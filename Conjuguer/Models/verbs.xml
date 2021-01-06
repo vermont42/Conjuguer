@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE verbs [
+    <!ELEMENT verbs (verb+)>
+    <!ELEMENT verb (verb*)>
+    <!ATTLIST verb in CDATA #REQUIRED>
+    <!ATTLIST verb tn CDATA #REQUIRED>
+    <!ATTLIST verb mo CDATA #REQUIRED>
+    <!ATTLIST verb ay CDATA #IMPLIED>
+]>
+
+<!--in = infinitive (e.g., finir)-->
+<!--tn = English translation -->
+<!--pa = verb model (e.g., 2-1)-->
+<!--ay = auxiliary (e means être) -->
+
+<verbs>
+  <verb in="colorer" tn="color" mo="1-1" />
+  <verb in="finir" tn="finish" mo="2-1" />
+  <verb in="lancer" tn="throw" mo="1-2a" />
+  <verb in="parler" tn="speak" mo="1-1" />
+</verbs>

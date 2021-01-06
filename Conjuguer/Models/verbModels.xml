@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE models [
+    <!ELEMENT models (model+)>
+    <!ELEMENT model (verb*)>
+    <!ATTLIST model id CDATA #REQUIRED>
+    <!ATTLIST model mo CDATA #REQUIRED>
+    <!ATTLIST model pa CDATA #IMPLIED>
+    <!ATTLIST model ep CDATA #IMPLIED>
+    <!ATTLIST model ep1 CDATA #IMPLIED>
+    <!ATTLIST model ep2 CDATA #IMPLIED>
+    <!ATTLIST model ep3 CDATA #IMPLIED>
+    <!ATTLIST model ep4 CDATA #IMPLIED>
+    <!ATTLIST model ep5 CDATA #IMPLIED>
+    <!ATTLIST model ep6 CDATA #IMPLIED>
+    <!ATTLIST model ap1 CDATA #IMPLIED>
+    <!ATTLIST model ap2 CDATA #IMPLIED>
+    <!ATTLIST model ap3 CDATA #IMPLIED>
+    <!ATTLIST model ap4 CDATA #IMPLIED>
+    <!ATTLIST model ap5 CDATA #IMPLIED>
+    <!ATTLIST model ap6 CDATA #IMPLIED>
+]>
+
+<!--id = model (e.g., 1-1)-->
+<!--ex = exemplar (e.g., parler)-->
+<!--pa = parent id (e.g., 2-1)-->
+<!--ep = ending for participe -->
+<!--ep[1-6] = ending for présent, je - ils-->
+<!--ap[1-6] = partial alteration for present, je - ils-->
+
+<models>
+  <model ex="parler" id="1-1" ep="é" ep1="e" ep2="es" ep3="e" ep4="ons" ep5="ez" ep6="ent"/>
+  <model ex="lancer" id="1-2a" pa="1-1" ap4="0,0,ç" />
+  <model ex="finir" id="2-1" ep="i" ep1="is" ep2="is" ep3="it" ep4="issons" ep5="issez" ep6="issent"/>
+</models>
