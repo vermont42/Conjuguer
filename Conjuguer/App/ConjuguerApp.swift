@@ -21,21 +21,23 @@ struct ConjuguerApp: App {
 
     print("verb count: \(Verb.verbs.count)  model count: \(VerbModel.models.count)\n")
 
-    for verb in ["arriver", "colorer", "finir", "lancer", "parler"] {
-      var output = "\(verb) "
+    for verb in ["apeler", "arriver", "colorer", "finir", "lancer", "parler"] {
+      var output = "\(verb)   "
 
       let participe: String
-      let participeResult = Conjugator.conjugate(infinitive: verb, tense: .participePassé, personNumber: nil)
+      let participeResult = Conjugator.conjugate(infinitive: verb, tense: .participePassé)
       switch participeResult {
       case .success(let value):
         participe = value
       default:
         fatalError()
       }
-      output += "\(participe) "
+      output += "participe: \(participe)   présent: "
 
-      for personNumber in [PersonNumber.firstSingular, .secondSingular, .thirdSingular, .firstPlural, .secondPlural, .thirdPlural] {
-        let présentResult = Conjugator.conjugate(infinitive: verb, tense: .indicatifPrésent, personNumber: personNumber)
+      let personNumbers: [PersonNumber] = [.firstSingular, .secondSingular, .thirdSingular, .firstPlural, .secondPlural, .thirdPlural]
+
+      for personNumber in personNumbers {
+        let présentResult = Conjugator.conjugate(infinitive: verb, tense: .indicatifPrésent(personNumber))
         switch présentResult {
         case .success(let value):
           output += "\(value) "
@@ -43,6 +45,19 @@ struct ConjuguerApp: App {
           fatalError()
         }
       }
+
+      output += "  passé simple: "
+
+      for personNumber in personNumbers {
+        let passéSimpleResult = Conjugator.conjugate(infinitive: verb, tense: .passéSimple(personNumber))
+        switch passéSimpleResult {
+        case .success(let value):
+          output += "\(value) "
+        default:
+          fatalError()
+        }
+      }
+
       print("\(output)\n")
     }
   }

@@ -14,6 +14,7 @@ struct VerbModel {
   let exemplar: String
   let parentId: String?
   let présentEndings: [String?]
+  let passéSimpleEndings: [String?]
   let participeEnding: String?
 
   let partialAlterations: [PartialAlteration]?
@@ -34,6 +35,16 @@ struct VerbModel {
       return VerbModel.model(id: parentId).présentEnding(personNumber: personNumber)
     } else {
       fatalError("présentEnding for \(personNumber.shortDisplayName) _and_ parentId are nil.")
+    }
+  }
+
+  func passéSimpleEnding(personNumber: PersonNumber) -> String {
+    if let passéSimpleEnding = passéSimpleEndings[personNumber.index] {
+      return passéSimpleEnding
+    } else if let parentId = parentId {
+      return VerbModel.model(id: parentId).passéSimpleEnding(personNumber: personNumber)
+    } else {
+      fatalError("passéSimpleEnding for \(personNumber.shortDisplayName) _and_ parentId are nil.")
     }
   }
 

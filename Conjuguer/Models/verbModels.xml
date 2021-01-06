@@ -21,14 +21,18 @@
 ]>
 
 <!--id = model (e.g., 1-1)-->
-<!--ex = exemplar (e.g., parler)-->
+<!--mo = exemplar (e.g., parler)-->
 <!--pa = parent id (e.g., 2-1)-->
 <!--ep = ending for participe -->
-<!--ep[1-6] = ending for présent, je - ils-->
-<!--ap[1-6] = partial alteration for present, je - ils-->
+<!--er[1-6] = ending for présent, je - ils-->
+<!--ex[1-6] = ending for passéSimple, je - ils-->
+<!--p = partial alteration-->
+<!--r[1-6][sp] = partial alteration for présent-->
+<!--x[1-6][sp] = partial alteration for passéSimple-->
 
 <models>
-  <model ex="parler" id="1-1" ep="é" ep1="e" ep2="es" ep3="e" ep4="ons" ep5="ez" ep6="ent"/>
-  <model ex="lancer" id="1-2a" pa="1-1" ap4="1,1,ç" />
-  <model ex="finir" id="2-1" ep="i" ep1="is" ep2="is" ep3="it" ep4="issons" ep5="issez" ep6="issent"/>
+  <model mo="parler" id="1-1" ep="é" er1="e" er2="es" er3="e" er4="ons" er5="ez" er6="ent" ex1="ai" ex2="as" ex3="a" ex4="âmes" ex5="âtes" ex6="èrent "/>
+  <model mo="lancer" id="1-2a" pa="1-1" p="1,1,ç,r1p,x1s,x2s,x3s,x1p,x2p" />
+  <model mo="apeler" id="1-3a" pa="1-1" p="0,1,l,r1s,r2s,r3s,r3p" />
+  <model mo="finir" id="2-1" ep="i" er1="is" er2="is" er3="it" er4="issons" er5="issez" er6="issent" ex1="is" ex2="is" ex3="it" ex4="îmes" ex5="îtes" ex6="irent" />
 </models>

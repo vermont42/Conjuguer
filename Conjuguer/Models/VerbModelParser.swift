@@ -36,7 +36,9 @@ class VerbModelParser: NSObject, XMLParserDelegate {
   private var currentExemplar = ""
   private var currentParentId: String?
   private var currentPrésentEndings: [String?] = [nil, nil, nil, nil, nil, nil]
+  private var currentPasséSimpleEndings: [String?] = [nil, nil, nil, nil, nil, nil]
   private var currentParticipeEnding: String?
+  private var currentPartialAlterations: [PartialAlteration] = []
 
   override init() {
     super.init()
@@ -68,8 +70,14 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       }
 
       for i in 0 ..< PersonNumber.count {
-        if let présentEnding = attributeDict["ep\(i + 1)"] {
+        if let présentEnding = attributeDict["er\(i + 1)"] {
           currentPrésentEndings[i] = présentEnding
+        }
+      }
+
+      for i in 0 ..< PersonNumber.count {
+        if let passéSimpleEnding = attributeDict["ex\(i + 1)"] {
+          currentPasséSimpleEndings[i] = passéSimpleEnding
         }
       }
 
@@ -77,12 +85,14 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         currentParticipeEnding = participeEnding
       }
 
-      // TODO: Store ap1-6 and then use it in Conjugator. Test lancer.
-
-      if let exemplar = attributeDict["ex"] {
+      if let exemplar = attributeDict["mo"] {
         currentExemplar = exemplar
       } else {
         fatalError("No exemplar specified.")
+      }
+
+      if let partialAlteration = attributeDict["p"] {
+        currentPartialAlterations.append(PartialAlteration(xmlString: partialAlteration))
       }
     }
   }
@@ -94,8 +104,9 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         exemplar: currentExemplar,
         parentId: currentParentId,
         présentEndings: currentPrésentEndings,
+        passéSimpleEndings: currentPasséSimpleEndings,
         participeEnding: currentParticipeEnding,
-        partialAlterations: nil,
+        partialAlterations: currentPartialAlterations,
         completeAlterations: nil
       )
 
@@ -105,7 +116,9 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       currentExemplar = ""
       currentParentId = nil
       currentPrésentEndings = [nil, nil, nil, nil, nil, nil]
+      currentPasséSimpleEndings = [nil, nil, nil, nil, nil, nil]
       currentParticipeEnding = nil
+      currentPartialAlterations = []
     }
   }
 }

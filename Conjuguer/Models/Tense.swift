@@ -6,7 +6,7 @@
 //  Copyright © 2017 Josh Adams. All rights reserved.
 //
 
-enum Tense {
+enum Tense: Hashable {
   case infinitif
   case translation
   case participePassé
