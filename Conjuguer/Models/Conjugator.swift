@@ -17,6 +17,14 @@ struct Conjugator {
       return .failure(.verbModelNotRecognized)
     }
 
+    if let completeAlterations = model.completeAlterations {
+      for alteration in completeAlterations {
+        if alteration.appliesTo == tense {
+          return .success(alteration.conjugation.uppercased())
+        }
+      }
+    }
+
     let index = infinitive.index(infinitive.endIndex, offsetBy: -1 * 2)
     var stem = String(infinitive[..<index])
 

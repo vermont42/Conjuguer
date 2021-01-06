@@ -39,6 +39,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
   private var currentPasséSimpleEndings: [String?] = [nil, nil, nil, nil, nil, nil]
   private var currentParticipeEnding: String?
   private var currentPartialAlterations: [PartialAlteration] = []
+  private var currentCompleteAlterations: [CompleteAlteration] = []
 
   override init() {
     super.init()
@@ -94,6 +95,10 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       if let partialAlteration = attributeDict["p"] {
         currentPartialAlterations.append(PartialAlteration(xmlString: partialAlteration))
       }
+
+      if let completeAlteration = attributeDict["cr"] {
+        currentCompleteAlterations = CompleteAlteration.alterationsFromXmlString(completeAlteration)
+      }
     }
   }
 
@@ -107,7 +112,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         passéSimpleEndings: currentPasséSimpleEndings,
         participeEnding: currentParticipeEnding,
         partialAlterations: currentPartialAlterations,
-        completeAlterations: nil
+        completeAlterations: currentCompleteAlterations
       )
 
       models[currentId] = model
@@ -119,6 +124,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       currentPasséSimpleEndings = [nil, nil, nil, nil, nil, nil]
       currentParticipeEnding = nil
       currentPartialAlterations = []
+      currentCompleteAlterations = []
     }
   }
 }

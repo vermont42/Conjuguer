@@ -24,7 +24,7 @@ struct PartialAlteration {
     let components = xmlString.components(separatedBy: xmlSeparator)
 
     guard components.count >= 4 else {
-      fatalError("XML string \(xmlString) did not have enough components.")
+      fatalError("Partial-alteration XML string \(xmlString) did not have enough components.")
     }
 
     guard let convertedStartIndexFromLast = Int(components[0]) else {
@@ -71,7 +71,7 @@ struct PartialAlteration {
         set.insert(.passéSimple(.thirdPlural))
 
       default:
-        fatalError("Unrecognized alteration \(alteration) found.")
+        fatalError("Unrecognized partial alteration \(alteration) found.")
       }
     }
 
@@ -81,5 +81,45 @@ struct PartialAlteration {
 
 struct CompleteAlteration {
   let conjugation: String
-  let appliesTo: Set<Tense>
+  let appliesTo: Tense
+
+  static func alterationsFromXmlString(_ xmlString: String) -> [CompleteAlteration] {
+    // r1s,vais,r2s,vas,r3s,va,r3p,vont
+    let components = xmlString.components(separatedBy: xmlSeparator)
+
+    guard components.count >= 2 else {
+      fatalError("Complete-alteration XML string \(xmlString) did not have enough components.")
+    }
+
+    guard components.count.isMultiple(of: 2) else {
+      fatalError("Complete-alteration XML string \(xmlString) had an odd number of components.")
+    }
+
+    let alterationCount = components.count / 2
+
+    var alterations: [CompleteAlteration] = []
+
+    for i in 0 ..< alterationCount {
+      let tense: Tense
+      switch components[i * 2] {
+      case "r1s":
+        tense = .indicatifPrésent(.firstSingular)
+      case "r2s":
+        tense = .indicatifPrésent(.secondSingular)
+      case "r3s":
+        tense = .indicatifPrésent(.thirdSingular)
+      case "r1p":
+        tense = .indicatifPrésent(.firstPlural)
+      case "r2p":
+        tense = .indicatifPrésent(.secondPlural)
+      case "r3p":
+        tense = .indicatifPrésent(.thirdPlural)
+      default:
+        fatalError("Unrecognized total alteration \(components[i * 2]) found.")
+      }
+      alterations.append(CompleteAlteration(conjugation: components[(i * 2) + 1], appliesTo: tense))
+    }
+
+    return alterations
+  }
 }
