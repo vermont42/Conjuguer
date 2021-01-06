@@ -13,7 +13,6 @@ enum PersonNumber: String, CaseIterable {
   case firstPlural = "fp"
   case secondPlural = "sp"
   case thirdPlural = "tp"
-  case none = "no"
 
   static let count = 6
 
@@ -31,8 +30,6 @@ enum PersonNumber: String, CaseIterable {
       return "vous"
     case .thirdPlural:
       return "elles"
-    case .none:
-      return "none"
     }
   }
 
@@ -50,8 +47,6 @@ enum PersonNumber: String, CaseIterable {
       return "2P"
     case .thirdPlural:
       return "3P"
-    case .none:
-      return "none"
     }
   }
 
@@ -69,8 +64,6 @@ enum PersonNumber: String, CaseIterable {
       return 4
     case .thirdPlural:
       return 5
-    case .none:
-      fatalError("PersonNumber none has no index.")
     }
   }
 }

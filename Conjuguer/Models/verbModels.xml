@@ -29,6 +29,6 @@
 
 <models>
   <model ex="parler" id="1-1" ep="é" ep1="e" ep2="es" ep3="e" ep4="ons" ep5="ez" ep6="ent"/>
-  <model ex="lancer" id="1-2a" pa="1-1" ap4="0,0,ç" />
+  <model ex="lancer" id="1-2a" pa="1-1" ap4="1,1,ç" />
   <model ex="finir" id="2-1" ep="i" ep1="is" ep2="is" ep3="it" ep4="issons" ep5="issez" ep6="issent"/>
 </models>

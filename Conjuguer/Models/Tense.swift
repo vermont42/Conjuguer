@@ -6,21 +6,21 @@
 //  Copyright © 2017 Josh Adams. All rights reserved.
 //
 
-enum Tense: String, CaseIterable {
-  case infinitif = "in"
-  case translation = "tn"
-  case participePassé = "pe"
-  case participePrésent = "pp"
-  case radicalFutur = "rf"
+enum Tense {
+  case infinitif
+  case translation
+  case participePassé
+  case participePrésent
+  case radicalFutur
 
-  case indicatifPrésent = "pr"
-  case passéSimple = "pt"
-  case imparfait = "ii"
-  case futurSimple = "fu"
-  case conditionelPrésent = "co"
-  case subjonctifPrésent = "pb"
-  case subjonctifImparfait = "sb"
-  case impératif = "im"
+  case indicatifPrésent(_ personNumber: PersonNumber)
+  case passéSimple(_ personNumber: PersonNumber)
+  case imparfait(_ personNumber: PersonNumber)
+  case futurSimple(_ personNumber: PersonNumber)
+  case conditionelPrésent(_ personNumber: PersonNumber)
+  case subjonctifPrésent(_ personNumber: PersonNumber)
+  case subjonctifImparfait(_ personNumber: PersonNumber)
+  case impératif(_ personNumber: PersonNumber)
 
   // TODO: Add compound tenses.
 

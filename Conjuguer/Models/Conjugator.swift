@@ -8,7 +8,7 @@
 import Foundation
 
 struct Conjugator {
-  static func conjugate(infinitive: String, tense: Tense, personNumber: PersonNumber?) -> Result<String, ConjugatorError> {
+  static func conjugate(infinitive: String, tense: Tense) -> Result<String, ConjugatorError> {
     guard let verb = Verb.verbs[infinitive] else {
       return .failure(.verbNotRecognized)
     }
@@ -21,18 +21,10 @@ struct Conjugator {
     let stem = String(infinitive[..<index])
 
     switch tense {
-    case .indicatifPrésent:
-      if let personNumber = personNumber {
-        return .success(stem + model.présentEnding(personNumber: personNumber))
-      } else {
-        return .failure(.personNumberNoneForConjugatedTense)
-      }
+    case .indicatifPrésent(let personNumber):
+      return .success(stem + model.présentEnding(personNumber: personNumber))
     case .participePassé:
-      if personNumber != nil {
-        return .failure(.personNumberForNonConjugatedTense)
-      } else {
-        return .success(stem + model.participeEndingRecursive)
-      }
+      return .success(stem + model.participeEndingRecursive)
     default:
       return .failure(.tenseNotImplemented(tense))
     }

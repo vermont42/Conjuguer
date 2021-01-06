@@ -8,8 +8,6 @@
 import Foundation
 
 enum ConjugatorError: Error {
-  case personNumberNoneForConjugatedTense
-  case personNumberForNonConjugatedTense
   case verbModelNotRecognized
   case verbNotRecognized
   case tooShort

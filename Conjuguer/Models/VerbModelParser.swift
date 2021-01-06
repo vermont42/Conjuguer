@@ -77,7 +77,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         currentParticipeEnding = participeEnding
       }
 
-      // TODO: Store ap1-6.
+      // TODO: Store ap1-6 and then use it in Conjugator. Test lancer.
 
       if let exemplar = attributeDict["ex"] {
         currentExemplar = exemplar
