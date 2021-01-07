@@ -14,4 +14,9 @@ struct Verb {
   let translation: String
   let model: String
   let auxiliary: Auxiliary
+
+  var infinitiveStem: String {
+    let index = infinitive.index(infinitive.endIndex, offsetBy: -1 * 2)
+    return String(infinitive[..<index])
+  }
 }

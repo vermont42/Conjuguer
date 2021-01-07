@@ -14,9 +14,9 @@ struct VerbModel {
   let exemplar: String
   let parentId: String?
   let présentEndings: [String?]
-  let passéSimpleEndings: [String?]
+  let participeStem: String?
   let participeEnding: String?
-
+  let passéSimpleGroup: PasséSimpleGroup?
   let partialAlterations: [PartialAlteration]?
   let completeAlterations: [CompleteAlteration]?
 
@@ -38,13 +38,11 @@ struct VerbModel {
     }
   }
 
-  func passéSimpleEnding(personNumber: PersonNumber) -> String {
-    if let passéSimpleEnding = passéSimpleEndings[personNumber.index] {
-      return passéSimpleEnding
-    } else if let parentId = parentId {
-      return VerbModel.model(id: parentId).passéSimpleEnding(personNumber: personNumber)
+  func participeStem(verb: Verb) -> String {
+    if let participeStem = participeStem {
+      return participeStem.uppercased()
     } else {
-      fatalError("passéSimpleEnding for \(personNumber.shortDisplayName) _and_ parentId are nil.")
+      return verb.infinitiveStem
     }
   }
 
@@ -55,6 +53,16 @@ struct VerbModel {
       return VerbModel.model(id: parentId).participeEndingRecursive
     } else {
       fatalError("participeEnding _and_ parentId are nil.")
+    }
+  }
+
+  var passéSimpleGroupRecursive: PasséSimpleGroup {
+    if let passéSimpleGroup = passéSimpleGroup {
+      return passéSimpleGroup
+    } else if let parentId = parentId {
+      return VerbModel.model(id: parentId).passéSimpleGroupRecursive
+    } else {
+      fatalError("passéSimpleGroup _and_ parentId are nil.")
     }
   }
 }

@@ -21,7 +21,7 @@ struct ConjuguerApp: App {
 
     print("verb count: \(Verb.verbs.count)  model count: \(VerbModel.models.count)\n")
 
-    for verb in ["aller", "apeler", "arriver", "colorer", "finir", "lancer", "parler"] {
+    for verb in ["aller", "apeler", "arriver", "avoir", "colorer", "finir", "lancer", "parler"] {
       var output = "\(verb)   "
 
       let participe: String

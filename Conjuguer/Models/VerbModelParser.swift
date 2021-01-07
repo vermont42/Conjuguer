@@ -36,8 +36,9 @@ class VerbModelParser: NSObject, XMLParserDelegate {
   private var currentExemplar = ""
   private var currentParentId: String?
   private var currentPrésentEndings: [String?] = [nil, nil, nil, nil, nil, nil]
-  private var currentPasséSimpleEndings: [String?] = [nil, nil, nil, nil, nil, nil]
+  private var currentParticipeStem: String?
   private var currentParticipeEnding: String?
+  private var currentPasséSimpleGroup: PasséSimpleGroup?
   private var currentPartialAlterations: [PartialAlteration] = []
   private var currentCompleteAlterations: [CompleteAlteration] = []
 
@@ -76,10 +77,8 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         }
       }
 
-      for i in 0 ..< PersonNumber.count {
-        if let passéSimpleEnding = attributeDict["ex\(i + 1)"] {
-          currentPasséSimpleEndings[i] = passéSimpleEnding
-        }
+      if let participeStem = attributeDict["ps"] {
+        currentParticipeStem = participeStem
       }
 
       if let participeEnding = attributeDict["ep"] {
@@ -90,6 +89,10 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         currentExemplar = exemplar
       } else {
         fatalError("No exemplar specified.")
+      }
+
+      if let passéSimpleGroup = attributeDict["se"] {
+        currentPasséSimpleGroup = PasséSimpleGroup.groupForXmlString(passéSimpleGroup)
       }
 
       if let partialAlteration = attributeDict["p"] {
@@ -109,8 +112,9 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         exemplar: currentExemplar,
         parentId: currentParentId,
         présentEndings: currentPrésentEndings,
-        passéSimpleEndings: currentPasséSimpleEndings,
+        participeStem: currentParticipeStem,
         participeEnding: currentParticipeEnding,
+        passéSimpleGroup: currentPasséSimpleGroup,
         partialAlterations: currentPartialAlterations,
         completeAlterations: currentCompleteAlterations
       )
@@ -121,8 +125,9 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       currentExemplar = ""
       currentParentId = nil
       currentPrésentEndings = [nil, nil, nil, nil, nil, nil]
-      currentPasséSimpleEndings = [nil, nil, nil, nil, nil, nil]
+      currentParticipeStem = nil
       currentParticipeEnding = nil
+      currentPasséSimpleGroup = nil
       currentPartialAlterations = []
       currentCompleteAlterations = []
     }

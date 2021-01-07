@@ -25,8 +25,15 @@ struct Conjugator {
       }
     }
 
-    let index = infinitive.index(infinitive.endIndex, offsetBy: -1 * 2)
-    var stem = String(infinitive[..<index])
+    var stem: String
+    switch tense {
+    case .indicatifPrésent(_):
+      stem = verb.infinitiveStem
+    case .participePassé, .passéSimple(_):
+      stem = model.participeStem(verb: verb)
+    default:
+      return .failure(.tenseNotImplemented(tense)) // TODO: Fix this.
+    }
 
     if let partialAlterations = model.partialAlterations {
       for alteration in partialAlterations {
@@ -41,11 +48,11 @@ struct Conjugator {
     case .indicatifPrésent(let personNumber):
       return .success(stem + model.présentEnding(personNumber: personNumber))
     case .passéSimple(let personNumber):
-      return .success(stem + model.passéSimpleEnding(personNumber: personNumber))
+      return .success(stem + model.passéSimpleGroupRecursive.endingForPersonNumber(personNumber))
     case .participePassé:
       return .success(stem + model.participeEndingRecursive)
     default:
-      return .failure(.tenseNotImplemented(tense))
+      return .failure(.tenseNotImplemented(tense)) // TODO: Fix this.
     }
   }
 }
