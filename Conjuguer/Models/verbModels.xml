@@ -21,6 +21,6 @@
   <model mo="apeler" id="1-3A" pa="1-1" p="0,1,l,r1s,r2s,r3s,r3p" />
   <model mo="finir" id="2-1" ep="i" si="x" se="i" />
   <model mo="couvrir" id="3-1" ep="T" si="E" se="i" up="f" p="1,1,er,pp" />
-  <model mo="avoir" id="8" pa="2-1" ps="e" ep="U" cr="r1s,ai,r2s,as,r3s,a,r1p,avons,r2p,avez,r3p,ont" se="u" />
-  <model mo="aller" id="9" pa="1-1" cr="r1s,vais,r2s,vas,r3s,va,r3p,vont" />
+  <model mo="avoir" id="8" pa="2-1" ps="e" ep="U" cr="rr,aYant,r1s,AI,r2s,As,r3s,A,r1p,aVons,r2p,aVez,r3p,Ont" se="u" />
+  <model mo="aller" id="9" pa="1-1" cr="r1s,VAIS,r2s,VAs,r3s,VA,r3p,VOnt" />
 </models>

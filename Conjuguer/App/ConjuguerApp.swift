@@ -36,15 +36,25 @@ struct ConjuguerApp: App {
     ] {
       var output = "\(verb)   "
 
-      let participe: String
-      let participeResult = Conjugator.conjugate(infinitive: verb, tense: .participePassé)
-      switch participeResult {
+      let participePassé: String
+      let participePasséResult = Conjugator.conjugate(infinitive: verb, tense: .participePassé)
+      switch participePasséResult {
       case .success(let value):
-        participe = value
+        participePassé = value
       default:
         fatalError()
       }
-      output += "participe: \(participe)   présent: "
+      output += "participe passé: \(participePassé)"
+
+      let participePrésent: String
+      let participePrésentResult = Conjugator.conjugate(infinitive: verb, tense: .participePrésent)
+      switch participePrésentResult {
+      case .success(let value):
+        participePrésent = value
+      default:
+        fatalError()
+      }
+      output += "   participe présent: \(participePrésent)   indicatif présent: "
 
       let personNumbers: [PersonNumber] = [.firstSingular, .secondSingular, .thirdSingular, .firstPlural, .secondPlural, .thirdPlural]
 

@@ -73,6 +73,9 @@ struct PartialAlteration {
       case "pp":
         set.insert(.participePassé)
 
+      case "rr":
+        set.insert(.participePrésent)
+
       default:
         fatalError("Unrecognized partial alteration \(alteration) found.")
       }
@@ -119,6 +122,9 @@ struct CompleteAlteration {
 
       case "pp":
         tense = .participePassé
+
+      case "rr":
+        tense = .participePrésent
 
       default:
         fatalError("Unrecognized total alteration \(components[i * 2]) found.")

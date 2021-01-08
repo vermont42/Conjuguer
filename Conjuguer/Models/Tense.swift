@@ -24,6 +24,9 @@ enum Tense: Hashable {
 
   // TODO: Add compound tenses.
 
+  static let onsLength = 3
+  static let participePrésentEnding = "ant"
+
   func conjugationCount() -> Int {
     switch self {
     case .infinitif, .translation, .participePassé, .participePrésent, .radicalFutur:

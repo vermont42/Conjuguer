@@ -28,7 +28,7 @@ struct Conjugator {
     if let completeAlterations = model.completeAlterations {
       for alteration in completeAlterations {
         if alteration.appliesTo == tense {
-          return .success(alteration.conjugation.uppercased())
+          return .success(alteration.conjugation)
         }
       }
     }
@@ -40,6 +40,21 @@ struct Conjugator {
       stem = verb.infinitiveStem
     case .participePassé:
       stem = model.participeStem(verb: verb)
+    case .participePrésent:
+      let nousPrésentConjugationResult = Conjugator.conjugate(infinitive: infinitive, tense: .indicatifPrésent(.firstPlural))
+      switch nousPrésentConjugationResult {
+      case .success(let value):
+        let index = value.index(value.endIndex, offsetBy: -1 * Tense.onsLength)
+        stem = String(value[..<index])
+      default:
+        // TODO: This doesn't work for verbs that have participePrésents but not nous présent conjugations.
+        // Example: pleuvoir. The stem is pleuv, not pleuvo. One solution might be to chop off, for
+        // infinitive stem, the last 3, rather than 2, letters for -oir verbs. Another solution would
+        // be to do a complete replacement of pleuvoir's participe présent with pleuvant, as with savoir.
+        stem = verb.infinitiveStem
+      }
+
+
     case .passéSimple(_):
       isConjugatingPasséSimple = true
       if model.usesParticipeStemForPasséSimple {
@@ -69,6 +84,8 @@ struct Conjugator {
       return .success(stem + model.passéSimpleGroupRecursive.endingForPersonNumber(personNumber))
     case .participePassé:
       return .success(stem + model.participeEndingRecursive)
+    case .participePrésent:
+      return .success(stem + Tense.participePrésentEnding)
     default:
       return .failure(.tenseNotImplemented(tense)) // TODO: Fix this.
     }
