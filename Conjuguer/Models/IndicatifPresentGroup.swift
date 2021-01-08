@@ -8,14 +8,16 @@
 import Foundation
 
 enum IndicatifPrésentGroup {
-  case e
+  case e(appliesToErVerb: Bool)
   case extendedS
   case s
 
   static func groupForXmlString(_ xmlString: String) -> IndicatifPrésentGroup {
     switch xmlString {
     case "e":
-      return .e
+      return .e(appliesToErVerb: true)
+    case "E":
+      return .e(appliesToErVerb: false)
     case "x":
       return .extendedS
     case "s":
@@ -27,21 +29,26 @@ enum IndicatifPrésentGroup {
 
   func endingForPersonNumber(_ personNumber: PersonNumber) -> String {
     switch self {
-    case .e:
+    case .e(let appliesToErVerb):
+      var ending: String
       switch personNumber {
       case .firstSingular:
-        return "e"
+        ending = "e"
       case .secondSingular:
-        return "es"
+        ending = "es"
       case .thirdSingular:
-        return "e"
+        ending = "e"
       case .firstPlural:
-        return "ons"
+        ending = "ons"
       case .secondPlural:
-        return "ez"
+        ending = "ez"
       case .thirdPlural:
-        return "ent"
+        ending = "ent"
       }
+      if !appliesToErVerb {
+        ending = ending.uppercased()
+      }
+      return ending
     case .extendedS:
       switch personNumber {
       case .firstSingular:
