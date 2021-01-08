@@ -120,6 +120,19 @@ struct CompleteAlteration {
       case "r3p":
         tense = .indicatifPrésent(.thirdPlural)
 
+      case "x1s":
+        tense = .passéSimple(.firstSingular)
+      case "x2s":
+        tense = .passéSimple(.secondSingular)
+      case "x3s":
+        tense = .passéSimple(.thirdSingular)
+      case "x1p":
+        tense = .passéSimple(.firstPlural)
+      case "x2p":
+        tense = .passéSimple(.secondPlural)
+      case "x3p":
+        tense = .passéSimple(.thirdPlural)
+
       case "pp":
         tense = .participePassé
 

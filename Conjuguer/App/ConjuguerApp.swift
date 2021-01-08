@@ -28,6 +28,7 @@ struct ConjuguerApp: App {
       "avoir",
       "colorer",
       "couvrir",
+      "être",
       "finir",
       "lancer",
       "offrir",
