@@ -9,6 +9,14 @@ import Foundation
 
 struct Conjugator {
   static func conjugate(infinitive: String, tense: Tense) -> Result<String, ConjugatorError> {
+    guard infinitive.count >= Verb.minVerbLength else {
+      return .failure(.verbTooShort)
+    }
+
+    guard Verb.endingIsValid(infinitive: infinitive) else {
+      return .failure(.infinitiveEndingInvalid)
+    }
+
     guard let verb = Verb.verbs[infinitive] else {
       return .failure(.verbNotRecognized)
     }
@@ -46,7 +54,7 @@ struct Conjugator {
 
     switch tense {
     case .indicatifPrésent(let personNumber):
-      return .success(stem + model.présentEnding(personNumber: personNumber))
+      return .success(stem + model.indicatifPrésentGroupRecursive.endingForPersonNumber(personNumber))
     case .passéSimple(let personNumber):
       return .success(stem + model.passéSimpleGroupRecursive.endingForPersonNumber(personNumber))
     case .participePassé:

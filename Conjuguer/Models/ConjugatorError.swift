@@ -10,7 +10,8 @@ import Foundation
 enum ConjugatorError: Error {
   case verbModelNotRecognized
   case verbNotRecognized
-  case tooShort
+  case verbTooShort
+  case infinitiveEndingInvalid
   case invalidEnding(String)
   case tenseNotImplemented(Tense)
   case noSuchConjugation(PersonNumber)

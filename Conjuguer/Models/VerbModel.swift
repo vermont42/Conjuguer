@@ -13,9 +13,9 @@ struct VerbModel {
   let id: String
   let exemplar: String
   let parentId: String?
-  let présentEndings: [String?]
   let participeStem: String?
   let participeEnding: String?
+  let indicatifPrésentGroup: IndicatifPrésentGroup?
   let passéSimpleGroup: PasséSimpleGroup?
   let partialAlterations: [PartialAlteration]?
   let completeAlterations: [CompleteAlteration]?
@@ -25,16 +25,6 @@ struct VerbModel {
       return model
     } else {
       fatalError("No verb model for \(id) found.")
-    }
-  }
-
-  func présentEnding(personNumber: PersonNumber) -> String {
-    if let présentEnding = présentEndings[personNumber.index] {
-      return présentEnding
-    } else if let parentId = parentId {
-      return VerbModel.model(id: parentId).présentEnding(personNumber: personNumber)
-    } else {
-      fatalError("présentEnding for \(personNumber.shortDisplayName) _and_ parentId are nil.")
     }
   }
 
@@ -63,6 +53,16 @@ struct VerbModel {
       return VerbModel.model(id: parentId).passéSimpleGroupRecursive
     } else {
       fatalError("passéSimpleGroup _and_ parentId are nil.")
+    }
+  }
+
+  var indicatifPrésentGroupRecursive: IndicatifPrésentGroup {
+    if let indicatifPrésentGroup = indicatifPrésentGroup {
+      return indicatifPrésentGroup
+    } else if let parentId = parentId {
+      return VerbModel.model(id: parentId).indicatifPrésentGroupRecursive
+    } else {
+      fatalError("indicatifPrésentGroup _and_ parentId are nil.")
     }
   }
 }

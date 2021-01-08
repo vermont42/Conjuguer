@@ -4,39 +4,22 @@
     <!ELEMENT model (verb*)>
     <!ATTLIST model id CDATA #REQUIRED>
     <!ATTLIST model mo CDATA #REQUIRED>
+    <!ATTLIST model si CDATA #IMPLIED>
+    <!ATTLIST model se CDATA #IMPLIED>
     <!ATTLIST model pa CDATA #IMPLIED>
     <!ATTLIST model ep CDATA #IMPLIED>
-    <!ATTLIST model ep1 CDATA #IMPLIED>
-    <!ATTLIST model ep2 CDATA #IMPLIED>
-    <!ATTLIST model ep3 CDATA #IMPLIED>
-    <!ATTLIST model ep4 CDATA #IMPLIED>
-    <!ATTLIST model ep5 CDATA #IMPLIED>
-    <!ATTLIST model ep6 CDATA #IMPLIED>
-    <!ATTLIST model ap1 CDATA #IMPLIED>
-    <!ATTLIST model ap2 CDATA #IMPLIED>
-    <!ATTLIST model ap3 CDATA #IMPLIED>
-    <!ATTLIST model ap4 CDATA #IMPLIED>
-    <!ATTLIST model ap5 CDATA #IMPLIED>
-    <!ATTLIST model ap6 CDATA #IMPLIED>
 ]>
 
-<!--id = model (e.g., 1-1)-->
-<!--mo = exemplar (e.g., parler)-->
-<!--pa = parent id (e.g., 2-1)-->
-<!--ps = participe stem -->
-<!--ep = ending for participe -->
-<!--er[1-6] = ending for présent, je - ils-->
-<!--p = partial alteration-->
 <!--r[1-6][sp] = partial alteration for présent-->
 <!--x[1-6][sp] = partial alteration for passéSimple-->
 <!--cr = complete alterations; example: "r1s,vais,r2s,vas,r3s,va,r3p,vont" -->
-<!--se = passé simple ending group (b,a,i,u) -->
 
 <models>
-  <model mo="parler" id="1-1" ep="é" er1="e" er2="es" er3="e" er4="ons" er5="ez" er6="ent" se="a" />
+  <model mo="parler" id="1-1" ep="é" si="e" se="a" />
   <model mo="lancer" id="1-2a" pa="1-1" p="1,1,ç,r1p,x1s,x2s,x3s,x1p,x2p" />
   <model mo="apeler" id="1-3a" pa="1-1" p="0,1,l,r1s,r2s,r3s,r3p" />
-  <model mo="finir" id="2-1" ep="i" er1="is" er2="is" er3="it" er4="issons" er5="issez" er6="issent" se="i" />
+  <model mo="finir" id="2-1" ep="i" si="x" se="i" />
+  <model mo="couvrir" id="3-1" ep="i" si="e" se="i" />
   <model mo="avoir" id="8" pa="2-1" ps="e" ep="U" cr="r1s,ai,r2s,as,r3s,a,r1p,avons,r2p,avez,r3p,ont" se="u" />
   <model mo="aller" id="9" pa="1-1" cr="r1s,vais,r2s,vas,r3s,va,r3p,vont" />
 </models>

@@ -84,7 +84,6 @@ struct CompleteAlteration {
   let appliesTo: Tense
 
   static func alterationsFromXmlString(_ xmlString: String) -> [CompleteAlteration] {
-    // r1s,vais,r2s,vas,r3s,va,r3p,vont
     let components = xmlString.components(separatedBy: xmlSeparator)
 
     guard components.count >= 2 else {

@@ -7,27 +7,6 @@
 
 import Foundation
 
-//<?xml version="1.0" encoding="utf-8"?>
-//<!DOCTYPE models [
-//    <!ELEMENT models (model+)>
-//    <!ELEMENT model (verb*)>
-//    <!ATTLIST model id CDATA #REQUIRED>
-//    <!ATTLIST model mo CDATA #REQUIRED>
-//    <!ATTLIST model pa CDATA #IMPLIED>
-//    <!ATTLIST model ap1 CDATA #IMPLIED>
-//    <!ATTLIST model ap2 CDATA #IMPLIED>
-//    <!ATTLIST model ap3 CDATA #IMPLIED>
-//    <!ATTLIST model ap4 CDATA #IMPLIED>
-//    <!ATTLIST model ap5 CDATA #IMPLIED>
-//    <!ATTLIST model ap6 CDATA #IMPLIED>
-//]>
-//
-//<models>
-//  <model mo="parler" id="1-1" ep1="e" ep2="es" ep3="e" ep4="ons" ep5="ez" ep6="ent"/>
-//  <model mo="lancer" id="1-2a" pa="1-1" ap4="0,0,ç" />
-//  <model mo="finir" id="2-1" ep1="is" ep2="is" ep3="it" ep4="issons" ep5="issez" ep6="issent"/>
-//</models>
-
 class VerbModelParser: NSObject, XMLParserDelegate {
   private var parser: XMLParser?
   private let modelTag = "model"
@@ -35,9 +14,9 @@ class VerbModelParser: NSObject, XMLParserDelegate {
   private var currentId = ""
   private var currentExemplar = ""
   private var currentParentId: String?
-  private var currentPrésentEndings: [String?] = [nil, nil, nil, nil, nil, nil]
   private var currentParticipeStem: String?
   private var currentParticipeEnding: String?
+  private var currentIndicatifPrésentGroup: IndicatifPrésentGroup?
   private var currentPasséSimpleGroup: PasséSimpleGroup?
   private var currentPartialAlterations: [PartialAlteration] = []
   private var currentCompleteAlterations: [CompleteAlteration] = []
@@ -71,12 +50,6 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         self.currentParentId = currentParentId
       }
 
-      for i in 0 ..< PersonNumber.count {
-        if let présentEnding = attributeDict["er\(i + 1)"] {
-          currentPrésentEndings[i] = présentEnding
-        }
-      }
-
       if let participeStem = attributeDict["ps"] {
         currentParticipeStem = participeStem
       }
@@ -89,6 +62,10 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         currentExemplar = exemplar
       } else {
         fatalError("No exemplar specified.")
+      }
+
+      if let indicatifPrésentGroup = attributeDict["si"] {
+        currentIndicatifPrésentGroup = IndicatifPrésentGroup.groupForXmlString(indicatifPrésentGroup)
       }
 
       if let passéSimpleGroup = attributeDict["se"] {
@@ -111,9 +88,9 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         id: currentId,
         exemplar: currentExemplar,
         parentId: currentParentId,
-        présentEndings: currentPrésentEndings,
         participeStem: currentParticipeStem,
         participeEnding: currentParticipeEnding,
+        indicatifPrésentGroup: currentIndicatifPrésentGroup,
         passéSimpleGroup: currentPasséSimpleGroup,
         partialAlterations: currentPartialAlterations,
         completeAlterations: currentCompleteAlterations
@@ -124,9 +101,9 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       currentId = ""
       currentExemplar = ""
       currentParentId = nil
-      currentPrésentEndings = [nil, nil, nil, nil, nil, nil]
       currentParticipeStem = nil
       currentParticipeEnding = nil
+      currentIndicatifPrésentGroup = nil
       currentPasséSimpleGroup = nil
       currentPartialAlterations = []
       currentCompleteAlterations = []

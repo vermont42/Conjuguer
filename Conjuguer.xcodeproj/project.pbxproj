@@ -26,6 +26,7 @@
 		036DB80025A37ECB0013C3B7 /* verbModels.xml in Resources */ = {isa = PBXBuildFile; fileRef = 036DB7FF25A37ECB0013C3B7 /* verbModels.xml */; };
 		036DB80525A386D60013C3B7 /* VerbModelParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB80425A386D60013C3B7 /* VerbModelParser.swift */; };
 		036DB81025A6C7900013C3B7 /* PasseSimpleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */; };
+		036DB81825A8C9420013C3B7 /* IndicatifPresentGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		036DB7FF25A37ECB0013C3B7 /* verbModels.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = verbModels.xml; sourceTree = "<group>"; };
 		036DB80425A386D60013C3B7 /* VerbModelParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbModelParser.swift; sourceTree = "<group>"; };
 		036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasseSimpleGroup.swift; sourceTree = "<group>"; };
+		036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatifPresentGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				036DB7F225A12B990013C3B7 /* Auxiliary.swift */,
 				036DB7D025A0C9F10013C3B7 /* Conjugator.swift */,
 				036DB7FA25A13C110013C3B7 /* ConjugatorError.swift */,
+				036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */,
 				036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */,
 				036DB7EC25A1070D0013C3B7 /* PersonNumber.swift */,
 				036DB7EB25A1070D0013C3B7 /* Tense.swift */,
@@ -321,6 +324,7 @@
 				036DB7E425A0DD9B0013C3B7 /* Alteration.swift in Sources */,
 				036DB7FB25A13C110013C3B7 /* ConjugatorError.swift in Sources */,
 				036DB790259FD6500013C3B7 /* ContentView.swift in Sources */,
+				036DB81825A8C9420013C3B7 /* IndicatifPresentGroup.swift in Sources */,
 				036DB7F325A12B990013C3B7 /* Auxiliary.swift in Sources */,
 				036DB80525A386D60013C3B7 /* VerbModelParser.swift in Sources */,
 				036DB7D125A0C9F10013C3B7 /* Conjugator.swift in Sources */,
