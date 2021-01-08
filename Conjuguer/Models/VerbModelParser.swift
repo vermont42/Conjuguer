@@ -15,6 +15,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
   private var currentExemplar = ""
   private var currentParentId: String?
   private var currentParticipeStem: String?
+  private var currentUsesParticipeStemForPasséSimple = true
   private var currentParticipeEnding: String?
   private var currentIndicatifPrésentGroup: IndicatifPrésentGroup?
   private var currentPasséSimpleGroup: PasséSimpleGroup?
@@ -54,6 +55,10 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         currentParticipeStem = participeStem
       }
 
+      if let usesParticipeStemForPasséSimple = attributeDict["up"] {
+        currentUsesParticipeStemForPasséSimple = usesParticipeStemForPasséSimple == "f" ? false : true
+      }
+
       if let participeEnding = attributeDict["ep"] {
         currentParticipeEnding = participeEnding
       }
@@ -90,6 +95,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         parentId: currentParentId,
         participeStem: currentParticipeStem,
         participeEnding: currentParticipeEnding,
+        usesParticipeStemForPasséSimple: currentUsesParticipeStemForPasséSimple,
         indicatifPrésentGroup: currentIndicatifPrésentGroup,
         passéSimpleGroup: currentPasséSimpleGroup,
         partialAlterations: currentPartialAlterations,
@@ -103,6 +109,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       currentParentId = nil
       currentParticipeStem = nil
       currentParticipeEnding = nil
+      currentUsesParticipeStemForPasséSimple = true
       currentIndicatifPrésentGroup = nil
       currentPasséSimpleGroup = nil
       currentPartialAlterations = []

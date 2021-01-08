@@ -70,6 +70,9 @@ struct PartialAlteration {
       case "x3p":
         set.insert(.passéSimple(.thirdPlural))
 
+      case "pp":
+        set.insert(.participePassé)
+
       default:
         fatalError("Unrecognized partial alteration \(alteration) found.")
       }
@@ -113,6 +116,10 @@ struct CompleteAlteration {
         tense = .indicatifPrésent(.secondPlural)
       case "r3p":
         tense = .indicatifPrésent(.thirdPlural)
+
+      case "pp":
+        tense = .participePassé
+
       default:
         fatalError("Unrecognized total alteration \(components[i * 2]) found.")
       }

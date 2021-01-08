@@ -8,6 +8,7 @@
     <!ATTLIST model se CDATA #IMPLIED>
     <!ATTLIST model pa CDATA #IMPLIED>
     <!ATTLIST model ep CDATA #IMPLIED>
+    <!ATTLIST model up CDATA #IMPLIED>
 ]>
 
 <!--r[1-6][sp] = partial alteration for présent-->
@@ -16,10 +17,10 @@
 
 <models>
   <model mo="parler" id="1-1" ep="é" si="e" se="a" />
-  <model mo="lancer" id="1-2a" pa="1-1" p="1,1,ç,r1p,x1s,x2s,x3s,x1p,x2p" />
-  <model mo="apeler" id="1-3a" pa="1-1" p="0,1,l,r1s,r2s,r3s,r3p" />
+  <model mo="lancer" id="1-2A" pa="1-1" p="1,1,ç,r1p,x1s,x2s,x3s,x1p,x2p" />
+  <model mo="apeler" id="1-3A" pa="1-1" p="0,1,l,r1s,r2s,r3s,r3p" />
   <model mo="finir" id="2-1" ep="i" si="x" se="i" />
-  <model mo="couvrir" id="3-1" ep="i" si="E" se="i" />
+  <model mo="couvrir" id="3-1" ep="T" si="E" se="i" up="f" p="1,1,er,pp" />
   <model mo="avoir" id="8" pa="2-1" ps="e" ep="U" cr="r1s,ai,r2s,as,r3s,a,r1p,avons,r2p,avez,r3p,ont" se="u" />
   <model mo="aller" id="9" pa="1-1" cr="r1s,vais,r2s,vas,r3s,va,r3p,vont" />
 </models>

@@ -15,12 +15,14 @@
 
 <verbs>
   <verb in="aller" tn="go" ay="e" mo="9" />
-  <verb in="apeler" tn="call" mo="1-3a" />
+  <verb in="apeler" tn="call" mo="1-3A" />
   <verb in="arriver" tn="arrive" ay="e" mo="1-1" />
   <verb in="avoir" tn="have" mo="8" />
   <verb in="colorer" tn="color" mo="1-1" />
   <verb in="couvrir" tn="cover" mo="3-1" />
   <verb in="finir" tn="finish" mo="2-1" />
-  <verb in="lancer" tn="throw" mo="1-2a" />
+  <verb in="lancer" tn="throw" mo="1-2A" />
+  <verb in="offrir" tn="offer" mo="3-1" />
   <verb in="parler" tn="speak" mo="1-1" />
+  <verb in="souffrir" tn="souffrir" mo="3-1" />
 </verbs>

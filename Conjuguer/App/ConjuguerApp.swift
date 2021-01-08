@@ -21,7 +21,19 @@ struct ConjuguerApp: App {
 
     print("verb count: \(Verb.verbs.count)  model count: \(VerbModel.models.count)\n")
 
-    for verb in ["aller", "apeler", "arriver", "avoir", "colorer", "couvrir", "finir", "lancer", "parler"] {
+    for verb in [
+      "aller",
+      "apeler",
+      "arriver",
+      "avoir",
+      "colorer",
+      "couvrir",
+      "finir",
+      "lancer",
+      "offrir",
+      "parler",
+      "souffrir",
+    ] {
       var output = "\(verb)   "
 
       let participe: String
@@ -63,6 +75,14 @@ struct ConjuguerApp: App {
         actualVerb.auxiliary == .être
       {
         output += "  auxiliary: être"
+      }
+
+      if
+        let actualVerb = Verb.verbs[verb],
+        let verbModel = VerbModel.models[actualVerb.model],
+        !verbModel.usesParticipeStemForPasséSimple
+      {
+        output += "  passé simple does not use participe stem"
       }
 
       print("\(output)\n")

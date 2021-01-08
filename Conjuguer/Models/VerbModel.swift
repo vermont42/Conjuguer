@@ -15,6 +15,7 @@ struct VerbModel {
   let parentId: String?
   let participeStem: String?
   let participeEnding: String?
+  let usesParticipeStemForPasséSimple: Bool
   let indicatifPrésentGroup: IndicatifPrésentGroup?
   let passéSimpleGroup: PasséSimpleGroup?
   let partialAlterations: [PartialAlteration]?

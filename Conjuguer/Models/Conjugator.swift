@@ -34,20 +34,30 @@ struct Conjugator {
     }
 
     var stem: String
+    var isConjugatingPasséSimple = false
     switch tense {
     case .indicatifPrésent(_):
       stem = verb.infinitiveStem
-    case .participePassé, .passéSimple(_):
+    case .participePassé:
       stem = model.participeStem(verb: verb)
+    case .passéSimple(_):
+      isConjugatingPasséSimple = true
+      if model.usesParticipeStemForPasséSimple {
+        stem = model.participeStem(verb: verb)
+      } else {
+        stem = verb.infinitiveStem
+      }
     default:
       return .failure(.tenseNotImplemented(tense)) // TODO: Fix this.
     }
 
     if let partialAlterations = model.partialAlterations {
       for alteration in partialAlterations {
-        if alteration.appliesTo.contains(tense) {
+        if
+          alteration.appliesTo.contains(tense) ||
+          (isConjugatingPasséSimple && alteration.appliesTo.contains(.participePassé) && model.usesParticipeStemForPasséSimple)
+        {
           stem.modifyStem(alteration: alteration)
-          break
         }
       }
     }
