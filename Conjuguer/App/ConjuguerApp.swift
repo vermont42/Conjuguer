@@ -81,6 +81,18 @@ struct ConjuguerApp: App {
         }
       }
 
+      output += "  imparfait: "
+
+      for personNumber in personNumbers {
+        let imparfaitResult = Conjugator.conjugate(infinitive: verb, tense: .imparfait(personNumber))
+        switch imparfaitResult {
+        case .success(let value):
+          output += "\(value) "
+        default:
+          fatalError()
+        }
+      }
+
       if
         let actualVerb = Verb.verbs[verb],
         actualVerb.auxiliary == .être

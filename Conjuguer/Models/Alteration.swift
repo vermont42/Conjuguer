@@ -70,6 +70,19 @@ struct PartialAlteration {
       case "x3p":
         set.insert(.passéSimple(.thirdPlural))
 
+      case "i1s":
+        set.insert(.imparfait(.firstSingular))
+      case "i2s":
+        set.insert(.imparfait(.secondSingular))
+      case "i3s":
+        set.insert(.imparfait(.thirdSingular))
+      case "i1p":
+        set.insert(.imparfait(.firstPlural))
+      case "i2p":
+        set.insert(.imparfait(.secondPlural))
+      case "i3p":
+        set.insert(.imparfait(.thirdPlural))
+
       case "pp":
         set.insert(.participePassé)
 
@@ -82,6 +95,16 @@ struct PartialAlteration {
     }
 
     appliesTo = set
+  }
+
+  static func alterationsFor(xmlString: String) -> [PartialAlteration] {
+    let separator = "|"
+    let components = xmlString.components(separatedBy: separator)
+    var alterations: [PartialAlteration] = []
+    components.forEach {
+      alterations.append(PartialAlteration(xmlString: $0))
+    }
+    return alterations
   }
 }
 

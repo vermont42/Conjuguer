@@ -40,21 +40,19 @@ struct Conjugator {
       stem = verb.infinitiveStem
     case .participePassé:
       stem = model.participeStem(verb: verb)
-    case .participePrésent:
-      let nousPrésentConjugationResult = Conjugator.conjugate(infinitive: infinitive, tense: .indicatifPrésent(.firstPlural))
-      switch nousPrésentConjugationResult {
-      case .success(let value):
-        let index = value.index(value.endIndex, offsetBy: -1 * Tense.onsLength)
-        stem = String(value[..<index])
-      default:
-        // TODO: This doesn't work for verbs that have participePrésents but not nous présent conjugations.
-        // Example: pleuvoir. The stem is pleuv, not pleuvo. One solution might be to chop off, for
-        // infinitive stem, the last 3, rather than 2, letters for -oir verbs. Another solution would
-        // be to do a complete replacement of pleuvoir's participe présent with pleuvant, as with savoir.
-        stem = verb.infinitiveStem
+    case .participePrésent, .imparfait(_):
+      if let imparfaitStem = model.imparfaitStem {
+        stem = imparfaitStem
+      } else {
+        let nousPrésentConjugationResult = Conjugator.conjugate(infinitive: infinitive, tense: .indicatifPrésent(.firstPlural))
+        switch nousPrésentConjugationResult {
+        case .success(let value):
+          let index = value.index(value.endIndex, offsetBy: -1 * Tense.onsLength)
+          stem = String(value[..<index])
+        default:
+          return .failure(.noNousPrésent(infinitive))
+        }
       }
-
-
     case .passéSimple(_):
       isConjugatingPasséSimple = true
       if model.usesParticipeStemForPasséSimple {
@@ -82,6 +80,8 @@ struct Conjugator {
       return .success(stem + model.indicatifPrésentGroupRecursive.endingForPersonNumber(personNumber))
     case .passéSimple(let personNumber):
       return .success(stem + model.passéSimpleGroupRecursive.endingForPersonNumber(personNumber))
+    case .imparfait(let personNumber):
+      return .success(stem + Imparfait.endingForPersonNumber(personNumber))
     case .participePassé:
       return .success(stem + model.participeEndingRecursive)
     case .participePrésent:

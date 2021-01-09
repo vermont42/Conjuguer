@@ -13,6 +13,7 @@ enum ConjugatorError: Error {
   case verbTooShort
   case infinitiveEndingInvalid
   case invalidEnding(String)
+  case noNousPrésent(String)
   case tenseNotImplemented(Tense)
   case noSuchConjugation(PersonNumber)
   case personNumberAbsent(Tense)

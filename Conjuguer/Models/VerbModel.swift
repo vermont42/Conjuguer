@@ -13,6 +13,7 @@ struct VerbModel {
   let id: String
   let exemplar: String
   let parentId: String?
+  let imparfaitStem: String?
   let participeStem: String?
   let participeEnding: String?
   let usesParticipeStemForPasséSimple: Bool
