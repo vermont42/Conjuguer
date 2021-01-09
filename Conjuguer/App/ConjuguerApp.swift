@@ -23,6 +23,7 @@ struct ConjuguerApp: App {
 
     for verb in [
       "aller",
+      "amorcer",
       "apeler",
       "arriver",
       "avoir",
@@ -32,6 +33,7 @@ struct ConjuguerApp: App {
       "finir",
       "lancer",
       "offrir",
+      "ouvrir",
       "parler",
       "souffrir",
     ] {
