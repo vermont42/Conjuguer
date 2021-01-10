@@ -28,6 +28,7 @@
 		036DB81025A6C7900013C3B7 /* PasseSimpleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */; };
 		036DB81825A8C9420013C3B7 /* IndicatifPresentGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */; };
 		03ACA9F725A9FD4400CF5390 /* Imparfait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACA9F625A9FD4400CF5390 /* Imparfait.swift */; };
+		03ACA9FC25AA5D4700CF5390 /* SubjonctifPresentGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACA9FB25AA5D4700CF5390 /* SubjonctifPresentGroup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasseSimpleGroup.swift; sourceTree = "<group>"; };
 		036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatifPresentGroup.swift; sourceTree = "<group>"; };
 		03ACA9F625A9FD4400CF5390 /* Imparfait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Imparfait.swift; sourceTree = "<group>"; };
+		03ACA9FB25AA5D4700CF5390 /* SubjonctifPresentGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjonctifPresentGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */,
 				036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */,
 				036DB7EC25A1070D0013C3B7 /* PersonNumber.swift */,
+				03ACA9FB25AA5D4700CF5390 /* SubjonctifPresentGroup.swift */,
 				036DB7EB25A1070D0013C3B7 /* Tense.swift */,
 				036DB7DE25A0DD7A0013C3B7 /* Verb.swift */,
 				036DB7BB259FD67C0013C3B7 /* VerbModel.swift */,
@@ -334,6 +337,7 @@
 				036DB7D125A0C9F10013C3B7 /* Conjugator.swift in Sources */,
 				036DB81025A6C7900013C3B7 /* PasseSimpleGroup.swift in Sources */,
 				036DB78E259FD6500013C3B7 /* ConjuguerApp.swift in Sources */,
+				03ACA9FC25AA5D4700CF5390 /* SubjonctifPresentGroup.swift in Sources */,
 				036DB7ED25A1070D0013C3B7 /* Tense.swift in Sources */,
 				036DB7BE259FD67C0013C3B7 /* VerbModel.swift in Sources */,
 				036DB7BF259FD67C0013C3B7 /* VerbParser.swift in Sources */,

@@ -10,6 +10,7 @@
     <!ATTLIST model ep CDATA #IMPLIED>
     <!ATTLIST model up CDATA #IMPLIED>
     <!ATTLIST model ii CDATA #IMPLIED>
+    <!ATTLIST model bb CDATA #IMPLIED>
 ]>
 
 <!--r[1-6][sp] = partial alteration for présent-->
@@ -17,12 +18,12 @@
 <!--cr = complete alterations; example: "r1s,vais,r2s,vas,r3s,va,r3p,vont" -->
 
 <models>
-  <model mo="parler" id="1-1" ep="é" si="e" se="a" />
+  <model mo="parler" id="1-1" ep="é" si="e" se="a" bb="e" />
   <model mo="lancer" id="1-2A" pa="1-1" p="1,1,ç,r1p,x1s,x2s,x3s,x1p,x2p|1,1,c,i1p,i2p" />
   <model mo="apeler" id="1-3A" pa="1-1" p="0,1,l,r1s,r2s,r3s,r3p" />
-  <model mo="finir" id="2-1" ep="i" si="x" se="i" />
-  <model mo="couvrir" id="3-1" ep="T" si="E" se="i" up="f" p="1,1,er,pp" />
-  <model mo="être" id="7" pa="3-1" ps="ÉT" ep="É" ii="Ét" cr="rr,Étant,r1s,SUIS,r2s,Es,r3s,EST,r1p,SOMMEs,r2p,êteS,r3p,SOnt,x1s,FUs,x2s,FUs,x3s,FUt,x1p,FÛmes,x2p,FÛtes,x3p,FUrent" />
-  <model mo="avoir" id="8" pa="2-1" ps="e" ep="U" cr="rr,aYant,r1s,AI,r2s,As,r3s,A,r1p,aVons,r2p,aVez,r3p,Ont" se="u" />
-  <model mo="aller" id="9" pa="1-1" cr="r1s,VAIS,r2s,VAs,r3s,VA,r3p,VOnt" />
+  <model mo="finir" id="2-1" ep="i" si="x" se="i" bb="s" />
+  <model mo="couvrir" id="3-1" ep="T" si="E" se="i" up="f" p="1,1,er,pp" bb="e" />
+  <model mo="être" id="7" pa="3-1" ps="ÉT" se="b" uf="FU" ep="É" ii="Ét" cr="rr,Étant,r1s,SUIS,r2s,Es,r3s,EST,r1p,SOMMEs,r2p,êteS,r3p,SOnt,b1s,SOIS,b2s,SOIs,b3s,SOIT,b1p,SOYons,b2p,SOYez,b3p,SOIent" bb="e" />
+  <model mo="avoir" id="8" pa="2-1" ps="e" ep="U" cr="rr,aYant,r1s,AI,r2s,As,r3s,A,r1p,aVons,r2p,aVez,r3p,Ont,b1s,aIe,b2s,aIes,b3s,aIT,b1p,aYons,b2p,aYez,b3p,aIent" se="u" bb="e" />
+  <model mo="aller" id="9" pa="1-1" cr="r1s,VAIS,r2s,VAs,r3s,VA,r3p,VOnt" sb="aIll" bb="e" />
 </models>

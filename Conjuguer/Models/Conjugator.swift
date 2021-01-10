@@ -53,12 +53,37 @@ struct Conjugator {
           return .failure(.noNousPrésent(infinitive))
         }
       }
-    case .passéSimple(_):
-      isConjugatingPasséSimple = true
-      if model.usesParticipeStemForPasséSimple {
-        stem = model.participeStem(verb: verb)
+    case .passéSimple(_), .subjonctifImparfait(_):
+      if let passéSimpleStem = model.passéSimpleStem {
+        stem = passéSimpleStem
+      } else {
+        isConjugatingPasséSimple = true
+        if model.usesParticipeStemForPasséSimple {
+          stem = model.participeStem(verb: verb)
+        } else {
+          stem = verb.infinitiveStem
+        }
+      }
+    case .subjonctifPrésent(let personNumber):
+      if let subjonctifStem = model.subjonctifStem {
+        stem = subjonctifStem
       } else {
         stem = verb.infinitiveStem
+        if let partialAlterations = model.partialAlterations {
+          let subjonctifPersonNumber: PersonNumber
+          switch personNumber {
+          case .firstSingular, .secondSingular, .thirdSingular, .thirdPlural:
+            subjonctifPersonNumber = .thirdPlural
+          case .firstPlural, .secondPlural:
+            subjonctifPersonNumber = .firstPlural
+          }
+          for alteration in partialAlterations {
+            if alteration.appliesTo.contains(.indicatifPrésent(subjonctifPersonNumber)) {
+              stem.modifyStem(alteration: alteration)
+              break
+            }
+          }
+        }
       }
     default:
       return .failure(.tenseNotImplemented(tense)) // TODO: Fix this.
@@ -79,15 +104,40 @@ struct Conjugator {
     case .indicatifPrésent(let personNumber):
       return .success(stem + model.indicatifPrésentGroupRecursive.endingForPersonNumber(personNumber))
     case .passéSimple(let personNumber):
-      return .success(stem + model.passéSimpleGroupRecursive.endingForPersonNumber(personNumber))
+      var ending = model.passéSimpleGroupRecursive.passéSimpleEndingForPersonNumber(personNumber)
+      moveCircumflexIfNeeded(stem: &stem, ending: &ending)
+      return .success(stem + ending)
+    case .subjonctifImparfait(let personNumber):
+      var ending = model.passéSimpleGroupRecursive.subjonctifImparfaitEndingForPersonNumber(personNumber)
+      moveCircumflexIfNeeded(stem: &stem, ending: &ending)
+      return .success(stem + ending)
     case .imparfait(let personNumber):
       return .success(stem + Imparfait.endingForPersonNumber(personNumber))
+    case .subjonctifPrésent(let personNumber):
+      return .success(stem + model.subjonctifPrésentGroupRecursive.endingForPersonNumber(personNumber))
     case .participePassé:
       return .success(stem + model.participeEndingRecursive)
     case .participePrésent:
       return .success(stem + Tense.participePrésentEnding)
     default:
       return .failure(.tenseNotImplemented(tense)) // TODO: Fix this.
+    }
+  }
+
+  static func moveCircumflexIfNeeded(stem: inout String, ending: inout String) {
+    guard ending.first == "^" else {
+      return
+    }
+
+    guard let stemLast = stem.last else {
+      fatalError("Attempted to add a circumflex to an empty String.")
+    }
+
+    ending = String(ending.dropFirst())
+    for tuple in [("a","â"), ("e","ê"), ("i","î"), ("o","ô"), ("u","û"), ("A","Â"), ("E","Ê"), ("I","Î"), ("O","Ô"), ("U","Û")] {
+      if String(stemLast) == tuple.0 {
+        stem = String(stem.dropLast()) + tuple.1
+      }
     }
   }
 }

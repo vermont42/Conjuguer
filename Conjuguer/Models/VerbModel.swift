@@ -15,10 +15,14 @@ struct VerbModel {
   let parentId: String?
   let imparfaitStem: String?
   let participeStem: String?
+  let subjonctifStem: String?
+  let passéSimpleStem: String?
   let participeEnding: String?
+
   let usesParticipeStemForPasséSimple: Bool
   let indicatifPrésentGroup: IndicatifPrésentGroup?
   let passéSimpleGroup: PasséSimpleGroup?
+  let subjonctifPrésentGroup: SubjonctifPrésentGroup?
   let partialAlterations: [PartialAlteration]?
   let completeAlterations: [CompleteAlteration]?
 
@@ -65,6 +69,16 @@ struct VerbModel {
       return VerbModel.model(id: parentId).indicatifPrésentGroupRecursive
     } else {
       fatalError("indicatifPrésentGroup _and_ parentId are nil.")
+    }
+  }
+
+  var subjonctifPrésentGroupRecursive: SubjonctifPrésentGroup {
+    if let subjonctifPrésentGroup = subjonctifPrésentGroup {
+      return subjonctifPrésentGroup
+    } else if let parentId = parentId {
+      return VerbModel.model(id: parentId).subjonctifPrésentGroupRecursive
+    } else {
+      fatalError("subjonctifPrésentGroup _and_ parentId are nil.")
     }
   }
 }

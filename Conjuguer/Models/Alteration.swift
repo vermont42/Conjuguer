@@ -57,6 +57,19 @@ struct PartialAlteration {
       case "r3p":
         set.insert(.indicatifPrésent(.thirdPlural))
 
+      case "b1s":
+        set.insert(.subjonctifPrésent(.firstSingular))
+      case "b2s":
+        set.insert(.subjonctifPrésent(.secondSingular))
+      case "b3s":
+        set.insert(.subjonctifPrésent(.thirdSingular))
+      case "b1p":
+        set.insert(.subjonctifPrésent(.firstPlural))
+      case "b2p":
+        set.insert(.subjonctifPrésent(.secondPlural))
+      case "b3p":
+        set.insert(.subjonctifPrésent(.thirdPlural))
+
       case "x1s":
         set.insert(.passéSimple(.firstSingular))
       case "x2s":
@@ -142,6 +155,19 @@ struct CompleteAlteration {
         tense = .indicatifPrésent(.secondPlural)
       case "r3p":
         tense = .indicatifPrésent(.thirdPlural)
+
+      case "b1s":
+        tense = .subjonctifPrésent(.firstSingular)
+      case "b2s":
+        tense = .subjonctifPrésent(.secondSingular)
+      case "b3s":
+        tense = .subjonctifPrésent(.thirdSingular)
+      case "b1p":
+        tense = .subjonctifPrésent(.firstPlural)
+      case "b2p":
+        tense = .subjonctifPrésent(.secondPlural)
+      case "b3p":
+        tense = .subjonctifPrésent(.thirdPlural)
 
       case "x1s":
         tense = .passéSimple(.firstSingular)

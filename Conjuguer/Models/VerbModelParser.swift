@@ -16,10 +16,13 @@ class VerbModelParser: NSObject, XMLParserDelegate {
   private var currentParentId: String?
   private var currentImparfaitStem: String?
   private var currentParticipeStem: String?
+  private var currentSubjonctifStem: String?
+  private var currentPasséSimpleStem: String?
   private var currentUsesParticipeStemForPasséSimple = true
   private var currentParticipeEnding: String?
   private var currentIndicatifPrésentGroup: IndicatifPrésentGroup?
   private var currentPasséSimpleGroup: PasséSimpleGroup?
+  private var currentSubjonctifPrésentGroup: SubjonctifPrésentGroup?
   private var currentPartialAlterations: [PartialAlteration] = []
   private var currentCompleteAlterations: [CompleteAlteration] = []
 
@@ -60,6 +63,14 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         currentParticipeStem = participeStem
       }
 
+      if let subjonctifStem = attributeDict["sb"] {
+        currentSubjonctifStem = subjonctifStem
+      }
+
+      if let passéSimpleStem = attributeDict["uf"] {
+        currentPasséSimpleStem = passéSimpleStem
+      }
+
       if let usesParticipeStemForPasséSimple = attributeDict["up"] {
         currentUsesParticipeStemForPasséSimple = usesParticipeStemForPasséSimple == "f" ? false : true
       }
@@ -82,6 +93,10 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         currentPasséSimpleGroup = PasséSimpleGroup.groupForXmlString(passéSimpleGroup)
       }
 
+      if let subjonctifPrésentGroup = attributeDict["bb"] {
+        currentSubjonctifPrésentGroup = SubjonctifPrésentGroup.groupForXmlString(subjonctifPrésentGroup)
+      }
+
       if let partialAlterations = attributeDict["p"] {
         currentPartialAlterations = PartialAlteration.alterationsFor(xmlString: partialAlterations)
       }
@@ -100,10 +115,13 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         parentId: currentParentId,
         imparfaitStem: currentImparfaitStem,
         participeStem: currentParticipeStem,
+        subjonctifStem: currentSubjonctifStem,
+        passéSimpleStem: currentPasséSimpleStem,
         participeEnding: currentParticipeEnding,
         usesParticipeStemForPasséSimple: currentUsesParticipeStemForPasséSimple,
         indicatifPrésentGroup: currentIndicatifPrésentGroup,
         passéSimpleGroup: currentPasséSimpleGroup,
+        subjonctifPrésentGroup: currentSubjonctifPrésentGroup,
         partialAlterations: currentPartialAlterations,
         completeAlterations: currentCompleteAlterations
       )
@@ -115,10 +133,13 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       currentParentId = nil
       currentImparfaitStem = nil
       currentParticipeStem = nil
+      currentSubjonctifStem = nil
+      currentPasséSimpleStem = nil
       currentParticipeEnding = nil
       currentUsesParticipeStemForPasséSimple = true
       currentIndicatifPrésentGroup = nil
       currentPasséSimpleGroup = nil
+      currentSubjonctifPrésentGroup = nil
       currentPartialAlterations = []
       currentCompleteAlterations = []
     }

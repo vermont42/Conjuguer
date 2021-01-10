@@ -28,7 +28,7 @@ enum PasséSimpleGroup {
     }
   }
 
-  func endingForPersonNumber(_ personNumber: PersonNumber) -> String {
+  func passéSimpleEndingForPersonNumber(_ personNumber: PersonNumber) -> String {
     switch self {
     case .bare:
       switch personNumber {
@@ -39,9 +39,9 @@ enum PasséSimpleGroup {
       case .thirdSingular:
         return "t"
       case .firstPlural:
-        return "mes" // TODO: Account for ^ before mes.
+        return "^mes"
       case .secondPlural:
-        return "tes" // TODO: Account for ^ before tes.
+        return "^tes"
       case .thirdPlural:
         return "rent"
       }
@@ -89,6 +89,71 @@ enum PasséSimpleGroup {
         return "ûtes"
       case .thirdPlural:
         return "urent"
+      }
+    }
+  }
+
+  func subjonctifImparfaitEndingForPersonNumber(_ personNumber: PersonNumber) -> String {
+    switch self {
+    case .bare:
+      switch personNumber {
+      case .firstSingular:
+        return "sse"
+      case .secondSingular:
+        return "sses"
+      case .thirdSingular:
+        return "^t"
+      case .firstPlural:
+        return "ssions"
+      case .secondPlural:
+        return "ssiez"
+      case .thirdPlural:
+        return "ssent"
+      }
+    case .a:
+      switch personNumber {
+      case .firstSingular:
+        return "asse"
+      case .secondSingular:
+        return "asses"
+      case .thirdSingular:
+        return "ât"
+      case .firstPlural:
+        return "assions"
+      case .secondPlural:
+        return "assiez"
+      case .thirdPlural:
+        return "assent"
+      }
+    case .i:
+      switch personNumber {
+      case .firstSingular:
+        return "isse"
+      case .secondSingular:
+        return "isses"
+      case .thirdSingular:
+        return "ît"
+      case .firstPlural:
+        return "issions"
+      case .secondPlural:
+        return "issiez"
+      case .thirdPlural:
+        return "issent"
+      }
+    case .u:
+      switch personNumber {
+      case .firstSingular:
+        return "usse"
+      case .secondSingular:
+        return "usses"
+      case .thirdSingular:
+        return "ût"
+      case .firstPlural:
+        return "ussions"
+      case .secondPlural:
+        return "ussiez"
+      case .thirdPlural:
+        return "ussent"
       }
     }
   }

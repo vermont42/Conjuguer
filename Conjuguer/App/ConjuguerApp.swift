@@ -83,11 +83,35 @@ struct ConjuguerApp: App {
         }
       }
 
+      output += "  subjonctif imparfait: "
+
+      for personNumber in personNumbers {
+        let subjonctifImparfaitResult = Conjugator.conjugate(infinitive: verb, tense: .subjonctifImparfait(personNumber))
+        switch subjonctifImparfaitResult {
+        case .success(let value):
+          output += "\(value) "
+        default:
+          fatalError()
+        }
+      }
+
       output += "  imparfait: "
 
       for personNumber in personNumbers {
         let imparfaitResult = Conjugator.conjugate(infinitive: verb, tense: .imparfait(personNumber))
         switch imparfaitResult {
+        case .success(let value):
+          output += "\(value) "
+        default:
+          fatalError()
+        }
+      }
+
+      output += "  subjonctif présent: "
+
+      for personNumber in personNumbers {
+        let subjonctifPrésentResult = Conjugator.conjugate(infinitive: verb, tense: .subjonctifPrésent(personNumber))
+        switch subjonctifPrésentResult {
         case .success(let value):
           output += "\(value) "
         default:
