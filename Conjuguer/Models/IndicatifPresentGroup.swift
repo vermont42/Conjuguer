@@ -27,7 +27,7 @@ enum IndicatifPrésentGroup {
     }
   }
 
-  func endingForPersonNumber(_ personNumber: PersonNumber) -> String {
+  func présentEndingForPersonNumber(_ personNumber: PersonNumber) -> String {
     switch self {
     case .e(let appliesToErVerb):
       var ending: String
@@ -78,6 +78,49 @@ enum IndicatifPrésentGroup {
         return "ez"
       case .thirdPlural:
         return "ent"
+      }
+    }
+  }
+
+  func impératifEndingForPersonNumber(_ personNumber: PersonNumber) -> String {
+    switch self {
+    case .e(let appliesToErVerb):
+      var ending: String
+      switch personNumber {
+      case .secondSingular:
+        ending = "e"
+      case .firstPlural:
+        ending = "ons"
+      case .secondPlural:
+        ending = "ez"
+      default:
+        ending = ""
+      }
+      if !appliesToErVerb {
+        ending = ending.uppercased()
+      }
+      return ending
+    case .extendedS:
+      switch personNumber {
+      case .secondSingular:
+        return "is"
+      case .firstPlural:
+        return "issons"
+      case .secondPlural:
+        return "issez"
+      default:
+        return ""
+      }
+    case .s:
+      switch personNumber {
+      case .secondSingular:
+        return "s"
+      case .firstPlural:
+        return "ons"
+      case .secondPlural:
+        return "ez"
+      default:
+        return ""
       }
     }
   }

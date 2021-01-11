@@ -35,6 +35,9 @@ struct Conjugator {
 
     var stem: String
     var isConjugatingPasséSimple = false
+    var isConjugatingImpératif = false
+    var impératifPersonNumber: PersonNumber = .secondSingular
+
     switch tense {
     case .indicatifPrésent(_):
       stem = verb.infinitifStem
@@ -100,15 +103,22 @@ struct Conjugator {
 
     case .futurSimple(_), .conditionnelPrésent(_), .radicalFutur:
       stem = model.futurStemRecursive(infinitif: infinitif)
-    default:
-      return .failure(.noRadicalFutur(infinitif))
+
+    case .impératif(let personNumber):
+      if !personNumber.isValidForImperatif {
+        return .failure(.defectiveForPersonNumber(personNumber))
+      }
+      isConjugatingImpératif = true
+      impératifPersonNumber = personNumber
+      stem = verb.infinitifStem
     }
 
     if let stemAlterations = model.stemAlterations {
       for alteration in stemAlterations {
         if
           alteration.appliesTo.contains(tense) ||
-          (isConjugatingPasséSimple && alteration.appliesTo.contains(.participePassé) && model.usesParticipePasséStemForPasséSimple)
+          (isConjugatingPasséSimple && alteration.appliesTo.contains(.participePassé) && model.usesParticipePasséStemForPasséSimple) ||
+          (isConjugatingImpératif && alteration.appliesTo.contains(.indicatifPrésent(impératifPersonNumber)))
         {
           stem.modifyStem(alteration: alteration)
         }
@@ -117,7 +127,7 @@ struct Conjugator {
 
     switch tense {
     case .indicatifPrésent(let personNumber):
-      return .success(stem + model.indicatifPrésentGroupRecursive.endingForPersonNumber(personNumber))
+      return .success(stem + model.indicatifPrésentGroupRecursive.présentEndingForPersonNumber(personNumber))
     case .passéSimple(let personNumber):
       var ending = model.passéSimpleGroupRecursive.passéSimpleEndingForPersonNumber(personNumber)
       moveCircumflexIfNeeded(stem: &stem, ending: &ending)
@@ -140,8 +150,8 @@ struct Conjugator {
       return .success(stem + Tense.participePrésentEnding)
     case .radicalFutur:
       return .success(stem)
-    case .impératif(_):
-      return .failure(.tenseNotImplemented(tense))
+    case .impératif(let personNumber):
+      return .success(stem + model.indicatifPrésentGroupRecursive.impératifEndingForPersonNumber(personNumber))
     }
   }
 

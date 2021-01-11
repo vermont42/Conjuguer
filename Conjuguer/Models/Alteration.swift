@@ -184,6 +184,13 @@ struct CompleteAlteration {
       case "x3p":
         tense = .passéSimple(.thirdPlural)
 
+      case "m2s":
+        tense = .impératif(.secondSingular)
+      case "m1p":
+        tense = .impératif(.firstPlural)
+      case "m2p":
+        tense = .impératif(.secondPlural)
+
       default:
         fatalError("Unrecognized total alteration \(components[i * 2]) found.")
       }

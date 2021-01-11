@@ -23,7 +23,7 @@
   <model mo="apeler" id="1-3A" pa="1-1" p="0,1,l,r1s,r2s,r3s,r3p" />
   <model mo="finir" id="2-1" ep="i" si="x" se="i" bb="s" />
   <model mo="couvrir" id="3-1" ep="T" si="E" se="i" up="f" p="1,1,er,pp" bb="e" />
-  <model mo="être" id="7" pa="3-1" ps="Ét" rr="Ét" ff="SEr" se="b" uf="FU" ep="É" ii="Ét" cr="r1s,SUIS,r2s,Es,r3s,EST,r1p,SOMMEs,r2p,êteS,r3p,SOnt,b1s,SOIS,b2s,SOIs,b3s,SOIT,b1p,SOYons,b2p,SOYez,b3p,SOIent" bb="e" />
-  <model mo="avoir" id="8" pa="2-1" rr="aY" ff="aUr" ps="e" ep="U" cr="r1s,AI,r2s,As,r3s,A,r1p,aVons,r2p,aVez,r3p,Ont,b1s,aIe,b2s,aIes,b3s,aIT,b1p,aYons,b2p,aYez,b3p,aIent" se="u" bb="e" />
+  <model mo="être" id="7" pa="3-1" ps="Ét" rr="Ét" ff="SEr" se="b" uf="FU" ep="É" ii="Ét" cr="r1s,SUIS,r2s,Es,r3s,EST,r1p,SOMMEs,r2p,êteS,r3p,SOnt,b1s,SOIS,b2s,SOIs,b3s,SOIT,b1p,SOYons,b2p,SOYez,b3p,SOIent,m2s,SOIs,m1p,SOYons,m2p,SOYez" bb="e" />
+  <model mo="avoir" id="8" pa="2-1" rr="aY" ff="aUr" ps="e" ep="U" cr="r1s,AI,r2s,As,r3s,A,r1p,aVons,r2p,aVez,r3p,Ont,b1s,aIe,b2s,aIes,b3s,aIT,b1p,aYons,b2p,aYez,b3p,aIent,m2s,AIe,m1p,AYons,m2p,AYez" se="u" bb="e" />
   <model mo="aller" id="9" pa="1-1" ff="IR" cr="r1s,VAIS,r2s,VAs,r3s,VA,r3p,VOnt" sb="aIll" bb="e" />
 </models>

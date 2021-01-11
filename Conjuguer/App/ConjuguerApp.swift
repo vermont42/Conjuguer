@@ -143,6 +143,19 @@ struct ConjuguerApp: App {
         }
       }
 
+      output += "• imperatif: "
+
+      for personNumber in personNumbers {
+        if personNumber.isValidForImperatif {
+          let impératifResult = Conjugator.conjugate(infinitif: verb, tense: .impératif(personNumber))
+          switch impératifResult {
+          case .success(let value):
+            output += "\(value) "
+          default:
+            fatalError()
+          }
+        }
+      }
 
       if
         let actualVerb = Verb.verbs[verb],
