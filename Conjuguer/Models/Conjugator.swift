@@ -42,16 +42,24 @@ struct Conjugator {
     case .participePassé:
       stem = model.participeStem(verb: verb)
 
-    case .participePrésent, .imparfait(_):
+    case .participePrésent:
+      if let participePrésentStem = model.participePrésentStem {
+        stem = participePrésentStem
+      } else {
+        if let nousPrésentConjugation = nousPrésentConjugation(infinitif: infinitif) {
+          stem = nousPrésentConjugation
+        } else {
+          return .failure(.noNousPrésent(infinitif))
+        }
+      }
+
+    case .imparfait(_):
       if let imparfaitStem = model.imparfaitStem {
         stem = imparfaitStem
       } else {
-        let nousPrésentConjugationResult = Conjugator.conjugate(infinitif: infinitif, tense: .indicatifPrésent(.firstPlural))
-        switch nousPrésentConjugationResult {
-        case .success(let value):
-          let index = value.index(value.endIndex, offsetBy: -1 * Tense.onsLength)
-          stem = String(value[..<index])
-        default:
+        if let nousPrésentConjugation = nousPrésentConjugation(infinitif: infinitif) {
+          stem = nousPrésentConjugation
+        } else {
           return .failure(.noNousPrésent(infinitif))
         }
       }
@@ -149,6 +157,17 @@ struct Conjugator {
       if String(stemLast) == tuple.0 {
         stem = String(stem.dropLast()) + tuple.1
       }
+    }
+  }
+
+  static func nousPrésentConjugation(infinitif: String) -> String? {
+    let nousPrésentConjugationResult = Conjugator.conjugate(infinitif: infinitif, tense: .indicatifPrésent(.firstPlural))
+    switch nousPrésentConjugationResult {
+    case .success(let value):
+      let index = value.index(value.endIndex, offsetBy: -1 * Tense.onsLength)
+      return String(value[..<index])
+    default:
+      return nil
     }
   }
 }

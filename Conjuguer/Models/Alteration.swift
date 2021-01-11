@@ -144,8 +144,6 @@ struct CompleteAlteration {
       switch components[i * 2] {
       case "pp":
         tense = .participePassé
-      case "rr":
-        tense = .participePrésent
 
       case "r1s":
         tense = .indicatifPrésent(.firstSingular)

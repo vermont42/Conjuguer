@@ -21,6 +21,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
   private var currentPasséSimpleStem: String?
   private var currentUsesParticipeStemForPasséSimple = true
   private var currentParticipeEnding: String?
+  private var currentParticipePrésentStem: String?
   private var currentIndicatifPrésentGroup: IndicatifPrésentGroup?
   private var currentPasséSimpleGroup: PasséSimpleGroup?
   private var currentSubjonctifPrésentGroup: SubjonctifPrésentGroup?
@@ -84,6 +85,10 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         currentParticipeEnding = participeEnding
       }
 
+      if let participePrésentStem = attributeDict["rr"] {
+        currentParticipePrésentStem = participePrésentStem
+      }
+
       if let exemplar = attributeDict["mo"] {
         currentExemplar = exemplar
       } else {
@@ -122,6 +127,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         participeStem: currentParticipeStem,
         subjonctifStem: currentSubjonctifStem,
         futurStem: currentFuturStem,
+        participePrésentStem: currentParticipePrésentStem,
         passéSimpleStem: currentPasséSimpleStem,
         participeEnding: currentParticipeEnding,
         usesParticipeStemForPasséSimple: currentUsesParticipeStemForPasséSimple,
@@ -141,6 +147,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       currentParticipeStem = nil
       currentSubjonctifStem = nil
       currentFuturStem = nil
+      currentParticipePrésentStem = nil
       currentPasséSimpleStem = nil
       currentParticipeEnding = nil
       currentUsesParticipeStemForPasséSimple = true

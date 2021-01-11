@@ -17,6 +17,7 @@ struct VerbModel {
   let participeStem: String?
   let subjonctifStem: String?
   let futurStem: String?
+  let participePrésentStem: String?
   let passéSimpleStem: String?
   let participeEnding: String?
 
