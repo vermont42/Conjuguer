@@ -50,23 +50,6 @@ enum PersonNumber: String, CaseIterable {
     }
   }
 
-  var index: Int {
-    switch self {
-    case .firstSingular:
-      return 0
-    case .secondSingular:
-      return 1
-    case .thirdSingular:
-      return 2
-    case .firstPlural:
-      return 3
-    case .secondPlural:
-      return 4
-    case .thirdPlural:
-      return 5
-    }
-  }
-
   var isValidForImperatif: Bool {
     [.secondSingular, .firstPlural, .secondPlural].contains(self)
   }
