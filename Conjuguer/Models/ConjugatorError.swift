@@ -11,7 +11,7 @@ enum ConjugatorError: Error {
   case verbModelNotRecognized
   case verbNotRecognized
   case verbTooShort
-  case infinitiveEndingInvalid
+  case infinitifEndingInvalid
   case invalidEnding(String)
   case noNousPrésent(String)
   case tenseNotImplemented(Tense)

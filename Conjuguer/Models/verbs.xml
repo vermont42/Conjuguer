@@ -8,7 +8,7 @@
     <!ATTLIST verb ay CDATA #IMPLIED>
 ]>
 
-<!--in = infinitive (e.g., finir)-->
+<!--in = infinitif (e.g., finir)-->
 <!--tn = English translation -->
 <!--pa = verb model (e.g., 2-1)-->
 <!--ay = auxiliary (e means être) -->

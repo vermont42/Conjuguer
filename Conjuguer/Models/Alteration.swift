@@ -102,6 +102,9 @@ struct StemAlteration {
       case "rr":
         set.insert(.participePrésent)
 
+      case "ff":
+        set.insert(.radicalFutur)
+
       default:
         fatalError("Unrecognized partial alteration \(alteration) found.")
       }

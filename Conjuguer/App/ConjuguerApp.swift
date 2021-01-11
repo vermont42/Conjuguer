@@ -37,10 +37,10 @@ struct ConjuguerApp: App {
       "parler",
       "souffrir",
     ] {
-      var output = "\(verb)   "
+      var output = "\(verb) • "
 
       let participePassé: String
-      let participePasséResult = Conjugator.conjugate(infinitive: verb, tense: .participePassé)
+      let participePasséResult = Conjugator.conjugate(infinitif: verb, tense: .participePassé)
       switch participePasséResult {
       case .success(let value):
         participePassé = value
@@ -50,19 +50,19 @@ struct ConjuguerApp: App {
       output += "participe passé: \(participePassé)"
 
       let participePrésent: String
-      let participePrésentResult = Conjugator.conjugate(infinitive: verb, tense: .participePrésent)
+      let participePrésentResult = Conjugator.conjugate(infinitif: verb, tense: .participePrésent)
       switch participePrésentResult {
       case .success(let value):
         participePrésent = value
       default:
         fatalError()
       }
-      output += "   participe présent: \(participePrésent)   indicatif présent: "
+      output += " • participe présent: \(participePrésent) • indicatif présent: "
 
       let personNumbers: [PersonNumber] = [.firstSingular, .secondSingular, .thirdSingular, .firstPlural, .secondPlural, .thirdPlural]
 
       for personNumber in personNumbers {
-        let présentResult = Conjugator.conjugate(infinitive: verb, tense: .indicatifPrésent(personNumber))
+        let présentResult = Conjugator.conjugate(infinitif: verb, tense: .indicatifPrésent(personNumber))
         switch présentResult {
         case .success(let value):
           output += "\(value) "
@@ -71,10 +71,10 @@ struct ConjuguerApp: App {
         }
       }
 
-      output += "  passé simple: "
+      output += "• passé simple: "
 
       for personNumber in personNumbers {
-        let passéSimpleResult = Conjugator.conjugate(infinitive: verb, tense: .passéSimple(personNumber))
+        let passéSimpleResult = Conjugator.conjugate(infinitif: verb, tense: .passéSimple(personNumber))
         switch passéSimpleResult {
         case .success(let value):
           output += "\(value) "
@@ -83,10 +83,10 @@ struct ConjuguerApp: App {
         }
       }
 
-      output += "  subjonctif imparfait: "
+      output += "• subjonctif imparfait: "
 
       for personNumber in personNumbers {
-        let subjonctifImparfaitResult = Conjugator.conjugate(infinitive: verb, tense: .subjonctifImparfait(personNumber))
+        let subjonctifImparfaitResult = Conjugator.conjugate(infinitif: verb, tense: .subjonctifImparfait(personNumber))
         switch subjonctifImparfaitResult {
         case .success(let value):
           output += "\(value) "
@@ -95,10 +95,10 @@ struct ConjuguerApp: App {
         }
       }
 
-      output += "  imparfait: "
+      output += "• imparfait: "
 
       for personNumber in personNumbers {
-        let imparfaitResult = Conjugator.conjugate(infinitive: verb, tense: .imparfait(personNumber))
+        let imparfaitResult = Conjugator.conjugate(infinitif: verb, tense: .imparfait(personNumber))
         switch imparfaitResult {
         case .success(let value):
           output += "\(value) "
@@ -107,10 +107,10 @@ struct ConjuguerApp: App {
         }
       }
 
-      output += "  subjonctif présent: "
+      output += "• subjonctif présent: "
 
       for personNumber in personNumbers {
-        let subjonctifPrésentResult = Conjugator.conjugate(infinitive: verb, tense: .subjonctifPrésent(personNumber))
+        let subjonctifPrésentResult = Conjugator.conjugate(infinitif: verb, tense: .subjonctifPrésent(personNumber))
         switch subjonctifPrésentResult {
         case .success(let value):
           output += "\(value) "
@@ -119,11 +119,36 @@ struct ConjuguerApp: App {
         }
       }
 
+      output += "• futur simple: "
+
+      for personNumber in personNumbers {
+        let futurResult = Conjugator.conjugate(infinitif: verb, tense: .futurSimple(personNumber))
+        switch futurResult {
+        case .success(let value):
+          output += "\(value) "
+        default:
+          fatalError()
+        }
+      }
+
+      output += "• conditionnel présent: "
+
+      for personNumber in personNumbers {
+        let conditionnelResult = Conjugator.conjugate(infinitif: verb, tense: .conditionnelPrésent(personNumber))
+        switch conditionnelResult {
+        case .success(let value):
+          output += "\(value) "
+        default:
+          fatalError()
+        }
+      }
+
+
       if
         let actualVerb = Verb.verbs[verb],
         actualVerb.auxiliary == .être
       {
-        output += "  auxiliary: être"
+        output += "• auxiliary: être "
       }
 
       if
@@ -131,7 +156,7 @@ struct ConjuguerApp: App {
         let verbModel = VerbModel.models[actualVerb.model],
         !verbModel.usesParticipeStemForPasséSimple
       {
-        output += "  passé simple does not use participe stem"
+        output += "• passé simple does not use participe stem"
       }
 
       print("\(output)\n")

@@ -17,7 +17,7 @@ enum Tense: Hashable {
   case passéSimple(_ personNumber: PersonNumber)
   case imparfait(_ personNumber: PersonNumber)
   case futurSimple(_ personNumber: PersonNumber)
-  case conditionelPrésent(_ personNumber: PersonNumber)
+  case conditionnelPrésent(_ personNumber: PersonNumber)
   case subjonctifPrésent(_ personNumber: PersonNumber)
   case subjonctifImparfait(_ personNumber: PersonNumber)
   case impératif(_ personNumber: PersonNumber)
@@ -31,7 +31,7 @@ enum Tense: Hashable {
     switch self {
     case .infinitif, .translation, .participePassé, .participePrésent, .radicalFutur:
       return 0
-    case .indicatifPrésent, .passéSimple, .imparfait, .futurSimple, .conditionelPrésent, .subjonctifPrésent, .subjonctifImparfait:
+    case .indicatifPrésent, .passéSimple, .imparfait, .futurSimple, .conditionnelPrésent, .subjonctifPrésent, .subjonctifImparfait:
       return 6
     case .impératif:
       return 3
@@ -58,8 +58,8 @@ enum Tense: Hashable {
       return "imparfait"
     case .futurSimple:
       return "futur simple"
-    case .conditionelPrésent:
-      return "conditionel présent"
+    case .conditionnelPrésent:
+      return "conditionnel présent"
     case .subjonctifPrésent:
       return "subjonctif présent"
     case .subjonctifImparfait:
@@ -89,8 +89,8 @@ enum Tense: Hashable {
       return "Imparfait"
     case .futurSimple:
       return "Futur Simple"
-    case .conditionelPrésent:
-      return "Conditionel Présent"
+    case .conditionnelPrésent:
+      return "Conditionnel Présent"
     case .subjonctifPrésent:
       return "Subjonctif Présent"
     case .subjonctifImparfait:

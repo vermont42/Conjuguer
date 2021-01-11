@@ -8,16 +8,16 @@
 import Foundation
 
 struct Conjugator {
-  static func conjugate(infinitive: String, tense: Tense) -> Result<String, ConjugatorError> {
-    guard infinitive.count >= Verb.minVerbLength else {
+  static func conjugate(infinitif: String, tense: Tense) -> Result<String, ConjugatorError> {
+    guard infinitif.count >= Verb.minVerbLength else {
       return .failure(.verbTooShort)
     }
 
-    guard Verb.endingIsValid(infinitive: infinitive) else {
-      return .failure(.infinitiveEndingInvalid)
+    guard Verb.endingIsValid(infinitif: infinitif) else {
+      return .failure(.infinitifEndingInvalid)
     }
 
-    guard let verb = Verb.verbs[infinitive] else {
+    guard let verb = Verb.verbs[infinitif] else {
       return .failure(.verbNotRecognized)
     }
 
@@ -37,22 +37,25 @@ struct Conjugator {
     var isConjugatingPasséSimple = false
     switch tense {
     case .indicatifPrésent(_):
-      stem = verb.infinitiveStem
+      stem = verb.infinitifStem
+
     case .participePassé:
       stem = model.participeStem(verb: verb)
+
     case .participePrésent, .imparfait(_):
       if let imparfaitStem = model.imparfaitStem {
         stem = imparfaitStem
       } else {
-        let nousPrésentConjugationResult = Conjugator.conjugate(infinitive: infinitive, tense: .indicatifPrésent(.firstPlural))
+        let nousPrésentConjugationResult = Conjugator.conjugate(infinitif: infinitif, tense: .indicatifPrésent(.firstPlural))
         switch nousPrésentConjugationResult {
         case .success(let value):
           let index = value.index(value.endIndex, offsetBy: -1 * Tense.onsLength)
           stem = String(value[..<index])
         default:
-          return .failure(.noNousPrésent(infinitive))
+          return .failure(.noNousPrésent(infinitif))
         }
       }
+
     case .passéSimple(_), .subjonctifImparfait(_):
       if let passéSimpleStem = model.passéSimpleStem {
         stem = passéSimpleStem
@@ -61,14 +64,15 @@ struct Conjugator {
         if model.usesParticipeStemForPasséSimple {
           stem = model.participeStem(verb: verb)
         } else {
-          stem = verb.infinitiveStem
+          stem = verb.infinitifStem
         }
       }
+
     case .subjonctifPrésent(let personNumber):
       if let subjonctifStem = model.subjonctifStem {
         stem = subjonctifStem
       } else {
-        stem = verb.infinitiveStem
+        stem = verb.infinitifStem
         if let stemAlterations = model.stemAlterations {
           let subjonctifPersonNumber: PersonNumber
           switch personNumber {
@@ -85,6 +89,9 @@ struct Conjugator {
           }
         }
       }
+
+    case .futurSimple(_), .conditionnelPrésent(_):
+      stem = model.futurStemRecursive(infinitif: infinitif)
     default:
       return .failure(.tenseNotImplemented(tense)) // TODO: Fix this.
     }
@@ -119,6 +126,10 @@ struct Conjugator {
       return .success(stem + model.participeEndingRecursive)
     case .participePrésent:
       return .success(stem + Tense.participePrésentEnding)
+    case .futurSimple(let personNumber):
+      return .success(stem + FuturSimple.endingForPersonNumber(personNumber))
+    case .conditionnelPrésent(let personNumber):
+      return .success(stem + ConditionnelPrésent.endingForPersonNumber(personNumber))
     default:
       return .failure(.tenseNotImplemented(tense)) // TODO: Fix this.
     }
@@ -146,6 +157,8 @@ extension String {
   mutating func modifyStem(alteration: StemAlteration) {
     if alteration.startIndexFromLast == 0 {
       self = self + alteration.charsToUse.uppercased()
+    } else if alteration.startIndexFromLast == -1 {
+      self = alteration.charsToUse.uppercased()
     } else {
       let repStartIndex = index(startIndex, offsetBy: count - 1)
       let repEndIndex = index(startIndex, offsetBy: (count - 1) + alteration.charsToReplaceCount - 1)

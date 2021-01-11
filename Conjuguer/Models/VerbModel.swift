@@ -38,7 +38,7 @@ struct VerbModel {
     if let participeStem = participeStem {
       return participeStem.uppercased()
     } else {
-      return verb.infinitiveStem
+      return verb.infinitifStem
     }
   }
 
@@ -80,5 +80,28 @@ struct VerbModel {
     } else {
       fatalError("subjonctifPrésentGroup _and_ parentId are nil.")
     }
+  }
+
+  func futurStemRecursive(infinitif: String) -> String {
+    var stem = infinitif
+    var recursiveStemAlterations: [StemAlteration]?
+    if let stemAlterations = stemAlterations {
+      recursiveStemAlterations = stemAlterations
+    } else if let parentId = parentId, let parentStemAlterations = VerbModel.models[parentId]?.stemAlterations {
+      recursiveStemAlterations = parentStemAlterations
+    }
+
+    if let recursiveStemAlterations = recursiveStemAlterations {
+      for alteration in recursiveStemAlterations {
+        if alteration.appliesTo.contains(.radicalFutur) {
+          stem.modifyStem(alteration: alteration)
+          break
+        }
+      }
+    } else if stem.last == "e" {
+      stem = String(stem.dropLast())
+    }
+    
+    return stem
   }
 }

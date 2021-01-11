@@ -38,7 +38,7 @@ class VerbParser: NSObject, XMLParserDelegate {
       if let currentVerb = attributeDict["in"] {
         self.currentVerb = currentVerb
       } else {
-        fatalError("No infinitive specified.")
+        fatalError("No infinitif specified.")
       }
 
       if let translation = attributeDict["tn"] {
@@ -69,7 +69,7 @@ class VerbParser: NSObject, XMLParserDelegate {
       }
       
       verbs[currentVerb] = Verb(
-        infinitive: currentVerb,
+        infinitif: currentVerb,
         translation: currentTranslation,
         model: currentModel,
         auxiliary: auxiliary
