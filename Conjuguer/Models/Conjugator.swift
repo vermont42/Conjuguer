@@ -157,8 +157,6 @@ extension String {
   mutating func modifyStem(alteration: StemAlteration) {
     if alteration.startIndexFromLast == 0 {
       self = self + alteration.charsToUse.uppercased()
-    } else if alteration.startIndexFromLast == -1 {
-      self = alteration.charsToUse.uppercased()
     } else {
       let repStartIndex = index(startIndex, offsetBy: count - 1)
       let repEndIndex = index(startIndex, offsetBy: (count - 1) + alteration.charsToReplaceCount - 1)

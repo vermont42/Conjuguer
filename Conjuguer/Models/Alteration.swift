@@ -44,6 +44,11 @@ struct StemAlteration {
     for index in startIndexOfAlterationsInXml ..< components.count {
       let alteration = components[index]
       switch alteration {
+      case "pp":
+        set.insert(.participePassé)
+      case "rr":
+        set.insert(.participePrésent)
+
       case "r1s":
         set.insert(.indicatifPrésent(.firstSingular))
       case "r2s":
@@ -96,15 +101,6 @@ struct StemAlteration {
       case "i3p":
         set.insert(.imparfait(.thirdPlural))
 
-      case "pp":
-        set.insert(.participePassé)
-
-      case "rr":
-        set.insert(.participePrésent)
-
-      case "ff":
-        set.insert(.radicalFutur)
-
       default:
         fatalError("Unrecognized partial alteration \(alteration) found.")
       }
@@ -146,6 +142,11 @@ struct CompleteAlteration {
     for i in 0 ..< alterationCount {
       let tense: Tense
       switch components[i * 2] {
+      case "pp":
+        tense = .participePassé
+      case "rr":
+        tense = .participePrésent
+
       case "r1s":
         tense = .indicatifPrésent(.firstSingular)
       case "r2s":
@@ -184,12 +185,6 @@ struct CompleteAlteration {
         tense = .passéSimple(.secondPlural)
       case "x3p":
         tense = .passéSimple(.thirdPlural)
-
-      case "pp":
-        tense = .participePassé
-
-      case "rr":
-        tense = .participePrésent
 
       default:
         fatalError("Unrecognized total alteration \(components[i * 2]) found.")

@@ -29,6 +29,8 @@
 		036DB81825A8C9420013C3B7 /* IndicatifPresentGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */; };
 		03ACA9F725A9FD4400CF5390 /* Imparfait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACA9F625A9FD4400CF5390 /* Imparfait.swift */; };
 		03ACA9FC25AA5D4700CF5390 /* SubjonctifPresentGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACA9FB25AA5D4700CF5390 /* SubjonctifPresentGroup.swift */; };
+		03ACAA0125ACB65300CF5390 /* FuturSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACAA0025ACB65300CF5390 /* FuturSimple.swift */; };
+		03ACAA0625ACB6B900CF5390 /* ConditionnelPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACAA0525ACB6B900CF5390 /* ConditionnelPresent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatifPresentGroup.swift; sourceTree = "<group>"; };
 		03ACA9F625A9FD4400CF5390 /* Imparfait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Imparfait.swift; sourceTree = "<group>"; };
 		03ACA9FB25AA5D4700CF5390 /* SubjonctifPresentGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjonctifPresentGroup.swift; sourceTree = "<group>"; };
+		03ACAA0025ACB65300CF5390 /* FuturSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuturSimple.swift; sourceTree = "<group>"; };
+		03ACAA0525ACB6B900CF5390 /* ConditionnelPresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionnelPresent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,8 +169,10 @@
 			children = (
 				036DB7E325A0DD9B0013C3B7 /* Alteration.swift */,
 				036DB7F225A12B990013C3B7 /* Auxiliary.swift */,
+				03ACAA0525ACB6B900CF5390 /* ConditionnelPresent.swift */,
 				036DB7D025A0C9F10013C3B7 /* Conjugator.swift */,
 				036DB7FA25A13C110013C3B7 /* ConjugatorError.swift */,
+				03ACAA0025ACB65300CF5390 /* FuturSimple.swift */,
 				03ACA9F625A9FD4400CF5390 /* Imparfait.swift */,
 				036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */,
 				036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */,
@@ -328,6 +334,7 @@
 				036DB7DF25A0DD7A0013C3B7 /* Verb.swift in Sources */,
 				036DB7EE25A1070D0013C3B7 /* PersonNumber.swift in Sources */,
 				036DB7E425A0DD9B0013C3B7 /* Alteration.swift in Sources */,
+				03ACAA0625ACB6B900CF5390 /* ConditionnelPresent.swift in Sources */,
 				036DB7FB25A13C110013C3B7 /* ConjugatorError.swift in Sources */,
 				03ACA9F725A9FD4400CF5390 /* Imparfait.swift in Sources */,
 				036DB790259FD6500013C3B7 /* ContentView.swift in Sources */,
@@ -335,6 +342,7 @@
 				036DB7F325A12B990013C3B7 /* Auxiliary.swift in Sources */,
 				036DB80525A386D60013C3B7 /* VerbModelParser.swift in Sources */,
 				036DB7D125A0C9F10013C3B7 /* Conjugator.swift in Sources */,
+				03ACAA0125ACB65300CF5390 /* FuturSimple.swift in Sources */,
 				036DB81025A6C7900013C3B7 /* PasseSimpleGroup.swift in Sources */,
 				036DB78E259FD6500013C3B7 /* ConjuguerApp.swift in Sources */,
 				03ACA9FC25AA5D4700CF5390 /* SubjonctifPresentGroup.swift in Sources */,

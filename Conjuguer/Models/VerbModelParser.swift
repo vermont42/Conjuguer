@@ -17,6 +17,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
   private var currentImparfaitStem: String?
   private var currentParticipeStem: String?
   private var currentSubjonctifStem: String?
+  private var currentFuturStem: String?
   private var currentPasséSimpleStem: String?
   private var currentUsesParticipeStemForPasséSimple = true
   private var currentParticipeEnding: String?
@@ -65,6 +66,10 @@ class VerbModelParser: NSObject, XMLParserDelegate {
 
       if let subjonctifStem = attributeDict["sb"] {
         currentSubjonctifStem = subjonctifStem
+      }
+
+      if let futurStem = attributeDict["ff"] {
+        currentFuturStem = futurStem
       }
 
       if let passéSimpleStem = attributeDict["uf"] {
@@ -116,6 +121,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         imparfaitStem: currentImparfaitStem,
         participeStem: currentParticipeStem,
         subjonctifStem: currentSubjonctifStem,
+        futurStem: currentFuturStem,
         passéSimpleStem: currentPasséSimpleStem,
         participeEnding: currentParticipeEnding,
         usesParticipeStemForPasséSimple: currentUsesParticipeStemForPasséSimple,
@@ -134,6 +140,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       currentImparfaitStem = nil
       currentParticipeStem = nil
       currentSubjonctifStem = nil
+      currentFuturStem = nil
       currentPasséSimpleStem = nil
       currentParticipeEnding = nil
       currentUsesParticipeStemForPasséSimple = true

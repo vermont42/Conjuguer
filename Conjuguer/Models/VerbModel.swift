@@ -16,6 +16,7 @@ struct VerbModel {
   let imparfaitStem: String?
   let participeStem: String?
   let subjonctifStem: String?
+  let futurStem: String?
   let passéSimpleStem: String?
   let participeEnding: String?
 
@@ -83,6 +84,10 @@ struct VerbModel {
   }
 
   func futurStemRecursive(infinitif: String) -> String {
+    if let futurStem = futurStem {
+      return futurStem
+    }
+
     var stem = infinitif
     var recursiveStemAlterations: [StemAlteration]?
     if let stemAlterations = stemAlterations {
