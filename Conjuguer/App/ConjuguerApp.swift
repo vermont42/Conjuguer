@@ -154,7 +154,7 @@ struct ConjuguerApp: App {
       if
         let actualVerb = Verb.verbs[verb],
         let verbModel = VerbModel.models[actualVerb.model],
-        !verbModel.usesParticipeStemForPasséSimple
+        !verbModel.usesParticipePasséStemForPasséSimple
       {
         output += "• passé simple does not use participe stem"
       }

@@ -14,14 +14,14 @@ struct VerbModel {
   let exemplar: String
   let parentId: String?
   let imparfaitStem: String?
-  let participeStem: String?
+  let participePasséStem: String?
   let subjonctifStem: String?
   let futurStem: String?
   let participePrésentStem: String?
   let passéSimpleStem: String?
   let participeEnding: String?
 
-  let usesParticipeStemForPasséSimple: Bool
+  let usesParticipePasséStemForPasséSimple: Bool
   let indicatifPrésentGroup: IndicatifPrésentGroup?
   let passéSimpleGroup: PasséSimpleGroup?
   let subjonctifPrésentGroup: SubjonctifPrésentGroup?
@@ -36,9 +36,9 @@ struct VerbModel {
     }
   }
 
-  func participeStem(verb: Verb) -> String {
-    if let participeStem = participeStem {
-      return participeStem.uppercased()
+  func participePasséStem(verb: Verb) -> String {
+    if let participePasséStem = participePasséStem {
+      return participePasséStem.uppercased()
     } else {
       return verb.infinitifStem
     }

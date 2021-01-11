@@ -40,7 +40,7 @@ struct Conjugator {
       stem = verb.infinitifStem
 
     case .participePassé:
-      stem = model.participeStem(verb: verb)
+      stem = model.participePasséStem(verb: verb)
 
     case .participePrésent:
       if let participePrésentStem = model.participePrésentStem {
@@ -69,8 +69,8 @@ struct Conjugator {
         stem = passéSimpleStem
       } else {
         isConjugatingPasséSimple = true
-        if model.usesParticipeStemForPasséSimple {
-          stem = model.participeStem(verb: verb)
+        if model.usesParticipePasséStemForPasséSimple {
+          stem = model.participePasséStem(verb: verb)
         } else {
           stem = verb.infinitifStem
         }
@@ -108,7 +108,7 @@ struct Conjugator {
       for alteration in stemAlterations {
         if
           alteration.appliesTo.contains(tense) ||
-          (isConjugatingPasséSimple && alteration.appliesTo.contains(.participePassé) && model.usesParticipeStemForPasséSimple)
+          (isConjugatingPasséSimple && alteration.appliesTo.contains(.participePassé) && model.usesParticipePasséStemForPasséSimple)
         {
           stem.modifyStem(alteration: alteration)
         }

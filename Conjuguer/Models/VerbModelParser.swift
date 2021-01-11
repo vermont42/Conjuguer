@@ -15,11 +15,11 @@ class VerbModelParser: NSObject, XMLParserDelegate {
   private var currentExemplar = ""
   private var currentParentId: String?
   private var currentImparfaitStem: String?
-  private var currentParticipeStem: String?
+  private var currentParticipePasséStem: String?
   private var currentSubjonctifStem: String?
   private var currentFuturStem: String?
   private var currentPasséSimpleStem: String?
-  private var currentUsesParticipeStemForPasséSimple = true
+  private var currentUsesParticipePasséStemForPasséSimple = true
   private var currentParticipeEnding: String?
   private var currentParticipePrésentStem: String?
   private var currentIndicatifPrésentGroup: IndicatifPrésentGroup?
@@ -61,8 +61,8 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         currentImparfaitStem = imparfaitStem
       }
 
-      if let participeStem = attributeDict["ps"] {
-        currentParticipeStem = participeStem
+      if let participePasséStem = attributeDict["ps"] {
+        currentParticipePasséStem = participePasséStem
       }
 
       if let subjonctifStem = attributeDict["sb"] {
@@ -77,8 +77,8 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         currentPasséSimpleStem = passéSimpleStem
       }
 
-      if let usesParticipeStemForPasséSimple = attributeDict["up"] {
-        currentUsesParticipeStemForPasséSimple = usesParticipeStemForPasséSimple == "f" ? false : true
+      if let usesParticipePasséStemForPasséSimple = attributeDict["up"] {
+        currentUsesParticipePasséStemForPasséSimple = usesParticipePasséStemForPasséSimple == "f" ? false : true
       }
 
       if let participeEnding = attributeDict["ep"] {
@@ -124,13 +124,13 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         exemplar: currentExemplar,
         parentId: currentParentId,
         imparfaitStem: currentImparfaitStem,
-        participeStem: currentParticipeStem,
+        participePasséStem: currentParticipePasséStem,
         subjonctifStem: currentSubjonctifStem,
         futurStem: currentFuturStem,
         participePrésentStem: currentParticipePrésentStem,
         passéSimpleStem: currentPasséSimpleStem,
         participeEnding: currentParticipeEnding,
-        usesParticipeStemForPasséSimple: currentUsesParticipeStemForPasséSimple,
+        usesParticipePasséStemForPasséSimple: currentUsesParticipePasséStemForPasséSimple,
         indicatifPrésentGroup: currentIndicatifPrésentGroup,
         passéSimpleGroup: currentPasséSimpleGroup,
         subjonctifPrésentGroup: currentSubjonctifPrésentGroup,
@@ -144,13 +144,13 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       currentExemplar = ""
       currentParentId = nil
       currentImparfaitStem = nil
-      currentParticipeStem = nil
+      currentParticipePasséStem = nil
       currentSubjonctifStem = nil
       currentFuturStem = nil
       currentParticipePrésentStem = nil
       currentPasséSimpleStem = nil
       currentParticipeEnding = nil
-      currentUsesParticipeStemForPasséSimple = true
+      currentUsesParticipePasséStemForPasséSimple = true
       currentIndicatifPrésentGroup = nil
       currentPasséSimpleGroup = nil
       currentSubjonctifPrésentGroup = nil
