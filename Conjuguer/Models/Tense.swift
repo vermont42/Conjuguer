@@ -7,8 +7,6 @@
 //
 
 enum Tense: Hashable {
-  case infinitif
-  case translation
   case participePassé
   case participePrésent
   case radicalFutur
@@ -29,8 +27,8 @@ enum Tense: Hashable {
 
   func conjugationCount() -> Int {
     switch self {
-    case .infinitif, .translation, .participePassé, .participePrésent, .radicalFutur:
-      return 0
+    case .participePassé, .participePrésent, .radicalFutur:
+      return 1
     case .indicatifPrésent, .passéSimple, .imparfait, .futurSimple, .conditionnelPrésent, .subjonctifPrésent, .subjonctifImparfait:
       return 6
     case .impératif:
@@ -40,10 +38,6 @@ enum Tense: Hashable {
 
   var displayName: String {
     switch self {
-    case .infinitif:
-      return "infinitif"
-    case .translation:
-      return "" // UI uses localized String.
     case .participePassé:
       return "participe passé"
     case .participePrésent:
@@ -71,10 +65,6 @@ enum Tense: Hashable {
 
   var titleCaseName: String {
     switch self {
-    case .infinitif:
-      return "Infinitif"
-    case .translation:
-      return "" // UI uses localized String.
     case .participePassé:
       return "Participe Passé"
     case .participePrésent:

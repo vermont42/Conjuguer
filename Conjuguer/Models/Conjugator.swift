@@ -98,10 +98,10 @@ struct Conjugator {
         }
       }
 
-    case .futurSimple(_), .conditionnelPrésent(_):
+    case .futurSimple(_), .conditionnelPrésent(_), .radicalFutur:
       stem = model.futurStemRecursive(infinitif: infinitif)
     default:
-      return .failure(.tenseNotImplemented(tense)) // TODO: Fix this.
+      return .failure(.noRadicalFutur(infinitif))
     }
 
     if let stemAlterations = model.stemAlterations {
@@ -130,16 +130,18 @@ struct Conjugator {
       return .success(stem + Imparfait.endingForPersonNumber(personNumber))
     case .subjonctifPrésent(let personNumber):
       return .success(stem + model.subjonctifPrésentGroupRecursive.endingForPersonNumber(personNumber))
-    case .participePassé:
-      return .success(stem + model.participeEndingRecursive)
-    case .participePrésent:
-      return .success(stem + Tense.participePrésentEnding)
     case .futurSimple(let personNumber):
       return .success(stem + FuturSimple.endingForPersonNumber(personNumber))
     case .conditionnelPrésent(let personNumber):
       return .success(stem + ConditionnelPrésent.endingForPersonNumber(personNumber))
-    default:
-      return .failure(.tenseNotImplemented(tense)) // TODO: Fix this.
+    case .participePassé:
+      return .success(stem + model.participeEndingRecursive)
+    case .participePrésent:
+      return .success(stem + Tense.participePrésentEnding)
+    case .radicalFutur:
+      return .success(stem)
+    case .impératif(_):
+      return .failure(.tenseNotImplemented(tense))
     }
   }
 

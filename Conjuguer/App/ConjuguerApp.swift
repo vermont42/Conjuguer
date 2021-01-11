@@ -159,6 +159,16 @@ struct ConjuguerApp: App {
         output += "• passé simple does not use participe stem"
       }
 
+      let radicalFuturResult = Conjugator.conjugate(infinitif: verb, tense: .radicalFutur)
+      switch radicalFuturResult {
+      case .success(let value):
+        if value != verb {
+          output += " • radical futur: \(value) "
+        }
+      default:
+        fatalError()
+      }
+
       print("\(output)\n")
     }
   }

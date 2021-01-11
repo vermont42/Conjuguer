@@ -66,4 +66,8 @@ enum PersonNumber: String, CaseIterable {
       return 5
     }
   }
+
+  var isValidForImperatif: Bool {
+    [.secondSingular, .firstPlural, .secondPlural].contains(self)
+  }
 }

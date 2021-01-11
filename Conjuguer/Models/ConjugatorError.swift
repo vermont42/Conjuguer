@@ -14,6 +14,7 @@ enum ConjugatorError: Error {
   case infinitifEndingInvalid
   case invalidEnding(String)
   case noNousPrésent(String)
+  case noRadicalFutur(String)
   case tenseNotImplemented(Tense)
   case noSuchConjugation(PersonNumber)
   case personNumberAbsent(Tense)
