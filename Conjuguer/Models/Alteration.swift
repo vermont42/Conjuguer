@@ -14,7 +14,7 @@ import Foundation
 fileprivate let xmlSeparator = ","
 fileprivate let startIndexOfAlterationsInXml = 3
 
-struct PartialAlteration {
+struct StemAlteration {
   let startIndexFromLast: Int
   let charsToReplaceCount: Int
   let charsToUse: String
@@ -110,12 +110,12 @@ struct PartialAlteration {
     appliesTo = set
   }
 
-  static func alterationsFor(xmlString: String) -> [PartialAlteration] {
+  static func alterationsFor(xmlString: String) -> [StemAlteration] {
     let separator = "|"
     let components = xmlString.components(separatedBy: separator)
-    var alterations: [PartialAlteration] = []
+    var alterations: [StemAlteration] = []
     components.forEach {
-      alterations.append(PartialAlteration(xmlString: $0))
+      alterations.append(StemAlteration(xmlString: $0))
     }
     return alterations
   }

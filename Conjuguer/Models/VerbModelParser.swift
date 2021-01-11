@@ -23,7 +23,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
   private var currentIndicatifPrésentGroup: IndicatifPrésentGroup?
   private var currentPasséSimpleGroup: PasséSimpleGroup?
   private var currentSubjonctifPrésentGroup: SubjonctifPrésentGroup?
-  private var currentPartialAlterations: [PartialAlteration] = []
+  private var currentStemAlterations: [StemAlteration] = []
   private var currentCompleteAlterations: [CompleteAlteration] = []
 
   override init() {
@@ -97,8 +97,8 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         currentSubjonctifPrésentGroup = SubjonctifPrésentGroup.groupForXmlString(subjonctifPrésentGroup)
       }
 
-      if let partialAlterations = attributeDict["p"] {
-        currentPartialAlterations = PartialAlteration.alterationsFor(xmlString: partialAlterations)
+      if let stemAlterations = attributeDict["p"] {
+        currentStemAlterations = StemAlteration.alterationsFor(xmlString: stemAlterations)
       }
 
       if let completeAlteration = attributeDict["cr"] {
@@ -122,7 +122,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         indicatifPrésentGroup: currentIndicatifPrésentGroup,
         passéSimpleGroup: currentPasséSimpleGroup,
         subjonctifPrésentGroup: currentSubjonctifPrésentGroup,
-        partialAlterations: currentPartialAlterations,
+        stemAlterations: currentStemAlterations,
         completeAlterations: currentCompleteAlterations
       )
 
@@ -140,7 +140,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       currentIndicatifPrésentGroup = nil
       currentPasséSimpleGroup = nil
       currentSubjonctifPrésentGroup = nil
-      currentPartialAlterations = []
+      currentStemAlterations = []
       currentCompleteAlterations = []
     }
   }

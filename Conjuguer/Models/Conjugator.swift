@@ -69,7 +69,7 @@ struct Conjugator {
         stem = subjonctifStem
       } else {
         stem = verb.infinitiveStem
-        if let partialAlterations = model.partialAlterations {
+        if let stemAlterations = model.stemAlterations {
           let subjonctifPersonNumber: PersonNumber
           switch personNumber {
           case .firstSingular, .secondSingular, .thirdSingular, .thirdPlural:
@@ -77,7 +77,7 @@ struct Conjugator {
           case .firstPlural, .secondPlural:
             subjonctifPersonNumber = .firstPlural
           }
-          for alteration in partialAlterations {
+          for alteration in stemAlterations {
             if alteration.appliesTo.contains(.indicatifPrésent(subjonctifPersonNumber)) {
               stem.modifyStem(alteration: alteration)
               break
@@ -89,8 +89,8 @@ struct Conjugator {
       return .failure(.tenseNotImplemented(tense)) // TODO: Fix this.
     }
 
-    if let partialAlterations = model.partialAlterations {
-      for alteration in partialAlterations {
+    if let stemAlterations = model.stemAlterations {
+      for alteration in stemAlterations {
         if
           alteration.appliesTo.contains(tense) ||
           (isConjugatingPasséSimple && alteration.appliesTo.contains(.participePassé) && model.usesParticipeStemForPasséSimple)
@@ -143,7 +143,7 @@ struct Conjugator {
 }
 
 extension String {
-  mutating func modifyStem(alteration: PartialAlteration) {
+  mutating func modifyStem(alteration: StemAlteration) {
     if alteration.startIndexFromLast == 0 {
       self = self + alteration.charsToUse.uppercased()
     } else {

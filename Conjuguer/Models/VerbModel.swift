@@ -23,7 +23,7 @@ struct VerbModel {
   let indicatifPrésentGroup: IndicatifPrésentGroup?
   let passéSimpleGroup: PasséSimpleGroup?
   let subjonctifPrésentGroup: SubjonctifPrésentGroup?
-  let partialAlterations: [PartialAlteration]?
+  let stemAlterations: [StemAlteration]?
   let completeAlterations: [CompleteAlteration]?
 
   static func model(id: String) -> VerbModel {
