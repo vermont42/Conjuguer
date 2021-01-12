@@ -20,21 +20,18 @@ enum Tense: Hashable {
   case subjonctifImparfait(_ personNumber: PersonNumber)
   case impératif(_ personNumber: PersonNumber)
 
-  // TODO: Add compound tenses.
+  case passéComposé(_ personNumber: PersonNumber)
+  case plusQueParfait(_ personNumber: PersonNumber)
+  case passéAntérieur(_ personNumber: PersonNumber)
+  case passéSurcomposé(_ personNumber: PersonNumber)
+  case futurAntérieur(_ personNumber: PersonNumber)
+  case conditionnelPassé(_ personNumber: PersonNumber)
+  case subjonctifPassé(_ personNumber: PersonNumber)
+  case subjonctifPlusQueParfait(_ personNumber: PersonNumber)
+  case impératifPassé(_ personNumber: PersonNumber)
 
   static let onsLength = 3
   static let participePrésentEnding = "ant"
-
-  func conjugationCount() -> Int {
-    switch self {
-    case .participePassé, .participePrésent, .radicalFutur:
-      return 1
-    case .indicatifPrésent, .passéSimple, .imparfait, .futurSimple, .conditionnelPrésent, .subjonctifPrésent, .subjonctifImparfait:
-      return 6
-    case .impératif:
-      return 3
-    }
-  }
 
   var displayName: String {
     switch self {
@@ -60,6 +57,24 @@ enum Tense: Hashable {
       return "subjonctif imparfait"
     case .impératif:
       return "impératif"
+    case .passéComposé(_):
+      return "passé composé"
+    case .plusQueParfait(_):
+      return "plus-que-parfait"
+    case .passéAntérieur(_):
+      return "passé antérieur"
+    case .passéSurcomposé(_):
+      return "passé surcomposé"
+    case .futurAntérieur(_):
+      return "futur antérieur"
+    case .conditionnelPassé(_):
+      return "conditionnel passé"
+    case .subjonctifPassé(_):
+      return "subjonctif passé"
+    case .subjonctifPlusQueParfait(_):
+      return "subjonctif plus-que-parfait"
+    case .impératifPassé(_):
+      return "impératif passé"
     }
   }
 
@@ -87,32 +102,68 @@ enum Tense: Hashable {
       return "Subjonctif Imparfait"
     case .impératif:
       return "Impératif"
+    case .passéComposé(_):
+      return "Passé Composé"
+    case .plusQueParfait(_):
+      return "Plus-que-parfait"
+    case .passéAntérieur(_):
+      return "Passé Antérieur"
+    case .passéSurcomposé(_):
+      return "Passé Surcomposé"
+    case .futurAntérieur(_):
+      return "Futur Antérieur"
+    case .conditionnelPassé(_):
+      return "Conditionnel Passé"
+    case .subjonctifPassé(_):
+      return "Subjonctif Passé"
+    case .subjonctifPlusQueParfait(_):
+      return "Subjonctif Plus-que-parfait"
+    case .impératifPassé(_):
+      return "Impératif Passé"
     }
   }
 
-    // TODO: Implement this.
-//  func auxilliaryTenseForCompoundTense() -> Result<Tense, AuxiliaryError> {
-//    switch self {
-//    case .perfectoDeIndicativo:
-//      return .success(.presenteDeIndicativo)
-//    case .pretéritoAnterior:
-//      return .success(.pretérito)
-//    case .pluscuamperfectoDeIndicativo:
-//      return .success(.imperfectoDeIndicativo)
-//    case .futuroPerfecto:
-//      return .success(.futuroDeIndicativo)
-//    case .condicionalCompuesto:
-//      return .success(.condicional)
-//    case .perfectoDeSubjuntivo:
-//      return .success(.presenteDeSubjuntivo)
-//    case .pluscuamperfectoDeSubjuntivo1:
-//      return .success(.imperfectoDeSubjuntivo1)
-//    case .pluscuamperfectoDeSubjuntivo2:
-//      return .success(.imperfectoDeSubjuntivo2)
-//    case .futuroPerfectoDeSubjuntivo:
-//      return .success(.futuroDeSubjuntivo)
-//    default:
-//      return .failure(.noHaberForm(self))
-//    }
-//  }
+  var isCompound: Bool {
+    switch self {
+    case .passéComposé(_), .plusQueParfait(_), .passéAntérieur(_), .passéSurcomposé(_), .futurAntérieur(_), .conditionnelPassé(_), .subjonctifPassé(_), .subjonctifPlusQueParfait(_), .impératifPassé(_):
+      return true
+    default:
+      return false
+    }
+  }
+
+  func conjugatedAuxilliary(personNumber: PersonNumber, auxiliary: Auxiliary) -> String {
+    let verb = auxiliary.verb
+    let tense: Tense
+    switch self {
+    case .passéComposé(_):
+      tense = .indicatifPrésent(personNumber)
+    case .plusQueParfait(_):
+      tense = .imparfait(personNumber)
+    case .passéAntérieur(_):
+      tense = .passéSimple(personNumber)
+    case .passéSurcomposé(_):
+      tense = .passéComposé(personNumber)
+    case .futurAntérieur(_):
+      tense = .futurSimple(personNumber)
+    case .conditionnelPassé(_):
+      tense = .conditionnelPrésent(personNumber)
+    case .subjonctifPassé(_):
+      tense = .subjonctifPrésent(personNumber)
+    case .subjonctifPlusQueParfait(_):
+      tense = .subjonctifImparfait(personNumber)
+    case .impératifPassé(_):
+      tense = .impératif(personNumber)
+    default:
+      return ""
+    }
+
+    let result = Conjugator.conjugate(infinitif: verb, tense: tense)
+    switch result {
+    case .success(let value):
+      return value
+    case .failure(_):
+      return ""
+    }
+  }
 }

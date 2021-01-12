@@ -15,6 +15,11 @@ struct ConjuguerApp: App {
     }
   }
 
+  static var compoundPersonNumbers: [PersonNumber] = [.firstSingular, .secondSingular, .thirdSingular, .firstPlural, .secondPlural, .thirdPlural]
+  static var compoundPersonNumbersIndex = 0
+  static var compoundImpératifPersonNumbers: [PersonNumber] = [.secondSingular, .firstPlural, .secondPlural]
+  static var compoundImpératifPersonNumbersIndex = 0
+
   init() {
     Verb.verbs = VerbParser().parse()
     VerbModel.models = VerbModelParser().parse()
@@ -83,18 +88,6 @@ struct ConjuguerApp: App {
         }
       }
 
-      output += "• subjonctif imparfait: "
-
-      for personNumber in personNumbers {
-        let subjonctifImparfaitResult = Conjugator.conjugate(infinitif: verb, tense: .subjonctifImparfait(personNumber))
-        switch subjonctifImparfaitResult {
-        case .success(let value):
-          output += "\(value) "
-        default:
-          fatalError()
-        }
-      }
-
       output += "• imparfait: "
 
       for personNumber in personNumbers {
@@ -112,6 +105,18 @@ struct ConjuguerApp: App {
       for personNumber in personNumbers {
         let subjonctifPrésentResult = Conjugator.conjugate(infinitif: verb, tense: .subjonctifPrésent(personNumber))
         switch subjonctifPrésentResult {
+        case .success(let value):
+          output += "\(value) "
+        default:
+          fatalError()
+        }
+      }
+
+      output += "• subjonctif imparfait: "
+
+      for personNumber in personNumbers {
+        let subjonctifImparfaitResult = Conjugator.conjugate(infinitif: verb, tense: .subjonctifImparfait(personNumber))
+        switch subjonctifImparfaitResult {
         case .success(let value):
           output += "\(value) "
         default:
@@ -156,6 +161,48 @@ struct ConjuguerApp: App {
           }
         }
       }
+
+      let personNumber = ConjuguerApp.compoundPersonNumbers[ConjuguerApp.compoundPersonNumbersIndex]
+      [
+        Tense.passéComposé(personNumber),
+        Tense.plusQueParfait(personNumber),
+        Tense.passéAntérieur(personNumber),
+        Tense.passéSurcomposé(personNumber),
+        Tense.futurAntérieur(personNumber),
+        Tense.conditionnelPassé(personNumber),
+        Tense.subjonctifPassé(personNumber),
+        Tense.subjonctifPlusQueParfait(personNumber),
+      ].forEach {
+        let compoundResult = Conjugator.conjugate(infinitif: verb, tense: $0)
+        switch compoundResult {
+        case .success(let value):
+          let pronoun: String
+          switch $0 {
+          case .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber):
+            pronoun = personNumber.pronoun
+          default:
+            fatalError()
+          }
+          output += "• \($0.displayName): \(pronoun) \(value) "
+        default:
+          fatalError()
+        }
+      }
+      ConjuguerApp.compoundPersonNumbersIndex += 1
+      ConjuguerApp.compoundPersonNumbersIndex %= ConjuguerApp.compoundPersonNumbers.count
+
+      output += " • impératif passé: "
+
+      let personNumberImpératif = ConjuguerApp.compoundImpératifPersonNumbers[ConjuguerApp.compoundImpératifPersonNumbersIndex]
+      let compoundResult = Conjugator.conjugate(infinitif: verb, tense: .impératifPassé(personNumberImpératif))
+      switch compoundResult {
+      case .success(let value):
+        output += "\(personNumberImpératif.pronoun) \(value) "
+      default:
+        fatalError()
+      }
+      ConjuguerApp.compoundImpératifPersonNumbersIndex += 1
+      ConjuguerApp.compoundImpératifPersonNumbersIndex %= ConjuguerApp.compoundImpératifPersonNumbers.count
 
       if
         let actualVerb = Verb.verbs[verb],
