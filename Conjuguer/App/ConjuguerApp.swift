@@ -29,7 +29,7 @@ struct ConjuguerApp: App {
     for verb in [
       "aller",
       "amorcer",
-      "apeler",
+      "appeler",
       "arriver",
       "avoir",
       "colorer",
@@ -222,9 +222,7 @@ struct ConjuguerApp: App {
       let radicalFuturResult = Conjugator.conjugate(infinitif: verb, tense: .radicalFutur)
       switch radicalFuturResult {
       case .success(let value):
-        if value != verb {
-          output += " • radical futur: \(value) "
-        }
+        output += " • radical futur: \(value) "
       default:
         fatalError()
       }

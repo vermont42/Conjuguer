@@ -36,6 +36,7 @@ struct Conjugator {
     var stem: String
     var isConjugatingPasséSimple = false
     var isConjugatingImpératif = false
+    var isUsingFuturStem = false
     var impératifPersonNumber: PersonNumber = .secondSingular
 
     switch tense {
@@ -102,6 +103,7 @@ struct Conjugator {
       }
 
     case .futurSimple(_), .conditionnelPrésent(_), .radicalFutur:
+      isUsingFuturStem = true
       stem = model.futurStemRecursive(infinitif: infinitif)
 
     case .impératif(let personNumber):
@@ -116,10 +118,10 @@ struct Conjugator {
     if let stemAlterations = model.stemAlterations {
       for alteration in stemAlterations {
         if
-          alteration.appliesTo.contains(tense) ||
+          (alteration.appliesTo.contains(tense) ||
           (isConjugatingPasséSimple && alteration.appliesTo.contains(.participePassé) && model.usesParticipePasséStemForPasséSimple) ||
           (isConjugatingImpératif && alteration.appliesTo.contains(.indicatifPrésent(impératifPersonNumber))) ||
-          (tense.isCompound && alteration.appliesTo.contains(.participePassé))
+          (tense.isCompound && alteration.appliesTo.contains(.participePassé))) && !isUsingFuturStem
         {
           stem.modifyStem(alteration: alteration)
         }
@@ -192,9 +194,21 @@ extension String {
     if alteration.startIndexFromLast == 0 {
       self = self + alteration.charsToUse.uppercased()
     } else {
-      let repStartIndex = index(startIndex, offsetBy: count - 1)
-      let repEndIndex = index(startIndex, offsetBy: (count - 1) + alteration.charsToReplaceCount - 1)
-      replaceSubrange(repStartIndex ... repEndIndex, with: alteration.charsToUse.uppercased())
+      let start = index(startIndex, offsetBy: count - alteration.startIndexFromLast)
+      let end = index(startIndex, offsetBy: (count - alteration.startIndexFromLast) + alteration.charsToReplaceCount)
+      replaceSubrange(start ..< end, with: alteration.charsToUse)
     }
   }
 }
+
+//let startIndexFromLast: Int
+//let charsToReplaceCount: Int
+//let charsToUse: String
+
+
+//let start = value.index(value.startIndex, offsetBy: 6);
+//let end = value.index(value.startIndex, offsetBy: 6 + 3);
+//value.replaceSubrange(start..<end, with: "yellow")
+//print(value)
+//green red blue
+//green yellow blue

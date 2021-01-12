@@ -48,6 +48,8 @@ struct StemAlteration {
         set.insert(.participePassé)
       case "rr":
         set.insert(.participePrésent)
+      case "sf":
+        set.insert(.radicalFutur)
 
       case "r1s":
         set.insert(.indicatifPrésent(.firstSingular))

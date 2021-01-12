@@ -20,7 +20,7 @@
 <models>
   <model mo="parler" id="1-1" ep="é" si="e" se="a" bb="e" />
   <model mo="lancer" id="1-2A" pa="1-1" p="1,1,ç,r1p,x1s,x2s,x3s,x1p,x2p|1,1,c,i1p,i2p" />
-  <model mo="apeler" id="1-3A" pa="1-1" p="0,1,l,r1s,r2s,r3s,r3p" />
+  <model mo="appeler" id="1-3A" pa="1-1" p="0,1,l,r1s,r2s,r3s,r3p|3,1,lL,sf" />
   <model mo="finir" id="2-1" ep="i" si="x" se="i" bb="s" />
   <model mo="couvrir" id="3-1" ep="T" si="E" se="i" up="f" p="1,1,er,pp" bb="e" />
   <model mo="être" id="7" pa="3-1" ps="Ét" rr="Ét" ff="SEr" se="b" uf="FU" ep="É" ii="Ét" cr="r1s,SUIS,r2s,Es,r3s,EST,r1p,SOMMEs,r2p,êteS,r3p,SOnt,b1s,SOIS,b2s,SOIs,b3s,SOIT,b1p,SOYons,b2p,SOYez,b3p,SOIent,m2s,SOIs,m1p,SOYons,m2p,SOYez" bb="e" />
