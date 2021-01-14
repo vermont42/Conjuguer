@@ -35,7 +35,7 @@ enum T {
   static func generateVerbModelTests() {
     for model in ["parler", "lancer", "appeler", "finir", "couvrir", "être", "avoir", "aller"] {
       var output = "func test" + model.capitalizingFirstLetter() + "() {\n  var personNumbersIndex = 0\n\n"
-      for tense in ["indicatifPrésent", "passéSimple", "imparfait", "futurSimple", "conditionnelPrésent", "subjonctifPrésent", "subjonctifImparfait"] {
+      for tense in ["indicatifPrésent", "imparfait", "futurSimple", "conditionnelPrésent", "passéSimple", "subjonctifPrésent", "subjonctifImparfait"] {
         output += "  for conjugation in ["
         for personNumber in personNumbers {
           let conjugation = T.conjugate(infinitif: model, tense: Tense.fromString(tense, personNumber: personNumber))
@@ -53,7 +53,12 @@ enum T {
         output += "  }\n\n"
       }
 
-      output += "  var impératifPersonNumbersIndex = 0\n\n"
+      for tense in ["participePassé", "participePrésent"] {
+        let conjugation = T.conjugate(infinitif: model, tense: Tense.fromString(tense, personNumber: .firstSingular))
+        output += "  T.testConjugation(infinitif: \"" + model + "\", tense: ." + tense + ", expected: \"\(conjugation)\")\n"
+      }
+
+      output += "\n  var impératifPersonNumbersIndex = 0\n\n"
       output += "  for conjugation in ["
       for personNumber in impératifPersonNumbers {
         let conjugation = T.conjugate(infinitif: model, tense: .impératif(personNumber))
@@ -68,12 +73,7 @@ enum T {
       output += "    T.testConjugation(infinitif: \"" + model + "\", tense: .impératif(T.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)\n"
       output += "    impératifPersonNumbersIndex += 1\n"
       output += "    impératifPersonNumbersIndex %= T.impératifPersonNumbers.count\n"
-      output += "  }\n\n"
-
-      for tense in ["participePassé", "participePrésent"] {
-        let conjugation = T.conjugate(infinitif: model, tense: Tense.fromString(tense, personNumber: .firstSingular))
-        output += "  T.testConjugation(infinitif: \"" + model + "\", tense: ." + tense + ", expected: \"\(conjugation)\")\n"
-      }
+      output += "  }\n"
 
       output += "}\n"
       print(output)
