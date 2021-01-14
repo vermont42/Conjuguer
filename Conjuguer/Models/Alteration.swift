@@ -103,6 +103,19 @@ struct StemAlteration {
       case "i3p":
         set.insert(.imparfait(.thirdPlural))
 
+      case "q1s":
+        set.insert(.subjonctifImparfait(.firstSingular))
+      case "q2s":
+        set.insert(.subjonctifImparfait(.secondSingular))
+      case "q3s":
+        set.insert(.subjonctifImparfait(.thirdSingular))
+      case "q1p":
+        set.insert(.subjonctifImparfait(.firstPlural))
+      case "q2p":
+        set.insert(.subjonctifImparfait(.secondPlural))
+      case "q3p":
+        set.insert(.subjonctifImparfait(.thirdPlural))
+
       default:
         fatalError("Unrecognized partial alteration \(alteration) found.")
       }

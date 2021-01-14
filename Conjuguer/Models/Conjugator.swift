@@ -35,9 +35,8 @@ struct Conjugator {
 
     var stem: String
     var isConjugatingPasséSimple = false
-    var isConjugatingSubjonctifImparfait = true
+    var isConjugatingSubjonctifImparfait = false
     var isConjugatingImpératif = false
-    var isUsingFuturStem = false
     var impératifPersonNumber: PersonNumber = .secondSingular
     var passéSimplePersonNumber: PersonNumber = .secondSingular
 
@@ -45,7 +44,8 @@ struct Conjugator {
     case .indicatifPrésent(_):
       stem = verb.infinitifStem
 
-    case .participePassé, .passéComposé(_), .plusQueParfait(_), .passéAntérieur(_), .passéSurcomposé(_), .futurAntérieur(_), .conditionnelPassé(_), .subjonctifPassé(_), .subjonctifPlusQueParfait(_), .impératifPassé(_):
+    case .participePassé,
+         .passéComposé(_), .plusQueParfait(_), .passéAntérieur(_), .passéSurcomposé(_), .futurAntérieur(_), .conditionnelPassé(_), .subjonctifPassé(_), .subjonctifPlusQueParfait(_), .impératifPassé(_):
       stem = model.participePasséStem(verb: verb)
 
     case .participePrésent:
@@ -119,7 +119,6 @@ struct Conjugator {
       }
 
     case .futurSimple(_), .conditionnelPrésent(_), .radicalFutur:
-      isUsingFuturStem = true
       stem = model.futurStemRecursive(infinitif: infinitif)
 
     case .impératif(let personNumber):
@@ -131,17 +130,22 @@ struct Conjugator {
       stem = verb.infinitifStem
     }
 
-    let isUsingTenseThatUsesPasséSimpleStem = isConjugatingPasséSimple && isConjugatingSubjonctifImparfait
+    let isUsingTenseThatUsesPasséSimpleStem = isConjugatingPasséSimple || isConjugatingSubjonctifImparfait
 
     if let stemAlterations = model.stemAlterations {
       for alteration in stemAlterations {
         if
-          (alteration.appliesTo.contains(tense) || alteration.appliesTo.contains(.passéSimple(passéSimplePersonNumber))) ||
-          (isUsingTenseThatUsesPasséSimpleStem &&
-          (isUsingTenseThatUsesPasséSimpleStem && alteration.appliesTo.contains(.participePassé) && model.usesParticipePasséStemForPasséSimple) ||
+          alteration.appliesTo.contains(tense) ||
+          (isUsingTenseThatUsesPasséSimpleStem && alteration.appliesTo.contains(.passéSimple(passéSimplePersonNumber)) && model.usesParticipePasséStemForPasséSimple) ||
           (isConjugatingImpératif && alteration.appliesTo.contains(.indicatifPrésent(impératifPersonNumber))) ||
-          (tense.isCompound && alteration.appliesTo.contains(.participePassé))) && !isUsingFuturStem
+          (tense.isCompound && alteration.appliesTo.contains(.participePassé))
         {
+//          (alteration.appliesTo.contains(tense) || alteration.appliesTo.contains(.passéSimple(passéSimplePersonNumber))) ||
+//          (isUsingTenseThatUsesPasséSimpleStem &&
+//          (isUsingTenseThatUsesPasséSimpleStem && alteration.appliesTo.contains(.participePassé) && model.usesParticipePasséStemForPasséSimple) ||
+//          (isConjugatingImpératif && alteration.appliesTo.contains(.indicatifPrésent(impératifPersonNumber))) ||
+//          (tense.isCompound && alteration.appliesTo.contains(.participePassé))) && !isUsingFuturStem
+//        {
           stem.modifyStem(alteration: alteration)
         }
       }
@@ -219,15 +223,3 @@ extension String {
     }
   }
 }
-
-//let startIndexFromLast: Int
-//let charsToReplaceCount: Int
-//let charsToUse: String
-
-
-//let start = value.index(value.startIndex, offsetBy: 6);
-//let end = value.index(value.startIndex, offsetBy: 6 + 3);
-//value.replaceSubrange(start..<end, with: "yellow")
-//print(value)
-//green red blue
-//green yellow blue

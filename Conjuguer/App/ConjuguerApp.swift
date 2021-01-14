@@ -228,23 +228,6 @@ struct ConjuguerApp: App {
       }
 
       print("\(output)\n\n\n\n\n")
-
-      var output2 = "["
-      for personNumber in ConjuguerApp.compoundPersonNumbers {
-        let result = Conjugator.conjugate(infinitif: verb, tense: .indicatifPrésent(personNumber))
-        switch result {
-        case .success(let value):
-          output2 += "\"" + value + "\""
-          if personNumber == .thirdPlural {
-            output2 += "]"
-          } else {
-            output2 += ", "
-          }
-        default:
-          fatalError()
-        }
-      }
-      print(output2 + "\n")
     }
   }
 }
