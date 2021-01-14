@@ -227,7 +227,7 @@ struct ConjuguerApp: App {
         fatalError()
       }
 
-      print("\(output)\n\n\n\n\n")
+      print("\(output)\n\n")
     }
   }
 }

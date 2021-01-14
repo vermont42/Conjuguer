@@ -8,6 +8,9 @@
 import Foundation
 
 class VerbModelParser: NSObject, XMLParserDelegate {
+  static let xmlSeparator = ","
+  static let startIndexOfAlterationsInXml = 3
+
   private var parser: XMLParser?
   private let modelTag = "model"
   private var models: [String: VerbModel] = [:]

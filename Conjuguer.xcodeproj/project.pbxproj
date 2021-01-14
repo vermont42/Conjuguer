@@ -18,7 +18,7 @@
 		036DB7C0259FD67C0013C3B7 /* verbs.xml in Resources */ = {isa = PBXBuildFile; fileRef = 036DB7BD259FD67C0013C3B7 /* verbs.xml */; };
 		036DB7D125A0C9F10013C3B7 /* Conjugator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB7D025A0C9F10013C3B7 /* Conjugator.swift */; };
 		036DB7DF25A0DD7A0013C3B7 /* Verb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB7DE25A0DD7A0013C3B7 /* Verb.swift */; };
-		036DB7E425A0DD9B0013C3B7 /* Alteration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB7E325A0DD9B0013C3B7 /* Alteration.swift */; };
+		036DB7E425A0DD9B0013C3B7 /* StemAlteration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB7E325A0DD9B0013C3B7 /* StemAlteration.swift */; };
 		036DB7ED25A1070D0013C3B7 /* Tense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB7EB25A1070D0013C3B7 /* Tense.swift */; };
 		036DB7EE25A1070D0013C3B7 /* PersonNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB7EC25A1070D0013C3B7 /* PersonNumber.swift */; };
 		036DB7F325A12B990013C3B7 /* Auxiliary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB7F225A12B990013C3B7 /* Auxiliary.swift */; };
@@ -33,6 +33,7 @@
 		03ACAA0625ACB6B900CF5390 /* ConditionnelPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACAA0525ACB6B900CF5390 /* ConditionnelPresent.swift */; };
 		03B54B3E25AF914F0062B323 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B54B3D25AF914F0062B323 /* TestUtils.swift */; };
 		03B54B4625AF92930062B323 /* VerbModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B54B4525AF92930062B323 /* VerbModelTests.swift */; };
+		03B54B4B25B00B870062B323 /* CompleteAlteration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B54B4A25B00B870062B323 /* CompleteAlteration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +71,7 @@
 		036DB7BD259FD67C0013C3B7 /* verbs.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = verbs.xml; sourceTree = "<group>"; };
 		036DB7D025A0C9F10013C3B7 /* Conjugator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conjugator.swift; sourceTree = "<group>"; };
 		036DB7DE25A0DD7A0013C3B7 /* Verb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verb.swift; sourceTree = "<group>"; };
-		036DB7E325A0DD9B0013C3B7 /* Alteration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alteration.swift; sourceTree = "<group>"; };
+		036DB7E325A0DD9B0013C3B7 /* StemAlteration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StemAlteration.swift; sourceTree = "<group>"; };
 		036DB7EB25A1070D0013C3B7 /* Tense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tense.swift; sourceTree = "<group>"; };
 		036DB7EC25A1070D0013C3B7 /* PersonNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonNumber.swift; sourceTree = "<group>"; };
 		036DB7F225A12B990013C3B7 /* Auxiliary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auxiliary.swift; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 		03ACAA0525ACB6B900CF5390 /* ConditionnelPresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionnelPresent.swift; sourceTree = "<group>"; };
 		03B54B3D25AF914F0062B323 /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		03B54B4525AF92930062B323 /* VerbModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbModelTests.swift; sourceTree = "<group>"; };
+		03B54B4A25B00B870062B323 /* CompleteAlteration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteAlteration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,8 +175,8 @@
 		036DB7CB25A0C97F0013C3B7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				036DB7E325A0DD9B0013C3B7 /* Alteration.swift */,
 				036DB7F225A12B990013C3B7 /* Auxiliary.swift */,
+				03B54B4A25B00B870062B323 /* CompleteAlteration.swift */,
 				03ACAA0525ACB6B900CF5390 /* ConditionnelPresent.swift */,
 				036DB7D025A0C9F10013C3B7 /* Conjugator.swift */,
 				036DB7FA25A13C110013C3B7 /* ConjugatorError.swift */,
@@ -183,6 +185,7 @@
 				036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */,
 				036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */,
 				036DB7EC25A1070D0013C3B7 /* PersonNumber.swift */,
+				036DB7E325A0DD9B0013C3B7 /* StemAlteration.swift */,
 				03ACA9FB25AA5D4700CF5390 /* SubjonctifPresentGroup.swift */,
 				036DB7EB25A1070D0013C3B7 /* Tense.swift */,
 				036DB7DE25A0DD7A0013C3B7 /* Verb.swift */,
@@ -339,7 +342,7 @@
 			files = (
 				036DB7DF25A0DD7A0013C3B7 /* Verb.swift in Sources */,
 				036DB7EE25A1070D0013C3B7 /* PersonNumber.swift in Sources */,
-				036DB7E425A0DD9B0013C3B7 /* Alteration.swift in Sources */,
+				036DB7E425A0DD9B0013C3B7 /* StemAlteration.swift in Sources */,
 				03ACAA0625ACB6B900CF5390 /* ConditionnelPresent.swift in Sources */,
 				036DB7FB25A13C110013C3B7 /* ConjugatorError.swift in Sources */,
 				03ACA9F725A9FD4400CF5390 /* Imparfait.swift in Sources */,
@@ -348,6 +351,7 @@
 				036DB7F325A12B990013C3B7 /* Auxiliary.swift in Sources */,
 				036DB80525A386D60013C3B7 /* VerbModelParser.swift in Sources */,
 				036DB7D125A0C9F10013C3B7 /* Conjugator.swift in Sources */,
+				03B54B4B25B00B870062B323 /* CompleteAlteration.swift in Sources */,
 				03ACAA0125ACB65300CF5390 /* FuturSimple.swift in Sources */,
 				036DB81025A6C7900013C3B7 /* PasseSimpleGroup.swift in Sources */,
 				036DB78E259FD6500013C3B7 /* ConjuguerApp.swift in Sources */,
