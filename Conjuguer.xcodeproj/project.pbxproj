@@ -11,7 +11,7 @@
 		036DB790259FD6500013C3B7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB78F259FD6500013C3B7 /* ContentView.swift */; };
 		036DB792259FD6510013C3B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 036DB791259FD6510013C3B7 /* Assets.xcassets */; };
 		036DB795259FD6510013C3B7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 036DB794259FD6510013C3B7 /* Preview Assets.xcassets */; };
-		036DB7A0259FD6510013C3B7 /* ConjuguerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB79F259FD6510013C3B7 /* ConjuguerTests.swift */; };
+		036DB7A0259FD6510013C3B7 /* CompoundTenseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB79F259FD6510013C3B7 /* CompoundTenseTests.swift */; };
 		036DB7AB259FD6510013C3B7 /* ConjuguerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB7AA259FD6510013C3B7 /* ConjuguerUITests.swift */; };
 		036DB7BE259FD67C0013C3B7 /* VerbModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB7BB259FD67C0013C3B7 /* VerbModel.swift */; };
 		036DB7BF259FD67C0013C3B7 /* VerbParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB7BC259FD67C0013C3B7 /* VerbParser.swift */; };
@@ -31,6 +31,8 @@
 		03ACA9FC25AA5D4700CF5390 /* SubjonctifPresentGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACA9FB25AA5D4700CF5390 /* SubjonctifPresentGroup.swift */; };
 		03ACAA0125ACB65300CF5390 /* FuturSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACAA0025ACB65300CF5390 /* FuturSimple.swift */; };
 		03ACAA0625ACB6B900CF5390 /* ConditionnelPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACAA0525ACB6B900CF5390 /* ConditionnelPresent.swift */; };
+		03B54B3E25AF914F0062B323 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B54B3D25AF914F0062B323 /* TestUtils.swift */; };
+		03B54B4625AF92930062B323 /* VerbModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B54B4525AF92930062B323 /* VerbModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +60,7 @@
 		036DB794259FD6510013C3B7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		036DB796259FD6510013C3B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		036DB79B259FD6510013C3B7 /* ConjuguerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConjuguerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		036DB79F259FD6510013C3B7 /* ConjuguerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConjuguerTests.swift; sourceTree = "<group>"; };
+		036DB79F259FD6510013C3B7 /* CompoundTenseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundTenseTests.swift; sourceTree = "<group>"; };
 		036DB7A1259FD6510013C3B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		036DB7A6259FD6510013C3B7 /* ConjuguerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConjuguerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		036DB7AA259FD6510013C3B7 /* ConjuguerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConjuguerUITests.swift; sourceTree = "<group>"; };
@@ -81,6 +83,8 @@
 		03ACA9FB25AA5D4700CF5390 /* SubjonctifPresentGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjonctifPresentGroup.swift; sourceTree = "<group>"; };
 		03ACAA0025ACB65300CF5390 /* FuturSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuturSimple.swift; sourceTree = "<group>"; };
 		03ACAA0525ACB6B900CF5390 /* ConditionnelPresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionnelPresent.swift; sourceTree = "<group>"; };
+		03B54B3D25AF914F0062B323 /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
+		03B54B4525AF92930062B323 /* VerbModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,8 +153,10 @@
 		036DB79E259FD6510013C3B7 /* ConjuguerTests */ = {
 			isa = PBXGroup;
 			children = (
-				036DB79F259FD6510013C3B7 /* ConjuguerTests.swift */,
+				036DB79F259FD6510013C3B7 /* CompoundTenseTests.swift */,
 				036DB7A1259FD6510013C3B7 /* Info.plist */,
+				03B54B4525AF92930062B323 /* VerbModelTests.swift */,
+				03B54B3D25AF914F0062B323 /* TestUtils.swift */,
 			);
 			path = ConjuguerTests;
 			sourceTree = "<group>";
@@ -356,7 +362,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				036DB7A0259FD6510013C3B7 /* ConjuguerTests.swift in Sources */,
+				036DB7A0259FD6510013C3B7 /* CompoundTenseTests.swift in Sources */,
+				03B54B3E25AF914F0062B323 /* TestUtils.swift in Sources */,
+				03B54B4625AF92930062B323 /* VerbModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

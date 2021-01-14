@@ -35,9 +35,11 @@ struct Conjugator {
 
     var stem: String
     var isConjugatingPasséSimple = false
+    var isConjugatingSubjonctifImparfait = true
     var isConjugatingImpératif = false
     var isUsingFuturStem = false
     var impératifPersonNumber: PersonNumber = .secondSingular
+    var passéSimplePersonNumber: PersonNumber = .secondSingular
 
     switch tense {
     case .indicatifPrésent(_):
@@ -68,11 +70,25 @@ struct Conjugator {
         }
       }
 
-    case .passéSimple(_), .subjonctifImparfait(_):
+    case .passéSimple(let personNumber):
       if let passéSimpleStem = model.passéSimpleStem {
         stem = passéSimpleStem
       } else {
         isConjugatingPasséSimple = true
+        passéSimplePersonNumber = personNumber
+        if model.usesParticipePasséStemForPasséSimple {
+          stem = model.participePasséStem(verb: verb)
+        } else {
+          stem = verb.infinitifStem
+        }
+      }
+
+    case .subjonctifImparfait(let personNumber):
+      if let passéSimpleStem = model.passéSimpleStem {
+        stem = passéSimpleStem
+      } else {
+        isConjugatingSubjonctifImparfait = true
+        passéSimplePersonNumber = personNumber
         if model.usesParticipePasséStemForPasséSimple {
           stem = model.participePasséStem(verb: verb)
         } else {
@@ -115,11 +131,14 @@ struct Conjugator {
       stem = verb.infinitifStem
     }
 
+    let isUsingTenseThatUsesPasséSimpleStem = isConjugatingPasséSimple && isConjugatingSubjonctifImparfait
+
     if let stemAlterations = model.stemAlterations {
       for alteration in stemAlterations {
         if
-          (alteration.appliesTo.contains(tense) ||
-          (isConjugatingPasséSimple && alteration.appliesTo.contains(.participePassé) && model.usesParticipePasséStemForPasséSimple) ||
+          (alteration.appliesTo.contains(tense) || alteration.appliesTo.contains(.passéSimple(passéSimplePersonNumber))) ||
+          (isUsingTenseThatUsesPasséSimpleStem &&
+          (isUsingTenseThatUsesPasséSimpleStem && alteration.appliesTo.contains(.participePassé) && model.usesParticipePasséStemForPasséSimple) ||
           (isConjugatingImpératif && alteration.appliesTo.contains(.indicatifPrésent(impératifPersonNumber))) ||
           (tense.isCompound && alteration.appliesTo.contains(.participePassé))) && !isUsingFuturStem
         {

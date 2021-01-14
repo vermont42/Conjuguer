@@ -15,9 +15,9 @@ struct ConjuguerApp: App {
     }
   }
 
-  static var compoundPersonNumbers: [PersonNumber] = [.firstSingular, .secondSingular, .thirdSingular, .firstPlural, .secondPlural, .thirdPlural]
+  static let compoundPersonNumbers: [PersonNumber] = [.firstSingular, .secondSingular, .thirdSingular, .firstPlural, .secondPlural, .thirdPlural]
   static var compoundPersonNumbersIndex = 0
-  static var compoundImpératifPersonNumbers: [PersonNumber] = [.secondSingular, .firstPlural, .secondPlural]
+  static let compoundImpératifPersonNumbers: [PersonNumber] = [.secondSingular, .firstPlural, .secondPlural]
   static var compoundImpératifPersonNumbersIndex = 0
 
   init() {
@@ -227,7 +227,24 @@ struct ConjuguerApp: App {
         fatalError()
       }
 
-      print("\(output)\n")
+      print("\(output)\n\n\n\n\n")
+
+      var output2 = "["
+      for personNumber in ConjuguerApp.compoundPersonNumbers {
+        let result = Conjugator.conjugate(infinitif: verb, tense: .indicatifPrésent(personNumber))
+        switch result {
+        case .success(let value):
+          output2 += "\"" + value + "\""
+          if personNumber == .thirdPlural {
+            output2 += "]"
+          } else {
+            output2 += ", "
+          }
+        default:
+          fatalError()
+        }
+      }
+      print(output2 + "\n")
     }
   }
 }
