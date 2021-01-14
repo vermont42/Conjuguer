@@ -45,7 +45,7 @@ struct Conjugator {
       stem = verb.infinitifStem
 
     case .participePassé,
-         .passéComposé(_), .plusQueParfait(_), .passéAntérieur(_), .passéSurcomposé(_), .futurAntérieur(_), .conditionnelPassé(_), .subjonctifPassé(_), .subjonctifPlusQueParfait(_), .impératifPassé(_):
+         .passéComposé(_), .plusQueParfait(_), .passéAntérieur(_), .passéSurcomposé(_), .futurAntérieur(_), .conditionnelPassé(_), .subjonctifPassé(_), .subjonctifPlusQueParfait(_):
       stem = model.participePasséStem(verb: verb)
 
     case .participePrésent:
@@ -128,6 +128,12 @@ struct Conjugator {
       isConjugatingImpératif = true
       impératifPersonNumber = personNumber
       stem = verb.infinitifStem
+
+    case .impératifPassé(let personNumber):
+      if !personNumber.isValidForImperatif {
+        return .failure(.defectiveForPersonNumber(personNumber))
+      }
+      stem = model.participePasséStem(verb: verb)
     }
 
     let isUsingTenseThatUsesPasséSimpleStem = isConjugatingPasséSimple || isConjugatingSubjonctifImparfait
@@ -140,12 +146,6 @@ struct Conjugator {
           (isConjugatingImpératif && alteration.appliesTo.contains(.indicatifPrésent(impératifPersonNumber))) ||
           (tense.isCompound && alteration.appliesTo.contains(.participePassé))
         {
-//          (alteration.appliesTo.contains(tense) || alteration.appliesTo.contains(.passéSimple(passéSimplePersonNumber))) ||
-//          (isUsingTenseThatUsesPasséSimpleStem &&
-//          (isUsingTenseThatUsesPasséSimpleStem && alteration.appliesTo.contains(.participePassé) && model.usesParticipePasséStemForPasséSimple) ||
-//          (isConjugatingImpératif && alteration.appliesTo.contains(.indicatifPrésent(impératifPersonNumber))) ||
-//          (tense.isCompound && alteration.appliesTo.contains(.participePassé))) && !isUsingFuturStem
-//        {
           stem.modifyStem(alteration: alteration)
         }
       }
