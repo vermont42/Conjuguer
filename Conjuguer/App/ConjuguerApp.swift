@@ -31,9 +31,11 @@ struct ConjuguerApp: App {
       "amorcer",
       "appeler",
       "arriver",
+      "assaillir",
       "avoir",
       "colorer",
       "couvrir",
+      "défaillir",
       "être",
       "finir",
       "lancer",
@@ -41,6 +43,7 @@ struct ConjuguerApp: App {
       "ouvrir",
       "parler",
       "souffrir",
+      "tressaillir"
     ] {
       var output = "\(verb) • "
 

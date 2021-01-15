@@ -298,6 +298,63 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testAssaillir() {
+    var personNumbersIndex = 0
+
+    for conjugation in ["assaillE", "assaillES", "assaillE", "assaillONS", "assaillEZ", "assaillENT"] {
+      T.testConjugation(infinitif: "assaillir", tense: .indicatifPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["assaillais", "assaillais", "assaillait", "assaillions", "assailliez", "assaillaient"] {
+      T.testConjugation(infinitif: "assaillir", tense: .imparfait(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["assaillirai", "assailliras", "assaillira", "assaillirons", "assaillirez", "assailliront"] {
+      T.testConjugation(infinitif: "assaillir", tense: .futurSimple(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["assaillirais", "assaillirais", "assaillirait", "assaillirions", "assailliriez", "assailliraient"] {
+      T.testConjugation(infinitif: "assaillir", tense: .conditionnelPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["assaillis", "assaillis", "assaillit", "assaillîmes", "assaillîtes", "assaillirent"] {
+      T.testConjugation(infinitif: "assaillir", tense: .passéSimple(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["assaille", "assailles", "assaille", "assaillions", "assailliez", "assaillent"] {
+      T.testConjugation(infinitif: "assaillir", tense: .subjonctifPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["assaillisse", "assaillisses", "assaillît", "assaillissions", "assaillissiez", "assaillissent"] {
+      T.testConjugation(infinitif: "assaillir", tense: .subjonctifImparfait(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    T.testConjugation(infinitif: "assaillir", tense: .participePassé, expected: "assailli")
+    T.testConjugation(infinitif: "assaillir", tense: .participePrésent, expected: "assaillant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["assaillE", "assaillONS", "assaillEZ"] {
+      T.testConjugation(infinitif: "assaillir", tense: .impératif(T.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= T.impératifPersonNumbers.count
+    }
+  }
+
   func testÊtre() {
     var personNumbersIndex = 0
 
