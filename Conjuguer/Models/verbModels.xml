@@ -20,11 +20,13 @@
 <models>
   <model mo="parler" id="1-1" ep="é" si="e" se="a" bb="e" />
   <model mo="lancer" id="1-2A" pa="1-1" p="1,1,Ç,r1p,x1s,x2s,x3s,x1p,x2p|1,1,C,i1p,i2p|1,1,C,b1p,b2p|1,1,Ç,q3p" />
-  <model mo="appeler" id="1-3A" pa="1-1" p="0,1,l,r1s,r2s,r3s,r3p|3,1,lL,sf" />
+  <model mo="manger" id="1-2B" pa="1-1" p="0,1,E,r1p,x1s,x2s,x3s,x1p,x2p,q3p|1,1,,i1p,i2p,b1p,b2p" />
+  <model mo="appeler" id="1-3A" pa="1-1" p="0,1,L,r1s,r2s,r3s,r3p|3,1,lL,sf" />
   <model mo="finir" id="2-1" ep="i" si="x" se="i" bb="s" />
   <model mo="couvrir" id="3-1" ep="T" si="E" se="i" up="f" p="1,1,er,pp" bb="e" />
   <model mo="assaillir" id="3-2A" pa="3-1" ep="i" />
   <model mo="cuellir" id="3-2B" pa="3-1" ep="i" p="2,1,E,sf" />
+  <model mo="boullir" id="3-2C" pa="3-1" ep="i" cr="r1s,bouS,r2s,bouS,r3s,bouT" />
   <model mo="être" id="7" pa="3-1" ps="Ét" rr="Ét" ff="SEr" se="b" uf="FU" ep="É" ii="Ét" cr="r1s,SUIS,r2s,Es,r3s,EST,r1p,SOMMEs,r2p,êteS,r3p,SOnt,b1s,SOIS,b2s,SOIs,b3s,SOIT,b1p,SOYons,b2p,SOYez,b3p,SOIent,m2s,SOIs,m1p,SOYons,m2p,SOYez" bb="e" />
   <model mo="avoir" id="8" pa="2-1" rr="aY" ff="aUr" ps="e" ep="U" cr="r1s,AI,r2s,As,r3s,A,r1p,aVons,r2p,aVez,r3p,Ont,b1s,aIe,b2s,aIes,b3s,aIT,b1p,aYons,b2p,aYez,b3p,aIent,m2s,AIe,m1p,AYons,m2p,AYez" se="u" bb="e" />
   <model mo="aller" id="9" pa="1-1" ff="IR" cr="r1s,VAIS,r2s,VAs,r3s,VA,r3p,VOnt,b1p,aLlions,b2p,aLliez,m2s,VA" sb="aIll" bb="e" />
