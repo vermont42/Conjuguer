@@ -27,6 +27,7 @@ struct ConjuguerApp: App {
     print("verb count: \(Verb.verbs.count)  model count: \(VerbModel.models.count)\n")
 
     for verb in [
+      "accueillir",
       "aller",
       "amorcer",
       "appeler",
@@ -35,6 +36,7 @@ struct ConjuguerApp: App {
       "avoir",
       "colorer",
       "couvrir",
+      "cueillir",
       "défaillir",
       "être",
       "finir",
@@ -42,6 +44,7 @@ struct ConjuguerApp: App {
       "offrir",
       "ouvrir",
       "parler",
+      "recueillir",
       "souffrir",
       "tressaillir"
     ] {
