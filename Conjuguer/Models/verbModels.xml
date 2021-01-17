@@ -24,6 +24,7 @@
   <model mo="appeler" id="1-3A" pa="1-1" p="0,1,L,r1s,r2s,r3s,r3p|3,1,lL,sf" />
   <model mo="jeter" id="1-3B" pa="1-1" p="0,1,T,r1s,r2s,r3s,r3p|3,1,tT,sf" />
   <model mo="peser" id="1-4" pa="1-1" p="2,1,È,r1s,r2s,r3s,r3p|4,1,È,sf" />
+  <model mo="céder" id="1-5" pa="1-1" p="2,1,È,r1s,r2s,r3s,r3p" />
   <model mo="finir" id="2-1" ep="i" si="x" se="i" bb="s" />
   <model mo="couvrir" id="3-1" ep="T" si="E" se="i" up="f" p="1,1,er,pp" bb="e" />
   <model mo="assaillir" id="3-2A" pa="3-1" ep="i" />

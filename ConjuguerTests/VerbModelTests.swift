@@ -355,6 +355,63 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testCéder() {
+    var personNumbersIndex = 0
+
+    for conjugation in ["cÈde", "cÈdes", "cÈde", "cédons", "cédez", "cÈdent"] {
+      T.testConjugation(infinitif: "céder", tense: .indicatifPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["cédais", "cédais", "cédait", "cédions", "cédiez", "cédaient"] {
+      T.testConjugation(infinitif: "céder", tense: .imparfait(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["céderai", "céderas", "cédera", "céderons", "céderez", "céderont"] {
+      T.testConjugation(infinitif: "céder", tense: .futurSimple(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["céderais", "céderais", "céderait", "céderions", "céderiez", "céderaient"] {
+      T.testConjugation(infinitif: "céder", tense: .conditionnelPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["cédai", "cédas", "céda", "cédâmes", "cédâtes", "cédèrent"] {
+      T.testConjugation(infinitif: "céder", tense: .passéSimple(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["cÈde", "cÈdes", "cÈde", "cédions", "cédiez", "cÈdent"] {
+      T.testConjugation(infinitif: "céder", tense: .subjonctifPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["cédasse", "cédasses", "cédât", "cédassions", "cédassiez", "cédassent"] {
+      T.testConjugation(infinitif: "céder", tense: .subjonctifImparfait(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    T.testConjugation(infinitif: "céder", tense: .participePassé, expected: "cédé")
+    T.testConjugation(infinitif: "céder", tense: .participePrésent, expected: "cédant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["cÈde", "cédons", "cédez"] {
+      T.testConjugation(infinitif: "céder", tense: .impératif(T.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= T.impératifPersonNumbers.count
+    }
+  }
+
   func testFinir() {
     var personNumbersIndex = 0
 

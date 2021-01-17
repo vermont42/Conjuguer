@@ -35,6 +35,7 @@ struct ConjuguerApp: App {
       "assaillir",
       "avoir",
       "bouillir",
+      "céder",
       "colorer",
       "couvrir",
       "cueillir",
