@@ -36,11 +36,13 @@
   <verb in="offrir" tn="offer" mo="3-1" />
   <verb in="ouvrir" tn="open" mo="3-1" />
   <verb in="parler" tn="speak" mo="1-1" />
+  <verb in="peser" tn="weight" mo="1-4" />
   <verb in="prier" tn="request,pray" mo="1-1" />
   <verb in="recueillir" tn="collect" mo="3-2B" />
   <verb in="saillir" tn="protrude" mo="3-2A" />
   <verb in="souffrir" tn="souffrir" mo="3-1" />
   <verb in="submerger" tn="overwhelm,submerge" mo="1-2B" />
+  <verb in="surmener" tn="overwork" mo="1-4" />
   <verb in="tressaillir" tn="wince" mo="3-2A" />
   <verb in="voleter" tn="flutter" mo="1-3B" />
 </verbs>

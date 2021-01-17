@@ -49,10 +49,12 @@ struct ConjuguerApp: App {
       "offrir",
       "ouvrir",
       "parler",
+      "peser",
       "prier",
       "recueillir",
       "souffrir",
       "submerger",
+      "surmener",
       "tressaillir",
       "voleter"
     ] {
