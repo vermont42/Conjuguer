@@ -141,10 +141,10 @@ struct Conjugator {
     if let stemAlterations = model.stemAlterations {
       for alteration in stemAlterations {
         if
-          alteration.appliesTo.contains(tense) ||
+          (alteration.appliesTo.contains(tense) ||
           (isUsingTenseThatUsesPasséSimpleStem && alteration.appliesTo.contains(.passéSimple(passéSimplePersonNumber)) && model.usesParticipePasséStemForPasséSimple) ||
           (isConjugatingImpératif && alteration.appliesTo.contains(.indicatifPrésent(impératifPersonNumber))) ||
-          (tense.isCompound && alteration.appliesTo.contains(.participePassé))
+          (tense.isCompound && alteration.appliesTo.contains(.participePassé))) && tense != .radicalFutur
         {
           stem.modifyStem(alteration: alteration)
         }

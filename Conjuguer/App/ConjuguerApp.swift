@@ -43,6 +43,7 @@ struct ConjuguerApp: App {
       "fabriquer",
       "fatiguer",
       "finir",
+      "jeter",
       "lancer",
       "manger",
       "offrir",
@@ -52,10 +53,10 @@ struct ConjuguerApp: App {
       "recueillir",
       "souffrir",
       "submerger",
-      "tressaillir"
+      "tressaillir",
+      "voleter"
     ] {
       var output = "\(verb) • "
-
       let participePassé: String
       let participePasséResult = Conjugator.conjugate(infinitif: verb, tense: .participePassé)
       switch participePasséResult {

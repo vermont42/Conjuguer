@@ -30,6 +30,7 @@
   <verb in="fabriquer" tn="fabricate" mo="1-1" />
   <verb in="fatiguer" tn="fatigue" mo="1-1" />
   <verb in="finir" tn="finish" mo="2-1" />
+  <verb in="jeter" tn="throw" mo="1-3B" />
   <verb in="lancer" tn="throw" mo="1-2A" />
   <verb in="manger" tn="eat" mo="1-2B" />
   <verb in="offrir" tn="offer" mo="3-1" />
@@ -41,4 +42,5 @@
   <verb in="souffrir" tn="souffrir" mo="3-1" />
   <verb in="submerger" tn="overwhelm,submerge" mo="1-2B" />
   <verb in="tressaillir" tn="wince" mo="3-2A" />
+  <verb in="voleter" tn="flutter" mo="1-3B" />
 </verbs>
