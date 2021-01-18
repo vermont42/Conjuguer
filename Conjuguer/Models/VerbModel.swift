@@ -84,12 +84,12 @@ struct VerbModel {
     }
   }
 
-  func futurStemRecursive(infinitif: String) -> String {
+  func futurStemsRecursive(infinitif: String) -> [String] {
     if let futurStem = futurStem {
-      return futurStem
+      return [futurStem]
     }
 
-    var stem = infinitif
+    var stems = [infinitif]
     var recursiveStemAlterations: [StemAlteration]?
     if let stemAlterations = stemAlterations {
       recursiveStemAlterations = stemAlterations
@@ -100,14 +100,17 @@ struct VerbModel {
     if let recursiveStemAlterations = recursiveStemAlterations {
       for alteration in recursiveStemAlterations {
         if alteration.appliesTo.contains(.radicalFutur) {
-          stem.modifyStem(alteration: alteration)
+          if alteration.isAdditive {
+            stems.append(stems[0])
+          }
+          stems[0].modifyStem(alteration: alteration)
           break
         }
       }
-    } else if stem.last == "e" {
-      stem = String(stem.dropLast())
+    } else if stems[0].last == "e" {
+      stems[0] = String(stems[0].dropLast())
     }
 
-    return stem
+    return stems
   }
 }

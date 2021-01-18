@@ -12,6 +12,7 @@ struct StemAlteration {
   let charsToReplaceCount: Int
   let charsToUse: String
   let appliesTo: Set<Tense>
+  let isAdditive: Bool // example: tu payes/paies
 
   init(xmlString: String) {
     let components = xmlString.components(separatedBy: VerbModelParser.xmlSeparator)
@@ -33,10 +34,14 @@ struct StemAlteration {
     charsToUse = components[2]
 
     var set: Set<Tense> = Set()
+    var isAdditiveAlteration = false
 
     for index in VerbModelParser.startIndexOfAlterationsInXml ..< components.count {
       let alteration = components[index]
       switch alteration {
+      case "A":
+        isAdditiveAlteration = true
+
       case "pp":
         set.insert(.participePassé)
       case "rr":
@@ -115,6 +120,7 @@ struct StemAlteration {
     }
 
     appliesTo = set
+    isAdditive = isAdditiveAlteration
   }
 
   static func alterationsFor(xmlString: String) -> [StemAlteration] {

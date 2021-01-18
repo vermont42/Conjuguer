@@ -56,8 +56,10 @@ class VerbModelTests: XCTestCase {
 
     var completedTestCount = 0
 
-    for model in Array(VerbModel.models.values) {
-      var output = "  func test" + model.exemplar.capitalizingFirstLetter() + "() {\n    var personNumbersIndex = 0\n\n"
+    for model in Array(VerbModel.models.values).sorted(by: { lhs, rhs in
+      return lhs.exemplar.caseInsensitiveCompare(rhs.exemplar) == .orderedAscending
+    }) {
+      var output = "  func test" + model.exemplar.capitalizingFirstLetter() + "() {\n    // ID: \(model.id)\n    var personNumbersIndex = 0\n\n"
       for tense in ["indicatifPrésent", "imparfait", "futurSimple", "conditionnelPrésent", "passéSimple", "subjonctifPrésent", "subjonctifImparfait"] {
         output += "    for conjugation in ["
         for personNumber in personNumbers {

@@ -31,7 +31,7 @@ struct Conjugator {
       }
     }
 
-    var stem: String
+    var stems: [String] = [] // Payer has an alternate stem, so this needs to be an array.
     var isConjugatingPasséSimple = false
     var isConjugatingSubjonctifImparfait = false
     var isConjugatingImpératif = false
@@ -40,18 +40,18 @@ struct Conjugator {
 
     switch tense {
     case .indicatifPrésent:
-      stem = verb.infinitifStem
+      stems.append(verb.infinitifStem)
 
     case .participePassé,
          .passéComposé, .plusQueParfait, .passéAntérieur, .passéSurcomposé, .futurAntérieur, .conditionnelPassé, .subjonctifPassé, .subjonctifPlusQueParfait:
-      stem = model.participePasséStem(verb: verb)
+      stems.append(model.participePasséStem(verb: verb))
 
     case .participePrésent:
       if let participePrésentStem = model.participePrésentStem {
-        stem = participePrésentStem
+        stems.append(participePrésentStem)
       } else {
         if let nousPrésentConjugation = nousPrésentConjugation(infinitif: infinitif) {
-          stem = nousPrésentConjugation
+          stems.append(nousPrésentConjugation)
         } else {
           return .failure(.noNousPrésent(infinitif))
         }
@@ -59,10 +59,10 @@ struct Conjugator {
 
     case .imparfait:
       if let imparfaitStem = model.imparfaitStem {
-        stem = imparfaitStem
+        stems.append(imparfaitStem)
       } else {
         if let nousPrésentConjugation = nousPrésentConjugation(infinitif: infinitif) {
-          stem = nousPrésentConjugation
+          stems.append(nousPrésentConjugation)
         } else {
           return .failure(.noNousPrésent(infinitif))
         }
@@ -70,35 +70,35 @@ struct Conjugator {
 
     case .passéSimple(let personNumber):
       if let passéSimpleStem = model.passéSimpleStem {
-        stem = passéSimpleStem
+        stems.append(passéSimpleStem)
       } else {
         isConjugatingPasséSimple = true
         passéSimplePersonNumber = personNumber
         if model.usesParticipePasséStemForPasséSimple {
-          stem = model.participePasséStem(verb: verb)
+          stems.append(model.participePasséStem(verb: verb))
         } else {
-          stem = verb.infinitifStem
+          stems.append(verb.infinitifStem)
         }
       }
 
     case .subjonctifImparfait(let personNumber):
       if let passéSimpleStem = model.passéSimpleStem {
-        stem = passéSimpleStem
+        stems.append(passéSimpleStem)
       } else {
         isConjugatingSubjonctifImparfait = true
         passéSimplePersonNumber = personNumber
         if model.usesParticipePasséStemForPasséSimple {
-          stem = model.participePasséStem(verb: verb)
+          stems.append(model.participePasséStem(verb: verb))
         } else {
-          stem = verb.infinitifStem
+          stems.append(verb.infinitifStem)
         }
       }
 
     case .subjonctifPrésent(let personNumber):
       if let subjonctifStem = model.subjonctifStem {
-        stem = subjonctifStem
+        stems.append(subjonctifStem)
       } else {
-        stem = verb.infinitifStem
+        stems.append(verb.infinitifStem)
         if let stemAlterations = model.stemAlterations {
           let subjonctifPersonNumber: PersonNumber
           switch personNumber {
@@ -109,7 +109,10 @@ struct Conjugator {
           }
           for alteration in stemAlterations {
             if alteration.appliesTo.contains(.indicatifPrésent(subjonctifPersonNumber)) {
-              stem.modifyStem(alteration: alteration)
+              if alteration.isAdditive {
+                stems.append(stems[0])
+              }
+              stems[0].modifyStem(alteration: alteration)
               break
             }
           }
@@ -117,7 +120,7 @@ struct Conjugator {
       }
 
     case .futurSimple, .conditionnelPrésent, .radicalFutur:
-      stem = model.futurStemRecursive(infinitif: infinitif)
+      stems = model.futurStemsRecursive(infinitif: infinitif)
 
     case .impératif(let personNumber):
       if !personNumber.isValidForImperatif {
@@ -125,13 +128,13 @@ struct Conjugator {
       }
       isConjugatingImpératif = true
       impératifPersonNumber = personNumber
-      stem = verb.infinitifStem
+      stems.append(verb.infinitifStem)
 
     case .impératifPassé(let personNumber):
       if !personNumber.isValidForImperatif {
         return .failure(.defectiveForPersonNumber(personNumber))
       }
-      stem = model.participePasséStem(verb: verb)
+      stems.append(model.participePasséStem(verb: verb))
     }
 
     let isUsingTenseThatUsesPasséSimpleStem = isConjugatingPasséSimple || isConjugatingSubjonctifImparfait
@@ -144,41 +147,58 @@ struct Conjugator {
           (isConjugatingImpératif && alteration.appliesTo.contains(.indicatifPrésent(impératifPersonNumber))) ||
           (tense.isCompound && alteration.appliesTo.contains(.participePassé))) && tense != .radicalFutur
         {
-          stem.modifyStem(alteration: alteration)
+          stems[0].modifyStem(alteration: alteration)
         }
       }
     }
 
     switch tense {
     case .indicatifPrésent(let personNumber):
-      return .success(stem + model.indicatifPrésentGroupRecursive.présentEndingForPersonNumber(personNumber))
+      return .success(composedConjugation(stems: stems, ending: model.indicatifPrésentGroupRecursive.présentEndingForPersonNumber(personNumber)))
     case .passéSimple(let personNumber):
       var ending = model.passéSimpleGroupRecursive.passéSimpleEndingForPersonNumber(personNumber)
-      moveCircumflexIfNeeded(stem: &stem, ending: &ending)
-      return .success(stem + ending)
+      for i in 0 ..< stems.count {
+        moveCircumflexIfNeeded(stem: &stems[i], ending: &ending)
+      }
+      return .success(composedConjugation(stems: stems, ending: ending))
     case .subjonctifImparfait(let personNumber):
       var ending = model.passéSimpleGroupRecursive.subjonctifImparfaitEndingForPersonNumber(personNumber)
-      moveCircumflexIfNeeded(stem: &stem, ending: &ending)
-      return .success(stem + ending)
+      for i in 0 ..< stems.count {
+        moveCircumflexIfNeeded(stem: &stems[i], ending: &ending)
+      }
+      return .success(composedConjugation(stems: stems, ending: ending))
     case .imparfait(let personNumber):
-      return .success(stem + Imparfait.endingForPersonNumber(personNumber))
+      return .success(composedConjugation(stems: stems, ending: Imparfait.endingForPersonNumber(personNumber)))
     case .subjonctifPrésent(let personNumber):
-      return .success(stem + model.subjonctifPrésentGroupRecursive.endingForPersonNumber(personNumber))
+      return .success(composedConjugation(stems: stems, ending: model.subjonctifPrésentGroupRecursive.endingForPersonNumber(personNumber)))
     case .futurSimple(let personNumber):
-      return .success(stem + FuturSimple.endingForPersonNumber(personNumber))
+      return .success(composedConjugation(stems: stems, ending: FuturSimple.endingForPersonNumber(personNumber)))
     case .conditionnelPrésent(let personNumber):
-      return .success(stem + ConditionnelPrésent.endingForPersonNumber(personNumber))
+      return .success(composedConjugation(stems: stems, ending: ConditionnelPrésent.endingForPersonNumber(personNumber)))
     case .participePassé:
-      return .success(stem + model.participeEndingRecursive)
+      return .success(stems[0] + model.participeEndingRecursive)
     case .participePrésent:
-      return .success(stem + Tense.participePrésentEnding)
+      return .success(stems[0] + Tense.participePrésentEnding)
     case .radicalFutur:
-      return .success(stem)
+      return .success(composedConjugation(stems: stems, ending: ""))
     case .impératif(let personNumber):
-      return .success(stem + model.indicatifPrésentGroupRecursive.impératifEndingForPersonNumber(personNumber))
+      return .success(composedConjugation(stems: stems, ending: model.indicatifPrésentGroupRecursive.impératifEndingForPersonNumber(personNumber)))
     case .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
-      return .success(tense.conjugatedAuxilliary(personNumber: personNumber, auxiliary: verb.auxiliary) + " " + stem + model.participeEndingRecursive)
+      return .success(tense.conjugatedAuxilliary(personNumber: personNumber, auxiliary: verb.auxiliary) + " " + stems[0] + model.participeEndingRecursive)
     }
+  }
+
+  static func composedConjugation(stems: [String], ending: String) -> String {
+    var output = ""
+    var hasAppendedAtLeastOneConjugation = false
+    stems.forEach {
+      if hasAppendedAtLeastOneConjugation {
+        output += "/"
+      }
+      output += $0 + ending
+      hasAppendedAtLeastOneConjugation = true
+    }
+    return output
   }
 
   static func moveCircumflexIfNeeded(stem: inout String, ending: inout String) {
