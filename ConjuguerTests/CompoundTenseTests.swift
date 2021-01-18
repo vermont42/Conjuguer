@@ -112,7 +112,7 @@ class ConjuguerTests: XCTestCase {
     }
 
     var impératifPersonNumbersIndex = 0
-    
+
     for conjugation in ["SOIs allé", "SOYons allé", "SOYez allé"] {
       T.testConjugation(infinitif: aller, tense: .impératifPassé(T.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
       impératifPersonNumbersIndex += 1

@@ -172,15 +172,13 @@ struct ConjuguerApp: App {
 
       output += " •  IMPERATIVE: "
 
-      for personNumber in personNumbers {
-        if personNumber.isValidForImperatif {
-          let impératifResult = Conjugator.conjugate(infinitif: verb, tense: .impératif(personNumber))
-          switch impératifResult {
-          case .success(let value):
-            output += "\(value) "
-          default:
-            fatalError()
-          }
+      for personNumber in personNumbers where personNumber.isValidForImperatif {
+        let impératifResult = Conjugator.conjugate(infinitif: verb, tense: .impératif(personNumber))
+        switch impératifResult {
+        case .success(let value):
+          output += "\(value) "
+        default:
+          fatalError()
         }
       }
 

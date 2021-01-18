@@ -17,7 +17,7 @@ enum T {
     switch result {
     case .success(let value):
       return value
-    case .failure(_):
+    case .failure:
       fatalError("Conjugation failed.")
     }
   }
@@ -27,7 +27,7 @@ enum T {
     switch result {
     case .success(let value):
       XCTAssertEqual(expected, value)
-    case .failure(_):
+    case .failure:
       XCTFail("Conjugation failed. Expected: \(expected)")
     }
   }
@@ -55,7 +55,7 @@ class VerbModelTests: XCTestCase {
     print(firstPart)
 
     let models = ["parler", "lancer", "manger", "appeler", "jeter", "peser", "céder", "dépecer", "rapiécer", "finir", "couvrir", "assaillir", "cueillir", "bouillir", "être", "avoir", "aller"]
-    
+
     for model in models {
       var output = "  func test" + model.capitalizingFirstLetter() + "() {\n    var personNumbersIndex = 0\n\n"
       for tense in ["indicatifPrésent", "imparfait", "futurSimple", "conditionnelPrésent", "passéSimple", "subjonctifPrésent", "subjonctifImparfait"] {

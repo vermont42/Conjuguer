@@ -57,23 +57,23 @@ enum Tense: Hashable {
       return "subjonctif imparfait"
     case .impératif:
       return "impératif"
-    case .passéComposé(_):
+    case .passéComposé:
       return "passé composé"
-    case .plusQueParfait(_):
+    case .plusQueParfait:
       return "plus-que-parfait"
-    case .passéAntérieur(_):
+    case .passéAntérieur:
       return "passé antérieur"
-    case .passéSurcomposé(_):
+    case .passéSurcomposé:
       return "passé surcomposé"
-    case .futurAntérieur(_):
+    case .futurAntérieur:
       return "futur antérieur"
-    case .conditionnelPassé(_):
+    case .conditionnelPassé:
       return "conditionnel passé"
-    case .subjonctifPassé(_):
+    case .subjonctifPassé:
       return "subjonctif passé"
-    case .subjonctifPlusQueParfait(_):
+    case .subjonctifPlusQueParfait:
       return "subjonctif plus-que-parfait"
-    case .impératifPassé(_):
+    case .impératifPassé:
       return "impératif passé"
     }
   }
@@ -102,30 +102,30 @@ enum Tense: Hashable {
       return "Subjonctif Imparfait"
     case .impératif:
       return "Impératif"
-    case .passéComposé(_):
+    case .passéComposé:
       return "Passé Composé"
-    case .plusQueParfait(_):
+    case .plusQueParfait:
       return "Plus-que-parfait"
-    case .passéAntérieur(_):
+    case .passéAntérieur:
       return "Passé Antérieur"
-    case .passéSurcomposé(_):
+    case .passéSurcomposé:
       return "Passé Surcomposé"
-    case .futurAntérieur(_):
+    case .futurAntérieur:
       return "Futur Antérieur"
-    case .conditionnelPassé(_):
+    case .conditionnelPassé:
       return "Conditionnel Passé"
-    case .subjonctifPassé(_):
+    case .subjonctifPassé:
       return "Subjonctif Passé"
-    case .subjonctifPlusQueParfait(_):
+    case .subjonctifPlusQueParfait:
       return "Subjonctif Plus-que-parfait"
-    case .impératifPassé(_):
+    case .impératifPassé:
       return "Impératif Passé"
     }
   }
 
   var isCompound: Bool {
     switch self {
-    case .passéComposé(_), .plusQueParfait(_), .passéAntérieur(_), .passéSurcomposé(_), .futurAntérieur(_), .conditionnelPassé(_), .subjonctifPassé(_), .subjonctifPlusQueParfait(_), .impératifPassé(_):
+    case .passéComposé, .plusQueParfait, .passéAntérieur, .passéSurcomposé, .futurAntérieur, .conditionnelPassé, .subjonctifPassé, .subjonctifPlusQueParfait, .impératifPassé:
       return true
     default:
       return false
@@ -136,23 +136,23 @@ enum Tense: Hashable {
     let verb = auxiliary.verb
     let tense: Tense
     switch self {
-    case .passéComposé(_):
+    case .passéComposé:
       tense = .indicatifPrésent(personNumber)
-    case .plusQueParfait(_):
+    case .plusQueParfait:
       tense = .imparfait(personNumber)
-    case .passéAntérieur(_):
+    case .passéAntérieur:
       tense = .passéSimple(personNumber)
-    case .passéSurcomposé(_):
+    case .passéSurcomposé:
       tense = .passéComposé(personNumber)
-    case .futurAntérieur(_):
+    case .futurAntérieur:
       tense = .futurSimple(personNumber)
-    case .conditionnelPassé(_):
+    case .conditionnelPassé:
       tense = .conditionnelPrésent(personNumber)
-    case .subjonctifPassé(_):
+    case .subjonctifPassé:
       tense = .subjonctifPrésent(personNumber)
-    case .subjonctifPlusQueParfait(_):
+    case .subjonctifPlusQueParfait:
       tense = .subjonctifImparfait(personNumber)
-    case .impératifPassé(_):
+    case .impératifPassé:
       tense = .impératif(personNumber)
     default:
       return ""
@@ -162,7 +162,7 @@ enum Tense: Hashable {
     switch result {
     case .success(let value):
       return value
-    case .failure(_):
+    case .failure:
       return ""
     }
   }

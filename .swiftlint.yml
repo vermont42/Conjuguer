@@ -1,0 +1,17 @@
+
+disabled_rules:
+  - line_length
+  - function_body_length
+  - function_parameter_count
+  - type_body_length
+  - identifier_name
+  - cyclomatic_complexity
+  - todo
+  - large_tuple
+  - void_return
+  - nesting
+  - type_name
+
+file_length:
+  warning: 10000
+  error: 100000

@@ -107,7 +107,7 @@ struct VerbModel {
     } else if stem.last == "e" {
       stem = String(stem.dropLast())
     }
-    
+
     return stem
   }
 }

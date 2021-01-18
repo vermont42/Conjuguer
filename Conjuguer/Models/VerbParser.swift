@@ -67,7 +67,7 @@ class VerbParser: NSObject, XMLParserDelegate {
       } else {
         auxiliary = .avoir
       }
-      
+
       verbs[currentVerb] = Verb(
         infinitif: currentVerb,
         translation: currentTranslation,

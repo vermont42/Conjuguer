@@ -26,10 +26,8 @@ struct Conjugator {
     }
 
     if let completeAlterations = model.completeAlterations {
-      for alteration in completeAlterations {
-        if alteration.appliesTo == tense {
-          return .success(alteration.conjugation)
-        }
+      for alteration in completeAlterations where alteration.appliesTo == tense {
+        return .success(alteration.conjugation)
       }
     }
 
@@ -41,11 +39,11 @@ struct Conjugator {
     var passéSimplePersonNumber: PersonNumber = .secondSingular
 
     switch tense {
-    case .indicatifPrésent(_):
+    case .indicatifPrésent:
       stem = verb.infinitifStem
 
     case .participePassé,
-         .passéComposé(_), .plusQueParfait(_), .passéAntérieur(_), .passéSurcomposé(_), .futurAntérieur(_), .conditionnelPassé(_), .subjonctifPassé(_), .subjonctifPlusQueParfait(_):
+         .passéComposé, .plusQueParfait, .passéAntérieur, .passéSurcomposé, .futurAntérieur, .conditionnelPassé, .subjonctifPassé, .subjonctifPlusQueParfait:
       stem = model.participePasséStem(verb: verb)
 
     case .participePrésent:
@@ -59,7 +57,7 @@ struct Conjugator {
         }
       }
 
-    case .imparfait(_):
+    case .imparfait:
       if let imparfaitStem = model.imparfaitStem {
         stem = imparfaitStem
       } else {
@@ -118,7 +116,7 @@ struct Conjugator {
         }
       }
 
-    case .futurSimple(_), .conditionnelPrésent(_), .radicalFutur:
+    case .futurSimple, .conditionnelPrésent, .radicalFutur:
       stem = model.futurStemRecursive(infinitif: infinitif)
 
     case .impératif(let personNumber):
@@ -193,7 +191,7 @@ struct Conjugator {
     }
 
     ending = String(ending.dropFirst())
-    for tuple in [("a","â"), ("e","ê"), ("i","î"), ("o","ô"), ("u","û"), ("A","Â"), ("E","Ê"), ("I","Î"), ("O","Ô"), ("U","Û")] {
+    for tuple in [("a", "â"), ("e", "ê"), ("i", "î"), ("o", "ô"), ("u", "û"), ("A", "Â"), ("E", "Ê"), ("I", "Î"), ("O", "Ô"), ("U", "Û")] {
       if String(stemLast) == tuple.0 {
         stem = String(stem.dropLast()) + tuple.1
       }
@@ -215,7 +213,7 @@ struct Conjugator {
 extension String {
   mutating func modifyStem(alteration: StemAlteration) {
     if alteration.startIndexFromLast == 0 {
-      self = self + alteration.charsToUse.uppercased()
+      self += alteration.charsToUse.uppercased()
     } else {
       let start = index(startIndex, offsetBy: count - alteration.startIndexFromLast)
       let end = index(startIndex, offsetBy: (count - alteration.startIndexFromLast) + alteration.charsToReplaceCount)
