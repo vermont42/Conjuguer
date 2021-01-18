@@ -30,6 +30,7 @@
   <model mo="protéger" id="1-6C" pa="1-1" p="0,1,E,r1p,x1s,x2s,x3s,x1p,x2p,q3p|1,1,,i1p,i2p,b1p,b2p|2,1,È,r1s,r2s,r3s,r3p" />
   <model mo="employer" id="1-7A" pa="1-1" p="1,1,I,r1s,r2s,r3s,r3p|3,1,I,sf" />
   <model mo="payer" id="1-7B" pa="1-1" p="1,1,I,A,r1s,r2s,r3s,r3p|3,1,I,A,sf" />
+  <model mo="envoyer" id="1-8" pa="1-1" p="1,1,I,r1s,r2s,r3s,r3p|4,4,ERr,sf" />
   <model mo="finir" id="2-1" ep="i" si="x" se="i" bb="s" />
   <model mo="couvrir" id="3-1" ep="T" si="E" se="i" up="f" p="1,1,er,pp" bb="e" />
   <model mo="assaillir" id="3-2A" pa="3-1" ep="i" />
