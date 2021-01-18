@@ -26,6 +26,7 @@
   <model mo="peser" id="1-4" pa="1-1" p="2,1,È,r1s,r2s,r3s,r3p|4,1,È,sf" />
   <model mo="céder" id="1-5" pa="1-1" p="2,1,È,r1s,r2s,r3s,r3p" />
   <model mo="dépecer" id="1-6A" pa="1-1" p="1,1,Ç,r1p,x1s,x2s,x3s,x1p,x2p|1,1,C,i1p,i2p|1,1,C,b1p,b2p|1,1,Ç,q3p|2,1,È,r1s,r2s,r3s,r3p|4,1,È,sf" />
+  <model mo="rapiécer" id="1-6B" pa="1-1" p="1,1,Ç,r1p,x1s,x2s,x3s,x1p,x2p|1,1,C,i1p,i2p|1,1,C,b1p,b2p|1,1,Ç,q3p|2,1,È,r1s,r2s,r3s,r3p" />
   <model mo="finir" id="2-1" ep="i" si="x" se="i" bb="s" />
   <model mo="couvrir" id="3-1" ep="T" si="E" se="i" up="f" p="1,1,er,pp" bb="e" />
   <model mo="assaillir" id="3-2A" pa="3-1" ep="i" />

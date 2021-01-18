@@ -33,7 +33,7 @@ enum T {
   }
 
   static func generateVerbModelTests() {
-    for model in ["parler", "lancer", "manger", "appeler", "jeter", "peser", "céder", "dépecer", "finir", "couvrir", "assaillir", "cueillir", "bouillir", "être", "avoir", "aller"] {
+    for model in ["parler", "lancer", "manger", "appeler", "jeter", "peser", "céder", "dépecer", "rapiécer", "finir", "couvrir", "assaillir", "cueillir", "bouillir", "être", "avoir", "aller"] {
       var output = "func test" + model.capitalizingFirstLetter() + "() {\n  var personNumbersIndex = 0\n\n"
       for tense in ["indicatifPrésent", "imparfait", "futurSimple", "conditionnelPrésent", "passéSimple", "subjonctifPrésent", "subjonctifImparfait"] {
         output += "  for conjugation in ["

@@ -54,6 +54,7 @@ struct ConjuguerApp: App {
       "parler",
       "peser",
       "prier",
+      "rapiécer",
       "recueillir",
       "souffrir",
       "submerger",
