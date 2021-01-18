@@ -33,10 +33,33 @@ enum T {
   }
 
   static func generateVerbModelTests() {
-    for model in ["parler", "lancer", "manger", "appeler", "jeter", "peser", "céder", "dépecer", "rapiécer", "finir", "couvrir", "assaillir", "cueillir", "bouillir", "être", "avoir", "aller"] {
-      var output = "func test" + model.capitalizingFirstLetter() + "() {\n  var personNumbersIndex = 0\n\n"
+    let firstPart = """
+//
+//  VerbModelTests.swift
+//  ConjuguerTests
+//
+//  Created by Joshua Adams on 1/13/21.
+//
+
+@testable import Conjuguer
+import XCTest
+
+class GenerateVerbModelTests: XCTestCase {
+  func testGenerateVerbModelTests() {
+    T.generateVerbModelTests()
+  }
+}
+
+class VerbModelTests: XCTestCase {
+"""
+    print(firstPart)
+
+    let models = ["parler", "lancer", "manger", "appeler", "jeter", "peser", "céder", "dépecer", "rapiécer", "finir", "couvrir", "assaillir", "cueillir", "bouillir", "être", "avoir", "aller"]
+    
+    for model in models {
+      var output = "  func test" + model.capitalizingFirstLetter() + "() {\n    var personNumbersIndex = 0\n\n"
       for tense in ["indicatifPrésent", "imparfait", "futurSimple", "conditionnelPrésent", "passéSimple", "subjonctifPrésent", "subjonctifImparfait"] {
-        output += "  for conjugation in ["
+        output += "    for conjugation in ["
         for personNumber in personNumbers {
           let conjugation = T.conjugate(infinitif: model, tense: Tense.fromString(tense, personNumber: personNumber))
           output += "\"" + conjugation + "\""
@@ -47,19 +70,19 @@ enum T {
           }
         }
 
-        output += "    T.testConjugation(infinitif: \"" + model + "\", tense: ." + tense + "(T.personNumbers[personNumbersIndex]), expected: conjugation)\n"
-        output += "    personNumbersIndex += 1\n"
-        output += "    personNumbersIndex %= T.personNumbers.count\n"
-        output += "  }\n\n"
+        output += "      T.testConjugation(infinitif: \"" + model + "\", tense: ." + tense + "(T.personNumbers[personNumbersIndex]), expected: conjugation)\n"
+        output += "      personNumbersIndex += 1\n"
+        output += "      personNumbersIndex %= T.personNumbers.count\n"
+        output += "    }\n\n"
       }
 
       for tense in ["participePassé", "participePrésent"] {
         let conjugation = T.conjugate(infinitif: model, tense: Tense.fromString(tense, personNumber: .firstSingular))
-        output += "  T.testConjugation(infinitif: \"" + model + "\", tense: ." + tense + ", expected: \"\(conjugation)\")\n"
+        output += "    T.testConjugation(infinitif: \"" + model + "\", tense: ." + tense + ", expected: \"\(conjugation)\")\n"
       }
 
-      output += "\n  var impératifPersonNumbersIndex = 0\n\n"
-      output += "  for conjugation in ["
+      output += "\n    var impératifPersonNumbersIndex = 0\n\n"
+      output += "    for conjugation in ["
       for personNumber in impératifPersonNumbers {
         let conjugation = T.conjugate(infinitif: model, tense: .impératif(personNumber))
         output += "\"" + conjugation + "\""
@@ -70,14 +93,18 @@ enum T {
         }
       }
 
-      output += "    T.testConjugation(infinitif: \"" + model + "\", tense: .impératif(T.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)\n"
-      output += "    impératifPersonNumbersIndex += 1\n"
-      output += "    impératifPersonNumbersIndex %= T.impératifPersonNumbers.count\n"
-      output += "  }\n"
+      output += "      T.testConjugation(infinitif: \"" + model + "\", tense: .impératif(T.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)\n"
+      output += "      impératifPersonNumbersIndex += 1\n"
+      output += "      impératifPersonNumbersIndex %= T.impératifPersonNumbers.count\n"
+      output += "    }\n"
 
-      output += "}\n"
+      output += "  }"
+      if model != models[models.count - 1] {
+        output += "\n"
+      }
       print(output)
     }
+    print("}")
   }
 }
 
