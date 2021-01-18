@@ -54,7 +54,7 @@ class VerbModelTests: XCTestCase {
 """
     print(firstPart)
 
-    let models = ["parler", "lancer", "manger", "appeler", "jeter", "peser", "céder", "dépecer", "rapiécer", "protéger", "finir", "couvrir", "assaillir", "cueillir", "bouillir", "être", "avoir", "aller"]
+    let models = ["parler", "lancer", "manger", "appeler", "jeter", "peser", "céder", "dépecer", "rapiécer", "protéger", "employer", "finir", "couvrir", "assaillir", "cueillir", "bouillir", "être", "avoir", "aller"]
 
     for model in models {
       var output = "  func test" + model.capitalizingFirstLetter() + "() {\n    var personNumbersIndex = 0\n\n"

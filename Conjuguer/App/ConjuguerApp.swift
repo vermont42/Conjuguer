@@ -26,43 +26,7 @@ struct ConjuguerApp: App {
 
     print("verb count: \(Verb.verbs.count)  model count: \(VerbModel.models.count)\n")
 
-    for verb in [
-      "accueillir",
-      "aller",
-      "amorcer",
-      "appeler",
-      "arriver",
-      "assaillir",
-      "avoir",
-      "bouillir",
-      "céder",
-      "clamecer",
-      "colorer",
-      "couvrir",
-      "cueillir",
-      "défaillir",
-      "dépecer",
-      "être",
-      "fabriquer",
-      "fatiguer",
-      "finir",
-      "jeter",
-      "lancer",
-      "manger",
-      "offrir",
-      "ouvrir",
-      "parler",
-      "peser",
-      "prier",
-      "protéger",
-      "rapiécer",
-      "recueillir",
-      "souffrir",
-      "submerger",
-      "surmener",
-      "tressaillir",
-      "voleter"
-    ] {
+    for verb in Array(Verb.verbs.keys) {
       var output = "\(verb)"
 
       output += "  •  PRESENT: "

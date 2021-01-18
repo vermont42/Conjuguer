@@ -585,6 +585,63 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testEmployer() {
+    var personNumbersIndex = 0
+
+    for conjugation in ["emploIe", "emploIes", "emploIe", "employons", "employez", "emploIent"] {
+      T.testConjugation(infinitif: "employer", tense: .indicatifPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["employais", "employais", "employait", "employions", "employiez", "employaient"] {
+      T.testConjugation(infinitif: "employer", tense: .imparfait(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["emploIerai", "emploIeras", "emploIera", "emploIerons", "emploIerez", "emploIeront"] {
+      T.testConjugation(infinitif: "employer", tense: .futurSimple(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["emploIerais", "emploIerais", "emploIerait", "emploIerions", "emploIeriez", "emploIeraient"] {
+      T.testConjugation(infinitif: "employer", tense: .conditionnelPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["employai", "employas", "employa", "employâmes", "employâtes", "employèrent"] {
+      T.testConjugation(infinitif: "employer", tense: .passéSimple(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["emploIe", "emploIes", "emploIe", "employions", "employiez", "emploIent"] {
+      T.testConjugation(infinitif: "employer", tense: .subjonctifPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["employasse", "employasses", "employât", "employassions", "employassiez", "employassent"] {
+      T.testConjugation(infinitif: "employer", tense: .subjonctifImparfait(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    T.testConjugation(infinitif: "employer", tense: .participePassé, expected: "employé")
+    T.testConjugation(infinitif: "employer", tense: .participePrésent, expected: "employant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["emploIe", "employons", "employez"] {
+      T.testConjugation(infinitif: "employer", tense: .impératif(T.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= T.impératifPersonNumbers.count
+    }
+  }
+
   func testFinir() {
     var personNumbersIndex = 0
 
