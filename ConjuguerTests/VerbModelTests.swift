@@ -528,6 +528,63 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testProtéger() {
+    var personNumbersIndex = 0
+
+    for conjugation in ["protÈge", "protÈges", "protÈge", "protégEons", "protégez", "protÈgent"] {
+      T.testConjugation(infinitif: "protéger", tense: .indicatifPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["protégEais", "protégEais", "protégEait", "protégions", "protégiez", "protégEaient"] {
+      T.testConjugation(infinitif: "protéger", tense: .imparfait(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["protégerai", "protégeras", "protégera", "protégerons", "protégerez", "protégeront"] {
+      T.testConjugation(infinitif: "protéger", tense: .futurSimple(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["protégerais", "protégerais", "protégerait", "protégerions", "protégeriez", "protégeraient"] {
+      T.testConjugation(infinitif: "protéger", tense: .conditionnelPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["protégEai", "protégEas", "protégEa", "protégEâmes", "protégEâtes", "protégèrent"] {
+      T.testConjugation(infinitif: "protéger", tense: .passéSimple(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["protÈge", "protÈges", "protÈge", "protégions", "protégiez", "protÈgent"] {
+      T.testConjugation(infinitif: "protéger", tense: .subjonctifPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["protégEasse", "protégEasses", "protégEât", "protégEassions", "protégEassiez", "protégEassent"] {
+      T.testConjugation(infinitif: "protéger", tense: .subjonctifImparfait(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    T.testConjugation(infinitif: "protéger", tense: .participePassé, expected: "protégé")
+    T.testConjugation(infinitif: "protéger", tense: .participePrésent, expected: "protégEant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["protÈge", "protégEons", "protégez"] {
+      T.testConjugation(infinitif: "protéger", tense: .impératif(T.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= T.impératifPersonNumbers.count
+    }
+  }
+
   func testFinir() {
     var personNumbersIndex = 0
 
