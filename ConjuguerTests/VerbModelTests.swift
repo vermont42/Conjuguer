@@ -412,6 +412,63 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testDépecer() {
+    var personNumbersIndex = 0
+
+    for conjugation in ["dépÈce", "dépÈces", "dépÈce", "dépeÇons", "dépecez", "dépÈcent"] {
+      T.testConjugation(infinitif: "dépecer", tense: .indicatifPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["dépeÇais", "dépeÇais", "dépeÇait", "dépeCions", "dépeCiez", "dépeÇaient"] {
+      T.testConjugation(infinitif: "dépecer", tense: .imparfait(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["dépÈcerai", "dépÈceras", "dépÈcera", "dépÈcerons", "dépÈcerez", "dépÈceront"] {
+      T.testConjugation(infinitif: "dépecer", tense: .futurSimple(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["dépÈcerais", "dépÈcerais", "dépÈcerait", "dépÈcerions", "dépÈceriez", "dépÈceraient"] {
+      T.testConjugation(infinitif: "dépecer", tense: .conditionnelPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["dépeÇai", "dépeÇas", "dépeÇa", "dépeÇâmes", "dépeÇâtes", "dépecèrent"] {
+      T.testConjugation(infinitif: "dépecer", tense: .passéSimple(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["dépÈce", "dépÈces", "dépÈce", "dépeCions", "dépeCiez", "dépÈcent"] {
+      T.testConjugation(infinitif: "dépecer", tense: .subjonctifPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["dépeÇasse", "dépeÇasses", "dépeÇât", "dépeÇassions", "dépeÇassiez", "dépeÇassent"] {
+      T.testConjugation(infinitif: "dépecer", tense: .subjonctifImparfait(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    T.testConjugation(infinitif: "dépecer", tense: .participePassé, expected: "dépecé")
+    T.testConjugation(infinitif: "dépecer", tense: .participePrésent, expected: "dépeÇant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["dépÈce", "dépeÇons", "dépecez"] {
+      T.testConjugation(infinitif: "dépecer", tense: .impératif(T.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= T.impératifPersonNumbers.count
+    }
+  }
+
   func testFinir() {
     var personNumbersIndex = 0
 
