@@ -137,7 +137,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         indicatifPrésentGroup: currentIndicatifPrésentGroup,
         passéSimpleGroup: currentPasséSimpleGroup,
         subjonctifPrésentGroup: currentSubjonctifPrésentGroup,
-        stemAlterations: currentStemAlterations,
+        stemAlterations: currentStemAlterations.isEmpty ? nil : currentStemAlterations,
         completeAlterations: currentCompleteAlterations
       )
 

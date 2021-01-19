@@ -32,6 +32,7 @@
   <model mo="payer" id="1-7B" pa="1-1" p="1,1,I,A,r1s,r2s,r3s,r3p|3,1,I,A,sf" />
   <model mo="envoyer" id="1-8" pa="1-1" p="1,1,I,r1s,r2s,r3s,r3p|4,4,ERr,sf" />
   <model mo="finir" id="2-1" ep="i" si="x" se="i" bb="s" />
+  <model mo="maudire" id="2-2" pa="2-1" ep="iT" si="X" bb="S" />
   <model mo="couvrir" id="3-1" ep="T" si="E" se="i" up="f" p="1,1,er,pp" bb="e" />
   <model mo="assaillir" id="3-2A" pa="3-1" ep="i" />
   <model mo="cueillir" id="3-2B" pa="3-1" ep="i" p="2,1,E,sf" />

@@ -9,7 +9,7 @@ import Foundation
 
 enum IndicatifPrésentGroup {
   case e(appliesToErVerb: Bool)
-  case extendedS
+  case extendedS(appliesToReVerb: Bool)
   case s
 
   static func groupForXmlString(_ xmlString: String) -> IndicatifPrésentGroup {
@@ -19,7 +19,9 @@ enum IndicatifPrésentGroup {
     case "E":
       return .e(appliesToErVerb: false)
     case "x":
-      return .extendedS
+      return .extendedS(appliesToReVerb: false)
+    case "X":
+      return .extendedS(appliesToReVerb: true)
     case "s":
       return .s
     default:
@@ -49,20 +51,20 @@ enum IndicatifPrésentGroup {
         ending = ending.uppercased()
       }
       return ending
-    case .extendedS:
+    case .extendedS(let appliesToReVerb):
       switch personNumber {
       case .firstSingular:
-        return "is"
+        return appliesToReVerb ? "Is" : "is"
       case .secondSingular:
-        return "is"
+        return appliesToReVerb ? "Is" : "is"
       case .thirdSingular:
-        return "it"
+        return appliesToReVerb ? "It" : "it"
       case .firstPlural:
-        return "issons"
+        return appliesToReVerb ? "ISSons" : "issons"
       case .secondPlural:
-        return "issez"
+        return appliesToReVerb ? "ISSez" : "issez"
       case .thirdPlural:
-        return "issent"
+        return appliesToReVerb ? "ISSent" : "issent"
       }
     case .s:
       switch personNumber {
@@ -85,29 +87,24 @@ enum IndicatifPrésentGroup {
   func impératifEndingForPersonNumber(_ personNumber: PersonNumber) -> String {
     switch self {
     case .e(let appliesToErVerb):
-      var ending: String
       switch personNumber {
       case .secondSingular:
-        ending = "e"
+        return appliesToErVerb ? "e" : "E"
       case .firstPlural:
-        ending = "ons"
+        return appliesToErVerb ? "ons" : "Ons"
       case .secondPlural:
-        ending = "ez"
+        return appliesToErVerb ? "ez" : "Ez"
       default:
-        ending = ""
+        return ""
       }
-      if !appliesToErVerb {
-        ending = ending.uppercased()
-      }
-      return ending
-    case .extendedS:
+    case .extendedS(let appliesToReVerb):
       switch personNumber {
       case .secondSingular:
-        return "is"
+        return appliesToReVerb ? "Is" : "is"
       case .firstPlural:
-        return "issons"
+        return appliesToReVerb ? "ISSons" : "issons"
       case .secondPlural:
-        return "issez"
+        return appliesToReVerb ? "ISSez" : "issez"
       default:
         return ""
       }

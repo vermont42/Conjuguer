@@ -17,7 +17,8 @@ struct Verb {
   let auxiliary: Auxiliary
 
   var infinitifStem: String {
-    let index = infinitif.index(infinitif.endIndex, offsetBy: -1 * 2)
+    let length = infinitif.hasSuffix("ire") ? 3 : 2
+    let index = infinitif.index(infinitif.endIndex, offsetBy: -1 * length)
     return String(infinitif[..<index])
   }
 
