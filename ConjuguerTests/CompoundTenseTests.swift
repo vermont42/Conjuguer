@@ -51,7 +51,7 @@ class ConjuguerTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["AI ÉTÉ allé", "As ÉTÉ allé", "A ÉTÉ allé", "aVons ÉTÉ allé", "aVez ÉTÉ allé", "Ont ÉTÉ allé"] {
+    for conjugation in ["AI ÉtÉ allé", "As ÉtÉ allé", "A ÉtÉ allé", "aVons ÉtÉ allé", "aVez ÉtÉ allé", "Ont ÉtÉ allé"] {
       T.testConjugation(infinitif: aller, tense: .passéSurcomposé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count

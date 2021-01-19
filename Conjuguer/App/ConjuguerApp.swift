@@ -15,9 +15,7 @@ struct ConjuguerApp: App {
     }
   }
 
-  static let compoundPersonNumbers: [PersonNumber] = PersonNumber.allCases
   static var compoundPersonNumbersIndex = 0
-  static let compoundImpératifPersonNumbers: [PersonNumber] = [.secondSingular, .firstPlural, .secondPlural]
   static var compoundImpératifPersonNumbersIndex = 0
 
   init() {
@@ -137,7 +135,7 @@ struct ConjuguerApp: App {
 
       output += " •  IMPERATIVE: "
 
-      for personNumber in personNumbers where personNumber.isValidForImperatif {
+      for personNumber in PersonNumber.impératifPersonNumbers {
         let impératifResult = Conjugator.conjugate(infinitif: verb, tense: .impératif(personNumber))
         switch impératifResult {
         case .success(let value):
@@ -155,7 +153,7 @@ struct ConjuguerApp: App {
         fatalError()
       }
 
-//      let personNumber = ConjuguerApp.compoundPersonNumbers[ConjuguerApp.compoundPersonNumbersIndex]
+//      let personNumber = PersonNumber.allCases[ConjuguerApp.compoundPersonNumbersIndex]
 //      [
 //        Tense.passéComposé(personNumber),
 //        Tense.plusQueParfait(personNumber),
@@ -164,7 +162,7 @@ struct ConjuguerApp: App {
 //        Tense.futurAntérieur(personNumber),
 //        Tense.conditionnelPassé(personNumber),
 //        Tense.subjonctifPassé(personNumber),
-//        Tense.subjonctifPlusQueParfait(personNumber),
+//        Tense.subjonctifPlusQueParfait(personNumber)
 //      ].forEach {
 //        let compoundResult = Conjugator.conjugate(infinitif: verb, tense: $0)
 //        switch compoundResult {
@@ -182,11 +180,11 @@ struct ConjuguerApp: App {
 //        }
 //      }
 //      ConjuguerApp.compoundPersonNumbersIndex += 1
-//      ConjuguerApp.compoundPersonNumbersIndex %= ConjuguerApp.compoundPersonNumbers.count
+//      ConjuguerApp.compoundPersonNumbersIndex %= PersonNumber.allCases.count
 //
 //      output += "  •  impératif passé: "
 //
-//      let personNumberImpératif = ConjuguerApp.compoundImpératifPersonNumbers[ConjuguerApp.compoundImpératifPersonNumbersIndex]
+//      let personNumberImpératif = PersonNumber.impératifPersonNumbers[ConjuguerApp.compoundImpératifPersonNumbersIndex]
 //      let compoundResult = Conjugator.conjugate(infinitif: verb, tense: .impératifPassé(personNumberImpératif))
 //      switch compoundResult {
 //      case .success(let value):
@@ -195,7 +193,7 @@ struct ConjuguerApp: App {
 //        fatalError()
 //      }
 //      ConjuguerApp.compoundImpératifPersonNumbersIndex += 1
-//      ConjuguerApp.compoundImpératifPersonNumbersIndex %= ConjuguerApp.compoundImpératifPersonNumbers.count
+//      ConjuguerApp.compoundImpératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
 
       if
         let actualVerb = Verb.verbs[verb],

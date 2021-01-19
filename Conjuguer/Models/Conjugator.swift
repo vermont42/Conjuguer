@@ -99,7 +99,7 @@ struct Conjugator {
         stems.append(subjonctifStem)
       } else {
         stems.append(verb.infinitifStem)
-        if let stemAlterations = model.stemAlterations {
+        if let stemAlterations = model.stemAlterationsRecursive {
           let subjonctifPersonNumber: PersonNumber
           switch personNumber {
           case .firstSingular, .secondSingular, .thirdSingular, .thirdPlural:
@@ -139,7 +139,7 @@ struct Conjugator {
 
     let isUsingTenseThatUsesPasséSimpleStem = isConjugatingPasséSimple || isConjugatingSubjonctifImparfait
 
-    if let stemAlterations = model.stemAlterations {
+    if let stemAlterations = model.stemAlterationsRecursive {
       for alteration in stemAlterations {
         if
           (alteration.appliesTo.contains(tense) ||

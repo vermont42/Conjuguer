@@ -36,9 +36,27 @@ struct VerbModel {
     }
   }
 
+  var stemAlterationsRecursive: [StemAlteration]? {
+    var allStemAlterations: [StemAlteration] = []
+    if
+      let parentId = parentId,
+      let parentStemAlterations = VerbModel.model(id: parentId).stemAlterationsRecursive
+    {
+      allStemAlterations += parentStemAlterations
+    }
+    if let localStemAlterations = stemAlterations {
+      allStemAlterations += localStemAlterations
+    }
+    if allStemAlterations.isEmpty {
+      return nil
+    } else {
+      return allStemAlterations
+    }
+  }
+
   func participePasséStem(verb: Verb) -> String {
     if let participePasséStem = participePasséStem {
-      return participePasséStem.uppercased()
+      return participePasséStem
     } else {
       return verb.infinitifStem
     }
@@ -93,7 +111,10 @@ struct VerbModel {
     var recursiveStemAlterations: [StemAlteration]?
     if let stemAlterations = stemAlterations {
       recursiveStemAlterations = stemAlterations
-    } else if let parentId = parentId, let parentStemAlterations = VerbModel.models[parentId]?.stemAlterations {
+    } else if
+      let parentId = parentId,
+      let parentStemAlterations = VerbModel.models[parentId]?.stemAlterations
+    {
       recursiveStemAlterations = parentStemAlterations
     }
 
