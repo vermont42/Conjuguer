@@ -14,7 +14,7 @@ enum PersonNumber: String, CaseIterable {
   case secondPlural = "sp"
   case thirdPlural = "tp"
 
-  static let count = 6
+  static let impératifPersonNumbers: [PersonNumber] = [.secondSingular, .firstPlural, .secondPlural]
 
   var pronoun: String {
     switch self {
@@ -51,6 +51,6 @@ enum PersonNumber: String, CaseIterable {
   }
 
   var isValidForImperatif: Bool {
-    [.secondSingular, .firstPlural, .secondPlural].contains(self)
+    PersonNumber.impératifPersonNumbers.contains(self)
   }
 }

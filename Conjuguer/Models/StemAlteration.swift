@@ -87,6 +87,10 @@ struct StemAlteration {
         set.insert(.passéSimple(.secondPlural))
       case "x3p":
         set.insert(.passéSimple(.thirdPlural))
+      case "xA":
+        PersonNumber.allCases.forEach {
+          set.insert(.passéSimple($0))
+        }
 
       case "i1s":
         set.insert(.imparfait(.firstSingular))

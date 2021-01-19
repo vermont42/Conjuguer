@@ -31,6 +31,7 @@
   <verb in="défaillir" tn="faint" mo="3-2A" />
   <verb in="dépecer" tn="cut up, tear" mo="1-6A" />
   <verb in="employer" tn="use, employ" mo="1-7A" />
+  <verb in="entrevoir" tn="glimpse, foresee" mo="4-1A" />
   <verb in="envoyer" tn="send" mo="1-8" />
   <verb in="essuyer" tn="wipe, dry" mo="1-7A" />
   <verb in="être" tn="be" mo="7" />
@@ -51,10 +52,12 @@
   <verb in="protéger" tn="protect" mo="1-6C" />
   <verb in="rapiécer" tn="patch" mo="1-6B" />
   <verb in="recueillir" tn="collect" mo="3-2B" />
+  <verb in="revoir" tn="see again" mo="4-1A" />
   <verb in="saillir" tn="protrude" mo="3-2A" />
   <verb in="souffrir" tn="souffrir" mo="3-1" />
   <verb in="submerger" tn="overwhelm, submerge" mo="1-2B" />
   <verb in="surmener" tn="overwork" mo="1-4" />
   <verb in="tressaillir" tn="wince" mo="3-2A" />
+  <verb in="voir" tn="see" mo="4-1A" />
   <verb in="voleter" tn="flutter" mo="1-3B" />
 </verbs>

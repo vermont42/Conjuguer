@@ -15,7 +15,7 @@ struct ConjuguerApp: App {
     }
   }
 
-  static let compoundPersonNumbers: [PersonNumber] = [.firstSingular, .secondSingular, .thirdSingular, .firstPlural, .secondPlural, .thirdPlural]
+  static let compoundPersonNumbers: [PersonNumber] = PersonNumber.allCases
   static var compoundPersonNumbersIndex = 0
   static let compoundImpératifPersonNumbers: [PersonNumber] = [.secondSingular, .firstPlural, .secondPlural]
   static var compoundImpératifPersonNumbersIndex = 0
@@ -31,7 +31,7 @@ struct ConjuguerApp: App {
 
       output += "  •  PRESENT: "
 
-      let personNumbers: [PersonNumber] = [.firstSingular, .secondSingular, .thirdSingular, .firstPlural, .secondPlural, .thirdPlural]
+      let personNumbers: [PersonNumber] = PersonNumber.allCases
 
       for personNumber in personNumbers {
         let présentResult = Conjugator.conjugate(infinitif: verb, tense: .indicatifPrésent(personNumber))

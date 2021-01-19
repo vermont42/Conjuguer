@@ -38,6 +38,7 @@
   <model mo="assaillir" id="3-2A" pa="3-1" ep="i" />
   <model mo="cueillir" id="3-2B" pa="3-1" ep="i" p="2,1,E,sf" />
   <model mo="bouillir" id="3-2C" pa="3-1" ep="i" cr="r1s,bouS,r2s,bouS,r3s,bouT" />
+  <model mo="voir" id="4-1A" ep="U" si="s" se="i" bb="e" p="1,1,Y,r1p,r2p|2,2,,xA|3,2,ER,sf|2,2,,pp" />
   <model mo="être" id="7" pa="3-1" ps="Ét" rr="Ét" ff="SEr" se="b" uf="FU" ep="É" ii="Ét" cr="r1s,SUIS,r2s,Es,r3s,EST,r1p,SOMMEs,r2p,êteS,r3p,SOnt,b1s,SOIS,b2s,SOIs,b3s,SOIT,b1p,SOYons,b2p,SOYez,b3p,SOIent,m2s,SOIs,m1p,SOYons,m2p,SOYez" bb="e" />
   <model mo="avoir" id="8" pa="2-1" rr="aY" ff="aUr" ps="e" ep="U" cr="r1s,AI,r2s,As,r3s,A,r1p,aVons,r2p,aVez,r3p,Ont,b1s,aIe,b2s,aIes,b3s,aIT,b1p,aYons,b2p,aYez,b3p,aIent,m2s,AIe,m1p,AYons,m2p,AYez" se="u" bb="e" />
   <model mo="aller" id="9" pa="1-1" ff="IR" cr="r1s,VAIS,r2s,VAs,r3s,VA,r3p,VOnt,b1p,aLlions,b2p,aLliez,m2s,VA" sb="aIll" bb="e" />
