@@ -479,6 +479,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testDevoir() {
+    // ID: 4-2A
+    var personNumbersIndex = 0
+
+    for conjugation in ["dOis", "dOis", "dOit", "deVons", "deVez", "dOIvent"] {
+      T.testConjugation(infinitif: "devoir", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["deVais", "deVais", "deVait", "deVions", "deViez", "deVaient"] {
+      T.testConjugation(infinitif: "devoir", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["devRai", "devRas", "devRa", "devRons", "devRez", "devRont"] {
+      T.testConjugation(infinitif: "devoir", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["devRais", "devRais", "devRait", "devRions", "devRiez", "devRaient"] {
+      T.testConjugation(infinitif: "devoir", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["dus", "dus", "dut", "dûmes", "dûtes", "durent"] {
+      T.testConjugation(infinitif: "devoir", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["dOIve", "dOIves", "dOIve", "deVions", "deViez", "dOIvent"] {
+      T.testConjugation(infinitif: "devoir", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["dusse", "dusses", "dût", "dussions", "dussiez", "dussent"] {
+      T.testConjugation(infinitif: "devoir", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "devoir", tense: .participePassé, expected: "dÛ")
+    T.testConjugation(infinitif: "devoir", tense: .participePrésent, expected: "deVant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["dOis", "deVons", "deVez"] {
+      T.testConjugation(infinitif: "devoir", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testDépecer() {
     // ID: 1-6A
     var personNumbersIndex = 0

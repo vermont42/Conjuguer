@@ -30,6 +30,7 @@
   <verb in="cueillir" tn="gather" mo="3-2B" />
   <verb in="défaillir" tn="faint" mo="3-2A" />
   <verb in="dépecer" tn="cut up, tear" mo="1-6A" />
+  <verb in="devoir" tn="must, owe" mo="4-2A" />
   <verb in="employer" tn="use, employ" mo="1-7A" />
   <verb in="entrevoir" tn="glimpse, foresee" mo="4-1A" />
   <verb in="envoyer" tn="send" mo="1-8" />
@@ -54,6 +55,7 @@
   <verb in="protéger" tn="protect" mo="1-6C" />
   <verb in="rapiécer" tn="patch" mo="1-6B" />
   <verb in="recueillir" tn="collect" mo="3-2B" />
+  <verb in="redevoir" tn="owe again" mo="4-2A" />
   <verb in="revoir" tn="see again" mo="4-1A" />
   <verb in="saillir" tn="protrude" mo="3-2A" />
   <verb in="souffrir" tn="souffrir" mo="3-1" />
