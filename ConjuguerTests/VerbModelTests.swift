@@ -1233,6 +1233,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testPourvoir() {
+    // ID: 4-1C
+    var personNumbersIndex = 0
+
+    for conjugation in ["pourvois", "pourvois", "pourvoit", "pourvoYons", "pourvoYez", "pourvoient"] {
+      T.testConjugation(infinitif: "pourvoir", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["pourvoYais", "pourvoYais", "pourvoYait", "pourvoYions", "pourvoYiez", "pourvoYaient"] {
+      T.testConjugation(infinitif: "pourvoir", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["pourvOIrai", "pourvOIras", "pourvOIra", "pourvOIrons", "pourvOIrez", "pourvOIront"] {
+      T.testConjugation(infinitif: "pourvoir", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["pourvOIrais", "pourvOIrais", "pourvOIrait", "pourvOIrions", "pourvOIriez", "pourvOIraient"] {
+      T.testConjugation(infinitif: "pourvoir", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["pourvus", "pourvus", "pourvut", "pourvûmes", "pourvûtes", "pourvurent"] {
+      T.testConjugation(infinitif: "pourvoir", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["pourvoie", "pourvoies", "pourvoie", "pourvoYions", "pourvoYiez", "pourvoient"] {
+      T.testConjugation(infinitif: "pourvoir", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["pourvusse", "pourvusses", "pourvût", "pourvussions", "pourvussiez", "pourvussent"] {
+      T.testConjugation(infinitif: "pourvoir", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "pourvoir", tense: .participePassé, expected: "pourvU")
+    T.testConjugation(infinitif: "pourvoir", tense: .participePrésent, expected: "pourvoYant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["pourvois", "pourvoYons", "pourvoYez"] {
+      T.testConjugation(infinitif: "pourvoir", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testPrévoir() {
     // ID: 4-1B
     var personNumbersIndex = 0
