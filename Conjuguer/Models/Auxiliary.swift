@@ -2,7 +2,7 @@
 //  Auxiliary.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 1/2/21.
+//  Created by Josh Adams on 1/2/21.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  VerbModelTests.swift
 //  ConjuguerTests
 //
-//  Created by Joshua Adams on 1/13/21.
+//  Created by Josh Adams on 1/13/21.
 //
 
 @testable import Conjuguer
@@ -764,6 +764,64 @@ class VerbModelTests: XCTestCase {
 
     for conjugation in ["finis", "finissons", "finissez"] {
       T.testConjugation(infinitif: "finir", tense: .impératif(T.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= T.impératifPersonNumbers.count
+    }
+  }
+
+  func testHaïr() {
+    // ID: 2-3
+    var personNumbersIndex = 0
+
+    for conjugation in ["haIs", "haIs", "haIt", "haïssons", "haïssez", "haïssent"] {
+      T.testConjugation(infinitif: "haïr", tense: .indicatifPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["haïssais", "haïssais", "haïssait", "haïssions", "haïssiez", "haïssaient"] {
+      T.testConjugation(infinitif: "haïr", tense: .imparfait(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["haïrai", "haïras", "haïra", "haïrons", "haïrez", "haïront"] {
+      T.testConjugation(infinitif: "haïr", tense: .futurSimple(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["haïrais", "haïrais", "haïrait", "haïrions", "haïriez", "haïraient"] {
+      T.testConjugation(infinitif: "haïr", tense: .conditionnelPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["haïs", "haïs", "haït", "haÏmes", "haÏtes", "haïrent"] {
+      T.testConjugation(infinitif: "haïr", tense: .passéSimple(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["haïsse", "haïsses", "haïsse", "haïssions", "haïssiez", "haïssent"] {
+      T.testConjugation(infinitif: "haïr", tense: .subjonctifPrésent(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    for conjugation in ["haïsse", "haïsses", "haÏt", "haïssions", "haïssiez", "haïssent"] {
+      T.testConjugation(infinitif: "haïr", tense: .subjonctifImparfait(T.personNumbers[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= T.personNumbers.count
+    }
+
+    T.testConjugation(infinitif: "haïr", tense: .participePassé, expected: "haï")
+    T.testConjugation(infinitif: "haïr", tense: .participePrésent, expected: "haïssant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["haIs", "haïssons", "haïssez"] {
+      T.testConjugation(infinitif: "haïr", tense: .impératif(T.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
       impératifPersonNumbersIndex += 1
       impératifPersonNumbersIndex %= T.impératifPersonNumbers.count
     }

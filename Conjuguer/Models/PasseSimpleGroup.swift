@@ -2,7 +2,7 @@
 //  PasseSimpleGroup.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 1/6/21.
+//  Created by Josh Adams on 1/6/21.
 //
 
 import Foundation
@@ -12,6 +12,7 @@ enum PasséSimpleGroup {
   case a
   case i
   case u
+  case ï
 
   static func groupForXmlString(_ xmlString: String) -> PasséSimpleGroup {
     switch xmlString {
@@ -23,6 +24,8 @@ enum PasséSimpleGroup {
       return .i
     case "u":
       return .u
+    case "ï":
+      return  .ï
     default:
       fatalError("Attempted to construct PasséSimpleGroup from invalid xmlString \(xmlString).")
     }
@@ -90,6 +93,21 @@ enum PasséSimpleGroup {
       case .thirdPlural:
         return "urent"
       }
+    case .ï:
+      switch personNumber {
+      case .firstSingular:
+        return "ïs"
+      case .secondSingular:
+        return "ïs"
+      case .thirdSingular:
+        return "ït"
+      case .firstPlural:
+        return "Ïmes"
+      case .secondPlural:
+        return "Ïtes"
+      case .thirdPlural:
+        return "ïrent"
+      }
     }
   }
 
@@ -154,6 +172,21 @@ enum PasséSimpleGroup {
         return "ussiez"
       case .thirdPlural:
         return "ussent"
+      }
+    case .ï:
+      switch personNumber {
+      case .firstSingular:
+        return "ïsse"
+      case .secondSingular:
+        return "ïsses"
+      case .thirdSingular:
+        return "Ït"
+      case .firstPlural:
+        return "ïssions"
+      case .secondPlural:
+        return "ïssiez"
+      case .thirdPlural:
+        return "ïssent"
       }
     }
   }

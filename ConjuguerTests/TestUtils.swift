@@ -2,7 +2,7 @@
 //  TestUtils.swift
 //  ConjuguerTests
 //
-//  Created by Joshua Adams on 1/13/21.
+//  Created by Josh Adams on 1/13/21.
 //
 
 @testable import Conjuguer
@@ -38,7 +38,7 @@ enum T {
 //  VerbModelTests.swift
 //  ConjuguerTests
 //
-//  Created by Joshua Adams on 1/13/21.
+//  Created by Josh Adams on 1/13/21.
 //
 
 @testable import Conjuguer

@@ -2,7 +2,7 @@
 //  ConjuguerUITests.swift
 //  ConjuguerUITests
 //
-//  Created by Joshua Adams on 1/1/21.
+//  Created by Josh Adams on 1/1/21.
 //
 
 import XCTest

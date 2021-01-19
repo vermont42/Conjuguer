@@ -2,7 +2,7 @@
 //  VerbModelParser.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 1/4/21.
+//  Created by Josh Adams on 1/4/21.
 //
 
 import Foundation

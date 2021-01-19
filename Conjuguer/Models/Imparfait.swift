@@ -2,7 +2,7 @@
 //  Imparfait.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 1/9/21.
+//  Created by Josh Adams on 1/9/21.
 //
 
 import Foundation

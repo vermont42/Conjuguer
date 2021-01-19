@@ -2,7 +2,7 @@
 //  SubjonctifPresentGroup.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 1/9/21.
+//  Created by Josh Adams on 1/9/21.
 //
 
 import Foundation
@@ -10,6 +10,7 @@ import Foundation
 enum SubjonctifPrésentGroup {
   case e
   case s(appliesToReVerb: Bool)
+  case ï
 
   static func groupForXmlString(_ xmlString: String) -> SubjonctifPrésentGroup {
     switch xmlString {
@@ -19,6 +20,8 @@ enum SubjonctifPrésentGroup {
       return .s(appliesToReVerb: false)
     case "S":
       return .s(appliesToReVerb: true)
+    case "ï":
+      return .ï
     default:
       fatalError("Attempted to construct SubjonctifPrésentGroup from invalid xmlString \(xmlString).")
     }
@@ -55,6 +58,21 @@ enum SubjonctifPrésentGroup {
         return appliesToReVerb ? "ISSiez" : "issiez"
       case .thirdPlural:
         return appliesToReVerb ? "ISSent" : "issent"
+      }
+    case .ï:
+      switch personNumber {
+      case .firstSingular:
+        return "ïsse"
+      case .secondSingular:
+        return "ïsses"
+      case .thirdSingular:
+        return "ïsse"
+      case .firstPlural:
+        return "ïssions"
+      case .secondPlural:
+        return "ïssiez"
+      case .thirdPlural:
+        return "ïssent"
       }
     }
   }

@@ -2,7 +2,7 @@
 //  IndicatifPresentGroup.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 1/8/21.
+//  Created by Josh Adams on 1/8/21.
 //
 
 import Foundation
@@ -11,6 +11,7 @@ enum IndicatifPrésentGroup {
   case e(appliesToErVerb: Bool)
   case extendedS(appliesToReVerb: Bool)
   case s
+  case ï
 
   static func groupForXmlString(_ xmlString: String) -> IndicatifPrésentGroup {
     switch xmlString {
@@ -24,6 +25,8 @@ enum IndicatifPrésentGroup {
       return .extendedS(appliesToReVerb: true)
     case "s":
       return .s
+    case "ï":
+      return .ï
     default:
       fatalError("Attempted to construct IndicatifPrésentGroup from invalid xmlString \(xmlString).")
     }
@@ -81,6 +84,21 @@ enum IndicatifPrésentGroup {
       case .thirdPlural:
         return "ent"
       }
+    case .ï:
+      switch personNumber {
+      case .firstSingular:
+        return "Is"
+      case .secondSingular:
+        return "Is"
+      case .thirdSingular:
+        return "It"
+      case .firstPlural:
+        return "ïssons"
+      case .secondPlural:
+        return "ïssez"
+      case .thirdPlural:
+        return "ïssent"
+      }
     }
   }
 
@@ -116,6 +134,17 @@ enum IndicatifPrésentGroup {
         return "ons"
       case .secondPlural:
         return "ez"
+      default:
+        return ""
+      }
+    case .ï:
+      switch personNumber {
+      case .secondSingular:
+        return "Is"
+      case .firstPlural:
+        return "ïssons"
+      case .secondPlural:
+        return "ïssez"
       default:
         return ""
       }
