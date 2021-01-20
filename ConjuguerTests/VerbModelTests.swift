@@ -1755,6 +1755,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testValoir() {
+    // ID: 4-5A
+    var personNumbersIndex = 0
+
+    for conjugation in ["vaUX", "vaUX", "vaUt", "vaLons", "vaLez", "vaLent"] {
+      T.testConjugation(infinitif: "valoir", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["vaLais", "vaLais", "vaLait", "vaLions", "vaLiez", "vaLaient"] {
+      T.testConjugation(infinitif: "valoir", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["vaUDrai", "vaUDras", "vaUDra", "vaUDrons", "vaUDrez", "vaUDront"] {
+      T.testConjugation(infinitif: "valoir", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["vaUDrais", "vaUDrais", "vaUDrait", "vaUDrions", "vaUDriez", "vaUDraient"] {
+      T.testConjugation(infinitif: "valoir", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["valus", "valus", "valut", "valûmes", "valûtes", "valurent"] {
+      T.testConjugation(infinitif: "valoir", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["vaILle", "vaILles", "vaILle", "vaLions", "vaLiez", "vaILlent"] {
+      T.testConjugation(infinitif: "valoir", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["valusse", "valusses", "valût", "valussions", "valussiez", "valussent"] {
+      T.testConjugation(infinitif: "valoir", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "valoir", tense: .participePassé, expected: "valU")
+    T.testConjugation(infinitif: "valoir", tense: .participePrésent, expected: "vaLant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["vaUX", "vaLons", "vaLez"] {
+      T.testConjugation(infinitif: "valoir", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testVoir() {
     // ID: 4-1A
     var personNumbersIndex = 0

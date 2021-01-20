@@ -32,6 +32,8 @@ enum Tense: Hashable {
 
   static let onsLength = 3
   static let participePrésentEnding = "ant"
+  static let alternateConjugationSeparator = "/"
+  static let irregularEndingIndicator = "*"
 
   var displayName: String {
     switch self {

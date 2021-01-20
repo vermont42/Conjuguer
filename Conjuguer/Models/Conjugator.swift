@@ -193,9 +193,13 @@ struct Conjugator {
     var hasAppendedAtLeastOneConjugation = false
     stems.forEach {
       if hasAppendedAtLeastOneConjugation {
-        output += "/"
+        output += Tense.alternateConjugationSeparator
       }
-      output += $0 + ending
+      if String($0.last ?? Character("")) == Tense.irregularEndingIndicator {
+        output += $0.dropLast()
+      } else {
+        output += $0 + ending
+      }
       hasAppendedAtLeastOneConjugation = true
     }
     return output
