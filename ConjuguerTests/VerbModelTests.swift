@@ -1465,6 +1465,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testPrévaloir() {
+    // ID: 4-5B
+    var personNumbersIndex = 0
+
+    for conjugation in ["prévaUX", "prévaUX", "prévaUt", "prévaLons", "prévaLez", "prévaLent"] {
+      T.testConjugation(infinitif: "prévaloir", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["prévaLais", "prévaLais", "prévaLait", "prévaLions", "prévaLiez", "prévaLaient"] {
+      T.testConjugation(infinitif: "prévaloir", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["prévaUDrai", "prévaUDras", "prévaUDra", "prévaUDrons", "prévaUDrez", "prévaUDront"] {
+      T.testConjugation(infinitif: "prévaloir", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["prévaUDrais", "prévaUDrais", "prévaUDrait", "prévaUDrions", "prévaUDriez", "prévaUDraient"] {
+      T.testConjugation(infinitif: "prévaloir", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["prévalus", "prévalus", "prévalut", "prévalûmes", "prévalûtes", "prévalurent"] {
+      T.testConjugation(infinitif: "prévaloir", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["prévaLe", "prévaLes", "prévaLe", "prévaLions", "prévaLiez", "prévaLent"] {
+      T.testConjugation(infinitif: "prévaloir", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["prévalusse", "prévalusses", "prévalût", "prévalussions", "prévalussiez", "prévalussent"] {
+      T.testConjugation(infinitif: "prévaloir", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "prévaloir", tense: .participePassé, expected: "prévalU")
+    T.testConjugation(infinitif: "prévaloir", tense: .participePrésent, expected: "prévaLant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["prévaUX", "prévaLons", "prévaLez"] {
+      T.testConjugation(infinitif: "prévaloir", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testPrévoir() {
     // ID: 4-1B
     var personNumbersIndex = 0
