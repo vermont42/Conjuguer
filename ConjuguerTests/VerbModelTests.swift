@@ -1523,6 +1523,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testRecevoir() {
+    // ID: 4-2B
+    var personNumbersIndex = 0
+
+    for conjugation in ["reÇOis", "reÇOis", "reÇOit", "receVons", "receVez", "reÇOIvent"] {
+      T.testConjugation(infinitif: "recevoir", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["receVais", "receVais", "receVait", "receVions", "receViez", "receVaient"] {
+      T.testConjugation(infinitif: "recevoir", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["recevRai", "recevRas", "recevRa", "recevRons", "recevRez", "recevRont"] {
+      T.testConjugation(infinitif: "recevoir", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["recevRais", "recevRais", "recevRait", "recevRions", "recevRiez", "recevRaient"] {
+      T.testConjugation(infinitif: "recevoir", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["reÇus", "reÇus", "reÇut", "reÇûmes", "reÇûtes", "reÇurent"] {
+      T.testConjugation(infinitif: "recevoir", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["reÇOIve", "reÇOIves", "reÇOIve", "receVions", "receViez", "reÇOIvent"] {
+      T.testConjugation(infinitif: "recevoir", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["reÇusse", "reÇusses", "reÇût", "reÇussions", "reÇussiez", "reÇussent"] {
+      T.testConjugation(infinitif: "recevoir", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "recevoir", tense: .participePassé, expected: "reÇU")
+    T.testConjugation(infinitif: "recevoir", tense: .participePrésent, expected: "receVant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["reÇOis", "receVons", "receVez"] {
+      T.testConjugation(infinitif: "recevoir", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testVoir() {
     // ID: 4-1A
     var personNumbersIndex = 0

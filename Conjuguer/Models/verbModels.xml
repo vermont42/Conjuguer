@@ -42,6 +42,7 @@
   <model mo="prévoir" id="4-1B" pa="4-1A" p="3,2,OI,sf" />
   <model mo="pourvoir" id="4-1C" pa="4-1B" se="u" />
   <model mo="devoir" id="4-2A" ep="Û" si="s" se="u" bb="e" p="4,4,Oi,r1s,r2s,r3s|3,3,V,r1p,r2p|4,4,OIv,r3p|4,4,,pp|4,4,,xA|3,3,R,sf" />
+  <model mo="recevoir" id="4-2B" pa="4-2A" ep="U" p="3,1,Ç,r1s,r2s,r3s|4,1,Ç,r3p|1,1,Ç,xA,pp|4,1,Ç,b1s,b2s,b3s,b3p" />
   <model mo="être" id="7" pa="1-1" ps="Ét" rr="Ét" ff="SEr" se="b" uf="FU" ep="É" ii="Ét" cr="r1s,SUIS,r2s,Es,r3s,EST,r1p,SOMMEs,r2p,êteS,r3p,SOnt,b1s,SOIS,b2s,SOIs,b3s,SOIT,b1p,SOYons,b2p,SOYez,b3p,SOIent,m2s,SOIs,m1p,SOYons,m2p,SOYez" bb="e" />
   <model mo="avoir" id="8" pa="2-1" rr="aY" ff="aUr" ps="E" ep="U" cr="r1s,AI,r2s,As,r3s,A,r1p,aVons,r2p,aVez,r3p,Ont,b1s,aIe,b2s,aIes,b3s,aIT,b1p,aYons,b2p,aYez,b3p,aIent,m2s,AIe,m1p,AYons,m2p,AYez" se="u" bb="e" />
   <model mo="aller" id="9" pa="1-1" ff="IR" cr="r1s,VAIS,r2s,VAs,r3s,VA,r3p,VOnt,b1p,aLlions,b2p,aLliez,m2s,VA" sb="aIll" bb="e" />

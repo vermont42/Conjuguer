@@ -108,17 +108,19 @@ struct VerbModel {
     }
 
     var stems = [infinitif]
-    var recursiveStemAlterations: [StemAlteration]?
+    var recursiveStemAlterations: [StemAlteration] = []
     if let stemAlterations = stemAlterations {
       recursiveStemAlterations = stemAlterations
-    } else if
+    }
+
+    if
       let parentId = parentId,
       let parentStemAlterations = VerbModel.models[parentId]?.stemAlterations
     {
-      recursiveStemAlterations = parentStemAlterations
+      recursiveStemAlterations += parentStemAlterations
     }
 
-    if let recursiveStemAlterations = recursiveStemAlterations {
+    if !recursiveStemAlterations.isEmpty {
       for alteration in recursiveStemAlterations {
         if alteration.appliesTo.contains(.radicalFutur) {
           if alteration.isAdditive {
