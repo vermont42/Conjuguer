@@ -39,8 +39,19 @@ struct Conjugator {
     var passéSimplePersonNumber: PersonNumber = .secondSingular
 
     switch tense {
-    case .indicatifPrésent:
+    case .indicatifPrésent(let personNumber):
       stems.append(verb.infinitifStem)
+      if let stemAlterations = model.stemAlterationsRecursive {
+        for alteration in stemAlterations {
+          if alteration.appliesTo.contains(.indicatifPrésent(personNumber)) {
+            if alteration.isAdditive {
+              stems.append(stems[0])
+              stems[1].modifyStem(alteration: alteration)
+              break
+            }
+          }
+        }
+      }
 
     case .participePassé,
          .passéComposé, .plusQueParfait, .passéAntérieur, .passéSurcomposé, .futurAntérieur, .conditionnelPassé, .subjonctifPassé, .subjonctifPlusQueParfait:
@@ -108,12 +119,12 @@ struct Conjugator {
             subjonctifPersonNumber = .firstPlural
           }
           for alteration in stemAlterations {
-            if alteration.appliesTo.contains(.indicatifPrésent(subjonctifPersonNumber)) {
+            if alteration.appliesTo.contains(.subjonctifPrésent(subjonctifPersonNumber)) {
               if alteration.isAdditive {
                 stems.append(stems[0])
+                stems[1].modifyStem(alteration: alteration)
+                break
               }
-              stems[0].modifyStem(alteration: alteration)
-              break
             }
           }
         }
@@ -129,6 +140,17 @@ struct Conjugator {
       isConjugatingImpératif = true
       impératifPersonNumber = personNumber
       stems.append(verb.infinitifStem)
+      if let stemAlterations = model.stemAlterationsRecursive {
+        for alteration in stemAlterations {
+          if alteration.appliesTo.contains(.indicatifPrésent(personNumber)) {
+            if alteration.isAdditive {
+              stems.append(stems[0])
+              stems[1].modifyStem(alteration: alteration)
+              break
+            }
+          }
+        }
+      }
 
     case .impératifPassé(let personNumber):
       if !personNumber.isValidForImperatif {
@@ -145,7 +167,7 @@ struct Conjugator {
           (alteration.appliesTo.contains(tense) ||
           (isUsingTenseThatUsesPasséSimpleStem && alteration.appliesTo.contains(.passéSimple(passéSimplePersonNumber)) && model.usesParticipePasséStemForPasséSimple) ||
           (isConjugatingImpératif && alteration.appliesTo.contains(.indicatifPrésent(impératifPersonNumber))) ||
-          (tense.isCompound && alteration.appliesTo.contains(.participePassé))) && tense != .radicalFutur
+            (tense.isCompound && alteration.appliesTo.contains(.participePassé))) && tense != .radicalFutur && !alteration.isAdditive
         {
           stems[0].modifyStem(alteration: alteration)
         }
