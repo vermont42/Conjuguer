@@ -769,6 +769,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testFalloir() {
+    // ID: 4-5C
+    var personNumbersIndex = 0
+
+    for conjugation in ["faUX", "faUX", "faUt", "falLons", "falLez", "falLent"] {
+      T.testConjugation(infinitif: "falloir", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["falLais", "falLais", "falLait", "faLions", "faLiez", "falLaient"] {
+      T.testConjugation(infinitif: "falloir", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["faUDrai", "faUDras", "faUDra", "faUDrons", "faUDrez", "faUDront"] {
+      T.testConjugation(infinitif: "falloir", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["faUDrais", "faUDrais", "faUDrait", "faUDrions", "faUDriez", "faUDraient"] {
+      T.testConjugation(infinitif: "falloir", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["fallus", "fallus", "fallut", "fallûmes", "fallûtes", "fallurent"] {
+      T.testConjugation(infinitif: "falloir", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["faILle", "faILles", "faILle", "falLions", "falLiez", "faILlent"] {
+      T.testConjugation(infinitif: "falloir", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["fallusse", "fallusses", "fallût", "fallussions", "fallussiez", "fallussent"] {
+      T.testConjugation(infinitif: "falloir", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "falloir", tense: .participePassé, expected: "fallU")
+    T.testConjugation(infinitif: "falloir", tense: .participePrésent, expected: "falLant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["faUX", "falLons", "falLez"] {
+      T.testConjugation(infinitif: "falloir", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testFinir() {
     // ID: 2-1
     var personNumbersIndex = 0

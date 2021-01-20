@@ -109,15 +109,16 @@ struct VerbModel {
 
     var stems = [infinitif]
     var recursiveStemAlterations: [StemAlteration] = []
-    if let stemAlterations = stemAlterations {
-      recursiveStemAlterations = stemAlterations
-    }
 
     if
       let parentId = parentId,
       let parentStemAlterations = VerbModel.models[parentId]?.stemAlterations
     {
-      recursiveStemAlterations += parentStemAlterations
+      recursiveStemAlterations = parentStemAlterations
+    }
+
+    if let stemAlterations = stemAlterations {
+      recursiveStemAlterations += stemAlterations
     }
 
     if !recursiveStemAlterations.isEmpty {
@@ -127,7 +128,6 @@ struct VerbModel {
             stems.append(stems[0])
           }
           stems[0].modifyStem(alteration: alteration)
-          break
         }
       }
     } else if stems[0].last == "e" {
