@@ -24,7 +24,7 @@ struct ConjuguerApp: App {
 
     print("verb count: \(Verb.verbs.count)  model count: \(VerbModel.models.count)\n")
 
-    for verb in ["promouvoir"] { // Array(Verb.verbs.keys) {
+    for verb in ["pleuvoir"] { // Array(Verb.verbs.keys) {
       var output = "\(verb)"
 
       output += "  •  PRESENT: "
