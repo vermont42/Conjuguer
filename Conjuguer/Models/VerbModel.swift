@@ -22,6 +22,7 @@ struct VerbModel {
   let participeEnding: String?
 
   let usesParticipePasséStemForPasséSimple: Bool
+  let usesSubjonctifStemForImpératif: Bool
   let indicatifPrésentGroup: IndicatifPrésentGroup?
   let passéSimpleGroup: PasséSimpleGroup?
   let subjonctifPrésentGroup: SubjonctifPrésentGroup?

@@ -23,6 +23,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
   private var currentFuturStem: String?
   private var currentPasséSimpleStem: String?
   private var currentUsesParticipePasséStemForPasséSimple = true
+  private var currentUsesSubjonctifStemForImpératif = false
   private var currentParticipeEnding: String?
   private var currentParticipePrésentStem: String?
   private var currentIndicatifPrésentGroup: IndicatifPrésentGroup?
@@ -84,6 +85,10 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         currentUsesParticipePasséStemForPasséSimple = usesParticipePasséStemForPasséSimple == "f" ? false : true
       }
 
+      if let usesSubjonctifStemForImpératif = attributeDict["ys"] {
+        currentUsesSubjonctifStemForImpératif = usesSubjonctifStemForImpératif == "t" ? true : false
+      }
+
       if let participeEnding = attributeDict["ep"] {
         currentParticipeEnding = participeEnding
       }
@@ -134,6 +139,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         passéSimpleStem: currentPasséSimpleStem,
         participeEnding: currentParticipeEnding,
         usesParticipePasséStemForPasséSimple: currentUsesParticipePasséStemForPasséSimple,
+        usesSubjonctifStemForImpératif: currentUsesSubjonctifStemForImpératif,
         indicatifPrésentGroup: currentIndicatifPrésentGroup,
         passéSimpleGroup: currentPasséSimpleGroup,
         subjonctifPrésentGroup: currentSubjonctifPrésentGroup,
@@ -154,6 +160,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       currentPasséSimpleStem = nil
       currentParticipeEnding = nil
       currentUsesParticipePasséStemForPasséSimple = true
+      currentUsesSubjonctifStemForImpératif = false
       currentIndicatifPrésentGroup = nil
       currentPasséSimpleGroup = nil
       currentSubjonctifPrésentGroup = nil

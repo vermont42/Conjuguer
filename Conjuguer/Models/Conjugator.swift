@@ -137,16 +137,23 @@ struct Conjugator {
       if !personNumber.isValidForImperatif {
         return .failure(.defectiveForPersonNumber(personNumber))
       }
-      isConjugatingImpératif = true
       impératifPersonNumber = personNumber
-      stems.append(verb.infinitifStem)
-      if let stemAlterations = model.stemAlterationsRecursive {
-        for alteration in stemAlterations {
-          if alteration.appliesTo.contains(.indicatifPrésent(personNumber)) {
-            if alteration.isAdditive {
-              stems.append(stems[0])
-              stems[1].modifyStem(alteration: alteration)
-              break
+      if model.usesSubjonctifStemForImpératif {
+        guard let subjonctifStem = model.subjonctifStem else {
+          return .failure(.impératifUsesSubjonctifStemButThereIsNone)
+        }
+        stems.append(subjonctifStem)
+      } else {
+        stems.append(verb.infinitifStem)
+        isConjugatingImpératif = true
+        if let stemAlterations = model.stemAlterationsRecursive {
+          for alteration in stemAlterations {
+            if alteration.appliesTo.contains(.indicatifPrésent(personNumber)) {
+              if alteration.isAdditive {
+                stems.append(stems[0])
+                stems[1].modifyStem(alteration: alteration)
+                break
+              }
             }
           }
         }
