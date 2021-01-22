@@ -507,7 +507,7 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["dus", "dus", "dut", "dûmes", "dûtes", "durent"] {
+    for conjugation in ["Dus", "Dus", "Dut", "Dûmes", "Dûtes", "Durent"] {
       T.testConjugation(infinitif: "devoir", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -519,13 +519,13 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["dusse", "dusses", "dût", "dussions", "dussiez", "dussent"] {
+    for conjugation in ["Dusse", "Dusses", "Dût", "Dussions", "Dussiez", "Dussent"] {
       T.testConjugation(infinitif: "devoir", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    T.testConjugation(infinitif: "devoir", tense: .participePassé, expected: "dÛ")
+    T.testConjugation(infinitif: "devoir", tense: .participePassé, expected: "DÛ")
     T.testConjugation(infinitif: "devoir", tense: .participePrésent, expected: "devant")
 
     var impératifPersonNumbersIndex = 0
