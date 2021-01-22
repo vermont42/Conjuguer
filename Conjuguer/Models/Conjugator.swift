@@ -155,6 +155,13 @@ struct Conjugator {
                 break
               }
             }
+            if alteration.appliesTo.contains(.impératif(personNumber)) {
+              if alteration.isAdditive {
+                stems.append(stems[0])
+                stems[1].modifyStem(alteration: alteration)
+                break
+              }
+            }
           }
         }
       }

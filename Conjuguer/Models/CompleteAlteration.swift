@@ -32,6 +32,9 @@ struct CompleteAlteration {
       case "pp":
         tense = .participePassé
 
+      case "rr":
+        tense = .participePrésent
+
       case "r1s":
         tense = .indicatifPrésent(.firstSingular)
       case "r2s":

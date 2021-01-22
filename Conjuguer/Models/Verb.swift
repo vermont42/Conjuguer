@@ -21,7 +21,7 @@ struct Verb {
     if infinitif.hasSuffix("ire") {
       endingLength = 3
     } else if infinitif.hasSuffix("oir") {
-      endingLength = 1
+      endingLength = 3
     } else {
       endingLength = 2
     }

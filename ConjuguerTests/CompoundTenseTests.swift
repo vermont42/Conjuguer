@@ -1,5 +1,5 @@
 //
-//  ConjuguerTests.swift
+//  CompoundTenseTests.swift
 //  ConjuguerTests
 //
 //  Created by Josh Adams on 1/1/21.
@@ -8,7 +8,7 @@
 @testable import Conjuguer
 import XCTest
 
-class ConjuguerTests: XCTestCase {
+class CompoundTenseTests: XCTestCase {
   func testCompoundTenses() {
     let aller = "aller"
     let avoir = "avoir"
@@ -21,7 +21,7 @@ class ConjuguerTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["AI EU", "As EU", "A EU", "aVons EU", "aVez EU", "Ont EU"] {
+    for conjugation in ["aI EU", "As EU", "A EU", "avons EU", "avez EU", "Ont EU"] {
       T.testConjugation(infinitif: avoir, tense: .passéComposé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -33,7 +33,7 @@ class ConjuguerTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["aVais EU", "aVais EU", "aVait EU", "aVions EU", "aViez EU", "aVaient EU"] {
+    for conjugation in ["avais EU", "avais EU", "avait EU", "avions EU", "aviez EU", "avaient EU"] {
       T.testConjugation(infinitif: avoir, tense: .plusQueParfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -51,13 +51,13 @@ class ConjuguerTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["AI ÉtÉ allé", "As ÉtÉ allé", "A ÉtÉ allé", "aVons ÉtÉ allé", "aVez ÉtÉ allé", "Ont ÉtÉ allé"] {
+    for conjugation in ["aI ÉtÉ allé", "As ÉtÉ allé", "A ÉtÉ allé", "avons ÉtÉ allé", "avez ÉtÉ allé", "Ont ÉtÉ allé"] {
       T.testConjugation(infinitif: aller, tense: .passéSurcomposé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["AI EU EU", "As EU EU", "A EU EU", "aVons EU EU", "aVez EU EU", "Ont EU EU"] {
+    for conjugation in ["aI EU EU", "As EU EU", "A EU EU", "avons EU EU", "avez EU EU", "Ont EU EU"] {
       T.testConjugation(infinitif: avoir, tense: .passéSurcomposé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -119,7 +119,7 @@ class ConjuguerTests: XCTestCase {
       impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
     }
 
-    for conjugation in ["AIe EU", "AYons EU", "AYez EU"] {
+    for conjugation in ["aIE EU", "aYons EU", "aYez EU"] {
       T.testConjugation(infinitif: avoir, tense: .impératifPassé(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
       impératifPersonNumbersIndex += 1
       impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count

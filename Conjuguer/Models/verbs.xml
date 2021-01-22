@@ -66,6 +66,7 @@
   <verb in="recueillir" tn="collect" mo="3-2B" />
   <verb in="redevoir" tn="owe again" mo="4-2A" />
   <verb in="revoir" tn="see again" mo="4-1A" />
+  <verb in="revouloir" tn="want again/back" mo="4-8" />
   <verb in="saillir" tn="protrude" mo="3-2A" />
   <verb in="savoir" tn="know" mo="4-7" />
   <verb in="souffrir" tn="souffrir" mo="3-1" />
@@ -75,4 +76,5 @@
   <verb in="valoir" tn="be worth" mo="4-5A" />
   <verb in="voir" tn="see" mo="4-1A" />
   <verb in="voleter" tn="flutter" mo="1-3B" />
+  <verb in="vouloir" tn="want" mo="4-8" />
 </verbs>
