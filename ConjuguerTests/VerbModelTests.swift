@@ -223,7 +223,7 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["asseYe/assOIe", "asseYes/assOIes", "asseYe/assOIe", "asseYions/assOIions", "asseYiez/assOIiez", "asseYent/assOIent"] {
+    for conjugation in ["asseYe/assOIe", "asseYes/assOIes", "asseYe/assOIe", "asseYions/assOYions", "asseYiez/assOYiez", "asseYent/assOIent"] {
       T.testConjugation(infinitif: "asseoir", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -2040,6 +2040,64 @@ class VerbModelTests: XCTestCase {
 
     for conjugation in ["saCHe", "saCHons", "saCHez"] {
       T.testConjugation(infinitif: "savoir", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
+  func testSurseoir() {
+    // ID: 4-9C
+    var personNumbersIndex = 0
+
+    for conjugation in ["sursOIs", "sursOIs", "sursOIt", "sursOYons", "sursOYez", "sursOIent"] {
+      T.testConjugation(infinitif: "surseoir", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["sursOYais", "sursOYais", "sursOYait", "sursOYions", "sursOYiez", "sursOYaient"] {
+      T.testConjugation(infinitif: "surseoir", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["surseoirai", "surseoiras", "surseoira", "surseoirons", "surseoirez", "surseoiront"] {
+      T.testConjugation(infinitif: "surseoir", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["surseoirais", "surseoirais", "surseoirait", "surseoirions", "surseoiriez", "surseoiraient"] {
+      T.testConjugation(infinitif: "surseoir", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["surSis", "surSis", "surSit", "surSîmes", "surSîtes", "surSirent"] {
+      T.testConjugation(infinitif: "surseoir", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["sursOIe", "sursOIes", "sursOIe", "sursOYions", "sursOYiez", "sursOIent"] {
+      T.testConjugation(infinitif: "surseoir", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["surSisse", "surSisses", "surSît", "surSissions", "surSissiez", "surSissent"] {
+      T.testConjugation(infinitif: "surseoir", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "surseoir", tense: .participePassé, expected: "surSIS")
+    T.testConjugation(infinitif: "surseoir", tense: .participePrésent, expected: "sursOYant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["sursOIs", "sursOYons", "sursOYez"] {
+      T.testConjugation(infinitif: "surseoir", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
       impératifPersonNumbersIndex += 1
       impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
     }
