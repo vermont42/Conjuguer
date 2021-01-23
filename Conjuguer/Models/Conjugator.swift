@@ -61,8 +61,8 @@ struct Conjugator {
       if let participePrésentStem = model.participePrésentStem {
         stems.append(participePrésentStem)
       } else {
-        if let nousPrésentConjugation = nousPrésentConjugation(infinitif: infinitif) {
-          stems.append(nousPrésentConjugation)
+        if let nousPrésentStem = nousPrésentStem(infinitif: infinitif) {
+          stems.append(nousPrésentStem)
         } else {
           return .failure(.noNousPrésent(infinitif))
         }
@@ -72,8 +72,11 @@ struct Conjugator {
       if let imparfaitStem = model.imparfaitStem {
         stems.append(imparfaitStem)
       } else {
-        if let nousPrésentConjugation = nousPrésentConjugation(infinitif: infinitif) {
-          stems.append(nousPrésentConjugation)
+        if let nousPrésentConjugation = nousPrésentStem(infinitif: infinitif) {
+          let alternatives = nousPrésentConjugation.components(separatedBy: Tense.alternateConjugationSeparator)
+          alternatives.forEach {
+            stems.append($0)
+          }
         } else {
           return .failure(.noNousPrésent(infinitif))
         }
@@ -258,12 +261,17 @@ struct Conjugator {
     }
   }
 
-  static func nousPrésentConjugation(infinitif: String) -> String? {
+  static func nousPrésentStem(infinitif: String) -> String? {
     let nousPrésentConjugationResult = Conjugator.conjugate(infinitif: infinitif, tense: .indicatifPrésent(.firstPlural))
     switch nousPrésentConjugationResult {
     case .success(let value):
-      let index = value.index(value.endIndex, offsetBy: -1 * Tense.onsLength)
-      return String(value[..<index])
+      let ons = IndicatifPrésentGroup.s.présentEndingForPersonNumber(.firstPlural)
+      if value.contains(Tense.alternateConjugationSeparator) {
+        return value.replacingOccurrences(of: ons, with: "")
+      } else {
+        let index = value.index(value.endIndex, offsetBy: -1 * ons.count)
+        return String(value[..<index])
+      }
     default:
       return nil
     }

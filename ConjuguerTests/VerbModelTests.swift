@@ -189,6 +189,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testAsseoir() {
+    // ID: 4-9AB
+    var personNumbersIndex = 0
+
+    for conjugation in ["assIEDs/assOIs", "assIEDs/assOIs", "assIED/assOIt", "asseYons/assOYons", "asseYez/assOYez", "asseYent/assOIent"] {
+      T.testConjugation(infinitif: "asseoir", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["asseYais/assOYais", "asseYais/assOYais", "asseYait/assOYait", "asseYions/assOYions", "asseYiez/assOYiez", "asseYaient/assOYaient"] {
+      T.testConjugation(infinitif: "asseoir", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["assIÉrai/asSoirai", "assIÉras/asSoiras", "assIÉra/asSoira", "assIÉrons/asSoirons", "assIÉrez/asSoirez", "assIÉront/asSoiront"] {
+      T.testConjugation(infinitif: "asseoir", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["assIÉrais/asSoirais", "assIÉrais/asSoirais", "assIÉrait/asSoirait", "assIÉrions/asSoirions", "assIÉriez/asSoiriez", "assIÉraient/asSoiraient"] {
+      T.testConjugation(infinitif: "asseoir", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["asSis", "asSis", "asSit", "asSîmes", "asSîtes", "asSirent"] {
+      T.testConjugation(infinitif: "asseoir", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["asseYe/assOIe", "asseYes/assOIes", "asseYe/assOIe", "asseYions/assOIions", "asseYiez/assOIiez", "asseYent/assOIent"] {
+      T.testConjugation(infinitif: "asseoir", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["asSisse", "asSisses", "asSît", "asSissions", "asSissiez", "asSissent"] {
+      T.testConjugation(infinitif: "asseoir", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "asseoir", tense: .participePassé, expected: "asSIS")
+    T.testConjugation(infinitif: "asseoir", tense: .participePrésent, expected: "asseY/assOYant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["assIEDs/assOIs", "asseYons/assOYons", "asseYez/assOYez"] {
+      T.testConjugation(infinitif: "asseoir", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testAvoir() {
     // ID: 8
     var personNumbersIndex = 0
@@ -1307,13 +1365,13 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["paIerai/payerai", "paIeras/payeras", "paIera/payera", "paIerons/payerons", "paIerez/payerez", "paIeront/payeront"] {
+    for conjugation in ["payerai/paIerai", "payeras/paIeras", "payera/paIera", "payerons/paIerons", "payerez/paIerez", "payeront/paIeront"] {
       T.testConjugation(infinitif: "payer", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["paIerais/payerais", "paIerais/payerais", "paIerait/payerait", "paIerions/payerions", "paIeriez/payeriez", "paIeraient/payeraient"] {
+    for conjugation in ["payerais/paIerais", "payerais/paIerais", "payerait/paIerait", "payerions/paIerions", "payeriez/paIeriez", "payeraient/paIeraient"] {
       T.testConjugation(infinitif: "payer", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count

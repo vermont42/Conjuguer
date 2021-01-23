@@ -30,7 +30,6 @@ enum Tense: Hashable {
   case subjonctifPlusQueParfait(_ personNumber: PersonNumber)
   case impératifPassé(_ personNumber: PersonNumber)
 
-  static let onsLength = 3
   static let participePrésentEnding = "ant"
   static let alternateConjugationSeparator = "/"
   static let irregularEndingIndicator = "*"
