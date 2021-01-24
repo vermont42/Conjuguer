@@ -1987,6 +1987,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testRendre() {
+    // ID: 5-1A
+    var personNumbersIndex = 0
+
+    for conjugation in ["rends", "rends", "renD", "rendons", "rendez", "rendent"] {
+      T.testConjugation(infinitif: "rendre", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["rendais", "rendais", "rendait", "rendions", "rendiez", "rendaient"] {
+      T.testConjugation(infinitif: "rendre", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["rendreai", "rendreas", "rendrea", "rendreons", "rendreez", "rendreont"] {
+      T.testConjugation(infinitif: "rendre", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["rendreais", "rendreais", "rendreait", "rendreions", "rendreiez", "rendreaient"] {
+      T.testConjugation(infinitif: "rendre", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["rendis", "rendis", "rendit", "rendîmes", "rendîtes", "rendirent"] {
+      T.testConjugation(infinitif: "rendre", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["rende", "rendes", "rende", "rendions", "rendiez", "rendent"] {
+      T.testConjugation(infinitif: "rendre", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["rendisse", "rendisses", "rendît", "rendissions", "rendissiez", "rendissent"] {
+      T.testConjugation(infinitif: "rendre", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "rendre", tense: .participePassé, expected: "rendu")
+    T.testConjugation(infinitif: "rendre", tense: .participePrésent, expected: "rendant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["rends", "rendons", "rendez"] {
+      T.testConjugation(infinitif: "rendre", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testSavoir() {
     // ID: 4-7
     var personNumbersIndex = 0

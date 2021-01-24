@@ -54,6 +54,7 @@
   <model mo="vouloir" id="4-8" ep="U" si="s" se="u" bb="e" p="3,3,EUX*,r1s,r2s|3,3,EU,r3s|3,2,EU,r3p|4,3,D,sf|3,2,EUIL,b1s,b2s,b3s,b3p|3,3,EUILLE*,A,h2s|3,2,EUIL,A,h2p" />
   <model mo="asseoir" id="4-9AB" ep="IS" si="s" se="i" bb="e" p="1,1,IED,r1s,r2s|1,1,IED*,r3s|0,1,Y,r1p,r2p,r3p,bA|4,3,IÉ,sf|2,2,S,xA,pp|1,1,OI,A,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|1,1,OY,A,r1p,r2p,b1p,b2p|5,2,S,A,sf" />
   <model mo="surseoir" id="4-9C" ep="IS" si="s" se="i" bb="e" p="2,2,S,xA,pp|1,1,OI,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|1,1,OY,r1p,r2p,b1p,b2p" />
+  <model mo="rendre" id="5-1A" ep="u" si="s" se="i" bb="e" p="1,1,D*,r3s" />
   <model mo="être" id="7" pa="1-1" ps="Ét" rr="Ét" ff="SEr" se="b" uf="FU" ep="É" ii="Ét" cr="r1s,SUIS,r2s,Es,r3s,EST,r1p,SOMMEs,r2p,êteS,r3p,SOnt,b1s,SOIS,b2s,SOIs,b3s,SOIT,b1p,SOYons,b2p,SOYez,b3p,SOIent,m2s,SOIs,m1p,SOYons,m2p,SOYez" bb="e" />
   <model mo="avoir" id="8" ep="U" si="s" se="u" bb="e"  p="1,1,I*,r1s|2,2,A,r2s|2,2,A*,r3s|2,2,Ont*,r3p|4,3,U,sf|2,2,E,xA|1,1,IT*,b3s|1,1,I,b1s,b2s,b3p|1,1,Yons*,b1p|1,1,Yez*,b2p|2,2,E,pp|1,1,Y,rr" cr="m2s,aIE,m1p,aYons,m2p,aYez" />
   <model mo="aller" id="9" pa="1-1" ff="IR" cr="r1s,VAIS,r2s,VAs,r3s,VA,r3p,VOnt,b1p,aLlions,b2p,aLliez,m2s,VA" sb="aIll" bb="e" />

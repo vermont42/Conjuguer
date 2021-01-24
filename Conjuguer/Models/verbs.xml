@@ -20,6 +20,7 @@
   <verb in="appeler" tn="call" mo="1-3A" />
   <verb in="arriver" tn="arrive" ay="e" mo="1-1" />
   <verb in="assaillir" tn="assail" mo="3-2A" />
+  <verb in="asseoir" tn="sit" mo="4-9AB" />
   <verb in="avoir" tn="have" mo="8" />
   <verb in="bouillir" tn="boil" mo="3-2C" />
   <verb in="bruire" tn="rustle, murmur" mo="2-2" />
@@ -47,11 +48,13 @@
   <verb in="lancer" tn="throw" mo="1-2A" />
   <verb in="manger" tn="eat" mo="1-2B" />
   <verb in="maudire" tn="curse" mo="2-2" />
+  <verb in="mordre" tn="bite" mo="5-1A" />
   <verb in="mouvoir" tn="move" mo="4-3A" />
   <verb in="offrir" tn="offer" mo="3-1" />
   <verb in="ouvrir" tn="open" mo="3-1" />
   <verb in="parler" tn="speak" mo="1-1" />
   <verb in="payer" tn="pay" mo="1-7B" />
+  <verb in="perdre" tn="lose" mo="5-1A" />
   <verb in="peser" tn="weight" mo="1-4" />
   <verb in="pleuvoir" tn="rain" mo="4-4" />
   <verb in="pourvoir" tn="supply, provide" mo="4-1C" />
@@ -65,6 +68,9 @@
   <verb in="recevoir" tn="receive" mo="4-2B" />
   <verb in="recueillir" tn="collect" mo="3-2B" />
   <verb in="redevoir" tn="owe again" mo="4-2A" />
+  <verb in="rendre" tn="render" mo="5-1A" />
+  <verb in="répandre" tn="spread, scatter" mo="5-1A" />
+  <verb in="répondre" tn="answer, respond" mo="5-1A" />
   <verb in="revoir" tn="see again" mo="4-1A" />
   <verb in="revouloir" tn="want again/back" mo="4-8" />
   <verb in="saillir" tn="protrude" mo="3-2A" />
@@ -72,11 +78,10 @@
   <verb in="souffrir" tn="souffrir" mo="3-1" />
   <verb in="submerger" tn="overwhelm, submerge" mo="1-2B" />
   <verb in="surmener" tn="overwork" mo="1-4" />
+  <verb in="surseoir" tn="postpone" mo="4-9C" />
   <verb in="tressaillir" tn="wince" mo="3-2A" />
   <verb in="valoir" tn="be worth" mo="4-5A" />
   <verb in="voir" tn="see" mo="4-1A" />
   <verb in="voleter" tn="flutter" mo="1-3B" />
   <verb in="vouloir" tn="want" mo="4-8" />
-  <verb in="asseoir" tn="sit" mo="4-9AB" />
-  <verb in="surseoir" tn="postpone" mo="4-9C" />
 </verbs>
