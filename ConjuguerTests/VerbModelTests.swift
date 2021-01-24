@@ -305,6 +305,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testBattre() {
+    // ID: 5-3
+    var personNumbersIndex = 0
+
+    for conjugation in ["baTs", "baTs", "baT", "battons", "battez", "battent"] {
+      T.testConjugation(infinitif: "battre", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["battais", "battais", "battait", "battions", "battiez", "battaient"] {
+      T.testConjugation(infinitif: "battre", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["battrai", "battras", "battra", "battrons", "battrez", "battront"] {
+      T.testConjugation(infinitif: "battre", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["battrais", "battrais", "battrait", "battrions", "battriez", "battraient"] {
+      T.testConjugation(infinitif: "battre", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["battis", "battis", "battit", "battîmes", "battîtes", "battirent"] {
+      T.testConjugation(infinitif: "battre", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["batte", "battes", "batte", "battions", "battiez", "battent"] {
+      T.testConjugation(infinitif: "battre", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["battisse", "battisses", "battît", "battissions", "battissiez", "battissent"] {
+      T.testConjugation(infinitif: "battre", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "battre", tense: .participePassé, expected: "battu")
+    T.testConjugation(infinitif: "battre", tense: .participePrésent, expected: "battant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["baTs", "battons", "battez"] {
+      T.testConjugation(infinitif: "battre", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testBouillir() {
     // ID: 3-2C
     var personNumbersIndex = 0
