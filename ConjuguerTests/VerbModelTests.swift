@@ -2003,13 +2003,13 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["rendreai", "rendreas", "rendrea", "rendreons", "rendreez", "rendreont"] {
+    for conjugation in ["rendrai", "rendras", "rendra", "rendrons", "rendrez", "rendront"] {
       T.testConjugation(infinitif: "rendre", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["rendreais", "rendreais", "rendreait", "rendreions", "rendreiez", "rendreaient"] {
+    for conjugation in ["rendrais", "rendrais", "rendrait", "rendrions", "rendriez", "rendraient"] {
       T.testConjugation(infinitif: "rendre", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -2040,6 +2040,64 @@ class VerbModelTests: XCTestCase {
 
     for conjugation in ["rends", "rendons", "rendez"] {
       T.testConjugation(infinitif: "rendre", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
+  func testRompre() {
+    // ID: 5-1B
+    var personNumbersIndex = 0
+
+    for conjugation in ["romps", "romps", "rompT", "rompons", "rompez", "rompent"] {
+      T.testConjugation(infinitif: "rompre", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["rompais", "rompais", "rompait", "rompions", "rompiez", "rompaient"] {
+      T.testConjugation(infinitif: "rompre", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["romprai", "rompras", "rompra", "romprons", "romprez", "rompront"] {
+      T.testConjugation(infinitif: "rompre", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["romprais", "romprais", "romprait", "romprions", "rompriez", "rompraient"] {
+      T.testConjugation(infinitif: "rompre", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["rompis", "rompis", "rompit", "rompîmes", "rompîtes", "rompirent"] {
+      T.testConjugation(infinitif: "rompre", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["rompe", "rompes", "rompe", "rompions", "rompiez", "rompent"] {
+      T.testConjugation(infinitif: "rompre", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["rompisse", "rompisses", "rompît", "rompissions", "rompissiez", "rompissent"] {
+      T.testConjugation(infinitif: "rompre", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "rompre", tense: .participePassé, expected: "rompu")
+    T.testConjugation(infinitif: "rompre", tense: .participePrésent, expected: "rompant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["romps", "rompons", "rompez"] {
+      T.testConjugation(infinitif: "rompre", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
       impératifPersonNumbersIndex += 1
       impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
     }

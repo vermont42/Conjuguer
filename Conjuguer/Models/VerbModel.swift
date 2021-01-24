@@ -122,19 +122,21 @@ struct VerbModel {
       recursiveStemAlterations += stemAlterations
     }
 
-    if !recursiveStemAlterations.isEmpty {
-      for alteration in recursiveStemAlterations {
-        if alteration.appliesTo.contains(.radicalFutur) {
-          if alteration.isAdditive {
-            stems.append(infinitif)
-            stems[1].modifyStem(alteration: alteration)
-          } else {
-            stems[0].modifyStem(alteration: alteration)
-          }
+    for alteration in recursiveStemAlterations {
+      if alteration.appliesTo.contains(.radicalFutur) {
+        if alteration.isAdditive {
+          stems.append(infinitif)
+          stems[1].modifyStem(alteration: alteration)
+        } else {
+          stems[0].modifyStem(alteration: alteration)
         }
       }
-    } else if stems[0].last == "e" {
-      stems[0] = String(stems[0].dropLast())
+    }
+
+    stems.forEach {
+      if $0.last == "e" {
+        stems[0] = String(stems[0].dropLast())
+      }
     }
 
     return stems
