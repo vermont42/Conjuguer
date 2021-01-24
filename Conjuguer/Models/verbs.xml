@@ -18,6 +18,7 @@
   <verb in="aller" tn="go" ay="e" mo="9" />
   <verb in="amorcer" tn="start, prime, bait" mo="1-2A" />
   <verb in="appeler" tn="call" mo="1-3A" />
+  <verb in="apprendre" tn="learn" mo="5-2" />
   <verb in="arriver" tn="arrive" ay="e" mo="1-1" />
   <verb in="assaillir" tn="assail" mo="3-2A" />
   <verb in="asseoir" tn="sit" mo="4-9AB" />
@@ -59,6 +60,7 @@
   <verb in="pleuvoir" tn="rain" mo="4-4" />
   <verb in="pourvoir" tn="supply, provide" mo="4-1C" />
   <verb in="pouvoir" tn="be able" mo="4-6" />
+  <verb in="prendre" tn="take" mo="5-2" />
   <verb in="prévoir" tn="foresee" mo="4-1B" />
   <verb in="prévaloir" tn="prevail" mo="4-5B" />
   <verb in="prier" tn="request, pray" mo="1-1" />

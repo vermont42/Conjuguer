@@ -1639,6 +1639,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testPrendre() {
+    // ID: 5-2
+    var personNumbersIndex = 0
+
+    for conjugation in ["prends", "prends", "prenD", "preNons", "preNez", "prenNent"] {
+      T.testConjugation(infinitif: "prendre", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["preNais", "preNais", "preNait", "preNions", "preNiez", "preNaient"] {
+      T.testConjugation(infinitif: "prendre", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["prendrai", "prendras", "prendra", "prendrons", "prendrez", "prendront"] {
+      T.testConjugation(infinitif: "prendre", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["prendrais", "prendrais", "prendrait", "prendrions", "prendriez", "prendraient"] {
+      T.testConjugation(infinitif: "prendre", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["pris", "pris", "prit", "prîmes", "prîtes", "prirent"] {
+      T.testConjugation(infinitif: "prendre", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["prenNe", "prenNes", "prenNe", "preNions", "preNiez", "prenNent"] {
+      T.testConjugation(infinitif: "prendre", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["prisse", "prisses", "prît", "prissions", "prissiez", "prissent"] {
+      T.testConjugation(infinitif: "prendre", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "prendre", tense: .participePassé, expected: "prIS")
+    T.testConjugation(infinitif: "prendre", tense: .participePrésent, expected: "preNant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["prends", "preNons", "preNez"] {
+      T.testConjugation(infinitif: "prendre", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testPrévaloir() {
     // ID: 4-5B
     var personNumbersIndex = 0
