@@ -1291,6 +1291,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testMettre() {
+    // ID: 5-4
+    var personNumbersIndex = 0
+
+    for conjugation in ["meTs", "meTs", "meT", "mettons", "mettez", "mettent"] {
+      T.testConjugation(infinitif: "mettre", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["mettais", "mettais", "mettait", "mettions", "mettiez", "mettaient"] {
+      T.testConjugation(infinitif: "mettre", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["mettrai", "mettras", "mettra", "mettrons", "mettrez", "mettront"] {
+      T.testConjugation(infinitif: "mettre", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["mettrais", "mettrais", "mettrait", "mettrions", "mettriez", "mettraient"] {
+      T.testConjugation(infinitif: "mettre", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["mis", "mis", "mit", "mîmes", "mîtes", "mirent"] {
+      T.testConjugation(infinitif: "mettre", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["mette", "mettes", "mette", "mettions", "mettiez", "mettent"] {
+      T.testConjugation(infinitif: "mettre", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["misse", "misses", "mît", "missions", "missiez", "missent"] {
+      T.testConjugation(infinitif: "mettre", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "mettre", tense: .participePassé, expected: "mIS")
+    T.testConjugation(infinitif: "mettre", tense: .participePrésent, expected: "mettant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["meTs", "mettons", "mettez"] {
+      T.testConjugation(infinitif: "mettre", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testMouvoir() {
     // ID: 4-3A
     var personNumbersIndex = 0

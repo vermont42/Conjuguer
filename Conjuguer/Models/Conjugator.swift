@@ -215,7 +215,13 @@ struct Conjugator {
     case .conditionnelPrésent(let personNumber):
       return .success(composedConjugation(stems: stems, ending: ConditionnelPrésent.endingForPersonNumber(personNumber)))
     case .participePassé:
-      return .success(stems[0] + model.participeEndingRecursive)
+      let result: String
+      if String(stems[0].last ?? Character("")) == Tense.irregularEndingIndicator {
+        result = String(stems[0].dropLast())
+      } else {
+        result = stems[0] + model.participeEndingRecursive
+      }
+      return .success(result)
     case .participePrésent:
       return .success(stems[0] + Tense.participePrésentEnding)
     case .radicalFutur:

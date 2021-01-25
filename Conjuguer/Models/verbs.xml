@@ -51,6 +51,7 @@
   <verb in="lancer" tn="throw" mo="1-2A" />
   <verb in="manger" tn="eat" mo="1-2B" />
   <verb in="maudire" tn="curse" mo="2-2" />
+  <verb in="mettre" tn="put" mo="5-4" />
   <verb in="mordre" tn="bite" mo="5-1A" />
   <verb in="mouvoir" tn="move" mo="4-3A" />
   <verb in="offrir" tn="offer" mo="3-1" />
