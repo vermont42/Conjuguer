@@ -18,9 +18,7 @@ struct Verb {
 
   var infinitifStem: String {
     let endingLength: Int
-    if infinitif.hasSuffix("ire") {
-      endingLength = 3
-    } else if infinitif.hasSuffix("oir") {
+    if infinitif.hasSuffix("oir") {
       endingLength = 3
     } else {
       endingLength = 2

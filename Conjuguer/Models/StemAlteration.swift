@@ -61,6 +61,10 @@ struct StemAlteration {
         set.insert(.indicatifPrésent(.secondPlural))
       case "r3p":
         set.insert(.indicatifPrésent(.thirdPlural))
+      case "rA":
+        PersonNumber.allCases.forEach {
+          set.insert(.indicatifPrésent($0))
+        }
 
       case "b1s":
         set.insert(.subjonctifPrésent(.firstSingular))
