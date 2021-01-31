@@ -27,6 +27,7 @@
   <verb in="bouillir" tn="boil" mo="3-2C" />
   <verb in="bruire" tn="rustle, murmur" mo="2-2" />
   <verb in="céder" tn="cede" mo="1-5" />
+  <verb in="circoncire" tn="circumcize" mo="5-8D" />
   <verb in="clamecer" tn="kick the bucket" mo="1-6A" />
   <verb in="colorer" tn="color" mo="1-1" />
   <verb in="combattre" tn="fight, oppose" mo="5-3" />
@@ -65,6 +66,7 @@
   <verb in="pleuvoir" tn="rain" mo="4-4" />
   <verb in="pourvoir" tn="supply, provide" mo="4-1C" />
   <verb in="pouvoir" tn="be able" mo="4-6" />
+  <verb in="prédire" tn="predict" mo="5-8B" />
   <verb in="prendre" tn="take" mo="5-2" />
   <verb in="prévoir" tn="foresee" mo="4-1B" />
   <verb in="prévaloir" tn="prevail" mo="4-5B" />
@@ -85,6 +87,7 @@
   <verb in="savoir" tn="know" mo="4-7" />
   <verb in="souffrir" tn="souffrir" mo="3-1" />
   <verb in="submerger" tn="overwhelm, submerge" mo="1-2B" />
+  <verb in="suffire" tn="suffice" mo="5-8C" />
   <verb in="suivre" tn="follow" mo="5-5" />
   <verb in="surmener" tn="overwork" mo="1-4" />
   <verb in="surseoir" tn="postpone" mo="4-9C" />

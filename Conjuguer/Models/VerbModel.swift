@@ -43,7 +43,7 @@ struct VerbModel {
       let parentId = parentId,
       let parentStemAlterations = VerbModel.model(id: parentId).stemAlterationsRecursive
     {
-      allStemAlterations += parentStemAlterations
+      allStemAlterations += parentStemAlterations.filter { $0.isInherited }
     }
     if let localStemAlterations = stemAlterations {
       allStemAlterations += localStemAlterations
@@ -115,7 +115,7 @@ struct VerbModel {
       let parentId = parentId,
       let parentStemAlterations = VerbModel.models[parentId]?.stemAlterations
     {
-      recursiveStemAlterations = parentStemAlterations
+      recursiveStemAlterations = parentStemAlterations.filter { $0.isInherited }
     }
 
     if let stemAlterations = stemAlterations {

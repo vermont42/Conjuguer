@@ -13,6 +13,7 @@ struct StemAlteration {
   let charsToUse: String
   let appliesTo: Set<Tense>
   let isAdditive: Bool // example: tu payes/paies
+  let isInherited: Bool // example: vous dîtes/prédisez
 
   init(xmlString: String) {
     let components = xmlString.components(separatedBy: VerbModelParser.xmlSeparator)
@@ -35,12 +36,16 @@ struct StemAlteration {
 
     var set: Set<Tense> = Set()
     var isAdditiveAlteration = false
+    var isInheritedAlteration = true
 
     for index in VerbModelParser.startIndexOfAlterationsInXml ..< components.count {
       let alteration = components[index]
       switch alteration {
       case "A":
         isAdditiveAlteration = true
+
+      case "N":
+        isInheritedAlteration = false
 
       case "pp":
         set.insert(.participePassé)
@@ -139,6 +144,7 @@ struct StemAlteration {
 
     appliesTo = set
     isAdditive = isAdditiveAlteration
+    isInherited = isInheritedAlteration
   }
 
   static func alterationsFor(xmlString: String) -> [StemAlteration] {
