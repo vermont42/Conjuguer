@@ -31,6 +31,7 @@
   <verb in="clamecer" tn="kick the bucket" mo="1-6A" />
   <verb in="colorer" tn="color" mo="1-1" />
   <verb in="combattre" tn="fight, oppose" mo="5-3" />
+  <verb in="conduire" tn="drive, conduct" mo="5-9A" />
   <verb in="couvrir" tn="cover" mo="3-1" />
   <verb in="cueillir" tn="gather" mo="3-2B" />
   <verb in="défaillir" tn="faint" mo="3-2A" />
@@ -38,6 +39,7 @@
   <verb in="devoir" tn="must, owe" mo="4-2A" />
   <verb in="dire" tn="say, tell" mo="5-8A" />
   <verb in="écrire" tn="write" mo="5-7" />
+  <verb in="élire" tn="elect" mo="5-10" />
   <verb in="émouvoir" tn="move emotionally" mo="4-3B" />
   <verb in="employer" tn="use, employ" mo="1-7A" />
   <verb in="entrapercevoir" tn="glimpse" mo="4-2B" />
@@ -52,11 +54,13 @@
   <verb in="haïr" tn="hate" mo="2-3" />
   <verb in="jeter" tn="throw" mo="1-3B" />
   <verb in="lancer" tn="throw" mo="1-2A" />
+  <verb in="lire" tn="read" mo="5-10" />
   <verb in="manger" tn="eat" mo="1-2B" />
   <verb in="maudire" tn="curse" mo="2-2" />
   <verb in="mettre" tn="put" mo="5-4" />
   <verb in="mordre" tn="bite" mo="5-1A" />
   <verb in="mouvoir" tn="move" mo="4-3A" />
+  <verb in="nuire" tn="harm" mo="5-9B" />
   <verb in="offrir" tn="offer" mo="3-1" />
   <verb in="ouvrir" tn="open" mo="3-1" />
   <verb in="parler" tn="speak" mo="1-1" />
@@ -82,10 +86,12 @@
   <verb in="répondre" tn="answer, respond" mo="5-1A" />
   <verb in="revoir" tn="see again" mo="4-1A" />
   <verb in="revouloir" tn="want again/back" mo="4-8" />
+  <verb in="rire" tn="laugh" mo="5-11" />
   <verb in="rompre" tn="break" mo="5-1B" />
   <verb in="saillir" tn="protrude" mo="3-2A" />
   <verb in="savoir" tn="know" mo="4-7" />
   <verb in="souffrir" tn="souffrir" mo="3-1" />
+  <verb in="sourire" tn="smile" mo="5-11" />
   <verb in="submerger" tn="overwhelm, submerge" mo="1-2B" />
   <verb in="suffire" tn="suffice" mo="5-8C" />
   <verb in="suivre" tn="follow" mo="5-5" />
