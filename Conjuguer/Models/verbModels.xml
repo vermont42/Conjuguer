@@ -70,6 +70,7 @@
   <model mo="nuire" id="5-9B" pa="5-9A" ep="I" p="1,1,,pp" />
   <model mo="lire" id="5-10" ep="u" si="s" se="u" bb="e" p="0,1,S,r1p,r2p,r3p,bA|2,2,L,xA,pp" />
   <model mo="rire" id="5-11" ep="" si="s" se="b" bb="e" p="1,1,I,pp" />
+  <model mo="plaindre" id="5-12" ep="T" si="s" se="i" bb="e" p="2,2,N,r1s,r2s,r3s,pp|2,2,GN,r1p,r2p,r3p,xA,bA" />
   <model mo="être" id="7" pa="1-1" ps="Ét" rr="Ét" ff="SEr" se="b" uf="FU" ep="É" ii="Ét" cr="r1s,SUIS,r2s,Es,r3s,EST,r1p,SOMMEs,r2p,êteS,r3p,SOnt,b1s,SOIS,b2s,SOIs,b3s,SOIT,b1p,SOYons,b2p,SOYez,b3p,SOIent,m2s,SOIs,m1p,SOYons,m2p,SOYez" bb="e" />
   <model mo="avoir" id="8" ep="U" si="s" se="u" bb="e"  p="1,1,I*,r1s|2,2,A,r2s|2,2,A*,r3s|2,2,Ont*,r3p|4,3,U,sf|2,2,E,xA|1,1,IT*,b3s|1,1,I,b1s,b2s,b3p|1,1,Yons*,b1p|1,1,Yez*,b2p|2,2,E,pp|1,1,Y,rr" cr="m2s,aIE,m1p,aYons,m2p,aYez" />
   <model mo="aller" id="9" pa="1-1" ff="IR" cr="r1s,VAIS,r2s,VAs,r3s,VA,r3p,VOnt,b1p,aLlions,b2p,aLliez,m2s,VA" sb="aIll" bb="e" />

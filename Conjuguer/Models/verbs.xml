@@ -53,6 +53,7 @@
   <verb in="finir" tn="finish" mo="2-1" />
   <verb in="haïr" tn="hate" mo="2-3" />
   <verb in="jeter" tn="throw" mo="1-3B" />
+  <verb in="joindre" tn="join" mo="5-12" />
   <verb in="lancer" tn="throw" mo="1-2A" />
   <verb in="lire" tn="read" mo="5-10" />
   <verb in="manger" tn="eat" mo="1-2B" />
@@ -65,8 +66,10 @@
   <verb in="ouvrir" tn="open" mo="3-1" />
   <verb in="parler" tn="speak" mo="1-1" />
   <verb in="payer" tn="pay" mo="1-7B" />
+  <verb in="peindre" tn="paint" mo="5-12" />
   <verb in="perdre" tn="lose" mo="5-1A" />
   <verb in="peser" tn="weight" mo="1-4" />
+  <verb in="plaindre" tn="pity" mo="5-12" />
   <verb in="pleuvoir" tn="rain" mo="4-4" />
   <verb in="pourvoir" tn="supply, provide" mo="4-1C" />
   <verb in="pouvoir" tn="be able" mo="4-6" />

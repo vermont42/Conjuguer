@@ -1929,6 +1929,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testPlaindre() {
+    // ID: 5-12
+    var personNumbersIndex = 0
+
+    for conjugation in ["plaiNs", "plaiNs", "plaiNt", "plaiGNons", "plaiGNez", "plaiGNent"] {
+      T.testConjugation(infinitif: "plaindre", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["plaiGNais", "plaiGNais", "plaiGNait", "plaiGNions", "plaiGNiez", "plaiGNaient"] {
+      T.testConjugation(infinitif: "plaindre", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["plaindrai", "plaindras", "plaindra", "plaindrons", "plaindrez", "plaindront"] {
+      T.testConjugation(infinitif: "plaindre", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["plaindrais", "plaindrais", "plaindrait", "plaindrions", "plaindriez", "plaindraient"] {
+      T.testConjugation(infinitif: "plaindre", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["plaiGNis", "plaiGNis", "plaiGNit", "plaiGNîmes", "plaiGNîtes", "plaiGNirent"] {
+      T.testConjugation(infinitif: "plaindre", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["plaiGNe", "plaiGNes", "plaiGNe", "plaiGNions", "plaiGNiez", "plaiGNent"] {
+      T.testConjugation(infinitif: "plaindre", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["plaiGNisse", "plaiGNisses", "plaiGNît", "plaiGNissions", "plaiGNissiez", "plaiGNissent"] {
+      T.testConjugation(infinitif: "plaindre", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "plaindre", tense: .participePassé, expected: "plaiNT")
+    T.testConjugation(infinitif: "plaindre", tense: .participePrésent, expected: "plaiGNant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["plaiNs", "plaiGNons", "plaiGNez"] {
+      T.testConjugation(infinitif: "plaindre", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testPleuvoir() {
     // ID: 4-4
     var personNumbersIndex = 0
