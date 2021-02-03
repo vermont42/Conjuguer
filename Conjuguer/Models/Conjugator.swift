@@ -43,12 +43,10 @@ struct Conjugator {
       stems.append(verb.infinitifStem)
       if let stemAlterations = model.stemAlterationsRecursive {
         for alteration in stemAlterations {
-          if alteration.appliesTo.contains(.indicatifPrésent(personNumber)) {
-            if alteration.isAdditive {
-              stems.append(stems[0])
-              stems[1].modifyStem(alteration: alteration)
-              break
-            }
+          if alteration.appliesTo.contains(.indicatifPrésent(personNumber)) && alteration.isAdditive {
+            stems.append(stems[0])
+            stems[1].modifyStem(alteration: alteration)
+            break
           }
         }
       }
@@ -56,6 +54,20 @@ struct Conjugator {
     case .participePassé,
          .passéComposé, .plusQueParfait, .passéAntérieur, .passéSurcomposé, .futurAntérieur, .conditionnelPassé, .subjonctifPassé, .subjonctifPlusQueParfait:
       stems.append(model.participePasséStem(verb: verb))
+      if let stemAlterations = model.stemAlterationsRecursive {
+        for alteration in stemAlterations {
+          if alteration.appliesTo.contains(.participePassé) && alteration.isAdditive {
+            stems.append(stems[0])
+            stems[1].modifyStem(alteration: alteration)
+            if String(stems[1].last ?? Character("")) == Tense.irregularEndingIndicator {
+              stems[1] = String(stems[1].dropLast())
+            } else {
+              stems[1] = stems[1] + model.participeEndingRecursive
+            }
+            break
+          }
+        }
+      }
 
     case .participePrésent:
       if let participePrésentStem = model.participePrésentStem {
@@ -122,12 +134,10 @@ struct Conjugator {
             subjonctifPersonNumber = .firstPlural
           }
           for alteration in stemAlterations {
-            if alteration.appliesTo.contains(.subjonctifPrésent(subjonctifPersonNumber)) {
-              if alteration.isAdditive {
-                stems.append(stems[0])
-                stems[1].modifyStem(alteration: alteration)
-                break
-              }
+            if alteration.appliesTo.contains(.subjonctifPrésent(subjonctifPersonNumber)) && alteration.isAdditive {
+              stems.append(stems[0])
+              stems[1].modifyStem(alteration: alteration)
+              break
             }
           }
         }
@@ -151,19 +161,15 @@ struct Conjugator {
         isConjugatingImpératif = true
         if let stemAlterations = model.stemAlterationsRecursive {
           for alteration in stemAlterations {
-            if alteration.appliesTo.contains(.indicatifPrésent(personNumber)) {
-              if alteration.isAdditive {
-                stems.append(stems[0])
-                stems[1].modifyStem(alteration: alteration)
-                break
-              }
+            if alteration.appliesTo.contains(.indicatifPrésent(personNumber)) && alteration.isAdditive {
+              stems.append(stems[0])
+              stems[1].modifyStem(alteration: alteration)
+              break
             }
-            if alteration.appliesTo.contains(.impératif(personNumber)) {
-              if alteration.isAdditive {
-                stems.append(stems[0])
-                stems[1].modifyStem(alteration: alteration)
-                break
-              }
+            if alteration.appliesTo.contains(.impératif(personNumber)) && alteration.isAdditive {
+              stems.append(stems[0])
+              stems[1].modifyStem(alteration: alteration)
+              break
             }
           }
         }
@@ -215,13 +221,12 @@ struct Conjugator {
     case .conditionnelPrésent(let personNumber):
       return .success(composedConjugation(stems: stems, ending: ConditionnelPrésent.endingForPersonNumber(personNumber)))
     case .participePassé:
-      let result: String
       if String(stems[0].last ?? Character("")) == Tense.irregularEndingIndicator {
-        result = String(stems[0].dropLast())
+        stems[0] = String(stems[0].dropLast())
       } else {
-        result = stems[0] + model.participeEndingRecursive
+        stems[0] = stems[0] + model.participeEndingRecursive
       }
-      return .success(result)
+      return .success(composedConjugation(stems: stems, ending: ""))
     case .participePrésent:
       return .success(stems[0] + Tense.participePrésentEnding)
     case .radicalFutur:

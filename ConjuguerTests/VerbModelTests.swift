@@ -15,6 +15,64 @@ class GenerateVerbModelTests: XCTestCase {
 }
 
 class VerbModelTests: XCTestCase {
+  func testAbsoudre() {
+    // ID: 5-13A
+    var personNumbersIndex = 0
+
+    for conjugation in ["absoUs", "absoUs", "absoUt", "absoLVons", "absoLVez", "absoLVent"] {
+      T.testConjugation(infinitif: "absoudre", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["absoLVais", "absoLVais", "absoLVait", "absoLVions", "absoLViez", "absoLVaient"] {
+      T.testConjugation(infinitif: "absoudre", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["absoudrai", "absoudras", "absoudra", "absoudrons", "absoudrez", "absoudront"] {
+      T.testConjugation(infinitif: "absoudre", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["absoudrais", "absoudrais", "absoudrait", "absoudrions", "absoudriez", "absoudraient"] {
+      T.testConjugation(infinitif: "absoudre", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["absoLus", "absoLus", "absoLut", "absoLûmes", "absoLûtes", "absoLurent"] {
+      T.testConjugation(infinitif: "absoudre", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["absoLVe", "absoLVes", "absoLVe", "absoLVions", "absoLViez", "absoLVent"] {
+      T.testConjugation(infinitif: "absoudre", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["absoLusse", "absoLusses", "absoLût", "absoLussions", "absoLussiez", "absoLussent"] {
+      T.testConjugation(infinitif: "absoudre", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "absoudre", tense: .participePassé, expected: "absouS")
+    T.testConjugation(infinitif: "absoudre", tense: .participePrésent, expected: "absoLVant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["absoUs", "absoLVons", "absoLVez"] {
+      T.testConjugation(infinitif: "absoudre", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testAller() {
     // ID: 9
     var personNumbersIndex = 0
@@ -2678,6 +2736,64 @@ class VerbModelTests: XCTestCase {
 
     for conjugation in ["rends", "rendons", "rendez"] {
       T.testConjugation(infinitif: "rendre", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
+  func testRésoudre() {
+    // ID: 5-13B
+    var personNumbersIndex = 0
+
+    for conjugation in ["résoUs", "résoUs", "résoUt", "résoLVons", "résoLVez", "résoLVent"] {
+      T.testConjugation(infinitif: "résoudre", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["résoLVais", "résoLVais", "résoLVait", "résoLVions", "résoLViez", "résoLVaient"] {
+      T.testConjugation(infinitif: "résoudre", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["résoudrai", "résoudras", "résoudra", "résoudrons", "résoudrez", "résoudront"] {
+      T.testConjugation(infinitif: "résoudre", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["résoudrais", "résoudrais", "résoudrait", "résoudrions", "résoudriez", "résoudraient"] {
+      T.testConjugation(infinitif: "résoudre", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["résoLus", "résoLus", "résoLut", "résoLûmes", "résoLûtes", "résoLurent"] {
+      T.testConjugation(infinitif: "résoudre", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["résoLVe", "résoLVes", "résoLVe", "résoLVions", "résoLViez", "résoLVent"] {
+      T.testConjugation(infinitif: "résoudre", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["résoLusse", "résoLusses", "résoLût", "résoLussions", "résoLussiez", "résoLussent"] {
+      T.testConjugation(infinitif: "résoudre", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "résoudre", tense: .participePassé, expected: "résouS/résoLu")
+    T.testConjugation(infinitif: "résoudre", tense: .participePrésent, expected: "résoLVant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["résoUs", "résoLVons", "résoLVez"] {
+      T.testConjugation(infinitif: "résoudre", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
       impératifPersonNumbersIndex += 1
       impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
     }

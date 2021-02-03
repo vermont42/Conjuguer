@@ -14,6 +14,7 @@
 <!--ay = auxiliary (e means être) -->
 
 <verbs>
+  <verb in="absoudre" tn="absolve" mo="5-13A" />
   <verb in="accueillir" tn="welcome" mo="3-2B" />
   <verb in="aller" tn="go" ay="e" mo="9" />
   <verb in="amorcer" tn="start, prime, bait" mo="1-2A" />
@@ -38,6 +39,7 @@
   <verb in="dépecer" tn="cut up, tear" mo="1-6A" />
   <verb in="devoir" tn="must, owe" mo="4-2A" />
   <verb in="dire" tn="say, tell" mo="5-8A" />
+  <verb in="dissoudre" tn="dissolve" mo="5-13A" />
   <verb in="écrire" tn="write" mo="5-7" />
   <verb in="élire" tn="elect" mo="5-10" />
   <verb in="émouvoir" tn="move emotionally" mo="4-3B" />
@@ -87,6 +89,7 @@
   <verb in="rendre" tn="render" mo="5-1A" />
   <verb in="répandre" tn="spread, scatter" mo="5-1A" />
   <verb in="répondre" tn="answer, respond" mo="5-1A" />
+  <verb in="résoudre" tn="dissolve" mo="5-13B" />
   <verb in="revoir" tn="see again" mo="4-1A" />
   <verb in="revouloir" tn="want again/back" mo="4-8" />
   <verb in="rire" tn="laugh" mo="5-11" />
