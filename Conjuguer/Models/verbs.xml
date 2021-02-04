@@ -33,6 +33,7 @@
   <verb in="colorer" tn="color" mo="1-1" />
   <verb in="combattre" tn="fight, oppose" mo="5-3" />
   <verb in="conduire" tn="drive, conduct" mo="5-9A" />
+  <verb in="coudre" tn="sew" mo="5-14" />
   <verb in="couvrir" tn="cover" mo="3-1" />
   <verb in="cueillir" tn="gather" mo="3-2B" />
   <verb in="défaillir" tn="faint" mo="3-2A" />
@@ -49,11 +50,13 @@
   <verb in="envoyer" tn="send" mo="1-8" />
   <verb in="essuyer" tn="wipe, dry" mo="1-7A" />
   <verb in="être" tn="be" mo="7" />
+  <verb in="exclure" tn="exclude" mo="5-16A" />
   <verb in="fabriquer" tn="fabricate" mo="1-1" />
   <verb in="falloir" tn="be necessary" mo="4-5C" />
   <verb in="fatiguer" tn="fatigue" mo="1-1" />
   <verb in="finir" tn="finish" mo="2-1" />
   <verb in="haïr" tn="hate" mo="2-3" />
+  <verb in="inclure" tn="include" mo="5-16B" />
   <verb in="jeter" tn="throw" mo="1-3B" />
   <verb in="joindre" tn="join" mo="5-12" />
   <verb in="lancer" tn="throw" mo="1-2A" />
@@ -62,6 +65,7 @@
   <verb in="maudire" tn="curse" mo="2-2" />
   <verb in="mettre" tn="put" mo="5-4" />
   <verb in="mordre" tn="bite" mo="5-1A" />
+  <verb in="moudre" tn="grind" mo="5-15" />
   <verb in="mouvoir" tn="move" mo="4-3A" />
   <verb in="nuire" tn="harm" mo="5-9B" />
   <verb in="offrir" tn="offer" mo="3-1" />
