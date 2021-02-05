@@ -15,6 +15,7 @@
 
 <verbs>
   <verb in="absoudre" tn="absolve" mo="5-13A" />
+  <verb in="accroître" tn="increase" mo="5-19B" />
   <verb in="accueillir" tn="welcome" mo="3-2B" />
   <verb in="aller" tn="go" ay="e" mo="9" />
   <verb in="amorcer" tn="start, prime, bait" mo="1-2A" />
@@ -25,6 +26,7 @@
   <verb in="asseoir" tn="sit" mo="4-9AB" />
   <verb in="avoir" tn="have" mo="8" />
   <verb in="battre" tn="beat" mo="5-3" />
+  <verb in="boire" tn="drink" mo="5-17" />
   <verb in="bouillir" tn="boil" mo="3-2C" />
   <verb in="bruire" tn="rustle, murmur" mo="2-2" />
   <verb in="céder" tn="cede" mo="1-5" />
@@ -35,6 +37,8 @@
   <verb in="conduire" tn="drive, conduct" mo="5-9A" />
   <verb in="coudre" tn="sew" mo="5-14" />
   <verb in="couvrir" tn="cover" mo="3-1" />
+  <verb in="croire" tn="believe" mo="5-18" />
+  <verb in="croître" tn="grow" mo="5-19A" />
   <verb in="cueillir" tn="gather" mo="3-2B" />
   <verb in="défaillir" tn="faint" mo="3-2A" />
   <verb in="dépecer" tn="cut up, tear" mo="1-6A" />

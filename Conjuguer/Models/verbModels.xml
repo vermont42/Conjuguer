@@ -77,6 +77,10 @@
   <model mo="moudre" id="5-15" ep="u" si="s" se="u" bb="e" p="1,1,D*,r3s|1,1,L,r1p,r2p,r3p,xA,bA,pp" />
   <model mo="exclure" id="5-16A" ep="" si="s" se="b" bb="e" p="1,1,U,N,pp" />
   <model mo="inclure" id="5-16B" pa="5-16A" ep="S" />
+  <model mo="boire" id="5-17" ep="u" si="s" se="u" bb="e" p="2,2,UV,r1p,r2p,b1p,b2p|0,1,V,r3p,b1s,b2s,b3s,b3p|3,3,B,xA,pp" />
+  <model mo="croire" id="5-18" ep="u" si="s" se="u" bb="e" p="1,1,Y,r1p,r2p,b1p,b2p|3,3,R,xA,pp" />
+  <model mo="croître" id="5-19A" ep="Û" si="s" se="b" bb="e" p="2,2,Î,N,r1s,r2s|2,2,Î,r3s|2,2,ISS,r1p,r2p,r3p,bA|3,3,Û,N,x1s,x2s,x3s,x3p|3,3,Û,x1p,x2p|3,3,,pp" />
+  <model mo="accroître" id="5-19B" pa="5-19A" ep="U" p="2,2,I,r1s,r2s|3,3,U,x1s,x2s,x3s,x3p|1,1,U,q1p,q2p" />
   <model mo="être" id="7" pa="1-1" ps="Ét" rr="Ét" ff="SEr" se="b" uf="FU" ep="É" ii="Ét" cr="r1s,SUIS,r2s,Es,r3s,EST,r1p,SOMMEs,r2p,êteS,r3p,SOnt,b1s,SOIS,b2s,SOIs,b3s,SOIT,b1p,SOYons,b2p,SOYez,b3p,SOIent,m2s,SOIs,m1p,SOYons,m2p,SOYez" bb="e" />
   <model mo="avoir" id="8" ep="U" si="s" se="u" bb="e"  p="1,1,I*,r1s|2,2,A,r2s|2,2,A*,r3s|2,2,Ont*,r3p|4,3,U,sf|2,2,E,xA|1,1,IT*,b3s|1,1,I,b1s,b2s,b3p|1,1,Yons*,b1p|1,1,Yez*,b2p|2,2,E,pp|1,1,Y,rr" cr="m2s,aIE,m1p,aYons,m2p,aYez" />
   <model mo="aller" id="9" pa="1-1" ff="IR" cr="r1s,VAIS,r2s,VAs,r3s,VA,r3p,VOnt,b1p,aLlions,b2p,aLliez,m2s,VA" sb="aIll" bb="e" />
