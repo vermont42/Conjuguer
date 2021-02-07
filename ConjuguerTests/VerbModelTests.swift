@@ -119,7 +119,7 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    T.testConjugation(infinitif: "accroître", tense: .participePassé, expected: "accrU")
+    T.testConjugation(infinitif: "accroître", tense: .participePassé, expected: "accRU")
     T.testConjugation(infinitif: "accroître", tense: .participePrésent, expected: "accroISSant")
 
     var impératifPersonNumbersIndex = 0
@@ -769,6 +769,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testConnaître() {
+    // ID: 5-20
+    var personNumbersIndex = 0
+
+    for conjugation in ["connaIs", "connaIs", "connaÎt", "connaISSons", "connaISSez", "connaISSent"] {
+      T.testConjugation(infinitif: "connaître", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["connaISSais", "connaISSais", "connaISSait", "connaISSions", "connaISSiez", "connaISSaient"] {
+      T.testConjugation(infinitif: "connaître", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["connaîtrai", "connaîtras", "connaîtra", "connaîtrons", "connaîtrez", "connaîtront"] {
+      T.testConjugation(infinitif: "connaître", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["connaîtrais", "connaîtrais", "connaîtrait", "connaîtrions", "connaîtriez", "connaîtraient"] {
+      T.testConjugation(infinitif: "connaître", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["conNus", "conNus", "conNut", "conNûmes", "conNûtes", "conNurent"] {
+      T.testConjugation(infinitif: "connaître", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["connaISSe", "connaISSes", "connaISSe", "connaISSions", "connaISSiez", "connaISSent"] {
+      T.testConjugation(infinitif: "connaître", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["conNusse", "conNusses", "conNût", "conNussions", "conNussiez", "conNussent"] {
+      T.testConjugation(infinitif: "connaître", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "connaître", tense: .participePassé, expected: "conNu")
+    T.testConjugation(infinitif: "connaître", tense: .participePrésent, expected: "connaISSant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["connaIs", "connaISSons", "connaISSez"] {
+      T.testConjugation(infinitif: "connaître", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testCoudre() {
     // ID: 5-14
     var personNumbersIndex = 0
@@ -989,7 +1047,7 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    T.testConjugation(infinitif: "croître", tense: .participePassé, expected: "crÛ")
+    T.testConjugation(infinitif: "croître", tense: .participePassé, expected: "cRÛ")
     T.testConjugation(infinitif: "croître", tense: .participePrésent, expected: "croISSant")
 
     var impératifPersonNumbersIndex = 0
@@ -2214,6 +2272,64 @@ class VerbModelTests: XCTestCase {
 
     for conjugation in ["mEUs", "mouvons", "mouvez"] {
       T.testConjugation(infinitif: "mouvoir", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
+  func testNaître() {
+    // ID: 5-21
+    var personNumbersIndex = 0
+
+    for conjugation in ["naIs", "naIs", "naÎt", "naISSons", "naISSez", "naISSent"] {
+      T.testConjugation(infinitif: "naître", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["naISSais", "naISSais", "naISSait", "naISSions", "naISSiez", "naISSaient"] {
+      T.testConjugation(infinitif: "naître", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["naîtrai", "naîtras", "naîtra", "naîtrons", "naîtrez", "naîtront"] {
+      T.testConjugation(infinitif: "naître", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["naîtrais", "naîtrais", "naîtrait", "naîtrions", "naîtriez", "naîtraient"] {
+      T.testConjugation(infinitif: "naître", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["naQUis", "naQUis", "naQUit", "naQUîmes", "naQUîtes", "naQUirent"] {
+      T.testConjugation(infinitif: "naître", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["naISSe", "naISSes", "naISSe", "naISSions", "naISSiez", "naISSent"] {
+      T.testConjugation(infinitif: "naître", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["naQUisse", "naQUisses", "naQUît", "naQUissions", "naQUissiez", "naQUissent"] {
+      T.testConjugation(infinitif: "naître", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "naître", tense: .participePassé, expected: "NÉ")
+    T.testConjugation(infinitif: "naître", tense: .participePrésent, expected: "naISSant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["naIs", "naISSons", "naISSez"] {
+      T.testConjugation(infinitif: "naître", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
       impératifPersonNumbersIndex += 1
       impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
     }
@@ -3483,7 +3599,7 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    T.testConjugation(infinitif: "suffire", tense: .participePassé, expected: "suffi")
+    T.testConjugation(infinitif: "suffire", tense: .participePassé, expected: "suffI")
     T.testConjugation(infinitif: "suffire", tense: .participePrésent, expected: "suffiSant")
 
     var impératifPersonNumbersIndex = 0

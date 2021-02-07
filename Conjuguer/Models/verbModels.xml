@@ -41,16 +41,16 @@
   <model mo="voir" id="4-1A" ep="U" si="s" se="i" bb="e" p="0,2,OI,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|0,2,OY,r1p,r2p,b1p,b2p|3,2,ER,N,sf" />
   <model mo="prévoir" id="4-1B" pa="4-1A" />
   <model mo="pourvoir" id="4-1C" pa="4-1A" se="u" />
-  <model mo="devoir" id="4-2A" ep="Û" si="s" se="u" bb="e" p="2,2,OI,r1s,r2s,r3s|2,1,OI,r3p,b1s,b2s,b3s,b3p|3,3,R,sf|3,3,D,xA,pp" />
+  <model mo="devoir" id="4-2A" ep="Û" si="s" se="u" bb="e" p="2,2,OI,r1s,r2s,r3s|2,1,OI,r3p,b1s,b2s,b3s,b3p|3,3,R,sf|3,3,@,xA,pp" />
   <model mo="recevoir" id="4-2B" pa="4-2A" ep="U" p="3,1,Ç,r1s,r2s,r3s|4,1,Ç,r3p,b1s,b2s,b3s,b3p|1,1,Ç,xA,pp" />
-  <model mo="mouvoir" id="4-3A" ep="Û" si="s" se="u" bb="e" p="3,3,EU,r1s,r2s,r3s|3,1,E,r3p,b1s,b2s,b3s,b3p|3,3,R,sf|4,4,M,xA,pp" />
+  <model mo="mouvoir" id="4-3A" ep="Û" si="s" se="u" bb="e" p="3,3,EU,r1s,r2s,r3s|3,1,E,r3p,b1s,b2s,b3s,b3p|3,3,R,sf|4,4,@,xA,pp" />
   <model mo="promouvoir" id="4-3B" pa="4-3A" ep="U" />
-  <model mo="pleuvoir" id="4-4" ep="U" si="s" se="u" bb="e" p="2,2,U,r1s,r2s,r3s|3,3,R,sf|4,4,L,xA,pp" />
+  <model mo="pleuvoir" id="4-4" ep="U" si="s" se="u" bb="e" p="2,2,U,r1s,r2s,r3s|3,3,R,sf|4,4,@,xA,pp" />
   <model mo="valoir" id="4-5A" ep="U" si="s" se="u" bb="e" p="1,1,UX*,r1s,r2s|1,1,U,r3s|4,3,UD,sf|1,1,ILl,b1s,b2s,b3s,b3p" />
   <model mo="prévaloir" id="4-5B" pa="4-5A" p="3,3,L,b1s,b2s,b3s,b3p" />
   <model mo="falloir" id="4-5C" pa="4-5A" p="4,1,,r1s,r2s|2,1,,r3s|4,1,,sf|4,1,,b1s,b2s,b3s,b3p" />
-  <model mo="pouvoir" id="4-6" ep="U" si="s" se="u" bb="e" sb="pUISS" p="3,3,EUX*,r1s,r2s|3,3,UI,A,r1s|3,3,EU,r3s|4,3,R,sf|4,4,P,xA,pp" />
-  <model mo="savoir" id="4-7" ep="U" si="s" se="u" bb="e" ys="t" sb="saCH" cr="m2s,saCHe,rr,saCHant" p="1,1,I,r1s,r2s,r3s|4,3,U,sf|3,3,S,xA,pp" />
+  <model mo="pouvoir" id="4-6" ep="U" si="s" se="u" bb="e" sb="pUISS" p="3,3,EUX*,r1s,r2s|3,3,UI,A,r1s|3,3,EU,r3s|4,3,R,sf|4,4,@,xA,pp" />
+  <model mo="savoir" id="4-7" ep="U" si="s" se="u" bb="e" ys="t" sb="saCH" cr="m2s,saCHe,rr,saCHant" p="1,1,I,r1s,r2s,r3s|4,3,U,sf|3,3,@,xA,pp" />
   <model mo="vouloir" id="4-8" ep="U" si="s" se="u" bb="e" p="3,3,EUX*,r1s,r2s|3,3,EU,r3s|3,2,EU,r3p|4,3,D,sf|3,2,EUIL,b1s,b2s,b3s,b3p|3,3,EUILLE*,A,h2s|3,2,EUIL,A,h2p" />
   <model mo="asseoir" id="4-9AB" ep="IS" si="s" se="i" bb="e" p="1,1,IED,r1s,r2s|1,1,IED*,r3s|0,1,Y,r1p,r2p,r3p,bA|4,3,IÉ,sf|2,2,S,xA,pp|1,1,OI,A,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|1,1,OY,A,r1p,r2p,b1p,b2p|5,2,S,A,sf" />
   <model mo="surseoir" id="4-9C" ep="IS" si="s" se="i" bb="e" p="2,2,S,xA,pp|1,1,OI,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|1,1,OY,r1p,r2p,b1p,b2p" />
@@ -64,11 +64,11 @@
   <model mo="écrire" id="5-7" ep="T" si="s" se="i" bb="e" p="0,1,V,r1p,r2p,r3p,xA,bA" />
   <model mo="dire" id="5-8A" ep="T" si="s" se="b" bb="e" p="0,1,S,r1p,r3p|1,1,ÎTES*,N,r2p|0,1,S,bA" />
   <model mo="prédire" id="5-8B" pa="5-8A" p="0,1,S,r2p" />
-  <model mo="suffire" id="5-8C" pa="5-8B" ep="" />
+  <model mo="suffire" id="5-8C" pa="5-8B" ep="" p="1,1,@,pp" />
   <model mo="circoncire" id="5-8D" pa="5-8B" ep="S" />
   <model mo="conduire" id="5-9A" ep="T" si="s" se="i" bb="e" p="0,1,S,r1p,r2p,r3p,xA,bA" />
   <model mo="nuire" id="5-9B" pa="5-9A" ep="I" p="1,1,,pp" />
-  <model mo="lire" id="5-10" ep="u" si="s" se="u" bb="e" p="0,1,S,r1p,r2p,r3p,bA|2,2,L,xA,pp" />
+  <model mo="lire" id="5-10" ep="u" si="s" se="u" bb="e" p="0,1,S,r1p,r2p,r3p,bA|2,2,@,xA,pp" />
   <model mo="rire" id="5-11" ep="" si="s" se="b" bb="e" p="1,1,I,pp" />
   <model mo="plaindre" id="5-12" ep="T" si="s" se="i" bb="e" p="2,2,N,r1s,r2s,r3s,pp|2,2,GN,r1p,r2p,r3p,xA,bA" />
   <model mo="absoudre" id="5-13A" si="s" se="u" bb="e" p="2,2,U,r1s,r2s,r3s|2,2,LV,r1p,r2p,r3p,bA|2,2,L,xA|1,1,S*,pp" />
@@ -77,10 +77,12 @@
   <model mo="moudre" id="5-15" ep="u" si="s" se="u" bb="e" p="1,1,D*,r3s|1,1,L,r1p,r2p,r3p,xA,bA,pp" />
   <model mo="exclure" id="5-16A" ep="" si="s" se="b" bb="e" p="1,1,U,N,pp" />
   <model mo="inclure" id="5-16B" pa="5-16A" ep="S" />
-  <model mo="boire" id="5-17" ep="u" si="s" se="u" bb="e" p="2,2,UV,r1p,r2p,b1p,b2p|0,1,V,r3p,b1s,b2s,b3s,b3p|3,3,B,xA,pp" />
-  <model mo="croire" id="5-18" ep="u" si="s" se="u" bb="e" p="1,1,Y,r1p,r2p,b1p,b2p|3,3,R,xA,pp" />
-  <model mo="croître" id="5-19A" ep="Û" si="s" se="b" bb="e" p="2,2,Î,N,r1s,r2s|2,2,Î,r3s|2,2,ISS,r1p,r2p,r3p,bA|3,3,Û,N,x1s,x2s,x3s,x3p|3,3,Û,x1p,x2p|3,3,,pp" />
+  <model mo="boire" id="5-17" ep="u" si="s" se="u" bb="e" p="2,2,UV,r1p,r2p,b1p,b2p|0,1,V,r3p,b1s,b2s,b3s,b3p|3,3,@,xA,pp" />
+  <model mo="croire" id="5-18" ep="u" si="s" se="u" bb="e" p="1,1,Y,r1p,r2p,b1p,b2p|3,3,@,xA,pp" />
+  <model mo="croître" id="5-19A" ep="Û" si="s" se="b" bb="e" p="2,2,Î,N,r1s,r2s|2,2,Î,r3s|2,2,ISS,r1p,r2p,r3p,bA|3,3,Û,N,x1s,x2s,x3s,x3p|3,3,Û,x1p,x2p|4,4,@,pp" />
   <model mo="accroître" id="5-19B" pa="5-19A" ep="U" p="2,2,I,r1s,r2s|3,3,U,x1s,x2s,x3s,x3p|1,1,U,q1p,q2p" />
+  <model mo="connaître" id="5-20" ep="u" si="s" se="u" bb="e" p="2,2,I,r1s,r2s|2,2,Î,r3s|2,2,ISS,r1p,r2p,r3p,bA|4,4,@,N,xA|4,4,@,pp" />
+  <model mo="naître" id="5-21" pa="5-20" ep="É" se="i" p="2,2,QU,xA" />
   <model mo="être" id="7" pa="1-1" ps="Ét" rr="Ét" ff="SEr" se="b" uf="FU" ep="É" ii="Ét" cr="r1s,SUIS,r2s,Es,r3s,EST,r1p,SOMMEs,r2p,êteS,r3p,SOnt,b1s,SOIS,b2s,SOIs,b3s,SOIT,b1p,SOYons,b2p,SOYez,b3p,SOIent,m2s,SOIs,m1p,SOYons,m2p,SOYez" bb="e" />
   <model mo="avoir" id="8" ep="U" si="s" se="u" bb="e"  p="1,1,I*,r1s|2,2,A,r2s|2,2,A*,r3s|2,2,Ont*,r3p|4,3,U,sf|2,2,E,xA|1,1,IT*,b3s|1,1,I,b1s,b2s,b3p|1,1,Yons*,b1p|1,1,Yez*,b2p|2,2,E,pp|1,1,Y,rr" cr="m2s,aIE,m1p,aYons,m2p,aYez" />
   <model mo="aller" id="9" pa="1-1" ff="IR" cr="r1s,VAIS,r2s,VAs,r3s,VA,r3p,VOnt,b1p,aLlions,b2p,aLliez,m2s,VA" sb="aIll" bb="e" />

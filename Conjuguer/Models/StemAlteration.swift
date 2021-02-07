@@ -14,6 +14,7 @@ struct StemAlteration {
   let appliesTo: Set<Tense>
   let isAdditive: Bool // example: tu payes/paies
   let isInherited: Bool // example: vous dîtes/prédisez
+  static let capitalizedFirstLetter = "@" // example: devoir -> Du
 
   init(xmlString: String) {
     let components = xmlString.components(separatedBy: VerbModelParser.xmlSeparator)
@@ -155,5 +156,21 @@ struct StemAlteration {
       alterations.append(StemAlteration(xmlString: $0))
     }
     return alterations
+  }
+}
+
+extension String {
+  mutating func modifyStem(alteration: StemAlteration) {
+    if alteration.startIndexFromLast == 0 {
+      self += alteration.charsToUse
+    } else {
+      let start = index(startIndex, offsetBy: count - alteration.startIndexFromLast)
+      let end = index(startIndex, offsetBy: (count - alteration.startIndexFromLast) + alteration.charsToReplaceCount)
+      if alteration.charsToUse == StemAlteration.capitalizedFirstLetter {
+        replaceSubrange(start ..< end, with: self[start].uppercased())
+      } else {
+        replaceSubrange(start ..< end, with: alteration.charsToUse)
+      }
+    }
   }
 }

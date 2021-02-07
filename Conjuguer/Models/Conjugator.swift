@@ -288,15 +288,3 @@ struct Conjugator {
     }
   }
 }
-
-extension String {
-  mutating func modifyStem(alteration: StemAlteration) {
-    if alteration.startIndexFromLast == 0 {
-      self += alteration.charsToUse
-    } else {
-      let start = index(startIndex, offsetBy: count - alteration.startIndexFromLast)
-      let end = index(startIndex, offsetBy: (count - alteration.startIndexFromLast) + alteration.charsToReplaceCount)
-      replaceSubrange(start ..< end, with: alteration.charsToUse)
-    }
-  }
-}
