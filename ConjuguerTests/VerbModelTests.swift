@@ -1581,6 +1581,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testFaire() {
+    // ID: 5-23
+    var personNumbersIndex = 0
+
+    for conjugation in ["fais", "fais", "fait", "faiSons", "faiSez", "fONT"] {
+      T.testConjugation(infinitif: "faire", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["faiSais", "faiSais", "faiSait", "faiSions", "faiSiez", "faiSaient"] {
+      T.testConjugation(infinitif: "faire", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["fErai", "fEras", "fEra", "fErons", "fErez", "fEront"] {
+      T.testConjugation(infinitif: "faire", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["fErais", "fErais", "fErait", "fErions", "fEriez", "fEraient"] {
+      T.testConjugation(infinitif: "faire", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["Fis", "Fis", "Fit", "Fîmes", "Fîtes", "Firent"] {
+      T.testConjugation(infinitif: "faire", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["faSSe", "faSSes", "faSSe", "faSSions", "faSSiez", "faSSent"] {
+      T.testConjugation(infinitif: "faire", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["Fisse", "Fisses", "Fît", "Fissions", "Fissiez", "Fissent"] {
+      T.testConjugation(infinitif: "faire", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "faire", tense: .participePassé, expected: "faiT")
+    T.testConjugation(infinitif: "faire", tense: .participePrésent, expected: "faiSant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["fais", "faiSons", "faiSez"] {
+      T.testConjugation(infinitif: "faire", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testFalloir() {
     // ID: 4-5C
     var personNumbersIndex = 0
