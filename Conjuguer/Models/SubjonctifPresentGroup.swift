@@ -8,14 +8,16 @@
 import Foundation
 
 enum SubjonctifPrésentGroup {
-  case e
+  case e(appliesToIrVerb: Bool)
   case s(appliesToReVerb: Bool)
   case ï
 
   static func groupForXmlString(_ xmlString: String) -> SubjonctifPrésentGroup {
     switch xmlString {
     case "e":
-      return .e
+      return .e(appliesToIrVerb: false)
+    case "E":
+      return .e(appliesToIrVerb: true)
     case "s":
       return .s(appliesToReVerb: false)
     case "S":
@@ -29,20 +31,20 @@ enum SubjonctifPrésentGroup {
 
   func endingForPersonNumber(_ personNumber: PersonNumber) -> String {
     switch self {
-    case .e:
+    case .e(let appliesToIrVerb):
       switch personNumber {
       case .firstSingular:
-        return "e"
+        return appliesToIrVerb ? "E" : "e"
       case .secondSingular:
-        return "es"
+        return appliesToIrVerb ? "ES" : "es"
       case .thirdSingular:
-        return "e"
+        return appliesToIrVerb ? "E" : "e"
       case .firstPlural:
-        return "ions"
+        return appliesToIrVerb ? "IONS" : "ions"
       case .secondPlural:
-        return "iez"
+        return appliesToIrVerb ? "IEZ" : "iez"
       case .thirdPlural:
-        return "ent"
+        return appliesToIrVerb ? "ENT" : "ent"
       }
     case .s(let appliesToReVerb):
       switch personNumber {

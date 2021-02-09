@@ -93,7 +93,7 @@ class CompoundTenseTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["aIe EU", "aIes EU", "aIT EU", "aYons EU", "aYez EU", "aIent EU"] {
+    for conjugation in ["aIE EU", "aIES EU", "aIT EU", "aYons EU", "aYez EU", "aIENT EU"] {
       T.testConjugation(infinitif: avoir, tense: .subjonctifPassé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
