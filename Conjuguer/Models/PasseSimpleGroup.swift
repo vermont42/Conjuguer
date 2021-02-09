@@ -8,11 +8,11 @@
 import Foundation
 
 enum PasséSimpleGroup {
-  case bare
-  case a
-  case i
-  case u
-  case ï
+  case bare // exclure
+  case a // parler
+  case i // finir
+  case u // devoir
+  case ï // haïr
 
   static func groupForXmlString(_ xmlString: String) -> PasséSimpleGroup {
     switch xmlString {

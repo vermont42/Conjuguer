@@ -8,10 +8,11 @@
 import Foundation
 
 enum IndicatifPrésentGroup {
-  case e(appliesToErVerb: Bool)
-  case extendedS(appliesToReVerb: Bool)
-  case s
-  case ï
+  case e(appliesToErVerb: Bool) // parler (true) / couvrir (false)
+  case extendedS(appliesToIrVerb: Bool) // finir (true) / maudire (false)
+  case s // voir
+  case ï // haïr
+  case r // rendre
 
   static func groupForXmlString(_ xmlString: String) -> IndicatifPrésentGroup {
     switch xmlString {
@@ -20,13 +21,15 @@ enum IndicatifPrésentGroup {
     case "E":
       return .e(appliesToErVerb: false)
     case "x":
-      return .extendedS(appliesToReVerb: false)
+      return .extendedS(appliesToIrVerb: true)
     case "X":
-      return .extendedS(appliesToReVerb: true)
+      return .extendedS(appliesToIrVerb: false)
     case "s":
       return .s
     case "ï":
       return .ï
+    case "r":
+      return .r
     default:
       fatalError("Attempted to construct IndicatifPrésentGroup from invalid xmlString \(xmlString).")
     }
@@ -54,20 +57,20 @@ enum IndicatifPrésentGroup {
         ending = ending.uppercased()
       }
       return ending
-    case .extendedS(let appliesToReVerb):
+    case .extendedS(let appliesToIrVerb):
       switch personNumber {
       case .firstSingular:
-        return appliesToReVerb ? "Is" : "is"
+        return appliesToIrVerb ? "is" : "Is"
       case .secondSingular:
-        return appliesToReVerb ? "Is" : "is"
+        return appliesToIrVerb ? "is" : "Is"
       case .thirdSingular:
-        return appliesToReVerb ? "It" : "it"
+        return appliesToIrVerb ? "it" : "It"
       case .firstPlural:
-        return appliesToReVerb ? "ISSons" : "issons"
+        return appliesToIrVerb ? "issons" : "ISSons"
       case .secondPlural:
-        return appliesToReVerb ? "ISSez" : "issez"
+        return appliesToIrVerb ? "issez" : "ISSez"
       case .thirdPlural:
-        return appliesToReVerb ? "ISSent" : "issent"
+        return appliesToIrVerb ? "issent" : "ISSent"
       }
     case .s:
       switch personNumber {
@@ -77,6 +80,21 @@ enum IndicatifPrésentGroup {
         return "s"
       case .thirdSingular:
         return "t"
+      case .firstPlural:
+        return "ons"
+      case .secondPlural:
+        return "ez"
+      case .thirdPlural:
+        return "ent"
+      }
+    case .r:
+      switch personNumber {
+      case .firstSingular:
+        return "s"
+      case .secondSingular:
+        return "s"
+      case .thirdSingular:
+        return ""
       case .firstPlural:
         return "ons"
       case .secondPlural:
@@ -115,18 +133,18 @@ enum IndicatifPrésentGroup {
       default:
         return ""
       }
-    case .extendedS(let appliesToReVerb):
+    case .extendedS(let appliesToIrVerb):
       switch personNumber {
       case .secondSingular:
-        return appliesToReVerb ? "Is" : "is"
+        return appliesToIrVerb ? "is" : "Is"
       case .firstPlural:
-        return appliesToReVerb ? "ISSons" : "issons"
+        return appliesToIrVerb ? "issons" : "ISSons"
       case .secondPlural:
-        return appliesToReVerb ? "ISSez" : "issez"
+        return appliesToIrVerb ? "issez" : "ISSez"
       default:
         return ""
       }
-    case .s:
+    case .s, .r:
       switch personNumber {
       case .secondSingular:
         return "s"

@@ -2919,7 +2919,7 @@ class VerbModelTests: XCTestCase {
     // ID: 5-2
     var personNumbersIndex = 0
 
-    for conjugation in ["prends", "prends", "prenD", "preNons", "preNez", "prenNent"] {
+    for conjugation in ["prends", "prends", "prend", "preNons", "preNez", "prenNent"] {
       T.testConjugation(infinitif: "prendre", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -3383,7 +3383,7 @@ class VerbModelTests: XCTestCase {
     // ID: 5-1A
     var personNumbersIndex = 0
 
-    for conjugation in ["rends", "rends", "renD", "rendons", "rendez", "rendent"] {
+    for conjugation in ["rends", "rends", "rend", "rendons", "rendez", "rendent"] {
       T.testConjugation(infinitif: "rendre", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -3896,6 +3896,64 @@ class VerbModelTests: XCTestCase {
 
     for conjugation in ["tais", "taiSons", "taiSez"] {
       T.testConjugation(infinitif: "taire", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
+  func testTraire() {
+    // ID: 5-24
+    var personNumbersIndex = 0
+
+    for conjugation in ["trais", "trais", "trait", "traYons", "traYez", "traient"] {
+      T.testConjugation(infinitif: "traire", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["traYais", "traYais", "traYait", "traYions", "traYiez", "traYaient"] {
+      T.testConjugation(infinitif: "traire", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["trairai", "trairas", "traira", "trairons", "trairez", "trairont"] {
+      T.testConjugation(infinitif: "traire", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["trairais", "trairais", "trairait", "trairions", "trairiez", "trairaient"] {
+      T.testConjugation(infinitif: "traire", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["traYai", "traYas", "traYa", "traYâmes", "traYâtes", "traYèrent"] {
+      T.testConjugation(infinitif: "traire", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["traie", "traies", "traie", "traYions", "traYiez", "traient"] {
+      T.testConjugation(infinitif: "traire", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["traYasse", "traYasses", "traYât", "traYassions", "traYassiez", "traYassent"] {
+      T.testConjugation(infinitif: "traire", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "traire", tense: .participePassé, expected: "traiT")
+    T.testConjugation(infinitif: "traire", tense: .participePrésent, expected: "traYant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["trais", "traYons", "traYez"] {
+      T.testConjugation(infinitif: "traire", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
       impératifPersonNumbersIndex += 1
       impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
     }
