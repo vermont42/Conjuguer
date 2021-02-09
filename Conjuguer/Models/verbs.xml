@@ -36,6 +36,7 @@
   <verb in="combattre" tn="fight, oppose" mo="5-3" />
   <verb in="conduire" tn="drive, conduct" mo="5-9A" />
   <verb in="connaître" tn="know" mo="5-20" />
+  <verb in="convaincre" tn="convince" mo="5-25" />
   <verb in="coudre" tn="sew" mo="5-14" />
   <verb in="couvrir" tn="cover" mo="3-1" />
   <verb in="croire" tn="believe" mo="5-18" />
@@ -123,6 +124,7 @@
   <verb in="traire" tn="milk" mo="5-24" />
   <verb in="tressaillir" tn="wince" mo="3-2A" />
   <verb in="valoir" tn="be worth" mo="4-5A" />
+  <verb in="vaincre" tn="vanquish" mo="5-25" />
   <verb in="vivre" tn="live" mo="5-6" />
   <verb in="voir" tn="see" mo="4-1A" />
   <verb in="voleter" tn="flutter" mo="1-3B" />

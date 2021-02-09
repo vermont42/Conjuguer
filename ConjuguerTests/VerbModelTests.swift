@@ -3959,6 +3959,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testVaincre() {
+    // ID: 5-25
+    var personNumbersIndex = 0
+
+    for conjugation in ["vaincs", "vaincs", "vainc", "vainQUons", "vainQUez", "vainQUent"] {
+      T.testConjugation(infinitif: "vaincre", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["vainQUais", "vainQUais", "vainQUait", "vainQUions", "vainQUiez", "vainQUaient"] {
+      T.testConjugation(infinitif: "vaincre", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["vaincrai", "vaincras", "vaincra", "vaincrons", "vaincrez", "vaincront"] {
+      T.testConjugation(infinitif: "vaincre", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["vaincrais", "vaincrais", "vaincrait", "vaincrions", "vaincriez", "vaincraient"] {
+      T.testConjugation(infinitif: "vaincre", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["vainQUis", "vainQUis", "vainQUit", "vainQUîmes", "vainQUîtes", "vainQUirent"] {
+      T.testConjugation(infinitif: "vaincre", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["vainQUe", "vainQUes", "vainQUe", "vainQUions", "vainQUiez", "vainQUent"] {
+      T.testConjugation(infinitif: "vaincre", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["vainQUisse", "vainQUisses", "vainQUît", "vainQUissions", "vainQUissiez", "vainQUissent"] {
+      T.testConjugation(infinitif: "vaincre", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "vaincre", tense: .participePassé, expected: "vaincu")
+    T.testConjugation(infinitif: "vaincre", tense: .participePrésent, expected: "vainQUant")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["vaincs", "vainQUons", "vainQUez"] {
+      T.testConjugation(infinitif: "vaincre", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testValoir() {
     // ID: 4-5A
     var personNumbersIndex = 0
