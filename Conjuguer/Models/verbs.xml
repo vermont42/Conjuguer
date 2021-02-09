@@ -47,6 +47,7 @@
   <verb in="devoir" tn="must, owe" mo="4-2A" />
   <verb in="dire" tn="say, tell" mo="5-8A" />
   <verb in="dissoudre" tn="dissolve" mo="5-13A" />
+  <verb in="dormir" tn="sleep" mo="6-1" />
   <verb in="écrire" tn="write" mo="5-7" />
   <verb in="élire" tn="elect" mo="5-10" />
   <verb in="émouvoir" tn="move emotionally" mo="4-3B" />
@@ -62,6 +63,7 @@
   <verb in="falloir" tn="be necessary" mo="4-5C" />
   <verb in="fatiguer" tn="fatigue" mo="1-1" />
   <verb in="finir" tn="finish" mo="2-1" />
+  <verb in="fuire" tn="flee" mo="6-2" />
   <verb in="haïr" tn="hate" mo="2-3" />
   <verb in="inclure" tn="include" mo="5-16B" />
   <verb in="jeter" tn="throw" mo="1-3B" />
@@ -114,6 +116,9 @@
   <verb in="saillir" tn="protrude" mo="3-2A" />
   <verb in="satisfaire" tn="satisfy, fulfil" mo="5-23" />
   <verb in="savoir" tn="know" mo="4-7" />
+  <verb in="sentir" tn="sense, smell" mo="6-1" />
+  <verb in="servir" tn="serve" mo="6-1" />
+  <verb in="sortir" tn="take out, go out" mo="6-1" />
   <verb in="souffrir" tn="souffrir" mo="3-1" />
   <verb in="sourire" tn="smile" mo="5-11" />
   <verb in="submerger" tn="overwhelm, submerge" mo="1-2B" />
