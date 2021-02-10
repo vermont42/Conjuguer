@@ -30,7 +30,6 @@ class VerbModelParser: NSObject, XMLParserDelegate {
   private var currentPasséSimpleGroup: PasséSimpleGroup?
   private var currentSubjonctifPrésentGroup: SubjonctifPrésentGroup?
   private var currentStemAlterations: [StemAlteration] = []
-  private var currentCompleteAlterations: [CompleteAlteration] = []
 
   override init() {
     super.init()
@@ -118,10 +117,6 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       if let stemAlterations = attributeDict["p"] {
         currentStemAlterations = StemAlteration.alterationsFor(xmlString: stemAlterations)
       }
-
-      if let completeAlteration = attributeDict["cr"] {
-        currentCompleteAlterations = CompleteAlteration.alterationsFromXmlString(completeAlteration)
-      }
     }
   }
 
@@ -143,8 +138,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         indicatifPrésentGroup: currentIndicatifPrésentGroup,
         passéSimpleGroup: currentPasséSimpleGroup,
         subjonctifPrésentGroup: currentSubjonctifPrésentGroup,
-        stemAlterations: currentStemAlterations.isEmpty ? nil : currentStemAlterations,
-        completeAlterations: currentCompleteAlterations
+        stemAlterations: currentStemAlterations.isEmpty ? nil : currentStemAlterations
       )
 
       models[currentId] = model
@@ -165,7 +159,6 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       currentPasséSimpleGroup = nil
       currentSubjonctifPrésentGroup = nil
       currentStemAlterations = []
-      currentCompleteAlterations = []
     }
   }
 }

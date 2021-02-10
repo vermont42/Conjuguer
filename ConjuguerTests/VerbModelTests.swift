@@ -351,7 +351,7 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    T.testConjugation(infinitif: "assaillir", tense: .participePassé, expected: "assailLi")
+    T.testConjugation(infinitif: "assaillir", tense: .participePassé, expected: "assailli")
     T.testConjugation(infinitif: "assaillir", tense: .participePrésent, expected: "assaillant")
 
     var impératifPersonNumbersIndex = 0
@@ -641,7 +641,7 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    T.testConjugation(infinitif: "bouillir", tense: .participePassé, expected: "bouilLi")
+    T.testConjugation(infinitif: "bouillir", tense: .participePassé, expected: "bouilli")
     T.testConjugation(infinitif: "bouillir", tense: .participePrésent, expected: "bouillant")
 
     var impératifPersonNumbersIndex = 0
@@ -1221,7 +1221,7 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    T.testConjugation(infinitif: "cueillir", tense: .participePassé, expected: "cueilLi")
+    T.testConjugation(infinitif: "cueillir", tense: .participePassé, expected: "cueilli")
     T.testConjugation(infinitif: "cueillir", tense: .participePrésent, expected: "cueillant")
 
     var impératifPersonNumbersIndex = 0
@@ -1640,10 +1640,10 @@ class VerbModelTests: XCTestCase {
   }
 
   func testÊtre() {
-    // ID: 7
+    // ID: 5-26
     var personNumbersIndex = 0
 
-    for conjugation in ["SUIS", "Es", "EST", "SOMMEs", "êteS", "SOnt"] {
+    for conjugation in ["SUIs", "Es", "ESt", "SOMMEs", "êteS", "SOnt"] {
       T.testConjugation(infinitif: "être", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -1667,19 +1667,19 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["FUs", "FUs", "FUt", "FÛmes", "FÛtes", "FUrent"] {
+    for conjugation in ["Fus", "Fus", "Fut", "Fûmes", "Fûtes", "Furent"] {
       T.testConjugation(infinitif: "être", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["SOIS", "SOIs", "SOIT", "SOYons", "SOYez", "SOIent"] {
+    for conjugation in ["SOIS", "SOIS", "SOIT", "SOYons", "SOYez", "SOIent"] {
       T.testConjugation(infinitif: "être", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["FUsse", "FUsses", "FÛt", "FUssions", "FUssiez", "FUssent"] {
+    for conjugation in ["Fusse", "Fusses", "Fût", "Fussions", "Fussiez", "Fussent"] {
       T.testConjugation(infinitif: "être", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -3952,7 +3952,7 @@ class VerbModelTests: XCTestCase {
 
     var impératifPersonNumbersIndex = 0
 
-    for conjugation in ["saCHe", "saCHons", "saCHez"] {
+    for conjugation in ["saCHE", "saCHons", "saCHez"] {
       T.testConjugation(infinitif: "savoir", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
       impératifPersonNumbersIndex += 1
       impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count

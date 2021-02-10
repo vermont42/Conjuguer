@@ -8,11 +8,6 @@
     <!ATTLIST verb ay CDATA #IMPLIED>
 ]>
 
-<!--in = infinitif (e.g., finir)-->
-<!--tn = English translation -->
-<!--pa = verb model (e.g., 2-1)-->
-<!--ay = auxiliary (e means être) -->
-
 <verbs>
   <verb in="absoudre" tn="absolve" mo="5-13A" />
   <verb in="accroître" tn="increase" mo="5-19B" />
@@ -58,7 +53,7 @@
   <verb in="entrevoir" tn="glimpse, foresee" mo="4-1A" />
   <verb in="envoyer" tn="send" mo="1-8" />
   <verb in="essuyer" tn="wipe, dry" mo="1-7A" />
-  <verb in="être" tn="be" mo="7" />
+  <verb in="être" tn="be" mo="5-26" />
   <verb in="exclure" tn="exclude" mo="5-16A" />
   <verb in="fabriquer" tn="fabricate" mo="1-1" />
   <verb in="faire" tn="do, make" mo="5-23" />

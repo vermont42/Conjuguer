@@ -25,12 +25,6 @@ struct Conjugator {
       return .failure(.verbModelNotRecognized)
     }
 
-    if let completeAlterations = model.completeAlterations {
-      for alteration in completeAlterations where alteration.appliesTo == tense {
-        return .success(alteration.conjugation)
-      }
-    }
-
     var stems: [String] = [] // Payer has an alternate stem, so this needs to be an array.
     var isConjugatingPasséSimple = false
     var isConjugatingSubjonctifImparfait = false

@@ -15,7 +15,7 @@ class CompoundTenseTests: XCTestCase {
 
     var personNumbersIndex = 0
 
-    for conjugation in ["SUIS allé", "Es allé", "EST allé", "SOMMEs allé", "êteS allé", "SOnt allé"] {
+    for conjugation in ["SUIs allé", "Es allé", "ESt allé", "SOMMEs allé", "êteS allé", "SOnt allé"] {
       T.testConjugation(infinitif: aller, tense: .passéComposé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -39,7 +39,7 @@ class CompoundTenseTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["FUs allé", "FUs allé", "FUt allé", "FÛmes allé", "FÛtes allé", "FUrent allé"] {
+    for conjugation in ["Fus allé", "Fus allé", "Fut allé", "Fûmes allé", "Fûtes allé", "Furent allé"] {
       T.testConjugation(infinitif: aller, tense: .passéAntérieur(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -87,7 +87,7 @@ class CompoundTenseTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["SOIS allé", "SOIs allé", "SOIT allé", "SOYons allé", "SOYez allé", "SOIent allé"] {
+    for conjugation in ["SOIS allé", "SOIS allé", "SOIT allé", "SOYons allé", "SOYez allé", "SOIent allé"] {
       T.testConjugation(infinitif: aller, tense: .subjonctifPassé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -99,7 +99,7 @@ class CompoundTenseTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["FUsse allé", "FUsses allé", "FÛt allé", "FUssions allé", "FUssiez allé", "FUssent allé"] {
+    for conjugation in ["Fusse allé", "Fusses allé", "Fût allé", "Fussions allé", "Fussiez allé", "Fussent allé"] {
       T.testConjugation(infinitif: aller, tense: .subjonctifPlusQueParfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count

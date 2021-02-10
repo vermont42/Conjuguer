@@ -33,7 +33,6 @@
 		03ACAA0625ACB6B900CF5390 /* ConditionnelPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACAA0525ACB6B900CF5390 /* ConditionnelPresent.swift */; };
 		03B54B3E25AF914F0062B323 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B54B3D25AF914F0062B323 /* TestUtils.swift */; };
 		03B54B4625AF92930062B323 /* VerbModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B54B4525AF92930062B323 /* VerbModelTests.swift */; };
-		03B54B4B25B00B870062B323 /* CompleteAlteration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B54B4A25B00B870062B323 /* CompleteAlteration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,7 +85,6 @@
 		03ACAA0525ACB6B900CF5390 /* ConditionnelPresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionnelPresent.swift; sourceTree = "<group>"; };
 		03B54B3D25AF914F0062B323 /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		03B54B4525AF92930062B323 /* VerbModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbModelTests.swift; sourceTree = "<group>"; };
-		03B54B4A25B00B870062B323 /* CompleteAlteration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteAlteration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				036DB7F225A12B990013C3B7 /* Auxiliary.swift */,
-				03B54B4A25B00B870062B323 /* CompleteAlteration.swift */,
 				03ACAA0525ACB6B900CF5390 /* ConditionnelPresent.swift */,
 				036DB7D025A0C9F10013C3B7 /* Conjugator.swift */,
 				036DB7FA25A13C110013C3B7 /* ConjugatorError.swift */,
@@ -373,7 +370,6 @@
 				036DB7F325A12B990013C3B7 /* Auxiliary.swift in Sources */,
 				036DB80525A386D60013C3B7 /* VerbModelParser.swift in Sources */,
 				036DB7D125A0C9F10013C3B7 /* Conjugator.swift in Sources */,
-				03B54B4B25B00B870062B323 /* CompleteAlteration.swift in Sources */,
 				03ACAA0125ACB65300CF5390 /* FuturSimple.swift in Sources */,
 				036DB81025A6C7900013C3B7 /* PasseSimpleGroup.swift in Sources */,
 				036DB78E259FD6500013C3B7 /* ConjuguerApp.swift in Sources */,
