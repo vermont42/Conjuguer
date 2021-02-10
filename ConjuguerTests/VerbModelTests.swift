@@ -205,13 +205,13 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["IRai", "IRas", "IRa", "IRons", "IRez", "IRont"] {
+    for conjugation in ["Irai", "Iras", "Ira", "Irons", "Irez", "Iront"] {
       T.testConjugation(infinitif: "aller", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["IRais", "IRais", "IRait", "IRions", "IRiez", "IRaient"] {
+    for conjugation in ["Irais", "Irais", "Irait", "Irions", "Iriez", "Iraient"] {
       T.testConjugation(infinitif: "aller", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -223,7 +223,7 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["aIlle", "aIlles", "aIlle", "aLlions", "aLliez", "aIllent"] {
+    for conjugation in ["aIlle", "aIlles", "aIlle", "allions", "alliez", "aIllent"] {
       T.testConjugation(infinitif: "aller", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count

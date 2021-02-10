@@ -31,6 +31,7 @@
   <model mo="employer" id="1-7A" pa="1-1" p="1,1,I,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|3,1,I,sf" />
   <model mo="payer" id="1-7B" pa="1-1" p="1,1,I,A,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|3,1,I,A,sf" />
   <model mo="envoyer" id="1-8" pa="1-1" p="1,1,I,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|4,4,ERr,sf" />
+  <model mo="aller" id="1-9" pa="1-1" p="3,3,VAIS*,r1s|3,3,VAs*,r2s|3,3,VA*,r3s|3,3,VOnt*,r3p|5,4,I,sf|2,0,I,b1s,b2s,b3s,b3p|2,1,,h2s" />
   <model mo="finir" id="2-1" ep="i" si="x" se="i" bb="s" />
   <model mo="maudire" id="2-2" pa="2-1" ep="T" si="X" bb="S" p="1,1,,rA,xA,bA" />
   <model mo="haïr" id="2-3" pa="2-1" ep="ï" si="ï" se="ï" bb="ï" />
@@ -97,5 +98,4 @@
   <model mo="venir" id="6-7" ep="U" si="s" se="b" bb="E" p="2,0,I,r1s,r2s,r3s|2,2,IeNn,r3p,b1s,b2s,b3s,b3p|4,3,IenD,sf|2,1,I,x1s,x2s,x3s,x3p|2,1,Î,x1p,x2p|2,1,Î,q3s|2,1,I,q1p,q2p" />
   <model mo="être" id="7" pa="1-1" ps="Ét" rr="Ét" ff="SEr" se="b" uf="FU" ep="É" ii="Ét" cr="r1s,SUIS,r2s,Es,r3s,EST,r1p,SOMMEs,r2p,êteS,r3p,SOnt,b1s,SOIS,b2s,SOIs,b3s,SOIT,b1p,SOYons,b2p,SOYez,b3p,SOIent,m2s,SOIs,m1p,SOYons,m2p,SOYez" bb="e" />
   <model mo="avoir" id="8" ep="U" si="s" se="u" bb="E"  p="1,1,I*,r1s|2,2,A,r2s|2,2,A*,r3s|2,2,Ont*,r3p|4,3,U,sf|2,2,E,xA|1,1,IT*,b3s|1,1,I,b1s,b2s,b3p|1,1,Yons*,b1p|1,1,Yez*,b2p|2,2,E,pp|1,1,Y,rr" cr="m2s,aIE,m1p,aYons,m2p,aYez" />
-  <model mo="aller" id="9" pa="1-1" ff="IR" cr="r1s,VAIS,r2s,VAs,r3s,VA,r3p,VOnt,b1p,aLlions,b2p,aLliez,m2s,VA" sb="aIll" bb="e" />
 </models>
