@@ -190,7 +190,7 @@ class VerbModelTests: XCTestCase {
   }
 
   func testAller() {
-    // ID: 9
+    // ID: 1-9
     var personNumbersIndex = 0
 
     for conjugation in ["VAIS", "VAs", "VA", "allons", "allez", "VOnt"] {
@@ -422,7 +422,7 @@ class VerbModelTests: XCTestCase {
   }
 
   func testAvoir() {
-    // ID: 8
+    // ID: 4-10
     var personNumbersIndex = 0
 
     for conjugation in ["aI", "As", "A", "avons", "avez", "Ont"] {
