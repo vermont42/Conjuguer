@@ -8,7 +8,6 @@
     <!ATTLIST model se CDATA #IMPLIED>
     <!ATTLIST model pa CDATA #IMPLIED>
     <!ATTLIST model ep CDATA #IMPLIED>
-    <!ATTLIST model up CDATA #IMPLIED>
     <!ATTLIST model bb CDATA #IMPLIED>
 ]>
 
