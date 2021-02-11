@@ -202,14 +202,6 @@ struct ConjuguerApp: App {
         output += " •  auxiliary: être "
       }
 
-      if
-        let actualVerb = Verb.verbs[verb],
-        let verbModel = VerbModel.models[actualVerb.model],
-        !verbModel.usesParticipePasséStemForPasséSimple
-      {
-        output += " •  passé simple does not use participe stem"
-      }
-
       print("\(output)\n\n")
     }
   }

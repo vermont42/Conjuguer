@@ -25,7 +25,7 @@ struct Conjugator {
       return .failure(.verbModelNotRecognized)
     }
 
-    var stems: [String] = [] // Payer has an alternate stem, so this needs to be an array.
+    var stems: [String] = [] // Payer and pouvoir have alternate stems, so this needs to be an array.
     var isConjugatingPasséSimple = false
     var isConjugatingSubjonctifImparfait = false
     var isConjugatingImpératif = false
@@ -47,7 +47,7 @@ struct Conjugator {
 
     case .participePassé,
          .passéComposé, .plusQueParfait, .passéAntérieur, .passéSurcomposé, .futurAntérieur, .conditionnelPassé, .subjonctifPassé, .subjonctifPlusQueParfait:
-      stems.append(model.participePasséStem(verb: verb))
+      stems.append(verb.infinitifStem)
       if let stemAlterations = model.stemAlterationsRecursive {
         for alteration in stemAlterations {
           if alteration.appliesTo.contains(.participePassé) && alteration.isAdditive {
@@ -64,75 +64,39 @@ struct Conjugator {
       }
 
     case .participePrésent:
-      if let participePrésentStem = model.participePrésentStem {
-        stems.append(participePrésentStem)
-      } else {
-        if let nousPrésentStem = nousPrésentStem(infinitif: infinitif) {
-          stems.append(nousPrésentStem)
-        } else {
-          return .failure(.noNousPrésent(infinitif))
-        }
-      }
+        stems.append(nousPrésentStem(infinitif: infinitif))
 
     case .imparfait:
-      if let imparfaitStem = model.imparfaitStem {
-        stems.append(imparfaitStem)
-      } else {
-        if let nousPrésentConjugation = nousPrésentStem(infinitif: infinitif) {
-          let alternatives = nousPrésentConjugation.components(separatedBy: Tense.alternateConjugationSeparator)
-          alternatives.forEach {
-            stems.append($0)
-          }
-        } else {
-          return .failure(.noNousPrésent(infinitif))
-        }
+      let alternatives = nousPrésentStem(infinitif: infinitif).components(separatedBy: Tense.alternateConjugationSeparator)
+      alternatives.forEach {
+        stems.append($0)
       }
 
     case .passéSimple(let personNumber):
-      if let passéSimpleStem = model.passéSimpleStem {
-        stems.append(passéSimpleStem)
-      } else {
-        isConjugatingPasséSimple = true
-        passéSimplePersonNumber = personNumber
-        if model.usesParticipePasséStemForPasséSimple {
-          stems.append(model.participePasséStem(verb: verb))
-        } else {
-          stems.append(verb.infinitifStem)
-        }
-      }
+      isConjugatingPasséSimple = true
+      passéSimplePersonNumber = personNumber
+      stems.append(verb.infinitifStem)
 
     case .subjonctifImparfait(let personNumber):
-      if let passéSimpleStem = model.passéSimpleStem {
-        stems.append(passéSimpleStem)
-      } else {
-        isConjugatingSubjonctifImparfait = true
-        passéSimplePersonNumber = personNumber
-        if model.usesParticipePasséStemForPasséSimple {
-          stems.append(model.participePasséStem(verb: verb))
-        } else {
-          stems.append(verb.infinitifStem)
-        }
-      }
+      isConjugatingSubjonctifImparfait = true
+      passéSimplePersonNumber = personNumber
+      stems.append(verb.infinitifStem)
 
     case .subjonctifPrésent(let personNumber):
-      if let subjonctifStem = model.subjonctifStem {
-        stems.append(subjonctifStem)
-      } else {
-        stems.append(verb.infinitifStem)
-        if let stemAlterations = model.stemAlterationsRecursive {
-          let subjonctifPersonNumber: PersonNumber
-          switch personNumber {
-          case .firstSingular, .secondSingular, .thirdSingular, .thirdPlural:
-            subjonctifPersonNumber = .thirdPlural
-          case .firstPlural, .secondPlural:
-            subjonctifPersonNumber = .firstPlural
-          }
-          for alteration in stemAlterations {
-            if alteration.appliesTo.contains(.subjonctifPrésent(subjonctifPersonNumber)) && alteration.isAdditive {
-              stems.append(stems[0])
-              stems[1].modifyStem(alteration: alteration)
-              break
-            }
+      stems.append(verb.infinitifStem)
+      if let stemAlterations = model.stemAlterationsRecursive {
+        let subjonctifPersonNumber: PersonNumber
+        switch personNumber {
+        case .firstSingular, .secondSingular, .thirdSingular, .thirdPlural:
+          subjonctifPersonNumber = .thirdPlural
+        case .firstPlural, .secondPlural:
+          subjonctifPersonNumber = .firstPlural
+        }
+        for alteration in stemAlterations {
+          if alteration.appliesTo.contains(.subjonctifPrésent(subjonctifPersonNumber)) && alteration.isAdditive {
+            stems.append(stems[0])
+            stems[1].modifyStem(alteration: alteration)
+            break
           }
         }
       }
@@ -145,26 +109,19 @@ struct Conjugator {
         return .failure(.defectiveForPersonNumber(personNumber))
       }
       impératifPersonNumber = personNumber
-      if model.usesSubjonctifStemForImpératif {
-        guard let subjonctifStem = model.subjonctifStem else {
-          return .failure(.impératifUsesSubjonctifStemButThereIsNone)
-        }
-        stems.append(subjonctifStem)
-      } else {
-        stems.append(verb.infinitifStem)
-        isConjugatingImpératif = true
-        if let stemAlterations = model.stemAlterationsRecursive {
-          for alteration in stemAlterations {
-            if alteration.appliesTo.contains(.indicatifPrésent(personNumber)) && alteration.isAdditive {
-              stems.append(stems[0])
-              stems[1].modifyStem(alteration: alteration)
-              break
-            }
-            if alteration.appliesTo.contains(.impératif(personNumber)) && alteration.isAdditive {
-              stems.append(stems[0])
-              stems[1].modifyStem(alteration: alteration)
-              break
-            }
+      stems.append(verb.infinitifStem)
+      isConjugatingImpératif = true
+      if let stemAlterations = model.stemAlterationsRecursive {
+        for alteration in stemAlterations {
+          if alteration.appliesTo.contains(.indicatifPrésent(personNumber)) && alteration.isAdditive {
+            stems.append(stems[0])
+            stems[1].modifyStem(alteration: alteration)
+            break
+          }
+          if alteration.appliesTo.contains(.impératif(personNumber)) && alteration.isAdditive {
+            stems.append(stems[0])
+            stems[1].modifyStem(alteration: alteration)
+            break
           }
         }
       }
@@ -173,7 +130,7 @@ struct Conjugator {
       if !personNumber.isValidForImperatif {
         return .failure(.defectiveForPersonNumber(personNumber))
       }
-      stems.append(model.participePasséStem(verb: verb))
+      stems.append(verb.infinitifStem)
     }
 
     let isUsingTenseThatUsesPasséSimpleStem = isConjugatingPasséSimple || isConjugatingSubjonctifImparfait
@@ -182,7 +139,7 @@ struct Conjugator {
       for alteration in stemAlterations {
         if
           (alteration.appliesTo.contains(tense) ||
-          (isUsingTenseThatUsesPasséSimpleStem && alteration.appliesTo.contains(.passéSimple(passéSimplePersonNumber)) && model.usesParticipePasséStemForPasséSimple) ||
+          (isUsingTenseThatUsesPasséSimpleStem && alteration.appliesTo.contains(.passéSimple(passéSimplePersonNumber))) ||
           (isConjugatingImpératif && alteration.appliesTo.contains(.indicatifPrésent(impératifPersonNumber))) ||
             (tense.isCompound && alteration.appliesTo.contains(.participePassé))) && tense != .radicalFutur && !alteration.isAdditive
         {
@@ -266,19 +223,17 @@ struct Conjugator {
     }
   }
 
-  static func nousPrésentStem(infinitif: String) -> String? {
+  static func nousPrésentStem(infinitif: String) -> String {
     let nousPrésentConjugationResult = Conjugator.conjugate(infinitif: infinitif, tense: .indicatifPrésent(.firstPlural))
     switch nousPrésentConjugationResult {
     case .success(let value):
       let ons = IndicatifPrésentGroup.s.présentEndingForPersonNumber(.firstPlural)
-      if value.contains(Tense.alternateConjugationSeparator) {
-        return value.replacingOccurrences(of: ons, with: "")
-      } else {
-        let index = value.index(value.endIndex, offsetBy: -1 * ons.count)
-        return String(value[..<index])
-      }
+      let ONS = ons.uppercased()
+      return value.replacingOccurrences(of: ons, with: "")
+        .replacingOccurrences(of: ONS, with: "")
+        .replacingOccurrences(of: Tense.irregularEndingIndicator, with: "")
     default:
-      return nil
+      fatalError("Could not conjugate nous indicatifPrésent for \(infinitif).")
     }
   }
 }

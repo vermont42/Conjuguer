@@ -118,6 +118,10 @@ struct StemAlteration {
         set.insert(.imparfait(.secondPlural))
       case "i3p":
         set.insert(.imparfait(.thirdPlural))
+      case "iA":
+        PersonNumber.allCases.forEach {
+          set.insert(.imparfait($0))
+        }
 
       case "q1s":
         set.insert(.subjonctifImparfait(.firstSingular))

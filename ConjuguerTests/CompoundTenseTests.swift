@@ -87,7 +87,7 @@ class CompoundTenseTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["SOIS allé", "SOIS allé", "SOIT allé", "SOYons allé", "SOYez allé", "SOIent allé"] {
+    for conjugation in ["SOIS allé", "SOIs allé", "SOIT allé", "SOYons allé", "SOYez allé", "SOIent allé"] {
       T.testConjugation(infinitif: aller, tense: .subjonctifPassé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count

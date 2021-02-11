@@ -13,16 +13,7 @@ struct VerbModel {
   let id: String
   let exemplar: String
   let parentId: String?
-  let imparfaitStem: String?
-  let participePasséStem: String?
-  let subjonctifStem: String?
-  let futurStem: String?
-  let participePrésentStem: String?
-  let passéSimpleStem: String?
   let participeEnding: String?
-
-  let usesParticipePasséStemForPasséSimple: Bool
-  let usesSubjonctifStemForImpératif: Bool
   let indicatifPrésentGroup: IndicatifPrésentGroup?
   let passéSimpleGroup: PasséSimpleGroup?
   let subjonctifPrésentGroup: SubjonctifPrésentGroup?
@@ -54,13 +45,7 @@ struct VerbModel {
     }
   }
 
-  func participePasséStem(verb: Verb) -> String {
-    if let participePasséStem = participePasséStem {
-      return participePasséStem
-    } else {
-      return verb.infinitifStem
-    }
-  }
+  private let andParentIdAreNil = " _and_ parentId are nil."
 
   var participeEndingRecursive: String {
     if let participeEnding = participeEnding {
@@ -68,7 +53,7 @@ struct VerbModel {
     } else if let parentId = parentId {
       return VerbModel.model(id: parentId).participeEndingRecursive
     } else {
-      fatalError("participeEnding _and_ parentId are nil.")
+      fatalError("participeEnding" + andParentIdAreNil)
     }
   }
 
@@ -78,7 +63,7 @@ struct VerbModel {
     } else if let parentId = parentId {
       return VerbModel.model(id: parentId).passéSimpleGroupRecursive
     } else {
-      fatalError("passéSimpleGroup _and_ parentId are nil.")
+      fatalError("passéSimpleGroup" + andParentIdAreNil)
     }
   }
 
@@ -88,7 +73,7 @@ struct VerbModel {
     } else if let parentId = parentId {
       return VerbModel.model(id: parentId).indicatifPrésentGroupRecursive
     } else {
-      fatalError("indicatifPrésentGroup _and_ parentId are nil.")
+      fatalError("indicatifPrésentGroup" + andParentIdAreNil)
     }
   }
 
@@ -98,15 +83,11 @@ struct VerbModel {
     } else if let parentId = parentId {
       return VerbModel.model(id: parentId).subjonctifPrésentGroupRecursive
     } else {
-      fatalError("subjonctifPrésentGroup _and_ parentId are nil.")
+      fatalError("subjonctifPrésentGroup" + andParentIdAreNil)
     }
   }
 
   func futurStemsRecursive(infinitif: String) -> [String] {
-    if let futurStem = futurStem {
-      return [futurStem]
-    }
-
     var stems = [infinitif]
     var recursiveStemAlterations: [StemAlteration] = []
 

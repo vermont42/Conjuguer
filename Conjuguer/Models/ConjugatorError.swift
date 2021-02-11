@@ -12,12 +12,5 @@ enum ConjugatorError: Error {
   case verbNotRecognized
   case verbTooShort
   case infinitifEndingInvalid
-  case invalidEnding(String)
-  case noNousPrésent(String)
-  case noRadicalFutur(String)
-  case tenseNotImplemented(Tense)
-  case noSuchConjugation(PersonNumber)
-  case personNumberAbsent(Tense)
   case defectiveForPersonNumber(PersonNumber)
-  case impératifUsesSubjonctifStemButThereIsNone
 }
