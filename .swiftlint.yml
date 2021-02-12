@@ -11,6 +11,7 @@ disabled_rules:
   - void_return
   - nesting
   - type_name
+  - shorthand_operator
 
 file_length:
   warning: 10000
