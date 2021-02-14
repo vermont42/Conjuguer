@@ -48,20 +48,37 @@ struct InputView: View {
   }
 
   private func add() {
-    let currentAuxiliary = Auxiliary(rawValue: auxiliary) ?? .avoir
-    if infinitif != "" && translation != "" && model != "" && auxiliary != "" {
-      let verb = Verb(
-        infinitif: infinitif,
-        translation: translation,
-        model: model,
-        auxiliary: currentAuxiliary
-      )
-      Verb.verbs[infinitif] = verb
-      conjugate(infinitif)
-    } else {
-      Swift.print("Input field was blank.")
+    defer {
+      resetFields()
     }
 
+    let currentAuxiliary = Auxiliary(rawValue: auxiliary) ?? .avoir
+    if infinitif == "" || translation == "" || model == "" || auxiliary == "" {
+      Swift.print("Input field was blank.")
+      return
+    }
+
+    if Verb.verbs[infinitif] != nil {
+      Swift.print("\(infinitif) has already been inpat.")
+      return
+    }
+
+    if VerbModel.models[model] == nil {
+      Swift.print("Invalid model \(model) inpat.")
+      return
+    }
+
+    let verb = Verb(
+      infinitif: infinitif,
+      translation: translation,
+      model: model,
+      auxiliary: currentAuxiliary
+    )
+    Verb.verbs[infinitif] = verb
+    conjugate(infinitif)
+  }
+
+  private func resetFields() {
     infinitif = ""
     translation = ""
     model = "1-1"
