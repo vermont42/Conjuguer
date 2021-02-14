@@ -1,13 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE verbs [
-    <!ELEMENT verbs (verb+)>
-    <!ELEMENT verb (verb*)>
-    <!ATTLIST verb in CDATA #REQUIRED>
-    <!ATTLIST verb tn CDATA #REQUIRED>
-    <!ATTLIST verb mo CDATA #REQUIRED>
-    <!ATTLIST verb ay CDATA #IMPLIED>
-]>
-
 <verbs>
   <verb in="abaisser" tn="lower, stoop, abase" mo="1-1" />
   <verb in="abandonner" tn="abandon" mo="1-1" />
@@ -18,7 +8,30 @@
   <verb in="abdiquer" tn="abdicate" mo="1-1" />
   <verb in="abêtir" tn="dumb down, deaden" mo="2-1" />
   <verb in="abhorrer" tn="abhor, loathe" mo="1-1" />
+  <verb in="abîmer" tn="damage" mo="1-1" />
+  <verb in="abjurer" tn="renounce, abjure" mo="1-1" />
+  <verb in="ablater" tn="ablate, remove" mo="1-1" />
+  <verb in="abolir" tn="abolish" mo="2-1" />
+  <verb in="abominer" tn="abhor, execrate" mo="1-1" />
+  <verb in="abonder" tn="abound" mo="1-1" />
+  <verb in="abonner" tn="subscribe" mo="1-1" />
+  <verb in="abonnir" tn="improve" mo="2-1" />
+  <verb in="aborder" tn="deal with, tackle" mo="1-1" />
+  <verb in="aboucher" tn="get in contact" mo="1-1" />
+  <verb in="abouler" tn="roll along" mo="1-1" />
+  <verb in="abouter" tn="join, abut" mo="1-1" />
+  <verb in="aboutir" tn="lead to, reach" mo="2-1" />
+  <verb in="aboyer" tn="bark, yell" mo="1-7A" />
+  <verb in="abraser" tn="abrade" mo="1-1" />
+  <verb in="abreuver" tn="water" mo="1-1" />
+  <verb in="abréger" tn="shorten, abridge" mo="1-6C" />
+  <verb in="abriter" tn="shelter" mo="1-1" />
+  <verb in="abroger" tn="rescind" mo="1-2B" />
+  <verb in="abrutir" tn="render idiotic" mo="2-1" />
+  <verb in="absenter" tn="leave" re="t" mo="1-1" />
+  <verb in="absorber" tn="absorb" mo="1-1" />
   <verb in="absoudre" tn="absolve" mo="5-13A" />
+  <verb in="abstenir" tn="abstain" re="t" mo="6-7" />
   <verb in="accroître" tn="increase" mo="5-19B" />
   <verb in="accueillir" tn="welcome" mo="3-2B" />
   <verb in="acquérir" tn="acquire" mo="6-3" />

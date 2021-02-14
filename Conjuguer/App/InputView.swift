@@ -12,6 +12,7 @@ struct InputView: View {
   @State var model: String = "1-1"
   @State var translation: String = ""
   @State var auxiliary: String = "a"
+  @State var reflexive: String = "f"
 
   var body: some View {
     ZStack {
@@ -37,6 +38,11 @@ struct InputView: View {
           .autocapitalization(UITextAutocapitalizationType.none)
           .disableAutocorrection(true)
           .padding()
+        TextField("Reflexive", text: $reflexive)
+          .textFieldStyle(RoundedBorderTextFieldStyle())
+          .autocapitalization(UITextAutocapitalizationType.none)
+          .disableAutocorrection(true)
+          .padding()
         Button("Add") {
           add()
         }
@@ -58,6 +64,8 @@ struct InputView: View {
       return
     }
 
+    let isReflexive = reflexive == "t" ? true : false
+
     if Verb.verbs[infinitif] != nil {
       Swift.print("\(infinitif) has already been inpat.")
       return
@@ -72,7 +80,8 @@ struct InputView: View {
       infinitif: infinitif,
       translation: translation,
       model: model,
-      auxiliary: currentAuxiliary
+      auxiliary: currentAuxiliary,
+      isReflexive: isReflexive
     )
     Verb.verbs[infinitif] = verb
     conjugate(infinitif)
@@ -83,6 +92,7 @@ struct InputView: View {
     translation = ""
     model = "1-1"
     auxiliary = "a"
+    reflexive = "f"
   }
 
   private func conjugate(_ verb: String) {
@@ -247,6 +257,9 @@ struct InputView: View {
       output += "  <verb in=\"" + verb.infinitif + "\" tn=\"" + verb.translation + "\" "
       if verb.auxiliary == .être {
         output += "ay=\"e\" "
+      }
+      if verb.isReflexive {
+        output += "re=\"t\" "
       }
       output += "mo=\"" + verb.model + "\" />\n"
     }

@@ -15,6 +15,7 @@ class VerbParser: NSObject, XMLParserDelegate {
   private var currentTranslation = ""
   private var currentModel = ""
   private var currentAuxiliary: String?
+  private var currentIsReflexive: Bool = false
 
   override init() {
     super.init()
@@ -56,6 +57,13 @@ class VerbParser: NSObject, XMLParserDelegate {
       if let auxiliary = attributeDict["ay"] {
         currentAuxiliary = auxiliary
       }
+
+      if
+        let isReflexive = attributeDict["re"],
+        isReflexive == "t"
+      {
+        currentIsReflexive = true
+      }
     }
   }
 
@@ -72,13 +80,15 @@ class VerbParser: NSObject, XMLParserDelegate {
         infinitif: currentVerb,
         translation: currentTranslation,
         model: currentModel,
-        auxiliary: auxiliary
+        auxiliary: auxiliary,
+        isReflexive: currentIsReflexive
       )
 
       currentVerb = ""
       currentTranslation = ""
       currentModel = ""
       currentAuxiliary = nil
+      currentIsReflexive = false
     }
   }
 }
