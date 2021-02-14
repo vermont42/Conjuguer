@@ -11,7 +11,7 @@ import SwiftUI
 struct ConjuguerApp: App {
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      InputView()
     }
   }
 
@@ -23,7 +23,7 @@ struct ConjuguerApp: App {
     VerbModel.models = VerbModelParser().parse()
 
     print("verb count: \(Verb.verbs.count)  model count: \(VerbModel.models.count)\n")
-
+/*
     for verb in Array(Verb.verbs.keys) {
       var output = "\(verb)"
 
@@ -204,5 +204,6 @@ struct ConjuguerApp: App {
 
       print("\(output)\n\n")
     }
+ */
   }
 }
