@@ -9,7 +9,7 @@ import SwiftUI
 
 struct InputView: View {
   @State var infinitif: String = ""
-  @State var model: String = ""
+  @State var model: String = "1-1"
   @State var translation: String = ""
   @State var auxiliary: String = "a"
 
@@ -64,7 +64,7 @@ struct InputView: View {
 
     infinitif = ""
     translation = ""
-    model = ""
+    model = "1-1"
     auxiliary = "a"
   }
 
