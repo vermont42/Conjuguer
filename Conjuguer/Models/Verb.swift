@@ -16,6 +16,7 @@ struct Verb {
   let model: String
   let auxiliary: Auxiliary
   let isReflexive: Bool
+  let frequency: Int?
 
   var infinitifStem: String {
     let endingLength: Int

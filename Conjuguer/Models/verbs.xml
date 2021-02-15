@@ -6,6 +6,7 @@
     <!ATTLIST verb tn CDATA #REQUIRED>
     <!ATTLIST verb mo CDATA #REQUIRED>
     <!ATTLIST verb ay CDATA #IMPLIED>
+    <!ATTLIST verb fr CDATA #IMPLIED>
 ]>
 
 <verbs>
@@ -48,10 +49,10 @@
   <verb in="accaparer" tn="monopolize, corner" mo="1-1" />
   <verb in="accastiller" tn="fit out" mo="1-1" />
   <verb in="accentuer" tn="accentuate" mo="1-1" />
-  <verb in="accepter" tn="accept" mo="1-1" />
   <verb in="accessoiriser" tn="accessorize with" mo="1-1" />
   <verb in="accéder" tn="reach, access" mo="1-5" />
   <verb in="accélérer" tn="accelerate" mo="1-5" />
+  <verb in="accepter" tn="accept" mo="1-1" fr="52" />
   <verb in="acclamer" tn="acclaim" mo="1-1" />
   <verb in="acclimater" tn="acclimatize" mo="1-1" />
   <verb in="accoler" tn="place side by side" mo="1-1" />
@@ -82,37 +83,62 @@
   <verb in="achalander" tn="supply with clientele" mo="1-1" />
   <verb in="acharner" tn="incite, sic" mo="1-1" />
   <verb in="acquérir" tn="acquire" mo="6-3" />
-  <verb in="aller" tn="go" ay="e" mo="1-9" />
+  <verb in="agir" tn="act" mo="2-1" fr="53" />
+  <verb in="aimer" tn="like, love" mo="1-1" fr="59" />
+  <verb in="ajouter" tn="add" mo="1-1" fr="94" />
+  <verb in="aller" tn="go" ay="e" mo="1-9" fr="10" />
   <verb in="amorcer" tn="start, prime, bait" mo="1-2A" />
-  <verb in="appeler" tn="call" mo="1-3A" />
-  <verb in="apprendre" tn="learn" mo="5-2" />
-  <verb in="arriver" tn="arrive" ay="e" mo="1-1" />
+  <verb in="appartenir" tn="belong, concern" mo="6-7" fr="79" />
+  <verb in="appeler" tn="call" mo="1-3A" fr="36" />
+  <verb in="apporter" tn="bring" mo="1-1" fr="89" />
+  <verb in="apprendre" tn="learn" mo="5-2" fr="82" />
+  <verb in="arriver" tn="arrive" ay="e" mo="1-1" fr="42" />
   <verb in="assaillir" tn="assail" mo="3-2A" />
   <verb in="asseoir" tn="sit" mo="4-9AB" />
-  <verb in="avoir" tn="have" mo="4-10" />
+  <verb in="assurer" tn="secure, assure" mo="1-1" fr="73" />
+  <verb in="atteindre" tn="attain" mo="5-12" fr="91" />
+  <verb in="attendre" tn="wait for" mo="5-1A" fr="34" />
+  <verb in="avoir" tn="have" mo="4-10" fr="2" />
   <verb in="battre" tn="beat" mo="5-3" />
   <verb in="boire" tn="drink" mo="5-17" />
   <verb in="bouillir" tn="boil" mo="3-2C" />
   <verb in="bruire" tn="rustle, murmur" mo="2-2" />
   <verb in="céder" tn="cede" mo="1-5" />
+  <verb in="changer" tn="change" mo="1-1" fr="70" />
+  <verb in="chercher" tn="look for, seek" mo="1-1" fr="86" />
+  <verb in="choisir" tn="choose" mo="2-1" fr="57" />
   <verb in="circoncire" tn="circumcize" mo="5-8D" />
   <verb in="clamecer" tn="kick the bucket" mo="1-6A" />
   <verb in="colorer" tn="color" mo="1-1" />
   <verb in="combattre" tn="fight, oppose" mo="5-3" />
+  <verb in="commencer" tn="start" mo="1-2A" fr="31" />
+  <verb in="comprendre" tn="understand" mo="5-2" fr="20" />
+  <verb in="compter" tn="count" mo="1-1" fr="32" />
+  <verb in="concerner" tn="concern" mo="1-1" fr="81" />
   <verb in="conduire" tn="drive, conduct" mo="5-9A" />
-  <verb in="connaître" tn="know" mo="5-20" />
+  <verb in="connaître" tn="know" mo="5-20" fr="29" />
+  <verb in="considérer" tn="consider" mo="1-1" fr="63" />
+  <verb in="continuer" tn="continue" mo="1-1" fr="26" />
   <verb in="convaincre" tn="convince" mo="5-25" />
   <verb in="coudre" tn="sew" mo="5-14" />
   <verb in="courir" tn="run" mo="6-4" />
   <verb in="couvrir" tn="cover" mo="3-1" />
-  <verb in="croire" tn="believe" mo="5-18" />
+  <verb in="créer" tn="create" mo="1-1" fr="84" />
+  <verb in="croire" tn="believe" mo="5-18" fr="30" />
   <verb in="croître" tn="grow" mo="5-19A" />
   <verb in="cueillir" tn="gather" mo="3-2B" />
-  <verb in="devoir" tn="must, owe" mo="4-2A" />
+  <verb in="décéder" tn="die" ay="e" mo="1-5" />
+  <verb in="décider" tn="decide" mo="1-1" fr="41" />
+  <verb in="défendre" tn="defend, forbid" mo="5-1A" fr="99" />
+  <verb in="demander" tn="ask" mo="1-1" fr="15" />
+  <verb in="devenir" tn="become" ay="e" mo="6-7" fr="39" />
+  <verb in="devoir" tn="must, owe" mo="4-2A" fr="7" />
   <verb in="défaillir" tn="faint" mo="3-2A" />
   <verb in="dépecer" tn="cut up, tear" mo="1-6A" />
-  <verb in="dire" tn="say, tell" mo="5-8A" />
+  <verb in="descendre" tn="descend" ay="e" mo="5-1A" />
+  <verb in="dire" tn="say, tell" mo="5-8A" fr="6" />
   <verb in="dissoudre" tn="dissolve" mo="5-13A" />
+  <verb in="donner" tn="give" mo="1-1" fr="9" />
   <verb in="dormir" tn="sleep" mo="6-1" />
   <verb in="employer" tn="use, employ" mo="1-7A" />
   <verb in="entrapercevoir" tn="glimpse" mo="4-2B" />
@@ -120,89 +146,137 @@
   <verb in="envoyer" tn="send" mo="1-8" />
   <verb in="essuyer" tn="wipe, dry" mo="1-7A" />
   <verb in="exclure" tn="exclude" mo="5-16A" />
-  <verb in="écrire" tn="write" mo="5-7" />
+  <verb in="écrire" tn="write" mo="5-7" fr="98" />
   <verb in="élire" tn="elect" mo="5-10" />
   <verb in="émouvoir" tn="move emotionally" mo="4-3B" />
-  <verb in="être" tn="be" mo="5-26" />
+  <verb in="empêcher" tn="prevent" mo="1-1" fr="75" />
+  <verb in="entendre" tn="hear, understand" mo="5-1A" fr="33" />
+  <verb in="entrer" tn="enter" ay="e" mo="1-1" fr="87" />
+  <verb in="essayer" tn="try" mo="1-7B" fr="74" />
+  <verb in="être" tn="be" mo="5-26" fr="1" />
+  <verb in="exister" tn="exist" mo="1-1" fr="66" />
+  <verb in="expliquer" tn="explain" mo="1-1" fr="62" />
   <verb in="fabriquer" tn="fabricate" mo="1-1" />
-  <verb in="faire" tn="do, make" mo="5-23" />
-  <verb in="falloir" tn="be necessary" mo="4-5C" />
+  <verb in="faire" tn="do, make" mo="5-23" fr="4" />
+  <verb in="falloir" tn="be necessary" mo="4-5C" fr="13" />
   <verb in="fatiguer" tn="fatigue" mo="1-1" />
   <verb in="finir" tn="finish" mo="2-1" />
   <verb in="fuire" tn="flee" mo="6-2" />
+  <verb in="gagner" tn="win" mo="1-1" fr="65" />
   <verb in="haïr" tn="hate" mo="2-3" />
+  <verb in="importer" tn="matter, import" mo="1-1" fr="93" />
   <verb in="inclure" tn="include" mo="5-16B" />
   <verb in="jeter" tn="throw" mo="1-3B" />
   <verb in="joindre" tn="join" mo="5-12" />
+  <verb in="jouer" tn="play" mo="1-1" fr="55" />
   <verb in="lancer" tn="throw" mo="1-2A" />
-  <verb in="lire" tn="read" mo="5-10" />
+  <verb in="laisser" tn="leave, allow" mo="1-1" fr="46" />
+  <verb in="lire" tn="read" mo="5-10" fr="68" />
   <verb in="manger" tn="eat" mo="1-2B" />
   <verb in="maudire" tn="curse" mo="2-2" />
-  <verb in="mettre" tn="put" mo="5-4" />
+  <verb in="mener" tn="lead" mo="1-1" fr="78" />
+  <verb in="mettre" tn="put" mo="5-4" fr="5" />
+  <verb in="monter" tn="climb, mount" ay="e" mo="1-1" />
+  <verb in="montrer" tn="show" mo="1-1" fr="25" />
   <verb in="mordre" tn="bite" mo="5-1A" />
   <verb in="moudre" tn="grind" mo="5-15" />
-  <verb in="mourir" tn="die" mo="6-5" />
+  <verb in="mourir" tn="die" ay="e" mo="6-5" />
   <verb in="mouvoir" tn="move" mo="4-3A" />
-  <verb in="naître" tn="be born" mo="5-21" />
+  <verb in="naître" tn="be born" ay="e" mo="5-21" />
   <verb in="nuire" tn="harm" mo="5-9B" />
+  <verb in="obtenir" tn="obtain" mo="6-7" fr="85" />
+  <verb in="occuper" tn="occupy" mo="1-1" fr="38" />
   <verb in="offrir" tn="offer" mo="3-1" />
-  <verb in="ouvrir" tn="open" mo="3-1" />
+  <verb in="ouvrir" tn="open" mo="3-1" fr="64" />
   <verb in="paître" tn="graze, pasture" mo="5-20" />
   <verb in="paraître" tn="appear" mo="5-20" />
-  <verb in="parler" tn="speak" mo="1-1" />
-  <verb in="partir" tn="leave" mo="6-1" />
+  <verb in="parler" tn="speak" mo="1-1" fr="24" />
+  <verb in="partir" tn="leave" ay="e" mo="6-1" fr="40" />
+  <verb in="parvenir" tn="reach, attain" ay="e" mo="6-7" />
+  <verb in="passer" tn="pass" mo="1-1" fr="19" />
   <verb in="payer" tn="pay" mo="1-7B" />
   <verb in="peindre" tn="paint" mo="5-12" />
-  <verb in="perdre" tn="lose" mo="5-1A" />
+  <verb in="penser" tn="think" mo="1-1" fr="27" />
+  <verb in="perdre" tn="lose, waste" mo="5-1A" fr="61" />
+  <verb in="permettre" tn="permit" mo="5-4" fr="37" />
   <verb in="peser" tn="weight" mo="1-4" />
   <verb in="plaindre" tn="pity" mo="5-12" />
   <verb in="plaire" tn="please" mo="5-22A" />
   <verb in="pleuvoir" tn="rain" mo="4-4" />
+  <verb in="porter" tn="carry" mo="1-1" fr="23" />
+  <verb in="poser" tn="pose, put down" mo="1-1" fr="54" />
   <verb in="pourvoir" tn="supply, provide" mo="4-1C" />
-  <verb in="pouvoir" tn="be able" mo="4-6" />
-  <verb in="prendre" tn="take" mo="5-2" />
+  <verb in="pouvoir" tn="be able" mo="4-6" fr="3" />
+  <verb in="prendre" tn="take" mo="5-2" fr="8" />
   <verb in="prédire" tn="predict" mo="5-8B" />
+  <verb in="préparer" tn="prepare" mo="1-1" fr="96" />
+  <verb in="présenter" tn="present" mo="1-1" fr="51" />
   <verb in="prévaloir" tn="prevail" mo="4-5B" />
   <verb in="prévoir" tn="foresee" mo="4-1B" />
   <verb in="prier" tn="request, pray" mo="1-1" />
+  <verb in="produire" tn="produce" mo="5-9A" fr="95" />
   <verb in="promouvoir" tn="promote" mo="4-3B" />
+  <verb in="proposer" tn="suggest, proprose" mo="1-1" fr="88" />
   <verb in="protéger" tn="protect" mo="1-6C" />
   <verb in="rapiécer" tn="patch" mo="1-6B" />
-  <verb in="recevoir" tn="receive" mo="4-2B" />
+  <verb in="rappeler" tn="remind" mo="1-3A" fr="50" />
+  <verb in="recevoir" tn="receive" mo="4-2B" fr="47" />
+  <verb in="reconnaître" tn="recognize" mo="5-20" fr="56" />
   <verb in="recueillir" tn="collect" mo="3-2B" />
   <verb in="redevoir" tn="owe again" mo="4-2A" />
+  <verb in="refuser" tn="refuse" mo="1-1" fr="67" />
+  <verb in="relever" tn="raise" mo="1-1" fr="97" />
+  <verb in="remettre" tn="put back, replace" mo="5-4" fr="35" />
   <verb in="renaître" tn="be born again" mo="5-21" />
-  <verb in="rendre" tn="render" mo="5-1A" />
+  <verb in="rencontrer" tn="meet, encounter" mo="1-1" fr="83" />
+  <verb in="rendre" tn="render" mo="5-1A" fr="17" />
+  <verb in="rentrer" tn="re-enter, go in" ay="e" mo="1-1" />
+  <verb in="reprendre" tn="take back" mo="5-2" fr="77" />
+  <verb in="représenter" tn="represent" mo="1-1" fr="72" />
+  <verb in="rester" tn="stay" ay="e" mo="1-1" fr="21" />
+  <verb in="retourner" tn="return" ay="e" mo="1-1" />
+  <verb in="retrouver" tn="find, regain" mo="1-1" fr="60" />
+  <verb in="réussir" tn="succeed" mo="2-1" fr="69" />
+  <verb in="revenir" tn="return" ay="e" mo="6-7" fr="44" />
   <verb in="revoir" tn="see again" mo="4-1A" />
   <verb in="revouloir" tn="want again/back" mo="4-8" />
   <verb in="répandre" tn="spread, scatter" mo="5-1A" />
-  <verb in="répondre" tn="answer, respond" mo="5-1A" />
+  <verb in="répondre" tn="answer, respond" mo="5-1A" fr="48" />
   <verb in="résoudre" tn="dissolve" mo="5-13B" />
   <verb in="rire" tn="laugh" mo="5-11" />
+  <verb in="risquer" tn="risk" mo="1-1" fr="80" />
   <verb in="rompre" tn="break" mo="5-1B" />
   <verb in="saillir" tn="protrude" mo="3-2A" />
   <verb in="satisfaire" tn="satisfy, fulfill" mo="5-23" />
-  <verb in="savoir" tn="know" mo="4-7" />
+  <verb in="savoir" tn="know" mo="4-7" fr="12" />
+  <verb in="sembler" tn="seem" mo="1-1" fr="44" />
   <verb in="sentir" tn="sense, smell" mo="6-1" />
-  <verb in="servir" tn="serve" mo="6-1" />
-  <verb in="sortir" tn="take out, go out" mo="6-1" />
+  <verb in="servir" tn="serve" mo="6-1" fr="43" />
+  <verb in="sortir" tn="take out, go out" ay="e" mo="6-1" fr="76" />
   <verb in="souffrir" tn="souffrir" mo="3-1" />
   <verb in="sourire" tn="smile" mo="5-11" />
   <verb in="submerger" tn="overwhelm, submerge" mo="1-2B" />
   <verb in="suffire" tn="suffice" mo="5-8C" />
-  <verb in="suivre" tn="follow" mo="5-5" />
+  <verb in="suivre" tn="follow" mo="5-5" fr="28" />
   <verb in="surmener" tn="overwork" mo="1-4" />
   <verb in="surseoir" tn="postpone" mo="4-9C" />
   <verb in="taire" tn="keep quiet" mo="5-22B" />
-  <verb in="tenir" tn="hold" mo="6-7" />
+  <verb in="tenir" tn="hold" mo="6-7" fr="22" />
+  <verb in="tenter" tn="tempt" mo="1-1" fr="92" />
+  <verb in="tirer" tn="pull, fire" mo="1-1" fr="100" />
+  <verb in="tomber" tn="fall" ay="e" mo="1-1" />
+  <verb in="toucher" tn="touch" mo="1-1" fr="58" />
   <verb in="traire" tn="milk" mo="5-24" />
+  <verb in="travailler" tn="work" mo="1-1" fr="71" />
   <verb in="tressaillir" tn="wince" mo="3-2A" />
+  <verb in="trouver" tn="find" mo="1-1" fr="16" />
+  <verb in="utiliser" tn="use, employ" mo="1-1" fr="90" />
   <verb in="vaincre" tn="vanquish" mo="5-25" />
   <verb in="valoir" tn="be worth" mo="4-5A" />
-  <verb in="venir" tn="come" mo="6-7" />
+  <verb in="venir" tn="come" ay="e" mo="6-7" fr="18" />
   <verb in="vêtir" tn="dress" mo="6-6" />
-  <verb in="vivre" tn="live" mo="5-6" />
-  <verb in="voir" tn="see" mo="4-1A" />
+  <verb in="vivre" tn="live" mo="5-6" fr="49" />
+  <verb in="voir" tn="see" mo="4-1A" fr="14" />
   <verb in="voleter" tn="flutter" mo="1-3B" />
-  <verb in="vouloir" tn="want" mo="4-8" />
+  <verb in="vouloir" tn="want" mo="4-8" fr="11" />
 </verbs>

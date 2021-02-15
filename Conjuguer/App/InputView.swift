@@ -81,7 +81,8 @@ struct InputView: View {
       translation: translation,
       model: model,
       auxiliary: currentAuxiliary,
-      isReflexive: isReflexive
+      isReflexive: isReflexive,
+      frequency: nil
     )
     Verb.verbs[infinitif] = verb
     conjugate(infinitif)
@@ -260,7 +261,11 @@ struct InputView: View {
       if verb.isReflexive {
         output += "re=\"t\" "
       }
-      output += "mo=\"" + verb.model.uppercased() + "\" />\n"
+      output += "mo=\"" + verb.model.uppercased() + "\" "
+      if let frequency = verb.frequency {
+        output += "fr=\"\(frequency)\" "
+      }
+      output += "/>\n"
     }
     output  += "</verbs>"
     Swift.print(output)

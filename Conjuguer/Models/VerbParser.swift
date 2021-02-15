@@ -16,6 +16,7 @@ class VerbParser: NSObject, XMLParserDelegate {
   private var currentModel = ""
   private var currentAuxiliary: String?
   private var currentIsReflexive: Bool = false
+  private var currentFrequency: Int?
 
   override init() {
     super.init()
@@ -64,6 +65,13 @@ class VerbParser: NSObject, XMLParserDelegate {
       {
         currentIsReflexive = true
       }
+
+      if
+        let frequency = attributeDict["fr"],
+        let frequencyInt = Int(frequency)
+      {
+        currentFrequency = frequencyInt
+      }
     }
   }
 
@@ -81,7 +89,8 @@ class VerbParser: NSObject, XMLParserDelegate {
         translation: currentTranslation,
         model: currentModel,
         auxiliary: auxiliary,
-        isReflexive: currentIsReflexive
+        isReflexive: currentIsReflexive,
+        frequency: currentFrequency
       )
 
       currentVerb = ""
@@ -89,6 +98,7 @@ class VerbParser: NSObject, XMLParserDelegate {
       currentModel = ""
       currentAuxiliary = nil
       currentIsReflexive = false
+      currentFrequency = nil
     }
   }
 }

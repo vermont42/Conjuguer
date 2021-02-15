@@ -23,7 +23,7 @@ struct ConjuguerApp: App {
     VerbModel.models = VerbModelParser().parse()
 
     print("verb count: \(Verb.verbs.count)  model count: \(VerbModel.models.count)\n")
-/*
+
     for verb in Array(Verb.verbs.keys) {
       var output = "\(verb)"
 
@@ -199,11 +199,17 @@ struct ConjuguerApp: App {
         let actualVerb = Verb.verbs[verb],
         actualVerb.auxiliary == .être
       {
-        output += " •  auxiliary: être "
+        output += " •  AUXILIARY: ÊTRE "
+      }
+
+      if
+        let actualVerb = Verb.verbs[verb],
+        let frequency = actualVerb.frequency
+      {
+        output += " •  FREQUENCY: \(frequency) "
       }
 
       print("\(output)\n\n")
     }
- */
   }
 }
