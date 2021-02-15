@@ -1,3 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE verbs [
+    <!ELEMENT verbs (verb+)>
+    <!ELEMENT verb (verb*)>
+    <!ATTLIST verb in CDATA #REQUIRED>
+    <!ATTLIST verb tn CDATA #REQUIRED>
+    <!ATTLIST verb mo CDATA #REQUIRED>
+    <!ATTLIST verb ay CDATA #IMPLIED>
+]>
+
 <verbs>
   <verb in="abaisser" tn="lower, stoop, abase" mo="1-1" />
   <verb in="abandonner" tn="abandon" mo="1-1" />
@@ -32,8 +42,45 @@
   <verb in="absorber" tn="absorb" mo="1-1" />
   <verb in="absoudre" tn="absolve" mo="5-13A" />
   <verb in="abstenir" tn="abstain" re="t" mo="6-7" />
+  <verb in="abstraire" tn="abstract" mo="5-24" />
+  <verb in="abuser" tn="mislead, abuse" mo="1-1" />
+  <verb in="accabler" tn="devastate, overwhelm" mo="1-1" />
+  <verb in="accaparer" tn="monopolize, corner" mo="1-1" />
+  <verb in="accastiller" tn="fit out" mo="1-1" />
+  <verb in="accentuer" tn="accentuate" mo="1-1" />
+  <verb in="accepter" tn="accept" mo="1-1" />
+  <verb in="accessoiriser" tn="accessorize with" mo="1-1" />
+  <verb in="accéder" tn="reach, access" mo="1-5" />
+  <verb in="accélérer" tn="accelerate" mo="1-5" />
+  <verb in="acclamer" tn="acclaim" mo="1-1" />
+  <verb in="acclimater" tn="acclimatize" mo="1-1" />
+  <verb in="accoler" tn="place side by side" mo="1-1" />
+  <verb in="accommoder" tn="accommodate" mo="1-1" />
+  <verb in="accompagner" tn="accompany" mo="1-1" />
+  <verb in="accomplir" tn="accomplish" mo="2-1" />
+  <verb in="accorder" tn="grant" mo="1-1" />
+  <verb in="accoster" tn="come ashore" mo="1-1" />
+  <verb in="accoter" tn="lean, support" mo="1-1" />
+  <verb in="accoucher" tn="give birth" mo="1-1" />
+  <verb in="accouder" tn="rest, lean on one’s elbows" re="t" mo="1-1" />
+  <verb in="accoupler" tn="pair up, unite" mo="1-1" />
+  <verb in="accourcir" tn="shorten" mo="2-1" />
+  <verb in="accourir" tn="rush up, run up" mo="6-4" />
+  <verb in="accoutrer" tn="equip, furnish with dress" mo="1-1" />
+  <verb in="accoutumer" tn="accustom" mo="1-1" />
+  <verb in="accréditer" tn="accredit" mo="1-1" />
+  <verb in="accrocher" tn="hook, hook up" mo="1-1" />
+  <verb in="accroire" tn="believe something false" mo="5-18" />
   <verb in="accroître" tn="increase" mo="5-19B" />
+  <verb in="accroupir" tn="crouch, squat" re="t" mo="2-1" />
   <verb in="accueillir" tn="welcome" mo="3-2B" />
+  <verb in="acculer" tn="corner, prevent escape" mo="1-1" />
+  <verb in="accumuler" tn="accumlate" mo="1-1" />
+  <verb in="accuser" tn="accuse" mo="1-1" />
+  <verb in="acérer" tn="sharpen" mo="1-5" />
+  <verb in="acétifier" tn="acetify, turn into acid" mo="1-1" />
+  <verb in="achalander" tn="supply with clientele" mo="1-1" />
+  <verb in="acharner" tn="incite, sic" mo="1-1" />
   <verb in="acquérir" tn="acquire" mo="6-3" />
   <verb in="aller" tn="go" ay="e" mo="1-9" />
   <verb in="amorcer" tn="start, prime, bait" mo="1-2A" />

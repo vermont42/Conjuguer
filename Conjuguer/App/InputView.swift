@@ -231,8 +231,7 @@ struct InputView: View {
       output += " •  auxiliary: être "
     }
 
-    Swift.print("\(output)\n\n")
-    Swift.print("verb count: \(Verb.verbs.count)")
+    Swift.print("\(output)\n")
   }
 
   private func print() {
@@ -261,7 +260,7 @@ struct InputView: View {
       if verb.isReflexive {
         output += "re=\"t\" "
       }
-      output += "mo=\"" + verb.model + "\" />\n"
+      output += "mo=\"" + verb.model.uppercased() + "\" />\n"
     }
     output  += "</verbs>"
     Swift.print(output)
