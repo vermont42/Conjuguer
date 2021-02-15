@@ -251,9 +251,12 @@ struct InputView: View {
     <verbs>
     """
     output += "\n"
+
+    let french = Locale(identifier: "fr")
     let verbArray = Verb.verbs.values.sorted { lhs, rhs in
-      lhs.infinitif.caseInsensitiveCompare(rhs.infinitif) == .orderedAscending
+      lhs.infinitif.compare(rhs.infinitif, locale: french) == .orderedAscending
     }
+
     for verb in verbArray {
       output += "  <verb in=\"" + verb.infinitif + "\" tn=\"" + verb.translation + "\" "
       if verb.auxiliary == .être {
