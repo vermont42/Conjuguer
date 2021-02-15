@@ -245,6 +245,7 @@ struct InputView: View {
         <!ATTLIST verb tn CDATA #REQUIRED>
         <!ATTLIST verb mo CDATA #REQUIRED>
         <!ATTLIST verb ay CDATA #IMPLIED>
+        <!ATTLIST verb fr CDATA #IMPLIED>
     ]>
 
     <verbs>
