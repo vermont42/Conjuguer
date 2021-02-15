@@ -24,134 +24,140 @@ struct ConjuguerApp: App {
 
     print("verb count: \(Verb.verbs.count)  model count: \(VerbModel.models.count)\n")
 
-    for verb in Array(Verb.verbs.keys) {
-      var output = "\(verb)"
-
-      output += "  •  PRESENT: "
-
-      let personNumbers: [PersonNumber] = PersonNumber.allCases
-
-      for personNumber in personNumbers {
-        let présentResult = Conjugator.conjugate(infinitif: verb, tense: .indicatifPrésent(personNumber))
-        switch présentResult {
-        case .success(let value):
-          output += "\(value) "
-        default:
-          fatalError()
-        }
-      }
-
-      output += " •  IMPERFECT: "
-
-      for personNumber in personNumbers {
-        let imparfaitResult = Conjugator.conjugate(infinitif: verb, tense: .imparfait(personNumber))
-        switch imparfaitResult {
-        case .success(let value):
-          output += "\(value) "
-        default:
-          fatalError()
-        }
-      }
-
-      output += " •  FUTURE: "
-
-      for personNumber in personNumbers {
-        let futurResult = Conjugator.conjugate(infinitif: verb, tense: .futurSimple(personNumber))
-        switch futurResult {
-        case .success(let value):
-          output += "\(value) "
-        default:
-          fatalError()
-        }
-      }
-
-      output += " •  CONDITIONAL: "
-
-      for personNumber in personNumbers {
-        let conditionnelResult = Conjugator.conjugate(infinitif: verb, tense: .conditionnelPrésent(personNumber))
-        switch conditionnelResult {
-        case .success(let value):
-          output += "\(value) "
-        default:
-          fatalError()
-        }
-      }
-
-      output += " •  SIMPLE PAST: "
-
-      for personNumber in personNumbers {
-        let passéSimpleResult = Conjugator.conjugate(infinitif: verb, tense: .passéSimple(personNumber))
-        switch passéSimpleResult {
-        case .success(let value):
-          output += "\(value) "
-        default:
-          fatalError()
-        }
-      }
-
-      output += " •  SUBJ. PRESENT: "
-
-      for personNumber in personNumbers {
-        let subjonctifPrésentResult = Conjugator.conjugate(infinitif: verb, tense: .subjonctifPrésent(personNumber))
-        switch subjonctifPrésentResult {
-        case .success(let value):
-          output += "\(value) "
-        default:
-          fatalError()
-        }
-      }
-
-      output += " •  SUBJ. IMPERFECT: "
-
-      for personNumber in personNumbers {
-        let subjonctifImparfaitResult = Conjugator.conjugate(infinitif: verb, tense: .subjonctifImparfait(personNumber))
-        switch subjonctifImparfaitResult {
-        case .success(let value):
-          output += "\(value) "
-        default:
-          fatalError()
-        }
-      }
-
-      let participePassé: String
-      let participePasséResult = Conjugator.conjugate(infinitif: verb, tense: .participePassé)
-      switch participePasséResult {
-      case .success(let value):
-        participePassé = value
-      default:
-        fatalError()
-      }
-      output += "  •  PAST PARTICIPLE: \(participePassé) "
-
-      let participePrésent: String
-      let participePrésentResult = Conjugator.conjugate(infinitif: verb, tense: .participePrésent)
-      switch participePrésentResult {
-      case .success(let value):
-        participePrésent = value
-      default:
-        fatalError()
-      }
-      output += " •  PRESENT PARTICIPLE: \(participePrésent) "
-
-      output += " •  IMPERATIVE: "
-
-      for personNumber in PersonNumber.impératifPersonNumbers {
-        let impératifResult = Conjugator.conjugate(infinitif: verb, tense: .impératif(personNumber))
-        switch impératifResult {
-        case .success(let value):
-          output += "\(value) "
-        default:
-          fatalError()
-        }
-      }
-
-      let radicalFuturResult = Conjugator.conjugate(infinitif: verb, tense: .radicalFutur)
-      switch radicalFuturResult {
-      case .success(let value):
-        output += " •  FUTURE STEM: \(value) "
-      default:
-        fatalError()
-      }
+//    let french = Locale(identifier: "fr")
+//    let verbArray = Verb.verbs.values.sorted { lhs, rhs in
+//      lhs.infinitif.compare(rhs.infinitif, locale: french) == .orderedAscending
+//    }
+//
+//    for verb in verbArray {
+//      let infinitif = verb.infinitif
+//      var output = "\(infinitif)"
+//
+//      output += "  •  \(verb.translation)  •  PRESENT: "
+//
+//      let personNumbers: [PersonNumber] = PersonNumber.allCases
+//
+//      for personNumber in personNumbers {
+//        let présentResult = Conjugator.conjugate(infinitif: infinitif, tense: .indicatifPrésent(personNumber))
+//        switch présentResult {
+//        case .success(let value):
+//          output += "\(value) "
+//        default:
+//          fatalError()
+//        }
+//      }
+//
+//      output += " •  IMPERFECT: "
+//
+//      for personNumber in personNumbers {
+//        let imparfaitResult = Conjugator.conjugate(infinitif: infinitif, tense: .imparfait(personNumber))
+//        switch imparfaitResult {
+//        case .success(let value):
+//          output += "\(value) "
+//        default:
+//          fatalError()
+//        }
+//      }
+//
+//      output += " •  FUTURE: "
+//
+//      for personNumber in personNumbers {
+//        let futurResult = Conjugator.conjugate(infinitif: infinitif, tense: .futurSimple(personNumber))
+//        switch futurResult {
+//        case .success(let value):
+//          output += "\(value) "
+//        default:
+//          fatalError()
+//        }
+//      }
+//
+//      output += " •  CONDITIONAL: "
+//
+//      for personNumber in personNumbers {
+//        let conditionnelResult = Conjugator.conjugate(infinitif: infinitif, tense: .conditionnelPrésent(personNumber))
+//        switch conditionnelResult {
+//        case .success(let value):
+//          output += "\(value) "
+//        default:
+//          fatalError()
+//        }
+//      }
+//
+//      output += " •  SIMPLE PAST: "
+//
+//      for personNumber in personNumbers {
+//        let passéSimpleResult = Conjugator.conjugate(infinitif: infinitif, tense: .passéSimple(personNumber))
+//        switch passéSimpleResult {
+//        case .success(let value):
+//          output += "\(value) "
+//        default:
+//          fatalError()
+//        }
+//      }
+//
+//      output += " •  SUBJ. PRESENT: "
+//
+//      for personNumber in personNumbers {
+//        let subjonctifPrésentResult = Conjugator.conjugate(infinitif: infinitif, tense: .subjonctifPrésent(personNumber))
+//        switch subjonctifPrésentResult {
+//        case .success(let value):
+//          output += "\(value) "
+//        default:
+//          fatalError()
+//        }
+//      }
+//
+//      output += " •  SUBJ. IMPERFECT: "
+//
+//      for personNumber in personNumbers {
+//        let subjonctifImparfaitResult = Conjugator.conjugate(infinitif: infinitif, tense: .subjonctifImparfait(personNumber))
+//        switch subjonctifImparfaitResult {
+//        case .success(let value):
+//          output += "\(value) "
+//        default:
+//          fatalError()
+//        }
+//      }
+//
+//      let participePassé: String
+//      let participePasséResult = Conjugator.conjugate(infinitif: infinitif, tense: .participePassé)
+//      switch participePasséResult {
+//      case .success(let value):
+//        participePassé = value
+//      default:
+//        fatalError()
+//      }
+//      output += "  •  PAST PARTICIPLE: \(participePassé) "
+//
+//      let participePrésent: String
+//      let participePrésentResult = Conjugator.conjugate(infinitif: infinitif, tense: .participePrésent)
+//      switch participePrésentResult {
+//      case .success(let value):
+//        participePrésent = value
+//      default:
+//        fatalError()
+//      }
+//      output += " •  PRESENT PARTICIPLE: \(participePrésent) "
+//
+//      output += " •  IMPERATIVE: "
+//
+//      for personNumber in PersonNumber.impératifPersonNumbers {
+//        let impératifResult = Conjugator.conjugate(infinitif: infinitif, tense: .impératif(personNumber))
+//        switch impératifResult {
+//        case .success(let value):
+//          output += "\(value) "
+//        default:
+//          fatalError()
+//        }
+//      }
+//
+//      let radicalFuturResult = Conjugator.conjugate(infinitif: infinitif, tense: .radicalFutur)
+//      switch radicalFuturResult {
+//      case .success(let value):
+//        output += " •  FUTURE STEM: \(value) "
+//      default:
+//        fatalError()
+//      }
 
 //      let personNumber = PersonNumber.allCases[ConjuguerApp.compoundPersonNumbersIndex]
 //      [
@@ -195,21 +201,21 @@ struct ConjuguerApp: App {
 //      ConjuguerApp.compoundImpératifPersonNumbersIndex += 1
 //      ConjuguerApp.compoundImpératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
 
-      if
-        let actualVerb = Verb.verbs[verb],
-        actualVerb.auxiliary == .être
-      {
-        output += " •  AUXILIARY: ÊTRE "
-      }
-
-      if
-        let actualVerb = Verb.verbs[verb],
-        let frequency = actualVerb.frequency
-      {
-        output += " •  FREQUENCY: \(frequency) "
-      }
-
-      print("\(output)\n\n")
-    }
+//      if
+//        let actualVerb = Verb.verbs[infinitif],
+//        actualVerb.auxiliary == .être
+//      {
+//        output += " •  AUXILIARY: ÊTRE "
+//      }
+//
+//      if
+//        let actualVerb = Verb.verbs[infinitif],
+//        let frequency = actualVerb.frequency
+//      {
+//        output += " •  FREQUENCY: \(frequency) "
+//      }
+//
+//      print("\(output)\n\n")
+//    }
   }
 }

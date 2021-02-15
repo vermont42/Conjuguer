@@ -99,7 +99,8 @@ struct InputView: View {
   private func conjugate(_ verb: String) {
     var output = "\(verb)"
 
-    output += "  •  PRESENT: "
+    let noTranslation = "NO TRANSLATION"
+    output += "  •  \(Verb.verbs[verb]?.translation ?? noTranslation)  •  PRESENT: "
 
     let personNumbers: [PersonNumber] = PersonNumber.allCases
 
