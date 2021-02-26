@@ -23,29 +23,35 @@ struct InputView: View {
           .autocapitalization(UITextAutocapitalizationType.none)
           .disableAutocorrection(true)
           .padding()
+
         TextField("Model", text: $model)
           .textFieldStyle(RoundedBorderTextFieldStyle())
           .autocapitalization(UITextAutocapitalizationType.none)
           .disableAutocorrection(true)
           .padding()
+
         TextField("Translation", text: $translation)
           .textFieldStyle(RoundedBorderTextFieldStyle())
           .autocapitalization(UITextAutocapitalizationType.none)
           .disableAutocorrection(true)
           .padding()
+
         TextField("Auxiliary", text: $auxiliary)
           .textFieldStyle(RoundedBorderTextFieldStyle())
           .autocapitalization(UITextAutocapitalizationType.none)
           .disableAutocorrection(true)
           .padding()
+
         TextField("Reflexive", text: $reflexive)
           .textFieldStyle(RoundedBorderTextFieldStyle())
           .autocapitalization(UITextAutocapitalizationType.none)
           .disableAutocorrection(true)
           .padding()
+
         Button("Add") {
           add()
         }
+
         Button("Print") {
           print()
         }
@@ -253,9 +259,8 @@ struct InputView: View {
     """
     output += "\n"
 
-    let french = Locale(identifier: "fr")
     let verbArray = Verb.verbs.values.sorted { lhs, rhs in
-      lhs.infinitif.compare(rhs.infinitif, locale: french) == .orderedAscending
+      lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
     }
 
     for verb in verbArray {

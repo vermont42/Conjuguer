@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct VerbModel {
+struct VerbModel: Hashable {
   static var models: [String: VerbModel] = [:]
 
   let id: String
@@ -18,12 +18,46 @@ struct VerbModel {
   let passéSimpleGroup: PasséSimpleGroup?
   let subjonctifPrésentGroup: SubjonctifPrésentGroup?
   let stemAlterations: [StemAlteration]?
+  let position: Int
+  var irregularity = 0
+
+  var description: String {
+    switch id {
+    case "1-1":
+      return "Regular -er"
+    case "2-1":
+      return "Regular -er"
+    case "5-1A":
+      return "Regular -re"
+    default:
+      return "\(irregularity)% Irregular"
+    }
+  }
 
   static func model(id: String) -> VerbModel {
     if let model = models[id] {
       return model
     } else {
       fatalError("No verb model for \(id) found.")
+    }
+  }
+
+  static func computeIrregularities() {
+    for model in models {
+      var irregularityCount = 0
+      if model.value.participeEndingRecursive == model.value.participeEndingRecursive.localizedUppercase {
+        irregularityCount += 1
+      }
+      if let stemAlterations = model.value.stemAlterationsRecursive {
+        for alteration in stemAlterations {
+          irregularityCount += alteration.appliesTo.count
+          if alteration.charsToUse.contains(Tense.irregularEndingMarker) {
+            irregularityCount += alteration.appliesTo.count
+          }
+        }
+      }
+      let maxIrregularityCount = 41
+      models[model.value.id]?.irregularity = Int((Double(irregularityCount) / Double(maxIrregularityCount)) * 100.0)
     }
   }
 
@@ -53,7 +87,7 @@ struct VerbModel {
     } else if let parentId = parentId {
       return VerbModel.model(id: parentId).participeEndingRecursive
     } else {
-      fatalError("participeEnding" + andParentIdAreNil)
+      return ""
     }
   }
 
@@ -120,5 +154,9 @@ struct VerbModel {
     }
 
     return stems
+  }
+
+  static func == (lhs: VerbModel, rhs: VerbModel) -> Bool {
+    lhs.id == rhs.id
   }
 }

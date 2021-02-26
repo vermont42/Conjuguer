@@ -111,6 +111,14 @@ enum PasséSimpleGroup {
     }
   }
 
+  var endings: String {
+    var output = ""
+    for personNumber in PersonNumber.allCases {
+      output += passéSimpleEndingForPersonNumber(personNumber) + " "
+    }
+    return output
+  }
+
   func subjonctifImparfaitEndingForPersonNumber(_ personNumber: PersonNumber) -> String {
     switch self {
     case .bare:
@@ -189,5 +197,13 @@ enum PasséSimpleGroup {
         return "ïssent"
       }
     }
+  }
+
+  var subjonctifImparfaitEndings: String {
+    var output = ""
+    for personNumber in PersonNumber.allCases {
+      output += subjonctifImparfaitEndingForPersonNumber(personNumber) + " "
+    }
+    return output
   }
 }

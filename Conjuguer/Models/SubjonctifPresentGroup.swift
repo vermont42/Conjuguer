@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SubjonctifPrésentGroup {
+enum SubjonctifPrésentGroup: Hashable {
   case e(appliesToIrVerb: Bool)
   case s(appliesToReVerb: Bool)
   case ï
@@ -77,5 +77,13 @@ enum SubjonctifPrésentGroup {
         return "ïssent"
       }
     }
+  }
+
+  var endings: String {
+    var output = ""
+    for personNumber in PersonNumber.allCases {
+      output += endingForPersonNumber(personNumber) + " "
+    }
+    return output
   }
 }

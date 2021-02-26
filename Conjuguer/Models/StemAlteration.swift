@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StemAlteration {
+struct StemAlteration: Hashable {
   let startIndexFromLast: Int
   let charsToReplaceCount: Int
   let charsToUse: String
@@ -150,6 +150,10 @@ struct StemAlteration {
     appliesTo = set
     isAdditive = isAdditiveAlteration
     isInherited = isInheritedAlteration
+  }
+
+  var toString: String {
+    charsToUse
   }
 
   static func alterationsFor(xmlString: String) -> [StemAlteration] {

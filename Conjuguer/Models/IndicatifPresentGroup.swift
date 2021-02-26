@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum IndicatifPrésentGroup {
+enum IndicatifPrésentGroup: Hashable {
   case e(appliesToErVerb: Bool) // parler (true) / couvrir (false)
   case extendedS(appliesToIrVerb: Bool) // finir (true) / maudire (false)
   case s // voir
@@ -120,6 +120,14 @@ enum IndicatifPrésentGroup {
     }
   }
 
+  var endings: String {
+    var output = ""
+    for personNumber in PersonNumber.allCases {
+      output += présentEndingForPersonNumber(personNumber) + " "
+    }
+    return output
+  }
+
   func impératifEndingForPersonNumber(_ personNumber: PersonNumber) -> String {
     switch self {
     case .e(let appliesToErVerb):
@@ -167,5 +175,13 @@ enum IndicatifPrésentGroup {
         return ""
       }
     }
+  }
+
+  var impératifEndings: String {
+    var output = ""
+    for personNumber in PersonNumber.impératifPersonNumbers {
+      output += impératifEndingForPersonNumber(personNumber) + " "
+    }
+    return output
   }
 }

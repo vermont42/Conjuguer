@@ -22,6 +22,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
   private var currentPasséSimpleGroup: PasséSimpleGroup?
   private var currentSubjonctifPrésentGroup: SubjonctifPrésentGroup?
   private var currentStemAlterations: [StemAlteration] = []
+  private var currentPosition = 0
 
   override init() {
     super.init()
@@ -90,7 +91,8 @@ class VerbModelParser: NSObject, XMLParserDelegate {
         indicatifPrésentGroup: currentIndicatifPrésentGroup,
         passéSimpleGroup: currentPasséSimpleGroup,
         subjonctifPrésentGroup: currentSubjonctifPrésentGroup,
-        stemAlterations: currentStemAlterations.isEmpty ? nil : currentStemAlterations
+        stemAlterations: currentStemAlterations.isEmpty ? nil : currentStemAlterations,
+        position: currentPosition
       )
 
       models[currentId] = model
@@ -103,6 +105,7 @@ class VerbModelParser: NSObject, XMLParserDelegate {
       currentPasséSimpleGroup = nil
       currentSubjonctifPrésentGroup = nil
       currentStemAlterations = []
+      currentPosition += 1
     }
   }
 }

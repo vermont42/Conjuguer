@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct Verb {
+struct Verb: Identifiable, Hashable {
   static var verbs: [String: Verb] = [:]
   static let minVerbLength = 4
 
+  let id = UUID()
   let infinitif: String
   let translation: String
   let model: String

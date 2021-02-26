@@ -11,7 +11,7 @@ import SwiftUI
 struct ConjuguerApp: App {
   var body: some Scene {
     WindowGroup {
-      InputView()
+      MainTabView()
     }
   }
 
@@ -21,12 +21,12 @@ struct ConjuguerApp: App {
   init() {
     Verb.verbs = VerbParser().parse()
     VerbModel.models = VerbModelParser().parse()
+    VerbModel.computeIrregularities()
 
     print("verb count: \(Verb.verbs.count)  model count: \(VerbModel.models.count)\n")
 
-//    let french = Locale(identifier: "fr")
 //    let verbArray = Verb.verbs.values.sorted { lhs, rhs in
-//      lhs.infinitif.compare(rhs.infinitif, locale: french) == .orderedAscending
+//      lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
 //    }
 //
 //    for verb in verbArray {

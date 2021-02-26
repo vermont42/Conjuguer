@@ -22,7 +22,7 @@ extension Text {
     var currentIrregularPart = ""
 
     for char in mixedCaseString {
-      let isRegular = char.isLowercase
+      let isRegular = char.isLowercase || char == "^"
       let canonicalChar = char.lowercased()
       switch state {
       case .notStarted:
