@@ -198,22 +198,34 @@ enum Tense: Hashable {
   }
 
   static func shorthandForNonCompoundTense(appliesTo: Set<Tense>) -> String {
-    // TODO: Collapse x1s, x2s, x3s... to xA for all tenses that use A.
-    // Then build the String. rA, xA, bA, iA
     var shorthands: Set<String> = Set()
 
     appliesTo.forEach {
       shorthands.insert($0.shortDisplayName)
     }
 
-    let appliesToCount = appliesTo.count
     var numberAppended = 0
     var output = ""
+
+    let rA = ["r1s", "r2s", "r3s", "r1p", "r2p", "r3p"]
+    let xA = ["x1s", "x2s", "x3s", "x1p", "x2p", "x3p"]
+    let bA = ["b1s", "b2s", "b3s", "b1p", "b2p", "b3p"]
+    let iA = ["i1s", "i2s", "i3s", "i1p", "i2p", "i3p"]
+
+    [(rA, "rA"), (xA, "xA"), (bA, "bA"), (iA, "iA")].forEach { tup in
+      let hasAll = shorthands.contains(tup.0[0]) && shorthands.contains(tup.0[1]) && shorthands.contains(tup.0[2]) && shorthands.contains(tup.0[3]) && shorthands.contains(tup.0[4]) && shorthands.contains(tup.0[5])
+      if hasAll {
+        tup.0.forEach {
+          shorthands.remove($0)
+        }
+        shorthands.insert(tup.1)
+      }
+    }
 
     shorthands.forEach {
       output.append($0)
       numberAppended += 1
-      if numberAppended < appliesToCount {
+      if numberAppended < shorthands.count {
         output.append(", ")
       }
     }

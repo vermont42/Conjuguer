@@ -21,12 +21,11 @@ struct ModelBrowseView: View {
         }
         .pickerStyle(SegmentedPickerStyle())
 
-        List {
+        ScrollView {
           ForEach(store.modelsAndDecorators, id: \.self) { modelAndDecorator in
-            NavigationLink(destination: ModelView(model: modelAndDecorator.model)) {
+            NavigationLink(destination: ModelView(model: modelAndDecorator.model), label: {
               Text(modelAndDecorator.model.exemplar + modelAndDecorator.decorator)
-                .frame(maxWidth: .infinity, alignment: .center)
-            }
+            })
           }
           .navigationBarTitle("Verb Models")
         }
@@ -35,14 +34,14 @@ struct ModelBrowseView: View {
   }
 
   init() {
-//    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-//    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
-//    UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white, .backgroundColor: UIColor.black]
-//    UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white, .backgroundColor: UIColor.black]
-//    UINavigationBar.appearance().backgroundColor = .black
-//    UINavigationBar.appearance().tintColor = .white
-//    UINavigationBar.appearance().barTintColor = .black
-
+    //    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+    //    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
+    //    UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white, .backgroundColor: UIColor.black]
+    //    UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white, .backgroundColor: UIColor.black]
+    //    UINavigationBar.appearance().backgroundColor = .black
+    //    UINavigationBar.appearance().tintColor = .white
+    //    UINavigationBar.appearance().barTintColor = .black
+    UITableViewCell.appearance().selectionStyle = .none
     store = ModelStore(world: Current)
   }
 }
