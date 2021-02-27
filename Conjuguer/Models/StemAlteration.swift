@@ -41,6 +41,8 @@ struct StemAlteration: Hashable {
 
     for index in VerbModelParser.startIndexOfAlterationsInXml ..< components.count {
       let alteration = components[index]
+      // TODO: Don't switch. Instead, handle "A" and "N". Then use Tense.tensesFor(shorthand to figure out what to insert.
+
       switch alteration {
       case "A":
         isAdditiveAlteration = true
@@ -153,7 +155,16 @@ struct StemAlteration: Hashable {
   }
 
   var toString: String {
-    charsToUse
+    var output = "\(startIndexFromLast)"
+    if startIndexFromLast > 0 {
+      output += ", \(charsToReplaceCount)"
+    }
+    if charsToUse == "" {
+      output += ", Ø"
+    } else {
+      output += ", " + charsToUse
+    }
+    return output
   }
 
   static func alterationsFor(xmlString: String) -> [StemAlteration] {

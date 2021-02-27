@@ -167,4 +167,63 @@ enum Tense: Hashable {
       return ""
     }
   }
+
+  var shortDisplayName: String {
+    switch self {
+    case .participePassé:
+      return "pp"
+    case .participePrésent:
+      return "rr"
+    case .radicalFutur:
+      return "sf"
+    case .indicatifPrésent(let personNumber):
+      return "r" + personNumber.shortDisplayName
+    case .passéSimple(let personNumber):
+      return "x" + personNumber.shortDisplayName
+    case .imparfait(let personNumber):
+      return "i" + personNumber.shortDisplayName
+    case .futurSimple(let personNumber):
+      return "f" + personNumber.shortDisplayName
+    case .conditionnelPrésent(let personNumber):
+      return "c" + personNumber.shortDisplayName
+    case .subjonctifPrésent(let personNumber):
+      return "b" + personNumber.shortDisplayName
+    case .subjonctifImparfait(let personNumber):
+      return "q" + personNumber.shortDisplayName
+    case .impératif(let personNumber):
+      return "h" + personNumber.shortDisplayName
+    default:
+      return ""
+    }
+  }
+
+  static func shorthandForNonCompoundTense(appliesTo: Set<Tense>) -> String {
+    // TODO: Collapse x1s, x2s, x3s... to xA for all tenses that use A.
+    // Then build the String. rA, xA, bA, iA
+    var shorthands: Set<String> = Set()
+
+    appliesTo.forEach {
+      shorthands.insert($0.shortDisplayName)
+    }
+
+    let appliesToCount = appliesTo.count
+    var numberAppended = 0
+    var output = ""
+
+    shorthands.forEach {
+      output.append($0)
+      numberAppended += 1
+      if numberAppended < appliesToCount {
+        output.append(", ")
+      }
+    }
+
+    return output
+  }
+
+  static func tensesFor(shorthand: String) -> [Tense] {
+    var output: [Tense] = []
+    output.append(.indicatifPrésent(.firstSingular))
+    return output
+  }
 }

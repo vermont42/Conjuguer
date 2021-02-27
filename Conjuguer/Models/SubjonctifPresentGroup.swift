@@ -79,10 +79,26 @@ enum SubjonctifPrésentGroup: Hashable {
     }
   }
 
-  var endings: String {
+  func endings(stemAlterations: [StemAlteration]?) -> String {
+    var alterationsWithStar: Set<Tense> = Set()
+    if let stemAlterations = stemAlterations {
+      for stemAlteration in stemAlterations {
+        for personNumber in PersonNumber.allCases {
+          let lastChar = String(stemAlteration.charsToUse.last ?? Character(" "))
+          if lastChar == Tense.irregularEndingMarker && stemAlteration.appliesTo.contains(.subjonctifPrésent(personNumber)) {
+            alterationsWithStar.insert(.subjonctifPrésent(personNumber))
+          }
+        }
+      }
+    }
+
     var output = ""
     for personNumber in PersonNumber.allCases {
-      output += endingForPersonNumber(personNumber) + " "
+      if alterationsWithStar.contains(.subjonctifPrésent(personNumber)) {
+        output += Tense.irregularEndingMarker + " "
+      } else {
+        output += endingForPersonNumber(personNumber) + " "
+      }
     }
     return output
   }

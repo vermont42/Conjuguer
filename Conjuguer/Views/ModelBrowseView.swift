@@ -12,7 +12,6 @@ struct ModelBrowseView: View {
   @ObservedObject var store: ModelStore
 
   var body: some View {
-
     NavigationView {
       VStack {
         Picker("", selection: $store.modelSort) {
@@ -26,14 +25,11 @@ struct ModelBrowseView: View {
           ForEach(store.modelsAndDecorators, id: \.self) { modelAndDecorator in
             NavigationLink(destination: ModelView(model: modelAndDecorator.model)) {
               Text(modelAndDecorator.model.exemplar + modelAndDecorator.decorator)
-                //.foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .center)
             }
           }
-          //.listRowBackground(Color.black)
           .navigationBarTitle("Verb Models")
         }
-        //.navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
       }
     }
   }

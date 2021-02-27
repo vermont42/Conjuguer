@@ -15,7 +15,6 @@ class Settings {
     didSet {
       if verbSort != oldValue {
         getterSetter.set(key: Settings.verbSortKey, value: "\(verbSort)")
-        print("@@@ set value to \(verbSort)")
       }
     }
   }
@@ -37,11 +36,9 @@ class Settings {
 
     if let verbSortString = getterSetter.get(key: Settings.verbSortKey) {
       verbSort = VerbSort(rawValue: verbSortString) ?? Settings.verbSortDefault
-      print("@@@ got \(verbSortString) from UserDefaults")
     } else {
       verbSort = Settings.verbSortDefault
       getterSetter.set(key: Settings.verbSortKey, value: "\(verbSort)")
-      print("@@@ UserDefaults empty; using \(verbSort)")
     }
 
     if let modelSortString = getterSetter.get(key: Settings.modelSortKey) {

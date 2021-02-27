@@ -120,10 +120,26 @@ enum IndicatifPrésentGroup: Hashable {
     }
   }
 
-  var endings: String {
+  func endings(stemAlterations: [StemAlteration]?) -> String {
+    var alterationsWithStar: Set<Tense> = Set()
+    if let stemAlterations = stemAlterations {
+      for stemAlteration in stemAlterations {
+        for personNumber in PersonNumber.allCases {
+          let lastChar = String(stemAlteration.charsToUse.last ?? Character(" "))
+          if lastChar == Tense.irregularEndingMarker && stemAlteration.appliesTo.contains(.indicatifPrésent(personNumber)) {
+            alterationsWithStar.insert(.indicatifPrésent(personNumber))
+          }
+        }
+      }
+    }
+
     var output = ""
     for personNumber in PersonNumber.allCases {
-      output += présentEndingForPersonNumber(personNumber) + " "
+      if alterationsWithStar.contains(.indicatifPrésent(personNumber)) {
+        output += Tense.irregularEndingMarker + " "
+      } else {
+        output += présentEndingForPersonNumber(personNumber) + " "
+      }
     }
     return output
   }
@@ -177,10 +193,26 @@ enum IndicatifPrésentGroup: Hashable {
     }
   }
 
-  var impératifEndings: String {
+  func impératifEndings(stemAlterations: [StemAlteration]?) -> String {
+    var alterationsWithStar: Set<Tense> = Set()
+    if let stemAlterations = stemAlterations {
+      for stemAlteration in stemAlterations {
+        for personNumber in PersonNumber.impératifPersonNumbers {
+          let lastChar = String(stemAlteration.charsToUse.last ?? Character(" "))
+          if lastChar == Tense.irregularEndingMarker && stemAlteration.appliesTo.contains(.impératif(personNumber)) {
+            alterationsWithStar.insert(.impératif(personNumber))
+          }
+        }
+      }
+    }
+
     var output = ""
     for personNumber in PersonNumber.impératifPersonNumbers {
-      output += impératifEndingForPersonNumber(personNumber) + " "
+      if alterationsWithStar.contains(.impératif(personNumber)) {
+        output += Tense.irregularEndingMarker + " "
+      } else {
+        output += impératifEndingForPersonNumber(personNumber) + " "
+      }
     }
     return output
   }

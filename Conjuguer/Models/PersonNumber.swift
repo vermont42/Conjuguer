@@ -36,17 +36,17 @@ enum PersonNumber: String, CaseIterable {
   var shortDisplayName: String {
     switch self {
     case .firstSingular:
-      return "1S"
+      return "1s"
     case .secondSingular:
-      return "2S"
+      return "2s"
     case .thirdSingular:
-      return "3S"
+      return "3s"
     case .firstPlural:
-      return "1P"
+      return "1p"
     case .secondPlural:
-      return "2P"
+      return "2p"
     case .thirdPlural:
-      return "3P"
+      return "3p"
     }
   }
 
