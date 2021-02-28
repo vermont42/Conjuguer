@@ -12,9 +12,7 @@ struct VerbBrowseView: View {
   @ObservedObject var store: VerbStore
 
   var body: some View {
-    ZStack {
-      Color.black
-
+    NavigationView {
       VStack {
         Picker("", selection: $store.verbSort) {
           ForEach(VerbSort.allCases, id: \.self) { type in
@@ -23,23 +21,25 @@ struct VerbBrowseView: View {
         }
         .pickerStyle(SegmentedPickerStyle())
 
-        List {
+        ScrollView {
           ForEach(store.verbs, id: \.self) { verb in
-            Text(verb.infinitif)
-              .foregroundColor(.white)
-              .frame(maxWidth: .infinity, alignment: .center)
+            NavigationLink(destination: Text("This is a placeholder."), label: {
+              Text(verb.infinitif)
+            })
+            .buttonStyle(PlainButtonStyle())
           }
-          .listRowBackground(Color.black)
+          .navigationBarTitle("Verbs")
         }
       }
     }
+    .navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
+    .padding()
   }
 
   init() {
-    UISegmentedControl.appearance().selectedSegmentTintColor = .blue
-    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.blue], for: .normal)
-
+//    UISegmentedControl.appearance().selectedSegmentTintColor = .blue
+//    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+//    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.blue], for: .normal)
     store = VerbStore(world: Current)
   }
 }

@@ -26,12 +26,14 @@ struct ModelBrowseView: View {
             NavigationLink(destination: ModelView(model: modelAndDecorator.model), label: {
               Text(modelAndDecorator.model.exemplar + modelAndDecorator.decorator)
             })
+            .buttonStyle(PlainButtonStyle())
           }
           .navigationBarTitle("Verb Models")
         }
       }
     }
     .navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
+    .padding()
   }
 
   init() {
@@ -42,7 +44,6 @@ struct ModelBrowseView: View {
     //    UINavigationBar.appearance().backgroundColor = .black
     //    UINavigationBar.appearance().tintColor = .white
     //    UINavigationBar.appearance().barTintColor = .black
-    UITableViewCell.appearance().selectionStyle = .none
     store = ModelStore(world: Current)
   }
 }

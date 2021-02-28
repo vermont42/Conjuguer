@@ -18,15 +18,18 @@ struct ModelView: View {
           let parent = VerbModel.models[parentId]
         {
           Text("Parent: \(parent.exemplar) (\(parent.id))")
+            .modifier(HeadingLabel())
         }
 
         Text(model.description)
+          .modifier(HeadingLabel())
 
         Spacer()
           .frame(height: 16)
 
         Group {
           Text("Endings")
+            .modifier(SubheadingLabel())
 
           Text("Participe Passé: ") + Text(mixedCaseString: model.participeEndingRecursive)
 
@@ -46,10 +49,9 @@ struct ModelView: View {
 
         if let stemAlterations = model.stemAlterationsRecursive {
           Text("Stem Alterations")
+            .modifier(SubheadingLabel())
           ForEach(stemAlterations, id: \.self) { alteration in
-            // TODO: Prefix with (for example) "r1s: ". Use Tense.shorthandForNonCompoundTense(appliesTo:) to build the prefix label.
-            // Add an info button describing abbreviations to the right of "Stem Alterations".
-            //   static func shorthandForNonCompoundTense(appliesTo: Set<Tense>) -> String {
+            // TODO: Add an info button describing abbreviations to the right of "Stem Alterations".
             let appliesToString = Tense.shorthandForNonCompoundTense(appliesTo: alteration.appliesTo)
             Text(appliesToString + ": ") + Text(mixedCaseString: alteration.toString)
           }
@@ -59,5 +61,6 @@ struct ModelView: View {
       }
     }
     .navigationTitle(model.exemplar + " (\(model.id))")
+    .padding()
   }
 }

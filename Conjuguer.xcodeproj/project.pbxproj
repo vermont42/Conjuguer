@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0343E7DF25E427890043B813 /* ModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0343E7DE25E427890043B813 /* ModelView.swift */; };
+		03653F0325EC4F5A00A34267 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03653F0225EC4F5A00A34267 /* Modifiers.swift */; };
 		036DB78E259FD6500013C3B7 /* ConjuguerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB78D259FD6500013C3B7 /* ConjuguerApp.swift */; };
 		036DB790259FD6500013C3B7 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB78F259FD6500013C3B7 /* InputView.swift */; };
 		036DB792259FD6510013C3B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 036DB791259FD6510013C3B7 /* Assets.xcassets */; };
@@ -67,6 +68,7 @@
 
 /* Begin PBXFileReference section */
 		0343E7DE25E427890043B813 /* ModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelView.swift; sourceTree = "<group>"; };
+		03653F0225EC4F5A00A34267 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		036DB78A259FD6500013C3B7 /* Conjuguer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conjuguer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		036DB78D259FD6500013C3B7 /* ConjuguerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConjuguerApp.swift; sourceTree = "<group>"; };
 		036DB78F259FD6500013C3B7 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				0373683025DC672F008BDF46 /* DictionaryGetterSetter.swift */,
 				0373682E25DC672F008BDF46 /* GetterSetter.swift */,
 				0373683D25DD79A4008BDF46 /* ModelSort.swift */,
+				03653F0225EC4F5A00A34267 /* Modifiers.swift */,
 				0373682425DC65B2008BDF46 /* Settings.swift */,
 				0373682F25DC672F008BDF46 /* UserDefaultsGetterSetter.swift */,
 				0373681A25DB8BAD008BDF46 /* Util.swift */,
@@ -426,6 +429,7 @@
 				036DB81825A8C9420013C3B7 /* IndicatifPresentGroup.swift in Sources */,
 				0373683125DC672F008BDF46 /* GetterSetter.swift in Sources */,
 				036DB7F325A12B990013C3B7 /* Auxiliary.swift in Sources */,
+				03653F0325EC4F5A00A34267 /* Modifiers.swift in Sources */,
 				036DB80525A386D60013C3B7 /* VerbModelParser.swift in Sources */,
 				036DB7D125A0C9F10013C3B7 /* Conjugator.swift in Sources */,
 				0373681B25DB8BAD008BDF46 /* Util.swift in Sources */,
