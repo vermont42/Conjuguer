@@ -30,7 +30,7 @@ struct ModelBrowseView: View {
           .navigationBarTitle("Verb Models")
         }
       }
-    }
+    }.navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
   }
 
   init() {
