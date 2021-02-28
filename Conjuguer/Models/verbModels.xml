@@ -15,7 +15,7 @@
   <model mo="parler" id="1-1" ep="é" si="e" se="a" bb="e" />
   <model mo="lancer" id="1-2A" pa="1-1" p="1,1,Ç,r1p,x1s,x2s,x3s,x1p,x2p|1,1,C,i1p,i2p|1,1,C,b1p,b2p|1,1,Ç,q3p" />
   <model mo="manger" id="1-2B" pa="1-1" p="0,1,E,r1p,x1s,x2s,x3s,x1p,x2p,q3p|1,1,,i1p,i2p" />
-  <model mo="appeler" id="1-3A" pa="1-1" p="0,1,L,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|3,1,lL,sf" />
+  <model mo="appeler" id="1-3A" pa="1-1" p="0,1,L,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|3,0,L,sf" />
   <model mo="jeter" id="1-3B" pa="1-1" p="0,1,T,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|3,1,tT,sf" />
   <model mo="peser" id="1-4" pa="1-1" p="2,1,È,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|4,1,È,sf" />
   <model mo="céder" id="1-5" pa="1-1" p="2,1,È,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p" />

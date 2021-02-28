@@ -263,13 +263,13 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["appelLerai", "appelLeras", "appelLera", "appelLerons", "appelLerez", "appelLeront"] {
+    for conjugation in ["appeLlerai", "appeLleras", "appeLlera", "appeLlerons", "appeLlerez", "appeLleront"] {
       T.testConjugation(infinitif: "appeler", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["appelLerais", "appelLerais", "appelLerait", "appelLerions", "appelLeriez", "appelLeraient"] {
+    for conjugation in ["appeLlerais", "appeLlerais", "appeLlerait", "appeLlerions", "appeLleriez", "appeLleraient"] {
       T.testConjugation(infinitif: "appeler", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
