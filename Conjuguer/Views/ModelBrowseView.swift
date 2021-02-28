@@ -66,7 +66,7 @@ final class ModelStore: ObservableObject {
     irregularityModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
       lhs.irregularity >= rhs.irregularity
     }
-    .map { ModelAndDecorator(model: $0, decorator: " - \($0.irregularity)%") }
+    .map { ModelAndDecorator(model: $0, decorator: " • \($0.irregularity)%") }
 
     alphabeticModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
       lhs.exemplar.compare(rhs.exemplar, locale: Util.french) == .orderedAscending

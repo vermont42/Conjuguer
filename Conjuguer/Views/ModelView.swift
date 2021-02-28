@@ -25,11 +25,6 @@ struct ModelView: View {
         Spacer()
           .frame(height: 16)
 
-        Text("Radical Futur: ") + Text(mixedCaseString: model.futurStemsRecursive(infinitif: model.exemplar)[0])
-
-        Spacer()
-          .frame(height: 16)
-
         Group {
           Text("Endings")
 
