@@ -158,7 +158,7 @@
   <verb in="expliquer" tn="explain" mo="1-1" fr="62" />
   <verb in="fabriquer" tn="fabricate" mo="1-1" />
   <verb in="faire" tn="do, make" mo="5-23" fr="4" />
-  <verb in="falloir" tn="be necessary" mo="4-5C" fr="13" />
+  <verb in="falloir" tn="be necessary" mo="4-5C" de="t" fr="13" />
   <verb in="fatiguer" tn="fatigue" mo="1-1" />
   <verb in="finir" tn="finish" mo="2-1" />
   <verb in="fuire" tn="flee" mo="6-2" />
@@ -202,7 +202,7 @@
   <verb in="peser" tn="weight" mo="1-4" />
   <verb in="plaindre" tn="pity" mo="5-12" />
   <verb in="plaire" tn="please" mo="5-22A" />
-  <verb in="pleuvoir" tn="rain" mo="4-4" />
+  <verb in="pleuvoir" tn="rain" mo="4-4" de="t" />
   <verb in="porter" tn="carry" mo="1-1" fr="23" />
   <verb in="poser" tn="pose, put down" mo="1-1" fr="54" />
   <verb in="pourvoir" tn="supply, provide" mo="4-1C" />

@@ -23,11 +23,7 @@ struct VerbView: View {
           Text(model.exemplar + " (" + model.id + ")")
         }
 
-        if verb.isReflexive {
-          Text("Reflexive")
-        } else {
-          Text("Not Reflexive")
-        }
+        Text((verb.isReflexive ? "Reflexive" : "Not Reflexive") + ", " + (verb.isDefective ? "Defective" : "Not Defective"))
 
         if verb.auxiliary == .être {
           Text("Auxiliary: être")

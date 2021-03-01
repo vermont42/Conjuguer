@@ -88,6 +88,7 @@ struct InputView: View {
       model: model,
       auxiliary: currentAuxiliary,
       isReflexive: isReflexive,
+      isDefective: false,
       frequency: nil
     )
     Verb.verbs[infinitif] = verb

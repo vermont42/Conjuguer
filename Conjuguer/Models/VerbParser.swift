@@ -15,7 +15,8 @@ class VerbParser: NSObject, XMLParserDelegate {
   private var currentTranslation = ""
   private var currentModel = ""
   private var currentAuxiliary: String?
-  private var currentIsReflexive: Bool = false
+  private var currentIsReflexive = false
+  private var currentIsDefective = false
   private var currentFrequency: Int?
 
   override init() {
@@ -67,6 +68,13 @@ class VerbParser: NSObject, XMLParserDelegate {
       }
 
       if
+        let isDefective = attributeDict["de"],
+        isDefective == "t"
+      {
+        currentIsDefective = true
+      }
+
+      if
         let frequency = attributeDict["fr"],
         let frequencyInt = Int(frequency)
       {
@@ -78,7 +86,10 @@ class VerbParser: NSObject, XMLParserDelegate {
   func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
     if elementName == verbTag {
       let auxiliary: Auxiliary
-      if let currentAuxiliary = currentAuxiliary {
+
+      if currentIsReflexive {
+        auxiliary = .être
+      } else if let currentAuxiliary = currentAuxiliary {
         auxiliary = Auxiliary(rawValue: currentAuxiliary) ?? .avoir
       } else {
         auxiliary = .avoir
@@ -90,6 +101,7 @@ class VerbParser: NSObject, XMLParserDelegate {
         model: currentModel,
         auxiliary: auxiliary,
         isReflexive: currentIsReflexive,
+        isDefective: currentIsDefective,
         frequency: currentFrequency
       )
 
@@ -98,6 +110,7 @@ class VerbParser: NSObject, XMLParserDelegate {
       currentModel = ""
       currentAuxiliary = nil
       currentIsReflexive = false
+      currentIsDefective = false
       currentFrequency = nil
     }
   }

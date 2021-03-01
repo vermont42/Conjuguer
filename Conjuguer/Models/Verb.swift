@@ -17,6 +17,7 @@ struct Verb: Identifiable, Hashable {
   let model: String
   let auxiliary: Auxiliary
   let isReflexive: Bool
+  let isDefective: Bool // TODO: trulyDefectiveTenses: Set<Tense>, arguablyDefectiveTenses: Set<Tense>
   let frequency: Int?
 
   var infinitifStem: String {
