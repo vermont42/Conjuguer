@@ -53,4 +53,46 @@ enum PersonNumber: String, CaseIterable {
   var isValidForImperatif: Bool {
     PersonNumber.impératifPersonNumbers.contains(self)
   }
+
+  func pronounAndConjugation(_ conjugation: String, isReflexive: Bool) -> String {
+    let normalizedFirstLetter = String(conjugation.first ?? Character(" "))
+      .folding(options: .diacriticInsensitive, locale: Util.french)
+      .lowercased(with: Util.french)
+    let firstLetterIsVowel = ["a", "e", "i", "o", "u"].contains(normalizedFirstLetter)
+
+    let preamble: String
+    if isReflexive {
+      switch self {
+      case .firstSingular:
+        preamble = firstLetterIsVowel ? "je m'" : "je me "
+      case .secondSingular:
+        preamble = firstLetterIsVowel ? "tu t'" : "tu te "
+      case .thirdSingular:
+        preamble = firstLetterIsVowel ? "il s'" : "il se "
+      case .firstPlural:
+        preamble = "nous nous "
+      case .secondPlural:
+        preamble = "vous vous "
+      case .thirdPlural:
+        preamble = firstLetterIsVowel ? "ils s'" : "ils se "
+      }
+    } else {
+      switch self {
+      case .firstSingular:
+        preamble = firstLetterIsVowel ? "j'" : "je "
+      case .secondSingular:
+        preamble = "tu "
+      case .thirdSingular:
+        preamble = "il "
+      case .firstPlural:
+        preamble = "nous "
+      case .secondPlural:
+        preamble = "vous "
+      case .thirdPlural:
+        preamble = "ils "
+      }
+    }
+
+    return preamble + conjugation
+  }
 }
