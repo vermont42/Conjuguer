@@ -23,7 +23,7 @@ struct VerbBrowseView: View {
 
         ScrollView {
           ForEach(store.verbs, id: \.self) { verb in
-            NavigationLink(destination: Text("This is a placeholder."), label: {
+            NavigationLink(destination: VerbView(verb: verb), label: {
               Text(verb.infinitif)
             })
             .buttonStyle(PlainButtonStyle())

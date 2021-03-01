@@ -30,3 +30,18 @@ struct HeadingLabel: ViewModifier {
       .font(.system(.headline))
   }
 }
+
+struct LeftAligned: ViewModifier {
+    func body(content: Content) -> some View {
+        HStack {
+            content
+            Spacer()
+        }
+    }
+}
+
+extension View {
+    func leftAligned() -> some View {
+        return self.modifier(LeftAligned())
+    }
+}
