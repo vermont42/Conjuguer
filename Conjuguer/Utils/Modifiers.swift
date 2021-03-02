@@ -17,10 +17,10 @@ struct SubheadingLabel: ViewModifier {
   }
 }
 
-struct BodyLabel: ViewModifier {
+struct TableText: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(.system(.body))
+      .font(.system(.title2))
   }
 }
 
@@ -44,4 +44,8 @@ extension View {
     func leftAligned() -> some View {
         return self.modifier(LeftAligned())
     }
+
+  func tableText() -> some View {
+      return self.modifier(TableText())
+  }
 }

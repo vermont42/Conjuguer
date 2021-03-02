@@ -25,6 +25,7 @@ struct VerbBrowseView: View {
           ForEach(store.verbs, id: \.self) { verb in
             NavigationLink(destination: VerbView(verb: verb), label: {
               Text(verb.infinitif)
+                .tableText()
             })
             .buttonStyle(PlainButtonStyle())
           }

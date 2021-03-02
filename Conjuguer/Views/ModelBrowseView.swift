@@ -25,6 +25,7 @@ struct ModelBrowseView: View {
           ForEach(store.modelsAndDecorators, id: \.self) { modelAndDecorator in
             NavigationLink(destination: ModelView(model: modelAndDecorator.model), label: {
               Text(modelAndDecorator.model.exemplar + modelAndDecorator.decorator)
+                .tableText()
             })
             .buttonStyle(PlainButtonStyle())
           }

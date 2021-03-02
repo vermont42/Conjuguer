@@ -26,7 +26,7 @@ struct VerbModel: Hashable {
     case "1-1":
       return "Regular -er"
     case "2-1":
-      return "Regular -er"
+      return "Regular -ir"
     case "5-1A":
       return "Regular -re"
     default:

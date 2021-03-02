@@ -10,12 +10,6 @@ import SwiftUI
 struct MainTabView: View {
   var body: some View {
     TabView {
-      InputView()
-        .tabItem({
-          Image(systemName: "keyboard")
-          Text("Input")
-        })
-        .tag(0)
 
       VerbBrowseView()
         .environmentObject(Current)
@@ -23,13 +17,20 @@ struct MainTabView: View {
           Image(systemName: "sun.max")
           Text("Verbs")
         })
-        .tag(1)
+        .tag(0)
 
       ModelBrowseView()
         .environmentObject(Current)
         .tabItem({
           Image(systemName: "moon.stars")
           Text("Models")
+        })
+        .tag(1)
+
+      InputView()
+        .tabItem({
+          Image(systemName: "keyboard")
+          Text("Input")
         })
         .tag(2)
     }
