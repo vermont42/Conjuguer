@@ -78,13 +78,16 @@ struct InputView: View {
       resetFields()
     }
 
-    let currentAuxiliary = Auxiliary(rawValue: auxiliary) ?? .avoir
+    var currentAuxiliary = Auxiliary(rawValue: auxiliary) ?? .avoir
     if infinitif == "" || translation == "" || model == "" || auxiliary == "" {
       Swift.print("Input field was blank.")
       return
     }
 
     let isReflexive = reflexive == "t" ? true : false
+    if isReflexive {
+      currentAuxiliary = .être
+    }
 
     if Verb.verbs[infinitif] != nil {
       Swift.print("\(infinitif) has already been inpat.")

@@ -83,6 +83,14 @@
   <verb in="achalander" tn="supply with clientele" mo="1-1" />
   <verb in="acharner" tn="incite, sic" mo="1-1" />
   <verb in="acheminer" tn="transport, send off" mo="1-1" />
+  <verb in="acheter" tn="buy" mo="1-4" />
+  <verb in="achever" tn="finish, finish off" mo="1-4" />
+  <verb in="achopper" tn="stumble on a stone, hit a snag" mo="1-1" />
+  <verb in="achromatiser" tn="achromitize" mo="1-1" />
+  <verb in="acidifier" tn="acidify" mo="1-1" />
+  <verb in="aciduler" tn="acidulate" mo="1-1" />
+  <verb in="aciérer" tn="acierate, convert iron into steel" mo="1-5" />
+  <verb in="acoquiner" tn="become familiar with" re="t" mo="1-1" />
   <verb in="acquérir" tn="acquire" mo="6-3" />
   <verb in="agir" tn="act" mo="2-1" fr="53" />
   <verb in="aimer" tn="like, love" mo="1-1" fr="59" />
