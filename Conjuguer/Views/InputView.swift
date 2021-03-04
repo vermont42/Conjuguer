@@ -18,42 +18,56 @@ struct InputView: View {
     ZStack {
       Color.black
       VStack {
-        TextField("Infinitif", text: $infinitif)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-          .autocapitalization(UITextAutocapitalizationType.none)
-          .disableAutocorrection(true)
-          .padding()
+        Group {
+          Text("Infinitif")
+            .modifier(SubheadingLabel())
+          TextField("Infinitif", text: $infinitif)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .autocapitalization(UITextAutocapitalizationType.none)
+            .disableAutocorrection(true)
+            .padding()
 
-        TextField("Model", text: $model)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-          .autocapitalization(UITextAutocapitalizationType.none)
-          .disableAutocorrection(true)
-          .padding()
+          Text("Model")
+            .modifier(SubheadingLabel())
+          TextField("Model", text: $model)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .autocapitalization(UITextAutocapitalizationType.none)
+            .disableAutocorrection(true)
+            .padding()
 
-        TextField("Translation", text: $translation)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-          .autocapitalization(UITextAutocapitalizationType.none)
-          .disableAutocorrection(true)
-          .padding()
+          Text("Translation")
+            .modifier(SubheadingLabel())
+          TextField("Translation", text: $translation)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .autocapitalization(UITextAutocapitalizationType.none)
+            .disableAutocorrection(true)
+            .padding()
 
-        TextField("Auxiliary", text: $auxiliary)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-          .autocapitalization(UITextAutocapitalizationType.none)
-          .disableAutocorrection(true)
-          .padding()
-
-        TextField("Reflexive", text: $reflexive)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-          .autocapitalization(UITextAutocapitalizationType.none)
-          .disableAutocorrection(true)
-          .padding()
-
-        Button("Add") {
-          add()
+          Text("Auxiliary (a or e)")
+            .modifier(SubheadingLabel())
+          TextField("Auxiliary", text: $auxiliary)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .autocapitalization(UITextAutocapitalizationType.none)
+            .disableAutocorrection(true)
+            .padding()
         }
 
-        Button("Print") {
-          print()
+        Group {
+          Text("Reflexive (t or f)")
+            .modifier(SubheadingLabel())
+          TextField("Reflexive", text: $reflexive)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .autocapitalization(UITextAutocapitalizationType.none)
+            .disableAutocorrection(true)
+            .padding()
+
+          Button("Add") {
+            add()
+          }
+
+          Button("Print") {
+            print()
+          }
         }
       }
     }
