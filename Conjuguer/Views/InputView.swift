@@ -94,7 +94,7 @@ struct InputView: View {
       return
     }
 
-    if VerbModel.models[model] == nil {
+    if VerbModel.models[model.uppercased()] == nil {
       Swift.print("Invalid model \(model) inpat.")
       return
     }
@@ -102,7 +102,7 @@ struct InputView: View {
     let verb = Verb(
       infinitif: infinitif,
       translation: translation,
-      model: model,
+      model: model.uppercased(),
       auxiliary: currentAuxiliary,
       isReflexive: isReflexive,
       isDefective: false,

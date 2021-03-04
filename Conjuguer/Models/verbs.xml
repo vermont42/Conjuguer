@@ -92,6 +92,23 @@
   <verb in="aciérer" tn="acierate, convert iron into steel" mo="1-5" />
   <verb in="acoquiner" tn="become familiar with" re="t" mo="1-1" />
   <verb in="acquérir" tn="acquire" mo="6-3" />
+  <verb in="acquiescer" tn="acquiesce" mo="1-2A" />
+  <verb in="acquitter" tn="pay, acknowledge" mo="1-1" />
+  <verb in="actionner" tn="set into action, actuate" mo="1-1" />
+  <verb in="activer" tn="activate" mo="1-1" />
+  <verb in="actualiser" tn="update, actualize" mo="1-1" />
+  <verb in="adapter" tn="adapt" mo="1-1" />
+  <verb in="additionner" tn="sum, add" mo="1-1" />
+  <verb in="adhérer" tn="adhere, stick to" mo="1-5" />
+  <verb in="adjectiver" tn="adjectivize" mo="1-1" />
+  <verb in="adjoindre" tn="adjoin" mo="5-12" />
+  <verb in="adjuger" tn="adjudicate, auction" mo="1-2B" />
+  <verb in="adjurer" tn="implore" mo="1-1" />
+  <verb in="admettre" tn="admit" mo="5-4" />
+  <verb in="administrer" tn="administer" mo="1-1" />
+  <verb in="admirer" tn="admire" mo="1-1" />
+  <verb in="admonester" tn="admonish, reprimand" mo="1-1" />
+  <verb in="adonner" tn="devote oneself" re="t" mo="1-1" />
   <verb in="agir" tn="act" mo="2-1" fr="53" />
   <verb in="aimer" tn="like, love" mo="1-1" fr="59" />
   <verb in="ajouter" tn="add" mo="1-1" fr="94" />
