@@ -109,6 +109,22 @@
   <verb in="admirer" tn="admire" mo="1-1" />
   <verb in="admonester" tn="admonish, reprimand" mo="1-1" />
   <verb in="adonner" tn="devote oneself" re="t" mo="1-1" />
+  <verb in="adopter" tn="adopt" mo="1-1" />
+  <verb in="adorer" tn="adore, worship" mo="1-1" />
+  <verb in="adosser" tn="put someone’s back against" mo="1-1" />
+  <verb in="adouber" tn="dub, name" mo="1-1" />
+  <verb in="adoucir" tn="make mild, soften, sweeten" mo="2-1" />
+  <verb in="adresser" tn="direct" mo="1-1" />
+  <verb in="adsorber" tn="adsorb" mo="1-1" />
+  <verb in="aduler" tn="adulate" mo="1-1" />
+  <verb in="adultérer" tn="falsify, fake" mo="1-5" />
+  <verb in="advenir" tn="happen, occur" mo="6-7" />
+  <verb in="aérer" tn="air, aerate" mo="1-5" />
+  <verb in="affabuler" tn="make up stories, tell a fable" mo="1-1" />
+  <verb in="affadir" tn="make tasteless, insipid, or bland" mo="2-1" />
+  <verb in="affaiblir" tn="weaken, enfeeble" mo="2-1" />
+  <verb in="affairer" tn="busy onself" re="t" mo="1-1" />
+  <verb in="affaisser" tn="cause to subside" mo="1-1" />
   <verb in="agir" tn="act" mo="2-1" fr="53" />
   <verb in="aimer" tn="like, love" mo="1-1" fr="59" />
   <verb in="ajouter" tn="add" mo="1-1" fr="94" />
