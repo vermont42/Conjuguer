@@ -266,13 +266,16 @@ struct InputView: View {
 
     for verb in verbArray {
       output += "  <verb in=\"" + verb.infinitif + "\" tn=\"" + verb.translation + "\" "
-      if verb.auxiliary == .être {
+      if verb.auxiliary == .être && !verb.isReflexive {
         output += "ay=\"e\" "
       }
       if verb.isReflexive {
         output += "re=\"t\" "
       }
       output += "mo=\"" + verb.model.uppercased() + "\" "
+      if verb.isDefective {
+        output += "de=\"t\" "
+      }
       if let frequency = verb.frequency {
         output += "fr=\"\(frequency)\" "
       }
