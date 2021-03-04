@@ -238,4 +238,12 @@ enum Tense: Hashable {
     output.append(.indicatifPrésent(.firstSingular))
     return output
   }
+
+  static var allIndicatifPrésentTenses: [Tense] {
+    var output: [Tense] = []
+    PersonNumber.allCases.forEach {
+      output.append(.indicatifPrésent($0))
+    }
+    return output
+  }
 }
