@@ -1,10 +1,10 @@
 ## Conjuguer
 
-**Conjuguer** is a nascent iOS™ app for learning French verb conjugations. Eventually, **Conjuguer** will conjugate _all_ French verbs, regular and irregular, in **all** French verb tenses.
+**Conjuguer** is a nascent iOS™ app for learning French verb conjugations. Eventually, **Conjuguer** will conjugate _all_ French verbs, regular and irregular, in _all_ French verb tenses.
 
 **Conjuguer** shares and will share features with its Spanish-verb predecessor, [Conjugar](https://itunes.apple.com/us/app/conjugar/id1236500467?mt=8), but **Conjuguer** represents conjugation irregularities in a more parsimonious manner, allowing **Conjuguer** to conjugate more verbs. All of them, in fact.
 
-Unlike Conjugar, **Conjuguer** will contain frequency-of-use data for all verbs, which will allow learners to focus their studies on the most important verbs.
+Unlike Conjugar, **Conjuguer** contains verb frequency-of-use data, which allows learners to focus their studies on the most important verbs.
 
 ### Screenshots
 
@@ -24,7 +24,7 @@ Conjuguer is licensed under the GNU General Public License in order to discourag
 
 * Add 5500+ French verbs.
 * Get frequency data for more verbs.
-* Add quiz mode.
+* Add quiz mode and integrate with Game Center™.
 * Internationalize and then localize for French.
 * Add descriptions of tenses.
 * Add a help button to explain endings and stem alterations on the verb-model screen.
@@ -33,4 +33,5 @@ Conjuguer is licensed under the GNU General Public License in order to discourag
 * Hire a designer to create an app icon and other icons.
 * Create a Vapor-based analytics backend and instrument the client.
 * Put iOS-specific, SwiftUI, and verb-conjugation code in separate frameworks to facilitate a Mac port.
+* I salute you for reading this far.
 
