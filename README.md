@@ -33,5 +33,6 @@ Unlike Conjugar, **Conjuguer** contains verb frequency-of-use data, which allows
 * Hire a designer to create an app icon and other icons.
 * Create a Vapor-based analytics backend and instrument the client.
 * Put iOS-specific, SwiftUI, and verb-conjugation code in separate frameworks to facilitate a Mac port.
+* Allow users to specify pronoun genders.
 * I salute you for reading this far.
 
