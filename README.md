@@ -18,7 +18,7 @@ Unlike Conjugar, **Conjuguer** contains verb frequency-of-use data, which allows
 
 ### License
 
-Conjuguer is licensed under the GNU General Public License in order to discourage release of low-quality clones to the App Store. Conjugar briefly suffered this indignity.
+**Conjuguer** is licensed under the GNU General Public License in order to discourage release of low-quality clones to the App Store™. Conjugar briefly suffered this indignity.
 
 ### TODOs
 
@@ -28,7 +28,7 @@ Conjuguer is licensed under the GNU General Public License in order to discourag
 * Internationalize and then localize for French.
 * Add descriptions of tenses.
 * Add a help button to explain endings and stem alterations on the verb-model screen.
-* Add unit tests for non-SwiftUI code. There _are_ unit tests for all eighty verb models and for compound tenses.
+* Add unit tests for non-SwiftUI code. There _are_ unit tests for all eighty verb models and for all compound tenses.
 * Ensure that the app takes full advantage of accessibility APIs and features.
 * Hire a designer to create an app icon and other icons.
 * Create a Vapor-based analytics backend and instrument the client.
