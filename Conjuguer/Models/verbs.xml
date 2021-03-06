@@ -146,7 +146,29 @@
   <verb in="affourcher" tn="anchor, straddle" mo="1-1" />
   <verb in="affourrager" tn="forage" mo="1-2B" />
   <verb in="affranchir" tn="free, liberate" mo="2-1" />
+  <verb in="affréter" tn="charter" mo="1-5" />
+  <verb in="affriander" tn="make delicious" mo="1-1" />
+  <verb in="affrioler" tn="tempt, entice" mo="1-1" />
+  <verb in="affronter" tn="confront, face" mo="1-1" />
+  <verb in="affubler" tn="deck out, equip" mo="1-1" />
+  <verb in="affûter" tn="sharpen, whet" mo="1-1" />
+  <verb in="africaniser" tn="Africanize" mo="1-1" />
+  <verb in="agacer" tn="irritate, tease" mo="1-2A" />
+  <verb in="agencer" tn="arrange, lay out" mo="1-2A" />
+  <verb in="agenouiller" tn="kneel down" re="t" mo="1-1" />
+  <verb in="agglomérer" tn="agglomerate" mo="1-5" />
+  <verb in="agglutiner" tn="paste together" mo="1-1" />
+  <verb in="aggraver" tn="make worse" mo="1-1" />
+  <verb in="agioter" tn="speculate" mo="1-1" />
   <verb in="agir" tn="act" mo="2-1" fr="53" />
+  <verb in="agiter" tn="shake, wave, agitate" mo="1-1" />
+  <verb in="agneler" tn="lamb, yean" mo="1-4" />
+  <verb in="agonir" tn="throw insults" mo="2-1" />
+  <verb in="agoniser" tn="die slowly" mo="1-1" />
+  <verb in="agrafer" tn="staple" mo="1-1" />
+  <verb in="agrandir" tn="enlarge" mo="2-1" />
+  <verb in="agréer" tn="accept" mo="1-1" />
+  <verb in="agréger" tn="aggregate" mo="1-6A" />
   <verb in="aimer" tn="like, love" mo="1-1" fr="59" />
   <verb in="ajouter" tn="add" mo="1-1" fr="94" />
   <verb in="aller" tn="go" ay="e" mo="1-9" fr="10" />
