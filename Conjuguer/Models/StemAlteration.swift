@@ -8,8 +8,7 @@
 import Foundation
 
 struct StemAlteration: Hashable {
-  let startIndexFromLast: Int
-  let charsToReplaceCount: Int
+  let type: StemAlterationType
   let charsToUse: String
   let appliesTo: Set<Tense>
   let isAdditive: Bool // example: tu payes/paies
@@ -19,27 +18,29 @@ struct StemAlteration: Hashable {
   init(xmlString: String) {
     let components = xmlString.components(separatedBy: VerbModelParser.xmlSeparator)
 
-    guard components.count >= 4 else {
+    guard components.count >= 3 else {
       fatalError("Partial-alteration XML string \(xmlString) did not have enough components.")
     }
 
-    guard let convertedStartIndexFromLast = Int(components[0]) else {
-      fatalError(components[0] + " is not a valid Int.")
+    let startIndexOfAlterationsInXml: Int
+    if let convertedStartIndexFromLast = Int(components[0]) {
+      guard let convertedCharsToReplaceCount = Int(components[1]) else {
+        fatalError(components[1] + " is not a valid Int.")
+      }
+      type = .indexBased(startIndexFromLast: convertedStartIndexFromLast, charsToReplaceCount: convertedCharsToReplaceCount)
+      charsToUse = components[2]
+      startIndexOfAlterationsInXml = 3
+    } else {
+      type = .letterBased(letterToReplace: components[0])
+      charsToUse = components[1]
+      startIndexOfAlterationsInXml = 2
     }
-    startIndexFromLast = convertedStartIndexFromLast
-
-    guard let convertedCharsToReplaceCount = Int(components[1]) else {
-      fatalError(components[1] + " is not a valid Int.")
-    }
-    charsToReplaceCount = convertedCharsToReplaceCount
-
-    charsToUse = components[2]
 
     var set: Set<Tense> = Set()
     var isAdditiveAlteration = false
     var isInheritedAlteration = true
 
-    for index in VerbModelParser.startIndexOfAlterationsInXml ..< components.count {
+    for index in startIndexOfAlterationsInXml ..< components.count {
       let alteration = components[index]
       // TODO: Don't switch. Instead, handle "A" and "N". Then use Tense.tensesFor(shorthand to figure out what to insert.
 
@@ -155,16 +156,21 @@ struct StemAlteration: Hashable {
   }
 
   var toString: String {
-    var output = "\(startIndexFromLast)"
-    if startIndexFromLast > 0 {
-      output += ", \(charsToReplaceCount)"
+    switch type {
+    case .indexBased(let startIndexFromLast, let charsToReplaceCount):
+      var output = "\(startIndexFromLast)"
+      if startIndexFromLast > 0 {
+        output += ", \(charsToReplaceCount)"
+      }
+      if charsToUse == "" {
+        output += ", Ø"
+      } else {
+        output += ", " + charsToUse
+      }
+      return output
+    case .letterBased(let letterToReplace):
+      return letterToReplace + " ➡️ " + charsToUse
     }
-    if charsToUse == "" {
-      output += ", Ø"
-    } else {
-      output += ", " + charsToUse
-    }
-    return output
   }
 
   static func alterationsFor(xmlString: String) -> [StemAlteration] {
@@ -178,17 +184,29 @@ struct StemAlteration: Hashable {
   }
 }
 
+enum StemAlterationType: Hashable {
+  case indexBased(startIndexFromLast: Int, charsToReplaceCount: Int)
+  case letterBased(letterToReplace: String)
+}
+
 extension String {
   mutating func modifyStem(alteration: StemAlteration) {
-    if alteration.startIndexFromLast == 0 {
-      self += alteration.charsToUse
-    } else {
-      let start = index(startIndex, offsetBy: count - alteration.startIndexFromLast)
-      let end = index(startIndex, offsetBy: (count - alteration.startIndexFromLast) + alteration.charsToReplaceCount)
-      if alteration.charsToUse == StemAlteration.capitalizedFirstLetter {
-        replaceSubrange(start ..< end, with: self[start].uppercased())
+    switch alteration.type {
+    case .indexBased(let startIndexFromLast, let charsToReplaceCount):
+      if startIndexFromLast == 0 {
+        self += alteration.charsToUse
       } else {
-        replaceSubrange(start ..< end, with: alteration.charsToUse)
+        let start = index(startIndex, offsetBy: count - startIndexFromLast)
+        let end = index(startIndex, offsetBy: (count - startIndexFromLast) + charsToReplaceCount)
+        if alteration.charsToUse == StemAlteration.capitalizedFirstLetter {
+          replaceSubrange(start ..< end, with: self[start].uppercased())
+        } else {
+          replaceSubrange(start ..< end, with: alteration.charsToUse)
+        }
+      }
+    case .letterBased(let letterToReplace):
+      if let range = range(of: letterToReplace, options: [.backwards], range: nil, locale: nil) {
+        self = replacingCharacters(in: range, with: alteration.charsToUse)
       }
     }
   }
