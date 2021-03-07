@@ -331,6 +331,7 @@
   <verb in="argenter" tn="silverplate" mo="1-1" />
   <verb in="arguer" tn="deduce, argue" mo="1-1" />
   <verb in="argumenter" tn="argue" mo="1-1" />
+  <verb in="ariser" tn="reef a sail" mo="1-1" />
   <verb in="armer" tn="arm, dub (a knight)" mo="1-1" />
   <verb in="armorier" tn="emblazon (with arms)" mo="1-1" />
   <verb in="arnaquer" tn="swindle, dupe" mo="1-1" />
@@ -341,9 +342,35 @@
   <verb in="arracher" tn="uproot, extract" mo="1-1" />
   <verb in="arraisonner" tn="hail (a taxicab)" mo="1-1" />
   <verb in="arranger" tn="arrange" mo="1-2B" />
+  <verb in="arrenter" tn="pay a pension or annuity" mo="1-1" />
+  <verb in="arrérager" tn="be in arrears" mo="1-2B" />
+  <verb in="arrêter" tn="halt, stop, arrest" mo="1-1" />
+  <verb in="arriérer" tn="tarry, be late" mo="1-5" />
+  <verb in="arrimer" tn="stow" mo="1-1" />
+  <verb in="arriser" tn="reef a sail" mo="1-1" />
   <verb in="arriver" tn="arrive" ay="e" mo="1-1" fr="42" />
+  <verb in="arroger" tn="arrogate, appropriate" mo="1-2B" />
+  <verb in="arrondir" tn="make round" mo="2-1" />
+  <verb in="arroser" tn="water, sprinkle" mo="1-1" />
+  <verb in="articuler" tn="join, articulate" mo="1-1" />
+  <verb in="ascensionner" tn="climb a mountain, ascend" mo="1-1" />
+  <verb in="aseptiser" tn="sterilize, disinfect" mo="1-1" />
+  <verb in="asperger" tn="spray, sprinkle" mo="1-2B" />
+  <verb in="asphalter" tn="asphalt" mo="1-1" />
+  <verb in="asphyxier" tn="asphyxiate" mo="1-1" />
+  <verb in="aspirer" tn="aspire, aspirate" mo="1-1" />
+  <verb in="assagir" tn="settle down" mo="2-1" />
   <verb in="assaillir" tn="assail" mo="3-2A" />
+  <verb in="assainir" tn="clean up" mo="2-1" />
+  <verb in="assaisonner" tn="season" mo="1-1" />
+  <verb in="assassiner" tn="assassinate" mo="1-1" />
+  <verb in="assécher" tn="dry out, dry" mo="1-5" />
+  <verb in="assembler" tn="assemble" mo="1-1" />
+  <verb in="assener" tn="strike (a blow)" mo="1-4" />
+  <verb in="asséner" tn="strike (a blow)" mo="1-5" />
   <verb in="asseoir" tn="sit" mo="4-9AB" />
+  <verb in="asservir" tn="enslave" mo="2-1" />
+  <verb in="assiéger" tn="besiege, lay siege to" mo="1-6C" />
   <verb in="assurer" tn="secure, assure" mo="1-1" fr="73" />
   <verb in="atteindre" tn="attain" mo="5-12" fr="91" />
   <verb in="attendre" tn="wait for" mo="5-1A" fr="34" />
