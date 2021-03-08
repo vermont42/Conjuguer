@@ -421,7 +421,100 @@
   <verb in="auner" tn="measure in ells" mo="1-1" />
   <verb in="auréoler" tn="surround with a halo" mo="1-1" />
   <verb in="aurifier" tn="fill a tooth cavity with gold" mo="1-1" />
+  <verb in="ausculter" tn="listen to sounds of internal organs using a stethoscope" mo="1-1" />
+  <verb in="authentifier" tn="authenticate" mo="1-1" />
+  <verb in="authentiquer" tn="authenticate" mo="1-1" />
+  <verb in="autocensurer" tn="self-censor" re="t" mo="1-1" />
+  <verb in="autodétruire" tn="self-destruct" re="t" mo="5-9A" />
+  <verb in="autofinancer" tn="self-finance" mo="1-2A" />
+  <verb in="autographier" tn="autograph" mo="1-1" />
+  <verb in="automatiser" tn="automate" mo="1-1" />
+  <verb in="autoproclamer" tn="self-proclaim" re="t" mo="1-1" />
+  <verb in="autopsier" tn="autopsy" mo="1-1" />
+  <verb in="autorépliquer" tn="self-replicate" re="t" mo="1-1" />
+  <verb in="autoriser" tn="authorize, allow" mo="1-1" />
+  <verb in="avachir" tn="make soft" mo="2-1" />
+  <verb in="avaler" tn="swallow, believe" mo="1-1" />
+  <verb in="avaliser" tn="back, support" mo="1-1" />
+  <verb in="avancer" tn="advance, go forward" mo="1-2A" />
+  <verb in="avantager" tn="favor, give advantage to" mo="1-2B" />
+  <verb in="avarier" tn="go rotten, spoil" re="t" mo="1-1" />
+  <verb in="aventurer" tn="venture" mo="1-1" />
+  <verb in="avérer" tn="uncover, reveal" mo="1-5" />
+  <verb in="avertir" tn="warn, avert" mo="2-1" />
+  <verb in="aveugler" tn="blind" mo="1-1" />
+  <verb in="aveulir" tn="enfeeble, debase" mo="2-1" />
+  <verb in="avilir" tn="demean, debase" mo="2-1" />
+  <verb in="aviser" tn="advise, notice" mo="1-1" />
+  <verb in="avitailler" tn="refuel, restock" mo="1-1" />
+  <verb in="aviver" tn="brighten, shine" mo="1-1" />
   <verb in="avoir" tn="have" mo="4-10" fr="2" />
+  <verb in="avoisiner" tn="neighbor, border on" mo="1-1" />
+  <verb in="avorter" tn="abort" mo="1-1" />
+  <verb in="avouer" tn="avow, confess" mo="1-1" />
+  <verb in="avoyer" tn="set a saw blade" mo="1-7A" />
+  <verb in="axer" tn="align on an axis" mo="1-1" />
+  <verb in="axiomatiser" tn="axiomatize" mo="1-1" />
+  <verb in="azurer" tn="blue (brighten laundry)" mo="1-1" />
+  <verb in="babiller" tn="chat, babble" mo="1-1" />
+  <verb in="bâcher" tn="cover with a canvass" mo="1-1" />
+  <verb in="bachoter" tn="cram for an exam" mo="1-1" />
+  <verb in="bâcler" tn="bang out" mo="1-1" />
+  <verb in="badigeonner" tn="smear, slather, whitewash" mo="1-1" />
+  <verb in="badiner" tn="jest, joke" mo="1-1" />
+  <verb in="bafouer" tn="scorn, flout" mo="1-1" />
+  <verb in="bafouiller" tn="babble, splutter" mo="1-1" />
+  <verb in="bâfrer" tn="guzzle, gobble" mo="1-1" />
+  <verb in="bagarrer" tn="scrap, scuffle" mo="1-1" />
+  <verb in="baguenauder" tn="stroll, amble" mo="1-1" />
+  <verb in="baguer" tn="ring, tag, band" mo="1-1" />
+  <verb in="baigner" tn="bathe, go for a swim" mo="1-1" />
+  <verb in="bailler" tn="give, lend, rent" mo="1-1" />
+  <verb in="bâiller" tn="yawn" mo="1-1" />
+  <verb in="bâillonner" tn="gag, muzzle" mo="1-1" />
+  <verb in="baiser" tn="copulate with" mo="1-1" />
+  <verb in="baisser" tn="lower, turn down" mo="1-1" />
+  <verb in="balader" tn="stroll, walk around" mo="1-1" />
+  <verb in="balafrer" tn="scar" mo="1-1" />
+  <verb in="balancer" tn="swing" mo="1-2A" />
+  <verb in="balayer" tn="sweep" mo="1-7B" />
+  <verb in="balbutier" tn="stammer, stutter" mo="1-1" />
+  <verb in="baliser" tn="mark with beacons" mo="1-1" />
+  <verb in="balkaniser" tn="Balkanize" mo="1-1" />
+  <verb in="ballaster" tn="ballast" mo="1-1" />
+  <verb in="baller" tn="dance, swing, sway" mo="1-1" />
+  <verb in="ballonner" tn="swell, bulge" mo="1-1" />
+  <verb in="ballotter" tn="toss around, jolt" mo="1-1" />
+  <verb in="bambocher" tn="feast" mo="1-1" />
+  <verb in="banaliser" tn="banalize" mo="1-1" />
+  <verb in="bancher" tn="construct formwork, pour concrete using formwork" mo="1-1" />
+  <verb in="bander" tn="bandage" mo="1-1" />
+  <verb in="bannir" tn="banish" mo="2-1" />
+  <verb in="banquer" tn="fork out, pay the bill" mo="1-1" />
+  <verb in="banqueter" tn="banquet, feast" mo="1-3B" />
+  <verb in="baptiser" tn="baptize, christen" mo="1-1" />
+  <verb in="baragouiner" tn="gibber, jabber" mo="1-1" />
+  <verb in="baraquer" tn="billet (troops)" mo="1-1" />
+  <verb in="baratiner" tn="chat up, sweet-talk" mo="1-1" />
+  <verb in="baratter" tn="churn" mo="1-1" />
+  <verb in="barber" tn="bore someone" mo="1-1" />
+  <verb in="barbifier" tn="shave someone’s beard" mo="1-1" />
+  <verb in="barboter" tn="splash" mo="1-1" />
+  <verb in="barbouiller" tn="daub" mo="1-1" />
+  <verb in="barder" tn="bard, clad" mo="1-1" />
+  <verb in="barguigner" tn="hesitate" mo="1-1" />
+  <verb in="barioler" tn="paint with garish colors" mo="1-1" />
+  <verb in="barrer" tn="bar" mo="1-1" />
+  <verb in="barricader" tn="barricade" mo="1-1" />
+  <verb in="barrir" tn="trumpet (elephant)" mo="2-1" />
+  <verb in="basaner" tn="tan" mo="1-1" />
+  <verb in="basculer" tn="topple, tip over" mo="1-1" />
+  <verb in="baser" tn="base" mo="1-1" />
+  <verb in="bassiner" tn="bathe with a warm liquid" mo="1-1" />
+  <verb in="baster" tn="suffice, give satisfaction" mo="1-1" />
+  <verb in="batailler" tn="battle" mo="1-1" />
+  <verb in="bateler" tn="conjure, juggle" mo="1-3A" />
+  <verb in="bâter" tn="put on a packsaddle" mo="1-1" />
   <verb in="battre" tn="beat" mo="5-3" />
   <verb in="boire" tn="drink" mo="5-17" />
   <verb in="bouillir" tn="boil" mo="3-2C" />
