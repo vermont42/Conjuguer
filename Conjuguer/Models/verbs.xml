@@ -515,7 +515,94 @@
   <verb in="batailler" tn="battle" mo="1-1" />
   <verb in="bateler" tn="conjure, juggle" mo="1-3A" />
   <verb in="bâter" tn="put on a packsaddle" mo="1-1" />
+  <verb in="batifoler" tn="frolic" mo="1-1" />
+  <verb in="bâtir" tn="build, construct" mo="2-1" />
+  <verb in="bâtonner" tn="club, strike with a club" mo="1-1" />
   <verb in="battre" tn="beat" mo="5-3" />
+  <verb in="bavarder" tn="chat" mo="1-1" />
+  <verb in="bavasser" tn="waffle, natter" mo="1-1" />
+  <verb in="baver" tn="drool, slobber" mo="1-1" />
+  <verb in="bayer" tn="gape" mo="1-7B" />
+  <verb in="bazarder" tn="sell, sell off" mo="1-1" />
+  <verb in="béatifier" tn="beatify" mo="1-1" />
+  <verb in="bêcher" tn="dig with a spade, badmouth" mo="1-1" />
+  <verb in="bêcheveter" tn="upend" mo="1-3B" />
+  <verb in="bécoter" tn="kiss, besmooch" mo="1-1" />
+  <verb in="becqueter" tn="peck at, kiss" mo="1-3B" />
+  <verb in="becter" tn="eat" mo="1-1" />
+  <verb in="bedonner" tn="have a plump stomach, be paunchy" mo="1-1" />
+  <verb in="béer" tn="gape" mo="1-1" />
+  <verb in="bégayer" tn="stammer" mo="1-7B" />
+  <verb in="bégueter" tn="bleat" mo="1-4" />
+  <verb in="bêler" tn="baa, bleat" mo="1-1" />
+  <verb in="bémoliser" tn="flatten, soften" mo="1-1" />
+  <verb in="bénéficier" tn="enjoy, benefit from" mo="1-1" />
+  <verb in="bénir" tn="bless" mo="2-1" />
+  <verb in="béqueter" tn="peck at, kiss" mo="1-3B" />
+  <verb in="béquiller" tn="walk with crutches, lower kickstand of motorcycle" mo="1-1" />
+  <verb in="bercer" tn="cradle, rock" mo="1-2A" />
+  <verb in="berner" tn="trick, fool" mo="1-1" />
+  <verb in="besogner" tn="toil, drudge" mo="1-1" />
+  <verb in="bêtifier" tn="act childishly, be brutalized" mo="1-1" />
+  <verb in="bétonner" tn="concrete, cover with concrete" mo="1-1" />
+  <verb in="beugler" tn="moo, cry out" mo="1-1" />
+  <verb in="beurrer" tn="butter, rub with butter" mo="1-1" />
+  <verb in="biaiser" tn="slant, bias, skew" mo="1-1" />
+  <verb in="biberonner" tn="bottle feed, booze" mo="1-1" />
+  <verb in="bicher" tn="go well, be happy, flirt" mo="1-1" />
+  <verb in="bichonner" tn="groom, titivate" mo="1-1" />
+  <verb in="bidonner" tn="fabricate, make up" mo="1-1" />
+  <verb in="bidouiller" tn="fiddle" mo="1-1" />
+  <verb in="bienvenir" tn="welcome" mo="6-7" />
+  <verb in="biffer" tn="cross out, cancel" mo="1-1" />
+  <verb in="bifurquer" tn="bifurcate" mo="1-1" />
+  <verb in="bigarrer" tn="variegate, produce a colorful pattern" mo="1-1" />
+  <verb in="bigler" tn="squint, glance" mo="1-1" />
+  <verb in="bigophoner" tn="play a bigophone" mo="1-1" />
+  <verb in="bigorner" tn="forge, hit" mo="1-1" />
+  <verb in="biler" tn="worry" re="t" mo="1-1" />
+  <verb in="biner" tn="hoe, binate" mo="1-1" />
+  <verb in="biologiser" tn="analyze from a strictly biological point of view" mo="1-1" />
+  <verb in="biper" tn="beep, bleep out (censor)" mo="1-1" />
+  <verb in="biscuiter" tn="bake unglazed earthenware" mo="1-1" />
+  <verb in="biseauter" tn="bevel" mo="1-1" />
+  <verb in="biser" tn="kiss" mo="1-1" />
+  <verb in="bisquer" tn="be scornful or moody" mo="1-1" />
+  <verb in="bisser" tn="repeat, perform an encore" mo="1-1" />
+  <verb in="bistourner" tn="twist" mo="1-1" />
+  <verb in="bistrer" tn="darken, blacken, be mezmerized" mo="1-1" />
+  <verb in="biter" tn="understand, humiliate" mo="1-1" />
+  <verb in="bitter" tn="understand" mo="1-1" />
+  <verb in="bitturer" tn="become drunk" re="t" mo="1-1" />
+  <verb in="bitumer" tn="asphalt" mo="1-1" />
+  <verb in="biturer" tn="become drunk" re="t" mo="1-1" />
+  <verb in="bivouaquer" tn="bivouac" mo="1-1" />
+  <verb in="bizuter" tn="haze" mo="1-1" />
+  <verb in="blablater" tn="chit-chat" mo="1-1" />
+  <verb in="blackbouler" tn="blackball" mo="1-1" />
+  <verb in="blaguer" tn="joke, joke about" mo="1-1" />
+  <verb in="blairer" tn="stand the sight of" mo="1-1" />
+  <verb in="blâmer" tn="blame" mo="1-1" />
+  <verb in="blanchir" tn="launder, whiten" mo="2-1" />
+  <verb in="blaser" tn="blunt, dull" mo="1-1" />
+  <verb in="blasonner" tn="blazon" mo="1-1" />
+  <verb in="blasphémer" tn="blaspheme" mo="1-5" />
+  <verb in="blatérer" tn="bleat, bray" mo="1-5" />
+  <verb in="blêmir" tn="whiten, become pale, blanch" mo="2-1" />
+  <verb in="bléser" tn="lisp" mo="1-5" />
+  <verb in="blesser" tn="injure, wound" mo="1-1" />
+  <verb in="blettir" tn="overripen" mo="2-1" />
+  <verb in="bleuir" tn="make blue, turn blue" mo="2-1" />
+  <verb in="blinder" tn="armor, reinforce" mo="1-1" />
+  <verb in="blistériser" tn="put in a blister pack" mo="1-1" />
+  <verb in="blondir" tn="dye blond, brown" mo="2-1" />
+  <verb in="bloquer" tn="block, barricade" mo="1-1" />
+  <verb in="blottir" tn="snuggle up or huddle against" re="t" mo="2-1" />
+  <verb in="blouser" tn="bilk, con" mo="1-1" />
+  <verb in="bluffer" tn="bluff, surprise" mo="1-1" />
+  <verb in="bluter" tn="sift, sieve" mo="1-1" />
+  <verb in="bobiner" tn="wind onto a bobbin" mo="1-1" />
+  <verb in="bocarder" tn="stamp" mo="1-1" />
   <verb in="boire" tn="drink" mo="5-17" />
   <verb in="bouillir" tn="boil" mo="3-2C" />
   <verb in="bruire" tn="rustle, murmur" mo="2-2" />
