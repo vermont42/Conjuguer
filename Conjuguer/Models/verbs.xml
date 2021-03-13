@@ -604,7 +604,94 @@
   <verb in="bobiner" tn="wind onto a bobbin" mo="1-1" />
   <verb in="bocarder" tn="stamp" mo="1-1" />
   <verb in="boire" tn="drink" mo="5-17" />
+  <verb in="boiser" tn="panel, afforest" mo="1-1" />
+  <verb in="boiter" tn="limp" mo="1-1" />
+  <verb in="boitiller" tn="hobble, limp slightly" mo="1-1" />
+  <verb in="bombarder" tn="shell, blitz" mo="1-1" />
+  <verb in="bomber" tn="bulge, cower" mo="1-1" />
+  <verb in="bondir" tn="bounce, spring" mo="2-1" />
+  <verb in="bonifier" tn="improve" mo="1-1" />
+  <verb in="bonimenter" tn="make a pitch" mo="1-1" />
+  <verb in="border" tn="border" mo="1-1" />
+  <verb in="bordurer" tn="border" mo="1-1" />
+  <verb in="borner" tn="limit, confine" mo="1-1" />
+  <verb in="bornoyer" tn="look at with one eye closed to verify alignment or surface flatness" mo="1-7A" />
+  <verb in="bosseler" tn="emboss" mo="1-3A" />
+  <verb in="bosser" tn="raise an anchor, do a task" mo="1-1" />
+  <verb in="bossuer" tn="cause to become deformed" mo="1-1" />
+  <verb in="bostonner" tn="dance the Boston" mo="1-1" />
+  <verb in="botteler" tn="tie in bunches" mo="1-3A" />
+  <verb in="botter" tn="kick, please" mo="1-1" />
+  <verb in="boubouler" tn="call out (as an owl)" mo="1-1" />
+  <verb in="boucaner" tn="smoke meat" mo="1-1" />
+  <verb in="boucharder" tn="make a surface nonskid" mo="1-1" />
+  <verb in="boucher" tn="butcher" mo="1-1" />
+  <verb in="bouchonner" tn="rub down" mo="1-1" />
+  <verb in="boucler" tn="buckle, curl" mo="1-1" />
+  <verb in="bouder" tn="sulk, frown upon" mo="1-1" />
+  <verb in="boudiner" tn="contort into the shape of a sausage" mo="1-1" />
+  <verb in="bouffer" tn="eat, worry, consume in excess" mo="1-1" />
+  <verb in="bouffir" tn="cause to become swollen or puffy, puff up" mo="2-1" />
+  <verb in="bouffonner" tn="engage in buffoonery" mo="1-1" />
+  <verb in="bouger" tn="move" mo="1-2B" />
+  <verb in="bougonner" tn="grumble" mo="1-1" />
   <verb in="bouillir" tn="boil" mo="3-2C" />
+  <verb in="bouillonner" tn="bubble, froth" mo="1-1" />
+  <verb in="bouillotter" tn="simmer" mo="1-1" />
+  <verb in="boulanger" tn="prepare and bake bread" mo="1-2B" />
+  <verb in="bouler" tn="inflate, swell up" mo="1-1" />
+  <verb in="bouleverser" tn="completely and drastically change, overturn, shake, cause a strong emotion, disorganize, turn upside down" mo="1-1" />
+  <verb in="boulocher" tn="pill, make fluffy little balls by friction" mo="1-1" />
+  <verb in="boulonner" tn="bolt on, work hard" mo="1-1" />
+  <verb in="boulotter" tn="eat, consume" mo="1-1" />
+  <verb in="boumer" tn="go well" mo="1-1" />
+  <verb in="bouquiner" tn="read constantly for pleasure" mo="1-1" />
+  <verb in="bourdonner" tn="buzz, drone" mo="1-1" />
+  <verb in="bourgeonner" tn="bud, granulate" mo="1-1" />
+  <verb in="bourlinguer" tn="tack against the wind" mo="1-1" />
+  <verb in="bourreler" tn="cruelly torment someone with a painful feeling" mo="1-3A" />
+  <verb in="bourrer" tn="stuff with stuffing material, force-feed" mo="1-1" />
+  <verb in="boursicoter" tn="set money aside, dabble on the stock market" mo="1-1" />
+  <verb in="boursoufler" tn="swell, inflate" mo="1-1" />
+  <verb in="bousculer" tn="shove, jostle" mo="1-1" />
+  <verb in="bousiller" tn="wreck, botch" mo="1-1" />
+  <verb in="bouter" tn="push, remove flesh from the skin of an animal" mo="1-1" />
+  <verb in="boutonner" tn="button" mo="1-1" />
+  <verb in="bouturer" tn="stick, propagate plants by cuttin" mo="1-1" />
+  <verb in="boxer" tn="box" mo="1-1" />
+  <verb in="boyauter" tn="experience a paroxysm of laughter" re="t" mo="1-1" />
+  <verb in="boycotter" tn="boycott" mo="1-1" />
+  <verb in="braconner" tn="poach" mo="1-1" />
+  <verb in="brader" tn="sell at a reduced price" mo="1-1" />
+  <verb in="brailler" tn="holler, bawl" mo="1-1" />
+  <verb in="braire" tn="bray, shout" mo="5-24" />
+  <verb in="braiser" tn="braise" mo="1-1" />
+  <verb in="bramer" tn="bellow, troat" mo="1-1" />
+  <verb in="brancarder" tn="carry on a stretcher" mo="1-1" />
+  <verb in="brancher" tn="connect, branch, turn" mo="1-1" />
+  <verb in="brandir" tn="brandish" mo="2-1" />
+  <verb in="branler" tn="shake" mo="1-1" />
+  <verb in="braquer" tn="point a gun or camera, make a hard turn" mo="1-1" />
+  <verb in="braser" tn="weld, braze" mo="1-1" />
+  <verb in="brasiller" tn="braze" mo="1-1" />
+  <verb in="brasser" tn="brew, intermingle" mo="1-1" />
+  <verb in="brasseyer" tn="brew beer" mo="1-1" />
+  <verb in="braver" tn="challenge, defy, brave" mo="1-1" />
+  <verb in="bredouiller" tn="stammer, mumble" mo="1-1" />
+  <verb in="brêler" tn="tie with rope" mo="1-1" />
+  <verb in="brésiller" tn="tint or dye with brazilwood" mo="1-1" />
+  <verb in="bretteler" tn="scratch a surface with a rapier" mo="1-3A" />
+  <verb in="bretter" tn="scratch a surface with a rapier" mo="1-1" />
+  <verb in="breveter" tn="patent" mo="1-3B" />
+  <verb in="bricoler" tn="tinker" mo="1-1" />
+  <verb in="brider" tn="bridle" mo="1-1" />
+  <verb in="bridger" tn="play bridge" mo="1-2B" />
+  <verb in="briefer" tn="brief" mo="1-1" />
+  <verb in="briffer" tn="eat avidly" mo="1-1" />
+  <verb in="briguer" tn="crave" mo="1-1" />
+  <verb in="brillanter" tn="make shiny" mo="1-1" />
+  <verb in="brillantiner" tn="apply Brillantine" mo="1-1" />
+  <verb in="briller" tn="shine, sparkle" mo="1-1" />
   <verb in="bruire" tn="rustle, murmur" mo="2-2" />
   <verb in="céder" tn="cede" mo="1-5" />
   <verb in="changer" tn="change" mo="1-1" fr="70" />
