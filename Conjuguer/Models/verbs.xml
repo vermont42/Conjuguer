@@ -755,7 +755,7 @@
   <verb in="cailler" tn="curdle, clot" mo="1-1" />
   <verb in="caillouter" tn="make a road using crushed stone" mo="1-1" />
   <verb in="cajoler" tn="cuddle, cradle, cajole" mo="1-1" />
-  <verb in="calaminer" tn="apply pale pink zinc oxide powder to oneself" re="t" mo="1-1" />
+  <verb in="calaminer" tn="apply pale-pink zinc-oxide powder to oneself" re="t" mo="1-1" />
   <verb in="calamistrer" tn="curl hair" mo="1-1" />
   <verb in="calancher" tn="die" mo="1-1" />
   <verb in="calandrer" tn="put through a calender" mo="1-1" />
@@ -785,7 +785,97 @@
   <verb in="cancaner" tn="gossip, quack" mo="1-1" />
   <verb in="cancériser" tn="become cancerous" mo="1-1" />
   <verb in="candir" tn="crystallize" mo="2-1" />
+  <verb in="caner" tn="die" mo="1-1" />
+  <verb in="canneler" tn="decorate or adorn with cannelures" mo="1-3A" />
+  <verb in="canner" tn="can, die" mo="1-1" />
+  <verb in="cannibaliser" tn="cannibalize" mo="1-1" />
+  <verb in="canoniser" tn="canonize" mo="1-1" />
+  <verb in="canonner" tn="cannon, cannonade" mo="1-1" />
+  <verb in="canoter" tn="go canoeing" mo="1-1" />
+  <verb in="cantonner" tn="station, billet, confine" mo="1-1" />
+  <verb in="canuler" tn="bore, annoy" mo="1-1" />
+  <verb in="caoutchouter" tn="coat or decorate with rubber" mo="1-1" />
+  <verb in="caparaçonner" tn="caparison" mo="1-1" />
+  <verb in="capeler" tn="pass the eye of a hawser over a bollard" mo="1-3A" />
+  <verb in="capeyer" tn="hold one’s cape during a gust of wind" mo="1-1" />
+  <verb in="capitaliser" tn="capitalize" mo="1-1" />
+  <verb in="capitonner" tn="pad, fill with padding" mo="1-1" />
+  <verb in="capituler" tn="surrender, capitulate" mo="1-1" />
+  <verb in="capoter" tn="overturn, derail" mo="1-1" />
+  <verb in="capsuler" tn="put in a capsule" mo="1-1" />
+  <verb in="capter" tn="capture, detect" mo="1-1" />
+  <verb in="captiver" tn="engross, captivate" mo="1-1" />
+  <verb in="capturer" tn="capture" mo="1-1" />
+  <verb in="caqueter" tn="cackle, prattle" mo="1-4" />
+  <verb in="caracoler" tn="caracole, sit pretty" mo="1-1" />
+  <verb in="caractériser" tn="characterize" mo="1-1" />
+  <verb in="caramboler" tn="collide with" mo="1-1" />
+  <verb in="caraméliser" tn="caramelize" mo="1-1" />
+  <verb in="carapater" tn="run away" re="t" mo="1-1" />
+  <verb in="carbonater" tn="carbonate" mo="1-1" />
+  <verb in="carboniser" tn="char" mo="1-1" />
+  <verb in="carburer" tn="carburet, run well" mo="1-1" />
+  <verb in="carcailler" tn="cry out (as a quail)" mo="1-1" />
+  <verb in="carder" tn="card, use a carding machine" mo="1-1" />
+  <verb in="carencer" tn="cause a deficiency in someone" mo="1-2A" />
+  <verb in="caréner" tn="career" mo="1-5" />
+  <verb in="caresser" tn="stroke, caress, toy with" mo="1-1" />
+  <verb in="carguer" tn="fold or to roll up the sails against their yards and sometimes against the mast, by means of the cargoes" mo="1-1" />
+  <verb in="caricaturer" tn="caricature" mo="1-1" />
+  <verb in="carier" tn="rot, rot away" mo="1-1" />
+  <verb in="carillonner" tn="ring, chime, peal" mo="1-1" />
+  <verb in="carotter" tn="extort something from someone by abusing good faith" mo="1-1" />
+  <verb in="carreler" tn="tile, pave" mo="1-3A" />
+  <verb in="carrer" tn="square" mo="1-1" />
+  <verb in="carrosser" tn="put a body on a car" mo="1-1" />
+  <verb in="carroyer" tn="divide into squares" mo="1-7A" />
+  <verb in="carter" tn="verify a person’s age by inspecting an identity card" mo="1-1" />
+  <verb in="cartonner" tn="cover up with cardboard" mo="1-1" />
+  <verb in="cascader" tn="cascade" mo="1-1" />
+  <verb in="caser" tn="fit" mo="1-1" />
+  <verb in="caserner" tn="barrack" mo="1-1" />
+  <verb in="casquer" tn="fall into a trap, cover with a helmet" mo="1-1" />
+  <verb in="casse-croûter" tn="snack" mo="1-1" />
+  <verb in="casser" tn="break, break up" mo="1-1" />
+  <verb in="castagner" tn="scrap, scuffle" mo="1-1" />
+  <verb in="castrer" tn="neuter" mo="1-1" />
+  <verb in="cataloguer" tn="catalog" mo="1-1" />
+  <verb in="catalyser" tn="catalyze" mo="1-1" />
+  <verb in="catapulter" tn="catapult" mo="1-1" />
+  <verb in="catastropher" tn="stagger a person with an announcement" mo="1-1" />
+  <verb in="catcher" tn="wrestle, catch, understand" mo="1-1" />
+  <verb in="catéchiser" tn="catechize" mo="1-1" />
+  <verb in="catir" tn="stiffen a fabric" mo="2-1" />
+  <verb in="cauchemarder" tn="have a nightmare" mo="1-1" />
+  <verb in="causer" tn="cause, chat, speak" mo="1-1" />
+  <verb in="cautériser" tn="cauterize" mo="1-1" />
+  <verb in="cautionner" tn="post bail, support" mo="1-1" />
+  <verb in="cavalcader" tn="ride with a group, run in all directions" mo="1-1" />
+  <verb in="cavaler" tn="rush about, be on the run" mo="1-1" />
+  <verb in="caver" tn="dig, mine" mo="1-1" />
   <verb in="céder" tn="cede" mo="1-5" />
+  <verb in="ceindre" tn="gird, put on, wrap around" mo="5-12" />
+  <verb in="ceinturer" tn="belt, put a belt around" mo="1-1" />
+  <verb in="célébrer" tn="put a belt around" mo="1-5" />
+  <verb in="celer" tn="conceal, hide" mo="1-4" />
+  <verb in="cémenter" tn="cement" mo="1-1" />
+  <verb in="cendrer" tn="make ash-colored" mo="1-1" />
+  <verb in="censurer" tn="rebuke, censure, censor" mo="1-1" />
+  <verb in="centraliser" tn="centralize" mo="1-1" />
+  <verb in="centrer" tn="center" mo="1-1" />
+  <verb in="centrifuger" tn="centrifuge" mo="1-2B" />
+  <verb in="centupler" tn="centuple, multiply by one hundred" mo="1-1" />
+  <verb in="cercler" tn="ring, hoop, encircle" mo="1-1" />
+  <verb in="cerner" tn="surround, figure out" mo="1-1" />
+  <verb in="certifier" tn="certify" mo="1-1" />
+  <verb in="césariser" tn="grant the César Award to" mo="1-1" />
+  <verb in="cesser" tn="cease, stop, break up" mo="1-1" />
+  <verb in="chagriner" tn="bother, worry, grieve, upset" mo="1-1" />
+  <verb in="chahuter" tn="playfight, horseplay" mo="1-1" />
+  <verb in="chaîner" tn="chain" mo="1-1" />
+  <verb in="chaloir" tn="heat, matter, be of import" mo="4-5A" />
+  <verb in="chalouper" tn="sway, rock (said of dancing or walking)" mo="1-1" />
+  <verb in="chamailler" tn="bicker, squabble, quarrel" re="t" mo="1-1" />
   <verb in="changer" tn="change" mo="1-1" fr="70" />
   <verb in="chercher" tn="look for, seek" mo="1-1" fr="86" />
   <verb in="choisir" tn="choose" mo="2-1" fr="57" />
