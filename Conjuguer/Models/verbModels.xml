@@ -53,6 +53,7 @@
   <model mo="avoir" id="4-10" ep="U" si="s" se="u" bb="E" sb="aY" p="1,1,I*,r1s|2,2,A,r2s|2,2,A*,r3s|2,2,Ont*,r3p|4,3,U,sf|2,2,E,xA|2,2,E,pp|1,1,Y,rr|1,1,I,b1s,b2s|1,1,IT*,b3s|1,1,Yons*,b1p|1,1,Yez*,b2p|1,1,I,b3p|1,1,aIE*,h2s|1,1,Y,h1p,h2p" />
   <model mo="rendre" id="5-1A" ep="u" si="r" se="i" bb="e" />
   <model mo="rompre" id="5-1B" pa="5-1A" p="0,1,T,r3s" />
+  <model mo="foutre" id="5-1C" pa="5-1A" p="2,2,U,r1s,r2s" />
   <model mo="prendre" id="5-2" pa="5-1A" ep="IS" p="2,2,N,r1p,r2p,b1p,b2p|1,1,N,r3p,b1s,b2s,b3s,b3p|3,3,,xA|3,3,,pp" />
   <model mo="battre" id="5-3" pa="5-1A" p="2,2,T,r1s,r2s,r3s" />
   <model mo="mettre" id="5-4" pa="5-3" p="3,3,,xA|3,3,IS*,pp" />
@@ -86,6 +87,8 @@
   <model mo="traire" id="5-24" ep="T" si="s" se="a" bb="e" p="1,1,Y,r1p,r2p,xA,b1p,b2p" />
   <model mo="vaincre" id="5-25" si="r" se="i" bb="e" ep="u" p="1,1,QU,r1p,r2p,r3p,xA,bA" />
   <model mo="être" id="5-26" si="s" se="u" bb="e" ep="É" sb="SOI" p="2,2,SUI,r1s|2,2,E,r2s|2,2,ES,r3s|2,2,SOMMEs*,r1p|2,2,êteS*,r2p|2,2,SOnt*,r3p|4,2,SE,sf|2,2,F,xA|6,6,Ét,iA|2,2,SOIS*,b1s|2,2,SOIs*,b2s|2,2,SOIT*,b3s|2,2,SOYons*,b1p|2,2,SOYez*,b2p|2,2,SOI,b3p|1,1,SOI,h2s|5,5,Yons*,h1p|5,5,SOYez*,h2p|2,1,É,pp|6,6,Ét,rr" />
+  <model mo="clore" id="5-27" ep="S" si="s" se="b" bb="e" p="1,1,Ô,N,r3s|0,1,S,r1p,r2p,r3p,bA" />
+  <model mo="forclore" id="5-27A" pa="5-27" />
   <model mo="partir" id="6-1" si="s" se="i" bb="E" ep="i" p="2,2,@,r1s,r2s,r3s" />
   <model mo="fuire" id="6-2" si="s" se="b" bb="e" ep="I" p="1,1,Y,r1p,r2p,b1p,b2p|1,1,,pp" />
   <model mo="acquérir" id="6-3" si="s" se="i" bb="e" ep="iS" p="2,1,IE,r1s,r2s,r3s|2,1,IÈ,r3p|4,4,ERr,sf|3,3,@,xA,pp|2,1,IÈ,b1s,b2s,b3s,b3p" />

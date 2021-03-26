@@ -1011,7 +1011,7 @@
   <verb in="cloner" tn="clone" mo="1-1" />
   <verb in="clopiner" tn="limp, hobble, halt" mo="1-1" />
   <verb in="cloquer" tn="blister, get blisters" mo="1-1" />
-  <verb in="clore" tn="close" mo="5-8A" />
+  <verb in="clore" tn="close" mo="5-27" />
   <verb in="clôturer" tn="fence off" mo="1-1" />
   <verb in="clouer" tn="nail" mo="1-1" />
   <verb in="clouter" tn="decorate with nails, stud" mo="1-1" />
@@ -1204,7 +1204,7 @@
   <verb in="contredire" tn="contradict" mo="5-8B" />
   <verb in="contrefaire" tn="forge, counterfeit, imitate, mimic, disguise" mo="5-23" />
   <verb in="contreficher" tn="not give a darn" re="t" mo="1-1" />
-  <verb in="contrefoutre" tn="not give a darn about" re="t" mo="5-3" />
+  <verb in="contrefoutre" tn="mock" re="t" mo="5-1C" />
   <verb in="contremanifester" tn="participate in a counterdemonstration" mo="1-1" />
   <verb in="contrepasser" tn="cancel, annul" mo="1-1" />
   <verb in="contrer" tn="block, counter, counteract" mo="1-1" />
@@ -1223,6 +1223,7 @@
   <verb in="cueillir" tn="gather" mo="3-2B" />
   <verb in="décéder" tn="die" ay="e" mo="1-5" />
   <verb in="décider" tn="decide" mo="1-1" fr="41" />
+  <verb in="déclore" tn="open, reopen, uncover" mo="5-27A" />
   <verb in="défaillir" tn="faint" mo="3-2A" />
   <verb in="défendre" tn="defend, forbid" mo="5-1A" fr="99" />
   <verb in="demander" tn="ask" mo="1-1" fr="15" />
@@ -1234,11 +1235,13 @@
   <verb in="dissoudre" tn="dissolve" mo="5-13A" />
   <verb in="donner" tn="give" mo="1-1" fr="9" />
   <verb in="dormir" tn="sleep" mo="6-1" />
+  <verb in="éclore" tn="hatch, bloom" mo="5-27A" />
   <verb in="écrire" tn="write" mo="5-7" fr="98" />
   <verb in="élire" tn="elect" mo="5-10" />
   <verb in="émouvoir" tn="move emotionally" mo="4-3B" />
   <verb in="empêcher" tn="prevent" mo="1-1" fr="75" />
   <verb in="employer" tn="use, employ" mo="1-7A" />
+  <verb in="enclore" tn="enclose, fortify" mo="5-27A" />
   <verb in="entendre" tn="hear, understand" mo="5-1A" fr="33" />
   <verb in="entrapercevoir" tn="glimpse" mo="4-2B" />
   <verb in="entrer" tn="enter" ay="e" mo="1-1" fr="87" />
@@ -1255,6 +1258,8 @@
   <verb in="falloir" tn="be necessary" mo="4-5C" de="t" fr="13" />
   <verb in="fatiguer" tn="fatigue" mo="1-1" />
   <verb in="finir" tn="finish" mo="2-1" />
+  <verb in="forclore" tn="debar" mo="5-27A" />
+  <verb in="foutre" tn="not give a darn about" re="t" mo="5-1C" />
   <verb in="fuire" tn="flee" mo="6-2" />
   <verb in="gagner" tn="win" mo="1-1" fr="65" />
   <verb in="haïr" tn="hate" mo="2-3" />
@@ -1318,6 +1323,7 @@
   <verb in="reconnaître" tn="recognize" mo="5-20" fr="56" />
   <verb in="recueillir" tn="collect" mo="3-2B" />
   <verb in="redevoir" tn="owe again" mo="4-2A" />
+  <verb in="refoutre" tn="put back, return" mo="5-1C" />
   <verb in="refuser" tn="refuse" mo="1-1" fr="67" />
   <verb in="relever" tn="raise" mo="1-1" fr="97" />
   <verb in="remettre" tn="put back, replace" mo="5-4" fr="35" />
