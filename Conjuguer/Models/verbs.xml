@@ -876,21 +876,343 @@
   <verb in="chaloir" tn="heat, matter, be of import" mo="4-5A" />
   <verb in="chalouper" tn="sway, rock (said of dancing or walking)" mo="1-1" />
   <verb in="chamailler" tn="bicker, squabble, quarrel" re="t" mo="1-1" />
+  <verb in="chamarrer" tn="enhance a fabric or garment with sumptuous ornaments" mo="1-1" />
+  <verb in="chambarder" tn="turn upside down, radically reorganize" mo="1-1" />
+  <verb in="chambouler" tn="shatter, shake, turn upside down" mo="1-1" />
+  <verb in="chambrer" tn="bring wine to room temperature, mock" mo="1-1" />
+  <verb in="chamoiser" tn="prepare a chamois skin" mo="1-1" />
+  <verb in="champagniser" tn="treat a white wine using the champenois method" mo="1-1" />
+  <verb in="champlever" tn="dig into a surface to carve a figure into it or to insert enamel ornaments" mo="1-4" />
+  <verb in="chanceler" tn="stagger, totter, wobble" mo="1-3A" />
+  <verb in="chancir" tn="become covered with mould" re="t" mo="2-1" />
+  <verb in="chanfreiner" tn="chamfer" mo="1-1" />
   <verb in="changer" tn="change" mo="1-1" fr="70" />
+  <verb in="chansonner" tn="satirize in song" mo="1-1" />
+  <verb in="chanter" tn="sing" mo="1-1" />
+  <verb in="chantonner" tn="sing, hum" mo="1-1" />
+  <verb in="chantourner" tn="carve or hollow out a piece of wood, stone, or marble into a predetermined shape" mo="1-1" />
+  <verb in="chaparder" tn="pinch, pilfer" mo="1-1" />
+  <verb in="chapeauter" tn="put a hat on someone, be in control" mo="1-1" />
+  <verb in="chaperonner" tn="chaperone, hood" mo="1-1" />
+  <verb in="chapitrer" tn="reprimand" mo="1-1" />
+  <verb in="chaponner" tn="caponize" mo="1-1" />
+  <verb in="chaptaliser" tn="add sugar to must to increase the alcohol content of wine" mo="1-1" />
+  <verb in="charbonner" tn="turn into coal, produce coal" mo="1-1" />
+  <verb in="charcuter" tn="chop or cut badly, butcher" mo="1-1" />
+  <verb in="charger" tn="load up, load, charge" mo="1-2B" />
+  <verb in="charmer" tn="charm with magic, charm" mo="1-1" />
+  <verb in="charpenter" tn="tailor, tailor make" mo="1-1" />
+  <verb in="charrier" tn="carry, transport, pull one’s leg" mo="1-1" />
+  <verb in="charroyer" tn="transport by cart or wagon" mo="1-7A" />
+  <verb in="chartériser" tn="charter (a plane or train)" mo="1-1" />
+  <verb in="chasser" tn="hunt, chase, drive off" mo="1-1" />
+  <verb in="châtaigner" tn="give chestnuts, strike" mo="1-1" />
+  <verb in="châtier" tn="chastise, punish, castigate, smite" mo="1-1" />
+  <verb in="chatonner" tn="give birth to kittens" mo="1-1" />
+  <verb in="chatouiller" tn="tickle" mo="1-1" />
+  <verb in="chatoyer" tn="shimmer" mo="1-7A" />
+  <verb in="châtrer" tn="castrate" mo="1-1" />
+  <verb in="chauler" tn="whitewash" mo="1-1" />
+  <verb in="chaumer" tn="clear land of stubble" mo="1-1" />
+  <verb in="chausser" tn="put footwear on someone" mo="1-1" />
+  <verb in="chauvir" tn="perk up (ears of an animal)" mo="2-1" />
+  <verb in="chavirer" tn="capsize" mo="1-1" />
+  <verb in="cheminer" tn="walk on, keep walking" mo="1-1" />
+  <verb in="chemiser" tn="line, cover the inside surface of" mo="1-1" />
   <verb in="chercher" tn="look for, seek" mo="1-1" fr="86" />
+  <verb in="chérir" tn="cherish" mo="2-1" />
+  <verb in="chevaler" tn="support with beams" mo="1-1" />
+  <verb in="chevaucher" tn="straddle, be astride, span" mo="1-1" />
+  <verb in="cheviller" tn="assemble with dowels or pegs" mo="1-1" />
+  <verb in="chevroter" tn="quaver, bleat" mo="1-1" />
+  <verb in="chiader" tn="defecate" mo="1-1" />
+  <verb in="chialer" tn="cry, complain" mo="1-1" />
+  <verb in="chicaner" tn="quibble, squabble, bicker" re="t" mo="1-1" />
+  <verb in="chier" tn="poop" mo="1-1" />
+  <verb in="chiffonner" tn="crumple, crease, bother, perplex" mo="1-1" />
+  <verb in="chiffrer" tn="number, add up, encrypt" mo="1-1" />
+  <verb in="chigner" tn="whine, moan, complain" mo="1-1" />
+  <verb in="chiner" tn="dye and interweave fabrics" mo="1-1" />
+  <verb in="chinoiser" tn="argue, quibble, squabble" mo="1-1" />
+  <verb in="chiper" tn="pinch, steal, rob" mo="1-1" />
+  <verb in="chipoter" tn="nibble, quibble, haggle" mo="1-1" />
+  <verb in="chiquer" tn="chew tobacco, chew gum" mo="1-1" />
+  <verb in="chlinguer" tn="stink, reek" mo="1-1" />
+  <verb in="chlorer" tn="chlorinate" mo="1-1" />
+  <verb in="chloroformer" tn="chloroform" mo="1-1" />
+  <verb in="chlorurer" tn="chlorinate" mo="1-1" />
+  <verb in="choir" tn="fall" mo="4-1A" />
   <verb in="choisir" tn="choose" mo="2-1" fr="57" />
+  <verb in="chômer" tn="be idle, be out of work" mo="1-1" />
+  <verb in="choper" tn="steal, arrest, pick up (a passenger)" mo="1-1" />
+  <verb in="chopper" tn="stumble" mo="1-1" />
+  <verb in="choquer" tn="hit, collide, shock" mo="1-1" />
+  <verb in="chorégraphier" tn="choreograph" mo="1-1" />
+  <verb in="chosifier" tn="reify" mo="1-1" />
+  <verb in="chouchouter" tn="spoil, pamper" mo="1-1" />
+  <verb in="chougner" tn="cry, whine, whinge" mo="1-1" />
+  <verb in="chouiner" tn="cry, whine, whinge" mo="1-1" />
+  <verb in="chouraver" tn="nick, pinch, steal" mo="1-1" />
+  <verb in="chourer" tn="steal" mo="1-1" />
+  <verb in="choyer" tn="cherish, revere, treasure" mo="1-7A" />
+  <verb in="christianiser" tn="Christianize" mo="1-1" />
+  <verb in="chromer" tn="chrome" mo="1-1" />
+  <verb in="chronométrer" tn="time, keep time" mo="1-5" />
+  <verb in="chuchoter" tn="whisper, rustle (of leaves)" mo="1-1" />
+  <verb in="chuinter" tn="hoot, buzz, creak" mo="1-1" />
+  <verb in="chuter" tn="fall, drop" mo="1-1" />
+  <verb in="cibler" tn="target" mo="1-1" />
+  <verb in="cicatriser" tn="heal, scar" mo="1-1" />
+  <verb in="ciller" tn="blink, bat an eyelash" mo="1-1" />
+  <verb in="cimenter" tn="cement, confirm" mo="1-1" />
+  <verb in="cinématographier" tn="cinematograph" mo="1-1" />
+  <verb in="cingler" tn="sail, navigate" mo="1-1" />
+  <verb in="cintrer" tn="bend, vault, take in at the waist" mo="1-1" />
   <verb in="circoncire" tn="circumcize" mo="5-8D" />
+  <verb in="circonscrire" tn="circumscribe" mo="5-7" />
+  <verb in="circonvenir" tn="circumvent" mo="6-7" />
+  <verb in="circuler" tn="circulate, go by, get around" mo="1-1" />
+  <verb in="cirer" tn="wax" mo="1-1" />
+  <verb in="cisailler" tn="clip, shear" mo="1-1" />
+  <verb in="ciseler" tn="chisel, chop finely (spices)" mo="1-4" />
+  <verb in="citer" tn="cite, summon, name" mo="1-1" />
+  <verb in="civiliser" tn="civilize" mo="1-1" />
+  <verb in="clabauder" tn="bark frequently" mo="1-1" />
+  <verb in="claironner" tn="bugle, yell" mo="1-1" />
   <verb in="clamecer" tn="kick the bucket" mo="1-6A" />
+  <verb in="clamer" tn="proclaim" mo="1-1" />
+  <verb in="clamper" tn="clamp" mo="1-1" />
+  <verb in="clamser" tn="die" mo="1-1" />
+  <verb in="clapir" tn="cry out (as a rabbit)" mo="2-1" />
+  <verb in="clapoter" tn="swash, slosh, lap" mo="1-1" />
+  <verb in="clapper" tn="click (the tongue)" mo="1-1" />
+  <verb in="claquemurer" tn="shut in, enclose" mo="1-1" />
+  <verb in="claquer" tn="clack" mo="1-1" />
+  <verb in="claqueter" tn="cry out (as a stork)" mo="1-3B" />
+  <verb in="clarifier" tn="clarify" mo="1-1" />
+  <verb in="classer" tn="classify, file" mo="1-1" />
+  <verb in="classifier" tn="classify" mo="1-1" />
+  <verb in="claudiquer" tn="limp" mo="1-1" />
+  <verb in="claustrer" tn="confine" mo="1-1" />
+  <verb in="claveter" tn="secure with a key" mo="1-3B" />
+  <verb in="clayonner" tn="line the embankment of a ditch or road with wattle" mo="1-1" />
+  <verb in="clicher" tn="stereotype" mo="1-1" />
+  <verb in="cligner" tn="squint" mo="1-1" />
+  <verb in="clignoter" tn="blink, indicate" mo="1-1" />
+  <verb in="climatiser" tn="air-condition" mo="1-1" />
+  <verb in="cliquer" tn="click" mo="1-1" />
+  <verb in="cliqueter" tn="jingle, rattle, clink" mo="1-3B" />
+  <verb in="clisser" tn="decorate a bottle by putting it in a wicker basket" mo="1-1" />
+  <verb in="cliver" tn="cleave" mo="1-1" />
+  <verb in="clochardiser" tn="cause someone to become a vagabond" mo="1-1" />
+  <verb in="clocher" tn="ring a bell, wobble" mo="1-1" />
+  <verb in="cloisonner" tn="partition" mo="1-1" />
+  <verb in="cloîtrer" tn="cloister" mo="1-1" />
+  <verb in="cloner" tn="clone" mo="1-1" />
+  <verb in="clopiner" tn="limp, hobble, halt" mo="1-1" />
+  <verb in="cloquer" tn="blister, get blisters" mo="1-1" />
+  <verb in="clore" tn="close" mo="5-8A" />
+  <verb in="clôturer" tn="fence off" mo="1-1" />
+  <verb in="clouer" tn="nail" mo="1-1" />
+  <verb in="clouter" tn="decorate with nails, stud" mo="1-1" />
+  <verb in="coacher" tn="coach" mo="1-1" />
+  <verb in="coaguler" tn="coagulate" mo="1-1" />
+  <verb in="coaliser" tn="form into a colation, unite" mo="1-1" />
+  <verb in="coasser" tn="croak (like a frog)" mo="1-1" />
+  <verb in="cocher" tn="tick, cross" mo="1-1" />
+  <verb in="côcher" tn="tick, cross" mo="1-1" />
+  <verb in="cochonner" tn="mess up" mo="1-1" />
+  <verb in="cocoter" tn="yap, jabber, blather" mo="1-1" />
+  <verb in="cocotter" tn="yap, jabber, blather" mo="1-1" />
+  <verb in="cocufier" tn="be unfaithful to, cuckold" mo="1-1" />
+  <verb in="coder" tn="code, encode" mo="1-1" />
+  <verb in="codifier" tn="codify" mo="1-1" />
+  <verb in="coéditer" tn="edit in collaboration" mo="1-1" />
+  <verb in="coexister" tn="coexist" mo="1-1" />
+  <verb in="coffrer" tn="lock up, make framework" mo="1-1" />
+  <verb in="cofinancer" tn="cofinance" mo="1-2A" />
+  <verb in="cogérer" tn="co-manage, co-run" mo="1-5" />
+  <verb in="cogiter" tn="cogitate, think about" mo="1-1" />
+  <verb in="cogner" tn="whack, bash, thump" mo="1-1" />
+  <verb in="cohabiter" tn="cohabit, live together" mo="1-1" />
+  <verb in="coiffer" tn="cover the head, give a haircut" mo="1-1" />
+  <verb in="coincer" tn="wedge, jam, expose" mo="1-2A" />
+  <verb in="coïncider" tn="coincide" mo="1-1" />
+  <verb in="coïter" tn="copulate" mo="1-1" />
+  <verb in="cokéfier" tn="cokify" mo="1-1" />
+  <verb in="collaborer" tn="collaborate" mo="1-1" />
+  <verb in="collapser" tn="collapse" mo="1-1" />
+  <verb in="collationner" tn="collate" mo="1-1" />
+  <verb in="collecter" tn="collect, gather" mo="1-1" />
+  <verb in="collectionner" tn="collect" mo="1-1" />
+  <verb in="collectiviser" tn="collectivize" mo="1-1" />
+  <verb in="coller" tn="stick, glue" mo="1-1" />
+  <verb in="colleter" tn="wrap round the collar, collar" mo="1-3B" />
+  <verb in="colliger" tn="collate, compile" mo="1-2B" />
+  <verb in="colloquer" tn="lodge someone" mo="1-1" />
+  <verb in="colmater" tn="fill in, plug, fill up" mo="1-1" />
+  <verb in="coloniser" tn="colonize" mo="1-1" />
   <verb in="colorer" tn="color" mo="1-1" />
+  <verb in="colorier" tn="color" mo="1-1" />
+  <verb in="coloriser" tn="colorize" mo="1-1" />
+  <verb in="colporter" tn="peddle, hawk" mo="1-1" />
+  <verb in="coltiner" tn="lug, carry on the shoulder" mo="1-1" />
   <verb in="combattre" tn="fight, oppose" mo="5-3" />
+  <verb in="combiner" tn="combine" mo="1-1" />
+  <verb in="combler" tn="fulfil, satisfy" mo="1-1" />
+  <verb in="commander" tn="tell someone to do something, ask for a product" mo="1-1" />
+  <verb in="commanditer" tn="commission, finance, sponsor" mo="1-1" />
+  <verb in="commémorer" tn="commemorate" mo="1-1" />
   <verb in="commencer" tn="start" mo="1-2A" fr="31" />
+  <verb in="commenter" tn="comment" mo="1-1" />
+  <verb in="commercer" tn="trade" mo="1-2A" />
+  <verb in="commercialiser" tn="commercialize" mo="1-1" />
+  <verb in="commettre" tn="commit" mo="5-4" />
+  <verb in="commissionner" tn="commission" mo="1-1" />
+  <verb in="commotionner" tn="cause a commotion" mo="1-1" />
+  <verb in="commuer" tn="commute (a sentence)" mo="1-1" />
+  <verb in="communaliser" tn="communalize" mo="1-1" />
+  <verb in="communier" tn="receive communion" mo="1-1" />
+  <verb in="communiquer" tn="communicate" mo="1-1" />
+  <verb in="commuter" tn="commute, switch" mo="1-1" />
+  <verb in="compacter" tn="compact" mo="1-1" />
+  <verb in="comparaître" tn="appear before a judge" mo="5-20" />
+  <verb in="comparer" tn="compare" mo="1-1" />
+  <verb in="comparoir" tn="appear before a judge" mo="4-1A" />
+  <verb in="compartimenter" tn="compartmentalize" mo="1-1" />
+  <verb in="compasser" tn="compass" mo="1-1" />
+  <verb in="compatir" tn="sympathize, empathize, feel for" mo="2-1" />
+  <verb in="compenser" tn="compensate for, offset" mo="1-1" />
+  <verb in="compiler" tn="compile" mo="1-1" />
+  <verb in="compisser" tn="urinate on" mo="1-1" />
+  <verb in="complaire" tn="get stuck in, bask in, wallow in" re="t" mo="5-22A" />
+  <verb in="compléter" tn="complete" mo="1-5" />
+  <verb in="complexer" tn="establish a complex, have a complex about something" mo="1-1" />
+  <verb in="complexifier" tn="complexify" mo="1-1" />
+  <verb in="complimenter" tn="compliment" mo="1-1" />
+  <verb in="compliquer" tn="complicate, elaborate" mo="1-1" />
+  <verb in="comploter" tn="plot, especially something illegal or immoral" mo="1-1" />
+  <verb in="comporter" tn="include, consist of, entail" mo="1-1" />
+  <verb in="composer" tn="compose, constitute, dial (a number)" mo="1-1" />
+  <verb in="composter" tn="stamp a ticket, create compost, add compost to the ground" mo="1-1" />
   <verb in="comprendre" tn="understand" mo="5-2" fr="20" />
+  <verb in="compresser" tn="compress" mo="1-1" />
+  <verb in="comprimer" tn="compress" mo="1-1" />
+  <verb in="compromettre" tn="compromise, jeopardize" mo="5-4" />
+  <verb in="comptabiliser" tn="count, keep score" mo="1-1" />
   <verb in="compter" tn="count" mo="1-1" fr="32" />
+  <verb in="compulser" tn="consult" mo="1-1" />
+  <verb in="concasser" tn="crush, grind, dice (a tomato)" mo="1-1" />
+  <verb in="concéder" tn="concede" mo="1-5" />
+  <verb in="concélébrer" tn="concelebrate, celebrate along with others" mo="1-5" />
+  <verb in="concentrer" tn="concentrate" mo="1-1" />
+  <verb in="conceptualiser" tn="conceptualize" mo="1-1" />
   <verb in="concerner" tn="concern" mo="1-1" fr="81" />
+  <verb in="concerter" tn="concert, plan" mo="1-1" />
+  <verb in="concevoir" tn="conceive" mo="4-2B" />
+  <verb in="conchier" tn="poop on something, tell someone to get lost" mo="1-1" />
+  <verb in="concilier" tn="reconcile, conciliate" mo="1-1" />
+  <verb in="conclure" tn="conclude, attain, reach" mo="5-16A" />
+  <verb in="concocter" tn="concoct" mo="1-1" />
+  <verb in="concorder" tn="match, tally, concur" mo="1-1" />
+  <verb in="concourir" tn="compete, content, contribute to, converge" mo="6-4" />
+  <verb in="concrétiser" tn="concretize" mo="1-1" />
+  <verb in="concurrencer" tn="compete with" mo="1-2A" />
+  <verb in="condamner" tn="condemn, sentence, punish, block, obstruct" mo="1-1" />
+  <verb in="condenser" tn="condense, compress, concentrate" mo="1-1" />
+  <verb in="condescendre" tn="condescend to" mo="5-1A" />
+  <verb in="conditionner" tn="package, condition" mo="1-1" />
   <verb in="conduire" tn="drive, conduct" mo="5-9A" />
+  <verb in="confectionner" tn="make, create, fashion (clothes)" mo="1-1" />
+  <verb in="confédérer" tn="confederate" mo="1-5" />
+  <verb in="confesser" tn="admit, confess" mo="1-1" />
+  <verb in="confier" tn="confide, entrust" mo="1-1" />
+  <verb in="configurer" tn="configure" mo="1-1" />
+  <verb in="confiner" tn="confine" mo="1-1" />
+  <verb in="confire" tn="preserve (food), pickle" mo="5-8B" />
+  <verb in="confirmer" tn="confirm, uphold" mo="1-1" />
+  <verb in="confisquer" tn="confiscate" mo="1-1" />
+  <verb in="confluer" tn="(of a river) join, flow into (another river), flood together" mo="1-1" />
+  <verb in="confondre" tn="confound" mo="5-1A" />
+  <verb in="conformer" tn="conform, comply" mo="1-1" />
+  <verb in="conforter" tn="comfort, reinforce" mo="1-1" />
+  <verb in="confronter" tn="confront, contrast, compare" mo="1-1" />
+  <verb in="congédier" tn="lay off, dismiss" mo="1-1" />
+  <verb in="congeler" tn="freeze" mo="1-4" />
+  <verb in="congestionner" tn="congest, make flushed" mo="1-1" />
+  <verb in="conglomérer" tn="conglomerate" mo="1-5" />
+  <verb in="conglutiner" tn="join two or more objects with viscous material" mo="1-1" />
+  <verb in="congratuler" tn="congratulate" mo="1-1" />
+  <verb in="congréer" tn="wrap a line with wire so as to fill the voids between the strands" mo="1-1" />
+  <verb in="conjecturer" tn="conjecture, surmise, speculate" mo="1-1" />
+  <verb in="conjuguer" tn="conjugate (obviously), unite, tie together" mo="1-1" />
+  <verb in="conjurer" tn="beseech, beg, ward off, conspire, plot, conjure" mo="1-1" />
   <verb in="connaître" tn="know" mo="5-20" fr="29" />
+  <verb in="connecter" tn="connect, log in" mo="1-1" />
+  <verb in="connoter" tn="connote" mo="1-1" />
+  <verb in="conquérir" tn="conquer, capture, win, win over" mo="6-3" />
+  <verb in="consacrer" tn="dedicate, devote time, consecrate" mo="1-1" />
+  <verb in="conscientiser" tn="make aware, sensitize" mo="1-1" />
+  <verb in="conseiller" tn="advise, counsel" mo="1-1" />
+  <verb in="consentir" tn="consent" mo="6-1" />
+  <verb in="conserver" tn="keep in a particular place, retain, conserve, preserve" mo="1-1" />
   <verb in="considérer" tn="consider" mo="1-1" fr="63" />
+  <verb in="consigner" tn="confine to quarters, give someone detention, record, consign" mo="1-1" />
+  <verb in="consister" tn="consist" mo="1-1" />
+  <verb in="consoler" tn="comfort, console" mo="1-1" />
+  <verb in="consolider" tn="consolidate" mo="1-1" />
+  <verb in="consommer" tn="consume, consummate" mo="1-1" />
+  <verb in="conspirer" tn="conspire" mo="1-1" />
+  <verb in="conspuer" tn="boo, shout down" mo="1-1" />
+  <verb in="constater" tn="note, notice, certify, state, observe" mo="1-1" />
+  <verb in="consteller" tn="cluster, constellate" mo="1-1" />
+  <verb in="consterner" tn="alarm, dismay" mo="1-1" />
+  <verb in="constiper" tn="constipate" mo="1-1" />
+  <verb in="constituer" tn="constitute, make up" mo="1-1" />
+  <verb in="constitutionnaliser" tn="constitutionalize" mo="1-1" />
+  <verb in="construire" tn="build, construct" mo="5-9A" />
+  <verb in="consulter" tn="consult, refer to" mo="1-1" />
+  <verb in="consumer" tn="consume, use up" mo="1-1" />
+  <verb in="contacter" tn="contact" mo="1-1" />
+  <verb in="contagionner" tn="infect with a contagion" mo="1-1" />
+  <verb in="contaminer" tn="contaminate" mo="1-1" />
+  <verb in="contempler" tn="contemplate" mo="1-1" />
+  <verb in="conteneuriser" tn="containerize" mo="1-1" />
+  <verb in="contenir" tn="contain, hold back, hold, take" mo="6-7" />
+  <verb in="contenter" tn="content, satisfy" mo="1-1" />
+  <verb in="conter" tn="recount (tell a story)" mo="1-1" />
+  <verb in="contester" tn="contest, challenge, dispute" mo="1-1" />
+  <verb in="contingenter" tn="apply a quota to, brake" mo="1-1" />
   <verb in="continuer" tn="continue" mo="1-1" fr="26" />
+  <verb in="contorsionner" tn="contort" re="t" mo="1-1" />
+  <verb in="contourner" tn="circumvent, bypass, skirt around, travel from one place to another, visit several places" mo="1-1" />
+  <verb in="contracter" tn="contract" mo="1-1" />
+  <verb in="contractualiser" tn="contractualize" mo="1-1" />
+  <verb in="contraindre" tn="constrain, compel, force" mo="5-12" />
+  <verb in="contrarier" tn="thwart, upset, stand in the way of" mo="1-1" />
+  <verb in="contraster" tn="contrast" mo="1-1" />
+  <verb in="contre-attaquer" tn="counterattack" mo="1-1" />
+  <verb in="contre-indiquer" tn="counterindicate, contraindicate" mo="1-1" />
+  <verb in="contre-manifester" tn="participate in a counterdemonstration" mo="1-1" />
+  <verb in="contre-passer" tn="cancel, annul" mo="1-1" />
+  <verb in="contre-tirer" tn="counterproof a print or drawing" mo="1-1" />
+  <verb in="contrebalancer" tn="counterbalance" mo="1-2A" />
+  <verb in="contrebattre" tn="counter, get back at" mo="5-3" />
+  <verb in="contrebraquer" tn="counterbalance" mo="1-1" />
+  <verb in="contrebuter" tn="prop up" mo="1-1" />
+  <verb in="contrecarrer" tn="thwart, stymie" mo="1-1" />
+  <verb in="contredire" tn="contradict" mo="5-8B" />
+  <verb in="contrefaire" tn="forge, counterfeit, imitate, mimic, disguise" mo="5-23" />
+  <verb in="contreficher" tn="not give a darn" re="t" mo="1-1" />
+  <verb in="contrefoutre" tn="not give a darn about" re="t" mo="5-3" />
+  <verb in="contremanifester" tn="participate in a counterdemonstration" mo="1-1" />
+  <verb in="contrepasser" tn="cancel, annul" mo="1-1" />
+  <verb in="contrer" tn="block, counter, counteract" mo="1-1" />
+  <verb in="contresigner" tn="countersign" mo="1-1" />
+  <verb in="contretirer" tn="counterproof a print or drawing" mo="1-1" />
+  <verb in="contrevenir" tn="countervene" mo="6-7" />
+  <verb in="contribuer" tn="contribute, help" mo="1-1" />
+  <verb in="contrister" tn="grieve for" mo="1-1" />
   <verb in="convaincre" tn="convince" mo="5-25" />
   <verb in="coudre" tn="sew" mo="5-14" />
   <verb in="courir" tn="run" mo="6-4" />
@@ -1021,6 +1343,7 @@
   <verb in="saillir" tn="protrude" mo="3-2A" />
   <verb in="satisfaire" tn="satisfy, fulfill" mo="5-23" />
   <verb in="savoir" tn="know" mo="4-7" fr="12" />
+  <verb in="schlinguer" tn="stink, reek" mo="1-1" />
   <verb in="sembler" tn="seem" mo="1-1" fr="44" />
   <verb in="sentir" tn="sense, smell" mo="6-1" />
   <verb in="servir" tn="serve" mo="6-1" fr="43" />

@@ -23,7 +23,10 @@ struct ConjuguerApp: App {
     VerbModel.models = VerbModelParser().parse()
     VerbModel.computeIrregularities()
 
-    print("verb count: \(Verb.verbs.count)  model count: \(VerbModel.models.count)\n")
+    let totalVerbs = 6200
+    let fraction = Double(Verb.verbs.count) / Double(totalVerbs)
+    let percent = Int(fraction * 100)
+    print("verb count: \(Verb.verbs.count)   percent done: \(percent)%   model count: \(VerbModel.models.count)\n")
 
 //    let verbArray = Verb.verbs.values.sorted { lhs, rhs in
 //      lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
