@@ -11,7 +11,6 @@ struct InputView: View {
   @State var infinitif: String = ""
   @State var model: String = "1-1"
   @State var translation: String = ""
-  @State var auxiliary: String = "a"
   @State var reflexive: String = "f"
 
   var body: some View {
@@ -27,14 +26,6 @@ struct InputView: View {
             .disableAutocorrection(true)
             .padding()
 
-          Text("Model")
-            .modifier(SubheadingLabel())
-          TextField("Model", text: $model)
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .autocapitalization(UITextAutocapitalizationType.none)
-            .disableAutocorrection(true)
-            .padding()
-
           Text("Translation")
             .modifier(SubheadingLabel())
           TextField("Translation", text: $translation)
@@ -43,9 +34,9 @@ struct InputView: View {
             .disableAutocorrection(true)
             .padding()
 
-          Text("Auxiliary (a or e)")
+          Text("Model")
             .modifier(SubheadingLabel())
-          TextField("Auxiliary", text: $auxiliary)
+          TextField("Model", text: $model)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .autocapitalization(UITextAutocapitalizationType.none)
             .disableAutocorrection(true)
@@ -78,24 +69,29 @@ struct InputView: View {
       resetFields()
     }
 
-    var currentAuxiliary = Auxiliary(rawValue: auxiliary) ?? .avoir
-    if infinitif == "" || translation == "" || model == "" || auxiliary == "" {
-      Swift.print("Input field was blank.")
+    if infinitif == "" || translation == "" || model == "" {
+      outputError("Input field was blank.")
       return
     }
 
     let isReflexive = reflexive == "t" ? true : false
-    if isReflexive {
-      currentAuxiliary = .être
-    }
 
     if Verb.verbs[infinitif] != nil {
-      Swift.print("\(infinitif) has already been inpat.")
+      outputError("\(infinitif) has already been inpat.")
       return
     }
 
     if VerbModel.models[model.uppercased()] == nil {
-      Swift.print("Invalid model \(model) inpat.")
+      outputError("Invalid model \(model) inpat.")
+      return
+    }
+
+    let lastTwo = infinitif.suffix(2)
+    let lastThree = infinitif.suffix(3)
+    let lastFour = infinitif.suffix(4)
+
+    if (lastTwo == "ir" || lastTwo == "re" || lastThree == "cer" || lastFour == "eler" || lastFour == "oyer") && model == "1-1" {
+      outputError("1-1 is an invalid model for \(infinitif).")
       return
     }
 
@@ -103,20 +99,25 @@ struct InputView: View {
       infinitif: infinitif,
       translation: translation,
       model: model.uppercased(),
-      auxiliary: currentAuxiliary,
+      auxiliary: isReflexive ? .être : .avoir,
       isReflexive: isReflexive,
       isDefective: false,
       frequency: nil
     )
     Verb.verbs[infinitif] = verb
     conjugate(infinitif)
+    SoundPlayer.play(.chime)
+  }
+
+  private func outputError(_ error: String) {
+    Swift.print(error)
+    SoundPlayer.play(.sadTrombone)
   }
 
   private func resetFields() {
     infinitif = ""
     translation = ""
     model = "1-1"
-    auxiliary = "a"
     reflexive = "f"
   }
 

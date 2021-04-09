@@ -1343,16 +1343,779 @@
   <verb in="croquer" tn="crunch, waste, sketch" mo="1-1" />
   <verb in="crosser" tn="hit with a hockey stick, lacrosse stick, or golf club" mo="1-1" />
   <verb in="crotter" tn="befoul with poop" mo="1-1" />
+  <verb in="crouler" tn="collapse" mo="1-1" />
+  <verb in="croupir" tn="stagnate, wallow, rot" mo="2-1" />
+  <verb in="croustiller" tn="get crunchier, crunch, munch" mo="1-1" />
+  <verb in="crouter" tn="eat, form a crust" mo="1-1" />
+  <verb in="croûter" tn="eat, form a crust" mo="1-1" />
+  <verb in="crucifier" tn="crucify" mo="1-1" />
+  <verb in="crypter" tn="encrypt" mo="1-1" />
+  <verb in="cryptographier" tn="encrypt" mo="1-1" />
+  <verb in="cuber" tn="cube (a number)" mo="1-1" />
   <verb in="cueillir" tn="gather" mo="3-2B" />
+  <verb in="cuirasser" tn="put on a suit of armor, prepare for action" mo="1-1" />
+  <verb in="cuire" tn="cook" mo="5-9A" />
+  <verb in="cuisiner" tn="cook" mo="1-1" />
+  <verb in="cuiter" tn="get wasted" re="t" mo="1-1" />
+  <verb in="cuivrer" tn="coat with copper" mo="1-1" />
+  <verb in="culbuter" tn="take a tumble" mo="1-1" />
+  <verb in="culer" tn="go astern, back up" mo="1-1" />
+  <verb in="culminer" tn="culminate" mo="1-1" />
+  <verb in="culotter" tn="be clothed with culottes" mo="1-1" />
+  <verb in="culpabiliser" tn="feel guilty, guilt trip" mo="1-1" />
+  <verb in="cultiver" tn="cultivate" mo="1-1" />
+  <verb in="cumuler" tn="accumulate, multitask" mo="1-1" />
+  <verb in="curer" tn="clean" mo="1-1" />
+  <verb in="cureter" tn="perform curettage" mo="1-3B" />
+  <verb in="customiser" tn="customize" mo="1-1" />
+  <verb in="cuveler" tn="use planks to prop up a mine and prevent its collapse" mo="1-3A" />
+  <verb in="cuver" tn="ferment, calm" mo="1-1" />
+  <verb in="cyanoser" tn="cause cyanosis" mo="1-1" />
+  <verb in="cylindrer" tn="roll, make into a cylinder shape" mo="1-1" />
+  <verb in="dactylographier" tn="type" mo="1-1" />
+  <verb in="daigner" tn="deign, condescend" mo="1-1" />
+  <verb in="daller" tn="pave with slabs" mo="1-1" />
+  <verb in="damasquiner" tn="damascene" mo="1-1" />
+  <verb in="damasser" tn="damask" mo="1-1" />
+  <verb in="damer" tn="queen" mo="1-1" />
+  <verb in="damner" tn="damn" mo="1-1" />
+  <verb in="dandiner" tn="waddle about, toddle" mo="1-1" />
+  <verb in="danser" tn="dance" mo="1-1" />
+  <verb in="dansoter" tn="dance poorly" mo="1-1" />
+  <verb in="dansotter" tn="dance poorly" mo="1-1" />
+  <verb in="darder" tn="shoot an arrow, point up" mo="1-1" />
+  <verb in="dater" tn="date" mo="1-1" />
+  <verb in="dauber" tn="hit, strike, denigrate, defame" mo="1-1" />
+  <verb in="dealer" tn="deal drugs" mo="1-1" />
+  <verb in="déambuler" tn="stroll, walk around, amble" mo="1-1" />
+  <verb in="débâcler" tn="break up (said of ice)" mo="1-1" />
+  <verb in="débagouler" tn="vomit, hurl abuse" mo="1-1" />
+  <verb in="débâillonner" tn="ungag, uncensor" mo="1-1" />
+  <verb in="déballer" tn="unpack, unwrap" mo="1-1" />
+  <verb in="déballonner" tn="chicken out" re="t" mo="1-1" />
+  <verb in="débanaliser" tn="cause something to lose its banal character" mo="1-1" />
+  <verb in="débander" tn="remove a bandage or blindfold" mo="1-1" />
+  <verb in="débaptiser" tn="remove a person from the parish register, rename" mo="1-1" />
+  <verb in="débarbouiller" tn="wash someone’s face" mo="1-1" />
+  <verb in="débarder" tn="transport logs" mo="1-1" />
+  <verb in="débarquer" tn="unload merchandise, disembark" mo="1-1" />
+  <verb in="débarrasser" tn="rid oneself of" re="t" mo="1-1" />
+  <verb in="débarrer" tn="unbar" mo="1-1" />
+  <verb in="débâter" tn="unsaddle" mo="1-1" />
+  <verb in="débâtir" tn="debate" mo="2-1" />
+  <verb in="débattre" tn="negotiate, debate" mo="5-3" />
+  <verb in="débaucher" tn="make redundant, lay off" mo="1-1" />
+  <verb in="débecter" tn="vomit" mo="1-1" />
+  <verb in="débenzoler" tn="get rid of benzol" mo="1-1" />
+  <verb in="débiliter" tn="debilitate" mo="1-1" />
+  <verb in="débillarder" tn="cut diagonally" mo="1-1" />
+  <verb in="débiner" tn="denigrate, run down" mo="1-1" />
+  <verb in="débiter" tn="sell continuously, produce" mo="1-1" />
+  <verb in="déblatérer" tn="rant about, blather" mo="1-5" />
+  <verb in="déblayer" tn="clear away" mo="1-7B" />
+  <verb in="débloquer" tn="unblock" mo="1-1" />
+  <verb in="débobiner" tn="unwind, unspool" mo="1-1" />
+  <verb in="déboguer" tn="debug" mo="1-1" />
+  <verb in="déboiser" tn="deforest" mo="1-1" />
+  <verb in="déboîter" tn="take apart, disconnect" mo="1-1" />
+  <verb in="débonder" tn="uncork, pour out one’s heart" mo="1-1" />
+  <verb in="déborder" tn="overflow, overshoot" mo="1-1" />
+  <verb in="débosseler" tn="remove bumps from an object" mo="1-3A" />
+  <verb in="débotter" tn="remove the boots of" mo="1-1" />
+  <verb in="déboucher" tn="unblock, uncork" mo="1-1" />
+  <verb in="déboucler" tn="unbuckle, undo curls" mo="1-1" />
+  <verb in="débouler" tn="tumble down, drop in" mo="1-1" />
+  <verb in="débouquer" tn="disembogue" mo="1-1" />
+  <verb in="débourber" tn="get out of mud" mo="1-1" />
+  <verb in="débourrer" tn="get rid of fluff or hair" mo="1-1" />
+  <verb in="débourser" tn="pay out, disburse" mo="1-1" />
+  <verb in="déboussoler" tn="disorientate" mo="1-1" />
+  <verb in="débouter" tn="dismiss" mo="1-1" />
+  <verb in="déboutonner" tn="unbutton" mo="1-1" />
+  <verb in="débraguetter" tn="unzip the zipper on pants" mo="1-1" />
+  <verb in="débrailler" tn="loosen one’s clothing" re="t" mo="1-1" />
+  <verb in="débrancher" tn="unplug" mo="1-1" />
+  <verb in="débrayer" tn="declutch, disengage" mo="1-7B" />
+  <verb in="débrider" tn="unbridle, unharness" mo="1-1" />
+  <verb in="débriefer" tn="debrief" mo="1-1" />
+  <verb in="débrocher" tn="unspit" mo="1-1" />
+  <verb in="débrouiller" tn="beat the system, manage, figure something out" re="t" mo="1-1" />
+  <verb in="débroussailler" tn="clear brush off land" mo="1-1" />
+  <verb in="débucher" tn="start" mo="1-1" />
+  <verb in="débudgétiser" tn="remove something from the budget" mo="1-1" />
+  <verb in="débureaucratiser" tn="cause something to lose its bureaucratic character" mo="1-1" />
+  <verb in="débusquer" tn="smoke out, flush out" mo="1-1" />
+  <verb in="débuter" tn="start, debut" mo="1-1" />
+  <verb in="décacheter" tn="unseal, open" mo="1-3B" />
+  <verb in="décadrer" tn="remove frame from" mo="1-1" />
+  <verb in="décaisser" tn="pay out" mo="1-1" />
+  <verb in="décalaminer" tn="decoke, decarbonize" mo="1-1" />
+  <verb in="décalcifier" tn="decalcify" mo="1-1" />
+  <verb in="décaler" tn="unload a ship, stagger a shift" mo="1-1" />
+  <verb in="décalquer" tn="trace, transfer" mo="1-1" />
+  <verb in="décamper" tn="decamp, buzz off" mo="1-1" />
+  <verb in="décaniller" tn="decamp, go away" mo="1-1" />
+  <verb in="décanter" tn="decant" mo="1-1" />
+  <verb in="décaper" tn="scour, strip" mo="1-1" />
+  <verb in="décapitaliser" tn="take capital status away from a city" mo="1-1" />
+  <verb in="décapiter" tn="decapitate, behead" mo="1-1" />
+  <verb in="décapoter" tn="put down the hood of a convertible car" mo="1-1" />
+  <verb in="décapsuler" tn="remove the cap from a bottle" mo="1-1" />
+  <verb in="décapuchonner" tn="remove a hood" mo="1-1" />
+  <verb in="décarbonater" tn="decarbonate" mo="1-1" />
+  <verb in="décarburer" tn="decarburize" mo="1-1" />
+  <verb in="décarcasser" tn="bend over backwards" re="t" mo="1-1" />
+  <verb in="décarreler" tn="remove the tiles from a room in a dwelling" mo="1-3A" />
+  <verb in="décatir" tn="get rid of the finish that the manufacturer of a woolen fabric gave to it" mo="2-1" />
+  <verb in="décauser" tn="denigrate, as a Walloon" mo="1-1" />
+  <verb in="décavaillonner" tn="work the soil as close as possible to the vines, where a plow cannot reach, in order to weed" mo="1-1" />
+  <verb in="décaver" tn="wipe out one of the players" mo="1-1" />
   <verb in="décéder" tn="die" ay="e" mo="1-5" />
+  <verb in="déceler" tn="discover, reveal" mo="1-4" />
+  <verb in="décélérer" tn="decelerate" mo="1-5" />
+  <verb in="décentraliser" tn="decentralize" mo="1-1" />
+  <verb in="décentrer" tn="move off-center" mo="1-1" />
+  <verb in="décercler" tn="remove the circles from" mo="1-1" />
+  <verb in="décérébrer" tn="decerebrate" mo="1-5" />
+  <verb in="décerner" tn="award" mo="1-1" />
+  <verb in="décerveler" tn="remove the brain, brainwash" mo="1-3A" />
+  <verb in="décevoir" tn="disappoint" mo="4-2B" />
+  <verb in="déchaîner" tn="unleash" mo="1-1" />
+  <verb in="déchanter" tn="become disillusioned" mo="1-1" />
+  <verb in="déchaperonner" tn="unhood" mo="1-1" />
+  <verb in="décharger" tn="unload, discharge" mo="1-2B" />
+  <verb in="décharner" tn="deflesh, emaciate" mo="1-1" />
+  <verb in="déchaumer" tn="clear land, by plowing, of post-harvest stubble" mo="1-1" />
+  <verb in="déchausser" tn="take one’s shoes off" re="t" mo="1-1" />
+  <verb in="déchiffonner" tn="iron wrinkled clothing" mo="1-1" />
+  <verb in="déchiffrer" tn="decipher" mo="1-1" />
+  <verb in="déchiqueter" tn="rip or cut into small pieces" mo="1-3B" />
+  <verb in="déchirer" tn="rip up" mo="1-1" />
+  <verb in="déchlorurer" tn="eliminate chlorides" mo="1-1" />
+  <verb in="déchristianiser" tn="dechristianize" mo="1-1" />
   <verb in="décider" tn="decide" mo="1-1" fr="41" />
+  <verb in="décimaliser" tn="decimalize" mo="1-1" />
+  <verb in="décimer" tn="decimate" mo="1-1" />
+  <verb in="décintrer" tn="remove arches used for construction" mo="1-1" />
+  <verb in="déclamer" tn="declaim, speak out against" mo="1-1" />
+  <verb in="déclarer" tn="declare" mo="1-1" />
+  <verb in="déclasser" tn="relegate, demote, delist" mo="1-1" />
+  <verb in="déclassifier" tn="declassify" mo="1-1" />
+  <verb in="déclaveter" tn="remove the key from" mo="1-3B" />
+  <verb in="déclencher" tn="trigger, take off the latch" mo="1-1" />
+  <verb in="décléricaliser" tn="declericalize" mo="1-1" />
+  <verb in="décliner" tn="weaken, sicken, decline" mo="1-1" />
+  <verb in="décliqueter" tn="remove the click from" mo="1-3B" />
+  <verb in="décloisonner" tn="decompartmentalize" mo="1-1" />
   <verb in="déclore" tn="open, reopen, uncover" mo="5-27A" />
+  <verb in="déclouer" tn="unnail" mo="1-1" />
+  <verb in="décocher" tn="uncheck, deselect" mo="1-1" />
+  <verb in="décoder" tn="decode" mo="1-1" />
+  <verb in="décoffrer" tn="remove formwork after setting concrete" mo="1-1" />
+  <verb in="décoiffer" tn="mess up someone’s hair, knock someone’s hat off" mo="1-1" />
+  <verb in="décoincer" tn="unjam, loosen, loosen up" mo="1-2A" />
+  <verb in="décolérer" tn="calm down" mo="1-1" />
+  <verb in="décoller" tn="take off (as a flying vehicle)" mo="1-1" />
+  <verb in="décolleter" tn="reveal the neckline (as a garment)" mo="1-3B" />
+  <verb in="décoloniser" tn="decolonize" mo="1-1" />
+  <verb in="décolorer" tn="discolor, fade" mo="1-1" />
+  <verb in="décommander" tn="cancel, put off" mo="1-1" />
+  <verb in="décommettre" tn="unravel, untwist" mo="5-4" />
+  <verb in="décommuniser" tn="decommunize" mo="1-1" />
+  <verb in="décompacter" tn="unpack, uncompress" mo="1-1" />
+  <verb in="décompenser" tn="decompensate" mo="1-1" />
+  <verb in="décomplexer" tn="overcome, remove, deal with" mo="1-1" />
+  <verb in="décomposer" tn="decompose" mo="1-1" />
+  <verb in="décompresser" tn="decompress, relax" mo="1-1" />
+  <verb in="décomprimer" tn="decompress" mo="1-1" />
+  <verb in="décompter" tn="deduct, pick out, scrap" mo="1-1" />
+  <verb in="déconcentrer" tn="distract, devolve" mo="1-1" />
+  <verb in="déconcerter" tn="disconcert, baffle" mo="1-1" />
+  <verb in="déconditionner" tn="decondition" mo="1-1" />
+  <verb in="décongeler" tn="thaw, unfreeze, defrost" mo="1-4" />
+  <verb in="décongestionner" tn="decongest" mo="1-1" />
+  <verb in="déconnecter" tn="disconnect, unplug" mo="1-1" />
+  <verb in="déconner" tn="kid, joke" mo="1-1" />
+  <verb in="déconseiller" tn="advise against" mo="1-1" />
+  <verb in="déconsidérer" tn="discredit" mo="1-5" />
+  <verb in="déconsigner" tn="release, return, reimburse" mo="1-1" />
+  <verb in="déconstruire" tn="deconstruct" mo="5-9A" />
+  <verb in="décontaminer" tn="decontaminate" mo="1-1" />
+  <verb in="décontenancer" tn="disconcert, discountenance" mo="1-2A" />
+  <verb in="décontracter" tn="relax" mo="1-1" />
+  <verb in="décorder" tn="unrope" mo="1-1" />
+  <verb in="décorer" tn="decorate" mo="1-1" />
+  <verb in="décorner" tn="dehorn" mo="1-1" />
+  <verb in="décortiquer" tn="decorticate, peel, shell" mo="1-1" />
+  <verb in="découcher" tn="sleep away from home, stay out all night" mo="1-1" />
+  <verb in="découdre" tn="unsew" mo="5-14" />
+  <verb in="découler" tn="follow from, ensue" mo="1-1" />
+  <verb in="découper" tn="cut up, chop up" mo="1-1" />
+  <verb in="découpler" tn="uncouple, decouple" mo="1-1" />
+  <verb in="décourager" tn="discourage" mo="1-2B" />
+  <verb in="découronner" tn="remove the crown or sovereign status from" mo="1-1" />
+  <verb in="découvrir" tn="discover" mo="3-1" />
+  <verb in="décrasser" tn="clean up, scrub" mo="1-1" />
+  <verb in="décrédibiliser" tn="discredit" mo="1-1" />
+  <verb in="décréditer" tn="discredit, disgrace" mo="1-1" />
+  <verb in="décrêper" tn="remove frizz from hair" mo="1-1" />
+  <verb in="décrépir" tn="remove roughcast from" mo="2-1" />
+  <verb in="décréter" tn="order, decree" mo="1-5" />
+  <verb in="décreuser" tn="scald cocoons to unwind silk with ease" mo="1-1" />
+  <verb in="décrier" tn="decry" mo="1-1" />
+  <verb in="décrire" tn="describe" mo="5-7" />
+  <verb in="décrisper" tn="unclench" mo="1-1" />
+  <verb in="décrocher" tn="unhook, stall" mo="1-1" />
+  <verb in="décroiser" tn="uncross, unfold" mo="1-1" />
+  <verb in="décroître" tn="decrease" mo="5-19B" />
+  <verb in="décrotter" tn="clean the mud off" mo="1-1" />
+  <verb in="décruer" tn="scour" mo="1-1" />
+  <verb in="décruser" tn="ungum" mo="1-1" />
+  <verb in="décrypter" tn="decrypt" mo="1-1" />
+  <verb in="décuivrer" tn="remove copper from" mo="1-1" />
+  <verb in="déculasser" tn="remove the breech of a firearm" mo="1-1" />
+  <verb in="déculotter" tn="remove someone’s underwear" mo="1-1" />
+  <verb in="déculpabiliser" tn="exonerate" mo="1-1" />
+  <verb in="décupler" tn="render or become ten times bigger" mo="1-1" />
+  <verb in="décuver" tn="remove wine or grapes from a vat" mo="1-1" />
+  <verb in="dédaigner" tn="scorn, despise, disdain" mo="1-1" />
+  <verb in="dédicacer" tn="sign, autograph" mo="1-2A" />
+  <verb in="dédier" tn="dedicate" mo="1-1" />
+  <verb in="dédifférencier" tn="undifferentiate" re="t" mo="1-1" />
+  <verb in="dédire" tn="go back on, retract" re="t" mo="5-8B" />
+  <verb in="dédommager" tn="compensate, make up for" mo="1-2B" />
+  <verb in="dédorer" tn="tarnish" mo="1-1" />
+  <verb in="dédouaner" tn="clear through customs" mo="1-1" />
+  <verb in="dédoubler" tn="reunite, separate, duplicate" mo="1-1" />
+  <verb in="dédramatiser" tn="play down, make less dramatic" mo="1-1" />
+  <verb in="déduire" tn="deduce, deduct" mo="5-9A" />
   <verb in="défaillir" tn="faint" mo="3-2A" />
+  <verb in="défaire" tn="take down, undo, break, defeat" mo="5-23" />
+  <verb in="défalquer" tn="deduct, recoup" mo="1-1" />
+  <verb in="défatiguer" tn="remove fatique, vivify" mo="1-1" />
+  <verb in="défaufiler" tn="remove seam made by threading" mo="1-1" />
+  <verb in="défausser" tn="straighten" mo="1-1" />
+  <verb in="défavoriser" tn="disfavor, disadvantage, discriminate" mo="1-1" />
   <verb in="défendre" tn="defend, forbid" mo="5-1A" fr="99" />
+  <verb in="défenestrer" tn="defenestrate" mo="1-1" />
+  <verb in="déféquer" tn="defecate" mo="1-1" />
+  <verb in="déférer" tn="remand, grant, bestow" mo="1-5" />
+  <verb in="déferler" tn="break (of waves), break out, surge" mo="1-1" />
+  <verb in="déferrer" tn="remove iron from" mo="1-1" />
+  <verb in="défeuiller" tn="defoliate" mo="1-1" />
+  <verb in="défeutrer" tn="remove felting from wool" mo="1-1" />
+  <verb in="défibrer" tn="strip of fibers" mo="1-1" />
+  <verb in="déficeler" tn="untwine" mo="1-1" />
+  <verb in="défier" tn="defy, challenge" mo="1-1" />
+  <verb in="défigurer" tn="disfigure" mo="1-1" />
+  <verb in="défiler" tn="parade, march" mo="1-1" />
+  <verb in="définir" tn="define" mo="2-1" />
+  <verb in="défiscaliser" tn="reduce taxation" mo="1-1" />
+  <verb in="déflagrer" tn="deflagrate" mo="1-1" />
+  <verb in="défléchir" tn="deflect" mo="2-1" />
+  <verb in="défleurir" tn="shed blossoms" mo="2-1" />
+  <verb in="déflorer" tn="completely pluck, deflower" mo="1-1" />
+  <verb in="défolier" tn="defoliate" mo="1-1" />
+  <verb in="défoncer" tn="deep-plow, smash in" mo="1-2A" />
+  <verb in="déforcer" tn="diminish someone’s strength or power" mo="1-2A" />
+  <verb in="déforester" tn="deforest" mo="1-1" />
+  <verb in="déformer" tn="distort, pervert" mo="1-1" />
+  <verb in="défouler" tn="vent, unwind, let off steam" mo="1-1" />
+  <verb in="défourailler" tn="get out of jail" mo="1-1" />
+  <verb in="défourner" tn="remove from an oven" mo="1-1" />
+  <verb in="défraîchir" tn="wither, destroy freshness of" mo="2-1" />
+  <verb in="défrayer" tn="defray" mo="1-7B" />
+  <verb in="défricher" tn="clear land, lay the groundwork" mo="1-1" />
+  <verb in="défriper" tn="smooth out" mo="1-1" />
+  <verb in="défriser" tn="remove curls" mo="1-1" />
+  <verb in="défroisser" tn="iron (clothes)" mo="1-1" />
+  <verb in="défroncer" tn="undo gathers, folds, or plaits" mo="1-2A" />
+  <verb in="défroquer" tn="defrock" mo="1-1" />
+  <verb in="défruiter" tn="remove fruit" mo="1-1" />
+  <verb in="dégager" tn="free, release" mo="1-2B" />
+  <verb in="dégainer" tn="unsheath" mo="1-1" />
+  <verb in="déganter" tn="remove gloves from a hand" mo="1-1" />
+  <verb in="dégarnir" tn="to strip, clear (remove)" mo="2-1" />
+  <verb in="dégasoliner" tn="treat natural gas to remove the liquid part" mo="1-1" />
+  <verb in="dégauchir" tn="plane (a surface)" mo="2-1" />
+  <verb in="dégazer" tn="degas" mo="1-1" />
+  <verb in="dégazoliner" tn="treat natural gas to remove the liquid part" mo="1-1" />
+  <verb in="dégazonner" tn="remove sod" mo="1-1" />
+  <verb in="dégeler" tn="thaw, defrost" mo="1-4" />
+  <verb in="dégénérer" tn="degenerate, go south" mo="1-5" />
+  <verb in="dégermer" tn="degerm" mo="1-1" />
+  <verb in="dégivrer" tn="de-ice, defrost" mo="1-1" />
+  <verb in="déglacer" tn="de-ice, remove ice from" mo="1-2A" />
+  <verb in="déglinguer" tn="knacker, screw up" mo="1-1" />
+  <verb in="dégluer" tn="remove birdlime (from)" mo="1-1" />
+  <verb in="déglutir" tn="swallow; swallow down (food)" mo="2-1" />
+  <verb in="dégober" tn="remove the slip from a piece of ceramic" mo="1-1" />
+  <verb in="dégobiller" tn="throw up, puke" mo="1-1" />
+  <verb in="dégoiser" tn="rattle off (speak volubly)" mo="1-1" />
+  <verb in="dégommer" tn="degum, unseat, zap" mo="1-1" />
+  <verb in="dégonfler" tn="deflate" mo="1-1" />
+  <verb in="dégorger" tn="flow into, spill into" mo="1-2B" />
+  <verb in="dégoter" tn="dig up" mo="1-1" />
+  <verb in="dégotter" tn="dig up" mo="1-1" />
+  <verb in="dégouliner" tn="drip" mo="1-1" />
+  <verb in="dégoupiller" tn="unpin" mo="1-1" />
+  <verb in="dégourdir" tn="warm up one’s fingers, stretch one’s legs" mo="2-1" />
+  <verb in="dégoûter" tn="disgust, nauseate" mo="1-1" />
+  <verb in="dégoutter" tn="drip" mo="1-1" />
+  <verb in="dégrader" tn="demote, degrade" mo="1-1" />
+  <verb in="dégrafer" tn="unclasp, unfasten, unhook" mo="1-1" />
+  <verb in="dégraisser" tn="degrease, remove fat" mo="1-1" />
+  <verb in="dégravoyer" tn="bare, lay bare" mo="1-7A" />
+  <verb in="dégréer" tn="unrig" mo="1-1" />
+  <verb in="dégrever" tn="unburden, take a weight off someone’s shoulders" mo="1-4" />
+  <verb in="dégringoler" tn="fall down" mo="1-1" />
+  <verb in="dégripper" tn="unblock" mo="1-1" />
+  <verb in="dégriser" tn="sober up" mo="1-1" />
+  <verb in="dégrosser" tn="reduce, draw smaller" mo="1-1" />
+  <verb in="dégrossir" tn="rough-hew, tell off" mo="2-1" />
+  <verb in="dégrouiller" tn="hurry up" re="t" mo="1-1" />
+  <verb in="dégrouper" tn="ungroup, separate" mo="1-1" />
+  <verb in="déguerpir" tn="skedaddle, flee" mo="2-1" />
+  <verb in="dégueulasser" tn="make something dirty" mo="1-1" />
+  <verb in="dégueuler" tn="vomit" mo="1-1" />
+  <verb in="déguiser" tn="disguise" mo="1-1" />
+  <verb in="dégurgiter" tn="regurgitate" mo="1-1" />
+  <verb in="déguster" tn="taste or try food" mo="1-1" />
+  <verb in="déhaler" tn="warp" mo="1-1" />
+  <verb in="déhancher" tn="wiggle one’s hips, sway one’s hips" re="t" mo="1-1" />
+  <verb in="déharnacher" tn="unharness" mo="1-1" />
+  <verb in="déhotter" tn="leave rapidly" mo="1-1" />
+  <verb in="déhouiller" tn="remove coal from" mo="1-1" />
+  <verb in="déifier" tn="deify" mo="1-1" />
+  <verb in="déjanter" tn="come off the rim" mo="1-1" />
+  <verb in="déjauger" tn="remove a boat at least partially from water" mo="1-2B" />
+  <verb in="déjeter" tn="warp, thrust" mo="1-3B" />
+  <verb in="déjeuner" tn="eat lunch, to have lunch" mo="1-1" />
+  <verb in="déjouer" tn="frustrate, foil, thwart" mo="1-1" />
+  <verb in="déjucher" tn="leave the perch or roost" mo="1-1" />
+  <verb in="déjuger" tn="reverse a judgement" re="t" mo="1-2B" />
+  <verb in="délabialiser" tn="delabialize" mo="1-1" />
+  <verb in="délabrer" tn="dilapidate" mo="1-1" />
+  <verb in="délabyrinther" tn="brighten up" mo="1-1" />
+  <verb in="délacer" tn="unlace" mo="1-2A" />
+  <verb in="délainer" tn="remove wool from sheepskin" mo="1-1" />
+  <verb in="délaisser" tn="forsake, abandon" mo="1-1" />
+  <verb in="délaiter" tn="skim off buttermilk" mo="1-1" />
+  <verb in="délarder" tn="splay" mo="1-1" />
+  <verb in="délasser" tn="refresh, relax" mo="1-1" />
+  <verb in="délaver" tn="soak, fade, wash out" mo="1-1" />
+  <verb in="délayer" tn="add water to, thin out (paint)" mo="1-7B" />
+  <verb in="déléaturer" tn="demand the suppression of" mo="1-1" />
+  <verb in="délecter" tn="relish" mo="1-1" />
+  <verb in="délégitimer" tn="delegitimize" mo="1-1" />
+  <verb in="déléguer" tn="delegate, devolve" mo="1-5" />
+  <verb in="délester" tn="jettison ballast, remove ballast from" mo="1-1" />
+  <verb in="délibérer" tn="deliberate, plan, prepare" mo="1-5" />
+  <verb in="délier" tn="untie, loosen, release" mo="1-1" />
+  <verb in="délignifier" tn="delignify" mo="1-1" />
+  <verb in="délimiter" tn="delimit" mo="1-1" />
+  <verb in="délinéamenter" tn="delineate" mo="1-1" />
+  <verb in="délinéer" tn="delineate" mo="1-1" />
+  <verb in="délirer" tn="be delirious" mo="1-1" />
+  <verb in="déliter" tn="split and crumble, disintegrate" mo="1-1" />
+  <verb in="délivrer" tn="set free, deliver" mo="1-1" />
+  <verb in="délocaliser" tn="relocate, delocalize" mo="1-1" />
+  <verb in="déloger" tn="move out, expel" mo="1-2B" />
+  <verb in="délurer" tn="render delirious" mo="1-1" />
+  <verb in="délustrer" tn="take off the lustre, the gloss of" mo="1-1" />
+  <verb in="déluter" tn="unlute" mo="1-1" />
+  <verb in="démagnétiser" tn="demagnetize" mo="1-1" />
+  <verb in="démaigrir" tn="lose weight" mo="2-1" />
+  <verb in="démailler" tn="unmask" mo="1-1" />
+  <verb in="démailloter" tn="unswathe, unswaddle" mo="1-1" />
+  <verb in="démancher" tn="take off the handle, go wrong" mo="1-1" />
   <verb in="demander" tn="ask" mo="1-1" fr="15" />
+  <verb in="démanger" tn="cause to feel itchy" mo="1-2B" />
+  <verb in="démanteler" tn="dismantle" mo="1-4" />
+  <verb in="démantibuler" tn="smash to smithereens" mo="1-1" />
+  <verb in="démaquiller" tn="remove makeup" mo="1-1" />
+  <verb in="démarcher" tn="canvass" mo="1-1" />
+  <verb in="démarier" tn="unmarry" mo="1-1" />
+  <verb in="démarquer" tn="remove a mark or label from" mo="1-1" />
+  <verb in="démarrer" tn="start (up)" mo="1-1" />
+  <verb in="démascler" tn="unmask" mo="1-1" />
+  <verb in="démasquer" tn="unmask" mo="1-1" />
+  <verb in="démastiquer" tn="remove putty" mo="1-1" />
+  <verb in="démâter" tn="dismast, unmast" mo="1-1" />
+  <verb in="dématérialiser" tn="dematerialize" mo="1-1" />
+  <verb in="démédicaliser" tn="demedicalize" mo="1-1" />
+  <verb in="démêler" tn="untangle, unmix" mo="1-1" />
+  <verb in="démembrer" tn="dismember" mo="1-1" />
+  <verb in="déménager" tn="move (an object from a place to another), move house" mo="1-2B" />
+  <verb in="démener" tn="convulse" re="t" mo="1-4" />
+  <verb in="démentir" tn="contradict, gainsay" mo="6-1" />
+  <verb in="démerder" tn="manage, get by, figure something out" re="t" mo="1-1" />
+  <verb in="démériter" tn="be unworthy" mo="1-1" />
+  <verb in="démettre" tn="dismiss, discharge (from a post)" mo="5-4" />
+  <verb in="démeubler" tn="remove the furniture from" mo="1-1" />
+  <verb in="demeurer" tn="live, stay" mo="1-1" />
+  <verb in="démieller" tn="demiell" mo="1-1" />
+  <verb in="démilitariser" tn="demilitarize" mo="1-1" />
+  <verb in="déminer" tn="remove mines from" mo="1-1" />
+  <verb in="déminéraliser" tn="demineralize" mo="1-1" />
+  <verb in="démissionner" tn="resign, make resign" mo="1-1" />
+  <verb in="démobiliser" tn="demobilise" mo="1-1" />
+  <verb in="démocratiser" tn="democratize" mo="1-1" />
+  <verb in="démoder" tn="go out of fashion" mo="1-1" />
+  <verb in="démoduler" tn="demodulate" mo="1-1" />
+  <verb in="démolir" tn="demolish" mo="2-1" />
+  <verb in="démonétiser" tn="demonetize" mo="1-1" />
+  <verb in="démonter" tn="dismantle, take down" mo="1-1" />
+  <verb in="démontrer" tn="demonstrate" mo="1-1" />
+  <verb in="démoraliser" tn="immoralize, demoralize" mo="1-1" />
+  <verb in="démordre" tn=" let go, release, give up" mo="5-1A" />
+  <verb in="démotiver" tn="demotivate" mo="1-1" />
+  <verb in="démoucheter" tn="remove the protective end from a foil, making the foil into a dangerous weapon" mo="1-3B" />
+  <verb in="démouler" tn="turn out (remove from a mould)" mo="1-1" />
+  <verb in="démoustiquer" tn="rid of mosquitos" mo="1-1" />
+  <verb in="démultiplier" tn="multiply, lever, gear up" mo="1-1" />
+  <verb in="démunir" tn="divest of, deprive of" mo="2-1" />
+  <verb in="démuseler" tn="unmuzzle" mo="1-3A" />
+  <verb in="démutiser" tn="cause someone or someting to cease being mute" mo="1-1" />
+  <verb in="démyéliniser" tn="demyelinate" mo="1-1" />
+  <verb in="démystifier" tn="demystify" mo="1-1" />
+  <verb in="démythifier" tn="demystify, reveal, unlock" mo="1-1" />
+  <verb in="dénasaliser" tn="denasalize" mo="1-1" />
+  <verb in="dénationaliser" tn="denationalize" mo="1-1" />
+  <verb in="dénatter" tn="remove knots" mo="1-1" />
+  <verb in="dénaturaliser" tn="denaturalize" mo="1-1" />
+  <verb in="dénaturer" tn="misrepresent, denature" mo="1-1" />
+  <verb in="dénazifier" tn="remove Nazi influence" mo="1-1" />
+  <verb in="dénébuler" tn="demist, defog" mo="1-1" />
+  <verb in="dénébuliser" tn="demist, defog" mo="1-1" />
+  <verb in="déneiger" tn="remoe snow (from)" mo="1-2B" />
+  <verb in="déniaiser" tn="smarten up" mo="1-1" />
+  <verb in="dénicher" tn="scare up, track down" mo="1-1" />
+  <verb in="dénicotiniser" tn="remove nicotine from" mo="1-1" />
+  <verb in="dénier" tn="deny" mo="1-1" />
+  <verb in="dénigrer" tn="denigrate" mo="1-1" />
+  <verb in="dénitrifier" tn="denitrify" mo="1-1" />
+  <verb in="déniveler" tn="make uneven" mo="1-3A" />
+  <verb in="dénombrer" tn="count, enumerate" mo="1-1" />
+  <verb in="dénommer" tn="name" mo="1-1" />
+  <verb in="dénoncer" tn="denounce" mo="1-2A" />
+  <verb in="dénoter" tn="denote" mo="1-1" />
+  <verb in="dénouer" tn="unknot" mo="1-1" />
+  <verb in="dénoyauter" tn="remove stones or pits from" mo="1-1" />
+  <verb in="dénoyer" tn="dewater" mo="1-7A" />
+  <verb in="densifier" tn="become denser" mo="1-1" />
+  <verb in="denteler" tn=" indent, notch" mo="1-3A" />
+  <verb in="dénucléariser" tn="denuclearize" mo="1-1" />
+  <verb in="dénuder" tn="render nude" mo="1-1" />
+  <verb in="dénuer" tn="deprive" re="t" mo="1-1" />
+  <verb in="dépailler" tn="remove the straw from" mo="1-1" />
+  <verb in="dépalisser" tn="remove supports from the branches of a fruit tree" mo="1-1" />
+  <verb in="dépanner" tn=" fix, repair" mo="1-1" />
+  <verb in="dépaqueter" tn="unpack" mo="1-3B" />
+  <verb in="déparasiter" tn="remove parasites from" mo="1-1" />
+  <verb in="dépareiller" tn="unmatch" mo="1-1" />
+  <verb in="déparer" tn="spoil, put out of place" mo="1-1" />
+  <verb in="déparier" tn="separate the male and female of certain animals" mo="1-1" />
+  <verb in="déparler" tn="speak nastily" mo="1-1" />
+  <verb in="départager" tn="shift the balance between two parties of" mo="1-2B" />
+  <verb in="départementaliser" tn="departmentalize" mo="1-1" />
+  <verb in="départir" tn="divest, dispose of" re="t" mo="6-1" />
+  <verb in="dépasser" tn="overtake" mo="1-1" />
+  <verb in="dépassionner" tn="defuse, take the sting out of" mo="1-1" />
+  <verb in="dépatouiller" tn="managing to cope despite difficulties" re="t" mo="1-1" />
+  <verb in="dépatrier" tn="take away someone’s home country" mo="1-1" />
+  <verb in="dépaver" tn="remove the cobblestones from a road" mo="1-1" />
+  <verb in="dépayser" tn="move somebody from their usual country or place" mo="1-1" />
   <verb in="dépecer" tn="cut up, tear" mo="1-6A" />
+  <verb in="dépêcher" tn="send, dispatch (urgently)" mo="1-1" />
+  <verb in="dépeigner" tn="mess up (someone’s hair)" mo="1-1" />
+  <verb in="dépeindre" tn="depict, portray, remove paint" mo="5-12" />
+  <verb in="dépénaliser" tn="decriminalize" mo="1-1" />
+  <verb in="dépendre" tn="depend" mo="5-1A" />
+  <verb in="dépenser" tn="spend (money)" mo="1-1" />
+  <verb in="dépérir" tn="fade away, decline, wither (away), go downhill" mo="2-1" />
+  <verb in="dépersonnaliser" tn="depersonalise" mo="1-1" />
+  <verb in="dépêtrer" tn="disentangle" mo="1-1" />
+  <verb in="dépeupler" tn="depopulate" mo="1-1" />
+  <verb in="déphaser" tn="dephase" mo="1-1" />
+  <verb in="déphosphorer" tn="dephosphorize" mo="1-1" />
+  <verb in="dépiauter" tn="skin, undress" mo="1-1" />
+  <verb in="dépiler" tn="depilate" mo="1-1" />
+  <verb in="dépiquer" tn="make feel better" mo="1-1" />
+  <verb in="dépister" tn="track an animal using its tracks, derail" mo="1-1" />
+  <verb in="dépiter" tn="sadden, upset" mo="1-1" />
+  <verb in="déplacer" tn="move" mo="1-2A" />
+  <verb in="déplafonner" tn="remove the upper limit for" mo="1-1" />
+  <verb in="déplaire" tn="be displeasing or disliked" mo="5-22A" />
+  <verb in="déplanter" tn="deplant" mo="1-1" />
+  <verb in="déplâtrer" tn="remove from plaster" mo="1-1" />
+  <verb in="déplier" tn="unfold (undo the action of folding)" mo="1-1" />
+  <verb in="déplisser" tn="unwrinkle" mo="1-1" />
+  <verb in="déplomber" tn="remove lead from" mo="1-1" />
+  <verb in="déplorer" tn="deplore something" mo="1-1" />
+  <verb in="déployer" tn="spread out, unfold, deploy" mo="1-7A" />
+  <verb in="déplumer" tn="pluck" mo="1-1" />
+  <verb in="dépoétiser" tn="depoetize" mo="1-1" />
+  <verb in="dépointer" tn="de-target" mo="1-1" />
+  <verb in="dépoitrailler" tn="uncover or reveal one’s breasts" re="t" mo="1-1" />
+  <verb in="dépolariser" tn="depolarize" mo="1-1" />
+  <verb in="dépolir" tn="unpolish" mo="2-1" />
+  <verb in="dépolitiser" tn="depoliticize" mo="1-1" />
+  <verb in="dépolluer" tn="depollute" mo="1-1" />
+  <verb in="dépolymériser" tn="depolymerize" mo="1-1" />
+  <verb in="déporter" tn="deport" mo="1-1" />
+  <verb in="déposer" tn="put down (set down), lay down" mo="1-1" />
+  <verb in="déposséder" tn="dispossess" mo="1-5" />
+  <verb in="dépoter" tn="unpot" mo="1-1" />
+  <verb in="dépouiller" tn="skin (an animal)" mo="1-1" />
+  <verb in="dépoussiérer" tn="do the dusting" mo="1-5" />
+  <verb in="dépraver" tn="corrupt, pervert, deprave" mo="1-1" />
+  <verb in="déprécier" tn="depreciate (lower the value of)" mo="1-1" />
+  <verb in="déprendre" tn="abandon (especially a person)" mo="5-2" />
+  <verb in="dépressuriser" tn="depressurize" mo="1-1" />
+  <verb in="déprimer" tn="deject, depress" mo="1-1" />
+  <verb in="dépriser" tn="undervalue, depreciate" mo="1-1" />
+  <verb in="déprogrammer" tn="pull (off the air)" mo="1-1" />
+  <verb in="déprolétariser" tn="deproletarize" mo="1-1" />
+  <verb in="déprotéger" tn="remove protection from" mo="1-6C" />
+  <verb in="dépuceler" tn="deflower" mo="1-3A" />
+  <verb in="dépulper" tn="mash to a pulp" mo="1-1" />
+  <verb in="dépurer" tn="purify" mo="1-1" />
+  <verb in="députer" tn="deputize" mo="1-1" />
+  <verb in="déqualifier" tn="deskill" mo="1-1" />
+  <verb in="déraciner" tn="uproot, to deracinate (a tree)" mo="1-1" />
+  <verb in="dérader" tn="be drien from the anchors and forced out to sea" mo="1-1" />
+  <verb in="dérager" tn="stop being angry" mo="1-2B" />
+  <verb in="déraidir" tn="unstiffen" mo="2-1" />
+  <verb in="dérailler" tn="derail, be derailed" mo="1-1" />
+  <verb in="déraisonner" tn="talk nonsense" mo="1-1" />
+  <verb in="déramer" tn="fan (paper)" mo="1-1" />
+  <verb in="déranger" tn="disrupt, bother" mo="1-2B" />
+  <verb in="déraper" tn="slide, skip" mo="1-1" />
+  <verb in="déraser" tn="undermine" mo="1-1" />
+  <verb in="dératiser" tn="rid of rats" mo="1-1" />
+  <verb in="dérayer" tn="finish plowing" mo="1-7B" />
+  <verb in="déréaliser" tn="cause something to lose its connection with reality" mo="1-1" />
+  <verb in="déréglementer" tn="deregulate" mo="1-1" />
+  <verb in="dérégler" tn="disturb, disrupt" mo="1-5" />
+  <verb in="déresponsabiliser" tn="remoe all sense of responsability from someone" mo="1-1" />
+  <verb in="dérider" tn="brighten up, cheer up" mo="1-1" />
+  <verb in="dériver" tn="derive (originate from)" mo="1-1" />
+  <verb in="dérober" tn="conceal, screen, shield" mo="1-1" />
+  <verb in="dérocher" tn="remove rocks from" mo="1-1" />
+  <verb in="déroder" tn="thin a forest by clearing dead trees" mo="1-1" />
+  <verb in="déroger" tn="repeal (a law)" mo="1-2B" />
+  <verb in="dérougir" tn="cause to stop being red" mo="2-1" />
+  <verb in="dérouiller" tn="remove rust from" mo="1-1" />
+  <verb in="dérouler" tn="unroll" mo="1-1" />
+  <verb in="dérouter" tn="reroute, derail, disconcert" mo="1-1" />
+  <verb in="désabonner" tn="unsubscribe" mo="1-1" />
+  <verb in="désabuser" tn="enlighten, correct" mo="1-1" />
+  <verb in="désaccentuer" tn="remove diacritics from" mo="1-1" />
+  <verb in="désacclimater" tn="de-acclimatize" mo="1-1" />
+  <verb in="désaccorder" tn="disagree" mo="1-1" />
+  <verb in="désaccoupler" tn="unbind, separate" mo="1-1" />
+  <verb in="désaccoutumer" tn="become unaccustomed to" mo="1-1" />
+  <verb in="désacidifier" tn="deacidify" mo="1-1" />
+  <verb in="désaciérer" tn="désaciérer" mo="1-1" />
+  <verb in="désacraliser" tn="deconsecrate" mo="1-1" />
+  <verb in="désactiver" tn="deactivate, disable" mo="1-1" />
+  <verb in="désadapter" tn="stop being adapted" mo="1-1" />
+  <verb in="désaérer" tn="deaerate" mo="1-5" />
+  <verb in="désaffecter" tn="decommission" mo="1-1" />
+  <verb in="désaffectionner" tn="stop having affection for" re="t" mo="1-1" />
+  <verb in="désaffilier" tn="disaffiliate" mo="1-1" />
+  <verb in="désagrafer" tn="unstaple" mo="1-1" />
+  <verb in="désagréger" tn="disintegrate, break up" mo="1-6C" />
+  <verb in="désaimanter" tn="demagnetize" mo="1-1" />
+  <verb in="désaisonnaliser" tn="deseasonalize" mo="1-1" />
+  <verb in="désajuster" tn="derange, disturb" mo="1-1" />
+  <verb in="désaliéner" tn="de-alienate" mo="1-5" />
+  <verb in="désaligner" tn="make uneven (ranks of soldiers)" mo="1-1" />
+  <verb in="désalper" tn="descend from high-altitude pastures, in particular as a Swiss cow" mo="1-1" />
+  <verb in="désaltérer" tn="quench the thirst" mo="1-5" />
+  <verb in="désambiguïser" tn="disambiguate" mo="1-1" />
+  <verb in="désamianter" tn="remove asbestos from" mo="1-1" />
+  <verb in="désamidonner" tn="remove starch" mo="1-1" />
+  <verb in="désaminer" tn="deaminate" mo="1-1" />
+  <verb in="désamorcer" tn="defuse (e.g. a weapon), prevent something from happen" mo="1-2A" />
+  <verb in="désaper" tn="undress" mo="1-1" />
+  <verb in="désapparier" tn="separate (birds that have been paired)" mo="1-1" />
+  <verb in="désappointer" tn="dismiss, disappoint (Louisiana only)" mo="1-1" />
+  <verb in="désapprendre" tn="unlearn" mo="5-2" />
+  <verb in="désapprouver" tn="disapprove (of)" mo="1-1" />
+  <verb in="désapprovisionner" tn="stop stocking or supplying" mo="1-1" />
+  <verb in="désarçonner" tn="unhorse, unseat" mo="1-1" />
+  <verb in="désargenter" tn="desilver" mo="1-1" />
+  <verb in="désarmer" tn="disarm" mo="1-1" />
+  <verb in="désarrimer" tn="shift (move something that had been placed somewhere)" mo="1-1" />
+  <verb in="désarticuler" tn="dislocate" mo="1-1" />
+  <verb in="désassembler" tn="disassemble (to take to pieces)" mo="1-1" />
+  <verb in="désassimiler" tn="disassimilate" mo="1-1" />
+  <verb in="désassortir" tn="spoil the match of" mo="2-1" />
+  <verb in="désatomiser" tn="deprive of nuclear weapons" mo="1-1" />
+  <verb in="désavantager" tn="disadvantage" mo="1-2B" />
+  <verb in="désavouer" tn="ake back (something that has been said), disavow" mo="1-1" />
+  <verb in="désaxer" tn="unbalance, derail" mo="1-1" />
+  <verb in="desceller" tn="break the seal of, unseal" mo="1-1" />
   <verb in="descendre" tn="descend" ay="e" mo="5-1A" />
+  <verb in="déséchouer" tn="get afloat" mo="1-1" />
+  <verb in="désectoriser" tn="desectorate" mo="1-1" />
+  <verb in="désembobiner" tn="unwind" mo="1-1" />
+  <verb in="désembourber" tn="draw out of the mire" mo="1-1" />
+  <verb in="désembourgeoiser" tn="no longer be bourgeois" mo="1-1" />
+  <verb in="désembouteiller" tn="remove from a bottle" mo="1-1" />
+  <verb in="désembuer" tn="remove mist from" mo="1-1" />
+  <verb in="désemparer" tn="disable (a ship)" mo="1-1" />
+  <verb in="désemplir" tn="(partially) empty (something that is full up)" mo="2-1" />
+  <verb in="désenaser" tn="de-silt" mo="1-1" />
+  <verb in="désencadrer" tn="remove frame from" mo="1-1" />
+  <verb in="désenchaîner" tn="remove from chains" mo="1-1" />
+  <verb in="désenchanter" tn="disenchant" mo="1-1" />
+  <verb in="désenclaver" tn="disenclave" mo="1-1" />
+  <verb in="désencombrer" tn="disencumber" mo="1-1" />
+  <verb in="désencrasser" tn="clean" mo="1-1" />
+  <verb in="désendetter" tn="deleverage (reduce debt)" re="t" mo="1-1" />
+  <verb in="désénerver" tn="cause someone to stop being annoyed" mo="1-1" />
+  <verb in="désenfler" tn="deflate" mo="1-1" />
+  <verb in="désenfumer" tn="remove smoke from a smoke-filled space" mo="1-1" />
+  <verb in="désengager" tn="disengage, withdraw" mo="1-2B" />
+  <verb in="désengluer" tn="unglue" mo="1-1" />
+  <verb in="désengorger" tn="unclutter, unclog" mo="1-2B" />
+  <verb in="désengourdir" tn="remove or alleviate numbness" mo="2-1" />
+  <verb in="désengrener" tn="throw out of gear" mo="1-4" />
+  <verb in="désenivrer" tn="sober up" mo="1-1" />
+  <verb in="désennuyer" tn="relieve boredom (from)" mo="1-7A" />
+  <verb in="désenrayer" tn="disengage" mo="1-7B" />
+  <verb in="désensabler" tn="remove sand from" mo="1-1" />
+  <verb in="désensibiliser" tn="desensitize" mo="1-1" />
+  <verb in="désensorceler" tn="unbewitch" mo="1-3A" />
+  <verb in="désentoiler" tn="strip" mo="1-1" />
+  <verb in="désentortiller" tn="untangle" mo="1-1" />
+  <verb in="désentraver" tn="unshackle" mo="1-1" />
+  <verb in="désenvenimer" tn="remove venom from" mo="1-1" />
+  <verb in="désenverguer" tn="unbend (sails)" mo="1-1" />
+  <verb in="désenvoûter" tn="unbewitch, disenchant" mo="1-1" />
+  <verb in="désépaissir" tn="make thinner" mo="2-1" />
+  <verb in="déséquilibrer" tn="unbalance" mo="1-1" />
+  <verb in="déséquiper" tn="disarm a ship" mo="1-1" />
+  <verb in="déserter" tn="desert (a place), abandon" mo="1-1" />
+  <verb in="désertifier" tn="desertify" re="t" mo="1-1" />
+  <verb in="désespérer" tn="despair (feel hopeless)" mo="1-5" />
+  <verb in="désétatiser" tn="remove the government character from" mo="1-1" />
+  <verb in="désexciter" tn="deexcite" mo="1-1" />
+  <verb in="désexualiser" tn="desexualize" mo="1-1" />
+  <verb in="déshabiller" tn="undress" mo="1-1" />
+  <verb in="déshabituer" tn="rid of a habit" re="t" mo="1-1" />
+  <verb in="désherber" tn="weed (remove weeds from)" mo="1-1" />
+  <verb in="déshériter" tn="disinherit" mo="1-1" />
+  <verb in="déshonorer" tn="dishonor" mo="1-1" />
+  <verb in="déshuiler" tn="remove oil from" mo="1-1" />
+  <verb in="déshumaniser" tn="dehumanize" mo="1-1" />
+  <verb in="déshydrater" tn="dehydrate" mo="1-1" />
+  <verb in="déshydrogéner" tn="dehydrogenate" mo="1-5" />
+  <verb in="déshypothéquer" tn="remove the mortgage from" mo="1-1" />
+  <verb in="désigner" tn="designate" mo="1-1" />
+  <verb in="désillusionner" tn="burst someone’s bubble, disillusion" mo="1-1" />
+  <verb in="désincarner" tn="disembody, disincarnate" mo="1-1" />
+  <verb in="désincruster" tn="unclog" mo="1-1" />
+  <verb in="désindexer" tn="deindex" mo="1-1" />
+  <verb in="désindustrialiser" tn="deindustrialize" mo="1-1" />
+  <verb in="désinfecter" tn="disinfect" mo="1-1" />
+  <verb in="désinformer" tn="misinform, disinform" mo="1-1" />
+  <verb in="désinhiber" tn="disinhibit" mo="1-1" />
+  <verb in="désinsectiser" tn="debug (to remoe insects from somewhere)" mo="1-1" />
+  <verb in="désinstaller" tn="uninstall" mo="1-1" />
+  <verb in="désintégrer" tn="disintegrate" mo="1-5" />
+  <verb in="désintéresser" tn="give money to (somebody) as a compensation for something" mo="1-1" />
+  <verb in="désintoxiquer" tn="detoxify (for drugs or alcohol)" mo="1-1" />
+  <verb in="désinvestir" tn="divest" mo="2-1" />
+  <verb in="désirer" tn="desire, want" mo="1-1" />
+  <verb in="désister" tn="withdraw" re="t" mo="1-1" />
+  <verb in="désobéir" tn="disobey" mo="2-1" />
+  <verb in="désobliger" tn="offend" mo="1-2B" />
+  <verb in="désobstruer" tn="deobstruct" mo="1-1" />
+  <verb in="désocialiser" tn="desocialize" mo="1-1" />
+  <verb in="désodoriser" tn="deodorize" mo="1-1" />
+  <verb in="désoler" tn="be upset" re="t" mo="1-1" />
+  <verb in="désolidariser" tn="dissociate (break up a group)" mo="1-1" />
+  <verb in="désoperculer" tn="open the alveoli of" mo="1-1" />
+  <verb in="désopiler" tn="remove obstructions, cause to laugh" mo="1-1" />
+  <verb in="désorbiter" tn="deorbit" mo="1-1" />
+  <verb in="désorganiser" tn="disorganize" mo="1-1" />
+  <verb in="désorienter" tn="disorient, bewilder" mo="1-1" />
+  <verb in="désosser" tn="debone, take apart" mo="1-1" />
+  <verb in="désoxygéner" tn="deoxygenate" mo="1-5" />
+  <verb in="desquamer" tn="lose one’s scales (as a squamate)" mo="1-1" />
+  <verb in="dessabler" tn="remove sand from" mo="1-1" />
+  <verb in="dessaisir" tn="disseize, dispossess, or deprive of (the possession or the administration of)" mo="2-1" />
+  <verb in="dessaler" tn="desalt" mo="1-1" />
+  <verb in="dessangler" tn="ungirth, to loosen the girth" mo="1-1" />
+  <verb in="dessaouler" tn="sober up" mo="1-1" />
+  <verb in="dessaper" tn="undress" mo="1-1" />
+  <verb in="dessécher" tn="dry out" re="t" mo="1-5" />
+  <verb in="desseller" tn="unsaddle" mo="1-1" />
+  <verb in="desserrer" tn="loosen (knot, belt, etc.)" mo="1-1" />
+  <verb in="dessertir" tn="unsocket, remove (a gem) from its socket on a piece of jewellery" mo="2-1" />
+  <verb in="desservir" tn="serve (be the pastor of a church)" mo="6-1" />
+  <verb in="dessiller" tn="open someone’s eyes (to make the person see or understand something)" mo="1-1" />
+  <verb in="dessiner" tn="sketch, draw" mo="1-1" />
+  <verb in="dessoler" tn="take off the sole" mo="1-1" />
+  <verb in="dessouder" tn="unsolder" mo="1-1" />
+  <verb in="dessoûler" tn="sober up" mo="1-1" />
+  <verb in="dessuinter" tn="remove grease from wool" mo="1-1" />
+  <verb in="déstabiliser" tn="destabilize" mo="1-1" />
+  <verb in="déstaliniser" tn="destalinize" mo="1-1" />
+  <verb in="destiner" tn="destine, fate" mo="1-1" />
+  <verb in="destituer" tn="depose, discharge, relieve" mo="1-1" />
+  <verb in="déstocker" tn="destock" mo="1-1" />
+  <verb in="déstructurer" tn="deconstruct, dismantle" mo="1-1" />
+  <verb in="désulfiter" tn="desulfitize" mo="1-1" />
+  <verb in="désulfurer" tn="desulfurize" mo="1-1" />
+  <verb in="désunir" tn="disunite, separate, divide" mo="2-1" />
+  <verb in="désynchroniser" tn="desynchronize" mo="1-1" />
+  <verb in="détacher" tn="remove spots, stains" mo="1-1" />
+  <verb in="détailler" tn="detail, retail" mo="1-1" />
+  <verb in="détaler" tn="make oneself scarce, scamper away" mo="1-1" />
+  <verb in="détartrer" tn="descale" mo="1-1" />
+  <verb in="détaxer" tn="free from tax" mo="1-1" />
+  <verb in="détecter" tn="detect, discover" mo="1-1" />
+  <verb in="déteindre" tn="bleach" mo="5-12" />
+  <verb in="dételer" tn="unyoke (a bull), unharness (a horse)" mo="1-3A" />
+  <verb in="détendre" tn="relax" mo="5-1A" />
+  <verb in="détenir" tn="detain" mo="6-7" />
+  <verb in="déterger" tn="deterge" mo="1-2B" />
+  <verb in="détériorer" tn="deteriorate" mo="1-1" />
+  <verb in="déterminer" tn="determine, establish" mo="1-1" />
+  <verb in="déterrer" tn="dig up, exhume" mo="1-1" />
+  <verb in="détester" tn="hate, detest" mo="1-1" />
+  <verb in="détirer" tn="stretch (by pulling)" mo="1-1" />
+  <verb in="détoner" tn="detonate" mo="1-1" />
+  <verb in="détonner" tn="sing out of tune, stick out like a sore thumb" mo="1-1" />
+  <verb in="détordre" tn="untwist" mo="5-1A" />
+  <verb in="détortiller" tn="untwist, unravel" mo="1-1" />
+  <verb in="détourer" tn="silhouette" mo="1-1" />
+  <verb in="détourner" tn="divert, distract" mo="1-1" />
+  <verb in="détoxiquer" tn="detoxify" mo="1-1" />
+  <verb in="détracter" tn="detract" mo="1-1" />
+  <verb in="détraquer" tn="upset, wreck, unsettle" mo="1-1" />
+  <verb in="détremper" tn="soak, water down" mo="1-1" />
+  <verb in="détromper" tn="disabuse" mo="1-1" />
+  <verb in="détrôner" tn="dethrone" mo="1-1" />
+  <verb in="détroquer" tn="detach" mo="1-1" />
+  <verb in="détrousser" tn="rob someone of what they are wearing or carrying" mo="1-1" />
+  <verb in="détruire" tn="destroy" mo="5-9A" />
+  <verb in="dévaler" tn="descend" mo="1-1" />
+  <verb in="dévaliser" tn="rob, burgle" mo="1-1" />
+  <verb in="dévaloriser" tn="devalorize" mo="1-1" />
+  <verb in="dévaluer" tn="devalue" mo="1-1" />
+  <verb in="devancer" tn="surpass, overtake" mo="1-2A" />
+  <verb in="dévaster" tn="devastate, destroy" mo="1-1" />
+  <verb in="développer" tn="develop, code" mo="1-1" />
   <verb in="devenir" tn="become" ay="e" mo="6-7" fr="39" />
+  <verb in="dévergonder" tn="break bad, be led astray" re="t" mo="1-1" />
+  <verb in="déverguer" tn="unbend the sails from the yards" mo="1-1" />
+  <verb in="dévernir" tn="remove varnish from something" mo="2-1" />
   <verb in="devoir" tn="must, owe" mo="4-2A" fr="7" />
   <verb in="dire" tn="say, tell" mo="5-8A" fr="6" />
   <verb in="dissoudre" tn="dissolve" mo="5-13A" />

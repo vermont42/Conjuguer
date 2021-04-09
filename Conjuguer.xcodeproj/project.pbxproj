@@ -48,6 +48,10 @@
 		03ACAA0625ACB6B900CF5390 /* ConditionnelPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACAA0525ACB6B900CF5390 /* ConditionnelPresent.swift */; };
 		03B54B3E25AF914F0062B323 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B54B3D25AF914F0062B323 /* TestUtils.swift */; };
 		03B54B4625AF92930062B323 /* VerbModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B54B4525AF92930062B323 /* VerbModelTests.swift */; };
+		03C2CAC52619125200CFA825 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2CAC32619125200CFA825 /* SoundPlayer.swift */; };
+		03C2CAC62619125200CFA825 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2CAC42619125200CFA825 /* Sound.swift */; };
+		03C2CACE261912EA00CFA825 /* sadTrombone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03C2CACC261912EA00CFA825 /* sadTrombone.mp3 */; };
+		03C2CAD62619160C00CFA825 /* chime.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03C2CAD52619160C00CFA825 /* chime.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +119,10 @@
 		03ACAA0525ACB6B900CF5390 /* ConditionnelPresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionnelPresent.swift; sourceTree = "<group>"; };
 		03B54B3D25AF914F0062B323 /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		03B54B4525AF92930062B323 /* VerbModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbModelTests.swift; sourceTree = "<group>"; };
+		03C2CAC32619125200CFA825 /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		03C2CAC42619125200CFA825 /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		03C2CACC261912EA00CFA825 /* sadTrombone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sadTrombone.mp3; sourceTree = "<group>"; };
+		03C2CAD52619160C00CFA825 /* chime.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chime.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				036DB7CC25A0C9AF0013C3B7 /* App */,
+				03C2CACA261912AA00CFA825 /* Assets */,
 				036DB796259FD6510013C3B7 /* Info.plist */,
 				036DB7CB25A0C97F0013C3B7 /* Models */,
 				037367FD25D5C3C9008BDF46 /* Utils */,
@@ -214,6 +223,7 @@
 				036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */,
 				036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */,
 				036DB7EC25A1070D0013C3B7 /* PersonNumber.swift */,
+				03C2CAC42619125200CFA825 /* Sound.swift */,
 				036DB7E325A0DD9B0013C3B7 /* StemAlteration.swift */,
 				03ACA9FB25AA5D4700CF5390 /* SubjonctifPresentGroup.swift */,
 				036DB7EB25A1070D0013C3B7 /* Tense.swift */,
@@ -246,6 +256,7 @@
 				0373683D25DD79A4008BDF46 /* ModelSort.swift */,
 				03653F0225EC4F5A00A34267 /* Modifiers.swift */,
 				0373682425DC65B2008BDF46 /* Settings.swift */,
+				03C2CAC32619125200CFA825 /* SoundPlayer.swift */,
 				0373682F25DC672F008BDF46 /* UserDefaultsGetterSetter.swift */,
 				0373681A25DB8BAD008BDF46 /* Util.swift */,
 				0373682925DC667B008BDF46 /* VerbSort.swift */,
@@ -265,6 +276,15 @@
 				03653F0F25EC67DF00A34267 /* VerbView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		03C2CACA261912AA00CFA825 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				03C2CAD52619160C00CFA825 /* chime.mp3 */,
+				03C2CACC261912EA00CFA825 /* sadTrombone.mp3 */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,8 +391,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03C2CACE261912EA00CFA825 /* sadTrombone.mp3 in Resources */,
 				036DB795259FD6510013C3B7 /* Preview Assets.xcassets in Resources */,
 				036DB80025A37ECB0013C3B7 /* verbModels.xml in Resources */,
+				03C2CAD62619160C00CFA825 /* chime.mp3 in Resources */,
 				036DB7C0259FD67C0013C3B7 /* verbs.xml in Resources */,
 				036DB792259FD6510013C3B7 /* Assets.xcassets in Resources */,
 			);
@@ -420,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03C2CAC62619125200CFA825 /* Sound.swift in Sources */,
 				036DB7DF25A0DD7A0013C3B7 /* Verb.swift in Sources */,
 				036DB7EE25A1070D0013C3B7 /* PersonNumber.swift in Sources */,
 				036DB7E425A0DD9B0013C3B7 /* StemAlteration.swift in Sources */,
@@ -452,6 +475,7 @@
 				0373684525DD809C008BDF46 /* ModelBrowseView.swift in Sources */,
 				036DB7BE259FD67C0013C3B7 /* VerbModel.swift in Sources */,
 				036DB7BF259FD67C0013C3B7 /* VerbParser.swift in Sources */,
+				03C2CAC52619125200CFA825 /* SoundPlayer.swift in Sources */,
 				0373680E25DB811F008BDF46 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
