@@ -90,6 +90,11 @@ struct InputView: View {
     let lastThree = infinitif.suffix(3)
     let lastFour = infinitif.suffix(4)
 
+    if !["er", "ir", "re", "ïr"].contains(lastTwo) {
+      outputError("Invalid infinitive \(infinitif).")
+      return
+    }
+
     if (lastTwo == "ir" || lastTwo == "re" || lastThree == "cer" || lastFour == "eler" || lastFour == "oyer") && model == "1-1" {
       outputError("1-1 is an invalid model for \(infinitif).")
       return
