@@ -10,7 +10,6 @@
 ]>
 
 <verbs>
-  <verb in=" embraquer" tn="haul in" mo="1-1" />
   <verb in="abaisser" tn="lower, stoop, abase" mo="1-1" />
   <verb in="abandonner" tn="abandon" mo="1-1" />
   <verb in="abasourdir" tn="dumbfound, daze" mo="2-1" />
@@ -2449,6 +2448,7 @@
   <verb in="embouter" tn="embout, put a nozzle or tip on something" mo="1-1" />
   <verb in="emboutir" tn="emboss, crash into" mo="2-1" />
   <verb in="embrancher" tn="join, connect, link up" mo="1-1" />
+  <verb in="embraquer" tn="haul in" mo="1-1" />
   <verb in="embraser" tn="set fire to, inflame, impassion" mo="1-1" />
   <verb in="embrasser" tn="hug, embrace" mo="1-1" />
   <verb in="embrayer" tn="engage, set in motion" mo="1-7B" />

@@ -19,7 +19,7 @@ struct InputView: View {
       VStack {
         Group {
           Text("Infinitif")
-            .modifier(SubheadingLabel())
+            .subheadingLabel()
           TextField("Infinitif", text: $infinitif)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .autocapitalization(UITextAutocapitalizationType.none)
@@ -27,7 +27,7 @@ struct InputView: View {
             .padding()
 
           Text("Translation")
-            .modifier(SubheadingLabel())
+            .subheadingLabel()
           TextField("Translation", text: $translation)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .autocapitalization(UITextAutocapitalizationType.none)
@@ -35,7 +35,7 @@ struct InputView: View {
             .padding()
 
           Text("Model")
-            .modifier(SubheadingLabel())
+            .subheadingLabel()
           TextField("Model", text: $model)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .autocapitalization(UITextAutocapitalizationType.none)
@@ -45,7 +45,7 @@ struct InputView: View {
 
         Group {
           Text("Reflexive (t or f)")
-            .modifier(SubheadingLabel())
+            .subheadingLabel()
           TextField("Reflexive", text: $reflexive)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .autocapitalization(UITextAutocapitalizationType.none)

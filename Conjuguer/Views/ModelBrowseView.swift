@@ -38,13 +38,6 @@ struct ModelBrowseView: View {
   }
 
   init() {
-    //    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-    //    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
-    //    UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white, .backgroundColor: UIColor.black]
-    //    UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white, .backgroundColor: UIColor.black]
-    //    UINavigationBar.appearance().backgroundColor = .black
-    //    UINavigationBar.appearance().tintColor = .white
-    //    UINavigationBar.appearance().barTintColor = .black
     store = ModelStore(world: Current)
   }
 }

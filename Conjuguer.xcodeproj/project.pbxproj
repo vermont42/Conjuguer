@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		033EAA182630A36B0055B313 /* WorkSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 033EAA172630A36B0055B313 /* WorkSans.ttf */; };
 		0343E7DF25E427890043B813 /* ModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0343E7DE25E427890043B813 /* ModelView.swift */; };
 		03653F0325EC4F5A00A34267 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03653F0225EC4F5A00A34267 /* Modifiers.swift */; };
 		03653F1025EC67DF00A34267 /* VerbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03653F0F25EC67DF00A34267 /* VerbView.swift */; };
@@ -72,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		033EAA172630A36B0055B313 /* WorkSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WorkSans.ttf; sourceTree = "<group>"; };
 		0343E7DE25E427890043B813 /* ModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelView.swift; sourceTree = "<group>"; };
 		03653F0225EC4F5A00A34267 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		03653F0F25EC67DF00A34267 /* VerbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbView.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 			children = (
 				03C2CAD52619160C00CFA825 /* chime.mp3 */,
 				03C2CACC261912EA00CFA825 /* sadTrombone.mp3 */,
+				033EAA172630A36B0055B313 /* WorkSans.ttf */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				033EAA182630A36B0055B313 /* WorkSans.ttf in Resources */,
 				03C2CACE261912EA00CFA825 /* sadTrombone.mp3 in Resources */,
 				036DB795259FD6510013C3B7 /* Preview Assets.xcassets in Resources */,
 				036DB80025A37ECB0013C3B7 /* verbModels.xml in Resources */,

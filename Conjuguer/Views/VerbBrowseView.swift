@@ -38,9 +38,6 @@ struct VerbBrowseView: View {
   }
 
   init() {
-//    UISegmentedControl.appearance().selectedSegmentTintColor = .blue
-//    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-//    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.blue], for: .normal)
     store = VerbStore(world: Current)
   }
 }

@@ -19,6 +19,8 @@ struct ConjuguerApp: App {
   static var compoundImpératifPersonNumbersIndex = 0
 
   init() {
+    Modifiers.setTitleAttributes()
+
     Verb.verbs = VerbParser().parse()
     VerbModel.models = VerbModelParser().parse()
     VerbModel.computeIrregularities()
