@@ -178,6 +178,7 @@
   <verb in="ahaner" tn="pant due to exercise" mo="1-1" />
   <verb in="ahanner" tn="pant due to exercise" mo="1-1" />
   <verb in="ahurir" tn="astound" mo="2-1" />
+  <verb in="aicher" tn="bait a hook" mo="1-1" />
   <verb in="aider" tn="help" mo="1-1" />
   <verb in="aigrir" tn="embitter" mo="2-1" />
   <verb in="aiguiller" tn="direct towards" mo="1-1" />
@@ -2627,29 +2628,1013 @@
   <verb in="engrosser" tn="impregnate" mo="1-1" />
   <verb in="engueuler" tn="give (someone) a roasting, tell someone off, chew out" mo="1-1" />
   <verb in="enguirlander" tn="tell off, tick off" mo="1-1" />
+  <verb in="enhardir" tn="embolden" mo="2-1" />
+  <verb in="enharnacher" tn="harness a horse, caparison" mo="1-1" />
+  <verb in="enherber" tn="poison, cover with grass" mo="1-1" />
+  <verb in="enivrer" tn="intoxicate, inebriate" mo="1-1" />
+  <verb in="enjamber" tn="straddle, stride" mo="1-1" />
+  <verb in="enjoindre" tn="enjoin, order" mo="5-12" />
+  <verb in="enjôler" tn="bewitch" mo="1-1" />
+  <verb in="enjoliver" tn="embellish, prettify" mo="1-1" />
+  <verb in="enjuiver" tn="cause to become more Jewish" mo="1-1" />
+  <verb in="enkyster" tn="encyst" re="t" mo="1-1" />
+  <verb in="enlacer" tn="wrap around, embrace" mo="1-2A" />
+  <verb in="enlaidir" tn="uglify" mo="2-1" />
+  <verb in="enlever" tn="remove, take off, take away, clear, remove clothes" mo="1-4" />
+  <verb in="enliasser" tn="bundle together (usually paper)" mo="1-1" />
+  <verb in="enlier" tn="lay stones" mo="1-1" />
+  <verb in="enliser" tn="get (a ship or vehicle) stuck in mud or sand" mo="1-1" />
+  <verb in="enluminer" tn="light up, embrighten, brighten" mo="1-1" />
+  <verb in="ennoblir" tn="ennoble" mo="2-1" />
+  <verb in="ennuager" tn="cloud over (become cloudy)" mo="1-2B" />
+  <verb in="ennuyer" tn="bore, annoy" mo="1-7A" />
+  <verb in="énoncer" tn="enounce, lay out, declare, explain" mo="1-2A" />
+  <verb in="enorgueillir" tn="make someone proud" mo="2-1" />
+  <verb in="énouer" tn="remove the knots from, unknot" mo="1-1" />
+  <verb in="enquérir" tn="inquire" re="t" mo="6-3" />
+  <verb in="enquêter" tn="investigate, survey" mo="1-1" />
+  <verb in="enquiquiner" tn="annoy" mo="1-1" />
+  <verb in="enraciner" tn="root, cause to take root" mo="1-1" />
+  <verb in="enrager" tn="have rabies, enrage, anger, infuriate" mo="1-2B" />
+  <verb in="enrayer" tn="slow down, brake, curb, check, jam, block (a weapon)" mo="1-7B" />
+  <verb in="enrégimenter" tn="enlist" mo="1-1" />
+  <verb in="enregistrer" tn="record for later replay or use, save on a computer" mo="1-1" />
+  <verb in="enrésiner" tn="plant with conifers" mo="1-1" />
+  <verb in="enrhumer" tn="give someone a cold" mo="1-1" />
+  <verb in="enrichir" tn="enrich" mo="2-1" />
+  <verb in="enrober" tn="coat" mo="1-1" />
+  <verb in="enrocher" tn="riprap" mo="1-1" />
+  <verb in="enrôler" tn="enroll, enlist" mo="1-1" />
+  <verb in="enrouer" tn="make hoarse" mo="1-1" />
+  <verb in="enrouler" tn="wind, curl (around)" mo="1-1" />
+  <verb in="enrubanner" tn="ribbon, beribbon" mo="1-1" />
+  <verb in="ensabler" tn="silt up, strand" mo="1-1" />
+  <verb in="ensacher" tn="bag" mo="1-1" />
+  <verb in="ensanglanter" tn="cover with shed blood" mo="1-1" />
+  <verb in="ensauvager" tn="make wild, become wild" mo="1-2B" />
+  <verb in="enseigner" tn="teach" mo="1-1" />
+  <verb in="ensemencer" tn="sow, seed" mo="1-2A" />
+  <verb in="enserrer" tn="clasp, hold on tightly around (something)" mo="1-1" />
+  <verb in="ensevelir" tn="bury, entomb, cover with earth" mo="2-1" />
+  <verb in="ensiler" tn="store in a silo" mo="1-1" />
+  <verb in="ensoleiller" tn="fill with light, brighten, illuminate" mo="1-1" />
+  <verb in="ensorceler" tn="enchant, cast a spell, captivate" mo="1-3A" />
+  <verb in="ensuivre" tn="follow, come next, result, come as a result" re="t" mo="5-5" />
+  <verb in="entabler" tn="have the hips move before the shoulders (of a horse)" re="t" mo="1-1" />
+  <verb in="entacher" tn="taint, blemish, besmirch, mar" mo="1-1" />
+  <verb in="entailler" tn="snick, cut into, gash" mo="1-1" />
+  <verb in="entamer" tn="cut into (something), remove a small piece of something" mo="1-1" />
+  <verb in="entarter" tn="throw a pie at, hit with pie" mo="1-1" />
+  <verb in="entartrer" tn="scale, fur up" mo="1-1" />
+  <verb in="entasser" tn="pile objects, hoard money" mo="1-1" />
   <verb in="entendre" tn="hear, understand" mo="5-1A" fr="33" />
+  <verb in="enténébrer" tn="envelop in shadows" mo="1-5" />
+  <verb in="enter" tn="graft, implant" mo="1-1" />
+  <verb in="entériner" tn="ratify, confirm, consent" mo="1-1" />
+  <verb in="enterrer" tn="bury, ditch (plans)" mo="1-1" />
+  <verb in="entêter" tn="be stubborn, persist" mo="1-1" />
+  <verb in="enthousiasmer" tn="enthuse" mo="1-1" />
+  <verb in="enticher" tn="become infatuated or besotted" mo="1-1" />
+  <verb in="entonner" tn="strike up, burst into (chanting or singing), pour using a funnel" mo="1-1" />
+  <verb in="entortiller" tn="wrap around, twist around, envelop, win over, persuade" mo="1-1" />
+  <verb in="entourer" tn="surround" mo="1-1" />
+  <verb in="entraccuser" tn="accuse each other, make mutual accusations" re="t" mo="1-1" />
+  <verb in="entradmirer" tn="admire each other" re="t" mo="1-1" />
+  <verb in="entraider" tn="help one another" re="t" mo="1-1" />
+  <verb in="entraîner" tn="coach, train, drag" mo="1-1" />
   <verb in="entrapercevoir" tn="glimpse" mo="4-2B" />
+  <verb in="entraver" tn="hinder, impede" mo="1-1" />
+  <verb in="entre-déchirer" tn="tear each other to bits" re="t" mo="1-1" />
+  <verb in="entre-détruire" tn="destroy each other" re="t" mo="5-9A" />
+  <verb in="entre-dévorer" tn="devour each other" mo="1-1" />
+  <verb in="entre-égorger" tn="rip each other’s throats out" re="t" mo="1-2B" />
+  <verb in="entre-manger" tn="eat one another" re="t" mo="1-2B" />
+  <verb in="entre-nuire" tn="harm each other" re="t" mo="5-9B" />
+  <verb in="entre-regarder" tn="look at each other" re="t" mo="1-1" />
+  <verb in="entre-tuer" tn="kill each other" re="t" mo="1-1" />
+  <verb in="entrebâiller" tn="half-open, leave ajar" mo="1-1" />
+  <verb in="entrechoquer" tn="knock together, clink together" mo="1-1" />
+  <verb in="entrecouper" tn="interrupt, intersperse, scatter with" mo="1-1" />
+  <verb in="entrecroiser" tn="criss-cross, intersect" mo="1-1" />
+  <verb in="entredéchirer" tn="tear each other to bits" re="t" mo="1-1" />
+  <verb in="entredétruire" tn="destroy each other" re="t" mo="5-9A" />
+  <verb in="entredévorer" tn="devour each other" re="t" mo="1-1" />
+  <verb in="entrégorger" tn="rip each other’s throats out" re="t" mo="1-2B" />
+  <verb in="entrelacer" tn="interlock, interweave" mo="1-2A" />
+  <verb in="entrelarder" tn="lard, intersperse with" mo="1-1" />
+  <verb in="entremanger" tn="eat one another" re="t" mo="1-2B" />
+  <verb in="entremêler" tn="interlock, interweave" mo="1-1" />
+  <verb in="entremettre" tn="mediate" re="t" mo="5-4" />
+  <verb in="entrenuire" tn="harm each other" re="t" mo="5-9B" />
+  <verb in="entreposer" tn="store goods in a warehouse" mo="1-1" />
+  <verb in="entreprendre" tn="undertake" mo="5-2" />
   <verb in="entrer" tn="enter" ay="e" mo="1-1" fr="87" />
+  <verb in="entreregarder" tn="look at each other" re="t" mo="1-1" />
+  <verb in="entretailler" tn="knock knees" re="t" mo="1-1" />
+  <verb in="entretenir" tn="maintain, look after, support, fuel" mo="6-7" />
+  <verb in="entretoiser" tn="brace, put a brace/crosspiece between two beams" mo="1-1" />
+  <verb in="entretuer" tn="kill each other" re="t" mo="1-1" />
   <verb in="entrevoir" tn="glimpse, foresee" mo="4-1A" />
+  <verb in="entrevoûter" tn="fill with plaster" mo="1-1" />
+  <verb in="entrouvrir" tn="half-open, leave ajar" mo="3-1" />
+  <verb in="entuber" tn="dupe, swindle, fool" mo="1-1" />
+  <verb in="énucléer" tn="enucleate" mo="1-1" />
+  <verb in="énumérer" tn="enumerate, count out, go through one by one" mo="1-5" />
+  <verb in="envahir" tn="invade" mo="2-1" />
+  <verb in="envaser" tn="silt up" mo="1-1" />
+  <verb in="envelopper" tn="wrap someone or something, cover, envelop" mo="1-1" />
+  <verb in="envenimer" tn="envenom, aggravate, inflame" mo="1-1" />
+  <verb in="enverguer" tn="bend a sail to its yard" mo="1-1" />
+  <verb in="envider" tn="wrap thread around a spindle" mo="1-1" />
+  <verb in="envier" tn="envy" mo="1-1" />
+  <verb in="environner" tn="surround, encircle" mo="1-1" />
+  <verb in="envisager" tn="envisage, contemplate" mo="1-2B" />
+  <verb in="envoiler" tn="warp, become bent" re="t" mo="1-1" />
+  <verb in="envoler" tn="take off, take flight, blow away, vanish, be stolen" re="t" mo="1-1" />
+  <verb in="envoûter" tn="cast a spell, bewitch, charm, hex" mo="1-1" />
   <verb in="envoyer" tn="send" mo="1-8" />
+  <verb in="épaissir" tn="thicken, get/make thicker" mo="2-1" />
+  <verb in="épamprer" tn="trim vines that would prevent grapes from ripening" mo="1-1" />
+  <verb in="épancher" tn="pour, pour out, erupt, spit out, spurt out" mo="1-1" />
+  <verb in="épandre" tn="discharge, pour" mo="5-1A" />
+  <verb in="épanneler" tn="prepare a block of marble" mo="1-3A" />
+  <verb in="épanouir" tn="make happy, give pleasure, satisfy" mo="2-1" />
+  <verb in="épargner" tn="save, spare" mo="1-1" />
+  <verb in="éparpiller" tn="scatter" mo="1-1" />
+  <verb in="épater" tn="amaze, stagger" mo="1-1" />
+  <verb in="épaufrer" tn="chip stone" mo="1-1" />
+  <verb in="épauler" tn="give a hand, help out" mo="1-1" />
+  <verb in="épeler" tn="spell" mo="1-3A" />
+  <verb in="épépiner" tn="deseed, remove the pips from something" mo="1-1" />
+  <verb in="éperonner" tn="spur, spur on, ram" mo="1-1" />
+  <verb in="épeurer" tn="frighten, scare" mo="1-1" />
+  <verb in="épicer" tn="spice, add spice to" mo="1-2A" />
+  <verb in="épier" tn="spy on, keep an eye on, watch" mo="1-1" />
+  <verb in="épierrer" tn="clear of stones" mo="1-1" />
+  <verb in="épiler" tn="epilate" mo="1-1" />
+  <verb in="épiloguer" tn="criticize someone minutely" mo="1-1" />
+  <verb in="épincer" tn="shear, crop, chisel" mo="1-2A" />
+  <verb in="épinceter" tn="shear, crop, chisel" mo="1-3B" />
+  <verb in="épiner" tn="protect with spikes or spines" mo="1-1" />
+  <verb in="épingler" tn="pin, catch" mo="1-1" />
+  <verb in="épisser" tn="splice" mo="1-1" />
+  <verb in="éployer" tn="spread (out), unfurl" mo="1-7A" />
+  <verb in="éplucher" tn="peel" mo="1-1" />
+  <verb in="épointer" tn="blunt" mo="1-1" />
+  <verb in="éponger" tn="sponge" mo="1-2B" />
+  <verb in="épontiller" tn="shore up" mo="1-1" />
+  <verb in="épouiller" tn="delouse" mo="1-1" />
+  <verb in="époumoner" tn="shout at the top of one’s lungs" re="t" mo="1-1" />
+  <verb in="épouser" tn="get married, wed" re="t" mo="1-1" />
+  <verb in="épousseter" tn="dust" mo="1-3B" />
+  <verb in="époustoufler" tn="amaze, stupefy" mo="1-1" />
+  <verb in="époutir" tn="card (wool)" mo="2-1" />
+  <verb in="épouvanter" tn="terrify, horrify" mo="1-1" />
+  <verb in="épreindre" tn="squeeze out, draw out by pressing, extract" mo="5-12" />
+  <verb in="éprendre" tn="become enamored with, fall in love with" re="t" mo="5-2" />
+  <verb in="éprouver" tn="test, sense, feel, undergo a transformation" mo="1-1" />
+  <verb in="épucer" tn="remove fleas" mo="1-2A" />
+  <verb in="épuiser" tn="squeeze out, dry up, wear out" mo="1-1" />
+  <verb in="épurer" tn="purify, expurgate" mo="1-1" />
+  <verb in="équarrir" tn="square off, quarter" mo="2-1" />
+  <verb in="équerrer" tn="square off" mo="1-1" />
+  <verb in="équeuter" tn="remove the stem from a fruit, stem, hull" mo="1-1" />
+  <verb in="équilibrer" tn="balance, make balanced, counterbalance" mo="1-1" />
+  <verb in="équiper" tn="supply, equip" mo="1-1" />
+  <verb in="équivaloir" tn="be equivalent to" mo="4-5A" />
+  <verb in="équivoquer" tn="equivocate, æquivocate" mo="1-1" />
+  <verb in="éradiquer" tn="eradicate" mo="1-1" />
+  <verb in="érafler" tn="scratch, graze" mo="1-1" />
+  <verb in="érailler" tn="scratch, tear" mo="1-1" />
+  <verb in="éreinter" tn="wear out, exhaust, criticize strongly" mo="1-1" />
+  <verb in="ergoter" tn="quibble, argue, contest, prune" mo="1-1" />
+  <verb in="ériger" tn="erect" mo="1-2B" />
+  <verb in="éroder" tn="erode" mo="1-1" />
+  <verb in="érotiser" tn="eroticize" mo="1-1" />
+  <verb in="errer" tn="wander, wander about" mo="1-1" />
+  <verb in="éructer" tn="belch, eructate, blurt out" mo="1-1" />
+  <verb in="esbigner" tn="steal away" re="t" mo="1-1" />
+  <verb in="esbroufer" tn="show off, boast, brag" mo="1-1" />
+  <verb in="escalader" tn="escalade, climb, go rock climbing" mo="1-1" />
+  <verb in="escamoter" tn="conjure away, make disappear, evade, dodge, skip" mo="1-1" />
+  <verb in="escher" tn="bait a hook" mo="1-1" />
+  <verb in="esclaffer" tn="burst out in laughter" re="t" mo="1-1" />
+  <verb in="esclavager" tn="enslave" mo="1-2B" />
+  <verb in="escompter" tn="discount because of a payment by anticipation, anticipate, be in the hope of" mo="1-1" />
+  <verb in="escorter" tn="escort, accompany" mo="1-1" />
+  <verb in="escrimer" tn="fence, engage in the sport of fencing" mo="1-1" />
+  <verb in="escroquer" tn="swindle" mo="1-1" />
+  <verb in="espacer" tn="space out, allow gaps or interals between" mo="1-2A" />
+  <verb in="espérer" tn="hope, hope for" mo="1-5" />
+  <verb in="espionner" tn="spy, act as a spy" mo="1-1" />
+  <verb in="esquicher" tn="squeeze" mo="1-1" />
+  <verb in="esquinter" tn="damage, ruin, or wear out, especially through use or misuse" mo="1-1" />
+  <verb in="esquisser" tn="sketch, draft, outline" mo="1-1" />
+  <verb in="esquiver" tn="dodge (a blow), duck, evade, elude" mo="1-1" />
+  <verb in="essaimer" tn="swarm" mo="1-1" />
+  <verb in="essanger" tn="get dirt off, clean" mo="1-2B" />
+  <verb in="essarter" tn="clear forest land of trees, assart" mo="1-1" />
   <verb in="essayer" tn="try" mo="1-7B" fr="74" />
+  <verb in="essorer" tn="dry out, to hang out to dry, wring, wring out" mo="1-1" />
+  <verb in="essoriller" tn="shear, crop ears" mo="1-1" />
+  <verb in="essoucher" tn="uproot stumps from land" mo="1-1" />
+  <verb in="essouffler" tn="knock the wind out of, leave breathless" mo="1-1" />
   <verb in="essuyer" tn="wipe, dry" mo="1-7A" />
+  <verb in="estamper" tn="emboss, stamp" mo="1-1" />
+  <verb in="estampiller" tn="stamp, mark with a stamp" mo="1-1" />
+  <verb in="ester" tn="appear in court, be" mo="1-1" />
+  <verb in="estérifier" tn="esterify" mo="1-1" />
+  <verb in="esthétiser" tn="estheticize" mo="1-1" />
+  <verb in="estimer" tn="estimate, calculate roughly, esteem, hold in high regard" mo="1-1" />
+  <verb in="estiver" tn="estivate" mo="1-1" />
+  <verb in="estomaquer" tn="flabbergast, stupefy" mo="1-1" />
+  <verb in="estomper" tn="blur, make indistinct, dim" mo="1-1" />
+  <verb in="estoquer" tn="impale" mo="1-1" />
+  <verb in="estourbir" tn="stun, knock out" mo="2-1" />
+  <verb in="estrapader" tn="hang something from the yardarm" mo="1-1" />
+  <verb in="estrapasser" tn="tire (a horse)" mo="1-1" />
+  <verb in="estropier" tn="cripple" mo="1-1" />
+  <verb in="établir" tn="establish, set up" mo="2-1" />
+  <verb in="étager" tn="layer, set one above the other" mo="1-2B" />
+  <verb in="étalager" tn="display (goods)" mo="1-2B" />
+  <verb in="étaler" tn="spread, spread out, smear, tagger, flaunt, show off" mo="1-1" />
+  <verb in="étalinguer" tn="clinch, fasten, bend" mo="1-1" />
+  <verb in="étalonner" tn="calibrate" mo="1-1" />
+  <verb in="étamer" tn="tin plate" mo="1-1" />
+  <verb in="étamper" tn="punch" mo="1-1" />
+  <verb in="étancher" tn="make watertight, stop water from flowing, quench" mo="1-1" />
+  <verb in="étançonner" tn="prop up, shore up" mo="1-1" />
+  <verb in="étarquer" tn="tauten sails" mo="1-1" />
+  <verb in="étatiser" tn="nationalize" mo="1-1" />
+  <verb in="étayer" tn="prop up, support, back up" mo="1-7B" />
+  <verb in="éteindre" tn="turn off, put out, extinguish" mo="5-12" />
+  <verb in="étendre" tn="stretch the limbs, spread, hang out washing, extend, englare, expand, dilute, water down" mo="5-1A" />
+  <verb in="éterniser" tn="drag out, prolong, immortalize" mo="1-1" />
+  <verb in="éternuer" tn="sneeze" mo="1-1" />
+  <verb in="étêter" tn="pollard, trim the top of a tree, cut off the top of an object" mo="1-1" />
+  <verb in="éthérifier" tn="etherify" mo="1-1" />
+  <verb in="éthériser" tn="etherize" mo="1-1" />
+  <verb in="ethniciser" tn="ethnicize" mo="1-1" />
+  <verb in="étinceler" tn="spark, sparkle, twinkle" mo="1-3A" />
+  <verb in="étioler" tn="etiolate, render pale" mo="1-1" />
+  <verb in="étiqueter" tn="label" mo="1-3B" />
+  <verb in="étirer" tn="stretch" mo="1-1" />
+  <verb in="étoffer" tn="upholster, stuff, pad out, flesh out" mo="1-1" />
+  <verb in="étoiler" tn="adorn with stars" mo="1-1" />
+  <verb in="étonner" tn="surprise, astound" mo="1-1" />
+  <verb in="étouffer" tn="choke, stop, inhibit, prevent" mo="1-1" />
+  <verb in="étouper" tn="caulk" mo="1-1" />
+  <verb in="étourdir" tn="daze, stun, tire, wear out" mo="2-1" />
+  <verb in="étrangler" tn="strangle" mo="1-1" />
   <verb in="être" tn="be" mo="5-26" fr="1" />
+  <verb in="étrécir" tn="make narrow" mo="2-1" />
+  <verb in="étreindre" tn="hug, clutch, grip" mo="5-12" />
+  <verb in="étrenner" tn="wear for the first time, break in, be the guinea pig" mo="1-1" />
+  <verb in="étriller" tn="curry (a horse), groom, trounce, critique, reprimand" mo="1-1" />
+  <verb in="étriper" tn="gut, disembowel, thrash, defeat convincingly" mo="1-1" />
+  <verb in="étriquer" tn="narrow" mo="1-1" />
+  <verb in="étronçonner" tn="cut off branches, debranch" mo="1-1" />
+  <verb in="étudier" tn="study" mo="1-1" />
+  <verb in="étuver" tn="dry in a drying oven" mo="1-1" />
+  <verb in="euphoriser" tn="induce euphoria" mo="1-1" />
+  <verb in="européaniser" tn="Europeanize" mo="1-1" />
+  <verb in="euthanasier" tn="euthanize" mo="1-1" />
+  <verb in="évacuer" tn="evacuate" mo="1-1" />
+  <verb in="évader" tn="escape" re="t" mo="1-1" />
+  <verb in="évaluer" tn="assess" mo="1-1" />
+  <verb in="évangéliser" tn="evangelize" mo="1-1" />
+  <verb in="évanouir" tn="faint, vanish, disappear" re="t" mo="2-1" />
+  <verb in="évaporer" tn="evaporate" mo="1-1" />
+  <verb in="évaser" tn="widen, open out, splay, flare" mo="1-1" />
+  <verb in="éveiller" tn="stimulate, kindle, waken" mo="1-1" />
+  <verb in="éventer" tn="air, ventilate, expose to wind" mo="1-1" />
+  <verb in="éventrer" tn="disembowel, rip apart, tear open" mo="1-1" />
+  <verb in="évertuer" tn="strive" re="t" mo="1-1" />
+  <verb in="évider" tn="hollow out" mo="1-1" />
+  <verb in="évincer" tn="evict, depose, knock out" mo="1-2A" />
+  <verb in="éviscérer" tn="eviscerate" mo="1-5" />
+  <verb in="éviter" tn="avoid, dodge, shun, bypass, avert" mo="1-1" />
+  <verb in="évoluer" tn="evolve, change, develop, play, move about" mo="1-1" />
+  <verb in="évoquer" tn="evoke, mention" mo="1-1" />
+  <verb in="exacerber" tn="exacerbate, worsen" mo="1-1" />
+  <verb in="exagérer" tn="exaggerate" mo="1-5" />
+  <verb in="exalter" tn="elate, thrill, be elated" mo="1-1" />
+  <verb in="examiner" tn="examine" mo="1-1" />
+  <verb in="exaspérer" tn="exasperate, frustrate" mo="1-5" />
+  <verb in="exaucer" tn="fulfil the wish of a prayer" mo="1-2A" />
+  <verb in="excaver" tn="excavate" mo="1-1" />
+  <verb in="excéder" tn="exceed, annoy, anger" mo="1-5" />
+  <verb in="exceller" tn="excel" mo="1-1" />
+  <verb in="excentrer" tn="offset" mo="1-1" />
+  <verb in="excepter" tn="exclude, not count, make an exception" mo="1-1" />
+  <verb in="exciper" tn="plea (in a legal setting)" mo="1-1" />
+  <verb in="exciser" tn="excise" mo="1-1" />
+  <verb in="exciter" tn="excite, stir the emotions of" mo="1-1" />
+  <verb in="exclamer" tn="exclaim, shout out" re="t" mo="1-1" />
   <verb in="exclure" tn="exclude" mo="5-16A" />
+  <verb in="excommunier" tn="excommunicate" mo="1-1" />
+  <verb in="excorier" tn="excoriate" mo="1-1" />
+  <verb in="excréter" tn="excrete" mo="1-5" />
+  <verb in="excursionner" tn="take a trip" mo="1-1" />
+  <verb in="excuser" tn="excuse, pardon" mo="1-1" />
+  <verb in="exécrer" tn="loathe, abhor, execrate" mo="1-5" />
+  <verb in="exécuter" tn="execute, carry out" mo="1-1" />
+  <verb in="exemplifier" tn="exemplify" mo="1-1" />
+  <verb in="exempter" tn="exempt" mo="1-1" />
+  <verb in="exercer" tn="instruct, command, exercise, practice, do" mo="1-2A" />
+  <verb in="exfiltrer" tn="exfiltrate" mo="1-1" />
+  <verb in="exfolier" tn="exfoliate, strip of leaves" mo="1-1" />
+  <verb in="exhaler" tn="exhale, let out (a secret or sound)" mo="1-1" />
+  <verb in="exhausser" tn="raise up, erect (a building)" mo="1-1" />
+  <verb in="exhéréder" tn="disinherit" mo="1-5" />
+  <verb in="exhiber" tn="exhibit, show, show off, show round" mo="1-1" />
+  <verb in="exhorter" tn="exhort" mo="1-1" />
+  <verb in="exhumer" tn="exhume" mo="1-1" />
+  <verb in="exiger" tn="demand, require" mo="1-2B" />
+  <verb in="exiler" tn="exile, banish" mo="1-1" />
   <verb in="exister" tn="exist" mo="1-1" fr="66" />
+  <verb in="exonder" tn="surface, emerge" re="t" mo="1-1" />
+  <verb in="exonérer" tn="exonerate" mo="1-5" />
+  <verb in="exorciser" tn="exorcize" mo="1-1" />
+  <verb in="expatrier" tn="expatriate, deport" mo="1-1" />
+  <verb in="expectorer" tn="expectorate" mo="1-1" />
+  <verb in="expédier" tn="post, send, ship, expedite" mo="1-1" />
+  <verb in="expérimenter" tn="experiment, experience" mo="1-1" />
+  <verb in="expertiser" tn="appraise, value" mo="1-1" />
+  <verb in="expier" tn="expiate, make amends for, atone for" mo="1-1" />
+  <verb in="expirer" tn="breathe out, run out, die" mo="1-1" />
+  <verb in="expliciter" tn="clarify" mo="1-1" />
   <verb in="expliquer" tn="explain" mo="1-1" fr="62" />
+  <verb in="exploiter" tn="exploit" mo="1-1" />
+  <verb in="explorer" tn="explore" mo="1-1" />
+  <verb in="exploser" tn="explode" mo="1-1" />
+  <verb in="exporter" tn="export" mo="1-1" />
+  <verb in="exposer" tn="expose" mo="1-1" />
+  <verb in="exprimer" tn="express" mo="1-1" />
+  <verb in="exproprier" tn="expropriate" mo="1-1" />
+  <verb in="expulser" tn="expel" mo="1-1" />
+  <verb in="expurger" tn="expurgate" mo="1-2B" />
+  <verb in="exsuder" tn="exude" mo="1-1" />
+  <verb in="extasier" tn="be in ecstacy, rave" re="t" mo="1-1" />
+  <verb in="exténuer" tn="extenuate, weaken, exhaust" mo="1-1" />
+  <verb in="extérioriser" tn="exteriorize, show, express, display" mo="1-1" />
+  <verb in="exterminer" tn="exterminate" mo="1-1" />
+  <verb in="externaliser" tn="outsource" mo="1-1" />
+  <verb in="extirper" tn="uproot, extirpate, pull out" mo="1-1" />
+  <verb in="extorquer" tn="extort" mo="1-1" />
+  <verb in="extrader" tn="extradite" mo="1-1" />
+  <verb in="extraire" tn="extract (to draw out)" mo="5-24" />
+  <verb in="extrapoler" tn="extrapolate" mo="1-1" />
+  <verb in="extravaguer" tn="go, wander, extravagate" mo="1-1" />
+  <verb in="extravaser" tn="extravasate" re="t" mo="1-1" />
+  <verb in="exulcérer" tn="exulcerate, chafe" mo="1-5" />
+  <verb in="exulter" tn="exult, rejoice" mo="1-1" />
   <verb in="fabriquer" tn="fabricate" mo="1-1" />
+  <verb in="fabuler" tn="fantasize" mo="1-1" />
+  <verb in="facetter" tn="facet" mo="1-1" />
+  <verb in="fâcher" tn="annoy, vex" mo="1-1" />
+  <verb in="faciliter" tn="facilitate" mo="1-1" />
+  <verb in="façonner" tn="fashion, shape, work on" mo="1-1" />
+  <verb in="facturer" tn="charge, invoice, bill" mo="1-1" />
+  <verb in="fagoter" tn="bundle, dress up" mo="1-1" />
+  <verb in="faiblir" tn="weaken, get weaker" mo="2-1" />
+  <verb in="failler" tn="crack, fissure" re="t" mo="1-1" />
+  <verb in="fainéanter" tn="do nothing, be idle, faff" mo="1-1" />
   <verb in="faire" tn="do, make" mo="5-23" fr="4" />
+  <verb in="faisander" tn="hang game meat" mo="1-1" />
   <verb in="falloir" tn="be necessary" mo="4-5C" de="t" fr="13" />
+  <verb in="falsifier" tn="falsify" mo="1-1" />
+  <verb in="faluner" tn="fertilize with shellfish shells" mo="1-1" />
+  <verb in="familiariser" tn="familiarize" mo="1-1" />
+  <verb in="fanatiser" tn="fanaticize" mo="1-1" />
+  <verb in="faner" tn="make hay, fade, wither" mo="1-1" />
+  <verb in="fanfaronner" tn="boast, swagger" mo="1-1" />
+  <verb in="fantasmer" tn="fantasize" mo="1-1" />
+  <verb in="farcir" tn="stuff, apply stuffing to" mo="2-1" />
+  <verb in="farder" tn="disguise, paint the face" mo="1-1" />
+  <verb in="farfouiller" tn="rummage around" mo="1-1" />
+  <verb in="fariner" tn="flour, apply flour to something" mo="1-1" />
+  <verb in="farter" tn="wax skis" mo="1-1" />
+  <verb in="fasciner" tn="fascinate" mo="1-1" />
+  <verb in="fasciser" tn="impose fascism" mo="1-1" />
+  <verb in="faseyer" tn="flap (as a sail or flag)" mo="1-1" />
   <verb in="fatiguer" tn="fatigue" mo="1-1" />
+  <verb in="faucarder" tn="cut aquatic plants" mo="1-1" />
+  <verb in="faucher" tn="mow, reap, run over, knock down" mo="1-1" />
+  <verb in="faufiler" tn="baste" mo="1-1" />
+  <verb in="fausser" tn="falsify, render invalid, skew, distort (a result)" mo="1-1" />
+  <verb in="fauter" tn="make a mistake, mess up" mo="1-1" />
+  <verb in="favoriser" tn="favor, show a preference to something, prioritize" mo="1-1" />
+  <verb in="faxer" tn="fax" mo="1-1" />
+  <verb in="fayoter" tn="brownnose" mo="1-1" />
+  <verb in="féconder" tn="fecundate" mo="1-1" />
+  <verb in="féculer" tn="make into starch" mo="1-1" />
+  <verb in="fédéraliser" tn="federalize" mo="1-1" />
+  <verb in="fédérer" tn="federate" mo="1-5" />
+  <verb in="feindre" tn="fake, feign" mo="5-12" />
+  <verb in="feinter" tn="feint" mo="1-1" />
+  <verb in="fêler" tn="crack" mo="1-1" />
+  <verb in="féliciter" tn="congratulate" mo="1-1" />
+  <verb in="féminiser" tn="feminize" mo="1-1" />
+  <verb in="fendiller" tn="crack, craze" mo="1-1" />
+  <verb in="fendre" tn="split, chop (wood), crack" mo="5-1A" />
+  <verb in="fenêtrer" tn="make holes for windows, install windows" mo="1-1" />
+  <verb in="férir" tn="hit, strike" mo="2-1" />
+  <verb in="ferler" tn="furl, roll up (a sail)" mo="1-1" />
+  <verb in="fermenter" tn="ferment" mo="1-1" />
+  <verb in="fermer" tn="shut, close" mo="1-1" />
+  <verb in="ferrailler" tn="cross swords with, scrap, recycle" mo="1-1" />
+  <verb in="ferrer" tn="clad in iron, be clad in iron, shoe (a horse)" mo="1-1" />
+  <verb in="ferrouter" tn="piggyback" mo="1-1" />
+  <verb in="fertiliser" tn="fertilize" mo="1-1" />
+  <verb in="fesser" tn="spank" mo="1-1" />
+  <verb in="festonner" tn="festoon" mo="1-1" />
+  <verb in="festoyer" tn="feast, banquet" mo="1-7A" />
+  <verb in="fêter" tn="celebrate (an event)" mo="1-1" />
+  <verb in="fétichiser" tn="fetishize" mo="1-1" />
+  <verb in="feuiller" tn="come into leaf" mo="1-1" />
+  <verb in="feuilleter" tn="leaf through, turn the pages of (a book) rapidly, reading short sections at random" mo="1-3B" />
+  <verb in="feuler" tn="growl" mo="1-1" />
+  <verb in="feutrer" tn="felt, muffle" mo="1-1" />
+  <verb in="fiabiliser" tn="make more reliable" mo="1-1" />
+  <verb in="fiancer" tn="get engaged to be married" mo="1-2A" />
+  <verb in="ficeler" tn="tie up, to truss" mo="1-3A" />
+  <verb in="ficher" tn="not care about" re="t" mo="1-1" />
+  <verb in="fidéliser" tn="loyalize, keep loyal" mo="1-1" />
+  <verb in="fienter" tn="defecate" mo="1-1" />
+  <verb in="fier" tn="trust someone, rely on someone" re="t" mo="1-1" />
+  <verb in="figer" tn="freeze, frighten" mo="1-2B" />
+  <verb in="fignoler" tn="tweak, put the finishing touches to" mo="1-1" />
+  <verb in="figurer" tn="appear in a list, be included, represent" mo="1-1" />
+  <verb in="filer" tn="spin a web, thread through a crowd, spin a thread" mo="1-1" />
+  <verb in="fileter" tn="thread" mo="1-4" />
+  <verb in="filialiser" tn="subsidiarize, spin off" mo="1-1" />
+  <verb in="filigraner" tn="filigree" mo="1-1" />
+  <verb in="filmer" tn="film" mo="1-1" />
+  <verb in="filocher" tn="follow, tail, shadow" mo="1-1" />
+  <verb in="filouter" tn="steal" mo="1-1" />
+  <verb in="filtrer" tn="filter" mo="1-1" />
+  <verb in="finaliser" tn="finalize" mo="1-1" />
+  <verb in="financer" tn="fund" mo="1-2A" />
+  <verb in="financiariser" tn="financialize" mo="1-1" />
+  <verb in="finasser" tn="finesse" mo="1-1" />
   <verb in="finir" tn="finish" mo="2-1" />
+  <verb in="fiscaliser" tn="tax, make taxable" mo="1-1" />
+  <verb in="fissurer" tn="fissure, crack" mo="1-1" />
+  <verb in="fixer" tn="fix, fasten" mo="1-1" />
+  <verb in="flageller" tn="beat severely with a scourge or a whip" mo="1-1" />
+  <verb in="flageoler" tn="stagger" mo="1-1" />
+  <verb in="flagorner" tn="flatter coarsely" mo="1-1" />
+  <verb in="flairer" tn="smell, sniff (at)" mo="1-1" />
+  <verb in="flamber" tn="flame, flambé" mo="1-1" />
+  <verb in="flamboyer" tn="blaze, flame" mo="1-7A" />
+  <verb in="flancher" tn="drop out, wimp out" mo="1-1" />
+  <verb in="flâner" tn="wander around, loiter, mill about" mo="1-1" />
+  <verb in="flanquer" tn="flank, adjoin, fling, chuck" mo="1-1" />
+  <verb in="flasher" tn="flash" mo="1-1" />
+  <verb in="flatter" tn="flatter, pet, caress" mo="1-1" />
+  <verb in="flécher" tn="mark with arrows" mo="1-5" />
+  <verb in="fléchir" tn="bend, fold" mo="2-1" />
+  <verb in="flemmarder" tn="laze about, laze around" mo="1-1" />
+  <verb in="flétrir" tn="wither" mo="2-1" />
+  <verb in="fleurer" tn="give off (an odor), waft, smell" mo="1-1" />
+  <verb in="fleurir" tn="flower, produce flowers, bloom, flourish" mo="2-1" />
+  <verb in="flexibiliser" tn="make supple, make flexible, become supple" mo="1-1" />
+  <verb in="flinguer" tn="gun, gun down" mo="1-1" />
+  <verb in="flipper" tn="freak out, flip out" mo="1-1" />
+  <verb in="fliquer" tn="police" mo="1-1" />
+  <verb in="flirter" tn="flirt" mo="1-1" />
+  <verb in="floconner" tn="snow" mo="1-1" />
+  <verb in="floculer" tn="flocculate" mo="1-1" />
+  <verb in="flotter" tn="float, flutter, wave, mill about" mo="1-1" />
+  <verb in="flouer" tn="swindle, con" mo="1-1" />
+  <verb in="fluctuer" tn="fluctuate" mo="1-1" />
+  <verb in="fluer" tn="flow, creep" mo="1-1" />
+  <verb in="fluidifier" tn="fluidify" mo="1-1" />
+  <verb in="flûter" tn="play a flute" mo="1-1" />
+  <verb in="focaliser" tn="focus, focalize" mo="1-1" />
+  <verb in="foirer" tn="mess up" mo="1-1" />
+  <verb in="foisonner" tn="abound, be plentiful, teem (with)" mo="1-1" />
+  <verb in="folâtrer" tn="frolic, gambol" mo="1-1" />
+  <verb in="folioter" tn="number the pages of a book or manuscript" mo="1-1" />
+  <verb in="folkloriser" tn="treat as folklore" mo="1-1" />
+  <verb in="fomenter" tn="foment" mo="1-1" />
+  <verb in="foncer" tn="darken" mo="1-2A" />
+  <verb in="fonctionnariser" tn="establish as a civil servant" mo="1-1" />
+  <verb in="fonctionner" tn="function, work" mo="1-1" />
+  <verb in="fonder" tn="found" mo="1-1" />
+  <verb in="fondre" tn="melt, melt down, smelt" mo="5-1A" />
+  <verb in="forcer" tn="force" mo="1-2A" />
+  <verb in="forcir" tn="become stronger, fatter" mo="2-1" />
   <verb in="forclore" tn="debar" mo="5-27A" />
+  <verb in="forer" tn="bore, drill" mo="1-1" />
+  <verb in="forfaire" tn="forfeit, commit a crime, cause to forfeit" mo="5-23" />
+  <verb in="forger" tn="fashion metal with fire and a hammer, forge" mo="1-2B" />
+  <verb in="forjeter" tn="protrude, bulge" mo="1-3B" />
+  <verb in="forlancer" tn="flush out" mo="1-2A" />
+  <verb in="forligner" tn="degenerate" mo="1-1" />
+  <verb in="forlonger" tn="outdistance" mo="1-2B" />
+  <verb in="formaliser" tn="formalize, legalize" mo="1-1" />
+  <verb in="formater" tn="format" mo="1-1" />
+  <verb in="former" tn="form, shape, train" mo="1-1" />
+  <verb in="formoler" tn="disinfect" mo="1-1" />
+  <verb in="formuler" tn="formulate, put into words" mo="1-1" />
+  <verb in="forniquer" tn="fornicate" mo="1-1" />
+  <verb in="fortifier" tn="fortify" mo="1-1" />
+  <verb in="fossiliser" tn="fossilize" mo="1-1" />
+  <verb in="fouailler" tn="lash repeatedly" mo="1-1" />
+  <verb in="foudroyer" tn="strike (of lightning), devastate" mo="1-7A" />
+  <verb in="fouetter" tn="whip" mo="1-1" />
+  <verb in="fouger" tn="root" mo="1-2B" />
+  <verb in="fouiller" tn="search, frisk, investigate" mo="1-1" />
+  <verb in="fouiner" tn="furrow, ferret, snoop around" mo="1-1" />
+  <verb in="fouir" tn="dig, grub, burrow" mo="2-1" />
+  <verb in="fouler" tn="stamp, impress, dent, mill, trample" mo="1-1" />
+  <verb in="fourbir" tn="furbish, burnish" mo="2-1" />
+  <verb in="fourcher" tn="fork" mo="1-1" />
+  <verb in="fourgonner" tn="poke embers" mo="1-1" />
+  <verb in="fourguer" tn="sell off, flog, offload" mo="1-1" />
+  <verb in="fourmiller" tn="swarm, to be full of, tingle" mo="1-1" />
+  <verb in="fournir" tn="supply, provide, furnish" mo="2-1" />
+  <verb in="fourrager" tn="fodder, forage" mo="1-2B" />
+  <verb in="fourrer" tn="shove, stick, stuff" mo="1-1" />
+  <verb in="fourvoyer" tn="mislead, cloak" mo="1-7A" />
   <verb in="foutre" tn="not give a darn about, go away" re="t" mo="5-1C" />
+  <verb in="fracasser" tn="smash, break violently" mo="1-1" />
+  <verb in="fractionner" tn="fractionate, divide into fractions" mo="1-1" />
+  <verb in="fracturer" tn="fracture" mo="1-1" />
+  <verb in="fragiliser" tn="weaken" mo="1-1" />
+  <verb in="fragmenter" tn="split up, divide, fragment" mo="1-1" />
+  <verb in="fraîchir" tn="freshen" mo="2-1" />
+  <verb in="fraiser" tn="sheer with a cutting tool" mo="1-1" />
+  <verb in="framboiser" tn="flavor with raspberry juice" mo="1-1" />
+  <verb in="franchir" tn="clear, cross, pass, cover" mo="2-1" />
+  <verb in="franchiser" tn="franchise" mo="1-1" />
+  <verb in="franciser" tn="Frenchify" mo="1-1" />
+  <verb in="franger" tn="fringe" mo="1-2B" />
+  <verb in="fransquillonner" tn="speak French in an affected manner to avoid showing one’s accent, particularly in Belgium" mo="1-1" />
+  <verb in="frapper" tn="hit, strike, bash" mo="1-1" />
+  <verb in="fraterniser" tn="fraternize" mo="1-1" />
+  <verb in="frauder" tn="commit fraud" mo="1-1" />
+  <verb in="frayer" tn="open up, clear, spawn, fertilize" mo="1-7B" />
+  <verb in="fredonner" tn="hum" mo="1-1" />
+  <verb in="frégater" tn="build with a long hull" mo="1-1" />
+  <verb in="freiner" tn="brake" mo="1-1" />
+  <verb in="frelater" tn="adulterate, corrupt" mo="1-1" />
+  <verb in="frémir" tn="quiver, shiver, simmer" mo="2-1" />
+  <verb in="fréquenter" tn="frequent, go to, socialize with" mo="1-1" />
+  <verb in="fréter" tn="charter (a boat)" mo="1-5" />
+  <verb in="frétiller" tn="wriggle" mo="1-1" />
+  <verb in="fretter" tn="reinforce with ferrules" mo="1-1" />
+  <verb in="fricasser" tn="fricassee, engage in debauchery" mo="1-1" />
+  <verb in="fricoter" tn="cook a stew, flirt" mo="1-1" />
+  <verb in="frictionner" tn="rub, rub down, massage" mo="1-1" />
+  <verb in="frigorifier" tn="refrigerate" mo="1-1" />
+  <verb in="frimer" tn="show off" mo="1-1" />
+  <verb in="fringuer" tn="tog up" mo="1-1" />
+  <verb in="friper" tn="crumple, crush" mo="1-1" />
+  <verb in="frire" tn="fry" mo="5-11" />
+  <verb in="friser" tn="curl, graze, pass by barely touching" mo="1-1" />
+  <verb in="frisotter" tn="curl" mo="1-1" />
+  <verb in="frissonner" tn="tremble, shiver" mo="1-1" />
+  <verb in="friter" tn="argue" re="t" mo="1-1" />
+  <verb in="fritter" tn="fritter, sinter" mo="1-1" />
+  <verb in="froisser" tn="crumple, rumple, crease" mo="1-1" />
+  <verb in="frôler" tn="brush against, touch, skim" mo="1-1" />
+  <verb in="froncer" tn="scowl, gather fabric" mo="1-2A" />
+  <verb in="fronder" tn="slingshot, critique" mo="1-1" />
+  <verb in="frotter" tn="rub, chafe, scrub, scour" mo="1-1" />
+  <verb in="frouer" tn="cry out as an owl or pigeon" mo="1-1" />
+  <verb in="froufrouter" tn="rustle" mo="1-1" />
+  <verb in="fructifier" tn="fructify" mo="1-1" />
+  <verb in="frustrer" tn="frustrate, vex" mo="1-1" />
+  <verb in="fuguer" tn="flee, run away from home" mo="1-1" />
   <verb in="fuire" tn="flee" mo="6-2" />
+  <verb in="fulgurer" tn="fulgurate" mo="1-1" />
+  <verb in="fulminer" tn="fulminate" mo="1-1" />
+  <verb in="fumer" tn="smoke, emit smoke, steam" mo="1-1" />
+  <verb in="fumiger" tn="fumigate" mo="1-2B" />
+  <verb in="fureter" tn="rummage" mo="1-4" />
+  <verb in="fuseler" tn="give the shape of a spindle" mo="1-3A" />
+  <verb in="fuser" tn="melt, fuse, gush, spurt, ring out, sound out" mo="1-1" />
+  <verb in="fusiller" tn="shoot, shoot down, gun down" mo="1-1" />
+  <verb in="fusionner" tn="fuse, meld" mo="1-1" />
+  <verb in="fustiger" tn="fustigate, publicly criticize" mo="1-2B" />
+  <verb in="gabarier" tn="verify" mo="1-1" />
+  <verb in="gâcher" tn="ruin, spoil, mar, wreck, waste, mess up, botch, bungle" mo="1-1" />
+  <verb in="gadgétiser" tn="gadgetize" mo="1-1" />
+  <verb in="gaffer" tn="make a gaffe, mess up, botch, gaffer tape" mo="1-1" />
+  <verb in="gager" tn="guarantee, wager, bet" mo="1-2B" />
   <verb in="gagner" tn="win" mo="1-1" fr="65" />
+  <verb in="gainer" tn="cover, sheathe" mo="1-1" />
+  <verb in="galber" tn="curve" mo="1-1" />
+  <verb in="galéjer" tn="tease" mo="1-5" />
+  <verb in="galérer" tn="have a hard time" mo="1-5" />
+  <verb in="galipoter" tn="tar" mo="1-1" />
+  <verb in="galonner" tn="braid, galloon" mo="1-1" />
+  <verb in="galoper" tn="gallop" mo="1-1" />
+  <verb in="galvaniser" tn="galvanize" mo="1-1" />
+  <verb in="galvauder" tn="waste, squander" mo="1-1" />
+  <verb in="gambader" tn="frolic, gambol, caper" mo="1-1" />
+  <verb in="gamberger" tn="think hard" mo="1-1" />
+  <verb in="gambiller" tn="jig about, dance" mo="1-1" />
+  <verb in="gangrener" tn="develop gangrene, utterly corrupt" mo="1-4" />
+  <verb in="gangréner" tn="develop gangrene, utterly corrupt" mo="1-5" />
+  <verb in="ganser" tn="border, decorate with a border" mo="1-1" />
+  <verb in="ganter" tn="glove, cover with a glove" mo="1-1" />
+  <verb in="garancer" tn="dye with madder" mo="1-2A" />
+  <verb in="garantir" tn="guarantee, protect, preserve" mo="2-1" />
+  <verb in="garder" tn="keep, retain, store, save, guard" mo="1-1" />
+  <verb in="garer" tn="cover, shelter" mo="1-1" />
+  <verb in="gargariser" tn="gargle" re="t" mo="1-1" />
+  <verb in="gargouiller" tn="gargle, rumble" mo="1-1" />
+  <verb in="garnir" tn="furnish, arm, decorate, garnish" mo="2-1" />
+  <verb in="garrotter" tn="bind, fasten strongly" mo="1-1" />
+  <verb in="gaspiller" tn="waste" mo="1-1" />
+  <verb in="gâter" tn="spoil, ruin" mo="1-1" />
+  <verb in="gâtifier" tn="go soft in the head" mo="1-1" />
+  <verb in="gauchir" tn="dodge, act deceptively, speak deceptively" mo="2-1" />
+  <verb in="gaufrer" tn="emboss, goffer" mo="1-1" />
+  <verb in="gauler" tn="beat, beat down (with a pole)" mo="1-1" />
+  <verb in="gausser" tn="mock, scorn, criticize harshly" re="t" mo="1-1" />
+  <verb in="gaver" tn="force-feed" mo="1-1" />
+  <verb in="gazéifier" tn="gasify, aerate" mo="1-1" />
+  <verb in="gazer" tn="gloss over, cover up, hush up" mo="1-1" />
+  <verb in="gazonner" tn="cover with sod, turf" mo="1-1" />
+  <verb in="gazouiller" tn="chirp, twitter, gurgle, tweet" mo="1-1" />
+  <verb in="geindre" tn="moan, groan" mo="5-12" />
+  <verb in="geler" tn="freeze, be very cold" mo="1-4" />
+  <verb in="gélifier" tn="jellify" mo="1-1" />
+  <verb in="géminer" tn="twin, make gemelled" mo="1-1" />
+  <verb in="gémir" tn="moan, groan" mo="2-1" />
+  <verb in="gemmer" tn="tap (a tree)" mo="1-1" />
+  <verb in="gendarmer" tn="militate against, object to, protest against" re="t" mo="1-1" />
+  <verb in="gêner" tn="hinder, hamper, bother, annoy, irritate, embarass" mo="1-1" />
+  <verb in="généraliser" tn="generalize" mo="1-1" />
+  <verb in="générer" tn="generate" mo="1-5" />
+  <verb in="gerber" tn="sheave, throw up" mo="1-1" />
+  <verb in="gercer" tn="chap, become chapped" mo="1-2A" />
+  <verb in="gérer" tn="manage" mo="1-5" />
+  <verb in="germaniser" tn="Germanize" mo="1-1" />
+  <verb in="germer" tn="germinate" mo="1-1" />
+  <verb in="gésir" tn="lie dead, be located, be buried" mo="2-1" />
+  <verb in="gesticuler" tn="gesticulate" mo="1-1" />
+  <verb in="gicler" tn="squirt, spurt" mo="1-1" />
+  <verb in="gifler" tn="slap (on the face)" mo="1-1" />
+  <verb in="gigoter" tn="wriggle (about)" mo="1-1" />
+  <verb in="gîter" tn="list, heel over, take shelter" mo="1-1" />
+  <verb in="givrer" tn="ice up, glaze" mo="1-1" />
+  <verb in="glacer" tn="freeze, turn to ice, ice" mo="1-2A" />
+  <verb in="glairer" tn="glair, smear with egg-white" mo="1-1" />
+  <verb in="glaiser" tn="clay, spread clay onto" mo="1-1" />
+  <verb in="glander" tn="do, loaf around" mo="1-1" />
+  <verb in="glandouiller" tn="do nothing, bum around all day" mo="1-1" />
+  <verb in="glaner" tn="gather, glean" mo="1-1" />
+  <verb in="glapir" tn="yelp, bark, shriek" mo="2-1" />
+  <verb in="glatir" tn="bark repeatedly, cry out as an eagle" mo="2-1" />
+  <verb in="glavioter" tn="spit saliva and/or mucus" mo="1-1" />
+  <verb in="gléner" tn="coil (rope)" mo="1-5" />
+  <verb in="glisser" tn="slip, slide, skid, glide" mo="1-1" />
+  <verb in="globaliser" tn="globalize" mo="1-1" />
+  <verb in="glorifier" tn="laud, glorify" mo="1-1" />
+  <verb in="gloser" tn="annotate, gloss" mo="1-1" />
+  <verb in="glouglouter" tn="gobble (as a turkey), gurgle" mo="1-1" />
+  <verb in="glousser" tn="cluck (as a chicken), gobble (as a turkey), chortle, giggle" mo="1-1" />
+  <verb in="glycériner" tn="add glycerine" mo="1-1" />
+  <verb in="gober" tn="swallow whole, be gullible" mo="1-1" />
+  <verb in="goberger" tn="enjoy oneself" re="t" mo="1-2B" />
+  <verb in="godailler" tn="eat or drink to excess, be creased" mo="1-1" />
+  <verb in="goder" tn="be creased" mo="1-1" />
+  <verb in="godiller" tn="scull, wedeln" mo="1-1" />
+  <verb in="godronner" tn="knurl, decorate" mo="1-1" />
+  <verb in="goinfrer" tn="pig out, stuff oneself" re="t" mo="1-1" />
+  <verb in="gominer" tn="apply hair gel, style one’s hair" re="t" mo="1-1" />
+  <verb in="gommer" tn="gum, erase, rub out" mo="1-1" />
+  <verb in="gondoler" tn="crinkle, warp" mo="1-1" />
+  <verb in="gonfler" tn="inflate, blow up, swell, puff up" mo="1-1" />
+  <verb in="gorger" tn="gorge oneself (eat greedily)" mo="1-2B" />
+  <verb in="gouacher" tn="paint with gouache" mo="1-1" />
+  <verb in="gouailler" tn="mock, jeer at" mo="1-1" />
+  <verb in="goudronner" tn="tarmac, tar, tar up" mo="1-1" />
+  <verb in="gouger" tn="work (a material) with a gouge" mo="1-2B" />
+  <verb in="goujonner" tn="dowel" mo="1-1" />
+  <verb in="goupiller" tn="pin (together)" mo="1-1" />
+  <verb in="gourer" tn="goof up, mess up, screw up, doubt" re="t" mo="1-1" />
+  <verb in="gourmander" tn="scold, lard (food)" mo="1-1" />
+  <verb in="gournabler" tn="treenail" mo="1-1" />
+  <verb in="goûter" tn="taste, try (a food)" mo="1-1" />
+  <verb in="goutter" tn="drip" mo="1-1" />
+  <verb in="gouverner" tn="govern, steer" mo="1-1" />
+  <verb in="gracier" tn="pardon, issue a pardon to" mo="1-1" />
+  <verb in="graduer" tn="graduate" mo="1-1" />
+  <verb in="graffiter" tn="apply graffiti to" mo="1-1" />
+  <verb in="grailler" tn="nosh, snack" mo="1-1" />
+  <verb in="graillonner" tn="smell of grease" mo="1-1" />
+  <verb in="grainer" tn="granulate, seed" mo="1-1" />
+  <verb in="graisser" tn="grease, oil, lubricate, smear" mo="1-1" />
+  <verb in="grammaticaliser" tn="grammaticalize" mo="1-1" />
+  <verb in="grandir" tn="grow, get bigger, magnify" mo="2-1" />
+  <verb in="graniter" tn="granite" mo="1-1" />
+  <verb in="granuler" tn="granulate, grain" mo="1-1" />
+  <verb in="graphiter" tn="apply graphite to" mo="1-1" />
+  <verb in="grappiller" tn="pick grapes, scrape together, rake together" mo="1-1" />
+  <verb in="grasseyer" tn="pronounce uvularly" mo="1-1" />
+  <verb in="graticuler" tn="divide into squares" mo="1-1" />
+  <verb in="gratifier" tn="gratify, reward" mo="1-1" />
+  <verb in="gratiner" tn="grill" mo="1-1" />
+  <verb in="gratouiller" tn="itch, scratch" mo="1-1" />
+  <verb in="gratter" tn="scratch, scrub, scrape" mo="1-1" />
+  <verb in="grattouiller" tn="itch, scratch" mo="1-1" />
+  <verb in="graver" tn="engrave, carve" mo="1-1" />
+  <verb in="gravillonner" tn="gravel, cover with gravel" mo="1-1" />
+  <verb in="gravir" tn="climb up" mo="2-1" />
+  <verb in="graviter" tn="orbit, gravitate" mo="1-1" />
+  <verb in="gréciser" tn="render Grecian, translate into Greek" mo="1-1" />
+  <verb in="grecquer" tn="incise" mo="1-1" />
+  <verb in="gréer" tn="rig" mo="1-1" />
+  <verb in="greffer" tn="transplant, graft" mo="1-1" />
+  <verb in="grêler" tn="hail" mo="1-1" />
+  <verb in="grelotter" tn="shiver, tremble" mo="1-1" />
+  <verb in="grenailler" tn="granulate" mo="1-1" />
+  <verb in="greneler" tn="grain" mo="1-3A" />
+  <verb in="grener" tn="seed, produce seeds" mo="1-4" />
+  <verb in="grenouiller" tn="play in water, swim, bathe" mo="1-1" />
+  <verb in="gréser" tn="glaze" mo="1-5" />
+  <verb in="grésiller" tn="crackle, sizzle" mo="1-1" />
+  <verb in="grever" tn="put a burden on" mo="1-4" />
+  <verb in="gribouiller" tn="scribble, doodle" mo="1-1" />
+  <verb in="griffer" tn="scratch" mo="1-1" />
+  <verb in="griffonner" tn="scribble, scrawl" mo="1-1" />
+  <verb in="grigner" tn="bare one’s teeth, crease, wrinkle" mo="1-1" />
+  <verb in="grignoter" tn="nibble, snack" mo="1-1" />
+  <verb in="grillager" tn="enclose with wire netting" mo="1-2B" />
+  <verb in="griller" tn="toast, grill" mo="1-1" />
+  <verb in="grimacer" tn="grimace" mo="1-2A" />
+  <verb in="grimer" tn="apply makeup" mo="1-1" />
+  <verb in="grimper" tn="climb, climb up" mo="1-1" />
+  <verb in="grincer" tn="squeak, creak, rasp, squeal, gnash, squawk" mo="1-2A" />
+  <verb in="gripper" tn="grab, grasp" mo="1-1" />
+  <verb in="grisailler" tn="gray, go gray, turn gray" mo="1-1" />
+  <verb in="griser" tn="gray, become gray, gray out" mo="1-1" />
+  <verb in="grisoller" tn="cry out as a lark" mo="1-1" />
+  <verb in="grisonner" tn="become gray" mo="1-1" />
+  <verb in="griveler" tn="leave without paying, make money on the side" mo="1-3A" />
+  <verb in="grognasser" tn="grumble, whine, complain, whinge" mo="1-1" />
+  <verb in="grogner" tn="grunt, growl, snarl" mo="1-1" />
+  <verb in="grognonner" tn="growl" mo="1-1" />
+  <verb in="grommeler" tn="grumble" mo="1-3A" />
+  <verb in="gronder" tn="rumble, roar, growl, tell off, scowl" mo="1-1" />
+  <verb in="grossir" tn="increase, make larger, get fat" mo="2-1" />
+  <verb in="grossoyer" tn="engross" mo="1-7A" />
+  <verb in="grouiller" tn="mill about, swarm with people, swarm, crawl" mo="1-1" />
+  <verb in="grouper" tn="group" mo="1-1" />
+  <verb in="gruger" tn="dupe, con, rob" mo="1-2B" />
+  <verb in="grumeler" tn="become lumpy" re="t" mo="1-3A" />
+  <verb in="guéer" tn="ford, bathe" mo="1-1" />
+  <verb in="guérir" tn="cure, heal, recover" mo="2-1" />
+  <verb in="guerroyer" tn="wage war, hassle, bother" mo="1-7A" />
+  <verb in="guêtrer" tn="put on gaiters" mo="1-1" />
+  <verb in="guetter" tn="watch (intently), watch for, lie in wait" mo="1-1" />
+  <verb in="gueuler" tn="yell, scream" mo="1-1" />
+  <verb in="gueuletonner" tn="feast" mo="1-1" />
+  <verb in="guider" tn="guide" mo="1-1" />
+  <verb in="guigner" tn="eye, sneak a look at" mo="1-1" />
+  <verb in="guillemeter" tn="put in quotation marks" mo="1-3B" />
+  <verb in="guillocher" tn="engrave" mo="1-1" />
+  <verb in="guillotiner" tn="guillotine, execute with a guillotine" mo="1-1" />
+  <verb in="guincher" tn="boogie (dance)" mo="1-1" />
+  <verb in="guinder" tn="raise, erect, hoist" mo="1-1" />
+  <verb in="guiper" tn="wind, twist" mo="1-1" />
+  <verb in="habiliter" tn="habilitate" mo="1-1" />
+  <verb in="habiller" tn="get dressed" re="t" mo="1-1" />
+  <verb in="habiter" tn="live in, occupy" mo="1-1" />
+  <verb in="habituer" tn="get used to something" re="t" mo="1-1" />
+  <verb in="hacher" tn="chop up, mince" mo="1-1" />
+  <verb in="hachurer" tn="hachure" mo="1-1" />
   <verb in="haïr" tn="hate" mo="2-3" />
+  <verb in="halener" tn="scent, exhale" mo="1-4" />
+  <verb in="haler" tn="haul, tow" mo="1-1" />
+  <verb in="hâler" tn="tan, get a tan" mo="1-1" />
+  <verb in="haleter" tn="pant" mo="1-4" />
+  <verb in="halluciner" tn="hallucinate" mo="1-1" />
+  <verb in="halogéner" tn="halogenate" mo="1-5" />
+  <verb in="hameçonner" tn="put a hook on, scam" mo="1-1" />
+  <verb in="hancher" tn="put one’s weight on one hip" mo="1-1" />
+  <verb in="handicaper" tn="handicap" mo="1-1" />
+  <verb in="hannetonner" tn="exterminate June bugs" mo="1-1" />
+  <verb in="hanter" tn="haunt, frequent" mo="1-1" />
+  <verb in="happer" tn="grab, snatch, snap up" mo="1-1" />
+  <verb in="haranguer" tn="harangue, excite, rile up" mo="1-1" />
+  <verb in="harasser" tn="exhaust, wear out" mo="1-1" />
+  <verb in="harceler" tn="hassle, bother, disrupt" mo="1-4" />
+  <verb in="harder" tn="harness together" mo="1-1" />
+  <verb in="harmoniser" tn="harmonize" mo="1-1" />
+  <verb in="harnacher" tn="harness" mo="1-1" />
+  <verb in="harponner" tn="harpoon" mo="1-1" />
+  <verb in="hasarder" tn="hazard" mo="1-1" />
+  <verb in="hâter" tn="speed up, hasten" mo="1-1" />
+  <verb in="haubaner" tn="secure with a wire" mo="1-1" />
+  <verb in="hausser" tn="raise, shrug" mo="1-1" />
+  <verb in="haver" tn="cut" mo="1-1" />
+  <verb in="héberger" tn="house, accommodate" mo="1-2B" />
+  <verb in="hébéter" tn="stupefy" mo="1-5" />
+  <verb in="hébraïser" tn="Hebraize, study Hebrew" mo="1-1" />
+  <verb in="héler" tn="hail, call out loudly" mo="1-5" />
+  <verb in="hélitreuiller" tn="winch up into a helicopter" mo="1-1" />
+  <verb in="helléniser" tn="Hellenize" mo="1-1" />
+  <verb in="hennir" tn="neigh, whinny" mo="2-1" />
+  <verb in="herbager" tn="pasture, graze" mo="1-2B" />
+  <verb in="herboriser" tn="herborize, collect herbs for medicinal uses" mo="1-1" />
+  <verb in="hercher" tn="push a cart" mo="1-1" />
+  <verb in="hérisser" tn="bristle, ruffle" mo="1-1" />
+  <verb in="hérissonner" tn="bristle" re="t" mo="1-1" />
+  <verb in="hériter" tn="inherit" mo="1-1" />
+  <verb in="herscher" tn="push a cart" mo="1-1" />
+  <verb in="herser" tn="harrow" mo="1-1" />
+  <verb in="hésiter" tn="hesitate" mo="1-1" />
+  <verb in="heurter" tn="strike, hit, clash, conflict with" mo="1-1" />
+  <verb in="hiberner" tn="hibernate" mo="1-1" />
+  <verb in="hiérarchiser" tn="hierarchize, prioritize" mo="1-1" />
+  <verb in="hisser" tn="hoist, raise" mo="1-1" />
+  <verb in="historier" tn="spin a yarn" mo="1-1" />
+  <verb in="hiverner" tn="winter, hibernate" mo="1-1" />
+  <verb in="hocher" tn="nod" mo="1-1" />
+  <verb in="holographier" tn="write a will by hand" mo="1-1" />
+  <verb in="homogénéifier" tn="homogenize" mo="1-1" />
+  <verb in="homogénéiser" tn="homogenize" mo="1-1" />
+  <verb in="homologuer" tn="officially recognize, ratify" mo="1-1" />
+  <verb in="hongrer" tn="castrate a horse" mo="1-1" />
+  <verb in="hongroyer" tn="tan with alum" mo="1-7A" />
+  <verb in="honnir" tn="shame, disgrace, dishonor" mo="2-1" />
+  <verb in="honorer" tn="honor" mo="1-1" />
+  <verb in="hoqueter" tn="hiccup" mo="1-3B" />
+  <verb in="hormoner" tn="treat with hormones" mo="1-1" />
+  <verb in="horrifier" tn="horrify" mo="1-1" />
+  <verb in="horripiler" tn="exasperate, infuriate" mo="1-1" />
+  <verb in="hospitaliser" tn="hospitalize" mo="1-1" />
+  <verb in="houblonner" tn="add hops to" mo="1-1" />
+  <verb in="houpper" tn="add a crest to" mo="1-1" />
+  <verb in="hourder" tn="fill with rubble" mo="1-1" />
+  <verb in="houspiller" tn="chide, scold, criticize, rebuke, torment" mo="1-1" />
+  <verb in="housser" tn="cover with a dustsheet, dust" mo="1-1" />
+  <verb in="hucher" tn="cry out" mo="1-1" />
+  <verb in="huer" tn="boo" mo="1-1" />
+  <verb in="huiler" tn="oil, oil up" mo="1-1" />
+  <verb in="hululer" tn="hoot, cry out as an owl" mo="1-1" />
+  <verb in="humaniser" tn="humanize, civilize" mo="1-1" />
+  <verb in="humecter" tn="moisten" mo="1-1" />
+  <verb in="humer" tn="smell" mo="1-1" />
+  <verb in="humidifier" tn="humidify" mo="1-1" />
+  <verb in="humilier" tn="humiliate" mo="1-1" />
+  <verb in="hurler" tn="shout, yell, howl" mo="1-1" />
+  <verb in="hybrider" tn="hybridize" mo="1-1" />
+  <verb in="hydrater" tn="hydrate" mo="1-1" />
+  <verb in="hydrofuger" tn="dampproof, make water repellent" mo="1-2B" />
+  <verb in="hydrogéner" tn="hydrogenate" mo="1-5" />
+  <verb in="hydrolyser" tn="hydrolyze" mo="1-1" />
+  <verb in="hypertrophier" tn="hypertrophy" mo="1-1" />
+  <verb in="hypnotiser" tn="hypnotize, mesmerize" mo="1-1" />
+  <verb in="hypostasier" tn="hypostatize" mo="1-1" />
+  <verb in="hypothéquer" tn="hypothecate, mortgage" mo="1-5" />
+  <verb in="idéaliser" tn="idealize" mo="1-1" />
+  <verb in="identifier" tn="identify, log in" mo="1-1" />
+  <verb in="idolâtrer" tn="idolize, worship" mo="1-1" />
+  <verb in="ignifuger" tn="fireproof" mo="1-2B" />
+  <verb in="ignorer" tn="ignore, be unaware of, be ignorant of" mo="1-1" />
+  <verb in="illuminer" tn="illuminate, light up, enlighten" mo="1-1" />
+  <verb in="illusionner" tn="delude" mo="1-1" />
+  <verb in="illustrer" tn="illustrate" mo="1-1" />
+  <verb in="imaginer" tn="imagine" mo="1-1" />
+  <verb in="imbiber" tn="soak, saturate" mo="1-1" />
+  <verb in="imbriquer" tn="imbricate, nest one within another" mo="1-1" />
+  <verb in="imiter" tn="imitate" mo="1-1" />
+  <verb in="immatriculer" tn="register" mo="1-1" />
+  <verb in="immerger" tn="immerse" mo="1-2B" />
+  <verb in="immigrer" tn="immigrate" mo="1-1" />
+  <verb in="immiscer" tn="interfere with" re="t" mo="1-2A" />
+  <verb in="immobiliser" tn="immobilize" mo="1-1" />
+  <verb in="immoler" tn="sacrifice, massacre, kill" mo="1-1" />
+  <verb in="immortaliser" tn="immortalize" mo="1-1" />
+  <verb in="immuniser" tn="immunize" mo="1-1" />
+  <verb in="impartir" tn="assign" mo="2-1" />
+  <verb in="impatienter" tn="become impatient, make impatient" mo="1-1" />
+  <verb in="impatroniser" tn="be in charge, take over" re="t" mo="1-1" />
+  <verb in="imperméabiliser" tn="waterproof, make waterproof" mo="1-1" />
+  <verb in="impétrer" tn="procure, secure" mo="1-5" />
+  <verb in="implanter" tn="build, install, open, establish, instill, embed, implant" mo="1-1" />
+  <verb in="implémenter" tn="implement" mo="1-1" />
+  <verb in="impliquer" tn="implicate, accuse, imply" mo="1-1" />
+  <verb in="implorer" tn="beg, plead, implore" mo="1-1" />
+  <verb in="imploser" tn="implode" mo="1-1" />
   <verb in="importer" tn="matter, import" mo="1-1" fr="93" />
+  <verb in="importuner" tn="importune, annoy" mo="1-1" />
+  <verb in="imposer" tn="impose" mo="1-1" />
+  <verb in="imprégner" tn="impregnate, imbue" mo="1-5" />
+  <verb in="impressionner" tn="impress, wow, overawe" mo="1-1" />
+  <verb in="imprimer" tn="print, print out" mo="1-1" />
+  <verb in="improviser" tn="improvise" mo="1-1" />
+  <verb in="impulser" tn="encourage, egg on" mo="1-1" />
+  <verb in="imputer" tn="attribute, impute, put down to" mo="1-1" />
+  <verb in="inactiver" tn="inactivate, deactivate" mo="1-1" />
+  <verb in="inaugurer" tn="inaugurate" mo="1-1" />
+  <verb in="incarcérer" tn="incarcerate" mo="1-5" />
+  <verb in="incarner" tn="incarnate, embody, personify" mo="1-1" />
+  <verb in="incendier" tn="burn down, roast" mo="1-1" />
+  <verb in="incidenter" tn="disrupt proceedings" mo="1-1" />
+  <verb in="incinérer" tn="incinerate" mo="1-5" />
+  <verb in="inciser" tn="incise, make an incision" mo="1-1" />
+  <verb in="inciter" tn="urge, impel" mo="1-1" />
+  <verb in="incliner" tn="incline" mo="1-1" />
   <verb in="inclure" tn="include" mo="5-16B" />
+  <verb in="incomber" tn="behoove" mo="1-1" />
+  <verb in="incommoder" tn="incommode, bother, disconcert" mo="1-1" />
+  <verb in="incorporer" tn="incorporate, embed" mo="1-1" />
+  <verb in="incriminer" tn="incriminate, accuse" mo="1-1" />
+  <verb in="incruster" tn="embed, inlay" mo="1-1" />
+  <verb in="incuber" tn="incubate" mo="1-1" />
+  <verb in="inculper" tn="charge (in a legal context)" mo="1-1" />
+  <verb in="inculquer" tn="inculcate, instill into" mo="1-1" />
+  <verb in="incurver" tn="bend into a curve" mo="1-1" />
+  <verb in="indemniser" tn="compensate" mo="1-1" />
+  <verb in="indexer" tn="index, put into an index" mo="1-1" />
+  <verb in="indifférer" tn="leave indifferent" mo="1-5" />
+  <verb in="indigner" tn="fill with indignation, exasperate" mo="1-1" />
+  <verb in="indiquer" tn="connote, show, indicate" mo="1-1" />
+  <verb in="indisposer" tn="irritate, annoy, upset" mo="1-1" />
+  <verb in="individualiser" tn="individualize, personalize" mo="1-1" />
+  <verb in="induire" tn="induce, cause" mo="5-9A" />
+  <verb in="indurer" tn="harden" mo="1-1" />
+  <verb in="industrialiser" tn="industrialize" mo="1-1" />
+  <verb in="infantiliser" tn="infantilize" mo="1-1" />
+  <verb in="infatuer" tn="infatuate" mo="1-1" />
+  <verb in="infecter" tn="infect" mo="1-1" />
+  <verb in="inféoder" tn="infeudate, subjugate, subdue" mo="1-1" />
+  <verb in="inférer" tn="infer" mo="1-5" />
+  <verb in="inférioriser" tn="belittle, make someone feel inferior" mo="1-1" />
+  <verb in="infester" tn="infest" mo="1-1" />
+  <verb in="infiltrer" tn="infiltrate" re="t" mo="1-1" />
+  <verb in="infirmer" tn="weaken, undermine, invalidate" mo="1-1" />
+  <verb in="infléchir" tn="bend, curve" mo="2-1" />
+  <verb in="infliger" tn="inflict, impose" mo="1-2B" />
+  <verb in="influencer" tn="influence" mo="1-2A" />
+  <verb in="influer" tn="influence" mo="1-1" />
+  <verb in="informatiser" tn="computerize" mo="1-1" />
+  <verb in="informer" tn="inform, enlighten, impart knowledge (upon)" mo="1-1" />
+  <verb in="infuser" tn="infuse, inject" mo="1-1" />
+  <verb in="ingénier" tn="strive" re="t" mo="1-1" />
+  <verb in="ingérer" tn="ingest, to swallow" mo="1-5" />
+  <verb in="ingurgiter" tn="swallow, drink avidly" mo="1-1" />
+  <verb in="inhaler" tn="inhale" mo="1-1" />
+  <verb in="inhiber" tn="inhibit" mo="1-1" />
+  <verb in="inhumer" tn="bury, inter" mo="1-1" />
+  <verb in="initialiser" tn="initialize" mo="1-1" />
+  <verb in="initier" tn="initiate, start" mo="1-1" />
+  <verb in="injecter" tn="inject" mo="1-1" />
+  <verb in="injurier" tn="howl abuse at" mo="1-1" />
+  <verb in="innerver" tn="innervate" mo="1-1" />
+  <verb in="innocenter" tn="declare innocent, absolve" mo="1-1" />
+  <verb in="innover" tn="innovate" mo="1-1" />
+  <verb in="inoculer" tn="inoculate" mo="1-1" />
+  <verb in="inonder" tn="flood, inundate" mo="1-1" />
+  <verb in="inquiéter" tn="worry" mo="1-5" />
+  <verb in="inscrire" tn="inscribe, jot down, sign up" mo="5-7" />
+  <verb in="insculper" tn="stamp" mo="1-1" />
+  <verb in="insculpter" tn="stamp" mo="1-1" />
+  <verb in="inséminer" tn="inseminate" mo="1-1" />
+  <verb in="insensibiliser" tn="anesthetize, desensitize (to an allergy)" mo="1-1" />
+  <verb in="insérer" tn="insert" mo="1-5" />
+  <verb in="insinuer" tn="insinuate, hint" mo="1-1" />
+  <verb in="insister" tn="insist" mo="1-1" />
+  <verb in="insoler" tn="sunbathe" re="t" mo="1-1" />
+  <verb in="insolubiliser" tn="insolubilize" mo="1-1" />
+  <verb in="insonoriser" tn="soundproof:" mo="1-1" />
+  <verb in="inspecter" tn="inspect" mo="1-1" />
+  <verb in="inspirer" tn="inspire, breathe" mo="1-1" />
+  <verb in="installer" tn="install, place" mo="1-1" />
+  <verb in="instaurer" tn="set up, establish" mo="1-1" />
+  <verb in="instiguer" tn="inspire, motivate" mo="1-1" />
+  <verb in="instiller" tn="instill" mo="1-1" />
+  <verb in="instituer" tn="institute, bring forth" mo="1-1" />
+  <verb in="institutionnaliser" tn="institutionalize" mo="1-1" />
+  <verb in="instruire" tn="instruct, teach, try (a case)" mo="5-9A" />
+  <verb in="instrumentaliser" tn="instrumentalize, exploit, use (for selfish gains)" mo="1-1" />
+  <verb in="instrumenter" tn="instrument, draw up, orchestrate" mo="1-1" />
+  <verb in="insuffler" tn="infuse, instill" mo="1-1" />
+  <verb in="insulter" tn="insult" mo="1-1" />
+  <verb in="insupporter" tn="be unbearable or extremely irritating" mo="1-1" />
+  <verb in="insurger" tn="rise up, protest (against)" re="t" mo="1-2B" />
+  <verb in="intailler" tn="etch" mo="1-1" />
+  <verb in="intégrer" tn="integrate, incorporate, join, join up, integrate" mo="1-5" />
+  <verb in="intellectualiser" tn="intellectualize" mo="1-1" />
+  <verb in="intensifier" tn="intensify" mo="1-1" />
+  <verb in="intenter" tn="file in court, bring to court" mo="1-1" />
+  <verb in="interagir" tn="interact (with)" mo="2-1" />
+  <verb in="intercaler" tn="intercalate, insert, join in a ruck" mo="1-1" />
+  <verb in="intercéder" tn="intercede" mo="1-5" />
+  <verb in="intercepter" tn="intercept" mo="1-1" />
+  <verb in="interclasser" tn="merge" mo="1-1" />
+  <verb in="interconnecter" tn="interconnect" mo="1-1" />
+  <verb in="interdire" tn="forbid, ban, prohibit, interdict" mo="5-8B" />
   <verb in="jeter" tn="throw" mo="1-3B" />
   <verb in="joindre" tn="join" mo="5-12" />
   <verb in="jouer" tn="play" mo="1-1" fr="55" />
@@ -2756,6 +3741,7 @@
   <verb in="travailler" tn="work" mo="1-1" fr="71" />
   <verb in="tressaillir" tn="wince" mo="3-2A" />
   <verb in="trouver" tn="find" mo="1-1" fr="16" />
+  <verb in="ululer" tn="hoot, cry out as an owl" mo="1-1" />
   <verb in="utiliser" tn="use, employ" mo="1-1" fr="90" />
   <verb in="vaincre" tn="vanquish" mo="5-25" />
   <verb in="valoir" tn="be worth" mo="4-5A" />
