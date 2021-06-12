@@ -8,6 +8,62 @@
 import SwiftUI
 
 extension Text {
+  init(verb: Verb, tense: Tense) {
+    let conjugation: String
+    switch Conjugator.conjugate(infinitif: verb.infinitif, tense: tense) {
+    case .success(let value):
+      conjugation = value
+    default:
+      fatalError("Could not conjugate \(verb.infinitif) for \(tense.displayName).")
+    }
+
+    switch tense {
+    case .participePassé, .participePrésent, .radicalFutur:
+      self.init(mixedCaseString: conjugation)
+      return
+    default:
+      self.init("")
+
+// TODO: Build mixedCaseString with subject pronoun and reflexive pronoun.
+// TODO: For all verbs, use .strikeThrough() if conjugation is defective.
+
+//    case .indicatifPrésent(_):
+//      <#code#>
+//    case .passéSimple(_):
+//      <#code#>
+//    case .imparfait(_):
+//      <#code#>
+//    case .futurSimple(_):
+//      <#code#>
+//    case .conditionnelPrésent(_):
+//      <#code#>
+//    case .subjonctifPrésent(_):
+//      <#code#>
+//    case .subjonctifImparfait(_):
+//      <#code#>
+//    case .impératif(_):
+//      <#code#>
+//    case .passéComposé(_):
+//      <#code#>
+//    case .plusQueParfait(_):
+//      <#code#>
+//    case .passéAntérieur(_):
+//      <#code#>
+//    case .passéSurcomposé(_):
+//      <#code#>
+//    case .futurAntérieur(_):
+//      <#code#>
+//    case .conditionnelPassé(_):
+//      <#code#>
+//    case .subjonctifPassé(_):
+//      <#code#>
+//    case .subjonctifPlusQueParfait(_):
+//      <#code#>
+//    case .impératifPassé(_):
+//      <#code#>
+    }
+  }
+
   init(mixedCaseString: String) {
     self.init("")
 

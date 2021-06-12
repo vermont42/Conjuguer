@@ -52,6 +52,17 @@ struct VerbView: View {
         Spacer()
 
         Group {
+          Text("P. Passé, P. Présent, R. Futur")
+            .subheadingLabel()
+
+          let passéPart = Text(verb: verb, tense: .participePassé).font(bodyFont) + Text(", ").font(bodyFont)
+          let présentPart = Text(verb: verb, tense: .participePrésent).font(bodyFont) + Text(", ").font(bodyFont)
+          let futurPart = Text(verb: verb, tense: .radicalFutur).font(bodyFont)
+
+          passéPart + présentPart + futurPart
+
+          Spacer()
+
           Group {
             Text("Indicatif Présent")
               .subheadingLabel()
@@ -82,7 +93,9 @@ struct VerbView: View {
             }
 
             Spacer()
+          }
 
+          Group {
             Text("Imparfait")
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
@@ -96,9 +109,7 @@ struct VerbView: View {
               }
             }
             Spacer()
-          }
 
-          Group {
             Text("Futur Simple")
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in

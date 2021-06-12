@@ -19,15 +19,17 @@ struct VerbBrowseView: View {
             Text(type.displayName).tag(type)
           }
         }
-        .pickerStyle(SegmentedPickerStyle())
+          .pickerStyle(SegmentedPickerStyle())
 
         ScrollView {
-          ForEach(store.verbs, id: \.self) { verb in
-            NavigationLink(destination: VerbView(verb: verb), label: {
-              Text(verb.infinitif)
-                .tableText()
-            })
-            .buttonStyle(PlainButtonStyle())
+          LazyVStack {
+            ForEach(store.verbs, id: \.self) { verb in
+              NavigationLink(destination: VerbView(verb: verb), label: {
+                Text(verb.infinitif)
+                  .tableText()
+              })
+              .buttonStyle(PlainButtonStyle())
+            }
           }
           .navigationBarTitle("Verbs")
         }
