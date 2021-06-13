@@ -30,23 +30,30 @@ struct VerbView: View {
             .bodyLabel()
         }
 
-        if verb.isReflexive && verb.isDefective {
-          Text("Reflexive, Defective")
-            .bodyLabel()
-        } else if !verb.isReflexive && verb.isDefective {
-          Text("Defective")
-            .bodyLabel()
-        } else if verb.isReflexive && !verb.isDefective {
-          Text("Reflexive")
-            .bodyLabel()
-        }
+        Group {
+          if verb.isReflexive && verb.isDefective {
+            Text("Reflexive, Defective")
+              .bodyLabel()
+          } else if !verb.isReflexive && verb.isDefective {
+            Text("Defective")
+              .bodyLabel()
+          } else if verb.isReflexive && !verb.isDefective {
+            Text("Reflexive")
+              .bodyLabel()
+          }
 
-        if verb.auxiliary == .être {
-          Text("Auxiliary: être")
-            .bodyLabel()
-        } else {
-          Text("Auxiliary: avoir")
-            .bodyLabel()
+          if verb.hasAspiratedH {
+            Text("Aspirated H")
+              .bodyLabel()
+          }
+
+          if verb.auxiliary == .être {
+            Text("Auxiliary: être")
+              .bodyLabel()
+          } else {
+            Text("Auxiliary: avoir")
+              .bodyLabel()
+          }
         }
 
         Spacer()
@@ -69,7 +76,7 @@ struct VerbView: View {
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
               switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .indicatifPrésent(personNumber)) {
               case .success(let value):
-                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                 Text(mixedCaseString: pronounAndConjugation)
                   .bodyLabel()
               default:
@@ -84,7 +91,7 @@ struct VerbView: View {
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
               switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .passéSimple(personNumber)) {
               case .success(let value):
-                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                 Text(mixedCaseString: pronounAndConjugation)
                   .bodyLabel()
               default:
@@ -101,7 +108,7 @@ struct VerbView: View {
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
               switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .imparfait(personNumber)) {
               case .success(let value):
-                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                 Text(mixedCaseString: pronounAndConjugation)
                   .bodyLabel()
               default:
@@ -115,7 +122,7 @@ struct VerbView: View {
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
               switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .futurSimple(personNumber)) {
               case .success(let value):
-                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                 Text(mixedCaseString: pronounAndConjugation)
                   .bodyLabel()
               default:
@@ -130,7 +137,7 @@ struct VerbView: View {
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
               switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .conditionnelPrésent(personNumber)) {
               case .success(let value):
-                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                 Text(mixedCaseString: pronounAndConjugation)
                   .bodyLabel()
               default:
@@ -147,7 +154,7 @@ struct VerbView: View {
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
               switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .subjonctifPrésent(personNumber)) {
               case .success(let value):
-                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                 Text(mixedCaseString: pronounAndConjugation)
                   .bodyLabel()
               default:
@@ -162,7 +169,7 @@ struct VerbView: View {
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
               switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .subjonctifImparfait(personNumber)) {
               case .success(let value):
-                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                 Text(mixedCaseString: pronounAndConjugation)
                   .bodyLabel()
               default:
@@ -202,7 +209,7 @@ struct VerbView: View {
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .passéComposé(personNumber)) {
                 case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                   Text(mixedCaseString: pronounAndConjugation)
                     .bodyLabel()
                 default:
@@ -217,7 +224,7 @@ struct VerbView: View {
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .plusQueParfait(personNumber)) {
                 case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                   Text(mixedCaseString: pronounAndConjugation)
                     .bodyLabel()
                 default:
@@ -232,7 +239,7 @@ struct VerbView: View {
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .passéAntérieur(personNumber)) {
                 case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                   Text(mixedCaseString: pronounAndConjugation)
                     .bodyLabel()
                 default:
@@ -249,7 +256,7 @@ struct VerbView: View {
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .passéSurcomposé(personNumber)) {
                 case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                   Text(mixedCaseString: pronounAndConjugation)
                     .bodyLabel()
                 default:
@@ -264,7 +271,7 @@ struct VerbView: View {
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .futurAntérieur(personNumber)) {
                 case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                   Text(mixedCaseString: pronounAndConjugation)
                     .bodyLabel()
                 default:
@@ -279,7 +286,7 @@ struct VerbView: View {
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .conditionnelPassé(personNumber)) {
                 case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                   Text(mixedCaseString: pronounAndConjugation)
                     .bodyLabel()
                 default:
@@ -296,7 +303,7 @@ struct VerbView: View {
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .subjonctifPassé(personNumber)) {
                 case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                   Text(mixedCaseString: pronounAndConjugation)
                     .bodyLabel()
                 default:
@@ -311,7 +318,7 @@ struct VerbView: View {
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .subjonctifPlusQueParfait(personNumber)) {
                 case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive)
+                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
                   Text(mixedCaseString: pronounAndConjugation)
                     .bodyLabel()
                 default:

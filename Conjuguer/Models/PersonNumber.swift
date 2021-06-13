@@ -54,32 +54,34 @@ enum PersonNumber: String, CaseIterable {
     PersonNumber.impératifPersonNumbers.contains(self)
   }
 
-  func pronounAndConjugation(_ conjugation: String, isReflexive: Bool) -> String {
+  func pronounAndConjugation(_ conjugation: String, isReflexive: Bool, hasAspiratedH: Bool) -> String {
     let normalizedFirstLetter = String(conjugation.first ?? Character(" "))
       .folding(options: .diacriticInsensitive, locale: Util.french)
       .lowercased(with: Util.french)
     let firstLetterIsVowel = ["a", "e", "i", "o", "u"].contains(normalizedFirstLetter)
+    let firstLetterIsUnaspiratedH = normalizedFirstLetter == "h" && !hasAspiratedH
+    let firstLetterImpliesLiaison = firstLetterIsVowel || firstLetterIsUnaspiratedH
 
     let preamble: String
     if isReflexive {
       switch self {
       case .firstSingular:
-        preamble = firstLetterIsVowel ? "je m'" : "je me "
+        preamble = firstLetterImpliesLiaison ? "je m'" : "je me "
       case .secondSingular:
-        preamble = firstLetterIsVowel ? "tu t'" : "tu te "
+        preamble = firstLetterImpliesLiaison ? "tu t'" : "tu te "
       case .thirdSingular:
-        preamble = firstLetterIsVowel ? "il s'" : "il se "
+        preamble = firstLetterImpliesLiaison ? "il s'" : "il se "
       case .firstPlural:
         preamble = "nous nous "
       case .secondPlural:
         preamble = "vous vous "
       case .thirdPlural:
-        preamble = firstLetterIsVowel ? "ils s'" : "ils se "
+        preamble = firstLetterImpliesLiaison ? "ils s'" : "ils se "
       }
     } else {
       switch self {
       case .firstSingular:
-        preamble = firstLetterIsVowel ? "j'" : "je "
+        preamble = firstLetterImpliesLiaison ? "j'" : "je "
       case .secondSingular:
         preamble = "tu "
       case .thirdSingular:

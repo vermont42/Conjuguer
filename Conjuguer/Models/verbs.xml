@@ -3409,84 +3409,99 @@
   <verb in="habiller" tn="get dressed" re="t" mo="1-1" />
   <verb in="habiter" tn="live in, occupy" mo="1-1" />
   <verb in="habituer" tn="get used to something" re="t" mo="1-1" />
-  <verb in="hacher" tn="chop up, mince" mo="1-1" />
+  <verb in="hâbler" tn="speak, engage in exageration" ah="t" mo="1-1" />
+  <verb in="hacher" tn="chop up, mince" ah="t" mo="1-1" />
   <verb in="hachurer" tn="hachure" mo="1-1" />
-  <verb in="haïr" tn="hate" mo="2-3" />
+  <verb in="haïr" tn="hate" ah="t" mo="2-3" />
   <verb in="halener" tn="scent, exhale" mo="1-4" />
-  <verb in="haler" tn="haul, tow" mo="1-1" />
-  <verb in="hâler" tn="tan, get a tan" mo="1-1" />
-  <verb in="haleter" tn="pant" mo="1-4" />
+  <verb in="haler" tn="haul, tow" ah="t" mo="1-1" />
+  <verb in="hâler" tn="tan, get a tan" ah="t" mo="1-1" />
+  <verb in="haleter" tn="pant" ah="t" mo="1-4" />
   <verb in="halluciner" tn="hallucinate" mo="1-1" />
   <verb in="halogéner" tn="halogenate" mo="1-5" />
   <verb in="hameçonner" tn="put a hook on, scam" mo="1-1" />
-  <verb in="hancher" tn="put one’s weight on one hip" mo="1-1" />
-  <verb in="handicaper" tn="handicap" mo="1-1" />
-  <verb in="hannetonner" tn="exterminate June bugs" mo="1-1" />
-  <verb in="hanter" tn="haunt, frequent" mo="1-1" />
-  <verb in="happer" tn="grab, snatch, snap up" mo="1-1" />
-  <verb in="haranguer" tn="harangue, excite, rile up" mo="1-1" />
-  <verb in="harasser" tn="exhaust, wear out" mo="1-1" />
-  <verb in="harceler" tn="hassle, bother, disrupt" mo="1-4" />
-  <verb in="harder" tn="harness together" mo="1-1" />
+  <verb in="hancher" tn="put one’s weight on one hip" ah="t" mo="1-1" />
+  <verb in="handicaper" tn="handicap" ah="t" mo="1-1" />
+  <verb in="hannetonner" tn="exterminate June bugs" ah="t" mo="1-1" />
+  <verb in="hanter" tn="haunt, frequent" ah="t" mo="1-1" />
+  <verb in="happer" tn="grab, snatch, snap up" ah="t" mo="1-1" />
+  <verb in="haranguer" tn="harangue, excite, rile up" ah="t" mo="1-1" />
+  <verb in="harasser" tn="exhaust, wear out" ah="t" mo="1-1" />
+  <verb in="harceler" tn="hassle, bother, disrupt" ah="t" mo="1-4" />
+  <verb in="harder" tn="harness together" ah="t" mo="1-1" />
+  <verb in="haricoter" tn="take small risks in gambling or business" ah="t" mo="1-1" />
   <verb in="harmoniser" tn="harmonize" mo="1-1" />
-  <verb in="harnacher" tn="harness" mo="1-1" />
-  <verb in="harponner" tn="harpoon" mo="1-1" />
-  <verb in="hasarder" tn="hazard" mo="1-1" />
-  <verb in="hâter" tn="speed up, hasten" mo="1-1" />
-  <verb in="haubaner" tn="secure with a wire" mo="1-1" />
-  <verb in="hausser" tn="raise, shrug" mo="1-1" />
-  <verb in="haver" tn="cut" mo="1-1" />
+  <verb in="harnacher" tn="harness" ah="t" mo="1-1" />
+  <verb in="harpailler" tn="quarrel, squabble" ah="t" re="t" mo="1-1" />
+  <verb in="harper" tn="grasp forcefully" ah="t" mo="1-1" />
+  <verb in="harponner" tn="harpoon" ah="t" mo="1-1" />
+  <verb in="hasarder" tn="hazard" ah="t" mo="1-1" />
+  <verb in="hâter" tn="speed up, hasten" ah="t" mo="1-1" />
+  <verb in="haubaner" tn="secure with a wire" ah="t" mo="1-1" />
+  <verb in="haubanner" tn="secure with a wire" ah="t" mo="1-1" />
+  <verb in="hausser" tn="raise, shrug" ah="t" mo="1-1" />
+  <verb in="haver" tn="cut" ah="t" mo="1-1" />
+  <verb in="havir" tn="singe" ah="t" mo="2-1" />
   <verb in="héberger" tn="house, accommodate" mo="1-2B" />
   <verb in="hébéter" tn="stupefy" mo="1-5" />
   <verb in="hébraïser" tn="Hebraize, study Hebrew" mo="1-1" />
-  <verb in="héler" tn="hail, call out loudly" mo="1-5" />
+  <verb in="héler" tn="hail, call out loudly" ah="t" mo="1-5" />
   <verb in="hélitreuiller" tn="winch up into a helicopter" mo="1-1" />
   <verb in="helléniser" tn="Hellenize" mo="1-1" />
-  <verb in="hennir" tn="neigh, whinny" mo="2-1" />
+  <verb in="hennir" tn="neigh, whinny" ah="t" mo="2-1" />
   <verb in="herbager" tn="pasture, graze" mo="1-2B" />
   <verb in="herboriser" tn="herborize, collect herbs for medicinal uses" mo="1-1" />
-  <verb in="hercher" tn="push a cart" mo="1-1" />
-  <verb in="hérisser" tn="bristle, ruffle" mo="1-1" />
-  <verb in="hérissonner" tn="bristle" re="t" mo="1-1" />
+  <verb in="hercher" tn="push a cart" ah="t" mo="1-1" />
+  <verb in="hérisser" tn="bristle, ruffle" ah="t" mo="1-1" />
+  <verb in="hérissonner" tn="bristle" re="t" ah="t" mo="1-1" />
   <verb in="hériter" tn="inherit" mo="1-1" />
-  <verb in="herscher" tn="push a cart" mo="1-1" />
-  <verb in="herser" tn="harrow" mo="1-1" />
+  <verb in="herscher" tn="push a cart" ah="t" mo="1-1" />
+  <verb in="herser" tn="harrow" ah="t" mo="1-1" />
   <verb in="hésiter" tn="hesitate" mo="1-1" />
-  <verb in="heurter" tn="strike, hit, clash, conflict with" mo="1-1" />
+  <verb in="heurter" tn="strike, hit, clash, conflict with" ah="t" mo="1-1" />
   <verb in="hiberner" tn="hibernate" mo="1-1" />
-  <verb in="hiérarchiser" tn="hierarchize, prioritize" mo="1-1" />
-  <verb in="hisser" tn="hoist, raise" mo="1-1" />
+  <verb in="hier" tn="stamp with a rod" ah="t" mo="1-1" />
+  <verb in="hiérarchiser" tn="hierarchize, prioritize" ah="t" mo="1-1" />
+  <verb in="hisser" tn="hoist, raise" ah="t" mo="1-1" />
   <verb in="historier" tn="spin a yarn" mo="1-1" />
   <verb in="hiverner" tn="winter, hibernate" mo="1-1" />
-  <verb in="hocher" tn="nod" mo="1-1" />
+  <verb in="hocher" tn="nod" ah="t" mo="1-1" />
+  <verb in="hogner" tn="growl, rumble" ah="t" mo="1-1" />
+  <verb in="hôler" tn="cry out as a tawny owl" ah="t" mo="1-1" />
+  <verb in="hollandiser" tn="give something or someone Dutch character or manners" ah="t" mo="1-1" />
   <verb in="holographier" tn="write a will by hand" mo="1-1" />
   <verb in="homogénéifier" tn="homogenize" mo="1-1" />
   <verb in="homogénéiser" tn="homogenize" mo="1-1" />
   <verb in="homologuer" tn="officially recognize, ratify" mo="1-1" />
-  <verb in="hongrer" tn="castrate a horse" mo="1-1" />
-  <verb in="hongroyer" tn="tan with alum" mo="1-7A" />
-  <verb in="honnir" tn="shame, disgrace, dishonor" mo="2-1" />
+  <verb in="hongrer" tn="castrate a horse" ah="t" mo="1-1" />
+  <verb in="hongroyer" tn="tan with alum" ah="t" mo="1-7A" />
+  <verb in="honnir" tn="shame, disgrace, dishonor" ah="t" mo="2-1" />
   <verb in="honorer" tn="honor" mo="1-1" />
-  <verb in="hoqueter" tn="hiccup" mo="1-3B" />
+  <verb in="hoqueter" tn="hiccup" ah="t" mo="1-3B" />
   <verb in="hormoner" tn="treat with hormones" mo="1-1" />
   <verb in="horrifier" tn="horrify" mo="1-1" />
   <verb in="horripiler" tn="exasperate, infuriate" mo="1-1" />
   <verb in="hospitaliser" tn="hospitalize" mo="1-1" />
-  <verb in="houblonner" tn="add hops to" mo="1-1" />
+  <verb in="hotter" tn="carry in a sack" ah="t" mo="1-1" />
+  <verb in="houblonner" tn="add hops to" ah="t" mo="1-1" />
+  <verb in="houler" tn="swell (as the sea)" ah="t" mo="1-1" />
   <verb in="houpper" tn="add a crest to" mo="1-1" />
-  <verb in="hourder" tn="fill with rubble" mo="1-1" />
-  <verb in="houspiller" tn="chide, scold, criticize, rebuke, torment" mo="1-1" />
-  <verb in="housser" tn="cover with a dustsheet, dust" mo="1-1" />
-  <verb in="hucher" tn="cry out" mo="1-1" />
-  <verb in="huer" tn="boo" mo="1-1" />
+  <verb in="hourder" tn="fill with rubble" ah="t" mo="1-1" />
+  <verb in="hourdir" tn="fill with rubble" ah="t" mo="2-1" />
+  <verb in="houspiller" tn="chide, scold, criticize, rebuke, torment" ah="t" mo="1-1" />
+  <verb in="housser" tn="cover with a dustsheet, dust" ah="t" mo="1-1" />
+  <verb in="hucher" tn="cry out" ah="t" mo="1-1" />
+  <verb in="huer" tn="boo" ah="t" mo="1-1" />
   <verb in="huiler" tn="oil, oil up" mo="1-1" />
-  <verb in="hululer" tn="hoot, cry out as an owl" mo="1-1" />
+  <verb in="hululer" tn="hoot, cry out as an owl" ah="t" mo="1-1" />
   <verb in="humaniser" tn="humanize, civilize" mo="1-1" />
   <verb in="humecter" tn="moisten" mo="1-1" />
-  <verb in="humer" tn="smell" mo="1-1" />
+  <verb in="humer" tn="smell" ah="t" mo="1-1" />
   <verb in="humidifier" tn="humidify" mo="1-1" />
   <verb in="humilier" tn="humiliate" mo="1-1" />
-  <verb in="hurler" tn="shout, yell, howl" mo="1-1" />
+  <verb in="humoter" tn="swallow by sucking" ah="t" mo="1-1" />
+  <verb in="hurler" tn="shout, yell, howl" ah="t" mo="1-1" />
+  <verb in="hutter" tn="make a hut for shelter" ah="t" mo="1-1" />
   <verb in="hybrider" tn="hybridize" mo="1-1" />
   <verb in="hydrater" tn="hydrate" mo="1-1" />
   <verb in="hydrofuger" tn="dampproof, make water repellent" mo="1-2B" />

@@ -1,6 +1,6 @@
 ## Conjuguer
 
-**Conjuguer** is a nascent iOS™ app for learning French verb conjugations. **Conjuguer** conjugates more than 6,000 French verbs, regular and irregular, in _all_ French verb tenses.
+**Conjuguer** is a nascent iOS™ app for learning French verb conjugations. **Conjuguer** conjugates 6,295 verbs, regular and irregular, in _all_ French verb tenses.
 
 **Conjuguer** shares and will share features with its Spanish-verb predecessor, [Conjugar](https://itunes.apple.com/us/app/conjugar/id1236500467?mt=8), but **Conjuguer** represents conjugation irregularities in a more parsimonious manner, allowing **Conjuguer** to conjugate more verbs.
 

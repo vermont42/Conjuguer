@@ -107,6 +107,7 @@ struct InputView: View {
       auxiliary: isReflexive ? .être : .avoir,
       isReflexive: isReflexive,
       isDefective: false,
+      hasAspiratedH: false,
       frequency: nil
     )
     Verb.verbs[infinitif] = verb
