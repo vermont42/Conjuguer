@@ -105,11 +105,11 @@ enum IndicatifPrésentGroup: Hashable {
     case .ï:
       switch personNumber {
       case .firstSingular:
-        return "Is"
+        return "ïs"
       case .secondSingular:
-        return "Is"
+        return "ïs"
       case .thirdSingular:
-        return "It"
+        return "ït"
       case .firstPlural:
         return "ïssons"
       case .secondPlural:
@@ -182,7 +182,7 @@ enum IndicatifPrésentGroup: Hashable {
     case .ï:
       switch personNumber {
       case .secondSingular:
-        return "Is"
+        return "is"
       case .firstPlural:
         return "ïssons"
       case .secondPlural:

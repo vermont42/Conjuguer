@@ -441,7 +441,7 @@
   <verb in="avantager" tn="favor, give advantage to" mo="1-2B" />
   <verb in="avarier" tn="go rotten, spoil" re="t" mo="1-1" />
   <verb in="aventurer" tn="venture" mo="1-1" />
-  <verb in="avérer" tn="uncover, reveal" mo="1-5" />
+  <verb in="avérer" tn="prove to be" mo="1-5" de="t" />
   <verb in="avertir" tn="warn, avert" mo="2-1" />
   <verb in="aveugler" tn="blind" mo="1-1" />
   <verb in="aveulir" tn="enfeeble, debase" mo="2-1" />
@@ -749,7 +749,7 @@
   <verb in="cadencer" tn="cadence" mo="1-2A" />
   <verb in="cadrer" tn="fit, go well together" mo="1-1" />
   <verb in="cafarder" tn="tattle" mo="1-1" />
-  <verb in="cafeter" tn="drink coffee" mo="1-1" />
+  <verb in="cafeter" tn="rat, rat on, denounce, drink coffee (in the Ardennes)" mo="1-1" />
   <verb in="cafouiller" tn="play up, be in a mess, fall apart" mo="1-1" />
   <verb in="cafter" tn="rat, rat on, denounce" mo="1-1" />
   <verb in="cahoter" tn="bump, jolt" mo="1-1" />
@@ -763,7 +763,7 @@
   <verb in="calciner" tn="calcinate" mo="1-1" />
   <verb in="calculer" tn="calculate" mo="1-1" />
   <verb in="caler" tn="wedge, jam" mo="1-1" />
-  <verb in="caleter" tn="escape, flee" mo="1-1" />
+  <verb in="caleter" tn="leave quickly, flee" mo="1-1" />
   <verb in="calfater" tn="caulk" mo="1-1" />
   <verb in="calfeutrer" tn="caulk" mo="1-1" />
   <verb in="calibrer" tn="calibrate, grade" mo="1-1" />
@@ -916,7 +916,7 @@
   <verb in="chauler" tn="whitewash" mo="1-1" />
   <verb in="chaumer" tn="clear land of stubble" mo="1-1" />
   <verb in="chausser" tn="put footwear on someone" mo="1-1" />
-  <verb in="chauvir" tn="perk up (ears of an animal)" mo="2-1" />
+  <verb in="chauvir" tn="perk up (ears of an animal)" mo="6-1A" />
   <verb in="chavirer" tn="capsize" mo="1-1" />
   <verb in="cheminer" tn="walk on, keep walking" mo="1-1" />
   <verb in="chemiser" tn="line, cover the inside surface of" mo="1-1" />
@@ -942,7 +942,7 @@
   <verb in="chlorer" tn="chlorinate" mo="1-1" />
   <verb in="chloroformer" tn="chloroform" mo="1-1" />
   <verb in="chlorurer" tn="chlorinate" mo="1-1" />
-  <verb in="choir" tn="fall" mo="4-1A" />
+  <verb in="choir" tn="fall" mo="4-11A" />
   <verb in="choisir" tn="choose" mo="2-1" fr="57" />
   <verb in="chômer" tn="be idle, be out of work" mo="1-1" />
   <verb in="choper" tn="steal, arrest, pick up (a passenger)" mo="1-1" />
@@ -1280,6 +1280,7 @@
   <verb in="courber" tn="bend" mo="1-1" />
   <verb in="courir" tn="run" mo="6-4" />
   <verb in="couronner" tn="crown" mo="1-1" />
+  <verb in="courre" tn="hunt" mo="6-4" />
   <verb in="courroucer" tn="enrage, infuriate" mo="1-2A" />
   <verb in="courser" tn="buy" mo="1-1" />
   <verb in="court-circuiter" tn="short circuit" mo="1-1" />
@@ -1493,6 +1494,7 @@
   <verb in="déchiqueter" tn="rip or cut into small pieces" mo="1-3B" />
   <verb in="déchirer" tn="rip up" mo="1-1" />
   <verb in="déchlorurer" tn="eliminate chlorides" mo="1-1" />
+  <verb in="déchoir" tn="wane, diminish, strip (someone of something)" mo="4-11A" />
   <verb in="déchristianiser" tn="dechristianize" mo="1-1" />
   <verb in="décider" tn="decide" mo="1-1" fr="41" />
   <verb in="décimaliser" tn="decimalize" mo="1-1" />
@@ -2312,6 +2314,7 @@
   <verb in="écher" tn="bait a hook" mo="1-5" />
   <verb in="écheveler" tn="tousle someone’s hair" mo="1-3A" />
   <verb in="échiner" tn="break someone’s back" mo="1-1" />
+  <verb in="échoir" tn="fall due" mo="4-11B" />
   <verb in="échopper" tn="engrave with a chisel" mo="1-1" />
   <verb in="échouer" tn="fail, fall through, miscarry" mo="1-1" />
   <verb in="écimer" tn="pollard" mo="1-1" />
@@ -2842,7 +2845,7 @@
   <verb in="essuyer" tn="wipe, dry" mo="1-7A" />
   <verb in="estamper" tn="emboss, stamp" mo="1-1" />
   <verb in="estampiller" tn="stamp, mark with a stamp" mo="1-1" />
-  <verb in="ester" tn="appear in court, be" mo="1-1" />
+  <verb in="ester" tn="appear in court, be, stay, remain, stand" mo="1-10" />
   <verb in="estérifier" tn="esterify" mo="1-1" />
   <verb in="esthétiser" tn="estheticize" mo="1-1" />
   <verb in="estimer" tn="estimate, calculate roughly, esteem, hold in high regard" mo="1-1" />
@@ -2999,6 +3002,7 @@
   <verb in="fagoter" tn="bundle, dress up" mo="1-1" />
   <verb in="faiblir" tn="weaken, get weaker" mo="2-1" />
   <verb in="failler" tn="crack, fissure" re="t" mo="1-1" />
+  <verb in="faillir" tn="almost do something, fail, fall short" mo="4-12" />
   <verb in="fainéanter" tn="do nothing, be idle, faff" mo="1-1" />
   <verb in="faire" tn="do, make" mo="5-23" fr="4" />
   <verb in="faisander" tn="hang game meat" mo="1-1" />
@@ -3039,7 +3043,7 @@
   <verb in="fendiller" tn="crack, craze" mo="1-1" />
   <verb in="fendre" tn="split, chop (wood), crack" mo="5-1A" />
   <verb in="fenêtrer" tn="make holes for windows, install windows" mo="1-1" />
-  <verb in="férir" tn="hit, strike" mo="2-1" />
+  <verb in="férir" tn="hit, strike" mo="2-4" />
   <verb in="ferler" tn="furl, roll up (a sail)" mo="1-1" />
   <verb in="fermenter" tn="ferment" mo="1-1" />
   <verb in="fermer" tn="shut, close" mo="1-1" />
@@ -3059,7 +3063,8 @@
   <verb in="fiabiliser" tn="make more reliable" mo="1-1" />
   <verb in="fiancer" tn="get engaged to be married" mo="1-2A" />
   <verb in="ficeler" tn="tie up, to truss" mo="1-3A" />
-  <verb in="ficher" tn="not care about" re="t" mo="1-1" />
+  <verb in="ficher" tn="put something on file" mo="1-1" />
+  <verb in="fiche" tn="not care about" re="t" mo="1-11" />
   <verb in="fidéliser" tn="loyalize, keep loyal" mo="1-1" />
   <verb in="fienter" tn="defecate" mo="1-1" />
   <verb in="fier" tn="trust someone, rely on someone" re="t" mo="1-1" />
@@ -3277,7 +3282,7 @@
   <verb in="gérer" tn="manage" mo="1-5" />
   <verb in="germaniser" tn="Germanize" mo="1-1" />
   <verb in="germer" tn="germinate" mo="1-1" />
-  <verb in="gésir" tn="lie dead, be located, be buried" mo="2-1" />
+  <verb in="gésir" tn="be located, lie dead, be buried" mo="5-28" />
   <verb in="gesticuler" tn="gesticulate" mo="1-1" />
   <verb in="gicler" tn="squirt, spurt" mo="1-1" />
   <verb in="gifler" tn="slap (on the face)" mo="1-1" />
@@ -3412,7 +3417,8 @@
   <verb in="hâbler" tn="speak, engage in exageration" ah="t" mo="1-1" />
   <verb in="hacher" tn="chop up, mince" ah="t" mo="1-1" />
   <verb in="hachurer" tn="hachure" mo="1-1" />
-  <verb in="haïr" tn="hate" ah="t" mo="2-3" />
+  <verb in="haïr" tn="hate" ah="t" ex="France" mo="2-3A" />
+  <verb in="haïr" tn="hate" ex="Québec" mo="2-3B" />
   <verb in="halener" tn="scent, exhale" mo="1-4" />
   <verb in="haler" tn="haul, tow" ah="t" mo="1-1" />
   <verb in="hâler" tn="tan, get a tan" ah="t" mo="1-1" />
@@ -4256,6 +4262,8 @@
   <verb in="ouater" tn="cover with cotton wool" mo="1-1" />
   <verb in="ouatiner" tn="quilt" mo="1-1" />
   <verb in="ouiller" tn="add wine to a barrel to replace evaporated wine" mo="1-1" />
+  <verb in="ouïr" tn="listen, hear" ex="modern" mo="2-3B" />
+  <verb in="ouïr" tn="listen, hear" ex="Trad." mo="2-5" />
   <verb in="ourdir" tn="warp, plot" mo="2-1" />
   <verb in="ourler" tn="hem" mo="1-1" />
   <verb in="outiller" tn="equip, tool up" mo="1-1" />
@@ -4879,7 +4887,7 @@
   <verb in="réagir" tn="react, respond" mo="2-1" />
   <verb in="réajuster" tn="adjust, readjust" mo="1-1" />
   <verb in="réaléser" tn="reream, rebore" mo="1-5" />
-  <verb in="réaliser" tn="direct (a movie), fulfill (a dream), perform (activities), finish making, carry out, make, realize (make real), realize (become aware of)" mo="1-1" />
+  <verb in="réaliser" tn="direct (a movie), fulfill (a dream), perform (activities), finish making, carry out, make, realize (make real), realize (become aware)" mo="1-1" />
   <verb in="réaménager" tn="change a layout" mo="1-2B" />
   <verb in="réanimer" tn="reanimate, revive" mo="1-1" />
   <verb in="réapparaître" tn="reappear,  respawn (in a video game)" mo="5-20" />

@@ -9,8 +9,8 @@
 import XCTest
 
 enum T {
-  static func conjugate(infinitif: String, tense: Tense) -> String {
-    let result = Conjugator.conjugate(infinitif: infinitif, tense: tense)
+  static func conjugate(infinitif: String, tense: Tense, extraLetters: String?) -> String {
+    let result = Conjugator.conjugate(infinitif: infinitif, tense: tense, extraLetters: extraLetters)
     switch result {
     case .success(let value):
       return value
@@ -19,8 +19,8 @@ enum T {
     }
   }
 
-  static func testConjugation(infinitif: String, tense: Tense, expected: String) {
-    let result = Conjugator.conjugate(infinitif: infinitif, tense: tense)
+  static func testConjugation(infinitif: String, tense: Tense, expected: String, extraLetters: String?) {
+    let result = Conjugator.conjugate(infinitif: infinitif, tense: tense, extraLetters: extraLetters)
     switch result {
     case .success(let value):
       XCTAssertEqual(expected, value)
@@ -56,11 +56,18 @@ class VerbModelTests: XCTestCase {
     for model in Array(VerbModel.models.values).sorted(by: { lhs, rhs in
       return lhs.exemplar.caseInsensitiveCompare(rhs.exemplar) == .orderedAscending
     }) {
-      var output = "  func test" + model.exemplar.capitalizingFirstLetter() + "() {\n    // ID: \(model.id)\n    var personNumbersIndex = 0\n\n"
+      var output = "  func test" + model.exemplar.capitalizingFirstLetter() + (model.extraLetters?.replacingOccurrences(of: ".", with: "") ?? "") + "() {\n    // ID: \(model.id)\n    var personNumbersIndex = 0\n\n"
+      let extraLettersComponent: String
+      if let extraLetters = model.extraLetters {
+        extraLettersComponent = "\"\(extraLetters)\""
+      } else {
+        extraLettersComponent = "nil"
+      }
+      let extraLettersArg = ", extraLetters: " + extraLettersComponent
       for tense in ["indicatifPrésent", "imparfait", "futurSimple", "conditionnelPrésent", "passéSimple", "subjonctifPrésent", "subjonctifImparfait"] {
         output += "    for conjugation in ["
         for personNumber in PersonNumber.allCases {
-          let conjugation = T.conjugate(infinitif: model.exemplar, tense: Tense.fromString(tense, personNumber: personNumber))
+          let conjugation = T.conjugate(infinitif: model.exemplar, tense: Tense.fromString(tense, personNumber: personNumber), extraLetters: model.extraLetters)
           output += "\"" + conjugation + "\""
           if personNumber == .thirdPlural {
             output += "] {\n"
@@ -69,21 +76,21 @@ class VerbModelTests: XCTestCase {
           }
         }
 
-        output += "      T.testConjugation(infinitif: \"" + model.exemplar + "\", tense: ." + tense + "(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)\n"
+        output += "      T.testConjugation(infinitif: \"" + model.exemplar + "\", tense: ." + tense + "(PersonNumber.allCases[personNumbersIndex]), expected: conjugation\(extraLettersArg))\n"
         output += "      personNumbersIndex += 1\n"
         output += "      personNumbersIndex %= PersonNumber.allCases.count\n"
         output += "    }\n\n"
       }
 
       for tense in ["participePassé", "participePrésent"] {
-        let conjugation = T.conjugate(infinitif: model.exemplar, tense: Tense.fromString(tense, personNumber: .firstSingular))
-        output += "    T.testConjugation(infinitif: \"" + model.exemplar + "\", tense: ." + tense + ", expected: \"\(conjugation)\")\n"
+        let conjugation = T.conjugate(infinitif: model.exemplar, tense: Tense.fromString(tense, personNumber: .firstSingular), extraLetters: model.extraLetters)
+        output += "    T.testConjugation(infinitif: \"" + model.exemplar + "\", tense: ." + tense + ", expected: \"\(conjugation)\"\(extraLettersArg))\n"
       }
 
       output += "\n    var impératifPersonNumbersIndex = 0\n\n"
       output += "    for conjugation in ["
       for personNumber in PersonNumber.impératifPersonNumbers {
-        let conjugation = T.conjugate(infinitif: model.exemplar, tense: .impératif(personNumber))
+        let conjugation = T.conjugate(infinitif: model.exemplar, tense: .impératif(personNumber), extraLetters: model.extraLetters)
         output += "\"" + conjugation + "\""
         if personNumber == .secondPlural {
           output += "] {\n"
@@ -92,7 +99,7 @@ class VerbModelTests: XCTestCase {
         }
       }
 
-      output += "      T.testConjugation(infinitif: \"" + model.exemplar + "\", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)\n"
+      output += "      T.testConjugation(infinitif: \"" + model.exemplar + "\", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation\(extraLettersArg))\n"
       output += "      impératifPersonNumbersIndex += 1\n"
       output += "      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count\n"
       output += "    }\n"

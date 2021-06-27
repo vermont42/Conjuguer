@@ -25,7 +25,7 @@ struct VerbBrowseView: View {
           LazyVStack {
             ForEach(store.verbs, id: \.self) { verb in
               NavigationLink(destination: VerbView(verb: verb), label: {
-                Text(verb.infinitif)
+                Text(verb.infinitifWithPossibleExtraLetters)
                   .tableText()
               })
               .buttonStyle(PlainButtonStyle())

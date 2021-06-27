@@ -20,6 +20,7 @@ struct VerbModel: Hashable {
   let stemAlterations: [StemAlteration]?
   let position: Int
   var irregularity = 0
+  let extraLetters: String?
 
   var description: String {
     switch id {
@@ -118,6 +119,14 @@ struct VerbModel: Hashable {
       return VerbModel.model(id: parentId).subjonctifPrésentGroupRecursive
     } else {
       fatalError("subjonctifPrésentGroup" + andParentIdAreNil)
+    }
+  }
+
+  var exemplarWithPossibleExtraLetters: String {
+    if let extraLetters = extraLetters {
+      return exemplar + " (" + extraLetters + ")"
+    } else {
+      return exemplar
     }
   }
 

@@ -159,7 +159,7 @@ enum Tense: Hashable {
       return ""
     }
 
-    let result = Conjugator.conjugate(infinitif: verb, tense: tense)
+    let result = Conjugator.conjugate(infinitif: verb, tense: tense, extraLetters: nil)
     switch result {
     case .success(let value):
       return value

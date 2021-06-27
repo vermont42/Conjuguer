@@ -24,7 +24,7 @@ struct ModelBrowseView: View {
         ScrollView {
           ForEach(store.modelsAndDecorators, id: \.self) { modelAndDecorator in
             NavigationLink(destination: ModelView(model: modelAndDecorator.model), label: {
-              Text(modelAndDecorator.model.exemplar + modelAndDecorator.decorator)
+              Text(modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator)
                 .tableText()
             })
             .buttonStyle(PlainButtonStyle())

@@ -108,10 +108,11 @@ struct InputView: View {
       isReflexive: isReflexive,
       isDefective: false,
       hasAspiratedH: false,
-      frequency: nil
+      frequency: nil,
+      extraLetters: nil
     )
     Verb.verbs[infinitif] = verb
-    conjugate(infinitif)
+    conjugate(infinitif, extraLetters: nil)
     SoundPlayer.play(.chime)
   }
 
@@ -127,7 +128,7 @@ struct InputView: View {
     reflexive = "f"
   }
 
-  private func conjugate(_ verb: String) {
+  private func conjugate(_ verb: String, extraLetters: String?) {
     var output = "\(verb)"
 
     let noTranslation = "NO TRANSLATION"
@@ -136,7 +137,7 @@ struct InputView: View {
     let personNumbers: [PersonNumber] = PersonNumber.allCases
 
     for personNumber in personNumbers {
-      let présentResult = Conjugator.conjugate(infinitif: verb, tense: .indicatifPrésent(personNumber))
+      let présentResult = Conjugator.conjugate(infinitif: verb, tense: .indicatifPrésent(personNumber), extraLetters: extraLetters)
       switch présentResult {
       case .success(let value):
         output += "\(value) "
@@ -148,7 +149,7 @@ struct InputView: View {
     output += " •  IMPERFECT: "
 
     for personNumber in personNumbers {
-      let imparfaitResult = Conjugator.conjugate(infinitif: verb, tense: .imparfait(personNumber))
+      let imparfaitResult = Conjugator.conjugate(infinitif: verb, tense: .imparfait(personNumber), extraLetters: extraLetters)
       switch imparfaitResult {
       case .success(let value):
         output += "\(value) "
@@ -160,7 +161,7 @@ struct InputView: View {
     output += " •  FUTURE: "
 
     for personNumber in personNumbers {
-      let futurResult = Conjugator.conjugate(infinitif: verb, tense: .futurSimple(personNumber))
+      let futurResult = Conjugator.conjugate(infinitif: verb, tense: .futurSimple(personNumber), extraLetters: extraLetters)
       switch futurResult {
       case .success(let value):
         output += "\(value) "
@@ -172,7 +173,7 @@ struct InputView: View {
     output += " •  CONDITIONAL: "
 
     for personNumber in personNumbers {
-      let conditionnelResult = Conjugator.conjugate(infinitif: verb, tense: .conditionnelPrésent(personNumber))
+      let conditionnelResult = Conjugator.conjugate(infinitif: verb, tense: .conditionnelPrésent(personNumber), extraLetters: extraLetters)
       switch conditionnelResult {
       case .success(let value):
         output += "\(value) "
@@ -184,7 +185,7 @@ struct InputView: View {
     output += " •  SIMPLE PAST: "
 
     for personNumber in personNumbers {
-      let passéSimpleResult = Conjugator.conjugate(infinitif: verb, tense: .passéSimple(personNumber))
+      let passéSimpleResult = Conjugator.conjugate(infinitif: verb, tense: .passéSimple(personNumber), extraLetters: extraLetters)
       switch passéSimpleResult {
       case .success(let value):
         output += "\(value) "
@@ -196,7 +197,7 @@ struct InputView: View {
     output += " •  SUBJ. PRESENT: "
 
     for personNumber in personNumbers {
-      let subjonctifPrésentResult = Conjugator.conjugate(infinitif: verb, tense: .subjonctifPrésent(personNumber))
+      let subjonctifPrésentResult = Conjugator.conjugate(infinitif: verb, tense: .subjonctifPrésent(personNumber), extraLetters: extraLetters)
       switch subjonctifPrésentResult {
       case .success(let value):
         output += "\(value) "
@@ -208,7 +209,7 @@ struct InputView: View {
     output += " •  SUBJ. IMPERFECT: "
 
     for personNumber in personNumbers {
-      let subjonctifImparfaitResult = Conjugator.conjugate(infinitif: verb, tense: .subjonctifImparfait(personNumber))
+      let subjonctifImparfaitResult = Conjugator.conjugate(infinitif: verb, tense: .subjonctifImparfait(personNumber), extraLetters: extraLetters)
       switch subjonctifImparfaitResult {
       case .success(let value):
         output += "\(value) "
@@ -218,7 +219,7 @@ struct InputView: View {
     }
 
     let participePassé: String
-    let participePasséResult = Conjugator.conjugate(infinitif: verb, tense: .participePassé)
+    let participePasséResult = Conjugator.conjugate(infinitif: verb, tense: .participePassé, extraLetters: extraLetters)
     switch participePasséResult {
     case .success(let value):
       participePassé = value
@@ -228,7 +229,7 @@ struct InputView: View {
     output += "  •  PAST PARTICIPLE: \(participePassé) "
 
     let participePrésent: String
-    let participePrésentResult = Conjugator.conjugate(infinitif: verb, tense: .participePrésent)
+    let participePrésentResult = Conjugator.conjugate(infinitif: verb, tense: .participePrésent, extraLetters: extraLetters)
     switch participePrésentResult {
     case .success(let value):
       participePrésent = value
@@ -240,7 +241,7 @@ struct InputView: View {
     output += " •  IMPERATIVE: "
 
     for personNumber in PersonNumber.impératifPersonNumbers {
-      let impératifResult = Conjugator.conjugate(infinitif: verb, tense: .impératif(personNumber))
+      let impératifResult = Conjugator.conjugate(infinitif: verb, tense: .impératif(personNumber), extraLetters: extraLetters)
       switch impératifResult {
       case .success(let value):
         output += "\(value) "
@@ -249,7 +250,7 @@ struct InputView: View {
       }
     }
 
-    let radicalFuturResult = Conjugator.conjugate(infinitif: verb, tense: .radicalFutur)
+    let radicalFuturResult = Conjugator.conjugate(infinitif: verb, tense: .radicalFutur, extraLetters: extraLetters)
     switch radicalFuturResult {
     case .success(let value):
       output += " •  FUTURE STEM: \(value) "

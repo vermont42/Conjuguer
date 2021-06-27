@@ -21,7 +21,7 @@ struct ModelView: View {
           let parentId = model.parentId,
           let parent = VerbModel.models[parentId]
         {
-          Text("Parent: \(parent.exemplar) (\(parent.id))")
+          Text("Parent: \(parent.exemplarWithPossibleExtraLetters) (\(parent.id))")
             .headingLabel()
         }
 
@@ -64,7 +64,7 @@ struct ModelView: View {
         Spacer()
       }
     }
-    .navigationTitle(model.exemplar + " (\(model.id))")
+    .navigationTitle(model.exemplarWithPossibleExtraLetters + " (\(model.id))")
     .customNavigationBarItems()
     .padding()
   }

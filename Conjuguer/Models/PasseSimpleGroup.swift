@@ -102,9 +102,9 @@ enum PasséSimpleGroup {
       case .thirdSingular:
         return "ït"
       case .firstPlural:
-        return "Ïmes"
+        return "ïmes"
       case .secondPlural:
-        return "Ïtes"
+        return "ïtes"
       case .thirdPlural:
         return "ïrent"
       }
@@ -188,7 +188,7 @@ enum PasséSimpleGroup {
       case .secondSingular:
         return "ïsses"
       case .thirdSingular:
-        return "Ït"
+        return "ït"
       case .firstPlural:
         return "ïssions"
       case .secondPlural:

@@ -10,7 +10,7 @@ import SwiftUI
 extension Text {
   init(verb: Verb, tense: Tense) {
     let conjugation: String
-    switch Conjugator.conjugate(infinitif: verb.infinitif, tense: tense) {
+    switch Conjugator.conjugate(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) {
     case .success(let value):
       conjugation = value
     default:

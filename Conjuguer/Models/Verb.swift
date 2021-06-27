@@ -20,16 +20,27 @@ struct Verb: Identifiable, Hashable {
   let isDefective: Bool // TODO: trulyDefectiveTenses: Set<Tense>, arguablyDefectiveTenses: Set<Tense>
   let hasAspiratedH: Bool
   let frequency: Int?
+  let extraLetters: String?
 
   var infinitifStem: String {
     let endingLength: Int
     if infinitif.hasSuffix("oir") {
       endingLength = 3
-    } else {
+    } else if infinitif != "fiche" {
       endingLength = 2
+    } else {
+      endingLength = 1
     }
     let index = infinitif.index(infinitif.endIndex, offsetBy: -1 * endingLength)
     return String(infinitif[..<index])
+  }
+
+  var infinitifWithPossibleExtraLetters: String {
+    if let extraLetters = extraLetters {
+      return infinitif + " (" + extraLetters + ")"
+    } else {
+      return infinitif
+    }
   }
 
   static func endingIsValid(infinitif: String) -> Bool {
@@ -37,6 +48,6 @@ struct Verb: Identifiable, Hashable {
     let validFrenchVerbEndings = ["er", "ir", "re", "ïr"]
     let index = infinitif.index(infinitif.endIndex, offsetBy: -1 * frenchVerbEndingLength)
     let ending = String(infinitif[index...])
-    return validFrenchVerbEndings.contains(ending)
+    return validFrenchVerbEndings.contains(ending) || infinitif == "fiche"
   }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct Conjugator {
-  static func conjugate(infinitif: String, tense: Tense) -> Result<String, ConjugatorError> {
+  static func conjugate(infinitif: String, tense: Tense, extraLetters: String?) -> Result<String, ConjugatorError> {
     guard infinitif.count >= Verb.minVerbLength else {
       return .failure(.verbTooShort)
     }
@@ -17,7 +17,14 @@ struct Conjugator {
       return .failure(.infinitifEndingInvalid)
     }
 
-    guard let verb = Verb.verbs[infinitif] else {
+    let infinitifWithPossibleExtraLetters: String
+    if let extraLetters = extraLetters {
+      infinitifWithPossibleExtraLetters = infinitif + " " + extraLetters
+    } else {
+      infinitifWithPossibleExtraLetters = infinitif
+    }
+
+    guard let verb = Verb.verbs[infinitifWithPossibleExtraLetters] else {
       return .failure(.verbNotRecognized)
     }
 
@@ -64,10 +71,10 @@ struct Conjugator {
       }
 
     case .participePrésent:
-        stems.append(nousPrésentStem(infinitif: infinitif))
+        stems.append(nousPrésentStem(infinitif: infinitif, extraLetters: extraLetters))
 
     case .imparfait:
-      let alternatives = nousPrésentStem(infinitif: infinitif).components(separatedBy: Tense.alternateConjugationSeparator)
+      let alternatives = nousPrésentStem(infinitif: infinitif, extraLetters: extraLetters).components(separatedBy: Tense.alternateConjugationSeparator)
       alternatives.forEach {
         stems.append($0)
       }
@@ -223,8 +230,8 @@ struct Conjugator {
     }
   }
 
-  static func nousPrésentStem(infinitif: String) -> String {
-    let nousPrésentConjugationResult = Conjugator.conjugate(infinitif: infinitif, tense: .indicatifPrésent(.firstPlural))
+  static func nousPrésentStem(infinitif: String, extraLetters: String? = nil) -> String {
+    let nousPrésentConjugationResult = Conjugator.conjugate(infinitif: infinitif, tense: .indicatifPrésent(.firstPlural), extraLetters: extraLetters)
     switch nousPrésentConjugationResult {
     case .success(let value):
       let ons = IndicatifPrésentGroup.s.présentEndingForPersonNumber(.firstPlural)

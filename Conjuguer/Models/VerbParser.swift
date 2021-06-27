@@ -19,6 +19,7 @@ class VerbParser: NSObject, XMLParserDelegate {
   private var currentIsDefective = false
   private var currentHasAspiratedH = false
   private var currentFrequency: Int?
+  private var currentExtraLetters: String?
 
   override init() {
     super.init()
@@ -88,6 +89,10 @@ class VerbParser: NSObject, XMLParserDelegate {
       {
         currentFrequency = frequencyInt
       }
+
+      if let extraLetters = attributeDict["ex"] {
+        currentExtraLetters = extraLetters
+      }
     }
   }
 
@@ -103,7 +108,14 @@ class VerbParser: NSObject, XMLParserDelegate {
         auxiliary = .avoir
       }
 
-      verbs[currentVerb] = Verb(
+      let currentVerbWithPossibleExtraLetters: String
+      if let currentExtraLetters = currentExtraLetters {
+        currentVerbWithPossibleExtraLetters = currentVerb + " " + currentExtraLetters // haïr Canada
+      } else {
+        currentVerbWithPossibleExtraLetters = currentVerb
+      }
+
+      verbs[currentVerbWithPossibleExtraLetters] = Verb(
         infinitif: currentVerb,
         translation: currentTranslation,
         model: currentModel,
@@ -111,7 +123,8 @@ class VerbParser: NSObject, XMLParserDelegate {
         isReflexive: currentIsReflexive,
         isDefective: currentIsDefective,
         hasAspiratedH: currentHasAspiratedH,
-        frequency: currentFrequency
+        frequency: currentFrequency,
+        extraLetters: currentExtraLetters
       )
 
       currentVerb = ""
@@ -122,6 +135,7 @@ class VerbParser: NSObject, XMLParserDelegate {
       currentIsDefective = false
       currentHasAspiratedH = false
       currentFrequency = nil
+      currentExtraLetters = nil
     }
   }
 }
