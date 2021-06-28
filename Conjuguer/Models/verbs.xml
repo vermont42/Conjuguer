@@ -5519,7 +5519,8 @@
   <verb in="safraner" tn="add saffron to" mo="1-1" />
   <verb in="saietter" tn="brush" mo="1-1" />
   <verb in="saigner" tn="bleed, be bleeding" mo="1-1" />
-  <verb in="saillir" tn="protrude" mo="3-2A" />
+  <verb in="saillir" tn="bulge" mo="3-2A" ex="bulge" />
+  <verb in="saillir" tn="mate" mo="2-1" ex="mate" />
   <verb in="saisir" tn="take hold of, grab, seize" mo="2-1" />
   <verb in="salarier" tn="pay a salary" mo="1-1" />
   <verb in="saler" tn="salt" mo="1-1" />
@@ -5679,7 +5680,8 @@
   <verb in="sonner" tn="sound, ring" mo="1-1" />
   <verb in="sonoriser" tn="voice, install a sound system" mo="1-1" />
   <verb in="sophistiquer" tn="falsify, corrupt" mo="1-1" />
-  <verb in="sortir" tn="take out, go out" ay="e" mo="6-1" fr="76" />
+  <verb in="sortir" tn="exit" ay="e" mo="6-1" fr="76" ex="exit" />
+  <verb in="sortir" tn="obtain" mo="2-1" ex="obtain" />
   <verb in="soucier" tn="worry" mo="1-1" />
   <verb in="souder" tn="solder" mo="1-1" />
   <verb in="soudoyer" tn="bribe" mo="1-7A" />
