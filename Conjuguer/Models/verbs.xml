@@ -7,6 +7,8 @@
     <!ATTLIST verb mo CDATA #REQUIRED>
     <!ATTLIST verb ay CDATA #IMPLIED>
     <!ATTLIST verb fr CDATA #IMPLIED>
+    <!ATTLIST verb ee CDATA #IMPLIED>
+    <!ATTLIST verb so CDATA #IMPLIED>
 ]>
 
 <verbs>
@@ -916,7 +918,7 @@
   <verb in="chauler" tn="whitewash" mo="1-1" />
   <verb in="chaumer" tn="clear land of stubble" mo="1-1" />
   <verb in="chausser" tn="put footwear on someone" mo="1-1" />
-  <verb in="chauvir" tn="perk up (ears of an animal)" mo="6-1A" />
+  <verb in="chauvir" tn="perk up (ears of an equid)" mo="6-1A" ee="chauvir les oreilles = perk up one's ears (as an equid)" />
   <verb in="chavirer" tn="capsize" mo="1-1" />
   <verb in="cheminer" tn="walk on, keep walking" mo="1-1" />
   <verb in="chemiser" tn="line, cover the inside surface of" mo="1-1" />
@@ -4522,7 +4524,7 @@
   <verb in="pleuvasser" tn="rain a little or intermittently" mo="1-1" />
   <verb in="pleuviner" tn="drizzle" mo="1-1" />
   <verb in="pleuvioter" tn="drizzle" mo="1-1" />
-  <verb in="pleuvoir" tn="rain" mo="4-4" de="t" />
+  <verb in="pleuvoir" tn="rain" mo="4-4" de="t" ee="Les plaisanteries et les compliments crus pleuvaient... = Jokes and raw compliments were raining down..." so="Isabelle Eberhardt, Yasmina" />
   <verb in="pleuvoter" tn="drizzle" mo="1-1" />
   <verb in="plier" tn="fold, fold up, bend" mo="1-1" />
   <verb in="plisser" tn="fold over, pleat, wrinkle, crease" mo="1-1" />

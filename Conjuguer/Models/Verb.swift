@@ -21,6 +21,8 @@ struct Verb: Identifiable, Hashable {
   let hasAspiratedH: Bool
   let frequency: Int?
   let extraLetters: String?
+  let example: String?
+  let source: String?
 
   var infinitifStem: String {
     let endingLength: Int

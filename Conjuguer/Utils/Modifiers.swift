@@ -33,12 +33,12 @@ enum Modifiers {
 
   // Consider using this code to customize segmentedControl and further customize navBar.
   // May need to rename setTitleAttributes().
-//  UISegmentedControl.appearance().selectedSegmentTintColor = .blue
-//  UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-//  UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.blue], for: .normal)
-//  UINavigationBar.appearance().backgroundColor = .black
-//  UINavigationBar.appearance().tintColor = .white
-//  UINavigationBar.appearance().barTintColor = .black
+  //  UISegmentedControl.appearance().selectedSegmentTintColor = .blue
+  //  UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+  //  UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.blue], for: .normal)
+  //  UINavigationBar.appearance().backgroundColor = .black
+  //  UINavigationBar.appearance().tintColor = .white
+  //  UINavigationBar.appearance().barTintColor = .black
 }
 
 struct CustomNavigationBarItems: ViewModifier {
@@ -82,6 +82,16 @@ struct BodyLabel: ViewModifier {
   }
 }
 
+struct SmallLabel: ViewModifier {
+  @Environment(\.colorScheme) var colorScheme
+
+  func body(content: Content) -> some View {
+    content
+      .font(Font.custom(workSans, size: 16))
+      .foregroundColor(colorScheme == .dark ? Color(UIColor.lightGray) : Color(UIColor.darkGray))
+  }
+}
+
 struct ButtonLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
@@ -97,17 +107,30 @@ struct HeadingLabel: ViewModifier {
 }
 
 struct LeftAligned: ViewModifier {
-    func body(content: Content) -> some View {
-        HStack {
-            content
-            Spacer()
-        }
+  func body(content: Content) -> some View {
+    HStack {
+      content
+      Spacer()
     }
+  }
+}
+
+struct RightAligned: ViewModifier {
+  func body(content: Content) -> some View {
+    HStack {
+      Spacer()
+      content
+    }
+  }
 }
 
 extension View {
   func leftAligned() -> some View {
     modifier(LeftAligned())
+  }
+
+  func rightAligned() -> some View {
+    modifier(RightAligned())
   }
 
   func tableText() -> some View {
@@ -120,6 +143,10 @@ extension View {
 
   func bodyLabel() -> some View {
     modifier(BodyLabel())
+  }
+
+  func smallLabel() -> some View {
+    modifier(SmallLabel())
   }
 
   func headingLabel() -> some View {

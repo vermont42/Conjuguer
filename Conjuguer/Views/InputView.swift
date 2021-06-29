@@ -109,7 +109,9 @@ struct InputView: View {
       isDefective: false,
       hasAspiratedH: false,
       frequency: nil,
-      extraLetters: nil
+      extraLetters: nil,
+      example: nil,
+      source: nil
     )
     Verb.verbs[infinitif] = verb
     conjugate(infinitif, extraLetters: nil)

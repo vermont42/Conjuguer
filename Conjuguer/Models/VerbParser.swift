@@ -20,6 +20,8 @@ class VerbParser: NSObject, XMLParserDelegate {
   private var currentHasAspiratedH = false
   private var currentFrequency: Int?
   private var currentExtraLetters: String?
+  private var currentExample: String?
+  private var currentSource: String?
 
   override init() {
     super.init()
@@ -93,6 +95,14 @@ class VerbParser: NSObject, XMLParserDelegate {
       if let extraLetters = attributeDict["ex"] {
         currentExtraLetters = extraLetters
       }
+
+      if let example = attributeDict["ee"] {
+        currentExample = example
+      }
+
+      if let source = attributeDict["so"] {
+        currentSource = source
+      }
     }
   }
 
@@ -124,7 +134,9 @@ class VerbParser: NSObject, XMLParserDelegate {
         isDefective: currentIsDefective,
         hasAspiratedH: currentHasAspiratedH,
         frequency: currentFrequency,
-        extraLetters: currentExtraLetters
+        extraLetters: currentExtraLetters,
+        example: currentExample,
+        source: currentSource
       )
 
       currentVerb = ""
@@ -136,6 +148,8 @@ class VerbParser: NSObject, XMLParserDelegate {
       currentHasAspiratedH = false
       currentFrequency = nil
       currentExtraLetters = nil
+      currentExample = nil
+      currentSource = nil
     }
   }
 }

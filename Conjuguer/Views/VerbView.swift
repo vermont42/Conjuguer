@@ -58,6 +58,25 @@ struct VerbView: View {
 
         Spacer()
 
+        if let example = verb.example {
+          Group {
+            Text("Example Use")
+              .subheadingLabel()
+              .leftAligned()
+
+            Text(example)
+              .bodyLabel()
+
+            if let source = verb.source {
+              Text(source)
+                .smallLabel()
+                .rightAligned()
+            }
+
+            Spacer()
+          }
+        }
+
         Group {
           Text("P. Passé, P. Présent, R. Futur")
             .subheadingLabel()
