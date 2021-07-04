@@ -106,12 +106,12 @@ struct InputView: View {
       model: model.uppercased(),
       auxiliary: isReflexive ? .être : .avoir,
       isReflexive: isReflexive,
-      isDefective: false,
       hasAspiratedH: false,
       frequency: nil,
       extraLetters: nil,
       example: nil,
-      source: nil
+      source: nil,
+      defectGroupId: nil
     )
     Verb.verbs[infinitif] = verb
     conjugate(infinitif, extraLetters: nil)
@@ -300,9 +300,6 @@ struct InputView: View {
         output += "re=\"t\" "
       }
       output += "mo=\"" + verb.model.uppercased() + "\" "
-      if verb.isDefective {
-        output += "de=\"t\" "
-      }
       if let frequency = verb.frequency {
         output += "fr=\"\(frequency)\" "
       }

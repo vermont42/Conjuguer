@@ -9,6 +9,7 @@
     <!ATTLIST verb fr CDATA #IMPLIED>
     <!ATTLIST verb ee CDATA #IMPLIED>
     <!ATTLIST verb so CDATA #IMPLIED>
+    <!ATTLIST verb dg CDATA #IMPLIED>
 ]>
 
 <verbs>
@@ -298,7 +299,7 @@
   <verb in="appareiller" tn="join or mix together" mo="1-1" />
   <verb in="apparenter" tn="be related to" mo="1-1" />
   <verb in="apparier" tn="pair or match" mo="1-1" />
-  <verb in="apparoir" tn="be evident" mo="4-1D" de="t" />
+  <verb in="apparoir" tn="be evident" mo="4-1D" />
   <verb in="appartenir" tn="belong, concern" mo="6-7" fr="79" />
   <verb in="appâter" tn="bait, lure" mo="1-1" />
   <verb in="appauvrir" tn="impoverish" mo="2-1" />
@@ -443,7 +444,7 @@
   <verb in="avantager" tn="favor, give advantage to" mo="1-2B" />
   <verb in="avarier" tn="go rotten, spoil" re="t" mo="1-1" />
   <verb in="aventurer" tn="venture" mo="1-1" />
-  <verb in="avérer" tn="prove to be" mo="1-5" de="t" />
+  <verb in="avérer" tn="prove to be" mo="1-5" />
   <verb in="avertir" tn="warn, avert" mo="2-1" />
   <verb in="aveugler" tn="blind" mo="1-1" />
   <verb in="aveulir" tn="enfeeble, debase" mo="2-1" />
@@ -944,7 +945,7 @@
   <verb in="chlorer" tn="chlorinate" mo="1-1" />
   <verb in="chloroformer" tn="chloroform" mo="1-1" />
   <verb in="chlorurer" tn="chlorinate" mo="1-1" />
-  <verb in="choir" tn="fall" mo="4-11A" />
+  <verb in="choir" tn="fall" mo="4-11A" dg="7" />
   <verb in="choisir" tn="choose" mo="2-1" fr="57" />
   <verb in="chômer" tn="be idle, be out of work" mo="1-1" />
   <verb in="choper" tn="steal, arrest, pick up (a passenger)" mo="1-1" />
@@ -1081,7 +1082,7 @@
   <verb in="compacter" tn="compact" mo="1-1" />
   <verb in="comparaître" tn="appear before a judge" mo="5-20" />
   <verb in="comparer" tn="compare" mo="1-1" />
-  <verb in="comparoir" tn="appear before a judge" mo="4-1A" />
+  <verb in="comparoir" tn="appear before a judge" mo="4-1A" dg="10" />
   <verb in="compartimenter" tn="compartmentalize" mo="1-1" />
   <verb in="compasser" tn="compass" mo="1-1" />
   <verb in="compatir" tn="sympathize, empathize, feel for" mo="2-1" />
@@ -2847,7 +2848,7 @@
   <verb in="essuyer" tn="wipe, dry" mo="1-7A" />
   <verb in="estamper" tn="emboss, stamp" mo="1-1" />
   <verb in="estampiller" tn="stamp, mark with a stamp" mo="1-1" />
-  <verb in="ester" tn="appear in court, be, stay, remain, stand" mo="1-10" />
+  <verb in="ester" tn="appear in court, be, stay, remain, stand" mo="1-10" dg="0" ee="ester en justice = be a party in legal proceedings" />
   <verb in="estérifier" tn="esterify" mo="1-1" />
   <verb in="esthétiser" tn="estheticize" mo="1-1" />
   <verb in="estimer" tn="estimate, calculate roughly, esteem, hold in high regard" mo="1-1" />
@@ -3008,7 +3009,7 @@
   <verb in="fainéanter" tn="do nothing, be idle, faff" mo="1-1" />
   <verb in="faire" tn="do, make" mo="5-23" fr="4" />
   <verb in="faisander" tn="hang game meat" mo="1-1" />
-  <verb in="falloir" tn="be necessary" mo="4-5C" de="t" fr="13" />
+  <verb in="falloir" tn="be necessary" mo="4-5C" fr="13" />
   <verb in="falsifier" tn="falsify" mo="1-1" />
   <verb in="faluner" tn="fertilize with shellfish shells" mo="1-1" />
   <verb in="familiariser" tn="familiarize" mo="1-1" />
@@ -4524,7 +4525,7 @@
   <verb in="pleuvasser" tn="rain a little or intermittently" mo="1-1" />
   <verb in="pleuviner" tn="drizzle" mo="1-1" />
   <verb in="pleuvioter" tn="drizzle" mo="1-1" />
-  <verb in="pleuvoir" tn="rain" mo="4-4" de="t" ee="Les plaisanteries et les compliments crus pleuvaient... = Jokes and raw compliments were raining down..." so="Isabelle Eberhardt, Yasmina" />
+  <verb in="pleuvoir" tn="rain" mo="4-4" ee="Les plaisanteries et les compliments crus pleuvaient... = Jokes and raw compliments were raining down..." so="Isabelle Eberhardt, Yasmina" dg="25" />
   <verb in="pleuvoter" tn="drizzle" mo="1-1" />
   <verb in="plier" tn="fold, fold up, bend" mo="1-1" />
   <verb in="plisser" tn="fold over, pleat, wrinkle, crease" mo="1-1" />

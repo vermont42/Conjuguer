@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE defectGroups [
+    <!ELEMENT defectGroups (defectGroup+)>
+    <!ELEMENT defectGroup (defectGroup*)>
+    <!ATTLIST defectGroup id CDATA #REQUIRED>
+    <!ATTLIST defectGroup en CDATA #REQUIRED>
+    <!ATTLIST defectGroup fr CDATA #IMPLIED>
+    <!ATTLIST defectGroup uo CDATA #IMPLIED>
+    <!ATTLIST defectGroup du CDATA #IMPLIED>
+]>
+
+<defectGroups>
+  <defectGroup id="0" en="Only infinitif is used." fr="Seul l'infinitif est utilisé." />
+  <defectGroup id="7" en="Only participe passé is used." fr="Seul le participe passé est utilisé." uo="pp" />
+  <defectGroup id="10" en="Only participe passé and participe présent are used." fr="Seuls le participe passé et le participe présent sont utilisés." uo="pp,rr" />
+  <defectGroup id="25" en="Usually used with 3S. Occasionally 3P. In a poetic context, other persons might be appropriate." fr="Habituellement utilisé avec 3S. Parfois 3P. Dans un contexte poétique, d'autres personnes pourraient être appropriées." du="1S,2S,1P,2P" />
+</defectGroups>

@@ -9,7 +9,7 @@ import SwiftUI
 
 extension Text {
   init(verb: Verb, tense: Tense) {
-    let conjugation: String
+    var conjugation: String
     switch Conjugator.conjugate(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) {
     case .success(let value):
       conjugation = value
@@ -18,49 +18,56 @@ extension Text {
     }
 
     switch tense {
-    case .participePassé, .participePrésent, .radicalFutur:
-      self.init(mixedCaseString: conjugation)
-      return
-    default:
-      self.init("")
+    case .participePassé:
+      break
+    case .participePrésent:
+      break
+    case .radicalFutur:
+      break
+    case .indicatifPrésent(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .passéSimple(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .imparfait(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .futurSimple(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .conditionnelPrésent(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .subjonctifPrésent(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .subjonctifImparfait(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .impératif(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .passéComposé(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .plusQueParfait(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .passéAntérieur(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .passéSurcomposé(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .futurAntérieur(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .conditionnelPassé(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .subjonctifPassé(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .subjonctifPlusQueParfait(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .impératifPassé(let personNumber):
+      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    }
 
-// TODO: Build mixedCaseString with subject pronoun and reflexive pronoun.
-// TODO: For all verbs, use .strikeThrough() if conjugation is defective.
+    self.init(mixedCaseString: conjugation)
 
-//    case .indicatifPrésent(_):
-//      <#code#>
-//    case .passéSimple(_):
-//      <#code#>
-//    case .imparfait(_):
-//      <#code#>
-//    case .futurSimple(_):
-//      <#code#>
-//    case .conditionnelPrésent(_):
-//      <#code#>
-//    case .subjonctifPrésent(_):
-//      <#code#>
-//    case .subjonctifImparfait(_):
-//      <#code#>
-//    case .impératif(_):
-//      <#code#>
-//    case .passéComposé(_):
-//      <#code#>
-//    case .plusQueParfait(_):
-//      <#code#>
-//    case .passéAntérieur(_):
-//      <#code#>
-//    case .passéSurcomposé(_):
-//      <#code#>
-//    case .futurAntérieur(_):
-//      <#code#>
-//    case .conditionnelPassé(_):
-//      <#code#>
-//    case .subjonctifPassé(_):
-//      <#code#>
-//    case .subjonctifPlusQueParfait(_):
-//      <#code#>
-//    case .impératifPassé(_):
-//      <#code#>
+    if
+      let defectGroupId = verb.defectGroupId,
+      let defectGroup = DefectGroup.defectGroups[defectGroupId],
+      defectGroup.isDefectiveForTense(tense)
+    {
+      self = self.strikethrough()
     }
   }
 

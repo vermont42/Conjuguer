@@ -31,13 +31,7 @@ struct VerbView: View {
         }
 
         Group {
-          if verb.isReflexive && verb.isDefective {
-            Text("Reflexive, Defective")
-              .bodyLabel()
-          } else if !verb.isReflexive && verb.isDefective {
-            Text("Defective")
-              .bodyLabel()
-          } else if verb.isReflexive && !verb.isDefective {
+          if verb.isReflexive {
             Text("Reflexive")
               .bodyLabel()
           }
@@ -56,24 +50,33 @@ struct VerbView: View {
           }
         }
 
-        Spacer()
-
-        if let example = verb.example {
-          Group {
-            Text("Example Use")
-              .subheadingLabel()
-              .leftAligned()
-
-            Text(example)
-              .bodyLabel()
-
-            if let source = verb.source {
-              Text(source)
-                .smallLabel()
-                .rightAligned()
-            }
-
+        Group {
+          if
+            let defectGroupId = verb.defectGroupId,
+            let defectGroup = DefectGroup.defectGroups[defectGroupId]
+          {
+            Text("Defective. " + defectGroup.description())
+                .bodyLabel()
             Spacer()
+          }
+
+          if let example = verb.example {
+            Group {
+              Text("Example Use")
+                .subheadingLabel()
+                .leftAligned()
+
+              Text(example)
+                .bodyLabel()
+
+              if let source = verb.source {
+                Text(source)
+                  .smallLabel()
+                  .rightAligned()
+              }
+
+              Spacer()
+            }
           }
         }
 
@@ -93,14 +96,7 @@ struct VerbView: View {
             Text("Indicatif Présent")
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .indicatifPrésent(personNumber), extraLetters: verb.extraLetters) {
-              case .success(let value):
-                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                Text(mixedCaseString: pronounAndConjugation)
-                  .bodyLabel()
-              default:
-                fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for indicatif présent.")
-              }
+              Text(verb: verb, tense: .indicatifPrésent(personNumber)).font(bodyFont)
             }
 
             Spacer()
@@ -108,14 +104,7 @@ struct VerbView: View {
             Text("Passé Simple")
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .passéSimple(personNumber), extraLetters: verb.extraLetters) {
-              case .success(let value):
-                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                Text(mixedCaseString: pronounAndConjugation)
-                  .bodyLabel()
-              default:
-                fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for passé simple.")
-              }
+              Text(verb: verb, tense: .passéSimple(personNumber)).font(bodyFont)
             }
 
             Spacer()
@@ -125,28 +114,14 @@ struct VerbView: View {
             Text("Imparfait")
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .imparfait(personNumber), extraLetters: verb.extraLetters) {
-              case .success(let value):
-                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                Text(mixedCaseString: pronounAndConjugation)
-                  .bodyLabel()
-              default:
-                fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for imparfait.")
-              }
+              Text(verb: verb, tense: .imparfait(personNumber)).font(bodyFont)
             }
             Spacer()
 
             Text("Futur Simple")
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .futurSimple(personNumber), extraLetters: verb.extraLetters) {
-              case .success(let value):
-                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                Text(mixedCaseString: pronounAndConjugation)
-                  .bodyLabel()
-              default:
-                fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for futur simple.")
-              }
+              Text(verb: verb, tense: .futurSimple(personNumber)).font(bodyFont)
             }
 
             Spacer()
@@ -154,14 +129,7 @@ struct VerbView: View {
             Text("Conditionnel Présent")
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .conditionnelPrésent(personNumber), extraLetters: verb.extraLetters) {
-              case .success(let value):
-                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                Text(mixedCaseString: pronounAndConjugation)
-                  .bodyLabel()
-              default:
-                fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for conditionnel présent.")
-              }
+              Text(verb: verb, tense: .conditionnelPrésent(personNumber)).font(bodyFont)
             }
 
             Spacer()
@@ -171,14 +139,7 @@ struct VerbView: View {
             Text("Subjonctif Présent")
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .subjonctifPrésent(personNumber), extraLetters: verb.extraLetters) {
-              case .success(let value):
-                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                Text(mixedCaseString: pronounAndConjugation)
-                  .bodyLabel()
-              default:
-                fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for subjonctif présent.")
-              }
+              Text(verb: verb, tense: .subjonctifPrésent(personNumber)).font(bodyFont)
             }
 
             Spacer()
@@ -186,14 +147,7 @@ struct VerbView: View {
             Text("Subjonctif Imparfait")
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .subjonctifImparfait(personNumber), extraLetters: verb.extraLetters) {
-              case .success(let value):
-                let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                Text(mixedCaseString: pronounAndConjugation)
-                  .bodyLabel()
-              default:
-                fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for subjonctif imparfait.")
-              }
+              Text(verb: verb, tense: .subjonctifImparfait(personNumber)).font(bodyFont)
             }
 
             Spacer()
@@ -201,13 +155,7 @@ struct VerbView: View {
             Text("Impératif")
               .subheadingLabel()
             ForEach(PersonNumber.impératifPersonNumbers, id: \.self) { personNumber in
-              switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .impératif(personNumber), extraLetters: verb.extraLetters) {
-              case .success(let value):
-                Text(mixedCaseString: value)
-                  .bodyLabel()
-              default:
-                fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for impératif.")
-              }
+              Text(verb: verb, tense: .impératif(personNumber)).font(bodyFont)
             }
           }
         }
@@ -226,14 +174,7 @@ struct VerbView: View {
               Text("Passé Composé")
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-                switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .passéComposé(personNumber), extraLetters: verb.extraLetters) {
-                case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                  Text(mixedCaseString: pronounAndConjugation)
-                    .bodyLabel()
-                default:
-                  fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for passé composé.")
-                }
+                Text(verb: verb, tense: .passéComposé(personNumber)).font(bodyFont)
               }
 
               Spacer()
@@ -241,14 +182,7 @@ struct VerbView: View {
               Text("Plus Que Parfait")
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-                switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .plusQueParfait(personNumber), extraLetters: verb.extraLetters) {
-                case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                  Text(mixedCaseString: pronounAndConjugation)
-                    .bodyLabel()
-                default:
-                  fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for plus que parfait.")
-                }
+                Text(verb: verb, tense: .plusQueParfait(personNumber)).font(bodyFont)
               }
 
               Spacer()
@@ -256,14 +190,7 @@ struct VerbView: View {
               Text("Passé Antérieur")
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-                switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .passéAntérieur(personNumber), extraLetters: verb.extraLetters) {
-                case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                  Text(mixedCaseString: pronounAndConjugation)
-                    .bodyLabel()
-                default:
-                  fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for passé antérieur.")
-                }
+                Text(verb: verb, tense: .passéAntérieur(personNumber)).font(bodyFont)
               }
 
               Spacer()
@@ -273,14 +200,7 @@ struct VerbView: View {
               Text("Passé Surcomposé")
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-                switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .passéSurcomposé(personNumber), extraLetters: verb.extraLetters) {
-                case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                  Text(mixedCaseString: pronounAndConjugation)
-                    .bodyLabel()
-                default:
-                  fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for passé surcomposé.")
-                }
+                Text(verb: verb, tense: .passéSurcomposé(personNumber)).font(bodyFont)
               }
 
               Spacer()
@@ -288,14 +208,7 @@ struct VerbView: View {
               Text("Futur Antérieur")
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-                switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .futurAntérieur(personNumber), extraLetters: verb.extraLetters) {
-                case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                  Text(mixedCaseString: pronounAndConjugation)
-                    .bodyLabel()
-                default:
-                  fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for futur antérieur.")
-                }
+                Text(verb: verb, tense: .futurAntérieur(personNumber)).font(bodyFont)
               }
 
               Spacer()
@@ -303,14 +216,7 @@ struct VerbView: View {
               Text("Conditionnel Passé")
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-                switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .conditionnelPassé(personNumber), extraLetters: verb.extraLetters) {
-                case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                  Text(mixedCaseString: pronounAndConjugation)
-                    .bodyLabel()
-                default:
-                  fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for conditionnel passé")
-                }
+                Text(verb: verb, tense: .conditionnelPassé(personNumber)).font(bodyFont)
               }
 
               Spacer()
@@ -320,14 +226,7 @@ struct VerbView: View {
               Text("Subjonctif Passé")
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-                switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .subjonctifPassé(personNumber), extraLetters: verb.extraLetters) {
-                case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                  Text(mixedCaseString: pronounAndConjugation)
-                    .bodyLabel()
-                default:
-                  fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for subjonctif passé.")
-                }
+                Text(verb: verb, tense: .subjonctifPassé(personNumber)).font(bodyFont)
               }
 
               Spacer()
@@ -335,14 +234,7 @@ struct VerbView: View {
               Text("Subjonctif Plus Que Parfait")
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-                switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .subjonctifPlusQueParfait(personNumber), extraLetters: verb.extraLetters) {
-                case .success(let value):
-                  let pronounAndConjugation = personNumber.pronounAndConjugation(value, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-                  Text(mixedCaseString: pronounAndConjugation)
-                    .bodyLabel()
-                default:
-                  fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for subjonctif plus que parfait.")
-                }
+                Text(verb: verb, tense: .subjonctifPlusQueParfait(personNumber)).font(bodyFont)
               }
 
               Spacer()
@@ -350,13 +242,7 @@ struct VerbView: View {
               Text("Impératif Passé")
                 .subheadingLabel()
               ForEach(PersonNumber.impératifPersonNumbers, id: \.self) { personNumber in
-                switch Conjugator.conjugate(infinitif: verb.infinitif, tense: .impératifPassé(personNumber), extraLetters: verb.extraLetters) {
-                case .success(let value):
-                  Text(mixedCaseString: value)
-                    .bodyLabel()
-                default:
-                  fatalError("Could not conjugate \(verb.infinitif) \(personNumber.shortDisplayName) for impératif passé.")
-                }
+                Text(verb: verb, tense: .impératifPassé(personNumber)).font(bodyFont)
               }
             }
           }

@@ -24,6 +24,7 @@ struct ConjuguerApp: App {
     Verb.verbs = VerbParser().parse()
     VerbModel.models = VerbModelParser().parse()
     VerbModel.computeIrregularities()
+    DefectGroup.defectGroups = DefectGroupParser().parse()
 
 //    let verbArray = Verb.verbs.values.sorted { lhs, rhs in
 //      lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending

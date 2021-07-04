@@ -17,12 +17,12 @@ struct Verb: Identifiable, Hashable {
   let model: String
   let auxiliary: Auxiliary
   let isReflexive: Bool
-  let isDefective: Bool // TODO: trulyDefectiveTenses: Set<Tense>, arguablyDefectiveTenses: Set<Tense>
   let hasAspiratedH: Bool
   let frequency: Int?
   let extraLetters: String?
   let example: String?
   let source: String?
+  let defectGroupId: String?
 
   var infinitifStem: String {
     let endingLength: Int

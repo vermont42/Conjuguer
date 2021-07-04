@@ -16,12 +16,12 @@ class VerbParser: NSObject, XMLParserDelegate {
   private var currentModel = ""
   private var currentAuxiliary: String?
   private var currentIsReflexive = false
-  private var currentIsDefective = false
   private var currentHasAspiratedH = false
   private var currentFrequency: Int?
   private var currentExtraLetters: String?
   private var currentExample: String?
   private var currentSource: String?
+  private var currentDefectGroupId: String?
 
   override init() {
     super.init()
@@ -72,13 +72,6 @@ class VerbParser: NSObject, XMLParserDelegate {
       }
 
       if
-        let isDefective = attributeDict["de"],
-        isDefective == "t"
-      {
-        currentIsDefective = true
-      }
-
-      if
         let hasAspiratedH = attributeDict["ah"],
         hasAspiratedH == "t"
       {
@@ -102,6 +95,10 @@ class VerbParser: NSObject, XMLParserDelegate {
 
       if let source = attributeDict["so"] {
         currentSource = source
+      }
+
+      if let defectGroupId = attributeDict["dg"] {
+        currentDefectGroupId = defectGroupId
       }
     }
   }
@@ -131,12 +128,12 @@ class VerbParser: NSObject, XMLParserDelegate {
         model: currentModel,
         auxiliary: auxiliary,
         isReflexive: currentIsReflexive,
-        isDefective: currentIsDefective,
         hasAspiratedH: currentHasAspiratedH,
         frequency: currentFrequency,
         extraLetters: currentExtraLetters,
         example: currentExample,
-        source: currentSource
+        source: currentSource,
+        defectGroupId: currentDefectGroupId
       )
 
       currentVerb = ""
@@ -144,12 +141,12 @@ class VerbParser: NSObject, XMLParserDelegate {
       currentModel = ""
       currentAuxiliary = nil
       currentIsReflexive = false
-      currentIsDefective = false
       currentHasAspiratedH = false
       currentFrequency = nil
       currentExtraLetters = nil
       currentExample = nil
       currentSource = nil
+      currentDefectGroupId = nil
     }
   }
 }
