@@ -7,9 +7,6 @@
 
 import Foundation
 
-//<defectGroup id="0" en="Only infinitif is used." fr="Seul l'infinitif est utilisé." />
-//<defectGroup id="7" en="Only participe passé is used." fr="Seul le participe passé est utilisé." us="ep" />
-
 struct DefectGroup {
   static var defectGroups: [String: DefectGroup] = [:]
 
