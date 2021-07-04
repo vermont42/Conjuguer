@@ -74,7 +74,7 @@ struct DefectGroup {
       .conditionnelPrésent(.firstSingular), .conditionnelPrésent(.secondSingular), .conditionnelPrésent(.thirdSingular), .conditionnelPrésent(.firstPlural), .conditionnelPrésent(.secondPlural), .conditionnelPrésent(.thirdPlural),
       .subjonctifPrésent(.firstSingular), .subjonctifPrésent(.secondSingular), .subjonctifPrésent(.thirdSingular), .subjonctifPrésent(.firstPlural), .subjonctifPrésent(.secondPlural), .subjonctifPrésent(.thirdPlural),
       .subjonctifImparfait(.firstSingular), .subjonctifImparfait(.secondSingular), .subjonctifImparfait(.thirdSingular), .subjonctifImparfait(.firstPlural), .subjonctifImparfait(.secondPlural), .subjonctifImparfait(.thirdPlural),
-      .impératif(.secondSingular),.impératif(.firstPlural), .impératif(.secondPlural),
+      .impératif(.secondSingular), .impératif(.firstPlural), .impératif(.secondPlural),
       .passéComposé(.firstSingular), .passéComposé(.secondSingular), .passéComposé(.thirdSingular), .passéComposé(.firstPlural), .passéComposé(.secondPlural), .passéComposé(.thirdPlural),
       .plusQueParfait(.firstSingular), .plusQueParfait(.secondSingular), .plusQueParfait(.thirdSingular), .plusQueParfait(.firstPlural), .plusQueParfait(.secondPlural), .plusQueParfait(.thirdPlural),
       .passéAntérieur(.firstSingular), .passéAntérieur(.secondSingular), .passéAntérieur(.thirdSingular), .passéAntérieur(.firstPlural), .passéAntérieur(.secondPlural), .passéAntérieur(.thirdPlural),
