@@ -26,7 +26,7 @@ struct VerbView: View {
           .bodyLabel()
 
         if let model = VerbModel.models[verb.model] {
-          Text(model.exemplar + " (" + model.id + ")")
+          Text("Model: \(model.exemplar) (\(model.id))")
             .bodyLabel()
         }
 

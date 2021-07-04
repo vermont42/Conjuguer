@@ -32,18 +32,26 @@ struct DefectGroup {
       setAllDefectsTo(true)
     } else if let doesntUse = doesntUse {
       setAllDefectsTo(false)
-      // TODO: Disable certain conjugations.
+      let doesntUseArray = doesntUse.components(separatedBy: defectSeparator)
+      for doesnt in doesntUseArray {
+        switch doesnt {
+        case "1s", "2s", "3s", "1p", "2p", "3p":
+          defectifyPersonNumber(PersonNumber.personNumberForShortDisplayName(doesnt))
+        default:
+          fatalError("Unrecognized doesntUse \(doesnt) found.")
+        }
+      }
     } else if let usesOnly = usesOnly {
       setAllDefectsTo(true)
-      let defectArray = usesOnly.components(separatedBy: defectSeparator)
-      for defect in defectArray {
-        switch defect {
+      let usesOnlyArray = usesOnly.components(separatedBy: defectSeparator)
+      for uses in usesOnlyArray {
+        switch uses {
         case "pp":
           defects[.participePassé] = false
         case "rr":
           defects[.participePrésent] = false
         default:
-          fatalError("Unrecognized defect \(defect) found.")
+          fatalError("Unrecognized usesOnly \(uses) found.")
         }
       }
     }
@@ -83,6 +91,30 @@ struct DefectGroup {
       .impératifPassé(.secondSingular), .impératifPassé(.firstPlural), .impératifPassé(.secondPlural)
     ].forEach {
       defects[$0] = value
+    }
+  }
+
+  private mutating func defectifyPersonNumber(_ personNumber: PersonNumber) {
+    [
+      .indicatifPrésent(personNumber),
+      .passéSimple(personNumber),
+      .imparfait(personNumber),
+      .futurSimple(personNumber),
+      .conditionnelPrésent(personNumber),
+      .subjonctifPrésent(personNumber),
+      .subjonctifImparfait(personNumber),
+      .impératif(personNumber),
+      .passéComposé(personNumber),
+      .plusQueParfait(personNumber),
+      .passéAntérieur(personNumber),
+      .passéSurcomposé(personNumber),
+      .futurAntérieur(personNumber),
+      .conditionnelPassé(personNumber),
+      .subjonctifPassé(personNumber),
+      .subjonctifPlusQueParfait(personNumber),
+      .impératifPassé(personNumber)
+    ].forEach {
+      defects[$0] = true
     }
   }
 }

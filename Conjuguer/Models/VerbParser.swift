@@ -122,19 +122,21 @@ class VerbParser: NSObject, XMLParserDelegate {
         currentVerbWithPossibleExtraLetters = currentVerb
       }
 
-      verbs[currentVerbWithPossibleExtraLetters] = Verb(
-        infinitif: currentVerb,
-        translation: currentTranslation,
-        model: currentModel,
-        auxiliary: auxiliary,
-        isReflexive: currentIsReflexive,
-        hasAspiratedH: currentHasAspiratedH,
-        frequency: currentFrequency,
-        extraLetters: currentExtraLetters,
-        example: currentExample,
-        source: currentSource,
-        defectGroupId: currentDefectGroupId
-      )
+      if ["avoir", "être"].contains(currentVerb) || currentDefectGroupId != nil {
+        verbs[currentVerbWithPossibleExtraLetters] = Verb(
+          infinitif: currentVerb,
+          translation: currentTranslation,
+          model: currentModel,
+          auxiliary: auxiliary,
+          isReflexive: currentIsReflexive,
+          hasAspiratedH: currentHasAspiratedH,
+          frequency: currentFrequency,
+          extraLetters: currentExtraLetters,
+          example: currentExample,
+          source: currentSource,
+          defectGroupId: currentDefectGroupId
+        )
+      }
 
       currentVerb = ""
       currentTranslation = ""

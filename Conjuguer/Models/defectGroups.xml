@@ -11,7 +11,8 @@
 
 <defectGroups>
   <defectGroup id="0" en="Only infinitif is used." fr="Seul l'infinitif est utilisé." />
-  <defectGroup id="7" en="Only participe passé is used." fr="Seul le participe passé est utilisé." uo="pp" />
-  <defectGroup id="10" en="Only participe passé and participe présent are used." fr="Seuls le participe passé et le participe présent sont utilisés." uo="pp,rr" />
-  <defectGroup id="25" en="Usually used with 3S. Occasionally 3P. In a poetic context, other persons might be appropriate." fr="Habituellement utilisé avec 3S. Parfois 3P. Dans un contexte poétique, d'autres personnes pourraient être appropriées." du="1S,2S,1P,2P" />
+  <defectGroup id="6" en="Only participe passé is used." fr="Seul le participe passé est utilisé." uo="pp" />
+  <defectGroup id="9" en="Only participe passé and participe présent are used." fr="Seuls le participe passé et le participe présent sont utilisés." uo="pp,rr" />
+  <defectGroup id="22" en="Only 3s is used, but in poetry, other persons might be appropriate." fr="Seulement 3s est utilisé, mais en poésie, d'autres personnes pourraient être appropriées." du="1s,2s,1p,2p,3p" />
+  <defectGroup id="24" en="Usually used with 3s. Occasionally 3p. In poetry, other persons might be appropriate." fr="Habituellement utilisé avec 3s. Parfois 3p. En poésie, d'autres personnes pourraient être appropriées." du="1s,2s,1p,2p" />
 </defectGroups>

@@ -74,7 +74,7 @@
   <verb in="accoutumer" tn="accustom" mo="1-1" />
   <verb in="accréditer" tn="accredit" mo="1-1" />
   <verb in="accrocher" tn="hook, hook up" mo="1-1" />
-  <verb in="accroire" tn="believe something false" mo="5-18" />
+  <verb in="accroire" tn="believe something false" mo="5-18" dg="0" />
   <verb in="accroître" tn="increase" mo="5-19B" />
   <verb in="accroupir" tn="crouch, squat" re="t" mo="2-1" />
   <verb in="accueillir" tn="welcome" mo="3-2B" />
@@ -526,7 +526,7 @@
   <verb in="bavarder" tn="chat" mo="1-1" />
   <verb in="bavasser" tn="waffle, natter" mo="1-1" />
   <verb in="baver" tn="drool, slobber" mo="1-1" />
-  <verb in="bayer" tn="gape" mo="1-7B" />
+  <verb in="bayer" tn="gape" mo="1-7B" dg="0" ee="bayer aux corneilles = be dumbstruck or gape" />
   <verb in="bazarder" tn="sell, sell off" mo="1-1" />
   <verb in="béatifier" tn="beatify" mo="1-1" />
   <verb in="bêcher" tn="dig with a spade, badmouth" mo="1-1" />
@@ -711,11 +711,11 @@
   <verb in="bronzer" tn="tan (from exposure to ultraviolet radiation)" mo="1-1" />
   <verb in="brosser" tn="brush, whip, beat, play truant, skip class" mo="1-1" />
   <verb in="brouetter" tn="transport something in a wheelbarrow" mo="1-1" />
-  <verb in="brouillasser" tn="drizzle" mo="1-1" />
+  <verb in="brouillasser" tn="drizzle" mo="1-1" dg="22" />
   <verb in="brouiller" tn="blur, mix up, confuse" mo="1-1" />
   <verb in="brouter" tn="gaze, browse" mo="1-1" />
   <verb in="broyer" tn="crush, grind" mo="1-7A" />
-  <verb in="bruiner" tn="drizzle" mo="1-1" />
+  <verb in="bruiner" tn="drizzle" mo="1-1" dg="22" />
   <verb in="bruire" tn="rustle, murmur" mo="2-2" />
   <verb in="bruisser" tn="make a noise, rustle" mo="1-1" />
   <verb in="bruiter" tn="make a noise, do the sound effects" mo="1-1" />
@@ -945,7 +945,7 @@
   <verb in="chlorer" tn="chlorinate" mo="1-1" />
   <verb in="chloroformer" tn="chloroform" mo="1-1" />
   <verb in="chlorurer" tn="chlorinate" mo="1-1" />
-  <verb in="choir" tn="fall" mo="4-11A" dg="7" />
+  <verb in="choir" tn="fall" mo="4-11A" dg="6" />
   <verb in="choisir" tn="choose" mo="2-1" fr="57" />
   <verb in="chômer" tn="be idle, be out of work" mo="1-1" />
   <verb in="choper" tn="steal, arrest, pick up (a passenger)" mo="1-1" />
@@ -1082,7 +1082,7 @@
   <verb in="compacter" tn="compact" mo="1-1" />
   <verb in="comparaître" tn="appear before a judge" mo="5-20" />
   <verb in="comparer" tn="compare" mo="1-1" />
-  <verb in="comparoir" tn="appear before a judge" mo="4-1A" dg="10" />
+  <verb in="comparoir" tn="appear before a judge" mo="4-1A" dg="9" />
   <verb in="compartimenter" tn="compartmentalize" mo="1-1" />
   <verb in="compasser" tn="compass" mo="1-1" />
   <verb in="compatir" tn="sympathize, empathize, feel for" mo="2-1" />
@@ -1283,7 +1283,7 @@
   <verb in="courber" tn="bend" mo="1-1" />
   <verb in="courir" tn="run" mo="6-4" />
   <verb in="couronner" tn="crown" mo="1-1" />
-  <verb in="courre" tn="hunt" mo="6-4" />
+  <verb in="courre" tn="hunt" mo="6-4" dg="0" ee="chasse à courre = hunting with hounds" />
   <verb in="courroucer" tn="enrage, infuriate" mo="1-2A" />
   <verb in="courser" tn="buy" mo="1-1" />
   <verb in="court-circuiter" tn="short circuit" mo="1-1" />
@@ -1295,7 +1295,7 @@
   <verb in="couver" tn="brood, coddle, scheme" mo="1-1" />
   <verb in="couvrir" tn="cover" mo="3-1" />
   <verb in="cracher" tn="spit" mo="1-1" />
-  <verb in="crachiner" tn="spit, drizzle (of rain)" mo="1-1" />
+  <verb in="crachiner" tn="spit, drizzle (of rain)" mo="1-1" dg="22" />
   <verb in="crachoter" tn="spittle, splutter, crackle" mo="1-1" />
   <verb in="crachouiller" tn="sputter" mo="1-1" />
   <verb in="crailler" tn="cry out as a crow or other bird" mo="1-1" />
@@ -2245,10 +2245,10 @@
   <verb in="doublonner" tn="duplicate" mo="1-1" />
   <verb in="doucher" tn="take a shower" re="t" mo="1-1" />
   <verb in="doucir" tn="polish, smooth" mo="2-1" />
-  <verb in="douer" tn="endow (someone)" mo="1-1" />
+  <verb in="douer" tn="endow (someone)" mo="1-1" dg="6" />
   <verb in="douiller" tn="hurt" mo="1-1" />
   <verb in="douter" tn="doubt" mo="1-1" />
-  <verb in="dracher" tn="rain like cats and dogs (in Belgium)" mo="1-1" />
+  <verb in="dracher" tn="rain like cats and dogs (in Belgium)" mo="1-1" dg="22" />
   <verb in="dragéifier" tn="coat, cover" mo="1-1" />
   <verb in="drageonner" tn="put forth shoots or suckers" mo="1-1" />
   <verb in="draguer" tn="dredge, flirt" mo="1-1" />
@@ -3046,7 +3046,7 @@
   <verb in="fendiller" tn="crack, craze" mo="1-1" />
   <verb in="fendre" tn="split, chop (wood), crack" mo="5-1A" />
   <verb in="fenêtrer" tn="make holes for windows, install windows" mo="1-1" />
-  <verb in="férir" tn="hit, strike" mo="2-4" />
+  <verb in="férir" tn="hit, strike" mo="2-4" dg="0" ee="sans coup férir = without encountering any opposition" />
   <verb in="ferler" tn="furl, roll up (a sail)" mo="1-1" />
   <verb in="fermenter" tn="ferment" mo="1-1" />
   <verb in="fermer" tn="shut, close" mo="1-1" />
@@ -3361,7 +3361,7 @@
   <verb in="grecquer" tn="incise" mo="1-1" />
   <verb in="gréer" tn="rig" mo="1-1" />
   <verb in="greffer" tn="transplant, graft" mo="1-1" />
-  <verb in="grêler" tn="hail" mo="1-1" />
+  <verb in="grêler" tn="hail" mo="1-1" dg="22" />
   <verb in="grelotter" tn="shiver, tremble" mo="1-1" />
   <verb in="grenailler" tn="granulate" mo="1-1" />
   <verb in="greneler" tn="grain" mo="1-3A" />
@@ -4154,7 +4154,7 @@
   <verb in="nécroser" tn="necrose" mo="1-1" />
   <verb in="négliger" tn="neglect" mo="1-2B" />
   <verb in="négocier" tn="negotiate" mo="1-1" />
-  <verb in="neiger" tn="snow" mo="1-2B" />
+  <verb in="neiger" tn="snow" mo="1-2B" dg="22" />
   <verb in="nervurer" tn="rib, make architectural ribs on a vault" mo="1-1" />
   <verb in="nettoyer" tn="clean, wipe clean" mo="1-7A" />
   <verb in="neutraliser" tn="neutralize" mo="1-1" />
@@ -4214,7 +4214,7 @@
   <verb in="obvier" tn="obviate" mo="1-1" />
   <verb in="occasionner" tn="provoke, cause" mo="1-1" />
   <verb in="occidentaliser" tn="westernize" mo="1-1" />
-  <verb in="occire" tn="slay" mo="5-8D" />
+  <verb in="occire" tn="slay" mo="5-8D" dg="6" />
   <verb in="occlure" tn="occlude" mo="5-16B" />
   <verb in="occulter" tn="occult" mo="1-1" />
   <verb in="occuper" tn="occupy" mo="1-1" fr="38" />
@@ -4523,9 +4523,9 @@
   <verb in="pleurer" tn="cry, weep, mourn" mo="1-1" />
   <verb in="pleurnicher" tn="whine" mo="1-1" />
   <verb in="pleuvasser" tn="rain a little or intermittently" mo="1-1" />
-  <verb in="pleuviner" tn="drizzle" mo="1-1" />
-  <verb in="pleuvioter" tn="drizzle" mo="1-1" />
-  <verb in="pleuvoir" tn="rain" mo="4-4" ee="Les plaisanteries et les compliments crus pleuvaient... = Jokes and raw compliments were raining down..." so="Isabelle Eberhardt, Yasmina" dg="25" />
+  <verb in="pleuviner" tn="drizzle" mo="1-1" dg="22" />
+  <verb in="pleuvioter" tn="drizzle" mo="1-1" dg="22" />
+  <verb in="pleuvoir" tn="rain" mo="4-4" ee="Les plaisanteries et les compliments crus pleuvaient... = Jokes and raw compliments were raining down..." so="Isabelle Eberhardt, Yasmina" dg="24" />
   <verb in="pleuvoter" tn="drizzle" mo="1-1" />
   <verb in="plier" tn="fold, fold up, bend" mo="1-1" />
   <verb in="plisser" tn="fold over, pleat, wrinkle, crease" mo="1-1" />
@@ -4534,7 +4534,7 @@
   <verb in="ployer" tn="bend, fold" mo="1-7A" />
   <verb in="plucher" tn="fluff up, become fluffy" mo="1-1" />
   <verb in="plumer" tn="pluck the feathers off, swindle" mo="1-1" />
-  <verb in="pluviner" tn="drizzle" mo="1-1" />
+  <verb in="pluviner" tn="drizzle" mo="1-1" dg="22" />
   <verb in="pocharder" tn="become drunk" re="t" mo="1-1" />
   <verb in="pocher" tn="poach, cook by poaching, sketch" mo="1-1" />
   <verb in="podzoliser" tn="podzolize" mo="1-1" />
@@ -4739,7 +4739,7 @@
   <verb in="quartager" tn="perform a fourth cultivation" mo="1-2B" />
   <verb in="quémander" tn="beg (for), cadge" mo="1-1" />
   <verb in="quereller" tn="quarrel, squabble" mo="1-1" />
-  <verb in="quérir" tn="seek" mo="6-3" />
+  <verb in="quérir" tn="seek" mo="6-3" dg="0" />
   <verb in="questionner" tn="question, interrogate, call into question" mo="1-1" />
   <verb in="quêter" tn="search for, look for, beg" mo="1-1" />
   <verb in="queuter" tn="miss, fail, screw up" mo="1-1" />
@@ -4875,7 +4875,7 @@
   <verb in="raviser" tn="change one’s mind, reconsider" re="t" mo="1-1" />
   <verb in="ravitailler" tn="resupply, refuel, revictual" mo="1-1" />
   <verb in="raviver" tn="revive, rekindle" mo="1-1" />
-  <verb in="ravoir" tn="have back, get back" mo="4-10" />
+  <verb in="ravoir" tn="have back, get back" mo="4-10" dg="0" />
   <verb in="rayer" tn="line, cross out, cross off, wipe off" mo="1-7B" />
   <verb in="rayonner" tn="radiate, spread out" mo="1-1" />
   <verb in="razzier" tn="raid" mo="1-1" />
@@ -5206,7 +5206,7 @@
   <verb in="rendosser" tn="put on again" mo="1-1" />
   <verb in="rendre" tn="render" mo="5-1A" fr="17" />
   <verb in="renégocier" tn="renegotiate" mo="1-1" />
-  <verb in="reneiger" tn="snow again" mo="1-2B" />
+  <verb in="reneiger" tn="snow again" mo="1-2B" dg="22" />
   <verb in="rénetter" tn="cut furrows into a hoof with a hoof knife" mo="1-1" />
   <verb in="renfermer" tn="lock again, re-lock, contain, encompass" mo="1-1" />
   <verb in="renfiler" tn="rethread" mo="1-1" />
@@ -5272,7 +5272,7 @@
   <verb in="replacer" tn="put back, replace" mo="1-2A" />
   <verb in="replanter" tn="replant" mo="1-1" />
   <verb in="replâtrer" tn="replaster, patch up" mo="1-1" />
-  <verb in="repleuvoir" tn="rain again, rain for a second time" mo="4-4" />
+  <verb in="repleuvoir" tn="rain again, rain for a second time" mo="4-4" dg="22" />
   <verb in="replier" tn="fold, fold up, refold, fold again" mo="1-1" />
   <verb in="répliquer" tn="reply, replicate" mo="1-1" />
   <verb in="replonger" tn="plunge again, plunge back, relapse" mo="1-2B" />
@@ -6205,7 +6205,7 @@
   <verb in="varier" tn="vary" mo="1-1" />
   <verb in="varloper" tn="plane" mo="1-1" />
   <verb in="vaseliner" tn="put vaseline on" mo="1-1" />
-  <verb in="vaser" tn="rain cats and dogs" mo="1-1" />
+  <verb in="vaser" tn="rain cats and dogs" mo="1-1" dg="22" />
   <verb in="vasouiller" tn="hesitate" mo="1-1" />
   <verb in="vaticiner" tn="prophesy" mo="1-1" />
   <verb in="vautrer" tn="wallow" re="t" mo="1-1" />
@@ -6220,7 +6220,7 @@
   <verb in="vénérer" tn="worship, venerate" mo="1-5" />
   <verb in="venger" tn="avenge, take revenge (upon)" mo="1-2B" />
   <verb in="venir" tn="come" ay="e" mo="6-7" fr="18" />
-  <verb in="venter" tn="be windy, blow" mo="1-1" />
+  <verb in="venter" tn="be windy, blow" mo="1-1" dg="22" />
   <verb in="ventiler" tn="ventilate, discuss, debate" mo="1-1" />
   <verb in="verbaliser" tn="verbalize, put into words" mo="1-1" />
   <verb in="verdir" tn="turn green" mo="2-1" />
