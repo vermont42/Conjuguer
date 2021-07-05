@@ -11,6 +11,10 @@
 
 <defectGroups>
   <defectGroup id="0" en="Only infinitif is used." fr="Seul l'infinitif est utilisé." />
+  <defectGroup id="1" en="Only participe passé, participe présent, 3s, and 3p are used." fr="Seuls participe passé, participe présent, 3s et 3p sont utilisés." du="1s,2s,1p,2p" />
+  <defectGroup id="2" en="Only indicatif présent 3s is used." fr="Seul l'indicatif présent 3s est utilisé." uo="r3s" />
+  <defectGroup id="3" en="Only participe présent and indicatif présent 3s are used." fr="Seuls l'indicatif présent 3s et le participe présent sont utilisés." uo="rr,r3s" />
+  <defectGroup id="4" en="Only participe présent, 3s, and 3p are used." fr="Seuls participe présent, 3s et 3p sont utilisés." uo="rr,3s,3p" />
   <defectGroup id="6" en="Only participe passé is used." fr="Seul le participe passé est utilisé." uo="pp" />
   <defectGroup id="9" en="Only participe passé and participe présent are used." fr="Seuls le participe passé et le participe présent sont utilisés." uo="pp,rr" />
   <defectGroup id="22" en="Only 3s is used, but in poetry, other persons might be appropriate." fr="Seulement 3s est utilisé, mais en poésie, d'autres personnes pourraient être appropriées." du="1s,2s,1p,2p,3p" />

@@ -36,7 +36,7 @@ struct DefectGroup {
       for doesnt in doesntUseArray {
         switch doesnt {
         case "1s", "2s", "3s", "1p", "2p", "3p":
-          defectifyPersonNumber(PersonNumber.personNumberForShortDisplayName(doesnt))
+          setPersonNumberDefectivity(personNumber: PersonNumber.personNumberForShortDisplayName(doesnt), defective: true)
         default:
           fatalError("Unrecognized doesntUse \(doesnt) found.")
         }
@@ -50,6 +50,12 @@ struct DefectGroup {
           defects[.participePassé] = false
         case "rr":
           defects[.participePrésent] = false
+        case "r3s":
+          defects[.indicatifPrésent(.thirdSingular)] = false
+        case "3s":
+          setPersonNumberDefectivity(personNumber: .thirdSingular, defective: false)
+        case "3p":
+          setPersonNumberDefectivity(personNumber: .thirdPlural, defective: false)
         default:
           fatalError("Unrecognized usesOnly \(uses) found.")
         }
@@ -61,8 +67,10 @@ struct DefectGroup {
     defects[tense] ?? false
   }
 
-  func description(locale: Locale = Locale.current) -> String {
-    if locale.languageCode == Util.french.languageCode {
+  func description(preferredLanguage: String? = nil) -> String {
+    let languageCode = preferredLanguage ?? Locale.preferredLanguages.first ?? Util.english.languageCode
+
+    if languageCode == Util.french.languageCode {
       return descriptionFr
     } else {
       return descriptionEn
@@ -94,7 +102,7 @@ struct DefectGroup {
     }
   }
 
-  private mutating func defectifyPersonNumber(_ personNumber: PersonNumber) {
+  private mutating func setPersonNumberDefectivity(personNumber: PersonNumber, defective: Bool) {
     [
       .indicatifPrésent(personNumber),
       .passéSimple(personNumber),
@@ -114,7 +122,7 @@ struct DefectGroup {
       .subjonctifPlusQueParfait(personNumber),
       .impératifPassé(personNumber)
     ].forEach {
-      defects[$0] = true
+      defects[$0] = defective
     }
   }
 }

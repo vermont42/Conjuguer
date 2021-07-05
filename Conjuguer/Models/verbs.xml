@@ -121,7 +121,7 @@
   <verb in="adsorber" tn="adsorb" mo="1-1" />
   <verb in="aduler" tn="adulate" mo="1-1" />
   <verb in="adultérer" tn="falsify, fake" mo="1-5" />
-  <verb in="advenir" tn="happen, occur" mo="6-7" />
+  <verb in="advenir" tn="happen, occur" mo="6-7" dg="1" />
   <verb in="aérer" tn="air, aerate" mo="1-5" />
   <verb in="affabuler" tn="make up stories, tell a fable" mo="1-1" />
   <verb in="affadir" tn="make tasteless, insipid, or bland" mo="2-1" />
@@ -299,7 +299,7 @@
   <verb in="appareiller" tn="join or mix together" mo="1-1" />
   <verb in="apparenter" tn="be related to" mo="1-1" />
   <verb in="apparier" tn="pair or match" mo="1-1" />
-  <verb in="apparoir" tn="be evident" mo="4-1D" />
+  <verb in="apparoir" tn="be evident" mo="4-1D" dg="2" />
   <verb in="appartenir" tn="belong, concern" mo="6-7" fr="79" />
   <verb in="appâter" tn="bait, lure" mo="1-1" />
   <verb in="appauvrir" tn="impoverish" mo="2-1" />
@@ -444,7 +444,7 @@
   <verb in="avantager" tn="favor, give advantage to" mo="1-2B" />
   <verb in="avarier" tn="go rotten, spoil" re="t" mo="1-1" />
   <verb in="aventurer" tn="venture" mo="1-1" />
-  <verb in="avérer" tn="prove to be" mo="1-5" />
+  <verb in="avérer" tn="prove to be" mo="1-5" dg="1" />
   <verb in="avertir" tn="warn, avert" mo="2-1" />
   <verb in="aveugler" tn="blind" mo="1-1" />
   <verb in="aveulir" tn="enfeeble, debase" mo="2-1" />
@@ -535,7 +535,7 @@
   <verb in="becqueter" tn="peck at, kiss" mo="1-3B" />
   <verb in="becter" tn="eat" mo="1-1" />
   <verb in="bedonner" tn="have a plump stomach, be paunchy" mo="1-1" />
-  <verb in="béer" tn="gape" mo="1-1" />
+  <verb in="béer" tn="gape" mo="1-1" dg="3" ee="être bouche bée = be astonished" />
   <verb in="bégayer" tn="stammer" mo="1-7B" />
   <verb in="bégueter" tn="bleat" mo="1-4" />
   <verb in="bêler" tn="baa, bleat" mo="1-1" />
@@ -668,7 +668,7 @@
   <verb in="braconner" tn="poach" mo="1-1" />
   <verb in="brader" tn="sell at a reduced price" mo="1-1" />
   <verb in="brailler" tn="holler, bawl" mo="1-1" />
-  <verb in="braire" tn="bray, shout" mo="5-24" />
+  <verb in="braire" tn="bray, shout" mo="5-24" dg="1" />
   <verb in="braiser" tn="braise" mo="1-1" />
   <verb in="bramer" tn="bellow, troat" mo="1-1" />
   <verb in="brancarder" tn="carry on a stretcher" mo="1-1" />
@@ -716,7 +716,7 @@
   <verb in="brouter" tn="gaze, browse" mo="1-1" />
   <verb in="broyer" tn="crush, grind" mo="1-7A" />
   <verb in="bruiner" tn="drizzle" mo="1-1" dg="22" />
-  <verb in="bruire" tn="rustle, murmur" mo="2-2" />
+  <verb in="bruire" tn="rustle, murmur" mo="2-2" dg="4" />
   <verb in="bruisser" tn="make a noise, rustle" mo="1-1" />
   <verb in="bruiter" tn="make a noise, do the sound effects" mo="1-1" />
   <verb in="bruler" tn="burn" mo="1-1" />
@@ -877,7 +877,7 @@
   <verb in="chagriner" tn="bother, worry, grieve, upset" mo="1-1" />
   <verb in="chahuter" tn="playfight, horseplay" mo="1-1" />
   <verb in="chaîner" tn="chain" mo="1-1" />
-  <verb in="chaloir" tn="heat, matter, be of import" mo="4-5A" />
+  <verb in="chaloir" tn="heat, matter, be of import" mo="4-5A" dg="2" />
   <verb in="chalouper" tn="sway, rock (said of dancing or walking)" mo="1-1" />
   <verb in="chamailler" tn="bicker, squabble, quarrel" re="t" mo="1-1" />
   <verb in="chamarrer" tn="enhance a fabric or garment with sumptuous ornaments" mo="1-1" />
@@ -2685,7 +2685,7 @@
   <verb in="ensiler" tn="store in a silo" mo="1-1" />
   <verb in="ensoleiller" tn="fill with light, brighten, illuminate" mo="1-1" />
   <verb in="ensorceler" tn="enchant, cast a spell, captivate" mo="1-3A" />
-  <verb in="ensuivre" tn="follow, come next, result, come as a result" re="t" mo="5-5" />
+  <verb in="ensuivre" tn="follow, come next, result, come as a result" re="t" mo="5-5" dg="1" />
   <verb in="entabler" tn="have the hips move before the shoulders (of a horse)" re="t" mo="1-1" />
   <verb in="entacher" tn="taint, blemish, besmirch, mar" mo="1-1" />
   <verb in="entailler" tn="snick, cut into, gash" mo="1-1" />
@@ -3570,7 +3570,7 @@
   <verb in="inciter" tn="urge, impel" mo="1-1" />
   <verb in="incliner" tn="incline" mo="1-1" />
   <verb in="inclure" tn="include" mo="5-16B" />
-  <verb in="incomber" tn="behoove" mo="1-1" />
+  <verb in="incomber" tn="behoove" mo="1-1" dg="1" />
   <verb in="incommoder" tn="incommode, bother, disconcert" mo="1-1" />
   <verb in="incorporer" tn="incorporate, embed" mo="1-1" />
   <verb in="incriminer" tn="incriminate, accuse" mo="1-1" />
@@ -5344,7 +5344,7 @@
   <verb in="restituer" tn="restitute, restore, bring back, bring back to life" mo="1-1" />
   <verb in="restreindre" tn="restrict, limit, restrain" mo="5-12" />
   <verb in="restructurer" tn="restructure" mo="1-1" />
-  <verb in="résulter" tn="result, happen" mo="1-1" />
+  <verb in="résulter" tn="result, happen" mo="1-1" dg="1" />
   <verb in="résumer" tn="summarize, sum up" mo="1-1" />
   <verb in="resurgir" tn="reemerge, resurface, reappear" mo="2-1" />
   <verb in="rétablir" tn="restore, restablish" mo="2-1" />
@@ -5522,8 +5522,8 @@
   <verb in="safraner" tn="add saffron to" mo="1-1" />
   <verb in="saietter" tn="brush" mo="1-1" />
   <verb in="saigner" tn="bleed, be bleeding" mo="1-1" />
-  <verb in="saillir" tn="bulge" mo="3-2A" ex="bulge" />
-  <verb in="saillir" tn="mate" mo="2-1" ex="mate" />
+  <verb in="saillir" tn="bulge" mo="3-2A" ex="bulge" dg="1" />
+  <verb in="saillir" tn="mate" mo="2-1" ex="mate" dg="1" />
   <verb in="saisir" tn="take hold of, grab, seize" mo="2-1" />
   <verb in="salarier" tn="pay a salary" mo="1-1" />
   <verb in="saler" tn="salt" mo="1-1" />
@@ -5684,7 +5684,7 @@
   <verb in="sonoriser" tn="voice, install a sound system" mo="1-1" />
   <verb in="sophistiquer" tn="falsify, corrupt" mo="1-1" />
   <verb in="sortir" tn="exit" ay="e" mo="6-1" fr="76" ex="exit" />
-  <verb in="sortir" tn="obtain" mo="2-1" ex="obtain" />
+  <verb in="sortir" tn="obtain" mo="2-1" ex="obtain" dg="1" />
   <verb in="soucier" tn="worry" mo="1-1" />
   <verb in="souder" tn="solder" mo="1-1" />
   <verb in="soudoyer" tn="bribe" mo="1-7A" />
@@ -5706,7 +5706,7 @@
   <verb in="soupirer" tn="sigh" mo="1-1" />
   <verb in="souquer" tn="heave" mo="1-1" />
   <verb in="sourciller" tn="frown" mo="1-1" />
-  <verb in="sourdre" tn="well up" mo="5-1A" />
+  <verb in="sourdre" tn="well up" mo="5-1A" dg="1" />
   <verb in="sourire" tn="smile" mo="5-11" />
   <verb in="sous-employer" tn="underuse, underutilize" mo="1-7A" />
   <verb in="sous-entendre" tn="imply" mo="5-1A" />
