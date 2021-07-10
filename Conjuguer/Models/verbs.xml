@@ -752,9 +752,9 @@
   <verb in="cadencer" tn="cadence" mo="1-2A" />
   <verb in="cadrer" tn="fit, go well together" mo="1-1" />
   <verb in="cafarder" tn="tattle" mo="1-1" />
-  <verb in="cafeter" tn="rat, rat on, denounce, drink coffee (in the Ardennes)" mo="1-1" />
+  <verb in="cafeter" tn="rat, rat on, denounce, drink coffee (in the Ardennes)" dg="5" mo="1-1" />
   <verb in="cafouiller" tn="play up, be in a mess, fall apart" mo="1-1" />
-  <verb in="cafter" tn="rat, rat on, denounce" mo="1-1" />
+  <verb in="cafter" tn="rat, rat on, denounce" dg="5" mo="1-1" />
   <verb in="cahoter" tn="bump, jolt" mo="1-1" />
   <verb in="cailler" tn="curdle, clot" mo="1-1" />
   <verb in="caillouter" tn="make a road using crushed stone" mo="1-1" />
@@ -766,7 +766,7 @@
   <verb in="calciner" tn="calcinate" mo="1-1" />
   <verb in="calculer" tn="calculate" mo="1-1" />
   <verb in="caler" tn="wedge, jam" mo="1-1" />
-  <verb in="caleter" tn="leave quickly, flee" mo="1-1" />
+  <verb in="caleter" tn="leave quickly, flee" dg="5" mo="1-1" />
   <verb in="calfater" tn="caulk" mo="1-1" />
   <verb in="calfeutrer" tn="caulk" mo="1-1" />
   <verb in="calibrer" tn="calibrate, grade" mo="1-1" />
@@ -777,7 +777,7 @@
   <verb in="calomnier" tn="slander, libel, calumniate" mo="1-1" />
   <verb in="calorifuger" tn="provide insulation to prevent heat loss" mo="1-2B" />
   <verb in="calquer" tn="model, imitate, trace" mo="1-1" />
-  <verb in="calter" tn="leave quickly, flee" mo="1-1" />
+  <verb in="calter" tn="leave quickly, flee" dg="5" mo="1-1" />
   <verb in="cambrer" tn="arch one’s feet or back" mo="1-1" />
   <verb in="cambrioler" tn="burgle, burglarize" mo="1-1" />
   <verb in="camer" tn="take drugs" re="t" mo="1-1" />
@@ -983,7 +983,7 @@
   <verb in="civiliser" tn="civilize" mo="1-1" />
   <verb in="clabauder" tn="bark frequently" mo="1-1" />
   <verb in="claironner" tn="bugle, yell" mo="1-1" />
-  <verb in="clamecer" tn="kick the bucket" mo="1-6A" />
+  <verb in="clamecer" tn="kick the bucket" dg="7" mo="1-6A" />
   <verb in="clamer" tn="proclaim" mo="1-1" />
   <verb in="clamper" tn="clamp" mo="1-1" />
   <verb in="clamser" tn="die" mo="1-1" />

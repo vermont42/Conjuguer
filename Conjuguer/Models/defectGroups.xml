@@ -15,7 +15,9 @@
   <defectGroup id="2" en="Only indicatif présent 3s is used." fr="Seul l'indicatif présent 3s est utilisé." uo="r3s" />
   <defectGroup id="3" en="Only participe présent and indicatif présent 3s are used." fr="Seuls l'indicatif présent 3s et le participe présent sont utilisés." uo="rr,r3s" />
   <defectGroup id="4" en="Only participe présent, 3s, and 3p are used." fr="Seuls participe présent, 3s et 3p sont utilisés." uo="rr,3s,3p" />
+  <defectGroup id="5" en="1s, 2s, 3s, and 3p of indicatif présent and subjonctif présent are not used." fr="1s, 2s, 3s et 3p de l'indicatif présent et du subjonctif présent ne sont pas utilisés." du="r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p" />
   <defectGroup id="6" en="Only participe passé is used." fr="Seul le participe passé est utilisé." uo="pp" />
+  <defectGroup id="7" en="1s, 2s, 3s, and 3p of indicatif présent and subjonctif présent are not used. Futur simple and conditionnel présent are not used." fr="1s, 2s, 3s et 3p de l'indicatif présent et du subjonctif présent ne sont pas utilisés. Le futur simple et le conditionnel présent ne sont pas utilisés." du="r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p,fA,cA" />
   <defectGroup id="9" en="Only participe passé and participe présent are used." fr="Seuls le participe passé et le participe présent sont utilisés." uo="pp,rr" />
   <defectGroup id="22" en="Only 3s is used, but in poetry, other persons might be appropriate." fr="Seulement 3s est utilisé, mais en poésie, d'autres personnes pourraient être appropriées." du="1s,2s,1p,2p,3p" />
   <defectGroup id="24" en="Usually used with 3s. Occasionally 3p. In poetry, other persons might be appropriate." fr="Habituellement utilisé avec 3s. Parfois 3p. En poésie, d'autres personnes pourraient être appropriées." du="1s,2s,1p,2p" />

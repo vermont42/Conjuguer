@@ -37,6 +37,30 @@ struct DefectGroup {
         switch doesnt {
         case "1s", "2s", "3s", "1p", "2p", "3p":
           setPersonNumberDefectivity(personNumber: PersonNumber.personNumberForShortDisplayName(doesnt), defective: true)
+        case "r1s":
+          defects[.indicatifPrésent(.firstSingular)] = true
+        case "r2s":
+          defects[.indicatifPrésent(.secondSingular)] = true
+        case "r3s":
+          defects[.indicatifPrésent(.thirdSingular)] = true
+        case "r3p":
+          defects[.indicatifPrésent(.thirdPlural)] = true
+        case "b1s":
+          defects[.subjonctifPrésent(.firstSingular)] = true
+        case "b2s":
+          defects[.subjonctifPrésent(.secondSingular)] = true
+        case "b3s":
+          defects[.subjonctifPrésent(.thirdSingular)] = true
+        case "b3p":
+          defects[.subjonctifPrésent(.thirdPlural)] = true
+        case "fA":
+          PersonNumber.allCases.forEach {
+            defects[.futurSimple($0)] = true
+          }
+        case "cA":
+          PersonNumber.allCases.forEach {
+            defects[.conditionnelPrésent($0)] = true
+          }
         default:
           fatalError("Unrecognized doesntUse \(doesnt) found.")
         }
