@@ -23,6 +23,7 @@
   <defectGroup id="10" en="Imparfait, impératif, and participe présent are not used." fr="L'imparfait, l'impératif, et le participe présent ne sont pas utilisés." du="iA,hA,rr" />
   <defectGroup id="11" en="1s, 2s, 1p, and 2p are not used. Impératif is not used." fr="1s, 2s, 1p et 2p ne sont pas utilisées. L'impératif n'est pas utilisé." du="1s,2s,1p,2p,hA" />
   <defectGroup id="12" en="Imparfait and passé simple are not used." fr="L'imparfait et le passé simple ne sont pas utilisés." du="iA,xA" />
+  <defectGroup id="13" en="Imperatif is not used. Rare outside passé simple and participe passé." fr="L'impératif n'est pas utilisé. Rare en dehors du passé simple et du participe passé." du="hA" />
   <defectGroup id="22" en="Only 3s is used, but in poetry, other persons might be appropriate." fr="Seulement 3s est utilisé, mais en poésie, d'autres personnes pourraient être appropriées." du="1s,2s,1p,2p,3p" />
   <defectGroup id="24" en="Usually used with 3s. Occasionally 3p. In poetry, other persons might be appropriate." fr="Habituellement utilisé avec 3s. Parfois 3p. En poésie, d'autres personnes pourraient être appropriées." du="1s,2s,1p,2p" />
 </defectGroups>

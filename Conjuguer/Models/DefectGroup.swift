@@ -121,9 +121,9 @@ struct DefectGroup {
   }
 
   func description(preferredLanguage: String? = nil) -> String {
-    let languageCode = preferredLanguage ?? Locale.preferredLanguages.first ?? Util.english.languageCode
+    let languageCode = preferredLanguage ?? Locale.preferredLanguages.first ?? Util.english.languageCode ?? "en-US"
 
-    if languageCode == Util.french.languageCode {
+    if languageCode.contains(Util.french.languageCode ?? "🥐") {
       return descriptionFr
     } else {
       return descriptionEn

@@ -3005,7 +3005,7 @@
   <verb in="fagoter" tn="bundle, dress up" mo="1-1" />
   <verb in="faiblir" tn="weaken, get weaker" mo="2-1" />
   <verb in="failler" tn="crack, fissure" re="t" mo="1-1" />
-  <verb in="faillir" tn="almost do something, fail, fall short" mo="4-12" />
+  <verb in="faillir" tn="almost do something, fail, fall short" dg="13" mo="4-12" />
   <verb in="fainéanter" tn="do nothing, be idle, faff" mo="1-1" />
   <verb in="faire" tn="do, make" mo="5-23" fr="4" />
   <verb in="faisander" tn="hang game meat" mo="1-1" />
