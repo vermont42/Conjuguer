@@ -1015,7 +1015,7 @@
   <verb in="cloner" tn="clone" mo="1-1" />
   <verb in="clopiner" tn="limp, hobble, halt" mo="1-1" />
   <verb in="cloquer" tn="blister, get blisters" mo="1-1" />
-  <verb in="clore" tn="close" mo="5-27" />
+  <verb in="clore" tn="close" dg="8" mo="5-27" />
   <verb in="clôturer" tn="fence off" mo="1-1" />
   <verb in="clouer" tn="nail" mo="1-1" />
   <verb in="clouter" tn="decorate with nails, stud" mo="1-1" />
@@ -1497,7 +1497,7 @@
   <verb in="déchiqueter" tn="rip or cut into small pieces" mo="1-3B" />
   <verb in="déchirer" tn="rip up" mo="1-1" />
   <verb in="déchlorurer" tn="eliminate chlorides" mo="1-1" />
-  <verb in="déchoir" tn="wane, diminish, strip (someone of something)" mo="4-11A" />
+  <verb in="déchoir" tn="wane, diminish, strip (someone of something)" dg="10" mo="4-11A" />
   <verb in="déchristianiser" tn="dechristianize" mo="1-1" />
   <verb in="décider" tn="decide" mo="1-1" fr="41" />
   <verb in="décimaliser" tn="decimalize" mo="1-1" />
@@ -2317,7 +2317,7 @@
   <verb in="écher" tn="bait a hook" mo="1-5" />
   <verb in="écheveler" tn="tousle someone’s hair" mo="1-3A" />
   <verb in="échiner" tn="break someone’s back" mo="1-1" />
-  <verb in="échoir" tn="fall due" mo="4-11B" />
+  <verb in="échoir" tn="fall due" dg="11" mo="4-11B" />
   <verb in="échopper" tn="engrave with a chisel" mo="1-1" />
   <verb in="échouer" tn="fail, fall through, miscarry" mo="1-1" />
   <verb in="écimer" tn="pollard" mo="1-1" />
@@ -2327,7 +2327,7 @@
   <verb in="éclater" tn="shatter, make a loud noise" mo="1-1" />
   <verb in="éclipser" tn="eclipse, overshadow" mo="1-1" />
   <verb in="éclisser" tn="splint" mo="1-1" />
-  <verb in="éclore" tn="hatch, bloom" mo="5-27A" />
+  <verb in="éclore" tn="hatch, bloom" dg="12" mo="5-27A" />
   <verb in="écluser" tn="pass through a lock" mo="1-1" />
   <verb in="écobuer" tn="remove roots from earth and burn them" mo="1-1" />
   <verb in="écœurer" tn="nauseate, disgust" mo="1-1" />
@@ -2563,7 +2563,7 @@
   <verb in="enclaver" tn="enclave" mo="1-1" />
   <verb in="enclencher" tn="set off, start up, put in motion" mo="1-1" />
   <verb in="encliqueter" tn="lock into, clip into, engage" mo="1-3B" />
-  <verb in="enclore" tn="enclose, fortify" mo="5-27A" />
+  <verb in="enclore" tn="enclose, fortify" dg="12" mo="5-27A" />
   <verb in="enclouer" tn="nail in, put a nail in" mo="1-1" />
   <verb in="encocher" tn="notch, put a notch in, nock" mo="1-1" />
   <verb in="encoder" tn="encode" mo="1-1" />

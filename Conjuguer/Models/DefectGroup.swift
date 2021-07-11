@@ -43,6 +43,10 @@ struct DefectGroup {
           defects[.indicatifPrésent(.secondSingular)] = true
         case "r3s":
           defects[.indicatifPrésent(.thirdSingular)] = true
+        case "r1p":
+          defects[.indicatifPrésent(.firstPlural)] = true
+        case "r2p":
+          defects[.indicatifPrésent(.secondPlural)] = true
         case "r3p":
           defects[.indicatifPrésent(.thirdPlural)] = true
         case "b1s":
@@ -53,6 +57,14 @@ struct DefectGroup {
           defects[.subjonctifPrésent(.thirdSingular)] = true
         case "b3p":
           defects[.subjonctifPrésent(.thirdPlural)] = true
+        case "h1p":
+          defects[.impératif(.firstPlural)] = true
+          defects[.impératifPassé(.firstPlural)] = true
+        case "h2p":
+          defects[.impératif(.secondPlural)] = true
+          defects[.impératifPassé(.firstPlural)] = true
+        case "rr":
+          defects[.participePrésent] = true
         case "fA":
           PersonNumber.allCases.forEach {
             defects[.futurSimple($0)] = true
@@ -60,6 +72,23 @@ struct DefectGroup {
         case "cA":
           PersonNumber.allCases.forEach {
             defects[.conditionnelPrésent($0)] = true
+          }
+        case "xA":
+          PersonNumber.allCases.forEach {
+            defects[.passéSimple($0)] = true
+          }
+        case "iA":
+          PersonNumber.allCases.forEach {
+            defects[.imparfait($0)] = true
+          }
+        case "qA":
+          PersonNumber.allCases.forEach {
+            defects[.subjonctifImparfait($0)] = true
+          }
+        case "hA":
+          PersonNumber.impératifPersonNumbers.forEach {
+            defects[.impératif($0)] = true
+            defects[.impératifPassé($0)] = true
           }
         default:
           fatalError("Unrecognized doesntUse \(doesnt) found.")
