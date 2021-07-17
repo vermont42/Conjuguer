@@ -24,6 +24,15 @@
   <defectGroup id="11" en="1s, 2s, 1p, and 2p are not used. Impératif is not used." fr="1s, 2s, 1p et 2p ne sont pas utilisées. L'impératif n'est pas utilisé." du="1s,2s,1p,2p,hA" />
   <defectGroup id="12" en="Imparfait and passé simple are not used." fr="L'imparfait et le passé simple ne sont pas utilisés." du="iA,xA" />
   <defectGroup id="13" en="Imperatif is not used. Rare outside passé simple and participe passé." fr="L'impératif n'est pas utilisé. Rare en dehors du passé simple et du participe passé." du="hA" />
-  <defectGroup id="22" en="Only 3s is used, but in poetry, other persons might be appropriate." fr="Seulement 3s est utilisé, mais en poésie, d'autres personnes pourraient être appropriées." du="1s,2s,1p,2p,3p" />
-  <defectGroup id="24" en="Usually used with 3s. Occasionally 3p. In poetry, other persons might be appropriate." fr="Habituellement utilisé avec 3s. Parfois 3p. En poésie, d'autres personnes pourraient être appropriées." du="1s,2s,1p,2p" />
+  <defectGroup id="14" en="Passé simple is not used." fr="Le passé simple n'est pas utilisé." du="xA" />
+  <defectGroup id="15" en="Only participe passé is used." fr="Seul le participe passé est utilisé." uo="pp" />
+  <defectGroup id="16" en="Only participe passé, futur, conditionnel, and 1s, 2s, 3s, and 3p of indicatatif présent are used." fr="Seuls le participe passé, le futur, le conditionnel, et les 1s, 2s, 3s et 3p de l'indicatif présent sont utilisés." uo="pp,r1s,r2s,r3s,r3p,fA,cA" />
+  <defectGroup id="17" en="Only indicatif présent, imparfait, and participe présent are used." fr="Seuls l'indicatif présent, l'imparfait et le participant présent sont utilisés." uo="rA,iA,rr" />
+  <defectGroup id="18" en="1s, 2s, 1p, 2p, passé simple, participe passé, and subjonctif imparfait are not used." fr="1s, 2s, 1p, 2p, passé simple, participe passé et subjonctif imparfait ne sont pas utilisés." du="1s,2s,1p,2p,xA,qA,pp" />
+  <defectGroup id="19" en="Only participe passé and 2p impératif are used." fr="Seuls le participe passé et l'impératif de la 2p sont utilisés." uo="pp,h2s,h2p" />
+  <defectGroup id="20" en="Passé simple and passé participe are not used." fr="Le passé simple et le passé participe ne sont pas utilisés." du="xA,pp" />
+  <defectGroup id="21" en="Only participe passé and 3s indicatif présent are used." fr="Seuls le participe passé et la 3s de l'indicatif présent sont utilisés." uo="pp,r3s" />
+  <defectGroup id="22" en="Only 3s is used, but in poetry, other persons might be appropriate." fr="Seulement la 3s est utilisée, mais en poésie, d'autres personnes pourraient être appropriées." du="1s,2s,1p,2p,3p" />
+  <defectGroup id="23" en="Only 3s is used." fr="Seulement la 3s est utilisée." du="1s,2s,1p,2p,3p" />
+  <defectGroup id="24" en="Usually used with 3s. Occasionally 3p. In poetry, other persons might be appropriate." fr="La 3s est généralement utilisée. Parfois la 3p. En poésie, d'autres personnes pourraient être appropriées." du="1s,2s,1p,2p" />
 </defectGroups>

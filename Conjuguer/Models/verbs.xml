@@ -3009,7 +3009,7 @@
   <verb in="fainéanter" tn="do nothing, be idle, faff" mo="1-1" />
   <verb in="faire" tn="do, make" mo="5-23" fr="4" />
   <verb in="faisander" tn="hang game meat" mo="1-1" />
-  <verb in="falloir" tn="be necessary" mo="4-5C" fr="13" />
+  <verb in="falloir" tn="be necessary" mo="4-5C" dg="23" fr="13" />
   <verb in="falsifier" tn="falsify" mo="1-1" />
   <verb in="faluner" tn="fertilize with shellfish shells" mo="1-1" />
   <verb in="familiariser" tn="familiarize" mo="1-1" />
@@ -3067,7 +3067,7 @@
   <verb in="fiancer" tn="get engaged to be married" mo="1-2A" />
   <verb in="ficeler" tn="tie up, to truss" mo="1-3A" />
   <verb in="ficher" tn="put something on file" mo="1-1" />
-  <verb in="fiche" tn="not care about" re="t" mo="1-11" />
+  <verb in="fiche" tn="not care about" re="t" dg="14" ee="je m'en fiche = I don't give a darn about it" mo="1-11" />
   <verb in="fidéliser" tn="loyalize, keep loyal" mo="1-1" />
   <verb in="fienter" tn="defecate" mo="1-1" />
   <verb in="fier" tn="trust someone, rely on someone" re="t" mo="1-1" />
@@ -3134,9 +3134,9 @@
   <verb in="fondre" tn="melt, melt down, smelt" mo="5-1A" />
   <verb in="forcer" tn="force" mo="1-2A" />
   <verb in="forcir" tn="become stronger, fatter" mo="2-1" />
-  <verb in="forclore" tn="debar" mo="5-27A" />
+  <verb in="forclore" tn="debar" dg="15" ee="forclos = foreclosed or shut out" mo="5-27A" />
   <verb in="forer" tn="bore, drill" mo="1-1" />
-  <verb in="forfaire" tn="forfeit, commit a crime, cause to forfeit" mo="5-23" />
+  <verb in="forfaire" tn="forfeit, commit a crime, cause to forfeit" dg="15" ee="être forfait = have forfeited or have withdrawn" mo="5-23" />
   <verb in="forger" tn="fashion metal with fire and a hammer, forge" mo="1-2B" />
   <verb in="forjeter" tn="protrude, bulge" mo="1-3B" />
   <verb in="forlancer" tn="flush out" mo="1-2A" />
@@ -3167,7 +3167,7 @@
   <verb in="fourrager" tn="fodder, forage" mo="1-2B" />
   <verb in="fourrer" tn="shove, stick, stuff" mo="1-1" />
   <verb in="fourvoyer" tn="mislead, cloak" mo="1-7A" />
-  <verb in="foutre" tn="not give a darn about, go away" re="t" mo="5-1C" />
+  <verb in="foutre" tn="not give a darn about, go away" re="t" dg="14" mo="5-1C" />
   <verb in="fracasser" tn="smash, break violently" mo="1-1" />
   <verb in="fractionner" tn="fractionate, divide into fractions" mo="1-1" />
   <verb in="fracturer" tn="fracture" mo="1-1" />
@@ -3201,7 +3201,7 @@
   <verb in="frimer" tn="show off" mo="1-1" />
   <verb in="fringuer" tn="tog up" mo="1-1" />
   <verb in="friper" tn="crumple, crush" mo="1-1" />
-  <verb in="frire" tn="fry" mo="5-11" />
+  <verb in="frire" tn="fry" dg="16" mo="5-11" />
   <verb in="friser" tn="curl, graze, pass by barely touching" mo="1-1" />
   <verb in="frisotter" tn="curl" mo="1-1" />
   <verb in="frissonner" tn="tremble, shiver" mo="1-1" />
@@ -3285,7 +3285,7 @@
   <verb in="gérer" tn="manage" mo="1-5" />
   <verb in="germaniser" tn="Germanize" mo="1-1" />
   <verb in="germer" tn="germinate" mo="1-1" />
-  <verb in="gésir" tn="be located, lie dead, be buried" mo="5-28" />
+  <verb in="gésir" tn="be located, lie dead, be buried" dg="17" ee="ci-gît = here lies (tombstone)" mo="5-28" />
   <verb in="gesticuler" tn="gesticulate" mo="1-1" />
   <verb in="gicler" tn="squirt, spurt" mo="1-1" />
   <verb in="gifler" tn="slap (on the face)" mo="1-1" />
@@ -4012,7 +4012,7 @@
   <verb in="mériter" tn="deserve, merit" mo="1-1" />
   <verb in="mésallier" tn="misally, marry beneath one’s rank" re="t" mo="1-1" />
   <verb in="mésestimer" tn="underestimate" mo="1-1" />
-  <verb in="messeoir" tn="be unsuitable, be unwanted" mo="4-9AB" />
+  <verb in="messeoir" tn="be unsuitable, be unwanted" dg="18" mo="4-9AB" />
   <verb in="mesurer" tn="measure" mo="1-1" />
   <verb in="mésuser" tn="misuse" mo="1-1" />
   <verb in="métaboliser" tn="metabolize" mo="1-1" />
@@ -4101,7 +4101,7 @@
   <verb in="moucheronner" tn="jump out of the water to catch flies" mo="1-1" />
   <verb in="moucheter" tn="fleck" mo="1-3B" />
   <verb in="moudre" tn="grind" mo="5-15" />
-  <verb in="moufeter" tn="protest" mo="1-1" />
+  <verb in="moufeter" tn="protest" dg="15" mo="1-1" />
   <verb in="moufter" tn="protest" mo="1-1" />
   <verb in="mouiller" tn="make wet, get wet, dampen, moisten" mo="1-1" />
   <verb in="mouler" tn="mould, fit tightly" mo="1-1" />
@@ -4265,8 +4265,8 @@
   <verb in="ouater" tn="cover with cotton wool" mo="1-1" />
   <verb in="ouatiner" tn="quilt" mo="1-1" />
   <verb in="ouiller" tn="add wine to a barrel to replace evaporated wine" mo="1-1" />
-  <verb in="ouïr" tn="listen, hear" ex="modern" mo="2-3B" />
-  <verb in="ouïr" tn="listen, hear" ex="trad." mo="2-5" />
+  <verb in="ouïr" tn="listen, hear" ex="modern" dg="19" ee="ouï-dire = hearsay" mo="2-3B" />
+  <verb in="ouïr" tn="listen, hear" ex="trad." dg="19" ee="ouï-dire = hearsay" mo="2-5" />
   <verb in="ourdir" tn="warp, plot" mo="2-1" />
   <verb in="ourler" tn="hem" mo="1-1" />
   <verb in="outiller" tn="equip, tool up" mo="1-1" />
@@ -4292,7 +4292,7 @@
   <verb in="paillassonner" tn="cover with straw mats" mo="1-1" />
   <verb in="pailler" tn="cover with straw" mo="1-1" />
   <verb in="pailleter" tn="bespangle" mo="1-3B" />
-  <verb in="paître" tn="graze, pasture" mo="5-20" />
+  <verb in="paître" tn="graze, pasture" dg="20" mo="5-20" />
   <verb in="palabrer" tn="endlessly argue" mo="1-1" />
   <verb in="palanquer" tn="lift using a hoist" mo="1-1" />
   <verb in="palataliser" tn="palatalize" mo="1-1" />
@@ -4337,7 +4337,7 @@
   <verb in="parementer" tn="face, adorn" mo="1-1" />
   <verb in="parer" tn="adorn, bedeck, fend off, parry" mo="1-1" />
   <verb in="paresser" tn="laze about, loaf" mo="1-1" />
-  <verb in="parfaire" tn="finish, complete" mo="5-23" />
+  <verb in="parfaire" tn="finish, complete" dg="15" mo="5-23" />
   <verb in="parfiler" tn="unthread, unravel" mo="1-1" />
   <verb in="parfondre" tn="fuse" mo="5-1A" />
   <verb in="parfumer" tn="perfume" mo="5-1A" />
@@ -4457,7 +4457,7 @@
   <verb in="photocopier" tn="photocopy" mo="1-1" />
   <verb in="photographier" tn="photograph" mo="1-1" />
   <verb in="phraser" tn="phrase" mo="1-1" />
-  <verb in="piaffer" tn=" stamp, paw the ground (as a horse)" mo="1-1" />
+  <verb in="piaffer" tn="stamp, paw the ground (as a horse)" mo="1-1" />
   <verb in="piailler" tn="cheep, chirp, emit high-pitched noise" mo="1-1" />
   <verb in="pianoter" tn="tap, type on a computer keyboard" mo="1-1" />
   <verb in="piauler" tn="cheep, chirp, emit high-pitched noise" mo="1-1" />
@@ -5609,7 +5609,7 @@
   <verb in="semoncer" tn="scold, reprimand, rebuke" mo="1-2A" />
   <verb in="sensibiliser" tn="make sensitive, raise awareness" mo="1-1" />
   <verb in="sentir" tn="sense, smell" mo="6-1" />
-  <verb in="seoir" tn="be suitable for, be proper for, be situated" mo="4-9AB" />
+  <verb in="seoir" tn="be suitable for, be proper for, be situated" dg="18" mo="4-9AB" />
   <verb in="séparer" tn="separate, split up" mo="1-1" />
   <verb in="septupler" tn="septuple" mo="1-1" />
   <verb in="séquencer" tn="sequence" mo="1-2A" />
@@ -5764,7 +5764,7 @@
   <verb in="strier" tn="streak, stripe, striate" mo="1-1" />
   <verb in="stripper" tn="strip (varicose veins)" mo="1-1" />
   <verb in="structurer" tn="structure" mo="1-1" />
-  <verb in="stupéfaire" tn="stupify, amaze" mo="5-23" />
+  <verb in="stupéfaire" tn="stupify, amaze" dg="21" mo="5-23" />
   <verb in="stupéfier" tn="stupify, amaze" mo="1-1" />
   <verb in="stuquer" tn="stucco" mo="1-1" />
   <verb in="styliser" tn="stylize" mo="1-1" />

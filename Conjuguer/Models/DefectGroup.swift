@@ -65,6 +65,8 @@ struct DefectGroup {
           defects[.impératifPassé(.firstPlural)] = true
         case "rr":
           defects[.participePrésent] = true
+        case "pp":
+          defects[.participePassé] = true
         case "fA":
           PersonNumber.allCases.forEach {
             defects[.futurSimple($0)] = true
@@ -103,12 +105,38 @@ struct DefectGroup {
           defects[.participePassé] = false
         case "rr":
           defects[.participePrésent] = false
+        case "r1s":
+          defects[.indicatifPrésent(.firstSingular)] = false
+        case "r2s":
+          defects[.indicatifPrésent(.secondSingular)] = false
         case "r3s":
           defects[.indicatifPrésent(.thirdSingular)] = false
+        case "r3p":
+          defects[.indicatifPrésent(.thirdPlural)] = false
+        case "h2s":
+          defects[.impératif(.secondSingular)] = false
+        case "h2p":
+          defects[.impératif(.secondPlural)] = false
         case "3s":
           setPersonNumberDefectivity(personNumber: .thirdSingular, defective: false)
         case "3p":
           setPersonNumberDefectivity(personNumber: .thirdPlural, defective: false)
+        case "rA":
+          PersonNumber.allCases.forEach {
+            defects[.indicatifPrésent($0)] = false
+          }
+        case "iA":
+          PersonNumber.allCases.forEach {
+            defects[.imparfait($0)] = false
+          }
+        case "fA":
+          PersonNumber.allCases.forEach {
+            defects[.futurSimple($0)] = false
+          }
+        case "cA":
+          PersonNumber.allCases.forEach {
+            defects[.conditionnelPrésent($0)] = false
+          }
         default:
           fatalError("Unrecognized usesOnly \(uses) found.")
         }
