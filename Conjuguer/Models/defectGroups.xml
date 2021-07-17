@@ -23,7 +23,7 @@
   <defectGroup id="10" en="Imparfait, impératif, and participe présent are not used." fr="L'imparfait, l'impératif, et le participe présent ne sont pas utilisés." du="iA,hA,rr" />
   <defectGroup id="11" en="1s, 2s, 1p, and 2p are not used. Impératif is not used." fr="1s, 2s, 1p et 2p ne sont pas utilisées. L'impératif n'est pas utilisé." du="1s,2s,1p,2p,hA" />
   <defectGroup id="12" en="Imparfait and passé simple are not used." fr="L'imparfait et le passé simple ne sont pas utilisés." du="iA,xA" />
-  <defectGroup id="13" en="Imperatif is not used. Rare outside passé simple and participe passé." fr="L'impératif n'est pas utilisé. Rare en dehors du passé simple et du participe passé." du="hA" />
+  <defectGroup id="13" en="Impératif is not used. Rare outside passé simple and participe passé." fr="L'impératif n'est pas utilisé. Rare en dehors du passé simple et du participe passé." du="hA" />
   <defectGroup id="14" en="Passé simple is not used." fr="Le passé simple n'est pas utilisé." du="xA" />
   <defectGroup id="15" en="Only participe passé is used." fr="Seul le participe passé est utilisé." uo="pp" />
   <defectGroup id="16" en="Only participe passé, futur, conditionnel, and 1s, 2s, 3s, and 3p of indicatatif présent are used." fr="Seuls le participe passé, le futur, le conditionnel, et les 1s, 2s, 3s et 3p de l'indicatif présent sont utilisés." uo="pp,r1s,r2s,r3s,r3p,fA,cA" />

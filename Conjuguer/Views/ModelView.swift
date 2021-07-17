@@ -28,6 +28,20 @@ struct ModelView: View {
         Text(model.description)
           .headingLabel()
 
+        if
+          let defectGroupId = model.defectGroupId,
+          let defectGroup = DefectGroup.defectGroups[defectGroupId]
+        {
+          Group {
+            Spacer()
+              .frame(height: 16)
+            Text("Defective")
+              .subheadingLabel()
+            Text(defectGroup.description())
+              .bodyLabel()
+          }
+        }
+
         Spacer()
           .frame(height: 16)
 

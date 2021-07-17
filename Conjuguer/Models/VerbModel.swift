@@ -21,6 +21,7 @@ struct VerbModel: Hashable {
   let position: Int
   var irregularity = 0
   let extraLetters: String?
+  let defectGroupId: String?
 
   var description: String {
     switch id {
