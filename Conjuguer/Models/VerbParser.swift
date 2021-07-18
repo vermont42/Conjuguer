@@ -122,7 +122,6 @@ class VerbParser: NSObject, XMLParserDelegate {
         currentVerbWithPossibleExtraLetters = currentVerb
       }
 
-      if ["incomber", "être", "avoir"].contains(currentVerb) {
       verbs[currentVerbWithPossibleExtraLetters] = Verb(
         infinitif: currentVerb,
         translation: currentTranslation,
@@ -136,7 +135,6 @@ class VerbParser: NSObject, XMLParserDelegate {
         source: currentSource,
         defectGroupId: currentDefectGroupId
       )
-      }
 
       currentVerb = ""
       currentTranslation = ""
