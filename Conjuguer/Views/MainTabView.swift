@@ -14,23 +14,23 @@ struct MainTabView: View {
       VerbBrowseView()
         .environmentObject(Current)
         .tabItem({
-          Image(systemName: "sun.max")
-          Text("Verbs")
+          Image(systemName: "tortoise.fill")
+          Text(L.Navigation.verbs)
         })
         .tag(0)
 
       ModelBrowseView()
         .environmentObject(Current)
         .tabItem({
-          Image(systemName: "moon.stars")
-          Text("Models")
+          Image(systemName: "hare.fill")
+          Text(L.Navigation.models)
         })
         .tag(1)
 
-      InputView()
+      InfoBrowseView()
         .tabItem({
-          Image(systemName: "keyboard")
-          Text("Input")
+          Image(systemName: "ladybug.fill")
+          Text(L.Navigation.info)
         })
         .tag(2)
     }

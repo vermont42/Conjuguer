@@ -14,7 +14,7 @@ extension Text {
     case .success(let value):
       conjugation = value
     default:
-      fatalError("Could not conjugate \(verb.infinitif) for \(tense.displayName).")
+      fatalError("Could not conjugate \(verb.infinitif) for \(tense.titleCaseName).")
     }
 
     switch tense {

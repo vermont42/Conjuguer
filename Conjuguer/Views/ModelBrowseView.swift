@@ -16,7 +16,7 @@ struct ModelBrowseView: View {
       VStack {
         Picker("", selection: $store.modelSort) {
           ForEach(ModelSort.allCases, id: \.self) { type in
-            Text(type.rawValue).tag(type)
+            Text(L.displayNameForModelSort(type)).tag(type)
           }
         }
         .pickerStyle(SegmentedPickerStyle())
@@ -29,7 +29,7 @@ struct ModelBrowseView: View {
             })
             .buttonStyle(PlainButtonStyle())
           }
-          .navigationBarTitle("Verb Models")
+          .navigationBarTitle(L.Navigation.models)
         }
       }
     }

@@ -18,7 +18,7 @@ struct VerbView: View {
   var body: some View {
     ScrollView {
       VStack(alignment: .leading) {
-        Text("Overview")
+        Text(L.VerbView.overview)
           .subheadingLabel()
           .leftAligned()
 
@@ -26,26 +26,26 @@ struct VerbView: View {
           .bodyLabel()
 
         if let model = VerbModel.models[verb.model] {
-          Text("Model: \(model.exemplar) (\(model.id))")
+          Text("\(L.VerbView.model) \(model.exemplar) (\(model.id))")
             .bodyLabel()
         }
 
         Group {
           if verb.isReflexive {
-            Text("Reflexive")
+            Text(L.VerbView.reflexive)
               .bodyLabel()
           }
 
           if verb.hasAspiratedH {
-            Text("Aspirated H")
+            Text(L.VerbView.aspiratedH)
               .bodyLabel()
           }
 
           if verb.auxiliary == .être {
-            Text("Auxiliary: être")
+            Text(L.VerbView.auxiliaryÊtre)
               .bodyLabel()
           } else {
-            Text("Auxiliary: avoir")
+            Text(L.VerbView.auxiliaryAvoir)
               .bodyLabel()
           }
         }
@@ -55,14 +55,14 @@ struct VerbView: View {
             let defectGroupId = verb.defectGroupId,
             let defectGroup = DefectGroup.defectGroups[defectGroupId]
           {
-            Text("Defective. " + defectGroup.description())
+            Text("\(L.VerbView.defective) " + defectGroup.description())
                 .bodyLabel()
             Spacer()
           }
 
           if let example = verb.example {
             Group {
-              Text("Example Use")
+              Text(L.VerbView.exampleUse)
                 .subheadingLabel()
                 .leftAligned()
 
@@ -81,7 +81,7 @@ struct VerbView: View {
         }
 
         Group {
-          Text("P. Passé, P. Présent, R. Futur")
+          Text(L.VerbView.personlessConjugations)
             .subheadingLabel()
 
           let passéPart = Text(verb: verb, tense: .participePassé).font(bodyFont) + Text(", ").font(bodyFont)
@@ -93,7 +93,7 @@ struct VerbView: View {
           Spacer()
 
           Group {
-            Text("Indicatif Présent")
+            Text(Tense.indicatifPrésent(.firstSingular).titleCaseName)
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
               Text(verb: verb, tense: .indicatifPrésent(personNumber)).font(bodyFont)
@@ -101,7 +101,7 @@ struct VerbView: View {
 
             Spacer()
 
-            Text("Passé Simple")
+            Text(Tense.passéSimple(.firstSingular).titleCaseName)
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
               Text(verb: verb, tense: .passéSimple(personNumber)).font(bodyFont)
@@ -111,14 +111,14 @@ struct VerbView: View {
           }
 
           Group {
-            Text("Imparfait")
+            Text(Tense.imparfait(.firstSingular).titleCaseName)
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
               Text(verb: verb, tense: .imparfait(personNumber)).font(bodyFont)
             }
             Spacer()
 
-            Text("Futur Simple")
+            Text(Tense.futurSimple(.firstSingular).titleCaseName)
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
               Text(verb: verb, tense: .futurSimple(personNumber)).font(bodyFont)
@@ -126,7 +126,7 @@ struct VerbView: View {
 
             Spacer()
 
-            Text("Conditionnel Présent")
+            Text(Tense.conditionnelPrésent(.firstSingular).titleCaseName)
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
               Text(verb: verb, tense: .conditionnelPrésent(personNumber)).font(bodyFont)
@@ -136,7 +136,7 @@ struct VerbView: View {
           }
 
           Group {
-            Text("Subjonctif Présent")
+            Text(Tense.subjonctifPrésent(.firstSingular).titleCaseName)
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
               Text(verb: verb, tense: .subjonctifPrésent(personNumber)).font(bodyFont)
@@ -144,7 +144,7 @@ struct VerbView: View {
 
             Spacer()
 
-            Text("Subjonctif Imparfait")
+            Text(Tense.subjonctifImparfait(.firstSingular).titleCaseName)
               .subheadingLabel()
             ForEach(PersonNumber.allCases, id: \.self) { personNumber in
               Text(verb: verb, tense: .subjonctifImparfait(personNumber)).font(bodyFont)
@@ -152,7 +152,7 @@ struct VerbView: View {
 
             Spacer()
 
-            Text("Impératif")
+            Text(Tense.impératif(.firstPlural).titleCaseName)
               .subheadingLabel()
             ForEach(PersonNumber.impératifPersonNumbers, id: \.self) { personNumber in
               Text(verb: verb, tense: .impératif(personNumber)).font(bodyFont)
@@ -163,7 +163,7 @@ struct VerbView: View {
         Spacer()
 
         Toggle(isOn: $shouldShowCompoundTenses) {
-          Text("Show Compound Tenses")
+          Text(L.VerbView.showCompoundTenses)
         }
 
         if shouldShowCompoundTenses {
@@ -171,7 +171,7 @@ struct VerbView: View {
             Spacer()
 
             Group {
-              Text("Passé Composé")
+              Text(Tense.passéComposé(.firstSingular).titleCaseName)
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 Text(verb: verb, tense: .passéComposé(personNumber)).font(bodyFont)
@@ -179,7 +179,7 @@ struct VerbView: View {
 
               Spacer()
 
-              Text("Plus Que Parfait")
+              Text(Tense.plusQueParfait(.firstSingular).titleCaseName)
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 Text(verb: verb, tense: .plusQueParfait(personNumber)).font(bodyFont)
@@ -187,7 +187,7 @@ struct VerbView: View {
 
               Spacer()
 
-              Text("Passé Antérieur")
+              Text(Tense.passéAntérieur(.firstSingular).titleCaseName)
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 Text(verb: verb, tense: .passéAntérieur(personNumber)).font(bodyFont)
@@ -197,7 +197,7 @@ struct VerbView: View {
             }
 
             Group {
-              Text("Passé Surcomposé")
+              Text(Tense.passéSurcomposé(.firstSingular).titleCaseName)
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 Text(verb: verb, tense: .passéSurcomposé(personNumber)).font(bodyFont)
@@ -205,7 +205,7 @@ struct VerbView: View {
 
               Spacer()
 
-              Text("Futur Antérieur")
+              Text(Tense.futurAntérieur(.firstSingular).titleCaseName)
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 Text(verb: verb, tense: .futurAntérieur(personNumber)).font(bodyFont)
@@ -213,7 +213,7 @@ struct VerbView: View {
 
               Spacer()
 
-              Text("Conditionnel Passé")
+              Text(Tense.conditionnelPassé(.firstSingular).titleCaseName)
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 Text(verb: verb, tense: .conditionnelPassé(personNumber)).font(bodyFont)
@@ -223,7 +223,7 @@ struct VerbView: View {
             }
 
             Group {
-              Text("Subjonctif Passé")
+              Text(Tense.subjonctifPassé(.firstSingular).titleCaseName)
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 Text(verb: verb, tense: .subjonctifPassé(personNumber)).font(bodyFont)
@@ -231,7 +231,7 @@ struct VerbView: View {
 
               Spacer()
 
-              Text("Subjonctif Plus Que Parfait")
+              Text(Tense.subjonctifPlusQueParfait(.firstSingular).titleCaseName)
                 .subheadingLabel()
               ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                 Text(verb: verb, tense: .subjonctifPlusQueParfait(personNumber)).font(bodyFont)
@@ -239,7 +239,7 @@ struct VerbView: View {
 
               Spacer()
 
-              Text("Impératif Passé")
+              Text(Tense.impératifPassé(.firstSingular).titleCaseName)
                 .subheadingLabel()
               ForEach(PersonNumber.impératifPersonNumbers, id: \.self) { personNumber in
                 Text(verb: verb, tense: .impératifPassé(personNumber)).font(bodyFont)

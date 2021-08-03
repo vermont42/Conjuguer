@@ -16,7 +16,7 @@ struct VerbBrowseView: View {
       VStack {
         Picker("", selection: $store.verbSort) {
           ForEach(VerbSort.allCases, id: \.self) { type in
-            Text(type.displayName).tag(type)
+            Text(L.displayNameForVerbSort(type)).tag(type)
           }
         }
           .pickerStyle(SegmentedPickerStyle())
@@ -31,7 +31,7 @@ struct VerbBrowseView: View {
               .buttonStyle(PlainButtonStyle())
             }
           }
-          .navigationBarTitle("Verbs")
+          .navigationBarTitle(L.Navigation.verbs)
         }
       }
     }

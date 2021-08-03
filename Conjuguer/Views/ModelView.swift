@@ -21,7 +21,7 @@ struct ModelView: View {
           let parentId = model.parentId,
           let parent = VerbModel.models[parentId]
         {
-          Text("Parent: \(parent.exemplarWithPossibleExtraLetters) (\(parent.id))")
+          Text("\(L.ModelView.parent): \(parent.exemplarWithPossibleExtraLetters) (\(parent.id))")
             .headingLabel()
         }
 
@@ -35,7 +35,7 @@ struct ModelView: View {
           Group {
             Spacer()
               .frame(height: 16)
-            Text("Defective")
+            Text(L.ModelView.defective)
               .subheadingLabel()
             Text(defectGroup.description())
               .bodyLabel()
@@ -46,27 +46,27 @@ struct ModelView: View {
           .frame(height: 16)
 
         Group {
-          Text("Endings")
+          Text(L.ModelView.endings)
             .subheadingLabel()
 
-          Text("Participe Passé: ").font(bodyFont) + Text(mixedCaseString: model.participeEndingRecursive).font(bodyFont)
+          Text("\(Tense.participePassé.shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.participeEndingRecursive).font(bodyFont)
 
-          Text("Ind. Présent: ").font(bodyFont) + Text(mixedCaseString: model.indicatifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations)).font(bodyFont)
+          Text("\(Tense.indicatifPrésent(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.indicatifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations)).font(bodyFont)
 
-          Text("Impératif: ").font(bodyFont) + Text(mixedCaseString: model.indicatifPrésentGroupRecursive.impératifEndings(stemAlterations: model.stemAlterations)).font(bodyFont)
+          Text("\(Tense.impératif(.firstPlural).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.indicatifPrésentGroupRecursive.impératifEndings(stemAlterations: model.stemAlterations)).font(bodyFont)
 
-          Text("Passé Simple: ").font(bodyFont) + Text(mixedCaseString: model.passéSimpleGroupRecursive.endings).font(bodyFont)
+          Text("\(Tense.passéSimple(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.passéSimpleGroupRecursive.endings).font(bodyFont)
 
-          Text("Subj. Présent: ").font(bodyFont) + Text(mixedCaseString: model.subjonctifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations)).font(bodyFont)
+          Text("\(Tense.subjonctifPrésent(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.subjonctifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations)).font(bodyFont)
 
-          Text("Subj. Imp.: ").font(bodyFont) + Text(mixedCaseString: model.passéSimpleGroupRecursive.subjonctifImparfaitEndings).font(bodyFont)
+          Text("\(Tense.subjonctifImparfait(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.passéSimpleGroupRecursive.subjonctifImparfaitEndings).font(bodyFont)
         }
 
         Spacer()
           .frame(height: 16)
 
         if let stemAlterations = model.stemAlterationsRecursive {
-          Text("Stem Alterations")
+          Text(L.ModelView.stemAlterations)
             .subheadingLabel()
           ForEach(stemAlterations, id: \.self) { alteration in
             // TODO: Add an info button describing abbreviations to the right of "Stem Alterations".

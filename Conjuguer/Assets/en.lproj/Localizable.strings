@@ -1,0 +1,38 @@
+/* 
+  Localizable.strings
+  Conjuguer
+
+  Created by Joshua Adams on 8/1/21.
+*/
+
+"Navigation.verbs" = "Verbs";
+"Navigation.models" = "Models";
+"Navigation.info" = "Info";
+"Navigation.input" = "Input";
+"Navigation.input" = "Input";
+"Navigation.back" = "Back";
+
+"VerbView.overview" = "Overview";
+"VerbView.model" = "Model:";
+"VerbView.reflexive" = "Reflexive";
+"VerbView.aspiratedH" = "Aspirated H";
+"VerbView.auxiliaryÊtre" = "Auxiliary: être";
+"VerbView.auxiliaryAvoir" = "Auxiliary: avoir";
+"VerbView.defective" = "Defective.";
+"VerbView.exampleUse" = "Example Use";
+"VerbView.personlessConjugations" = "P. Passé, P. Présent, R. Futur";
+"VerbView.showCompoundTenses" = "Show Compound Tenses";
+
+"ModelView.parent" = "Parent";
+"ModelView.defective" = "Defective";
+"ModelView.endings" = "Endings";
+"ModelView.stemAlterations" = "Stem Alterations";
+"ModelView.regular" = "Regular";
+"ModelView.irregular" = "Irregular";
+
+"VerbSort.frequency" = "Frequency";
+"VerbSort.alphabetic" = "Alphabetic";
+
+"ModelSort.irregularity" = "Irregularity";
+"ModelSort.alphabetic" = "Alphabetic";
+"ModelSort.identifier" = "Identifier";

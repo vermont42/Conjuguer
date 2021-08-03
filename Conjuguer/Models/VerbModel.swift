@@ -26,13 +26,13 @@ struct VerbModel: Hashable {
   var description: String {
     switch id {
     case "1-1":
-      return "Regular -er"
+      return "\(L.ModelView.regular) -er"
     case "2-1":
-      return "Regular -ir"
+      return "\(L.ModelView.regular) -ir"
     case "5-1A":
-      return "Regular -re"
+      return "\(L.ModelView.regular) -re"
     default:
-      return "\(irregularity)% Irregular"
+      return "\(irregularity)% \(L.ModelView.irregular)"
     }
   }
 

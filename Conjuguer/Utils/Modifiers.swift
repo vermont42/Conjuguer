@@ -51,7 +51,7 @@ struct CustomNavigationBarItems: ViewModifier {
         leading: Button(action: { presentationMode.wrappedValue.dismiss() }) {
           HStack {
             Image(systemName: "arrow.left")
-            Text("Back" + "  ")
+            Text(L.Navigation.back + "  ")
               .modifier(ButtonLabel())
           }
         })

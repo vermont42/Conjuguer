@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		032B122326BA02D8000E70CA /* InfoBrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B122226BA02D8000E70CA /* InfoBrowseView.swift */; };
 		033EAA182630A36B0055B313 /* WorkSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 033EAA172630A36B0055B313 /* WorkSans.ttf */; };
 		0343E7DF25E427890043B813 /* ModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0343E7DE25E427890043B813 /* ModelView.swift */; };
+		035D979726B74C820089083C /* L.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035D979626B74C820089083C /* L.swift */; };
+		035D979A26B74D6C0089083C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 035D979C26B74D6C0089083C /* Localizable.strings */; };
 		03653F0325EC4F5A00A34267 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03653F0225EC4F5A00A34267 /* Modifiers.swift */; };
 		03653F1025EC67DF00A34267 /* VerbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03653F0F25EC67DF00A34267 /* VerbView.swift */; };
 		036DB78E259FD6500013C3B7 /* ConjuguerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB78D259FD6500013C3B7 /* ConjuguerApp.swift */; };
@@ -76,8 +79,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		032B122226BA02D8000E70CA /* InfoBrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoBrowseView.swift; sourceTree = "<group>"; };
 		033EAA172630A36B0055B313 /* WorkSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WorkSans.ttf; sourceTree = "<group>"; };
 		0343E7DE25E427890043B813 /* ModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelView.swift; sourceTree = "<group>"; };
+		035D979626B74C820089083C /* L.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L.swift; sourceTree = "<group>"; };
+		035D979B26B74D6C0089083C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		035D979D26B74D730089083C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		03653F0225EC4F5A00A34267 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		03653F0F25EC67DF00A34267 /* VerbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbView.swift; sourceTree = "<group>"; };
 		036DB78A259FD6500013C3B7 /* Conjuguer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conjuguer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,11 +234,12 @@
 				036DB7D025A0C9F10013C3B7 /* Conjugator.swift */,
 				036DB7FA25A13C110013C3B7 /* ConjugatorError.swift */,
 				038E0AFD2690976D002A71EF /* DefectGroup.swift */,
-				038E0AF8268D0E02002A71EF /* defectGroups.xml */,
 				038E0B022690A016002A71EF /* DefectGroupParser.swift */,
+				038E0AF8268D0E02002A71EF /* defectGroups.xml */,
 				03ACAA0025ACB65300CF5390 /* FuturSimple.swift */,
 				03ACA9F625A9FD4400CF5390 /* Imparfait.swift */,
 				036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */,
+				035D979626B74C820089083C /* L.swift */,
 				036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */,
 				036DB7EC25A1070D0013C3B7 /* PersonNumber.swift */,
 				03C2CAC42619125200CFA825 /* Sound.swift */,
@@ -279,6 +287,7 @@
 		0373680C25DB80DA008BDF46 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				032B122226BA02D8000E70CA /* InfoBrowseView.swift */,
 				036DB78F259FD6500013C3B7 /* InputView.swift */,
 				0373680D25DB811F008BDF46 /* MainTabView.swift */,
 				0373684425DD809C008BDF46 /* ModelBrowseView.swift */,
@@ -293,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				03C2CAD52619160C00CFA825 /* chime.mp3 */,
+				035D979C26B74D6C0089083C /* Localizable.strings */,
 				03C2CACC261912EA00CFA825 /* sadTrombone.mp3 */,
 				033EAA172630A36B0055B313 /* WorkSans.ttf */,
 			);
@@ -408,6 +418,7 @@
 				03C2CACE261912EA00CFA825 /* sadTrombone.mp3 in Resources */,
 				038E0AF9268D0E02002A71EF /* defectGroups.xml in Resources */,
 				036DB795259FD6510013C3B7 /* Preview Assets.xcassets in Resources */,
+				035D979A26B74D6C0089083C /* Localizable.strings in Resources */,
 				036DB80025A37ECB0013C3B7 /* verbModels.xml in Resources */,
 				03C2CAD62619160C00CFA825 /* chime.mp3 in Resources */,
 				036DB7C0259FD67C0013C3B7 /* verbs.xml in Resources */,
@@ -460,6 +471,7 @@
 				038E0AFE2690976D002A71EF /* DefectGroup.swift in Sources */,
 				03C2CAC62619125200CFA825 /* Sound.swift in Sources */,
 				036DB7DF25A0DD7A0013C3B7 /* Verb.swift in Sources */,
+				032B122326BA02D8000E70CA /* InfoBrowseView.swift in Sources */,
 				036DB7EE25A1070D0013C3B7 /* PersonNumber.swift in Sources */,
 				036DB7E425A0DD9B0013C3B7 /* StemAlteration.swift in Sources */,
 				0373682A25DC667B008BDF46 /* VerbSort.swift in Sources */,
@@ -483,6 +495,7 @@
 				0373683E25DD79A4008BDF46 /* ModelSort.swift in Sources */,
 				036DB78E259FD6500013C3B7 /* ConjuguerApp.swift in Sources */,
 				037367FF25D5C3EB008BDF46 /* ConjugationText.swift in Sources */,
+				035D979726B74C820089083C /* L.swift in Sources */,
 				03ACA9FC25AA5D4700CF5390 /* SubjonctifPresentGroup.swift in Sources */,
 				0373682525DC65B2008BDF46 /* Settings.swift in Sources */,
 				0373681625DB8530008BDF46 /* VerbBrowseView.swift in Sources */,
@@ -529,6 +542,18 @@
 			targetProxy = 036DB7A7259FD6510013C3B7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		035D979C26B74D6C0089083C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				035D979B26B74D6C0089083C /* en */,
+				035D979D26B74D730089083C /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		036DB7AD259FD6510013C3B7 /* Debug */ = {

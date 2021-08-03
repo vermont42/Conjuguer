@@ -34,51 +34,6 @@ enum Tense: Hashable {
   static let alternateConjugationSeparator = "/"
   static let irregularEndingMarker = "*"
 
-  var displayName: String {
-    switch self {
-    case .participePassé:
-      return "participe passé"
-    case .participePrésent:
-      return "participe présent"
-    case .radicalFutur:
-      return "radical futur"
-    case .indicatifPrésent:
-      return "indicatif présent"
-    case .passéSimple:
-      return "passé simple"
-    case .imparfait:
-      return "imparfait"
-    case .futurSimple:
-      return "futur simple"
-    case .conditionnelPrésent:
-      return "conditionnel présent"
-    case .subjonctifPrésent:
-      return "subjonctif présent"
-    case .subjonctifImparfait:
-      return "subjonctif imparfait"
-    case .impératif:
-      return "impératif"
-    case .passéComposé:
-      return "passé composé"
-    case .plusQueParfait:
-      return "plus-que-parfait"
-    case .passéAntérieur:
-      return "passé antérieur"
-    case .passéSurcomposé:
-      return "passé surcomposé"
-    case .futurAntérieur:
-      return "futur antérieur"
-    case .conditionnelPassé:
-      return "conditionnel passé"
-    case .subjonctifPassé:
-      return "subjonctif passé"
-    case .subjonctifPlusQueParfait:
-      return "subjonctif plus-que-parfait"
-    case .impératifPassé:
-      return "impératif passé"
-    }
-  }
-
   var titleCaseName: String {
     switch self {
     case .participePassé:
@@ -121,6 +76,19 @@ enum Tense: Hashable {
       return "Subjonctif Plus-que-parfait"
     case .impératifPassé:
       return "Impératif Passé"
+    }
+  }
+
+  var shortTitleCaseName: String {
+    switch self {
+    case .indicatifPrésent:
+      return "Ind. Présent"
+    case .subjonctifPrésent:
+      return "Subj. Présent"
+    case .subjonctifImparfait:
+      return "Subj. Imp."
+    default:
+      return titleCaseName
     }
   }
 
