@@ -57,11 +57,12 @@ struct VerbView: View {
           {
             Text("\(L.VerbView.defective) " + defectGroup.description())
                 .bodyLabel()
-            Spacer()
           }
 
           if let example = verb.example {
             Group {
+              Spacer()
+
               Text(L.VerbView.exampleUse)
                 .subheadingLabel()
                 .leftAligned()
@@ -74,13 +75,13 @@ struct VerbView: View {
                   .smallLabel()
                   .rightAligned()
               }
-
-              Spacer()
             }
           }
         }
 
         Group {
+          Spacer()
+
           Text(L.VerbView.personlessConjugations)
             .subheadingLabel()
 

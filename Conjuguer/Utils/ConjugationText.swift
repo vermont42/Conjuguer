@@ -100,14 +100,14 @@ extension Text {
         if isRegular {
           currentRegularPart += canonicalChar
         } else {
-          self = self + Text(currentRegularPart).foregroundColor(.blue)
+          self = self + Text(currentRegularPart).foregroundColor(.customBlue)
           currentRegularPart = ""
           currentIrregularPart = canonicalChar
           state = .inIrregularPart
         }
       case .inIrregularPart:
         if isRegular {
-          self = self + Text(currentIrregularPart).foregroundColor(.red)
+          self = self + Text(currentIrregularPart).foregroundColor(.customRed)
           currentRegularPart = canonicalChar
           currentIrregularPart = ""
           state = .inRegularPart
@@ -117,7 +117,7 @@ extension Text {
       }
     }
 
-    self = self + Text(currentRegularPart).foregroundColor(.blue)
-    self = self + Text(currentIrregularPart).foregroundColor(.red)
+    self = self + Text(currentRegularPart).foregroundColor(.customBlue)
+    self = self + Text(currentIrregularPart).foregroundColor(.customRed)
   }
 }

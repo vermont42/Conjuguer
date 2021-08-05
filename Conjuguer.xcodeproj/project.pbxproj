@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		032B122326BA02D8000E70CA /* InfoBrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B122226BA02D8000E70CA /* InfoBrowseView.swift */; };
+		032B122726BB3FA0000E70CA /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B122626BB3FA0000E70CA /* ColorExtension.swift */; };
 		033EAA182630A36B0055B313 /* WorkSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 033EAA172630A36B0055B313 /* WorkSans.ttf */; };
 		0343E7DF25E427890043B813 /* ModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0343E7DE25E427890043B813 /* ModelView.swift */; };
 		035D979726B74C820089083C /* L.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035D979626B74C820089083C /* L.swift */; };
@@ -80,6 +81,7 @@
 
 /* Begin PBXFileReference section */
 		032B122226BA02D8000E70CA /* InfoBrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoBrowseView.swift; sourceTree = "<group>"; };
+		032B122626BB3FA0000E70CA /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		033EAA172630A36B0055B313 /* WorkSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WorkSans.ttf; sourceTree = "<group>"; };
 		0343E7DE25E427890043B813 /* ModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelView.swift; sourceTree = "<group>"; };
 		035D979626B74C820089083C /* L.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L.swift; sourceTree = "<group>"; };
@@ -259,7 +261,6 @@
 		036DB7CC25A0C9AF0013C3B7 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				036DB791259FD6510013C3B7 /* Assets.xcassets */,
 				036DB78D259FD6500013C3B7 /* ConjuguerApp.swift */,
 				036DB793259FD6510013C3B7 /* Preview Content */,
 			);
@@ -280,6 +281,7 @@
 				0373681A25DB8BAD008BDF46 /* Util.swift */,
 				0373682925DC667B008BDF46 /* VerbSort.swift */,
 				0373681F25DC6502008BDF46 /* World.swift */,
+				032B122626BB3FA0000E70CA /* ColorExtension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -301,6 +303,7 @@
 		03C2CACA261912AA00CFA825 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				036DB791259FD6510013C3B7 /* Assets.xcassets */,
 				03C2CAD52619160C00CFA825 /* chime.mp3 */,
 				035D979C26B74D6C0089083C /* Localizable.strings */,
 				03C2CACC261912EA00CFA825 /* sadTrombone.mp3 */,
@@ -487,6 +490,7 @@
 				03653F0325EC4F5A00A34267 /* Modifiers.swift in Sources */,
 				036DB80525A386D60013C3B7 /* VerbModelParser.swift in Sources */,
 				036DB7D125A0C9F10013C3B7 /* Conjugator.swift in Sources */,
+				032B122726BB3FA0000E70CA /* ColorExtension.swift in Sources */,
 				03653F1025EC67DF00A34267 /* VerbView.swift in Sources */,
 				0373681B25DB8BAD008BDF46 /* Util.swift in Sources */,
 				03ACAA0125ACB65300CF5390 /* FuturSimple.swift in Sources */,

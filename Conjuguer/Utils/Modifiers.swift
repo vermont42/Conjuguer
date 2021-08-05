@@ -59,12 +59,10 @@ struct CustomNavigationBarItems: ViewModifier {
 }
 
 struct SubheadingLabel: ViewModifier {
-  @Environment(\.colorScheme) var colorScheme
-
   func body(content: Content) -> some View {
     content
       .font(Font.custom(workSans, size: 20))
-      .foregroundColor(colorScheme == .dark ? Color(UIColor.lightGray) : Color(UIColor.darkGray))
+      .foregroundColor(.customGray)
   }
 }
 
@@ -72,6 +70,7 @@ struct TableText: ViewModifier {
   func body(content: Content) -> some View {
     content
       .font(Font.custom(workSans, size: 18))
+      .foregroundColor(.customForeground)
   }
 }
 
@@ -79,16 +78,15 @@ struct BodyLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
       .font(Font.custom(workSans, size: 20))
+      .foregroundColor(.customForeground)
   }
 }
 
 struct SmallLabel: ViewModifier {
-  @Environment(\.colorScheme) var colorScheme
-
   func body(content: Content) -> some View {
     content
       .font(Font.custom(workSans, size: 16))
-      .foregroundColor(colorScheme == .dark ? Color(UIColor.lightGray) : Color(UIColor.darkGray))
+      .foregroundColor(.customGray)
   }
 }
 
