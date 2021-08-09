@@ -29,6 +29,11 @@
 "ModelView.regular" = "Régulier";
 "ModelView.irregular" = "Irrégulier";
 
+"Info.purposeAndUseHeading" = "But et Emploi";
+"Info.terminologyHeading" = "Terminologie";
+"Info.defectivenessHeading" = "Défectuosité";
+"Info.creditsHeading" = "Crédits";
+
 "VerbSort.frequency" = "Fréquence";
 "VerbSort.alphabetic" = "Alphabétique";
 

@@ -10,6 +10,8 @@ import SwiftUI
 extension Color {
   static let customForeground = Color("customForeground")
   static let customBackground = Color("customBackground")
+  //static let customBackground = Color.yellow
+  //static let customForeground = Color.pink
   static let customGray = Color("customGray")
   static let customRed = Color("customRed")
   static let customBlue = Color("customBlue")

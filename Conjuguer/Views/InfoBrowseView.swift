@@ -9,12 +9,28 @@ import SwiftUI
 
 struct InfoBrowseView: View {
   var body: some View {
-    Text("Make a list of Infos.")
-  }
-}
+    ZStack {
+      Color.customBackground
+        .ignoresSafeArea()
 
-struct InfoBrowseView_Previews: PreviewProvider {
-  static var previews: some View {
-    InfoBrowseView()
+      NavigationView {
+        ZStack {
+          Color.customBackground
+
+          ScrollView {
+            ForEach(Info.infos, id: \.self) { info in
+              NavigationLink(destination: InfoView(info: info), label: {
+                Text(info.heading)
+                  .tableText()
+              })
+                .buttonStyle(PlainButtonStyle())
+            }
+              .navigationBarTitle(L.Navigation.info)
+          }
+        }
+      }
+        .navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
+        .padding()
+    }
   }
 }

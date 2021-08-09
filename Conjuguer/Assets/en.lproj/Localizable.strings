@@ -30,6 +30,35 @@
 "ModelView.regular" = "Regular";
 "ModelView.irregular" = "Irregular";
 
+"Info.purposeAndUseHeading" = "Lorem Ipsum";
+"Info.purposeAndUseText" = "^Lorem^
+
+~Lorem~ ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper porta $consequaT$. Nulla arcu nisl, pretium ut euismod at, dapibus a quam. Praesent nec finibus sapien, vel egestas lectus. Donec interdum est et ante laoreet, quis cursus velit finibus. Aliquam sed ante in enim mattis fermentum euismod ac leo. Maecenas ut congue leo. In hac habitasse platea dictumst. Duis porta arcu ac tellus sollicitudin, vulputate volutpat neque feugiat. Suspendisse vulputate turpis non neque ultricies condimentum eu ut mauris. Praesent in ipsum erat.
+
+Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi luctus tempus dolor eget lacinia. Duis eget aliquam diam. Nam et justo eget eros pretium dictum at sit amet eros. Praesent elit dui, imperdiet sit amet rutrum quis, molestie in orci. Maecenas porttitor pulvinar gravida. Pellentesque leo orci, eleifend at velit eu, viverra interdum erat. Donec sit amet imperdiet ante. Nulla posuere id magna at laoreet. Donec lacinia a mi non finibus. Nullam eget sodales mauris, sodales bibendum sapien. Aliquam in mauris vitae dolor molestie bibendum. Vestibulum gravida nisi eget ante accumsan dapibus. Nunc in mi sem. In pharetra ultricies metus, at gravida lorem efficitur nec. In faucibus pulvinar fringilla.
+
+Curabitur facilisis tincidunt sapien, accumsan sodales ligula facilisis sed. Aenean convallis arcu ut mi molestie iaculis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam ut purus vitae dui pharetra rutrum malesuada ac lectus. Sed sit amet posuere nibh, vitae sodales risus. Morbi eget dapibus tortor, at interdum tortor. Curabitur quis dolor in eros malesuada sollicitudin. Pellentesque elementum dolor sit amet dui viverra vehicula.
+
+In rhoncus porta risus, in facilisis elit lacinia ac. Pellentesque in porttitor neque. In mollis ipsum nec volutpat consectetur. Curabitur at tempus dolor, at malesuada tellus. In rhoncus urna sollicitudin blandit varius. Maecenas interdum tempus pretium. Duis tincidunt nulla quis accumsan pulvinar. Donec enim turpis, efficitur id facilisis et, aliquet eget ante. Morbi eu quam mattis, efficitur ante sit amet, consectetur ex. In luctus egestas ultricies. Morbi facilisis commodo pulvinar. Integer dignissim mauris quis pharetra vehicula. Nunc augue ante, bibendum nec dui vitae, porta viverra est. In lacinia ante vel velit ullamcorper dignissim. Nam urna odio, luctus ac ex at, ornare maximus erat.
+
+Maecenas sed tempus arcu. Nulla et aliquam nibh. Donec placerat malesuada felis, eget porttitor enim semper non. Proin quis justo et tortor tincidunt condimentum at in turpis. Curabitur interdum ultrices finibus. Nulla eget nisi vel libero mollis venenatis. Duis id elit et urna fringilla ornare sit amet ut mi. Morbi facilisis, ligula ac ultrices auctor, lacus velit viverra nulla, id pellentesque lectus dolor eget neque. Duis rutrum lacus sem, eu blandit risus molestie vitae. Suspendisse a lectus est. Donec placerat, dui at placerat malesuada, turpis lorem feugiat sapien, et fringilla risus lectus quis dolor.
+
+^Ipsum^
+
+~Lorem~ ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper porta $consequaT$. Nulla arcu nisl, pretium ut euismod at, dapibus a quam. Praesent nec finibus sapien, vel egestas lectus. Donec interdum est et ante laoreet, quis cursus velit finibus. Aliquam sed ante in enim mattis fermentum euismod ac leo. Maecenas ut congue leo. In hac habitasse platea dictumst. Duis porta arcu ac tellus sollicitudin, vulputate volutpat neque feugiat. Suspendisse vulputate turpis non neque ultricies condimentum eu ut mauris. Praesent in ipsum erat.
+
+Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi luctus tempus dolor eget lacinia. Duis eget aliquam diam. Nam et justo eget eros pretium dictum at sit amet eros. Praesent elit dui, imperdiet sit amet rutrum quis, molestie in orci. Maecenas porttitor pulvinar gravida. Pellentesque leo orci, eleifend at velit eu, viverra interdum erat. Donec sit amet imperdiet ante. Nulla posuere id magna at laoreet. Donec lacinia a mi non finibus. Nullam eget sodales mauris, sodales bibendum sapien. Aliquam in mauris vitae dolor molestie bibendum. Vestibulum gravida nisi eget ante accumsan dapibus. Nunc in mi sem. In pharetra ultricies metus, at gravida lorem efficitur nec. In faucibus pulvinar fringilla.
+
+Curabitur facilisis tincidunt sapien, accumsan sodales ligula facilisis sed. Aenean convallis arcu ut mi molestie iaculis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam ut purus vitae dui pharetra rutrum malesuada ac lectus. Sed sit amet posuere nibh, vitae sodales risus. Morbi eget dapibus tortor, at interdum tortor. Curabitur quis dolor in eros malesuada sollicitudin. Pellentesque elementum dolor sit amet dui viverra vehicula.
+
+In rhoncus porta risus, in facilisis elit lacinia ac. Pellentesque in porttitor neque. In mollis ipsum nec volutpat consectetur. Curabitur at tempus dolor, at malesuada tellus. In rhoncus urna sollicitudin blandit varius. Maecenas interdum tempus pretium. Duis tincidunt nulla quis accumsan pulvinar. Donec enim turpis, efficitur id facilisis et, aliquet eget ante. Morbi eu quam mattis, efficitur ante sit amet, consectetur ex. In luctus egestas ultricies. Morbi facilisis commodo pulvinar. Integer dignissim mauris quis pharetra vehicula. Nunc augue ante, bibendum nec dui vitae, porta viverra est. In lacinia ante vel velit ullamcorper dignissim. Nam urna odio, luctus ac ex at, ornare maximus erat.
+
+Maecenas sed tempus arcu. Nulla et aliquam nibh. Donec placerat malesuada felis, eget porttitor enim semper non. Proin quis justo et tortor tincidunt condimentum at in turpis. Curabitur interdum ultrices finibus. Nulla eget nisi vel libero mollis venenatis. Duis id elit et urna fringilla ornare sit amet ut mi. Morbi facilisis, ligula ac ultrices auctor, lacus velit viverra nulla, id pellentesque lectus dolor eget neque. Duis rutrum lacus sem, eu blandit risus molestie vitae. Suspendisse a lectus est. Donec placerat, dui at placerat malesuada, turpis lorem feugiat sapien, et fringilla risus lectus quis dolor.";
+
+"Info.terminologyHeading" = "Terminology";
+"Info.defectivenessHeading" = "Defectiveness";
+"Info.creditsHeading" = "Credits";
+
 "VerbSort.frequency" = "Frequency";
 "VerbSort.alphabetic" = "Alphabetic";
 

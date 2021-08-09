@@ -12,29 +12,38 @@ struct ModelBrowseView: View {
   @ObservedObject var store: ModelStore
 
   var body: some View {
-    NavigationView {
-      VStack {
-        Picker("", selection: $store.modelSort) {
-          ForEach(ModelSort.allCases, id: \.self) { type in
-            Text(L.displayNameForModelSort(type)).tag(type)
-          }
-        }
-        .pickerStyle(SegmentedPickerStyle())
+    ZStack {
+      Color.customBackground
+        .ignoresSafeArea()
 
-        ScrollView {
-          ForEach(store.modelsAndDecorators, id: \.self) { modelAndDecorator in
-            NavigationLink(destination: ModelView(model: modelAndDecorator.model), label: {
-              Text(modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator)
-                .tableText()
-            })
-            .buttonStyle(PlainButtonStyle())
+      NavigationView {
+        ZStack {
+          Color.customBackground
+
+          VStack {
+            Picker("", selection: $store.modelSort) {
+              ForEach(ModelSort.allCases, id: \.self) { type in
+                Text(L.displayNameForModelSort(type)).tag(type)
+              }
+            }
+              .pickerStyle(SegmentedPickerStyle())
+
+            ScrollView {
+              ForEach(store.modelsAndDecorators, id: \.self) { modelAndDecorator in
+                NavigationLink(destination: ModelView(model: modelAndDecorator.model), label: {
+                  Text(modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator)
+                    .tableText()
+                })
+                  .buttonStyle(PlainButtonStyle())
+              }
+                .navigationBarTitle(L.Navigation.models)
+            }
           }
-          .navigationBarTitle(L.Navigation.models)
         }
       }
+        .navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
+        .padding()
     }
-    .navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
-    .padding()
   }
 
   init() {

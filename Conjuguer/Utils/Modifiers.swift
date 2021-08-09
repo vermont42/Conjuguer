@@ -7,28 +7,17 @@
 
 import SwiftUI
 
-private let workSans = "Work Sans"
-
-let bodyFont = Font.custom(workSans, size: 20)
-
-func displayFontFamilyNames() {
-  for family: String in UIFont.familyNames {
-    print("\(family)")
-    for names: String in UIFont.fontNames(forFamilyName: family) {
-      print("== \(names)")
-    }
-  }
-}
-
 enum Modifiers {
   static func setTitleAttributes() {
-    UIFont(name: workSans, size: 36).map {
-      UINavigationBar.appearance().largeTitleTextAttributes = [.font: $0]
+    UIFont(name: workSansSemiBold, size: 24).map {
+      UINavigationBar.appearance().largeTitleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customForeground)]
     }
 
-    UIFont(name: workSans, size: 20).map {
-      UINavigationBar.appearance().titleTextAttributes = [.font: $0]
+    UIFont(name: workSansSemiBold, size: 18).map {
+      UINavigationBar.appearance().titleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customForeground)]
     }
+
+    UINavigationBar.appearance().backgroundColor = UIColor(Color.customBackground)
   }
 
   // Consider using this code to customize segmentedControl and further customize navBar.
@@ -61,7 +50,7 @@ struct CustomNavigationBarItems: ViewModifier {
 struct SubheadingLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSans, size: 20))
+      .font(Font.custom(workSansSemiBold, size: 20))
       .foregroundColor(.customGray)
   }
 }
@@ -69,7 +58,7 @@ struct SubheadingLabel: ViewModifier {
 struct TableText: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSans, size: 18))
+      .font(Font.custom(workSansRegular, size: 18))
       .foregroundColor(.customForeground)
   }
 }
@@ -77,7 +66,7 @@ struct TableText: ViewModifier {
 struct BodyLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSans, size: 20))
+      .font(Font.custom(workSansRegular, size: 20))
       .foregroundColor(.customForeground)
   }
 }
@@ -85,7 +74,7 @@ struct BodyLabel: ViewModifier {
 struct SmallLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSans, size: 16))
+      .font(Font.custom(workSansRegular, size: 16))
       .foregroundColor(.customGray)
   }
 }
@@ -93,14 +82,14 @@ struct SmallLabel: ViewModifier {
 struct ButtonLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSans, size: 20))
+      .font(Font.custom(workSansSemiBold, size: 20))
   }
 }
 
 struct HeadingLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSans, size: 24))
+      .font(Font.custom(workSansSemiBold, size: 24))
   }
 }
 

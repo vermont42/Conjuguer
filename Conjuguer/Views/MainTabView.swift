@@ -10,7 +10,6 @@ import SwiftUI
 struct MainTabView: View {
   var body: some View {
     TabView {
-
       VerbBrowseView()
         .environmentObject(Current)
         .tabItem({

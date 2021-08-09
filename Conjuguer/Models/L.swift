@@ -98,6 +98,49 @@ enum L {
     }
   }
 
+  enum Info {
+    static var purposeAndUseHeading: String {
+      NSLocalizedString("Info.purposeAndUseHeading", comment: "")
+    }
+
+    static var purposeAndUseText: String {
+      NSLocalizedString("Info.purposeAndUseText", comment: "")
+    }
+
+    static var terminologyHeading: String {
+      NSLocalizedString("Info.terminologyHeading", comment: "")
+    }
+
+    static var terminologyText: String {
+      //NSLocalizedString("Info.terminologyText", comment: "")
+"""
+
+"""
+    }
+
+    static var defectivenessHeading: String {
+      NSLocalizedString("Info.defectivenessHeading", comment: "")
+    }
+
+    static var defectivenessText: String {
+      //NSLocalizedString("Info.defectivenessText", comment: "")
+"""
+
+"""
+    }
+
+    static var creditsHeading: String {
+      NSLocalizedString("Info.creditsHeading", comment: "")
+    }
+
+    static var creditsText: String {
+      //NSLocalizedString("Info.creditsText", comment: "")
+"""
+
+"""
+    }
+  }
+
   static func displayNameForVerbSort(_ sort: VerbSort) -> String {
     switch sort {
     case .frequency:
