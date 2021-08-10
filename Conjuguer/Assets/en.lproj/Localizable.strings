@@ -30,7 +30,7 @@
 "ModelView.regular" = "Regular";
 "ModelView.irregular" = "Irregular";
 
-"Info.purposeAndUseHeading" = "Lorem Ipsum";
+"Info.purposeAndUseHeading" = "Purpose & Use";
 "Info.purposeAndUseText" = "^Lorem^
 
 ~Lorem~ ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper porta $consequaT$. Nulla arcu nisl, pretium ut euismod at, dapibus a quam. Praesent nec finibus sapien, vel egestas lectus. Donec interdum est et ante laoreet, quis cursus velit finibus. Aliquam sed ante in enim mattis fermentum euismod ac leo. Maecenas ut congue leo. In hac habitasse platea dictumst. Duis porta arcu ac tellus sollicitudin, vulputate volutpat neque feugiat. Suspendisse vulputate turpis non neque ultricies condimentum eu ut mauris. Praesent in ipsum erat.
@@ -57,6 +57,27 @@ Maecenas sed tempus arcu. Nulla et aliquam nibh. Donec placerat malesuada felis,
 
 "Info.terminologyHeading" = "Terminology";
 "Info.defectivenessHeading" = "Defectiveness";
+"Info.participePasséHeading" = "Participe Passé";
+"Info.participePrésentHeading" = "Participe Présent";
+"Info.radicalFuturHeading" = "Radical Futur";
+"Info.indicatifPrésentHeading" = "Indicatif Présent";
+"Info.passéSimpleHeading" = "Passé Simple";
+"Info.imparfaitHeading" = "Imparfait";
+"Info.futurSimpleHeading" = "Futur Simple";
+"Info.conditionnelPrésentHeading" = "Conditionnel Présent";
+"Info.subjonctifPrésentHeading" = "Subjonctif Présent";
+"Info.subjonctifImparfaitHeading" = "Subjonctif Imparfait";
+"Info.impératifHeading" = "Impératif";
+"Info.passéComposéHeading" = "Passé Composé";
+"Info.plusQueParfaitHeading" = "Plus-que-parfait";
+"Info.passéAntérieurHeading" = "Passé Antérieur";
+"Info.passéSurcomposéHeading" = "Passé Surcomposé";
+"Info.futurAntérieurHeading" = "Futur Antérieur";
+"Info.conditionnelPasséHeading" = "Conditionnel Passé";
+"Info.subjonctifPasséHeading" = "Subjonctif Passé";
+"Info.subjonctifPlusQueParfaitHeading" = "Subjonctif Plus-que-parfait";
+"Info.impératifPasséHeading" = "Impératif Passé";
+"Info.questionsAndResponsesHeading" = "Questions and Responses";
 "Info.creditsHeading" = "Credits";
 
 "VerbSort.frequency" = "Frequency";

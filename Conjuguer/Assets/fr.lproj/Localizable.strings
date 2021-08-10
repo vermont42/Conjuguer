@@ -32,6 +32,27 @@
 "Info.purposeAndUseHeading" = "But et Emploi";
 "Info.terminologyHeading" = "Terminologie";
 "Info.defectivenessHeading" = "Défectuosité";
+"Info.participePasséHeading" = "Participe Passé";
+"Info.participePrésentHeading" = "Participe Présent";
+"Info.radicalFuturHeading" = "Radical Futur";
+"Info.indicatifPrésentHeading" = "Indicatif Présent";
+"Info.passéSimpleHeading" = "Passé Simple";
+"Info.imparfaitHeading" = "Imparfait";
+"Info.futurSimpleHeading" = "Futur Simple";
+"Info.conditionnelPrésentHeading" = "Conditionnel Présent";
+"Info.subjonctifPrésentHeading" = "Subjonctif Présent";
+"Info.subjonctifImparfaitHeading" = "Subjonctif Imparfait";
+"Info.impératifHeading" = "Impératif";
+"Info.passéComposéHeading" = "Passé Composé";
+"Info.plusQueParfaitHeading" = "Plus-que-parfait";
+"Info.passéAntérieurHeading" = "Passé Antérieur";
+"Info.passéSurcomposéHeading" = "Passé Surcomposé";
+"Info.futurAntérieurHeading" = "Futur Antérieur";
+"Info.conditionnelPasséHeading" = "Conditionnel Passé";
+"Info.subjonctifPasséHeading" = "Subjonctif Passé";
+"Info.subjonctifPlusQueParfaitHeading" = "Subjonctif Plus-que-parfait";
+"Info.impératifPasséHeading" = "Impératif Passé";
+"Info.questionsAndResponsesHeading" = "Questions and Responses";
 "Info.creditsHeading" = "Crédits";
 
 "VerbSort.frequency" = "Fréquence";
