@@ -55,15 +55,10 @@ struct ModelView: View {
                 .subheadingLabel()
 
               Text("\(Tense.participePassé.shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.participeEndingRecursive).font(bodyFont)
-
               Text("\(Tense.indicatifPrésent(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.indicatifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations)).font(bodyFont)
-
               Text("\(Tense.impératif(.firstPlural).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.indicatifPrésentGroupRecursive.impératifEndings(stemAlterations: model.stemAlterations)).font(bodyFont)
-
               Text("\(Tense.passéSimple(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.passéSimpleGroupRecursive.endings).font(bodyFont)
-
               Text("\(Tense.subjonctifPrésent(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.subjonctifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations)).font(bodyFont)
-
               Text("\(Tense.subjonctifImparfait(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.passéSimpleGroupRecursive.subjonctifImparfaitEndings).font(bodyFont)
             }
 
