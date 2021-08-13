@@ -34,7 +34,7 @@
   <model mo="haïr" id="2-3B" pa="2-1" ep="ï" si="ï" se="ï" bb="ï" p="0,1,ïs*,h2s" ex="Québec" />
   <model mo="férir" id="2-4" pa="2-1" ep="U" dg="0" />
   <model mo="ouïr" id="2-5" ep="ï" si="s" se="ï" bb="E" p="1,1,I,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|1,1,Y,r1p,r2p,b1p,b2p|3,3,rR,sf|3,2,I,A,sf" ex="trad." dg="19" />
-  <model mo="couvrir" id="3-1" ep="T" si="E" se="i" p="1,1,er,N,pp" bb="E" />
+  <model mo="couvrir" id="3-1" ep="T" si="E" se="i" p="1,1,ER,N,pp" bb="E" />
   <model mo="assaillir" id="3-2A" pa="3-1" ep="i" />
   <model mo="cueillir" id="3-2B" pa="3-2A" ep="i" p="2,1,E,sf" />
   <model mo="bouillir" id="3-2C" pa="3-2A" ep="i" p="3,3,S*,r1s,r2s|3,3,T*,r3s|2,2,ill,h2s" />

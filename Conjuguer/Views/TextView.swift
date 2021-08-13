@@ -17,11 +17,12 @@ struct TextView: UIViewRepresentable {
     v.isEditable = false
     v.textColor = UIColor(Color.customForeground)
     v.backgroundColor = UIColor(Color.customBackground)
+    v.contentOffset = .zero
     return v
   }
 
   func updateUIView(_ uiView: UITextView, context: Context) {
     uiView.attributedText = text
-    uiView.contentOffset = CGPoint(x: 0.0, y: 0.0)
+    uiView.contentOffset = .zero
   }
 }

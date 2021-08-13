@@ -56,8 +56,143 @@ In rhoncus porta risus, in facilisis elit lacinia ac. Pellentesque in porttitor 
 Maecenas sed tempus arcu. Nulla et aliquam nibh. Donec placerat malesuada felis, eget porttitor enim semper non. Proin quis justo et tortor tincidunt condimentum at in turpis. Curabitur interdum ultrices finibus. Nulla eget nisi vel libero mollis venenatis. Duis id elit et urna fringilla ornare sit amet ut mi. Morbi facilisis, ligula ac ultrices auctor, lacus velit viverra nulla, id pellentesque lectus dolor eget neque. Duis rutrum lacus sem, eu blandit risus molestie vitae. Suspendisse a lectus est. Donec placerat, dui at placerat malesuada, turpis lorem feugiat sapien, et fringilla risus lectus quis dolor.";
 
 "Info.terminologyHeading" = "Terminology";
+
+"Info.terminologyText" = "^Verb^
+
+A ~verb~ is a kind of word that describes an action in a sentence. For example, in “Jacques Brel played the guitar”, “play” is the verb. Likewise, in the sentence “Jacques Brel jouait de la guitare”, “jouer” is the verb. Verb ~tense~s express, among other things, when an action took place. In the example sentences, the verb tenses indicate that the action (playing the guitar) took place in the past. In English, to a limited degree, and in French, to a greater degree, the ~subject~ or actor in the sentence, combined with the tense, determines the exact form of the verb used. This is the verb ~conjugation~. In English, the example sentence’s combination of subject and tense results in the conjugation “played”. In French, the conjugation is “jouait”.
+
+The ~infinitif~ (infinitive) is an invariant verb form that usually ends in -er, -ir, or -re. Unlike a conjugation, an ~infinitif~ does not indicate time, number, or person. Example use: “Jacques Brel savait ~chanter~.” = “Jacques Brel $knEw$ how ~to sing~.” In both sentences, the infinitif represents the ~act~ of singing without reference to time, number, or person.
+
+French dictionaries and ~Conjuguer~‘s Verbs tab list infinitif forms of verbs.
+
+The ~radical de l‘infinitif~ (infinitive stem) is the infinitif minus its -er, -ir, or -re ending. This stem is a component of many conjugations.
+
+^Pronoun^
+
+A subject ~pronoun~ is a word that stands in for a subject. In English, the subject pronouns are ~I~, ~you~, ~he/she/it/one~, ~we~, ~you/y‘all~, and ~they~.
+
+Subject pronouns correspond to the ~singular~ or ~plural~ number and to the ~first person~, ~second person~, or ~third person~. English subject pronouns follow. Shorthand abbreviations of the person-number combinations are in parentheses.
+
+first person, singular (1s): ~I~
+second person, singular (2s): ~you~
+third person, singular (3s): ~he/she/it~
+first person, plural (1p): ~we~
+second person, plural (2p): ~you/y‘all~
+third person, plural (3p): ~they~
+
+Except with respect to 2s, the choice of subject pronoun in French is straightforward.
+
+1s: ~je~
+3s: ~il~ (masc.)/~elle~ (fem.)
+1p: ~nous~
+2p: ~vous~
+3p: ~ils~ (masc.)/~elles~ (fem.)
+
+(“Fem.” means that a pronoun refers to female subjects, and “masc.” means that a pronoun refers to male subjects. In casual speech, “on” replaces “nous” and uses 3s conjugations.)
+
+With respect to 2s, there are two choices: ~tu~ and ~vous~. ~Tu~ and its conjugations express intimacy, familiarity, friendliness, or, when used in anger on a stranger, rudeness. ~Vous~ and its conjugations express politeness, respect, or, when used on a former intimate, emotional distance.
+
+^Order and Presentation of Conjugations^
+
+Treatises on French verbs, when presenting the conjugations for a particular tense, use the following person-number order: 1s, 2s, 3s, 1p, 2p, 3p. In adherance with tradition, ~Conjuguer~ does the same. For example, ~Conjuguer~ would present the indicatif-présent conjugations of ~être~ as follows:
+
+$SUIs$, $Es$, $ESt$, $SOMMEs$, $êteS$, $SOnt$
+
+Red letters in conjugations represent irregularities. A verb is considered irregular if any of its conjugations differs from the conjugation of a regular ~er~, ~ir~, or ~re~ verb.";
+
 "Info.defectivenessHeading" = "Defectiveness";
+
+"Info.defectivenessText" = "^Types^
+
+Sixty-five French verbs are ~defective~. This doesn‘t mean that something is wrong with them. No, defective in this context means that these verbs lack certain or even most conjugations. Verbs may be considered defective for a variety of reasons.
+
+1. Use of certain person-numbers would be non-sensical. For example, “je $faUX$ que tu restes” would ~literally~ mean “I $AM$ necessary that you stay.” Falloir is therefore defective for all person-numbers except 3s. “Il $faUt$ que tu restes” makes sense, meaning “it $IS$ necessary that you stay”.
+
+2. Some verbs are impersonal. This doesn’t mean that they lack that human touch. No, impersonal in this context means that their subject is, in English, generic “it” or, in French, generic “il”. These verbs involve natural phenomena like snow, hail, sleet, and rain. “Il pleut.” = “It is raining.” Because of the customary “il” subjects, these verbs are considered defective for person-numbers other than 3s. There is, however, ~some~ flexibility. Quoting and translating Voltaire, “Les calomnies pleuvent sur quiconque réussit.” = “Calumnies rain on whoever succeeds.” One could imagine other person-numbers being used for impersonal verbs in poetry. For example, in a poem whose narrator is Nature, the pronoun and conjugation “je neige”, meaning “I am snowing”, would make sense.
+
+3. Some verbs are defective in certain tenses in order to avoid confusion with other verbs’ conjugations. For example, paître is defective in the passé simple because the conjugations suggested by analogy with connaître, $Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$, and $Purent$, are identical to pouvoir’s passé-simple conjugations.
+
+4. Some verbs are defective because they have fallen out of use except in certain fixed expressions. Ouïr (to hear or listen) has been replaced by entendre and écouter except in the expressions “oui-dire” = “hearsay” and “Oyez!” = “Listen!” (addressing Parliament). Ester (to be or stay) has been replaced by être and rester except in the expression “ester en justice” = “be a party in legal proceedings”. Gésir (to lie prone) ~is~ still occasionally used in the indicatif présent and imparfait, but the ~primary~ use of this verb is “ci-gît” = “here lies (dead)”, a common tombstone inscription.
+
+^Reasons for Inclusion^
+
+Reference works on French verbs, for example the book “French Verbs Made Simple(r)” and the website Wiktionary, omit defective conjugations entirely. But the developer of ~Conjuguer~ is providing ~all~ conjugations, including those traditionally considered defective, to you, the user of this app. Three reasons for this heterodoxy follow.
+
+1. As stated on page 319 of “French Verbs Made Simple(r)”, “There is occasionally disagreement [among] various sources as to which [conjugations] actually exist.” To omit certain conjugations, therefore, would require a series of judgment calls by the developer of Conjuguer, who judgeth not lest he be judged.
+
+2. Certain conjugations are likely absent from any large corpus of French text and could therefore be considered defective. But the fact that a conjugation isn’t used doesn’t mean that it couldn’t be useful. Consider a poem narrated by the clouds of Earth and Venus. This poem might include the line “We rain water and sulphuric acid, respectively.” Thus, although pleuvoir is considered defective for 1p in all conjugated tenses, this conjugation (pleuvons) would be useful in such a poem.
+
+3. Ester (to be or stay), though nearly extinct in French, has heavily used relatives in other Romance languages. For example, Spanish has two words for “to be”: “ser” and (you guessed it) “estar”. Conjuguer’s users might be curious how ester’s conjugations would have evolved had that verb remained productive in French, as it did in Spanish. Conjuguer’s users might also be curious how clore’s conjugations would have evolved had fermer not replaced it. For the benefit of curious users, Conjuguer includes speculative conjugations of ester, ouïr, gésir, choir, and clore, inspired by the Old French conjugations provided by Wiktionary and “Tableaux de conjugaison de l’ancien français” by Machio Okada and Hitoshi Ogurisu.
+
+Notwithstanding Conjuguer’s inclusive approach to conjugations traditionally considered defective, those conjugations ~are~ highlighted with strikethrough in Conjuguer's user interface.";
+
 "Info.participePasséHeading" = "Participe Passé";
+
+"Info.participePasséText" = "^Use^
+
+The ~participe passé~ corresponds to the -en, -ed, -d, or -t form of an English verb, the past participle, and is used with the auxiliary verbs ~avoir~ and ~être~ to form certain compound tenses, including the %passé composé%: “j’ai parlé” = “I $spOke$”, “I $dID$ speak”, or “I have $spOken$”. The participe passé is also used to form an adjective or noun from a verb: “temps perdu” = “lost time”, “l’inconnu” = “the unknown”.
+
+^Form^
+
+In general, the participe passé is formed by adding the following endings to the radical de l‘infinitif:
+
+Regular ~er~ verbs: -é
+
+Examples: “parlé” = “$spOken$”, “chanté” = “$sUng$”, “dansé” = “danced”
+
+Regular ~ir~ verbs: -i
+
+Examples: “fini” = “finished”, “établi” = “established”, “évanoui” = “fainted”
+
+Regular ~re~ verbs: -u
+
+Examples: “entendu” = “heard”, “vendu” = “$sOld$”, “rendu” = “rendered”
+
+^Agreement^
+
+When the participe passé is used as an adjective, it agrees in both gender and number with the noun it modifies. Example: “des langues parlées en France” = “some languages spoken in France”
+
+The participe passé, used in compound tenses, agrees in gender and number with the subject in two scenarios.
+
+One scenario involves reflexive use of verbs. “Les chattes se sont nettoyées.” = “The female cats groomed themselves.”
+
+The other scenario involves certain verbs that use the auxiliary être rather than avoir: aller, arriver, descendre, devenir, entrer, monter, mourir, naître, partir, parvenir, passer, ressortir, rester, retomber, retourner, revenir, sortir, tomber. Confusingly, verbs in this list use avoir, without agreement, in transitive situations.
+
+Contrast:
+
+“Elle est sortie.” = “She $leFt$.”
+
+with:
+
+“Elle a sorti son portefeuille.” = “She $gOt$ her wallet out.”
+
+Note the absence of agreement in the second conjugation of sortir.
+
+^Irregularities^
+
+Here are some irregular participes passés:
+
+avoir: $EU$
+comprendre: $comprIS$
+connaître: $connU$
+croire: $crU$
+devoir: $DU$
+dire: $diT$
+être: $ÉtÉ$
+faire: $faiT$
+falloir: $fallU$
+lire: $lU$
+mettre: $mIS$
+ouvrir: $ouvERT$
+pouvoir: $PU$
+prendre: $prIS$
+savoir: $SU$
+suivre: $suivIS$
+tenir: $tenU$
+venir: $venU$
+vivre: $vÉCu$
+vouloir: $voulU$";
+
 "Info.participePrésentHeading" = "Participe Présent";
 "Info.radicalFuturHeading" = "Radical Futur";
 "Info.indicatifPrésentHeading" = "Indicatif Présent";

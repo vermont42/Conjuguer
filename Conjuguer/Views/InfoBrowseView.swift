@@ -18,19 +18,22 @@ struct InfoBrowseView: View {
           Color.customBackground
 
           ScrollView {
-            ForEach(Info.infos, id: \.self) { info in
-              NavigationLink(destination: InfoView(info: info), label: {
-                Text(info.heading)
-                  .tableText()
-              })
-                .buttonStyle(PlainButtonStyle())
+            LazyVStack {
+              ForEach(Info.infos, id: \.heading) { info in
+                NavigationLink(destination: InfoView(info: info)) {
+                  ZStack {
+                    Color.customBackground
+                    Text(info.heading)
+                      .tableText()
+                  }
+                }
+                  .buttonStyle(PlainButtonStyle())
+              }
             }
               .navigationBarTitle(L.Navigation.info)
           }
         }
       }
-        .navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
-        .padding()
     }
   }
 }

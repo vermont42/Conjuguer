@@ -112,10 +112,7 @@ enum L {
     }
 
     static var terminologyText: String {
-      //NSLocalizedString("Info.terminologyText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.terminologyText", comment: "")
     }
 
     static var defectivenessHeading: String {
@@ -123,10 +120,7 @@ enum L {
     }
 
     static var defectivenessText: String {
-      //NSLocalizedString("Info.defectivenessText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.defectivenessText", comment: "")
     }
 
     static var participePasséHeading: String {
@@ -134,10 +128,7 @@ enum L {
     }
 
     static var participePasséText: String {
-      //NSLocalizedString("Info.participePasséText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.participePasséText", comment: "")
     }
 
     static var participePrésentHeading: String {
@@ -145,10 +136,7 @@ enum L {
     }
 
     static var participePrésentText: String {
-      //NSLocalizedString("Info.participePrésentText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.participePrésentText", comment: "")
     }
 
     static var radicalFuturHeading: String {
@@ -156,10 +144,7 @@ enum L {
     }
 
     static var radicalFuturText: String {
-      //NSLocalizedString("Info.radicalFuturText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.radicalFuturText", comment: "")
     }
 
     static var indicatifPrésentHeading: String {
@@ -167,10 +152,7 @@ enum L {
     }
 
     static var indicatifPrésentText: String {
-      //NSLocalizedString("Info.indicatifPrésentText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.indicatifPrésentText", comment: "")
     }
 
     static var passéSimpleHeading: String {
@@ -178,10 +160,7 @@ enum L {
     }
 
     static var passéSimpleText: String {
-      //NSLocalizedString("Info.passéSimpleText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.passéSimpleText", comment: "")
     }
 
     static var imparfaitHeading: String {
@@ -189,10 +168,7 @@ enum L {
     }
 
     static var imparfaitText: String {
-      //NSLocalizedString("Info.imparfaitText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.imparfaitText", comment: "")
     }
 
     static var futurSimpleHeading: String {
@@ -200,10 +176,7 @@ enum L {
     }
 
     static var futurSimpleText: String {
-      //NSLocalizedString("Info.futurSimpleText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.futurSimpleText", comment: "")
     }
 
     static var conditionnelPrésentHeading: String {
@@ -211,10 +184,7 @@ enum L {
     }
 
     static var conditionnelPrésentText: String {
-      //NSLocalizedString("Info.conditionnelPrésentText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.conditionnelPrésentText", comment: "")
     }
 
     static var subjonctifPrésentHeading: String {
@@ -222,10 +192,7 @@ enum L {
     }
 
     static var subjonctifPrésentText: String {
-      //NSLocalizedString("Info.subjonctifPrésentText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.subjonctifPrésentText", comment: "")
     }
 
     static var subjonctifImparfaitHeading: String {
@@ -233,10 +200,7 @@ enum L {
     }
 
     static var subjonctifImparfaitText: String {
-      //NSLocalizedString("Info.subjonctifImparfaitText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.subjonctifImparfaitText", comment: "")
     }
 
     static var impératifHeading: String {
@@ -244,10 +208,7 @@ enum L {
     }
 
     static var impératifText: String {
-      //NSLocalizedString("Info.impératifText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.impératifText", comment: "")
     }
 
     static var passéComposéHeading: String {
@@ -255,10 +216,7 @@ enum L {
     }
 
     static var passéComposéText: String {
-      //NSLocalizedString("Info.passéComposéText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.passéComposéText", comment: "")
     }
 
     static var plusQueParfaitHeading: String {
@@ -266,10 +224,7 @@ enum L {
     }
 
     static var plusQueParfaitText: String {
-      //NSLocalizedString("Info.plusQueParfaitText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.plusQueParfaitText", comment: "")
     }
 
     static var passéAntérieurHeading: String {
@@ -277,10 +232,7 @@ enum L {
     }
 
     static var passéAntérieurText: String {
-      //NSLocalizedString("Info.passéAntérieurText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.passéAntérieurText", comment: "")
     }
 
     static var passéSurcomposéHeading: String {
@@ -288,10 +240,7 @@ enum L {
     }
 
     static var passéSurcomposéText: String {
-      //NSLocalizedString("Info.passéSurcomposéText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.passéSurcomposéText", comment: "")
     }
 
     static var futurAntérieurHeading: String {
@@ -299,10 +248,7 @@ enum L {
     }
 
     static var futurAntérieurText: String {
-      //NSLocalizedString("Info.futurAntérieurText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.futurAntérieurText", comment: "")
     }
 
     static var conditionnelPasséHeading: String {
@@ -310,10 +256,7 @@ enum L {
     }
 
     static var conditionnelPasséText: String {
-      //NSLocalizedString("Info.conditionnelPasséText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.conditionnelPasséText", comment: "")
     }
 
     static var subjonctifPasséHeading: String {
@@ -321,10 +264,7 @@ enum L {
     }
 
     static var subjonctifPasséText: String {
-      //NSLocalizedString("Info.subjonctifPasséText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.subjonctifPasséText", comment: "")
     }
 
     static var subjonctifPlusQueParfaitHeading: String {
@@ -332,10 +272,7 @@ enum L {
     }
 
     static var subjonctifPlusQueParfaitText: String {
-      //NSLocalizedString("Info.subjonctifPlusQueParfaitText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.subjonctifPlusQueParfaitText", comment: "")
     }
 
     static var impératifPasséHeading: String {
@@ -343,10 +280,7 @@ enum L {
     }
 
     static var impératifPasséText: String {
-      //NSLocalizedString("Info.impératifPasséText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.impératifPasséText", comment: "")
     }
 
     static var questionsAndResponsesHeading: String {
@@ -354,10 +288,7 @@ enum L {
     }
 
     static var questionsAndResponsesText: String {
-      //NSLocalizedString("Info.questionsAndResponsesText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.questionsAndResponsesText", comment: "")
     }
 
     static var creditsHeading: String {
@@ -365,10 +296,7 @@ enum L {
     }
 
     static var creditsText: String {
-      //NSLocalizedString("Info.creditsText", comment: "")
-"""
-
-"""
+      NSLocalizedString("Info.creditsText", comment: "")
     }
   }
 
