@@ -59,7 +59,7 @@ Maecenas sed tempus arcu. Nulla et aliquam nibh. Donec placerat malesuada felis,
 
 "Info.terminologyText" = "^Verb^
 
-A ~verb~ is a kind of word that describes an action in a sentence. For example, in “Jacques Brel played the guitar”, “play” is the verb. Likewise, in the sentence “Jacques Brel jouait de la guitare”, “jouer” is the verb. Verb ~tense~s express, among other things, when an action took place. In the example sentences, the verb tenses indicate that the action (playing the guitar) took place in the past. In English, to a limited degree, and in French, to a greater degree, the ~subject~ or actor in the sentence, combined with the tense, determines the exact form of the verb used. This is the verb ~conjugation~. In English, the example sentence’s combination of subject and tense results in the conjugation “played”. In French, the conjugation is “jouait”.
+A ~verb~ is a kind of word that describes an action. For example, in the sentence “Jacques Brel played the guitar”, “play” is the verb. Likewise, in the sentence “Jacques Brel jouait de la guitare”, “jouer” is the verb. Verb ~tense~s express, among other things, when an action took place. In the example sentences, the verb tenses indicate that the action (playing the guitar) took place in the past. In English and in French, the ~subject~ or actor in the sentence, combined with the tense, determine the form of the verb used. This is the verb ~conjugation~. In English, the example sentence’s combination of subject and tense results in the conjugation “played”. In French, the conjugation is “jouait”.
 
 The ~infinitif~ (infinitive) is an invariant verb form that usually ends in -er, -ir, or -re. Unlike a conjugation, an ~infinitif~ does not indicate time, number, or person. Example use: “Jacques Brel savait ~chanter~.” = “Jacques Brel $knEw$ how ~to sing~.” In both sentences, the infinitif represents the ~act~ of singing without reference to time, number, or person.
 
@@ -92,7 +92,7 @@ Except with respect to 2s, the choice of subject pronoun in French is straightfo
 
 With respect to 2s, there are two choices: ~tu~ and ~vous~. ~Tu~ and its conjugations express intimacy, familiarity, friendliness, or, when used in anger on a stranger, rudeness. ~Vous~ and its conjugations express politeness, respect, or, when used on a former intimate, emotional distance.
 
-^Order and Presentation of Conjugations^
+^Order of Presentation of Conjugations^
 
 Treatises on French verbs, when presenting the conjugations for a particular tense, use the following person-number order: 1s, 2s, 3s, 1p, 2p, 3p. In adherance with tradition, ~Conjuguer~ does the same. For example, ~Conjuguer~ would present the indicatif-présent conjugations of ~être~ as follows:
 
@@ -124,13 +124,13 @@ Reference works on French verbs, for example the book “French Verbs Made Simpl
 
 3. Ester (to be or stay), though nearly extinct in French, has heavily used relatives in other Romance languages. For example, Spanish has two words for “to be”: “ser” and (you guessed it) “estar”. Conjuguer’s users might be curious how ester’s conjugations would have evolved had that verb remained productive in French, as it did in Spanish. Conjuguer’s users might also be curious how clore’s conjugations would have evolved had fermer not replaced it. For the benefit of curious users, Conjuguer includes speculative conjugations of ester, ouïr, gésir, choir, and clore, inspired by the Old French conjugations provided by Wiktionary and “Tableaux de conjugaison de l’ancien français” by Machio Okada and Hitoshi Ogurisu.
 
-Notwithstanding Conjuguer’s inclusive approach to conjugations traditionally considered defective, those conjugations ~are~ highlighted with strikethrough in Conjuguer's user interface.";
+Notwithstanding Conjuguer’s inclusive approach to conjugations traditionally considered defective, those conjugations ~are~ called out with strikethrough in Conjuguer's user interface.";
 
 "Info.participePasséHeading" = "Participe Passé";
 
 "Info.participePasséText" = "^Use^
 
-The ~participe passé~ corresponds to the -en, -ed, -d, or -t form of an English verb, the past participle, and is used with the auxiliary verbs ~avoir~ and ~être~ to form certain compound tenses, including the %passé composé%: “j’ai parlé” = “I $spOke$”, “I $dID$ speak”, or “I have $spOken$”. The participe passé is also used to form an adjective or noun from a verb: “temps perdu” = “lost time”, “l’inconnu” = “the unknown”.
+The ~participe passé~ (past participle) is used with the auxiliary verbs ~avoir~ and ~être~ to form certain compound tenses, including the %passé composé%: “j’ai parlé” = “I $spOke$”, “I $dID$ speak”, or “I have $spOken$”. The participe passé is also used to form an adjective or noun from a verb: “temps perdu” = “lost time”, “l’inconnu” = “the unknown”.
 
 ^Form^
 
