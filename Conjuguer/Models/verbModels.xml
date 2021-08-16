@@ -100,10 +100,11 @@
   <model mo="gésir" id="5-28" ep="Ü" si="s" se="u" bb="e" p="2,2,I,r1s,r2s|2,2,Î,r3s|2,1,I,r1p,r2p,r3p|3,3,J,x1s,x3s,x3p|1,1,Üs*,x2s|1,1,,x1p,x2p|2,1,I,bA|2,2,É,pp" dg="17" />
   <model mo="partir" id="6-1" si="s" se="i" bb="E" ep="i" p="2,2,@,N,r1s,r2s,r3s" />
   <model mo="chauvir" id="6-1A" pa="6-1" p="0,1,I,r1s,r2s,r3s" dg="0" />
-  <model mo="fuire" id="6-2" si="s" se="b" bb="e" ep="I" p="1,1,Y,r1p,r2p,b1p,b2p|1,1,,pp" />
+  <model mo="fuir" id="6-2" si="s" se="i" bb="e" ep="I" p="0,1,I,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|0,1,Y,r1p,r2p,b1p,b2p" />
   <model mo="acquérir" id="6-3" si="s" se="i" bb="e" ep="iS" p="2,1,IE,r1s,r2s,r3s|2,1,IÈ,r3p|4,4,ERr,sf|3,3,@,xA,pp|2,1,IÈ,b1s,b2s,b3s,b3p" />
   <model mo="courir" id="6-4" ep="U" si="s" se="u" bb="E" p="3,3,Rr,sf" />
   <model mo="mourir" id="6-5" pa="6-4" ep="T" p="3,1,E,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|3,2,@,pp" />
   <model mo="vêtir" id="6-6" ep="U" si="r" se="i" bb="E" />
   <model mo="venir" id="6-7" ep="U" si="s" se="b" bb="E" p="2,0,I,r1s,r2s,r3s|2,2,IeNn,r3p,b1s,b2s,b3s,b3p|4,3,IenD,sf|2,1,I,x1s,x2s,x3s,x3p|2,1,Î,x1p,x2p|2,1,Î,q3s|2,1,I,q1p,q2p" />
+  <model mo="issir" id="6-8" ep="U" si="s" se="i" bb="E" p="3,3,I,r1s,r2s|3,3,Î,r3s" />
 </models>

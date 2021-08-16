@@ -52,6 +52,11 @@ struct VerbView: View {
               Text(L.VerbView.auxiliaryAvoir)
                 .bodyLabel()
             }
+
+            if let frequency = verb.frequency {
+              Text("\(L.VerbView.frequency): \(frequency) / \(FrequencyParser.maxFrequency)")
+                .bodyLabel()
+            }
           }
 
           Group {

@@ -17,6 +17,7 @@
 "VerbView.aspiratedH" = "H Aspirée";
 "VerbView.auxiliaryÊtre" = "Auxiliaire: Être";
 "VerbView.auxiliaryAvoir" = "Auxiliaire: Avoir";
+"VerbView.frequency" = "Fréquence";
 "VerbView.defective" = "Défectif.";
 "VerbView.exampleUse" = "Exemple d'Utilisation";
 "VerbView.personlessConjugations" = "P. Passé, P. Présent, R. Futur";

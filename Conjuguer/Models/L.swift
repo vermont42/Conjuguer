@@ -55,6 +55,10 @@ enum L {
       NSLocalizedString("VerbView.auxiliaryAvoir", comment: "")
     }
 
+    static var frequency: String {
+      NSLocalizedString("VerbView.frequency", comment: "")
+    }
+
     static var defective: String {
       NSLocalizedString("VerbView.defective", comment: "")
     }

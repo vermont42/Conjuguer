@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030FFAA526CA19CB00741524 /* frequencies.xml in Resources */ = {isa = PBXBuildFile; fileRef = 030FFAA426CA19CB00741524 /* frequencies.xml */; };
+		030FFAA726CA1A2000741524 /* FrequencyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030FFAA626CA1A2000741524 /* FrequencyParser.swift */; };
 		032B122326BA02D8000E70CA /* InfoBrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B122226BA02D8000E70CA /* InfoBrowseView.swift */; };
 		032B122726BB3FA0000E70CA /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B122626BB3FA0000E70CA /* ColorExtension.swift */; };
 		032D267226BDF52100AE1BD1 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D267126BDF52100AE1BD1 /* InfoView.swift */; };
@@ -89,6 +91,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		030FFAA426CA19CB00741524 /* frequencies.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = frequencies.xml; sourceTree = "<group>"; };
+		030FFAA626CA1A2000741524 /* FrequencyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyParser.swift; sourceTree = "<group>"; };
 		032B122226BA02D8000E70CA /* InfoBrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoBrowseView.swift; sourceTree = "<group>"; };
 		032B122626BB3FA0000E70CA /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		032D267126BDF52100AE1BD1 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
@@ -256,6 +260,8 @@
 				038E0AFD2690976D002A71EF /* DefectGroup.swift */,
 				038E0B022690A016002A71EF /* DefectGroupParser.swift */,
 				038E0AF8268D0E02002A71EF /* defectGroups.xml */,
+				030FFAA426CA19CB00741524 /* frequencies.xml */,
+				030FFAA626CA1A2000741524 /* FrequencyParser.swift */,
 				03ACAA0025ACB65300CF5390 /* FuturSimple.swift */,
 				03ACA9F625A9FD4400CF5390 /* Imparfait.swift */,
 				036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */,
@@ -448,6 +454,7 @@
 				03C2CACE261912EA00CFA825 /* sadTrombone.mp3 in Resources */,
 				038E0AF9268D0E02002A71EF /* defectGroups.xml in Resources */,
 				036DB795259FD6510013C3B7 /* Preview Assets.xcassets in Resources */,
+				030FFAA526CA19CB00741524 /* frequencies.xml in Resources */,
 				035D979A26B74D6C0089083C /* Localizable.strings in Resources */,
 				036DB80025A37ECB0013C3B7 /* verbModels.xml in Resources */,
 				03309F7026BD8D10003E4F92 /* WorkSans-Bold.ttf in Resources */,
@@ -547,6 +554,7 @@
 				032D267426BDF5E000AE1BD1 /* TextView.swift in Sources */,
 				032D267226BDF52100AE1BD1 /* InfoView.swift in Sources */,
 				0373680E25DB811F008BDF46 /* MainTabView.swift in Sources */,
+				030FFAA726CA1A2000741524 /* FrequencyParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

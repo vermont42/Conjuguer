@@ -18,7 +18,7 @@ struct Verb: Identifiable, Hashable {
   let auxiliary: Auxiliary
   let isReflexive: Bool
   let hasAspiratedH: Bool
-  let frequency: Int?
+  var frequency: Int?
   let extraLetters: String?
   let example: String?
   let source: String?
