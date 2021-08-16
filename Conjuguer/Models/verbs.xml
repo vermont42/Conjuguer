@@ -79,7 +79,7 @@
   <verb in="accroupir" tn="crouch, squat" re="t" mo="2-1" />
   <verb in="accueillir" tn="welcome" mo="3-2B" fr="163" />
   <verb in="acculer" tn="corner, prevent escape" mo="1-1" />
-  <verb in="accumuler" tn="accumlate" mo="1-1" fr="808" />
+  <verb in="accumuler" tn="accumulate" mo="1-1" fr="808" />
   <verb in="accuser" tn="accuse" mo="1-1" fr="477" />
   <verb in="acérer" tn="sharpen" mo="1-5" />
   <verb in="acétifier" tn="acetify, turn into acid" mo="1-1" />
@@ -126,7 +126,7 @@
   <verb in="affabuler" tn="make up stories, tell a fable" mo="1-1" />
   <verb in="affadir" tn="make tasteless, insipid, or bland" mo="2-1" />
   <verb in="affaiblir" tn="weaken, enfeeble" mo="2-1" fr="972" />
-  <verb in="affairer" tn="busy onself" re="t" mo="1-1" />
+  <verb in="affairer" tn="busy oneself" re="t" mo="1-1" />
   <verb in="affaisser" tn="cause to subside" mo="1-1" />
   <verb in="affaler" tn="lower, let down" mo="1-1" />
   <verb in="affamer" tn="starve" mo="1-1" />
@@ -221,7 +221,7 @@
   <verb in="altérer" tn="alter, fiddle with" mo="1-5" />
   <verb in="alterner" tn="alternate" mo="1-1" />
   <verb in="aluminer" tn="aluminize" mo="1-1" />
-  <verb in="aluner" tn="tream with alum" mo="1-1" />
+  <verb in="aluner" tn="treat with alum" mo="1-1" />
   <verb in="alunir" tn="land on the Moon" mo="2-1" />
   <verb in="amadouer" tn="coax, sweet-talk" mo="1-1" />
   <verb in="amaigrir" tn="emaciate" mo="2-1" />
@@ -406,7 +406,7 @@
   <verb in="attendrir" tn="make softer" mo="2-1" />
   <verb in="attenter" tn="assault" mo="1-1" />
   <verb in="atténuer" tn="attenuate" mo="1-1" />
-  <verb in="atterrer" tn="fell, appal" mo="1-1" />
+  <verb in="atterrer" tn="fell, appall" mo="1-1" />
   <verb in="atterrir" tn="land a flying vehicle" mo="2-1" />
   <verb in="attester" tn="attest, support with evidence" mo="1-1" fr="723" />
   <verb in="attiédir" tn="warm" mo="2-1" />
@@ -574,7 +574,7 @@
   <verb in="bisquer" tn="be scornful or moody" mo="1-1" />
   <verb in="bisser" tn="repeat, perform an encore" mo="1-1" />
   <verb in="bistourner" tn="twist" mo="1-1" />
-  <verb in="bistrer" tn="darken, blacken, be mezmerized" mo="1-1" />
+  <verb in="bistrer" tn="darken, blacken, be mesmerized" mo="1-1" />
   <verb in="biter" tn="understand, humiliate" mo="1-1" />
   <verb in="bitter" tn="understand" mo="1-1" />
   <verb in="bitturer" tn="become drunk" re="t" mo="1-1" />
@@ -661,7 +661,7 @@
   <verb in="bousiller" tn="wreck, botch" mo="1-1" />
   <verb in="bouter" tn="push, remove flesh from the skin of an animal" mo="1-1" />
   <verb in="boutonner" tn="button" mo="1-1" />
-  <verb in="bouturer" tn="stick, propagate plants by cuttin" mo="1-1" />
+  <verb in="bouturer" tn="stick, propagate plants by cutting" mo="1-1" />
   <verb in="boxer" tn="box" mo="1-1" />
   <verb in="boyauter" tn="experience a paroxysm of laughter" re="t" mo="1-1" />
   <verb in="boycotter" tn="boycott" mo="1-1" />
@@ -734,7 +734,7 @@
   <verb in="buter" tn="stop dead, buttress, kill" mo="1-1" />
   <verb in="butiner" tn="gather pollen" mo="1-1" />
   <verb in="butter" tn="heap" mo="1-1" />
-  <verb in="cabaler" tn="make or belong to a cabale" mo="1-1" />
+  <verb in="cabaler" tn="make or belong to a cabal" mo="1-1" />
   <verb in="cabaner" tn="live in a hut or cabin" mo="1-1" />
   <verb in="câbler" tn="cable" mo="1-1" />
   <verb in="cabosser" tn="dent" mo="1-1" />
@@ -973,7 +973,7 @@
   <verb in="cinématographier" tn="cinematograph" mo="1-1" />
   <verb in="cingler" tn="sail, navigate" mo="1-1" />
   <verb in="cintrer" tn="bend, vault, take in at the waist" mo="1-1" />
-  <verb in="circoncire" tn="circumcize" mo="5-8D" />
+  <verb in="circoncire" tn="circumcise" mo="5-8D" />
   <verb in="circonscrire" tn="circumscribe" mo="5-7" />
   <verb in="circonvenir" tn="circumvent" mo="6-7" />
   <verb in="circuler" tn="circulate, go by, get around" mo="1-1" fr="665" />
@@ -1216,7 +1216,7 @@
   <verb in="contrer" tn="block, counter, counteract" mo="1-1" />
   <verb in="contresigner" tn="countersign" mo="1-1" />
   <verb in="contretirer" tn="counterproof a print or drawing" mo="1-1" />
-  <verb in="contrevenir" tn="countervene" mo="6-7" />
+  <verb in="contrevenir" tn="contravene" mo="6-7" />
   <verb in="contribuer" tn="contribute, help" mo="1-1" fr="239" />
   <verb in="contrister" tn="grieve for" mo="1-1" />
   <verb in="contrôler" tn="check, examine, control" mo="1-1" fr="328" />
@@ -1237,7 +1237,7 @@
   <verb in="convulsionner" tn="cause convulsions" mo="1-1" />
   <verb in="coopérer" tn="cooperate" mo="1-5" />
   <verb in="coopter" tn="coopt" mo="1-1" />
-  <verb in="coordonner" tn="coordinate, organize throroughly" mo="1-1" fr="662" />
+  <verb in="coordonner" tn="coordinate, organize thoroughly" mo="1-1" fr="662" />
   <verb in="copermuter" tn="exchange one benefice for another" mo="1-1" />
   <verb in="copier" tn="copy" mo="1-1" fr="754" />
   <verb in="copiloter" tn="copilot" mo="1-1" />
@@ -1600,7 +1600,7 @@
   <verb in="défaillir" tn="faint" mo="3-2A" />
   <verb in="défaire" tn="take down, undo, break, defeat" mo="5-23" fr="834" />
   <verb in="défalquer" tn="deduct, recoup" mo="1-1" />
-  <verb in="défatiguer" tn="remove fatique, vivify" mo="1-1" />
+  <verb in="défatiguer" tn="remove fatigue, vivify" mo="1-1" />
   <verb in="défaufiler" tn="remove seam made by threading" mo="1-1" />
   <verb in="défausser" tn="straighten" mo="1-1" />
   <verb in="défavoriser" tn="disfavor, disadvantage, discriminate" mo="1-1" />
@@ -1730,7 +1730,7 @@
   <verb in="délocaliser" tn="relocate, delocalize" mo="1-1" />
   <verb in="déloger" tn="move out, expel" mo="1-2B" />
   <verb in="délurer" tn="render delirious" mo="1-1" />
-  <verb in="délustrer" tn="take off the lustre, the gloss of" mo="1-1" />
+  <verb in="délustrer" tn="take off the luster, the gloss of" mo="1-1" />
   <verb in="déluter" tn="unlute" mo="1-1" />
   <verb in="démagnétiser" tn="demagnetize" mo="1-1" />
   <verb in="démaigrir" tn="lose weight" mo="2-1" />
@@ -1767,7 +1767,7 @@
   <verb in="déminer" tn="remove mines from" mo="1-1" />
   <verb in="déminéraliser" tn="demineralize" mo="1-1" />
   <verb in="démissionner" tn="resign, make resign" mo="1-1" />
-  <verb in="démobiliser" tn="demobilise" mo="1-1" />
+  <verb in="démobiliser" tn="demobilize" mo="1-1" />
   <verb in="démocratiser" tn="democratize" mo="1-1" />
   <verb in="démoder" tn="go out of fashion" mo="1-1" />
   <verb in="démoduler" tn="demodulate" mo="1-1" />
@@ -1776,7 +1776,7 @@
   <verb in="démonter" tn="dismantle, take down" mo="1-1" />
   <verb in="démontrer" tn="demonstrate" mo="1-1" fr="389" />
   <verb in="démoraliser" tn="immoralize, demoralize" mo="1-1" />
-  <verb in="démordre" tn=" let go, release, give up" mo="5-1A" />
+  <verb in="démordre" tn="let go, release, give up" mo="5-1A" />
   <verb in="démotiver" tn="demotivate" mo="1-1" />
   <verb in="démoucheter" tn="remove the protective end from a foil, making the foil into a dangerous weapon" mo="1-3B" />
   <verb in="démouler" tn="turn out (remove from a mould)" mo="1-1" />
@@ -1796,7 +1796,7 @@
   <verb in="dénazifier" tn="remove Nazi influence" mo="1-1" />
   <verb in="dénébuler" tn="demist, defog" mo="1-1" />
   <verb in="dénébuliser" tn="demist, defog" mo="1-1" />
-  <verb in="déneiger" tn="remoe snow (from)" mo="1-2B" />
+  <verb in="déneiger" tn="remove snow (from)" mo="1-2B" />
   <verb in="déniaiser" tn="smarten up" mo="1-1" />
   <verb in="dénicher" tn="scare up, track down" mo="1-1" />
   <verb in="dénicotiniser" tn="remove nicotine from" mo="1-1" />
@@ -1812,13 +1812,13 @@
   <verb in="dénoyauter" tn="remove stones or pits from" mo="1-1" />
   <verb in="dénoyer" tn="dewater" mo="1-7A" />
   <verb in="densifier" tn="become denser" mo="1-1" />
-  <verb in="denteler" tn=" indent, notch" mo="1-3A" />
+  <verb in="denteler" tn="indent, notch" mo="1-3A" />
   <verb in="dénucléariser" tn="denuclearize" mo="1-1" />
   <verb in="dénuder" tn="render nude" mo="1-1" />
   <verb in="dénuer" tn="deprive" re="t" mo="1-1" />
   <verb in="dépailler" tn="remove the straw from" mo="1-1" />
   <verb in="dépalisser" tn="remove supports from the branches of a fruit tree" mo="1-1" />
-  <verb in="dépanner" tn=" fix, repair" mo="1-1" />
+  <verb in="dépanner" tn="fix, repair" mo="1-1" />
   <verb in="dépaqueter" tn="unpack" mo="1-3B" />
   <verb in="déparasiter" tn="remove parasites from" mo="1-1" />
   <verb in="dépareiller" tn="unmatch" mo="1-1" />
@@ -1842,7 +1842,7 @@
   <verb in="dépendre" tn="depend" mo="5-1A" fr="327" />
   <verb in="dépenser" tn="spend (money)" mo="1-1" fr="800" />
   <verb in="dépérir" tn="fade away, decline, wither (away), go downhill" mo="2-1" />
-  <verb in="dépersonnaliser" tn="depersonalise" mo="1-1" />
+  <verb in="dépersonnaliser" tn="depersonalize" mo="1-1" />
   <verb in="dépêtrer" tn="disentangle" mo="1-1" />
   <verb in="dépeupler" tn="depopulate" mo="1-1" />
   <verb in="déphaser" tn="dephase" mo="1-1" />
@@ -1892,7 +1892,7 @@
   <verb in="députer" tn="deputize" mo="1-1" fr="612" />
   <verb in="déqualifier" tn="deskill" mo="1-1" />
   <verb in="déraciner" tn="uproot, to deracinate (a tree)" mo="1-1" />
-  <verb in="dérader" tn="be drien from the anchors and forced out to sea" mo="1-1" />
+  <verb in="dérader" tn="be driven from the anchors and forced out to sea" mo="1-1" />
   <verb in="dérager" tn="stop being angry" mo="1-2B" />
   <verb in="déraidir" tn="unstiffen" mo="2-1" />
   <verb in="dérailler" tn="derail, be derailed" mo="1-1" />
@@ -1906,7 +1906,7 @@
   <verb in="déréaliser" tn="cause something to lose its connection with reality" mo="1-1" />
   <verb in="déréglementer" tn="deregulate" mo="1-1" />
   <verb in="dérégler" tn="disturb, disrupt" mo="1-5" />
-  <verb in="déresponsabiliser" tn="remoe all sense of responsability from someone" mo="1-1" />
+  <verb in="déresponsabiliser" tn="remove all sense of responsibility from someone" mo="1-1" />
   <verb in="dérider" tn="brighten up, cheer up" mo="1-1" />
   <verb in="dériver" tn="derive (originate from)" mo="1-1" fr="730" />
   <verb in="dérober" tn="conceal, screen, shield" mo="1-1" />
@@ -1963,7 +1963,7 @@
   <verb in="désassortir" tn="spoil the match of" mo="2-1" />
   <verb in="désatomiser" tn="deprive of nuclear weapons" mo="1-1" />
   <verb in="désavantager" tn="disadvantage" mo="1-2B" />
-  <verb in="désavouer" tn="ake back (something that has been said), disavow" mo="1-1" />
+  <verb in="désavouer" tn="take back (something that has been said), disavow" mo="1-1" />
   <verb in="désaxer" tn="unbalance, derail" mo="1-1" />
   <verb in="desceller" tn="break the seal of, unseal" mo="1-1" />
   <verb in="descendre" tn="descend" ay="e" mo="5-1A" fr="427" />
@@ -2032,7 +2032,7 @@
   <verb in="désinfecter" tn="disinfect" mo="1-1" />
   <verb in="désinformer" tn="misinform, disinform" mo="1-1" />
   <verb in="désinhiber" tn="disinhibit" mo="1-1" />
-  <verb in="désinsectiser" tn="debug (to remoe insects from somewhere)" mo="1-1" />
+  <verb in="désinsectiser" tn="debug (to remove insects from somewhere)" mo="1-1" />
   <verb in="désinstaller" tn="uninstall" mo="1-1" />
   <verb in="désintégrer" tn="disintegrate" mo="1-5" />
   <verb in="désintéresser" tn="give money to (somebody) as a compensation for something" mo="1-1" />
@@ -2064,7 +2064,7 @@
   <verb in="dessécher" tn="dry out" re="t" mo="1-5" />
   <verb in="desseller" tn="unsaddle" mo="1-1" />
   <verb in="desserrer" tn="loosen (knot, belt, etc.)" mo="1-1" />
-  <verb in="dessertir" tn="unsocket, remove (a gem) from its socket on a piece of jewellery" mo="2-1" />
+  <verb in="dessertir" tn="unsocket, remove (a gem) from its socket on a piece of jewelery" mo="2-1" />
   <verb in="desservir" tn="serve (be the pastor of a church)" mo="6-1" fr="715" />
   <verb in="dessiller" tn="open someone’s eyes (to make the person see or understand something)" mo="1-1" />
   <verb in="dessiner" tn="sketch, draw" mo="1-1" fr="363" />
@@ -2302,7 +2302,7 @@
   <verb in="écanguer" tn="scutch, swingle (hemp or flax)" mo="1-1" />
   <verb in="écarquiller" tn="goggle, open wide" mo="1-1" />
   <verb in="écarteler" tn="pull a body apart by the four limbs, divide a shield into four parts" mo="1-4" />
-  <verb in="écarter" tn="separate, moe apart" mo="1-1" fr="645" />
+  <verb in="écarter" tn="separate, move apart" mo="1-1" fr="645" />
   <verb in="échafauder" tn="put up scaffolding" mo="1-1" />
   <verb in="échalasser" tn="furnish with stakes" mo="1-1" />
   <verb in="échancrer" tn="scallop (cut in the shape of a crescent)" mo="1-1" />
@@ -2381,13 +2381,13 @@
   <verb in="effleurer" tn="touch lightly, stroke gently" mo="1-1" />
   <verb in="effleurir" tn="effloresce" mo="2-1" />
   <verb in="effondrer" tn="collapse" mo="1-1" />
-  <verb in="efforcer" tn="endeavour, make efforts towards" re="t" mo="1-2A" fr="889" />
+  <verb in="efforcer" tn="endeavor, make efforts towards" re="t" mo="1-2A" fr="889" />
   <verb in="effranger" tn="unthread, fray" mo="1-2B" />
   <verb in="effrayer" tn="affray, frighten, scare" mo="1-7B" />
   <verb in="effriter" tn="break up, crumble" mo="1-1" />
   <verb in="égailler" tn="disperse, scatter" re="t" mo="1-1" />
   <verb in="égaler" tn="equal, equate to" mo="1-1" />
-  <verb in="égaliser" tn="equalize, equalise" mo="1-1" />
+  <verb in="égaliser" tn="equalize" mo="1-1" />
   <verb in="égarer" tn="misplace" mo="1-1" />
   <verb in="égayer" tn="entertain" mo="1-7B" />
   <verb in="egorger" tn="slit the throat of" mo="1-2B" />
@@ -2591,7 +2591,7 @@
   <verb in="endommager" tn="damage" mo="1-2B" fr="911" />
   <verb in="endormir" tn="fall asleep" re="t" mo="6-1" fr="915" />
   <verb in="endosser" tn="carry on one’s back" mo="1-1" />
-  <verb in="enduire" tn="plaster, coat, cover, smear, annoint" mo="5-9A" />
+  <verb in="enduire" tn="plaster, coat, cover, smear, anoint" mo="5-9A" />
   <verb in="endurcir" tn="harden (make harder)" mo="2-1" />
   <verb in="endurer" tn="endure" mo="1-1" />
   <verb in="énerver" tn="vex, get on one’s nerves, make nervous" mo="1-1" />
@@ -2612,7 +2612,7 @@
   <verb in="enfourcher" tn="get on, mount" mo="1-1" />
   <verb in="enfourner" tn="put in the oven" mo="1-1" />
   <verb in="enfreindre" tn="infringe" mo="5-12" />
-  <verb in="enfuir" tn=" flee" re="t" mo="6-2" />
+  <verb in="enfuir" tn="flee" re="t" mo="6-2" />
   <verb in="enfutailler" tn="cask" mo="1-1" />
   <verb in="enfûter" tn="put into a keg" mo="1-1" />
   <verb in="engager" tn="pledge, commit, hire, involve" mo="1-2B" fr="134" />
@@ -2832,7 +2832,7 @@
   <verb in="escorter" tn="escort, accompany" mo="1-1" />
   <verb in="escrimer" tn="fence, engage in the sport of fencing" mo="1-1" />
   <verb in="escroquer" tn="swindle" mo="1-1" />
-  <verb in="espacer" tn="space out, allow gaps or interals between" mo="1-2A" />
+  <verb in="espacer" tn="space out, allow gaps or intervals between" mo="1-2A" />
   <verb in="espérer" tn="hope, hope for" mo="1-5" fr="203" />
   <verb in="espionner" tn="spy, act as a spy" mo="1-1" />
   <verb in="esquicher" tn="squeeze" mo="1-1" />
@@ -2929,7 +2929,7 @@
   <verb in="exalter" tn="elate, thrill, be elated" mo="1-1" />
   <verb in="examiner" tn="examine" mo="1-1" fr="504" />
   <verb in="exaspérer" tn="exasperate, frustrate" mo="1-5" />
-  <verb in="exaucer" tn="fulfil the wish of a prayer" mo="1-2A" />
+  <verb in="exaucer" tn="fulfill the wish of a prayer" mo="1-2A" />
   <verb in="excaver" tn="excavate" mo="1-1" />
   <verb in="excéder" tn="exceed, annoy, anger" mo="1-5" />
   <verb in="exceller" tn="excel" mo="1-1" />
@@ -2983,7 +2983,7 @@
   <verb in="expulser" tn="expel" mo="1-1" />
   <verb in="expurger" tn="expurgate" mo="1-2B" />
   <verb in="exsuder" tn="exude" mo="1-1" />
-  <verb in="extasier" tn="be in ecstacy, rave" re="t" mo="1-1" />
+  <verb in="extasier" tn="be in ecstasy, rave" re="t" mo="1-1" />
   <verb in="exténuer" tn="extenuate, weaken, exhaust" mo="1-1" />
   <verb in="extérioriser" tn="exteriorize, show, express, display" mo="1-1" />
   <verb in="exterminer" tn="exterminate" mo="1-1" />
@@ -3279,7 +3279,7 @@
   <verb in="gémir" tn="moan, groan" mo="2-1" />
   <verb in="gemmer" tn="tap (a tree)" mo="1-1" />
   <verb in="gendarmer" tn="militate against, object to, protest against" re="t" mo="1-1" />
-  <verb in="gêner" tn="hinder, hamper, bother, annoy, irritate, embarass" mo="1-1" fr="827" />
+  <verb in="gêner" tn="hinder, hamper, bother, annoy, irritate, embarrass" mo="1-1" fr="827" />
   <verb in="généraliser" tn="generalize" mo="1-1" fr="791" />
   <verb in="générer" tn="generate" mo="1-5" fr="436" />
   <verb in="gerber" tn="sheave, throw up" mo="1-1" />
@@ -3419,7 +3419,7 @@
   <verb in="habiller" tn="get dressed" re="t" mo="1-1" fr="727" />
   <verb in="habiter" tn="live in, occupy" mo="1-1" fr="392" />
   <verb in="habituer" tn="get used to something" re="t" mo="1-1" fr="777" />
-  <verb in="hâbler" tn="speak, engage in exageration" mo="1-1" ah="t" />
+  <verb in="hâbler" tn="speak, engage in exaggeration" mo="1-1" ah="t" />
   <verb in="hacher" tn="chop up, mince" mo="1-1" ah="t" />
   <verb in="hachurer" tn="hachure" mo="1-1" />
   <verb in="haïr" tn="hate" mo="2-3A" ah="t" ex="France" />
@@ -3714,7 +3714,7 @@
   <verb in="itérer" tn="iterate" mo="1-5" />
   <verb in="ixer" tn="X-rate, make X-rated" mo="1-1" />
   <verb in="jabler" tn="create a lip on the end of a barrel" mo="1-1" />
-  <verb in="jaboter" tn=" jabber" mo="1-1" />
+  <verb in="jaboter" tn="jabber" mo="1-1" />
   <verb in="jacasser" tn="caw (as a magpie), chatter, jabber" mo="1-1" />
   <verb in="jacter" tn="talk, speak, chat" mo="1-1" />
   <verb in="jaillir" tn="spurt out, gush forth, spring out, thrust up, jut out, emerge from" mo="2-1" />
@@ -4069,7 +4069,7 @@
   <verb in="moduler" tn="modulate" mo="1-1" />
   <verb in="moirer" tn="give something a moiré pattern" mo="1-1" />
   <verb in="moiser" tn="strut" mo="1-1" />
-  <verb in="moisir" tn="go mouldy, moulder, hang around, gather dust" mo="2-1" />
+  <verb in="moisir" tn="go moldy, moulder, hang around, gather dust" mo="2-1" />
   <verb in="moissonner" tn="harvest, reap" mo="1-1" />
   <verb in="moitir" tn="soak" mo="2-1" />
   <verb in="molester" tn="molest, maul" mo="1-1" />
@@ -4706,7 +4706,7 @@
   <verb in="propager" tn="propagate, spread" mo="1-2B" />
   <verb in="prophétiser" tn="prophetize" mo="1-1" />
   <verb in="proportionner" tn="proportion" mo="1-1" />
-  <verb in="proposer" tn="suggest, proprose" mo="1-1" fr="21" />
+  <verb in="proposer" tn="suggest, propose" mo="1-1" fr="21" />
   <verb in="propulser" tn="propel, propulse" mo="1-1" />
   <verb in="proroger" tn="extend, prorogue" mo="1-2B" />
   <verb in="proscrire" tn="banish, proscribe" mo="5-7" />
@@ -4899,7 +4899,7 @@
   <verb in="réaliser" tn="direct (a movie), fulfill (a dream), perform (activities), finish making, carry out, make, realize (make real), realize (become aware)" mo="1-1" fr="37" />
   <verb in="réaménager" tn="change a layout" mo="1-2B" />
   <verb in="réanimer" tn="reanimate, revive" mo="1-1" />
-  <verb in="réapparaître" tn="reappear,  respawn (in a video game)" mo="5-20" />
+  <verb in="réapparaître" tn="reappear, respawn (in a video game)" mo="5-20" />
   <verb in="réapprendre" tn="relearn" mo="5-2" />
   <verb in="réapprovisionner" tn="restock" mo="1-1" />
   <verb in="réargenter" tn="resilverplate" mo="1-1" />
@@ -5009,7 +5009,7 @@
   <verb in="reculotter" tn="put pants back on" mo="1-1" />
   <verb in="récupérer" tn="get back, recover, recuperate, reform, rehabilitate, reclaim, recover, make up" mo="1-5" fr="362" />
   <verb in="récurer" tn="scrub, scour" mo="1-1" />
-  <verb in="récuser" tn="object, make an objection, impugn, challenge, recuuse" mo="1-1" />
+  <verb in="récuser" tn="object, make an objection, impugn, challenge, recuse" mo="1-1" />
   <verb in="recycler" tn="recycle" mo="1-1" fr="923" />
   <verb in="redécouvrir" tn="rediscover" mo="3-1" />
   <verb in="redéfaire" tn="undo" mo="5-23" />
@@ -5126,7 +5126,7 @@
   <verb in="réinviter" tn="reinvite" mo="1-1" />
   <verb in="réitérer" tn="reiterate" mo="1-5" />
   <verb in="rejaillir" tn="splash back, splash up, rebound on, be reflected on" mo="2-1" />
-  <verb in="rejeter" tn=" throw back, discharge, refute, reject" mo="1-3A" fr="460" />
+  <verb in="rejeter" tn="throw back, discharge, refute, reject" mo="1-3A" fr="460" />
   <verb in="rejoindre" tn="join, join up, rejoin" mo="5-12" fr="179" />
   <verb in="rejointoyer" tn="regrout" mo="1-7A" />
   <verb in="rejouer" tn="replay" mo="1-1" />
@@ -5155,7 +5155,7 @@
   <verb in="remaquiller" tn="redo makeup" mo="1-1" />
   <verb in="remarcher" tn="work again, function again, walk again" mo="1-1" />
   <verb in="remarier" tn="remarry" mo="1-1" />
-  <verb in="remarquer" tn=" observe, point out, remark upon, notice" mo="1-1" fr="330" />
+  <verb in="remarquer" tn="observe, point out, remark upon, notice" mo="1-1" fr="330" />
   <verb in="remastiquer" tn="chew again" mo="1-1" />
   <verb in="remballer" tn="rewrap, wrap up again" mo="1-1" />
   <verb in="rembarquer" tn="reembark" mo="1-1" />
@@ -5171,7 +5171,7 @@
   <verb in="remédier" tn="remedy, cure, fix" mo="1-1" />
   <verb in="remembrer" tn="consolidate" mo="1-1" />
   <verb in="remémorer" tn="memorize" mo="1-1" />
-  <verb in="remercier" tn="thank, fire (an employee, euphimistically)" mo="1-1" fr="444" />
+  <verb in="remercier" tn="thank, fire (an employee, euphemistically)" mo="1-1" fr="444" />
   <verb in="remettre" tn="put back, replace" mo="5-4" fr="177" />
   <verb in="remeubler" tn="refurnish" mo="1-1" />
   <verb in="remilitariser" tn="remilitarize" mo="1-1" />
@@ -5353,7 +5353,7 @@
   <verb in="résulter" tn="result, happen" mo="1-1" fr="468" dg="1" />
   <verb in="résumer" tn="summarize, sum up" mo="1-1" fr="573" />
   <verb in="resurgir" tn="reemerge, resurface, reappear" mo="2-1" />
-  <verb in="rétablir" tn="restore, restablish" mo="2-1" fr="732" />
+  <verb in="rétablir" tn="restore, reestablish" mo="2-1" fr="732" />
   <verb in="retailler" tn="recut, cut again" mo="1-1" />
   <verb in="rétamer" tn="tin-plate again, wear out" mo="1-1" />
   <verb in="retaper" tn="revamp, refurbish, retype" mo="1-1" />
@@ -5425,7 +5425,7 @@
   <verb in="revivre" tn="live again, relive" mo="5-6" />
   <verb in="revoir" tn="see again" mo="4-1A" fr="402" />
   <verb in="revoler" tn="fly again, fly back, squirt" mo="1-1" />
-  <verb in="révolter" tn="revolt, appal, disgust" mo="1-1" />
+  <verb in="révolter" tn="revolt, appall, disgust" mo="1-1" />
   <verb in="révolutionner" tn="revolutionize" mo="1-1" />
   <verb in="révoquer" tn="revoke, remove, take away" mo="1-1" />
   <verb in="revoter" tn="revote" mo="1-1" />
@@ -5517,7 +5517,7 @@
   <verb in="saborder" tn="scuttle (a ship), pull the plug on" mo="1-1" />
   <verb in="saboter" tn="sabotage" mo="1-1" />
   <verb in="sabouler" tn="torment" mo="1-1" />
-  <verb in="sabrer" tn="slash with a sabre" mo="1-1" />
+  <verb in="sabrer" tn="slash with a saber" mo="1-1" />
   <verb in="saccader" tn="jerk, jolt, shake" mo="1-1" />
   <verb in="saccager" tn="sack, pillage, ransack" mo="1-2B" />
   <verb in="saccharifier" tn="saccharify" mo="1-1" />
@@ -5785,7 +5785,7 @@
   <verb in="suborner" tn="suborn, bribe" mo="1-1" />
   <verb in="subroger" tn="subrogate" mo="1-2B" />
   <verb in="subsister" tn="subsist, live on, go on, keep going, stay, remain" mo="1-1" fr="877" />
-  <verb in="substantiver" tn="substantivise, nominalize" mo="1-1" />
+  <verb in="substantiver" tn="substantivize, nominalize" mo="1-1" />
   <verb in="substituer" tn="substitute" mo="1-1" fr="899" />
   <verb in="subsumer" tn="subsume" mo="1-1" />
   <verb in="subtiliser" tn="snatch, take possession of" mo="1-1" />
@@ -5905,7 +5905,7 @@
   <verb in="tabler" tn="base one’s scheming on something" mo="1-1" />
   <verb in="tabouiser" tn="consider taboo" mo="1-1" />
   <verb in="tacher" tn="soil, stain" mo="1-1" />
-  <verb in="tâcher" tn=" try, attempt, endeavour, ensure" mo="1-1" />
+  <verb in="tâcher" tn="try, attempt, endeavor, ensure" mo="1-1" />
   <verb in="tacheter" tn="spot, dapple" mo="1-3B" />
   <verb in="tacler" tn="tackle" mo="1-1" />
   <verb in="taguer" tn="tag (with graffiti)" mo="1-1" />
@@ -6111,7 +6111,7 @@
   <verb in="trémater" tn="overtake" mo="1-1" />
   <verb in="trembler" tn="tremble, shake" mo="1-1" />
   <verb in="trembloter" tn="quiver" mo="1-1" />
-  <verb in="trémousser" tn=" jig, jiggle" re="t" mo="1-1" />
+  <verb in="trémousser" tn="jig, jiggle" re="t" mo="1-1" />
   <verb in="tremper" tn="soak, drench, wet, dip, dunk" mo="1-1" />
   <verb in="trémuler" tn="tremble, shake" mo="1-1" />
   <verb in="trépaner" tn="trepan" mo="1-1" />
@@ -6262,11 +6262,11 @@
   <verb in="violacer" tn="turn purple, purple" mo="1-2A" />
   <verb in="violenter" tn="subject to violence, commit violence upon" mo="1-1" />
   <verb in="violer" tn="violate, rape" mo="1-1" fr="895" />
-  <verb in="violoner" tn="play violon, fiddle" mo="1-1" />
+  <verb in="violoner" tn="play violin, fiddle" mo="1-1" />
   <verb in="virer" tn="veer, turn into, become" mo="1-1" />
   <verb in="virevolter" tn="twirl, spin around, loop around" mo="1-1" />
   <verb in="viriliser" tn="masculinize" mo="1-1" />
-  <verb in="viroler" tn=" decorate with rings surrounding bugles or hunting horns" mo="1-1" />
+  <verb in="viroler" tn="decorate with rings surrounding bugles or hunting horns" mo="1-1" />
   <verb in="viser" tn="aim at, target" mo="1-1" fr="159" />
   <verb in="visionner" tn="view" mo="1-1" />
   <verb in="visiter" tn="visit (a place)" mo="1-1" fr="54" />
