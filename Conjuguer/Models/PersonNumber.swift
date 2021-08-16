@@ -98,6 +98,26 @@ enum PersonNumber: String, CaseIterable {
     return preamble + conjugation
   }
 
+  func impératifAndPossibleReflexivePronoun(_ conjugation: String, isReflexive: Bool) -> String {
+    let suffix: String
+    if isReflexive {
+      switch self {
+      case .secondSingular:
+        suffix = "-toi"
+      case .firstPlural:
+        suffix = "-nous"
+      case .secondPlural:
+        suffix = "-vous"
+      default:
+        fatalError("Attempted to call impératifAndPossibleReflexivePronoun for \(shortDisplayName).")
+      }
+    } else {
+      suffix = ""
+    }
+
+    return conjugation + suffix
+  }
+
   static func personNumberForShortDisplayName(_ shortDisplayName: String) -> PersonNumber {
     switch shortDisplayName {
     case "1s":

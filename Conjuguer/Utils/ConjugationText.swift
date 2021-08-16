@@ -39,7 +39,7 @@ extension Text {
     case .subjonctifImparfait(let personNumber):
       conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
     case .impératif(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+      conjugation = personNumber.impératifAndPossibleReflexivePronoun(conjugation, isReflexive: verb.isReflexive)
     case .passéComposé(let personNumber):
       conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
     case .plusQueParfait(let personNumber):
@@ -56,8 +56,8 @@ extension Text {
       conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
     case .subjonctifPlusQueParfait(let personNumber):
       conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .impératifPassé(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+    case .impératifPassé:
+      break
     }
 
     self.init(mixedCaseString: conjugation)

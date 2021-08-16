@@ -174,7 +174,9 @@ struct VerbView: View {
 
           Toggle(isOn: $shouldShowCompoundTenses) {
             Text(L.VerbView.showCompoundTenses)
+              .subheadingLabel()
           }
+          .toggleStyle(SwitchToggleStyle(tint: .customRed))
 
           if shouldShowCompoundTenses {
             Group {
