@@ -71,6 +71,7 @@
 		03C2CAC62619125200CFA825 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2CAC42619125200CFA825 /* Sound.swift */; };
 		03C2CACE261912EA00CFA825 /* sadTrombone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03C2CACC261912EA00CFA825 /* sadTrombone.mp3 */; };
 		03C2CAD62619160C00CFA825 /* chime.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03C2CAD52619160C00CFA825 /* chime.mp3 */; };
+		03DDCF9826CAE47500123BB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03DDCF9726CAE47500123BB0 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +163,7 @@
 		03C2CAC42619125200CFA825 /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		03C2CACC261912EA00CFA825 /* sadTrombone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sadTrombone.mp3; sourceTree = "<group>"; };
 		03C2CAD52619160C00CFA825 /* chime.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chime.mp3; sourceTree = "<group>"; };
+		03DDCF9726CAE47500123BB0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -336,6 +338,7 @@
 			children = (
 				036DB791259FD6510013C3B7 /* Assets.xcassets */,
 				03C2CAD52619160C00CFA825 /* chime.mp3 */,
+				03DDCF9726CAE47500123BB0 /* LaunchScreen.storyboard */,
 				035D979C26B74D6C0089083C /* Localizable.strings */,
 				03C2CACC261912EA00CFA825 /* sadTrombone.mp3 */,
 				033EAA172630A36B0055B313 /* WorkSans.ttf */,
@@ -457,6 +460,7 @@
 				030FFAA526CA19CB00741524 /* frequencies.xml in Resources */,
 				035D979A26B74D6C0089083C /* Localizable.strings in Resources */,
 				036DB80025A37ECB0013C3B7 /* verbModels.xml in Resources */,
+				03DDCF9826CAE47500123BB0 /* LaunchScreen.storyboard in Resources */,
 				03309F7026BD8D10003E4F92 /* WorkSans-Bold.ttf in Resources */,
 				03C2CAD62619160C00CFA825 /* chime.mp3 in Resources */,
 				036DB7C0259FD67C0013C3B7 /* verbs.xml in Resources */,
