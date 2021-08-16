@@ -67,17 +67,19 @@ final class VerbStore: ObservableObject {
     self.current = world
     verbSort = current.settings.verbSort
 
-    frequencyVerbs = Verb.verbs.values.sorted { lhs, rhs in
-      if lhs.frequency == nil && rhs.frequency == nil {
-        return lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
-      } else if lhs.frequency == nil && rhs.frequency != nil {
-        return false
-      } else if lhs.frequency != nil && rhs.frequency == nil {
-        return true
-      } else {
-        return (lhs.frequency ?? 0) < (rhs.frequency ?? 0)
+    frequencyVerbs = Verb.verbs.values
+      .filter { $0.frequency != nil }
+      .sorted { lhs, rhs in
+        if lhs.frequency == nil && rhs.frequency == nil {
+          return lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
+        } else if lhs.frequency == nil && rhs.frequency != nil {
+          return false
+        } else if lhs.frequency != nil && rhs.frequency == nil {
+          return true
+        } else {
+          return (lhs.frequency ?? 0) < (rhs.frequency ?? 0)
+        }
       }
-    }
 
     alphabeticVerbs = Verb.verbs.values.sorted { lhs, rhs in
       lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
