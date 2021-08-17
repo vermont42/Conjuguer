@@ -479,6 +479,7 @@
   <verb in="baiser" tn="copulate with" mo="1-1" />
   <verb in="baisser" tn="lower, turn down" mo="1-1" fr="532" />
   <verb in="balader" tn="stroll, walk around" mo="1-1" />
+  <verb in="baladodiffuser" tn="podcast" mo="1-1" />
   <verb in="balafrer" tn="scar" mo="1-1" />
   <verb in="balancer" tn="swing" mo="1-2A" />
   <verb in="balayer" tn="sweep" mo="1-7B" />
@@ -3305,6 +3306,7 @@
   <verb in="glavioter" tn="spit saliva and/or mucus" mo="1-1" />
   <verb in="gléner" tn="coil (rope)" mo="1-5" />
   <verb in="glisser" tn="slip, slide, skid, glide" mo="1-1" fr="565" />
+  <verb in="glisser-déposer" tn="drag and drop" mo="1-1" />
   <verb in="globaliser" tn="globalize" mo="1-1" />
   <verb in="glorifier" tn="laud, glorify" mo="1-1" />
   <verb in="gloser" tn="annotate, gloss" mo="1-1" />
@@ -3355,7 +3357,7 @@
   <verb in="gratouiller" tn="itch, scratch" mo="1-1" />
   <verb in="gratter" tn="scratch, scrub, scrape" mo="1-1" />
   <verb in="grattouiller" tn="itch, scratch" mo="1-1" />
-  <verb in="graver" tn="engrave, carve" mo="1-1" fr="796" />
+  <verb in="graver" tn="engrave, carve, burn (a CD-ROM or DVD)" mo="1-1" fr="796" />
   <verb in="gravillonner" tn="gravel, cover with gravel" mo="1-1" />
   <verb in="gravir" tn="climb up" mo="2-1" />
   <verb in="graviter" tn="orbit, gravitate" mo="1-1" />
@@ -4516,7 +4518,7 @@
   <verb in="planer" tn="glide, hover, be entranced" mo="1-1" />
   <verb in="planifier" tn="plan ahead, prepare oneself" mo="1-1" />
   <verb in="planquer" tn="hide, spy, snoop" mo="1-1" />
-  <verb in="planter" tn="plant, drive in (a nail), pitch (a tent)" mo="1-1" fr="607" />
+  <verb in="planter" tn="plant, drive in (a nail), pitch (a tent), crash (computing)" mo="1-1" fr="607" />
   <verb in="plaquer" tn="plate, tackle, grapple" mo="1-1" />
   <verb in="plasmifier" tn="transform into plasma" mo="1-1" />
   <verb in="plastifier" tn="laminate" mo="1-1" />
@@ -4815,7 +4817,7 @@
   <verb in="ramasser" tn="pick up, collect, gather" mo="1-1" />
   <verb in="ramender" tn="mend (a net)" mo="1-1" />
   <verb in="ramener" tn="take back, bring back, restore, draw, pull" mo="1-4" fr="528" />
-  <verb in="ramer" tn="row" mo="1-1" />
+  <verb in="ramer" tn="row, hang (computing)" mo="1-1" />
   <verb in="rameuter" tn="round up" mo="1-1" />
   <verb in="ramifier" tn="ramify, divide" re="t" mo="1-1" />
   <verb in="ramollir" tn="soften, mollify" mo="2-1" />
@@ -6180,6 +6182,7 @@
   <verb in="uniformiser" tn="make uniform, uniformize" mo="1-1" />
   <verb in="unir" tn="unite, join, combine" mo="2-1" fr="334" />
   <verb in="universaliser" tn="universalize" mo="1-1" />
+  <verb in="uploader" tn="upload" mo="1-1" />
   <verb in="urbaniser" tn="urbanize" mo="1-1" />
   <verb in="urger" tn="be urgent" mo="1-2B" />
   <verb in="uriner" tn="urinate" mo="1-1" />
