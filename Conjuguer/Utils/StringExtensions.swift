@@ -11,7 +11,7 @@ import UIKit
 
 extension String {
   static var headingSeparator: Character {
-    "*"
+    "†"
   }
 
   static var subheadingSeparator: Character {
