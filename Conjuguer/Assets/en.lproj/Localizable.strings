@@ -195,6 +195,43 @@ vivre: $vÉCu$
 vouloir: $voulU$";
 
 "Info.participePrésentHeading" = "Participe Présent";
+
+"Info.participePrésentText" = "^Uses^
+
+The ~participe présent~ can be used:
+
+• As an invariable verb referring to a noun or pronoun.
+
+“[M]es parents, n'$aYant$ guère de loisir pour faire des sorties … prirent l’habitude de me laisser aller me promener sans eux.” = “[M]y parents, having little time to go out … $gOt$ into the habit of letting me go for a walk without them.”
+
+- Marcel Proust, “À la recherche de temps perdu”
+
+• In a participle clause.
+
+“Il n’avait … aucune raison de haïr ce bon Charles, n’$Étant$ pas ce qui s’appelle dévoré de jalousie.” = “He $haD$ … no reason to hate good Charles, not being what $Is$ called devoured by jealousy.”
+
+- Gustave Flaubert, “Madame Bovary”
+
+• Or as an adjective. In this case, the participe présent agrees with the noun being modified.
+
+“Gervaise avait gardé sa tranquillité souriante de la matinée.” = “Gervaise $haD$ kept her smiling tranquility of the morning.”
+
+- Émile Zola, “L’Assommoir”
+
+^Form^
+
+The participe présent is formed from the 1p indicatif-présent conjugation, minus -ons, plus -ant. Examples:
+
+parler -> parlant
+finir -> finissant
+rendre -> rendant
+
+Three participes présents do not follow this pattern and are therefore irregular:
+
+avoir ~> $aYant$
+être ~> $Étant$
+savoir ~> $saCHant$";
+
 "Info.radicalFuturHeading" = "Radical Futur";
 "Info.indicatifPrésentHeading" = "Indicatif Présent";
 "Info.passéSimpleHeading" = "Passé Simple";
