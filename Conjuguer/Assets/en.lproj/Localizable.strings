@@ -37,7 +37,6 @@
 ~Lorem~ ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper porta $consequaT$. Nulla arcu nisl, pretium ut euismod at, dapibus a quam. Praesent nec finibus sapien, vel egestas lectus. Donec interdum est et ante laoreet, quis cursus velit finibus. Aliquam sed ante in enim mattis fermentum euismod ac leo. Maecenas ut congue leo. In hac habitasse platea dictumst. Duis porta arcu ac tellus sollicitudin, vulputate volutpat neque feugiat. Suspendisse vulputate turpis non neque ultricies condimentum eu ut mauris. Praesent in ipsum erat.";
 
 "Info.terminologyHeading" = "Terminology";
-
 "Info.terminologyText" = "^Verb^
 
 A ~verb~ is a kind of word that describes an action. For example, in the sentence “Jacques Brel played the guitar”, “play” is the verb. Likewise, in the sentence “Jacques Brel jouait de la guitare”, “jouer” is the verb. Verb ~tense~s express, among other things, when an action took place. In the example sentences, the verb tenses indicate that the action (playing the guitar) took place in the past. In English and in French, the ~subject~ or actor in the sentence, combined with the tense, determine the form of the verb used. This is the verb ~conjugation~. In English, the example sentence’s combination of subject and tense results in the conjugation “played”. In French, the conjugation is “jouait”.
@@ -108,7 +107,6 @@ Reference works on French verbs, for example the book “French Verbs Made Simpl
 Notwithstanding Conjuguer’s inclusive approach to conjugations traditionally considered defective, those conjugations ~are~ called out with strikethrough in Conjuguer's user interface.";
 
 "Info.participePasséHeading" = "Participe Passé";
-
 "Info.participePasséText" = "^Use^
 
 The ~participe passé~ (past participle) is used with the auxiliary verbs ~avoir~ and ~être~ to form certain compound tenses, including the %passé composé%: “j’ai parlé” = “I $spOke$”, “I $dID$ speak”, or “I have $spOken$”. The participe passé is also used to form an adjective or noun from a verb: “temps perdu” = “lost time”, “l’inconnu” = “the unknown”.
@@ -202,16 +200,15 @@ Verbs derived from the above verbs use variants of these irregular participes pa
 ravoir -> $rEU$";
 
 "Info.participePrésentHeading" = "Participe Présent";
-
 "Info.participePrésentText" = "^Uses^
 
-The ~participe présent~ (present participle) can be used:
+The ~participe présent~ (present participle) is used:
 
 • As an invariable verb referring to a noun or pronoun.
 
 “[M]es parents, n'$aYant$ guère de loisir pour faire des sorties … prirent l’habitude de me laisser aller me promener sans eux.” = “[M]y parents, having little time to go out … $gOt$ into the habit of letting me go for a walk without them.”
 
-- Marcel Proust, “À la recherche de temps perdu”
+- Marcel Proust, “Du côté de chez Swann”
 
 • In a participle clause.
 
@@ -253,7 +250,7 @@ The ~radical futur~ (future stem) has two uses:
 
 • As the stem for the conditionnel-présent tense.
 
-“[O]n rêvait à la quantité de plats qu’il $faUDrait$ et quelles $SEraient$ les entrées.” = “One $dreamT$ of the quantity of dishes that would be needed and what the starters would be.”
+“[O]n rêvait à la quantité de plats qu’il $faUDrait$ et quelles $SEraient$ les entrées.” = “[O]ne $dreamT$ of the quantity of dishes that would be needed and what the starters would be.”
 
 - Gustave Flaubert, “Madame Bovary”
 
@@ -301,6 +298,82 @@ Verbs derived from the above verbs use variants of these irregular radicaux futu
 devenir -> $devIenDr$";
 
 "Info.indicatifPrésentHeading" = "Indicatif Présent";
+"Info.indicatifPrésentText" = "^Uses^
+
+The ~indicatif présent~ (present indicative) is used:
+
+• To describe continuing reality.
+
+“Mon mari prétend que je n’aime pas les fruits parce que j’en mange moins que lui.” = “My husband claims I don’t like fruit because I eat less of it than he does.”
+
+- Marcel Proust, “Du côté de chez Swann”
+
+• Similarly, to express the repeated or habitual nature of an action. English sometimes uses the construction ~have a habit of + gerund~ to accomplish this.
+
+“[O]ù que je me trouve, dès qu’ils commencent à retentir et à se répondre, je l’$aperÇOis$, avec ses tilleuls et son trottoir éclairé par la lune.” = “[W]herever I find myself, as soon as they begin to ring and answer each other, I see it, with its lindens and its moonlit sidewalk.”
+
+- Marcel Proust, “Du côté de chez Swann”
+
+• To describe an ongoing action. English uses the construction ~be + infinitive + -ing~ to accomplish this.
+
+“Vois-tu, je $saIs$ que tu m’attends.” = “You see, I know that you $ARE$ waiting for me.”
+
+- Victor Hugo, “Demain dès l’aube”
+
+• To emphasize. English uses the construction ~do + infinitive~ to accomplish this.
+
+“Oh! très-sincèrement je $souffrE$” = “Oh very sincerely I do suffer”
+
+- Charles Baudelaire, “Le Monstre, ou le Paranymphe d'une nymphe macabre”
+
+^Conjugation^
+
+For most verbs, the infinitif-présent stem is the infinitif minus the -er, -ir, or -re ending. The infinitif-présent endings fall into one of the following categories.
+
+1. Regular ~er~ verbs plus couvrir, cueillir, and bouillir: e, es, e, ons, ez, ent
+
+Examples:
+~céder~: $cÈde$, $cÈdes$, $cÈde$, cédons, cédez, $cÈdent$
+~parler~: parle, parles, parle, parlons, parlez, parlent
+~couvrir~: $couvrE$, $couvrEs$, $couvrE$, $couvrONS$, $couvrEZ$, $couvrENT$
+
+2. Regular ~ir~ verbs plus maudire: is, is, it, issons, issez, issent
+
+Examples:
+~alunir~: alunis, alunis, alunit, alunissons, alunissez, alunissent
+~finir~: finis, finis, finit, finissons, finissez, finissent
+~maudire~: $maudIs$, $maudIs$, $maudIt$, $maudISSons$, $maudISSez$, $maudISSent$
+
+3. Regular ~re~ verbs: s, s, _, ons, ez, ent
+
+Examples:
+~mordre~: mords, mords, mord, mordons, mordez, mordent
+~rendre~: rends, rends, rend, rendons, rendez, rendent
+~vaincre~: vaincs, vaincs, vainc, $vainQUons$, $vainQUez$, $vainQUent$
+
+4. ~Haïr~ as conjugated in Quebec: haïs, haïs, haït, haïssons, haïssez, haïssent
+
+5. The endings are s, s, t, ons, ez, ent for the following verbs:
+
+absoudre, accroître, acquérir, asseoir, boire, choir, clore, conduire, connaître, coudre, courir, croire, croître, écrire, devoir, dire, exclure, faire, forclore, fuir, gésir, inclure, issir, lire, moudre, mourir, mouvoir, naître, ouïr (traditional), partir, plaindre, plaire, pleuvoir, pouvoir, rire, savoir, suivre, surseoir, taire, traire, valoir, venir, vivre, voir, vouloir
+
+Examples:
+~boire~: bois, bois, boit, $bUVons$, $bUVez$, $boiVent$
+~croître~: $croÎs$, $croÎs$, $croÎt$, $croISSons$, $croISSez$, $croISSent$
+~gésir~: $gIs$, $gIs$, $gÎt$, $gIsons$, $gIsez$, $gIsent$
+~ouïr (traditional)~: $oIs$, $oIs$, $oIt$, $oYons$, $oYez$, $oIent$
+~voir~: $vOIs$, $vOIs$, $vOIt$, $vOYons$, $vOYez$, $vOIent$
+
+Most of these verbs use irregular stems for some or all infinitif-présent conjugations.
+
+6. Three verbs are fundamentally irregular in that their stems ~and~ endings are largely unpredictable. These verbs are:
+
+~être~: $SUIs$, $Es$, $ESt$, $SOMMEs$, $êteS$, $SOnt$
+~avoir~: $aI$, $As$, $A$, avons, avez, $Ont$
+~aller~: $VAIS$, $VAs$, $VA$, $allons$, $allez$, $VOnt$
+
+Être, avoir, and aller are, respectively, the most, second-most, and eighth-most used verbs in French.";
+
 "Info.passéSimpleHeading" = "Passé Simple";
 "Info.imparfaitHeading" = "Imparfait";
 "Info.futurSimpleHeading" = "Futur Simple";
