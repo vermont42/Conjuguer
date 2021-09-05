@@ -33,13 +33,13 @@
 
 "Info.purposeAndUseHeading" = "Purpose & Use";
 
-"Info.purposeAndUseText" = "^Lorem^
+"Info.purposeAndUseText" = "`Lorem`
 
 ~Lorem~ ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper porta $consequaT$.";
 
 "Info.terminologyHeading" = "Terminology";
 
-"Info.terminologyText" = "^Verb^
+"Info.terminologyText" = "`Verb`
 
 A ~verb~ is a kind of word that describes an action. For example, in the sentence “Jacques Brel played the guitar”, “play” is the verb. Likewise, in the sentence “Jacques Brel jouait de la guitare”, “jouer” is the verb. Verb ~tense~s express, among other things, when an action took place. In the example sentences, the verb tenses indicate that the action (playing the guitar) took place in the past. In English and in French, the ~subject~ or actor in the sentence, combined with the tense, determine the form of the verb used. This is the verb ~conjugation~. In English, the example sentence’s combination of subject and tense results in the conjugation “played”. In French, the conjugation is “jouait”.
 
@@ -49,7 +49,7 @@ French dictionaries and ~Conjuguer~’s Verbs tab list infinitif forms of verbs.
 
 The ~radical de l’infinitif~ (infinitive stem) is the infinitif minus its -er, -ir, or -re ending. This stem is the base for many conjugations.
 
-^Pronoun^
+`Pronoun`
 
 A subject ~pronoun~ is a word that stands in for the subject, the actor in a sentence. In English, the subject pronouns are ~I~, ~you~, ~he/she/it/one~, ~we~, ~you/y’all~, and ~they~.
 
@@ -74,7 +74,7 @@ Except with respect to 2s, the choice of subject pronoun in French is straightfo
 
 With respect to 2s, there are two choices: ~tu~ and ~vous~. ~Tu~ and its conjugations express intimacy, familiarity, friendliness, or, when used in anger on a stranger, rudeness. ~Vous~ and its conjugations express politeness, respect, or, when used on a former intimate, emotional distance.
 
-^Order of Presentation of Conjugations^
+`Order of Presentation of Conjugations`
 
 Treatises on French verbs, when presenting the conjugations for a particular tense, use the following person-number order: 1s, 2s, 3s, 1p, 2p, 3p. Respecting tradition, ~Conjuguer~ does the same. For example, ~Conjuguer~ would present the indicatif-présent conjugations of ~être~ as follows:
 
@@ -84,7 +84,7 @@ Red letters in conjugations represent irregularities. A verb is considered irreg
 
 "Info.defectivenessHeading" = "Defectiveness";
 
-"Info.defectivenessText" = "^Types^
+"Info.defectivenessText" = "`Types`
 
 Sixty-five French verbs are ~defective~. This doesn’t mean that something is wrong with them. No, defective in this context means that these verbs lack certain or even most conjugations. Verbs may be considered defective for a variety of reasons.
 
@@ -96,7 +96,7 @@ Sixty-five French verbs are ~defective~. This doesn’t mean that something is w
 
 4. Some verbs are defective because they have fallen out of use except in certain fixed expressions. Ouïr (to hear or listen) has been replaced by entendre and écouter except in the expressions “oui-dire” = “hearsay” and “Oyez!” = “Listen!” (addressing Parliament). Ester (to be or stay) has been replaced by être and rester except in the expression “ester en justice” = “be a party in legal proceedings”. Gésir (to lie prone) ~is~ still occasionally used in the indicatif présent and imparfait, but the ~primary~ use of this verb is “ci-gît” = “here lies (dead)”, a common tombstone inscription.
 
-^Reasons for Inclusion^
+`Reasons for Inclusion`
 
 Reference works on French verbs, for example the book “French Verbs Made Simple(r)” and the website Wiktionary, omit defective conjugations entirely. But the developer of ~Conjuguer~ is providing ~all~ conjugations, including those traditionally considered defective, to you, the user of this app. Three reasons for this heterodoxy follow.
 
@@ -109,11 +109,11 @@ Reference works on French verbs, for example the book “French Verbs Made Simpl
 Notwithstanding Conjuguer’s inclusive approach to conjugations traditionally considered defective, those conjugations ~are~ called out with strikethrough in Conjuguer's user interface.";
 
 "Info.participePasséHeading" = "Participe Passé";
-"Info.participePasséText" = "^Use^
+"Info.participePasséText" = "`Use`
 
 The ~participe passé~ (past participle) is used with the auxiliary verbs ~avoir~ and ~être~ to form certain compound tenses, including the %passé composé%: “j’ai parlé” = “I $spOke$”, “I $dID$ speak”, or “I have $spOken$”. The participe passé is also used to form an adjective or noun from a verb: “temps perdu” = “lost time”, “l’inconnu” = “the unknown”.
 
-^Form^
+`Form`
 
 In general, the participe passé is formed by adding the following endings to the radical de l’infinitif:
 
@@ -129,7 +129,7 @@ Regular ~re~ verbs: -u
 
 Examples: “entendu” = “heard”, “vendu” = “$sOld$”, “rendu” = “rendered”
 
-^Agreement^
+`Agreement`
 
 When the participe passé is used as an adjective, it agrees in both gender and number with the noun it modifies. Example: “des langues parlées en France” = “some languages $spOken$ in France”
 
@@ -149,7 +149,7 @@ with:
 
 Note the absence of agreement in the second conjugation of sortir.
 
-^Irregularities^
+`Irregularities`
 
 Here are some irregular participes passés:
 
@@ -203,7 +203,7 @@ ravoir -> $rEU$";
 
 "Info.participePrésentHeading" = "Participe Présent";
 
-"Info.participePrésentText" = "^Uses^
+"Info.participePrésentText" = "`Uses`
 
 The ~participe présent~ (present participle) is used:
 
@@ -225,7 +225,7 @@ The ~participe présent~ (present participle) is used:
 
 - Émile Zola, “L’Assommoir”
 
-^Form^
+`Form`
 
 The participe présent is formed from the 1p indicatif-présent conjugation, minus -ons, plus -ant. Examples:
 
@@ -241,7 +241,7 @@ savoir -> $saCHant$";
 
 "Info.radicalFuturHeading" = "Radical Futur";
 
-"Info.radicalFuturText" = "^Uses^
+"Info.radicalFuturText" = "`Uses`
 
 The ~radical futur~ (future stem) has two uses:
 
@@ -257,7 +257,7 @@ The ~radical futur~ (future stem) has two uses:
 
 - Gustave Flaubert, “Madame Bovary”
 
-^Form^
+`Form`
 
 For most verbs, the radical futur is identical the infinitif. The final -e is dropped from -re verbs. Examples:
 
@@ -302,7 +302,7 @@ devenir -> $devIenDr$";
 
 "Info.indicatifPrésentHeading" = "Indicatif Présent";
 
-"Info.indicatifPrésentText" = "^Uses^
+"Info.indicatifPrésentText" = "`Uses`
 
 The ~indicatif présent~ (present indicative) is used:
 
@@ -330,9 +330,9 @@ The ~indicatif présent~ (present indicative) is used:
 
 - Charles Baudelaire, “Le Monstre, ou le Paranymphe d'une nymphe macabre”
 
-^Conjugation^
+`Conjugation`
 
-For most verbs, the indicatif-présent stem is the infinitif minus the -er, -ir, -re, or -oir ending. The indicatif-présent endings fall into one of the following categories.
+For most verbs, the indicatif-présent stem is the infinitif minus the -er, -ir, -re, or -oir ending. The indicatif-présent endings for any verb belong to one of the following categories.
 
 1. Regular ~er~ verbs plus couvrir, cueillir, and bouillir: e, es, e, ons, ez, ent
 
@@ -383,7 +383,7 @@ Most of these verbs use irregular stems for some or all infinitif-présent conju
 
 "Info.passéSimpleHeading" = "Passé Simple";
 
-"Info.passéSimpleText" = "^Use^
+"Info.passéSimpleText" = "`Use`
 
 The passé simple (simple past) was used for actions that were completed in the past. This use contrasted with that of the imparfait, which was (and continues to be) used for actions that were repeated, habitual, or continuing. The passé simple is no longer used in conversation or writing unless the speaker or writer is self-consciously recondite.
 
@@ -401,7 +401,7 @@ Here are some examples of the passé simple.
 
 - Gustave Flaubert, “Madame Bovary”
 
-^Conjugation^
+`Conjugation`
 
 For regular ~er~, ~ir~, and ~re~ verbs, the passé-simple stem is the infinitif minus the -er, -ir, or -re ending.
 
@@ -409,7 +409,7 @@ Verbs with irregular participe-passé stems, including most ~oir~ verbs, use tho
 
 The passé-simple stem of être, $F$-, though irregular, is related to the English words be and been.
 
-The passé-simple endings fall into one of the following categories.
+The passé-simple endings for any verb belong to one of the following categories.
 
 1. Regular ~er~ verbs plus traire (~a~ group): ai, as, a, âmes, âtes, èrent
 
@@ -437,7 +437,7 @@ Examples:
 ~être~: $Fus$, $Fus$, $Fut$, $Fûmes$, $Fûtes$, $Furent$
 ~lire~: $Lus$, $Lus$, $Lut$, $Lûmes$, $Lûtes$, $Lurent$
 
-5. Certain irregular verbs (~bare~ group): s, s, t, mes, tes, rent
+5. Certain irregular verbs (~bare~ group): s, s, t, ^mes, ^tes, rent
 
 ~dire~: dis, dis, dit, dîmes, dîtes, dirent
 ~exclure~: exclus, exclus, exclut, exclûmes, exclûtes, exclurent
@@ -445,7 +445,7 @@ Examples:
 
 "Info.imparfaitHeading" = "Imparfait";
 
-"Info.imparfaitText" = "^Uses^
+"Info.imparfaitText" = "`Uses`
 
 The ~imparfait~ (imperfect) is used:
 
@@ -469,7 +469,7 @@ The ~imparfait~ (imperfect) is used:
 
 - Turoldus, “La Chanson de Roland”
 
-^Conjugation^
+`Conjugation`
 
 With one exception, the imparfait stem is the 1p indicatif-présent conjugation, minus -ons. The exception is être, whose imparfait stem is $Ét$.
 
@@ -483,7 +483,7 @@ Examples:
 
 "Info.futurSimpleHeading" = "Futur Simple";
 
-"Info.futurSimpleText" = "^Uses^
+"Info.futurSimpleText" = "`Uses`
 
 The ~futur simple~ (simple future) is used for actions expected, predicted, or hoped to take place in the future. Examples:
 
@@ -501,7 +501,7 @@ French uses the futur simple in one situation English uses the present indicativ
 
 - Gustave Flaubert, “Madame Bovary”
 
-^Conjugation^
+`Conjugation`
 
 The stem of the futur simple is the radical futur. To this is added ai, as, a, ons, ez, or ont.
 
@@ -513,7 +513,7 @@ Examples:
 
 "Info.conditionnelPrésentHeading" = "Conditionnel Présent";
 
-"Info.conditionnelPrésentText" = "^Uses^
+"Info.conditionnelPrésentText" = "`Uses`
 
 The ~conditionnel présent~ (present conditional) is used:
 
@@ -539,7 +539,7 @@ In ~si~ clauses about possible or hypothetical situations.
 
 - Gustave Flaubert, “Madame Bovary”
 
-^Conjugation^
+`Conjugation`
 
 The stem of the conditionnel présent is the radical futur. To this is added ais, ais, ait, ions, iez, or aient.
 
@@ -551,7 +551,7 @@ Examples:
 
 "Info.subjonctifPrésentHeading" = "Subjonctif Présent";
 
-"Info.subjonctifPrésentText" = "^Uses^
+"Info.subjonctifPrésentText" = "`Uses`
 
 The ~subjonctif présent~ (present subjunctive) is used:
 
@@ -577,7 +577,7 @@ To command or exhort.
 
 - Marcel Proust, “Du côté de chez Swann”
 
-^Conjugation^
+`Conjugation`
 
 For most verbs, the subjonctif-présent stem is the 3p stem of the indicatif présent.
 
@@ -620,7 +620,103 @@ Example:
 haïsse, haïsses, haïsse, haïssions, haïssiez, haïssent";
 
 "Info.subjonctifImparfaitHeading" = "Subjonctif Imparfait";
+
+"Info.subjonctifImparfaitText" = "`Use`
+
+The ~subjonctif imparfait~ (imperfect subjunctive) is used after the conjunctions à condition que, afin que, à moins que, de peur que, pour que, pourvu que, quoique, and sans que ~when~ the main clause uses passé simple or imparfait. Use of the subjonctif imparfait is rare in contemporary French.
+
+Examples:
+
+“[I]l semblait ouvrir tout seul, sans que j’$EUsse$ besoin de le tourner.” = “It seemed to open on its own, without me needing to turn it.”
+
+- Marcel Proust, “Du côté de chez Swann”
+
+“[Q]uoiqu’ils $FUssent$ bruns, ils semblaient noirs à cause des cils.” = “Although they were brown, they looked black because of her eyelashes.”
+
+- Gustave Flaubert, “Madame Bovary”
+
+`Conjugation`
+
+The stem of the subjonctif imparfait is identical to that of the passé simple.
+
+The subjonctif-imparfait endings for any verb belong to one of the following categories, which are analogous to the five passé-simple categories.
+
+1. Regular ~er~ verbs plus traire (~a~ group): asse, asses, ât, assions, assiez, assent
+
+Examples:
+~parler~: parlasse, parlasses, parlât, parlassions, parlassiez, parlassent
+~traire~: $traYasse$, $traYasses$, $traYât$, $traYassions$, $traYassiez$, $traYassent$
+
+2. Regular ~ir~ verbs, regular ~re~ verbs, and certain irregular verbs (~i~ group): isse, isses, ît, issions, issiez, issent
+
+Examples:
+~finir~: finisse, finisses, finît, finissions, finissiez, finissent
+~naître~: $naQUisse$, $naQUisses$, $naQUît$, $naQUissions$, $naQUissiez$, $naQUissent$
+~rendre~: rendisse, rendisses, rendît, rendissions, rendissiez, rendissent
+
+3. Haïr and the traditional conjugation of ouïr (~ï~ group): ïsse, ïsses, ït, ïssions, ïssiez, ïssent
+
+Examples:
+~haïr~: haïsse, haïsses, haït, haïssions, haïssiez, haïssent
+~ouïr~: ouïsse, ouïsses, ouït, ouïssions, ouïssiez, ouïssent
+
+4. Certain irregular verbs (~u~ group): usse, usses, ût, ussions, ussiez, ussent
+
+~avoir~: $Eusse$, $Eusses$, $Eût$, $Eussions$, $Eussiez$, $Eussent$
+~boire~: $Busse$, $Busses$, $Bût$, $Bussions$, $Bussiez$, $Bussent$
+~être~: $Fusse$, $Fusses$, $Fût$, $Fussions$, $Fussiez$, $Fussent$
+~lire~: $Lusse$, $Lusses$, $Lût$, $Lussions$, $Lussiez$, $Lussent$
+
+5. Certain irregular verbs (~bare~ group): sse, sses, ^t, ssions, ssiez, ssent
+
+~dire~: disse, disses, dît, dissions, dissiez, dissent
+~exclure~: exclusse, exclusses, exclût, exclssions, exclussiez, exclussent
+~venir~: $vInsse$, $vInsses$, $vÎnt$, $vInssions$, $vInssiez$, $vInssent$";
+
 "Info.impératifHeading" = "Impératif";
+
+"Info.impératifText" = "`Use`
+
+The ~impératif~ (imperative) is used for commands, instructions, or requests.
+
+Examples:
+
+“N’$aYez$ pas peur, allez!” = “Don’t be afraid. Go!”
+
+- Émile Zola, “L’Assommoir”
+
+“Ô temps, suspends ton vol!” = “O, Time, pause in your flight!”
+
+- Alphonse de Lamartine, “Le Lac”
+
+`Conjugation`
+
+Unlike most other tenses, the impératif only uses three person-number combinations: 2s, 1p, and 2p. For all but four verbs, the 1p and 2p impératif conjugations are identical to their indicatif-présent counterparts.
+
+The 1s conjugations are also identical to their indicatif-présent counterparts except that, if the verb uses the indicatif-présent endings e, es, e, ons, ez, and ent, the s is dropped from the 1s impératif conjugation. Examples:
+
+parler -> parle
+couvrir -> $couvrE$
+
+Four verbs are exceptional in that they use subjonctif-présent stems for the impératif.
+
+être: $SOIS$, $SOYons$, $SOYez$
+avoir: $AIE$, $AYons$, $AYez$
+savoir: $saCHE$, $saCHons$, $saCHez$
+vouloir: $vEUILle$/$vEUX$, voulons, $vEUILlez$/voulez
+
+The $vEUILle$/$vEUILlez$ conjugations of vouloir are used for polite requests.
+
+“[V]$EUILlez$ monter sur l’épaule de ce garçon.” = “Please step on that boy’s shoulder.”
+
+- Jules Verne, “Robur le Conquérant”
+
+Similarly, these conjugations are sometimes used to close formal letters.
+
+“V$EUILlez$ recevoir, Monsieur, mes plus cordiales salutations.” = “Please receive, Sir, my warmest regards.”
+
+- Office québécois de la langue française, “Formules usuelles de salutation”";
+
 "Info.passéComposéHeading" = "Passé Composé";
 "Info.plusQueParfaitHeading" = "Plus-que-parfait";
 "Info.passéAntérieurHeading" = "Passé Antérieur";

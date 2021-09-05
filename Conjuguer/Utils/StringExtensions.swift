@@ -15,7 +15,7 @@ extension String {
   }
 
   static var subheadingSeparator: Character {
-    "^"
+    "`"
   }
 
   static var boldSeparator: Character {
