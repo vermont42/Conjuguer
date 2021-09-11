@@ -136,6 +136,12 @@ class VerbParser: NSObject, XMLParserDelegate {
         defectGroupId: currentDefectGroupId
       )
 
+      if let model = VerbModel.models[currentModel] {
+        var verbs = model.verbs
+        verbs.append(currentVerbWithPossibleExtraLetters)
+        VerbModel.models[currentModel]?.verbs = verbs
+      }
+
       currentVerb = ""
       currentTranslation = ""
       currentModel = ""

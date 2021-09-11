@@ -2,7 +2,7 @@
 //  ModelBrowseView.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 2/17/21.
+//  Created by Josh Adams on 2/17/21.
 //
 
 import SwiftUI

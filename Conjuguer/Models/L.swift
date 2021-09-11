@@ -2,7 +2,7 @@
 //  L.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 8/1/21.
+//  Created by Josh Adams on 8/1/21.
 //
 
 import Foundation
@@ -99,6 +99,14 @@ enum L {
 
     static var irregular: String {
       NSLocalizedString("ModelView.irregular", comment: "")
+    }
+
+    static var verbsUsing: String {
+      NSLocalizedString("ModelView.verbsUsing", comment: "")
+    }
+
+    static var verbUsing: String {
+      NSLocalizedString("ModelView.verbUsing", comment: "")
     }
   }
 

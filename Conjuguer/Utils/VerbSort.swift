@@ -2,7 +2,7 @@
 //  VerbSort.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 2/16/21.
+//  Created by Josh Adams on 2/16/21.
 //
 
 import Foundation

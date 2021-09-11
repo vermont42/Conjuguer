@@ -2,7 +2,7 @@
 //  ModelView.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 2/22/21.
+//  Created by Josh Adams on 2/22/21.
 //
 
 import SwiftUI
@@ -76,9 +76,19 @@ struct ModelView: View {
             }
 
             Spacer()
-          }
+              .frame(height: 16)
 
-          Spacer()
+            Group {
+              if model.verbs.count > 1 {
+                Text(L.ModelView.verbsUsing)
+                  .subheadingLabel()
+              } else {
+                Text(L.ModelView.verbUsing)
+                  .subheadingLabel()
+              }
+              Text(model.verbs.joined(separator: ", ")).font(bodyFont)
+            }
+          }
         }
       }
         .navigationTitle(model.exemplarWithPossibleExtraLetters + " (\(model.id))")

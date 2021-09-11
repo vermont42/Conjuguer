@@ -2,7 +2,7 @@
 //  ColorExtension.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 8/4/21.
+//  Created by Josh Adams on 8/4/21.
 //
 
 import SwiftUI

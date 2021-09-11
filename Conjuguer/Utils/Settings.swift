@@ -2,7 +2,7 @@
 //  Settings.swift
 //  Conjuger
 //
-//  Created by Joshua Adams on 1/13/19.
+//  Created by Josh Adams on 1/13/19.
 //  Copyright © 2019 Josh Adams. All rights reserved.
 //
 

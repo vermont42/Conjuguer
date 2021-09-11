@@ -2,7 +2,7 @@
 //  World.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 1/15/19.
+//  Created by Josh Adams on 1/15/19.
 //  Enhanced by Stephen Celis on 1/16/19.
 //  Copyright © 2019 Josh Adams. All rights reserved.
 //

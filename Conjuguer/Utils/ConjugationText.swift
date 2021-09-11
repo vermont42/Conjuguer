@@ -2,7 +2,7 @@
 //  ConjugationText.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 2/11/21.
+//  Created by Josh Adams on 2/11/21.
 //
 
 import SwiftUI

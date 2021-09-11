@@ -2,7 +2,7 @@
   Localizable.strings
   Conjuguer
 
-  Created by Joshua Adams on 8/1/21.
+  Created by Josh Adams on 8/1/21.
 */
 
 "Navigation.verbs" = "Verbes";
@@ -29,6 +29,8 @@
 "ModelView.stemAlterations" = "Modifications des Radicaux";
 "ModelView.regular" = "Régulier";
 "ModelView.irregular" = "Irrégulier";
+"ModelView.verbsUsing" = "Verbes Qui Utilisent Ce Modèle";
+"ModelView.verbUsing" = "Verbe Qui Utilise Ce Modèle";
 
 "Info.purposeAndUseHeading" = "But et Emploi";
 "Info.terminologyHeading" = "Terminologie";

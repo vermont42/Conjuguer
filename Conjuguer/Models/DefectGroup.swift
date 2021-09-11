@@ -2,7 +2,7 @@
 //  DefectGroup.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 7/3/21.
+//  Created by Josh Adams on 7/3/21.
 //
 
 import Foundation

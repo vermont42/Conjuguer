@@ -2,7 +2,7 @@
   Localizable.strings
   Conjuguer
 
-  Created by Joshua Adams on 8/1/21.
+  Created by Josh Adams on 8/1/21.
 */
 
 "Navigation.verbs" = "Verbs";
@@ -30,6 +30,8 @@
 "ModelView.stemAlterations" = "Stem Alterations";
 "ModelView.regular" = "Regular";
 "ModelView.irregular" = "Irregular";
+"ModelView.verbsUsing" = "Verbs Using This Model";
+"ModelView.verbUsing" = "Verb Using This Model";
 
 "Info.purposeAndUseHeading" = "Purpose & Use";
 
@@ -65,14 +67,16 @@ third person, plural (3p): ~they~
 Except with respect to 2s, the choice of subject pronoun in French is straightforward.
 
 1s: ~je~
-3s: ~il~ (masc.)/~elle~ (fem.)
+3s: ~il~ (masc.)/~elle~ (fem.)/~on~
 1p: ~nous~
 2p: ~vous~
 3p: ~ils~ (masc.)/~elles~ (fem.)
 
-(“Fem.” means that a pronoun refers to female subjects, and “masc.” means that a pronoun refers to male subjects. In casual speech, “on” replaces “nous” and uses 3s conjugations.)
+“Fem.” means that a pronoun refers to female subjects, and “masc.” means that a pronoun refers to male subjects.
 
-With respect to 2s, there are two choices: ~tu~ and ~vous~. ~Tu~ and its conjugations express intimacy, familiarity, friendliness, or, when used in anger on a stranger, rudeness. ~Vous~ and its conjugations express politeness, respect, or, when used on a former intimate, emotional distance.
+In casual speech, “on” replaces “nous” and uses 3s conjugations.
+
+With respect to 2s, there are two choices: ~tu~ and ~vous~. ~Tu~ and its conjugations express intimacy, familiarity, friendliness, or, when used in anger on a stranger, rudeness. ~Vous~ and its conjugations express politeness, respect, or, when used on a former intimate, desire for emotional distance.
 
 `Order of Presentation of Conjugations`
 
@@ -86,23 +90,23 @@ Red letters in conjugations represent irregularities. A verb is considered irreg
 
 "Info.defectivenessText" = "`Types`
 
-Sixty-five French verbs are ~defective~. This doesn’t mean that something is wrong with them. No, defective in this context means that these verbs lack certain or even most conjugations. Verbs may be considered defective for a variety of reasons.
+Sixty-five French verbs are ~defective~. This doesn’t mean that something is wrong with them. No, defective in this context means that these verbs lack certain or even all conjugations. Verbs may be considered defective for a variety of reasons.
 
-1. Use of certain person-numbers would be non-sensical. For example, “je $faUX$ que tu restes” would ~literally~ mean “I $AM$ necessary that you stay.” Falloir is therefore defective for all person-numbers except 3s. “Il $faUt$ que tu restes” makes sense, meaning “it $IS$ necessary that you stay”.
+1. Use of certain person-numbers would be non-sensical. For example, “je $faUX$ que tu restes” would ~literally~ mean “I $AM$ necessary that you stay”. Falloir is therefore defective for all person-numbers except 3s. “Il $faUt$ que tu restes” makes sense, meaning “it $IS$ necessary that you stay”.
 
-2. Some verbs are impersonal. This doesn’t mean that they lack that human touch. No, impersonal in this context means that their subject is, in English, generic “it” or, in French, generic “il”. These verbs involve natural phenomena like snow, hail, sleet, and rain. “Il pleut.” = “It is raining.” Because of the customary “il” subjects, these verbs are considered defective for person-numbers other than 3s. There is, however, ~some~ flexibility. Quoting and translating Voltaire, “Les calomnies pleuvent sur quiconque réussit.” = “Calumnies rain on whoever succeeds.” One could imagine other person-numbers being used for impersonal verbs in poetry. For example, in a poem whose narrator is Nature, the pronoun and conjugation “je neige”, meaning “I am snowing”, would make sense.
+2. Some verbs are impersonal. This doesn’t mean that they lack that human touch. No, impersonal in this context means that their subject is, in English, generic “it” or, in French, generic “il”. These verbs involve natural phenomena like snow, hail, sleet, and rain. “Il pleut.” = “It is raining.” Because of the customary “il” subjects, these verbs are considered defective for person-numbers other than 3s. There is, however, ~some~ flexibility. Quoting and translating Voltaire, “Les calomnies pleuvent sur quiconque réussit.” = “Calumnies rain on whoever succeeds.” One could imagine other person-numbers being used for impersonal verbs in poetry. For example, in a poem written from the perspective of nature, the pronoun and conjugation “je neige”, meaning “I am snowing”, would make sense.
 
 3. Some verbs are defective in certain tenses in order to avoid confusion with other verbs’ conjugations. For example, paître is defective in the passé simple because the conjugations suggested by analogy with connaître, $Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$, and $Purent$, are identical to pouvoir’s passé-simple conjugations.
 
-4. Some verbs are defective because they have fallen out of use except in certain fixed expressions. Ouïr (to hear or listen) has been replaced by entendre and écouter except in the expressions “oui-dire” = “hearsay” and “Oyez!” = “Listen!” (addressing Parliament). Ester (to be or stay) has been replaced by être and rester except in the expression “ester en justice” = “be a party in legal proceedings”. Gésir (to lie prone) ~is~ still occasionally used in the indicatif présent and imparfait, but the ~primary~ use of this verb is “ci-gît” = “here lies (dead)”, a common tombstone inscription.
+4. Some verbs are defective because they have fallen out of use except in certain fixed expressions. Ouïr (to hear or listen) has been replaced by entendre and écouter except in the expressions “oui-dire” = “hearsay” and “Oyez!” = “Listen!” (addressing Parliament). Ester (to be or stay) has been replaced by être and rester except in the expression “ester en justice” = “be a party in legal proceedings”. Gésir (to lie prone) ~is~ still occasionally used in the indicatif présent and imparfait, but the ~primary~ use of this verb is “ci-$gÎt$” = “here lies (dead)”, a common tombstone inscription.
 
 `Reasons for Inclusion`
 
-Reference works on French verbs, for example the book “French Verbs Made Simple(r)” and the website Wiktionary, omit defective conjugations entirely. But the developer of ~Conjuguer~ is providing ~all~ conjugations, including those traditionally considered defective, to you, the user of this app. Three reasons for this heterodoxy follow.
+Reference works on French verbs, for example the book “French Verbs Made Simple(r)” and the website Wiktionary, omit defective conjugations entirely. But the developer of ~Conjuguer~ is providing ~all~ conjugations, including those traditionally considered defective, to you, the user of this app. Three reasons for this heterodox generosity follow.
 
-1. As stated in “French Verbs Made Simple(r)”, “There is occasionally disagreement [among] various sources as to which [conjugations] actually exist.” Similarly, regarding the word ravoir, Wiktionary says, “D’après la plupart des dictionnaires classiques, ce verbe est défectif et ne se conjugue pas. Néanmoins, des usages de formes conjuguées sont avérées régionalement.” To omit certain conjugations, therefore, would require a series of judgment calls by the developer of Conjuguer. He judgeth not lest he be judged.
+1. As stated in “French Verbs Made Simple(r)”, “There is occasionally disagreement [among] various sources as to which [conjugations] actually exist.” Similarly, regarding the word ravoir, Wiktionary says, “D’après la plupart des dictionnaires classiques, ce verbe $EST$ défectif et ne se conjugue pas. Néanmoins, des usages de formes conjuguées $SONT$ avérées régionalement.” To omit certain conjugations, therefore, would require a series of judgment calls by the developer of Conjuguer. He judgeth not lest he be judged.
 
-2. Certain conjugations are likely absent from any large corpus of French text and could therefore be considered defective. But the fact that a conjugation isn’t used doesn’t mean that it couldn’t be useful. Consider a poem narrated by the clouds of Earth and Venus. This poem might include the line “We rain water and sulphuric acid, respectively.” Thus, although pleuvoir is considered defective for 1p in all conjugated tenses, this conjugation (pleuvons) would be useful in such a poem.
+2. Certain conjugations are likely absent from any large corpus of French text and could therefore be considered defective. But the fact that a conjugation isn’t used doesn’t mean that it couldn’t be useful. Consider a poem written from the perspective of the clouds of Earth and Venus. This poem might include the line “We rain water and sulphuric acid, respectively.” Thus, although pleuvoir is considered defective for 1p in all conjugated tenses, this conjugation (pleuvons) would be useful in such a poem.
 
 3. Ester (to be or stay), though nearly extinct in French, has heavily used relatives in other Romance languages. For example, Spanish has two words for “to be”: “ser” and (you guessed it) “estar”. Conjuguer’s users might be curious how ester’s conjugations would have evolved had that verb remained productive in French, as it did in Spanish. Conjuguer’s users might also be curious how clore’s conjugations would have evolved had fermer not replaced it. For the benefit of curious users, Conjuguer includes speculative conjugations of choir, clore, ester, gésir, issir, and ouïr, inspired by the Old French conjugations provided by Wiktionary and “Tableaux de conjugaison de l’ancien français” by Machio Okada and Hitoshi Ogurisu.
 
@@ -318,7 +322,7 @@ The ~indicatif présent~ (present indicative) is used:
 
 - Marcel Proust, Du côté de chez Swann
 
-• To describe an ongoing action. English uses the construction ~be + infinitive + -ing~ to accomplish this.
+• To emphasize the ongoing character of an action. English uses the construction ~be + infinitive + -ing~ to accomplish this.
 
 “Vois-tu, je $saIs$ que tu m’attends.” = “You see, I know that you $ARE$ waiting for me.”
 

@@ -21,9 +21,10 @@ struct ConjuguerApp: App {
   init() {
     Modifiers.setTitleAttributes()
 
-    Verb.verbs = VerbParser().parse()
     VerbModel.models = VerbModelParser().parse()
+    Verb.verbs = VerbParser().parse()
     VerbModel.computeIrregularities()
+    VerbModel.sortVerbs()
     DefectGroup.defectGroups = DefectGroupParser().parse()
 
 //    let verbArray = Verb.verbs.values.sorted { lhs, rhs in

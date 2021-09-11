@@ -22,6 +22,7 @@ struct VerbModel: Hashable {
   var irregularity = 0
   let extraLetters: String?
   let defectGroupId: String?
+  var verbs: [String] = []
 
   var description: String {
     switch id {
@@ -60,6 +61,13 @@ struct VerbModel: Hashable {
       }
       let maxIrregularityCount = 41
       models[model.value.id]?.irregularity = Int((Double(irregularityCount) / Double(maxIrregularityCount)) * 100.0)
+    }
+  }
+
+  static func sortVerbs() {
+    for model in models {
+      let sortedVerbs = model.value.verbs.sorted()
+      models[model.value.id]?.verbs = sortedVerbs
     }
   }
 

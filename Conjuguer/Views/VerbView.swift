@@ -2,7 +2,7 @@
 //  VerbView.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 2/28/21.
+//  Created by Josh Adams on 2/28/21.
 //
 
 import SwiftUI

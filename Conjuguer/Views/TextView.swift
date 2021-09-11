@@ -2,7 +2,7 @@
 //  TextView.swift
 //  TextView
 //
-//  Created by Joshua Adams on 7/25/21.
+//  Created by Josh Adams on 7/25/21.
 //
 
 import SwiftUI
