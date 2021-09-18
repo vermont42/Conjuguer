@@ -33,6 +33,14 @@
 "ModelView.verbsUsing" = "Verbs Using This Model";
 "ModelView.verbUsing" = "Verb Using This Model";
 
+"Info.dedicationHeading" = "Dedication";
+
+"Info.dedicationText" = "This app is dedicated to David Compton, my high-school French teacher and Nordic-skiing coach.
+
+He wasn’t my French teacher for my first two years of high school, but he was aware of my interest in and aptitude for French through our interactions on the Nordic-skiing team. At the beginning of my junior year, I wasn’t going to be able to take French because of a schedule conflict with Advanced Placement English. But Mr. Compton created a five-days-a-week French-literature class just for me. (A German exchange student named Julian Peters soon joined us.) Using “Anthologie de la Littérature Française” by Robert Leggewie as our textbook, we studied the greats of French literature from Chrétien de Troyes to Samuel Beckett. I had a blast, and my knowledge of French took a leap. At the end of the year, I achieved a maximum score on the French Advanced Placement test. At the beginning of my freshman year of college, I took a test to get credit for a major-level French class. Of the sixty freshmen who took the test, I was one of only three who passed.
+
+Mr. Compton already had a full class schedule in the fall of 1991, when he created the class for me. On some level, he might have enjoyed spending that class period puffing on his tobacco pipe, tinkering with his Macintosh computer. Solipsistic teen that I was, I never asked him ~why~ he sacrificed that time for me. But I can speculate. He studied in France during the 60s and was a francophile. He may have recognized our shared interest in French and wanted to give me the opportunity to pursue it to the fullest extent possible, as he had done. Whatever his motivation, I am grateful and dedicate this app to him as a token of my gratitude.";
+
 "Info.purposeAndUseHeading" = "Purpose & Use";
 
 "Info.purposeAndUseText" = "`Lorem`

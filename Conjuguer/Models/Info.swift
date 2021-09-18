@@ -10,8 +10,9 @@ import Foundation
 struct Info: Hashable {
   let heading: String
   let attributedText: NSAttributedString
+  let imageName: String?
 
-  private init(heading: String, text: String) {
+  private init(heading: String, text: String, imageName: String? = nil) {
 //    guard let encodedHeading = heading.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
 //      fatalError("Could not URL encode heading \(heading).")
 //    }
@@ -19,9 +20,11 @@ struct Info: Hashable {
 //    self.heading = encodedHeading
     self.heading = heading
     attributedText = text.attributedText
+    self.imageName = imageName
   }
 
   static let infos: [Info] = [
+    Info(heading: L.Info.dedicationHeading, text: L.Info.dedicationText, imageName: "Compton"),
     Info(heading: L.Info.purposeAndUseHeading, text: L.Info.purposeAndUseText),
     Info(heading: L.Info.terminologyHeading, text: L.Info.terminologyText),
     Info(heading: L.Info.defectivenessHeading, text: L.Info.defectivenessText),

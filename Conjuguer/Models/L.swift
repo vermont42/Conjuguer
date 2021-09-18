@@ -111,6 +111,14 @@ enum L {
   }
 
   enum Info {
+    static var dedicationHeading: String {
+      NSLocalizedString("Info.dedicationHeading", comment: "")
+    }
+
+    static var dedicationText: String {
+      NSLocalizedString("Info.dedicationText", comment: "")
+    }
+
     static var purposeAndUseHeading: String {
       NSLocalizedString("Info.purposeAndUseHeading", comment: "")
     }
