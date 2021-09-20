@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct VerbBrowseView: View {
-  @EnvironmentObject var current: World
-  @ObservedObject var store: VerbStore
+  @EnvironmentObject private var current: World
+  @ObservedObject private var store: VerbStore
+  @State private var isPresentingVerb = false
 
   var body: some View {
     ZStack {
@@ -26,7 +27,7 @@ struct VerbBrowseView: View {
                 Text(L.displayNameForVerbSort(type)).tag(type)
               }
             }
-              .pickerStyle(SegmentedPickerStyle())
+            .pickerStyle(SegmentedPickerStyle())
 
             ScrollView {
               LazyVStack {
@@ -39,17 +40,27 @@ struct VerbBrowseView: View {
                         .tableText()
                     }
                   })
-                    .buttonStyle(PlainButtonStyle())
+                  .buttonStyle(PlainButtonStyle())
                 }
               }
-                .navigationBarTitle(L.Navigation.verbs)
+              .navigationBarTitle(L.Navigation.verbs)
             }
           }
         }
       }
-        .navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
-        .padding()
+      .navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
+      .padding()
     }
+    .onReceive(Current.$verb) { value in
+      if value != nil {
+        isPresentingVerb = true
+      }
+    }
+    .sheet(isPresented: $isPresentingVerb, content: {
+      Current.verb.map {
+        VerbView(verb: $0)
+      }
+    })
   }
 
   init() {

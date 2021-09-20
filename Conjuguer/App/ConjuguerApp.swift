@@ -12,9 +12,8 @@ struct ConjuguerApp: App {
   var body: some Scene {
     WindowGroup {
       MainTabView()
-        .onOpenURL { url in
-          print("Received URL: \(url)")
-        }
+        .environmentObject(Current)
+        .onOpenURL(perform: Current.handleURL(_:))
     }
   }
 

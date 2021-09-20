@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct MainTabView: View {
+  @State var activeTab = TabIdentifier.verbs
+
   var body: some View {
-    TabView {
+    TabView(selection: $activeTab) {
       VerbBrowseView()
         .environmentObject(Current)
         .tabItem({
           Image(systemName: "tortoise.fill")
           Text(L.Navigation.verbs)
         })
-        .tag(0)
+        .tag(TabIdentifier.verbs)
 
       ModelBrowseView()
         .environmentObject(Current)
@@ -24,14 +26,22 @@ struct MainTabView: View {
           Image(systemName: "hare.fill")
           Text(L.Navigation.models)
         })
-        .tag(1)
+        .tag(TabIdentifier.models)
 
       InfoBrowseView()
+        .environmentObject(Current)
         .tabItem({
           Image(systemName: "ladybug.fill")
           Text(L.Navigation.info)
         })
-        .tag(2)
+        .tag(TabIdentifier.info)
+    }
+    .onOpenURL { url in
+      guard let tabIdentifier = url.tabIdentifier else {
+        return
+      }
+
+      activeTab = tabIdentifier
     }
   }
 }
@@ -40,4 +50,10 @@ struct MainTabView_Previews: PreviewProvider {
   static var previews: some View {
     MainTabView()
   }
+}
+
+enum TabIdentifier: Hashable {
+  case verbs
+  case models
+  case info
 }

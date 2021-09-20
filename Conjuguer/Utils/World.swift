@@ -18,6 +18,9 @@ var Current = World.device
 
 class World: ObservableObject {
   @Published var settings: Settings
+  @Published private(set) var verb: Verb?
+  @Published private(set) var verbModel: VerbModel?
+  @Published private(set) var info: Info?
 
   init(settings: Settings) {
     self.settings = settings
@@ -40,4 +43,25 @@ class World: ObservableObject {
 
     return World(settings: settings)
   }()
+
+  func handleURL(_ url: URL) {
+    guard
+      url.isDeeplink,
+      url.hasExpectedNumberOfDeeplinkComponents
+    else {
+      return
+    }
+
+    switch url.host {
+    case URL.verbHost:
+      verb = Verb.verbs[url.pathComponents[1]]
+    case URL.verbModelHost:
+      verbModel = VerbModel.models[url.pathComponents[1]]
+    case URL.infoHost:
+      return
+      // TODO: Create appropriate Info.
+    default:
+      return
+    }
+  }
 }

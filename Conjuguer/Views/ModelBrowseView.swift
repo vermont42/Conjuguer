@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ModelBrowseView: View {
-  @EnvironmentObject var current: World
-  @ObservedObject var store: ModelStore
+  @EnvironmentObject private var current: World
+  @ObservedObject private var store: ModelStore
+  @State private var isPresentingVerbModel = false
 
   var body: some View {
     ZStack {
@@ -44,6 +45,16 @@ struct ModelBrowseView: View {
         .navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
         .padding()
     }
+    .onReceive(Current.$verbModel) { value in
+      if value != nil {
+        isPresentingVerbModel = true
+      }
+    }
+    .sheet(isPresented: $isPresentingVerbModel, content: {
+      Current.verbModel.map {
+        ModelView(model: $0)
+      }
+    })
   }
 
   init() {
