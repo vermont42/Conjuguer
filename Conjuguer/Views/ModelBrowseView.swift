@@ -11,6 +11,7 @@ struct ModelBrowseView: View {
   @EnvironmentObject private var current: World
   @ObservedObject private var store: ModelStore
   @State private var isPresentingVerbModel = false
+  @State private var searchText = ""
 
   var body: some View {
     ZStack {
@@ -27,23 +28,31 @@ struct ModelBrowseView: View {
                 Text(L.displayNameForModelSort(type)).tag(type)
               }
             }
-              .pickerStyle(SegmentedPickerStyle())
+            .pickerStyle(SegmentedPickerStyle())
 
             ScrollView {
-              ForEach(store.modelsAndDecorators, id: \.self) { modelAndDecorator in
+              ForEach(searchResults, id: \.self) { modelAndDecorator in
                 NavigationLink(destination: ModelView(model: modelAndDecorator.model), label: {
                   Text(modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator)
                     .tableText()
                 })
                   .buttonStyle(PlainButtonStyle())
               }
-                .navigationBarTitle(L.Navigation.models)
+              .navigationBarTitle(L.Navigation.models)
             }
           }
         }
       }
-        .navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
-        .padding()
+      .navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
+      .padding()
+      .searchable(text: $searchText, suggestions: {
+        ForEach(searchResults, id: \.self) { modelAndDecorator in
+          Text("\(modelAndDecorator.model.exemplarWithPossibleExtraLetters)\(modelAndDecorator.decorator)")
+            .tableText()
+            .buttonStyle(PlainButtonStyle())
+            .searchCompletion(modelAndDecorator.model.exemplarWithPossibleExtraLetters)
+        }
+      })
     }
     .onReceive(Current.$verbModel) { value in
       if value != nil {
@@ -55,6 +64,14 @@ struct ModelBrowseView: View {
         ModelView(model: $0)
       }
     })
+  }
+
+  var searchResults: [ModelAndDecorator] {
+    if searchText.isEmpty {
+      return store.modelsAndDecorators
+    } else {
+      return store.modelsAndDecorators.filter { $0.model.exemplar.contains(searchText.localizedLowercase) }
+    }
   }
 
   init() {

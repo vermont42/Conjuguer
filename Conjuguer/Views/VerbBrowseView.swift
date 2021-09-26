@@ -11,6 +11,7 @@ struct VerbBrowseView: View {
   @EnvironmentObject private var current: World
   @ObservedObject private var store: VerbStore
   @State private var isPresentingVerb = false
+  @State private var searchText = ""
 
   var body: some View {
     ZStack {
@@ -31,7 +32,7 @@ struct VerbBrowseView: View {
 
             ScrollView {
               LazyVStack {
-                ForEach(store.verbs, id: \.self) { verb in
+                ForEach(searchResults, id: \.self) { verb in
                   NavigationLink(destination: VerbView(verb: verb), label: {
                     ZStack {
                       Color.customBackground
@@ -48,8 +49,15 @@ struct VerbBrowseView: View {
           }
         }
       }
-      .navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
+      .navigationViewStyle(.stack) // https://stackoverflow.com/a/66024249
       .padding()
+      .searchable(text: $searchText, suggestions: {
+        ForEach(searchResults, id: \.self) { result in
+          Text(result.infinitifWithPossibleExtraLetters)
+            .tableText()
+            .searchCompletion(result.infinitifWithPossibleExtraLetters)
+        }
+      })
     }
     .onReceive(Current.$verb) { value in
       if value != nil {
@@ -61,6 +69,14 @@ struct VerbBrowseView: View {
         VerbView(verb: $0)
       }
     })
+  }
+
+  var searchResults: [Verb] {
+    if searchText.isEmpty {
+      return store.verbs
+    } else {
+      return store.verbs.filter { $0.infinitifWithPossibleExtraLetters.contains(searchText.localizedLowercase) }
+    }
   }
 
   init() {
@@ -79,7 +95,6 @@ final class VerbStore: ObservableObject {
     verbSort = current.settings.verbSort
 
     frequencyVerbs = Verb.verbs.values
-      .filter { $0.frequency != nil }
       .sorted { lhs, rhs in
         if lhs.frequency == nil && rhs.frequency == nil {
           return lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
