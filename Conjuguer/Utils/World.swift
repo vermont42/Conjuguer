@@ -52,14 +52,22 @@ class World: ObservableObject {
       return
     }
 
+    verb = nil
+    verbModel = nil
+    info = nil
+
     switch url.host {
     case URL.verbHost:
       verb = Verb.verbs[url.pathComponents[1]]
     case URL.verbModelHost:
       verbModel = VerbModel.models[url.pathComponents[1]]
     case URL.infoHost:
-      return
-      // TODO: Create appropriate Info.
+      if
+        let infoIndex = Int(url.pathComponents[1]),
+        infoIndex < Info.infos.count
+      {
+        info = Info.infos[infoIndex]
+      }
     default:
       return
     }

@@ -16,23 +16,24 @@ extension URL {
     pathComponents.count == 2
   }
 
-  var tabIdentifier: TabIdentifier? {
-    guard isDeeplink else {
-      return nil
-    }
+//  var tabIdentifier: TabIdentifier? {
+//    guard isDeeplink else {
+//      return nil
+//    }
+//
+//    switch host {
+//    case "verb":
+//      return .verbs
+//    case "model":
+//      return .models
+//    case "info":
+//      return .info
+//    default:
+//      return nil
+//    }
+//  }
 
-    switch host {
-    case "verb":
-      return .verbs
-    case "model":
-      return .models
-    case "info":
-      return .info
-    default:
-      return nil
-    }
-  }
-
+  static let conjuguerUrlPrefix = "conjuguer://"
   static let verbHost = "verb"
   static let verbModelHost = "model"
   static let infoHost = "info"

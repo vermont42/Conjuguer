@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ModelView: View {
+  @State private var isPresentingVerb = false
   let model: VerbModel
 
   init(model: VerbModel) {
@@ -94,5 +95,17 @@ struct ModelView: View {
         .navigationTitle(model.exemplarWithPossibleExtraLetters + " (\(model.id))")
         .customNavigationBarItems()
     }
+    .onReceive(Current.$verb) { value in
+      if value == nil {
+        isPresentingVerb = false
+      } else {
+        isPresentingVerb = true
+      }
+    }
+    .sheet(isPresented: $isPresentingVerb, content: {
+      Current.verb.map {
+        VerbView(verb: $0)
+      }
+    })
   }
 }

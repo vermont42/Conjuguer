@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct InfoBrowseView: View {
+  @State private var isPresentingInfo = false
+  @State private var isPresentingVerb = false
+
   var body: some View {
     ZStack {
       Color.customBackground
@@ -35,5 +38,29 @@ struct InfoBrowseView: View {
         }
       }
     }
+    .onReceive(Current.$info) { value in
+      if value == nil {
+        isPresentingInfo = false
+      } else {
+        isPresentingInfo = true
+      }
+    }
+    .onReceive(Current.$verb) { value in
+      if value == nil {
+        isPresentingVerb = false
+      } else {
+        isPresentingVerb = true
+      }
+    }
+    .sheet(isPresented: $isPresentingInfo, content: {
+      Current.info.map {
+        InfoView(info: $0)
+      }
+    })
+    .sheet(isPresented: $isPresentingVerb, content: {
+      Current.verb.map {
+        VerbView(verb: $0)
+      }
+    })
   }
 }

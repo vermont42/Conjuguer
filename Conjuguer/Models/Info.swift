@@ -51,4 +51,14 @@ struct Info: Hashable {
     Info(heading: L.Info.questionsAndResponsesHeading, text: L.Info.questionsAndResponsesText),
     Info(heading: L.Info.creditsHeading, text: L.Info.creditsText)
   ]
+
+  static func headingToIndex(heading: String) -> Int? {
+    for (i, info) in infos.enumerated() {
+      if info.heading.lowercased() == heading.lowercased() {
+        return i
+      }
+    }
+
+    return nil
+  }
 }
