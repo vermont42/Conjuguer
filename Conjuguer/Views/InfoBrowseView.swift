@@ -52,15 +52,29 @@ struct InfoBrowseView: View {
         isPresentingVerb = true
       }
     }
-    .sheet(isPresented: $isPresentingInfo, content: {
-      Current.info.map {
-        InfoView(info: $0)
+    .sheet(
+      isPresented: $isPresentingInfo,
+      onDismiss: {
+        Current.info = nil
+        isPresentingInfo = false
+      },
+      content: {
+        Current.info.map {
+          InfoView(info: $0, shouldShowInfoHeading: true)
+        }
       }
-    })
-    .sheet(isPresented: $isPresentingVerb, content: {
-      Current.verb.map {
-        VerbView(verb: $0)
+    )
+    .sheet(
+      isPresented: $isPresentingVerb,
+      onDismiss: {
+        Current.verb = nil
+        isPresentingVerb = false
+      },
+      content: {
+        Current.verb.map {
+          VerbView(verb: $0, shouldShowVerbHeading: true)
+        }
       }
-    })
+    )
   }
 }

@@ -18,9 +18,9 @@ var Current = World.device
 
 class World: ObservableObject {
   @Published var settings: Settings
-  @Published private(set) var verb: Verb?
-  @Published private(set) var verbModel: VerbModel?
-  @Published private(set) var info: Info?
+  @Published var verb: Verb?
+  @Published var verbModel: VerbModel?
+  @Published var info: Info?
 
   init(settings: Settings) {
     self.settings = settings

@@ -10,6 +10,12 @@ import UIKit
 
 struct InfoView: View {
   let info: Info
+  let shouldShowInfoHeading: Bool
+
+  init(info: Info, shouldShowInfoHeading: Bool = false) {
+    self.info = info
+    self.shouldShowInfoHeading = shouldShowInfoHeading
+  }
 
   var body: some View {
     VStack {
@@ -18,6 +24,12 @@ struct InfoView: View {
           .resizable()
           .aspectRatio(contentMode: .fit)
           .frame(width: 270)
+      }
+
+      if shouldShowInfoHeading {
+        Text(info.heading)
+          .headingLabel()
+        Spacer()
       }
 
       TextView(text: info.attributedText)

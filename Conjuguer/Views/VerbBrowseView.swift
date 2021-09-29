@@ -64,11 +64,18 @@ struct VerbBrowseView: View {
         isPresentingVerb = true
       }
     }
-    .sheet(isPresented: $isPresentingVerb, content: {
-      Current.verb.map {
-        VerbView(verb: $0)
+    .sheet(
+      isPresented: $isPresentingVerb,
+      onDismiss: {
+        Current.verb = nil
+        isPresentingVerb = false
+      },
+      content: {
+        Current.verb.map {
+          VerbView(verb: $0, shouldShowVerbHeading: true)
+        }
       }
-    })
+    )
   }
 
   var searchResults: [Verb] {

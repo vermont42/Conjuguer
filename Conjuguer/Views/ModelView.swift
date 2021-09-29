@@ -87,7 +87,7 @@ struct ModelView: View {
                 Text(L.ModelView.verbUsing)
                   .subheadingLabel()
               }
-              Text(model.verbs.joined(separator: ", ")).font(bodyFont)
+              Text(model.verbsWithDeepLinks()).font(bodyFont)
             }
           }
         }
@@ -102,10 +102,17 @@ struct ModelView: View {
         isPresentingVerb = true
       }
     }
-    .sheet(isPresented: $isPresentingVerb, content: {
-      Current.verb.map {
-        VerbView(verb: $0)
+    .sheet(
+      isPresented: $isPresentingVerb,
+      onDismiss: {
+        Current.verb = nil
+        isPresentingVerb = false
+      },
+      content: {
+        Current.verb.map {
+          VerbView(verb: $0, shouldShowVerbHeading: true)
+        }
       }
-    })
+    )
   }
 }

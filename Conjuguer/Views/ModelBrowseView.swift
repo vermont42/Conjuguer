@@ -59,11 +59,18 @@ struct ModelBrowseView: View {
         isPresentingVerbModel = true
       }
     }
-    .sheet(isPresented: $isPresentingVerbModel, content: {
-      Current.verbModel.map {
-        ModelView(model: $0)
+    .sheet(
+      isPresented: $isPresentingVerbModel,
+      onDismiss: {
+        Current.verbModel = nil
+        isPresentingVerbModel = false
+      },
+      content: {
+        Current.verbModel.map {
+          ModelView(model: $0)
+        }
       }
-    })
+    )
   }
 
   var searchResults: [ModelAndDecorator] {

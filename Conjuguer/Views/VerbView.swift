@@ -9,10 +9,12 @@ import SwiftUI
 
 struct VerbView: View {
   let verb: Verb
+  let shouldShowVerbHeading: Bool
   @State var shouldShowCompoundTenses = false
 
-  init(verb: Verb) {
+  init(verb: Verb, shouldShowVerbHeading: Bool = false) {
     self.verb = verb
+    self.shouldShowVerbHeading = shouldShowVerbHeading
   }
 
   var body: some View {
@@ -22,6 +24,12 @@ struct VerbView: View {
 
       ScrollView {
         VStack(alignment: .leading) {
+          if shouldShowVerbHeading {
+            Text(verb.infinitifWithPossibleExtraLetters)
+              .headingLabel()
+            Spacer()
+          }
+
           Text(L.VerbView.overview)
             .subheadingLabel()
             .leftAligned()

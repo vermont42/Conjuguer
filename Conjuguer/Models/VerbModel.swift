@@ -37,6 +37,17 @@ struct VerbModel: Hashable {
     }
   }
 
+  func verbsWithDeepLinks() -> AttributedString {
+    do {
+      return try AttributedString(markdown: verbs.map {
+        let encodedVerb = $0.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? ""
+        return "[\($0)](\(URL.conjuguerUrlPrefix + URL.verbHost)/\(encodedVerb))"
+      }.joined(separator: ", "))
+    } catch {
+      return AttributedString("")
+    }
+  }
+
   static func model(id: String) -> VerbModel {
     if let model = models[id] {
       return model
