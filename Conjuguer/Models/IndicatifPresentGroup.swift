@@ -138,7 +138,9 @@ enum IndicatifPrésentGroup: Hashable {
       if alterationsWithStar.contains(.indicatifPrésent(personNumber)) {
         output += Tense.irregularEndingMarker + " "
       } else {
-        output += présentEndingForPersonNumber(personNumber) + " "
+        let ending = présentEndingForPersonNumber(personNumber)
+        let normalizedEnding = ending == "" ? "_" : ending
+        output += normalizedEnding + " "
       }
     }
     return output

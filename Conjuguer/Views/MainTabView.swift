@@ -13,7 +13,7 @@ struct MainTabView: View {
       VerbBrowseView()
         .environmentObject(Current)
         .tabItem({
-          Image(systemName: "tortoise.fill")
+          Image(systemName: "book.fill")
           Text(L.Navigation.verbs)
         })
         .tag(0)
@@ -21,18 +21,34 @@ struct MainTabView: View {
       ModelBrowseView()
         .environmentObject(Current)
         .tabItem({
-          Image(systemName: "hare.fill")
+          Image(systemName: "key.fill")
           Text(L.Navigation.models)
         })
         .tag(1)
 
+      QuizView()
+        .environmentObject(Current)
+        .tabItem({
+          Image(systemName: "square.and.pencil")
+          Text(L.Navigation.quiz)
+        })
+        .tag(2)
+
       InfoBrowseView()
         .environmentObject(Current)
         .tabItem({
-          Image(systemName: "ladybug.fill")
+          Image(systemName: "questionmark.diamond.fill")
           Text(L.Navigation.info)
         })
-        .tag(2)
+        .tag(3)
+
+      SettingsView()
+        .environmentObject(Current)
+        .tabItem({
+          Image(systemName: "gearshape.2.fill")
+          Text(L.Navigation.settings)
+        })
+        .tag(4)
     }
   }
 }

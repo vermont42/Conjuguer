@@ -7,7 +7,9 @@
 
 "Navigation.verbs" = "Verbes";
 "Navigation.models" = "Modèles";
+"Navigation.quiz" = "Quiz";
 "Navigation.info" = "Info";
+"Navigation.settings" = "Réglages";
 "Navigation.input" = "Entrée";
 "Navigation.back" = "Retourner";
 

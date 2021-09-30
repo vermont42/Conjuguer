@@ -73,6 +73,8 @@
 		03C2CACE261912EA00CFA825 /* sadTrombone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03C2CACC261912EA00CFA825 /* sadTrombone.mp3 */; };
 		03C2CAD62619160C00CFA825 /* chime.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03C2CAD52619160C00CFA825 /* chime.mp3 */; };
 		03DDCF9826CAE47500123BB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03DDCF9726CAE47500123BB0 /* LaunchScreen.storyboard */; };
+		03FA474827060D2000131205 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FA474727060D2000131205 /* QuizView.swift */; };
+		03FA474A27060D6C00131205 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FA474927060D6C00131205 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,6 +168,8 @@
 		03C2CACC261912EA00CFA825 /* sadTrombone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sadTrombone.mp3; sourceTree = "<group>"; };
 		03C2CAD52619160C00CFA825 /* chime.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chime.mp3; sourceTree = "<group>"; };
 		03DDCF9726CAE47500123BB0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		03FA474727060D2000131205 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		03FA474927060D6C00131205 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +333,8 @@
 				0373680D25DB811F008BDF46 /* MainTabView.swift */,
 				0373684425DD809C008BDF46 /* ModelBrowseView.swift */,
 				0343E7DE25E427890043B813 /* ModelView.swift */,
+				03FA474727060D2000131205 /* QuizView.swift */,
+				03FA474927060D6C00131205 /* SettingsView.swift */,
 				032D267326BDF5E000AE1BD1 /* TextView.swift */,
 				0373681525DB8530008BDF46 /* VerbBrowseView.swift */,
 				03653F0F25EC67DF00A34267 /* VerbView.swift */,
@@ -517,6 +523,7 @@
 				038E0AFE2690976D002A71EF /* DefectGroup.swift in Sources */,
 				03C2CAC62619125200CFA825 /* Sound.swift in Sources */,
 				036DB7DF25A0DD7A0013C3B7 /* Verb.swift in Sources */,
+				03FA474A27060D6C00131205 /* SettingsView.swift in Sources */,
 				03309F6926BC9E72003E4F92 /* NSAttributedStringExtension.swift in Sources */,
 				032B122326BA02D8000E70CA /* InfoBrowseView.swift in Sources */,
 				036DB7EE25A1070D0013C3B7 /* PersonNumber.swift in Sources */,
@@ -541,6 +548,7 @@
 				032B122726BB3FA0000E70CA /* ColorExtension.swift in Sources */,
 				03653F1025EC67DF00A34267 /* VerbView.swift in Sources */,
 				0373681B25DB8BAD008BDF46 /* Util.swift in Sources */,
+				03FA474827060D2000131205 /* QuizView.swift in Sources */,
 				03ACAA0125ACB65300CF5390 /* FuturSimple.swift in Sources */,
 				0373682025DC6502008BDF46 /* World.swift in Sources */,
 				032D267626C02FAB00AE1BD1 /* Fonts.swift in Sources */,

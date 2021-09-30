@@ -17,8 +17,16 @@ enum L {
       NSLocalizedString("Navigation.models", comment: "")
     }
 
+    static var quiz: String {
+      NSLocalizedString("Navigation.quiz", comment: "")
+    }
+
     static var info: String {
       NSLocalizedString("Navigation.info", comment: "")
+    }
+
+    static var settings: String {
+      NSLocalizedString("Navigation.settings", comment: "")
     }
 
     static var input: String {
