@@ -926,7 +926,7 @@ The impératif passé is formed from the impératif form of avoir or être follo
 
 ~Q:~ Why does ~Conjuguer~ use French names for tenses rather than English, for example, ~indicatif présent~ rather than ~present indicative~?
 
-~A:~ Admittedly, English tense names would perhaps be more approachable for the learner in certain cases, for example, ~radical futur~. English speakers might better understand the term ~future stem~. But perhaps because of his years working as a lawyer and software developer, ~Conjuguer~’s developer values precision in language. English tense names are imprecise when applied to French tenses. For example, the English ~present indicative~ has more limited uses than the French ~indicatif présent~.
+~A:~ Admittedly, English tense names would perhaps be more approachable for the learner in certain cases, for example, ~radical futur~. English speakers might better understand the term ~future stem~. But perhaps because of his years working as a lawyer and software developer, ~Conjuguer~’s developer values precision in language. English tense names map imperfectly to French tenses. For example, the English ~present indicative~ has more limited uses than the French ~indicatif présent~.
 
 ~Q:~ I've seen the terms “mood” and “aspect” in descriptions of verb tenses, but ~Conjuguer~ does not use these terms. Also, the participe passé, participe présent, and radical futur are not really tenses.
 
@@ -938,7 +938,19 @@ The impératif passé is formed from the impératif form of avoir or être follo
 
 "Info.creditsHeading" = "Credits";
 
-"Info.creditsText" = "";
+"Info.creditsText" = "Josh Adams developed Conjuguer.
+
+Wei Huang created Conjuguer's font, Work Sans, and licensed it under the Open Font License, available here: %https://scripts.sil.org/cms/scripts/page.php?item_id=OFL-FAQ_web%
+
+Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l'ancien français, which Conjuguer uses for conjugation of ester, gésir, issir, and certain other defective verbs. URL: %https://micmap.org/dicfro/introduction/tableaux-de-conjugaison%
+
+David Brodsky wrote “French Verbs Made Simple(r)”, which provided two key insights. First, conjugations are combinations of stems, sometimes modified, and endings, usually predictable. Second, all French verbs are conjugated according to a verb ~model~. The number of models is ~much~ smaller than the number of irregular verbs.
+
+Daniel Alston and Larry Sanger proposed and ideated Wiktionary, the primary source of French-to-English verb translations. Wiktionary content is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. URL: %https://en.wiktionary.org/wiki/Wiktionary:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License%
+
+Xavier Nègre created Lexilogos, a collection of French dictionaries that Conjuguer’s developer used for translations not available in Wiktionary. URL: %https://www.lexilogos.com/english/french_dictionary.htm%
+
+Adam Kilgarriff founded Lexical Computing, the company behind Sketch Engine, which is the source of Conjuguer’s verb-frequency data.";
 
 "VerbSort.frequency" = "Frequency";
 "VerbSort.alphabetic" = "Alphabetic";
