@@ -50,7 +50,7 @@ Mr. Compton already had a full class schedule in the fall of 1991, when he creat
 
 "Info.terminologyText" = "`Verb`
 
-A ~verb~ is a kind of word that describes an action. For example, in the sentence “Jacques Brel played the guitar”, “play” is the verb. Likewise, in the sentence “Jacques Brel jouait de la guitare”, “jouer” is the verb. Verb ~tense~s express, among other things, when an action took place. In the example sentences, the verb tenses indicate that the action (playing the guitar) took place in the past. In English and in French, the ~subject~ or actor in the sentence, combined with the tense, determine the form of the verb used. This is the verb ~conjugation~. In English, the example sentence’s combination of subject and tense results in the conjugation “played”. In French, the conjugation is “jouait”.
+A ~verb~ is a kind of word that describes an action. For example, in the sentence “Jacques Brel played the guitar”, “play” is the verb. Likewise, in the sentence “Jacques Brel jouait de la guitare”, “jouer” is the verb. Verb ~tense~s express, among other things, when an action took, takes, or will take place. In the example sentences, the verb tenses indicate that the action (playing the guitar) took place in the past. In English and in French, the ~subject~ or actor in the sentence, combined with the tense, determine the form of the verb used. This is the verb ~conjugation~. In English, the example sentence’s combination of subject and tense results in the conjugation “played”. In French, the conjugation is “jouait”.
 
 The ~infinitif~ (infinitive) is an invariant verb form that usually ends in -er, -ir, or -re. Unlike a conjugation, an ~infinitif~ does not indicate time, number, or person. Example use: “Jacques Brel savait ~chanter~.” = “Jacques Brel $knEw$ how ~to sing~.” In both sentences, the infinitif represents the ~act~ of singing without reference to time, number, or person.
 
@@ -60,7 +60,7 @@ The ~radical de l’infinitif~ (infinitive stem) is the infinitif minus its -er,
 
 `Pronoun`
 
-A subject ~pronoun~ is a word that stands in for the subject, the actor in a sentence. In English, the subject pronouns are ~I~, ~you~, ~he/she/it/one~, ~we~, ~you/y’all~, and ~they~.
+A subject ~pronoun~ is a word that stands in for the subject, the actor in a sentence. In English, the subject pronouns in widespread use are ~I~, ~you~, ~he/she/it/one~, ~we~, ~you/y’all~, and ~they~. The English subject pronouns ~ye~ and ~thou~ have be in decline since the Elizabethan period.
 
 Subject pronouns correspond to the ~singular~ or ~plural~ number and to the ~first person~, ~second person~, or ~third person~. English subject pronouns follow. Shorthand abbreviations of the person-number combinations are in parentheses.
 
@@ -934,15 +934,11 @@ The impératif passé is formed from the impératif form of avoir or être follo
 
 ~Q:~ Why aren’t there more recent examples of uses of the tenses?
 
-~A:~ French copyright expires seventy years after the death of the author, unless the author died in military service during wartime, in which case the period is one hundred years. Antoine de Saint-Exupéry’s 1944 death precludes use of Le Petit Prince, ~Conjuguer~’s developer’s favorite French book. Verily, ~Conjuguer~ respects French copyright law, and all example uses are more than one hundred years old.";
+~A:~ French copyright expires seventy years after the death of the author, unless the author died in military service during wartime, in which case the period is one hundred years. Antoine de Saint-Exupéry’s 1944 death precludes use of “Le Petit Prince”, ~Conjuguer~’s developer’s favorite French book. Verily, ~Conjuguer~ respects French copyright law, and all example uses are more than one hundred years old.";
 
 "Info.creditsHeading" = "Credits";
 
-"Info.creditsText" = "
-
-
-
-";
+"Info.creditsText" = "";
 
 "VerbSort.frequency" = "Frequency";
 "VerbSort.alphabetic" = "Alphabetic";
