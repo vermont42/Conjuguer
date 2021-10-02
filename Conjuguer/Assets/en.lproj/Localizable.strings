@@ -117,7 +117,7 @@ Reference works on French verbs, for example the book “French Verbs Made Simpl
 
 3. Ester (to be or stay), though nearly extinct in French, has heavily used relatives in other Romance languages. For example, Spanish has two words for “to be”: “ser” and (you guessed it) “estar”. Conjuguer’s users might be curious how ester’s conjugations would have evolved had that verb remained productive in French, as it did in Spanish. Conjuguer’s users might also be curious how clore’s conjugations would have evolved had fermer not replaced it. For the benefit of curious users, Conjuguer includes speculative conjugations of choir, clore, ester, gésir, issir, and ouïr, inspired by the Old French conjugations provided by Wiktionary and “Tableaux de conjugaison de l’ancien français” by Machio Okada and Hitoshi Ogurisu.
 
-Notwithstanding Conjuguer’s inclusive approach to conjugations traditionally considered defective, those conjugations ~are~ called out with strikethrough in Conjuguer's user interface.";
+Notwithstanding Conjuguer’s inclusive approach to conjugations traditionally considered defective, those conjugations ~are~ called out with strikethrough in Conjuguer’s user interface.";
 
 "Info.participePasséHeading" = "Participe Passé";
 "Info.participePasséText" = "`Use`
@@ -220,7 +220,7 @@ The ~participe présent~ (present participle) is used:
 
 • As an invariable verb referring to a noun or pronoun.
 
-“[M]es parents, n'$aYant$ guère de loisir pour faire des sorties … prirent l’habitude de me laisser aller me promener sans eux.” = “My parents, having little time to go out … $gOt$ into the habit of letting me go for a walk without them.”
+“[M]es parents, n’$aYant$ guère de loisir pour faire des sorties … prirent l’habitude de me laisser aller me promener sans eux.” = “My parents, having little time to go out … $gOt$ into the habit of letting me go for a walk without them.”
 
 - Marcel Proust, Du côté de chez Swann
 
@@ -339,7 +339,7 @@ The ~indicatif présent~ (present indicative) is used:
 
 “Oh! très-sincèrement je $souffrE$” = “Oh very sincerely I do suffer!”
 
-- Charles Baudelaire, Le Monstre, ou le Paranymphe d'une nymphe macabre
+- Charles Baudelaire, Le Monstre, ou le Paranymphe d’une nymphe macabre
 
 `Conjugation`
 
@@ -462,7 +462,7 @@ The ~imparfait~ (imperfect) is used:
 
 • To express the repeated or habitual nature of an action. English sometimes uses ~would + infinitive~ in this situation, as in the translation below.
 
-“Parfois, à peine ma bougie éteinte, mes yeux se fermaient si vite que je n’avais pas le temps de me dire, ‘Je $m’endoRs$.’” = “Sometimes, barely after my candle $WAS$ extinguished, my eyes would close so quickly that I $dIDn’t$ have time to say to myself, ‘I'm falling asleep.’”
+“Parfois, à peine ma bougie éteinte, mes yeux se fermaient si vite que je n’avais pas le temps de me dire, ‘Je $m’endoRs$.’” = “Sometimes, barely after my candle $WAS$ extinguished, my eyes would close so quickly that I $dIDn’t$ have time to say to myself, ‘I’m falling asleep.’”
 
 - Marcel Proust, Du côté de chez Swann
 
@@ -740,7 +740,7 @@ Examples:
 
 - Émile Zola, L’Assommoir
 
-“Mais j’ai $Vu$ monsieur d’Ajuda-Pinto entrant chez monsieur de Rochefide, et j’$aI$ pensé qu’alors vous $Étiez$ seule.” = “But I $sAW$ Monsieur d'Ajuda-Pinto entering Monsieur de Rochefide’s house, and I $thOUGHT$ you $WERE$ alone then.”
+“Mais j’ai $Vu$ monsieur d’Ajuda-Pinto entrant chez monsieur de Rochefide, et j’$aI$ pensé qu’alors vous $Étiez$ seule.” = “But I $sAW$ Monsieur d’Ajuda-Pinto entering Monsieur de Rochefide’s house, and I $thOUGHT$ you $WERE$ alone then.”
 
 - Honoré de Balzac, Le père Goriot
 
@@ -924,11 +924,11 @@ The impératif passé is formed from the impératif form of avoir or être follo
 
 ~A:~ Feel free to email ~Conjuguer~’s developer at vermontcoder@gmail.com if you would like a verb to be added.
 
-~Q:~ Why does ~Conjuguer~ use French names for tenses rather than English, for example, ~indicatif présent~ rather than ~present indicative~?
+~Q:~ Why does ~Conjuguer~ mostly use French names for tenses rather than English, for example, ~indicatif présent~ rather than ~present indicative~?
 
-~A:~ Admittedly, English tense names would perhaps be more approachable for the learner in certain cases, for example, ~radical futur~. English speakers might better understand the term ~future stem~. But perhaps because of his years working as a lawyer and software developer, ~Conjuguer~’s developer values precision in language. English tense names map imperfectly to French tenses. For example, the English ~present indicative~ has more limited uses than the French ~indicatif présent~.
+~A:~ Admittedly, English tense names would perhaps be more approachable for the learner in certain cases, for example, ~radical futur~. English speakers might better understand the term ~future stem~. But perhaps because of his years working as a lawyer, ~Conjuguer~’s developer values precision in language. English tense names map imperfectly to French tenses. For example, the English ~present indicative~ has more limited uses than the French ~indicatif présent~.
 
-~Q:~ I've seen the terms “mood” and “aspect” in descriptions of verb tenses, but ~Conjuguer~ does not use these terms. Also, the participe passé, participe présent, and radical futur are not really tenses.
+~Q:~ I’ve seen the terms “mood” and “aspect” in descriptions of verb tenses, but ~Conjuguer~ does not use these terms. Also, the participe passé, participe présent, and radical futur are not really tenses.
 
 ~A:~ Was that a question? You are correct that ~Conjuguer~ does not use these two terms, and those three things are not usually described as “tenses”. With respect to terminology, bear in mind that ~Conjuguer~’s purpose is to teach French-verb conjugation, not to teach English French-verb-conjugation nomenclature. With respect to the participe passé, participe présent, and radical futur, ~Conjuguer~’s developer does consider those three things to be tenses, if “tense” is taken to mean “a systematic way of changing verbs for a specific purpose”. This definition, though absent, on information and belief, from any dictionary, serves ~Conjuguer~’s pedagogical purpose well enough.
 
@@ -940,17 +940,19 @@ The impératif passé is formed from the impératif form of avoir or être follo
 
 "Info.creditsText" = "Josh Adams developed Conjuguer.
 
-Wei Huang created Conjuguer's font, Work Sans, and licensed it under the Open Font License, available here: %https://scripts.sil.org/cms/scripts/page.php?item_id=OFL-FAQ_web%
+Daniel Alston and Larry Sanger proposed and ideated Wiktionary, Conjuguer’s primary source of French-to-English verb translations. Wiktionary content is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. URL: %https://en.wiktionary.org/wiki/Wiktionary:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License%
 
-Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l'ancien français, which Conjuguer uses for conjugation of ester, gésir, issir, and certain other defective verbs. URL: %https://micmap.org/dicfro/introduction/tableaux-de-conjugaison%
+David Brodsky wrote “French Verbs Made Simple(r)”, which provided two key insights to the developer of Conjuguer. First, conjugations are combinations of stems, sometimes modified, and endings, usually predictable. Second, every French verb is conjugated using a French-verb ~model~. The number of models is ~much~ smaller than the number of irregular verbs.
 
-David Brodsky wrote “French Verbs Made Simple(r)”, which provided two key insights. First, conjugations are combinations of stems, sometimes modified, and endings, usually predictable. Second, all French verbs are conjugated according to a verb ~model~. The number of models is ~much~ smaller than the number of irregular verbs.
+Wei Huang created Conjuguer’s font, Work Sans, and licensed it under the Open Font License, available here: %https://scripts.sil.org/cms/scripts/page.php?item_id=OFL-FAQ_web%
 
-Daniel Alston and Larry Sanger proposed and ideated Wiktionary, the primary source of French-to-English verb translations. Wiktionary content is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. URL: %https://en.wiktionary.org/wiki/Wiktionary:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License%
+Adam Kilgarriff founded Lexical Computing, the company behind Sketch Engine, which is the source of Conjuguer’s verb-frequency data.
 
 Xavier Nègre created Lexilogos, a collection of French dictionaries that Conjuguer’s developer used for translations not available in Wiktionary. URL: %https://www.lexilogos.com/english/french_dictionary.htm%
 
-Adam Kilgarriff founded Lexical Computing, the company behind Sketch Engine, which is the source of Conjuguer’s verb-frequency data.";
+Franz Josef Och architected Google Translate, which Conjuguer’s developer used to translate French definitions of verbs that were in the French, but not the English, Wiktionary. URL: %https://translate.google.com%
+
+Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’ancien français, which Conjuguer uses for conjugation of ester, gésir, issir, and certain other defective verbs. URL: %https://micmap.org/dicfro/introduction/tableaux-de-conjugaison%";
 
 "VerbSort.frequency" = "Frequency";
 "VerbSort.alphabetic" = "Alphabetic";
