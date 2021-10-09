@@ -29,7 +29,7 @@ struct TextView: UIViewRepresentable {
 
 class TextViewDelegate: NSObject, UITextViewDelegate {
   func textView(_ textView: UITextView, shouldInteractWith url: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-    let cleansedUrlString = url.absoluteString.removingPercentEncoding ?? ""
+    let cleansedUrlString = parenlessString((url.absoluteString.removingPercentEncoding ?? "")).lowercased()
 
     if let infoIndex = Info.headingToIndex(heading: cleansedUrlString) {
       let infoDeepLinkUrlString = URL.conjuguerUrlPrefix + "\(URL.infoHost)/\(infoIndex)"
@@ -39,18 +39,19 @@ class TextViewDelegate: NSObject, UITextViewDelegate {
       }
       return false
     } else if Verb.verbs[cleansedUrlString] != nil {
-      let verbDeepLinkUrlString = URL.conjuguerUrlPrefix + "\(URL.verbHost)/\(url.absoluteString)"
-      print(verbDeepLinkUrlString)
+      let verbDeepLinkUrlString = URL.conjuguerUrlPrefix + "\(URL.verbHost)/\(parenlessString(url.absoluteString.lowercased()))"
       URL(string: verbDeepLinkUrlString).map {
         UIApplication.shared.open($0)
       }
       return false
+    } else {
+      return true
     }
+  }
 
-    // TODO: If there is an http prefix, just return true. See InfoVC.swift.
-    // Otherwise, check the value against verbs, model IDs, and Infos. (Spanish titles are tricky.)
-    // Note that Info titles map to Ints.
-    // Construct a conjuguer URL, open that, and return false.
-    return true
+  private func parenlessString(_ input: String) -> String {
+    input
+      .replacingOccurrences(of: "(", with: "")
+      .replacingOccurrences(of: ")", with: "")
   }
 }
