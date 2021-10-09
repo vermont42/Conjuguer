@@ -36,7 +36,7 @@
 
 "Info.dedicationHeading" = "Dedication";
 
-"Info.dedicationText" = "David Compton was my high-school Nordic-skiing coach. He was also a French teacher but not initially ~my~ French teacher. He was aware of my interest in and aptitude for French, however. At the beginning of my junior year, I wasn’t going to be able to take French because of a schedule conflict with Advanced Placement English, so Mr. Compton created a five-days-a-week French-literature class just for me. A German exchange student named Julian Peters soon joined us. Using Volumes I and II of “Anthologie de la Littérature Française” by Robert Leggewie as our textbooks, we studied the greats of French literature from Chrétien de Troyes to Samuel Beckett. As an aside, this literary study ultimately inspired Conjuguer’s use of literary examples of tense use. I thoroughly enjoyed Mr Compton’s class, and my knowledge of French took a giant leap. At the end of the year, I achieved a maximum score on the French Advanced Placement test. At the beginning of my freshman year of college, I took a test to get credit for a major-level French class and, of the sixty freshmen who took the test, I was one of only three who passed.
+"Info.dedicationText" = "David Compton was my high-school Nordic-skiing coach. He was also a French teacher but not initially ~my~ French teacher. He was aware of my interest in and aptitude for French, however. At the beginning of my junior year, I wasn’t going to be able to take French because of a schedule conflict with Advanced Placement English, so Mr. Compton created a five-days-a-week French-literature class just for me. A German exchange student named Julian Peters soon joined us. Using Volumes I and II of “Anthologie de la Littérature Française” by Robert Leggewie as our textbooks, we studied the greats of French literature from Chrétien de Troyes to Samuel Beckett. As an aside, this literary study ultimately inspired ~Conjuguer~’s use of literary examples of tense use. I thoroughly enjoyed Mr Compton’s class, and my knowledge of French took a giant leap. At the end of the year, I achieved a maximum score on the French Advanced Placement test. At the beginning of my freshman year of college, I took a test to get credit for a major-level French class and, of the sixty freshmen who took the test, I was one of only three who passed.
 
 Mr. Compton already had a full class schedule in the fall of 1991, when he created the class for me. On some level, he might have enjoyed spending that class period puffing on his tobacco pipe, tinkering with his Macintosh computer. Solipsistic teen that I was, I never asked him ~why~ he sacrificed that time for me. But I can speculate. He studied at the Sorbonne during the 1960s and was a francophile. He may have recognized in me a shared interest in French and wanted to give me the opportunity to pursue it to the fullest extent possible. Whatever his motivation, I am grateful and dedicate this app to him.";
 
@@ -111,13 +111,13 @@ Sixty-five French verbs are ~defective~. This doesn’t mean that something is w
 
 Reference works on French verbs, for example the book “French Verbs Made Simple(r)” and the website Wiktionary, omit defective conjugations entirely. But the developer of ~Conjuguer~ is providing ~all~ conjugations, including those traditionally considered defective, to you, the user of this app. Three reasons for this heterodox generosity follow.
 
-1. As stated in “French Verbs Made Simple(r)”, “There is occasionally disagreement [among] various sources as to which [conjugations] actually exist.” Similarly, regarding the word ravoir, Wiktionary says, “D’après la plupart des dictionnaires classiques, ce verbe $EST$ défectif et ne se conjugue pas. Néanmoins, des usages de formes conjuguées $SONT$ avérées régionalement.” To omit certain conjugations, therefore, would require a series of judgment calls by the developer of Conjuguer. He judgeth not lest he be judged.
+1. As stated in “French Verbs Made Simple(r)”, “There is occasionally disagreement [among] various sources as to which [conjugations] actually exist.” Similarly, regarding the word ravoir, Wiktionary says, “D’après la plupart des dictionnaires classiques, ce verbe $EST$ défectif et ne se conjugue pas. Néanmoins, des usages de formes conjuguées $SONT$ avérées régionalement.” To omit certain conjugations, therefore, would require a series of judgment calls by the developer of ~Conjuguer~. He judgeth not lest he be judged.
 
 2. Certain conjugations are likely absent from any large corpus of French text and could therefore be considered defective. But the fact that a conjugation isn’t used doesn’t mean that it couldn’t be useful. Consider a poem written from the perspective of the clouds of Earth and Venus. This poem might include the line “We rain water and sulphuric acid, respectively.” Thus, although pleuvoir is considered defective for 1p in all conjugated tenses, this conjugation (pleuvons) would be useful in such a poem.
 
-3. Ester (to be or stay), though nearly extinct in French, has heavily used relatives in other Romance languages. For example, Spanish has two words for “to be”: “ser” and (you guessed it) “estar”. Conjuguer’s users might be curious how ester’s conjugations would have evolved had that verb remained productive in French, as it did in Spanish. Conjuguer’s users might also be curious how clore’s conjugations would have evolved had fermer not replaced it. For the benefit of curious users, Conjuguer includes speculative conjugations of choir, clore, ester, gésir, issir, and ouïr, inspired by the Old French conjugations provided by Wiktionary and “Tableaux de conjugaison de l’ancien français” by Machio Okada and Hitoshi Ogurisu.
+3. Ester (to be or stay), though nearly extinct in French, has heavily used relatives in other Romance languages. For example, Spanish has two words for “to be”: “ser” and (you guessed it) “estar”. ~Conjuguer~’s users might be curious how ester’s conjugations would have evolved had that verb remained productive in French, as it did in Spanish. ~Conjuguer~’s users might also be curious how clore’s conjugations would have evolved had fermer not replaced it. For the benefit of curious users, ~Conjuguer~ includes speculative conjugations of choir, clore, ester, gésir, issir, and ouïr, inspired by the Old French conjugations provided by Wiktionary and “Tableaux de conjugaison de l’ancien français” by Machio Okada and Hitoshi Ogurisu.
 
-Notwithstanding Conjuguer’s inclusive approach to conjugations traditionally considered defective, those conjugations ~are~ called out with strikethrough in Conjuguer’s user interface.";
+Notwithstanding ~Conjuguer~’s inclusive approach to conjugations traditionally considered defective, those conjugations ~are~ called out with strikethrough in ~Conjuguer~’s user interface.";
 
 "Info.participePasséHeading" = "Participe Passé";
 "Info.participePasséText" = "`Use`
@@ -704,7 +704,7 @@ Examples:
 
 Unlike most other tenses, the impératif only uses three person-number combinations: 2s, 1p, and 2p. For all but four verbs, the 1p and 2p impératif conjugations are identical to their indicatif-présent counterparts.
 
-The 1s conjugations are also identical to their indicatif-présent counterparts except that, if the verb uses the indicatif-présent endings e, es, e, ons, ez, and ent, the s is dropped from the 1s impératif conjugation. Examples:
+The 2s conjugations are also identical to their indicatif-présent counterparts except that, if the verb uses the indicatif-présent endings e, es, e, ons, ez, and ent, the s is dropped from the 2s impératif conjugation. Examples:
 
 parler -> parle
 couvrir -> $couvrE$
@@ -938,21 +938,21 @@ The impératif passé is formed from the impératif form of avoir or être follo
 
 "Info.creditsHeading" = "Credits";
 
-"Info.creditsText" = "Josh Adams developed Conjuguer.
+"Info.creditsText" = "Josh Adams developed ~Conjuguer~. Here is the source code of ~Conjuguer~: https://github.com/vermont42/Conjuguer
 
-Daniel Alston and Larry Sanger proposed and ideated Wiktionary, Conjuguer’s primary source of French-to-English verb translations. Wiktionary content is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. URL: %https://en.wiktionary.org/wiki/Wiktionary:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License%
+Daniel Alston and Larry Sanger proposed and ideated Wiktionary, ~Conjuguer~’s primary source of French-to-English verb translations. Wiktionary content is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. URL: %https://en.wiktionary.org/wiki/Wiktionary:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License%
 
-David Brodsky wrote “French Verbs Made Simple(r)”, which provided two key insights to the developer of Conjuguer. First, conjugations are combinations of stems, sometimes modified, and endings, usually predictable. Second, every French verb is conjugated using a French-verb ~model~. The number of models is ~much~ smaller than the number of irregular verbs.
+David Brodsky wrote “French Verbs Made Simple(r)”, which provided two key insights to the developer of ~Conjuguer~. First, conjugations are combinations of stems, sometimes modified, and endings, usually predictable. Second, every French verb is conjugated using a French-verb ~model~. The number of models is ~much~ smaller than the number of irregular verbs.
 
-Wei Huang created Conjuguer’s font, Work Sans, and licensed it under the Open Font License, available here: %https://scripts.sil.org/cms/scripts/page.php?item_id=OFL-FAQ_web%
+Wei Huang created ~Conjuguer~’s font, Work Sans, and licensed it under the Open Font License, available here: %https://scripts.sil.org/cms/scripts/page.php?item_id=OFL-FAQ_web%
 
-Adam Kilgarriff founded Lexical Computing, the company behind Sketch Engine, which is the source of Conjuguer’s verb-frequency data.
+Adam Kilgarriff founded Lexical Computing, the company behind Sketch Engine, which is the source of ~Conjuguer~’s verb-frequency data.
 
-Xavier Nègre created Lexilogos, a collection of French dictionaries that Conjuguer’s developer used for translations not available in Wiktionary. URL: %https://www.lexilogos.com/english/french_dictionary.htm%
+Xavier Nègre created Lexilogos, a collection of French dictionaries that ~Conjuguer~’s developer used for translations not available in Wiktionary. URL: %https://www.lexilogos.com/english/french_dictionary.htm%
 
-Franz Josef Och architected Google Translate, which Conjuguer’s developer used to translate French definitions of verbs that were in the French, but not the English, Wiktionary. URL: %https://translate.google.com%
+Franz Josef Och architected Google Translate, which ~Conjuguer~’s developer used to translate French definitions of verbs that were in the French, but not the English, Wiktionary. URL: %https://translate.google.com%
 
-Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’ancien français, which Conjuguer uses for conjugation of ester, gésir, issir, and certain other defective verbs. URL: %https://micmap.org/dicfro/introduction/tableaux-de-conjugaison%";
+Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’ancien français, which ~Conjuguer~ uses for conjugation of ester, gésir, issir, and certain other defective verbs. URL: %https://micmap.org/dicfro/introduction/tableaux-de-conjugaison%";
 
 "VerbSort.frequency" = "Frequency";
 "VerbSort.alphabetic" = "Alphabetic";
