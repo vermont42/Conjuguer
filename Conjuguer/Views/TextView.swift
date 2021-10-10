@@ -29,7 +29,7 @@ struct TextView: UIViewRepresentable {
 
 class TextViewDelegate: NSObject, UITextViewDelegate {
   func textView(_ textView: UITextView, shouldInteractWith url: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-    let cleansedUrlString = parenlessString((url.absoluteString.removingPercentEncoding ?? "")).lowercased()
+    let cleansedUrlString = firstLetterLowercasedString(parenlessString((url.absoluteString.removingPercentEncoding ?? "")))
 
     if let infoIndex = Info.headingToIndex(heading: cleansedUrlString) {
       let infoDeepLinkUrlString = URL.conjuguerUrlPrefix + "\(URL.infoHost)/\(infoIndex)"
@@ -39,7 +39,7 @@ class TextViewDelegate: NSObject, UITextViewDelegate {
       }
       return false
     } else if Verb.verbs[cleansedUrlString] != nil {
-      let verbDeepLinkUrlString = URL.conjuguerUrlPrefix + "\(URL.verbHost)/\(parenlessString(url.absoluteString.lowercased()))"
+      let verbDeepLinkUrlString = URL.conjuguerUrlPrefix + "\(URL.verbHost)/\(parenlessString(firstLetterLowercasedString(url.absoluteString)))"
       URL(string: verbDeepLinkUrlString).map {
         UIApplication.shared.open($0)
       }
@@ -53,5 +53,9 @@ class TextViewDelegate: NSObject, UITextViewDelegate {
     input
       .replacingOccurrences(of: "(", with: "")
       .replacingOccurrences(of: ")", with: "")
+  }
+
+  private func firstLetterLowercasedString(_ input: String) -> String {
+    input.prefix(1).lowercased() + input.dropFirst()
   }
 }
