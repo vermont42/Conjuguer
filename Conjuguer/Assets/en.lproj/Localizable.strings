@@ -425,34 +425,34 @@ The passé-simple endings for any verb belong to one of the following categories
 1. Regular ~er~ verbs plus traire (~a~ group): ai, as, a, âmes, âtes, èrent
 
 Examples:
-~parler~: parle, parles, parle, parlons, parlez, parlent
-~traire~: $traYai$, $traYas$, $traYa$, $traYâmes$, $traYâtes$, $traYèrent$
+%parler%: parle, parles, parle, parlons, parlez, parlent
+%traire%: $traYai$, $traYas$, $traYa$, $traYâmes$, $traYâtes$, $traYèrent$
 
 2. Regular ~ir~ verbs, regular ~re~ verbs, and certain irregular verbs (~i~ group): is, is, it, îmes, îtes, irent
 
 Examples:
-~finir~: finis, finis, finit, finissons, finissez, finissent
-~naître~: $naQUis$, $naQUis$, $naQUit$, $naQUîmes$, $naQUîtes$, $naQUirent$
-~rendre~: rendis, rendis, rendit, rendîmes, rendîtes, rendirent
+%finir%: finis, finis, finit, finissons, finissez, finissent
+%naître%: $naQUis$, $naQUis$, $naQUit$, $naQUîmes$, $naQUîtes$, $naQUirent$
+%rendre%: rendis, rendis, rendit, rendîmes, rendîtes, rendirent
 
-3. Haïr and the traditional conjugation of ouïr (~ï~ group): ïs, ïs, ït, ïmes, ïtes, ïrent
+3. %Haïr (Québec)%, %haïr (France)%, %ouïr (modern)%, and %ouïr (trad.)% (~ï~ group): ïs, ïs, ït, ïmes, ïtes, ïrent
 
 Examples:
-~haïr~: haïs, haïs, haït, haïmes, haïtes, haïrent
-~ouïr~: ouïs, ouïs, ouït, ouïmes, ouïtes, ouïrent
+%haïr (Québec)%: haïs, haïs, haït, haïmes, haïtes, haïrent
+%ouïr (modern)%: ouïs, ouïs, ouït, ouïmes, ouïtes, ouïrent
 
 4. Certain irregular verbs (~u~ group): us, us, ut, ûmes, ûtes, urent
 
-~avoir~: $Eus$, $Eus$, $Eut$, $Eûmes$, $Eûtes$, $Eurent$
-~boire~: $Bus$, $Bus$, $But$, $Bûmes$, $Bûtes$, $Burent$
-~être~: $Fus$, $Fus$, $Fut$, $Fûmes$, $Fûtes$, $Furent$
-~lire~: $Lus$, $Lus$, $Lut$, $Lûmes$, $Lûtes$, $Lurent$
+%avoir%: $Eus$, $Eus$, $Eut$, $Eûmes$, $Eûtes$, $Eurent$
+%boire%: $Bus$, $Bus$, $But$, $Bûmes$, $Bûtes$, $Burent$
+%être%: $Fus$, $Fus$, $Fut$, $Fûmes$, $Fûtes$, $Furent$
+%lire%: $Lus$, $Lus$, $Lut$, $Lûmes$, $Lûtes$, $Lurent$
 
 5. Certain irregular verbs (~bare~ group): s, s, t, ^mes, ^tes, rent
 
-~dire~: dis, dis, dit, dîmes, dîtes, dirent
-~exclure~: exclus, exclus, exclut, exclûmes, exclûtes, exclurent
-~venir~: $vIns$, $vIns$, $vInt$, $vÎnmes$, $vÎntes$, $vInrent$";
+%dire%: dis, dis, dit, dîmes, dîtes, dirent
+%exclure%: exclus, exclus, exclut, exclûmes, exclûtes, exclurent
+%venir%: $vIns$, $vIns$, $vInt$, $vÎnmes$, $vÎntes$, $vInrent$";
 
 "Info.imparfaitHeading" = "Imparfait";
 
@@ -476,21 +476,21 @@ The ~imparfait~ (imperfect) is used:
 
 - Gustave Flaubert, Madame Bovary
 
-“Quels hom esteit ne de quel terre il eret” = “Who he was nor what country he was from”
+“Quels hom esteit ne de quel terre il $eRet$” = “Who he was nor what country he was from”
 
 - Turoldus, La Chanson de Roland
 
 `Conjugation`
 
-With one exception, the imparfait stem is the 1p indicatif-présent conjugation, minus -ons. The exception is être, whose imparfait stem is $Ét$.
+With one exception, the imparfait stem is the 1p indicatif-présent conjugation, minus -ons. The exception is %être%, whose imparfait stem is $Ét$.
 
 To the imparfait stem is added ais, ais, ait, ions, iez, or aient.
 
 Examples:
-~être~: $Étais$, $Étais$, $Était$, $Étions$, $Étiez$, $Étaient$
-~étrécir~: étrécissais, étrécissais, étrécissait, étrécissions, étrécissiez, étrécissaient
-~parler~: parlais, parlais, parlait, parlions, parliez, parlaient
-~prendre~: $preNais$, $preNais$, $preNait$, $preNions$, $preNiez$, $preNaient$";
+%être%: $Étais$, $Étais$, $Était$, $Étions$, $Étiez$, $Étaient$
+%étrécir%: étrécissais, étrécissais, étrécissait, étrécissions, étrécissiez, étrécissaient
+%parler%: parlais, parlais, parlait, parlions, parliez, parlaient
+%prendre%: $preNais$, $preNais$, $preNait$, $preNions$, $preNiez$, $preNaient$";
 
 "Info.futurSimpleHeading" = "Futur Simple";
 
@@ -517,10 +517,10 @@ French uses the futur simple in one situation English uses the present indicativ
 The stem of the futur simple is the %radical futur%. To this is added ai, as, a, ons, ez, or ont.
 
 Examples:
-~être~: $AUrai$, $AUras$, $AUra$, $AUrons$, $AUrez$, $AUront$
-~étrécir~: étrécirai, étréciras, étrécira, étrécirons, étrécirez, étréciront
-~parler~: parlerai, parleras, parlera, parlerons, parlerez, parleront
-~prendre~: prendrai, prendras, prendra, prendrons, prendrez, prendront";
+%être%: $AUrai$, $AUras$, $AUra$, $AUrons$, $AUrez$, $AUront$
+%étrécir%: étrécirai, étréciras, étrécira, étrécirons, étrécirez, étréciront
+%parler%: parlerai, parleras, parlera, parlerons, parlerez, parleront
+%prendre%: prendrai, prendras, prendra, prendrons, prendrez, prendront";
 
 "Info.conditionnelPrésentHeading" = "Conditionnel Présent";
 
@@ -534,7 +534,7 @@ In past, indirect discourse about expected, predicted, or hoped-for events.
 
 - Gustave Flaubert, Madame Bovary
 
-To indicate politeness with pouvoir, avoir, and être.
+To indicate politeness with %pouvoir%, %avoir%, and %être%.
 
 “Vous ne $pouRriez$ pas me prêter dix sous?” = “Couldn’t you lend me ten cents?”
 
@@ -555,10 +555,10 @@ In ~si~ clauses about possible or hypothetical situations.
 The stem of the conditionnel présent is the radical futur. To this is added ais, ais, ait, ions, iez, or aient.
 
 Examples:
-~être~: $AUrais$, $AUrais$, $AUrait$, $AUrions$, $AUriez$, $AUraient$
-~étrécir~: étrécirais, étrécirais, étrécirait, étrécirions, étréciriez, étréciraient
-~parler~: parlerais, parlerais, parlerait, parlerions, parleriez, parleraient
-~prendre~: prendrais, prendrais, prendrait, prendrions, prendriez, prendraient";
+%être%: $AUrais$, $AUrais$, $AUrait$, $AUrions$, $AUriez$, $AUraient$
+%étrécir%: étrécirais, étrécirais, étrécirait, étrécirions, étréciriez, étréciraient
+%parler%: parlerais, parlerais, parlerait, parlerions, parleriez, parleraient
+%prendre%: prendrais, prendrais, prendrait, prendrions, prendriez, prendraient";
 
 "Info.subjonctifPrésentHeading" = "Subjonctif Présent";
 
@@ -566,21 +566,25 @@ Examples:
 
 The ~subjonctif présent~ (present subjunctive) is used:
 
-To express opinion, fear, doubt, or obligation. In this case, a clause with ~indicatif présent~ preceeds the ~que~ clause with ~subjonctif présent~.
+To express opinion, fear, or doubt. In this case, a clause with ~indicatif présent~ often preceeds the ~que~ clause with ~subjonctif présent~.
 
-“Vous ne $craiGnez$ pourtant pas que je $fASSe$ des bêtises” = “Fear not that I shall do something foolish.”
+“Sainte Vierge, est-il possible que le bon Dieu $vEUILle$ faire souffrir ainsi une malheureuse créature humaine?” = “Blessed Virgin, is it possible that the good Lord wants to make an unhappy human creature suffer in this way?”
 
-- Émile Zola, L’Assommoir
+- Marcel Proust, Du côté de chez Swann
 
-“Il faut que vous $saCHiez$ mon nom.” = “You need to know my name.”
+“Acceptez donc ici l’hommage de ma gratitude, qui, si grande qu’elle $pUIsse$ être, ne $SEra$ jamais à la hauteur de votre éloquence et de votre dévouement.” = “So accept here the homage of my gratitude, which, however great it may be, will never live up to your eloquence and dedication.”
 
-- Victor Hugo, Notre-Dame de Paris
+- Gustave Flaubert, Madame Bovary
 
-After the conjunctions à condition que, afin que, à moins que, de peur que, pour que, pourvu que, quoique, and sans que.
+After the conjunctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, and ~sans que~.
 
 “[T]out est organisé pour qu’elles ne $pUISSent$ se joindre.” - “Everything is organized so that they cannot join.”
 
 - Gustave Flaubert, Madame Bovary
+
+“[P]ourvu qu’on vive … on n’$A$ point trop à se plaindre.” = “As long as we’$RE$ alive, … we don’t have too much to complain about.”
+
+- Émile Zola, L’Assommoir
 
 To command or exhort.
 
@@ -588,53 +592,58 @@ To command or exhort.
 
 - Marcel Proust, Du côté de chez Swann
 
+“Il faut que vous $saCHiez$ mon nom.” = “You need to know my name.”
+
+- Victor Hugo, Notre-Dame de Paris
+
 `Conjugation`
 
 For most verbs, the subjonctif-présent stem is the 3p stem of the indicatif présent.
 
 Certain irregular subjonctif-présent stems follow. The first stem on each line is for 1s, 2s, 3s, and 3p. The second stem is for 1p and 2p.
 
-avoir -> $aI$/$aY$
-aller -> $aIll$/all
-pouvoir -> $pUISS$/$pUISS$
-faire -> $faSS$/$faSS$
-savoir -> $saCH$/$saCH$
-croire -> croi/$croY$
-boire -> $boiV$/$bUV$
-devoir -> $dOIv$/dev
-prendre -> $prenN$/$preN$
-tenir -> $tIENn$/ten
-venir -> $vIENn$/ven
-voir -> voi/$voY$
-vouloir -> $vEUILl$/voul
+%avoir% -> $aI$/$aY$
+%aller% -> $aIll$/all
+%pouvoir% -> $pUISS$/$pUISS$
+%faire% -> $faSS$/$faSS$
+%savoir% -> $saCH$/$saCH$
+%croire% -> croi/$croY$
+%boire% -> $boiV$/$bUV$
+%devoir% -> $dOIv$/dev
+%prendre% -> $prenN$/$preN$
+%tenir% -> $tIENn$/ten
+%venir% -> $vIENn$/ven
+%voir% -> voi/$voY$
+%vouloir% -> $vEUILl$/voul
 
 To the subjonctif-présent stem is added an ending from one of the following categories.
 
-1. Regular ~er~ verbs, regular ~re~ verbs, certain irregular verbs: e, es, e, ions, iez, ent
+1. Regular ~er~ verbs, regular ~re~ verbs, and certain irregular verbs: e, es, e, ions, iez, ent
 
 Examples:
-~boire~: $boiVe$, $boiVes$, $boiVe$, $bUVions$, $bUViez$, $boiVent$
-~couvrir~: $couvrE$, $couvrEs$, $couvrE$, $couvrIONS$, $couvrIEZ$, $couvrENT$
-~parler~: parle, parles, parle, parlons, parlez, parlent
-~rendre~: rende, rendes, rende, rendions, rendiez, rendent
+%boire%: $boiVe$, $boiVes$, $boiVe$, $bUVions$, $bUViez$, $boiVent$
+%couvrir%: $couvrE$, $couvrEs$, $couvrE$, $couvrIONS$, $couvrIEZ$, $couvrENT$
+%parler%: parle, parles, parle, parlons, parlez, parlent
+%rendre%: rende, rendes, rende, rendions, rendiez, rendent
 
 2. Regular ~ir~ verbs plus maudire: isse, isses, isse, issions, issiez, issent
 
 Examples:
-~alunir~: alunisse, alunisses, alunisse, alunissions, alunissiez, alunissent
-~finir~: finisse, finisses, finisse, finissions, finissiez, finissent
-~maudire~: $maudISSE$, $maudISSES$, $maudISSE$, $maudISSions$, $maudISSiez$, $maudISSent$
+%alunir%: alunisse, alunisses, alunisse, alunissions, alunissiez, alunissent
+%finir%: finisse, finisses, finisse, finissions, finissiez, finissent
+%maudire%: $maudISSE$, $maudISSES$, $maudISSE$, $maudISSions$, $maudISSiez$, $maudISSent$
 
-3. ~Haïr~ as conjugated in both Quebec and France: ïsse, ïsses, ïsse, ïssions, ïssiez, ïssent
+3. %Haïr (France)% and %haïr (Québec)%: ïsse, ïsses, ïsse, ïssions, ïssiez, ïssent
 
-Example:
-haïsse, haïsses, haïsse, haïssions, haïssiez, haïssent";
+Examples:
+%haïr (Québec)%: haïsse, haïsses, haïsse, haïssions, haïssiez, haïssent
+%haïr (France)%: haïsse, haïsses, haïsse, haïssions, haïssiez, haïssent";
 
 "Info.subjonctifImparfaitHeading" = "Subjonctif Imparfait";
 
 "Info.subjonctifImparfaitText" = "`Use`
 
-The ~subjonctif imparfait~ (imperfect subjunctive) is used after the conjunctions à condition que, afin que, à moins que, de peur que, pour que, pourvu que, quoique, and sans que ~when~ the main clause uses passé simple or imparfait. Use of the subjonctif imparfait is rare in contemporary French.
+The ~subjonctif imparfait~ (imperfect subjunctive) is used after the conjunctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, and ~sans que~ when the main clause uses %passé simple% or %imparfait%. Use of the subjonctif imparfait is rare in contemporary French.
 
 Examples:
 
@@ -652,37 +661,37 @@ The stem of the subjonctif imparfait is identical to that of the passé simple.
 
 The subjonctif-imparfait endings for any verb belong to one of the following categories, which are analogous to the five passé-simple categories.
 
-1. Regular ~er~ verbs plus traire (~a~ group): asse, asses, ât, assions, assiez, assent
+1. Regular ~er~ verbs plus %traire% (~a~ group): asse, asses, ât, assions, assiez, assent
 
 Examples:
-~parler~: parlasse, parlasses, parlât, parlassions, parlassiez, parlassent
-~traire~: $traYasse$, $traYasses$, $traYât$, $traYassions$, $traYassiez$, $traYassent$
+%parler%: parlasse, parlasses, parlât, parlassions, parlassiez, parlassent
+%traire%: $traYasse$, $traYasses$, $traYât$, $traYassions$, $traYassiez$, $traYassent$
 
 2. Regular ~ir~ verbs, regular ~re~ verbs, and certain irregular verbs (~i~ group): isse, isses, ît, issions, issiez, issent
 
 Examples:
-~finir~: finisse, finisses, finît, finissions, finissiez, finissent
-~naître~: $naQUisse$, $naQUisses$, $naQUît$, $naQUissions$, $naQUissiez$, $naQUissent$
-~rendre~: rendisse, rendisses, rendît, rendissions, rendissiez, rendissent
+%finir%: finisse, finisses, finît, finissions, finissiez, finissent
+%naître%: $naQUisse$, $naQUisses$, $naQUît$, $naQUissions$, $naQUissiez$, $naQUissent$
+%rendre%: rendisse, rendisses, rendît, rendissions, rendissiez, rendissent
 
-3. Haïr and the traditional conjugation of ouïr (~ï~ group): ïsse, ïsses, ït, ïssions, ïssiez, ïssent
+3. %Haïr (France)%, %haïr Québec%, and %ouïr (trad.)% (~ï~ group): ïsse, ïsses, ït, ïssions, ïssiez, ïssent
 
 Examples:
-~haïr~: haïsse, haïsses, haït, haïssions, haïssiez, haïssent
-~ouïr~: ouïsse, ouïsses, ouït, ouïssions, ouïssiez, ouïssent
+%haïr (France)%: haïsse, haïsses, haït, haïssions, haïssiez, haïssent
+%ouïr (trad.)%: ouïsse, ouïsses, ouït, ouïssions, ouïssiez, ouïssent
 
 4. Certain irregular verbs (~u~ group): usse, usses, ût, ussions, ussiez, ussent
 
-~avoir~: $Eusse$, $Eusses$, $Eût$, $Eussions$, $Eussiez$, $Eussent$
-~boire~: $Busse$, $Busses$, $Bût$, $Bussions$, $Bussiez$, $Bussent$
-~être~: $Fusse$, $Fusses$, $Fût$, $Fussions$, $Fussiez$, $Fussent$
-~lire~: $Lusse$, $Lusses$, $Lût$, $Lussions$, $Lussiez$, $Lussent$
+%avoir%: $Eusse$, $Eusses$, $Eût$, $Eussions$, $Eussiez$, $Eussent$
+%boire%: $Busse$, $Busses$, $Bût$, $Bussions$, $Bussiez$, $Bussent$
+%être%: $Fusse$, $Fusses$, $Fût$, $Fussions$, $Fussiez$, $Fussent$
+%lire%: $Lusse$, $Lusses$, $Lût$, $Lussions$, $Lussiez$, $Lussent$
 
 5. Certain irregular verbs (~bare~ group): sse, sses, ^t, ssions, ssiez, ssent
 
-~dire~: disse, disses, dît, dissions, dissiez, dissent
-~exclure~: exclusse, exclusses, exclût, exclssions, exclussiez, exclussent
-~venir~: $vInsse$, $vInsses$, $vÎnt$, $vInssions$, $vInssiez$, $vInssent$";
+%dire%: disse, disses, dît, dissions, dissiez, dissent
+%exclure%: exclusse, exclusses, exclût, exclssions, exclussiez, exclussent
+%venir%: $vInsse$, $vInsses$, $vÎnt$, $vInssions$, $vInssiez$, $vInssent$";
 
 "Info.impératifHeading" = "Impératif";
 
