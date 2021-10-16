@@ -2815,13 +2815,13 @@ class VerbModelTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["issirai", "issiras", "issira", "issirons", "issirez", "issiront"] {
+    for conjugation in ["isTrai", "isTras", "isTra", "isTrons", "isTrez", "isTront"] {
       T.testConjugation(infinitif: "issir", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["issirais", "issirais", "issirait", "issirions", "issiriez", "issiraient"] {
+    for conjugation in ["isTrais", "isTrais", "isTrait", "isTrions", "isTriez", "isTraient"] {
       T.testConjugation(infinitif: "issir", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count

@@ -138,13 +138,15 @@ struct InputView: View {
 
     let personNumbers: [PersonNumber] = PersonNumber.allCases
 
+    let conjugationFailed = "Conjugation failed."
+
     for personNumber in personNumbers {
       let présentResult = Conjugator.conjugate(infinitif: verb, tense: .indicatifPrésent(personNumber), extraLetters: extraLetters)
       switch présentResult {
       case .success(let value):
         output += "\(value) "
       default:
-        fatalError()
+        fatalError(conjugationFailed)
       }
     }
 
@@ -156,7 +158,7 @@ struct InputView: View {
       case .success(let value):
         output += "\(value) "
       default:
-        fatalError()
+        fatalError(conjugationFailed)
       }
     }
 
@@ -168,7 +170,7 @@ struct InputView: View {
       case .success(let value):
         output += "\(value) "
       default:
-        fatalError()
+        fatalError(conjugationFailed)
       }
     }
 
@@ -180,7 +182,7 @@ struct InputView: View {
       case .success(let value):
         output += "\(value) "
       default:
-        fatalError()
+        fatalError(conjugationFailed)
       }
     }
 
@@ -192,7 +194,7 @@ struct InputView: View {
       case .success(let value):
         output += "\(value) "
       default:
-        fatalError()
+        fatalError(conjugationFailed)
       }
     }
 
@@ -204,7 +206,7 @@ struct InputView: View {
       case .success(let value):
         output += "\(value) "
       default:
-        fatalError()
+        fatalError(conjugationFailed)
       }
     }
 
@@ -216,7 +218,7 @@ struct InputView: View {
       case .success(let value):
         output += "\(value) "
       default:
-        fatalError()
+        fatalError(conjugationFailed)
       }
     }
 
@@ -226,7 +228,7 @@ struct InputView: View {
     case .success(let value):
       participePassé = value
     default:
-      fatalError()
+      fatalError(conjugationFailed)
     }
     output += "  •  PAST PARTICIPLE: \(participePassé) "
 
@@ -236,7 +238,7 @@ struct InputView: View {
     case .success(let value):
       participePrésent = value
     default:
-      fatalError()
+      fatalError(conjugationFailed)
     }
     output += " •  PRESENT PARTICIPLE: \(participePrésent) "
 
@@ -248,7 +250,7 @@ struct InputView: View {
       case .success(let value):
         output += "\(value) "
       default:
-        fatalError()
+        fatalError(conjugationFailed)
       }
     }
 
@@ -257,7 +259,7 @@ struct InputView: View {
     case .success(let value):
       output += " •  FUTURE STEM: \(value) "
     default:
-      fatalError()
+      fatalError(conjugationFailed)
     }
 
     if

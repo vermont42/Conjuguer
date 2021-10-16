@@ -42,7 +42,9 @@ struct VerbModel: Hashable {
       return try AttributedString(markdown: verbs.map {
         let encodedVerb = $0.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? ""
         return "[\($0)](\(URL.conjuguerUrlPrefix + URL.verbHost)/\(encodedVerb))"
-      }.joined(separator: ", "))
+      }
+        .joined(separator: ", ")
+      )
     } catch {
       return AttributedString("")
     }

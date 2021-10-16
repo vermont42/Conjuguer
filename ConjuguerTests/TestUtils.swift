@@ -53,9 +53,12 @@ class VerbModelTests: XCTestCase {
 
     var completedTestCount = 0
 
-    for model in Array(VerbModel.models.values).sorted(by: { lhs, rhs in
-      return lhs.exemplar.caseInsensitiveCompare(rhs.exemplar) == .orderedAscending
-    }) {
+    let models = Array(VerbModel.models.values).sorted(by: { lhs, rhs in
+        return lhs.exemplar.caseInsensitiveCompare(rhs.exemplar) == .orderedAscending
+      }
+    )
+
+    for model in models {
       var output = "  func test" + model.exemplar.capitalizingFirstLetter() + (model.extraLetters?.replacingOccurrences(of: ".", with: "").capitalizingFirstLetter() ?? "") + "() {\n    // ID: \(model.id)\n    var personNumbersIndex = 0\n\n"
       let extraLettersComponent: String
       if let extraLetters = model.extraLetters {

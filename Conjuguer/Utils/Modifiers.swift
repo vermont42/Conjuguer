@@ -43,7 +43,8 @@ struct CustomNavigationBarItems: ViewModifier {
             Text(L.Navigation.back + "  ")
               .modifier(ButtonLabel())
           }
-        })
+        }
+      )
   }
 }
 

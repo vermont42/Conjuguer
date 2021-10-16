@@ -178,7 +178,8 @@ struct DefectGroup {
       .subjonctifPassé(.firstSingular), .subjonctifPassé(.secondSingular), .subjonctifPassé(.thirdSingular), .subjonctifPassé(.firstPlural), .subjonctifPassé(.secondPlural), .subjonctifPassé(.thirdPlural),
       .subjonctifPlusQueParfait(.firstSingular), .subjonctifPlusQueParfait(.secondSingular), .subjonctifPlusQueParfait(.thirdSingular), .subjonctifPlusQueParfait(.firstPlural), .subjonctifPlusQueParfait(.secondPlural), .subjonctifPlusQueParfait(.thirdPlural),
       .impératifPassé(.secondSingular), .impératifPassé(.firstPlural), .impératifPassé(.secondPlural)
-    ].forEach {
+    ]
+    .forEach {
       defects[$0] = value
     }
   }
@@ -202,7 +203,8 @@ struct DefectGroup {
       .subjonctifPassé(personNumber),
       .subjonctifPlusQueParfait(personNumber),
       .impératifPassé(personNumber)
-    ].forEach {
+    ]
+    .forEach {
       defects[$0] = defective
     }
   }

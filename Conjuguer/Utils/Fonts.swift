@@ -25,7 +25,7 @@ func displayFontFamilyNames() {
   }
 }
 
-struct Fonts {
+enum Fonts {
   static let heading = UIFont(name: workSansSemiBold, size: 24.0) ?? safeFont
   static let subheading = UIFont(name: workSansSemiBold, size: 18.0) ?? safeFont
   static let body = UIFont(name: workSansRegular, size: 16.0) ?? safeFont

@@ -13,10 +13,10 @@ struct TextView: UIViewRepresentable {
   let textViewDelegate = TextViewDelegate()
 
   func makeUIView(context: Context) -> UITextView {
-    let v = UITextView()
-    v.isEditable = false
-    v.contentOffset = .zero
-    return v
+    let textView = UITextView()
+    textView.isEditable = false
+    textView.contentOffset = .zero
+    return textView
   }
 
   func updateUIView(_ uiView: UITextView, context: Context) {

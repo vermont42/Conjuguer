@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Conjugator {
+enum Conjugator {
   static func conjugate(infinitif: String, tense: Tense, extraLetters: String?) -> Result<String, ConjugatorError> {
     guard infinitif.count >= Verb.minVerbLength else {
       return .failure(.verbTooShort)
