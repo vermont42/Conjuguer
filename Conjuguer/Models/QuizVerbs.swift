@@ -2,7 +2,7 @@
 //  QuizVerbs.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 10/10/21.
+//  Created by Josh Adams on 10/10/21.
 //
 
 import Foundation
