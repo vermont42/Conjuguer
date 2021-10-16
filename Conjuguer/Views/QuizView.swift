@@ -2,7 +2,7 @@
 //  QuizView.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 9/30/21.
+//  Created by Josh Adams on 9/30/21.
 //
 
 import SwiftUI

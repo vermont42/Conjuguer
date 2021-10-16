@@ -2,7 +2,7 @@
 //  URLExtensions.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 9/20/21.
+//  Created by Josh Adams on 9/20/21.
 //
 
 import Foundation
