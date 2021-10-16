@@ -285,16 +285,16 @@ Certain verbs have irregular radicaux futurs. They are:
 %avoir% -> $aUr$-
 %choir% -> $chERr$-*
 %dépecer% -> $dépÈcer$-
+%devoir% -> $devR$-
 %employer% -> $emploIer$-
+%envoyer% -> $envERr$-
 %être% -> $SEr$-
 %faire% -> $fEr$-
 %faillir% -> $faUDr$-*
+%falloir% -> $faUDr$-
 %issir% -> $isTr$-
 %jeter% -> $jetTer$-
 %pouvoir% -> $pouRr$-
-%devoir% -> $devR$-
-%falloir% -> $faUDr$-
-%envoyer% -> $envERr$-
 %mouvoir% -> $mouvR$-
 %ouïr (trad.)% -> $Oir$-* or $oRr$-*
 %payer% -> $paIer$-*
@@ -715,17 +715,17 @@ Unlike most other tenses, the impératif only uses three person-number combinati
 
 The 2s conjugations are also identical to their indicatif-présent counterparts except that, if the verb uses the indicatif-présent endings e, es, e, ons, ez, and ent, the s is dropped from the 2s impératif conjugation. Examples:
 
-parler -> parle
-couvrir -> $couvrE$
+%parler% -> parle
+%couvrir% -> $couvrE$
 
 Four verbs are exceptional in that they use subjonctif-présent stems for the impératif.
 
-être: $SOIS$, $SOYons$, $SOYez$
-avoir: $AIE$, $AYons$, $AYez$
-savoir: $saCHE$, $saCHons$, $saCHez$
-vouloir: $vEUILle$/$vEUX$, voulons, $vEUILlez$/voulez
+%être%: $SOIS$, $SOYons$, $SOYez$
+%avoir%: $AIE$, $AYons$, $AYez$
+%savoir%: $saCHE$, $saCHons$, $saCHez$
+%vouloir%: $vEUILle$/$vEUX$, voulons, $vEUILlez$/voulez
 
-The $vEUILle$/$vEUILlez$ conjugations of vouloir are used for polite requests.
+The $vEUILle$/$vEUILlez$ conjugations of %vouloir% are used for polite requests.
 
 “[V]$EUILlez$ monter sur l’épaule de ce garçon.” = “Please step on that boy’s shoulder.”
 
@@ -753,7 +753,7 @@ Examples:
 
 - Honoré de Balzac, Le père Goriot
 
-This second example demonstrates why être, the most common French verb, rarely uses the passé composé. Past state is usually expressed with the imparfait, not the passé composé. Être ~does~ use the passé composé for the passive voice, as demonstrated below.
+This second example demonstrates why %être%, the most popular French verb, rarely uses the passé composé. Past state is usually expressed with the %imparfait%, not the passé composé. %Être% ~does~ use the passé composé for the passive voice, as demonstrated below.
 
 “Lorsque l’Assommoir $A$ $paRu$ dans $uN$ journal, il a $ÉtÉ$ attaqué avec une brutalité sans exemple, dénoncé, chargé de tous les crimes.” = “When ‘The Drinking Den’ appeared in a newspaper, it $WAS$ denounced, charged with every crime, and attacked with unprecedented brutality.”
 
@@ -761,7 +761,7 @@ This second example demonstrates why être, the most common French verb, rarely 
 
 `Conjugation`
 
-The passé composé is formed from the présent-indicatif form of avoir or être followed by the participe passé. The section ~Agreement~ of this app’s description of the participe passé has information on choice of auxiliary and possible gender-and-number agreement.";
+The passé composé is formed from the %indicatif présent% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.plusQueParfaitHeading" = "Plus-que-parfait";
 
@@ -771,7 +771,7 @@ The ~Plus-que-parfait~ (pluperfect) is used for situations existing prior to a f
 
 Examples:
 
-“Si vous saviez … tout ce que j’avais rêvé!” = “If you only knew ... everything I had dreamed of!”
+“Si vous saviez … tout ce que j’avais rêvé!” = “If you only knew … everything I had dreamed of!”
 
 - Gustave Flaubert, Madame Bovary
 
@@ -781,7 +781,7 @@ Examples:
 
 `Conjugation`
 
-The plus-que-parfait is formed from the imparfait form of avoir or être followed by the participe passé. The section ~Agreement~ of this app’s description of the participe passé has information on choice of auxiliary and possible gender-and-number agreement.";
+The plus-que-parfait is formed from the %imparfait% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.passéAntérieurHeading" = "Passé Antérieur";
 
@@ -801,7 +801,7 @@ Examples:
 
 `Conjugation`
 
-The passé antérieur is formed from the passé-simple form of avoir or être followed by the participe passé. The section ~Agreement~ of this app’s description of the participe passé has information on choice of auxiliary and possible gender-and-number agreement.";
+The passé antérieur is formed from the %passé simple% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.passéSurcomposéHeading" = "Passé Surcomposé";
 
@@ -821,7 +821,7 @@ Examples:
 
 `Conjugation`
 
-The passé surcomposé is formed from the passé composé form of avoir or être followed by the participe passé. The section ~Agreement~ of this app’s description of the participe passé has information on choice of auxiliary and possible gender-and-number agreement.";
+The passé surcomposé is formed from the %passé composé% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.futurAntérieurHeading" = "Futur Antérieur";
 
@@ -841,7 +841,7 @@ Examples:
 
 `Conjugation`
 
-The futur antérieur is formed from the futur-simple form of avoir or être followed by the participe passé. The section ~Agreement~ of this app’s description of the participe passé has information on choice of auxiliary and possible gender-and-number agreement.";
+The futur antérieur is formed from the %futur simple% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.conditionnelPasséHeading" = "Conditionnel Passé";
 
@@ -861,7 +861,7 @@ Examples:
 
 `Conjugation`
 
-The conditionnel passé is formed from the conditionnel-présent form of avoir or être followed by the participe passé. The section ~Agreement~ of this app’s description of the participe passé has information on choice of auxiliary and possible gender-and-number agreement.";
+The conditionnel passé is formed from the %conditionnel présent% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.subjonctifPasséHeading" = "Subjonctif Passé";
 
@@ -881,7 +881,7 @@ Examples:
 
 `Conjugation`
 
-The subjonctif passé is formed from the subjonctif-présent form of avoir or être followed by the participe passé. The section ~Agreement~ of this app’s description of the participe passé has information on choice of auxiliary and possible gender-and-number agreement.";
+The subjonctif passé is formed from the %subjonctif présent% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.subjonctifPlusQueParfaitHeading" = "Subjonctif Plus-que-parfait";
 
@@ -901,7 +901,7 @@ Examples:
 
 `Conjugation`
 
-The subjonctif plus-que-parfait is formed from the subjonctif-imparfait form of avoir or être followed by the participe passé. The section ~Agreement~ of this app’s description of the participe passé has information on choice of auxiliary and possible gender-and-number agreement.";
+The subjonctif plus-que-parfait is formed from the %subjonctif imparfait% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.impératifPasséHeading" = "Impératif Passé";
 
@@ -921,7 +921,7 @@ Examples:
 
 `Conjugation`
 
-The impératif passé is formed from the impératif form of avoir or être followed by the participe passé. The section ~Agreement~ of this app’s description of the participe passé has information on choice of auxiliary and possible gender-and-number agreement.";
+The impératif passé is formed from the %impératif% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.questionsAndResponsesHeading" = "Questions and Responses";
 
@@ -935,11 +935,11 @@ The impératif passé is formed from the impératif form of avoir or être follo
 
 ~Q:~ Why does ~Conjuguer~ mostly use French names for tenses rather than English, for example, ~indicatif présent~ rather than ~present indicative~?
 
-~A:~ Admittedly, English tense names would perhaps be more approachable for the learner in certain cases, for example, ~radical futur~. English speakers might better understand the term ~future stem~. But perhaps because of his years working as a lawyer, ~Conjuguer~’s developer values precision in language. English tense names map imperfectly to French tenses. For example, the English ~present indicative~ has more limited uses than the French ~indicatif présent~.
+~A:~ Admittedly, English tense names would perhaps be more approachable for the learner in certain cases, for example, %radical futur%. English speakers might better understand the term ~future stem~. But perhaps because of his years working as a lawyer, ~Conjuguer~’s developer values precision in language. English tense names map imperfectly to French tenses. For example, the English ~present indicative~ has more limited uses than the French %indicatif présent%. The English term is therefore an imprecise match for the French tense.
 
-~Q:~ I’ve seen the terms “mood” and “aspect” in descriptions of verb tenses, but ~Conjuguer~ does not use these terms. Also, the participe passé, participe présent, and radical futur are not really tenses.
+~Q:~ I’ve seen the terms “mood” and “aspect” in descriptions of verb tenses, but ~Conjuguer~ does not use these terms. Also, the %participe passé%, %participe présent%, and %radical futur% are not really tenses.
 
-~A:~ Was that a question? You are correct that ~Conjuguer~ does not use these two terms, and those three things are not usually described as “tenses”. With respect to terminology, bear in mind that ~Conjuguer~’s purpose is to teach French-verb conjugation, not to teach English French-verb-conjugation nomenclature. With respect to the participe passé, participe présent, and radical futur, ~Conjuguer~’s developer does consider those three things to be tenses, if “tense” is taken to mean “a systematic way of changing verbs for a specific purpose”. This definition, though absent, on information and belief, from any dictionary, serves ~Conjuguer~’s pedagogical purpose well enough.
+~A:~ Was that a question? You are correct that ~Conjuguer~ does not use these two terms, and those three things are not usually described as “tenses”. With respect to terminology, bear in mind that ~Conjuguer~’s purpose is to teach French-verb conjugation, not to teach English French-verb-conjugation nomenclature. With respect to the %participe passé%, %participe présent%, and %radical futur%, ~Conjuguer~’s developer does consider those three things to be tenses, if “tense” is taken to mean “a systematic way of changing verbs for a specific purpose”. This definition, though absent, on information and belief, from any dictionary, serves ~Conjuguer~’s pedagogical purpose well enough.
 
 ~Q:~ Why aren’t there more recent examples of uses of the tenses?
 
