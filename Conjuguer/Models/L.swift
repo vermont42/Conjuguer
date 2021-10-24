@@ -118,6 +118,12 @@ enum L {
     }
   }
 
+  enum Quiz {
+    static var gameCenterFailure: String {
+      NSLocalizedString("Quiz.gameCenterFailure", comment: "")
+    }
+  }
+
   enum Info {
     static var dedicationHeading: String {
       NSLocalizedString("Info.dedicationHeading", comment: "")

@@ -7,7 +7,6 @@
 //  Copyright © 2019 Josh Adams. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
 
 #if targetEnvironment(simulator)
@@ -18,30 +17,37 @@ var Current = World.device
 
 class World: ObservableObject {
   @Published var settings: Settings
+  @Published var gameCenter: GameCenterable
+  @Published var quiz: Quiz
   @Published var verb: Verb?
   @Published var verbModel: VerbModel?
   @Published var info: Info?
 
-  init(settings: Settings) {
+  init(settings: Settings, gameCenter: GameCenterable, quiz: Quiz) {
     self.settings = settings
+    self.gameCenter = gameCenter
+    self.quiz = quiz
   }
 
   static let device: World = {
     let settings = Settings(getterSetter: UserDefaultsGetterSetter())
-
-    return World(settings: settings)
+    let gameCenter = TestGameCenter() // TODO: Use real one.
+    let quiz = Quiz(gameCenter: gameCenter)
+    return World(settings: settings, gameCenter: gameCenter, quiz: quiz)
   }()
 
   static let simulator: World = {
     let settings = Settings(getterSetter: UserDefaultsGetterSetter())
-
-    return World(settings: settings)
+    let gameCenter = TestGameCenter() // TODO: Use real one.
+    let quiz = Quiz(gameCenter: gameCenter)
+    return World(settings: settings, gameCenter: gameCenter, quiz: quiz)
   }()
 
   static let unitTest: World = {
     let settings = Settings(getterSetter: DictionaryGetterSetter())
-
-    return World(settings: settings)
+    let gameCenter = TestGameCenter()
+    let quiz = Quiz(gameCenter: gameCenter)
+    return World(settings: settings, gameCenter: gameCenter, quiz: quiz)
   }()
 
   func handleURL(_ url: URL) {

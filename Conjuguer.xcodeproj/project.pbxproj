@@ -28,6 +28,10 @@
 		03653F0325EC4F5A00A34267 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03653F0225EC4F5A00A34267 /* Modifiers.swift */; };
 		03653F1025EC67DF00A34267 /* VerbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03653F0F25EC67DF00A34267 /* VerbView.swift */; };
 		036A993027138ACD00C6C984 /* QuizVerbs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036A992F27138ACD00C6C984 /* QuizVerbs.swift */; };
+		036A9932271B8AF700C6C984 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036A9931271B8AF700C6C984 /* Quiz.swift */; };
+		036A99342726144600C6C984 /* QuizState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036A99332726144600C6C984 /* QuizState.swift */; };
+		036A99362726166F00C6C984 /* GameCenterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036A99352726166F00C6C984 /* GameCenterable.swift */; };
+		036A99382726168900C6C984 /* TestGameCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036A99372726168900C6C984 /* TestGameCenter.swift */; };
 		036DB78E259FD6500013C3B7 /* ConjuguerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB78D259FD6500013C3B7 /* ConjuguerApp.swift */; };
 		036DB790259FD6500013C3B7 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB78F259FD6500013C3B7 /* InputView.swift */; };
 		036DB792259FD6510013C3B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 036DB791259FD6510013C3B7 /* Assets.xcassets */; };
@@ -110,6 +114,10 @@
 		03653F0225EC4F5A00A34267 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		03653F0F25EC67DF00A34267 /* VerbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbView.swift; sourceTree = "<group>"; };
 		036A992F27138ACD00C6C984 /* QuizVerbs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizVerbs.swift; sourceTree = "<group>"; };
+		036A9931271B8AF700C6C984 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
+		036A99332726144600C6C984 /* QuizState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizState.swift; sourceTree = "<group>"; };
+		036A99352726166F00C6C984 /* GameCenterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterable.swift; sourceTree = "<group>"; };
+		036A99372726168900C6C984 /* TestGameCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestGameCenter.swift; sourceTree = "<group>"; };
 		036DB78A259FD6500013C3B7 /* Conjuguer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conjuguer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		036DB78D259FD6500013C3B7 /* ConjuguerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConjuguerApp.swift; sourceTree = "<group>"; };
 		036DB78F259FD6500013C3B7 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -250,6 +258,8 @@
 				035D979626B74C820089083C /* L.swift */,
 				036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */,
 				036DB7EC25A1070D0013C3B7 /* PersonNumber.swift */,
+				036A9931271B8AF700C6C984 /* Quiz.swift */,
+				036A99332726144600C6C984 /* QuizState.swift */,
 				036A992F27138ACD00C6C984 /* QuizVerbs.swift */,
 				03C2CAC42619125200CFA825 /* Sound.swift */,
 				036DB7E325A0DD9B0013C3B7 /* StemAlteration.swift */,
@@ -281,6 +291,7 @@
 				037367FE25D5C3EB008BDF46 /* ConjugationText.swift */,
 				0373683025DC672F008BDF46 /* DictionaryGetterSetter.swift */,
 				032D267526C02FAB00AE1BD1 /* Fonts.swift */,
+				036A99352726166F00C6C984 /* GameCenterable.swift */,
 				0373682E25DC672F008BDF46 /* GetterSetter.swift */,
 				0373683D25DD79A4008BDF46 /* ModelSort.swift */,
 				03653F0225EC4F5A00A34267 /* Modifiers.swift */,
@@ -288,6 +299,7 @@
 				0373682425DC65B2008BDF46 /* Settings.swift */,
 				03C2CAC32619125200CFA825 /* SoundPlayer.swift */,
 				03309F6826BC9E72003E4F92 /* StringExtensions.swift */,
+				036A99372726168900C6C984 /* TestGameCenter.swift */,
 				03309F6B26BCA0B0003E4F92 /* UIFontExtension.swift */,
 				0339B50826F9053500F63ADC /* URLExtensions.swift */,
 				0373682F25DC672F008BDF46 /* UserDefaultsGetterSetter.swift */,
@@ -470,6 +482,7 @@
 				03FA474A27060D6C00131205 /* SettingsView.swift in Sources */,
 				03309F6926BC9E72003E4F92 /* NSAttributedStringExtension.swift in Sources */,
 				036A993027138ACD00C6C984 /* QuizVerbs.swift in Sources */,
+				036A9932271B8AF700C6C984 /* Quiz.swift in Sources */,
 				032B122326BA02D8000E70CA /* InfoBrowseView.swift in Sources */,
 				036DB7EE25A1070D0013C3B7 /* PersonNumber.swift in Sources */,
 				036DB7E425A0DD9B0013C3B7 /* StemAlteration.swift in Sources */,
@@ -481,6 +494,7 @@
 				036DB7FB25A13C110013C3B7 /* ConjugatorError.swift in Sources */,
 				03ACA9F725A9FD4400CF5390 /* Imparfait.swift in Sources */,
 				03309F6A26BC9E72003E4F92 /* StringExtensions.swift in Sources */,
+				036A99382726168900C6C984 /* TestGameCenter.swift in Sources */,
 				038E0B032690A016002A71EF /* DefectGroupParser.swift in Sources */,
 				036DB790259FD6500013C3B7 /* InputView.swift in Sources */,
 				03309F6626BC9C95003E4F92 /* Info.swift in Sources */,
@@ -506,7 +520,9 @@
 				0373682525DC65B2008BDF46 /* Settings.swift in Sources */,
 				0373681625DB8530008BDF46 /* VerbBrowseView.swift in Sources */,
 				0373683225DC672F008BDF46 /* UserDefaultsGetterSetter.swift in Sources */,
+				036A99362726166F00C6C984 /* GameCenterable.swift in Sources */,
 				0373683325DC672F008BDF46 /* DictionaryGetterSetter.swift in Sources */,
+				036A99342726144600C6C984 /* QuizState.swift in Sources */,
 				036DB7ED25A1070D0013C3B7 /* Tense.swift in Sources */,
 				0373684525DD809C008BDF46 /* ModelBrowseView.swift in Sources */,
 				036DB7BE259FD67C0013C3B7 /* VerbModel.swift in Sources */,
