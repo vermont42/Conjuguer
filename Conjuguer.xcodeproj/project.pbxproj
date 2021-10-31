@@ -15,6 +15,7 @@
 		032D267426BDF5E000AE1BD1 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D267326BDF5E000AE1BD1 /* TextView.swift */; };
 		032D267626C02FAB00AE1BD1 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D267526C02FAB00AE1BD1 /* Fonts.swift */; };
 		032D267826C0DD6200AE1BD1 /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 032D267726C0DD6200AE1BD1 /* WorkSans-SemiBold.ttf */; };
+		032DBC46272E0D4500D5804C /* gun.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 032DBC45272E0D4500D5804C /* gun.mp3 */; };
 		03309F6626BC9C95003E4F92 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03309F6526BC9C95003E4F92 /* Info.swift */; };
 		03309F6926BC9E72003E4F92 /* NSAttributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03309F6726BC9E72003E4F92 /* NSAttributedStringExtension.swift */; };
 		03309F6A26BC9E72003E4F92 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03309F6826BC9E72003E4F92 /* StringExtensions.swift */; };
@@ -100,6 +101,7 @@
 		032D267326BDF5E000AE1BD1 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		032D267526C02FAB00AE1BD1 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		032D267726C0DD6200AE1BD1 /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		032DBC45272E0D4500D5804C /* gun.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gun.mp3; sourceTree = "<group>"; };
 		03309F6526BC9C95003E4F92 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		03309F6726BC9E72003E4F92 /* NSAttributedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtension.swift; sourceTree = "<group>"; };
 		03309F6826BC9E72003E4F92 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 		03C2CACA261912AA00CFA825 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				032DBC45272E0D4500D5804C /* gun.mp3 */,
 				036DB791259FD6510013C3B7 /* Assets.xcassets */,
 				03C2CAD52619160C00CFA825 /* chime.mp3 */,
 				03DDCF9726CAE47500123BB0 /* LaunchScreen.storyboard */,
@@ -426,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				033EAA182630A36B0055B313 /* WorkSans.ttf in Resources */,
+				032DBC46272E0D4500D5804C /* gun.mp3 in Resources */,
 				03C2CACE261912EA00CFA825 /* sadTrombone.mp3 in Resources */,
 				038E0AF9268D0E02002A71EF /* defectGroups.xml in Resources */,
 				036DB795259FD6510013C3B7 /* Preview Assets.xcassets in Resources */,

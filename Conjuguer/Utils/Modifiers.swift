@@ -141,6 +141,10 @@ extension View {
     modifier(HeadingLabel())
   }
 
+  func buttonLabel() -> some View {
+    modifier(ButtonLabel())
+  }
+
   func customNavigationBarItems() -> some View {
     modifier(CustomNavigationBarItems())
   }

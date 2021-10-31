@@ -8,8 +8,8 @@
 import SwiftUI
 
 class Quiz: ObservableObject {
-  private(set) var quizState = QuizState.notStarted
-  private(set) var elapsedTime: Int = 0
+  @Published private(set) var quizState = QuizState.notStarted
+  @Published private(set) var elapsedTime: Int = 0
   private(set) var score: Int = 0
   private(set) var currentQuestionIndex = 0
   private(set) var proposedAnswers: [String] = []
@@ -17,6 +17,7 @@ class Quiz: ObservableObject {
   private(set) var questions: [(String, Tense, PersonNumber)] = []
 
   private var timer: Timer?
+  private var timer2: Timer?
   private var gameCenter: GameCenterable?
   private var shouldShuffle = true
 
@@ -46,5 +47,26 @@ class Quiz: ObservableObject {
   init(gameCenter: GameCenterable, shouldShuffle: Bool = true) {
     self.gameCenter = gameCenter
     self.shouldShuffle = shouldShuffle
+  }
+
+  func start() {
+    quizState = .inProgress
+    elapsedTime = 0
+    timer = Timer.scheduledTimer(
+      withTimeInterval: 1.0,
+      repeats: true,
+      block: { [weak self] _ in
+        self?.elapsedTime += 1
+      }
+    )
+  }
+
+  func quit() {
+    timer?.invalidate()
+    quizState = .notStarted
+  }
+
+  @objc func eachSecond() {
+    elapsedTime += 1
   }
 }

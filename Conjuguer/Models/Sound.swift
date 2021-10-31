@@ -7,6 +7,7 @@
 //
 
 enum Sound: String {
+  case gun
   case chime
   case sadTrombone
 }
