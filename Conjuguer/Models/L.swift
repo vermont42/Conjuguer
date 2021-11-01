@@ -122,6 +122,18 @@ enum L {
     static var gameCenterFailure: String {
       NSLocalizedString("Quiz.gameCenterFailure", comment: "")
     }
+
+    static var none: String {
+      NSLocalizedString("Quiz.none", comment: "")
+    }
+
+    static var quizComplete: String {
+      NSLocalizedString("Quiz.quizComplete", comment: "")
+    }
+
+    static var cool: String {
+      NSLocalizedString("Quiz.cool", comment: "")
+    }
   }
 
   enum Info {

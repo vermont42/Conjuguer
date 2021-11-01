@@ -54,7 +54,6 @@ class FrequencyParser: NSObject, XMLParserDelegate {
       let suffix = currentStr.suffix(2)
       if ["er", "ir", "re"].contains(suffix) {
         if currentStr == "sortir" {
-          print("sortir frequency: \(currentFrequency)")
           currentFrequency += 1
         } else if var verb = Verb.verbs[currentStr] {
           verb.frequency = currentFrequency

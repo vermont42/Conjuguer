@@ -34,6 +34,11 @@
 "ModelView.verbsUsing" = "Verbs Using This Model";
 "ModelView.verbUsing" = "Verb Using This Model";
 
+"Quiz.gameCenterFailure" = "Game Center failed.";
+"Quiz.none" = "none";
+"Quiz.quizComplete" = "Congratulations! You completed a quiz scoring %d points.";
+"Quiz.cool" = "Cool";
+
 "Info.dedicationHeading" = "Dedication";
 
 "Info.dedicationText" = "David Compton was my high-school Nordic-skiing coach. He was also a French teacher but not initially ~my~ French teacher. He was aware of my interest in and aptitude for French, however. At the beginning of my junior year, I wasn’t going to be able to take French because of a schedule conflict with Advanced Placement English, so Mr. Compton created a five-days-a-week French-literature class just for me. A German exchange student named Julian Peters soon joined us. Using Volumes I and II of “Anthologie de la Littérature Française” by Robert Leggewie as our textbooks, we studied the greats of French literature from Chrétien de Troyes to Samuel Beckett. As an aside, this literary study ultimately inspired ~Conjuguer~’s use of literary examples of tense use. I thoroughly enjoyed Mr Compton’s class, and my knowledge of French took a giant leap. At the end of the year, I achieved a maximum score on the French Advanced Placement test. At the beginning of my freshman year of college, I took a test to get credit for a major-level French class and, of the sixty freshmen who took the test, I was one of only three who passed.

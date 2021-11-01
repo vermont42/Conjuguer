@@ -30,13 +30,13 @@ struct QuizView: View {
 
         if quiz.quizState == .inProgress {
           Group {
-            Text("Verb: gésir")
+            Text("Verb: \(quiz.questions[quiz.currentQuestionIndex].0.infinitifWithPossibleExtraLetters)")
               .bodyLabel()
 
             Spacer()
               .frame(height: 8)
 
-            Text("Trans.: be located, lie dead, be buried")
+            Text("Trans.: \(quiz.questions[quiz.currentQuestionIndex].0.translation)")
               .bodyLabel()
           }
 
@@ -44,26 +44,26 @@ struct QuizView: View {
             .frame(height: 8)
 
           Group {
-            Text("Pronoun: ils")
+            Text("Pronoun: \(quiz.questions[quiz.currentQuestionIndex].1.pronounString)")
               .bodyLabel()
 
             Spacer()
               .frame(height: 8)
 
-            Text("Tense: passé simple")
+            Text("Tense: \(quiz.questions[quiz.currentQuestionIndex].1.titleCaseName.lowercased())")
               .bodyLabel()
 
             Spacer()
               .frame(height: 8)
 
             HStack {
-              Text("Progress: 1 / 30")
+              Text("Progress: \(quiz.currentQuestionIndex + 1) / \(quiz.questions.count)")
                 .bodyLabel()
                 .foregroundColor(Color.customBlue)
 
               Spacer()
 
-              Text("Score: 0")
+              Text("Score: \(quiz.score)")
                 .bodyLabel()
                 .foregroundColor(Color.customBlue)
             }
@@ -88,6 +88,11 @@ struct QuizView: View {
             TextField("conjugation", text: $input)
               .focused($conjugationFieldIsFocused)
               .autocapitalization(.none)
+              .onSubmit {
+                quiz.process(proposedAnswer: input)
+                input = ""
+                conjugationFieldIsFocused = true
+              }
           }
 
           Spacer()
@@ -115,6 +120,11 @@ struct QuizView: View {
     }
     .padding(.leading, 16)
     .padding(.trailing, 16)
+    .alert(String(format: L.Quiz.quizComplete, quiz.lastScore), isPresented: $quiz.shouldShowLastScore) {
+      Button(L.Quiz.cool, role: .cancel) {
+        quiz.shouldShowLastScore = false
+      }
+    }
   }
 
   private func quit() {

@@ -52,4 +52,12 @@ struct Verb: Identifiable, Hashable {
     let ending = String(infinitif[index...])
     return validFrenchVerbEndings.contains(ending) || infinitif == "fiche"
   }
+
+  static func verbForInfinitif(_ infinitif: String) -> Verb {
+    if let verb = verbs[infinitif] {
+      return verb
+    } else {
+      fatalError("Could not retrieve verb for \(infinitif).")
+    }
+  }
 }
