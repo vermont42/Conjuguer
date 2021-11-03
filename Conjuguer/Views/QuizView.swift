@@ -30,13 +30,13 @@ struct QuizView: View {
 
         if quiz.quizState == .inProgress {
           Group {
-            Text("Verb: \(quiz.questions[quiz.currentQuestionIndex].0.infinitifWithPossibleExtraLetters)")
+            Text("\(L.Quiz.verbWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.infinitifWithPossibleExtraLetters)")
               .bodyLabel()
 
             Spacer()
               .frame(height: 8)
 
-            Text("Trans.: \(quiz.questions[quiz.currentQuestionIndex].0.translation)")
+            Text("\(L.Quiz.translationWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.translation)")
               .bodyLabel()
           }
 
@@ -44,26 +44,26 @@ struct QuizView: View {
             .frame(height: 8)
 
           Group {
-            Text("Pronoun: \(quiz.questions[quiz.currentQuestionIndex].1.pronounString)")
+            Text("\(L.Quiz.pronounWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.pronounString)")
               .bodyLabel()
 
             Spacer()
               .frame(height: 8)
 
-            Text("Tense: \(quiz.questions[quiz.currentQuestionIndex].1.titleCaseName.lowercased())")
+            Text("\(L.Quiz.tenseWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.titleCaseName.lowercased())")
               .bodyLabel()
 
             Spacer()
               .frame(height: 8)
 
             HStack {
-              Text("Progress: \(quiz.currentQuestionIndex + 1) / \(quiz.questions.count)")
+              Text("\(L.Quiz.progressWithColon) \(quiz.currentQuestionIndex + 1) / \(quiz.questions.count)")
                 .bodyLabel()
                 .foregroundColor(Color.customBlue)
 
               Spacer()
 
-              Text("Score: \(quiz.score)")
+              Text("\(L.Quiz.scoreWithColon) \(quiz.score)")
                 .bodyLabel()
                 .foregroundColor(Color.customBlue)
             }
@@ -72,20 +72,20 @@ struct QuizView: View {
               .frame(height: 8)
 
             HStack {
-              Text("Elapsed: \(quiz.elapsedTime)")
+              Text("\(L.Quiz.elapsedWithColon) \(quiz.elapsedTime)")
                 .bodyLabel()
                 .foregroundColor(Color.customBlue)
 
               Spacer()
 
-              Button("Quit") {
+              Button(L.Quiz.quit) {
                 quit()
               }
               .buttonLabel()
               .foregroundColor(Color.customRed)
             }
 
-            TextField("conjugation", text: $input)
+            TextField(L.Quiz.conjugation, text: $input)
               .focused($conjugationFieldIsFocused)
               .autocapitalization(.none)
               .onSubmit {
@@ -104,7 +104,7 @@ struct QuizView: View {
           HStack {
             Spacer()
 
-            Button("Start") {
+            Button(L.Quiz.start) {
               start()
             }
             .buttonLabel()

@@ -120,33 +120,33 @@ class Quiz: ObservableObject {
   }
 
   private func buildQuiz() {
-    [regularErVerb, regularErVerb, regularIrVerb, regularIrVerb, regularReVerb, bigThreeVerb, indicatifPrésentStemChangerVerb].forEach {
-      questions.append(($0, .indicatifPrésent(personNumber)))
-    }
-
-    [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb, êtreAuxiliaryVerb, irregularParticipePasséVerb].forEach {
-      questions.append(($0, .passéComposé(personNumber)))
-    }
-
-    [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb].forEach {
-      questions.append(($0, .subjonctifPrésent(personNumber)))
-    }
-
-    [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
-      questions.append(($0, .imparfait(personNumber)))
-    }
-
-    [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
-      questions.append(($0, .futurSimple(personNumber)))
-    }
-
-    [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
-      questions.append(($0, .conditionnelPrésent(personNumber)))
-    }
-
-    [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
-      questions.append(($0, .impératif(impératifPersonNumber)))
-    }
+//    [regularErVerb, regularErVerb, regularIrVerb, regularIrVerb, regularReVerb, bigThreeVerb, indicatifPrésentStemChangerVerb].forEach {
+//      questions.append(($0, .indicatifPrésent(personNumber)))
+//    }
+//
+//    [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb, êtreAuxiliaryVerb, irregularParticipePasséVerb].forEach {
+//      questions.append(($0, .passéComposé(personNumber)))
+//    }
+//
+//    [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb].forEach {
+//      questions.append(($0, .subjonctifPrésent(personNumber)))
+//    }
+//
+//    [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
+//      questions.append(($0, .imparfait(personNumber)))
+//    }
+//
+//    [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
+//      questions.append(($0, .futurSimple(personNumber)))
+//    }
+//
+//    [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
+//      questions.append(($0, .conditionnelPrésent(personNumber)))
+//    }
+//
+//    [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
+//      questions.append(($0, .impératif(impératifPersonNumber)))
+//    }
 
     questions.append((topThirtyVerb, .participePrésent))
 

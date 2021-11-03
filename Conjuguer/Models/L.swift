@@ -119,6 +119,46 @@ enum L {
   }
 
   enum Quiz {
+    static var start: String {
+      NSLocalizedString("Quiz.start", comment: "")
+    }
+
+    static var verbWithColon: String {
+      NSLocalizedString("Quiz.verbWithColon", comment: "")
+    }
+
+    static var translationWithColon: String {
+      NSLocalizedString("Quiz.translationWithColon", comment: "")
+    }
+
+    static var pronounWithColon: String {
+      NSLocalizedString("Quiz.pronounWithColon", comment: "")
+    }
+
+    static var tenseWithColon: String {
+      NSLocalizedString("Quiz.tenseWithColon", comment: "")
+    }
+
+    static var progressWithColon: String {
+      NSLocalizedString("Quiz.progressWithColon", comment: "")
+    }
+
+    static var scoreWithColon: String {
+      NSLocalizedString("Quiz.scoreWithColon", comment: "")
+    }
+
+    static var elapsedWithColon: String {
+      NSLocalizedString("Quiz.elapsedWithColon", comment: "")
+    }
+
+    static var conjugation: String {
+      NSLocalizedString("Quiz.conjugation", comment: "")
+    }
+
+    static var quit: String {
+      NSLocalizedString("Quiz.quit", comment: "")
+    }
+
     static var gameCenterFailure: String {
       NSLocalizedString("Quiz.gameCenterFailure", comment: "")
     }

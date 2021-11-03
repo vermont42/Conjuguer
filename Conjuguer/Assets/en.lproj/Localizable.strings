@@ -34,6 +34,16 @@
 "ModelView.verbsUsing" = "Verbs Using This Model";
 "ModelView.verbUsing" = "Verb Using This Model";
 
+"Quiz.start" = "Start";
+"Quiz.scoreWithColon" = "Score:";
+"Quiz.verbWithColon" = "Verb:";
+"Quiz.translationWithColon" = "Trans.:";
+"Quiz.pronounWithColon" = "Pronoun:";
+"Quiz.tenseWithColon" = "Tense:";
+"Quiz.progressWithColon" = "Progress:";
+"Quiz.elapsedWithColon" = "Elapsed:";
+"Quiz.conjugation" = "Conjugation";
+"Quiz.quit" = "Quit";
 "Quiz.gameCenterFailure" = "Game Center failed.";
 "Quiz.none" = "none";
 "Quiz.quizComplete" = "Congratulations! You completed a quiz scoring %d points.";
