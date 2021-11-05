@@ -968,6 +968,8 @@ Daniel Alston and Larry Sanger proposed and ideated Wiktionary, ~Conjuguer~’s 
 
 David Brodsky wrote “French Verbs Made Simple(r)”, which provided two key insights to the developer of ~Conjuguer~. First, conjugations are combinations of stems, sometimes modified, and endings, usually predictable. Second, every French verb is conjugated using a French-verb ~model~. The number of models is ~much~ smaller than the number of irregular verbs.
 
+Ilona Coffre created ~Conjuguer~’s app icon.
+
 Wei Huang created ~Conjuguer~’s font, Work Sans, and licensed it under the Open Font License, available here: %https://scripts.sil.org/cms/scripts/page.php?item_id=OFL-FAQ_web%
 
 Adam Kilgarriff founded Lexical Computing, the company behind Sketch Engine, which is the source of ~Conjuguer~’s verb-frequency data.
