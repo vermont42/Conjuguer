@@ -23,6 +23,8 @@ struct ConjuguerApp: App {
   init() {
     Modifiers.setTitleAttributes()
 
+    SoundPlayer.setup()
+
     VerbModel.models = VerbModelParser().parse()
     Verb.verbs = VerbParser().parse()
     VerbModel.computeIrregularities()

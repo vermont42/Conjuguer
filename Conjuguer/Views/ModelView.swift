@@ -40,7 +40,7 @@ struct ModelView: View {
             {
               Group {
                 Spacer()
-                  .frame(height: 16)
+                  .frame(height: Layout.doubleDefaultSpacing)
                 Text(L.ModelView.defective)
                   .subheadingLabel()
                 Text(defectGroup.description())
@@ -49,7 +49,7 @@ struct ModelView: View {
             }
 
             Spacer()
-              .frame(height: 16)
+              .frame(height: Layout.doubleDefaultSpacing)
 
             Group {
               Text(L.ModelView.endings)
@@ -64,7 +64,7 @@ struct ModelView: View {
             }
 
             Spacer()
-              .frame(height: 16)
+              .frame(height: Layout.doubleDefaultSpacing)
 
             if let stemAlterations = model.stemAlterationsRecursive {
               Text(L.ModelView.stemAlterations)
@@ -77,7 +77,7 @@ struct ModelView: View {
             }
 
             Spacer()
-              .frame(height: 16)
+              .frame(height: Layout.doubleDefaultSpacing)
 
             Group {
               if model.verbs.count > 1 {

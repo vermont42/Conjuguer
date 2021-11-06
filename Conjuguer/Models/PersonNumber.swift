@@ -29,7 +29,7 @@ enum PersonNumber: String, CaseIterable {
     case .secondPlural:
       return "vous"
     case .thirdPlural:
-      return "elles"
+      return "ils"
     }
   }
 

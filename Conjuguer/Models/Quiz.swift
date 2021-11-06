@@ -61,6 +61,7 @@ class Quiz: ObservableObject {
     resetPublishedProperties()
     buildQuiz()
     quizState = .inProgress
+    SoundPlayer.play(Sound.randomGun)
 
     timer = Timer.scheduledTimer(
       withTimeInterval: 1.0,
@@ -120,33 +121,33 @@ class Quiz: ObservableObject {
   }
 
   private func buildQuiz() {
-//    [regularErVerb, regularErVerb, regularIrVerb, regularIrVerb, regularReVerb, bigThreeVerb, indicatifPrésentStemChangerVerb].forEach {
-//      questions.append(($0, .indicatifPrésent(personNumber)))
-//    }
-//
-//    [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb, êtreAuxiliaryVerb, irregularParticipePasséVerb].forEach {
-//      questions.append(($0, .passéComposé(personNumber)))
-//    }
-//
-//    [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb].forEach {
-//      questions.append(($0, .subjonctifPrésent(personNumber)))
-//    }
-//
-//    [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
-//      questions.append(($0, .imparfait(personNumber)))
-//    }
-//
-//    [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
-//      questions.append(($0, .futurSimple(personNumber)))
-//    }
-//
-//    [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
-//      questions.append(($0, .conditionnelPrésent(personNumber)))
-//    }
-//
-//    [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
-//      questions.append(($0, .impératif(impératifPersonNumber)))
-//    }
+    [regularErVerb, regularErVerb, regularIrVerb, regularIrVerb, regularReVerb, bigThreeVerb, indicatifPrésentStemChangerVerb].forEach {
+      questions.append(($0, .indicatifPrésent(personNumber)))
+    }
+
+    [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb, êtreAuxiliaryVerb, irregularParticipePasséVerb].forEach {
+      questions.append(($0, .passéComposé(personNumber)))
+    }
+
+    [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb].forEach {
+      questions.append(($0, .subjonctifPrésent(personNumber)))
+    }
+
+    [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
+      questions.append(($0, .imparfait(personNumber)))
+    }
+
+    [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
+      questions.append(($0, .futurSimple(personNumber)))
+    }
+
+    [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
+      questions.append(($0, .conditionnelPrésent(personNumber)))
+    }
+
+    [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
+      questions.append(($0, .impératif(impératifPersonNumber)))
+    }
 
     questions.append((topThirtyVerb, .participePrésent))
 
@@ -267,7 +268,9 @@ class Quiz: ObservableObject {
     switch correctAnswerResult {
     case let .success(correctAnswer):
       let result = ConjugationResult.compare(lhs: correctAnswer, rhs: proposedAnswer)
-      SoundPlayer.play(result.sound)
+      if currentQuestionIndex != questions.count - 1 {
+        SoundPlayer.play(result.sound)
+      }
       score += result.score
     default:
       fatalError("Conjugation failed.")
@@ -276,6 +279,7 @@ class Quiz: ObservableObject {
     if currentQuestionIndex == questions.count {
       lastScore = score
       shouldShowLastScore = true
+      SoundPlayer.play(Sound.randomApplause)
       quit()
     }
   }

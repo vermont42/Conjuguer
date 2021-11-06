@@ -19,14 +19,14 @@ struct QuizView: View {
 
       VStack(alignment: .leading) {
         Spacer()
-          .frame(height: 24)
+          .frame(height: Layout.tripleDefaultSpacing)
 
         Text(L.Navigation.quiz)
           .headingLabel()
           .foregroundColor(Color.customBlue)
 
         Spacer()
-          .frame(height: 8)
+          .frame(height: Layout.defaultSpacing)
 
         if quiz.quizState == .inProgress {
           Group {
@@ -34,27 +34,27 @@ struct QuizView: View {
               .bodyLabel()
 
             Spacer()
-              .frame(height: 8)
+              .frame(height: Layout.defaultSpacing)
 
             Text("\(L.Quiz.translationWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.translation)")
               .bodyLabel()
           }
 
           Spacer()
-            .frame(height: 8)
+            .frame(height: Layout.defaultSpacing)
 
           Group {
             Text("\(L.Quiz.pronounWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.pronounString)")
               .bodyLabel()
 
             Spacer()
-              .frame(height: 8)
+              .frame(height: Layout.defaultSpacing)
 
             Text("\(L.Quiz.tenseWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.titleCaseName.lowercased())")
               .bodyLabel()
 
             Spacer()
-              .frame(height: 8)
+              .frame(height: Layout.defaultSpacing)
 
             HStack {
               Text("\(L.Quiz.progressWithColon) \(quiz.currentQuestionIndex + 1) / \(quiz.questions.count)")
@@ -69,7 +69,7 @@ struct QuizView: View {
             }
 
             Spacer()
-              .frame(height: 8)
+              .frame(height: Layout.defaultSpacing)
 
             HStack {
               Text("\(L.Quiz.elapsedWithColon) \(quiz.elapsedTime)")
@@ -114,12 +114,12 @@ struct QuizView: View {
           }
 
           Spacer()
-            .frame(height: 8)
+            .frame(height: Layout.defaultSpacing)
         }
       }
     }
-    .padding(.leading, 16)
-    .padding(.trailing, 16)
+    .padding(.leading, Layout.doubleDefaultSpacing)
+    .padding(.trailing, Layout.doubleDefaultSpacing)
     .alert(String(format: L.Quiz.quizComplete, quiz.lastScore), isPresented: $quiz.shouldShowLastScore) {
       Button(L.Quiz.cool, role: .cancel) {
         quiz.shouldShowLastScore = false
@@ -135,7 +135,6 @@ struct QuizView: View {
   }
 
   private func start() {
-    SoundPlayer.play(.gun)
     quiz.start()
     let delayForFocus: TimeInterval = 0.1 // https://stackoverflow.com/a/69134653
     DispatchQueue.main.asyncAfter(deadline: .now() + delayForFocus) {

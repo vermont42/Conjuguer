@@ -17,9 +17,7 @@ class SoundPlayer {
     sounds = Dictionary()
     do {
       try AVAudioSession.sharedInstance().setCategory(.playback) // was ambient
-    } catch let error as NSError {
-      print("\(error.localizedDescription)")
-    }
+    } catch {}
   }
 
   static func play(_ sound: Sound) {
@@ -27,11 +25,18 @@ class SoundPlayer {
       if let audioUrl = Bundle.main.url(forResource: sound.rawValue, withExtension: soundExtension) {
         do {
           try soundPlayer.sounds[sound.rawValue] = AVAudioPlayer.init(contentsOf: audioUrl)
-        } catch let error as NSError {
-          print("\(error.localizedDescription)")
-        }
+        } catch {}
       }
     }
     soundPlayer.sounds[sound.rawValue]?.play()
+  }
+
+  static func setup() {
+    let session = AVAudioSession.sharedInstance()
+    do {
+      try session.setCategory(.playback, options: .mixWithOthers)
+    } catch {}
+
+    play(.silence) // https://forums.developer.apple.com/thread/23160
   }
 }
