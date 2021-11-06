@@ -10,11 +10,11 @@ import SwiftUI
 enum Modifiers {
   static func setTitleAttributes() {
     UIFont(name: workSansSemiBold, size: 24).map {
-      UINavigationBar.appearance().largeTitleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customForeground)]
+      UINavigationBar.appearance().largeTitleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customBlue)]
     }
 
     UIFont(name: workSansSemiBold, size: 18).map {
-      UINavigationBar.appearance().titleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customForeground)]
+      UINavigationBar.appearance().titleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customBlue)]
     }
 
     UINavigationBar.appearance().backgroundColor = UIColor(Color.customBackground)

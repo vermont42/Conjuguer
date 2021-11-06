@@ -18,15 +18,15 @@ struct QuizView: View {
         .ignoresSafeArea()
 
       VStack(alignment: .leading) {
-        HStack {
-          Spacer()
+        Spacer()
+          .frame(height: 24)
 
-          Text(L.Navigation.quiz)
-            .headingLabel()
-            .foregroundColor(Color.customBlue)
+        Text(L.Navigation.quiz)
+          .headingLabel()
+          .foregroundColor(Color.customBlue)
 
-          Spacer()
-        }
+        Spacer()
+          .frame(height: 8)
 
         if quiz.quizState == .inProgress {
           Group {
