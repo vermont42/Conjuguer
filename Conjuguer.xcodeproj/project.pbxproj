@@ -33,6 +33,10 @@
 		035BC8E42736EA3000EA13CA /* applause2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 035BC8DF2736EA3000EA13CA /* applause2.mp3 */; };
 		035BC8E52736EA3000EA13CA /* gun2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 035BC8E02736EA3000EA13CA /* gun2.mp3 */; };
 		035BC8E72736F14600EA13CA /* silence.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 035BC8E62736F14600EA13CA /* silence.mp3 */; };
+		035BC8E92737235C00EA13CA /* QuizDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035BC8E82737235C00EA13CA /* QuizDifficulty.swift */; };
+		035BC8EC2737346D00EA13CA /* sadTrombone2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 035BC8EA2737346D00EA13CA /* sadTrombone2.mp3 */; };
+		035BC8ED2737346D00EA13CA /* sadTrombone3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 035BC8EB2737346D00EA13CA /* sadTrombone3.mp3 */; };
+		035BC8EF273736A700EA13CA /* sadTrombone4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 035BC8EE273736A700EA13CA /* sadTrombone4.mp3 */; };
 		035D979726B74C820089083C /* L.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035D979626B74C820089083C /* L.swift */; };
 		035D979A26B74D6C0089083C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 035D979C26B74D6C0089083C /* Localizable.strings */; };
 		03653F0325EC4F5A00A34267 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03653F0225EC4F5A00A34267 /* Modifiers.swift */; };
@@ -85,7 +89,7 @@
 		03B54B4625AF92930062B323 /* VerbModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B54B4525AF92930062B323 /* VerbModelTests.swift */; };
 		03C2CAC52619125200CFA825 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2CAC32619125200CFA825 /* SoundPlayer.swift */; };
 		03C2CAC62619125200CFA825 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2CAC42619125200CFA825 /* Sound.swift */; };
-		03C2CACE261912EA00CFA825 /* sadTrombone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03C2CACC261912EA00CFA825 /* sadTrombone.mp3 */; };
+		03C2CACE261912EA00CFA825 /* sadTrombone1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03C2CACC261912EA00CFA825 /* sadTrombone1.mp3 */; };
 		03C2CAD62619160C00CFA825 /* chime.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03C2CAD52619160C00CFA825 /* chime.mp3 */; };
 		03FA474827060D2000131205 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FA474727060D2000131205 /* QuizView.swift */; };
 		03FA474A27060D6C00131205 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FA474927060D6C00131205 /* SettingsView.swift */; };
@@ -128,6 +132,10 @@
 		035BC8DF2736EA3000EA13CA /* applause2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = applause2.mp3; sourceTree = "<group>"; };
 		035BC8E02736EA3000EA13CA /* gun2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gun2.mp3; sourceTree = "<group>"; };
 		035BC8E62736F14600EA13CA /* silence.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = silence.mp3; sourceTree = "<group>"; };
+		035BC8E82737235C00EA13CA /* QuizDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDifficulty.swift; sourceTree = "<group>"; };
+		035BC8EA2737346D00EA13CA /* sadTrombone2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sadTrombone2.mp3; sourceTree = "<group>"; };
+		035BC8EB2737346D00EA13CA /* sadTrombone3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sadTrombone3.mp3; sourceTree = "<group>"; };
+		035BC8EE273736A700EA13CA /* sadTrombone4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sadTrombone4.mp3; sourceTree = "<group>"; };
 		035D979626B74C820089083C /* L.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L.swift; sourceTree = "<group>"; };
 		035D979B26B74D6C0089083C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		035D979D26B74D730089083C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -185,7 +193,7 @@
 		03B54B4525AF92930062B323 /* VerbModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbModelTests.swift; sourceTree = "<group>"; };
 		03C2CAC32619125200CFA825 /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		03C2CAC42619125200CFA825 /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
-		03C2CACC261912EA00CFA825 /* sadTrombone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sadTrombone.mp3; sourceTree = "<group>"; };
+		03C2CACC261912EA00CFA825 /* sadTrombone1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sadTrombone1.mp3; sourceTree = "<group>"; };
 		03C2CAD52619160C00CFA825 /* chime.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chime.mp3; sourceTree = "<group>"; };
 		03FA474727060D2000131205 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		03FA474927060D6C00131205 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -220,7 +228,10 @@
 				032DBC4A272F5CA400D5804C /* chirp.mp3 */,
 				035BC8DD2736EA3000EA13CA /* gun1.mp3 */,
 				035BC8E02736EA3000EA13CA /* gun2.mp3 */,
-				03C2CACC261912EA00CFA825 /* sadTrombone.mp3 */,
+				03C2CACC261912EA00CFA825 /* sadTrombone1.mp3 */,
+				035BC8EA2737346D00EA13CA /* sadTrombone2.mp3 */,
+				035BC8EB2737346D00EA13CA /* sadTrombone3.mp3 */,
+				035BC8EE273736A700EA13CA /* sadTrombone4.mp3 */,
 				035BC8E62736F14600EA13CA /* silence.mp3 */,
 			);
 			path = Sounds;
@@ -297,6 +308,7 @@
 				036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */,
 				036DB7EC25A1070D0013C3B7 /* PersonNumber.swift */,
 				036A9931271B8AF700C6C984 /* Quiz.swift */,
+				035BC8E82737235C00EA13CA /* QuizDifficulty.swift */,
 				036A99332726144600C6C984 /* QuizState.swift */,
 				036A992F27138ACD00C6C984 /* QuizVerbs.swift */,
 				03C2CAC42619125200CFA825 /* Sound.swift */,
@@ -464,17 +476,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				033EAA182630A36B0055B313 /* WorkSans.ttf in Resources */,
-				03C2CACE261912EA00CFA825 /* sadTrombone.mp3 in Resources */,
+				03C2CACE261912EA00CFA825 /* sadTrombone1.mp3 in Resources */,
 				038E0AF9268D0E02002A71EF /* defectGroups.xml in Resources */,
 				035BC8E32736EA3000EA13CA /* applause3.mp3 in Resources */,
 				035BC8E52736EA3000EA13CA /* gun2.mp3 in Resources */,
 				035BC8E12736EA3000EA13CA /* applause1.mp3 in Resources */,
 				036DB795259FD6510013C3B7 /* Preview Assets.xcassets in Resources */,
 				030FFAA526CA19CB00741524 /* frequencies.xml in Resources */,
+				035BC8EF273736A700EA13CA /* sadTrombone4.mp3 in Resources */,
 				035D979A26B74D6C0089083C /* Localizable.strings in Resources */,
 				035BC8E72736F14600EA13CA /* silence.mp3 in Resources */,
+				035BC8ED2737346D00EA13CA /* sadTrombone3.mp3 in Resources */,
 				036DB80025A37ECB0013C3B7 /* verbModels.xml in Resources */,
 				03309F7026BD8D10003E4F92 /* WorkSans-Bold.ttf in Resources */,
+				035BC8EC2737346D00EA13CA /* sadTrombone2.mp3 in Resources */,
 				036E4D102735CA7C00A52973 /* LaunchScreen.storyboard in Resources */,
 				035BC8E22736EA3000EA13CA /* gun1.mp3 in Resources */,
 				03C2CAD62619160C00CFA825 /* chime.mp3 in Resources */,
@@ -528,6 +543,7 @@
 				03FA474A27060D6C00131205 /* SettingsView.swift in Sources */,
 				03309F6926BC9E72003E4F92 /* NSAttributedStringExtension.swift in Sources */,
 				032DBC48272F57A600D5804C /* ConjugationResult.swift in Sources */,
+				035BC8E92737235C00EA13CA /* QuizDifficulty.swift in Sources */,
 				036A993027138ACD00C6C984 /* QuizVerbs.swift in Sources */,
 				036A9932271B8AF700C6C984 /* Quiz.swift in Sources */,
 				032B122326BA02D8000E70CA /* InfoBrowseView.swift in Sources */,

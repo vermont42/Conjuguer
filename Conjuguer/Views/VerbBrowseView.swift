@@ -82,7 +82,11 @@ struct VerbBrowseView: View {
     if searchText.isEmpty {
       return store.verbs
     } else {
-      return store.verbs.filter { $0.infinitifWithPossibleExtraLetters.contains(searchText.localizedLowercase) }
+      let matchingVerbs = store.verbs.filter { $0.infinitifWithPossibleExtraLetters.contains(searchText.localizedLowercase) }
+      if matchingVerbs.isEmpty {
+        SoundPlayer.play(.randomSadTrombone)
+      }
+      return matchingVerbs
     }
   }
 

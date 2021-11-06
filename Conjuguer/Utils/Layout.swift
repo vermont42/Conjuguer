@@ -2,7 +2,7 @@
 //  Layout.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 11/6/21.
+//  Created by Josh Adams on 11/6/21.
 //
 
 import UIKit

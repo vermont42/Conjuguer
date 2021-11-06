@@ -128,7 +128,7 @@ struct QuizView: View {
   }
 
   private func quit() {
-    SoundPlayer.play(.sadTrombone)
+    SoundPlayer.play(Sound.randomSadTrombone)
     conjugationFieldIsFocused = false
     input = ""
     quiz.quit()

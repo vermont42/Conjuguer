@@ -8,16 +8,16 @@
 import SwiftUI
 
 enum Modifiers {
-  static func setTitleAttributes() {
+  static func modifyAppearances() {
     UIFont(name: workSansSemiBold, size: 24).map {
       UINavigationBar.appearance().largeTitleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customBlue)]
     }
-
     UIFont(name: workSansSemiBold, size: 18).map {
       UINavigationBar.appearance().titleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customBlue)]
     }
-
     UINavigationBar.appearance().backgroundColor = UIColor(Color.customBackground)
+    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color.customBlue)], for: .selected)
+    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color.customBlue)], for: .normal)
   }
 
   // Consider using this code to customize segmentedControl and further customize navBar.
@@ -56,6 +56,14 @@ struct SubheadingLabel: ViewModifier {
   }
 }
 
+struct SettingsSubheadingLabel: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .font(Font.custom(workSansSemiBold, size: 20))
+      .foregroundColor(.customBlue)
+  }
+}
+
 struct TableText: ViewModifier {
   func body(content: Content) -> some View {
     content
@@ -77,6 +85,14 @@ struct SmallLabel: ViewModifier {
     content
       .font(Font.custom(workSansRegular, size: 16))
       .foregroundColor(.customGray)
+  }
+}
+
+struct SettingsLabel: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .font(Font.custom(workSansRegular, size: 16))
+      .foregroundColor(.customForeground)
   }
 }
 
@@ -112,6 +128,14 @@ struct RightAligned: ViewModifier {
   }
 }
 
+struct SegmentedPicker: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .pickerStyle(SegmentedPickerStyle())
+      .padding(.horizontal, Layout.doubleDefaultSpacing)
+  }
+}
+
 extension View {
   func leftAligned() -> some View {
     modifier(LeftAligned())
@@ -129,12 +153,20 @@ extension View {
     modifier(SubheadingLabel())
   }
 
+  func settingsSubheadingLabel() -> some View {
+    modifier(SettingsSubheadingLabel())
+  }
+
   func bodyLabel() -> some View {
     modifier(BodyLabel())
   }
 
   func smallLabel() -> some View {
     modifier(SmallLabel())
+  }
+
+  func settingsLabel() -> some View {
+    modifier(SettingsLabel())
   }
 
   func headingLabel() -> some View {

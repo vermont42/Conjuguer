@@ -76,6 +76,11 @@
 "Info.questionsAndResponsesHeading" = "Questions and Responses";
 "Info.creditsHeading" = "Crédits";
 
+"Settings.quizDifficulty" = "Difficulté du Quiz";
+"Settings.regular" = "Ordinaire";
+"Settings.ridiculous" = "Ridicule";
+"Settings.quizDifficultyDescription" = "Ce réglage détermine la difficulté des quiz. Vous voulez probablement Ordinaire.";
+
 "VerbSort.frequency" = "Fréquence";
 "VerbSort.alphabetic" = "Alphabétique";
 

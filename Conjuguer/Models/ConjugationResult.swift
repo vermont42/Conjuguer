@@ -2,7 +2,7 @@
 //  ConjugationResult.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 10/31/21.
+//  Created by Josh Adams on 10/31/21.
 //
 
 import Foundation

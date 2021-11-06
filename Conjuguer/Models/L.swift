@@ -386,6 +386,24 @@ enum L {
     }
   }
 
+  enum Settings {
+    static var quizDifficulty: String {
+      NSLocalizedString("Settings.quizDifficulty", comment: "")
+    }
+
+    static var regular: String {
+      NSLocalizedString("Settings.regular", comment: "")
+    }
+
+    static var ridiculous: String {
+      NSLocalizedString("Settings.ridiculous", comment: "")
+    }
+
+    static var quizDifficultyDescription: String {
+      NSLocalizedString("Settings.quizDifficultyDescription", comment: "")
+    }
+  }
+
   static func displayNameForVerbSort(_ sort: VerbSort) -> String {
     switch sort {
     case .frequency:

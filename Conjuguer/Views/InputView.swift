@@ -120,7 +120,7 @@ struct InputView: View {
 
   private func outputError(_ error: String) {
     Swift.print(error)
-    SoundPlayer.play(.sadTrombone)
+    SoundPlayer.play(Sound.randomSadTrombone)
   }
 
   private func resetFields() {

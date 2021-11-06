@@ -31,6 +31,16 @@ class Settings {
   static let modelSortKey = "modelSort"
   static let modelSortDefault: ModelSort = .irregularity
 
+  var quizDifficulty: QuizDifficulty {
+    didSet {
+      if quizDifficulty != oldValue {
+        getterSetter.set(key: Settings.quizDifficultyKey, value: quizDifficulty.rawValue)
+      }
+    }
+  }
+  static let quizDifficultyKey = "quizDifficulty"
+  static let quizDifficultyDefault: QuizDifficulty = .regular
+
   init(getterSetter: GetterSetter) {
     self.getterSetter = getterSetter
 
@@ -46,6 +56,13 @@ class Settings {
     } else {
       modelSort = Settings.modelSortDefault
       getterSetter.set(key: Settings.modelSortKey, value: "\(modelSort)")
+    }
+
+    if let quizDifficultyString = getterSetter.get(key: Settings.quizDifficultyKey) {
+      quizDifficulty = QuizDifficulty(rawValue: quizDifficultyString) ?? Settings.quizDifficultyDefault
+    } else {
+      quizDifficulty = Settings.quizDifficultyDefault
+      getterSetter.set(key: Settings.quizDifficultyKey, value: quizDifficulty.rawValue)
     }
   }
 }

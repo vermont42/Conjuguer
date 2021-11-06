@@ -77,7 +77,11 @@ struct ModelBrowseView: View {
     if searchText.isEmpty {
       return store.modelsAndDecorators
     } else {
-      return store.modelsAndDecorators.filter { $0.model.exemplar.contains(searchText.localizedLowercase) }
+      let matchingModels = store.modelsAndDecorators.filter { $0.model.exemplar.contains(searchText.localizedLowercase) }
+      if matchingModels.isEmpty {
+        SoundPlayer.play(.randomSadTrombone)
+      }
+      return matchingModels
     }
   }
 

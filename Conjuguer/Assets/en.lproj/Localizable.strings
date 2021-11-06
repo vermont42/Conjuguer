@@ -980,6 +980,11 @@ Franz Josef Och architected Google Translate, which ~Conjuguer~’s developer us
 
 Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’ancien français, which ~Conjuguer~ uses for conjugation of ester, gésir, issir, and certain other defective verbs. URL: %https://micmap.org/dicfro/introduction/tableaux-de-conjugaison%";
 
+"Settings.quizDifficulty" = "Quiz Difficulty";
+"Settings.regular" = "Regular";
+"Settings.ridiculous" = "Ridiculous";
+"Settings.quizDifficultyDescription" = "This setting determines the difficulty of quizzes. You probably want Regular.";
+
 "VerbSort.frequency" = "Frequency";
 "VerbSort.alphabetic" = "Alphabetic";
 

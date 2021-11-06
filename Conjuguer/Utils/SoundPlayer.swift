@@ -12,6 +12,7 @@ class SoundPlayer {
   private static let soundPlayer = SoundPlayer()
   private var sounds: [String: AVAudioPlayer]
   private static let soundExtension = "mp3"
+  private static var instantOfLastPlay: TimeInterval = 0.0
 
   private init () {
     sounds = Dictionary()
@@ -28,7 +29,12 @@ class SoundPlayer {
         } catch {}
       }
     }
-    soundPlayer.sounds[sound.rawValue]?.play()
+    let instantOfCurrentPlay = Date().timeIntervalSince1970
+    let minSoundInterval: TimeInterval = 1.0
+    if instantOfCurrentPlay - instantOfLastPlay > minSoundInterval {
+      soundPlayer.sounds[sound.rawValue]?.play()
+      instantOfLastPlay = instantOfCurrentPlay
+    }
   }
 
   static func setup() {

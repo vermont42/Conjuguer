@@ -21,7 +21,7 @@ struct ConjuguerApp: App {
   static var compoundImpératifPersonNumbersIndex = 0
 
   init() {
-    Modifiers.setTitleAttributes()
+    Modifiers.modifyAppearances()
 
     SoundPlayer.setup()
 
