@@ -93,6 +93,7 @@ struct SettingsLabel: ViewModifier {
     content
       .font(Font.custom(workSansRegular, size: 16))
       .foregroundColor(.customForeground)
+      .padding(.horizontal, Layout.doubleDefaultSpacing)
   }
 }
 

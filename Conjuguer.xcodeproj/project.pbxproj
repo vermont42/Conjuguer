@@ -37,6 +37,7 @@
 		035BC8EC2737346D00EA13CA /* sadTrombone2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 035BC8EA2737346D00EA13CA /* sadTrombone2.mp3 */; };
 		035BC8ED2737346D00EA13CA /* sadTrombone3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 035BC8EB2737346D00EA13CA /* sadTrombone3.mp3 */; };
 		035BC8EF273736A700EA13CA /* sadTrombone4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 035BC8EE273736A700EA13CA /* sadTrombone4.mp3 */; };
+		035BC8F127376D3C00EA13CA /* PronounGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035BC8F027376D3C00EA13CA /* PronounGender.swift */; };
 		035D979726B74C820089083C /* L.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035D979626B74C820089083C /* L.swift */; };
 		035D979A26B74D6C0089083C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 035D979C26B74D6C0089083C /* Localizable.strings */; };
 		03653F0325EC4F5A00A34267 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03653F0225EC4F5A00A34267 /* Modifiers.swift */; };
@@ -136,6 +137,7 @@
 		035BC8EA2737346D00EA13CA /* sadTrombone2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sadTrombone2.mp3; sourceTree = "<group>"; };
 		035BC8EB2737346D00EA13CA /* sadTrombone3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sadTrombone3.mp3; sourceTree = "<group>"; };
 		035BC8EE273736A700EA13CA /* sadTrombone4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sadTrombone4.mp3; sourceTree = "<group>"; };
+		035BC8F027376D3C00EA13CA /* PronounGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PronounGender.swift; sourceTree = "<group>"; };
 		035D979626B74C820089083C /* L.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L.swift; sourceTree = "<group>"; };
 		035D979B26B74D6C0089083C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		035D979D26B74D730089083C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				035D979626B74C820089083C /* L.swift */,
 				036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */,
 				036DB7EC25A1070D0013C3B7 /* PersonNumber.swift */,
+				035BC8F027376D3C00EA13CA /* PronounGender.swift */,
 				036A9931271B8AF700C6C984 /* Quiz.swift */,
 				035BC8E82737235C00EA13CA /* QuizDifficulty.swift */,
 				036A99332726144600C6C984 /* QuizState.swift */,
@@ -545,6 +548,7 @@
 				032DBC48272F57A600D5804C /* ConjugationResult.swift in Sources */,
 				035BC8E92737235C00EA13CA /* QuizDifficulty.swift in Sources */,
 				036A993027138ACD00C6C984 /* QuizVerbs.swift in Sources */,
+				035BC8F127376D3C00EA13CA /* PronounGender.swift in Sources */,
 				036A9932271B8AF700C6C984 /* Quiz.swift in Sources */,
 				032B122326BA02D8000E70CA /* InfoBrowseView.swift in Sources */,
 				036DB7EE25A1070D0013C3B7 /* PersonNumber.swift in Sources */,

@@ -391,16 +391,40 @@ enum L {
       NSLocalizedString("Settings.quizDifficulty", comment: "")
     }
 
+    static var quizDifficultyDescription: String {
+      NSLocalizedString("Settings.quizDifficultyDescription", comment: "")
+    }
+
+    static var pronounGender: String {
+      NSLocalizedString("Settings.pronounGender", comment: "")
+    }
+
+    static var pronounGenderDescription: String {
+      NSLocalizedString("Settings.pronounGenderDescription", comment: "")
+    }
+  }
+
+  enum QuizDifficulty {
     static var regular: String {
-      NSLocalizedString("Settings.regular", comment: "")
+      NSLocalizedString("QuizDifficulty.regular", comment: "")
     }
 
     static var ridiculous: String {
-      NSLocalizedString("Settings.ridiculous", comment: "")
+      NSLocalizedString("QuizDifficulty.ridiculous", comment: "")
+    }
+  }
+
+  enum PronounGender {
+    static var feminine: String {
+      NSLocalizedString("PronounGender.feminine", comment: "")
     }
 
-    static var quizDifficultyDescription: String {
-      NSLocalizedString("Settings.quizDifficultyDescription", comment: "")
+    static var masculine: String {
+      NSLocalizedString("PronounGender.masculine", comment: "")
+    }
+
+    static var both: String {
+      NSLocalizedString("PronounGender.both", comment: "")
     }
   }
 

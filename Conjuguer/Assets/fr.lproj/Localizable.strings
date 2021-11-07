@@ -77,9 +77,16 @@
 "Info.creditsHeading" = "Crédits";
 
 "Settings.quizDifficulty" = "Difficulté du Quiz";
-"Settings.regular" = "Ordinaire";
-"Settings.ridiculous" = "Ridicule";
 "Settings.quizDifficultyDescription" = "Ce réglage détermine la difficulté des quiz. Vous voulez probablement Ordinaire.";
+"Settings.pronounGender" = "Genre des Pronoms";
+"Settings.pronounGenderDescription" = "Ce réglage détermine le genre du pronom, ce qui est important pour certaines conjugaisons aux temps composés.";
+
+"QuizDifficulty.regular" = "Ordinaire";
+"QuizDifficulty.ridiculous" = "Ridicule";
+
+"PronounGender.feminine" = "Féminin";
+"PronounGender.masculine" = "Masculin";
+"PronounGender.both" = "Les Deux";
 
 "VerbSort.frequency" = "Fréquence";
 "VerbSort.alphabetic" = "Alphabétique";

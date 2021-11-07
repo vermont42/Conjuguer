@@ -41,6 +41,16 @@ class Settings {
   static let quizDifficultyKey = "quizDifficulty"
   static let quizDifficultyDefault: QuizDifficulty = .regular
 
+  var pronounGender: PronounGender {
+    didSet {
+      if pronounGender != oldValue {
+        getterSetter.set(key: Settings.pronounGenderKey, value: pronounGender.rawValue)
+      }
+    }
+  }
+  static let pronounGenderKey = "pronounGender"
+  static let pronounGenderDefault: PronounGender = .feminine
+
   init(getterSetter: GetterSetter) {
     self.getterSetter = getterSetter
 
@@ -63,6 +73,13 @@ class Settings {
     } else {
       quizDifficulty = Settings.quizDifficultyDefault
       getterSetter.set(key: Settings.quizDifficultyKey, value: quizDifficulty.rawValue)
+    }
+
+    if let pronounGenderString = getterSetter.get(key: Settings.pronounGenderKey) {
+      pronounGender = PronounGender(rawValue: pronounGenderString) ?? Settings.pronounGenderDefault
+    } else {
+      pronounGender = Settings.pronounGenderDefault
+      getterSetter.set(key: Settings.pronounGenderKey, value: pronounGender.rawValue)
     }
   }
 }

@@ -23,9 +23,9 @@ enum QuizDifficulty: String, CaseIterable {
   var localizedDifficulty: String {
     switch self {
     case .regular:
-      return L.Settings.regular
+      return L.QuizDifficulty.regular
     case .ridiculous:
-      return L.Settings.ridiculous
+      return L.QuizDifficulty.ridiculous
     }
   }
 }

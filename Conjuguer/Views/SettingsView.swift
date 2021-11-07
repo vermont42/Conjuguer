@@ -52,6 +52,27 @@ struct SettingsView: View {
           }
 
           Spacer()
+
+          Group {
+            Text(L.Settings.pronounGender)
+              .modifier(SettingsSubheadingLabel())
+
+            Picker("", selection: $store.pronounGender) {
+              ForEach(PronounGender.allCases, id: \.self) { pronounGender in
+                Text(pronounGender.localizedGender).tag(pronounGender)
+              }
+            }
+              .modifier(SegmentedPicker())
+              .onAppear {
+                self.store.pronounGender = self.current.settings.pronounGender
+                self.store.current = self.current
+              }
+
+            Text(L.Settings.pronounGenderDescription)
+              .modifier(SettingsLabel())
+
+            Spacer(minLength: Layout.tripleDefaultSpacing)
+          }
         }
       }
     }
@@ -64,6 +85,12 @@ final class SelectionStore: ObservableObject {
   var quizDifficulty: QuizDifficulty = Settings.quizDifficultyDefault {
     didSet {
       current?.settings.quizDifficulty = quizDifficulty
+    }
+  }
+
+  var pronounGender: PronounGender = Settings.pronounGenderDefault {
+    didSet {
+      current?.settings.pronounGender = pronounGender
     }
   }
 }

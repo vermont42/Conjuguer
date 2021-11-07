@@ -51,7 +51,7 @@
 
 "Info.dedicationHeading" = "Dedication";
 
-"Info.dedicationText" = "David Compton was my high-school Nordic-skiing coach. He was also a French teacher but not initially ~my~ French teacher. He was aware of my interest in and aptitude for French, however. At the beginning of my junior year, I wasn’t going to be able to take French because of a schedule conflict with Advanced Placement English, so Mr. Compton created a five-days-a-week French-literature class just for me. A German exchange student named Julian Peters soon joined us. Using Volumes I and II of “Anthologie de la Littérature Française” by Robert Leggewie as our textbooks, we studied the greats of French literature from Chrétien de Troyes to Samuel Beckett. As an aside, this literary study ultimately inspired ~Conjuguer~’s use of literary examples of tense use. I thoroughly enjoyed Mr Compton’s class, and my knowledge of French took a giant leap. At the end of the year, I achieved a maximum score on the French Advanced Placement test. At the beginning of my freshman year of college, I took a test to get credit for a major-level French class and, of the sixty freshmen who took the test, I was one of only three who passed.
+"Info.dedicationText" = "David Compton was my high-school Nordic-skiing coach. He was also a French teacher but not initially ~my~ French teacher. He was aware of my interest in and aptitude for French, however. At the beginning of my junior year, I wasn’t going to be able to take French because of a schedule conflict with Advanced Placement English, so Mr. Compton created a five-days-a-week French-literature class just for me. A German exchange student named Julian Peters soon joined us. Using Volumes I and II of “Anthologie de la Littérature Française” by Robert Leggewie as our textbooks, we studied the greats of French literature from Chrétien de Troyes to Samuel Beckett. This literary study ultimately inspired ~Conjuguer~’s use of literary examples of tense use. I thoroughly enjoyed Mr Compton’s class, and my knowledge of French took a giant leap. At the end of the year, I achieved a maximum score on the French Advanced Placement test. At the beginning of my freshman year of college, I took a test to get credit for a major-level French class and, of the sixty freshmen who took the test, I was one of only three who passed.
 
 Mr. Compton already had a full class schedule in the fall of 1991, when he created the class for me. On some level, he might have enjoyed spending that class period puffing on his tobacco pipe, tinkering with his Macintosh computer. Solipsistic teen that I was, I never asked him ~why~ he sacrificed that time for me. But I can speculate. He studied at the Sorbonne during the 1960s and was a francophile. He may have recognized in me a shared interest in French and wanted to give me the opportunity to pursue it to the fullest extent possible. Whatever his motivation, I am grateful and dedicate this app to him.";
 
@@ -397,7 +397,7 @@ Examples:
 %ouïr (trad.)%: $oIs$, $oIs$, $oIt$, $oYons$, $oYez$, $oIent$
 %voir%: $vOIs$, $vOIs$, $vOIt$, $vOYons$, $vOYez$, $vOIent$
 
-Most of these verbs use irregular stems for some or all infinitif-présent conjugations.
+Most of these verbs use irregular stems for some or all indicatif-présent conjugations.
 
 6. Three verbs are fundamentally irregular in that their stems ~and~ endings are mostly unpredictable. These verbs are:
 
@@ -658,7 +658,7 @@ Examples:
 
 "Info.subjonctifImparfaitText" = "`Use`
 
-The ~subjonctif imparfait~ (imperfect subjunctive) is used after the conjunctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, and ~sans que~ when the main clause uses %passé simple% or %imparfait%. Use of the subjonctif imparfait is rare in contemporary French.
+The ~subjonctif imparfait~ (imperfect subjunctive) was used after the conjunctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, and ~sans que~ when the main clause uses %passé simple% or %imparfait%. Use of the subjonctif imparfait is rare in contemporary French.
 
 Examples:
 
@@ -674,7 +674,7 @@ Examples:
 
 The stem of the subjonctif imparfait is identical to that of the passé simple.
 
-The subjonctif-imparfait endings for any verb belong to one of the following categories, which are analogous to the five passé-simple categories.
+The subjonctif-imparfait endings for any verb belong to one of the following categories, which correspond to the five passé-simple categories.
 
 1. Regular ~er~ verbs plus %traire% (~a~ group): asse, asses, ât, assions, assiez, assent
 
@@ -882,7 +882,7 @@ The conditionnel passé is formed from the %conditionnel présent% form of %avoi
 
 "Info.subjonctifPasséText" = "`Use`
 
-Like the subjonctif présent, the ~subjonctif passé~ (past subjunctive) is used to express opinion, fear, doubt, or obligation. A clause using non-subjonctif tense often accompanies a clause using the subjonctif passé. In this case, the events of the subjonctif-passé clause precede the events of the non-subjonctif clause.
+Like the subjonctif présent, the ~subjonctif passé~ (past subjunctive) was used to express opinion, fear, doubt, or obligation. A clause using non-subjonctif tense often accompanied a clause using the subjonctif passé. In this case, the events of the subjonctif-passé clause preceded the events of the non-subjonctif clause.
 
 Examples:
 
@@ -896,13 +896,13 @@ Examples:
 
 `Conjugation`
 
-The subjonctif passé is formed from the %subjonctif présent% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
+The subjonctif passé was formed from the %subjonctif présent% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.subjonctifPlusQueParfaitHeading" = "Subjonctif Plus-que-parfait";
 
 "Info.subjonctifPlusQueParfaitText" = "`Use`
 
-The ~subjonctif plus-que-parfait~ (pluperfect subjunctive) is used to express opinion, fear, doubt, or obligation with respect to past events. Use of this tense is rare.
+The ~subjonctif plus-que-parfait~ (pluperfect subjunctive) was used to express opinion, fear, doubt, or obligation with respect to past events. Use of this tense is rare.
 
 Examples:
 
@@ -916,7 +916,7 @@ Examples:
 
 `Conjugation`
 
-The subjonctif plus-que-parfait is formed from the %subjonctif imparfait% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
+The subjonctif plus-que-parfait was formed from the %subjonctif imparfait% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.impératifPasséHeading" = "Impératif Passé";
 
@@ -981,9 +981,16 @@ Franz Josef Och architected Google Translate, which ~Conjuguer~’s developer us
 Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’ancien français, which ~Conjuguer~ uses for conjugation of ester, gésir, issir, and certain other defective verbs. URL: %https://micmap.org/dicfro/introduction/tableaux-de-conjugaison%";
 
 "Settings.quizDifficulty" = "Quiz Difficulty";
-"Settings.regular" = "Regular";
-"Settings.ridiculous" = "Ridiculous";
 "Settings.quizDifficultyDescription" = "This setting determines the difficulty of quizzes. You probably want Regular.";
+"Settings.pronounGender" = "Pronoun Gender";
+"Settings.pronounGenderDescription" = "This setting determines pronoun gender, which matters for certain compound-tense conjugations.";
+
+"QuizDifficulty.regular" = "Regular";
+"QuizDifficulty.ridiculous" = "Ridiculous";
+
+"PronounGender.feminine" = "Feminine";
+"PronounGender.masculine" = "Masculine";
+"PronounGender.both" = "Both";
 
 "VerbSort.frequency" = "Frequency";
 "VerbSort.alphabetic" = "Alphabetic";
