@@ -426,6 +426,14 @@ enum L {
     static var both: String {
       NSLocalizedString("PronounGender.both", comment: "")
     }
+
+    static var feminineAbbreviation: String {
+      NSLocalizedString("PronounGender.feminineAbbreviation", comment: "")
+    }
+
+    static var masculineAbbreviation: String {
+      NSLocalizedString("PronounGender.masculineAbbreviation", comment: "")
+    }
   }
 
   static func displayNameForVerbSort(_ sort: VerbSort) -> String {

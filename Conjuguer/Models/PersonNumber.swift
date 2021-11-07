@@ -33,6 +33,57 @@ enum PersonNumber: String, CaseIterable {
     }
   }
 
+  var pronounWithGender: String {
+    let pronounGender = Current.settings.pronounGender
+    let masc = L.PronounGender.masculineAbbreviation
+    let fem = L.PronounGender.feminineAbbreviation
+
+    switch self {
+    case .firstSingular:
+      switch pronounGender {
+      case .feminine, .both:
+        return "je (\(fem))"
+      case .masculine:
+        return "je (\(masc))"
+      }
+    case .secondSingular:
+      switch pronounGender {
+      case .feminine, .both:
+        return "tu (\(fem))"
+      case .masculine:
+        return "tu (\(masc))"
+      }
+    case .thirdSingular:
+      switch pronounGender {
+      case .feminine, .both:
+        return "elle"
+      case .masculine:
+        return "il"
+      }
+    case .firstPlural:
+      switch pronounGender {
+      case .masculine, .both:
+        return "nous (\(masc))"
+      case .feminine:
+        return "nous (\(fem))"
+      }
+    case .secondPlural:
+      switch pronounGender {
+      case .masculine, .both:
+        return "vous (\(masc))"
+      case .feminine:
+        return "vous (\(fem))"
+      }
+    case .thirdPlural:
+      switch pronounGender {
+      case .masculine, .both:
+        return "ils"
+      case .feminine:
+        return "elles"
+      }
+    }
+  }
+
   var shortDisplayName: String {
     switch self {
     case .firstSingular:
@@ -62,6 +113,9 @@ enum PersonNumber: String, CaseIterable {
     let firstLetterIsUnaspiratedH = normalizedFirstLetter == "h" && !hasAspiratedH
     let firstLetterImpliesLiaison = firstLetterIsVowel || firstLetterIsUnaspiratedH
 
+    let thirdSingular = Current.settings.pronounGender.thirdSingular
+    let thirdPlural = Current.settings.pronounGender.thirdPlural
+
     let preamble: String
     if isReflexive {
       switch self {
@@ -70,13 +124,13 @@ enum PersonNumber: String, CaseIterable {
       case .secondSingular:
         preamble = firstLetterImpliesLiaison ? "tu t'" : "tu te "
       case .thirdSingular:
-        preamble = firstLetterImpliesLiaison ? "il s'" : "il se "
+        preamble = firstLetterImpliesLiaison ? "\(thirdSingular) s'" : "\(thirdSingular) se "
       case .firstPlural:
         preamble = "nous nous "
       case .secondPlural:
         preamble = "vous vous "
       case .thirdPlural:
-        preamble = firstLetterImpliesLiaison ? "ils s'" : "ils se "
+        preamble = firstLetterImpliesLiaison ? "\(thirdPlural) s'" : "\(thirdPlural) se "
       }
     } else {
       switch self {
@@ -85,13 +139,13 @@ enum PersonNumber: String, CaseIterable {
       case .secondSingular:
         preamble = "tu "
       case .thirdSingular:
-        preamble = "il "
+        preamble = "\(thirdSingular) "
       case .firstPlural:
         preamble = "nous "
       case .secondPlural:
         preamble = "vous "
       case .thirdPlural:
-        preamble = "ils "
+        preamble = "\(thirdPlural) "
       }
     }
 

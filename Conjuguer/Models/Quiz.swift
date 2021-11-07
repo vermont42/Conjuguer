@@ -121,39 +121,41 @@ class Quiz: ObservableObject {
   }
 
   private func buildQuiz() {
-    [regularErVerb, regularErVerb, regularIrVerb, regularIrVerb, regularReVerb, bigThreeVerb, indicatifPrésentStemChangerVerb].forEach {
-      questions.append(($0, .indicatifPrésent(personNumber)))
-    }
+    questions.append((Verb.verbForInfinitif("pouvoir"), .indicatifPrésent(.firstSingular)))
 
-    [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb, êtreAuxiliaryVerb, irregularParticipePasséVerb].forEach {
-      questions.append(($0, .passéComposé(personNumber)))
-    }
-
-    [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb].forEach {
-      questions.append(($0, .subjonctifPrésent(personNumber)))
-    }
-
-    [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
-      questions.append(($0, .imparfait(personNumber)))
-    }
-
-    [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
-      questions.append(($0, .futurSimple(personNumber)))
-    }
-
-    [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
-      questions.append(($0, .conditionnelPrésent(personNumber)))
-    }
-
-    [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
-      questions.append(($0, .impératif(impératifPersonNumber)))
-    }
-
-    questions.append((topThirtyVerb, .participePrésent))
-
-    if shouldShuffle {
-      questions.shuffle()
-    }
+//    [regularErVerb, regularErVerb, regularIrVerb, regularIrVerb, regularReVerb, bigThreeVerb, indicatifPrésentStemChangerVerb].forEach {
+//      questions.append(($0, .indicatifPrésent(personNumber)))
+//    }
+//
+//    [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb, êtreAuxiliaryVerb, irregularParticipePasséVerb].forEach {
+//      questions.append(($0, .passéComposé(personNumber)))
+//    }
+//
+//    [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb].forEach {
+//      questions.append(($0, .subjonctifPrésent(personNumber)))
+//    }
+//
+//    [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
+//      questions.append(($0, .imparfait(personNumber)))
+//    }
+//
+//    [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
+//      questions.append(($0, .futurSimple(personNumber)))
+//    }
+//
+//    [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
+//      questions.append(($0, .conditionnelPrésent(personNumber)))
+//    }
+//
+//    [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
+//      questions.append(($0, .impératif(impératifPersonNumber)))
+//    }
+//
+//    questions.append((topThirtyVerb, .participePrésent))
+//
+//    if shouldShuffle {
+//      questions.shuffle()
+//    }
   }
 
   private var personNumber: PersonNumber {
@@ -267,7 +269,7 @@ class Quiz: ObservableObject {
     let correctAnswerResult = Conjugator.conjugate(infinitif: verb.infinitif, tense: tense, extraLetters: nil)
     switch correctAnswerResult {
     case let .success(correctAnswer):
-      let result = ConjugationResult.compare(lhs: correctAnswer, rhs: proposedAnswer)
+      let result = ConjugationResult.score(correctAnswer: correctAnswer, proposedAnswer: proposedAnswer)
       if currentQuestionIndex != questions.count - 1 {
         SoundPlayer.play(result.sound)
       }

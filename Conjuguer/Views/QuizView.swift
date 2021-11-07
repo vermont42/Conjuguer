@@ -44,7 +44,7 @@ struct QuizView: View {
             .frame(height: Layout.defaultSpacing)
 
           Group {
-            Text("\(L.Quiz.pronounWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.pronounString)")
+            Text("\(L.Quiz.pronounWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.pronounWithGender)")
               .bodyLabel()
 
             Spacer()

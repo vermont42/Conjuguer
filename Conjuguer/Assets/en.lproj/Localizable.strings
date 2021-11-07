@@ -983,7 +983,7 @@ Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’anci
 "Settings.quizDifficulty" = "Quiz Difficulty";
 "Settings.quizDifficultyDescription" = "This setting determines the difficulty of quizzes. You probably want Regular.";
 "Settings.pronounGender" = "Pronoun Gender";
-"Settings.pronounGenderDescription" = "This setting determines pronoun gender, which matters for certain compound-tense conjugations.";
+"Settings.pronounGenderDescription" = "This setting determines pronoun gender, which matters for certain compound-tense conjugations. “Both” means that singular pronouns are feminine and that plural pronouns are masculine.";
 
 "QuizDifficulty.regular" = "Regular";
 "QuizDifficulty.ridiculous" = "Ridiculous";
@@ -991,6 +991,8 @@ Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’anci
 "PronounGender.feminine" = "Feminine";
 "PronounGender.masculine" = "Masculine";
 "PronounGender.both" = "Both";
+"PronounGender.feminineAbbreviation" = "fem.";
+"PronounGender.masculineAbbreviation" = "masc.";
 
 "VerbSort.frequency" = "Frequency";
 "VerbSort.alphabetic" = "Alphabetic";

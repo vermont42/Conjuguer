@@ -165,10 +165,10 @@ enum Tense: Hashable {
     }
   }
 
-  var pronounString: String {
+  var pronounWithGender: String {
     switch self {
     case .indicatifPrésent(let personNumber), .passéSimple(let personNumber), .imparfait(let personNumber), .futurSimple(let personNumber), .conditionnelPrésent(let personNumber), .subjonctifPrésent(let personNumber), .subjonctifImparfait(let personNumber), .impératif(let personNumber), .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
-      return personNumber.pronoun
+      return personNumber.pronounWithGender
     case .participePassé, .participePrésent, .radicalFutur:
       return L.Quiz.none
     }

@@ -12,32 +12,32 @@ enum ConjugationResult {
   case partialMatch
   case noMatch
 
-  static func compare(lhs: String, rhs: String) -> ConjugationResult {
-    let lhsCount = lhs.count
-    let rhsCount = rhs.count
-    if lhsCount != rhsCount || lhsCount == 0 {
+  static func score(correctAnswer: String, proposedAnswer: String) -> ConjugationResult {
+    let correctAnswerCount = correctAnswer.count
+    let proposedAnswerCount = proposedAnswer.count
+    if correctAnswerCount != proposedAnswerCount || correctAnswerCount == 0 {
       return .noMatch
     }
-    var lhsClean = lhs.lowercased()
-    var rhsClean = rhs.lowercased()
-    if lhsClean == rhsClean {
+    var correctAnswerClean = correctAnswer.lowercased()
+    var proposedAnswerClean = proposedAnswer.lowercased()
+    if correctAnswerClean == proposedAnswerClean {
       return .totalMatch
     }
     [("â", "a"), ("ê", "e"), ("î", "i"), ("ô", "o"), ("û", "u")].forEach {
-      lhsClean = lhsClean.replacingOccurrences(of: $0.0, with: $0.1)
-      rhsClean = rhsClean.replacingOccurrences(of: $0.0, with: $0.1)
+      correctAnswerClean = correctAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
+      proposedAnswerClean = proposedAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
     }
-    if lhsClean == rhsClean {
+    if correctAnswerClean == proposedAnswerClean {
       return .totalMatch
     }
     [
       ("à", "a"), ("è", "e"), ("ì", "i"), ("ò", "o"), ("ù", "u"),
       ("á", "a"), ("é", "e"), ("í", "i"), ("ó", "o"), ("ú", "u")
     ].forEach {
-      lhsClean = lhsClean.replacingOccurrences(of: $0.0, with: $0.1)
-      rhsClean = rhsClean.replacingOccurrences(of: $0.0, with: $0.1)
+      correctAnswerClean = correctAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
+      proposedAnswerClean = proposedAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
     }
-    if lhsClean == rhsClean {
+    if correctAnswerClean == proposedAnswerClean {
       return .partialMatch
     } else {
       return .noMatch

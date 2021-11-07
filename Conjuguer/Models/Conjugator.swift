@@ -192,7 +192,14 @@ enum Conjugator {
     case .impératif(let personNumber):
       return .success(composedConjugation(stems: stems, ending: model.indicatifPrésentGroupRecursive.impératifEndingForPersonNumber(personNumber)))
     case .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
-      return .success(tense.conjugatedAuxilliary(personNumber: personNumber, auxiliary: verb.auxiliary) + " " + stems[0] + model.participeEndingRecursive)
+      let conjugationWithoutAgreement = tense.conjugatedAuxilliary(personNumber: personNumber, auxiliary: verb.auxiliary) + " " + stems[0] + model.participeEndingRecursive
+      if verb.isReflexive || verb.auxiliary == .être {
+        let pronounGender = Current.settings.pronounGender
+        let agreementEnding = pronounGender.participePasséEndingForPersonNumber(personNumber)
+        return .success(conjugationWithoutAgreement + agreementEnding)
+      } else {
+        return .success(conjugationWithoutAgreement)
+      }
     }
   }
 
