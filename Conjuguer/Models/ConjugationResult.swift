@@ -12,36 +12,32 @@ enum ConjugationResult {
   case partialMatch
   case noMatch
 
-  static func score(correctAnswer: String, proposedAnswer: String) -> ConjugationResult {
-    let correctAnswerCount = correctAnswer.count
-    let proposedAnswerCount = proposedAnswer.count
-    if correctAnswerCount != proposedAnswerCount || correctAnswerCount == 0 {
-      return .noMatch
-    }
-    var correctAnswerClean = correctAnswer.lowercased()
+  static func score(correctAnswers: String, proposedAnswer: String) -> ConjugationResult {
+    let correctAnswersClean = correctAnswers.lowercased()
     var proposedAnswerClean = proposedAnswer.lowercased()
-    if correctAnswerClean == proposedAnswerClean {
-      return .totalMatch
+    for var correctAnswerClean in correctAnswersClean.components(separatedBy: Tense.alternateConjugationSeparator) {
+      if correctAnswerClean == proposedAnswerClean {
+        return .totalMatch
+      }
+      [("â", "a"), ("ê", "e"), ("î", "i"), ("ô", "o"), ("û", "u")].forEach {
+        correctAnswerClean = correctAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
+        proposedAnswerClean = proposedAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
+      }
+      if correctAnswerClean == proposedAnswerClean {
+        return .totalMatch
+      }
+      [
+        ("à", "a"), ("è", "e"), ("ì", "i"), ("ò", "o"), ("ù", "u"),
+        ("á", "a"), ("é", "e"), ("í", "i"), ("ó", "o"), ("ú", "u")
+      ].forEach {
+        correctAnswerClean = correctAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
+        proposedAnswerClean = proposedAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
+      }
+      if correctAnswerClean == proposedAnswerClean {
+        return .partialMatch
+      }
     }
-    [("â", "a"), ("ê", "e"), ("î", "i"), ("ô", "o"), ("û", "u")].forEach {
-      correctAnswerClean = correctAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
-      proposedAnswerClean = proposedAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
-    }
-    if correctAnswerClean == proposedAnswerClean {
-      return .totalMatch
-    }
-    [
-      ("à", "a"), ("è", "e"), ("ì", "i"), ("ò", "o"), ("ù", "u"),
-      ("á", "a"), ("é", "e"), ("í", "i"), ("ó", "o"), ("ú", "u")
-    ].forEach {
-      correctAnswerClean = correctAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
-      proposedAnswerClean = proposedAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
-    }
-    if correctAnswerClean == proposedAnswerClean {
-      return .partialMatch
-    } else {
-      return .noMatch
-    }
+    return .noMatch
   }
 
   var sound: Sound {
