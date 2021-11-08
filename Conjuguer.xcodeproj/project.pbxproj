@@ -38,9 +38,11 @@
 		035BC8ED2737346D00EA13CA /* sadTrombone3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 035BC8EB2737346D00EA13CA /* sadTrombone3.mp3 */; };
 		035BC8EF273736A700EA13CA /* sadTrombone4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 035BC8EE273736A700EA13CA /* sadTrombone4.mp3 */; };
 		035BC8F127376D3C00EA13CA /* PronounGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035BC8F027376D3C00EA13CA /* PronounGender.swift */; };
-		035BC8F327387B7D00EA13CA /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035BC8F227387B7D00EA13CA /* ResultsView.swift */; };
+		035BC8F327387B7D00EA13CA /* QuizResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035BC8F227387B7D00EA13CA /* QuizResultsView.swift */; };
 		035BC8F5273897C200EA13CA /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035BC8F4273897C200EA13CA /* DoubleExtension.swift */; };
 		035BC8F72738A4F900EA13CA /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035BC8F62738A4F900EA13CA /* IntExtension.swift */; };
+		035BC8F92739BC7C00EA13CA /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035BC8F82739BC7C00EA13CA /* QuizResultView.swift */; };
+		035BC8FB2739C1DC00EA13CA /* QuizResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035BC8FA2739C1DC00EA13CA /* QuizResult.swift */; };
 		035D979726B74C820089083C /* L.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035D979626B74C820089083C /* L.swift */; };
 		035D979A26B74D6C0089083C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 035D979C26B74D6C0089083C /* Localizable.strings */; };
 		03653F0325EC4F5A00A34267 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03653F0225EC4F5A00A34267 /* Modifiers.swift */; };
@@ -141,9 +143,11 @@
 		035BC8EB2737346D00EA13CA /* sadTrombone3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sadTrombone3.mp3; sourceTree = "<group>"; };
 		035BC8EE273736A700EA13CA /* sadTrombone4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sadTrombone4.mp3; sourceTree = "<group>"; };
 		035BC8F027376D3C00EA13CA /* PronounGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PronounGender.swift; sourceTree = "<group>"; };
-		035BC8F227387B7D00EA13CA /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		035BC8F227387B7D00EA13CA /* QuizResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultsView.swift; sourceTree = "<group>"; };
 		035BC8F4273897C200EA13CA /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		035BC8F62738A4F900EA13CA /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
+		035BC8F82739BC7C00EA13CA /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
+		035BC8FA2739C1DC00EA13CA /* QuizResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResult.swift; sourceTree = "<group>"; };
 		035D979626B74C820089083C /* L.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L.swift; sourceTree = "<group>"; };
 		035D979B26B74D6C0089083C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		035D979D26B74D730089083C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -318,6 +322,7 @@
 				035BC8F027376D3C00EA13CA /* PronounGender.swift */,
 				036A9931271B8AF700C6C984 /* Quiz.swift */,
 				035BC8E82737235C00EA13CA /* QuizDifficulty.swift */,
+				035BC8FA2739C1DC00EA13CA /* QuizResult.swift */,
 				036A99332726144600C6C984 /* QuizState.swift */,
 				036A992F27138ACD00C6C984 /* QuizVerbs.swift */,
 				03C2CAC42619125200CFA825 /* Sound.swift */,
@@ -381,8 +386,9 @@
 				0373680D25DB811F008BDF46 /* MainTabView.swift */,
 				0373684425DD809C008BDF46 /* ModelBrowseView.swift */,
 				0343E7DE25E427890043B813 /* ModelView.swift */,
+				035BC8F227387B7D00EA13CA /* QuizResultsView.swift */,
+				035BC8F82739BC7C00EA13CA /* QuizResultView.swift */,
 				03FA474727060D2000131205 /* QuizView.swift */,
-				035BC8F227387B7D00EA13CA /* ResultsView.swift */,
 				03FA474927060D6C00131205 /* SettingsView.swift */,
 				032D267326BDF5E000AE1BD1 /* TextView.swift */,
 				0373681525DB8530008BDF46 /* VerbBrowseView.swift */,
@@ -554,6 +560,7 @@
 				036DB7DF25A0DD7A0013C3B7 /* Verb.swift in Sources */,
 				03FA474A27060D6C00131205 /* SettingsView.swift in Sources */,
 				03309F6926BC9E72003E4F92 /* NSAttributedStringExtension.swift in Sources */,
+				035BC8F92739BC7C00EA13CA /* QuizResultView.swift in Sources */,
 				032DBC48272F57A600D5804C /* ConjugationResult.swift in Sources */,
 				035BC8E92737235C00EA13CA /* QuizDifficulty.swift in Sources */,
 				036A993027138ACD00C6C984 /* QuizVerbs.swift in Sources */,
@@ -574,6 +581,7 @@
 				038E0B032690A016002A71EF /* DefectGroupParser.swift in Sources */,
 				035BC8F72738A4F900EA13CA /* IntExtension.swift in Sources */,
 				036DB790259FD6500013C3B7 /* InputView.swift in Sources */,
+				035BC8FB2739C1DC00EA13CA /* QuizResult.swift in Sources */,
 				03309F6626BC9C95003E4F92 /* Info.swift in Sources */,
 				036DB81825A8C9420013C3B7 /* IndicatifPresentGroup.swift in Sources */,
 				0373683125DC672F008BDF46 /* GetterSetter.swift in Sources */,
@@ -609,7 +617,7 @@
 				035BC8DB2736E86F00EA13CA /* Layout.swift in Sources */,
 				032D267426BDF5E000AE1BD1 /* TextView.swift in Sources */,
 				032D267226BDF52100AE1BD1 /* InfoView.swift in Sources */,
-				035BC8F327387B7D00EA13CA /* ResultsView.swift in Sources */,
+				035BC8F327387B7D00EA13CA /* QuizResultsView.swift in Sources */,
 				0373680E25DB811F008BDF46 /* MainTabView.swift in Sources */,
 				030FFAA726CA1A2000741524 /* FrequencyParser.swift in Sources */,
 			);

@@ -2,7 +2,7 @@
 //  DoubleExtension.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 11/7/21.
+//  Created by Josh Adams on 11/7/21.
 //
 
 import Foundation

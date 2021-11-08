@@ -117,24 +117,19 @@ struct QuizView: View {
             .frame(height: Layout.defaultSpacing)
         }
       }
+        .padding(.leading, Layout.doubleDefaultSpacing)
+        .padding(.trailing, Layout.doubleDefaultSpacing)
+        .sheet(
+          isPresented: $quiz.shouldShowResults,
+          onDismiss: {
+            quiz.shouldShowResults = false
+          },
+          content: {
+            QuizResultsView()
+              .environmentObject(quiz)
+          }
+        )
     }
-    .padding(.leading, Layout.doubleDefaultSpacing)
-    .padding(.trailing, Layout.doubleDefaultSpacing)
-//    .alert(String(format: L.QuizView.quizComplete, quiz.lastScore), isPresented: $quiz.shouldShowLastScore) {
-//      Button(L.QuizView.cool, role: .cancel) {
-//        quiz.shouldShowLastScore = false
-//      }
-//    }
-    .sheet(
-      isPresented: $quiz.shouldShowResults,
-      onDismiss: {
-        quiz.shouldShowResults = false
-      },
-      content: {
-        ResultsView()
-          .environmentObject(quiz)
-      }
-    )
   }
 
   private func quit() {

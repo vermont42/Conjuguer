@@ -1,13 +1,13 @@
 //
-//  ResultsView.swift
+//  QuizResultsView.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 11/7/21.
+//  Created by Josh Adams on 11/7/21.
 //
 
 import SwiftUI
 
-struct ResultsView: View {
+struct QuizResultsView: View {
   @EnvironmentObject var quiz: Quiz
 
   var body: some View {
@@ -39,11 +39,10 @@ struct ResultsView: View {
           .bodyLabel()
 
         ScrollView(.vertical) {
-          Text("\(quiz.score)")
-          Text(quiz.numberCorrect.asFormattedNumberCorrect())
-          // May be useful for setting row height: https://swiftuirecipes.com/blog/swiftui-list-change-row-and-header-height
-          // TODO: Design row in KeyNote. Could use different SF Symbols icon for correct, half, and zero.
-          // May need to update model.
+          ForEach(quiz.quizResults, id: \.infinitif) { quizResult in
+            QuizResultView(quizResult: quizResult)
+              .listRowSeparatorTint(.customForeground) // TODO: Make this work.
+          }
         }
       }
         .frame(maxWidth: .infinity, alignment: .leading)

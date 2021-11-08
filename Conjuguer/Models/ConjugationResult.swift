@@ -72,4 +72,15 @@ enum ConjugationResult {
       return 0.0
     }
   }
+
+  var iconString: String {
+    switch self {
+    case .totalMatch:
+      return "checkmark"
+    case .partialMatch:
+      return "circle.bottomhalf.fill"
+    case .noMatch:
+      return "xmark"
+    }
+  }
 }

@@ -2,7 +2,7 @@
 //  IntExtension.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 6/25/17.
+//  Created by Josh Adams on 6/25/17.
 //
 
 import Foundation

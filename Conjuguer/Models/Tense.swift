@@ -174,6 +174,15 @@ enum Tense: Hashable {
     }
   }
 
+  var pronounDecorator: String {
+    switch self {
+    case .indicatifPrésent(let personNumber), .passéSimple(let personNumber), .imparfait(let personNumber), .futurSimple(let personNumber), .conditionnelPrésent(let personNumber), .subjonctifPrésent(let personNumber), .subjonctifImparfait(let personNumber), .impératif(let personNumber), .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
+      return " - \(personNumber.pronounWithGender)"
+    case .participePassé, .participePrésent, .radicalFutur:
+      return ""
+    }
+  }
+
   static func shorthandForNonCompoundTense(appliesTo: Set<Tense>) -> String {
     var shorthands: Set<String> = Set()
 

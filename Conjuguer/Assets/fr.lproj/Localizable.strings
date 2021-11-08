@@ -83,7 +83,7 @@
 "Settings.quizDifficulty" = "Difficulté du Quiz";
 "Settings.quizDifficultyDescription" = "Ce réglage détermine la difficulté des quiz. Vous voulez probablement Ordinaire.";
 "Settings.pronounGender" = "Genres des Pronoms";
-"Settings.pronounGenderDescription" = "Ce réglage détermine les genres des pronoms, ce qui est important pour certaines conjugaisons aux temps composés. “Les Deux” signifie que les pronoms singuliers sont féminins et que les pronoms pluriels sont masculins.";
+"Settings.pronounGenderDescription" = "Ce réglage détermine les genres des pronoms, ce qui est important pour certaines conjugaisons aux temps composés. « Les Deux » signifie que les pronoms singuliers sont féminins et que les pronoms pluriels sont masculins.";
 
 "QuizDifficulty.regular" = "Ordinaire";
 "QuizDifficulty.ridiculous" = "Ridicule";
