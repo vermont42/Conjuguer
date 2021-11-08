@@ -19,15 +19,6 @@ struct ResultsView: View {
         Spacer()
           .frame(height: Layout.tripleDefaultSpacing)
 
-//        HStack {
-//          Text(L.Navigation.results)
-//            .modifier(HeadingLabel())
-//            .foregroundColor(Color.customBlue)
-//            .padding(.leading, Layout.doubleDefaultSpacing)
-//
-//          Spacer()
-//        }
-
         Text(L.Navigation.results)
           .modifier(HeadingLabel())
           .foregroundColor(Color.customBlue)
@@ -50,6 +41,7 @@ struct ResultsView: View {
         ScrollView(.vertical) {
           Text("\(quiz.score)")
           Text(quiz.numberCorrect.asFormattedNumberCorrect())
+          // May be useful for setting row height: https://swiftuirecipes.com/blog/swiftui-list-change-row-and-header-height
         }
       }
         .frame(maxWidth: .infinity, alignment: .leading)
