@@ -21,6 +21,10 @@ enum L {
       NSLocalizedString("Navigation.quiz", comment: "")
     }
 
+    static var results: String {
+      NSLocalizedString("Navigation.results", comment: "")
+    }
+
     static var info: String {
       NSLocalizedString("Navigation.info", comment: "")
     }
@@ -84,6 +88,16 @@ enum L {
     }
   }
 
+  enum ResultsView {
+    static var correctWithColon: String {
+      NSLocalizedString("ResultsView.correctWithColon", comment: "")
+    }
+
+    static var timeWithColon: String {
+      NSLocalizedString("ResultsView.timeWithColon", comment: "")
+    }
+  }
+
   enum ModelView {
     static var parent: String {
       NSLocalizedString("ModelView.parent", comment: "")
@@ -118,61 +132,61 @@ enum L {
     }
   }
 
-  enum Quiz {
+  enum QuizView {
     static var start: String {
-      NSLocalizedString("Quiz.start", comment: "")
+      NSLocalizedString("QuizView.start", comment: "")
     }
 
     static var verbWithColon: String {
-      NSLocalizedString("Quiz.verbWithColon", comment: "")
+      NSLocalizedString("QuizView.verbWithColon", comment: "")
     }
 
     static var translationWithColon: String {
-      NSLocalizedString("Quiz.translationWithColon", comment: "")
+      NSLocalizedString("QuizView.translationWithColon", comment: "")
     }
 
     static var pronounWithColon: String {
-      NSLocalizedString("Quiz.pronounWithColon", comment: "")
+      NSLocalizedString("QuizView.pronounWithColon", comment: "")
     }
 
     static var tenseWithColon: String {
-      NSLocalizedString("Quiz.tenseWithColon", comment: "")
+      NSLocalizedString("QuizView.tenseWithColon", comment: "")
     }
 
     static var progressWithColon: String {
-      NSLocalizedString("Quiz.progressWithColon", comment: "")
+      NSLocalizedString("QuizView.progressWithColon", comment: "")
     }
 
     static var scoreWithColon: String {
-      NSLocalizedString("Quiz.scoreWithColon", comment: "")
+      NSLocalizedString("QuizView.scoreWithColon", comment: "")
     }
 
     static var elapsedWithColon: String {
-      NSLocalizedString("Quiz.elapsedWithColon", comment: "")
+      NSLocalizedString("QuizView.elapsedWithColon", comment: "")
     }
 
     static var conjugation: String {
-      NSLocalizedString("Quiz.conjugation", comment: "")
+      NSLocalizedString("QuizView.conjugation", comment: "")
     }
 
     static var quit: String {
-      NSLocalizedString("Quiz.quit", comment: "")
+      NSLocalizedString("QuizView.quit", comment: "")
     }
 
     static var gameCenterFailure: String {
-      NSLocalizedString("Quiz.gameCenterFailure", comment: "")
+      NSLocalizedString("QuizView.gameCenterFailure", comment: "")
     }
 
     static var none: String {
-      NSLocalizedString("Quiz.none", comment: "")
+      NSLocalizedString("QuizView.none", comment: "")
     }
 
     static var quizComplete: String {
-      NSLocalizedString("Quiz.quizComplete", comment: "")
+      NSLocalizedString("QuizView.quizComplete", comment: "")
     }
 
     static var cool: String {
-      NSLocalizedString("Quiz.cool", comment: "")
+      NSLocalizedString("QuizView.cool", comment: "")
     }
   }
 
@@ -411,6 +425,14 @@ enum L {
 
     static var ridiculous: String {
       NSLocalizedString("QuizDifficulty.ridiculous", comment: "")
+    }
+
+    static var regularDifficulty: String {
+      NSLocalizedString("QuizDifficulty.regularDifficulty", comment: "")
+    }
+
+    static var ridiculousDifficulty: String {
+      NSLocalizedString("QuizDifficulty.ridiculousDifficulty", comment: "")
     }
   }
 

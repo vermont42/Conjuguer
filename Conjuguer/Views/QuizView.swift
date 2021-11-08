@@ -30,13 +30,13 @@ struct QuizView: View {
 
         if quiz.quizState == .inProgress {
           Group {
-            Text("\(L.Quiz.verbWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.infinitifWithPossibleExtraLetters)")
+            Text("\(L.QuizView.verbWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.infinitifWithPossibleExtraLetters)")
               .bodyLabel()
 
             Spacer()
               .frame(height: Layout.defaultSpacing)
 
-            Text("\(L.Quiz.translationWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.translation)")
+            Text("\(L.QuizView.translationWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.translation)")
               .bodyLabel()
           }
 
@@ -44,26 +44,26 @@ struct QuizView: View {
             .frame(height: Layout.defaultSpacing)
 
           Group {
-            Text("\(L.Quiz.pronounWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.pronounWithGender)")
+            Text("\(L.QuizView.pronounWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.pronounWithGender)")
               .bodyLabel()
 
             Spacer()
               .frame(height: Layout.defaultSpacing)
 
-            Text("\(L.Quiz.tenseWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.titleCaseName.lowercased())")
+            Text("\(L.QuizView.tenseWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.titleCaseName.lowercased())")
               .bodyLabel()
 
             Spacer()
               .frame(height: Layout.defaultSpacing)
 
             HStack {
-              Text("\(L.Quiz.progressWithColon) \(quiz.currentQuestionIndex + 1) / \(quiz.questions.count)")
+              Text("\(L.QuizView.progressWithColon) \(quiz.currentQuestionIndex + 1) / \(quiz.questions.count)")
                 .bodyLabel()
                 .foregroundColor(Color.customBlue)
 
               Spacer()
 
-              Text("\(L.Quiz.scoreWithColon) \(quiz.score)")
+              Text("\(L.QuizView.scoreWithColon) \(quiz.score)")
                 .bodyLabel()
                 .foregroundColor(Color.customBlue)
             }
@@ -72,20 +72,20 @@ struct QuizView: View {
               .frame(height: Layout.defaultSpacing)
 
             HStack {
-              Text("\(L.Quiz.elapsedWithColon) \(quiz.elapsedTime)")
+              Text("\(L.QuizView.elapsedWithColon) \(quiz.elapsedTime)")
                 .bodyLabel()
                 .foregroundColor(Color.customBlue)
 
               Spacer()
 
-              Button(L.Quiz.quit) {
+              Button(L.QuizView.quit) {
                 quit()
               }
               .buttonLabel()
               .foregroundColor(Color.customRed)
             }
 
-            TextField(L.Quiz.conjugation, text: $input)
+            TextField(L.QuizView.conjugation, text: $input)
               .focused($conjugationFieldIsFocused)
               .autocapitalization(.none)
               .onSubmit {
@@ -104,7 +104,7 @@ struct QuizView: View {
           HStack {
             Spacer()
 
-            Button(L.Quiz.start) {
+            Button(L.QuizView.start) {
               start()
             }
             .buttonLabel()
@@ -120,11 +120,21 @@ struct QuizView: View {
     }
     .padding(.leading, Layout.doubleDefaultSpacing)
     .padding(.trailing, Layout.doubleDefaultSpacing)
-    .alert(String(format: L.Quiz.quizComplete, quiz.lastScore), isPresented: $quiz.shouldShowLastScore) {
-      Button(L.Quiz.cool, role: .cancel) {
-        quiz.shouldShowLastScore = false
+//    .alert(String(format: L.QuizView.quizComplete, quiz.lastScore), isPresented: $quiz.shouldShowLastScore) {
+//      Button(L.QuizView.cool, role: .cancel) {
+//        quiz.shouldShowLastScore = false
+//      }
+//    }
+    .sheet(
+      isPresented: $quiz.shouldShowResults,
+      onDismiss: {
+        quiz.shouldShowResults = false
+      },
+      content: {
+        ResultsView()
+          .environmentObject(quiz)
       }
-    }
+    )
   }
 
   private func quit() {

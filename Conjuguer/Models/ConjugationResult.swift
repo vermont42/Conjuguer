@@ -61,4 +61,15 @@ enum ConjugationResult {
       return 0
     }
   }
+
+  var percentCorrect: Double {
+    switch self {
+    case .totalMatch:
+      return 1.0
+    case .partialMatch:
+      return 0.5
+    case .noMatch:
+      return 0.0
+    }
+  }
 }

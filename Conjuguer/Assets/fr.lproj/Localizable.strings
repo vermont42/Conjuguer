@@ -8,6 +8,7 @@
 "Navigation.verbs" = "Verbes";
 "Navigation.models" = "Modèles";
 "Navigation.quiz" = "Quiz";
+"Navigation.results" = "Résultats";
 "Navigation.info" = "Info";
 "Navigation.settings" = "Réglages";
 "Navigation.input" = "Entrée";
@@ -34,20 +35,23 @@
 "ModelView.verbsUsing" = "Verbes Qui Utilisent Ce Modèle";
 "ModelView.verbUsing" = "Verbe Qui Utilise Ce Modèle";
 
-"Quiz.start" = "Commencer";
-"Quiz.scoreWithColon" = "Score:";
-"Quiz.verbWithColon" = "Verbe:";
-"Quiz.translationWithColon" = "Trad.:";
-"Quiz.pronounWithColon" = "Pronom:";
-"Quiz.tenseWithColon" = "Temps:";
-"Quiz.progressWithColon" = "Progrès:";
-"Quiz.elapsedWithColon" = "Écoulé:";
-"Quiz.conjugation" = "Conjugaison";
-"Quiz.quit" = "Quitter";
-"Quiz.gameCenterFailure" = "Game Center a raté.";
-"Quiz.none" = "aucun";
-"Quiz.quizComplete" = "Félicitations! Vous avez terminé un quiz en marquant %d points.";
-"Quiz.cool" = "Chouette";
+"QuizView.start" = "Commencer";
+"QuizView.scoreWithColon" = "Score:";
+"QuizView.verbWithColon" = "Verbe:";
+"QuizView.translationWithColon" = "Trad.:";
+"QuizView.pronounWithColon" = "Pronom:";
+"QuizView.tenseWithColon" = "Temps:";
+"QuizView.progressWithColon" = "Progrès:";
+"QuizView.elapsedWithColon" = "Écoulé:";
+"QuizView.conjugation" = "Conjugaison";
+"QuizView.quit" = "Quitter";
+"QuizView.gameCenterFailure" = "Game Center a raté.";
+"QuizView.none" = "aucun";
+"QuizView.quizComplete" = "Félicitations! Vous avez terminé un quiz en marquant %d points.";
+"QuizView.cool" = "Chouette";
+
+"ResultsView.correctWithColon" = "Correcte:";
+"ResultsView.timeWithColon" = "Temps:";
 
 "Info.dedicationHeading" = "Dédicace";
 "Info.purposeAndUseHeading" = "But et Emploi";
@@ -83,6 +87,8 @@
 
 "QuizDifficulty.regular" = "Ordinaire";
 "QuizDifficulty.ridiculous" = "Ridicule";
+"QuizDifficulty.regularDifficulty" = "Difficulté Ordinaire";
+"QuizDifficulty.ridiculous" = "Difficulté Ridicule";
 
 "PronounGender.feminine" = "Féminin";
 "PronounGender.masculine" = "Masculin";

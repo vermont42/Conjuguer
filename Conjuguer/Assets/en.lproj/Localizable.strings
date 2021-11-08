@@ -8,6 +8,7 @@
 "Navigation.verbs" = "Verbs";
 "Navigation.models" = "Models";
 "Navigation.quiz" = "Quiz";
+"Navigation.results" = "Results";
 "Navigation.info" = "Info";
 "Navigation.settings" = "Settings";
 "Navigation.input" = "Input";
@@ -34,20 +35,23 @@
 "ModelView.verbsUsing" = "Verbs Using This Model";
 "ModelView.verbUsing" = "Verb Using This Model";
 
-"Quiz.start" = "Start";
-"Quiz.scoreWithColon" = "Score:";
-"Quiz.verbWithColon" = "Verb:";
-"Quiz.translationWithColon" = "Trans.:";
-"Quiz.pronounWithColon" = "Pronoun:";
-"Quiz.tenseWithColon" = "Tense:";
-"Quiz.progressWithColon" = "Progress:";
-"Quiz.elapsedWithColon" = "Elapsed:";
-"Quiz.conjugation" = "Conjugation";
-"Quiz.quit" = "Quit";
-"Quiz.gameCenterFailure" = "Game Center failed.";
-"Quiz.none" = "none";
-"Quiz.quizComplete" = "Congratulations! You completed a quiz scoring %d points.";
-"Quiz.cool" = "Cool";
+"QuizView.start" = "Start";
+"QuizView.scoreWithColon" = "Score:";
+"QuizView.verbWithColon" = "Verb:";
+"QuizView.translationWithColon" = "Trans.:";
+"QuizView.pronounWithColon" = "Pronoun:";
+"QuizView.tenseWithColon" = "Tense:";
+"QuizView.progressWithColon" = "Progress:";
+"QuizView.elapsedWithColon" = "Elapsed:";
+"QuizView.conjugation" = "Conjugation";
+"QuizView.quit" = "Quit";
+"QuizView.gameCenterFailure" = "Game Center failed.";
+"QuizView.none" = "none";
+"QuizView.quizComplete" = "Congratulations! You completed a quiz scoring %d points.";
+"QuizView.cool" = "Cool";
+
+"ResultsView.correctWithColon" = "Correct:";
+"ResultsView.timeWithColon" = "Time:";
 
 "Info.dedicationHeading" = "Dedication";
 
@@ -987,6 +991,8 @@ Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’anci
 
 "QuizDifficulty.regular" = "Regular";
 "QuizDifficulty.ridiculous" = "Ridiculous";
+"QuizDifficulty.regularDifficulty" = "Regular Difficulty";
+"QuizDifficulty.ridiculousDifficulty" = "Ridiculous Difficulty";
 
 "PronounGender.feminine" = "Feminine";
 "PronounGender.masculine" = "Masculine";

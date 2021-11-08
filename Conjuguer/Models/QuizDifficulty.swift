@@ -28,4 +28,13 @@ enum QuizDifficulty: String, CaseIterable {
       return L.QuizDifficulty.ridiculous
     }
   }
+
+  var localizedDifficultyWithLabel: String {
+    switch self {
+    case .regular:
+      return L.QuizDifficulty.regularDifficulty
+    case .ridiculous:
+      return L.QuizDifficulty.ridiculousDifficulty
+    }
+  }
 }
