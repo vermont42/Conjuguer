@@ -42,6 +42,8 @@ struct ResultsView: View {
           Text("\(quiz.score)")
           Text(quiz.numberCorrect.asFormattedNumberCorrect())
           // May be useful for setting row height: https://swiftuirecipes.com/blog/swiftui-list-change-row-and-header-height
+          // TODO: Design row in KeyNote. Could use different SF Symbols icon for correct, half, and zero.
+          // May need to update model.
         }
       }
         .frame(maxWidth: .infinity, alignment: .leading)
