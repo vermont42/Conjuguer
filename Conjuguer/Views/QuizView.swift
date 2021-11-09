@@ -11,6 +11,10 @@ struct QuizView: View {
   @EnvironmentObject var quiz: Quiz
   @State var input = ""
   @FocusState private var conjugationFieldIsFocused: Bool
+  @State private var currentAnimationAmount = 2.5
+  private let initialAnimationAmount = 2.5
+  private let animationModifier = 1.5
+  private let animationDuration = 2.0
 
   var body: some View {
     ZStack {
@@ -107,8 +111,16 @@ struct QuizView: View {
             Button(L.QuizView.start) {
               start()
             }
-            .buttonLabel()
-            .foregroundColor(Color.customRed)
+              .buttonLabel()
+              .foregroundColor(Color.customRed)
+              .onAppear {
+                self.currentAnimationAmount = initialAnimationAmount - animationModifier
+              }
+              .onDisappear {
+                self.currentAnimationAmount = initialAnimationAmount
+              }
+              .scaleEffect(currentAnimationAmount)
+              .animation(.easeInOut(duration: animationDuration), value: currentAnimationAmount)
 
             Spacer()
           }
