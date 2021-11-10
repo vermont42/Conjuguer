@@ -137,6 +137,15 @@ struct SegmentedPicker: ViewModifier {
   }
 }
 
+struct FunButton: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .foregroundColor(Color.customRed)
+      .buttonStyle(.bordered)
+      .tint(.customRed)
+  }
+}
+
 extension View {
   func leftAligned() -> some View {
     modifier(LeftAligned())
@@ -180,5 +189,9 @@ extension View {
 
   func customNavigationBarItems() -> some View {
     modifier(CustomNavigationBarItems())
+  }
+
+  func funButton() -> some View {
+    modifier(FunButton())
   }
 }

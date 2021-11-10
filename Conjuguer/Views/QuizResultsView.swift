@@ -21,7 +21,7 @@ struct QuizResultsView: View {
 
         Text(L.Navigation.results)
           .modifier(HeadingLabel())
-          .foregroundColor(Color.customBlue)
+          .foregroundColor(.customBlue)
 
         Spacer()
           .frame(height: Layout.tripleDefaultSpacing)

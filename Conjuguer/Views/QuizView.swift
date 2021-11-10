@@ -27,7 +27,7 @@ struct QuizView: View {
 
         Text(L.Navigation.quiz)
           .headingLabel()
-          .foregroundColor(Color.customBlue)
+          .foregroundColor(.customBlue)
 
         Spacer()
           .frame(height: Layout.defaultSpacing)
@@ -63,13 +63,13 @@ struct QuizView: View {
             HStack {
               Text("\(L.QuizView.progressWithColon) \(quiz.currentQuestionIndex + 1) / \(quiz.questions.count)")
                 .bodyLabel()
-                .foregroundColor(Color.customBlue)
+                .foregroundColor(.customBlue)
 
               Spacer()
 
               Text("\(L.QuizView.scoreWithColon) \(quiz.score)")
                 .bodyLabel()
-                .foregroundColor(Color.customBlue)
+                .foregroundColor(.customBlue)
             }
 
             Spacer()
@@ -78,7 +78,7 @@ struct QuizView: View {
             HStack {
               Text("\(L.QuizView.elapsedWithColon) \(quiz.elapsedTime)")
                 .bodyLabel()
-                .foregroundColor(Color.customBlue)
+                .foregroundColor(.customBlue)
 
               Spacer()
 
@@ -86,7 +86,7 @@ struct QuizView: View {
                 quit()
               }
               .buttonLabel()
-              .foregroundColor(Color.customRed)
+              .funButton()
             }
 
             TextField(L.QuizView.conjugation, text: $input)
@@ -112,7 +112,6 @@ struct QuizView: View {
               start()
             }
               .buttonLabel()
-              .foregroundColor(Color.customRed)
               .onAppear {
                 self.currentAnimationAmount = initialAnimationAmount - animationModifier
               }
@@ -120,8 +119,8 @@ struct QuizView: View {
                 self.currentAnimationAmount = initialAnimationAmount
               }
               .scaleEffect(currentAnimationAmount)
-              .animation(.easeInOut(duration: animationDuration), value: currentAnimationAmount)
-
+              .animation(.linear(duration: animationDuration), value: currentAnimationAmount)
+              .funButton()
             Spacer()
           }
 
