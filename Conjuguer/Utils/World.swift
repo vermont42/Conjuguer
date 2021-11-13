@@ -31,14 +31,14 @@ class World: ObservableObject {
 
   static let device: World = {
     let settings = Settings(getterSetter: UserDefaultsGetterSetter())
-    let gameCenter = TestGameCenter() // TODO: Use real one.
+    let gameCenter = GameCenter.shared
     let quiz = Quiz(gameCenter: gameCenter)
     return World(settings: settings, gameCenter: gameCenter, quiz: quiz)
   }()
 
   static let simulator: World = {
     let settings = Settings(getterSetter: UserDefaultsGetterSetter())
-    let gameCenter = TestGameCenter() // TODO: Use real one.
+    let gameCenter = GameCenter.shared
     let quiz = Quiz(gameCenter: gameCenter)
     return World(settings: settings, gameCenter: gameCenter, quiz: quiz)
   }()

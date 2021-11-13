@@ -292,6 +292,7 @@ class Quiz: ObservableObject {
     if currentQuestionIndex == questions.count {
       shouldShowResults = true
       SoundPlayer.play(Sound.randomApplause)
+      Current.gameCenter.reportScore(score)
       quit()
     }
   }

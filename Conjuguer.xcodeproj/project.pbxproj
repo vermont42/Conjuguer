@@ -23,6 +23,9 @@
 		03309F6A26BC9E72003E4F92 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03309F6826BC9E72003E4F92 /* StringExtensions.swift */; };
 		03309F6C26BCA0B0003E4F92 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03309F6B26BCA0B0003E4F92 /* UIFontExtension.swift */; };
 		03309F7026BD8D10003E4F92 /* WorkSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03309F6F26BD8D10003E4F92 /* WorkSans-Bold.ttf */; };
+		0338F169273C229700FD796C /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0338F168273C229700FD796C /* GameKit.framework */; };
+		0338F16D273F54C100FD796C /* GameCenterAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0338F16C273F54C100FD796C /* GameCenterAuthView.swift */; };
+		0338F16F273F6A7300FD796C /* GameCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0338F16E273F6A7300FD796C /* GameCenter.swift */; };
 		0339B50926F9053500F63ADC /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0339B50826F9053500F63ADC /* URLExtensions.swift */; };
 		033EAA182630A36B0055B313 /* WorkSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 033EAA172630A36B0055B313 /* WorkSans.ttf */; };
 		0343E7DF25E427890043B813 /* ModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0343E7DE25E427890043B813 /* ModelView.swift */; };
@@ -128,6 +131,9 @@
 		03309F6826BC9E72003E4F92 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		03309F6B26BCA0B0003E4F92 /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		03309F6F26BD8D10003E4F92 /* WorkSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Bold.ttf"; sourceTree = "<group>"; };
+		0338F168273C229700FD796C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		0338F16C273F54C100FD796C /* GameCenterAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterAuthView.swift; sourceTree = "<group>"; };
+		0338F16E273F6A7300FD796C /* GameCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenter.swift; sourceTree = "<group>"; };
 		0339B50826F9053500F63ADC /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
 		033EAA172630A36B0055B313 /* WorkSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WorkSans.ttf; sourceTree = "<group>"; };
 		0343E7DE25E427890043B813 /* ModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelView.swift; sourceTree = "<group>"; };
@@ -216,6 +222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0338F169273C229700FD796C /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,12 +256,21 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		0338F167273C229700FD796C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0338F168273C229700FD796C /* GameKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		036DB781259FD6500013C3B7 = {
 			isa = PBXGroup;
 			children = (
 				036DB78C259FD6500013C3B7 /* Conjuguer */,
 				036DB79E259FD6510013C3B7 /* ConjuguerTests */,
 				036DB78B259FD6500013C3B7 /* Products */,
+				0338F167273C229700FD796C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -356,6 +372,7 @@
 				0373683025DC672F008BDF46 /* DictionaryGetterSetter.swift */,
 				035BC8F4273897C200EA13CA /* DoubleExtension.swift */,
 				032D267526C02FAB00AE1BD1 /* Fonts.swift */,
+				0338F16E273F6A7300FD796C /* GameCenter.swift */,
 				036A99352726166F00C6C984 /* GameCenterable.swift */,
 				0373682E25DC672F008BDF46 /* GetterSetter.swift */,
 				035BC8F62738A4F900EA13CA /* IntExtension.swift */,
@@ -380,6 +397,7 @@
 		0373680C25DB80DA008BDF46 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0338F16C273F54C100FD796C /* GameCenterAuthView.swift */,
 				032B122226BA02D8000E70CA /* InfoBrowseView.swift */,
 				032D267126BDF52100AE1BD1 /* InfoView.swift */,
 				036DB78F259FD6500013C3B7 /* InputView.swift */,
@@ -556,6 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				038E0AFE2690976D002A71EF /* DefectGroup.swift in Sources */,
+				0338F16F273F6A7300FD796C /* GameCenter.swift in Sources */,
 				03C2CAC62619125200CFA825 /* Sound.swift in Sources */,
 				036DB7DF25A0DD7A0013C3B7 /* Verb.swift in Sources */,
 				03FA474A27060D6C00131205 /* SettingsView.swift in Sources */,
@@ -602,6 +621,7 @@
 				037367FF25D5C3EB008BDF46 /* ConjugationText.swift in Sources */,
 				035D979726B74C820089083C /* L.swift in Sources */,
 				03ACA9FC25AA5D4700CF5390 /* SubjonctifPresentGroup.swift in Sources */,
+				0338F16D273F54C100FD796C /* GameCenterAuthView.swift in Sources */,
 				0373682525DC65B2008BDF46 /* Settings.swift in Sources */,
 				0373681625DB8530008BDF46 /* VerbBrowseView.swift in Sources */,
 				0373683225DC672F008BDF46 /* UserDefaultsGetterSetter.swift in Sources */,

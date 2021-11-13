@@ -105,6 +105,8 @@ struct QuizView: View {
         if quiz.quizState == .notStarted {
           Spacer()
 
+          GameCenterAuthView()
+
           HStack {
             Spacer()
 
@@ -134,6 +136,7 @@ struct QuizView: View {
           isPresented: $quiz.shouldShowResults,
           onDismiss: {
             quiz.shouldShowResults = false
+            Current.gameCenter.showLeaderboard()
           },
           content: {
             QuizResultsView()

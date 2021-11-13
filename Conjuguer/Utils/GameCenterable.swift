@@ -13,3 +13,9 @@ protocol GameCenterable {
   func reportScore(_ score: Int)
   func showLeaderboard()
 }
+
+extension GameCenterable {
+  func authenticate(onViewController: UIViewController) {
+    authenticate(onViewController: onViewController, completion: nil)
+  }
+}
