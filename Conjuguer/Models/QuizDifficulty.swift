@@ -11,12 +11,12 @@ enum QuizDifficulty: String, CaseIterable {
   case regular = "Regular"
   case ridiculous = "Ridiculous"
 
-  var scoreModifier: Double {
+  var scoreModifier: Int {
     switch self {
     case .regular:
-      return 1.0
+      return 1
     case .ridiculous:
-      return 2.0
+      return 2
     }
   }
 

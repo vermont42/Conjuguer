@@ -124,35 +124,70 @@ class Quiz: ObservableObject {
   private func buildQuiz() {
 //    questions.append((Verb.verbForInfinitif("avoir"), .indicatifPrésent(.firstSingular))) // For testing one conjugation.
 
-    [regularErVerb, regularErVerb, regularIrVerb, regularIrVerb, regularReVerb, bigThreeVerb, indicatifPrésentStemChangerVerb].forEach {
-      questions.append(($0, .indicatifPrésent(personNumber)))
-    }
+    switch Current.settings.quizDifficulty {
+    case .regular:
+      [regularErVerb, regularErVerb, regularIrVerb, regularIrVerb, regularReVerb, bigThreeVerb, indicatifPrésentStemChangerVerb].forEach {
+        questions.append(($0, .indicatifPrésent(personNumber)))
+      }
 
-    [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb, êtreAuxiliaryVerb, irregularParticipePasséVerb].forEach {
-      questions.append(($0, .passéComposé(personNumber)))
-    }
+      [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb, êtreAuxiliaryVerb, irregularParticipePasséVerb].forEach {
+        questions.append(($0, .passéComposé(personNumber)))
+      }
 
-    [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb].forEach {
-      questions.append(($0, .subjonctifPrésent(personNumber)))
-    }
+      [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb].forEach {
+        questions.append(($0, .subjonctifPrésent(personNumber)))
+      }
 
-    [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
-      questions.append(($0, .imparfait(personNumber)))
-    }
+      [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
+        questions.append(($0, .imparfait(personNumber)))
+      }
 
-    [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
-      questions.append(($0, .futurSimple(personNumber)))
-    }
+      [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
+        questions.append(($0, .futurSimple(personNumber)))
+      }
 
-    [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
-      questions.append(($0, .conditionnelPrésent(personNumber)))
-    }
+      [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
+        questions.append(($0, .conditionnelPrésent(personNumber)))
+      }
 
-    [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
-      questions.append(($0, .impératif(impératifPersonNumber)))
-    }
+      [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
+        questions.append(($0, .impératif(impératifPersonNumber)))
+      }
 
-    questions.append((topThirtyVerb, .participePrésent))
+      questions.append((topThirtyVerb, .participePrésent))
+
+    case .ridiculous:
+      questions.append((Verb.verbForInfinitif("ester"), .indicatifPrésent(.firstSingular)))
+      questions.append((Verb.verbForInfinitif("gésir"), .participePassé))
+      questions.append((Verb.verbForInfinitif("gésir"), .passéSimple(.thirdSingular)))
+      questions.append((Verb.verbForInfinitif("choir"), .participePassé))
+      questions.append((Verb.verbForInfinitif("clore"), .indicatifPrésent(.thirdSingular)))
+      questions.append((Verb.verbForInfinitif("courre"), .futurSimple(.firstPlural)))
+      questions.append((Verb.verbForInfinitif("fiche"), .participePassé))
+      questions.append((Verb.verbForInfinitif("avoir"), .subjonctifImparfait(.secondPlural)))
+      questions.append((Verb.verbForInfinitif("avoir"), .subjonctifPrésent(.firstPlural)))
+      questions.append((Verb.verbForInfinitif("aller"), .subjonctifPrésent(.secondSingular)))
+      questions.append((Verb.verbForInfinitif("être"), .passéSimple(.firstSingular)))
+      questions.append((Verb.verbForInfinitif("être"), .subjonctifImparfait(.thirdSingular)))
+      questions.append((Verb.verbForInfinitif("béer"), .indicatifPrésent(.firstSingular)))
+      questions.append((Verb.verbForInfinitif("braire"), .passéSimple(.thirdPlural)))
+      questions.append((Verb.verbForInfinitif("bruire"), .subjonctifPrésent(.thirdSingular)))
+      questions.append((Verb.verbForInfinitif("falloir"), .subjonctifImparfait(.thirdSingular)))
+      questions.append((Verb.verbForInfinitif("faillir"), .subjonctifPrésent(.firstPlural)))
+      questions.append((Verb.verbForInfinitif("couvrir"), .passéSimple(.thirdPlural)))
+      questions.append((Verb.verbForInfinitif("maudire"), .indicatifPrésent(.secondPlural)))
+      questions.append((Verb.verbForInfinitif("valoir"), .subjonctifImparfait(.firstSingular)))
+      questions.append((Verb.verbForInfinitif("résoudre"), .indicatifPrésent(.firstPlural)))
+      questions.append((Verb.verbForInfinitif("promouvoir"), .passéSimple(.thirdPlural)))
+      questions.append((Verb.verbForInfinitif("pouvoir"), .subjonctifPrésent(.firstPlural)))
+      questions.append((Verb.verbForInfinitif("plaindre"), .passéSimple(.thirdSingular)))
+      questions.append((Verb.verbForInfinitif("issir"), .participePassé))
+      questions.append((Verb.verbForInfinitif("lire"), .passéSimple(.firstPlural)))
+      questions.append((Verb.verbForInfinitif("mettre"), .indicatifPrésent(.firstSingular)))
+      questions.append((Verb.verbForInfinitif("moudre"), .indicatifPrésent(.firstPlural)))
+      questions.append((Verb.verbForInfinitif("paître"), .imparfait(.secondPlural)))
+      questions.append((Verb.verbForInfinitif("mouvoir"), .passéSimple(.firstPlural)))
+    }
 
     if shouldShuffle {
       questions.shuffle()
@@ -274,7 +309,7 @@ class Quiz: ObservableObject {
       if currentQuestionIndex != questions.count - 1 {
         SoundPlayer.play(conjugationResult.sound)
       }
-      score += conjugationResult.score
+      score += conjugationResult.score * difficulty.scoreModifier
       numberCorrect += 1.0 * conjugationResult.percentCorrect
       quizResults.append(
         QuizResult(

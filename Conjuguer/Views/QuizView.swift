@@ -76,7 +76,7 @@ struct QuizView: View {
               .frame(height: Layout.defaultSpacing)
 
             HStack {
-              Text("\(L.QuizView.elapsedWithColon) \(quiz.elapsedTime)")
+              Text("\(L.QuizView.elapsedWithColon) \(quiz.elapsedTime.timeString)")
                 .bodyLabel()
                 .foregroundColor(.customBlue)
 
