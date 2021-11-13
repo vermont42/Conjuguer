@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct VerbBrowseView: View {
-  @EnvironmentObject private var current: World
   @ObservedObject private var store: VerbStore
   @State private var isPresentingVerb = false
   @State private var searchText = ""

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Settings {
+class Settings: ObservableObject {
   private let getterSetter: GetterSetter
 
   var verbSort: VerbSort {

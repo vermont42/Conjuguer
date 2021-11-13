@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SettingsView: View {
-  @EnvironmentObject var current: World
   @ObservedObject var store = SelectionStore()
 
   var body: some View {
@@ -41,8 +40,8 @@ struct SettingsView: View {
             }
               .modifier(SegmentedPicker())
               .onAppear {
-                self.store.quizDifficulty = self.current.settings.quizDifficulty
-                self.store.current = self.current
+                self.store.quizDifficulty = Current.settings.quizDifficulty
+                self.store.current = Current
               }
 
             Text(L.Settings.quizDifficultyDescription)
@@ -64,8 +63,8 @@ struct SettingsView: View {
             }
               .modifier(SegmentedPicker())
               .onAppear {
-                self.store.pronounGender = self.current.settings.pronounGender
-                self.store.current = self.current
+                self.store.pronounGender = Current.settings.pronounGender
+                self.store.current = Current
               }
 
             Text(L.Settings.pronounGenderDescription)

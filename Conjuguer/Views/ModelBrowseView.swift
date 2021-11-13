@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ModelBrowseView: View {
-  @EnvironmentObject private var current: World
   @ObservedObject private var store: ModelStore
   @State private var isPresentingVerbModel = false
   @State private var searchText = ""

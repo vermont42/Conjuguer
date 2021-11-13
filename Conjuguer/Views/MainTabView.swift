@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct MainTabView: View {
-  @StateObject var current = Current
-  @StateObject var quiz = Quiz(gameCenter: TestGameCenter())
+  @StateObject var quiz = Current.quiz
 
   var body: some View {
     TabView {
       VerbBrowseView()
-        .environmentObject(current)
         .tabItem({
             Image(systemName: "book.fill")
             Text(L.Navigation.verbs)
@@ -23,7 +21,6 @@ struct MainTabView: View {
         .tag(0)
 
       ModelBrowseView()
-        .environmentObject(current)
         .tabItem({
             Image(systemName: "key.fill")
             Text(L.Navigation.models)
@@ -41,7 +38,6 @@ struct MainTabView: View {
         .tag(2)
 
       InfoBrowseView()
-        .environmentObject(current)
         .tabItem({
             Image(systemName: "questionmark.diamond.fill")
             Text(L.Navigation.info)
@@ -50,7 +46,6 @@ struct MainTabView: View {
         .tag(3)
 
       SettingsView()
-        .environmentObject(current)
         .tabItem({
             Image(systemName: "gearshape.2.fill")
             Text(L.Navigation.settings)
