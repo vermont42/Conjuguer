@@ -966,7 +966,7 @@ The impératif passé is formed from the %impératif% form of %avoir% or %être%
 
 "Info.creditsHeading" = "Credits";
 
-"Info.creditsText" = "Josh Adams developed ~Conjuguer~. Here is the source code of ~Conjuguer~: https://github.com/vermont42/Conjuguer
+"Info.creditsText" = "Josh Adams developed ~Conjuguer~. Here is the source code of ~Conjuguer~: %https://github.com/vermont42/Conjuguer%
 
 Daniel Alston and Larry Sanger proposed and ideated Wiktionary, ~Conjuguer~’s primary source of French-to-English verb translations. Wiktionary content is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. URL: %https://en.wiktionary.org/wiki/Wiktionary:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License%
 

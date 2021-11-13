@@ -49,7 +49,7 @@ struct Info: Hashable {
     Info(heading: L.Info.subjonctifPlusQueParfaitHeading, text: L.Info.subjonctifPlusQueParfaitText),
     Info(heading: L.Info.impératifPasséHeading, text: L.Info.impératifPasséText),
     Info(heading: L.Info.questionsAndResponsesHeading, text: L.Info.questionsAndResponsesText),
-    Info(heading: L.Info.creditsHeading, text: L.Info.creditsText)
+    Info(heading: L.Info.creditsHeading, text: L.Info.creditsText, imageName: "Adams")
   ]
 
   static func headingToIndex(heading: String) -> Int? {

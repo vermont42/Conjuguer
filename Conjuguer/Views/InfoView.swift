@@ -37,5 +37,7 @@ struct InfoView: View {
         .navigationTitle(info.heading)
         .customNavigationBarItems()
     }
+      .padding(.leading, Layout.doubleDefaultSpacing)
+      .padding(.trailing, Layout.doubleDefaultSpacing)
   }
 }
