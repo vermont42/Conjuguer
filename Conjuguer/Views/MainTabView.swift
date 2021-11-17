@@ -53,6 +53,9 @@ struct MainTabView: View {
         )
         .tag(4)
     }
+      .onAppear {
+        Current.analytics.recordViewAppeared("\(MainTabView.self)")
+      }
   }
 }
 

@@ -76,5 +76,8 @@ struct InfoBrowseView: View {
         }
       }
     )
+    .onAppear {
+      Current.analytics.recordViewAppeared("\(InfoBrowseView.self)")
+    }
   }
 }

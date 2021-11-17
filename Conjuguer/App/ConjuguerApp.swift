@@ -10,34 +10,8 @@ import AWSCognitoAuthPlugin
 import AWSPinpointAnalyticsPlugin
 import SwiftUI
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    do {
-      try Amplify.add(plugin: AWSCognitoAuthPlugin())
-      try Amplify.add(plugin: AWSPinpointAnalyticsPlugin())
-      try Amplify.configure()
-      print("Amplify configured with Auth and Analytics plugins")
-    } catch {
-      print("Failed to initialize Amplify with \(error)")
-    }
-
-    let properties: AnalyticsProperties = [
-      "eventPropertyStringKey": "eventPropertyStringValue",
-      "eventPropertyIntKey": 123,
-      "eventPropertyDoubleKey": 12.34,
-      "eventPropertyBoolKey": true
-    ]
-    let event = BasicAnalyticsEvent(name: "eventName", properties: properties)
-    Amplify.Analytics.record(event: event)
-
-    return true
-  }
-}
-
 @main
 struct ConjuguerApp: App {
-  @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
   var body: some Scene {
     WindowGroup {
       MainTabView()
@@ -50,6 +24,8 @@ struct ConjuguerApp: App {
   static var compoundImpératifPersonNumbersIndex = 0
 
   init() {
+    Current.analytics.recordBecameActive()
+
     Modifiers.modifyAppearances()
 
     SoundPlayer.setup()

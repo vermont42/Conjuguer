@@ -75,6 +75,9 @@ struct VerbBrowseView: View {
         }
       }
     )
+    .onAppear {
+      Current.analytics.recordViewAppeared("\(VerbBrowseView.self)")
+    }
   }
 
   var searchResults: [Verb] {

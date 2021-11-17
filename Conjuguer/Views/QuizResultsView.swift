@@ -48,6 +48,9 @@ struct QuizResultsView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.leading, Layout.doubleDefaultSpacing)
         .padding(.trailing, Layout.doubleDefaultSpacing)
+        .onAppear {
+          Current.analytics.recordViewAppeared("\(QuizResultsView.self)")
+        }
     }
   }
 }

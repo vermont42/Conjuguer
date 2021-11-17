@@ -143,6 +143,9 @@ struct QuizView: View {
               .environmentObject(quiz)
           }
         )
+        .onAppear {
+          Current.analytics.recordViewAppeared("\(QuizView.self)")
+        }
     }
   }
 

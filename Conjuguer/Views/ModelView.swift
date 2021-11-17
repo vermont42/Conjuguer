@@ -114,5 +114,8 @@ struct ModelView: View {
         }
       }
     )
+    .onAppear {
+      Current.analytics.recordViewAppeared("\(ModelView.self)")
+    }
   }
 }

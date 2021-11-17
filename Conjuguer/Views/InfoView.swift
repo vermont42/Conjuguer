@@ -39,5 +39,8 @@ struct InfoView: View {
     }
       .padding(.leading, Layout.doubleDefaultSpacing)
       .padding(.trailing, Layout.doubleDefaultSpacing)
+      .onAppear {
+        Current.analytics.recordViewAppeared("\(InfoView.self)")
+      }
   }
 }

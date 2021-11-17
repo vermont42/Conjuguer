@@ -74,6 +74,9 @@ struct SettingsView: View {
           }
         }
       }
+        .onAppear {
+          Current.analytics.recordViewAppeared("\(SettingsView.self)")
+        }
     }
   }
 }

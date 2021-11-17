@@ -97,6 +97,13 @@
 		03AE93E0274322EF00233105 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 03AE93DF274322EF00233105 /* AWSCognitoAuthPlugin */; };
 		03AE93E2274322EF00233105 /* AWSPinpointAnalyticsPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 03AE93E1274322EF00233105 /* AWSPinpointAnalyticsPlugin */; };
 		03AE93E4274322EF00233105 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 03AE93E3274322EF00233105 /* Amplify */; };
+		03AE93E92744423600233105 /* AWSAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AE93E62744423500233105 /* AWSAnalyticsService.swift */; };
+		03AE93EA2744423600233105 /* TestAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AE93E72744423500233105 /* TestAnalyticsService.swift */; };
+		03AE93EB2744423600233105 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AE93E82744423600233105 /* AnalyticsService.swift */; };
+		03AE93ED2744424F00233105 /* DeviceUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AE93EC2744424F00233105 /* DeviceUtility.swift */; };
+		03AE93F1274443E400233105 /* RealAnalyticsLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AE93EE274443E400233105 /* RealAnalyticsLocale.swift */; };
+		03AE93F2274443E400233105 /* AnalyticsLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AE93EF274443E400233105 /* AnalyticsLocale.swift */; };
+		03AE93F3274443E400233105 /* StubAnalyticsLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AE93F0274443E400233105 /* StubAnalyticsLocale.swift */; };
 		03B54B3E25AF914F0062B323 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B54B3D25AF914F0062B323 /* TestUtils.swift */; };
 		03B54B4625AF92930062B323 /* VerbModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B54B4525AF92930062B323 /* VerbModelTests.swift */; };
 		03C2CAC52619125200CFA825 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2CAC32619125200CFA825 /* SoundPlayer.swift */; };
@@ -212,6 +219,13 @@
 		03ACA9FB25AA5D4700CF5390 /* SubjonctifPresentGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjonctifPresentGroup.swift; sourceTree = "<group>"; };
 		03ACAA0025ACB65300CF5390 /* FuturSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuturSimple.swift; sourceTree = "<group>"; };
 		03ACAA0525ACB6B900CF5390 /* ConditionnelPresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionnelPresent.swift; sourceTree = "<group>"; };
+		03AE93E62744423500233105 /* AWSAnalyticsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSAnalyticsService.swift; sourceTree = "<group>"; };
+		03AE93E72744423500233105 /* TestAnalyticsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAnalyticsService.swift; sourceTree = "<group>"; };
+		03AE93E82744423600233105 /* AnalyticsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
+		03AE93EC2744424F00233105 /* DeviceUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceUtility.swift; sourceTree = "<group>"; };
+		03AE93EE274443E400233105 /* RealAnalyticsLocale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealAnalyticsLocale.swift; sourceTree = "<group>"; };
+		03AE93EF274443E400233105 /* AnalyticsLocale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsLocale.swift; sourceTree = "<group>"; };
+		03AE93F0274443E400233105 /* StubAnalyticsLocale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubAnalyticsLocale.swift; sourceTree = "<group>"; };
 		03B54B3D25AF914F0062B323 /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		03B54B4525AF92930062B323 /* VerbModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbModelTests.swift; sourceTree = "<group>"; };
 		03C2CAC32619125200CFA825 /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
@@ -281,7 +295,6 @@
 				036DB79E259FD6510013C3B7 /* ConjuguerTests */,
 				036DB78B259FD6500013C3B7 /* Products */,
 				0338F167273C229700FD796C /* Frameworks */,
-				066E5F3FB153D59BE6C7C639 /* AmplifyConfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -297,6 +310,7 @@
 		036DB78C259FD6500013C3B7 /* Conjuguer */ = {
 			isa = PBXGroup;
 			children = (
+				03AE93E52744416900233105 /* Analytics */,
 				036DB7CC25A0C9AF0013C3B7 /* App */,
 				03C2CACA261912AA00CFA825 /* Assets */,
 				036DB796259FD6510013C3B7 /* Info.plist */,
@@ -426,6 +440,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		03AE93E52744416900233105 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				862932877B40F772488741F4 /* amplifyconfiguration.json */,
+				03AE93EF274443E400233105 /* AnalyticsLocale.swift */,
+				03AE93E82744423600233105 /* AnalyticsService.swift */,
+				03AE93E62744423500233105 /* AWSAnalyticsService.swift */,
+				98119C0C766C1CBB24228A47 /* awsconfiguration.json */,
+				03AE93EC2744424F00233105 /* DeviceUtility.swift */,
+				03AE93EE274443E400233105 /* RealAnalyticsLocale.swift */,
+				03AE93F0274443E400233105 /* StubAnalyticsLocale.swift */,
+				03AE93E72744423500233105 /* TestAnalyticsService.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
 		03C2CACA261912AA00CFA825 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,15 +468,6 @@
 				033EAA172630A36B0055B313 /* WorkSans.ttf */,
 			);
 			path = Assets;
-			sourceTree = "<group>";
-		};
-		066E5F3FB153D59BE6C7C639 /* AmplifyConfig */ = {
-			isa = PBXGroup;
-			children = (
-				98119C0C766C1CBB24228A47 /* awsconfiguration.json */,
-				862932877B40F772488741F4 /* amplifyconfiguration.json */,
-			);
-			name = AmplifyConfig;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -603,6 +624,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03AE93F3274443E400233105 /* StubAnalyticsLocale.swift in Sources */,
+				03AE93ED2744424F00233105 /* DeviceUtility.swift in Sources */,
 				038E0AFE2690976D002A71EF /* DefectGroup.swift in Sources */,
 				0338F16F273F6A7300FD796C /* GameCenter.swift in Sources */,
 				03C2CAC62619125200CFA825 /* Sound.swift in Sources */,
@@ -636,6 +659,7 @@
 				0373683125DC672F008BDF46 /* GetterSetter.swift in Sources */,
 				036DB7F325A12B990013C3B7 /* Auxiliary.swift in Sources */,
 				03653F0325EC4F5A00A34267 /* Modifiers.swift in Sources */,
+				03AE93EA2744423600233105 /* TestAnalyticsService.swift in Sources */,
 				036DB80525A386D60013C3B7 /* VerbModelParser.swift in Sources */,
 				036DB7D125A0C9F10013C3B7 /* Conjugator.swift in Sources */,
 				032B122726BB3FA0000E70CA /* ColorExtension.swift in Sources */,
@@ -655,15 +679,19 @@
 				0373682525DC65B2008BDF46 /* Settings.swift in Sources */,
 				0373681625DB8530008BDF46 /* VerbBrowseView.swift in Sources */,
 				0373683225DC672F008BDF46 /* UserDefaultsGetterSetter.swift in Sources */,
+				03AE93E92744423600233105 /* AWSAnalyticsService.swift in Sources */,
 				036A99362726166F00C6C984 /* GameCenterable.swift in Sources */,
 				0373683325DC672F008BDF46 /* DictionaryGetterSetter.swift in Sources */,
 				036A99342726144600C6C984 /* QuizState.swift in Sources */,
 				036DB7ED25A1070D0013C3B7 /* Tense.swift in Sources */,
 				0373684525DD809C008BDF46 /* ModelBrowseView.swift in Sources */,
 				035BC8F5273897C200EA13CA /* DoubleExtension.swift in Sources */,
+				03AE93EB2744423600233105 /* AnalyticsService.swift in Sources */,
 				036DB7BE259FD67C0013C3B7 /* VerbModel.swift in Sources */,
 				036DB7BF259FD67C0013C3B7 /* VerbParser.swift in Sources */,
+				03AE93F1274443E400233105 /* RealAnalyticsLocale.swift in Sources */,
 				03C2CAC52619125200CFA825 /* SoundPlayer.swift in Sources */,
+				03AE93F2274443E400233105 /* AnalyticsLocale.swift in Sources */,
 				035BC8DB2736E86F00EA13CA /* Layout.swift in Sources */,
 				032D267426BDF5E000AE1BD1 /* TextView.swift in Sources */,
 				032D267226BDF52100AE1BD1 /* InfoView.swift in Sources */,

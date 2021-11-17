@@ -19,35 +19,45 @@ class World: ObservableObject {
   @Published var settings: Settings
   @Published var gameCenter: GameCenterable
   @Published var quiz: Quiz
+  @Published var analytics: AnalyticsService
+  @Published var analyticsLocale: AnalyticsLocale
   @Published var verb: Verb?
   @Published var verbModel: VerbModel?
   @Published var info: Info?
 
-  init(settings: Settings, gameCenter: GameCenterable, quiz: Quiz) {
+  init(settings: Settings, gameCenter: GameCenterable, quiz: Quiz, analytics: AnalyticsService, analyticsLocale: AnalyticsLocale) {
     self.settings = settings
     self.gameCenter = gameCenter
     self.quiz = quiz
+    self.analytics = analytics
+    self.analyticsLocale = analyticsLocale
   }
 
   static let device: World = {
     let settings = Settings(getterSetter: UserDefaultsGetterSetter())
     let gameCenter = GameCenter.shared
     let quiz = Quiz(gameCenter: gameCenter)
-    return World(settings: settings, gameCenter: gameCenter, quiz: quiz)
+    let analytics = AWSAnalyticsService()
+    let analyticsLocale = RealAnalyticsLocale()
+    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics, analyticsLocale: analyticsLocale)
   }()
 
   static let simulator: World = {
     let settings = Settings(getterSetter: UserDefaultsGetterSetter())
     let gameCenter = GameCenter.shared
     let quiz = Quiz(gameCenter: gameCenter)
-    return World(settings: settings, gameCenter: gameCenter, quiz: quiz)
+    let analytics = AWSAnalyticsService() // TODO: Use TestAnalyticsService.
+    let analyticsLocale = RealAnalyticsLocale()
+    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics, analyticsLocale: analyticsLocale)
   }()
 
   static let unitTest: World = {
     let settings = Settings(getterSetter: DictionaryGetterSetter())
     let gameCenter = TestGameCenter()
     let quiz = Quiz(gameCenter: gameCenter)
-    return World(settings: settings, gameCenter: gameCenter, quiz: quiz)
+    let analytics = TestAnalyticsService()
+    let analyticsLocale = StubAnalyticsLocale()
+    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics, analyticsLocale: analyticsLocale)
   }()
 
   func handleURL(_ url: URL) {

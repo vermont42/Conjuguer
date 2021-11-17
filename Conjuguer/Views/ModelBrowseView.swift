@@ -70,6 +70,9 @@ struct ModelBrowseView: View {
         }
       }
     )
+    .onAppear {
+      Current.analytics.recordViewAppeared("\(ModelBrowseView.self)")
+    }
   }
 
   var searchResults: [ModelAndDecorator] {

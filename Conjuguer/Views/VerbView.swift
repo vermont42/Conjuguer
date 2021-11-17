@@ -268,6 +268,9 @@ struct VerbView: View {
             }
           }
         }
+          .onAppear {
+            Current.analytics.recordViewAppeared("\(VerbView.self)")
+          }
       }
         .navigationTitle(verb.infinitifWithPossibleExtraLetters)
         .customNavigationBarItems()
