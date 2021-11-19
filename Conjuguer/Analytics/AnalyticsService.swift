@@ -12,6 +12,11 @@ protocol AnalyticsService {
   func recordEvent(_ name: String, properties: [String: String]?)
   func recordBecameActive()
   func recordViewAppeared(_ viewName: String)
+  func recordQuizStart(difficulty: QuizDifficulty)
+  func recordQuizQuit(difficulty: QuizDifficulty, lastQuestionIndex: Int, elapsedTime: Int)
+  func recordQuizCompletion(difficulty: QuizDifficulty, elapsedTime: Int, score: Int)
+  func recordGameCenterAuthSucceeded()
+  func recordGameCenterAuthFailed()
 }
 
 extension AnalyticsService {
@@ -20,20 +25,58 @@ extension AnalyticsService {
   }
 
   func recordBecameActive() {
-    let becameActive = "becameActive"
+    let becameActiveName = "becameActive"
     let modelKey = "model"
     let localeKey = "locale"
 
     let modelName = UIDevice.current.modelName
     let locale = Current.analyticsLocale.locale
 
-    recordEvent(becameActive, properties: [modelKey: modelName, localeKey: locale])
+    recordEvent(becameActiveName, properties: [modelKey: modelName, localeKey: locale])
   }
 
   func recordViewAppeared(_ viewName: String) {
-    let viewAppeared = "viewAppeared"
+    let viewAppearedName = "viewAppeared"
     let viewNameKey = "viewName"
-    recordEvent(viewAppeared, properties: [viewNameKey: viewName])
+    recordEvent(viewAppearedName, properties: [viewNameKey: viewName])
+  }
+
+  var difficultyKey: String {
+    "difficulty"
+  }
+
+  func recordQuizStart(difficulty: QuizDifficulty) {
+    let quizStartName = "quizStart"
+    recordEvent(quizStartName, properties: [difficultyKey: difficulty.rawValue])
+  }
+
+  var elapsedTimeKey: String {
+    "elapsedTime"
+  }
+
+  func recordQuizQuit(difficulty: QuizDifficulty, lastQuestionIndex: Int, elapsedTime: Int) {
+    let quizQuitName = "quizQuit"
+    let lastQuestionIndexKey = "lastQuestionIndex"
+    recordEvent(quizQuitName, properties: [difficultyKey: difficulty.rawValue, lastQuestionIndexKey: "\(lastQuestionIndex)", elapsedTimeKey: "\(elapsedTime)"])
+  }
+
+  var scoreKey: String {
+    "score"
+  }
+
+  func recordQuizCompletion(difficulty: QuizDifficulty, elapsedTime: Int, score: Int) {
+    let quizCompletionName = "quizCompletion"
+    recordEvent(quizCompletionName, properties: [difficultyKey: difficulty.rawValue, scoreKey: "\(score)", elapsedTimeKey: "\(elapsedTime)"])
+  }
+
+  func recordGameCenterAuthSucceeded() {
+    let gameCenterAuthSucceededName = "gameCenterAuthSucceeded"
+    recordEvent(gameCenterAuthSucceededName)
+  }
+
+  func recordGameCenterAuthFailed() {
+    let gameCenterAuthFailedName = "gameCenterAuthFailed"
+    recordEvent(gameCenterAuthFailedName)
   }
 }
 

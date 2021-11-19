@@ -8,18 +8,15 @@
 import SwiftUI
 import UIKit
 
-class GameCenterAuthVC: UIViewController {
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    Current.gameCenter.authenticate(onViewController: self)
-  }
-}
+class GameCenterAuthVC: UIViewController {}
 
 struct GameCenterAuthView: UIViewControllerRepresentable {
   typealias UIViewControllerType = UIViewController
+  let gameCenterAuthVC = GameCenterAuthVC()
+
   func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 
   func makeUIViewController(context: Context) -> UIViewController {
-    GameCenterAuthVC()
+    gameCenterAuthVC
   }
 }

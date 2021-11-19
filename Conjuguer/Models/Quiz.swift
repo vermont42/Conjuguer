@@ -62,6 +62,7 @@ class Quiz: ObservableObject {
     buildQuiz()
     quizState = .inProgress
     SoundPlayer.play(Sound.randomGun)
+    Current.analytics.recordQuizStart(difficulty: Current.settings.quizDifficulty)
 
     timer = Timer.scheduledTimer(
       withTimeInterval: 1.0,
@@ -75,6 +76,7 @@ class Quiz: ObservableObject {
   func quit() {
     timer?.invalidate()
     quizState = .notStarted
+    Current.analytics.recordQuizQuit(difficulty: Current.settings.quizDifficulty, lastQuestionIndex: currentQuestionIndex, elapsedTime: elapsedTime)
   }
 
   private func resetIndices() {
@@ -328,6 +330,7 @@ class Quiz: ObservableObject {
       shouldShowResults = true
       SoundPlayer.play(Sound.randomApplause)
       Current.gameCenter.reportScore(score)
+      Current.analytics.recordQuizCompletion(difficulty: Current.settings.quizDifficulty, elapsedTime: elapsedTime, score: score)
       quit()
     }
   }

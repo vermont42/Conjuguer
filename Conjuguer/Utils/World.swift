@@ -46,7 +46,7 @@ class World: ObservableObject {
     let settings = Settings(getterSetter: UserDefaultsGetterSetter())
     let gameCenter = GameCenter.shared
     let quiz = Quiz(gameCenter: gameCenter)
-    let analytics = AWSAnalyticsService() // TODO: Use TestAnalyticsService.
+    let analytics = TestAnalyticsService()
     let analyticsLocale = RealAnalyticsLocale()
     return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics, analyticsLocale: analyticsLocale)
   }()

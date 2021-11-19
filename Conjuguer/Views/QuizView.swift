@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct QuizView: View {
-  @EnvironmentObject var quiz: Quiz
+  @EnvironmentObject var current: World
   @State var input = ""
   @FocusState private var conjugationFieldIsFocused: Bool
   @State private var currentAnimationAmount = 2.5
   private let initialAnimationAmount = 2.5
   private let animationModifier = 1.5
   private let animationDuration = 2.0
+  private let gameCenterAuthView = GameCenterAuthView()
 
   var body: some View {
     ZStack {
@@ -32,15 +33,15 @@ struct QuizView: View {
         Spacer()
           .frame(height: Layout.defaultSpacing)
 
-        if quiz.quizState == .inProgress {
+        if current.quiz.quizState == .inProgress {
           Group {
-            Text("\(L.QuizView.verbWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.infinitifWithPossibleExtraLetters)")
+            Text("\(L.QuizView.verbWithColon) \(current.quiz.questions[current.quiz.currentQuestionIndex].0.infinitifWithPossibleExtraLetters)")
               .bodyLabel()
 
             Spacer()
               .frame(height: Layout.defaultSpacing)
 
-            Text("\(L.QuizView.translationWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.translation)")
+            Text("\(L.QuizView.translationWithColon) \(current.quiz.questions[current.quiz.currentQuestionIndex].0.translation)")
               .bodyLabel()
           }
 
@@ -48,26 +49,26 @@ struct QuizView: View {
             .frame(height: Layout.defaultSpacing)
 
           Group {
-            Text("\(L.QuizView.pronounWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.pronounWithGender)")
+            Text("\(L.QuizView.pronounWithColon) \(current.quiz.questions[current.quiz.currentQuestionIndex].1.pronounWithGender)")
               .bodyLabel()
 
             Spacer()
               .frame(height: Layout.defaultSpacing)
 
-            Text("\(L.QuizView.tenseWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.titleCaseName.lowercased())")
+            Text("\(L.QuizView.tenseWithColon) \(current.quiz.questions[current.quiz.currentQuestionIndex].1.titleCaseName.lowercased())")
               .bodyLabel()
 
             Spacer()
               .frame(height: Layout.defaultSpacing)
 
             HStack {
-              Text("\(L.QuizView.progressWithColon) \(quiz.currentQuestionIndex + 1) / \(quiz.questions.count)")
+              Text("\(L.QuizView.progressWithColon) \(current.quiz.currentQuestionIndex + 1) / \(current.quiz.questions.count)")
                 .bodyLabel()
                 .foregroundColor(.customBlue)
 
               Spacer()
 
-              Text("\(L.QuizView.scoreWithColon) \(quiz.score)")
+              Text("\(L.QuizView.scoreWithColon) \(current.quiz.score)")
                 .bodyLabel()
                 .foregroundColor(.customBlue)
             }
@@ -76,7 +77,7 @@ struct QuizView: View {
               .frame(height: Layout.defaultSpacing)
 
             HStack {
-              Text("\(L.QuizView.elapsedWithColon) \(quiz.elapsedTime.timeString)")
+              Text("\(L.QuizView.elapsedWithColon) \(current.quiz.elapsedTime.timeString)")
                 .bodyLabel()
                 .foregroundColor(.customBlue)
 
@@ -93,7 +94,7 @@ struct QuizView: View {
               .focused($conjugationFieldIsFocused)
               .autocapitalization(.none)
               .onSubmit {
-                quiz.process(proposedAnswer: input)
+                current.quiz.process(proposedAnswer: input)
                 input = ""
                 conjugationFieldIsFocused = true
               }
@@ -102,10 +103,10 @@ struct QuizView: View {
           Spacer()
         }
 
-        if quiz.quizState == .notStarted {
+        if current.quiz.quizState == .notStarted {
           Spacer()
 
-          GameCenterAuthView()
+          gameCenterAuthView
 
           HStack {
             Spacer()
@@ -133,18 +134,21 @@ struct QuizView: View {
         .padding(.leading, Layout.doubleDefaultSpacing)
         .padding(.trailing, Layout.doubleDefaultSpacing)
         .sheet(
-          isPresented: $quiz.shouldShowResults,
+          isPresented: $current.quiz.shouldShowResults,
           onDismiss: {
-            quiz.shouldShowResults = false
-            Current.gameCenter.showLeaderboard()
+            current.quiz.shouldShowResults = false
+            current.gameCenter.showLeaderboard()
           },
           content: {
             QuizResultsView()
-              .environmentObject(quiz)
+              .environmentObject(current.quiz)
           }
         )
         .onAppear {
-          Current.analytics.recordViewAppeared("\(QuizView.self)")
+          current.analytics.recordViewAppeared("\(QuizView.self)")
+          if current.quiz.quizState == .notStarted && !current.gameCenter.isAuthenticated {
+            current.gameCenter.authenticate(onViewController: gameCenterAuthView.gameCenterAuthVC)
+          }
         }
     }
   }
@@ -153,11 +157,11 @@ struct QuizView: View {
     SoundPlayer.play(Sound.randomSadTrombone)
     conjugationFieldIsFocused = false
     input = ""
-    quiz.quit()
+    current.quiz.quit()
   }
 
   private func start() {
-    quiz.start()
+    current.quiz.start()
     let delayForFocus: TimeInterval = 0.1 // https://stackoverflow.com/a/69134653
     DispatchQueue.main.asyncAfter(deadline: .now() + delayForFocus) {
       conjugationFieldIsFocused = true

@@ -32,11 +32,11 @@ class GameCenter: NSObject, GameCenterable, GKGameCenterControllerDelegate {
           self.leaderboardIdentifier = identifier ?? "ERROR"
           //print("identifier: \(self.leaderboardIdentifier)")
         }
+        Current.analytics.recordGameCenterAuthSucceeded()
         completion?(true)
       } else {
-        SoundPlayer.play(.randomSadTrombone)
-        // UIAlertController.showMessage(Localizations.gameCenterFailure, title: "😰", okTitle: Localizations.gotIt, onViewController: onViewController)
         self.isAuthenticated = false
+        Current.analytics.recordGameCenterAuthFailed()
         completion?(false)
       }
     }
