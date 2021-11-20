@@ -18,29 +18,34 @@ struct InfoView: View {
   }
 
   var body: some View {
-    VStack {
-      if let imageName = info.imageName {
-        Image(imageName)
-          .resizable()
-          .aspectRatio(contentMode: .fit)
-          .frame(width: 270)
-      }
+    ZStack {
+      Color.customBackground
+        .ignoresSafeArea()
 
-      if shouldShowInfoHeading {
-        Text(info.heading)
-          .headingLabel()
-        Spacer()
-      }
+      VStack {
+        if let imageName = info.imageName {
+          Image(imageName)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 270)
+        }
 
-      TextView(text: info.attributedText)
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .navigationTitle(info.heading)
-        .customNavigationBarItems()
-    }
+        if shouldShowInfoHeading {
+          Text(info.heading)
+            .headingLabel()
+          Spacer()
+        }
+
+        TextView(text: info.attributedText)
+          .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+          .navigationTitle(info.heading)
+          .customNavigationBarItems()
+      }
       .padding(.leading, Layout.doubleDefaultSpacing)
       .padding(.trailing, Layout.doubleDefaultSpacing)
       .onAppear {
         Current.analytics.recordViewAppeared("\(InfoView.self)")
       }
+    }
   }
 }

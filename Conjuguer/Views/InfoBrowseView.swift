@@ -38,6 +38,7 @@ struct InfoBrowseView: View {
         }
       }
     }
+    .navigationViewStyle(.stack) // https://stackoverflow.com/a/66024249
     .onReceive(Current.$info) { value in
       if value == nil {
         isPresentingInfo = false
