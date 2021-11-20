@@ -326,12 +326,43 @@ class Quiz: ObservableObject {
       fatalError("Conjugation failed.")
     }
     currentQuestionIndex += 1
+
     if currentQuestionIndex == questions.count {
-      shouldShowResults = true
-      SoundPlayer.play(Sound.randomApplause)
-      Current.gameCenter.reportScore(score)
-      Current.analytics.recordQuizCompletion(difficulty: Current.settings.quizDifficulty, elapsedTime: elapsedTime, score: score)
-      quit()
+      completeQuiz()
+    }
+  }
+
+  private func completeQuiz() {
+    score += Quiz.bonusForElapsedTime(elapsedTime)
+    shouldShowResults = true
+    SoundPlayer.play(Sound.randomApplause)
+    Current.gameCenter.reportScore(score)
+    Current.analytics.recordQuizCompletion(difficulty: Current.settings.quizDifficulty, elapsedTime: elapsedTime, score: score)
+    quit()
+  }
+
+  private static func bonusForElapsedTime(_ elapsedTime: Int) -> Int {
+    switch elapsedTime {
+    case 0 ... 120:
+      return 350
+    case 121 ... 180:
+      return 300
+    case 181 ... 240:
+      return 250
+    case 241 ... 300:
+      return 200
+    case 301 ... 360:
+      return 150
+    case 361 ... 420:
+      return 150
+    case 421 ... 480:
+      return 100
+    case 481 ... 540:
+      return 50
+    case 541 ... 600:
+      return 25
+    default:
+      return 0
     }
   }
 }

@@ -9,6 +9,10 @@
 import Foundation
 
 class TestAnalyticsService: AnalyticsService {
+  var analyticsLocale: AnalyticsLocale {
+    StubAnalyticsLocale()
+  }
+
   private var fire: (String) -> Void
 
   init(fire: @escaping (String) -> Void = { analytic in print(analytic) }) {

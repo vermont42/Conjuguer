@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-  @StateObject var current = Current
+  @StateObject var quiz = Current.quiz
 
   var body: some View {
     TabView {
@@ -29,7 +29,7 @@ struct MainTabView: View {
         .tag(1)
 
       QuizView()
-        .environmentObject(current)
+        .environmentObject(quiz)
         .tabItem({
             Image(systemName: "square.and.pencil")
             Text(L.Navigation.quiz)

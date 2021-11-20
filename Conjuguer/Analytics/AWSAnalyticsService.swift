@@ -12,6 +12,10 @@ import AWSPinpointAnalyticsPlugin
 import Foundation
 
 class AWSAnalyticsService: NSObject, AnalyticsService {
+  var analyticsLocale: AnalyticsLocale {
+    RealAnalyticsLocale()
+  }
+
   override init() {
     do {
       try Amplify.add(plugin: AWSCognitoAuthPlugin())

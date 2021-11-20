@@ -20,17 +20,15 @@ class World: ObservableObject {
   @Published var gameCenter: GameCenterable
   @Published var quiz: Quiz
   @Published var analytics: AnalyticsService
-  @Published var analyticsLocale: AnalyticsLocale
   @Published var verb: Verb?
   @Published var verbModel: VerbModel?
   @Published var info: Info?
 
-  init(settings: Settings, gameCenter: GameCenterable, quiz: Quiz, analytics: AnalyticsService, analyticsLocale: AnalyticsLocale) {
+  init(settings: Settings, gameCenter: GameCenterable, quiz: Quiz, analytics: AnalyticsService) {
     self.settings = settings
     self.gameCenter = gameCenter
     self.quiz = quiz
     self.analytics = analytics
-    self.analyticsLocale = analyticsLocale
   }
 
   static let device: World = {
@@ -38,17 +36,15 @@ class World: ObservableObject {
     let gameCenter = GameCenter.shared
     let quiz = Quiz(gameCenter: gameCenter)
     let analytics = AWSAnalyticsService()
-    let analyticsLocale = RealAnalyticsLocale()
-    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics, analyticsLocale: analyticsLocale)
+    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics)
   }()
 
   static let simulator: World = {
     let settings = Settings(getterSetter: UserDefaultsGetterSetter())
-    let gameCenter = GameCenter.shared
+    let gameCenter = TestGameCenter()
     let quiz = Quiz(gameCenter: gameCenter)
     let analytics = TestAnalyticsService()
-    let analyticsLocale = RealAnalyticsLocale()
-    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics, analyticsLocale: analyticsLocale)
+    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics)
   }()
 
   static let unitTest: World = {
@@ -56,8 +52,7 @@ class World: ObservableObject {
     let gameCenter = TestGameCenter()
     let quiz = Quiz(gameCenter: gameCenter)
     let analytics = TestAnalyticsService()
-    let analyticsLocale = StubAnalyticsLocale()
-    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics, analyticsLocale: analyticsLocale)
+    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics)
   }()
 
   func handleURL(_ url: URL) {

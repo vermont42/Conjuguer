@@ -9,6 +9,7 @@
 import UIKit
 
 protocol AnalyticsService {
+  var analyticsLocale: AnalyticsLocale { get }
   func recordEvent(_ name: String, properties: [String: String]?)
   func recordBecameActive()
   func recordViewAppeared(_ viewName: String)
@@ -30,7 +31,7 @@ extension AnalyticsService {
     let localeKey = "locale"
 
     let modelName = UIDevice.current.modelName
-    let locale = Current.analyticsLocale.locale
+    let locale = analyticsLocale.locale
 
     recordEvent(becameActiveName, properties: [modelKey: modelName, localeKey: locale])
   }
