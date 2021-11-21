@@ -324,6 +324,10 @@ Verbs derived from the above verbs use variants of these irregular radicaux futu
 
 %devenir% -> $devIenDr$";
 
+"Info.stemAlterationsHeading" = "Stem Alterations";
+
+"Info.stemAlterationsText" = "Foo";
+
 "Info.indicatifPrésentHeading" = "Indicatif Présent";
 
 "Info.indicatifPrésentText" = "`Uses`

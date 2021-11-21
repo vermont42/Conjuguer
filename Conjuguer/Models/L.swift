@@ -247,6 +247,14 @@ enum L {
       NSLocalizedString("Info.radicalFuturText", comment: "")
     }
 
+    static var stemAlterationsHeading: String {
+      NSLocalizedString("Info.stemAlterationsHeading", comment: "")
+    }
+
+    static var stemAlterationsText: String {
+      NSLocalizedString("Info.stemAlterationsText", comment: "")
+    }
+
     static var indicatifPrésentHeading: String {
       NSLocalizedString("Info.indicatifPrésentHeading", comment: "")
     }

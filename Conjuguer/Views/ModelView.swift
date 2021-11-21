@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ModelView: View {
   @State private var isPresentingVerb = false
+  @State private var isPresentingStemAlterationsInfo = false
   let model: VerbModel
 
   init(model: VerbModel) {
@@ -67,8 +68,18 @@ struct ModelView: View {
               .frame(height: Layout.doubleDefaultSpacing)
 
             if let stemAlterations = model.stemAlterationsRecursive {
-              Text(L.ModelView.stemAlterations)
-                .subheadingLabel()
+              HStack {
+                Text(L.ModelView.stemAlterations)
+                  .subheadingLabel()
+                Spacer()
+                Button {
+                  isPresentingStemAlterationsInfo = true
+                } label: {
+                    Image(systemName: "questionmark.diamond.fill")
+                }
+                  .buttonStyle(.borderless)
+                  .tint(.customRed)
+              }
               ForEach(stemAlterations, id: \.self) { alteration in
                 // TODO: Add an info button describing abbreviations to the right of "Stem Alterations".
                 let appliesToString = Tense.shorthandForNonCompoundTense(appliesTo: alteration.appliesTo)
@@ -112,6 +123,15 @@ struct ModelView: View {
         Current.verb.map {
           VerbView(verb: $0, shouldShowVerbHeading: true)
         }
+      }
+    )
+    .sheet(
+      isPresented: $isPresentingStemAlterationsInfo,
+      onDismiss: {
+        isPresentingStemAlterationsInfo = false
+      },
+      content: {
+        InfoView(info: Info.infos[Info.headingToIndex(heading: L.Info.stemAlterationsHeading) ?? 0], shouldShowInfoHeading: true)
       }
     )
     .onAppear {
