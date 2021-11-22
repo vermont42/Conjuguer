@@ -69,7 +69,7 @@ The ~infinitif~ (infinitive) is an invariant verb form that usually ends in -er,
 
 French dictionaries and ~Conjuguer~’s Verbs tab list infinitif forms of verbs.
 
-The ~radical de l’infinitif~ (infinitive stem) is the infinitif minus its -er, -ir, or -re ending. This stem is the base for many conjugations.
+The ~radical de l’infinitif~ (infinitive stem) is the infinitif minus its -er, -ir, or -re ending. This stem is the base for most conjugations.
 
 `Pronoun`
 
@@ -324,9 +324,89 @@ Verbs derived from the above verbs use variants of these irregular radicaux futu
 
 %devenir% -> $devIenDr$";
 
-"Info.stemAlterationsHeading" = "Stem Alterations";
+"Info.representingIrregularitiesHeading" = "Representing Irregularities";
 
-"Info.stemAlterationsText" = "Foo";
+"Info.representingIrregularitiesText" = "Of the 6,314 verbs in Conjuguer, 5,217 have conjugations that are completely regular. A completely regular conjuguation uses the radical de l’infinitif as its stem, and the ending is completely predictable. These are verbs that are conjugated using verb models 1-1 (regular -er), 2-1 (regular -ir), and 5-1A (regular -re). Examples:
+
+cacaber -> vous cacabâtes
+alunir -> nous alunissons
+épandre -> épandu
+
+The other 1,097 verbs are conjugated using one of ninty-two irregular-verb models. Verb models exhibit irregularities in three ways.
+
+First, the stem used differs from the radical de l’infinitif, but the ending is predictable. Example:
+
+suivre -> je $suIs$ (~not~ suivs)
+
+Second, the stem is as expected, but the ending is unpredictable. Example:
+
+être -> vous $êteS$ (~not~ êtez)
+
+Third, both the stem and ending are unpredictable. Example:
+
+aller -> elles $VOnt$ (~not~ allent)
+
+~Conjuguer~ represents stem alterations and unpredictable endings for verb models in the following manner:
+
+~[tenses to apply this alteration to]~: ~[number of letters from end of radical de l’infinitif]~, ~[number of letters to replace]~, ~[letters to swap in]~
+
+Here is an example. The model for boire, 2-17, has the following alteration:
+
+r1p, r2p, b1p, b2p: 2, 2, UV
+
+This alteration results in the following conjugations:
+
+nous $bUVon$ (~not~ boions)
+vous $bUVez$ (~not~ boiez)
+nous $bUVions$ (~not~ boiions)
+vous $bUViez$ (~not~ boiiez)
+
+~Conjuguer~ colors capital letters in alterations red, signifying irregularity.
+
+An asterisk at the end of letters to swap in means an unpredictable ending.
+
+For example, the model for valoir, 4-5A, has the following alteration:
+
+r1s, r2s: 1, 1, UX*
+
+This alteration results in the following conjugations:
+
+je $vaUX$ (~not~ $vaUs$)
+tu $vaUX$ (~not~ $vaUs$)
+
+Here is how tenses are represented in the alterations:
+
+pp: participe passé
+rr: participe présent
+sf: radical futur
+r1s, r2s, r3s, r1p, r2p, r3p: six person-numbers of the indicatif présent
+b1s, b2s, b3s, b1p, b2p, b3p: six person-numbers of the subjonctif présent
+x1s, x2s, x3s, x1p, x2p, x3p: six person-numbers of the passé simple
+i1s, i2s, i3s, i1p, i2p, i3p: six person-numbers of the imparfait
+q1s, q2s, q3s, q1p, q2p, q3p: six person-numbers of the subjonctif imparfait
+h2s, h1p, h2p: three person-numbers of the impératif
+
+The person-number ~A~ means “all six”. For example, xA is equivalent to x1s, x2s, x3s, x1p, x2p, x3p. Likewise, rA is equivalent to r1s, r2s, r3s, r1p, r2p, r3p.
+
+For example, the model for avoir, 4-10, has the following alteration:
+
+xA: 2, 2, E
+
+This results in following passé-simple conjugations:
+
+$Eus$, $Eus$, $Eut$, $Eûmes$, $Eûtes$, $Eurent$
+
+Some alterations have @ as the letter to swap in. This means “capitalize the first letter of the conjugation to indicate its irregularity”.
+
+For example, the model for pouvoir, 4-6, has the following alteration:
+
+xA, pp: 4, 4, @
+
+This results in following passé-simple conjugations:
+
+$Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$, $Purent$
+
+The participe passé is $Pu$.";
 
 "Info.indicatifPrésentHeading" = "Indicatif Présent";
 

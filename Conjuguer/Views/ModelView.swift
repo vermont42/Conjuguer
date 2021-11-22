@@ -131,7 +131,7 @@ struct ModelView: View {
         isPresentingStemAlterationsInfo = false
       },
       content: {
-        InfoView(info: Info.infos[Info.headingToIndex(heading: L.Info.stemAlterationsHeading) ?? 0], shouldShowInfoHeading: true)
+        InfoView(info: Info.infos[Info.headingToIndex(heading: L.Info.representingIrregularitiesHeading) ?? 0], shouldShowInfoHeading: true)
       }
     )
     .onAppear {
