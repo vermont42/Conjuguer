@@ -3,17 +3,15 @@
 //  Conjuguer
 //
 //  Created by Josh Adams on 10/12/18.
-//  Copyright © 2018 Joshua Adams. All rights reserved.
+//  Copyright © 2018 Josh Adams. All rights reserved.
 //
 
 import UIKit
 
 public extension UIDevice {
   var modelName: String {
-    if #available(iOS 14.0, *) {
-      if ProcessInfo.processInfo.isiOSAppOnMac {
-        return "iOS on Mac"
-      }
+    if ProcessInfo.processInfo.isiOSAppOnMac {
+      return "iOS on Mac"
     }
 
     var systemInfo = utsname()
@@ -30,7 +28,7 @@ public extension UIDevice {
     }
 
     // https://everyi.com/by-identifier/ipod-iphone-ipad-specs-by-model-identifier.html
-    // // swiftlint:disable switch_case_on_newline
+    // swiftlint:disable switch_case_on_newline
     switch identifier {
     case "iPod5,1":                                 return "iPod Touch 5"
     case "iPod7,1":                                 return "iPod Touch 6"

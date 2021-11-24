@@ -3,7 +3,7 @@
 //  Conjuguer
 //
 //  Created by Josh Adams on 10/8/18.
-//  Copyright © 2018 Joshua Adams. All rights reserved.
+//  Copyright © 2018 Josh Adams. All rights reserved.
 //
 
 import Amplify

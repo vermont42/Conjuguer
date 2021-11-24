@@ -75,7 +75,7 @@ The ~radical de l’infinitif~ (infinitive stem) is the infinitif minus its -er,
 
 A subject ~pronoun~ is a word that stands in for the subject, the actor in a sentence. In English, the subject pronouns in widespread use are ~I~, ~you~, ~he/she/it/one~, ~we~, ~you/y’all~, and ~they~. The English subject pronouns ~ye~ and ~thou~ have be in decline since the Elizabethan period.
 
-Subject pronouns correspond to the ~singular~ or ~plural~ number and to the ~first person~, ~second person~, or ~third person~. English subject pronouns follow. Shorthand abbreviations of the person-number combinations are in parentheses.
+Subject pronouns correspond to the ~singular~ or ~plural~ number and to the ~first person~, ~second person~, or ~third person~. English subject pronouns follow. Abbreviations of the person-number combinations are in parentheses.
 
 first person, singular (1s): ~I~
 second person, singular (2s): ~you~
@@ -114,7 +114,7 @@ Sixty-five French verbs are ~defective~. This doesn’t mean that something is w
 
 1. Use of certain person-numbers would be non-sensical. For example, “je $faUX$ que tu restes” would ~literally~ mean “I $AM$ necessary that you stay”. %Falloir% is therefore defective for all person-numbers except 3s. “Il $faUt$ que tu restes” makes sense, meaning “it $IS$ necessary that you stay”.
 
-2. Some verbs are impersonal. This doesn’t mean that they lack that human touch. No, impersonal in this context means that their subject is, in English, generic “it” or, in French, generic “il”. These verbs involve natural phenomena like snow, hail, sleet, and rain. “Il $pleuT$.” = “It is raining.” Because of the customary “il” subjects, these verbs are considered defective for person-numbers other than 3s. There is, however, ~some~ flexibility. Quoting and translating Voltaire, “Les calomnies pleuvent sur quiconque réussit.” = “Calumnies rain on whoever succeeds.” One could imagine other person-numbers being used for impersonal verbs in poetry. For example, in a poem written from the perspective of nature, the pronoun and conjugation “je neige”, meaning “I am snowing”, would make sense.
+2. Some verbs are impersonal. This doesn’t mean that they lack that human touch. No, impersonal in this context means that their subject is, in English, generic “it” or, in French, generic “il”. These verbs involve natural phenomena like snow, hail, sleet, and rain. “Il $pleuT$.” = “It is raining.” Because of the customary “il” subjects, these verbs are considered defective for person-numbers other than 3s. There is, however, ~some~ flexibility. Quoting and translating Voltaire, “Les calomnies pleuvent sur quiconque réussit.” = “Calumnies rain on whoever succeeds.” One could imagine other person-numbers being used for impersonal verbs in poetry. For example, in a poem written from the perspective of nature, the pronoun and conjugation “je neige”, meaning “I $AM$ snowing”, would make sense.
 
 3. Some verbs are defective in certain tenses in order to avoid confusion with other verbs’ conjugations. For example, %paître% is defective in the %passé simple% because the conjugations suggested by analogy with %connaître%, $Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$, and $Purent$, are identical to %pouvoir%’s passé-simple conjugations.
 
@@ -133,6 +133,7 @@ Reference works on French verbs, for example the book “French Verbs Made Simpl
 Notwithstanding ~Conjuguer~’s inclusive approach to conjugations traditionally considered defective, those conjugations ~are~ called out with strikethrough in ~Conjuguer~’s user interface.";
 
 "Info.participePasséHeading" = "Participe Passé";
+
 "Info.participePasséText" = "`Use`
 
 The ~participe passé~ (past participle) is used with the auxiliary verbs ~avoir~ and ~être~ to form certain compound tenses, including the %passé composé%: “j’ai parlé” = “I $spOke$”, “I $dID$ speak”, or “I have $spOken$”. The participe passé is also used to form an adjective or noun from a verb: “temps perdu” = “lost time”, “l’$inconNu$” = “the unknown”.
@@ -326,7 +327,7 @@ Verbs derived from the above verbs use variants of these irregular radicaux futu
 
 "Info.representingIrregularitiesHeading" = "Representing Irregularities";
 
-"Info.representingIrregularitiesText" = "Of the 6,314 verbs in Conjuguer, 5,217 have conjugations that are completely regular. A completely regular conjuguation uses the radical de l’infinitif as its stem, and the ending is completely predictable. These are verbs that are conjugated using verb models 1-1 (regular -er), 2-1 (regular -ir), and 5-1A (regular -re). Examples:
+"Info.representingIrregularitiesText" = "Of the 6,314 verbs in ~Conjuguer~, 5,217 have conjugations that are completely regular. A completely regular conjuguation uses the radical de l’infinitif as its stem, and the ending is completely predictable. These are verbs that are conjugated using verb models 1-1 (regular -er), 2-1 (regular -ir), and 5-1A (regular -re). Examples:
 
 cacaber -> vous cacabâtes
 alunir -> nous alunissons

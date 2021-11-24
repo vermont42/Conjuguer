@@ -22,18 +22,18 @@
 "VerbView.auxiliaryAvoir" = "Auxiliaire: Avoir";
 "VerbView.frequency" = "Fréquence";
 "VerbView.defective" = "Défectif.";
-"VerbView.exampleUse" = "Exemple d'Utilisation";
+"VerbView.exampleUse" = "Exemple d’utilisation";
 "VerbView.personlessConjugations" = "P. Passé, P. Présent, R. Futur";
-"VerbView.showCompoundTenses" = "Montrer les Temps Composés";
+"VerbView.showCompoundTenses" = "Montrer les temps composés";
 
 "ModelView.parent" = "Parent";
 "ModelView.defective" = "Défectif";
 "ModelView.endings" = "Terminaisons";
-"ModelView.stemAlterations" = "Modifications des Radicaux";
+"ModelView.stemAlterations" = "Modifications des radicaux";
 "ModelView.regular" = "Régulier";
 "ModelView.irregular" = "Irrégulier";
-"ModelView.verbsUsing" = "Verbes Qui Utilisent Ce Modèle";
-"ModelView.verbUsing" = "Verbe Qui Utilise Ce Modèle";
+"ModelView.verbsUsing" = "Verbes qui utilisent ce modèle";
+"ModelView.verbUsing" = "Verbe qui utilise ce modèle";
 
 "QuizView.start" = "Commencer";
 "QuizView.scoreWithColon" = "Score:";
@@ -54,44 +54,121 @@
 "ResultsView.timeWithColon" = "Temps:";
 
 "Info.dedicationHeading" = "Dédicace";
+
+"Info.dedicationText" = "David Compton était mon entraîneur de ski nordique au lycée. Il était aussi professeur de français mais pas initialement ~mon~ professeur de français. Il était cependant conscient de mon intérêt et de mes aptitudes pour le français. Au début de ma troisième année, je n’allais pas pouvoir prendre le français en raison d’un conflit d’horaire avec Advanced Placement English, alors M. Compton a créé un cours de littérature française de cinq jours par semaine juste pour moi. Un étudiant d’échange allemand nommé Julian Peters nous a bientôt rejoints. En utilisant comme manuels les tomes I et II de « Anthologie de la littérature française » de Robert Leggewie, nous avons étudié les grands de la littérature française de Chrétien de Troyes à Samuel Beckett. Cette étude littéraire a finalement inspiré l’utilisation par ~Conjuguer~ d’exemples littéraires d’usage tendu. J’ai beaucoup apprécié le cours de M. Compton et ma connaissance du français a énormément augmenté. A la fin de l’année, j’ai obtenu un score maximum au test de français Advanced Placement. Au début de ma première année à l’université, j’ai passé un test pour obtenir un crédit pour un cours de français de niveau specialisé et, sur les soixante étudiants de première année qui ont passé le test, j’étais l’un des trois à réussir.
+
+M. Compton avait déjà un horaire de cours complet à l’automne 1991, lorsqu’il a créé le cours pour moi. Il aurait peut-être aimé passer cette période de classe à tirer sur sa pipe à tabac ou à bricoler son ordinateur Macintosh. Ado solipsiste que j’étais, je ne lui ai jamais demandé ~pourquoi~ il avait sacrifié ce temps pour moi. Mais je peux spéculer. Il a étudié à la Sorbonne dans les années 1960 et était francophile. Il a peut-être reconnu en moi un intérêt commun pour le français et a voulu me donner l’opportunité de le poursuivre dans toute la mesure du possible. Quelle que soit sa motivation, je lui en suis reconnaissant et lui dédie cette application.";
+
+"Info.terminologyHeading" = "Terminologie";
+
+"Info.terminologyText" = "`Verbe`
+
+Un ~verbe~ est une sorte de mot qui décrit une action. Par exemple, dans la phrase « Jacques Brel jouait de la guitare », « jouer » est le verbe. De même, dans la phrase « Jacques Brel played the guitar », « play » est le verbe. Les ~temps~ des verbes expriment, entre autres, quand une action a eu, prend ou aura lieu. Dans les phrases exemplaires, les temps verbaux indiquent que l’action (jouer de la guitare) a eu lieu dans le passé. En anglais et en français, le ~sujet~ ou acteur de la phrase, combiné au temps, détermine la forme du verbe utilisé. C’est la ~conjugaison~ du verbe. En anglais, la combinaison du sujet et du temps de la phrase d’exemple entraîne la conjugaison « played ». En français, la conjugaison est « jouait ».
+
+L’~infinitif~ est une forme verbale invariante qui se termine généralement par -er, -ir ou -re. Contrairement à une conjugaison, un ~infinitif~ n’indique pas le temps, le nombre ou la personne. Exemple d’utilisation : « Jacques Brel savait ~chanter~ ». = « Jacques Brel $knEw$ how ~to sing~. » Dans les deux phrases, l’infinitif représente l’~acte~ de chanter sans référence au temps, au nombre ou à la personne.
+
+Les dictionnaires français et l’onglet Verbes de ~Conjuguer~ répertorient les formes infinitives des verbes.
+
+Le ~radical de l’infinitif~ est l’infinitif moins sa terminaison -er, -ir ou -re. Cette racine est la base de la plupart des conjugaisons.
+
+`Pronom`
+
+Un ~pronom~ sujet est un mot qui remplace le sujet, l’acteur d’une phrase. En anglais, les pronoms sujets les plus répandus sont ~I~, ~you~, ~he/she/it/one~, ~we~, ~you/y’all~ et ~they~. Les pronoms sujets anglais ~ye~ et ~thou~ sont en déclin depuis la période élisabéthaine.
+
+Les pronoms sujets correspondent au ~singulier~ ou au ~pluriel~ et à la ~première personne~, ~deuxième personne~ ou ~troisième personne~. Les pronoms sujets anglais suivent. Les abréviations des combinaisons personne-numéro sont entre parenthèses.
+
+première personne du singulier (1s) : ~I~
+deuxième personne du singulier (2s) : ~you~
+troisième personne, singulier (3s): ~he/she/it/one~
+première personne du pluriel (1p) : ~we~
+deuxième personne, pluriel (2p) : ~you/y’all~
+troisième personne, pluriel (3p): ~they~
+
+Sauf en ce qui concerne la 2s, le choix du pronom sujet en français est simple.
+
+1s : ~je~
+3s : ~il~ (masc.)/~elle~ (fém.)/~on~
+1p : ~nous~
+2p : ~vous~
+3p : ~ils~ (masc.)/~elles~ (fém.)
+
+« Fém. » signifie qu’un pronom fait référence aux femelles, et « masc. » signifie qu’un pronom fait référence aux mâles.
+
+Dans le langage courant, « on » remplace « nous » et utilise les conjugaisons 3s.
+
+Concernant la 2s, il y a deux choix : ~tu~ et ~vous~. ~Tu~ et ses conjugaisons expriment l’intimité, la familiarité, la convivialité ou, lorsqu’il est utilisé avec colère contre un étranger, l’impolitesse. ~Vous~ et ses conjugaisons expriment la politesse, le respect, ou, lorsqu’il est utilisé sur un ancien intime, le désir de distance émotionnelle.
+
+`Ordre de présentation des conjugaisons`
+
+Les traités sur les verbes français, lors de la présentation des conjugaisons d’un temps particulier, utilisent l’ordre des nombres de personnes suivant : 1s, 2s, 3s, 1p, 2p, 3p. Respectueux de la tradition, ~Conjuguer~ fait de même. Par exemple, ~Conjuguer~ présenterait les conjugaisons indicatif-présent de ~être~ comme suit :
+
+$SUIs$, $Es$, $ESt$, $SOMMEs$, $êteS$, $SOnt$
+
+Les lettres rouges dans les conjugaisons représentent des irrégularités. Un verbe est considéré comme irrégulier si l’une de ses conjugaisons diffère de la conjugaison d’un verbe régulier ~er~, ~ir~ ou ~re~.";
+
 "Info.defectivenessHeading" = "Défectuosité";
-"Info.participePasséHeading" = "Participe Passé";
-"Info.participePrésentHeading" = "Participe Présent";
-"Info.radicalFuturHeading" = "Radical Futur";
-"Info.representingIrregularitiesHeading" = "Représentation des Irrégularités";
-"Info.indicatifPrésentHeading" = "Indicatif Présent";
-"Info.passéSimpleHeading" = "Passé Simple";
+
+"Info.defectivenessText" = "`Espèces`
+
+Soixante-cinq verbes français sont ~défectueux~. Cela ne veut pas dire que quelque chose ne va pas chez eux. Non, défectueux dans ce contexte signifie que ces verbes manquent de certaines ou même de toutes les conjugaisons. Les verbes peuvent être considérés comme défectueux pour diverses raisons.
+
+1. L’utilisation de certaines personnes-numéros serait absurde. Par exemple, « je $fAUX$ que tu restes » signifierait ~littéralement~ « I $AM$ necessary that you stay ». %Falloir% est donc défectueux pour tous les personnes-numéros sauf la 3s. « Il $faUt$ que tu restes » est logique et signifie « it $IS$ necessary that you stay ».
+
+2. Certains verbes sont impersonnels. Cela ne veut pas dire qu’ils manquent de l’humanité. Non, impersonnel dans ce contexte signifie que leur sujet est, en anglais, « it » générique ou, en français, « il » générique. Ces verbes impliquent des phénomènes naturels comme la neige, la grêle, le grésil et la pluie. « Il $pleuT$. » = « It $IS$ raining. » En raison des sujets « il » habituels, ces verbes sont considérés comme défectueux pour les personnes-numéros autres que la 3s. Il existe cependant une ~certaine~ flexibilité. Citant et traduisant Voltaire, « Les calomnies pleuvent sur réussit. » = « Calumnies rain on whoever succeeds. » On pourrait imaginer d’autres personnes-numéros utilisées pour des verbes impersonnels dans la poésie. Par exemple, dans un poème écrit du point de vue de la nature, le pronom et la conjugaison « je neige », signifiant « I $AM$ snowing », auraient un sens.
+
+3. Certains verbes sont défectueux à certains temps afin d’éviter toute confusion avec la conjugaison d’autres verbes. Par exemple, %paître% est défectueux dans le %passé simple% car les conjugaisons proposées par analogie avec %connaître%, $Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$ et $Purent$, sont identiques aux conjugaisons passé-simples de %pouvoir%.
+
+4. Certains verbes sont défectueux parce qu’ils sont tombés en désuétude sauf dans certaines expressions fixes. %Ouïr (trad.)% (entendre ou écouter) a été remplacé par %entendre% et %écouter% sauf dans les expressions « ouï-dire » = « hearsay » et « O$Yez$ ! = « Écoutez ! » (s’adressant au parlement britannique). %Ester% (to be or stay) a été remplacé par %être% et %rester% sauf dans l’expression « ester en justice » = « be a party in legal proceedings ». %Gésir% (to lie prone) ~est~ encore occasionnellement utilisé dans l’%indicatif présent% et %imparfait%, mais l’usage ~primaire~ de ce verbe est « ci-$gÎt$ » = « here lies (dead) », une inscription commune sur les pierres tombales.
+
+`Motifs d’inclusion`
+
+Les ouvrages de référence sur les verbes français, par exemple le livre « French Verbs Made Simple(r) » et le site Wiktionary, omettent complètement les conjugaisons défectueuses. Mais le développeur de ~Conjuguer~ fournit ~toutes~ les conjugaisons, y compris celles traditionnellement considérées comme défectueuses, à vous, l’utilisateur de cette application. Trois raisons expliquent cette générosité hétérodoxe.
+
+1. Comme indiqué dans « French Verbs Made Simple(r) », « There is occasionally disagreement [among] various sources as to which [conjugations] actually exist. » De même, concernant le mot %ravoir%, le Wiktionnaire dit : « D’après la plupart des dictionnaires classiques, ce verbe $EST$ défectif et ne se conjugue pas. Néanmoins, des usages de formes associées $SONT$ avérées régionalement. » Omettre certaines conjugaisons nécessiterait donc une série de jugements de la part du développeur de ~Conjuguer~. Il ne juge pas afin qu’il ne soit point jugé.
+
+2. Certaines conjugaisons sont probablement absentes de tout grand corpus de texte français et pourraient donc être considérées comme défectueuses. Mais le fait qu’une conjugaison n’est pas utilisée ne veut pas dire qu’elle ne pourrait pas être utile. Considérez un poème écrit du point de vue des nuages ​​de la Terre et de Vénus. Ce poème pourrait inclure le vers « Nous pleuvons de l’eau et de l’acide sulfurique, respectivement. » Ainsi, bien que pleuvoir soit considéré comme défectueux pour la 1p dans tous les temps conjugués, cette conjugaison (pleuvons) serait utile dans un tel poème.
+
+3. %Ester% (être ou rester), bien que presque éteint en français, a des parents fréquemment utilisés dans d’autres langues romanes. Par exemple, l’espagnol a deux mots pour « être » : « ser » et (vous l’avez deviné) « estar ». Les utilisateurs de ~Conjuguer~ pourraient être curieux de savoir comment les conjugaisons d’ester auraient évolué si ce verbe était resté productif en français, comme il l’a fait en espagnol. De même, les utilisateurs de ~Conjuguer~ pourraient également être curieux de savoir comment les conjugaisons de %clore% auraient évolué si %fermer% ne les avait pas remplacées. Pour le bénéfice des utilisateurs curieux, ~Conjuguer~ comprend des conjugaisons spéculatives de %choir%, %clore%, %ester%, %gésir%, %issir% et %ouïr%, inspirées des conjugaisons du vieux français fournies par Wiktionary et « Tableaux de conjugaison de l’ancien français » de Machio Okada et Hitoshi Ogurisu.
+
+Nonobstant l’approche inclusive de ~Conjuguer~ aux conjugaisons traditionnellement considérées comme défectueuses, ces conjugaisons ~sont~ barrées dans l’interface utilisateur de ~Conjuguer~.";
+
+"Info.participePasséHeading" = "Participe passé";
+"Info.participePrésentHeading" = "Participe présent";
+"Info.radicalFuturHeading" = "Radical futur";
+"Info.representingIrregularitiesHeading" = "Représentation des irrégularités";
+"Info.indicatifPrésentHeading" = "Indicatif présent";
+"Info.passéSimpleHeading" = "Passé simple";
 "Info.imparfaitHeading" = "Imparfait";
-"Info.futurSimpleHeading" = "Futur Simple";
-"Info.conditionnelPrésentHeading" = "Conditionnel Présent";
-"Info.subjonctifPrésentHeading" = "Subjonctif Présent";
-"Info.subjonctifImparfaitHeading" = "Subjonctif Imparfait";
+"Info.futurSimpleHeading" = "Futur simple";
+"Info.conditionnelPrésentHeading" = "Conditionnel présent";
+"Info.subjonctifPrésentHeading" = "Subjonctif présent";
+"Info.subjonctifImparfaitHeading" = "Subjonctif imparfait";
 "Info.impératifHeading" = "Impératif";
-"Info.passéComposéHeading" = "Passé Composé";
+"Info.passéComposéHeading" = "Passé composé";
 "Info.plusQueParfaitHeading" = "Plus-que-parfait";
-"Info.passéAntérieurHeading" = "Passé Antérieur";
-"Info.passéSurcomposéHeading" = "Passé Surcomposé";
-"Info.futurAntérieurHeading" = "Futur Antérieur";
-"Info.conditionnelPasséHeading" = "Conditionnel Passé";
-"Info.subjonctifPasséHeading" = "Subjonctif Passé";
-"Info.subjonctifPlusQueParfaitHeading" = "Subjonctif Plus-que-parfait";
-"Info.impératifPasséHeading" = "Impératif Passé";
-"Info.questionsAndResponsesHeading" = "Questions and Responses";
+"Info.passéAntérieurHeading" = "Passé antérieur";
+"Info.passéSurcomposéHeading" = "Passé surcomposé";
+"Info.futurAntérieurHeading" = "Futur antérieur";
+"Info.conditionnelPasséHeading" = "Conditionnel passé";
+"Info.subjonctifPasséHeading" = "Subjonctif passé";
+"Info.subjonctifPlusQueParfaitHeading" = "Subjonctif plus-que-parfait";
+"Info.impératifPasséHeading" = "Impératif passé";
+"Info.questionsAndResponsesHeading" = "Questions et réponses";
 "Info.creditsHeading" = "Crédits";
 
-"Settings.quizDifficulty" = "Difficulté du Quiz";
+"Settings.quizDifficulty" = "Difficulté du quiz";
 "Settings.quizDifficultyDescription" = "Ce réglage détermine la difficulté des quiz. Vous voulez probablement Ordinaire.";
-"Settings.pronounGender" = "Genres des Pronoms";
-"Settings.pronounGenderDescription" = "Ce réglage détermine les genres des pronoms, ce qui est important pour certaines conjugaisons aux temps composés. « Les Deux » signifie que les pronoms singuliers sont féminins et que les pronoms pluriels sont masculins.";
+"Settings.pronounGender" = "Genres des pronoms";
+"Settings.pronounGenderDescription" = "Ce réglage détermine les genres des pronoms, ce qui est important pour certaines conjugaisons aux temps composés. « Les deux » signifie que les pronoms singuliers sont féminins et que les pronoms pluriels sont masculins.";
 
 "QuizDifficulty.regular" = "Ordinaire";
 "QuizDifficulty.ridiculous" = "Ridicule";
-"QuizDifficulty.regularDifficulty" = "Difficulté Ordinaire";
-"QuizDifficulty.ridiculous" = "Difficulté Ridicule";
+"QuizDifficulty.regularDifficulty" = "Difficulté ordinaire";
+"QuizDifficulty.ridiculous" = "Difficulté ridicule";
 
 "PronounGender.feminine" = "Féminin";
 "PronounGender.masculine" = "Masculin";
-"PronounGender.both" = "Les Deux";
+"PronounGender.both" = "Les deux";
 "PronounGender.feminineAbbreviation" = "fém.";
 "PronounGender.masculineAbbreviation" = "masc.";
 
