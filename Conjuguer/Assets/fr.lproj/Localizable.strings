@@ -133,8 +133,198 @@ Les ouvrages de référence sur les verbes français, par exemple le livre « Fr
 Nonobstant l’approche inclusive de ~Conjuguer~ aux conjugaisons traditionnellement considérées comme défectueuses, ces conjugaisons ~sont~ barrées dans l’interface utilisateur de ~Conjuguer~.";
 
 "Info.participePasséHeading" = "Participe passé";
+
+"Info.participePasséText" = "`Utilisation`
+
+Le ~participe passé~ est utilisé avec les verbes auxiliaires ~avoir~ et ~être~ pour former certains temps composés, dont le %passé composé% : « j’ai parlé » = « I $spOke$ », « I $dID$ speak » ou « I have $spOken$ ». Le participe passé est également utilisé pour former un adjectif ou un nom à partir d’un verbe : « temps perdu » = « lost time », « l’$inconNu$ » = « the unknown ».
+
+`Forme`
+
+En général, le participe passé se forme en ajoutant les terminaisons suivantes au radical de l’infinitif :
+
+Verbes ~er~ réguliers : -é
+
+Exemples : « parlé » = « $spOken$ », « chanté » = « $sUng$ », « dansé » = « danced »
+
+Verbes ~ir~ réguliers : -i
+
+Exemples : « fini » = « finished », « établi » = « established », « évanoui » = « fainted »
+
+Verbes ~re~ réguliers : -u
+
+Exemples : « entendu » = « heard », « vendu » = « $sOld$ », « rendu » = « rendered »
+
+`Accord`
+
+Lorsque le participe passé est utilisé comme adjectif, il s’accorde en genre et en nombre avec le nom qu’il modifie. Exemple : « des langues parlées en France » = « some languages ​​$spOken$ in France »
+
+Le participe passé, utilisé aux temps composés, s’accorde en genre et en nombre avec le sujet dans deux scénarios.
+
+Un scénario implique l’utilisation réflexive des verbes. “Les chattes se sont nettoyées.” = « The female cats groomed themselves. »
+
+L’autre scénario implique certains verbes qui utilisent l’auxiliaire %être% plutôt que %avoir% : %aller%, %arriver%, %descendre%, %devenir%, %entrer%, %issir%, %monter%, %mourir% , %naître%, %partir%, %parvenir%, %passer%, %ressortir%, %rester%, %retomber%, %retourner%, %revenir%, %sortir (exit)% et %tomber%. De manière confuse, les verbes de cette liste utilisent %avoir%, sans accord, dans les situations transitives.
+
+Contrastez :
+
+« Elle est sortie. » = « Elle $leFt$. »
+
+avec :
+
+« Elle a sorti son portefeuille. » = « She $gOt$ her wallet out. »
+
+Notez l’absence d’accord dans la deuxième conjugaison de sortir.
+
+`Irrégularités`
+
+Voici quelques participes passés irréguliers :
+
+%absoudre% -> $absouS$
+%acquérir% -> $acquIs$
+%assis% -> $assIS$
+%avoir% -> $EU$
+%boire% -> $bU$
+%comprendre% -> $comprIS$
+%connaître% -> $connU$
+%coudre% -> $couSu$
+%couvrir% -> $couvERT$
+%croire% -> $crU$
+%croître% -> $crÛ$
+%devoir% -> $DÛ$
+%dire% -> $diT$
+%être% -> $ÉtÉ$
+%exclure% -> $exclU$
+%faire% -> $faiT$
+%falloir% -> $fallU$
+%gésir% -> $gÉÜ$
+%issir% -> $issU$
+%lire% -> $lU$
+%mettre% -> $mIS$
+%moudre% -> $mouLu$
+%mourir% -> $moRT$
+%mouvoir% -> $MÛ$
+%nuire% -> $nuI$
+%ouvrir% -> $ouvERT$
+%plaindre% -> $plainT$
+%plaire% -> $plU$
+%pleuvoir% -> $plU$
+%pouvoir% -> $PU$
+%prendre% -> $prIS$
+%promouvoir% -> $promU$
+%recevoir% -> $reÇU$
+%résoudre% -> $résoLu$
+%rire% -> $rI$
+%savoir% -> $sU$
+%suffire% -> $suffI$
+%suivre% -> $suivIS$
+%surseoir% -> $surIS$
+%tenir% -> $tenU$
+%venir% -> $venU$
+%vivre% -> $vÉCu$
+%vouloir% -> $voulU$
+
+Les verbes dérivés des verbes ci-dessus utilisent des variantes de ces participes passés irréguliers. Exemple :
+
+%ravoir% -> $rEU$";
+
 "Info.participePrésentHeading" = "Participe présent";
+
+"Info.participePrésentText" = "`Utilisations`
+
+Le ~participe présent~ est utilisé :
+
+• En tant que verbe invariable se référant à un nom ou à un pronom.
+
+« [M]es parents, n’$aYant$ rarement de loisir pour faire des sorties … prirent l’habitude de me laisser aller me promener sans eux. » = « My parents, having little time to go out … $gOt$ into the habit of letting me go for a walk without them. »
+
+- Marcel Proust, Du côté de chez Swann
+
+• Dans une proposition de participe.
+
+« Il n’avait … aucune raison de haïr ce bon Charles, n’$Étant$ pas ce qui s’appelle dévoré de jalousie. = « He $haD$ … no reason to hate good Charles, not being … devoured by jealousy. »
+
+- Gustave Flaubert, Madame Bovary
+
+• Ou comme adjectif. Dans ce cas, le participant présent s’accorde avec le nom que se modifie.
+
+« Gervaise avait gardé sa tranquillité souriante de la matinée. = « Gervaise $haD$ kept her smiling tranquility of the morning. »
+
+- Émile Zola, L’Assommoir
+
+`Forme`
+
+Le participe présent est formé de la conjugaison 1p de l’indicatif présent, moins -ons, plus -ant. Exemples :
+
+%parler% -> parlant
+%finir% -> finissant
+%rendre% -> impressionner
+
+Trois participes présents ne suivent pas ce schéma et sont donc irréguliers :
+
+%avoir% -> $aYant$
+%être% -> $Étant$
+%savoir% -> $saCHant$";
+
 "Info.radicalFuturHeading" = "Radical futur";
+
+"Info.radicalFuturText" = "`Utilisations`
+
+Le ~radical futur~ a deux usages :
+
+• Comme racine du %futur simple%.
+
+« La noce $aUra$ lieu le samedi 29 juillet. » = « The wedding will take place on Saturday, July 29. »
+
+- Émile Zola, L’Assommoir
+
+• Comme racine du %conditionnel présent%.
+
+« [O]n rêvait à la quantité de plats qu’il $faUDrait$ et quelles $SE seraient$ les entrées. » = « One $dreamT$ of the quantity of dishes that would be needed and what the starters would be. »
+
+- Gustave Flaubert, Madame Bovary
+
+`Forme`
+
+Pour la plupart des verbes, le futur radical est identique à l’infinitif. Le -e final s’ôte des verbes -re. Exemples :
+
+%finir% -> finir-
+%parler% -> parler-
+%rendre% -> rendr-
+
+Certains verbes ont des radicaux futurs irréguliers. Ils sont:
+
+%acquérir% -> $acquERr$-
+%aller% -> $Ir$-
+%appeler% -> $appelLer$-
+%asseoir% -> $assiÉr$-*
+%avoir% -> $aUr$-
+%choeur% -> $chERr$-*
+%dépècer% -> $dépÈcer$-
+%devoir% -> $devR$-
+%employeur% -> $employeur$-
+%envoyer% -> $envERr$-
+%être% -> $SEr$-
+%faire% -> $fEr$-
+%faillir% -> $faUDr$-*
+%falloir% -> $faUDr$-
+%issir% -> $isTr$-
+%jeter% -> $jetTer$-
+%pouvoir% -> $pourRr$-
+%mouvoir% -> $mouvR$-
+%ouïr (trad.)% -> $Oir$-* ou $oRr$-*
+%payeur% -> $paIer$-*
+%peser% -> $peser$-
+%savoir% -> $saUr$-
+%venir% -> $vIenDr$-
+%valoir% -> $vaUDr$-
+%voir% -> $veRr$-
+%vouloir% -> $vouDr$-
+
+* L’utilisation de ces futurs radicaux irréguliers est facultative. Par exemple, les futurs radicaux de %payer% sont à la fois payer- et $paIer$-.
+
+Les verbes dérivés des verbes ci-dessus utilisent des variantes de ces radicaux futurs irréguliers. Exemple :
+
+%devenir% -> $devIenDr$";
+
 "Info.representingIrregularitiesHeading" = "Représentation des irrégularités";
 "Info.indicatifPrésentHeading" = "Indicatif présent";
 "Info.passéSimpleHeading" = "Passé simple";
