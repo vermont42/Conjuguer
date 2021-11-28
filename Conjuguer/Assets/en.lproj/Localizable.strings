@@ -248,7 +248,7 @@ The ~participe présent~ (present participle) is used:
 
 “Gervaise avait gardé sa tranquillité souriante de la matinée.” = “Gervaise $haD$ kept her smiling tranquility of the morning.”
 
-- Émile Zola, L’Assommoir
+- Émile Zola, L’assommoir
 
 `Form`
 
@@ -274,7 +274,7 @@ The ~radical futur~ (future stem) has two uses:
 
 “La noce $aUra$ lieu le samedi 29 juillet.” = “The wedding will take place on Saturday, July 29.”
 
-- Émile Zola, L’Assommoir
+- Émile Zola, L’assommoir
 
 • As the stem for the %conditionnel présent%.
 
@@ -325,9 +325,9 @@ Verbs derived from the above verbs use variants of these irregular radicaux futu
 
 %devenir% -> $devIenDr$";
 
-"Info.representingIrregularitiesHeading" = "Representing Irregularities";
+"Info.irregularitiesHeading" = "Irregularities";
 
-"Info.representingIrregularitiesText" = "Of the 6,314 verbs in ~Conjuguer~, 5,217 have conjugations that are completely regular. A completely regular conjuguation uses the radical de l’infinitif as its stem, and the ending is completely predictable. These are verbs that are conjugated using verb models 1-1 (regular -er), 2-1 (regular -ir), and 5-1A (regular -re). Examples:
+"Info.irregularitiesText" = "Of the 6,314 verbs in ~Conjuguer~, 5,217 have conjugations that are completely regular. A completely regular conjuguation uses the radical de l’infinitif as its stem, and the ending is completely predictable. These are verbs that are conjugated using verb models 1-1 (regular -er), 2-1 (regular -ir), and 5-1A (regular -re). Examples:
 
 cacaber -> vous cacabâtes
 alunir -> nous alunissons
@@ -504,7 +504,7 @@ Here are some examples of the passé simple.
 
 “Tresqu’en la mer $cUnquist$ la tere altaigne.” = “He conquered the high land down to the sea.”
 
-- Turoldus, La Chanson de Roland
+- Turoldus, La chanson de Roland
 
 “Emma s’étendit beaucoup sur la misère des affections terrestres et l’éternel isolement où le cœur reste enseveli.” = “Emma $spOke$ at length about the misery of earthly ailments and the eternal isolation in which the heart remains buried.”
 
@@ -560,13 +560,13 @@ The ~imparfait~ (imperfect) is used:
 
 • To express the repeated or habitual nature of an action. English sometimes uses ~would + infinitive~ in this situation, as in the translation below.
 
-“Parfois, à peine ma bougie éteinte, mes yeux se fermaient si vite que je n’avais pas le temps de me dire, ‘Je $m’endoRs$.’” = “Sometimes, barely after my candle $WAS$ extinguished, my eyes would close so quickly that I $dIDn’t$ have time to say to myself, ‘I’m falling asleep.’”
+“Parfois, à peine ma bougie éteinte, mes yeux se fermaient si vite que je n’avais pas le temps de me dire, ‘Je $m’endoRs$.’” = “Sometimes, barely after my candle $WAS$ extinguished, my eyes would close so quickly that I $dIDn’t$ have time to say to myself, ‘I’$M$ falling asleep.’”
 
 - Marcel Proust, Du côté de chez Swann
 
 “[E]lle prenait souvent le café avec Adèle et Virginie, quand les petites avaient de l’argent.” = “She often $haD$ coffee with Adèle and Virginie when the little ones $haD$ money.”
 
-- Émile Zola, L’Assommoir
+- Émile Zola, L’assommoir
 
 • To describe past state.
 
@@ -574,9 +574,9 @@ The ~imparfait~ (imperfect) is used:
 
 - Gustave Flaubert, Madame Bovary
 
-“Quels hom esteit ne de quel terre il $eRet$” = “Who he was nor what country he was from”
+“Quels hom esteit ne de quel terre il $eRet$” = “Who he $WAS$ nor what country he $WAS$ from”
 
-- Turoldus, La Chanson de Roland
+- Turoldus, La chanson de Roland
 
 `Conjugation`
 
@@ -598,13 +598,13 @@ The ~futur simple~ (simple future) is used for actions expected, predicted, or h
 
 “[J]e vous garderai une place à côté de moi, et nous causerons.” = “I will save a place for you next to me, and we will chat.”
 
-- Émile Zola, L’Assommoir
+- Émile Zola, L’assommoir
 
 “[I]l ne $saUra$ plus l’heure, il estimera qu’il vient à peine de se coucher.” = “He will not know the time[;] he will think he has barely gone to bed.”
 
 - Marcel Proust, Du côté de chez Swann
 
-French uses the futur simple in one situation English uses the present indicative: in future-time clauses starting with “quand”.
+French uses the futur simple in one situation in which English uses the present indicative: in future-time clauses starting with “quand”.
 
 “[J]e les $verRai$ l’année prochaine, quand j’$Irai$ habiter Paris, pour finir mon droit.” = “I will see them next year, when I go live in Paris to finish studying for the bar exam.”
 
@@ -636,7 +636,7 @@ To indicate politeness with %pouvoir%, %avoir%, and %être%.
 
 “Vous ne $pouRriez$ pas me prêter dix sous?” = “Couldn’t you lend me ten cents?”
 
-- Émile Zola, L’Assommoir
+- Émile Zola, L’assommoir
 
 “Monsieur Swann, $vouDriez$-vous avoir la bonté de me permettre de vous présenter notre ami Saniette?” = “Mr. Swann, would you be so kind as to permit me to introduce to you our friend Saniette?”
 
@@ -676,13 +676,13 @@ To express opinion, fear, or doubt. In this case, a clause with ~indicatif prés
 
 After the conjunctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, and ~sans que~.
 
-“[T]out est organisé pour qu’elles ne $pUISSent$ se joindre.” - “Everything is organized so that they cannot join.”
+“[T]out est organisé pour qu’elles ne $pUISSent$ se joindre.” = “Everything $IS$ organized so that they cannot join.”
 
 - Gustave Flaubert, Madame Bovary
 
 “[P]ourvu qu’on vive … on n’$A$ point trop à se plaindre.” = “As long as we’$RE$ alive, … we don’t have too much to complain about.”
 
-- Émile Zola, L’Assommoir
+- Émile Zola, L’assommoir
 
 To command or exhort.
 
@@ -741,7 +741,7 @@ Examples:
 
 "Info.subjonctifImparfaitText" = "`Use`
 
-The ~subjonctif imparfait~ (imperfect subjunctive) was used after the conjunctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, and ~sans que~ when the main clause uses %passé simple% or %imparfait%. Use of the subjonctif imparfait is rare in contemporary French.
+The ~subjonctif imparfait~ (imperfect subjunctive) was used after the conjunctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, and ~sans que~ when the main clause used %passé simple% or %imparfait%. Use of the subjonctif imparfait is rare in contemporary French.
 
 Examples:
 
@@ -772,7 +772,7 @@ Examples:
 %naître%: $naQUisse$, $naQUisses$, $naQUît$, $naQUissions$, $naQUissiez$, $naQUissent$
 %rendre%: rendisse, rendisses, rendît, rendissions, rendissiez, rendissent
 
-3. %Haïr (France)%, %haïr Québec%, and %ouïr (trad.)% (~ï~ group): ïsse, ïsses, ït, ïssions, ïssiez, ïssent
+3. %Haïr (France)%, %haïr (Québec)%, and %ouïr (trad.)% (~ï~ group): ïsse, ïsses, ït, ïssions, ïssiez, ïssent
 
 Examples:
 %haïr (France)%: haïsse, haïsses, haït, haïssions, haïssiez, haïssent
@@ -801,9 +801,9 @@ Examples:
 
 “N’$aYez$ pas peur, allez!” = “Don’t be afraid. Go!”
 
-- Émile Zola, L’Assommoir
+- Émile Zola, L’assommoir
 
-“Ô temps, suspends ton vol!” = “O, Time, pause in your flight!”
+“Ô temps, suspends ton vol!” = “O, Time, pause your flight!”
 
 - Alphonse de Lamartine, Le Lac
 
@@ -845,27 +845,27 @@ Examples:
 
 “[N]ous avons $faiT$ le voyage avec les deux enfants.” = “We traveled with the two children.”
 
-- Émile Zola, L’Assommoir
+- Émile Zola, L’assommoir
 
 “Mais j’ai $Vu$ monsieur d’Ajuda-Pinto entrant chez monsieur de Rochefide, et j’$aI$ pensé qu’alors vous $Étiez$ seule.” = “But I $sAW$ Monsieur d’Ajuda-Pinto entering Monsieur de Rochefide’s house, and I $thOUGHT$ you $WERE$ alone then.”
 
 - Honoré de Balzac, Le père Goriot
 
-This second example demonstrates why %être%, the most popular French verb, rarely uses the passé composé. Past state is usually expressed with the %imparfait%, not the passé composé. %Être% ~does~ use the passé composé for the passive voice, as demonstrated below.
+This second example demonstrates why %être%, the most commonly used French verb, rarely uses the passé composé. Past state is usually expressed with the %imparfait%, not the passé composé. %Être% ~does~ use the passé composé for the passive voice, as demonstrated below.
 
-“Lorsque l’Assommoir $A$ $paRu$ dans $uN$ journal, il a $ÉtÉ$ attaqué avec une brutalité sans exemple, dénoncé, chargé de tous les crimes.” = “When ‘The Drinking Den’ appeared in a newspaper, it $WAS$ denounced, charged with every crime, and attacked with unprecedented brutality.”
+“Lorsque l’assommoir $A$ $paRu$ dans $uN$ journal, il a $ÉtÉ$ attaqué avec une brutalité sans exemple, dénoncé, chargé de tous les crimes.” = “When ‘The Drinking Den’ appeared in a newspaper, it $WAS$ denounced, charged with every crime, and attacked with unprecedented brutality.”
 
-- Émile Zola, L’Assommoir
+- Émile Zola, L’assommoir
 
 `Conjugation`
 
-The passé composé is formed from the %indicatif présent% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
+The passé composé is formed from the %indicatif présent% conjugation of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.plusQueParfaitHeading" = "Plus-que-parfait";
 
 "Info.plusQueParfaitText" = "`Use`
 
-The ~Plus-que-parfait~ (pluperfect) is used for situations existing prior to a fixed point in the past.
+The ~plus-que-parfait~ (pluperfect) is used for situations existing prior to a fixed point in the past.
 
 Examples:
 
@@ -879,7 +879,7 @@ Examples:
 
 `Conjugation`
 
-The plus-que-parfait is formed from the %imparfait% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
+The plus-que-parfait is formed from the %imparfait% conjugation of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.passéAntérieurHeading" = "Passé Antérieur";
 
@@ -891,7 +891,7 @@ Examples:
 
 “Gervaise, dès qu’il se $FUt$ éloigné, se $remIt$ à la fenêtre.” = “As soon as he $haD$ gone, Gervaise again returned to the window.”
 
-- Émile Zola, L’Assommoir
+- Émile Zola, L’assommoir
 
 “Le patient arriva enfin …, et quand il $Eut$ $ÉtÉ$ hissé sur la plate-forme, … une huée prodigieuse mêlée de rires et d’acclamations, éclata dans la place.” = “The condemned finally arrived, … and when he $haD$ been hoisted upon the platform, … a prodigious hoot, mingled with laughter and cheers, erupted in the plaza.”
 
@@ -899,7 +899,7 @@ Examples:
 
 `Conjugation`
 
-The passé antérieur is formed from the %passé simple% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
+The passé antérieur is formed from the %passé simple% conjugation of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.passéSurcomposéHeading" = "Passé Surcomposé";
 
@@ -919,7 +919,7 @@ Examples:
 
 `Conjugation`
 
-The passé surcomposé is formed from the %passé composé% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
+The passé surcomposé is formed from the %passé composé% conjugation of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.futurAntérieurHeading" = "Futur Antérieur";
 
@@ -939,7 +939,7 @@ Examples:
 
 `Conjugation`
 
-The futur antérieur is formed from the %futur simple% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
+The futur antérieur is formed from the %futur simple% conjugation of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.conditionnelPasséHeading" = "Conditionnel Passé";
 
@@ -951,7 +951,7 @@ Examples:
 
 “Moi, si j’avais $EU$ des meubles, j’aurais guetté un cabinet.” = “Me, if I $haD$ $haD$ furniture, I would have been looking for a cabinet.”
 
-- Émile Zola, L’Assommoir
+- Émile Zola, L’assommoir
 
 “Toutes $aUraient$ $Pu$ faire un fleuve avec leurs pleurs!” = “Each could have $maDe$ a river with her tears!”
 
@@ -959,13 +959,13 @@ Examples:
 
 `Conjugation`
 
-The conditionnel passé is formed from the %conditionnel présent% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
+The conditionnel passé is formed from the %conditionnel présent% conjugation of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.subjonctifPasséHeading" = "Subjonctif Passé";
 
 "Info.subjonctifPasséText" = "`Use`
 
-Like the subjonctif présent, the ~subjonctif passé~ (past subjunctive) was used to express opinion, fear, doubt, or obligation. A clause using non-subjonctif tense often accompanied a clause using the subjonctif passé. In this case, the events of the subjonctif-passé clause preceded the events of the non-subjonctif clause.
+Like the subjonctif présent, the ~subjonctif passé~ (past subjunctive) was used to express opinion, fear, doubt, or obligation. A clause using a non-subjonctif tense often accompanied a clause using the subjonctif passé. In this case, the events of the subjonctif-passé clause preceded the events of the non-subjonctif clause.
 
 Examples:
 
@@ -979,7 +979,7 @@ Examples:
 
 `Conjugation`
 
-The subjonctif passé was formed from the %subjonctif présent% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
+The subjonctif passé was formed from the %subjonctif présent% conjugation of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.subjonctifPlusQueParfaitHeading" = "Subjonctif Plus-que-parfait";
 
@@ -995,11 +995,11 @@ Examples:
 
 “Coupeau n’$aUrait$ pas osé se marier, sans qu’ils $Eussent$ avant tout accepté sa femme.” = “Coupeau would not have dared to marry without their first having accepted his wife.”
 
-- Émile Zola, L’Assommoir
+- Émile Zola, L’assommoir
 
 `Conjugation`
 
-The subjonctif plus-que-parfait was formed from the %subjonctif imparfait% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
+The subjonctif plus-que-parfait was formed from the %subjonctif imparfait% conjugation of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.impératifPasséHeading" = "Impératif Passé";
 
@@ -1019,29 +1019,29 @@ Examples:
 
 `Conjugation`
 
-The impératif passé is formed from the %impératif% form of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
+The impératif passé is formed from the %impératif% conjugation of %avoir% or %être% followed by the %participe passé%. The section ~Agreement~ of this app’s description of the %participe passé% has information on choice of auxiliary and possible gender-and-number agreement.";
 
 "Info.questionsAndResponsesHeading" = "Questions and Responses";
 
 "Info.questionsAndResponsesText" = "~Q:~ How can I contact the developer of ~Conjuguer~?
 
-~A:~ Email vermontcoder@gmail.com.
+~R:~ Email vermontcoder@gmail.com.
 
 ~Q:~ There is a verb missing from the ~Verbs~ screen. What gives?
 
-~A:~ Feel free to email ~Conjuguer~’s developer at vermontcoder@gmail.com if you would like a verb to be added.
+~R:~ Feel free to email ~Conjuguer~’s developer at vermontcoder@gmail.com if you would like a verb to be added.
 
 ~Q:~ Why does ~Conjuguer~ mostly use French names for tenses rather than English, for example, ~indicatif présent~ rather than ~present indicative~?
 
-~A:~ Admittedly, English tense names would perhaps be more approachable for the learner in certain cases, for example, %radical futur%. English speakers might better understand the term ~future stem~. But perhaps because of his years working as a lawyer, ~Conjuguer~’s developer values precision in language. English tense names map imperfectly to French tenses. For example, the English ~present indicative~ has more limited uses than the French %indicatif présent%. The English term is therefore an imprecise match for the French tense.
+~R:~ Admittedly, English tense names would perhaps be more approachable for the learner in certain cases, for example, %radical futur%. English speakers might better understand the term ~future stem~. But perhaps because of his years working as a lawyer, ~Conjuguer~’s developer values precision in language. English tense names map imperfectly to French tenses. For example, the English ~present indicative~ has more limited uses than the French %indicatif présent%. The English term is therefore an imprecise match for the French tense.
 
 ~Q:~ I’ve seen the terms “mood” and “aspect” in descriptions of verb tenses, but ~Conjuguer~ does not use these terms. Also, the %participe passé%, %participe présent%, and %radical futur% are not really tenses.
 
-~A:~ Was that a question? You are correct that ~Conjuguer~ does not use these two terms, and those three things are not usually described as “tenses”. With respect to terminology, bear in mind that ~Conjuguer~’s purpose is to teach French-verb conjugation, not to teach English French-verb-conjugation nomenclature. With respect to the %participe passé%, %participe présent%, and %radical futur%, ~Conjuguer~’s developer does consider those three things to be tenses, if “tense” is taken to mean “a systematic way of changing verbs for a specific purpose”. This definition, though absent, on information and belief, from any dictionary, serves ~Conjuguer~’s pedagogical purpose well enough.
+~R:~ Was that a question? You are correct that ~Conjuguer~ does not use these two terms, and those three things are not usually described as “tenses”. With respect to terminology, bear in mind that ~Conjuguer~’s purpose is to teach French-verb conjugation, not to teach English French-verb-conjugation nomenclature. With respect to the %participe passé%, %participe présent%, and %radical futur%, ~Conjuguer~’s developer does consider those three things to be tenses, if “tense” is taken to mean “a systematic way of changing verbs for a specific purpose”. This definition, though absent, on information and belief, from any dictionary, serves ~Conjuguer~’s pedagogical purpose well enough.
 
 ~Q:~ Why aren’t there more recent examples of uses of the tenses?
 
-~A:~ French copyright expires seventy years after the death of the author, unless the author died in military service during wartime, in which case the period is one hundred years. Antoine de Saint-Exupéry’s 1944 death precludes use of “Le Petit Prince”, ~Conjuguer~’s developer’s favorite French book. Verily, ~Conjuguer~ respects French copyright law, and all example uses are more than one hundred years old.";
+~R:~ French copyright expires seventy years after the death of the author, unless the author died in military service during wartime, in which case the period is one hundred years. Antoine de Saint-Exupéry’s 1944 death precludes use of “Le petit prince”, ~Conjuguer~’s developer’s favorite French book. Verily, ~Conjuguer~ respects French copyright law, and all example uses are more than one hundred years old.";
 
 "Info.creditsHeading" = "Credits";
 

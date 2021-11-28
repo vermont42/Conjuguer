@@ -26,11 +26,11 @@ struct Info: Hashable {
   static let infos: [Info] = [
     Info(heading: L.Info.dedicationHeading, text: L.Info.dedicationText, imageName: "Compton"),
     Info(heading: L.Info.terminologyHeading, text: L.Info.terminologyText),
+    Info(heading: L.Info.irregularitiesHeading, text: L.Info.irregularitiesText),
     Info(heading: L.Info.defectivenessHeading, text: L.Info.defectivenessText),
     Info(heading: L.Info.participePasséHeading, text: L.Info.participePasséText),
     Info(heading: L.Info.participePrésentHeading, text: L.Info.participePrésentText),
     Info(heading: L.Info.radicalFuturHeading, text: L.Info.radicalFuturText),
-    Info(heading: L.Info.representingIrregularitiesHeading, text: L.Info.representingIrregularitiesText),
     Info(heading: L.Info.indicatifPrésentHeading, text: L.Info.indicatifPrésentText),
     Info(heading: L.Info.passéSimpleHeading, text: L.Info.passéSimpleText),
     Info(heading: L.Info.imparfaitHeading, text: L.Info.imparfaitText),

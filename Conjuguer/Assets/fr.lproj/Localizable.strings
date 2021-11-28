@@ -110,27 +110,27 @@ Les lettres rouges dans les conjugaisons représentent des irrégularités. Un v
 
 "Info.defectivenessText" = "`Espèces`
 
-Soixante-cinq verbes français sont ~défectueux~. Cela ne veut pas dire que quelque chose ne va pas chez eux. Non, défectueux dans ce contexte signifie que ces verbes manquent de certaines ou même de toutes les conjugaisons. Les verbes peuvent être considérés comme défectueux pour diverses raisons.
+Soixante-cinq verbes français sont ~défectifs~. Cela ne veut pas dire que quelque chose ne va pas chez eux. Non, défectifs dans ce contexte signifie que ces verbes manquent de certaines ou même de toutes les conjugaisons. Les verbes peuvent être considérés comme défectifs pour diverses raisons.
 
-1. L’utilisation de certaines personnes-numéros serait absurde. Par exemple, « je $fAUX$ que tu restes » signifierait ~littéralement~ « I $AM$ necessary that you stay ». %Falloir% est donc défectueux pour tous les personnes-numéros sauf la 3s. « Il $faUt$ que tu restes » est logique et signifie « it $IS$ necessary that you stay ».
+1. L’utilisation de certaines personnes-numéros serait absurde. Par exemple, « je $fAUX$ que tu restes » signifierait ~littéralement~ « I $AM$ necessary that you stay ». %Falloir% est donc défectif pour tous les personnes-numéros sauf la 3s. « Il $faUt$ que tu restes » est logique et signifie « it $IS$ necessary that you stay ».
 
-2. Certains verbes sont impersonnels. Cela ne veut pas dire qu’ils manquent de l’humanité. Non, impersonnel dans ce contexte signifie que leur sujet est, en anglais, « it » générique ou, en français, « il » générique. Ces verbes impliquent des phénomènes naturels comme la neige, la grêle, le grésil et la pluie. « Il $pleuT$. » = « It $IS$ raining. » En raison des sujets « il » habituels, ces verbes sont considérés comme défectueux pour les personnes-numéros autres que la 3s. Il existe cependant une ~certaine~ flexibilité. Citant et traduisant Voltaire, « Les calomnies pleuvent sur réussit. » = « Calumnies rain on whoever succeeds. » On pourrait imaginer d’autres personnes-numéros utilisées pour des verbes impersonnels dans la poésie. Par exemple, dans un poème écrit du point de vue de la nature, le pronom et la conjugaison « je neige », signifiant « I $AM$ snowing », auraient un sens.
+2. Certains verbes sont impersonnels. Cela ne veut pas dire qu’ils manquent de l’humanité. Non, impersonnel dans ce contexte signifie que leur sujet est, en anglais, « it » générique ou, en français, « il » générique. Ces verbes impliquent des phénomènes naturels comme la neige, la grêle, le grésil et la pluie. « Il $pleuT$. » = « It $IS$ raining. » En raison des sujets « il » habituels, ces verbes sont considérés comme défectifs pour les personnes-numéros autres que la 3s. Il existe cependant une ~certaine~ flexibilité. Citant et traduisant Voltaire, « Les calomnies pleuvent sur réussit. » = « Calumnies rain on whoever succeeds. » On pourrait imaginer d’autres personnes-numéros utilisées pour des verbes impersonnels dans la poésie. Par exemple, dans un poème écrit du point de vue de la nature, le pronom et la conjugaison « je neige », signifiant « I $AM$ snowing », auraient un sens.
 
-3. Certains verbes sont défectueux à certains temps afin d’éviter toute confusion avec la conjugaison d’autres verbes. Par exemple, %paître% est défectueux dans le %passé simple% car les conjugaisons proposées par analogie avec %connaître%, $Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$ et $Purent$, sont identiques aux conjugaisons passé-simples de %pouvoir%.
+3. Certains verbes sont défectifs à certains temps afin d’éviter toute confusion avec la conjugaison d’autres verbes. Par exemple, %paître% est défectif au %passé simple% car les conjugaisons proposées par analogie avec %connaître%, $Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$ et $Purent$, sont identiques aux conjugaisons passé-simples de %pouvoir%.
 
-4. Certains verbes sont défectueux parce qu’ils sont tombés en désuétude sauf dans certaines expressions fixes. %Ouïr (trad.)% (entendre ou écouter) a été remplacé par %entendre% et %écouter% sauf dans les expressions « ouï-dire » = « hearsay » et « O$Yez$ ! = « Écoutez ! » (s’adressant au parlement britannique). %Ester% (to be or stay) a été remplacé par %être% et %rester% sauf dans l’expression « ester en justice » = « be a party in legal proceedings ». %Gésir% (to lie prone) ~est~ encore occasionnellement utilisé dans l’%indicatif présent% et %imparfait%, mais l’usage ~primaire~ de ce verbe est « ci-$gÎt$ » = « here lies (dead) », une inscription commune sur les pierres tombales.
+4. Certains verbes sont défectifs parce qu’ils sont tombés en désuétude sauf dans certaines expressions fixes. %Ouïr (trad.)% (entendre ou écouter) a été remplacé par %entendre% et %écouter% sauf dans les expressions « ouï-dire » = « hearsay » et « O$Yez$ ! = « Écoutez ! » (s’adressant au parlement britannique). %Ester% (to be or stay) a été remplacé par %être% et %rester% sauf dans l’expression « ester en justice » = « be a party in legal proceedings ». %Gésir% (to lie prone) ~est~ encore occasionnellement utilisé dans l’%indicatif présent% et %imparfait%, mais l’usage ~primaire~ de ce verbe est « ci-$gÎt$ » = « here lies (dead) », une inscription commune sur les pierres tombales.
 
 `Motifs d’inclusion`
 
-Les ouvrages de référence sur les verbes français, par exemple le livre « French Verbs Made Simple(r) » et le site Wiktionary, omettent complètement les conjugaisons défectueuses. Mais le développeur de ~Conjuguer~ fournit ~toutes~ les conjugaisons, y compris celles traditionnellement considérées comme défectueuses, à vous, l’utilisateur de cette application. Trois raisons expliquent cette générosité hétérodoxe.
+Les ouvrages de référence sur les verbes français, par exemple le livre « French Verbs Made Simple(r) » et le site Wiktionary, omettent complètement les conjugaisons défectives. Mais le développeur de ~Conjuguer~ fournit ~toutes~ les conjugaisons, y compris celles traditionnellement considérées comme défectives, à vous, l’utilisateur de cette application. Trois raisons expliquent cette générosité hétérodoxe.
 
 1. Comme indiqué dans « French Verbs Made Simple(r) », « There is occasionally disagreement [among] various sources as to which [conjugations] actually exist. » De même, concernant le mot %ravoir%, le Wiktionnaire dit : « D’après la plupart des dictionnaires classiques, ce verbe $EST$ défectif et ne se conjugue pas. Néanmoins, des usages de formes associées $SONT$ avérées régionalement. » Omettre certaines conjugaisons nécessiterait donc une série de jugements de la part du développeur de ~Conjuguer~. Il ne juge pas afin qu’il ne soit point jugé.
 
-2. Certaines conjugaisons sont probablement absentes de tout grand corpus de texte français et pourraient donc être considérées comme défectueuses. Mais le fait qu’une conjugaison n’est pas utilisée ne veut pas dire qu’elle ne pourrait pas être utile. Considérez un poème écrit du point de vue des nuages ​​de la Terre et de Vénus. Ce poème pourrait inclure le vers « Nous pleuvons de l’eau et de l’acide sulfurique, respectivement. » Ainsi, bien que pleuvoir soit considéré comme défectueux pour la 1p dans tous les temps conjugués, cette conjugaison (pleuvons) serait utile dans un tel poème.
+2. Certaines conjugaisons sont probablement absentes de tout grand corpus de texte français et pourraient donc être considérées comme défectives. Mais le fait qu’une conjugaison n’est pas utilisée ne veut pas dire qu’elle ne pourrait pas être utile. Considérez un poème écrit du point de vue des nuages ​​de la Terre et de Vénus. Ce poème pourrait inclure le vers « Nous pleuvons de l’eau et de l’acide sulfurique, respectivement. » Ainsi, bien que pleuvoir soit considéré comme défectif pour la 1p dans tous les temps conjugués, cette conjugaison (pleuvons) serait utile dans un tel poème.
 
 3. %Ester% (être ou rester), bien que presque éteint en français, a des parents fréquemment utilisés dans d’autres langues romanes. Par exemple, l’espagnol a deux mots pour « être » : « ser » et (vous l’avez deviné) « estar ». Les utilisateurs de ~Conjuguer~ pourraient être curieux de savoir comment les conjugaisons d’ester auraient évolué si ce verbe était resté productif en français, comme il l’a fait en espagnol. De même, les utilisateurs de ~Conjuguer~ pourraient également être curieux de savoir comment les conjugaisons de %clore% auraient évolué si %fermer% ne les avait pas remplacées. Pour le bénéfice des utilisateurs curieux, ~Conjuguer~ comprend des conjugaisons spéculatives de %choir%, %clore%, %ester%, %gésir%, %issir% et %ouïr%, inspirées des conjugaisons du vieux français fournies par Wiktionary et « Tableaux de conjugaison de l’ancien français » de Machio Okada et Hitoshi Ogurisu.
 
-Nonobstant l’approche inclusive de ~Conjuguer~ aux conjugaisons traditionnellement considérées comme défectueuses, ces conjugaisons ~sont~ barrées dans l’interface utilisateur de ~Conjuguer~.";
+Nonobstant l’approche inclusive de ~Conjuguer~ aux conjugaisons traditionnellement considérées comme défectives, ces conjugaisons ~sont~ barrées dans l’interface utilisateur de ~Conjuguer~.";
 
 "Info.participePasséHeading" = "Participe passé";
 
@@ -248,7 +248,7 @@ Le ~participe présent~ est utilisé :
 
 « Gervaise avait gardé sa tranquillité souriante de la matinée. = « Gervaise $haD$ kept her smiling tranquility of the morning. »
 
-- Émile Zola, L’Assommoir
+- Émile Zola, L’assommoir
 
 `Forme`
 
@@ -274,7 +274,7 @@ Le ~radical futur~ a deux usages :
 
 « La noce $aUra$ lieu le samedi 29 juillet. » = « The wedding will take place on Saturday, July 29. »
 
-- Émile Zola, L’Assommoir
+- Émile Zola, L’assommoir
 
 • Comme racine du %conditionnel présent%.
 
@@ -325,26 +325,743 @@ Les verbes dérivés des verbes ci-dessus utilisent des variantes de ces radicau
 
 %devenir% -> $devIenDr$";
 
-"Info.representingIrregularitiesHeading" = "Représentation des irrégularités";
+"Info.irregularitiesHeading" = "Irrégularités";
+
+"Info.irregularitiesText" = "Sur les 6.314 verbes de ~Conjuguer~, 5.217 ont des conjugaisons parfaitement régulières. Une conjugaison tout à fait régulière utilise le radical de l’infinitif comme radical, et la terminaison est tout à fait prévisible. Ce sont des verbes qui sont conjugués à l’aide des modèles de verbes 1-1 (-er régulier), 2-1 (-ir régulier) et 5-1A (-re régulier). Exemples :
+
+cacaber -> vous cacabâtes
+alunir -> nous alunissons
+épandre -> épandu
+
+Les 1.097 autres verbes sont conjugués à l’aide de l’un des quatre-vingt-douze modèles de verbes irréguliers. Les modèles verbaux présentent des irrégularités de trois manières.
+
+Premièrement, le radical utilisé diffère du radical de l’infinitif, mais la terminaison est prévisible. Exemple :
+
+suivre -> je $suIs$ (~pas~ suivs)
+
+Deuxièmement, le radical est comme prévu, mais la terminaison est imprévisible. Exemple :
+
+être -> vous $êteS$ (~pas~ êtez)
+
+Troisièmement, la racine et la terminaison sont imprévisibles. Exemple :
+
+aller -> elles $VOnt$ (~pas~ allent)
+
+~Conjuguer~ représente les altérations de radical et les terminaisons imprévisibles pour les modèles verbaux de la manière suivante :
+
+~[temps auxquels appliquer cette modification]~: ~[nombre de lettres à partir de la fin du radical de l’infinitif]~, ~[nombre de lettres à remplacer]~, ~[lettres à échanger]~
+
+Voici un exemple. Le modèle de boire, 2-17, a la modification suivante :
+
+r1p, r2p, b1p, b2p: 2, 2, UV
+
+Cette altération entraîne les conjugaisons suivantes :
+
+nous $bUVon$ (~pas~ boions)
+vous $bUVez$ (~pas~ boiez)
+nous $bUVions$ (~pas~ boiions)
+vous $bUViez$ (~pas~ boiiez)
+
+~Conjuguer~ colore en rouge les lettres majuscules dans les altérations, signifiant l’irrégularité.
+
+Un astérisque à la fin des lettres à échanger signifie une terminaison imprévisible.
+
+Par exemple, le modèle de valoir, 4-5A, a la modification suivante :
+
+r1s, r2s: 1, 1, UX*
+
+Cette altération entraîne les conjugaisons suivantes :
+
+je $vaUX$ (~pas~ $vaUs$)
+tu $vaUX$ (~pas~ $vaUs$)
+
+Voici comment les temps sont représentés dans les altérations :
+
+pp : participe passé
+rr : participe présent
+sf : radical futur
+r1s, r2s, r3s, r1p, r2p, r3p : six numéros-personnes de l’indicatif présent
+b1s, b2s, b3s, b1p, b2p, b3p : six numéros-personnes du subjonctif présent
+x1s, x2s, x3s, x1p, x2p, x3p : six chiffres-personnes du passé simple
+i1s, i2s, i3s, i1p, i2p, i3p : six numéros-personnes de l’imparfait
+q1s, q2s, q3s, q1p, q2p, q3p : six numéros-personnes du subjonctif imparfait
+h2s, hlp, h2p : trois nombres-personnes de l’impératif
+
+Le numéro-personne ~A~ signifie « tous les six ». Par exemple, xA est équivalent à x1s, x2s, x3s, x1p, x2p, x3p. De même, rA est équivalent à r1s, r2s, r3s, r1p, r2p, r3p.
+
+Par exemple, le modèle d’avoir, 4-10, a la modification suivante :
+
+xA: 2, 2, E
+
+Cela donne les conjugaisons passé-simples suivantes :
+
+$Eus$, $Eus$, $Eut$, $Eûmes$, $Eûtes$, $Eurent$
+
+Certaines modifications ont @ comme lettre à échanger. Cela signifie « mettre en majuscule la première lettre de la conjugaison pour indiquer son irrégularité ».
+
+Par exemple, le modèle de pouvoir, 4-6, a la modification suivante :
+
+xA, pp: 4, 4, @
+
+Cela entraîne les conjugaisons passé-simples suivantes :
+
+$Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$, $Purent$
+
+Le participe passé est $Pu$.";
+
 "Info.indicatifPrésentHeading" = "Indicatif présent";
+
+"Info.indicatifPrésentText" = "`Utilisations`
+
+L’~indicatif présent~ est utilisé :
+
+• Pour décrire la réalité continue.
+
+« Mon mari prétend que je n’aime pas les fruits parce que j’en mange moins que lui. » = « My husband claims I don’t like fruit because I eat less of it than he does. »
+
+- Marcel Proust, Du côté de chez Swann
+
+• De même, pour exprimer le caractère répété ou habituel d’une action. L’anglais utilise parfois la construction ~have a habit of + gérondif~ pour accomplir cela.
+
+« [O]ù que je me trouve, dès qu’ils commencent à retenir et à se répondre, je l’$aperÇOis$, avec ses tilleuls et son trottoir éclairé par la lune. » = « Wherever I find myself, as soon as they begin to ring and answer each other, I see it, with its lindens and its moonlit sidewalk. »
+
+- Marcel Proust, Du côté de chez Swann
+
+• Pour souligner le caractère continu d’une action. L’anglais utilise la construction ~be + infinitif + -ing~ pour accomplir cela.
+
+« Vois-tu, je $saIs$ que tu m’attends. » = « You see, I know that you $ARE$ waiting for me. »
+
+- Victor Hugo, Demain dès l’aube
+
+• Dans les situations où l’anglais utilise la construction ~do + infinitif~ pour mettre l’accent.
+
+« Oh! très-sincèrement je $souffrE$ » = « Oh very sincerely do I suffer ! »
+
+- Charles Baudelaire, Le Monstre, ou le Paranymphe d’une nymphe macabre
+
+`Conjugaison`
+
+Pour la plupart des verbes, le radical indicatif-présent est l’infinitif moins la terminaison -er, -ir, -re ou -oir. Les terminaisons indicatif-présent de tout verbe appartiennent à l’une des catégories suivantes.
+
+1. Verbes ~er~ réguliers plus couvrir, cueillir et bouillir : e, es, e, ons, ez, ent
+
+Exemples :
+%céder% : $cÈde$, $cÈdes$, $cÈde$, cédons, cédez, $cÈdent$
+%couvrir% : $couvrE$, $couvrEs$, $couvrE$, $couvrONS$, $couvrEZ$, $couvrENT$
+%parler% : parle, parle, parle, parle, parle, parle
+
+2. Verbes ~ir~ réguliers plus maudire : is, is, it, isssons, issez, issent
+
+Exemples :
+%alunir% : alunis, alunis, alunit, alunissons, alunissez, alunissent
+%finir% : finis, finis, fini, finissons, finissez, finissent
+%maudire% : $maudIs$, $maudIs$, $maudIt$, $maudISSons$, $maudISSez$, $maudISSent$
+
+3. Verbes ~re~ réguliers et certains verbes irréguliers : s, s, _, ons, ez, ent
+
+Exemples :
+%mordre% : mords, mords, mord, mords, mordez, mordent
+%rendre% : rends, rends, rend, rendons, rendez, rendent
+%vaincre% : vaincs, vaincs, vainc, $vainQUons$, $vainQUez$, $vainQUent$
+
+4. %Haïr (Québec)% : ïs, ïs, ït, ïssons, ïssez, ïssent
+
+Exemple :
+haïs, haïs, haït, haïssons, haïssez, haïssent
+
+5. Les terminaisons sont s, s, t, ons, ez, ent pour les verbes suivants :
+
+%absoudre%, % objectif%, %acquérir%, %asseoir%, %boire%, %choir%, %clore%, %conduire%, %connaître%, %coudre%, %courir%, %croire%, %croître%, %écrire%, %devoir%, %dire%, %exclure%, %faire%, %forclore%, %fuir%, %gésir%, %inclure%, %issir%, %lire%, %moudre%, %mourir%, %mouvoir%, %naître%, %ouïr (trad.)%, %partir%, %plaindre%, %plaire%, %pleuvoir%, %pouvoir%, %rire%, %savoir%, %suivre%, %surseoir%, %taire%, %traire%, %valoir%, %venir%, %vivre%, %voir%, %vouloir%
+
+Exemples :
+%boire% : bois, bois, boit, $bUVons$, $bUVez$, $boiVent$
+%croître% : $croÎs$, $croÎs$, $croÎt$, $croISSons$, $croISSez$, $croISSent$
+%gésir% : $gIs$, $gIs$, $gÎt$, $gIsons$, $gIsez$, $gIsent$
+%ouïr (trad.)% : $oIs$, $oIs$, $oIt$, $oYons$, $oYez$, $oIent$
+%voir% : $vOIs$, $vOIs$, $vOIt$, $vOYons$, $vOYez$, $vOIent$
+
+La plupart de ces verbes utilisent des radicaux irréguliers pour certaines ou toutes les conjugaisons indicatif-présentes.
+
+6. Trois verbes sont fondamentalement irréguliers dans la mesure où leurs radicaux ~et~ terminaisons sont pour la plupart imprévisibles. Ces verbes sont :
+
+%aller% : $VAIS$, $VAs$, $VA$, $allons$, $allez$, $VOnt$
+%avoir% : $aI$, $As$, $A$, avez, avez, $Ont$
+%être% : $SUIs$, $Es$, $ESt$, $SOMMEs$, $êteS$, $SOnt$
+
+Être, avoir et aller sont respectivement au premier, au deuxième et au huitième rang quant aux verbes français.";
+
 "Info.passéSimpleHeading" = "Passé simple";
+
+"Info.passéSimpleText" = "`Utilisation`
+
+Le passé simple a été utilisé pour les actions qui ont été accomplies dans le passé. Cet usage contrastait avec celui de l’imparfait, qui était (et continue d’être) utilisé pour des actions répétées, habituelles ou continues. Le passé simple n’est plus utilisé dans la conversation ou l’écriture à moins que le locuteur ou l’écrivain ne soit consciemment abstrus.
+
+Voici quelques exemples du passé simple.
+
+« J’entendis les pas de mes parents qui accompagnaient Swann. » = « I $hearD$ the footsteps of my parents, who $WERE$ accompanying Swann. »
+
+- Marcel Proust, Du côté de chez Swann
+
+« Tresqu’en la mer $cUnquist$ la tere altaigne. » = « He conquered the high land down to the sea. »
+
+- Turoldus, La chanson de Roland
+
+« Emma s’étendit beaucoup sur la misère des affections terrestres et l’éternel isolement où le cœur reste enseveli. » = « Emma $spOke$ at length about the misery of earthly ailments and the eternal isolation in which the heart remains buried. »
+
+- Gustave Flaubert, Madame Bovary
+
+`Conjugaison`
+
+Pour les verbes réguliers ~er~, ~ir~ et ~re~, le radical passé-simple est l’infinitif moins la terminaison -er, -ir ou -re.
+
+Les verbes avec des radicaux participe-passé irréguliers, y compris la plupart des verbes ~oir~, utilisent ces radicaux pour le passé simple. Par exemple, le radical participe-passé et passé-simple de %devoir% est $D$-.
+
+Le radical passé-simple de être, $F$-, bien qu’irrégulier, est lié aux mots anglais be et been.
+
+Les terminaisons passé-simples de tout verbe appartiennent à l’une des catégories suivantes.
+
+1. Verbes ~er~ réguliers plus traire (groupe ~a~) : ai, as, a, âmes, âtes, èrent
+
+Exemples :
+%parler% : parle, parles, parle, parlons, parlez, parlent
+%traire% : $traYai$, $traYas$, $traYa$, $traYâmes$, $traYâtes$, $traYèrent$
+
+2. Verbes ~ir~ réguliers, verbes ~re~ réguliers et certains verbes irréguliers (groupe ~i~) : is, is, it, îmes, îtes, irent
+
+Exemples :
+%finir% : finis, finis, finit, finissons, finissez, finissent
+%naître% : $naQUis$, $naQUis$, $naQUit$, $naQUîmes$, $naQUîtes$, $naQUIrent$
+%rendre% : rendis, rendis, rendit, rendîmes, rendîtes, rendirent
+
+3. %Haïr (Québec)%, %haïr (France)%, %ouïr (modern)% et %ouïr (trad.)% (groupe ~ï~) : ïs, ïs, ït, ïmes, ïtes, ïrent
+
+Exemples :
+%haïr (Québec)% : haïs, haïs, haït, haïmes, haïtes, haïrent
+%ouïr (modern)% : ouïs, ouïs, ouït, ouïmes, ouïtes, ouïrent
+
+4. Certains verbes irréguliers (groupe ~u~) : us, us, ut, ûmes, ûtes, urent
+
+%avoir% : $Eus$, $Eus$, $Eut$, $Eûmes$, $Eûtes$, $Eurent$
+%boire% : $Bus$, $Bus$, $But$, $Bûmes$, $Bûtes$, $Burent$
+%être% : $Fus$, $Fus$, $Fut$, $Fûmes$, $Fûtes$, $Furent$
+%lire% : $Lus$, $Lus$, $Lut$, $Lûmes$, $Lûtes$, $Lurent$
+
+5. Certains verbes irréguliers (groupe ~nu~): s, s, t, ^mes, ^tes, rent
+
+%dire% : dis, dis, dit, dîmes, dîtes, dirent
+%exclure% : exclus, exclus, exclut, exclûmes, exclûtes, exclurent
+%venir% : $vIns$, $vIns$, $vInt$, $vÎnmes$, $vÎntes$, $vInrent$";
+
 "Info.imparfaitHeading" = "Imparfait";
+
+"Info.imparfaitText" = "`Utilisations`
+
+L’~imparfait~ est utilisé :
+
+• Pour exprimer le caractère répété ou habituel d’une action. L’anglais utilise parfois ~would + infinitif~ dans cette situation, comme dans la traduction ci-dessous.
+
+« Parfois, à peine ma bougie éteinte, mes yeux se fermaient si vite que je n’avais pas le temps de me dire : « Je $m’endoRs$. » » = « Sometimes, barely after my candle $WAS$ extinguished, my eyes would close so quickly that I $dIDn’t$ have time to say to myself : « I’$M$ falling asleep. » »
+
+- Marcel Proust, Du côté de chez Swann
+
+« [E]lle prenait souvent le café avec Adèle et Virginie, quand les petites avaient de l’argent. » = « She often $haD$ coffee with Adèle and Virginie when the little ones $haD$ money. »
+
+- Émile Zola, L’assommoir
+
+• Pour décrire l’état passé.
+
+« Il $Était$ chaussé de souliers forts, mal cirés, garnis de clous. » = « He $wOre$ strong shoes, poorly polished, studded with nails. »
+
+- Gustave Flaubert, Madame Bovary
+
+« Quels hom esteit ne de quel terre il $eRet$ » = « Who he $WAS$ nor what country he $WAS$ from »
+
+- Turoldus, La chanson de Roland
+
+`Conjugaison`
+
+A une exception près, le radical imparfait est la conjugaison 1p indicatif-présente, moins -ons. L’exception est %être%, dont la racine imparfaite est $Ét$.
+
+Au radical imparfait s’ajoute ais, ais, ait, ions, iez ou aient.
+
+Exemples :
+%être% : $Étais$, $Étais$, $Était$, $Étions$, $Étiez$, $Étaient$
+%étrécir% : étrécissais, étrécissais, étrécissaient, étrécissions, étrécissiez, étrécissaient
+%parler% : parlais, parlais, parlait, parlions, parliez, parlaient
+%prendre% : $preNais$, $preNais$, $preNait$, $preNions$, $preNiez$, $preNaient$";
+
 "Info.futurSimpleHeading" = "Futur simple";
+
+"Info.futurSimpleText" = "`Utilisations`
+
+Le ~futur simple~ est utilisé pour les actions attendues, prédites ou espérées avoir lieu dans le futur. Exemples :
+
+« [J]e vous garderai une place à côté de moi, et nous causerons. » = « I will save a place for you next to me, and we will chat. »
+
+- Émile Zola, L’assommoir
+
+« [I]l ne $saUra$ plus l’heure, il estimera qu’il vient à peine de se coucher. » = « He will not know the time[;] he will think he has barely gone to bed. »
+
+- Marcel Proust, Du côté de chez Swann
+
+Le français utilise le futur simple dans une situation où l’anglais utilise le présent de l’indicatif : dans les propositions du futur commençant par « quand ».
+
+« [J]e les $verRai$ l’année prochaine, quand j’$Irai$ habiter Paris, pour finir mon droit. » = « I will see them next year, when I go live in Paris to finish studying for the bar exam. »
+
+- Gustave Flaubert, Madame Bovary
+
+`Conjugaison`
+
+Le radical du futur simple est le %radical futur%. A cela s’ajoute ai, as, a, ons, ez ou ont.
+
+Exemples :
+%être% : $AUrai$, $AUras$, $AUra$, $AUrons$, $AUrez$, $AUront$
+%étrécir% : étrécirai, étréciras, étrécira, étrécirons, étrécirez, étréciront
+%parler% : parlerai, parleras, parlera, parlerons, parlerez, parleront
+%prendre% : prendrai, prendras, prendra, prendrons, prendrez, prendront";
+
 "Info.conditionnelPrésentHeading" = "Conditionnel présent";
+
+"Info.conditionnelPrésentText" = "`Utilisations`
+
+Le ~conditionnel présent~ est utilisé :
+
+Dans le discours passé et indirect sur les événements attendus, prédits ou espérés.
+
+« [I]l espérait … que son pauvre argent … lui $revIENDrait$ … considérablement plus dodu. = « He hoped … that his poor little money … would come back to him one day considerably plumper. »
+
+- Gustave Flaubert, Madame Bovary
+
+Pour indiquer la politesse avec %pouvoir%, %avoir%, et %être%.
+
+« Vous ne $pourriez$ pas moi prêter dix sous ? » = « Couldn’t you lend me ten cents ? »
+
+- Émile Zola, L’assommoir
+
+« Monsieur Swann, $vouDriez$-vous avoir la bonté de me permettre de vous présenter notre ami Saniette ? » = « Mr. Swann, would you be so kind as to permit me to introduce to you our friend Saniette ? »
+
+- Marcel Proust, Du côté de chez Swann
+
+Dans des propositions ~si~ sur les situations possibles ou hypothétiques.
+
+« Si j’$Étais$ à ta place, moi, j’en trouverais bien ! » = « If I $WERE$ in your place, I would find some ! »
+
+- Gustave Flaubert, Madame Bovary
+
+`Conjugaison`
+
+La racine du conditionnel présent est le futur radical. A cela s’ajoutent ais, ais, ait, ions, iez ou aient.
+
+Exemples :
+%être% : $AUrais$, $AUrais$, $AUrait$, $AUrions$, $AUriez$, $AUraient$
+%étrécir% : étrécirais, étrécirais, étrécirait, étrécirions, étréciriez, étréciraient
+%parler%: parlerais, parlerais, parlerait, parlerions, parleriez, parleraient
+%prendre% : prendrais, prendrais, prendrait, prendrions, prendriez, prendraient";
+
 "Info.subjonctifPrésentHeading" = "Subjonctif présent";
+
+"Info.subjonctifPrésentText" = "`Utilisation`
+
+Le ~subjonctif présent~ est utilisé :
+
+Pour exprimer une opinion, une peur ou un doute. Dans ce cas, une proposition avec l’~indicatif présent~ précède souvent la proposition ~que~ avec ~subjonctif présent~.
+
+« Sainte Vierge, est-il possible que le bon Dieu $vEUILle$ faire souffrir ainsi qu’une malheureuse créature humaine ? » = « Blessed Virgin, is it possible that the good Lord wants to make an unhappy human creature suffer in this way ? »
+
+- Marcel Proust, Du côté de chez Swann
+
+« Acceptez donc ici l’hommage de ma gratitude, qui, si grande qu’elle $pUIsse$ être, ne $SEra$ jamais à la hauteur de votre éloquence et de votre dévouement. » = « So accept here the homage of my gratitude, which, however great it may be, will never live up to your eloquence and dedication. »
+
+- Gustave Flaubert, Madame Bovary
+
+Après les conjonctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~ et ~sans que~.
+
+« [T]out est organisé pour qu’elles ne $pUISSent$ se joindre. » = « Everything $IS$ organized so that they cannot join. »
+
+- Gustave Flaubert, Madame Bovary
+
+« [P]ourvu qu’on vive … on n’$A$ point trop à se plaindre. » = « As long as we’$RE$ alive, … we don’t have too much to complain about. »
+
+- Émile Zola, L’assommoir
+
+Pour commander ou exhorter.
+
+« [Q]u’elle ne $faSSe$ pas de manières maintenant. » = « She’d better not put on any airs now. »
+
+- Marcel Proust, Du côté de chez Swann
+
+« Il faut que vous $saCHIez$ mon nom. » = « You need to know my name. »
+
+- Victor Hugo, Notre-Dame de Paris
+
+`Conjugaison`
+
+Pour la plupart des verbes, le radical subjonctif-présent est le radical 3p de l’indicatif présent.
+
+Certaines racines irrégulières du subjonctif-présent suivent. La première racine de chaque ligne correspond aux 1s, 2s, 3s et 3p. La deuxième racine currespond aux 1p et 2p.
+
+%avoir% -> $aI$/$aY$
+%aller% -> $aIll$/all
+%pouvoir% -> $pUISS$/$pUISS$
+%faire% -> $faSS$/$faSS$
+%savoir% -> $saCH$/$saCH$
+%croire% -> croi/$croY$
+%boire% -> $boiV$/$bUV$
+%devoir% -> $dOIv$/dev
+%prendre% -> $prenN$/$preN$
+%tenir% -> $tIENn$/ten
+%venir% -> $vIENn$/ven
+%voir% -> voi/$voY$
+%vouloir% -> $vEUILl$/voul
+
+Au radical du subjonctif présent s’ajoute une terminaison de l’une des catégories suivantes.
+
+1. Verbes ~er~ réguliers, verbes ~re~ réguliers et certains verbes irréguliers : e, es, e, ions, iez, ent
+
+Exemples :
+%boire% : $boiVe$, $boiVes$, $boiVe$, $bUVions$, $bUViez$, $boiVent$
+%couvrir% : $couvrE$, $couvrEs$, $couvrE$, $couvrIONS$, $couvrIEZ$, $couvrENT$
+%parler% : parle, parles, parle, parlons, parlez, parlent
+%rendre% : rende, rendes, rende, rendions, rendiez, rendent
+
+2. Verbes ~ir~ réguliers plus maudire : isse, isses, isse, issions, issiez, issent
+
+Exemples :
+%alunir% : alunisse, alunisses, alunisse, alunissions, alunissiez, alunissent
+%finir% : finisse, finisses, finisse, finissions, finissiez, finissent
+%maudire% : $maudISSE$, $maudISSES$, $maudISSE$, $maudISSions$, $maudISSiez$, $maudISSent$
+
+3. %Haïr (France)% et %haïr (Québec)% : ïsse, ïsses, ïsse, ïssions, ïssiez, ïssent
+
+Exemples :
+%haïr (Québec)% : haïsse, haïsses, haïsse, haïssions, haïssiez, haïssent
+%haïr (France)% : haïsse, haïsses, haïsse, haïssions, haïssiez, haïssent";
+
 "Info.subjonctifImparfaitHeading" = "Subjonctif imparfait";
+
+"Info.subjonctifImparfaitText" = "`Utilisation`
+
+Le ~subjonctif imparfait~ était utilisé après les conjonctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, et ~sans que~ lorsque la proposition principale utilisait le %passé simple% ou l’%imparfait%. L’usage du subjonctif imparfait est rare en français contemporain.
+
+Exemples :
+
+« [I]l semblait ouvrir tout seul, sans que j’$EUsse$ besoin de le tourner. » = « It seemed to open on its own, without me needing to turn it. »
+
+- Marcel Proust, Du côté de chez Swann
+
+« [Q]uoiqu’ils $FUssent$ bruns, ils semblaient noirs à cause des cils. » = « Although they were brown, they looked black because of her eyelashes. »
+
+- Gustave Flaubert, Madame Bovary
+
+`Conjugaison`
+
+Le radical du subjonctif imparfait est identique à celui du passé simple.
+
+Les terminaisons subjonctif-imparfait pour tout verbe appartiennent à l’une des catégories suivantes, qui correspondent aux cinq catégories du passé-simple.
+
+1. Verbes ~er~ réguliers plus %traire% (groupe ~a~): asse, ass, ât, assions, assiez, assent
+
+Exemples :
+%parler% : parlasse, parlasses, parlât, parlassions, parlassiez, parlassent
+%traire% : $traYasse$, $traYasses$, $traYât$, $traYassions$, $traYassiez$, $traYassent$
+
+2. Verbes ~ir~ réguliers, verbes ~re~ réguliers et certains verbes irréguliers (groupe ~i~) : isse, isses, ît, issions, issiez, issent
+
+Exemples :
+%finir% : finisse, finisses, finît, finissions, finissiez, finissent
+%naître% : $naQUisse$, $naQUisses$, $naQUît$, $naQUissions$, $naQUissiez$, $naQUissent$
+%rendre% : rendisse, rendisses, rendît, rendissions, rendissiez, rendissent
+
+3. %Haïr (France)%, %haïr (Québec)%, et %ouïr (trad.)% (groupe ~ï~) : ïsse, ïsses, ït, ïssions, ïssiez, ïssent
+
+Exemples :
+%haïr (France)% : haïsse, haïsses, haït, haïssions, haïssiez, haïssent
+%ouïr (trad.)% : ouïsse, ouïsses, ouït, ouïssions, ouïssiez, ouïssent
+
+4. Certains verbes irréguliers (groupe ~u~) : usse, usses, ût, ussions, ussiez, usssent
+
+%avoir% : $Eusse$, $Eusses$, $Eût$, $Eussions$, $Eussiez$, $Eussent$
+%boire% : $Busse$, $Busses$, $Bût$, $Bussions$, $Bussiez$, $Bussent$
+%être% : $Fusse$, $Fusses$, $Fût$, $Fusions$, $Fussiez$, $Fussent$
+%lire% : $Lusse$, $Lusses$, $Lût$, $Lussions$, $Lussiez$, $Lussent$
+
+5. Certains verbes irréguliers (groupe ~nu~) : sse, sses, ^t, ssions, ssiez, ssent
+
+%dire% : disse, disse, dît, dissions, dissiez, dissidence
+%exclure% : exclus, exclus, exclut, exclussions, exclussiez, exclussent
+%venir% : $vInsse$, $vInsses$, $vÎnt$, $vInssions$, $vInssiez$, $vInssent$";
+
 "Info.impératifHeading" = "Impératif";
+
+"Info.impératifText" = "`Utilisation`
+
+L’~impératif~ est utilisé pour les commandes, les instructions ou les requêtes.
+
+Exemples :
+
+« N’$aYez$ pas peur, allez ! » = « Don’t be afraid. Go ! »
+
+- Émile Zola, L’assommoir
+
+« Ô temps, suspend ton vol ! » = « O, Time, pause your flight ! »
+
+- Alphonse de Lamartine, Le Lac
+
+`Conjugaison`
+
+Contrairement à la plupart des autres temps, l’impératif n’utilise que trois combinaisons personne-numéroes : 2s, 1p et 2p. Pour tous les verbes sauf quatre, les conjugaisons 1p et 2p impératif sont identiques à leurs homologues indicatif-présents.
+
+Les conjugaisons 2s sont également identiques à leurs homologues indicatif-présents sauf que, si le verbe utilise les terminaisons indicatif-présentes e, es, e, ons, ez et ent, le s est supprimé de la conjugaison 2s impératif. Exemples:
+
+%parler% -> parle
+%couvrir% -> $couverE$
+
+Quatre verbes sont exceptionnels en ce qu’ils utilisent des radicaux subjonctif-présents pour le impératif.
+
+%être% : $SOIS$, $SOYons$, $SOYez$
+%avoir% : $AIE$, $AYons$, $AYez$
+%savoir% : $saCHE$, $saCHons$, $saCHez$
+%vouloir% : $vEUILle$/$vEUX$, voulons, $vEUILlez$/voulez
+
+Les conjugaisons $vEUILle$/$vEUILlez$ de %vouloir% sont utilisées pour les requêtes polies.
+
+« [V]$EUILLEz$ monter sur l’épaule de ce garçon. » = « Please step on that boy’s shoulder. »
+
+- Jules Verne, Robur le Conquérant
+
+De même, ces conjugaisons sont parfois utilisées pour terminer les lettres formelles.
+
+« V$EUILlez$ recevoir, Monsieur, mes plus cordiales salutations. » = « Please receive, Sir, my warmest regards. »
+
+- Office québécois de la langue française, Formules usuelles de salutation";
+
 "Info.passéComposéHeading" = "Passé composé";
+
+"Info.passéComposéText" = "`Utilisation`
+
+Le ~passé composé~ est utilisé pour les actions du passé qui sont terminées, choatives, non continues et non répétées.
+
+Exemples:
+
+« [N]ous ont $faiT$ le voyage avec les deux enfants. » = « We traveled with the two children. »
+
+- Émile Zola, L’assommoir
+
+« Mais j’ai $Vu$ monsieur d’Ajuda-Pinto entrant chez monsieur de Rochefide, et j’$aI$ pensé qu’alors vous $Étiez$ seule. » = « But I $sAW$ Monsieur d’Ajuda-Pinto entering Monsieur de Rochefide’s house, and I $thOUGHT$ you $WERE$ alone then. »
+
+- Honoré de Balzac, Le père Goriot
+
+Ce deuxième exemple montre pourquoi %être%, le verbe français le plus utilisé, n’utilise que rarement le passé composé. L’état passé est généralement exprimé avec le %imparfait%, pas le passé composé. Cependant, %être% utilise le passé composé pour la voix passive, comme démontré ci-dessous.
+
+« Lorsque l’assommoir $A$ $paRu$ dans $uN$ journal, il a $ÉtÉ$ attaqué avec une brutalité sans exemple, dénoncé, chargé de tous les crimes. » = « When “The Drinking Den” appeared in a newspaper, it $WAS$ denounced, charged with every crime, and attacked with unprecedented brutality. »
+
+- Émile Zola, L’assommoir
+
+`Conjugaison`
+
+Le passé composé est formé de la conjugaison %indicatif présent% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+
 "Info.plusQueParfaitHeading" = "Plus-que-parfait";
+
+"Info.plusQueParfaitText" = "`Utilisation`
+
+Le ~plus-que-parfait~ est utilisé pour les situations antérieures à un point fixe dans le passé.
+
+Exemples :
+
+« Si vous sauvez … tout ce que j’avais rêvé ! » = « If you only knew … everything I had dreamed of ! »
+
+- Gustave Flaubert, Madame Bovary
+
+« [J]e m’$Étais$ barré la possibilité de m’endormir sans l’avoir $reVue$. » = « I had denied myself the possibility of falling asleep without having seen her again. »
+
+- Marcel Proust, Du côté de chez Swann
+
+`Conjugaison`
+
+Le plus-que-parfait est formé de la conjugaison %imparfait% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+
 "Info.passéAntérieurHeading" = "Passé antérieur";
+
+"Info.passéAntérieurText" = "`Utilisation`
+
+Le ~passé antérieur~ est utilisé pour les événements passés qui se sont terminés avant d’autres événements passés. Une proposition utilisant le passé antérieur commence souvent par une conjonction temporelle, par exemple immédiatement que, dès que ou quand.
+
+Exemples:
+
+« Gervaise, dès qu’il se $FUt$ éloigné, se $remIt$ à la fenêtre. » = « As soon as he $haD$ gone, Gervaise again returned to the window. »
+
+- Émile Zola, L’assommoir
+
+« Le patient arriva enfin …, et quand il $Eut$ $ÉtÉ$ hissé sur la plate-forme, … une huée prodigieuse mêlée de rires et d’acclamations, éclata dans la place. » = « The condemned finally arrived, … and when he $haD$ been hoisted upon the platform, … a prodigious hoot, mingled with laughter and cheers, erupted in the plaza. »
+
+- Victor Hugo, Notre-Dame de Paris
+
+`Conjugaison`
+
+Le passé antérieur est formé de la conjugaison %passé simple% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+
 "Info.passéSurcomposéHeading" = "Passé surcomposé";
+
+"Info.passéSurcomposéText" = "`Utilisation`
+
+Le ~passé surcomposé~ est utilisé pour les situations antérieures à un point fixe dans le passé. L’usage de ce temps est stigmatisé et rare en dehors du sud de la France.
+
+Exemples :
+
+« Quand j’$aI$ $EU$ perdu ma pauvre défunte, j’allais dans les champs pour être tout seul. » = « When I $losT$ my poor deceased, I $WENT$ to the fields to be all alone. »
+
+- Gustave Flaubert, Madame Bovary
+
+« Commentaire monsieur Vautrin $EST$-il donc rentré cette nuit après que Christophe $A$ $EU$ $mIS$ les verrous ? » = « So how did Monsieur Vautrin come home that night after Christophe $haD$ bolted the doors ? »
+
+- Honoré de Balzac, Le père Goriot
+
+`Conjugaison`
+
+Le passé surcomposé est formé de la conjugaison %passé composé% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+
 "Info.futurAntérieurHeading" = "Futur antérieur";
+
+"Info.futurAntérieurText" = "`Utilisation`
+
+Le ~futur antérieur~ est utilisé pour placer des événements dans un futur passé.
+
+Exemples :
+
+« Quand tu l’$aUras$ rendu malade, tu $SEras$ bien avancé ! » = « You’ll end up making him ill, and a lot of good that will do ! »
+
+- Marcel Proust, Du côté de chez Swann
+
+« Toutes les personnes qui se dirigent vers … la Picardie $aUront$ remarqué … un misérable $atteiNt$ d’une horrible plaie faciale. = « Anyone traveling to … Picardy will no doubt have noticed … a wretch suffering from a horrible facial wound. »
+
+- Gustave Flaubert, Madame Bovary
+
+`Conjugaison`
+
+Le futur antérieur est formé de la conjugaison %futur simple% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+
 "Info.conditionnelPasséHeading" = "Conditionnel passé";
+
+"Info.conditionnelPasséText" = "`Utilisation`
+
+Le ~conditionnel passé~ est utilisé pour exprimer des énoncés hypothétiques. Une proposition contenant une conjugaison conditionnel-passé suit souvent une proposition ~si~ contenant une conjugaison plus-que-parfait.
+
+Exemples :
+
+« Moi, si j’avais $EU$ des meubles, j’aurais guetté un cabinet. » = « Me, if I $haD$ $haD$ furniture, I would have been looking for a cabinet. »
+
+- Émile Zola, L’assommoir
+
+« Toutes $aUraient$ $Pu$ faire un fleuve avec leurs pleurs ! » = « Each could have $maDe$ a river with her tears ! »
+
+- Charles Baudelaire, Les Petites Vielles
+
+`Conjugaison`
+
+Le conditionnel passé est formé de la conjugaison %conditionnel présent% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+
 "Info.subjonctifPasséHeading" = "Subjonctif passé";
+
+"Info.subjonctifPasséText" = "`Utilisation`
+
+Comme le subjonctif présent, le ~subjonctif passé~ était utilisé pour exprimer une opinion, une peur, un doute ou une obligation. Une proposition utilisant un temps non-subjonctif accompagnait souvent une proposition utilisant le subjonctif passé. Dans ce cas, les événements de la proposition en subjonctif passé ont précédé les événements de la proposition non-subjonctif.
+
+Exemples :
+
+« Tiens, j’$AI$ fini par m’endormir quoique maman ne $SOIS$ pas $venUe$ me dire bonsoir » = « Why, I ended up falling asleep even though mom $dID$n’t come to say goodnight to me. »
+
+- Marcel Proust, Du côté de chez Swann
+
+« C’$EST$ un brave garçon, quoique nous $aYons$ $EU$ ensemble des difficultés. » = « C’est un bon garçon, bien que nous ayons rencontré des difficultés ensemble. »
+
+- Gustave Flaubert, Madame Bovary
+
+`Conjugaison`
+
+Le subjonctif passé était formé de la conjugaison %subjonctif présent% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+
 "Info.subjonctifPlusQueParfaitHeading" = "Subjonctif plus-que-parfait";
+
+"Info.subjonctifPlusQueParfaitText" = "`Utilisation`
+
+Le ~subjonctif plus-que-parfait~ était utilisé pour exprimer une opinion, une peur, un doute ou une obligation à l’égard d’événements passés. L’utilisation actuelle de ce temps est rare.
+
+Exemples :
+
+« [J]e sentais que je n’avais pas présenté la tranquillité nécessaire pour continuer utilement ma recherche, et qu’il valait mieux n’y plus penser jusqu’à ce que je $Fusse$ rentré. » = « I felt that I did not currently have the necessary peace of mind to usefully pursue my research and that it was better not to think about it any more until I had returned. »
+
+- Marcel Proust, Du côté de chez Swann
+
+« Coupeau n’$aUrait$ pas osé se marier, sans qu’ils $Eussent$ avant tout accepté sa femme. » = « Coupeau would not have dared to marry without their first having accepted his wife. »
+
+- Émile Zola, L’assommoir
+
+`Conjugaison`
+
+Le subjonctif plus-que-parfait était formé de la conjugaison %subjonctif imparfait% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+
 "Info.impératifPasséHeading" = "Impératif passé";
+
+"Info.impératifPasséText" = "`Utiliser`
+
+L’~impératif passé~ indique qu’une action doit avoir lieu avant un moment, une action ou un événement futur. Comme impératif, l’impératif passé n’utilise que les conjugaisons 2s, 1p et 2p. ~Contrairement~ à l’impératif, l’impératif passé est rarement utilisé.
+
+Exemples :
+
+« A$IE$ fini ton devoir avant le week-end. » = « Finish your homework before the weekend. »
+
+- Prof
+
+« S$OIS$ rentrée chez toi avant que ta calèche ne $devIENne$ une citrouille. » = « Return home before your horse-drawn carriage becomes a pumpkin. »
+
+- La fée marraine
+
+`Conjugaison`
+
+L’impératif passé est formé de la conjugaison %impératif% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+
 "Info.questionsAndResponsesHeading" = "Questions et réponses";
+
+"Info.questionsAndResponsesText" = "~Q :~ Comment puis-je contacter le développeur de ~Conjuguer~ ?
+
+~R :~ Envoyez un e-mail à vermontcoder@gmail.com.
+
+~Q :~ Il manque un verbe à l’écran ~Verbes~. Qu’est-ce qui se passe ?
+
+~R :~ N’hésitez pas à envoyer un e-mail au développeur de ~Conjuguer~, vermontcoder@gmail.com, si vous souhaitez qu’un verbe soit ajouté.
+
+~Q :~ Pourquoi ~Conjuguer~ utilise-t-elle principalement des noms français pour les temps plutôt qu’anglais, par exemple, ~indicatif présent~ plutôt que ~present indicative~ ?
+
+~R :~ Certes, les noms au temps anglais seraient peut-être plus accessibles pour l’apprenant dans certains cas, par exemple, %radical futur%. Les anglophones pourraient mieux comprendre le terme ~future stem~. Mais peut-être à cause de ses années de travail en tant qu’avocat, le développeur de ~Conjuguer~ valorise la précision du langage. Les noms des temps anglais correspondent imparfaitement aux temps français. Par exemple, le ~present indicative~ anglais a des usages plus limités que le %indicatif présent% français. Le terme anglais est donc une correspondance imprécise pour le temps français.
+
+~Q :~ J’ai vu les termes « mode » et « aspect » dans les descriptions des temps verbaux, mais ~Conjuguer~ n’utilise pas ces termes. De plus, le %participe passé%, le %participe présent% et le %futur radical% ne sont pas vraiment des temps.
+
+~R :~ C’était une question ? Vous avez raison de dire que ~Conjuguer~ n’utilise pas ces deux termes, et ces trois choses ne sont généralement pas décrites comme des « temps ». En ce qui concerne la terminologie, gardez à l’esprit que le but de ~Conjuguer~ est d’enseigner la conjugaison des verbes français, pas d’enseigner la nomenclature de la conjugaison anglaise. En ce qui concerne le %participe passé%, le %participe présent% et le %futur radical%, le développeur de ~Conjuguer~ considère que ces trois choses sont des temps, si « temps » signifie « une manière systématique de changer les verbes dans un but précis ». Cette définition, bien qu’absente, au meilleur de ses informations et croyances, dans n’importe quel dictionnaire, sert assez bien l’objectif pédagogique de ~Conjuguer~.
+
+~Q :~ Pourquoi n’y a-t-il pas d’exemples plus récents d’utilisation des temps ?
+
+~R :~ Le droit d’auteur français expire soixante-dix ans après la mort de l’auteur, sauf si l’auteur est décédé pendant le service militaire en temps de guerre, auquel cas la période est de cent ans. La mort d’Antoine de Saint-Exupéry en 1944 empêche l’utilisation de « Le petit prince », le livre français préféré du développeur de ~Conjuguer~. En vérité, ~Conjuguer~ respecte la loi française sur le droit d’auteur, et tous les exemples d’utilisation ont plus de cent ans.";
+
 "Info.creditsHeading" = "Crédits";
+
+"Info.creditsText" = "Josh Adams a développé ~Conjuguer~. Voici le code source de ~Conjuguer~ : %https://github.com/vermont42/Conjuguer%
+
+Daniel Alston et Larry Sanger ont proposé et imaginé Wiktionary, la principale source de traductions de verbes du français vers l’anglais par ~Conjuguer~. Le contenu du Wiktionnaire est sous licence Creative Commons Attribution-ShareAlike 3.0 Unported License. URL : %https://en.wiktionary.org/wiki/Wiktionary:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License%
+
+David Brodsky a écrit « French Verbs Made Simple(r) », qui a fourni deux informations clés au développeur de ~Conjuguer~. Premièrement, les conjugaisons sont des combinaisons de radicaux, parfois modifiés, et de terminaisons, généralement prévisibles. Deuxièmement, chaque verbe français est conjugué à l’aide d’un ~modèle~ de verbe français. Le nombre de modèles est ~beaucoup~ inférieur au nombre de verbes irréguliers.
+
+Ilona Coffre a créé l’icône de l’application ~Conjuguer~.
+
+Wei Huang a créé la police de caractère de ~Conjuguer~, Work Sans, et lui a donné la licence Open Font License, disponible ici : %https://scripts.sil.org/cms/scripts/page.php?item_id=OFL-FAQ_web%
+
+Adam Kilgarriff a fondé Lexical Computing, la société qui a developpé Sketch Engine, qui est la source des données de fréquence de verbe de ~Conjuguer~.
+
+Xavier Nègre a créé Lexilogos, une collection de dictionnaires français que le développeur de ~Conjuguer~ a utilisé pour des traductions non disponibles dans le Wiktionnaire. URL : %https://www.lexilogos.com/english/french_dictionary.htm%
+
+Franz Josef Och a conçu Google Translate, que le développeur de ~Conjuguer~ a utilisé pour traduire les définitions françaises des verbes qui étaient dans le Wiktionnaire français mais pas dans le Wiktionnaire anglais. URL : %https://translate.google.com%
+
+Machio Okada et Hitoshi Oguriso ont créé les Tableaux de conjugaison de l’ancien français, que ~Conjuguer~ utilise pour les conjugaisons de ester, gésir, issir et certains autres verbes défectifs. URL : %https://micmap.org/dicfro/introduction/tableaux-de-conjugaison%";
 
 "Settings.quizDifficulty" = "Difficulté du quiz";
 "Settings.quizDifficultyDescription" = "Ce réglage détermine la difficulté des quiz. Vous voulez probablement Ordinaire.";

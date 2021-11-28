@@ -247,12 +247,12 @@ enum L {
       NSLocalizedString("Info.radicalFuturText", comment: "")
     }
 
-    static var representingIrregularitiesHeading: String {
-      NSLocalizedString("Info.representingIrregularitiesHeading", comment: "")
+    static var irregularitiesHeading: String {
+      NSLocalizedString("Info.irregularitiesHeading", comment: "")
     }
 
-    static var representingIrregularitiesText: String {
-      NSLocalizedString("Info.representingIrregularitiesText", comment: "")
+    static var irregularitiesText: String {
+      NSLocalizedString("Info.irregularitiesText", comment: "")
     }
 
     static var indicatifPrésentHeading: String {
