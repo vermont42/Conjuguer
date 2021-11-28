@@ -55,9 +55,11 @@
 
 "Info.dedicationHeading" = "Dedication";
 
-"Info.dedicationText" = "David Compton was my high-school Nordic-skiing coach. He was also a French teacher but not initially ~my~ French teacher. He was aware of my interest in and aptitude for French, however. At the beginning of my junior year, I wasn’t going to be able to take French because of a schedule conflict with Advanced Placement English, so Mr. Compton created a five-days-a-week French-literature class just for me. A German exchange student named Julian Peters soon joined us. Using Volumes I and II of “Anthologie de la Littérature Française” by Robert Leggewie as our textbooks, we studied the greats of French literature from Chrétien de Troyes to Samuel Beckett. This literary study ultimately inspired ~Conjuguer~’s use of literary examples of tense use. I thoroughly enjoyed Mr Compton’s class, and my knowledge of French took a giant leap. At the end of the year, I achieved a maximum score on the French Advanced Placement test. At the beginning of my freshman year of college, I took a test to get credit for a major-level French class and, of the sixty freshmen who took the test, I was one of only three who passed.
+"Info.dedicationText" = "David Compton was my high-school Nordic-skiing coach. He was also a French teacher but not initially ~my~ French teacher. He was aware of my interest in and aptitude for French, however. At the beginning of my junior year, I wasn’t going to be able to take French because of a schedule conflict with Advanced Placement English. So Mr. Compton created a five-days-a-week French-literature class just for me. A German exchange student named Julian Peters soon joined us. Using Volumes I and II of “Anthologie de la Littérature Française” by Robert Leggewie as our textbooks, we studied the greats of French literature from Chrétien de Troyes to Samuel Beckett. This literary study ultimately inspired ~Conjuguer~’s use of literary examples of tense use. I thoroughly enjoyed Mr Compton’s class, and my knowledge of French took a giant leap. At the end of the year, I achieved a maximum score on the French Advanced Placement test. At the beginning of my freshman year at Dartmouth College, I took a test to get credit for a major-level French class and, of the sixty freshmen who took the test, I was one of only three who passed.
 
-Mr. Compton already had a full class schedule in the fall of 1991, when he created the class for me. On some level, he might have enjoyed spending that class period puffing on his tobacco pipe, tinkering with his Macintosh computer. Solipsistic teen that I was, I never asked him ~why~ he sacrificed that time for me. But I can speculate. He studied at the Sorbonne during the 1960s and was a francophile. He may have recognized in me a shared interest in French and wanted to give me the opportunity to pursue it to the fullest extent possible. Whatever his motivation, I am grateful and dedicate this app to him.";
+Mr. Compton already had a full class schedule in the fall of 1991, when he created the class for me. On some level, he might have enjoyed spending that class period puffing on his tobacco pipe, tinkering with his Macintosh computer. Solipsistic teen that I was, I never asked him ~why~ he sacrificed that time for me. But I can speculate. He studied at the Sorbonne during the 1960s and was a francophile. He may have recognized in me a shared interest in French and wanted to give me the opportunity to pursue it to the fullest extent possible. Whatever his motivation, I am grateful and dedicate this app to him.
+
+Thanks to Mr. Compton, the name of ~Conjuguer~ is correctly spelled. During my freshman year at Dartmouth College, I developed the predecessor to ~Conjuguer~, ~Le Conjugateur~, a HyperCard stack. During a break from school, I demonstrated ~Le Conjugateur~ to Mr. Compton. He was impressed but commented that I was consistently misspelling the French word for “conjugate”, “conjuguer”, as “conjuger”. A rapid correction ensued and endured.";
 
 "Info.terminologyHeading" = "Terminology";
 
@@ -73,7 +75,7 @@ The ~radical de l’infinitif~ (infinitive stem) is the infinitif minus its -er,
 
 `Pronoun`
 
-A subject ~pronoun~ is a word that stands in for the subject, the actor in a sentence. In English, the subject pronouns in widespread use are ~I~, ~you~, ~he/she/it/one~, ~we~, ~you/y’all~, and ~they~. The English subject pronouns ~ye~ and ~thou~ have be in decline since the Elizabethan period.
+A subject ~pronoun~ is a word that stands in for the subject in a sentence. The subject is the actor. In English, the subject pronouns in widespread use are ~I~, ~you~, ~he/she/it/one~, ~we~, ~you/y’all~, and ~they~. The English subject pronouns ~ye~ and ~thou~ have be in decline since the Elizabethan period.
 
 Subject pronouns correspond to the ~singular~ or ~plural~ number and to the ~first person~, ~second person~, or ~third person~. English subject pronouns follow. Abbreviations of the person-number combinations are in parentheses.
 
@@ -94,7 +96,7 @@ Except with respect to 2s, the choice of subject pronoun in French is straightfo
 
 “Fem.” means that a pronoun refers to female subjects, and “masc.” means that a pronoun refers to male subjects.
 
-In casual speech, “on” replaces “nous” and uses 3s conjugations.
+In quotidian speech, “on” replaces “nous” and uses 3s conjugations.
 
 With respect to 2s, there are two choices: ~tu~ and ~vous~. ~Tu~ and its conjugations express intimacy, familiarity, friendliness, or, when used in anger on a stranger, rudeness. ~Vous~ and its conjugations express politeness, respect, or, when used on a former intimate, desire for emotional distance.
 
@@ -105,6 +107,90 @@ Treatises on French verbs, when presenting the conjugations for a particular ten
 $SUIs$, $Es$, $ESt$, $SOMMEs$, $êteS$, $SOnt$
 
 Red letters in conjugations represent irregularities. A verb is considered irregular if any of its conjugations differs from the conjugation of a regular ~er~, ~ir~, or ~re~ verb.";
+
+"Info.irregularitiesHeading" = "Irregularities";
+
+"Info.irregularitiesText" = "Of the 6,314 verbs in ~Conjuguer~, 5,217 have conjugations that are completely regular. A completely regular conjuguation uses the radical de l’infinitif as its stem, and the ending is completely predictable. These are verbs that are conjugated using verb models 1-1 (regular -er), 2-1 (regular -ir), and 5-1A (regular -re). Examples:
+
+cacaber -> vous cacabâtes
+alunir -> nous alunissons
+épandre -> épandu
+
+The other 1,097 verbs are conjugated using one of ninty-two irregular-verb models. Verb models exhibit irregularities in three ways.
+
+First, the stem used differs from the radical de l’infinitif, but the ending is predictable. Example:
+
+suivre -> je $suIs$ (~not~ suivs)
+
+Second, the stem is as expected, but the ending is unpredictable. Example:
+
+être -> vous $êteS$ (~not~ êtez)
+
+Third, both the stem ~and~ ending are unpredictable. Example:
+
+aller -> elles $VOnt$ (~not~ allent)
+
+~Conjuguer~ represents stem alterations and unpredictable endings for verb models in the following manner:
+
+~[tenses to apply this alteration to]~: ~[number of letters from end of radical de l’infinitif]~, ~[number of letters to replace]~, ~[letters to swap in]~
+
+Here is an example. The model for boire, 2-17, has the following alteration:
+
+r1p, r2p, b1p, b2p: 2, 2, UV
+
+This alteration results in the following conjugations:
+
+nous $bUVons$ (~not~ boions)
+vous $bUVez$ (~not~ boiez)
+nous $bUVions$ (~not~ boiions)
+vous $bUViez$ (~not~ boiiez)
+
+~Conjuguer~ colors capital letters in alterations red, signifying irregularity.
+
+An asterisk at the end of letters to swap in means an unpredictable ending.
+
+For example, the model for valoir, 4-5A, has the following alteration:
+
+r1s, r2s: 1, 1, UX*
+
+This alteration results in the following conjugations:
+
+je $vaUX$ (~not~ $vaUs$)
+tu $vaUX$ (~not~ $vaUs$)
+
+Here is how tenses are represented in the alterations:
+
+pp: participe passé
+rr: participe présent
+sf: radical futur
+r1s, r2s, r3s, r1p, r2p, r3p: six person-numbers of the indicatif présent
+b1s, b2s, b3s, b1p, b2p, b3p: six person-numbers of the subjonctif présent
+x1s, x2s, x3s, x1p, x2p, x3p: six person-numbers of the passé simple
+i1s, i2s, i3s, i1p, i2p, i3p: six person-numbers of the imparfait
+q1s, q2s, q3s, q1p, q2p, q3p: six person-numbers of the subjonctif imparfait
+h2s, h1p, h2p: three person-numbers of the impératif
+
+The person-number ~A~ means “all six”. For example, xA is equivalent to x1s, x2s, x3s, x1p, x2p, x3p. Likewise, rA is equivalent to r1s, r2s, r3s, r1p, r2p, r3p.
+
+For example, the model for avoir, 4-10, has the following alteration:
+
+xA: 2, 2, E
+
+This results in following passé-simple conjugations:
+
+$Eus$, $Eus$, $Eut$, $Eûmes$, $Eûtes$, $Eurent$
+
+Some alterations have @ as the letter to swap in. This means “capitalize the first letter of the conjugation to indicate its irregularity”.
+
+For example, the model for pouvoir, 4-6, has the following alteration:
+
+xA, pp: 4, 4, @
+
+This results in following passé-simple conjugations:
+
+$Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$, $Purent$
+
+The participe passé is $Pu$.";
 
 "Info.defectivenessHeading" = "Defectiveness";
 
@@ -325,90 +411,6 @@ Verbs derived from the above verbs use variants of these irregular radicaux futu
 
 %devenir% -> $devIenDr$";
 
-"Info.irregularitiesHeading" = "Irregularities";
-
-"Info.irregularitiesText" = "Of the 6,314 verbs in ~Conjuguer~, 5,217 have conjugations that are completely regular. A completely regular conjuguation uses the radical de l’infinitif as its stem, and the ending is completely predictable. These are verbs that are conjugated using verb models 1-1 (regular -er), 2-1 (regular -ir), and 5-1A (regular -re). Examples:
-
-cacaber -> vous cacabâtes
-alunir -> nous alunissons
-épandre -> épandu
-
-The other 1,097 verbs are conjugated using one of ninty-two irregular-verb models. Verb models exhibit irregularities in three ways.
-
-First, the stem used differs from the radical de l’infinitif, but the ending is predictable. Example:
-
-suivre -> je $suIs$ (~not~ suivs)
-
-Second, the stem is as expected, but the ending is unpredictable. Example:
-
-être -> vous $êteS$ (~not~ êtez)
-
-Third, both the stem and ending are unpredictable. Example:
-
-aller -> elles $VOnt$ (~not~ allent)
-
-~Conjuguer~ represents stem alterations and unpredictable endings for verb models in the following manner:
-
-~[tenses to apply this alteration to]~: ~[number of letters from end of radical de l’infinitif]~, ~[number of letters to replace]~, ~[letters to swap in]~
-
-Here is an example. The model for boire, 2-17, has the following alteration:
-
-r1p, r2p, b1p, b2p: 2, 2, UV
-
-This alteration results in the following conjugations:
-
-nous $bUVon$ (~not~ boions)
-vous $bUVez$ (~not~ boiez)
-nous $bUVions$ (~not~ boiions)
-vous $bUViez$ (~not~ boiiez)
-
-~Conjuguer~ colors capital letters in alterations red, signifying irregularity.
-
-An asterisk at the end of letters to swap in means an unpredictable ending.
-
-For example, the model for valoir, 4-5A, has the following alteration:
-
-r1s, r2s: 1, 1, UX*
-
-This alteration results in the following conjugations:
-
-je $vaUX$ (~not~ $vaUs$)
-tu $vaUX$ (~not~ $vaUs$)
-
-Here is how tenses are represented in the alterations:
-
-pp: participe passé
-rr: participe présent
-sf: radical futur
-r1s, r2s, r3s, r1p, r2p, r3p: six person-numbers of the indicatif présent
-b1s, b2s, b3s, b1p, b2p, b3p: six person-numbers of the subjonctif présent
-x1s, x2s, x3s, x1p, x2p, x3p: six person-numbers of the passé simple
-i1s, i2s, i3s, i1p, i2p, i3p: six person-numbers of the imparfait
-q1s, q2s, q3s, q1p, q2p, q3p: six person-numbers of the subjonctif imparfait
-h2s, h1p, h2p: three person-numbers of the impératif
-
-The person-number ~A~ means “all six”. For example, xA is equivalent to x1s, x2s, x3s, x1p, x2p, x3p. Likewise, rA is equivalent to r1s, r2s, r3s, r1p, r2p, r3p.
-
-For example, the model for avoir, 4-10, has the following alteration:
-
-xA: 2, 2, E
-
-This results in following passé-simple conjugations:
-
-$Eus$, $Eus$, $Eut$, $Eûmes$, $Eûtes$, $Eurent$
-
-Some alterations have @ as the letter to swap in. This means “capitalize the first letter of the conjugation to indicate its irregularity”.
-
-For example, the model for pouvoir, 4-6, has the following alteration:
-
-xA, pp: 4, 4, @
-
-This results in following passé-simple conjugations:
-
-$Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$, $Purent$
-
-The participe passé is $Pu$.";
-
 "Info.indicatifPrésentHeading" = "Indicatif Présent";
 
 "Info.indicatifPrésentText" = "`Uses`
@@ -437,7 +439,7 @@ The ~indicatif présent~ (present indicative) is used:
 
 “Oh! très-sincèrement je $souffrE$” = “Oh very sincerely do I suffer!”
 
-- Charles Baudelaire, Le Monstre, ou le Paranymphe d’une nymphe macabre
+- Charles Baudelaire, Le monstre, ou le paranymphe d’une nymphe macabre
 
 `Conjugation`
 
@@ -498,17 +500,21 @@ The passé simple (simple past) was used for actions that were completed in the 
 
 Here are some examples of the passé simple.
 
-“J’entendis les pas de mes parents qui accompagnaient Swann.” = “I $hearD$ the footsteps of my parents, who $WERE$ accompanying Swann.”
-
-- Marcel Proust, Du côté de chez Swann
-
 “Tresqu’en la mer $cUnquist$ la tere altaigne.” = “He conquered the high land down to the sea.”
 
 - Turoldus, La chanson de Roland
 
+“Me $vInt$ le vouloir de briser la tres amoureuse prison.” = “The longing came over me to break away from love’s imprisonment.”
+
+- François Villon, Le testament
+
 “Emma s’étendit beaucoup sur la misère des affections terrestres et l’éternel isolement où le cœur reste enseveli.” = “Emma $spOke$ at length about the misery of earthly ailments and the eternal isolation in which the heart remains buried.”
 
 - Gustave Flaubert, Madame Bovary
+
+“J’entendis les pas de mes parents qui accompagnaient Swann.” = “I $hearD$ the footsteps of my parents, who $WERE$ accompanying Swann.”
+
+- Marcel Proust, Du côté de chez Swann
 
 `Conjugation`
 
@@ -518,7 +524,7 @@ Verbs with irregular participe-passé stems, including most ~oir~ verbs, use tho
 
 The passé-simple stem of être, $F$-, though irregular, is related to the English words be and been.
 
-The passé-simple endings for any verb belong to one of the following categories.
+The passé-simple endings belong to one of the following categories.
 
 1. Regular ~er~ verbs plus traire (~a~ group): ai, as, a, âmes, âtes, èrent
 
@@ -626,13 +632,13 @@ Examples:
 
 The ~conditionnel présent~ (present conditional) is used:
 
-In past, indirect discourse about expected, predicted, or hoped-for events.
+• In past, indirect discourse about expected, predicted, or hoped-for events.
 
 “[I]l espérait … que son pauvre argent … lui $revIENDrait$ … considérablement plus dodu.” = “He hoped … that his poor little money … would come back to him one day considerably plumper.”
 
 - Gustave Flaubert, Madame Bovary
 
-To indicate politeness with %pouvoir%, %avoir%, and %être%.
+• To indicate politeness with %pouvoir%, %avoir%, and %être%.
 
 “Vous ne $pouRriez$ pas me prêter dix sous?” = “Couldn’t you lend me ten cents?”
 
@@ -642,7 +648,7 @@ To indicate politeness with %pouvoir%, %avoir%, and %être%.
 
 - Marcel Proust, Du côté de chez Swann
 
-In ~si~ clauses about possible or hypothetical situations.
+• In ~si~ clauses about possible or hypothetical situations.
 
 “Si j’$Étais$ à ta place, moi, j’en trouverais bien!” = “If I $WERE$ in your place, I would find some!”
 
@@ -664,7 +670,7 @@ Examples:
 
 The ~subjonctif présent~ (present subjunctive) is used:
 
-To express opinion, fear, or doubt. In this case, a clause with ~indicatif présent~ often preceeds the ~que~ clause with ~subjonctif présent~.
+• To express opinion, fear, or doubt. In this case, a clause with ~indicatif présent~ often preceeds the ~que~ clause with ~subjonctif présent~.
 
 “Sainte Vierge, est-il possible que le bon Dieu $vEUILle$ faire souffrir ainsi une malheureuse créature humaine?” = “Blessed Virgin, is it possible that the good Lord wants to make an unhappy human creature suffer in this way?”
 
@@ -674,7 +680,7 @@ To express opinion, fear, or doubt. In this case, a clause with ~indicatif prés
 
 - Gustave Flaubert, Madame Bovary
 
-After the conjunctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, and ~sans que~.
+• Following the conjunctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, and ~sans que~.
 
 “[T]out est organisé pour qu’elles ne $pUISSent$ se joindre.” = “Everything $IS$ organized so that they cannot join.”
 
@@ -684,7 +690,7 @@ After the conjunctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur 
 
 - Émile Zola, L’assommoir
 
-To command or exhort.
+• To command or exhort.
 
 “[Q]u’elle ne $faSSe$ pas de manières maintenant.” = “She’d better not put on any airs now.”
 
@@ -741,7 +747,7 @@ Examples:
 
 "Info.subjonctifImparfaitText" = "`Use`
 
-The ~subjonctif imparfait~ (imperfect subjunctive) was used after the conjunctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, and ~sans que~ when the main clause used %passé simple% or %imparfait%. Use of the subjonctif imparfait is rare in contemporary French.
+The ~subjonctif imparfait~ (imperfect subjunctive) was used following the conjunctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, and ~sans que~ when the main clause used %passé simple% or %imparfait%. Use of the subjonctif imparfait is rare in contemporary French.
 
 Examples:
 
@@ -805,7 +811,7 @@ Examples:
 
 “Ô temps, suspends ton vol!” = “O, Time, pause your flight!”
 
-- Alphonse de Lamartine, Le Lac
+- Alphonse de Lamartine, Le lac
 
 `Conjugation`
 
@@ -847,7 +853,7 @@ Examples:
 
 - Émile Zola, L’assommoir
 
-“Mais j’ai $Vu$ monsieur d’Ajuda-Pinto entrant chez monsieur de Rochefide, et j’$aI$ pensé qu’alors vous $Étiez$ seule.” = “But I $sAW$ Monsieur d’Ajuda-Pinto entering Monsieur de Rochefide’s house, and I $thOUGHT$ you $WERE$ alone then.”
+“Mais j’ai $Vu$ monsieur d’Ajuda-Pinto entrant chez monsieur de Rochefide, et j’$aI$ pensé qu’alors vous $Étiez$ seule.” = “But I $sAW$ Mr. d’Ajuda-Pinto entering Mr. de Rochefide’s house, and I $thOUGHT$ you $WERE$ alone then.”
 
 - Honoré de Balzac, Le père Goriot
 
@@ -869,7 +875,7 @@ The ~plus-que-parfait~ (pluperfect) is used for situations existing prior to a f
 
 Examples:
 
-“Si vous saviez … tout ce que j’avais rêvé!” = “If you only knew … everything I had dreamed of!”
+“Si vous saviez … tout ce que j’avais rêvé!” = “If you only knew … everything I had $dreamT$ of!”
 
 - Gustave Flaubert, Madame Bovary
 
@@ -889,7 +895,7 @@ The ~passé antérieur~ (anterior past) is used for past events that were comple
 
 Examples:
 
-“Gervaise, dès qu’il se $FUt$ éloigné, se $remIt$ à la fenêtre.” = “As soon as he $haD$ gone, Gervaise again returned to the window.”
+“Gervaise, dès qu’il se $FUt$ éloigné, se $remIt$ à la fenêtre.” = “As soon as he $haD$ gone away, Gervaise again returned to the window.”
 
 - Émile Zola, L’assommoir
 
@@ -955,7 +961,7 @@ Examples:
 
 “Toutes $aUraient$ $Pu$ faire un fleuve avec leurs pleurs!” = “Each could have $maDe$ a river with her tears!”
 
-- Charles Baudelaire, Les Petites Vielles
+- Charles Baudelaire, Les petites vielles
 
 `Conjugation`
 
@@ -1061,7 +1067,7 @@ Xavier Nègre created Lexilogos, a collection of French dictionaries that ~Conju
 
 Franz Josef Och architected Google Translate, which ~Conjuguer~’s developer used to translate French definitions of verbs that were in the French, but not the English, Wiktionary. URL: %https://translate.google.com%
 
-Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’ancien français, which ~Conjuguer~ uses for conjugation of ester, gésir, issir, and certain other defective verbs. URL: %https://micmap.org/dicfro/introduction/tableaux-de-conjugaison%";
+Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’ancien français, which ~Conjuguer~ uses for conjugation of %ester%, %gésir%, %issir%, and certain other defective verbs. URL: %https://micmap.org/dicfro/introduction/tableaux-de-conjugaison%";
 
 "Settings.quizDifficulty" = "Quiz Difficulty";
 "Settings.quizDifficultyDescription" = "This setting determines the difficulty of quizzes. You probably want Regular.";

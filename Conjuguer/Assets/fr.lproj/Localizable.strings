@@ -29,7 +29,7 @@
 "ModelView.parent" = "Parent";
 "ModelView.defective" = "Défectif";
 "ModelView.endings" = "Terminaisons";
-"ModelView.stemAlterations" = "Modifications des radicaux";
+"ModelView.stemAlterations" = "Altérations des radicaux";
 "ModelView.regular" = "Régulier";
 "ModelView.irregular" = "Irrégulier";
 "ModelView.verbsUsing" = "Verbes qui utilisent ce modèle";
@@ -55,32 +55,34 @@
 
 "Info.dedicationHeading" = "Dédicace";
 
-"Info.dedicationText" = "David Compton était mon entraîneur de ski nordique au lycée. Il était aussi professeur de français mais pas initialement ~mon~ professeur de français. Il était cependant conscient de mon intérêt et de mes aptitudes pour le français. Au début de ma troisième année, je n’allais pas pouvoir prendre le français en raison d’un conflit d’horaire avec Advanced Placement English, alors M. Compton a créé un cours de littérature française de cinq jours par semaine juste pour moi. Un étudiant d’échange allemand nommé Julian Peters nous a bientôt rejoints. En utilisant comme manuels les tomes I et II de « Anthologie de la littérature française » de Robert Leggewie, nous avons étudié les grands de la littérature française de Chrétien de Troyes à Samuel Beckett. Cette étude littéraire a finalement inspiré l’utilisation par ~Conjuguer~ d’exemples littéraires d’usage tendu. J’ai beaucoup apprécié le cours de M. Compton et ma connaissance du français a énormément augmenté. A la fin de l’année, j’ai obtenu un score maximum au test de français Advanced Placement. Au début de ma première année à l’université, j’ai passé un test pour obtenir un crédit pour un cours de français de niveau specialisé et, sur les soixante étudiants de première année qui ont passé le test, j’étais l’un des trois à réussir.
+"Info.dedicationText" = "David Compton était mon entraîneur de ski nordique au lycée. Il était aussi professeur de français mais pas initialement ~mon~ professeur de français. Il était cependant conscient de mon intérêt et de mes aptitudes pour le français. Au début de ma troisième année, je n’allais pas pouvoir suivre un cours de français à cause d’un conflit d’horaire avec Advanced Placement English. Alors M. Compton a créé un cours de littérature française de cinq jours par semaine juste pour moi. Un étudiant d’échange allemand nommé Julian Peters nous a bientôt rejoints. En utilisant comme manuels les tomes I et II d’ « Anthologie de la littérature française » de Robert Leggewie, nous avons étudié les grands de la littérature française de Chrétien de Troyes à Samuel Beckett. Cette étude littéraire a finalement inspiré l’utilisation par ~Conjuguer~ d’exemples littéraires d’usage des temps. J’ai beaucoup apprécié le cours de M. Compton et ma connaissance du français s’est énormément augmentée. À la fin de l’année, j’ai obtenu un score maximum au test de français Advanced Placement. Au début de ma première année à Dartmouth College, j’ai passé un test pour obtenir un crédit pour un cours de français de niveau specialisé et, sur les soixante étudiants de première année qui ont passé le test, j’étais l’un des trois à réussir.
 
-M. Compton avait déjà un horaire de cours complet à l’automne 1991, lorsqu’il a créé le cours pour moi. Il aurait peut-être aimé passer cette période de classe à tirer sur sa pipe à tabac ou à bricoler son ordinateur Macintosh. Ado solipsiste que j’étais, je ne lui ai jamais demandé ~pourquoi~ il avait sacrifié ce temps pour moi. Mais je peux spéculer. Il a étudié à la Sorbonne dans les années 1960 et était francophile. Il a peut-être reconnu en moi un intérêt commun pour le français et a voulu me donner l’opportunité de le poursuivre dans toute la mesure du possible. Quelle que soit sa motivation, je lui en suis reconnaissant et lui dédie cette application.";
+M. Compton avait déjà un horaire de cours complet à l’automne 1991, lorsqu’il a créé le cours pour moi. Il aurait peut-être aimé passer cette période de classe à tirer sur sa pipe à tabac ou à bricoler son ordinateur Macintosh. Ado solipsiste que j’étais, je ne lui ai jamais demandé ~pourquoi~ il avait sacrifié ce temps pour moi. Mais je peux spéculer. Il a étudié à la Sorbonne dans les années 1960 et était francophile. Il a peut-être reconnu en moi un intérêt commun pour le français et a voulu me donner l’opportunité de le poursuivre dans toute la mesure du possible. Quelle que soit sa motivation, je lui en suis reconnaissant et lui dédie cette application.
+
+Grâce à M. Compton, le nom de ~Conjuguer~ est correctement orthographié. Au cours de ma première année au Dartmouth College, j’ai développé le prédécesseur de ~Conjuguer~, ~Le Conjugateur~, une pile HyperCard. Lors d’une pause scolaire, j’ai démontré ~Le Conjugateur~ à M. Compton. Il a été impressionné mais a commenté que j’épelais systématiquement le mot français « conjuguer » comme « conjuger ». Une correction rapide s’est ensuivi et a duré.";
 
 "Info.terminologyHeading" = "Terminologie";
 
 "Info.terminologyText" = "`Verbe`
 
-Un ~verbe~ est une sorte de mot qui décrit une action. Par exemple, dans la phrase « Jacques Brel jouait de la guitare », « jouer » est le verbe. De même, dans la phrase « Jacques Brel played the guitar », « play » est le verbe. Les ~temps~ des verbes expriment, entre autres, quand une action a eu, prend ou aura lieu. Dans les phrases exemplaires, les temps verbaux indiquent que l’action (jouer de la guitare) a eu lieu dans le passé. En anglais et en français, le ~sujet~ ou acteur de la phrase, combiné au temps, détermine la forme du verbe utilisé. C’est la ~conjugaison~ du verbe. En anglais, la combinaison du sujet et du temps de la phrase d’exemple entraîne la conjugaison « played ». En français, la conjugaison est « jouait ».
+Un ~verbe~ est une sorte de mot qui décrit une action. Par exemple, dans la phrase « Jacques Brel jouait de la guitare », « jouer » est le verbe. De même, dans la phrase « Jacques Brel played the guitar », « play » est le verbe. Les ~temps~ des verbes expriment, entre autres, quand une action a eu, a ou aura lieu. Dans les phrases exemplaires, les temps verbaux indiquent que l’action (jouer de la guitare) a eu lieu dans le passé. En anglais et en français, le ~sujet~ ou acteur de la phrase, combiné au temps, détermine la forme du verbe utilisé. C’est la ~conjugaison~ du verbe. En anglais, la combinaison du sujet et du temps de la phrase d’exemple entraîne la conjugaison « played ». En français, la conjugaison est « jouait ».
 
 L’~infinitif~ est une forme verbale invariante qui se termine généralement par -er, -ir ou -re. Contrairement à une conjugaison, un ~infinitif~ n’indique pas le temps, le nombre ou la personne. Exemple d’utilisation : « Jacques Brel savait ~chanter~ ». = « Jacques Brel $knEw$ how ~to sing~. » Dans les deux phrases, l’infinitif représente l’~acte~ de chanter sans référence au temps, au nombre ou à la personne.
 
 Les dictionnaires français et l’onglet Verbes de ~Conjuguer~ répertorient les formes infinitives des verbes.
 
-Le ~radical de l’infinitif~ est l’infinitif moins sa terminaison -er, -ir ou -re. Cette racine est la base de la plupart des conjugaisons.
+Le ~radical de l’infinitif~ est l’infinitif moins sa terminaison -er, -ir ou -re. Ce radical est la base de la plupart des conjugaisons.
 
 `Pronom`
 
-Un ~pronom~ sujet est un mot qui remplace le sujet, l’acteur d’une phrase. En anglais, les pronoms sujets les plus répandus sont ~I~, ~you~, ~he/she/it/one~, ~we~, ~you/y’all~ et ~they~. Les pronoms sujets anglais ~ye~ et ~thou~ sont en déclin depuis la période élisabéthaine.
+Un ~pronom~ sujet est un mot qui remplace le sujet d’une phrase. Le sujet est l’acteur. En anglais, les pronoms sujets les plus répandus sont ~I~, ~you~, ~he/she/it/one~, ~we~, ~you/y’all~ et ~they~. Les pronoms sujets anglais ~ye~ et ~thou~ sont en déclin depuis la période élisabéthaine.
 
 Les pronoms sujets correspondent au ~singulier~ ou au ~pluriel~ et à la ~première personne~, ~deuxième personne~ ou ~troisième personne~. Les pronoms sujets anglais suivent. Les abréviations des combinaisons personne-numéro sont entre parenthèses.
 
-première personne du singulier (1s) : ~I~
-deuxième personne du singulier (2s) : ~you~
+première personne, singulier (1s) : ~I~
+deuxième personne, singulier (2s) : ~you~
 troisième personne, singulier (3s): ~he/she/it/one~
-première personne du pluriel (1p) : ~we~
+première personne, pluriel (1p) : ~we~
 deuxième personne, pluriel (2p) : ~you/y’all~
 troisième personne, pluriel (3p): ~they~
 
@@ -94,17 +96,101 @@ Sauf en ce qui concerne la 2s, le choix du pronom sujet en français est simple.
 
 « Fém. » signifie qu’un pronom fait référence aux femelles, et « masc. » signifie qu’un pronom fait référence aux mâles.
 
-Dans le langage courant, « on » remplace « nous » et utilise les conjugaisons 3s.
+Dans le langage quotidien, « on » remplace « nous » et utilise les conjugaisons 3s.
 
-Concernant la 2s, il y a deux choix : ~tu~ et ~vous~. ~Tu~ et ses conjugaisons expriment l’intimité, la familiarité, la convivialité ou, lorsqu’il est utilisé avec colère contre un étranger, l’impolitesse. ~Vous~ et ses conjugaisons expriment la politesse, le respect, ou, lorsqu’il est utilisé sur un ancien intime, le désir de distance émotionnelle.
+Concernant la 2s, il y a deux choix : ~tu~ et ~vous~. ~Tu~ et ses conjugaisons expriment l’intimité, la familiarité, la convivialité ou, lorsqu’il est utilisé avec colère contre un étranger, la grossièreté. ~Vous~ et ses conjugaisons expriment la politesse, le respect, ou, lorsqu’il est utilisé sur un ancien intime, le désir de distance émotionnelle.
 
 `Ordre de présentation des conjugaisons`
 
-Les traités sur les verbes français, lors de la présentation des conjugaisons d’un temps particulier, utilisent l’ordre des nombres de personnes suivant : 1s, 2s, 3s, 1p, 2p, 3p. Respectueux de la tradition, ~Conjuguer~ fait de même. Par exemple, ~Conjuguer~ présenterait les conjugaisons indicatif-présent de ~être~ comme suit :
+Les traités sur les verbes français, lors de la présentation des conjugaisons d’un temps particulier, utilisent l’ordre des nombres de personnes suivant : 1s, 2s, 3s, 1p, 2p, 3p. Respectueux de la tradition, ~Conjuguer~ fait de même. Par exemple, ~Conjuguer~ présenterait les conjugaisons indicatif-présent d’~être~ comme suit :
 
 $SUIs$, $Es$, $ESt$, $SOMMEs$, $êteS$, $SOnt$
 
 Les lettres rouges dans les conjugaisons représentent des irrégularités. Un verbe est considéré comme irrégulier si l’une de ses conjugaisons diffère de la conjugaison d’un verbe régulier ~er~, ~ir~ ou ~re~.";
+
+"Info.irregularitiesHeading" = "Irrégularités";
+
+"Info.irregularitiesText" = "Sur les 6.314 verbes de ~Conjuguer~, 5.217 ont des conjugaisons parfaitement régulières. Une conjugaison tout à fait régulière utilise le radical de l’infinitif comme radical, et la terminaison est tout à fait prévisible. Ce sont les verbes qui sont conjugués à l’aide des modèles de verbes 1-1 (-er régulier), 2-1 (-ir régulier) et 5-1A (-re régulier). Exemples :
+
+cacaber -> vous cacabâtes
+alunir -> nous alunissons
+épandre -> épandu
+
+Les 1.097 autres verbes sont conjugués à l’aide de l’un des quatre-vingt-douze modèles de verbes irréguliers. Les modèles verbaux présentent des irrégularités de trois manières.
+
+Premièrement, le radical utilisé diffère du radical de l’infinitif, mais la terminaison est prévisible. Exemple :
+
+suivre -> je $suIs$ (~pas~ suivs)
+
+Deuxièmement, le radical est comme prévu, mais la terminaison est imprévisible. Exemple :
+
+être -> vous $êteS$ (~pas~ êtez)
+
+Troisièmement, le radical ~et~ la terminaison sont imprévisibles. Exemple :
+
+aller -> elles $VOnt$ (~pas~ allent)
+
+~Conjuguer~ représente les altérations des radicaux et les terminaisons imprévisibles des modèles verbaux de la manière suivante :
+
+~[temps auquel s’applique cette altération]~: ~[nombre de lettres à partir de la fin du radical de l’infinitif]~, ~[nombre de lettres à remplacer]~, ~[lettres de remplacement]~
+
+Voici un exemple. Le modèle de boire, 2-17, a l’altération suivante :
+
+r1p, r2p, b1p, b2p: 2, 2, UV
+
+Cette altération entraîne les conjugaisons suivantes :
+
+nous $bUVons$ (~pas~ boions)
+vous $bUVez$ (~pas~ boiez)
+nous $bUVions$ (~pas~ boiions)
+vous $bUViez$ (~pas~ boiiez)
+
+~Conjuguer~ colore en rouge les lettres majuscules dans les altérations, signifiant les irrégularités.
+
+Un astérisque à la fin des lettres de remplacement signifie une terminaison imprévisible.
+
+Par exemple, le modèle de valoir, 4-5A, a l’altération suivante :
+
+r1s, r2s: 1, 1, UX*
+
+Cette altération entraîne les conjugaisons suivantes :
+
+je $vaUX$ (~pas~ $vaUs$)
+tu $vaUX$ (~pas~ $vaUs$)
+
+Voici comment les temps sont représentés dans les altérations :
+
+pp : participe passé
+rr : participe présent
+sf : radical futur
+r1s, r2s, r3s, r1p, r2p, r3p : six numéros-personnes de l’indicatif présent
+b1s, b2s, b3s, b1p, b2p, b3p : six numéros-personnes du subjonctif présent
+x1s, x2s, x3s, x1p, x2p, x3p : six numéros-personnes du passé simple
+i1s, i2s, i3s, i1p, i2p, i3p : six numéros-personnes de l’imparfait
+q1s, q2s, q3s, q1p, q2p, q3p : six numéros-personnes du subjonctif imparfait
+h2s, hlp, h2p : trois nombres-personnes de l’impératif
+
+Le numéro-personne ~A~ signifie « tous les six ». Par exemple, xA est équivalent à x1s, x2s, x3s, x1p, x2p, x3p. De même, rA est équivalent à r1s, r2s, r3s, r1p, r2p, r3p.
+
+Par exemple, le modèle d’avoir, 4-10, a l’altération suivante :
+
+xA: 2, 2, E
+
+Cela entraîne les conjugaisons passé-simples suivantes :
+
+$Eus$, $Eus$, $Eut$, $Eûmes$, $Eûtes$, $Eurent$
+
+Certaines altérations ont @ comme lettre de remplacement. Cela signifie « mettre en majuscule la première lettre de la conjugaison pour indiquer son irrégularité ».
+
+Par exemple, le modèle de pouvoir, 4-6, a l’altération suivante :
+
+xA, pp: 4, 4, @
+
+Cela entraîne les conjugaisons passé-simples suivantes :
+
+$Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$, $Purent$
+
+Le participe passé est $Pu$.";
 
 "Info.defectivenessHeading" = "Défectuosité";
 
@@ -114,7 +200,7 @@ Soixante-cinq verbes français sont ~défectifs~. Cela ne veut pas dire que quel
 
 1. L’utilisation de certaines personnes-numéros serait absurde. Par exemple, « je $fAUX$ que tu restes » signifierait ~littéralement~ « I $AM$ necessary that you stay ». %Falloir% est donc défectif pour tous les personnes-numéros sauf la 3s. « Il $faUt$ que tu restes » est logique et signifie « it $IS$ necessary that you stay ».
 
-2. Certains verbes sont impersonnels. Cela ne veut pas dire qu’ils manquent de l’humanité. Non, impersonnel dans ce contexte signifie que leur sujet est, en anglais, « it » générique ou, en français, « il » générique. Ces verbes impliquent des phénomènes naturels comme la neige, la grêle, le grésil et la pluie. « Il $pleuT$. » = « It $IS$ raining. » En raison des sujets « il » habituels, ces verbes sont considérés comme défectifs pour les personnes-numéros autres que la 3s. Il existe cependant une ~certaine~ flexibilité. Citant et traduisant Voltaire, « Les calomnies pleuvent sur réussit. » = « Calumnies rain on whoever succeeds. » On pourrait imaginer d’autres personnes-numéros utilisées pour des verbes impersonnels dans la poésie. Par exemple, dans un poème écrit du point de vue de la nature, le pronom et la conjugaison « je neige », signifiant « I $AM$ snowing », auraient un sens.
+2. Certains verbes sont impersonnels. Cela ne veut pas dire qu’ils manquent de l’humanité. Non, impersonnel dans ce contexte signifie que leur sujet est, en anglais, « it » générique ou, en français, « il » générique. Ces verbes impliquent des phénomènes naturels comme la neige, la grêle, le grésil et la pluie. « Il $pleuT$. » = « It $IS$ raining. » En raison des sujets « il » habituels, ces verbes sont considérés comme défectifs pour les personnes-numéros autres que la 3s. Il existe cependant une ~certaine~ flexibilité. Citant et traduisant Voltaire, « Les calomnies pleuvent sur quiconque réussit. » = « Calumnies rain on whoever succeeds. » On pourrait imaginer d’autres personnes-numéros utilisées pour des verbes impersonnels dans la poésie. Par exemple, dans un poème écrit du point de vue de la nature, le pronom et la conjugaison « je neige », signifiant « I $AM$ snowing », auraient du sens.
 
 3. Certains verbes sont défectifs à certains temps afin d’éviter toute confusion avec la conjugaison d’autres verbes. Par exemple, %paître% est défectif au %passé simple% car les conjugaisons proposées par analogie avec %connaître%, $Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$ et $Purent$, sont identiques aux conjugaisons passé-simples de %pouvoir%.
 
@@ -136,7 +222,7 @@ Nonobstant l’approche inclusive de ~Conjuguer~ aux conjugaisons traditionnelle
 
 "Info.participePasséText" = "`Utilisation`
 
-Le ~participe passé~ est utilisé avec les verbes auxiliaires ~avoir~ et ~être~ pour former certains temps composés, dont le %passé composé% : « j’ai parlé » = « I $spOke$ », « I $dID$ speak » ou « I have $spOken$ ». Le participe passé est également utilisé pour former un adjectif ou un nom à partir d’un verbe : « temps perdu » = « lost time », « l’$inconNu$ » = « the unknown ».
+Le ~participe passé~ est utilisé avec les verbes auxiliaires ~avoir~ et ~être~ pour former certains temps composés, dont le %passé composé% : « j’ai parlé » = « I $spOke$ », « I $dID$ speak » ou « I have $spOken$ ». Le participe passé est également utilisé pour former un adjectif ou un nom d’un verbe : « temps perdu » = « lost time », « l’$inconNu$ » = « the unknown ».
 
 `Forme`
 
@@ -162,7 +248,7 @@ Le participe passé, utilisé aux temps composés, s’accorde en genre et en no
 
 Un scénario implique l’utilisation réflexive des verbes. “Les chattes se sont nettoyées.” = « The female cats groomed themselves. »
 
-L’autre scénario implique certains verbes qui utilisent l’auxiliaire %être% plutôt que %avoir% : %aller%, %arriver%, %descendre%, %devenir%, %entrer%, %issir%, %monter%, %mourir% , %naître%, %partir%, %parvenir%, %passer%, %ressortir%, %rester%, %retomber%, %retourner%, %revenir%, %sortir (exit)% et %tomber%. De manière confuse, les verbes de cette liste utilisent %avoir%, sans accord, dans les situations transitives.
+L’autre scénario implique certains verbes qui utilisent l’auxiliaire %être% plutôt que %avoir% : %aller%, %arriver%, %descendre%, %devenir%, %entrer%, %issir%, %monter%, %mourir%, %naître%, %partir%, %parvenir%, %passer%, %ressortir%, %rester%, %retomber%, %retourner%, %revenir%, %sortir (exit)% et %tomber%. De manière confuse, les verbes de cette liste utilisent %avoir%, sans accord, dans les situations transitives.
 
 Contrastez :
 
@@ -246,7 +332,7 @@ Le ~participe présent~ est utilisé :
 
 • Ou comme adjectif. Dans ce cas, le participant présent s’accorde avec le nom que se modifie.
 
-« Gervaise avait gardé sa tranquillité souriante de la matinée. = « Gervaise $haD$ kept her smiling tranquility of the morning. »
+« Gervaise avait gardé sa tranquillité souriante de la matinée. » = « Gervaise $haD$ kept her smiling tranquility of the morning. »
 
 - Émile Zola, L’assommoir
 
@@ -256,7 +342,7 @@ Le participe présent est formé de la conjugaison 1p de l’indicatif présent,
 
 %parler% -> parlant
 %finir% -> finissant
-%rendre% -> impressionner
+%rendre% -> rendant
 
 Trois participes présents ne suivent pas ce schéma et sont donc irréguliers :
 
@@ -270,13 +356,13 @@ Trois participes présents ne suivent pas ce schéma et sont donc irréguliers :
 
 Le ~radical futur~ a deux usages :
 
-• Comme racine du %futur simple%.
+• Comme radical du %futur simple%.
 
 « La noce $aUra$ lieu le samedi 29 juillet. » = « The wedding will take place on Saturday, July 29. »
 
 - Émile Zola, L’assommoir
 
-• Comme racine du %conditionnel présent%.
+• Comme radical du %conditionnel présent%.
 
 « [O]n rêvait à la quantité de plats qu’il $faUDrait$ et quelles $SE seraient$ les entrées. » = « One $dreamT$ of the quantity of dishes that would be needed and what the starters would be. »
 
@@ -284,7 +370,7 @@ Le ~radical futur~ a deux usages :
 
 `Forme`
 
-Pour la plupart des verbes, le futur radical est identique à l’infinitif. Le -e final s’ôte des verbes -re. Exemples :
+Le futur radical de la plupart des verbes est identique à l’infinitif. Le -e final s’ôte des verbes -re. Exemples :
 
 %finir% -> finir-
 %parler% -> parler-
@@ -295,12 +381,12 @@ Certains verbes ont des radicaux futurs irréguliers. Ils sont:
 %acquérir% -> $acquERr$-
 %aller% -> $Ir$-
 %appeler% -> $appelLer$-
-%asseoir% -> $assiÉr$-*
+%asseoir% -> $assIÉr$-*
 %avoir% -> $aUr$-
-%choeur% -> $chERr$-*
-%dépècer% -> $dépÈcer$-
+%choir% -> $chERr$-*
+%dépecer% -> $dépÈcer$-
 %devoir% -> $devR$-
-%employeur% -> $employeur$-
+%employer% -> $emploIer$-
 %envoyer% -> $envERr$-
 %être% -> $SEr$-
 %faire% -> $fEr$-
@@ -308,11 +394,11 @@ Certains verbes ont des radicaux futurs irréguliers. Ils sont:
 %falloir% -> $faUDr$-
 %issir% -> $isTr$-
 %jeter% -> $jetTer$-
-%pouvoir% -> $pourRr$-
+%pouvoir% -> $pouRr$-
 %mouvoir% -> $mouvR$-
-%ouïr (trad.)% -> $Oir$-* ou $oRr$-*
-%payeur% -> $paIer$-*
-%peser% -> $peser$-
+%ouïr (trad.)% -> $Oir$-* or $oRr$-*
+%payer% -> $paIer$-*
+%peser% -> $pÈser$-
 %savoir% -> $saUr$-
 %venir% -> $vIenDr$-
 %valoir% -> $vaUDr$-
@@ -324,90 +410,6 @@ Certains verbes ont des radicaux futurs irréguliers. Ils sont:
 Les verbes dérivés des verbes ci-dessus utilisent des variantes de ces radicaux futurs irréguliers. Exemple :
 
 %devenir% -> $devIenDr$";
-
-"Info.irregularitiesHeading" = "Irrégularités";
-
-"Info.irregularitiesText" = "Sur les 6.314 verbes de ~Conjuguer~, 5.217 ont des conjugaisons parfaitement régulières. Une conjugaison tout à fait régulière utilise le radical de l’infinitif comme radical, et la terminaison est tout à fait prévisible. Ce sont des verbes qui sont conjugués à l’aide des modèles de verbes 1-1 (-er régulier), 2-1 (-ir régulier) et 5-1A (-re régulier). Exemples :
-
-cacaber -> vous cacabâtes
-alunir -> nous alunissons
-épandre -> épandu
-
-Les 1.097 autres verbes sont conjugués à l’aide de l’un des quatre-vingt-douze modèles de verbes irréguliers. Les modèles verbaux présentent des irrégularités de trois manières.
-
-Premièrement, le radical utilisé diffère du radical de l’infinitif, mais la terminaison est prévisible. Exemple :
-
-suivre -> je $suIs$ (~pas~ suivs)
-
-Deuxièmement, le radical est comme prévu, mais la terminaison est imprévisible. Exemple :
-
-être -> vous $êteS$ (~pas~ êtez)
-
-Troisièmement, la racine et la terminaison sont imprévisibles. Exemple :
-
-aller -> elles $VOnt$ (~pas~ allent)
-
-~Conjuguer~ représente les altérations de radical et les terminaisons imprévisibles pour les modèles verbaux de la manière suivante :
-
-~[temps auxquels appliquer cette modification]~: ~[nombre de lettres à partir de la fin du radical de l’infinitif]~, ~[nombre de lettres à remplacer]~, ~[lettres à échanger]~
-
-Voici un exemple. Le modèle de boire, 2-17, a la modification suivante :
-
-r1p, r2p, b1p, b2p: 2, 2, UV
-
-Cette altération entraîne les conjugaisons suivantes :
-
-nous $bUVon$ (~pas~ boions)
-vous $bUVez$ (~pas~ boiez)
-nous $bUVions$ (~pas~ boiions)
-vous $bUViez$ (~pas~ boiiez)
-
-~Conjuguer~ colore en rouge les lettres majuscules dans les altérations, signifiant l’irrégularité.
-
-Un astérisque à la fin des lettres à échanger signifie une terminaison imprévisible.
-
-Par exemple, le modèle de valoir, 4-5A, a la modification suivante :
-
-r1s, r2s: 1, 1, UX*
-
-Cette altération entraîne les conjugaisons suivantes :
-
-je $vaUX$ (~pas~ $vaUs$)
-tu $vaUX$ (~pas~ $vaUs$)
-
-Voici comment les temps sont représentés dans les altérations :
-
-pp : participe passé
-rr : participe présent
-sf : radical futur
-r1s, r2s, r3s, r1p, r2p, r3p : six numéros-personnes de l’indicatif présent
-b1s, b2s, b3s, b1p, b2p, b3p : six numéros-personnes du subjonctif présent
-x1s, x2s, x3s, x1p, x2p, x3p : six chiffres-personnes du passé simple
-i1s, i2s, i3s, i1p, i2p, i3p : six numéros-personnes de l’imparfait
-q1s, q2s, q3s, q1p, q2p, q3p : six numéros-personnes du subjonctif imparfait
-h2s, hlp, h2p : trois nombres-personnes de l’impératif
-
-Le numéro-personne ~A~ signifie « tous les six ». Par exemple, xA est équivalent à x1s, x2s, x3s, x1p, x2p, x3p. De même, rA est équivalent à r1s, r2s, r3s, r1p, r2p, r3p.
-
-Par exemple, le modèle d’avoir, 4-10, a la modification suivante :
-
-xA: 2, 2, E
-
-Cela donne les conjugaisons passé-simples suivantes :
-
-$Eus$, $Eus$, $Eut$, $Eûmes$, $Eûtes$, $Eurent$
-
-Certaines modifications ont @ comme lettre à échanger. Cela signifie « mettre en majuscule la première lettre de la conjugaison pour indiquer son irrégularité ».
-
-Par exemple, le modèle de pouvoir, 4-6, a la modification suivante :
-
-xA, pp: 4, 4, @
-
-Cela entraîne les conjugaisons passé-simples suivantes :
-
-$Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$, $Purent$
-
-Le participe passé est $Pu$.";
 
 "Info.indicatifPrésentHeading" = "Indicatif présent";
 
@@ -437,11 +439,11 @@ L’~indicatif présent~ est utilisé :
 
 « Oh! très-sincèrement je $souffrE$ » = « Oh very sincerely do I suffer ! »
 
-- Charles Baudelaire, Le Monstre, ou le Paranymphe d’une nymphe macabre
+- Charles Baudelaire, Le monstre, ou le paranymphe d’une nymphe macabre
 
 `Conjugaison`
 
-Pour la plupart des verbes, le radical indicatif-présent est l’infinitif moins la terminaison -er, -ir, -re ou -oir. Les terminaisons indicatif-présent de tout verbe appartiennent à l’une des catégories suivantes.
+Le radical de l’indicatif présent de la plupart des verbes est l’infinitif moins la terminaison -er, -ir, -re ou -oir. Les terminaisons de l’indicatif présent de tout verbe appartiennent à l’une des catégories suivantes.
 
 1. Verbes ~er~ réguliers plus couvrir, cueillir et bouillir : e, es, e, ons, ez, ent
 
@@ -480,7 +482,7 @@ Exemples :
 %ouïr (trad.)% : $oIs$, $oIs$, $oIt$, $oYons$, $oYez$, $oIent$
 %voir% : $vOIs$, $vOIs$, $vOIt$, $vOYons$, $vOYez$, $vOIent$
 
-La plupart de ces verbes utilisent des radicaux irréguliers pour certaines ou toutes les conjugaisons indicatif-présentes.
+La plupart de ces verbes utilisent des radicaux irréguliers pour certaines ou toutes les conjugaisons de l’indicatif présent.
 
 6. Trois verbes sont fondamentalement irréguliers dans la mesure où leurs radicaux ~et~ terminaisons sont pour la plupart imprévisibles. Ces verbes sont :
 
@@ -488,37 +490,41 @@ La plupart de ces verbes utilisent des radicaux irréguliers pour certaines ou t
 %avoir% : $aI$, $As$, $A$, avez, avez, $Ont$
 %être% : $SUIs$, $Es$, $ESt$, $SOMMEs$, $êteS$, $SOnt$
 
-Être, avoir et aller sont respectivement au premier, au deuxième et au huitième rang quant aux verbes français.";
+Être, avoir et aller sont respectivement au premier, au deuxième et au huitième rang quant à l’utilisation des verbes français.";
 
 "Info.passéSimpleHeading" = "Passé simple";
 
 "Info.passéSimpleText" = "`Utilisation`
 
-Le passé simple a été utilisé pour les actions qui ont été accomplies dans le passé. Cet usage contrastait avec celui de l’imparfait, qui était (et continue d’être) utilisé pour des actions répétées, habituelles ou continues. Le passé simple n’est plus utilisé dans la conversation ou l’écriture à moins que le locuteur ou l’écrivain ne soit consciemment abstrus.
+Le passé simple était utilisé pour les actions qui étaient accomplies dans le passé. Cet usage contrastait avec celui de l’imparfait, qui était (et continue d’être) utilisé pour des actions répétées, habituelles ou continues. Le passé simple n’est plus utilisé dans la conversation ou l’écriture à moins que le locuteur ou l’écrivain ne soit consciemment abstrus.
 
 Voici quelques exemples du passé simple.
-
-« J’entendis les pas de mes parents qui accompagnaient Swann. » = « I $hearD$ the footsteps of my parents, who $WERE$ accompanying Swann. »
-
-- Marcel Proust, Du côté de chez Swann
 
 « Tresqu’en la mer $cUnquist$ la tere altaigne. » = « He conquered the high land down to the sea. »
 
 - Turoldus, La chanson de Roland
 
+« Me $vInt$ le vouloir de briser la tres amoureuse prison. » = « The longing came over me to break away from love’s imprisonment. »
+
+- François Villon, Le testament
+
 « Emma s’étendit beaucoup sur la misère des affections terrestres et l’éternel isolement où le cœur reste enseveli. » = « Emma $spOke$ at length about the misery of earthly ailments and the eternal isolation in which the heart remains buried. »
 
 - Gustave Flaubert, Madame Bovary
+
+« J’entendis les pas de mes parents qui accompagnaient Swann. » = « I $hearD$ the footsteps of my parents, who $WERE$ accompanying Swann. »
+
+- Marcel Proust, Du côté de chez Swann
 
 `Conjugaison`
 
 Pour les verbes réguliers ~er~, ~ir~ et ~re~, le radical passé-simple est l’infinitif moins la terminaison -er, -ir ou -re.
 
-Les verbes avec des radicaux participe-passé irréguliers, y compris la plupart des verbes ~oir~, utilisent ces radicaux pour le passé simple. Par exemple, le radical participe-passé et passé-simple de %devoir% est $D$-.
+Les verbes qui ont des radicaux irréguliers du participe passé, y compris la plupart des verbes ~oir~, utilisent ces radicaux pour le passé simple. Par exemple, le radical du participe passé et du passé simple de %devoir% est $D$-.
 
-Le radical passé-simple de être, $F$-, bien qu’irrégulier, est lié aux mots anglais be et been.
+Le radical du passé simple d’être, $F$-, bien qu’il soit irrégulier, est lié aux mots anglais be et been.
 
-Les terminaisons passé-simples de tout verbe appartiennent à l’une des catégories suivantes.
+Les terminaisons du passé simple appartiennent à l’une des catégories suivantes.
 
 1. Verbes ~er~ réguliers plus traire (groupe ~a~) : ai, as, a, âmes, âtes, èrent
 
@@ -560,7 +566,7 @@ L’~imparfait~ est utilisé :
 
 • Pour exprimer le caractère répété ou habituel d’une action. L’anglais utilise parfois ~would + infinitif~ dans cette situation, comme dans la traduction ci-dessous.
 
-« Parfois, à peine ma bougie éteinte, mes yeux se fermaient si vite que je n’avais pas le temps de me dire : « Je $m’endoRs$. » » = « Sometimes, barely after my candle $WAS$ extinguished, my eyes would close so quickly that I $dIDn’t$ have time to say to myself : « I’$M$ falling asleep. » »
+« Parfois, à peine ma bougie éteinte, mes yeux se fermaient si vite que je n’avais pas le temps de me dire : “Je $m’endoRs$.” » = « Sometimes, barely after my candle $WAS$ extinguished, my eyes would close so quickly that I $dIDn’t$ have time to say to myself : “I’$M$ falling asleep.” »
 
 - Marcel Proust, Du côté de chez Swann
 
@@ -580,7 +586,7 @@ L’~imparfait~ est utilisé :
 
 `Conjugaison`
 
-A une exception près, le radical imparfait est la conjugaison 1p indicatif-présente, moins -ons. L’exception est %être%, dont la racine imparfaite est $Ét$.
+À une exception près, le radical imparfait est la conjugaison 1p de l’indicatif présente, moins -ons. L’exception est %être%, dont le radical imparfait est $Ét$.
 
 Au radical imparfait s’ajoute ais, ais, ait, ions, iez ou aient.
 
@@ -612,7 +618,7 @@ Le français utilise le futur simple dans une situation où l’anglais utilise 
 
 `Conjugaison`
 
-Le radical du futur simple est le %radical futur%. A cela s’ajoute ai, as, a, ons, ez ou ont.
+Le radical du futur simple est le %radical futur%. À cela s’ajoute ai, as, a, ons, ez ou ont.
 
 Exemples :
 %être% : $AUrai$, $AUras$, $AUra$, $AUrons$, $AUrez$, $AUront$
@@ -626,13 +632,13 @@ Exemples :
 
 Le ~conditionnel présent~ est utilisé :
 
-Dans le discours passé et indirect sur les événements attendus, prédits ou espérés.
+• Dans le discours passé et indirect sur les événements attendus, prédits ou espérés.
 
-« [I]l espérait … que son pauvre argent … lui $revIENDrait$ … considérablement plus dodu. = « He hoped … that his poor little money … would come back to him one day considerably plumper. »
+« [I]l espérait … que son pauvre argent … lui $revIENDrait$ … considérablement plus dodu. » = « He hoped … that his poor little money … would come back to him one day considerably plumper. »
 
 - Gustave Flaubert, Madame Bovary
 
-Pour indiquer la politesse avec %pouvoir%, %avoir%, et %être%.
+• Pour indiquer la politesse avec %pouvoir%, %avoir% et %être%.
 
 « Vous ne $pourriez$ pas moi prêter dix sous ? » = « Couldn’t you lend me ten cents ? »
 
@@ -642,7 +648,7 @@ Pour indiquer la politesse avec %pouvoir%, %avoir%, et %être%.
 
 - Marcel Proust, Du côté de chez Swann
 
-Dans des propositions ~si~ sur les situations possibles ou hypothétiques.
+• Dans des propositions ~si~ sur les situations possibles ou hypothétiques.
 
 « Si j’$Étais$ à ta place, moi, j’en trouverais bien ! » = « If I $WERE$ in your place, I would find some ! »
 
@@ -650,7 +656,7 @@ Dans des propositions ~si~ sur les situations possibles ou hypothétiques.
 
 `Conjugaison`
 
-La racine du conditionnel présent est le futur radical. A cela s’ajoutent ais, ais, ait, ions, iez ou aient.
+Le radical du conditionnel présent est le futur radical. À cela s’ajoutent ais, ais, ait, ions, iez ou aient.
 
 Exemples :
 %être% : $AUrais$, $AUrais$, $AUrait$, $AUrions$, $AUriez$, $AUraient$
@@ -664,7 +670,7 @@ Exemples :
 
 Le ~subjonctif présent~ est utilisé :
 
-Pour exprimer une opinion, une peur ou un doute. Dans ce cas, une proposition avec l’~indicatif présent~ précède souvent la proposition ~que~ avec ~subjonctif présent~.
+• Pour exprimer une opinion, une peur ou un doute. Dans ce cas, une proposition avec l’~indicatif présent~ précède souvent la proposition ~que~ avec le ~subjonctif présent~.
 
 « Sainte Vierge, est-il possible que le bon Dieu $vEUILle$ faire souffrir ainsi qu’une malheureuse créature humaine ? » = « Blessed Virgin, is it possible that the good Lord wants to make an unhappy human creature suffer in this way ? »
 
@@ -674,7 +680,7 @@ Pour exprimer une opinion, une peur ou un doute. Dans ce cas, une proposition av
 
 - Gustave Flaubert, Madame Bovary
 
-Après les conjonctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~ et ~sans que~.
+• Suivant les conjonctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~ et ~sans que~.
 
 « [T]out est organisé pour qu’elles ne $pUISSent$ se joindre. » = « Everything $IS$ organized so that they cannot join. »
 
@@ -684,7 +690,7 @@ Après les conjonctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur
 
 - Émile Zola, L’assommoir
 
-Pour commander ou exhorter.
+• Pour commander ou exhorter.
 
 « [Q]u’elle ne $faSSe$ pas de manières maintenant. » = « She’d better not put on any airs now. »
 
@@ -696,9 +702,9 @@ Pour commander ou exhorter.
 
 `Conjugaison`
 
-Pour la plupart des verbes, le radical subjonctif-présent est le radical 3p de l’indicatif présent.
+Le radical du subjonctif présent de la plupart des verbes est le radical 3p de l’indicatif présent.
 
-Certaines racines irrégulières du subjonctif-présent suivent. La première racine de chaque ligne correspond aux 1s, 2s, 3s et 3p. La deuxième racine currespond aux 1p et 2p.
+Certains radicaux irréguliers du subjonctif présent suivent. Le premier radical de chaque ligne correspond aux 1s, 2s, 3s et 3p. Le deuxième radical correspond aux 1p et 2p.
 
 %avoir% -> $aI$/$aY$
 %aller% -> $aIll$/all
@@ -741,7 +747,7 @@ Exemples :
 
 "Info.subjonctifImparfaitText" = "`Utilisation`
 
-Le ~subjonctif imparfait~ était utilisé après les conjonctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, et ~sans que~ lorsque la proposition principale utilisait le %passé simple% ou l’%imparfait%. L’usage du subjonctif imparfait est rare en français contemporain.
+Le ~subjonctif imparfait~ était utilisé suivant les conjonctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, et ~sans que~ lorsque la proposition principale utilisait le %passé simple% ou l’%imparfait%. L’usage du subjonctif imparfait est rare en français contemporain.
 
 Exemples :
 
@@ -757,7 +763,7 @@ Exemples :
 
 Le radical du subjonctif imparfait est identique à celui du passé simple.
 
-Les terminaisons subjonctif-imparfait pour tout verbe appartiennent à l’une des catégories suivantes, qui correspondent aux cinq catégories du passé-simple.
+Les terminaisons du subjonctif imparfait appartiennent à l’une des catégories suivantes, qui correspondent aux cinq catégories du passé simple.
 
 1. Verbes ~er~ réguliers plus %traire% (groupe ~a~): asse, ass, ât, assions, assiez, assent
 
@@ -805,18 +811,18 @@ Exemples :
 
 « Ô temps, suspend ton vol ! » = « O, Time, pause your flight ! »
 
-- Alphonse de Lamartine, Le Lac
+- Alphonse de Lamartine, Le lac
 
 `Conjugaison`
 
-Contrairement à la plupart des autres temps, l’impératif n’utilise que trois combinaisons personne-numéroes : 2s, 1p et 2p. Pour tous les verbes sauf quatre, les conjugaisons 1p et 2p impératif sont identiques à leurs homologues indicatif-présents.
+Contrairement à la plupart des autres temps, l’impératif n’utilise que trois combinaisons personne-numéro : 2s, 1p et 2p. Hormis quatre verbs exceptionnels, les conjugaisons 1p et 2p de l’impératif sont identiques à leurs homologues de l’indicatif présent.
 
-Les conjugaisons 2s sont également identiques à leurs homologues indicatif-présents sauf que, si le verbe utilise les terminaisons indicatif-présentes e, es, e, ons, ez et ent, le s est supprimé de la conjugaison 2s impératif. Exemples :
+Les conjugaisons 2s sont également identiques à leurs homologues de l’indicatif présent sauf que, si le verbe utilise les terminaisons de l’indicatif présent e, es, e, ons, ez et ent, le s est supprimé de la conjugaison 2s impérative. Exemples :
 
 %parler% -> parle
-%couvrir% -> $couverE$
+%couvrir% -> $couvrE$
 
-Quatre verbes sont exceptionnels en ce qu’ils utilisent des radicaux subjonctif-présents pour le impératif.
+Quatre verbes sont exceptionnels en ce qu’ils utilisent les radicaux du subjonctif présent pour l’impératif.
 
 %être% : $SOIS$, $SOYons$, $SOYez$
 %avoir% : $AIE$, $AYons$, $AYez$
@@ -843,15 +849,15 @@ Le ~passé composé~ est utilisé pour les actions du passé qui sont terminées
 
 Exemples :
 
-« [N]ous ont $faiT$ le voyage avec les deux enfants. » = « We traveled with the two children. »
+« [N]ous avons $faiT$ le voyage avec les deux enfants. » = « We traveled with the two children. »
 
 - Émile Zola, L’assommoir
 
-« Mais j’ai $Vu$ monsieur d’Ajuda-Pinto entrant chez monsieur de Rochefide, et j’$aI$ pensé qu’alors vous $Étiez$ seule. » = « But I $sAW$ Monsieur d’Ajuda-Pinto entering Monsieur de Rochefide’s house, and I $thOUGHT$ you $WERE$ alone then. »
+« Mais j’ai $Vu$ monsieur d’Ajuda-Pinto entrant chez monsieur de Rochefide, et j’$aI$ pensé qu’alors vous $Étiez$ seule. » = « But I $sAW$ Mr. d’Ajuda-Pinto entering Mr. de Rochefide’s house, and I $thOUGHT$ you $WERE$ alone then. »
 
 - Honoré de Balzac, Le père Goriot
 
-Ce deuxième exemple montre pourquoi %être%, le verbe français le plus utilisé, n’utilise que rarement le passé composé. L’état passé est généralement exprimé avec le %imparfait%, pas le passé composé. Cependant, %être% utilise le passé composé pour la voix passive, comme démontré ci-dessous.
+Ce deuxième exemple montre pourquoi %être%, le verbe français le plus utilisé, n’utilise que rarement le passé composé. L’état passé est généralement exprimé en utilisant l’%imparfait%, pas le passé composé. Cependant, %être% utilise le passé composé pour la voix passive, comme démontré ci-dessous.
 
 « Lorsque l’assommoir $A$ $paRu$ dans $uN$ journal, il a $ÉtÉ$ attaqué avec une brutalité sans exemple, dénoncé, chargé de tous les crimes. » = « When “The Drinking Den” appeared in a newspaper, it $WAS$ denounced, charged with every crime, and attacked with unprecedented brutality. »
 
@@ -869,7 +875,7 @@ Le ~plus-que-parfait~ est utilisé pour les situations antérieures à un point 
 
 Exemples :
 
-« Si vous sauvez … tout ce que j’avais rêvé ! » = « If you only knew … everything I had dreamed of ! »
+« Si vous saviez … tout ce que j’avais rêvé ! » = « If you only knew … everything I had $dreamT$ of ! »
 
 - Gustave Flaubert, Madame Bovary
 
@@ -889,7 +895,7 @@ Le ~passé antérieur~ est utilisé pour les événements passés qui se sont te
 
 Exemples :
 
-« Gervaise, dès qu’il se $FUt$ éloigné, se $remIt$ à la fenêtre. » = « As soon as he $haD$ gone, Gervaise again returned to the window. »
+« Gervaise, dès qu’il se $FUt$ éloigné, se $remIt$ à la fenêtre. » = « As soon as he $haD$ gone away, Gervaise again returned to the window. »
 
 - Émile Zola, L’assommoir
 
@@ -905,7 +911,7 @@ Le passé antérieur est formé de la conjugaison %passé simple% d’%avoir% ou
 
 "Info.passéSurcomposéText" = "`Utilisation`
 
-Le ~passé surcomposé~ est utilisé pour les situations antérieures à un point fixe dans le passé. L’usage de ce temps est stigmatisé et rare en dehors du sud de la France.
+Le ~passé surcomposé~ est utilisé pour les situations antérieures à un point fixe dans le passé. L’usage de ce temps est stigmatisé et rare en dehors du midi français.
 
 Exemples :
 
@@ -913,7 +919,7 @@ Exemples :
 
 - Gustave Flaubert, Madame Bovary
 
-« Commentaire monsieur Vautrin $EST$-il donc rentré cette nuit après que Christophe $A$ $EU$ $mIS$ les verrous ? » = « So how did Monsieur Vautrin come home that night after Christophe $haD$ bolted the doors ? »
+« Comment monsieur Vautrin $EST$-il donc rentré cette nuit après que Christophe $A$ $EU$ $mIS$ les verrous ? » = « So how did Monsieur Vautrin come home that night after Christophe $haD$ bolted the doors ? »
 
 - Honoré de Balzac, Le père Goriot
 
@@ -945,7 +951,7 @@ Le futur antérieur est formé de la conjugaison %futur simple% d’%avoir% ou d
 
 "Info.conditionnelPasséText" = "`Utilisation`
 
-Le ~conditionnel passé~ est utilisé pour exprimer des énoncés hypothétiques. Une proposition contenant une conjugaison conditionnel-passé suit souvent une proposition ~si~ contenant une conjugaison plus-que-parfait.
+Le ~conditionnel passé~ est utilisé pour exprimer les énoncés hypothétiques. Une proposition contenant une conjugaison du conditionnel passé suit souvent une proposition ~si~ contenant une conjugaison du plus-que-parfait.
 
 Exemples :
 
@@ -973,7 +979,7 @@ Exemples :
 
 - Marcel Proust, Du côté de chez Swann
 
-« C’$EST$ un brave garçon, quoique nous $aYons$ $EU$ ensemble des difficultés. » = « C’est un bon garçon, bien que nous ayons rencontré des difficultés ensemble. »
+« C’$EST$ un brave garçon, quoique nous $aYons$ $EU$ ensemble des difficultés. » = « He’$S$ a good boy, though we experienced some difficulties together. »
 
 - Gustave Flaubert, Madame Bovary
 
@@ -1005,7 +1011,7 @@ Le subjonctif plus-que-parfait était formé de la conjugaison %subjonctif impar
 
 "Info.impératifPasséText" = "`Utiliser`
 
-L’~impératif passé~ indique qu’une action doit avoir lieu avant un moment, une action ou un événement futur. Comme impératif, l’impératif passé n’utilise que les conjugaisons 2s, 1p et 2p. ~Contrairement~ à l’impératif, l’impératif passé est rarement utilisé.
+L’~impératif passé~ indique qu’une action doit avoir lieu avant un moment, une action ou un événement futur. Tout comme l’impératif, l’impératif passé n’utilise que les conjugaisons 2s, 1p et 2p. ~Contrairement~ à l’impératif, l’impératif passé est rarement utilisé.
 
 Exemples :
 
@@ -1033,7 +1039,7 @@ L’impératif passé est formé de la conjugaison %impératif% d’%avoir% ou d
 
 ~Q :~ Pourquoi ~Conjuguer~ utilise-t-elle principalement des noms français pour les temps plutôt qu’anglais, par exemple, ~indicatif présent~ plutôt que ~present indicative~ ?
 
-~R :~ Certes, les noms au temps anglais seraient peut-être plus accessibles pour l’apprenant dans certains cas, par exemple, %radical futur%. Les anglophones pourraient mieux comprendre le terme ~future stem~. Mais peut-être à cause de ses années de travail en tant qu’avocat, le développeur de ~Conjuguer~ valorise la précision du langage. Les noms des temps anglais correspondent imparfaitement aux temps français. Par exemple, le ~present indicative~ anglais a des usages plus limités que le %indicatif présent% français. Le terme anglais est donc une correspondance imprécise pour le temps français.
+~R :~ Certes, les noms des temps anglais seraient peut-être plus accessibles pour l’apprenant dans certains cas, par exemple, %radical futur%. Les anglophones pourraient mieux comprendre le terme ~future stem~. Mais peut-être à cause de ses années de travail en tant qu’avocat, le développeur de ~Conjuguer~ valorise la précision du langage. Les noms des temps anglais correspondent imparfaitement aux temps français. Par exemple, le ~present indicative~ anglais a des usages plus limités que le %indicatif présent% français. Le terme anglais décrit donc mal le temps français.
 
 ~Q :~ J’ai vu les termes « mode » et « aspect » dans les descriptions des temps verbaux, mais ~Conjuguer~ n’utilise pas ces termes. De plus, le %participe passé%, le %participe présent% et le %futur radical% ne sont pas vraiment des temps.
 
@@ -1061,7 +1067,7 @@ Xavier Nègre a créé Lexilogos, une collection de dictionnaires français que 
 
 Franz Josef Och a conçu Google Translate, que le développeur de ~Conjuguer~ a utilisé pour traduire les définitions françaises des verbes qui étaient dans le Wiktionnaire français mais pas dans le Wiktionnaire anglais. URL : %https://translate.google.com%
 
-Machio Okada et Hitoshi Oguriso ont créé les Tableaux de conjugaison de l’ancien français, que ~Conjuguer~ utilise pour les conjugaisons de ester, gésir, issir et certains autres verbes défectifs. URL : %https://micmap.org/dicfro/introduction/tableaux-de-conjugaison%";
+Machio Okada et Hitoshi Oguriso ont créé les Tableaux de conjugaison de l’ancien français, que ~Conjuguer~ utilise pour les conjugaisons de %ester%, %gésir%, %issir% et certains autres verbes défectifs. URL : %https://micmap.org/dicfro/introduction/tableaux-de-conjugaison%";
 
 "Settings.quizDifficulty" = "Difficulté du quiz";
 "Settings.quizDifficultyDescription" = "Ce réglage détermine la difficulté des quiz. Vous voulez probablement Ordinaire.";
