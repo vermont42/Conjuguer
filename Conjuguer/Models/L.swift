@@ -10,479 +10,487 @@ import Foundation
 enum L {
   enum Navigation {
     static var verbs: String {
-      NSLocalizedString("Navigation.verbs", comment: "")
+      String(localized: "Navigation.verbs")
     }
 
     static var models: String {
-      NSLocalizedString("Navigation.models", comment: "")
+      String(localized: "Navigation.models")
     }
 
     static var quiz: String {
-      NSLocalizedString("Navigation.quiz", comment: "")
+      String(localized: "Navigation.quiz")
     }
 
     static var results: String {
-      NSLocalizedString("Navigation.results", comment: "")
+      String(localized: "Navigation.results")
     }
 
     static var info: String {
-      NSLocalizedString("Navigation.info", comment: "")
+      String(localized: "Navigation.info")
     }
 
     static var settings: String {
-      NSLocalizedString("Navigation.settings", comment: "")
+      String(localized: "Navigation.settings")
     }
 
     static var input: String {
-      NSLocalizedString("Navigation.input", comment: "")
+      String(localized: "Navigation.input")
     }
 
     static var back: String {
-      NSLocalizedString("Navigation.back", comment: "")
+      String(localized: "Navigation.back")
     }
   }
 
   enum VerbView {
     static var overview: String {
-      NSLocalizedString("VerbView.overview", comment: "")
+      String(localized: "VerbView.overview")
     }
 
     static var model: String {
-      NSLocalizedString("VerbView.model", comment: "")
+      String(localized: "VerbView.model")
     }
 
     static var reflexive: String {
-      NSLocalizedString("VerbView.reflexive", comment: "")
+      String(localized: "VerbView.reflexive")
     }
 
     static var aspiratedH: String {
-      NSLocalizedString("VerbView.aspiratedH", comment: "")
+      String(localized: "VerbView.aspiratedH")
     }
 
     static var auxiliaryÊtre: String {
-      NSLocalizedString("VerbView.auxiliaryÊtre", comment: "")
+      String(localized: "VerbView.auxiliaryÊtre")
     }
 
     static var auxiliaryAvoir: String {
-      NSLocalizedString("VerbView.auxiliaryAvoir", comment: "")
+      String(localized: "VerbView.auxiliaryAvoir")
     }
 
     static var frequency: String {
-      NSLocalizedString("VerbView.frequency", comment: "")
+      String(localized: "VerbView.frequency")
     }
 
     static var defective: String {
-      NSLocalizedString("VerbView.defective", comment: "")
+      String(localized: "VerbView.defective")
     }
 
     static var exampleUse: String {
-      NSLocalizedString("VerbView.exampleUse", comment: "")
+      String(localized: "VerbView.exampleUse")
     }
 
     static var personlessConjugations: String {
-      NSLocalizedString("VerbView.personlessConjugations", comment: "")
+      String(localized: "VerbView.personlessConjugations")
     }
 
     static var showCompoundTenses: String {
-      NSLocalizedString("VerbView.showCompoundTenses", comment: "")
+      String(localized: "VerbView.showCompoundTenses")
     }
   }
 
   enum ResultsView {
     static var correctWithColon: String {
-      NSLocalizedString("ResultsView.correctWithColon", comment: "")
+      String(localized: "ResultsView.correctWithColon")
     }
 
     static var timeWithColon: String {
-      NSLocalizedString("ResultsView.timeWithColon", comment: "")
+      String(localized: "ResultsView.timeWithColon")
     }
   }
 
   enum ModelView {
     static var parent: String {
-      NSLocalizedString("ModelView.parent", comment: "")
+      String(localized: "ModelView.parent")
     }
 
     static var defective: String {
-      NSLocalizedString("ModelView.defective", comment: "")
+      String(localized: "ModelView.defective")
     }
 
     static var endings: String {
-      NSLocalizedString("ModelView.endings", comment: "")
+      String(localized: "ModelView.endings")
     }
 
     static var stemAlterations: String {
-      NSLocalizedString("ModelView.stemAlterations", comment: "")
+      String(localized: "ModelView.stemAlterations")
     }
 
     static var regular: String {
-      NSLocalizedString("ModelView.regular", comment: "")
+      String(localized: "ModelView.regular")
     }
 
     static var irregular: String {
-      NSLocalizedString("ModelView.irregular", comment: "")
+      String(localized: "ModelView.irregular")
     }
 
     static var verbsUsing: String {
-      NSLocalizedString("ModelView.verbsUsing", comment: "")
+      String(localized: "ModelView.verbsUsing")
     }
 
     static var verbUsing: String {
-      NSLocalizedString("ModelView.verbUsing", comment: "")
+      String(localized: "ModelView.verbUsing")
     }
   }
 
   enum QuizView {
     static var start: String {
-      NSLocalizedString("QuizView.start", comment: "")
+      String(localized: "QuizView.start")
     }
 
     static var verbWithColon: String {
-      NSLocalizedString("QuizView.verbWithColon", comment: "")
+      String(localized: "QuizView.verbWithColon")
     }
 
     static var translationWithColon: String {
-      NSLocalizedString("QuizView.translationWithColon", comment: "")
+      String(localized: "QuizView.translationWithColon")
     }
 
     static var pronounWithColon: String {
-      NSLocalizedString("QuizView.pronounWithColon", comment: "")
+      String(localized: "QuizView.pronounWithColon")
     }
 
     static var tenseWithColon: String {
-      NSLocalizedString("QuizView.tenseWithColon", comment: "")
+      String(localized: "QuizView.tenseWithColon")
     }
 
     static var progressWithColon: String {
-      NSLocalizedString("QuizView.progressWithColon", comment: "")
+      String(localized: "QuizView.progressWithColon")
     }
 
     static var scoreWithColon: String {
-      NSLocalizedString("QuizView.scoreWithColon", comment: "")
+      String(localized: "QuizView.scoreWithColon")
     }
 
     static var elapsedWithColon: String {
-      NSLocalizedString("QuizView.elapsedWithColon", comment: "")
+      String(localized: "QuizView.elapsedWithColon")
     }
 
     static var conjugation: String {
-      NSLocalizedString("QuizView.conjugation", comment: "")
+      String(localized: "QuizView.conjugation")
     }
 
     static var quit: String {
-      NSLocalizedString("QuizView.quit", comment: "")
+      String(localized: "QuizView.quit")
     }
 
     static var gameCenterFailure: String {
-      NSLocalizedString("QuizView.gameCenterFailure", comment: "")
+      String(localized: "QuizView.gameCenterFailure")
     }
 
     static var none: String {
-      NSLocalizedString("QuizView.none", comment: "")
+      String(localized: "QuizView.none")
     }
 
     static var quizComplete: String {
-      NSLocalizedString("QuizView.quizComplete", comment: "")
+      String(localized: "QuizView.quizComplete")
     }
 
     static var cool: String {
-      NSLocalizedString("QuizView.cool", comment: "")
+      String(localized: "QuizView.cool")
     }
   }
 
   enum Info {
     static var dedicationHeading: String {
-      NSLocalizedString("Info.dedicationHeading", comment: "")
+      String(localized: "Info.dedicationHeading")
     }
 
     static var dedicationText: String {
-      NSLocalizedString("Info.dedicationText", comment: "")
+      String(localized: "Info.dedicationText")
+    }
+
+    static var valuePropositionHeading: String {
+      String(localized: "Info.valuePropositionHeading")
+    }
+
+    static var valuePropositionText: String {
+      String(localized: "Info.valuePropositionText")
     }
 
     static var purposeAndUseHeading: String {
-      NSLocalizedString("Info.purposeAndUseHeading", comment: "")
+      String(localized: "Info.purposeAndUseHeading")
     }
 
     static var purposeAndUseText: String {
-      NSLocalizedString("Info.purposeAndUseText", comment: "")
+      String(localized: "Info.purposeAndUseText")
     }
 
     static var terminologyHeading: String {
-      NSLocalizedString("Info.terminologyHeading", comment: "")
+      String(localized: "Info.terminologyHeading")
     }
 
     static var terminologyText: String {
-      NSLocalizedString("Info.terminologyText", comment: "")
+      String(localized: "Info.terminologyText")
     }
 
     static var defectivenessHeading: String {
-      NSLocalizedString("Info.defectivenessHeading", comment: "")
+      String(localized: "Info.defectivenessHeading")
     }
 
     static var defectivenessText: String {
-      NSLocalizedString("Info.defectivenessText", comment: "")
+      String(localized: "Info.defectivenessText")
     }
 
     static var participePasséHeading: String {
-      NSLocalizedString("Info.participePasséHeading", comment: "")
+      String(localized: "Info.participePasséHeading")
     }
 
     static var participePasséText: String {
-      NSLocalizedString("Info.participePasséText", comment: "")
+      String(localized: "Info.participePasséText")
     }
 
     static var participePrésentHeading: String {
-      NSLocalizedString("Info.participePrésentHeading", comment: "")
+      String(localized: "Info.participePrésentHeading")
     }
 
     static var participePrésentText: String {
-      NSLocalizedString("Info.participePrésentText", comment: "")
+      String(localized: "Info.participePrésentText")
     }
 
     static var radicalFuturHeading: String {
-      NSLocalizedString("Info.radicalFuturHeading", comment: "")
+      String(localized: "Info.radicalFuturHeading")
     }
 
     static var radicalFuturText: String {
-      NSLocalizedString("Info.radicalFuturText", comment: "")
+      String(localized: "Info.radicalFuturText")
     }
 
     static var irregularitiesHeading: String {
-      NSLocalizedString("Info.irregularitiesHeading", comment: "")
+      String(localized: "Info.irregularitiesHeading")
     }
 
     static var irregularitiesText: String {
-      NSLocalizedString("Info.irregularitiesText", comment: "")
+      String(localized: "Info.irregularitiesText")
     }
 
     static var indicatifPrésentHeading: String {
-      NSLocalizedString("Info.indicatifPrésentHeading", comment: "")
+      String(localized: "Info.indicatifPrésentHeading")
     }
 
     static var indicatifPrésentText: String {
-      NSLocalizedString("Info.indicatifPrésentText", comment: "")
+      String(localized: "Info.indicatifPrésentText")
     }
 
     static var passéSimpleHeading: String {
-      NSLocalizedString("Info.passéSimpleHeading", comment: "")
+      String(localized: "Info.passéSimpleHeading")
     }
 
     static var passéSimpleText: String {
-      NSLocalizedString("Info.passéSimpleText", comment: "")
+      String(localized: "Info.passéSimpleText")
     }
 
     static var imparfaitHeading: String {
-      NSLocalizedString("Info.imparfaitHeading", comment: "")
+      String(localized: "Info.imparfaitHeading")
     }
 
     static var imparfaitText: String {
-      NSLocalizedString("Info.imparfaitText", comment: "")
+      String(localized: "Info.imparfaitText")
     }
 
     static var futurSimpleHeading: String {
-      NSLocalizedString("Info.futurSimpleHeading", comment: "")
+      String(localized: "Info.futurSimpleHeading")
     }
 
     static var futurSimpleText: String {
-      NSLocalizedString("Info.futurSimpleText", comment: "")
+      String(localized: "Info.futurSimpleText")
     }
 
     static var conditionnelPrésentHeading: String {
-      NSLocalizedString("Info.conditionnelPrésentHeading", comment: "")
+      String(localized: "Info.conditionnelPrésentHeading")
     }
 
     static var conditionnelPrésentText: String {
-      NSLocalizedString("Info.conditionnelPrésentText", comment: "")
+      String(localized: "Info.conditionnelPrésentText")
     }
 
     static var subjonctifPrésentHeading: String {
-      NSLocalizedString("Info.subjonctifPrésentHeading", comment: "")
+      String(localized: "Info.subjonctifPrésentHeading")
     }
 
     static var subjonctifPrésentText: String {
-      NSLocalizedString("Info.subjonctifPrésentText", comment: "")
+      String(localized: "Info.subjonctifPrésentText")
     }
 
     static var subjonctifImparfaitHeading: String {
-      NSLocalizedString("Info.subjonctifImparfaitHeading", comment: "")
+      String(localized: "Info.subjonctifImparfaitHeading")
     }
 
     static var subjonctifImparfaitText: String {
-      NSLocalizedString("Info.subjonctifImparfaitText", comment: "")
+      String(localized: "Info.subjonctifImparfaitText")
     }
 
     static var impératifHeading: String {
-      NSLocalizedString("Info.impératifHeading", comment: "")
+      String(localized: "Info.impératifHeading")
     }
 
     static var impératifText: String {
-      NSLocalizedString("Info.impératifText", comment: "")
+      String(localized: "Info.impératifText")
     }
 
     static var passéComposéHeading: String {
-      NSLocalizedString("Info.passéComposéHeading", comment: "")
+      String(localized: "Info.passéComposéHeading")
     }
 
     static var passéComposéText: String {
-      NSLocalizedString("Info.passéComposéText", comment: "")
+      String(localized: "Info.passéComposéText")
     }
 
     static var plusQueParfaitHeading: String {
-      NSLocalizedString("Info.plusQueParfaitHeading", comment: "")
+      String(localized: "Info.plusQueParfaitHeading")
     }
 
     static var plusQueParfaitText: String {
-      NSLocalizedString("Info.plusQueParfaitText", comment: "")
+      String(localized: "Info.plusQueParfaitText")
     }
 
     static var passéAntérieurHeading: String {
-      NSLocalizedString("Info.passéAntérieurHeading", comment: "")
+      String(localized: "Info.passéAntérieurHeading")
     }
 
     static var passéAntérieurText: String {
-      NSLocalizedString("Info.passéAntérieurText", comment: "")
+      String(localized: "Info.passéAntérieurText")
     }
 
     static var passéSurcomposéHeading: String {
-      NSLocalizedString("Info.passéSurcomposéHeading", comment: "")
+      String(localized: "Info.passéSurcomposéHeading")
     }
 
     static var passéSurcomposéText: String {
-      NSLocalizedString("Info.passéSurcomposéText", comment: "")
+      String(localized: "Info.passéSurcomposéText")
     }
 
     static var futurAntérieurHeading: String {
-      NSLocalizedString("Info.futurAntérieurHeading", comment: "")
+      String(localized: "Info.futurAntérieurHeading")
     }
 
     static var futurAntérieurText: String {
-      NSLocalizedString("Info.futurAntérieurText", comment: "")
+      String(localized: "Info.futurAntérieurText")
     }
 
     static var conditionnelPasséHeading: String {
-      NSLocalizedString("Info.conditionnelPasséHeading", comment: "")
+      String(localized: "Info.conditionnelPasséHeading")
     }
 
     static var conditionnelPasséText: String {
-      NSLocalizedString("Info.conditionnelPasséText", comment: "")
+      String(localized: "Info.conditionnelPasséText")
     }
 
     static var subjonctifPasséHeading: String {
-      NSLocalizedString("Info.subjonctifPasséHeading", comment: "")
+      String(localized: "Info.subjonctifPasséHeading")
     }
 
     static var subjonctifPasséText: String {
-      NSLocalizedString("Info.subjonctifPasséText", comment: "")
+      String(localized: "Info.subjonctifPasséText")
     }
 
     static var subjonctifPlusQueParfaitHeading: String {
-      NSLocalizedString("Info.subjonctifPlusQueParfaitHeading", comment: "")
+      String(localized: "Info.subjonctifPlusQueParfaitHeading")
     }
 
     static var subjonctifPlusQueParfaitText: String {
-      NSLocalizedString("Info.subjonctifPlusQueParfaitText", comment: "")
+      String(localized: "Info.subjonctifPlusQueParfaitText")
     }
 
     static var impératifPasséHeading: String {
-      NSLocalizedString("Info.impératifPasséHeading", comment: "")
+      String(localized: "Info.impératifPasséHeading")
     }
 
     static var impératifPasséText: String {
-      NSLocalizedString("Info.impératifPasséText", comment: "")
+      String(localized: "Info.impératifPasséText")
     }
 
     static var questionsAndResponsesHeading: String {
-      NSLocalizedString("Info.questionsAndResponsesHeading", comment: "")
+      String(localized: "Info.questionsAndResponsesHeading")
     }
 
     static var questionsAndResponsesText: String {
-      NSLocalizedString("Info.questionsAndResponsesText", comment: "")
+      String(localized: "Info.questionsAndResponsesText")
     }
 
     static var creditsHeading: String {
-      NSLocalizedString("Info.creditsHeading", comment: "")
+      String(localized: "Info.creditsHeading")
     }
 
     static var creditsText: String {
-      NSLocalizedString("Info.creditsText", comment: "")
+      String(localized: "Info.creditsText")
     }
   }
 
   enum Settings {
     static var quizDifficulty: String {
-      NSLocalizedString("Settings.quizDifficulty", comment: "")
+      String(localized: "Settings.quizDifficulty")
     }
 
     static var quizDifficultyDescription: String {
-      NSLocalizedString("Settings.quizDifficultyDescription", comment: "")
+      String(localized: "Settings.quizDifficultyDescription")
     }
 
     static var pronounGender: String {
-      NSLocalizedString("Settings.pronounGender", comment: "")
+      String(localized: "Settings.pronounGender")
     }
 
     static var pronounGenderDescription: String {
-      NSLocalizedString("Settings.pronounGenderDescription", comment: "")
+      String(localized: "Settings.pronounGenderDescription")
     }
   }
 
   enum QuizDifficulty {
     static var regular: String {
-      NSLocalizedString("QuizDifficulty.regular", comment: "")
+      String(localized: "QuizDifficulty.regular")
     }
 
     static var ridiculous: String {
-      NSLocalizedString("QuizDifficulty.ridiculous", comment: "")
+      String(localized: "QuizDifficulty.ridiculous")
     }
 
     static var regularDifficulty: String {
-      NSLocalizedString("QuizDifficulty.regularDifficulty", comment: "")
+      String(localized: "QuizDifficulty.regularDifficulty")
     }
 
     static var ridiculousDifficulty: String {
-      NSLocalizedString("QuizDifficulty.ridiculousDifficulty", comment: "")
+      String(localized: "QuizDifficulty.ridiculousDifficulty")
     }
   }
 
   enum PronounGender {
     static var feminine: String {
-      NSLocalizedString("PronounGender.feminine", comment: "")
+      String(localized: "PronounGender.feminine")
     }
 
     static var masculine: String {
-      NSLocalizedString("PronounGender.masculine", comment: "")
+      String(localized: "PronounGender.masculine")
     }
 
     static var both: String {
-      NSLocalizedString("PronounGender.both", comment: "")
+      String(localized: "PronounGender.both")
     }
 
     static var feminineAbbreviation: String {
-      NSLocalizedString("PronounGender.feminineAbbreviation", comment: "")
+      String(localized: "PronounGender.feminineAbbreviation")
     }
 
     static var masculineAbbreviation: String {
-      NSLocalizedString("PronounGender.masculineAbbreviation", comment: "")
+      String(localized: "PronounGender.masculineAbbreviation")
     }
   }
 
   static func displayNameForVerbSort(_ sort: VerbSort) -> String {
     switch sort {
     case .frequency:
-      return NSLocalizedString("VerbSort.frequency", comment: "")
-    case .alphabetic:
-      return NSLocalizedString("VerbSort.alphabetic", comment: "")
+      return String(localized: "VerbSort.frequency")
+    case .alphabetical:
+      return String(localized: "alphabetical")
     }
   }
 
   static func displayNameForModelSort(_ sort: ModelSort) -> String {
     switch sort {
     case .irregularity:
-      return NSLocalizedString("ModelSort.irregularity", comment: "")
-    case .alphabetic:
-      return NSLocalizedString("ModelSort.alphabetic", comment: "")
+      return String(localized: "ModelSort.irregularity")
+    case .alphabetical:
+      return String(localized: "alphabetical")
     case .identifier:
-      return NSLocalizedString("ModelSort.identifier", comment: "")
+      return String(localized: "ModelSort.identifier")
     }
   }
 }

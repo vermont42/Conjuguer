@@ -126,7 +126,7 @@ final class ModelStore: ObservableObject {
     switch modelSort {
     case .irregularity:
       modelsAndDecorators = irregularityModelsAndDecorators
-    case .alphabetic:
+    case .alphabetical:
       modelsAndDecorators = alphabeticModelsAndDecorators
     case .identifier:
       modelsAndDecorators = identifierModelsAndDecorators
@@ -140,7 +140,7 @@ final class ModelStore: ObservableObject {
       switch modelSort {
       case .irregularity:
         modelsAndDecorators = irregularityModelsAndDecorators
-      case .alphabetic:
+      case .alphabetical:
         modelsAndDecorators = alphabeticModelsAndDecorators
       case .identifier:
         modelsAndDecorators = identifierModelsAndDecorators

@@ -127,7 +127,7 @@ final class VerbStore: ObservableObject {
     switch verbSort {
     case .frequency:
       verbs = frequencyVerbs
-    case .alphabetic:
+    case .alphabetical:
       verbs = alphabeticVerbs
     }
   }
@@ -139,7 +139,7 @@ final class VerbStore: ObservableObject {
       switch verbSort {
       case .frequency:
         verbs = frequencyVerbs
-      case .alphabetic:
+      case .alphabetical:
         verbs = alphabeticVerbs
       }
     }

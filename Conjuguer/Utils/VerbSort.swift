@@ -9,14 +9,14 @@ import Foundation
 
 enum VerbSort: String, CaseIterable {
   case frequency
-  case alphabetic
+  case alphabetical
 
   var displayName: String {
     switch self {
     case .frequency:
       return "Frequency"
-    case .alphabetic:
-      return "Alphabetic"
+    case .alphabetical:
+      return "Alphabetical"
     }
   }
 }

@@ -31,7 +31,7 @@ struct MainTabView: View {
       QuizView()
         .environmentObject(quiz)
         .tabItem({
-            Image(systemName: "square.and.pencil")
+            Image(systemName: "pencil.circle.fill")
             Text(L.Navigation.quiz)
           }
         )

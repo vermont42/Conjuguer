@@ -5,6 +5,8 @@
   Created by Josh Adams on 8/1/21.
 */
 
+"alphabetical" = "Alphabétique";
+
 "Navigation.verbs" = "Verbes";
 "Navigation.models" = "Modèles";
 "Navigation.quiz" = "Quiz";
@@ -55,11 +57,27 @@
 
 "Info.dedicationHeading" = "Dédicace";
 
-"Info.dedicationText" = "David Compton était mon entraîneur de ski nordique au lycée. Il était aussi professeur de français mais pas initialement ~mon~ professeur de français. Il était cependant conscient de mon intérêt et de mes aptitudes pour le français. Au début de ma troisième année, je n’allais pas pouvoir suivre un cours de français à cause d’un conflit d’horaire avec Advanced Placement English. Alors M. Compton a créé un cours de littérature française de cinq jours par semaine juste pour moi. Un étudiant d’échange allemand nommé Julian Peters nous a bientôt rejoints. En utilisant comme manuels les tomes I et II d’ « Anthologie de la littérature française » de Robert Leggewie, nous avons étudié les grands de la littérature française de Chrétien de Troyes à Samuel Beckett. Cette étude littéraire a finalement inspiré l’utilisation par ~Conjuguer~ d’exemples littéraires d’usage des temps. J’ai beaucoup apprécié le cours de M. Compton et ma connaissance du français s’est énormément augmentée. À la fin de l’année, j’ai obtenu un score maximum au test de français Advanced Placement. Au début de ma première année à Dartmouth College, j’ai passé un test pour obtenir un crédit pour un cours de français de niveau specialisé et, sur les soixante étudiants de première année qui ont passé le test, j’étais l’un des trois à réussir.
+"Info.dedicationText" = "David Compton était mon entraîneur de ski nordique au lycée. Il était aussi professeur de français mais pas initialement ~mon~ professeur de français. Il était cependant conscient de mon intérêt et de mes aptitudes pour le français. Au début de ma troisième année, je n’allais pas pouvoir suivre un cours de français à cause d’un conflit d’horaire avec Advanced Placement English. Alors M. Compton a créé un cours de littérature française de cinq jours par semaine juste pour moi. Un étudiant d’échange allemand nommé Julian Peters nous a bientôt rejoints. En utilisant comme manuels les tomes I et II d’ « Anthologie de la littérature française » de Robert Leggewie, nous avons étudié les grands de la littérature française de Chrétien de Troyes à Samuel Beckett. Cette étude littéraire a finalement inspiré l’utilisation par ~Conjuguer~ d’exemples littéraires d’usage des temps. J’ai beaucoup apprécié le cours de M. Compton et ma connaissance du français s’est énormément améliorée. À la fin de l’année, j’ai obtenu un score maximum au test de français Advanced Placement. Au début de ma première année à Dartmouth College, j’ai passé un test pour obtenir un crédit pour un cours de français de niveau spécialisé et, sur les soixante étudiants de première année qui ont passé le test, j’étais l’un des trois à réussir.
 
 M. Compton avait déjà un horaire de cours complet à l’automne 1991, lorsqu’il a créé le cours pour moi. Il aurait peut-être aimé passer cette période de classe à tirer sur sa pipe à tabac ou à bricoler son ordinateur Macintosh. Ado solipsiste que j’étais, je ne lui ai jamais demandé ~pourquoi~ il avait sacrifié ce temps pour moi. Mais je peux spéculer. Il a étudié à la Sorbonne dans les années 1960 et était francophile. Il a peut-être reconnu en moi un intérêt commun pour le français et a voulu me donner l’opportunité de le poursuivre dans toute la mesure du possible. Quelle que soit sa motivation, je lui en suis reconnaissant et lui dédie cette application.
 
 Grâce à M. Compton, le nom de ~Conjuguer~ est correctement orthographié. Au cours de ma première année au Dartmouth College, j’ai développé le prédécesseur de ~Conjuguer~, ~Le Conjugateur~, une pile HyperCard. Lors d’une pause scolaire, j’ai démontré ~Le Conjugateur~ à M. Compton. Il a été impressionné mais a commenté que j’épelais systématiquement le mot français « conjuguer » comme « conjuger ». Une correction rapide s’est ensuivi et a duré.";
+
+"Info.valuePropositionHeading" = "Proposition de valeur";
+
+"Info.valuePropositionText" = "~Conjuguer~ est une application pour apprendre les conjugaisons des verbes français.
+
+~Conjuguer~ conjugue 5.217 verbes français réguliers et 1.097 verbes français irréguliers à ~tous~ les temps.
+
+Chaque verbe français a une traduction anglaise. En effet, réaliser en a huit !
+
+Chaque temps est décrit en détail, avec des exemples d’utilisation des classiques de la littérature française, dont « La chanson de Roland » et « À la recherche du temps perdu ».
+
+~Conjuguer~ a des conjugaisons ~complètes~ pour soixante-six verbes français défectueux, y compris des verbes exotiques comme ester, issir et gésir.
+
+~Conjuguer~ a des classements de fréquence d'utilisation pour les 981 premiers verbes français, d’être à ancrer. Ces classements peuvent aider à concentrer l'étude du vocabulaire.
+
+~Conjuguer~ comprend un mode quiz pour gamifier l’étude des verbes. Les résultats des quiz sont disponibles dans Game Center™.";
 
 "Info.terminologyHeading" = "Terminologie";
 
@@ -77,7 +95,7 @@ Le ~radical de l’infinitif~ est l’infinitif moins sa terminaison -er, -ir ou
 
 Un ~pronom~ sujet est un mot qui remplace le sujet d’une phrase. Le sujet est l’acteur. En anglais, les pronoms sujets les plus répandus sont ~I~, ~you~, ~he/she/it/one~, ~we~, ~you/y’all~ et ~they~. Les pronoms sujets anglais ~ye~ et ~thou~ sont en déclin depuis la période élisabéthaine.
 
-Les pronoms sujets correspondent au ~singulier~ ou au ~pluriel~ et à la ~première personne~, ~deuxième personne~ ou ~troisième personne~. Les pronoms sujets anglais suivent. Les abréviations des combinaisons personne-numéro sont entre parenthèses.
+Les pronoms sujets correspondent au ~singulier~ ou au ~pluriel~ et à la ~première personne~, ~deuxième personne~ ou ~troisième personne~. Les pronoms sujets anglais suivent. Les abréviations des combinaisons personne-numéroes sont entre parenthèses.
 
 première personne, singulier (1s) : ~I~
 deuxième personne, singulier (2s) : ~you~
@@ -163,14 +181,14 @@ Voici comment les temps sont représentés dans les altérations :
 pp : participe passé
 rr : participe présent
 sf : radical futur
-r1s, r2s, r3s, r1p, r2p, r3p : six numéros-personnes de l’indicatif présent
-b1s, b2s, b3s, b1p, b2p, b3p : six numéros-personnes du subjonctif présent
-x1s, x2s, x3s, x1p, x2p, x3p : six numéros-personnes du passé simple
-i1s, i2s, i3s, i1p, i2p, i3p : six numéros-personnes de l’imparfait
-q1s, q2s, q3s, q1p, q2p, q3p : six numéros-personnes du subjonctif imparfait
-h2s, hlp, h2p : trois nombres-personnes de l’impératif
+r1s, r2s, r3s, r1p, r2p, r3p : six personne-numéros de l’indicatif présent
+b1s, b2s, b3s, b1p, b2p, b3p : six personne-numéros du subjonctif présent
+x1s, x2s, x3s, x1p, x2p, x3p : six personne-numéros du passé simple
+i1s, i2s, i3s, i1p, i2p, i3p : six personne-numéros de l’imparfait
+q1s, q2s, q3s, q1p, q2p, q3p : six personne-numéros du subjonctif imparfait
+h2s, hlp, h2p : trois personne-numéros de l’impératif
 
-Le numéro-personne ~A~ signifie « tous les six ». Par exemple, xA est équivalent à x1s, x2s, x3s, x1p, x2p, x3p. De même, rA est équivalent à r1s, r2s, r3s, r1p, r2p, r3p.
+La personne-numéro ~A~ signifie « tous les six ». Par exemple, xA est équivalent à x1s, x2s, x3s, x1p, x2p, x3p. De même, rA est équivalent à r1s, r2s, r3s, r1p, r2p, r3p.
 
 Par exemple, le modèle d’avoir, 4-10, a l’altération suivante :
 
@@ -198,9 +216,9 @@ Le participe passé est $Pu$.";
 
 Soixante-cinq verbes français sont ~défectifs~. Cela ne veut pas dire que quelque chose ne va pas chez eux. Non, défectifs dans ce contexte signifie que ces verbes manquent de certaines ou même de toutes les conjugaisons. Les verbes peuvent être considérés comme défectifs pour diverses raisons.
 
-1. L’utilisation de certaines personnes-numéros serait absurde. Par exemple, « je $fAUX$ que tu restes » signifierait ~littéralement~ « I $AM$ necessary that you stay ». %Falloir% est donc défectif pour tous les personnes-numéros sauf la 3s. « Il $faUt$ que tu restes » est logique et signifie « it $IS$ necessary that you stay ».
+1. L’utilisation de certaines personne-numéros serait absurde. Par exemple, « je $fAUX$ que tu restes » signifierait ~littéralement~ « I $AM$ necessary that you stay ». %Falloir% est donc défectif pour tous les personne-numéros sauf la 3s. « Il $faUt$ que tu restes » est logique et signifie « it $IS$ necessary that you stay ».
 
-2. Certains verbes sont impersonnels. Cela ne veut pas dire qu’ils manquent de l’humanité. Non, impersonnel dans ce contexte signifie que leur sujet est, en anglais, « it » générique ou, en français, « il » générique. Ces verbes impliquent des phénomènes naturels comme la neige, la grêle, le grésil et la pluie. « Il $pleuT$. » = « It $IS$ raining. » En raison des sujets « il » habituels, ces verbes sont considérés comme défectifs pour les personnes-numéros autres que la 3s. Il existe cependant une ~certaine~ flexibilité. Citant et traduisant Voltaire, « Les calomnies pleuvent sur quiconque réussit. » = « Calumnies rain on whoever succeeds. » On pourrait imaginer d’autres personnes-numéros utilisées pour des verbes impersonnels dans la poésie. Par exemple, dans un poème écrit du point de vue de la nature, le pronom et la conjugaison « je neige », signifiant « I $AM$ snowing », auraient du sens.
+2. Certains verbes sont impersonnels. Cela ne veut pas dire qu’ils manquent de l’humanité. Non, impersonnel dans ce contexte signifie que leur sujet est, en anglais, « it » générique ou, en français, « il » générique. Ces verbes impliquent des phénomènes naturels comme la neige, la grêle, le grésil et la pluie. « Il $pleuT$. » = « It $IS$ raining. » En raison des sujets « il » habituels, ces verbes sont considérés comme défectifs pour les personne-numéros autres que la 3s. Il existe cependant une ~certaine~ flexibilité. Citant et traduisant Voltaire, « Les calomnies pleuvent sur quiconque réussit. » = « Calumnies rain on whoever succeeds. » On pourrait imaginer d’autres personne-numéros utilisées pour des verbes impersonnels dans la poésie. Par exemple, dans un poème écrit du point de vue de la nature, le pronom et la conjugaison « je neige », signifiant « I $AM$ snowing », auraient du sens.
 
 3. Certains verbes sont défectifs à certains temps afin d’éviter toute confusion avec la conjugaison d’autres verbes. Par exemple, %paître% est défectif au %passé simple% car les conjugaisons proposées par analogie avec %connaître%, $Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$ et $Purent$, sont identiques aux conjugaisons passé-simples de %pouvoir%.
 
@@ -815,7 +833,7 @@ Exemples :
 
 `Conjugaison`
 
-Contrairement à la plupart des autres temps, l’impératif n’utilise que trois combinaisons personne-numéro : 2s, 1p et 2p. Hormis quatre verbs exceptionnels, les conjugaisons 1p et 2p de l’impératif sont identiques à leurs homologues de l’indicatif présent.
+Contrairement à la plupart des autres temps, l’impératif n’utilise que trois combinaisons personne-numéroes : 2s, 1p et 2p. Hormis quatre verbs exceptionnels, les conjugaisons 1p et 2p de l’impératif sont identiques à leurs homologues de l’indicatif présent.
 
 Les conjugaisons 2s sont également identiques à leurs homologues de l’indicatif présent sauf que, si le verbe utilise les terminaisons de l’indicatif présent e, es, e, ons, ez et ent, le s est supprimé de la conjugaison 2s impérative. Exemples :
 
@@ -1070,7 +1088,7 @@ Franz Josef Och a conçu Google Translate, que le développeur de ~Conjuguer~ a 
 Machio Okada et Hitoshi Oguriso ont créé les Tableaux de conjugaison de l’ancien français, que ~Conjuguer~ utilise pour les conjugaisons de %ester%, %gésir%, %issir% et certains autres verbes défectifs. URL : %https://micmap.org/dicfro/introduction/tableaux-de-conjugaison%";
 
 "Settings.quizDifficulty" = "Difficulté du quiz";
-"Settings.quizDifficultyDescription" = "Ce réglage détermine la difficulté des quiz. Vous voulez probablement Ordinaire.";
+"Settings.quizDifficultyDescription" = "Ce réglage détermine la difficulté des quiz. Vous voulez probablement Ordinaire parce que Ridicule comprend des temps et des verbes qui ne sont pas d’un usage répandu.";
 "Settings.pronounGender" = "Genres des pronoms";
 "Settings.pronounGenderDescription" = "Ce réglage détermine les genres des pronoms, ce qui est important pour certaines conjugaisons aux temps composés. « Les deux » signifie que les pronoms singuliers sont féminins et que les pronoms pluriels sont masculins.";
 
@@ -1086,8 +1104,6 @@ Machio Okada et Hitoshi Oguriso ont créé les Tableaux de conjugaison de l’an
 "PronounGender.masculineAbbreviation" = "masc.";
 
 "VerbSort.frequency" = "Fréquence";
-"VerbSort.alphabetic" = "Alphabétique";
 
 "ModelSort.irregularity" = "Irrégularité";
-"ModelSort.alphabetic" = "Alphabétique";
 "ModelSort.identifier" = "Identifiant";

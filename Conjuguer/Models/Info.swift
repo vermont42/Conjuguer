@@ -25,6 +25,7 @@ struct Info: Hashable {
 
   static let infos: [Info] = [
     Info(heading: L.Info.dedicationHeading, text: L.Info.dedicationText, imageName: "Compton"),
+    Info(heading: L.Info.valuePropositionHeading, text: L.Info.valuePropositionText),
     Info(heading: L.Info.terminologyHeading, text: L.Info.terminologyText),
     Info(heading: L.Info.irregularitiesHeading, text: L.Info.irregularitiesText),
     Info(heading: L.Info.defectivenessHeading, text: L.Info.defectivenessText),

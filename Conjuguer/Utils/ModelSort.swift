@@ -9,6 +9,6 @@ import Foundation
 
 enum ModelSort: String, CaseIterable {
   case irregularity = "Irregularity"
-  case alphabetic = "Alphabetic"
+  case alphabetical = "Alphabetical"
   case identifier = "Identifier"
 }

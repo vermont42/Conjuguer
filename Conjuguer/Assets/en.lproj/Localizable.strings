@@ -5,6 +5,8 @@
   Created by Josh Adams on 8/1/21.
 */
 
+"alphabetical" = "Alphabetical";
+
 "Navigation.verbs" = "Verbs";
 "Navigation.models" = "Models";
 "Navigation.quiz" = "Quiz";
@@ -61,6 +63,22 @@ Mr. Compton already had a full class schedule in the fall of 1991, when he creat
 
 Thanks to Mr. Compton, the name of ~Conjuguer~ is correctly spelled. During my freshman year at Dartmouth College, I developed the predecessor to ~Conjuguer~, ~Le Conjugateur~, a HyperCard stack. During a break from school, I demonstrated ~Le Conjugateur~ to Mr. Compton. He was impressed but commented that I was consistently misspelling the French word for “conjugate”, “conjuguer”, as “conjuger”. A rapid correction ensued and endured.";
 
+"Info.valuePropositionHeading" = "Value Proposition";
+
+"Info.valuePropositionText" = "~Conjuguer~ is an app for learning French verb conjugations.
+
+~Conjuguer~ conjugates 5,217 regular French verbs and 1,097 irregular French verbs in ~all~ tenses.
+
+Every French verb has an English translation. In fact, réaliser has eight!
+
+Every tense is fully described, with sample uses from the classics of French literature, including “La chanson de Roland” and “À la recherche du temps perdu”.
+
+~Conjuguer~ has ~full~ conjugations for sixty-six defective French verbs, including exotic ones like ester, issir, and gésir.
+
+~Conjuguer~ has frequency-of-use rankings for the top 981 French verbs, from être to ancrer. These rankings can help focus vocabulary study.
+
+~Conjuguer~ includes a quiz mode for gamifying study. Quiz results are available in Game Center™.";
+
 "Info.terminologyHeading" = "Terminology";
 
 "Info.terminologyText" = "`Verb`
@@ -110,13 +128,13 @@ Red letters in conjugations represent irregularities. A verb is considered irreg
 
 "Info.irregularitiesHeading" = "Irregularities";
 
-"Info.irregularitiesText" = "Of the 6,314 verbs in ~Conjuguer~, 5,217 have conjugations that are completely regular. A completely regular conjuguation uses the radical de l’infinitif as its stem, and the ending is completely predictable. These are verbs that are conjugated using verb models 1-1 (regular -er), 2-1 (regular -ir), and 5-1A (regular -re). Examples:
+"Info.irregularitiesText" = "Of the 6,314 verbs in ~Conjuguer~, 5,217 have conjugations that are completely regular. A completely regular conjugation uses the radical de l’infinitif as its stem, and the ending is completely predictable. These are verbs that are conjugated using verb models 1-1 (regular -er), 2-1 (regular -ir), and 5-1A (regular -re). Examples:
 
 cacaber -> vous cacabâtes
 alunir -> nous alunissons
 épandre -> épandu
 
-The other 1,097 verbs are conjugated using one of ninty-two irregular-verb models. Verb models exhibit irregularities in three ways.
+The other 1,097 verbs are conjugated using one of ninety-two irregular-verb models. Verb models exhibit irregularities in three ways.
 
 First, the stem used differs from the radical de l’infinitif, but the ending is predictable. Example:
 
@@ -370,7 +388,7 @@ The ~radical futur~ (future stem) has two uses:
 
 `Form`
 
-For most verbs, the radical futur is identical the infinitif. The final -e is dropped from -re verbs. Examples:
+For most verbs, the radical futur is identical to the infinitif. The final -e is dropped from -re verbs. Examples:
 
 %finir% -> finir-
 %parler% -> parler-
@@ -747,7 +765,7 @@ Examples:
 
 "Info.subjonctifImparfaitText" = "`Use`
 
-The ~subjonctif imparfait~ (imperfect subjunctive) was used following the conjunctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, and ~sans que~ when the main clause used %passé simple% or %imparfait%. Use of the subjonctif imparfait is rare in contemporary French.
+The ~subjonctif imparfait~ (imperfect subjunctive) was used following the conjunctions ~à condition que~, ~afin que~, ~à moins que~, ~de peur que~, ~pour que~, ~pourvu que~, ~quoique~, and ~sans que~ when the main clause used the %passé simple% or %imparfait%. Use of the subjonctif imparfait is rare in contemporary French.
 
 Examples:
 
@@ -1070,7 +1088,7 @@ Franz Josef Och architected Google Translate, which ~Conjuguer~’s developer us
 Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’ancien français, which ~Conjuguer~ uses for conjugation of %ester%, %gésir%, %issir%, and certain other defective verbs. URL: %https://micmap.org/dicfro/introduction/tableaux-de-conjugaison%";
 
 "Settings.quizDifficulty" = "Quiz Difficulty";
-"Settings.quizDifficultyDescription" = "This setting determines the difficulty of quizzes. You probably want Regular.";
+"Settings.quizDifficultyDescription" = "This setting determines the difficulty of quizzes. You probably want Regular because Ridiculous includes tenses and verbs that are not in widespread use.";
 "Settings.pronounGender" = "Pronoun Gender";
 "Settings.pronounGenderDescription" = "This setting determines pronoun gender, which matters for certain compound-tense conjugations. “Both” means that singular pronouns are feminine and that plural pronouns are masculine.";
 
@@ -1086,8 +1104,6 @@ Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’anci
 "PronounGender.masculineAbbreviation" = "masc.";
 
 "VerbSort.frequency" = "Frequency";
-"VerbSort.alphabetic" = "Alphabetic";
 
 "ModelSort.irregularity" = "Irregularity";
-"ModelSort.alphabetic" = "Alphabetic";
 "ModelSort.identifier" = "Identifier";
