@@ -10,6 +10,8 @@ import XCTest
 
 class CompoundTenseTests: XCTestCase {
   func testCompoundTenses() {
+    // Use feminine pronouns regardless of user preference.
+    Current.settings = Settings(getterSetter: DictionaryGetterSetter())
     let aller = "aller"
     let avoir = "avoir"
 
