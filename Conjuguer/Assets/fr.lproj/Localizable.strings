@@ -75,7 +75,7 @@ Chaque temps est décrit en détail, avec des exemples d’utilisation des class
 
 ~Conjuguer~ a des conjugaisons ~complètes~ pour soixante-six verbes français défectueux, y compris des verbes exotiques comme ester, issir et gésir.
 
-~Conjuguer~ a des classements de fréquence d'utilisation pour les 981 premiers verbes français, d’être à ancrer. Ces classements peuvent aider à concentrer l'étude du vocabulaire.
+~Conjuguer~ a des classements de fréquence d’utilisation pour les 981 premiers verbes français, d’être à ancrer. Ces classements peuvent aider à concentrer l’étude du vocabulaire.
 
 ~Conjuguer~ comprend un mode quiz pour gamifier l’étude des verbes. Les résultats des quiz sont disponibles dans Game Center™.";
 
@@ -230,7 +230,7 @@ Les ouvrages de référence sur les verbes français, par exemple le livre « Fr
 
 1. Comme indiqué dans « French Verbs Made Simple(r) », « There is occasionally disagreement [among] various sources as to which [conjugations] actually exist. » De même, concernant le mot %ravoir%, le Wiktionnaire dit : « D’après la plupart des dictionnaires classiques, ce verbe $EST$ défectif et ne se conjugue pas. Néanmoins, des usages de formes associées $SONT$ avérées régionalement. » Omettre certaines conjugaisons nécessiterait donc une série de jugements de la part du développeur de ~Conjuguer~. Il ne juge pas afin qu’il ne soit point jugé.
 
-2. Certaines conjugaisons sont probablement absentes de tout grand corpus de texte français et pourraient donc être considérées comme défectives. Mais le fait qu’une conjugaison n’est pas utilisée ne veut pas dire qu’elle ne pourrait pas être utile. Considérez un poème écrit du point de vue des nuages ​​de la Terre et de Vénus. Ce poème pourrait inclure le vers « Nous pleuvons de l’eau et de l’acide sulfurique, respectivement. » Ainsi, bien que pleuvoir soit considéré comme défectif pour la 1p dans tous les temps conjugués, cette conjugaison (pleuvons) serait utile dans un tel poème.
+2. Certaines conjugaisons sont probablement absentes de tous grands corpus de texte français et pourraient donc être considérées comme défectives. Mais le fait qu’une conjugaison n’est pas utilisée ne veut pas dire qu’elle ne pourrait pas être utile. Considérez un poème écrit du point de vue des nuages de la Terre et de Vénus. Ce poème pourrait inclure le vers « Nous pleuvons de l’eau et de l’acide sulfurique, respectivement. » Ainsi, bien que pleuvoir soit considéré comme défectif pour la 1p dans tous les temps conjugués, cette conjugaison (pleuvons) serait utile dans un tel poème.
 
 3. %Ester% (être ou rester), bien que presque éteint en français, a des parents fréquemment utilisés dans d’autres langues romanes. Par exemple, l’espagnol a deux mots pour « être » : « ser » et (vous l’avez deviné) « estar ». Les utilisateurs de ~Conjuguer~ pourraient être curieux de savoir comment les conjugaisons d’ester auraient évolué si ce verbe était resté productif en français, comme il l’a fait en espagnol. De même, les utilisateurs de ~Conjuguer~ pourraient également être curieux de savoir comment les conjugaisons de %clore% auraient évolué si %fermer% ne les avait pas remplacées. Pour le bénéfice des utilisateurs curieux, ~Conjuguer~ comprend des conjugaisons spéculatives de %choir%, %clore%, %ester%, %gésir%, %issir% et %ouïr%, inspirées des conjugaisons du vieux français fournies par Wiktionary et « Tableaux de conjugaison de l’ancien français » de Machio Okada et Hitoshi Ogurisu.
 
@@ -522,7 +522,7 @@ Voici quelques exemples du passé simple.
 
 - Turoldus, La chanson de Roland
 
-« Me $vInt$ le vouloir de briser la tres amoureuse prison. » = « The longing came over me to break away from love’s imprisonment. »
+« Me $vInt$ le vouloir de briser la tres amoureuse prison. » = « I was seized by desire to break out of the prison of love. »
 
 - François Villon, Le testament
 
@@ -979,7 +979,7 @@ Exemples :
 
 « Toutes $aUraient$ $Pu$ faire un fleuve avec leurs pleurs ! » = « Each could have $maDe$ a river with her tears ! »
 
-- Charles Baudelaire, Les Petites Vielles
+- Charles Baudelaire, Les petites vielles
 
 `Conjugaison`
 
