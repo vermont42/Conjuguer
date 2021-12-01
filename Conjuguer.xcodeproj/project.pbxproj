@@ -332,10 +332,10 @@
 		036DB79E259FD6510013C3B7 /* ConjuguerTests */ = {
 			isa = PBXGroup;
 			children = (
-				036DB79F259FD6510013C3B7 /* CompoundTenseTests.swift */,
 				036DB7A1259FD6510013C3B7 /* Info.plist */,
-				03B54B4525AF92930062B323 /* VerbModelTests.swift */,
+				03AE93F52757DAAB00233105 /* Models */,
 				03B54B3D25AF914F0062B323 /* TestUtils.swift */,
+				03AE93F62757DAB600233105 /* Utils */,
 			);
 			path = ConjuguerTests;
 			sourceTree = "<group>";
@@ -454,6 +454,22 @@
 				03AE93E72744423500233105 /* TestAnalyticsService.swift */,
 			);
 			path = Analytics;
+			sourceTree = "<group>";
+		};
+		03AE93F52757DAAB00233105 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				036DB79F259FD6510013C3B7 /* CompoundTenseTests.swift */,
+				03B54B4525AF92930062B323 /* VerbModelTests.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		03AE93F62757DAB600233105 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		03C2CACA261912AA00CFA825 /* Assets */ = {

@@ -15,7 +15,7 @@ class CompoundTenseTests: XCTestCase {
 
     var personNumbersIndex = 0
 
-    for conjugation in ["SUIs allé", "Es allé", "ESt allé", "SOMMEs allé", "êteS allé", "SOnt allé"] {
+    for conjugation in ["SUIs allée", "Es allée", "ESt allée", "SOMMEs allées", "êteS allées", "SOnt allées"] {
       T.testConjugation(infinitif: aller, tense: .passéComposé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -27,7 +27,7 @@ class CompoundTenseTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["Étais allé", "Étais allé", "Était allé", "Étions allé", "Étiez allé", "Étaient allé"] {
+    for conjugation in ["Étais allée", "Étais allée", "Était allée", "Étions allées", "Étiez allées", "Étaient allées"] {
       T.testConjugation(infinitif: aller, tense: .plusQueParfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -39,7 +39,7 @@ class CompoundTenseTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["Fus allé", "Fus allé", "Fut allé", "Fûmes allé", "Fûtes allé", "Furent allé"] {
+    for conjugation in ["Fus allée", "Fus allée", "Fut allée", "Fûmes allées", "Fûtes allées", "Furent allées"] {
       T.testConjugation(infinitif: aller, tense: .passéAntérieur(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -51,7 +51,7 @@ class CompoundTenseTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["aI ÉtÉ allé", "As ÉtÉ allé", "A ÉtÉ allé", "avons ÉtÉ allé", "avez ÉtÉ allé", "Ont ÉtÉ allé"] {
+    for conjugation in ["aI ÉtÉ allée", "As ÉtÉ allée", "A ÉtÉ allée", "avons ÉtÉ allées", "avez ÉtÉ allées", "Ont ÉtÉ allées"] {
       T.testConjugation(infinitif: aller, tense: .passéSurcomposé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -63,7 +63,7 @@ class CompoundTenseTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["SErai allé", "SEras allé", "SEra allé", "SErons allé", "SErez allé", "SEront allé"] {
+    for conjugation in ["SErai allée", "SEras allée", "SEra allée", "SErons allées", "SErez allées", "SEront allées"] {
       T.testConjugation(infinitif: aller, tense: .futurAntérieur(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -75,7 +75,7 @@ class CompoundTenseTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["SErais allé", "SErais allé", "SErait allé", "SErions allé", "SEriez allé", "SEraient allé"] {
+    for conjugation in ["SErais allée", "SErais allée", "SErait allée", "SErions allées", "SEriez allées", "SEraient allées"] {
       T.testConjugation(infinitif: aller, tense: .conditionnelPassé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -87,7 +87,7 @@ class CompoundTenseTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["SOIS allé", "SOIs allé", "SOIT allé", "SOYons allé", "SOYez allé", "SOIent allé"] {
+    for conjugation in ["SOIS allée", "SOIs allée", "SOIT allée", "SOYons allées", "SOYez allées", "SOIent allées"] {
       T.testConjugation(infinitif: aller, tense: .subjonctifPassé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -99,7 +99,7 @@ class CompoundTenseTests: XCTestCase {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    for conjugation in ["Fusse allé", "Fusses allé", "Fût allé", "Fussions allé", "Fussiez allé", "Fussent allé"] {
+    for conjugation in ["Fusse allée", "Fusses allée", "Fût allée", "Fussions allées", "Fussiez allées", "Fussent allées"] {
       T.testConjugation(infinitif: aller, tense: .subjonctifPlusQueParfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -113,7 +113,7 @@ class CompoundTenseTests: XCTestCase {
 
     var impératifPersonNumbersIndex = 0
 
-    for conjugation in ["SOIs allé", "SOYons allé", "SOYez allé"] {
+    for conjugation in ["SOIs allée", "SOYons allées", "SOYez allées"] {
       T.testConjugation(infinitif: aller, tense: .impératifPassé(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation, extraLetters: nil)
       impératifPersonNumbersIndex += 1
       impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
