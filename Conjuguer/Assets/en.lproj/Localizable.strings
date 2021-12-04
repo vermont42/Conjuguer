@@ -40,7 +40,7 @@
 "QuizView.start" = "Start";
 "QuizView.scoreWithColon" = "Score:";
 "QuizView.verbWithColon" = "Verb:";
-"QuizView.translationWithColon" = "Trans.:";
+"QuizView.translationWithColon" = "Translation:";
 "QuizView.pronounWithColon" = "Pronoun:";
 "QuizView.tenseWithColon" = "Tense:";
 "QuizView.progressWithColon" = "Progress:";
@@ -180,7 +180,7 @@ Here is how tenses are represented in the alterations:
 
 pp: participe passé
 rr: participe présent
-sf: radical futur
+sf: radical du futur
 r1s, r2s, r3s, r1p, r2p, r3p: six person-numbers of the indicatif présent
 b1s, b2s, b3s, b1p, b2p, b3p: six person-numbers of the subjonctif présent
 x1s, x2s, x3s, x1p, x2p, x3p: six person-numbers of the passé simple
@@ -368,11 +368,11 @@ Three participes présents do not follow this pattern and are therefore irregula
 %être% -> $Étant$
 %savoir% -> $saCHant$";
 
-"Info.radicalFuturHeading" = "Radical Futur";
+"Info.radicalFuturHeading" = "Radical du Futur";
 
 "Info.radicalFuturText" = "`Uses`
 
-The ~radical futur~ (future stem) has two uses:
+The ~radical du futur~ (future stem) has two uses:
 
 • As the stem for the %futur simple%.
 
@@ -388,7 +388,7 @@ The ~radical futur~ (future stem) has two uses:
 
 `Form`
 
-For most verbs, the radical futur is identical to the infinitif. The final -e is dropped from -re verbs. Examples:
+For most verbs, the radical du futur is identical to the infinitif. The final -e is dropped from -re verbs. Examples:
 
 %finir% -> finir-
 %parler% -> parler-
@@ -636,7 +636,7 @@ French uses the futur simple in one situation in which English uses the present 
 
 `Conjugation`
 
-The stem of the futur simple is the %radical futur%. To this is added ai, as, a, ons, ez, or ont.
+The stem of the futur simple is the %radical du futur%. To this is added ai, as, a, ons, ez, or ont.
 
 Examples:
 %être%: $AUrai$, $AUras$, $AUra$, $AUrons$, $AUrez$, $AUront$
@@ -674,7 +674,7 @@ The ~conditionnel présent~ (present conditional) is used:
 
 `Conjugation`
 
-The stem of the conditionnel présent is the radical futur. To this is added ais, ais, ait, ions, iez, or aient.
+The stem of the conditionnel présent is the radical du futur. To this is added ais, ais, ait, ions, iez, or aient.
 
 Examples:
 %être%: $AUrais$, $AUrais$, $AUrait$, $AUrions$, $AUriez$, $AUraient$
@@ -1057,11 +1057,11 @@ The impératif passé is formed from the %impératif% conjugation of %avoir% or 
 
 ~Q:~ Why does ~Conjuguer~ mostly use French names for tenses rather than English, for example, ~indicatif présent~ rather than ~present indicative~?
 
-~R:~ Admittedly, English tense names would perhaps be more approachable for the learner in certain cases, for example, %radical futur%. English speakers might better understand the term ~future stem~. But perhaps because of his years working as a lawyer, ~Conjuguer~’s developer values precision in language. English tense names map imperfectly to French tenses. For example, the English ~present indicative~ has more limited uses than the French %indicatif présent%. The English term is therefore an imprecise match for the French tense.
+~R:~ Admittedly, English tense names would perhaps be more approachable for the learner in certain cases, for example, %radical du futur%. English speakers might better understand the term ~future stem~. But perhaps because of his years working as a lawyer, ~Conjuguer~’s developer values precision in language. English tense names map imperfectly to French tenses. For example, the English ~present indicative~ has more limited uses than the French %indicatif présent%. The English term is therefore an imprecise match for the French tense.
 
-~Q:~ I’ve seen the terms “mood” and “aspect” in descriptions of verb tenses, but ~Conjuguer~ does not use these terms. Also, the %participe passé%, %participe présent%, and %radical futur% are not really tenses.
+~Q:~ I’ve seen the terms “mood” and “aspect” in descriptions of verb tenses, but ~Conjuguer~ does not use these terms. Also, the %participe passé%, %participe présent%, and %radical du futur% are not really tenses.
 
-~R:~ Was that a question? You are correct that ~Conjuguer~ does not use these two terms, and those three things are not usually described as “tenses”. With respect to terminology, bear in mind that ~Conjuguer~’s purpose is to teach French-verb conjugation, not to teach English French-verb-conjugation nomenclature. With respect to the %participe passé%, %participe présent%, and %radical futur%, ~Conjuguer~’s developer does consider those three things to be tenses, if “tense” is taken to mean “a systematic way of changing verbs for a specific purpose”. This definition, though absent, on information and belief, from any dictionary, serves ~Conjuguer~’s pedagogical purpose well enough.
+~R:~ Was that a question? You are correct that ~Conjuguer~ does not use these two terms, and those three things are not usually described as “tenses”. With respect to terminology, bear in mind that ~Conjuguer~’s purpose is to teach French-verb conjugation, not to teach English French-verb-conjugation nomenclature. With respect to the %participe passé%, %participe présent%, and %radical du futur%, ~Conjuguer~’s developer does consider those three things to be tenses, if “tense” is taken to mean “a systematic way of changing verbs for a specific purpose”. This definition, though absent, on information and belief, from any dictionary, serves ~Conjuguer~’s pedagogical purpose well enough.
 
 ~Q:~ Why aren’t there more recent examples of uses of the tenses?
 
@@ -1089,8 +1089,8 @@ Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’anci
 
 "Settings.quizDifficulty" = "Quiz Difficulty";
 "Settings.quizDifficultyDescription" = "This setting determines the difficulty of quizzes. You probably want Regular because Ridiculous includes tenses and verbs that are not in widespread use.";
-"Settings.pronounGender" = "Pronoun Gender";
-"Settings.pronounGenderDescription" = "This setting determines pronoun gender, which matters for certain compound-tense conjugations. “Both” means that singular pronouns are feminine and that plural pronouns are masculine.";
+"Settings.pronounGender" = "Pronoun Genders";
+"Settings.pronounGenderDescription" = "This setting determines pronoun genders, which matters for certain compound-tense conjugations. “Both” means that singular pronouns are feminine and that plural pronouns are masculine.";
 
 "QuizDifficulty.regular" = "Regular";
 "QuizDifficulty.ridiculous" = "Ridiculous";

@@ -41,7 +41,7 @@ enum Tense: Hashable {
     case .participePrésent:
       return "Participe Présent"
     case .radicalFutur:
-      return "Radical Futur"
+      return "Radical du Futur"
     case .indicatifPrésent:
       return "Indicatif Présent"
     case .passéSimple:
