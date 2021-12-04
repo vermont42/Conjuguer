@@ -2509,6 +2509,64 @@ class VerbModelTests: XCTestCase {
     }
   }
 
+  func testFrire() {
+    // ID: 5-11A
+    var personNumbersIndex = 0
+
+    for conjugation in ["fris", "fris", "frit", "frions", "friez", "frient"] {
+      T.testConjugation(infinitif: "frire", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["friais", "friais", "friait", "friions", "friiez", "friaient"] {
+      T.testConjugation(infinitif: "frire", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["frirai", "friras", "frira", "frirons", "frirez", "friront"] {
+      T.testConjugation(infinitif: "frire", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["frirais", "frirais", "frirait", "fririons", "fririez", "friraient"] {
+      T.testConjugation(infinitif: "frire", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["fris", "fris", "frit", "frîmes", "frîtes", "frirent"] {
+      T.testConjugation(infinitif: "frire", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["frie", "fries", "frie", "friions", "friiez", "frient"] {
+      T.testConjugation(infinitif: "frire", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["frisse", "frisses", "frît", "frissions", "frissiez", "frissent"] {
+      T.testConjugation(infinitif: "frire", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "frire", tense: .participePassé, expected: "friT", extraLetters: nil)
+    T.testConjugation(infinitif: "frire", tense: .participePrésent, expected: "friant", extraLetters: nil)
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["fris", "frions", "friez"] {
+      T.testConjugation(infinitif: "frire", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation, extraLetters: nil)
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
   func testFuir() {
     // ID: 6-2
     var personNumbersIndex = 0
@@ -2625,64 +2683,6 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testHaïrQuébec() {
-    // ID: 2-3B
-    var personNumbersIndex = 0
-
-    for conjugation in ["haïs", "haïs", "haït", "haïssons", "haïssez", "haïssent"] {
-      T.testConjugation(infinitif: "haïr", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: "Québec")
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    for conjugation in ["haïssais", "haïssais", "haïssait", "haïssions", "haïssiez", "haïssaient"] {
-      T.testConjugation(infinitif: "haïr", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: "Québec")
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    for conjugation in ["haïrai", "haïras", "haïra", "haïrons", "haïrez", "haïront"] {
-      T.testConjugation(infinitif: "haïr", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: "Québec")
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    for conjugation in ["haïrais", "haïrais", "haïrait", "haïrions", "haïriez", "haïraient"] {
-      T.testConjugation(infinitif: "haïr", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: "Québec")
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    for conjugation in ["haïs", "haïs", "haït", "haïmes", "haïtes", "haïrent"] {
-      T.testConjugation(infinitif: "haïr", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: "Québec")
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    for conjugation in ["haïsse", "haïsses", "haïsse", "haïssions", "haïssiez", "haïssent"] {
-      T.testConjugation(infinitif: "haïr", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: "Québec")
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    for conjugation in ["haïsse", "haïsses", "haït", "haïssions", "haïssiez", "haïssent"] {
-      T.testConjugation(infinitif: "haïr", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: "Québec")
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    T.testConjugation(infinitif: "haïr", tense: .participePassé, expected: "haï", extraLetters: "Québec")
-    T.testConjugation(infinitif: "haïr", tense: .participePrésent, expected: "haïssant", extraLetters: "Québec")
-
-    var impératifPersonNumbersIndex = 0
-
-    for conjugation in ["haïs", "haïssons", "haïssez"] {
-      T.testConjugation(infinitif: "haïr", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation, extraLetters: "Québec")
-      impératifPersonNumbersIndex += 1
-      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
-    }
-  }
-
   func testHaïrFrance() {
     // ID: 2-3A
     var personNumbersIndex = 0
@@ -2736,6 +2736,64 @@ class VerbModelTests: XCTestCase {
 
     for conjugation in ["hais", "haÏssons", "haÏssez"] {
       T.testConjugation(infinitif: "haïr", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation, extraLetters: "France")
+      impératifPersonNumbersIndex += 1
+      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
+    }
+  }
+
+  func testHaïrQuébec() {
+    // ID: 2-3B
+    var personNumbersIndex = 0
+
+    for conjugation in ["haïs", "haïs", "haït", "haïssons", "haïssez", "haïssent"] {
+      T.testConjugation(infinitif: "haïr", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: "Québec")
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["haïssais", "haïssais", "haïssait", "haïssions", "haïssiez", "haïssaient"] {
+      T.testConjugation(infinitif: "haïr", tense: .imparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: "Québec")
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["haïrai", "haïras", "haïra", "haïrons", "haïrez", "haïront"] {
+      T.testConjugation(infinitif: "haïr", tense: .futurSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: "Québec")
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["haïrais", "haïrais", "haïrait", "haïrions", "haïriez", "haïraient"] {
+      T.testConjugation(infinitif: "haïr", tense: .conditionnelPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: "Québec")
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["haïs", "haïs", "haït", "haïmes", "haïtes", "haïrent"] {
+      T.testConjugation(infinitif: "haïr", tense: .passéSimple(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: "Québec")
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["haïsse", "haïsses", "haïsse", "haïssions", "haïssiez", "haïssent"] {
+      T.testConjugation(infinitif: "haïr", tense: .subjonctifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: "Québec")
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    for conjugation in ["haïsse", "haïsses", "haït", "haïssions", "haïssiez", "haïssent"] {
+      T.testConjugation(infinitif: "haïr", tense: .subjonctifImparfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: "Québec")
+      personNumbersIndex += 1
+      personNumbersIndex %= PersonNumber.allCases.count
+    }
+
+    T.testConjugation(infinitif: "haïr", tense: .participePassé, expected: "haï", extraLetters: "Québec")
+    T.testConjugation(infinitif: "haïr", tense: .participePrésent, expected: "haïssant", extraLetters: "Québec")
+
+    var impératifPersonNumbersIndex = 0
+
+    for conjugation in ["haïs", "haïssons", "haïssez"] {
+      T.testConjugation(infinitif: "haïr", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation, extraLetters: "Québec")
       impératifPersonNumbersIndex += 1
       impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
     }

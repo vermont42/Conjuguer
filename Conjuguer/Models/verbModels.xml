@@ -75,7 +75,8 @@
   <model mo="conduire" id="5-9A" ep="T" si="s" se="i" bb="e" p="0,1,S,r1p,r2p,r3p,xA,bA" />
   <model mo="nuire" id="5-9B" pa="5-9A" ep="I" p="1,1,,pp" />
   <model mo="lire" id="5-10" ep="u" si="s" se="u" bb="e" p="0,1,S,r1p,r2p,r3p,bA|2,2,@,xA,pp" />
-  <model mo="rire" id="5-11" ep="" si="s" se="b" bb="e" p="1,1,I,pp" />
+  <model mo="rire" id="5-11" ep="" si="s" se="b" bb="e" p="1,1,I,N,pp" />
+  <model mo="frire" id="5-11A" pa="5-11" ep="T" />
   <model mo="plaindre" id="5-12" ep="T" si="s" se="i" bb="e" p="2,2,N,r1s,r2s,r3s,pp|2,2,GN,r1p,r2p,r3p,xA,bA" />
   <model mo="absoudre" id="5-13A" si="s" se="u" bb="e" p="2,2,U,r1s,r2s,r3s|2,2,LV,r1p,r2p,r3p,bA|2,2,L,xA|1,1,S*,pp" />
   <model mo="résoudre" id="5-13B" pa="5-13A" ep="u" p="2,2,L,A,pp" />
