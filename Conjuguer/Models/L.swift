@@ -181,10 +181,6 @@ enum L {
       String(localized: "QuizView.none")
     }
 
-    static var quizComplete: String {
-      String(localized: "QuizView.quizComplete")
-    }
-
     static var cool: String {
       String(localized: "QuizView.cool")
     }

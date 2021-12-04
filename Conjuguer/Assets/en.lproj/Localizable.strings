@@ -49,7 +49,6 @@
 "QuizView.quit" = "Quit";
 "QuizView.gameCenterFailure" = "Game Center failed.";
 "QuizView.none" = "none";
-"QuizView.quizComplete" = "Congratulations! You completed a quiz scoring %d points.";
 "QuizView.cool" = "Cool";
 
 "ResultsView.correctWithColon" = "Correct:";
