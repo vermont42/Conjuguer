@@ -56,7 +56,7 @@
 
 "Info.dedicationHeading" = "Dédicace";
 
-"Info.dedicationText" = "David Compton était mon entraîneur de ski nordique au lycée. Il était aussi professeur de français, mais il n'était pas mon professeur de français au départ. Il était cependant conscient de l'intérêt et des compétences que j'avais pour la langue française. Au début de ma troisième année, je ne pouvais pas assister aux cours de français à cause d’un conflit d’horaire avec Advanced Placement English. Alors M. Compton a donc créé un cours de littérature française de cinq jours par semaine, juste pour moi. Un étudiant allemand participant à un programme d'échange, nommé Julian Peters, s’est rapidement joint à nous. Nous avons utilisé comme manuels les volumes I et II de « L’anthologie de la littérature française » de Robert Leggewie et nous avons étudié les grands de la littérature française de Chrétien de Troyes à Samuel Beckett. Cette étude littéraire a finalement inspiré l’utilisation par ~Conjuguer~ d’exemples littéraires de l’utilisation des temps. J’ai beaucoup apprécié le cours de M. Compton et ma connaissance du français s’est énormément améliorée. À la fin de l’année, j’ai obtenu un score maximum au test de français Advanced Placement. Au début de ma première année à Dartmouth College, j’ai passé un test pour obtenir un crédit pour un cours de français de niveau supérieur et, sur les soixante étudiants de première année qui ont passé le test, j’étais l’un des trois qui l’ont réussi.
+"Info.dedicationText" = "David Compton était mon entraîneur de ski nordique au lycée. Il était aussi professeur de français, mais il n’était pas mon professeur de français au départ. Il était cependant conscient de l’intérêt et des compétences que j’avais pour la langue française. Au début de ma troisième année, je ne pouvais pas assister aux cours de français à cause d’un conflit d’horaire avec Advanced Placement English. Alors M. Compton a donc créé un cours de littérature française de cinq jours par semaine, juste pour moi. Un étudiant allemand participant à un programme d’échange, nommé Julian Peters, s’est rapidement joint à nous. Nous avons utilisé comme manuels les volumes I et II de « L’anthologie de la littérature française » de Robert Leggewie et nous avons étudié les grands de la littérature française de Chrétien de Troyes à Samuel Beckett. Cette étude littéraire a finalement inspiré l’utilisation par ~Conjuguer~ d’exemples littéraires de l’utilisation des temps. J’ai beaucoup apprécié le cours de M. Compton et ma connaissance du français s’est énormément améliorée. À la fin de l’année, j’ai obtenu un score maximum au test de français Advanced Placement. Au début de ma première année à Dartmouth College, j’ai passé un test pour obtenir un crédit pour un cours de français de niveau supérieur et, sur les soixante étudiants de première année qui ont passé le test, j’étais l’un des trois qui l’ont réussi.
 
 M. Compton avait déjà un emploi du temps chargé à l’automne 1991, lorsqu’il a créé le cours pour moi. Il aurait peut-être aimé passer cette période de classe à tirer sur sa pipe à tabac ou à bricoler son ordinateur Macintosh. Adolescent solipsiste que j’étais, je ne lui ai jamais demandé ~pourquoi~ il avait sacrifié ce temps pour moi. Mais je peux faire des hypothèses. Il a étudié à la Sorbonne dans les années 1960 et était francophile. Il a peut-être reconnu en moi un intérêt commun pour le français et a voulu me donner l’opportunité de le poursuivre dans toute la mesure du possible. Quelle que soit sa motivation, je lui en suis reconnaissant et lui dédie cette application.
 
@@ -68,7 +68,7 @@ Grâce à M. Compton, le mot ~Conjuguer~ est correctement orthographié. Pendant
 
 L’application conjugue 5.217 verbes français réguliers et 1.097 verbes français irréguliers à ~tous~ les temps.
 
-Chaque verbe français a une traduction anglaise. En effet, le verbe réaliser en a huit !
+Chaque verbe français a au moins une traduction anglaise. En effet, le verbe %réaliser% en a huit !
 
 Chaque temps est décrit en détail, avec des exemples d’utilisation des classiques tirés de la littérature française, dont « La chanson de Roland » et « À la recherche du temps perdu ».
 
@@ -82,7 +82,7 @@ Chaque temps est décrit en détail, avec des exemples d’utilisation des class
 
 "Info.terminologyText" = "`Verbe`
 
-Un ~verbe~ est un type de mot qui décrit une action. Par exemple, dans la phrase « Jacques Brel jouait de la guitare », « jouer » est le verbe. De même, dans la phrase « Jacques Brel played the guitar », « play » est le verbe. Les ~temps~ des verbes expriment, parmi d'autres éléments, à quel moment une action a eu, a ou aura lieu. Dans les phrases données comme exemples, les temps des verbes indiquent que l’action (jouer de la guitare) a eu lieu dans le passé. En anglais et en français, le ~sujet~ ou l’acteur de la phrase, combiné au temps, détermine la forme du verbe utilisé. C’est la ~conjugaison~ du verbe. En anglais, la combinaison du sujet et du temps de la phrase d’exemple entraîne la conjugaison « played ». En français, la conjugaison est « jouait ».
+Un ~verbe~ est un type de mot qui décrit une action. Par exemple, dans la phrase « Jacques Brel jouait de la guitare », « jouer » est le verbe. De même, dans la phrase « Jacques Brel played the guitar », « play » est le verbe. Les ~temps~ des verbes expriment, parmi d’autres éléments, à quel moment une action a eu, a ou aura lieu. Dans les phrases données comme exemples, les temps des verbes indiquent que l’action (jouer de la guitare) a eu lieu dans le passé. En anglais et en français, le ~sujet~ ou l’acteur de la phrase, combiné au temps, détermine la forme du verbe utilisé. C’est la ~conjugaison~ du verbe. En anglais, la combinaison du sujet et du temps de la phrase d’exemple entraîne la conjugaison « played ». En français, la conjugaison est « jouait ».
 
 L’~infinitif~ est une forme verbale invariable qui se termine généralement par -er, -ir ou -re. Contrairement à une conjugaison, un ~infinitif~ n’indique pas le temps, le nombre ou la personne. Exemple d’utilisation : « Jacques Brel savait ~chanter~ ». = « Jacques Brel $knEw$ how ~to sing~. » Dans les deux phrases, l’infinitif représente l’~acte~ de chanter sans référence au temps, au nombre ou à la personne.
 
@@ -94,7 +94,7 @@ Le ~radical de l’infinitif~ est constitué de l’infinitif sans sa terminaiso
 
 Un ~pronom~ sujet est un mot qui remplace le sujet d’une phrase. Le sujet est l’acteur. En anglais, les pronoms sujets les plus répandus sont ~I~, ~you~, ~he/she/it/one~, ~we~, ~you/y’all~ et ~they~. Les pronoms sujets anglais ~ye~ et ~thou~ sont en déclin depuis l’époque élisabéthaine.
 
-Les pronoms sujets correspondent au ~singulier~ ou au ~pluriel~ et à la ~première personne~, ~deuxième personne~ ou ~troisième personne~. Les pronoms sujets anglais suivent. Les abréviations des combinaisons personne-numéroes sont entre parenthèses.
+Les pronoms sujets correspondent au ~singulier~ ou au ~pluriel~ et à la ~première personne~, ~deuxième personne~ ou ~troisième personne~. Les pronoms sujets anglais suivent. Les abréviations des combinaisons nombres-personnes sont entre parenthèses.
 
 première personne, singulier (1s) : ~I~
 deuxième personne, singulier (2s) : ~you~
@@ -119,7 +119,7 @@ Concernant la 2s, il y a deux choix : ~tu~ et ~vous~. ~Tu~ et ses conjugaisons e
 
 `Ordre de présentation des conjugaisons`
 
-Dans les traités de verbes français, les conjugaisons d'un temps particulier sont présentées dans l’ordre des nombres de personnes suivant : 1s, 2s, 3s, 1p, 2p, 3p. Conformément à la tradition, ~Conjuguer~ fait de même. Par exemple, ~Conjuguer~ présenterait les conjugaisons indicatif-présent d’~être~ comme suit :
+Dans les traités de verbes français, les conjugaisons d’un temps particulier sont présentées dans l’ordre des nombres-personnes suivant : 1s, 2s, 3s, 1p, 2p, 3p. Conformément à la tradition, ~Conjuguer~ fait de même. Par exemple, ~Conjuguer~ présenterait les conjugaisons indicatif-présent d’~être~ comme suit :
 
 $SUIs$, $Es$, $ESt$, $SOMMEs$, $êteS$, $SOnt$
 
@@ -164,9 +164,7 @@ vous $bUViez$ (~pas~ boiiez)
 
 ~Conjuguer~ colore en rouge les lettres majuscules dans les altérations, signifiant les irrégularités.
 
-Un astérisque à la fin des lettres de remplacement signifie une terminaison imprévisible.
-
-Par exemple, le modèle du verbe valoir, 4-5A, a l’altération suivante :
+Un astérisque à la fin des lettres de remplacement signifie une terminaison imprévisible. Par exemple, le modèle du verbe valoir, 4-5A, a l’altération suivante :
 
 r1s, r2s: 1, 1, UX*
 
@@ -180,14 +178,14 @@ Voici comment les temps sont représentés dans les altérations :
 pp : participe passé
 rr : participe présent
 sf : radical du futur
-r1s, r2s, r3s, r1p, r2p, r3p : six personne-numéros de l’indicatif présent
-b1s, b2s, b3s, b1p, b2p, b3p : six personne-numéros du subjonctif présent
-x1s, x2s, x3s, x1p, x2p, x3p : six personne-numéros du passé simple
-i1s, i2s, i3s, i1p, i2p, i3p : six personne-numéros de l’imparfait
-q1s, q2s, q3s, q1p, q2p, q3p : six personne-numéros du subjonctif imparfait
-h2s, hlp, h2p : trois personne-numéros de l’impératif
+r1s, r2s, r3s, r1p, r2p, r3p : six nombres-personnes de l’indicatif présent
+b1s, b2s, b3s, b1p, b2p, b3p : six nombres-personnes du subjonctif présent
+x1s, x2s, x3s, x1p, x2p, x3p : six nombres-personnes du passé simple
+i1s, i2s, i3s, i1p, i2p, i3p : six nombres-personnes de l’imparfait
+q1s, q2s, q3s, q1p, q2p, q3p : six nombres-personnes du subjonctif imparfait
+h2s, hlp, h2p : trois nombres-personnes de l’impératif
 
-La personne-numéro ~A~ signifie « tous les six ». Par exemple, xA est équivalent à x1s, x2s, x3s, x1p, x2p, x3p. De même, rA est équivalent à r1s, r2s, r3s, r1p, r2p, r3p.
+La nombre-personne ~A~ signifie « tous les six ». Par exemple, xA est équivalent à x1s, x2s, x3s, x1p, x2p, x3p. De même, rA est équivalent à r1s, r2s, r3s, r1p, r2p, r3p.
 
 Par exemple, le modèle du verbe avoir, 4-10, a l’altération suivante :
 
@@ -215,9 +213,9 @@ Le participe passé est $Pu$.";
 
 Soixante-cinq verbes français sont ~défectifs~. Cela ne signifie pas que quelque chose ne va pas avec ces verbes. Dans ce contexte, défectifs signifie que ces verbes sont dépourvus de certaines les conjugaisons voire de toutes. Les verbes peuvent être considérés comme défectifs pour diverses raisons.
 
-1. L’utilisation de certaines personne-numéros serait absurde. Par exemple, « je $fAUX$ que tu restes » signifierait ~littéralement~ « I $AM$ necessary that you stay ». %Falloir% est donc défectif pour tous les personne-numéros sauf la 3s. « Il $faUt$ que tu restes » est logique et signifie « it $IS$ necessary that you stay ».
+1. L’utilisation de certaines nombres-personnes serait absurde. Par exemple, « je $fAUX$ que tu restes » signifierait ~littéralement~ « I $AM$ necessary that you stay ». %Falloir% est donc défectif pour tous les nombres-personnes sauf la 3s. « Il $faUt$ que tu restes » est logique et signifie « it $IS$ necessary that you stay ».
 
-2. Certains verbes sont impersonnels. Cela ne veut pas dire qu’ils manquent d’humanité. Le terme impersonnel dans ce contexte signifie que leur sujet est, en anglais, le générique « it » ou, en français, le générique « il ». Ces verbes impliquent des phénomènes naturels comme la neige, la grêle, le grésil et la pluie. « Il $pleuT$. » = « It $IS$ raining. » En raison des sujets habituels comme « il », ces verbes sont considérés comme défectifs pour les personne-numéros autres que la 3s. Il existe cependant une ~certaine~ flexibilité. Citant et traduisant Voltaire, « Les calomnies pleuvent sur quiconque réussit. » = « Calumnies rain on whoever succeeds. » On pourrait imaginer d’autres personne-numéros utilisées pour des verbes impersonnels dans la poésie. Par exemple, dans un poème écrit du point de vue de la nature, le pronom et la conjugaison « je neige », signifiant « I $AM$ snowing », auraient du sens.
+2. Certains verbes sont impersonnels. Cela ne veut pas dire qu’ils manquent d’humanité. Le terme impersonnel dans ce contexte signifie que leur sujet est, en anglais, le générique « it » ou, en français, le générique « il ». Ces verbes impliquent des phénomènes naturels comme la neige, la grêle, le grésil et la pluie. « Il $pleuT$. » = « It $IS$ raining. » En raison des sujets habituels comme « il », ces verbes sont considérés comme défectifs pour les nombres-personnes autres que la 3s. Il existe cependant une ~certaine~ flexibilité. Citant et traduisant Voltaire, « Les calomnies pleuvent sur quiconque réussit. » = « Calumnies rain on whoever succeeds. » On pourrait imaginer d’autres nombres-personnes utilisées pour des verbes impersonnels dans la poésie. Par exemple, dans un poème écrit du point de vue de la nature, le pronom et la conjugaison « je neige », signifiant « I $AM$ snowing », auraient du sens.
 
 3. Certains verbes sont défectifs à certains temps afin d’éviter toute confusion avec la conjugaison d’autres verbes. Par exemple, %paître% est défectif au %passé simple% car les conjugaisons proposées par analogie avec %connaître%, $Pus$, $Pus$, $Put$, $Pûmes$, $Pûtes$ et $Purent$, sont identiques aux conjugaisons de %pouvoir% au passé simple.
 
@@ -229,7 +227,7 @@ Les ouvrages de référence traitant les verbes français, par exemple le livre 
 
 1. Comme indiqué dans « French Verbs Made Simple(r) », « There is occasionally disagreement [among] various sources as to which [conjugations] actually exist. » De même, concernant le mot %ravoir%, le Wiktionnaire indique : « D’après la plupart des dictionnaires classiques, ce verbe $EST$ défectif et ne se conjugue pas. Néanmoins, des usages de formes associées $SONT$ avérées régionalement. » La suppression de certaines conjugaisons nécessiterait donc une série de jugements de la part du développeur de ~Conjuguer~. Il ne juge pas afin qu’il ne soit point jugé.
 
-2. Certaines conjugaisons sont probablement absentes de tous grands corpus de texte français et pourraient donc être considérées comme défectives. Mais le fait qu’une conjugaison n’est pas utilisée ne veut pas dire qu’elle ne pourrait pas être utile. Prenez l'exemple d’un poème écrit du point de vue des nuages de la Terre et de Vénus. Ce poème pourrait inclure le vers « Nous pleuvons de l’eau et de l’acide sulfurique, respectivement. » Ainsi, bien que pleuvoir soit considéré comme défectif pour la 1p dans tous les temps conjugués, cette conjugaison (pleuvons) serait utile dans un tel poème.
+2. Certaines conjugaisons sont probablement absentes de tous grands corpus de texte français et pourraient donc être considérées comme défectives. Mais le fait qu’une conjugaison n’est pas utilisée ne veut pas dire qu’elle ne pourrait pas être utile. Prenez l’exemple d’un poème écrit du point de vue des nuages de la Terre et de Vénus. Ce poème pourrait inclure le vers « Nous pleuvons de l’eau et de l’acide sulfurique, respectivement. » Ainsi, bien que pleuvoir soit considéré comme défectif pour la 1p dans tous les temps conjugués, cette conjugaison (pleuvons) serait utile dans un tel poème.
 
 3. %Ester% (être ou rester), bien que presque éteint en français, a des parents fréquemment utilisés dans d’autres langues romanes. Par exemple, l’espagnol a deux mots pour « être » : « ser » et (vous l’avez deviné) « estar ». Les utilisateurs de ~Conjuguer~ pourraient être curieux de savoir comment les conjugaisons d’ester auraient évolué si ce verbe était resté productif en français, comme il l’a fait en espagnol. De même, les utilisateurs de ~Conjuguer~ pourraient également être curieux de savoir comment les conjugaisons de %clore% auraient évolué si %fermer% ne l’avait pas remplacé. Pour le bénéfice des utilisateurs curieux, ~Conjuguer~ comprend des conjugaisons spéculatives de %choir%, %clore%, %ester%, %gésir%, %issir% et %ouïr%, inspirées des conjugaisons de l’ancien français fournies par Wiktionary et « Tableaux de conjugaison de l’ancien français » de Machio Okada et Hitoshi Ogurisu.
 
@@ -355,7 +353,7 @@ Le ~participe présent~ est utilisé :
 
 `Forme`
 
-Le participe présent est formé de la conjugaison 1p de l’indicatif présent, sans -ons, main en ajoutant -ant. Exemples :
+Le participe présent est formé par la conjugaison 1p de l’indicatif présent, sans -ons, main en ajoutant -ant. Exemples :
 
 %parler% -> parlant
 %finir% -> finissant
@@ -446,7 +444,7 @@ L’~indicatif présent~ est utilisé :
 
 - Marcel Proust, Du côté de chez Swann
 
-• Pour mettre l'accent sur le caractère continu d’une action. L’anglais utilise la structure ~be + infinitif + -ing~ pour accomplir cela.
+• Pour mettre l’accent sur le caractère continu d’une action. L’anglais utilise la structure ~be + infinitif + -ing~ pour accomplir cela.
 
 « Vois-tu, je $saIs$ que tu m’attends. » = « You see, I know that you $ARE$ waiting for me. »
 
@@ -513,7 +511,7 @@ La plupart de ces verbes utilisent des radicaux irréguliers pour certaines ou t
 
 "Info.passéSimpleText" = "`Utilisation`
 
-Le passé simple était utilisé pour les actions qui étaient accomplies dans le passé, contrairement à l'imparfait, qui était (et continue d’être) utilisé pour des actions répétées, habituelles ou durables. Le passé simple n’est plus utilisé dans la conversation ou l’écriture à moins que le locuteur ou l’écrivain ne soit consciemment abstrus.
+Le passé simple était utilisé pour les actions qui étaient accomplies dans le passé, contrairement à l’imparfait, qui était (et continue d’être) utilisé pour des actions répétées, habituelles ou durables. Le passé simple n’est plus utilisé dans la conversation ou l’écriture à moins que le locuteur ou l’écrivain ne soit consciemment abstrus.
 
 Voici quelques exemples du passé simple.
 
@@ -818,7 +816,7 @@ Exemples :
 
 "Info.impératifText" = "`Utilisation`
 
-L’~impératif~ est utilisé pour les commandes, les instructions ou les requêtes.
+L’~impératif~ est utilisé pour les commandes, les instructions ou les demandes.
 
 Exemples :
 
@@ -832,27 +830,27 @@ Exemples :
 
 `Conjugaison`
 
-Contrairement à la plupart des autres temps, l’impératif n’utilise que trois combinaisons personne-numéroes : 2s, 1p et 2p. Hormis quatre verbs exceptionnels, les conjugaisons 1p et 2p de l’impératif sont identiques à leurs homologues de l’indicatif présent.
+Contrairement à la plupart des autres temps, l’impératif n’utilise que trois combinaisons nombres-personnes : 2s, 1p et 2p. Pour tous les verbes sauf quatre, les conjugaisons 1p et 2p de l’impératif sont identiques à leurs homologues de l’indicatif présent.
 
 Les conjugaisons 2s sont également identiques à leurs homologues de l’indicatif présent sauf que, si le verbe utilise les terminaisons de l’indicatif présent e, es, e, ons, ez et ent, le s est supprimé de la conjugaison 2s impérative. Exemples :
 
 %parler% -> parle
 %couvrir% -> $couvrE$
 
-Quatre verbes sont exceptionnels en ce qu’ils utilisent les radicaux du subjonctif présent pour l’impératif.
+Il existe quatre verbes qui sont exceptionnels en raison de l’utilisation du subjonctif présent pour l’impératif.
 
 %être% : $SOIS$, $SOYons$, $SOYez$
 %avoir% : $AIE$, $AYons$, $AYez$
 %savoir% : $saCHE$, $saCHons$, $saCHez$
 %vouloir% : $vEUILle$/$vEUX$, voulons, $vEUILlez$/voulez
 
-Les conjugaisons $vEUILle$/$vEUILlez$ de %vouloir% sont utilisées pour les requêtes polies.
+Les conjugaisons $vEUILle$/$vEUILlez$ de %vouloir% sont utilisées pour les demandes de politesse.
 
 « [V]$EUILLEz$ monter sur l’épaule de ce garçon. » = « Please step on that boy’s shoulder. »
 
-- Jules Verne, Robur le Conquérant
+- Jules Verne, Robur-le-Conquérant
 
-De même, ces conjugaisons sont parfois utilisées pour terminer les lettres formelles.
+De même, ces conjugaisons sont parfois utilisées pour clôturer des lettres formelles.
 
 « V$EUILlez$ recevoir, Monsieur, mes plus cordiales salutations. » = « Please receive, Sir, my warmest regards. »
 
@@ -862,7 +860,7 @@ De même, ces conjugaisons sont parfois utilisées pour terminer les lettres for
 
 "Info.passéComposéText" = "`Utilisation`
 
-Le ~passé composé~ est utilisé pour les actions du passé qui sont terminées, choatives, non continues et non répétées.
+Le ~passé composé~ est utilisé pour les actions du passé qui sont terminées, achevées, non continues et non répétées.
 
 Exemples :
 
@@ -874,7 +872,7 @@ Exemples :
 
 - Honoré de Balzac, Le père Goriot
 
-Ce deuxième exemple montre pourquoi %être%, le verbe français le plus utilisé, n’utilise que rarement le passé composé. L’état passé est généralement exprimé en utilisant l’%imparfait%, pas le passé composé. Cependant, %être% utilise le passé composé pour la voix passive, comme démontré ci-dessous.
+Ce deuxième exemple montre pourquoi %être%, le verbe français le plus utilisé, utilise rarement le passé composé. L’état passé est généralement exprimé en utilisant l’%imparfait%, et non pas le passé composé. Cependant, %être% s’emploie au passé composé pour la voix passive, comme le montre l’exemple ci-dessous.
 
 « Lorsque l’assommoir $A$ $paRu$ dans $uN$ journal, il a $ÉtÉ$ attaqué avec une brutalité sans exemple, dénoncé, chargé de tous les crimes. » = « When “The Drinking Den” appeared in a newspaper, it $WAS$ denounced, charged with every crime, and attacked with unprecedented brutality. »
 
@@ -882,13 +880,13 @@ Ce deuxième exemple montre pourquoi %être%, le verbe français le plus utilis�
 
 `Conjugaison`
 
-Le passé composé est formé de la conjugaison %indicatif présent% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+Le passé composé est formé par la conjugaison %indicatif présent% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de cette application concernant le %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
 
 "Info.plusQueParfaitHeading" = "Plus-que-parfait";
 
 "Info.plusQueParfaitText" = "`Utilisation`
 
-Le ~plus-que-parfait~ est utilisé pour les situations antérieures à un point fixe dans le passé.
+Le ~plus-que-parfait~ est utilisé pour les situations antérieures par rapport à un instant fixe dans le passé.
 
 Exemples :
 
@@ -902,13 +900,13 @@ Exemples :
 
 `Conjugaison`
 
-Le plus-que-parfait est formé de la conjugaison %imparfait% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+Le plus-que-parfait est formé par la conjugaison %imparfait% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de cette application concernant le %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
 
 "Info.passéAntérieurHeading" = "Passé antérieur";
 
 "Info.passéAntérieurText" = "`Utilisation`
 
-Le ~passé antérieur~ est utilisé pour les événements passés qui se sont terminés avant d’autres événements passés. Une proposition utilisant le passé antérieur commence souvent par une conjonction temporelle, par exemple immédiatement que, dès que ou quand.
+Le ~passé antérieur~ est utilisé pour exprimer des événements antérieurs qui ont été accomplis avant d’autres événements passés. Une proposition utilisant le passé antérieur commence souvent par une conjonction de temps, par exemple immédiatement que, dès que ou quand.
 
 Exemples :
 
@@ -922,13 +920,13 @@ Exemples :
 
 `Conjugaison`
 
-Le passé antérieur est formé de la conjugaison %passé simple% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+Le passé antérieur est formé par la conjugaison %passé simple% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de cette application concernant le %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
 
 "Info.passéSurcomposéHeading" = "Passé surcomposé";
 
 "Info.passéSurcomposéText" = "`Utilisation`
 
-Le ~passé surcomposé~ est utilisé pour les situations antérieures à un point fixe dans le passé. L’usage de ce temps est stigmatisé et rare en dehors du midi français.
+Le ~passé surcomposé~ est utilisé pour décrire les situations antérieures à un instant fixe dans le passé. L’usage de ce temps est stigmatisé et rare en dehors du midi français.
 
 Exemples :
 
@@ -942,7 +940,7 @@ Exemples :
 
 `Conjugaison`
 
-Le passé surcomposé est formé de la conjugaison %passé composé% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+Le passé surcomposé est formé par la conjugaison %passé composé% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de cette application concernant le %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
 
 "Info.futurAntérieurHeading" = "Futur antérieur";
 
@@ -962,7 +960,7 @@ Exemples :
 
 `Conjugaison`
 
-Le futur antérieur est formé de la conjugaison %futur simple% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+Le futur antérieur est formé par la conjugaison %futur simple% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de cette application concernant le %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
 
 "Info.conditionnelPasséHeading" = "Conditionnel passé";
 
@@ -982,13 +980,13 @@ Exemples :
 
 `Conjugaison`
 
-Le conditionnel passé est formé de la conjugaison %conditionnel présent% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+Le conditionnel passé est formé par la conjugaison %conditionnel présent% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de cette application concernant le %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
 
 "Info.subjonctifPasséHeading" = "Subjonctif passé";
 
 "Info.subjonctifPasséText" = "`Utilisation`
 
-Comme le subjonctif présent, le ~subjonctif passé~ était utilisé pour exprimer une opinion, une peur, un doute ou une obligation. Une proposition utilisant un temps non-subjonctif accompagnait souvent une proposition utilisant le subjonctif passé. Dans ce cas, les événements de la proposition en subjonctif passé ont précédé les événements de la proposition non-subjonctif.
+Comme le subjonctif présent, le ~subjonctif passé~ était utilisé pour exprimer une opinion, une crainte, un doute ou une obligation. Une proposition utilisant un temps non-subjonctif accompagnait souvent une proposition utilisant le subjonctif passé. Dans ce cas, les événements de la proposition en subjonctif passé ont précédé les événements de la proposition non-subjonctif.
 
 Exemples :
 
@@ -1002,13 +1000,13 @@ Exemples :
 
 `Conjugaison`
 
-Le subjonctif passé était formé de la conjugaison %subjonctif présent% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+Le subjonctif passé était formé de la conjugaison %subjonctif présent% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de cette application concernant le %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
 
 "Info.subjonctifPlusQueParfaitHeading" = "Subjonctif plus-que-parfait";
 
 "Info.subjonctifPlusQueParfaitText" = "`Utilisation`
 
-Le ~subjonctif plus-que-parfait~ était utilisé pour exprimer une opinion, une peur, un doute ou une obligation à l’égard d’événements passés. L’utilisation actuelle de ce temps est rare.
+Le ~subjonctif plus-que-parfait~ était utilisé pour exprimer une opinion, une crainte, un doute ou une obligation à l’égard d’événements passés. Ce temps est rarement utilisé aujourd'hui.
 
 Exemples :
 
@@ -1022,7 +1020,7 @@ Exemples :
 
 `Conjugaison`
 
-Le subjonctif plus-que-parfait était formé de la conjugaison %subjonctif imparfait% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+Le subjonctif plus-que-parfait était formé de la conjugaison %subjonctif imparfait% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de cette application concernant le %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
 
 "Info.impératifPasséHeading" = "Impératif passé";
 
@@ -1042,7 +1040,7 @@ Exemples :
 
 `Conjugaison`
 
-L’impératif passé est formé de la conjugaison %impératif% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de la description de cette application du %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
+L’impératif passé est formé par la conjugaison %impératif% d’%avoir% ou d’%être% suivi du %participe passé%. La section ~Accord~ de cette application concernant le %participe passé% contient des informations sur le choix de l’auxiliaire et sur l’accord de genre et de nombre.";
 
 "Info.questionsAndResponsesHeading" = "Questions et réponses";
 
@@ -1060,7 +1058,7 @@ L’impératif passé est formé de la conjugaison %impératif% d’%avoir% ou d
 
 ~Q :~ Les termes « mode » et « aspect » ont été utilisés dans les descriptions des temps verbaux, mais ~Conjuguer~ n’utilise pas ces termes. De plus, le %participe passé%, le %participe présent% et le %radical du futur% ne constituent pas vraiment des temps.
 
-~R :~ Est-ce bien une question ? Effectivement, ~Conjuguer~ n’utilise pas ces deux termes, et ces trois éléments ne sont pas généralement décrits comme étant des « temps ». Quant à la terminologie, gardez en tête que le but de ~Conjuguer~ est d’enseigner la conjugaison des verbes français, et non d’enseigner la nomenclature de la conjugaison des verbes en anglais. En ce qui concerne le %participe passé%, le %participe présent% et le %radical du futur%, le développeur de ~Conjuguer~ considère ces trois éléments comme des temps, si l’on entend par « temps » « une manière systématique de changer les verbes dans un but précis ». Cette définition, bien qu’absente, au meilleur de ses informations et croyances, dans n’importe quel dictionnaire, sert assez bien l’objectif pédagogique de ~Conjuguer~.
+~R :~ Est-ce bien une question ? Effectivement, ~Conjuguer~ n’utilise pas ces deux termes, et ces trois éléments ne sont pas généralement décrits comme étant des « temps ». Quant à la terminologie, gardez en tête que le but de ~Conjuguer~ est d’enseigner la conjugaison des verbes français, et non d’enseigner la nomenclature de la conjugaison des verbes en anglais. En ce qui concerne le %participe passé%, le %participe présent% et le %radical du futur%, le développeur de ~Conjuguer~ considère ces trois éléments comme des temps, si le terme « temps » signifie « une manière systématique de changer les verbes dans un but précis ». Cette définition, bien qu’absente, au meilleur de ses informations et croyances, dans n’importe quel dictionnaire, sert assez bien l’objectif pédagogique de ~Conjuguer~.
 
 ~Q :~ Pourquoi n’y a-t-il pas d’exemples plus récents d’utilisation des temps ?
 

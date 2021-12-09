@@ -68,7 +68,7 @@ Thanks to Mr. Compton, the name of ~Conjuguer~ is correctly spelled. During my f
 
 ~Conjuguer~ conjugates 5,217 regular French verbs and 1,097 irregular French verbs in ~all~ tenses.
 
-Every French verb has an English translation. In fact, réaliser has eight!
+Every French verb has at least one English translation. In fact, %réaliser% has eight!
 
 Every tense is fully described, with sample uses from the classics of French literature, including “La chanson de Roland” and “À la recherche du temps perdu”.
 
@@ -164,9 +164,7 @@ vous $bUViez$ (~not~ boiiez)
 
 ~Conjuguer~ colors capital letters in alterations red, signifying irregularity.
 
-An asterisk at the end of letters to swap in means an unpredictable ending.
-
-For example, the model for valoir, 4-5A, has the following alteration:
+An asterisk at the end of letters to swap in means an unpredictable ending. For example, the model for valoir, 4-5A, has the following alteration:
 
 r1s, r2s: 1, 1, UX*
 
@@ -850,7 +848,7 @@ The $vEUILle$/$vEUILlez$ conjugations of %vouloir% are used for polite requests.
 
 “[V]$EUILlez$ monter sur l’épaule de ce garçon.” = “Please step on that boy’s shoulder.”
 
-- Jules Verne, Robur le Conquérant
+- Jules Verne, Robur-le-Conquérant
 
 Similarly, these conjugations are sometimes used to close formal letters.
 
