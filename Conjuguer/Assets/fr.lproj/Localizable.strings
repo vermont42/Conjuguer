@@ -1078,6 +1078,8 @@ Wei Huang a créé la police de caractère de ~Conjuguer~, Work Sans, et lui a d
 
 Adam Kilgarriff a fondé Lexical Computing, la société qui a développé Sketch Engine, qui est la source des données de fréquence de verbe de ~Conjuguer~.
 
+Siham Messalti a relu la version française de Conjuguer.
+
 Xavier Nègre a créé Lexilogos, une collection de dictionnaires français que le développeur de ~Conjuguer~ a utilisé pour des traductions non disponibles dans le Wiktionnaire. URL : %https://www.lexilogos.com/english/french_dictionary.htm%
 
 Franz Josef Och a conçu Google Translate, que le développeur de ~Conjuguer~ a utilisé pour traduire les définitions françaises des verbes qui étaient dans le Wiktionnaire français mais pas dans le Wiktionnaire anglais. URL : %https://translate.google.com%

@@ -1078,6 +1078,8 @@ Wei Huang created ~Conjuguer~’s font, Work Sans, and licensed it under the Ope
 
 Adam Kilgarriff founded Lexical Computing, the company behind Sketch Engine, which is the source of ~Conjuguer~’s verb-frequency data.
 
+Siham Messalti proofread the French version of Conjuguer.
+
 Xavier Nègre created Lexilogos, a collection of French dictionaries that ~Conjuguer~’s developer used for translations not available in Wiktionary. URL: %https://www.lexilogos.com/english/french_dictionary.htm%
 
 Franz Josef Och architected Google Translate, which ~Conjuguer~’s developer used to translate French definitions of verbs that were in the French, but not the English, Wiktionary. URL: %https://translate.google.com%
