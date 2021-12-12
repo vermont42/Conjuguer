@@ -36,13 +36,13 @@ struct QuizView: View {
         if quiz.quizState == .inProgress {
           Group {
             Text("\(L.QuizView.verbWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.infinitifWithPossibleExtraLetters)")
-              .bodyLabel()
+              .constrainedBodyLabel()
 
             Spacer()
               .frame(height: Layout.defaultSpacing)
 
             Text("\(L.QuizView.translationWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.translation)")
-              .bodyLabel()
+              .constrainedBodyLabel()
           }
 
           Spacer()
@@ -50,26 +50,26 @@ struct QuizView: View {
 
           Group {
             Text("\(L.QuizView.pronounWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.pronounWithGender)")
-              .bodyLabel()
+              .constrainedBodyLabel()
 
             Spacer()
               .frame(height: Layout.defaultSpacing)
 
             Text("\(L.QuizView.tenseWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.titleCaseName.lowercased())")
-              .bodyLabel()
+              .constrainedBodyLabel()
 
             Spacer()
               .frame(height: Layout.defaultSpacing)
 
             HStack {
               Text("\(L.QuizView.progressWithColon) \(quiz.currentQuestionIndex + 1) / \(quiz.questions.count)")
-                .bodyLabel()
+                .constrainedBodyLabel()
                 .foregroundColor(.customBlue)
 
               Spacer()
 
               Text("\(L.QuizView.scoreWithColon) \(quiz.score)")
-                .bodyLabel()
+                .constrainedBodyLabel()
                 .foregroundColor(.customBlue)
             }
 
@@ -78,7 +78,7 @@ struct QuizView: View {
 
             HStack {
               Text("\(L.QuizView.elapsedWithColon) \(quiz.elapsedTime.timeString)")
-                .bodyLabel()
+                .constrainedBodyLabel()
                 .foregroundColor(.customBlue)
 
               Spacer()

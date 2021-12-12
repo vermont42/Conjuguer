@@ -22,6 +22,7 @@ struct TextView: UIViewRepresentable {
   func updateUIView(_ uiView: UITextView, context: Context) {
     uiView.backgroundColor = UIColor(Color.customBackground)
     uiView.attributedText = text
+    uiView.font = UIFont.preferredFont(forTextStyle: .body)
     uiView.contentOffset = .zero
     uiView.delegate = textViewDelegate
   }

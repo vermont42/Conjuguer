@@ -80,6 +80,15 @@ struct BodyLabel: ViewModifier {
   }
 }
 
+struct ConstrainedBodyLabel: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .font(Font.custom(workSansRegular, size: 20))
+      .foregroundColor(.customForeground)
+      .dynamicTypeSize(...DynamicTypeSize.xLarge)
+  }
+}
+
 struct SmallLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
@@ -169,6 +178,10 @@ extension View {
 
   func bodyLabel() -> some View {
     modifier(BodyLabel())
+  }
+
+  func constrainedBodyLabel() -> some View {
+    modifier(ConstrainedBodyLabel())
   }
 
   func smallLabel() -> some View {
