@@ -252,4 +252,159 @@ enum Conjugator {
       fatalError("Could not conjugate nous indicatifPrésent for \(infinitif).")
     }
   }
+
+  static func printConjugations(infinitif: String) {
+    guard let verb = Verb.verbs["alunir"] else {
+      fatalError("Verb \(infinitif) not found.")
+    }
+
+    let infinitif = verb.infinitif
+    var output = "\(infinitif)"
+
+    output += "  •  \(verb.translation)  •  PRESENT: "
+
+    let personNumbers: [PersonNumber] = PersonNumber.allCases
+
+    let extraLetters = verb.extraLetters
+
+    let conjugationFailedMesage = "Conjugation failed."
+
+    for personNumber in personNumbers {
+      let présentResult = conjugate(infinitif: infinitif, tense: .indicatifPrésent(personNumber), extraLetters: extraLetters)
+      switch présentResult {
+      case .success(let value):
+        output += "\(value) "
+      default:
+        fatalError(conjugationFailedMesage)
+      }
+    }
+
+    output += " •  IMPERFECT: "
+
+    for personNumber in personNumbers {
+      let imparfaitResult = conjugate(infinitif: infinitif, tense: .imparfait(personNumber), extraLetters: extraLetters)
+      switch imparfaitResult {
+      case .success(let value):
+        output += "\(value) "
+      default:
+        fatalError(conjugationFailedMesage)
+      }
+    }
+
+    output += " •  FUTURE: "
+
+    for personNumber in personNumbers {
+      let futurResult = conjugate(infinitif: infinitif, tense: .futurSimple(personNumber), extraLetters: extraLetters)
+      switch futurResult {
+      case .success(let value):
+        output += "\(value) "
+      default:
+        fatalError(conjugationFailedMesage)
+      }
+    }
+
+    output += " •  CONDITIONAL: "
+
+    for personNumber in personNumbers {
+      let conditionnelResult = conjugate(infinitif: infinitif, tense: .conditionnelPrésent(personNumber), extraLetters: extraLetters)
+      switch conditionnelResult {
+      case .success(let value):
+        output += "\(value) "
+      default:
+        fatalError(conjugationFailedMesage)
+      }
+    }
+
+    output += " •  SIMPLE PAST: "
+
+    for personNumber in personNumbers {
+      let passéSimpleResult = conjugate(infinitif: infinitif, tense: .passéSimple(personNumber), extraLetters: extraLetters)
+      switch passéSimpleResult {
+      case .success(let value):
+        output += "\(value) "
+      default:
+        fatalError(conjugationFailedMesage)
+      }
+    }
+
+    output += " •  SUBJ. PRESENT: "
+
+    for personNumber in personNumbers {
+      let subjonctifPrésentResult = conjugate(infinitif: infinitif, tense: .subjonctifPrésent(personNumber), extraLetters: extraLetters)
+      switch subjonctifPrésentResult {
+      case .success(let value):
+        output += "\(value) "
+      default:
+        fatalError(conjugationFailedMesage)
+      }
+    }
+
+    output += " •  SUBJ. IMPERFECT: "
+
+    for personNumber in personNumbers {
+      let subjonctifImparfaitResult = conjugate(infinitif: infinitif, tense: .subjonctifImparfait(personNumber), extraLetters: extraLetters)
+      switch subjonctifImparfaitResult {
+      case .success(let value):
+        output += "\(value) "
+      default:
+        fatalError(conjugationFailedMesage)
+      }
+    }
+
+    let participePassé: String
+    let participePasséResult = conjugate(infinitif: infinitif, tense: .participePassé, extraLetters: extraLetters)
+    switch participePasséResult {
+    case .success(let value):
+      participePassé = value
+    default:
+      fatalError(conjugationFailedMesage)
+    }
+    output += "  •  PAST PARTICIPLE: \(participePassé) "
+
+    let participePrésent: String
+    let participePrésentResult = conjugate(infinitif: infinitif, tense: .participePrésent, extraLetters: extraLetters)
+    switch participePrésentResult {
+    case .success(let value):
+      participePrésent = value
+    default:
+      fatalError(conjugationFailedMesage)
+    }
+    output += " •  PRESENT PARTICIPLE: \(participePrésent) "
+
+    output += " •  IMPERATIVE: "
+
+    for personNumber in PersonNumber.impératifPersonNumbers {
+      let impératifResult = conjugate(infinitif: infinitif, tense: .impératif(personNumber), extraLetters: extraLetters)
+      switch impératifResult {
+      case .success(let value):
+        output += "\(value) "
+      default:
+        fatalError(conjugationFailedMesage)
+      }
+    }
+
+    let radicalFuturResult = conjugate(infinitif: infinitif, tense: .radicalFutur, extraLetters: extraLetters)
+    switch radicalFuturResult {
+    case .success(let value):
+      output += " •  FUTURE STEM: \(value) "
+    default:
+      fatalError(conjugationFailedMesage)
+    }
+
+    if
+      let actualVerb = Verb.verbs[infinitif],
+      actualVerb.auxiliary == .être
+    {
+      output += " •  AUXILIARY: ÊTRE "
+    }
+
+    if
+      let actualVerb = Verb.verbs[infinitif],
+      let frequency = actualVerb.frequency
+    {
+      output += " •  FREQUENCY: \(frequency) "
+    }
+
+    print("\(output)\n\n")
+  }
 }
