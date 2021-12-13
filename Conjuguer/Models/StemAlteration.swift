@@ -12,7 +12,7 @@ struct StemAlteration: Hashable {
   let charsToUse: String
   let appliesTo: Set<Tense>
   let isAdditive: Bool // example: tu payes/paies
-  let isInherited: Bool // example: vous dîtes/prédisez
+  let isInherited: Bool // example: vous dîtes/prédisez (false in that case)
   static let capitalizedFirstLetter = "@" // example: devoir -> Du
 
   init(xmlString: String) {

@@ -10,10 +10,6 @@ import SwiftUI
 import UIKit
 
 extension String {
-  static var headingSeparator: Character {
-    "†"
-  }
-
   static var subheadingSeparator: Character {
     "`"
   }
@@ -94,7 +90,6 @@ extension String {
     var conjugationRanges: [NSRange] = []
     let centeredStyle = NSMutableParagraphStyle()
     centeredStyle.alignment = .center
-    var inHeading = false
     var inSubheading = false
     var inBold = false
     var inConjugation = false
@@ -103,17 +98,6 @@ extension String {
     var startIndex = 0
 
     for char in self {
-      if char == String.headingSeparator {
-        if inHeading {
-          attributesAndRanges.append((NSAttributedString.Key.paragraphStyle, centeredStyle, NSRange(location: startIndex, length: currentIndex - startIndex)))
-          attributesAndRanges.append((NSAttributedString.Key.font, Fonts.heading, NSRange(location: startIndex, length: currentIndex - startIndex)))
-          inHeading = false
-        } else {
-          inHeading = true
-          startIndex = currentIndex
-        }
-      }
-
       if char == String.subheadingSeparator {
         if inSubheading {
           attributesAndRanges.append((NSAttributedString.Key.paragraphStyle, centeredStyle, NSRange(location: startIndex, length: currentIndex - startIndex)))
@@ -188,7 +172,6 @@ extension String {
     }
 
     [
-      String(String.headingSeparator),
       String(String.subheadingSeparator),
       String(String.boldSeparator),
       String(String.linkSeparator),

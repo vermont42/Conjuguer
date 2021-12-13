@@ -44,7 +44,7 @@
   <verb in="abrutir" tn="render idiotic" mo="2-1" />
   <verb in="absenter" tn="leave" re="t" mo="1-1" />
   <verb in="absorber" tn="absorb" mo="1-1" fr="773" />
-  <verb in="absoudre" tn="absolve" mo="5-13A" />
+  <verb in="absoudre" tn="absolve" mo="5-13" />
   <verb in="abstenir" tn="abstain" re="t" mo="6-7" />
   <verb in="abstraire" tn="abstract" mo="5-24" />
   <verb in="abuser" tn="mislead, abuse" mo="1-1" />
@@ -2209,7 +2209,7 @@
   <verb in="dissiper" tn="dissipate, squander" mo="1-1" />
   <verb in="dissocier" tn="dissociate, break up, separate" mo="1-1" />
   <verb in="dissoner" tn="make a discord, be discordant" mo="1-1" />
-  <verb in="dissoudre" tn="dissolve" mo="5-13A" fr="924" />
+  <verb in="dissoudre" tn="dissolve" mo="5-13" fr="924" />
   <verb in="dissuader" tn="dissuade, put off" mo="1-1" />
   <verb in="distancer" tn="distance, outdistance" mo="1-2A" />
   <verb in="distancier" tn="distance (be detached)" mo="1-1" />
@@ -5322,7 +5322,7 @@
   <verb in="resituer" tn="resituate" mo="1-1" />
   <verb in="résonner" tn="resonate, ring out, resound" mo="1-1" />
   <verb in="résorber" tn="resorb" mo="1-1" />
-  <verb in="résoudre" tn="dissolve" mo="5-13B" fr="409" />
+  <verb in="résoudre" tn="dissolve" mo="5-13" fr="409" />
   <verb in="respectabiliser" tn="make respectable" mo="1-1" />
   <verb in="respecter" tn="respect, meet (a deadline)" mo="1-1" fr="214" />
   <verb in="respirer" tn="breathe" mo="1-1" fr="839" />

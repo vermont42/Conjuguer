@@ -82,9 +82,9 @@ Every tense is fully described, with sample uses from the classics of French lit
 
 "Info.terminologyText" = "`Verb`
 
-A ~verb~ is a kind of word that describes an action. For example, in the sentence “Jacques Brel played the guitar”, “play” is the verb. Likewise, in the sentence “Jacques Brel jouait de la guitare”, “jouer” is the verb. Verb ~tense~s express, among other things, when an action took, takes, or will take place. In the example sentences, the verb tenses indicate that the action (playing the guitar) took place in the past. In English and in French, the ~subject~ or actor in the sentence, combined with the tense, determine the form of the verb used. This is the verb ~conjugation~. In English, the example sentence’s combination of subject and tense results in the conjugation “played”. In French, the conjugation is “jouait”.
+A ~verb~ is a kind of word that describes an action. For example, in the sentence “Jacques Brel played the guitar”, “play” is the verb. Likewise, in the sentence “Jacques Brel jouait de la guitare”, “%jouer%” is the verb. Verb ~tense~s express, among other things, when an action took, takes, or will take place. In the example sentences, the verb tenses indicate that the action (playing the guitar) took place in the past. In English and in French, the ~subject~ or actor in the sentence, combined with the tense, determine the form of the verb used. This is the verb ~conjugation~. In English, the example sentence’s combination of subject and tense results in the conjugation “played”. In French, the conjugation is “jouait”.
 
-The ~infinitif~ (infinitive) is an invariant verb form that usually ends in -er, -ir, or -re. Unlike a conjugation, an ~infinitif~ does not indicate time, number, or person. Example use: “Jacques Brel savait ~chanter~.” = “Jacques Brel $knEw$ how ~to sing~.” In both sentences, the infinitif represents the ~act~ of singing without reference to time, number, or person.
+The ~infinitif~ (infinitive) is an invariant verb form that usually ends in -er, -ir, or -re. Unlike a conjugation, an ~infinitif~ does not indicate time, number, or person. Example use: “Jacques Brel savait %chanter%.” = “Jacques Brel $knEw$ how ~to sing~.” In both sentences, the infinitif represents the ~act~ of singing without reference to time, number, or person.
 
 French dictionaries and ~Conjuguer~’s Verbs tab list infinitif forms of verbs.
 
@@ -129,29 +129,29 @@ Red letters in conjugations represent irregularities. A verb is considered irreg
 
 "Info.irregularitiesText" = "Of the 6,314 verbs in ~Conjuguer~, 5,217 have conjugations that are completely regular. A completely regular conjugation uses the radical de l’infinitif as its stem, and the ending is completely predictable. These are verbs that are conjugated using verb models 1-1 (regular -er), 2-1 (regular -ir), and 5-1A (regular -re). Examples:
 
-cacaber -> vous cacabâtes
-alunir -> nous alunissons
-épandre -> épandu
+%cacaber% -> vous cacabâtes
+%alunir% -> nous alunissons
+%épandre% -> épandu
 
 The other 1,097 verbs are conjugated using one of ninety-two irregular-verb models. Verb models exhibit irregularities in three ways.
 
 First, the stem used differs from the radical de l’infinitif, but the ending is predictable. Example:
 
-suivre -> je $suIs$ (~not~ suivs)
+%suivre% -> je $suIs$ (~not~ suivs)
 
 Second, the stem is as expected, but the ending is unpredictable. Example:
 
-être -> vous $êteS$ (~not~ êtez)
+%être% -> vous $êteS$ (~not~ êtez)
 
 Third, both the stem ~and~ ending are unpredictable. Example:
 
-aller -> elles $VOnt$ (~not~ allent)
+%aller% -> elles $VOnt$ (~not~ allent)
 
 ~Conjuguer~ represents stem alterations and unpredictable endings for verb models in the following manner:
 
 ~[tenses to apply this alteration to]~: ~[number of letters from end of radical de l’infinitif]~, ~[number of letters to replace]~, ~[letters to swap in]~
 
-Here is an example. The model for boire, 2-17, has the following alteration:
+Here is an example. The model for %boire%, 2-17, has the following alteration:
 
 r1p, r2p, b1p, b2p: 2, 2, UV
 
@@ -164,7 +164,7 @@ vous $bUViez$ (~not~ boiiez)
 
 ~Conjuguer~ colors capital letters in alterations red, signifying irregularity.
 
-An asterisk at the end of letters to swap in means an unpredictable ending. For example, the model for valoir, 4-5A, has the following alteration:
+An asterisk at the end of letters to swap in means an unpredictable ending. For example, the model for %valoir%, 4-5A, has the following alteration:
 
 r1s, r2s: 1, 1, UX*
 
@@ -187,7 +187,7 @@ h2s, h1p, h2p: three person-numbers of the impératif
 
 The person-number ~A~ means “all six”. For example, xA is equivalent to x1s, x2s, x3s, x1p, x2p, x3p. Likewise, rA is equivalent to r1s, r2s, r3s, r1p, r2p, r3p.
 
-For example, the model for avoir, 4-10, has the following alteration:
+For example, the model for %avoir%, 4-10, has the following alteration:
 
 xA: 2, 2, E
 
@@ -197,7 +197,7 @@ $Eus$, $Eus$, $Eut$, $Eûmes$, $Eûtes$, $Eurent$
 
 Some alterations have @ as the letter to swap in. This means “capitalize the first letter of the conjugation to indicate its irregularity”.
 
-For example, the model for pouvoir, 4-6, has the following alteration:
+For example, the model for %pouvoir%, 4-6, has the following alteration:
 
 xA, pp: 4, 4, @
 
@@ -1077,6 +1077,12 @@ Ilona Coffre created ~Conjuguer~’s app icon.
 Wei Huang created ~Conjuguer~’s font, Work Sans, and licensed it under the Open Font License, available here: %https://scripts.sil.org/cms/scripts/page.php?item_id=OFL-FAQ_web%
 
 Adam Kilgarriff founded Lexical Computing, the company behind Sketch Engine, which is the source of ~Conjuguer~’s verb-frequency data.
+
+Kevin MacLeod (incompetech.com) wrote the song used in ~Conjuguer~’s app preview, “Backbay Lounge”. The song’s license follows.
+
+“Backbay Lounge” Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
 
 Siham Messalti proofread the French version of Conjuguer.
 

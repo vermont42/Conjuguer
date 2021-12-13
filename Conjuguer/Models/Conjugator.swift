@@ -52,8 +52,7 @@ enum Conjugator {
         }
       }
 
-    case .participePassé,
-         .passéComposé, .plusQueParfait, .passéAntérieur, .passéSurcomposé, .futurAntérieur, .conditionnelPassé, .subjonctifPassé, .subjonctifPlusQueParfait:
+    case .participePassé, .passéComposé, .plusQueParfait, .passéAntérieur, .passéSurcomposé, .futurAntérieur, .conditionnelPassé, .subjonctifPassé, .subjonctifPlusQueParfait:
       stems.append(verb.infinitifStem)
       if let stemAlterations = model.stemAlterationsRecursive {
         for alteration in stemAlterations {
@@ -192,6 +191,9 @@ enum Conjugator {
     case .impératif(let personNumber):
       return .success(composedConjugation(stems: stems, ending: model.indicatifPrésentGroupRecursive.impératifEndingForPersonNumber(personNumber)))
     case .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
+      if stems[0].suffix(1) == Tense.irregularEndingMarker {
+        stems[0] = String(stems[0].dropLast())
+      }
       let conjugationWithoutAgreement = tense.conjugatedAuxilliary(personNumber: personNumber, auxiliary: verb.auxiliary) + " " + stems[0] + model.participeEndingRecursive
       if verb.isReflexive || verb.auxiliary == .être {
         let pronounGender = Current.settings.pronounGender

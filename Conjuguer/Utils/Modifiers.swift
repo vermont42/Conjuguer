@@ -19,15 +19,6 @@ enum Modifiers {
     UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color.customBlue)], for: .selected)
     UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color.customBlue)], for: .normal)
   }
-
-  // Consider using this code to customize segmentedControl and further customize navBar.
-  // May need to rename setTitleAttributes().
-  //  UISegmentedControl.appearance().selectedSegmentTintColor = .blue
-  //  UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-  //  UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.blue], for: .normal)
-  //  UINavigationBar.appearance().backgroundColor = .black
-  //  UINavigationBar.appearance().tintColor = .white
-  //  UINavigationBar.appearance().barTintColor = .black
 }
 
 struct CustomNavigationBarItems: ViewModifier {

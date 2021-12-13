@@ -13,11 +13,6 @@ struct Info: Hashable {
   let imageName: String?
 
   private init(heading: String, text: String, imageName: String? = nil) {
-//    guard let encodedHeading = heading.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
-//      fatalError("Could not URL encode heading \(heading).")
-//    }
-//
-//    self.heading = encodedHeading
     self.heading = heading
     attributedText = text.attributedText
     self.imageName = imageName

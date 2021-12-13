@@ -82,9 +82,9 @@ Chaque temps est décrit en détail, avec des exemples d’utilisation des class
 
 "Info.terminologyText" = "`Verbe`
 
-Un ~verbe~ est un type de mot qui décrit une action. Par exemple, dans la phrase « Jacques Brel jouait de la guitare », « jouer » est le verbe. De même, dans la phrase « Jacques Brel played the guitar », « play » est le verbe. Les ~temps~ des verbes expriment, parmi d’autres éléments, à quel moment une action a eu, a ou aura lieu. Dans les phrases données comme exemples, les temps des verbes indiquent que l’action (jouer de la guitare) a eu lieu dans le passé. En anglais et en français, le ~sujet~ ou l’acteur de la phrase, combiné au temps, détermine la forme du verbe utilisé. C’est la ~conjugaison~ du verbe. En anglais, la combinaison du sujet et du temps de la phrase d’exemple entraîne la conjugaison « played ». En français, la conjugaison est « jouait ».
+Un ~verbe~ est un type de mot qui décrit une action. Par exemple, dans la phrase « Jacques Brel jouait de la guitare », « %jouer% » est le verbe. De même, dans la phrase « Jacques Brel played the guitar », « play » est le verbe. Les ~temps~ des verbes expriment, parmi d’autres éléments, à quel moment une action a eu, a ou aura lieu. Dans les phrases données comme exemples, les temps des verbes indiquent que l’action (jouer de la guitare) a eu lieu dans le passé. En anglais et en français, le ~sujet~ ou l’acteur de la phrase, combiné au temps, détermine la forme du verbe utilisé. C’est la ~conjugaison~ du verbe. En anglais, la combinaison du sujet et du temps de la phrase d’exemple entraîne la conjugaison « played ». En français, la conjugaison est « jouait ».
 
-L’~infinitif~ est une forme verbale invariable qui se termine généralement par -er, -ir ou -re. Contrairement à une conjugaison, un ~infinitif~ n’indique pas le temps, le nombre ou la personne. Exemple d’utilisation : « Jacques Brel savait ~chanter~ ». = « Jacques Brel $knEw$ how ~to sing~. » Dans les deux phrases, l’infinitif représente l’~acte~ de chanter sans référence au temps, au nombre ou à la personne.
+L’~infinitif~ est une forme verbale invariable qui se termine généralement par -er, -ir ou -re. Contrairement à une conjugaison, un ~infinitif~ n’indique pas le temps, le nombre ou la personne. Exemple d’utilisation : « Jacques Brel savait %chanter% ». = « Jacques Brel $knEw$ how ~to sing~. » Dans les deux phrases, l’infinitif représente l’~acte~ de chanter sans référence au temps, au nombre ou à la personne.
 
 Les dictionnaires français et l’onglet Verbes de ~Conjuguer~ répertorient les formes infinitives des verbes.
 
@@ -129,29 +129,29 @@ Les lettres rouges dans les conjugaisons représentent des irrégularités. Un v
 
 "Info.irregularitiesText" = "Sur les 6 314 verbes que compte ~Conjuguer~, 5 217 ont des conjugaisons complètement régulières. Une conjugaison complètement régulière utilise le radical de l’infinitif comme radical, et la terminaison est tout à fait prévisible. Ce sont les verbes qui sont conjugués à l’aide des modèles de verbes 1-1 (régulier -er), 2-1 (régulier -ir) et 5-1A (régulier -re). Exemples :
 
-cacaber -> vous cacabâtes
-alunir -> nous alunissons
-épandre -> épandu
+%cacaber% -> vous cacabâtes
+%alunir% -> nous alunissons
+%épandre% -> épandu
 
 Les 1 097 autres verbes sont conjugués à l’aide de l’un des quatre-vingt-douze modèles de verbes irréguliers. Les modèles verbaux présentent des irrégularités de trois manières.
 
 Premièrement, le radical utilisé diffère du radical de l’infinitif, mais la terminaison est prévisible. Exemple :
 
-suivre -> je $suIs$ (~pas~ suivs)
+%suivre% -> je $suIs$ (~pas~ suivs)
 
 Deuxièmement, le radical est conforme aux attentes, mais la terminaison est imprévisible. Exemple :
 
-être -> vous $êteS$ (~pas~ êtez)
+%être% -> vous $êteS$ (~pas~ êtez)
 
 Troisièmement, le radical ~et~ la terminaison sont tous deux imprévisibles. Exemple :
 
-aller -> elles $VOnt$ (~pas~ allent)
+%aller% -> elles $VOnt$ (~pas~ allent)
 
 ~Conjuguer~ représente les altérations des radicaux et les terminaisons imprévisibles des modèles verbaux de la manière suivante :
 
 ~[temps auxquels s’applique cette altération]~: ~[nombre de lettres à partir de la fin du radical de l’infinitif]~, ~[nombre de lettres à remplacer]~, ~[lettres de remplacement]~
 
-Voici un exemple. Le modèle de boire, 2-17, a l’altération suivante :
+Voici un exemple. Le modèle de %boire%, 2-17, a l’altération suivante :
 
 r1p, r2p, b1p, b2p: 2, 2, UV
 
@@ -164,7 +164,7 @@ vous $bUViez$ (~pas~ boiiez)
 
 ~Conjuguer~ colore en rouge les lettres majuscules dans les altérations, signifiant les irrégularités.
 
-Un astérisque à la fin des lettres de remplacement signifie une terminaison imprévisible. Par exemple, le modèle du verbe valoir, 4-5A, a l’altération suivante :
+Un astérisque à la fin des lettres de remplacement signifie une terminaison imprévisible. Par exemple, le modèle du verbe %valoir%, 4-5A, a l’altération suivante :
 
 r1s, r2s: 1, 1, UX*
 
@@ -187,7 +187,7 @@ h2s, hlp, h2p : trois nombres-personnes de l’impératif
 
 La nombre-personne ~A~ signifie « tous les six ». Par exemple, xA est équivalent à x1s, x2s, x3s, x1p, x2p, x3p. De même, rA est équivalent à r1s, r2s, r3s, r1p, r2p, r3p.
 
-Par exemple, le modèle du verbe avoir, 4-10, a l’altération suivante :
+Par exemple, le modèle du verbe %avoir%, 4-10, a l’altération suivante :
 
 xA: 2, 2, E
 
@@ -197,7 +197,7 @@ $Eus$, $Eus$, $Eut$, $Eûmes$, $Eûtes$, $Eurent$
 
 Certaines altérations ont @ comme lettre de remplacement. Cela signifie « mettre en majuscule la première lettre de la conjugaison pour indiquer son irrégularité ».
 
-Par exemple, le modèle du verbe pouvoir, 4-6, a l’altération suivante :
+Par exemple, le modèle du verbe %pouvoir%, 4-6, a l’altération suivante :
 
 xA, pp: 4, 4, @
 
@@ -1006,7 +1006,7 @@ Le subjonctif passé était formé de la conjugaison %subjonctif présent% d’%
 
 "Info.subjonctifPlusQueParfaitText" = "`Utilisation`
 
-Le ~subjonctif plus-que-parfait~ était utilisé pour exprimer une opinion, une crainte, un doute ou une obligation à l’égard d’événements passés. Ce temps est rarement utilisé aujourd'hui.
+Le ~subjonctif plus-que-parfait~ était utilisé pour exprimer une opinion, une crainte, un doute ou une obligation à l’égard d’événements passés. Ce temps est rarement utilisé aujourd’hui.
 
 Exemples :
 
@@ -1077,6 +1077,12 @@ Ilona Coffre a créé l’icône de l’application ~Conjuguer~.
 Wei Huang a créé la police de caractère de ~Conjuguer~, Work Sans, et lui a donné la licence Open Font License, disponible ici : %https://scripts.sil.org/cms/scripts/page.php?item_id=OFL-FAQ_web%
 
 Adam Kilgarriff a fondé Lexical Computing, la société qui a développé Sketch Engine, qui est la source des données de fréquence de verbe de ~Conjuguer~.
+
+Kevin MacLeod (incompetech.com) a écrit la chanson utilisée dans la vidéo de prévisualisation de ~Conjuguer~, « Backbay Lounge ». La licence de cette chanson suit.
+
+“Backbay Lounge” Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
 
 Siham Messalti a relu la version française de Conjuguer.
 

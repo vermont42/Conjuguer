@@ -78,8 +78,7 @@
   <model mo="rire" id="5-11" ep="" si="s" se="b" bb="e" p="1,1,I,N,pp" />
   <model mo="frire" id="5-11A" pa="5-11" ep="T" />
   <model mo="plaindre" id="5-12" ep="T" si="s" se="i" bb="e" p="2,2,N,r1s,r2s,r3s,pp|2,2,GN,r1p,r2p,r3p,xA,bA" />
-  <model mo="absoudre" id="5-13A" si="s" se="u" bb="e" p="2,2,U,r1s,r2s,r3s|2,2,LV,r1p,r2p,r3p,bA|2,2,L,xA|1,1,S*,pp" />
-  <model mo="résoudre" id="5-13B" pa="5-13A" ep="u" p="2,2,L,A,pp" />
+  <model mo="absoudre" id="5-13" si="s" se="u" bb="e" p="2,2,U,r1s,r2s,r3s|2,2,LV,r1p,r2p,r3p,bA|2,2,L,xA|1,1,S*,pp" />
   <model mo="coudre" id="5-14" ep="u" si="s" se="i" bb="e" p="1,1,D*,r3s|1,1,S,r1p,r2p,r3p,xA,bA,pp" />
   <model mo="moudre" id="5-15" ep="u" si="s" se="u" bb="e" p="1,1,D*,r3s|1,1,L,r1p,r2p,r3p,xA,bA,pp" />
   <model mo="exclure" id="5-16A" ep="" si="s" se="b" bb="e" p="1,1,U,N,pp" />
@@ -92,7 +91,7 @@
   <model mo="naître" id="5-21" pa="5-20" ep="É" se="i" p="2,2,QU,xA" />
   <model mo="plaire" id="5-22A" ep="u" si="s" se="u" bb="e" p="1,1,Î,N,r3s|0,1,S,r1p,r2p,r3p,bA|3,3,@,xA,pp" />
   <model mo="taire" id="5-22B" pa="5-22A" />
-  <model mo="faire" id="5-23" ep="T" si="s" se="i" bb="e" p="0,1,S,r1p,r2p|2,2,ONT*,r3p|4,2,E,sf|3,3,@,xA|1,1,SS,bA" />
+  <model mo="faire" id="5-23" ep="T" si="s" se="i" bb="e" p="0,1,S,r1p|0,1,TeS*,r2p|2,2,ONT*,r3p|4,2,E,sf|3,3,@,xA|1,1,SS,bA" />
   <model mo="traire" id="5-24" ep="T" si="s" se="a" bb="e" p="1,1,Y,r1p,r2p,xA,b1p,b2p" />
   <model mo="vaincre" id="5-25" si="r" se="i" bb="e" ep="u" p="1,1,QU,r1p,r2p,r3p,xA,bA" />
   <model mo="être" id="5-26" si="s" se="u" bb="e" ep="É" sb="SOI" p="2,2,SUI,r1s|2,2,E,r2s|2,2,ES,r3s|2,2,SOMMEs*,r1p|2,2,êteS*,r2p|2,2,SOnt*,r3p|4,2,SE,sf|2,2,F,xA|6,6,Ét,iA|2,2,SOIS*,b1s|2,2,SOIs*,b2s|2,2,SOIT*,b3s|2,2,SOYons*,b1p|2,2,SOYez*,b2p|2,2,SOI,b3p|1,1,SOI,h2s|5,5,Yons*,h1p|5,5,SOYez*,h2p|2,1,É,pp|6,6,Ét,rr" />
