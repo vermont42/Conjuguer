@@ -154,18 +154,17 @@ struct QuizView: View {
     }
   }
 
-  private func quit() {
-    SoundPlayer.play(Sound.randomSadTrombone)
-    conjugationFieldIsFocused = false
-    input = ""
-    quiz.quit()
-  }
-
   private func start() {
     quiz.start()
     let delayForFocus: TimeInterval = 0.1 // https://stackoverflow.com/a/69134653
     DispatchQueue.main.asyncAfter(deadline: .now() + delayForFocus) {
       conjugationFieldIsFocused = true
     }
+  }
+
+  private func quit() {
+    conjugationFieldIsFocused = false
+    input = ""
+    quiz.quit()
   }
 }

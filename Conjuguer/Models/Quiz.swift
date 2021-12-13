@@ -74,6 +74,7 @@ class Quiz: ObservableObject {
   }
 
   func quit() {
+    SoundPlayer.play(Sound.randomSadTrombone)
     timer?.invalidate()
     quizState = .notStarted
     Current.analytics.recordQuizQuit(difficulty: Current.settings.quizDifficulty, lastQuestionIndex: currentQuestionIndex, elapsedTime: elapsedTime)
