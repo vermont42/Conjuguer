@@ -1096,6 +1096,8 @@ Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’anci
 "Settings.quizDifficultyDescription" = "This setting determines the difficulty of quizzes. You probably want Regular because Ridiculous includes tenses and verbs that are not in widespread use.";
 "Settings.pronounGender" = "Pronoun Genders";
 "Settings.pronounGenderDescription" = "This setting determines pronoun genders, which matters for certain compound-tense conjugations. “Both” means that singular pronouns are feminine and that plural pronouns are masculine.";
+"Settings.ratingsAndReviews" = "Ratings and Reviews";
+"Settings.rateOrReview" = "Rate or Review";
 
 "QuizDifficulty.regular" = "Regular";
 "QuizDifficulty.ridiculous" = "Ridiculous";
@@ -1107,6 +1109,10 @@ Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’anci
 "PronounGender.both" = "Both";
 "PronounGender.feminineAbbreviation" = "fem.";
 "PronounGender.masculineAbbreviation" = "masc.";
+
+"RatingsFetcher.noRating" = "No one has rated this version of Conjuguer.";
+"RatingsFetcher.oneRating" = "There is one rating for this version of Conjuguer.";
+"RatingsFetcher.multipleRatings" = "There are %d ratings for this version of Conjuguer.";
 
 "VerbSort.frequency" = "Frequency";
 

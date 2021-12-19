@@ -23,12 +23,17 @@ class World: ObservableObject {
   @Published var verb: Verb?
   @Published var verbModel: VerbModel?
   @Published var info: Info?
+  @Published var session: URLSession
 
-  init(settings: Settings, gameCenter: GameCenterable, quiz: Quiz, analytics: AnalyticsService) {
+  private static let fakeRatingsCount = 1
+  private static let fakeSession = URLSession.stubSession(ratingsCount: fakeRatingsCount)
+
+  init(settings: Settings, gameCenter: GameCenterable, quiz: Quiz, analytics: AnalyticsService, session: URLSession) {
     self.settings = settings
     self.gameCenter = gameCenter
     self.quiz = quiz
     self.analytics = analytics
+    self.session = session
   }
 
   static let device: World = {
@@ -36,7 +41,7 @@ class World: ObservableObject {
     let gameCenter = GameCenter.shared
     let quiz = Quiz(gameCenter: gameCenter)
     let analytics = AWSAnalyticsService()
-    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics)
+    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics, session: URLSession.shared)
   }()
 
   static let simulator: World = {
@@ -44,7 +49,7 @@ class World: ObservableObject {
     let gameCenter = TestGameCenter()
     let quiz = Quiz(gameCenter: gameCenter)
     let analytics = TestAnalyticsService()
-    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics)
+    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics, session: fakeSession)
   }()
 
   static let unitTest: World = {
@@ -52,7 +57,7 @@ class World: ObservableObject {
     let gameCenter = TestGameCenter()
     let quiz = Quiz(gameCenter: gameCenter)
     let analytics = TestAnalyticsService()
-    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics)
+    return World(settings: settings, gameCenter: gameCenter, quiz: quiz, analytics: analytics, session: fakeSession)
   }()
 
   func handleURL(_ url: URL) {

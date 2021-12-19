@@ -428,6 +428,14 @@ enum L {
     static var pronounGenderDescription: String {
       String(localized: "Settings.pronounGenderDescription")
     }
+
+    static var ratingsAndReviews: String {
+      String(localized: "Settings.ratingsAndReviews")
+    }
+
+    static var rateOrReview: String {
+      String(localized: "Settings.rateOrReview")
+    }
   }
 
   enum QuizDifficulty {
@@ -467,6 +475,20 @@ enum L {
 
     static var masculineAbbreviation: String {
       String(localized: "PronounGender.masculineAbbreviation")
+    }
+  }
+
+  enum RatingsFetcher {
+    static var noRating: String {
+      String(localized: "RatingsFetcher.noRating")
+    }
+
+    static var oneRating: String {
+      String(localized: "RatingsFetcher.oneRating")
+    }
+
+    static var multipleRatings: String {
+      String(localized: "RatingsFetcher.multipleRatings")
     }
   }
 

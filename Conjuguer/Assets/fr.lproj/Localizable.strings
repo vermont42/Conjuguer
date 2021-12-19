@@ -1096,6 +1096,8 @@ Machio Okada et Hitoshi Oguriso ont créé les Tableaux de conjugaison de l’an
 "Settings.quizDifficultyDescription" = "Ce paramètre détermine la difficulté des quiz. Vous voulez probablement Ordinaire parce que Ridicule comprend des temps et des verbes qui ne sont pas d’usage très répandu.";
 "Settings.pronounGender" = "Genres des pronoms";
 "Settings.pronounGenderDescription" = "Ce paramètre détermine le genre du pronom, ce qui est important pour certaines conjugaisons aux temps composés. « Les deux » signifie que les pronoms singuliers sont féminins et que les pronoms pluriels sont masculins.";
+"Settings.ratingsAndReviews" = "Évaluations et critiques";
+"Settings.rateOrReview" = "Évaluer ou critiquer";
 
 "QuizDifficulty.regular" = "Ordinaire";
 "QuizDifficulty.ridiculous" = "Ridicule";
@@ -1107,6 +1109,10 @@ Machio Okada et Hitoshi Oguriso ont créé les Tableaux de conjugaison de l’an
 "PronounGender.both" = "Les deux";
 "PronounGender.feminineAbbreviation" = "fém.";
 "PronounGender.masculineAbbreviation" = "masc.";
+
+"RatingsFetcher.noRating" = "Personne n’a évalué cette version de Conjuguer.";
+"RatingsFetcher.oneRating" = "Cette version de Conjuguer n’a qu’une évaluation.";
+"RatingsFetcher.multipleRatings" = "Cette version de Conjuguer a %d évaluations.";
 
 "VerbSort.frequency" = "Fréquence";
 

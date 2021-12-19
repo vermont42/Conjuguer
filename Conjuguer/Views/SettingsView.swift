@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
   @ObservedObject var store = SelectionStore()
+  @State private var rateReviewDescription = ""
 
   var body: some View {
     ZStack {
@@ -72,10 +73,32 @@ struct SettingsView: View {
 
             Spacer(minLength: Layout.tripleDefaultSpacing)
           }
+
+          Group {
+            Text(L.Settings.ratingsAndReviews)
+              .modifier(SubheadingLabel())
+
+            Button(L.Settings.rateOrReview) {
+              UIApplication.shared.open(RatingsFetcher.reviewURL, options: [:])
+            }
+              .modifier(FunButton())
+
+            if rateReviewDescription != "" {
+              Text(rateReviewDescription)
+                .modifier(SettingsLabel())
+            }
+          }
         }
       }
         .onAppear {
           Current.analytics.recordViewAppeared("\(SettingsView.self)")
+          RatingsFetcher.fetchRatingsDescription(completion: { description in
+            if description != RatingsFetcher.errorMessage {
+              DispatchQueue.main.async {
+                self.rateReviewDescription = description
+              }
+            }
+          })
         }
     }
   }
