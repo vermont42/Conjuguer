@@ -402,7 +402,7 @@
   <verb in="attarder" tn="make late, delay" mo="1-1" />
   <verb in="atteindre" tn="attain" mo="5-12" fr="110" />
   <verb in="atteler" tn="harness, yoke" mo="1-3A" />
-  <verb in="attendre" tn="wait for" mo="5-1A" fr="57" />
+  <verb in="attendre" tn="wait for, expect" mo="5-1A" fr="57" />
   <verb in="attendrir" tn="make softer" mo="2-1" />
   <verb in="attenter" tn="assault" mo="1-1" />
   <verb in="atténuer" tn="attenuate" mo="1-1" />
@@ -3776,7 +3776,7 @@
   <verb in="lâcher" tn="release, loosen, let go, abandon, chicken out" mo="1-1" fr="746" />
   <verb in="laïciser" tn="laicize, secularize" mo="1-1" />
   <verb in="lainer" tn="teasel" mo="1-1" />
-  <verb in="laisser" tn="leave, allow" mo="1-1" fr="39" />
+  <verb in="laisser" tn="leave, leave alone, allow" mo="1-1" fr="39" />
   <verb in="laitonner" tn="plate with brass" mo="1-1" />
   <verb in="laïusser" tn="make a speech" mo="1-1" />
   <verb in="lambrisser" tn="panel" mo="1-1" />
@@ -4232,7 +4232,7 @@
   <verb in="offenser" tn="offend, hurt" mo="1-1" />
   <verb in="officialiser" tn="formalize" mo="1-1" />
   <verb in="officier" tn="officiate" mo="1-1" />
-  <verb in="offrir" tn="offer" mo="3-1" fr="46" />
+  <verb in="offrir" tn="offer, give as a gift" mo="3-1" fr="46" />
   <verb in="offusquer" tn="offend" mo="1-1" />
   <verb in="oindre" tn="anoint" mo="5-12" />
   <verb in="oiseler" tn="hunt small birds" mo="1-3A" />
@@ -4358,7 +4358,7 @@
   <verb in="parrainer" tn="mentor, sponsor" mo="1-1" />
   <verb in="parsemer" tn="sprinkle, scatter, strew" mo="1-4" />
   <verb in="partager" tn="share, divide, divide up" mo="1-2B" fr="44" />
-  <verb in="participer" tn="participate, donate" mo="1-1" fr="100" />
+  <verb in="participer" tn="participate in, donate to" mo="1-1" fr="100" />
   <verb in="particulariser" tn="particularize" mo="1-1" />
   <verb in="partir" tn="leave" ay="e" mo="6-1" fr="26" />
   <verb in="partouser" tn="participate in an orgy" mo="1-1" />
@@ -4580,9 +4580,9 @@
   <verb in="pontifier" tn="pontificate" mo="1-1" />
   <verb in="populariser" tn="popularize" mo="1-1" />
   <verb in="poquer" tn="in pétanque, throw the boule up high so that it stops dead when it hits the ground" mo="1-1" />
-  <verb in="porter" tn="carry" mo="1-1" fr="41" />
+  <verb in="porter" tn="carry, wear, bear" mo="1-1" fr="41" />
   <verb in="portraiturer" tn="paint a portrait, portray" mo="1-1" />
-  <verb in="poser" tn="pose, put down" mo="1-1" fr="83" />
+  <verb in="poser" tn="pose, ask (a question), put down, stop carrying" mo="1-1" fr="83" />
   <verb in="positionner" tn="position" mo="1-1" fr="687" />
   <verb in="positiver" tn="think positively, be optimistic" mo="1-1" />
   <verb in="posséder" tn="own, possess" mo="1-5" fr="149" />
