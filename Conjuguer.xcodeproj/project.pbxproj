@@ -78,6 +78,9 @@
 		036F9872276F929200ACD986 /* RatingsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F9871276F929200ACD986 /* RatingsFetcher.swift */; };
 		036F9874276FDDC500ACD986 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F9873276FDDC500ACD986 /* URLProtocolStub.swift */; };
 		036F9876276FDE0000ACD986 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F9875276FDE0000ACD986 /* URLSessionExtension.swift */; };
+		036F987827700E9000ACD986 /* ReviewPrompter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F987727700E9000ACD986 /* ReviewPrompter.swift */; };
+		036F987A27700ED600ACD986 /* ReviewPromptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F987927700ED600ACD986 /* ReviewPromptable.swift */; };
+		036F987C27700F1300ACD986 /* TestReviewPrompter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F987B27700F1300ACD986 /* TestReviewPrompter.swift */; };
 		037367FF25D5C3EB008BDF46 /* ConjugationText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037367FE25D5C3EB008BDF46 /* ConjugationText.swift */; };
 		0373680E25DB811F008BDF46 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0373680D25DB811F008BDF46 /* MainTabView.swift */; };
 		0373681625DB8530008BDF46 /* VerbBrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0373681525DB8530008BDF46 /* VerbBrowseView.swift */; };
@@ -206,6 +209,9 @@
 		036F9871276F929200ACD986 /* RatingsFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsFetcher.swift; sourceTree = "<group>"; };
 		036F9873276FDDC500ACD986 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 		036F9875276FDE0000ACD986 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
+		036F987727700E9000ACD986 /* ReviewPrompter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPrompter.swift; sourceTree = "<group>"; };
+		036F987927700ED600ACD986 /* ReviewPromptable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPromptable.swift; sourceTree = "<group>"; };
+		036F987B27700F1300ACD986 /* TestReviewPrompter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestReviewPrompter.swift; sourceTree = "<group>"; };
 		037367FE25D5C3EB008BDF46 /* ConjugationText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConjugationText.swift; sourceTree = "<group>"; };
 		0373680D25DB811F008BDF46 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		0373681525DB8530008BDF46 /* VerbBrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbBrowseView.swift; sourceTree = "<group>"; };
@@ -411,10 +417,13 @@
 				03653F0225EC4F5A00A34267 /* Modifiers.swift */,
 				03309F6726BC9E72003E4F92 /* NSAttributedStringExtension.swift */,
 				036F9871276F929200ACD986 /* RatingsFetcher.swift */,
+				036F987927700ED600ACD986 /* ReviewPromptable.swift */,
+				036F987727700E9000ACD986 /* ReviewPrompter.swift */,
 				0373682425DC65B2008BDF46 /* Settings.swift */,
 				03C2CAC32619125200CFA825 /* SoundPlayer.swift */,
 				03309F6826BC9E72003E4F92 /* StringExtensions.swift */,
 				036A99372726168900C6C984 /* TestGameCenter.swift */,
+				036F987B27700F1300ACD986 /* TestReviewPrompter.swift */,
 				03309F6B26BCA0B0003E4F92 /* UIFontExtension.swift */,
 				0339B50826F9053500F63ADC /* URLExtensions.swift */,
 				036F9873276FDDC500ACD986 /* URLProtocolStub.swift */,
@@ -673,6 +682,7 @@
 				036DB790259FD6500013C3B7 /* InputView.swift in Sources */,
 				035BC8FB2739C1DC00EA13CA /* QuizResult.swift in Sources */,
 				03309F6626BC9C95003E4F92 /* Info.swift in Sources */,
+				036F987A27700ED600ACD986 /* ReviewPromptable.swift in Sources */,
 				036DB81825A8C9420013C3B7 /* IndicatifPresentGroup.swift in Sources */,
 				0373683125DC672F008BDF46 /* GetterSetter.swift in Sources */,
 				036DB7F325A12B990013C3B7 /* Auxiliary.swift in Sources */,
@@ -693,6 +703,7 @@
 				036DB78E259FD6500013C3B7 /* ConjuguerApp.swift in Sources */,
 				037367FF25D5C3EB008BDF46 /* ConjugationText.swift in Sources */,
 				035D979726B74C820089083C /* L.swift in Sources */,
+				036F987827700E9000ACD986 /* ReviewPrompter.swift in Sources */,
 				03ACA9FC25AA5D4700CF5390 /* SubjonctifPresentGroup.swift in Sources */,
 				0338F16D273F54C100FD796C /* GameCenterAuthView.swift in Sources */,
 				0373682525DC65B2008BDF46 /* Settings.swift in Sources */,
@@ -717,6 +728,7 @@
 				036F9872276F929200ACD986 /* RatingsFetcher.swift in Sources */,
 				035BC8F327387B7D00EA13CA /* QuizResultsView.swift in Sources */,
 				0373680E25DB811F008BDF46 /* MainTabView.swift in Sources */,
+				036F987C27700F1300ACD986 /* TestReviewPrompter.swift in Sources */,
 				030FFAA726CA1A2000741524 /* FrequencyParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

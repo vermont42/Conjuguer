@@ -2,7 +2,7 @@
 //  RatingsFetcher.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 12/19/21.
+//  Created by Josh Adams on 12/19/21.
 //
 
 import Foundation
@@ -39,15 +39,15 @@ enum RatingsFetcher {
           let json = try? JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any],
           let results = json["results"] as? [[String: Any]],
           results.count == 1
-          else {
-            completion(errorMessage)
-            return
+        else {
+          completion(errorMessage)
+          return
         }
 
         let ratingsCount = (results[0])["userRatingCountForCurrentVersion"] as? Int ?? 0
 
         let description: String
-        let exhortation = " Ajoutez la vôtre !"
+        let exhortation = " Ajoutez la vôtre."
 
         switch ratingsCount {
         case 0:

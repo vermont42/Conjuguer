@@ -51,6 +51,28 @@ class Settings: ObservableObject {
   static let pronounGenderKey = "pronounGender"
   static let pronounGenderDefault: PronounGender = .feminine
 
+  var promptActionCount: Int {
+    didSet {
+      if promptActionCount != oldValue {
+        getterSetter.set(key: Settings.promptActionCountKey, value: "\(promptActionCount)")
+      }
+    }
+  }
+  static let promptActionCountKey = "promptActionCount"
+  static let promptActionCountDefault = 0
+
+  var lastReviewPromptDate: Date {
+    didSet {
+      if lastReviewPromptDate != oldValue {
+        getterSetter.set(key: Settings.lastReviewPromptDateKey, value: formatter.string(from: lastReviewPromptDate))
+      }
+    }
+  }
+  static let lastReviewPromptDateKey = "lastReviewPromptDate"
+  static let lastReviewPromptDateDefault = Date(timeIntervalSince1970: 0.0)
+  private let formatter = DateFormatter()
+  private static let format = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
+
   init(getterSetter: GetterSetter) {
     self.getterSetter = getterSetter
 
@@ -80,6 +102,22 @@ class Settings: ObservableObject {
     } else {
       pronounGender = Settings.pronounGenderDefault
       getterSetter.set(key: Settings.pronounGenderKey, value: pronounGender.rawValue)
+    }
+
+    if let promptActionCountString = getterSetter.get(key: Settings.promptActionCountKey) {
+      promptActionCount = Int((promptActionCountString as NSString).intValue)
+    } else {
+      promptActionCount = Settings.promptActionCountDefault
+      getterSetter.set(key: Settings.promptActionCountKey, value: "\(promptActionCount)")
+    }
+
+    formatter.dateFormat = Settings.format
+
+    if let lastReviewPromptDateString = getterSetter.get(key: Settings.lastReviewPromptDateKey) {
+      lastReviewPromptDate = formatter.date(from: lastReviewPromptDateString) ?? Settings.lastReviewPromptDateDefault
+    } else {
+      lastReviewPromptDate = Settings.lastReviewPromptDateDefault
+      getterSetter.set(key: Settings.lastReviewPromptDateKey, value: formatter.string(from: lastReviewPromptDate))
     }
   }
 }

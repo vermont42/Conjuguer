@@ -2,7 +2,7 @@
 //  URLSessionExtension.swift
 //  Conjuguer
 //
-//  Created by Joshua Adams on 12/19/21.
+//  Created by Josh Adams on 12/19/21.
 //
 
 import Foundation

@@ -77,6 +77,7 @@ struct VerbBrowseView: View {
     )
     .onAppear {
       Current.analytics.recordViewAppeared("\(VerbBrowseView.self)")
+      Current.reviewPrompter.promptableActionHappened()
     }
   }
 
