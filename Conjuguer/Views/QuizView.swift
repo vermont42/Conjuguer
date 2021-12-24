@@ -104,10 +104,10 @@ struct QuizView: View {
           Spacer()
         }
 
+        gameCenterAuthView
+
         if quiz.quizState == .notStarted {
           Spacer()
-
-          gameCenterAuthView
 
           HStack {
             Spacer()

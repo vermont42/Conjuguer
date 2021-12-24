@@ -334,7 +334,10 @@ class Quiz: ObservableObject {
   }
 
   private func completeQuiz() {
-    score += Quiz.bonusForElapsedTime(elapsedTime)
+    let minimumScoreThatGetsBonus = 150
+    if score >= minimumScoreThatGetsBonus {
+      score += Quiz.bonusForElapsedTime(elapsedTime)
+    }
     shouldShowResults = true
     SoundPlayer.play(Sound.randomApplause)
     Current.gameCenter.reportScore(score)
@@ -345,23 +348,23 @@ class Quiz: ObservableObject {
   private static func bonusForElapsedTime(_ elapsedTime: Int) -> Int {
     switch elapsedTime {
     case 0 ... 120:
-      return 350
+      return 450
     case 121 ... 180:
-      return 300
+      return 400
     case 181 ... 240:
-      return 250
+      return 350
     case 241 ... 300:
-      return 200
+      return 300
     case 301 ... 360:
-      return 150
+      return 250
     case 361 ... 420:
-      return 150
+      return 200
     case 421 ... 480:
-      return 100
+      return 150
     case 481 ... 540:
-      return 50
+      return 100
     case 541 ... 600:
-      return 25
+      return 50
     default:
       return 0
     }
