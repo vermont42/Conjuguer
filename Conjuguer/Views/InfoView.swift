@@ -23,11 +23,12 @@ struct InfoView: View {
         .ignoresSafeArea()
 
       VStack {
-        if let imageName = info.imageName {
-          Image(imageName)
+        if let imageInfo = info.imageInfo {
+          Image(imageInfo.filename)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 270)
+            .accessibilityLabel(imageInfo.accessibilityLabel)
         }
 
         if shouldShowInfoHeading {

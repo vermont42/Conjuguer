@@ -24,12 +24,34 @@ struct ModelView: View {
       ScrollView {
         HStack {
           VStack(alignment: .leading) {
+            HStack {
+              Text(model.exemplarWithPossibleExtraLetters)
+                .headingLabel()
+                .frenchPronunciation()
+
+              Text(" (\(model.id))")
+                .headingLabel()
+
+              Spacer()
+            }
+
             if
               let parentId = model.parentId,
               let parent = VerbModel.models[parentId]
             {
-              Text("\(L.ModelView.parent): \(parent.exemplarWithPossibleExtraLetters) (\(parent.id))")
-                .headingLabel()
+              HStack {
+                Text("\(L.ModelView.parent): ")
+                  .headingLabel()
+
+                Text(parent.exemplarWithPossibleExtraLetters)
+                  .headingLabel()
+                  .frenchPronunciation()
+
+                Text(" (\(parent.id))")
+                  .headingLabel()
+
+                Spacer()
+              }
             }
 
             Text(model.description)
@@ -56,12 +78,23 @@ struct ModelView: View {
               Text(L.ModelView.endings)
                 .subheadingLabel()
 
-              Text("\(Tense.participePassé.shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.participeEndingRecursive).font(bodyFont)
-              Text("\(Tense.indicatifPrésent(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.indicatifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations)).font(bodyFont)
-              Text("\(Tense.impératif(.firstPlural).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.indicatifPrésentGroupRecursive.impératifEndings(stemAlterations: model.stemAlterations)).font(bodyFont)
-              Text("\(Tense.passéSimple(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.passéSimpleGroupRecursive.endings).font(bodyFont)
-              Text("\(Tense.subjonctifPrésent(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.subjonctifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations)).font(bodyFont)
-              Text("\(Tense.subjonctifImparfait(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.passéSimpleGroupRecursive.subjonctifImparfaitEndings).font(bodyFont)
+              (Text("\(Tense.participePassé.shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.participeEndingRecursive).font(bodyFont))
+                .frenchPronunciation()
+
+              (Text("\(Tense.indicatifPrésent(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.indicatifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations)).font(bodyFont))
+                .frenchPronunciation()
+
+              (Text("\(Tense.impératif(.firstPlural).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.indicatifPrésentGroupRecursive.impératifEndings(stemAlterations: model.stemAlterations)).font(bodyFont))
+                .frenchPronunciation()
+
+              (Text("\(Tense.passéSimple(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.passéSimpleGroupRecursive.endings).font(bodyFont))
+                .frenchPronunciation()
+
+              (Text("\(Tense.subjonctifPrésent(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.subjonctifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations)).font(bodyFont))
+                .frenchPronunciation()
+
+              (Text("\(Tense.subjonctifImparfait(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.passéSimpleGroupRecursive.subjonctifImparfaitEndings).font(bodyFont))
+                .frenchPronunciation()
             }
 
             Spacer()
@@ -79,11 +112,13 @@ struct ModelView: View {
                 }
                   .buttonStyle(.borderless)
                   .tint(.customRed)
+                  .accessibility(label: Text(L.Navigation.info))
+                  .accessibility(hint: Text(L.ModelView.infoButtonHint))
               }
               ForEach(stemAlterations, id: \.self) { alteration in
-                // TODO: Add an info button describing abbreviations to the right of "Stem Alterations".
                 let appliesToString = Tense.shorthandForNonCompoundTense(appliesTo: alteration.appliesTo)
-                Text(appliesToString + ": ").font(bodyFont) + Text(mixedCaseString: alteration.toString).font(bodyFont)
+                (Text(appliesToString + ": ").font(bodyFont) + Text(mixedCaseString: alteration.toString).font(bodyFont))
+                  .frenchPronunciation()
               }
             }
 
@@ -98,12 +133,13 @@ struct ModelView: View {
                 Text(L.ModelView.verbUsing)
                   .subheadingLabel()
               }
-              Text(model.verbsWithDeepLinks()).font(bodyFont)
+              Text(model.verbsWithDeepLinks())
+                .font(bodyFont)
+                .frenchPronunciation()
             }
           }
         }
       }
-        .navigationTitle(model.exemplarWithPossibleExtraLetters + " (\(model.id))")
         .customNavigationBarItems()
     }
     .onReceive(Current.$verb) { value in

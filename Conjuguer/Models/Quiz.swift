@@ -61,6 +61,7 @@ class Quiz: ObservableObject {
     resetPublishedProperties()
     buildQuiz()
     quizState = .inProgress
+    announcePublishedProperties()
     SoundPlayer.play(Sound.randomGun)
     Current.analytics.recordQuizStart(difficulty: Current.settings.quizDifficulty)
 
@@ -330,6 +331,8 @@ class Quiz: ObservableObject {
 
     if currentQuestionIndex == questions.count {
       completeQuiz()
+    } else {
+      announcePublishedProperties()
     }
   }
 
@@ -343,6 +346,36 @@ class Quiz: ObservableObject {
     Current.gameCenter.reportScore(score)
     Current.analytics.recordQuizCompletion(difficulty: Current.settings.quizDifficulty, elapsedTime: elapsedTime, score: score)
     quit()
+  }
+
+  private func announcePublishedProperties() {
+    if UIAccessibility.isVoiceOverRunning {
+      let announcementDelay = 1.0
+      DispatchQueue.main.asyncAfter(deadline: .now() + announcementDelay) { [self] in
+        let currentLocaleString: String
+        let currentRegion = Current.analytics.analyticsLocale.regionCode
+        let currentLanguage = Current.analytics.analyticsLocale.languageCode
+        if currentLanguage == "fr" {
+          currentLocaleString = Utterer.frenchLocaleString
+        } else {
+          currentLocaleString = currentLanguage + "-" + currentRegion
+        }
+        Utterer.utter(L.QuizView.verbWithColon, localeString: currentLocaleString)
+        let frenchLocaleString = Utterer.frenchLocaleString
+        Utterer.utter(questions[currentQuestionIndex].0.infinitif, localeString: frenchLocaleString)
+        Utterer.utter(L.QuizView.translationWithColon, localeString: currentLocaleString)
+        Utterer.utter(questions[currentQuestionIndex].0.translation, localeString: Utterer.englishLocaleString)
+        Utterer.utter(L.QuizView.pronounWithColon, localeString: currentLocaleString)
+        Utterer.utter(questions[currentQuestionIndex].1.pronoun, localeString: Utterer.frenchLocaleString)
+        Utterer.utter(questions[currentQuestionIndex].1.gender, localeString: currentLocaleString)
+        Utterer.utter(L.QuizView.tenseWithColon, localeString: currentLocaleString)
+        Utterer.utter(questions[currentQuestionIndex].1.titleCaseName, localeString: Utterer.frenchLocaleString)
+        Utterer.utter(L.QuizView.progressWithColon, localeString: currentLocaleString)
+        Utterer.utter("\(currentQuestionIndex + 1) \(L.QuizView.outOf) \(questions.count)", localeString: currentLocaleString)
+        Utterer.utter("\(L.QuizView.scoreWithColon) \(score)", localeString: currentLocaleString)
+        Utterer.utter("\(L.QuizView.elapsedWithColon) \(elapsedTime) \(L.QuizView.seconds)", localeString: currentLocaleString)
+      }
+    }
   }
 
   private static func bonusForElapsedTime(_ elapsedTime: Int) -> Int {

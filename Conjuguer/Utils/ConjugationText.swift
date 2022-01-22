@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Text {
-  init(verb: Verb, tense: Tense) {
+  init(verb: Verb, tense: Tense, shouldShowIrregularities: Bool = true) {
     var conjugation: String
     switch Conjugator.conjugate(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) {
     case .success(let value):
@@ -60,14 +60,18 @@ extension Text {
       break
     }
 
-    self.init(mixedCaseString: conjugation)
+    if shouldShowIrregularities {
+      self.init(mixedCaseString: conjugation)
+    } else {
+      self.init(conjugation.lowercased())
+    }
 
     if
       let defectGroupId = verb.defectGroupId,
       let defectGroup = DefectGroup.defectGroups[defectGroupId],
       defectGroup.isDefectiveForTense(tense)
     {
-      self = self.strikethrough()
+      self = strikethrough()
     }
   }
 

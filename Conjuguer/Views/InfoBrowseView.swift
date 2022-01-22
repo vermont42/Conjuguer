@@ -31,6 +31,7 @@ struct InfoBrowseView: View {
                   }
                 }
                   .buttonStyle(PlainButtonStyle())
+                  .frenchPronunciation(forReal: info.alwaysUsesFrenchPronunciation)
               }
             }
               .navigationBarTitle(L.Navigation.info)

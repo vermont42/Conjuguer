@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ImageInfo {
+struct ImageInfo: Hashable {
   let filename: String
   let accessibilityLabel: String
 }

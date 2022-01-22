@@ -47,8 +47,8 @@ enum L {
       String(localized: "VerbView.overview")
     }
 
-    static var model: String {
-      String(localized: "VerbView.model")
+    static var modelWithColon: String {
+      String(localized: "VerbView.modelWithColon")
     }
 
     static var reflexive: String {
@@ -59,16 +59,12 @@ enum L {
       String(localized: "VerbView.aspiratedH")
     }
 
-    static var auxiliaryÊtre: String {
-      String(localized: "VerbView.auxiliaryÊtre")
+    static var auxiliaryWithColon: String {
+      String(localized: "VerbView.auxiliaryWithColon")
     }
 
-    static var auxiliaryAvoir: String {
-      String(localized: "VerbView.auxiliaryAvoir")
-    }
-
-    static var frequency: String {
-      String(localized: "VerbView.frequency")
+    static var frequencyWithColon: String {
+      String(localized: "VerbView.frequencyWithColon")
     }
 
     static var defective: String {
@@ -130,6 +126,10 @@ enum L {
     static var verbUsing: String {
       String(localized: "ModelView.verbUsing")
     }
+
+    static var infoButtonHint: String {
+      String(localized: "ModelView.infoButtonHint")
+    }
   }
 
   enum QuizView {
@@ -155,6 +155,14 @@ enum L {
 
     static var progressWithColon: String {
       String(localized: "QuizView.progressWithColon")
+    }
+
+    static var outOf: String {
+      String(localized: "QuizView.outOf")
+    }
+
+    static var seconds: String {
+      String(localized: "QuizView.seconds")
     }
 
     static var scoreWithColon: String {
@@ -489,6 +497,16 @@ enum L {
 
     static var multipleRatings: String {
       String(localized: "RatingsFetcher.multipleRatings")
+    }
+  }
+
+  enum ImageInfo {
+    static var davidCompton: String {
+      String(localized: "ImageInfo.davidCompton")
+    }
+
+    static var joshAdams: String {
+      String(localized: "ImageInfo.joshAdams")
     }
   }
 

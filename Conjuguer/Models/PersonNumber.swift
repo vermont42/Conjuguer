@@ -17,19 +17,33 @@ enum PersonNumber: String, CaseIterable {
   static let impératifPersonNumbers: [PersonNumber] = [.secondSingular, .firstPlural, .secondPlural]
 
   var pronoun: String {
+    let pronounGender = Current.settings.pronounGender
+    let singular = " singulier" // Intentionally not localizing this.
+    let plural = " pluriel"
+
     switch self {
     case .firstSingular:
       return "je"
     case .secondSingular:
       return "tu"
     case .thirdSingular:
-      return "il"
+      switch pronounGender {
+      case .feminine, .both:
+        return "elle" + singular
+      case .masculine:
+        return "il" + singular
+      }
     case .firstPlural:
       return "nous"
     case .secondPlural:
       return "vous"
     case .thirdPlural:
-      return "ils"
+      switch pronounGender {
+      case .masculine, .both:
+        return "ils" + plural
+      case .feminine:
+        return "elles" + plural
+      }
     }
   }
 
@@ -81,6 +95,47 @@ enum PersonNumber: String, CaseIterable {
       case .feminine:
         return "elles"
       }
+    }
+  }
+
+  var gender: String {
+    let pronounGender = Current.settings.pronounGender
+    let masc = L.PronounGender.masculine
+    let fem = L.PronounGender.feminine
+
+    switch self {
+    case .firstSingular:
+      switch pronounGender {
+      case .feminine, .both:
+        return fem
+      case .masculine:
+        return masc
+      }
+    case .secondSingular:
+      switch pronounGender {
+      case .feminine, .both:
+        return fem
+      case .masculine:
+        return masc
+      }
+    case .thirdSingular:
+      return "" // Gender is implied by pronoun itself.
+    case .firstPlural:
+      switch pronounGender {
+      case .masculine, .both:
+        return masc
+      case .feminine:
+        return fem
+      }
+    case .secondPlural:
+      switch pronounGender {
+      case .masculine, .both:
+        return masc
+      case .feminine:
+        return fem
+      }
+    case .thirdPlural:
+      return "" // Gender is implied by pronoun lui-même.
     }
   }
 

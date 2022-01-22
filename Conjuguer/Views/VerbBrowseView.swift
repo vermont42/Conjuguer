@@ -35,12 +35,11 @@ struct VerbBrowseView: View {
                   NavigationLink(destination: VerbView(verb: verb), label: {
                     ZStack {
                       Color.customBackground
-
                       Text(verb.infinitifWithPossibleExtraLetters)
-                        .tableText()
                     }
                   })
-                  .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(PlainButtonStyle())
+                    .frenchPronunciation()
                 }
               }
               .navigationBarTitle(L.Navigation.verbs)
@@ -50,10 +49,9 @@ struct VerbBrowseView: View {
       }
       .navigationViewStyle(.stack) // https://stackoverflow.com/a/66024249
       .padding()
-      .searchable(text: $searchText, suggestions: {
+      .searchable(text: $searchText, prompt: "", suggestions: {
         ForEach(searchResults, id: \.self) { result in
           Text(result.infinitifWithPossibleExtraLetters)
-            .tableText()
             .searchCompletion(result.infinitifWithPossibleExtraLetters)
         }
       })

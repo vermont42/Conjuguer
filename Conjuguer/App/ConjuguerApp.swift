@@ -29,6 +29,7 @@ struct ConjuguerApp: App {
     Modifiers.modifyAppearances()
 
     SoundPlayer.setup()
+    Utterer.setup()
 
     VerbModel.models = VerbModelParser().parse()
     Verb.verbs = VerbParser().parse()

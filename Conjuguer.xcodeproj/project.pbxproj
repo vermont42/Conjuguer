@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		030FFAA526CA19CB00741524 /* frequencies.xml in Resources */ = {isa = PBXBuildFile; fileRef = 030FFAA426CA19CB00741524 /* frequencies.xml */; };
 		030FFAA726CA1A2000741524 /* FrequencyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030FFAA626CA1A2000741524 /* FrequencyParser.swift */; };
+		031D6454278B4C890000C7DB /* Utterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031D6453278B4C890000C7DB /* Utterer.swift */; };
 		032B122326BA02D8000E70CA /* InfoBrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B122226BA02D8000E70CA /* InfoBrowseView.swift */; };
 		032B122726BB3FA0000E70CA /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B122626BB3FA0000E70CA /* ColorExtension.swift */; };
 		032D267226BDF52100AE1BD1 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D267126BDF52100AE1BD1 /* InfoView.swift */; };
@@ -74,6 +75,7 @@
 		036DB80525A386D60013C3B7 /* VerbModelParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB80425A386D60013C3B7 /* VerbModelParser.swift */; };
 		036DB81025A6C7900013C3B7 /* PasseSimpleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */; };
 		036DB81825A8C9420013C3B7 /* IndicatifPresentGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */; };
+		036DEF2B2782226A00B0BAED /* ImageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036DEF2A2782226A00B0BAED /* ImageInfo.swift */; };
 		036E4D102735CA7C00A52973 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 036E4D0F2735CA7C00A52973 /* LaunchScreen.storyboard */; };
 		036F9872276F929200ACD986 /* RatingsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F9871276F929200ACD986 /* RatingsFetcher.swift */; };
 		036F9874276FDDC500ACD986 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F9873276FDDC500ACD986 /* URLProtocolStub.swift */; };
@@ -135,6 +137,7 @@
 /* Begin PBXFileReference section */
 		030FFAA426CA19CB00741524 /* frequencies.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = frequencies.xml; sourceTree = "<group>"; };
 		030FFAA626CA1A2000741524 /* FrequencyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyParser.swift; sourceTree = "<group>"; };
+		031D6453278B4C890000C7DB /* Utterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utterer.swift; sourceTree = "<group>"; };
 		032B122226BA02D8000E70CA /* InfoBrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoBrowseView.swift; sourceTree = "<group>"; };
 		032B122626BB3FA0000E70CA /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		032D267126BDF52100AE1BD1 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
@@ -205,6 +208,7 @@
 		036DB80425A386D60013C3B7 /* VerbModelParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbModelParser.swift; sourceTree = "<group>"; };
 		036DB80F25A6C7900013C3B7 /* PasseSimpleGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasseSimpleGroup.swift; sourceTree = "<group>"; };
 		036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatifPresentGroup.swift; sourceTree = "<group>"; };
+		036DEF2A2782226A00B0BAED /* ImageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInfo.swift; sourceTree = "<group>"; };
 		036E4D0F2735CA7C00A52973 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		036F9871276F929200ACD986 /* RatingsFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsFetcher.swift; sourceTree = "<group>"; };
 		036F9873276FDDC500ACD986 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
@@ -365,6 +369,7 @@
 				030FFAA426CA19CB00741524 /* frequencies.xml */,
 				030FFAA626CA1A2000741524 /* FrequencyParser.swift */,
 				03ACAA0025ACB65300CF5390 /* FuturSimple.swift */,
+				036DEF2A2782226A00B0BAED /* ImageInfo.swift */,
 				03ACA9F625A9FD4400CF5390 /* Imparfait.swift */,
 				036DB81725A8C9420013C3B7 /* IndicatifPresentGroup.swift */,
 				03309F6526BC9C95003E4F92 /* Info.swift */,
@@ -430,6 +435,7 @@
 				036F9875276FDE0000ACD986 /* URLSessionExtension.swift */,
 				0373682F25DC672F008BDF46 /* UserDefaultsGetterSetter.swift */,
 				0373681A25DB8BAD008BDF46 /* Util.swift */,
+				031D6453278B4C890000C7DB /* Utterer.swift */,
 				0373682925DC667B008BDF46 /* VerbSort.swift */,
 				0373681F25DC6502008BDF46 /* World.swift */,
 			);
@@ -653,6 +659,7 @@
 				03AE93F3274443E400233105 /* StubAnalyticsLocale.swift in Sources */,
 				03AE93ED2744424F00233105 /* DeviceUtility.swift in Sources */,
 				038E0AFE2690976D002A71EF /* DefectGroup.swift in Sources */,
+				036DEF2B2782226A00B0BAED /* ImageInfo.swift in Sources */,
 				0338F16F273F6A7300FD796C /* GameCenter.swift in Sources */,
 				03C2CAC62619125200CFA825 /* Sound.swift in Sources */,
 				036DB7DF25A0DD7A0013C3B7 /* Verb.swift in Sources */,
@@ -674,6 +681,7 @@
 				03ACAA0625ACB6B900CF5390 /* ConditionnelPresent.swift in Sources */,
 				03309F6C26BCA0B0003E4F92 /* UIFontExtension.swift in Sources */,
 				036DB7FB25A13C110013C3B7 /* ConjugatorError.swift in Sources */,
+				031D6454278B4C890000C7DB /* Utterer.swift in Sources */,
 				03ACA9F725A9FD4400CF5390 /* Imparfait.swift in Sources */,
 				03309F6A26BC9E72003E4F92 /* StringExtensions.swift in Sources */,
 				036A99382726168900C6C984 /* TestGameCenter.swift in Sources */,

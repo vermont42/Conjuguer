@@ -36,6 +36,7 @@ struct ModelBrowseView: View {
                     .tableText()
                 })
                   .buttonStyle(PlainButtonStyle())
+                  .frenchPronunciation()
               }
               .navigationBarTitle(L.Navigation.models)
             }
@@ -44,10 +45,11 @@ struct ModelBrowseView: View {
       }
       .navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
       .padding()
-      .searchable(text: $searchText, suggestions: {
+      .searchable(text: $searchText, prompt: "", suggestions: {
         ForEach(searchResults, id: \.self) { modelAndDecorator in
           Text("\(modelAndDecorator.model.exemplarWithPossibleExtraLetters)\(modelAndDecorator.decorator)")
             .tableText()
+            .frenchPronunciation()
             .buttonStyle(PlainButtonStyle())
             .searchCompletion(modelAndDecorator.model.exemplarWithPossibleExtraLetters)
         }

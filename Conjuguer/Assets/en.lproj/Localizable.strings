@@ -17,12 +17,11 @@
 "Navigation.back" = "Back";
 
 "VerbView.overview" = "Overview";
-"VerbView.model" = "Model:";
+"VerbView.modelWithColon" = "Model:";
 "VerbView.reflexive" = "Reflexive";
 "VerbView.aspiratedH" = "Aspirated H";
-"VerbView.auxiliaryÊtre" = "Auxiliary: être";
-"VerbView.auxiliaryAvoir" = "Auxiliary: avoir";
-"VerbView.frequency" = "Frequency";
+"VerbView.auxiliaryWithColon" = "Auxiliary:";
+"VerbView.frequencyWithColon" = "Frequency:";
 "VerbView.defective" = "Defective.";
 "VerbView.exampleUse" = "Example Use";
 "VerbView.personlessConjugations" = "P. Passé, P. Présent, R. Futur";
@@ -36,6 +35,7 @@
 "ModelView.irregular" = "Irregular";
 "ModelView.verbsUsing" = "Verbs Using This Model";
 "ModelView.verbUsing" = "Verb Using This Model";
+"ModelView.infoButtonHint" = "shows infomation about how verb conjugation irregularities are represented";
 
 "QuizView.start" = "Start";
 "QuizView.scoreWithColon" = "Score:";
@@ -44,6 +44,8 @@
 "QuizView.pronounWithColon" = "Pronoun:";
 "QuizView.tenseWithColon" = "Tense:";
 "QuizView.progressWithColon" = "Progress:";
+"QuizView.outOf" = "out of";
+"QuizView.seconds" = "seconds";
 "QuizView.elapsedWithColon" = "Elapsed:";
 "QuizView.conjugation" = "Conjugation";
 "QuizView.quit" = "Quit";
@@ -1113,6 +1115,9 @@ Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’anci
 "RatingsFetcher.noRating" = "No one has rated this version of Conjuguer.";
 "RatingsFetcher.oneRating" = "There is one rating for this version of Conjuguer.";
 "RatingsFetcher.multipleRatings" = "There are %d ratings for this version of Conjuguer.";
+
+"ImageInfo.davidCompton" = "photograph of David Compton taken in Paris, France during the early 1960s";
+"ImageInfo.joshAdams" = "photograph of Josh Adams taken near Vacaville, California in 2021";
 
 "VerbSort.frequency" = "Frequency";
 

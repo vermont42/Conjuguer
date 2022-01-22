@@ -37,12 +37,14 @@ struct QuizView: View {
           Group {
             Text("\(L.QuizView.verbWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.infinitifWithPossibleExtraLetters)")
               .constrainedBodyLabel()
+              .frenchPronunciation()
 
             Spacer()
               .frame(height: Layout.defaultSpacing)
 
             Text("\(L.QuizView.translationWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.translation)")
               .constrainedBodyLabel()
+              .englishPronunciation()
           }
 
           Spacer()
@@ -51,12 +53,14 @@ struct QuizView: View {
           Group {
             Text("\(L.QuizView.pronounWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.pronounWithGender)")
               .constrainedBodyLabel()
+              .frenchPronunciation()
 
             Spacer()
               .frame(height: Layout.defaultSpacing)
 
             Text("\(L.QuizView.tenseWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.titleCaseName.lowercased())")
               .constrainedBodyLabel()
+              .frenchPronunciation()
 
             Spacer()
               .frame(height: Layout.defaultSpacing)

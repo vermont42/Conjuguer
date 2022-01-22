@@ -63,6 +63,30 @@ struct TableText: ViewModifier {
   }
 }
 
+struct FrenchPronunciation: ViewModifier {
+  let forReal: Bool
+
+  init(forReal: Bool) {
+    self.forReal = forReal
+  }
+
+  func body(content: Content) -> some View {
+    if forReal {
+      content
+        .environment(\.locale, .init(identifier: "fr-FR"))
+    } else {
+      content
+    }
+  }
+}
+
+struct EnglishPronunciation: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .environment(\.locale, .init(identifier: "en-US"))
+  }
+}
+
 struct BodyLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
@@ -107,7 +131,8 @@ struct ButtonLabel: ViewModifier {
 struct HeadingLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansSemiBold, size: 24))
+      .font(Font.custom(workSansSemiBold, size: 22))
+      .accessibility(addTraits: [.isHeader])
   }
 }
 
@@ -157,6 +182,14 @@ extension View {
 
   func tableText() -> some View {
     modifier(TableText())
+  }
+
+  func frenchPronunciation(forReal: Bool = true) -> some View {
+    modifier(FrenchPronunciation(forReal: forReal))
+  }
+
+  func englishPronunciation() -> some View {
+    modifier(EnglishPronunciation())
   }
 
   func subheadingLabel() -> some View {
