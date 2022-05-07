@@ -9,7 +9,7 @@ Conjuguer
 
 Unlike Conjugar, **Conjuguer** contains verb frequency-of-use data, which allows learners to focus their studies on the most important verbs.
 
-**Conjuguer** is available for free download in the iOS App Store™. Tap the logo below to install.
+**Conjuguer** is available for free download in the iOS App Store™. Tap the button below to install.
 
 [![Install](apple.png)](https://apps.apple.com/us/app/conjuguer/id1588624373)
 

@@ -5,9 +5,6 @@
 //  Created by Josh Adams on 1/1/21.
 //
 
-import Amplify
-import AWSCognitoAuthPlugin
-import AWSPinpointAnalyticsPlugin
 import SwiftUI
 
 @main
