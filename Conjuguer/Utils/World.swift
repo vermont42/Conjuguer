@@ -9,11 +9,7 @@
 
 import SwiftUI
 
-#if targetEnvironment(simulator)
-var Current = World.simulator
-#else
-var Current = World.device
-#endif
+var Current = World.chooseWorld()
 
 class World: ObservableObject {
   @Published var settings: Settings
@@ -43,6 +39,19 @@ class World: ObservableObject {
     self.analytics = analytics
     self.reviewPrompter = reviewPrompter
     self.session = session
+  }
+
+  static func chooseWorld() -> World {
+#if targetEnvironment(simulator)
+    let isRunningUnitTests = NSClassFromString("XCTest") != nil
+    if isRunningUnitTests {
+      return World.unitTest
+    } else {
+      return World.simulator
+    }
+#else
+    return World.device
+#endif
   }
 
   static let device: World = {

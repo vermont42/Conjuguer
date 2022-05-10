@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030BBACC2827288B00027D1B /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030BBACB2827288B00027D1B /* AppLauncher.swift */; };
+		030BBACE2827289B00027D1B /* TestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030BBACD2827289B00027D1B /* TestApp.swift */; };
 		030FFAA526CA19CB00741524 /* frequencies.xml in Resources */ = {isa = PBXBuildFile; fileRef = 030FFAA426CA19CB00741524 /* frequencies.xml */; };
 		030FFAA726CA1A2000741524 /* FrequencyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030FFAA626CA1A2000741524 /* FrequencyParser.swift */; };
 		031D6454278B4C890000C7DB /* Utterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031D6453278B4C890000C7DB /* Utterer.swift */; };
@@ -135,6 +137,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		030BBACB2827288B00027D1B /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
+		030BBACD2827289B00027D1B /* TestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestApp.swift; sourceTree = "<group>"; };
 		030FFAA426CA19CB00741524 /* frequencies.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = frequencies.xml; sourceTree = "<group>"; };
 		030FFAA626CA1A2000741524 /* FrequencyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyParser.swift; sourceTree = "<group>"; };
 		031D6453278B4C890000C7DB /* Utterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utterer.swift; sourceTree = "<group>"; };
@@ -399,8 +403,10 @@
 		036DB7CC25A0C9AF0013C3B7 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				030BBACB2827288B00027D1B /* AppLauncher.swift */,
 				036DB78D259FD6500013C3B7 /* ConjuguerApp.swift */,
 				036DB793259FD6510013C3B7 /* Preview Content */,
+				030BBACD2827289B00027D1B /* TestApp.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -685,6 +691,7 @@
 				03ACA9F725A9FD4400CF5390 /* Imparfait.swift in Sources */,
 				03309F6A26BC9E72003E4F92 /* StringExtensions.swift in Sources */,
 				036A99382726168900C6C984 /* TestGameCenter.swift in Sources */,
+				030BBACE2827289B00027D1B /* TestApp.swift in Sources */,
 				038E0B032690A016002A71EF /* DefectGroupParser.swift in Sources */,
 				035BC8F72738A4F900EA13CA /* IntExtension.swift in Sources */,
 				036DB790259FD6500013C3B7 /* InputView.swift in Sources */,
@@ -699,6 +706,7 @@
 				036DB80525A386D60013C3B7 /* VerbModelParser.swift in Sources */,
 				036DB7D125A0C9F10013C3B7 /* Conjugator.swift in Sources */,
 				032B122726BB3FA0000E70CA /* ColorExtension.swift in Sources */,
+				030BBACC2827288B00027D1B /* AppLauncher.swift in Sources */,
 				03653F1025EC67DF00A34267 /* VerbView.swift in Sources */,
 				0373681B25DB8BAD008BDF46 /* Util.swift in Sources */,
 				03FA474827060D2000131205 /* QuizView.swift in Sources */,

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@main
 struct ConjuguerApp: App {
   var body: some Scene {
     WindowGroup {
@@ -27,13 +26,5 @@ struct ConjuguerApp: App {
 
     SoundPlayer.setup()
     Utterer.setup()
-
-    VerbModel.models = VerbModelParser().parse()
-    Verb.verbs = VerbParser().parse()
-    VerbModel.computeIrregularities()
-    VerbModel.sortVerbs()
-    DefectGroup.defectGroups = DefectGroupParser().parse()
-
-//    Conjugator.printConjugations(infinitif: "alunir")
   }
 }
