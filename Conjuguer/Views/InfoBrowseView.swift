@@ -30,11 +30,11 @@ struct InfoBrowseView: View {
                       .tableText()
                   }
                 }
-                  .buttonStyle(PlainButtonStyle())
-                  .frenchPronunciation(forReal: info.alwaysUsesFrenchPronunciation)
+                .buttonStyle(PlainButtonStyle())
+                .frenchPronunciation(forReal: info.alwaysUsesFrenchPronunciation)
               }
             }
-              .navigationBarTitle(L.Navigation.info)
+            .navigationBarTitle(L.Navigation.info)
           }
         }
       }

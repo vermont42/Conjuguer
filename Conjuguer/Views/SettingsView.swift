@@ -22,7 +22,7 @@ struct SettingsView: View {
 
         HStack {
           Text(L.Navigation.settings)
-            .modifier(HeadingLabel())
+            .headingLabel()
             .foregroundColor(Color.customBlue)
             .padding(.leading, Layout.doubleDefaultSpacing)
 
@@ -32,21 +32,21 @@ struct SettingsView: View {
         ScrollView(.vertical) {
           Group {
             Text(L.Settings.quizDifficulty)
-              .modifier(SettingsSubheadingLabel())
+              .settingsSubheadingLabel()
 
             Picker("", selection: $store.quizDifficulty) {
               ForEach(QuizDifficulty.allCases, id: \.self) { quizDifficulty in
                 Text(quizDifficulty.localizedDifficulty).tag(quizDifficulty)
               }
             }
-              .modifier(SegmentedPicker())
-              .onAppear {
-                self.store.quizDifficulty = Current.settings.quizDifficulty
-                self.store.current = Current
-              }
+            .segmentedPicker()
+            .onAppear {
+              self.store.quizDifficulty = Current.settings.quizDifficulty
+              self.store.current = Current
+            }
 
             Text(L.Settings.quizDifficultyDescription)
-              .modifier(SettingsLabel())
+              .settingsLabel()
 
             Spacer(minLength: Layout.tripleDefaultSpacing)
           }
@@ -55,51 +55,51 @@ struct SettingsView: View {
 
           Group {
             Text(L.Settings.pronounGender)
-              .modifier(SettingsSubheadingLabel())
+              .settingsSubheadingLabel()
 
             Picker("", selection: $store.pronounGender) {
               ForEach(PronounGender.allCases, id: \.self) { pronounGender in
                 Text(pronounGender.localizedGender).tag(pronounGender)
               }
             }
-              .modifier(SegmentedPicker())
-              .onAppear {
-                self.store.pronounGender = Current.settings.pronounGender
-                self.store.current = Current
-              }
+            .segmentedPicker()
+            .onAppear {
+              self.store.pronounGender = Current.settings.pronounGender
+              self.store.current = Current
+            }
 
             Text(L.Settings.pronounGenderDescription)
-              .modifier(SettingsLabel())
+              .settingsLabel()
 
             Spacer(minLength: Layout.tripleDefaultSpacing)
           }
 
           Group {
             Text(L.Settings.ratingsAndReviews)
-              .modifier(SubheadingLabel())
+              .subheadingLabel()
 
             Button(L.Settings.rateOrReview) {
               UIApplication.shared.open(RatingsFetcher.reviewURL, options: [:])
             }
-              .modifier(FunButton())
+            .funButton()
 
             if rateReviewDescription != "" {
               Text(rateReviewDescription)
-                .modifier(SettingsLabel())
+                .settingsLabel()
             }
           }
         }
       }
-        .onAppear {
-          Current.analytics.recordViewAppeared("\(SettingsView.self)")
-          RatingsFetcher.fetchRatingsDescription(completion: { description in
-            if description != RatingsFetcher.errorMessage {
-              DispatchQueue.main.async {
-                self.rateReviewDescription = description
-              }
+      .onAppear {
+        Current.analytics.recordViewAppeared("\(SettingsView.self)")
+        RatingsFetcher.fetchRatingsDescription(completion: { description in
+          if description != RatingsFetcher.errorMessage {
+            DispatchQueue.main.async {
+              self.rateReviewDescription = description
             }
-          })
-        }
+          }
+        })
+      }
     }
   }
 }

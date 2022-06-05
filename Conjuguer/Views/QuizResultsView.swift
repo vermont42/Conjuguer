@@ -20,7 +20,7 @@ struct QuizResultsView: View {
           .frame(height: Layout.tripleDefaultSpacing)
 
         Text(L.Navigation.results)
-          .modifier(HeadingLabel())
+          .headingLabel()
           .foregroundColor(.customBlue)
 
         Spacer()
@@ -45,12 +45,12 @@ struct QuizResultsView: View {
           }
         }
       }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.leading, Layout.doubleDefaultSpacing)
-        .padding(.trailing, Layout.doubleDefaultSpacing)
-        .onAppear {
-          Current.analytics.recordViewAppeared("\(QuizResultsView.self)")
-        }
+      .frame(maxWidth: .infinity, alignment: .leading)
+      .padding(.leading, Layout.doubleDefaultSpacing)
+      .padding(.trailing, Layout.doubleDefaultSpacing)
+      .onAppear {
+        Current.analytics.recordViewAppeared("\(QuizResultsView.self)")
+      }
     }
   }
 }

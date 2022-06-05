@@ -29,7 +29,6 @@ opt_in_rules:
   - identical_operands
   - implicit_return
   - legacy_random
-  - lower_acl_than_parent
   - multiline_arguments
   - multiline_function_chains
   - multiline_literal_brackets

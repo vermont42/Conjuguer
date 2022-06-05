@@ -150,7 +150,7 @@ struct VerbView: View {
                     .accessibilityHidden(true)
                 }
               }
-                .padding(.bottom, -1.0 * Layout.defaultSpacing)
+              .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
               Spacer()
 
@@ -171,7 +171,7 @@ struct VerbView: View {
                     .accessibilityHidden(true)
                 }
               }
-                .padding(.bottom, -1.0 * Layout.defaultSpacing)
+              .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
               Spacer()
             }
@@ -194,7 +194,7 @@ struct VerbView: View {
                     .accessibilityHidden(true)
                 }
               }
-                .padding(.bottom, -1.0 * Layout.defaultSpacing)
+              .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
               Spacer()
 
@@ -215,7 +215,7 @@ struct VerbView: View {
                     .accessibilityHidden(true)
                 }
               }
-                .padding(.bottom, -1.0 * Layout.defaultSpacing)
+              .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
               Spacer()
 
@@ -236,7 +236,7 @@ struct VerbView: View {
                     .accessibilityHidden(true)
                 }
               }
-                .padding(.bottom, -1.0 * Layout.defaultSpacing)
+              .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
               Spacer()
             }
@@ -259,7 +259,7 @@ struct VerbView: View {
                     .accessibilityHidden(true)
                 }
               }
-                .padding(.bottom, -1.0 * Layout.defaultSpacing)
+              .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
               Spacer()
 
@@ -280,7 +280,7 @@ struct VerbView: View {
                     .accessibilityHidden(true)
                 }
               }
-                .padding(.bottom, -1.0 * Layout.defaultSpacing)
+              .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
               Spacer()
 
@@ -301,7 +301,7 @@ struct VerbView: View {
                     .accessibilityHidden(true)
                 }
               }
-                .padding(.bottom, -1.0 * Layout.defaultSpacing)
+              .padding(.bottom, -1.0 * Layout.defaultSpacing)
             }
           }
 
@@ -311,8 +311,8 @@ struct VerbView: View {
             Text(L.VerbView.showCompoundTenses)
               .subheadingLabel()
           }
-            .toggleStyle(SwitchToggleStyle(tint: .customRed))
-            .padding(.top, Layout.defaultSpacing)
+          .toggleStyle(SwitchToggleStyle(tint: .customRed))
+          .padding(.top, Layout.defaultSpacing)
 
           if shouldShowCompoundTenses {
             Group {
@@ -323,7 +323,6 @@ struct VerbView: View {
                   .subheadingLabel()
                   .frenchPronunciation()
                   .padding(.bottom, -1.0 * Layout.defaultSpacing)
-                  //.padding(.top, Layout.defaultSpacing)
 
                 ForEach(PersonNumber.allCases, id: \.self) { personNumber in
                   ZStack {
@@ -336,7 +335,7 @@ struct VerbView: View {
                       .accessibilityHidden(true)
                   }
                 }
-                  .padding(.bottom, -1.0 * Layout.defaultSpacing)
+                .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
                 Spacer()
 
@@ -357,7 +356,7 @@ struct VerbView: View {
                       .accessibilityHidden(true)
                   }
                 }
-                  .padding(.bottom, -1.0 * Layout.defaultSpacing)
+                .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
                 Spacer()
 
@@ -378,7 +377,7 @@ struct VerbView: View {
                       .accessibilityHidden(true)
                   }
                 }
-                  .padding(.bottom, -1.0 * Layout.defaultSpacing)
+                .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
                 Spacer()
               }
@@ -401,7 +400,7 @@ struct VerbView: View {
                       .accessibilityHidden(true)
                   }
                 }
-                  .padding(.bottom, -1.0 * Layout.defaultSpacing)
+                .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
                 Spacer()
 
@@ -422,7 +421,7 @@ struct VerbView: View {
                       .accessibilityHidden(true)
                   }
                 }
-                  .padding(.bottom, -1.0 * Layout.defaultSpacing)
+                .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
                 Spacer()
 
@@ -443,7 +442,7 @@ struct VerbView: View {
                       .accessibilityHidden(true)
                   }
                 }
-                  .padding(.bottom, -1.0 * Layout.defaultSpacing)
+                .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
                 Spacer()
               }
@@ -466,7 +465,7 @@ struct VerbView: View {
                       .accessibilityHidden(true)
                   }
                 }
-                  .padding(.bottom, -1.0 * Layout.defaultSpacing)
+                .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
                 Spacer()
 
@@ -487,7 +486,7 @@ struct VerbView: View {
                       .accessibilityHidden(true)
                   }
                 }
-                  .padding(.bottom, -1.0 * Layout.defaultSpacing)
+                .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
                 Spacer()
 
@@ -508,18 +507,18 @@ struct VerbView: View {
                       .accessibilityHidden(true)
                   }
                 }
-                  .padding(.bottom, -1.0 * Layout.defaultSpacing)
+                .padding(.bottom, -1.0 * Layout.defaultSpacing)
 
                 Spacer()
               }
             }
           }
         }
-          .onAppear {
-            Current.analytics.recordViewAppeared("\(VerbView.self)")
-          }
+        .onAppear {
+          Current.analytics.recordViewAppeared("\(VerbView.self)")
+        }
       }
-        .customNavigationBarItems()
+      .customNavigationBarItems()
     }
   }
 }
