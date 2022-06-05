@@ -32,14 +32,14 @@ struct VerbBrowseView: View {
             ScrollView {
               LazyVStack {
                 ForEach(searchResults, id: \.self) { verb in
-                  NavigationLink(destination: VerbView(verb: verb), label: {
+                  NavigationLink(destination: VerbView(verb: verb)) {
                     ZStack {
                       Color.customBackground
                       Text(verb.infinitifWithPossibleExtraLetters)
                     }
-                  })
-                    .buttonStyle(PlainButtonStyle())
-                    .frenchPronunciation()
+                  }
+                  .buttonStyle(PlainButtonStyle())
+                  .frenchPronunciation()
                 }
               }
               .navigationBarTitle(L.Navigation.verbs)

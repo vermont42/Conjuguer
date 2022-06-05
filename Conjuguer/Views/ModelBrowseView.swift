@@ -31,12 +31,12 @@ struct ModelBrowseView: View {
 
             ScrollView {
               ForEach(searchResults, id: \.self) { modelAndDecorator in
-                NavigationLink(destination: ModelView(model: modelAndDecorator.model), label: {
+                NavigationLink(destination: ModelView(model: modelAndDecorator.model)) {
                   Text(modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator)
                     .tableText()
-                })
-                  .buttonStyle(PlainButtonStyle())
-                  .frenchPronunciation()
+                }
+                .buttonStyle(PlainButtonStyle())
+                .frenchPronunciation()
               }
               .navigationBarTitle(L.Navigation.models)
             }

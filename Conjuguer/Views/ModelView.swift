@@ -104,17 +104,20 @@ struct ModelView: View {
               HStack {
                 Text(L.ModelView.stemAlterations)
                   .subheadingLabel()
+
                 Spacer()
+
                 Button {
                   isPresentingStemAlterationsInfo = true
                 } label: {
                     Image(systemName: "questionmark.diamond.fill")
                 }
-                  .buttonStyle(.borderless)
-                  .tint(.customRed)
-                  .accessibility(label: Text(L.Navigation.info))
-                  .accessibility(hint: Text(L.ModelView.infoButtonHint))
+                .buttonStyle(.borderless)
+                .tint(.customRed)
+                .accessibility(label: Text(L.Navigation.info))
+                .accessibility(hint: Text(L.ModelView.infoButtonHint))
               }
+
               ForEach(stemAlterations, id: \.self) { alteration in
                 let appliesToString = Tense.shorthandForNonCompoundTense(appliesTo: alteration.appliesTo)
                 (Text(appliesToString + ": ").font(bodyFont) + Text(mixedCaseString: alteration.toString).font(bodyFont))
@@ -140,7 +143,7 @@ struct ModelView: View {
           }
         }
       }
-        .customNavigationBarItems()
+      .customNavigationBarItems()
     }
     .onReceive(Current.$verb) { value in
       if value == nil {

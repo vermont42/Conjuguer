@@ -119,16 +119,17 @@ struct QuizView: View {
             Button(L.QuizView.start) {
               start()
             }
-              .buttonLabel()
-              .onAppear {
-                self.currentAnimationAmount = initialAnimationAmount - animationModifier
-              }
-              .onDisappear {
-                self.currentAnimationAmount = initialAnimationAmount
-              }
-              .scaleEffect(currentAnimationAmount)
-              .animation(.linear(duration: animationDuration), value: currentAnimationAmount)
-              .funButton()
+            .buttonLabel()
+            .onAppear {
+              self.currentAnimationAmount = initialAnimationAmount - animationModifier
+            }
+            .onDisappear {
+              self.currentAnimationAmount = initialAnimationAmount
+            }
+            .scaleEffect(currentAnimationAmount)
+            .animation(.linear(duration: animationDuration), value: currentAnimationAmount)
+            .funButton()
+
             Spacer()
           }
 
@@ -136,25 +137,25 @@ struct QuizView: View {
             .frame(height: Layout.defaultSpacing)
         }
       }
-        .padding(.leading, Layout.doubleDefaultSpacing)
-        .padding(.trailing, Layout.doubleDefaultSpacing)
-        .sheet(
-          isPresented: $quiz.shouldShowResults,
-          onDismiss: {
-            quiz.shouldShowResults = false
-            Current.gameCenter.showLeaderboard()
-          },
-          content: {
-            QuizResultsView()
-              .environmentObject(quiz)
-          }
-        )
-        .onAppear {
-          Current.analytics.recordViewAppeared("\(QuizView.self)")
-          if quiz.quizState == .notStarted && !Current.gameCenter.isAuthenticated {
-            Current.gameCenter.authenticate(onViewController: gameCenterAuthView.gameCenterAuthVC)
-          }
+      .padding(.leading, Layout.doubleDefaultSpacing)
+      .padding(.trailing, Layout.doubleDefaultSpacing)
+      .sheet(
+        isPresented: $quiz.shouldShowResults,
+        onDismiss: {
+          quiz.shouldShowResults = false
+          Current.gameCenter.showLeaderboard()
+        },
+        content: {
+          QuizResultsView()
+            .environmentObject(quiz)
         }
+      )
+      .onAppear {
+        Current.analytics.recordViewAppeared("\(QuizView.self)")
+        if quiz.quizState == .notStarted && !Current.gameCenter.isAuthenticated {
+          Current.gameCenter.authenticate(onViewController: gameCenterAuthView.gameCenterAuthVC)
+        }
+      }
     }
   }
 
