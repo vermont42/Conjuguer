@@ -34,76 +34,72 @@ struct QuizView: View {
           .frame(height: Layout.defaultSpacing)
 
         if quiz.quizState == .inProgress {
-          Group {
-            Text("\(L.QuizView.verbWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.infinitifWithPossibleExtraLetters)")
+          Text("\(L.QuizView.verbWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.infinitifWithPossibleExtraLetters)")
+            .constrainedBodyLabel()
+            .frenchPronunciation()
+
+          Spacer()
+            .frame(height: Layout.defaultSpacing)
+
+          Text("\(L.QuizView.translationWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.translation)")
+            .constrainedBodyLabel()
+            .englishPronunciation()
+
+          Spacer()
+            .frame(height: Layout.defaultSpacing)
+
+          Text("\(L.QuizView.pronounWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.pronounWithGender)")
+            .constrainedBodyLabel()
+            .frenchPronunciation()
+
+          Spacer()
+            .frame(height: Layout.defaultSpacing)
+
+          Text("\(L.QuizView.tenseWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.titleCaseName.lowercased())")
+            .constrainedBodyLabel()
+            .frenchPronunciation()
+
+          Spacer()
+            .frame(height: Layout.defaultSpacing)
+
+          HStack {
+            Text("\(L.QuizView.progressWithColon) \(quiz.currentQuestionIndex + 1) / \(quiz.questions.count)")
               .constrainedBodyLabel()
-              .frenchPronunciation()
+              .foregroundColor(.customBlue)
 
             Spacer()
-              .frame(height: Layout.defaultSpacing)
 
-            Text("\(L.QuizView.translationWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.translation)")
+            Text("\(L.QuizView.scoreWithColon) \(quiz.score)")
               .constrainedBodyLabel()
-              .englishPronunciation()
+              .foregroundColor(.customBlue)
           }
 
           Spacer()
             .frame(height: Layout.defaultSpacing)
 
-          Group {
-            Text("\(L.QuizView.pronounWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.pronounWithGender)")
+          HStack {
+            Text("\(L.QuizView.elapsedWithColon) \(quiz.elapsedTime.timeString)")
               .constrainedBodyLabel()
-              .frenchPronunciation()
+              .foregroundColor(.customBlue)
 
             Spacer()
-              .frame(height: Layout.defaultSpacing)
 
-            Text("\(L.QuizView.tenseWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.titleCaseName.lowercased())")
-              .constrainedBodyLabel()
-              .frenchPronunciation()
-
-            Spacer()
-              .frame(height: Layout.defaultSpacing)
-
-            HStack {
-              Text("\(L.QuizView.progressWithColon) \(quiz.currentQuestionIndex + 1) / \(quiz.questions.count)")
-                .constrainedBodyLabel()
-                .foregroundColor(.customBlue)
-
-              Spacer()
-
-              Text("\(L.QuizView.scoreWithColon) \(quiz.score)")
-                .constrainedBodyLabel()
-                .foregroundColor(.customBlue)
+            Button(L.QuizView.quit) {
+              quit()
             }
-
-            Spacer()
-              .frame(height: Layout.defaultSpacing)
-
-            HStack {
-              Text("\(L.QuizView.elapsedWithColon) \(quiz.elapsedTime.timeString)")
-                .constrainedBodyLabel()
-                .foregroundColor(.customBlue)
-
-              Spacer()
-
-              Button(L.QuizView.quit) {
-                quit()
-              }
-              .buttonLabel()
-              .funButton()
-            }
-
-            TextField(L.QuizView.conjugation, text: $input)
-              .focused($conjugationFieldIsFocused)
-              .autocapitalization(.none)
-              .disableAutocorrection(true)
-              .onSubmit {
-                quiz.process(proposedAnswer: input)
-                input = ""
-                conjugationFieldIsFocused = true
-              }
+            .buttonLabel()
+            .funButton()
           }
+
+          TextField(L.QuizView.conjugation, text: $input)
+            .focused($conjugationFieldIsFocused)
+            .autocapitalization(.none)
+            .disableAutocorrection(true)
+            .onSubmit {
+              quiz.process(proposedAnswer: input)
+              input = ""
+              conjugationFieldIsFocused = true
+            }
 
           Spacer()
         }

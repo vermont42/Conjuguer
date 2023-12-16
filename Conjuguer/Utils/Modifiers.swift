@@ -132,10 +132,6 @@ private struct TableText: ViewModifier {
 private struct FrenchPronunciation: ViewModifier {
   let forReal: Bool
 
-  init(forReal: Bool) {
-    self.forReal = forReal
-  }
-
   func body(content: Content) -> some View {
     if forReal {
       content

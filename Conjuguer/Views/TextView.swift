@@ -29,7 +29,7 @@ struct TextView: UIViewRepresentable {
 }
 
 class TextViewDelegate: NSObject, UITextViewDelegate {
-  func textView(_ textView: UITextView, shouldInteractWith url: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+  func textView(_ textView: UITextView, shouldInteractWith url: URL, in characterRange: NSRange) -> Bool {
     let cleansedUrlString = firstLetterLowercasedString(parenlessString((url.absoluteString.removingPercentEncoding ?? "")))
 
     if let infoIndex = Info.headingToIndex(heading: cleansedUrlString) {

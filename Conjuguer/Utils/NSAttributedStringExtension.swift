@@ -16,5 +16,5 @@ func + (left: NSAttributedString, right: NSAttributedString) -> NSAttributedStri
 }
 
 func += (lhs: inout NSAttributedString, rhs: NSAttributedString) {
-  return lhs = lhs + rhs
+  lhs = lhs + rhs
 }

@@ -65,6 +65,6 @@ enum RatingsFetcher {
   }
 
   static func stubData(ratingsCount: Int) -> Data {
-    return Data("{ \"resultCount\":1, \"results\": [ { \"userRatingCountForCurrentVersion\": \(ratingsCount) } ] }".utf8)
+    Data("{ \"resultCount\":1, \"results\": [ { \"userRatingCountForCurrentVersion\": \(ratingsCount) } ] }".utf8)
   }
 }

@@ -30,63 +30,57 @@ struct SettingsView: View {
         }
 
         ScrollView(.vertical) {
-          Group {
-            Text(L.Settings.quizDifficulty)
-              .settingsSubheadingLabel()
+          Text(L.Settings.quizDifficulty)
+            .settingsSubheadingLabel()
 
-            Picker("", selection: $store.quizDifficulty) {
-              ForEach(QuizDifficulty.allCases, id: \.self) { quizDifficulty in
-                Text(quizDifficulty.localizedDifficulty).tag(quizDifficulty)
-              }
+          Picker("", selection: $store.quizDifficulty) {
+            ForEach(QuizDifficulty.allCases, id: \.self) { quizDifficulty in
+              Text(quizDifficulty.localizedDifficulty).tag(quizDifficulty)
             }
-            .segmentedPicker()
-            .onAppear {
-              self.store.quizDifficulty = Current.settings.quizDifficulty
-              self.store.current = Current
-            }
-
-            Text(L.Settings.quizDifficultyDescription)
-              .settingsLabel()
-
-            Spacer(minLength: Layout.tripleDefaultSpacing)
           }
+          .segmentedPicker()
+          .onAppear {
+            self.store.quizDifficulty = Current.settings.quizDifficulty
+            self.store.current = Current
+          }
+
+          Text(L.Settings.quizDifficultyDescription)
+            .settingsLabel()
+
+          Spacer(minLength: Layout.tripleDefaultSpacing)
 
           Spacer()
 
-          Group {
-            Text(L.Settings.pronounGender)
-              .settingsSubheadingLabel()
+          Text(L.Settings.pronounGender)
+            .settingsSubheadingLabel()
 
-            Picker("", selection: $store.pronounGender) {
-              ForEach(PronounGender.allCases, id: \.self) { pronounGender in
-                Text(pronounGender.localizedGender).tag(pronounGender)
-              }
+          Picker("", selection: $store.pronounGender) {
+            ForEach(PronounGender.allCases, id: \.self) { pronounGender in
+              Text(pronounGender.localizedGender).tag(pronounGender)
             }
-            .segmentedPicker()
-            .onAppear {
-              self.store.pronounGender = Current.settings.pronounGender
-              self.store.current = Current
-            }
-
-            Text(L.Settings.pronounGenderDescription)
-              .settingsLabel()
-
-            Spacer(minLength: Layout.tripleDefaultSpacing)
+          }
+          .segmentedPicker()
+          .onAppear {
+            self.store.pronounGender = Current.settings.pronounGender
+            self.store.current = Current
           }
 
-          Group {
-            Text(L.Settings.ratingsAndReviews)
-              .subheadingLabel()
+          Text(L.Settings.pronounGenderDescription)
+            .settingsLabel()
 
-            Button(L.Settings.rateOrReview) {
-              UIApplication.shared.open(RatingsFetcher.reviewURL, options: [:])
-            }
-            .funButton()
+          Spacer(minLength: Layout.tripleDefaultSpacing)
 
-            if rateReviewDescription != "" {
-              Text(rateReviewDescription)
-                .settingsLabel()
-            }
+          Text(L.Settings.ratingsAndReviews)
+            .subheadingLabel()
+
+          Button(L.Settings.rateOrReview) {
+            UIApplication.shared.open(RatingsFetcher.reviewURL, options: [:])
+          }
+          .funButton()
+
+          if rateReviewDescription != "" {
+            Text(rateReviewDescription)
+              .settingsLabel()
           }
         }
       }

@@ -61,41 +61,37 @@ struct ModelView: View {
               let defectGroupId = model.defectGroupId,
               let defectGroup = DefectGroup.defectGroups[defectGroupId]
             {
-              Group {
-                Spacer()
-                  .frame(height: Layout.doubleDefaultSpacing)
-                Text(L.ModelView.defective)
-                  .subheadingLabel()
-                Text(defectGroup.description())
-                  .bodyLabel()
-              }
+              Spacer()
+                .frame(height: Layout.doubleDefaultSpacing)
+              Text(L.ModelView.defective)
+                .subheadingLabel()
+              Text(defectGroup.description())
+                .bodyLabel()
             }
 
             Spacer()
               .frame(height: Layout.doubleDefaultSpacing)
 
-            Group {
-              Text(L.ModelView.endings)
-                .subheadingLabel()
+            Text(L.ModelView.endings)
+              .subheadingLabel()
 
-              (Text("\(Tense.participePassé.shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.participeEndingRecursive).font(bodyFont))
-                .frenchPronunciation()
+            (Text("\(Tense.participePassé.shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.participeEndingRecursive).font(bodyFont))
+              .frenchPronunciation()
 
-              (Text("\(Tense.indicatifPrésent(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.indicatifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations)).font(bodyFont))
-                .frenchPronunciation()
+            (Text("\(Tense.indicatifPrésent(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.indicatifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations)).font(bodyFont))
+              .frenchPronunciation()
 
-              (Text("\(Tense.impératif(.firstPlural).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.indicatifPrésentGroupRecursive.impératifEndings(stemAlterations: model.stemAlterations)).font(bodyFont))
-                .frenchPronunciation()
+            (Text("\(Tense.impératif(.firstPlural).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.indicatifPrésentGroupRecursive.impératifEndings(stemAlterations: model.stemAlterations)).font(bodyFont))
+              .frenchPronunciation()
 
-              (Text("\(Tense.passéSimple(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.passéSimpleGroupRecursive.endings).font(bodyFont))
-                .frenchPronunciation()
+            (Text("\(Tense.passéSimple(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.passéSimpleGroupRecursive.endings).font(bodyFont))
+              .frenchPronunciation()
 
-              (Text("\(Tense.subjonctifPrésent(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.subjonctifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations)).font(bodyFont))
-                .frenchPronunciation()
+            (Text("\(Tense.subjonctifPrésent(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.subjonctifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations)).font(bodyFont))
+              .frenchPronunciation()
 
-              (Text("\(Tense.subjonctifImparfait(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.passéSimpleGroupRecursive.subjonctifImparfaitEndings).font(bodyFont))
-                .frenchPronunciation()
-            }
+            (Text("\(Tense.subjonctifImparfait(.firstSingular).shortTitleCaseName): ").font(bodyFont) + Text(mixedCaseString: model.passéSimpleGroupRecursive.subjonctifImparfaitEndings).font(bodyFont))
+              .frenchPronunciation()
 
             Spacer()
               .frame(height: Layout.doubleDefaultSpacing)
@@ -128,18 +124,16 @@ struct ModelView: View {
             Spacer()
               .frame(height: Layout.doubleDefaultSpacing)
 
-            Group {
-              if model.verbs.count > 1 {
-                Text(L.ModelView.verbsUsing)
-                  .subheadingLabel()
-              } else {
-                Text(L.ModelView.verbUsing)
-                  .subheadingLabel()
-              }
-              Text(model.verbsWithDeepLinks())
-                .font(bodyFont)
-                .frenchPronunciation()
+            if model.verbs.count > 1 {
+              Text(L.ModelView.verbsUsing)
+                .subheadingLabel()
+            } else {
+              Text(L.ModelView.verbUsing)
+                .subheadingLabel()
             }
+            Text(model.verbsWithDeepLinks())
+              .font(bodyFont)
+              .frenchPronunciation()
           }
         }
       }

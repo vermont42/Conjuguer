@@ -12,7 +12,7 @@ class UserDefaultsGetterSetter: GetterSetter {
   private let userDefaults = UserDefaults.standard
 
   func get(key: String) -> String? {
-    return userDefaults.string(forKey: key)
+    userDefaults.string(forKey: key)
   }
 
   func set(key: String, value: String) {

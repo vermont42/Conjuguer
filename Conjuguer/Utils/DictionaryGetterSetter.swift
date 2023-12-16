@@ -18,7 +18,7 @@ class DictionaryGetterSetter: GetterSetter {
   }
 
   func get(key: String) -> String? {
-    return dictionary[key]
+    dictionary[key]
   }
 
   func set(key: String, value: String) {

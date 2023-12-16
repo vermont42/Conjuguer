@@ -17,7 +17,7 @@ protocol AnalyticsLocale {
 
 extension AnalyticsLocale {
   var locale: String {
-    return languageCode + regionCode
+    languageCode + regionCode
   }
 
   var defaultLanguageCode: String {

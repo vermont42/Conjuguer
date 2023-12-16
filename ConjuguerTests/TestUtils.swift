@@ -54,7 +54,7 @@ class VerbModelTests: XCTestCase {
     var completedTestCount = 0
 
     let models = Array(VerbModel.models.values).sorted(by: { lhs, rhs in
-        return lhs.exemplar.caseInsensitiveCompare(rhs.exemplar) == .orderedAscending
+        lhs.exemplar.caseInsensitiveCompare(rhs.exemplar) == .orderedAscending
       }
     )
 
@@ -120,7 +120,7 @@ class VerbModelTests: XCTestCase {
 
 extension String {
     func capitalizingFirstLetter() -> String {
-      return prefix(1).capitalized + dropFirst()
+      prefix(1).capitalized + dropFirst()
     }
 
     mutating func capitalizeFirstLetter() {

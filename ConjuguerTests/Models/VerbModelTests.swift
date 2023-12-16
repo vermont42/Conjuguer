@@ -8,11 +8,13 @@
 @testable import Conjuguer
 import XCTest
 
-//class GenerateVerbModelTests: XCTestCase {
-//  func testGenerateVerbModelTests() {
-//    T.generateVerbModelTests()
-//  }
-//}
+/*
+class GenerateVerbModelTests: XCTestCase {
+  func testGenerateVerbModelTests() {
+    T.generateVerbModelTests()
+  }
+}
+*/
 
 class VerbModelTests: XCTestCase {
   func testAbsoudre() {
