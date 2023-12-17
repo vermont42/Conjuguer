@@ -7,20 +7,22 @@
 //  Copyright © 2019 Josh Adams. All rights reserved.
 //
 
+import Observation
 import SwiftUI
 
 var Current = World.chooseWorld()
 
-class World: ObservableObject {
-  @Published var settings: Settings
-  @Published var gameCenter: GameCenterable
-  @Published var quiz: Quiz
-  @Published var analytics: AnalyticsService
-  @Published var reviewPrompter: ReviewPromptable
-  @Published var verb: Verb?
-  @Published var verbModel: VerbModel?
-  @Published var info: Info?
-  @Published var session: URLSession
+@Observable
+class World {
+  var settings: Settings
+  var gameCenter: GameCenterable
+  var quiz: Quiz
+  var analytics: AnalyticsService
+  var reviewPrompter: ReviewPromptable
+  var verb: Verb?
+  var verbModel: VerbModel?
+  var info: Info?
+  var session: URLSession
 
   private static let fakeRatingsCount = 1
   private static let fakeSession = URLSession.stubSession(ratingsCount: fakeRatingsCount)

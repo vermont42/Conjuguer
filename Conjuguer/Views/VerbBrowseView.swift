@@ -56,8 +56,8 @@ struct VerbBrowseView: View {
         }
       })
     }
-    .onReceive(Current.$verb) { value in
-      if value != nil {
+    .onChange(of: Current.verb) { _, newVerb in
+      if newVerb != nil {
         isPresentingVerb = true
       }
     }
