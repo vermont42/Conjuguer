@@ -15,9 +15,6 @@ struct ConjuguerApp: App {
     }
   }
 
-  static var compoundPersonNumbersIndex = 0
-  static var compoundImpératifPersonNumbersIndex = 0
-
   init() {
     Current.analytics.recordBecameActive()
 

@@ -246,6 +246,7 @@
 		03AE93EE274443E400233105 /* RealAnalyticsLocale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealAnalyticsLocale.swift; sourceTree = "<group>"; };
 		03AE93EF274443E400233105 /* AnalyticsLocale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsLocale.swift; sourceTree = "<group>"; };
 		03AE93F0274443E400233105 /* StubAnalyticsLocale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubAnalyticsLocale.swift; sourceTree = "<group>"; };
+		03AFA68B2B2E875500CE8269 /* Conjuguer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Conjuguer.entitlements; sourceTree = "<group>"; };
 		03B54B3D25AF914F0062B323 /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		03B54B4525AF92930062B323 /* VerbModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbModelTests.swift; sourceTree = "<group>"; };
 		03C2CAC32619125200CFA825 /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
@@ -330,6 +331,7 @@
 		036DB78C259FD6500013C3B7 /* Conjuguer */ = {
 			isa = PBXGroup;
 			children = (
+				03AFA68B2B2E875500CE8269 /* Conjuguer.entitlements */,
 				03AE93E52744416900233105 /* Analytics */,
 				036DB7CC25A0C9AF0013C3B7 /* App */,
 				03C2CACA261912AA00CFA825 /* Assets */,
@@ -906,6 +908,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Conjuguer/Conjuguer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Conjuguer/App/Preview Content\"";
 				DEVELOPMENT_TEAM = V3L2PL4QC9;
@@ -929,6 +932,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Conjuguer/Conjuguer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Conjuguer/App/Preview Content\"";
 				DEVELOPMENT_TEAM = V3L2PL4QC9;
