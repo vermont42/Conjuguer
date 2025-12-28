@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct VerbBrowseView: View {
-  @ObservedObject private var store: VerbStore
+  @StateObject private var store: VerbStore
   @State private var isPresentingVerb = false
   @State private var searchText = ""
 
@@ -27,7 +27,7 @@ struct VerbBrowseView: View {
                 Text(L.displayNameForVerbSort(type)).tag(type)
               }
             }
-            .pickerStyle(SegmentedPickerStyle())
+            .pickerStyle(.segmented)
 
             ScrollView {
               LazyVStack {
@@ -38,7 +38,7 @@ struct VerbBrowseView: View {
                       Text(verb.infinitifWithPossibleExtraLetters)
                     }
                   }
-                  .buttonStyle(PlainButtonStyle())
+                  .buttonStyle(.plain)
                   .frenchPronunciation()
                 }
               }
@@ -92,7 +92,7 @@ struct VerbBrowseView: View {
   }
 
   init() {
-    store = VerbStore(world: Current)
+    _store = StateObject(wrappedValue: VerbStore(world: Current))
   }
 }
 

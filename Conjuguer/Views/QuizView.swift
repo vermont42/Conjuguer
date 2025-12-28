@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct QuizView: View {
-  @EnvironmentObject var quiz: Quiz
+  @Environment(Quiz.self) var quiz
   @State var input = ""
   @FocusState private var conjugationFieldIsFocused: Bool
   @State private var currentAnimationAmount = 2.5
@@ -18,6 +18,7 @@ struct QuizView: View {
   private let gameCenterAuthView = GameCenterAuthView()
 
   var body: some View {
+    @Bindable var quiz = quiz
     ZStack {
       Color.customBackground
         .ignoresSafeArea()
@@ -91,6 +92,23 @@ struct QuizView: View {
             .funButton()
           }
 
+          if
+            let previousIncorrectAnswer = quiz.previousIncorrectAnswer,
+            let previousCorrectAnswer = quiz.previousCorrectAnswer
+          {
+            Spacer()
+              .frame(height: Layout.defaultSpacing)
+
+            (Text("\(L.QuizView.lastAnswer) ").foregroundColor(.customRed) + Text(previousIncorrectAnswer))
+              .constrainedBodyLabel()
+
+            Spacer()
+              .frame(height: Layout.defaultSpacing)
+
+            (Text("\(L.QuizView.correctAnswer) ").foregroundColor(.customBlue) + Text(mixedCaseString: previousCorrectAnswer))
+              .constrainedBodyLabel()
+          }
+
           TextField(L.QuizView.conjugation, text: $input)
             .focused($conjugationFieldIsFocused)
             .autocapitalization(.none)
@@ -143,7 +161,7 @@ struct QuizView: View {
         },
         content: {
           QuizResultsView()
-            .environmentObject(quiz)
+            .environment(quiz)
         }
       )
       .onAppear {

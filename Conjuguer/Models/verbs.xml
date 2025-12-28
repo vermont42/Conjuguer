@@ -2333,6 +2333,7 @@
   <verb in="éclore" tn="hatch, bloom" mo="5-27A" dg="12" />
   <verb in="écluser" tn="pass through a lock" mo="1-1" />
   <verb in="écobuer" tn="remove roots from earth and burn them" mo="1-1" />
+  <verb in="écoconcevoir" tn="design a product respecting the environment" mo="4-1A" />
   <verb in="écœurer" tn="nauseate, disgust" mo="1-1" />
   <verb in="éconduire" tn="get rid of (someone), dismiss, refuse, reject" mo="5-9A" />
   <verb in="économiser" tn="economize" mo="1-1" fr="977" />
@@ -4594,6 +4595,7 @@
   <verb in="postposer" tn="postpose, postpone" mo="1-1" />
   <verb in="postsynchroniser" tn="dub" mo="1-1" />
   <verb in="postuler" tn="postulate, posit" mo="1-1" />
+  <verb in="potabiliser" tn="make potable, make drinkable" mo="1-1" />
   <verb in="potasser" tn="cram, review" mo="1-1" />
   <verb in="potentialiser" tn="potentiate, potentialize" mo="1-1" />
   <verb in="potiner" tn="gossip" mo="1-1" />
@@ -4701,6 +4703,7 @@
   <verb in="promettre" tn="promise" mo="5-4" fr="450" />
   <verb in="promotionner" tn="promote" mo="1-1" />
   <verb in="promouvoir" tn="promote" mo="4-3B" fr="434" />
+  <verb in="prompter" tn="prompt an AI system" mo="1-1" />
   <verb in="promulguer" tn="promulgate" mo="1-1" />
   <verb in="prôner" tn="extol, praise, laud" mo="1-1" />
   <verb in="prononcer" tn="pronounce, say, mention" mo="1-2A" fr="379" />
@@ -5927,6 +5930,7 @@
   <verb in="taniser" tn="add tannins to" mo="1-1" />
   <verb in="tanner" tn="tan (in leather-making)" mo="1-1" />
   <verb in="tanniser" tn="add tannins to" mo="1-1" />
+  <verb in="tanquer" tn="get stuck, plant oneself, drive in, plant, stand someone up, stay put, fail, skip, crash" mo="1-1" />
   <verb in="tapager" tn="be noisy, make noise" mo="1-2B" />
   <verb in="taper" tn="slap, knock, beat, type" mo="1-1" fr="611" />
   <verb in="tapiner" tn="work, labor" mo="1-1" />
@@ -5953,6 +5957,7 @@
   <verb in="taxer" tn="tax, impose a tax on" mo="1-1" />
   <verb in="tayloriser" tn="Taylorize" mo="1-1" />
   <verb in="tchatcher" tn="chat" mo="1-1" />
+  <verb in="tchiper" tn="make a sucking sound to show disapproval or contempt" mo="1-1" />
   <verb in="techniciser" tn="make more technical" mo="1-1" />
   <verb in="technocratiser" tn="technologize" mo="1-1" />
   <verb in="teiller" tn="ret" mo="1-1" />
@@ -6272,6 +6277,7 @@
   <verb in="viroler" tn="decorate with rings surrounding bugles or hunting horns" mo="1-1" />
   <verb in="viser" tn="aim at, target" mo="1-1" fr="159" />
   <verb in="visionner" tn="view" mo="1-1" />
+  <verb in="visibiliser" tn="make visible" mo="1-1" />
   <verb in="visiter" tn="visit (a place)" mo="1-1" fr="54" />
   <verb in="visser" tn="screw in, screw on" mo="1-1" />
   <verb in="visualiser" tn="visualize" mo="1-1" fr="862" />

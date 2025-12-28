@@ -219,7 +219,7 @@ private struct RightAligned: ViewModifier {
 private struct SegmentedPicker: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .pickerStyle(SegmentedPickerStyle())
+      .pickerStyle(.segmented)
       .padding(.horizontal, Layout.doubleDefaultSpacing)
   }
 }

@@ -53,6 +53,8 @@
 "QuizView.gameCenterFailure" = "Game Center a subi un echec.";
 "QuizView.none" = "aucun";
 "QuizView.cool" = "Chouette";
+"QuizView.lastAnswer" = "Dernière réponse:";
+"QuizView.correctAnswer" = "Réponse correcte:";
 
 "ResultsView.correctWithColon" = "Correcte:";
 "ResultsView.timeWithColon" = "Temps:";

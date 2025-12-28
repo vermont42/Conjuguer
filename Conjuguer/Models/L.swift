@@ -192,6 +192,14 @@ enum L {
     static var cool: String {
       String(localized: "QuizView.cool")
     }
+
+    static var lastAnswer: String {
+      String(localized: "QuizView.lastAnswer")
+    }
+
+    static var correctAnswer: String {
+      String(localized: "QuizView.correctAnswer")
+    }
   }
 
   enum Info {

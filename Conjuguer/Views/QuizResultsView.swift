@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct QuizResultsView: View {
-  @EnvironmentObject var quiz: Quiz
+  @Environment(Quiz.self) var quiz
 
   var body: some View {
     ZStack {

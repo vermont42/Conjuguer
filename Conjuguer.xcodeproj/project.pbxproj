@@ -97,6 +97,7 @@
 		0373683325DC672F008BDF46 /* DictionaryGetterSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0373683025DC672F008BDF46 /* DictionaryGetterSetter.swift */; };
 		0373683E25DD79A4008BDF46 /* ModelSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0373683D25DD79A4008BDF46 /* ModelSort.swift */; };
 		0373684525DD809C008BDF46 /* ModelBrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0373684425DD809C008BDF46 /* ModelBrowseView.swift */; };
+		038A31EB2CFBEAA60069E5D8 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 038A31EA2CFBEAA60069E5D8 /* PrivacyInfo.xcprivacy */; };
 		038E0AF9268D0E02002A71EF /* defectGroups.xml in Resources */ = {isa = PBXBuildFile; fileRef = 038E0AF8268D0E02002A71EF /* defectGroups.xml */; };
 		038E0AFE2690976D002A71EF /* DefectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038E0AFD2690976D002A71EF /* DefectGroup.swift */; };
 		038E0B032690A016002A71EF /* DefectGroupParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038E0B022690A016002A71EF /* DefectGroupParser.swift */; };
@@ -232,6 +233,7 @@
 		0373683025DC672F008BDF46 /* DictionaryGetterSetter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryGetterSetter.swift; sourceTree = "<group>"; };
 		0373683D25DD79A4008BDF46 /* ModelSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSort.swift; sourceTree = "<group>"; };
 		0373684425DD809C008BDF46 /* ModelBrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBrowseView.swift; sourceTree = "<group>"; };
+		038A31EA2CFBEAA60069E5D8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		038E0AF8268D0E02002A71EF /* defectGroups.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = defectGroups.xml; sourceTree = "<group>"; };
 		038E0AFD2690976D002A71EF /* DefectGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefectGroup.swift; sourceTree = "<group>"; };
 		038E0B022690A016002A71EF /* DefectGroupParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefectGroupParser.swift; sourceTree = "<group>"; };
@@ -499,13 +501,14 @@
 		03C2CACA261912AA00CFA825 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				032DBC4D272F5CB400D5804C /* Sounds */,
 				036DB791259FD6510013C3B7 /* Assets.xcassets */,
 				036E4D0F2735CA7C00A52973 /* LaunchScreen.storyboard */,
 				035D979C26B74D6C0089083C /* Localizable.strings */,
+				038A31EA2CFBEAA60069E5D8 /* PrivacyInfo.xcprivacy */,
+				032DBC4D272F5CB400D5804C /* Sounds */,
+				033EAA172630A36B0055B313 /* WorkSans.ttf */,
 				03309F6F26BD8D10003E4F92 /* WorkSans-Bold.ttf */,
 				032D267726C0DD6200AE1BD1 /* WorkSans-SemiBold.ttf */,
-				033EAA172630A36B0055B313 /* WorkSans.ttf */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -621,6 +624,7 @@
 				032DBC4B272F5CA400D5804C /* buzz.mp3 in Resources */,
 				036DB7C0259FD67C0013C3B7 /* verbs.xml in Resources */,
 				035BC8E42736EA3000EA13CA /* applause2.mp3 in Resources */,
+				038A31EB2CFBEAA60069E5D8 /* PrivacyInfo.xcprivacy in Resources */,
 				032DBC4C272F5CA400D5804C /* chirp.mp3 in Resources */,
 				036DB792259FD6510013C3B7 /* Assets.xcassets in Resources */,
 				032D267826C0DD6200AE1BD1 /* WorkSans-SemiBold.ttf in Resources */,
@@ -914,12 +918,13 @@
 				DEVELOPMENT_TEAM = V3L2PL4QC9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Conjuguer/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = software.racecondition.Conjuguer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -938,12 +943,13 @@
 				DEVELOPMENT_TEAM = V3L2PL4QC9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Conjuguer/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = software.racecondition.Conjuguer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

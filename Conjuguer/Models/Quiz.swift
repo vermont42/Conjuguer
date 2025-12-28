@@ -5,18 +5,22 @@
 //  Created by Josh Adams on 10/16/21.
 //
 
+import Observation
 import SwiftUI
 
-class Quiz: ObservableObject {
-  @Published private(set) var quizState = QuizState.notStarted
-  @Published private(set) var elapsedTime = 0
-  @Published private(set) var score = 0
-  @Published private(set) var numberCorrect = 0.0
-  @Published private(set) var difficulty = QuizDifficulty.regular
-  @Published private(set) var currentQuestionIndex = 0
-  @Published private(set) var questions: [(Verb, Tense)] = []
-  @Published private(set) var quizResults: [QuizResult] = []
-  @Published var shouldShowResults = false
+@Observable
+class Quiz {
+  private(set) var quizState = QuizState.notStarted
+  private(set) var elapsedTime = 0
+  private(set) var score = 0
+  private(set) var numberCorrect = 0.0
+  private(set) var difficulty = QuizDifficulty.regular
+  private(set) var currentQuestionIndex = 0
+  private(set) var questions: [(Verb, Tense)] = []
+  private(set) var quizResults: [QuizResult] = []
+  var shouldShowResults = false
+  private(set) var previousIncorrectAnswer: String?
+  private(set) var previousCorrectAnswer: String?
 
   private var timer: Timer?
   private var timer2: Timer?
@@ -123,6 +127,8 @@ class Quiz: ObservableObject {
     currentQuestionIndex = 0
     questions = []
     quizResults = []
+    previousIncorrectAnswer = nil
+    previousCorrectAnswer = nil
   }
 
   private func buildQuiz() {
@@ -324,6 +330,13 @@ class Quiz: ObservableObject {
           actualAnswer: proposedAnswer
         )
       )
+      if conjugationResult == .noMatch {
+        previousIncorrectAnswer = proposedAnswer
+        previousCorrectAnswer = correctAnswers
+      } else {
+        previousIncorrectAnswer = nil
+        previousCorrectAnswer = nil
+      }
     default:
       fatalError("Conjugation failed.")
     }

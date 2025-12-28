@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:gist.githubusercontent.com)",
+      "WebSearch",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(xcodebuild:*)"
+    ]
+  }
+}

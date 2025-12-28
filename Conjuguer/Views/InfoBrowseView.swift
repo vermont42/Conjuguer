@@ -30,7 +30,7 @@ struct InfoBrowseView: View {
                       .tableText()
                   }
                 }
-                .buttonStyle(PlainButtonStyle())
+                .buttonStyle(.plain)
                 .frenchPronunciation(forReal: info.alwaysUsesFrenchPronunciation)
               }
             }

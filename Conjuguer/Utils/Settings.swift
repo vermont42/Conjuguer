@@ -7,11 +7,13 @@
 //
 
 import Foundation
+import Observation
 
-class Settings: ObservableObject {
+@Observable
+class Settings {
   private let getterSetter: GetterSetter
 
-  var verbSort: VerbSort {
+  var verbSort: VerbSort = verbSortDefault {
     didSet {
       if verbSort != oldValue {
         getterSetter.set(key: Settings.verbSortKey, value: "\(verbSort)")
@@ -21,7 +23,7 @@ class Settings: ObservableObject {
   static let verbSortKey = "verbSort"
   static let verbSortDefault: VerbSort = .frequency
 
-  var modelSort: ModelSort {
+  var modelSort: ModelSort = modelSortDefault {
     didSet {
       if modelSort != oldValue {
         getterSetter.set(key: Settings.modelSortKey, value: "\(modelSort)")
@@ -31,7 +33,7 @@ class Settings: ObservableObject {
   static let modelSortKey = "modelSort"
   static let modelSortDefault: ModelSort = .irregularity
 
-  var quizDifficulty: QuizDifficulty {
+  var quizDifficulty: QuizDifficulty = quizDifficultyDefault {
     didSet {
       if quizDifficulty != oldValue {
         getterSetter.set(key: Settings.quizDifficultyKey, value: quizDifficulty.rawValue)
@@ -41,7 +43,7 @@ class Settings: ObservableObject {
   static let quizDifficultyKey = "quizDifficulty"
   static let quizDifficultyDefault: QuizDifficulty = .regular
 
-  var pronounGender: PronounGender {
+  var pronounGender: PronounGender = pronounGenderDefault {
     didSet {
       if pronounGender != oldValue {
         getterSetter.set(key: Settings.pronounGenderKey, value: pronounGender.rawValue)
@@ -51,7 +53,7 @@ class Settings: ObservableObject {
   static let pronounGenderKey = "pronounGender"
   static let pronounGenderDefault: PronounGender = .feminine
 
-  var promptActionCount: Int {
+  var promptActionCount: Int = promptActionCountDefault {
     didSet {
       if promptActionCount != oldValue {
         getterSetter.set(key: Settings.promptActionCountKey, value: "\(promptActionCount)")
@@ -61,7 +63,7 @@ class Settings: ObservableObject {
   static let promptActionCountKey = "promptActionCount"
   static let promptActionCountDefault = 0
 
-  var lastReviewPromptDate: Date {
+  var lastReviewPromptDate: Date = lastReviewPromptDateDefault {
     didSet {
       if lastReviewPromptDate != oldValue {
         getterSetter.set(key: Settings.lastReviewPromptDateKey, value: formatter.string(from: lastReviewPromptDate))
@@ -75,48 +77,42 @@ class Settings: ObservableObject {
 
   init(getterSetter: GetterSetter) {
     self.getterSetter = getterSetter
+    formatter.dateFormat = Settings.format
 
+    // Load saved values after all properties are initialized
     if let verbSortString = getterSetter.get(key: Settings.verbSortKey) {
       verbSort = VerbSort(rawValue: verbSortString) ?? Settings.verbSortDefault
     } else {
-      verbSort = Settings.verbSortDefault
       getterSetter.set(key: Settings.verbSortKey, value: "\(verbSort)")
     }
 
     if let modelSortString = getterSetter.get(key: Settings.modelSortKey) {
       modelSort = ModelSort(rawValue: modelSortString) ?? Settings.modelSortDefault
     } else {
-      modelSort = Settings.modelSortDefault
       getterSetter.set(key: Settings.modelSortKey, value: "\(modelSort)")
     }
 
     if let quizDifficultyString = getterSetter.get(key: Settings.quizDifficultyKey) {
       quizDifficulty = QuizDifficulty(rawValue: quizDifficultyString) ?? Settings.quizDifficultyDefault
     } else {
-      quizDifficulty = Settings.quizDifficultyDefault
       getterSetter.set(key: Settings.quizDifficultyKey, value: quizDifficulty.rawValue)
     }
 
     if let pronounGenderString = getterSetter.get(key: Settings.pronounGenderKey) {
       pronounGender = PronounGender(rawValue: pronounGenderString) ?? Settings.pronounGenderDefault
     } else {
-      pronounGender = Settings.pronounGenderDefault
       getterSetter.set(key: Settings.pronounGenderKey, value: pronounGender.rawValue)
     }
 
     if let promptActionCountString = getterSetter.get(key: Settings.promptActionCountKey) {
       promptActionCount = Int((promptActionCountString as NSString).intValue)
     } else {
-      promptActionCount = Settings.promptActionCountDefault
       getterSetter.set(key: Settings.promptActionCountKey, value: "\(promptActionCount)")
     }
-
-    formatter.dateFormat = Settings.format
 
     if let lastReviewPromptDateString = getterSetter.get(key: Settings.lastReviewPromptDateKey) {
       lastReviewPromptDate = formatter.date(from: lastReviewPromptDateString) ?? Settings.lastReviewPromptDateDefault
     } else {
-      lastReviewPromptDate = Settings.lastReviewPromptDateDefault
       getterSetter.set(key: Settings.lastReviewPromptDateKey, value: formatter.string(from: lastReviewPromptDate))
     }
   }

@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct SettingsView: View {
-  @ObservedObject var store = SelectionStore()
   @State private var rateReviewDescription = ""
 
   var body: some View {
+    @Bindable var settings = Current.settings
+
     ZStack {
       Color.customBackground
         .ignoresSafeArea()
@@ -33,16 +34,12 @@ struct SettingsView: View {
           Text(L.Settings.quizDifficulty)
             .settingsSubheadingLabel()
 
-          Picker("", selection: $store.quizDifficulty) {
+          Picker("", selection: $settings.quizDifficulty) {
             ForEach(QuizDifficulty.allCases, id: \.self) { quizDifficulty in
               Text(quizDifficulty.localizedDifficulty).tag(quizDifficulty)
             }
           }
           .segmentedPicker()
-          .onAppear {
-            self.store.quizDifficulty = Current.settings.quizDifficulty
-            self.store.current = Current
-          }
 
           Text(L.Settings.quizDifficultyDescription)
             .settingsLabel()
@@ -54,16 +51,12 @@ struct SettingsView: View {
           Text(L.Settings.pronounGender)
             .settingsSubheadingLabel()
 
-          Picker("", selection: $store.pronounGender) {
+          Picker("", selection: $settings.pronounGender) {
             ForEach(PronounGender.allCases, id: \.self) { pronounGender in
               Text(pronounGender.localizedGender).tag(pronounGender)
             }
           }
           .segmentedPicker()
-          .onAppear {
-            self.store.pronounGender = Current.settings.pronounGender
-            self.store.current = Current
-          }
 
           Text(L.Settings.pronounGenderDescription)
             .settingsLabel()
@@ -94,22 +87,6 @@ struct SettingsView: View {
           }
         })
       }
-    }
-  }
-}
-
-final class SelectionStore: ObservableObject {
-  var current: World?
-
-  var quizDifficulty: QuizDifficulty = Settings.quizDifficultyDefault {
-    didSet {
-      current?.settings.quizDifficulty = quizDifficulty
-    }
-  }
-
-  var pronounGender: PronounGender = Settings.pronounGenderDefault {
-    didSet {
-      current?.settings.pronounGender = pronounGender
     }
   }
 }

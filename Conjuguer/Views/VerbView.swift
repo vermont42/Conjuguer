@@ -122,172 +122,14 @@ struct VerbView: View {
               .accessibilityHidden(true)
           }
 
-          Spacer()
-
-          Text(Tense.indicatifPrésent(.firstSingular).titleCaseName)
-            .subheadingLabel()
-            .frenchPronunciation()
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-          ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-            ZStack {
-              Color.customBackground
-                .accessibility(value: Text(verb: verb, tense: .indicatifPrésent(personNumber), shouldShowIrregularities: false))
-                .frenchPronunciation()
-
-              Text(verb: verb, tense: .indicatifPrésent(personNumber)).font(bodyFont)
-                .leftAligned()
-                .accessibilityHidden(true)
-            }
-          }
-          .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-          Spacer()
-
-          Text(Tense.passéSimple(.firstSingular).titleCaseName)
-            .subheadingLabel()
-            .frenchPronunciation()
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-            .padding(.top, Layout.defaultSpacing)
-
-          ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-            ZStack {
-              Color.customBackground
-                .accessibility(value: Text(verb: verb, tense: .passéSimple(personNumber), shouldShowIrregularities: false))
-                .frenchPronunciation()
-
-              Text(verb: verb, tense: .passéSimple(personNumber)).font(bodyFont)
-                .leftAligned()
-                .accessibilityHidden(true)
-            }
-          }
-          .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-          Spacer()
-
-          Text(Tense.imparfait(.firstSingular).titleCaseName)
-            .subheadingLabel()
-            .frenchPronunciation()
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-            .padding(.top, Layout.defaultSpacing)
-
-          ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-            ZStack {
-              Color.customBackground
-                .accessibility(value: Text(verb: verb, tense: .imparfait(personNumber), shouldShowIrregularities: false))
-                .frenchPronunciation()
-
-              Text(verb: verb, tense: .imparfait(personNumber)).font(bodyFont)
-                .leftAligned()
-                .accessibilityHidden(true)
-            }
-          }
-          .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-          Spacer()
-
-          Text(Tense.futurSimple(.firstSingular).titleCaseName)
-            .subheadingLabel()
-            .frenchPronunciation()
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-            .padding(.top, Layout.defaultSpacing)
-
-          ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-            ZStack {
-              Color.customBackground
-                .accessibility(value: Text(verb: verb, tense: .futurSimple(personNumber), shouldShowIrregularities: false))
-                .frenchPronunciation()
-
-              Text(verb: verb, tense: .futurSimple(personNumber)).font(bodyFont)
-                .leftAligned()
-                .accessibilityHidden(true)
-            }
-          }
-          .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-          Spacer()
-
-          Text(Tense.conditionnelPrésent(.firstSingular).titleCaseName)
-            .subheadingLabel()
-            .frenchPronunciation()
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-            .padding(.top, Layout.defaultSpacing)
-
-          ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-            ZStack {
-              Color.customBackground
-                .accessibility(value: Text(verb: verb, tense: .conditionnelPrésent(personNumber), shouldShowIrregularities: false))
-                .frenchPronunciation()
-
-              Text(verb: verb, tense: .conditionnelPrésent(personNumber)).font(bodyFont)
-                .leftAligned()
-                .accessibilityHidden(true)
-            }
-          }
-          .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-          Spacer()
-
-          Text(Tense.subjonctifPrésent(.firstSingular).titleCaseName)
-            .subheadingLabel()
-            .frenchPronunciation()
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-            .padding(.top, Layout.defaultSpacing)
-
-          ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-            ZStack {
-              Color.customBackground
-                .accessibility(value: Text(verb: verb, tense: .subjonctifPrésent(personNumber), shouldShowIrregularities: false))
-                .frenchPronunciation()
-
-              Text(verb: verb, tense: .subjonctifPrésent(personNumber)).font(bodyFont)
-                .leftAligned()
-                .accessibilityHidden(true)
-            }
-          }
-          .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-          Spacer()
-
-          Text(Tense.subjonctifImparfait(.firstSingular).titleCaseName)
-            .subheadingLabel()
-            .frenchPronunciation()
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-            .padding(.top, Layout.defaultSpacing)
-
-          ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-            ZStack {
-              Color.customBackground
-                .accessibility(value: Text(verb: verb, tense: .subjonctifImparfait(personNumber), shouldShowIrregularities: false))
-                .frenchPronunciation()
-
-              Text(verb: verb, tense: .subjonctifImparfait(personNumber)).font(bodyFont)
-                .leftAligned()
-                .accessibilityHidden(true)
-            }
-          }
-          .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-          Spacer()
-
-          Text(Tense.impératif(.firstPlural).titleCaseName)
-            .subheadingLabel()
-            .frenchPronunciation()
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-            .padding(.top, Layout.defaultSpacing)
-
-          ForEach(PersonNumber.impératifPersonNumbers, id: \.self) { personNumber in
-            ZStack {
-              Color.customBackground
-                .accessibility(value: Text(verb: verb, tense: .impératif(personNumber), shouldShowIrregularities: false))
-                .frenchPronunciation()
-
-              Text(verb: verb, tense: .impératif(personNumber)).font(bodyFont)
-                .leftAligned()
-                .accessibilityHidden(true)
-            }
-          }
-          .padding(.bottom, -1.0 * Layout.defaultSpacing)
+          TenseSectionView(verb: verb, tenseBuilder: { .indicatifPrésent($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: true)
+          TenseSectionView(verb: verb, tenseBuilder: { .passéSimple($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: false)
+          TenseSectionView(verb: verb, tenseBuilder: { .imparfait($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: false)
+          TenseSectionView(verb: verb, tenseBuilder: { .futurSimple($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: false)
+          TenseSectionView(verb: verb, tenseBuilder: { .conditionnelPrésent($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: false)
+          TenseSectionView(verb: verb, tenseBuilder: { .subjonctifPrésent($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: false)
+          TenseSectionView(verb: verb, tenseBuilder: { .subjonctifImparfait($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: false)
+          TenseSectionView(verb: verb, tenseBuilder: { .impératif($0) }, personNumbers: PersonNumber.impératifPersonNumbers, isFirstInGroup: false)
 
           Spacer()
 
@@ -299,193 +141,15 @@ struct VerbView: View {
           .padding(.top, Layout.defaultSpacing)
 
           if shouldShowCompoundTenses {
-            Spacer()
-
-            Text(Tense.passéComposé(.firstSingular).titleCaseName)
-              .subheadingLabel()
-              .frenchPronunciation()
-              .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-            ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              ZStack {
-                Color.customBackground
-                  .accessibility(value: Text(verb: verb, tense: .passéComposé(personNumber), shouldShowIrregularities: false))
-                  .frenchPronunciation()
-
-                Text(verb: verb, tense: .passéComposé(personNumber)).font(bodyFont)
-                  .leftAligned()
-                  .accessibilityHidden(true)
-              }
-            }
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-            Spacer()
-
-            Text(Tense.plusQueParfait(.firstSingular).titleCaseName)
-              .subheadingLabel()
-              .frenchPronunciation()
-              .padding(.bottom, -1.0 * Layout.defaultSpacing)
-              .padding(.top, Layout.defaultSpacing)
-
-            ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              ZStack {
-                Color.customBackground
-                  .accessibility(value: Text(verb: verb, tense: .plusQueParfait(personNumber), shouldShowIrregularities: false))
-                  .frenchPronunciation()
-
-                Text(verb: verb, tense: .plusQueParfait(personNumber)).font(bodyFont)
-                  .leftAligned()
-                  .accessibilityHidden(true)
-              }
-            }
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-            Spacer()
-
-            Text(Tense.passéAntérieur(.firstSingular).titleCaseName)
-              .subheadingLabel()
-              .frenchPronunciation()
-              .padding(.bottom, -1.0 * Layout.defaultSpacing)
-              .padding(.top, Layout.defaultSpacing)
-
-            ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              ZStack {
-                Color.customBackground
-                  .accessibility(value: Text(verb: verb, tense: .passéAntérieur(personNumber), shouldShowIrregularities: false))
-                  .frenchPronunciation()
-
-                Text(verb: verb, tense: .passéAntérieur(personNumber)).font(bodyFont)
-                  .leftAligned()
-                  .accessibilityHidden(true)
-              }
-            }
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-            Spacer()
-
-            Text(Tense.passéSurcomposé(.firstSingular).titleCaseName)
-              .subheadingLabel()
-              .frenchPronunciation()
-              .padding(.bottom, -1.0 * Layout.defaultSpacing)
-              .padding(.top, Layout.defaultSpacing)
-
-            ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              ZStack {
-                Color.customBackground
-                  .accessibility(value: Text(verb: verb, tense: .passéSurcomposé(personNumber), shouldShowIrregularities: false))
-                  .frenchPronunciation()
-
-                Text(verb: verb, tense: .passéSurcomposé(personNumber)).font(bodyFont)
-                  .leftAligned()
-                  .accessibilityHidden(true)
-              }
-            }
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-            Spacer()
-
-            Text(Tense.futurAntérieur(.firstSingular).titleCaseName)
-              .subheadingLabel()
-              .frenchPronunciation()
-              .padding(.bottom, -1.0 * Layout.defaultSpacing)
-              .padding(.top, Layout.defaultSpacing)
-
-            ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              ZStack {
-                Color.customBackground
-                  .accessibility(value: Text(verb: verb, tense: .futurAntérieur(personNumber), shouldShowIrregularities: false))
-                  .frenchPronunciation()
-
-                Text(verb: verb, tense: .futurAntérieur(personNumber)).font(bodyFont)
-                  .leftAligned()
-                  .accessibilityHidden(true)
-              }
-            }
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-            Spacer()
-
-            Text(Tense.conditionnelPassé(.firstSingular).titleCaseName)
-              .subheadingLabel()
-              .frenchPronunciation()
-              .padding(.bottom, -1.0 * Layout.defaultSpacing)
-              .padding(.top, Layout.defaultSpacing)
-
-            ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              ZStack {
-                Color.customBackground
-                  .accessibility(value: Text(verb: verb, tense: .conditionnelPassé(personNumber), shouldShowIrregularities: false))
-                  .frenchPronunciation()
-
-                Text(verb: verb, tense: .conditionnelPassé(personNumber)).font(bodyFont)
-                  .leftAligned()
-                  .accessibilityHidden(true)
-              }
-            }
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-            Spacer()
-
-            Text(Tense.subjonctifPassé(.firstSingular).titleCaseName)
-              .subheadingLabel()
-              .frenchPronunciation()
-              .padding(.bottom, -1.0 * Layout.defaultSpacing)
-              .padding(.top, Layout.defaultSpacing)
-
-            ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              ZStack {
-                Color.customBackground
-                  .accessibility(value: Text(verb: verb, tense: .subjonctifPassé(personNumber), shouldShowIrregularities: false))
-                  .frenchPronunciation()
-
-                Text(verb: verb, tense: .subjonctifPassé(personNumber)).font(bodyFont)
-                  .leftAligned()
-                  .accessibilityHidden(true)
-              }
-            }
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-            Spacer()
-
-            Text(Tense.subjonctifPlusQueParfait(.firstSingular).titleCaseName)
-              .subheadingLabel()
-              .frenchPronunciation()
-              .padding(.bottom, -1.0 * Layout.defaultSpacing)
-              .padding(.top, Layout.defaultSpacing)
-
-            ForEach(PersonNumber.allCases, id: \.self) { personNumber in
-              ZStack {
-                Color.customBackground
-                  .accessibility(value: Text(verb: verb, tense: .subjonctifPlusQueParfait(personNumber), shouldShowIrregularities: false))
-                  .frenchPronunciation()
-
-                Text(verb: verb, tense: .subjonctifPlusQueParfait(personNumber)).font(bodyFont)
-                  .leftAligned()
-                  .accessibilityHidden(true)
-              }
-            }
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
-
-            Spacer()
-
-            Text(Tense.impératifPassé(.firstSingular).titleCaseName)
-              .subheadingLabel()
-              .frenchPronunciation()
-              .padding(.bottom, -1.0 * Layout.defaultSpacing)
-              .padding(.top, Layout.defaultSpacing)
-
-            ForEach(PersonNumber.impératifPersonNumbers, id: \.self) { personNumber in
-              ZStack {
-                Color.customBackground
-                  .accessibility(value: Text(verb: verb, tense: .impératifPassé(personNumber), shouldShowIrregularities: false))
-                  .frenchPronunciation()
-
-                Text(verb: verb, tense: .impératifPassé(personNumber)).font(bodyFont)
-                  .leftAligned()
-                  .accessibilityHidden(true)
-              }
-            }
-            .padding(.bottom, -1.0 * Layout.defaultSpacing)
+            TenseSectionView(verb: verb, tenseBuilder: { .passéComposé($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: true)
+            TenseSectionView(verb: verb, tenseBuilder: { .plusQueParfait($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: false)
+            TenseSectionView(verb: verb, tenseBuilder: { .passéAntérieur($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: false)
+            TenseSectionView(verb: verb, tenseBuilder: { .passéSurcomposé($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: false)
+            TenseSectionView(verb: verb, tenseBuilder: { .futurAntérieur($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: false)
+            TenseSectionView(verb: verb, tenseBuilder: { .conditionnelPassé($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: false)
+            TenseSectionView(verb: verb, tenseBuilder: { .subjonctifPassé($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: false)
+            TenseSectionView(verb: verb, tenseBuilder: { .subjonctifPlusQueParfait($0) }, personNumbers: PersonNumber.allCases, isFirstInGroup: false)
+            TenseSectionView(verb: verb, tenseBuilder: { .impératifPassé($0) }, personNumbers: PersonNumber.impératifPersonNumbers, isFirstInGroup: false)
 
             Spacer()
           }
@@ -496,5 +160,35 @@ struct VerbView: View {
       }
       .customNavigationBarItems()
     }
+  }
+}
+
+private struct TenseSectionView: View {
+  let verb: Verb
+  let tenseBuilder: (PersonNumber) -> Tense
+  let personNumbers: [PersonNumber]
+  let isFirstInGroup: Bool
+
+  var body: some View {
+    Spacer()
+
+    Text(tenseBuilder(personNumbers[0]).titleCaseName)
+      .subheadingLabel()
+      .frenchPronunciation()
+      .padding(.bottom, -1.0 * Layout.defaultSpacing)
+      .padding(.top, isFirstInGroup ? 0 : Layout.defaultSpacing)
+
+    ForEach(personNumbers, id: \.self) { personNumber in
+      ZStack {
+        Color.customBackground
+          .accessibility(value: Text(verb: verb, tense: tenseBuilder(personNumber), shouldShowIrregularities: false))
+          .frenchPronunciation()
+
+        Text(verb: verb, tense: tenseBuilder(personNumber)).font(bodyFont)
+          .leftAligned()
+          .accessibilityHidden(true)
+      }
+    }
+    .padding(.bottom, -1.0 * Layout.defaultSpacing)
   }
 }

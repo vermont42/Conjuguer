@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ModelBrowseView: View {
-  @ObservedObject private var store: ModelStore
+  @StateObject private var store: ModelStore
   @State private var isPresentingVerbModel = false
   @State private var searchText = ""
 
@@ -27,7 +27,7 @@ struct ModelBrowseView: View {
                 Text(L.displayNameForModelSort(type)).tag(type)
               }
             }
-            .pickerStyle(SegmentedPickerStyle())
+            .pickerStyle(.segmented)
 
             ScrollView {
               ForEach(searchResults, id: \.self) { modelAndDecorator in
@@ -35,7 +35,7 @@ struct ModelBrowseView: View {
                   Text(modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator)
                     .tableText()
                 }
-                .buttonStyle(PlainButtonStyle())
+                .buttonStyle(.plain)
                 .frenchPronunciation()
               }
               .navigationBarTitle(L.Navigation.models)
@@ -43,14 +43,14 @@ struct ModelBrowseView: View {
           }
         }
       }
-      .navigationViewStyle(StackNavigationViewStyle()) // https://stackoverflow.com/a/66024249
+      .navigationViewStyle(.stack) // https://stackoverflow.com/a/66024249
       .padding()
       .searchable(text: $searchText, prompt: "", suggestions: {
         ForEach(searchResults, id: \.self) { modelAndDecorator in
           Text("\(modelAndDecorator.model.exemplarWithPossibleExtraLetters)\(modelAndDecorator.decorator)")
             .tableText()
             .frenchPronunciation()
-            .buttonStyle(PlainButtonStyle())
+            .buttonStyle(.plain)
             .searchCompletion(modelAndDecorator.model.exemplarWithPossibleExtraLetters)
         }
       })
@@ -90,7 +90,7 @@ struct ModelBrowseView: View {
   }
 
   init() {
-    store = ModelStore(world: Current)
+    _store = StateObject(wrappedValue: ModelStore(world: Current))
   }
 }
 
