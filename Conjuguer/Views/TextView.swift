@@ -34,7 +34,6 @@ class TextViewDelegate: NSObject, UITextViewDelegate {
 
     if let infoIndex = Info.headingToIndex(heading: cleansedUrlString) {
       let infoDeepLinkUrlString = URL.conjuguerUrlPrefix + "\(URL.infoHost)/\(infoIndex)"
-      print(infoDeepLinkUrlString)
       URL(string: infoDeepLinkUrlString).map {
         UIApplication.shared.open($0)
       }

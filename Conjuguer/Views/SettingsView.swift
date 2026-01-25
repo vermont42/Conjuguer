@@ -46,8 +46,6 @@ struct SettingsView: View {
 
           Spacer(minLength: Layout.tripleDefaultSpacing)
 
-          Spacer()
-
           Text(L.Settings.pronounGender)
             .settingsSubheadingLabel()
 

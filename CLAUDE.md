@@ -22,7 +22,7 @@ xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer -destination 'platform
 
 ## Architecture Overview
 
-Conjuguer is an iOS app for learning French verb conjugations. It conjugates 6,314 verbs across all French tenses.
+Conjuguer is an iOS app for learning French verb conjugations. It conjugates 6,320 verbs across all French tenses.
 
 ### Core Domain Model
 

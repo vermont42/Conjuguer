@@ -22,7 +22,7 @@ enum Sound: String {
   case silence
 
   static var randomGun: Sound {
-    randomSound(base: "gun", count: 3, defaultSound: .gun1)
+    randomSound(base: "gun", count: 2, defaultSound: .gun1)
   }
 
   static var randomApplause: Sound {
