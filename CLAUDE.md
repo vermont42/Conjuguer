@@ -4,20 +4,94 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Build and Test Commands
 
-This is an Xcode project. Use the following commands:
+This project uses the **`ios-build-verify` Claude Code skill** for building, testing,
+and verifying the app. The build/test scripts pipe `xcodebuild` through `xcbeautify`
+for concise output and tee raw output to `build.log` as a fallback. Per-project
+configuration lives at `.claude/ios-build-verify.config.sh` (target sim: iPhone 17 /
+iOS 26; scheme: `Conjuguer`) and is sourced by every script.
+
+Scripts live under the skill's install path. Resolve it once, then invoke by name:
 
 ```bash
+export IBV_SCRIPTS=$(dirname "$(find ~/.claude -path '*ios-build-verify*' -name build_app.sh 2>/dev/null | head -1)")
+
 # Build the app
-xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer -destination 'platform=iOS Simulator,name=iPhone 16' build
+"$IBV_SCRIPTS/build_app.sh"
 
-# Run tests
-xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer -destination 'platform=iOS Simulator,name=iPhone 16' test
+# Run all tests
+"$IBV_SCRIPTS/run_tests.sh"
 
-# Run a single test class
-xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:ConjuguerTests/VerbModelTests
+# Run a single suite or method (Swift Testing form: Target/Suite/method() — note trailing ())
+"$IBV_SCRIPTS/run_tests.sh" --only-testing ConjuguerTests/VerbModelTests
+"$IBV_SCRIPTS/run_tests.sh" --only-testing ConjuguerTests/CompoundTenseTests/testCompoundTenses
+```
 
-# Run a single test method
-xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:ConjuguerTests/CompoundTenseTests/testCompoundTenses
+### Verifying the app (simulator-driven)
+
+The skill can launch the app and inspect/drive the UI so changes can be verified
+beyond unit tests:
+
+```bash
+"$IBV_SCRIPTS/launch_app.sh"                 # build first, then boot + install + launch + wait-for-render
+"$IBV_SCRIPTS/screenshot.sh <context-slug>"  # capture a PNG under docs/screenshots/
+"$IBV_SCRIPTS/describe_ui.sh"                # dump the accessibility tree
+"$IBV_SCRIPTS/tap_tab.sh <verbs|models|quiz|info|settings>"  # tap a main tab
+```
+
+The launch anchor is `verb_browse_sort` (the sort `Picker` in `VerbBrowseView`). Add
+more `.accessibilityIdentifier`/`.accessibilityValue` modifiers on a migration-by-use
+basis as verification flows need them. See the skill's `SKILL.md` for the full verify
+surface (named-intent ops, annotation checks, iOS 26 control caveats).
+
+#### Accessibility identifiers added so far
+
+| Identifier | Element | Notes |
+|---|---|---|
+| `verb_browse_sort` | Sort `Picker` in `VerbBrowseView` | Launch anchor (`FIRST_SCREEN_ID`). |
+| `input_quiz_conjugation` | Answer `TextField` in `QuizView` | Carries `.accessibilityValue(input)`, so `read_value`/`set_value`/`type_text --id` work with read-back. |
+| `picker_settings_quizDifficulty` | Quiz-difficulty segmented `Picker` in `SettingsView` | 2 segments (Regular, Ridiculous). |
+| `picker_settings_pronounGender` | Pronoun-gender segmented `Picker` in `SettingsView` | 3 segments (Feminine, Masculine, Both). |
+
+List rows (verbs, models, info headings) and tab buttons are not yet annotated —
+drive them by `AXLabel` / `tap_tab.sh` for now.
+
+#### iOS 26 control caveats specific to this app
+
+- **Accented input (é, è, à, ç, …):** `axe type` rejects non-ASCII. The skill's
+  `set_value.sh` / `type_text.sh` (v0.3.0+) auto-route non-ASCII through a
+  `simctl pbcopy` + Cmd+V pasteboard fallback, so French conjugations enter
+  correctly. The quiz field is reachable by id, so prefer `type_text.sh --id
+  input_quiz_conjugation "<answer>"` (gives read-back); the field also auto-focuses
+  after **Start**, so a bare `axe type` into the focused field also works for ASCII.
+- **Segmented pickers** render with empty AXTree children on iOS 26, so segments
+  aren't individually addressable by id. The parent identifier locates the control's
+  frame; `verify_segment.sh` then verifies a segment's label + selected state, but
+  **requires `--segments N` explicitly** (it can't infer the count through the
+  children-empty bug): `--segments 2` for `picker_settings_quizDifficulty`,
+  `--segments 3` for `picker_settings_pronounGender`. To *drive* a selection, compute
+  the segment center from the id'd frame (`x + width*(i+0.5)/N`, `y + height/2`) and
+  `tap_xy.sh`.
+
+#### Completing a quiz (regular difficulty)
+
+A regular-difficulty quiz is 30 questions; `Quiz.process(_:)` advances on every
+submission regardless of correctness, so completion = submit an answer to all 30.
+After **Start**, the answer field auto-focuses; type into `input_quiz_conjugation`
+and send Return (`axe key 40`) per question. The `Progress: N / 30` label tracks
+position; the run ends with a `QuizResultsView` sheet (label `Results`).
+
+**SourceKit vs. the build:** editing a view file often triggers SourceKit "Cannot find
+X in scope" diagnostics for same-module symbols. If `build_app.sh` succeeds, the build
+is authoritative — do not "fix" SourceKit-only diagnostics.
+
+### Diagnostic fallback (raw xcodebuild)
+
+Useful when `xcbeautify`'s lossy filter drops an early-stage error. Prefer the skill
+scripts as the default path so future sessions exercise the skill.
+
+```bash
+xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer -destination 'platform=iOS Simulator,name=iPhone 17' build
+xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer -destination 'platform=iOS Simulator,name=iPhone 17' test -only-testing:ConjuguerTests/VerbModelTests
 ```
 
 ## Architecture Overview

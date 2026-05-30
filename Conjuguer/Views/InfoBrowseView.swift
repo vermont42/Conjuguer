@@ -40,14 +40,14 @@ struct InfoBrowseView: View {
       }
     }
     .navigationViewStyle(.stack) // https://stackoverflow.com/a/66024249
-    .onChange(of: Current.info) { _, newInfo in
+    .onChange(of: Current.info, initial: true) { _, newInfo in
       if newInfo == nil {
         isPresentingInfo = false
       } else {
         isPresentingInfo = true
       }
     }
-    .onChange(of: Current.verb) { _, newVerb in
+    .onChange(of: Current.verb, initial: true) { _, newVerb in
       if newVerb == nil {
         isPresentingVerb = false
       } else {

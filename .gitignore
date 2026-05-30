@@ -17,3 +17,7 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+# ios-build-verify
+build.log
+.claude/ios-build-verify.*
+docs/screenshots/

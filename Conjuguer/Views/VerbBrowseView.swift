@@ -28,6 +28,7 @@ struct VerbBrowseView: View {
               }
             }
             .pickerStyle(.segmented)
+            .accessibilityIdentifier("verb_browse_sort")
 
             ScrollView {
               LazyVStack {
@@ -56,7 +57,7 @@ struct VerbBrowseView: View {
         }
       })
     }
-    .onChange(of: Current.verb) { _, newVerb in
+    .onChange(of: Current.verb, initial: true) { _, newVerb in
       if newVerb != nil {
         isPresentingVerb = true
       }

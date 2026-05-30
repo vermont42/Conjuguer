@@ -11,43 +11,31 @@ struct MainTabView: View {
   @State private var quiz = Current.quiz
 
   var body: some View {
-    TabView {
-      VerbBrowseView()
-        .tabItem {
-          Image(systemName: "book.fill")
-          Text(L.Navigation.verbs)
-        }
-        .tag(0)
+    @Bindable var current = Current
 
-      ModelBrowseView()
-        .tabItem {
-          Image(systemName: "key.fill")
-          Text(L.Navigation.models)
-        }
-        .tag(1)
+    TabView(selection: $current.selectedTab) {
+      Tab(L.Navigation.verbs, systemImage: "book.fill", value: MainTab.verbs) {
+        VerbBrowseView()
+      }
 
-      QuizView()
-        .environment(quiz)
-        .tabItem {
-          Image(systemName: "pencil.circle.fill")
-          Text(L.Navigation.quiz)
-        }
-        .tag(2)
+      Tab(L.Navigation.models, systemImage: "key.fill", value: MainTab.models) {
+        ModelBrowseView()
+      }
 
-      InfoBrowseView()
-        .tabItem {
-          Image(systemName: "questionmark.diamond.fill")
-          Text(L.Navigation.info)
-        }
-        .tag(3)
+      Tab(L.Navigation.quiz, systemImage: "pencil.circle.fill", value: MainTab.quiz) {
+        QuizView()
+          .environment(quiz)
+      }
 
-      SettingsView()
-        .tabItem {
-          Image(systemName: "gearshape.2.fill")
-          Text(L.Navigation.settings)
-        }
-        .tag(4)
+      Tab(L.Navigation.info, systemImage: "questionmark.diamond.fill", value: MainTab.info) {
+        InfoBrowseView()
+      }
+
+      Tab(L.Navigation.settings, systemImage: "gearshape.2.fill", value: MainTab.settings) {
+        SettingsView()
+      }
     }
+    .tabViewStyle(.sidebarAdaptable)
     .onAppear {
       Current.analytics.recordViewAppeared("\(MainTabView.self)")
     }

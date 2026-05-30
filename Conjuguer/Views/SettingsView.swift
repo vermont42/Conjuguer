@@ -40,6 +40,8 @@ struct SettingsView: View {
             }
           }
           .segmentedPicker()
+          .accessibilityIdentifier("picker_settings_quizDifficulty")
+          .accessibilityValue(settings.quizDifficulty.localizedDifficulty)
 
           Text(L.Settings.quizDifficultyDescription)
             .settingsLabel()
@@ -55,6 +57,8 @@ struct SettingsView: View {
             }
           }
           .segmentedPicker()
+          .accessibilityIdentifier("picker_settings_pronounGender")
+          .accessibilityValue(settings.pronounGender.localizedGender)
 
           Text(L.Settings.pronounGenderDescription)
             .settingsLabel()

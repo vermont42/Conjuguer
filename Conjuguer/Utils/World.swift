@@ -12,6 +12,14 @@ import SwiftUI
 
 var Current = World.chooseWorld()
 
+enum MainTab: Hashable {
+  case verbs
+  case models
+  case quiz
+  case info
+  case settings
+}
+
 @Observable
 class World {
   var settings: Settings
@@ -22,6 +30,7 @@ class World {
   var verb: Verb?
   var verbModel: VerbModel?
   var info: Info?
+  var selectedTab: MainTab = .verbs
   var session: URLSession
 
   private static let fakeRatingsCount = 1
@@ -116,14 +125,17 @@ class World {
     switch url.host {
     case URL.verbHost:
       verb = Verb.verbs[url.pathComponents[1]]
+      selectedTab = .verbs
     case URL.verbModelHost:
       verbModel = VerbModel.models[url.pathComponents[1]]
+      selectedTab = .models
     case URL.infoHost:
       if
         let infoIndex = Int(url.pathComponents[1]),
         infoIndex < Info.infos.count
       {
         info = Info.infos[infoIndex]
+        selectedTab = .info
       }
     default:
       return

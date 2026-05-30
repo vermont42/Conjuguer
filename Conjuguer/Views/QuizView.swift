@@ -113,6 +113,8 @@ struct QuizView: View {
             .focused($conjugationFieldIsFocused)
             .autocapitalization(.none)
             .disableAutocorrection(true)
+            .accessibilityIdentifier("input_quiz_conjugation")
+            .accessibilityValue(input)
             .onSubmit {
               quiz.process(proposedAnswer: input)
               input = ""

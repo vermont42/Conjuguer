@@ -1,0 +1,14 @@
+{
+  "enabledPlugins": {
+    "ios-build-verify@ios-build-verify": true
+  },
+  "extraKnownMarketplaces": {
+    "ios-build-verify": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/vermont42/ios-build-verify.git"
+      },
+      "autoUpdate": true
+    }
+  }
+}
