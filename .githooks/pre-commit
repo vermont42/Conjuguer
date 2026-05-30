@@ -1,0 +1,38 @@
+#!/bin/sh
+#
+# Pre-commit hook: lint staged Swift files with SwiftLint.
+#
+# SwiftLint used to run as an Xcode "Run SwiftLint" build phase on every build.
+# It now runs here instead, so it gates commits without slowing every build.
+#
+# Enable in a fresh clone with:
+#   git config core.hooksPath .githooks
+#
+# Honors the repo's .swiftlint.yml. Runs with --strict so ANY violation in the
+# staged files (the project's rules are all warning-severity) blocks the commit.
+# Only staged files are linted, so pre-existing issues elsewhere won't block you.
+# To lint without blocking on warnings, drop the --strict flag below.
+
+if ! command -v swiftlint >/dev/null 2>&1; then
+  echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+  exit 0
+fi
+
+# Expose staged Swift files (Added/Copied/Modified) to SwiftLint via the
+# SCRIPT_INPUT_FILE_* protocol so it lints only what is being committed and
+# returns a proper exit code.
+count=0
+while IFS= read -r file; do
+  [ -z "$file" ] && continue
+  export "SCRIPT_INPUT_FILE_$count=$file"
+  count=$((count + 1))
+done <<EOF
+$(git diff --cached --name-only --diff-filter=ACM | grep '\.swift$')
+EOF
+
+if [ "$count" -eq 0 ]; then
+  exit 0
+fi
+
+export SCRIPT_INPUT_FILE_COUNT="$count"
+swiftlint lint --use-script-input-files --strict --quiet

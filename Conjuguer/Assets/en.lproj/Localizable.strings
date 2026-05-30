@@ -14,7 +14,7 @@
 "Navigation.info" = "Info";
 "Navigation.settings" = "Settings";
 "Navigation.input" = "Input";
-"Navigation.back" = "Back";
+"Navigation.done" = "Done";
 
 "VerbView.overview" = "Overview";
 "VerbView.modelWithColon" = "Model:";

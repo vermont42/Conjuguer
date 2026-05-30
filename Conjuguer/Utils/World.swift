@@ -141,4 +141,35 @@ class World {
       return
     }
   }
+
+  // Handles a deep link tapped from within an already-presented detail view (e.g. the
+  // "Verbs Using This Model" links in ModelView or the verb/info links in InfoView's text).
+  // Unlike handleURL, it neither switches selectedTab nor clears the sibling entities, so
+  // the target is presented in place as a sheet by the current context and the user stays
+  // on the same tab. Clearing siblings here would blank out the underlying sheet (e.g.
+  // ModelView is driven by verbModel), so only the tapped entity is set.
+  func handleInAppURL(_ url: URL) {
+    guard
+      url.isDeeplink,
+      url.hasExpectedNumberOfDeeplinkComponents
+    else {
+      return
+    }
+
+    switch url.host {
+    case URL.verbHost:
+      verb = Verb.verbs[url.pathComponents[1]]
+    case URL.verbModelHost:
+      verbModel = VerbModel.models[url.pathComponents[1]]
+    case URL.infoHost:
+      if
+        let infoIndex = Int(url.pathComponents[1]),
+        infoIndex < Info.infos.count
+      {
+        info = Info.infos[infoIndex]
+      }
+    default:
+      return
+    }
+  }
 }

@@ -1,6 +1,7 @@
 {
   "enabledPlugins": {
-    "ios-build-verify@ios-build-verify": true
+    "ios-build-verify@ios-build-verify": true,
+    "swiftui-expert@swiftui-expert-skill": true
   },
   "extraKnownMarketplaces": {
     "ios-build-verify": {

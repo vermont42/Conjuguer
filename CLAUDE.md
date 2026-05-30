@@ -94,6 +94,19 @@ xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer -destination 'platform
 xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer -destination 'platform=iOS Simulator,name=iPhone 17' test -only-testing:ConjuguerTests/VerbModelTests
 ```
 
+### Linting
+
+SwiftLint runs as a **git pre-commit hook** (`.githooks/pre-commit`), not as an Xcode
+build phase, so it gates commits without slowing every build. It lints only the staged
+Swift files with `--strict`, honoring `.swiftlint.yml`; any violation blocks the commit
+(drop `--strict` in the hook to make warnings non-blocking). Enable it once per clone:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+If `swiftlint` isn't installed the hook prints a warning and lets the commit through.
+
 ## Architecture Overview
 
 Conjuguer is an iOS app for learning French verb conjugations. It conjugates 6,320 verbs across all French tenses.

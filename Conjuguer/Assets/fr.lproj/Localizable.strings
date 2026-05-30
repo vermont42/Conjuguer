@@ -14,7 +14,7 @@
 "Navigation.info" = "Info";
 "Navigation.settings" = "Paramètres";
 "Navigation.input" = "Entrée";
-"Navigation.back" = "Retourner";
+"Navigation.done" = "Terminé";
 
 "VerbView.overview" = "Aperçu";
 "VerbView.modelWithColon" = "Modèle:";
@@ -798,7 +798,7 @@ Exemples :
 %naître% : $naQUisse$, $naQUisses$, $naQUît$, $naQUissions$, $naQUissiez$, $naQUissent$
 %rendre% : rendisse, rendisses, rendît, rendissions, rendissiez, rendissent
 
-3. %Haïr (France)%, %haïr (Québec)%, et %ouïr (trad.)% (groupe ~ï~) : ïsse, ïsses, ït, ïssions, ïssiez, ïssent
+3. %haïr (France)%, %haïr (Québec)%, et %ouïr (trad.)% (groupe ~ï~) : ïsse, ïsses, ït, ïssions, ïssiez, ïssent
 
 Exemples :
 %haïr (France)% : haïsse, haïsses, haït, haïssions, haïssiez, haïssent

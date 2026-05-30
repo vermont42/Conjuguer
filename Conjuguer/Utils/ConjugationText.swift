@@ -76,8 +76,6 @@ extension Text {
   }
 
   init(mixedCaseString: String) {
-    self.init("")
-
     enum ColorParsingState {
       case notStarted
       case inRegularPart
@@ -87,6 +85,19 @@ extension Text {
     var state = ColorParsingState.notStarted
     var currentRegularPart = ""
     var currentIrregularPart = ""
+    var attributedString = AttributedString()
+
+    func appendRegular() {
+      var part = AttributedString(currentRegularPart)
+      part.foregroundColor = .customBlue
+      attributedString += part
+    }
+
+    func appendIrregular() {
+      var part = AttributedString(currentIrregularPart)
+      part.foregroundColor = .customRed
+      attributedString += part
+    }
 
     for char in mixedCaseString {
       let isRegular = char.isLowercase || !char.isLetter
@@ -104,14 +115,14 @@ extension Text {
         if isRegular {
           currentRegularPart += canonicalChar
         } else {
-          self = self + Text(currentRegularPart).foregroundColor(.customBlue)
+          appendRegular()
           currentRegularPart = ""
           currentIrregularPart = canonicalChar
           state = .inIrregularPart
         }
       case .inIrregularPart:
         if isRegular {
-          self = self + Text(currentIrregularPart).foregroundColor(.customRed)
+          appendIrregular()
           currentRegularPart = canonicalChar
           currentIrregularPart = ""
           state = .inRegularPart
@@ -121,7 +132,9 @@ extension Text {
       }
     }
 
-    self = self + Text(currentRegularPart).foregroundColor(.customBlue)
-    self = self + Text(currentIrregularPart).foregroundColor(.customRed)
+    appendRegular()
+    appendIrregular()
+
+    self.init(attributedString)
   }
 }

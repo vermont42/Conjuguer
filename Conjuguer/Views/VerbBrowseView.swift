@@ -71,6 +71,7 @@ struct VerbBrowseView: View {
       content: {
         Current.verb.map {
           VerbView(verb: $0, shouldShowVerbHeading: true)
+            .sheetDismissable()
         }
       }
     )

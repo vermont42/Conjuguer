@@ -137,8 +137,18 @@ struct ModelView: View {
           }
         }
       }
-      .customNavigationBarItems()
     }
+    .environment(\.openURL, OpenURLAction { url in
+      // "Verbs Using This Model" links are tapped while this view is presented as a
+      // sheet within the Models tab. Routing them through Current.handleURL would also
+      // switch selectedTab to .verbs, leaving the user on the Verbs tab after dismissal.
+      // Handle the link in place instead so only the VerbView sheet is presented.
+      guard url.isDeeplink else {
+        return .systemAction
+      }
+      Current.handleInAppURL(url)
+      return .handled
+    })
     .onChange(of: Current.verb) { _, newVerb in
       if newVerb == nil {
         isPresentingVerb = false
@@ -155,6 +165,7 @@ struct ModelView: View {
       content: {
         Current.verb.map {
           VerbView(verb: $0, shouldShowVerbHeading: true)
+            .sheetDismissable()
         }
       }
     )
@@ -165,6 +176,7 @@ struct ModelView: View {
       },
       content: {
         InfoView(info: Info.infos[Info.headingToIndex(heading: L.Info.irregularitiesHeading) ?? 0], shouldShowInfoHeading: true)
+          .sheetDismissable()
       }
     )
     .onAppear {

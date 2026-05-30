@@ -8,18 +8,15 @@
 
 import GameKit
 
-class GameCenter: NSObject, GameCenterable, GKGameCenterControllerDelegate {
+class GameCenter: NSObject, GameCenterable {
   static let shared = GameCenter()
   var isAuthenticated = false
   private let localPlayer = GKLocalPlayer.local
   private var leaderboardIdentifier = ""
-  private var onViewController: UIViewController?
 
   private override init() {}
 
   func authenticate(onViewController: UIViewController, completion: ((Bool) -> Void)? = nil) {
-    self.onViewController = onViewController
-
     localPlayer.authenticateHandler = { viewController, _ in
       if let viewController = viewController {
         onViewController.present(viewController, animated: true, completion: nil)
@@ -53,12 +50,6 @@ class GameCenter: NSObject, GameCenterable, GKGameCenterControllerDelegate {
     guard isAuthenticated else {
       return
     }
-    let gcViewController = GKGameCenterViewController(leaderboardID: leaderboardIdentifier, playerScope: .global, timeScope: .allTime)
-    gcViewController.gameCenterDelegate = self
-    onViewController?.present(gcViewController, animated: true, completion: nil)
-  }
-
-  func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-    gameCenterViewController.dismiss(animated: true, completion: nil)
+    GKAccessPoint.shared.trigger(leaderboardID: leaderboardIdentifier, playerScope: .global, timeScope: .allTime) { }
   }
 }

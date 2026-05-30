@@ -38,8 +38,7 @@ struct InfoView: View {
 
         TextView(text: info.attributedText)
           .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-          .navigationTitle(info.heading)
-          .customNavigationBarItems()
+          .navigationTitle(shouldShowInfoHeading ? "" : info.heading)
       }
       .padding(.leading, Layout.doubleDefaultSpacing)
       .padding(.trailing, Layout.doubleDefaultSpacing)

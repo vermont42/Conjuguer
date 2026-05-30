@@ -32,16 +32,20 @@ class TextViewDelegate: NSObject, UITextViewDelegate {
   func textView(_ textView: UITextView, shouldInteractWith url: URL, in characterRange: NSRange) -> Bool {
     let cleansedUrlString = firstLetterLowercasedString(parenlessString((url.absoluteString.removingPercentEncoding ?? "")))
 
+    // InfoView's text is shown as a sheet (in the Info or Models tab), so verb/info links
+    // are handled in place via handleInAppURL rather than UIApplication.open. The latter
+    // routes through handleURL, which switches selectedTab and would strand the user on a
+    // different tab once the presented sheet is dismissed.
     if let infoIndex = Info.headingToIndex(heading: cleansedUrlString) {
       let infoDeepLinkUrlString = URL.conjuguerUrlPrefix + "\(URL.infoHost)/\(infoIndex)"
       URL(string: infoDeepLinkUrlString).map {
-        UIApplication.shared.open($0)
+        Current.handleInAppURL($0)
       }
       return false
     } else if Verb.verbs[cleansedUrlString] != nil {
       let verbDeepLinkUrlString = URL.conjuguerUrlPrefix + "\(URL.verbHost)/\(parenlessString(firstLetterLowercasedString(url.absoluteString)))"
       URL(string: verbDeepLinkUrlString).map {
-        UIApplication.shared.open($0)
+        Current.handleInAppURL($0)
       }
       return false
     } else {

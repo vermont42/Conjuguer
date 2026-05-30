@@ -158,7 +158,6 @@ struct VerbView: View {
           Current.analytics.recordViewAppeared("\(VerbView.self)")
         }
       }
-      .customNavigationBarItems()
     }
   }
 }

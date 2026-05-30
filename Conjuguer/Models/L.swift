@@ -37,8 +37,8 @@ enum L {
       String(localized: "Navigation.input")
     }
 
-    static var back: String {
-      String(localized: "Navigation.back")
+    static var done: String {
+      String(localized: "Navigation.done")
     }
   }
 

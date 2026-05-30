@@ -63,6 +63,7 @@ struct InfoBrowseView: View {
       content: {
         Current.info.map {
           InfoView(info: $0, shouldShowInfoHeading: true)
+            .sheetDismissable()
         }
       }
     )
@@ -75,6 +76,7 @@ struct InfoBrowseView: View {
       content: {
         Current.verb.map {
           VerbView(verb: $0, shouldShowVerbHeading: true)
+            .sheetDismissable()
         }
       }
     )

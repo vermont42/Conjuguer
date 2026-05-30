@@ -69,6 +69,7 @@ struct ModelBrowseView: View {
       content: {
         Current.verbModel.map {
           ModelView(model: $0)
+            .sheetDismissable()
         }
       }
     )
