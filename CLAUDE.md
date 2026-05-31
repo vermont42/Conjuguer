@@ -111,6 +111,28 @@ If `swiftlint` isn't installed the hook prints a warning and lets the commit thr
 
 Conjuguer is an iOS app for learning French verb conjugations. It conjugates 6,320 verbs across all French tenses.
 
+### Project Layout (synchronized folders)
+
+The project uses **Xcode synchronized folders** (`PBXFileSystemSynchronizedRootGroup`),
+not classic groups: the two target folders `Conjuguer/` and `ConjuguerTests/` are each
+synced as a root group, and Xcode mirrors their on-disk contents into the targets by file
+type. Practical consequences:
+
+- **Adding a source, test, or resource file requires no `project.pbxproj` edit and no Xcode
+  step** — just create the file on disk under the appropriate folder and it is compiled or
+  bundled automatically (`.swift` → Sources, asset/`.xml`/`.json`/`.mp3`/etc. → Resources).
+  Likewise, deleting a file needs no project edit. This is why new test classes get their own
+  files (e.g. `DeeplinkTests.swift`) rather than being appended to an existing file.
+- **All test doubles live in the app target** (`TestApp.swift`, `TestAnalyticsService.swift`,
+  `TestGameCenter.swift`, `TestReviewPrompter.swift`, `StubAnalyticsLocale.swift`,
+  `DictionaryGetterSetter.swift`, `URLProtocolStub.swift`), referenced by `World.swift` for the
+  simulator/unitTest configs, so the whole `Conjuguer/` tree compiles into one target.
+- The only files inside the synced folders excluded from a target are the per-target
+  `Info.plist`s (via `membershipExceptions`); `Conjuguer.entitlements` is wired through
+  `CODE_SIGN_ENTITLEMENTS` and is not bundled. Don't add new files under a synced folder that
+  should *not* ship — they'd be picked up automatically; exclude them with a membership
+  exception or keep them outside the folder.
+
 ### Core Domain Model
 
 - **Verb** (`Models/Verb.swift`): Represents a French verb with properties like infinitif, translation, model reference, auxiliary (avoir/être), and frequency data. Stored in a static dictionary keyed by infinitif.
