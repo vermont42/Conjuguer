@@ -6,6 +6,8 @@
 //  Copyright © 2017 Josh Adams. All rights reserved.
 //
 
+import Foundation
+
 enum PersonNumber: String, CaseIterable {
   case firstSingular = "fs"
   case secondSingular = "ss"

@@ -178,7 +178,8 @@ struct QuizView: View {
   private func start() {
     quiz.start()
     let delayForFocus: TimeInterval = 0.1 // https://stackoverflow.com/a/69134653
-    DispatchQueue.main.asyncAfter(deadline: .now() + delayForFocus) {
+    Task { @MainActor in
+      try? await Task.sleep(for: .seconds(delayForFocus))
       conjugationFieldIsFocused = true
     }
   }

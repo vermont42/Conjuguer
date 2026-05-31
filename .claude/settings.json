@@ -1,7 +1,8 @@
 {
   "enabledPlugins": {
     "ios-build-verify@ios-build-verify": true,
-    "swiftui-expert@swiftui-expert-skill": true
+    "swiftui-expert@swiftui-expert-skill": true,
+    "swift-concurrency@swift-concurrency-agent-skill": true
   },
   "extraKnownMarketplaces": {
     "ios-build-verify": {

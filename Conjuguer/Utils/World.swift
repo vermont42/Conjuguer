@@ -10,7 +10,7 @@
 import Observation
 import SwiftUI
 
-var Current = World.chooseWorld()
+@MainActor var Current = World.chooseWorld()
 
 enum MainTab: Hashable {
   case verbs
@@ -20,6 +20,7 @@ enum MainTab: Hashable {
   case settings
 }
 
+@MainActor
 @Observable
 class World {
   var settings: Settings

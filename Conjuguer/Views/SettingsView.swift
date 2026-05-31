@@ -83,7 +83,7 @@ struct SettingsView: View {
         Current.analytics.recordViewAppeared("\(SettingsView.self)")
         RatingsFetcher.fetchRatingsDescription(completion: { description in
           if description != RatingsFetcher.errorMessage {
-            DispatchQueue.main.async {
+            Task { @MainActor in
               self.rateReviewDescription = description
             }
           }

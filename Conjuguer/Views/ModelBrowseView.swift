@@ -5,6 +5,7 @@
 //  Created by Josh Adams on 2/17/21.
 //
 
+import Combine
 import SwiftUI
 
 struct ModelBrowseView: View {

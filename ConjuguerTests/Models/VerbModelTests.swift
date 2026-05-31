@@ -16,6 +16,7 @@ class GenerateVerbModelTests: XCTestCase {
 }
 */
 
+@MainActor
 class VerbModelTests: XCTestCase {
   func testAbsoudre() {
     // ID: 5-13

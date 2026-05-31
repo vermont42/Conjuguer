@@ -18,7 +18,7 @@ struct ReviewPrompter: ReviewPromptable {
     if let scene = UIApplication.shared.connectedScenes.first(
       where: { $0.activationState == .foregroundActive }
     ) as? UIWindowScene {
-      DispatchQueue.main.async {
+      Task { @MainActor in
         AppStore.requestReview(in: scene)
       }
     }

@@ -364,7 +364,8 @@ class Quiz {
   private func announcePublishedProperties() {
     if UIAccessibility.isVoiceOverRunning {
       let announcementDelay = 1.0
-      DispatchQueue.main.asyncAfter(deadline: .now() + announcementDelay) { [self] in
+      Task { @MainActor in
+        try? await Task.sleep(for: .seconds(announcementDelay))
         let currentLocaleString: String
         let currentRegion = Current.analytics.analyticsLocale.regionCode
         let currentLanguage = Current.analytics.analyticsLocale.languageCode

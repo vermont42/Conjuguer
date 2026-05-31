@@ -8,10 +8,15 @@
 @testable import Conjuguer
 import XCTest
 
+@MainActor
 class CompoundTenseTests: XCTestCase {
   func testCompoundTenses() {
-    // Use feminine pronouns regardless of user preference.
-    Current.settings = Settings(getterSetter: DictionaryGetterSetter())
+    // Use feminine pronouns regardless of user preference. Mutate the property in place
+    // rather than reassigning `Current.settings`: replacing the @Observable property
+    // releases the old Settings inside ObservationRegistrar.withMutation, which invokes its
+    // MainActor-isolated deinit and crashes the runtime (swift_task_deinitOnExecutorImpl).
+    // Nothing in the app reassigns Current.settings, so mutating in place matches real usage.
+    Current.settings.pronounGender = .feminine
     let aller = "aller"
     let avoir = "avoir"
 
@@ -133,6 +138,7 @@ class CompoundTenseTests: XCTestCase {
 // already-presented detail sheet, e.g. ModelView's verb list or InfoView's text) are
 // handled in place: no tab switch and no clearing of the sibling entity that drives the
 // underlying sheet. Lives here to avoid a project-file change for a new test file.
+@MainActor
 class DeeplinkTests: XCTestCase {
   private func url(_ string: String) -> URL {
     guard let url = URL(string: string) else {

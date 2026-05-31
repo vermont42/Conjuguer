@@ -6,7 +6,10 @@
 //  Copyright © 2018 Josh Adams. All rights reserved.
 //
 
-import Amplify
+// @preconcurrency: Amplify is not yet annotated for Swift concurrency, so its global
+// `Amplify.Analytics` accessor trips strict-concurrency's shared-mutable-state check.
+// Suppress those diagnostics here and drop @preconcurrency once the SDK adopts Sendable.
+@preconcurrency import Amplify
 import AWSCognitoAuthPlugin
 import AWSPinpointAnalyticsPlugin
 import Foundation

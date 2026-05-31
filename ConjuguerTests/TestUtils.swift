@@ -8,6 +8,7 @@
 @testable import Conjuguer
 import XCTest
 
+@MainActor
 enum T {
   static func conjugate(infinitif: String, tense: Tense, extraLetters: String?) -> String {
     let result = Conjugator.conjugate(infinitif: infinitif, tense: tense, extraLetters: extraLetters)
