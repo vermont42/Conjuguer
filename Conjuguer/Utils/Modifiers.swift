@@ -90,10 +90,6 @@ extension View {
   }
 }
 
-// The full-screen custom background, applied as a `.background(...)` decoration rather than a
-// repeated `ZStack { Color.customBackground.ignoresSafeArea() … }` peer (#20). The frame keeps
-// the decorated view filling the screen so the background extends into the safe areas, matching
-// the old ZStack behavior for both greedy and intrinsically-sized content.
 private struct ScreenBackground: ViewModifier {
   func body(content: Content) -> some View {
     content
