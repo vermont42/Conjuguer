@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum IndicatifPrésentGroup: Hashable {
+nonisolated enum IndicatifPrésentGroup: Hashable {
   case e(appliesToErVerb: Bool) // parler (true) / couvrir (false)
   case extendedS(appliesToIrVerb: Bool) // finir (true) / maudire (false)
   case s // voir

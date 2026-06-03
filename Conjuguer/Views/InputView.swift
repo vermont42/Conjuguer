@@ -7,11 +7,12 @@
 
 import SwiftUI
 
+#if DEBUG
 struct InputView: View {
-  @State var infinitif: String = ""
-  @State var model: String = "1-1"
-  @State var translation: String = ""
-  @State var reflexive: String = "f"
+  @State private var infinitif: String = ""
+  @State private var model: String = "1-1"
+  @State private var translation: String = ""
+  @State private var reflexive: String = "f"
 
   var body: some View {
     ZStack {
@@ -326,8 +327,8 @@ struct InputView: View {
   }
 }
 
-struct InputView_Previews: PreviewProvider {
-  static var previews: some View {
-    InputView()
-  }
+#Preview {
+  PreviewSupport.bootstrap()
+  return InputView()
 }
+#endif

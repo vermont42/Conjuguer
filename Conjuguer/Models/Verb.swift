@@ -24,6 +24,34 @@ struct Verb: Identifiable, Hashable {
   let source: String?
   let defectGroupId: String?
 
+  // This is nonisolated so the verb XML parse can construct verbs off the main actor.
+  // The parsed values are published into the main-actor `verbs` store afterward.
+  nonisolated init(
+    infinitif: String,
+    translation: String,
+    model: String,
+    auxiliary: Auxiliary,
+    isReflexive: Bool,
+    hasAspiratedH: Bool,
+    frequency: Int?,
+    extraLetters: String?,
+    example: String?,
+    source: String?,
+    defectGroupId: String?
+  ) {
+    self.infinitif = infinitif
+    self.translation = translation
+    self.model = model
+    self.auxiliary = auxiliary
+    self.isReflexive = isReflexive
+    self.hasAspiratedH = hasAspiratedH
+    self.frequency = frequency
+    self.extraLetters = extraLetters
+    self.example = example
+    self.source = source
+    self.defectGroupId = defectGroupId
+  }
+
   var infinitifStem: String {
     let endingLength: Int
     if infinitif.hasSuffix("oir") {

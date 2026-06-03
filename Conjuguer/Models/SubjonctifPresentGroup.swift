@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SubjonctifPrésentGroup: Hashable {
+nonisolated enum SubjonctifPrésentGroup: Hashable {
   case e(appliesToIrVerb: Bool)
   case s(appliesToReVerb: Bool)
   case ï

@@ -7,11 +7,13 @@
 
 import Foundation
 
-struct Info: Hashable {
+struct Info: Identifiable, Hashable {
   let heading: String
   let attributedText: NSAttributedString
   let alwaysUsesFrenchPronunciation: Bool
   let imageInfo: ImageInfo?
+
+  var id: String { heading }
 
   private init(heading: String, text: String, alwaysUsesFrenchPronunciation: Bool = false, imageInfo: ImageInfo? = nil) {
     self.heading = heading

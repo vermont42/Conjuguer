@@ -8,178 +8,138 @@
 import SwiftUI
 
 struct QuizView: View {
+  @Environment(World.self) private var world
   @Environment(Quiz.self) var quiz
-  @State var input = ""
+  @State private var input = ""
   @FocusState private var conjugationFieldIsFocused: Bool
-  @State private var currentAnimationAmount = 2.5
-  private let initialAnimationAmount = 2.5
-  private let animationModifier = 1.5
-  private let animationDuration = 2.0
-  private let gameCenterAuthView = GameCenterAuthView()
+  @State private var authCoordinator = GameCenterAuthCoordinator()
 
   var body: some View {
     @Bindable var quiz = quiz
-    ZStack {
-      Color.customBackground
-        .ignoresSafeArea()
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      Text(L.Navigation.quiz)
+        .headingLabel()
+        .foregroundStyle(Color.customBlue)
 
-      VStack(alignment: .leading) {
-        Spacer()
-          .frame(height: Layout.tripleDefaultSpacing)
+      if quiz.quizState == .inProgress {
+        Text("\(L.QuizView.verbWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.infinitifWithPossibleExtraLetters)")
+          .constrainedBodyLabel()
+          .frenchPronunciation()
 
-        Text(L.Navigation.quiz)
-          .headingLabel()
-          .foregroundColor(.customBlue)
+        Text("\(L.QuizView.translationWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.translation)")
+          .constrainedBodyLabel()
+          .englishPronunciation()
 
-        Spacer()
-          .frame(height: Layout.defaultSpacing)
+        Text("\(L.QuizView.pronounWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.pronounWithGender)")
+          .constrainedBodyLabel()
+          .frenchPronunciation()
 
-        if quiz.quizState == .inProgress {
-          Text("\(L.QuizView.verbWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.infinitifWithPossibleExtraLetters)")
+        Text("\(L.QuizView.tenseWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.titleCaseName.lowercased())")
+          .constrainedBodyLabel()
+          .frenchPronunciation()
+
+        HStack {
+          Text("\(L.QuizView.progressWithColon) \(quiz.currentQuestionIndex + 1) / \(quiz.questions.count)")
             .constrainedBodyLabel()
-            .frenchPronunciation()
+            .foregroundStyle(Color.customBlue)
 
           Spacer()
-            .frame(height: Layout.defaultSpacing)
 
-          Text("\(L.QuizView.translationWithColon) \(quiz.questions[quiz.currentQuestionIndex].0.translation)")
+          Text("\(L.QuizView.scoreWithColon) \(quiz.score)")
             .constrainedBodyLabel()
-            .englishPronunciation()
-
-          Spacer()
-            .frame(height: Layout.defaultSpacing)
-
-          Text("\(L.QuizView.pronounWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.pronounWithGender)")
-            .constrainedBodyLabel()
-            .frenchPronunciation()
-
-          Spacer()
-            .frame(height: Layout.defaultSpacing)
-
-          Text("\(L.QuizView.tenseWithColon) \(quiz.questions[quiz.currentQuestionIndex].1.titleCaseName.lowercased())")
-            .constrainedBodyLabel()
-            .frenchPronunciation()
-
-          Spacer()
-            .frame(height: Layout.defaultSpacing)
-
-          HStack {
-            Text("\(L.QuizView.progressWithColon) \(quiz.currentQuestionIndex + 1) / \(quiz.questions.count)")
-              .constrainedBodyLabel()
-              .foregroundColor(.customBlue)
-
-            Spacer()
-
-            Text("\(L.QuizView.scoreWithColon) \(quiz.score)")
-              .constrainedBodyLabel()
-              .foregroundColor(.customBlue)
-          }
-
-          Spacer()
-            .frame(height: Layout.defaultSpacing)
-
-          HStack {
-            Text("\(L.QuizView.elapsedWithColon) \(quiz.elapsedTime.timeString)")
-              .constrainedBodyLabel()
-              .foregroundColor(.customBlue)
-
-            Spacer()
-
-            Button(L.QuizView.quit) {
-              quit()
-            }
-            .buttonLabel()
-            .funButton()
-          }
-
-          if
-            let previousIncorrectAnswer = quiz.previousIncorrectAnswer,
-            let previousCorrectAnswer = quiz.previousCorrectAnswer
-          {
-            Spacer()
-              .frame(height: Layout.defaultSpacing)
-
-            (Text("\(L.QuizView.lastAnswer) ").foregroundColor(.customRed) + Text(previousIncorrectAnswer))
-              .constrainedBodyLabel()
-
-            Spacer()
-              .frame(height: Layout.defaultSpacing)
-
-            (Text("\(L.QuizView.correctAnswer) ").foregroundColor(.customBlue) + Text(mixedCaseString: previousCorrectAnswer))
-              .constrainedBodyLabel()
-          }
-
-          TextField(L.QuizView.conjugation, text: $input)
-            .focused($conjugationFieldIsFocused)
-            .autocapitalization(.none)
-            .disableAutocorrection(true)
-            .accessibilityIdentifier("input_quiz_conjugation")
-            .accessibilityValue(input)
-            .onSubmit {
-              quiz.process(proposedAnswer: input)
-              input = ""
-              conjugationFieldIsFocused = true
-            }
-
-          Spacer()
+            .foregroundStyle(Color.customBlue)
         }
 
-        gameCenterAuthView
+        HStack {
+          Text("\(L.QuizView.elapsedWithColon) \(quiz.elapsedTime.timeString)")
+            .constrainedBodyLabel()
+            .foregroundStyle(Color.customBlue)
 
-        if quiz.quizState == .notStarted {
           Spacer()
 
-          HStack {
-            Spacer()
+          Button(L.QuizView.quit) {
+            quit()
+          }
+          .buttonLabel()
+          .funButton()
+        }
 
-            Button(L.QuizView.start) {
-              start()
-            }
-            .buttonLabel()
-            .onAppear {
-              self.currentAnimationAmount = initialAnimationAmount - animationModifier
-            }
-            .onDisappear {
-              self.currentAnimationAmount = initialAnimationAmount
-            }
-            .scaleEffect(currentAnimationAmount)
-            .animation(.linear(duration: animationDuration), value: currentAnimationAmount)
-            .funButton()
+        if
+          let previousIncorrectAnswer = quiz.previousIncorrectAnswer,
+          let previousCorrectAnswer = quiz.previousCorrectAnswer
+        {
+          lastAnswerText(previousIncorrectAnswer)
+            .constrainedBodyLabel()
 
-            Spacer()
+          correctAnswerText(previousCorrectAnswer)
+            .constrainedBodyLabel()
+        }
+
+        TextField(L.QuizView.conjugation, text: $input)
+          .focused($conjugationFieldIsFocused)
+          .textInputAutocapitalization(.never)
+          .autocorrectionDisabled()
+          .accessibilityIdentifier("input_quiz_conjugation")
+          .accessibilityValue(input)
+          .onSubmit {
+            quiz.process(proposedAnswer: input)
+            input = ""
+            conjugationFieldIsFocused = true
           }
 
-          Spacer()
-            .frame(height: Layout.defaultSpacing)
-        }
+        Spacer()
       }
-      .padding(.leading, Layout.doubleDefaultSpacing)
-      .padding(.trailing, Layout.doubleDefaultSpacing)
-      .sheet(
-        isPresented: $quiz.shouldShowResults,
-        onDismiss: {
-          quiz.shouldShowResults = false
-          Current.gameCenter.showLeaderboard()
-        },
-        content: {
-          QuizResultsView()
-            .environment(quiz)
+
+      GameCenterAuthView(coordinator: authCoordinator)
+
+      if quiz.quizState == .notStarted {
+        Spacer()
+
+        HStack {
+          Spacer()
+
+          Button(L.QuizView.start) {
+            start()
+          }
+          .buttonLabel()
+          .phaseAnimator([1.0, 1.1]) { content, scale in
+            content.scaleEffect(scale)
+          } animation: { _ in
+            .easeInOut(duration: 0.9)
+          }
+          .funButton()
+
+          Spacer()
         }
-      )
-      .onAppear {
-        Current.analytics.recordViewAppeared("\(QuizView.self)")
-        if quiz.quizState == .notStarted && !Current.gameCenter.isAuthenticated {
-          Current.gameCenter.authenticate(onViewController: gameCenterAuthView.gameCenterAuthVC)
-        }
+        .padding(.bottom, Layout.defaultSpacing)
       }
     }
+    .padding(.leading, Layout.doubleDefaultSpacing)
+    .padding(.trailing, Layout.doubleDefaultSpacing)
+    .padding(.top, Layout.tripleDefaultSpacing)
+    .sheet(
+      isPresented: $quiz.shouldShowResults,
+      onDismiss: {
+        quiz.shouldShowResults = false
+        world.gameCenter.showLeaderboard()
+      },
+      content: {
+        QuizResultsView()
+          .environment(quiz)
+      }
+    )
+    .onAppear {
+      world.analytics.recordViewAppeared("\(QuizView.self)")
+      if quiz.quizState == .notStarted && !world.gameCenter.isAuthenticated {
+        world.gameCenter.authenticate(onViewController: authCoordinator.viewController)
+      }
+    }
+    .screenBackground()
   }
 
   private func start() {
     quiz.start()
-    let delayForFocus: TimeInterval = 0.1 // https://stackoverflow.com/a/69134653
     Task { @MainActor in
-      try? await Task.sleep(for: .seconds(delayForFocus))
       conjugationFieldIsFocused = true
     }
   }
@@ -188,5 +148,19 @@ struct QuizView: View {
     conjugationFieldIsFocused = false
     input = ""
     quiz.quit()
+  }
+
+  private func lastAnswerText(_ incorrectAnswer: String) -> Text {
+    var attributed = AttributedString("\(L.QuizView.lastAnswer) ")
+    attributed.foregroundColor = Color.customRed
+    attributed += AttributedString(incorrectAnswer)
+    return Text(attributed)
+  }
+
+  private func correctAnswerText(_ correctAnswer: String) -> Text {
+    var attributed = AttributedString("\(L.QuizView.correctAnswer) ")
+    attributed.foregroundColor = Color.customBlue
+    attributed += AttributedString(mixedCaseString: correctAnswer)
+    return Text(attributed)
   }
 }

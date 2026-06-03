@@ -42,6 +42,26 @@ enum L {
     }
   }
 
+  enum VerbBrowseView {
+    static var sortOrder: String {
+      String(localized: "VerbBrowseView.sortOrder")
+    }
+
+    static var searchPrompt: String {
+      String(localized: "VerbBrowseView.searchPrompt")
+    }
+  }
+
+  enum ModelBrowseView {
+    static var sortOrder: String {
+      String(localized: "ModelBrowseView.sortOrder")
+    }
+
+    static var searchPrompt: String {
+      String(localized: "ModelBrowseView.searchPrompt")
+    }
+  }
+
   enum VerbView {
     static var overview: String {
       String(localized: "VerbView.overview")

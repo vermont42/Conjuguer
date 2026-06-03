@@ -7,10 +7,15 @@
 
 import Foundation
 
-class VerbParser: NSObject, XMLParserDelegate {
+nonisolated class VerbParser: NSObject, XMLParserDelegate {
   private var parser: XMLParser?
   private let verbTag = "verb"
   private var verbs: [String: Verb] = [:]
+  // The parsed verb models, threaded through locally rather than via the main-actor
+  // `VerbModel.models` store, so the whole parse can run off the main actor. Each
+  // verb appends itself to its model's verb list here; the result is returned alongside
+  // the verbs and published into the static stores on the main actor.
+  private var models: [String: VerbModel] = [:]
   private var currentVerb = ""
   private var currentTranslation = ""
   private var currentModel = ""
@@ -35,9 +40,12 @@ class VerbParser: NSObject, XMLParserDelegate {
     }
   }
 
-  func parse() -> [String: Verb] {
+  // Parses verbs.xml, associating each verb with its model in the supplied `models` dict,
+  // and returns both the verbs and the updated models, with their verb lists populated.
+  func parse(models: [String: VerbModel]) -> (verbs: [String: Verb], models: [String: VerbModel]) {
+    self.models = models
     parser?.parse()
-    return verbs
+    return (verbs, self.models)
   }
 
   func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String]) {
@@ -136,10 +144,10 @@ class VerbParser: NSObject, XMLParserDelegate {
         defectGroupId: currentDefectGroupId
       )
 
-      if let model = VerbModel.models[currentModel] {
+      if let model = models[currentModel] {
         var verbs = model.verbs
         verbs.append(currentVerbWithPossibleExtraLetters)
-        VerbModel.models[currentModel]?.verbs = verbs
+        models[currentModel]?.verbs = verbs
       }
 
       currentVerb = ""

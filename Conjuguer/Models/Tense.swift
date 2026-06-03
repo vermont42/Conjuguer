@@ -6,7 +6,7 @@
 //  Copyright © 2017 Josh Adams. All rights reserved.
 //
 
-enum Tense: Hashable {
+nonisolated enum Tense: Hashable {
   case participePassé
   case participePrésent
   case radicalFutur
@@ -101,7 +101,7 @@ enum Tense: Hashable {
     }
   }
 
-  func conjugatedAuxilliary(personNumber: PersonNumber, auxiliary: Auxiliary) -> String {
+  @MainActor func conjugatedAuxilliary(personNumber: PersonNumber, auxiliary: Auxiliary) -> String {
     let verb = auxiliary.verb
     let tense: Tense
     switch self {
@@ -165,7 +165,7 @@ enum Tense: Hashable {
     }
   }
 
-  var pronounWithGender: String {
+  @MainActor var pronounWithGender: String {
     switch self {
     case .indicatifPrésent(let personNumber), .passéSimple(let personNumber), .imparfait(let personNumber), .futurSimple(let personNumber), .conditionnelPrésent(let personNumber), .subjonctifPrésent(let personNumber), .subjonctifImparfait(let personNumber), .impératif(let personNumber), .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
       return personNumber.pronounWithGender
@@ -174,7 +174,7 @@ enum Tense: Hashable {
     }
   }
 
-  var pronoun: String {
+  @MainActor var pronoun: String {
     switch self {
     case .indicatifPrésent(let personNumber), .passéSimple(let personNumber), .imparfait(let personNumber), .futurSimple(let personNumber), .conditionnelPrésent(let personNumber), .subjonctifPrésent(let personNumber), .subjonctifImparfait(let personNumber), .impératif(let personNumber), .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
       return personNumber.pronoun
@@ -183,7 +183,7 @@ enum Tense: Hashable {
     }
   }
 
-  var gender: String {
+  @MainActor var gender: String {
     switch self {
     case .indicatifPrésent(let personNumber), .passéSimple(let personNumber), .imparfait(let personNumber), .futurSimple(let personNumber), .conditionnelPrésent(let personNumber), .subjonctifPrésent(let personNumber), .subjonctifImparfait(let personNumber), .impératif(let personNumber), .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
       return personNumber.gender
@@ -192,7 +192,7 @@ enum Tense: Hashable {
     }
   }
 
-  var pronounDecorator: String {
+  @MainActor var pronounDecorator: String {
     switch self {
     case .indicatifPrésent(let personNumber), .passéSimple(let personNumber), .imparfait(let personNumber), .futurSimple(let personNumber), .conditionnelPrésent(let personNumber), .subjonctifPrésent(let personNumber), .subjonctifImparfait(let personNumber), .impératif(let personNumber), .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
       return " - \(personNumber.pronounWithGender)"

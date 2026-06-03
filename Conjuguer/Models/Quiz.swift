@@ -23,7 +23,6 @@ class Quiz {
   private(set) var previousCorrectAnswer: String?
 
   private var timer: Timer?
-  private var timer2: Timer?
   private var gameCenter: GameCenterable?
   private var shouldShuffle = true
 
@@ -73,7 +72,12 @@ class Quiz {
       withTimeInterval: 1.0,
       repeats: true,
       block: { [weak self] _ in
-        self?.elapsedTime += 1
+        // Scheduled from this @MainActor method, so the block fires on the main run loop;
+        // assumeIsolated bridges that known main-actor callback back to main-actor isolation
+        // to mutate elapsedTime synchronously (no per-tick Task hop, identical timing).
+        MainActor.assumeIsolated {
+          self?.elapsedTime += 1
+        }
       }
     )
   }
@@ -132,8 +136,6 @@ class Quiz {
   }
 
   private func buildQuiz() {
-//    questions.append((Verb.verbForInfinitif("avoir"), .indicatifPrésent(.firstSingular))) // For testing one conjugation.
-
     switch Current.settings.quizDifficulty {
     case .regular:
       [regularErVerb, regularErVerb, regularIrVerb, regularIrVerb, regularReVerb, bigThreeVerb, indicatifPrésentStemChangerVerb].forEach {

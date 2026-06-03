@@ -11,10 +11,12 @@ import UIKit
 let workSansRegular = "WorkSans-Regular"
 let workSansSemiBold = "WorkSans-SemiBold"
 
-let bodyFont = Font.custom(workSansRegular, size: 20.0)
-let headingFont = Font.custom(workSansSemiBold, size: 24.0)
-let subheadingFont = Font.custom(workSansSemiBold, size: 18.0)
-let boldBodyFont = Font.custom(workSansSemiBold, size: 16.0)
+// `relativeTo:` keeps the base sizes unchanged but scales each font on the matching Dynamic Type
+// curve (e.g. headings on .title rather than the default .body curve).
+let bodyFont = Font.custom(workSansRegular, size: 20.0, relativeTo: .body)
+let headingFont = Font.custom(workSansSemiBold, size: 24.0, relativeTo: .title)
+let subheadingFont = Font.custom(workSansSemiBold, size: 18.0, relativeTo: .title3)
+let boldBodyFont = Font.custom(workSansSemiBold, size: 16.0, relativeTo: .callout)
 
 func displayFontFamilyNames() {
   for family: String in UIFont.familyNames {

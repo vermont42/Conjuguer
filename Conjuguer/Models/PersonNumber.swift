@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PersonNumber: String, CaseIterable {
+nonisolated enum PersonNumber: String, CaseIterable {
   case firstSingular = "fs"
   case secondSingular = "ss"
   case thirdSingular = "ts"
@@ -18,7 +18,7 @@ enum PersonNumber: String, CaseIterable {
 
   static let impératifPersonNumbers: [PersonNumber] = [.secondSingular, .firstPlural, .secondPlural]
 
-  var pronoun: String {
+  @MainActor var pronoun: String {
     let pronounGender = Current.settings.pronounGender
     let singular = " singulier" // Intentionally not localizing this.
     let plural = " pluriel"
@@ -49,7 +49,7 @@ enum PersonNumber: String, CaseIterable {
     }
   }
 
-  var pronounWithGender: String {
+  @MainActor var pronounWithGender: String {
     let pronounGender = Current.settings.pronounGender
     let masc = L.PronounGender.masculineAbbreviation
     let fem = L.PronounGender.feminineAbbreviation
@@ -100,7 +100,7 @@ enum PersonNumber: String, CaseIterable {
     }
   }
 
-  var gender: String {
+  @MainActor var gender: String {
     let pronounGender = Current.settings.pronounGender
     let masc = L.PronounGender.masculine
     let fem = L.PronounGender.feminine
@@ -162,7 +162,7 @@ enum PersonNumber: String, CaseIterable {
     PersonNumber.impératifPersonNumbers.contains(self)
   }
 
-  func pronounAndConjugation(_ conjugation: String, isReflexive: Bool, hasAspiratedH: Bool) -> String {
+  @MainActor func pronounAndConjugation(_ conjugation: String, isReflexive: Bool, hasAspiratedH: Bool) -> String {
     let normalizedFirstLetter = String(conjugation.first ?? Character(" "))
       .folding(options: .diacriticInsensitive, locale: Util.french)
       .lowercased(with: Util.french)

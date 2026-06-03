@@ -16,6 +16,12 @@
 "Navigation.input" = "Input";
 "Navigation.done" = "Done";
 
+"VerbBrowseView.sortOrder" = "Sort order";
+"VerbBrowseView.searchPrompt" = "Search verbs";
+
+"ModelBrowseView.sortOrder" = "Sort order";
+"ModelBrowseView.searchPrompt" = "Search models";
+
 "VerbView.overview" = "Overview";
 "VerbView.modelWithColon" = "Model:";
 "VerbView.reflexive" = "Reflexive";

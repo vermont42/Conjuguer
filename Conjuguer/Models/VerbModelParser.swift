@@ -7,7 +7,7 @@
 
 import Foundation
 
-class VerbModelParser: NSObject, XMLParserDelegate {
+nonisolated class VerbModelParser: NSObject, XMLParserDelegate {
   static let xmlSeparator = ","
 
   private var parser: XMLParser?

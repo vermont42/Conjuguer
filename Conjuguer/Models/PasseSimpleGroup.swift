@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PasséSimpleGroup {
+nonisolated enum PasséSimpleGroup {
   case bare // exclure
   case a // parler
   case i // finir

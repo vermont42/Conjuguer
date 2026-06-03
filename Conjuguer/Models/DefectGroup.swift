@@ -15,7 +15,7 @@ struct DefectGroup {
   let descriptionFr: String
   private var defects: [Tense: Bool] = [:]
 
-  init(id: String, descriptionEn: String, descriptionFr: String, usesOnly: String?, doesntUse: String?) {
+  nonisolated init(id: String, descriptionEn: String, descriptionFr: String, usesOnly: String?, doesntUse: String?) {
     guard
       !(usesOnly != nil && doesntUse != nil)
     else {
@@ -158,7 +158,7 @@ struct DefectGroup {
     }
   }
 
-  private mutating func setAllDefectsTo(_ value: Bool) {
+  nonisolated private mutating func setAllDefectsTo(_ value: Bool) {
     [
       .participePassé, .participePrésent, .radicalFutur,
       .indicatifPrésent(.firstSingular), .indicatifPrésent(.secondSingular), .indicatifPrésent(.thirdSingular), .indicatifPrésent(.firstPlural), .indicatifPrésent(.secondPlural), .indicatifPrésent(.thirdPlural),
@@ -184,7 +184,7 @@ struct DefectGroup {
     }
   }
 
-  private mutating func setPersonNumberDefectivity(personNumber: PersonNumber, defective: Bool) {
+  nonisolated private mutating func setPersonNumberDefectivity(personNumber: PersonNumber, defective: Bool) {
     [
       .indicatifPrésent(personNumber),
       .passéSimple(personNumber),

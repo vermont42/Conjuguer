@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct InfoView: View {
+  @Environment(World.self) private var world
   let info: Info
   let shouldShowInfoHeading: Bool
 
@@ -17,34 +18,38 @@ struct InfoView: View {
   }
 
   var body: some View {
-    ZStack {
-      Color.customBackground
-        .ignoresSafeArea()
-
-      VStack {
-        if let imageInfo = info.imageInfo {
-          Image(imageInfo.filename)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 270)
-            .accessibilityLabel(imageInfo.accessibilityLabel)
-        }
-
-        if shouldShowInfoHeading {
-          Text(info.heading)
-            .headingLabel()
-          Spacer()
-        }
-
-        TextView(text: info.attributedText)
-          .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-          .navigationTitle(shouldShowInfoHeading ? "" : info.heading)
+    VStack {
+      if let imageInfo = info.imageInfo {
+        Image(imageInfo.filename)
+          .resizable()
+          .aspectRatio(contentMode: .fit)
+          .frame(width: 270)
+          .accessibilityLabel(imageInfo.accessibilityLabel)
       }
-      .padding(.leading, Layout.doubleDefaultSpacing)
-      .padding(.trailing, Layout.doubleDefaultSpacing)
-      .onAppear {
-        Current.analytics.recordViewAppeared("\(InfoView.self)")
+
+      if shouldShowInfoHeading {
+        Text(info.heading)
+          .headingLabel()
+        Spacer()
       }
+
+      TextView(text: info.attributedText)
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+        .navigationTitle(shouldShowInfoHeading ? "" : info.heading)
     }
+    .padding(.leading, Layout.doubleDefaultSpacing)
+    .padding(.trailing, Layout.doubleDefaultSpacing)
+    .onAppear {
+      world.analytics.recordViewAppeared("\(InfoView.self)")
+    }
+    .screenBackground()
   }
 }
+
+#if DEBUG
+#Preview {
+  PreviewSupport.bootstrap()
+  return InfoView(info: PreviewSupport.sampleInfo, shouldShowInfoHeading: true)
+    .environment(Current)
+}
+#endif

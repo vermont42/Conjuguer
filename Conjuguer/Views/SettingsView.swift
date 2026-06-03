@@ -8,87 +8,85 @@
 import SwiftUI
 
 struct SettingsView: View {
+  @Environment(World.self) private var world
+  @Environment(\.openURL) private var openURL
   @State private var rateReviewDescription = ""
 
   var body: some View {
-    @Bindable var settings = Current.settings
+    @Bindable var settings = world.settings
 
-    ZStack {
-      Color.customBackground
-        .ignoresSafeArea()
+    VStack(alignment: .leading) {
+      HStack {
+        Text(L.Navigation.settings)
+          .headingLabel()
+          .foregroundStyle(Color.customBlue)
+          .padding(.leading, Layout.doubleDefaultSpacing)
 
-      VStack(alignment: .leading) {
         Spacer()
-          .frame(height: Layout.tripleDefaultSpacing)
-
-        HStack {
-          Text(L.Navigation.settings)
-            .headingLabel()
-            .foregroundColor(Color.customBlue)
-            .padding(.leading, Layout.doubleDefaultSpacing)
-
-          Spacer()
-        }
-
-        ScrollView(.vertical) {
-          Text(L.Settings.quizDifficulty)
-            .settingsSubheadingLabel()
-
-          Picker("", selection: $settings.quizDifficulty) {
-            ForEach(QuizDifficulty.allCases, id: \.self) { quizDifficulty in
-              Text(quizDifficulty.localizedDifficulty).tag(quizDifficulty)
-            }
-          }
-          .segmentedPicker()
-          .accessibilityIdentifier("picker_settings_quizDifficulty")
-          .accessibilityValue(settings.quizDifficulty.localizedDifficulty)
-
-          Text(L.Settings.quizDifficultyDescription)
-            .settingsLabel()
-
-          Spacer(minLength: Layout.tripleDefaultSpacing)
-
-          Text(L.Settings.pronounGender)
-            .settingsSubheadingLabel()
-
-          Picker("", selection: $settings.pronounGender) {
-            ForEach(PronounGender.allCases, id: \.self) { pronounGender in
-              Text(pronounGender.localizedGender).tag(pronounGender)
-            }
-          }
-          .segmentedPicker()
-          .accessibilityIdentifier("picker_settings_pronounGender")
-          .accessibilityValue(settings.pronounGender.localizedGender)
-
-          Text(L.Settings.pronounGenderDescription)
-            .settingsLabel()
-
-          Spacer(minLength: Layout.tripleDefaultSpacing)
-
-          Text(L.Settings.ratingsAndReviews)
-            .subheadingLabel()
-
-          Button(L.Settings.rateOrReview) {
-            UIApplication.shared.open(RatingsFetcher.reviewURL, options: [:])
-          }
-          .funButton()
-
-          if rateReviewDescription != "" {
-            Text(rateReviewDescription)
-              .settingsLabel()
-          }
-        }
       }
-      .onAppear {
-        Current.analytics.recordViewAppeared("\(SettingsView.self)")
-        RatingsFetcher.fetchRatingsDescription(completion: { description in
-          if description != RatingsFetcher.errorMessage {
-            Task { @MainActor in
-              self.rateReviewDescription = description
-            }
+
+      ScrollView(.vertical) {
+        Text(L.Settings.quizDifficulty)
+          .settingsSubheadingLabel()
+
+        Picker("", selection: $settings.quizDifficulty) {
+          ForEach(QuizDifficulty.allCases, id: \.self) { quizDifficulty in
+            Text(quizDifficulty.localizedDifficulty).tag(quizDifficulty)
           }
-        })
+        }
+        .segmentedPicker()
+        .accessibilityIdentifier("picker_settings_quizDifficulty")
+        .accessibilityLabel(Text(L.Settings.quizDifficulty))
+        .accessibilityValue(settings.quizDifficulty.localizedDifficulty)
+
+        Text(L.Settings.quizDifficultyDescription)
+          .settingsLabel()
+
+        Spacer(minLength: Layout.tripleDefaultSpacing)
+
+        Text(L.Settings.pronounGender)
+          .settingsSubheadingLabel()
+
+        Picker("", selection: $settings.pronounGender) {
+          ForEach(PronounGender.allCases, id: \.self) { pronounGender in
+            Text(pronounGender.localizedGender).tag(pronounGender)
+          }
+        }
+        .segmentedPicker()
+        .accessibilityIdentifier("picker_settings_pronounGender")
+        .accessibilityLabel(Text(L.Settings.pronounGender))
+        .accessibilityValue(settings.pronounGender.localizedGender)
+
+        Text(L.Settings.pronounGenderDescription)
+          .settingsLabel()
+
+        Spacer(minLength: Layout.tripleDefaultSpacing)
+
+        Text(L.Settings.ratingsAndReviews)
+          .subheadingLabel()
+
+        Button(L.Settings.rateOrReview) {
+          openURL(RatingsFetcher.reviewURL)
+        }
+        .funButton()
+
+        if rateReviewDescription != "" {
+          Text(rateReviewDescription)
+            .settingsLabel()
+        }
       }
     }
+    .padding(.top, Layout.tripleDefaultSpacing)
+    .onAppear {
+      world.analytics.recordViewAppeared("\(SettingsView.self)")
+      RatingsFetcher.fetchRatingsDescription(completion: { description in
+        if description != RatingsFetcher.errorMessage {
+          Task { @MainActor in
+            self.rateReviewDescription = description
+          }
+        }
+      })
+    }
+    .screenBackground()
   }
 }

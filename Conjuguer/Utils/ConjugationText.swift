@@ -7,74 +7,11 @@
 
 import SwiftUI
 
-extension Text {
-  init(verb: Verb, tense: Tense, shouldShowIrregularities: Bool = true) {
-    var conjugation: String
-    switch Conjugator.conjugate(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) {
-    case .success(let value):
-      conjugation = value
-    default:
-      fatalError("Could not conjugate \(verb.infinitif) for \(tense.titleCaseName).")
-    }
-
-    switch tense {
-    case .participePassé:
-      break
-    case .participePrésent:
-      break
-    case .radicalFutur:
-      break
-    case .indicatifPrésent(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .passéSimple(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .imparfait(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .futurSimple(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .conditionnelPrésent(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .subjonctifPrésent(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .subjonctifImparfait(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .impératif(let personNumber):
-      conjugation = personNumber.impératifAndPossibleReflexivePronoun(conjugation, isReflexive: verb.isReflexive)
-    case .passéComposé(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .plusQueParfait(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .passéAntérieur(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .passéSurcomposé(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .futurAntérieur(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .conditionnelPassé(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .subjonctifPassé(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .subjonctifPlusQueParfait(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
-    case .impératifPassé:
-      break
-    }
-
-    if shouldShowIrregularities {
-      self.init(mixedCaseString: conjugation)
-    } else {
-      self.init(conjugation.lowercased())
-    }
-
-    if
-      let defectGroupId = verb.defectGroupId,
-      let defectGroup = DefectGroup.defectGroups[defectGroupId],
-      defectGroup.isDefectiveForTense(tense)
-    {
-      self = strikethrough()
-    }
-  }
-
+extension AttributedString {
+  // Builds a colored attributed string from a mixed-case conjugation: lowercase letters and
+  // non-letters are "regular" (blue), uppercase letters are "irregular" (red). The output is
+  // normalized to lowercase. Color building is the expensive, character-by-character work that
+  // VerbConjugations precomputes off `body`.
   init(mixedCaseString: String) {
     enum ColorParsingState {
       case notStarted
@@ -89,13 +26,13 @@ extension Text {
 
     func appendRegular() {
       var part = AttributedString(currentRegularPart)
-      part.foregroundColor = .customBlue
+      part.foregroundColor = Color.customBlue
       attributedString += part
     }
 
     func appendIrregular() {
       var part = AttributedString(currentIrregularPart)
-      part.foregroundColor = .customRed
+      part.foregroundColor = Color.customRed
       attributedString += part
     }
 
@@ -135,6 +72,12 @@ extension Text {
     appendRegular()
     appendIrregular()
 
-    self.init(attributedString)
+    self = attributedString
+  }
+}
+
+extension Text {
+  init(mixedCaseString: String) {
+    self.init(AttributedString(mixedCaseString: mixedCaseString))
   }
 }

@@ -8,26 +8,19 @@
 import SwiftUI
 
 struct QuizResultsView: View {
+  @Environment(World.self) private var world
   @Environment(Quiz.self) var quiz
 
   var body: some View {
-    ZStack {
-      Color.customBackground
-        .ignoresSafeArea()
-
-      VStack(alignment: .leading) {
-        Spacer()
-          .frame(height: Layout.tripleDefaultSpacing)
-
+    VStack(alignment: .leading) {
+      VStack(alignment: .leading, spacing: 0) {
         Text(L.Navigation.results)
           .headingLabel()
-          .foregroundColor(.customBlue)
-
-        Spacer()
-          .frame(height: Layout.tripleDefaultSpacing)
+          .foregroundStyle(Color.customBlue)
 
         Text("\(L.QuizView.scoreWithColon) \(quiz.score)")
           .bodyLabel()
+          .padding(.top, Layout.tripleDefaultSpacing)
 
         Text("\(L.ResultsView.correctWithColon) \(quiz.numberCorrect.asFormattedNumberCorrect()) / \(quiz.questions.count)")
           .bodyLabel()
@@ -37,20 +30,23 @@ struct QuizResultsView: View {
 
         Text("\(L.ResultsView.timeWithColon) \(quiz.elapsedTime.timeString)")
           .bodyLabel()
+      }
 
-        ScrollView(.vertical) {
-          ForEach(quiz.quizResults, id: \.infinitif) { quizResult in
-            QuizResultView(quizResult: quizResult)
-              .listRowSeparatorTint(.customForeground) // TODO: Make this work.
-          }
-        }
+      List(quiz.quizResults) { quizResult in
+        QuizResultView(quizResult: quizResult)
+          .listRowBackground(Color.customBackground)
+          .listRowSeparatorTint(.customForeground)
       }
-      .frame(maxWidth: .infinity, alignment: .leading)
-      .padding(.leading, Layout.doubleDefaultSpacing)
-      .padding(.trailing, Layout.doubleDefaultSpacing)
-      .onAppear {
-        Current.analytics.recordViewAppeared("\(QuizResultsView.self)")
-      }
+      .listStyle(.plain)
+      .scrollContentBackground(.hidden)
     }
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .padding(.leading, Layout.doubleDefaultSpacing)
+    .padding(.trailing, Layout.doubleDefaultSpacing)
+    .padding(.top, Layout.tripleDefaultSpacing)
+    .onAppear {
+      world.analytics.recordViewAppeared("\(QuizResultsView.self)")
+    }
+    .screenBackground()
   }
 }

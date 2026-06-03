@@ -8,10 +8,23 @@
 import SwiftUI
 
 struct ConjuguerApp: App {
+  @State private var verbData = VerbData()
+
   var body: some Scene {
     WindowGroup {
-      MainTabView()
-        .onOpenURL(perform: Current.handleURL(_:))
+      Group {
+        switch verbData.state {
+        case .loading:
+          LoadingView()
+        case .loaded:
+          MainTabView()
+            .environment(Current)
+        }
+      }
+      .task {
+        await verbData.load()
+      }
+      .onOpenURL(perform: Current.handleURL(_:))
     }
   }
 

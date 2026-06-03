@@ -5,109 +5,100 @@
 //  Created by Josh Adams on 2/15/21.
 //
 
-import Combine
+import Observation
 import SwiftUI
 
 struct VerbBrowseView: View {
-  @StateObject private var store: VerbStore
-  @State private var isPresentingVerb = false
+  @Environment(World.self) private var world
+  @State private var store = VerbStore(world: Current)
   @State private var searchText = ""
+  @State private var searchResults: [Verb] = []
 
   var body: some View {
-    ZStack {
-      Color.customBackground
-        .ignoresSafeArea()
+    @Bindable var store = store
+    @Bindable var world = world
 
-      NavigationView {
-        ZStack {
-          Color.customBackground
+    NavigationStack {
+      ZStack {
+        Color.customBackground
 
-          VStack {
-            Picker("", selection: $store.verbSort) {
-              ForEach(VerbSort.allCases, id: \.self) { type in
-                Text(L.displayNameForVerbSort(type)).tag(type)
-              }
+        VStack {
+          Picker("", selection: $store.verbSort) {
+            ForEach(VerbSort.allCases, id: \.self) { type in
+              Text(L.displayNameForVerbSort(type)).tag(type)
             }
-            .pickerStyle(.segmented)
-            .accessibilityIdentifier("verb_browse_sort")
+          }
+          .pickerStyle(.segmented)
+          .accessibilityIdentifier("verb_browse_sort")
+          .accessibilityLabel(Text(L.VerbBrowseView.sortOrder))
 
-            ScrollView {
-              LazyVStack {
-                ForEach(searchResults, id: \.self) { verb in
-                  NavigationLink(destination: VerbView(verb: verb)) {
-                    ZStack {
-                      Color.customBackground
-                      Text(verb.infinitifWithPossibleExtraLetters)
-                    }
-                  }
-                  .buttonStyle(.plain)
-                  .frenchPronunciation()
-                }
-              }
-              .navigationBarTitle(L.Navigation.verbs)
+          List(searchResults) { verb in
+            NavigationLink(value: verb) {
+              Text(verb.infinitifWithPossibleExtraLetters)
+            }
+            .frenchPronunciation()
+            .listRowBackground(Color.customBackground)
+          }
+          .listStyle(.plain)
+          .scrollContentBackground(.hidden)
+          .overlay {
+            if searchResults.isEmpty && !searchText.isEmpty {
+              ContentUnavailableView.search(text: searchText)
             }
           }
         }
+        .padding()
       }
-      .navigationViewStyle(.stack) // https://stackoverflow.com/a/66024249
-      .padding()
-      .searchable(text: $searchText, prompt: "", suggestions: {
-        ForEach(searchResults, id: \.self) { result in
+      .navigationTitle(L.Navigation.verbs)
+      .navigationDestination(for: Verb.self) { verb in
+        VerbView(verb: verb)
+      }
+      .searchable(text: $searchText, prompt: L.VerbBrowseView.searchPrompt, suggestions: {
+        ForEach(searchResults) { result in
           Text(result.infinitifWithPossibleExtraLetters)
             .searchCompletion(result.infinitifWithPossibleExtraLetters)
         }
       })
     }
-    .onChange(of: Current.verb, initial: true) { _, newVerb in
-      if newVerb != nil {
-        isPresentingVerb = true
-      }
+    .screenBackground()
+    .onChange(of: searchText, initial: true) { _, _ in
+      updateSearchResults(playSoundIfEmpty: true)
     }
-    .sheet(
-      isPresented: $isPresentingVerb,
-      onDismiss: {
-        Current.verb = nil
-        isPresentingVerb = false
-      },
-      content: {
-        Current.verb.map {
-          VerbView(verb: $0, shouldShowVerbHeading: true)
-            .sheetDismissable()
-        }
-      }
-    )
+    .onChange(of: store.verbSort) { _, _ in
+      updateSearchResults(playSoundIfEmpty: false)
+    }
+    .sheet(item: $world.verb) { verb in
+      VerbView(verb: verb, shouldShowVerbHeading: true)
+        .sheetDismissable()
+    }
     .onAppear {
-      Current.analytics.recordViewAppeared("\(VerbBrowseView.self)")
-      Current.reviewPrompter.promptableActionHappened()
+      world.analytics.recordViewAppeared("\(VerbBrowseView.self)")
+      world.reviewPrompter.promptableActionHappened()
     }
   }
 
-  var searchResults: [Verb] {
+  private func updateSearchResults(playSoundIfEmpty: Bool) {
     if searchText.isEmpty {
-      return store.verbs
+      searchResults = store.verbs
     } else {
       let matchingVerbs = store.verbs.filter { $0.infinitifWithPossibleExtraLetters.contains(searchText.localizedLowercase) }
-      if matchingVerbs.isEmpty {
+      if matchingVerbs.isEmpty && playSoundIfEmpty {
         SoundPlayer.play(.randomSadTrombone)
       }
-      return matchingVerbs
+      searchResults = matchingVerbs
     }
-  }
-
-  init() {
-    _store = StateObject(wrappedValue: VerbStore(world: Current))
   }
 }
 
-final class VerbStore: ObservableObject {
-  @Published var verbs: [Verb]
+@Observable
+final class VerbStore {
+  var verbs: [Verb]
   private let current: World
   private let frequencyVerbs: [Verb]
   private let alphabeticVerbs: [Verb]
 
   init(world: World) {
     self.current = world
-    verbSort = current.settings.verbSort
 
     frequencyVerbs = Verb.verbs.values
       .sorted { lhs, rhs in
@@ -126,12 +117,14 @@ final class VerbStore: ObservableObject {
       lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
     }
 
-    switch verbSort {
+    let initialSort = current.settings.verbSort
+    switch initialSort {
     case .frequency:
       verbs = frequencyVerbs
     case .alphabetical:
       verbs = alphabeticVerbs
     }
+    verbSort = initialSort
   }
 
   var verbSort: VerbSort {

@@ -10,22 +10,11 @@ import SwiftUI
 @main
 enum AppLauncher {
   static func main() throws {
-    setupModels()
-
     if NSClassFromString("XCTestCase") == nil {
       ConjuguerApp.main()
     } else {
+      VerbData.loadSynchronously()
       TestApp.main()
     }
-  }
-
-  private static func setupModels() {
-    VerbModel.models = VerbModelParser().parse()
-    Verb.verbs = VerbParser().parse()
-    VerbModel.computeIrregularities()
-    VerbModel.sortVerbs()
-    DefectGroup.defectGroups = DefectGroupParser().parse()
-
-//    Conjugator.printConjugations(infinitif: "alunir")
   }
 }

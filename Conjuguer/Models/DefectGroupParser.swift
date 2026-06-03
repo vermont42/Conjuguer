@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DefectGroupParser: NSObject, XMLParserDelegate {
+nonisolated class DefectGroupParser: NSObject, XMLParserDelegate {
   private var parser: XMLParser?
   private let defectGroupTag = "defectGroup"
   private var defectGroups: [String: DefectGroup] = [:]

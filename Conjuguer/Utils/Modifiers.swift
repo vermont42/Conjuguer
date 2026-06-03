@@ -15,7 +15,6 @@ enum Modifiers {
     UIFont(name: workSansSemiBold, size: 18).map {
       UINavigationBar.appearance().titleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customBlue)]
     }
-    UINavigationBar.appearance().backgroundColor = UIColor(Color.customBackground)
     UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color.customBlue)], for: .selected)
     UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color.customBlue)], for: .normal)
   }
@@ -85,6 +84,22 @@ extension View {
   func sheetDismissable() -> some View {
     modifier(SheetDismissable())
   }
+
+  func screenBackground() -> some View {
+    modifier(ScreenBackground())
+  }
+}
+
+// The full-screen custom background, applied as a `.background(...)` decoration rather than a
+// repeated `ZStack { Color.customBackground.ignoresSafeArea() … }` peer (#20). The frame keeps
+// the decorated view filling the screen so the background extends into the safe areas, matching
+// the old ZStack behavior for both greedy and intrinsically-sized content.
+private struct ScreenBackground: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .background(Color.customBackground.ignoresSafeArea())
+  }
 }
 
 private struct SheetDismissable: ViewModifier {
@@ -107,24 +122,24 @@ private struct SheetDismissable: ViewModifier {
 private struct SubheadingLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansSemiBold, size: 20))
-      .foregroundColor(.customGray)
+      .font(Font.custom(workSansSemiBold, size: 20, relativeTo: .title3))
+      .foregroundStyle(Color.customGray)
   }
 }
 
 private struct SettingsSubheadingLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansSemiBold, size: 20))
-      .foregroundColor(.customBlue)
+      .font(Font.custom(workSansSemiBold, size: 20, relativeTo: .title3))
+      .foregroundStyle(Color.customBlue)
   }
 }
 
 private struct TableText: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansRegular, size: 18))
-      .foregroundColor(.customForeground)
+      .font(Font.custom(workSansRegular, size: 18, relativeTo: .body))
+      .foregroundStyle(Color.customForeground)
   }
 }
 
@@ -151,16 +166,16 @@ private struct EnglishPronunciation: ViewModifier {
 private struct BodyLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansRegular, size: 20))
-      .foregroundColor(.customForeground)
+      .font(Font.custom(workSansRegular, size: 20, relativeTo: .body))
+      .foregroundStyle(Color.customForeground)
   }
 }
 
 private struct ConstrainedBodyLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansRegular, size: 20))
-      .foregroundColor(.customForeground)
+      .font(Font.custom(workSansRegular, size: 20, relativeTo: .body))
+      .foregroundStyle(Color.customForeground)
       .dynamicTypeSize(...DynamicTypeSize.xLarge)
   }
 }
@@ -168,16 +183,16 @@ private struct ConstrainedBodyLabel: ViewModifier {
 private struct SmallLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansRegular, size: 16))
-      .foregroundColor(.customGray)
+      .font(Font.custom(workSansRegular, size: 16, relativeTo: .callout))
+      .foregroundStyle(Color.customGray)
   }
 }
 
 private struct SettingsLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansRegular, size: 16))
-      .foregroundColor(.customForeground)
+      .font(Font.custom(workSansRegular, size: 16, relativeTo: .callout))
+      .foregroundStyle(Color.customForeground)
       .padding(.horizontal, Layout.doubleDefaultSpacing)
   }
 }
@@ -185,15 +200,15 @@ private struct SettingsLabel: ViewModifier {
 private struct ButtonLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansSemiBold, size: 20))
+      .font(Font.custom(workSansSemiBold, size: 20, relativeTo: .title3))
   }
 }
 
 private struct HeadingLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansSemiBold, size: 22))
-      .accessibility(addTraits: [.isHeader])
+      .font(Font.custom(workSansSemiBold, size: 22, relativeTo: .title))
+      .accessibilityAddTraits(.isHeader)
   }
 }
 
@@ -226,7 +241,6 @@ private struct SegmentedPicker: ViewModifier {
 private struct FunButton: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .foregroundColor(Color.customRed)
       .buttonStyle(.glass)
       .tint(.customRed)
   }

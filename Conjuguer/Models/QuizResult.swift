@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct QuizResult: Hashable {
+struct QuizResult: Hashable, Identifiable {
+  let id = UUID()
   let infinitif: String
   let tense: Tense
   let conjugationResult: ConjugationResult

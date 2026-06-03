@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Auxiliary: String {
+nonisolated enum Auxiliary: String {
   case avoir = "a"
   case être = "e"
 

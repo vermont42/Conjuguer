@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct MainTabView: View {
-  @State private var quiz = Current.quiz
+  @Environment(World.self) private var world
 
   var body: some View {
-    @Bindable var current = Current
+    @Bindable var world = world
 
-    TabView(selection: $current.selectedTab) {
+    TabView(selection: $world.selectedTab) {
       Tab(L.Navigation.verbs, systemImage: "book.fill", value: MainTab.verbs) {
         VerbBrowseView()
       }
@@ -24,7 +24,7 @@ struct MainTabView: View {
 
       Tab(L.Navigation.quiz, systemImage: "pencil.circle.fill", value: MainTab.quiz) {
         QuizView()
-          .environment(quiz)
+          .environment(world.quiz)
       }
 
       Tab(L.Navigation.info, systemImage: "questionmark.diamond.fill", value: MainTab.info) {
@@ -37,13 +37,15 @@ struct MainTabView: View {
     }
     .tabViewStyle(.sidebarAdaptable)
     .onAppear {
-      Current.analytics.recordViewAppeared("\(MainTabView.self)")
+      world.analytics.recordViewAppeared("\(MainTabView.self)")
     }
   }
 }
 
-struct MainTabView_Previews: PreviewProvider {
-  static var previews: some View {
-    MainTabView()
-  }
+#if DEBUG
+#Preview {
+  PreviewSupport.bootstrap()
+  return MainTabView()
+    .environment(Current)
 }
+#endif

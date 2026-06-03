@@ -11,36 +11,27 @@ struct QuizResultView: View {
   let quizResult: QuizResult
 
   var body: some View {
-    ZStack {
-      Color.customBackground
-        .ignoresSafeArea()
+    VStack {
+      HStack {
+        Spacer()
 
-      VStack {
-        HStack {
-          Spacer()
+        Text(quizResult.infinitif)
+          .subheadingLabel()
 
-          Text(quizResult.infinitif)
-            .subheadingLabel()
-
-          Text("")
-
-          Image(systemName: quizResult.conjugationResult.iconString)
-            .foregroundColor(.customGray)
-
-          Spacer()
-        }
-
-        Text(quizResult.tense.titleCaseName + quizResult.tense.pronounDecorator)
-
-        Text(mixedCaseString: quizResult.correctAnswer)
-          .font(bodyFont)
-
-        Text(mixedCaseString: quizResult.actualAnswer)
-          .font(bodyFont)
+        Image(systemName: quizResult.conjugationResult.iconString)
+          .foregroundStyle(Color.customGray)
 
         Spacer()
-          .frame(height: Layout.defaultSpacing)
       }
+
+      Text(quizResult.tense.titleCaseName + quizResult.tense.pronounDecorator)
+
+      Text(mixedCaseString: quizResult.correctAnswer)
+        .font(bodyFont)
+
+      Text(mixedCaseString: quizResult.actualAnswer)
+        .font(bodyFont)
     }
+    .padding(.bottom, Layout.defaultSpacing)
   }
 }

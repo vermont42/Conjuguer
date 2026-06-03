@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct VerbModel: Hashable {
+struct VerbModel: Identifiable, Hashable {
   static var models: [String: VerbModel] = [:]
 
   let id: String
@@ -23,6 +23,35 @@ struct VerbModel: Hashable {
   let extraLetters: String?
   let defectGroupId: String?
   var verbs: [String] = []
+
+  // This is nonisolated so the verb-model XML parse can construct models off the main actor
+  // The parsed models are published into the main-actor `models` store afterward. The derived
+  // passes (computeIrregularities / sortVerbs) stay main-actor and run post-publish.
+  nonisolated init(
+    id: String,
+    exemplar: String,
+    parentId: String?,
+    participeEnding: String?,
+    indicatifPrésentGroup: IndicatifPrésentGroup?,
+    passéSimpleGroup: PasséSimpleGroup?,
+    subjonctifPrésentGroup: SubjonctifPrésentGroup?,
+    stemAlterations: [StemAlteration]?,
+    position: Int,
+    extraLetters: String?,
+    defectGroupId: String?
+  ) {
+    self.id = id
+    self.exemplar = exemplar
+    self.parentId = parentId
+    self.participeEnding = participeEnding
+    self.indicatifPrésentGroup = indicatifPrésentGroup
+    self.passéSimpleGroup = passéSimpleGroup
+    self.subjonctifPrésentGroup = subjonctifPrésentGroup
+    self.stemAlterations = stemAlterations
+    self.position = position
+    self.extraLetters = extraLetters
+    self.defectGroupId = defectGroupId
+  }
 
   var description: String {
     switch id {

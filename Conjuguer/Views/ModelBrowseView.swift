@@ -5,104 +5,101 @@
 //  Created by Josh Adams on 2/17/21.
 //
 
-import Combine
+import Observation
 import SwiftUI
 
 struct ModelBrowseView: View {
-  @StateObject private var store: ModelStore
-  @State private var isPresentingVerbModel = false
+  @Environment(World.self) private var world
+  @State private var store = ModelStore(world: Current)
   @State private var searchText = ""
+  @State private var searchResults: [ModelAndDecorator] = []
 
   var body: some View {
-    ZStack {
-      Color.customBackground
-        .ignoresSafeArea()
+    @Bindable var store = store
+    @Bindable var world = world
 
-      NavigationView {
-        ZStack {
-          Color.customBackground
+    NavigationStack {
+      ZStack {
+        Color.customBackground
 
-          VStack {
-            Picker("", selection: $store.modelSort) {
-              ForEach(ModelSort.allCases, id: \.self) { type in
-                Text(L.displayNameForModelSort(type)).tag(type)
-              }
+        VStack {
+          Picker("", selection: $store.modelSort) {
+            ForEach(ModelSort.allCases, id: \.self) { type in
+              Text(L.displayNameForModelSort(type)).tag(type)
             }
-            .pickerStyle(.segmented)
+          }
+          .pickerStyle(.segmented)
+          .accessibilityLabel(Text(L.ModelBrowseView.sortOrder))
 
-            ScrollView {
-              ForEach(searchResults, id: \.self) { modelAndDecorator in
-                NavigationLink(destination: ModelView(model: modelAndDecorator.model)) {
-                  Text(modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator)
-                    .tableText()
-                }
-                .buttonStyle(.plain)
-                .frenchPronunciation()
-              }
-              .navigationBarTitle(L.Navigation.models)
+          List(searchResults) { modelAndDecorator in
+            NavigationLink(value: modelAndDecorator.model) {
+              Text(modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator)
+                .tableText()
+            }
+            .frenchPronunciation()
+            .listRowBackground(Color.customBackground)
+          }
+          .listStyle(.plain)
+          .scrollContentBackground(.hidden)
+          .overlay {
+            if searchResults.isEmpty && !searchText.isEmpty {
+              ContentUnavailableView.search(text: searchText)
             }
           }
         }
+        .padding()
       }
-      .navigationViewStyle(.stack) // https://stackoverflow.com/a/66024249
-      .padding()
-      .searchable(text: $searchText, prompt: "", suggestions: {
-        ForEach(searchResults, id: \.self) { modelAndDecorator in
+      .navigationTitle(L.Navigation.models)
+      .navigationDestination(for: VerbModel.self) { model in
+        ModelView(model: model)
+      }
+      .searchable(text: $searchText, prompt: L.ModelBrowseView.searchPrompt, suggestions: {
+        ForEach(searchResults) { modelAndDecorator in
           Text("\(modelAndDecorator.model.exemplarWithPossibleExtraLetters)\(modelAndDecorator.decorator)")
             .tableText()
             .frenchPronunciation()
-            .buttonStyle(.plain)
             .searchCompletion(modelAndDecorator.model.exemplarWithPossibleExtraLetters)
         }
       })
     }
-    .onChange(of: Current.verbModel, initial: true) { _, newVerbModel in
-      if newVerbModel != nil {
-        isPresentingVerbModel = true
-      }
+    .screenBackground()
+    .onChange(of: searchText, initial: true) { _, _ in
+      updateSearchResults(playSoundIfEmpty: true)
     }
-    .sheet(
-      isPresented: $isPresentingVerbModel,
-      onDismiss: {
-        Current.verbModel = nil
-        isPresentingVerbModel = false
-      },
-      content: {
-        Current.verbModel.map {
-          ModelView(model: $0)
-            .sheetDismissable()
-        }
-      }
-    )
+    .onChange(of: store.modelSort) { _, _ in
+      updateSearchResults(playSoundIfEmpty: false)
+    }
+    .sheet(item: $world.verbModel) { model in
+      ModelView(model: model)
+        .sheetDismissable()
+    }
     .onAppear {
-      Current.analytics.recordViewAppeared("\(ModelBrowseView.self)")
+      world.analytics.recordViewAppeared("\(ModelBrowseView.self)")
     }
   }
 
-  var searchResults: [ModelAndDecorator] {
+  private func updateSearchResults(playSoundIfEmpty: Bool) {
     if searchText.isEmpty {
-      return store.modelsAndDecorators
+      searchResults = store.modelsAndDecorators
     } else {
       let matchingModels = store.modelsAndDecorators.filter { $0.model.exemplar.contains(searchText.localizedLowercase) }
-      if matchingModels.isEmpty {
+      if matchingModels.isEmpty && playSoundIfEmpty {
         SoundPlayer.play(.randomSadTrombone)
       }
-      return matchingModels
+      searchResults = matchingModels
     }
   }
-
-  init() {
-    _store = StateObject(wrappedValue: ModelStore(world: Current))
-  }
 }
 
-struct ModelAndDecorator: Hashable {
+struct ModelAndDecorator: Identifiable, Hashable {
   let model: VerbModel
   let decorator: String
+  var id: String { model.id }
 }
 
-final class ModelStore: ObservableObject {
-  @Published var modelsAndDecorators: [ModelAndDecorator]
+@Observable
+final class ModelStore {
+  var modelsAndDecorators: [ModelAndDecorator]
   private let current: World
   private let irregularityModelsAndDecorators: [ModelAndDecorator]
   private let alphabeticModelsAndDecorators: [ModelAndDecorator]
@@ -110,7 +107,6 @@ final class ModelStore: ObservableObject {
 
   init(world: World) {
     self.current = world
-    modelSort = current.settings.modelSort
 
     irregularityModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
       lhs.irregularity >= rhs.irregularity
@@ -127,7 +123,8 @@ final class ModelStore: ObservableObject {
     }
     .map { ModelAndDecorator(model: $0, decorator: " (\($0.id))") }
 
-    switch modelSort {
+    let initialSort = current.settings.modelSort
+    switch initialSort {
     case .irregularity:
       modelsAndDecorators = irregularityModelsAndDecorators
     case .alphabetical:
@@ -135,6 +132,7 @@ final class ModelStore: ObservableObject {
     case .identifier:
       modelsAndDecorators = identifierModelsAndDecorators
     }
+    modelSort = initialSort
   }
 
   var modelSort: ModelSort {

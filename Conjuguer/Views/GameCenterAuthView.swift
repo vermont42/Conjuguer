@@ -10,13 +10,20 @@ import UIKit
 
 class GameCenterAuthVC: UIViewController {}
 
-struct GameCenterAuthView: UIViewControllerRepresentable {
-  typealias UIViewControllerType = UIViewController
-  let gameCenterAuthVC = GameCenterAuthVC()
+// Owns the view controller that Game Center's authentication UI is presented from. QuizView holds
+// this in @State so the controller's lifetime is stable across view-struct churn, and the
+// controller that gets mounted by GameCenterAuthView is the same one authentication presents from.
+@MainActor
+final class GameCenterAuthCoordinator {
+  let viewController = GameCenterAuthVC()
+}
 
-  func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+struct GameCenterAuthView: UIViewControllerRepresentable {
+  let coordinator: GameCenterAuthCoordinator
 
   func makeUIViewController(context: Context) -> UIViewController {
-    gameCenterAuthVC
+    coordinator.viewController
   }
+
+  func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }

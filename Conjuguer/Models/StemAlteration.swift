@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StemAlteration: Hashable {
+nonisolated struct StemAlteration: Hashable {
   let type: StemAlterationType
   let charsToUse: String
   let appliesTo: Set<Tense>
@@ -184,7 +184,7 @@ struct StemAlteration: Hashable {
   }
 }
 
-enum StemAlterationType: Hashable {
+nonisolated enum StemAlterationType: Hashable {
   case indexBased(startIndexFromLast: Int, charsToReplaceCount: Int)
   case letterBased(letterToReplace: String)
 }
