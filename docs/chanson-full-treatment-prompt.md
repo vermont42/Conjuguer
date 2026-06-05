@@ -116,7 +116,77 @@ extend them.
 | muvrai | `mouvoir (susciter)` |
 | esclair | `esclairier (soulager)` |
 | sedeir | `seoir (asseoir)` |
-| avoir, être, faire, tenir, prendre, devenir, jouer, descendre, saluer, demander, garder, atteindre, pouvoir, servir, réclamer, aimer, abattre, fleurir, escrimer, enseigner, conquérir, aller, venir, donner, appeler, conseiller, répondre, dire, mander, charger, louer, devoir, suivre, recevoir, vouloir, envoyer, perdre, conduire, mendier, voir, passer, trancher, monter, mettre, porter, savoir, conter, tendre, baisser, commencer, penser, lever, se coucher, confondre, amener, parler, enquérir, enchaîner, muer, trousser, avouer, s'en aller, contredire, croire, conquérir, mener, mettre, venger, joindre, vaincre, entreprendre, juger, jeter, craindre, durer, rire, livrer, commander, se dresser, se tenir | direct modern form |
+| caït | `cheoir (tomber)` |
+| avendrat / avent | `avenir (arriver)` |
+| targer | `targier (tarder)` |
+| asols | `absoudre` |
+| seignet | `seignier (bénir)` |
+| recuvrer | `recuvrer (recouvrer)` |
+| solt | `soleir (avoir coutume)` |
+| clamer | `clamer (appeler)` |
+| guariz | `garir (protéger)` |
+| tensez | `tenser (protéger)` |
+| estrait | `estraire (être issu)` |
+| placet | `plaire` |
+| achiminez | `s'acheminer` |
+| atarget | `atargier (s'attarder)` |
+| requert | `requérir` |
+| predet | `preer (piller)` |
+| espleiter | `esploitier (accomplir)` |
+| plevit / plevie | `plevir (jurer)` |
+| querreient | `querre (chercher)` |
+| esvolupet | `envoluper (envelopper)` |
+| sunt (= sone) | `soner (dire)` |
+| tint (= tentist) | `tentir (retentir)` |
+| purpenset | `porpenser (réfléchir)` |
+| esfreed | `esfreer (effrayer)` |
+| enpenet | `empenner` |
+| crollee | `croller (secouer)` |
+| comperee | `comperer (payer cher)` |
+| baillit / baillie | `baillir (traiter / avoir en garde)` |
+| asmastes | `asmer (oser)` |
+| afublez | `afubler (revêtir)` |
+| aproismet | `aproismier (s'approcher)` |
+| esculurez | `escolorer (pâlir)` |
+| remembre | `remembrer (se souvenir)` |
+| aquiter | `aquiter (acquitter)` |
+| enmeinet | `emmener` |
+| purparolent | `porparler (comploter)` |
+| demustrai | `démontrer (montrer)` |
+| guaz | `guagier (donner en gage)` |
+| desotrei | `desotreier (refuser)` |
+| demened | `demener (conduire)` |
+| acunter | `aconter (raconter)` |
+| enluminet | `enluminer (illuminer)` |
+| merveiller | `merveiller (s'étonner)` |
+| cadeir / chedet | `cheoir (tomber)` |
+| estuertrat | `estordre (échapper)` |
+| blesmie | `blesmir (meurtrir)` |
+| guastede | `guaster (dévaster)` |
+| adubees | `aduber (équiper)` |
+| remestrent | `remaindre (rester)` |
+| herbergent | `herberger (camper)` |
+| desherbergent | `desherberger (lever le camp)` |
+| guaz | `guagier (donner en gage)` |
+| forsfait | `forsfaire (se rendre coupable)` |
+| hunir | `honnir (déshonorer)` |
+| priset | `priser (estimer)` |
+| butet | `bouter (mettre)` |
+| apareillez | `appareiller (préparer)` |
+| eslegiet | `eslegier (acquitter)` |
+| siglet | `sigler (naviguer)` |
+| aquillit | `acueillir (saisir)` |
+| neiez | `neier (noyer)` |
+| graciet | `gracier (rendre grâce)` |
+| Tresvait | `tresaler (passer)` |
+| aserie | `aserir (devenir nuit)` |
+| estrussee | `estrosser (arracher)` |
+| avalat | `avaler (descendre)` |
+| apert | `apparoir (apparaître)` |
+| estut | `ester (se tenir debout)` |
+| detoerst | `detordre (tordre)` |
+| muer (poet muer) | `muer (s'empêcher)` |
+| avoir, être, faire, tenir, prendre, devenir, jouer, descendre, saluer, demander, garder, atteindre, pouvoir, servir, réclamer, aimer, abattre, fleurir, escrimer, enseigner, conquérir, aller, venir, donner, appeler, conseiller, répondre, dire, mander, charger, louer, devoir, suivre, recevoir, vouloir, envoyer, perdre, conduire, mendier, voir, passer, trancher, monter, mettre, porter, savoir, conter, tendre, baisser, commencer, penser, lever, se coucher, confondre, amener, parler, enquérir, enchaîner, muer, trousser, avouer, s'en aller, contredire, croire, conquérir, mener, mettre, venger, joindre, vaincre, entreprendre, juger, jeter, craindre, durer, rire, livrer, commander, se dresser, se tenir, accomplir, fendre, tourner, vivre, défier, fermer, ceindre, entrer, s'assembler, requérir, travailler, présenter, s'abandonner, faillir, descendre, lier, amener, courroucer, assiéger, écrire, souffrir, couvrir, prier, s'asseoir, s'approcher, s'appuyer, emmener, brandir, mercier, user, priser, connaître, détourner, défaire, combattre, rendre, blesser, assembler, songer, saisir, voler, mordre, assaillir, trancher, regarder, apporter, charger, pleurer, guerroyer | direct modern form |
 
 As new verbs appear, add them to this table **in this prompt file** so later chunks
 stay consistent. When a reflex is genuinely uncertain or disputed, prefer the
