@@ -32,11 +32,21 @@ The skill can launch the app and inspect/drive the UI so changes can be verified
 beyond unit tests:
 
 ```bash
-"$IBV_SCRIPTS/launch_app.sh"                 # build first, then boot + install + launch + wait-for-render
+"$IBV_SCRIPTS/build_app.sh"                  # COMPILE first — launch_app.sh does NOT build (see warning below)
+"$IBV_SCRIPTS/launch_app.sh"                 # boot + install the last-built .app + launch + wait-for-render
 "$IBV_SCRIPTS/screenshot.sh <context-slug>"  # capture a PNG under docs/screenshots/
 "$IBV_SCRIPTS/describe_ui.sh"                # dump the accessibility tree
 "$IBV_SCRIPTS/tap_tab.sh <verbs|models|quiz|info|settings>"  # tap a main tab
 ```
+
+> **⚠️ `launch_app.sh` does NOT compile.** It resolves `BUILT_PRODUCTS_DIR` via
+> `xcodebuild -showBuildSettings` (which doesn't build), then installs whatever `.app`
+> already exists there and launches it. **After editing source, you MUST run
+> `build_app.sh` (or `run_tests.sh`) first** — otherwise `launch_app.sh` reinstalls the
+> *previous* binary and your screenshots show pre-edit UI. (`launch_app.sh` does terminate
+> the running process before install, so a stale *process* isn't the issue — a stale
+> *build* is.) A symptom: edit → `launch_app.sh` → screenshot is byte-identical to the
+> last one across multiple different edits. Always `build_app.sh && launch_app.sh`.
 
 The launch anchor is `verb_browse_sort` (the sort `Picker` in `VerbBrowseView`). Add
 more `.accessibilityIdentifier`/`.accessibilityValue` modifiers on a migration-by-use
@@ -80,9 +90,43 @@ After **Start**, the answer field auto-focuses; type into `input_quiz_conjugatio
 and send Return (`axe key 40`) per question. The `Progress: N / 30` label tracks
 position; the run ends with a `QuizResultsView` sheet (label `Results`).
 
+The field **stays focused across submissions** (`submitAnswer()` re-sets focus), so a
+fast sweep is: tap it once (`tap_id.sh input_quiz_conjugation`), then loop
+`axe type "<answer>"` + `axe key 40` — batch many pairs into one Bash call (cleaning the
+temp dir first; see the ENOSPC note above) and `screenshot.sh` between batches to check
+progress. **Caveat:** if focus is lost (e.g. after a `describe_ui`/screenshot detour),
+`axe type`/`axe key 40` silently no-op and the quiz won't advance — re-tap the field by
+id before resuming. To exercise all three result-icon colors, mix outcomes: a correct
+conjugation → green, a correct skeleton with a dropped accent (e.g. `detends` for
+`détends`) → blue partial, junk (`x`) → red.
+
 **SourceKit vs. the build:** editing a view file often triggers SourceKit "Cannot find
 X in scope" diagnostics for same-module symbols. If `build_app.sh` succeeds, the build
 is authoritative — do not "fix" SourceKit-only diagnostics.
+
+#### Harness temp-dir fills up mid-verification ("filesystem full" / no output)
+
+Long simulator-driven runs (many `axe` / `describe_ui` calls) can make a Bash call
+return **"Bash completed with no output"** — even for a bare `echo` — or fail outright
+with *"the temp filesystem at `/private/tmp/claude-501/.../tasks` is full (0MB free) …
+ENOSPC."* This is **not** real disk pressure (`df -h /tmp` shows the volume has hundreds
+of GB free); the harness's per-call output capture is choking on accumulated empty
+`TemporaryDirectory.*` entries under `$TMPDIR` (`/tmp/claude-501`).
+
+- **Fix — clear them, as the first line of each verify command:**
+  `rm -rf /tmp/claude-501/TemporaryDirectory.* 2>/dev/null`. Putting it first gives the
+  *next* call's capture room; cleaning inside an already-failing call is too late for
+  that call's own output.
+- **The command body still runs even when its output is lost** — only the captured
+  stdout/stderr is dropped, not the execution. Never read "no output" as "it failed";
+  confirm state another way.
+- **Confirm state without stdout:** prefer `screenshot.sh <slug>` (writes a PNG to
+  `docs/screenshots/` and emits only the path) over reading the terminal, and have noisy
+  commands append progress to a file on the real disk (e.g. `… >> ~/verify.log`) that you
+  then `Read`.
+- **Reduce the trigger:** `describe_ui`'s full AXTree dump is large — pipe it straight
+  into `python3`/`grep` and print only the fields you need (or redirect it to a file),
+  rather than letting the whole JSON transit captured stdout.
 
 ### Diagnostic fallback (raw xcodebuild)
 

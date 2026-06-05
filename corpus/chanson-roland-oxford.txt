@@ -1,0 +1,4618 @@
+# La Chanson de Roland — Oxford manuscript, complete Old French text
+#
+# RAW SOURCE FILE for the full-treatment build (see docs/chanson-full-treatment-prompt.md).
+# This is the verbatim original only — no verb glosses, no translation.
+#
+# Source     : Orbis Latinus (orbilat.com), "La Chanson de Roland", 6 laisse-range pages
+#              .../Period_02/Roland/{001-049,050-099,100-149,150-199,200-249,250-291}.htm
+#              (Old French column only; the parallel English column was discarded.)
+# Manuscript : Oxford, Bodleian Library, Digby 23 (the Anglo-Norman Oxford version).
+# Numbering  : canonical Bédier line numbers, 1–4002. Laisses I–CCXCI (291), consecutive.
+# Extraction : HTML table parsed programmatically; folio markers (f.NNr/v) dropped;
+#              «»/accents decoded; verses wrapped across source lines were rejoined.
+#
+# VERIFIED   : line 1   = "Carles li reis, nostre emper[er]e magnes"
+#              line 96  = "Li empereres se fait e balz e liez,"  (laisse VIII start — matches corpus/chanson.md)
+#              line 4002= "Ci falt la geste que Turoldus declinet."  (canonical final line)
+#              total numbered lines = 4002 ; laisses = 291 ; alignment to Bédier confirmed
+#              via the source's every-5-line anchors on the cleanly-structured pages.
+#
+# LACUNAE    : 6 editorial lacuna rows appear. 3 (in laisses ~C–CL) are narrative gaps that
+#              do NOT take a Bédier line number (marked "unnumbered"); 3 (in the Baligant
+#              section) DO occupy a numbered slot (a line lost in Oxford) and are numbered.
+#              This split is what makes the count total exactly 4002.
+#
+# EDITION NOTE: orbilat's edition differs in minor orthography/punctuation from the UT-Austin
+#              Bédier text used for the existing laisses I & VIII in corpus/chanson.md
+#              (e.g. "Sarraguce"/"Saraguce", "aimet"/"amet", "emper[er]e"/"emperere",
+#              comma vs colon). Line numbers and laisse divisions agree. The processing step
+#              should pick one edition and note the switch (see the prompt's guardrails).
+#
+# Format     : "<lineNo>\t<verse>"; laisse headers as "Laisse <roman>"; lacuna rows as above.
+
+Laisse I
+1	Carles li reis, nostre emper[er]e magnes
+2	Set anz tuz pleins ad estet en Espaigne:
+3	Tresqu'en la mer cunquist la tere altaigne.
+4	N'i ad castel ki devant lui remaigne;
+5	Mur ne citet n'i est remes a fraindre,
+6	Fors Sarraguce, ki est en une muntaigne.
+7	Li reis Marsilie la tient, ki Deu nen aimet;
+8	Mahumet sert e Apollin recleimet:
+9	Nes poet guarder que mals ne l'i ateignet. AOI.
+
+Laisse II
+10	Li reis Marsilie esteit en Sarraguce.
+11	Alez en est en un verger suz l'umbre;
+12	Sur un perrun de marbre bloi se culchet,
+13	Envirun lui plus de vint milie humes.
+14	Il en apelet e ses dux e ses cuntes:
+15	«Oëz, seignurs, quel pecchet nus encumbret:
+16	Li emper[er]es Carles de France dulce
+17	En cest païs nos est venuz cunfundre.
+18	Jo nen ai ost qui bataille li dunne,
+19	Ne n'ai tel gent ki la sue derumpet.
+20	Cunseilez mei cume mi savie hume,
+21	Si m(e) guarisez e de mort et de hunte.»
+22	N'i ad paien ki un sul mot respundet,
+23	Fors Blancandrins de Castel de Valfunde.
+
+Laisse III
+24	Blancandrins fut des plus saives paiens:
+25	De vasselage fut asez chevaler,
+26	Prozdom i out pur sun seignur aider;
+27	E dist al rei: «Ore ne vus esmaiez!
+28	Mandez Carlun a l'orguillus, (e) al fier,
+29	Fedeilz servises e mult granz amistez.
+30	Vos li durrez urs e leons e chens,
+31	Set cenz camelz e mil hosturs muers,
+32	D'or e d'argent .IIII.C. muls cargez,
+33	Cinquante carre, qu'en ferat carier:
+34	Ben en purrat luer ses soldeiers.
+35	En ceste tere ad asez osteiet;
+36	En France, ad Ais, s'en deit ben repairer.
+37	Vos le sivrez a la feste seint Michel:
+38	Si recevrez la lei de chrestiens,
+39	Serez ses hom par honur e par ben.
+40	S'en volt ostages, e vos l'en enveiez,
+41	U dis u vint pur lui afiancer.
+42	Enveiu[n]s i les filz de noz muillers:
+43	Par nun d'ocire i enveierai le men.
+44	Asez est melz qu'il i perdent le chefs,
+45	Que nus perduns l'onur ne la deintet,
+46	Ne nus seiuns cunduiz a mendeier.» AOI.
+
+Laisse IV
+47	Dist Blancandrins: «Pa[r] ceste meie destre
+48	E par la barbe ki al piz me ventelet,
+49	L'ost des Franceis verrez sempres desfere.
+50	Francs s'en irunt en France la lur tere.
+51	Quant cascuns ert a sun meillor repaire,
+52	Carles serat ad Ais, a sa capele;
+53	A seint Michel tendrat mult halte feste.
+54	Vendrat li jurz, si passerat li termes,
+55	N'orrat de nos paroles ne nuveles.
+56	Li reis est fiers e sis curages pesmes:
+57	De noz ostages ferat tre[n]cher les testes;
+58	Asez est mielz, qu'il i perdent les testes,
+59	Que nus perduns clere Espaigne, la bele,
+60	Ne nus aiuns les mals ne les suffraites.»
+61	Dient paien: «Issi poet il ben estre!»
+
+Laisse V
+62	Li reis Marsilie out sun cunseill finet:
+63	Sin apelat Clarin (...) de Balaguet,
+64	Estamarin e Eudropin, sun per,
+65	E Priamun e Guarlan le barbet,
+66	E Machiner e sun uncle, Maheu,
+67	E Joüner e Malbien d'ultremer,
+68	E Blancandrins, por la raisun cunter.
+69	Des plus feluns dís en ad apelez:
+70	«Seignurs baruns, a Carlemagnes irez;
+71	Il est al siege a Cordres la citet.
+72	Branches d'olives en voz mains porterez,
+73	Ço senefiet pais e humilitet.
+74	Par voz saveirs sem puez acorder,
+75	Jo vos durrai or e argent asez,
+76	Teres e fiéz tant cum vos en vuldrez.»
+77	Dient paien: «De ço avun nus asez!» AOI.
+
+Laisse VI
+78	Li reis Marsilie out finet sun cunseill;
+79	Dist a ses humes: «Seignurs, vos en ireiz;
+80	Branches d'olive en voz mains portereiz,
+81	Si me direz a Carlemagne, le rei,
+82	Pur le soen Deu qu'il ait m(er)ercit de mei.
+83	Ja einz ne verrat passer cest premer meis,
+84	Que jel sivrai od mil de mes fedeilz,
+85	Si recevrai la chrestiene lei,
+86	[S]erai ses hom par amur e par feid;
+87	S'il voelt ostages, il en avrat par veir.»
+88	Dist Blancandrins: «Mult bon plait en avreiz.» AOI.
+
+Laisse VII
+89	Dis blanches mules fist amener Marsilies,
+90	Que li tramist li reis de Suatilie;
+91	Li frein sunt d'or, les seles d'argent mises.
+92	Cil sunt muntez ki le message firent,
+93	Enz en lur mains portent branches d'olive.
+94	Vindrent a Charles ki France ad en baillie:
+95	Nes poet guarder que alques ne l'engignent. AOI.
+
+Laisse VIII
+96	Li empereres se fait e balz e liez,
+97	Cordres ad prise e les murs peceiez,
+98	Od ses cadables les turs en abatied.
+99	Mult grant eschech en unt si chevaler
+100	D'or e d argent e de guarnemenz chers.
+101	En la citet nen ad remes paien,
+102	Ne seit ocis, u devient chrestien.
+103	Li empereres est en un grant verger,
+104	Ensembl od lui Rollant et oliver
+105	Sansun li dux e anseis li fiers
+106	Gefreid d anjou le rei gunfanuner,
+107	E si i furent e gerin et gerers,
+108	La u cist furent, des altres i out bien:
+109	De dulce france i ad quinze milliers.
+110	Sur palies blancs siedent cil cevaler,
+111	As tables juent pur els esbaneier
+112	E as eschecs li plus saive e li veill,
+113	E escremissent cil bacheler leger.
+114	Desuz un pin delez un eglenter
+115	Un faldestoed i unt fait tut d or mer,
+116	La siet li reis, ki dulce france tient.
+117	Blanche ad la barbe e tut flurit le chef,
+118	Gent ad le cors e le cuntenant fier,
+119	S'est, kil demandet, ne l estoet enseigner.
+120	E li message descendirent a pied,
+121	Sil saluerent par amur e par bien.
+
+Laisse IX
+122	Blancandrins ad tut premereins parled,
+123	E dist al rei: «Salvez seiez de Deu
+124	Le glorius, que de[v]u[n]s aürer!
+125	Iço vus mandet reis Marsilies, li bers:
+126	Enquis ad mult la lei de salvetez;
+127	De sun aveir vos voelt asez duner,
+128	Urs e leuns e veltres enchaignez,
+129	Set cenz cameilz e mil hosturs muez,
+130	D'or e d'argent .IIII. cenz muls trussez,
+131	Cinquante care, que carier en ferez;
+132	Tant i avrat de besanz esmerez
+133	Dunt bien purrez voz soldeiers luer.
+134	En cest païs avez estet asez;
+135	En France, ad Ais, devez bien repairer;
+136	La vos sivrat, ço dit mis avoez.»
+137	Li empereres tent (...) ses mains vers Deu,
+138	Baisset sun chef, si cumencet a penser. AOI.
+
+Laisse X
+139	Li empereres en tint sun chef enclin;
+140	De sa parole ne fut mie hastifs:
+141	Sa custume est qu'il parolet a leisír.
+142	Quant se redrecet, mult par out fier lu vis;
+143	Dist as messages: «Vus avez mult ben dit.
+144	Li reis Marsilies est mult mis enemis.
+145	De cez paroles que vos avez ci dit,
+146	En quel mesure en purrai estre fiz?»
+147	- «Voet par hostages,» ço dist li Sarrazins,
+148	«Dunt vos avrez ú dis ú quinze ú vint.
+149	Pa[r] num de ocire i metrai un mien filz,
+150	E sin avrez, ço quid, de plus gentilz.
+151	Quant vus serez el palais seignurill,
+152	A la grant feste seint Michel del Peril,
+153	Mis avoez la vos sivrat, ço dit;
+154	Enz en voz bainz que Deus pur vos i fist,
+155	La vuldrat il chrestiens devenir.»
+156	Charles respunt: «Uncore purrat guarir.» AOI.
+
+Laisse XI
+157	Bels fut li vespres e li soleilz fut cler.
+158	Les dis mulez fait Char[l]es establer,
+159	El grant verger fait li reis tendre un tref,
+160	Les dis messages ad fait enz hosteler;
+161	.XII. serjanz les unt ben cunreez.
+162	La noit demurent tresque vint al jur cler.
+163	Li empereres est par matin levet;
+164	Messe e matines ad li reis escultet.
+165	Desuz un pin en est li reis alez,
+166	Ses baruns mandet pur sun cunseill finer:
+167	Par cels de France voelt il del tut errer. AOI.
+
+Laisse XII
+168	Li emper[er]es s'en vait desuz un pin.
+169	Ses baruns mandet pur sun cunseill fenir:
+170	Le duc Oger, (e) l'arcevesque Turpin,
+171	Richard li Vélz e sun nev[old] Henri,
+172	E de Gascuigne li proz quens Acelin
+173	Tedbald de Reins e Milun, sun cusin;
+174	E si i furent e Gerers e Gerin;
+175	Ensembl' od els li quens Rollant i vint,
+176	E Oliver, li proz e li gentilz;
+177	Des Francs de France en i ad plus de mil.
+178	Guenes i vint, ki la traïsun fist.
+179	Des ore cumencet le cunseill que mal prist. AOI.
+
+Laisse XIII
+180	«Seignurs barons,» dist li emperere Carles,
+181	«Li reis Marsilie m'ad tramis ses messages;
+182	De sun aveir me voelt duner grant masse,
+183	Urs e leuns e veltres caeignables,
+184	Set cenz cameilz e mil hosturs muables,
+185	Quatre cenz mulz cargez del ór d'Arabe,
+186	Avoec iço plus de cinquante care;
+187	Mais il me mandet que en France m'en alge:
+188	Il me sivrat ad Aís, a mun estage,
+189	Si recevrat la nostre lei plus salve;
+190	Chrestiens ert, de mei tendrat ses marches;
+191	Mais jo ne sai quels en est sis curages.»
+192	Dient Franceis: «Il nus i cuvent guarde!» AOI.
+
+Laisse XIV
+193	Li empereres out sa raisun fenie.
+194	Li quens Rollant, ki ne l'otriet mie,
+195	En piez se drecet, si li vint cuntredire.
+196	Il dist al rei: «Ja mar crerez Marsilie.
+197	Set anz [ad] pleins, que en Espaigne venimes;
+198	Jo vos cunquis e Noples e Commibles,
+199	Pris ai Valterne e la tere de Pine
+200	E Balasgued e Tuele e Sezilie.
+201	Li reis Marsilie i fist mult que traïtre:
+202	De ses pai[ens il vus] enveiat quinze,
+203	Cha(n)cuns portout une branche d'olive;
+204	Nuncerent vos cez paroles meïsme.
+205	A vos Franceis un cunseill en presistes:
+206	Loerent vos alques de legerie.
+207	Dous de voz cuntes al paien tramesistes,
+208	L'un fut Basan e li altres Basilies;
+209	Les chef en prist es puis desuz Haltilie.
+210	Faites la guer[re] cum vos l'avez enprise:
+211	En Sarraguce menez vostre ost banie,
+212	Metez le sege a tute vostre vie,
+213	Si vengez cels que li fels fist ocire!» AOI.
+
+Laisse XV
+214	Li empe[re]re en tint sun chef enbrunc,
+215	Si duist sa barbe, afaitad sun gernun,
+216	Ne ben ne mal ne respunt sun nevuld.
+217	Franceis se taisent ne mais que Guenelun,
+218	En piez se drecet, si vint devant Carlun,
+219	Mult fierement cumencet sa raisun,
+220	E dist al rei: «Ja mar crerez bricun,
+221	Ne mei ne altre, se de vostre prod nun.
+222	Quant ço vos mandet li reis Marsiliun,
+223	Qu'il devendrat jointes ses mains tis hom,
+224	E tute Espaigne tendrat par vostre dun,
+225	Puis recevrat la lei que nus tenum,
+226	Ki ço vos lodet que cest plait degetuns,
+227	Ne li chalt, sire, de quel mort nus muriuns.
+228	Cunseill d orguill n'est dreiz que a plus munt,
+229	Laissun les fols, as sages nus tenuns.» AOI.
+
+Laisse XVI
+230	Apres iço i est Neimes venud;
+231	Meillor vassal n'aveit en la curt nul,
+232	E dist al rei: «Ben l'avez entendud,
+233	Guenes li quens ço vus ad respondud,
+234	Saveir i ad, mais qu'il seit entendud.
+235	Li reis Marsilie est de guere vencud:
+236	Vos li avez tuz ses castels toluz,
+237	Od voz caables avez fruiset ses murs,
+238	Ses citez arses e ses humes vencuz;
+239	Quant il vos mandet, qu'aiez mercit de lui,
+240	Pecchet fereit, ki dunc li fesist plus,
+241	U par ostage vos (en) voelt faire soürs;
+242	Ceste grant guerre ne deit munter a plus.»
+243	Dient Franceis: «Ben ad parlet li dux.» AOI.
+
+Laisse XVII
+244	- «Seignurs baruns, qui i enveieruns
+245	En Sarraguce al rei Marsiliuns?»
+246	Respunt dux Neimes: «Jo irai par vostre dun!
+247	Livrez m'en ore le guant e le bastun.»
+248	Respunt li reis: «Vos estes saives hom;
+249	Par ceste barbe e par cest men gernun,
+250	Vos n'irez pas uan de mei si luign.
+251	Alez sedeir, quant nuls ne vos sumunt.»
+
+Laisse XVIII
+252	- «Seignurs baruns, qui i purruns enveier
+253	Al Sarrazin ki Sarraguce tient?»
+254	Respunt Rollant: «Jo i puis aler mult ben!»
+255	- «Nu ferez certes!» dist li quens Oliver;
+256	«Vostre curages est mult pesmes e fiers;
+257	Jo me crendreie, que vos vos meslisez.
+258	Se li reis voelt, jo i puis aler ben.»
+259	Respunt li reis: «Ambdui vos en taisez!
+260	Ne vos ne il n'i porterez les piez.
+261	Par ceste barbe que veez [blancheier],
+262	Li duze per mar i serunt jugez!»
+263	Franceis se taisent: as les vus aquisez.
+
+Laisse XIX
+264	Turpins de Reins en est levet del renc,
+265	E dist al rei: «Laisez ester voz Francs!
+266	En cest païs avez estet set anz;
+267	Mult unt oüd e peines e ahans.
+268	Dunez m'en, sire, le bastun e le guant,
+269	E jo irai al Sarazin en Espaigne,
+270	Sin vois vedeir alques de sun semblant.»
+271	Li empereres respunt par maltalant:
+272	«Alez sedeir desur cel palie blanc!
+273	N'en parlez mais, se jo nel vos cumant!» AOI.
+
+Laisse XX
+274	- «Francs chevalers,» dist li emperere Carles,
+275	«Car m'eslisez un barun de ma marche,
+276	Qu'a Marsiliun me portast mun message.»
+277	Ço dist Rollant: «Ço ert Guenes, mis parastre.»
+278	Dient Franceis: «Car il le poet ben faire;
+279	Se lui lessez, n'i trametrez plus saive.»
+280	E li quens Guenes en fut mult anguisables;
+281	De sun col getet ses grandes pels de martre,
+282	E est remes en sun blialt de palie.
+283	Vairs out [les oilz] e mult fier lu visage,
+284	Gent out le cors e les costez out larges;
+285	Tant par fut bels tuit si per l'en esguardent.
+286	Dist a Rollant: «Tut fol, pur quei t'esrages?
+287	Ço set hom ben que jo sui tis parastres;
+288	Si as juget qu'a Marsiliun en alge!
+289	Se Deus ço dunet que jo de la repaire,
+290	Jo t'en muvra[i] un si grant contr[a]ire
+291	Ki durerat a trestut tun edage.»
+292	Respunt Rollant: «Orgoill ói e folage.
+293	Ço set hom ben, n'ai cure de manace;
+294	Mai[s] saives hom, il deit faire message:
+295	Si li reis voelt, prez sui por vus le face.» AOI.
+
+Laisse XXI
+296	Guenes respunt: «Pur mei n'iras tu mie!
+297	Tu n'ies mes hom ne jo ne sui tis sire.
+298	Carles comandet que face sun servise:
+299	En Sarraguce en irai a Marsilie;
+300	Einz i f[e]rai un poi de [le]gerie,
+301	Que jo n'esclair ceste meie grant ire.»
+302	Quant l'ot Rollant, si cumençat a rire. AOI.
+
+Laisse XXII
+303	Quant ço veit Guenes que ore s'en rit Rollant,
+304	Dunc ad tel doel pur poi d'ire ne fent,
+305	A ben petit que il ne pert le sens;
+306	E dit al cunte: «Jo ne vus aim nient;
+307	Sur mei avez turnet fals jugement.
+308	Dreiz emperere, veiz me ci en present,
+309	Ademplir voeill vostre comandement.» AOI.
+
+Laisse XXIII
+310	«En Sarraguce sai ben, [qu']aler m'estoet.
+311	Hom ki la vait, repairer ne s'en poet.
+312	Ensurquetut si ai jo vostre soer,
+313	Sin ai un filz, ja plus bels n'en estoet:
+314	Ço est Baldewin,» ço dit, «ki ert prozdoem.
+315	A lui lais jo mes honurs e mes fieus.
+316	Gua[r]dez le ben, ja nel verrai des oilz.»
+317	Carles respunt: «trop avez tendre coer.
+318	Puisquel comant, aler vus en estoet.»
+
+Laisse XXIV
+319	Ço dist li reis: «Guenes venez avant. AOI.
+320	Si recevez le bastun e lu guant.
+321	Oït l'avez, sur vos le jugent Franc.»
+322	- «Sire,» dist Guenes, «ço ad tut fait Rollant!
+323	Ne l'amerai a trestut mun vivant,
+324	Ne Oliver, por ço qu'il est si cumpainz;
+325	Li duze per, por [ço] qu'il l'aiment tant,
+326	Desfi les ci, sire, vostre veiant.»
+327	Ço dist li reis: «Trop avez maltalant.
+328	Or irez vos certes, quant jol cumant.»
+329	- «Jo i puis aler, mais n'i avrai guarant: AOI.
+330	Nu l'out Basilies ne sis freres Basant.»
+
+Laisse XXV
+331	Li empereres li tent sun guant le destre;
+332	Mais li quens Guenes iloec ne volsist estre:
+333	Quant le dut prendre, si li caït a tere.
+334	Dient Franceis: «Deus! que purrat ço estre?
+335	De cest message nos avendrat grant perte.»
+336	- «Seignurs» dist Guenes, «vos en orrez noveles!»
+
+Laisse XXVI
+337	- «Sire,» dist Guenes, «dunez mei le cungied;
+338	Quant aler dei, n'i ai plus que targer.»
+339	Ço dist li reis: «Al Jhesu e al mien!»
+340	De sa main destre l'ad asols e seignet,
+341	Puis li livrat le bastun e le bref.
+
+Laisse XXVII
+342	Guenes li quens s'en vait a sun ostel,
+343	De guarnemenz se prent a cunreer,
+344	De ses meillors que il pout recuvrer:
+345	Esperuns d'or ad en ses piez fermez,
+346	Ceint Murglies, s'espee, a sun costed;
+347	En Tachebrun, sun destrer est munted;
+348	L'estreu li tint sun uncle Guinemer.
+349	La veïsez tant chevaler plorer,
+350	Ki tuit li dient «Tant mare fustes, ber!
+351	En (la) cort al rei mult i avez ested,
+352	Noble vassal vos i solt hom clamer.
+353	Ki ço jugat, que doüsez aler
+354	Par Charlemagne n'er(cs) guariz ne tensez.
+355	Li quens Rollant nel se doüst penser,
+356	Que estrait estes de mult grant parented.»
+357	Enpres li dient: «Sire, car nos menez!»
+358	Ço respunt Guenes: «Ne placet Damnedeu!
+359	Mielz est que sul moerge que tant bon chevaler.
+360	En dulce France, seignurs, vos en irez:
+361	De meie part ma muiller saluez,
+362	E Pinabel, mun ami e mun per,
+363	E Baldewin, mun filz que vos savez,
+364	E lui aidez e pur seignur le tenez.»
+365	Entret en sa veie, si s'est achiminez. AOI.
+
+Laisse XXVIII
+366	Guenes chevalchet suz une olive halte,
+367	Asemblet s'est as sarrazins messag[es].
+368	Mais Blancandrins ki envers lu s'atarget;
+369	Par grant saveir parolet li uns a l'altre.
+370	Dist Blancandrins: «Merveilus hom est Charles,
+371	Ki cunquist Puille e trestute Calabre;
+372	Vers Engletere passat il la mer salse,
+373	Ad oes seint Perre en cunquist le chevage:
+374	Que nus requert ça en la nostre marche?»
+375	Guenes respunt: «Itels est sis curages,
+376	Jamais n'ert hume ki encuntre lui vaille.» AOI.
+
+Laisse XXIX
+377	Dist Blancandrins: «Francs sunt mult gentilz home;
+378	Mult grant mal funt e [cil] duc e cil cunte
+379	A lur seignur, ki tel cunseill li dunent:
+380	Lui e altrui travaillent, e cunfundent.»
+381	Guenes respunt: «Jo ne sai veirs nul hume,
+382	Ne mes Rollant, ki uncore en avrat hunte.
+383	Er matin sedeit li emperere suz l'umbre;
+384	Vint i ses nies, out vestue sa brunie,
+385	E out predet dejuste Carcasonie;
+386	En sa main tint une vermeille pume:
+387	«Tenez bel sire,» dist Rollant a sun uncle,
+388	«De trestuz reis vos present les curunes.»
+389	Li soens orgoilz le devreit ben cunfundre,
+390	Kar chascun jur de mort [il] s'abandunet.
+391	Seit, ki l'ociet, tute pais puis avriúmes.» AOI.
+
+Laisse XXX
+392	Dist Blancandrins: «Mult est pesmes Rollant,
+393	Ki tute gent voelt faire recreant,
+394	E tutes teres met en chalengement!
+395	Par quele gent quiet il espleiter tant?»
+396	Guenes respunt: «Par la franceise gent.
+397	Il l'a[i]ment tant ne li faldrunt nient;
+398	Or e argent lur met tant en present,
+399	Muls e destrers, e palies e guarnemenz;
+400	L'emperere meïsmes ad tut a sun talent.
+401	Cunquerrat li les teres d'ici qu'en Orient.» AOI.
+
+Laisse XXXI
+402	Tant chevalcherent Guenes e Blancandrins,
+403	Que l'un a l'altre la sue feit plevit,
+404	Que il querreient, que Rollant fust ocis.
+405	Tant chevalcherent e veies e chemins,
+406	Que en Sarraguce descendent suz un if.
+407	Un faldestoet out suz l'umbre d'un pin;
+408	Esvolupet fut d'un palie alexandrin:
+409	La fut li reis ki tute Espaigne tint;
+410	Tut entur lui vint milie Sarrazins.
+411	N'i ad celoi ki mot sunt ne mot tint,
+412	Pur les nuveles qu'il vuldreient oïr.
+413	Atant as vos Guenes e Blanchandrins.
+
+Laisse XXXII
+414	Blancandrins vint devant l'empereür;
+415	Par le puig[n] tint le cunte Guenelun,
+416	E dist al rei: «Salvez seiez de Mahun
+417	E d'Apollin, qui seintes leis tenuns!
+418	Vostre message fesime[s] a Charlun.
+419	Ambes ses mains en levat cuntre munt,
+420	Loat sun Deu, ne fist altre respuns.
+421	Ci vos enveiet un sun noble barun,
+422	Ki est de France, si est mult riches hom:
+423	Par lui orrez si avrez pais u nun.»
+424	Respunt Marsilie: «Or diet, nus l'orrum!» AOI.
+
+Laisse XXXIII
+425	Mais li quens Guenes se fut ben purpenset.
+426	Par grant saver cumencet a parler
+427	Cume celui ki ben faire le set,
+428	E dist al rei: «Salvez seiez de Deu
+429	Li Glorius, qui devum aürer!
+430	Iço vus mandet Carlemagnes, li ber,
+431	Que recevez seinte chrestientet;
+432	Demi Espaigne vos voelt en fiu duner.
+433	Se cest acorde ne vulez otrier,
+434	Pris e liez serez par poested;
+435	Al siege ad Ais en serez amenet,
+436	Par jugement serez iloec finet;
+437	La murrez vus a hunte e a viltet.»
+438	Li reis Marsilies en fut mult esfreed.
+439	Un algier tint, ki d'or fut enpenet,
+440	Ferir l'en volt, se n'en fust desturnet. AOI.
+
+Laisse XXXIV
+441	Li reis Marsilies ad la culur muee;
+442	De sun algeir ad la hanste crollee.
+443	Quant le vit Guenes, mist la main a l'espee,
+444	Cuntre dous deie l'ad del furrer getee,
+445	Si li ad dit: «Mult estes bele e clere!
+446	Tant vus avrai en curt a rei portee!
+447	Ja nel dirat de France li emperere,
+448	Que suls i moerge en l'estrange cuntree,
+449	Einz vos avrunt li meillor comperee.»
+450	Dient paien: «Desfaimes la mellee!»
+
+Laisse XXXV
+451	Tuit li preierent li meillor Sarrazin,
+452	Qu'el faldestoed s'es[t] Marsilies asis.
+453	Dist l'algalifes: «Mal nos avez baillit,
+454	Que li Franceis asmastes a ferir;
+455	Vos le doüssez esculter e oïr.»
+456	- «Sire,» dist Guenes, «mei l'avent a suffrir;
+457	Jo ne lerreie, por l'or que Deus fist
+458	Ne por tut l'aveir, ki seit en cest païs,
+459	Que jo ne li die, se tant ai de leisir,
+460	Que Charles li mandet, li reis poesteïfs,
+461	Par mei li mandet, sun mortel enemi.»
+462	Afublez est d'un mantel sabelin,
+463	Ki fut cuvert d'une palie alexandrin.
+464	Getet le a tere, sil receit Blancandrin;
+465	Mais de s'espee ne volt mie guerpir;
+466	En sun puign destre par l'orie punt la tint.
+467	Dient paien: «Noble baron ad ci!» AOI.
+
+Laisse XXXVI
+468	Envers le rei s'est Guenes aproismet,
+469	Si li ad dit: «A tort vos curuciez,
+470	Quar ço vos mandet Carles, ki France tient,
+471	Que recevez la lei de chrestiens;
+472	Demi Espaigne vus durat il en fiet.
+473	L'altre meitet avrat Rollant, sis nies:
+474	Mulz orguillos parçuner i avrez!
+475	Si ceste acorde ne volez otrier,
+476	En Sarraguce vus vendrat aseger;
+477	Par poestet serez pris e liez;
+478	Menet serez . . . [tut] dreit ad Ais le siet:
+479	Vus n'i avrez palefreid ne destrer,
+480	Ne mul ne mule que puissez chevalcher;
+481	Getet serez sur un malvais sumer.
+482	Par jugement iloec perdrez le chef.
+483	Nostre emperere vus enveiet cest bref.»
+484	El destre poign al paien l'ad liv(e)ret.
+
+Laisse XXXVII
+485	Marsilies fut esculurez de l'ire;
+486	Freint le seel, getet en ad la cire,
+487	Guardet al bref, vit la raisun escrite:
+488	«Carle me mandet, ki France ad en baillie,
+489	Que me remembre de la dolur e (de) l'ire,
+490	Ço est de Basan e de sun frere Basilie,
+491	Dunt pris les chefs as puis de Haltoíe;
+492	Se de mun cors voeil aquiter la vie,
+493	Dunc li envei mun uncle, l'algalife;
+494	Altrement ne m'amerat il mie.»
+495	Apres parlat ses filz envers Marsilies,
+496	E dist al rei: «Guenes ad dit folie;
+497	Tant ad erret nen est dreiz que plus vivet.
+498	Livrez le mei, jo en ferai la justise.»
+499	Quant l'oït Guenes, l'espee en ad branlie;
+500	Vait s'apuier suz le pin a la tige.
+
+Laisse XXXVIII
+501	Enz el verger s'en est alez li reis,
+502	Ses meillors humes enmeinet ensembl'od sei:
+503	E Blancandrins i vint, al canud peil,
+504	E Jurfaret, ki est ses filz e ses heirs,
+505	E l'algalifes, sun uncle e sis fedeilz.
+506	Dist Blancandrins: «Apelez le Franceis,
+507	De nostre prod m'ad plevie sa feid.»
+508	Ço dist li reis: «E vos l'i ameneiz.»
+509	E Guenes (l')ad pris par la main destre ad deiz,
+510	Enz el verger l'en meinet josqu'al rei.
+511	La purparolent la traïson seinz dreit. AOI.
+
+Laisse XXXIX
+512	«Bel sire Guenes,» ço li ad dit Marsilie,
+513	«Jo vos ai fait alques de legerie,
+514	Quant por ferir vus demustrai grant ire.
+515	Guaz vos en dreit par cez pels sabelines;
+516	Melz en valt l'or que ne funt cinc cenz livres:
+517	Einz demain noit en iert bele l'amendise.»
+518	Guenes respunt: «Jo nel desotrei mie.
+519	Deus se lui plaist, a bien le vos mercie!» AOI.
+
+Laisse XL
+520	Ço dist Marsilies: «Guenes par veir sacez,
+521	En talant ai que mult vos voeill amer,
+522	De Carlemagne vos voeill oïr parler.
+523	Il est mult vielz, si ad sun tens uset;
+524	Men escient dous cenz anz ad passet.
+525	Par tantes teres ad sun cors demened,
+526	Tanz [colps] ad pris sur sun escut bucler,
+527	Tanz riches reis cunduit a mendisted:
+528	Quant ert il mais recreanz d'osteier?»
+529	Guenes respunt: «Carles n'est mie tels.
+530	N'est hom kil veit e conuistre le set
+531	Que ço ne diet que l'emperere est ber.
+532	Tant nel vos sai ne preiser ne loer
+533	Que plus n'i ad d'onur e de bontet.
+534	Sa grant valor, kil purreit acunter?
+535	De tel barnage l'ad Deus enluminet,
+536	Meilz voelt murir que guerpir sun barnet.»
+
+Laisse XLI
+537	Dist li paiens: «Mult me puis merveiller
+538	De Carlemagne, ki est canuz e vielz!
+539	Men escientre dous cenz anz ad e mielz.
+540	Par tantes teres ad sun cors traveillet,
+541	Tanz colz ad pris de lances e d'espiet,
+542	Tanz riches reis cunduiz a mendistiet:
+543	Quant ert il mais recreanz d'osteier?»
+544	- «Ço n'iert,» dist Guenes: «tant cum vivet sis niés:
+545	N'at tel vassal suz la cape del ciel.
+546	Mult par est proz sis cumpainz Oliver.
+547	Les .XII. pers, que Carles ad tant chers,
+548	Funt les enguardes a .XX. milie chevalers.
+549	Soürs est Carles, que nuls home ne crent.» AOI.
+
+Laisse XLII
+550	Dist li Sarrazins: «Merveille en ai grant
+551	De Carlemagne, ki est canuz e blancs!
+552	Mien escientre plus ad de .II.C. anz.
+553	Par tantes teres est alet cunquerant,
+554	Tanz colps ad pris de bons espiez trenchanz,
+555	Tanz riches reis morz e vencuz en champ:
+556	Quant ier il mais d'osteier recreant?»
+557	- «Ço n'iert,» dist Guenes, «tant cum vivet Rollant:
+558	N'ad tel vassal d'ici qu en Orient.
+559	Mult par est proz Oliver, sis cumpainz;
+560	Li .XII. per, que Carles aimet tant,
+561	Funt les enguardes a .XX. milie de Francs,
+562	Soürs est Carlles, ne (cre) crent hume vivant.» AOI.
+
+Laisse XLIII
+563	- «Bel sire Guenes» dist marsilies li reis,
+564	«Jo ai tel gent, plus bele ne verreiz;
+565	Quarte cenz milie chevalers puis aveir.
+566	Puis m'en cumbatre a Carlles e a Franceis?»
+567	Guenes respunt: «Ne vus a ceste feiz!
+568	De voz paiens mult grant perte i avreiz.
+569	Lessez (la) folie, tenez vos al saveir.
+570	L'empereür tant li dunez aveir,
+571	N'i ait Franceis ki tot ne s'en merveilt.
+572	Par .XX. hostages que li enveiereiz
+573	En dulce France s'en repairerat li reis;
+574	Sa rereguarde lerrat derere sei:
+575	Iert i sis nies, li quens Rollant, (...) ço crei,
+576	E Oliver, li proz e li curteis.
+577	Mort sunt li cunte, se est ki mei en creit.
+578	Carlles verrat sun grant orguill cadeir;
+579	N'avrat talent, que ja mais vus guerreit.» AOI.
+
+Laisse XLIV
+580	- «Bel sire Guenes,[» ço dist li reis Marsilies,]
+581	«Cum faitement purrai Rollant ocire?»
+582	Guenes respont: «Ço vos sai jo ben dire.
+583	Li reis serat as meillors porz de Sizer;
+584	Sa rereguarde avrat detres sei mise;
+585	Iert i sis nies, li quens Rollant, li riches,
+586	E Oliver, en qui il tant se fiet;
+587	.XX. milie Francs unt en lur cumpaignie.
+588	De voz paiens lur enveiez .C. milie:
+589	Une bataille lur i rendent cil primes;
+590	La gent de France iert blecee e blesmie;
+591	Nel di por ço, des voz iert la martirie.
+592	Altre bataille lur livrez de meïsme:
+593	De quel que seit Rollant n'estuertrat mie.
+594	Dunc avrez faite gente chevalerie;
+595	N'avrez mais guere en tute vostre vie.» AOI.
+
+Laisse XLV
+596	- «Chi purreit faire, que Rollant i fust mort,
+597	Dunc perdreit Carles le destre braz del cors,
+598	Si remeindreient les merveilluses óz;
+599	N'asemblereit jamais Carles si grant esforz;
+600	Tere Major remeindreit en repos.»
+601	Quan l'ot Marsilie, si l'ad baiset el col,
+602	Puis si cumencet a venir ses tresors. AOI.
+
+Laisse XLVI
+603	Ço dist Marsilies: «Qu'en parlereient il plus?
+604	Cunseill n'est proz dunt hume n'est sevus.
+605	La traïsun me jurrez de Rollant si illi est.»
+606	Ço respunt Guenes: «Issi seit cum vos plaist!»
+607	Sur les reliques de s'espee Murgleis,
+608	La traïsun jurat, e si s'en est forsfait. AOI.
+
+Laisse XLVII
+609	Un faldestoed i out d'un olifant;
+610	Marsilies fait porter un livre avant:
+611	La lei i fut Mahum e Tervagan.
+612	Ço ad juret li Sarrazins espans:
+613	Se en rereguarde troevet le cors Rollant,
+614	Cumbatrat sei a trestute sa gent,
+615	E, se il poet, murrat i veirement.
+616	Guenes respunt: «Ben seit vostre comant!» AOI.
+
+Laisse XLVIII
+617	A tant i vint uns paiens, Valdabruns:
+618	Icil en vait al rei Marsiliun;
+619	Cler en riant l'ad dit a Guenelun:
+620	«Tenez m'espee, meillur n'en at nuls hom;
+621	Entre les helz ad plus de mil manguns.
+622	Par amistiez, bel sire, la vos duins,
+623	Que (v)[n]os aidez de Rollant le barun,
+624	Qu'en rereguarde trover le poüsum.»
+625	- «Ben serat fait,» li quens Guenes respunt.
+626	Puis se baiserent es vis e es mentuns.
+
+Laisse XLIX
+627	Apres i vint un paien, Climorins.
+628	Cler en riant a Guenelun l'ad dit:
+629	«Tenez mun helme, unches meillor ne vi.
+630	Si nos aidez de Rollant li marchis,
+631	Par quel mesure le poüssum hunir.»
+632	- «Ben serat fait,» Guenes respundit.
+633	Puis se baiserent es buches e es vis. AOI.
+
+Laisse L
+634	A tant i vint la reine Bramimunde.
+635	«Jo vos aim mult, sire,» dist ele al cunte,
+636	«Car mult vos priset mi sire e tuit si hume.
+637	A vostre femme enveierai dous nusches;
+638	Bien i ad or, matices e jacunces:
+639	Eles valent mielz que tut l'aveir de Rume,
+640	Vostre emperere si bones n'en out unches.»
+641	Il les ad prises, en sa hoese les butet, AOI.
+
+Laisse LI
+642	Li reis apelet Malduit sun tresorer:
+643	«L'aveir Carlun est il apareillez?»
+644	E cil respunt: «Oïl, sire, asez bien:
+645	.VII.C. cameilz, d'or e argent cargiez,
+646	E .XX. hostages, des plus gentilz desuz cel.» AOI.
+
+Laisse LII
+647	Marsilies tint Guen[elun] par l'espalle;
+648	Si li ad dit: «Mult par ies ber e sage.
+649	Par cele lei que vos tenez plus salve,
+650	Guardez de nos ne turnez le curage.
+651	De mun aveir vos voeill dunner grant masse:
+652	.X. muls cargez del plus fin or d'Arabe;
+653	Jamais n'iert an, altretel ne vos face.
+654	Tenez les clefs de ceste citet large,
+655	Le grant aveir en presentez al rei Carles,
+656	Pois me jugez Rollant a rereguarde.
+657	Sel pois trover a port ne a passage,
+658	Liverrai lui une mortel bataille.»
+659	Guenes respunt: «Mei est vis que trop targe!»
+660	Pois est munted, entret en sun veiage. AOI.
+
+Laisse LIII
+661	Li empereres aproismet sun repaire.
+662	Venuz en est a la citet de Galne.
+663	Li quens Rollant il l'ad e prise e fraite;
+664	Puis icel jur en fut cent anz deserte.
+665	De Guenelun atent li reis nuveles,
+666	E le treüd d'Espaigne, la grant tere.
+667	Par main en l'albe, si cum li jurz esclairet,
+668	Guenes li quens est venuz as herberges. AOI.
+
+Laisse LIV
+669	Li empereres est par matin levet;
+670	Messe e matines ad li reis escultet.
+671	Sur l'erbe verte estut devant sun tref.
+672	Rollant i fut e Oliver li ber,
+673	Neimes li dux e des altres asez.
+674	Guenes i vint, li fels, li parjurez.
+675	Par grant veisdie cumencet a parler,
+676	E dist al rei: «Salvez seiez de Deu!
+677	De Sarraguce ci vos aport les clefs;
+678	Mult grant aveir vos en faz amener,
+679	E .XX. hostages; faites les ben guarder!
+680	E si vos mandet reis Marsilies li ber,
+681	De l'algalifes nel devez pas blasmer,
+682	Kar a mes oilz vi .IIII.C. milie armez,
+683	Halbers vestuz, alquanz healmes fermez,
+684	Ceintes espees as punz d'or neielez,
+685	Ki l'en cunduistrent tresqu'en la mer:
+686	De Marcilie s'en fuient por la chrestientet,
+687	Que il ne voelent ne tenir ne guarder.
+688	Einz qu'il oüssent .IIII. liues siglet,
+689	Sis aquillit e tempeste e ored:
+690	La sunt neiez, jamais nes en verrez;
+691	Se il fust vif, jo l'oüsse amenet.
+692	Del rei paien, sire, par veir creez,
+693	Ja ne verrez cest premer meis passet
+694	Qu'il vos sivrat en France le regnet,
+695	Si recevrat la lei que vos tenez,
+696	Jointes ses mains iert vostre comandet;
+697	De vos tendrat Espaigne le regnet.»
+698	Ço dist li reis: «Graciet en seit Deus!
+699	Ben l'avez fait, mult grant prod i avrez.»
+700	Par mi cel ost funt mil grailles suner;
+701	Franc desherbergent, funt lur sumers trosser:
+702	Vers dulce France tuit sunt achiminez. AOI.
+
+Laisse LV
+703	Carles li magnes ad Espaigne guastede
+704	Les castels pris, (. . .) les citez violees.
+705	Ço dit li reis que sa guere out finee.
+706	Vers dulce France chevalchet l'emperere.
+707	Li quens Rollant ad l'enseigne fermee
+708	En sur un tertre cuntre le ciel levee.
+709	Franc se herbergent par tute la cuntree.
+710	Paien chevalchent par cez greignurs valees,
+711	Halbercs vestuz e tres bien fermeez
+712	Healmes lacez e ceintes lur espees,
+713	Escuz as cols e lances adubees.
+714	En un bruill par sum les puis remestrent,
+715	.IIII.C. milie atendent l'ajurnee.
+716	Deus! quel dulur que li Franceis nel sevent! AOI.
+
+Laisse LVI
+717	Tresvait le jur, la noit est aserie.
+718	Carles se dort, li empereres riches.
+719	Sunjat qu'il eret al greignurs porz de Sizer,
+720	Entre ses poinz teneit sa hanste fraisnine.
+721	Guenes li quens l'ad sur lui saisie;
+722	Par tel air l'at estrussee e brandie,
+723	Qu'envers le cel en volent les escicles.
+724	Carles se dort, qu'il ne s'esveillet mie.
+
+Laisse LVII
+725	Apres iceste altre avisiun sunjat:
+726	Qu'il en France ert, a sa capele, ad Ais,
+727	El destre braz li morst uns vers si mals.
+728	Devers Ardene vit venir uns leuparz,
+729	Sun cors demenie mult fierement asalt.
+730	D'enz de la sale uns veltres avalat,
+731	Que vint a Carles le galops e les salz,
+732	La destre oreille al premer uer trenchat,
+733	Ireement se cumbat al lepart.
+734	Dient Franceis, que grant bataille i ad;
+735	Il ne sevent, liquels d'els la veintrat.
+736	Carles se dort, mie ne s'esveillat. AOI.
+
+Laisse LVIII
+737	Tresvait la noit, e apert la clere albe.
+738	Par mi cel host suvent e menu reguarded:.
+739	Li empereres mult fierement chevalchet.
+740	«Seignurs barons,» dist li emperere Carles,
+741	«Veez les porz e les destreiz passages:
+742	Kar me jugez, ki ert en la rereguarde.»
+743	Guenes respunt: «Rollant cist miens fillastre:
+744	N'avez baron de si grant vasselage.»
+745	Quant l'ot li reis, fierement le reguardet,
+746	Si li ad dit: «Vos estes vifs diables.
+747	El cors vos est entree mortel rage.
+748	E ki serat devant mei en l'ansguarde?»
+749	Guenes respunt: «Oger de Denemarche:
+750	N'avez barun, ki mielz de lui la facet.» AOI.
+
+Laisse LIX
+751	Li quens Rollant quant il s'oït juger,
+752	Dunc ad parled a lei de chevaler:
+753	«Sire parastre, mult vos dei aveir cher:
+754	La rereguarde avez sur mei jugiet.
+755	N'i perdrat Carles, li reis ki France tient,
+756	Men escientre palefreid ne destrer,
+757	Ne mul ne mule que deiet chevalcher,
+758	Ne n'i perdrat ne runcin ne sumer,
+759	Que as espees ne seit einz eslegiet.»
+760	Guenes respunt: «Veir dites, jol sai bien.» AOI.
+
+Laisse LX
+761	Quant ot Rollant, qu'il ert en la rereguarde,
+762	Ireement parlat a sun parastre:
+763	«Ahi! culvert, malvais hom de put aire,
+764	Qui[d]ás, le guant me caïst en la place,
+765	Cume fist a tei le bastun devant Carle?» AOI.
+
+Laisse LXI
+766	- «Dreiz emperere,» dist Rollant le barun,
+767	«Dunez mei l'arc, que vos tenez el poign.
+768	Men escientre nel me reproverunt
+769	Que il me chedet, cum fist a Guenelun
+770	De sa main destre, quant reçut le bastun.»
+771	Li empereres en tint sun chef enbrunc,
+772	Si duist sa barbe, e detoerst sun gernun;
+773	Ne poet muer que des oilz ne plurt.
+
+Laisse LXII
+774	Anpres iço i est Neimes venud:
+775	Meillor vassal n'out en la curt de lui;
+776	E dist al rei: «Ben l'avez entendut;
+777	Li quens Rollant, il est mult irascut.
+778	La rereguarde est jugee (...) sur lui:
+779	N'avez baron ki jamais la remut.
+780	Dunez li l'arc que vos avez tendut,
+781	Si li truvez ki tres bien li aiut!»
+782	Li reis li dunet, e Rollant l'a reçut.
+
+Laisse LXIII
+783	Li empereres apelet ses nies Rollant:
+784	«Bel sire nies, or savez veirement,
+785	Demi mun host vos lerrai en present.
+786	Retenez les, ço est vostre salvement.»
+787	Ço dit li quens: «Jo n'en ferai nient;
+788	Deus me cunfunde, se la geste en desment!
+789	XX. milie Francs retendrai ben vaillanz.
+790	Passez les porz trestut soürement:
+791	Ja mar crendrez nul hume a mun vivant!» AOI.
+
+Laisse LXIV
+792	Li quens Rollant est muntet el destrer.
+793	Cuntre lui vient sis cumpainz Oliver;
+794	Vint i Gerins e li proz quens Gerers,
+795	E vint i Otes, si i vint Berengers,
+796	E vint i Astors e Anseïs li veillz;
+797	Vint i Gerart de Rossillon li fiers;
+798	Venuz i est li riches dux Gaifiers.
+799	Dist l'arcevesque: «Jo irai, par mun chef!»
+800	- «E jo od vos,» ço dist li quens Gualters;
+801	«Hom sui Rollant, jo ne li dei faillir.»
+802	Entr'e[l]s eslisent .XX. milie chevalers. AOI.
+
+Laisse LXV
+803	Li quens Rollant Gualter de l'Húm apelet:
+804	«Pernez mil Francs de France, nostre tere,
+805	Si purpernez les deserz e les tertres,
+806	Que l'emperere nis un des soens n'i perdet.»
+807	Respunt gualter: «Pur vos le dei ben faire.»
+808	Od mil Franceis de France, la lur tere,
+809	Gualter desrenget les destreiz e les tertres,
+810	N'en descendrat pur malvaises nuveles,
+811	Enceis qu'en seient. VII.C. espees traites.
+812	Reis Almaris, del regne de Belferne
+813	Une bataille lur livrat le jur pesme. AOI.
+
+Laisse LXVI
+814	Halt sunt li pui e li val tenebrus,
+815	Les roches bises, les destreiz merveillus.
+816	Le jur passerent Franceis a grant dulur;
+817	De .XV. lius en ot hom la rimur.
+818	Puis que il venent a la Tere Majur,
+819	Virent Guascuigne, la tere lur seignur.
+820	Dunc le remembret des fius e des honurs,
+821	E des pulcele e des gentilz oixurs:
+822	Cel nen i ad ki de pitet ne plurt.
+823	Sur tuz les altres est Carles anguissus:
+824	As porz d'Espaigne ad lesset sun nevold.
+825	Pitet l'en prent, ne poet muer n'en plurt. AOI.
+
+Laisse LXVII
+826	Li .XII. per sunt remes en Espaigne.
+827	.XX. milie F(r)rancs unt en lur cumpaigne,
+828	N'en unt poür ne de murir dutance.
+829	Li emperere s'en repairet en France;
+830	Suz sun mantel en fait la cuntenance.
+831	Dejuste lui li dux Neimes chevalchet
+832	E dit al rei: «De quei avez pesance?»
+833	Carles respunt: «Tort fait kil me demandet!
+834	Si grant doel ai ne puis muer nel pleigne.
+835	Par Guenelun serat destruite France,
+836	Enoit m'avint un avisiun d'angele,
+837	Que entre mes puinz me depeçout ma hanste,
+838	Chi ad juget mis nes a (la) rereguarde.
+839	Jo l'ai lesset en une estrange marche!
+840	Deus! se jol pert, ja n'en avrai escange!» AOI.
+
+Laisse LXVIII
+841	Carles li magnes ne poet muer n'en plurt.
+842	.C. milie Francs pur lui unt grant tendrur,
+843	E de Rollant merveilluse poür.
+844	Guen[e]s li fels en ad fait traïsun:
+845	Del rei paien en ad oüd granz duns,
+846	Or e argent, palies e ciclatuns,
+847	Muls e chevals e cameilz e leuns.
+848	Marsilies mandet d'Espaigne les baruns,
+849	Cuntes, vezcuntes e dux e almaçurs,
+850	Les amirafles e les filz as cunturs:
+851	.IIII.C. milie en ajustet en .III. jurz.
+852	En Sarraguce fait suner ses taburs;
+853	Mahumet levent en la plus halte tur.
+854	N'i ad paien nel prit e nel aort.
+855	Puis si chevalchent, par mult grant cuntençun,
+856	La Tere Certeine e les vals e les munz:
+857	De cels de France virent les gunfanuns.
+858	La rereguarde des .XII. cumpaignuns
+859	Ne lesserat bataille ne lur dunt.
+
+Laisse LXIX
+860	Li nies Marsilie, il est venuz avant,
+861	Sur un mulet od un bastun tuchant.
+862	Dist a sun uncle belement en riant:
+863	«Bel sire reis, jo vos ai servit tant,
+864	Sin ai oüt e peines e ahans,
+865	Faites batailles e vencues en champ!
+866	Dunez m'un feu, ço est le colp de Rollant;
+867	Jo l'ocirai a mun espiet trenchant.
+868	Se Mahumet me voelt estre guarant,
+869	De tute Espaigne aquiterai les pans
+870	Des porz d'Espaigne entresqu'a Durestant.
+871	Las serat Carles, si recrerrunt si Franc;
+872	Ja n'avrez mais guere en tut vostre vivant.»
+873	Li reis Marsilie l'en ad dunet le guant. AOI.
+
+Laisse LXX
+874	Li nies Marsilies tient le guant en sun poign,
+875	Sun uncle apelet de mult fiere raisun:
+876	«Bel sire reis, fait m'avez un grant dun.
+877	Eslisez mei .XII. de voz baruns,
+878	Sim cumbatrai as .XII. cumpaignuns.»
+879	Tut premerein l'en respunt Falsaron,
+880	Icil ert frere al rei Marsiliun:
+881	«Bel sires nies, e jo e vos [í]irum.
+882	Ceste bataille veirement la ferum:
+883	La rereguarde de la grant host Carlun,
+884	Il est juget que nus les ocirum.» AOI.
+
+Laisse LXXI
+885	Reis Corsalis, il est de l'altre part:
+886	Barbarins est e mult de males arz.
+887	Cil ad parlet a lei de bon vassal:
+888	Pur tut l'or Deu ne volt estre cuard [...]
+889	As vos poignant Malprimis de Brigant:
+890	Plus curt a piet que ne fait un cheval.
+891	Devant Marsilie cil s'escriet mult halt:
+892	«Jo cunduirai mun cors en Rencesvals;
+893	Se truis Rollant, ne lerrai que nel mat!»
+
+Laisse LXXII
+894	Uns amurafles i ad de Balaguez:
+895	Cors ad mult gent e le vis fier e cler;
+896	Puis que il est sur un cheval muntet,
+897	Mult se fait fiers de ses armes porter;
+898	De vasselage est il ben alosez;
+899	Fust chrestiens, asez oüst barnet.
+900	Devant Marsilie cil en est escriet:
+901	«En Rencesvals irai mun cors juer!
+902	Se truis Rollant, de mort serat finet,
+903	E Oliver e tuz les .XII. pers.
+904	Franceis murrunt a doel e a viltiet.
+905	Carles li magnes velz est e redotez:
+906	Recreanz ert de sa guerre mener,
+907	Si nus remeindrat Espaigne en quitedet.»
+908	Li reis Marsilie mult l'en ad merciet. AOI.
+
+Laisse LXXIII
+909	Uns almaçurs i ad de Moriane;
+910	N'ad plus felun en la tere d'Espaigne.
+911	Devant Marsilie ad faite sa vantance:
+912	«En Rencesvals guierai ma cumpaigne,
+913	.XX. milie ad escuz e a lances.
+914	Se trois Rollant, de mort li duins fiance.
+915	Jamais n'ert jor que Carles ne se pleignet.» AOI.
+
+Laisse LXXIV
+916	D'altre part est Turgis de Turteluse:
+917	Cil est uns quens, si est la citet sue.
+918	De chrestiens voelt faire male vode.
+919	Devant Marsilie as altres si s'ajust,
+920	Ço dist al rei: «Ne vos esmaiez unches!
+921	Plus valt Mahum que seint Perre de Rume!
+922	Se lui servez, l'onur del camp ert nostre.
+923	En Rencesvals a Rollant irai juindre,
+924	De mort n'avrat guarantisun pur hume.
+925	Veez m'espee, ki est e bone e lunge:
+926	A Durendal jo la metrai encuntre;
+927	Asez orrez, laquele irat desure.
+928	Franceis murrunt, si a nus s'abandunent;
+929	Carles li velz avrat e deol e hunte:
+930	Jamais en tere ne portera curone.»
+
+Laisse LXXV
+931	De l'altre part est Escremiz de Valterne:
+932	Sarrazins est, si est sue la tere.
+933	Devant Marsilie s'escriet en la presse,
+934	«En Rencesvals irai l'orgoill desfaire.
+935	Se trois Rollant, n'en porterat la teste,
+936	Ne Oliver, ki les altres cadelet;
+937	Li .XII. per tuit sunt jugez a perdre;
+938	Franceis murrunt e France en ert deserte,
+939	De bons vassals avrat Carles suffraite.» AOI.
+
+Laisse LXXVI
+940	D'altre part est uns paiens, Esturganz;
+941	Estramariz i est, un soens cumpainz:
+942	Cil sunt felun, traïtur suduiant.
+943	Ço dist Marsilie: «Seignurs, venez avant!
+944	En Rencesvals irez as porz passant,
+945	Si aiderez a cunduire ma gent.»
+946	E cil respundent: «(Sire,) a vostre comandement!
+947	Nus asaldrum Oliver e Rollant;
+948	Li .XII. per n'avrunt de mort guarant.
+949	Noz espees sunt bones e trenchant;
+950	Nus les feruns vermeilles de chald sanc.
+951	Franceis murrunt, Carles en ert dolent.
+952	Tere Majur vos metrum en present.
+953	Venez i, reis, sil verrez veirement:
+954	L'empereor vos metrum en present.»
+
+Laisse LXXVII
+955	Curant i vint Margariz de Sibilie;
+956	Cil tient la tere entre[s]qu'as Cazmarine.
+957	Pur sa beltet dames li sunt amies:
+958	Cele nel veit vers lui ne s'esclargisset;
+959	Quant ele le veit, ne poet muer ne riet;
+960	N'i ad paien de tel chevalerie.
+961	Vint en la presse, sur les altres s'escriet
+962	E dist al rei: «Ne vos esmaiez mie!
+963	En Rencesvals irai Rollant ocire,
+964	Ne Oliver n'en porterat la vie;
+965	Li .XII. per sunt remes en martirie.
+966	Veez m'espee, ki d'or est enheldie:
+967	Si la tramist li amiralz de Primes.
+968	Jo vos plevis qu'en vermeill sanc ert mise.
+969	Franceis murrunt e France en ert hunie;
+970	Carles li velz a la barbe flurie,
+971	Jamais n'ert jurn qu'il n'en ait doel e ire.
+972	Jusqu'a un an avrum France saisie;
+973	Gesir porrum el burc de seint Denise.»
+974	Li reis paiens parfundement l 'enclinet. AOI.
+
+Laisse LXXVIII
+975	De l'altre part est Chernubles de Munigre;
+976	Jusqu'a la tere si chevoel li balient;
+977	Greignor fais portet par giu, quant il s'enveiset,
+978	Que .IIII. mulez ne funt, quant il sumeient.
+979	Icele tere, ço dit, dun il esteit,
+980	Soleill n'i luist, ne blet n'i poet pas creistre,
+981	Pluie n'i chet, rusee n'i adeiset,
+982	Piere n'i ad que tute ne seit neire.
+983	Dient alquanz que diables i meignent.
+984	Ce dist Chernubles: «Ma bone espee ai ceinte;
+985	En Rencesvals jo la teindrai vermeille.
+986	Se trois Rollant li proz enmi ma veie,
+987	Se ne l'asaill, dunc ne faz jo que creire,
+988	Si cunquerrai Durendal od la meie.
+989	Franceis murrunt e France en ert deserte.»
+990	A icez moz li .XII. [per] s'alient;
+991	Itels .C. milie Sarrazins od els meinent,
+992	Ki de bataille s'argüent,e hasteient:
+993	Vunt s'aduber desuz une sapide.
+
+Laisse LXXIX
+994	Paien s'adubent des osbercs sarazineis,
+995	Tuit li plusur en sunt (saraguzeis) dublez en treis,
+996	Lacent lor elmes mult bons sarraguzeis,
+997	Ceignent espees de l'acer vianeis;
+998	Escuz unt genz, espiez valentineis,
+999	E gunfanuns blancs e blois e vermeilz.
+1000	Laissent les mulz e tuz les palefreiz,
+1001	Es destrers muntent, si chevalchent estreiz.
+1002	Clers fut li jurz e bels fut li soleilz:
+1003	N'unt guarnement que tut ne reflambeit.
+1004	Sunent mil grailles por ço que plus bel seit:
+1005	Granz est la noise, si l'oïrent Franceis.
+1006	Dist Oliver: «Sire cumpainz, ce crei,
+1007	De Sarrazins purum bataille aveir.»
+1008	Respont Rollant: «E! Deus la nus otreit!
+1009	Ben devuns ci estre pur nostre rei:
+1010	Pur sun seignor deit hom susfrir destreiz
+1011	E endurer e granz chalz e granz freiz,
+1012	Sin deit hom perdre e del quir e del peil.
+1013	Or guart chascuns que granz colps (l')[i] empleit,
+1014	Que malvaise cançun de nus chantet ne seit!
+1015	Paien unt tort e chrestiens unt dreit;
+1016	Malvaise essample n'en serat, ja de mei.» AOI.
+
+Laisse LXXX
+1017	Oliver est desur un pui haut muntez,
+1018	Guardet su destre par mi un val herbus,
+1019	Si veit venir cele gent paienur,
+1020	Sin apelat Rollant, sun cumpaignun:
+1021	«Devers Espaigne vei venir tel bruur,
+1022	Tanz blancs osbercs, tanz elmes flambius!
+1023	Icist ferunt nos Franceis grant irur.
+1024	Guenes le sout, li fel, li traïtur,
+1025	Ki nus jugat devant l'empereür.»
+1026	- «Tais Oliver,» li quens Rollant respunt,
+1027	«Mis parrastre est, ne voeill que mot en suns.»
+
+Laisse LXXXI
+1028	Oliver est desur un pui muntet;
+1029	Or veit il ben d'Espaigne le regnet
+1030	E Sarrazins, ki tant sunt asemblez.
+1031	Luisent cil elme, ki ad or sunt gemmez,
+1032	E cil escuz e cil osbercs safrez
+1033	E cil espiez, cil gunfanun fermez.
+1034	Sul les escheles ne poet il acunter;
+1035	Tant en i ad que mesure n'en set.
+1036	E lui meïsme en est mult esguaret.
+1037	Cum il einz pout, del pui est avalet,
+1038	Vint as Franceis, tut lur ad acuntet.
+
+Laisse LXXXII
+1039	Dist Oliver: «Jo ai paiens veüz:
+1040	Unc mais nuls hom en tere n'en vit plus.
+1041	Cil devant sunt .C. milie ad escuz
+1042	Helmes laciez e blancs osbercs vestuz
+1043	Dreites cez hanstes, luisent cil espiet brun.
+1044	Bataille avrez, unches mais tel ne fut.
+1045	Seignurs Franceis, de Deu aiez vertut!
+1046	El camp estez, que ne seium vencuz!»
+1047	Dient Franceis: «Dehet ait ki s'en fuit!
+1048	Ja pur murir ne vus en faldrat uns.» AOI.
+
+Laisse LXXXIII
+1049	Dist Oliver: «Paien unt grant esforz,
+1050	De noz Franceis m'i semblet aveir mult poi!
+1051	Cumpaign Rollant, kar sunez vostre corn:
+1052	Si l'orrat Carles, si returnerat l'ost.»
+1053	Respunt Rollant: «Jo fereie que fols!
+1054	En dulce France en perdreie mun los.
+1055	Sempres ferrai de Durendal granz colps;
+1056	Sanglant en ert li branz entresqu'a l'or.
+1057	Felun paien mar i vindrent as porz:
+1058	Jo vos plevis, tuz sunt jugez a mort.» AOI.
+
+Laisse LXXXIV
+1059	- «Cumpainz Rollant l'olifan car sunez:
+1060	Si l'orrat Carles, ferat l'ost returner,
+1061	Succurrat nos li reis od tut sun barnet.»
+1062	Respont Rollant: «Ne placet Damnedeu
+1063	Que mi parent pur mei seient blasmet
+1064	Ne France dulce ja cheet en viltet!
+1065	Einz i ferrai de Durendal asez,
+1066	Ma bone espee que ai ceint al costet:
+1067	Tut en verrez le brant ensanglentet.
+1068	Felun paien mar i sunt asemblez:
+1069	Jo vos plevis, tuz sunt a mort livrez.» AOI.
+
+Laisse LXXXV
+1070	- «Cumpainz Rollant, sunez vostre olifan:
+1071	Si l'orrat Carles, ki est as porz passant.
+1072	Je vos plevis, ja returnerunt Franc.»
+1073	- «Ne placet Deu,» ço li respunt Rollant,
+1074	«Que ço seit dit de nul hume vivant,
+1075	Ne pur paien, que ja seie cornant!
+1076	Ja n'en avrunt reproece mi parent!
+1077	Quant jo serai en la bataille grant
+1078	E jo ferrai e mil colps e .VII. cenz,
+1079	De Durendal verrez l'acer sanglent.
+1080	Franceis sunt bon, si ferrunt vassalment,
+1081	Ja cil d'Espaigne n'avrunt de mort guarant.»
+
+Laisse LXXXVI
+1082	Dist Oliver: «D'iço ne sai jo blasme?
+1083	Jo ai veüt les Sarrazins d'Espaigne,
+1084	Cuverz en sunt li val e les muntaignes
+1085	E li lariz e trestutes les plaignes.
+1086	Granz sunt les oz de cele gent estrange;
+1087	Nus i avum mult petite cumpaigne.»
+1088	Respunt Rollant: «Mis talenz en est graigne.
+1089	Ne placet Damnedeu ne ses angles
+1090	Que ja pur mei perdet sa valur France!
+1091	Melz voeill murir que huntage me venget.
+1092	Pur ben ferir l'emperere plus nos aimet.»
+
+Laisse LXXXVII
+1093	Rollant est proz e Oliver est sage;
+1094	Ambedui unt me[r]veillus vasselage.
+1095	Puis que il sunt as chevals e as armes,
+1096	Ja pur murir n'eschiverunt bataille.
+1097	Bon sunt li cunte e lur paroles haltes.
+1098	Felun paien par grant irur chevalchent.
+1099	Dist Oliver: «Rollant, veez en alques!
+1100	Cist nus sunt pres, mais trop nus est loinz Carles.
+1101	Vostre olifan, suner vos nel deignastes;
+1102	Fust i li reis, n'i oüssum damage.
+1103	Guardez amunt devers les porz d'Espaigne:
+1104	Veeir poez, dolente est la rereguarde;
+1105	Ki ceste fait, jamais n'en ferat altre.»
+1106	Respunt Rollant: «Ne dites tel ultrage!
+1107	Mal seit del coer ki el piz se cuardet!
+1108	Nus remeindrum en estal en la place;
+1109	Par nos í ert e li colps e li caples.» AOI.
+
+Laisse LXXXVIII
+1110	Quant Rollant veit que la bataille serat,
+1111	Plus se fait fiers que leon ne leupart.
+1112	Franceis escriet, Oliver apelat:
+1113	«Sire cumpainz, amis, nel dire ja!
+1114	Li emperere, ki Franceis nos laisat,
+1115	Itels .XX. milie en mist a une part
+1116	Sun escientre n'en i out un cuard.
+1117	Pur sun seignur deit hom susfrir granz mals
+1118	E endurer e forz freiz e granz chalz,
+1119	Sin deit hom perdre del sanc e de la char.
+1120	Fier de [ta] lance e jo de Durendal,
+1121	Ma bone espee, que li reis me dunat.
+1122	Se jo i moert, dire poet ki l'avrat
+1123	(E purrunt dire) que ele fut a noble vassal.»
+
+Laisse LXXXIX
+1124	D'altre part est li arcevesques Turpin,
+1125	Sun cheval broche e muntet un lariz,
+1126	Franceis apelet, un sermun lur ad dit:
+1127	«Seignurs baruns, Carles nus laissat ci;
+1128	Pur nostre rei devum nus ben murir.
+1129	Chrestientet aidez a sustenir!
+1130	Bataille avrez, vos en estes tuz fiz,
+1131	Kar a voz oilz veez les Sarrazins.
+1132	Clamez vos culpes, si preiez Deu mercit!
+1133	Asoldrai vos pur voz anmes guarir.
+1134	Se vos murez, esterez seinz martirs,
+1135	Sieges avrez el greignor pareïs.»
+1136	Franceis de[s]cendent, a tere se sunt mis,
+1137	E l'arcevesque de Deu les beneïst:
+1138	Par penitence les cumandet a ferir.
+
+Laisse XC
+1139	Franceis se drecent, si se metent sur piez.
+1140	Ben sunt asols e quites de lur pecchez,
+1141	E l'arcevesque de Deu les ad seignez;
+1142	Puis sunt muntez sur lur curanz destrers.
+1143	Adobez sunt a lei de chevalers
+1144	E de bataille sunt tuit apareillez.
+1145	Li quens Rollant apelet Oliver:
+1146	«Sire cumpainz, mult ben le saviez
+1147	Que Guenelun nos ad tuz espiez;
+1148	Pris en ad or e aveir e deners.
+1149	Li emperere nos devreit ben venger.
+1150	Li reis Marsilie de nos ad fait marchet;
+1151	Mais as espees l'estuvrat esleger.» AOI.
+
+Laisse XCI
+1152	As porz d'Espaigne en est passet Rollant
+1153	Sur Veillantif, sun bun cheval curant.
+1154	Portet ses armes, mult li sunt avenanz,
+1155	Mais sun espiet vait li bers palmeiant,
+1156	Cuntre le ciel vait la mure turnant,
+1157	Laciet en su un gunfanun tut blanc;
+1158	Les renges li batent josqu'as mains.
+1159	Cors ad mult gent, le vis cler e riant.
+1160	Sun cumpaignun apres le vait sivant,
+1161	E cil de France le cleiment a guarant.
+1162	Vers Sarrazins reguardet fierement
+1163	E vers Franceis humeles e dulcement,
+1164	Si lur ad dit un mot curteisement:
+1165	«Seignurs barons, suef pas alez tenant!
+1166	Cist paien vont grant martirie querant.
+1167	Encoi avrum un eschec bel e gent:
+1168	Nuls reis de France n'out unkes si vaillant.»
+1169	A cez paroles vunt les oz ajustant. AOI.
+
+Laisse XCII
+1170	Dist Oliver: «N'ai cure de parler.
+1171	Vostre olifan ne deignastes suner,
+1172	Ne de Carlun mie vos n'en avez.
+1173	Il n'en set mot, n'i ad culpes li bers.
+1174	Cil ki la sunt ne funt mie a blasmer.
+1175	Kar chevalchez a quanque vos puez!
+1176	Seignors baruns, el camp vos retenez!
+1177	Pur deu vos pri, ben seiez purpensez
+1178	De colps ferir, de receivre e (de) duner!
+1179	L'enseigne Carle n'i devum ublier.»
+1180	A icest mot sunt Franceis escriet.
+1181	Ki dunc oïst «Munjoie» demander,
+1182	De vasselage li poüst remembrer.
+1183	Puis si chevalchent, Deus! par si grant fiertet!
+1184	Brochent ad ait pur le plus tost aler,
+1185	Si vunt ferir, que fereient il el?
+1186	E Sarrazins nes unt mie dutez;
+1187	Francs e paiens, as les vus ajustez.
+
+Laisse XCIII
+1188	Li nies Marsilie, il ad a num Aelroth;
+1189	Tut premereins chevalchet devant l'ost.
+1190	De noz Franceis vait disant si mals moz:
+1191	«Feluns Franceis, hoi justerez as noz,
+1192	Traït vos ad ki a guarder vos out.
+1193	Fols est li reis ki vos laissat as porz.
+1194	Enquoi perdrat France dulce sun los,
+1195	Charles li magnes le destre braz del cors.»
+1196	Quant l'ot Rollant, Deus! si grant doel en out!
+1197	Sun cheval brochet, laiset curre a esforz,
+1198	Vait le ferir li quens quanque il pout.
+1199	L'escut li freint e l'osberc li desclot,
+1200	Trenchet le piz, si li briset les os,
+1201	Tute l'eschine li desevret del dos,
+1202	Od sun espiet l'anme li getet fors,
+1203	Enpeint le ben, fait li brandir le cors,
+1204	Pleine sa hanste del cheval l'abat mort,
+1205	En dous meitiez li ad briset le col;
+1206	Ne leserat, ço dit, que n'i parolt:
+1207	«Ultre culvert! Carles n'est mie fol,
+1208	Ne traïsun unkes amer ne volt.
+1209	Il fist que proz qu'il nus laisad as porz:
+1210	Oí n'en perdrat France dulce sun los.
+1211	Ferez i, Francs, nostre est li premers colps!
+1212	Nos avum dreit, mais cist glutun unt tort.» AOI.
+
+Laisse XCIV
+1213	Un duc i est, si ad num Falsaron:
+1214	Icil er[t] frere al rei Marsiliun;
+1215	Il tint la tere Datliun e Balbiun.
+1216	Suz cel nen at plus encrisme felun.
+1217	Entre les dous oilz mult out large le front,
+1218	Grant demi pied mesurer i pout hom.
+1219	Asez ad doel quant vit mort sun nevold,
+1220	Ist de la prese, si se met en bandun,
+1221	E se s'escriet l'enseigne paienor;
+1222	Envers Franceis est mult cuntrarius:
+1223	«Enquoi perdrat France dulce s'onur!»
+1224	Ot le Oliver, sin ad mult grant irur;
+1225	Le cheval brochet des oriez esperuns,
+1226	Vait le ferir en guise de baron.
+1227	L'escut li freint e l'osberc li derumpt,
+1228	El cors li met les pans del gunfanun,
+1229	Pleine sa hanste l'abat mort des arçuns;
+1230	Guardet a tere, veit gesir le glutun,
+1231	Si li ad dit par mult fiere raison:
+1232	«De voz manaces, culvert, jo n'ai essoign.
+1233	Ferez i, Francs, kar tres ben les veincrum!»
+1234	- «Munjoie!» escriet, ço est l'enseigne Carlun. AOI.
+
+Laisse XCV
+1235	Uns reis i est, si ad num Corsablix:
+1236	Barbarins est, d'un estra[n]ge païs.
+1237	Si apelad les altres Sarrazins:
+1238	«Ceste bataille ben la puum tenir,
+1239	Kar de Franceis i ad asez petit.
+1240	Cels ki ci sunt devum aveir mult vil;
+1241	Ja pur Charles n'i ert un sul guarit:
+1242	Or est le jur qu'els estuvrat murir.»
+1243	Ben l'entendit li arc[e]vesques Turpin.
+1244	Suz ciel n'at hume que [tant] voeillet haïr;
+1245	Sun cheval brochet des esperuns d'or fin,
+1246	Par grant vertut si l 'est alet ferir.
+1247	L'escut li freinst, l'osberc li descumfist,
+1248	Sun grant espiet par mi le cors li mist,
+1249	Empeint le ben, que mort le fait brandir,
+1250	Pleine sa hanste l'abat mort el chemin.
+1251	Guardet arere, veit le glutun gesir,
+1252	Ne laisserat que n'i parolt, ço dit:
+1253	«Culvert paien, vos i avez mentit!
+1254	Carles, mi sire, nus est guarant tuz dis;
+1255	Nostre Franceis n'unt talent de fuïr.
+1256	Voz cumpaignuns feruns trestuz restifs;
+1257	Nuveles vos di: mort vos estoet susfrir.
+1258	Ferez, Franceis! Nul de vus ne s'ublit!
+1259	Cist premer colp est nostre, Deu mercit!»
+1260	- «Munjoie!» escriet por le camp retenir.
+
+Laisse XCVI
+1261	Engelers fiert Malprimis de Brigal;
+1262	Sis bons escuz un dener ne li valt:
+1263	Tute li freint la bucle de cristal,
+1264	L'une meitiet li turnet cuntreval;
+1265	L'osberc li rumpt entresque a la charn,
+1266	Sun bon espiet enz el cors li enbat.
+1267	Li paiens chet cuntreval a un quat;
+1268	L'anme de lui en portet Sathanas. AOI.
+
+Laisse XCVII
+1269	E sis cumpainz Gerers fiert l'amurafle:
+1270	L'escut li freint e l'osberc li desmailet,
+1271	Sun bon espiet li me(n)t en la curaille,
+1272	Empeint le bien, par mi le cors li passet,
+1273	Que mort l'abat el camp, pleine sa hanste.
+1274	Dist Oliver: «Gente est nostre bataille!»
+
+Laisse XCVIII
+1275	Sansun li dux, (il) vait ferir l'almaçur:
+1276	L'escut li freinst, ki est a flurs e ad ór,
+1277	Li bons osbercs ne li est guarant prod,
+1278	Trenchet li le coer, le firie e le pulmun,
+1279	Que l'abat [mort], qui qu'en peist u qui nun.
+1280	Dist l'arcevesque: «Cist colp est de baron!»
+
+Laisse XCIX
+1281	E Anseïs laiset le cheval curre,
+1282	Si vait ferir Turgis de Turteluse;
+1283	L'escut li freint desuz l'oree bucle,
+1284	De sun osberc li derumpit les dubles,
+1285	Del bon espiet el cors li met la mure,
+1286	Empeinst le ben, tut le fer li mist ultre,
+1287	Pleine sa hanste el camp mort le tresturnet.
+1288	Ço dist Rollant: «Cist colp est de produme!»
+
+Laisse C
+1289	Et Engelers li Guascuinz de Burdele
+1290	Sun cheval (...) brochet, si li laschet la resne,
+1291	Si vait ferir Escremiz de Valterne:
+1292	L'escut del col li freint e escantelet,
+1293	De sun osberc li rumpit la ventaille,
+1294	Sil fiert el piz entre les dous furceles,
+1295	Pleine sa hanste l'abat mort de la sele;
+1296	Apres li dist: «Turnet estes a perdre!» AOI.
+
+Laisse CI
+1297	E Gualter fie[r]t un paien, Estorgans,
+1298	Sur sun escut en la pene devant,
+1299	Que tut li trenchet le vermeill e le blanc;
+1300	De sun osberc li ad rumput les pans,
+1301	El cors li met sun bon espiet tre[n]chant,
+1302	Que mort l'abat de sun cheval curant.
+1303	Apres li dist: «Ja n'i avrez guarant!»
+
+Laisse CII
+1304	E Berenger, il fiert Astramariz:
+1305	L'escut li freinst, l'osberc li descumfist,
+1306	Sun fort escut par mi le cors li mist,
+1307	Que mort l'abat entre mil Sarrazins.
+1308	Des .XII. pers li .X. en sunt ocis;
+1309	Ne mes que dous n'en i ad remes vifs;
+1310	Ço est Chernubles e li quens Margariz.
+1311	f.24rv
+
+Laisse CIII
+1312	Margariz est mult vaillant chevalers,
+1313	E bels e forz e isnels e legers.
+1314	Le cheval brochet, vait ferir Oliver:
+1315	L'escut li freint suz la bucle d'or mer,
+1316	Lez le costet li conduist sun espiet.
+1317	Deus le guarit, qu'el(l) cors ne l'ad tuchet.
+1318	La hanste fruisset, mie n'en a(d)[b]atiet.
+1319	Ultre s'en vait, qu'il n'i ad desturber;
+1320	Sunet sun gresle pur les soens ralier.
+
+Laisse CIV
+1321	La bataille est merveilluse e cumune.
+1322	Li quens Rollant mie ne s'asoüret,
+1323	Fiert de l'espiet tant cume hanste li duret;
+1324	A .XV. cols l'ad fraite e [...] perdue,
+1325	Trait Durendal, sa bone espee nue,
+1326	Sun cheval brochet, si vait ferir Chernuble:
+1327	L'elme li freint u li carbuncle luisent,
+1328	Trenchet la cors e la cheveleüre,
+1329	Si li trenchat les oilz e la faiture,
+1330	Le blanc osberc, dunt la maile est menue,
+1331	E tut le cors tresqu'en la furcheüre,
+1332	Enz en la sele, ki est a or batue;
+1333	El cheval est l'espee aresteüe,
+1334	Trenchet l'eschine, hunc n'i out quis [joi]nture,
+1335	Tut abat mort el pred sur l'erbe drue;
+1336	Apres li dist: «Culvert, mar i moüstes!
+1337	De Mahumet ja n'i avrez aiude.
+1338	Par tel glutun n'ert bataille oi vencue.»
+
+Laisse CV
+1339	Li quens Rollant par mi le champ chevalchet,
+1340	Tient Durendal, ki ben trenchet e taillet,
+1341	Des Sarrazins lur fait mult grant damage.
+1342	Ki lui veïst l'un geter mort su[r] l'altre,
+1343	Li sanc tuz clers gesir par cele place!
+1344	Sanglant en ad e l'osberc e [la] brace,
+1345	Sun bon cheval le col e les [es]palles.
+1346	E Oliver de ferir ne se target,
+1347	Li .XII. per n'en deivent aveir blasme,
+1348	E li Franceis i fierent e si caplent.
+1349	Moerent paien e alquanz en i pasment.
+1350	Dist l'arcevesque: «Ben ait nostre barnage!»
+1351	- «Munjoie!» escriet, ço est l'enseigne Carle. AOI.
+
+Laisse CVI
+1352	E Oliver chevalchet par l'estor,
+1353	Sa hanste est frait, n'en ad que un trunçun,
+1354	E vait fer(en)[ir] un paien, Malun:
+1355	L'escut li freint, ki est ad or e a flur,
+1356	Fors de la teste li met les oilz ansdous,
+1357	E la cervele li chet as piez desuz;
+1358	Mort le tresturnet od tut .VII.C. des lur.
+1359	Pois ad ocis Turgis e Esturguz;
+1360	La hanste briset e esclicet josqu'as poinz.
+1361	Ço dist Rollant: «Cumpainz, que faites vos?
+1362	En tel bataille n'ai cure de bastun;
+1363	Fers e acers i deit aveir valor.
+1364	U est vostre espee, ki Halteclere ad num?
+1365	D'or est li helz e de cristal li punz.»
+1366	- «Ne la poi traire,» Oliver li respunt,
+1367	«Kar de ferir oi jo si grant bosoign.» AOI.
+
+Laisse CVII
+1368	Danz Oliver trait ad sa bone espee,
+1369	Que ses cumpainz Rollant li ad tant demandee,
+1370	E il li ad cum chevaler mustree.
+1371	Fiert un paien, Justin de Val Ferree:
+1372	Tute la teste li ad par mi sevree,
+1373	Trenchet le cors e [la] bronie safree,
+1374	La bone sele, ki a ór est gemmee,
+1375	E al ceval a l'eschine trenchee;
+1376	Tut abat mort devant loi en la pree.
+1377	Ço dist Rollant: «Vos receif jo, frere!
+1378	Por itels colps nos eimet li emperere.»
+1379	De tutes parz est «Munjo[i]e» escriee. AOI.
+
+Laisse CVIII
+1380	Li quens Gerins set el ceval Sorel
+1381	E sis cumpainz Gerers en Passecerf,
+1382	Laschent lor reisnes, brochent amdui a ait,
+1383	E vunt ferir un paien, Timozel,
+1384	L'un en l'escut e li altre en l'osberc,
+1385	Lur dous espiez enz el cors li unt frait,
+1386	Mort le tresturnent tres enmi un guaret,
+1387	Ne l'oï dire ne jo mie nel sai
+1388	Liquels d'els dous en fut li plus isnels.
+1389	Esprieres icil fut filz Burdel,
+	. . . . . . . . . .  (lacuna: narrative gap, unnumbered)
+1390	E l'arcevesque lor ocist Siglorel,
+1391	L'encanteür ki ja fut en enfer:
+1392	Par artimal l'i cundoist Jupiter.
+1393	Ço dist Turpin: «Icist nos ert forsfait.»
+1394	Respunt Rollant: «Vencut est le culvert.
+1395	Oliver, frere, itels colps me sunt bel!»
+
+Laisse CIX
+1396	La bataille est aduree endementres.
+1397	Franc e paien merveilus colps i rendent.
+1398	Fierent li un, li altre se defendent.
+1399	Tant hanste i ad e fraite e sanglente,
+1400	Tant gunfanun rumpu e tant enseigne!
+1401	Tant bon Franceis i perdent lor juvente!
+1402	Ne reverrunt lor meres ne lor femmes,
+1403	Ne cels de France ki as porz les atendent. AOI.
+1404	Karles li magnes en pluret, si se demente.
+1405	De ço qui calt? N'en avrunt sucurance.
+1406	Malvais servis[e] le jur li rendit Guenes,
+1407	Qu'en Sarraguce sa maisnee alat vendre;
+1408	Puis en perdit e sa vie e ses membres;
+1409	El plait ad Ais en fut juget a prendre,
+1410	De ses parenz ensembl'od lui tels trente
+1411	Ki de murir nen ourent esperance. AOI.
+
+Laisse CX
+1412	La bataille est merveilluse e pesant;
+1413	Mult ben i fiert Oliver e Rollant,
+1414	Li arcevesques plus de mil colps i rent,
+1415	Li .XII. per ne s'en targent nient,
+1416	E li Franceis i fierent cumunement.
+1417	Moerent paien a miller(e)[s] e a cent;
+1418	Ki ne s'en fuit de mort n'i ad guarent;
+1419	Voillet o nun, tut i laisset sun tens.
+1420	Franceis i perdent lor meillors guarnemenz;
+1421	Ne reverrunt lor peres ne lor parenz
+1422	Ne Carlemagne, ki as porz les atent.
+1423	En France en ad mult merveillus turment;
+1424	Orez i ad de tuneire e de vent,
+1425	Pluies e gresilz desmesureement;
+1426	Chiedent i fuildres e menut e suvent,
+1427	E terremoete ço i ad veirement.
+1428	De seint Michel de(l) P(aris)[eril] josqu'as Seinz
+1429	Des Besençun tresqu'as [port] de Guitsand
+1430	N'en ad recet dunt del mur ne cravent.
+1431	Cuntre midi tenebres i ad granz;
+1432	N'i ad clartet, se li ciels nen i fent.
+1433	Hume nel veit,ki mult ne s espaent.
+1434	Dient plusor: «Ço est li definement,
+1435	La fin del secle ki nus est en present.»
+1436	Il nel sevent, ne dient veir nient:
+1437	Ço est li granz dulors por la mort de Rollant.
+
+Laisse CXI
+1438	Franceis i unt ferut de coer e de vigur;
+1439	Paien sunt morz a millers e a fuls:
+1440	De cent millers n'en poent guarir dous.
+1441	Rollant dist: «Nostre hume sunt mult proz:
+1442	Suz ciel n'ad home plus en ait de meillors.»
+1443	Il est escrit en la Geste Francor
+1444	Que vassals ad li nostre empereür.
+1445	Vunt par le camp, si requerent les lor,
+1446	Plurent des oilz de doel e de tendrur
+1447	Por lor parenz par coer e par amor.
+1448	Li reis Marsilie od sa grant ost lor surt. AOI.
+
+Laisse CXII
+1449	Marsilie vient par mi une valee
+1450	Od sa grant ost que il out asemblee.
+1451	.XX. escheles ad li reis anumbrees.
+1452	Lacent cil'elme as perres d'or gemmees,
+1453	E cil escuz e cez bronies sasfrees;
+1454	.VII. milie graisles i sunent la menee:
+1455	Grant est la noise par tute la contree.
+1456	Ço dist Rollant: «Oliver, compaign, frere,
+1457	Guenes li fels ad nostre mort juree;
+1458	La traïsun ne poet estre celee;
+1459	Mult grant venjance en prendrat l'emperere.
+1460	Bataille avrum e forte [e] aduree,
+1461	Unches mais hom tel ne vit ajustee.
+1462	Jo i ferrai de Durendal, m'espee,
+1463	E vos, compainz, ferrez de Halteclere.
+1464	En tanz lius les avum nos portees!
+1465	Tantes batailles en avum afinees!
+1466	Male chançun n'en deit estre cantee.» AOI.
+
+Laisse CXIII
+1467	Marsilies veit de sa gent le martirie,
+1468	Si fait suner ses cors e ses buisines,
+1469	Puis si chevalchet od sa grant ost banie.
+1470	Devant chevalchet un Sarrasin, Abisme:
+1471	Plus fel de lui n'out en sa cumpagnie.
+1472	Te(t)ches ad males e mult granz felonies;
+1473	Ne creit en Deu, le filz sainte Marie;
+1474	Issi est neirs cume peiz ki est demise;
+1475	Plus aimet il traïsun e murdrie
+1476	Qu'(e) il ne fesist trestut l'or de Galice;
+1477	Unches nuls hom nel vit juer ne rire.
+1478	Vasselage ad e mult grant estultie:
+1479	Por ço est drud al felun rei Marsilie;
+1480	Sun dragun portet a qui sa gent s'alient.
+1481	Li arcevesque ne l'amerat ja mie;
+1482	Cum il le vit, a ferir le desiret.
+1483	Mult quiement le dit a sei meïsme:
+1484	«Cel Sarraz[in] me semblet mult herite:
+1485	Mielz est mult que jo l'alge ocire.
+1486	Unches n'amai cuard ne cuardie.» AOI.
+
+Laisse CXIV
+1487	Li arcevesque cumencet la bataille.
+1488	Siet el cheval qu'il tolit a Grossaille,
+1489	Ço ert uns reis qu'l ocist en Denemarche.
+1490	Li destrers est e curanz e aates,
+1491	Piez ad copiez e les gambes ad plates,
+1492	Curte la quisse e la crupe bien large,
+1493	Lungs les costez e l'eschine ad ben halte,
+1494	Blanche la cue e la crignete jalne
+1495	Petites les oreilles, la teste tute falve;
+1496	Beste nen est nule ki encontre lui alge.
+1497	Li arcevesque brochet par tant grant vasselage:
+1498	Ne laisserat qu'Abisme nen asaillet;
+1499	Vait le ferir en l'escut amiracle:
+1500	Pierres i ad, ametistes e topazes,
+1501	Esterminals e carbuncles ki ardent;
+1502	En Val Metas li dunat uns diables,
+1503	Si li tramist li amiralz Galafes.
+1504	Turpins i fiert, ki nient ne l'esparignet,
+1505	Enpres sun colp ne quid que un dener vaillet,
+1506	Le cors li trenchet tres l'un costet qu'a l'altre,
+1507	Que mort l'abat en une voide place.
+1508	Dient Franceis: «Ci ad grant vasselage!
+1509	En l'arcevesque est ben la croce salve.»
+
+Laisse CXV
+1510	Franceis veient que paiens i ad tant,
+1511	De tutes parz en sunt cuvert li camp;
+1512	Suvent regretent Oliver e Rollant
+1513	Les .XII. pers, qu'il lor seient guarant.
+1514	E l'arcevesque lur dist de sun semblant:
+1515	«Seignors barons, n'en alez mespensant!
+1516	Pur Deu vos pri que ne seiez fuiant,
+1517	Que nuls prozdom malvaisement n'en chant.
+1518	Asez est mielz que moerium cumbatant.
+1519	Pramis nus est, fin prendrum a itant,
+1520	Ultre cest jurn ne serum plus vivant;
+1521	Mais d'une chose vos soi jo ben guarant:
+1522	Seint pareïs vos est abandunant;
+1523	As Innocenz vos en serez seant.»
+1524	A icest mot si s'esbaldissent Franc,
+1525	Cel nen i ad «Munjoie!» ne demant. AOI.
+
+Laisse CXVI
+1526	Un Sarrazin i out de Sarraguce,
+1527	De la citet l'une meitet est sue:
+1528	Ço est Climborins, ki pas ne fut produme.
+1529	Fiance prist de Guenelun le cunte,
+1530	Par amistiet l'en baisat en la buche,
+1531	Si l'en dunat s'espee e s'escarbuncle.
+1532	Tere Major ço dit, metrat a hunte,
+1533	A l'emperere si toldrat la curone.
+1534	Siet el ceval qu'il cleimet Barbamusche,
+1535	Plus est isnels que esprever ne arunde.
+1536	Brochet le bien, le frein li abandunet,
+1537	Si vait ferir Engeler de Guascoigne.
+1538	Nel poet guarir sun escut ne sa bronie:
+1539	De sun espiet el cors li met la mure,
+1540	Empeint le ben, tut le fer li mist ultre,
+1541	Pleine sa hanste el camp mort le tresturnet.
+1542	Apres escriet: «Cist sunt bon a (o)[c]unfundre!
+1543	Ferez, paien, pur la presse derumpre!»
+1544	Dient Franceis: «Deus quel doel de prodome!» AOI.
+
+Laisse CXVII
+1545	Li quens Rollant en apelet Oliver:
+1546	«Sire cumpainz, ja est morz Engeler;
+1547	Nus n'avium plus vaillant chevaler.»
+1548	Respont li quens: «Deus le me doinst venger!»
+1549	Sun cheval brochet des esperuns d'or mier,
+1550	Tient Halteclere, sanglent en est l'acer,
+1551	Par grant vertut vait ferir le paien.
+1552	Brandist sun colp e li Sarrazins chiet;
+1553	L'anme de lui en portent aversers.
+1554	Puis ad ocis le duc Alphaïen;
+1555	Escababi i ad le chef trenchet;
+1556	.VII. Arrabiz i ad deschevalcet:
+1557	Cil ne sunt proz ja mais pur guerreier.
+1558	Ço dist Rollant: «Mis cumpainz est irez!
+1559	Encuntre mei fait asez a preiser.
+1560	Pur itels colps nos ad Charles plus cher.»
+1561	A voiz escriet: «Ferez i, chevaler!» AOI.
+
+Laisse CXVIII
+1562	D'altre part est un paien, Valdabrun:
+1563	Celoi levat le rei Marsiliun,
+1564	Sire est par mer de .IIII.C. drodmunz;
+1565	N'i ad eschipre quis cleim se par loi nun.
+1566	Jerusalem prist ja par traïsun,
+1567	Si violat le temple Salomon,
+1568	Le patriarche ocist devant les funz.
+1569	Cil ot fiance del cunte Guenelon:
+1570	Il li dunat s'espee e mil manguns.
+1571	Siet el cheval qu'il cleimet Gramimund,
+1572	Plus est isnels que nen est uns falcuns.
+1573	Brochet le bien des aguz esperuns,
+1574	Si vait ferir li riche duc Sansun,
+1575	L'escut li freint e l'osberc li derumpt,
+1576	El cors li met les pans del gunfanun,
+1577	Pleine sa hanste l'abat mort des arçuns:
+1578	«Ferez paien, car tres ben les veintrum!»
+1579	Dient Franceis: «Deus quel doel de baron.!» AOI.
+
+Laisse CXIX
+1580	Li quens Rollant, quant il veit Sansun mort,
+1581	Poez saveir que mult grant doel en out.
+1582	Sun ceval brochet, si li curt ad esforz;
+1583	Tient Durendal, qui plus valt que fin ór.
+1584	Vait le ferir li bers, quanque il pout,
+1585	Desur sun elme, ki gemmet fut ad or:
+1586	Trenchet la teste e la bronie e le cors,
+1587	La bone sele, ki est gemmet ad or,
+1588	E al cheval parfundement le dos;
+1589	Ambure ocit, ki quel blasme ne quil lot.
+1590	Dient paien(t) [...]: «Cist colp nus est mult fort!»
+1591	Respont Rollant: «Ne pois amer les voz;
+1592	Devers vos est li orguilz e li torz.» AOI.
+
+Laisse CXX
+1593	D'Affrike i ad un Affrican venut,
+1594	Ço est Malquiant, le filz al rei Malcud.
+1595	Si guarnement sunt tut a or batud;
+1596	Cuntre le ciel sur tuz les altres luist.
+1597	Siet el ceval qu'il cleimet Salt Perdut:
+1598	Beste nen est ki poisset curre a lui.
+1599	Il vait ferir Anseïs en l'escut:
+1600	Tut li trenchat le vermeill e l'azur;
+1601	De sun osberc li ad les pans rumput,
+1602	El cors li met e le fer e le fust;
+1603	Morz est li quens, de sun tens n'i ad plus.
+1604	Dient Franceis: «Barun, tant mare fus!»
+
+Laisse CXXI
+1605	Par le camp vait Turpin li arcevesque;
+1606	Tel coronet ne chantat unches messe
+1607	Ki de sun cors feïst [...] tantes proecces.
+1608	Dist al paien: «Deus tut mal te tramette!
+1609	Tel ad ocis dunt al coer me regrette.»
+1610	Sun bon ceval i ad fait esdemetre,
+1611	Si l'ad ferut sur l'escut de Tulette,
+1612	Que mort l'abat desur le herbe verte.
+
+Laisse CXXII
+1613	De l'altre part est un paien, Grandonies,
+1614	Filz Capuel, le rei de Capadoce(neez).
+1615	Siet el cheval que il cleimet Marmorie,
+1616	Plus est isnels que n'est oisel ki volet;
+1617	Laschet la resne, des esperuns le brochet,
+1618	Si vait ferir Gerin par sa grant force.
+1619	L'escut vermeill li freint, de col li portet;
+1620	Aprof li ad sa bronie desclose,
+1621	El cors li met tute l'enseingne bloie,
+1622	Que mort l'abat en une halte roche.
+1623	Sun cumpaignun Gerers ocit uncore
+1624	E Berenger e Guiun de Seint Antonie;
+1625	Puis vait ferir un riche duc Austorje,
+1626	Ki tint Valeri e envers sur le Rosne.
+1627	Il l'abat mort; paien en unt grant joie.
+1628	Dient Franceis: «Mult decheent li nostre!»
+
+Laisse CXXIII
+1629	[L]i quens Rollant tint s'espee sanglente.
+1630	Ben ad oït que Franceis se dementent;
+1631	Si grant doel ad que par mi quiet fendre;
+1632	Dist al paien: «Deus tut mal te consente!
+1633	Tel as ocis que mult cher te quid vendre!»
+1634	Sun ceval brochet, ki oït del cuntence.
+1635	Ki quel cumpert, venuz en sunt ensemble.
+
+Laisse CXXIV
+1636	Grandonie fut e prozdom e vaillant
+1637	E vertuus e vassal cumbatant.
+1638	Enmi sa veie ad encuntret Rollant.
+1639	Enceis nel vit, sil recunut veirement
+1640	Al fier visage e al cors qu'il out gent
+1641	E al reguart e al contenement:
+1642	Ne poet muer qu'il ne s'en espoent,
+1643	Fuïr s'en voel, mais ne li valt nient:
+1644	Li quens le fiert tant vertuusement
+1645	Tresqu'al nasel tut le elme li fent,
+1646	Trenchet le nes e la buche e les denz,
+1647	Trestut le cors e l'osberc jazerenc
+1648	De l'oree sele (se)[les] dous alves d'argent
+1649	E al ceval le dos parfundement;
+1650	Ambure ocist seinz nul recoevrement,
+1651	E cil d'Espaigne s'en cleiment tuit dolent.
+1652	Dient Franceis: «Ben fiert nostre guarent!»
+
+Laisse CXXV
+1653	La bataille est e merveillose e grant.
+1654	Franceis i ferent des espiez brunisant.
+1655	La veïssez si grant dulor de gent,
+1656	Tant hume mort e nasfret e sanglent!
+1657	L'un gist sur l'altre e envers e adenz.
+1658	Li Sarrazin nel poent susfrir tant:
+1659	Voelent u nun, si guerpissent le camp.
+1660	Par vive force les encacerent Franc. AOI.
+
+Laisse CXXVI
+1661	La (la) b[at]aille est m[erv]eilluse e hastive.
+1662	Franceis i ferent par vigur e par ire,
+1663	Tren[chen]t cez poinz, cez costez, cez eschines,
+1664	Cez vestemenz entresque as chars vives.
+1665	Sur l'erbe verte li cler sancs s'en afilet.
+	. . . . . . . . . .  (lacuna: narrative gap, unnumbered)
+1666	«Tere Major, Mahummet te maldie!
+1667	Sur tute gent est la tue hardie.»
+1668	Cel nen i ad ki ne criet: «Marsilie!
+1669	Cevalche, rei! Bosuign avum d'aïe!»
+
+Laisse CXXVII
+1670	Li quens Rollant apelet Oliver:
+1671	«Sire cumpaign, sel volez otrier,
+1672	Li arcevesque est mult bon chevaler,
+1673	Nen ad meillor en tere ne suz cel;
+1674	Ben set ferir e de lance e d'espiet.»
+1675	Respunt li quens: «Kar li aluns aider!»
+1676	A icest mot l'unt Francs recumencet.
+1677	Dur sunt li colps e li caples est grefs;
+1678	Mu(n)lt grant dulor i ad de chrestiens.
+1679	Ki puis veïst Rollant e Oliver
+1680	De lur espees e ferir e capler!
+1681	Li arcevesque i fiert de sun espiet,
+1682	Cels qu'il unt mort, ben les poet hom preiser;
+1683	Il est escrit es cartres e es brefs,
+1684	Ço dit la Geste, plus de .IIII. milliers.
+1685	As quatre [es]turs lor est avenut ben;
+1686	Li quint apres lor est pesant e gref.
+1687	Tuz sunt ocis cist Franceis chevalers,
+1688	Ne mes seisante, que Deus i ad esparniez:
+1689	Einz que il moergent, se vendrunt mult cher.
+
+Laisse CXXVIII
+1690	Li quens Rollant des soens i veit grant perte; AOI.
+1691	Sun cumpaignun Oliver en apelet:
+1692	«Bel sire, chers cumpainz, pur Deu, que vos enhaitet?
+1693	Tanz bons vassals veez gesir par tere!
+1694	Pleindre poüms France dulce, la bele:
+1695	De tels barons cum or remeint deserte!
+1696	E! reis, amis, que vos ici nen estes?
+1697	Oliver, frere, cumment le purrum nus faire?
+1698	Cum faitement li manderum nuveles?»
+1699	Dist Oliver: «Jo nel sai cument quere.
+1700	Mielz voeill murir que hunte nus seit retraite.» AOI.
+
+Laisse CXXIX
+1701	Ço dist Rollant: «Cornerai l'olifant,
+1702	Si l'orrat Carles, ki est as porz passant.
+1703	Jo vos plevis ja returnerunt Franc.»
+1704	Dist Oliver: «Vergoigne sereit grant
+1705	E reprover a trestuz voz parenz;
+1706	Iceste hunte dureit al lur vivant!
+1707	Quant jel vos dis, n'en feïstes nient;
+1708	Mais nel ferez par le men loement.
+1709	Se vos cornez, n'ert mie hardement.
+1710	Ja avez vos ambsdous les braz sanglanz!»
+1711	Respont li quens: «Colps i ai fait mult genz!» AOI.
+
+Laisse CXXX
+1712	Ço dit Rollant: «Forz est nostre bataille;
+1713	Jo cornerai, si l'orrat li reis Karles.»
+1714	Dist Oliver: «Ne sereit vasselage!
+1715	Quant jel vos dis, cumpainz, vos ne deignastes.
+1716	Si fust li reis, n'i oüsum damage.
+1717	Cil ki la sunt n'en deivent aveir blasme.»
+1718	Dist Oliver: «Par ceste meie barbe,
+1719	Se puis veeir ma gente sorur Alde,
+1720	Ne jerrei(e)z ja mais entre sa brace!» AOI.
+
+Laisse CXXXI
+1721	Ço dist Rollant: «Por quei me portez ire?»
+1722	(E cil) E il respont: «Cumpainz, vos le feïstes,
+1723	Kar vasselage par sens nen est folie;
+1724	Mielz valt mesure que ne fait estultie.
+1725	Franceis sunt morz par vostre legerie.
+1726	Jamais Karlon de nus n'avrat servise.
+1727	Sem(e) creïsez, venuz i fust mi sire;
+1728	Ceste bataille oüsum faite u prise;
+1729	U pris ú mort i fust li reis Marsilie.
+1730	Vostre proecce, Rollant, mar la ve[ï]mes!
+1731	Karles li Magnes de nos n'avrat aïe.
+1732	N'ert mais tel home des qu'a Deu juïse.
+1733	Vos i murrez e France en ert (...) huníe.
+1734	Oi nus defalt la leial cumpaignie:
+1735	Einz le vesp(e)re mult ert gref la departie.» AOI.
+
+Laisse CXXXII
+1736	Li arceves[ques] les ót cuntrarier,
+1737	Le cheval brochet des esperuns d'or mer,
+1738	Vint tresqu'a els, sis prist a castier:
+1739	«Sire Rollant, e vos, sire Oliver,
+1740	Pur Deu vos pri, ne vos cuntraliez!
+1741	Ja li corners ne nos avreit mester,
+1742	Mais nepurquant si est il asez melz:
+1743	Venget li reis, si nus purrat venger;
+1744	Ja cil d'Espaigne ne s'en deivent turner liez.
+1745	Nostre Franceis i descendrunt a pied,
+1746	Truverunt nos e morz e detrenchez,
+1747	Leverunt nos en bieres sur sumers,
+1748	Si nus plurrunt de doel e de pitet,
+1749	Enfuerunt [nos] en aitres de musters;
+1750	N'en mangerunt ne lu ne porc ne chen.»
+1751	Respunt Rollant: «Sire, mult dites bien.» AOI.
+
+Laisse CXXXIII
+1752	Rollant ad mis l'olifan a sa buche,
+1753	Empeint le ben, par grant vertut le sunet.
+1754	Halt sunt li pui e la voiz est mult lunge,
+1755	Granz .XXX. liwes l'oïrent il respundre.
+1756	Karles l'oït e ses cumpaignes tutes.
+1757	Ço dit li reis: «Bataille funt nostre hume!»
+1758	E Guenelun li respundit encuntre:
+1759	«S'altre le desist, ja semblast grant mençunge!» AOI.
+
+Laisse CXXXIV
+1760	Li quens Rollant, par peine e par ahans,
+1761	Par grant dulor sunet sun olifan.
+1762	Par mi la buche en salt fors li cler sancs.
+1763	De sun cervel le temple en est rumpant.
+1764	Del corn qu'il tient l'oiïe en est mult grant:
+1765	Karles l'entent, ki est as porz passant.
+1766	Naimes li duc l'oïd, si l'escultent li Franc.
+1767	Ce dist li reis: «Jo oi le corn Rollant!
+1768	Unc nel sunast se ne fust (cu)cumbatant.»
+1769	Guenes respunt: «De bataille est il nient!
+1770	Ja estes veilz e fluriz e blancs;
+1771	Par tels paroles vus resemblez enfant.
+1772	Asez savez le grant orgoill Rollant;
+1773	Ço est merveille que Deus le soefret tant.
+1774	Ja prist il Noples seinz le vostre comant;
+1775	Fors s'en eissirent li Sarrazins dedenz,
+1776	Sis cumbatirent al bon vassal Rollant;
+	. . . . . . . . . .  (lacuna: narrative gap, unnumbered)
+1777	Puis od les ewes lavat les prez del sanc,
+1778	Pur cel le fist ne fust a[pa]rissant.
+1779	Pur un sul levre vat tute jur cornant,
+1780	Devant ses pers vait il ore gabant.
+1781	Suz cel n'ad gent ki [l']osast (re)querre en champ.
+1782	Car chevalcez! Pur qu'alez arestant?
+1783	Tere Major mult est loinz ça devant.» AOI.
+
+Laisse CXXXV
+1784	Li quens Rollant ad la buche sanglente.
+1785	De sun cervel rumput en est li temples.
+1786	L'olifan sunet a dulor e a peine.
+1787	Karles l'oït e ses Franceis l'entendent,
+1788	Ço dist li reis: «cCel corn ad lunge aleine!»
+1789	Respont dux Neimes: «Baron i fait la p[e]ine!
+1790	Bataille i ad, par le men escientre.
+1791	Cil l'at traït ki vos en roevet feindre.
+1792	Adubez vos, si criez vostre enseigne,
+1793	Si sucurez vostre maisnee gente:
+1794	Asez oez que Rollant se dementet!»
+
+Laisse CXXXVI
+1795	Li empereres ad fait suner ses corns.
+1796	Franceis descendent, si adubent lor cors
+1797	D'osbercs e de helmes e d'espees a or.
+1798	Escuz unt genz e espiez granz e forz,
+1799	E gunfanuns blancs e vermeilz e blois.
+1800	Es destrers muntent tuit li barun de l'ost,
+1801	Brochent ad ait tant cum durent li port.
+1802	N'i ad celoi (a celoi) a l'altre ne parolt:
+1803	«Se veïssum Rollant einz qu'il fust mortz,
+1804	Ensembl'od lui i durriums granz colps.»
+1805	De ço qui calt? car demuret i unt trop.
+
+Laisse CXXXVII
+1806	Esclargiz est li vespres e li jurz.
+1807	Cuntre le soleil reluisent cil adub,
+1808	Osbercs e helmes i getent grant flambur,
+1809	E cil escuz, ki ben sunt peinz a flurs,
+1810	E cil espiez(z), cil oret gunfanun.
+1811	Li empereres cevalchet par irur
+1812	E li Franceis dolenz et cur[uçus](ius);
+1813	N'i ad celoi ki durement ne plurt,
+1814	E de Rollant sunt en grant poür.
+1815	Li reis fait prendre le cunte Guenelun,
+1816	Sil cumandat as cous de sa maisun.
+1817	Tut li plus maistre en apelet, Besgun.
+1818	«Ben le me guarde, si cume tel felon!
+1819	De ma maisnee ad faite traïsun.»
+1820	Cil le receit, si met .C. cumpaignons
+1821	De la quisine, des mielz e des pejurs.
+1822	Icil li peilent la barbe e les gernuns;
+1823	(Morz est Turpin le guerreier Charlun)
+1824	Cascun le fiert .IIII. colps de sun puign;
+1825	Ben le batirent a fuz e a bastuns;
+1826	E si li metent el col un caeignun,
+1827	Si l'encaeinent altresi cum un urs;
+1828	Sur un sumer l'unt mis a deshonor.
+1829	Tant le guardent quel rendent a Charlun.
+
+Laisse CXXXVIII
+1830	Halt sunt li pui e tenebrus e grant, AOI.
+1831	Li val parfunt e les ewes curant.
+1832	Sunent cil graisle e derere e devant,
+1833	E tuit rachatent encuntre l'olifant.
+1834	Li empereres chevalchet ireement,
+1835	E li Franceis cur(i[...]us)uçus e dolent;
+1836	N'i ad celoi n'i plurt e se dement,
+1837	E p[ri]ent Deu qu'il guarisset Rollant
+1838	Josque il vengent el camp cumunement:
+1839	Ensembl'od lui i ferrunt veirement.
+1840	De ço qui calt? car ne lur valt nient.
+1841	Demurent trop, n'i poedent estre a tens. AOI.
+
+Laisse CXXXIX
+1842	Par grant irur chevalchet li reis Charles;
+1843	Desur (...) sa brunie li gist sa blanche barbe.
+1844	Puignent ad ait tuit li barun de France;
+1845	N'i ad icel ne demeint irance
+1846	Que il ne sunt a Rollant le cataigne,
+1847	Ki se cumbat as Sarrazins d'Espaigne;
+1848	Si est blecet, ne quit que anme i remaigne.
+1849	Deus! quels seisante humes i ad en sa cumpaigne!
+1850	Unches meillurs n'en out reis ne c[at]aignes. AOI.
+
+Laisse CXL
+1851	Rollant reguardet es munz e es lariz;
+1852	De cels de France i veit tanz morz gesir!
+1853	E il les pluret cum chevaler gentill:
+1854	«Seignors barons, de vos ait Deus mercit!
+1855	Tutes voz anmes otreit il pareïs!
+1856	En seintes flurs il les facet gesir!
+1857	Meillors vassals de vos unkes ne vi.
+1858	Si lungement tuz tens m'avez servit,
+1859	A oes Carlon si granz païs cunquis!
+1860	Li empereres tant mare vos nurrit!
+1861	Tere de France mult estes dulz païs
+1862	Oi desertet a tant rubostl exill.
+1863	Barons Franceis, pur mei vos vei murir:
+1864	Jo ne vos pois tenser ne guarantir.
+1865	Aït vos Deus, ki unkes ne mentit!
+1866	Oliver, frere, vos ne dei jo faillir.
+1867	De doel murra, se altre ne m'i ocit.
+1868	Sire cumpainz, alum i referir!»
+
+Laisse CXLI
+1869	Li quens Rollant el champ est repairet:
+1870	Tient Durendal, cume vassal i fiert.
+1871	Faldrun de Pui i ad par mi trenchet,
+1872	E .XXIIII. de tuz les melz preisez:
+1873	Jamais n'iert home plus se voeillet venger.
+1874	Si cum li cerfs s'en vait devant les chiens,
+1875	Devant Rollant si s'en fuient paiens.
+1876	Dist l'arcevesque: «Asez le faites ben!
+1877	Itel valor deit aveir chevaler
+1878	Ki armes portet e en bon cheval set;
+1879	En bataille deit estre forz e fiers,
+1880	U altrement ne valt .IIII. deners;
+1881	Einz deit monie estre en un de cez mustiers,
+1882	Si prierat tuz jurz por noz peccez.»
+1883	Respunt Rollant: «Ferez, nes esparignez!»
+1884	A icest mot l'unt Francs recumencet.
+1885	Mult grant damage i out de chrestiens.
+
+Laisse CXLII
+1886	Home ki ço set, que ja n'avrat prisun
+1887	En tel bataill[e] fait grant defension:
+1888	Pur ço sunt Francs si fiers cume leuns.
+1889	As vus Marsilie en guise de barunt.
+1890	Siet el cheval qu'il apelet Gaignun,
+1891	Brochet le ben, si vait ferir Bevon,
+1892	Icil ert sire de Belne e de Digun,
+1893	L'escut li freint e l'osberc li derumpt,
+1894	Que mort l'abat seinz altre descunfisun;
+1895	Puis ad ocis Yvoeries e Ivon
+1896	Ensembl'od els Gerard de Russillun.
+1897	Li quens Rollant ne li est guaires loign;
+1898	Dist al paien: «Damnesdeus mal te duinst!
+1899	A si grant tort m'ociz mes cumpaignuns!
+1900	Colp en avras einz que nos departum,
+1901	E de m'espee enquoi savras le nom.»
+1902	Vait le ferir en guise de baron:
+1903	Trenchet li ad li quens le destre poign.
+1904	Puis prent la teste de Jurfaleu le Blund,
+1905	Icil ert filz al rei Marsiliun.
+1906	Paien escrient: «Aíe nos, Mahum!
+1907	Li nostre deu, vengez nos de Carlun.
+1908	En ceste tere nus ad mis tels feluns!
+1909	Ja pur murir le camp ne guerpirunt.»
+1910	Dist l'un a l'altre: «E! car nos en fuiums!»
+1911	A icest mot tels .C. milie s'en vunt:
+1912	Ki ques rapelt, ja n'en returnerunt. AOI.
+
+Laisse CXLIII
+1913	De ço qui calt? Se fuit s'en est Marsilies,
+1914	Remes i est sis uncles, Marganices,
+1915	Ki tint Kartagene, Alfrere, Garmalie
+1916	E Ethiope, une tere maldite.
+1917	La neire gent en ad en sa baillie;
+1918	Granz unt les nes e lees les oreilles,
+1919	E sunt ensemble plus de cinquante milie.
+1920	Icil chevalchent fierement e a íre,
+1921	Puis escrient l'enseigne paenime.
+1922	Ço dist Rollant: «Ci recevrums ma[r]tyrie,
+1923	E or sai ben n'avons guaires a vivre;
+1924	Mais tut seit fel cher ne se vende primes!
+1925	Ferez, seignurs, des espees furbies,
+1926	Si calengez e voz (e) mors e voz vies!
+1927	Que dulce France par nus ne seit hunie!
+1928	Quant en cest camp vendrat Carles, mi sire,
+1929	De Sarrazins verrat tel discipline,
+1930	Cuntre un des noz en truverat morz .XV.,
+1931	Ne lesserat que nos ne beneïsse.» AOI.
+
+Laisse CXLIV
+1932	Quan Rollant veit la contredite gent
+1933	Ki plus sunt neirs que nen est arrement,
+1934	Ne n'unt de blanc ne mais que sul les denz,
+1935	Ço dist li quens: «Or sai jo veirement
+1936	Que hoi murrum par le mien escient.
+1937	Ferez Franceis, car jol vos recumenz!»
+1938	Dist Oliver: «Dehet ait li plus lenz!»
+1939	A icest mot Franceis se fierent enz.
+
+Laisse CXLV
+1940	Quant paien virent que Franceis i out poi,
+1941	Entr'els en unt e orgoil e cunfort.
+1942	Dist l'un a l'altre: «L'empereor ad tort.»
+1943	Li Marganices sist sur un ceval sor,
+1944	Brochet le ben des esperuns a or,
+1945	Fiert Oliver derere en mi le dos.
+1946	Le blanc osberc li ad descust el cors,
+1947	Par mi le piz sun espiet li mist fors,
+1948	E dit apres: «Un col avez pris fort!
+1949	Carles li magnes mar vos laissat as porz!
+1950	Tort nos ad fait: nen est dreiz qu'il s'en lot,
+1951	Kar de vos sul ai ben venget les noz.»
+
+Laisse CXLVI
+1952	Oliver sent que a mort est ferut.
+1953	Tient Halteclere, dunt li acer fut bruns,
+1954	Fiert Marganices sur l'elme a or, agut,
+1955	E flurs (e) e cristaus en acraventet jus;
+1956	Trenchet la teste d'ici qu'as denz menuz,
+1957	Brandist sun colp, si l'ad mort abatut,
+1958	E dist apres: «Paien mal aies tu!
+1959	Iço ne di que Karles n'i ait perdut;
+1960	Ne a muiler ne a dame qu'aies veüd,
+1961	N'en vanteras el regne dunt tu fus
+1962	Vaillant a un dener que m'i aies tolut,
+1963	Ne fait damage ne de mei ne d'altrui!»
+1964	Apres escriet Rollant qu'il li aiut. AOI.
+
+Laisse CXLVII
+1965	Oliver sent qu'il est a mort nasfret.
+1966	De lui venger ja mais ne li ert lez.
+1967	En la grant presse or i fiert cume ber,
+1968	Trenchet cez hanstes e cez escuz buclers,
+1969	E piez e poinz e seles e costez.
+1970	Ki lui veïst Sarrazins desmembrer,
+1971	Un mort sur altre geter,
+1972	De bon vassal li poüst remembrer.
+1973	L'enseigne Carle n'i volt mie ublier:
+1974	«Munjoie!» escriet e haltement e cler.
+1975	Rollant apelet, sun ami e sun per:
+1976	«Sire cumpaign, a mei car vus justez!
+1977	A grant dulor ermes hoi desevrez.» AOI.
+
+Laisse CXLVIII
+1978	Rollant reguardet Oliver al visage:
+1979	Teint fut e pers, desculuret e pale.
+1980	Li sancs tuz clers par mi le cors li raiet:
+1981	Encuntre tere en cheent les esclaces.
+1982	«Deus!» dist li quens, «or ne sai jo que face.
+1983	Sire cumpainz, mar fut vostre barnage!
+1984	Jamais n'iert hume ki tun cors cuntrevaillet.
+1985	E! France dulce, cun hoi remendras guaste
+1986	De bons vassals, cunfundue e chaiete!
+1987	Li emperere en avrat grant damage.»
+1988	A icest mot sur sun cheval se pasmet. AOI.
+
+Laisse CXLIX
+1989	As vus Rollant sur sun cheval pasmet,
+1990	E Oliver ki est a mort nasfret:
+1991	Tant ad seinet (ki) li oil li sunt trublet;
+1992	Ne loinz ne pres (es) ne poet vedeir si cler
+1993	Que rec[on]oistre poisset nuls hom mortel.
+1994	Sun cumpaignun, cum il l'at encontret,
+1995	Sil fiert amunt sur l'elme a or gemet:
+1996	Tut li detrenchet d'ici qu'al nasel;
+1997	Mais en la teste ne l'ad mie adeset.
+1998	A icel colp l'ad Rollant reguardet,
+1999	Si li demandet dulcement e suef:
+2000	«Sire cumpain, faites le vos de gred?
+2001	Ja est ço Rollant, ki tant vos soelt amer!
+2002	Par nule guise ne m'aviez desfiet!»
+2003	Dist Oliver: «Or vos oi jo parler;
+2004	Jo ne vos vei, veied vus Damnedeu!
+2005	Ferut vos ai, car le me pardunez!»
+2006	Rollant respunt: «Jo n'ai nient de mal.
+2007	Jol vos parduins ici e devant Deu.»
+2008	A icel mot l'un a l'altre ad clinet.
+2009	Par tel [...] amur as les vus desevred!
+
+Laisse CL
+2010	Oliver sent que la mort mult l'angoisset.
+2011	Ansdous les oilz en la teste li turnent,
+2012	L'oíe pert e la veüe tute;
+2013	Descent a piet, a l[a] tere se culchet,
+2014	Durement en halt si recleimet sa culpe,
+2015	Cuntre le ciel ambesdous ses mains juintes,
+2016	Si priet Deu que pareïs li dunget
+2017	E beneïst Karlun e France dulce,
+2018	Sun cumpaignun Rollant sur tuz humes.
+2019	Falt li le coer, le helme li embrunchet,
+2020	Trestut le cors a la tere li justet.
+2021	Morz est li quens, que plus ne se demuret.
+2022	Rollant li ber le pluret, sil duluset;
+2023	Jamais en tere n'orrez plus dolent hume!
+
+Laisse CLI
+2024	Or veit Rollant que mort est sun ami,
+2025	Gesir adenz, a la tere sun vis,
+2026	Mult dulcement a regreter le prist:
+2027	«Sire cumpaign, tant mar fustes hardiz!
+2028	Ensemble avum estet e anz e dis;
+2029	Nem fesis mal ne jo nel te forsfis.
+2030	Quant tu es mor[t], dulur est que jo vif!»
+2031	A icest mot se pasmet li marchis
+2032	Sur sun ceval que cleimet Veillantif.
+2033	Afermet est a ses estreus d'or fin:
+2034	Quel part qu'il alt, ne poet mie chaïr.
+
+Laisse CLII
+2035	Ainz que Rollant se seit aperceüt,
+2036	De pasmeisuns guariz ne revenuz,
+2037	Mult grant damage li est apareüt:
+2038	Morz sunt Franceis, tuz les i ad perdut,
+2039	Senz l'arcevesque e senz Gualter del Hum.
+2040	Repairez est des muntaignes jus;
+2041	A cels d'Espaigne mult s'i est cumbatuz;
+2042	Mort sunt si hume, sis unt paiens (...) vencut;
+2043	Voeillet (illi) o nun, desuz cez vals s'en fuit,
+2044	Si reclaimet Rollant, qu'il li aiut:
+2045	«E! gentilz quens, vaillanz hom, ú ies tu?
+2046	Unkes nen oi poür, la u tu fus.
+2047	Ço est Gualter, ki cunquist Maelgut,
+2048	Li nies Droün, al vieill e al canut!
+2049	Pur vasselage suleie estre tun drut.
+2050	Ma hanste est fraite e percet mun escut,
+2051	E mis osbercs desmailet e rumput;
+2052	Par mi le cors hot une lances [...] ferut.
+2053	Sempres murrai, mais cher me sui vendut!»
+2054	A icel mot l'at Rollant entendut;
+2055	Le cheval brochet, si vient poignant vers lui. AOI.
+
+Laisse CLIII
+2056	Rollant ad doel, si fut maltalentifs;
+2057	En la grant presse cumencet a ferir.
+2058	De cels d'Espaigne en ad get[et] mort .XX.,
+2059	E Gualter .VI. e l'arcevesque .V.
+2060	Dient paien: «(Felun) Feluns humes ad ci!
+2061	Guardez, seignurs, qu'il n'en algent vif!
+2062	Tut par seit fel ki nes vait envaïr,
+2063	E recreant ki les lerrat guar[ir]!»
+2064	Dunc recumencent e le hu e le cri;
+2065	De tutes parz le revunt envaïr. AOI.
+
+Laisse CLIV
+2066	Li quens Rollant fut noble guerrer,
+2067	Gualter de Hums est bien bon chevaler,
+2068	Li arcevesque prozdom e essaiet:
+2069	Li uns ne volt l'altre nient laisser.
+2070	En la grant presse i fierent as paiens.
+2071	Mil Sarrazins i descendent a piet,
+2072	E a cheval sunt .XL. millers.
+2073	Men escientre nes osent aproismer.
+2074	Il lor lancent e lances e espiez,
+2075	E wigres e darz e museras e agiez e gieser.
+2076	As premers colps i unt ocis Gualter,
+2077	Turpins de Reins tut sun escut percet,
+2078	Quasset sun elme, si l'unt nasfret el chef,
+2079	E sun osberc rumput e desmailet;
+2080	Par mi le cors nasfret de .IIII. espiez;
+2081	Dedesuz lui ocient sun destrer.
+2082	Or est grant doel quant l'arcevesque chiet. AOI.
+
+Laisse CLV
+2083	Turpins de Reins, quant se sent abatut,
+2084	De .IIII. espiez par mi le cors ferut,
+2085	Isnelement li ber resailit sus;
+2086	Rollant reguardet, puis si li est curut,
+2087	E dist un mot: «Ne sui mie vencut!
+2088	Ja bon vassal nen ert vif recreüt.»
+2089	Il trait Almace, s'espee de acer brun,
+2090	En la grant presse mil colps i fiert e plus,
+2091	Puis le dist Carles qu'il n'en esparignat nul;
+2092	Tels .IIII. cenz i troevet entur lui:
+2093	Alquanz nafrez, alquanz par mi ferut,
+2094	Si out d'icels ki les chefs unt perdut.
+2095	Ço dit la Geste e cil ki el camp fut:
+2096	Li ber Gilie, por qui Deus fait vertuz,
+2097	E fist la chartre el muster de Loüm.
+2098	Ki tant ne set ne l'ad prod entendut.
+
+Laisse CLVI
+2099	Li quens Rollant genteme[n]t se cumbat,
+2100	Mais le cors ad tressuet e mult chalt;
+2101	En la teste ad e dulor e grant mal:
+2102	Rumput est li temples, por ço que il cornat.
+2103	Mais saveir volt se Charles i vendrat:
+2104	Trait l'olifan, fieblement le sunat.
+2105	Li emperere s'estut, si l'escultat:
+2106	«Seignurs,» dist il, «mult malement nos vait!
+2107	Rollant mis nies hoi cest jur nus defalt.
+2108	Jo oi al corner que guaires ne vivrat.
+2109	Ki estre i voelt isnelement chevalzt!
+2110	Sunez voz graisles tant que en cest ost ad!»
+2111	Seisante milie en i cornent si halt,
+2112	Sunent li munt e respondent li val:
+2113	Paien l'entendent, nel tindrent mie en gab;
+2114	Dit l'un a l'altre: «Karlun avrum nus ja!»
+
+Laisse CLVII
+2115	Dient paien: «L'emperere repairet! AOI.
+2116	De cels de France oe(n)z suner les graisles!
+2117	Se Carles vient, de nus i avrat perte.
+2118	Se R[ollant] vit, nostre guere renovelet,
+2119	Perdud avuns Espaigne, nostre tere.»
+2120	Tels .IIII. cenz s'en asemble[nt] a helmes,
+2121	E des meillors ki el camp quient estre:
+2122	A Rollant rendent un estur fort e pesme.
+2123	Or ad li quens endreit sei asez que faire. AOI.
+
+Laisse CLVIII
+2124	Li quens Rollant, quant il les veit venir,
+2125	Tant se fait fort e fiers e maneviz!
+2126	Ne lur lerat tant cum il serat vif.
+2127	Siet el cheval qu'om cleimet Veillantif,
+2128	Brochet le bien des esperuns d'or fin,
+2129	En la grant presse les vait tuz envaïr,
+2130	Ensem[b]l'od lui arcevesques Turpin.
+2131	Dist l'un a l'altre: «Ça vus traiez ami!
+2132	De cels de France les corns avuns oït:
+2133	Carles repairet, li reis poesteïfs!»
+
+Laisse CLIX
+2134	Li quens Rollant unkes n'amat cuard
+2135	Ne orguillos, ne malvais (...) hume de male part,
+2136	Ne chevaler, se il ne fust bon vassal.
+2137	Li arcevesques Turpin en apelat:
+2138	«Sire, a pied estes e jo sui a ceval;
+2139	Pur vostre amur ici prendrai estal;
+2140	Ensemble avruns e le ben e le mal;
+2141	Ne vos lerrai pur nul hume de car.
+2142	Encui rendruns a paiens cest asalt.
+2143	Les colps des mielz, cels sunt de Durendal.»
+2144	Dist l'arcevesque: «Fel seit ki ben n'i ferrat.
+2145	Carles repairet, ki ben nus vengerat.»
+
+Laisse CLX
+2146	Paien dient: «Si mare fumes nez!
+2147	Cum pes[mes] jurz nus est hoi ajurnez!
+2148	Perdut avum noz seignurs e noz pers.
+2149	Carles repeiret od sa grant ost li ber;
+2150	De cels de France odum les graisles clers,
+2151	Grant est la noise de «Munjoie!» escrier.
+2152	Li quens Rollant est de tant grant fiertet,
+2153	Ja n'ert vencut pur nul hume carnel.
+2154	Lancuns a lui, puis sil laissums ester.»
+2155	E il si firent darz e wigres asez,
+2156	Espiez e lances e museraz enpennez;
+2157	(Le) L'escut Rollant unt frait e estroet,
+2158	E sun osberc rumput e desmailet;
+2159	Mais enz el cors ne l'unt mie adeset.
+2160	Mais Veillantif unt en .XXX. lius nafret,
+2161	Desuz le cunte, si l'i unt mort laisset.
+2162	Paien s'en fuient, puis sil laisent ester.
+2163	Li quens Rollant i est remes a pied. AOI.
+
+Laisse CLXI
+2164	Paien s'en fuient, curucus e irez;
+2165	Envers Espaigne tendent de l'espleiter.
+2166	Li quens Rollant nes ad dunt encalcer:
+2167	Perdut i ad Veillantif sun destrer;
+2168	Voellet o nun, remes i est a piet.
+2169	A l'arcevesque Turpin alat aider:
+2170	Sun elme ad or li deslaçat del chef,
+2171	Si li tolit le blanc osberc leger,
+2172	E sun blialt li ad tut detrenchet;
+2173	En ses granz plaies les pans li ad butet;
+2174	Cuntre sun piz puis si l'ad enbracet;
+2175	Sur l'erbe verte puis l'at suef culchet,
+2176	Mult dulcement li ad Rollant preiet:
+2177	«E! gentilz hom, car me dunez cunget!
+2178	Noz cumpaignuns, que oümes tanz chers,
+2179	Or sunt il morz: nes i devuns laiser.
+2180	Joes voell aler querre e entercer,
+2181	Dedevant vos juster e enrenger.»
+2182	Dist l'arcevesque: «Alez e repairez!
+2183	Cist camp est vostre, mercit Deu [...] mien.»
+
+Laisse CLXII
+2184	Rollant s'en turnet, par le camp vait tut suls,
+2185	Cercet les vals e si cercet les munz:
+2186	Iloec truvat Gerin e Gerer sun cumpaignun.
+2187	E si truvat Berenger e Attun;
+2188	Iloec truvat Anseïs e Sansun,
+2189	Truvat Gerard le veill de Russillun.
+2190	Par uns e uns les ad pris le barun,
+2191	A l'arcevesque en est venuz a tut,
+2192	Sis mist en reng dedevant ses genuilz.
+2193	Li arcevesque ne poet muer n'en plurt,
+2194	Lievet sa main, fait sa b[en]eïçun,
+2195	Apres ad dit: «Mare fustes, seignurs!
+2196	Tutes voz anmes ait Deus li Glorius!
+2197	En pareïs les metet en se[i]ntes flurs!
+2198	La meie mort me rent si anguissus:
+2199	Ja ne verrai le riche empereuür!»
+
+Laisse CLXIII
+2200	Rollant s'en turnet, le camp vait recercer,
+2201	Sun cumpaignun ad truvet, Oliver:
+2202	Encuntre sun piz estreit l'ad enbracet;
+2203	Si cum il poet a l'arcevesques en vent,
+2204	Sur un escut l'ad as altres culchet,
+2205	E l'arcevesque (les) [l']ad asols e seignet.
+2206	Idunc agreget le doel e la pitet.
+2207	Ço dit Rollant: «Bels cumpainz Oliver,
+2208	Vos fustes fils al duc Reiner
+2209	Ki tint la marche del val de Runers.
+2210	Pur hanste freindre e pur escuz peceier,
+2211	Pur orgoillos veincre e esmaier,
+2212	E pur prozdomes tenir e cunseiller,
+2213	E pur glutun veincre e esmaier,
+2214	En nule tere n'ad meillor chevaler!»
+
+Laisse CLXIV
+2215	Li quens Rollant, quant il veit mort ses pers,
+2216	E Oliver, qu'il tant poeit amer,
+2217	Tendrur en out, cumencet a plurer.
+2218	En sun visage fut mult desculurez.
+2219	Si grant doel out que mais ne pout ester;
+2220	Voeillet o nun, a tere chet pasmet.
+2221	Dist l'arcevesque: «Tant mare fustes ber!»
+
+Laisse CLXV
+2222	Li arcevesques quant vit pasmer Rollant,
+2223	Dunc out tel doel unkes mais n'out si grant.
+2224	Tendit sa main, si ad pris l'olifan:
+2225	En Rencesvals ad un ewe curant;
+2226	Aler i volt, sin durrat a Rollant.
+2227	Sun petit pas s'en turnet cancelant.
+2228	Il est si fieble qu'il ne poet en avant;
+2229	N'en ad vertut, trop ad perdut del sanc.
+2230	Einz que om alast un sul arpent de camp,
+2231	Falt li le coer, si est chaeit avant.
+2232	La sue mort l'i vait mult angoissant.
+
+Laisse CLXVI
+2233	Li quens Rollant revient de pasmeisuns:
+2234	Sur piez se drecet, mais il ad grant dulur.
+2235	Guardet aval e si guardet amunt:
+2236	Sur l'erbe verte, ultre ses cumpaignuns,
+2237	La veit gesir le nobilie barun,
+2238	Ço est l'arcevesque, que Deus mist en sun num.
+2239	Cleimet sa culpe, si reguardet amunt,
+2240	Cuntre le ciel amsdous ses mains ad juinz,
+2241	Si priet Deu que pareïs li duinst.
+2242	[Morz est Turpin, le guerreier Charlun.]
+2243	Par granz batailles e par mult bels sermons,
+2244	Cuntre paiens fut tuz tens campiuns.
+2245	Deus li otreit (la sue) seinte beneïçun! AOI.
+
+Laisse CLXVII
+2246	Li quens Rollant veit l'ar[ce]vesque a tere:
+2247	Defors sun cors veit gesir la buele;
+2248	Desuz le frunt li buillit la cervele.
+2249	Desur sun piz, entre les dous furceles,
+2250	Cruisiedes ad ses blanches [mains], les beles.
+2251	Forment le pleignet a la lei de sa tere:
+2252	«E! gentilz hom, chevaler de bon aire,
+2253	Hoi te cumant al Glorius celeste!
+2254	Jamais n'ert hume plus volenters le serve.
+2255	Des les apostles ne fut hom tel prophete
+2256	Pur lei tenir e pur humes atraire.
+2257	Ja la vostre anme nen ait sufraite!
+2258	De pareïs li seit la porte uverte!»
+
+Laisse CLXVIII
+2259	Ço sent Rollant que la mort li est pres
+2260	Par les oreilles fors se ist la cervel.
+2261	De ses pers priet Deu ques apelt,
+2262	E pois de lui a l'angle Gabriel.
+2263	Prist l'olifan, que reproce n'en ait,
+2264	E Durendal s'espee en l'altre main.
+2265	D'un arcbaleste ne poet traire un quarrel,
+2266	Devers Espaigne en vait en un guaret;
+2267	Muntet sur un tertre; desuz un arbre bel(e)
+2268	Quatre perruns i ad, de marbre fait(e).
+2269	Sur l'erbe verte si est caeit envers:
+2270	La s'est pasmet, kar la mort li est pres.
+
+Laisse CLXIX
+2271	Halt sunt li pui e mult halt les arbres.
+2272	Quatre perruns i ad luisant de marbre.
+2273	Sur l'erbe verte li quens Rollant se pasmet.
+2274	Uns Sarrazins tute veie l'esguardet:
+2275	Si se feinst mort, si gist entre les altres;
+2276	Del sanc luat sun cors e sun visage.
+2277	Met sei en piez e de curre s'astet.
+2278	Bels fut e forz e de grant vasselage;
+2279	Par sun orgoill cumencet mortel rage;
+2280	Rollant saisit e sun cors e ses armes,
+2281	E dist un mot: «Vencut est li nies Carles!
+2282	Iceste espee porterai en Arabe.»
+2283	En cel tirer(es) li quens s'aperçut alques.
+
+Laisse CLXX
+2284	Ço sent Rollant que s'espee li tolt.
+2285	Uvrit les oilz, si li ad dit un mot:
+2286	«Men escientre, tu n'ies mie des noz!»
+2287	Tient l'olifan, que unkes perdre ne volt,
+2288	Sil fiert en l'elme, ki gemmet fut a or:
+2289	Fruisset l'acer e la teste e les ós,
+2290	Amsdous les oilz del chef li ad mis fors;
+2291	Jus a ses piez si l'ad tresturnet mort.
+2292	Apres li dit: «Culvert paien, cum fus unkes si ós
+2293	Que me saisis, ne a dreit ne a tort?
+2294	Ne l'orrat hume, ne t'en tienget por fol.
+2295	Fenduz en est mis olifans el gros,
+2296	Caiuz en est li cristals e li ors.»
+
+Laisse CLXXI
+2297	Ço sent Rollant la veúe ad perdue;
+2298	Met sei sur piez, quanqu'il poet, s'esvertuet;
+2299	En sun visage sa culur ad perdue.
+2300	Dedevant lui ad une perre byse:
+2301	.X. colps i fiert par doel e par rancune.
+2302	Cruist li acers, ne freint, [ne] n'esgruignet.
+2303	«E!» dist li quens, «sainte Marie, aiue!
+2304	E! Durendal, bone, si mare fustes!
+2305	Quant jo mei perd, de vos n'en ai mais cure.
+2306	Tantes batailles en camp en ai vencues.
+2307	E tantes teres larges escumbatues,
+2308	Que Carles tient, ki la barbe ad canue!
+2309	Ne vos ait hume ki pur altre fuiet!
+2310	Mult bon vassal vos ad lung tens tenue:
+2311	Jamais n'ert tel en France l'asolue.»
+
+Laisse CLXXII
+2312	Rollant ferit el perrun de sardónie.
+2313	Cruist li acers, ne briset ne n'esgrunie.
+2314	Quant il ço vit que n'en pout mie freindre,
+2315	A sei meïsme la cumencet a pleindre:
+2316	«E! Durendal, cum es bele, e clere, e blanche!
+2317	Cuntre soleill si luises e reflambes!
+2318	Carles esteit es vals de Moriane,
+2319	Quant Deus del cel li mandat par sun a[n]gle,
+2320	Qu'il te dunast a un cunte cataignie:
+2321	Dunc la me ceinst li gentilz reis, li magnes.
+2322	Jo l'en cunquis Namon e Bretaigne,
+2323	Si l'en cunquis e Peitou e le Maine;
+2324	Jo l'en cunquis Normendie la franche,
+2325	Si l'en cunquis Provence e Equitaigne
+2326	E Lumbardie e trestute (r)Romaine;
+2327	Jo l'en cunquis Baiver e tute Flandres,
+2328	E Burguigne e trestute Puillanie,
+2329	Costentinnoble, dunt il out la fiance,
+2330	E en Saisonie fait il ço, qu'il demandet;
+2331	Jo l'en cunquis e Escoce e Vales Islonde,
+2332	E Engletere, que il teneit sa cambre;
+2333	Cunquis l'en ai païs e teres tantes,
+2334	Que Carles tient, ki ad la barbe blanche.
+2335	Pur ceste espee ai dulor e pesance:
+2336	Mielz voeill murir qu'entre paiens remaigne.
+2337	Deus! Perre, n'en laise(i)t hunir France!»
+
+Laisse CLXXIII
+2338	Rollant ferit en une perre bise,
+2339	Plus en abat que jo ne vos sai dire.
+2340	L'espee cruist, ne fruisset, ne ne brise,
+2341	Cuntre ciel amunt est resortie.
+2342	Quant veit li quens que ne la freindrat mie,
+2343	Mult dulcement la pleinst a sei meïsme:
+2344	«E! Durendal, cum es bele e seintisme!
+2345	En l'oriet punt asez i ad reliques:
+2346	La dent seint Perre e del sanc seint Basilie,
+2347	E des chevels mun seignor seint Denise,
+2348	Del vestement i ad seinte Marie.
+2349	Il nen est dreiz que paiens te baillisent;
+2350	De chrestiens devrez estre servie.
+2351	Ne vos ait hume ki facet cuardie!
+2352	Mult larges teres de vus avrai cunquises,
+2353	Que Carles les tent, ki la barbe ad flurie.
+2354	E li empereres en est ber e riches.»
+
+Laisse CLXXIV
+2355	Ço sent Rollant que la mort le tresprent,
+2356	Devers la teste sur le quer li descent.
+2357	Desuz un pin i est alet curant,
+2358	Sur l'erbe verte s'i est culcet adenz,
+2359	Desuz lui met s'espee e l'olifan (en sumet);
+2360	Turnat sa teste vers la paiene gent;
+2361	Pur ço l'at fait que il voelt veirement
+2362	Que Carles diet e trestute sa gent,
+2363	Li gentilz quens, qu'il fut mort cunquerant.
+2364	Cleimet sa culpe e menut e suvent;
+2365	Pur ses pecchez Deu (recleimet) en puroffrid lo guant. AOI.
+
+Laisse CLXXV
+2366	Ço sent Rollant de sun tens n'i ad plus.
+2367	Devers Espaigne est en un pui agut;
+2368	A l'une main si ad sun piz batud:
+2369	«Deus, meie culpe vers les tues vertuz
+2370	De mes pecchez, des granz e des menuz
+2371	Que jo ai fait des l'ure que nez fui
+2372	Tresqu'a cest jur que ci sui consoüt!»
+2373	Sun destre guant en ad vers Deu tendut:
+2374	Angles del ciel i descendent a lui. AOI.
+
+Laisse CLXXVI
+2375	Li quens Rollant se jut desuz un pin;
+2376	Envers Espaigne en ad turnet sun vis.
+2377	De plusurs choses a remembrer li prist:
+2378	De tantes teres cum li bers conquist,
+2379	De dulce France, des humes de sun lign,
+2380	De Carlemagne, sun seignor, kil nurrit.
+2381	Ne poet muer n'en plurt e ne suspirt.
+2382	Mais lui meïsme ne volt mettre en ubli,
+2383	Cleimet sa culpe, si priet Deu mercit:
+2384	«Veire Patene, ki unkes ne mentis,
+2385	Seint Lazaron de mort resurrexis,
+2386	E Daniel des leons guaresis,
+2387	Guaris de mei l'anme de tuz perilz
+2388	Pur les pecchez que en ma vie fis!»
+2389	Sun destre guant a Deu en puroffrit;
+2390	Seint Gabriel de sa main l'ad pris.
+2391	Desur sun braz teneit le chef enclin;
+2392	Juntes ses mains est alet a sa fin.
+2393	Deus tramist sun angle Cherubin,
+2394	E seint Michel del Peril;
+2395	Ensembl'od els sent Gabriel i vint.
+2396	L'anme del cunte portent en pareïs.
+
+Laisse CLXXVII
+2397	Morz est Rollant, Deus en ad l'anme es cels.
+2398	Li emperere en Rence[s]val[s] parvient.
+2399	Il nen i ad ne veie ne senter,
+2400	Ne voide tere, ne alne (illi) [ne] plein pied,
+2401	Que il n'i ait o Franceis ó paien.
+2402	Carles escriet: «U estes vos, bels nies?
+2403	U est l'arcevesque e li quens Oliver?
+2404	U est Gerins e sis cumpainz Gerers?
+2405	U est Otes e li quens Berengers
+2406	Ive e Ivorie, que jo aveie tant chers?
+2407	Que est devenuz li Guascuinz Engeler?
+2408	Sansun li dux e Anseïs li bers?
+2409	U est Gerard de Russillun li veilz?
+2410	Li .XII. per, que jo aveie laiset?»
+2411	De ço qui chelt, quant nul n'en respundiet?
+2412	- «Deus!» dist li reis, «tant me pois esmaer
+2413	Que jo ne fui a l'estur cumencer!»
+2414	Tiret sa barbe cum hom ki est iret;
+2415	Plurent des oilz si baron chevaler;
+2416	Encuntre tere se pasment .XX. millers.
+2417	Naimes li dux en ad mult grant pitet.
+
+Laisse CLXXVIII
+2418	Il n'en i ad chevaler ne barun
+2419	Que de pitet mult durement ne plurt;
+2420	Plurent lur filz, lur freres, lur nevolz,
+2421	E lur amis e lur lige seignurs;
+2422	Encuntre tere se pasment [...] li plusur.
+2423	Naimes li dux d'iço ad fait que proz,
+2424	Tuz premereins l'ad dit l empereür:
+2425	«Veez avant de dous liwes de nus,
+2426	Ve[d]e[i]r puez les granz chemins puldrus,
+2427	(Que) Qu'ase(n)z i ad de la gent paienur.
+2428	Car chevalchez! Vengez ceste dulor!»
+2429	- «E! Deus!» dist Carles, «ja sunt il ja si luinz!
+2430	Cunse[i]l[l]ez mei e dreit[ure] e honur;
+2431	De France dulce m'unt tolud la flur.»
+2432	Li reis cumandet Gebuin e Otun,
+2433	Tedbalt de Reins e le cunte Milun:
+2434	«Guardez le champ e les vals e les munz.
+2435	Lessez gesir les morz tut issi cun il sunt,
+2436	Que n'i adeist ne beste ne lion,
+2437	Ne n'i adeist esquier ne garçun;
+2438	Jo vus defend que n'i adeist nuls hom,
+2439	Josque Deus voeil[l]e que en cest camp revengum.»
+2440	E cil respundent dulcement, par amur:
+2441	«Dreiz emperere, cher sire, si ferum!»
+2442	Mil chevaler i retienent des lur. AOI.
+
+Laisse CLXXIX
+2443	Li empereres fait ses graisles suner,
+2444	Puis si chevalchet od sa grant ost li ber.
+2445	De cels d'Espaigne unt lur les dos turnez,
+2446	Tenent l'enchalz, tuit en sunt cumunel.
+2447	Quant veit li reis le vespres decliner,
+2448	Sur l'erbe verte descent li reis en un pred,
+2449	Culchet sei a tere, si priet Damnedeu
+2450	Que li soleilz facet pur lui arester,
+2451	La nuit targer e le jur demurer.
+2452	Ais li un angle ki od lui soelt parler,
+2453	Isnelement si li ad comandet:
+2454	«Charle, chevalche, car tei ne faudrad clartet!
+2455	La flur de France as perdut, ço set Deus.
+2456	Venger te poez de la gent criminel.»
+2457	A icel mot est l'emperere muntet. AOI.
+
+Laisse CLXXX
+2458	Pur Karlemagne fist Deus vertuz mult granz,
+2459	Car li soleilz est remes en estant.
+2460	Paien s'en fuient, ben les chalcent Franc.
+2461	El Val Tenebrus la les vunt ateignant,
+2462	Vers Sarraguce les enchalcent [...] franc,
+2463	A colps pleners les en vunt ociant,
+2464	Tolent lur veies e les chemins plus granz.
+2465	L'ewe de Sebre, el lur est dedevant:
+2466	Mult est parfunde, merveill[us]e e curant;
+2467	Il n'en i ad barge, ne drodmund ne caland.
+2468	Paiens recleiment un lur deu, Tervagant,
+2469	Puis saillent enz, mais il n'i unt guarant.
+2470	Li adubez en sunt li plus pesant,
+2471	Env(er)ers les funz s'en turnerent alquanz;
+2472	Li altre en vunt cuntreval flotant.
+2473	Li miez guariz en unt boüd itant,
+2474	Tuz sunt neiez par merveillus ahan.
+2475	Franceis escrient: «Mare fustes, Rollant!» AOI.
+
+Laisse CLXXXI
+2476	Quant Carles veit que tuit sunt mort paiens,
+2477	Alquanz ocis e li plusur neiet,
+2478	Mult grant eschec en unt si chevaler,
+2479	Li gentilz reis descendut est a piet,
+2480	Culchet sei a tere, sin ad Deu graciet.
+2481	Quant il se drecet, li soleilz est culchet.
+2482	Dist l'emperere: «Tens est del herberger;
+2483	En Rencesvals est tart del repairer:
+2484	Nos chevals sunt e las e ennuiez.
+2485	Tolez lur les seles, le freins qu'il unt es chefs,
+2486	E par cez prez les laisez refreider.»
+2487	Respundent Franc: «Sire, vos dites bien.» AOI.
+
+Laisse CLXXXII
+2488	Li emperere ad prise sa herberge.
+2489	Franceis descendent en la tere deserte,
+2490	A lur chevals unt toleites les seles,
+2491	Les freins a or e metent jus des testes,
+2492	Livrent lur prez, asez i ad fresche herbe;
+2493	D'altre cunreid ne lur poeent plus faire.
+2494	Ki mult est las, il se dort cuntre tere.
+2495	Icele noit n'unt unkes escalguaite.
+
+Laisse CLXXXIII
+2496	Li emperere s'est culcet en un pret:
+2497	Sun grant espiet met a sun chef li ber;
+2498	Icele noit ne se volt il desarmer,
+2499	Si ad vestut sun blanc osberc sasfret,
+2500	Laciet sun elme, ki est a or gemmet,
+2501	Ceinte Joiuse, unches ne fut sa per,
+2502	Ki cascun jur muet .XXX. clartez.
+2503	Asez savum de la lance parler
+2504	Dunt Nostre Sire fut en la cruiz nasfret:
+2505	Carles en ad la mure, mercit Deu;
+2506	en l'oret punt l'ad faite manuvrer.
+2507	Pur ceste honur e pur ceste bontet,
+2508	Li nums Joiuse l'espee fut dunet.
+2509	Baruns franceis nel deivent ublier:
+2510	Enseigne en unt de «Munjoie!» crier;
+2511	Pur ço nes poet nule gent cuntrester.
+
+Laisse CLXXXIV
+2512	Clere est la noit e la lune luisante.
+2513	Carles se gist, mais doel ad de Rollant
+2514	E d'Oliver li peiset mult forment,
+2515	Des .XII. pers e de la franceise gent.
+2516	[Qu']en Rencesvals ad laiset morz sang[l]enz.
+2517	Ne poet muer n'en plurt e nes dement
+2518	E priet Deu qu'as anmes seit guarent.
+2519	Las est li reis, kar la peine est mult grant;
+2520	Endormiz est, ne pout mais en avant.
+2521	Par tuz les prez or se dorment li Franc.
+2522	N'i ad cheval ki puisset ester en estant;
+2523	Ki herbe voelt, il la prent en gisant.
+2524	Mult ad apris ki bien conuist ahan.
+
+Laisse CLXXXV
+2525	Karles se dort cum hume traveillet.
+2526	Seint Gabriel li ad Deus enveiet:
+2527	L'empereür li cumandet a guarder.
+2528	Li angles est tute noit a sun chef.
+2529	Par avisiun li ad anunciet
+2530	D'une bataille ki encuntre lui ert:
+2531	Senefiance l'en demustrat mult gref.
+2532	Carles guardat amunt envers le ciel,
+2533	Veit les tuneires e les venz e les giels,
+2534	E les orez, les merveillus tempez,
+2535	E fous e flambes i est apareillez:
+2536	Isnelement sur tute sa gent chet.
+2537	Ardent cez hanstes de fraisne e de pumer
+2538	E cez escuz jesqu'as bucles d'or mier,
+2539	Fruisent cez hanstes de cez trenchanz espiez,
+2540	Cruissent osbercs e cez helmes d'acer.
+2541	En grant dulor i veit ses chevalers.
+2542	Urs e leuparz les voelent puis manger,
+2543	Serpenz e guivres, dragun e averser;
+2544	Grifuns i ad, plus de trente millers:
+2545	N'en i ad cel a Franceis ne s'agiet.
+2546	E Franceis crient: «Carlemagne, aidez!»
+2547	Li reis en ad e dulur e pitet;
+2548	Aler i volt, mais il ad desturber.
+2549	Devers un gualt uns granz leons li vint,
+2550	Mult par ert pesmes e orguillus e fiers;
+2551	Sun cors meïsmes i asalt e requert,
+2552	E prenent sei a braz ambesdous por loiter;
+2553	Mais ço ne set liquels abat ne quels chiet.
+2554	Li emperere n'est mie esveillet.
+
+Laisse CLXXXVI
+2555	Apres icel li vien[t] un altre avisiun,
+2556	Qu'il ert en France, ad Ais, a un perrun,
+2557	En dous chaeines si teneit un brohun.
+2558	Devers Ardene veeit venir .XXX. urs,
+2559	Cascun parolet altresi cume hum.
+2560	Diseient li: «Sire rendez le nus!
+2561	Il nen est dreiz que il seit mais od vos;
+2562	Nostre parent devum estre a sucurs.»
+2563	De sun paleis uns veltres acurt;
+2564	Entre les altres asaillit le greignur
+2565	Sur l'erbe verte ultre ses cumpaignuns.
+2566	La vit li reis si merveillus estur;
+2567	Mais ço ne set liquels veint ne quels nun.
+2568	Li angles Deu ço ad mustret al barun.
+2569	Carles se dort tresqu'al demain, al cler jur.
+
+Laisse CLXXXVII
+2570	Li reis Marsilie s'en fuit en Sarraguce.
+2571	Suz un olive est descendut en l'umbre,
+2572	S'espee rent e sun elme e sa bronie;
+2573	Sur la verte herbe mult laidement se culcet;
+2574	La destre main ad perdue trestute;
+2575	Del sanc qu'en ist se pasmet e angoiset.
+2576	Dedevant lui sa muiller, Bramimunde,
+2577	Pluret e criet, mult forment se doluset;
+2578	Ensembl'od li plus de .XX. mil humes,
+2579	Si maldient Carlun e France dulce.
+2580	Ad Apolin (en) curent en une crute,
+2581	Tencent a lui, laidement le despersunent:
+2582	«E! malvais deus, por quei nus fais tel hunte?
+2583	Cest nostre rei por quei lessas cunfundre?
+2584	Ki mult te sert, malvais luer l'en dunes!»
+2585	Puis si li tolent se sceptre e sa curune.
+2586	Par les mains le pendent sur une culumbe,
+2587	Entre lur piez a tere le tresturnent,
+2588	A granz bastuns le batent e defruisent.
+2589	E Tervagan tolent sun escarbuncle,
+2590	E Mahumet enz en un fosset butent,
+2591	E porc e chen le mordent e defulent.
+
+Laisse CLXXXVIII
+2592	De pa(i)smeisuns en est venuz Marsilies:
+2593	Fait sei porter en sa cambre voltice;
+2594	Plusurs culurs i ad peinz e escrites.
+2595	E Bramimunde le pluret, la reïne,
+2596	Trait ses chevels, si se cleimet caitive,
+2597	A l'altre mot mult haltement s'escriet:
+2598	«E! Sarraguce, cum ies oi desguarnie
+2599	Del gentil rei ki t'aveit en baillie!
+2600	Li nostre deu i unt fait felonie,
+2601	Ki en bataille oi matin le faillirent.
+2602	Li amiralz i ferat cuardie
+2603	S'il ne cumbat a cele gent hardie,
+2604	Ki si sunt fiers n'unt cure de lur vies.
+2605	Li emperere od la barbe flurie,
+2606	Vasselage ad e mult grant estultie;
+2607	S'il ad bataill(i)e, il ne s'en fuirat mie.
+2608	Mult est grant doel que n'en est ki l'ociet!»
+
+Laisse CLXXXIX
+2609	Li emperere par sa grant poestet,
+2610	.VII. anz tuz plens ad en Espaigne estet;
+2611	Prent i chastels e alquantes citez.
+2612	Li reis Marsilie s'en purcacet asez:
+2613	Al premer an fist ses brefs seieler,
+2614	En Babilonie Baligant ad mandet,
+2615	Ço est l'amiraill, le viel d'antiquitet,
+2616	Tut survesquiet e Virgilie e Omer,
+2617	En Sarraguce alt sucurre li ber;
+2618	E, s'il nel fait, il guerpirat ses deus
+2619	E tuz ses ydeles que il soelt adorer,
+2620	Si recevrat sainte chrestientet,
+2621	A Charlemagne se vuldrat acorder.
+2622	E cil est loinz, si ad mult demuret;
+2623	Mandet sa gent de .XL. regnez,
+2624	Ses granz drodmunz en ad fait aprester,
+2625	Eschiez e barges e galies e nefs.
+2626	Suz Alixandre ad un port juste mer:
+2627	Tut sun navilie i ad fait aprester.
+2628	Ço est en mai, al premer jur d'ested:
+2629	Tutes ses oz ad empeintes en mer.
+
+Laisse CXC
+2630	Granz sunt les oz de cele gent averse:
+2631	Siglent a fort e nagent e guvernent.
+2632	En sum cez maz e en cez (les) [h]altes vernes,
+2633	Asez i ad carbuncles e lanternes;
+2634	La sus amunt pargetent tel luiserne
+2635	Par la noit la mer en est plus bele.
+2636	E cum il vienent en Espaigne la tere,
+2637	Tut li païs en reluist e esclairet.
+2638	Jesqu'a Marsilie en parvunt les noveles. AOI.
+
+Laisse CXCI
+2639	Gent paienor ne voelent cesser unkes:
+2640	Issent de mer, venent as ewes dulces,
+2641	Laisent Marbrose e si laisent Marbrise,
+2642	Par Sebre amunt tut lur naviries turnent.
+2643	Asez i ad lanternes e carbuncles:
+2644	Tute la noit mult grant clartet lur dunent.
+2645	A icel jur venent a Sarraguce. AOI.
+
+Laisse CXCII
+2646	Clers est li jurz et li soleilz luisant.
+2647	Li amiralz est issut del calan:
+2648	Espaneliz fors le vait adestrant,
+2649	.XVII. reis apres le vunt siwant;
+2650	Cuntes e dux i ad ben ne sai quanz.
+2651	Suz un lorer, ki est en mi un camp,
+2652	Sur l'erbe verte getent un palie blanc:
+2653	U[n] faldestoed i unt mis d'olifan.
+2654	Desur s'asiet li paien Baligant;
+2655	Tuit li altre sunt remes en estant.
+2656	Li sire d'els premer parlat avant:
+2657	«Oiez ore, franc chevaler vaillant!
+2658	Carles li reis, l'emperere des Francs,
+2659	Ne deit manger, se jo ne li cumant.
+2660	Par tute Espaigne m'at fait guere mult grant:
+2661	En France dulce le voeil aler querant.
+2662	Ne finerai en trestut mun vivant
+2663	Josqu'il seit mort u tut vif recreant.»
+2664	Sur sun genoill en fiert sun destre guant.
+
+Laisse CXCIII
+2665	Puis qu'il l'ad dit, mult s'en est afichet
+2666	Que ne lairat pur tut l'or desuz ciel,
+2667	Que il ainz ad Ais, o Carles soelt plaider.
+2668	Si hume li lo[d]ent, si li unt cunseillet.
+2669	Puis apelat dous de ses chevalers,
+2670	L'un Clarifan e l'altre Clarïen:
+2671	«Vos estes filz al rei Maltraïen,
+2672	Ki messages soleit faire volenters.
+2673	Jo vos cumant qu'en Sarraguce algez;
+2674	Marsiliun de meie part li nunciez,
+2675	Cuntre Franceis li sui venut aider.
+2676	Se jo truis ó, mult grant bataille i ert;
+2677	Si l'en dunez cest guant ad or pleiet,
+2678	El destre poign si li faites chalcer.
+2679	Si li portez cest [bast]uncel d'or mer,
+2680	E a mei venget pur reconoistre sun feu.
+2681	En France irai pur Carles guerreier;
+2682	S'en ma mercit ne se culzt a mes piez
+2683	E ne guerpisset la lei de chrestiens,
+2684	Jo li toldrai la co(r)rune del chef.»
+2685	Paien respundent «Sire, mult dites bien.»
+
+Laisse CXCIV
+2686	Dist Baligant: «Car chevalchez, barun!
+2687	L'un port le guant, li alt]r]e le bastun!»
+2688	E cil respundent «Cher sire, si ferum.»
+2689	Tant chevalcherent que en Sarraguce sunt.
+2690	Passent .X. portes, traversent .IIII. punz,
+2691	Tutes les rues u li burgeis estunt.
+2692	Cum il aproisment en la citet amunt,
+2693	Vers le paleis oïrent grant fremur;
+2694	Asez i ad de cele gent paienur,
+2695	Plurent e crient, demeinent grant dolor,
+2696	Pleignent lur deus Tervagan e Mahum
+2697	E Apollin, dunt il mie n'en unt.
+2698	Dist cascun a l'altre: «Caitifs, que devendrum?
+2699	Sur nus est venue male confusiun.
+2700	Perdut avum le rei Marsiliun:
+2701	Li quens Rollant li trenchat ier le destre poign.
+2702	Nus n'avum mie de Jurfaleu le Blunt.
+2703	Trestute Espaigne iert hoi en lur bandun.»
+2704	Li dui message descendent al perrun.
+
+Laisse CXCV
+2705	Lur chevals laisent dedesuz un olive:
+2706	Dui Sarrazin par les resnes les pristrent.
+2707	E li message par les mantels se tindrent,
+2708	Puis sunt muntez sus el paleis altisme.
+2709	Cum il entrent en la cambre voltice,
+2710	Par bel amur malvais saluz li firent:
+2711	«Cil Mahumet ki nus ad en baillie,
+2712	E Tervagan e Apollin, nostre sire,
+2713	Sálvent le rei e guardent la reïne!»
+2714	Dist Bramimunde: «Or oi mult grant folie!
+2715	Cist nostre deu sunt en recreantise.
+2716	En Rencesval m[al]vaises vertuz firent:
+2717	Noz chevalers i unt lesset ocire;
+2718	Cest mien seignur en bataille faillirent;
+2719	Le destre poign ad perdut, n'en ad mie,
+2720	Si li trenchat li quens Rollant, li riches.
+2721	Trestute Espaigne avrat Carles en baillie.
+2722	Que devendrai, duluruse, caitive?
+2723	E! lasse, que n'en ai un hume ki m'ociet!» AOI.
+
+Laisse CXCVI
+2724	Dist Clarien «Dame, ne parlez mie itant!
+2725	Messages sumes al paien Baligant.
+2726	Marsiliun, ço dit, serat guarant,
+2727	Si l'en enveiet sun bastun e sun guant.
+2728	En Sebre avum .IIII. milie calant,
+2729	Eschiez e barges e galees curant;
+2730	Drodmunz i ad ne vos sai dire quanz.
+2731	Li amiralz est riches e puisant:
+2732	En France irat Carlemagne querant;
+2733	Rendre le quidet u mort ó recreant.»
+2734	Dist Bramimunde «Mar en irat itant!
+2735	Plus pres d'ici purrez truver les Francs.
+2736	En ceste tere ad estet ja .VII. anz.
+2737	Li emperere est ber e cumbatant:
+2738	Meilz voel murir que ja fuiet de camp;
+2739	Suz ciel n'ad rei qu'il prist a un enfant.
+2740	Carles ne creint nuls hom ki seit vivant.»
+
+Laisse CXCVII
+2741	- «Laissez ço ester!« dist Marsilies li reis.
+2742	Dist as messages: «Seignurs, parlez a mei!
+2743	Ja veez vos que a mort sui destreit,
+2744	Jo si nen ai filz ne fille ne heir:
+2745	Un en aveie, cil fut ocis her seir.
+2746	Mun seignur dites qu'il me vienge veeir.
+2747	Li amiraill ad en Espaigne dreit:
+2748	Quite li cleim, se il la voelt aveir,
+2749	Puis la defendet encuntre li Franceis!
+2750	Vers Carlemagne li durrai bon conseill:
+2751	Cunquis l'avrat d'oi cest jur en un meis.
+2752	De Sarraguce les clefs li portereiz;
+2753	Pui li dites, il n'en irat, s'il me creit.»
+2754	Cil respundent: «Sire, vus dites veir.» AOI.
+
+Laisse CXCVIII
+2755	Ço dist Marsilie: «Carles l'emperere
+2756	Mort m'ad mes homes, ma tere deguastee,
+2757	E mes citez fraites e violees.
+2758	Il jut anuit sur cel ewe de Sebre:
+2759	Jo ai cunte n'i ad mais que .VII. liwes.
+2760	L'amirail dites que sun host i amein.
+2761	Par vos li mand bataille i seit justee.»
+2762	De Sarraguce les clefs li ad livrees.
+2763	Li messager ambedui l'enclinerent,
+2764	Prenent cu(i)[n]get, a cel mot s'en turnerent.
+
+Laisse CXCIX
+2765	Li dui message es chevals sunt muntet.
+2766	Isnelement issent de la citet,
+2767	A l'amiraill en vunt esfreedement;
+2768	De Sarra[gu]ce li presentent les cles.
+2769	Dist Baligant: «Que avez vos truvet?
+2770	U est Marsilie, que jo aveie mandet?«
+2771	Dist Clarïen: «Il est a mort nasfret.
+2772	Li emperere fut ier as porz passer,
+2773	Si s'en vuolt en dulce France aler.
+2774	Par grant honur se fist rereguarder:
+2775	Li quens Rollant i fut remes, sis nies,
+2776	E Oliver e tuit li .XII. per,
+2777	De cels de France .XX. milie adubez.
+2778	Li reis Marsilie s'i cumbatit, li bers.
+2779	Il e Rollant el camp furent remes:
+2780	De Durendal li dunat un colp tel
+2781	Le destre poign li ad del cors sevret;
+2782	Sun filz ad mort, qu'il tant suleit amer,
+2783	E li baron qu'il i out amenet.
+2784	Fuiant s'en vint, qu'il n'i pout mes ester.
+2785	Li emperere l'ad enchalcet asez.
+2786	Li reis mandet que vos le sucurez.
+2787	Quite vus cleimet d'Espaigne le regnet.»
+2788	E Baligant cumencet a penser;
+2789	Si grant doel ad por poi qu'il n'est desvet. AOI.
+
+Laisse CC
+2790	«Sire amiralz,» dist Clarïens,
+2791	«En Rencesvals une bataille out íer.
+2792	Morz est Rollant e li quens Oliver,
+2793	Li .XII. per, que Carles aveit tant cher;
+2794	De lur Franceis i ad mort .XX. millers.
+2795	Li reis Marsilie le destre poign i perdit,
+2796	E l'emperere asez l'ad enchalcet,
+2797	En ceste tere n'est remes chevaler
+2798	Ne seit ocis o en Sebre neiet.
+2799	Desur la rive sunt Frances herbergiez:
+2800	En cest païs nus sunt tant aproeciez,
+2801	Se vos volez, li repaires ert grefs.»
+2802	E Baligant le reguart en ad fiers,
+2803	En sun curage en est joüs e liet.
+2804	Del faldestod se redrecet en piez,
+2805	Puis escriet: «Baruns, ne vos targez!
+2806	Eissez des nefs, muntez, si cevalciez!
+2807	S'or ne s'en fuit Karlemagne li veilz,
+2808	Li reis Marsilie enqui serat venget:
+2809	Pur sun poign destre l'en liverai le che(s)[f].»
+
+Laisse CCI
+2810	Paien d'Arabe des nefs se sunt eissut,
+2811	Puis sunt muntez es chevals e es muls;
+2812	Si chevalcherent, que fereient il plus?
+2813	Li amiralz, ki trestuz les esmut,
+2814	Sin apelet Gemalfin, un sun drut:
+2815	«Jo te cumant de tutes mes oz l'aunde.»
+2816	Puis en un sun destrer brun est munte;
+2817	Ensembl'od lui emmeinet .IIII. dux.
+2818	Tant chevalchat qu'en Sarraguce fut.
+2819	A un perron de marbre est descenduz,
+2820	E quatre cuntes l'estreu li unt tenut.
+2821	Par les degrez el paleis muntet sus,
+2822	E Bramidonie vient curant cuntre lui;
+2823	Si li ad dit: «Dolente, si mare fui!
+2824	A itel hunte, sire, mon seignor ai perdut!»
+2825	Chet li as piez, li amiralz la reçut;
+2826	Sus en la chambre ad doel en sunt venut. AOI.
+
+Laisse CCII
+2827	Li reis Marsilie, cum il veit Baligant,
+2828	Dunc apelat dui Sarrazin espans:
+2829	«Pernez m'as braz, sim(e) drecez en seant.»
+2830	Al puign senestre ad pris un de ses guanz.
+2831	Ço dist Marsilie: «Sire reis, amiralz,
+2832	Teres tutes ici [...] rengnes vos rendemas
+2833	E Sarraguce e l'onur qu'i apent.
+2834	Mei ai perdut e tute ma gent.»
+2835	E cil respunt: «Tant sy jo plus dolent.
+2836	Ne pois a vos tenir lung parlement:
+2837	Jo sai asez que Carles ne m'atent,
+2838	E nepurquant de vos receif le guant.»
+2839	Al doel qu'il ad s'en est turnet plurant. AOI.
+2840	Par les degrez jus del paleis descent,
+2841	Muntet el ceval, vient a sa gent puignant.
+2842	Tant chevalchat, qu'il est premers devant,
+2843	De uns ad altres si se vait escriant:
+2844	«Venez paien, car ja s'en fuient Frant!» AOI.
+
+Laisse CCIII
+2845	Al matin, quant primes pert li albe,
+2846	Esveillez est li e[m]perere Carles.
+2847	Sein Gabriel, ki de part Deu le guarde,
+2848	Levet sa main, sur lui fait sun signacle.
+2849	Li reis descent, si ad rendut ses armes,
+2850	Si se desarment par tute l'ost li altre.
+2851	Puis sunt muntet, par grant vertut chevalchent
+2852	Cez veiez lunges e cez chemins mult larges,
+2853	Si vunt ve[d]eir le merveillus damage
+2854	En Rencesvals, la ó fut la bataille. AOI.
+
+Laisse CCIV
+2855	En Rencesvals en est Carles venuz.
+2856	Des morz qu'il troevet cumencet a plurer.
+2857	Dist a Franceis: «Segnu[r]s, le pas tenez;
+2858	Kar mei meïsme estoet avant aler
+2859	Pur mun nev[ol]d que vuldreie truver.
+2860	A Eis esteie, a une féste anoel:
+2861	Si se vant(t)[er]ent mi vaillant chevaler
+2862	De granz batailles, de forz esturs pleners.
+2863	D'une raisun oï Rollant parler:
+2864	Ja ne (ne) murreit en estrange regnet
+2865	Ne trespassast ses hume[s] e ses pers;
+2866	Vers lur païs avreit sun chef turnet;
+2867	Cunquerrantment si finereit li bers.»
+2868	Plus qu'en ne poet un bastuncel jeter,
+2869	Devant les altres est en un pui muntet.
+
+Laisse CCV
+2870	Quant l'empereres vait querre sun nevold,
+2871	De tantes herbes el pre truvat les flors,
+2872	Ki sunt vermeilz del sanc de noz barons!
+2873	Pitet en ad, ne poet muer n'en plurt.
+2874	Desuz dous arbres parvenuz est [...] li reis.
+2875	Les colps Rollant conut en treis per(r)uns,
+2876	Sur l'erbe verte veit gesir sun nevuld;
+2877	Nen est merveille se Karles ad irur.
+2878	Descent a pied, aled i est pleins curs,
+2879	Entre ses mains ansdous prent le priest suus;
+2880	Sur lui se pasmet, tant par est anguissus.
+
+Laisse CCVI
+2881	Li empereres de pasmeisuns revint.
+2882	Naimes li dux e li quens Acelin,
+2883	Gefrei d'Anjou e sun frere Henri
+2884	Prenent le rei, sil drecent suz un pin.
+2885	Guardet a la tere, veit sun nevold gesir.
+2886	Tant dulcement a regreter le prist:
+2887	«Amis Rollant, de tei ait Deus mercit!
+2888	Unques nuls hom tel chevaler ne vit
+2889	Por granz batailles juster e defenir.
+2890	La meie honor est turnet en declin.»
+2891	Carles se pasmet, ne s'en pout astenir. AOI.
+
+Laisse CCVII
+2892	Carles li reis se vint de pasmeisuns;
+2893	Par mains le tienent .III. de ses barons.
+2894	Guardet a tere, veit gesir sun nev[u]ld:
+2895	Cors ad gaillard, perdue ad sa culur,
+2896	Turnez ses oilz, mult li sunt tenebros.
+2897	Carles le pleint par feid e par amur:
+2898	«Ami Rollant, Deus metet t'anme en flors,
+2899	En pareïs, entre les glorius!
+2900	Cum en Espaigne venis [a] mal seignur!
+2901	Jamais n'ert jurn que de tei n'aie dulur.
+2902	Cum decarrat ma force e ma baldur!
+2903	N'en avrai ja ki sustienget m'onur;
+2904	Suz ciel ne quid aveir ami un sul!
+2905	Se jo ai parenz, n'en i ad nul si proz.»
+2906	Trait ses crignels, pleines ses mains amsdous,
+2907	Cent milie Franc en unt si grant dulur
+2908	N'en i ad cel ki durement ne plurt. AOI.
+
+Laisse CCVIII
+2909	«Ami Rollant, jo m'en irai en France.
+2910	Cum jo serai a Loün, en ma chambre,
+2911	De plusurs regnes vendrunt li hume estrange;
+2912	Demanderunt: «U est quens cataignes?»
+2913	Jo lur dirrai qu'il est morz en Espaigne.
+2914	A grant dulur tendrai puis mun reialme:
+2915	Jamais n'ert jur que ne plur ne n'en pleigne.»
+
+Laisse CCIX
+2916	- «Ami Rollant, prozdoem, juvente bele,
+2917	Cum jo serai a Eis, em ma chapele,
+2918	Vendrunt li hume, demanderunt noveles;
+2919	Jes lur dirrai, merveilluses e pesmes:
+2920	«Morz est mis nies, ki tant me fist cunquere.»
+2921	Encuntre mei revelerunt li Seisne,
+2922	E Hungre e Bugre e tante gent averse,
+2923	Romain, Puillain e tuit icil de Palerne
+2924	E cil d'Affrike e cil de Califerne;
+2925	Puis entrerunt mes peines e mes suffraites.
+2926	Ki guierat mes oz a tel poeste,
+2927	Quant cil est [morz] ki tuz jurz nos cadelet?
+2928	E! France, cum remeines deserte!
+2929	Si grant doel ai que jo ne vuldreie estre!»
+2930	Sa barbe blanche cumencet a detraire,
+2931	Ad ambes mains les chevels de sa teste.
+2932	Cent milie Francs s'en pasment cuntre tere.
+
+Laisse CCX
+2933	«Ami Rollant, de tei ait Deus mercit!
+2934	L'anme de tei seit mise en pareïs!
+2935	Ki tei ad mort France ad mis en exill.
+2936	Si grant dol ai que ne voldreie vivre,
+2937	De ma maisnee, ki por mei est ocise!
+2938	Ço duinset Deus, le filz sainte Marie,
+2939	Einz que jo vienge as maistres porz de Sirie,
+2940	L'anme del cors me seit oi departie,
+2941	Entre les lur aluee e mise,
+2942	E ma car fust delez els enfuïe!»
+2943	Ploret des oilz, sa blanche bar[b]e tiret.
+2944	E dist dux Naimes: «Or ad Carles grant ire.» AOI.
+
+Laisse CCXI
+2945	- «Sire emperere,» ço dist Gefrei d'Anjou,
+2946	«Ceste dolor ne demenez tant fort!
+2947	Par tut le camp faites querre les noz,
+2948	Que cil d'Espaigne en la bataille unt mort;
+2949	En un carne(l)[r] cumandez que hom les port.»
+2950	Ço dist li reis: «Sunez en vostre corn!» AOI.
+
+Laisse CCXII
+2951	Gefreid d'Anjou ad sun greisle sunet.
+2952	Franceis descendent, Carles l'ad comandet.
+2953	Tuz lur amis qu'il i unt morz truvet,
+2954	Ad un carne(l)[r] sempres les unt portet.
+2955	Asez i ad evesques e abez,
+2956	Munies, canonies, proveires coronez:
+2957	Si sunt asols e seignez de part Deu.
+2958	Mirre e timoine i firent alumer,
+2959	Gaillardement tuz les unt encensez;
+2960	A grant honor pois les unt enterrez.
+2961	Sis unt laisez: qu'en fereient il el? AOI.
+
+Laisse CCXIII
+2962	Li emperere fait Rollant costeïr
+2963	E Oliver e (e) l'arcevesque Turpin,
+2964	Devant sei les ad fait tuz uvrir
+2965	E tuz les quers en paile recuillir:
+2966	Un blanc sarcou de marbre sunt enz mis;
+2967	E puis les cors des barons si unt pris,
+2968	En quirs de cerf les seignurs unt mis:
+2969	Ben sunt lavez de piment e de vin.
+2970	Li reis cumandet Tedbalt e Gebuin,
+2971	Milun le cunte e Otes le marchis:
+2972	«En .III. carettes les guiez [...] tres ben.»
+2973	Bien sunt cuverz d'un palie galazin. AOI.
+
+Laisse CCXIV
+2974	Venir s'en volt li emperere Carles,
+2975	Quant de paiens li surdent les enguardes.
+2976	De cels devant i vindrent dui messages,
+2977	De l'amirail li nuncent la bataille:
+2978	«Reis orguillos, nen est fins que t'en alges!
+2979	Veiz Baligant, ki apres tei chevalchet:
+2980	Granz sunt les oz qu'il ameinet d'Arabe.
+2981	Encoi verrum se tu as vasselage.« AOI.
+2982	Carles li reis en ad prise sa barbe;
+2983	Si li remembret del doel e [del] damage,
+2984	Mult fierement tute sa gent reguardez;
+2985	Puis si s'escriet a sa voiz grand e halte:
+2986	«Barons franceis, as chevals e as armes!» AOI.
+
+Laisse CCXV
+2987	Li empereres tuz premereins s'adubet:
+2988	Isnelement ad vestue sa brunie,
+2989	Lacet sun helme, si ad ceinte Joiuse,
+2990	Ki pur soleill sa clartet n'en muet;
+2991	Pent a sun col un escut de Biterne,
+2992	Tient sun espiet, sin fait brandir la hanste,
+2993	En Tencendur, sun bon cheval, puis muntet:
+2994	Il le cunquist es guez desuz Marsune,
+2995	Sin getat mort Malpalin de Nerbone;
+2996	Laschet la resne, mult suvent l'esperonet,
+2997	Fait sun eslais, veant cent mil humes, AOI.
+2998	Recleimet Deu e l'apostle de Rome.
+
+Laisse CCXVI
+2999	Par tut le champ cil de France descendent,
+3000	Plus de cent milie s'en adubent ensemble;
+3001	Guarnemenz unt ki ben lor atalente[n]t,
+3002	Cevals curanz e lur armes mult gentes;
+3003	Puis sunt muntez e unt grant science.
+3004	S'il troevent oí, bataille quident rendre.
+3005	Cil gunfanun sur les helmes lur pendent.
+3006	Quant Carles veit si beles cuntenances,
+3007	Sin apelat Jozeran de Provence,
+3008	Naimon li duc, Antelme de Maience:
+3009	«En tels vassals deit hom aveir fiance!
+3010	Asez est fols ki entr'els se dem[ent]et.
+3011	Si Arrabiz de venir ne se repentent,
+3012	La mort Rollant lur quid cherement rendre.»
+3013	Respunt dux Neimes: «E Deus le nos cunsente!» AOI.
+
+Laisse CCXVII
+3014	Carles apelet Rabe[l] e Guinemán.
+3015	Ço dist li reis: «Seignurs, jo vos cumant,
+3016	Seiez es lius Oliver e Rollant:
+3017	L'un port l'espee e l'altre l'olifant,
+3018	Si chevalcez el premer chef devant,
+3019	Ensembl'od vos .XV. milie de Franc(ei)s,
+3020	De bachelers, de noz (...) meillors vaillanz.
+3021	Apres icels en avrat altretant,
+3022	Sis guierat Gibuins e Guinemans.»
+3023	Naimes li dux e li quens Jozerans
+3024	Icez eschieles ben les vunt ajustant.
+3025	S'il troevent oí, bataille i ert mult grant. AOI.
+
+Laisse CCXVIII
+3026	De Franceis sunt les premeres escheles.
+3027	Apres les dous establisent la terce;
+3028	En cele sunt li vassal de Baivere,
+3029	A .XX. [milie] chevalers la preiserent;
+3030	Ja devers els bataille n'ert lessee.
+3031	Suz cel n'ad gent que Carles ait plus chere,
+3032	Fors cels de France, ki les regnes cunquerent.
+3033	Li quens Oger li Daneis, li puinneres,
+3034	Les guierat, kar la cumpaigne est fiere. AOI.
+
+Laisse CCXIX
+3035	Treis escheles ad l'emperere Carles.
+3036	Naimes li dux puis establist la quarte
+3037	De tels barons qu'asez unt vasselage:
+3038	Alemans sunt e si sunt d'Alemaigne;
+3039	Vint milie sunt, ço dient tuit li altre.
+3040	Ben sunt guarniz e de chevals e d'armes;
+3041	Ja por murir ne guerpirunt bataille.
+3042	Sis guierat Hermans li dux de Trace.
+3043	Einz i murat que cuardise i facet. AOI.
+
+Laisse CCXX
+3044	Naimes li dux e li quens Jozerans
+3045	La quinte eschele unt faite de Normans:
+3046	.XX. milie sunt, ço dient tuit li Franc.
+3047	Armes unt beles e bons cevals curanz;
+3048	Ja pur murir cil n'erent recreanz.
+3049	Suz ciel n'ad gent ki plus poissent en camp.
+3050	Richard li velz les guierat el camp:
+3051	Cil i ferrat de sun espiet trenchant. AOI.
+
+Laisse CCXXI
+3052	La siste eschele unt faite de Bretuns:
+3053	.XXX. milie chevalers od els unt.
+3054	Icil chevalchent en guise de baron,
+3055	Peintes lur hanstes, fermez lur gunfanun.
+3056	Le seignur d'els est apelet Oedun:
+3057	Icil cumandet le cunte Nevelun,
+3058	Tedbald de Reins e le marchis Otun:
+3059	«Guiez ma gent, jo vos en faz le dun!» AOI.
+
+Laisse CCXXII
+3060	Li emperere ad .VI. escheles faites.
+3061	Naimes li dux puis establist la sedme
+3062	De Peitevins e des barons d'Alverne:
+3063	.XL. milie chevalers poeent estre.
+3064	Chevals unt bons e les armes mult beles.
+3065	Cil sunt par els en un val suz un tertre;
+3066	Sis beneïst Carles de sa main destre.
+3067	Els guierat Jozerans e Godselmes. AOI.
+
+Laisse CCXXIII
+3068	E l'oidme eschele ad Naimes establie:
+3069	De Flamengs est [e] des barons de Frise.
+3070	Chevalers unt plus de .XL. milie;
+3071	Ja devers els n'ert bataille guerpie.
+3072	Ço dist li reis «Cist ferunt mun servise.»
+3073	Entre Rembalt e Hamon de Galice
+3074	Les guierunt tut par chevalerie. AOI.
+
+Laisse CCXXIV
+3075	Entre Naimon e Jozeran le cunte
+3076	La noefme eschele unt faite de prozdomes
+3077	De Loherengs e de cels de Borgoigne.
+3078	.L. milie chevalers unt par cunte,
+3079	Helmes laciez e vestues lor bronies;
+3080	Espiez unt forz e les hanstes sunt curtes.
+3081	Si Arrabiz de venir ne demurent,
+3082	Cil les ferrunt, s'il a els s'abandunent.
+3083	Sis guierat Tierris, li dux d'Argone. AOI.
+
+Laisse CCXXV
+3084	La disme eschele est des baruns de France:
+3085	Cent milie sunt de noz meillors cataignes.
+3086	Cors unt gaillarz e fieres cuntenances,
+3087	Les chefs fluriz e les barbes unt blanches,
+3088	Osbercs vestuz e lur brunies dubleines,
+3089	Ceintes espees franceises e d'Espaigne;
+3090	Escuz unt genz, de multes cunoisances.
+3091	Puis sunt muntez, la bataille demandent;
+3092	«Munjoie!» escrient: Od els est Carlemagne.
+3093	Gefreid d'Anjou portet l'orieflambe:
+3094	Seint Piere fut (...), si aveit num Romaine;
+3095	Mais de Munjoie iloec out pris eschange. AOI.
+
+Laisse CCXXVI
+3096	Li emperere de sun cheval descent;
+3097	Sur l'erbe verte se est culchet adenz,
+3098	Turnet su[n] vis vers le soleill levant,
+3099	Recleimet Deu mult escordusement:
+3100	«Veire Paterne, hoi cest jor me defend,
+3101	Ki guaresis Jonas tut veirement
+3102	De la baleine ki en sun cors l'aveit
+3103	E espar(i)gnas le rei de Niniven
+3104	E Daniel del merveillus turment
+3105	Enz en la fosse des leons o fut enz,
+3106	Les .III. enfanz tut en un fou ardant:
+3107	La tue amurs me seit hoi en present!
+3108	Par ta mercit, se tei plaist, me cunsent
+3109	Que mun nevold pois[se] venger Rollant!»
+3110	Cum ad oret, si se drecet en estant,
+3111	Seignat sun chef de la vertut poisant.
+3112	Muntet li reis en sun cheval curant;
+3113	L'estreu li tindrent Neimes e Jocerans;
+3114	Prent sun escut e sun espiet trenchant.
+3115	Gent ad le cors, gaillart e ben seant,
+3116	Cler le visage e de bon cuntenant.
+3117	Puis si chevalchet mult aficheement.
+3118	Sunent cil greisle e derere e devant;
+3119	Sur tuz les altres bundist li olifant.
+3120	Plurent Franceis pur pitet de Rollant.
+
+Laisse CCXXVII
+3121	Mult gentement li emperere chevalchet:
+3122	Desur sa bronie fors ad mise sa barbe.
+3123	Pur sue amor altretel funt li altre:
+3124	Cent milie Francs en sunt reconoisable.
+3125	Passent cez puis e cez roches plus haltes,
+3126	E cez parfunz val(ee)s, ces destreit anguisables,
+3127	Issent des porz e de la tere guaste,
+3128	Devers Espaigne sunt alez en la marche;
+3129	En un emplein unt prise lur estage.
+3130	A Baligant repairent ses enguardes.
+3131	Uns Sulians ki ad dit sun message:
+3132	«Veüd avum li orguillus reis Carles.
+3133	Fiers sunt si hume, n'unt talent qu'il li faillent.
+3134	Adubez vus, sempres avrez bataille!»
+3135	Dist Baligant: «Or oi grant vasselage.
+3136	Sunez voz graisles, que mi paien le sace[n]t!»
+
+Laisse CCXXVIII
+3137	Par tute l'ost funt lur taburs suner,
+3138	E cez buisines e cez greisles mult cler:
+3139	Paien descendent pur lur cors aduber.
+3140	Li amiralz ne se voelt demurer:
+3141	Vest une bronie dunt li pan sunt sasfret,
+3142	Lacet sun elme, ki ad or est gemmet,
+3143	Puis ceint s'espee al senestre costet.
+3144	Par sun orgoill li ad un num truvet:
+3145	Par la spee Carlun dunt il oït parler
+3146	. . . . . . . . . .  (lacuna: line lost in the Oxford ms)
+3147	Ço ert s'enseigne en bataille campel:
+3148	Ses chevalers en ad fait escrier.
+3149	Pent a sun col un soen grant escut let:
+3150	D'or est la bucle e de cristal listet,
+3151	La guige en est d'un bon palie roet;
+3152	Tient sun espiet, si l'apelet Maltet:
+3153	La hanste grosse cume uns tinels;
+3154	De sul le fer fust uns mulez trusset.
+3155	En sun destrer Baligant est muntet;
+3156	L'estreu li tint Marcules d'Ultremer.
+3157	La forcheüre ad asez grant li ber,
+3158	Graisles les flancs e larges les costez;
+3159	Gros ad le piz, belement est mollet,
+3160	Lees les espalles e le vis ad mult cler,
+3161	Fier le visage, le chef recercelet,
+3162	Tant par ert blancs cume flur en estet;
+3163	De vasselage est suvent esprovet.
+3164	Deus! quel baron, s'oüst chrestientet!
+3165	Le cheval brochet, li sancs en ist tuz clers,
+3166	Fait sun eslais, si tressalt un fosset,
+3167	Cinquante pez i poet hom mesurer.
+3168	Paien escrient: «Cist deit marches tenser!
+3169	N'i ad Franceis, si a lui vient juster,
+3170	Voeillet o nun, n'i perdet sun edet.
+3171	Carles est fols que ne s'en est alet.» AOI.
+
+Laisse CCXXIX
+3172	Li amiralz ben resemblet barun.
+3173	Blanche ad la barbe ensement cume flur,
+3174	E de sa lei mult par est saives hom,
+3175	E en bataille est fiers e orgoillus.
+3176	Ses filz Malpramis mult est chevalerus:
+3177	Granz est e forz e trait as anceisurs.
+3178	Dist a sun perre: «Sire, car cevalchum!
+3179	Mult me merveill se ja verrum Carlun.»
+3180	Dist Baligant: «Oïl, car mult est proz.
+3181	En plusurs gestes de lui sunt granz honurs.
+3182	Il n'en at mie de Rollant sun nevold:
+3183	N'avrat vertut ques tienget cuntre nus.» AOI.
+
+Laisse CCXXX
+3184	- «Bels filz Malpramis,» ço li dist Baligant,
+3185	«Li altrer fut ocis le bon vassal Rollant
+3186	E Oliver, li proz e li vaillanz,
+3187	Li .XII. per qui Carles amat tant,
+3188	De cels de France .XX. milie cumbatanz.
+3189	Trestuz les altres ne pris jo mie un guant.
+3190	Li empereres repairet veirement,
+3191	S'il m'at nunciet mes mes, li Sulians,
+3192	.X. escheles en unt faites mult granz.
+3193	Cil est mult proz ki sunet l'olifant,
+3194	D'un graisle cler racatet ses cumpaignz;
+3195	E si cevalcent el premer chef devant,
+3196	Ensembl'od els .XV. milie de Francs,
+3197	De bachelers que Carles cleimet enfanz.
+3198	Apres icels en i ad ben altretanz:
+3199	Cil i ferrunt mult orgoillusement.»
+3200	Dist Malpramis: «Le colp vos en demant.» AOI.
+
+Laisse CCXXXI
+3201	- «Filz Malpramis,» Baligant li ad dit,
+3202	«Jo vos otri quanque m'avez ci quis.
+3203	Cuntre Franceis sempres irez ferir;
+3204	Si i merrez Torleu, le rei persis,
+3205	E Dapamort, un altre rei leutiz.
+3206	Le grant orgoill se ja puez matir,
+3207	Jo vos durrai un pan de mun païs
+3208	Des Cheriant entresqu'en Val Marchis.»
+3209	Cil respunt: «Sire, vostre mercit!»
+3210	Passet avant, le dun en requeillit,
+3211	Ço est de la tere ki fut al rei Flurit,
+3212	A itel ore unches puis ne la vit,
+3213	Ne il n'en fut ne vestut ne saisit.
+
+Laisse CCXXXII
+3214	Li amiraill chevalchet par cez oz.
+3215	Sis filz le siut, ki mult ad grant le cors.
+3216	Li reis Torleus e li reis Dapamort
+3217	.XXX. escheles establissent mult tost:
+3218	Chevalers unt a merveillus esforz;
+3219	En la menur .L. milie en out.
+3220	La premere est de cels de Butentrot,
+3221	E l'altre apres de Micenes as chefs gros;
+3222	Sur les eschines qu'il unt en mi les dos
+3223	Cil sunt seiet ensement cume porc. AOI.
+3224	E la t(er)erce est de Nubles e de Blos,
+3225	E la quarte est de Bruns e d'Esclavoz,
+3226	E la quinte est de Sorbres e de Sorz,
+3227	E la siste est d'Ermines e de Mors,
+3228	E la sedme est de cels de Jericho,
+3229	E l'oitme est de Nigres e la noefme de Gros,
+3230	E la disme est de Balide la fort:
+3231	Ço est une gent ki unches ben ne volt. AOI.
+3232	Li amiralz en juret quanqu'il poet
+3233	De Mahumet les vertuz e le cors:
+3234	«Karles de France chevalchet cume fols.
+3235	Bataille i ert, se il ne s'en destolt;
+3236	Jamais n'avrat el chef corone d'or.»
+
+Laisse CCXXXIII
+3237	Dis escheles establisent apres.
+3238	La premere est des Canelius les laiz,
+3239	De Val Fuit sun venuz en traver.
+3240	L'altre est de Turcs e la terce de Pers,
+3241	E la quarte est de Pinceneis e de Pers,
+3242	E la quinte est de Solteras e d'Avers,
+3243	E la siste est d'Ormaleus e d'Eugiez,
+3244	E la sedme est de la gent Samuel,
+3245	L'oidme est de Bruise e la noefme de Clavers,
+3246	E la disme est d'Occian le desert:
+3247	Ço est une gent ki Damnedeu ne sert;
+3248	De plus feluns n'orrez parler jamais.
+3249	Durs unt les quirs ensement cume fer:
+3250	Pur ço n'unt soign de elme ne d'osberc;
+3251	En la bataille sunt felun e engres. AOI.
+
+Laisse CCXXXIV
+3252	Li amiralz .X. escheles ad justedes:
+3253	La premere est des jaianz de Malprese,
+3254	L'altre est de Hums e la terce de Hungres,
+3255	E la quarte est de Baldise la lunge
+3256	E la quinte est de cels de Val Penuse
+3257	E la siste est de [...] Maruse,
+3258	E la sedme est de Leus e d'Astrimónies;
+3259	L'oidme est d'Argoilles e la noefme de Clarbone,
+3260	E la disme est des barbez de Fronde:
+3261	Ço est une gent ki Deu nen amat unkes.
+3262	Geste Francor .XXX. escheles i numbrent.
+3263	Granz sunt les oz u cez buisines sunent.
+3264	Paien chevalchent en guise de produme. AOI.
+
+Laisse CCXXXV
+3265	Li amiralz mult par est riches hoem.
+3266	Dedavant sei fait porter sun dragon
+3267	E l'estandart Tervagan e Mahum
+3268	E un ymagene Apolin le felun.
+3269	Des Canelius chevalchent envirun.
+3270	Mult haltement escrient un sermun:
+3271	«Ki par noz Deus voelt aveir guarison,
+3272	Sis prit e servet par grant afflictiun!»
+3273	Paien i baissent lur chefs e lur mentun;
+3274	Lor helmes clers i suzclinent enbrunc.
+3275	Dient F[r]anceis: «Sempres murrez, glutun!
+3276	De vos seit hoi male confusiun!
+3277	Li nostre Deu, guarantisez Carlun!
+3278	Ceste bataille seit ju(ic)get en sun num!» AOI.
+
+Laisse CCXXXVI
+3279	Li amiralz est mult de grant saveir;
+3280	A sei apelet sis filz e les dous reis:
+3281	«Seignurs barons, devant chevalchereiz,
+3282	Mes escheles tutes les guiereiz;
+3283	Mais des meillors voeill jo retenir treis:
+3284	L'un ert de Turcs e l'altre d'Ormaleis,
+3285	E la terce est des jaianz de Malpreis.
+3286	Cil d'Ociant ierent e[n]sembl'ot mei,
+3287	Si justerunt a Charles e a Franceis.
+3288	Li emperere, s'il se cumbat od mei,
+3289	Desur le buc la teste perdre en deit.
+3290	Trestut seit fiz, n'i avrat altre dreit.» AOI.
+
+Laisse CCXXXVII
+3291	Granz sunt les oz e les escheles beles;
+3292	Entr'els nen at ne pui ne val ne tertre,
+3293	Selve ne bois; asconse n'i poet estre;
+3294	Ben s'entreveient en mi la pleine tere.
+3295	Dist Baligant: «La meie gent averse,
+3296	Car chevalchez pur la bataille quere!»
+3297	L'enseigne portet Amborres d'Oluferne.
+3298	Paien escrient, «Precieuse» l'apelent.
+3299	Dient Franceis: «De vos seit hoi grant perte!»
+3300	Mult haltement: «Munjoie!» renuvelent.
+3301	Li emperere i fait suner ses greisles,
+3302	E l'olifan, ki tres(tu)tuz les esclairet.
+3303	Dient paien: «La gent Ca[r]lun est bele.
+3304	Bataille avrum e aduree e pesme.» AOI.
+
+Laisse CCXXXVIII
+3305	Grant est la plaigne e large la cuntree.
+3306	Luisent cil elme as perres d'or gemmees,
+3307	E cez escuz e cez bronies safrees,
+3308	E cez espiez, cez enseignes fermees.
+3309	Sunent cez greisles, les voiz en sunt mult cleres;
+3310	De l'olifan haltes sunt les menees.
+3311	Li amiralz en apelet sun frere,
+3312	Ço est Canabeus, li reis de Floredee:
+3313	Cil tint la terre entresqu'en Val Sevree.
+3314	Les escheles Charlun li ad mustrees:
+3315	«Veez l'orgoil de France la loee!
+3316	Mult fierement chevalchet li emperere;
+3317	Il est darere od cele gent barbee.
+3318	Desur lur bronies lur barbes unt getees,
+3319	Altresi blanches cume neif sur gelee.
+3320	Cil i ferrunt de lances e d'espees,
+3321	Bataille avrum e forte e aduree:
+3322	Unkes nuls hom ne vit tel ajustee.»
+3323	Plus qu'om ne lancet une verge pelee,
+3324	Baligant ad ses cumpaignes trespassees.
+3325	Une raisun lur ad dit e mustree:
+3326	«Venez, paien, kar jo(n) irai en l'estree.»
+3327	De sun espiet la hanste en ad branlee;
+3328	Envers Karlun la mure en ad turnee. AOI.
+
+Laisse CCXXXIX
+3329	Carles li magnes, cum il vit l'amiraill,
+3330	E le dragon, l'enseigne e l'estandart,
+3331	De cels d'Arabe si grant force i par (ar)ad,
+3332	De la cuntree unt purprises les parz,
+3333	Ne mes que tant (scue)[cume] l'empereres en ad,
+3334	Li reis de France s'en escriet mult halt:
+3335	«Barons franceis, vos estes bons vassals.
+3336	Tantes batailles avez faites en camps!
+3337	Veez paien: felun sunt e cuart,
+3338	Tutes lor leis un dener ne lur valt.
+3339	S'il unt grant gent, d'iço, seignurs, qui calt?
+3340	Ki errer voelt, a mei venir s'en alt!»
+3341	Des esperons puis brochet le cheval,
+3342	E Tencendor li (a)ad fait .IIII. salz.
+3343	Dient Franceis: «Icist reis est vassals!
+3344	Chevalchez, bers! Nul de nus ne vus falt.»
+
+Laisse CCXL
+3345	Clers fut li jurz e li soleilz luisanz.
+3346	Les oz sunt beles e les cumpaignes granz.
+3347	Justees sunt les escheles devant.
+3348	Li quens Rabels e li quens Guinemans
+3349	Lascent les resnes a lor cevals curanz,
+3350	Brochent a eit; dunc laisent curre Francs:
+3351	Si vunt ferir de lur espiez trenchanz. AOI.
+
+Laisse CCXLI
+3352	Li quens Rabels est chevaler hardiz,
+3353	Le cheval brochet des esperuns d'or fin,
+3354	Si vait ferir Torleu, le rei persis,
+3355	N'escut ne bronie ne pout sun colp tenir:
+3356	L'espiet a or li ad enz el cors mis,
+3357	Que mort l'abat sur un boissun petit.
+3358	Dient F[r]anceis: «Damnedeus nos aït!»
+3359	Carles ad dreit, ne li devom faillir.» AOI.
+
+Laisse CCXLII
+3360	E Guineman justet a un rei leutice.
+3361	Tute li freint la targe, ki est flurie;
+3362	Apres li ad la bronie descunfite;
+3363	Tute l'enseigne li ad enz el cors mise,
+3364	Que mort l'abat, ki qu'en plurt u kin riet.
+3365	A icest colp cil de France s'esc(ri)rient:
+3366	«Ferez, baron, ne vos targez mie!
+3367	Carles ad dreit vers la gent [pa]iesnie;
+3368	Deus nus ad mis al plus verai juïse.» AOI.
+
+Laisse CCXLIII
+3369	Malpramis siet sur un cheval tut blanc;
+3370	Cunduit sun cors en la presse des Francs.
+3371	De (u) uns es altres granz colps i vait ferant,
+3372	L'un mort sur l'altre suvent vait trescevant.
+3373	Tut premereins s'escriet Baligant:
+3374	«Li mien baron, nurrit vos ai lung tens.
+3375	Veez mun fils, Carlun le vait querant,
+3376	A ses armes tanz barons calunjant:
+3377	Meillor vassal de lui ja ne demant.
+3378	Succurez le a voz espiez trenchant!»
+3379	A icest mot paien venent avant,
+3380	Durs colps i fierent, mult est li caples granz.
+3381	La bataille est merveilluse e pesant:
+3382	Ne fut si fort enceis ne puis cel tens. AOI.
+
+Laisse CCXLIV
+3383	Granz sunt les oz e les cumpaignes fieres,
+3384	Justees sunt trestutes les escheles,
+3385	E li paien merveillusement fierent.
+3386	Deus! tantes hanstes i ad par mi brisees,
+3387	Escuz fruisez e bronies desmaillees!
+3388	La veïsez la tere si junchee:
+3389	L'erbe del camp, ki est verte e delgee
+3390	. . . . . . . . . .  (lacuna: line lost in the Oxford ms)
+3391	Li amiralz recleime sa maisnee:
+3392	«Ferez, baron, sur la gent chrestiene!»
+3393	La bataille est mult dure e afichee;
+3394	Unc einz ne puis ne fut si fort ajustee;
+3395	Josqu'a la [nuit] nen ert fins otriee. AOI.
+
+Laisse CCXLV
+3396	Li amiralz la sue gent apelet:
+3397	«Ferez, paien: por el venud n'i estes!
+3398	Jo vos durrai muillers gentes e beles,
+3399	Si vos durai feus e honors e teres.»
+3400	Paien respundent: «Nus le devuns ben fere.»
+3401	A colps pleners de lor espiez i perdent:
+3402	Plus de cent milie espees i unt traites.
+3403	Ais vos le caple e dulurus e pesmes;
+3404	Bataille veit cil ki entr'els volt estre. AOI.
+
+Laisse CCXLVI
+3405	Li emperere recleimet ses Franceis:
+3406	«Seignors barons, jo vos aim, si vos crei.
+3407	Tantes batailles avez faites pur mei,
+3408	Regnes cunquis e desordenet reis!
+3409	Ben le conuis que gueredun vos en dei
+3410	E de mun cors, de terres e d'aveir.
+3411	Vengez voz fi[l]z, voz freres e voz heirs,
+3412	Qu'en Rencesvals furent morz l'altre seir!
+3413	Ja savez vos cuntre paiens ai dreit.»
+3414	Respondent Franc: «Sire, vos dites veir.»
+3415	Itels .XX. miliers en ad od sei,
+3416	Cumunement l'en prametent lor feiz,
+3417	Ne li faldrunt pur mort ne pur destreit.
+3418	N'en i ad cel sa lance n'i empleit;
+3419	De lur espees i fierent demaneis.
+3420	La bataille est de merveillus destreit. AOI.
+
+Laisse CCXLVII
+3421	E Malpramis parmi le camp chevalchet;
+3422	De cels de France i fait mult grant damage.
+3423	Naimes li dux fierement le reguardet,
+3424	Vait le ferir cum hume vertudable.
+3425	De sun escut li freint la pene halte,
+3426	De sun osberc les dous pans li desaffret;
+3427	El cors li met tute l'enseigne jalne,
+3428	Que mort [l'abat] entre .VII.C. des altres.
+
+Laisse CCXLVIII
+3429	Reis Canabeus, le frere a l'amiraill,
+3430	Des esporuns ben brochot sun cheval;
+3431	Trait ad l'espee, le punt est de cristal,
+3432	Si fiert Naimun en l'elme principal:
+3433	L'une meitiet l'en fruissed d'une part,
+3434	Al brant d'acer l'en trenchet .V. des laz,
+3435	Li capelers un dener ne li valt;
+3436	Trenchet la coife entresque a la char,
+3437	Jus a la tere une piece en abat.
+3438	Granz fut li colps, li dux en estonat,
+3439	Sempres caïst, se Deus ne li aidast.
+3440	De sun destrer le col en enbraçat.
+3441	Se li paiens une feiz recuvrast,
+3442	Sempres fust mort li nobilies vassal.
+3443	Carles de France i vint, kil succurat. AOI.
+
+Laisse CCXLIX
+3444	Naimes li dux tant par est anguissables,
+3445	E li paiens de ferir mult le hastet.
+3446	Carles li dist: «Culvert, mar le baillastes!»
+3447	Vait le ferir par sun grant vasselage:
+3448	L'escut li freint, cuntre le coer li quasset,
+3449	De sun osberc li desrumpt la ventaille,
+3450	Que mort l'abat: la sele en remeint guaste.
+
+Laisse CCL
+3451	Mult ad grant doel Carlemagnes li reis,
+3452	Quant Naimun veit nafret devant sei,
+3453	Sur l'erbe verte le sanc tut cler caeir.
+3454	Li empereres li ad dit a cunseill:
+3455	«Bel sire Naimes, kar chevalcez od mei!
+3456	Morz est li gluz ki en destreit vus teneit;
+3457	El cors li mis mun espiet une feiz.»
+3458	Respunt li dux: «Sire, jo vos en crei.
+3459	Se jo vif alques, mult grant prod i avreiz.»
+3460	Puis sunt justez par amur e par feid,
+3461	Ensembl'od els tels .XX. milie Franceis.
+3462	N'i ad celoi que n'i fierge o n'i capleit. AOI.
+
+Laisse CCLI
+3463	Li amiralz chevalchet par le camp,
+3464	Si vait ferir le cunte Guneman,
+3465	Cuntre le coer li fruisset l'escut blanc,
+3466	De sun osberc li derumpit les pans,
+3467	Les dous costez li deseivret des flancs,
+3468	Que mort l'abat de sun cheval curant.
+3469	Puis ad ocis Gebuin e Lorain,
+3470	Richard le Veill, li sire des Normans.
+3471	Paien escrient: «Preciuse est vaillant!
+3472	Ferez, baron, nus i avom guarant!» AOI.
+
+Laisse CCLII
+3473	Ki puis veist li chevaler d'Arabe,
+3474	Cels d'Occiant e d'Argoillie e de Bascle!
+3475	De lur espiez ben i fierent e caplent;
+3476	E li Franceis n'unt talent que s'en algent;
+3477	Asez i moerent e des uns e des altres.
+3478	Entresqu'al vespre est mult fort la bataille,
+3479	Des francs barons i ad mult gran damage.
+3480	Doel i avrat, enceis qu'ele departed. AOI.
+
+Laisse CCLIII
+3481	Mult ben i fierent Franceis e Arrabit;
+3482	Fruissent cil hanste se cil espiez furbit.
+3483	Ki dunc veïst cez escuz si malmis,
+3484	Cez blancs osbercs ki dunc oïst fremir,
+3485	E cez escuz sur cez helmes cruisir,
+3486	Cez chevalers ki dunc veïst caïr
+3487	E humes braire, contre tere murir,
+3488	De grant dulor li poüst suvenir!
+3489	Ceste bataille est mult fort a suffrir.
+3490	Li amiralz recleimet Apolin
+3491	E Tervagan e Mahumet altresi:
+3492	«Mi Damnedeu, jo vos ai mult servit!
+3493	Tutes tes ymagenes ferai d'or fin.» AOI.
+3494	. . . . . . . . . .  (lacuna: line lost in the Oxford ms)
+3495	As li devant un soen drut, Gemalfin.
+3496	Males nuveles li aportet e dit:
+3497	«Baligant, sire, mal este oi baillit.
+3498	Perdut avez Malpramis vostre fils,
+3499	E Canabeus, vostre frere, est ocis.
+3500	A dous Franceis belement en avint.
+3501	Li empereres en est l'uns, ço m'est vis:
+3502	Granz ad le cors, ben resenblet marchis;
+3503	Blanc[he] ad la barbe cume flur en avrill.»
+3504	Li amiralz en ad le helme enclin,
+3505	E en apres sin enbrunket sun vis:
+3506	Si grant doel ad sempres quiad murir.
+3507	Sin apelat Jangleu l'Ultremarin.
+
+Laisse CCLIV
+3508	Dist l'amiraill: «Jangleu, venez avant!
+3509	Vos estes proz e vostre saveir est grant;
+3510	Vostre conseill ai oc evud tuz tens.
+3511	Que vos en semblet d'Arrabiz e de Francs?
+3512	Avrum nos la victorie del champ?»
+3513	E cil respunt: «Morz estes, Baligant!
+3514	Ja vostre deu ne vos erent guarant.
+3515	Carles est fiers e si hume vaillant;
+3516	Unc ne vi gent ki si fust cumbatant.
+3517	Mais reclamez les barons d'Occiant,
+3518	Turcs e Enfruns, Arabiz e Jaianz.
+3519	Ço que estre en deit, ne l'alez demurant.»
+
+Laisse CCLV
+3520	Li amiraill ad sa barbe fors mise,
+3521	Altresi blanche cume flur en espine:
+3522	Cument qu'il seit, ne s'i voelt celer mie.
+3523	Met a sa buche une clere buisine,
+3524	Sunet la cler, que si paien l'oïrent;
+3525	Par tut le camp ses cumpaignes ralient.
+3526	Cil d'Ociant i braient e henissent,
+3527	Arguille si cume chen i glatissent;
+3528	Requerent Franc par si grant estultie,
+3529	El plus espes ses rumpent e partissent:
+3530	A icest colp en jetent mort .VII. milie.
+
+Laisse CCLVI
+3531	Li quens Oger cuardise n'out unkes;
+3532	Meillor vassal de lui ne vestit bronie.
+3533	Quant de Franceis les escheles vit rumpre,
+3534	Si apelat Tierri, le duc d'Argone,
+3535	Gefrei d'Anjou e Jozeran le cunte,
+3536	Mult fierement Carles en araisunet:
+3537	«Veez paien cum ocient voz humes!
+3538	Ja Deu ne placet qu'el chef portez corone,
+3539	S'or n'i ferez pur venger vostre hunte.»
+3540	N'i ad icel ki un sul mot respundet:
+3541	Brochent ad eit, lor cevals laissent cure,
+3542	Vunt les ferir la o il les encuntrent.
+
+Laisse CCLVII
+3543	Mult ben i fiert Carlemagnes li reis, AOI.
+3544	Naimes li dux e Oger li Daneis,
+3545	Geifreid d'Anjou ki l'enseigne teneit.
+3546	Mult par est proz danz Ogers li Daneis!
+3547	Puint le ceval, laisset curre ad espleit,
+3548	Si vait ferir celui ki le dragun teneit,
+3549	Qu'Ambure cravente en la place devant sei
+3550	E le dragon e l'enseigne le rei.
+3551	Baligant veit sun gunfanun cadeir
+3552	E l'estandart Mahumet remaneir.
+3553	Li amiralz alques s'en aperceit
+3554	Que il ad tort e Carlemagnes dreit.
+3555	Paien d'Arabe s'en turnent plus .C.
+3556	Li emperere recleimet ses parenz:
+3557	«Dites, baron, por Deu, si m'aidereiz.»
+3558	Respundent Francs: «Mar le demandereiz.
+3559	Trestut seit fel ki n'i fierget a espleit!» AOI.
+
+Laisse CCLVIII
+3560	Passet li jurz, si turnet a la vespree.
+3561	Franc e paien i fierent des espees.
+3562	Cil sunt vassal ki les oz ajusterent.
+3563	Lor enseignes n'i unt mie ubliees:
+3564	Li amira[l]z «Preciuse!» ad criee,
+3565	Carles «Munjoie!», l'enseigne renumee.
+3566	L'un conuist l'altre as haltes voiz e as cleres;
+3567	En mi le camp amdui s'entr'encuntrerent:
+3568	Si se vunt ferir, granz colps s'entredunerent
+3569	De lor espiez en lor targes roees.
+3570	Fraites les unt desuz cez bucles lees.
+3571	De lor osbercs les pans en desevrerent:
+3572	Dedenz cez cors mie ne s'adeserent:
+3573	Rumpent cez cengles e cez seles verserent,
+3574	Cheent li rei, a tere se turbecherent,
+3575	Isnelement sur lor piez releverent.
+3576	Mult vassalment unt traites les espees.
+3577	Ceste bataille n'en ert mais destornee:
+3578	Seinz hume mort ne poet estre achevee. AOI.
+
+Laisse CCLIX
+3579	Mult est vassal Carles de France dulce;
+3580	Li amiralt, il nel crent ne ne dutet.
+3581	Cez lor espees tutes nues i mustrent,
+3582	Sur cez escuz mult granz colps s'entredunent,
+3583	Trenchent les quirs e cez fuz ki sunt dubles;
+3584	Cheent li clou, si pecerent les bucles;
+3585	Puis fierent il nud a nud sur les bronies;
+3586	Des helmes clers li fous en escarbunet.
+3587	Ceste bataille ne poet remaneir unkes,
+3588	Josque li uns sun tort i reconuisset. AOI.
+
+Laisse CCLX
+3589	Dist l'amiraill: «Carles, kar te purpenses,
+3590	Si pren cunseill que vers mei te repentes!
+3591	Mort as (...) mun filz, par le men esciente;
+3592	A mult grant tort mun païs me calenges;
+3593	Deven mes hom, en fedeltet voeill rendre;
+3594	Ven mei servir d'ici qu'en Oriente!»
+3595	Carles respunt: «Mult grant viltet me sembl[e];
+3596	Pais ne amor ne dei a paien rendre.
+3597	Receif la lei que Deus nos apresentet,
+3598	Christientet, e pui te amerai sempres;
+3599	Puis serf e crei le rei omnipotente!»
+3600	Dist Baligant: «Malvais sermun cumences!»
+3601	Puis vunt ferir des espees qu'unt ceintes. AOI.
+
+Laisse CCLXI
+3602	Li amiralz est mult de grant vertut.
+3603	Fier Carlemagne sur l'elme d'acer brun,
+3604	Desur la teste li ad frait e fendut;
+3605	Met li l'espee sur les chevels menuz,
+3606	Prent de la carn grant pleine palme e plus:
+3607	Iloec endreit remeint li os tut nut.
+3608	Carles cancelet, por poi qu'il n'est caüt;
+3609	Mais Deus ne volt qu'il seit mort ne vencut.
+3610	Seint Gabriel est repairet a lui,
+3611	Si li demande: «Reis magnes, que fais tu?»
+
+Laisse CCLXII
+3612	Quant Carles oït la seinte voiz de l'angle,
+3613	N'en ad poür ne de murir dutance;
+3614	Repairet loi vigur e remembrance.
+3615	Fiert l'amiraill de l'espee de France,
+3616	L'elme li freint o li gemme reflambent,
+3617	[T]renchet la teste pur la cervele espandre
+3618	[E] tut le vis tresqu'en la barbe blanche,
+3619	Que mort l'abat senz nule recuvrance.
+3620	«Munjoie!» escriet pur la reconuisance.
+3621	A icest mot venuz i est dux Neimes:
+3622	Prent Tencendur, muntet i est li reis magnes.
+3623	Paien s'en turnent, ne volt Deus qu'il i remainent.
+3624	Or sunt Franceis a icels qu'il demandent.
+
+Laisse CCLXIII
+3625	Paien s'en fuient, cum Damnesdeus le volt.
+3626	Encalcent Francs e l'emperere avoec.
+3627	Ço dist li reis: «Seignurs, vengez voz doels,
+3628	Si esclargiez voz talenz e voz coers,
+3629	Kar hoi matin vos vi plurer des oilz.»
+3630	Respondent Franc: «Sire, çó nus estoet.»
+3631	Cascuns i fiert tanz granz colps cum il poet.
+3632	Poi s'en estoerstrent d'icels ki sunt iloec.
+
+Laisse CCLXIV
+3633	Granz est li calz, si se levet la puldre.
+3634	Paien s'en fuient e Franceis les anguissent;
+3635	Li enchalz duret d'ici qu'en Sarraguce.
+3636	En sum sa tur muntee est Bramidonie,
+3637	Ensembl'od li si clerc e si canonie
+3638	De false lei, que Deus nen amat unkes:
+3639	Ordres nen unt ne en lor chefs corones.
+3640	Quant ele vit Arrabiz si cunfundre,
+3641	A halte voiz s'escrie: «Aiez nos, Mahum!
+3642	E! gentilz reis, ja sunt vencuz noz humes,
+3643	Li amiralz ocis a si grant hunte!»
+3644	Quant l'ot Marsilie, vers sa pareit se turnet,
+3645	Pluret des oilz, tute sa chere enbrunchet:
+3646	Morz est de doel. Si cum pecchet l'encumbret,
+3647	L'anme de lui as vifs diables dunet. AOI.
+
+Laisse CCLXV
+3648	Paien sunt morz, alquant cunfundue,
+3649	E Carles ad sa bataille vencue.
+3650	De Sarraguce ad la porte abatue:
+3651	Or set il ben que n'est mais defendue.
+3652	Prent la citet, od sa gent i est venue;
+3653	Par poestet icele noit i jurent.
+3654	Fiers est li reis a la barbe canue,
+3655	E Bramidonie les turs li ad rendues:
+3656	Les dis sunt grandes, les cinquante menues.
+3657	Mult ben espleitet qui Damnesdeus aiuet.
+
+Laisse CCLXVI
+3658	Passet li jurz, la noit est aserie;
+3659	Clers est la lune e les esteiles flambient.
+3660	Li emperere ad Sarraguce prise.
+3661	A mil Franceis funt ben cercer la vile,
+3662	Les sinagoges e les mahumeries;
+3663	A mailz de fer e a cuignees qu'ils tindrent,
+3664	Fruissent les ymagenes e trestutes les ydeles:
+3665	N'i remeindrat ne sorz ne falserie.
+3666	Li reis creit en Deu, faire voelt sun servise;
+3667	E si evesque les eves beneïssent,
+3668	Meinent paien ent[r]esqu'al baptisterie:
+3669	S'or i ad cel qui Carles cuntredie voillet,
+3670	Il le fait pendre o ardeir ou ocire.
+3671	Baptizet sunt asez plus de .C. milie
+3672	Veir chrestien, ne mais sul la reïne.
+3673	En France dulce iert menee caitive:
+3674	Ço voelt li reis par amur cunvertisset.
+
+Laisse CCLXVII
+3675	Passet la noit, si apert le cler jor.
+3676	De Sarraguce Carles guarnist les turs;
+3677	Mil chevalers i laissat puigneürs;
+3678	Guardent la vile a oes l'empereor.
+3679	Mandet li reis e si hume trestuz
+3680	E Bramidonie, qu'il meinet en sa prisun;
+3681	Mais n'ad talent que li facet se bien nun.
+3682	Repairez sunt a joie e a baldur.
+3683	Passent Nerbone par force e par vigur;
+3684	Vint a Burdeles la citet de...
+3685	Desur l'alter seint Severin le baron
+3686	Met l'oliphan plein d'or e de manguns:
+3687	Li pelerin le veient ki la vunt.
+3688	Passet Girunde a mult granz nefs qu'i sunt;
+3689	Entresque a Blaive ad cunduit sun nevold
+3690	E Oliver, sun nobilie cumpaignun,
+3691	E l'arcevesque, ki fut sages e proz.
+3692	En blancs sarcous fait metre les seignurs
+3693	A Seint Romain; la gisent li baron.
+3694	Francs les cumandent a Deu e a ses nuns.
+3695	Carles cevalchet e les vals e les munz;
+3696	Entresqu'a Ais ne volt prendre sujurn.
+3697	Tant chevalchat qu'il descent al perrun.
+3698	Cume il est en sun paleis halçur,
+3699	Par ses messages mandet ses jugeors:
+3700	Baivers e Saisnes, Loherencs e Frisuns;
+3701	Alemans mandet, si mandet Borguignuns,
+3702	E Peitevins e Normans e Bretuns,
+3703	De cels de France des plus saives qui sunt.
+3704	Des ore cumencet le plait de Guenelun.
+
+Laisse CCLXVIII
+3705	Li empereres est repairet d'Espaigne,
+3706	E vient a Ais, al meillor sied de France;
+3707	Muntet el palais, est venut en la sale.
+3708	As li Alde venue, une bele damisele.
+3709	Ço dist al rei: «O est Rollant le catanie,
+3710	Ki me jurat cume sa per a prendre?»
+3711	Carles en ad e dulor e pesance,
+3712	Pluret des oilz, tiret sa barbe blance:
+3713	«Soer, cher'amie, de hume mort me demandes.
+3714	Jo t'en durai mult esforcet eschange:
+3715	Ço est Loewis, mielz ne sai a parler;
+3716	Il est mes filz e si tendrat mes marches.»
+3717	Alde respunt: «Cest mot mei est estrange.
+3718	Ne place Deu ne ses seinz ne ses angles
+3719	Apres Rollant que jo vive remaigne!»
+3720	Pert la culor, chet as piez Carlemagne,
+3721	Sempres est morte, Deus ait mercit de l'anme!
+3722	Franceis barons en plurent e si la pleignent.
+
+Laisse CCLXIX
+3723	Alde la bel[e] est a sa fin alee.
+3724	Quidet li reis que el[le] se seit pasmee;
+3725	Pited en ad, sin pluret l'emperere;
+3726	Prent la as mains, si l'en ad relevee.
+3727	Desur l(es)[']espalles ad la teste clinee.
+3728	Quant Carles veit que morte l'ad truvee,
+3729	Quatre cuntesses sempres i ad mandees.
+3730	A un muster de nuneins est portee;
+3731	La noit la guaitent entresqu'a l 'ajurnee.
+3732	Lunc un alter belement l'enterrerent.
+3733	Mult grant honor i ad li reis dunee, AOI.
+
+Laisse CCLXX
+3734	Li emperere est repairet ad Ais.
+3735	Guenes li fels, en caeines de fer,
+3736	En la citet est devant le paleis.
+3737	A un estache l'unt atachet cil serf,
+3738	Les mains li lient a curreies de cerf;
+3739	Tres ben le batent a fuz e a jamelz:
+3740	N'ad deservit que altre ben i ait;
+3741	A grant dulur iloec atent sun plait.
+
+Laisse CCLXXI
+3742	Il est escrit en l'anciene geste
+3743	Que Carles mandet humes de plusurs teres.
+3744	Asemblez sunt ad Ais, a la capele.
+3745	Halz est li jurz, mult par est grande la feste,
+3746	Dient alquanz del baron seint Silvestre.
+3747	Des ore cumencet le plait e les noveles
+3748	De Guenelun, ki traïsun ad faite.
+3749	Li emperere devant sei l'ad fait traire. AOI.
+
+Laisse CCLXXII
+3750	«Seignors barons» dist Carlemagnes li reis,
+3751	«De Guenelun car me jugez le dreit!
+3752	Il fut en l'ost tresque en Espaigne od mei,
+3753	Si me tolit .XX. milie de mes Franceis
+3754	E mun nevold, que ja mais ne verreiz,
+3755	E Oliver, li proz e li curteis;
+3756	Les .XII. pers ad traït por aveir.»
+3757	Dist Guenelon: «Fel seie se jol ceil!
+3758	Rollant me forfist en or et en aveir,
+3759	Pur que jo quis sa mort e sun destreit;
+3760	Mais traïsun nule n'en i otrei.»
+3761	Respundent Franc: «Ore en tendrum cunseill.»
+
+Laisse CCLXXIII
+3762	Devant le rei la s'estut Guenelun:
+3763	Cors ad gaillard, el vis gente color;
+3764	S'il fust leials, ben resemblast barun.
+3765	Veit cels de France e tuz les jugeürs,
+3766	De ses parenz .XXX. ki od lui sunt;
+3767	Puis s'escriat haltement, a grant voeiz:
+3768	«Por amor Deu, car m'entendez, barons!
+3769	Seignors, jo fui en l'ost avoec l'empereür,
+3770	Serveie le par feid e par amur.
+3771	Rollant sis nies me coillit en haür,
+3772	Si me jugat a mort e a dulur.
+3773	Message fui al rei Marsiliun;
+3774	Par mun saveir vinc jo a guarisun.
+3775	Jo desfiai Rollant le poigneor
+3776	E Oliver e tuiz lur cumpaignun;
+3777	Carles l'oïd e si nobilie baron.
+3778	Venget m'en sui, mais n'i ad traïsun.»
+3779	Respundent Francs: «A conseill en irums.»
+
+Laisse CCLXXIV
+3780	Quant Guenes veit que ses granz plaiz cumencet,
+3781	De ses parenz ensemble [od li] i out trente.
+3782	Un en i ad a qui li altre entendent:
+3783	Ço est Pinabel del castel de Sorence;
+3784	Ben set parler e dreite raisun rendre;
+3785	Vassals est bons por ses armes defendre, AOI.
+3786	Ço li dist Guenes: «En vos [...] ami...
+3787	Getez mei hoi de mort e de calunje!»
+3788	Dist Pinabel: «Vos serez guarit sempres.
+3789	N'i ad Frances ki vos juget a pendre,
+3790	U l'emper[er]e les noz dous cors en asemblet,
+3791	Al b(a)rant d'acer que jo ne l'en desmente.»
+3792	Guenes li quens a ses piez se presente.
+
+Laisse CCLXXV
+3793	Bavier e Saisnes sunt alet a conseill,
+3794	E Peitevin e Norman e Franceis;
+3795	Asez i ad Alemans e tTiedeis.
+3796	Icels d'Alverne(ne) i sunt li plus curteis;
+3797	Pur Pinabel se cuntienent plus quei.
+3798	Dist l'un a l'altre: «Bien fait a remaneir!
+3799	Laisum le plait e si preium le rei
+3800	Que Guenelun cleimt quite ceste feiz,
+3801	Puis si li servet par amur e par feid.
+3802	Morz est Rollant, ja mais nel revereiz;
+3803	N'ert recuvret por ór ne por aveir:
+3804	Mult sereit fols ki [l]a(a) se cumbatreit.»
+3805	N'en i ad celoi nel graant e otreit,
+3806	Fors sul Tierri, le frere(re) dam Geifreit. AOI.
+
+Laisse CCLXXVI
+3807	A Charlemagne repairent si barun;
+3808	Dient al rei: «Sire, nus vos prium
+3809	Que clamez quite le cunte Guenelun,
+3810	Puis si vos servet par feid e par amor.
+3811	Vivre le laisez, car mult est gentilz hoem.
+3812	Ja por murir n'en ert veüd gerun,
+3813	Ne por aveir ja nel recuverum.»
+3814	Ço dist li reis: «Vos estes mi felun!» AOI.
+
+Laisse CCLXXVII
+3815	Quant Carles veit que tuz li sunt faillid,
+3816	Mult l'enbrunchit e la chere e le vis;
+3817	Al doel qu'il ad si se cleimet caitifs.
+3818	Ais li devant uns chevalers, [Tierris],
+3819	Frere Gefrei a un duc angevin.
+3820	Heingre out le cors e graisle e eschewid,
+3821	Neirs les chevels e alques bruns [le vis];
+3822	N'est gueres granz ne trop nen est petiz.
+3823	Curteisement a l'emperere ad dit:
+3824	«Bels sire reis, ne vos dementez si.
+3825	Ja savez vos, que mult vos ai servit;
+3826	Par anceisurs dei jo tel plait tenir.
+3827	Que que Rollant a Guenelun forsfesist,
+3828	Vostre servise l'en doüst bien guarir!
+3829	Guenes est fels d'iço qu'il le traït;
+3830	Vers vos s'en est parjurez e malmis.
+3831	Pur ço le juz jo a prendre e a murir
+3832	E sun cors metre...
+3833	Si cume fel ki felonie fist.
+3834	Se or ad parent ki m'en voeille desmentir,
+3835	A ceste espee, que jo ai ceinte ici,
+3836	Mun jugement voel sempres guarantir.»
+3837	Respundent Franc: «Or avez vos ben dit.»
+
+Laisse CCLXXVIII
+3838	Devant lu rei est venuz Pinabel,
+3839	Granz est e forz e vassals e isnel:
+3840	Qu'il fiert a colp, de sun tens n'i ad mais.
+3841	E dist al rei: «Sire, vostre est li plaiz:
+3842	Car cumandez, que tel noise n'i ait!
+3843	Ci vei Tierri, ki jugement ad fait.
+3844	Jo si li fals, od lui m'en cumbatrai.»
+3845	Met li el poign de cerf le destre guant.
+3846	Dist li emper[er]es: «Bons pleges en demant.»
+3847	.XXX. parenz l'i plevissent leial.
+3848	Ço dist li reis: «E jol vos recr[e]rai.»
+3849	Fait cels guarder tresque li dreiz en serat. AOI.
+
+Laisse CCLXXIX
+3850	Quant veit Tierri qu'or en ert la bataille,
+3851	Sun destre guant en ad presentet Carle.
+3852	Li emperere l'i recreit par hostage,
+3853	Puis fait porter .IIII. bancs en la place;
+3854	La vunt sedeir cil kis deivent cumbatre.
+3855	Ben sunt malez, par jugement des altres,
+3856	Sil purparlat Oger de Denemarche;
+3857	E puis demandent lur chevals e lur armes.
+
+Laisse CCLXXX
+3858	Puis que il sunt a bataille jugez, AOI.
+3859	Ben sunt cunfes e asols e seignez:
+3860	Oent lur messes e sunt acuminiez;
+3861	Mult granz offrendes metent par cez musters.
+3862	Devant Carlun andui sunt repairez:
+3863	Lur esperuns unt en lor piez calcez,
+3864	Vestent osberc blancs e forz e legers,
+3865	Lur helmes clers unt fermez en lor chefs,
+3866	Ceinent espees enheldees d'or mier,
+3867	En lur cols pendent lur escuz de quarters,
+3868	En lur puinz destres unt lur trenchanz espiez;
+3869	Puis sunt muntez en lur curanz destrers.
+3870	Idunc plurerent .C. milie chevalers,
+3871	Qui pur Rollant de Tierri unt pitiet.
+3872	Deus set asez cument la fins en ert.
+
+Laisse CCLXXXI
+3873	Dedesuz Ais est la pree mult large:
+3874	Des dous baruns justee est la bataille.
+3875	Cil sunt produme e de grant vasselage
+3876	E lur chevals sunt curanz e aates.
+3877	Brochent les bien, tutes les resnes lasquent;
+3878	Par grant vertut vait ferir l'uns li altre;
+3879	Tuz lur escuz i fruissent e esquassent,
+3880	Lur osbercs rumpent e lur cengles depiecent,
+3881	Les alves turnent, les seles cheent a tere.
+3882	.C. mil humes i plurent, kis esguardent.
+
+Laisse CCLXXXII
+3883	A tere sunt ambdui li chevaler, AOI.
+3884	Isnelement se drecent sur lur piez.
+3885	Pinabels est forz e isnels e legers.
+3886	Li uns requiert l'altre, n'unt mie des destrers.
+3887	De cez espees enheldees d'or mer,
+3888	Fierent e caplent sur cez helmes d'acer;
+3889	Granz sunt les colps, as helmes detrencher.
+3890	Mult se dementent cil Franceis chevaler.
+3891	«E! Deus,» dist Carles, «le dreit en esclargiez!»
+
+Laisse CCLXXXIII
+3892	Dist Pinabel: «Tierri, car te recreiz!
+3893	Tes hom serai par amur e par feid,
+3894	A tun plaisir te durrai mun aveir,
+3895	Mais Guenelun fai acorder al rei!»
+3896	Respont Tierri: «Ja n'en tendrai cunseill.
+3897	Tut seie fel se jo mie l'otrei!
+3898	Deus facet hoi entre nus dous le dreit!» AOI.
+
+Laisse CCLXXXIV
+3899	Ço dist Tierri: «Pinabel mult ies ber,
+3900	Granz ies e forz e tis cors ben mollez;
+3901	De vasselage te conoissent ti per;
+3902	Ceste bataille, car la laisses ester!
+3903	A Carlemagne te ferai acorder;
+3904	De Guenelun justise ert faite tel,
+3905	Jamais n'ert jur que il n'en seit parlet.»
+3906	Dist Pinabel: «Ne placet Damnedeu!
+3907	Sustenir voeill trestut mun parentet;
+3908	N'en recrerrai pur nul hume mortel;
+3909	Mielz voeill murir que il me seit reprovet.»
+3910	De lur espees cumencent a capler
+3911	Desur cez helmes, ki sunt a or gemez;
+3912	Cuntre le ciel en volet li fous tuz clers.
+3913	Il ne poet estre qu'il seient desevrez:
+3914	Seinz hume mort ne poet estre afinet. AOI.
+
+Laisse CCLXXXV
+3915	Mult par est proz Pinabel de Sorence;
+3916	Si fiert Tierri sur l'elme de Provence:
+3917	Salt en li fous, que l'erbe en fait esprendre;
+3918	Del brant d'acer la mure li presentet,
+3919	Desur le frunt li ad faite descendre.
+3920	Parmi le vis (li ad faite descendre):
+3921	La destre joe en ad tute sanglente;
+3922	L'osberc del dos josque par sum le ventre.
+3923	Deus le guarit, que mort ne l'acraventet. AOI.
+
+Laisse CCLXXXVI
+3924	Ço veit Tierris, que el vis est ferut:
+3925	Li sancs tuz clers en chiet el pred herbus
+3926	Fiert Pinabel sur l'elme d'acer brun,
+3927	Jusqu'al nasel li ad frait e fendut,
+3928	Del chef li ad le cervel espandut,
+3929	Brandit sun colp, si l'ad mort abatut.
+3930	A icest colp est li esturs vencut.
+3931	Escrient Franc: «Deus i ad fait vertut!
+3932	Asez est dreiz que Guenes seit pendut
+3933	E si parent, ki plaidet unt pur lui.» AOI.
+
+Laisse CCLXXXVII
+3934	Quant Tierris ad vencue sa bataille,
+3935	Venuz i est li emperere Carles,
+3936	Ensembl'od lui de ses baruns quarante,
+3937	Naimes li dux, Oger de Danemarche,
+3938	Geifrei d'Anjou e Willalme de Blaive.
+3939	Li reis ad pris Tierri entre sa brace,
+3940	Tert lui le vis od ses granz pels de martre,
+3941	Celes met jus, puis li afublent altres;
+3942	Mult suavet le chevaler desarment.
+3943	[Munter l'unt] fait en une mule d'Arabe;
+3944	Repairet s'en a joie e a barnage;
+3945	Vienent ad Ais, descendent en la place.
+3946	Des ore cumencet l'ocisiun des altres.
+
+Laisse CCLXXXVIII
+3947	Carles apelet ses cuntes e ses dux:
+3948	«Que me loez de cels qu'ai retenuz?
+3949	Pur Guenelun erent a plait venuz,
+3950	Pur Pinabel en ostage renduz.»
+3951	Respundent Franc: «Ja mar en vivrat uns!»
+3952	Li reis cumandet un soen veier, Basbrun:
+3953	«Va, sis pent tuz a l'arbre de mal fust!
+3954	Par ceste barbe dunt li peil sunt canuz,
+3955	Se uns escapet, morz ies e cunfunduz.»
+3956	Cil li respunt: «Qu'en fereie jo e el?»
+3957	Od .C. serjanz par force les cunduit.
+3958	.XXX. en i ad d'icels ki sunt pendut.
+3959	Ki hume traïst, sei ocit e altroi. AOI.
+
+Laisse CCLXXXIX
+3960	Puis sunt turnet Bavier e Aleman
+3961	E Peitevin e Bretun e Norman.
+3962	Sor tuit li altre l'unt otriet li Franc
+3963	Que Guenes moerget par merveillus ahan.
+3964	Quatre destrers funt amener avant,
+3965	Puis si li lient e les piez e les mains.
+3966	Li cheval sunt orgoillus e curant;
+3967	Quatre serjanz les acoeillent devant,
+3968	Devers un'ewe ki est en mi un camp.
+3969	Guenes est turnet a perdiciun grant;
+3970	Trestuit si nerf mult li sunt estendant
+3971	E tuit li membre de sun cors derumpant:
+3972	Sur l'erbe verte en espant li cler sanc.
+3973	Guenes est mort cume fel recreant.
+3974	Hom ki traïst altre, nen est dreiz qu'il s'en vant.
+
+Laisse CCXC
+3975	Quant li empereres ad faite sa venjance,
+3976	Sin apelat ses evesques de France,
+3977	Cels de Baviere e icels d'Alemaigne:
+3978	«En ma maisun ad une caitive franche.
+3979	Tant ad oït e sermuns e essamples,
+3980	Creire voelt Deu, chrestientet demandet.
+3981	Baptizez la, pur quei Deus en ait l'anme.»
+3982	Cil li respundent: «Or seit faite par marrenes:
+3983	Asez cruiz e linees dames...»
+3984	As bainz ad Aís mult sunt granz les ci...
+3985	La baptizent la reïne d'Espaigne:
+3986	Truvee li unt le num de Juliane.
+3987	Chrestiene est par veire conoisance.
+
+Laisse CCXCI
+3988	Quant l'emperere ad faite sa justise
+3989	E esclargiez est la sue grant ire,
+3990	En Bramidonie ad chrestientet mise,
+3991	Passet li jurz, la nuit est aserie.
+3992	Culcez s'est li reis en sa cambre voltice.
+3993	Seint Gabriel de part Deu li vint dire:
+3994	«Carles, sumun les oz de tun emperie!
+3995	Par force iras en la tere de Bire,
+3996	Reis Vivien si succuras en Imphe,
+3997	A la citet que paien unt asise:
+3998	Li chrestien te recleiment e crient.»
+3999	Li emperere n'i volsist aler mie:
+4000	«Deus,» dist li reis, «si penuse est ma vie!»
+4001	Pluret des oilz, sa barbe blanche tiret.
+4002	Ci falt la geste que Turoldus declinet.
