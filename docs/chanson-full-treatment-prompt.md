@@ -94,7 +94,29 @@ extend them.
 | encumbret | `encombrer (accabler)` |
 | errer | `errer (voyager)` |
 | escultet | `esculter (écouter)` |
-| avoir, être, faire, tenir, prendre, devenir, jouer, descendre, saluer, demander, garder, atteindre, pouvoir, servir, réclamer, aimer, abattre, fleurir, escrimer, enseigner, conquérir, aller, venir, donner, appeler, conseiller, répondre, dire, mander, charger, louer, devoir, suivre, recevoir, vouloir, envoyer, perdre, conduire, mendier, voir, passer, trancher, monter, mettre, porter, savoir, conter, tendre, baisser, commencer, penser, lever, se coucher, confondre, amener, parler, enquérir, enchaîner, muer, trousser, avouer | direct modern form |
+| cuvent | `cuvenir (falloir)` |
+| otriet | `otreier (octroyer)` |
+| nuncerent | `noncier (annoncer)` |
+| lodet / loerent | `loer (conseiller)` |
+| degetuns | `degeter (rejeter)` |
+| chalt | `chaloir (importer)` |
+| duist | `duire (lisser)` |
+| afaitad | `afaitier (arranger)` |
+| toluz | `tolir (enlever)` |
+| fruiset | `fruisier (briser)` |
+| arses | `ardre (brûler)` |
+| sumunt | `semondre (inviter)` |
+| meslisez | `mesler (se quereller)` |
+| blancheier | `blancheier (blanchir)` |
+| aquisez | `aquiser (apaiser)` |
+| ester | `ester (rester)` |
+| eslisez | `eslire (choisir)` |
+| esguardent | `esgarder (regarder)` |
+| esrages | `esragier (s'enrager)` |
+| muvrai | `mouvoir (susciter)` |
+| esclair | `esclairier (soulager)` |
+| sedeir | `seoir (asseoir)` |
+| avoir, être, faire, tenir, prendre, devenir, jouer, descendre, saluer, demander, garder, atteindre, pouvoir, servir, réclamer, aimer, abattre, fleurir, escrimer, enseigner, conquérir, aller, venir, donner, appeler, conseiller, répondre, dire, mander, charger, louer, devoir, suivre, recevoir, vouloir, envoyer, perdre, conduire, mendier, voir, passer, trancher, monter, mettre, porter, savoir, conter, tendre, baisser, commencer, penser, lever, se coucher, confondre, amener, parler, enquérir, enchaîner, muer, trousser, avouer, s'en aller, contredire, croire, conquérir, mener, mettre, venger, joindre, vaincre, entreprendre, juger, jeter, craindre, durer, rire, livrer, commander, se dresser, se tenir | direct modern form |
 
 As new verbs appear, add them to this table **in this prompt file** so later chunks
 stay consistent. When a reflex is genuinely uncertain or disputed, prefer the

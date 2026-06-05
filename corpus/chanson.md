@@ -439,3 +439,353 @@ orbilat.com), which differs in minor orthography and punctuation (`aimet`,
 165. Beneath a pine the king has gone,
 166. His barons he summons to settle his counsel:
 167. Through those of France he wishes to act in everything. AOI. <!-- uncertain: "errer del tut" = proceed/act entirely by means of the men of France -->
+
+---
+
+## Laisse XII (lines 168–179)
+
+**Original**
+168. Li emper[er]es s'en vait desuz un pin. [s'en aller]
+169. Ses baruns mandet pur sun cunseill fenir: [mander, finer (finir)]
+170. Le duc Oger, (e) l'arcevesque Turpin,
+171. Richard li Vélz e sun nev[old] Henri,
+172. E de Gascuigne li proz quens Acelin
+173. Tedbald de Reins e Milun, sun cusin;
+174. E si i furent e Gerers e Gerin; [être]
+175. Ensembl' od els li quens Rollant i vint, [venir]
+176. E Oliver, li proz e li gentilz;
+177. Des Francs de France en i ad plus de mil. [avoir]
+178. Guenes i vint, ki la traïsun fist. [venir, faire]
+179. Des ore cumencet le cunseill que mal prist. AOI. [commencer, prendre]
+
+**Translation**
+168. The emperor goes off beneath a pine tree.
+169. He summons his barons to settle his counsel:
+170. Duke Ogier, (and) Archbishop Turpin,
+171. Richard the Old and his nephew Henri,
+172. And from Gascony the valiant count Acelin,
+173. Tedbald of Reims and Milun, his cousin;
+174. And there too were Gerers and Gerin;
+175. Together with them Count Roland came there,
+176. And Oliver, the valiant and the noble;
+177. Of the Franks of France there are more than a thousand of them.
+178. Guenes came there, who committed the treason.
+179. From now begins the counsel that came to ill. AOI. <!-- uncertain: "que mal prist" lit. "which took ill/turned out badly" -->
+
+---
+
+## Laisse XIII (lines 180–192)
+
+**Original**
+180. «Seignurs barons,» dist li emperere Carles, [dire]
+181. «Li reis Marsilie m'ad tramis ses messages; [avoir, tramettre (transmettre)]
+182. De sun aveir me voelt duner grant masse, [vouloir, donner]
+183. Urs e leuns e veltres caeignables,
+184. Set cenz cameilz e mil hosturs muables,
+185. Quatre cenz mulz cargez del ór d'Arabe, [charger]
+186. Avoec iço plus de cinquante care;
+187. Mais il me mandet que en France m'en alge: [mander, aller]
+188. Il me sivrat ad Aís, a mun estage, [suivre]
+189. Si recevrat la nostre lei plus salve; [recevoir]
+190. Chrestiens ert, de mei tendrat ses marches; [être, tenir]
+191. Mais jo ne sai quels en est sis curages.» [savoir, être]
+192. Dient Franceis: «Il nus i cuvent guarde!» AOI. [dire, cuvenir (falloir)] <!-- uncertain: cuvent = impersonal "it behooves/is fitting"; nearest modern sense is falloir -->
+
+**Translation**
+180. «My lord barons,» said the emperor Charles,
+181. «King Marsile has sent me his messengers;
+182. From his wealth he wishes to give me a great quantity,
+183. Bears and lions and leashed hunting-dogs,
+184. Seven hundred camels and a thousand mewed hawks,
+185. Four hundred mules laden with the gold of Arabia,
+186. Along with this, more than fifty carts;
+187. But he commands me that I depart from France: <!-- uncertain: "mandet ... que ... m'en alge" read as a request/demand that Charles go to Aix, i.e. leave France for home -->
+188. He will follow me to Aix, to my residence,
+189. And there will receive our most saving faith;
+190. He will be a Christian, will hold his marches from me;
+191. But I do not know what his intention is.»
+192. The Franks say: «We must be on our guard in this!» AOI.
+
+---
+
+## Laisse XIV (lines 193–213)
+
+**Original**
+193. Li empereres out sa raisun fenie. [avoir, finer (finir)]
+194. Li quens Rollant, ki ne l'otriet mie, [otreier (octroyer)]
+195. En piez se drecet, si li vint cuntredire. [se dresser, venir, contredire]
+196. Il dist al rei: «Ja mar crerez Marsilie. [dire, croire]
+197. Set anz [ad] pleins, que en Espaigne venimes; [avoir, venir]
+198. Jo vos cunquis e Noples e Commibles, [conquérir]
+199. Pris ai Valterne e la tere de Pine [prendre, avoir]
+200. E Balasgued e Tuele e Sezilie.
+201. Li reis Marsilie i fist mult que traïtre: [faire]
+202. De ses pai[ens il vus] enveiat quinze, [envoyer]
+203. Cha(n)cuns portout une branche d'olive; [porter]
+204. Nuncerent vos cez paroles meïsme. [noncier (annoncer)]
+205. A vos Franceis un cunseill en presistes: [prendre]
+206. Loerent vos alques de legerie. [loer (conseiller)]
+207. Dous de voz cuntes al paien tramesistes, [tramettre (transmettre)]
+208. L'un fut Basan e li altres Basilies; [être]
+209. Les chef en prist es puis desuz Haltilie. [prendre]
+210. Faites la guer[re] cum vos l'avez enprise: [faire, avoir, entreprendre]
+211. En Sarraguce menez vostre ost banie, [mener]
+212. Metez le sege a tute vostre vie, [mettre]
+213. Si vengez cels que li fels fist ocire!» AOI. [venger, faire, ocire (tuer)]
+
+**Translation**
+193. The emperor had finished his speech.
+194. Count Roland, who did not agree to it at all,
+195. Rises to his feet, and came to contradict him.
+196. He said to the king: «It would be folly to trust Marsile. <!-- uncertain: "Ja mar crerez" = "you will wrongly believe / it is ill that you should believe" -->
+197. Seven full years it is, since we came into Spain;
+198. I conquered for you both Noples and Commibles,
+199. I have taken Valterne and the land of Pine
+200. And Balasgued and Tuele and Sezilie.
+201. King Marsile acted there very much like a traitor:
+202. Of his pagans he sent you fifteen,
+203. Each one carried an olive branch;
+204. They announced to you these very words.
+205. With your Franks you took a counsel on it:
+206. They advised you somewhat foolishly. <!-- uncertain: "alques de legerie" = "somewhat out of lightness/rashness" -->
+207. Two of your counts you sent to the pagan,
+208. The one was Basan and the other Basile;
+209. He took their heads in the hills below Haltilie. <!-- uncertain: "Les chef en prist" = he had their heads taken / beheaded them -->
+210. Wage the war as you have undertaken it:
+211. To Saragossa lead your summoned host,
+212. Lay the siege for the whole of your life,
+213. And avenge those whom the villain had killed!» AOI.
+
+---
+
+## Laisse XV (lines 214–229)
+
+**Original**
+214. Li empe[re]re en tint sun chef enbrunc, [tenir]
+215. Si duist sa barbe, afaitad sun gernun, [duire (lisser), afaitier (arranger)]
+216. Ne ben ne mal ne respunt sun nevuld. [répondre]
+217. Franceis se taisent ne mais que Guenelun, [se taire]
+218. En piez se drecet, si vint devant Carlun, [se dresser, venir]
+219. Mult fierement cumencet sa raisun, [commencer]
+220. E dist al rei: «Ja mar crerez bricun, [dire, croire]
+221. Ne mei ne altre, se de vostre prod nun.
+222. Quant ço vos mandet li reis Marsiliun, [mander]
+223. Qu'il devendrat jointes ses mains tis hom, [devenir, joindre]
+224. E tute Espaigne tendrat par vostre dun, [tenir]
+225. Puis recevrat la lei que nus tenum, [recevoir, tenir]
+226. Ki ço vos lodet que cest plait degetuns, [loer (conseiller), degeter (rejeter)]
+227. Ne li chalt, sire, de quel mort nus muriuns. [chaloir (importer), mourir]
+228. Cunseill d orguill n'est dreiz que a plus munt, [monter]
+229. Laissun les fols, as sages nus tenuns.» AOI. [laisser, se tenir]
+
+**Translation**
+214. The emperor held his head bowed down,
+215. He smoothed his beard, arranged his mustache,
+216. Neither good nor ill does he answer his nephew.
+217. The French keep silent, all save Ganelon,
+218. He rises to his feet, and came before Charles,
+219. Very fiercely he begins his speech,
+220. And said to the king: «Never to your harm will you believe a knave,
+221. Neither me nor another, except for your own profit. <!-- uncertain: "se de vostre prod nun" — "unless for your benefit" -->
+222. When the king Marsile sends you word of this,
+223. That he will become, his hands joined, your vassal,
+224. And will hold all Spain by your gift,
+225. Then will receive the faith that we hold,
+226. Whoever advises you that we reject this agreement,
+227. Cares not, sire, by what death we may die.
+228. Counsel of pride, it is not right that it rise further, <!-- uncertain: "que a plus munt" — "that it amount to more / rise higher" -->
+229. Let us leave the fools, let us hold to the wise.» AOI.
+
+---
+
+## Laisse XVI (lines 230–243)
+
+**Original**
+230. Apres iço i est Neimes venud; [être, venir]
+231. Meillor vassal n'aveit en la curt nul, [avoir]
+232. E dist al rei: «Ben l'avez entendud, [dire, avoir, entendre]
+233. Guenes li quens ço vus ad respondud, [avoir, répondre]
+234. Saveir i ad, mais qu'il seit entendud. [savoir, avoir, être, entendre]
+235. Li reis Marsilie est de guere vencud: [être, vaincre]
+236. Vos li avez tuz ses castels toluz, [avoir, tolir (enlever)]
+237. Od voz caables avez fruiset ses murs, [avoir, fruisier (briser)]
+238. Ses citez arses e ses humes vencuz; [ardre (brûler), vaincre]
+239. Quant il vos mandet, qu'aiez mercit de lui, [mander, avoir]
+240. Pecchet fereit, ki dunc li fesist plus, [faire]
+241. U par ostage vos (en) voelt faire soürs; [vouloir, faire]
+242. Ceste grant guerre ne deit munter a plus.» [devoir, monter]
+243. Dient Franceis: «Ben ad parlet li dux.» AOI. [dire, avoir, parler]
+
+**Translation**
+230. After this, Naimes came forward;
+231. There was no better vassal in the court,
+232. And he said to the king: «You have indeed heard it,
+233. Ganelon the count has answered you thus,
+234. There is wisdom in it, provided it be heeded.
+235. King Marsile is defeated in war:
+236. You have taken from him all his castles,
+237. With your siege engines you have shattered his walls,
+238. Burned his cities and vanquished his men;
+239. When he sends word to you, that you have mercy on him,
+240. He would commit a sin, whoever should then do more to him, <!-- uncertain: sense of "ki dunc li fesist plus" -->
+241. Or by hostages he wishes to give you assurance; <!-- uncertain: "faire soürs" = render secure/give guarantees -->
+242. This great war ought not to mount up to more.»
+243. The Franks say: «The duke has spoken well.» AOI.
+
+---
+
+## Laisse XVII (lines 244–251)
+
+**Original**
+244. - «Seignurs baruns, qui i enveieruns [envoyer]
+245. En Sarraguce al rei Marsiliuns?»
+246. Respunt dux Neimes: «Jo irai par vostre dun! [répondre, aller]
+247. Livrez m'en ore le guant e le bastun.» [livrer]
+248. Respunt li reis: «Vos estes saives hom; [répondre, être]
+249. Par ceste barbe e par cest men gernun,
+250. Vos n'irez pas uan de mei si luign. [aller]
+251. Alez sedeir, quant nuls ne vos sumunt.» [aller, seoir (asseoir), semondre (inviter)]
+
+**Translation**
+244. «My lord barons, whom shall we send
+245. To Saragossa, to King Marsile?»
+246. Duke Naimes replies: «I will go, by your leave!
+247. Hand me now the glove and the staff.»
+248. The king replies: «You are a wise man;
+249. By this beard and by this moustache of mine,
+250. You shall not go this year so far from me.
+251. Go sit down, since no one summons you.»
+
+---
+
+## Laisse XVIII (lines 252–263)
+
+**Original**
+252. - «Seignurs baruns, qui i purruns enveier [pouvoir, envoyer]
+253. Al Sarrazin ki Sarraguce tient?» [tenir]
+254. Respunt Rollant: «Jo i puis aler mult ben!» [répondre, pouvoir, aller]
+255. - «Nu ferez certes!» dist li quens Oliver; [faire, dire]
+256. «Vostre curages est mult pesmes e fiers; [être]
+257. Jo me crendreie, que vos vos meslisez. [craindre, mesler (se quereller)]
+258. Se li reis voelt, jo i puis aler ben.» [vouloir, pouvoir, aller]
+259. Respunt li reis: «Ambdui vos en taisez! [répondre, se taire]
+260. Ne vos ne il n'i porterez les piez. [porter]
+261. Par ceste barbe que veez [blancheier], [voir, blancheier (blanchir)]
+262. Li duze per mar i serunt jugez!» [être, juger]
+263. Franceis se taisent: as les vus aquisez. [se taire, aquiser (apaiser)]
+
+**Translation**
+252. - «Lord barons, whom can we send
+253. To the Saracen who holds Saragossa?»
+254. Roland answers: «I can go there very well!»
+255. - «You shall certainly not!» said Count Oliver;
+256. «Your temper is very harsh and fierce;
+257. I would fear that you would come to blows.
+258. If the king wills it, I can well go there.»
+259. The king answers: «Both of you, be silent about it!
+260. Neither you nor he shall set foot there.
+261. By this beard that you see growing white,
+262. The twelve peers would be ill-judged [for it]!» <!-- uncertain: "mar i serunt jugez" — sense is that they will be doomed/condemned to misfortune -->
+263. The Franks fall silent: behold them quieted.
+
+---
+
+## Laisse XIX (lines 264–273)
+
+**Original**
+264. Turpins de Reins en est levet del renc, [être, lever]
+265. E dist al rei: «Laisez ester voz Francs! [dire, laisser, ester (rester)]
+266. En cest païs avez estet set anz; [avoir, être]
+267. Mult unt oüd e peines e ahans. [avoir]
+268. Dunez m'en, sire, le bastun e le guant, [donner]
+269. E jo irai al Sarazin en Espaigne, [aller]
+270. Sin vois vedeir alques de sun semblant.» [aller, voir]
+271. Li empereres respunt par maltalant: [répondre]
+272. «Alez sedeir desur cel palie blanc! [aller, seoir (asseoir)]
+273. N'en parlez mais, se jo nel vos cumant!» AOI. [parler, commander]
+
+**Translation**
+264. Turpin of Reims has risen from the ranks,
+265. And said to the king: «Let your Franks be!
+266. In this land you have been seven years;
+267. Much have they endured, both hardships and toils.
+268. Give me, sire, the staff and the glove,
+269. And I shall go to the Saracen in Spain,
+270. And go see something of his disposition.» <!-- uncertain: "alques de sun semblant" = "somewhat of his appearance/bearing" -->
+271. The emperor answers with displeasure:
+272. «Go sit down upon that white silk cloth!
+273. Speak of it no more, unless I command you to!» AOI.
+
+---
+
+## Laisse XX (lines 274–295)
+
+**Original**
+274. - «Francs chevalers,» dist li emperere Carles, [dire]
+275. «Car m'eslisez un barun de ma marche, [eslire (choisir)]
+276. Qu'a Marsiliun me portast mun message.» [porter]
+277. Ço dist Rollant: «Ço ert Guenes, mis parastre.» [dire, être]
+278. Dient Franceis: «Car il le poet ben faire; [dire, pouvoir, faire]
+279. Se lui lessez, n'i trametrez plus saive.» [laisser, tramettre (transmettre)]
+280. E li quens Guenes en fut mult anguisables; [être]
+281. De sun col getet ses grandes pels de martre, [jeter]
+282. E est remes en sun blialt de palie. [être, remaindre (rester)]
+283. Vairs out [les oilz] e mult fier lu visage, [avoir]
+284. Gent out le cors e les costez out larges; [avoir]
+285. Tant par fut bels tuit si per l'en esguardent. [être, esgarder (regarder)]
+286. Dist a Rollant: «Tut fol, pur quei t'esrages? [dire, esragier (s'enrager)]
+287. Ço set hom ben que jo sui tis parastres; [savoir, être]
+288. Si as juget qu'a Marsiliun en alge! [avoir, juger, aller]
+289. Se Deus ço dunet que jo de la repaire, [donner, repairer (rentrer)]
+290. Jo t'en muvra[i] un si grant contr[a]ire [mouvoir (susciter)]
+291. Ki durerat a trestut tun edage.» [durer]
+292. Respunt Rollant: «Orgoill ói e folage. [répondre, oïr (entendre)]
+293. Ço set hom ben, n'ai cure de manace; [savoir, avoir]
+294. Mai[s] saives hom, il deit faire message: [devoir, faire]
+295. Si li reis voelt, prez sui por vus le face.» AOI. [vouloir, être, faire]
+
+**Translation**
+274. - «Frankish knights,» said the emperor Charles,
+275. «Now choose me a baron of my march,
+276. Who would carry my message to Marsile.»
+277. Rollant said this: «That will be Guenes, my stepfather.»
+278. The Franks say: «For he can do it well;
+279. If you leave him aside, you will not send a wiser one.»
+280. And the count Guenes was very distressed by it;
+281. From his neck he throws his great pelts of marten,
+282. And he remained in his tunic of silk.
+283. He had bright eyes and a very fierce face,
+284. He had a noble body and his sides were broad;
+285. He was so very handsome that all his peers gaze at him.
+286. He said to Rollant: «Utter fool, why do you rage?
+287. One knows well that I am your stepfather;
+288. So you have decided that I should go to Marsile!
+289. If God grants that I return from there,
+290. I will stir up against you such a great calamity
+291. That it will last all your lifetime.»
+292. Rollant answers: «I hear arrogance and folly.
+293. One knows well, I have no care for a threat;
+294. But a wise man, he ought to carry a message:
+295. If the king wishes, I am ready to do it for you.» AOI.
+
+---
+
+## Laisse XXI (lines 296–302)
+
+**Original**
+296. Guenes respunt: «Pur mei n'iras tu mie! [répondre, aller]
+297. Tu n'ies mes hom ne jo ne sui tis sire. [être]
+298. Carles comandet que face sun servise: [commander, faire]
+299. En Sarraguce en irai a Marsilie; [aller]
+300. Einz i f[e]rai un poi de [le]gerie, [faire]
+301. Que jo n'esclair ceste meie grant ire.» [esclairier (soulager)]
+302. Quant l'ot Rollant, si cumençat a rire. AOI. [oïr (entendre), commencer, rire]
+
+**Translation**
+296. Ganelon answers: «You will not go at all on my behalf!
+297. You are not my vassal, nor am I your lord.
+298. Charles commands that I perform his service:
+299. To Saragossa I shall go, to Marsile;
+300. But first I shall do a bit of recklessness, <!-- uncertain: legerie = rashness/folly -->
+301. To relieve this great wrath of mine.» <!-- uncertain: "Que jo n'esclair" rendered as purpose "so that I may relieve"; literal negation is awkward here -->
+302. When Roland heard it, he began to laugh. AOI.
