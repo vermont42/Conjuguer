@@ -186,7 +186,87 @@ extend them.
 | estut | `ester (se tenir debout)` |
 | detoerst | `detordre (tordre)` |
 | muer (poet muer) | `muer (s'empêcher)` |
-| avoir, être, faire, tenir, prendre, devenir, jouer, descendre, saluer, demander, garder, atteindre, pouvoir, servir, réclamer, aimer, abattre, fleurir, escrimer, enseigner, conquérir, aller, venir, donner, appeler, conseiller, répondre, dire, mander, charger, louer, devoir, suivre, recevoir, vouloir, envoyer, perdre, conduire, mendier, voir, passer, trancher, monter, mettre, porter, savoir, conter, tendre, baisser, commencer, penser, lever, se coucher, confondre, amener, parler, enquérir, enchaîner, muer, trousser, avouer, s'en aller, contredire, croire, conquérir, mener, mettre, venger, joindre, vaincre, entreprendre, juger, jeter, craindre, durer, rire, livrer, commander, se dresser, se tenir, accomplir, fendre, tourner, vivre, défier, fermer, ceindre, entrer, s'assembler, requérir, travailler, présenter, s'abandonner, faillir, descendre, lier, amener, courroucer, assiéger, écrire, souffrir, couvrir, prier, s'asseoir, s'approcher, s'appuyer, emmener, brandir, mercier, user, priser, connaître, détourner, défaire, combattre, rendre, blesser, assembler, songer, saisir, voler, mordre, assaillir, trancher, regarder, apporter, charger, pleurer, guerroyer | direct modern form |
+| irascut | `irascir (irriter)` |
+| desrenget | `desrengier (quitter les rangs)` |
+| purpernez | `porprendre (occuper)` |
+| traites | `traire (tirer)` |
+| guierai | `guier (guider)` |
+| cadelet | `cadeler (commander)` |
+| recrerrunt | `recroire (renoncer)` |
+| aort | `aorer (adorer)` |
+| balient | `baleer (flotter)` |
+| enveiset | `enveisier (s'amuser)` |
+| sumeient | `sommer (charger une bête de somme)` |
+| adeiset | `adeser (toucher)` |
+| meignent | `manoir (demeurer)` |
+| reflambeit | `reflamber (resplendir)` |
+| empleit | `empleier (asséner)` |
+| argüent | `arguer (s'exciter)` |
+| esclargisset | `esclargir (s'éclairer)` |
+| enheldie | `enhelder (munir d'une poignée)` |
+| esguaret | `esgarer (troubler)` |
+| eschiverunt | `eschiver (éviter)` |
+| cuardet | `cuarder (faire le lâche)` |
+| espiez (Guenelun nos ad espiez) | `espier (épier)` |
+| palmeiant | `palmeier (brandir)` |
+| justerez | `jouster (combattre)` |
+| desclot | `desclore (fendre)` |
+| desevret | `dessevrer (séparer)` |
+| derumpt / derumpit | `derompre (rompre)` |
+| descumfist | `desconfire (défaire)` |
+| desmailet | `desmailler (démailler)` |
+| enbat | `embattre (enfoncer)` |
+| escantelet | `escanteler (mettre en pièces)` |
+| tresturnet | `tresturner (renverser)` |
+| empeint / empeinst | `empeindre (pousser)` |
+| Ist | `issir (sortir)` |
+| eslegiet / esleger | `eslegier (acquitter)` |
+| desclot | `desclore (fendre/ouvrir)` |
+| esclicet | `esclicier (voler en éclats)` |
+| esdemetre | `esdemetre (s'élancer)` |
+| decheent | `decheoir (déchoir)` |
+| encuntret | `encontrer (rencontrer)` |
+| recunut | `reconoistre (reconnaître)` |
+| espoent | `espoenter (s'épouvanter)` |
+| encacerent | `enchacier (pourchasser)` |
+| afilet | `afiler (couler)` |
+| castier | `castier (réprimander)` |
+| cuntralier / cuntarier | `cuntralier (se quereller)` |
+| defalt | `defaillir (manquer)` |
+| roevet | `rover (demander)` |
+| salt (en salt fors) | `saillir (jaillir)` |
+| gabant | `gaber (railler)` |
+| arestant | `arester (s'arrêter)` |
+| esclargiz | `esclargir (s'éclaircir)` |
+| rachatent | `rachater (répondre en écho)` |
+| puignent | `poindre (éperonner)` |
+| demeint | `demener (manifester)` |
+| blecet | `blecier (blesser)` |
+| referir | `referir (frapper de nouveau)` |
+| aït | `aïdier (aider)` |
+| departum | `départir (se séparer)` |
+| calengez | `chalengier (revendiquer)` |
+| descust | `descoudre (découdre)` |
+| lot (qu'il s'en lot) | `loer (se féliciter)` |
+| acraventet | `acraventer (abattre)` |
+| nasfret | `nasfrer (blesser)` |
+| justez / justet | `joster (rejoindre)` |
+| raiet | `raiier (ruisseler)` |
+| cuntrevaillet | `contrevaloir (égaler)` |
+| seinet | `seiner (saigner)` |
+| detrenchet | `detrenchier (taillader)` |
+| clinet | `cliner (incliner)` |
+| duluset | `doluser (se lamenter)` |
+| embrunchet | `embruncher (pencher)` |
+| afermet | `afermer (fixer)` |
+| esbaldissent | `esbaldir (s'enhardir)` |
+| mespensant | `mespenser (mal penser)` |
+| enhaitet | `enhaitier (encourager)` |
+| retraite | `retraire (rapporter)` |
+| capler | `capler (frapper)` |
+| peilent | `peler (arracher)` |
+| guierai | `guier (guider)` |
+| avoir, être, faire, tenir, prendre, devenir, jouer, descendre, saluer, demander, garder, atteindre, pouvoir, servir, réclamer, aimer, abattre, fleurir, escrimer, enseigner, conquérir, aller, venir, donner, appeler, conseiller, répondre, dire, mander, charger, louer, devoir, suivre, recevoir, vouloir, envoyer, perdre, conduire, mendier, voir, passer, trancher, monter, mettre, porter, savoir, conter, tendre, baisser, commencer, penser, lever, se coucher, confondre, amener, parler, enquérir, enchaîner, muer, trousser, avouer, s'en aller, contredire, croire, conquérir, mener, mettre, venger, joindre, vaincre, entreprendre, juger, jeter, craindre, durer, rire, livrer, commander, se dresser, se tenir, accomplir, fendre, tourner, vivre, défier, fermer, ceindre, entrer, s'assembler, requérir, travailler, présenter, s'abandonner, faillir, descendre, lier, amener, courroucer, assiéger, écrire, souffrir, couvrir, prier, s'asseoir, s'approcher, s'appuyer, emmener, brandir, mercier, user, priser, connaître, détourner, défaire, combattre, rendre, blesser, assembler, songer, saisir, voler, mordre, assaillir, trancher, regarder, apporter, charger, pleurer, guerroyer, remuer, démentir, retourner, secourir, blâmer, corner, daigner, douter, oublier, sembler, valoir, lâcher, peser, ceindre, fermer, gemmer, ferir, mater, haïr, mentir, fuir, reluire, peindre, enchaîner, rendre, tailler, désirer, déserter, garantir, nourrir, démembrer, vanter, pardonner, consentir, ressembler, feindre, crier, manger, enfouir, rappeler, recommencer, angoisser, débattre, épargner, conduire, rallier, durer, demeurer | direct modern form |
 
 As new verbs appear, add them to this table **in this prompt file** so later chunks
 stay consistent. When a reflex is genuinely uncertain or disputed, prefer the

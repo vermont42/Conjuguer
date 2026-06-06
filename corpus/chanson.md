@@ -2051,3 +2051,3246 @@ orbilat.com), which differs in minor orthography and punctuation (`aimet`,
 771. The emperor held his head bowed,
 772. He smoothed his beard, and twisted his moustache;
 773. He cannot help but weep from his eyes.
+
+---
+
+## Laisse LXII (lines 774–782)
+
+**Original**
+774. Anpres iço i est Neimes venud: [être, venir]
+775. Meillor vassal n'out en la curt de lui; [avoir]
+776. E dist al rei: «Ben l'avez entendut; [dire, avoir, entendre]
+777. Li quens Rollant, il est mult irascut. [être, irascir (irriter)]
+778. La rereguarde est jugee (...) sur lui: [être, juger]
+779. N'avez baron ki jamais la remut. [avoir, remuer]
+780. Dunez li l'arc que vos avez tendut, [donner, avoir, tendre]
+781. Si li truvez ki tres bien li aiut!» [trouver, aider]
+782. Li reis li dunet, e Rollant l'a reçut. [donner, avoir, recevoir]
+
+**Translation**
+774. After this Naimes came forward:
+775. There was no better vassal at his court;
+776. And he said to the king: «You have heard it well;
+777. Count Roland, he is very angry.
+778. The rearguard has been assigned (...) to him:
+779. You have no baron who would ever change it.
+780. Give him the bow that you have drawn,
+781. And find him someone who may aid him well!»
+782. The king gives it to him, and Roland received it.
+
+---
+
+## Laisse LXIII (lines 783–791)
+
+**Original**
+783. Li empereres apelet ses nies Rollant: [appeler]
+784. «Bel sire nies, or savez veirement, [savoir]
+785. Demi mun host vos lerrai en present. [laisser]
+786. Retenez les, ço est vostre salvement.» [retenir, être]
+787. Ço dit li quens: «Jo n'en ferai nient; [dire, faire]
+788. Deus me cunfunde, se la geste en desment! [confondre, démentir]
+789. XX. milie Francs retendrai ben vaillanz. [retenir]
+790. Passez les porz trestut soürement: [passer]
+791. Ja mar crendrez nul hume a mun vivant!» AOI. [craindre]
+
+**Translation**
+783. The emperor calls his nephew Roland:
+784. «Fair lord nephew, now you know truly,
+785. Half my host I will leave to you here and now.
+786. Keep them, this is your safeguard.»
+787. Says the count: «I will do nothing of the sort;
+788. May God confound me, if I belie my lineage!
+789. Twenty thousand Franks I will keep, right valiant ones.
+790. Cross the passes in complete security:
+791. Never, while I live, need you fear any man!» AOI.
+
+---
+
+## Laisse LXIV (lines 792–802)
+
+**Original**
+792. Li quens Rollant est muntet el destrer. [être, monter]
+793. Cuntre lui vient sis cumpainz Oliver; [venir]
+794. Vint i Gerins e li proz quens Gerers, [venir]
+795. E vint i Otes, si i vint Berengers, [venir]
+796. E vint i Astors e Anseïs li veillz; [venir]
+797. Vint i Gerart de Rossillon li fiers; [venir]
+798. Venuz i est li riches dux Gaifiers. [venir, être]
+799. Dist l'arcevesque: «Jo irai, par mun chef!» [dire, aller]
+800. - «E jo od vos,» ço dist li quens Gualters; [dire]
+801. «Hom sui Rollant, jo ne li dei faillir.» [être, devoir, faillir]
+802. Entr'e[l]s eslisent .XX. milie chevalers. AOI. [eslire (choisir)]
+
+**Translation**
+792. Count Roland has mounted his warhorse.
+793. Toward him comes his companion Oliver;
+794. There came Gerin and the valiant count Gerier,
+795. And there came Oton, and there came Berengier,
+796. And there came Astor and Anseïs the old;
+797. There came Gerart of Roussillon the proud;
+798. The mighty duke Gaifier has come there too.
+799. Said the archbishop: «I shall go, by my head!»
+800. - «And I with you,» so said the count Gualter;
+801. «I am Roland's man, I must not fail him.»
+802. Among themselves they choose twenty thousand knights. AOI.
+
+---
+
+## Laisse LXV (lines 803–813)
+
+**Original**
+803. Li quens Rollant Gualter de l'Húm apelet: [appeler]
+804. «Pernez mil Francs de France, nostre tere, [prendre]
+805. Si purpernez les deserz e les tertres, [porprendre (occuper)]
+806. Que l'emperere nis un des soens n'i perdet.» [perdre]
+807. Respunt gualter: «Pur vos le dei ben faire.» [répondre, devoir, faire]
+808. Od mil Franceis de France, la lur tere,
+809. Gualter desrenget les destreiz e les tertres, [desrengier (quitter les rangs)]
+810. N'en descendrat pur malvaises nuveles, [descendre]
+811. Enceis qu'en seient. VII.C. espees traites. [être, traire (tirer)]
+812. Reis Almaris, del regne de Belferne
+813. Une bataille lur livrat le jur pesme. AOI. [livrer]
+
+**Translation**
+803. Count Roland calls to Gautier de l'Hum:
+804. «Take a thousand Franks from France, our land,
+805. And occupy the wastelands and the hills,
+806. So that the emperor loses not one of his own there.»
+807. Gautier replies: «For you I must do it well.»
+808. With a thousand Frenchmen from France, their land,
+809. Gautier ranges over the passes and the hills,
+810. He will not come down from them for any bad news,
+811. Before seven hundred swords be drawn.
+812. King Almaris, from the kingdom of Belferne,
+813. Gave them a fierce battle that grievous day. AOI.
+
+---
+
+## Laisse LXVI (lines 814–825)
+
+**Original**
+814. Halt sunt li pui e li val tenebrus, [être]
+815. Les roches bises, les destreiz merveillus.
+816. Le jur passerent Franceis a grant dulur; [passer]
+817. De .XV. lius en ot hom la rimur. [oïr (entendre)]
+818. Puis que il venent a la Tere Majur, [venir]
+819. Virent Guascuigne, la tere lur seignur. [voir]
+820. Dunc le remembret des fius e des honurs, [remembrer (se souvenir)]
+821. E des pulcele e des gentilz oixurs:
+822. Cel nen i ad ki de pitet ne plurt. [avoir, pleurer]
+823. Sur tuz les altres est Carles anguissus: [être]
+824. As porz d'Espaigne ad lesset sun nevold. [avoir, laisser]
+825. Pitet l'en prent, ne poet muer n'en plurt. AOI. [prendre, pouvoir, muer (s'empêcher), pleurer]
+
+**Translation**
+814. High are the peaks and shadowy the valleys,
+815. The rocks dark, the defiles fearsome.
+816. That day the French passed through with great suffering;
+817. From fifteen leagues away one could hear their din.
+818. When they come to the Great Land,
+819. They saw Gascony, the land of their lord.
+820. Then he remembers his fiefs and his honors,
+821. And the maidens and his noble wives:
+822. There is none there who does not weep for pity.
+823. Above all the others Charles is anguished:
+824. At the passes of Spain he has left his nephew.
+825. Pity takes him, he cannot but weep. AOI.
+
+---
+
+## Laisse LXVII (lines 826–840)
+
+**Original**
+826. Li .XII. per sunt remes en Espaigne. [être, remaindre (rester)]
+827. .XX. milie F(r)rancs unt en lur cumpaigne, [avoir]
+828. N'en unt poür ne de murir dutance. [avoir, mourir]
+829. Li emperere s'en repairet en France; [repairer (rentrer)]
+830. Suz sun mantel en fait la cuntenance. [faire]
+831. Dejuste lui li dux Neimes chevalchet [chevaucher]
+832. E dit al rei: «De quei avez pesance?» [dire, avoir]
+833. Carles respunt: «Tort fait kil me demandet! [répondre, faire, demander]
+834. Si grant doel ai ne puis muer nel pleigne. [avoir, pouvoir, muer (s'empêcher), plaindre]
+835. Par Guenelun serat destruite France, [être, détruire]
+836. Enoit m'avint un avisiun d'angele, [avenir (arriver)]
+837. Que entre mes puinz me depeçout ma hanste, [dépecer]
+838. Chi ad juget mis nes a (la) rereguarde. [avoir, juger]
+839. Jo l'ai lesset en une estrange marche! [avoir, laisser]
+840. Deus! se jol pert, ja n'en avrai escange!» AOI. [perdre, avoir]
+
+**Translation**
+826. The Twelve Peers have remained in Spain.
+827. Twenty thousand Franks are in their company,
+828. They have no fear nor dread of dying.
+829. The emperor returns to France;
+830. Beneath his cloak he keeps his composure.
+831. Beside him Duke Naimes rides
+832. And says to the king: «What is troubling you?»
+833. Charles replies: «He who asks me does wrong!
+834. Such great grief I have that I cannot keep from lamenting it.
+835. Through Ganelon France will be destroyed,
+836. Last night an angel's vision came to me,
+837. That between my hands my lance was shattered,
+838. He who has assigned my nephew to the rearguard.
+839. I have left him in a strange land!
+840. God! if I lose him, I shall have no replacement for him!» AOI.
+
+---
+
+## Laisse LXVIII (lines 841–859)
+
+**Original**
+841. Carles li magnes ne poet muer n'en plurt. [pouvoir, muer (s'empêcher), pleurer]
+842. .C. milie Francs pur lui unt grant tendrur, [avoir]
+843. E de Rollant merveilluse poür.
+844. Guen[e]s li fels en ad fait traïsun: [avoir, faire]
+845. Del rei paien en ad oüd granz duns, [avoir]
+846. Or e argent, palies e ciclatuns,
+847. Muls e chevals e cameilz e leuns.
+848. Marsilies mandet d'Espaigne les baruns, [mander]
+849. Cuntes, vezcuntes e dux e almaçurs,
+850. Les amirafles e les filz as cunturs:
+851. .IIII.C. milie en ajustet en .III. jurz. [ajuster (rassembler)]
+852. En Sarraguce fait suner ses taburs; [faire, sonner]
+853. Mahumet levent en la plus halte tur. [lever]
+854. N'i ad paien nel prit e nel aort. [avoir, prier, aorer (adorer)]
+855. Puis si chevalchent, par mult grant cuntençun, [chevaucher]
+856. La Tere Certeine e les vals e les munz:
+857. De cels de France virent les gunfanuns. [voir]
+858. La rereguarde des .XII. cumpaignuns
+859. Ne lesserat bataille ne lur dunt. [laisser, donner]
+
+**Translation**
+841. Charlemagne cannot help but weep at it.
+842. A hundred thousand Franks feel great tenderness for him,
+843. And a marvelous fear for Roland.
+844. Ganelon the felon has committed treason against him:
+845. From the pagan king he has received great gifts,
+846. Gold and silver, silken cloths and brocades,
+847. Mules and horses and camels and lions.
+848. Marsile summons the barons of Spain,
+849. Counts, viscounts and dukes and almaçors,
+850. The emirs and the sons of the counts:
+851. Four hundred thousand he gathers in three days.
+852. In Saragossa he has his drums sounded;
+853. They raise up Mohammed on the highest tower.
+854. There is no pagan who does not pray to him and adore him.
+855. Then they ride forth, with very great striving,
+856. Through the Solid Land and the valleys and the mountains:
+857. Of those of France they saw the banners.
+858. The rearguard of the twelve companions
+859. Will not fail to give them battle.
+
+---
+
+## Laisse LXIX (lines 860–873)
+
+**Original**
+860. Li nies Marsilie, il est venuz avant, [être, venir]
+861. Sur un mulet od un bastun tuchant. [toucher]
+862. Dist a sun uncle belement en riant: [dire, rire]
+863. «Bel sire reis, jo vos ai servit tant, [avoir, servir]
+864. Sin ai oüt e peines e ahans, [avoir]
+865. Faites batailles e vencues en champ! [faire, vaincre]
+866. Dunez m'un feu, ço est le colp de Rollant; [donner, être]
+867. Jo l'ocirai a mun espiet trenchant. [ocire (tuer), trancher]
+868. Se Mahumet me voelt estre guarant, [vouloir, être]
+869. De tute Espaigne aquiterai les pans [acquitter]
+870. Des porz d'Espaigne entresqu'a Durestant.
+871. Las serat Carles, si recrerrunt si Franc; [être, recroire (renoncer)]
+872. Ja n'avrez mais guere en tut vostre vivant.» [avoir]
+873. Li reis Marsilie l'en ad dunet le guant. AOI. [avoir, donner]
+
+**Translation**
+860. The nephew of Marsile, he has come forward,
+861. On a mule, prodding it with a stick.
+862. He said to his uncle, smiling pleasantly:
+863. «Fair lord king, I have served you so long,
+864. And I have had from it both hardships and toils,
+865. Fought battles and won them in the field!
+866. Grant me a fief: it is the blow against Roland;
+867. I will kill him with my sharp spear.
+868. If Muhammad is willing to be my protector,
+869. I will clear of foes the lands of all Spain
+870. From the passes of Spain as far as Durestant.
+871. Charles will be weary, his Franks will give up;
+872. Never again will you have war in all your life.»
+873. King Marsile has given him the glove for it. AOI.
+
+---
+
+## Laisse LXX (lines 874–884)
+
+**Original**
+874. Li nies Marsilies tient le guant en sun poign, [tenir]
+875. Sun uncle apelet de mult fiere raisun: [appeler]
+876. «Bel sire reis, fait m'avez un grant dun. [faire, avoir]
+877. Eslisez mei .XII. de voz baruns, [eslire (choisir)]
+878. Sim cumbatrai as .XII. cumpaignuns.» [combattre]
+879. Tut premerein l'en respunt Falsaron, [répondre]
+880. Icil ert frere al rei Marsiliun: [être]
+881. «Bel sires nies, e jo e vos [í]irum. [aller]
+882. Ceste bataille veirement la ferum: [faire]
+883. La rereguarde de la grant host Carlun,
+884. Il est juget que nus les ocirum.» AOI. [être, juger, ocire (tuer)]
+
+**Translation**
+874. Marsile's nephew holds the gauntlet in his fist,
+875. He addresses his uncle with very fierce speech:
+876. «Fair lord king, you have granted me a great gift.
+877. Choose me twelve of your barons,
+878. And I will fight the twelve companions.»
+879. Falsaron answers him first of all,
+880. He was brother to King Marsile:
+881. «Fair lord nephew, both I and you will go.
+882. This battle, truly, we will fight it:
+883. The rearguard of Charlemagne's great host,
+884. It is judged that we shall kill them.» AOI.
+
+---
+
+## Laisse LXXI (lines 885–893)
+
+**Original**
+885. Reis Corsalis, il est de l'altre part: [être]
+886. Barbarins est e mult de males arz. [être]
+887. Cil ad parlet a lei de bon vassal: [avoir, parler]
+888. Pur tut l'or Deu ne volt estre cuard [...] [vouloir, être]
+889. As vos poignant Malprimis de Brigant:
+890. Plus curt a piet que ne fait un cheval. [courir, faire]
+891. Devant Marsilie cil s'escriet mult halt: [escrier (s'écrier)]
+892. «Jo cunduirai mun cors en Rencesvals; [conduire]
+893. Se truis Rollant, ne lerrai que nel mat!» [trouver, laisser, mater]
+
+**Translation**
+885. King Corsalis, he is on the other side:
+886. He is a Berber and full of evil arts.
+887. He has spoken in the manner of a good vassal:
+888. For all God's gold he would not be a coward [...]
+889. Here comes spurring Malprimis of Brigant:
+890. He runs faster on foot than a horse does.
+891. Before Marsile he cries out very loudly:
+892. «I will lead my body into Roncevaux;
+893. If I find Roland, I will not fail to bring him down!»
+
+---
+
+## Laisse LXXII (lines 894–908)
+
+**Original**
+894. Uns amurafles i ad de Balaguez: [avoir]
+895. Cors ad mult gent e le vis fier e cler; [avoir]
+896. Puis que il est sur un cheval muntet, [être, monter]
+897. Mult se fait fiers de ses armes porter; [faire, porter]
+898. De vasselage est il ben alosez; [être]
+899. Fust chrestiens, asez oüst barnet. [être, avoir]
+900. Devant Marsilie cil en est escriet: [être, escrier (s'écrier)]
+901. «En Rencesvals irai mun cors juer! [aller, jouer]
+902. Se truis Rollant, de mort serat finet, [trouver, être, finer (finir)]
+903. E Oliver e tuz les .XII. pers.
+904. Franceis murrunt a doel e a viltiet. [mourir]
+905. Carles li magnes velz est e redotez: [être]
+906. Recreanz ert de sa guerre mener, [être, mener]
+907. Si nus remeindrat Espaigne en quitedet.» [remaindre (rester)]
+908. Li reis Marsilie mult l'en ad merciet. AOI. [avoir, mercier]
+
+**Translation**
+894. There is there an emir from Balaguer:
+895. He has a very noble body and a face fierce and bright;
+896. Once he is mounted upon a horse,
+897. He bears himself fiercely in carrying his arms;
+898. For valor he is well renowned;
+899. Were he a Christian, he would have had ample baronage.
+900. Before Marsile this man cries out:
+901. «To Roncevaux I will go to disport my body!
+902. If I find Roland, he will be finished by death,
+903. And Oliver and all the Twelve Peers.
+904. The French will die in grief and in shame.
+905. Charles the Great is old and worn out:
+906. He will be weary of waging his war,
+907. And so Spain will remain to us in freedom.»
+908. King Marsile thanks him greatly for it. AOI.
+
+---
+
+## Laisse LXXIII (lines 909–915)
+
+**Original**
+909. Uns almaçurs i ad de Moriane; [avoir]
+910. N'ad plus felun en la tere d'Espaigne. [avoir]
+911. Devant Marsilie ad faite sa vantance: [avoir, faire]
+912. «En Rencesvals guierai ma cumpaigne, [guier (guider)]
+913. .XX. milie ad escuz e a lances. [avoir]
+914. Se trois Rollant, de mort li duins fiance. [trouver, donner]
+915. Jamais n'ert jor que Carles ne se pleignet.» AOI. [être, plaindre]
+
+**Translation**
+909. There is an emir there from Moriane;
+910. There is no one more felon in the land of Spain.
+911. Before Marsile he made his boast:
+912. «At Roncevaux I will lead my company,
+913. Twenty thousand with shields and with lances.
+914. If I find Roland, I pledge him to death.
+915. Never will there be a day that Charles does not lament it.» AOI.
+
+---
+
+## Laisse LXXIV (lines 916–930)
+
+**Original**
+916. D'altre part est Turgis de Turteluse: [être]
+917. Cil est uns quens, si est la citet sue. [être]
+918. De chrestiens voelt faire male vode. [vouloir, faire]
+919. Devant Marsilie as altres si s'ajust, [ajuster (se joindre)]
+920. Ço dist al rei: «Ne vos esmaiez unches! [dire, esmaier (s'inquiéter)]
+921. Plus valt Mahum que seint Perre de Rume! [valoir]
+922. Se lui servez, l'onur del camp ert nostre. [servir, être]
+923. En Rencesvals a Rollant irai juindre, [aller, joindre]
+924. De mort n'avrat guarantisun pur hume. [avoir]
+925. Veez m'espee, ki est e bone e lunge: [voir, être]
+926. A Durendal jo la metrai encuntre; [mettre]
+927. Asez orrez, laquele irat desure. [oïr (entendre), aller]
+928. Franceis murrunt, si a nus s'abandunent; [mourir, s'abandonner]
+929. Carles li velz avrat e deol e hunte: [avoir]
+930. Jamais en tere ne portera curone.» [porter]
+
+**Translation**
+916. On the other side is Turgis of Tortelose:
+917. He is a count, and the city is his.
+918. Of Christians he wishes to make an evil massacre.
+919. Before Marsile he joins the others,
+920. He said to the king: «Never be dismayed!
+921. Muhammad is worth more than Saint Peter of Rome!
+922. If you serve him, the honor of the field will be ours.
+923. At Roncevaux I will go to join Roland,
+924. From death he will have no safeguard for any man.
+925. See my sword, which is both good and long:
+926. Against Durendal I will set it;
+927. Soon you will hear which one will prevail.
+928. The French will die, if they engage with us;
+929. Charles the old will have grief and shame:
+930. Never on earth will he wear a crown again.»
+
+---
+
+## Laisse LXXV (lines 931–939)
+
+**Original**
+931. De l'altre part est Escremiz de Valterne: [être]
+932. Sarrazins est, si est sue la tere. [être]
+933. Devant Marsilie s'escriet en la presse, [escrier (s'écrier)]
+934. «En Rencesvals irai l'orgoill desfaire. [aller, desfaire (défaire)]
+935. Se trois Rollant, n'en porterat la teste, [trouver, porter]
+936. Ne Oliver, ki les altres cadelet; [cadeler (commander)]
+937. Li .XII. per tuit sunt jugez a perdre; [être, juger, perdre]
+938. Franceis murrunt e France en ert deserte, [mourir, être]
+939. De bons vassals avrat Carles suffraite.» AOI. [avoir]
+
+**Translation**
+931. On the other side is Escremiz of Valterne:
+932. He is a Saracen, and the land is his.
+933. Before Marsile he cries out in the throng,
+934. «To Roncevaux I will go to undo their pride.
+935. If I find Roland, he will not carry away his head,
+936. Nor Oliver, who commands the others;
+937. The Twelve Peers are all condemned to perish;
+938. The French shall die and France will be left desolate,
+939. Charles will have want of good vassals.» AOI.
+
+---
+
+## Laisse LXXVI (lines 940–954)
+
+**Original**
+940. D'altre part est uns paiens, Esturganz; [être]
+941. Estramariz i est, un soens cumpainz: [être]
+942. Cil sunt felun, traïtur suduiant. [être]
+943. Ço dist Marsilie: «Seignurs, venez avant! [dire, venir]
+944. En Rencesvals irez as porz passant, [aller, passer]
+945. Si aiderez a cunduire ma gent.» [aider, conduire]
+946. E cil respundent: «(Sire,) a vostre comandement! [répondre]
+947. Nus asaldrum Oliver e Rollant; [assaillir]
+948. Li .XII. per n'avrunt de mort guarant. [avoir]
+949. Noz espees sunt bones e trenchant; [être]
+950. Nus les feruns vermeilles de chald sanc. [ferir (frapper)]
+951. Franceis murrunt, Carles en ert dolent. [mourir, être]
+952. Tere Majur vos metrum en present. [mettre]
+953. Venez i, reis, sil verrez veirement: [venir, voir]
+954. L'empereor vos metrum en present.» [mettre]
+
+**Translation**
+940. On the other side is a pagan, Esturganz;
+941. Estramariz is there too, a companion of his:
+942. These are felons, treacherous traitors.
+943. Marsile said this: «Lords, come forward!
+944. You will go to Roncevaux, passing through the gorges,
+945. And you will help to conduct my people.»
+946. And they answer: «(Sire,) at your command!
+947. We will assail Oliver and Roland;
+948. The Twelve Peers will have no protection from death.
+949. Our swords are good and sharp;
+950. We will make them crimson with hot blood.
+951. The French will die, Charles will be grieved by it.
+952. We will deliver the Great Land to you.
+953. Come there, king, and you will truly see it:
+954. We will hand over the emperor to you.»
+
+---
+
+## Laisse LXXVII (lines 955–974)
+
+**Original**
+955. Curant i vint Margariz de Sibilie; [courir, venir]
+956. Cil tient la tere entre[s]qu'as Cazmarine. [tenir]
+957. Pur sa beltet dames li sunt amies: [être]
+958. Cele nel veit vers lui ne s'esclargisset; [voir, esclargir (s'éclairer)]
+959. Quant ele le veit, ne poet muer ne riet; [voir, pouvoir, muer (s'empêcher), rire]
+960. N'i ad paien de tel chevalerie. [avoir]
+961. Vint en la presse, sur les altres s'escriet [venir, escrier (s'écrier)]
+962. E dist al rei: «Ne vos esmaiez mie! [dire, esmaier (s'inquiéter)]
+963. En Rencesvals irai Rollant ocire, [aller, ocire (tuer)]
+964. Ne Oliver n'en porterat la vie; [porter]
+965. Li .XII. per sunt remes en martirie. [être, remaindre (rester)]
+966. Veez m'espee, ki d'or est enheldie: [voir, être, enhelder (munir d'une poignée)]
+967. Si la tramist li amiralz de Primes. [tramettre (transmettre)]
+968. Jo vos plevis qu'en vermeill sanc ert mise. [plevir (garantir), être, mettre]
+969. Franceis murrunt e France en ert hunie; [mourir, être, honnir (déshonorer)]
+970. Carles li velz a la barbe flurie, [avoir]
+971. Jamais n'ert jurn qu'il n'en ait doel e ire. [être, avoir]
+972. Jusqu'a un an avrum France saisie; [avoir, saisir]
+973. Gesir porrum el burc de seint Denise.» [gésir (être couché), pouvoir]
+974. Li reis paiens parfundement l 'enclinet. AOI. [incliner]
+
+**Translation**
+955. Margariz of Seville came running there;
+956. He holds the land as far as Cazmarine.
+957. For his beauty the ladies are his friends:
+958. None sees him but she brightens toward him;
+959. When she sees him, she cannot help but smile;
+960. There is no pagan of such knighthood.
+961. He came into the throng, above the others he cries out
+962. And said to the king: «Do not be dismayed at all!
+963. To Roncevaux I will go to slay Roland,
+964. Nor will Oliver carry off his life from it;
+965. The Twelve Peers are left there in martyrdom.
+966. Behold my sword, which is hilted with gold:
+967. The emir of Primes sent it to me thus.
+968. I pledge to you that it will be set in crimson blood.
+969. The French will die and France will be shamed by it;
+970. Charles the old, with the flowering beard,
+971. Never will there be a day that he does not have grief and wrath from it.
+972. Within a year we shall have seized France;
+973. We shall be able to lie in the town of Saint Denis.»
+974. The pagan king bows deeply to him. AOI.
+
+---
+
+## Laisse LXXVIII (lines 975–993)
+
+**Original**
+975. De l'altre part est Chernubles de Munigre; [être]
+976. Jusqu'a la tere si chevoel li balient; [baleer (flotter)]
+977. Greignor fais portet par giu, quant il s'enveiset, [porter, enveisier (s'amuser)]
+978. Que .IIII. mulez ne funt, quant il sumeient. [faire, sommer (charger une bête de somme)]
+979. Icele tere, ço dit, dun il esteit, [dire, être]
+980. Soleill n'i luist, ne blet n'i poet pas creistre, [luire, pouvoir, croître]
+981. Pluie n'i chet, rusee n'i adeiset, [cheoir (tomber), adeser (toucher)]
+982. Piere n'i ad que tute ne seit neire. [avoir, être]
+983. Dient alquanz que diables i meignent. [dire, manoir (demeurer)]
+984. Ce dist Chernubles: «Ma bone espee ai ceinte; [dire, avoir, ceindre]
+985. En Rencesvals jo la teindrai vermeille. [teindre]
+986. Se trois Rollant li proz enmi ma veie, [trouver]
+987. Se ne l'asaill, dunc ne faz jo que creire, [assaillir, faire]
+988. Si cunquerrai Durendal od la meie. [conquérir]
+989. Franceis murrunt e France en ert deserte.» [mourir, être]
+990. A icez moz li .XII. [per] s'alient; [s'allier]
+991. Itels .C. milie Sarrazins od els meinent, [mener]
+992. Ki de bataille s'argüent,e hasteient: [arguer (s'exciter), hâter]
+993. Vunt s'aduber desuz une sapide. [aller, aduber (s'équiper)]
+
+**Translation**
+975. On the other side is Chernuble of Munigre;
+976. His hair sweeps down to the ground;
+977. For sport, when he amuses himself, he carries a greater load
+978. Than four pack-mules bear when they are laden.
+979. That land, he says, from which he came,
+980. The sun does not shine there, nor can grain grow there,
+981. No rain falls there, no dew settles there,
+982. There is no stone there that is not entirely black.
+983. Some say that devils dwell there.
+984. Chernuble says: «My good sword I have girded on;
+985. At Roncevaux I shall stain it crimson.
+986. If I find Roland the brave in my path,
+987. If I do not assail him, then let me not be believed,
+988. And I shall conquer Durendal with my own blade.
+989. The French shall die and France shall be left desolate.»
+990. At these words the twelve peers ally themselves;
+991. Such a hundred thousand Saracens they lead with them,
+992. Who urge themselves on to battle, and make haste:
+993. They go to arm themselves beneath a pine tree.
+
+---
+
+## Laisse LXXIX (lines 994–1016)
+
+**Original**
+994. Paien s'adubent des osbercs sarazineis, [aduber (s'équiper)]
+995. Tuit li plusur en sunt (saraguzeis) dublez en treis, [être]
+996. Lacent lor elmes mult bons sarraguzeis, [lacer]
+997. Ceignent espees de l'acer vianeis; [ceindre]
+998. Escuz unt genz, espiez valentineis, [avoir]
+999. E gunfanuns blancs e blois e vermeilz.
+1000. Laissent les mulz e tuz les palefreiz, [laisser]
+1001. Es destrers muntent, si chevalchent estreiz. [monter, chevaucher]
+1002. Clers fut li jurz e bels fut li soleilz: [être]
+1003. N'unt guarnement que tut ne reflambeit. [avoir, reflamber (resplendir)]
+1004. Sunent mil grailles por ço que plus bel seit: [sonner, être]
+1005. Granz est la noise, si l'oïrent Franceis. [être, oïr (entendre)]
+1006. Dist Oliver: «Sire cumpainz, ce crei, [dire, croire]
+1007. De Sarrazins purum bataille aveir.» [pouvoir, avoir]
+1008. Respont Rollant: «E! Deus la nus otreit! [répondre, otreier (octroyer)]
+1009. Ben devuns ci estre pur nostre rei: [devoir, être]
+1010. Pur sun seignor deit hom susfrir destreiz [devoir, souffrir]
+1011. E endurer e granz chalz e granz freiz, [endurer]
+1012. Sin deit hom perdre e del quir e del peil. [devoir, perdre]
+1013. Or guart chascuns que granz colps (l')[i] empleit, [garder, empleier (asséner)]
+1014. Que malvaise cançun de nus chantet ne seit! [chanter, être]
+1015. Paien unt tort e chrestiens unt dreit; [avoir]
+1016. Malvaise essample n'en serat, ja de mei.» AOI. [être]
+
+**Translation**
+994. The pagans arm themselves with Saracen hauberks,
+995. Most of them are triple-meshed,
+996. They lace on their fine Saragossan helmets,
+997. They gird on swords of Viennese steel;
+998. They have handsome shields, Valencian spears,
+999. And gonfalons white and blue and red.
+1000. They leave behind the mules and all the palfreys,
+1001. They mount their war-horses and ride in close ranks.
+1002. Clear was the day and fair was the sun:
+1003. They have no piece of armor that does not all blaze with light.
+1004. A thousand trumpets sound so that it may be more splendid:
+1005. Great is the din, and the French heard it.
+1006. Oliver said: «Sir comrade, I believe
+1007. We may have battle from the Saracens.»
+1008. Roland answers: «Ah! God grant it to us!
+1009. We must indeed stand here for our king:
+1010. For his lord a man should suffer hardships
+1011. And endure both great heat and great cold,
+1012. And a man should lose both hide and hair for it.
+1013. Now let each man take care to strike great blows there,
+1014. So that no evil song be sung about us!
+1015. The pagans are in the wrong and the Christians are in the right;
+1016. An evil example will never come from me.» AOI.
+
+---
+
+## Laisse LXXX (lines 1017–1027)
+
+**Original**
+1017. Oliver est desur un pui haut muntez, [être, monter]
+1018. Guardet su destre par mi un val herbus, [garder (regarder)]
+1019. Si veit venir cele gent paienur, [voir, venir]
+1020. Sin apelat Rollant, sun cumpaignun: [appeler]
+1021. «Devers Espaigne vei venir tel bruur, [voir, venir]
+1022. Tanz blancs osbercs, tanz elmes flambius!
+1023. Icist ferunt nos Franceis grant irur. [faire]
+1024. Guenes le sout, li fel, li traïtur, [savoir]
+1025. Ki nus jugat devant l'empereür.» [juger]
+1026. - «Tais Oliver,» li quens Rollant respunt, [taire, répondre]
+1027. «Mis parrastre est, ne voeill que mot en suns.» [être, vouloir, soner (dire)]
+
+**Translation**
+1017. Oliver has climbed up onto a high hill,
+1018. He looks to his right across a grassy valley,
+1019. And sees the pagan host coming,
+1020. And he called Roland, his companion:
+1021. «From the direction of Spain I see such a tumult coming,
+1022. So many white hauberks, so many flaming helmets!
+1023. These will bring great grief upon our Franks.
+1024. Ganelon knew it, the traitor, the betrayer,
+1025. Who judged us before the emperor.»
+1026. - «Be silent, Oliver,» Count Roland replies,
+1027. «He is my stepfather, I do not wish that you say a word of it.»
+
+---
+
+## Laisse LXXXI (lines 1028–1038)
+
+**Original**
+1028. Oliver est desur un pui muntet; [être, monter]
+1029. Or veit il ben d'Espaigne le regnet [voir]
+1030. E Sarrazins, ki tant sunt asemblez. [être, assembler]
+1031. Luisent cil elme, ki ad or sunt gemmez, [luire, être, gemmer]
+1032. E cil escuz e cil osbercs safrez
+1033. E cil espiez, cil gunfanun fermez.
+1034. Sul les escheles ne poet il acunter; [pouvoir, aconter (raconter)]
+1035. Tant en i ad que mesure n'en set. [avoir, savoir]
+1036. E lui meïsme en est mult esguaret. [être, esgarer (troubler)]
+1037. Cum il einz pout, del pui est avalet, [pouvoir, être, avaler (descendre)]
+1038. Vint as Franceis, tut lur ad acuntet. [venir, avoir, aconter (raconter)]
+
+**Translation**
+1028. Olivier has climbed up onto a hill;
+1029. Now he sees clearly the realm of Spain
+1030. And the Saracens, who are gathered in such numbers.
+1031. The helmets gleam, which are gemmed with gold,
+1032. And those shields and those golden-trimmed hauberks
+1033. And those spears, those affixed gonfanons.
+1034. He cannot even count the battalions;
+1035. There are so many of them that he does not know their number.
+1036. And he himself is much troubled by it.
+1037. As fast as he could, he came down from the hill,
+1038. Came to the French, told them everything.
+
+---
+
+## Laisse LXXXII (lines 1039–1048)
+
+**Original**
+1039. Dist Oliver: «Jo ai paiens veüz: [dire, avoir, voir]
+1040. Unc mais nuls hom en tere n'en vit plus. [voir]
+1041. Cil devant sunt .C. milie ad escuz [être]
+1042. Helmes laciez e blancs osbercs vestuz [lacer, vêtir]
+1043. Dreites cez hanstes, luisent cil espiet brun. [luire]
+1044. Bataille avrez, unches mais tel ne fut. [avoir, être]
+1045. Seignurs Franceis, de Deu aiez vertut! [avoir]
+1046. El camp estez, que ne seium vencuz! [ester (rester), être, vaincre]
+1047. Dient Franceis: «Dehet ait ki s'en fuit! [dire, avoir, s'enfuir]
+1048. Ja pur murir ne vus en faldrat uns.» AOI. [mourir, faillir]
+
+**Translation**
+1039. Oliver said: «I have seen the pagans:
+1040. never before did any man on earth see more of them.
+1041. Those in front number a hundred thousand with shields,
+1042. helmets laced on and white hauberks donned.
+1043. Upright are those lances, those burnished spearheads gleam.
+1044. You will have a battle, never was there such a one.
+1045. Lord Franks, may you have valor from God!
+1046. Hold the field, that we be not vanquished!»
+1047. The Franks say: «Cursed be he who flees!
+1048. Never, even to escape death, will a single one of us fail you.» AOI.
+
+---
+
+## Laisse LXXXIII (lines 1049–1058)
+
+**Original**
+1049. Dist Oliver: «Paien unt grant esforz, [dire, avoir]
+1050. De noz Franceis m'i semblet aveir mult poi! [sembler, avoir]
+1051. Cumpaign Rollant, kar sunez vostre corn: [sonner]
+1052. Si l'orrat Carles, si returnerat l'ost.» [oïr (entendre), retourner]
+1053. Respunt Rollant: «Jo fereie que fols! [répondre, faire]
+1054. En dulce France en perdreie mun los. [perdre]
+1055. Sempres ferrai de Durendal granz colps; [ferir (frapper)]
+1056. Sanglant en ert li branz entresqu'a l'or. [être]
+1057. Felun paien mar i vindrent as porz: [venir]
+1058. Jo vos plevis, tuz sunt jugez a mort.» AOI. [plevir (garantir), être, juger]
+
+**Translation**
+1049. Oliver said: «The pagans have a great host,
+1050. of our Franks it seems to me there are very few!
+1051. Companion Roland, do sound your horn:
+1052. Charles will hear it, and he will turn back the army.»
+1053. Roland answers: «I would act like a fool!
+1054. In sweet France I would lose my renown.
+1055. At once I will strike great blows with Durendal;
+1056. bloody will be the blade right up to the hilt of gold.
+1057. Ill-fated pagans, in an evil hour they came to the passes:
+1058. I pledge you, all are condemned to death.» AOI.
+
+---
+
+## Laisse LXXXIV (lines 1059–1069)
+
+**Original**
+1059. - «Cumpainz Rollant l'olifan car sunez: [sonner]
+1060. Si l'orrat Carles, ferat l'ost returner, [oïr (entendre), faire, retourner]
+1061. Succurrat nos li reis od tut sun barnet.» [secourir]
+1062. Respont Rollant: «Ne placet Damnedeu [répondre, plaire]
+1063. Que mi parent pur mei seient blasmet [être, blâmer]
+1064. Ne France dulce ja cheet en viltet! [cheoir (tomber)]
+1065. Einz i ferrai de Durendal asez, [ferir (frapper)]
+1066. Ma bone espee que ai ceint al costet: [avoir, ceindre]
+1067. Tut en verrez le brant ensanglentet. [voir]
+1068. Felun paien mar i sunt asemblez: [être, assembler]
+1069. Jo vos plevis, tuz sunt a mort livrez.» AOI. [plevir (garantir), être, livrer]
+
+**Translation**
+1059. - «Companion Roland, sound the oliphant:
+1060. Charles will hear it, will make the army turn back,
+1061. The king will come to our aid with all his host of barons.»
+1062. Roland replies: «May it not please the Lord God
+1063. That my kinsmen be blamed because of me
+1064. Nor sweet France ever fall into disgrace!
+1065. Rather I will strike hard with Durendal,
+1066. My good sword that I have girded at my side:
+1067. You will see its blade all bloodied because of it.
+1068. The felon pagans have gathered here to their misfortune:
+1069. I pledge you, they are all delivered up to death.» AOI.
+
+---
+
+## Laisse LXXXV (lines 1070–1081)
+
+**Original**
+1070. - «Cumpainz Rollant, sunez vostre olifan: [sonner]
+1071. Si l'orrat Carles, ki est as porz passant. [oïr (entendre), être, passer]
+1072. Je vos plevis, ja returnerunt Franc.» [plevir (garantir), retourner]
+1073. - «Ne placet Deu,» ço li respunt Rollant, [plaire, répondre]
+1074. «Que ço seit dit de nul hume vivant, [être, dire, vivre]
+1075. Ne pur paien, que ja seie cornant! [être, corner]
+1076. Ja n'en avrunt reproece mi parent! [avoir]
+1077. Quant jo serai en la bataille grant [être]
+1078. E jo ferrai e mil colps e .VII. cenz, [ferir (frapper)]
+1079. De Durendal verrez l'acer sanglent. [voir]
+1080. Franceis sunt bon, si ferrunt vassalment, [être, ferir (frapper)]
+1081. Ja cil d'Espaigne n'avrunt de mort guarant.» [avoir]
+
+**Translation**
+1070. - «Companion Roland, sound your oliphant:
+1071. Charles will hear it, he who is passing through the mountain passes.
+1072. I guarantee you, the Franks will return at once.»
+1073. - «May it not please God,» Roland answers him,
+1074. «That it be said by any living man,
+1075. Nor for any pagan, that I should ever sound the horn!
+1076. My kinsmen shall never have reproach for it!
+1077. When I am in the great battle
+1078. And I shall strike a thousand blows and seven hundred,
+1079. You will see the bloody steel of Durendal.
+1080. The French are good, they will strike valiantly,
+1081. Those of Spain shall never have a guarantee against death.»
+
+---
+
+## Laisse LXXXVI (lines 1082–1092)
+
+**Original**
+1082. Dist Oliver: «D'iço ne sai jo blasme? [dire, savoir]
+1083. Jo ai veüt les Sarrazins d'Espaigne, [avoir, voir]
+1084. Cuverz en sunt li val e les muntaignes [être, couvrir]
+1085. E li lariz e trestutes les plaignes.
+1086. Granz sunt les oz de cele gent estrange; [être]
+1087. Nus i avum mult petite cumpaigne.» [avoir]
+1088. Respunt Rollant: «Mis talenz en est graigne. [répondre, être]
+1089. Ne placet Damnedeu ne ses angles [plaire]
+1090. Que ja pur mei perdet sa valur France! [perdre]
+1091. Melz voeill murir que huntage me venget. [vouloir, mourir, venir]
+1092. Pur ben ferir l'emperere plus nos aimet.» [ferir (frapper), aimer]
+
+**Translation**
+1082. Said Oliver: «Of this I do not know how to make complaint.
+1083. I have seen the Saracens of Spain,
+1084. The valleys and the mountains are covered with them,
+1085. And the hillsides and all the plains.
+1086. Great are the hosts of that foreign people;
+1087. We here have a very small company.»
+1088. Roland answers: «My desire is the greater for it.
+1089. May it not please the Lord God nor his angels
+1090. That ever for my sake France should lose its worth!
+1091. I would rather die than that shame befall me.
+1092. For striking well the emperor loves us the more.»
+
+---
+
+## Laisse LXXXVII (lines 1093–1109)
+
+**Original**
+1093. Rollant est proz e Oliver est sage; [être]
+1094. Ambedui unt me[r]veillus vasselage. [avoir]
+1095. Puis que il sunt as chevals e as armes, [être]
+1096. Ja pur murir n'eschiverunt bataille. [mourir, eschiver (éviter)]
+1097. Bon sunt li cunte e lur paroles haltes. [être]
+1098. Felun paien par grant irur chevalchent. [chevaucher]
+1099. Dist Oliver: «Rollant, veez en alques! [dire, voir]
+1100. Cist nus sunt pres, mais trop nus est loinz Carles. [être]
+1101. Vostre olifan, suner vos nel deignastes; [sonner, daigner]
+1102. Fust i li reis, n'i oüssum damage. [être, avoir]
+1103. Guardez amunt devers les porz d'Espaigne: [garder (regarder)]
+1104. Veeir poez, dolente est la rereguarde; [voir, pouvoir, être]
+1105. Ki ceste fait, jamais n'en ferat altre.» [faire]
+1106. Respunt Rollant: «Ne dites tel ultrage! [répondre, dire]
+1107. Mal seit del coer ki el piz se cuardet! [être, cuarder (faire le lâche)]
+1108. Nus remeindrum en estal en la place; [remaindre (rester)]
+1109. Par nos í ert e li colps e li caples.» AOI. [être]
+
+**Translation**
+1093. Roland is brave and Oliver is wise;
+1094. Both have marvelous valor.
+1095. Once they are on their horses and at their arms,
+1096. Never, even on pain of death, will they shun battle.
+1097. Good are the counts, and their words are lofty.
+1098. The wicked pagans ride with great fury.
+1099. Said Oliver: «Roland, look over there a bit!
+1100. These are close to us, but Charles is too far from us.
+1101. Your olifant, you did not deign to sound it;
+1102. Were the king here, we would have no harm.
+1103. Look up toward the passes of Spain:
+1104. You can see, the rearguard is to be pitied;
+1105. He who makes this one will never make another.»
+1106. Roland answers: «Do not speak such outrage!
+1107. Cursed be the heart that turns coward in the breast!
+1108. We will remain firm in our place;
+1109. By us will be both the blows and the fighting.» AOI.
+
+---
+
+## Laisse LXXXVIII (lines 1110–1123)
+
+**Original**
+1110. Quant Rollant veit que la bataille serat, [voir, être]
+1111. Plus se fait fiers que leon ne leupart. [faire]
+1112. Franceis escriet, Oliver apelat: [escrier (s'écrier), appeler]
+1113. «Sire cumpainz, amis, nel dire ja! [dire]
+1114. Li emperere, ki Franceis nos laisat, [laisser]
+1115. Itels .XX. milie en mist a une part [mettre]
+1116. Sun escientre n'en i out un cuard. [avoir]
+1117. Pur sun seignur deit hom susfrir granz mals [devoir, souffrir]
+1118. E endurer e forz freiz e granz chalz, [endurer]
+1119. Sin deit hom perdre del sanc e de la char. [devoir, perdre]
+1120. Fier de [ta] lance e jo de Durendal, [ferir (frapper)]
+1121. Ma bone espee, que li reis me dunat. [donner]
+1122. Se jo i moert, dire poet ki l'avrat [mourir, dire, pouvoir, avoir]
+1123. (E purrunt dire) que ele fut a noble vassal.» [dire, être]
+
+**Translation**
+1110. When Roland sees that the battle will take place,
+1111. He makes himself fiercer than lion or leopard.
+1112. He calls out to the French, he addressed Oliver:
+1113. «Sir companion, friend, do not say so!
+1114. The emperor, who left the French to us,
+1115. Set apart such twenty thousand men
+1116. To his knowledge there was not one coward among them.
+1117. For his lord a man must suffer great hardships
+1118. And endure both fierce cold and great heat,
+1119. And a man must lose of his blood and of his flesh.
+1120. Strike with [your] lance and I with Durendal,
+1121. My good sword, which the king gave me.
+1122. If I die here, whoever has it may say
+1123. (And they will be able to say) that it belonged to a noble vassal.»
+
+---
+
+## Laisse LXXXIX (lines 1124–1138)
+
+**Original**
+1124. D'altre part est li arcevesques Turpin, [être]
+1125. Sun cheval broche e muntet un lariz, [brocher (éperonner), monter]
+1126. Franceis apelet, un sermun lur ad dit: [appeler, avoir, dire]
+1127. «Seignurs baruns, Carles nus laissat ci; [laisser]
+1128. Pur nostre rei devum nus ben murir. [devoir, mourir]
+1129. Chrestientet aidez a sustenir! [aider, soutenir]
+1130. Bataille avrez, vos en estes tuz fiz, [avoir, être]
+1131. Kar a voz oilz veez les Sarrazins. [voir]
+1132. Clamez vos culpes, si preiez Deu mercit! [clamer, prier]
+1133. Asoldrai vos pur voz anmes guarir. [absoudre, garir (guérir)]
+1134. Se vos murez, esterez seinz martirs, [mourir, ester (rester)]
+1135. Sieges avrez el greignor pareïs.» [avoir]
+1136. Franceis de[s]cendent, a tere se sunt mis, [descendre, se mettre]
+1137. E l'arcevesque de Deu les beneïst: [bénir]
+1138. Par penitence les cumandet a ferir. [commander, ferir (frapper)]
+
+**Translation**
+1124. On the other side is Archbishop Turpin,
+1125. He spurs his horse and climbs a hillock,
+1126. He calls the Franks, he has given them a sermon:
+1127. «Lord barons, Charles left us here;
+1128. For our king we must surely die.
+1129. Help to uphold Christianity!
+1130. You will have battle, of this you are all certain,
+1131. For with your own eyes you see the Saracens.
+1132. Confess your sins, and pray to God for mercy!
+1133. I shall absolve you to save your souls.
+1134. If you die, you will be holy martyrs,
+1135. You will have seats in the greater paradise.»
+1136. The Franks dismount, they prostrated themselves on the ground,
+1137. And the archbishop blessed them in God's name:
+1138. As penance he commands them to strike.
+
+---
+
+## Laisse XC (lines 1139–1151)
+
+**Original**
+1139. Franceis se drecent, si se metent sur piez. [se dresser, se mettre]
+1140. Ben sunt asols e quites de lur pecchez, [être, absoudre]
+1141. E l'arcevesque de Deu les ad seignez; [avoir, seignier (bénir)]
+1142. Puis sunt muntez sur lur curanz destrers. [être, monter]
+1143. Adobez sunt a lei de chevalers [être, aduber (équiper)]
+1144. E de bataille sunt tuit apareillez. [être, appareiller (préparer)]
+1145. Li quens Rollant apelet Oliver: [appeler]
+1146. «Sire cumpainz, mult ben le saviez [savoir]
+1147. Que Guenelun nos ad tuz espiez; [avoir, espier (épier)]
+1148. Pris en ad or e aveir e deners. [prendre, avoir]
+1149. Li emperere nos devreit ben venger. [devoir, venger]
+1150. Li reis Marsilie de nos ad fait marchet; [avoir, faire]
+1151. Mais as espees l'estuvrat esleger.» AOI. [estovoir (falloir), eslegier (acquitter)]
+
+**Translation**
+1139. The French rise up and get to their feet.
+1140. They are well absolved and released from their sins,
+1141. And the archbishop has blessed them in God's name;
+1142. Then they have mounted their swift war-horses.
+1143. They are equipped in the manner of knights
+1144. And are all made ready for battle.
+1145. Count Roland calls to Oliver:
+1146. «Sir companion, you knew it well
+1147. That Ganelon has betrayed us all;
+1148. He has taken for it gold and wealth and money.
+1149. The emperor ought well to avenge us.
+1150. King Marsile has made a bargain of us;
+1151. But it will have to be settled with swords.» AOI.
+
+---
+
+## Laisse XCI (lines 1152–1169)
+
+**Original**
+1152. As porz d'Espaigne en est passet Rollant [être, passer]
+1153. Sur Veillantif, sun bun cheval curant. [courir]
+1154. Portet ses armes, mult li sunt avenanz, [porter, être]
+1155. Mais sun espiet vait li bers palmeiant, [aller, palmeier (brandir)]
+1156. Cuntre le ciel vait la mure turnant, [aller, tourner]
+1157. Laciet en su un gunfanun tut blanc; [lacer]
+1158. Les renges li batent josqu'as mains. [battre]
+1159. Cors ad mult gent, le vis cler e riant. [avoir, rire]
+1160. Sun cumpaignun apres le vait sivant, [aller, suivre]
+1161. E cil de France le cleiment a guarant. [clamer (proclamer)]
+1162. Vers Sarrazins reguardet fierement [regarder]
+1163. E vers Franceis humeles e dulcement,
+1164. Si lur ad dit un mot curteisement: [avoir, dire]
+1165. «Seignurs barons, suef pas alez tenant! [aller, tenir]
+1166. Cist paien vont grant martirie querant. [aller, querre (chercher)]
+1167. Encoi avrum un eschec bel e gent: [avoir]
+1168. Nuls reis de France n'out unkes si vaillant.» [avoir]
+1169. A cez paroles vunt les oz ajustant. AOI. [aller, ajuster (joindre)]
+
+**Translation**
+1152. Through the passes of Spain Roland has gone by
+1153. On Veillantif, his good swift horse.
+1154. He bears his arms, which become him well,
+1155. But the baron goes brandishing his spear,
+1156. Toward the sky he goes turning the point,
+1157. A pure white gonfalon laced upon it;
+1158. The streamers beat down to his hands.
+1159. His body is most noble, his face bright and smiling.
+1160. His companion comes following after him,
+1161. And those of France acclaim him as their protector.
+1162. Toward the Saracens he looks fiercely
+1163. And toward the Franks humbly and gently,
+1164. And he said a word to them courteously:
+1165. «Lord barons, go forward at a gentle pace!
+1166. These pagans go seeking great martyrdom.
+1167. Today we shall have fine and noble spoils:
+1168. No king of France ever had such valuable ones.»
+1169. At these words the hosts go closing in. AOI.
+
+---
+
+## Laisse XCII (lines 1170–1187)
+
+**Original**
+1170. Dist Oliver: «N'ai cure de parler. [dire, avoir, parler]
+1171. Vostre olifan ne deignastes suner, [daigner, sonner]
+1172. Ne de Carlun mie vos n'en avez. [avoir]
+1173. Il n'en set mot, n'i ad culpes li bers. [savoir, avoir]
+1174. Cil ki la sunt ne funt mie a blasmer. [être, faire, blâmer]
+1175. Kar chevalchez a quanque vos puez! [chevaucher, pouvoir]
+1176. Seignors baruns, el camp vos retenez! [retenir]
+1177. Pur deu vos pri, ben seiez purpensez [prier, être, porpenser (réfléchir)]
+1178. De colps ferir, de receivre e (de) duner! [ferir (frapper), recevoir, donner]
+1179. L'enseigne Carle n'i devum ublier.» [devoir, oublier]
+1180. A icest mot sunt Franceis escriet. [être, escrier (s'écrier)]
+1181. Ki dunc oïst «Munjoie» demander, [oïr (entendre), demander]
+1182. De vasselage li poüst remembrer. [pouvoir, remembrer (se souvenir)]
+1183. Puis si chevalchent, Deus! par si grant fiertet! [chevaucher]
+1184. Brochent ad ait pur le plus tost aler, [brocher (éperonner), aller]
+1185. Si vunt ferir, que fereient il el? [aller, ferir (frapper), faire]
+1186. E Sarrazins nes unt mie dutez; [avoir, douter]
+1187. Francs e paiens, as les vus ajustez. [ajuster (joindre)]
+
+**Translation**
+1170. Said Oliver: «I have no wish to speak.
+1171. You did not deign to sound your oliphant,
+1172. and so you have nothing from Charles in this matter.
+1173. He knows nothing of it; the noble lord is not to blame.
+1174. Those who are there are not at all to be blamed.
+1175. So ride on with all the speed you can!
+1176. Lord barons, hold your ground on the field!
+1177. For God's sake I pray you, be well resolved
+1178. to strike blows, to receive and (to) give them!
+1179. We must not forget Charles's war-cry here.»
+1180. At this word the Franks cried out.
+1181. Whoever then had heard them call «Munjoie»
+1182. would have been reminded of true valor.
+1183. Then they ride on, God! with such great fierceness!
+1184. They spur hard to go all the faster,
+1185. and they go to strike — what else would they do?
+1186. And they have not at all feared the Saracens;
+1187. Franks and pagans, now they are joined in battle.
+
+---
+
+## Laisse XCIII (lines 1188–1212)
+
+**Original**
+1188. Li nies Marsilie, il ad a num Aelroth; [avoir]
+1189. Tut premereins chevalchet devant l'ost. [chevaucher]
+1190. De noz Franceis vait disant si mals moz: [aller, dire]
+1191. «Feluns Franceis, hoi justerez as noz, [jouster (combattre)]
+1192. Traït vos ad ki a guarder vos out. [avoir, trahir, garder]
+1193. Fols est li reis ki vos laissat as porz. [être, laisser]
+1194. Enquoi perdrat France dulce sun los, [perdre]
+1195. Charles li magnes le destre braz del cors.»
+1196. Quant l'ot Rollant, Deus! si grant doel en out! [oïr (entendre), avoir]
+1197. Sun cheval brochet, laiset curre a esforz, [brocher (éperonner), laisser, courir]
+1198. Vait le ferir li quens quanque il pout. [aller, ferir (frapper), pouvoir]
+1199. L'escut li freint e l'osberc li desclot, [fraindre (briser), desclore (fendre)]
+1200. Trenchet le piz, si li briset les os, [trancher, briser]
+1201. Tute l'eschine li desevret del dos, [dessevrer (séparer)]
+1202. Od sun espiet l'anme li getet fors, [jeter]
+1203. Enpeint le ben, fait li brandir le cors, [empeindre (pousser), faire, brandir]
+1204. Pleine sa hanste del cheval l'abat mort, [abattre]
+1205. En dous meitiez li ad briset le col; [avoir, briser]
+1206. Ne leserat, ço dit, que n'i parolt: [laisser, dire, parler]
+1207. «Ultre culvert! Carles n'est mie fol, [être]
+1208. Ne traïsun unkes amer ne volt. [aimer, vouloir]
+1209. Il fist que proz qu'il nus laisad as porz: [faire, laisser]
+1210. Oí n'en perdrat France dulce sun los. [perdre]
+1211. Ferez i, Francs, nostre est li premers colps! [ferir (frapper), être]
+1212. Nos avum dreit, mais cist glutun unt tort.» AOI. [avoir]
+
+**Translation**
+1188. The nephew of Marsile, he is named Aelroth;
+1189. First of all he rides out before the host.
+1190. He goes speaking such evil words about our French:
+1191. «Felon French, today you shall joust with ours,
+1192. He who should have guarded you has betrayed you.
+1193. Foolish is the king who left you at the passes.
+1194. This day sweet France shall lose its renown,
+1195. Charles the Great the right arm from his body.»
+1196. When Roland heard it, God! such great grief he had!
+1197. He spurs his horse, lets it run at full force,
+1198. The count goes to strike him with all his might.
+1199. He shatters his shield and breaks open his hauberk,
+1200. Slashes his chest, and breaks his bones,
+1201. Severs the whole spine from his back,
+1202. With his spear casts out his soul,
+1203. Drives it home well, makes the body sway,
+1204. With his lance's full length casts him dead from the horse,
+1205. In two halves he has broken his neck;
+1206. He will not refrain, he says, from speaking there:
+1207. «Wretched coward! Charles is not at all foolish,
+1208. Nor did he ever wish to love treason.
+1209. He acted as a brave man when he left us at the passes:
+1210. Today sweet France shall not lose its renown.
+1211. Strike, Franks, the first blows are ours!
+1212. We have the right, but these gluttons are in the wrong.» AOI.
+
+---
+
+## Laisse XCIV (lines 1213–1234)
+
+**Original**
+1213. Un duc i est, si ad num Falsaron: [être, avoir]
+1214. Icil er[t] frere al rei Marsiliun; [être]
+1215. Il tint la tere Datliun e Balbiun. [tenir]
+1216. Suz cel nen at plus encrisme felun. [avoir]
+1217. Entre les dous oilz mult out large le front, [avoir]
+1218. Grant demi pied mesurer i pout hom. [mesurer, pouvoir]
+1219. Asez ad doel quant vit mort sun nevold, [avoir, voir]
+1220. Ist de la prese, si se met en bandun, [issir (sortir), mettre]
+1221. E se s'escriet l'enseigne paienor; [escrier (s'écrier)]
+1222. Envers Franceis est mult cuntrarius: [être]
+1223. «Enquoi perdrat France dulce s'onur!» [perdre]
+1224. Ot le Oliver, sin ad mult grant irur; [oïr (entendre), avoir]
+1225. Le cheval brochet des oriez esperuns, [brocher (éperonner)]
+1226. Vait le ferir en guise de baron. [aller, ferir (frapper)]
+1227. L'escut li freint e l'osberc li derumpt, [fraindre (briser), derompre (rompre)]
+1228. El cors li met les pans del gunfanun, [mettre]
+1229. Pleine sa hanste l'abat mort des arçuns; [abattre]
+1230. Guardet a tere, veit gesir le glutun, [garder (regarder), voir, gésir (être couché)]
+1231. Si li ad dit par mult fiere raison: [avoir, dire]
+1232. «De voz manaces, culvert, jo n'ai essoign. [avoir]
+1233. Ferez i, Francs, kar tres ben les veincrum!» [ferir (frapper), vaincre]
+1234. - «Munjoie!» escriet, ço est l'enseigne Carlun. AOI. [escrier (s'écrier), être]
+
+**Translation**
+1213. There is a duke there, named Falsaron:
+1214. He was the brother of King Marsile;
+1215. He held the land of Dathan and Abiram.
+1216. Under heaven there is no more wicked villain.
+1217. Between his two eyes he had a very broad forehead,
+1218. A good half-foot one could measure there.
+1219. He has great grief when he sees his nephew dead,
+1220. He springs out of the press and flings himself forward,
+1221. And cries out the pagan war-cry;
+1222. Toward the Franks he is most hostile:
+1223. «This day shall sweet France lose her honor!»
+1224. Oliver hears him, and feels very great wrath at it;
+1225. He spurs his horse with his golden spurs,
+1226. Goes to strike him in the manner of a baron.
+1227. He shatters his shield and tears apart his hauberk,
+1228. Drives into his body the folds of the gonfanon,
+1229. With his lance full-length he hurls him dead from the saddle;
+1230. He looks to the ground, sees the wretch lying there,
+1231. And spoke to him in most fierce speech:
+1232. «Of your threats, scoundrel, I have no care.
+1233. Strike, Franks, for we shall surely defeat them!»
+1234. - «Monjoie!» he cries, that is Charles's war-cry. AOI.
+
+---
+
+## Laisse XCV (lines 1235–1260)
+
+**Original**
+1235. Uns reis i est, si ad num Corsablix: [être, avoir]
+1236. Barbarins est, d'un estra[n]ge païs. [être]
+1237. Si apelad les altres Sarrazins: [appeler]
+1238. «Ceste bataille ben la puum tenir, [pouvoir, tenir]
+1239. Kar de Franceis i ad asez petit. [avoir]
+1240. Cels ki ci sunt devum aveir mult vil; [être, devoir, avoir]
+1241. Ja pur Charles n'i ert un sul guarit: [être, garir (guérir)]
+1242. Or est le jur qu'els estuvrat murir.» [être, estovoir (falloir), mourir]
+1243. Ben l'entendit li arc[e]vesques Turpin. [oïr (entendre)]
+1244. Suz ciel n'at hume que [tant] voeillet haïr; [avoir, vouloir, haïr]
+1245. Sun cheval brochet des esperuns d'or fin, [brocher (éperonner)]
+1246. Par grant vertut si l 'est alet ferir. [être, aller, ferir (frapper)]
+1247. L'escut li freinst, l'osberc li descumfist, [fraindre (briser), desconfire (défaire)]
+1248. Sun grant espiet par mi le cors li mist, [mettre]
+1249. Empeint le ben, que mort le fait brandir, [empeindre (pousser), faire, brandir]
+1250. Pleine sa hanste l'abat mort el chemin. [abattre]
+1251. Guardet arere, veit le glutun gesir, [garder (regarder), voir, gésir (être couché)]
+1252. Ne laisserat que n'i parolt, ço dit: [laisser, parler, dire]
+1253. «Culvert paien, vos i avez mentit! [avoir, mentir]
+1254. Carles, mi sire, nus est guarant tuz dis; [être]
+1255. Nostre Franceis n'unt talent de fuïr. [avoir, fuir]
+1256. Voz cumpaignuns feruns trestuz restifs; [ferir (frapper)]
+1257. Nuveles vos di: mort vos estoet susfrir. [dire, estovoir (falloir), souffrir]
+1258. Ferez, Franceis! Nul de vus ne s'ublit! [ferir (frapper), oublier]
+1259. Cist premer colp est nostre, Deu mercit!» [être]
+1260. - «Munjoie!» escriet por le camp retenir. [escrier (s'écrier), retenir]
+
+**Translation**
+1235. A king is there, and his name is Corsablix:
+1236. He is a Barbary man, from a strange land.
+1237. He called out to the other Saracens:
+1238. «This battle we can well sustain,
+1239. For of the Franks there are quite few here.
+1240. Those who are here we should hold very cheap;
+1241. Never, for all of Charles, shall a single one be saved:
+1242. Now is the day when they must die.»
+1243. Archbishop Turpin heard him well.
+1244. Under heaven there is no man he would so wish to hate;
+1245. He spurs his horse with the spurs of fine gold,
+1246. With great force he has gone to strike him.
+1247. He shattered his shield, he broke apart his hauberk,
+1248. He thrust his great spear through the middle of his body,
+1249. Drives it well in, so that he makes him reel dead,
+1250. With his lance at full length he strikes him down dead on the road.
+1251. He looks behind, sees the wretch lying there,
+1252. He will not refrain from speaking to him, he says this:
+1253. «Vile pagan, you have lied in this!
+1254. Charles, my lord, is our protector always;
+1255. Our Franks have no wish to flee.
+1256. Your companions we shall make all motionless;
+1257. News I tell you: you must suffer death.
+1258. Strike, Franks! Let none of you forget himself!
+1259. This first blow is ours, thanks be to God!»
+1260. - «Munjoie!» he cries out, to hold the field.
+
+---
+
+## Laisse XCVI (lines 1261–1268)
+
+**Original**
+1261. Engelers fiert Malprimis de Brigal; [ferir (frapper)]
+1262. Sis bons escuz un dener ne li valt: [valoir]
+1263. Tute li freint la bucle de cristal, [fraindre (briser)]
+1264. L'une meitiet li turnet cuntreval; [tourner]
+1265. L'osberc li rumpt entresque a la charn, [rompre]
+1266. Sun bon espiet enz el cors li enbat. [embattre (enfoncer)]
+1267. Li paiens chet cuntreval a un quat; [cheoir (tomber)]
+1268. L'anme de lui en portet Sathanas. AOI. [porter]
+
+**Translation**
+1261. Engelier strikes Malprimis of Brigal;
+1262. His good shield is not worth a denier to him:
+1263. He shatters the boss of crystal all over it,
+1264. One half of it he turns downward;
+1265. He breaks the hauberk right through to the flesh,
+1266. He drives his good spear into the body.
+1267. The pagan falls down dead at one blow;
+1268. Satan carries off his soul. AOI.
+
+---
+
+## Laisse XCVII (lines 1269–1274)
+
+**Original**
+1269. E sis cumpainz Gerers fiert l'amurafle: [ferir (frapper)]
+1270. L'escut li freint e l'osberc li desmailet, [fraindre (briser), desmailler (démailler)]
+1271. Sun bon espiet li me(n)t en la curaille, [mettre]
+1272. Empeint le bien, par mi le cors li passet, [empeindre (pousser), passer]
+1273. Que mort l'abat el camp, pleine sa hanste. [abattre]
+1274. Dist Oliver: «Gente est nostre bataille!» [dire, être]
+
+**Translation**
+1269. And his companion Gerers strikes the emir:
+1270. He shatters his shield and breaks apart the mail of his hauberk,
+1271. He thrusts his good spear into his belly,
+1272. Drives it home hard, runs it right through his body,
+1273. So that he hurls him dead to the ground, his lance at full length.
+1274. Oliver said: «Noble is our battle!»
+
+---
+
+## Laisse XCVIII (lines 1275–1280)
+
+**Original**
+1275. Sansun li dux, (il) vait ferir l'almaçur: [aller, ferir (frapper)]
+1276. L'escut li freinst, ki est a flurs e ad ór, [fraindre (briser), être]
+1277. Li bons osbercs ne li est guarant prod, [être]
+1278. Trenchet li le coer, le firie e le pulmun, [trancher]
+1279. Que l'abat [mort], qui qu'en peist u qui nun, [abattre, peser]
+1280. Dist l'arcevesque: «Cist colp est de baron!» [dire, être]
+
+**Translation**
+1275. Duke Samson, he goes to strike the emir:
+1276. He shattered his shield, which is wrought with flowers and gold,
+1277. His good hauberk is no real protection to him,
+1278. He cuts through his heart, his liver, and his lung,
+1279. So that he strikes him down [dead], whoever may be grieved by it or not,
+1280. Said the archbishop: «This blow is a baron's!»
+
+---
+
+## Laisse XCIX (lines 1281–1288)
+
+**Original**
+1281. E Anseïs laiset le cheval curre, [laisser, courir]
+1282. Si vait ferir Turgis de Turteluse; [aller, ferir (frapper)]
+1283. L'escut li freint desuz l'oree bucle, [fraindre (briser)]
+1284. De sun osberc li derumpit les dubles, [derompre (rompre)]
+1285. Del bon espiet el cors li met la mure, [mettre]
+1286. Empeinst le ben, tut le fer li mist ultre, [empeindre (pousser), mettre]
+1287. Pleine sa hanste el camp mort le tresturnet. [tresturner (renverser)]
+1288. Ço dist Rollant: «Cist colp est de produme!» [dire, être]
+
+**Translation**
+1281. And Anseïs lets his horse run,
+1282. Then goes to strike Turgis of Tortelose;
+1283. He shatters his shield beneath the gilded boss,
+1284. Tears apart the doubled mail of his hauberk,
+1285. Drives the point of his good spear into his body,
+1286. Thrusts it well, sends the iron clean through him,
+1287. With his lance at full length casts him dead from the saddle.
+1288. Roland says this: «This blow is a worthy man's!»
+
+---
+
+## Laisse C (lines 1289–1296)
+
+**Original**
+1289. Et Engelers li Guascuinz de Burdele
+1290. Sun cheval (...) brochet, si li laschet la resne, [brocher (éperonner), lâcher]
+1291. Si vait ferir Escremiz de Valterne: [aller, ferir (frapper)]
+1292. L'escut del col li freint e escantelet, [fraindre (briser), escanteler (mettre en pièces)]
+1293. De sun osberc li rumpit la ventaille, [rompre]
+1294. Sil fiert el piz entre les dous furceles, [ferir (frapper)]
+1295. Pleine sa hanste l'abat mort de la sele; [abattre]
+1296. Apres li dist: «Turnet estes a perdre!» AOI. [dire, tourner, être, perdre]
+
+**Translation**
+1289. And Engelier the Gascon of Bordeaux
+1290. Spurs his horse, lets loose the rein,
+1291. And goes to strike Escremiz of Valterne:
+1292. He shatters and smashes to pieces the shield at his neck,
+1293. Tears open the ventail of his hauberk,
+1294. Strikes him in the chest between the two collarbones,
+1295. With the full length of his lance knocks him dead from the saddle;
+1296. Afterward he says to him: «You are doomed to perish!» AOI.
+
+---
+
+## Laisse CI (lines 1297–1303)
+
+**Original**
+1297. E Gualter fie[r]t un paien, Estorgans, [ferir (frapper)]
+1298. Sur sun escut en la pene devant,
+1299. Que tut li trenchet le vermeill e le blanc; [trancher]
+1300. De sun osberc li ad rumput les pans, [avoir, rompre]
+1301. El cors li met sun bon espiet tre[n]chant, [mettre]
+1302. Que mort l'abat de sun cheval curant. [abattre]
+1303. Apres li dist: «Ja n'i avrez guarant!» [dire, avoir]
+
+**Translation**
+1297. And Gualter strikes a pagan, Estorgant,
+1298. Upon his shield, on the front panel,
+1299. So that he cuts clean through the red and the white;
+1300. He has burst open the skirts of his hauberk,
+1301. Into his body he drives his good sharp spear,
+1302. So that he strikes him dead from his swift horse.
+1303. Afterward he says to him: «You shall have no protection here!»
+
+---
+
+## Laisse CII (lines 1304–1310)
+
+**Original**
+1304. E Berenger, il fiert Astramariz: [ferir (frapper)]
+1305. L'escut li freinst, l'osberc li descumfist, [fraindre (briser), desconfire (défaire)]
+1306. Sun fort escut par mi le cors li mist, [mettre] <!-- uncertain: "escut" here is likely a scribal error for "espiet" (spear), given the thrust through the body -->
+1307. Que mort l'abat entre mil Sarrazins. [abattre]
+1308. Des .XII. pers li .X. en sunt ocis; [être, ocire (tuer)]
+1309. Ne mes que dous n'en i ad remes vifs; [avoir, remaindre (rester)]
+1310. Ço est Chernubles e li quens Margariz. [être]
+
+**Translation**
+1304. And Berenger, he strikes Astramariz:
+1305. He shattered his shield, he tore apart his hauberk,
+1306. His strong spear he thrust through the middle of his body,
+1307. So that he strikes him dead among a thousand Saracens.
+1308. Of the Twelve Peers, ten of them are slain;
+1309. No more than two of them have remained alive there;
+1310. These are Chernuble and the count Margariz.
+
+---
+
+## Laisse CIII (lines 1311–1319)
+
+**Original**
+1311. Margariz est mult vaillant chevalers, [être]
+1312. E bels e forz e isnels e legers.
+1313. Le cheval brochet, vait ferir Oliver: [brocher (éperonner), aller, ferir (frapper)]
+1314. L'escut li freint suz la bucle d'or mer, [fraindre (briser)]
+1315. Lez le costet li conduist sun espiet. [conduire]
+1316. Deus le guarit, qu'el(l) cors ne l'ad tuchet. [garir (protéger), toucher]
+1317. La hanste fruisset, mie n'en a(d)[b]atiet. [fruisier (briser), abattre]
+1318. Ultre s'en vait, qu'il n'i ad desturber; [s'en aller, avoir, destorber (empêcher)]
+1319. Sunet sun gresle pur les soens ralier. [sonner, rallier]
+
+**Translation**
+1311. Margariz is a very valiant knight,
+1312. And handsome and strong and swift and nimble.
+1313. He spurs his horse, goes to strike Oliver:
+1314. He shatters his shield beneath the boss of pure gold,
+1315. Along his side his spear passes.
+1316. God protects him, for it did not touch his body.
+1317. The shaft splinters, none of it is struck down.
+1318. He passes on beyond, for there is nothing to stop him;
+1319. He sounds his bugle to rally his men.
+
+---
+
+## Laisse CIV (lines 1320–1337)
+
+**Original**
+1320. La bataille est merveilluse e cumune. [être]
+1321. Li quens Rollant mie ne s'asoüret, [asseürer (se rassurer)]
+1322. Fiert de l'espiet tant cume hanste li duret; [ferir (frapper), durer]
+1323. A .XV. cols l'ad fraite e [...] perdue, [avoir, fraindre (briser), perdre]
+1324. Trait Durendal, sa bone espee nue, [traire (tirer)]
+1325. Sun cheval brochet, si vait ferir Chernuble: [brocher (éperonner), aller, ferir (frapper)]
+1326. L'elme li freint u li carbuncle luisent, [fraindre (briser), luire]
+1327. Trenchet la cors e la cheveleüre, [trancher]
+1328. Si li trenchat les oilz e la faiture, [trancher]
+1329. Le blanc osberc, dunt la maile est menue, [être]
+1330. E tut le cors tresqu'en la furcheüre,
+1331. Enz en la sele, ki est a or batue; [être]
+1332. El cheval est l'espee aresteüe, [arrêter]
+1333. Trenchet l'eschine, hunc n'i out quis [joi]nture, [trancher, avoir, quérir (chercher)]
+1334. Tut abat mort el pred sur l'erbe drue; [abattre]
+1335. Apres li dist: «Culvert, mar i moüstes! [dire, mouvoir (s'élancer)]
+1336. De Mahumet ja n'i avrez aiude. [avoir]
+1337. Par tel glutun n'ert bataille oi vencue.» [être, vaincre]
+
+**Translation**
+1320. The battle is marvelous and general.
+1321. Count Roland does not spare himself at all,
+1322. He strikes with his spear as long as the shaft lasts him;
+1323. At fifteen blows he has broken and lost it,
+1324. He draws Durendal, his good naked sword,
+1325. He spurs his horse, and goes to strike Chernuble:
+1326. He breaks his helm where the carbuncles gleam,
+1327. He cuts through the scalp and the hair,
+1328. And cut through the eyes and the face,
+1329. The white hauberk, whose mail is fine,
+1330. And the whole body down to the fork of the legs,
+1331. Right into the saddle, which is beaten with gold;
+1332. In the horse the sword came to rest,
+1333. He cuts through the spine, never seeking a joint there,
+1334. He strikes him all dead on the meadow on the thick grass;
+1335. Afterward he says to him: «Coward, in an evil hour you set forth!
+1336. From Mahomet you will never have help there.
+1337. By such a villain a battle will not be won today.»
+
+---
+
+## Laisse CV (lines 1338–1350)
+
+**Original**
+1338. Li quens Rollant par mi le champ chevalchet, [chevaucher]
+1339. Tient Durendal, ki ben trenchet e taillet, [tenir, trancher, tailler]
+1340. Des Sarrazins lur fait mult grant damage. [faire]
+1341. Ki lui veïst l'un geter mort su[r] l'altre, [voir, jeter]
+1342. Li sanc tuz clers gesir par cele place! [gésir (être couché)]
+1343. Sanglant en ad e l'osberc e [la] brace, [avoir]
+1344. Sun bon cheval le col e les [es]palles.
+1345. E Oliver de ferir ne se target, [ferir (frapper), targier (tarder)]
+1346. Li .XII. per n'en deivent aveir blasme, [devoir, avoir]
+1347. E li Franceis i fierent e si caplent. [ferir (frapper), capler (frapper)]
+1348. Moerent paien e alquanz en i pasment. [mourir, se pâmer]
+1349. Dist l'arcevesque: «Ben ait nostre barnage!» [dire, avoir]
+1350. - «Munjoie!» escriet, ço est l'enseigne Carle. AOI. [escrier (s'écrier), être]
+
+**Translation**
+1338. Count Roland rides through the middle of the field,
+1339. Holds Durendal, which cuts and slashes well,
+1340. Does the Saracens very great harm.
+1341. Whoever had seen him throw one dead upon another,
+1342. The bright blood lying all over that place!
+1343. He has blood on both his hauberk and his arm,
+1344. His good horse on the neck and the shoulders.
+1345. And Oliver does not delay in striking,
+1346. The Twelve Peers ought to have no blame for it,
+1347. And the Franks strike and hew there.
+1348. The pagans die and several of them faint there.
+1349. Said the archbishop: «Blessed be our baronage!»
+1350. - «Munjoie!» he cries, that is Charles's battle-cry. AOI.
+
+---
+
+## Laisse CVI (lines 1351–1366)
+
+**Original**
+1351. E Oliver chevalchet par l'estor, [chevaucher]
+1352. Sa hanste est frait, n'en ad que un trunçun, [être, avoir]
+1353. E vait fer(en)[ir] un paien, Malun: [aller, ferir (frapper)]
+1354. L'escut li freint, ki est ad or e a flur, [fraindre (briser), être]
+1355. Fors de la teste li met les oilz ansdous, [mettre]
+1356. E la cervele li chet as piez desuz; [cheoir (tomber)]
+1357. Mort le tresturnet od tut .VII.C. des lur. [tresturner (renverser)]
+1358. Pois ad ocis Turgis e Esturguz; [avoir, ocire (tuer)]
+1359. La hanste briset e esclicet josqu'as poinz. [briser, esclicier (voler en éclats)]
+1360. Ço dist Rollant: «Cumpainz, que faites vos? [dire, faire]
+1361. En tel bataille n'ai cure de bastun; [avoir]
+1362. Fers e acers i deit aveir valor. [devoir, avoir, valoir]
+1363. U est vostre espee, ki Halteclere ad num? [être, avoir]
+1364. D'or est li helz e de cristal li punz.» [être]
+1365. - «Ne la poi traire,» Oliver li respunt, [pouvoir, traire (tirer), répondre]
+1366. «Kar de ferir oi jo si grant bosoign.» AOI. [ferir (frapper), avoir]
+
+**Translation**
+1351. And Oliver rides through the fray,
+1352. His lance is broken, he has but one stump of it,
+1353. And he goes to strike a pagan, Malun:
+1354. He shatters his shield, which is adorned with gold and flowers,
+1355. From his head he drives out both his eyes,
+1356. And his brains fall down at his feet;
+1357. He casts him down dead, along with seven hundred of their men.
+1358. Then he has slain Turgis and Esturguz;
+1359. His lance breaks and splinters all the way to his fists.
+1360. Roland says this: «Comrade, what are you doing?
+1361. In such a battle I have no care for a stick;
+1362. Iron and steel ought to be of worth here.
+1363. Where is your sword, which is named Halteclere?
+1364. The hilt is of gold and the pommel of crystal.»
+1365. - «I could not draw it,» Oliver answers him,
+1366. «For I had such great need to strike.» AOI.
+
+---
+
+## Laisse CVII (lines 1367–1378)
+
+**Original**
+1367. Danz Oliver trait ad sa bone espee, [traire (tirer), avoir]
+1368. Que ses cumpainz Rollant li ad tant demandee, [avoir, demander]
+1369. E il li ad cum chevaler mustree. [avoir, montrer]
+1370. Fiert un paien, Justin de Val Ferree: [ferir (frapper)]
+1371. Tute la teste li ad par mi sevree, [avoir, sevrer (séparer)]
+1372. Trenchet le cors e [la] bronie safree, [trancher]
+1373. La bone sele, ki a ór est gemmee, [être, gemmer]
+1374. E al ceval a l'eschine trenchee; [trancher]
+1375. Tut abat mort devant loi en la pree. [abattre]
+1376. Ço dist Rollant: «Vos receif jo, frere! [dire, recevoir]
+1377. Por itels colps nos eimet li emperere.» [aimer]
+1378. De tutes parz est «Munjo[i]e» escriee. AOI. [être, escrier (s'écrier)]
+
+**Translation**
+1367. Lord Oliver has drawn his good sword,
+1368. Which his companion Roland had so much asked of him,
+1369. And he has shown it to him in knightly fashion.
+1370. He strikes a pagan, Justin of Val Ferrée:
+1371. He has cut his whole head clean in two,
+1372. Cleaves the body and the gilded mail-coat,
+1373. The good saddle, which is jeweled with gold,
+1374. And cut through the horse's spine;
+1375. He fells him dead before himself on the meadow.
+1376. Roland said: «I accept you, brother!
+1377. For such blows the emperor loves us.»
+1378. On all sides «Munjoie» is cried. AOI.
+
+---
+
+## Laisse CVIII (lines 1379–1394)
+
+**Original**
+1379. Li quens Gerins set el ceval Sorel [seoir (être assis)]
+1380. E sis cumpainz Gerers en Passecerf,
+1381. Laschent lor reisnes, brochent amdui a ait, [lâcher, brocher (éperonner)]
+1382. E vunt ferir un paien, Timozel, [aller, ferir (frapper)]
+1383. L'un en l'escut e li altre en l'osberc,
+1384. Lur dous espiez enz el cors li unt frait, [avoir, fraindre (briser)]
+1385. Mort le tresturnent tres enmi un guaret, [tresturner (renverser)]
+1386. Ne l'oï dire ne jo mie nel sai [oïr (entendre), dire, savoir]
+1387. Liquels d'els dous en fut li plus isnels. [être]
+1388. Esprieres icil fut filz Burdel, [être]
+<!-- lacuna: narrative gap, no Bédier line here -->
+1389. E l'arcevesque lor ocist Siglorel, [ocire (tuer)]
+1390. L'encanteür ki ja fut en enfer: [être]
+1391. Par artimal l'i cundoist Jupiter. [conduire]
+1392. Ço dist Turpin: «Icist nos ert forsfait.» [dire, forsfaire (faire tort)]
+1393. Respunt Rollant: «Vencut est le culvert. [répondre, vaincre, être]
+1394. Oliver, frere, itels colps me sunt bel!» [être]
+
+**Translation**
+1379. Count Gerin sits on his horse Sorel
+1380. And his companion Gerer on Passecerf,
+1381. They slacken their reins, both spur eagerly,
+1382. And go to strike a pagan, Timozel,
+1383. The one on the shield and the other on the hauberk,
+1384. Their two spears they have shattered in his body,
+1385. Dead they tumble him down in the middle of a fallow field.
+1386. I never heard it told, nor do I know at all
+1387. Which of the two was the swifter.
+1388. Esprieris, this one was the son of Burdel,
+1389. And the archbishop slew Siglorel for them,
+1390. The enchanter who had already been in hell:
+1391. By magic Jupiter led him there.
+1392. Turpin says: «This one has done us wrong.»
+1393. Roland answers: «The villain is vanquished.
+1394. Oliver, brother, such blows please me!»
+
+---
+
+## Laisse CIX (lines 1395–1410)
+
+**Original**
+1395. La bataille est aduree endementres. [être]
+1396. Franc e paien merveilus colps i rendent. [rendre]
+1397. Fierent li un, li altre se defendent. [ferir (frapper), défendre]
+1398. Tant hanste i ad e fraite e sanglente, [avoir, fraindre (briser)]
+1399. Tant gunfanun rumpu e tant enseigne! [rompre]
+1400. Tant bon Franceis i perdent lor juvente! [perdre]
+1401. Ne reverrunt lor meres ne lor femmes, [revoir]
+1402. Ne cels de France ki as porz les atendent. AOI. [attendre]
+1403. Karles li magnes en pluret, si se demente. [pleurer, se démenter (se lamenter)]
+1404. De ço qui calt? N'en avrunt sucurance. [chaloir (importer), avoir]
+1405. Malvais servis[e] le jur li rendit Guenes, [rendre]
+1406. Qu'en Sarraguce sa maisnee alat vendre; [aller, vendre]
+1407. Puis en perdit e sa vie e ses membres; [perdre]
+1408. El plait ad Ais en fut juget a prendre, [être, juger, prendre]
+1409. De ses parenz ensembl'od lui tels trente
+1410. Ki de murir nen ourent esperance. AOI. [mourir, avoir]
+
+**Translation**
+1395. The battle is hard-fought meanwhile.
+1396. Frank and pagan exchange marvelous blows.
+1397. The one side strikes, the others defend themselves.
+1398. So many a lance there is, both shattered and bloody,
+1399. So many a gonfalon torn and so many a standard!
+1400. So many good Franks there lose their youth!
+1401. They will not see again their mothers nor their wives,
+1402. Nor those of France who await them at the passes. AOI.
+1403. Charles the Great weeps for it, and laments.
+1404. What does it matter? They will have no help from it.
+1405. An evil service Ganelon rendered him that day,
+1406. When he went to Saragossa to sell his household;
+1407. Afterward he lost for it both his life and his limbs;
+1408. At the trial at Aix he was condemned to be seized,
+1409. Of his kinsmen along with him fully thirty such
+1410. Who had no hope of escaping death. AOI.
+
+---
+
+## Laisse CX (lines 1411–1436)
+
+**Original**
+1411. La bataille est merveilluse e pesant; [être]
+1412. Mult ben i fiert Oliver e Rollant, [ferir (frapper)]
+1413. Li arcevesques plus de mil colps i rent, [rendre]
+1414. Li .XII. per ne s'en targent nient, [targier (tarder)]
+1415. E li Franceis i fierent cumunement. [ferir (frapper)]
+1416. Moerent paien a miller(e)[s] e a cent; [mourir]
+1417. Ki ne s'en fuit de mort n'i ad guarent; [s'enfuir, avoir]
+1418. Voillet o nun, tut i laisset sun tens. [vouloir, laisser]
+1419. Franceis i perdent lor meillors guarnemenz; [perdre]
+1420. Ne reverrunt lor peres ne lor parenz [revoir]
+1421. Ne Carlemagne, ki as porz les atent. [attendre]
+1422. En France en ad mult merveillus turment; [avoir]
+1423. Orez i ad de tuneire e de vent, [avoir]
+1424. Pluies e gresilz desmesureement;
+1425. Chiedent i fuildres e menut e suvent, [cheoir (tomber)]
+1426. E terremoete ço i ad veirement. [avoir]
+1427. De seint Michel de(l) P(aris)[eril] josqu'as Seinz
+1428. Des Besençun tresqu'as [port] de Guitsand
+1429. N'en ad recet dunt del mur ne cravent. [avoir, cravanter (s'écrouler)]
+1430. Cuntre midi tenebres i ad granz; [avoir]
+1431. N'i ad clartet, se li ciels nen i fent. [avoir, fendre]
+1432. Hume nel veit,ki mult ne s espaent. [voir, espaenter (s'épouvanter)]
+1433. Dient plusor: «Ço est li definement, [dire, être]
+1434. La fin del secle ki nus est en present.» [être]
+1435. Il nel sevent, ne dient veir nient: [savoir, dire]
+1436. Ço est li granz dulors por la mort de Rollant. [être]
+
+**Translation**
+1411. The battle is marvelous and hard;
+1412. Oliver and Roland strike well there,
+1413. The archbishop deals more than a thousand blows,
+1414. The Twelve Peers do not hold back at all,
+1415. And the French strike there all together.
+1416. Pagans die there by thousands and by hundreds;
+1417. Whoever does not flee has no protection from death there;
+1418. Willing or not, each leaves his life there.
+1419. The French lose there their best warriors;
+1420. They will not see again their fathers nor their kinsmen,
+1421. Nor Charlemagne, who awaits them at the passes.
+1422. In France there is a most marvelous storm;
+1423. There is a tempest of thunder and of wind,
+1424. Rains and hail beyond measure;
+1425. Thunderbolts fall there, both small and frequent,
+1426. And there is an earthquake there in truth.
+1427. From Saint Michael of the Peril as far as the Saints,
+1428. From Besançon up to the port of Wissant,
+1429. There is no dwelling whose wall does not crumble.
+1430. Around midday there are great shadows there;
+1431. There is no light, unless the sky splits open.
+1432. No man sees it who is not greatly terrified.
+1433. Many say: «This is the ending,
+1434. The end of the world that is upon us.»
+1435. They do not know it, they speak no truth at all:
+1436. This is the great mourning for the death of Roland.
+
+---
+
+## Laisse CXI (lines 1437–1447)
+
+**Original**
+1437. Franceis i unt ferut de coer e de vigur; [avoir, ferir (frapper)]
+1438. Paien sunt morz a millers e a fuls: [être, mourir]
+1439. De cent millers n'en poent guarir dous. [pouvoir, garir (réchapper)]
+1440. Rollant dist: «Nostre hume sunt mult proz: [dire, être]
+1441. Suz ciel n'ad home plus en ait de meillors.» [avoir]
+1442. Il est escrit en la Geste Francor [être, écrire]
+1443. Que vassals ad li nostre empereür. [avoir]
+1444. Vunt par le camp, si requerent les lor, [aller, requérir]
+1445. Plurent des oilz de doel e de tendrur [pleurer]
+1446. Por lor parenz par coer e par amor.
+1447. Li reis Marsilie od sa grant ost lor surt. AOI. [sourdre (surgir)]
+
+**Translation**
+1437. The French have struck there with heart and with vigor;
+1438. The pagans are dead by the thousands and in droves:
+1439. Of a hundred thousand not two of them can escape.
+1440. Roland said: «Our men are very valiant:
+1441. Under heaven there is no one who has more of the best.»
+1442. It is written in the Geste of the Franks
+1443. That valiant men our emperor has.
+1444. They go through the field, and they seek their own,
+1445. They weep from their eyes out of grief and tenderness
+1446. For their kinsmen out of heart and out of love.
+1447. King Marsile with his great host surges upon them. AOI.
+
+---
+
+## Laisse CXII (lines 1448–1465)
+
+**Original**
+1448. Marsilie vient par mi une valee [venir]
+1449. Od sa grant ost que il out asemblee. [avoir, assembler]
+1450. .XX. escheles ad li reis anumbrees. [avoir, anombrer (dénombrer)]
+1451. Lacent cil'elme as perres d'or gemmees, [lacer]
+1452. E cil escuz e cez bronies sasfrees;
+1453. .VII. milie graisles i sunent la menee: [sonner]
+1454. Grant est la noise par tute la contree. [être]
+1455. Ço dist Rollant: «Oliver, compaign, frere, [dire]
+1456. Guenes li fels ad nostre mort juree; [avoir, jurer]
+1457. La traïsun ne poet estre celee; [pouvoir, être, celer]
+1458. Mult grant venjance en prendrat l'emperere. [prendre]
+1459. Bataille avrum e forte [e] aduree, [avoir, adurer (endurcir)]
+1460. Unches mais hom tel ne vit ajustee. [voir, ajuster]
+1461. Jo i ferrai de Durendal, m'espee, [ferir (frapper)]
+1462. E vos, compainz, ferrez de Halteclere. [ferir (frapper)]
+1463. En tanz lius les avum nos portees! [avoir, porter]
+1464. Tantes batailles en avum afinees! [avoir, afiner (achever)]
+1465. Male chançun n'en deit estre cantee.» AOI. [devoir, être, chanter]
+
+**Translation**
+1448. Marsile comes through the middle of a valley
+1449. With his great host that he had assembled.
+1450. The king has counted twenty battalions.
+1451. They lace on those helmets gemmed with gold,
+1452. And those shields and those saffron-dyed hauberks;
+1453. Seven thousand trumpets sound the charge there:
+1454. Great is the din throughout the whole country.
+1455. Roland said this: «Oliver, companion, brother,
+1456. Ganelon the traitor has sworn our death;
+1457. The treason cannot be concealed;
+1458. The emperor will take very great vengeance for it.
+1459. We shall have a battle, hard and grueling,
+1460. Never did any man see such a one joined.
+1461. I shall strike there with Durendal, my sword,
+1462. And you, companion, will strike with Hauteclaire.
+1463. In so many places have we borne them!
+1464. So many battles have we ended with them!
+1465. Let no evil song be sung about it.» AOI.
+
+---
+
+## Laisse CXIII (lines 1466–1485)
+
+**Original**
+1466. Marsilies veit de sa gent le martirie, [voir]
+1467. Si fait suner ses cors e ses buisines, [faire, sonner]
+1468. Puis si chevalchet od sa grant ost banie. [chevaucher]
+1469. Devant chevalchet un Sarrasin, Abisme: [chevaucher]
+1470. Plus fel de lui n'out en sa cumpagnie. [avoir]
+1471. Te(t)ches ad males e mult granz felonies; [avoir]
+1472. Ne creit en Deu, le filz sainte Marie; [croire]
+1473. Issi est neirs cume peiz ki est demise; [être]
+1474. Plus aimet il traïsun e murdrie [aimer]
+1475. Qu'(e) il ne fesist trestut l'or de Galice; [faire]
+1476. Unches nuls hom nel vit juer ne rire. [voir, jouer, rire]
+1477. Vasselage ad e mult grant estultie: [avoir]
+1478. Por ço est drud al felun rei Marsilie; [être]
+1479. Sun dragun portet a qui sa gent s'alient. [porter, s'allier]
+1480. Li arcevesque ne l'amerat ja mie; [aimer]
+1481. Cum il le vit, a ferir le desiret. [voir, ferir (frapper), désirer]
+1482. Mult quiement le dit a sei meïsme: [dire]
+1483. «Cel Sarraz[in] me semblet mult herite: [sembler]
+1484. Mielz est mult que jo l'alge ocire. [être, aller, ocire (tuer)]
+1485. Unches n'amai cuard ne cuardie.» AOI. [aimer]
+
+**Translation**
+1466. Marsile sees the slaughter of his people,
+1467. So he has his horns and his trumpets sounded,
+1468. Then he rides forth with his great mustered host.
+1469. Out in front rides a Saracen, Abisme:
+1470. There was none more wicked than he in his company.
+1471. He has evil traits and very great villainies;
+1472. He does not believe in God, the son of holy Mary;
+1473. He is as black as melted pitch;
+1474. He loves treachery and murder more
+1475. Than he would for all the gold of Galicia;
+1476. Never did any man see him play or laugh.
+1477. He has valor and very great rashness:
+1478. For this he is a favorite of the felon king Marsile;
+1479. He carries his dragon-standard, around which his people rally.
+1480. The archbishop will never love him at all;
+1481. As soon as he saw him, he longed to strike him.
+1482. Very quietly he says to himself:
+1483. «This Saracen seems to me very much a heretic:
+1484. It is far better that I go and slay him.
+1485. Never did I love a coward or cowardice.» AOI.
+
+---
+
+## Laisse CXIV (lines 1486–1508)
+
+**Original**
+1486. Li arcevesque cumencet la bataille. [commencer]
+1487. Siet el cheval qu'il tolit a Grossaille, [seoir (être assis), tolir (enlever)]
+1488. Ço ert uns reis qu'l ocist en Denemarche. [être, ocire (tuer)]
+1489. Li destrers est e curanz e aates, [être]
+1490. Piez ad copiez e les gambes ad plates, [avoir]
+1491. Curte la quisse e la crupe bien large,
+1492. Lungs les costez e l'eschine ad ben halte, [avoir]
+1493. Blanche la cue e la crignete jalne
+1494. Petites les oreilles, la teste tute falve;
+1495. Beste nen est nule ki encontre lui alge. [être, aller]
+1496. Li arcevesque brochet par tant grant vasselage: [brocher (éperonner)]
+1497. Ne laisserat qu'Abisme nen asaillet; [laisser, assaillir]
+1498. Vait le ferir en l'escut amiracle: [aller, ferir (frapper)]
+1499. Pierres i ad, ametistes e topazes, [avoir]
+1500. Esterminals e carbuncles ki ardent; [ardre (brûler)]
+1501. En Val Metas li dunat uns diables, [donner]
+1502. Si li tramist li amiralz Galafes. [tramettre (transmettre)]
+1503. Turpins i fiert, ki nient ne l'esparignet, [ferir (frapper), épargner]
+1504. Enpres sun colp ne quid que un dener vaillet, [cuidier (croire), valoir]
+1505. Le cors li trenchet tres l'un costet qu'a l'altre, [trancher]
+1506. Que mort l'abat en une voide place. [abattre]
+1507. Dient Franceis: «Ci ad grant vasselage! [dire, avoir]
+1508. En l'arcevesque est ben la croce salve.» [être]
+
+**Translation**
+1486. The archbishop begins the battle.
+1487. He sits on the horse that he took from Grossaille,
+1488. He was a king whom he slew in Denmark.
+1489. The warhorse is both swift and nimble,
+1490. It has hollow hooves and flat legs,
+1491. Short the thigh and the croup very broad,
+1492. Long the flanks and the spine very high,
+1493. White the tail and the mane yellow,
+1494. Small the ears, the head all tawny;
+1495. There is no beast that can match it.
+1496. The archbishop spurs with such great valor:
+1497. He will not fail to assail Abisme;
+1498. He goes to strike him on the marvelous shield:
+1499. There are stones, amethysts and topazes,
+1500. esterminals and carbuncles that blaze;
+1501. In Val Metas a devil gave it to him,
+1502. And the emir Galafe sent it on to him.
+1503. Turpin strikes him there, who spares him not at all,
+1504. After his blow I think it is not worth a denier,
+1505. He cleaves his body from one side to the other,
+1506. So that he strikes him dead in an empty space.
+1507. The French say: «Here is great valor!
+1508. In the archbishop the crozier is well safe.»
+
+---
+
+## Laisse CXV (lines 1509–1524)
+
+**Original**
+1509. Franceis veient que paiens i ad tant, [voir, avoir]
+1510. De tutes parz en sunt cuvert li camp; [être, couvrir]
+1511. Suvent regretent Oliver e Rollant [regretter]
+1512. Les .XII. pers, qu'il lor seient guarant. [être]
+1513. E l'arcevesque lur dist de sun semblant: [dire]
+1514. «Seignors barons, n'en alez mespensant! [aller, mespenser (mal penser)]
+1515. Pur Deu vos pri que ne seiez fuiant, [prier, être]
+1516. Que nuls prozdom malvaisement n'en chant. [chanter]
+1517. Asez est mielz que moerium cumbatant. [être, mourir, combattre]
+1518. Pramis nus est, fin prendrum a itant, [promettre, prendre]
+1519. Ultre cest jurn ne serum plus vivant; [être, vivre]
+1520. Mais d'une chose vos soi jo ben guarant: [être]
+1521. Seint pareïs vos est abandunant; [abandonner]
+1522. As Innocenz vos en serez seant.» [seoir (être assis)]
+1523. A icest mot si s'esbaldissent Franc, [esbaldir (s'enhardir)]
+1524. Cel nen i ad «Munjoie!» ne demant. AOI. [avoir, demander]
+
+**Translation**
+1509. The French see that there are so many pagans there,
+1510. On all sides the fields are covered with them;
+1511. Often they lament Oliver and Roland,
+1512. The Twelve Peers, that they might be their protectors.
+1513. And the archbishop spoke to them in his fashion:
+1514. «Lord barons, do not go thinking ill!
+1515. For God's sake I pray you not to flee,
+1516. So that no worthy man may sing ill of it.
+1517. It is much better that we die fighting.
+1518. It is promised to us, we shall come to our end thereby,
+1519. Beyond this day we shall be alive no longer;
+1520. But of one thing I am your good warrant:
+1521. Holy paradise is granted to you;
+1522. Among the Innocents you shall be seated.»
+1523. At this word the Franks take heart,
+1524. There is not one who does not cry «Munjoie!» AOI.
+
+---
+
+## Laisse CXVI (lines 1525–1543)
+
+**Original**
+1525. Un Sarrazin i out de Sarraguce, [avoir]
+1526. De la citet l'une meitet est sue: [être]
+1527. Ço est Climborins, ki pas ne fut produme. [être]
+1528. Fiance prist de Guenelun le cunte, [prendre]
+1529. Par amistiet l'en baisat en la buche, [baiser]
+1530. Si l'en dunat s'espee e s'escarbuncle. [donner]
+1531. Tere Major ço dit, metrat a hunte, [dire, mettre]
+1532. A l'emperere si toldrat la curone. [tolir (enlever)]
+1533. Siet el ceval qu'il cleimet Barbamusche, [seoir (être assis), clamer (nommer)]
+1534. Plus est isnels que esprever ne arunde. [être]
+1535. Brochet le bien, le frein li abandunet, [brocher (éperonner), abandonner]
+1536. Si vait ferir Engeler de Guascoigne. [aller, ferir (frapper)]
+1537. Nel poet guarir sun escut ne sa bronie: [pouvoir, garir (protéger)]
+1538. De sun espiet el cors li met la mure, [mettre]
+1539. Empeint le ben, tut le fer li mist ultre, [empeindre (pousser), mettre]
+1540. Pleine sa hanste el camp mort le tresturnet. [tresturner (renverser)]
+1541. Apres escriet: «Cist sunt bon a (o)[c]unfundre! [escrier (s'écrier), être, confondre]
+1542. Ferez, paien, pur la presse derumpre!» [ferir (frapper), derompre (rompre)]
+1543. Dient Franceis: «Deus quel doel de prodome!» AOI. [dire]
+
+**Translation**
+1525. There was a Saracen there from Saragossa,
+1526. Of the city one half is his:
+1527. He is Climborin, who was no worthy man at all.
+1528. He took an oath from Ganelon the count,
+1529. In friendship kissed him on the mouth,
+1530. And gave him his sword and his carbuncle.
+1531. The Great Land, he says, he will put to shame,
+1532. And from the emperor he will take away the crown.
+1533. He sits on the horse he calls Barbamusche,
+1534. Swifter is it than sparrowhawk or swallow.
+1535. He spurs it hard, gives it free rein,
+1536. And goes to strike Engelier of Gascony.
+1537. Neither his shield nor his hauberk can protect him:
+1538. He thrusts the point of his spear into his body,
+1539. Drives it in hard, sends all the iron through,
+1540. With his lance's full length flings him dead in the field.
+1541. Then he cries out: «These are good to destroy!
+1542. Strike, pagans, to break the press!»
+1543. The Franks say: «God, what grief for so brave a man!» AOI.
+
+---
+
+## Laisse CXVII (lines 1544–1560)
+
+**Original**
+1544. Li quens Rollant en apelet Oliver: [appeler]
+1545. «Sire cumpainz, ja est morz Engeler; [être, mourir]
+1546. Nus n'avium plus vaillant chevaler.» [avoir]
+1547. Respont li quens: «Deus le me doinst venger!» [répondre, donner, venger]
+1548. Sun cheval brochet des esperuns d'or mier, [brocher (éperonner)]
+1549. Tient Halteclere, sanglent en est l'acer, [tenir, être]
+1550. Par grant vertut vait ferir le paien. [aller, ferir (frapper)]
+1551. Brandist sun colp e li Sarrazins chiet; [brandir, cheoir (tomber)]
+1552. L'anme de lui en portent aversers. [porter]
+1553. Puis ad ocis le duc Alphaïen; [avoir, ocire (tuer)]
+1554. Escababi i ad le chef trenchet; [avoir, trancher]
+1555. .VII. Arrabiz i ad deschevalcet: [avoir, deschevalcier (désarçonner)]
+1556. Cil ne sunt proz ja mais pur guerreier. [être, guerroyer]
+1557. Ço dist Rollant: «Mis cumpainz est irez! [dire, être]
+1558. Encuntre mei fait asez a preiser. [faire, priser]
+1559. Pur itels colps nos ad Charles plus cher.» [avoir]
+1560. A voiz escriet: «Ferez i, chevaler!» AOI. [escrier (s'écrier), ferir (frapper)]
+
+**Translation**
+1544. Count Roland calls out to Oliver:
+1545. «Sir companion, Engelier is now dead;
+1546. We had no more valiant knight.»
+1547. The count replies: «May God grant me to avenge him!»
+1548. He spurs his horse with spurs of pure gold,
+1549. Grasps Halteclere, its steel is bloody,
+1550. With great strength he goes to strike the pagan.
+1551. He brandishes his blow and the Saracen falls;
+1552. Demons carry off his soul.
+1553. Then he has slain Duke Alphaïen;
+1554. He has cut off the head of Escababi;
+1555. He has unhorsed seven Arabs:
+1556. They will never again be of use for waging war.
+1557. Roland says: «My companion is enraged!
+1558. Beside me he does very well, worthy of praise.
+1559. For such blows Charles holds us the dearer.»
+1560. In a loud voice he cries out: «Strike here, knights!» AOI.
+
+---
+
+## Laisse CXVIII (lines 1561–1578)
+
+**Original**
+1561. D'altre part est un paien, Valdabrun: [être]
+1562. Celoi levat le rei Marsiliun, [lever]
+1563. Sire est par mer de .IIII.C. drodmunz; [être]
+1564. N'i ad eschipre quis cleim se par loi nun. [avoir, clamer (réclamer)]
+1565. Jerusalem prist ja par traïsun, [prendre]
+1566. Si violat le temple Salomon, [violer]
+1567. Le patriarche ocist devant les funz. [ocire (tuer)]
+1568. Cil ot fiance del cunte Guenelon: [avoir]
+1569. Il li dunat s'espee e mil manguns. [donner]
+1570. Siet el cheval qu'il cleimet Gramimund, [seoir (être assis), clamer (nommer)]
+1571. Plus est isnels que nen est uns falcuns. [être]
+1572. Brochet le bien des aguz esperuns, [brocher (éperonner)]
+1573. Si vait ferir li riche duc Sansun, [aller, ferir (frapper)]
+1574. L'escut li freint e l'osberc li derumpt, [fraindre (briser), derompre (rompre)]
+1575. El cors li met les pans del gunfanun, [mettre]
+1576. Pleine sa hanste l'abat mort des arçuns: [abattre]
+1577. «Ferez paien, car tres ben les veintrum!» [ferir (frapper), vaincre]
+1578. Dient Franceis: «Deus quel doel de baron.!» AOI. [dire]
+
+**Translation**
+1561. On the other side is a pagan, Valdabrun:
+1562. He stood godfather to King Marsile,
+1563. He is lord by sea of four hundred dromons;
+1564. There is no sailor who does not claim him as his rightful master.
+1565. He took Jerusalem once by treason,
+1566. And violated the temple of Solomon,
+1567. He slew the patriarch before the baptismal fonts.
+1568. This man had the pledge of Count Ganelon:
+1569. He gave him his sword and a thousand mangons.
+1570. He sits on the horse he calls Gramimund,
+1571. Swifter is it than a falcon is.
+1572. He spurs it well with sharp spurs,
+1573. And goes to strike the mighty duke Samson,
+1574. He shatters his shield and tears apart his hauberk,
+1575. Into his body he drives the folds of the gonfanon,
+1576. With his lance at full length he strikes him dead from the saddle-bows:
+1577. «Strike, pagans, for we shall vanquish them right well!»
+1578. The Franks say: «God, what grief for such a baron!» AOI.
+
+---
+
+## Laisse CXIX (lines 1579–1591)
+
+**Original**
+1579. Li quens Rollant, quant il veit Sansun mort, [voir, mourir]
+1580. Poez saveir que mult grant doel en out. [pouvoir, savoir, avoir]
+1581. Sun ceval brochet, si li curt ad esforz; [brocher (éperonner), courir]
+1582. Tient Durendal, qui plus valt que fin ór. [tenir, valoir]
+1583. Vait le ferir li bers, quanque il pout, [aller, ferir (frapper), pouvoir]
+1584. Desur sun elme, ki gemmet fut ad or:
+1585. Trenchet la teste e la bronie e le cors, [trancher]
+1586. La bone sele, ki est gemmet ad or,
+1587. E al cheval parfundement le dos;
+1588. Ambure ocit, ki quel blasme ne quil lot. [ocire (tuer), blâmer, louer]
+1589. Dient paien(t) [...]: «Cist colp nus est mult fort!» [dire, être]
+1590. Respont Rollant: «Ne pois amer les voz; [répondre, pouvoir, aimer]
+1591. Devers vos est li orguilz e li torz.» AOI. [être]
+
+**Translation**
+1579. Count Roland, when he sees Samson dead,
+1580. You may be sure that he felt very great grief at it.
+1581. He spurs his horse, and rushes at him with all his might;
+1582. He grasps Durendal, which is worth more than fine gold.
+1583. The baron goes to strike him with all his strength,
+1584. Upon his helmet, which was set with gems in gold:
+1585. He slices through the head and the hauberk and the body,
+1586. The good saddle, which is set with gems in gold,
+1587. And deep into the horse's back;
+1588. He kills them both, let who will blame or praise it.
+1589. The pagans say: «This blow is very hard on us!»
+1590. Roland replies: «I cannot love your people;
+1591. On your side is the arrogance and the wrong.» AOI.
+
+---
+
+## Laisse CXX (lines 1592–1603)
+
+**Original**
+1592. D'Affrike i ad un Affrican venut, [avoir, venir]
+1593. Ço est Malquiant, le filz al rei Malcud. [être]
+1594. Si guarnement sunt tut a or batud; [être, battre]
+1595. Cuntre le ciel sur tuz les altres luist. [luire]
+1596. Siet el ceval qu'il cleimet Salt Perdut: [seoir (être assis), clamer (nommer)]
+1597. Beste nen est ki poisset curre a lui. [être, pouvoir, courir]
+1598. Il vait ferir Anseïs en l'escut: [aller, ferir (frapper)]
+1599. Tut li trenchat le vermeill e l'azur; [trancher]
+1600. De sun osberc li ad les pans rumput, [avoir, rompre]
+1601. El cors li met e le fer e le fust; [mettre]
+1602. Morz est li quens, de sun tens n'i ad plus. [être, mourir, avoir]
+1603. Dient Franceis: «Barun, tant mare fus!» [dire, être]
+
+**Translation**
+1592. From Africa there has come an African,
+1593. This is Malquiant, the son of King Malcud.
+1594. His trappings are all beaten with gold;
+1595. Against the sky he shines above all the others.
+1596. He sits on the horse that he calls Salt Perdut:
+1597. There is no beast that can run as fast as it.
+1598. He goes to strike Anseïs on the shield:
+1599. He cuts clean through the vermilion and the azure;
+1600. From his hauberk he has torn away the skirts,
+1601. He thrusts into his body both the iron and the shaft;
+1602. The count is dead, of his time there is no more.
+1603. The Franks say: «Baron, how ill-fated you were!»
+
+---
+
+## Laisse CXXI (lines 1604–1611)
+
+**Original**
+1604. Par le camp vait Turpin li arcevesque; [aller]
+1605. Tel coronet ne chantat unches messe [chanter]
+1606. Ki de sun cors feïst [...] tantes proecces. [faire]
+1607. Dist al paien: «Deus tut mal te tramette! [dire, tramettre (transmettre)]
+1608. Tel ad ocis dunt al coer me regrette.» [avoir, ocire (tuer), regretter]
+1609. Sun bon ceval i ad fait esdemetre, [avoir, faire, esdemetre (s'élancer)]
+1610. Si l'ad ferut sur l'escut de Tulette, [avoir, ferir (frapper)]
+1611. Que mort l'abat desur le herbe verte. [abattre]
+
+**Translation**
+1604. Through the field goes Turpin the archbishop;
+1605. Never did such a tonsured man chant a mass
+1606. Who with his body performed such feats of valor.
+1607. He said to the pagan: «May God send you every evil!
+1608. You have slain one for whom my heart grieves.»
+1609. He spurred his good horse to leap forward,
+1610. And struck him upon the shield of Toledo,
+1611. So that he casts him dead upon the green grass.
+
+---
+
+## Laisse CXXII (lines 1612–1627)
+
+**Original**
+1612. De l'altre part est un paien, Grandonies, [être]
+1613. Filz Capuel, le rei de Capadoce(neez).
+1614. Siet el cheval que il cleimet Marmorie, [seoir (être assis), clamer (nommer)]
+1615. Plus est isnels que n'est oisel ki volet; [être, voler]
+1616. Laschet la resne, des esperuns le brochet, [lâcher, brocher (éperonner)]
+1617. Si vait ferir Gerin par sa grant force. [aller, ferir (frapper)]
+1618. L'escut vermeill li freint, de col li portet; [fraindre (briser), porter]
+1619. Aprof li ad sa bronie desclose, [avoir, desclore (ouvrir)]
+1620. El cors li met tute l'enseingne bloie, [mettre]
+1621. Que mort l'abat en une halte roche. [abattre]
+1622. Sun cumpaignun Gerers ocit uncore [ocire (tuer)]
+1623. E Berenger e Guiun de Seint Antonie;
+1624. Puis vait ferir un riche duc Austorje, [aller, ferir (frapper)]
+1625. Ki tint Valeri e envers sur le Rosne. [tenir]
+1626. Il l'abat mort; paien en unt grant joie. [abattre, avoir]
+1627. Dient Franceis: «Mult decheent li nostre!» [dire, decheoir (déchoir)]
+
+**Translation**
+1612. On the other side is a pagan, Grandonie,
+1613. Son of Capuel, the king of Cappadocia.
+1614. He sits on the horse that he calls Marmorie,
+1615. Swifter is it than a bird that flies;
+1616. He slackens the rein, spurs it with his spurs,
+1617. And goes to strike Gerin with his great force.
+1618. He shatters his vermilion shield, tears it from his neck;
+1619. Then he has ripped open his hauberk,
+1620. Drives into his body all the blue ensign,
+1621. So that he strikes him dead upon a high rock.
+1622. His companion Gerier he slays as well
+1623. And Berenger and Guy of Saint Antoine;
+1624. Then he goes to strike a rich duke, Austorge,
+1625. Who held Valence and the lands along the Rhône.
+1626. He strikes him dead; the pagans have great joy of it.
+1627. The Franks say: «Greatly do our men decline!»
+
+---
+
+## Laisse CXXIII (lines 1628–1634)
+
+**Original**
+1628. [L]i quens Rollant tint s'espee sanglente. [tenir]
+1629. Ben ad oït que Franceis se dementent; [avoir, oïr (entendre), se démenter (se lamenter)]
+1630. Si grant doel ad que par mi quiet fendre; [avoir, cuidier (croire), fendre]
+1631. Dist al paien: «Deus tut mal te consente! [dire, consentir]
+1632. Tel as ocis que mult cher te quid vendre!» [ocire (tuer), cuidier (croire), vendre]
+1633. Sun ceval brochet, ki oït del cuntence. [brocher (éperonner), oïr (entendre)]
+1634. Ki quel cumpert, venuz en sunt ensemble. [comperer (payer cher), être, venir]
+
+**Translation**
+1628. Count Roland held his bloodied sword.
+1629. He has clearly heard that the Franks are lamenting;
+1630. He has such great grief that he thinks he will split apart;
+1631. He said to the pagan: «May God grant you every evil!
+1632. You have killed one such that I think I will sell him to you very dear!»
+1633. He spurs his horse, which heard the dispute.
+1634. Whoever pays for it, they have come together.
+
+---
+
+## Laisse CXXIV (lines 1635–1651)
+
+**Original**
+1635. Grandonie fut e prozdom e vaillant [être]
+1636. E vertuus e vassal cumbatant. [combattre]
+1637. Enmi sa veie ad encuntret Rollant. [avoir, encontrer (rencontrer)]
+1638. Enceis nel vit, sil recunut veirement [voir, reconoistre (reconnaître)]
+1639. Al fier visage e al cors qu'il out gent [avoir]
+1640. E al reguart e al contenement:
+1641. Ne poet muer qu'il ne s'en espoent, [pouvoir, muer (s'empêcher), espoenter (s'épouvanter)]
+1642. Fuïr s'en voel, mais ne li valt nient: [fuir, vouloir, valoir]
+1643. Li quens le fiert tant vertuusement [ferir (frapper)]
+1644. Tresqu'al nasel tut le elme li fent, [fendre]
+1645. Trenchet le nes e la buche e les denz, [trancher]
+1646. Trestut le cors e l'osberc jazerenc
+1647. De l'oree sele (se)[les] dous alves d'argent
+1648. E al ceval le dos parfundement;
+1649. Ambure ocist seinz nul recoevrement, [ocire (tuer)]
+1650. E cil d'Espaigne s'en cleiment tuit dolent. [clamer (se déclarer)]
+1651. Dient Franceis: «Ben fiert nostre guarent!» [dire, ferir (frapper)]
+
+**Translation**
+1635. Grandonie was a worthy man and valiant
+1636. And mighty and a battling vassal.
+1637. In the middle of his path he encountered Roland.
+1638. Never before had he seen him, yet he recognized him truly
+1639. By his fierce face and his noble body
+1640. And by his bearing and his demeanor:
+1641. He cannot help but be terrified by it,
+1642. He wishes to flee from it, but it avails him nothing:
+1643. The count strikes him so mightily
+1644. That he splits his whole helmet down to the nasal,
+1645. Cuts through the nose and the mouth and the teeth,
+1646. The whole body and the hauberk of Jazerant mail
+1647. And the two silver flaps of the gilded saddle
+1648. And deep into the horse's back;
+1649. He slew both without any recovery,
+1650. And those of Spain lament over it, all grieving.
+1651. The Franks say: «Well does our protector strike!»
+
+---
+
+## Laisse CXXV (lines 1652–1659)
+
+**Original**
+1652. La bataille est e merveillose e grant. [être]
+1653. Franceis i ferent des espiez brunisant. [ferir (frapper)]
+1654. La veïssez si grant dulor de gent, [voir]
+1655. Tant hume mort e nasfret e sanglent!
+1656. L'un gist sur l'altre e envers e adenz. [gésir (être couché)]
+1657. Li Sarrazin nel poent susfrir tant: [pouvoir, souffrir]
+1658. Voelent u nun, si guerpissent le camp. [vouloir, guerpir (abandonner)]
+1659. Par vive force les encacerent Franc. AOI. [enchacier (pourchasser)]
+
+**Translation**
+1652. The battle is both marvelous and great.
+1653. The French strike there with their burnished spears.
+1654. There you would have seen such great suffering of people,
+1655. So many men dead and wounded and bloody!
+1656. One lies upon another, both on his back and face down.
+1657. The Saracens cannot endure it so long:
+1658. Willing or not, they abandon the field.
+1659. By living force the Franks pursue them. AOI.
+
+---
+
+## Laisse CXXVI (lines 1660–1668)
+
+**Original**
+1660. La (la) b[at]aille est m[erv]eilluse e hastive. [être]
+1661. Franceis i ferent par vigur e par ire, [ferir (frapper)]
+1662. Tren[chen]t cez poinz, cez costez, cez eschines, [trancher]
+1663. Cez vestemenz entresque as chars vives.
+1664. Sur l'erbe verte li cler sancs s'en afilet. [afiler (couler)]
+<!-- lacuna: narrative gap, no Bédier line here -->
+1665. «Tere Major, Mahummet te maldie! [maudire]
+1666. Sur tute gent est la tue hardie.» [être]
+1667. Cel nen i ad ki ne criet: «Marsilie! [avoir, crier]
+1668. Cevalche, rei! Bosuign avum d'aïe!» [chevaucher, avoir]
+
+**Translation**
+1660. The battle is marvelous and swift.
+1661. The French strike there with vigor and with wrath,
+1662. They cut through these fists, these flanks, these spines,
+1663. These garments down to the living flesh.
+1664. On the green grass the bright blood flows away.
+1665. «Great Land, may Mahomet curse you!
+1666. Above every people your boldness stands.»
+1667. There is not one who does not cry out: «Marsile!
+1668. Ride, king! We have need of aid!»
+
+---
+
+## Laisse CXXVII (lines 1669–1688)
+
+**Original**
+1669. Li quens Rollant apelet Oliver: [appeler]
+1670. «Sire cumpaign, sel volez otrier, [vouloir, otreier (octroyer)]
+1671. Li arcevesque est mult bon chevaler, [être]
+1672. Nen ad meillor en tere ne suz cel; [avoir]
+1673. Ben set ferir e de lance e d'espiet.» [savoir, ferir (frapper)]
+1674. Respunt li quens: «Kar li aluns aider!» [répondre, aller, aider]
+1675. A icest mot l'unt Francs recumencet. [avoir, recommencer]
+1676. Dur sunt li colps e li caples est grefs; [être]
+1677. Mu(n)lt grant dulor i ad de chrestiens. [avoir]
+1678. Ki puis veïst Rollant e Oliver [voir]
+1679. De lur espees e ferir e capler! [ferir (frapper), capler (frapper)]
+1680. Li arcevesque i fiert de sun espiet, [ferir (frapper)]
+1681. Cels qu'il unt mort, ben les poet hom preiser; [avoir, mourir, pouvoir, priser]
+1682. Il est escrit es cartres e es brefs, [être, écrire]
+1683. Ço dit la Geste, plus de .IIII. milliers. [dire]
+1684. As quatre [es]turs lor est avenut ben; [être, avenir (échoir)]
+1685. Li quint apres lor est pesant e gref. [être]
+1686. Tuz sunt ocis cist Franceis chevalers, [être, ocire (tuer)]
+1687. Ne mes seisante, que Deus i ad esparniez: [avoir, espargnier (épargner)]
+1688. Einz que il moergent, se vendrunt mult cher. [mourir, vendre]
+
+**Translation**
+1669. Count Roland calls out to Oliver:
+1670. «Lord companion, if you will grant it,
+1671. The archbishop is a very good knight,
+1672. There is none better on earth nor under heaven;
+1673. He well knows how to strike with both lance and spear.»
+1674. The count replies: «Then let us go help him!»
+1675. At this word the Franks renewed the fight.
+1676. Hard are the blows and the fighting is grievous;
+1677. Very great suffering there is among the Christians.
+1678. Whoever then might have seen Roland and Oliver
+1679. striking and hewing with their swords!
+1680. The archbishop strikes there with his spear,
+1681. those whom they have slain, one can well count them;
+1682. It is written in the charters and in the records,
+1683. So says the Geste, more than four thousand.
+1684. In the four assaults it went well for them;
+1685. The fifth, after, is heavy and grievous for them.
+1686. All are slain, these French knights,
+1687. all but sixty, whom God has spared:
+1688. Before they die, they will sell themselves very dear.
+
+---
+
+## Laisse CXXVIII (lines 1689–1699)
+
+**Original**
+1689. Li quens Rollant des soens i veit grant perte; AOI. [voir]
+1690. Sun cumpaignun Oliver en apelet: [appeler]
+1691. «Bel sire, chers cumpainz, pur Deu, que vos enhaitet? [enhaitier (encourager)]
+1692. Tanz bons vassals veez gesir par tere! [voir, gésir (être couché)]
+1693. Pleindre poüms France dulce, la bele: [plaindre, pouvoir]
+1694. De tels barons cum or remeint deserte! [remaindre (rester)]
+1695. E! reis, amis, que vos ici nen estes? [être]
+1696. Oliver, frere, cumment le purrum nus faire? [pouvoir, faire]
+1697. Cum faitement li manderum nuveles?» [mander]
+1698. Dist Oliver: «Jo nel sai cument quere. [dire, savoir, querre (chercher)]
+1699. Mielz voeill murir que hunte nus seit retraite.» AOI. [vouloir, mourir, être, retraire (rapporter)]
+
+**Translation**
+1689. Count Roland sees great loss among his own men; AOI.
+1690. He calls upon his companion Oliver:
+1691. «Fair lord, dear comrade, in God's name, what cheers you?
+1692. So many good vassals you see lying upon the ground!
+1693. We may pity France the sweet, the fair:
+1694. Of such barons how she now remains bereft!
+1695. Ah! king, friend, why are you not here?
+1696. Oliver, brother, how shall we manage it?
+1697. In what way shall we send him news?»
+1698. Said Oliver: «I know not how to seek it.
+1699. I would rather die than that shame be reported of us.» AOI.
+
+---
+
+## Laisse CXXIX (lines 1700–1710)
+
+**Original**
+1700. Ço dist Rollant: «Cornerai l'olifant, [dire, corner]
+1701. Si l'orrat Carles, ki est as porz passant. [oïr (entendre), être, passer]
+1702. Jo vos plevis ja returnerunt Franc.» [plevir (garantir), retourner]
+1703. Dist Oliver: «Vergoigne sereit grant [dire, être]
+1704. E reprover a trestuz voz parenz;
+1705. Iceste hunte dureit al lur vivant! [durer]
+1706. Quant jel vos dis, n'en feïstes nient; [dire, faire]
+1707. Mais nel ferez par le men loement. [faire]
+1708. Se vos cornez, n'ert mie hardement. [corner, être]
+1709. Ja avez vos ambsdous les braz sanglanz!» [avoir]
+1710. Respont li quens: «Colps i ai fait mult genz!» AOI. [répondre, avoir, faire]
+
+**Translation**
+1700. Roland said: «I will sound the olifant,
+1701. So Charles, who is passing through the passes, will hear it.
+1702. I pledge to you the Franks will return at once.»
+1703. Oliver said: «It would be a great shame
+1704. And a reproach to all your kinsmen;
+1705. This disgrace would last all their lives!
+1706. When I told you this, you did nothing about it;
+1707. But you will not do it with my approval.
+1708. If you sound the horn, it will be no act of valor.
+1709. Already you have both your arms bloodied!»
+1710. The count replied: «I have struck blows most fine!» AOI.
+
+---
+
+## Laisse CXXX (lines 1711–1719)
+
+**Original**
+1711. Ço dit Rollant: «Forz est nostre bataille; [dire, être]
+1712. Jo cornerai, si l'orrat li reis Karles.» [corner, oïr (entendre)]
+1713. Dist Oliver: «Ne sereit vasselage! [dire, être]
+1714. Quant jel vos dis, cumpainz, vos ne deignastes. [dire, daigner]
+1715. Si fust li reis, n'i oüsum damage. [être, avoir]
+1716. Cil ki la sunt n'en deivent aveir blasme.» [être, devoir, avoir]
+1717. Dist Oliver: «Par ceste meie barbe, [dire]
+1718. Se puis veeir ma gente sorur Alde, [pouvoir, voir]
+1719. Ne jerrei(e)z ja mais entre sa brace!» AOI. [gesir (coucher)]
+
+**Translation**
+1711. Roland says: «Our battle is fierce;
+1712. I will sound the horn, and King Charles will hear it.»
+1713. Oliver said: «That would be no act of valor!
+1714. When I told you of it, comrade, you did not deign to.
+1715. Had the king been here, we would have suffered no harm.
+1716. Those who are over there ought not bear blame for it.»
+1717. Oliver said: «By this beard of mine,
+1718. If I can see my fair sister Alde again,
+1719. You shall never lie in her arms!» AOI.
+
+---
+
+## Laisse CXXXI (lines 1720–1734)
+
+**Original**
+1720. Ço dist Rollant: «Por quei me portez ire?» [dire, porter]
+1721. (E cil) E il respont: «Cumpainz, vos le feïstes, [répondre, faire]
+1722. Kar vasselage par sens nen est folie; [être]
+1723. Mielz valt mesure que ne fait estultie. [valoir, faire]
+1724. Franceis sunt morz par vostre legerie. [être, mourir]
+1725. Jamais Karlon de nus n'avrat servise. [avoir]
+1726. Sem(e) creïsez, venuz i fust mi sire; [croire, venir, être]
+1727. Ceste bataille oüsum faite u prise; [avoir, faire, prendre]
+1728. U pris ú mort i fust li reis Marsilie. [prendre, mourir, être]
+1729. Vostre proecce, Rollant, mar la ve[ï]mes! [voir]
+1730. Karles li Magnes de nos n'avrat aïe. [avoir]
+1731. N'ert mais tel home des qu'a Deu juïse. [être]
+1732. Vos i murrez e France en ert (...) huníe. [mourir, être]
+1733. Oi nus defalt la leial cumpaignie: [defaillir (manquer)]
+1734. Einz le vesp(e)re mult ert gref la departie.» AOI. [être]
+
+**Translation**
+1720. Roland said this: «Why do you bear anger toward me?»
+1721. And he answers: «Companion, you did it,
+1722. For bravery with good sense is not folly;
+1723. Moderation is worth more than recklessness.
+1724. The French are dead through your rashness.
+1725. Never again will Charles have service from us.
+1726. Had you trusted me, my lord would have come here;
+1727. This battle we would have fought and won;
+1728. Captured or killed would have been King Marsile.
+1729. Your prowess, Roland, in an evil hour did we see it!
+1730. Charlemagne will have no help from us.
+1731. There will be no such man until God's Judgment.
+1732. You will die here and France will be shamed by it.
+1733. Today the loyal fellowship fails us:
+1734. Before evening the parting will be most grievous.» AOI.
+
+---
+
+## Laisse CXXXII (lines 1735–1750)
+
+**Original**
+1735. Li arceves[ques] les ót cuntrarier, [oïr (entendre), cuntralier (se quereller)]
+1736. Le cheval brochet des esperuns d'or mer, [brocher (éperonner)]
+1737. Vint tresqu'a els, sis prist a castier: [venir, prendre, castier (réprimander)]
+1738. «Sire Rollant, e vos, sire Oliver,
+1739. Pur Deu vos pri, ne vos cuntraliez! [prier, cuntralier (se quereller)]
+1740. Ja li corners ne nos avreit mester, [avoir]
+1741. Mais nepurquant si est il asez melz: [être]
+1742. Venget li reis, si nus purrat venger; [venir, pouvoir, venger]
+1743. Ja cil d'Espaigne ne s'en deivent turner liez. [devoir, tourner]
+1744. Nostre Franceis i descendrunt a pied, [descendre]
+1745. Truverunt nos e morz e detrenchez, [trouver]
+1746. Leverunt nos en bieres sur sumers, [lever]
+1747. Si nus plurrunt de doel e de pitet, [pleurer]
+1748. Enfuerunt [nos] en aitres de musters; [enfouir]
+1749. N'en mangerunt ne lu ne porc ne chen.» [manger]
+1750. Respunt Rollant: «Sire, mult dites bien.» AOI. [répondre, dire]
+
+**Translation**
+1735. The archbishop heard them quarreling,
+1736. He spurs his horse with the spurs of pure gold,
+1737. Came right up to them, and began to rebuke them:
+1738. «Lord Roland, and you, Lord Oliver,
+1739. For God's sake I pray you, do not quarrel!
+1740. The sounding of the horn would now be of no use to us,
+1741. But nevertheless it is much better so:
+1742. Let the king come, for he will be able to avenge us;
+1743. Those of Spain shall not return from here rejoicing.
+1744. Our Frenchmen will dismount here on foot,
+1745. They will find us both dead and cut to pieces,
+1746. They will lift us onto biers on pack-horses,
+1747. And will weep for us with grief and pity,
+1748. They will bury us in the churchyards of minsters;
+1749. Neither wolf nor pig nor dog shall eat of us.»
+1750. Roland answers: «Lord, you speak very well.» AOI.
+
+---
+
+## Laisse CXXXIII (lines 1751–1758)
+
+**Original**
+1751. Rollant ad mis l'olifan a sa buche, [avoir, mettre]
+1752. Empeint le ben, par grant vertut le sunet. [empeindre (pousser), sonner]
+1753. Halt sunt li pui e la voiz est mult lunge, [être]
+1754. Granz .XXX. liwes l'oïrent il respundre. [oïr (entendre), répondre]
+1755. Karles l'oït e ses cumpaignes tutes. [oïr (entendre)]
+1756. Ço dit li reis: «Bataille funt nostre hume!» [dire, faire]
+1757. E Guenelun li respundit encuntre: [répondre]
+1758. «S'altre le desist, ja semblast grant mençunge!» AOI. [dire, sembler]
+
+**Translation**
+1751. Roland has put the oliphant to his mouth,
+1752. He grips it well, sounds it with great force.
+1753. High are the peaks and the sound carries very far,
+1754. They heard it echo back a full thirty leagues.
+1755. Charles heard it, and all his companions.
+1756. The king says: «Our men are giving battle!»
+1757. And Ganelon answered him in return:
+1758. «Had another said it, it would seem a great lie!» AOI.
+
+---
+
+## Laisse CXXXIV (lines 1759–1782)
+
+**Original**
+1759. Li quens Rollant, par peine e par ahans,
+1760. Par grant dulor sunet sun olifan. [sonner]
+1761. Par mi la buche en salt fors li cler sancs. [saillir (jaillir)]
+1762. De sun cervel le temple en est rumpant. [rompre]
+1763. Del corn qu'il tient l'oiïe en est mult grant: [tenir]
+1764. Karles l'entent, ki est as porz passant. [oïr (entendre), être]
+1765. Naimes li duc l'oïd, si l'escultent li Franc. [oïr (entendre), écouter]
+1766. Ce dist li reis: «Jo oi le corn Rollant! [dire, oïr (entendre)]
+1767. Unc nel sunast se ne fust (cu)cumbatant.» [sonner, être, combattre]
+1768. Guenes respunt: «De bataille est il nient! [répondre, être]
+1769. Ja estes veilz e fluriz e blancs; [être]
+1770. Par tels paroles vus resemblez enfant. [ressembler]
+1771. Asez savez le grant orgoill Rollant; [savoir]
+1772. Ço est merveille que Deus le soefret tant. [être, souffrir]
+1773. Ja prist il Noples seinz le vostre comant; [prendre]
+1774. Fors s'en eissirent li Sarrazins dedenz, [issir (sortir)]
+1775. Sis cumbatirent al bon vassal Rollant; [combattre]
+<!-- lacuna: narrative gap, no Bédier line here -->
+1776. Puis od les ewes lavat les prez del sanc, [laver]
+1777. Pur cel le fist ne fust a[pa]rissant. [faire, être]
+1778. Pur un sul levre vat tute jur cornant, [aller, corner]
+1779. Devant ses pers vait il ore gabant. [aller, gaber (railler)]
+1780. Suz cel n'ad gent ki [l']osast (re)querre en champ. [oser, querre (chercher)]
+1781. Car chevalcez! Pur qu'alez arestant? [chevaucher, aller, arester (s'arrêter)]
+1782. Tere Major mult est loinz ça devant.» AOI. [être]
+
+**Translation**
+1759. Count Roland, with pain and with travail,
+1760. With great anguish sounds his oliphant.
+1761. Out through his mouth the bright blood leaps forth.
+1762. The temple of his brain is bursting.
+1763. Of the horn he holds the sound is very great:
+1764. Charles hears it, who is passing through the gorges.
+1765. Naimes the duke heard it, and the Franks listen to it.
+1766. The king says: «I hear Roland's horn!
+1767. He would never sound it unless he were fighting.»
+1768. Ganelon answers: «There is no battle at all!
+1769. You are already old and white-haired and hoary;
+1770. By such words you seem like a child.
+1771. You know well Roland's great pride;
+1772. It is a marvel that God suffers him so long.
+1773. He once took Noples without your command;
+1774. The Saracens within sallied forth,
+1775. And they fought the good vassal Roland;
+1776. Then with the waters he washed the meadows of the blood,
+1777. So that it should not be apparent.
+1778. For a single hare he goes blowing his horn all day,
+1779. Before his peers he goes now boasting.
+1780. Under heaven there is no man who would dare seek him out in the field.
+1781. So ride on! Why do you keep stopping?
+1782. The Great Land is very far on ahead.» AOI.
+
+---
+
+## Laisse CXXXV (lines 1783–1793)
+
+**Original**
+1783. Li quens Rollant ad la buche sanglente. [avoir]
+1784. De sun cervel rumput en est li temples. [rompre, être]
+1785. L'olifan sunet a dulor e a peine. [sonner]
+1786. Karles l'oït e ses Franceis l'entendent, [oïr (entendre), entendre]
+1787. Ço dist li reis: «cCel corn ad lunge aleine!» [dire, avoir]
+1788. Respont dux Neimes: «Baron i fait la p[e]ine! [répondre, faire]
+1789. Bataille i ad, par le men escientre. [avoir]
+1790. Cil l'at traït ki vos en roevet feindre. [avoir, trahir, rover (demander), feindre]
+1791. Adubez vos, si criez vostre enseigne, [aduber (s'équiper), crier]
+1792. Si sucurez vostre maisnee gente: [secourir]
+1793. Asez oez que Rollant se dementet!» [oïr (entendre), se démenter (se lamenter)]
+
+**Translation**
+1783. Count Roland has a bloody mouth.
+1784. The temple of his brain is burst.
+1785. He sounds the oliphant in sorrow and in pain.
+1786. Charles hears it and his Franks hear it,
+1787. The king said: «That horn has long breath!»
+1788. Duke Naimes answers: «A baron takes the trouble of it!
+1789. There is a battle, by my knowledge.
+1790. He who asks you to feign indifference has betrayed him.
+1791. Arm yourselves, cry out your war-cry,
+1792. And succor your noble household:
+1793. You hear well enough that Roland laments!»
+
+---
+
+## Laisse CXXXVI (lines 1794–1804)
+
+**Original**
+1794. Li empereres ad fait suner ses corns. [avoir, faire, sonner]
+1795. Franceis descendent, si adubent lor cors [descendre, aduber (équiper)]
+1796. D'osbercs e de helmes e d'espees a or.
+1797. Escuz unt genz e espiez granz e forz, [avoir]
+1798. E gunfanuns blancs e vermeilz e blois.
+1799. Es destrers muntent tuit li barun de l'ost, [monter]
+1800. Brochent ad ait tant cum durent li port. [brocher (éperonner), durer]
+1801. N'i ad celoi (a celoi) a l'altre ne parolt: [avoir, parler]
+1802. «Se veïssum Rollant einz qu'il fust mortz, [voir, être, mourir]
+1803. Ensembl'od lui i durriums granz colps.» [donner]
+1804. De ço qui calt? car demuret i unt trop. [chaloir (importer), avoir, demeurer]
+
+**Translation**
+1794. The emperor has had his horns sounded.
+1795. The French dismount, and they equip their bodies
+1796. With hauberks and helmets and swords of gold.
+1797. They have fine shields and great strong spears,
+1798. And gonfalons white and vermilion and blue.
+1799. Onto their war-horses mount all the barons of the host,
+1800. They spur eagerly as far as the passes extend.
+1801. There is not one of them but speaks to the other:
+1802. «If only we might see Roland before he is dead,
+1803. Together with him we would deal great blows.»
+1804. What does it matter? For they have tarried too long.
+
+---
+
+## Laisse CXXXVII (lines 1805–1828)
+
+**Original**
+1805. Esclargiz est li vespres e li jurz. [être, esclargir (s'éclaircir)]
+1806. Cuntre le soleil reluisent cil adub, [reluire]
+1807. Osbercs e helmes i getent grant flambur, [jeter]
+1808. E cil escuz, ki ben sunt peinz a flurs, [être, peindre]
+1809. E cil espiez(z), cil oret gunfanun.
+1810. Li empereres cevalchet par irur [chevaucher]
+1811. E li Franceis dolenz et cur[uçus](ius);
+1812. N'i ad celoi ki durement ne plurt, [avoir, pleurer]
+1813. E de Rollant sunt en grant poür. [être]
+1814. Li reis fait prendre le cunte Guenelun, [faire, prendre]
+1815. Sil cumandat as cous de sa maisun. [commander]
+1816. Tut li plus maistre en apelet, Besgun. [appeler]
+1817. «Ben le me guarde, si cume tel felon! [garder]
+1818. De ma maisnee ad faite traïsun.» [avoir, faire]
+1819. Cil le receit, si met .C. cumpaignons [recevoir, mettre]
+1820. De la quisine, des mielz e des pejurs.
+1821. Icil li peilent la barbe e les gernuns; [peler (arracher)]
+1822. (Morz est Turpin le guerreier Charlun) [être, mourir]
+1823. Cascun le fiert .IIII. colps de sun puign; [ferir (frapper)]
+1824. Ben le batirent a fuz e a bastuns; [battre]
+1825. E si li metent el col un caeignun, [mettre]
+1826. Si l'encaeinent altresi cum un urs; [enchaîner]
+1827. Sur un sumer l'unt mis a deshonor. [avoir, mettre]
+1828. Tant le guardent quel rendent a Charlun. [garder, rendre]
+
+**Translation**
+1805. The evening and the day grow bright.
+1806. Against the sun those pieces of armor gleam,
+1807. Hauberks and helmets cast forth a great blaze of light,
+1808. And those shields, which are finely painted with flowers,
+1809. And those spears, those gilded gonfalons.
+1810. The emperor rides on in wrath
+1811. And the French, grieving and angry;
+1812. There is none among them who does not weep bitterly,
+1813. And for Roland they are in great fear.
+1814. The king has Count Ganelon seized,
+1815. And handed him over to the cooks of his household.
+1816. He calls upon the chief of them all, Besgun.
+1817. «Guard him well for me, as befits such a felon!
+1818. He has committed treason against my house.»
+1819. The cook receives him, and sets a hundred companions
+1820. From the kitchen, of the best and of the worst.
+1821. These pluck out his beard and his mustaches;
+1822. (Turpin, the warrior of Charles, is dead)
+1823. Each strikes him four blows with his fist;
+1824. They beat him soundly with rods and with sticks;
+1825. And they put a chain around his neck,
+1826. And chain him up just like a bear;
+1827. On a pack-horse they have set him in dishonor.
+1828. They guard him until they hand him back to Charles.
+
+---
+
+## Laisse CXXXVIII (lines 1829–1840)
+
+**Original**
+1829. Halt sunt li pui e tenebrus e grant, AOI. [être]
+1830. Li val parfunt e les ewes curant. [courir]
+1831. Sunent cil graisle e derere e devant, [sonner]
+1832. E tuit rachatent encuntre l'olifant. [rachater (répondre par un écho)]
+1833. Li empereres chevalchet ireement, [chevaucher]
+1834. E li Franceis cur(i[...]us)uçus e dolent;
+1835. N'i ad celoi n'i plurt e se dement, [avoir, pleurer, se démenter (se lamenter)]
+1836. E p[ri]ent Deu qu'il guarisset Rollant [prier, garir (protéger)]
+1837. Josque il vengent el camp cumunement: [venir]
+1838. Ensembl'od lui i ferrunt veirement. [ferir (frapper)]
+1839. De ço qui calt? car ne lur valt nient. [chaloir (importer), valoir]
+1840. Demurent trop, n'i poedent estre a tens. AOI. [demeurer, pouvoir, être]
+
+**Translation**
+1829. High are the peaks and shadowy and great,
+1830. The valleys deep and the rivers swift-running.
+1831. Those trumpets sound, both in the rear and in the van,
+1832. And all of them answer back the call of the oliphant.
+1833. The emperor rides on in wrath,
+1834. And the Franks ride troubled and grieving;
+1835. There is not one of them who does not weep and lament,
+1836. And they pray to God that He keep Roland safe
+1837. Until they reach the field all together:
+1838. There at his side they will truly strike their blows.
+1839. But what use is it? It avails them nothing.
+1840. They tarry too long, they cannot be there in time. AOI.
+
+---
+
+## Laisse CXXXIX (lines 1841–1849)
+
+**Original**
+1841. Par grant irur chevalchet li reis Charles; [chevaucher]
+1842. Desur (...) sa brunie li gist sa blanche barbe. [gésir (être couché)]
+1843. Puignent ad ait tuit li barun de France; [poindre (éperonner)]
+1844. N'i ad icel ne demeint irance [avoir, demener (manifester)]
+1845. Que il ne sunt a Rollant le cataigne, [être]
+1846. Ki se cumbat as Sarrazins d'Espaigne; [combattre]
+1847. Si est blecet, ne quit que anme i remaigne. [être, blecier (blesser), cuidier (croire), remaindre (rester)]
+1848. Deus! quels seisante humes i ad en sa cumpaigne! [avoir]
+1849. Unches meillurs n'en out reis ne c[at]aignes. AOI. [avoir]
+
+**Translation**
+1841. In great wrath rides King Charles;
+1842. Over his hauberk hangs his white beard.
+1843. The barons of France spur on eagerly;
+1844. There is not one of them but feels grief
+1845. That they are not beside Roland the captain,
+1846. Who fights against the Saracens of Spain;
+1847. He is so wounded, I do not think a soul remains in him.
+1848. God! what sixty men he has in his company!
+1849. Never did king or captain have better. AOI.
+
+---
+
+## Laisse CXL (lines 1850–1867)
+
+**Original**
+1850. Rollant reguardet es munz e es lariz; [regarder]
+1851. De cels de France i veit tanz morz gesir! [voir, gésir (être couché)]
+1852. E il les pluret cum chevaler gentill: [pleurer]
+1853. «Seignors barons, de vos ait Deus mercit! [avoir]
+1854. Tutes voz anmes otreit il pareïs! [otreier (octroyer)]
+1855. En seintes flurs il les facet gesir! [faire, gésir (être couché)]
+1856. Meillors vassals de vos unkes ne vi. [voir]
+1857. Si lungement tuz tens m'avez servit, [avoir, servir]
+1858. A oes Carlon si granz païs cunquis! [conquérir]
+1859. Li empereres tant mare vos nurrit! [nourrir]
+1860. Tere de France mult estes dulz païs [être]
+1861. Oi desertet a tant rubostl exill. [déserter]
+1862. Barons Franceis, pur mei vos vei murir: [voir, mourir]
+1863. Jo ne vos pois tenser ne guarantir. [pouvoir, tenser (protéger), garantir]
+1864. Aït vos Deus, ki unkes ne mentit! [aïdier (aider), mentir]
+1865. Oliver, frere, vos ne dei jo faillir. [devoir, faillir]
+1866. De doel murra, se altre ne m'i ocit. [mourir, ocire (tuer)]
+1867. Sire cumpainz, alum i referir!» [aller, referir (frapper de nouveau)]
+
+**Translation**
+1850. Roland looks over the mountains and the slopes;
+1851. of those of France he sees so many lying dead!
+1852. And he weeps for them as a noble knight:
+1853. «Lord barons, may God have mercy on you!
+1854. May he grant paradise to all your souls!
+1855. May he make them lie among holy flowers!
+1856. Better vassals than you I never saw.
+1857. So long, through all time, you have served me,
+1858. and for Charles's use conquered such great lands!
+1859. The emperor raised you for such an ill fate!
+1860. Land of France, you are a most sweet country,
+1861. today laid waste by such cruel ruin.
+1862. French barons, for my sake I see you die:
+1863. I cannot protect you nor save you.
+1864. May God aid you, who never lied!
+1865. Oliver, brother, I must not fail you.
+1866. I shall die of grief, if nothing else slays me.
+1867. Lord companion, let us go strike again!»
+
+---
+
+## Laisse CXLI (lines 1868–1884)
+
+**Original**
+1868. Li quens Rollant el champ est repairet: [être, repairer (rentrer)]
+1869. Tient Durendal, cume vassal i fiert. [tenir, ferir (frapper)]
+1870. Faldrun de Pui i ad par mi trenchet, [avoir, trancher]
+1871. E .XXIIII. de tuz les melz preisez:
+1872. Jamais n'iert home plus se voeillet venger. [être, vouloir, venger]
+1873. Si cum li cerfs s'en vait devant les chiens, [s'en aller]
+1874. Devant Rollant si s'en fuient paiens. [s'enfuir]
+1875. Dist l'arcevesque: «Asez le faites ben! [dire, faire]
+1876. Itel valor deit aveir chevaler [devoir, avoir]
+1877. Ki armes portet e en bon cheval set; [porter, seoir (être assis)]
+1878. En bataille deit estre forz e fiers, [devoir, être]
+1879. U altrement ne valt .IIII. deners; [valoir]
+1880. Einz deit monie estre en un de cez mustiers, [devoir, être]
+1881. Si prierat tuz jurz por noz peccez.» [prier]
+1882. Respunt Rollant: «Ferez, nes esparignez!» [répondre, ferir (frapper), épargner]
+1883. A icest mot l'unt Francs recumencet. [avoir, recommencer]
+1884. Mult grant damage i out de chrestiens. [avoir]
+
+**Translation**
+1868. Count Roland has returned to the field:
+1869. He holds Durendal, and strikes like a brave warrior.
+1870. He has cut Faldrun of Pui clean through the middle,
+1871. And twenty-four of the most highly esteemed:
+1872. Never will a man be more eager to take revenge.
+1873. Just as the stag flees before the hounds,
+1874. So the pagans flee before Roland.
+1875. The archbishop said: «You do this very well indeed!
+1876. Such valor a knight ought to have
+1877. Who bears arms and sits upon a good horse;
+1878. In battle he ought to be strong and fierce,
+1879. Or otherwise he is not worth four deniers;
+1880. Rather he ought to be a monk in one of these minsters,
+1881. Where he would pray every day for our sins.»
+1882. Roland answers: «Strike, do not spare them!»
+1883. At this word the Franks have begun again.
+1884. Very great was the loss there among the Christians.
+
+---
+
+## Laisse CXLII (lines 1885–1911)
+
+**Original**
+1885. Home ki ço set, que ja n'avrat prisun [savoir, avoir]
+1886. En tel bataill[e] fait grant defension: [faire]
+1887. Pur ço sunt Francs si fiers cume leuns. [être]
+1888. As vus Marsilie en guise de barunt.
+1889. Siet el cheval qu'il apelet Gaignun, [seoir (être assis), appeler]
+1890. Brochet le ben, si vait ferir Bevon, [brocher (éperonner), aller, ferir (frapper)]
+1891. Icil ert sire de Belne e de Digun, [être]
+1892. L'escut li freint e l'osberc li derumpt, [fraindre (briser), derompre (rompre)]
+1893. Que mort l'abat seinz altre descunfisun; [abattre]
+1894. Puis ad ocis Yvoeries e Ivon [avoir, ocire (tuer)]
+1895. Ensembl'od els Gerard de Russillun.
+1896. Li quens Rollant ne li est guaires loign; [être]
+1897. Dist al paien: «Damnesdeus mal te duinst! [dire, donner]
+1898. A si grant tort m'ociz mes cumpaignuns! [ocire (tuer)]
+1899. Colp en avras einz que nos departum, [avoir, départir (se séparer)]
+1900. E de m'espee enquoi savras le nom.» [savoir]
+1901. Vait le ferir en guise de baron: [aller, ferir (frapper)]
+1902. Trenchet li ad li quens le destre poign. [avoir, trancher]
+1903. Puis prent la teste de Jurfaleu le Blund, [prendre]
+1904. Icil ert filz al rei Marsiliun. [être]
+1905. Paien escrient: «Aíe nos, Mahum! [escrier (s'écrier)]
+1906. Li nostre deu, vengez nos de Carlun. [venger]
+1907. En ceste tere nus ad mis tels feluns! [avoir, mettre]
+1908. Ja pur murir le camp ne guerpirunt.» [guerpir (abandonner)]
+1909. Dist l'un a l'altre: «E! car nos en fuiums!» [dire, s'enfuir]
+1910. A icest mot tels .C. milie s'en vunt: [s'en aller]
+1911. Ki ques rapelt, ja n'en returnerunt. AOI. [rappeler, retourner]
+
+**Translation**
+1885. A man who knows this, that he will never be taken prisoner,
+1886. puts up a great defense in such a battle:
+1887. for this reason the Franks are as fierce as lions.
+1888. See here Marsile, in the guise of a baron.
+1889. He sits on the horse that he calls Gaignun,
+1890. spurs it well, and goes to strike Beuve,
+1891. who was lord of Beaune and of Dijon.
+1892. He breaks his shield and tears apart his hauberk,
+1893. so that he strikes him dead without any further undoing;
+1894. then he has killed Yvoire and Yvon,
+1895. together with them Gérard of Roussillon.
+1896. Count Roland is not very far from him;
+1897. he said to the pagan: «May the Lord God give you ill!
+1898. So very wrongly you kill my companions!
+1899. You will have a blow before we part,
+1900. and you will know today the name of my sword.»
+1901. He goes to strike him in the guise of a baron:
+1902. the count has cut off his right fist.
+1903. Then he takes the head of Jurfaleu the Blond,
+1904. who was son of King Marsile.
+1905. The pagans cry out: «Help us, Mahomet!
+1906. O our gods, avenge us on Charles!
+1907. He has set such villains in this land!
+1908. Even on pain of death they will not abandon the field.»
+1909. One said to the other: «Eh! let us flee from here!»
+1910. At this word a good hundred thousand of them go off:
+1911. whoever may recall them, they will never return. AOI.
+
+---
+
+## Laisse CXLIII (lines 1912–1930)
+
+**Original**
+1912. De ço qui calt? Se fuit s'en est Marsilies, [chaloir (importer), s'enfuir, être]
+1913. Remes i est sis uncles, Marganices, [remaindre (rester), être]
+1914. Ki tint Kartagene, Alfrere, Garmalie [tenir]
+1915. E Ethiope, une tere maldite.
+1916. La neire gent en ad en sa baillie; [avoir]
+1917. Granz unt les nes e lees les oreilles, [avoir]
+1918. E sunt ensemble plus de cinquante milie. [être]
+1919. Icil chevalchent fierement e a íre, [chevaucher]
+1920. Puis escrient l'enseigne paenime. [escrier (s'écrier)]
+1921. Ço dist Rollant: «Ci recevrums ma[r]tyrie, [dire, recevoir]
+1922. E or sai ben n'avons guaires a vivre; [savoir, avoir, vivre]
+1923. Mais tut seit fel cher ne se vende primes! [être, vendre]
+1924. Ferez, seignurs, des espees furbies, [ferir (frapper)]
+1925. Si calengez e voz (e) mors e voz vies! [chalengier (revendiquer)]
+1926. Que dulce France par nus ne seit hunie! [être, honnir (déshonorer)]
+1927. Quant en cest camp vendrat Carles, mi sire, [venir]
+1928. De Sarrazins verrat tel discipline, [voir]
+1929. Cuntre un des noz en truverat morz .XV., [trouver]
+1930. Ne lesserat que nos ne beneïsse.» AOI. [laisser, bénir]
+
+**Translation**
+1912. What does it matter? Marsile has fled,
+1913. His uncle Marganice has remained there,
+1914. Who held Carthage, Alfrere, Garmalie
+1915. And Ethiopia, a cursed land.
+1916. He has the black people under his command;
+1917. They have large noses and broad ears,
+1918. And together they number more than fifty thousand.
+1919. These men ride fiercely and with wrath,
+1920. Then they shout the pagan battle cry.
+1921. Roland said: «Here we shall receive our martyrdom,
+1922. And now I know well we have not much longer to live;
+1923. But cursed be whoever does not sell himself dearly first!
+1924. Strike, lords, with your burnished swords,
+1925. And contest both your deaths and your lives!
+1926. Let sweet France not be dishonored through us!
+1927. When Charles, my lord, comes onto this field,
+1928. He will see such slaughter of Saracens,
+1929. For one of ours he will find fifteen of them dead,
+1930. He will not fail to bless us.» AOI.
+
+---
+
+## Laisse CXLIV (lines 1931–1938)
+
+**Original**
+1931. Quan Rollant veit la contredite gent [voir]
+1932. Ki plus sunt neirs que nen est arrement, [être]
+1933. Ne n'unt de blanc ne mais que sul les denz, [avoir]
+1934. Ço dist li quens: «Or sai jo veirement [dire, savoir]
+1935. Que hoi murrum par le mien escient. [mourir]
+1936. Ferez Franceis, car jol vos recumenz!» [ferir (frapper), recommencer]
+1937. Dist Oliver: «Dehet ait li plus lenz!» [dire, avoir]
+1938. A icest mot Franceis se fierent enz. [ferir (frapper)]
+
+**Translation**
+1931. When Roland sees the accursed people,
+1932. Who are blacker than ink is,
+1933. And have nothing white except only their teeth,
+1934. The count said this: «Now I know truly
+1935. That today we shall die, to my knowledge.
+1936. Strike, Franks, for I begin it again for you!»
+1937. Oliver said: «Cursed be the slowest!»
+1938. At this word the Franks hurl themselves in.
+
+---
+
+## Laisse CXLV (lines 1939–1950)
+
+**Original**
+1939. Quant paien virent que Franceis i out poi, [voir, avoir]
+1940. Entr'els en unt e orgoil e cunfort. [avoir]
+1941. Dist l'un a l'altre: «L'empereor ad tort.» [dire, avoir]
+1942. Li Marganices sist sur un ceval sor, [seoir (être assis)]
+1943. Brochet le ben des esperuns a or, [brocher (éperonner)]
+1944. Fiert Oliver derere en mi le dos. [ferir (frapper)]
+1945. Le blanc osberc li ad descust el cors, [avoir, descoudre (découdre)]
+1946. Par mi le piz sun espiet li mist fors, [mettre]
+1947. E dit apres: «Un col avez pris fort! [dire, avoir, prendre]
+1948. Carles li magnes mar vos laissat as porz! [laisser]
+1949. Tort nos ad fait: nen est dreiz qu'il s'en lot, [avoir, faire, être, loer (se féliciter)]
+1950. Kar de vos sul ai ben venget les noz.» [avoir, venger]
+
+**Translation**
+1939. When the pagans saw that the French were few there,
+1940. They take pride and comfort among themselves.
+1941. One said to the other: «The emperor is in the wrong.»
+1942. The Marganice sat upon a sorrel horse,
+1943. He spurs it hard with his spurs of gold,
+1944. He strikes Oliver from behind, in the middle of the back.
+1945. He has split open the white hauberk against his body,
+1946. He thrust his spear out through the middle of his breast,
+1947. And said after: «You have taken a hard blow!
+1948. Charlemagne left you at the passes to your sorrow!
+1949. He has wronged us: it is not right that he should boast of it,
+1950. For through you alone I have well avenged our men.»
+
+---
+
+## Laisse CXLVI (lines 1951–1963)
+
+**Original**
+1951. Oliver sent que a mort est ferut. [sentir, être, ferir (frapper)]
+1952. Tient Halteclere, dunt li acer fut bruns, [tenir, être]
+1953. Fiert Marganices sur l'elme a or, agut, [ferir (frapper)]
+1954. E flurs (e) e cristaus en acraventet jus; [acraventer (abattre)]
+1955. Trenchet la teste d'ici qu'as denz menuz, [trancher]
+1956. Brandist sun colp, si l'ad mort abatut, [brandir, avoir, abattre]
+1957. E dist apres: «Paien mal aies tu! [dire, avoir]
+1958. Iço ne di que Karles n'i ait perdut; [dire, avoir, perdre]
+1959. Ne a muiler ne a dame qu'aies veüd, [avoir, voir]
+1960. N'en vanteras el regne dunt tu fus [vanter, être]
+1961. Vaillant a un dener que m'i aies tolut, [avoir, tolir (enlever)]
+1962. Ne fait damage ne de mei ne d'altrui!» [faire]
+1963. Apres escriet Rollant qu'il li aiut. AOI. [escrier (s'écrier), aider]
+
+**Translation**
+1951. Oliver feels that he is wounded to death.
+1952. He grips Halteclere, whose steel was burnished,
+1953. He strikes Marganices on the helmet of gold, pointed,
+1954. And cuts away its flowers and crystals;
+1955. He cleaves the head down to the fine teeth,
+1956. He brandishes his blow, and has struck him dead,
+1957. And said afterward: «Pagan, a curse upon you!
+1958. I do not say that Charles has lost nothing here;
+1959. But neither to wife nor to lady whom you have seen
+1960. Will you boast, in the realm from which you came,
+1961. That you took from me a single denier's worth,
+1962. Nor did harm to me or to any other!»
+1963. Afterward he cries out to Roland to help him. AOI.
+
+---
+
+## Laisse CXLVII (lines 1964–1976)
+
+**Original**
+1964. Oliver sent qu'il est a mort nasfret. [sentir, être, nasfrer (blesser)]
+1965. De lui venger ja mais ne li ert lez. [venger, être]
+1966. En la grant presse or i fiert cume ber, [ferir (frapper)]
+1967. Trenchet cez hanstes e cez escuz buclers, [trancher]
+1968. E piez e poinz e seles e costez.
+1969. Ki lui veïst Sarrazins desmembrer, [voir, démembrer]
+1970. Un mort sur altre geter, [jeter]
+1971. De bon vassal li poüst remembrer. [pouvoir, remembrer (se souvenir)]
+1972. L'enseigne Carle n'i volt mie ublier: [vouloir, oublier]
+1973. «Munjoie!» escriet e haltement e cler. [escrier (s'écrier)]
+1974. Rollant apelet, sun ami e sun per: [appeler]
+1975. «Sire cumpaign, a mei car vus justez! [joster (rejoindre)]
+1976. A grant dulor ermes hoi desevrez.» AOI. [être, dessevrer (séparer)]
+
+**Translation**
+1964. Oliver feels that he is wounded to death.
+1965. Never will it be pleasant for him to avenge himself.
+1966. In the great throng he now strikes like a baron,
+1967. He slices through those lances and those bossed shields,
+1968. And feet and fists and saddles and sides.
+1969. Whoever had seen him dismember the Saracens,
+1970. Throw one dead man upon another,
+1971. Might well remember a good vassal.
+1972. Charles's battle-cry he does not wish to forget:
+1973. «Munjoie!» he cries out both loudly and clearly.
+1974. He calls Roland, his friend and his peer:
+1975. «Lord companion, come now, join me here!
+1976. With great sorrow shall we today be parted.» AOI.
+
+---
+
+## Laisse CXLVIII (lines 1977–1987)
+
+**Original**
+1977. Rollant reguardet Oliver al visage: [regarder]
+1978. Teint fut e pers, desculuret e pale. [être]
+1979. Li sancs tuz clers par mi le cors li raiet: [raiier (ruisseler)]
+1980. Encuntre tere en cheent les esclaces. [cheoir (tomber)]
+1981. «Deus!» dist li quens, «or ne sai jo que face. [dire, savoir, faire]
+1982. Sire cumpainz, mar fut vostre barnage! [être]
+1983. Jamais n'iert hume ki tun cors cuntrevaillet. [être, contrevaloir (égaler)]
+1984. E! France dulce, cun hoi remendras guaste [remaindre (rester)]
+1985. De bons vassals, cunfundue e chaiete!
+1986. Li emperere en avrat grant damage.» [avoir]
+1987. A icest mot sur sun cheval se pasmet. AOI. [se pâmer]
+
+**Translation**
+1977. Roland looks at Oliver in the face:
+1978. It was wan and livid, discolored and pale.
+1979. The bright blood streams down across his body:
+1980. The clots of it fall to the ground.
+1981. «God!» said the count, «now I know not what to do.
+1982. Lord companion, ill-fated was your valor!
+1983. Never will there be a man who equals your worth.
+1984. Ah! sweet France, how laid waste you will remain today,
+1985. Bereft of good vassals, ruined and fallen low!
+1986. The emperor will have great harm from it.»
+1987. At this word, upon his horse he swoons. AOI.
+
+---
+
+## Laisse CXLIX (lines 1988–2008)
+
+**Original**
+1988. As vus Rollant sur sun cheval pasmet, [se pâmer]
+1989. E Oliver ki est a mort nasfret: [être, nasfrer (blesser)]
+1990. Tant ad seinet (ki) li oil li sunt trublet; [avoir, seiner (saigner), être, troubler]
+1991. Ne loinz ne pres (es) ne poet vedeir si cler [pouvoir, voir]
+1992. Que rec[on]oistre poisset nuls hom mortel. [reconoistre (reconnaître), pouvoir]
+1993. Sun cumpaignun, cum il l'at encontret, [avoir, encontrer (rencontrer)]
+1994. Sil fiert amunt sur l'elme a or gemet: [ferir (frapper)]
+1995. Tut li detrenchet d'ici qu'al nasel; [detrenchier (taillader)]
+1996. Mais en la teste ne l'ad mie adeset. [avoir, adeser (toucher)]
+1997. A icel colp l'ad Rollant reguardet, [avoir, regarder]
+1998. Si li demandet dulcement e suef: [demander]
+1999. «Sire cumpain, faites le vos de gred? [faire]
+2000. Ja est ço Rollant, ki tant vos soelt amer! [être, soleir (avoir coutume), aimer]
+2001. Par nule guise ne m'aviez desfiet!» [avoir, défier]
+2002. Dist Oliver: «Or vos oi jo parler; [dire, oïr (entendre), parler]
+2003. Jo ne vos vei, veied vus Damnedeu! [voir]
+2004. Ferut vos ai, car le me pardunez!» [ferir (frapper), avoir, pardonner]
+2005. Rollant respunt: «Jo n'ai nient de mal. [répondre, avoir]
+2006. Jol vos parduins ici e devant Deu.» [pardonner]
+2007. A icel mot l'un a l'altre ad clinet. [avoir, cliner (incliner)]
+2008. Par tel [...] amur as les vus desevred! [dessevrer (séparer)]
+
+**Translation**
+1988. There is Roland, fainting upon his horse,
+1989. And Oliver, who is wounded to death:
+1990. He has bled so much that his eyes are clouded;
+1991. Neither far nor near can he see clearly enough
+1992. That any mortal man could be recognized.
+1993. His companion, as he has encountered him,
+1994. He strikes him up high upon the gem-set golden helm:
+1995. He cleaves it all the way down to the nasal;
+1996. But he has not at all touched the head.
+1997. At that blow Roland has looked at him,
+1998. And asks him gently and softly:
+1999. «Lord companion, do you do this on purpose?
+2000. This is indeed Roland, who is so wont to love you!
+2001. In no way had you defied me!»
+2002. Oliver says: «Now I hear you speak;
+2003. I do not see you, may the Lord God see you!
+2004. I have struck you, so forgive me for it!»
+2005. Roland answers: «I have no hurt at all.
+2006. I forgive you for it here and before God.»
+2007. At that word the one bowed to the other.
+2008. With such love there you see them part!
+
+---
+
+## Laisse CL (lines 2009–2022)
+
+**Original**
+2009. Oliver sent que la mort mult l'angoisset. [sentir, angoisser]
+2010. Ansdous les oilz en la teste li turnent, [tourner]
+2011. L'oíe pert e la veüe tute; [perdre]
+2012. Descent a piet, a l[a] tere se culchet, [descendre, se coucher]
+2013. Durement en halt si recleimet sa culpe, [reclamer]
+2014. Cuntre le ciel ambesdous ses mains juintes, [joindre]
+2015. Si priet Deu que pareïs li dunget [prier, donner]
+2016. E beneïst Karlun e France dulce, [bénir]
+2017. Sun cumpaignun Rollant sur tuz humes.
+2018. Falt li le coer, le helme li embrunchet, [faillir, embruncher (pencher)]
+2019. Trestut le cors a la tere li justet. [joster (joindre)]
+2020. Morz est li quens, que plus ne se demuret. [être, mourir, demeurer]
+2021. Rollant li ber le pluret, sil duluset; [pleurer, doluser (se lamenter)]
+2022. Jamais en tere n'orrez plus dolent hume! [oïr (entendre)]
+
+**Translation**
+2009. Oliver feels that death greatly anguishes him.
+2010. Both his eyes turn back in his head,
+2011. He loses his hearing and his sight entirely;
+2012. He dismounts on foot, lies down on the ground,
+2013. Loudly, on high, he confesses his sins,
+2014. Toward heaven both his hands joined,
+2015. And he prays to God to grant him paradise
+2016. And to bless Charles and sweet France,
+2017. And his companion Roland above all men.
+2018. His heart fails him, his helmet droops down,
+2019. His whole body sinks down to the ground.
+2020. The count is dead, he lingers no longer.
+2021. Roland the brave weeps for him, laments him;
+2022. Never on earth will you hear a more grieving man!
+
+---
+
+## Laisse CLI (lines 2023–2033)
+
+**Original**
+2023. Or veit Rollant que mort est sun ami, [voir, être, mourir]
+2024. Gesir adenz, a la tere sun vis, [gésir (être couché)]
+2025. Mult dulcement a regreter le prist: [regretter, prendre]
+2026. «Sire cumpaign, tant mar fustes hardiz! [être]
+2027. Ensemble avum estet e anz e dis; [avoir, être]
+2028. Nem fesis mal ne jo nel te forsfis. [faire, forsfaire (faire tort)]
+2029. Quant tu es mor[t], dulur est que jo vif!» [être, mourir, vivre]
+2030. A icest mot se pasmet li marchis [se pâmer]
+2031. Sur sun ceval que cleimet Veillantif. [clamer (nommer)]
+2032. Afermet est a ses estreus d'or fin: [être, afermer (fixer)]
+2033. Quel part qu'il alt, ne poet mie chaïr. [aller, pouvoir, cheoir (tomber)]
+
+**Translation**
+2023. Now Roland sees that his friend is dead,
+2024. Lying face down, his face to the earth,
+2025. Very tenderly he began to lament him:
+2026. «Lord companion, what an evil hour your boldness brought you!
+2027. Together we have been for years and days;
+2028. You never did me wrong, nor did I wrong you.
+2029. Since you are dead, it is grief that I live!»
+2030. At this word the marquis swoons
+2031. Upon his horse that is called Veillantif.
+2032. He is held fast in his stirrups of fine gold:
+2033. Wherever he may go, he cannot fall.
