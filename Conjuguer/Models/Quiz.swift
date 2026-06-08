@@ -356,6 +356,9 @@ class Quiz {
     if score >= minimumScoreThatGetsBonus {
       score += Quiz.bonusForElapsedTime(elapsedTime)
     }
+    if score > Current.settings.bestScore {
+      Current.settings.bestScore = score
+    }
     shouldShowResults = true
     SoundPlayer.play(Sound.randomApplause)
     Current.gameCenter.reportScore(score)

@@ -5,7 +5,7 @@
 //  Created by Josh Adams on 10/31/21.
 //
 
-import Foundation
+import SwiftUI
 
 enum ConjugationResult {
   case totalMatch
@@ -73,14 +73,25 @@ enum ConjugationResult {
     }
   }
 
-  var iconString: String {
+  var feedbackIconString: String {
     switch self {
     case .totalMatch:
-      return "checkmark"
+      return "checkmark.circle.fill"
     case .partialMatch:
       return "circle.bottomhalf.fill"
     case .noMatch:
-      return "xmark"
+      return "xmark.circle.fill"
+    }
+  }
+
+  var feedbackColor: Color {
+    switch self {
+    case .totalMatch:
+      return .customGreen
+    case .partialMatch:
+      return .customBlue
+    case .noMatch:
+      return .customRed
     }
   }
 }

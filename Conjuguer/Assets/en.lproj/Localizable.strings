@@ -22,6 +22,10 @@
 "ModelBrowseView.sortOrder" = "Sort order";
 "ModelBrowseView.searchPrompt" = "Search models";
 
+"InfoBrowseView.sectionAbout" = "About";
+"InfoBrowseView.sectionConcepts" = "Concepts";
+"InfoBrowseView.sectionTenses" = "Tenses";
+
 "VerbView.overview" = "Overview";
 "VerbView.modelWithColon" = "Model:";
 "VerbView.reflexive" = "Reflexive";
@@ -32,6 +36,12 @@
 "VerbView.exampleUse" = "Example Use";
 "VerbView.personlessConjugations" = "P. Passé, P. Présent, R. Futur";
 "VerbView.showCompoundTenses" = "Show Compound Tenses";
+"VerbView.modelButtonHint" = "Shows this verb’s conjugation model.";
+"VerbView.colorKeyTitle" = "Color Key";
+"VerbView.colorKeyRegular" = "Regular";
+"VerbView.colorKeyIrregular" = "Irregular";
+"VerbView.colorKeyExplanation" = "Irregular stems and endings appear in red; regular forms in blue.";
+"VerbView.dismissColorKey" = "Dismiss color key";
 
 "ModelView.parent" = "Parent";
 "ModelView.defective" = "Defective";
@@ -60,9 +70,13 @@
 "QuizView.cool" = "Cool";
 "QuizView.lastAnswer" = "Last Answer:";
 "QuizView.correctAnswer" = "Correct Answer:";
+"QuizView.briefing" = "Test your knowledge of French conjugation.";
+"QuizView.questionCount" = "30 questions";
+"QuizView.bestScoreWithColon" = "Best score:";
 
 "ResultsView.correctWithColon" = "Correct:";
 "ResultsView.timeWithColon" = "Time:";
+"ResultsView.yourAnswerWithColon" = "Your answer:";
 
 "Info.dedicationHeading" = "Dedication";
 

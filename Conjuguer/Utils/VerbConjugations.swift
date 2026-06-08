@@ -7,26 +7,20 @@
 
 import SwiftUI
 
-// Display-ready, precomputed conjugations for a verb. Built once (off `body`) so VerbView does
-// not re-run Conjugator or rebuild colored AttributedStrings on every body evaluation, and so
-// each form's colored display and its spoken (accessibility) text share a single conjugation
-// pass.
 struct VerbConjugations {
-  // One conjugated form: the colored display string and the plain spoken string.
   struct Cell: Identifiable {
     let id: Int
+    let pronoun: String
     let display: AttributedString
     let accessibility: String
   }
 
-  // One tense's worth of cells, with its title.
   struct Section: Identifiable {
     let id: Int
     let title: String
     let cells: [Cell]
   }
 
-  // A tense and the person-numbers to present it for.
   struct TenseSpec {
     let builder: (PersonNumber) -> Tense
     let personNumbers: [PersonNumber]
@@ -36,14 +30,11 @@ struct VerbConjugations {
   let personlessAccessibility: String
   let simpleSections: [Section]
 
-  // Builds the always-shown (personless + simple-tense) data. Compound tenses are built lazily
-  // by the compound subview via `sections(verb:specs:)` only when that section is revealed.
   init(verb: Verb) {
     (personlessDisplay, personlessAccessibility) = Self.personless(verb: verb)
     simpleSections = Self.sections(verb: verb, specs: Self.simpleSpecs)
   }
 
-  // The non-compound tenses, in display order.
   static let simpleSpecs: [TenseSpec] = [
     TenseSpec(builder: { .indicatifPrésent($0) }, personNumbers: PersonNumber.allCases),
     TenseSpec(builder: { .passéSimple($0) }, personNumbers: PersonNumber.allCases),
@@ -55,7 +46,6 @@ struct VerbConjugations {
     TenseSpec(builder: { .impératif($0) }, personNumbers: PersonNumber.impératifPersonNumbers)
   ]
 
-  // The compound tenses, in display order.
   static let compoundSpecs: [TenseSpec] = [
     TenseSpec(builder: { .passéComposé($0) }, personNumbers: PersonNumber.allCases),
     TenseSpec(builder: { .plusQueParfait($0) }, personNumbers: PersonNumber.allCases),
@@ -90,31 +80,24 @@ struct VerbConjugations {
     return (display, accessibility)
   }
 
-  // Conjugates once and derives both the colored display and the plain lowercased spoken string.
   static func cell(verb: Verb, tense: Tense, id: Int) -> Cell {
-    let conjugation = conjugationString(verb: verb, tense: tense)
-    var display = AttributedString(mixedCaseString: conjugation)
+    let parts = conjugationParts(verb: verb, tense: tense)
+    var display = AttributedString(mixedCaseString: parts.form)
     if isDefective(verb: verb, tense: tense) {
       display.strikethroughStyle = Text.LineStyle.single
     }
-    return Cell(id: id, display: display, accessibility: conjugation.lowercased())
+    return Cell(id: id, pronoun: parts.pronoun, display: display, accessibility: parts.spoken)
   }
 
-  // The pronoun-applied, mixed-case conjugation for a verb+tense (moved out of Text(verb:tense:)).
-  static func conjugationString(verb: Verb, tense: Tense) -> String {
-    var conjugation: String
-    switch Conjugator.conjugate(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) {
-    case .success(let value):
-      conjugation = value
-    default:
-      fatalError("Could not conjugate \(verb.infinitif) for \(tense.titleCaseName).")
-    }
+  static func conjugationParts(verb: Verb, tense: Tense) -> (pronoun: String, form: String, spoken: String) {
+    let conjugation = rawConjugation(verb: verb, tense: tense)
 
     switch tense {
     case .participePassé, .participePrésent, .radicalFutur, .impératifPassé:
-      break
+      return ("", conjugation, conjugation.lowercased())
     case .impératif(let personNumber):
-      conjugation = personNumber.impératifAndPossibleReflexivePronoun(conjugation, isReflexive: verb.isReflexive)
+      let form = personNumber.impératifAndPossibleReflexivePronoun(conjugation, isReflexive: verb.isReflexive)
+      return ("", form, form.lowercased())
     case
       .indicatifPrésent(let personNumber),
       .passéSimple(let personNumber),
@@ -131,10 +114,19 @@ struct VerbConjugations {
       .conditionnelPassé(let personNumber),
       .subjonctifPassé(let personNumber),
       .subjonctifPlusQueParfait(let personNumber):
-      conjugation = personNumber.pronounAndConjugation(conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+      let preamble = personNumber.preamble(forConjugation: conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+      let pronoun = preamble.trimmingCharacters(in: .whitespaces)
+      return (pronoun, conjugation, (preamble + conjugation).lowercased())
     }
+  }
 
-    return conjugation
+  static func rawConjugation(verb: Verb, tense: Tense) -> String {
+    switch Conjugator.conjugate(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) {
+    case .success(let value):
+      return value
+    default:
+      fatalError("Could not conjugate \(verb.infinitif) for \(tense.titleCaseName).")
+    }
   }
 
   static func isDefective(verb: Verb, tense: Tense) -> Bool {

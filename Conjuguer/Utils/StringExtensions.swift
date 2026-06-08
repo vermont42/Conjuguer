@@ -85,11 +85,16 @@ extension String {
 
   var attributedText: NSAttributedString {
     let attributedText = NSMutableAttributedString(string: self)
-    attributedText.addAttributes([NSAttributedString.Key.foregroundColor: UIColor(Color.customForeground), NSAttributedString.Key.font: Fonts.body], range: NSRange(location: 0, length: attributedText.length))
+    // A touch more line spacing makes the long-form articles more comfortable to read (#22).
+    let bodyStyle = NSMutableParagraphStyle()
+    bodyStyle.lineSpacing = 4
+    attributedText.addAttributes([NSAttributedString.Key.foregroundColor: UIColor(Color.customForeground), NSAttributedString.Key.font: Fonts.body, NSAttributedString.Key.paragraphStyle: bodyStyle], range: NSRange(location: 0, length: attributedText.length))
     var attributesAndRanges: [(NSAttributedString.Key, Any, NSRange)] = []
     var conjugationRanges: [NSRange] = []
+    // Centered subheadings carry the same line spacing so they sit consistently in the column.
     let centeredStyle = NSMutableParagraphStyle()
     centeredStyle.alignment = .center
+    centeredStyle.lineSpacing = 4
     var inSubheading = false
     var inBold = false
     var inConjugation = false

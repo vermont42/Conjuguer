@@ -19,61 +19,57 @@ struct SettingsView: View {
       HStack {
         Text(L.Navigation.settings)
           .headingLabel()
-          .foregroundStyle(Color.customBlue)
           .padding(.leading, Layout.doubleDefaultSpacing)
 
         Spacer()
       }
 
       ScrollView(.vertical) {
-        Text(L.Settings.quizDifficulty)
-          .settingsSubheadingLabel()
+        VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
+          settingCard(title: L.Settings.quizDifficulty) {
+            Picker("", selection: $settings.quizDifficulty) {
+              ForEach(QuizDifficulty.allCases, id: \.self) { quizDifficulty in
+                Text(quizDifficulty.localizedDifficulty).tag(quizDifficulty)
+              }
+            }
+            .pickerStyle(.segmented)
+            .accessibilityIdentifier("picker_settings_quizDifficulty")
+            .accessibilityLabel(Text(L.Settings.quizDifficulty))
+            .accessibilityValue(settings.quizDifficulty.localizedDifficulty)
 
-        Picker("", selection: $settings.quizDifficulty) {
-          ForEach(QuizDifficulty.allCases, id: \.self) { quizDifficulty in
-            Text(quizDifficulty.localizedDifficulty).tag(quizDifficulty)
+            Text(L.Settings.quizDifficultyDescription)
+              .settingsLabel()
+          }
+
+          settingCard(title: L.Settings.pronounGender) {
+            Picker("", selection: $settings.pronounGender) {
+              ForEach(PronounGender.allCases, id: \.self) { pronounGender in
+                Text(pronounGender.localizedGender).tag(pronounGender)
+              }
+            }
+            .pickerStyle(.segmented)
+            .accessibilityIdentifier("picker_settings_pronounGender")
+            .accessibilityLabel(Text(L.Settings.pronounGender))
+            .accessibilityValue(settings.pronounGender.localizedGender)
+
+            Text(L.Settings.pronounGenderDescription)
+              .settingsLabel()
+          }
+
+          settingCard(title: L.Settings.ratingsAndReviews) {
+            Button(L.Settings.rateOrReview) {
+              openURL(RatingsFetcher.reviewURL)
+            }
+            .funButton()
+
+            if rateReviewDescription != "" {
+              Text(rateReviewDescription)
+                .settingsLabel()
+            }
           }
         }
-        .segmentedPicker()
-        .accessibilityIdentifier("picker_settings_quizDifficulty")
-        .accessibilityLabel(Text(L.Settings.quizDifficulty))
-        .accessibilityValue(settings.quizDifficulty.localizedDifficulty)
-
-        Text(L.Settings.quizDifficultyDescription)
-          .settingsLabel()
-
-        Spacer(minLength: Layout.tripleDefaultSpacing)
-
-        Text(L.Settings.pronounGender)
-          .settingsSubheadingLabel()
-
-        Picker("", selection: $settings.pronounGender) {
-          ForEach(PronounGender.allCases, id: \.self) { pronounGender in
-            Text(pronounGender.localizedGender).tag(pronounGender)
-          }
-        }
-        .segmentedPicker()
-        .accessibilityIdentifier("picker_settings_pronounGender")
-        .accessibilityLabel(Text(L.Settings.pronounGender))
-        .accessibilityValue(settings.pronounGender.localizedGender)
-
-        Text(L.Settings.pronounGenderDescription)
-          .settingsLabel()
-
-        Spacer(minLength: Layout.tripleDefaultSpacing)
-
-        Text(L.Settings.ratingsAndReviews)
-          .subheadingLabel()
-
-        Button(L.Settings.rateOrReview) {
-          openURL(RatingsFetcher.reviewURL)
-        }
-        .funButton()
-
-        if rateReviewDescription != "" {
-          Text(rateReviewDescription)
-            .settingsLabel()
-        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, Layout.doubleDefaultSpacing)
       }
     }
     .padding(.top, Layout.tripleDefaultSpacing)
@@ -88,5 +84,18 @@ struct SettingsView: View {
       })
     }
     .screenBackground()
+  }
+
+  private func settingCard<Content: View>(
+    title: String,
+    @ViewBuilder content: () -> Content
+  ) -> some View {
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      Text(title)
+        .subheadingLabel()
+
+      content()
+    }
+    .card()
   }
 }

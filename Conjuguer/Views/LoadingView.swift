@@ -7,15 +7,26 @@
 
 import SwiftUI
 
-// Shown while the verb/model data is parsed off the main actor at launch. Gates the real
-// UI so nothing renders against an empty store. The parse is fast, so this is typically
-// on screen only briefly before MainTabView replaces it.
 struct LoadingView: View {
   var body: some View {
-    ProgressView()
-      .controlSize(.large)
-      .screenBackground()
-      .accessibilityIdentifier("loading_indicator")
+    VStack(spacing: Layout.doubleDefaultSpacing) {
+      Image("Splash")
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: 120)
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .accessibilityHidden(true)
+
+      Text("Conjuguer")
+        .font(Font.custom(workSansSemiBold, size: 34, relativeTo: .largeTitle))
+        .foregroundStyle(Color.customBlue)
+
+      ProgressView()
+        .controlSize(.large)
+        .padding(.top, Layout.defaultSpacing)
+    }
+    .screenBackground()
+    .accessibilityIdentifier("loading_indicator")
   }
 }
 

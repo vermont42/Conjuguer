@@ -17,13 +17,22 @@ struct InfoBrowseView: View {
       ZStack {
         Color.customBackground
 
-        List(Info.infos) { info in
-          NavigationLink(value: info) {
-            Text(info.heading)
-              .tableText()
+        List {
+          ForEach(Info.sections, id: \.category) { section in
+            Section {
+              ForEach(section.infos) { info in
+                NavigationLink(value: info) {
+                  Text(info.heading)
+                    .tableText()
+                }
+                .frenchPronunciation(forReal: info.alwaysUsesFrenchPronunciation)
+                .listRowBackground(Color.customBackground)
+              }
+            } header: {
+              Text(section.category.title)
+                .subheadingLabel()
+            }
           }
-          .frenchPronunciation(forReal: info.alwaysUsesFrenchPronunciation)
-          .listRowBackground(Color.customBackground)
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
@@ -34,11 +43,6 @@ struct InfoBrowseView: View {
       }
     }
     .screenBackground()
-    // Two .sheet(item:) modifiers (rather than one Identifiable enum) intentionally preserve
-    // sheet stacking: a verb link tapped inside a presented InfoView (routed in place via
-    // TextViewDelegate.handleInAppURL, which sets Current.verb without clearing Current.info)
-    // presents VerbView on top of the info article. Collapsing to one enum would dismiss the
-    // article instead.
     .sheet(item: $world.info) { info in
       InfoView(info: info, shouldShowInfoHeading: true)
         .sheetDismissable()

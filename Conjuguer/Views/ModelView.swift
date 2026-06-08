@@ -12,115 +12,42 @@ struct ModelView: View {
   @State private var detailSheet: DetailSheet?
   let model: VerbModel
 
+  private static let gridPronouns = ["je", "tu", "il", "nous", "vous", "ils"]
+  private static let gridOrder: [PersonNumber] = [.firstSingular, .secondSingular, .thirdSingular, .firstPlural, .secondPlural, .thirdPlural]
+  private static let endingFont = Font.custom(workSansRegular, size: 16, relativeTo: .body)
+  private static let endingPronounFont = Font.custom(workSansRegular, size: 14, relativeTo: .footnote)
+  private static let endingTenseLabelFont = Font.custom(workSansSemiBold, size: 14, relativeTo: .footnote)
+
   init(model: VerbModel) {
     self.model = model
   }
 
   var body: some View {
     ScrollView {
-      HStack {
-        VStack(alignment: .leading, spacing: 0) {
-          HStack {
-            Text(model.exemplarWithPossibleExtraLetters)
-              .headingLabel()
-              .frenchPronunciation()
+      VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
+        headerCard
+          .scrollFade()
 
-            Text(" (\(model.id))")
-              .headingLabel()
-
-            Spacer()
-          }
-
-          if
-            let parentId = model.parentId,
-            let parent = VerbModel.models[parentId]
-          {
-            HStack {
-              Text("\(L.ModelView.parent): ")
-                .headingLabel()
-
-              Text(parent.exemplarWithPossibleExtraLetters)
-                .headingLabel()
-                .frenchPronunciation()
-
-              Text(" (\(parent.id))")
-                .headingLabel()
-
-              Spacer()
-            }
-          }
-
-          Text(model.description)
-            .headingLabel()
-
-          if
-            let defectGroupId = model.defectGroupId,
-            let defectGroup = DefectGroup.defectGroups[defectGroupId]
-          {
-            Text(L.ModelView.defective)
-              .subheadingLabel()
-              .padding(.top, Layout.doubleDefaultSpacing)
-            Text(defectGroup.description())
-              .bodyLabel()
-          }
-
-          Text(L.ModelView.endings)
-            .subheadingLabel()
-            .padding(.top, Layout.doubleDefaultSpacing)
-
-          endingRow("\(Tense.participePassé.shortTitleCaseName): ", model.participeEndingRecursive)
-
-          endingRow("\(Tense.indicatifPrésent(.firstSingular).shortTitleCaseName): ", model.indicatifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations))
-
-          endingRow("\(Tense.impératif(.firstPlural).shortTitleCaseName): ", model.indicatifPrésentGroupRecursive.impératifEndings(stemAlterations: model.stemAlterations))
-
-          endingRow("\(Tense.passéSimple(.firstSingular).shortTitleCaseName): ", model.passéSimpleGroupRecursive.endings)
-
-          endingRow("\(Tense.subjonctifPrésent(.firstSingular).shortTitleCaseName): ", model.subjonctifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations))
-
-          endingRow("\(Tense.subjonctifImparfait(.firstSingular).shortTitleCaseName): ", model.passéSimpleGroupRecursive.subjonctifImparfaitEndings)
-            .padding(.bottom, Layout.doubleDefaultSpacing)
-
-          if let stemAlterations = model.stemAlterationsRecursive {
-            HStack {
-              Text(L.ModelView.stemAlterations)
-                .subheadingLabel()
-
-              Spacer()
-
-              Button {
-                detailSheet = .stemAlterationsInfo
-              } label: {
-                  Image(systemName: "questionmark.diamond.fill")
-              }
-              .buttonStyle(.borderless)
-              .tint(.customRed)
-              .accessibilityLabel(Text(L.Navigation.info))
-              .accessibilityHint(Text(L.ModelView.infoButtonHint))
-            }
-
-            ForEach(stemAlterations, id: \.self) { alteration in
-              let appliesToString = Tense.shorthandForNonCompoundTense(appliesTo: alteration.appliesTo)
-              endingRow(appliesToString + ": ", alteration.toString)
-            }
-          }
-
-          if model.verbs.count > 1 {
-            Text(L.ModelView.verbsUsing)
-              .subheadingLabel()
-              .padding(.top, Layout.doubleDefaultSpacing)
-          } else {
-            Text(L.ModelView.verbUsing)
-              .subheadingLabel()
-              .padding(.top, Layout.doubleDefaultSpacing)
-          }
-          Text(model.verbsWithDeepLinks())
-            .font(bodyFont)
-            .frenchPronunciation()
+        if
+          let defectGroupId = model.defectGroupId,
+          let defectGroup = DefectGroup.defectGroups[defectGroupId]
+        {
+          defectiveCard(defectGroup)
+            .scrollFade()
         }
+
+        endingsCard
+          .scrollFade()
+
+        if let stemAlterations = model.stemAlterationsRecursive {
+          stemAlterationsCard(stemAlterations)
+            .scrollFade()
+        }
+
+        verbsUsingCard
+          .scrollFade()
       }
-      .padding(.leading, Layout.doubleDefaultSpacing)
-      .padding(.trailing, Layout.doubleDefaultSpacing)
+      .padding(.horizontal, Layout.doubleDefaultSpacing)
     }
     .screenBackground()
     .environment(\.openURL, OpenURLAction { url in
@@ -150,6 +77,161 @@ struct ModelView: View {
     }
   }
 
+  private var headerCard: some View {
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      HStack(alignment: .firstTextBaseline) {
+        Text(model.exemplarWithPossibleExtraLetters)
+          .headingLabel()
+          .frenchPronunciation()
+
+        Text("(\(model.id))")
+          .headingLabel()
+
+        Spacer()
+      }
+
+      Text(model.description)
+        .bodyLabel()
+
+      if
+        let parentId = model.parentId,
+        let parent = VerbModel.models[parentId]
+      {
+        HStack(spacing: 0) {
+          Text("\(L.ModelView.parent): ")
+            .smallLabel()
+          Text(parent.exemplarWithPossibleExtraLetters)
+            .smallLabel()
+            .frenchPronunciation()
+          Text(" (\(parent.id))")
+            .smallLabel()
+          Spacer()
+        }
+      }
+    }
+    .card()
+  }
+
+  private func defectiveCard(_ defectGroup: DefectGroup) -> some View {
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      Text(L.ModelView.defective)
+        .subheadingLabel()
+      Text(defectGroup.description())
+        .bodyLabel()
+    }
+    .card()
+  }
+
+  private var endingsCard: some View {
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      Text(L.ModelView.endings)
+        .subheadingLabel()
+
+      endingRow("\(Tense.participePassé.shortTitleCaseName): ", model.participeEndingRecursive)
+
+      ScrollView(.horizontal, showsIndicators: false) {
+        Grid(alignment: .leading, horizontalSpacing: 8, verticalSpacing: 6) {
+          GridRow(alignment: .firstTextBaseline) {
+            ForEach(Self.gridPronouns, id: \.self) { pronoun in
+              Text(pronoun)
+                .font(Self.endingPronounFont)
+                .foregroundStyle(Color.customGray)
+                .frenchPronunciation()
+                .gridColumnAlignment(.leading)
+            }
+          }
+
+          ForEach(endingTenses) { tense in
+            GridRow {
+              Text(tense.label)
+                .font(Self.endingTenseLabelFont)
+                .foregroundStyle(Color.customGray)
+                .gridCellColumns(Self.gridPronouns.count)
+            }
+
+            GridRow(alignment: .firstTextBaseline) {
+              ForEach(Array(tense.slots.enumerated()), id: \.offset) { _, slot in
+                Text(slot ?? AttributedString(" "))
+                  .font(Self.endingFont)
+                  .frenchPronunciation()
+                  .gridColumnAlignment(.leading)
+              }
+            }
+          }
+        }
+      }
+    }
+    .card()
+  }
+
+  private var endingTenses: [EndingTense] {
+    let specs: [(String, String, [PersonNumber])] = [
+      (Tense.indicatifPrésent(.firstSingular).shortTitleCaseName, model.indicatifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations), PersonNumber.allCases),
+      (Tense.impératif(.firstPlural).shortTitleCaseName, model.indicatifPrésentGroupRecursive.impératifEndings(stemAlterations: model.stemAlterations), PersonNumber.impératifPersonNumbers),
+      (Tense.passéSimple(.firstSingular).shortTitleCaseName, model.passéSimpleGroupRecursive.endings, PersonNumber.allCases),
+      (Tense.subjonctifPrésent(.firstSingular).shortTitleCaseName, model.subjonctifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations), PersonNumber.allCases),
+      (Tense.subjonctifImparfait(.firstSingular).shortTitleCaseName, model.passéSimpleGroupRecursive.subjonctifImparfaitEndings, PersonNumber.allCases)
+    ]
+    return specs.enumerated().map { index, spec in
+      EndingTense(id: index, label: spec.0, slots: endingSlots(spec.1, order: spec.2))
+    }
+  }
+
+  private struct EndingTense: Identifiable {
+    let id: Int
+    let label: String
+    let slots: [AttributedString?]
+  }
+
+  private func stemAlterationsCard(_ stemAlterations: [StemAlteration]) -> some View {
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      HStack(spacing: 6) {
+        Text(L.ModelView.stemAlterations)
+          .subheadingLabel()
+
+        Button {
+          detailSheet = .stemAlterationsInfo
+        } label: {
+          Image(systemName: "questionmark.diamond.fill")
+        }
+        .buttonStyle(.borderless)
+        .tint(.customRed)
+        .accessibilityLabel(Text(L.Navigation.info))
+        .accessibilityHint(Text(L.ModelView.infoButtonHint))
+
+        Spacer()
+      }
+
+      ForEach(stemAlterations, id: \.self) { alteration in
+        let appliesToString = Tense.shorthandForNonCompoundTense(appliesTo: alteration.appliesTo)
+        endingRow(appliesToString + ": ", alteration.toString)
+      }
+    }
+    .card()
+  }
+
+  private var verbsUsingCard: some View {
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      Text(model.verbs.count > 1 ? L.ModelView.verbsUsing : L.ModelView.verbUsing)
+        .subheadingLabel()
+      Text(model.verbsWithDeepLinks())
+        .font(bodyFont)
+        .frenchPronunciation()
+    }
+    .card()
+  }
+
+  private func endingSlots(_ endings: String, order: [PersonNumber]) -> [AttributedString?] {
+    let tokens = endings.split(separator: " ", omittingEmptySubsequences: true).map(String.init)
+    var byPerson: [PersonNumber: String] = [:]
+    for (index, personNumber) in order.enumerated() where index < tokens.count {
+      byPerson[personNumber] = tokens[index]
+    }
+    return Self.gridOrder.map { personNumber in
+      byPerson[personNumber].map { AttributedString(mixedCaseString: $0) }
+    }
+  }
+
   private func endingRow(_ label: String, _ mixedCase: String) -> some View {
     var attributed = AttributedString(label)
     attributed += AttributedString(mixedCaseString: mixedCase)
@@ -170,6 +252,24 @@ struct ModelView: View {
         return "stemAlterationsInfo"
       }
     }
+  }
+}
+
+struct IrregularityBadge: View {
+  let percent: Int
+
+  private var tint: Color {
+    percent == 0 ? .customBlue : .customRed
+  }
+
+  var body: some View {
+    Text("\(percent)%")
+      .font(Font.custom(workSansSemiBold, size: 14, relativeTo: .caption))
+      .foregroundStyle(tint)
+      .padding(.horizontal, 10)
+      .padding(.vertical, 3)
+      .background(Capsule().fill(tint.opacity(0.15)))
+      .accessibilityLabel(Text("\(percent)% \(L.ModelView.irregular)"))
   }
 }
 

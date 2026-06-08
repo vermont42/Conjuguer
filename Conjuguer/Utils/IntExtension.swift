@@ -19,7 +19,7 @@ extension Int {
     } else if minutes > 0 {
       return NSString(format: "%d:%02d", minutes, remainingSeconds) as String
     } else {
-      return NSString(format: "%d", remainingSeconds) as String
+      return NSString(format: "0:%02d", remainingSeconds) as String
     }
   }
 }

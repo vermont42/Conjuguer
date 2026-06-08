@@ -9,12 +9,20 @@ import SwiftUI
 
 enum Modifiers {
   static func modifyAppearances() {
+    let navBarAppearance = UINavigationBarAppearance()
+    navBarAppearance.configureWithOpaqueBackground()
+    navBarAppearance.backgroundColor = UIColor(Color.customBackground)
+    navBarAppearance.shadowColor = .clear
     UIFont(name: workSansSemiBold, size: 24).map {
-      UINavigationBar.appearance().largeTitleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customBlue)]
+      navBarAppearance.largeTitleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customBlue)]
     }
     UIFont(name: workSansSemiBold, size: 18).map {
-      UINavigationBar.appearance().titleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customBlue)]
+      navBarAppearance.titleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customBlue)]
     }
+    UINavigationBar.appearance().standardAppearance = navBarAppearance
+    UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+    UINavigationBar.appearance().compactAppearance = navBarAppearance
+
     UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color.customBlue)], for: .selected)
     UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color.customBlue)], for: .normal)
   }
@@ -45,16 +53,8 @@ extension View {
     modifier(SubheadingLabel())
   }
 
-  func settingsSubheadingLabel() -> some View {
-    modifier(SettingsSubheadingLabel())
-  }
-
   func bodyLabel() -> some View {
     modifier(BodyLabel())
-  }
-
-  func constrainedBodyLabel() -> some View {
-    modifier(ConstrainedBodyLabel())
   }
 
   func smallLabel() -> some View {
@@ -69,16 +69,28 @@ extension View {
     modifier(HeadingLabel())
   }
 
+  func headingForegroundLabel() -> some View {
+    modifier(HeadingForegroundLabel())
+  }
+
   func buttonLabel() -> some View {
     modifier(ButtonLabel())
   }
 
-  func funButton() -> some View {
-    modifier(FunButton())
+  func funButton(tint: Color = .customBlue) -> some View {
+    modifier(FunButton(tint: tint))
   }
 
-  func segmentedPicker() -> some View {
-    modifier(SegmentedPicker())
+  func card(accent: Color? = nil) -> some View {
+    modifier(Card(accent: accent))
+  }
+
+  func numericText() -> some View {
+    modifier(NumericText())
+  }
+
+  func scrollFade() -> some View {
+    modifier(ScrollFade())
   }
 
   func sheetDismissable() -> some View {
@@ -118,16 +130,9 @@ private struct SheetDismissable: ViewModifier {
 private struct SubheadingLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansSemiBold, size: 20, relativeTo: .title3))
+      .font(Font.custom(workSansSemiBold, size: 20, relativeTo: .title3).smallCaps())
+      .tracking(0.5)
       .foregroundStyle(Color.customGray)
-  }
-}
-
-private struct SettingsSubheadingLabel: ViewModifier {
-  func body(content: Content) -> some View {
-    content
-      .font(Font.custom(workSansSemiBold, size: 20, relativeTo: .title3))
-      .foregroundStyle(Color.customBlue)
   }
 }
 
@@ -167,15 +172,6 @@ private struct BodyLabel: ViewModifier {
   }
 }
 
-private struct ConstrainedBodyLabel: ViewModifier {
-  func body(content: Content) -> some View {
-    content
-      .font(Font.custom(workSansRegular, size: 20, relativeTo: .body))
-      .foregroundStyle(Color.customForeground)
-      .dynamicTypeSize(...DynamicTypeSize.xLarge)
-  }
-}
-
 private struct SmallLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
@@ -189,7 +185,6 @@ private struct SettingsLabel: ViewModifier {
     content
       .font(Font.custom(workSansRegular, size: 16, relativeTo: .callout))
       .foregroundStyle(Color.customForeground)
-      .padding(.horizontal, Layout.doubleDefaultSpacing)
   }
 }
 
@@ -204,6 +199,16 @@ private struct HeadingLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
       .font(Font.custom(workSansSemiBold, size: 22, relativeTo: .title))
+      .foregroundStyle(Color.customBlue)
+      .accessibilityAddTraits(.isHeader)
+  }
+}
+
+private struct HeadingForegroundLabel: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .font(Font.custom(workSansSemiBold, size: 22, relativeTo: .title))
+      .foregroundStyle(Color.customForeground)
       .accessibilityAddTraits(.isHeader)
   }
 }
@@ -226,18 +231,49 @@ private struct RightAligned: ViewModifier {
   }
 }
 
-private struct SegmentedPicker: ViewModifier {
-  func body(content: Content) -> some View {
-    content
-      .pickerStyle(.segmented)
-      .padding(.horizontal, Layout.doubleDefaultSpacing)
-  }
-}
-
 private struct FunButton: ViewModifier {
+  var tint: Color = .customBlue
+
   func body(content: Content) -> some View {
     content
       .buttonStyle(.glass)
-      .tint(.customRed)
+      .tint(tint)
+  }
+}
+
+private struct Card: ViewModifier {
+  var accent: Color?
+  var cornerRadius: CGFloat = 12
+
+  func body(content: Content) -> some View {
+    content
+      .frame(maxWidth: .infinity, alignment: .leading)
+      .padding(Layout.doubleDefaultSpacing)
+      .background(Color.customSurface)
+      .overlay(alignment: .leading) {
+        if let accent {
+          accent.frame(width: 4)
+        }
+      }
+      .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+  }
+}
+
+private struct NumericText: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .monospacedDigit()
+      .contentTransition(.numericText())
+  }
+}
+
+private struct ScrollFade: ViewModifier {
+  @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+  func body(content: Content) -> some View {
+    let reduceMotion = reduceMotion
+    return content.scrollTransition { view, phase in
+      view.opacity(reduceMotion ? 1 : 1 - abs(phase.value) * 0.12)
+    }
   }
 }

@@ -33,8 +33,14 @@ struct ModelBrowseView: View {
 
           List(searchResults) { modelAndDecorator in
             NavigationLink(value: modelAndDecorator.model) {
-              Text(modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator)
-                .tableText()
+              HStack {
+                Text(modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator)
+                  .tableText()
+                if let irregularity = modelAndDecorator.irregularityBadge {
+                  Spacer()
+                  IrregularityBadge(percent: irregularity)
+                }
+              }
             }
             .frenchPronunciation()
             .listRowBackground(Color.customBackground)
@@ -67,8 +73,13 @@ struct ModelBrowseView: View {
       updateSearchResults(playSoundIfEmpty: true)
     }
     .onChange(of: store.modelSort) { _, _ in
-      updateSearchResults(playSoundIfEmpty: false)
+      // Animate the re-sort so the list visibly reorders rather than snapping (#19).
+      withAnimation(.snappy) {
+        updateSearchResults(playSoundIfEmpty: false)
+      }
     }
+    // Selection haptic so flipping the sort reads as a causal, tactile action (#19).
+    .sensoryFeedback(.selection, trigger: store.modelSort)
     .sheet(item: $world.verbModel) { model in
       ModelView(model: model)
         .sheetDismissable()
@@ -94,6 +105,7 @@ struct ModelBrowseView: View {
 struct ModelAndDecorator: Identifiable, Hashable {
   let model: VerbModel
   let decorator: String
+  var irregularityBadge: Int?
   var id: String { model.id }
 }
 
@@ -111,7 +123,7 @@ final class ModelStore {
     irregularityModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
       lhs.irregularity >= rhs.irregularity
     }
-    .map { ModelAndDecorator(model: $0, decorator: " • \($0.irregularity)%") }
+    .map { ModelAndDecorator(model: $0, decorator: "", irregularityBadge: $0.irregularity) }
 
     alphabeticModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
       lhs.exemplar.compare(rhs.exemplar, locale: Util.french) == .orderedAscending

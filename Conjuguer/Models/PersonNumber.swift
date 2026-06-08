@@ -163,6 +163,12 @@ nonisolated enum PersonNumber: String, CaseIterable {
   }
 
   @MainActor func pronounAndConjugation(_ conjugation: String, isReflexive: Bool, hasAspiratedH: Bool) -> String {
+    preamble(forConjugation: conjugation, isReflexive: isReflexive, hasAspiratedH: hasAspiratedH) + conjugation
+  }
+
+  // The subject (+ reflexive) pronoun that precedes a conjugation, including any elision
+  // (j'/m'/t'/s') implied by the conjugation's first letter.
+  @MainActor func preamble(forConjugation conjugation: String, isReflexive: Bool, hasAspiratedH: Bool) -> String {
     let normalizedFirstLetter = String(conjugation.first ?? Character(" "))
       .folding(options: .diacriticInsensitive, locale: Util.french)
       .lowercased(with: Util.french)
@@ -173,40 +179,37 @@ nonisolated enum PersonNumber: String, CaseIterable {
     let thirdSingular = Current.settings.pronounGender.thirdSingular
     let thirdPlural = Current.settings.pronounGender.thirdPlural
 
-    let preamble: String
     if isReflexive {
       switch self {
       case .firstSingular:
-        preamble = firstLetterImpliesLiaison ? "je m'" : "je me "
+        return firstLetterImpliesLiaison ? "je m'" : "je me "
       case .secondSingular:
-        preamble = firstLetterImpliesLiaison ? "tu t'" : "tu te "
+        return firstLetterImpliesLiaison ? "tu t'" : "tu te "
       case .thirdSingular:
-        preamble = firstLetterImpliesLiaison ? "\(thirdSingular) s'" : "\(thirdSingular) se "
+        return firstLetterImpliesLiaison ? "\(thirdSingular) s'" : "\(thirdSingular) se "
       case .firstPlural:
-        preamble = "nous nous "
+        return "nous nous "
       case .secondPlural:
-        preamble = "vous vous "
+        return "vous vous "
       case .thirdPlural:
-        preamble = firstLetterImpliesLiaison ? "\(thirdPlural) s'" : "\(thirdPlural) se "
+        return firstLetterImpliesLiaison ? "\(thirdPlural) s'" : "\(thirdPlural) se "
       }
     } else {
       switch self {
       case .firstSingular:
-        preamble = firstLetterImpliesLiaison ? "j'" : "je "
+        return firstLetterImpliesLiaison ? "j'" : "je "
       case .secondSingular:
-        preamble = "tu "
+        return "tu "
       case .thirdSingular:
-        preamble = "\(thirdSingular) "
+        return "\(thirdSingular) "
       case .firstPlural:
-        preamble = "nous "
+        return "nous "
       case .secondPlural:
-        preamble = "vous "
+        return "vous "
       case .thirdPlural:
-        preamble = "\(thirdPlural) "
+        return "\(thirdPlural) "
       }
     }
-
-    return preamble + conjugation
   }
 
   func impératifAndPossibleReflexivePronoun(_ conjugation: String, isReflexive: Bool) -> String {

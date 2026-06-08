@@ -9,10 +9,12 @@ import SwiftUI
 
 struct VerbView: View {
   @Environment(World.self) private var world
+  @AppStorage("hasSeenConjugationColorKey") private var hasSeenColorKey = false
   let verb: Verb
   let shouldShowVerbHeading: Bool
   private let conjugations: VerbConjugations
   @State private var shouldShowCompoundTenses = false
+  @State private var detailSheet: DetailSheet?
 
   init(verb: Verb, shouldShowVerbHeading: Bool = false) {
     self.verb = verb
@@ -22,98 +24,32 @@ struct VerbView: View {
 
   var body: some View {
     ScrollView {
-      VStack(alignment: .leading, spacing: 0) {
+      VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
         Text(verb.infinitifWithPossibleExtraLetters)
           .headingLabel()
           .frenchPronunciation()
+          .scrollFade()
 
-        Text(L.VerbView.overview)
-          .subheadingLabel()
-          .leftAligned()
-          .padding(.top, Layout.defaultSpacing)
-
-        Text(verb.translation)
-          .bodyLabel()
-          .englishPronunciation()
-
-        if let model = VerbModel.models[verb.model] {
-          HStack {
-            Text(L.VerbView.modelWithColon + " ")
-              .bodyLabel()
-            Text(model.exemplar + " ")
-              .bodyLabel()
-              .frenchPronunciation()
-            Text("(\(model.id))")
-              .bodyLabel()
-            Spacer()
-          }
-        }
-
-        if verb.isReflexive {
-          Text(L.VerbView.reflexive)
-            .bodyLabel()
-        }
-
-        if verb.hasAspiratedH {
-          Text(L.VerbView.aspiratedH)
-            .bodyLabel()
-        }
-
-        HStack {
-          Text(L.VerbView.auxiliaryWithColon + " ")
-            .bodyLabel()
-          Text(verb.auxiliary.verb)
-            .bodyLabel()
-            .frenchPronunciation()
-          Spacer()
-        }
-
-        if let frequency = verb.frequency {
-          Text("\(L.VerbView.frequencyWithColon) \(frequency) / \(FrequencyParser.maxFrequency)")
-            .bodyLabel()
-        }
-
-        if
-          let defectGroupId = verb.defectGroupId,
-          let defectGroup = DefectGroup.defectGroups[defectGroupId]
-        {
-          Text("\(L.VerbView.defective) " + defectGroup.description())
-              .bodyLabel()
-        }
+        overviewCard
+          .scrollFade()
 
         if let example = verb.example {
-          Text(L.VerbView.exampleUse)
-            .subheadingLabel()
-            .leftAligned()
-            .padding(.top, Layout.defaultSpacing)
-
-          Text(example)
-            .bodyLabel()
-            .frenchPronunciation()
-
-          if let source = verb.source {
-            Text(source)
-              .smallLabel()
-              .rightAligned()
-              .frenchPronunciation()
-          }
+          exampleCard(example)
+            .scrollFade()
         }
 
-        Text(L.VerbView.personlessConjugations)
-          .subheadingLabel()
-          .frenchPronunciation()
-          .padding(.top, Layout.defaultSpacing)
+        if !hasSeenColorKey {
+          colorKey
+            .scrollFade()
+        }
 
-        // One element carries both the colored display and the spoken (lowercased, French)
-        // value, replacing the invisible-Color + accessibilityHidden-Text pair (#26).
-        Text(conjugations.personlessDisplay)
-          .font(bodyFont)
-          .accessibilityLabel(conjugations.personlessAccessibility)
-          .frenchPronunciation()
-          .leftAligned()
+        personlessCard
+          .scrollFade()
 
         ForEach(conjugations.simpleSections) { section in
           TenseSectionView(section: section)
+            .card()
+            .scrollFade()
         }
 
         Toggle(isOn: $shouldShowCompoundTenses) {
@@ -122,7 +58,7 @@ struct VerbView: View {
         }
         .toggleStyle(.switch)
         .tint(.customRed)
-        .padding(.top, Layout.defaultSpacing)
+        .scrollFade()
 
         if shouldShowCompoundTenses {
           CompoundTensesView(verb: verb)
@@ -131,10 +67,185 @@ struct VerbView: View {
       .onAppear {
         world.analytics.recordViewAppeared("\(VerbView.self)")
       }
-      .padding(.leading, Layout.doubleDefaultSpacing)
-      .padding(.trailing, Layout.doubleDefaultSpacing)
+      .padding(.horizontal, Layout.doubleDefaultSpacing)
     }
     .screenBackground()
+    .sheet(item: $detailSheet) { sheet in
+      switch sheet {
+      case .model(let model):
+        ModelView(model: model)
+          .sheetDismissable()
+      }
+    }
+  }
+
+  private var overviewCard: some View {
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      Text(L.VerbView.overview)
+        .subheadingLabel()
+
+      Text(verb.translation)
+        .bodyLabel()
+        .englishPronunciation()
+
+      if let model = VerbModel.models[verb.model] {
+        modelRow(model)
+      }
+
+      if verb.isReflexive {
+        Text(L.VerbView.reflexive)
+          .bodyLabel()
+      }
+
+      if verb.hasAspiratedH {
+        Text(L.VerbView.aspiratedH)
+          .bodyLabel()
+      }
+
+      metaRow(L.VerbView.auxiliaryWithColon, verb.auxiliary.verb)
+        .font(bodyFont)
+        .frenchPronunciation()
+        .frame(maxWidth: .infinity, alignment: .leading)
+
+      if let frequency = verb.frequency {
+        metaRow(L.VerbView.frequencyWithColon, "\(frequency) / \(FrequencyParser.maxFrequency)")
+          .font(bodyFont)
+          .frame(maxWidth: .infinity, alignment: .leading)
+      }
+
+      if
+        let defectGroupId = verb.defectGroupId,
+        let defectGroup = DefectGroup.defectGroups[defectGroupId]
+      {
+        Text("\(L.VerbView.defective) " + defectGroup.description())
+          .bodyLabel()
+      }
+    }
+    .card()
+  }
+
+  private func modelRow(_ model: VerbModel) -> some View {
+    Button {
+      detailSheet = .model(model)
+    } label: {
+      modelReferenceText(model)
+        .frenchPronunciation()
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    .buttonStyle(.plain)
+    .accessibilityHint(Text(L.VerbView.modelButtonHint))
+  }
+
+  private func modelReferenceText(_ model: VerbModel) -> Text {
+    // Gray, demoted "Model:" prefix vs. the blue, link-colored value, per #29.
+    var label = AttributedString(L.VerbView.modelWithColon + " ")
+    label.foregroundColor = Color.customGray
+
+    var value = AttributedString("\(model.exemplar) (\(model.id)) ")
+    value.foregroundColor = Color.customBlue
+
+    let reference = Text(label + value)
+      .font(bodyFont)
+    let chevron = Text(Image(systemName: "chevron.right"))
+      .font(.footnote)
+      .foregroundStyle(Color.customBlue)
+
+    return Text("\(reference)\(chevron)")
+  }
+
+  private func metaRow(_ prefix: String, _ value: String) -> Text {
+    var label = AttributedString(prefix + " ")
+    label.foregroundColor = Color.customGray
+
+    var valuePart = AttributedString(value)
+    valuePart.foregroundColor = Color.customForeground
+
+    return Text(label + valuePart)
+  }
+
+  private func exampleCard(_ example: String) -> some View {
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      Text(L.VerbView.exampleUse)
+        .subheadingLabel()
+
+      Text(example)
+        .bodyLabel()
+        .frenchPronunciation()
+
+      if let source = verb.source {
+        Text(source)
+          .smallLabel()
+          .rightAligned()
+          .frenchPronunciation()
+      }
+    }
+    .card()
+  }
+
+  private var personlessCard: some View {
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      Text(L.VerbView.personlessConjugations)
+        .subheadingLabel()
+        .frenchPronunciation()
+
+      Text(conjugations.personlessDisplay)
+        .font(bodyFont)
+        .accessibilityLabel(conjugations.personlessAccessibility)
+        .frenchPronunciation()
+        .leftAligned()
+    }
+    .card()
+  }
+
+  private var colorKey: some View {
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      HStack {
+        Text(L.VerbView.colorKeyTitle)
+          .subheadingLabel()
+        Spacer()
+        Button {
+          withAnimation { hasSeenColorKey = true }
+        } label: {
+          Image(systemName: "xmark.circle.fill")
+            .foregroundStyle(Color.customGray)
+        }
+        .buttonStyle(.borderless)
+        .accessibilityLabel(Text(L.VerbView.dismissColorKey))
+      }
+
+      Text(L.VerbView.colorKeyExplanation)
+        .smallLabel()
+
+      HStack(spacing: Layout.doubleDefaultSpacing) {
+        colorKeySwatch(color: .customBlue, label: L.VerbView.colorKeyRegular)
+        colorKeySwatch(color: .customRed, label: L.VerbView.colorKeyIrregular)
+        Spacer()
+      }
+    }
+    .card(accent: .customBlue)
+  }
+
+  private func colorKeySwatch(color: Color, label: String) -> some View {
+    HStack(spacing: 6) {
+      Circle()
+        .fill(color)
+        .frame(width: 12, height: 12)
+      Text(label)
+        .bodyLabel()
+        .foregroundStyle(color)
+    }
+    .accessibilityElement(children: .combine)
+  }
+
+  private enum DetailSheet: Identifiable {
+    case model(VerbModel)
+
+    var id: String {
+      switch self {
+      case .model(let model):
+        return "model-\(model.id)"
+      }
+    }
   }
 }
 
@@ -148,6 +259,8 @@ private struct CompoundTensesView: View {
   var body: some View {
     ForEach(sections) { section in
       TenseSectionView(section: section)
+        .card()
+        .scrollFade()
     }
   }
 }
@@ -156,17 +269,28 @@ private struct TenseSectionView: View {
   let section: VerbConjugations.Section
 
   var body: some View {
-    Text(section.title)
-      .subheadingLabel()
-      .frenchPronunciation()
-      .padding(.top, Layout.defaultSpacing)
-
-    ForEach(section.cells) { cell in
-      Text(cell.display)
-        .font(bodyFont)
-        .accessibilityLabel(cell.accessibility)
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      Text(section.title)
+        .subheadingLabel()
         .frenchPronunciation()
-        .leftAligned()
+
+      Grid(alignment: .leading, horizontalSpacing: Layout.doubleDefaultSpacing, verticalSpacing: 8) {
+        ForEach(section.cells) { cell in
+          GridRow(alignment: .firstTextBaseline) {
+            Text(cell.pronoun)
+              .smallLabel()
+              .frenchPronunciation()
+              .gridColumnAlignment(.leading)
+              .accessibilityHidden(true)
+
+            Text(cell.display)
+              .font(bodyFont)
+              .frenchPronunciation()
+              .gridColumnAlignment(.leading)
+              .accessibilityLabel(cell.accessibility)
+          }
+        }
+      }
     }
   }
 }

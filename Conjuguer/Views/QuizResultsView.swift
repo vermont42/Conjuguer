@@ -13,23 +13,31 @@ struct QuizResultsView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      VStack(alignment: .leading, spacing: 0) {
+      VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
         Text(L.Navigation.results)
           .headingLabel()
-          .foregroundStyle(Color.customBlue)
 
-        Text("\(L.QuizView.scoreWithColon) \(quiz.score)")
-          .bodyLabel()
-          .padding(.top, Layout.tripleDefaultSpacing)
+        VStack(alignment: .leading, spacing: 0) {
+          Text(L.QuizView.scoreWithColon)
+            .smallLabel()
 
-        Text("\(L.ResultsView.correctWithColon) \(quiz.numberCorrect.asFormattedNumberCorrect()) / \(quiz.questions.count)")
-          .bodyLabel()
+          Text("\(quiz.score)")
+            .font(Font.custom(workSansSemiBold, size: 64, relativeTo: .largeTitle))
+            .foregroundStyle(Color.customBlue)
+            .numericText()
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
+        }
+        .padding(.top, Layout.defaultSpacing)
 
-        Text(quiz.difficulty.localizedDifficultyWithLabel)
-          .bodyLabel()
+        VStack(alignment: .leading, spacing: Layout.defaultSpacing / 2) {
+          Text("\(L.ResultsView.correctWithColon) \(quiz.numberCorrect.asFormattedNumberCorrect()) / \(quiz.questions.count)")
 
-        Text("\(L.ResultsView.timeWithColon) \(quiz.elapsedTime.timeString)")
-          .bodyLabel()
+          Text(quiz.difficulty.localizedDifficultyWithLabel)
+
+          Text("\(L.ResultsView.timeWithColon) \(quiz.elapsedTime.timeString)")
+        }
+        .smallLabel()
       }
 
       List(quiz.quizResults) { quizResult in

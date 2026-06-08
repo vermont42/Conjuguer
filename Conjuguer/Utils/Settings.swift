@@ -43,6 +43,16 @@ class Settings {
   static let quizDifficultyKey = "quizDifficulty"
   static let quizDifficultyDefault: QuizDifficulty = .regular
 
+  var bestScore: Int = bestScoreDefault {
+    didSet {
+      if bestScore != oldValue {
+        getterSetter.set(key: Settings.bestScoreKey, value: "\(bestScore)")
+      }
+    }
+  }
+  static let bestScoreKey = "bestScore"
+  static let bestScoreDefault = 0
+
   var pronounGender: PronounGender = pronounGenderDefault {
     didSet {
       if pronounGender != oldValue {
@@ -96,6 +106,12 @@ class Settings {
       quizDifficulty = QuizDifficulty(rawValue: quizDifficultyString) ?? Settings.quizDifficultyDefault
     } else {
       getterSetter.set(key: Settings.quizDifficultyKey, value: quizDifficulty.rawValue)
+    }
+
+    if let bestScoreString = getterSetter.get(key: Settings.bestScoreKey) {
+      bestScore = Int((bestScoreString as NSString).intValue)
+    } else {
+      getterSetter.set(key: Settings.bestScoreKey, value: "\(bestScore)")
     }
 
     if let pronounGenderString = getterSetter.get(key: Settings.pronounGenderKey) {

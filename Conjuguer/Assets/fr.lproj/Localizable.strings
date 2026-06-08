@@ -22,6 +22,10 @@
 "ModelBrowseView.sortOrder" = "Ordre de tri";
 "ModelBrowseView.searchPrompt" = "Rechercher des modèles";
 
+"InfoBrowseView.sectionAbout" = "À propos";
+"InfoBrowseView.sectionConcepts" = "Concepts";
+"InfoBrowseView.sectionTenses" = "Temps";
+
 "VerbView.overview" = "Aperçu";
 "VerbView.modelWithColon" = "Modèle:";
 "VerbView.reflexive" = "Réflexif";
@@ -33,6 +37,12 @@
 "VerbView.exampleUse" = "Exemple d’utilisation";
 "VerbView.personlessConjugations" = "P. Passé, P. Présent, R. Futur";
 "VerbView.showCompoundTenses" = "Montrer les temps composés";
+"VerbView.modelButtonHint" = "Affiche le modèle de conjugaison de ce verbe.";
+"VerbView.colorKeyTitle" = "Légende des couleurs";
+"VerbView.colorKeyRegular" = "Régulier";
+"VerbView.colorKeyIrregular" = "Irrégulier";
+"VerbView.colorKeyExplanation" = "Les radicaux et terminaisons irréguliers sont en rouge ; les formes régulières en bleu.";
+"VerbView.dismissColorKey" = "Masquer la légende des couleurs";
 
 "ModelView.parent" = "Parent";
 "ModelView.defective" = "Défectif";
@@ -61,9 +71,13 @@
 "QuizView.cool" = "Chouette";
 "QuizView.lastAnswer" = "Dernière réponse:";
 "QuizView.correctAnswer" = "Réponse correcte:";
+"QuizView.briefing" = "Testez vos connaissances en conjugaison française.";
+"QuizView.questionCount" = "30 questions";
+"QuizView.bestScoreWithColon" = "Meilleur score:";
 
 "ResultsView.correctWithColon" = "Correcte:";
 "ResultsView.timeWithColon" = "Temps:";
+"ResultsView.yourAnswerWithColon" = "Votre réponse:";
 
 "Info.dedicationHeading" = "Dédicace";
 

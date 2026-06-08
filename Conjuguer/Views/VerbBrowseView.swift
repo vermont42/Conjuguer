@@ -34,9 +34,8 @@ struct VerbBrowseView: View {
 
           List(searchResults) { verb in
             NavigationLink(value: verb) {
-              Text(verb.infinitifWithPossibleExtraLetters)
+              verbRow(verb)
             }
-            .frenchPronunciation()
             .listRowBackground(Color.customBackground)
           }
           .listStyle(.plain)
@@ -65,8 +64,11 @@ struct VerbBrowseView: View {
       updateSearchResults(playSoundIfEmpty: true)
     }
     .onChange(of: store.verbSort) { _, _ in
-      updateSearchResults(playSoundIfEmpty: false)
+      withAnimation(.snappy) {
+        updateSearchResults(playSoundIfEmpty: false)
+      }
     }
+    .sensoryFeedback(.selection, trigger: store.verbSort)
     .sheet(item: $world.verb) { verb in
       VerbView(verb: verb, shouldShowVerbHeading: true)
         .sheetDismissable()
@@ -74,6 +76,27 @@ struct VerbBrowseView: View {
     .onAppear {
       world.analytics.recordViewAppeared("\(VerbBrowseView.self)")
       world.reviewPrompter.promptableActionHappened()
+    }
+  }
+
+  private func verbRow(_ verb: Verb) -> some View {
+    HStack(alignment: .firstTextBaseline) {
+      VStack(alignment: .leading, spacing: 2) {
+        Text(verb.infinitifWithPossibleExtraLetters)
+          .tableText()
+          .frenchPronunciation()
+
+        Text(verb.translation)
+          .smallLabel()
+          .englishPronunciation()
+      }
+
+      if let frequency = verb.frequency {
+        Spacer()
+        Text("#\(frequency)")
+          .smallLabel()
+          .accessibilityHidden(true)
+      }
     }
   }
 

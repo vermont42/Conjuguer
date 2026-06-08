@@ -24,17 +24,19 @@ struct InfoView: View {
           .resizable()
           .aspectRatio(contentMode: .fit)
           .frame(width: 270)
+          .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+          .shadow(color: Color.customForeground.opacity(0.2), radius: 8, y: 4)
           .accessibilityLabel(imageInfo.accessibilityLabel)
       }
 
       if shouldShowInfoHeading {
         Text(info.heading)
-          .headingLabel()
+          .headingForegroundLabel()
         Spacer()
       }
 
       TextView(text: info.attributedText)
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+        .frame(minWidth: 0, maxWidth: 680, minHeight: 0, maxHeight: .infinity)
         .navigationTitle(shouldShowInfoHeading ? "" : info.heading)
     }
     .padding(.leading, Layout.doubleDefaultSpacing)

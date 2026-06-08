@@ -62,6 +62,20 @@ enum L {
     }
   }
 
+  enum InfoBrowseView {
+    static var sectionAbout: String {
+      String(localized: "InfoBrowseView.sectionAbout")
+    }
+
+    static var sectionConcepts: String {
+      String(localized: "InfoBrowseView.sectionConcepts")
+    }
+
+    static var sectionTenses: String {
+      String(localized: "InfoBrowseView.sectionTenses")
+    }
+  }
+
   enum VerbView {
     static var overview: String {
       String(localized: "VerbView.overview")
@@ -102,6 +116,30 @@ enum L {
     static var showCompoundTenses: String {
       String(localized: "VerbView.showCompoundTenses")
     }
+
+    static var modelButtonHint: String {
+      String(localized: "VerbView.modelButtonHint")
+    }
+
+    static var colorKeyTitle: String {
+      String(localized: "VerbView.colorKeyTitle")
+    }
+
+    static var colorKeyRegular: String {
+      String(localized: "VerbView.colorKeyRegular")
+    }
+
+    static var colorKeyIrregular: String {
+      String(localized: "VerbView.colorKeyIrregular")
+    }
+
+    static var colorKeyExplanation: String {
+      String(localized: "VerbView.colorKeyExplanation")
+    }
+
+    static var dismissColorKey: String {
+      String(localized: "VerbView.dismissColorKey")
+    }
   }
 
   enum ResultsView {
@@ -111,6 +149,10 @@ enum L {
 
     static var timeWithColon: String {
       String(localized: "ResultsView.timeWithColon")
+    }
+
+    static var yourAnswerWithColon: String {
+      String(localized: "ResultsView.yourAnswerWithColon")
     }
   }
 
@@ -219,6 +261,18 @@ enum L {
 
     static var correctAnswer: String {
       String(localized: "QuizView.correctAnswer")
+    }
+
+    static var briefing: String {
+      String(localized: "QuizView.briefing")
+    }
+
+    static var questionCount: String {
+      String(localized: "QuizView.questionCount")
+    }
+
+    static var bestScoreWithColon: String {
+      String(localized: "QuizView.bestScoreWithColon")
     }
   }
 
