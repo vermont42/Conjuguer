@@ -77,9 +77,7 @@ struct SettingsView: View {
       world.analytics.recordViewAppeared("\(SettingsView.self)")
       RatingsFetcher.fetchRatingsDescription(completion: { description in
         if description != RatingsFetcher.errorMessage {
-          Task { @MainActor in
-            self.rateReviewDescription = description
-          }
+          self.rateReviewDescription = description
         }
       })
     }

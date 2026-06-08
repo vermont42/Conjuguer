@@ -27,36 +27,41 @@ enum RatingsFetcher {
     return reviewURL
   }
 
-  static func fetchRatingsDescription(completion: @escaping (String) -> Void) {
+  static func fetchRatingsDescription(completion: @escaping @MainActor (String) -> Void) {
     let request = URLRequest(url: RatingsFetcher.iTunesURL)
 
+    // Capture main-actor-isolated state before entering the @Sendable closure.
+    let errorMessage = RatingsFetcher.errorMessage
+    let noRating = L.RatingsFetcher.noRating
+    let oneRating = L.RatingsFetcher.oneRating
+    let multipleRatings = L.RatingsFetcher.multipleRatings
+
     let task = Current.session.dataTask(with: request) { (responseData, _, error) in
-      if error != nil {
-        completion(errorMessage)
-        return
-      } else if let responseData = responseData {
-        guard
-          let json = try? JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any],
-          let results = json["results"] as? [[String: Any]],
-          results.count == 1
-        else {
-          completion(errorMessage)
-          return
-        }
+      let description: String
+      let exhortation = " Ajoutez la vôtre."
 
+      if
+        error == nil,
+        let responseData = responseData,
+        let json = try? JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any],
+        let results = json["results"] as? [[String: Any]],
+        results.count == 1
+      {
         let ratingsCount = (results[0])["userRatingCountForCurrentVersion"] as? Int ?? 0
-
-        let description: String
-        let exhortation = " Ajoutez la vôtre."
 
         switch ratingsCount {
         case 0:
-          description = L.RatingsFetcher.noRating + exhortation
+          description = noRating + exhortation
         case 1:
-          description = L.RatingsFetcher.oneRating + exhortation
+          description = oneRating + exhortation
         default:
-          description = (NSString(format: L.RatingsFetcher.multipleRatings as NSString, ratingsCount) as String) + exhortation
+          description = (NSString(format: multipleRatings as NSString, ratingsCount) as String) + exhortation
         }
+      } else {
+        description = errorMessage
+      }
+
+      Task { @MainActor in
         completion(description)
       }
     }

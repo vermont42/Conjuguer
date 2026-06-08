@@ -25,8 +25,10 @@ class GameCenter: NSObject, GameCenterable {
         self.isAuthenticated = true
         SoundPlayer.play(.randomApplause)
         self.localPlayer.loadDefaultLeaderboardIdentifier { identifier, _ in
-          self.leaderboardIdentifier = identifier ?? "ERROR"
-          // print("identifier: \(self.leaderboardIdentifier)")
+          Task { @MainActor in
+            self.leaderboardIdentifier = identifier ?? "ERROR"
+            // print("identifier: \(self.leaderboardIdentifier)")
+          }
         }
         Current.analytics.recordGameCenterAuthSucceeded()
         completion?(true)
