@@ -151,6 +151,24 @@ git config core.hooksPath .githooks
 
 If `swiftlint` isn't installed the hook prints a warning and lets the commit through.
 
+#### Rules worth pre-empting while writing (so the hook doesn't bounce a commit)
+
+- **`conditional_returns_on_newline`** — a `guard`/`if` that returns must put the `return`
+  on its **own line**, never inline. The project keeps this rule on purpose: one-statement-
+  per-line makes stepping through control flow in the debugger easier (you can breakpoint
+  the `return` itself and see whether the branch was taken). Write:
+
+  ```swift
+  guard etymologies == nil else {
+    return
+  }
+  ```
+
+  not `guard etymologies == nil else { return }`. The same applies to `if x { return }`,
+  `guard … else { return nil }`, `… else { continue }`, etc. — break the body onto its own
+  line. (Seen in practice: an inline `guard … else { return }` passed the build but blocked
+  the commit under `--strict`.)
+
 ## Architecture Overview
 
 Conjuguer is an iOS app for learning French verb conjugations. It conjugates 6,320 verbs across all French tenses.
