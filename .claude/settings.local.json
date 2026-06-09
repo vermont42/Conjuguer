@@ -5,7 +5,9 @@
       "WebSearch",
       "Bash(grep:*)",
       "Bash(find:*)",
-      "Bash(xcodebuild:*)"
+      "Bash(xcodebuild:*)",
+      "Bash(rm -rf /Users/josh/.claude/tmp/claude-501/*/*/tasks/TemporaryDirectory.*)",
+      "Bash(rm -rf /Users/josh/.claude/tmp/claude-501/-Users-josh-Desktop-workspace-Conjuguer/*/tasks/*)"
     ]
   }
 }

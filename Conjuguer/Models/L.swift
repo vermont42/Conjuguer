@@ -140,6 +140,10 @@ enum L {
     static var dismissColorKey: String {
       String(localized: "VerbView.dismissColorKey")
     }
+
+    static var etymologyHeading: String {
+      String(localized: "VerbView.etymologyHeading")
+    }
   }
 
   enum ResultsView {

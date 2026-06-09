@@ -26,6 +26,23 @@ extension String {
     "$"
   }
 
+  // Renders `~bold~`-delimited runs as bold, for SwiftUI Text in the etymology card.
+  // Etymologies use only the bold delimiter; every other character — including the literal
+  // `*` of linguistic reconstructions (e.g. *steh₂-) and Unicode sub/superscripts — passes
+  // through untouched. Alternating segments between `~` markers are bold.
+  var etymologyAttributedString: AttributedString {
+    var result = AttributedString()
+    var isBold = false
+    for segment in components(separatedBy: String(String.boldSeparator)) {
+      var piece = AttributedString(segment)
+      piece.foregroundColor = Color.customForeground
+      piece.font = isBold ? bodyBoldFont : bodyFont
+      result.append(piece)
+      isBold.toggle()
+    }
+    return result
+  }
+
   func replaceFirstOccurence(of oldSubstring: String, with newSubstring: String) -> String {
     if let range = self.range(of: oldSubstring) {
       return self.replacingCharacters(in: range, with: newSubstring)

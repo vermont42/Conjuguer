@@ -43,6 +43,7 @@
 "VerbView.colorKeyIrregular" = "Irrégulier";
 "VerbView.colorKeyExplanation" = "Les radicaux et terminaisons irréguliers sont en rouge ; les formes régulières en bleu.";
 "VerbView.dismissColorKey" = "Masquer la légende des couleurs";
+"VerbView.etymologyHeading" = "Étymologie";
 
 "ModelView.parent" = "Parent";
 "ModelView.defective" = "Défectif";

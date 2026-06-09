@@ -1,0 +1,4911 @@
+{
+  "description": "The 981 most-used French verbs, ranked by usage, for the etymology pipeline (see etymology-pipeline.md). Generated from Conjuguer/Models/frequencies.xml (document order = usage order) filtered to -er/-ir/-re infinitives present in Conjuguer/Models/verbs.xml, deduplicated. `gloss` is the verb's English translation(s) from verbs.xml — a few verbs (e.g. sortir, saillir) carry two entries for their two conjugation patterns, whose distinct glosses are joined with '; '. One etymology per infinitif covers both patterns. Note: this list includes sortir (rank 56), which the app's FrequencyParser drops via a special-case skip.",
+  "count": 981,
+  "verbs": [
+    {
+      "rank": 1,
+      "infinitif": "être",
+      "gloss": "be"
+    },
+    {
+      "rank": 2,
+      "infinitif": "avoir",
+      "gloss": "have"
+    },
+    {
+      "rank": 3,
+      "infinitif": "pouvoir",
+      "gloss": "be able"
+    },
+    {
+      "rank": 4,
+      "infinitif": "faire",
+      "gloss": "do, make"
+    },
+    {
+      "rank": 5,
+      "infinitif": "devoir",
+      "gloss": "must, owe"
+    },
+    {
+      "rank": 6,
+      "infinitif": "voir",
+      "gloss": "see"
+    },
+    {
+      "rank": 7,
+      "infinitif": "prendre",
+      "gloss": "take"
+    },
+    {
+      "rank": 8,
+      "infinitif": "aller",
+      "gloss": "go"
+    },
+    {
+      "rank": 9,
+      "infinitif": "dire",
+      "gloss": "say, tell"
+    },
+    {
+      "rank": 10,
+      "infinitif": "mettre",
+      "gloss": "put"
+    },
+    {
+      "rank": 11,
+      "infinitif": "permettre",
+      "gloss": "permit"
+    },
+    {
+      "rank": 12,
+      "infinitif": "donner",
+      "gloss": "give"
+    },
+    {
+      "rank": 13,
+      "infinitif": "trouver",
+      "gloss": "find"
+    },
+    {
+      "rank": 14,
+      "infinitif": "savoir",
+      "gloss": "know"
+    },
+    {
+      "rank": 15,
+      "infinitif": "consulter",
+      "gloss": "consult, refer to"
+    },
+    {
+      "rank": 16,
+      "infinitif": "suivre",
+      "gloss": "follow"
+    },
+    {
+      "rank": 17,
+      "infinitif": "passer",
+      "gloss": "pass"
+    },
+    {
+      "rank": 18,
+      "infinitif": "venir",
+      "gloss": "come"
+    },
+    {
+      "rank": 19,
+      "infinitif": "vouloir",
+      "gloss": "want"
+    },
+    {
+      "rank": 20,
+      "infinitif": "utiliser",
+      "gloss": "use, employ"
+    },
+    {
+      "rank": 21,
+      "infinitif": "proposer",
+      "gloss": "suggest, propose"
+    },
+    {
+      "rank": 22,
+      "infinitif": "faillir",
+      "gloss": "almost do something, fail, fall short"
+    },
+    {
+      "rank": 23,
+      "infinitif": "devenir",
+      "gloss": "become"
+    },
+    {
+      "rank": 24,
+      "infinitif": "connaître",
+      "gloss": "know, be familiar with"
+    },
+    {
+      "rank": 25,
+      "infinitif": "rester",
+      "gloss": "stay, remain"
+    },
+    {
+      "rank": 26,
+      "infinitif": "partir",
+      "gloss": "leave"
+    },
+    {
+      "rank": 27,
+      "infinitif": "comprendre",
+      "gloss": "understand"
+    },
+    {
+      "rank": 28,
+      "infinitif": "aider",
+      "gloss": "help"
+    },
+    {
+      "rank": 29,
+      "infinitif": "modifier",
+      "gloss": "change, modify"
+    },
+    {
+      "rank": 30,
+      "infinitif": "présenter",
+      "gloss": "present"
+    },
+    {
+      "rank": 31,
+      "infinitif": "créer",
+      "gloss": "create"
+    },
+    {
+      "rank": 32,
+      "infinitif": "rendre",
+      "gloss": "render"
+    },
+    {
+      "rank": 33,
+      "infinitif": "penser",
+      "gloss": "think"
+    },
+    {
+      "rank": 34,
+      "infinitif": "parler",
+      "gloss": "speak"
+    },
+    {
+      "rank": 35,
+      "infinitif": "lire",
+      "gloss": "read"
+    },
+    {
+      "rank": 36,
+      "infinitif": "demander",
+      "gloss": "ask"
+    },
+    {
+      "rank": 37,
+      "infinitif": "réaliser",
+      "gloss": "direct (a movie), fulfill (a dream), perform (activities), finish making, carry out, make, realize (make real), realize (become aware)"
+    },
+    {
+      "rank": 38,
+      "infinitif": "agir",
+      "gloss": "act"
+    },
+    {
+      "rank": 39,
+      "infinitif": "laisser",
+      "gloss": "leave, leave alone, allow"
+    },
+    {
+      "rank": 40,
+      "infinitif": "tenir",
+      "gloss": "hold"
+    },
+    {
+      "rank": 41,
+      "infinitif": "porter",
+      "gloss": "carry, wear, bear"
+    },
+    {
+      "rank": 42,
+      "infinitif": "vivre",
+      "gloss": "live"
+    },
+    {
+      "rank": 43,
+      "infinitif": "découvrir",
+      "gloss": "discover"
+    },
+    {
+      "rank": 44,
+      "infinitif": "partager",
+      "gloss": "share, divide, divide up"
+    },
+    {
+      "rank": 45,
+      "infinitif": "situer",
+      "gloss": "locate, situate"
+    },
+    {
+      "rank": 46,
+      "infinitif": "offrir",
+      "gloss": "offer, give as a gift"
+    },
+    {
+      "rank": 47,
+      "infinitif": "arriver",
+      "gloss": "arrive"
+    },
+    {
+      "rank": 48,
+      "infinitif": "retrouver",
+      "gloss": "find, regain"
+    },
+    {
+      "rank": 49,
+      "infinitif": "aimer",
+      "gloss": "like, love"
+    },
+    {
+      "rank": 50,
+      "infinitif": "jouer",
+      "gloss": "play"
+    },
+    {
+      "rank": 51,
+      "infinitif": "sembler",
+      "gloss": "seem"
+    },
+    {
+      "rank": 52,
+      "infinitif": "commencer",
+      "gloss": "start"
+    },
+    {
+      "rank": 53,
+      "infinitif": "appeler",
+      "gloss": "call"
+    },
+    {
+      "rank": 54,
+      "infinitif": "visiter",
+      "gloss": "visit (a place)"
+    },
+    {
+      "rank": 55,
+      "infinitif": "comporter",
+      "gloss": "include, consist of, entail"
+    },
+    {
+      "rank": 56,
+      "infinitif": "sortir",
+      "gloss": "obtain; exit"
+    },
+    {
+      "rank": 57,
+      "infinitif": "attendre",
+      "gloss": "wait for, expect"
+    },
+    {
+      "rank": 58,
+      "infinitif": "écrire",
+      "gloss": "write"
+    },
+    {
+      "rank": 59,
+      "infinitif": "saisir",
+      "gloss": "take hold of, grab, seize"
+    },
+    {
+      "rank": 60,
+      "infinitif": "recevoir",
+      "gloss": "receive"
+    },
+    {
+      "rank": 61,
+      "infinitif": "exister",
+      "gloss": "exist"
+    },
+    {
+      "rank": 62,
+      "infinitif": "améliorer",
+      "gloss": "improve, better, ameliorate"
+    },
+    {
+      "rank": 63,
+      "infinitif": "obtenir",
+      "gloss": "obtain"
+    },
+    {
+      "rank": 64,
+      "infinitif": "choisir",
+      "gloss": "choose"
+    },
+    {
+      "rank": 65,
+      "infinitif": "ajouter",
+      "gloss": "add"
+    },
+    {
+      "rank": 66,
+      "infinitif": "travailler",
+      "gloss": "work"
+    },
+    {
+      "rank": 67,
+      "infinitif": "enrichir",
+      "gloss": "enrich"
+    },
+    {
+      "rank": 68,
+      "infinitif": "ouvrir",
+      "gloss": "open"
+    },
+    {
+      "rank": 69,
+      "infinitif": "assurer",
+      "gloss": "secure, assure"
+    },
+    {
+      "rank": 70,
+      "infinitif": "montrer",
+      "gloss": "show"
+    },
+    {
+      "rank": 71,
+      "infinitif": "souhaiter",
+      "gloss": "wish (for), hope (for)"
+    },
+    {
+      "rank": 72,
+      "infinitif": "croire",
+      "gloss": "believe"
+    },
+    {
+      "rank": 73,
+      "infinitif": "publier",
+      "gloss": "publish, release, issue"
+    },
+    {
+      "rank": 74,
+      "infinitif": "accomplir",
+      "gloss": "accomplish"
+    },
+    {
+      "rank": 75,
+      "infinitif": "naître",
+      "gloss": "be born"
+    },
+    {
+      "rank": 76,
+      "infinitif": "suggérer",
+      "gloss": "suggest, propose, evoke"
+    },
+    {
+      "rank": 77,
+      "infinitif": "répondre",
+      "gloss": "answer, respond"
+    },
+    {
+      "rank": 78,
+      "infinitif": "développer",
+      "gloss": "develop, code"
+    },
+    {
+      "rank": 79,
+      "infinitif": "organiser",
+      "gloss": "organize, plan an event"
+    },
+    {
+      "rank": 80,
+      "infinitif": "produire",
+      "gloss": "produce"
+    },
+    {
+      "rank": 81,
+      "infinitif": "représenter",
+      "gloss": "represent"
+    },
+    {
+      "rank": 82,
+      "infinitif": "servir",
+      "gloss": "serve"
+    },
+    {
+      "rank": 83,
+      "infinitif": "poser",
+      "gloss": "pose, ask (a question), put down, stop carrying"
+    },
+    {
+      "rank": 84,
+      "infinitif": "constituer",
+      "gloss": "constitute, make up"
+    },
+    {
+      "rank": 85,
+      "infinitif": "sauvegarder",
+      "gloss": "safeguard, protect, save (on a computer), back up (computer data)"
+    },
+    {
+      "rank": 86,
+      "infinitif": "concerner",
+      "gloss": "concern"
+    },
+    {
+      "rank": 87,
+      "infinitif": "compter",
+      "gloss": "count"
+    },
+    {
+      "rank": 88,
+      "infinitif": "prévoir",
+      "gloss": "foresee"
+    },
+    {
+      "rank": 89,
+      "infinitif": "expliquer",
+      "gloss": "explain"
+    },
+    {
+      "rank": 90,
+      "infinitif": "revenir",
+      "gloss": "return"
+    },
+    {
+      "rank": 91,
+      "infinitif": "perdre",
+      "gloss": "lose, waste"
+    },
+    {
+      "rank": 92,
+      "infinitif": "entendre",
+      "gloss": "hear, understand"
+    },
+    {
+      "rank": 93,
+      "infinitif": "considérer",
+      "gloss": "consider"
+    },
+    {
+      "rank": 94,
+      "infinitif": "effectuer",
+      "gloss": "effect, work out (a calculation), carry out (an experiment)"
+    },
+    {
+      "rank": 95,
+      "infinitif": "chercher",
+      "gloss": "look for, seek"
+    },
+    {
+      "rank": 96,
+      "infinitif": "changer",
+      "gloss": "change"
+    },
+    {
+      "rank": 97,
+      "infinitif": "décider",
+      "gloss": "decide"
+    },
+    {
+      "rank": 98,
+      "infinitif": "apporter",
+      "gloss": "bring"
+    },
+    {
+      "rank": 99,
+      "infinitif": "lancer",
+      "gloss": "throw"
+    },
+    {
+      "rank": 100,
+      "infinitif": "participer",
+      "gloss": "participate in, donate to"
+    },
+    {
+      "rank": 101,
+      "infinitif": "continuer",
+      "gloss": "continue"
+    },
+    {
+      "rank": 102,
+      "infinitif": "charger",
+      "gloss": "load up, load, charge"
+    },
+    {
+      "rank": 103,
+      "infinitif": "falloir",
+      "gloss": "be necessary"
+    },
+    {
+      "rank": 104,
+      "infinitif": "indiquer",
+      "gloss": "connote, show, indicate"
+    },
+    {
+      "rank": 105,
+      "infinitif": "disposer",
+      "gloss": "distribute, organize, have at one’s disposal"
+    },
+    {
+      "rank": 106,
+      "infinitif": "annoncer",
+      "gloss": "announce"
+    },
+    {
+      "rank": 107,
+      "infinitif": "lier",
+      "gloss": "link, associate, thicken"
+    },
+    {
+      "rank": 108,
+      "infinitif": "construire",
+      "gloss": "build, construct"
+    },
+    {
+      "rank": 109,
+      "infinitif": "installer",
+      "gloss": "install, place"
+    },
+    {
+      "rank": 110,
+      "infinitif": "atteindre",
+      "gloss": "attain"
+    },
+    {
+      "rank": 111,
+      "infinitif": "reprendre",
+      "gloss": "take back"
+    },
+    {
+      "rank": 112,
+      "infinitif": "arrêter",
+      "gloss": "halt, stop, arrest"
+    },
+    {
+      "rank": 113,
+      "infinitif": "accompagner",
+      "gloss": "accompany"
+    },
+    {
+      "rank": 114,
+      "infinitif": "mener",
+      "gloss": "lead"
+    },
+    {
+      "rank": 115,
+      "infinitif": "adapter",
+      "gloss": "adapt"
+    },
+    {
+      "rank": 116,
+      "infinitif": "former",
+      "gloss": "form, shape, train"
+    },
+    {
+      "rank": 117,
+      "infinitif": "priver",
+      "gloss": "deprive"
+    },
+    {
+      "rank": 118,
+      "infinitif": "composer",
+      "gloss": "compose, constitute, dial (a number)"
+    },
+    {
+      "rank": 119,
+      "infinitif": "rencontrer",
+      "gloss": "meet, encounter"
+    },
+    {
+      "rank": 120,
+      "infinitif": "reconnaître",
+      "gloss": "recognize"
+    },
+    {
+      "rank": 121,
+      "infinitif": "rappeler",
+      "gloss": "remind"
+    },
+    {
+      "rank": 122,
+      "infinitif": "apprendre",
+      "gloss": "learn"
+    },
+    {
+      "rank": 123,
+      "infinitif": "élever",
+      "gloss": "raise, bring up"
+    },
+    {
+      "rank": 124,
+      "infinitif": "contenir",
+      "gloss": "contain, hold back, hold, take"
+    },
+    {
+      "rank": 125,
+      "infinitif": "envoyer",
+      "gloss": "send"
+    },
+    {
+      "rank": 126,
+      "infinitif": "apparaître",
+      "gloss": "appear"
+    },
+    {
+      "rank": 127,
+      "infinitif": "mourir",
+      "gloss": "die"
+    },
+    {
+      "rank": 128,
+      "infinitif": "étayer",
+      "gloss": "prop up, support, back up"
+    },
+    {
+      "rank": 129,
+      "infinitif": "finir",
+      "gloss": "finish"
+    },
+    {
+      "rank": 130,
+      "infinitif": "éviter",
+      "gloss": "avoid, dodge, shun, bypass, avert"
+    },
+    {
+      "rank": 131,
+      "infinitif": "essayer",
+      "gloss": "try"
+    },
+    {
+      "rank": 132,
+      "infinitif": "entrer",
+      "gloss": "enter"
+    },
+    {
+      "rank": 133,
+      "infinitif": "réduire",
+      "gloss": "reduce, cut (prices), shorten (text)"
+    },
+    {
+      "rank": 134,
+      "infinitif": "engager",
+      "gloss": "pledge, commit, hire, involve"
+    },
+    {
+      "rank": 135,
+      "infinitif": "intégrer",
+      "gloss": "integrate, incorporate, join, join up"
+    },
+    {
+      "rank": 136,
+      "infinitif": "acheter",
+      "gloss": "buy"
+    },
+    {
+      "rank": 137,
+      "infinitif": "regarder",
+      "gloss": "look at, watch"
+    },
+    {
+      "rank": 138,
+      "infinitif": "détailler",
+      "gloss": "detail, retail"
+    },
+    {
+      "rank": 139,
+      "infinitif": "fournir",
+      "gloss": "supply, provide, furnish"
+    },
+    {
+      "rank": 140,
+      "infinitif": "profiter",
+      "gloss": "take advantage of, make the most of, be beneficial"
+    },
+    {
+      "rank": 141,
+      "infinitif": "gagner",
+      "gloss": "win"
+    },
+    {
+      "rank": 142,
+      "infinitif": "définir",
+      "gloss": "define"
+    },
+    {
+      "rank": 143,
+      "infinitif": "établir",
+      "gloss": "establish, set up"
+    },
+    {
+      "rank": 144,
+      "infinitif": "placer",
+      "gloss": "place, seat"
+    },
+    {
+      "rank": 145,
+      "infinitif": "inscrire",
+      "gloss": "inscribe, jot down, sign up"
+    },
+    {
+      "rank": 146,
+      "infinitif": "associer",
+      "gloss": "associate"
+    },
+    {
+      "rank": 147,
+      "infinitif": "oublier",
+      "gloss": "forget"
+    },
+    {
+      "rank": 148,
+      "infinitif": "nommer",
+      "gloss": "nominate, name, call"
+    },
+    {
+      "rank": 149,
+      "infinitif": "posséder",
+      "gloss": "own, possess"
+    },
+    {
+      "rank": 150,
+      "infinitif": "soutenir",
+      "gloss": "support, keep up"
+    },
+    {
+      "rank": 151,
+      "infinitif": "occuper",
+      "gloss": "occupy"
+    },
+    {
+      "rank": 152,
+      "infinitif": "appliquer",
+      "gloss": "apply"
+    },
+    {
+      "rank": 153,
+      "infinitif": "bénéficier",
+      "gloss": "enjoy, benefit from"
+    },
+    {
+      "rank": 154,
+      "infinitif": "monter",
+      "gloss": "climb, mount"
+    },
+    {
+      "rank": 155,
+      "infinitif": "sentir",
+      "gloss": "sense, smell"
+    },
+    {
+      "rank": 156,
+      "infinitif": "toucher",
+      "gloss": "touch"
+    },
+    {
+      "rank": 157,
+      "infinitif": "issir",
+      "gloss": "leave, exit, go out, get out, escape, produce"
+    },
+    {
+      "rank": 158,
+      "infinitif": "vendre",
+      "gloss": "sell"
+    },
+    {
+      "rank": 159,
+      "infinitif": "viser",
+      "gloss": "aim at, target"
+    },
+    {
+      "rank": 160,
+      "infinitif": "payer",
+      "gloss": "pay"
+    },
+    {
+      "rank": 161,
+      "infinitif": "tomber",
+      "gloss": "fall"
+    },
+    {
+      "rank": 162,
+      "infinitif": "paraître",
+      "gloss": "appear"
+    },
+    {
+      "rank": 163,
+      "infinitif": "accueillir",
+      "gloss": "welcome"
+    },
+    {
+      "rank": 164,
+      "infinitif": "limiter",
+      "gloss": "mark, limit"
+    },
+    {
+      "rank": 165,
+      "infinitif": "traiter",
+      "gloss": "treat, take care of, process"
+    },
+    {
+      "rank": 166,
+      "infinitif": "tourner",
+      "gloss": "turn, stir, tour"
+    },
+    {
+      "rank": 167,
+      "infinitif": "imposer",
+      "gloss": "impose"
+    },
+    {
+      "rank": 168,
+      "infinitif": "conduire",
+      "gloss": "drive, conduct"
+    },
+    {
+      "rank": 169,
+      "infinitif": "préparer",
+      "gloss": "prepare"
+    },
+    {
+      "rank": 170,
+      "infinitif": "déclarer",
+      "gloss": "declare"
+    },
+    {
+      "rank": 171,
+      "infinitif": "protéger",
+      "gloss": "protect"
+    },
+    {
+      "rank": 172,
+      "infinitif": "garder",
+      "gloss": "keep, retain, store, save, guard"
+    },
+    {
+      "rank": 173,
+      "infinitif": "accepter",
+      "gloss": "accept"
+    },
+    {
+      "rank": 174,
+      "infinitif": "réussir",
+      "gloss": "succeed"
+    },
+    {
+      "rank": 175,
+      "infinitif": "sommer",
+      "gloss": "sum up, summon, call"
+    },
+    {
+      "rank": 176,
+      "infinitif": "tenter",
+      "gloss": "tempt"
+    },
+    {
+      "rank": 177,
+      "infinitif": "remettre",
+      "gloss": "put back, replace"
+    },
+    {
+      "rank": 178,
+      "infinitif": "augmenter",
+      "gloss": "increase"
+    },
+    {
+      "rank": 179,
+      "infinitif": "rejoindre",
+      "gloss": "join, join up, rejoin"
+    },
+    {
+      "rank": 180,
+      "infinitif": "inviter",
+      "gloss": "invite"
+    },
+    {
+      "rank": 181,
+      "infinitif": "tirer",
+      "gloss": "pull, fire, shoot"
+    },
+    {
+      "rank": 182,
+      "infinitif": "conserver",
+      "gloss": "keep in a particular place, retain, conserve, preserve"
+    },
+    {
+      "rank": 183,
+      "infinitif": "fonder",
+      "gloss": "found"
+    },
+    {
+      "rank": 184,
+      "infinitif": "manquer",
+      "gloss": "lack, be missed by, miss"
+    },
+    {
+      "rank": 185,
+      "infinitif": "consacrer",
+      "gloss": "dedicate, devote time, consecrate"
+    },
+    {
+      "rank": 186,
+      "infinitif": "terminer",
+      "gloss": "end, finish, terminate"
+    },
+    {
+      "rank": 187,
+      "infinitif": "poursuivre",
+      "gloss": "pursue, chase, torment"
+    },
+    {
+      "rank": 188,
+      "infinitif": "remplacer",
+      "gloss": "replace"
+    },
+    {
+      "rank": 189,
+      "infinitif": "noter",
+      "gloss": "note, notice, grade"
+    },
+    {
+      "rank": 190,
+      "infinitif": "suffire",
+      "gloss": "suffice"
+    },
+    {
+      "rank": 191,
+      "infinitif": "quitter",
+      "gloss": "leave, quit, discharge somebody from an obligation"
+    },
+    {
+      "rank": 192,
+      "infinitif": "marquer",
+      "gloss": "mark, mark down, brand"
+    },
+    {
+      "rank": 193,
+      "infinitif": "correspondre",
+      "gloss": "correspond, write to"
+    },
+    {
+      "rank": 194,
+      "infinitif": "préciser",
+      "gloss": "specify, clarify, point out"
+    },
+    {
+      "rank": 195,
+      "infinitif": "relever",
+      "gloss": "raise"
+    },
+    {
+      "rank": 196,
+      "infinitif": "exprimer",
+      "gloss": "express"
+    },
+    {
+      "rank": 197,
+      "infinitif": "estimer",
+      "gloss": "estimate, calculate roughly, esteem, hold in high regard"
+    },
+    {
+      "rank": 198,
+      "infinitif": "gérer",
+      "gloss": "manage"
+    },
+    {
+      "rank": 199,
+      "infinitif": "intéresser",
+      "gloss": "interest, make interested"
+    },
+    {
+      "rank": 200,
+      "infinitif": "concevoir",
+      "gloss": "conceive"
+    },
+    {
+      "rank": 201,
+      "infinitif": "fixer",
+      "gloss": "fix, fasten"
+    },
+    {
+      "rank": 202,
+      "infinitif": "identifier",
+      "gloss": "identify, log in"
+    },
+    {
+      "rank": 203,
+      "infinitif": "espérer",
+      "gloss": "hope, hope for"
+    },
+    {
+      "rank": 204,
+      "infinitif": "marier",
+      "gloss": "wed, marry"
+    },
+    {
+      "rank": 205,
+      "infinitif": "signer",
+      "gloss": "sign"
+    },
+    {
+      "rank": 206,
+      "infinitif": "préférer",
+      "gloss": "prefer"
+    },
+    {
+      "rank": 207,
+      "infinitif": "importer",
+      "gloss": "matter, import"
+    },
+    {
+      "rank": 208,
+      "infinitif": "destiner",
+      "gloss": "destine, fate"
+    },
+    {
+      "rank": 209,
+      "infinitif": "fonctionner",
+      "gloss": "function, work"
+    },
+    {
+      "rank": 210,
+      "infinitif": "valoir",
+      "gloss": "be worth"
+    },
+    {
+      "rank": 211,
+      "infinitif": "diriger",
+      "gloss": "direct, lead"
+    },
+    {
+      "rank": 212,
+      "infinitif": "étudier",
+      "gloss": "study"
+    },
+    {
+      "rank": 213,
+      "infinitif": "avancer",
+      "gloss": "advance, go forward"
+    },
+    {
+      "rank": 214,
+      "infinitif": "respecter",
+      "gloss": "respect, meet (a deadline)"
+    },
+    {
+      "rank": 215,
+      "infinitif": "adopter",
+      "gloss": "adopt"
+    },
+    {
+      "rank": 216,
+      "infinitif": "discuter",
+      "gloss": "discuss, chat"
+    },
+    {
+      "rank": 217,
+      "infinitif": "refuser",
+      "gloss": "refuse"
+    },
+    {
+      "rank": 218,
+      "infinitif": "confirmer",
+      "gloss": "confirm, uphold"
+    },
+    {
+      "rank": 219,
+      "infinitif": "spécialiser",
+      "gloss": "specialize, assign a specialized task"
+    },
+    {
+      "rank": 220,
+      "infinitif": "constater",
+      "gloss": "note, notice, certify, state, observe"
+    },
+    {
+      "rank": 221,
+      "infinitif": "révéler",
+      "gloss": "reveal, give away, develop (a photo)"
+    },
+    {
+      "rank": 222,
+      "infinitif": "affirmer",
+      "gloss": "affirm, claim"
+    },
+    {
+      "rank": 223,
+      "infinitif": "évoquer",
+      "gloss": "evoke, mention"
+    },
+    {
+      "rank": 224,
+      "infinitif": "réunir",
+      "gloss": "gather, collect, bring together"
+    },
+    {
+      "rank": 225,
+      "infinitif": "décrire",
+      "gloss": "describe"
+    },
+    {
+      "rank": 226,
+      "infinitif": "adresser",
+      "gloss": "direct"
+    },
+    {
+      "rank": 227,
+      "infinitif": "empêcher",
+      "gloss": "prevent"
+    },
+    {
+      "rank": 228,
+      "infinitif": "désigner",
+      "gloss": "designate"
+    },
+    {
+      "rank": 229,
+      "infinitif": "couvrir",
+      "gloss": "cover"
+    },
+    {
+      "rank": 230,
+      "infinitif": "observer",
+      "gloss": "observe, watch, notice, keep"
+    },
+    {
+      "rank": 231,
+      "infinitif": "tuer",
+      "gloss": "kill"
+    },
+    {
+      "rank": 232,
+      "infinitif": "garantir",
+      "gloss": "guarantee, protect, preserve"
+    },
+    {
+      "rank": 233,
+      "infinitif": "citer",
+      "gloss": "cite, summon, name"
+    },
+    {
+      "rank": 234,
+      "infinitif": "ouvrer",
+      "gloss": "work"
+    },
+    {
+      "rank": 235,
+      "infinitif": "intervenir",
+      "gloss": "intervene, take part"
+    },
+    {
+      "rank": 236,
+      "infinitif": "transformer",
+      "gloss": "transform"
+    },
+    {
+      "rank": 237,
+      "infinitif": "conseiller",
+      "gloss": "advise, counsel"
+    },
+    {
+      "rank": 238,
+      "infinitif": "enregistrer",
+      "gloss": "record for later replay or use, save on a computer"
+    },
+    {
+      "rank": 239,
+      "infinitif": "contribuer",
+      "gloss": "contribute, help"
+    },
+    {
+      "rank": 240,
+      "infinitif": "évoluer",
+      "gloss": "evolve, change, develop, play, move about"
+    },
+    {
+      "rank": 241,
+      "infinitif": "inclure",
+      "gloss": "include"
+    },
+    {
+      "rank": 242,
+      "infinitif": "appuyer",
+      "gloss": "press, push"
+    },
+    {
+      "rank": 243,
+      "infinitif": "déterminer",
+      "gloss": "determine, establish"
+    },
+    {
+      "rank": 244,
+      "infinitif": "apprécier",
+      "gloss": "appreciate, like"
+    },
+    {
+      "rank": 245,
+      "infinitif": "soumettre",
+      "gloss": "submit"
+    },
+    {
+      "rank": 246,
+      "infinitif": "réserver",
+      "gloss": "reserve, make a reservation (for), book"
+    },
+    {
+      "rank": 247,
+      "infinitif": "appartenir",
+      "gloss": "belong, concern"
+    },
+    {
+      "rank": 248,
+      "infinitif": "acquérir",
+      "gloss": "acquire"
+    },
+    {
+      "rank": 249,
+      "infinitif": "convenir",
+      "gloss": "admit, agree, suit, be convenient for"
+    },
+    {
+      "rank": 250,
+      "infinitif": "renforcer",
+      "gloss": "reinforce, strengthen"
+    },
+    {
+      "rank": 251,
+      "infinitif": "manger",
+      "gloss": "eat"
+    },
+    {
+      "rank": 252,
+      "infinitif": "parvenir",
+      "gloss": "reach, attain"
+    },
+    {
+      "rank": 253,
+      "infinitif": "afficher",
+      "gloss": "put up, display"
+    },
+    {
+      "rank": 254,
+      "infinitif": "baser",
+      "gloss": "base"
+    },
+    {
+      "rank": 255,
+      "infinitif": "fermer",
+      "gloss": "shut, close"
+    },
+    {
+      "rank": 256,
+      "infinitif": "cacher",
+      "gloss": "hide"
+    },
+    {
+      "rank": 257,
+      "infinitif": "imaginer",
+      "gloss": "imagine"
+    },
+    {
+      "rank": 258,
+      "infinitif": "pousser",
+      "gloss": "push, urge on"
+    },
+    {
+      "rank": 259,
+      "infinitif": "varier",
+      "gloss": "vary"
+    },
+    {
+      "rank": 260,
+      "infinitif": "maintenir",
+      "gloss": "maintain, stick to"
+    },
+    {
+      "rank": 261,
+      "infinitif": "opposer",
+      "gloss": "oppose"
+    },
+    {
+      "rank": 262,
+      "infinitif": "rechercher",
+      "gloss": "search for, look for, search again, look for again"
+    },
+    {
+      "rank": 263,
+      "infinitif": "accorder",
+      "gloss": "grant"
+    },
+    {
+      "rank": 264,
+      "infinitif": "livrer",
+      "gloss": "deliver, hand over, betray"
+    },
+    {
+      "rank": 265,
+      "infinitif": "dérouler",
+      "gloss": "unroll"
+    },
+    {
+      "rank": 266,
+      "infinitif": "remporter",
+      "gloss": "take back, take away (again)"
+    },
+    {
+      "rank": 267,
+      "infinitif": "remplir",
+      "gloss": "fill, fill up, fill in, fulfill"
+    },
+    {
+      "rank": 268,
+      "infinitif": "vérifier",
+      "gloss": "verify"
+    },
+    {
+      "rank": 269,
+      "infinitif": "retenir",
+      "gloss": "retain, hold, remember"
+    },
+    {
+      "rank": 270,
+      "infinitif": "équiper",
+      "gloss": "supply, equip"
+    },
+    {
+      "rank": 271,
+      "infinitif": "cliquer",
+      "gloss": "click"
+    },
+    {
+      "rank": 272,
+      "infinitif": "souligner",
+      "gloss": "underscore, underline, highlight, emphasize"
+    },
+    {
+      "rank": 273,
+      "infinitif": "déposer",
+      "gloss": "put down (set down), lay down"
+    },
+    {
+      "rank": 274,
+      "infinitif": "pratiquer",
+      "gloss": "do, practise"
+    },
+    {
+      "rank": 275,
+      "infinitif": "supprimer",
+      "gloss": "delete, suppress, remove, take out"
+    },
+    {
+      "rank": 276,
+      "infinitif": "dédier",
+      "gloss": "dedicate"
+    },
+    {
+      "rank": 277,
+      "infinitif": "marcher",
+      "gloss": "walk, travel, move, march, step, function"
+    },
+    {
+      "rank": 278,
+      "infinitif": "favoriser",
+      "gloss": "favor, show a preference to something, prioritize"
+    },
+    {
+      "rank": 279,
+      "infinitif": "exercer",
+      "gloss": "instruct, command, exercise, practice, do"
+    },
+    {
+      "rank": 280,
+      "infinitif": "disparaître",
+      "gloss": "disappear"
+    },
+    {
+      "rank": 281,
+      "infinitif": "juger",
+      "gloss": "judge, try, deem"
+    },
+    {
+      "rank": 282,
+      "infinitif": "cesser",
+      "gloss": "cease, stop, break up"
+    },
+    {
+      "rank": 283,
+      "infinitif": "battre",
+      "gloss": "beat"
+    },
+    {
+      "rank": 284,
+      "infinitif": "inspirer",
+      "gloss": "inspire, breathe"
+    },
+    {
+      "rank": 285,
+      "infinitif": "signifier",
+      "gloss": "signify, mean"
+    },
+    {
+      "rank": 286,
+      "infinitif": "entraîner",
+      "gloss": "coach, train, drag"
+    },
+    {
+      "rank": 287,
+      "infinitif": "raconter",
+      "gloss": "recount, tell, narrate"
+    },
+    {
+      "rank": 288,
+      "infinitif": "diffuser",
+      "gloss": "diffuse, broadcast"
+    },
+    {
+      "rank": 289,
+      "infinitif": "impliquer",
+      "gloss": "implicate, accuse, imply"
+    },
+    {
+      "rank": 290,
+      "infinitif": "exposer",
+      "gloss": "expose"
+    },
+    {
+      "rank": 291,
+      "infinitif": "défendre",
+      "gloss": "defend, forbid"
+    },
+    {
+      "rank": 292,
+      "infinitif": "compléter",
+      "gloss": "complete"
+    },
+    {
+      "rank": 293,
+      "infinitif": "hésiter",
+      "gloss": "hesitate"
+    },
+    {
+      "rank": 294,
+      "infinitif": "dépasser",
+      "gloss": "overtake"
+    },
+    {
+      "rank": 295,
+      "infinitif": "intituler",
+      "gloss": "title"
+    },
+    {
+      "rank": 296,
+      "infinitif": "interdire",
+      "gloss": "forbid, ban, prohibit, interdict"
+    },
+    {
+      "rank": 297,
+      "infinitif": "traduire",
+      "gloss": "translate, summon"
+    },
+    {
+      "rank": 298,
+      "infinitif": "consister",
+      "gloss": "consist"
+    },
+    {
+      "rank": 299,
+      "infinitif": "retirer",
+      "gloss": "take off, remove, withdraw"
+    },
+    {
+      "rank": 300,
+      "infinitif": "élire",
+      "gloss": "elect"
+    },
+    {
+      "rank": 301,
+      "infinitif": "autoriser",
+      "gloss": "authorize, allow"
+    },
+    {
+      "rank": 302,
+      "infinitif": "étendre",
+      "gloss": "stretch the limbs, spread, hang out washing, extend, englare, expand, dilute, water down"
+    },
+    {
+      "rank": 303,
+      "infinitif": "provoquer",
+      "gloss": "provoke, bring on, bring about"
+    },
+    {
+      "rank": 304,
+      "infinitif": "amener",
+      "gloss": "bring a person, take, fetch"
+    },
+    {
+      "rank": 305,
+      "infinitif": "aborder",
+      "gloss": "deal with, tackle"
+    },
+    {
+      "rank": 306,
+      "infinitif": "rentrer",
+      "gloss": "re-enter, go in"
+    },
+    {
+      "rank": 307,
+      "infinitif": "contacter",
+      "gloss": "contact"
+    },
+    {
+      "rank": 308,
+      "infinitif": "animer",
+      "gloss": "animate"
+    },
+    {
+      "rank": 309,
+      "infinitif": "couper",
+      "gloss": "cut"
+    },
+    {
+      "rank": 310,
+      "infinitif": "classer",
+      "gloss": "classify, file"
+    },
+    {
+      "rank": 311,
+      "infinitif": "écouter",
+      "gloss": "listen"
+    },
+    {
+      "rank": 312,
+      "infinitif": "obliger",
+      "gloss": "oblige, require, compel, force someone"
+    },
+    {
+      "rank": 313,
+      "infinitif": "séparer",
+      "gloss": "separate, split up"
+    },
+    {
+      "rank": 314,
+      "infinitif": "retourner",
+      "gloss": "return"
+    },
+    {
+      "rank": 315,
+      "infinitif": "tester",
+      "gloss": "test"
+    },
+    {
+      "rank": 316,
+      "infinitif": "recommander",
+      "gloss": "command, order, recommend, endorse"
+    },
+    {
+      "rank": 317,
+      "infinitif": "qualifier",
+      "gloss": "qualify"
+    },
+    {
+      "rank": 318,
+      "infinitif": "subir",
+      "gloss": "suffer, undergo, be subjected to"
+    },
+    {
+      "rank": 319,
+      "infinitif": "sélectionner",
+      "gloss": "select, pick"
+    },
+    {
+      "rank": 320,
+      "infinitif": "traverser",
+      "gloss": "cross, go across"
+    },
+    {
+      "rank": 321,
+      "infinitif": "reposer",
+      "gloss": "rest, repose"
+    },
+    {
+      "rank": 322,
+      "infinitif": "employer",
+      "gloss": "use, employ"
+    },
+    {
+      "rank": 323,
+      "infinitif": "dater",
+      "gloss": "date"
+    },
+    {
+      "rank": 324,
+      "infinitif": "mentionner",
+      "gloss": "mention"
+    },
+    {
+      "rank": 325,
+      "infinitif": "assister",
+      "gloss": "attend, be present"
+    },
+    {
+      "rank": 326,
+      "infinitif": "faciliter",
+      "gloss": "facilitate"
+    },
+    {
+      "rank": 327,
+      "infinitif": "dépendre",
+      "gloss": "depend"
+    },
+    {
+      "rank": 328,
+      "infinitif": "contrôler",
+      "gloss": "check, examine, control"
+    },
+    {
+      "rank": 329,
+      "infinitif": "informer",
+      "gloss": "inform, enlighten, impart knowledge (upon)"
+    },
+    {
+      "rank": 330,
+      "infinitif": "remarquer",
+      "gloss": "observe, point out, remark upon, notice"
+    },
+    {
+      "rank": 331,
+      "infinitif": "transmettre",
+      "gloss": "transmit"
+    },
+    {
+      "rank": 332,
+      "infinitif": "confier",
+      "gloss": "confide, entrust"
+    },
+    {
+      "rank": 333,
+      "infinitif": "détruire",
+      "gloss": "destroy"
+    },
+    {
+      "rank": 334,
+      "infinitif": "unir",
+      "gloss": "unite, join, combine"
+    },
+    {
+      "rank": 335,
+      "infinitif": "accéder",
+      "gloss": "reach, access"
+    },
+    {
+      "rank": 336,
+      "infinitif": "envisager",
+      "gloss": "envisage, contemplate"
+    },
+    {
+      "rank": 337,
+      "infinitif": "nécessiter",
+      "gloss": "require, call for"
+    },
+    {
+      "rank": 338,
+      "infinitif": "risquer",
+      "gloss": "risk"
+    },
+    {
+      "rank": 339,
+      "infinitif": "commander",
+      "gloss": "tell someone to do something, ask for a product"
+    },
+    {
+      "rank": 340,
+      "infinitif": "attaquer",
+      "gloss": "attack"
+    },
+    {
+      "rank": 341,
+      "infinitif": "voter",
+      "gloss": "vote"
+    },
+    {
+      "rank": 342,
+      "infinitif": "justifier",
+      "gloss": "justify"
+    },
+    {
+      "rank": 343,
+      "infinitif": "abandonner",
+      "gloss": "abandon"
+    },
+    {
+      "rank": 344,
+      "infinitif": "distinguer",
+      "gloss": "distinguish"
+    },
+    {
+      "rank": 345,
+      "infinitif": "connecter",
+      "gloss": "connect, log in"
+    },
+    {
+      "rank": 346,
+      "infinitif": "regrouper",
+      "gloss": "regroup, group together"
+    },
+    {
+      "rank": 347,
+      "infinitif": "fabriquer",
+      "gloss": "fabricate"
+    },
+    {
+      "rank": 348,
+      "infinitif": "verser",
+      "gloss": "pour, pay, capsize"
+    },
+    {
+      "rank": 349,
+      "infinitif": "déplacer",
+      "gloss": "move"
+    },
+    {
+      "rank": 350,
+      "infinitif": "adorer",
+      "gloss": "adore, worship"
+    },
+    {
+      "rank": 351,
+      "infinitif": "rapporter",
+      "gloss": "bring back, retrieve"
+    },
+    {
+      "rank": 352,
+      "infinitif": "comparer",
+      "gloss": "compare"
+    },
+    {
+      "rank": 353,
+      "infinitif": "attirer",
+      "gloss": "attract"
+    },
+    {
+      "rank": 354,
+      "infinitif": "remonter",
+      "gloss": "go back up, come back up, climb again, reclimb, go back, return"
+    },
+    {
+      "rank": 355,
+      "infinitif": "jeter",
+      "gloss": "throw"
+    },
+    {
+      "rank": 356,
+      "infinitif": "demeurer",
+      "gloss": "live, stay"
+    },
+    {
+      "rank": 357,
+      "infinitif": "doter",
+      "gloss": "endow, donate"
+    },
+    {
+      "rank": 358,
+      "infinitif": "lever",
+      "gloss": "raise, lift"
+    },
+    {
+      "rank": 359,
+      "infinitif": "provenir",
+      "gloss": "originate (from), arise (from)"
+    },
+    {
+      "rank": 360,
+      "infinitif": "conclure",
+      "gloss": "conclude, attain, reach"
+    },
+    {
+      "rank": 361,
+      "infinitif": "attribuer",
+      "gloss": "grant, award"
+    },
+    {
+      "rank": 362,
+      "infinitif": "récupérer",
+      "gloss": "get back, recover, recuperate, reform, rehabilitate, reclaim, make up"
+    },
+    {
+      "rank": 363,
+      "infinitif": "dessiner",
+      "gloss": "sketch, draw"
+    },
+    {
+      "rank": 364,
+      "infinitif": "évaluer",
+      "gloss": "assess"
+    },
+    {
+      "rank": 365,
+      "infinitif": "débuter",
+      "gloss": "start, debut"
+    },
+    {
+      "rank": 366,
+      "infinitif": "communiquer",
+      "gloss": "communicate"
+    },
+    {
+      "rank": 367,
+      "infinitif": "interroger",
+      "gloss": "question, interrogate"
+    },
+    {
+      "rank": 368,
+      "infinitif": "figurer",
+      "gloss": "appear in a list, be included, represent"
+    },
+    {
+      "rank": 369,
+      "infinitif": "télécharger",
+      "gloss": "download, upload"
+    },
+    {
+      "rank": 370,
+      "infinitif": "souffrir",
+      "gloss": "souffrir"
+    },
+    {
+      "rank": 371,
+      "infinitif": "mesurer",
+      "gloss": "measure"
+    },
+    {
+      "rank": 372,
+      "infinitif": "satisfaire",
+      "gloss": "satisfy, fulfill"
+    },
+    {
+      "rank": 373,
+      "infinitif": "condamner",
+      "gloss": "condemn, sentence, punish, block, obstruct"
+    },
+    {
+      "rank": 374,
+      "infinitif": "introduire",
+      "gloss": "introduce, insert, put in"
+    },
+    {
+      "rank": 375,
+      "infinitif": "supposer",
+      "gloss": "suppose, think, reckon, surmise, suggest, imply"
+    },
+    {
+      "rank": 376,
+      "infinitif": "sauver",
+      "gloss": "save, rescue, protect"
+    },
+    {
+      "rank": 377,
+      "infinitif": "investir",
+      "gloss": "invest"
+    },
+    {
+      "rank": 378,
+      "infinitif": "analyser",
+      "gloss": "analyze"
+    },
+    {
+      "rank": 379,
+      "infinitif": "prononcer",
+      "gloss": "pronounce, say, mention"
+    },
+    {
+      "rank": 380,
+      "infinitif": "tendre",
+      "gloss": "tighten, stretch out"
+    },
+    {
+      "rank": 381,
+      "infinitif": "user",
+      "gloss": "use, wear, wear down, wear off, wear out, grind down, run in"
+    },
+    {
+      "rank": 382,
+      "infinitif": "relier",
+      "gloss": "connect, link, join, relate to"
+    },
+    {
+      "rank": 383,
+      "infinitif": "attacher",
+      "gloss": "affix, bind"
+    },
+    {
+      "rank": 384,
+      "infinitif": "entourer",
+      "gloss": "surround"
+    },
+    {
+      "rank": 385,
+      "infinitif": "illustrer",
+      "gloss": "illustrate"
+    },
+    {
+      "rank": 386,
+      "infinitif": "indexer",
+      "gloss": "index, put into an index"
+    },
+    {
+      "rank": 387,
+      "infinitif": "corriger",
+      "gloss": "correct"
+    },
+    {
+      "rank": 388,
+      "infinitif": "enlever",
+      "gloss": "remove, take off, take away, clear, remove clothes"
+    },
+    {
+      "rank": 389,
+      "infinitif": "démontrer",
+      "gloss": "demonstrate"
+    },
+    {
+      "rank": 390,
+      "infinitif": "privilégier",
+      "gloss": "privilege, favor"
+    },
+    {
+      "rank": 391,
+      "infinitif": "rassembler",
+      "gloss": "assemble, gather, summon"
+    },
+    {
+      "rank": 392,
+      "infinitif": "habiter",
+      "gloss": "live in, occupy"
+    },
+    {
+      "rank": 393,
+      "infinitif": "rédiger",
+      "gloss": "proofread, compose"
+    },
+    {
+      "rank": 394,
+      "infinitif": "entreprendre",
+      "gloss": "undertake"
+    },
+    {
+      "rank": 395,
+      "infinitif": "financer",
+      "gloss": "fund"
+    },
+    {
+      "rank": 396,
+      "infinitif": "convaincre",
+      "gloss": "convince"
+    },
+    {
+      "rank": 397,
+      "infinitif": "échapper",
+      "gloss": "escape (from), evade"
+    },
+    {
+      "rank": 398,
+      "infinitif": "signaler",
+      "gloss": "signal, highlight, notify"
+    },
+    {
+      "rank": 399,
+      "infinitif": "procéder",
+      "gloss": "proceed, behave"
+    },
+    {
+      "rank": 400,
+      "infinitif": "prouver",
+      "gloss": "prove"
+    },
+    {
+      "rank": 401,
+      "infinitif": "courir",
+      "gloss": "run"
+    },
+    {
+      "rank": 402,
+      "infinitif": "revoir",
+      "gloss": "see again"
+    },
+    {
+      "rank": 403,
+      "infinitif": "affecter",
+      "gloss": "feign, affect"
+    },
+    {
+      "rank": 404,
+      "infinitif": "exiger",
+      "gloss": "demand, require"
+    },
+    {
+      "rank": 405,
+      "infinitif": "enseigner",
+      "gloss": "teach"
+    },
+    {
+      "rank": 406,
+      "infinitif": "plaire",
+      "gloss": "please"
+    },
+    {
+      "rank": 407,
+      "infinitif": "ressembler",
+      "gloss": "resemble, be similar to, look like"
+    },
+    {
+      "rank": 408,
+      "infinitif": "diminuer",
+      "gloss": "diminish, decrease"
+    },
+    {
+      "rank": 409,
+      "infinitif": "résoudre",
+      "gloss": "dissolve"
+    },
+    {
+      "rank": 410,
+      "infinitif": "percevoir",
+      "gloss": "perceive, make out, understand"
+    },
+    {
+      "rank": 411,
+      "infinitif": "ressentir",
+      "gloss": "feel"
+    },
+    {
+      "rank": 412,
+      "infinitif": "libérer",
+      "gloss": "liberate, set free, release from captivity, vacate"
+    },
+    {
+      "rank": 413,
+      "infinitif": "chanter",
+      "gloss": "sing"
+    },
+    {
+      "rank": 414,
+      "infinitif": "régler",
+      "gloss": "sort out, settle, set, adjust, regulate, put lines on"
+    },
+    {
+      "rank": 415,
+      "infinitif": "admettre",
+      "gloss": "admit"
+    },
+    {
+      "rank": 416,
+      "infinitif": "personnaliser",
+      "gloss": "personalize, customize"
+    },
+    {
+      "rank": 417,
+      "infinitif": "manifester",
+      "gloss": "demonstrate, protest"
+    },
+    {
+      "rank": 418,
+      "infinitif": "rouler",
+      "gloss": "roll, revolve"
+    },
+    {
+      "rank": 419,
+      "infinitif": "boire",
+      "gloss": "drink"
+    },
+    {
+      "rank": 420,
+      "infinitif": "frapper",
+      "gloss": "hit, strike, bash"
+    },
+    {
+      "rank": 421,
+      "infinitif": "surprendre",
+      "gloss": "surprise, catch out"
+    },
+    {
+      "rank": 422,
+      "infinitif": "prétendre",
+      "gloss": "claim, allege, expect"
+    },
+    {
+      "rank": 423,
+      "infinitif": "caractériser",
+      "gloss": "characterize"
+    },
+    {
+      "rank": 424,
+      "infinitif": "souvenir",
+      "gloss": "remember"
+    },
+    {
+      "rank": 425,
+      "infinitif": "orienter",
+      "gloss": "orientate, guide"
+    },
+    {
+      "rank": 426,
+      "infinitif": "supporter",
+      "gloss": "support, bear"
+    },
+    {
+      "rank": 427,
+      "infinitif": "descendre",
+      "gloss": "descend"
+    },
+    {
+      "rank": 428,
+      "infinitif": "dénoncer",
+      "gloss": "denounce"
+    },
+    {
+      "rank": 429,
+      "infinitif": "réfléchir",
+      "gloss": "ponder, reflect"
+    },
+    {
+      "rank": 430,
+      "infinitif": "ignorer",
+      "gloss": "ignore, be unaware of, be ignorant of"
+    },
+    {
+      "rank": 431,
+      "infinitif": "témoigner",
+      "gloss": "witness"
+    },
+    {
+      "rank": 432,
+      "infinitif": "voler",
+      "gloss": "fly, flee, steal, rob"
+    },
+    {
+      "rank": 433,
+      "infinitif": "asseoir",
+      "gloss": "sit"
+    },
+    {
+      "rank": 434,
+      "infinitif": "promouvoir",
+      "gloss": "promote"
+    },
+    {
+      "rank": 435,
+      "infinitif": "nourrir",
+      "gloss": "nourish, feed"
+    },
+    {
+      "rank": 436,
+      "infinitif": "générer",
+      "gloss": "generate"
+    },
+    {
+      "rank": 437,
+      "infinitif": "entretenir",
+      "gloss": "maintain, look after, support, fuel"
+    },
+    {
+      "rank": 438,
+      "infinitif": "mériter",
+      "gloss": "deserve, merit"
+    },
+    {
+      "rank": 439,
+      "infinitif": "renvoyer",
+      "gloss": "resend, send again, send back, give back, fire, expel"
+    },
+    {
+      "rank": 440,
+      "infinitif": "élaborer",
+      "gloss": "elaborate, draw up, write up, make up, whip up, put together"
+    },
+    {
+      "rank": 441,
+      "infinitif": "encourager",
+      "gloss": "encourage"
+    },
+    {
+      "rank": 442,
+      "infinitif": "durer",
+      "gloss": "last (for)"
+    },
+    {
+      "rank": 443,
+      "infinitif": "consommer",
+      "gloss": "consume, consummate"
+    },
+    {
+      "rank": 444,
+      "infinitif": "remercier",
+      "gloss": "thank, fire (an employee, euphemistically)"
+    },
+    {
+      "rank": 445,
+      "infinitif": "concentrer",
+      "gloss": "concentrate"
+    },
+    {
+      "rank": 446,
+      "infinitif": "désirer",
+      "gloss": "desire, want"
+    },
+    {
+      "rank": 447,
+      "infinitif": "exploiter",
+      "gloss": "exploit"
+    },
+    {
+      "rank": 448,
+      "infinitif": "parcourir",
+      "gloss": "go through, pass through, read through, skim"
+    },
+    {
+      "rank": 449,
+      "infinitif": "restaurer",
+      "gloss": "restore"
+    },
+    {
+      "rank": 450,
+      "infinitif": "promettre",
+      "gloss": "promise"
+    },
+    {
+      "rank": 451,
+      "infinitif": "dévoiler",
+      "gloss": "unveil (remove a veil from)"
+    },
+    {
+      "rank": 452,
+      "infinitif": "préserver",
+      "gloss": "preserve"
+    },
+    {
+      "rank": 453,
+      "infinitif": "croiser",
+      "gloss": "cross"
+    },
+    {
+      "rank": 454,
+      "infinitif": "avérer",
+      "gloss": "prove to be"
+    },
+    {
+      "rank": 455,
+      "infinitif": "rêver",
+      "gloss": "dream"
+    },
+    {
+      "rank": 456,
+      "infinitif": "imprimer",
+      "gloss": "print, print out"
+    },
+    {
+      "rank": 457,
+      "infinitif": "causer",
+      "gloss": "cause, chat, speak"
+    },
+    {
+      "rank": 458,
+      "infinitif": "émettre",
+      "gloss": "emit, state, express, issue"
+    },
+    {
+      "rank": 459,
+      "infinitif": "forcer",
+      "gloss": "force"
+    },
+    {
+      "rank": 460,
+      "infinitif": "rejeter",
+      "gloss": "throw back, discharge, refute, reject"
+    },
+    {
+      "rank": 461,
+      "infinitif": "poster",
+      "gloss": "mail"
+    },
+    {
+      "rank": 462,
+      "infinitif": "prévenir",
+      "gloss": "warn, notify, prevent"
+    },
+    {
+      "rank": 463,
+      "infinitif": "répéter",
+      "gloss": "repeat"
+    },
+    {
+      "rank": 464,
+      "infinitif": "joindre",
+      "gloss": "join"
+    },
+    {
+      "rank": 465,
+      "infinitif": "avouer",
+      "gloss": "avow, confess"
+    },
+    {
+      "rank": 466,
+      "infinitif": "éloigner",
+      "gloss": "remove, distance"
+    },
+    {
+      "rank": 467,
+      "infinitif": "interpréter",
+      "gloss": "translate, interpret, construe"
+    },
+    {
+      "rank": 468,
+      "infinitif": "résulter",
+      "gloss": "result, happen"
+    },
+    {
+      "rank": 469,
+      "infinitif": "valider",
+      "gloss": "validate"
+    },
+    {
+      "rank": 470,
+      "infinitif": "répartir",
+      "gloss": "distribute, apportion, forward (email)"
+    },
+    {
+      "rank": 471,
+      "infinitif": "guider",
+      "gloss": "guide"
+    },
+    {
+      "rank": 472,
+      "infinitif": "dominer",
+      "gloss": "dominate"
+    },
+    {
+      "rank": 473,
+      "infinitif": "extraire",
+      "gloss": "extract (to draw out)"
+    },
+    {
+      "rank": 474,
+      "infinitif": "emporter",
+      "gloss": "take away, win"
+    },
+    {
+      "rank": 475,
+      "infinitif": "échanger",
+      "gloss": "exchange, swap"
+    },
+    {
+      "rank": 476,
+      "infinitif": "lutter",
+      "gloss": "struggle, fight, wrestle"
+    },
+    {
+      "rank": 477,
+      "infinitif": "accuser",
+      "gloss": "accuse"
+    },
+    {
+      "rank": 478,
+      "infinitif": "rapprocher",
+      "gloss": "reapproach, approach again, come closer"
+    },
+    {
+      "rank": 479,
+      "infinitif": "commettre",
+      "gloss": "commit"
+    },
+    {
+      "rank": 480,
+      "infinitif": "isoler",
+      "gloss": "isolate, insulate"
+    },
+    {
+      "rank": 481,
+      "infinitif": "exécuter",
+      "gloss": "execute, carry out"
+    },
+    {
+      "rank": 482,
+      "infinitif": "oser",
+      "gloss": "dare"
+    },
+    {
+      "rank": 483,
+      "infinitif": "diviser",
+      "gloss": "divide"
+    },
+    {
+      "rank": 484,
+      "infinitif": "opérer",
+      "gloss": "operate (on), take place"
+    },
+    {
+      "rank": 485,
+      "infinitif": "maîtriser",
+      "gloss": "master, have authority over somebody, dominate"
+    },
+    {
+      "rank": 486,
+      "infinitif": "coter",
+      "gloss": "quote, grade, rate"
+    },
+    {
+      "rank": 487,
+      "infinitif": "aboutir",
+      "gloss": "lead to, reach"
+    },
+    {
+      "rank": 488,
+      "infinitif": "allier",
+      "gloss": "ally, alloy"
+    },
+    {
+      "rank": 489,
+      "infinitif": "explorer",
+      "gloss": "explore"
+    },
+    {
+      "rank": 490,
+      "infinitif": "résister",
+      "gloss": "resist"
+    },
+    {
+      "rank": 491,
+      "infinitif": "bloquer",
+      "gloss": "block, barricade"
+    },
+    {
+      "rank": 492,
+      "infinitif": "prêter",
+      "gloss": "lend"
+    },
+    {
+      "rank": 493,
+      "infinitif": "éliminer",
+      "gloss": "eliminate"
+    },
+    {
+      "rank": 494,
+      "infinitif": "mobiliser",
+      "gloss": "mobilize"
+    },
+    {
+      "rank": 495,
+      "infinitif": "requérir",
+      "gloss": "call for, require, request, summon, demand, need"
+    },
+    {
+      "rank": 496,
+      "infinitif": "menacer",
+      "gloss": "threaten, jeopardize, endanger, menace"
+    },
+    {
+      "rank": 497,
+      "infinitif": "confronter",
+      "gloss": "confront, contrast, compare"
+    },
+    {
+      "rank": 498,
+      "infinitif": "détenir",
+      "gloss": "detain"
+    },
+    {
+      "rank": 499,
+      "infinitif": "délivrer",
+      "gloss": "set free, deliver"
+    },
+    {
+      "rank": 500,
+      "infinitif": "sacrer",
+      "gloss": "crown, post"
+    },
+    {
+      "rank": 501,
+      "infinitif": "achever",
+      "gloss": "finish, finish off"
+    },
+    {
+      "rank": 502,
+      "infinitif": "apercevoir",
+      "gloss": "see, glimpse, catch sight of"
+    },
+    {
+      "rank": 503,
+      "infinitif": "douter",
+      "gloss": "doubt"
+    },
+    {
+      "rank": 504,
+      "infinitif": "examiner",
+      "gloss": "examine"
+    },
+    {
+      "rank": 505,
+      "infinitif": "calculer",
+      "gloss": "calculate"
+    },
+    {
+      "rank": 506,
+      "infinitif": "accroître",
+      "gloss": "increase"
+    },
+    {
+      "rank": 507,
+      "infinitif": "distribuer",
+      "gloss": "distribute"
+    },
+    {
+      "rank": 508,
+      "infinitif": "craindre",
+      "gloss": "fear"
+    },
+    {
+      "rank": 509,
+      "infinitif": "susciter",
+      "gloss": "stir up, fuel, evoke, suscitate"
+    },
+    {
+      "rank": 510,
+      "infinitif": "plonger",
+      "gloss": "dive, plunge"
+    },
+    {
+      "rank": 511,
+      "infinitif": "rire",
+      "gloss": "laugh"
+    },
+    {
+      "rank": 512,
+      "infinitif": "multiplier",
+      "gloss": "multiply, increase"
+    },
+    {
+      "rank": 513,
+      "infinitif": "recueillir",
+      "gloss": "collect"
+    },
+    {
+      "rank": 514,
+      "infinitif": "compliquer",
+      "gloss": "complicate, elaborate"
+    },
+    {
+      "rank": 515,
+      "infinitif": "louer",
+      "gloss": "rent, lease"
+    },
+    {
+      "rank": 516,
+      "infinitif": "approcher",
+      "gloss": "approach"
+    },
+    {
+      "rank": 517,
+      "infinitif": "dégager",
+      "gloss": "free, release"
+    },
+    {
+      "rank": 518,
+      "infinitif": "affronter",
+      "gloss": "confront, face"
+    },
+    {
+      "rank": 519,
+      "infinitif": "approprier",
+      "gloss": "adapt something to a situation"
+    },
+    {
+      "rank": 520,
+      "infinitif": "prolonger",
+      "gloss": "prolong"
+    },
+    {
+      "rank": 521,
+      "infinitif": "soigner",
+      "gloss": "treat, nurse, look after, take care of"
+    },
+    {
+      "rank": 522,
+      "infinitif": "dormir",
+      "gloss": "sleep"
+    },
+    {
+      "rank": 523,
+      "infinitif": "mélanger",
+      "gloss": "mix, mix up"
+    },
+    {
+      "rank": 524,
+      "infinitif": "exclure",
+      "gloss": "exclude"
+    },
+    {
+      "rank": 525,
+      "infinitif": "casser",
+      "gloss": "break, break up"
+    },
+    {
+      "rank": 526,
+      "infinitif": "précéder",
+      "gloss": "precede"
+    },
+    {
+      "rank": 527,
+      "infinitif": "éditer",
+      "gloss": "publish, edit"
+    },
+    {
+      "rank": 528,
+      "infinitif": "ramener",
+      "gloss": "take back, bring back, restore, draw, pull"
+    },
+    {
+      "rank": 529,
+      "infinitif": "confondre",
+      "gloss": "confound"
+    },
+    {
+      "rank": 530,
+      "infinitif": "sécuriser",
+      "gloss": "secure, put at ease"
+    },
+    {
+      "rank": 531,
+      "infinitif": "éclairer",
+      "gloss": "brighten, light up"
+    },
+    {
+      "rank": 532,
+      "infinitif": "baisser",
+      "gloss": "lower, turn down"
+    },
+    {
+      "rank": 533,
+      "infinitif": "inventer",
+      "gloss": "invent"
+    },
+    {
+      "rank": 534,
+      "infinitif": "optimiser",
+      "gloss": "optimize"
+    },
+    {
+      "rank": 535,
+      "infinitif": "combattre",
+      "gloss": "fight, oppose"
+    },
+    {
+      "rank": 536,
+      "infinitif": "coûter",
+      "gloss": "cost"
+    },
+    {
+      "rank": 537,
+      "infinitif": "blesser",
+      "gloss": "injure, wound"
+    },
+    {
+      "rank": 538,
+      "infinitif": "veiller",
+      "gloss": "stay up, sit up, keep watch"
+    },
+    {
+      "rank": 539,
+      "infinitif": "coller",
+      "gloss": "stick, glue"
+    },
+    {
+      "rank": 540,
+      "infinitif": "cuire",
+      "gloss": "cook"
+    },
+    {
+      "rank": 541,
+      "infinitif": "amuser",
+      "gloss": "amuse, entertain"
+    },
+    {
+      "rank": 542,
+      "infinitif": "armer",
+      "gloss": "arm, dub (a knight)"
+    },
+    {
+      "rank": 543,
+      "infinitif": "transporter",
+      "gloss": "transport"
+    },
+    {
+      "rank": 544,
+      "infinitif": "renouveler",
+      "gloss": "renew"
+    },
+    {
+      "rank": 545,
+      "infinitif": "dresser",
+      "gloss": "build, set, tame"
+    },
+    {
+      "rank": 546,
+      "infinitif": "peser",
+      "gloss": "weight"
+    },
+    {
+      "rank": 547,
+      "infinitif": "réclamer",
+      "gloss": "claim, reclaim, protest, object"
+    },
+    {
+      "rank": 548,
+      "infinitif": "réagir",
+      "gloss": "react, respond"
+    },
+    {
+      "rank": 549,
+      "infinitif": "alimenter",
+      "gloss": "feed"
+    },
+    {
+      "rank": 550,
+      "infinitif": "transférer",
+      "gloss": "transfer, remove"
+    },
+    {
+      "rank": 551,
+      "infinitif": "activer",
+      "gloss": "activate"
+    },
+    {
+      "rank": 552,
+      "infinitif": "progresser",
+      "gloss": "progress"
+    },
+    {
+      "rank": 553,
+      "infinitif": "décéder",
+      "gloss": "die"
+    },
+    {
+      "rank": 554,
+      "infinitif": "tromper",
+      "gloss": "deceive, lead astray, mislead, fool"
+    },
+    {
+      "rank": 555,
+      "infinitif": "peindre",
+      "gloss": "paint"
+    },
+    {
+      "rank": 556,
+      "infinitif": "insister",
+      "gloss": "insist"
+    },
+    {
+      "rank": 557,
+      "infinitif": "déployer",
+      "gloss": "spread out, unfold, deploy"
+    },
+    {
+      "rank": 558,
+      "infinitif": "démarrer",
+      "gloss": "start (up)"
+    },
+    {
+      "rank": 559,
+      "infinitif": "parer",
+      "gloss": "adorn, bedeck, fend off, parry"
+    },
+    {
+      "rank": 560,
+      "infinitif": "renaître",
+      "gloss": "be born again"
+    },
+    {
+      "rank": 561,
+      "infinitif": "refaire",
+      "gloss": "redo, remake"
+    },
+    {
+      "rank": 562,
+      "infinitif": "emprunter",
+      "gloss": "borrow"
+    },
+    {
+      "rank": 563,
+      "infinitif": "contraindre",
+      "gloss": "constrain, compel, force"
+    },
+    {
+      "rank": 564,
+      "infinitif": "célébrer",
+      "gloss": "put a belt around"
+    },
+    {
+      "rank": 565,
+      "infinitif": "glisser",
+      "gloss": "slip, slide, skid, glide"
+    },
+    {
+      "rank": 566,
+      "infinitif": "répertorier",
+      "gloss": "index, keep a repertoire of"
+    },
+    {
+      "rank": 567,
+      "infinitif": "combiner",
+      "gloss": "combine"
+    },
+    {
+      "rank": 568,
+      "infinitif": "succéder",
+      "gloss": "succeed (follow in order), inherit by right of kingship"
+    },
+    {
+      "rank": 569,
+      "infinitif": "reproduire",
+      "gloss": "reproduce"
+    },
+    {
+      "rank": 570,
+      "infinitif": "recruter",
+      "gloss": "recruit"
+    },
+    {
+      "rank": 571,
+      "infinitif": "contenter",
+      "gloss": "content, satisfy"
+    },
+    {
+      "rank": 572,
+      "infinitif": "abriter",
+      "gloss": "shelter"
+    },
+    {
+      "rank": 573,
+      "infinitif": "résumer",
+      "gloss": "summarize, sum up"
+    },
+    {
+      "rank": 574,
+      "infinitif": "ordonner",
+      "gloss": "arrange, organize, sort out, prescribe"
+    },
+    {
+      "rank": 575,
+      "infinitif": "cultiver",
+      "gloss": "cultivate"
+    },
+    {
+      "rank": 576,
+      "infinitif": "répandre",
+      "gloss": "spread, scatter"
+    },
+    {
+      "rank": 577,
+      "infinitif": "assumer",
+      "gloss": "assume, take responsibility"
+    },
+    {
+      "rank": 578,
+      "infinitif": "rajouter",
+      "gloss": "re-add, add again, put back in"
+    },
+    {
+      "rank": 579,
+      "infinitif": "céder",
+      "gloss": "cede"
+    },
+    {
+      "rank": 580,
+      "infinitif": "regretter",
+      "gloss": "regret"
+    },
+    {
+      "rank": 581,
+      "infinitif": "aménager",
+      "gloss": "lay out, fit out"
+    },
+    {
+      "rank": 582,
+      "infinitif": "opter",
+      "gloss": "opt"
+    },
+    {
+      "rank": 583,
+      "infinitif": "emmener",
+      "gloss": "take off, away, or out"
+    },
+    {
+      "rank": 584,
+      "infinitif": "coucher",
+      "gloss": "go to bed"
+    },
+    {
+      "rank": 585,
+      "infinitif": "bâtir",
+      "gloss": "build, construct"
+    },
+    {
+      "rank": 586,
+      "infinitif": "procurer",
+      "gloss": "get, obtain, procure"
+    },
+    {
+      "rank": 587,
+      "infinitif": "grandir",
+      "gloss": "grow, get bigger, magnify"
+    },
+    {
+      "rank": 588,
+      "infinitif": "résider",
+      "gloss": "reside, live, lie"
+    },
+    {
+      "rank": 589,
+      "infinitif": "initier",
+      "gloss": "initiate, start"
+    },
+    {
+      "rank": 590,
+      "infinitif": "passionner",
+      "gloss": "impassionate, motivate"
+    },
+    {
+      "rank": 591,
+      "infinitif": "séduire",
+      "gloss": "seduce, lure"
+    },
+    {
+      "rank": 592,
+      "infinitif": "mêler",
+      "gloss": "mix, shuffle"
+    },
+    {
+      "rank": 593,
+      "infinitif": "étonner",
+      "gloss": "surprise, astound"
+    },
+    {
+      "rank": 594,
+      "infinitif": "presser",
+      "gloss": "urge, squeeze, hurry"
+    },
+    {
+      "rank": 595,
+      "infinitif": "solliciter",
+      "gloss": "solicit, attract"
+    },
+    {
+      "rank": 596,
+      "infinitif": "boiter",
+      "gloss": "limp"
+    },
+    {
+      "rank": 597,
+      "infinitif": "incarner",
+      "gloss": "incarnate, embody, personify"
+    },
+    {
+      "rank": 598,
+      "infinitif": "nettoyer",
+      "gloss": "clean, wipe clean"
+    },
+    {
+      "rank": 599,
+      "infinitif": "muser",
+      "gloss": "wander about"
+    },
+    {
+      "rank": 600,
+      "infinitif": "rattacher",
+      "gloss": "attach, fix, fix on, put on, link"
+    },
+    {
+      "rank": 601,
+      "infinitif": "insérer",
+      "gloss": "insert"
+    },
+    {
+      "rank": 602,
+      "infinitif": "rassurer",
+      "gloss": "reassure, calm down"
+    },
+    {
+      "rank": 603,
+      "infinitif": "disputer",
+      "gloss": "dispute"
+    },
+    {
+      "rank": 604,
+      "infinitif": "bouger",
+      "gloss": "move, budge"
+    },
+    {
+      "rank": 605,
+      "infinitif": "inciter",
+      "gloss": "urge, impel"
+    },
+    {
+      "rank": 606,
+      "infinitif": "annuler",
+      "gloss": "cancel, annul"
+    },
+    {
+      "rank": 607,
+      "infinitif": "planter",
+      "gloss": "plant, drive in (a nail), pitch (a tent), crash (computing)"
+    },
+    {
+      "rank": 608,
+      "infinitif": "soulever",
+      "gloss": "raise, lift up, pick up, stir up, rouse"
+    },
+    {
+      "rank": 609,
+      "infinitif": "prier",
+      "gloss": "request, pray"
+    },
+    {
+      "rank": 610,
+      "infinitif": "repartir",
+      "gloss": "leave again, go back, restart, set off again, retort"
+    },
+    {
+      "rank": 611,
+      "infinitif": "taper",
+      "gloss": "slap, knock, beat, type"
+    },
+    {
+      "rank": 612,
+      "infinitif": "députer",
+      "gloss": "deputize"
+    },
+    {
+      "rank": 613,
+      "infinitif": "inquiéter",
+      "gloss": "worry"
+    },
+    {
+      "rank": 614,
+      "infinitif": "commenter",
+      "gloss": "comment"
+    },
+    {
+      "rank": 615,
+      "infinitif": "accélérer",
+      "gloss": "accelerate"
+    },
+    {
+      "rank": 616,
+      "infinitif": "fuir",
+      "gloss": "flee"
+    },
+    {
+      "rank": 617,
+      "infinitif": "surveiller",
+      "gloss": "monitor, survey, watch"
+    },
+    {
+      "rank": 618,
+      "infinitif": "élargir",
+      "gloss": "make larger, enlarge"
+    },
+    {
+      "rank": 619,
+      "infinitif": "survenir",
+      "gloss": "occur, happen unexpectedly"
+    },
+    {
+      "rank": 620,
+      "infinitif": "simplifier",
+      "gloss": "simplify"
+    },
+    {
+      "rank": 621,
+      "infinitif": "motiver",
+      "gloss": "motivate, justify"
+    },
+    {
+      "rank": 622,
+      "infinitif": "renseigner",
+      "gloss": "advise, inform"
+    },
+    {
+      "rank": 623,
+      "infinitif": "franchir",
+      "gloss": "clear, cross, pass, cover"
+    },
+    {
+      "rank": 624,
+      "infinitif": "doubler",
+      "gloss": "double, duplicate"
+    },
+    {
+      "rank": 625,
+      "infinitif": "suspendre",
+      "gloss": "suspend"
+    },
+    {
+      "rank": 626,
+      "infinitif": "expérimenter",
+      "gloss": "experiment, experience"
+    },
+    {
+      "rank": 627,
+      "infinitif": "voyager",
+      "gloss": "travel, voyage"
+    },
+    {
+      "rank": 628,
+      "infinitif": "encadrer",
+      "gloss": "frame, surround, outline"
+    },
+    {
+      "rank": 629,
+      "infinitif": "cibler",
+      "gloss": "target"
+    },
+    {
+      "rank": 630,
+      "infinitif": "colorer",
+      "gloss": "color"
+    },
+    {
+      "rank": 631,
+      "infinitif": "chauffer",
+      "gloss": "heat, warm, warm up"
+    },
+    {
+      "rank": 632,
+      "infinitif": "approuver",
+      "gloss": "approve"
+    },
+    {
+      "rank": 633,
+      "infinitif": "programmer",
+      "gloss": "program"
+    },
+    {
+      "rank": 634,
+      "infinitif": "approfondir",
+      "gloss": "deepen"
+    },
+    {
+      "rank": 635,
+      "infinitif": "repérer",
+      "gloss": "map out, mark, reference, spot, detect, pick out"
+    },
+    {
+      "rank": 636,
+      "infinitif": "implanter",
+      "gloss": "build, install, open, establish, instill, embed, implant"
+    },
+    {
+      "rank": 637,
+      "infinitif": "briser",
+      "gloss": "break, snap"
+    },
+    {
+      "rank": 638,
+      "infinitif": "voiler",
+      "gloss": "veil, cover with a veil, become cloudy"
+    },
+    {
+      "rank": 639,
+      "infinitif": "laver",
+      "gloss": "wash"
+    },
+    {
+      "rank": 640,
+      "infinitif": "carrer",
+      "gloss": "square"
+    },
+    {
+      "rank": 641,
+      "infinitif": "couler",
+      "gloss": "sink, flow"
+    },
+    {
+      "rank": 642,
+      "infinitif": "sauter",
+      "gloss": "jump, leap"
+    },
+    {
+      "rank": 643,
+      "infinitif": "survivre",
+      "gloss": "survive, outlive"
+    },
+    {
+      "rank": 644,
+      "infinitif": "ravir",
+      "gloss": "ravish, plunder, kidnap"
+    },
+    {
+      "rank": 645,
+      "infinitif": "écarter",
+      "gloss": "separate, move apart"
+    },
+    {
+      "rank": 646,
+      "infinitif": "engendrer",
+      "gloss": "generate, spawn, beget"
+    },
+    {
+      "rank": 647,
+      "infinitif": "dorer",
+      "gloss": "gild, coat with gold"
+    },
+    {
+      "rank": 648,
+      "infinitif": "formuler",
+      "gloss": "formulate, put into words"
+    },
+    {
+      "rank": 649,
+      "infinitif": "brûler",
+      "gloss": "burn"
+    },
+    {
+      "rank": 650,
+      "infinitif": "renoncer",
+      "gloss": "resign, quit, renounce, waive"
+    },
+    {
+      "rank": 651,
+      "infinitif": "critiquer",
+      "gloss": "criticize, critique"
+    },
+    {
+      "rank": 652,
+      "infinitif": "décevoir",
+      "gloss": "disappoint"
+    },
+    {
+      "rank": 653,
+      "infinitif": "valoriser",
+      "gloss": "valorize, add value"
+    },
+    {
+      "rank": 654,
+      "infinitif": "serrer",
+      "gloss": "tighten, shake (hands), squeeze"
+    },
+    {
+      "rank": 655,
+      "infinitif": "saluer",
+      "gloss": "greet, wave to, salute"
+    },
+    {
+      "rank": 656,
+      "infinitif": "réveiller",
+      "gloss": "awaken"
+    },
+    {
+      "rank": 657,
+      "infinitif": "clore",
+      "gloss": "close"
+    },
+    {
+      "rank": 658,
+      "infinitif": "détecter",
+      "gloss": "detect, discover"
+    },
+    {
+      "rank": 659,
+      "infinitif": "déclencher",
+      "gloss": "trigger, take off the latch"
+    },
+    {
+      "rank": 660,
+      "infinitif": "embarquer",
+      "gloss": "board (a vehicle), embark"
+    },
+    {
+      "rank": 661,
+      "infinitif": "décorer",
+      "gloss": "decorate"
+    },
+    {
+      "rank": 662,
+      "infinitif": "coordonner",
+      "gloss": "coordinate, organize thoroughly"
+    },
+    {
+      "rank": 663,
+      "infinitif": "ranger",
+      "gloss": "order, arrange"
+    },
+    {
+      "rank": 664,
+      "infinitif": "anticiper",
+      "gloss": "anticipate"
+    },
+    {
+      "rank": 665,
+      "infinitif": "circuler",
+      "gloss": "circulate, go by, get around"
+    },
+    {
+      "rank": 666,
+      "infinitif": "pénétrer",
+      "gloss": "penetrate, enter"
+    },
+    {
+      "rank": 667,
+      "infinitif": "contester",
+      "gloss": "contest, challenge, dispute"
+    },
+    {
+      "rank": 668,
+      "infinitif": "négocier",
+      "gloss": "negotiate"
+    },
+    {
+      "rank": 669,
+      "infinitif": "éprouver",
+      "gloss": "test, sense, feel, undergo a transformation"
+    },
+    {
+      "rank": 670,
+      "infinitif": "désoler",
+      "gloss": "be upset"
+    },
+    {
+      "rank": 671,
+      "infinitif": "handicaper",
+      "gloss": "handicap"
+    },
+    {
+      "rank": 672,
+      "infinitif": "décliner",
+      "gloss": "weaken, sicken, decline"
+    },
+    {
+      "rank": 673,
+      "infinitif": "détacher",
+      "gloss": "remove spots, stains"
+    },
+    {
+      "rank": 674,
+      "infinitif": "foutre",
+      "gloss": "not give a darn about, go away"
+    },
+    {
+      "rank": 675,
+      "infinitif": "entamer",
+      "gloss": "cut into (something), remove a small piece of something"
+    },
+    {
+      "rank": 676,
+      "infinitif": "fréquenter",
+      "gloss": "frequent, go to, socialize with"
+    },
+    {
+      "rank": 677,
+      "infinitif": "réputer",
+      "gloss": "repute"
+    },
+    {
+      "rank": 678,
+      "infinitif": "stocker",
+      "gloss": "store, stock, stock up"
+    },
+    {
+      "rank": 679,
+      "infinitif": "récompenser",
+      "gloss": "award"
+    },
+    {
+      "rank": 680,
+      "infinitif": "accrocher",
+      "gloss": "hook, hook up"
+    },
+    {
+      "rank": 681,
+      "infinitif": "jouir",
+      "gloss": "enjoy"
+    },
+    {
+      "rank": 682,
+      "infinitif": "structurer",
+      "gloss": "structure"
+    },
+    {
+      "rank": 683,
+      "infinitif": "influencer",
+      "gloss": "influence"
+    },
+    {
+      "rank": 684,
+      "infinitif": "effacer",
+      "gloss": "erase, efface"
+    },
+    {
+      "rank": 685,
+      "infinitif": "rembourser",
+      "gloss": "pay back, refund, reimburse"
+    },
+    {
+      "rank": 686,
+      "infinitif": "pleurer",
+      "gloss": "cry, weep, mourn"
+    },
+    {
+      "rank": 687,
+      "infinitif": "positionner",
+      "gloss": "position"
+    },
+    {
+      "rank": 688,
+      "infinitif": "convertir",
+      "gloss": "convert"
+    },
+    {
+      "rank": 689,
+      "infinitif": "inaugurer",
+      "gloss": "inaugurate"
+    },
+    {
+      "rank": 690,
+      "infinitif": "plaindre",
+      "gloss": "pity"
+    },
+    {
+      "rank": 691,
+      "infinitif": "pencher",
+      "gloss": "tilt, tip up, lean, list"
+    },
+    {
+      "rank": 692,
+      "infinitif": "éteindre",
+      "gloss": "turn off, put out, extinguish"
+    },
+    {
+      "rank": 693,
+      "infinitif": "pourvoir",
+      "gloss": "supply, provide"
+    },
+    {
+      "rank": 694,
+      "infinitif": "présider",
+      "gloss": "preside, chair, head"
+    },
+    {
+      "rank": 695,
+      "infinitif": "crier",
+      "gloss": "cry, shout"
+    },
+    {
+      "rank": 696,
+      "infinitif": "typer",
+      "gloss": "stereotype"
+    },
+    {
+      "rank": 697,
+      "infinitif": "projeter",
+      "gloss": "plan"
+    },
+    {
+      "rank": 698,
+      "infinitif": "régner",
+      "gloss": "reign"
+    },
+    {
+      "rank": 699,
+      "infinitif": "revendiquer",
+      "gloss": "demand, claim, lay claim to"
+    },
+    {
+      "rank": 700,
+      "infinitif": "équilibrer",
+      "gloss": "balance, make balanced, counterbalance"
+    },
+    {
+      "rank": 701,
+      "infinitif": "admirer",
+      "gloss": "admire"
+    },
+    {
+      "rank": 702,
+      "infinitif": "recouvrir",
+      "gloss": "cover again, cover completely, cover up"
+    },
+    {
+      "rank": 703,
+      "infinitif": "repousser",
+      "gloss": "push back, push out of the way, repel, ward off, turn away"
+    },
+    {
+      "rank": 704,
+      "infinitif": "déléguer",
+      "gloss": "delegate, devolve"
+    },
+    {
+      "rank": 705,
+      "infinitif": "filmer",
+      "gloss": "film"
+    },
+    {
+      "rank": 706,
+      "infinitif": "ressortir",
+      "gloss": "go back out, come back out, take back out"
+    },
+    {
+      "rank": 707,
+      "infinitif": "téléviser",
+      "gloss": "televise"
+    },
+    {
+      "rank": 708,
+      "infinitif": "collecter",
+      "gloss": "collect, gather"
+    },
+    {
+      "rank": 709,
+      "infinitif": "danser",
+      "gloss": "dance"
+    },
+    {
+      "rank": 710,
+      "infinitif": "piloter",
+      "gloss": "pilot, drive"
+    },
+    {
+      "rank": 711,
+      "infinitif": "creuser",
+      "gloss": "dig"
+    },
+    {
+      "rank": 712,
+      "infinitif": "reprocher",
+      "gloss": "blame somebody for something"
+    },
+    {
+      "rank": 713,
+      "infinitif": "éclater",
+      "gloss": "shatter, make a loud noise"
+    },
+    {
+      "rank": 714,
+      "infinitif": "régir",
+      "gloss": "govern"
+    },
+    {
+      "rank": 715,
+      "infinitif": "desservir",
+      "gloss": "serve (be the pastor of a church)"
+    },
+    {
+      "rank": 716,
+      "infinitif": "fêter",
+      "gloss": "celebrate (an event)"
+    },
+    {
+      "rank": 717,
+      "infinitif": "refléter",
+      "gloss": "reflect"
+    },
+    {
+      "rank": 718,
+      "infinitif": "commercialiser",
+      "gloss": "commercialize"
+    },
+    {
+      "rank": 719,
+      "infinitif": "collaborer",
+      "gloss": "collaborate"
+    },
+    {
+      "rank": 720,
+      "infinitif": "salarier",
+      "gloss": "pay a salary"
+    },
+    {
+      "rank": 721,
+      "infinitif": "invoquer",
+      "gloss": "invoke, call upon (God)"
+    },
+    {
+      "rank": 722,
+      "infinitif": "réparer",
+      "gloss": "repair, fix, mend"
+    },
+    {
+      "rank": 723,
+      "infinitif": "attester",
+      "gloss": "attest, support with evidence"
+    },
+    {
+      "rank": 724,
+      "infinitif": "allumer",
+      "gloss": "turn on, set alight"
+    },
+    {
+      "rank": 725,
+      "infinitif": "jurer",
+      "gloss": "swear, promise by oath, say a swear word"
+    },
+    {
+      "rank": 726,
+      "infinitif": "rater",
+      "gloss": "miss (an event or a thing), fail"
+    },
+    {
+      "rank": 727,
+      "infinitif": "habiller",
+      "gloss": "get dressed"
+    },
+    {
+      "rank": 728,
+      "infinitif": "racheter",
+      "gloss": "buy out, buy off"
+    },
+    {
+      "rank": 729,
+      "infinitif": "chasser",
+      "gloss": "hunt, chase, drive off"
+    },
+    {
+      "rank": 730,
+      "infinitif": "dériver",
+      "gloss": "derive (originate from)"
+    },
+    {
+      "rank": 731,
+      "infinitif": "instaurer",
+      "gloss": "set up, establish"
+    },
+    {
+      "rank": 732,
+      "infinitif": "rétablir",
+      "gloss": "restore, reestablish"
+    },
+    {
+      "rank": 733,
+      "infinitif": "fondre",
+      "gloss": "melt, melt down, smelt"
+    },
+    {
+      "rank": 734,
+      "infinitif": "épouser",
+      "gloss": "get married, wed"
+    },
+    {
+      "rank": 735,
+      "infinitif": "certifier",
+      "gloss": "certify"
+    },
+    {
+      "rank": 736,
+      "infinitif": "rompre",
+      "gloss": "break"
+    },
+    {
+      "rank": 737,
+      "infinitif": "restreindre",
+      "gloss": "restrict, limit, restrain"
+    },
+    {
+      "rank": 738,
+      "infinitif": "induire",
+      "gloss": "induce, cause"
+    },
+    {
+      "rank": 739,
+      "infinitif": "rénover",
+      "gloss": "renew, renovate, revitalize"
+    },
+    {
+      "rank": 740,
+      "infinitif": "baptiser",
+      "gloss": "baptize, christen"
+    },
+    {
+      "rank": 741,
+      "infinitif": "écraser",
+      "gloss": "squash, obliterate"
+    },
+    {
+      "rank": 742,
+      "infinitif": "tracer",
+      "gloss": "draw, plot, buck up, hurry up"
+    },
+    {
+      "rank": 743,
+      "infinitif": "abattre",
+      "gloss": "butcher, cut down"
+    },
+    {
+      "rank": 744,
+      "infinitif": "échouer",
+      "gloss": "fail, fall through, miscarry"
+    },
+    {
+      "rank": 745,
+      "infinitif": "emparer",
+      "gloss": "seize, get hold of, take over"
+    },
+    {
+      "rank": 746,
+      "infinitif": "lâcher",
+      "gloss": "release, loosen, let go, abandon, chicken out"
+    },
+    {
+      "rank": 747,
+      "infinitif": "saler",
+      "gloss": "salt"
+    },
+    {
+      "rank": 748,
+      "infinitif": "conférer",
+      "gloss": "confer"
+    },
+    {
+      "rank": 749,
+      "infinitif": "pointer",
+      "gloss": "point to/at, indicate, clock in"
+    },
+    {
+      "rank": 750,
+      "infinitif": "nier",
+      "gloss": "deny"
+    },
+    {
+      "rank": 751,
+      "infinitif": "diplômer",
+      "gloss": "graduate"
+    },
+    {
+      "rank": 752,
+      "infinitif": "localiser",
+      "gloss": "locate, localize"
+    },
+    {
+      "rank": 753,
+      "infinitif": "adjoindre",
+      "gloss": "adjoin"
+    },
+    {
+      "rank": 754,
+      "infinitif": "copier",
+      "gloss": "copy"
+    },
+    {
+      "rank": 755,
+      "infinitif": "envahir",
+      "gloss": "invade"
+    },
+    {
+      "rank": 756,
+      "infinitif": "détourner",
+      "gloss": "divert, distract"
+    },
+    {
+      "rank": 757,
+      "infinitif": "recenser",
+      "gloss": "count, census, identify"
+    },
+    {
+      "rank": 758,
+      "infinitif": "fumer",
+      "gloss": "smoke, emit smoke, steam"
+    },
+    {
+      "rank": 759,
+      "infinitif": "adhérer",
+      "gloss": "adhere, stick to"
+    },
+    {
+      "rank": 760,
+      "infinitif": "compenser",
+      "gloss": "compensate for, offset"
+    },
+    {
+      "rank": 761,
+      "infinitif": "centrer",
+      "gloss": "center"
+    },
+    {
+      "rank": 762,
+      "infinitif": "surmonter",
+      "gloss": "overcome, surmount, get over"
+    },
+    {
+      "rank": 763,
+      "infinitif": "conquérir",
+      "gloss": "conquer, capture, win, win over"
+    },
+    {
+      "rank": 764,
+      "infinitif": "allonger",
+      "gloss": "lay down, lengthen"
+    },
+    {
+      "rank": 765,
+      "infinitif": "découper",
+      "gloss": "cut up, chop up"
+    },
+    {
+      "rank": 766,
+      "infinitif": "vaincre",
+      "gloss": "vanquish"
+    },
+    {
+      "rank": 767,
+      "infinitif": "débattre",
+      "gloss": "negotiate, debate"
+    },
+    {
+      "rank": 768,
+      "infinitif": "capturer",
+      "gloss": "capture"
+    },
+    {
+      "rank": 769,
+      "infinitif": "exploser",
+      "gloss": "explode"
+    },
+    {
+      "rank": 770,
+      "infinitif": "embrasser",
+      "gloss": "hug, embrace"
+    },
+    {
+      "rank": 771,
+      "infinitif": "référer",
+      "gloss": "refer"
+    },
+    {
+      "rank": 772,
+      "infinitif": "munir",
+      "gloss": "provide, fit, equip"
+    },
+    {
+      "rank": 773,
+      "infinitif": "absorber",
+      "gloss": "absorb"
+    },
+    {
+      "rank": 774,
+      "infinitif": "enfermer",
+      "gloss": "lock up, lock in, lock away"
+    },
+    {
+      "rank": 775,
+      "infinitif": "combler",
+      "gloss": "fulfil, satisfy"
+    },
+    {
+      "rank": 776,
+      "infinitif": "relancer",
+      "gloss": "throw back, reboot"
+    },
+    {
+      "rank": 777,
+      "infinitif": "habituer",
+      "gloss": "get used to something"
+    },
+    {
+      "rank": 778,
+      "infinitif": "différer",
+      "gloss": "differ"
+    },
+    {
+      "rank": 779,
+      "infinitif": "avertir",
+      "gloss": "warn, avert"
+    },
+    {
+      "rank": 780,
+      "infinitif": "reculer",
+      "gloss": "move back, put back, go backwards, back down, concede"
+    },
+    {
+      "rank": 781,
+      "infinitif": "souscrire",
+      "gloss": "subscribe"
+    },
+    {
+      "rank": 782,
+      "infinitif": "foncer",
+      "gloss": "darken"
+    },
+    {
+      "rank": 783,
+      "infinitif": "sonner",
+      "gloss": "sound, ring"
+    },
+    {
+      "rank": 784,
+      "infinitif": "arracher",
+      "gloss": "uproot, extract"
+    },
+    {
+      "rank": 785,
+      "infinitif": "débarquer",
+      "gloss": "unload merchandise, disembark"
+    },
+    {
+      "rank": 786,
+      "infinitif": "lister",
+      "gloss": "list, create a list"
+    },
+    {
+      "rank": 787,
+      "infinitif": "déguster",
+      "gloss": "taste or try food"
+    },
+    {
+      "rank": 788,
+      "infinitif": "émerger",
+      "gloss": "arrive at the top"
+    },
+    {
+      "rank": 789,
+      "infinitif": "recouvrer",
+      "gloss": "recover"
+    },
+    {
+      "rank": 790,
+      "infinitif": "récolter",
+      "gloss": "harvest, reap"
+    },
+    {
+      "rank": 791,
+      "infinitif": "généraliser",
+      "gloss": "generalize"
+    },
+    {
+      "rank": 792,
+      "infinitif": "lover",
+      "gloss": "coil a rope, fake a line"
+    },
+    {
+      "rank": 793,
+      "infinitif": "honorer",
+      "gloss": "honor"
+    },
+    {
+      "rank": 794,
+      "infinitif": "orner",
+      "gloss": "decorate, adorn"
+    },
+    {
+      "rank": 795,
+      "infinitif": "reconstruire",
+      "gloss": "rebuild"
+    },
+    {
+      "rank": 796,
+      "infinitif": "graver",
+      "gloss": "engrave, carve, burn (a CD-ROM or DVD)"
+    },
+    {
+      "rank": 797,
+      "infinitif": "diversifier",
+      "gloss": "diversify, broaden"
+    },
+    {
+      "rank": 798,
+      "infinitif": "dispenser",
+      "gloss": "excuse, exempt, dispense"
+    },
+    {
+      "rank": 799,
+      "infinitif": "manipuler",
+      "gloss": "manipulate"
+    },
+    {
+      "rank": 800,
+      "infinitif": "dépenser",
+      "gloss": "spend (money)"
+    },
+    {
+      "rank": 801,
+      "infinitif": "croître",
+      "gloss": "grow"
+    },
+    {
+      "rank": 802,
+      "infinitif": "stimuler",
+      "gloss": "stimulate, whip up"
+    },
+    {
+      "rank": 803,
+      "infinitif": "interrompre",
+      "gloss": "interrupt"
+    },
+    {
+      "rank": 804,
+      "infinitif": "fleurir",
+      "gloss": "flower, produce flowers, bloom, flourish"
+    },
+    {
+      "rank": 805,
+      "infinitif": "enchaîner",
+      "gloss": "chain, shackle, subjugate, enslave, concatenate"
+    },
+    {
+      "rank": 806,
+      "infinitif": "brancher",
+      "gloss": "connect, branch, turn"
+    },
+    {
+      "rank": 807,
+      "infinitif": "débarrasser",
+      "gloss": "rid oneself of"
+    },
+    {
+      "rank": 808,
+      "infinitif": "accumuler",
+      "gloss": "accumulate"
+    },
+    {
+      "rank": 809,
+      "infinitif": "assimiler",
+      "gloss": "assimilate, liken"
+    },
+    {
+      "rank": 810,
+      "infinitif": "appréhender",
+      "gloss": "apprehend, dread, catch"
+    },
+    {
+      "rank": 811,
+      "infinitif": "renommer",
+      "gloss": "rename, reelect, glorify, laud"
+    },
+    {
+      "rank": 812,
+      "infinitif": "masquer",
+      "gloss": "mask, hide"
+    },
+    {
+      "rank": 813,
+      "infinitif": "enfoncer",
+      "gloss": "push in, break open, defeat, sink down"
+    },
+    {
+      "rank": 814,
+      "infinitif": "filer",
+      "gloss": "spin a web, thread through a crowd, spin a thread"
+    },
+    {
+      "rank": 815,
+      "infinitif": "assassiner",
+      "gloss": "assassinate"
+    },
+    {
+      "rank": 816,
+      "infinitif": "prescrire",
+      "gloss": "prescribe"
+    },
+    {
+      "rank": 817,
+      "infinitif": "fusionner",
+      "gloss": "fuse, meld"
+    },
+    {
+      "rank": 818,
+      "infinitif": "décrocher",
+      "gloss": "unhook, stall"
+    },
+    {
+      "rank": 819,
+      "infinitif": "différencier",
+      "gloss": "differentiate, distinguish"
+    },
+    {
+      "rank": 820,
+      "infinitif": "découler",
+      "gloss": "follow from, ensue"
+    },
+    {
+      "rank": 821,
+      "infinitif": "réjouir",
+      "gloss": "please, delight"
+    },
+    {
+      "rank": 822,
+      "infinitif": "héberger",
+      "gloss": "house, accommodate"
+    },
+    {
+      "rank": 823,
+      "infinitif": "enterrer",
+      "gloss": "bury, ditch (plans)"
+    },
+    {
+      "rank": 824,
+      "infinitif": "articuler",
+      "gloss": "join, articulate"
+    },
+    {
+      "rank": 825,
+      "infinitif": "féliciter",
+      "gloss": "congratulate"
+    },
+    {
+      "rank": 826,
+      "infinitif": "préconiser",
+      "gloss": "recommend, advocate"
+    },
+    {
+      "rank": 827,
+      "infinitif": "gêner",
+      "gloss": "hinder, hamper, bother, annoy, irritate, embarrass"
+    },
+    {
+      "rank": 828,
+      "infinitif": "border",
+      "gloss": "border"
+    },
+    {
+      "rank": 829,
+      "infinitif": "tailler",
+      "gloss": "cut, sharpen"
+    },
+    {
+      "rank": 830,
+      "infinitif": "écouler",
+      "gloss": "shift, flow, elapse"
+    },
+    {
+      "rank": 831,
+      "infinitif": "fatiguer",
+      "gloss": "fatigue"
+    },
+    {
+      "rank": 832,
+      "infinitif": "reporter",
+      "gloss": "carry something back, wear again, transfer (an emotion), put back, put off"
+    },
+    {
+      "rank": 833,
+      "infinitif": "agréer",
+      "gloss": "accept"
+    },
+    {
+      "rank": 834,
+      "infinitif": "défaire",
+      "gloss": "take down, undo, break, defeat"
+    },
+    {
+      "rank": 835,
+      "infinitif": "tarder",
+      "gloss": "tarry, be slow to do something"
+    },
+    {
+      "rank": 836,
+      "infinitif": "redonner",
+      "gloss": "give again, give back"
+    },
+    {
+      "rank": 837,
+      "infinitif": "inverser",
+      "gloss": "revert, inverse"
+    },
+    {
+      "rank": 838,
+      "infinitif": "proclamer",
+      "gloss": "proclaim, declare"
+    },
+    {
+      "rank": 839,
+      "infinitif": "respirer",
+      "gloss": "breathe"
+    },
+    {
+      "rank": 840,
+      "infinitif": "percer",
+      "gloss": "pierce, see through"
+    },
+    {
+      "rank": 841,
+      "infinitif": "sucer",
+      "gloss": "suck"
+    },
+    {
+      "rank": 842,
+      "infinitif": "déduire",
+      "gloss": "deduce, deduct"
+    },
+    {
+      "rank": 843,
+      "infinitif": "ériger",
+      "gloss": "erect"
+    },
+    {
+      "rank": 844,
+      "infinitif": "sécher",
+      "gloss": "dry, play truant"
+    },
+    {
+      "rank": 845,
+      "infinitif": "agrandir",
+      "gloss": "enlarge"
+    },
+    {
+      "rank": 846,
+      "infinitif": "perturber",
+      "gloss": "disrupt, disturb, throw off, fluster"
+    },
+    {
+      "rank": 847,
+      "infinitif": "ajuster",
+      "gloss": "adjust, tweak"
+    },
+    {
+      "rank": 848,
+      "infinitif": "sourire",
+      "gloss": "smile"
+    },
+    {
+      "rank": 849,
+      "infinitif": "persuader",
+      "gloss": "persuade"
+    },
+    {
+      "rank": 850,
+      "infinitif": "goûter",
+      "gloss": "taste, try (a food)"
+    },
+    {
+      "rank": 851,
+      "infinitif": "grouper",
+      "gloss": "group"
+    },
+    {
+      "rank": 852,
+      "infinitif": "sensibiliser",
+      "gloss": "make sensitive, raise awareness"
+    },
+    {
+      "rank": 853,
+      "infinitif": "vider",
+      "gloss": "empty, empty out, gut (a fish)"
+    },
+    {
+      "rank": 854,
+      "infinitif": "modérer",
+      "gloss": "moderate, temper, lessen, weaken"
+    },
+    {
+      "rank": 855,
+      "infinitif": "négliger",
+      "gloss": "neglect"
+    },
+    {
+      "rank": 856,
+      "infinitif": "surnommer",
+      "gloss": "nickname"
+    },
+    {
+      "rank": 857,
+      "infinitif": "loger",
+      "gloss": "lodge, stay, be lodging"
+    },
+    {
+      "rank": 858,
+      "infinitif": "axer",
+      "gloss": "align on an axis"
+    },
+    {
+      "rank": 859,
+      "infinitif": "peupler",
+      "gloss": "populate"
+    },
+    {
+      "rank": 860,
+      "infinitif": "renverser",
+      "gloss": "turn over, turn upside down, knock over, run over, spill, overthrow, agitate"
+    },
+    {
+      "rank": 861,
+      "infinitif": "dégrader",
+      "gloss": "demote, degrade"
+    },
+    {
+      "rank": 862,
+      "infinitif": "visualiser",
+      "gloss": "visualize"
+    },
+    {
+      "rank": 863,
+      "infinitif": "sucrer",
+      "gloss": "sugar, add sugar to, sweeten"
+    },
+    {
+      "rank": 864,
+      "infinitif": "guérir",
+      "gloss": "cure, heal, recover"
+    },
+    {
+      "rank": 865,
+      "infinitif": "accentuer",
+      "gloss": "accentuate"
+    },
+    {
+      "rank": 866,
+      "infinitif": "soulager",
+      "gloss": "relieve, soothe"
+    },
+    {
+      "rank": 867,
+      "infinitif": "revêtir",
+      "gloss": "clothe, dress, disguise, hide"
+    },
+    {
+      "rank": 868,
+      "infinitif": "trancher",
+      "gloss": "slice, cut into slices, conclude"
+    },
+    {
+      "rank": 869,
+      "infinitif": "incorporer",
+      "gloss": "incorporate, embed"
+    },
+    {
+      "rank": 870,
+      "infinitif": "réfugier",
+      "gloss": "take refuge"
+    },
+    {
+      "rank": 871,
+      "infinitif": "référencer",
+      "gloss": "list (a product in a catalogue), put (a product on the shelves)"
+    },
+    {
+      "rank": 872,
+      "infinitif": "instituer",
+      "gloss": "institute, bring forth"
+    },
+    {
+      "rank": 873,
+      "infinitif": "aligner",
+      "gloss": "align"
+    },
+    {
+      "rank": 874,
+      "infinitif": "caler",
+      "gloss": "wedge, jam"
+    },
+    {
+      "rank": 875,
+      "infinitif": "recourir",
+      "gloss": "run again, race again"
+    },
+    {
+      "rank": 876,
+      "infinitif": "recommencer",
+      "gloss": "restart, start again."
+    },
+    {
+      "rank": 877,
+      "infinitif": "subsister",
+      "gloss": "subsist, live on, go on, keep going, stay, remain"
+    },
+    {
+      "rank": 878,
+      "infinitif": "énoncer",
+      "gloss": "enounce, lay out, declare, explain"
+    },
+    {
+      "rank": 879,
+      "infinitif": "incliner",
+      "gloss": "incline"
+    },
+    {
+      "rank": 880,
+      "infinitif": "relire",
+      "gloss": "reread, read again"
+    },
+    {
+      "rank": 881,
+      "infinitif": "interpeller",
+      "gloss": "call out to, question, interrogate"
+    },
+    {
+      "rank": 882,
+      "infinitif": "hériter",
+      "gloss": "inherit"
+    },
+    {
+      "rank": 883,
+      "infinitif": "détendre",
+      "gloss": "relax"
+    },
+    {
+      "rank": 884,
+      "infinitif": "convoquer",
+      "gloss": "convene, convoke, summon, call"
+    },
+    {
+      "rank": 885,
+      "infinitif": "préoccuper",
+      "gloss": "concern, preoccupy"
+    },
+    {
+      "rank": 886,
+      "infinitif": "souffler",
+      "gloss": "blow, blow out, whisper, relax"
+    },
+    {
+      "rank": 887,
+      "infinitif": "douer",
+      "gloss": "endow (someone)"
+    },
+    {
+      "rank": 888,
+      "infinitif": "retracer",
+      "gloss": "recount, tell, redraw, draw again"
+    },
+    {
+      "rank": 889,
+      "infinitif": "efforcer",
+      "gloss": "endeavor, make efforts towards"
+    },
+    {
+      "rank": 890,
+      "infinitif": "mentir",
+      "gloss": "lie"
+    },
+    {
+      "rank": 891,
+      "infinitif": "arranger",
+      "gloss": "arrange"
+    },
+    {
+      "rank": 892,
+      "infinitif": "cumuler",
+      "gloss": "accumulate, multitask"
+    },
+    {
+      "rank": 893,
+      "infinitif": "étaler",
+      "gloss": "spread, spread out, smear, tagger, flaunt, show off"
+    },
+    {
+      "rank": 894,
+      "infinitif": "exciter",
+      "gloss": "excite, stir the emotions of"
+    },
+    {
+      "rank": 895,
+      "infinitif": "violer",
+      "gloss": "violate, rape"
+    },
+    {
+      "rank": 896,
+      "infinitif": "déranger",
+      "gloss": "disrupt, bother"
+    },
+    {
+      "rank": 897,
+      "infinitif": "épuiser",
+      "gloss": "squeeze out, dry up, wear out"
+    },
+    {
+      "rank": 898,
+      "infinitif": "gouverner",
+      "gloss": "govern, steer"
+    },
+    {
+      "rank": 899,
+      "infinitif": "substituer",
+      "gloss": "substitute"
+    },
+    {
+      "rank": 900,
+      "infinitif": "primer",
+      "gloss": "dominate, be dominant over, win, prevail"
+    },
+    {
+      "rank": 901,
+      "infinitif": "évacuer",
+      "gloss": "evacuate"
+    },
+    {
+      "rank": 902,
+      "infinitif": "deviner",
+      "gloss": "guess, perceive"
+    },
+    {
+      "rank": 903,
+      "infinitif": "briller",
+      "gloss": "shine, sparkle"
+    },
+    {
+      "rank": 904,
+      "infinitif": "excuser",
+      "gloss": "excuse, pardon"
+    },
+    {
+      "rank": 905,
+      "infinitif": "administrer",
+      "gloss": "administer"
+    },
+    {
+      "rank": 906,
+      "infinitif": "épargner",
+      "gloss": "save, spare"
+    },
+    {
+      "rank": 907,
+      "infinitif": "ralentir",
+      "gloss": "slow down, abate"
+    },
+    {
+      "rank": 908,
+      "infinitif": "semer",
+      "gloss": "sow"
+    },
+    {
+      "rank": 909,
+      "infinitif": "plier",
+      "gloss": "fold, fold up, bend"
+    },
+    {
+      "rank": 910,
+      "infinitif": "déboucher",
+      "gloss": "unblock, uncork"
+    },
+    {
+      "rank": 911,
+      "infinitif": "endommager",
+      "gloss": "damage"
+    },
+    {
+      "rank": 912,
+      "infinitif": "décerner",
+      "gloss": "award"
+    },
+    {
+      "rank": 913,
+      "infinitif": "enceindre",
+      "gloss": "surround"
+    },
+    {
+      "rank": 914,
+      "infinitif": "agiter",
+      "gloss": "shake, wave, agitate"
+    },
+    {
+      "rank": 915,
+      "infinitif": "endormir",
+      "gloss": "fall asleep"
+    },
+    {
+      "rank": 916,
+      "infinitif": "promener",
+      "gloss": "walk (leisurely), go for a walk, stroll"
+    },
+    {
+      "rank": 917,
+      "infinitif": "choquer",
+      "gloss": "hit, collide, shock"
+    },
+    {
+      "rank": 918,
+      "infinitif": "naviguer",
+      "gloss": "navigate, sail, browse"
+    },
+    {
+      "rank": 919,
+      "infinitif": "nuire",
+      "gloss": "harm"
+    },
+    {
+      "rank": 920,
+      "infinitif": "obéir",
+      "gloss": "obey"
+    },
+    {
+      "rank": 921,
+      "infinitif": "restituer",
+      "gloss": "restitute, restore, bring back, bring back to life"
+    },
+    {
+      "rank": 922,
+      "infinitif": "capter",
+      "gloss": "capture, detect"
+    },
+    {
+      "rank": 923,
+      "infinitif": "recycler",
+      "gloss": "recycle"
+    },
+    {
+      "rank": 924,
+      "infinitif": "dissoudre",
+      "gloss": "dissolve"
+    },
+    {
+      "rank": 925,
+      "infinitif": "relayer",
+      "gloss": "relay, change horses, relieve, take over from"
+    },
+    {
+      "rank": 926,
+      "infinitif": "heurter",
+      "gloss": "strike, hit, clash, conflict with"
+    },
+    {
+      "rank": 927,
+      "infinitif": "consentir",
+      "gloss": "consent"
+    },
+    {
+      "rank": 928,
+      "infinitif": "sacrifier",
+      "gloss": "sacrifice"
+    },
+    {
+      "rank": 929,
+      "infinitif": "dissimuler",
+      "gloss": "conceal, conceal, dissimulate"
+    },
+    {
+      "rank": 930,
+      "infinitif": "rattraper",
+      "gloss": "get back (something which is lost), catch up (with)"
+    },
+    {
+      "rank": 931,
+      "infinitif": "cuisiner",
+      "gloss": "cook"
+    },
+    {
+      "rank": 932,
+      "infinitif": "aggraver",
+      "gloss": "make worse"
+    },
+    {
+      "rank": 933,
+      "infinitif": "bouleverser",
+      "gloss": "completely and drastically change, overturn, shake, cause a strong emotion, disorganize, turn upside down"
+    },
+    {
+      "rank": 934,
+      "infinitif": "piquer",
+      "gloss": "prick, sting, steal"
+    },
+    {
+      "rank": 935,
+      "infinitif": "aspirer",
+      "gloss": "aspire, aspirate"
+    },
+    {
+      "rank": 936,
+      "infinitif": "dénommer",
+      "gloss": "name"
+    },
+    {
+      "rank": 937,
+      "infinitif": "relater",
+      "gloss": "relate, account, recount"
+    },
+    {
+      "rank": 938,
+      "infinitif": "arborer",
+      "gloss": "sport clothes, wear a facial expression"
+    },
+    {
+      "rank": 939,
+      "infinitif": "assembler",
+      "gloss": "assemble"
+    },
+    {
+      "rank": 940,
+      "infinitif": "taire",
+      "gloss": "keep quiet"
+    },
+    {
+      "rank": 941,
+      "infinitif": "grimper",
+      "gloss": "climb, climb up"
+    },
+    {
+      "rank": 942,
+      "infinitif": "assortir",
+      "gloss": "match, match up"
+    },
+    {
+      "rank": 943,
+      "infinitif": "punir",
+      "gloss": "punish"
+    },
+    {
+      "rank": 944,
+      "infinitif": "pardonner",
+      "gloss": "pardon, forgive, excuse"
+    },
+    {
+      "rank": 945,
+      "infinitif": "consolider",
+      "gloss": "consolidate"
+    },
+    {
+      "rank": 946,
+      "infinitif": "impressionner",
+      "gloss": "impress, wow, overawe"
+    },
+    {
+      "rank": 947,
+      "infinitif": "conditionner",
+      "gloss": "package, condition"
+    },
+    {
+      "rank": 948,
+      "infinitif": "prélever",
+      "gloss": "take, remove"
+    },
+    {
+      "rank": 949,
+      "infinitif": "conformer",
+      "gloss": "conform, comply"
+    },
+    {
+      "rank": 950,
+      "infinitif": "réviser",
+      "gloss": "revise, review"
+    },
+    {
+      "rank": 951,
+      "infinitif": "exporter",
+      "gloss": "export"
+    },
+    {
+      "rank": 952,
+      "infinitif": "soupçonner",
+      "gloss": "suspect"
+    },
+    {
+      "rank": 953,
+      "infinitif": "apparenter",
+      "gloss": "be related to"
+    },
+    {
+      "rank": 954,
+      "infinitif": "illimiter",
+      "gloss": "make unlimited, remove limits"
+    },
+    {
+      "rank": 955,
+      "infinitif": "attraper",
+      "gloss": "trap, catch"
+    },
+    {
+      "rank": 956,
+      "infinitif": "siéger",
+      "gloss": "sit, be located"
+    },
+    {
+      "rank": 957,
+      "infinitif": "songer",
+      "gloss": "dream"
+    },
+    {
+      "rank": 958,
+      "infinitif": "sanctionner",
+      "gloss": "sanction"
+    },
+    {
+      "rank": 959,
+      "infinitif": "craquer",
+      "gloss": "split, break, crack"
+    },
+    {
+      "rank": 960,
+      "infinitif": "rémunérer",
+      "gloss": "remunerate, pay back"
+    },
+    {
+      "rank": 961,
+      "infinitif": "apprêter",
+      "gloss": "prepare, get ready, prime"
+    },
+    {
+      "rank": 962,
+      "infinitif": "précipiter",
+      "gloss": "throw out, push out, chuck out, throw off, push off, chuck off, precipitate"
+    },
+    {
+      "rank": 963,
+      "infinitif": "déplorer",
+      "gloss": "deplore something"
+    },
+    {
+      "rank": 964,
+      "infinitif": "désactiver",
+      "gloss": "deactivate, disable"
+    },
+    {
+      "rank": 965,
+      "infinitif": "détester",
+      "gloss": "hate, detest"
+    },
+    {
+      "rank": 966,
+      "infinitif": "disperser",
+      "gloss": "disperse, scatter"
+    },
+    {
+      "rank": 967,
+      "infinitif": "forger",
+      "gloss": "fashion metal with fire and a hammer, forge"
+    },
+    {
+      "rank": 968,
+      "infinitif": "configurer",
+      "gloss": "configure"
+    },
+    {
+      "rank": 969,
+      "infinitif": "défiler",
+      "gloss": "parade, march"
+    },
+    {
+      "rank": 970,
+      "infinitif": "puiser",
+      "gloss": "draw water, tap into"
+    },
+    {
+      "rank": 971,
+      "infinitif": "réformer",
+      "gloss": "reform"
+    },
+    {
+      "rank": 972,
+      "infinitif": "affaiblir",
+      "gloss": "weaken, enfeeble"
+    },
+    {
+      "rank": 973,
+      "infinitif": "assigner",
+      "gloss": "assign"
+    },
+    {
+      "rank": 974,
+      "infinitif": "reconstituer",
+      "gloss": "re-form, recreate"
+    },
+    {
+      "rank": 975,
+      "infinitif": "symboliser",
+      "gloss": "symbolize"
+    },
+    {
+      "rank": 976,
+      "infinitif": "miser",
+      "gloss": "bet"
+    },
+    {
+      "rank": 977,
+      "infinitif": "économiser",
+      "gloss": "economize"
+    },
+    {
+      "rank": 978,
+      "infinitif": "infliger",
+      "gloss": "inflict, impose"
+    },
+    {
+      "rank": 979,
+      "infinitif": "apaiser",
+      "gloss": "appease, pacify, calm"
+    },
+    {
+      "rank": 980,
+      "infinitif": "surgir",
+      "gloss": "emerge, appear, crop up"
+    },
+    {
+      "rank": 981,
+      "infinitif": "ancrer",
+      "gloss": "anchor"
+    }
+  ]
+}

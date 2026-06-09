@@ -42,6 +42,7 @@
 "VerbView.colorKeyIrregular" = "Irregular";
 "VerbView.colorKeyExplanation" = "Irregular stems and endings appear in red; regular forms in blue.";
 "VerbView.dismissColorKey" = "Dismiss color key";
+"VerbView.etymologyHeading" = "Etymology";
 
 "ModelView.parent" = "Parent";
 "ModelView.defective" = "Defective";

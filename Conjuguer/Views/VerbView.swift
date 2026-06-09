@@ -63,6 +63,11 @@ struct VerbView: View {
         if shouldShowCompoundTenses {
           CompoundTensesView(verb: verb)
         }
+
+        if let etymologyText = Etymology.text(for: verb.infinitif) {
+          etymologyCard(etymologyText)
+            .scrollFade()
+        }
       }
       .onAppear {
         world.analytics.recordViewAppeared("\(VerbView.self)")
@@ -178,6 +183,19 @@ struct VerbView: View {
           .rightAligned()
           .frenchPronunciation()
       }
+    }
+    .card()
+  }
+
+  private func etymologyCard(_ text: String) -> some View {
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      Text(L.VerbView.etymologyHeading)
+        .subheadingLabel()
+        .accessibilityAddTraits(.isHeader)
+
+      Text(text.etymologyAttributedString)
+        .lineSpacing(4)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     .card()
   }
