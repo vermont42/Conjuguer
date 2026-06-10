@@ -1,7 +1,7 @@
 Anthropic just released its new Fable model. I wanted to test it, at high and max effort levels, against Opus, at high and max levels. I ran four sessions of Claude Code in Conjuguer with the following prompt:
 
 ```
-Please explore the Conjuguer codebase and offer suggestions for improvement. Look for duplications, inelegant code, and code smells. Output your findings as a Markdown file in the prompts folder. Order the suggestions from most impactful to least.
+Please explore the Conjuguer codebase and offer suggestions for improvement. Look for duplications, inelegant code, and code smells. Output your findings as a Markdown file in the docs folder. Order the suggestions from most impactful to least.
 ```
 
 Each session had a different combination of model and effort level. The result files are in the prompts folder. They are:

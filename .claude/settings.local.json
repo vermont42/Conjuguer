@@ -7,7 +7,9 @@
       "Bash(find:*)",
       "Bash(xcodebuild:*)",
       "Bash(rm -rf /Users/josh/.claude/tmp/claude-501/*/*/tasks/TemporaryDirectory.*)",
-      "Bash(rm -rf /Users/josh/.claude/tmp/claude-501/-Users-josh-Desktop-workspace-Conjuguer/*/tasks/*)"
+      "Bash(rm -rf /Users/josh/.claude/tmp/claude-501/-Users-josh-Desktop-workspace-Conjuguer/*/tasks/*)",
+      "Bash(rm -rf /tmp/claude-501/TemporaryDirectory.* /Users/josh/.claude/tmp/claude-501/*/*/tasks/*)",
+      "Bash(grep -o '<h2[^>]*>[^<]*</h2>' /Users/josh/Desktop/workspace/Blog/_site/blog/fable-and-opus/index.html)"
     ]
   }
 }
