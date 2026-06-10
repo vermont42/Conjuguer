@@ -1,0 +1,547 @@
+# Conjuguer — Unified Code-Improvement Suggestions (Verified Union)
+
+This file merges every suggestion from the four model-eval review reports —
+`code-review-suggestions-Opus-high.md` (**OH**), `-Opus-max.md` (**OM**),
+`-Fable-high.md` (**FH**), `-Fable-max.md` (**FM**) — deduplicated into 33 items and
+re-ranked **most impactful → least**, by my judgment after verification (correctness >
+user-facing UX > maintainability > polish).
+
+**Every claim below was verified against the codebase at commit `32f8478`** (files read,
+dead code grepped, bug mechanisms traced). Each item lists which reports found it (with
+their own item numbers), the verification verdict with evidence, and effort
+(S < 30 min · M ≈ half-day · L = multi-day). Claims that needed correction are in
+Appendix A; a few things all four reports missed are in Appendix B. The comparative
+analysis of the four sessions is in `docs/model-eval-analysis.md`.
+
+A note on validity: **no suggestion from any report was rejected outright** — all 33
+items survive. Appendix A only demotes *details* (counts, framings, two flawed fix
+sketches).
+
+---
+
+## Tier A — Verified user-facing bugs (fix first)
+
+### 1. `modelSort` preference never survives a relaunch
+**Found by:** FM §1.1 only · **Verified:** ✅ real, every-user, every-launch · **Effort:** S
+
+`Settings.swift:29` persists via interpolation — `"\(modelSort)"` yields the *case name*
+(`"alphabetical"`) — but `Settings.swift:100` restores via `ModelSort(rawValue:)`, and
+`ModelSort`'s raw values are capitalized (`"Alphabetical"`, `ModelSort.swift:11-13`), so
+the lookup always fails and falls back to `.irregularity`. Choosing Alphabetical or
+Identifier in the Models tab is forgotten on every launch. `verbSort` escapes only
+because its raw values happen to equal its case names.
+
+**Fix:** persist `modelSort.rawValue` (and `verbSort.rawValue` for symmetry) in both the
+`didSet` and the init seed path. Item 20 eliminates the divergent-serialization class of
+bug; item 33 adds the round-trip test that would have caught it.
+
+### 2. Browse search is case- and diacritic-sensitive
+**Found by:** FH #3, FM §3.4 · **Verified:** ✅ real, core-UX · **Effort:** S
+
+`VerbBrowseView.swift:107` and `ModelBrowseView.swift:96` filter with
+`contains(searchText.localizedLowercase)` — only the *query* is lowercased and matching
+is diacritic-exact, so `Etre`, `etre`, and `repeter` find nothing. Particularly costly in
+a French-learning app whose own quiz treats dropped accents as partial credit.
+
+**Fix:** `localizedStandardContains(searchText)` at both sites (Finder-style matching).
+Two one-line changes.
+
+### 3. Quiz scoring leaks accent-stripping across alternate answers
+**Found by:** FM §1.3 only · **Verified:** ✅ real (traced) · **Effort:** S
+
+`ConjugationResult.score` (`ConjugationResult.swift:15-41`): `proposedAnswerClean` is
+declared *outside* the loop over alternate correct answers but mutated *inside* it. For a
+multi-form verb (`paye/paie`), iteration 1 strips accents from the proposed answer, so
+iteration 2's *exact-match* check compares against the already-stripped input: `pàie`
+scores `.totalMatch` against `paie` instead of `.partialMatch`.
+
+**Fix:** re-derive the cleaned proposed answer per iteration (the per-answer
+`correctAnswerClean` already is). Add the table-driven test from item 33 — this is the
+heart of quiz scoring and has zero tests.
+
+### 4. `DefectGroup` `h2p` marks the wrong impératif-passé row
+**Found by:** FM §1.2 only · **Verified:** ✅ real and live in shipped data · **Effort:** S
+
+`DefectGroup.swift:63-65`: the `doesntUse` arm for `"h2p"` sets
+`defects[.impératifPassé(.firstPlural)]` — copy-pasted from `h1p` above; should be
+`.secondPlural`. Live impact: `defectGroups.xml` group 8 (`du="…,h1p,h2p"`) is used by
+*clore*, whose *vous* impératif passé is therefore not struck through as defective in the
+compound-tenses view.
+
+**Fix:** one-token change; item 15 (shorthand codec) eliminates the bug class. Add the
+DefectGroup parsing test (item 33).
+
+### 5. ModelView endings grid ignores inherited alterations
+**Found by:** FM §1.8 only · **Verified:** ✅ real · **Effort:** S
+
+`ModelView.swift:169-172` passes `model.stemAlterations` (local only) to
+`endings(stemAlterations:)` / `impératifEndings(…)`, while conjugation itself — and the
+alterations card in the same view (line 42) — use `stemAlterationsRecursive`. A child
+model inheriting `*`-marked alterations shows ordinary endings where the conjugated forms
+actually diverge.
+
+**Fix:** pass `model.stemAlterationsRecursive` at the three call sites.
+
+### 6. ReviewPrompter: frozen clock, parallel `Settings`, dead `shared`
+**Found by:** FH #5 (second Settings), FM §1.6 (all three) · **Verified:** ✅ all three · **Effort:** S–M
+
+`ReviewPrompter.swift:27`: `now: Date = Date()` is captured once when `World` builds the
+prompter at launch, so the 180-day interval is always measured against *launch time*, and
+`lastReviewPromptDate` is recorded as the launch date, not the prompt date. The same init
+defaults to `Settings(getterSetter: UserDefaultsGetterSetter())`, creating a second live
+`Settings` beside `Current.settings` (confirmed: `World.device`/`simulator` call
+`ReviewPrompter()`, `World.swift:79, 94`) — same UserDefaults keys, separate in-memory
+state, invisible to `@Observable` tracking. `ReviewPrompter.shared` (`:11`) has no
+callers.
+
+**Fix:** inject a clock (`now: () -> Date = Date.init`); build
+`ReviewPrompter(settings: settings)` inside the `World` factories; delete `shared`.
+
+---
+
+## Tier B — Verified latent correctness defects
+
+### 7. `futurStemsRecursive`: trims the wrong stem; skips grandparent alterations
+**Found by:** OM #9 (flagged suspicious), FH #4 (confirmed + fix), FM §1.5 (+ the
+grandparent half, unique) · **Verified:** ✅ both halves · **Effort:** S, plus a test
+
+`VerbModel.swift:210-214`: `stems.forEach { if $0.last == "e" { stems[0] = … } }` —
+inspects each stem but always mutates `stems[0]`. With two stems: `[non-e, e]` trims the
+wrong one; `[e, e]` double-trims the first. No current data produces the bad case (golden
+tests pass), but the code can't do what it intends. Fix:
+`for i in stems.indices where stems[i].last == "e" { stems[i] = … }`.
+
+Second half (`VerbModel.swift:188-193`): fetches `VerbModel.models[parentId]?.stemAlterations`
+— one level only — where every other consumer walks the chain via
+`stemAlterationsRecursive`. A grandparent's inheritable `sf` alteration is silently
+dropped. Reuse `stemAlterationsRecursive` and delete the manual merge.
+
+### 8. `sorted(by: >=)` violates the strict-weak-ordering contract
+**Found by:** FM §1.4 only · **Verified:** ✅ real (documented UB) · **Effort:** S
+
+`ModelBrowseView.swift:123-125` sorts irregularity with `>=`. `sorted(by:)` requires a
+strict ordering; `>=` returns true for equal elements (undefined behavior; stdlib debug
+checks can trap). Use `>`, and add a secondary tiebreaker (e.g. exemplar) so
+equal-irregularity models stop landing in dictionary-hash order — which also helps item 9.
+
+### 9. Nondeterministic stem-alteration labels
+**Found by:** FM §1.7 (the bug); OM #13 / FH #8 (the same code as cleanup) · **Verified:** ✅ · **Effort:** S
+
+`Tense.shorthandForNonCompoundTense` (`Tense.swift:204-238`) builds output by iterating a
+`Set<String>`, so ModelView's alteration rows can read `r1s, x3p` one launch and
+`x3p, r1s` the next. Sort before joining. While there: the six-chained-`contains` check
+is `allSatisfy`/`isSubset`, and the manual comma loop is `joined(separator: ", ")`.
+
+### 10. Quiz decks: element 0 skipped; first-lap order quirk
+**Found by:** OM #2, FH #1, FM §2.2 · **Verified:** ✅ (`Quiz.swift:210` pre-increments) · **Effort:** folded into item 13
+
+All 13 cycling accessors increment *before* reading, so each pool's element 0 is skipped
+until the first wraparound. Harmless under shuffling, but accidental. Fix lands free with
+the `CyclingDeck` refactor (item 13) — have `next()` return the current element first.
+
+### 11. `String(stem.last ?? Character(""))` traps if the stem is ever empty
+**Found by:** FH #11 only · **Verified:** ✅ pattern at `Conjugator.swift:62, 181, 215` · **Effort:** S
+
+`Character("")` is a runtime trap; the safe spelling already exists in the same file
+(`stems[0].suffix(1) == …`, line 194). Replace the three sites with
+`hasSuffix(Tense.irregularEndingMarker)`.
+
+---
+
+## Tier C — Dead code (zero-risk deletions, ~450 lines)
+
+### 12. Dead-code sweep (merged inventory, all grep-verified)
+**Found by:** OM #3 (6 items), FH #9 (6), FM §4 (16, of which 15 verified) · **Effort:** S–M total
+
+| Symbol | Location | Found by | Notes |
+|---|---|---|---|
+| `Conjugator.printConjugations` | `Conjugator.swift:256-409` | OM FH FM | ~154 lines; also buggy — ignores its param, hardcodes `"alunir"`, then shadows the param (`:257, 261`); typo `conjugationFailedMesage` (`:270`). OH cited its `fatalError`s but missed that it's dead. |
+| `FrequencyParser` (class) | `Models/FrequencyParser.swift` | FM | Never instantiated — `VerbData.parse()` runs only the other three parsers; frequencies ship in `verbs.xml` (`fr` attr, `VerbParser.swift:89-94`). Keep `maxFrequency` (only live use: `VerbView.swift:116`) — move it, delete the class, consider dropping `frequencies.xml` from the bundle. Also fix CLAUDE.md, which still says frequencies.xml loads at startup (Appendix B). |
+| `Verb.personlessConjugations` | `Verb.swift:76-98` | OM FH FM | Superseded by `VerbConjugations.personless`. |
+| `Tense.tensesFor(shorthand:)` | `Tense.swift:240-244` | OM FH FM | Stub that ignores its argument; referenced only by the TODO at `StemAlteration.swift:45`. Either finish it as part of item 15 or delete. |
+| `Tense.allIndicatifPrésentTenses` | `Tense.swift:246-252` | OM FH FM | No callers. |
+| `String.replaceFirstOccurence` | `StringExtensions.swift:46-51` | OM FH FM | No callers; misspelled. |
+| `String.coloredString(color:)` | `StringExtensions.swift:97-101` | FM | No callers. |
+| `PersonNumber.pronounAndConjugation` | `PersonNumber.swift:165-167` | FM | No callers. |
+| `QuizState.finished` | `QuizState.swift:11` | FM | Never assigned or matched anywhere. |
+| `VerbSort.displayName` | `VerbSort.swift:14-21` | FM | Views use `L.displayNameForVerbSort`; this unlocalized copy drifts. |
+| `UIFont.preferredFont(from:)` (whole file) | `Utils/UIFontExtension.swift` | FM | No callers. |
+| `displayFontFamilyNames()` | `Fonts.swift:23-30` | FM | Debug helper, no callers. |
+| `Quiz.gameCenter` stored property | `Quiz.swift:26, 56-57` | FM | Assigned, never read — `completeQuiz` uses `Current.gameCenter` (`:364`), so the injection is a broken seam. Prefer *using* the injected value (better for tests) over deleting. |
+| `subjonctifPrésentStemChangers` deck | `Quiz.swift:47-48, 102, 119, 281-287`; `QuizVerbs.swift:25` | OM FM | Accessor never called by `buildQuiz`. |
+| `AnalyticsLocale.defaultLanguageCode` (+ flag-emoji local) | `AnalyticsLocale.swift:14, 23-26` | FM (OH #13 flagged the emoji identifier for rename) | Requirement + default impl unused. Deleting it also resolves OH's ungreppable-identifier complaint. |
+| `ReviewPrompter.shared` | `ReviewPrompter.swift:11` | FM | `World` builds its own instance. (Part of item 6.) |
+| `VerbView.shouldShowVerbHeading` | `VerbView.swift:14, 19-21` | FH | Stored, never read — heading at `:28` is unconditional; 3 call sites pass `true` to no effect. Decide: honor it (as `InfoView.shouldShowInfoHeading` does, `InfoView.swift:32-40`) or remove the parameter. Behavioral decision, so do it consciously, not as a blind deletion. |
+
+(Correction absorbed: FM also listed `Utterer.defaultLocaleString` as dead; it's used by
+`Utterer.setup()` — it's a *duplicate*, handled in item 30.)
+
+---
+
+## Tier D — High-leverage structural refactors
+
+### 13. Quiz: replace 13 hand-rolled deck/index pairs with `CyclingDeck`
+**Found by:** all four (OH #1, OM #2, FH #1, FM §2.2) — the consensus #1 refactor · **Effort:** M
+
+`Quiz.swift:29-54` (13 array+index pairs), `:92-106` (`resetIndices`), `:108-124`
+(shuffles), `:209-311` (13 cycling accessors). One generic `CyclingDeck<Element>` with
+`next()`/shuffled-init collapses ~200 lines to ~40, deletes both maintenance methods,
+fixes the off-by-one (item 10), and removes the "did I update all four places?" footgun.
+Fold in: `QuizQuestion` struct to replace the `(Verb, Tense)` tuples (`Quiz.swift:19`,
+`QuizView.swift:135-136`; FH #13, FM §3.6) and the `gameCenter` injection fix (item 12
+row). FM's sketch is the most complete starting point.
+
+### 14. `Tense.personNumber` accessor to collapse the 17-case switches
+**Found by:** all four (OH #10, OM #4, FH #6, FM §2.3) · **Effort:** S–M
+
+`pronounWithGender`, `pronoun`, `gender`, `pronounDecorator` (`Tense.swift:168-202`) each
+re-match all seventeen person-bearing cases just to extract the `PersonNumber`. One
+`var personNumber: PersonNumber?` makes them one-liners; the same accessor simplifies the
+fifth copy in `VerbConjugations.conjugationParts` (`VerbConjugations.swift:95-120`) and
+can back `shortDisplayName`/`conjugatedAuxilliary`. Adding a tense currently means
+touching five-plus switches; after, one. Rename `conjugatedAuxilliary` →
+`conjugatedAuxiliary` while in the file (typo cluster, item 31).
+
+### 15. One source of truth for the tense-shorthand codec
+**Found by:** OM #5, FH #8, FM §2.4 (broadest: includes `DefectGroup`); OH #6 covered the
+decode switch only · **Effort:** M
+
+The `r1s`/`bA`/`pp` language is hand-parsed in three places — `StemAlteration.init`
+(`StemAlteration.swift:43-151`, 42 cases, with a TODO at `:45` asking for this exact
+refactor), and both `DefectGroup.init` branches (`DefectGroup.swift:36-143`) — and
+hand-*encoded* in `Tense.shortDisplayName` (`Tense.swift:139-166`). The grammar is
+regular: tense letter + person-number short name (or `A`). Build one
+`letter → (PersonNumber) -> Tense` table (finishing or replacing the `tensesFor` stub),
+derive both directions from it, and: the h2p bug class (item 4) becomes impossible,
+`DefectGroup.setAllDefectsTo`'s 102-tense literal (`:161-185`) becomes a loop,
+`defects: [Tense: Bool]` simplifies to `Set<Tense>`. Note the two dialects: DefectGroup
+adds `fA/cA/hA` and bare `1s…3p` codes — the table needs to cover both.
+
+### 16. Collapse the duplicated debug conjugation dump
+**Found by:** OM #6, FH #2, FM §2.1 · **Effort:** S–M
+
+`InputView.conjugate` (`InputView.swift:130-270`) is a near line-for-line copy of the
+(dead, buggy) `Conjugator.printConjugations` — eleven consecutive
+loop-switch-`fatalError` blocks. Delete `printConjugations` (item 12); rewrite
+`InputView.conjugate` as a loop over `VerbConjugations.simpleSpecs`-style
+`(label, [Tense])` specs (~140 lines → ~20). Context all reports missed: `InputView` is
+`#if DEBUG`-only, so this is maintainer-tool hygiene, not shipped-code risk — which is
+also why OH's #5 ("business logic living in the view", incl. the XML export at
+`:272-327` and the four repeated TextField stacks at `:21-51`) ranks here rather than in
+Tier A. Apply OH's TextField-helper suggestion opportunistically.
+
+### 17. `conjugatedString` helper + `fatalError` policy (59 sites)
+**Found by:** OM #1/#8 (the helper + the census — exactly 59, verified), FM §3.2; OH #3
+partially (engine should return errors, not crash) · **Effort:** M
+
+Nearly every `Conjugator.conjugate` caller unwraps the `Result` with the same
+`switch`-and-`fatalError` (e.g. `VerbConjugations.swift:123-130`, `Tense.swift:130-136`,
+`Conjugator.swift:244-253`, `Quiz.swift:317-344`, TestUtils). Add
+`Conjugator.conjugatedString(infinitif:tense:extraLetters:) -> String?` (or a throwing
+`get()` wrapper) and collapse them. Then audit the 59 `fatalError`s: keep genuine
+programmer-invariant traps, downgrade data-driven ones (XML parsers' missing-attribute
+traps — `VerbParser.swift:56`, `VerbModelParser.swift:50`, `StemAlteration.swift:149` —
+and `moveCircumflexIfNeeded`'s empty-stem trap at `Conjugator.swift:231`) to recoverable
+errors or skip-and-log.
+
+### 18. Generic parent-chain resolver in `VerbModel`
+**Found by:** OH #11, FM §2.5 · **Verified with caveat** · **Effort:** S
+
+`passéSimpleGroupRecursive`, `indicatifPrésentGroupRecursive`,
+`subjonctifPrésentGroupRecursive` (`VerbModel.swift:146-174`) are the same
+local-else-parent-else-`fatalError` walk; a keypath-parameterized `inherited(_:)`
+collapses them. **Caveat both reports missed in their sketches:**
+`participeEndingRecursive` (`:136-144`) falls back to `""` at the root (no `fatalError`),
+and `stemAlterationsRecursive` *merges* the chain — fold in only the three uniform ones,
+or parameterize the fallback. While in the file: name the magic
+`maxIrregularityCount = 41` (`:104`, OM #9) and iterate `models.keys` in
+`computeIrregularities`/`sortVerbs` if you want the style cleanup (OM #9 — legal Swift
+as-is; see Appendix A).
+
+### 19. Ending groups: code → data
+**Found by:** OH #2, FM §2.6 (fullest), OM #7 + FH #11 (star-builder triplication) · **Effort:** M–L
+
+Three parts, one theme (~535 lines across the three group files):
+- The per-group six-ending switches (`IndicatifPresentGroup.swift`,
+  `PasseSimpleGroup.swift`, `SubjonctifPresentGroup.swift`) become per-case 6-element
+  arrays/dictionaries in `PersonNumber` order. Bonus findings this surfaces, both FM:
+  `Imparfait` ≡ `ConditionnelPrésent` are byte-identical tables (alias one to the other);
+  `IndicatifPrésentGroup.s` vs `.r` differ only in third-singular.
+- The "star the `*`-overridden endings" algorithm is triplicated
+  (`IndicatifPresentGroup.swift:123-147`, `:198-220`; `SubjonctifPresentGroup.swift:82-104`)
+  plus two plain join-loops (`PasseSimpleGroup.swift:114-120, 202-208`) — one helper
+  parameterized by `(personNumbers, tenseBuilder, endingProvider)`.
+- Stop round-tripping structured data through display strings: the `endings…` methods
+  return space-joined strings that `ModelView.endingSlots` re-`split`s
+  (`ModelView.swift:224-233`, incl. the `"" → "_"` placeholder hack) — return
+  `[PersonNumber: String]` and let the view join (FM §3.1).
+While there, document the opposite uppercase-letter conventions in the two
+`groupForXmlString` mappings (FM §6).
+
+### 20. Settings: generic load/persist helpers, single serialization path
+**Found by:** all four (OH #8, OM #11, FH #7, FM §2.9) · **Effort:** M
+
+Seven properties × (didSet-persist + key + default + init load-or-seed) ≈ 120 lines
+(`Settings.swift:16-133`). Two small generic helpers (`load<T: RawRepresentable>` +
+`persist`) collapse it and — the real win — force every value through `rawValue`,
+eliminating the divergence behind item 1. Also: `Int((bestScoreString as NSString).intValue)`
+→ `Int(bestScoreString) ?? default` (`:112, 124`), and the hand-rolled `DateFormatter`
+(`:85-86`) → `ISO8601DateFormatter` or `timeIntervalSince1970`. **Constraint (both Fable
+reports, correct):** property wrappers don't compose with `@Observable`, so OH's
+`@SettingsPersisted` sketch won't compile as written — use the helper-method shape.
+
+### 21. Browse views/stores: extract the shared scaffold
+**Found by:** FH #10, FM §2.7, OH #4 (overclaimed — see Appendix A) · **Effort:** M–L
+
+`VerbBrowseView` and `ModelBrowseView` duplicate the
+picker → searchable list → `ContentUnavailableView` → sad-trombone → sheet → analytics
+scaffold, and `VerbStore`/`ModelStore` duplicate "precompute one sorted array per sort
+case; `didSet` persists + swaps." A generic `BrowseStore<Item, Sort>` plus a shared
+`updateSearchResults` halves both files. `InfoBrowseView` shares only the nav/list shell
+(no search/sort) — make it the third adopter only if/when it grows search. Fix while
+here (FH #10, FM §3.3): both views build their store from the global
+(`@State private var store = VerbStore(world: Current)`, line 13) while also reading
+`@Environment(World.self)` — initialize from the environment so previews/tests injecting
+a different `World` aren't half-ignored. This dovetails with the in-flight issue-#27
+work (`docs/conjuguer-ui-issues.md`) that moved views onto `@Environment(World.self)`.
+
+### 22. Conjugator internals cleanup
+**Found by:** OH #3 (decomposition), FH #12 (additive-scan helper), OM #13 + FH #12 + FM §3.7
+(`composedConjugation`), OM #13 + FM §3.4 (`moveCircumflexIfNeeded`) · **Effort:** M
+
+`conjugate()` is 195 lines with two big switches. Before any grand decomposition:
+- Extract the four near-identical additive-alteration scans
+  (`Conjugator.swift:45-53, 57-70, 93-108, 120-133`) into one helper (FH's sketch).
+- `composedConjugation`'s manual `hasAppendedAtLeastOneConjugation` flag (`:208-223`) →
+  `map { … }.joined(separator:)`.
+- `moveCircumflexIfNeeded`'s 10-tuple linear scan without `break` (`:235-239`) →
+  `[Character: Character]` lookup.
+- Then, if still warranted, OH's per-tense-family function extraction. The engine is the
+  best-tested code in the app (golden tests), so mechanical steps are safe; deep
+  restructuring should wait for item 33's extra tests.
+
+### 23. Consolidate diacritic handling on `folding`
+**Found by:** OM #13, FH #15, FM §3.4 · **Effort:** S–M
+
+Three implementations: `moveCircumflexIfNeeded`'s tuples, `ConjugationResult.score`'s two
+strip-tables (`ConjugationResult.swift:22-35`), and the right way —
+`folding(options: .diacriticInsensitive, locale:)` in `PersonNumber.preamble`
+(`PersonNumber.swift:172-174`). Standardize on `folding`; scoring keeps its two-tier
+(circumflex-only first stage) via an explicit circumflex set. Do together with item 3.
+
+### 24. `VerbView` recomputes all conjugations on every struct re-init
+**Found by:** FH #14 only · **Verified:** ✅ (`VerbView.swift:19-23`, stored `let`, not `@State`) · **Effort:** S–M
+
+`VerbConjugations(verb:)` conjugates ~50 forms + builds attributed strings, and runs
+every time the parent re-evaluates `body`. Store as `@State` populated in
+`.task(id: verb)` (or memoize keyed by infinitif). Low urgency, silent-growth cost.
+
+### 25. `World.handleURL` / `handleInAppURL` near-duplication
+**Found by:** OM #10 only · **Verified:** ✅ (`World.swift:114-175`) · **Effort:** S
+
+Extract the shared host→entity resolution; keep the well-written intent comment at
+`:146-151` on the seam. The behavioral difference (tab switch + sibling clearing) is
+covered by `DeeplinkTests`, so this is a safe extraction.
+
+### 26. Model layer reads `Current` directly
+**Found by:** FM §3.3 only (OH #13's `World`-global note is the long-term cousin) · **Effort:** M (policy)
+
+`PersonNumber.pronoun/pronounWithGender/gender` and `Conjugator.conjugate`'s compound
+branch (`Conjugator.swift:199`) read `Current.settings.pronounGender` from model code,
+which is why `CompoundTenseTests` must mutate global state (`CompoundTenseTests.swift:19`)
+and why the conjugation engine isn't a pure function. Pass `PronounGender` into the few
+call sites that need it. Aligns with the issue-#27 `@Environment` migration direction.
+
+### 27. XML parsers share an unextracted scaffold
+**Found by:** OH #9, FM §2.8 · **Effort:** M
+
+`VerbParser` / `VerbModelParser` / `DefectGroupParser` repeat the bundle-URL/XMLParser
+init, `current*` accumulator fields, required-attribute `fatalError`s, and end-element
+reset dance. A small base class + `require(_:in:)` attribute helper shrinks each to its
+element mapping and centralizes error handling (ties into item 17's fatalError policy;
+`FrequencyParser` is already gone via item 12). Parsers are untested — see item 33.
+
+---
+
+## Tier E — Modernization and polish
+
+### 28. Retire the legacy `NSAttributedString` pipeline
+**Found by:** OM #12, FM §3.5 (deepest analysis), OH #13 (parser note) · **Effort:** L
+
+Two parallel "color the irregular letters" systems: modern `AttributedString` (
+`ConjugationText.swift`, used by verb/model views) and the legacy
+`String.conjugatedString` + `String.attributedText` `NSAttributedString` path
+(`StringExtensions.swift:53-206`) still rendering Info articles (`Info.swift:21`,
+`InfoView.swift:38`, `TextView`). FM adds the sharpest reason to act: `attributedText`
+walks `Character`s while building UTF-16 `NSRange`s — correct only while the corpus stays
+precomposed-BMP French; the first astral/decomposed character shifts every later range.
+Migrate Info text to `AttributedString` (the `etymologyAttributedString` pattern,
+`StringExtensions.swift:33-44`, shows the house style), then delete the whole legacy path
+including its five `fatalError`s. Largest single item; schedule deliberately.
+
+### 29. `L.swift` (618 lines) — String Catalog and key hygiene
+**Found by:** OH #7 (catalog migration — unique); key inconsistency also FM §6 · **Effort:** L (catalog) / S (keys)
+
+Short term: normalize the bare `"alphabetical"` key shared by both sort enums
+(`L.swift:604, 613`) into namespaced keys; fold duplicated browse strings; move
+`displayNameForVerbSort/ModelSort` onto the enums. FM §6 adds: `*WithColon` strings are
+assembled by interpolation at call sites (`Quiz.swift:394-395`, `QuizView.swift:115, 230`,
+`QuizResultsView.swift:34, 38`) — prefer format-style localized strings for word-order
+safety. Long term: migrate to a String Catalog (`.xcstrings`) and delete most of the
+file.
+
+### 30. Service-layer grab bag (each S)
+**Found by:** OH #13, FH #15, FM §3.8/3.9/§6, OM #13 — merged:
+
+- **Audio session configured three times, failures swallowed** (FH, FM, OH):
+  `SoundPlayer.init` (`.playback`, empty `catch`, `SoundPlayer.swift:20-21`),
+  `SoundPlayer.setup()` (`:43-44`), `Utterer.setup()` (`Utterer.swift:22`) — one
+  bootstrap, log failures. Collapse `Utterer.defaultLocaleString`/`englishLocaleString`
+  duplicates (`:15-16`).
+- **RatingsFetcher** (FH, FM): hardcoded French `" Ajoutez la vôtre."`
+  (`RatingsFetcher.swift:41`) → localize; `JSONSerialization` + casts → `Codable`;
+  callback + manual `Task { @MainActor }` hop → `async/await`; `NSString(format:)` →
+  `String(format:)`.
+- **GameCenter** (OH, FM): nested completion handler → `async/await`; remove
+  commented-out `print`s (`GameCenter.swift:24, 30`); `"ERROR"` leaderboard sentinel
+  (`:29`) → optional + guard.
+- **URLExtensions** (OH, FM): derive `isDeeplink`'s `"conjuguer"` (`:12`) from
+  `conjuguerUrlPrefix` (`:19`); name the `pathComponents.count == 2` magic.
+- **`Verb.id = UUID()`** (FH, FM): fresh identity every parse and synthesized `Hashable`
+  includes it — use `infinitifWithPossibleExtraLetters` (the dictionary key) as the
+  stable `id`.
+- **Valid-endings list duplicated** (FH): `["er", "ir", "re", "ïr"]` in
+  `Verb.endingIsValid` (`Verb.swift:102`) and `InputView.add` (`InputView.swift:90`) —
+  the latter should call the former.
+- **`RealAnalyticsLocale` `none`/`NONE` sentinels** (OH): `RealAnalyticsLocale.swift:12-13`
+  — collapse to one constant.
+- **`DoubleExtension`** builds a `NumberFormatter` per call; **`IntExtension`** uses
+  `NSString(format:)` for H:MM:SS (OH). (If caching the formatter, mind the `locale:`
+  parameter.)
+- **`verbsWithDeepLinks` swallows its markdown error** (`VerbModel.swift:77-79`, OM) —
+  log before returning `""`.
+- **Analytics hook**: ten identical
+  `.onAppear { world.analytics.recordViewAppeared("\(X.self)") }` sites → one
+  `.recordsAppearance(as:)` modifier (FM §3.10; count corrected from nine).
+
+### 31. Quiz modeling nits + typo cluster (each S)
+**Found by:** FH #15, FM §3.6/§6, OM #13:
+
+- `numberCorrect` is a `Double` accumulating `1.0 * percentCorrect` (`Quiz.swift:16, 325`)
+  — drop the no-op multiplier, rename toward `score`-speak.
+- `buildQuiz`'s `.ridiculous` branch: thirty repeated `questions.append(…)` lines
+  (`Quiz.swift:171-201`) → a literal `(infinitif, tenseBuilder)` array mapped once.
+- `bonusForElapsedTime` (`Quiz.swift:400-423`): keep the table or use the *corrected*
+  closed form `t ≤ 120 → 450; else max(0, 400 − 50·((t−121)/60))` — both Fable reports'
+  formula was off by one bracket (Appendix A).
+- Typos: `conjugatedAuxilliary` (`Tense.swift:104`), `replaceFirstOccurence` (deleted in
+  item 12), `conjugationFailedMesage` (deleted in item 12), "initializaed"
+  (`RatingsFetcher.swift:14`), "inpat" ×2 (`InputView.swift:77, 82` — if wordplay, add a
+  comment).
+- `StemAlteration.alterationsFor` hardcodes its `"|"` separator (`StemAlteration.swift:177`)
+  while `","` is a named constant on `VerbModelParser` — name both (FM §6).
+- `Info.headingToIndex` (`Info.swift:64-72`) is `firstIndex(where:)` in disguise (FM §3.7).
+
+### 32. CLAUDE.md corrections
+**Found by:** FM §6 (count discrepancy); extended during verification · **Effort:** S
+
+CLAUDE.md says both "6,320 verbs" and "verbs.xml — All 6,314 verbs"; actual count is
+6,320 (`grep -c '<verb ' verbs.xml`), so fix the 6,314. Also stale: the Data Loading
+section lists `frequencies.xml` as loaded at startup — it isn't (item 12 /
+`FrequencyParser`).
+
+---
+
+## Tier F — Tests
+
+### 33. Close the test gaps around everything above
+**Found by:** OH #12, FM §5 (complementary lists) · **Effort:** M–L, amortized
+
+The generated `VerbModelTests` (5,530 lines) gives the engine superb golden coverage; the
+code *around* it — where every verified bug in Tier A lives — has none:
+
+- `ConjugationResult.score`: table-driven exact/circumflex/grave/junk cases incl. a
+  `paye/paie` multi-form case (locks in item 3).
+- `Settings`: round-trip every property through `DictionaryGetterSetter` (locks in
+  items 1/20).
+- `DefectGroup`: assert the tense set produced by each shorthand (locks in items 4/15).
+- `Quiz`: lifecycle/scoring/bonus thresholds/best-score persistence (today exercised only
+  via the manual simulator flow in CLAUDE.md; enables item 13 safely).
+- Parsers: malformed-input behavior once item 27/17 makes failures non-fatal.
+- `futurStemsRecursive`: a multi-stem future case (locks in item 7).
+- OH-only structural critiques, lower priority: regenerate-vs-table-driven debate for
+  `VerbModelTests` (it's generated by `TestUtils.generateVerbModelTests()` printing
+  source); `CompoundTenseTests`' 16 hand-rolled wraparound loops → a
+  `testConjugations(verb:expectedByTense:)` helper; `DeeplinkTests` fixtures derived from
+  data rather than hardcoded `"parler"`/`Info.infos[2]`.
+
+---
+
+## Recommended implementation order
+
+Each batch is independently shippable; run the full suite (`run_tests.sh`) after each.
+Tests-first where a batch touches scoring/persistence logic.
+
+1. **Batch 0 — Bugs (one sitting, ~2h, items 1–6).** Six S-sized fixes:
+   `modelSort.rawValue`, `localizedStandardContains` ×2, score-loop reset, `h2p` token,
+   `stemAlterationsRecursive` in ModelView, ReviewPrompter wiring (clock + shared
+   Settings). Write the regression tests from item 33 for the first four as you go.
+2. **Batch 1 — Deletions and docs (items 12, 32, typo half of 31).** ~450 lines of
+   grep-verified dead code, CLAUDE.md corrections, typos. Zero behavior change; shrinks
+   everything later. Decide `shouldShowVerbHeading` consciously.
+3. **Batch 2 — Latent correctness (items 7–9, 11).** `futurStemsRecursive` (+ test),
+   `sorted(by: >)` + tiebreaker, sorted shorthand labels, `hasSuffix` for the
+   `Character("")` traps.
+4. **Batch 3 — Mechanical consolidations under golden-test cover (items 14, 17, 13, 18,
+   22's small pieces).** `Tense.personNumber`, the `conjugatedString` helper (unblocks
+   later batches), `CyclingDeck` + `QuizQuestion` (after the Quiz tests), the
+   three-property resolver, `map/joined` + circumflex-dict cleanups.
+5. **Batch 4 — The codec and the data tables (items 15, 19, 23).** Shorthand
+   single-source (finishes the in-code TODO, makes item 4's bug class impossible,
+   `Set<Tense>` for defects), ending tables → data + star-builder helper +
+   typed `endingSlots`, diacritic folding consolidation.
+6. **Batch 5 — Settings & DI seams (items 20, 21, 26).** Settings helpers (after the
+   round-trip test), browse store ↔ environment alignment + generic `BrowseStore`,
+   pronoun-gender injection into the engine. Coordinate with the issue-#27 workstream in
+   `docs/conjuguer-ui-issues.md`.
+7. **Batch 6 — Views and services (items 16, 24, 25, 30, rest of 31).** InputView
+   spec-driven rewrite, VerbView memoization, `handleURL` extraction, the service grab
+   bag, analytics modifier.
+8. **Batch 7 — The big modernizations, each as its own PR (items 27, 28, 29, 33's
+   structural test work).** Parser scaffold + parser tests, NSAttributedString
+   retirement (largest; do last), String Catalog migration.
+
+Rough total: batches 0–2 are a weekend; 3–5 a focused week; 6–7 opportunistic.
+
+---
+
+## Appendix A — Claims corrected during verification
+
+No finding was fabricated; these details didn't survive (kept out of the rankings above):
+
+| Source | Claim | Correction |
+|---|---|---|
+| OH #4 | Three browse views "are the same view three times" | `InfoBrowseView` has no sort picker, no search, no `updateSearchResults`; only the nav/list shell matches. Treated as 2 views + future third (item 21). |
+| OH #6 | "60+ case" decoding switch | 42 cases / ~104 lines (`StemAlteration.swift:47-150`). |
+| OH #8 | `@SettingsPersisted` property wrapper | Property wrappers don't compose with `@Observable`; use generic helper methods (item 20). |
+| OH #11 | "Five identical … else `fatalError`" resolver props | Only 3 fatalError; `stemAlterationsRecursive` merges, `participeEndingRecursive` falls back to `""` — naive unification would change behavior (item 18 caveat). |
+| OH #5 | InputView business-logic ranking | `InputView` is `#if DEBUG`-only (no report noticed); demoted to item 16. |
+| OM #9 | Dictionary mutation-while-iterating is "fragile" | Legal, defined Swift (iteration over a value copy); style nit only. Cleanup kept as optional in item 18. |
+| FH #2 | "Nine consecutive copy-pasted blocks" | Eleven (FM's count verified). |
+| FH #15 / FM §3.6 | `bonusForElapsedTime` ≡ `max(0, 450 − 50·((t−1)/60))` | Off by one bracket (gives 350 at t=121; table says 400). Corrected form in item 31. |
+| FM §2.4 | "~100 cases" in `StemAlteration.init` | 42 cases (~109 lines). |
+| FM §3.10 | "Nine occurrences" of the analytics hook | Ten (verified list in transcript-era grep). |
+| FM §4 | `Utterer.defaultLocaleString` is dead | Referenced by `Utterer.setup()`; reclassified as duplicate-constant (item 30). |
+
+## Appendix B — Found during verification, missed by all four reports
+
+- **`InputView` is `#if DEBUG`-only** (`InputView.swift:10`) — reframes every InputView
+  suggestion as maintainer-tool hygiene.
+- **CLAUDE.md's Data Loading section is stale**: lists `frequencies.xml` among files
+  loaded at startup; `VerbData.parse()` never runs `FrequencyParser` (folded into
+  item 32).
+- **The corrected bonus formula** (Appendix A row) — neither Fable report's arithmetic
+  was usable as written.
+- Minor, noted in passing: `ModelBrowseView` filters on `exemplar` but displays
+  `exemplarWithPossibleExtraLetters`, so the parenthesized extra letters aren't
+  searchable.

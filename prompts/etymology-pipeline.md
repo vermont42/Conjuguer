@@ -210,7 +210,8 @@ For every `(verb, lang)` value, check:
 
 ```python
 python3 << 'ENDPY'
-import json, glob
+import json, glob, re
+emph = re.compile(r'\*(?!~)[^*~\n]+?\*')   # *word* emphasis (NOT the *~root~ reconstruction)
 problems = []
 for f in glob.glob('/tmp/etym_g*.json'):
     for verb, langs in json.load(open(f)).items():
@@ -222,6 +223,8 @@ for f in glob.glob('/tmp/etym_g*.json'):
             if '"' in t:                     problems.append((verb, lang, 'ASCII \" in prose'))
             if "\\n" in t:                   problems.append((verb, lang, "literal backslash-n"))
             if "\n\n" not in t:              problems.append((verb, lang, "no paragraph break"))
+            if "~*" in t:                    problems.append((verb, lang, "~* misplaced recon asterisk (want *~)"))
+            if emph.search(t):               problems.append((verb, lang, "*word* emphasis (use ~bold~ or plain)"))
         # en/fr should bold the same forms -> tilde counts should match
         if langs.get("en","").count("~") != langs.get("fr","").count("~"):
             problems.append((verb, "en/fr", "tilde count mismatch"))
@@ -391,7 +394,15 @@ file.
 >   bold it in **both** languages or **neither** — don't bold the bare verb in one language
 >   while glossing it in quotes in the other.
 > - **Reconstructed (unattested) forms** take a literal asterisk *before* the bold:
->   `*~steh₂-~`, `*~bʰuH-~`. Keep the asterisk outside the tildes.
+>   `*~steh₂-~`, `*~bʰuH-~`. Keep the asterisk **outside** the tildes. **Never write
+>   `~*steh₂-~`** (asterisk inside the bold) — it renders the `*` bolded, glued into the
+>   word. The asterisk and the opening tilde always go in the order `*~`, never `~*`.
+> - **The asterisk is reserved for reconstructions only — never use `*word*` for emphasis.**
+>   This renderer treats `~` as the *only* bold marker and passes every `*` through
+>   literally (it has to, for `*~steh₂-~`). So a markdown-style `*inhabit*` or `*row of
+>   threads*` shows up in the app as literal asterisks around the words. To stress a word,
+>   either bold it with tildes (`~inhabit~`, counting it on both sides) or just leave it
+>   plain — do not wrap it in `*`.
 > - **Subscripts/superscripts** in roots are written with real Unicode characters, never
 >   markup: subscripts `₀₁₂₃` (e.g. `*~h₂epo~`), superscript modifier letters `ʰ ʷ ʲ`
 >   (e.g. `*~bʰuH-~`). 
@@ -504,6 +515,16 @@ file.
   only the deep PIE root, not the cited Latin etymon (`coûter` → *stand*/*stay*). Neither is
   a fabrication, but prefer reproducing the source's reconstructed form exactly and saying
   "through the same PIE root" when the link is distant.
+- **Two asterisk defects the renderer makes visible (found by on-device verification).** The
+  app bolds only `~…~` and prints every `*` literally (it must, for `*~steh₂-~`). Subagents
+  produced two slips that the original Step 4 validator didn't catch, so they shipped and
+  showed as stray asterisks in the UI: (1) **`*word*` markdown emphasis** — 40 spans across
+  12 verbs (e.g. `*inhabit*`, `*row of threads*`, `*briefly*`) rendered as literal
+  `*inhabit*`; (2) **`~*root~`** — the reconstruction asterisk written *inside* the bold in
+  8 verbs (`~*nascere~`, `~*respondĕre~`, …), rendering a bolded `*` glued to the word. Both
+  are now Step 4 checks (`"~*"` and the `*word*` regex) and prompt rules. The cleanup that
+  removed them strips emphasis asterisks (`*x*`→`x`) and moves recon asterisks out
+  (`~*`→`*~`); neither touches `~`, so en/fr tilde parity is preserved automatically.
 
 ## Reminders
 
