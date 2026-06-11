@@ -21,3 +21,5 @@ amplifytools.xcconfig
 build.log
 .claude/ios-build-verify.*
 docs/screenshots/
+# Apple-copyrighted WWDC transcripts, archived locally for reference only (per their headers)
+docs/wwdc2026-*.txt
