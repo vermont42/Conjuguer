@@ -92,8 +92,8 @@ position; the run ends with a `QuizResultsView` sheet (label `Results`).
 
 The field **stays focused across submissions** (`submitAnswer()` re-sets focus), so a
 fast sweep is: tap it once (`tap_id.sh input_quiz_conjugation`), then loop
-`axe type "<answer>"` + `axe key 40` — batch many pairs into one Bash call (cleaning the
-temp dir first; see the ENOSPC note above) and `screenshot.sh` between batches to check
+`axe type "<answer>"` + `axe key 40` — batch many pairs into one Bash call and
+`screenshot.sh` between batches to check
 progress. **Caveat:** if focus is lost (e.g. after a `describe_ui`/screenshot detour),
 `axe type`/`axe key 40` silently no-op and the quiz won't advance — re-tap the field by
 id before resuming. To exercise all three result-icon colors, mix outcomes: a correct
@@ -104,29 +104,26 @@ conjugation → green, a correct skeleton with a dropped accent (e.g. `detends` 
 X in scope" diagnostics for same-module symbols. If `build_app.sh` succeeds, the build
 is authoritative — do not "fix" SourceKit-only diagnostics.
 
-#### Harness temp-dir fills up mid-verification ("filesystem full" / no output)
+#### False "temp filesystem … is full (0MB free)" errors & truncated Bash output
 
-Long simulator-driven runs (many `axe` / `describe_ui` calls) can make a Bash call
-return **"Bash completed with no output"** — even for a bare `echo` — or fail outright
-with *"the temp filesystem at `/private/tmp/claude-501/.../tasks` is full (0MB free) …
-ENOSPC."* This is **not** real disk pressure (`df -h /tmp` shows the volume has hundreds
-of GB free); the harness's per-call output capture is choking on accumulated empty
-`TemporaryDirectory.*` entries under `$TMPDIR` (`/tmp/claude-501`).
+Two related Claude Code harness bugs (native macOS build, seen through 2.1.173; live
+repros and full analysis in `~/Desktop/claude-code-bug-report.md`):
 
-- **Fix — clear them, as the first line of each verify command:**
-  `rm -rf /tmp/claude-501/TemporaryDirectory.* 2>/dev/null`. Putting it first gives the
-  *next* call's capture room; cleaning inside an already-failing call is too late for
-  that call's own output.
-- **The command body still runs even when its output is lost** — only the captured
-  stdout/stderr is dropped, not the execution. Never read "no output" as "it failed";
-  confirm state another way.
-- **Confirm state without stdout:** prefer `screenshot.sh <slug>` (writes a PNG to
-  `docs/screenshots/` and emits only the path) over reading the terminal, and have noisy
-  commands append progress to a file on the real disk (e.g. `… >> ~/verify.log`) that you
-  then `Read`.
-- **Reduce the trigger:** `describe_ui`'s full AXTree dump is large — pipe it straight
-  into `python3`/`grep` and print only the fields you need (or redirect it to a file),
-  rather than letting the whole JSON transit captured stdout.
+- The **"Command output was lost: the temp filesystem at …/tasks is full (0MB free) …
+  ENOSPC"** banner is **false** — a broken `statfs` (`bsize=0`) computes 0MB on any
+  volume. It really means the call produced no stdout and exited non-zero (a lone
+  no-match `grep` suffices). Treat it as a plain non-zero exit. Don't chase disk space,
+  and don't prefix commands with `rm -rf` of temp dirs (older advice here did; it was
+  useless, and the broad `tasks/*` variants can delete live capture files of concurrent
+  sessions).
+- **Mid-command output truncation** (sections of a compound command silently missing,
+  sometimes rendered as success) came from the harness shadowing `grep`/`find`/`rg`
+  with embedded tools whose child process can kill the shell. Global mitigations are
+  active on this machine (real ripgrep; `--allowedTools Grep,Glob` in the `claude`
+  alias; a PreToolUse hook prefixing `unset -f grep find rg`). If truncation
+  reappears, re-run via `command grep` / `command find`, and treat missing output as
+  unknown — never as "no matches". `screenshot.sh <slug>` and appending progress to a
+  real file (then `Read`) remain good stdout-free verification channels.
 
 ### Diagnostic fallback (raw xcodebuild)
 
