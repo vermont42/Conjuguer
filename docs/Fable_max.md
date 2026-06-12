@@ -2,8 +2,7 @@
 
 These etymologies were produced in a single batch by `general-purpose` subagents
 running **Claude Fable 5 at max effort**, via the pipeline in
-`prompts/etymology-pipeline.md`. They are listed here so the batch can be
-audited or re-reviewed as a cohort if the model/effort combination warrants it.
+`prompts/etymology-pipeline.md`.
 
 **Count:** 58 verbs (ranks 886–981).
 
