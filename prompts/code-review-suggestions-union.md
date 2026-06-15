@@ -82,20 +82,20 @@ actually diverge.
 
 **Fix:** pass `model.stemAlterationsRecursive` at the three call sites.
 
-### 6. ReviewPrompter: frozen clock, parallel `Settings`, dead `shared`
+### 6. ReviewPrompterReal: frozen clock, parallel `Settings`, dead `shared`
 **Found by:** FH #5 (second Settings), FM §1.6 (all three) · **Verified:** ✅ all three · **Effort:** S–M
 
-`ReviewPrompter.swift:27`: `now: Date = Date()` is captured once when `World` builds the
+`ReviewPrompterReal.swift:27`: `now: Date = Date()` is captured once when `World` builds the
 prompter at launch, so the 180-day interval is always measured against *launch time*, and
 `lastReviewPromptDate` is recorded as the launch date, not the prompt date. The same init
-defaults to `Settings(getterSetter: UserDefaultsGetterSetter())`, creating a second live
+defaults to `Settings(getterSetter: GetterSetterReal())`, creating a second live
 `Settings` beside `Current.settings` (confirmed: `World.device`/`simulator` call
-`ReviewPrompter()`, `World.swift:79, 94`) — same UserDefaults keys, separate in-memory
-state, invisible to `@Observable` tracking. `ReviewPrompter.shared` (`:11`) has no
+`ReviewPrompterReal()`, `World.swift:79, 94`) — same UserDefaults keys, separate in-memory
+state, invisible to `@Observable` tracking. `ReviewPrompterReal.shared` (`:11`) has no
 callers.
 
 **Fix:** inject a clock (`now: () -> Date = Date.init`); build
-`ReviewPrompter(settings: settings)` inside the `World` factories; delete `shared`.
+`ReviewPrompterReal(settings: settings)` inside the `World` factories; delete `shared`.
 
 ---
 
@@ -170,7 +170,7 @@ the `CyclingDeck` refactor (item 13) — have `next()` return the current elemen
 | `Quiz.gameCenter` stored property | `Quiz.swift:26, 56-57` | FM | Assigned, never read — `completeQuiz` uses `Current.gameCenter` (`:364`), so the injection is a broken seam. Prefer *using* the injected value (better for tests) over deleting. |
 | `subjonctifPrésentStemChangers` deck | `Quiz.swift:47-48, 102, 119, 281-287`; `QuizVerbs.swift:25` | OM FM | Accessor never called by `buildQuiz`. |
 | `AnalyticsLocale.defaultLanguageCode` (+ flag-emoji local) | `AnalyticsLocale.swift:14, 23-26` | FM (OH #13 flagged the emoji identifier for rename) | Requirement + default impl unused. Deleting it also resolves OH's ungreppable-identifier complaint. |
-| `ReviewPrompter.shared` | `ReviewPrompter.swift:11` | FM | `World` builds its own instance. (Part of item 6.) |
+| `ReviewPrompterReal.shared` | `ReviewPrompterReal.swift:11` | FM | `World` builds its own instance. (Part of item 6.) |
 | `VerbView.shouldShowVerbHeading` | `VerbView.swift:14, 19-21` | FH | Stored, never read — heading at `:28` is unconditional; 3 call sites pass `true` to no effect. Decide: honor it (as `InfoView.shouldShowInfoHeading` does, `InfoView.swift:32-40`) or remove the parameter. Behavioral decision, so do it consciously, not as a blind deletion. |
 
 (Correction absorbed: FM also listed `Utterer.defaultLocaleString` as dead; it's used by
@@ -402,8 +402,8 @@ file.
   (`RatingsFetcher.swift:41`) → localize; `JSONSerialization` + casts → `Codable`;
   callback + manual `Task { @MainActor }` hop → `async/await`; `NSString(format:)` →
   `String(format:)`.
-- **GameCenter** (OH, FM): nested completion handler → `async/await`; remove
-  commented-out `print`s (`GameCenter.swift:24, 30`); `"ERROR"` leaderboard sentinel
+- **GameCenterReal** (OH, FM): nested completion handler → `async/await`; remove
+  commented-out `print`s (`GameCenterReal.swift:24, 30`); `"ERROR"` leaderboard sentinel
   (`:29`) → optional + guard.
 - **URLExtensions** (OH, FM): derive `isDeeplink`'s `"conjuguer"` (`:12`) from
   `conjuguerUrlPrefix` (`:19`); name the `pathComponents.count == 2` magic.
@@ -413,7 +413,7 @@ file.
 - **Valid-endings list duplicated** (FH): `["er", "ir", "re", "ïr"]` in
   `Verb.endingIsValid` (`Verb.swift:102`) and `InputView.add` (`InputView.swift:90`) —
   the latter should call the former.
-- **`RealAnalyticsLocale` `none`/`NONE` sentinels** (OH): `RealAnalyticsLocale.swift:12-13`
+- **`AnalyticsLocaleReal` `none`/`NONE` sentinels** (OH): `AnalyticsLocaleReal.swift:12-13`
   — collapse to one constant.
 - **`DoubleExtension`** builds a `NumberFormatter` per call; **`IntExtension`** uses
   `NSString(format:)` for H:MM:SS (OH). (If caching the formatter, mind the `locale:`
@@ -462,7 +462,7 @@ code *around* it — where every verified bug in Tier A lives — has none:
 
 - `ConjugationResult.score`: table-driven exact/circumflex/grave/junk cases incl. a
   `paye/paie` multi-form case (locks in item 3).
-- `Settings`: round-trip every property through `DictionaryGetterSetter` (locks in
+- `Settings`: round-trip every property through `GetterSetterFake` (locks in
   items 1/20).
 - `DefectGroup`: assert the tense set produced by each shorthand (locks in items 4/15).
 - `Quiz`: lifecycle/scoring/bonus thresholds/best-score persistence (today exercised only
