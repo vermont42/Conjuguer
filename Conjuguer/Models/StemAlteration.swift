@@ -42,7 +42,7 @@ nonisolated struct StemAlteration: Hashable {
 
     for index in startIndexOfAlterationsInXml ..< components.count {
       let alteration = components[index]
-      // TODO: Don't switch. Instead, handle "A" and "N". Then use Tense.tensesFor(shorthand to figure out what to insert.
+      // TODO: Don't switch. Instead, handle "A" and "N", then derive the tenses from the shorthand to figure out what to insert.
 
       switch alteration {
       case "A":
@@ -174,8 +174,7 @@ nonisolated struct StemAlteration: Hashable {
   }
 
   static func alterationsFor(xmlString: String) -> [StemAlteration] {
-    let separator = "|"
-    let components = xmlString.components(separatedBy: separator)
+    let components = xmlString.components(separatedBy: VerbModelParser.alterationSeparator)
     var alterations: [StemAlteration] = []
     components.forEach {
       alterations.append(StemAlteration(xmlString: $0))

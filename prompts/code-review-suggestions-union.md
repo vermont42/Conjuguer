@@ -150,8 +150,18 @@ the `CyclingDeck` refactor (item 13) — have `next()` return the current elemen
 
 ## Tier C — Dead code (zero-risk deletions, ~450 lines)
 
-### 12. Dead-code sweep (merged inventory, all grep-verified)
+### 12. Dead-code sweep (merged inventory, all grep-verified) ✅ DONE (Batch 1)
 **Found by:** OM #3 (6 items), FH #9 (6), FM §4 (16, of which 15 verified) · **Effort:** S–M total
+
+> **Batch 1 resolution.** All rows deleted. `FrequencyParser` removed; `maxFrequency` moved to
+> `Verb.maxFrequency` (VerbView updated). `Quiz.gameCenter` now *used* (injected value drives
+> `completeQuiz`'s `reportScore`, replacing `Current.gameCenter`) and made a non-optional `let`.
+> `VerbView.shouldShowVerbHeading` decided consciously: **removed** the parameter — VerbView always
+> shows its in-body heading and sets no `navigationTitle` (unlike `InfoView`, where the flag toggles
+> body-heading vs. nav-title), so honoring it would have *hidden* the verb name in the browse
+> nav-destination case (a regression). The four call sites were updated. `Tense.tensesFor`'s TODO at
+> `StemAlteration.swift:45` was reworded to drop the dangling reference. `ReviewPrompterReal.shared`
+> was already removed in Batch 0. `frequencies.xml` is left in the bundle (unparsed; noted in CLAUDE.md).
 
 | Symbol | Location | Found by | Notes |
 |---|---|---|---|
@@ -424,8 +434,18 @@ file.
   `.onAppear { world.analytics.recordViewAppeared("\(X.self)") }` sites → one
   `.recordsAppearance(as:)` modifier (FM §3.10; count corrected from nine).
 
-### 31. Quiz modeling nits + typo cluster (each S)
+### 31. Quiz modeling nits + typo cluster (each S) ✅ DONE (Batch 1)
 **Found by:** FH #15, FM §3.6/§6, OM #13:
+
+> **Batch 1 resolution (all bullets).** `numberCorrect` → `correctnessScore`, no-op `1.0 *` dropped
+> (Quiz + QuizResultsView). `.ridiculous` branch → a single `[(String, Tense)]` literal mapped once
+> (source-order evaluation preserves the cycling-`personNumber` sequence exactly). `bonusForElapsedTime`:
+> **kept the table** (the reviewer-endorsed option — the table is correct; both Fable closed-forms were
+> off by one bracket). Typos fixed: `conjugatedAuxilliary` → `conjugatedAuxiliary` (def + call),
+> `initializaed` → `initialized`, `inpat` ×2 → `input`. `replaceFirstOccurence`/`conjugationFailedMesage`
+> resolved by their item-12 deletions. `StemAlteration.alterationsFor`'s `"|"` is now
+> `VerbModelParser.alterationSeparator` (beside the existing `xmlSeparator` `","`). `Info.headingToIndex`
+> → `infos.firstIndex { … }`.
 
 - `numberCorrect` is a `Double` accumulating `1.0 * percentCorrect` (`Quiz.swift:16, 325`)
   — drop the no-op multiplier, rename toward `score`-speak.
@@ -442,7 +462,7 @@ file.
   while `","` is a named constant on `VerbModelParser` — name both (FM §6).
 - `Info.headingToIndex` (`Info.swift:64-72`) is `firstIndex(where:)` in disguise (FM §3.7).
 
-### 32. CLAUDE.md corrections
+### 32. CLAUDE.md corrections ✅ DONE (Batch 1)
 **Found by:** FM §6 (count discrepancy); extended during verification · **Effort:** S
 
 CLAUDE.md says both "6,320 verbs" and "verbs.xml — All 6,314 verbs"; actual count is
@@ -486,9 +506,11 @@ Tests-first where a batch touches scoring/persistence logic.
    `modelSort.rawValue`, `localizedStandardContains` ×2, score-loop reset, `h2p` token,
    `stemAlterationsRecursive` in ModelView, ReviewPrompter wiring (clock + shared
    Settings). Write the regression tests from item 33 for the first four as you go.
-2. **Batch 1 — Deletions and docs (items 12, 32, typo half of 31).** ~450 lines of
-   grep-verified dead code, CLAUDE.md corrections, typos. Zero behavior change; shrinks
-   everything later. Decide `shouldShowVerbHeading` consciously.
+2. **Batch 1 — Deletions and docs (items 12, 32, *all* of 31). ✅ DONE.** ~450 lines of
+   grep-verified dead code, CLAUDE.md corrections, plus all of item 31 (not just the typos:
+   `correctnessScore` rename, ridiculous-branch table, separator constant, `firstIndex`).
+   Zero behavior change (113 tests green); shrinks everything later. `shouldShowVerbHeading`
+   decided consciously (parameter removed — see item 12 resolution note).
 3. **Batch 2 — Latent correctness (items 7–9, 11).** `futurStemsRecursive` (+ test),
    `sorted(by: >)` + tiebreaker, sorted shorthand labels, `hasSuffix` for the
    `Character("")` traps.

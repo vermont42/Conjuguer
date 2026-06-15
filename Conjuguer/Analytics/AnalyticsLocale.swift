@@ -11,17 +11,11 @@ import Foundation
 protocol AnalyticsLocale {
   var locale: String { get }
   var languageCode: String { get }
-  var defaultLanguageCode: String { get }
   var regionCode: String { get }
 }
 
 extension AnalyticsLocale {
   var locale: String {
     languageCode + regionCode
-  }
-
-  var defaultLanguageCode: String {
-    let 🏴󠁧󠁢󠁥󠁮󠁧󠁿👅 = "en"
-    return 🏴󠁧󠁢󠁥󠁮󠁧󠁿👅
   }
 }

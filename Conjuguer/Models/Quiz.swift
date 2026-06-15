@@ -13,7 +13,7 @@ class Quiz {
   private(set) var quizState = QuizState.notStarted
   private(set) var elapsedTime = 0
   private(set) var score = 0
-  private(set) var numberCorrect = 0.0
+  private(set) var correctnessScore = 0.0
   private(set) var difficulty = QuizDifficulty.regular
   private(set) var currentQuestionIndex = 0
   private(set) var questions: [(Verb, Tense)] = []
@@ -23,7 +23,7 @@ class Quiz {
   private(set) var previousCorrectAnswer: String?
 
   private var timer: Timer?
-  private var gameCenter: GameCenter?
+  private let gameCenter: GameCenter
   private var shouldShuffle = true
 
   private var personNumbers = PersonNumber.allCases
@@ -44,8 +44,6 @@ class Quiz {
   private var êtreAuxiliariesIndex = 0
   private var irregularParticipePassés = QuizVerbs.irregularParticipePassés
   private var irregularParticipePassésIndex = 0
-  private var subjonctifPrésentStemChangers = QuizVerbs.subjonctifPrésentStemChangers
-  private var subjonctifPrésentStemChangersIndex = 0
   private var topThirties = QuizVerbs.topThirties
   private var topThirtiesIndex = 0
   private var regularRadicauxFuturs = QuizVerbs.regularRadicauxFuturs
@@ -99,7 +97,6 @@ class Quiz {
     indicatifPrésentStemChangersIndex = 0
     êtreAuxiliariesIndex = 0
     irregularParticipePassésIndex = 0
-    subjonctifPrésentStemChangersIndex = 0
     topThirtiesIndex = 0
     regularRadicauxFutursIndex = 0
     irregularRadicauxFutursIndex = 0
@@ -116,7 +113,6 @@ class Quiz {
       indicatifPrésentStemChangers.shuffle()
       êtreAuxiliaries.shuffle()
       irregularParticipePassés.shuffle()
-      subjonctifPrésentStemChangers.shuffle()
       topThirties.shuffle()
       regularRadicauxFuturs.shuffle()
       irregularRadicauxFuturs.shuffle()
@@ -126,7 +122,7 @@ class Quiz {
   private func resetPublishedProperties() {
     elapsedTime = 0
     score = 0
-    numberCorrect = 0.0
+    correctnessScore = 0.0
     difficulty = Current.settings.quizDifficulty
     currentQuestionIndex = 0
     questions = []
@@ -169,36 +165,41 @@ class Quiz {
       questions.append((topThirtyVerb, .participePrésent))
 
     case .ridiculous:
-      questions.append((Verb.verbForInfinitif("ester"), .indicatifPrésent(.firstSingular)))
-      questions.append((Verb.verbForInfinitif("gésir"), .participePassé))
-      questions.append((Verb.verbForInfinitif("gésir"), .passéSimple(personNumber)))
-      questions.append((Verb.verbForInfinitif("choir"), .participePassé))
-      questions.append((Verb.verbForInfinitif("clore"), .indicatifPrésent(personNumber)))
-      questions.append((Verb.verbForInfinitif("courre"), .futurSimple(personNumber)))
-      questions.append((Verb.verbForInfinitif("fiche"), .participePassé))
-      questions.append((Verb.verbForInfinitif("avoir"), .subjonctifImparfait(personNumber)))
-      questions.append((Verb.verbForInfinitif("avoir"), .subjonctifPrésent(personNumber)))
-      questions.append((Verb.verbForInfinitif("aller"), .subjonctifPrésent(personNumber)))
-      questions.append((Verb.verbForInfinitif("être"), .passéSimple(personNumber)))
-      questions.append((Verb.verbForInfinitif("être"), .subjonctifImparfait(personNumber)))
-      questions.append((Verb.verbForInfinitif("béer"), .indicatifPrésent(personNumber)))
-      questions.append((Verb.verbForInfinitif("braire"), .passéSimple(personNumber)))
-      questions.append((Verb.verbForInfinitif("bruire"), .subjonctifPrésent(personNumber)))
-      questions.append((Verb.verbForInfinitif("falloir"), .subjonctifImparfait(personNumber)))
-      questions.append((Verb.verbForInfinitif("faillir"), .subjonctifPrésent(personNumber)))
-      questions.append((Verb.verbForInfinitif("couvrir"), .passéSimple(personNumber)))
-      questions.append((Verb.verbForInfinitif("maudire"), .indicatifPrésent(personNumber)))
-      questions.append((Verb.verbForInfinitif("valoir"), .subjonctifImparfait(personNumber)))
-      questions.append((Verb.verbForInfinitif("résoudre"), .indicatifPrésent(personNumber)))
-      questions.append((Verb.verbForInfinitif("promouvoir"), .passéSimple(personNumber)))
-      questions.append((Verb.verbForInfinitif("pouvoir"), .subjonctifPrésent(personNumber)))
-      questions.append((Verb.verbForInfinitif("plaindre"), .passéSimple(personNumber)))
-      questions.append((Verb.verbForInfinitif("issir"), .participePassé))
-      questions.append((Verb.verbForInfinitif("lire"), .passéSimple(personNumber)))
-      questions.append((Verb.verbForInfinitif("mettre"), .indicatifPrésent(personNumber)))
-      questions.append((Verb.verbForInfinitif("moudre"), .indicatifPrésent(personNumber)))
-      questions.append((Verb.verbForInfinitif("paître"), .imparfait(personNumber)))
-      questions.append((Verb.verbForInfinitif("mouvoir"), .passéSimple(personNumber)))
+      let ridiculousQuestions: [(String, Tense)] = [
+        ("ester", .indicatifPrésent(.firstSingular)),
+        ("gésir", .participePassé),
+        ("gésir", .passéSimple(personNumber)),
+        ("choir", .participePassé),
+        ("clore", .indicatifPrésent(personNumber)),
+        ("courre", .futurSimple(personNumber)),
+        ("fiche", .participePassé),
+        ("avoir", .subjonctifImparfait(personNumber)),
+        ("avoir", .subjonctifPrésent(personNumber)),
+        ("aller", .subjonctifPrésent(personNumber)),
+        ("être", .passéSimple(personNumber)),
+        ("être", .subjonctifImparfait(personNumber)),
+        ("béer", .indicatifPrésent(personNumber)),
+        ("braire", .passéSimple(personNumber)),
+        ("bruire", .subjonctifPrésent(personNumber)),
+        ("falloir", .subjonctifImparfait(personNumber)),
+        ("faillir", .subjonctifPrésent(personNumber)),
+        ("couvrir", .passéSimple(personNumber)),
+        ("maudire", .indicatifPrésent(personNumber)),
+        ("valoir", .subjonctifImparfait(personNumber)),
+        ("résoudre", .indicatifPrésent(personNumber)),
+        ("promouvoir", .passéSimple(personNumber)),
+        ("pouvoir", .subjonctifPrésent(personNumber)),
+        ("plaindre", .passéSimple(personNumber)),
+        ("issir", .participePassé),
+        ("lire", .passéSimple(personNumber)),
+        ("mettre", .indicatifPrésent(personNumber)),
+        ("moudre", .indicatifPrésent(personNumber)),
+        ("paître", .imparfait(personNumber)),
+        ("mouvoir", .passéSimple(personNumber))
+      ]
+      ridiculousQuestions.forEach { infinitif, tense in
+        questions.append((Verb.verbForInfinitif(infinitif), tense))
+      }
     }
 
     if shouldShuffle {
@@ -278,14 +279,6 @@ class Quiz {
     return Verb.verbForInfinitif(irregularParticipePassés[irregularParticipePassésIndex])
   }
 
-  private var subjonctifPrésentStemChangerVerb: Verb {
-    subjonctifPrésentStemChangersIndex += 1
-    if subjonctifPrésentStemChangersIndex == subjonctifPrésentStemChangers.count {
-      subjonctifPrésentStemChangersIndex = 0
-    }
-    return Verb.verbForInfinitif(subjonctifPrésentStemChangers[subjonctifPrésentStemChangersIndex])
-  }
-
   private var topThirtyVerb: Verb {
     topThirtiesIndex += 1
     if topThirtiesIndex == topThirties.count {
@@ -322,7 +315,7 @@ class Quiz {
         SoundPlayer.play(conjugationResult.sound)
       }
       score += conjugationResult.score * difficulty.scoreModifier
-      numberCorrect += 1.0 * conjugationResult.percentCorrect
+      correctnessScore += conjugationResult.percentCorrect
       quizResults.append(
         QuizResult(
           infinitif: verb.infinitifWithPossibleExtraLetters,
@@ -361,7 +354,7 @@ class Quiz {
     }
     shouldShowResults = true
     SoundPlayer.play(Sound.randomApplause)
-    Current.gameCenter.reportScore(score)
+    gameCenter.reportScore(score)
     Current.analytics.recordQuizCompletion(difficulty: Current.settings.quizDifficulty, elapsedTime: elapsedTime, score: score)
     quit()
   }

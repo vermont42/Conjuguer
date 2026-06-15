@@ -101,7 +101,7 @@ nonisolated enum Tense: Hashable {
     }
   }
 
-  @MainActor func conjugatedAuxilliary(personNumber: PersonNumber, auxiliary: Auxiliary) -> String {
+  @MainActor func conjugatedAuxiliary(personNumber: PersonNumber, auxiliary: Auxiliary) -> String {
     let verb = auxiliary.verb
     let tense: Tense
     switch self {
@@ -234,20 +234,6 @@ nonisolated enum Tense: Hashable {
       }
     }
 
-    return output
-  }
-
-  static func tensesFor(shorthand: String) -> [Tense] {
-    var output: [Tense] = []
-    output.append(.indicatifPrésent(.firstSingular))
-    return output
-  }
-
-  static var allIndicatifPrésentTenses: [Tense] {
-    var output: [Tense] = []
-    PersonNumber.allCases.forEach {
-      output.append(.indicatifPrésent($0))
-    }
     return output
   }
 }

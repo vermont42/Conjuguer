@@ -20,15 +20,6 @@ let headingFont = Font.custom(workSansSemiBold, size: 24.0, relativeTo: .title)
 let subheadingFont = Font.custom(workSansSemiBold, size: 18.0, relativeTo: .title3)
 let boldBodyFont = Font.custom(workSansSemiBold, size: 16.0, relativeTo: .callout)
 
-func displayFontFamilyNames() {
-  for family: String in UIFont.familyNames {
-    print("\(family)")
-    for names: String in UIFont.fontNames(forFamilyName: family) {
-      print("== \(names)")
-    }
-  }
-}
-
 enum Fonts {
   static let heading = UIFont(name: workSansSemiBold, size: 24.0) ?? safeFont
   static let subheading = UIFont(name: workSansSemiBold, size: 18.0) ?? safeFont

@@ -162,10 +162,6 @@ nonisolated enum PersonNumber: String, CaseIterable {
     PersonNumber.impératifPersonNumbers.contains(self)
   }
 
-  @MainActor func pronounAndConjugation(_ conjugation: String, isReflexive: Bool, hasAspiratedH: Bool) -> String {
-    preamble(forConjugation: conjugation, isReflexive: isReflexive, hasAspiratedH: hasAspiratedH) + conjugation
-  }
-
   // The subject (+ reflexive) pronoun that precedes a conjugation, including any elision
   // (j'/m'/t'/s') implied by the conjugation's first letter.
   @MainActor func preamble(forConjugation conjugation: String, isReflexive: Bool, hasAspiratedH: Bool) -> String {

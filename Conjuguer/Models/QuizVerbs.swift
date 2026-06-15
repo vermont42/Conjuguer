@@ -22,8 +22,6 @@ enum QuizVerbs {
 
   static let irregularParticipePassés = ["absoudre", "acquérir", "asseoir", "avoir", "boire", "comprendre", "connaître", "coudre", "couvrir", "croire", "croître", "devoir", "dire", "être", "exclure", "faire", "falloir", "lire", "mettre", "moudre", "mourir", "mouvoir", "nuire", "ouvrir", "plaindre", "plaire", "pleuvoir", "pouvoir", "prendre", "promouvoir", "recevoir", "rire", "savoir", "suffire", "suivre", "surseoir", "tenir", "venir", "vivre", "vouloir"]
 
-  static let subjonctifPrésentStemChangers = ["avoir", "aller", "pouvoir", "faire", "savoir", "croire", "boire", "devoir", "prendre", "tenir", "venir", "voir", "vouloir"]
-
   static let topThirties = ["être", "avoir", "pouvoir", "faire", "devoir", "voir", "prendre", "aller", "dire", "mettre", "permettre", "donner", "trouver", "savoir", "consulter", "suivre", "passer", "venir", "vouloir", "utiliser", "proposer", "faillir", "devenir", "connaître", "rester", "partir", "comprendre", "aider", "modifier"]
 
   static let regularRadicauxFuturs = ["donner", "trouver", "consulter", "passer", "utiliser", "proposer", "rester", "aider", "modifier", "présenter", "agir", "saisir", "choisir", "enrichir", "accomplir", "finir", "fournir", "définir", "établir", "rendre", "attendre", "répondre", "perdre", "entendre", "vendre", "correspondre", "défendre", "étendre", "dépendre"]

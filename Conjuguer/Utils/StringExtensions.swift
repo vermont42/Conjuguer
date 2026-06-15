@@ -43,13 +43,6 @@ extension String {
     return result
   }
 
-  func replaceFirstOccurence(of oldSubstring: String, with newSubstring: String) -> String {
-    if let range = self.range(of: oldSubstring) {
-      return self.replacingCharacters(in: range, with: newSubstring)
-    }
-    return self
-  }
-
   var conjugatedString: NSAttributedString {
     let nsStringCombined = NSString(string: self)
     guard let nsStrings = NSArray(array: nsStringCombined.components(separatedBy: " ")) as? [NSString] else {
@@ -92,12 +85,6 @@ extension String {
       attString += (NSAttributedString(string: " " ) + attStrings[i])
     }
     return attString
-  }
-
-  func coloredString(color: UIColor) -> NSAttributedString {
-    let attributedString = NSMutableAttributedString(string: self)
-    attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSRange(location: 0, length: count))
-    return attributedString
   }
 
   var attributedText: NSAttributedString {

@@ -11,14 +11,12 @@ struct VerbView: View {
   @Environment(World.self) private var world
   @AppStorage("hasSeenConjugationColorKey") private var hasSeenColorKey = false
   let verb: Verb
-  let shouldShowVerbHeading: Bool
   private let conjugations: VerbConjugations
   @State private var shouldShowCompoundTenses = false
   @State private var detailSheet: DetailSheet?
 
-  init(verb: Verb, shouldShowVerbHeading: Bool = false) {
+  init(verb: Verb) {
     self.verb = verb
-    self.shouldShowVerbHeading = shouldShowVerbHeading
     conjugations = VerbConjugations(verb: verb)
   }
 
@@ -113,7 +111,7 @@ struct VerbView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
 
       if let frequency = verb.frequency {
-        metaRow(L.VerbView.frequencyWithColon, "\(frequency) / \(FrequencyParser.maxFrequency)")
+        metaRow(L.VerbView.frequencyWithColon, "\(frequency) / \(Verb.maxFrequency)")
           .font(bodyFont)
           .frame(maxWidth: .infinity, alignment: .leading)
       }
@@ -316,7 +314,7 @@ private struct TenseSectionView: View {
 #if DEBUG
 #Preview {
   PreviewSupport.bootstrap()
-  return VerbView(verb: PreviewSupport.sampleVerb, shouldShowVerbHeading: true)
+  return VerbView(verb: PreviewSupport.sampleVerb)
     .environment(Current)
 }
 #endif

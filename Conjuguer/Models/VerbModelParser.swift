@@ -9,6 +9,7 @@ import Foundation
 
 nonisolated class VerbModelParser: NSObject, XMLParserDelegate {
   static let xmlSeparator = ","
+  static let alterationSeparator = "|"
 
   private var parser: XMLParser?
   private let modelTag = "model"

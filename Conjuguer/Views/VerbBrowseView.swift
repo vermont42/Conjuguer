@@ -70,7 +70,7 @@ struct VerbBrowseView: View {
     }
     .sensoryFeedback(.selection, trigger: store.verbSort)
     .sheet(item: $world.verb) { verb in
-      VerbView(verb: verb, shouldShowVerbHeading: true)
+      VerbView(verb: verb)
         .sheetDismissable()
     }
     .onAppear {

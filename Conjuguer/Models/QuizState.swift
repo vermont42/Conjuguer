@@ -8,5 +8,4 @@
 enum QuizState {
   case notStarted
   case inProgress
-  case finished
 }

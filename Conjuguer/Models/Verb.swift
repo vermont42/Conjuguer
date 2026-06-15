@@ -10,6 +10,7 @@ import Foundation
 struct Verb: Identifiable, Hashable {
   static var verbs: [String: Verb] = [:]
   static let minVerbLength = 4
+  static let maxFrequency = 981
 
   let id = UUID()
   let infinitif: String
@@ -70,30 +71,6 @@ struct Verb: Identifiable, Hashable {
       return infinitif + " (" + extraLetters + ")"
     } else {
       return infinitif
-    }
-  }
-
-  var personlessConjugations: String {
-    let passéPartResult = Conjugator.conjugate(infinitif: infinitif, tense: .participePassé, extraLetters: extraLetters)
-    let présentPartResult = Conjugator.conjugate(infinitif: infinitif, tense: .participePrésent, extraLetters: extraLetters)
-    let futurPartResult = Conjugator.conjugate(infinitif: infinitif, tense: .radicalFutur, extraLetters: extraLetters)
-
-    switch passéPartResult {
-    case .success(let passéPart):
-      switch présentPartResult {
-      case .success(let présentPart):
-        switch futurPartResult {
-        case .success(let futurPart):
-          let mixedCaseConjugations = passéPart + ", " + présentPart + ", " + futurPart
-          return mixedCaseConjugations.lowercased()
-        case .failure:
-          return ""
-        }
-      case .failure:
-        return ""
-      }
-    case .failure:
-      return ""
     }
   }
 

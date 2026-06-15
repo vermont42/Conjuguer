@@ -31,7 +31,7 @@ struct QuizResultsView: View {
         .padding(.top, Layout.defaultSpacing)
 
         VStack(alignment: .leading, spacing: Layout.defaultSpacing / 2) {
-          Text("\(L.ResultsView.correctWithColon) \(quiz.numberCorrect.asFormattedNumberCorrect()) / \(quiz.questions.count)")
+          Text("\(L.ResultsView.correctWithColon) \(quiz.correctnessScore.asFormattedNumberCorrect()) / \(quiz.questions.count)")
 
           Text(quiz.difficulty.localizedDifficultyWithLabel)
 

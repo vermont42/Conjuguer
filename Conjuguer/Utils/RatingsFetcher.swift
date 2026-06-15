@@ -11,7 +11,7 @@ enum RatingsFetcher {
   static let iTunesID = "1588624373"
   static let errorMessage = "Fetching failed."
 
-  private static let urlInitializationMessage = " URL could not be initializaed."
+  private static let urlInitializationMessage = " URL could not be initialized."
 
   static var iTunesURL: URL {
     guard let iTunesURL = URL(string: "https://itunes.apple.com/lookup?id=\(iTunesID)") else {

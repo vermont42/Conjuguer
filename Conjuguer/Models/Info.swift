@@ -62,13 +62,7 @@ struct Info: Identifiable, Hashable {
   }
 
   static func headingToIndex(heading: String) -> Int? {
-    for (i, info) in infos.enumerated() {
-      if info.heading.lowercased() == heading.lowercased() {
-        return i
-      }
-    }
-
-    return nil
+    infos.firstIndex { $0.heading.lowercased() == heading.lowercased() }
   }
 }
 

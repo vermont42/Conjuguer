@@ -204,11 +204,13 @@ type. Practical consequences:
 
 ### Data Loading
 
-Verb and model data is loaded from XML files at app startup in `AppLauncher.swift`:
-- `verbs.xml` - All 6,314 verbs
+Verb and model data is loaded from XML files at app startup via `VerbData.parse()`:
+- `verbs.xml` - All 6,320 verbs (frequency-of-use ships inline via each verb's `fr` attribute)
 - `verbModels.xml` - Conjugation pattern definitions
-- `frequencies.xml` - Verb frequency-of-use data
 - `defectGroups.xml` - Defective verb groups
+
+(`frequencies.xml` is bundled but **not** parsed at startup — the former `FrequencyParser`
+was dead code and has been removed; `Verb.maxFrequency` holds the highest rank.)
 
 ### Dependency Injection
 
