@@ -121,7 +121,10 @@ final class ModelStore {
     self.current = world
 
     irregularityModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
-      lhs.irregularity >= rhs.irregularity
+      if lhs.irregularity != rhs.irregularity {
+        return lhs.irregularity > rhs.irregularity
+      }
+      return lhs.exemplar.compare(rhs.exemplar, locale: Util.french) == .orderedAscending
     }
     .map { ModelAndDecorator(model: $0, decorator: "", irregularityBadge: $0.irregularity) }
 

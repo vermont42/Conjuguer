@@ -101,9 +101,15 @@ callers.
 
 ## Tier B — Verified latent correctness defects
 
-### 7. `futurStemsRecursive`: trims the wrong stem; skips grandparent alterations
+### 7. `futurStemsRecursive`: trims the wrong stem; skips grandparent alterations ✅ DONE (Batch 2)
 **Found by:** OM #9 (flagged suspicious), FH #4 (confirmed + fix), FM §1.5 (+ the
 grandparent half, unique) · **Verified:** ✅ both halves · **Effort:** S, plus a test
+
+> **Batch 2 resolution.** Trim loop rewritten as `for i in stems.indices where stems[i].last == "e"`
+> so each stem trims itself instead of always mutating `stems[0]`. The manual one-level parent merge
+> was replaced with `stemAlterationsRecursive ?? []`, which walks the whole chain (picking up a
+> grandparent's inheritable `sf`). New `FuturStemsTests` locks in both the regular-`-re` single-stem
+> trim (`vendre → ["vendr"]`) and the multi-stem additive case (`payer → ["payer", "paIer"]`). 115 tests green.
 
 `VerbModel.swift:210-214`: `stems.forEach { if $0.last == "e" { stems[0] = … } }` —
 inspects each stem but always mutates `stems[0]`. With two stems: `[non-e, e]` trims the
@@ -116,16 +122,24 @@ Second half (`VerbModel.swift:188-193`): fetches `VerbModel.models[parentId]?.st
 `stemAlterationsRecursive`. A grandparent's inheritable `sf` alteration is silently
 dropped. Reuse `stemAlterationsRecursive` and delete the manual merge.
 
-### 8. `sorted(by: >=)` violates the strict-weak-ordering contract
+### 8. `sorted(by: >=)` violates the strict-weak-ordering contract ✅ DONE (Batch 2)
 **Found by:** FM §1.4 only · **Verified:** ✅ real (documented UB) · **Effort:** S
+
+> **Batch 2 resolution.** `ModelStore`'s irregularity sort now uses `>` with an exemplar tiebreaker
+> (French-locale `compare`), so equal-irregularity models get a stable order instead of dictionary-hash
+> order.
 
 `ModelBrowseView.swift:123-125` sorts irregularity with `>=`. `sorted(by:)` requires a
 strict ordering; `>=` returns true for equal elements (undefined behavior; stdlib debug
 checks can trap). Use `>`, and add a secondary tiebreaker (e.g. exemplar) so
 equal-irregularity models stop landing in dictionary-hash order — which also helps item 9.
 
-### 9. Nondeterministic stem-alteration labels
+### 9. Nondeterministic stem-alteration labels ✅ DONE (Batch 2)
 **Found by:** FM §1.7 (the bug); OM #13 / FH #8 (the same code as cleanup) · **Verified:** ✅ · **Effort:** S
+
+> **Batch 2 resolution.** `shorthandForNonCompoundTense` now returns `shorthands.sorted().joined(separator: ", ")`,
+> so the label order is deterministic across launches. The six-chained-`contains` check became
+> `Set(tup.0).isSubset(of: shorthands)` and the manual comma loop is gone.
 
 `Tense.shorthandForNonCompoundTense` (`Tense.swift:204-238`) builds output by iterating a
 `Set<String>`, so ModelView's alteration rows can read `r1s, x3p` one launch and
@@ -139,8 +153,11 @@ All 13 cycling accessors increment *before* reading, so each pool's element 0 is
 until the first wraparound. Harmless under shuffling, but accidental. Fix lands free with
 the `CyclingDeck` refactor (item 13) — have `next()` return the current element first.
 
-### 11. `String(stem.last ?? Character(""))` traps if the stem is ever empty
+### 11. `String(stem.last ?? Character(""))` traps if the stem is ever empty ✅ DONE (Batch 2)
 **Found by:** FH #11 only · **Verified:** ✅ pattern at `Conjugator.swift:62, 181, 215` · **Effort:** S
+
+> **Batch 2 resolution.** All three sites now use `hasSuffix(Tense.irregularEndingMarker)` instead of
+> `String(stem.last ?? Character("")) == …`, removing the `Character("")` runtime trap.
 
 `Character("")` is a runtime trap; the safe spelling already exists in the same file
 (`stems[0].suffix(1) == …`, line 194). Replace the three sites with
@@ -511,9 +528,10 @@ Tests-first where a batch touches scoring/persistence logic.
    `correctnessScore` rename, ridiculous-branch table, separator constant, `firstIndex`).
    Zero behavior change (113 tests green); shrinks everything later. `shouldShowVerbHeading`
    decided consciously (parameter removed — see item 12 resolution note).
-3. **Batch 2 — Latent correctness (items 7–9, 11).** `futurStemsRecursive` (+ test),
-   `sorted(by: >)` + tiebreaker, sorted shorthand labels, `hasSuffix` for the
-   `Character("")` traps.
+3. **Batch 2 — Latent correctness (items 7–9, 11). ✅ DONE.** `futurStemsRecursive`
+   (per-stem trim + `stemAlterationsRecursive` for grandparent alterations, + `FuturStemsTests`),
+   `sorted(by: >)` + exemplar tiebreaker, sorted/deterministic shorthand labels, `hasSuffix`
+   for the three `Character("")` traps. 115 tests green (113 + 2).
 4. **Batch 3 — Mechanical consolidations under golden-test cover (items 14, 17, 13, 18,
    22's small pieces).** `Tense.personNumber`, the `conjugatedString` helper (unblocks
    later batches), `CyclingDeck` + `QuizQuestion` (after the Quiz tests), the

@@ -183,18 +183,7 @@ struct VerbModel: Identifiable, Hashable {
 
   func futurStemsRecursive(infinitif: String) -> [String] {
     var stems = [infinitif]
-    var recursiveStemAlterations: [StemAlteration] = []
-
-    if
-      let parentId = parentId,
-      let parentStemAlterations = VerbModel.models[parentId]?.stemAlterations
-    {
-      recursiveStemAlterations = parentStemAlterations.filter { $0.isInherited }
-    }
-
-    if let stemAlterations = stemAlterations {
-      recursiveStemAlterations += stemAlterations
-    }
+    let recursiveStemAlterations = stemAlterationsRecursive ?? []
 
     for alteration in recursiveStemAlterations {
       if alteration.appliesTo.contains(.radicalFutur) {
@@ -207,10 +196,8 @@ struct VerbModel: Identifiable, Hashable {
       }
     }
 
-    stems.forEach {
-      if $0.last == "e" {
-        stems[0] = String(stems[0].dropLast())
-      }
+    for i in stems.indices where stems[i].last == "e" {
+      stems[i] = String(stems[i].dropLast())
     }
 
     return stems

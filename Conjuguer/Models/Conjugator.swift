@@ -59,7 +59,7 @@ enum Conjugator {
           if alteration.appliesTo.contains(.participePassé) && alteration.isAdditive {
             stems.append(stems[0])
             stems[1].modifyStem(alteration: alteration)
-            if String(stems[1].last ?? Character("")) == Tense.irregularEndingMarker {
+            if stems[1].hasSuffix(Tense.irregularEndingMarker) {
               stems[1] = String(stems[1].dropLast())
             } else {
               stems[1] = stems[1] + model.participeEndingRecursive
@@ -178,7 +178,7 @@ enum Conjugator {
     case .conditionnelPrésent(let personNumber):
       return .success(composedConjugation(stems: stems, ending: ConditionnelPrésent.endingForPersonNumber(personNumber)))
     case .participePassé:
-      if String(stems[0].last ?? Character("")) == Tense.irregularEndingMarker {
+      if stems[0].hasSuffix(Tense.irregularEndingMarker) {
         stems[0] = String(stems[0].dropLast())
       } else {
         stems[0] = stems[0] + model.participeEndingRecursive
@@ -212,7 +212,7 @@ enum Conjugator {
       if hasAppendedAtLeastOneConjugation {
         output += Tense.alternateConjugationSeparator
       }
-      if String($0.last ?? Character("")) == Tense.irregularEndingMarker {
+      if $0.hasSuffix(Tense.irregularEndingMarker) {
         output += $0.dropLast()
       } else {
         output += $0 + ending
