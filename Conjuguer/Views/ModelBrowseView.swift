@@ -93,7 +93,7 @@ struct ModelBrowseView: View {
     if searchText.isEmpty {
       searchResults = store.modelsAndDecorators
     } else {
-      let matchingModels = store.modelsAndDecorators.filter { $0.model.exemplar.contains(searchText.localizedLowercase) }
+      let matchingModels = store.modelsAndDecorators.filter { $0.model.exemplar.localizedStandardContains(searchText) }
       if matchingModels.isEmpty && playSoundIfEmpty {
         SoundPlayer.play(.randomSadTrombone)
       }

@@ -21,7 +21,7 @@ sketches).
 
 ## Tier A — Verified user-facing bugs (fix first)
 
-### 1. `modelSort` preference never survives a relaunch
+### 1. `modelSort` preference never survives a relaunch ✅ DONE (Batch 0)
 **Found by:** FM §1.1 only · **Verified:** ✅ real, every-user, every-launch · **Effort:** S
 
 `Settings.swift:29` persists via interpolation — `"\(modelSort)"` yields the *case name*
@@ -35,7 +35,7 @@ because its raw values happen to equal its case names.
 `didSet` and the init seed path. Item 20 eliminates the divergent-serialization class of
 bug; item 33 adds the round-trip test that would have caught it.
 
-### 2. Browse search is case- and diacritic-sensitive
+### 2. Browse search is case- and diacritic-sensitive ✅ DONE (Batch 0)
 **Found by:** FH #3, FM §3.4 · **Verified:** ✅ real, core-UX · **Effort:** S
 
 `VerbBrowseView.swift:107` and `ModelBrowseView.swift:96` filter with
@@ -46,7 +46,7 @@ a French-learning app whose own quiz treats dropped accents as partial credit.
 **Fix:** `localizedStandardContains(searchText)` at both sites (Finder-style matching).
 Two one-line changes.
 
-### 3. Quiz scoring leaks accent-stripping across alternate answers
+### 3. Quiz scoring leaks accent-stripping across alternate answers ✅ DONE (Batch 0)
 **Found by:** FM §1.3 only · **Verified:** ✅ real (traced) · **Effort:** S
 
 `ConjugationResult.score` (`ConjugationResult.swift:15-41`): `proposedAnswerClean` is
@@ -59,7 +59,7 @@ scores `.totalMatch` against `paie` instead of `.partialMatch`.
 `correctAnswerClean` already is). Add the table-driven test from item 33 — this is the
 heart of quiz scoring and has zero tests.
 
-### 4. `DefectGroup` `h2p` marks the wrong impératif-passé row
+### 4. `DefectGroup` `h2p` marks the wrong impératif-passé row ✅ DONE (Batch 0)
 **Found by:** FM §1.2 only · **Verified:** ✅ real and live in shipped data · **Effort:** S
 
 `DefectGroup.swift:63-65`: the `doesntUse` arm for `"h2p"` sets
@@ -71,7 +71,7 @@ compound-tenses view.
 **Fix:** one-token change; item 15 (shorthand codec) eliminates the bug class. Add the
 DefectGroup parsing test (item 33).
 
-### 5. ModelView endings grid ignores inherited alterations
+### 5. ModelView endings grid ignores inherited alterations ✅ DONE (Batch 0)
 **Found by:** FM §1.8 only · **Verified:** ✅ real · **Effort:** S
 
 `ModelView.swift:169-172` passes `model.stemAlterations` (local only) to
@@ -82,7 +82,7 @@ actually diverge.
 
 **Fix:** pass `model.stemAlterationsRecursive` at the three call sites.
 
-### 6. ReviewPrompterReal: frozen clock, parallel `Settings`, dead `shared`
+### 6. ReviewPrompterReal: frozen clock, parallel `Settings`, dead `shared` ✅ DONE (Batch 0)
 **Found by:** FH #5 (second Settings), FM §1.6 (all three) · **Verified:** ✅ all three · **Effort:** S–M
 
 `ReviewPrompterReal.swift:27`: `now: Date = Date()` is captured once when `World` builds the
@@ -482,7 +482,7 @@ code *around* it — where every verified bug in Tier A lives — has none:
 Each batch is independently shippable; run the full suite (`run_tests.sh`) after each.
 Tests-first where a batch touches scoring/persistence logic.
 
-1. **Batch 0 — Bugs (one sitting, ~2h, items 1–6).** Six S-sized fixes:
+1. **Batch 0 — Bugs (one sitting, ~2h, items 1–6). ✅ DONE.** Six S-sized fixes:
    `modelSort.rawValue`, `localizedStandardContains` ×2, score-loop reset, `h2p` token,
    `stemAlterationsRecursive` in ModelView, ReviewPrompter wiring (clock + shared
    Settings). Write the regression tests from item 33 for the first four as you go.

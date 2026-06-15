@@ -166,10 +166,10 @@ struct ModelView: View {
 
   private var endingTenses: [EndingTense] {
     let specs: [(String, String, [PersonNumber])] = [
-      (Tense.indicatifPrésent(.firstSingular).shortTitleCaseName, model.indicatifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations), PersonNumber.allCases),
-      (Tense.impératif(.firstPlural).shortTitleCaseName, model.indicatifPrésentGroupRecursive.impératifEndings(stemAlterations: model.stemAlterations), PersonNumber.impératifPersonNumbers),
+      (Tense.indicatifPrésent(.firstSingular).shortTitleCaseName, model.indicatifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterationsRecursive), PersonNumber.allCases),
+      (Tense.impératif(.firstPlural).shortTitleCaseName, model.indicatifPrésentGroupRecursive.impératifEndings(stemAlterations: model.stemAlterationsRecursive), PersonNumber.impératifPersonNumbers),
       (Tense.passéSimple(.firstSingular).shortTitleCaseName, model.passéSimpleGroupRecursive.endings, PersonNumber.allCases),
-      (Tense.subjonctifPrésent(.firstSingular).shortTitleCaseName, model.subjonctifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterations), PersonNumber.allCases),
+      (Tense.subjonctifPrésent(.firstSingular).shortTitleCaseName, model.subjonctifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterationsRecursive), PersonNumber.allCases),
       (Tense.subjonctifImparfait(.firstSingular).shortTitleCaseName, model.passéSimpleGroupRecursive.subjonctifImparfaitEndings, PersonNumber.allCases)
     ]
     return specs.enumerated().map { index, spec in

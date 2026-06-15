@@ -62,7 +62,7 @@ struct DefectGroup {
           defects[.impératifPassé(.firstPlural)] = true
         case "h2p":
           defects[.impératif(.secondPlural)] = true
-          defects[.impératifPassé(.firstPlural)] = true
+          defects[.impératifPassé(.secondPlural)] = true
         case "rr":
           defects[.participePrésent] = true
         case "pp":

@@ -14,8 +14,9 @@ enum ConjugationResult {
 
   static func score(correctAnswers: String, proposedAnswer: String) -> ConjugationResult {
     let correctAnswersClean = correctAnswers.lowercased()
-    var proposedAnswerClean = proposedAnswer.lowercased()
+    let proposedAnswerLowercased = proposedAnswer.lowercased()
     for var correctAnswerClean in correctAnswersClean.components(separatedBy: Tense.alternateConjugationSeparator) {
+      var proposedAnswerClean = proposedAnswerLowercased
       if correctAnswerClean == proposedAnswerClean {
         return .totalMatch
       }

@@ -104,7 +104,7 @@ struct VerbBrowseView: View {
     if searchText.isEmpty {
       searchResults = store.verbs
     } else {
-      let matchingVerbs = store.verbs.filter { $0.infinitifWithPossibleExtraLetters.contains(searchText.localizedLowercase) }
+      let matchingVerbs = store.verbs.filter { $0.infinitifWithPossibleExtraLetters.localizedStandardContains(searchText) }
       if matchingVerbs.isEmpty && playSoundIfEmpty {
         SoundPlayer.play(.randomSadTrombone)
       }

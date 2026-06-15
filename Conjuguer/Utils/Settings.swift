@@ -16,7 +16,7 @@ class Settings {
   var verbSort: VerbSort = verbSortDefault {
     didSet {
       if verbSort != oldValue {
-        getterSetter.set(key: Settings.verbSortKey, value: "\(verbSort)")
+        getterSetter.set(key: Settings.verbSortKey, value: verbSort.rawValue)
       }
     }
   }
@@ -26,7 +26,7 @@ class Settings {
   var modelSort: ModelSort = modelSortDefault {
     didSet {
       if modelSort != oldValue {
-        getterSetter.set(key: Settings.modelSortKey, value: "\(modelSort)")
+        getterSetter.set(key: Settings.modelSortKey, value: modelSort.rawValue)
       }
     }
   }
@@ -93,13 +93,13 @@ class Settings {
     if let verbSortString = getterSetter.get(key: Settings.verbSortKey) {
       verbSort = VerbSort(rawValue: verbSortString) ?? Settings.verbSortDefault
     } else {
-      getterSetter.set(key: Settings.verbSortKey, value: "\(verbSort)")
+      getterSetter.set(key: Settings.verbSortKey, value: verbSort.rawValue)
     }
 
     if let modelSortString = getterSetter.get(key: Settings.modelSortKey) {
       modelSort = ModelSort(rawValue: modelSortString) ?? Settings.modelSortDefault
     } else {
-      getterSetter.set(key: Settings.modelSortKey, value: "\(modelSort)")
+      getterSetter.set(key: Settings.modelSortKey, value: modelSort.rawValue)
     }
 
     if let quizDifficultyString = getterSetter.get(key: Settings.quizDifficultyKey) {

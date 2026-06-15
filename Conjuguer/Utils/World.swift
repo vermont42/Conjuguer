@@ -76,7 +76,7 @@ class World {
       gameCenter: gameCenter,
       quiz: quiz,
       analytics: analytics,
-      reviewPrompter: ReviewPrompterReal(),
+      reviewPrompter: ReviewPrompterReal(settings: settings),
       session: URLSession.shared
     )
   }()
@@ -91,7 +91,7 @@ class World {
       gameCenter: gameCenter,
       quiz: quiz,
       analytics: analytics,
-      reviewPrompter: ReviewPrompterReal(),
+      reviewPrompter: ReviewPrompterReal(settings: settings),
       session: fakeSession
     )
   }()
