@@ -8,6 +8,15 @@
 import Foundation
 
 enum Conjugator {
+  static func conjugatedString(infinitif: String, tense: Tense, extraLetters: String?) -> String? {
+    switch conjugate(infinitif: infinitif, tense: tense, extraLetters: extraLetters) {
+    case .success(let value):
+      return value
+    case .failure:
+      return nil
+    }
+  }
+
   static func conjugate(infinitif: String, tense: Tense, extraLetters: String?) -> Result<String, ConjugatorError> {
     guard infinitif.count >= Verb.minVerbLength else {
       return .failure(.verbTooShort)
@@ -42,30 +51,15 @@ enum Conjugator {
     switch tense {
     case .indicatifPrésent(let personNumber):
       stems.append(verb.infinitifStem)
-      if let stemAlterations = model.stemAlterationsRecursive {
-        for alteration in stemAlterations {
-          if alteration.appliesTo.contains(.indicatifPrésent(personNumber)) && alteration.isAdditive {
-            stems.append(stems[0])
-            stems[1].modifyStem(alteration: alteration)
-            break
-          }
-        }
-      }
+      appendAdditiveAlternateStem(to: &stems, from: model, matching: [.indicatifPrésent(personNumber)])
 
     case .participePassé, .passéComposé, .plusQueParfait, .passéAntérieur, .passéSurcomposé, .futurAntérieur, .conditionnelPassé, .subjonctifPassé, .subjonctifPlusQueParfait:
       stems.append(verb.infinitifStem)
-      if let stemAlterations = model.stemAlterationsRecursive {
-        for alteration in stemAlterations {
-          if alteration.appliesTo.contains(.participePassé) && alteration.isAdditive {
-            stems.append(stems[0])
-            stems[1].modifyStem(alteration: alteration)
-            if stems[1].hasSuffix(Tense.irregularEndingMarker) {
-              stems[1] = String(stems[1].dropLast())
-            } else {
-              stems[1] = stems[1] + model.participeEndingRecursive
-            }
-            break
-          }
+      if appendAdditiveAlternateStem(to: &stems, from: model, matching: [.participePassé]) {
+        if stems[1].hasSuffix(Tense.irregularEndingMarker) {
+          stems[1] = String(stems[1].dropLast())
+        } else {
+          stems[1] = stems[1] + model.participeEndingRecursive
         }
       }
 
@@ -90,22 +84,14 @@ enum Conjugator {
 
     case .subjonctifPrésent(let personNumber):
       stems.append(verb.infinitifStem)
-      if let stemAlterations = model.stemAlterationsRecursive {
-        let subjonctifPersonNumber: PersonNumber
-        switch personNumber {
-        case .firstSingular, .secondSingular, .thirdSingular, .thirdPlural:
-          subjonctifPersonNumber = .thirdPlural
-        case .firstPlural, .secondPlural:
-          subjonctifPersonNumber = .firstPlural
-        }
-        for alteration in stemAlterations {
-          if alteration.appliesTo.contains(.subjonctifPrésent(subjonctifPersonNumber)) && alteration.isAdditive {
-            stems.append(stems[0])
-            stems[1].modifyStem(alteration: alteration)
-            break
-          }
-        }
+      let subjonctifPersonNumber: PersonNumber
+      switch personNumber {
+      case .firstSingular, .secondSingular, .thirdSingular, .thirdPlural:
+        subjonctifPersonNumber = .thirdPlural
+      case .firstPlural, .secondPlural:
+        subjonctifPersonNumber = .firstPlural
       }
+      appendAdditiveAlternateStem(to: &stems, from: model, matching: [.subjonctifPrésent(subjonctifPersonNumber)])
 
     case .futurSimple, .conditionnelPrésent, .radicalFutur:
       stems = model.futurStemsRecursive(infinitif: infinitif)
@@ -117,20 +103,7 @@ enum Conjugator {
       impératifPersonNumber = personNumber
       stems.append(verb.infinitifStem)
       isConjugatingImpératif = true
-      if let stemAlterations = model.stemAlterationsRecursive {
-        for alteration in stemAlterations {
-          if alteration.appliesTo.contains(.indicatifPrésent(personNumber)) && alteration.isAdditive {
-            stems.append(stems[0])
-            stems[1].modifyStem(alteration: alteration)
-            break
-          }
-          if alteration.appliesTo.contains(.impératif(personNumber)) && alteration.isAdditive {
-            stems.append(stems[0])
-            stems[1].modifyStem(alteration: alteration)
-            break
-          }
-        }
-      }
+      appendAdditiveAlternateStem(to: &stems, from: model, matching: [.indicatifPrésent(personNumber), .impératif(personNumber)])
 
     case .impératifPassé(let personNumber):
       if !personNumber.isValidForImperatif {
@@ -205,22 +178,35 @@ enum Conjugator {
     }
   }
 
-  static func composedConjugation(stems: [String], ending: String) -> String {
-    var output = ""
-    var hasAppendedAtLeastOneConjugation = false
-    stems.forEach {
-      if hasAppendedAtLeastOneConjugation {
-        output += Tense.alternateConjugationSeparator
-      }
-      if $0.hasSuffix(Tense.irregularEndingMarker) {
-        output += $0.dropLast()
-      } else {
-        output += $0 + ending
-      }
-      hasAppendedAtLeastOneConjugation = true
+  // Finds the first additive stem alteration that applies to any of `tenses` and, if found,
+  // appends an alternate stem (a copy of stems[0] with the alteration applied). Returns whether
+  // an alternate stem was appended. Callers must have already populated stems[0].
+  @discardableResult
+  static func appendAdditiveAlternateStem(to stems: inout [String], from model: VerbModel, matching tenses: [Tense]) -> Bool {
+    guard let stemAlterations = model.stemAlterationsRecursive else {
+      return false
     }
-    return output
+    for alteration in stemAlterations where alteration.isAdditive && tenses.contains(where: { alteration.appliesTo.contains($0) }) {
+      stems.append(stems[0])
+      stems[1].modifyStem(alteration: alteration)
+      return true
+    }
+    return false
   }
+
+  static func composedConjugation(stems: [String], ending: String) -> String {
+    stems
+      .map { stem in
+        if stem.hasSuffix(Tense.irregularEndingMarker) {
+          return String(stem.dropLast())
+        } else {
+          return stem + ending
+        }
+      }
+      .joined(separator: Tense.alternateConjugationSeparator)
+  }
+
+  static let circumflexedVowels: [Character: Character] = ["a": "â", "e": "ê", "i": "î", "o": "ô", "u": "û", "A": "Â", "E": "Ê", "I": "Î", "O": "Ô", "U": "Û"]
 
   static func moveCircumflexIfNeeded(stem: inout String, ending: inout String) {
     guard ending.first == "^" else {
@@ -232,24 +218,19 @@ enum Conjugator {
     }
 
     ending = String(ending.dropFirst())
-    for tuple in [("a", "â"), ("e", "ê"), ("i", "î"), ("o", "ô"), ("u", "û"), ("A", "Â"), ("E", "Ê"), ("I", "Î"), ("O", "Ô"), ("U", "Û")] {
-      if String(stemLast) == tuple.0 {
-        stem = String(stem.dropLast()) + tuple.1
-      }
+    if let circumflexed = circumflexedVowels[stemLast] {
+      stem = String(stem.dropLast()) + String(circumflexed)
     }
   }
 
   static func nousPrésentStem(infinitif: String, extraLetters: String? = nil) -> String {
-    let nousPrésentConjugationResult = Conjugator.conjugate(infinitif: infinitif, tense: .indicatifPrésent(.firstPlural), extraLetters: extraLetters)
-    switch nousPrésentConjugationResult {
-    case .success(let value):
-      let ons = IndicatifPrésentGroup.s.présentEndingForPersonNumber(.firstPlural)
-      let ONS = ons.uppercased()
-      return value.replacingOccurrences(of: ons, with: "")
-        .replacingOccurrences(of: ONS, with: "")
-        .replacingOccurrences(of: Tense.irregularEndingMarker, with: "")
-    default:
+    guard let value = Conjugator.conjugatedString(infinitif: infinitif, tense: .indicatifPrésent(.firstPlural), extraLetters: extraLetters) else {
       fatalError("Could not conjugate nous indicatifPrésent for \(infinitif).")
     }
+    let ons = IndicatifPrésentGroup.s.présentEndingForPersonNumber(.firstPlural)
+    let ONS = ons.uppercased()
+    return value.replacingOccurrences(of: ons, with: "")
+      .replacingOccurrences(of: ONS, with: "")
+      .replacingOccurrences(of: Tense.irregularEndingMarker, with: "")
   }
 }

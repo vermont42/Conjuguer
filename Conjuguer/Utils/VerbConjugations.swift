@@ -98,22 +98,11 @@ struct VerbConjugations {
     case .impératif(let personNumber):
       let form = personNumber.impératifAndPossibleReflexivePronoun(conjugation, isReflexive: verb.isReflexive)
       return ("", form, form.lowercased())
-    case
-      .indicatifPrésent(let personNumber),
-      .passéSimple(let personNumber),
-      .imparfait(let personNumber),
-      .futurSimple(let personNumber),
-      .conditionnelPrésent(let personNumber),
-      .subjonctifPrésent(let personNumber),
-      .subjonctifImparfait(let personNumber),
-      .passéComposé(let personNumber),
-      .plusQueParfait(let personNumber),
-      .passéAntérieur(let personNumber),
-      .passéSurcomposé(let personNumber),
-      .futurAntérieur(let personNumber),
-      .conditionnelPassé(let personNumber),
-      .subjonctifPassé(let personNumber),
-      .subjonctifPlusQueParfait(let personNumber):
+    default:
+      // Every remaining case is a person-bearing simple/compound tense, so personNumber is non-nil.
+      guard let personNumber = tense.personNumber else {
+        return ("", conjugation, conjugation.lowercased())
+      }
       let preamble = personNumber.preamble(forConjugation: conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
       let pronoun = preamble.trimmingCharacters(in: .whitespaces)
       return (pronoun, conjugation, (preamble + conjugation).lowercased())
@@ -121,12 +110,10 @@ struct VerbConjugations {
   }
 
   static func rawConjugation(verb: Verb, tense: Tense) -> String {
-    switch Conjugator.conjugate(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) {
-    case .success(let value):
-      return value
-    default:
+    guard let conjugation = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) else {
       fatalError("Could not conjugate \(verb.infinitif) for \(tense.titleCaseName).")
     }
+    return conjugation
   }
 
   static func isDefective(verb: Verb, tense: Tense) -> Bool {

@@ -127,13 +127,7 @@ nonisolated enum Tense: Hashable {
       return ""
     }
 
-    let result = Conjugator.conjugate(infinitif: verb, tense: tense, extraLetters: nil)
-    switch result {
-    case .success(let value):
-      return value
-    case .failure:
-      return ""
-    }
+    return Conjugator.conjugatedString(infinitif: verb, tense: tense, extraLetters: nil) ?? ""
   }
 
   var shortDisplayName: String {
@@ -165,40 +159,32 @@ nonisolated enum Tense: Hashable {
     }
   }
 
-  @MainActor var pronounWithGender: String {
+  var personNumber: PersonNumber? {
     switch self {
     case .indicatifPrésent(let personNumber), .passéSimple(let personNumber), .imparfait(let personNumber), .futurSimple(let personNumber), .conditionnelPrésent(let personNumber), .subjonctifPrésent(let personNumber), .subjonctifImparfait(let personNumber), .impératif(let personNumber), .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
-      return personNumber.pronounWithGender
+      return personNumber
     case .participePassé, .participePrésent, .radicalFutur:
-      return L.QuizView.none
+      return nil
     }
+  }
+
+  @MainActor var pronounWithGender: String {
+    personNumber?.pronounWithGender ?? L.QuizView.none
   }
 
   @MainActor var pronoun: String {
-    switch self {
-    case .indicatifPrésent(let personNumber), .passéSimple(let personNumber), .imparfait(let personNumber), .futurSimple(let personNumber), .conditionnelPrésent(let personNumber), .subjonctifPrésent(let personNumber), .subjonctifImparfait(let personNumber), .impératif(let personNumber), .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
-      return personNumber.pronoun
-    case .participePassé, .participePrésent, .radicalFutur:
-      return L.QuizView.none
-    }
+    personNumber?.pronoun ?? L.QuizView.none
   }
 
   @MainActor var gender: String {
-    switch self {
-    case .indicatifPrésent(let personNumber), .passéSimple(let personNumber), .imparfait(let personNumber), .futurSimple(let personNumber), .conditionnelPrésent(let personNumber), .subjonctifPrésent(let personNumber), .subjonctifImparfait(let personNumber), .impératif(let personNumber), .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
-      return personNumber.gender
-    case .participePassé, .participePrésent, .radicalFutur:
-      return L.QuizView.none
-    }
+    personNumber?.gender ?? L.QuizView.none
   }
 
   @MainActor var pronounDecorator: String {
-    switch self {
-    case .indicatifPrésent(let personNumber), .passéSimple(let personNumber), .imparfait(let personNumber), .futurSimple(let personNumber), .conditionnelPrésent(let personNumber), .subjonctifPrésent(let personNumber), .subjonctifImparfait(let personNumber), .impératif(let personNumber), .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
-      return " - \(personNumber.pronounWithGender)"
-    case .participePassé, .participePrésent, .radicalFutur:
+    guard let personNumber else {
       return ""
     }
+    return " - \(personNumber.pronounWithGender)"
   }
 
   static func shorthandForNonCompoundTense(appliesTo: Set<Tense>) -> String {

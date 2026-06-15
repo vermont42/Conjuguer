@@ -132,8 +132,8 @@ struct QuizView: View {
   private var questionBlock: some View {
     Group {
       if quiz.currentQuestionIndex < quiz.questions.count {
-        let verb = quiz.questions[quiz.currentQuestionIndex].0
-        let tense = quiz.questions[quiz.currentQuestionIndex].1
+        let verb = quiz.questions[quiz.currentQuestionIndex].verb
+        let tense = quiz.questions[quiz.currentQuestionIndex].tense
         let tenseName = tense.titleCaseName.lowercased()
         let ask = tense.pronounWithGender == L.QuizView.none ? tenseName : "\(tense.pronounWithGender) · \(tenseName)"
 

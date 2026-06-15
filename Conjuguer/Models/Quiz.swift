@@ -16,7 +16,7 @@ class Quiz {
   private(set) var correctnessScore = 0.0
   private(set) var difficulty = QuizDifficulty.regular
   private(set) var currentQuestionIndex = 0
-  private(set) var questions: [(Verb, Tense)] = []
+  private(set) var questions: [QuizQuestion] = []
   private(set) var quizResults: [QuizResult] = []
   var shouldShowResults = false
   private(set) var previousIncorrectAnswer: String?
@@ -26,30 +26,18 @@ class Quiz {
   private let gameCenter: GameCenter
   private var shouldShuffle = true
 
-  private var personNumbers = PersonNumber.allCases
-  private var personNumbersIndex = 0
-  private var impératifPersonNumbers = PersonNumber.impératifPersonNumbers
-  private var impératifPersonNumbersIndex = 0
-  private var regularErs = QuizVerbs.regularErs
-  private var regularErsIndex = 0
-  private var regularIrs = QuizVerbs.regularIrs
-  private var regularIrsIndex = 0
-  private var regularRes = QuizVerbs.regularRes
-  private var regularResIndex = 0
-  private var bigThrees = QuizVerbs.bigThrees
-  private var bigThreesIndex = 0
-  private var indicatifPrésentStemChangers = QuizVerbs.indicatifPrésentStemChangers
-  private var indicatifPrésentStemChangersIndex = 0
-  private var êtreAuxiliaries = QuizVerbs.êtreAuxiliaries
-  private var êtreAuxiliariesIndex = 0
-  private var irregularParticipePassés = QuizVerbs.irregularParticipePassés
-  private var irregularParticipePassésIndex = 0
-  private var topThirties = QuizVerbs.topThirties
-  private var topThirtiesIndex = 0
-  private var regularRadicauxFuturs = QuizVerbs.regularRadicauxFuturs
-  private var regularRadicauxFutursIndex = 0
-  private var irregularRadicauxFuturs = QuizVerbs.irregularRadicauxFuturs
-  private var irregularRadicauxFutursIndex = 0
+  private var personNumbers = CyclingDeck(PersonNumber.allCases)
+  private var impératifPersonNumbers = CyclingDeck(PersonNumber.impératifPersonNumbers)
+  private var regularErs = CyclingDeck(QuizVerbs.regularErs)
+  private var regularIrs = CyclingDeck(QuizVerbs.regularIrs)
+  private var regularRes = CyclingDeck(QuizVerbs.regularRes)
+  private var bigThrees = CyclingDeck(QuizVerbs.bigThrees)
+  private var indicatifPrésentStemChangers = CyclingDeck(QuizVerbs.indicatifPrésentStemChangers)
+  private var êtreAuxiliaries = CyclingDeck(QuizVerbs.êtreAuxiliaries)
+  private var irregularParticipePassés = CyclingDeck(QuizVerbs.irregularParticipePassés)
+  private var topThirties = CyclingDeck(QuizVerbs.topThirties)
+  private var regularRadicauxFuturs = CyclingDeck(QuizVerbs.regularRadicauxFuturs)
+  private var irregularRadicauxFuturs = CyclingDeck(QuizVerbs.irregularRadicauxFuturs)
 
   init(gameCenter: GameCenter, shouldShuffle: Bool = true) {
     self.gameCenter = gameCenter
@@ -57,8 +45,8 @@ class Quiz {
   }
 
   func start() {
-    resetIndices()
-    randomizePersonNumbersAndVerbs()
+    resetDecks()
+    shuffleDecks()
     resetPublishedProperties()
     buildQuiz()
     quizState = .inProgress
@@ -87,36 +75,37 @@ class Quiz {
     Current.analytics.recordQuizQuit(difficulty: Current.settings.quizDifficulty, lastQuestionIndex: currentQuestionIndex, elapsedTime: elapsedTime)
   }
 
-  private func resetIndices() {
-    personNumbersIndex = 0
-    impératifPersonNumbersIndex = 0
-    regularErsIndex = 0
-    regularIrsIndex = 0
-    regularResIndex = 0
-    bigThreesIndex = 0
-    indicatifPrésentStemChangersIndex = 0
-    êtreAuxiliariesIndex = 0
-    irregularParticipePassésIndex = 0
-    topThirtiesIndex = 0
-    regularRadicauxFutursIndex = 0
-    irregularRadicauxFutursIndex = 0
+  private func resetDecks() {
+    personNumbers.reset()
+    impératifPersonNumbers.reset()
+    regularErs.reset()
+    regularIrs.reset()
+    regularRes.reset()
+    bigThrees.reset()
+    indicatifPrésentStemChangers.reset()
+    êtreAuxiliaries.reset()
+    irregularParticipePassés.reset()
+    topThirties.reset()
+    regularRadicauxFuturs.reset()
+    irregularRadicauxFuturs.reset()
   }
 
-  private func randomizePersonNumbersAndVerbs() {
-    if shouldShuffle {
-      personNumbers.shuffle()
-      impératifPersonNumbers.shuffle()
-      regularErs.shuffle()
-      regularIrs.shuffle()
-      regularRes.shuffle()
-      bigThrees.shuffle()
-      indicatifPrésentStemChangers.shuffle()
-      êtreAuxiliaries.shuffle()
-      irregularParticipePassés.shuffle()
-      topThirties.shuffle()
-      regularRadicauxFuturs.shuffle()
-      irregularRadicauxFuturs.shuffle()
+  private func shuffleDecks() {
+    guard shouldShuffle else {
+      return
     }
+    personNumbers.shuffle()
+    impératifPersonNumbers.shuffle()
+    regularErs.shuffle()
+    regularIrs.shuffle()
+    regularRes.shuffle()
+    bigThrees.shuffle()
+    indicatifPrésentStemChangers.shuffle()
+    êtreAuxiliaries.shuffle()
+    irregularParticipePassés.shuffle()
+    topThirties.shuffle()
+    regularRadicauxFuturs.shuffle()
+    irregularRadicauxFuturs.shuffle()
   }
 
   private func resetPublishedProperties() {
@@ -135,34 +124,34 @@ class Quiz {
     switch Current.settings.quizDifficulty {
     case .regular:
       [regularErVerb, regularErVerb, regularIrVerb, regularIrVerb, regularReVerb, bigThreeVerb, indicatifPrésentStemChangerVerb].forEach {
-        questions.append(($0, .indicatifPrésent(personNumber)))
+        questions.append(QuizQuestion(verb: $0, tense: .indicatifPrésent(personNumber)))
       }
 
       [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb, êtreAuxiliaryVerb, irregularParticipePasséVerb].forEach {
-        questions.append(($0, .passéComposé(personNumber)))
+        questions.append(QuizQuestion(verb: $0, tense: .passéComposé(personNumber)))
       }
 
       [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb].forEach {
-        questions.append(($0, .subjonctifPrésent(personNumber)))
+        questions.append(QuizQuestion(verb: $0, tense: .subjonctifPrésent(personNumber)))
       }
 
       [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
-        questions.append(($0, .imparfait(personNumber)))
+        questions.append(QuizQuestion(verb: $0, tense: .imparfait(personNumber)))
       }
 
       [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
-        questions.append(($0, .futurSimple(personNumber)))
+        questions.append(QuizQuestion(verb: $0, tense: .futurSimple(personNumber)))
       }
 
       [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
-        questions.append(($0, .conditionnelPrésent(personNumber)))
+        questions.append(QuizQuestion(verb: $0, tense: .conditionnelPrésent(personNumber)))
       }
 
       [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
-        questions.append(($0, .impératif(impératifPersonNumber)))
+        questions.append(QuizQuestion(verb: $0, tense: .impératif(impératifPersonNumber)))
       }
 
-      questions.append((topThirtyVerb, .participePrésent))
+      questions.append(QuizQuestion(verb: topThirtyVerb, tense: .participePrésent))
 
     case .ridiculous:
       let ridiculousQuestions: [(String, Tense)] = [
@@ -198,7 +187,7 @@ class Quiz {
         ("mouvoir", .passéSimple(personNumber))
       ]
       ridiculousQuestions.forEach { infinitif, tense in
-        questions.append((Verb.verbForInfinitif(infinitif), tense))
+        questions.append(QuizQuestion(verb: Verb.verbForInfinitif(infinitif), tense: tense))
       }
     }
 
@@ -208,132 +197,81 @@ class Quiz {
   }
 
   private var personNumber: PersonNumber {
-    personNumbersIndex += 1
-    if personNumbersIndex == personNumbers.count {
-      personNumbersIndex = 0
-    }
-    return personNumbers[personNumbersIndex]
+    personNumbers.next()
   }
 
   private var impératifPersonNumber: PersonNumber {
-    impératifPersonNumbersIndex += 1
-    if impératifPersonNumbersIndex == impératifPersonNumbers.count {
-      impératifPersonNumbersIndex = 0
-    }
-    return impératifPersonNumbers[impératifPersonNumbersIndex]
+    impératifPersonNumbers.next()
   }
 
   private var regularErVerb: Verb {
-    regularErsIndex += 1
-    if regularErsIndex == regularErs.count {
-      regularErsIndex = 0
-    }
-    return Verb.verbForInfinitif(regularErs[regularErsIndex])
+    Verb.verbForInfinitif(regularErs.next())
   }
 
   private var regularIrVerb: Verb {
-    regularIrsIndex += 1
-    if regularIrsIndex == regularIrs.count {
-      regularIrsIndex = 0
-    }
-    return Verb.verbForInfinitif(regularIrs[regularIrsIndex])
+    Verb.verbForInfinitif(regularIrs.next())
   }
 
   private var regularReVerb: Verb {
-    regularResIndex += 1
-    if regularResIndex == regularRes.count {
-      regularResIndex = 0
-    }
-    return Verb.verbForInfinitif(regularRes[regularResIndex])
+    Verb.verbForInfinitif(regularRes.next())
   }
 
   private var bigThreeVerb: Verb {
-    bigThreesIndex += 1
-    if bigThreesIndex == bigThrees.count {
-      bigThreesIndex = 0
-    }
-    return Verb.verbForInfinitif(bigThrees[bigThreesIndex])
+    Verb.verbForInfinitif(bigThrees.next())
   }
 
   private var indicatifPrésentStemChangerVerb: Verb {
-    indicatifPrésentStemChangersIndex += 1
-    if indicatifPrésentStemChangersIndex == indicatifPrésentStemChangers.count {
-      indicatifPrésentStemChangersIndex = 0
-    }
-    return Verb.verbForInfinitif(indicatifPrésentStemChangers[indicatifPrésentStemChangersIndex])
+    Verb.verbForInfinitif(indicatifPrésentStemChangers.next())
   }
 
   private var êtreAuxiliaryVerb: Verb {
-    êtreAuxiliariesIndex += 1
-    if êtreAuxiliariesIndex == êtreAuxiliaries.count {
-      êtreAuxiliariesIndex = 0
-    }
-    return Verb.verbForInfinitif(êtreAuxiliaries[êtreAuxiliariesIndex])
+    Verb.verbForInfinitif(êtreAuxiliaries.next())
   }
 
   private var irregularParticipePasséVerb: Verb {
-    irregularParticipePassésIndex += 1
-    if irregularParticipePassésIndex == irregularParticipePassés.count {
-      irregularParticipePassésIndex = 0
-    }
-    return Verb.verbForInfinitif(irregularParticipePassés[irregularParticipePassésIndex])
+    Verb.verbForInfinitif(irregularParticipePassés.next())
   }
 
   private var topThirtyVerb: Verb {
-    topThirtiesIndex += 1
-    if topThirtiesIndex == topThirties.count {
-      topThirtiesIndex = 0
-    }
-    return Verb.verbForInfinitif(topThirties[topThirtiesIndex])
+    Verb.verbForInfinitif(topThirties.next())
   }
 
   private var regularRadicalFuturVerb: Verb {
-    regularRadicauxFutursIndex += 1
-    if regularRadicauxFutursIndex == regularRadicauxFuturs.count {
-      regularRadicauxFutursIndex = 0
-    }
-    return Verb.verbForInfinitif(regularRadicauxFuturs[regularRadicauxFutursIndex])
+    Verb.verbForInfinitif(regularRadicauxFuturs.next())
   }
 
   private var irregularRadicalFuturVerb: Verb {
-    irregularRadicauxFutursIndex += 1
-    if irregularRadicauxFutursIndex == irregularRadicauxFuturs.count {
-      irregularRadicauxFutursIndex = 0
-    }
-    return Verb.verbForInfinitif(irregularRadicauxFuturs[irregularRadicauxFutursIndex])
+    Verb.verbForInfinitif(irregularRadicauxFuturs.next())
   }
 
   func process(proposedAnswer: String) {
     let question = questions[currentQuestionIndex]
-    let verb = question.0
-    let tense = question.1
-    let correctAnswerResult = Conjugator.conjugate(infinitif: verb.infinitif, tense: tense, extraLetters: nil)
-    switch correctAnswerResult {
-    case let .success(correctAnswers):
-      let conjugationResult = ConjugationResult.score(correctAnswers: correctAnswers, proposedAnswer: proposedAnswer)
-      if currentQuestionIndex != questions.count - 1 {
-        SoundPlayer.play(conjugationResult.sound)
-      }
-      score += conjugationResult.score * difficulty.scoreModifier
-      correctnessScore += conjugationResult.percentCorrect
-      quizResults.append(
-        QuizResult(
-          infinitif: verb.infinitifWithPossibleExtraLetters,
-          tense: tense,
-          conjugationResult: conjugationResult,
-          correctAnswer: correctAnswers,
-          actualAnswer: proposedAnswer
-        )
-      )
-      if conjugationResult == .noMatch {
-        previousIncorrectAnswer = proposedAnswer
-        previousCorrectAnswer = correctAnswers
-      } else {
-        previousIncorrectAnswer = nil
-        previousCorrectAnswer = nil
-      }
-    default:
+    let verb = question.verb
+    let tense = question.tense
+    guard let correctAnswers = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: nil) else {
       fatalError("Conjugation failed.")
+    }
+    let conjugationResult = ConjugationResult.score(correctAnswers: correctAnswers, proposedAnswer: proposedAnswer)
+    if currentQuestionIndex != questions.count - 1 {
+      SoundPlayer.play(conjugationResult.sound)
+    }
+    score += conjugationResult.score * difficulty.scoreModifier
+    correctnessScore += conjugationResult.percentCorrect
+    quizResults.append(
+      QuizResult(
+        infinitif: verb.infinitifWithPossibleExtraLetters,
+        tense: tense,
+        conjugationResult: conjugationResult,
+        correctAnswer: correctAnswers,
+        actualAnswer: proposedAnswer
+      )
+    )
+    if conjugationResult == .noMatch {
+      previousIncorrectAnswer = proposedAnswer
+      previousCorrectAnswer = correctAnswers
+    } else {
+      previousIncorrectAnswer = nil
+      previousCorrectAnswer = nil
     }
     currentQuestionIndex += 1
 
@@ -372,16 +310,16 @@ class Quiz {
         } else {
           currentLocaleString = currentLanguage + "-" + currentRegion
         }
+        let question = questions[currentQuestionIndex]
         Utterer.utter(L.QuizView.verbWithColon, localeString: currentLocaleString)
-        let frenchLocaleString = Utterer.frenchLocaleString
-        Utterer.utter(questions[currentQuestionIndex].0.infinitif, localeString: frenchLocaleString)
+        Utterer.utter(question.verb.infinitif, localeString: Utterer.frenchLocaleString)
         Utterer.utter(L.QuizView.translationWithColon, localeString: currentLocaleString)
-        Utterer.utter(questions[currentQuestionIndex].0.translation, localeString: Utterer.englishLocaleString)
+        Utterer.utter(question.verb.translation, localeString: Utterer.englishLocaleString)
         Utterer.utter(L.QuizView.pronounWithColon, localeString: currentLocaleString)
-        Utterer.utter(questions[currentQuestionIndex].1.pronoun, localeString: Utterer.frenchLocaleString)
-        Utterer.utter(questions[currentQuestionIndex].1.gender, localeString: currentLocaleString)
+        Utterer.utter(question.tense.pronoun, localeString: Utterer.frenchLocaleString)
+        Utterer.utter(question.tense.gender, localeString: currentLocaleString)
         Utterer.utter(L.QuizView.tenseWithColon, localeString: currentLocaleString)
-        Utterer.utter(questions[currentQuestionIndex].1.titleCaseName, localeString: Utterer.frenchLocaleString)
+        Utterer.utter(question.tense.titleCaseName, localeString: Utterer.frenchLocaleString)
         Utterer.utter(L.QuizView.progressWithColon, localeString: currentLocaleString)
         Utterer.utter("\(currentQuestionIndex + 1) \(L.QuizView.outOf) \(questions.count)", localeString: currentLocaleString)
         Utterer.utter("\(L.QuizView.scoreWithColon) \(score)", localeString: currentLocaleString)

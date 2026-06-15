@@ -11,21 +11,16 @@ import XCTest
 @MainActor
 enum T {
   static func conjugate(infinitif: String, tense: Tense, extraLetters: String?) -> String {
-    let result = Conjugator.conjugate(infinitif: infinitif, tense: tense, extraLetters: extraLetters)
-    switch result {
-    case .success(let value):
-      return value
-    case .failure:
+    guard let value = Conjugator.conjugatedString(infinitif: infinitif, tense: tense, extraLetters: extraLetters) else {
       fatalError("Conjugation failed.")
     }
+    return value
   }
 
   static func testConjugation(infinitif: String, tense: Tense, expected: String, extraLetters: String?) {
-    let result = Conjugator.conjugate(infinitif: infinitif, tense: tense, extraLetters: extraLetters)
-    switch result {
-    case .success(let value):
+    if let value = Conjugator.conjugatedString(infinitif: infinitif, tense: tense, extraLetters: extraLetters) {
       XCTAssertEqual(expected, value)
-    case .failure:
+    } else {
       XCTFail("Conjugation failed. Expected: \(expected)")
     }
   }

@@ -146,8 +146,11 @@ equal-irregularity models stop landing in dictionary-hash order — which also h
 `x3p, r1s` the next. Sort before joining. While there: the six-chained-`contains` check
 is `allSatisfy`/`isSubset`, and the manual comma loop is `joined(separator: ", ")`.
 
-### 10. Quiz decks: element 0 skipped; first-lap order quirk
+### 10. Quiz decks: element 0 skipped; first-lap order quirk ✅ DONE (Batch 3, via item 13)
 **Found by:** OM #2, FH #1, FM §2.2 · **Verified:** ✅ (`Quiz.swift:210` pre-increments) · **Effort:** folded into item 13
+
+> **Batch 3 resolution.** Fixed for free by `CyclingDeck.next()` returning the current element before
+> advancing (item 13), so each pool's element 0 is handed out on the first lap.
 
 All 13 cycling accessors increment *before* reading, so each pool's element 0 is skipped
 until the first wraparound. Harmless under shuffling, but accidental. Fix lands free with
@@ -207,8 +210,19 @@ the `CyclingDeck` refactor (item 13) — have `next()` return the current elemen
 
 ## Tier D — High-leverage structural refactors
 
-### 13. Quiz: replace 13 hand-rolled deck/index pairs with `CyclingDeck`
+### 13. Quiz: replace 13 hand-rolled deck/index pairs with `CyclingDeck` ✅ DONE (Batch 3)
 **Found by:** all four (OH #1, OM #2, FH #1, FM §2.2) — the consensus #1 refactor · **Effort:** M
+
+> **Batch 3 resolution.** New generic `CyclingDeck<Element>` (`reset`/`shuffle`/`next`) replaced the
+> twelve array+index pairs and their twelve ~7-line cycling accessors (now one-liners), plus the
+> `resetIndices`/`randomizePersonNumbersAndVerbs` pair → `resetDecks`/`shuffleDecks`. `next()` returns
+> the current element *before* advancing, fixing item 10's off-by-one (element 0 is no longer skipped
+> on the first lap). New `QuizQuestion {verb; tense}` struct replaced the `(Verb, Tense)` tuples across
+> `Quiz`/`QuizView` (`QuizResultsView` only reads `.count`). The `gameCenter` injection was already
+> made live in Batch 1. New `QuizTests` drives the shared `Current.quiz` through a full 30-question
+> regular-difficulty lifecycle (a throwaway `Quiz`/`GameCenter` double crashes the runtime on its
+> @MainActor deinit — the hazard `CompoundTenseTests` documents). 117 tests green; quiz verified in
+> the simulator (`docs/screenshots/…-batch3-quiz-question.png`).
 
 `Quiz.swift:29-54` (13 array+index pairs), `:92-106` (`resetIndices`), `:108-124`
 (shuffles), `:209-311` (13 cycling accessors). One generic `CyclingDeck<Element>` with
@@ -218,8 +232,15 @@ Fold in: `QuizQuestion` struct to replace the `(Verb, Tense)` tuples (`Quiz.swif
 `QuizView.swift:135-136`; FH #13, FM §3.6) and the `gameCenter` injection fix (item 12
 row). FM's sketch is the most complete starting point.
 
-### 14. `Tense.personNumber` accessor to collapse the 17-case switches
+### 14. `Tense.personNumber` accessor to collapse the 17-case switches ✅ DONE (Batch 3)
 **Found by:** all four (OH #10, OM #4, FH #6, FM §2.3) · **Effort:** S–M
+
+> **Batch 3 resolution.** Added `var personNumber: PersonNumber?` (nil for the three personless
+> tenses). `pronounWithGender`/`pronoun`/`gender` became `personNumber?.… ?? L.QuizView.none`
+> one-liners and `pronounDecorator` a `guard let`. `VerbConjugations.conjugationParts`'s 15-case
+> third arm collapsed to a `default` that reads `tense.personNumber`. `conjugatedAuxiliary` already
+> takes its `PersonNumber` as a parameter, and `shortDisplayName` needs a per-case tense letter, so
+> those were left as-is. 117 tests green.
 
 `pronounWithGender`, `pronoun`, `gender`, `pronounDecorator` (`Tense.swift:168-202`) each
 re-match all seventeen person-bearing cases just to extract the `PersonNumber`. One
@@ -257,9 +278,17 @@ also why OH's #5 ("business logic living in the view", incl. the XML export at
 `:272-327` and the four repeated TextField stacks at `:21-51`) ranks here rather than in
 Tier A. Apply OH's TextField-helper suggestion opportunistically.
 
-### 17. `conjugatedString` helper + `fatalError` policy (59 sites)
+### 17. `conjugatedString` helper + `fatalError` policy (59 sites) ✅ DONE (Batch 3 — helper; fatalError audit deferred)
 **Found by:** OM #1/#8 (the helper + the census — exactly 59, verified), FM §3.2; OH #3
 partially (engine should return errors, not crash) · **Effort:** M
+
+> **Batch 3 resolution.** Added `Conjugator.conjugatedString(infinitif:tense:extraLetters:) -> String?`
+> and collapsed the switch-on-`Result`-and-unwrap boilerplate at `VerbConjugations.rawConjugation`,
+> `Tense.conjugatedAuxiliary`, `Conjugator.nousPrésentStem`, `Quiz.process`, and both `TestUtils`
+> helpers. **Deferred:** `InputView`'s eleven sites are left for item 16 (which rewrites that
+> `#if DEBUG` view wholesale), and the data-driven `fatalError` downgrade audit (XML parsers'
+> missing-attribute traps, `moveCircumflexIfNeeded`'s empty-stem trap) is left for item 27's parser
+> scaffold — genuine programmer-invariant traps (e.g. `rawConjugation`) were kept.
 
 Nearly every `Conjugator.conjugate` caller unwraps the `Result` with the same
 `switch`-and-`fatalError` (e.g. `VerbConjugations.swift:123-130`, `Tense.swift:130-136`,
@@ -271,8 +300,14 @@ traps — `VerbParser.swift:56`, `VerbModelParser.swift:50`, `StemAlteration.swi
 and `moveCircumflexIfNeeded`'s empty-stem trap at `Conjugator.swift:231`) to recoverable
 errors or skip-and-log.
 
-### 18. Generic parent-chain resolver in `VerbModel`
+### 18. Generic parent-chain resolver in `VerbModel` ✅ DONE (Batch 3)
 **Found by:** OH #11, FM §2.5 · **Verified with caveat** · **Effort:** S
+
+> **Batch 3 resolution.** Added a keypath-parameterized `inheritedGroup(_:name:)` and folded in only
+> the three uniform walks (`passéSimpleGroupRecursive`, `indicatifPrésentGroupRecursive`,
+> `subjonctifPrésentGroupRecursive`). Per the caveat, `participeEndingRecursive` (falls back to `""`)
+> and `stemAlterationsRecursive` (merges the chain) stay bespoke. `maxIrregularityCount` was already a
+> named local (`:104`); the optional `models.keys` style nit was skipped (legal as-is).
 
 `passéSimpleGroupRecursive`, `indicatifPrésentGroupRecursive`,
 `subjonctifPrésentGroupRecursive` (`VerbModel.swift:146-174`) are the same
@@ -332,9 +367,17 @@ here (FH #10, FM §3.3): both views build their store from the global
 a different `World` aren't half-ignored. This dovetails with the in-flight issue-#27
 work (`docs/conjuguer-ui-issues.md`) that moved views onto `@Environment(World.self)`.
 
-### 22. Conjugator internals cleanup
+### 22. Conjugator internals cleanup — small pieces ✅ DONE (Batch 3); deep decomposition deferred
 **Found by:** OH #3 (decomposition), FH #12 (additive-scan helper), OM #13 + FH #12 + FM §3.7
 (`composedConjugation`), OM #13 + FM §3.4 (`moveCircumflexIfNeeded`) · **Effort:** M
+
+> **Batch 3 resolution (the three small pieces).** Extracted the four near-identical additive-alteration
+> scans into one `appendAdditiveAlternateStem(to:from:matching:)` helper (the participe-passé arm keeps
+> its extra ending logic by branching on the `@discardableResult` return). `composedConjugation`'s manual
+> `hasAppendedAtLeastOneConjugation` flag → `map { … }.joined(separator:)`. `moveCircumflexIfNeeded`'s
+> 10-tuple linear scan → a `[Character: Character]` `circumflexedVowels` lookup. **Deferred:** OH's
+> per-tense-family decomposition of the 195-line `conjugate()` (optional — wait for item 33's extra
+> tests). Golden tests + new `QuizTests` green.
 
 `conjugate()` is 195 lines with two big switches. Before any grand decomposition:
 - Extract the four near-identical additive-alteration scans
@@ -533,9 +576,11 @@ Tests-first where a batch touches scoring/persistence logic.
    `sorted(by: >)` + exemplar tiebreaker, sorted/deterministic shorthand labels, `hasSuffix`
    for the three `Character("")` traps. 115 tests green (113 + 2).
 4. **Batch 3 — Mechanical consolidations under golden-test cover (items 14, 17, 13, 18,
-   22's small pieces).** `Tense.personNumber`, the `conjugatedString` helper (unblocks
-   later batches), `CyclingDeck` + `QuizQuestion` (after the Quiz tests), the
-   three-property resolver, `map/joined` + circumflex-dict cleanups.
+   22's small pieces). ✅ DONE.** `Tense.personNumber`, the `conjugatedString` helper (unblocks
+   later batches; its data-driven `fatalError` audit deferred to items 16/27), `CyclingDeck` +
+   `QuizQuestion` + new `QuizTests` (which also closes item 10's off-by-one), the three-property
+   resolver, and item 22's small pieces (additive-scan helper, `map/joined`, circumflex dict).
+   117 tests green (115 + 2); quiz verified in the simulator.
 5. **Batch 4 — The codec and the data tables (items 15, 19, 23).** Shorthand
    single-source (finishes the in-code TODO, makes item 4's bug class impossible,
    `Set<Tense>` for defects), ending tables → data + star-builder helper +
@@ -585,3 +630,27 @@ No finding was fabricated; these details didn't survive (kept out of the ranking
 - Minor, noted in passing: `ModelBrowseView` filters on `exemplar` but displays
   `exemplarWithPossibleExtraLetters`, so the parenthesized extra letters aren't
   searchable.
+
+---
+
+## Deferred work — partially-done items
+
+Snapshot after **Batch 3**. Fully-unstarted items keep their own numbered sections above, and
+the batch plan in "Recommended implementation order" already covers them. This section tracks
+only the items that are *partly* done, so their unfinished remainders don't get lost in an
+otherwise-✅ section. Tick a box when the remainder lands.
+
+### Carried-over partials (remainders of otherwise-done items)
+- [ ] **17 remainder** — the data-driven `fatalError` downgrade audit, *not* the helper (helper is
+  done): XML parser missing-attribute traps (`VerbParser.swift:56`, `VerbModelParser.swift:50`,
+  `StemAlteration.swift:149`) and `moveCircumflexIfNeeded`'s empty-stem trap → recoverable errors or
+  skip-and-log. Fold into **item 27**. InputView's 11 unwrap sites fold into **item 16**.
+- [ ] **22 remainder** — OH's per-tense-family decomposition of the 195-line `Conjugator.conjugate()`
+  (the three small pieces are done). Optional; do **after item 33** adds engine-edge tests.
+
+### Deliberately skipped (won't-do unless revisited)
+- **18 style nit** — iterating `models.keys` in `computeIrregularities`/`sortVerbs` (OM #9). Legal,
+  defined Swift as-is; skipped during Batch 3. No correctness impact.
+- **Appendix B minor** — `ModelBrowseView` searches `exemplar` but displays
+  `exemplarWithPossibleExtraLetters` (parenthesized extra letters aren't searchable). Roll into
+  item 21 if/when that view is reworked.

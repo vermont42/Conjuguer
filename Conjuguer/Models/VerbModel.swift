@@ -24,9 +24,6 @@ struct VerbModel: Identifiable, Hashable {
   let defectGroupId: String?
   var verbs: [String] = []
 
-  // This is nonisolated so the verb-model XML parse can construct models off the main actor
-  // The parsed models are published into the main-actor `models` store afterward. The derived
-  // passes (computeIrregularities / sortVerbs) stay main-actor and run post-publish.
   nonisolated init(
     id: String,
     exemplar: String,
@@ -133,6 +130,20 @@ struct VerbModel: Identifiable, Hashable {
 
   private let andParentIdAreNil = " _and_ parentId are nil."
 
+  // Resolves a group property that is inherited verbatim from the nearest ancestor that
+  // defines it (no merging), trapping at the root if none does. Only the three uniform
+  // local-else-parent-else-fatalError walks fold into this; participeEndingRecursive falls
+  // back to "" and stemAlterationsRecursive merges the chain, so they stay bespoke.
+  private func inheritedGroup<T>(_ keyPath: KeyPath<VerbModel, T?>, name: String) -> T {
+    if let value = self[keyPath: keyPath] {
+      return value
+    } else if let parentId = parentId {
+      return VerbModel.model(id: parentId).inheritedGroup(keyPath, name: name)
+    } else {
+      fatalError(name + andParentIdAreNil)
+    }
+  }
+
   var participeEndingRecursive: String {
     if let participeEnding = participeEnding {
       return participeEnding
@@ -144,33 +155,15 @@ struct VerbModel: Identifiable, Hashable {
   }
 
   var passéSimpleGroupRecursive: PasséSimpleGroup {
-    if let passéSimpleGroup = passéSimpleGroup {
-      return passéSimpleGroup
-    } else if let parentId = parentId {
-      return VerbModel.model(id: parentId).passéSimpleGroupRecursive
-    } else {
-      fatalError("passéSimpleGroup" + andParentIdAreNil)
-    }
+    inheritedGroup(\.passéSimpleGroup, name: "passéSimpleGroup")
   }
 
   var indicatifPrésentGroupRecursive: IndicatifPrésentGroup {
-    if let indicatifPrésentGroup = indicatifPrésentGroup {
-      return indicatifPrésentGroup
-    } else if let parentId = parentId {
-      return VerbModel.model(id: parentId).indicatifPrésentGroupRecursive
-    } else {
-      fatalError("indicatifPrésentGroup" + andParentIdAreNil)
-    }
+    inheritedGroup(\.indicatifPrésentGroup, name: "indicatifPrésentGroup")
   }
 
   var subjonctifPrésentGroupRecursive: SubjonctifPrésentGroup {
-    if let subjonctifPrésentGroup = subjonctifPrésentGroup {
-      return subjonctifPrésentGroup
-    } else if let parentId = parentId {
-      return VerbModel.model(id: parentId).subjonctifPrésentGroupRecursive
-    } else {
-      fatalError("subjonctifPrésentGroup" + andParentIdAreNil)
-    }
+    inheritedGroup(\.subjonctifPrésentGroup, name: "subjonctifPrésentGroup")
   }
 
   var exemplarWithPossibleExtraLetters: String {
