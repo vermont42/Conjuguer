@@ -1,5 +1,5 @@
 //
-//  TestAnalyticsService.swift
+//  AnalyticsServiceSpy.swift
 //  Conjuguer
 //
 //  Created by Josh Adams on 11/25/18.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-class TestAnalyticsService: AnalyticsService {
+class AnalyticsServiceSpy: AnalyticsService {
   var analyticsLocale: AnalyticsLocale {
-    StubAnalyticsLocale()
+    AnalyticsLocaleStub()
   }
 
   private var fire: (String) -> Void

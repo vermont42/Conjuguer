@@ -1,5 +1,5 @@
 //
-//  AWSAnalyticsService.swift
+//  AnalyticsServiceReal.swift
 //  Conjuguer
 //
 //  Created by Josh Adams on 10/8/18.
@@ -14,9 +14,9 @@ import AWSCognitoAuthPlugin
 import AWSPinpointAnalyticsPlugin
 import Foundation
 
-class AWSAnalyticsService: NSObject, AnalyticsService {
+class AnalyticsServiceReal: NSObject, AnalyticsService {
   var analyticsLocale: AnalyticsLocale {
-    RealAnalyticsLocale()
+    AnalyticsLocaleReal()
   }
 
   override init() {

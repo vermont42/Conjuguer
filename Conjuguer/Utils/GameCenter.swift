@@ -2,56 +2,20 @@
 //  GameCenter.swift
 //  Conjuguer
 //
-//  Created by Josh Adams on 6/26/17.
-//  Copyright © 2017 Josh Adams. All rights reserved.
+//  Created by Josh Adams on 10/24/21.
 //
 
-import GameKit
+import UIKit
 
-class GameCenter: NSObject, GameCenterable {
-  static let shared = GameCenter()
-  var isAuthenticated = false
-  private let localPlayer = GKLocalPlayer.local
-  private var leaderboardIdentifier = ""
+protocol GameCenter {
+  var isAuthenticated: Bool { get set }
+  func authenticate(onViewController: UIViewController, completion: ((Bool) -> Void)?)
+  func reportScore(_ score: Int)
+  func showLeaderboard()
+}
 
-  private override init() {}
-
-  func authenticate(onViewController: UIViewController, completion: ((Bool) -> Void)? = nil) {
-    localPlayer.authenticateHandler = { viewController, _ in
-      if let viewController = viewController {
-        onViewController.present(viewController, animated: true, completion: nil)
-      } else if self.localPlayer.isAuthenticated {
-        // print("AUTHENTICATED displayName: \(self.localPlayer.displayName) alias: \(self.localPlayer.alias) playerID: \(self.localPlayer.playerID)")
-        self.isAuthenticated = true
-        SoundPlayer.play(.randomApplause)
-        self.localPlayer.loadDefaultLeaderboardIdentifier { identifier, _ in
-          Task { @MainActor in
-            self.leaderboardIdentifier = identifier ?? "ERROR"
-            // print("identifier: \(self.leaderboardIdentifier)")
-          }
-        }
-        Current.analytics.recordGameCenterAuthSucceeded()
-        completion?(true)
-      } else {
-        self.isAuthenticated = false
-        Current.analytics.recordGameCenterAuthFailed()
-        completion?(false)
-      }
-    }
-  }
-
-  func reportScore(_ score: Int) {
-    guard isAuthenticated else {
-      return
-    }
-
-    GKLeaderboard.submitScore(score, context: 0, player: localPlayer, leaderboardIDs: [leaderboardIdentifier], completionHandler: { _ in })
-  }
-
-  func showLeaderboard() {
-    guard isAuthenticated else {
-      return
-    }
-    GKAccessPoint.shared.trigger(leaderboardID: leaderboardIdentifier, playerScope: .global, timeScope: .allTime) { }
+extension GameCenter {
+  func authenticate(onViewController: UIViewController) {
+    authenticate(onViewController: onViewController, completion: nil)
   }
 }

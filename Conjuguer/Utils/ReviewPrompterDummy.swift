@@ -1,5 +1,5 @@
 //
-//  TestReviewPrompter.swift
+//  ReviewPrompterDummy.swift
 //  Conjuguer
 //
 //  Created by Josh Adams on 11/28/18.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-class TestReviewPrompter: ReviewPromptable {
+class ReviewPrompterDummy: ReviewPrompter {
   func promptableActionHappened() {}
 }

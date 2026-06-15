@@ -23,7 +23,7 @@ class Quiz {
   private(set) var previousCorrectAnswer: String?
 
   private var timer: Timer?
-  private var gameCenter: GameCenterable?
+  private var gameCenter: GameCenter?
   private var shouldShuffle = true
 
   private var personNumbers = PersonNumber.allCases
@@ -53,7 +53,7 @@ class Quiz {
   private var irregularRadicauxFuturs = QuizVerbs.irregularRadicauxFuturs
   private var irregularRadicauxFutursIndex = 0
 
-  init(gameCenter: GameCenterable, shouldShuffle: Bool = true) {
+  init(gameCenter: GameCenter, shouldShuffle: Bool = true) {
     self.gameCenter = gameCenter
     self.shouldShuffle = shouldShuffle
   }

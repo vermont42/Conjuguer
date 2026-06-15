@@ -1,5 +1,5 @@
 //
-//  UserDefaultsGetterSetter.swift
+//  GetterSetterReal.swift
 //  Conjuguer
 //
 //  Created by Josh Adams on 1/13/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UserDefaultsGetterSetter: GetterSetter {
+class GetterSetterReal: GetterSetter {
   private let userDefaults = UserDefaults.standard
 
   func get(key: String) -> String? {

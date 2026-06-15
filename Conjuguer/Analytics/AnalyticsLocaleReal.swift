@@ -1,5 +1,5 @@
 //
-//  RealAnalyticsLocale.swift
+//  AnalyticsLocaleReal.swift
 //  Conjuguer
 //
 //  Created by Josh Adams on 12/15/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RealAnalyticsLocale: AnalyticsLocale {
+struct AnalyticsLocaleReal: AnalyticsLocale {
   private let none = "none"
   private let NONE = "NONE"
 

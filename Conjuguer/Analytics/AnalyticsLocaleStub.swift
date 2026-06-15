@@ -1,5 +1,5 @@
 //
-//  StubAnalyticsLocale.swift
+//  AnalyticsLocaleStub.swift
 //  Conjuguer
 //
 //  Created by Josh Adams on 12/15/20.
@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct StubAnalyticsLocale: AnalyticsLocale {
+struct AnalyticsLocaleStub: AnalyticsLocale {
   var languageCode: String
   var regionCode: String
   private static let english = "en"
   private static let america = "US"
 
-  init(languageCode: String = StubAnalyticsLocale.english, regionCode: String = StubAnalyticsLocale.america) {
+  init(languageCode: String = AnalyticsLocaleStub.english, regionCode: String = AnalyticsLocaleStub.america) {
     self.languageCode = languageCode
     self.regionCode = regionCode
   }

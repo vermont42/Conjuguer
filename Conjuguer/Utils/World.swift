@@ -24,10 +24,10 @@ enum MainTab: Hashable {
 @Observable
 class World {
   var settings: Settings
-  var gameCenter: GameCenterable
+  var gameCenter: GameCenter
   var quiz: Quiz
   var analytics: AnalyticsService
-  var reviewPrompter: ReviewPromptable
+  var reviewPrompter: ReviewPrompter
   var verb: Verb?
   var verbModel: VerbModel?
   var info: Info?
@@ -39,10 +39,10 @@ class World {
 
   init(
     settings: Settings,
-    gameCenter: GameCenterable,
+    gameCenter: GameCenter,
     quiz: Quiz,
     analytics: AnalyticsService,
-    reviewPrompter: ReviewPromptable,
+    reviewPrompter: ReviewPrompter,
     session: URLSession
   ) {
     self.settings = settings
@@ -67,46 +67,46 @@ class World {
   }
 
   static let device: World = {
-    let settings = Settings(getterSetter: UserDefaultsGetterSetter())
-    let gameCenter = GameCenter.shared
+    let settings = Settings(getterSetter: GetterSetterReal())
+    let gameCenter = GameCenterReal.shared
     let quiz = Quiz(gameCenter: gameCenter)
-    let analytics = AWSAnalyticsService()
+    let analytics = AnalyticsServiceReal()
     return World(
       settings: settings,
       gameCenter: gameCenter,
       quiz: quiz,
       analytics: analytics,
-      reviewPrompter: ReviewPrompter(),
+      reviewPrompter: ReviewPrompterReal(),
       session: URLSession.shared
     )
   }()
 
   static let simulator: World = {
-    let settings = Settings(getterSetter: UserDefaultsGetterSetter())
-    let gameCenter = TestGameCenter()
+    let settings = Settings(getterSetter: GetterSetterReal())
+    let gameCenter = GameCenterStub()
     let quiz = Quiz(gameCenter: gameCenter)
-    let analytics = TestAnalyticsService()
+    let analytics = AnalyticsServiceSpy()
     return World(
       settings: settings,
       gameCenter: gameCenter,
       quiz: quiz,
       analytics: analytics,
-      reviewPrompter: ReviewPrompter(),
+      reviewPrompter: ReviewPrompterReal(),
       session: fakeSession
     )
   }()
 
   static let unitTest: World = {
-    let settings = Settings(getterSetter: DictionaryGetterSetter())
-    let gameCenter = TestGameCenter()
+    let settings = Settings(getterSetter: GetterSetterFake())
+    let gameCenter = GameCenterStub()
     let quiz = Quiz(gameCenter: gameCenter)
-    let analytics = TestAnalyticsService()
+    let analytics = AnalyticsServiceSpy()
     return World(
       settings: settings,
       gameCenter: gameCenter,
       quiz: quiz,
       analytics: analytics,
-      reviewPrompter: TestReviewPrompter(),
+      reviewPrompter: ReviewPrompterDummy(),
       session: fakeSession
     )
   }()

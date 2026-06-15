@@ -1,5 +1,5 @@
 //
-//  TestGameCenter.swift
+//  GameCenterStub.swift
 //  Conjuguer
 //
 //  Created by Josh Adams on 10/24/21.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TestGameCenter: GameCenterable {
+class GameCenterStub: GameCenter {
   var isAuthenticated: Bool
 
   init(isAuthenticated: Bool = false) {
