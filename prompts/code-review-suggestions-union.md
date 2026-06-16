@@ -973,10 +973,16 @@ otherwise-✅ section. Tick a box when the remainder lands.
   (`Views/BrowseSearch.swift`), with each view passing its `matches` keypath inline. Verified in the
   simulator: both lists render, launch anchor intact, model row pushes detail. 129 tests green; SwiftLint
   `--strict` clean.
-- [ ] **26 remainder** — `PersonNumber.pronoun/pronounWithGender/gender/preamble` still read
-  `Current.settings.pronounGender`. Engine (`Conjugator.conjugate`) is now pure; these are `@MainActor`
-  presentation helpers. Parameterize them as a follow-on to the already-done `@Environment(World.self)`
-  injection (`docs/future-swiftui-fixes.md` #27) if/when the view layer threads `PronounGender` explicitly.
+- [x] **26 remainder** — ⛔️ **won't do.** `PersonNumber.pronoun/pronounWithGender/gender/preamble` still
+  read `Current.settings.pronounGender`. The concrete payoff item 26 named — engine purity + tests not
+  mutating global — was fully captured by the Batch 5 engine change (`Conjugator.conjugate` gained the
+  `pronounGender:` seam). These four are `@MainActor` *presentation* helpers, not engine code; parameterizing
+  them would ripple `PronounGender` through `Tense`'s four display accessors (`pronoun`/`pronounWithGender`/
+  `gender`/`pronounDecorator`) and their five call sites (`VerbView`, `VerbConjugations`, `QuizView`, `Quiz`
+  utterance) for marginal testability gain and zero functional change, touching lines that the
+  `@Environment(World.self)` view-layer plumbing (`docs/future-swiftui-fixes.md` #27 "env injection" — *not*
+  code-review item 27) would rework anyway. Closed here; fold in opportunistically if that injection ever
+  threads `PronounGender` explicitly.
 
 ### Deliberately skipped (won't-do unless revisited)
 - **18 style nit** — iterating `models.keys` in `computeIrregularities`/`sortVerbs` (OM #9). Legal,
