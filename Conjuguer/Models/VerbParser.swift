@@ -19,8 +19,6 @@ nonisolated class VerbParser: XMLDataParser {
   private var currentHasAspiratedH = false
   private var currentFrequency: Int?
   private var currentExtraLetters: String?
-  private var currentExample: String?
-  private var currentSource: String?
   private var currentDefectGroupId: String?
 
   init() {
@@ -81,14 +79,6 @@ nonisolated class VerbParser: XMLDataParser {
         currentExtraLetters = extraLetters
       }
 
-      if let example = attributeDict["ee"] {
-        currentExample = example
-      }
-
-      if let source = attributeDict["so"] {
-        currentSource = source
-      }
-
       if let defectGroupId = attributeDict["dg"] {
         currentDefectGroupId = defectGroupId
       }
@@ -131,8 +121,6 @@ nonisolated class VerbParser: XMLDataParser {
         hasAspiratedH: currentHasAspiratedH,
         frequency: currentFrequency,
         extraLetters: currentExtraLetters,
-        example: currentExample,
-        source: currentSource,
         defectGroupId: currentDefectGroupId
       )
 
@@ -153,8 +141,6 @@ nonisolated class VerbParser: XMLDataParser {
     currentHasAspiratedH = false
     currentFrequency = nil
     currentExtraLetters = nil
-    currentExample = nil
-    currentSource = nil
     currentDefectGroupId = nil
   }
 }

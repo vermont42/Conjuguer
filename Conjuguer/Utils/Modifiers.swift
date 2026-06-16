@@ -61,6 +61,10 @@ extension View {
     modifier(SmallLabel())
   }
 
+  func translationLabel() -> some View {
+    modifier(TranslationLabel())
+  }
+
   func settingsLabel() -> some View {
     modifier(SettingsLabel())
   }
@@ -192,6 +196,14 @@ private struct SmallLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
       .font(captionFont)
+      .foregroundStyle(Color.customGray)
+  }
+}
+
+private struct TranslationLabel: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .font(bodyFont)
       .foregroundStyle(Color.customGray)
   }
 }

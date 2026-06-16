@@ -21,8 +21,6 @@ struct Verb: Identifiable, Hashable {
   let hasAspiratedH: Bool
   var frequency: Int?
   let extraLetters: String?
-  let example: String?
-  let source: String?
   let defectGroupId: String?
 
   nonisolated init(
@@ -34,8 +32,6 @@ struct Verb: Identifiable, Hashable {
     hasAspiratedH: Bool,
     frequency: Int?,
     extraLetters: String?,
-    example: String?,
-    source: String?,
     defectGroupId: String?
   ) {
     self.infinitif = infinitif
@@ -46,8 +42,6 @@ struct Verb: Identifiable, Hashable {
     self.hasAspiratedH = hasAspiratedH
     self.frequency = frequency
     self.extraLetters = extraLetters
-    self.example = example
-    self.source = source
     self.defectGroupId = defectGroupId
   }
 

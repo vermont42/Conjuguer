@@ -89,8 +89,6 @@ struct InputView: View {
       hasAspiratedH: false,
       frequency: nil,
       extraLetters: nil,
-      example: nil,
-      source: nil,
       defectGroupId: nil
     )
     Verb.verbs[infinitif] = verb
@@ -161,8 +159,6 @@ struct InputView: View {
         <!ATTLIST verb mo CDATA #REQUIRED>
         <!ATTLIST verb ay CDATA #IMPLIED>
         <!ATTLIST verb fr CDATA #IMPLIED>
-        <!ATTLIST verb ee CDATA #IMPLIED>
-        <!ATTLIST verb so CDATA #IMPLIED>
         <!ATTLIST verb dg CDATA #IMPLIED>
     ]>
 
@@ -194,12 +190,6 @@ struct InputView: View {
       }
       if let extraLetters = verb.extraLetters {
         output += "ex=\"\(extraLetters)\" "
-      }
-      if let example = verb.example {
-        output += "ee=\"\(example)\" "
-      }
-      if let source = verb.source {
-        output += "so=\"\(source)\" "
       }
       output += "/>\n"
     }

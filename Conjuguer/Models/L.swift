@@ -107,6 +107,10 @@ enum L {
       String(localized: "VerbView.exampleUse")
     }
 
+    static var exampleUses: String {
+      String(localized: "VerbView.exampleUses")
+    }
+
     static var personlessConjugations: String {
       String(localized: "VerbView.personlessConjugations")
     }
@@ -141,6 +145,36 @@ enum L {
 
     static var etymologyHeading: String {
       String(localized: "VerbView.etymologyHeading")
+    }
+
+    static var sourceSwissPublic: String {
+      String(localized: "VerbView.sourceSwissPublic")
+    }
+
+    static var sourceFrenchGov: String {
+      String(localized: "VerbView.sourceFrenchGov")
+    }
+
+    static var sourceClaude: String {
+      String(localized: "VerbView.sourceClaude")
+    }
+
+    static func sourceWikipedia(_ article: String) -> String {
+      String(localized: "VerbView.sourceWikipedia", defaultValue: "— Wikipédia, « \(article) » (CC BY-SA 4.0)")
+    }
+
+    static var chansonHeading: String {
+      String(localized: "VerbView.chansonHeading")
+    }
+
+    static func chansonReference(laisse: String, line: Int?) -> String {
+      if let line {
+        // Interpolate the line as a bare string so no locale grouping separator appears
+        // (a line reference reads as "1658", not "1,658" / "1 658").
+        return String(localized: "VerbView.chansonReference", defaultValue: "Laisse \(laisse), Line \(String(line))")
+      } else {
+        return String(localized: "VerbView.chansonReferenceNoLine", defaultValue: "Laisse \(laisse)")
+      }
     }
   }
 

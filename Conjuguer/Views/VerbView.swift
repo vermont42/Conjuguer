@@ -14,10 +14,12 @@ struct VerbView: View {
   private let conjugations: VerbConjugations
   @State private var shouldShowCompoundTenses = false
   @State private var detailSheet: DetailSheet?
+  @State private var chansonExample: ChansonExample?
 
   init(verb: Verb) {
     self.verb = verb
     conjugations = VerbConjugations.memoized(for: verb)
+    _chansonExample = State(initialValue: ChansonData.example(for: verb))
   }
 
   var body: some View {
@@ -30,11 +32,6 @@ struct VerbView: View {
 
         overviewCard
           .scrollFade()
-
-        if let example = verb.example {
-          exampleCard(example)
-            .scrollFade()
-        }
 
         if !hasSeenColorKey {
           colorKey
@@ -64,6 +61,11 @@ struct VerbView: View {
 
         if let etymologyText = Etymology.text(for: verb.infinitif) {
           etymologyCard(etymologyText)
+            .scrollFade()
+        }
+
+        if let example = ExampleData.example(for: verb) {
+          exampleCard(example)
             .scrollFade()
         }
       }
@@ -164,23 +166,52 @@ struct VerbView: View {
     return Text(label + valuePart)
   }
 
-  private func exampleCard(_ example: String) -> some View {
+  private func exampleCard(_ example: Example) -> some View {
     VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
-      Text(L.VerbView.exampleUse)
+      Text(chansonExample == nil ? L.VerbView.exampleUse : L.VerbView.exampleUses)
         .subheadingLabel()
+        .accessibilityAddTraits(.isHeader)
 
-      Text(example)
+      Text(example.fr)
         .bodyLabel()
         .frenchPronunciation()
 
-      if let source = verb.source {
-        Text(source)
-          .smallLabel()
-          .rightAligned()
-          .frenchPronunciation()
+      Text(example.en)
+        .translationLabel()
+        .englishPronunciation()
+
+      Text(example.provenance.attribution)
+        .smallLabel()
+        .rightAligned()
+
+      if let chanson = chansonExample {
+        chansonSection(chanson)
       }
     }
     .card()
+    .accessibilityIdentifier("verb_example")
+  }
+
+  private func chansonSection(_ chanson: ChansonExample) -> some View {
+    VStack(alignment: .leading, spacing: 6) {
+      Divider()
+        .padding(.vertical, 4)
+
+      Text(L.VerbView.chansonHeading)
+        .smallLabel()
+        .accessibilityAddTraits(.isHeader)
+
+      Text(L.VerbView.chansonReference(laisse: chanson.laisse, line: chanson.line))
+        .smallLabel()
+
+      Text(chanson.of)
+        .bodyLabel()
+        .frenchPronunciation()
+
+      Text(chanson.tr)
+        .translationLabel()
+        .englishPronunciation()
+    }
   }
 
   private func etymologyCard(_ text: String) -> some View {

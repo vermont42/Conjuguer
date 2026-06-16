@@ -7,8 +7,6 @@
     <!ATTLIST verb mo CDATA #REQUIRED>
     <!ATTLIST verb ay CDATA #IMPLIED>
     <!ATTLIST verb fr CDATA #IMPLIED>
-    <!ATTLIST verb ee CDATA #IMPLIED>
-    <!ATTLIST verb so CDATA #IMPLIED>
     <!ATTLIST verb dg CDATA #IMPLIED>
 ]>
 
@@ -527,7 +525,7 @@
   <verb in="bavarder" tn="chat" mo="1-1" />
   <verb in="bavasser" tn="waffle, natter" mo="1-1" />
   <verb in="baver" tn="drool, slobber" mo="1-1" />
-  <verb in="bayer" tn="gape" mo="1-7B" dg="0" ee="bayer aux corneilles = be dumbstruck or gape" />
+  <verb in="bayer" tn="gape" mo="1-7B" dg="0" />
   <verb in="bazarder" tn="sell, sell off" mo="1-1" />
   <verb in="béatifier" tn="beatify" mo="1-1" />
   <verb in="bêcher" tn="dig with a spade, badmouth" mo="1-1" />
@@ -536,7 +534,7 @@
   <verb in="becqueter" tn="peck at, kiss" mo="1-3B" />
   <verb in="becter" tn="eat" mo="1-1" />
   <verb in="bedonner" tn="have a plump stomach, be paunchy" mo="1-1" />
-  <verb in="béer" tn="gape" mo="1-1" dg="3" ee="être bouche bée = be astonished" />
+  <verb in="béer" tn="gape" mo="1-1" dg="3" />
   <verb in="bégayer" tn="stammer" mo="1-7B" />
   <verb in="bégueter" tn="bleat" mo="1-4" />
   <verb in="bêler" tn="baa, bleat" mo="1-1" />
@@ -921,7 +919,7 @@
   <verb in="chauler" tn="whitewash" mo="1-1" />
   <verb in="chaumer" tn="clear land of stubble" mo="1-1" />
   <verb in="chausser" tn="put footwear on someone" mo="1-1" />
-  <verb in="chauvir" tn="perk up (ears of an equid)" mo="6-1A" ee="chauvir les oreilles = perk up one's ears (as an equid)" />
+  <verb in="chauvir" tn="perk up (ears of an equid)" mo="6-1A" />
   <verb in="chavirer" tn="capsize" mo="1-1" />
   <verb in="cheminer" tn="walk on, keep walking" mo="1-1" />
   <verb in="chemiser" tn="line, cover the inside surface of" mo="1-1" />
@@ -1286,7 +1284,7 @@
   <verb in="courber" tn="bend" mo="1-1" />
   <verb in="courir" tn="run" mo="6-4" fr="401" />
   <verb in="couronner" tn="crown" mo="1-1" />
-  <verb in="courre" tn="hunt" mo="6-4" dg="0" ee="chasse à courre = hunting with hounds" />
+  <verb in="courre" tn="hunt" mo="6-4" dg="0" />
   <verb in="courroucer" tn="enrage, infuriate" mo="1-2A" />
   <verb in="courser" tn="buy" mo="1-1" />
   <verb in="court-circuiter" tn="short circuit" mo="1-1" />
@@ -2852,7 +2850,7 @@
   <verb in="essuyer" tn="wipe, dry" mo="1-7A" />
   <verb in="estamper" tn="emboss, stamp" mo="1-1" />
   <verb in="estampiller" tn="stamp, mark with a stamp" mo="1-1" />
-  <verb in="ester" tn="appear in court, be, stay, remain, stand" mo="1-10" dg="0" ee="ester en justice = be a party in legal proceedings" />
+  <verb in="ester" tn="appear in court, be, stay, remain, stand" mo="1-10" dg="0" />
   <verb in="estérifier" tn="esterify" mo="1-1" />
   <verb in="esthétiser" tn="estheticize" mo="1-1" />
   <verb in="estimer" tn="estimate, calculate roughly, esteem, hold in high regard" mo="1-1" fr="197" />
@@ -3050,7 +3048,7 @@
   <verb in="fendiller" tn="crack, craze" mo="1-1" />
   <verb in="fendre" tn="split, chop (wood), crack" mo="5-1A" />
   <verb in="fenêtrer" tn="make holes for windows, install windows" mo="1-1" />
-  <verb in="férir" tn="hit, strike" mo="2-4" dg="0" ee="sans coup férir = without encountering any opposition" />
+  <verb in="férir" tn="hit, strike" mo="2-4" dg="0" />
   <verb in="ferler" tn="furl, roll up (a sail)" mo="1-1" />
   <verb in="fermenter" tn="ferment" mo="1-1" />
   <verb in="fermer" tn="shut, close" mo="1-1" fr="255" />
@@ -3070,7 +3068,7 @@
   <verb in="fiabiliser" tn="make more reliable" mo="1-1" />
   <verb in="fiancer" tn="get engaged to be married" mo="1-2A" />
   <verb in="ficeler" tn="tie up, to truss" mo="1-3A" />
-  <verb in="fiche" tn="not care about" re="t" mo="1-11" dg="14" ee="je m'en fiche = I don't give a darn about it" />
+  <verb in="fiche" tn="not care about" re="t" mo="1-11" dg="14" />
   <verb in="ficher" tn="put something on file" mo="1-1" />
   <verb in="fidéliser" tn="loyalize, keep loyal" mo="1-1" />
   <verb in="fienter" tn="defecate" mo="1-1" />
@@ -3138,9 +3136,9 @@
   <verb in="fondre" tn="melt, melt down, smelt" mo="5-1A" fr="733" />
   <verb in="forcer" tn="force" mo="1-2A" fr="459" />
   <verb in="forcir" tn="become stronger, fatter" mo="2-1" />
-  <verb in="forclore" tn="debar" mo="5-27A" dg="15" ee="forclos = foreclosed or shut out" />
+  <verb in="forclore" tn="debar" mo="5-27A" dg="15" />
   <verb in="forer" tn="bore, drill" mo="1-1" />
-  <verb in="forfaire" tn="forfeit, commit a crime, cause to forfeit" mo="5-23" dg="15" ee="être forfait = have forfeited or have withdrawn" />
+  <verb in="forfaire" tn="forfeit, commit a crime, cause to forfeit" mo="5-23" dg="15" />
   <verb in="forger" tn="fashion metal with fire and a hammer, forge" mo="1-2B" fr="967" />
   <verb in="forjeter" tn="protrude, bulge" mo="1-3B" />
   <verb in="forlancer" tn="flush out" mo="1-2A" />
@@ -3289,7 +3287,7 @@
   <verb in="gérer" tn="manage" mo="1-5" fr="198" />
   <verb in="germaniser" tn="Germanize" mo="1-1" />
   <verb in="germer" tn="germinate" mo="1-1" />
-  <verb in="gésir" tn="be located, lie dead, be buried" mo="5-28" dg="17" ee="ci-gît = here lies (tombstone)" />
+  <verb in="gésir" tn="be located, lie dead, be buried" mo="5-28" dg="17" />
   <verb in="gesticuler" tn="gesticulate" mo="1-1" />
   <verb in="gicler" tn="squirt, spurt" mo="1-1" />
   <verb in="gifler" tn="slap (on the face)" mo="1-1" />
@@ -3712,7 +3710,7 @@
   <verb in="irriter" tn="annoy, irritate" mo="1-1" />
   <verb in="islamiser" tn="Islamize, Islamicize" mo="1-1" />
   <verb in="isoler" tn="isolate, insulate" mo="1-1" fr="480" />
-  <verb in="issir" tn="leave, exit, go out, get out, escape, produce" ay="e" mo="6-8" fr="157" dg="6" ee="Il est issu de la famille des Bourbons. = He sprang from the Bourbon family." />
+  <verb in="issir" tn="leave, exit, go out, get out, escape, produce" ay="e" mo="6-8" fr="157" dg="6" />
   <verb in="italianiser" tn="Italianize" mo="1-1" />
   <verb in="itérer" tn="iterate" mo="1-5" />
   <verb in="ixer" tn="X-rate, make X-rated" mo="1-1" />
@@ -4273,8 +4271,8 @@
   <verb in="ouatiner" tn="quilt" mo="1-1" />
   <verb in="oublier" tn="forget" mo="1-1" fr="147" />
   <verb in="ouiller" tn="add wine to a barrel to replace evaporated wine" mo="1-1" />
-  <verb in="ouïr" tn="listen, hear" mo="2-3B" dg="19" ex="modern" ee="ouï-dire = hearsay" />
-  <verb in="ouïr" tn="listen, hear" mo="2-5" dg="19" ex="trad." ee="ouï-dire = hearsay" />
+  <verb in="ouïr" tn="listen, hear" mo="2-3B" dg="19" ex="modern" />
+  <verb in="ouïr" tn="listen, hear" mo="2-5" dg="19" ex="trad." />
   <verb in="ourdir" tn="warp, plot" mo="2-1" />
   <verb in="ourler" tn="hem" mo="1-1" />
   <verb in="outiller" tn="equip, tool up" mo="1-1" />
@@ -4533,7 +4531,7 @@
   <verb in="pleuvasser" tn="rain a little or intermittently" mo="1-1" />
   <verb in="pleuviner" tn="drizzle" mo="1-1" dg="22" />
   <verb in="pleuvioter" tn="drizzle" mo="1-1" dg="22" />
-  <verb in="pleuvoir" tn="rain" mo="4-4" dg="24" ee="Les plaisanteries et les compliments crus pleuvaient... = Jokes and raw compliments were raining down..." so="Isabelle Eberhardt, Yasmina" />
+  <verb in="pleuvoir" tn="rain" mo="4-4" dg="24" />
   <verb in="pleuvoter" tn="drizzle" mo="1-1" />
   <verb in="plier" tn="fold, fold up, bend" mo="1-1" fr="909" />
   <verb in="plisser" tn="fold over, pleat, wrinkle, crease" mo="1-1" />
