@@ -8,8 +8,6 @@
 import Foundation
 
 extension Double {
-  // Reuse one formatter rather than allocating per call; its locale is set each time so the
-  // caller-supplied locale (defaulting to .current) is still honored.
   private static let numberCorrectFormatter: NumberFormatter = {
     let formatter = NumberFormatter()
     formatter.numberStyle = .decimal

@@ -13,7 +13,6 @@ extension URL {
   }
 
   var hasExpectedNumberOfDeeplinkComponents: Bool {
-    // A well-formed deeplink path is "/<entity-id>", which URL splits into ["/", "<entity-id>"].
     pathComponents.count == URL.deeplinkComponentCount
   }
 

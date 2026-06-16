@@ -35,9 +35,6 @@ struct VerbConjugations {
     simpleSections = Self.sections(verb: verb, specs: Self.simpleSpecs)
   }
 
-  // Conjugating ~50 forms and building their attributed strings is pure for a given verb, so
-  // memoize it: VerbView re-inits on every parent body re-evaluation and would otherwise redo
-  // all of this each time. Keyed by infinitifWithPossibleExtraLetters (the unique verb key).
   @MainActor private static var cache: [String: VerbConjugations] = [:]
 
   @MainActor static func memoized(for verb: Verb) -> VerbConjugations {

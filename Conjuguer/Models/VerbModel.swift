@@ -131,10 +131,6 @@ struct VerbModel: Identifiable, Hashable {
 
   private let andParentIdAreNil = " _and_ parentId are nil."
 
-  // Resolves a group property that is inherited verbatim from the nearest ancestor that
-  // defines it (no merging), trapping at the root if none does. Only the three uniform
-  // local-else-parent-else-fatalError walks fold into this; participeEndingRecursive falls
-  // back to "" and stemAlterationsRecursive merges the chain, so they stay bespoke.
   private func inheritedGroup<T>(_ keyPath: KeyPath<VerbModel, T?>, name: String) -> T {
     if let value = self[keyPath: keyPath] {
       return value

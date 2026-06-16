@@ -586,9 +586,9 @@ file.
 > bootstrap (`.playback`, `.mixWithOthers`, logs failures); `SoundPlayer.init`'s setCategory was
 > removed and `SoundPlayer.setup`/`Utterer.setup` both call it. `Utterer.defaultLocaleString` deleted
 > (setup uses `englishLocaleString`). RatingsFetcher: `fetchRatingsDescription` is now a `@MainActor`
-> `async -> String` using `URLSession.data(for:)` + a `Decodable LookupResponse` + `String(format:)`,
-> and the exhortation is localized (`L.RatingsFetcher.exhortation`, added to both `.strings`);
-> `SettingsView` calls it from `.task`. **This surfaced a latent stub bug** — `URLProtocolStub` never
+> `async -> String` using `URLSession.data(for:)` + a `Decodable LookupResponse` + `String(format:)`;
+> `SettingsView` calls it from `.task`. (The trailing `" Ajoutez la vôtre."` exhortation is left
+> hardcoded French in every locale — that's intentional, not a bug, so it was *not* localized.) **This surfaced a latent stub bug** — `URLProtocolStub` never
 > sent a `URLResponse`, which the legacy `dataTask` tolerated but the async `data(for:)` API traps on
 > (SIGILL); the stub now sends a `200` `HTTPURLResponse`, fixing both paths. GameCenterReal: commented
 > `print`s removed; `leaderboardIdentifier` is now `String?` (no `"ERROR"` sentinel) with a `guard let`

@@ -37,7 +37,7 @@ enum RatingsFetcher {
 
   @MainActor static func fetchRatingsDescription() async -> String {
     let request = URLRequest(url: RatingsFetcher.iTunesURL)
-    let exhortation = L.RatingsFetcher.exhortation
+    let exhortation = " Ajoutez la vôtre." // Not a bug.
 
     guard
       let (data, _) = try? await Current.session.data(for: request),

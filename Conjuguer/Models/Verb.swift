@@ -12,9 +12,6 @@ struct Verb: Identifiable, Hashable {
   static let minVerbLength = 4
   static let maxFrequency = 981
 
-  // The dictionary key uniquely identifies a verb, so use it as a stable Identifiable id.
-  // A fresh UUID per parse would also leak into the synthesized Hashable/Equatable, making
-  // two parses of the same verb unequal.
   var id: String { infinitifWithPossibleExtraLetters }
   let infinitif: String
   let translation: String
@@ -28,8 +25,6 @@ struct Verb: Identifiable, Hashable {
   let source: String?
   let defectGroupId: String?
 
-  // This is nonisolated so the verb XML parse can construct verbs off the main actor.
-  // The parsed values are published into the main-actor `verbs` store afterward.
   nonisolated init(
     infinitif: String,
     translation: String,

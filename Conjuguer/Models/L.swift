@@ -584,10 +584,6 @@ enum L {
     static var multipleRatings: String {
       String(localized: "RatingsFetcher.multipleRatings")
     }
-
-    static var exhortation: String {
-      String(localized: "RatingsFetcher.exhortation")
-    }
   }
 
   enum ImageInfo {
