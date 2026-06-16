@@ -7,14 +7,9 @@
 
 import Foundation
 
-nonisolated class VerbParser: NSObject, XMLParserDelegate {
-  private var parser: XMLParser?
+nonisolated class VerbParser: XMLDataParser {
   private let verbTag = "verb"
   private var verbs: [String: Verb] = [:]
-  // The parsed verb models, threaded through locally rather than via the main-actor
-  // `VerbModel.models` store, so the whole parse can run off the main actor. Each
-  // verb appends itself to its model's verb list here; the result is returned alongside
-  // the verbs and published into the static stores on the main actor.
   private var models: [String: VerbModel] = [:]
   private var currentVerb = ""
   private var currentTranslation = ""
@@ -28,20 +23,14 @@ nonisolated class VerbParser: NSObject, XMLParserDelegate {
   private var currentSource: String?
   private var currentDefectGroupId: String?
 
-  override init() {
-    super.init()
-    let bundle = Bundle(for: VerbParser.self)
-    if let url = bundle.url(forResource: "verbs", withExtension: "xml") {
-      parser = XMLParser(contentsOf: url)
-      if parser == nil {
-        return
-      }
-      parser?.delegate = self
-    }
+  init() {
+    super.init(resource: "verbs")
   }
 
-  // Parses verbs.xml, associating each verb with its model in the supplied `models` dict,
-  // and returns both the verbs and the updated models, with their verb lists populated.
+  init(xmlString: String) {
+    super.init(data: Data(xmlString.utf8))
+  }
+
   func parse(models: [String: VerbModel]) -> (verbs: [String: Verb], models: [String: VerbModel]) {
     self.models = models
     parser?.parse()
@@ -50,23 +39,18 @@ nonisolated class VerbParser: NSObject, XMLParserDelegate {
 
   func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String]) {
     if elementName == verbTag {
-      if let currentVerb = attributeDict["in"] {
-        self.currentVerb = currentVerb
-      } else {
-        fatalError("No infinitif specified.")
-      }
+      currentElementIsValid = true
 
-      if let translation = attributeDict["tn"] {
-        currentTranslation = translation
-      } else {
-        fatalError("No translation specified.")
+      guard
+        let infinitif = require("in", from: attributeDict, element: verbTag),
+        let translation = require("tn", from: attributeDict, element: verbTag),
+        let model = require("mo", from: attributeDict, element: verbTag)
+      else {
+        return
       }
-
-      if let model = attributeDict["mo"] {
-        currentModel = model
-      } else {
-        fatalError("No model specified.")
-      }
+      currentVerb = infinitif
+      currentTranslation = translation
+      currentModel = model
 
       if let auxiliary = attributeDict["ay"] {
         currentAuxiliary = auxiliary
@@ -113,6 +97,14 @@ nonisolated class VerbParser: NSObject, XMLParserDelegate {
 
   func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
     if elementName == verbTag {
+      defer {
+        resetCurrent()
+      }
+
+      guard currentElementIsValid else {
+        return
+      }
+
       let auxiliary: Auxiliary
 
       if currentIsReflexive {
@@ -149,18 +141,20 @@ nonisolated class VerbParser: NSObject, XMLParserDelegate {
         verbs.append(currentVerbWithPossibleExtraLetters)
         models[currentModel]?.verbs = verbs
       }
-
-      currentVerb = ""
-      currentTranslation = ""
-      currentModel = ""
-      currentAuxiliary = nil
-      currentIsReflexive = false
-      currentHasAspiratedH = false
-      currentFrequency = nil
-      currentExtraLetters = nil
-      currentExample = nil
-      currentSource = nil
-      currentDefectGroupId = nil
     }
+  }
+
+  private func resetCurrent() {
+    currentVerb = ""
+    currentTranslation = ""
+    currentModel = ""
+    currentAuxiliary = nil
+    currentIsReflexive = false
+    currentHasAspiratedH = false
+    currentFrequency = nil
+    currentExtraLetters = nil
+    currentExample = nil
+    currentSource = nil
+    currentDefectGroupId = nil
   }
 }

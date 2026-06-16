@@ -7,8 +7,7 @@
 
 import Foundation
 
-nonisolated class DefectGroupParser: NSObject, XMLParserDelegate {
-  private var parser: XMLParser?
+nonisolated class DefectGroupParser: XMLDataParser {
   private let defectGroupTag = "defectGroup"
   private var defectGroups: [String: DefectGroup] = [:]
   private var currentId = ""
@@ -17,16 +16,12 @@ nonisolated class DefectGroupParser: NSObject, XMLParserDelegate {
   private var currentUsesOnly: String?
   private var currentDoesntUse: String?
 
-  override init() {
-    super.init()
-    let bundle = Bundle(for: DefectGroupParser.self)
-    if let url = bundle.url(forResource: "defectGroups", withExtension: "xml") {
-      parser = XMLParser(contentsOf: url)
-      if parser == nil {
-        return
-      }
-      parser?.delegate = self
-    }
+  init() {
+    super.init(resource: "defectGroups")
+  }
+
+  init(xmlString: String) {
+    super.init(data: Data(xmlString.utf8))
   }
 
   func parse() -> [String: DefectGroup] {
@@ -36,23 +31,18 @@ nonisolated class DefectGroupParser: NSObject, XMLParserDelegate {
 
   func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String]) {
     if elementName == defectGroupTag {
-      if let id = attributeDict["id"] {
-        currentId = id
-      } else {
-        fatalError("No ID specified.")
-      }
+      currentElementIsValid = true
 
-      if let descriptionEn = attributeDict["en"] {
-        currentDescriptionEn = descriptionEn
-      } else {
-        fatalError("No English description specified.")
+      guard
+        let id = require("id", from: attributeDict, element: defectGroupTag),
+        let descriptionEn = require("en", from: attributeDict, element: defectGroupTag),
+        let descriptionFr = require("fr", from: attributeDict, element: defectGroupTag)
+      else {
+        return
       }
-
-      if let descriptionFr = attributeDict["fr"] {
-        currentDescriptionFr = descriptionFr
-      } else {
-        fatalError("No French description specified.")
-      }
+      currentId = id
+      currentDescriptionEn = descriptionEn
+      currentDescriptionFr = descriptionFr
 
       if let usesOnly = attributeDict["uo"] {
         currentUsesOnly = usesOnly
@@ -66,11 +56,20 @@ nonisolated class DefectGroupParser: NSObject, XMLParserDelegate {
 
   func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
     if elementName == defectGroupTag {
+      defer {
+        resetCurrent()
+      }
+
+      guard currentElementIsValid else {
+        return
+      }
+
       if
         let currentUsesOnly = currentUsesOnly,
         let currentDoesntUse = currentDoesntUse
       {
-        fatalError("For ID \(currentId), both usesOnly \(currentUsesOnly) and doesntUse \(currentDoesntUse) were non-nil.")
+        print("Skipping <\(defectGroupTag)> \(currentId): both usesOnly (\(currentUsesOnly)) and doesntUse (\(currentDoesntUse)) were specified.")
+        return
       }
 
       defectGroups[currentId] = DefectGroup(
@@ -80,12 +79,14 @@ nonisolated class DefectGroupParser: NSObject, XMLParserDelegate {
         usesOnly: currentUsesOnly,
         doesntUse: currentDoesntUse
       )
-
-      currentId = ""
-      currentDescriptionEn = ""
-      currentDescriptionFr = ""
-      currentUsesOnly = nil
-      currentDoesntUse = nil
     }
+  }
+
+  private func resetCurrent() {
+    currentId = ""
+    currentDescriptionEn = ""
+    currentDescriptionFr = ""
+    currentUsesOnly = nil
+    currentDoesntUse = nil
   }
 }

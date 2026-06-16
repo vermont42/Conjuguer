@@ -10,124 +10,47 @@ import XCTest
 
 @MainActor
 class CompoundTenseTests: XCTestCase {
-  private func assertFeminine(infinitif: String, tense: Tense, expected: String) {
-    T.testConjugation(infinitif: infinitif, tense: tense, expected: expected, extraLetters: nil, pronounGender: .feminine)
+  private func assertFeminine(
+    _ infinitif: String,
+    _ tenseBuilder: (PersonNumber) -> Tense,
+    _ expected: [String],
+    personNumbers: [PersonNumber] = PersonNumber.allCases
+  ) {
+    XCTAssertEqual(expected.count, personNumbers.count, "Expected one conjugation per person-number.")
+    for (personNumber, conjugation) in zip(personNumbers, expected) {
+      T.testConjugation(infinitif: infinitif, tense: tenseBuilder(personNumber), expected: conjugation, extraLetters: nil, pronounGender: .feminine)
+    }
   }
 
   func testCompoundTenses() {
     let aller = "aller"
     let avoir = "avoir"
 
-    var personNumbersIndex = 0
+    assertFeminine(aller, Tense.passéComposé, ["SUIs allée", "Es allée", "ESt allée", "SOMMEs allées", "êteS allées", "SOnt allées"])
+    assertFeminine(avoir, Tense.passéComposé, ["aI EU", "As EU", "A EU", "avons EU", "avez EU", "Ont EU"])
 
-    for conjugation in ["SUIs allée", "Es allée", "ESt allée", "SOMMEs allées", "êteS allées", "SOnt allées"] {
-      assertFeminine(infinitif: aller, tense: .passéComposé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
+    assertFeminine(aller, Tense.plusQueParfait, ["Étais allée", "Étais allée", "Était allée", "Étions allées", "Étiez allées", "Étaient allées"])
+    assertFeminine(avoir, Tense.plusQueParfait, ["avais EU", "avais EU", "avait EU", "avions EU", "aviez EU", "avaient EU"])
 
-    for conjugation in ["aI EU", "As EU", "A EU", "avons EU", "avez EU", "Ont EU"] {
-      assertFeminine(infinitif: avoir, tense: .passéComposé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
+    assertFeminine(aller, Tense.passéAntérieur, ["Fus allée", "Fus allée", "Fut allée", "Fûmes allées", "Fûtes allées", "Furent allées"])
+    assertFeminine(avoir, Tense.passéAntérieur, ["Eus EU", "Eus EU", "Eut EU", "Eûmes EU", "Eûtes EU", "Eurent EU"])
 
-    for conjugation in ["Étais allée", "Étais allée", "Était allée", "Étions allées", "Étiez allées", "Étaient allées"] {
-      assertFeminine(infinitif: aller, tense: .plusQueParfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
+    assertFeminine(aller, Tense.passéSurcomposé, ["aI ÉtÉ allée", "As ÉtÉ allée", "A ÉtÉ allée", "avons ÉtÉ allées", "avez ÉtÉ allées", "Ont ÉtÉ allées"])
+    assertFeminine(avoir, Tense.passéSurcomposé, ["aI EU EU", "As EU EU", "A EU EU", "avons EU EU", "avez EU EU", "Ont EU EU"])
 
-    for conjugation in ["avais EU", "avais EU", "avait EU", "avions EU", "aviez EU", "avaient EU"] {
-      assertFeminine(infinitif: avoir, tense: .plusQueParfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
+    assertFeminine(aller, Tense.futurAntérieur, ["SErai allée", "SEras allée", "SEra allée", "SErons allées", "SErez allées", "SEront allées"])
+    assertFeminine(avoir, Tense.futurAntérieur, ["aUrai EU", "aUras EU", "aUra EU", "aUrons EU", "aUrez EU", "aUront EU"])
 
-    for conjugation in ["Fus allée", "Fus allée", "Fut allée", "Fûmes allées", "Fûtes allées", "Furent allées"] {
-      assertFeminine(infinitif: aller, tense: .passéAntérieur(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
+    assertFeminine(aller, Tense.conditionnelPassé, ["SErais allée", "SErais allée", "SErait allée", "SErions allées", "SEriez allées", "SEraient allées"])
+    assertFeminine(avoir, Tense.conditionnelPassé, ["aUrais EU", "aUrais EU", "aUrait EU", "aUrions EU", "aUriez EU", "aUraient EU"])
 
-    for conjugation in ["Eus EU", "Eus EU", "Eut EU", "Eûmes EU", "Eûtes EU", "Eurent EU"] {
-      assertFeminine(infinitif: avoir, tense: .passéAntérieur(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
+    assertFeminine(aller, Tense.subjonctifPassé, ["SOIS allée", "SOIs allée", "SOIT allée", "SOYons allées", "SOYez allées", "SOIent allées"])
+    assertFeminine(avoir, Tense.subjonctifPassé, ["aIE EU", "aIES EU", "aIT EU", "aYons EU", "aYez EU", "aIENT EU"])
 
-    for conjugation in ["aI ÉtÉ allée", "As ÉtÉ allée", "A ÉtÉ allée", "avons ÉtÉ allées", "avez ÉtÉ allées", "Ont ÉtÉ allées"] {
-      assertFeminine(infinitif: aller, tense: .passéSurcomposé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
+    assertFeminine(aller, Tense.subjonctifPlusQueParfait, ["Fusse allée", "Fusses allée", "Fût allée", "Fussions allées", "Fussiez allées", "Fussent allées"])
+    assertFeminine(avoir, Tense.subjonctifPlusQueParfait, ["Eusse EU", "Eusses EU", "Eût EU", "Eussions EU", "Eussiez EU", "Eussent EU"])
 
-    for conjugation in ["aI EU EU", "As EU EU", "A EU EU", "avons EU EU", "avez EU EU", "Ont EU EU"] {
-      assertFeminine(infinitif: avoir, tense: .passéSurcomposé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    for conjugation in ["SErai allée", "SEras allée", "SEra allée", "SErons allées", "SErez allées", "SEront allées"] {
-      assertFeminine(infinitif: aller, tense: .futurAntérieur(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    for conjugation in ["aUrai EU", "aUras EU", "aUra EU", "aUrons EU", "aUrez EU", "aUront EU"] {
-      assertFeminine(infinitif: avoir, tense: .futurAntérieur(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    for conjugation in ["SErais allée", "SErais allée", "SErait allée", "SErions allées", "SEriez allées", "SEraient allées"] {
-      assertFeminine(infinitif: aller, tense: .conditionnelPassé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    for conjugation in ["aUrais EU", "aUrais EU", "aUrait EU", "aUrions EU", "aUriez EU", "aUraient EU"] {
-      assertFeminine(infinitif: avoir, tense: .conditionnelPassé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    for conjugation in ["SOIS allée", "SOIs allée", "SOIT allée", "SOYons allées", "SOYez allées", "SOIent allées"] {
-      assertFeminine(infinitif: aller, tense: .subjonctifPassé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    for conjugation in ["aIE EU", "aIES EU", "aIT EU", "aYons EU", "aYez EU", "aIENT EU"] {
-      assertFeminine(infinitif: avoir, tense: .subjonctifPassé(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    for conjugation in ["Fusse allée", "Fusses allée", "Fût allée", "Fussions allées", "Fussiez allées", "Fussent allées"] {
-      assertFeminine(infinitif: aller, tense: .subjonctifPlusQueParfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    for conjugation in ["Eusse EU", "Eusses EU", "Eût EU", "Eussions EU", "Eussiez EU", "Eussent EU"] {
-      assertFeminine(infinitif: avoir, tense: .subjonctifPlusQueParfait(PersonNumber.allCases[personNumbersIndex]), expected: conjugation)
-      personNumbersIndex += 1
-      personNumbersIndex %= PersonNumber.allCases.count
-    }
-
-    var impératifPersonNumbersIndex = 0
-
-    for conjugation in ["SOIs allée", "SOYons allées", "SOYez allées"] {
-      assertFeminine(infinitif: aller, tense: .impératifPassé(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
-      impératifPersonNumbersIndex += 1
-      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
-    }
-
-    for conjugation in ["aIE EU", "aYons EU", "aYez EU"] {
-      assertFeminine(infinitif: avoir, tense: .impératifPassé(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation)
-      impératifPersonNumbersIndex += 1
-      impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
-    }
+    assertFeminine(aller, Tense.impératifPassé, ["SOIs allée", "SOYons allées", "SOYez allées"], personNumbers: PersonNumber.impératifPersonNumbers)
+    assertFeminine(avoir, Tense.impératifPassé, ["aIE EU", "aYons EU", "aYez EU"], personNumbers: PersonNumber.impératifPersonNumbers)
   }
 }

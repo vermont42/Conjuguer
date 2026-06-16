@@ -15,17 +15,19 @@ nonisolated struct StemAlteration: Hashable {
   let isInherited: Bool // example: vous dîtes/prédisez (false in that case)
   static let capitalizedFirstLetter = "@" // example: devoir -> Du
 
-  init(xmlString: String) {
+  init?(xmlString: String) {
     let components = xmlString.components(separatedBy: VerbModelParser.xmlSeparator)
 
     guard components.count >= 3 else {
-      fatalError("Partial-alteration XML string \(xmlString) did not have enough components.")
+      print("Skipping partial alteration: XML string \(xmlString) did not have enough components.")
+      return nil
     }
 
     let startIndexOfAlterationsInXml: Int
     if let convertedStartIndexFromLast = Int(components[0]) {
       guard let convertedCharsToReplaceCount = Int(components[1]) else {
-        fatalError(components[1] + " is not a valid Int.")
+        print("Skipping partial alteration \(xmlString): \(components[1]) is not a valid Int.")
+        return nil
       }
       type = .indexBased(startIndexFromLast: convertedStartIndexFromLast, charsToReplaceCount: convertedCharsToReplaceCount)
       charsToUse = components[2]
@@ -50,7 +52,8 @@ nonisolated struct StemAlteration: Hashable {
         isInheritedAlteration = false
       default:
         guard let tenses = Tense.tensesForShorthand(alteration) else {
-          fatalError("Unrecognized partial alteration \(alteration) found.")
+          print("Skipping partial alteration \(xmlString): unrecognized component \(alteration).")
+          return nil
         }
         set.formUnion(tenses)
       }
@@ -80,12 +83,9 @@ nonisolated struct StemAlteration: Hashable {
   }
 
   static func alterationsFor(xmlString: String) -> [StemAlteration] {
-    let components = xmlString.components(separatedBy: VerbModelParser.alterationSeparator)
-    var alterations: [StemAlteration] = []
-    components.forEach {
-      alterations.append(StemAlteration(xmlString: $0))
-    }
-    return alterations
+    xmlString
+      .components(separatedBy: VerbModelParser.alterationSeparator)
+      .compactMap { StemAlteration(xmlString: $0) }
   }
 }
 

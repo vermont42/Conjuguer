@@ -25,11 +25,11 @@ struct ModelBrowseView: View {
         VStack {
           Picker("", selection: $store.sort) {
             ForEach(ModelSort.allCases, id: \.self) { type in
-              Text(L.displayNameForModelSort(type)).tag(type)
+              Text(type.displayName).tag(type)
             }
           }
           .pickerStyle(.segmented)
-          .accessibilityLabel(Text(L.ModelBrowseView.sortOrder))
+          .accessibilityLabel(Text(L.BrowseView.sortOrder))
 
           List(searchResults) { modelAndDecorator in
             NavigationLink(value: modelAndDecorator.model) {

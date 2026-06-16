@@ -5,8 +5,6 @@
   Created by Josh Adams on 8/1/21.
 */
 
-"alphabetical" = "Alphabetical";
-
 "Navigation.verbs" = "Verbs";
 "Navigation.models" = "Models";
 "Navigation.quiz" = "Quiz";
@@ -16,10 +14,10 @@
 "Navigation.input" = "Input";
 "Navigation.done" = "Done";
 
-"VerbBrowseView.sortOrder" = "Sort order";
+"BrowseView.sortOrder" = "Sort order";
+
 "VerbBrowseView.searchPrompt" = "Search verbs";
 
-"ModelBrowseView.sortOrder" = "Sort order";
 "ModelBrowseView.searchPrompt" = "Search models";
 
 "InfoBrowseView.sectionAbout" = "About";
@@ -1143,6 +1141,8 @@ Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’anci
 "ImageInfo.joshAdams" = "photograph of Josh Adams taken near Vacaville, California in 2021";
 
 "VerbSort.frequency" = "Frequency";
+"VerbSort.alphabetical" = "Alphabetical";
 
 "ModelSort.irregularity" = "Irregularity";
+"ModelSort.alphabetical" = "Alphabetical";
 "ModelSort.identifier" = "Identifier";

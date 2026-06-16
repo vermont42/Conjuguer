@@ -541,21 +541,37 @@ which is why `CompoundTenseTests` must mutate global state (`CompoundTenseTests.
 and why the conjugation engine isn't a pure function. Pass `PronounGender` into the few
 call sites that need it. Aligns with the issue-#27 `@Environment` migration direction.
 
-### 27. XML parsers share an unextracted scaffold
+### 27. XML parsers share an unextracted scaffold ✅ DONE (Batch 7)
 **Found by:** OH #9, FM §2.8 · **Effort:** M
 
-`VerbParser` / `VerbModelParser` / `DefectGroupParser` repeat the bundle-URL/XMLParser
-init, `current*` accumulator fields, required-attribute `fatalError`s, and end-element
-reset dance. A small base class + `require(_:in:)` attribute helper shrinks each to its
-element mapping and centralizes error handling (ties into item 17's fatalError policy;
-`FrequencyParser` is already gone via item 12). Parsers are untested — see item 33.
+> **Batch 7 resolution.** New `XMLDataParser` base (`NSObject, XMLParserDelegate`) owns the
+> bundle-URL/`XMLParser` wiring (`init(resource:)`), a `currentElementIsValid` flag, and a
+> `require(_:from:element:)` helper that logs-and-skips a missing required attribute instead of
+> trapping. The three parsers now subclass it: each `init()` is a one-line `super.init(resource:)`,
+> each `didStartElement` validates required attrs through `require` (guard-return on miss), and each
+> `didEndElement` `guard currentElementIsValid` before constructing, with the per-element reset moved
+> into a `resetCurrent()` run via `defer`. This closes the **item 17 parser remainder**: the
+> required-attribute `fatalError`s in all three parsers, `StemAlteration.init`'s three data-driven traps
+> (now an `init?` that `alterationsFor` `compactMap`s), `DefectGroupParser`'s both-`uo`-and-`du` trap,
+> and `Conjugator.moveCircumflexIfNeeded`'s empty-stem trap are all downgraded to recoverable
+> skip-and-log (matching the existing `verbsWithDeepLinks`/`AudioSession` `print` convention). Genuine
+> programmer-invariant traps (`rawConjugation`, `VerbModel.model(id:)`, `nousPrésentStem`) were kept. A
+> test-only `init(data:)` / `init(xmlString:)` seam lets the new `ParserTests` exercise the skip paths
+> on in-memory documents without shipping fixtures (see item 33). The shipped XML is well-formed, so
+> these are purely defensive; the golden `VerbModelTests` (full real parse) stay green. 129 tests green.
 
 ---
 
 ## Tier E — Modernization and polish
 
-### 28. Retire the legacy `NSAttributedString` pipeline
+### 28. Retire the legacy `NSAttributedString` pipeline ⏸️ DEFERRED (Batch 7)
 **Found by:** OM #12, FM §3.5 (deepest analysis), OH #13 (parser note) · **Effort:** L
+
+> **Batch 7 note.** Deliberately deferred (owner's call) as the largest, most behavior-sensitive item:
+> it migrates the shipped Info-article markup language (`` ` ``-subheadings, `~bold~`, `%links%`,
+> `$conjugations$`) off `UITextView`/`NSAttributedString` and must re-home the tappable in-app
+> deep-links (`TextViewDelegate` → `Current.handleInAppURL`) onto SwiftUI's link handling. Schedule as
+> its own PR. The rest of Batch 7 (items 27, 29-keys, 33) shipped without it.
 
 Two parallel "color the irregular letters" systems: modern `AttributedString` (
 `ConjugationText.swift`, used by verb/model views) and the legacy
@@ -568,8 +584,25 @@ Migrate Info text to `AttributedString` (the `etymologyAttributedString` pattern
 `StringExtensions.swift:33-44`, shows the house style), then delete the whole legacy path
 including its five `fatalError`s. Largest single item; schedule deliberately.
 
-### 29. `L.swift` (618 lines) — String Catalog and key hygiene
+### 29. `L.swift` (618 lines) — String Catalog and key hygiene ✅ DONE (Batch 7 — key hygiene; catalog migration + `*WithColon` format-style deferred)
 **Found by:** OH #7 (catalog migration — unique); key inconsistency also FM §6 · **Effort:** L (catalog) / S (keys)
+
+> **Batch 7 resolution (the S key-hygiene part).** The bare `"alphabetical"` key (shared by both sort
+> enums, the drift hazard) is gone — replaced by namespaced `VerbSort.alphabetical` / `ModelSort.alphabetical`
+> keys in both `.strings` files. `displayNameForVerbSort`/`displayNameForModelSort` moved off `L`'s static
+> funcs onto `var displayName` on the `VerbSort`/`ModelSort` enums (delegating to new nested `L.VerbSort` /
+> `L.ModelSort` string enums), mirroring the existing `QuizDifficulty.localizedDifficulty` → `L.QuizDifficulty`
+> shape; the two browse views call `type.displayName`. The duplicated browse `sortOrder` string ("Sort order"
+> on both screens) folded into one shared `L.BrowseView.sortOrder` key. Verified in the simulator: the verb
+> two-segment and model three-segment sort pickers render the namespaced strings and sort correctly
+> (`docs/screenshots/…batch7-verb-sort.png`, `…batch7-model-sort2.png`). SwiftLint `--strict` clean; 129 tests green.
+>
+> **Deferred:** (1) the **`.xcstrings` String Catalog migration** (the L part — "long term" per the item;
+> owner deferred it with item 28). (2) the **`*WithColon` format-style conversion** (FM §6): several
+> `…WithColon` labels are used *both* standalone (e.g. `Utterer.utter(L.QuizView.verbWithColon, …)`,
+> `Text(L.QuizView.scoreWithColon)`) *and* interpolated with a value, so a clean format-string conversion
+> ("Score: %@") is more than the S-sized key cleanup and pairs naturally with the catalog migration that
+> centralizes format strings. Left for that PR.
 
 Short term: normalize the bare `"alphabetical"` key shared by both sort enums
 (`L.swift:604, 613`) into namespaced keys; fold duplicated browse strings; move
@@ -674,8 +707,21 @@ section lists `frequencies.xml` as loaded at startup — it isn't (item 12 /
 
 ## Tier F — Tests
 
-### 33. Close the test gaps around everything above
+### 33. Close the test gaps around everything above ◐ ONGOING (parser tests + CompoundTenseTests helper landed Batch 7)
 **Found by:** OH #12, FM §5 (complementary lists) · **Effort:** M–L, amortized
+
+> **Batch 7 progress.** Two pieces landed alongside item 27. (1) **Parser tests** — new `ParserTests`
+> (7 cases) exercises the now-non-fatal malformed-input paths: a verb/model/defectGroup missing a
+> required attribute is skipped while valid siblings survive, malformed stem alterations are dropped,
+> a both-`uo`-and-`du` defect group is skipped, and parser state resets between elements. (2) The
+> OH-only **`CompoundTenseTests` refactor** — the 16 hand-rolled wraparound loops (each cycling
+> `PersonNumber.allCases` from index 0 via a pointless `%=`) collapsed to a single
+> `assertFeminine(_:_:_:personNumbers:)` helper taking the enum case as a `PersonNumber → Tense`
+> constructor and `zip`ping persons with expected forms. **Skipped (documented):** the `DeeplinkTests`
+> "derive fixtures from data" critique — hardcoded `parler`/`4-2B`/`Info.infos[2]` are clearer than
+> derived fixtures for a routing test, with no real robustness gain. The `VerbModelTests`
+> regenerate-vs-table-driven debate (5,530 generated lines) is untouched. Earlier batches already added
+> `ConjugationResultTests`/`SettingsTests`/`DefectGroupTests`/`QuizTests`/`FuturStemsTests`. 129 tests green.
 
 The generated `VerbModelTests` (5,530 lines) gives the engine superb golden coverage; the
 code *around* it — where every verified bug in Tier A lives — has none:
@@ -745,9 +791,14 @@ Tests-first where a batch touches scoring/persistence logic.
    typos (Batch 1 had reported them fixed but hadn't), folded into the InputView rewrite. Found
    and fixed a latent `URLProtocolStub` bug (no `URLResponse` → async `data(for:)` SIGILL).
    122 tests green; Settings + verb detail verified in the simulator.
-8. **Batch 7 — The big modernizations, each as its own PR (items 27, 28, 29, 33's
-   structural test work).** Parser scaffold + parser tests, NSAttributedString
-   retirement (largest; do last), String Catalog migration.
+8. **Batch 7 — The big modernizations (items 27, 28, 29, 33's structural test work).
+   ◐ PARTLY DONE.** Shipped the tractable parts (owner deferred the two L-effort items):
+   item 27 parser scaffold (`XMLDataParser` base + log-and-skip, closing the item-17 parser/
+   circumflex `fatalError` remainder), item 33's parser tests + `CompoundTenseTests` helper, and
+   item 29's **key-hygiene** half (namespaced `alphabetical`, `displayName` on the sort enums,
+   folded `BrowseView.sortOrder`). 129 tests green; sort pickers verified in the simulator.
+   **Deferred to their own PRs:** item 28 (NSAttributedString retirement — largest, behavior-
+   sensitive), item 29's `.xcstrings` String Catalog migration + `*WithColon` format-style.
 
 Rough total: batches 0–2 are a weekend; 3–5 a focused week; 6–7 opportunistic.
 
@@ -788,16 +839,25 @@ No finding was fabricated; these details didn't survive (kept out of the ranking
 
 ## Deferred work — partially-done items
 
-Snapshot after **Batch 5**. Fully-unstarted items keep their own numbered sections above, and
+Snapshot after **Batch 7**. Fully-unstarted items keep their own numbered sections above, and
 the batch plan in "Recommended implementation order" already covers them. This section tracks
 only the items that are *partly* done, so their unfinished remainders don't get lost in an
 otherwise-✅ section. Tick a box when the remainder lands.
 
 ### Carried-over partials (remainders of otherwise-done items)
-- [ ] **17 remainder** — the data-driven `fatalError` downgrade audit, *not* the helper (helper is
-  done): XML parser missing-attribute traps (`VerbParser.swift:56`, `VerbModelParser.swift:50`,
-  `StemAlteration.swift:149`) and `moveCircumflexIfNeeded`'s empty-stem trap → recoverable errors or
-  skip-and-log. Fold into **item 27**. InputView's 11 unwrap sites fold into **item 16**.
+- [ ] **28 remainder** — the whole item, deferred from Batch 7 (owner's call): retire the legacy
+  `NSAttributedString` Info-article pipeline (`StringExtensions.attributedText`/`conjugatedString`,
+  `TextView`/`TextViewDelegate`, `Info.attributedText`) for SwiftUI `AttributedString`, re-homing the
+  tappable in-app deep-links onto SwiftUI link handling. Largest item; its own PR.
+- [ ] **29 remainder** — the two L-effort halves deferred from Batch 7 (the key-hygiene half is done):
+  (a) migrate `L.swift` + the two `Localizable.strings` to a `.xcstrings` String Catalog; (b) convert
+  the `*WithColon` labels to format-style localized strings (`"Score: %@"`) for word-order safety —
+  fiddly because several are used both standalone and interpolated, so it pairs with (a).
+- [x] **17 remainder** — the data-driven `fatalError` downgrade audit (the helper was done earlier).
+  ✅ **Done in Batch 7** via item 27: the XML parser missing-attribute traps, `StemAlteration.init`'s
+  three parse traps (now `init?`), `DefectGroupParser`'s both-`uo`-`du` trap, and
+  `moveCircumflexIfNeeded`'s empty-stem trap are all log-and-skip / recoverable now. (InputView's 11
+  unwrap sites were already folded into **item 16** in Batch 6.)
 - [ ] **19 remainder** — part 1: convert the engine-side `…EndingForPersonNumber` switches
   (`IndicatifPresentGroup`, `PasseSimpleGroup`, `SubjonctifPresentGroup`) to per-case data tables.
   Deferred deliberately in Batch 4 (loses compiler exhaustiveness for little gain now that the display

@@ -5,8 +5,6 @@
   Created by Josh Adams on 8/1/21.
 */
 
-"alphabetical" = "Alphabétique";
-
 "Navigation.verbs" = "Verbes";
 "Navigation.models" = "Modèles";
 "Navigation.quiz" = "Quiz";
@@ -16,10 +14,10 @@
 "Navigation.input" = "Entrée";
 "Navigation.done" = "Terminé";
 
-"VerbBrowseView.sortOrder" = "Ordre de tri";
+"BrowseView.sortOrder" = "Ordre de tri";
+
 "VerbBrowseView.searchPrompt" = "Rechercher des verbes";
 
-"ModelBrowseView.sortOrder" = "Ordre de tri";
 "ModelBrowseView.searchPrompt" = "Rechercher des modèles";
 
 "InfoBrowseView.sectionAbout" = "À propos";
@@ -1144,6 +1142,8 @@ Machio Okada et Hitoshi Oguriso ont créé les Tableaux de conjugaison de l’an
 "ImageInfo.joshAdams" = "photographie de Josh Adams prise près de Vacaville, en Californie, en 2021";
 
 "VerbSort.frequency" = "Fréquence";
+"VerbSort.alphabetical" = "Alphabétique";
 
 "ModelSort.irregularity" = "Irrégularité";
+"ModelSort.alphabetical" = "Alphabétique";
 "ModelSort.identifier" = "Identifiant";

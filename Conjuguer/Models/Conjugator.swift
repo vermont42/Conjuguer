@@ -212,11 +212,10 @@ enum Conjugator {
       return
     }
 
-    guard let stemLast = stem.last else {
-      fatalError("Attempted to add a circumflex to an empty String.")
-    }
-
     ending = String(ending.dropFirst())
+    guard let stemLast = stem.last else {
+      return
+    }
     if let circumflexed = circumflexedVowels[stemLast] {
       stem = String(stem.dropLast()) + String(circumflexed)
     }

@@ -25,12 +25,12 @@ struct VerbBrowseView: View {
         VStack {
           Picker("", selection: $store.sort) {
             ForEach(VerbSort.allCases, id: \.self) { type in
-              Text(L.displayNameForVerbSort(type)).tag(type)
+              Text(type.displayName).tag(type)
             }
           }
           .pickerStyle(.segmented)
           .accessibilityIdentifier("verb_browse_sort")
-          .accessibilityLabel(Text(L.VerbBrowseView.sortOrder))
+          .accessibilityLabel(Text(L.BrowseView.sortOrder))
 
           List(searchResults) { verb in
             NavigationLink(value: verb) {

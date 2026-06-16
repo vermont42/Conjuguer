@@ -7,11 +7,10 @@
 
 import Foundation
 
-nonisolated class VerbModelParser: NSObject, XMLParserDelegate {
+nonisolated class VerbModelParser: XMLDataParser {
   static let xmlSeparator = ","
   static let alterationSeparator = "|"
 
-  private var parser: XMLParser?
   private let modelTag = "model"
   private var models: [String: VerbModel] = [:]
   private var currentId = ""
@@ -26,16 +25,12 @@ nonisolated class VerbModelParser: NSObject, XMLParserDelegate {
   private var currentExtraLetters: String?
   private var currentDefectGroupId: String?
 
-  override init() {
-    super.init()
-    let bundle = Bundle(for: VerbModelParser.self)
-    if let url = bundle.url(forResource: "verbModels", withExtension: "xml") {
-      parser = XMLParser(contentsOf: url)
-      if parser == nil {
-        return
-      }
-      parser?.delegate = self
-    }
+  init() {
+    super.init(resource: "verbModels")
+  }
+
+  init(xmlString: String) {
+    super.init(data: Data(xmlString.utf8))
   }
 
   func parse() -> [String: VerbModel] {
@@ -45,11 +40,16 @@ nonisolated class VerbModelParser: NSObject, XMLParserDelegate {
 
   func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String]) {
     if elementName == modelTag {
-      if let currentId = attributeDict["id"] {
-        self.currentId = currentId
-      } else {
-        fatalError("No model ID specified.")
+      currentElementIsValid = true
+
+      guard
+        let id = require("id", from: attributeDict, element: modelTag),
+        let exemplar = require("mo", from: attributeDict, element: modelTag)
+      else {
+        return
       }
+      currentId = id
+      currentExemplar = exemplar
 
       if let currentParentId = attributeDict["pa"] {
         self.currentParentId = currentParentId
@@ -57,12 +57,6 @@ nonisolated class VerbModelParser: NSObject, XMLParserDelegate {
 
       if let participeEnding = attributeDict["ep"] {
         currentParticipeEnding = participeEnding
-      }
-
-      if let exemplar = attributeDict["mo"] {
-        currentExemplar = exemplar
-      } else {
-        fatalError("No exemplar specified.")
       }
 
       if let indicatifPrésentGroup = attributeDict["si"] {
@@ -93,6 +87,14 @@ nonisolated class VerbModelParser: NSObject, XMLParserDelegate {
 
   func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
     if elementName == modelTag {
+      defer {
+        resetCurrent()
+      }
+
+      guard currentElementIsValid else {
+        return
+      }
+
       let model = VerbModel(
         id: currentId,
         exemplar: currentExemplar,
@@ -108,18 +110,20 @@ nonisolated class VerbModelParser: NSObject, XMLParserDelegate {
       )
 
       models[currentId] = model
-
-      currentId = ""
-      currentExemplar = ""
-      currentParentId = nil
-      currentParticipeEnding = nil
-      currentIndicatifPrésentGroup = nil
-      currentPasséSimpleGroup = nil
-      currentSubjonctifPrésentGroup = nil
-      currentStemAlterations = []
-      currentPosition += 1
-      currentExtraLetters = nil
-      currentDefectGroupId = nil
     }
+  }
+
+  private func resetCurrent() {
+    currentId = ""
+    currentExemplar = ""
+    currentParentId = nil
+    currentParticipeEnding = nil
+    currentIndicatifPrésentGroup = nil
+    currentPasséSimpleGroup = nil
+    currentSubjonctifPrésentGroup = nil
+    currentStemAlterations = []
+    currentPosition += 1
+    currentExtraLetters = nil
+    currentDefectGroupId = nil
   }
 }

@@ -42,21 +42,21 @@ enum L {
     }
   }
 
-  enum VerbBrowseView {
+  // Strings common to the verb and model browse screens. The sort-order picker label is identical
+  // on both, so it lives here rather than being duplicated per screen.
+  enum BrowseView {
     static var sortOrder: String {
-      String(localized: "VerbBrowseView.sortOrder")
+      String(localized: "BrowseView.sortOrder")
     }
+  }
 
+  enum VerbBrowseView {
     static var searchPrompt: String {
       String(localized: "VerbBrowseView.searchPrompt")
     }
   }
 
   enum ModelBrowseView {
-    static var sortOrder: String {
-      String(localized: "ModelBrowseView.sortOrder")
-    }
-
     static var searchPrompt: String {
       String(localized: "ModelBrowseView.searchPrompt")
     }
@@ -596,23 +596,27 @@ enum L {
     }
   }
 
-  static func displayNameForVerbSort(_ sort: VerbSort) -> String {
-    switch sort {
-    case .frequency:
-      return String(localized: "VerbSort.frequency")
-    case .alphabetical:
-      return String(localized: "alphabetical")
+  enum VerbSort {
+    static var frequency: String {
+      String(localized: "VerbSort.frequency")
+    }
+
+    static var alphabetical: String {
+      String(localized: "VerbSort.alphabetical")
     }
   }
 
-  static func displayNameForModelSort(_ sort: ModelSort) -> String {
-    switch sort {
-    case .irregularity:
-      return String(localized: "ModelSort.irregularity")
-    case .alphabetical:
-      return String(localized: "alphabetical")
-    case .identifier:
-      return String(localized: "ModelSort.identifier")
+  enum ModelSort {
+    static var irregularity: String {
+      String(localized: "ModelSort.irregularity")
+    }
+
+    static var alphabetical: String {
+      String(localized: "ModelSort.alphabetical")
+    }
+
+    static var identifier: String {
+      String(localized: "ModelSort.identifier")
     }
   }
 }
