@@ -261,8 +261,8 @@ of the shipped app target**; only the finished JSON is bundled.
 |---|---|---|---|
 | `corpus/originals/` | Domain-tier subfolders of raw sources: `literature/` (PDFs of Proust, Zola, Flaubert + `chanson-roland-oxford.txt`) and `government/` (Swiss/French public-document `.txt`) | **No** | Raw source material — large and re-fetchable |
 | `corpus/grokked/` | `chanson.md` | **Yes** | Hand-built parsed intermediate: numbered Old French with the modern infinitive bracketed per line, plus a line-by-line Claude translation |
-| `corpus/working/` | `build_chanson_examples.py` (tracked), `chanson_progress.md` (ignored) | **Mixed** | Build script + local progress notes |
-| `corpus/json/` | `chanson_examples.json` | **Yes** | Finished export, bundled into the app |
+| `corpus/working/` | tracked build scripts (`build_chanson_examples.py`, `build_corpus_index.py`, `build_literature_examples.py`, `mine_examples.workflow.js`); ignored intermediates (`forms.json`, `corpus_index.json`, `shards/`) and `*.md` progress notes | **Mixed** | Build scripts + regenerable intermediates |
+| `corpus/json/` | `chanson_examples.json`, `literature_examples.json` | **Yes** | Finished exports, bundled into the app |
 
 **`.gitignore` rule — track only durable artifacts.** The repo tracks finished JSON
 (`json/`), the hand-built intermediate (`grokked/`), and the build script
@@ -278,14 +278,44 @@ ignored content needs a matching `!`/exclude pair.
 **`build_chanson_examples.py`** parses `grokked/chanson.md` per laisse, resolves each bracketed
 gloss to a canonical `verbs.xml` key (`in="…"`), and writes `json/chanson_examples.json`
 keyed by infinitif. It reports coverage and *unmatched* gloss tokens rather than silently
-dropping them. This hand-bracket-then-resolve approach suits the one fully-treated poem;
-the planned modern-prose pass over the novels will instead use **subagent extraction**
-(Claude recognizes conjugated/irregular forms natively) rather than regex.
+dropping them. This hand-bracket-then-resolve approach suits the one fully-treated poem.
+
+**Modern-prose pass — generated-forms index + subagent select/translate.** The pass over the
+novels (and government tier) moves the expensive work *off* the LLM and into deterministic code,
+so subagents only do the part that needs judgment. Three stages:
+
+1. **Form dump (`ConjuguerTests/Models/CorpusFormsDumpTests.swift`).** A build-time tool riding the
+   test target (so it reuses the app's authoritative `Conjugator` and already-loaded verb data),
+   *not* a behavioral test. It conjugates every usage-ranked verb across all tenses/persons and
+   writes `working/forms.json` — `{ "<surface form>": ["<verb id>", …] }`. This makes irregulars
+   (`veux`/`voulons`/`voudrai` → vouloir) and false substrings (`ancr` in "rancœur") non-issues:
+   the index matches whole generated word-forms, not hand-written stem patterns. Run on demand:
+   `run_tests.sh --only-testing ConjuguerTests/CorpusFormsDumpTests`. (Compound tenses emit only the
+   *participle*, not the auxiliary — else "ai" would map to every avoir-verb and make each "j'ai …"
+   a false hit.)
+2. **Index build (`build_corpus_index.py`).** ONE tokenizing pass over each source `.txt` (apostrophe-
+   and hyphen-splitting, NFC, lowercased), looking every token up in `forms.json`, writing
+   `working/corpus_index.json` = `{ "<verb id>": [ {doc, line, token, text}, … ] }`. Candidates are
+   gathered from all three novels independently, then merged round-robin with a **per-verb rotating
+   lead author** so the first candidate (what selectors reach for) is spread evenly across
+   Flaubert/Proust/Zola — not drained from whichever is scanned first; government docs append as
+   fallback. Prints coverage, the lead-author balance, and the zero-coverage tail. A token mapping to
+   several verbs (homographs: `suis` → être & suivre) is recorded under each; context disambiguates.
+3. **Select + translate (`build_literature_examples.py shard` → `mine_examples.workflow.js`).** The
+   python `shard` subcommand splits the index into ~30-verb shard files (so each subagent reads only
+   its slice, not the 1.1 MB whole). The Workflow fans out one subagent per shard: each picks the
+   earliest candidate that is a genuine *verbal* use (rejecting same-spelled nouns like "ancre"),
+   re-opens the source at the line for the full clean sentence, and translates it — returning a
+   schema-validated array. Write the aggregate to `json/literature_examples.json`, then
+   `build_literature_examples.py report <json>` prints the final author balance. Current coverage:
+   **974/982 ranked verbs (99.2%)**; the 8 zero-coverage verbs are the technical tail
+   (`télécharger`, `reconstruire`, …) for the future technology tier.
 
 **Future work (partially built):** the three novels won't cover the technical tail of the
 ranked verbs, so government- and technology-domain fallback corpora (mirroring
 Konjugieren's `corpus/government/` and `corpus/technology/` tiers) supplement them under
 `corpus/originals/`. The **government** tier now exists (`corpus/originals/government/`,
 Swiss/French public documents — see `prompts/get-government-corpus.md` and
-`docs/government-corpus-licensing.md`); the **technology** tier and the modern-prose
-extraction pass over all tiers remain to be built.
+`docs/government-corpus-licensing.md`); the modern-prose pass over the literature + government
+tiers is **built** (stages 1–3 above) and ready to run end-to-end. The **technology** tier — to
+cover the 8 zero-coverage technical verbs — remains to be added under `corpus/originals/`.

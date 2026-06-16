@@ -33,3 +33,6 @@ corpus/*
 !corpus/working/
 corpus/working/*
 !corpus/working/build_chanson_examples.py
+!corpus/working/build_corpus_index.py
+!corpus/working/build_literature_examples.py
+!corpus/working/mine_examples.workflow.js
