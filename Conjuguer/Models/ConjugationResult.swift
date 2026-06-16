@@ -12,29 +12,27 @@ enum ConjugationResult {
   case partialMatch
   case noMatch
 
+  private static let circumflexes: [Character: Character] = ["â": "a", "ê": "e", "î": "i", "ô": "o", "û": "u"]
+
+  private static func strippingCircumflexes(_ string: String) -> String {
+    String(string.map { circumflexes[$0] ?? $0 })
+  }
+
   static func score(correctAnswers: String, proposedAnswer: String) -> ConjugationResult {
-    let correctAnswersClean = correctAnswers.lowercased()
+    let correctAnswersLowercased = correctAnswers.lowercased()
     let proposedAnswerLowercased = proposedAnswer.lowercased()
-    for var correctAnswerClean in correctAnswersClean.components(separatedBy: Tense.alternateConjugationSeparator) {
-      var proposedAnswerClean = proposedAnswerLowercased
-      if correctAnswerClean == proposedAnswerClean {
+    for correctAnswer in correctAnswersLowercased.components(separatedBy: Tense.alternateConjugationSeparator) {
+      if correctAnswer == proposedAnswerLowercased {
         return .totalMatch
       }
-      [("â", "a"), ("ê", "e"), ("î", "i"), ("ô", "o"), ("û", "u")].forEach {
-        correctAnswerClean = correctAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
-        proposedAnswerClean = proposedAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
-      }
-      if correctAnswerClean == proposedAnswerClean {
+      if strippingCircumflexes(correctAnswer) == strippingCircumflexes(proposedAnswerLowercased) {
         return .totalMatch
       }
-      [
-        ("à", "a"), ("è", "e"), ("ì", "i"), ("ò", "o"), ("ù", "u"),
-        ("á", "a"), ("é", "e"), ("í", "i"), ("ó", "o"), ("ú", "u")
-      ].forEach {
-        correctAnswerClean = correctAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
-        proposedAnswerClean = proposedAnswerClean.replacingOccurrences(of: $0.0, with: $0.1)
-      }
-      if correctAnswerClean == proposedAnswerClean {
+      let foldOptions: String.CompareOptions = .diacriticInsensitive
+      if
+        correctAnswer.folding(options: foldOptions, locale: Util.french) ==
+        proposedAnswerLowercased.folding(options: foldOptions, locale: Util.french)
+      {
         return .partialMatch
       }
     }

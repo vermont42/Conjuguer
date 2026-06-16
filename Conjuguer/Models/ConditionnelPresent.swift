@@ -9,19 +9,6 @@ import Foundation
 
 enum ConditionnelPrésent {
   static func endingForPersonNumber(_ personNumber: PersonNumber) -> String {
-    switch personNumber {
-    case .firstSingular:
-      return "ais"
-    case .secondSingular:
-      return "ais"
-    case .thirdSingular:
-      return "ait"
-    case .firstPlural:
-      return "ions"
-    case .secondPlural:
-      return "iez"
-    case .thirdPlural:
-      return "aient"
-    }
+    Imparfait.endingForPersonNumber(personNumber)
   }
 }

@@ -8,11 +8,6 @@
 @testable import Conjuguer
 import XCTest
 
-// Table-driven coverage of ConjugationResult.score: exact matches, circumflex-only
-// (still total), grave/acute (partial), and junk. Includes the multi-form paye/paie case
-// that locks in Batch 0 item 3 — proposedAnswerClean must be re-derived per alternate
-// answer, or accent-stripping from an earlier alternate leaks into a later exact-match
-// check and inflates the score.
 @MainActor
 class ConjugationResultTests: XCTestCase {
   func testExactMatchIsTotal() {
@@ -35,10 +30,6 @@ class ConjugationResultTests: XCTestCase {
     XCTAssertEqual(ConjugationResult.score(correctAnswers: "parle", proposedAnswer: "xyz"), .noMatch)
   }
 
-  // Item 3 regression: with the per-iteration reset missing, the first alternate ("paye")
-  // strips the proposed answer's grave accent, so the second alternate's exact-match check
-  // sees "paie" == "paie" and wrongly returns .totalMatch. The dropped accent should be
-  // partial credit.
   func testAccentStrippingDoesNotLeakAcrossAlternates() {
     XCTAssertEqual(
       ConjugationResult.score(correctAnswers: "paye/paie", proposedAnswer: "pàie"),
@@ -47,8 +38,15 @@ class ConjugationResultTests: XCTestCase {
     )
   }
 
-  // An exact match against the second alternate stays total.
   func testExactMatchAgainstSecondAlternateIsTotal() {
     XCTAssertEqual(ConjugationResult.score(correctAnswers: "paye/paie", proposedAnswer: "paie"), .totalMatch)
+  }
+
+  func testDroppedCedillaIsPartial() {
+    XCTAssertEqual(ConjugationResult.score(correctAnswers: "plaça", proposedAnswer: "placa"), .partialMatch)
+  }
+
+  func testDroppedDiaeresisIsPartial() {
+    XCTAssertEqual(ConjugationResult.score(correctAnswers: "haïs", proposedAnswer: "hais"), .partialMatch)
   }
 }

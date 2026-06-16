@@ -187,6 +187,85 @@ nonisolated enum Tense: Hashable {
     return " - \(personNumber.pronounWithGender)"
   }
 
+  // MARK: - Tense-shorthand codec
+
+  // The single source of truth for the tense-shorthand grammar (e.g. "r1s", "bA", "pp")
+  // hand-parsed by StemAlteration and DefectGroup. A shorthand is a tense letter followed by
+  // a PersonNumber short name ("1s"…"3p") or "A" (all person-numbers for the family); the three
+  // personless tenses use two-letter codes. shortDisplayName above encodes the inverse direction.
+
+  static let personlessShorthands: [String: Tense] = [
+    "pp": .participePassé,
+    "rr": .participePrésent,
+    "sf": .radicalFutur
+  ]
+
+  // The constructor for a person-bearing tense family, keyed by its shorthand letter.
+  // (A function rather than a stored [String: (PersonNumber) -> Tense] so the closures need
+  // not be stored in a Sendable static under strict concurrency.)
+  static func tenseConstructor(forShorthandLetter letter: String) -> ((PersonNumber) -> Tense)? {
+    switch letter {
+    case "r":
+      return Tense.indicatifPrésent
+    case "x":
+      return Tense.passéSimple
+    case "i":
+      return Tense.imparfait
+    case "f":
+      return Tense.futurSimple
+    case "c":
+      return Tense.conditionnelPrésent
+    case "b":
+      return Tense.subjonctifPrésent
+    case "q":
+      return Tense.subjonctifImparfait
+    case "h":
+      return Tense.impératif
+    default:
+      return nil
+    }
+  }
+
+  // Decodes one shorthand into the simple tense(s) it denotes, or nil if unrecognized. "A"
+  // expands to every PersonNumber for the family (impératif to its three valid ones).
+  static func tensesForShorthand(_ shorthand: String) -> [Tense]? {
+    if let tense = personlessShorthands[shorthand] {
+      return [tense]
+    }
+    let letter = String(shorthand.prefix(1))
+    guard let makeTense = tenseConstructor(forShorthandLetter: letter) else {
+      return nil
+    }
+    let personPart = String(shorthand.dropFirst())
+    if personPart == "A" {
+      let personNumbers = letter == "h" ? PersonNumber.impératifPersonNumbers : PersonNumber.allCases
+      return personNumbers.map(makeTense)
+    }
+    guard let personNumber = PersonNumber.byShortDisplayName[personPart] else {
+      return nil
+    }
+    return [makeTense(personNumber)]
+  }
+
+  // Every concrete tense, matching DefectGroup's universe: impératif and impératifPassé only for
+  // their three valid person-numbers, every other family for all six.
+  static let allConcreteCases: [Tense] = {
+    var cases: [Tense] = [.participePassé, .participePrésent, .radicalFutur]
+    let sixPersonFamilies: [(PersonNumber) -> Tense] = [
+      Tense.indicatifPrésent, Tense.passéSimple, Tense.imparfait, Tense.futurSimple,
+      Tense.conditionnelPrésent, Tense.subjonctifPrésent, Tense.subjonctifImparfait,
+      Tense.passéComposé, Tense.plusQueParfait, Tense.passéAntérieur, Tense.passéSurcomposé,
+      Tense.futurAntérieur, Tense.conditionnelPassé, Tense.subjonctifPassé, Tense.subjonctifPlusQueParfait
+    ]
+    for family in sixPersonFamilies {
+      cases += PersonNumber.allCases.map(family)
+    }
+    for family in [Tense.impératif, Tense.impératifPassé] {
+      cases += PersonNumber.impératifPersonNumbers.map(family)
+    }
+    return cases
+  }()
+
   static func shorthandForNonCompoundTense(appliesTo: Set<Tense>) -> String {
     var shorthands: Set<String> = Set()
 

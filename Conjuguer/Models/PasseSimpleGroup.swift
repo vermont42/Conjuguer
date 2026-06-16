@@ -111,12 +111,13 @@ nonisolated enum PasséSimpleGroup {
     }
   }
 
-  var endings: String {
-    var output = ""
-    for personNumber in PersonNumber.allCases {
-      output += passéSimpleEndingForPersonNumber(personNumber) + " "
-    }
-    return output
+  var endings: [PersonNumber: String] {
+    EndingDisplay.markedEndings(
+      personNumbers: PersonNumber.allCases,
+      tense: Tense.passéSimple,
+      ending: passéSimpleEndingForPersonNumber,
+      stemAlterations: nil
+    )
   }
 
   func subjonctifImparfaitEndingForPersonNumber(_ personNumber: PersonNumber) -> String {
@@ -199,11 +200,12 @@ nonisolated enum PasséSimpleGroup {
     }
   }
 
-  var subjonctifImparfaitEndings: String {
-    var output = ""
-    for personNumber in PersonNumber.allCases {
-      output += subjonctifImparfaitEndingForPersonNumber(personNumber) + " "
-    }
-    return output
+  var subjonctifImparfaitEndings: [PersonNumber: String] {
+    EndingDisplay.markedEndings(
+      personNumbers: PersonNumber.allCases,
+      tense: Tense.subjonctifImparfait,
+      ending: subjonctifImparfaitEndingForPersonNumber,
+      stemAlterations: nil
+    )
   }
 }

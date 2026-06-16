@@ -228,22 +228,19 @@ nonisolated enum PersonNumber: String, CaseIterable {
     return conjugation + suffix
   }
 
+  static let byShortDisplayName: [String: PersonNumber] = [
+    "1s": .firstSingular,
+    "2s": .secondSingular,
+    "3s": .thirdSingular,
+    "1p": .firstPlural,
+    "2p": .secondPlural,
+    "3p": .thirdPlural
+  ]
+
   static func personNumberForShortDisplayName(_ shortDisplayName: String) -> PersonNumber {
-    switch shortDisplayName {
-    case "1s":
-      return .firstSingular
-    case "2s":
-      return .secondSingular
-    case "3s":
-      return .thirdSingular
-    case "1p":
-      return .firstPlural
-    case "2p":
-      return .secondPlural
-    case "3p":
-      return .thirdPlural
-    default:
+    guard let personNumber = byShortDisplayName[shortDisplayName] else {
       fatalError("Could not derive PersonNumber from shortDisplayName \(shortDisplayName).")
     }
+    return personNumber
   }
 }

@@ -120,30 +120,13 @@ nonisolated enum IndicatifPrésentGroup: Hashable {
     }
   }
 
-  func endings(stemAlterations: [StemAlteration]?) -> String {
-    var alterationsWithStar: Set<Tense> = Set()
-    if let stemAlterations = stemAlterations {
-      for stemAlteration in stemAlterations {
-        for personNumber in PersonNumber.allCases {
-          let lastChar = String(stemAlteration.charsToUse.last ?? Character(" "))
-          if lastChar == Tense.irregularEndingMarker && stemAlteration.appliesTo.contains(.indicatifPrésent(personNumber)) {
-            alterationsWithStar.insert(.indicatifPrésent(personNumber))
-          }
-        }
-      }
-    }
-
-    var output = ""
-    for personNumber in PersonNumber.allCases {
-      if alterationsWithStar.contains(.indicatifPrésent(personNumber)) {
-        output += Tense.irregularEndingMarker + " "
-      } else {
-        let ending = présentEndingForPersonNumber(personNumber)
-        let normalizedEnding = ending == "" ? "_" : ending
-        output += normalizedEnding + " "
-      }
-    }
-    return output
+  func endings(stemAlterations: [StemAlteration]?) -> [PersonNumber: String] {
+    EndingDisplay.markedEndings(
+      personNumbers: PersonNumber.allCases,
+      tense: Tense.indicatifPrésent,
+      ending: présentEndingForPersonNumber,
+      stemAlterations: stemAlterations
+    )
   }
 
   func impératifEndingForPersonNumber(_ personNumber: PersonNumber) -> String {
@@ -195,27 +178,12 @@ nonisolated enum IndicatifPrésentGroup: Hashable {
     }
   }
 
-  func impératifEndings(stemAlterations: [StemAlteration]?) -> String {
-    var alterationsWithStar: Set<Tense> = Set()
-    if let stemAlterations = stemAlterations {
-      for stemAlteration in stemAlterations {
-        for personNumber in PersonNumber.impératifPersonNumbers {
-          let lastChar = String(stemAlteration.charsToUse.last ?? Character(" "))
-          if lastChar == Tense.irregularEndingMarker && stemAlteration.appliesTo.contains(.impératif(personNumber)) {
-            alterationsWithStar.insert(.impératif(personNumber))
-          }
-        }
-      }
-    }
-
-    var output = ""
-    for personNumber in PersonNumber.impératifPersonNumbers {
-      if alterationsWithStar.contains(.impératif(personNumber)) {
-        output += Tense.irregularEndingMarker + " "
-      } else {
-        output += impératifEndingForPersonNumber(personNumber) + " "
-      }
-    }
-    return output
+  func impératifEndings(stemAlterations: [StemAlteration]?) -> [PersonNumber: String] {
+    EndingDisplay.markedEndings(
+      personNumbers: PersonNumber.impératifPersonNumbers,
+      tense: Tense.impératif,
+      ending: impératifEndingForPersonNumber,
+      stemAlterations: stemAlterations
+    )
   }
 }

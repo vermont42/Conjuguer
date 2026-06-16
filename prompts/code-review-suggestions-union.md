@@ -250,9 +250,24 @@ can back `shortDisplayName`/`conjugatedAuxilliary`. Adding a tense currently mea
 touching five-plus switches; after, one. Rename `conjugatedAuxilliary` →
 `conjugatedAuxiliary` while in the file (typo cluster, item 31).
 
-### 15. One source of truth for the tense-shorthand codec
+### 15. One source of truth for the tense-shorthand codec ✅ DONE (Batch 4)
 **Found by:** OM #5, FH #8, FM §2.4 (broadest: includes `DefectGroup`); OH #6 covered the
 decode switch only · **Effort:** M
+
+> **Batch 4 resolution.** Added the codec to `Tense` (the single owner of the `r1s`/`bA`/`pp`
+> grammar): `personlessShorthands`, `tenseConstructor(forShorthandLetter:)`, and
+> `tensesForShorthand(_:) -> [Tense]?` (decodes one shorthand, expanding `A` to all person-numbers —
+> impératif to its three), plus `allConcreteCases` (the 99-tense universe, replacing DefectGroup's
+> hand-written literal). `StemAlteration.init`'s 42-case switch collapsed to `A`/`N` flags + a single
+> `tensesForShorthand` call (finishing the in-code TODO that asked for exactly this). `DefectGroup`
+> now stores `Set<Tense>` instead of `[Tense: Bool]`; both `doesntUse`/`usesOnly` branches route every
+> code through one `applyDefect(code:defective:mirrorImpératifToPassé:)` helper — bare person codes
+> (`1s`…`3p`) filter `allConcreteCases` by `personNumber`, tense shorthands go through the codec, and
+> the doesntUse-only impératif→impératif-passé mirroring (the item-4 bug class) is now codec-derived
+> and impossible to mistype. `PersonNumber.byShortDisplayName` backs the lookups. The encode direction
+> (`Tense.shortDisplayName`) stays a switch next to the decode tables. 5 new `DefectGroupTests`
+> (fA expansion, bare person code, the usesOnly/doesntUse mirroring asymmetry) lock in the behavior;
+> 122 tests green.
 
 The `r1s`/`bA`/`pp` language is hand-parsed in three places — `StemAlteration.init`
 (`StemAlteration.swift:43-151`, 42 cases, with a TODO at `:45` asking for this exact
@@ -320,8 +335,25 @@ or parameterize the fallback. While in the file: name the magic
 `computeIrregularities`/`sortVerbs` if you want the style cleanup (OM #9 — legal Swift
 as-is; see Appendix A).
 
-### 19. Ending groups: code → data
+### 19. Ending groups: code → data ✅ DONE (Batch 4 — parts 2 & 3 + alias; per-person table conversion deferred)
 **Found by:** OH #2, FM §2.6 (fullest), OM #7 + FH #11 (star-builder triplication) · **Effort:** M–L
+
+> **Batch 4 resolution (the duplication-killing parts).** The triplicated "star the `*`-overridden
+> endings" algorithm (`IndicatifPrésentGroup` ×2, `SubjonctifPrésentGroup`) plus the two plain
+> passé-simple join-loops collapsed into one `EndingDisplay.markedEndings(personNumbers:tense:ending:stemAlterations:)`
+> helper (pass `stemAlterations: nil` for the un-starrable tenses). The five display methods stopped
+> round-tripping through space-joined strings — they now return `[PersonNumber: String]`, so
+> `ModelView.endingSlots` dropped its `split`/token-count/`"" → "_"` placeholder parser (the `_` is now
+> just the empty-ending display, applied at the view). `ConditionnelPrésent.endingForPersonNumber`
+> defers to `Imparfait`'s byte-identical table. Verified in the simulator: the `rendre`, `prendre`,
+> and grid layouts render correctly (the `_` under *il*, the partial-person impératif row, colored
+> irregular participe). 122 tests green.
+>
+> **Deferred (part 1):** converting the engine-side `…EndingForPersonNumber` switches to per-case
+> data tables. Those switches are exhaustiveness-checked by the compiler and the display path already
+> reuses them (via part 3), so the conversion is high-churn, low-value, and trades a compile-time
+> guarantee for a runtime one. The Imparfait≡Conditionnel win (the only concrete payoff) is captured
+> by the alias above; the `s`-vs-`r` near-duplication is left un-merged to avoid coupling two tenses.
 
 Three parts, one theme (~535 lines across the three group files):
 - The per-group six-ending switches (`IndicatifPresentGroup.swift`,
@@ -390,8 +422,18 @@ work (`docs/conjuguer-ui-issues.md`) that moved views onto `@Environment(World.s
   best-tested code in the app (golden tests), so mechanical steps are safe; deep
   restructuring should wait for item 33's extra tests.
 
-### 23. Consolidate diacritic handling on `folding`
+### 23. Consolidate diacritic handling on `folding` ✅ DONE (Batch 4)
 **Found by:** OM #13, FH #15, FM §3.4 · **Effort:** S–M
+
+> **Batch 4 resolution.** `ConjugationResult.score`'s two hand-rolled strip tables became: stage 1, an
+> explicit `circumflexes` map (a dropped circumflex stays a *total* match); stage 2,
+> `folding(options: .diacriticInsensitive, locale: Util.french)` for *partial* credit. This is the
+> intentional consolidation the item called for — any dropped accent now folds (cedilla, diaeresis,
+> grave, acute…), not just the ten grave/acute characters the old table enumerated; new
+> `testDroppedCedillaIsPartial`/`testDroppedDiaeresisIsPartial` document the broadening, and the
+> existing `paye/paie` leak test still passes (each fold is re-derived per alternate). `PersonNumber.preamble`
+> already used `folding`; `moveCircumflexIfNeeded` is left as-is — it *adds* a circumflex (the inverse
+> operation), already a clean `[Character: Character]` map from Batch 3. 122 tests green.
 
 Three implementations: `moveCircumflexIfNeeded`'s tuples, `ConjugationResult.score`'s two
 strip-tables (`ConjugationResult.swift:22-35`), and the right way —
@@ -581,10 +623,12 @@ Tests-first where a batch touches scoring/persistence logic.
    `QuizQuestion` + new `QuizTests` (which also closes item 10's off-by-one), the three-property
    resolver, and item 22's small pieces (additive-scan helper, `map/joined`, circumflex dict).
    117 tests green (115 + 2); quiz verified in the simulator.
-5. **Batch 4 — The codec and the data tables (items 15, 19, 23).** Shorthand
+5. **Batch 4 — The codec and the data tables (items 15, 19, 23). ✅ DONE.** Shorthand
    single-source (finishes the in-code TODO, makes item 4's bug class impossible,
-   `Set<Tense>` for defects), ending tables → data + star-builder helper +
-   typed `endingSlots`, diacritic folding consolidation.
+   `Set<Tense>` for defects), star-builder helper + typed `[PersonNumber: String]` endings
+   (dropping `endingSlots`' string round-trip) + Imparfait≡Conditionnel alias, diacritic
+   folding consolidation in scoring. 122 tests green (117 + 5); ModelView grid verified in
+   the simulator. Item 19's engine-side per-person table conversion deferred (see its note).
 6. **Batch 5 — Settings & DI seams (items 20, 21, 26).** Settings helpers (after the
    round-trip test), browse store ↔ environment alignment + generic `BrowseStore`,
    pronoun-gender injection into the engine. Coordinate with the issue-#27 workstream in
@@ -635,7 +679,7 @@ No finding was fabricated; these details didn't survive (kept out of the ranking
 
 ## Deferred work — partially-done items
 
-Snapshot after **Batch 3**. Fully-unstarted items keep their own numbered sections above, and
+Snapshot after **Batch 4**. Fully-unstarted items keep their own numbered sections above, and
 the batch plan in "Recommended implementation order" already covers them. This section tracks
 only the items that are *partly* done, so their unfinished remainders don't get lost in an
 otherwise-✅ section. Tick a box when the remainder lands.
@@ -645,6 +689,11 @@ otherwise-✅ section. Tick a box when the remainder lands.
   done): XML parser missing-attribute traps (`VerbParser.swift:56`, `VerbModelParser.swift:50`,
   `StemAlteration.swift:149`) and `moveCircumflexIfNeeded`'s empty-stem trap → recoverable errors or
   skip-and-log. Fold into **item 27**. InputView's 11 unwrap sites fold into **item 16**.
+- [ ] **19 remainder** — part 1: convert the engine-side `…EndingForPersonNumber` switches
+  (`IndicatifPresentGroup`, `PasseSimpleGroup`, `SubjonctifPresentGroup`) to per-case data tables.
+  Deferred deliberately in Batch 4 (loses compiler exhaustiveness for little gain now that the display
+  path reuses the switches). Revisit only if a concrete need arises. Star-builder helper, typed
+  endings, and the Imparfait≡Conditionnel alias are done.
 - [ ] **22 remainder** — OH's per-tense-family decomposition of the 195-line `Conjugator.conjugate()`
   (the three small pieces are done). Optional; do **after item 33** adds engine-edge tests.
 

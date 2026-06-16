@@ -14,6 +14,10 @@ class DefectGroupTests: XCTestCase {
     DefectGroup(id: "test", descriptionEn: "en", descriptionFr: "fr", usesOnly: nil, doesntUse: doesntUse)
   }
 
+  private func group(usesOnly: String) -> DefectGroup {
+    DefectGroup(id: "test", descriptionEn: "en", descriptionFr: "fr", usesOnly: usesOnly, doesntUse: nil)
+  }
+
   func testH2PMarksSecondPluralImpératifPassé() {
     let defectGroup = group(doesntUse: "h2p")
     XCTAssertTrue(
@@ -38,10 +42,30 @@ class DefectGroupTests: XCTestCase {
     XCTAssertFalse(defectGroup.isDefectiveForTense(.impératifPassé(.secondPlural)))
   }
 
-  // The clore data combines both codes; both vous and nous impératif passé must be struck.
   func testClorePatternStrikesBothImpératifPasséPlurals() {
     let defectGroup = group(doesntUse: "h1p,h2p")
     XCTAssertTrue(defectGroup.isDefectiveForTense(.impératifPassé(.firstPlural)))
+    XCTAssertTrue(defectGroup.isDefectiveForTense(.impératifPassé(.secondPlural)))
+  }
+
+  func testFAMarksEveryFuturSimplePerson() {
+    let defectGroup = group(doesntUse: "fA")
+    for personNumber in PersonNumber.allCases {
+      XCTAssertTrue(defectGroup.isDefectiveForTense(.futurSimple(personNumber)))
+    }
+    XCTAssertFalse(defectGroup.isDefectiveForTense(.indicatifPrésent(.firstSingular)))
+  }
+
+  func testBarePersonCodeMarksEveryTenseForThatPerson() {
+    let defectGroup = group(doesntUse: "1s")
+    XCTAssertTrue(defectGroup.isDefectiveForTense(.indicatifPrésent(.firstSingular)))
+    XCTAssertTrue(defectGroup.isDefectiveForTense(.passéComposé(.firstSingular)))
+    XCTAssertFalse(defectGroup.isDefectiveForTense(.indicatifPrésent(.secondSingular)))
+  }
+
+  func testUsesOnlyImpératifDoesNotMirrorToPassé() {
+    let defectGroup = group(usesOnly: "h2p")
+    XCTAssertFalse(defectGroup.isDefectiveForTense(.impératif(.secondPlural)))
     XCTAssertTrue(defectGroup.isDefectiveForTense(.impératifPassé(.secondPlural)))
   }
 }

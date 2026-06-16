@@ -165,15 +165,15 @@ struct ModelView: View {
   }
 
   private var endingTenses: [EndingTense] {
-    let specs: [(String, String, [PersonNumber])] = [
-      (Tense.indicatifPrésent(.firstSingular).shortTitleCaseName, model.indicatifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterationsRecursive), PersonNumber.allCases),
-      (Tense.impératif(.firstPlural).shortTitleCaseName, model.indicatifPrésentGroupRecursive.impératifEndings(stemAlterations: model.stemAlterationsRecursive), PersonNumber.impératifPersonNumbers),
-      (Tense.passéSimple(.firstSingular).shortTitleCaseName, model.passéSimpleGroupRecursive.endings, PersonNumber.allCases),
-      (Tense.subjonctifPrésent(.firstSingular).shortTitleCaseName, model.subjonctifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterationsRecursive), PersonNumber.allCases),
-      (Tense.subjonctifImparfait(.firstSingular).shortTitleCaseName, model.passéSimpleGroupRecursive.subjonctifImparfaitEndings, PersonNumber.allCases)
+    let specs: [(String, [PersonNumber: String])] = [
+      (Tense.indicatifPrésent(.firstSingular).shortTitleCaseName, model.indicatifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterationsRecursive)),
+      (Tense.impératif(.firstPlural).shortTitleCaseName, model.indicatifPrésentGroupRecursive.impératifEndings(stemAlterations: model.stemAlterationsRecursive)),
+      (Tense.passéSimple(.firstSingular).shortTitleCaseName, model.passéSimpleGroupRecursive.endings),
+      (Tense.subjonctifPrésent(.firstSingular).shortTitleCaseName, model.subjonctifPrésentGroupRecursive.endings(stemAlterations: model.stemAlterationsRecursive)),
+      (Tense.subjonctifImparfait(.firstSingular).shortTitleCaseName, model.passéSimpleGroupRecursive.subjonctifImparfaitEndings)
     ]
     return specs.enumerated().map { index, spec in
-      EndingTense(id: index, label: spec.0, slots: endingSlots(spec.1, order: spec.2))
+      EndingTense(id: index, label: spec.0, slots: endingSlots(spec.1))
     }
   }
 
@@ -221,14 +221,11 @@ struct ModelView: View {
     .card()
   }
 
-  private func endingSlots(_ endings: String, order: [PersonNumber]) -> [AttributedString?] {
-    let tokens = endings.split(separator: " ", omittingEmptySubsequences: true).map(String.init)
-    var byPerson: [PersonNumber: String] = [:]
-    for (index, personNumber) in order.enumerated() where index < tokens.count {
-      byPerson[personNumber] = tokens[index]
-    }
-    return Self.gridOrder.map { personNumber in
-      byPerson[personNumber].map { AttributedString(mixedCaseString: $0) }
+  private func endingSlots(_ endings: [PersonNumber: String]) -> [AttributedString?] {
+    Self.gridOrder.map { personNumber in
+      endings[personNumber].map { ending in
+        AttributedString(mixedCaseString: ending.isEmpty ? "_" : ending)
+      }
     }
   }
 
