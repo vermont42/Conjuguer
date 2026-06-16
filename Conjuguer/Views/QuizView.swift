@@ -53,8 +53,8 @@ struct QuizView: View {
           .sheetDismissable()
       }
     )
+    .recordsAppearance(as: "\(QuizView.self)")
     .onAppear {
-      world.analytics.recordViewAppeared("\(QuizView.self)")
       if quiz.quizState == .notStarted && !world.gameCenter.isAuthenticated {
         world.gameCenter.authenticate(onViewController: authCoordinator.viewController)
       }

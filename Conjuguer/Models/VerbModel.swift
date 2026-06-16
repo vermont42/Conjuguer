@@ -72,6 +72,7 @@ struct VerbModel: Identifiable, Hashable {
         .joined(separator: ", ")
       )
     } catch {
+      print("Could not build deep-linked verb list for model \(id): \(error.localizedDescription)")
       return AttributedString("")
     }
   }

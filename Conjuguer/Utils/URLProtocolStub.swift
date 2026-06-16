@@ -24,6 +24,12 @@ nonisolated class URLProtocolStub: URLProtocol {
 
   override func startLoading() {
     if let url = request.url {
+      // The async URLSession.data(for:) API requires a non-nil URLResponse and traps without
+      // one, so always supply a response even though the legacy dataTask path tolerated its
+      // absence.
+      if let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil) {
+        self.client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+      }
       if let data = URLProtocolStub.testURLs[url] {
         self.client?.urlProtocol(self, didLoad: data)
       }

@@ -18,37 +18,10 @@ struct InputView: View {
     ZStack {
       Color.black
       VStack {
-        Text("Infinitif")
-          .subheadingLabel()
-        TextField("Infinitif", text: $infinitif)
-          .textFieldStyle(.roundedBorder)
-          .textInputAutocapitalization(.never)
-          .autocorrectionDisabled()
-          .padding()
-
-        Text("Translation")
-          .subheadingLabel()
-        TextField("Translation", text: $translation)
-          .textFieldStyle(.roundedBorder)
-          .textInputAutocapitalization(.never)
-          .autocorrectionDisabled()
-          .padding()
-
-        Text("Model")
-          .subheadingLabel()
-        TextField("Model", text: $model)
-          .textFieldStyle(.roundedBorder)
-          .textInputAutocapitalization(.never)
-          .autocorrectionDisabled()
-          .padding()
-
-        Text("Reflexive (t or f)")
-          .subheadingLabel()
-        TextField("Reflexive", text: $reflexive)
-          .textFieldStyle(.roundedBorder)
-          .textInputAutocapitalization(.never)
-          .autocorrectionDisabled()
-          .padding()
+        labeledField("Infinitif", text: $infinitif)
+        labeledField("Translation", text: $translation)
+        labeledField("Model", text: $model)
+        labeledField("Reflexive (t or f)", text: $reflexive)
 
         Button("Add") {
           add()
@@ -59,6 +32,16 @@ struct InputView: View {
         }
       }
     }
+  }
+
+  @ViewBuilder private func labeledField(_ title: String, text: Binding<String>) -> some View {
+    Text(title)
+      .subheadingLabel()
+    TextField(title, text: text)
+      .textFieldStyle(.roundedBorder)
+      .textInputAutocapitalization(.never)
+      .autocorrectionDisabled()
+      .padding()
   }
 
   private func add() {
@@ -74,12 +57,12 @@ struct InputView: View {
     let isReflexive = reflexive == "t" ? true : false
 
     if Verb.verbs[infinitif] != nil {
-      outputError("\(infinitif) has already been inpat.")
+      outputError("\(infinitif) has already been input.")
       return
     }
 
     if VerbModel.models[model.uppercased()] == nil {
-      outputError("Invalid model \(model) inpat.")
+      outputError("Invalid model \(model) input.")
       return
     }
 
@@ -87,7 +70,7 @@ struct InputView: View {
     let lastThree = infinitif.suffix(3)
     let lastFour = infinitif.suffix(4)
 
-    if !["er", "ir", "re", "ïr"].contains(lastTwo) {
+    if !Verb.endingIsValid(infinitif: infinitif) {
       outputError("Invalid infinitive \(infinitif).")
       return
     }
@@ -128,142 +111,40 @@ struct InputView: View {
   }
 
   private func conjugate(_ verb: String, extraLetters: String?) {
-    var output = "\(verb)"
+    let all = PersonNumber.allCases
+    let specs: [(label: String, tenses: [Tense])] = [
+      ("PRESENT", all.map { .indicatifPrésent($0) }),
+      ("IMPERFECT", all.map { .imparfait($0) }),
+      ("FUTURE", all.map { .futurSimple($0) }),
+      ("CONDITIONAL", all.map { .conditionnelPrésent($0) }),
+      ("SIMPLE PAST", all.map { .passéSimple($0) }),
+      ("SUBJ. PRESENT", all.map { .subjonctifPrésent($0) }),
+      ("SUBJ. IMPERFECT", all.map { .subjonctifImparfait($0) }),
+      ("PAST PARTICIPLE", [.participePassé]),
+      ("PRESENT PARTICIPLE", [.participePrésent]),
+      ("IMPERATIVE", PersonNumber.impératifPersonNumbers.map { .impératif($0) }),
+      ("FUTURE STEM", [.radicalFutur])
+    ]
+
+    func forms(_ tenses: [Tense]) -> String {
+      tenses
+        .map { tense in
+          guard let value = Conjugator.conjugatedString(infinitif: verb, tense: tense, extraLetters: extraLetters) else {
+            fatalError("Conjugation failed.")
+          }
+          return value
+        }
+        .joined(separator: " ")
+    }
 
     let noTranslation = "NO TRANSLATION"
-    output += "  •  \(Verb.verbs[verb]?.translation ?? noTranslation)  •  PRESENT: "
+    var output = "\(verb)  •  \(Verb.verbs[verb]?.translation ?? noTranslation)"
+    output += specs
+      .map { "  •  \($0.label): \(forms($0.tenses))" }
+      .joined()
 
-    let personNumbers: [PersonNumber] = PersonNumber.allCases
-
-    let conjugationFailed = "Conjugation failed."
-
-    for personNumber in personNumbers {
-      let présentResult = Conjugator.conjugate(infinitif: verb, tense: .indicatifPrésent(personNumber), extraLetters: extraLetters)
-      switch présentResult {
-      case .success(let value):
-        output += "\(value) "
-      default:
-        fatalError(conjugationFailed)
-      }
-    }
-
-    output += " •  IMPERFECT: "
-
-    for personNumber in personNumbers {
-      let imparfaitResult = Conjugator.conjugate(infinitif: verb, tense: .imparfait(personNumber), extraLetters: extraLetters)
-      switch imparfaitResult {
-      case .success(let value):
-        output += "\(value) "
-      default:
-        fatalError(conjugationFailed)
-      }
-    }
-
-    output += " •  FUTURE: "
-
-    for personNumber in personNumbers {
-      let futurResult = Conjugator.conjugate(infinitif: verb, tense: .futurSimple(personNumber), extraLetters: extraLetters)
-      switch futurResult {
-      case .success(let value):
-        output += "\(value) "
-      default:
-        fatalError(conjugationFailed)
-      }
-    }
-
-    output += " •  CONDITIONAL: "
-
-    for personNumber in personNumbers {
-      let conditionnelResult = Conjugator.conjugate(infinitif: verb, tense: .conditionnelPrésent(personNumber), extraLetters: extraLetters)
-      switch conditionnelResult {
-      case .success(let value):
-        output += "\(value) "
-      default:
-        fatalError(conjugationFailed)
-      }
-    }
-
-    output += " •  SIMPLE PAST: "
-
-    for personNumber in personNumbers {
-      let passéSimpleResult = Conjugator.conjugate(infinitif: verb, tense: .passéSimple(personNumber), extraLetters: extraLetters)
-      switch passéSimpleResult {
-      case .success(let value):
-        output += "\(value) "
-      default:
-        fatalError(conjugationFailed)
-      }
-    }
-
-    output += " •  SUBJ. PRESENT: "
-
-    for personNumber in personNumbers {
-      let subjonctifPrésentResult = Conjugator.conjugate(infinitif: verb, tense: .subjonctifPrésent(personNumber), extraLetters: extraLetters)
-      switch subjonctifPrésentResult {
-      case .success(let value):
-        output += "\(value) "
-      default:
-        fatalError(conjugationFailed)
-      }
-    }
-
-    output += " •  SUBJ. IMPERFECT: "
-
-    for personNumber in personNumbers {
-      let subjonctifImparfaitResult = Conjugator.conjugate(infinitif: verb, tense: .subjonctifImparfait(personNumber), extraLetters: extraLetters)
-      switch subjonctifImparfaitResult {
-      case .success(let value):
-        output += "\(value) "
-      default:
-        fatalError(conjugationFailed)
-      }
-    }
-
-    let participePassé: String
-    let participePasséResult = Conjugator.conjugate(infinitif: verb, tense: .participePassé, extraLetters: extraLetters)
-    switch participePasséResult {
-    case .success(let value):
-      participePassé = value
-    default:
-      fatalError(conjugationFailed)
-    }
-    output += "  •  PAST PARTICIPLE: \(participePassé) "
-
-    let participePrésent: String
-    let participePrésentResult = Conjugator.conjugate(infinitif: verb, tense: .participePrésent, extraLetters: extraLetters)
-    switch participePrésentResult {
-    case .success(let value):
-      participePrésent = value
-    default:
-      fatalError(conjugationFailed)
-    }
-    output += " •  PRESENT PARTICIPLE: \(participePrésent) "
-
-    output += " •  IMPERATIVE: "
-
-    for personNumber in PersonNumber.impératifPersonNumbers {
-      let impératifResult = Conjugator.conjugate(infinitif: verb, tense: .impératif(personNumber), extraLetters: extraLetters)
-      switch impératifResult {
-      case .success(let value):
-        output += "\(value) "
-      default:
-        fatalError(conjugationFailed)
-      }
-    }
-
-    let radicalFuturResult = Conjugator.conjugate(infinitif: verb, tense: .radicalFutur, extraLetters: extraLetters)
-    switch radicalFuturResult {
-    case .success(let value):
-      output += " •  FUTURE STEM: \(value) "
-    default:
-      fatalError(conjugationFailed)
-    }
-
-    if
-      let actualVerb = Verb.verbs[verb],
-      actualVerb.auxiliary == .être
-    {
-      output += " •  auxiliary: être "
+    if Verb.verbs[verb]?.auxiliary == .être {
+      output += "  •  auxiliary: être"
     }
 
     Swift.print("\(output)\n")

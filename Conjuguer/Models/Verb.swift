@@ -12,7 +12,10 @@ struct Verb: Identifiable, Hashable {
   static let minVerbLength = 4
   static let maxFrequency = 981
 
-  let id = UUID()
+  // The dictionary key uniquely identifies a verb, so use it as a stable Identifiable id.
+  // A fresh UUID per parse would also leak into the synthesized Hashable/Equatable, making
+  // two parses of the same verb unequal.
+  var id: String { infinitifWithPossibleExtraLetters }
   let infinitif: String
   let translation: String
   let model: String

@@ -9,15 +9,18 @@ import Foundation
 
 extension URL {
   var isDeeplink: Bool {
-    scheme == "conjuguer"
+    scheme == URL.deeplinkScheme
   }
 
   var hasExpectedNumberOfDeeplinkComponents: Bool {
-    pathComponents.count == 2
+    // A well-formed deeplink path is "/<entity-id>", which URL splits into ["/", "<entity-id>"].
+    pathComponents.count == URL.deeplinkComponentCount
   }
 
-  static let conjuguerUrlPrefix = "conjuguer://"
+  static let deeplinkScheme = "conjuguer"
+  static let conjuguerUrlPrefix = deeplinkScheme + "://"
   static let verbHost = "verb"
   static let verbModelHost = "model"
   static let infoHost = "info"
+  private static let deeplinkComponentCount = 2
 }

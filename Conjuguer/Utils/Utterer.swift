@@ -12,18 +12,12 @@ enum Utterer {
   private static let synth = AVSpeechSynthesizer()
   private static let rate: Float = 0.5
   private static let pitchMultiplier: Float = 0.8
-  static let defaultLocaleString = "en-US"
   static let englishLocaleString = "en-US"
   static let frenchLocaleString = "fr-FR"
 
   static func setup() {
-    let session = AVAudioSession.sharedInstance()
-    do {
-      try session.setCategory(.playback, options: .mixWithOthers)
-    } catch let error as NSError {
-      print("\(error.localizedDescription)")
-    }
-    utter("", localeString: defaultLocaleString)
+    AudioSession.configure()
+    utter("", localeString: englishLocaleString)
   }
 
   static func utter(_ thingToUtter: String, localeString: String) {

@@ -72,9 +72,7 @@ struct ModelView: View {
           .sheetDismissable()
       }
     }
-    .onAppear {
-      world.analytics.recordViewAppeared("\(ModelView.self)")
-    }
+    .recordsAppearance(as: "\(ModelView.self)")
   }
 
   private var headerCard: some View {

@@ -82,9 +82,7 @@ struct ModelBrowseView: View {
       ModelView(model: model)
         .sheetDismissable()
     }
-    .onAppear {
-      world.analytics.recordViewAppeared("\(ModelBrowseView.self)")
-    }
+    .recordsAppearance(as: "\(ModelBrowseView.self)")
   }
 
   private func updateSearchResults(playSoundIfEmpty: Bool) {

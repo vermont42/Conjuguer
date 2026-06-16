@@ -41,9 +41,7 @@ struct InfoView: View {
     }
     .padding(.leading, Layout.doubleDefaultSpacing)
     .padding(.trailing, Layout.doubleDefaultSpacing)
-    .onAppear {
-      world.analytics.recordViewAppeared("\(InfoView.self)")
-    }
+    .recordsAppearance(as: "\(InfoView.self)")
     .screenBackground()
   }
 }

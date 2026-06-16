@@ -123,23 +123,8 @@ class World {
     verbModel = nil
     info = nil
 
-    switch url.host {
-    case URL.verbHost:
-      verb = Verb.verbs[url.pathComponents[1]]
-      selectedTab = .verbs
-    case URL.verbModelHost:
-      verbModel = VerbModel.models[url.pathComponents[1]]
-      selectedTab = .models
-    case URL.infoHost:
-      if
-        let infoIndex = Int(url.pathComponents[1]),
-        infoIndex < Info.infos.count
-      {
-        info = Info.infos[infoIndex]
-        selectedTab = .info
-      }
-    default:
-      return
+    if let tab = resolveDeeplinkEntity(from: url) {
+      selectedTab = tab
     }
   }
 
@@ -157,20 +142,33 @@ class World {
       return
     }
 
+    resolveDeeplinkEntity(from: url)
+  }
+
+  // Resolves a deep link's host + path to its target entity and assigns it. Returns the tab
+  // the target lives on (for handleURL's tab switch); handleInAppURL discards the result.
+  // Note the verb/model arms set the entity — possibly nil — unconditionally, while the info
+  // arm assigns (and reports a tab) only for an in-range index, matching the prior behavior.
+  @discardableResult
+  private func resolveDeeplinkEntity(from url: URL) -> MainTab? {
     switch url.host {
     case URL.verbHost:
       verb = Verb.verbs[url.pathComponents[1]]
+      return .verbs
     case URL.verbModelHost:
       verbModel = VerbModel.models[url.pathComponents[1]]
+      return .models
     case URL.infoHost:
-      if
+      guard
         let infoIndex = Int(url.pathComponents[1]),
         infoIndex < Info.infos.count
-      {
-        info = Info.infos[infoIndex]
+      else {
+        return nil
       }
+      info = Info.infos[infoIndex]
+      return .info
     default:
-      return
+      return nil
     }
   }
 }

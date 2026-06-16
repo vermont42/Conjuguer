@@ -280,8 +280,18 @@ derive both directions from it, and: the h2p bug class (item 4) becomes impossib
 `defects: [Tense: Bool]` simplifies to `Set<Tense>`. Note the two dialects: DefectGroup
 adds `fA/cA/hA` and bare `1s…3p` codes — the table needs to cover both.
 
-### 16. Collapse the duplicated debug conjugation dump
+### 16. Collapse the duplicated debug conjugation dump ✅ DONE (Batch 6)
 **Found by:** OM #6, FH #2, FM §2.1 · **Effort:** S–M
+
+> **Batch 6 resolution.** `Conjugator.printConjugations` was already deleted in Batch 1, so this was
+> just the `InputView.conjugate` rewrite: the eleven copy-pasted loop-switch-`fatalError` blocks
+> collapsed to a `[(label, [Tense])]` spec array mapped through one `forms(_:)` helper (which uses the
+> Batch-3 `Conjugator.conjugatedString` rather than re-unwrapping the `Result`), ~140 lines → ~35.
+> OH's TextField-helper suggestion applied opportunistically: the four repeated `Text + TextField`
+> stacks became a `labeledField(_:text:)` `@ViewBuilder`. Also folded in item 30/31's InputView nits —
+> the valid-endings check now calls `Verb.endingIsValid`, and the two `inpat` typos became `input`.
+> `InputView` remains `#if DEBUG`-only, so this is maintainer-tool hygiene. The XML-export `print()` and
+> its data-driven `fatalError`s are left for item 17/27's parser-error pass.
 
 `InputView.conjugate` (`InputView.swift:130-270`) is a near line-for-line copy of the
 (dead, buggy) `Conjugator.printConjugations` — eleven consecutive
@@ -475,15 +485,30 @@ strip-tables (`ConjugationResult.swift:22-35`), and the right way —
 (`PersonNumber.swift:172-174`). Standardize on `folding`; scoring keeps its two-tier
 (circumflex-only first stage) via an explicit circumflex set. Do together with item 3.
 
-### 24. `VerbView` recomputes all conjugations on every struct re-init
+### 24. `VerbView` recomputes all conjugations on every struct re-init ✅ DONE (Batch 6)
 **Found by:** FH #14 only · **Verified:** ✅ (`VerbView.swift:19-23`, stored `let`, not `@State`) · **Effort:** S–M
+
+> **Batch 6 resolution.** Took the "memoize keyed by infinitif" option (synchronous, no first-render
+> flash, unlike the `.task` route): added `@MainActor VerbConjugations.memoized(for:)` backed by a
+> `[String: VerbConjugations]` cache keyed by `infinitifWithPossibleExtraLetters`, and `VerbView.init`
+> now calls it instead of `VerbConjugations(verb:)`. Re-inits on parent `body` re-eval no longer redo
+> the ~50 conjugations + attributed-string builds. Cache is bounded by the verb count (≤6,320). The
+> compound-tense path (`CompoundTensesView`) is unchanged — it's only built when the toggle is on.
+> Verified `être` renders correctly in the simulator.
 
 `VerbConjugations(verb:)` conjugates ~50 forms + builds attributed strings, and runs
 every time the parent re-evaluates `body`. Store as `@State` populated in
 `.task(id: verb)` (or memoize keyed by infinitif). Low urgency, silent-growth cost.
 
-### 25. `World.handleURL` / `handleInAppURL` near-duplication
+### 25. `World.handleURL` / `handleInAppURL` near-duplication ✅ DONE (Batch 6)
 **Found by:** OM #10 only · **Verified:** ✅ (`World.swift:114-175`) · **Effort:** S
+
+> **Batch 6 resolution.** Extracted `resolveDeeplinkEntity(from:) -> MainTab?` (the shared
+> host→entity switch), which assigns the matched entity and returns the tab it lives on.
+> `handleURL` clears the siblings, calls it, and switches `selectedTab` only on a non-nil return;
+> `handleInAppURL` calls it `@discardableResult`-style and neither clears nor switches — so the prior
+> behavioral asymmetry (verb/model arms set the entity unconditionally, info arm only for an in-range
+> index) is preserved exactly. The intent comment stays on `handleInAppURL`. `DeeplinkTests` still green.
 
 Extract the shared host→entity resolution; keep the well-written intent comment at
 `:146-151` on the seam. The behavioral difference (tab switch + sibling clearing) is
@@ -554,8 +579,29 @@ assembled by interpolation at call sites (`Quiz.swift:394-395`, `QuizView.swift:
 safety. Long term: migrate to a String Catalog (`.xcstrings`) and delete most of the
 file.
 
-### 30. Service-layer grab bag (each S)
+### 30. Service-layer grab bag (each S) ✅ DONE (Batch 6)
 **Found by:** OH #13, FH #15, FM §3.8/3.9/§6, OM #13 — merged:
+
+> **Batch 6 resolution (all bullets).** Audio session: new `AudioSession.configure()` is the single
+> bootstrap (`.playback`, `.mixWithOthers`, logs failures); `SoundPlayer.init`'s setCategory was
+> removed and `SoundPlayer.setup`/`Utterer.setup` both call it. `Utterer.defaultLocaleString` deleted
+> (setup uses `englishLocaleString`). RatingsFetcher: `fetchRatingsDescription` is now a `@MainActor`
+> `async -> String` using `URLSession.data(for:)` + a `Decodable LookupResponse` + `String(format:)`,
+> and the exhortation is localized (`L.RatingsFetcher.exhortation`, added to both `.strings`);
+> `SettingsView` calls it from `.task`. **This surfaced a latent stub bug** — `URLProtocolStub` never
+> sent a `URLResponse`, which the legacy `dataTask` tolerated but the async `data(for:)` API traps on
+> (SIGILL); the stub now sends a `200` `HTTPURLResponse`, fixing both paths. GameCenterReal: commented
+> `print`s removed; `leaderboardIdentifier` is now `String?` (no `"ERROR"` sentinel) with a `guard let`
+> in `reportScore`/`showLeaderboard`. URLExtensions: `isDeeplink` derives from a new `deeplinkScheme`
+> constant (which also backs `conjuguerUrlPrefix`), and the `== 2` magic is a named
+> `deeplinkComponentCount`. `Verb.id` is now `infinitifWithPossibleExtraLetters` (stable; the per-parse
+> `UUID()` no longer leaks into synthesized `Hashable`/`Equatable`). `Verb.endingIsValid` is now the
+> single valid-endings source (InputView.add calls it). `AnalyticsLocaleReal` collapses `none`/`NONE`
+> to one `unknown` constant. `DoubleExtension` reuses a cached `NumberFormatter` (locale set per call);
+> `IntExtension` uses `String(format:)`. `verbsWithDeepLinks` logs before returning `""`. Analytics
+> hook: new `recordsAppearance(as:)` View modifier replaces all ten
+> `.onAppear { …recordViewAppeared… }` sites (the three with extra onAppear logic keep a slimmed
+> `.onAppear` beside the new modifier). 122 tests green; Settings + verb detail verified in the simulator.
 
 - **Audio session configured three times, failures swallowed** (FH, FM, OH):
   `SoundPlayer.init` (`.playback`, empty `catch`, `SoundPlayer.swift:20-21`),
@@ -689,9 +735,16 @@ Tests-first where a batch touches scoring/persistence logic.
    122 tests green. Two deferred remainders — item 21's environment-init + view-shell extraction,
    item 26's PersonNumber display props — tracked below; both belong to the issue-#27 workstream
    in `docs/conjuguer-ui-issues.md`.
-7. **Batch 6 — Views and services (items 16, 24, 25, 30, rest of 31).** InputView
-   spec-driven rewrite, VerbView memoization, `handleURL` extraction, the service grab
-   bag, analytics modifier.
+7. **Batch 6 — Views and services (items 16, 24, 25, 30, rest of 31). ✅ DONE.** InputView
+   spec-driven rewrite (+ `labeledField` helper), VerbView conjugation memoization,
+   `handleURL`/`handleInAppURL` shared resolver, and the full item-30 service grab bag
+   (single audio-session bootstrap, async/`Codable` RatingsFetcher with localized exhortation,
+   GameCenterReal cleanup, URLExtensions constants, stable `Verb.id`, valid-endings dedup,
+   AnalyticsLocaleReal constant, Double/Int extension nits, `verbsWithDeepLinks` logging, and a
+   `recordsAppearance(as:)` modifier across all ten sites). "Rest of 31" was the two `inpat`
+   typos (Batch 1 had reported them fixed but hadn't), folded into the InputView rewrite. Found
+   and fixed a latent `URLProtocolStub` bug (no `URLResponse` → async `data(for:)` SIGILL).
+   122 tests green; Settings + verb detail verified in the simulator.
 8. **Batch 7 — The big modernizations, each as its own PR (items 27, 28, 29, 33's
    structural test work).** Parser scaffold + parser tests, NSAttributedString
    retirement (largest; do last), String Catalog migration.

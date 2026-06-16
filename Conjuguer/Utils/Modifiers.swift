@@ -100,6 +100,24 @@ extension View {
   func screenBackground() -> some View {
     modifier(ScreenBackground())
   }
+
+  // Records a view-appeared analytics event. Replaces the repeated
+  // `.onAppear { world.analytics.recordViewAppeared("\(X.self)") }` boilerplate.
+  func recordsAppearance(as name: String) -> some View {
+    modifier(RecordsAppearance(name: name))
+  }
+}
+
+private struct RecordsAppearance: ViewModifier {
+  @Environment(World.self) private var world
+  let name: String
+
+  func body(content: Content) -> some View {
+    content
+      .onAppear {
+        world.analytics.recordViewAppeared(name)
+      }
+  }
 }
 
 private struct ScreenBackground: ViewModifier {

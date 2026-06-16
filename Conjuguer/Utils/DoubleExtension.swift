@@ -8,13 +8,18 @@
 import Foundation
 
 extension Double {
-  func asFormattedNumberCorrect(locale: Locale = .current) -> String {
+  // Reuse one formatter rather than allocating per call; its locale is set each time so the
+  // caller-supplied locale (defaulting to .current) is still honored.
+  private static let numberCorrectFormatter: NumberFormatter = {
     let formatter = NumberFormatter()
-    formatter.locale = locale
     formatter.numberStyle = .decimal
     formatter.maximumFractionDigits = 1
-    let number = NSNumber(value: self)
-    let formattedValue = formatter.string(from: number) ?? ""
-    return formattedValue
+    return formatter
+  }()
+
+  func asFormattedNumberCorrect(locale: Locale = .current) -> String {
+    let formatter = Double.numberCorrectFormatter
+    formatter.locale = locale
+    return formatter.string(from: NSNumber(value: self)) ?? ""
   }
 }

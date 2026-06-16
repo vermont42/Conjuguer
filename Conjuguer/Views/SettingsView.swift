@@ -73,13 +73,12 @@ struct SettingsView: View {
       }
     }
     .padding(.top, Layout.tripleDefaultSpacing)
-    .onAppear {
-      world.analytics.recordViewAppeared("\(SettingsView.self)")
-      RatingsFetcher.fetchRatingsDescription(completion: { description in
-        if description != RatingsFetcher.errorMessage {
-          self.rateReviewDescription = description
-        }
-      })
+    .recordsAppearance(as: "\(SettingsView.self)")
+    .task {
+      let description = await RatingsFetcher.fetchRatingsDescription()
+      if description != RatingsFetcher.errorMessage {
+        rateReviewDescription = description
+      }
     }
     .screenBackground()
   }

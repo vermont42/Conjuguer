@@ -27,46 +27,36 @@ enum RatingsFetcher {
     return reviewURL
   }
 
-  static func fetchRatingsDescription(completion: @escaping @MainActor (String) -> Void) {
-    let request = URLRequest(url: RatingsFetcher.iTunesURL)
-
-    // Capture main-actor-isolated state before entering the @Sendable closure.
-    let errorMessage = RatingsFetcher.errorMessage
-    let noRating = L.RatingsFetcher.noRating
-    let oneRating = L.RatingsFetcher.oneRating
-    let multipleRatings = L.RatingsFetcher.multipleRatings
-
-    let task = Current.session.dataTask(with: request) { (responseData, _, error) in
-      let description: String
-      let exhortation = " Ajoutez la vôtre."
-
-      if
-        error == nil,
-        let responseData = responseData,
-        let json = try? JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any],
-        let results = json["results"] as? [[String: Any]],
-        results.count == 1
-      {
-        let ratingsCount = (results[0])["userRatingCountForCurrentVersion"] as? Int ?? 0
-
-        switch ratingsCount {
-        case 0:
-          description = noRating + exhortation
-        case 1:
-          description = oneRating + exhortation
-        default:
-          description = (NSString(format: multipleRatings as NSString, ratingsCount) as String) + exhortation
-        }
-      } else {
-        description = errorMessage
-      }
-
-      Task { @MainActor in
-        completion(description)
-      }
+  private struct LookupResponse: Decodable {
+    struct Result: Decodable {
+      let userRatingCountForCurrentVersion: Int?
     }
 
-    task.resume()
+    let results: [Result]
+  }
+
+  @MainActor static func fetchRatingsDescription() async -> String {
+    let request = URLRequest(url: RatingsFetcher.iTunesURL)
+    let exhortation = L.RatingsFetcher.exhortation
+
+    guard
+      let (data, _) = try? await Current.session.data(for: request),
+      let response = try? JSONDecoder().decode(LookupResponse.self, from: data),
+      response.results.count == 1
+    else {
+      return errorMessage
+    }
+
+    let ratingsCount = response.results[0].userRatingCountForCurrentVersion ?? 0
+
+    switch ratingsCount {
+    case 0:
+      return L.RatingsFetcher.noRating + exhortation
+    case 1:
+      return L.RatingsFetcher.oneRating + exhortation
+    default:
+      return String(format: L.RatingsFetcher.multipleRatings, ratingsCount) + exhortation
+    }
   }
 
   static func stubData(ratingsCount: Int) -> Data {

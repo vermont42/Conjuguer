@@ -51,8 +51,6 @@ struct InfoBrowseView: View {
       VerbView(verb: verb)
         .sheetDismissable()
     }
-    .onAppear {
-      world.analytics.recordViewAppeared("\(InfoBrowseView.self)")
-    }
+    .recordsAppearance(as: "\(InfoBrowseView.self)")
   }
 }

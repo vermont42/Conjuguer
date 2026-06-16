@@ -12,7 +12,7 @@ class GameCenterReal: NSObject, GameCenter {
   static let shared = GameCenterReal()
   var isAuthenticated = false
   private let localPlayer = GKLocalPlayer.local
-  private var leaderboardIdentifier = ""
+  private var leaderboardIdentifier: String?
 
   private override init() {}
 
@@ -21,13 +21,11 @@ class GameCenterReal: NSObject, GameCenter {
       if let viewController = viewController {
         onViewController.present(viewController, animated: true, completion: nil)
       } else if self.localPlayer.isAuthenticated {
-        // print("AUTHENTICATED displayName: \(self.localPlayer.displayName) alias: \(self.localPlayer.alias) playerID: \(self.localPlayer.playerID)")
         self.isAuthenticated = true
         SoundPlayer.play(.randomApplause)
         self.localPlayer.loadDefaultLeaderboardIdentifier { identifier, _ in
           Task { @MainActor in
-            self.leaderboardIdentifier = identifier ?? "ERROR"
-            // print("identifier: \(self.leaderboardIdentifier)")
+            self.leaderboardIdentifier = identifier
           }
         }
         Current.analytics.recordGameCenterAuthSucceeded()
@@ -41,7 +39,7 @@ class GameCenterReal: NSObject, GameCenter {
   }
 
   func reportScore(_ score: Int) {
-    guard isAuthenticated else {
+    guard isAuthenticated, let leaderboardIdentifier else {
       return
     }
 
@@ -49,7 +47,7 @@ class GameCenterReal: NSObject, GameCenter {
   }
 
   func showLeaderboard() {
-    guard isAuthenticated else {
+    guard isAuthenticated, let leaderboardIdentifier else {
       return
     }
     GKAccessPoint.shared.trigger(leaderboardID: leaderboardIdentifier, playerScope: .global, timeScope: .allTime) { }

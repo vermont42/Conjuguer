@@ -16,9 +16,6 @@ class SoundPlayer {
 
   private init () {
     sounds = Dictionary()
-    do {
-      try AVAudioSession.sharedInstance().setCategory(.playback) // was ambient
-    } catch {}
   }
 
   static func play(_ sound: Sound) {
@@ -38,11 +35,7 @@ class SoundPlayer {
   }
 
   static func setup() {
-    let session = AVAudioSession.sharedInstance()
-    do {
-      try session.setCategory(.playback, options: .mixWithOthers)
-    } catch {}
-
+    AudioSession.configure()
     play(.silence) // https://forums.developer.apple.com/thread/23160
   }
 }

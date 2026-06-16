@@ -1138,6 +1138,7 @@ Machio Okada and Hitoshi Oguriso created the Tableaux de conjugaison de l’anci
 "RatingsFetcher.noRating" = "No one has rated this version of Conjuguer.";
 "RatingsFetcher.oneRating" = "There is one rating for this version of Conjuguer.";
 "RatingsFetcher.multipleRatings" = "There are %d ratings for this version of Conjuguer.";
+"RatingsFetcher.exhortation" = " Add yours.";
 
 "ImageInfo.davidCompton" = "photograph of David Compton taken in Paris, France during the early 1960s";
 "ImageInfo.joshAdams" = "photograph of Josh Adams taken near Vacaville, California in 2021";

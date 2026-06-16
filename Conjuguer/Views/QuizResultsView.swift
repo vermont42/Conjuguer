@@ -52,9 +52,7 @@ struct QuizResultsView: View {
     .padding(.leading, Layout.doubleDefaultSpacing)
     .padding(.trailing, Layout.doubleDefaultSpacing)
     .padding(.top, Layout.tripleDefaultSpacing)
-    .onAppear {
-      world.analytics.recordViewAppeared("\(QuizResultsView.self)")
-    }
+    .recordsAppearance(as: "\(QuizResultsView.self)")
     .screenBackground()
   }
 }

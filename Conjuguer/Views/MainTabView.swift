@@ -36,9 +36,7 @@ struct MainTabView: View {
       }
     }
     .tabViewStyle(.sidebarAdaptable)
-    .onAppear {
-      world.analytics.recordViewAppeared("\(MainTabView.self)")
-    }
+    .recordsAppearance(as: "\(MainTabView.self)")
   }
 }
 

@@ -73,8 +73,8 @@ struct VerbBrowseView: View {
       VerbView(verb: verb)
         .sheetDismissable()
     }
+    .recordsAppearance(as: "\(VerbBrowseView.self)")
     .onAppear {
-      world.analytics.recordViewAppeared("\(VerbBrowseView.self)")
       world.reviewPrompter.promptableActionHappened()
     }
   }

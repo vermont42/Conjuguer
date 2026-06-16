@@ -9,14 +9,13 @@
 import Foundation
 
 struct AnalyticsLocaleReal: AnalyticsLocale {
-  private let none = "none"
-  private let NONE = "NONE"
+  private static let unknown = "none"
 
   var languageCode: String {
-    NSLocale.current.language.languageCode?.identifier ?? none
+    NSLocale.current.language.languageCode?.identifier ?? Self.unknown
   }
 
   var regionCode: String {
-    NSLocale.current.region?.identifier ?? NONE
+    NSLocale.current.region?.identifier ?? Self.unknown
   }
 }

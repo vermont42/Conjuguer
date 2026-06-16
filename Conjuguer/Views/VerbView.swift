@@ -17,7 +17,7 @@ struct VerbView: View {
 
   init(verb: Verb) {
     self.verb = verb
-    conjugations = VerbConjugations(verb: verb)
+    conjugations = VerbConjugations.memoized(for: verb)
   }
 
   var body: some View {
@@ -67,9 +67,7 @@ struct VerbView: View {
             .scrollFade()
         }
       }
-      .onAppear {
-        world.analytics.recordViewAppeared("\(VerbView.self)")
-      }
+      .recordsAppearance(as: "\(VerbView.self)")
       .padding(.horizontal, Layout.doubleDefaultSpacing)
     }
     .screenBackground()
