@@ -8,8 +8,8 @@
 import Foundation
 
 enum Conjugator {
-  static func conjugatedString(infinitif: String, tense: Tense, extraLetters: String?) -> String? {
-    switch conjugate(infinitif: infinitif, tense: tense, extraLetters: extraLetters) {
+  static func conjugatedString(infinitif: String, tense: Tense, extraLetters: String?, pronounGender: PronounGender? = nil) -> String? {
+    switch conjugate(infinitif: infinitif, tense: tense, extraLetters: extraLetters, pronounGender: pronounGender) {
     case .success(let value):
       return value
     case .failure:
@@ -17,7 +17,7 @@ enum Conjugator {
     }
   }
 
-  static func conjugate(infinitif: String, tense: Tense, extraLetters: String?) -> Result<String, ConjugatorError> {
+  static func conjugate(infinitif: String, tense: Tense, extraLetters: String?, pronounGender: PronounGender? = nil) -> Result<String, ConjugatorError> {
     guard infinitif.count >= Verb.minVerbLength else {
       return .failure(.verbTooShort)
     }
@@ -169,8 +169,7 @@ enum Conjugator {
       }
       let conjugationWithoutAgreement = tense.conjugatedAuxiliary(personNumber: personNumber, auxiliary: verb.auxiliary) + " " + stems[0] + model.participeEndingRecursive
       if verb.isReflexive || verb.auxiliary == .être {
-        let pronounGender = Current.settings.pronounGender
-        let agreementEnding = pronounGender.participePasséEndingForPersonNumber(personNumber)
+        let agreementEnding = (pronounGender ?? Current.settings.pronounGender).participePasséEndingForPersonNumber(personNumber)
         return .success(conjugationWithoutAgreement + agreementEnding)
       } else {
         return .success(conjugationWithoutAgreement)

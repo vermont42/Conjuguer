@@ -10,15 +10,15 @@ import XCTest
 
 @MainActor
 enum T {
-  static func conjugate(infinitif: String, tense: Tense, extraLetters: String?) -> String {
-    guard let value = Conjugator.conjugatedString(infinitif: infinitif, tense: tense, extraLetters: extraLetters) else {
+  static func conjugate(infinitif: String, tense: Tense, extraLetters: String?, pronounGender: PronounGender? = nil) -> String {
+    guard let value = Conjugator.conjugatedString(infinitif: infinitif, tense: tense, extraLetters: extraLetters, pronounGender: pronounGender) else {
       fatalError("Conjugation failed.")
     }
     return value
   }
 
-  static func testConjugation(infinitif: String, tense: Tense, expected: String, extraLetters: String?) {
-    if let value = Conjugator.conjugatedString(infinitif: infinitif, tense: tense, extraLetters: extraLetters) {
+  static func testConjugation(infinitif: String, tense: Tense, expected: String, extraLetters: String?, pronounGender: PronounGender? = nil) {
+    if let value = Conjugator.conjugatedString(infinitif: infinitif, tense: tense, extraLetters: extraLetters, pronounGender: pronounGender) {
       XCTAssertEqual(expected, value)
     } else {
       XCTFail("Conjugation failed. Expected: \(expected)")

@@ -372,8 +372,20 @@ Three parts, one theme (~535 lines across the three group files):
 While there, document the opposite uppercase-letter conventions in the two
 `groupForXmlString` mappings (FM §6).
 
-### 20. Settings: generic load/persist helpers, single serialization path
+### 20. Settings: generic load/persist helpers, single serialization path ✅ DONE (Batch 5)
 **Found by:** all four (OH #8, OM #11, FH #7, FM §2.9) · **Effort:** M
+
+> **Batch 5 resolution.** Added a fileprivate `SettingValue` protocol (`var settingString` +
+> `init?(settingString:)`) with a blanket conformance for `RawRepresentable where RawValue == String`
+> (the four preference enums) plus `Int`/`Date` conformances, and two generic `Settings` helpers —
+> `load(key:default:)` (seeds the default when the key is missing, exactly as the old per-property init
+> did) and `persist(_:oldValue:key:)` (writes only on change). Every property's `didSet` and the init
+> now route through these, so **all seven values serialize through the same `settingString` path** — the
+> divergence that caused item 1 (a case name written, a rawValue read) is now structurally impossible.
+> The two `Int((string as NSString).intValue)` reads became `Int(settingString)` (garbage → default,
+> same observable result since both defaults are 0), and the hand-rolled `DateFormatter` was replaced by
+> `timeIntervalSince1970` round-tripping (no formatter, no fixed-format string). The existing
+> `SettingsTests` round-trip suite (added with item 33) still passes unchanged. 122 tests green.
 
 Seven properties × (didSet-persist + key + default + init load-or-seed) ≈ 120 lines
 (`Settings.swift:16-133`). Two small generic helpers (`load<T: RawRepresentable>` +
@@ -384,8 +396,30 @@ eliminating the divergence behind item 1. Also: `Int((bestScoreString as NSStrin
 reports, correct):** property wrappers don't compose with `@Observable`, so OH's
 `@SettingsPersisted` sketch won't compile as written — use the helper-method shape.
 
-### 21. Browse views/stores: extract the shared scaffold
+### 21. Browse views/stores: extract the shared scaffold ✅ DONE (Batch 5 — generic store; view-shell extraction & environment-init deferred)
 **Found by:** FH #10, FM §2.7, OH #4 (overclaimed — see Appendix A) · **Effort:** M–L
+
+> **Batch 5 resolution (the store duplication).** New generic `@Observable BrowseStore<Item: Identifiable, Sort: Hashable>`
+> (`Utils/BrowseStore.swift`) replaced the near-identical `VerbStore`/`ModelStore` classes: it holds the
+> pre-sorted arrays keyed by sort case, exposes the current one as `items`, and routes every change
+> through a caller-supplied `persistSort` closure (`sort.didSet` persists + swaps). The per-screen
+> sorting logic and the Settings keypath now live in small `VerbBrowse.makeStore(world:)` /
+> `ModelBrowse.makeStore(world:)` factories (the precompute reads only the global `Verb.verbs` /
+> `VerbModel.models` tables — sort-independent — plus `world.settings` for the initial/persisted sort).
+> The two views switched their `store.verbs`/`store.modelsAndDecorators` + `store.verbSort`/`store.modelSort`
+> references to `store.items`/`store.sort`. Verified in the simulator: flipping the verb sort reorders
+> the list (frequency → alphabetical) and the three-way model sort works (`docs/screenshots/…batch5-*`).
+> 122 tests green.
+>
+> **Deferred:** (1) the **environment-init fix** — both views still build their store from the global
+> `Current` in the `@State` default (`makeStore(world: Current)`); the factory now *takes* a `World`, so
+> the only remaining step is feeding it the `@Environment` world, which `@State` defaults can't see
+> (needs the optional-store-in-`onAppear` pattern). No behavior change in the shipping app, where the
+> environment world *is* `Current`. (2) the **view-shell extraction** (shared picker→list→
+> `ContentUnavailableView`→sheet→analytics scaffold and a shared `updateSearchResults`) — the two
+> `updateSearchResults` differ only in their filter keypath (`infinitifWithPossibleExtraLetters` vs
+> `exemplar`) and are three lines each; left un-merged. `InfoBrowseView` remains a non-adopter (no
+> search/sort), as the item recommends.
 
 `VerbBrowseView` and `ModelBrowseView` duplicate the
 picker → searchable list → `ContentUnavailableView` → sad-trombone → sheet → analytics
@@ -455,8 +489,26 @@ Extract the shared host→entity resolution; keep the well-written intent commen
 `:146-151` on the seam. The behavioral difference (tab switch + sibling clearing) is
 covered by `DeeplinkTests`, so this is a safe extraction.
 
-### 26. Model layer reads `Current` directly
+### 26. Model layer reads `Current` directly ✅ DONE (Batch 5 — engine made pure; PersonNumber display props deferred)
 **Found by:** FM §3.3 only (OH #13's `World`-global note is the long-term cousin) · **Effort:** M (policy)
+
+> **Batch 5 resolution.** `Conjugator.conjugate`/`conjugatedString` gained a `pronounGender: PronounGender? = nil`
+> parameter; the compound-tense branch now reads `pronounGender ?? Current.settings.pronounGender` instead
+> of `Current.settings.pronounGender` outright (the same inject-with-live-fallback seam as item 6's clock).
+> Given an explicit gender the engine is a **pure function of its arguments**. `CompoundTenseTests` no
+> longer mutates `Current.settings.pronounGender`: it injects `.feminine` through a one-line
+> `assertFeminine` wrapper over `T.testConjugation` (which, with `T.conjugate`, also gained the defaulted
+> param). The crash-hazard comment about mutating the @Observable property in place is gone — the test no
+> longer touches global state at all. 122 tests green (incl. all `VerbModelTests` golden cases, since the
+> default `nil` path preserves prior behavior).
+>
+> **Deferred:** `PersonNumber.pronoun/pronounWithGender/gender/preamble` still read `Current.settings.pronounGender`.
+> These are `@MainActor` *presentation* helpers (they build UI pronoun strings consumed by `QuizView`,
+> `Quiz` utterance, and `Tense`'s display accessors), not part of the conjugation engine — the concrete
+> payoff the item named (engine purity + tests not mutating global) is fully captured by the engine
+> change. Parameterizing them would ripple `PronounGender` through `Tense`'s four display accessors and
+> their callers for marginal testability gain; left for the issue-#27 `@Environment` migration, which is
+> the natural home for view-layer preference plumbing.
 
 `PersonNumber.pronoun/pronounWithGender/gender` and `Conjugator.conjugate`'s compound
 branch (`Conjugator.swift:199`) read `Current.settings.pronounGender` from model code,
@@ -629,10 +681,14 @@ Tests-first where a batch touches scoring/persistence logic.
    (dropping `endingSlots`' string round-trip) + Imparfait≡Conditionnel alias, diacritic
    folding consolidation in scoring. 122 tests green (117 + 5); ModelView grid verified in
    the simulator. Item 19's engine-side per-person table conversion deferred (see its note).
-6. **Batch 5 — Settings & DI seams (items 20, 21, 26).** Settings helpers (after the
-   round-trip test), browse store ↔ environment alignment + generic `BrowseStore`,
-   pronoun-gender injection into the engine. Coordinate with the issue-#27 workstream in
-   `docs/conjuguer-ui-issues.md`.
+6. **Batch 5 — Settings & DI seams (items 20, 21, 26). ✅ DONE.** Settings generic
+   `load`/`persist` helpers forcing a single serialization path (the `SettingValue` protocol;
+   the pre-existing round-trip test still green), generic `BrowseStore<Item, Sort>` replacing
+   `VerbStore`/`ModelStore` (verified in the simulator), and pronoun-gender injection making
+   `Conjugator.conjugate` a pure function (so `CompoundTenseTests` stops mutating global state).
+   122 tests green. Two deferred remainders — item 21's environment-init + view-shell extraction,
+   item 26's PersonNumber display props — tracked below; both belong to the issue-#27 workstream
+   in `docs/conjuguer-ui-issues.md`.
 7. **Batch 6 — Views and services (items 16, 24, 25, 30, rest of 31).** InputView
    spec-driven rewrite, VerbView memoization, `handleURL` extraction, the service grab
    bag, analytics modifier.
@@ -679,7 +735,7 @@ No finding was fabricated; these details didn't survive (kept out of the ranking
 
 ## Deferred work — partially-done items
 
-Snapshot after **Batch 4**. Fully-unstarted items keep their own numbered sections above, and
+Snapshot after **Batch 5**. Fully-unstarted items keep their own numbered sections above, and
 the batch plan in "Recommended implementation order" already covers them. This section tracks
 only the items that are *partly* done, so their unfinished remainders don't get lost in an
 otherwise-✅ section. Tick a box when the remainder lands.
@@ -696,6 +752,16 @@ otherwise-✅ section. Tick a box when the remainder lands.
   endings, and the Imparfait≡Conditionnel alias are done.
 - [ ] **22 remainder** — OH's per-tense-family decomposition of the 195-line `Conjugator.conjugate()`
   (the three small pieces are done). Optional; do **after item 33** adds engine-edge tests.
+- [ ] **21 remainder** — (a) **environment-init**: both browse views still build their `BrowseStore` from
+  the global `Current` in the `@State` default; the `VerbBrowse`/`ModelBrowse` factories already take a
+  `World`, so the remaining step is feeding the `@Environment` world (optional-store-in-`onAppear`). No
+  shipping-app behavior change. (b) **view-shell extraction**: the shared picker→list→
+  `ContentUnavailableView`→sheet→analytics scaffold and a shared `updateSearchResults` are still
+  per-view (the generic *store* is done). Fold both into the issue-#27 `@Environment` workstream.
+- [ ] **26 remainder** — `PersonNumber.pronoun/pronounWithGender/gender/preamble` still read
+  `Current.settings.pronounGender`. Engine (`Conjugator.conjugate`) is now pure; these are `@MainActor`
+  presentation helpers. Parameterize them alongside the issue-#27 `@Environment` migration if/when the
+  view layer threads `PronounGender` explicitly.
 
 ### Deliberately skipped (won't-do unless revisited)
 - **18 style nit** — iterating `models.keys` in `computeIrregularities`/`sortVerbs` (OM #9). Legal,

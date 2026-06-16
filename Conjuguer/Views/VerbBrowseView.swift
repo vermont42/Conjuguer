@@ -10,7 +10,7 @@ import SwiftUI
 
 struct VerbBrowseView: View {
   @Environment(World.self) private var world
-  @State private var store = VerbStore(world: Current)
+  @State private var store = VerbBrowse.makeStore(world: Current)
   @State private var searchText = ""
   @State private var searchResults: [Verb] = []
 
@@ -23,7 +23,7 @@ struct VerbBrowseView: View {
         Color.customBackground
 
         VStack {
-          Picker("", selection: $store.verbSort) {
+          Picker("", selection: $store.sort) {
             ForEach(VerbSort.allCases, id: \.self) { type in
               Text(L.displayNameForVerbSort(type)).tag(type)
             }
@@ -63,12 +63,12 @@ struct VerbBrowseView: View {
     .onChange(of: searchText, initial: true) { _, _ in
       updateSearchResults(playSoundIfEmpty: true)
     }
-    .onChange(of: store.verbSort) { _, _ in
+    .onChange(of: store.sort) { _, _ in
       withAnimation(.snappy) {
         updateSearchResults(playSoundIfEmpty: false)
       }
     }
-    .sensoryFeedback(.selection, trigger: store.verbSort)
+    .sensoryFeedback(.selection, trigger: store.sort)
     .sheet(item: $world.verb) { verb in
       VerbView(verb: verb)
         .sheetDismissable()
@@ -102,9 +102,9 @@ struct VerbBrowseView: View {
 
   private func updateSearchResults(playSoundIfEmpty: Bool) {
     if searchText.isEmpty {
-      searchResults = store.verbs
+      searchResults = store.items
     } else {
-      let matchingVerbs = store.verbs.filter { $0.infinitifWithPossibleExtraLetters.localizedStandardContains(searchText) }
+      let matchingVerbs = store.items.filter { $0.infinitifWithPossibleExtraLetters.localizedStandardContains(searchText) }
       if matchingVerbs.isEmpty && playSoundIfEmpty {
         SoundPlayer.play(.randomSadTrombone)
       }
@@ -113,17 +113,9 @@ struct VerbBrowseView: View {
   }
 }
 
-@Observable
-final class VerbStore {
-  var verbs: [Verb]
-  private let current: World
-  private let frequencyVerbs: [Verb]
-  private let alphabeticVerbs: [Verb]
-
-  init(world: World) {
-    self.current = world
-
-    frequencyVerbs = Verb.verbs.values
+enum VerbBrowse {
+  static func makeStore(world: World) -> BrowseStore<Verb, VerbSort> {
+    let frequencyVerbs = Verb.verbs.values
       .sorted { lhs, rhs in
         if lhs.frequency == nil && rhs.frequency == nil {
           return lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
@@ -136,30 +128,14 @@ final class VerbStore {
         }
       }
 
-    alphabeticVerbs = Verb.verbs.values.sorted { lhs, rhs in
+    let alphabeticVerbs = Verb.verbs.values.sorted { lhs, rhs in
       lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
     }
 
-    let initialSort = current.settings.verbSort
-    switch initialSort {
-    case .frequency:
-      verbs = frequencyVerbs
-    case .alphabetical:
-      verbs = alphabeticVerbs
-    }
-    verbSort = initialSort
-  }
-
-  var verbSort: VerbSort {
-    didSet {
-      current.settings.verbSort = verbSort
-
-      switch verbSort {
-      case .frequency:
-        verbs = frequencyVerbs
-      case .alphabetical:
-        verbs = alphabeticVerbs
-      }
-    }
+    return BrowseStore(
+      itemsBySort: [.frequency: frequencyVerbs, .alphabetical: alphabeticVerbs],
+      initialSort: world.settings.verbSort,
+      persistSort: { world.settings.verbSort = $0 }
+    )
   }
 }

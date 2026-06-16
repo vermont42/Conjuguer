@@ -15,9 +15,7 @@ class Settings {
 
   var verbSort: VerbSort = verbSortDefault {
     didSet {
-      if verbSort != oldValue {
-        getterSetter.set(key: Settings.verbSortKey, value: verbSort.rawValue)
-      }
+      persist(verbSort, oldValue: oldValue, key: Settings.verbSortKey)
     }
   }
   static let verbSortKey = "verbSort"
@@ -25,9 +23,7 @@ class Settings {
 
   var modelSort: ModelSort = modelSortDefault {
     didSet {
-      if modelSort != oldValue {
-        getterSetter.set(key: Settings.modelSortKey, value: modelSort.rawValue)
-      }
+      persist(modelSort, oldValue: oldValue, key: Settings.modelSortKey)
     }
   }
   static let modelSortKey = "modelSort"
@@ -35,9 +31,7 @@ class Settings {
 
   var quizDifficulty: QuizDifficulty = quizDifficultyDefault {
     didSet {
-      if quizDifficulty != oldValue {
-        getterSetter.set(key: Settings.quizDifficultyKey, value: quizDifficulty.rawValue)
-      }
+      persist(quizDifficulty, oldValue: oldValue, key: Settings.quizDifficultyKey)
     }
   }
   static let quizDifficultyKey = "quizDifficulty"
@@ -45,9 +39,7 @@ class Settings {
 
   var bestScore: Int = bestScoreDefault {
     didSet {
-      if bestScore != oldValue {
-        getterSetter.set(key: Settings.bestScoreKey, value: "\(bestScore)")
-      }
+      persist(bestScore, oldValue: oldValue, key: Settings.bestScoreKey)
     }
   }
   static let bestScoreKey = "bestScore"
@@ -55,9 +47,7 @@ class Settings {
 
   var pronounGender: PronounGender = pronounGenderDefault {
     didSet {
-      if pronounGender != oldValue {
-        getterSetter.set(key: Settings.pronounGenderKey, value: pronounGender.rawValue)
-      }
+      persist(pronounGender, oldValue: oldValue, key: Settings.pronounGenderKey)
     }
   }
   static let pronounGenderKey = "pronounGender"
@@ -65,9 +55,7 @@ class Settings {
 
   var promptActionCount: Int = promptActionCountDefault {
     didSet {
-      if promptActionCount != oldValue {
-        getterSetter.set(key: Settings.promptActionCountKey, value: "\(promptActionCount)")
-      }
+      persist(promptActionCount, oldValue: oldValue, key: Settings.promptActionCountKey)
     }
   }
   static let promptActionCountKey = "promptActionCount"
@@ -75,61 +63,78 @@ class Settings {
 
   var lastReviewPromptDate: Date = lastReviewPromptDateDefault {
     didSet {
-      if lastReviewPromptDate != oldValue {
-        getterSetter.set(key: Settings.lastReviewPromptDateKey, value: formatter.string(from: lastReviewPromptDate))
-      }
+      persist(lastReviewPromptDate, oldValue: oldValue, key: Settings.lastReviewPromptDateKey)
     }
   }
   static let lastReviewPromptDateKey = "lastReviewPromptDate"
   static let lastReviewPromptDateDefault = Date(timeIntervalSince1970: 0.0)
-  private let formatter = DateFormatter()
-  private static let format = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
 
   init(getterSetter: GetterSetter) {
     self.getterSetter = getterSetter
-    formatter.dateFormat = Settings.format
+    verbSort = load(key: Settings.verbSortKey, default: Settings.verbSortDefault)
+    modelSort = load(key: Settings.modelSortKey, default: Settings.modelSortDefault)
+    quizDifficulty = load(key: Settings.quizDifficultyKey, default: Settings.quizDifficultyDefault)
+    bestScore = load(key: Settings.bestScoreKey, default: Settings.bestScoreDefault)
+    pronounGender = load(key: Settings.pronounGenderKey, default: Settings.pronounGenderDefault)
+    promptActionCount = load(key: Settings.promptActionCountKey, default: Settings.promptActionCountDefault)
+    lastReviewPromptDate = load(key: Settings.lastReviewPromptDateKey, default: Settings.lastReviewPromptDateDefault)
+  }
 
-    // Load saved values after all properties are initialized
-    if let verbSortString = getterSetter.get(key: Settings.verbSortKey) {
-      verbSort = VerbSort(rawValue: verbSortString) ?? Settings.verbSortDefault
-    } else {
-      getterSetter.set(key: Settings.verbSortKey, value: verbSort.rawValue)
+  private func load<T: SettingValue>(key: String, default defaultValue: T) -> T {
+    guard let string = getterSetter.get(key: key) else {
+      getterSetter.set(key: key, value: defaultValue.settingString)
+      return defaultValue
     }
+    return T(settingString: string) ?? defaultValue
+  }
 
-    if let modelSortString = getterSetter.get(key: Settings.modelSortKey) {
-      modelSort = ModelSort(rawValue: modelSortString) ?? Settings.modelSortDefault
-    } else {
-      getterSetter.set(key: Settings.modelSortKey, value: modelSort.rawValue)
+  private func persist<T: SettingValue & Equatable>(_ value: T, oldValue: T, key: String) {
+    guard value != oldValue else {
+      return
     }
+    getterSetter.set(key: key, value: value.settingString)
+  }
+}
 
-    if let quizDifficultyString = getterSetter.get(key: Settings.quizDifficultyKey) {
-      quizDifficulty = QuizDifficulty(rawValue: quizDifficultyString) ?? Settings.quizDifficultyDefault
-    } else {
-      getterSetter.set(key: Settings.quizDifficultyKey, value: quizDifficulty.rawValue)
-    }
+private protocol SettingValue {
+  var settingString: String { get }
+  init?(settingString: String)
+}
 
-    if let bestScoreString = getterSetter.get(key: Settings.bestScoreKey) {
-      bestScore = Int((bestScoreString as NSString).intValue)
-    } else {
-      getterSetter.set(key: Settings.bestScoreKey, value: "\(bestScore)")
-    }
+extension SettingValue where Self: RawRepresentable, RawValue == String {
+  var settingString: String {
+    rawValue
+  }
 
-    if let pronounGenderString = getterSetter.get(key: Settings.pronounGenderKey) {
-      pronounGender = PronounGender(rawValue: pronounGenderString) ?? Settings.pronounGenderDefault
-    } else {
-      getterSetter.set(key: Settings.pronounGenderKey, value: pronounGender.rawValue)
-    }
+  init?(settingString: String) {
+    self.init(rawValue: settingString)
+  }
+}
 
-    if let promptActionCountString = getterSetter.get(key: Settings.promptActionCountKey) {
-      promptActionCount = Int((promptActionCountString as NSString).intValue)
-    } else {
-      getterSetter.set(key: Settings.promptActionCountKey, value: "\(promptActionCount)")
-    }
+extension VerbSort: SettingValue {}
+extension ModelSort: SettingValue {}
+extension QuizDifficulty: SettingValue {}
+extension PronounGender: SettingValue {}
 
-    if let lastReviewPromptDateString = getterSetter.get(key: Settings.lastReviewPromptDateKey) {
-      lastReviewPromptDate = formatter.date(from: lastReviewPromptDateString) ?? Settings.lastReviewPromptDateDefault
-    } else {
-      getterSetter.set(key: Settings.lastReviewPromptDateKey, value: formatter.string(from: lastReviewPromptDate))
+extension Int: SettingValue {
+  var settingString: String {
+    String(self)
+  }
+
+  init?(settingString: String) {
+    self.init(settingString)
+  }
+}
+
+extension Date: SettingValue {
+  var settingString: String {
+    String(timeIntervalSince1970)
+  }
+
+  init?(settingString: String) {
+    guard let interval = Double(settingString) else {
+      return nil
     }
+    self = Date(timeIntervalSince1970: interval)
   }
 }

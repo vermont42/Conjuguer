@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ModelBrowseView: View {
   @Environment(World.self) private var world
-  @State private var store = ModelStore(world: Current)
+  @State private var store = ModelBrowse.makeStore(world: Current)
   @State private var searchText = ""
   @State private var searchResults: [ModelAndDecorator] = []
 
@@ -23,7 +23,7 @@ struct ModelBrowseView: View {
         Color.customBackground
 
         VStack {
-          Picker("", selection: $store.modelSort) {
+          Picker("", selection: $store.sort) {
             ForEach(ModelSort.allCases, id: \.self) { type in
               Text(L.displayNameForModelSort(type)).tag(type)
             }
@@ -72,14 +72,12 @@ struct ModelBrowseView: View {
     .onChange(of: searchText, initial: true) { _, _ in
       updateSearchResults(playSoundIfEmpty: true)
     }
-    .onChange(of: store.modelSort) { _, _ in
-      // Animate the re-sort so the list visibly reorders rather than snapping (#19).
+    .onChange(of: store.sort) { _, _ in
       withAnimation(.snappy) {
         updateSearchResults(playSoundIfEmpty: false)
       }
     }
-    // Selection haptic so flipping the sort reads as a causal, tactile action (#19).
-    .sensoryFeedback(.selection, trigger: store.modelSort)
+    .sensoryFeedback(.selection, trigger: store.sort)
     .sheet(item: $world.verbModel) { model in
       ModelView(model: model)
         .sheetDismissable()
@@ -91,9 +89,9 @@ struct ModelBrowseView: View {
 
   private func updateSearchResults(playSoundIfEmpty: Bool) {
     if searchText.isEmpty {
-      searchResults = store.modelsAndDecorators
+      searchResults = store.items
     } else {
-      let matchingModels = store.modelsAndDecorators.filter { $0.model.exemplar.localizedStandardContains(searchText) }
+      let matchingModels = store.items.filter { $0.model.exemplar.localizedStandardContains(searchText) }
       if matchingModels.isEmpty && playSoundIfEmpty {
         SoundPlayer.play(.randomSadTrombone)
       }
@@ -109,18 +107,9 @@ struct ModelAndDecorator: Identifiable, Hashable {
   var id: String { model.id }
 }
 
-@Observable
-final class ModelStore {
-  var modelsAndDecorators: [ModelAndDecorator]
-  private let current: World
-  private let irregularityModelsAndDecorators: [ModelAndDecorator]
-  private let alphabeticModelsAndDecorators: [ModelAndDecorator]
-  private let identifierModelsAndDecorators: [ModelAndDecorator]
-
-  init(world: World) {
-    self.current = world
-
-    irregularityModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
+enum ModelBrowse {
+  static func makeStore(world: World) -> BrowseStore<ModelAndDecorator, ModelSort> {
+    let irregularityModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
       if lhs.irregularity != rhs.irregularity {
         return lhs.irregularity > rhs.irregularity
       }
@@ -128,40 +117,24 @@ final class ModelStore {
     }
     .map { ModelAndDecorator(model: $0, decorator: "", irregularityBadge: $0.irregularity) }
 
-    alphabeticModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
+    let alphabeticModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
       lhs.exemplar.compare(rhs.exemplar, locale: Util.french) == .orderedAscending
     }
     .map { ModelAndDecorator(model: $0, decorator: "") }
 
-    identifierModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
+    let identifierModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
       lhs.position < rhs.position
     }
     .map { ModelAndDecorator(model: $0, decorator: " (\($0.id))") }
 
-    let initialSort = current.settings.modelSort
-    switch initialSort {
-    case .irregularity:
-      modelsAndDecorators = irregularityModelsAndDecorators
-    case .alphabetical:
-      modelsAndDecorators = alphabeticModelsAndDecorators
-    case .identifier:
-      modelsAndDecorators = identifierModelsAndDecorators
-    }
-    modelSort = initialSort
-  }
-
-  var modelSort: ModelSort {
-    didSet {
-      current.settings.modelSort = modelSort
-
-      switch modelSort {
-      case .irregularity:
-        modelsAndDecorators = irregularityModelsAndDecorators
-      case .alphabetical:
-        modelsAndDecorators = alphabeticModelsAndDecorators
-      case .identifier:
-        modelsAndDecorators = identifierModelsAndDecorators
-      }
-    }
+    return BrowseStore(
+      itemsBySort: [
+        .irregularity: irregularityModelsAndDecorators,
+        .alphabetical: alphabeticModelsAndDecorators,
+        .identifier: identifierModelsAndDecorators
+      ],
+      initialSort: world.settings.modelSort,
+      persistSort: { world.settings.modelSort = $0 }
+    )
   }
 }
