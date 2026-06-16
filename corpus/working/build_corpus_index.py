@@ -79,7 +79,7 @@ def gutenberg_bounds(abspath):
     return lo, hi
 
 
-TIERS = ("literature", "government", "technology")
+TIERS = ("literature", "government", "technology", "wikipedia")
 
 
 def ordered_docs():
@@ -222,6 +222,8 @@ def author_of(rel):
         return name.split("-")[0]
     if os.sep + "technology" + os.sep in rel:
         return "technology"
+    if os.sep + "wikipedia" + os.sep in rel:
+        return "wikipedia"
     return "government"
 
 

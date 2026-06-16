@@ -259,7 +259,7 @@ of the shipped app target**; only the finished JSON is bundled.
 
 | Folder | Contents | Tracked? | Role |
 |---|---|---|---|
-| `corpus/originals/` | Domain-tier subfolders of raw sources: `literature/` (PDFs of Proust, Zola, Flaubert + `chanson-roland-oxford.txt`) and `government/` (Swiss/French public-document `.txt`) | **No** | Raw source material — large and re-fetchable |
+| `corpus/originals/` | Domain-tier subfolders of raw sources: `literature/` (PDFs of Proust, Zola, Flaubert + `chanson-roland-oxford.txt`), `government/` (Swiss/French public-document `.txt`), `technology/` (Swiss NCSC cyber/IT, PD), `wikipedia/` (French Wikipedia, CC BY-SA) | **No** | Raw source material — large and re-fetchable |
 | `corpus/grokked/` | `chanson.md` | **Yes** | Hand-built parsed intermediate: numbered Old French with the modern infinitive bracketed per line, plus a line-by-line Claude translation |
 | `corpus/working/` | tracked build scripts (`build_chanson_examples.py`, `build_corpus_index.py`, `build_tail_index.py`, `build_literature_examples.py`, `mine_examples.workflow.js`); ignored intermediates (`forms.json`, `corpus_index.json`, `tail_index.json`, `shards/`) and `*.md` progress notes | **Mixed** | Build scripts + regenerable intermediates |
 | `corpus/json/` | `chanson_examples.json`, `literature_examples.json` | **Yes** | Finished exports, bundled into the app |
@@ -330,11 +330,20 @@ imperfect over the bare noun-stem form) so the genuine verbal occurrences lead. 
 tail rescued ~40 verbs from the *existing* government tier with no new sources. It writes shards
 directly for `mine_examples.workflow.js`; merge its results back into `literature_examples.json`.
 
-**Technology tier.** `build_corpus_index.py` now recognizes a third `technology` tier
-(`corpus/originals/technology/`, same gitignore treatment as the others). It covers the genuine
-residual — real tech/news verbs absent from literature *and* government (`télécharger`,
-`téléviser`, `reconstruire`, …). Acquire license-clean French tech sources (Swiss NCSC = PD per
-Art. 5 URG; French ANSSI/CNIL/cybermalveillance = Licence Ouverte/Etalab — the same legal gate as
-the government tier, see `docs/government-corpus-licensing.md`), record them in a tracked manifest,
-then re-run `build_tail_index.py` + the workflow. A few residual verbs are inherent form-collisions
-(`faillir`↔*falloir*, `plaire`↔"plus", `violer`↔"violent") that no corpus cleanly resolves.
+**Tiers beyond literature.** `build_corpus_index.py` recognizes four tiers in priority order:
+`literature`, `government`, `technology`, `wikipedia` (each under `corpus/originals/<tier>/`, same
+gitignore treatment; `build_tail_index.py` draws the tail from the latter three). Each has a tracked
+provenance manifest under `docs/` recording attribution + license:
+- **government** (`docs/government-corpus-sources.md`) — Swiss PD (Art. 5 URG) + French Etalab.
+- **technology** (`docs/technology-corpus-sources.md`) — Swiss NCSC cyber/IT, PD. Consumer how-to
+  register supplies imperative/infinitive forms (`téléchargez`) that formal reports lack.
+- **wikipedia** (`docs/wikipedia-corpus-sources.md`) — French Wikipedia, **CC BY-SA 4.0**, an
+  owner-approved license exception (the government/technology tiers are PD/Etalab only) because it
+  is the only open source of the consumer/encyclopedic register the software/general verbs need.
+  CC BY-SA's attribution + share-alike obligations are documented in that manifest.
+
+Current coverage: **963/982 (98.1%)**. The ~19 still-uncovered are inherent form-collisions
+(`faillir`↔*falloir*, `plaire`↔"plus", `violer`↔"violent") that no corpus resolves, plus
+noun/adjective-dominant verbs that would need imperative how-to prose (Wikibooks recipes/guides).
+To extend coverage: add sources under a tier, then re-run `build_tail_index.py` + the workflow and
+merge into `literature_examples.json`.

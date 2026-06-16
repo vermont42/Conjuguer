@@ -1525,6 +1525,13 @@
   "line": 1763,
   "token": "corrigeant"
  },
+ "coter": {
+  "fr": "C'est en 1688 qu'on commence à coter les actions et obligations à la bourse de Londres.",
+  "en": "It was in 1688 that trading in stocks and bonds on the London Stock Exchange began.",
+  "source": "wp-bourse-economie.txt",
+  "line": 25,
+  "token": "coter"
+ },
  "coucher": {
   "fr": "Il l'envoyait se coucher sans feu, lui apprenait à boire de grands coups de rhum et à insulter les processions.",
   "en": "He would send him to bed without a fire, teach him to knock back great swigs of rum and to jeer at religious processions.",
@@ -1839,6 +1846,13 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 1162,
   "token": "dissimulait"
+ },
+ "dissoudre": {
+  "fr": "Louis XVIII, poussé par Decazes, ministre de la Police, dissout la chambre basse, demandant au corps électoral d'arbitrer le conflit.",
+  "en": "Louis XVIII, urged by Decazes, the Minister of Police, dissolved the lower house, asking the electorate to settle the conflict.",
+  "source": "wp-dissolution-de-lassemblee-nationale-france.txt",
+  "line": 33,
+  "token": "dissout"
  },
  "distinguer": {
   "fr": "M. Madinier voulait leur montrer les dorures et les peintures du plafond; mais ça leur cassait le cou, et ils ne distinguaient rien.",
@@ -2428,6 +2442,13 @@
   "line": 6404,
   "token": "encadrait"
  },
+ "enchaîner": {
+  "fr": "La gymnastique artistique est une discipline athlétique consistant à enchaîner des mouvements acrobatiques sur des agrès.",
+  "en": "Artistic gymnastics is an athletic discipline that involves linking acrobatic movements together on apparatus.",
+  "source": "wp-gymnastique-artistique.txt",
+  "line": 1,
+  "token": "enchaîner"
+ },
  "encourager": {
   "fr": "Cependant, Coupeau encourageait la jeune femme.",
   "en": "Meanwhile, Coupeau was encouraging the young woman.",
@@ -3001,6 +3022,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 6861,
   "token": "grimpaient"
+ },
+ "grouper": {
+  "fr": "Les oses peuvent se grouper par liaisons covalentes osidiques et former des diholosides tels que saccharose (sucrose), ou former des polyosides tels que l'amidon.",
+  "en": "Monosaccharides can join together through covalent glycosidic bonds to form disaccharides such as sucrose, or polysaccharides such as starch.",
+  "source": "wp-sucre.txt",
+  "line": 325,
+  "token": "grouper"
  },
  "guider": {
   "fr": "Nous guidant à tâtons sous la voûte obscure et puissamment nervurée comme la membrane d'une immense chauve-souris de pierre, Théodore et sa sœur nous éclairaient d'une bougie le tombeau de la petite fille de Sigebert.",
@@ -4255,6 +4283,13 @@
   "line": 762,
   "token": "possédait"
  },
+ "poster": {
+  "fr": "Sous ce hashtag, des riverains et des touristes postent des photos illustrant, selon eux, la saleté et l'enlaidissement de la ville.",
+  "en": "Under this hashtag, locals and tourists post photos illustrating, in their view, the filth and ugliness of the city.",
+  "source": "wp-paris.txt",
+  "line": 213,
+  "token": "postent"
+ },
  "poursuivre": {
   "fr": "Pour échapper aux regards dont elle le poursuivait, il retourna s'étendre sur le lit, en disant qu'il avait sommeil.",
   "en": "To escape the looks with which she pursued him, he went back to stretch out on the bed, saying he was sleepy.",
@@ -4766,6 +4801,13 @@
   "line": 14801,
   "token": "reconstituerais"
  },
+ "reconstruire": {
+  "fr": "En grande partie détruit pendant la Seconde Guerre mondiale, le centre-ville a été reconstruit d'après les plans de l'atelier d'Auguste Perret entre 1945 et 1964.",
+  "en": "Largely destroyed during the Second World War, the city centre was rebuilt according to the plans of Auguste Perret's studio between 1945 and 1964.",
+  "source": "wp-le-havre.txt",
+  "line": 59,
+  "token": "reconstruit"
+ },
  "recourir": {
   "fr": "Elle se plaisait à supposer tout d'un coup que Françoise la volait, qu'elle recourait à la ruse pour s'en assurer, la prenait sur le fait.",
   "en": "She enjoyed suddenly imagining that Françoise was robbing her, that she would resort to cunning to find out, catching her in the act.",
@@ -4884,6 +4926,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 8124,
   "token": "relançaient"
+ },
+ "relater": {
+  "fr": "L'Immortel (1888) d'Alphonse Daudet est une nouvelle relatant les manigances électorales d'Émile Zola pour se faire recevoir à l'Académie française.",
+  "en": "L'Immortel (1888) by Alphonse Daudet is a short novel recounting Émile Zola's electoral scheming to gain admission to the Académie française.",
+  "source": "wp-academie-francaise.txt",
+  "line": 365,
+  "token": "relatant"
  },
  "relayer": {
   "fr": "Un mot presque nouveau venait relayer les autres et le frappait avec une vigueur intacte.",
@@ -5564,6 +5613,13 @@
   "line": 323,
   "token": "salarié"
  },
+ "saler": {
+  "fr": "Le salage ou le sel dont on a besoin pour le saler, coute plus que l'achat de la bête.",
+  "en": "The salting process, or the salt needed to salt it, costs more than the purchase of the animal.",
+  "source": "wp-salaison.txt",
+  "line": 10,
+  "token": "saler"
+ },
  "saluer": {
   "fr": "Il y avait fort à parier que ces gens inconnus de nous qu'il voyait, étaient de ceux qu'il n'aurait pas osé saluer si, étant avec nous, il les avait rencontrés.",
   "en": "It was a safe bet that the people he saw, unknown to us, were just the sort he would never have dared greet if, in our company, he had run into them.",
@@ -5830,6 +5886,13 @@
   "line": 974,
   "token": "souvenez"
  },
+ "spécialiser": {
+  "fr": "Le but de ces compétitions est surtout de permettre aux jeunes « retraités » de pouvoir encore concourir ou de se spécialiser sur certains agrès.",
+  "en": "The aim of these competitions is above all to allow young retired gymnasts to continue competing or to specialise on certain apparatus.",
+  "source": "wp-gymnastique-artistique.txt",
+  "line": 18,
+  "token": "spécialiser"
+ },
  "stimuler": {
   "fr": "Les travaux de l'ADEME devraient nourrir nos réflexions et nous stimuler pour inventer la trajectoire que nous choisirons.",
   "en": "The ADEME's work should feed our thinking and spur us on to devise the path we will choose.",
@@ -5942,6 +6005,13 @@
   "line": 5484,
   "token": "surmonté"
  },
+ "surnommer": {
+  "fr": "Quelques-uns surnommèrent la machine boneshaker (« secoueuse d'os »), en raison de la conception des roues, en bois cerclées de fer.",
+  "en": "Some nicknamed the machine the boneshaker ('bone-shaker'), because of the design of the wheels, made of wood rimmed with iron.",
+  "source": "wp-bicyclette.txt",
+  "line": 18,
+  "token": "surnommèrent"
+ },
  "surprendre": {
   "fr": "Pour peu qu'elle s'attarde sur son chemin, cela ne me surprendrait point qu'elle arrive après l'élévation.",
   "en": "If she dawdles along the way, it would not surprise me in the least if she arrived after the Elevation.",
@@ -6025,6 +6095,13 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 1235,
   "token": "séparait"
+ },
+ "tailler": {
+  "fr": "De cela, découle la nécessité de ne pas tailler les sarments trop près des bourgeons ou du tronc, pour ne pas entraver la circulation de la sève.",
+  "en": "From this follows the need not to prune the shoots too close to the buds or the trunk, so as not to hinder the flow of sap.",
+  "source": "wp-taille-de-la-vigne.txt",
+  "line": 54,
+  "token": "tailler"
  },
  "taire": {
   "fr": "Ils s'arrêtèrent. Charles se taisait.",

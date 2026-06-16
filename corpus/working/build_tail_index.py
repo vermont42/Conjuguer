@@ -30,7 +30,7 @@ PLACED_JSON = os.path.join(os.path.dirname(HERE), "json", "literature_examples.j
 TAIL_JSON = os.path.join(HERE, "tail_index.json")
 SHARDS_DIR = os.path.join(HERE, "shards")
 SHARD_SIZE = 30
-TAIL_TIERS = ("government", "technology")
+TAIL_TIERS = ("government", "technology", "wikipedia")
 # Gather generously per doc so the rare verbal forms aren't capped out by the frequent noun.
 TAIL_PER_DOC_CAP = 15
 
