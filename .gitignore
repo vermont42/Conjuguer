@@ -32,4 +32,4 @@ corpus/*
 !corpus/grokked/
 !corpus/working/
 corpus/working/*
-!corpus/working/build_examples.py
+!corpus/working/build_chanson_examples.py

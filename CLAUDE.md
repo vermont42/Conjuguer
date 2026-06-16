@@ -247,3 +247,42 @@ All external services have protocol abstractions with production and test implem
 - **Settings** (`Utils/Settings.swift`): User preferences via protocol-based storage (UserDefaults or Dictionary)
 - **L** (`Models/L.swift`): Localization strings wrapper
 - **SoundPlayer/Utterer**: Audio feedback for quiz interactions
+
+### Literature-Example Corpus (`corpus/`)
+
+`corpus/` holds the pipeline that builds literature example sentences for the app's
+~980 **usage-ranked** verbs — one modern-prose example per verb, plus a *Chanson de
+Roland* example nested where one exists. It is a build-time data pipeline, **not part
+of the shipped app target**; only the finished JSON is bundled.
+
+**Pipeline stages (folders):**
+
+| Folder | Contents | Tracked? | Role |
+|---|---|---|---|
+| `corpus/originals/` | Source PDFs (Proust, Zola, Flaubert) + `chanson-roland-oxford.txt` | **No** | Raw source material — large and re-fetchable |
+| `corpus/grokked/` | `chanson.md` | **Yes** | Hand-built parsed intermediate: numbered Old French with the modern infinitive bracketed per line, plus a line-by-line Claude translation |
+| `corpus/working/` | `build_chanson_examples.py` (tracked), `chanson_progress.md` (ignored) | **Mixed** | Build script + local progress notes |
+| `corpus/json/` | `chanson_examples.json` | **Yes** | Finished export, bundled into the app |
+
+**`.gitignore` rule — track only durable artifacts.** The repo tracks finished JSON
+(`json/`), the hand-built intermediate (`grokked/`), and the build script
+(`working/build_chanson_examples.py`); it ignores the source originals and the `working/*.md`
+progress notes. The principle is *reproducibility*: `chanson.md` is irreplaceable manual
+transcription/translation and must be tracked, whereas the PDFs are re-fetchable and the
+JSON regenerates from `chanson.md` in seconds via the script. (Contrast the sibling app
+Konjugieren, which gitignores its *entire* corpus — correct there because its sources are
+all downloaded public-domain texts.) When adding files under `corpus/`, remember the
+whitelist: anything new under a tracked subfolder is committed automatically; new
+ignored content needs a matching `!`/exclude pair.
+
+**`build_chanson_examples.py`** parses `grokked/chanson.md` per laisse, resolves each bracketed
+gloss to a canonical `verbs.xml` key (`in="…"`), and writes `json/chanson_examples.json`
+keyed by infinitif. It reports coverage and *unmatched* gloss tokens rather than silently
+dropping them. This hand-bracket-then-resolve approach suits the one fully-treated poem;
+the planned modern-prose pass over the novels will instead use **subagent extraction**
+(Claude recognizes conjugated/irregular forms natively) rather than regex.
+
+**Future work (not yet built):** the three novels won't cover the technical tail of the
+ranked verbs, so government- and technology-domain fallback corpora (mirroring
+Konjugieren's `corpus/government/` and `corpus/technology/` tiers) will be added under
+`corpus/originals/` in a later session.
