@@ -261,7 +261,7 @@ of the shipped app target**; only the finished JSON is bundled.
 |---|---|---|---|
 | `corpus/originals/` | Domain-tier subfolders of raw sources: `literature/` (PDFs of Proust, Zola, Flaubert + `chanson-roland-oxford.txt`) and `government/` (Swiss/French public-document `.txt`) | **No** | Raw source material — large and re-fetchable |
 | `corpus/grokked/` | `chanson.md` | **Yes** | Hand-built parsed intermediate: numbered Old French with the modern infinitive bracketed per line, plus a line-by-line Claude translation |
-| `corpus/working/` | tracked build scripts (`build_chanson_examples.py`, `build_corpus_index.py`, `build_literature_examples.py`, `mine_examples.workflow.js`); ignored intermediates (`forms.json`, `corpus_index.json`, `shards/`) and `*.md` progress notes | **Mixed** | Build scripts + regenerable intermediates |
+| `corpus/working/` | tracked build scripts (`build_chanson_examples.py`, `build_corpus_index.py`, `build_tail_index.py`, `build_literature_examples.py`, `mine_examples.workflow.js`); ignored intermediates (`forms.json`, `corpus_index.json`, `tail_index.json`, `shards/`) and `*.md` progress notes | **Mixed** | Build scripts + regenerable intermediates |
 | `corpus/json/` | `chanson_examples.json`, `literature_examples.json` | **Yes** | Finished exports, bundled into the app |
 
 **`.gitignore` rule — track only durable artifacts.** The repo tracks finished JSON
@@ -317,5 +317,24 @@ Konjugieren's `corpus/government/` and `corpus/technology/` tiers) supplement th
 `corpus/originals/`. The **government** tier now exists (`corpus/originals/government/`,
 Swiss/French public documents — see `prompts/get-government-corpus.md` and
 `docs/government-corpus-licensing.md`); the modern-prose pass over the literature + government
-tiers is **built** (stages 1–3 above) and ready to run end-to-end. The **technology** tier — to
-cover the 8 zero-coverage technical verbs — remains to be added under `corpus/originals/`.
+tiers is **built and run** (stages 1–3 above) — `json/literature_examples.json` currently holds
+**951/982** verbs with a balanced example + translation.
+
+**Tail rescue (`build_tail_index.py`).** Verbs whose surface form equals a common noun
+(`signer`/`signe`, `programmer`/`programme`) initially came back null because the literature-first
+index filled all five candidate slots with *noun* uses, crowding out the *verbal* uses that exist
+in administrative/technical prose. `build_tail_index.py` targets just the uncovered verbs
+(ranked − placed), rebuilds their candidates from the **government + technology** tiers only, and
+**ranks each candidate by how distinctively verbal its token is** (infinitive/participle/gerund/
+imperfect over the bare noun-stem form) so the genuine verbal occurrences lead. Re-mining that
+tail rescued ~40 verbs from the *existing* government tier with no new sources. It writes shards
+directly for `mine_examples.workflow.js`; merge its results back into `literature_examples.json`.
+
+**Technology tier.** `build_corpus_index.py` now recognizes a third `technology` tier
+(`corpus/originals/technology/`, same gitignore treatment as the others). It covers the genuine
+residual — real tech/news verbs absent from literature *and* government (`télécharger`,
+`téléviser`, `reconstruire`, …). Acquire license-clean French tech sources (Swiss NCSC = PD per
+Art. 5 URG; French ANSSI/CNIL/cybermalveillance = Licence Ouverte/Etalab — the same legal gate as
+the government tier, see `docs/government-corpus-licensing.md`), record them in a tracked manifest,
+then re-run `build_tail_index.py` + the workflow. A few residual verbs are inherent form-collisions
+(`faillir`↔*falloir*, `plaire`↔"plus", `violer`↔"violent") that no corpus cleanly resolves.

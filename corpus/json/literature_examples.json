@@ -328,6 +328,13 @@
   "line": 64,
   "token": "vais"
  },
+ "allier": {
+  "fr": "Les membres du Conseil cantonal de sécurité souhaitent que les victimes puissent bénéficier d'un accompagnement global alliant soutien, conseils et aide dans les démarches judiciaires.",
+  "en": "The members of the Cantonal Security Council want victims to benefit from comprehensive support combining moral support, advice, and assistance with legal proceedings.",
+  "source": "ch-vd-rapport-gestion-2025.txt",
+  "line": 259,
+  "token": "alliant"
+ },
  "allonger": {
   "fr": "Il maigrit, sa taille s'allongea, et sa figure prit une sorte d'expression dolente qui la rendit presque intéressante.",
   "en": "He grew thin, his figure lengthened, and his face took on a kind of doleful expression that made it almost interesting.",
@@ -369,6 +376,13 @@
   "source": "ch-fed-conseil-federal-loi-co2-2022.txt",
   "line": 17,
   "token": "aménager"
+ },
+ "analyser": {
+  "fr": "La Commission fédérale de l'hygiène de l'air (CFHA) analyse et évalue les implications de celles-ci au regard de la situation en matière d'hygiène de l'air en Suisse et recommandera, le cas échéant, des réductions supplémentaires.",
+  "en": "The Federal Commission on Air Hygiene (FCAH) analyses and evaluates the implications of these new guidelines with respect to air quality conditions in Switzerland and will recommend further reductions where necessary.",
+  "source": "ch-fed-ofev-environnement-suisse-2022.txt",
+  "line": 311,
+  "token": "analyse"
  },
  "ancrer": {
   "fr": "L'axe en question a augmenté sa part de 9 % pour atteindre 69 % et ancrer ainsi son rôle comme axe principal du fret ferroviaire transalpin à travers la Suisse.",
@@ -425,6 +439,13 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 2461,
   "token": "apparaissait"
+ },
+ "apparenter": {
+  "fr": "Le suivi de l'évolution de la pratique du vélo s'apparente à celui de sa part modale parmi l'ensemble des modes de transport.",
+  "en": "Tracking changes in cycling habits is analogous to tracking cycling's modal share among all modes of transport.",
+  "source": "fr-cerema-mobilites-decarbonees-2022.txt",
+  "line": 373,
+  "token": "apparente"
  },
  "appartenir": {
   "fr": "Il était bien le maître de ce qui lui appartenait!",
@@ -523,6 +544,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 5118,
   "token": "arborent"
+ },
+ "armer": {
+  "fr": "Nous avons besoin de construire un nouveau référentiel d'action publique pour armer le bras d'un État en capacité de piloter ces transformations, dans une organisation et des processus renouvelés.",
+  "en": "We need to build a new public-policy framework to equip the state with the capacity to drive these transformations, within a renewed organisational structure and set of processes.",
+  "source": "fr-france-strategie-soutenabilites-2022.txt",
+  "line": 287,
+  "token": "armer"
  },
  "arracher": {
   "fr": "Il se fâcha, lui arracha des mains le linge qu'il rejeta dans la malle.",
@@ -741,6 +769,13 @@
   "line": 87,
   "token": "avère"
  },
+ "axer": {
+  "fr": "Le Cyber-Defence Campus (CYD Campus) d'armasuisse a collaboré étroitement avec les hautes écoles et les milieux économiques afin de mettre en place un monitorage des technologies axé sur la cybersécurité.",
+  "en": "The Cyber-Defence Campus (CYD Campus) of armasuisse has worked closely with universities and industry to establish a technology monitoring system focused on cybersecurity.",
+  "source": "ch-fed-suisse-numerique-cyberstrategie-2023.txt",
+  "line": 69,
+  "token": "axé"
+ },
  "baisser": {
   "fr": "Cottard manifesta en même temps son étonnement et sa soumission, comme devant une vérité contraire à tout ce qu'il avait cru jusque-là, mais d'une évidence irrésistible; et, baissant d'un air ému et peureux son nez dans son assiette, il se contenta de répondre: «Ah!-ah!-ah!»",
   "en": "Cottard showed at once his astonishment and his submission, as before a truth that contradicted everything he had believed until then yet was irresistibly plain; and, lowering his nose into his plate with a timid, emotion-filled air, he contented himself with replying: 'Ah! ah! ah!'",
@@ -754,6 +789,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 3742,
   "token": "baptiser"
+ },
+ "baser": {
+  "fr": "Ces escroqueries, menées avec un certain professionnalisme, exploitent la crédulité et la vulnérabilité des victimes en se basant sur l'autorité supposée de la police.",
+  "en": "These scams, carried out with a degree of professionalism, exploit the gullibility and vulnerability of the victims by relying on the supposed authority of the police.",
+  "source": "ch-fr-rapport-activite-conseil-etat-2025.txt",
+  "line": 271,
+  "token": "basant"
  },
  "battre": {
   "fr": "J'allai sans bruit dans le couloir; mon cœur battait si fort que j'avais de la peine à avancer.",
@@ -902,6 +944,13 @@
   "line": 289,
   "token": "causerons"
  },
+ "centrer": {
+  "fr": "L'encouragement est donc centré sur le développement et le changement d'échelle des processus de fabrication avec des technologies suisses.",
+  "en": "The support is therefore focused on the development and scaling up of manufacturing processes using Swiss technologies.",
+  "source": "ch-fed-conseil-federal-loi-co2-2022.txt",
+  "line": 159,
+  "token": "centré"
+ },
  "certifier": {
   "fr": "elle n'en réveille pas seulement l'image dans notre mémoire, elle en certifie le retour, la présence effective, ambiante, immédiatement accessible.",
   "en": "it not only awakens the image in our memory, it certifies the return of summer, its real, surrounding, immediately accessible presence.",
@@ -972,6 +1021,13 @@
   "line": 70,
   "token": "choquait"
  },
+ "cibler": {
+  "fr": "Cela permettra de cibler et de hiérarchiser les activités et les efforts dans le contexte international.",
+  "en": "This will make it possible to target and prioritise activities and efforts in the international context.",
+  "source": "ch-fed-oft-transfert-trafic-2025.txt",
+  "line": 513,
+  "token": "cibler"
+ },
  "circuler": {
   "fr": "Puisqu'elle ne pourrait jamais, en robe de velours à manches courtes, sur un piano d'Érard, dans un concert, battant de ses doigts légers les touches d'ivoire, sentir, comme une brise, circuler autour d'elle un murmure d'extase, ce n'était pas la peine de s'ennuyer à étudier.",
   "en": "Since she could never, in a velvet dress with short sleeves, at an Érard grand piano in a concert hall, her nimble fingers dancing over the keys, feel a murmur of rapture circulating around her like a breeze, there was no point tormenting herself with practice.",
@@ -985,6 +1041,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 3407,
   "token": "citait"
+ },
+ "classer": {
+  "fr": "Par le présent message, nous proposons de classer les interventions parlementaires suivantes.",
+  "en": "By this message, we propose to close the following parliamentary motions.",
+  "source": "ch-fed-conseil-federal-loi-co2-2022.txt",
+  "line": 25,
+  "token": "classer"
  },
  "cliquer": {
   "fr": "En cliquant sur le pétale correspondant à l'ODD 8 qui porte sur travail décent, une liste de thématiques communes à ces deux ODD apparaît.",
@@ -1574,6 +1637,13 @@
   "line": 395,
   "token": "cuit"
  },
+ "cuisiner": {
+  "fr": "De combien de temps et d'argent disposons-nous pour manger et cuisiner ?",
+  "en": "How much time and money do we have available for eating and cooking?",
+  "source": "ch-fed-ofev-environnement-suisse-2022.txt",
+  "line": 223,
+  "token": "cuisiner"
+ },
  "cultiver": {
   "fr": "ils se frottaient l'un contre l'autre toute la journée, comme les chats qui cherchent et cultivent leur plaisir.",
   "en": "they rubbed along together all day long, like cats that seek out and nurture their pleasure.",
@@ -1608,6 +1678,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 10230,
   "token": "danser"
+ },
+ "dater": {
+  "fr": "Les 54 bibliothèques et centres de documentation du DIP utilisent pour la gestion et le prêt de leur fond documentaire un logiciel obsolète datant des années 80.",
+  "en": "The 54 libraries and documentation centres of the DIP use for the management and lending of their collections an obsolete piece of software dating from the 1980s.",
+  "source": "ch-ge-rapport-gestion-conseil-etat-2006.txt",
+  "line": 583,
+  "token": "datant"
  },
  "demander": {
   "fr": "— Monsieur Lantier est donc encore couché? demanda-t-elle brusquement.",
@@ -1839,6 +1916,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 1803,
   "token": "douait"
+ },
+ "douter": {
+  "fr": "Elle brouille les responsabilités et fait douter de la possibilité même d'une action collective convergente.",
+  "en": "It blurs responsibilities and makes one doubt the very possibility of a coordinated collective action.",
+  "source": "fr-france-strategie-soutenabilites-2022.txt",
+  "line": 145,
+  "token": "douter"
  },
  "dresser": {
   "fr": "Ils se dressèrent sur leur séant, demi-nus, débrouillant leurs cheveux de leurs petites mains.",
@@ -2666,6 +2750,13 @@
   "line": 148,
   "token": "fallait"
  },
+ "fatiguer": {
+  "fr": "Timéo, ne te fatigue pas, tu parles à un robot, dit Kim.",
+  "en": "\"Timéo, don't wear yourself out — you're talking to a robot,\" said Kim.",
+  "source": "fr-strategie-ia-villani-2018.txt",
+  "line": 289,
+  "token": "fatigue"
+ },
  "favoriser": {
   "fr": "il le supposait amoureux d'Odette et qu'il aimait à favoriser les liaisons.",
   "en": "He assumed Swann was in love with Odette and enjoyed encouraging love affairs.",
@@ -2735,6 +2826,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 6480,
   "token": "fonctionner"
+ },
+ "fonder": {
+  "fr": "Les graphiques présentés dans le rapport se fondent en règle générale sur les données disponibles en août 2022.",
+  "en": "The charts presented in the report are generally based on data available as of August 2022.",
+  "source": "ch-fed-ofev-environnement-suisse-2022.txt",
+  "line": 677,
+  "token": "fondent"
  },
  "fondre": {
   "fr": "la neige sur les couvertures des bâtiments se fondait.",
@@ -2833,6 +2931,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 504,
   "token": "félicité"
+ },
+ "fêter": {
+  "fr": "Ce n'est pas par hasard que Genève accueille à un rythme annuel le grand salon international de l'automobile, qui a fêté son centenaire en 2005.",
+  "en": "It is no coincidence that Geneva hosts the prestigious international motor show every year — a show that celebrated its centenary in 2005.",
+  "source": "fr-cerema-mobilites-decarbonees-2022.txt",
+  "line": 429,
+  "token": "fêté"
  },
  "gagner": {
   "fr": "Non, sans doute, je n'ai pas d'argent. J'ai quatre sous pour le lavoir... Je n'en gagne pas comme certaines femmes.",
@@ -3107,6 +3212,13 @@
   "line": 7304,
   "token": "incorporé"
  },
+ "indexer": {
+  "fr": "Le pétrole constitue l'énergie sur laquelle le prix des autres énergies (gaz notamment) est largement indexé ou corrélé.",
+  "en": "Oil is the energy source to which the price of other energy types (especially gas) is largely pegged or correlated.",
+  "source": "fr-ademe-transitions-2050-2021.txt",
+  "line": 165,
+  "token": "indexé"
+ },
  "indiquer": {
   "fr": "Il indiqua encore la façon de s'y prendre pour avoir une provision de beurre à bon marché, et conclut un arrangement avec Lestiboudois, le sacristain.",
   "en": "He also showed her how to go about getting a supply of butter at a good price, and struck an arrangement with Lestiboudois, the sexton.",
@@ -3127,6 +3239,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 10287,
   "token": "infligea"
+ },
+ "influencer": {
+  "fr": "Les sections suivantes présentent les principaux facteurs qui ont influencé l'évolution du transport transalpin durant la période sous revue.",
+  "en": "The following sections present the main factors that influenced the development of trans-Alpine transport during the reference period.",
+  "source": "ch-fed-oft-transfert-trafic-2025.txt",
+  "line": 63,
+  "token": "influencé"
  },
  "informer": {
   "fr": "Mon père et mon grand-père eurent avec lui des explications violentes; j'en fus indirectement informé.",
@@ -3275,6 +3394,13 @@
   "line": 1362,
   "token": "inventait"
  },
+ "inverser": {
+  "fr": "L'action résolue de la communauté internationale et la mise au point de solutions alternatives ont permis d'inverser à temps la tendance.",
+  "en": "The resolute action of the international community and the development of alternative solutions made it possible to reverse the trend in time.",
+  "source": "ch-fed-ofev-environnement-suisse-2022.txt",
+  "line": 59,
+  "token": "inverser"
+ },
  "investir": {
   "fr": "La place financière suisse investit toujours autant dans l'extraction du pétrole et du charbon.",
   "en": "The Swiss financial centre still invests just as much in oil and coal extraction.",
@@ -3401,12 +3527,33 @@
   "line": 489,
   "token": "lié"
  },
+ "limiter": {
+  "fr": "L'approche des ressources se limite par contre le plus souvent à un critère.",
+  "en": "The resource-based approach, by contrast, is most often limited to a single criterion.",
+  "source": "ch-fed-ofs-pauvrete-2012.txt",
+  "line": 17,
+  "token": "limite"
+ },
  "lire": {
   "fr": "Ou bien lisait un vieux volume d'Anacharsis qui traînait dans l'étude.",
   "en": "Or he would read an old volume of Anacharsis that lay about in the study.",
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 362,
   "token": "lisait"
+ },
+ "lister": {
+  "fr": "Le tableau de bord permet de lister l'ensemble des objets parlementaires en attente de réponse devant le Conseil d'État en fonction des délais légaux.",
+  "en": "The dashboard makes it possible to list all the parliamentary items awaiting a response before the State Council, sorted by statutory deadlines.",
+  "source": "ch-ge-rapport-gestion-conseil-etat-2006.txt",
+  "line": 135,
+  "token": "lister"
+ },
+ "livrer": {
+  "fr": "On parle de cybersubversion quand des acteurs étatiques, non-étatiques ou animés de mobiles politiques se livrent à des cyberattaques pour saper le système politique d'un autre État.",
+  "en": "We speak of cybersubversion when state, non-state, or politically motivated actors engage in cyberattacks to undermine the political system of another state.",
+  "source": "ch-fed-suisse-numerique-cyberstrategie-2023.txt",
+  "line": 7,
+  "token": "livrent"
  },
  "localiser": {
   "fr": "Les facteurs démarrent leur journée au dépôt urbain, localisé en centre-ville, pour effectuer les opérations de chargement des vélos cargos.",
@@ -3555,6 +3702,13 @@
   "line": 144,
   "token": "mît"
  },
+ "miser": {
+  "fr": "Miser sur les énergies renouvelables indigènes et, partant, renforcer la sécurité de l'approvisionnement en électricité contribue grandement à la protection du climat.",
+  "en": "Betting on domestic renewable energies and thereby strengthening electricity supply security makes a major contribution to climate protection.",
+  "source": "ch-fed-ofev-environnement-suisse-2022.txt",
+  "line": 3,
+  "token": "miser"
+ },
  "mobiliser": {
   "fr": "Nous devons tous nous mobiliser.",
   "en": "We all need to mobilize.",
@@ -3681,12 +3835,26 @@
   "line": 171,
   "token": "nommer"
  },
+ "noter": {
+  "fr": "À noter cependant que la situation diffère sensiblement selon que ces personnes sont originaires de pays voisins de l'UE ou de pays non membres de l'UE.",
+  "en": "It should be noted, however, that the situation differs considerably depending on whether these people come from neighbouring EU countries or from non-EU countries.",
+  "source": "ch-fed-ofs-pauvrete-2012.txt",
+  "line": 53,
+  "token": "noter"
+ },
  "nourrir": {
   "fr": "Sa mère le nourrissait de confitures; son père le laissait courir sans souliers.",
   "en": "His mother fed him on jam; his father let him run about without shoes.",
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 291,
   "token": "nourrissait"
+ },
+ "nuire": {
+  "fr": "Le grand nombre de chantiers, la vulnérabilité aux perturbations d'une infrastructure en partie obsolète et des problèmes opérationnels supplémentaires nuisent à la performance du fret ferroviaire international.",
+  "en": "The large number of construction sites, the vulnerability to disruptions caused by partly outdated infrastructure, and additional operational problems are harming the performance of international rail freight.",
+  "source": "ch-fed-oft-transfert-trafic-2025.txt",
+  "line": 1,
+  "token": "nuisent"
  },
  "nécessiter": {
   "fr": "Le forgeron voulait parler d'une commande de gros boulons qui nécessitaient deux frappeurs à l'enclume.",
@@ -3989,6 +4157,13 @@
   "line": 70,
   "token": "pesait"
  },
+ "peupler": {
+  "fr": "La France représentait 15 % de la population de l'Union européenne à 27 pays (UE27) et en était le deuxième pays le plus peuplé derrière l'Allemagne (19 %).",
+  "en": "France accounted for 15% of the population of the 27-member European Union and was its second most populous country, after Germany (19%).",
+  "source": "fr-insee-emploi-pauvrete-demographie-2024.txt",
+  "line": 105,
+  "token": "peuplé"
+ },
  "piloter": {
   "fr": "L'octroi de subventions est piloté par la Confédération et décidé en fonction des projets.",
   "en": "The granting of subsidies is steered by the Confederation and decided on a project-by-project basis.",
@@ -4002,6 +4177,13 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 601,
   "token": "piquait"
+ },
+ "placer": {
+  "fr": "Pour pouvoir placer les auteurs d'une cyberattaque face à leurs responsabilités, il faut commencer par les identifier.",
+  "en": "In order to hold the perpetrators of a cyberattack accountable, one must first identify them.",
+  "source": "ch-fed-suisse-numerique-cyberstrategie-2023.txt",
+  "line": 105,
+  "token": "placer"
  },
  "plaindre": {
   "fr": "Gervaise, retombée sur la chaise, se plaignait doucement, par courtes phrases.",
@@ -4037,6 +4219,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 657,
   "token": "plongea"
+ },
+ "pointer": {
+  "fr": "En 2019, un rapport sénatorial alertait pourtant sur « l'urgence déclarée » en pointant le choc climatique inévitable, les risques naturels aggravés et les surmortalités significatives lors des vagues de chaleur.",
+  "en": "In 2019, a Senate report nonetheless sounded the alarm about the 'declared emergency', pointing to the inevitable climate shock, heightened natural hazards, and significant excess mortality during heatwaves.",
+  "source": "fr-ademe-transitions-2050-2021.txt",
+  "line": 273,
+  "token": "pointant"
  },
  "porter": {
   "fr": "Nous étions à l'Étude, quand le Proviseur entra, suivi d'un nouveau habillé en bourgeois et d'un garçon de classe qui portait un grand pupitre.",
@@ -4184,6 +4373,13 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 246,
   "token": "profité"
+ },
+ "programmer": {
+  "fr": "À l'avenir, nous ne programmerons plus les ordinateurs, nous les entraînerons.",
+  "en": "In the future, we will no longer program computers — we will train them.",
+  "source": "fr-strategie-ia-villani-2018.txt",
+  "line": 109,
+  "token": "programmerons"
  },
  "progresser": {
   "fr": "Tandis que je progressais dans ma lecture et que tombait la chaleur du jour, ces heures silencieuses, sonores, odorantes et limpides m'évoquaient encore cette vie.",
@@ -4338,6 +4534,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 4080,
   "token": "Préservé"
+ },
+ "présider": {
+  "fr": "Depuis le 1er janvier 2025, l'OFT co-préside le conseil exécutif du corridor de fret MNRM avec le ministère belge des transports.",
+  "en": "Since 1 January 2025, the FOT has been co-chairing the executive council of the MNRM freight corridor together with the Belgian Ministry of Transport.",
+  "source": "ch-fed-oft-transfert-trafic-2025.txt",
+  "line": 505,
+  "token": "préside"
  },
  "prétendre": {
   "fr": "«Comment elle connaît Swann? Pour une personne que tu prétendais parente du maréchal de Mac-Mahon!»",
@@ -4948,6 +5151,13 @@
   "line": 5771,
   "token": "ressortir"
  },
+ "restaurer": {
+  "fr": "Les ménages suisses dépensent en moyenne 5 % de leur revenu pour se restaurer dans les restaurants, cafés, bars, cantines et via les plats à l'emporter.",
+  "en": "Swiss households spend on average 5% of their income on eating out at restaurants, cafés, bars, canteens, and through takeaway meals.",
+  "source": "ch-fed-ofev-environnement-suisse-2022.txt",
+  "line": 245,
+  "token": "restaurer"
+ },
  "rester": {
   "fr": "Le dernier domestique est parti et il faudra rester toute la nuit à souffrir sans remède.",
   "en": "The last servant has gone, and one will have to spend the whole night suffering with no remedy.",
@@ -5080,6 +5290,20 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 412,
   "token": "réclamaient"
+ },
+ "récolter": {
+  "fr": "En 2025, une enquête de climat scolaire a pu être organisée à l'échelle du canton ; elle a récolté les réponses d'environ 6000 élèves de 86 établissements scolaires.",
+  "en": "In 2025, a school-climate survey was conducted canton-wide; it gathered responses from around 6,000 pupils across 86 schools.",
+  "source": "ch-vd-rapport-gestion-2025.txt",
+  "line": 161,
+  "token": "récolté"
+ },
+ "récompenser": {
+  "fr": "Ce concours, organisé à l'occasion du salon EVER 2020, a récompensé les meilleurs projets innovants sur le thème de la « ville durable ».",
+  "en": "This competition, held at the EVER 2020 trade show, rewarded the most innovative projects on the theme of the 'sustainable city'.",
+  "source": "fr-cerema-mobilites-decarbonees-2022.txt",
+  "line": 1109,
+  "token": "récompensé"
  },
  "récupérer": {
   "fr": "Le SPE a visité dans le courant de l'année 57 entreprises supposées récupérer des déchets spéciaux ou des déchets soumis à contrôle.",
@@ -5438,6 +5662,13 @@
   "line": 14276,
   "token": "signala"
  },
+ "signer": {
+  "fr": "Le Pacte de Glasgow pour le climat, signé par la Suisse en novembre 2021, enjoint à tous les pays de revoir d'ici à la fin 2022 leurs objectifs de réduction 2030 et de se montrer le plus ambitieux possible compte tenu des responsabilités, des capacités et du contexte qui leur sont propres.",
+  "en": "The Glasgow Climate Pact, signed by Switzerland in November 2021, calls on all countries to revise their 2030 reduction targets by the end of 2022 and to be as ambitious as possible given their respective responsibilities, capacities, and circumstances.",
+  "source": "ch-fed-conseil-federal-loi-co2-2022.txt",
+  "line": 61,
+  "token": "signé"
+ },
  "signifier": {
   "fr": "Elle sortit d'un air résigné qui semblait signifier: «C'est-il pas malheureux pour des parents d'avoir un enfant pareil!»",
   "en": "She left with a resigned air that seemed to mean: \"Isn't it a pity for parents to have a child like that!\"",
@@ -5459,6 +5690,13 @@
   "line": 562,
   "token": "situé"
  },
+ "siéger": {
+  "fr": "Le DETEC siège directement, avec des représentants de l'OFROU et de l'OFT, aussi bien au niveau de la direction dans l'organe directeur qu'au niveau du traitement des dossiers dans le groupe de travail chargé de la mise en œuvre des mesures.",
+  "en": "DETEC sits directly, alongside representatives of FEDRO and FOT, both at the management level in the governing body and at the case-handling level in the working group responsible for implementing the measures.",
+  "source": "ch-fed-oft-transfert-trafic-2025.txt",
+  "line": 547,
+  "token": "siège"
+ },
  "soigner": {
   "fr": "Il la trouvait joliment courageuse, quand il la voyait se tuer au travail, soigner les enfants, trouver encore le moyen de coudre le soir à toutes sortes de chiffons.",
   "en": "He found her remarkably brave when he saw her killing herself with work, looking after the children, and still finding time to sew in the evening on all manner of rags.",
@@ -5472,6 +5710,13 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 6989,
   "token": "sollicité"
+ },
+ "sommer": {
+  "fr": "La consommation d'énergie est obtenue en sommant les consommations en combustibles (hors matières premières) et en électricité, ainsi que les achats de vapeur.",
+  "en": "Energy consumption is obtained by adding together fuel consumption (excluding raw materials) and electricity, as well as steam purchases.",
+  "source": "fr-insee-references-entreprises-2023.txt",
+  "line": 155,
+  "token": "sommant"
  },
  "songer": {
   "fr": "Pieds nus, sans songer à remettre ses savates tombées, elle retourna s'accouder à la fenêtre, elle reprit son attente de la nuit, interrogeant les trottoirs, au loin.",
@@ -5492,6 +5737,13 @@
   "en": "Memory came to me like a help from on high to pull me from the void out of which I could not have escaped on my own; in a second I leaped across centuries of civilization.",
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 158,
+  "token": "sortir"
+ },
+ "sortir (obtain)": {
+  "fr": "22,8 % affirment s'en sortir financièrement en dépit d'un revenu modeste, soit parce qu'ils ont de la fortune, soit parce que leurs exigences sont modestes.",
+  "en": "22.8% say they manage financially despite a modest income, either because they have savings or because their needs are modest.",
+  "source": "ch-fed-ofs-pauvrete-2012.txt",
+  "line": 301,
   "token": "sortir"
  },
  "souffler": {
@@ -5591,6 +5843,13 @@
   "source": "ch-fed-conseil-federal-loi-co2-2022.txt",
   "line": 11,
   "token": "stocker"
+ },
+ "structurer": {
+  "fr": "La deuxième étape, nommée « socle d'engagement », permet de structurer la démarche au sein de chaque collectivité.",
+  "en": "The second step, called the 'engagement foundation', makes it possible to structure the approach within each local authority.",
+  "source": "fr-cerema-mobilites-decarbonees-2022.txt",
+  "line": 833,
+  "token": "structurer"
  },
  "subir": {
   "fr": "Quelqu'un qui choisissait ses fréquentations en dehors de la caste où il était né, en dehors de sa «classe» sociale, subissait à ses yeux un fâcheux déclassement.",
@@ -6005,6 +6264,13 @@
   "line": 2425,
   "token": "variait"
  },
+ "veiller": {
+  "fr": "Les États membres de l'UE doivent veiller à ce que, d'ici à 2025, des points de recharge électrique à haute puissance pour les véhicules légers et lourds soient disponibles à intervalles réguliers le long des principales autoroutes ainsi que des stations de ravitaillement en hydrogène à un intervalle maximal de 150 km.",
+  "en": "EU member states must ensure that, by 2025, high-power electric charging points for light and heavy vehicles are available at regular intervals along major motorways, as well as hydrogen refuelling stations no more than 150 km apart.",
+  "source": "ch-fed-conseil-federal-loi-co2-2022.txt",
+  "line": 101,
+  "token": "veiller"
+ },
  "vendre": {
   "fr": "«Mais non, madame Octave, mon temps n'est pas si cher; celui qui l'a fait ne nous l'a pas vendu.»",
   "en": "\"Not at all, Madame Octave, my time isn't worth so much; the one who made it did not sell it to us.\"",
@@ -6088,6 +6354,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 69,
   "token": "voulu"
+ },
+ "voyager": {
+  "fr": "Cette offre permet de voyager durant 4 week-ends consécutifs à un prix réduit sur l'entier du périmètre de la CTV.",
+  "en": "This offer allows travel over 4 consecutive weekends at a reduced price across the entire CTV network.",
+  "source": "ch-vd-rapport-gestion-2025.txt",
+  "line": 719,
+  "token": "voyager"
  },
  "vérifier": {
   "fr": "Il allait falloir prendre des informations, vérifier les hypothèques, voir s'il y avait lieu à une licitation ou à une liquidation.",
@@ -6271,6 +6544,13 @@
   "line": 13696,
   "token": "épuiser"
  },
+ "équilibrer": {
+  "fr": "Les centrales à gaz sont généralement les centrales mises en service pour équilibrer l'offre et la demande en cas de forte demande, et c'est leur coût de fonctionnement qui détermine principalement le prix de marché.",
+  "en": "Gas-fired power plants are generally the plants brought online to balance supply and demand during periods of peak demand, and it is their operating cost that primarily determines the market price.",
+  "source": "fr-insee-references-entreprises-2023.txt",
+  "line": 77,
+  "token": "équilibrer"
+ },
  "équiper": {
   "fr": "Pour pouvoir équiper toute la Suisse avec de telles lignes, il faudrait engager des contributions étatiques aux frais d'investissement estimées à près de 1,4 milliard de francs.",
   "en": "To be able to equip the whole of Switzerland with such lines, public contributions to investment costs estimated at nearly 1.4 billion francs would have to be committed.",
@@ -6298,6 +6578,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 2210,
   "token": "étalait"
+ },
+ "étayer": {
+  "fr": "La production d'expertise nécessaire pour étayer ces relations est aujourd'hui éparpillée entre une multitude d'acteurs et d'instances.",
+  "en": "The expert knowledge needed to substantiate these connections is today scattered among a multitude of actors and bodies.",
+  "source": "fr-france-strategie-soutenabilites-2022.txt",
+  "line": 501,
+  "token": "étayer"
  },
  "éteindre": {
   "fr": "Je vas seulement voir si mon feu ne s'éteint pas.",

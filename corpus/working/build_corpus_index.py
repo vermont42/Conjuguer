@@ -79,17 +79,21 @@ def gutenberg_bounds(abspath):
     return lo, hi
 
 
+TIERS = ("literature", "government", "technology")
+
+
 def ordered_docs():
-    """(tier, author, relpath, abspath) for every source .txt, literature before government."""
+    """(tier, author, relpath, abspath) for every source .txt, in tier priority order. The
+    'author' is the novelist for literature and the tier name otherwise (used for balancing)."""
     docs = []
-    for tier in ("literature", "government"):
+    for tier in TIERS:
         tier_dir = os.path.join(ORIGINALS, tier)
         if not os.path.isdir(tier_dir):
             continue
         for name in sorted(os.listdir(tier_dir)):
             if not name.endswith(".txt") or name in EXCLUDE:
                 continue
-            author = name.split("-")[0] if tier == "literature" else "government"
+            author = name.split("-")[0] if tier == "literature" else tier
             rel = os.path.join("corpus", "originals", tier, name)
             docs.append((tier, author, rel, os.path.join(tier_dir, name)))
     return docs
@@ -214,7 +218,11 @@ def main():
 
 def author_of(rel):
     name = os.path.basename(rel)
-    return name.split("-")[0] if os.sep + "literature" + os.sep in rel else "government"
+    if os.sep + "literature" + os.sep in rel:
+        return name.split("-")[0]
+    if os.sep + "technology" + os.sep in rel:
+        return "technology"
+    return "government"
 
 
 if __name__ == "__main__":
