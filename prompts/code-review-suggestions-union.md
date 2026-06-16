@@ -876,10 +876,20 @@ only the items that are *partly* done, so their unfinished remainders don't get 
 otherwise-✅ section. Tick a box when the remainder lands.
 
 ### Carried-over partials (remainders of otherwise-done items)
-- [ ] **28 remainder** — the whole item, deferred from Batch 7 (owner's call): retire the legacy
+- [x] **28 remainder** — the whole item, deferred from Batch 7 (owner's call): retire the legacy
   `NSAttributedString` Info-article pipeline (`StringExtensions.attributedText`/`conjugatedString`,
   `TextView`/`TextViewDelegate`, `Info.attributedText`) for SwiftUI `AttributedString`, re-homing the
   tappable in-app deep-links onto SwiftUI link handling. Largest item; its own PR.
+  ✅ **Done in Batch 8** (commit `032289e`): the markup language is parsed into a structured
+  `[RichTextBlock]` (`String.richTextBlocks`/`bodySegments`/`conjugationParts`) and rendered by a new
+  native-SwiftUI `RichTextView`; `Info` stores `richTextBlocks` instead of `attributedText`; `InfoView`
+  wraps a `ScrollView` and routes `%link%` taps through `.environment(\.openURL, …)` (porting
+  `TextViewDelegate`'s heading/verb resolution verbatim). Deleted the whole legacy path —
+  `conjugatedString`/`attributedText` (and their five `fatalError`s), `TextView.swift`, and
+  `NSAttributedStringExtension.swift`. Conjugation coloring switched to per-uppercase-run (matching
+  `AttributedString(mixedCaseString:)`), and per-block leading newlines are trimmed Konjugieren-style.
+  New `RichTextTests` (14 cases — the legacy path had zero); 143 tests green; verified in the simulator.
+  See the full resolution note on item 28 above.
 - [ ] **29 remainder** — the two L-effort halves deferred from Batch 7 (the key-hygiene half is done):
   (a) migrate `L.swift` + the two `Localizable.strings` to a `.xcstrings` String Catalog; (b) convert
   the `*WithColon` labels to format-style localized strings (`"Score: %@"`) for word-order safety —
