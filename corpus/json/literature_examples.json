@@ -167,6 +167,13 @@
   "line": 5210,
   "token": "adhérer"
  },
+ "adjoindre": {
+  "fr": "Pour mener à bien le projet, la directrice a décidé de s'adjoindre deux spécialistes du climat.",
+  "en": "To carry out the project, the director decided to bring on two climate specialists.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "s'adjoindre"
+ },
  "admettre": {
   "fr": "«Comme si je ne connaissais pas le chien de Mme Sazerat!» répondait ma tante dont l'esprit critique n'admettait pas si facilement un fait.",
   "en": "\"As if I didn't know Mme Sazerat's dog!\" my aunt would reply, for her critical mind did not accept a claim so readily.",
@@ -853,6 +860,13 @@
   "line": 5997,
   "token": "bouleversa"
  },
+ "brancher": {
+  "fr": "Avant de lancer la mise à jour, branchez votre ordinateur sur le secteur.",
+  "en": "Before starting the update, plug your computer into the mains.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "branchez"
+ },
  "briller": {
   "fr": "le beau visage de ma mère brillait encore de jeunesse ce soir-là où elle me tenait si doucement les mains et cherchait à arrêter mes larmes.",
   "en": "My mother's lovely face still glowed with youth that evening when she held my hands so gently and tried to stop my tears.",
@@ -929,6 +943,13 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 12823,
   "token": "caractérise"
+ },
+ "carrer": {
+  "fr": "Il se carra dans son fauteuil et alluma tranquillement sa pipe.",
+  "en": "He settled back squarely in his armchair and calmly lit his pipe.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "carra"
  },
  "casser": {
   "fr": "il retourna s'étendre sur le lit, en disant qu'il avait sommeil, et qu'elle ne lui cassât pas la tête davantage.",
@@ -1784,6 +1805,13 @@
   "line": 6741,
   "token": "diminuer"
  },
+ "diplômer": {
+  "fr": "Cette école vient de diplômer sa première promotion d'ingénieurs en cybersécurité.",
+  "en": "This school has just graduated its first class of cybersecurity engineers.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "diplômer"
+ },
  "dire": {
   "fr": "Mon côté ankylosé, cherchant à deviner son orientation, s'imaginait, par exemple, allongé face au mur dans un grand lit à baldaquin et aussitôt je me disais: «Tiens, j'ai fini par m'endormir quoique maman ne soit pas venue me dire bonsoir.»",
   "en": "My stiff side, trying to work out its orientation, imagined itself lying face to the wall in a great four-poster bed, and at once I said to myself: 'Well, I've finally fallen asleep even though mama didn't come to say goodnight.'",
@@ -2232,6 +2260,13 @@
   "line": 2928,
   "token": "déposant"
  },
+ "députer": {
+  "fr": "L'assemblée députa trois de ses membres pour porter la pétition au roi.",
+  "en": "The assembly delegated three of its members to bring the petition to the king.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "députa"
+ },
  "déranger": {
   "fr": "Il était peu probable que, sauf le cas d'incendie, Françoise allât déranger maman en présence de M. Swann pour un aussi petit personnage que moi.",
   "en": "It was unlikely that, except in the event of fire, Françoise would go and disturb Mama in M. Swann's presence on account of so insignificant a person as myself.",
@@ -2441,6 +2476,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 6404,
   "token": "encadrait"
+ },
+ "enceindre": {
+  "fr": "De puissants remparts enceignaient jadis toute la vieille ville.",
+  "en": "Powerful ramparts once encircled the entire old town.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "enceignaient"
  },
  "enchaîner": {
   "fr": "La gymnastique artistique est une discipline athlétique consistant à enchaîner des mouvements acrobatiques sur des agrès.",
@@ -2757,6 +2799,13 @@
   "line": 4131,
   "token": "facilité"
  },
+ "faillir": {
+  "fr": "J'ai failli manquer mon train ce matin à cause des embouteillages.",
+  "en": "I nearly missed my train this morning because of the traffic.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "failli"
+ },
  "faire": {
   "fr": "C'est ce qui fait ma force. J'ai un but auquel je vais.",
   "en": "That is what gives me my strength. I have a goal and I pursue it.",
@@ -2840,6 +2889,13 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 2378,
   "token": "fleurirent"
+ },
+ "foncer": {
+  "fr": "Dès que le feu passa au vert, la voiture fonça dans l'avenue.",
+  "en": "As soon as the light turned green, the car sped off down the avenue.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "fonça"
  },
  "fonctionner": {
   "fr": "mon esprit s'arrêtait de fonctionner, je ne voyais plus que le vide en face de mon attention.",
@@ -3093,6 +3149,13 @@
   "line": 396,
   "token": "habitue"
  },
+ "handicaper": {
+  "fr": "Une grave blessure au genou l'a handicapé pendant toute la saison.",
+  "en": "A serious knee injury hampered him for the entire season.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "handicapé"
+ },
  "heurter": {
   "fr": "Ce visage où ne se lit aucune commisération, aucun attendrissement devant la souffrance humaine, aucune crainte de la heurter, et qui est le visage sans douceur, le visage antipathique et sublime de la vraie bonté.",
   "en": "That face in which one reads no commiseration, no tenderness before human suffering, no fear of wounding it — the harsh, antipathetic, and sublime face of true goodness.",
@@ -3141,6 +3204,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 151,
   "token": "ignorais"
+ },
+ "illimiter": {
+  "fr": "Ce nouveau forfait illimite vos appels et vos messages vers l'étranger.",
+  "en": "This new plan makes your calls and texts abroad unlimited.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "illimite"
  },
  "illustrer": {
   "fr": "Je n'eus longtemps aucun plaisir à considérer cette Charité sans charité, cette Envie qui avait l'air d'une planche illustrant seulement dans un livre de médecine la compression de la glotte ou de la luette par une tumeur de la langue.",
@@ -3604,6 +3674,13 @@
   "line": 411,
   "token": "louer"
  },
+ "lover": {
+  "fr": "Le chat se lova au creux du canapé et ne bougea plus de la soirée.",
+  "en": "The cat curled up in the hollow of the sofa and didn't move for the rest of the evening.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "lova"
+ },
  "lutter": {
   "fr": "Après une heure de pluie et de vent contre lesquels j'avais lutté avec allégresse, comme j'arrivais au bord de la mare de Montjouvain, le soleil venait de reparaître.",
   "en": "After an hour of rain and wind against which I had struggled with delight, as I arrived at the edge of the pond at Montjouvain, the sun had just come out again.",
@@ -4017,6 +4094,13 @@
   "line": 248,
   "token": "oubliaient"
  },
+ "ouvrer": {
+  "fr": "Ce candélabre d'argent a été patiemment ouvré par un orfèvre vénitien.",
+  "en": "This silver candelabrum was patiently wrought by a Venetian goldsmith.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "ouvré"
+ },
  "ouvrir": {
   "fr": "Je me rendormais, et parfois je n'avais plus que de courts réveils d'un instant, le temps d'ouvrir les yeux pour fixer le kaléidoscope de l'obscurité.",
   "en": "I would fall back asleep, and sometimes I had only brief wakings of a moment, just long enough to open my eyes and fix them on the kaleidoscope of darkness.",
@@ -4219,6 +4303,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 344,
   "token": "plaignait"
+ },
+ "plaire": {
+  "fr": "Ce roman m'a tellement plu que je l'ai lu deux fois de suite.",
+  "en": "I enjoyed this novel so much that I read it twice in a row.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "plu"
  },
  "planter": {
   "fr": "tandis que sa femme, lâchant les filières, se plantait au milieu de l'atelier.",
@@ -5396,6 +5487,13 @@
   "line": 1138,
   "token": "réfugier"
  },
+ "référencer": {
+  "fr": "Une bonne agence saura référencer votre site afin qu'il apparaisse en première page.",
+  "en": "A good agency will know how to optimize your website so that it appears on the first page.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "référencer"
+ },
  "référer": {
   "fr": "Elle regarda pendant cinq minutes l'enveloppe comme si l'examen du papier et l'aspect de l'écriture allaient la renseigner sur la nature du contenu ou lui apprendre à quel article de son code elle devait se référer.",
   "en": "She stared at the envelope for five minutes as though the examination of the paper and the look of the handwriting would inform her about the nature of the contents or tell her which article of her code she ought to consult.",
@@ -5949,6 +6047,13 @@
   "line": 7282,
   "token": "suçait"
  },
+ "sucrer": {
+  "fr": "Elle sucra légèrement la crème avant de la servir aux invités.",
+  "en": "She lightly sweetened the cream before serving it to the guests.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "sucra"
+ },
  "suffire": {
   "fr": "Il suffit de son bras soulevé pour arrêter et faire reculer le soleil.",
   "en": "It is enough for him to raise his arm to stop and push back the sun.",
@@ -6278,12 +6383,26 @@
   "line": 1159,
   "token": "tuent"
  },
+ "typer": {
+  "fr": "Le réalisateur a délibérément typé ses personnages pour les rendre reconnaissables.",
+  "en": "The director deliberately gave his characters strong, recognizable types.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "typé"
+ },
  "télécharger": {
   "fr": "N'installez que les programmes et applications nécessaires et téléchargez-les toujours à partir du site du producteur ou d'une plateforme de téléchargement officielle.",
   "en": "Only install the programs and applications you need, and always download them from the manufacturer's website or an official download platform.",
   "source": "ch-ncsc-protection-appareils.txt",
   "line": 33,
   "token": "téléchargez"
+ },
+ "téléviser": {
+  "fr": "La chaîne publique télévisera la cérémonie d'ouverture en direct.",
+  "en": "The public channel will broadcast the opening ceremony live.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "télévisera"
  },
  "témoigner": {
   "fr": "— Allons, calme-toi, disait l'apothicaire, tu témoigneras plus tard ta reconnaissance envers ton bienfaiteur!",
@@ -6383,6 +6502,13 @@
   "line": 756,
   "token": "vida"
  },
+ "violer": {
+  "fr": "En coupant à travers le terrain, les randonneurs ont violé le règlement du parc.",
+  "en": "By cutting across the field, the hikers broke the park's rules.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "violé"
+ },
  "viser": {
   "fr": "Gervaise visait ses oreilles, s'enrageait de ne pouvoir les prendre, quand elle saisit enfin l'une des boucles, une poire de verre jaune.",
   "en": "Gervaise aimed her blows at the woman's ears, furious that she could not get a grip on them, when she finally caught hold of one of the earrings, a yellow glass pear.",
@@ -6410,6 +6536,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 526,
   "token": "vivait"
+ },
+ "voiler": {
+  "fr": "Peu à peu, de gros nuages voilèrent le soleil.",
+  "en": "Little by little, large clouds veiled the sun.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "voilèrent"
  },
  "voir": {
   "fr": "Ce soir-là, pendant qu'elle guettait son retour, elle croyait l'avoir vu entrer au bal du Grand-Balcon, dont les dix fenêtres flambantes éclairaient d'une nappe d'incendie la coulée noire des boulevards extérieurs.",

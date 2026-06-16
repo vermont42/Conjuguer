@@ -342,8 +342,10 @@ provenance manifest under `docs/` recording attribution + license:
   is the only open source of the consumer/encyclopedic register the software/general verbs need.
   CC BY-SA's attribution + share-alike obligations are documented in that manifest.
 
-Current coverage: **963/982 (98.1%)**. The ~19 still-uncovered are inherent form-collisions
-(`faillir`↔*falloir*, `plaire`↔"plus", `violer`↔"violent") that no corpus resolves, plus
-noun/adjective-dominant verbs that would need imperative how-to prose (Wikibooks recipes/guides).
-To extend coverage: add sources under a tier, then re-run `build_tail_index.py` + the workflow and
-merge into `literature_examples.json`.
+Corpus mining reached **963/982 (98.1%)**. The final 19 — inherent form-collisions
+(`faillir`↔*falloir*, `plaire`↔"plus", `violer`↔"violent") and noun/adjective-dominant verbs no
+open corpus uses verbally — were filled with **original Claude-authored example sentences**
+(`docs/authored-examples.md`), each carrying `"source": "Claude (Opus 4.8)"` + `"line": null` in
+the JSON so AI authorship is explicit and never attributed to a corpus it didn't come from.
+`literature_examples.json` is now **982/982 (100%)**. To extend/replace a tier: add sources under
+it, re-run `build_tail_index.py` + the workflow, and merge into `literature_examples.json`.
