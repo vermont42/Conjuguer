@@ -406,7 +406,7 @@ eliminating the divergence behind item 1. Also: `Int((bestScoreString as NSStrin
 reports, correct):** property wrappers don't compose with `@Observable`, so OH's
 `@SettingsPersisted` sketch won't compile as written — use the helper-method shape.
 
-### 21. Browse views/stores: extract the shared scaffold ✅ DONE (Batch 5 — generic store; view-shell extraction & environment-init deferred)
+### 21. Browse views/stores: extract the shared scaffold ✅ DONE (Batch 5 — generic store; environment-init + shared search helper in the browse-view session; full view-shell extraction deliberately not done — see note)
 **Found by:** FH #10, FM §2.7, OH #4 (overclaimed — see Appendix A) · **Effort:** M–L
 
 > **Batch 5 resolution (the store duplication).** New generic `@Observable BrowseStore<Item: Identifiable, Sort: Hashable>`
@@ -421,15 +421,18 @@ reports, correct):** property wrappers don't compose with `@Observable`, so OH's
 > the list (frequency → alphabetical) and the three-way model sort works (`docs/screenshots/…batch5-*`).
 > 122 tests green.
 >
-> **Deferred:** (1) the **environment-init fix** — both views still build their store from the global
-> `Current` in the `@State` default (`makeStore(world: Current)`); the factory now *takes* a `World`, so
-> the only remaining step is feeding it the `@Environment` world, which `@State` defaults can't see
-> (needs the optional-store-in-`onAppear` pattern). No behavior change in the shipping app, where the
-> environment world *is* `Current`. (2) the **view-shell extraction** (shared picker→list→
-> `ContentUnavailableView`→sheet→analytics scaffold and a shared `updateSearchResults`) — the two
-> `updateSearchResults` differ only in their filter keypath (`infinitifWithPossibleExtraLetters` vs
-> `exemplar`) and are three lines each; left un-merged. `InfoBrowseView` remains a non-adopter (no
-> search/sort), as the item recommends.
+> **Browse-view session follow-up.** (1) the **environment-init fix** — *done.* The views' stores became
+> optional `@State` built from the `@Environment` world in `.onAppear` (the optional-store-in-`onAppear`
+> pattern), dropping the `makeStore(world: Current)` default so an injected `World` is honored. (2) the
+> **full view-shell extraction** — *deliberately not done.* A generic
+> `BrowseScaffold<Item, Sort, Entity, Row, Detail, Suggestion>` was prototyped, but a 6-type-parameter
+> container for exactly two call sites read as inscrutable (the wrong abstraction at N=2), so it was reverted.
+> Each view keeps its own self-contained body (picker → searchable `List` → `ContentUnavailableView` → sheet
+> → analytics), and only the genuinely drift-prone piece — the empty/filter/sad-trombone search logic that
+> had already drifted into the Appendix-B bug — was factored into a small single-type-parameter helper
+> `BrowseSearch.results(in:query:playSoundIfEmpty:matches:)` (`Views/BrowseSearch.swift`); each view passes
+> its own `matches` keypath inline. `InfoBrowseView` remains a non-adopter (no search/sort). 129 tests green;
+> launch anchor + both lists verified in the simulator.
 
 `VerbBrowseView` and `ModelBrowseView` duplicate the
 picker → searchable list → `ContentUnavailableView` → sad-trombone → sheet → analytics
@@ -440,8 +443,10 @@ case; `didSet` persists + swaps." A generic `BrowseStore<Item, Sort>` plus a sha
 here (FH #10, FM §3.3): both views build their store from the global
 (`@State private var store = VerbStore(world: Current)`, line 13) while also reading
 `@Environment(World.self)` — initialize from the environment so previews/tests injecting
-a different `World` aren't half-ignored. This dovetails with the in-flight issue-#27
-work (`docs/conjuguer-ui-issues.md`) that moved views onto `@Environment(World.self)`.
+a different `World` aren't half-ignored. This builds on the `@Environment(World.self)`
+injection (`docs/future-swiftui-fixes.md` **#27**, "env injection" — *already done*; not to be
+confused with code-review item 27, the XML-parser scaffold), which moved views onto
+`@Environment(World.self)` but left the browse stores still reading global `Current`.
 
 ### 22. Conjugator internals cleanup — small pieces ✅ DONE (Batch 3); deep decomposition deferred
 **Found by:** OH #3 (decomposition), FH #12 (additive-scan helper), OM #13 + FH #12 + FM §3.7
@@ -452,10 +457,10 @@ work (`docs/conjuguer-ui-issues.md`) that moved views onto `@Environment(World.s
 > its extra ending logic by branching on the `@discardableResult` return). `composedConjugation`'s manual
 > `hasAppendedAtLeastOneConjugation` flag → `map { … }.joined(separator:)`. `moveCircumflexIfNeeded`'s
 > 10-tuple linear scan → a `[Character: Character]` `circumflexedVowels` lookup. **Deferred:** OH's
-> per-tense-family decomposition of the 195-line `conjugate()` (optional — wait for item 33's extra
-> tests). Golden tests + new `QuizTests` green.
+> per-tense-family decomposition of `conjugate()` (now ~159 lines after the extractions above; optional —
+> wait for item 33's extra tests). Golden tests + new `QuizTests` green.
 
-`conjugate()` is 195 lines with two big switches. Before any grand decomposition:
+`conjugate()` was 195 lines with two big switches (now ~159 after Batch 3's extractions). Before any grand decomposition:
 - Extract the four near-identical additive-alteration scans
   (`Conjugator.swift:45-53, 57-70, 93-108, 120-133`) into one helper (FH's sketch).
 - `composedConjugation`'s manual `hasAppendedAtLeastOneConjugation` flag (`:208-223`) →
@@ -532,14 +537,16 @@ covered by `DeeplinkTests`, so this is a safe extraction.
 > `Quiz` utterance, and `Tense`'s display accessors), not part of the conjugation engine — the concrete
 > payoff the item named (engine purity + tests not mutating global) is fully captured by the engine
 > change. Parameterizing them would ripple `PronounGender` through `Tense`'s four display accessors and
-> their callers for marginal testability gain; left for the issue-#27 `@Environment` migration, which is
-> the natural home for view-layer preference plumbing.
+> their callers for marginal testability gain; left as a follow-on to the (already-done)
+> `@Environment(World.self)` injection (`docs/future-swiftui-fixes.md` #27), the natural home for
+> view-layer preference plumbing.
 
 `PersonNumber.pronoun/pronounWithGender/gender` and `Conjugator.conjugate`'s compound
 branch (`Conjugator.swift:199`) read `Current.settings.pronounGender` from model code,
 which is why `CompoundTenseTests` must mutate global state (`CompoundTenseTests.swift:19`)
 and why the conjugation engine isn't a pure function. Pass `PronounGender` into the few
-call sites that need it. Aligns with the issue-#27 `@Environment` migration direction.
+call sites that need it. Aligns with the (already-done) `@Environment(World.self)` injection
+(`docs/future-swiftui-fixes.md` #27) direction.
 
 ### 27. XML parsers share an unextracted scaffold ✅ DONE (Batch 7)
 **Found by:** OH #9, FM §2.8 · **Effort:** M
@@ -707,7 +714,7 @@ section lists `frequencies.xml` as loaded at startup — it isn't (item 12 /
 
 ## Tier F — Tests
 
-### 33. Close the test gaps around everything above ◐ ONGOING (parser tests + CompoundTenseTests helper landed Batch 7)
+### 33. Close the test gaps around everything above ✅ DONE (regression suites landed across batches; 2 OH-only structural critiques deliberately skipped — see Deferred work)
 **Found by:** OH #12, FM §5 (complementary lists) · **Effort:** M–L, amortized
 
 > **Batch 7 progress.** Two pieces landed alongside item 27. (1) **Parser tests** — new `ParserTests`
@@ -778,9 +785,11 @@ Tests-first where a batch touches scoring/persistence logic.
    the pre-existing round-trip test still green), generic `BrowseStore<Item, Sort>` replacing
    `VerbStore`/`ModelStore` (verified in the simulator), and pronoun-gender injection making
    `Conjugator.conjugate` a pure function (so `CompoundTenseTests` stops mutating global state).
-   122 tests green. Two deferred remainders — item 21's environment-init + view-shell extraction,
-   item 26's PersonNumber display props — tracked below; both belong to the issue-#27 workstream
-   in `docs/conjuguer-ui-issues.md`.
+   122 tests green. (Item 21 was finished later in the browse-view session — environment-init + a small shared
+   `BrowseSearch` helper; the full generic view-shell extraction was prototyped and deliberately reverted as
+   too inscrutable for two call sites.) Remaining deferred remainder — item 26's PersonNumber display
+   props — tracked below; a follow-on to the already-done `@Environment(World.self)` injection
+   (`docs/future-swiftui-fixes.md` #27 "env injection" — *not* code-review item 27).
 7. **Batch 6 — Views and services (items 16, 24, 25, 30, rest of 31). ✅ DONE.** InputView
    spec-driven rewrite (+ `labeledField` helper), VerbView conjugation memoization,
    `handleURL`/`handleInAppURL` shared resolver, and the full item-30 service grab bag
@@ -857,28 +866,49 @@ otherwise-✅ section. Tick a box when the remainder lands.
   ✅ **Done in Batch 7** via item 27: the XML parser missing-attribute traps, `StemAlteration.init`'s
   three parse traps (now `init?`), `DefectGroupParser`'s both-`uo`-`du` trap, and
   `moveCircumflexIfNeeded`'s empty-stem trap are all log-and-skip / recoverable now. (InputView's 11
-  unwrap sites were already folded into **item 16** in Batch 6.)
+  unwrap sites were already folded into **item 16** in Batch 6.) **Follow-up:** one data-driven trap
+  of the same class escaped the original Batch-7 enumeration — `DefectGroup.applyDefect`'s
+  "Unrecognized defect code" `fatalError` (reached for any unknown `uo`/`du` code in `defectGroups.xml`,
+  unlike the parallel `StemAlteration` path which already `compactMap`s unknowns away). Now downgraded to
+  skip-and-log (`print(…); return`), matching the `StemAlteration`/parser convention; `DefectGroupTests`
+  still green.
 - [ ] **19 remainder** — part 1: convert the engine-side `…EndingForPersonNumber` switches
   (`IndicatifPresentGroup`, `PasseSimpleGroup`, `SubjonctifPresentGroup`) to per-case data tables.
   Deferred deliberately in Batch 4 (loses compiler exhaustiveness for little gain now that the display
   path reuses the switches). Revisit only if a concrete need arises. Star-builder helper, typed
   endings, and the Imparfait≡Conditionnel alias are done.
-- [ ] **22 remainder** — OH's per-tense-family decomposition of the 195-line `Conjugator.conjugate()`
+- [ ] **22 remainder** — OH's per-tense-family decomposition of the ~159-line `Conjugator.conjugate()`
   (the three small pieces are done). Optional; do **after item 33** adds engine-edge tests.
-- [ ] **21 remainder** — (a) **environment-init**: both browse views still build their `BrowseStore` from
-  the global `Current` in the `@State` default; the `VerbBrowse`/`ModelBrowse` factories already take a
-  `World`, so the remaining step is feeding the `@Environment` world (optional-store-in-`onAppear`). No
-  shipping-app behavior change. (b) **view-shell extraction**: the shared picker→list→
-  `ContentUnavailableView`→sheet→analytics scaffold and a shared `updateSearchResults` are still
-  per-view (the generic *store* is done). Fold both into the issue-#27 `@Environment` workstream.
+- [x] **21 remainder** — resolved in the browse-view session. (a) **environment-init**: ✅ done — both
+  browse views hold an optional `BrowseStore` (`@State private var store: BrowseStore<…>?`) built from the
+  `@Environment` world in `.onAppear` (the optional-store-in-`onAppear` pattern), the body rendering a
+  `Color.customBackground` placeholder until the store exists. The `@State = makeStore(world: Current)`
+  default is gone, so an injected `World` (previews/tests) is honored; no shipping-app behavior change.
+  (b) **full view-shell extraction**: ⛔️ deliberately not done — a generic
+  `BrowseScaffold<Item, Sort, Entity, Row, Detail, Suggestion>` was prototyped, judged too inscrutable for
+  two call sites (the wrong abstraction at N=2), and reverted. Each view keeps its own readable body; only
+  the drift-prone search logic (the source of the Appendix-B keypath bug) was factored into a small
+  single-type-parameter helper `BrowseSearch.results(in:query:playSoundIfEmpty:matches:)`
+  (`Views/BrowseSearch.swift`), with each view passing its `matches` keypath inline. Verified in the
+  simulator: both lists render, launch anchor intact, model row pushes detail. 129 tests green; SwiftLint
+  `--strict` clean.
 - [ ] **26 remainder** — `PersonNumber.pronoun/pronounWithGender/gender/preamble` still read
   `Current.settings.pronounGender`. Engine (`Conjugator.conjugate`) is now pure; these are `@MainActor`
-  presentation helpers. Parameterize them alongside the issue-#27 `@Environment` migration if/when the
-  view layer threads `PronounGender` explicitly.
+  presentation helpers. Parameterize them as a follow-on to the already-done `@Environment(World.self)`
+  injection (`docs/future-swiftui-fixes.md` #27) if/when the view layer threads `PronounGender` explicitly.
 
 ### Deliberately skipped (won't-do unless revisited)
 - **18 style nit** — iterating `models.keys` in `computeIrregularities`/`sortVerbs` (OM #9). Legal,
   defined Swift as-is; skipped during Batch 3. No correctness impact.
-- **Appendix B minor** — `ModelBrowseView` searches `exemplar` but displays
-  `exemplarWithPossibleExtraLetters` (parenthesized extra letters aren't searchable). Roll into
-  item 21 if/when that view is reworked.
+- **Appendix B minor** — ✅ **Done** (browse-view session, with item 21a): `ModelBrowseView` searched
+  `exemplar` but displayed `exemplarWithPossibleExtraLetters`, so parenthesized extra letters weren't
+  searchable; `updateSearchResults` now filters on `exemplarWithPossibleExtraLetters` (the property the
+  rows and search completions already show).
+- **33 a/b** — the two OH-only structural test critiques behind item 33's former `◐ ONGOING` status; no
+  meaningful value, so won't-do unless revisited. The per-bug regression suites all landed
+  (`ConjugationResultTests`/`SettingsTests`/`DefectGroupTests`/`QuizTests`/`FuturStemsTests`/`ParserTests`
+  + the `CompoundTenseTests` helper). (a) **`VerbModelTests` regenerate-vs-table-driven debate** — leave the
+  5,530 machine-generated lines (via `TestUtils.generateVerbModelTests()`) as-is; revisit only if that suite
+  becomes a maintenance burden. (b) **`DeeplinkTests` "derive fixtures from data" critique** — hardcoded
+  `parler`/`4-2B`/`Info.infos[2]` are clearer than derived fixtures for a routing test, with no real
+  robustness gain.

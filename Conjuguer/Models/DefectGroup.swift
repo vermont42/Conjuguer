@@ -63,7 +63,8 @@ struct DefectGroup {
     }
 
     guard var tenses = Tense.tensesForShorthand(code) else {
-      fatalError("Unrecognized defect code \(code) found.")
+      print("Skipping unrecognized defect code \(code) in defect group \(id).")
+      return
     }
 
     if mirrorImpératifToPassé {

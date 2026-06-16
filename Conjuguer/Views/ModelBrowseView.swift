@@ -10,11 +10,29 @@ import SwiftUI
 
 struct ModelBrowseView: View {
   @Environment(World.self) private var world
-  @State private var store = ModelBrowse.makeStore(world: Current)
+  @State private var store: BrowseStore<ModelAndDecorator, ModelSort>?
   @State private var searchText = ""
   @State private var searchResults: [ModelAndDecorator] = []
 
   var body: some View {
+    Group {
+      if let store {
+        content(store: store)
+      } else {
+        Color.customBackground
+          .screenBackground()
+      }
+    }
+    .onAppear {
+      guard store == nil else {
+        return
+      }
+      store = ModelBrowse.makeStore(world: world)
+    }
+  }
+
+  @ViewBuilder
+  private func content(store: BrowseStore<ModelAndDecorator, ModelSort>) -> some View {
     @Bindable var store = store
     @Bindable var world = world
 
@@ -86,14 +104,11 @@ struct ModelBrowseView: View {
   }
 
   private func updateSearchResults(playSoundIfEmpty: Bool) {
-    if searchText.isEmpty {
-      searchResults = store.items
-    } else {
-      let matchingModels = store.items.filter { $0.model.exemplar.localizedStandardContains(searchText) }
-      if matchingModels.isEmpty && playSoundIfEmpty {
-        SoundPlayer.play(.randomSadTrombone)
-      }
-      searchResults = matchingModels
+    guard let store else {
+      return
+    }
+    searchResults = BrowseSearch.results(in: store.items, query: searchText, playSoundIfEmpty: playSoundIfEmpty) {
+      $0.model.exemplarWithPossibleExtraLetters.localizedStandardContains($1)
     }
   }
 }
