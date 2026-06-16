@@ -9,7 +9,7 @@ import Foundation
 
 struct Info: Identifiable, Hashable {
   let heading: String
-  let attributedText: NSAttributedString
+  let richTextBlocks: [RichTextBlock]
   let alwaysUsesFrenchPronunciation: Bool
   let imageInfo: ImageInfo?
   let category: InfoCategory
@@ -18,7 +18,7 @@ struct Info: Identifiable, Hashable {
 
   private init(heading: String, text: String, category: InfoCategory, alwaysUsesFrenchPronunciation: Bool = false, imageInfo: ImageInfo? = nil) {
     self.heading = heading
-    attributedText = text.attributedText
+    richTextBlocks = text.richTextBlocks
     self.category = category
     self.alwaysUsesFrenchPronunciation = alwaysUsesFrenchPronunciation
     self.imageInfo = imageInfo

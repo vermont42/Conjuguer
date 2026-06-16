@@ -7,7 +7,23 @@
 //
 
 import SwiftUI
-import UIKit
+
+enum RichTextBlock: Hashable {
+  case body([TextSegment])
+  case subheading(String)
+}
+
+enum ConjugationPart: Hashable {
+  case irregular(String)
+  case regular(String)
+}
+
+enum TextSegment: Hashable {
+  case bold(String)
+  case conjugation([ConjugationPart])
+  case link(text: String, url: URL)
+  case plain(String)
+}
 
 extension String {
   static var subheadingSeparator: Character {
@@ -26,169 +42,174 @@ extension String {
     "$"
   }
 
-  // Renders `~bold~`-delimited runs as bold, for SwiftUI Text in the etymology card.
-  // Etymologies use only the bold delimiter; every other character — including the literal
-  // `*` of linguistic reconstructions (e.g. *steh₂-) and Unicode sub/superscripts — passes
-  // through untouched. Alternating segments between `~` markers are bold.
   var etymologyAttributedString: AttributedString {
     var result = AttributedString()
     var isBold = false
     for segment in components(separatedBy: String(String.boldSeparator)) {
       var piece = AttributedString(segment)
       piece.foregroundColor = Color.customForeground
-      piece.font = isBold ? bodyBoldFont : bodyFont
+      piece.font = isBold ? bodyEmphasisFont : bodyFont
       result.append(piece)
       isBold.toggle()
     }
     return result
   }
 
-  var conjugatedString: NSAttributedString {
-    let nsStringCombined = NSString(string: self)
-    guard let nsStrings = NSArray(array: nsStringCombined.components(separatedBy: " ")) as? [NSString] else {
-      fatalError("nsStrings was nil.")
+  func trimmingLeadingNewlines() -> String {
+    var result = self
+    while result.hasPrefix("\n") {
+      result.removeFirst()
     }
-    var attStrings: [NSAttributedString] = []
-    for nsString in nsStrings {
-      let length = nsString.length
-      var startIndex = -1
-      var endIndex = startIndex
-      let uppercaseLetters = NSCharacterSet.uppercaseLetters
-      for i in 0 ..< length {
-        guard let unicodeScalar = UnicodeScalar(nsString.character(at: i)) else {
-          fatalError("unicodeScalar was nil.")
-        }
-        if uppercaseLetters.contains(unicodeScalar) {
-          startIndex = i
-          break
-        }
-      }
-      if startIndex != -1 {
-        for i in (0 ..< length).reversed() {
-          guard let unicodeScalar = UnicodeScalar(nsString.character(at: i)) else {
-            fatalError("unicodeScalar was nil.")
-          }
-          if uppercaseLetters.contains(unicodeScalar) {
-            endIndex = i
-            break
-          }
-        }
-        let attString = NSMutableAttributedString(string: nsString.lowercased)
-        attString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(Color.customRed), range: NSRange(location: startIndex, length: endIndex - startIndex + 1))
-        attStrings.append(attString)
-      } else {
-        attStrings.append(NSAttributedString(string: nsString as String))
-      }
-    }
-    var attString: NSAttributedString = attStrings[0]
-    for i in 1 ..< attStrings.count {
-      attString += (NSAttributedString(string: " " ) + attStrings[i])
-    }
-    return attString
+    return result
   }
 
-  var attributedText: NSAttributedString {
-    let attributedText = NSMutableAttributedString(string: self)
-    // A touch more line spacing makes the long-form articles more comfortable to read (#22).
-    let bodyStyle = NSMutableParagraphStyle()
-    bodyStyle.lineSpacing = 4
-    attributedText.addAttributes([NSAttributedString.Key.foregroundColor: UIColor(Color.customForeground), NSAttributedString.Key.font: Fonts.body, NSAttributedString.Key.paragraphStyle: bodyStyle], range: NSRange(location: 0, length: attributedText.length))
-    var attributesAndRanges: [(NSAttributedString.Key, Any, NSRange)] = []
-    var conjugationRanges: [NSRange] = []
-    // Centered subheadings carry the same line spacing so they sit consistently in the column.
-    let centeredStyle = NSMutableParagraphStyle()
-    centeredStyle.alignment = .center
-    centeredStyle.lineSpacing = 4
+  var richTextBlocks: [RichTextBlock] {
+    var blocks: [RichTextBlock] = []
+    var currentText = ""
     var inSubheading = false
-    var inBold = false
-    var inConjugation = false
-    var inLink = false
-    var currentIndex = 0
-    var startIndex = 0
+
+    func flushBody() {
+      let trimmed = currentText.trimmingLeadingNewlines()
+      currentText = ""
+      guard !trimmed.isEmpty else {
+        return
+      }
+      blocks.append(.body(trimmed.bodySegments))
+    }
 
     for char in self {
       if char == String.subheadingSeparator {
         if inSubheading {
-          attributesAndRanges.append((NSAttributedString.Key.paragraphStyle, centeredStyle, NSRange(location: startIndex, length: currentIndex - startIndex)))
-          attributesAndRanges.append((NSAttributedString.Key.font, Fonts.subheading, NSRange(location: startIndex, length: currentIndex - startIndex)))
+          let trimmed = currentText.trimmingCharacters(in: .whitespacesAndNewlines)
+          if !trimmed.isEmpty {
+            blocks.append(.subheading(trimmed))
+          }
+          currentText = ""
           inSubheading = false
         } else {
+          flushBody()
           inSubheading = true
-          startIndex = currentIndex
         }
+      } else {
+        currentText.append(char)
       }
+    }
+
+    flushBody()
+
+    return blocks
+  }
+
+  var bodySegments: [TextSegment] {
+    var segments: [TextSegment] = []
+    var currentText = ""
+    var inBold = false
+    var inLink = false
+    var inConjugation = false
+    var markupStart = startIndex
+
+    func flushPlain() {
+      guard !currentText.isEmpty else {
+        return
+      }
+      segments.append(.plain(currentText))
+      currentText = ""
+    }
+
+    func markupContent(endingAt index: Index) -> String {
+      String(self[self.index(after: markupStart) ..< index])
+    }
+
+    for index in indices {
+      let char = self[index]
 
       if char == String.boldSeparator {
         if inBold {
-          attributesAndRanges.append((NSAttributedString.Key.font, Fonts.boldBody, NSRange(location: startIndex, length: currentIndex - startIndex)))
+          let content = markupContent(endingAt: index)
+          flushPlain()
+          segments.append(.bold(content))
           inBold = false
         } else {
+          flushPlain()
           inBold = true
-          startIndex = currentIndex
+          markupStart = index
         }
-      }
-
-      if char == String.linkSeparator {
+      } else if char == String.linkSeparator {
         if inLink {
-          let nsRange = NSRange(location: startIndex + 1, length: (currentIndex - startIndex) - 1)
-          guard let range = Range(nsRange, in: self) else {
-            fatalError("Could not make Range.")
-          }
-          var subString = String(self[range])
-          let http = "http"
-          if subString.prefix(http.count) != http {
-            guard let encodedString = subString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
-              fatalError("Could not URL encode substring.")
-            }
-            subString = encodedString
-          }
-          attributesAndRanges.append((NSAttributedString.Key.link, subString, nsRange))
+          let content = markupContent(endingAt: index)
+          flushPlain()
+          segments.append(Self.linkSegment(for: content))
           inLink = false
         } else {
+          flushPlain()
           inLink = true
-          startIndex = currentIndex
+          markupStart = index
         }
-      }
-
-      if char == String.conjugationSeparator {
+      } else if char == String.conjugationSeparator {
         if inConjugation {
-          let nsRange = NSRange(location: startIndex + 1, length: (currentIndex - startIndex) - 1)
-          conjugationRanges.append(nsRange)
+          let content = markupContent(endingAt: index)
+          flushPlain()
+          segments.append(.conjugation(content.conjugationParts))
           inConjugation = false
         } else {
+          flushPlain()
           inConjugation = true
-          startIndex = currentIndex
+          markupStart = index
         }
-      }
-
-      currentIndex += 1
-    }
-
-    for triple in attributesAndRanges {
-      attributedText.addAttribute(triple.0, value: triple.1, range: triple.2)
-    }
-
-    for conjugationRange in conjugationRanges {
-      let conjugation = attributedText.mutableString.substring(with: conjugationRange)
-      let attributedString = (conjugation as String).conjugatedString
-      attributedText.replaceCharacters(in: conjugationRange, with: (self as NSString).substring(with: conjugationRange).lowercased())
-      attributedString.enumerateAttribute(NSAttributedString.Key.foregroundColor, in: NSRange(location: 0, length: attributedString.length), options: []) { (value, range, _) -> Void in
-        if value != nil {
-          let infoRange = NSRange(location: conjugationRange.location + range.location, length: range.length)
-          attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(Color.customRed), range: infoRange)
-        }
+      } else if !inBold && !inLink && !inConjugation {
+        currentText.append(char)
       }
     }
 
-    [
-      String(String.subheadingSeparator),
-      String(String.boldSeparator),
-      String(String.linkSeparator),
-      String(String.conjugationSeparator)
-    ].forEach {
-      attributedText.mutableString.replaceOccurrences(of: $0, with: "", options: NSString.CompareOptions.caseInsensitive, range: NSRange(location: 0, length: attributedText.length))
+    flushPlain()
+
+    if inBold || inLink || inConjugation {
+      segments.append(.plain(String(self[self.index(after: markupStart)...])))
     }
 
-    return attributedText
+    return segments
+  }
+
+  private static func linkSegment(for content: String) -> TextSegment {
+    let urlString: String
+    if content.hasPrefix("http") {
+      urlString = content
+    } else {
+      urlString = content.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? content
+    }
+    if let url = URL(string: urlString) {
+      return .link(text: content, url: url)
+    }
+    return .plain(content)
+  }
+
+  var conjugationParts: [ConjugationPart] {
+    guard !isEmpty else {
+      return []
+    }
+
+    var parts: [ConjugationPart] = []
+    var currentRun = ""
+    var currentIsIrregular: Bool?
+
+    func flushRun() {
+      guard !currentRun.isEmpty, let isIrregular = currentIsIrregular else {
+        return
+      }
+      parts.append(isIrregular ? .irregular(currentRun) : .regular(currentRun))
+      currentRun = ""
+    }
+
+    for char in self {
+      let isIrregular = char.isUppercase
+      if isIrregular != currentIsIrregular {
+        flushRun()
+        currentIsIrregular = isIrregular
+      }
+      currentRun += char.lowercased()
+    }
+    flushRun()
+
+    return parts
   }
 }

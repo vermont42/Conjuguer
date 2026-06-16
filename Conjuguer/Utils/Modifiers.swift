@@ -101,8 +101,6 @@ extension View {
     modifier(ScreenBackground())
   }
 
-  // Records a view-appeared analytics event. Replaces the repeated
-  // `.onAppear { world.analytics.recordViewAppeared("\(X.self)") }` boilerplate.
   func recordsAppearance(as name: String) -> some View {
     modifier(RecordsAppearance(name: name))
   }
@@ -148,7 +146,7 @@ private struct SheetDismissable: ViewModifier {
 private struct SubheadingLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansSemiBold, size: 20, relativeTo: .title3).smallCaps())
+      .font(buttonFont.smallCaps())
       .tracking(0.5)
       .foregroundStyle(Color.customGray)
   }
@@ -157,7 +155,7 @@ private struct SubheadingLabel: ViewModifier {
 private struct TableText: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansRegular, size: 18, relativeTo: .body))
+      .font(tableRowFont)
       .foregroundStyle(Color.customForeground)
   }
 }
@@ -185,7 +183,7 @@ private struct EnglishPronunciation: ViewModifier {
 private struct BodyLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansRegular, size: 20, relativeTo: .body))
+      .font(bodyFont)
       .foregroundStyle(Color.customForeground)
   }
 }
@@ -193,7 +191,7 @@ private struct BodyLabel: ViewModifier {
 private struct SmallLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansRegular, size: 16, relativeTo: .callout))
+      .font(captionFont)
       .foregroundStyle(Color.customGray)
   }
 }
@@ -201,7 +199,7 @@ private struct SmallLabel: ViewModifier {
 private struct SettingsLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansRegular, size: 16, relativeTo: .callout))
+      .font(captionFont)
       .foregroundStyle(Color.customForeground)
   }
 }
@@ -209,14 +207,14 @@ private struct SettingsLabel: ViewModifier {
 private struct ButtonLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansSemiBold, size: 20, relativeTo: .title3))
+      .font(buttonFont)
   }
 }
 
 private struct HeadingLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansSemiBold, size: 22, relativeTo: .title))
+      .font(headingFont)
       .foregroundStyle(Color.customBlue)
       .accessibilityAddTraits(.isHeader)
   }
@@ -225,7 +223,7 @@ private struct HeadingLabel: ViewModifier {
 private struct HeadingForegroundLabel: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(Font.custom(workSansSemiBold, size: 22, relativeTo: .title))
+      .font(headingFont)
       .foregroundStyle(Color.customForeground)
       .accessibilityAddTraits(.isHeader)
   }

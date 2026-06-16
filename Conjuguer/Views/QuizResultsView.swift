@@ -22,7 +22,7 @@ struct QuizResultsView: View {
             .smallLabel()
 
           Text("\(quiz.score)")
-            .font(Font.custom(workSansSemiBold, size: 64, relativeTo: .largeTitle))
+            .font(scoreFont)
             .foregroundStyle(Color.customBlue)
             .numericText()
             .lineLimit(1)

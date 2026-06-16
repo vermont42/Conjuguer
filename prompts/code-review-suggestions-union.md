@@ -571,14 +571,36 @@ call sites that need it. Aligns with the (already-done) `@Environment(World.self
 
 ## Tier E — Modernization and polish
 
-### 28. Retire the legacy `NSAttributedString` pipeline ⏸️ DEFERRED (Batch 7)
+### 28. Retire the legacy `NSAttributedString` pipeline ✅ DONE (Batch 8)
 **Found by:** OM #12, FM §3.5 (deepest analysis), OH #13 (parser note) · **Effort:** L
 
-> **Batch 7 note.** Deliberately deferred (owner's call) as the largest, most behavior-sensitive item:
-> it migrates the shipped Info-article markup language (`` ` ``-subheadings, `~bold~`, `%links%`,
-> `$conjugations$`) off `UITextView`/`NSAttributedString` and must re-home the tappable in-app
-> deep-links (`TextViewDelegate` → `Current.handleInAppURL`) onto SwiftUI's link handling. Schedule as
-> its own PR. The rest of Batch 7 (items 27, 29-keys, 33) shipped without it.
+> **Batch 8 resolution.** The Info-article markup language is now parsed into a structured
+> `[RichTextBlock]` (`enum RichTextBlock { case body([TextSegment]); case subheading }`, with
+> `TextSegment` = `.plain`/`.bold`/`.link`/`.conjugation([ConjugationPart])`) by new `String.richTextBlocks`
+> / `bodySegments` / `conjugationParts` parsers in `StringExtensions.swift`, and rendered by a new
+> native-SwiftUI `RichTextView` (`Views/RichTextView.swift`) that builds one `AttributedString` per body
+> block (bold → `bodyBoldFont`, links → Markdown `[text](url)`, conjugations → per-run `customForeground`/
+> `customRed`) and centers `` `subheadings` ``. `Info` now stores `richTextBlocks: [RichTextBlock]` instead
+> of `attributedText: NSAttributedString`. `InfoView` wraps the content in a `ScrollView` and re-homes the
+> tappable in-app deep-links onto `.environment(\.openURL, OpenURLAction { … })`, porting the former
+> `TextViewDelegate`'s heading/verb resolution verbatim (so `%link%` taps still route through
+> `World.handleInAppURL`). **Deleted** the whole legacy path: `String.conjugatedString` + `String.attributedText`
+> (its five `fatalError`s gone), `TextView.swift` (the `UITextView` wrapper + `TextViewDelegate`),
+> `NSAttributedStringExtension.swift` (the now-orphaned `+`/`+=` operators), and the UIFont-based `Fonts` enum
+> (`Fonts.swift`'s only legacy-only artifact; the SwiftUI `*Font` globals stay). This also retires the UTF-16
+> `NSRange`-vs-`Character` correctness hazard FM flagged. **Behavioral note:** conjugation coloring switched
+> from the legacy first-to-last-uppercase *span* to per-uppercase-*run* coloring (matching
+> `AttributedString(mixedCaseString:)` and the verb/model views) — affects 3 authored tokens with
+> non-contiguous uppercase (`devIenDr`, `vIenDr`, `ÉtÉ`), which now mark exactly the irregular letters.
+> Per-block leading newlines (the blank lines separating a `` `subheading` `` from its body in the source
+> `.strings`) are trimmed à la Konjugieren's `trimmingLeadingNewlines()`, so inter-block spacing is governed
+> by `RichTextView`'s layout (VStack spacing + subheading top padding) rather than literal source blank
+> lines; internal `\n\n` paragraph breaks within a body block are preserved. New `RichTextTests` (14 cases —
+> the legacy path had zero) lock in block splitting, leading-newline trimming, internal-paragraph
+> preservation, each inline segment, run-based conjugation coloring (incl. the non-contiguous case), and
+> graceful unterminated-delimiter handling. Verified in the simulator: subheadings, bold, blue verb links
+> (tap → verb sheet), and red irregular conjugations all render with tight subheading→body spacing
+> (`docs/screenshots/…item28-*`). 143 tests green; SwiftLint `--strict` clean.
 
 Two parallel "color the irregular letters" systems: modern `AttributedString` (
 `ConjugationText.swift`, used by verb/model views) and the legacy

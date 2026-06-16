@@ -139,7 +139,7 @@ struct QuizView: View {
 
         VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
           Text(verb.infinitifWithPossibleExtraLetters)
-            .font(Font.custom(workSansSemiBold, size: 34, relativeTo: .largeTitle))
+            .font(largeTitleFont)
             .foregroundStyle(Color.customForeground)
             .frenchPronunciation()
 
@@ -148,7 +148,7 @@ struct QuizView: View {
             .englishPronunciation()
 
           Text(ask)
-            .font(Font.custom(workSansSemiBold, size: 20, relativeTo: .title3))
+            .font(buttonFont)
             .foregroundStyle(Color.customForeground)
             .frenchPronunciation()
             .padding(.top, Layout.defaultSpacing / 2)
@@ -188,7 +188,7 @@ struct QuizView: View {
       .focused($conjugationFieldIsFocused)
       .textInputAutocapitalization(.never)
       .autocorrectionDisabled()
-      .font(Font.custom(workSansRegular, size: 20, relativeTo: .body))
+      .font(bodyFont)
       .foregroundStyle(Color.customForeground)
       .padding(Layout.doubleDefaultSpacing)
       .background(

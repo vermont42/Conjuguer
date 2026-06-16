@@ -14,9 +14,6 @@ struct ModelView: View {
 
   private static let gridPronouns = ["je", "tu", "il", "nous", "vous", "ils"]
   private static let gridOrder: [PersonNumber] = [.firstSingular, .secondSingular, .thirdSingular, .firstPlural, .secondPlural, .thirdPlural]
-  private static let endingFont = Font.custom(workSansRegular, size: 16, relativeTo: .body)
-  private static let endingPronounFont = Font.custom(workSansRegular, size: 14, relativeTo: .footnote)
-  private static let endingTenseLabelFont = Font.custom(workSansSemiBold, size: 14, relativeTo: .footnote)
 
   init(model: VerbModel) {
     self.model = model
@@ -132,7 +129,7 @@ struct ModelView: View {
           GridRow(alignment: .firstTextBaseline) {
             ForEach(Self.gridPronouns, id: \.self) { pronoun in
               Text(pronoun)
-                .font(Self.endingPronounFont)
+                .font(gridPronounFont)
                 .foregroundStyle(Color.customGray)
                 .frenchPronunciation()
                 .gridColumnAlignment(.leading)
@@ -142,7 +139,7 @@ struct ModelView: View {
           ForEach(endingTenses) { tense in
             GridRow {
               Text(tense.label)
-                .font(Self.endingTenseLabelFont)
+                .font(gridTenseLabelFont)
                 .foregroundStyle(Color.customGray)
                 .gridCellColumns(Self.gridPronouns.count)
             }
@@ -150,7 +147,7 @@ struct ModelView: View {
             GridRow(alignment: .firstTextBaseline) {
               ForEach(Array(tense.slots.enumerated()), id: \.offset) { _, slot in
                 Text(slot ?? AttributedString(" "))
-                  .font(Self.endingFont)
+                  .font(gridEndingFont)
                   .frenchPronunciation()
                   .gridColumnAlignment(.leading)
               }
@@ -259,7 +256,7 @@ struct IrregularityBadge: View {
 
   var body: some View {
     Text("\(percent)%")
-      .font(Font.custom(workSansSemiBold, size: 14, relativeTo: .caption))
+      .font(irregularityBadgeFont)
       .foregroundStyle(tint)
       .padding(.horizontal, 10)
       .padding(.vertical, 3)

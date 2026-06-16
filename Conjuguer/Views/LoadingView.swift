@@ -18,7 +18,7 @@ struct LoadingView: View {
         .accessibilityHidden(true)
 
       Text("Conjuguer")
-        .font(Font.custom(workSansSemiBold, size: 34, relativeTo: .largeTitle))
+        .font(largeTitleFont)
         .foregroundStyle(Color.customBlue)
 
       ProgressView()

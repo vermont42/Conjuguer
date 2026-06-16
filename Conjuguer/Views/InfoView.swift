@@ -18,31 +18,65 @@ struct InfoView: View {
   }
 
   var body: some View {
-    VStack {
-      if let imageInfo = info.imageInfo {
-        Image(imageInfo.filename)
-          .resizable()
-          .aspectRatio(contentMode: .fit)
-          .frame(width: 270)
-          .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-          .shadow(color: Color.customForeground.opacity(0.2), radius: 8, y: 4)
-          .accessibilityLabel(imageInfo.accessibilityLabel)
-      }
+    ScrollView {
+      VStack {
+        if let imageInfo = info.imageInfo {
+          Image(imageInfo.filename)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 270)
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .shadow(color: Color.customForeground.opacity(0.2), radius: 8, y: 4)
+            .accessibilityLabel(imageInfo.accessibilityLabel)
+        }
 
-      if shouldShowInfoHeading {
-        Text(info.heading)
-          .headingForegroundLabel()
-        Spacer()
-      }
+        if shouldShowInfoHeading {
+          Text(info.heading)
+            .headingForegroundLabel()
+            .padding(.bottom, Layout.defaultSpacing)
+        }
 
-      TextView(text: info.attributedText)
-        .frame(minWidth: 0, maxWidth: 680, minHeight: 0, maxHeight: .infinity)
-        .navigationTitle(shouldShowInfoHeading ? "" : info.heading)
+        RichTextView(blocks: info.richTextBlocks)
+          .frame(minWidth: 0, maxWidth: 680)
+          .frame(maxWidth: .infinity, alignment: .leading)
+      }
+      .padding(.leading, Layout.doubleDefaultSpacing)
+      .padding(.trailing, Layout.doubleDefaultSpacing)
     }
-    .padding(.leading, Layout.doubleDefaultSpacing)
-    .padding(.trailing, Layout.doubleDefaultSpacing)
+    .navigationTitle(shouldShowInfoHeading ? "" : info.heading)
     .recordsAppearance(as: "\(InfoView.self)")
     .screenBackground()
+    .environment(\.openURL, OpenURLAction { url in
+      handleInfoLink(url)
+    })
+  }
+
+  private func handleInfoLink(_ url: URL) -> OpenURLAction.Result {
+    let cleansedUrlString = firstLetterLowercased(parenless(url.absoluteString.removingPercentEncoding ?? ""))
+
+    if let infoIndex = Info.headingToIndex(heading: cleansedUrlString) {
+      URL(string: URL.conjuguerUrlPrefix + "\(URL.infoHost)/\(infoIndex)").map {
+        world.handleInAppURL($0)
+      }
+      return .handled
+    } else if Verb.verbs[cleansedUrlString] != nil {
+      URL(string: URL.conjuguerUrlPrefix + "\(URL.verbHost)/\(parenless(firstLetterLowercased(url.absoluteString)))").map {
+        world.handleInAppURL($0)
+      }
+      return .handled
+    } else {
+      return .systemAction
+    }
+  }
+
+  private func parenless(_ input: String) -> String {
+    input
+      .replacingOccurrences(of: "(", with: "")
+      .replacingOccurrences(of: ")", with: "")
+  }
+
+  private func firstLetterLowercased(_ input: String) -> String {
+    input.prefix(1).lowercased() + input.dropFirst()
   }
 }
 
