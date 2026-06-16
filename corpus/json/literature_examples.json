@@ -6201,6 +6201,13 @@
   "line": 1159,
   "token": "tuent"
  },
+ "télécharger": {
+  "fr": "N'installez que les programmes et applications nécessaires et téléchargez-les toujours à partir du site du producteur ou d'une plateforme de téléchargement officielle.",
+  "en": "Only install the programs and applications you need, and always download them from the manufacturer's website or an official download platform.",
+  "source": "ch-ncsc-protection-appareils.txt",
+  "line": 33,
+  "token": "téléchargez"
+ },
  "témoigner": {
   "fr": "— Allons, calme-toi, disait l'apothicaire, tu témoigneras plus tard ta reconnaissance envers ton bienfaiteur!",
   "en": "\"Come now, calm yourself,\" said the apothecary; \"you will show your gratitude to your benefactor later!\"",
