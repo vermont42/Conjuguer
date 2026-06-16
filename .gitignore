@@ -23,3 +23,13 @@ build.log
 docs/screenshots/
 # Apple-copyrighted WWDC transcripts, archived locally for reference only (per their headers)
 docs/wwdc2026-*.txt
+# corpus: tracked = finished JSON exports (corpus/json/), the hand-built parsed
+# intermediates (corpus/grokked/ — irreplaceable manual transcription/translation), and
+# the build script. Ignored = source PDFs/text (originals/, large + reconstructable) and
+# progress notes (working/*.md).
+corpus/*
+!corpus/json/
+!corpus/grokked/
+!corpus/working/
+corpus/working/*
+!corpus/working/build_examples.py
