@@ -931,13 +931,35 @@ otherwise-✅ section. Tick a box when the remainder lands.
   unlike the parallel `StemAlteration` path which already `compactMap`s unknowns away). Now downgraded to
   skip-and-log (`print(…); return`), matching the `StemAlteration`/parser convention; `DefectGroupTests`
   still green.
-- [ ] **19 remainder** — part 1: convert the engine-side `…EndingForPersonNumber` switches
-  (`IndicatifPresentGroup`, `PasseSimpleGroup`, `SubjonctifPresentGroup`) to per-case data tables.
-  Deferred deliberately in Batch 4 (loses compiler exhaustiveness for little gain now that the display
-  path reuses the switches). Revisit only if a concrete need arises. Star-builder helper, typed
+- [x] **19 remainder** — ⛔️ **won't do.** Part 1: convert the engine-side `…EndingForPersonNumber`
+  switches (`IndicatifPresentGroup`, `PasseSimpleGroup`, `SubjonctifPresentGroup`) to per-case data
+  tables. Deferred in Batch 4 and now closed as won't-do: the change is purely cosmetic and trades a
+  compile-time guarantee for a runtime one — the `switch personNumber` is exhaustiveness-checked (add a
+  `PersonNumber` case and the compiler flags every table), whereas a positional array silently desyncs
+  and a `[PersonNumber: String]` dictionary reintroduces an optional/`fatalError` path the codebase has
+  been actively removing (items 27/29/33). The duplication that justified item 19 (triplicated
+  star-builder, string round-tripping) was already harvested in Batch 4, and the one concrete dedup
+  payoff (Imparfait≡Conditionnel) shipped as the alias; what remains is non-duplicated per-tense data
+  that legitimately differs. High churn (hand-transcribing six tense tables, easy to transpose an
+  ending) feeding both engine and display path, for no functional gain. Star-builder helper, typed
   endings, and the Imparfait≡Conditionnel alias are done.
-- [ ] **22 remainder** — OH's per-tense-family decomposition of the ~159-line `Conjugator.conjugate()`
-  (the three small pieces are done). Optional; do **after item 33** adds engine-edge tests.
+- [x] **22 remainder** — ⛔️ **won't do.** OH's per-tense-family decomposition of the ~159-line
+  `Conjugator.conjugate()`. The three high-value small pieces already shipped in Batch 3
+  (`appendAdditiveAlternateStem`, `composedConjugation`'s `map`/`joined`, the circumflex
+  `[Character: Character]` lookup); what's left is the speculative grand restructure, closed for the
+  same reason as item 19. (a) **The clean split fights the code.** `conjugate()` runs in four spans —
+  validation/setup (`:21-49`, shared), the stem-building `switch tense` (`:51-113`), the non-additive
+  stem-alteration phase (`:115-128`, shared), and the ending-application `switch tense` (`:130-177`).
+  A *true* per-tense-family split is awkward because the alteration phase is genuinely shared yet
+  reads the mutable flags set by the stem-building switch (`isConjugatingPasséSimple`,
+  `impératifPersonNumber`, …), so each family fn would have to re-call or re-implement it, or thread
+  the flags through return values. The only natural decomposition is **phase-based**
+  (`buildStems` → alter → `applyEnding`), which isn't what the item asked for and is only marginally
+  clearer. (b) **High risk, zero functional payoff.** The engine is the best-tested code in the app
+  (golden tests + the item-33 regression suites that have now landed, so the stated precondition *is*
+  satisfied), but control-flow restructuring of the hot path is exactly where a subtle regression
+  hides — for a purely cosmetic gain. The item self-described as "optional." Left as a single proven
+  function.
 - [x] **21 remainder** — resolved in the browse-view session. (a) **environment-init**: ✅ done — both
   browse views hold an optional `BrowseStore` (`@State private var store: BrowseStore<…>?`) built from the
   `@Environment` world in `.onAppear` (the optional-store-in-`onAppear` pattern), the body rendering a
