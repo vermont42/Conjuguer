@@ -259,7 +259,7 @@ of the shipped app target**; only the finished JSON is bundled.
 
 | Folder | Contents | Tracked? | Role |
 |---|---|---|---|
-| `corpus/originals/` | Source PDFs (Proust, Zola, Flaubert) + `chanson-roland-oxford.txt` | **No** | Raw source material — large and re-fetchable |
+| `corpus/originals/` | Domain-tier subfolders of raw sources: `literature/` (PDFs of Proust, Zola, Flaubert + `chanson-roland-oxford.txt`) and `government/` (Swiss/French public-document `.txt`) | **No** | Raw source material — large and re-fetchable |
 | `corpus/grokked/` | `chanson.md` | **Yes** | Hand-built parsed intermediate: numbered Old French with the modern infinitive bracketed per line, plus a line-by-line Claude translation |
 | `corpus/working/` | `build_chanson_examples.py` (tracked), `chanson_progress.md` (ignored) | **Mixed** | Build script + local progress notes |
 | `corpus/json/` | `chanson_examples.json` | **Yes** | Finished export, bundled into the app |
@@ -282,7 +282,10 @@ dropping them. This hand-bracket-then-resolve approach suits the one fully-treat
 the planned modern-prose pass over the novels will instead use **subagent extraction**
 (Claude recognizes conjugated/irregular forms natively) rather than regex.
 
-**Future work (not yet built):** the three novels won't cover the technical tail of the
+**Future work (partially built):** the three novels won't cover the technical tail of the
 ranked verbs, so government- and technology-domain fallback corpora (mirroring
-Konjugieren's `corpus/government/` and `corpus/technology/` tiers) will be added under
-`corpus/originals/` in a later session.
+Konjugieren's `corpus/government/` and `corpus/technology/` tiers) supplement them under
+`corpus/originals/`. The **government** tier now exists (`corpus/originals/government/`,
+Swiss/French public documents — see `prompts/get-government-corpus.md` and
+`docs/government-corpus-licensing.md`); the **technology** tier and the modern-prose
+extraction pass over all tiers remain to be built.

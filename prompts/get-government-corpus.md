@@ -53,3 +53,43 @@ ls -lh corpus/originals/government/ 2>/dev/null && echo "---" && \
   { command grep -c '^|' docs/government-corpus-sources.md 2>/dev/null || echo 0; } \
   | sed 's/^/manifest rows: /'
 ```
+
+## Questions from Claude (2026-06-16, before first run)
+
+Read the prompt + `docs/government-corpus-licensing.md` and inspected repo state
+(`corpus/originals/government/` and `docs/government-corpus-sources.md` don't exist yet;
+`corpus/originals/` is gitignored as intended; only `frequencies.xml` exists — there is
+no machine-readable list of the *uncovered* technical-tail verbs). The prompt is clear
+and runnable as-is; my defaults if unanswered are noted per question.
+
+1. **Run now, or is this a clean-session prompt to launch separately?** The doc is framed
+   as a "clean-session prompt" and acquisition is web/Chrome-heavy. *Default if
+   unanswered:* treat this turn as review-only — I append these questions and **do not**
+   start acquiring until you say go (or paste the fenced block into a fresh session).
+
+2. **Filename convention for the saved `.txt` files?** The manifest has a `filename`
+   column but no scheme is specified. *Proposed default:*
+   `<jur>-<office-or-canton>-<topic>-<year>.txt`, lowercase, ASCII slug — e.g.
+   `ch-fed-ofs-rapport-annuel-2023.txt`, `ch-ge-rapport-gestion-2022.txt`,
+   `fr-ademe-strategie-numerique-2022.txt`. OK, or do you want a different pattern?
+
+3. **Verb-variety steering — broad-by-domain, or target a derived uncovered-verb list?**
+   There's no ready list of the technical-tail verbs still needing examples, and the
+   prompt frames selection by *domain* (government + technology prose). *Default:* select
+   broadly across distinct offices/cantons/domains for verb spread, without first
+   computing a target verb set from `frequencies.xml`/`verbs.xml`. Say so if you'd rather
+   I derive and optimize against the uncovered tail first.
+
+4. **How aggressively to strip non-prose?** Swiss/French reports are mostly PDF with prose
+   interleaved with tables, figures, captions, footnotes, and running headers/footers.
+   *Default:* keep only running sentences — drop tables/figures/captions/footnotes/page
+   chrome even at the cost of losing some content — since these feed a later
+   sentence-extraction pass that wants clean prose. Confirm that trade-off.
+
+5. **Volume for this first batch?** *Default:* the prompt's `~8–12 documents` (Swiss-heavy,
+   ~⅔–¾ CH). Switch to the "~3 documents" validation run from the Volume knob if you'd
+   prefer a small shakedown before a full sweep.
+
+6. **Commit the manifest at the end?** Per the Commit knob. *Default:* leave
+   `docs/government-corpus-sources.md` uncommitted for you to review (raw `.txt` stay
+   gitignored regardless). Say "commit" to have me check it in with a one-line message.
