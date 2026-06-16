@@ -52,10 +52,8 @@ enum RatingsFetcher {
     switch ratingsCount {
     case 0:
       return L.RatingsFetcher.noRating + exhortation
-    case 1:
-      return L.RatingsFetcher.oneRating + exhortation
     default:
-      return String(format: L.RatingsFetcher.multipleRatings, ratingsCount) + exhortation
+      return L.RatingsFetcher.ratings(count: ratingsCount) + exhortation
     }
   }
 

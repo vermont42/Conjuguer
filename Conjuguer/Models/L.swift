@@ -42,8 +42,6 @@ enum L {
     }
   }
 
-  // Strings common to the verb and model browse screens. The sort-order picker label is identical
-  // on both, so it lives here rather than being duplicated per screen.
   enum BrowseView {
     static var sortOrder: String {
       String(localized: "BrowseView.sortOrder")
@@ -151,12 +149,16 @@ enum L {
       String(localized: "ResultsView.correctWithColon")
     }
 
-    static var timeWithColon: String {
-      String(localized: "ResultsView.timeWithColon")
-    }
-
     static var yourAnswerWithColon: String {
       String(localized: "ResultsView.yourAnswerWithColon")
+    }
+
+    static func correct(_ score: String, of total: Int) -> String {
+      String(localized: "ResultsView.correctCount", defaultValue: "Correct: \(score) / \(total)")
+    }
+
+    static func time(_ timeString: String) -> String {
+      String(localized: "ResultsView.time", defaultValue: "Time: \(timeString)")
     }
   }
 
@@ -185,12 +187,10 @@ enum L {
       String(localized: "ModelView.irregular")
     }
 
-    static var verbsUsing: String {
-      String(localized: "ModelView.verbsUsing")
-    }
-
-    static var verbUsing: String {
-      String(localized: "ModelView.verbUsing")
+    static func verbsUsing(count: Int) -> String {
+      count > 1
+        ? String(localized: "ModelView.verbsUsing")
+        : String(localized: "ModelView.verbUsing")
     }
 
     static var infoButtonHint: String {
@@ -223,20 +223,8 @@ enum L {
       String(localized: "QuizView.progressWithColon")
     }
 
-    static var outOf: String {
-      String(localized: "QuizView.outOf")
-    }
-
-    static var seconds: String {
-      String(localized: "QuizView.seconds")
-    }
-
     static var scoreWithColon: String {
       String(localized: "QuizView.scoreWithColon")
-    }
-
-    static var elapsedWithColon: String {
-      String(localized: "QuizView.elapsedWithColon")
     }
 
     static var conjugation: String {
@@ -275,8 +263,20 @@ enum L {
       String(localized: "QuizView.questionCount")
     }
 
-    static var bestScoreWithColon: String {
-      String(localized: "QuizView.bestScoreWithColon")
+    static func score(_ value: Int) -> String {
+      String(localized: "QuizView.score", defaultValue: "Score: \(value)")
+    }
+
+    static func bestScore(_ value: Int) -> String {
+      String(localized: "QuizView.bestScore", defaultValue: "Best score: \(value)")
+    }
+
+    static func elapsed(seconds: Int) -> String {
+      String(localized: "QuizView.elapsed", defaultValue: "Elapsed: \(seconds) seconds")
+    }
+
+    static func progress(_ current: Int, of total: Int) -> String {
+      String(localized: "QuizView.progressCount", defaultValue: "\(current) out of \(total)")
     }
   }
 
@@ -577,12 +577,8 @@ enum L {
       String(localized: "RatingsFetcher.noRating")
     }
 
-    static var oneRating: String {
-      String(localized: "RatingsFetcher.oneRating")
-    }
-
-    static var multipleRatings: String {
-      String(localized: "RatingsFetcher.multipleRatings")
+    static func ratings(count: Int) -> String {
+      String(localized: "RatingsFetcher.ratings", defaultValue: "\(count)")
     }
   }
 

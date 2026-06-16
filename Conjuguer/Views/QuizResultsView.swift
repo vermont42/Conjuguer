@@ -31,11 +31,11 @@ struct QuizResultsView: View {
         .padding(.top, Layout.defaultSpacing)
 
         VStack(alignment: .leading, spacing: Layout.defaultSpacing / 2) {
-          Text("\(L.ResultsView.correctWithColon) \(quiz.correctnessScore.asFormattedNumberCorrect()) / \(quiz.questions.count)")
+          Text(L.ResultsView.correct(quiz.correctnessScore.asFormattedNumberCorrect(), of: quiz.questions.count))
 
           Text(quiz.difficulty.localizedDifficultyWithLabel)
 
-          Text("\(L.ResultsView.timeWithColon) \(quiz.elapsedTime.timeString)")
+          Text(L.ResultsView.time(quiz.elapsedTime.timeString))
         }
         .smallLabel()
       }

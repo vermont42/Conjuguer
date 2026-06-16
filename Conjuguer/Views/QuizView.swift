@@ -112,7 +112,7 @@ struct QuizView: View {
 
         Spacer()
 
-        Text("\(L.QuizView.scoreWithColon) \(quiz.score)")
+        Text(L.QuizView.score(quiz.score))
           .numericText()
           .animation(.snappy, value: quiz.score)
 
@@ -227,7 +227,7 @@ struct QuizView: View {
         Label(world.settings.quizDifficulty.localizedDifficultyWithLabel, systemImage: "speedometer")
         Label(L.QuizView.questionCount, systemImage: "list.number")
         if world.settings.bestScore > 0 {
-          Label("\(L.QuizView.bestScoreWithColon) \(world.settings.bestScore)", systemImage: "trophy")
+          Label(L.QuizView.bestScore(world.settings.bestScore), systemImage: "trophy")
         }
       }
       .smallLabel()

@@ -321,9 +321,9 @@ class Quiz {
         Utterer.utter(L.QuizView.tenseWithColon, localeString: currentLocaleString)
         Utterer.utter(question.tense.titleCaseName, localeString: Utterer.frenchLocaleString)
         Utterer.utter(L.QuizView.progressWithColon, localeString: currentLocaleString)
-        Utterer.utter("\(currentQuestionIndex + 1) \(L.QuizView.outOf) \(questions.count)", localeString: currentLocaleString)
-        Utterer.utter("\(L.QuizView.scoreWithColon) \(score)", localeString: currentLocaleString)
-        Utterer.utter("\(L.QuizView.elapsedWithColon) \(elapsedTime) \(L.QuizView.seconds)", localeString: currentLocaleString)
+        Utterer.utter(L.QuizView.progress(currentQuestionIndex + 1, of: questions.count), localeString: currentLocaleString)
+        Utterer.utter(L.QuizView.score(score), localeString: currentLocaleString)
+        Utterer.utter(L.QuizView.elapsed(seconds: elapsedTime), localeString: currentLocaleString)
       }
     }
   }

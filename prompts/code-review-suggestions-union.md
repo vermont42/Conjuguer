@@ -613,7 +613,7 @@ Migrate Info text to `AttributedString` (the `etymologyAttributedString` pattern
 `StringExtensions.swift:33-44`, shows the house style), then delete the whole legacy path
 including its five `fatalError`s. Largest single item; schedule deliberately.
 
-### 29. `L.swift` (618 lines) — String Catalog and key hygiene ✅ DONE (Batch 7 — key hygiene; catalog migration + `*WithColon` format-style deferred)
+### 29. `L.swift` (618 lines) — String Catalog and key hygiene ✅ DONE (key hygiene in Batch 7; `.xcstrings` migration + `*WithColon` format-style finished later — see "29 remainder" below)
 **Found by:** OH #7 (catalog migration — unique); key inconsistency also FM §6 · **Effort:** L (catalog) / S (keys)
 
 > **Batch 7 resolution (the S key-hygiene part).** The bare `"alphabetical"` key (shared by both sort
@@ -626,12 +626,10 @@ including its five `fatalError`s. Largest single item; schedule deliberately.
 > two-segment and model three-segment sort pickers render the namespaced strings and sort correctly
 > (`docs/screenshots/…batch7-verb-sort.png`, `…batch7-model-sort2.png`). SwiftLint `--strict` clean; 129 tests green.
 >
-> **Deferred:** (1) the **`.xcstrings` String Catalog migration** (the L part — "long term" per the item;
-> owner deferred it with item 28). (2) the **`*WithColon` format-style conversion** (FM §6): several
-> `…WithColon` labels are used *both* standalone (e.g. `Utterer.utter(L.QuizView.verbWithColon, …)`,
-> `Text(L.QuizView.scoreWithColon)`) *and* interpolated with a value, so a clean format-string conversion
-> ("Score: %@") is more than the S-sized key cleanup and pairs naturally with the catalog migration that
-> centralizes format strings. Left for that PR.
+> **Deferred (now ✅ done — see "29 remainder" in the partials section):** (1) the **`.xcstrings` String
+> Catalog migration** and (2) the **`*WithColon` format-style conversion**. The standalone-vs-interpolated
+> tension noted here was resolved by keeping the standalone colon-label keys (split sites with two colors /
+> two TTS locales) and adding separate `%lld`/`%@` format keys only for the uniform sites.
 
 Short term: normalize the bare `"alphabetical"` key shared by both sort enums
 (`L.swift:604, 613`) into namespaced keys; fold duplicated browse strings; move
@@ -828,8 +826,9 @@ Tests-first where a batch touches scoring/persistence logic.
    circumflex `fatalError` remainder), item 33's parser tests + `CompoundTenseTests` helper, and
    item 29's **key-hygiene** half (namespaced `alphabetical`, `displayName` on the sort enums,
    folded `BrowseView.sortOrder`). 129 tests green; sort pickers verified in the simulator.
-   **Deferred to their own PRs:** item 28 (NSAttributedString retirement — largest, behavior-
-   sensitive), item 29's `.xcstrings` String Catalog migration + `*WithColon` format-style.
+   **Deferred to their own PRs (both now ✅ done):** item 28 (NSAttributedString retirement — largest,
+   behavior-sensitive; done in Batch 8), item 29's `.xcstrings` String Catalog migration + `*WithColon`
+   format-style (done later — see "29 remainder" in the partials section).
 
 Rough total: batches 0–2 are a weekend; 3–5 a focused week; 6–7 opportunistic.
 
@@ -890,10 +889,38 @@ otherwise-✅ section. Tick a box when the remainder lands.
   `AttributedString(mixedCaseString:)`), and per-block leading newlines are trimmed Konjugieren-style.
   New `RichTextTests` (14 cases — the legacy path had zero); 143 tests green; verified in the simulator.
   See the full resolution note on item 28 above.
-- [ ] **29 remainder** — the two L-effort halves deferred from Batch 7 (the key-hygiene half is done):
+- [x] **29 remainder** — the two L-effort halves deferred from Batch 7 (the key-hygiene half was done):
   (a) migrate `L.swift` + the two `Localizable.strings` to a `.xcstrings` String Catalog; (b) convert
   the `*WithColon` labels to format-style localized strings (`"Score: %@"`) for word-order safety —
   fiddly because several are used both standalone and interpolated, so it pairs with (a).
+  ✅ **Done in this session.**
+  **(a) Catalog.** The two `Conjuguer/Assets/{en,fr}.lproj/Localizable.strings` are gone, replaced by a
+  single `Conjuguer/Assets/Localizable.xcstrings` (synced folders auto-bundle it; the build now `Compile
+  XCStrings` + `Copy`s an en/fr `Localizable.strings` each). The values were merged deterministically
+  (`plutil -convert json` on both `.strings`, then a script emitting the catalog) to avoid hand-transcribing
+  the huge multi-paragraph Info bodies. `L.swift` is **kept as the typed facade** (per owner's call) — every
+  accessor still calls `String(localized:)`, so the migration is a backing-store swap, not a Swift rewrite.
+  Two latent fr bugs surfaced and were handled: a **dead** fr-only key `VerbView.auxiliaryÊtre` (referenced
+  by no Swift, absent from en) was dropped, and `QuizDifficulty.ridiculousDifficulty` was **missing from fr**
+  (English leaked into the French "Ridiculous Difficulty" label) — now translated `Difficulté ridicule`.
+  **(b) Format-style.** Only the genuinely *uniform* interpolations (label + value render/speak as one
+  localized unit) became value-taking `L` funcs backed by `%lld`/`%@` catalog keys: `QuizView.score(_:)`,
+  `.bestScore(_:)`, `.elapsed(seconds:)`, `.progress(_:of:)`, `ResultsView.correct(_:of:)`, `.time(_:)`.
+  The **split** sites stay as standalone colon-label keys, because a single format string can't carry their
+  two text colors (`VerbView` model/aux/freq, `QuizResultView` answers) or two TTS locales (`Quiz.swift`
+  utters the label in the user's locale and the French value separately) — so `scoreWithColon`,
+  `correctWithColon`, `progressWithColon` survive alongside the new format funcs. This is exactly the
+  "used both standalone and interpolated" tension the item flagged: keep the label key, add a format key.
+  **Plurals (owner asked to fold).** `RatingsFetcher` one/other folded into a single plural key
+  `RatingsFetcher.ratings(count:)`; the exactly-zero case stays a separate `noRating` (CLDR has no "zero"
+  category for en/fr, so it's a distinct human message, not a grammatical plural). `ModelView.verbUsing`/
+  `verbsUsing` **could not** fold — the catalog compiler rejects a plural variation whose text doesn't
+  reference the count (this label never shows the number), explicitly advising "use separate top-level
+  strings"; kept as two keys behind an `L.ModelView.verbsUsing(count:)` helper. New `LocalizationTests`
+  (3 cases) assert the format substitution and plural selection under the en locale — they also empirically
+  confirm the `String(localized: key, defaultValue: "\(count)")` mechanism drives catalog plural choice.
+  143 XCTest + 3 Swift-Testing cases green; build clean; verified in the simulator (verb split-labels render
+  `Model:`/`Auxiliary:`/`Frequency:`, quiz shows `Best score: 20`).
 - [x] **17 remainder** — the data-driven `fatalError` downgrade audit (the helper was done earlier).
   ✅ **Done in Batch 7** via item 27: the XML parser missing-attribute traps, `StemAlteration.init`'s
   three parse traps (now `init?`), `DefectGroupParser`'s both-`uo`-`du` trap, and

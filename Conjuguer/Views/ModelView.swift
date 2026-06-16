@@ -207,7 +207,7 @@ struct ModelView: View {
 
   private var verbsUsingCard: some View {
     VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
-      Text(model.verbs.count > 1 ? L.ModelView.verbsUsing : L.ModelView.verbUsing)
+      Text(L.ModelView.verbsUsing(count: model.verbs.count))
         .subheadingLabel()
       Text(model.verbsWithDeepLinks())
         .font(bodyFont)
