@@ -44,7 +44,7 @@
   <verb in="absorber" tn="absorb" mo="1-1" fr="773" />
   <verb in="absoudre" tn="absolve" mo="5-13" />
   <verb in="abstenir" tn="abstain" re="t" mo="6-7" />
-  <verb in="abstraire" tn="abstract" mo="5-24" />
+  <verb in="abstraire" tn="abstract" mo="5-24" dg="25" />
   <verb in="abuser" tn="mislead, abuse" mo="1-1" />
   <verb in="accabler" tn="devastate, overwhelm" mo="1-1" />
   <verb in="accaparer" tn="monopolize, corner" mo="1-1" />
@@ -667,7 +667,7 @@
   <verb in="braconner" tn="poach" mo="1-1" />
   <verb in="brader" tn="sell at a reduced price" mo="1-1" />
   <verb in="brailler" tn="holler, bawl" mo="1-1" />
-  <verb in="braire" tn="bray, shout" mo="5-24" dg="1" />
+  <verb in="braire" tn="bray, shout" mo="5-24" dg="26" />
   <verb in="braiser" tn="braise" mo="1-1" />
   <verb in="bramer" tn="bellow, troat" mo="1-1" />
   <verb in="brancarder" tn="carry on a stretcher" mo="1-1" />
@@ -2215,7 +2215,7 @@
   <verb in="distiller" tn="distill" mo="1-1" />
   <verb in="distinguer" tn="distinguish" mo="1-1" fr="344" />
   <verb in="distordre" tn="distort" mo="5-1A" />
-  <verb in="distraire" tn="distract" mo="5-24" />
+  <verb in="distraire" tn="distract" mo="5-24" dg="25" />
   <verb in="distribuer" tn="distribute" mo="1-1" fr="507" />
   <verb in="divaguer" tn="ramble, wander" mo="1-1" />
   <verb in="diverger" tn="diverge" mo="1-2B" />
@@ -2991,7 +2991,7 @@
   <verb in="extirper" tn="uproot, extirpate, pull out" mo="1-1" />
   <verb in="extorquer" tn="extort" mo="1-1" />
   <verb in="extrader" tn="extradite" mo="1-1" />
-  <verb in="extraire" tn="extract (to draw out)" mo="5-24" fr="473" />
+  <verb in="extraire" tn="extract (to draw out)" mo="5-24" fr="473" dg="25" />
   <verb in="extrapoler" tn="extrapolate" mo="1-1" />
   <verb in="extravaguer" tn="go, wander, extravagate" mo="1-1" />
   <verb in="extravaser" tn="extravasate" re="t" mo="1-1" />
@@ -3048,7 +3048,7 @@
   <verb in="fendiller" tn="crack, craze" mo="1-1" />
   <verb in="fendre" tn="split, chop (wood), crack" mo="5-1A" />
   <verb in="fenêtrer" tn="make holes for windows, install windows" mo="1-1" />
-  <verb in="férir" tn="hit, strike" mo="2-4" dg="0" />
+  <verb in="férir" tn="hit, strike" mo="2-4" dg="6" />
   <verb in="ferler" tn="furl, roll up (a sail)" mo="1-1" />
   <verb in="fermenter" tn="ferment" mo="1-1" />
   <verb in="fermer" tn="shut, close" mo="1-1" fr="255" />
@@ -4549,7 +4549,7 @@
   <verb in="poignarder" tn="stab, knife" mo="1-1" />
   <verb in="poiler" tn="laugh hard" re="t" mo="1-1" />
   <verb in="poinçonner" tn="stamp, punch, hallmark" mo="1-1" />
-  <verb in="poindre" tn="prick, sting, afflict, appear" mo="5-12" />
+  <verb in="poindre" tn="prick, sting, afflict, appear" mo="5-12" dg="24" />
   <verb in="pointer" tn="point to/at, indicate, clock in" mo="1-1" fr="749" />
   <verb in="pointiller" tn="stipple, quibble over" mo="1-1" />
   <verb in="poireauter" tn="hang around" mo="1-1" />
@@ -4802,7 +4802,7 @@
   <verb in="railler" tn="mock, taunt, jeer at, jest" mo="1-1" />
   <verb in="rainer" tn="groove" mo="1-1" />
   <verb in="rainurer" tn="groove" mo="1-1" />
-  <verb in="raire" tn="roar (as a stag)" mo="5-24" />
+  <verb in="raire" tn="roar (as a stag)" mo="5-24" dg="25" />
   <verb in="raisonner" tn="reason" mo="1-1" />
   <verb in="rajeunir" tn="rejuvenate" mo="2-1" />
   <verb in="rajouter" tn="re-add, add again, put back in" mo="1-1" fr="578" />
@@ -5729,7 +5729,7 @@
   <verb in="sous-traiter" tn="subcontract" mo="1-1" />
   <verb in="sous-virer" tn="understeer, oversteer" mo="1-1" />
   <verb in="souscrire" tn="subscribe" mo="5-7" fr="781" />
-  <verb in="soustraire" tn="subtract, avoid, escape from" mo="5-24" />
+  <verb in="soustraire" tn="subtract, avoid, escape from" mo="5-24" dg="25" />
   <verb in="soutacher" tn="decorate with a narrow braid featuring a herringbone pattern" mo="1-1" />
   <verb in="soutenir" tn="support, keep up" mo="6-7" fr="150" />
   <verb in="soutirer" tn="rack (beer or wine)" mo="1-1" />
@@ -6067,7 +6067,7 @@
   <verb in="traînailler" tn="dawdle, mooch" mo="1-1" />
   <verb in="traînasser" tn="dawdle, mooch" mo="1-1" />
   <verb in="traîner" tn="pull, drag, lie about" mo="1-1" />
-  <verb in="traire" tn="milk" mo="5-24" />
+  <verb in="traire" tn="milk" mo="5-24" dg="25" />
   <verb in="traiter" tn="treat, take care of, process" mo="1-1" fr="165" />
   <verb in="tramer" tn="weave, hatch, think up, come up with" mo="1-1" />
   <verb in="tranchefiler" tn="bind (a book)" mo="1-1" />

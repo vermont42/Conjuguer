@@ -88,6 +88,59 @@ class CorpusFormsDumpTests: XCTestCase {
     print("CorpusFormsDump: wrote \(outURL.path)")
   }
 
+  // Companion dump over the FULL verb dictionary (all ~6,320 verbs, not just the usage-ranked
+  // set), to `corpus/working/forms_all.json`. Needed when mining for verbs outside the ranked
+  // top — e.g. the Chanson-only verbs that have a Chanson example but no modern example. Same
+  // form/verb-id schema as the ranked dump; kept as a separate file so the canonical forms.json
+  // (ranked-only) the literature index relies on is untouched.
+  func testDumpAllVerbForms() throws {
+    let outURL = URL(filePath: #filePath)
+      .deletingLastPathComponent()  // Models/
+      .deletingLastPathComponent()  // ConjuguerTests/
+      .deletingLastPathComponent()  // repo root
+      .appending(path: "corpus/working/forms_all.json")
+
+    let allVerbs = Verb.verbs.values.sorted { $0.infinitif < $1.infinitif }
+    XCTAssertFalse(allVerbs.isEmpty, "Verb data not loaded.")
+
+    var index: [String: Set<String>] = [:]
+    var conjugationCount = 0
+    for verb in allVerbs {
+      let id = verb.infinitifWithPossibleExtraLetters
+      for tense in Tense.allConcreteCases {
+        for gender in [PronounGender.feminine, .masculine] {
+          guard let conjugation = Conjugator.conjugatedString(
+            infinitif: verb.infinitif,
+            tense: tense,
+            extraLetters: verb.extraLetters,
+            pronounGender: gender
+          ) else {
+            continue
+          }
+          conjugationCount += 1
+          for alternate in conjugation.split(separator: "/") {
+            let words = alternate.split(separator: " ").map { Self.normalize(String($0)) }
+            let forms = tense.isCompound ? Array(words.suffix(1)) : words
+            for token in forms where token.count >= Self.minFormLength {
+              index[token, default: []].insert(id)
+            }
+          }
+        }
+      }
+    }
+
+    let out = index.reduce(into: [String: [String]]()) { accumulator, pair in
+      accumulator[pair.key] = pair.value.sorted()
+    }
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+    try encoder.encode(out).write(to: outURL)
+
+    print("CorpusFormsDump(all): \(allVerbs.count) verbs → \(conjugationCount) conjugations → "
+      + "\(out.count) distinct forms")
+    print("CorpusFormsDump(all): wrote \(outURL.path)")
+  }
+
   // Lowercase + NFC so forms compare equal to NFC-normalized corpus tokens regardless of how
   // accents were encoded upstream.
   private static func normalize(_ string: String) -> String {
