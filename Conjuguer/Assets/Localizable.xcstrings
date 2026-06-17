@@ -2255,6 +2255,23 @@
         }
       }
     },
+    "VerbView.chansonNextExample" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show a different Chanson de Roland example"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher un autre exemple de la Chanson de Roland"
+          }
+        }
+      }
+    },
     "VerbView.chansonReference" : {
       "extractionState" : "stale",
       "localizations" : {

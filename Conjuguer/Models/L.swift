@@ -167,6 +167,10 @@ enum L {
       String(localized: "VerbView.chansonHeading")
     }
 
+    static var chansonNextExample: String {
+      String(localized: "VerbView.chansonNextExample")
+    }
+
     static func chansonReference(laisse: String, line: Int?) -> String {
       if let line {
         // Interpolate the line as a bare string so no locale grouping separator appears

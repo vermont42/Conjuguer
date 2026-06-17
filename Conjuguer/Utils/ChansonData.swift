@@ -25,9 +25,8 @@ enum ChansonData {
     examples = decoded
   }
 
-  @MainActor static func example(for verb: Verb) -> ChansonExample? {
+  @MainActor static func examples(for verb: Verb) -> [ChansonExample] {
     loadIfNeeded()
-    let occurrences = examples?[verb.infinitifWithPossibleExtraLetters] ?? examples?[verb.infinitif]
-    return occurrences?.randomElement()
+    return examples?[verb.infinitifWithPossibleExtraLetters] ?? examples?[verb.infinitif] ?? []
   }
 }

@@ -14,12 +14,20 @@ struct VerbView: View {
   private let conjugations: VerbConjugations
   @State private var shouldShowCompoundTenses = false
   @State private var detailSheet: DetailSheet?
-  @State private var chansonExample: ChansonExample?
+  @State private var chansonExamples: [ChansonExample]
+  @State private var chansonIndex: Int
 
   init(verb: Verb) {
     self.verb = verb
     conjugations = VerbConjugations.memoized(for: verb)
-    _chansonExample = State(initialValue: ChansonData.example(for: verb))
+    let examples = ChansonData.examples(for: verb)
+    _chansonExamples = State(initialValue: examples)
+    // Start on a random occurrence so each launch still varies; the sword button cycles from here.
+    _chansonIndex = State(initialValue: examples.indices.randomElement() ?? 0)
+  }
+
+  private var chansonExample: ChansonExample? {
+    chansonExamples.indices.contains(chansonIndex) ? chansonExamples[chansonIndex] : nil
   }
 
   var body: some View {
@@ -215,6 +223,19 @@ struct VerbView: View {
       Text(chanson.tr)
         .translationLabel()
         .englishPronunciation()
+
+      if chansonExamples.count > 1 {
+        Button {
+          withAnimation {
+            chansonIndex = (chansonIndex + 1) % chansonExamples.count
+          }
+        } label: {
+          Image(systemName: "flag.2.crossed")
+            .foregroundStyle(Color.customRed)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text(L.VerbView.chansonNextExample))
+      }
     }
   }
 
