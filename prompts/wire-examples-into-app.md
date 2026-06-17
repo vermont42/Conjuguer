@@ -34,11 +34,12 @@ taxonomy below), `line` = 1-based line in the (gitignored) source `.txt` or `nul
 | `source` prefix | Origin | License | Attribution needed? |
 |---|---|---|---|
 | `proust-…`, `zola-…`, `flaubert-…` | Proust *Du côté de chez Swann* (1913), Zola *L'Assommoir* (1877), Flaubert *Madame Bovary* (1857) | Public domain | Courtesy credit |
+| `lafontaine-…`, `moliere-…` | La Fontaine *Fables*, Molière *Œuvres complètes* T1–T4 (classical tier — modern examples for the 144 Chanson-only archaic verbs) | Public domain (Project Gutenberg) | Courtesy credit |
 | `ch-…` (not `ch-ncsc-…`) | Swiss federal/cantonal public documents | PD — Art. 5 URG | Courtesy credit |
 | `fr-…` | French government agencies (ADEME, CNIL, ANSSI, INSEE, France Stratégie, CEREMA, …) | **Licence Ouverte / Etalab 2.0** | **Required** (attribution + license) |
 | `ch-ncsc-…` | Swiss OFCS/NCSC cyber/IT guides | PD — Art. 5 URG | Courtesy credit |
 | `wp-…` | French Wikipedia articles | **CC BY-SA 4.0** | **Required** (attribution + license + share-alike) |
-| `Claude (Opus 4.8)` | 19 original AI-authored examples (the verbs no corpus covered) | — | **Credit Claude** |
+| `Claude (Opus 4.8)` | 82 original AI-authored examples (19 ranked-verb stragglers + 63 archaic Chanson-only verbs no corpus covered) | — | **Credit Claude** |
 
 The manifests under `docs/` map each `source` filename → human title + URL + license. Use them to
 build the display-attribution lookup; **`docs/authored-examples.md`** lists the 19 Claude-authored

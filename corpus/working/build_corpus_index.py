@@ -79,7 +79,7 @@ def gutenberg_bounds(abspath):
     return lo, hi
 
 
-TIERS = ("literature", "government", "technology", "wikipedia")
+TIERS = ("literature", "classical", "government", "technology", "wikipedia")
 
 
 def ordered_docs():

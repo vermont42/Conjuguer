@@ -351,10 +351,13 @@ imperfect over the bare noun-stem form) so the genuine verbal occurrences lead. 
 tail rescued ~40 verbs from the *existing* government tier with no new sources. It writes shards
 directly for `mine_examples.workflow.js`; merge its results back into `literature_examples.json`.
 
-**Tiers beyond literature.** `build_corpus_index.py` recognizes four tiers in priority order:
-`literature`, `government`, `technology`, `wikipedia` (each under `corpus/originals/<tier>/`, same
-gitignore treatment; `build_tail_index.py` draws the tail from the latter three). Each has a tracked
-provenance manifest under `docs/` recording attribution + license:
+**Tiers beyond literature.** `build_corpus_index.py` recognizes five tiers in priority order:
+`literature`, `classical`, `government`, `technology`, `wikipedia` (each under
+`corpus/originals/<tier>/`, same gitignore treatment; `build_tail_index.py` draws the tail from the
+latter four). Each has a tracked provenance manifest under `docs/` recording attribution + license:
+- **classical** (`docs/classical-corpus-sources.md`) — La Fontaine *Fables* + Molière *Œuvres
+  complètes*, 17th-c. French, **PD via Project Gutenberg** (modernized 19th-c. Garnier orthography,
+  so forms match). Added to bridge the gap between *Roland* (~1100) and the 19th-c. novels.
 - **government** (`docs/government-corpus-sources.md`) — Swiss PD (Art. 5 URG) + French Etalab.
 - **technology** (`docs/technology-corpus-sources.md`) — Swiss NCSC cyber/IT, PD. Consumer how-to
   register supplies imperative/infinitive forms (`téléchargez`) that formal reports lack.
@@ -368,5 +371,19 @@ Corpus mining reached **963/982 (98.1%)**. The final 19 — inherent form-collis
 open corpus uses verbally — were filled with **original Claude-authored example sentences**
 (`docs/authored-examples.md`), each carrying `"source": "Claude (Opus 4.8)"` + `"line": null` in
 the JSON so AI authorship is explicit and never attributed to a corpus it didn't come from.
-`literature_examples.json` is now **982/982 (100%)**. To extend/replace a tier: add sources under
-it, re-run `build_tail_index.py` + the workflow, and merge into `literature_examples.json`.
+`literature_examples.json` now covers the ranked **982 + 144 Chanson-only special verbs = 1126**
+(`100%`). To extend/replace a tier: add sources under it, re-run `build_tail_index.py` + the
+workflow, and merge into `literature_examples.json`.
+
+**Classical tier — the 144 Chanson-only verbs.** `chanson_examples.json` attaches a *Roland*
+example to 332 verbs; **144** of those are not in the ranked 982 (archaic reflexes the poem
+contains: `occire`, `quérir`, `gésir`, `ouïr`, `honnir`, …). To honor each with a *modern* example
+below its Chanson one, the classical tier was mined via **`build_classical_index.py`** (targets the
+144 — recomputed as `chanson − lit`, keyed by **bare infinitive**; uses `forms_all.json` over all
+~6,320 verbs with a `re.sub(r"\s*\(.*\)$","",vid)` normalization gotcha; ranks candidates by
+distinctively-verbal token) → **`mine_classical.workflow.js`** (4 shards, subagents reject
+noun/adjective/pronoun homographs) → **`merge_classical.py`** (merges into `literature_examples.json`
+keyed by verb, refuses to overwrite the existing 982). Result: **81 classical-mined** (36 La
+Fontaine, 45 Molière) + **63 authored** (`docs/classical-authored.md` — 45 absent-from-tier +
+18 homograph-only). Both the `corpus/json/` and bundled `Conjuguer/Models/` copies of
+`literature_examples.json` must stay in sync (the app loads the latter via `ExampleData.swift`).

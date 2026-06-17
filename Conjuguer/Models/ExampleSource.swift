@@ -11,6 +11,8 @@ enum ExampleSource: Hashable {
   case proust
   case zola
   case flaubert
+  case laFontaine // lafontaine-… — La Fontaine, Fables, PD (classical tier).
+  case moliere // moliere-… — Molière, Œuvres complètes, PD (classical tier).
   case swissPublic // ch-… and ch-ncsc-… — Swiss public documents, PD (Art. 5 URG).
   case frenchGov // fr-… — French agencies, Licence Ouverte / Etalab 2.0.
   case wikipedia(article: String) // wp-… — French Wikipedia, CC BY-SA 4.0.
@@ -24,6 +26,10 @@ enum ExampleSource: Hashable {
       self = .zola
     } else if rawSource.hasPrefix("flaubert") {
       self = .flaubert
+    } else if rawSource.hasPrefix("lafontaine") {
+      self = .laFontaine
+    } else if rawSource.hasPrefix("moliere") {
+      self = .moliere
     } else if rawSource.hasPrefix("fr-") {
       self = .frenchGov
     } else if rawSource.hasPrefix("ch-") {
@@ -45,6 +51,10 @@ enum ExampleSource: Hashable {
       return "— Émile Zola, « L’Assommoir » (1877)"
     case .flaubert:
       return "— Gustave Flaubert, « Madame Bovary » (1857)"
+    case .laFontaine:
+      return "— Jean de La Fontaine, « Fables » (1668–1694)"
+    case .moliere:
+      return "— Molière, « Œuvres complètes » (1659–1673)"
     case .swissPublic:
       return L.VerbView.sourceSwissPublic
     case .frenchGov:

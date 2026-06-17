@@ -41,6 +41,13 @@
   "line": 4231,
   "token": "absorbât"
  },
+ "absoudre": {
+  "fr": "Le prêtre absout le pécheur repentant de toutes ses fautes.",
+  "en": "The priest absolves the repentant sinner of all his sins.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "absout"
+ },
  "accentuer": {
   "fr": "Or, aussi bien les fortes pluies que le dégel du permafrost vont s'accentuer avec le réchauffement climatique.",
   "en": "Yet both heavy rainfall and the thawing of permafrost will intensify with climate change.",
@@ -125,6 +132,13 @@
   "line": 7173,
   "token": "accélérer"
  },
+ "acheminer": {
+  "fr": "Ah! Frosine, la joie où vous m'acheminez!",
+  "en": "Ah! Frosine, the joy toward which you are leading me!",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 11624,
+  "token": "acheminez"
+ },
  "acheter": {
   "fr": "Elle fit venir de chez elle un vieux lit en merisier, et acheta de plus un petit poêle en fonte, avec la provision de bois qui devait chauffer son pauvre enfant.",
   "en": "She had an old cherry-wood bed brought from her house, and also bought a small cast-iron stove, along with a supply of firewood to keep her poor child warm.",
@@ -138,6 +152,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 2781,
   "token": "achevait"
+ },
+ "acquitter": {
+  "fr": "Aussitôt chacun accourut pour s'acquitter envers le prince de certains compliments de consolation.",
+  "en": "At once everyone came running to discharge their duty toward the prince with certain words of condolence.",
+  "source": "lafontaine-fables.txt",
+  "line": 8709,
+  "token": "acquitter"
  },
  "acquérir": {
   "fr": "En passant par votre magnifique plaidoirie, mon œuvre a acquis pour moi-même comme une autorité imprévue.",
@@ -209,12 +230,26 @@
   "line": 1056,
   "token": "adorent"
  },
+ "adouber": {
+  "fr": "Le roi adouba le jeune écuyer en le frappant du plat de son épée.",
+  "en": "The king dubbed the young squire, striking him with the flat of his sword.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "adouba"
+ },
  "adresser": {
   "fr": "…une allusion personnelle qu'elle passait souvent inaperçue de celui même à qui elle s'adressait.",
   "en": "…a personal allusion that often went unnoticed by the very person it was directed at.",
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 791,
   "token": "s'adressait"
+ },
+ "advenir": {
+  "fr": "S'il advient que dehors quelque affaire m'appelle, j'appréhende au retour cette triste nouvelle.",
+  "en": "If it happens that some business calls me away, I dread that sad news upon my return.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 9189,
+  "token": "advient"
  },
  "affaiblir": {
   "fr": "La mourante s'affaiblissait, ne parlant plus, n'ayant que son regard, son ancien regard noir de petite fille résignée et songeuse, qu'elle fixait sur ses deux enfants.",
@@ -230,12 +265,33 @@
   "line": 871,
   "token": "affectait"
  },
+ "affermer": {
+  "fr": "Le seigneur afferma ses terres à un riche laboureur pour neuf années.",
+  "en": "The lord leased out his lands to a wealthy farmer for nine years.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "afferma"
+ },
  "afficher": {
   "fr": "Elle avait une grosse envie d'un petit mantelet de soie, affiché treize francs, rue du Faubourg-Poissonnière.",
   "en": "She had a strong desire for a little silk mantle, priced at thirteen francs, on the rue du Faubourg-Poissonnière.",
   "source": "zola-lassommoir-1877.txt",
   "line": 2594,
   "token": "affiché"
+ },
+ "affiler": {
+  "fr": "Le faucheur affila sa lame avant de se mettre à couper les blés.",
+  "en": "The mower sharpened his blade before setting about cutting the wheat.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "affila"
+ },
+ "affiner": {
+  "fr": "Pour la seconde fois les trompe et les affine, blanchit sa robe et s'enfarine.",
+  "en": "For the second time he deceives and outwits them, whitens his coat and dusts himself with flour.",
+  "source": "lafontaine-fables.txt",
+  "line": 3754,
+  "token": "affine"
  },
  "affirmer": {
   "fr": "C'était dans son clocher qu'elle semblait prendre conscience d'elle-même, affirmer une existence individuelle et responsable.",
@@ -250,6 +306,13 @@
   "source": "fr-cerema-mobilites-decarbonees-2022.txt",
   "line": 195,
   "token": "affronter"
+ },
+ "affubler": {
+  "fr": "On l'avait affublé d'un chapeau ridicule qui faisait rire tout le village.",
+  "en": "They had got him up in a ridiculous hat that made the whole village laugh.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "affublé"
  },
  "aggraver": {
   "fr": "…la présence d'Odette, la douceur d'être auprès d'elle était le seul spécifique (un spécifique qui à la longue aggravait le mal avec bien des remèdes, mais du moins calmait momentanément la souffrance).",
@@ -398,6 +461,13 @@
   "line": 27,
   "token": "ancrer"
  },
+ "angoisser": {
+  "fr": "L'attente interminable des résultats l'angoissait au point de l'empêcher de dormir.",
+  "en": "The endless wait for the results distressed him so much that it kept him from sleeping.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "angoissait"
+ },
  "animer": {
   "fr": "Une vive rougeur animait les joues de ma tante, c'était Eulalie.",
   "en": "A bright flush coloured my aunt's cheeks — it was Eulalie.",
@@ -447,12 +517,26 @@
   "line": 2461,
   "token": "apparaissait"
  },
+ "appareiller": {
+  "fr": "Le navire appareilla dès l'aube et mit le cap sur les îles lointaines.",
+  "en": "The ship set sail at dawn and headed for the distant islands.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "appareilla"
+ },
  "apparenter": {
   "fr": "Le suivi de l'évolution de la pratique du vélo s'apparente à celui de sa part modale parmi l'ensemble des modes de transport.",
   "en": "Tracking changes in cycling habits is analogous to tracking cycling's modal share among all modes of transport.",
   "source": "fr-cerema-mobilites-decarbonees-2022.txt",
   "line": 373,
   "token": "apparente"
+ },
+ "apparoir": {
+  "fr": "Vous m'êtes, en dormant, un peu triste apparu.",
+  "en": "While I slept, you appeared to me looking somewhat sad.",
+  "source": "lafontaine-fables.txt",
+  "line": 8558,
+  "token": "apparu"
  },
  "appartenir": {
   "fr": "Il était bien le maître de ce qui lui appartenait!",
@@ -552,6 +636,13 @@
   "line": 5118,
   "token": "arborent"
  },
+ "arguer": {
+  "fr": "Il argua de sa mauvaise santé pour se dispenser du long voyage.",
+  "en": "He pleaded his poor health to get out of the long journey.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "argua"
+ },
  "armer": {
   "fr": "Nous avons besoin de construire un nouveau référentiel d'action publique pour armer le bras d'un État en capacité de piloter ces transformations, dans une organisation et des processus renouvelés.",
   "en": "We need to build a new public-policy framework to equip the state with the capacity to drive these transformations, within a renewed organisational structure and set of processes.",
@@ -601,6 +692,13 @@
   "line": 4325,
   "token": "aspirât"
  },
+ "assaillir": {
+  "fr": "Une personne à qui, dans les désirs qui pourraient l'assaillir, il ne manquerait rien qu'un moyen de faillir.",
+  "en": "A person who, amid the desires that might assail her, would lack nothing but the means to err.",
+  "source": "moliere-oeuvres-t2.txt",
+  "line": 652,
+  "token": "assaillir"
+ },
  "assassiner": {
   "fr": "il racontait que des hommes allaient venir l'assassiner.",
   "en": "he kept saying that men were coming to murder him.",
@@ -643,6 +741,13 @@
   "line": 498,
   "token": "assistât"
  },
+ "assiéger": {
+  "fr": "Il ne pouvait armer sa femme contre les séductions hardies qui venaient l'assiéger.",
+  "en": "He could not arm his wife against the bold seductions that came to besiege her.",
+  "source": "moliere-oeuvres-t2.txt",
+  "line": 5525,
+  "token": "assiéger"
+ },
  "associer": {
   "fr": "Un bandeau de pourpre au fond des bois du Calvaire qui se reflétait plus loin dans l'étang, rougeur qui, accompagnée souvent d'un froid assez vif, s'associait, dans mon esprit, à la rougeur du feu au-dessus duquel rôtissait le poulet.",
   "en": "A band of crimson at the edge of the Calvary woods, reflected further on in the pond, a redness which, often accompanied by a sharp chill, became associated in my mind with the glow of the fire over which a chicken was roasting.",
@@ -684,6 +789,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 1506,
   "token": "attaquer"
+ },
+ "attarder": {
+  "fr": "Elle s'attarda longtemps devant la vitrine du libraire, incapable de choisir.",
+  "en": "She lingered a long while at the bookseller's window, unable to choose.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "attarda"
  },
  "atteindre": {
   "fr": "Quand leurs économies atteignirent la somme de six cents francs, la jeune femme ne dormit plus, obsédée d'un rêve d'ambition.",
@@ -741,6 +853,13 @@
   "line": 11403,
   "token": "autoriser"
  },
+ "avaler": {
+  "fr": "Je vois sa raison d'une audience avide avaler ce poison.",
+  "en": "I see his reason swallow that poison with an eager ear.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 16893,
+  "token": "avaler"
+ },
  "avancer": {
   "fr": "Golo, plein d'un affreux dessein, sortait de la petite forêt triangulaire qui veloutait d'un vert sombre la pente d'une colline, et s'avançait en tressautant vers le château de la pauvre Geneviève de Brabant.",
   "en": "Golo, filled with a dreadful purpose, emerged from the small triangular wood that cast a dark green velvet over the hillside and advanced, lurching and jolting, toward the castle of the poor Geneviève de Brabant.",
@@ -783,12 +902,33 @@
   "line": 69,
   "token": "axé"
  },
+ "bailler": {
+  "fr": "Je suis bien tenté de te bailler une quinte major, en présence de tes parents.",
+  "en": "I'm sorely tempted to land you a good wallop, right in front of your parents.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 1821,
+  "token": "bailler"
+ },
+ "baiser": {
+  "fr": "Un père, quand il veut, peut sa fille baiser, sans que l'on ait sujet de s'en scandaliser.",
+  "en": "A father, when he wishes, may kiss his daughter, without anyone having cause to be scandalized.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 15377,
+  "token": "baiser"
+ },
  "baisser": {
   "fr": "Cottard manifesta en même temps son étonnement et sa soumission, comme devant une vérité contraire à tout ce qu'il avait cru jusque-là, mais d'une évidence irrésistible; et, baissant d'un air ému et peureux son nez dans son assiette, il se contenta de répondre: «Ah!-ah!-ah!»",
   "en": "Cottard showed at once his astonishment and his submission, as before a truth that contradicted everything he had believed until then yet was irresistibly plain; and, lowering his nose into his plate with a timid, emotion-filled air, he contented himself with replying: 'Ah! ah! ah!'",
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 11003,
   "token": "baissant"
+ },
+ "balayer": {
+  "fr": "Une servante vient balayer tout l'ouvrage.",
+  "en": "A servant comes and sweeps away all the work.",
+  "source": "lafontaine-fables.txt",
+  "line": 3385,
+  "token": "balayer"
  },
  "baptiser": {
   "fr": "Tu as tort de baptiser les autres, répondit-il avec humeur. Tu ne sais pas, toi, qu'on t'appelle Queue-de-Vache, dans le quartier, à cause de tes cheveux.",
@@ -825,6 +965,20 @@
   "line": 25,
   "token": "bloquer"
  },
+ "blâmer": {
+  "fr": "Pendant le repas, Xantus ne fit autre chose que blâmer son cuisinier.",
+  "en": "During the meal, Xanthus did nothing but criticize his cook.",
+  "source": "lafontaine-fables.txt",
+  "line": 625,
+  "token": "blâmer"
+ },
+ "blêmir": {
+  "fr": "En apprenant la terrible nouvelle, il blêmit et dut s'appuyer contre le mur.",
+  "en": "On hearing the terrible news, he turned pale and had to lean against the wall.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "blêmit"
+ },
  "boire": {
   "fr": "Il montait ses chevaux au lieu de les envoyer au labour, buvait son cidre en bouteilles au lieu de le vendre en barriques, mangeait les plus belles volailles de sa cour.",
   "en": "He rode his horses instead of sending them out to plough, drank his cider from the bottle instead of selling it by the barrel, and ate the finest fowl from his yard.",
@@ -860,12 +1014,26 @@
   "line": 5997,
   "token": "bouleversa"
  },
+ "bouter": {
+  "fr": "Ce monsieu veut m'épouser, et tu ne dois pas te bouter en colère.",
+  "en": "This gentleman wants to marry me, and you mustn't fly into a rage.",
+  "source": "moliere-oeuvres-t3.txt",
+  "line": 1547,
+  "token": "bouter"
+ },
  "brancher": {
   "fr": "Avant de lancer la mise à jour, branchez votre ordinateur sur le secteur.",
   "en": "Before starting the update, plug your computer into the mains.",
   "source": "Claude (Opus 4.8)",
   "line": null,
   "token": "branchez"
+ },
+ "brandir": {
+  "fr": "Le chevalier brandit son épée et s'élança au galop vers l'ennemi.",
+  "en": "The knight brandished his sword and charged at a gallop toward the enemy.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "brandit"
  },
  "briller": {
   "fr": "le beau visage de ma mère brillait encore de jeunesse ce soir-là où elle me tenait si doucement les mains et cherchait à arrêter mes larmes.",
@@ -881,6 +1049,13 @@
   "line": 1131,
   "token": "brisait"
  },
+ "brocher": {
+  "fr": "Il fallut qu'un homme de génie voulût bien brocher des scènes qui amenaient des danses, des chants et des spectacles.",
+  "en": "It was necessary for a man of genius to be willing to knock together scenes that brought in dances, songs, and spectacles.",
+  "source": "moliere-oeuvres-t4.txt",
+  "line": 16698,
+  "token": "brocher"
+ },
  "brûler": {
   "fr": "On crut Gervaise ébouillantée. Mais elle n'avait que le pied gauche brûlé légèrement.",
   "en": "Everyone feared Gervaise had been scalded all over. But only her left foot had been lightly burned.",
@@ -894,6 +1069,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 3936,
   "token": "bâtir"
+ },
+ "bénir": {
+  "fr": "Mon enfant, le bon Dieu puisse-t-il vous bénir, et dans tous vos attraits longtemps vous maintenir.",
+  "en": "My child, may the good Lord bless you, and long preserve you in all your charms.",
+  "source": "moliere-oeuvres-t2.txt",
+  "line": 7075,
+  "token": "bénir"
  },
  "bénéficier": {
   "fr": "Ce n'était pas seulement parce qu'une image dont nous rêvons reste toujours marquée, s'embellit et bénéficie du reflet des couleurs étrangères qui par hasard l'entourent dans notre rêverie.",
@@ -965,6 +1147,20 @@
   "line": 289,
   "token": "causerons"
  },
+ "ceindre": {
+  "fr": "Avant la bataille, le guerrier ceignit son épée et boucla son armure.",
+  "en": "Before the battle, the warrior girded on his sword and fastened his armor.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "ceignit"
+ },
+ "celer": {
+  "fr": "Elle ne put celer plus longtemps le chagrin qui lui rongeait le cœur.",
+  "en": "She could no longer conceal the grief that was gnawing at her heart.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "celer"
+ },
  "centrer": {
   "fr": "L'encouragement est donc centré sur le développement et le changement d'échelle des processus de fabrication avec des technologies suisses.",
   "en": "The support is therefore focused on the development and scaling up of manufacturing processes using Swiss technologies.",
@@ -985,6 +1181,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 298,
   "token": "cessé"
+ },
+ "chaloir": {
+  "fr": "Peu lui chaut ce que pensent les envieux ; il suit sa route sans broncher.",
+  "en": "Little does he care what the envious think; he goes his way without flinching.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "chaut"
  },
  "changer": {
   "fr": "Il pouvait changer maintenant les heures de ses repas, rentrer ou sortir sans donner de raisons, et, lorsqu'il était bien fatigué, s'étendre de ses quatre membres, tout en large, dans son lit.",
@@ -1007,6 +1210,13 @@
   "line": 67,
   "token": "chargé"
  },
+ "charrier": {
+  "fr": "Le fleuve en crue charriait des troncs d'arbres et des pans de toiture.",
+  "en": "The flooding river was carrying along tree trunks and sections of roofing.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "charriait"
+ },
  "chasser": {
   "fr": "jusqu'à ce que l'habitude eût changé la couleur des rideaux, fait taire la pendule, enseigné la pitié à la glace oblique et cruelle, dissimulé, sinon chassé complètement, l'odeur du vétiver.",
   "en": "until habit had changed the color of the curtains, silenced the clock, taught pity to the slanting and cruel mirror, concealed, if not entirely chased away, the smell of vetiver.",
@@ -1028,6 +1238,20 @@
   "line": 126,
   "token": "cherchait"
  },
+ "chevaucher": {
+  "fr": "Dans les batailles il chevauchait le destrier, plus grand et vigoureux.",
+  "en": "In battle he rode the destrier, the larger and more vigorous warhorse.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 15967,
+  "token": "chevauchait"
+ },
+ "choir": {
+  "fr": "Un jeune enfant dans l'eau se laissa choir, en badinant sur les bords de la Seine.",
+  "en": "A young child let himself fall into the water while frolicking on the banks of the Seine.",
+  "source": "lafontaine-fables.txt",
+  "line": 1809,
+  "token": "choir"
+ },
  "choisir": {
   "fr": "Sa mère lui choisit une chambre, au quatrième, sur l'Eau-de-Robec, chez un teinturier de sa connaissance.",
   "en": "His mother chose him a room on the fourth floor overlooking the Eau-de-Robec, at the home of a dyer she knew.",
@@ -1042,12 +1266,26 @@
   "line": 70,
   "token": "choquait"
  },
+ "châtier": {
+  "fr": "Quoi! châtier mes gens n'est pas en ma puissance?",
+  "en": "What! Is punishing my own servants not within my power?",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 5185,
+  "token": "châtier"
+ },
  "cibler": {
   "fr": "Cela permettra de cibler et de hiérarchiser les activités et les efforts dans le contexte international.",
   "en": "This will make it possible to target and prioritise activities and efforts in the international context.",
   "source": "ch-fed-oft-transfert-trafic-2025.txt",
   "line": 513,
   "token": "cibler"
+ },
+ "cingler": {
+  "fr": "Le vent du nord lui cinglait le visage tandis qu'il traversait la lande.",
+  "en": "The north wind lashed his face as he crossed the moor.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "cinglait"
  },
  "circuler": {
   "fr": "Puisqu'elle ne pourrait jamais, en robe de velours à manches courtes, sur un piano d'Érard, dans un concert, battant de ses doigts légers les touches d'ivoire, sentir, comme une brise, circuler autour d'elle un murmure d'extase, ce n'était pas la peine de s'ennuyer à étudier.",
@@ -1062,6 +1300,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 3407,
   "token": "citait"
+ },
+ "clamer": {
+  "fr": "L'accusé clamait son innocence devant la cour assemblée.",
+  "en": "The accused loudly proclaimed his innocence before the assembled court.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "clamait"
  },
  "classer": {
   "fr": "Par le présent message, nous proposons de classer les interventions parlementaires suivantes.",
@@ -1455,6 +1700,13 @@
   "line": 509,
   "token": "contenta"
  },
+ "conter": {
+  "fr": "Hem! que veux-tu conter?",
+  "en": "Hmm! What do you want to tell me?",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 5218,
+  "token": "conter"
+ },
  "contester": {
   "fr": "La chronique de Saint-Denis dont nous ne pouvons contester la sûreté d'information ne laisse aucun doute à cet égard.",
   "en": "The chronicle of Saint-Denis, whose reliability of information we cannot dispute, leaves no doubt on that score.",
@@ -1475,6 +1727,20 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 8883,
   "token": "contraint"
+ },
+ "contrarier": {
+  "fr": "En vienne jusque-là que de se méconnoître, de contrarier tout et de faire le maître.",
+  "en": "To go so far as to forget herself, to oppose everything and play the master.",
+  "source": "moliere-oeuvres-t3.txt",
+  "line": 17334,
+  "token": "contrarier"
+ },
+ "contredire": {
+  "fr": "Je n'y contredis point, je les ai mérités.",
+  "en": "I do not contradict it at all; I have deserved them.",
+  "source": "moliere-oeuvres-t3.txt",
+  "line": 19823,
+  "token": "contredis"
  },
  "contribuer": {
   "fr": "tout cela contribuait à leur irritation contre lui.",
@@ -1532,6 +1798,13 @@
   "line": 221,
   "token": "copierez"
  },
+ "corner": {
+  "fr": "Les oreilles me cornent.",
+  "en": "My ears are ringing.",
+  "source": "moliere-oeuvres-t2.txt",
+  "line": 961,
+  "token": "cornent"
+ },
  "correspondre": {
   "fr": "chaque fois que pendant les classes, je correspondais, aussitôt que le professeur avait la tête tournée, avec un nouvel ami.",
   "en": "every time during class I would exchange notes with a new friend the moment the teacher looked away.",
@@ -1545,6 +1818,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 1763,
   "token": "corrigeant"
+ },
+ "corroyer": {
+  "fr": "L'artisan corroyait le cuir pour l'assouplir avant d'en faire des bottes.",
+  "en": "The craftsman curried the leather to soften it before making boots from it.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "corroyait"
  },
  "coter": {
   "fr": "C'est en 1688 qu'on commence à coter les actions et obligations à la bourse de Londres.",
@@ -1580,6 +1860,13 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 317,
   "token": "courait"
+ },
+ "courroucer": {
+  "fr": "Comme on voit que la mer, quand l'orage s'accroît, vient à se courroucer, le vent souffle et ravage.",
+  "en": "As one sees the sea, when the storm grows, begin to rage, the wind blows and lays waste.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 10764,
+  "token": "courroucer"
  },
  "couvrir": {
   "fr": "comme ces cloches de couvents que couvrent si bien les bruits de la ville pendant le jour qu'on les croirait arrêtées mais qui se remettent à sonner dans le silence du soir.",
@@ -1644,6 +1931,13 @@
   "line": 142,
   "token": "croiser"
  },
+ "crouler": {
+  "fr": "Rongée par les ans, la vieille tour menaçait de crouler au premier orage.",
+  "en": "Worn away by the years, the old tower threatened to collapse at the first storm.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "crouler"
+ },
  "croître": {
   "fr": "Quand elle entra, ça croissait et ça embellissait. Coupeau était fou furieux, un échappé de Charenton!",
   "en": "When she went in, it was getting worse and worse. Coupeau was raving mad, a lunatic escaped from Charenton!",
@@ -1699,6 +1993,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 3562,
   "token": "célébrer"
+ },
+ "daigner": {
+  "fr": "Ce sont propos trop bas pour y daigner descendre.",
+  "en": "These are words too lowly for him to deign to stoop to.",
+  "source": "moliere-oeuvres-t3.txt",
+  "line": 7622,
+  "token": "daigner"
  },
  "danser": {
   "fr": "Il avait la même considération pour des petits bourgeois qui faisaient danser au cinquième étage d'un escalier D, palier à gauche, que pour la princesse de Parme qui donnait les plus belles fêtes de Paris.",
@@ -2029,6 +2330,13 @@
   "line": 1379,
   "token": "déçu"
  },
+ "déchoir": {
+  "fr": "L'âge la fit déchoir: adieu tous les amants.",
+  "en": "Age made her fade: farewell to all her suitors.",
+  "source": "lafontaine-fables.txt",
+  "line": 7072,
+  "token": "déchoir"
+ },
  "décider": {
   "fr": "Puis, lorsqu'il répéta sa question, furieusement, elle se décida.",
   "en": "Then, when he repeated his question furiously, she made up her mind.",
@@ -2057,12 +2365,26 @@
   "line": 1121,
   "token": "décliné"
  },
+ "déclore": {
+  "fr": "Au retour du printemps, le verger déclôt ses premières fleurs blanches.",
+  "en": "With the return of spring, the orchard opens its first white blossoms.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "déclôt"
+ },
  "décorer": {
   "fr": "Il y avait, pour décorer l'appartement, accrochée à un clou, au milieu du mur dont la peinture verte s'écaillait sous le salpêtre, une tête de Minerve au crayon noir, encadrée de dorure.",
   "en": "To decorate the rooms there was, hung on a nail in the middle of a wall whose green paint was flaking away under the damp, a pencil-drawn head of Minerva in a gilded frame.",
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 623,
   "token": "décorer"
+ },
+ "découdre": {
+  "fr": "Le sanglier, rappelant les restes de sa vie, vient à lui, le découd, meurt vengé sur son corps.",
+  "en": "The boar, summoning what remained of his life, comes at him, rips him open, and dies avenged upon his body.",
+  "source": "lafontaine-fables.txt",
+  "line": 9532,
+  "token": "découd"
  },
  "découler": {
   "fr": "Un filet de salive pure découlait de sa lèvre sur la soie du tablier.",
@@ -2120,6 +2442,13 @@
   "line": 117,
   "token": "déduit"
  },
+ "défaillir": {
+  "fr": "Saisie par la chaleur, elle sentit ses forces défaillir et faillit tomber.",
+  "en": "Overcome by the heat, she felt her strength give way and nearly fell.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "défaillir"
+ },
  "défaire": {
   "fr": "Il fallut boucher toutes les issues, fermer les volets, creuser mon propre tombeau, en défaisant mes couvertures, revêtir le suaire de ma chemise de nuit.",
   "en": "I had to stop every crack, close the shutters, dig my own grave — pulling back my bedcovers — and put on the shroud of my nightshirt.",
@@ -2133,6 +2462,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 1003,
   "token": "défendent"
+ },
+ "défier": {
+  "fr": "Et le premier osa l'abîme défier !",
+  "en": "And he was the first who dared to defy the abyss!",
+  "source": "lafontaine-fables.txt",
+  "line": 7508,
+  "token": "défier"
  },
  "défiler": {
   "fr": "La conversation de Charles était plate comme un trottoir de rue, et les idées de tout le monde y défilaient dans leur costume ordinaire, sans exciter d'émotion, de rire ou de rêverie.",
@@ -2162,12 +2498,26 @@
   "line": 4528,
   "token": "dégrade"
  },
+ "déguerpir": {
+  "fr": "Nous fatiguerons tant notre provincial, qu'il faudra, ma foi, qu'il déguerpisse.",
+  "en": "We'll wear our provincial down so much that, by my faith, he'll have to clear out.",
+  "source": "moliere-oeuvres-t4.txt",
+  "line": 15751,
+  "token": "déguerpisse"
+ },
  "déguster": {
   "fr": "L'idée de déguster une pizza dans peu de temps fait gagner deux points à la cote de bonheur de Kim.",
   "en": "The prospect of savouring a pizza in a short while gives Kim's happiness score a two-point boost.",
   "source": "fr-strategie-ia-villani-2018.txt",
   "line": 279,
   "token": "déguster"
+ },
+ "déjeter": {
+  "fr": "Avec l'humidité, la planche mal séchée s'était déjetée et fermait mal la porte.",
+  "en": "With the damp, the poorly dried board had warped and no longer closed the door properly.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "déjetée"
  },
  "délivrer": {
   "fr": "C'est la seule manière de me délivrer d'un soupçon peut-être calomnieux pour elle, destiné en tous cas à la faire souffrir et que rien ne pourrait plus détruire, une fois la lettre partie.",
@@ -2183,12 +2533,40 @@
   "line": 201,
   "token": "délèguent"
  },
+ "démailler": {
+  "fr": "Une seule maille qui file suffit à démailler tout le bas de soie.",
+  "en": "A single running stitch is enough to unravel the whole silk stocking.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "démailler"
+ },
  "démarrer": {
   "fr": "La phase de mise en œuvre a démarré en 2020 et durera six ans.",
   "en": "The implementation phase got under way in 2020 and will last six years.",
   "source": "ch-fed-ofev-environnement-suisse-2022.txt",
   "line": 241,
   "token": "démarré"
+ },
+ "démembrer": {
+  "fr": "On écorche, on taille, on démembre Messire loup.",
+  "en": "They skin, they cut, they dismember Sir Wolf.",
+  "source": "lafontaine-fables.txt",
+  "line": 8121,
+  "token": "démembre"
+ },
+ "démener": {
+  "fr": "Il se démenait comme un beau diable pour sauver son commerce de la ruine.",
+  "en": "He was struggling for all he was worth to save his business from ruin.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "démenait"
+ },
+ "démentir": {
+  "fr": "A quoi bon se montrer, et, comme un étourdi, me venir démentir de tout ce que je di ?",
+  "en": "What good is it to show yourself and, like a scatterbrain, come and contradict me about everything I say?",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 2942,
+  "token": "démentir"
  },
  "démontrer": {
   "fr": "Ce qui nous démontre, en passant, que les prêtres ont toujours croupi dans une ignorance turpide, où ils s'efforcent d'engloutir avec eux les populations.",
@@ -2211,12 +2589,26 @@
   "line": 14326,
   "token": "dénonçait"
  },
+ "départir": {
+  "fr": "Puisque de son dessein je dois me départir, attendez que du moins je la fasse sortir.",
+  "en": "Since I must give up his plan, at least wait until I have her brought out.",
+  "source": "moliere-oeuvres-t2.txt",
+  "line": 2466,
+  "token": "départir"
+ },
  "dépasser": {
   "fr": "Je sentais qu'elle était liée au goût du thé et du gâteau, mais qu'elle le dépassait infiniment, ne devait pas être de même nature.",
   "en": "I felt that it was connected to the taste of the tea and the cake, but that it infinitely exceeded them and could not be of the same nature.",
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 1601,
   "token": "dépassait"
+ },
+ "dépecer": {
+  "fr": "Puis en autant de parts le cerf il dépeça.",
+  "en": "Then he cut up the stag into just as many parts.",
+  "source": "lafontaine-fables.txt",
+  "line": 1202,
+  "token": "dépeça"
  },
  "dépendre": {
   "fr": "Sans doute il ne dépendait pas de sa sœur, qui n'était même pas l'aînée.",
@@ -2295,6 +2687,13 @@
   "line": 65,
   "token": "désactivé"
  },
+ "déserter": {
+  "fr": "Il leur est dur de voir déserter les galans.",
+  "en": "It is hard for them to see the suitors desert them.",
+  "source": "moliere-oeuvres-t3.txt",
+  "line": 17437,
+  "token": "déserter"
+ },
  "désigner": {
   "fr": "Mon grand-père m'appelant et me désignant la haie de Tansonville, me dit : « Toi qui aimes les aubépines, regarde un peu cette épine rose ; est-elle jolie ! »",
   "en": "My grandfather, calling me over and pointing out the hedge at Tansonville, said: 'You who love hawthorn, just look at this pink thorn — isn't it lovely!'",
@@ -2365,6 +2764,13 @@
   "line": 1469,
   "token": "détestez"
  },
+ "détordre": {
+  "fr": "Elle détordit patiemment le fil de fer pour libérer le petit oiseau pris au piège.",
+  "en": "She patiently untwisted the wire to free the little bird caught in the trap.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "détordit"
+ },
  "détourner": {
   "fr": "Les dames, quand elles eurent le nez sur la peinture, poussèrent de petits cris; puis, elles se détournèrent, très-rouges.",
   "en": "The women, when they had their noses right up to the painting, let out little cries; then they turned away, bright red.",
@@ -2414,6 +2820,13 @@
   "line": 472,
   "token": "efforçant"
  },
+ "effrayer": {
+  "fr": "L'âne effraiera les gens, nous servant de trompette.",
+  "en": "The donkey will frighten people, serving us as a trumpet.",
+  "source": "lafontaine-fables.txt",
+  "line": 5696,
+  "token": "effraiera"
+ },
  "embarquer": {
   "fr": "Un notaire d'Ingouville, détenteur de fonds de la veuve Dubuc, s'embarqua, par une belle marée, emportant avec lui tout l'argent de son étude.",
   "en": "A notary from Ingouville, who held the widow Dubuc's funds, set sail on a fair tide, taking with him all the money from his practice.",
@@ -2421,12 +2834,26 @@
   "line": 760,
   "token": "embarqua"
  },
+ "embattre": {
+  "fr": "Le charron embattit la jante de fer brûlant autour de la roue de bois.",
+  "en": "The wheelwright fitted the red-hot iron rim around the wooden wheel.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "embattit"
+ },
  "embrasser": {
   "fr": "Ma seule consolation, quand je montais me coucher, était que maman viendrait m'embrasser quand je serais dans mon lit.",
   "en": "My one consolation when I went upstairs to bed was that Mamma would come and kiss me when I was in bed.",
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 427,
   "token": "embrasser"
+ },
+ "embroncher": {
+  "fr": "Accablé de honte, le coupable embroncha la tête sans oser répondre.",
+  "en": "Overcome with shame, the guilty man bowed his head, not daring to answer.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "embroncha"
  },
  "emmener": {
   "fr": "Madame Boche avait emmené Claude et Étienne; et l'on entendait, à l'autre bout, l'éclat de leurs sanglots mêlé aux heurts sonores des deux battoirs.",
@@ -2441,6 +2868,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 13605,
   "token": "emparée"
+ },
+ "empenner": {
+  "fr": "L'archer empenna soigneusement chacune de ses flèches avant le tournoi.",
+  "en": "The archer carefully fletched each of his arrows before the tournament.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "empenna"
  },
  "employer": {
   "fr": "Quand il parlait de choses sérieuses, quand il employait une expression qui semblait impliquer une opinion sur un sujet important, il avait soin de l'isoler dans une intonation spéciale, machinale et ironique.",
@@ -2491,6 +2925,13 @@
   "line": 1,
   "token": "enchaîner"
  },
+ "encombrer": {
+  "fr": "Mille livres et paperasses encombraient le bureau du vieux notaire.",
+  "en": "A thousand books and papers cluttered the old notary's desk.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "encombraient"
+ },
  "encourager": {
   "fr": "Cependant, Coupeau encourageait la jeune femme.",
   "en": "Meanwhile, Coupeau was encouraging the young woman.",
@@ -2512,6 +2953,13 @@
   "line": 62,
   "token": "endors"
  },
+ "endurer": {
+  "fr": "Il faut de ses amis endurer quelque chose.",
+  "en": "One must put up with something from one's friends.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 3499,
+  "token": "endurer"
+ },
  "enfermer": {
   "fr": "Les façades avaient six étages, quatre façades régulières enfermant le vaste carré de la cour.",
   "en": "The façades rose six storeys high, four regular façades enclosing the vast square of the courtyard.",
@@ -2525,6 +2973,27 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 640,
   "token": "enfonçait"
+ },
+ "enfouir": {
+  "fr": "Celui-ci l'aide. Ils vont enfouir le trésor.",
+  "en": "The latter helps him. They go to bury the treasure.",
+  "source": "lafontaine-fables.txt",
+  "line": 11104,
+  "token": "enfouir"
+ },
+ "enfreindre": {
+  "fr": "Nul ne saurait enfreindre la loi sans s'exposer à de lourdes peines.",
+  "en": "No one may break the law without risking heavy penalties.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "enfreindre"
+ },
+ "enfuir": {
+  "fr": "Entend un léger bruit : ce lui fut un signal pour s'enfuir devers sa tanière.",
+  "en": "He hears a faint noise: it was a signal for him to flee toward his den.",
+  "source": "lafontaine-fables.txt",
+  "line": 2592,
+  "token": "enfuir"
  },
  "engager": {
   "fr": "Cet escalier détesté où je m'engageais toujours si tristement exhalait une odeur de vernis.",
@@ -2546,6 +3015,27 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 1070,
   "token": "enlevait"
+ },
+ "enluminer": {
+  "fr": "Le moine enluminait les majuscules d'or fin et d'azur.",
+  "en": "The monk illuminated the capital letters in fine gold and azure.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "enluminait"
+ },
+ "enquérir": {
+  "fr": "Dès son arrivée, elle s'enquit de la santé de son vieil ami.",
+  "en": "As soon as she arrived, she inquired after her old friend's health.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "enquit"
+ },
+ "enrager": {
+  "fr": "Et c'est ce qui me fait enrager ; je croyois refaire mon ventre d'une bonne carrelure.",
+  "en": "And that's what drives me mad; I was counting on filling my belly with a good meal.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 786,
+  "token": "enrager"
  },
  "enregistrer": {
   "fr": "Il ressort de l'analyse empirique que la pauvreté monétaire a enregistré une tendance à la baisse entre 2008 et 2010, et ce quel que soit le concept de pauvreté retenu.",
@@ -2631,6 +3121,13 @@
   "line": 3608,
   "token": "envahir"
  },
+ "envelopper": {
+  "fr": "De là naîtront engins à vous envelopper, et lacets pour vous attraper.",
+  "en": "From it will spring devices to ensnare you, and snares to catch you.",
+  "source": "lafontaine-fables.txt",
+  "line": 1288,
+  "token": "envelopper"
+ },
  "envisager": {
   "fr": "Swann trouvait en lui, dans le souvenir de la phrase qu'il avait entendue, comme la possibilité inespérée de commencer sur le tard une vie toute différente.",
   "en": "Swann found within himself, in the memory of the phrase he had heard, what seemed like the unhoped-for possibility of beginning, late in life, an entirely different existence.",
@@ -2645,6 +3142,20 @@
   "line": 124,
   "token": "envoyait"
  },
+ "errer": {
+  "fr": "En lui payant de tribut un mouton par chaque mois, j'erre dans la campagne comme il me plaît.",
+  "en": "By paying him one sheep a month as tribute, I roam the countryside as I please.",
+  "source": "lafontaine-fables.txt",
+  "line": 5871,
+  "token": "erre"
+ },
+ "escrimer": {
+  "fr": "Il s'escrimait depuis une heure à déchiffrer cette vieille écriture effacée.",
+  "en": "He had been struggling away for an hour to decipher that faded old handwriting.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "escrimait"
+ },
  "espérer": {
   "fr": "Y eût-il songé, qu'il aurait sans doute attribué son zèle à la gravité du cas, ou peut-être au profit qu'il en espérait.",
   "en": "Had he stopped to think about it, he would no doubt have attributed his diligence to the seriousness of the case, or perhaps to the fee he hoped to earn.",
@@ -2652,12 +3163,26 @@
   "line": 679,
   "token": "espérait"
  },
+ "esquiver": {
+  "fr": "Le fanfaron aussitôt d'esquiver : O Jupiter, montre-moi quelque asile.",
+  "en": "The braggart at once slips away: O Jupiter, show me some refuge.",
+  "source": "lafontaine-fables.txt",
+  "line": 5875,
+  "token": "esquiver"
+ },
  "essayer": {
   "fr": "Ce supplice que lui infligeait ma grand'tante, le spectacle des vaines prières de ma grand'mère et de sa faiblesse, vaincue d'avance, essayant inutilement d'ôter à mon grand-père le verre à liqueur, c'était de ces choses à la vue desquelles on s'habitue plus tard jusqu'à les considérer en riant.",
   "en": "This torment inflicted on her by my great-aunt, the sight of my grandmother's futile pleas and her helplessness, defeated before she began, vainly trying to take the liqueur glass from my grandfather — these were the kinds of things one eventually grows used to, to the point of laughing at them.",
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 394,
   "token": "essayant"
+ },
+ "ester": {
+  "fr": "La commune a le droit d'ester en justice pour défendre ses biens.",
+  "en": "The municipality has the right to go to court to defend its property.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "ester"
  },
  "estimer": {
   "fr": "À la première minute de son réveil, il ne saura plus l'heure, il estimera qu'il vient à peine de se coucher.",
@@ -2834,12 +3359,40 @@
   "line": 7554,
   "token": "favoriser"
  },
+ "feindre": {
+  "fr": "Et votre âme, feignant une innocence entière, ne s'offre à m'en donner une pleine lumière.",
+  "en": "And your soul, feigning complete innocence, does not offer to give me full light on the matter.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 18513,
+  "token": "feignant"
+ },
+ "fendre": {
+  "fr": "Vive la gent qui fend les airs !",
+  "en": "Long live the kind that cleaves the air!",
+  "source": "lafontaine-fables.txt",
+  "line": 2180,
+  "token": "fend"
+ },
  "fermer": {
   "fr": "mes yeux se fermaient si vite que je n'avais pas le temps de me dire: «Je m'endors.»",
   "en": "My eyes would close so quickly that I did not even have time to tell myself: 'I am falling asleep.'",
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 61,
   "token": "fermaient"
+ },
+ "fiancer": {
+  "fr": "Ses parents l'avaient fiancée fort jeune à un marchand de la ville voisine.",
+  "en": "Her parents had betrothed her very young to a merchant from the neighboring town.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "fiancée"
+ },
+ "fier": {
+  "fr": "Crois-tu qu'après un tel outrage je me doive fier à toi ?",
+  "en": "Do you think that after such an outrage I should trust you?",
+  "source": "lafontaine-fables.txt",
+  "line": 11489,
+  "token": "fier"
  },
  "figurer": {
   "fr": "en des jours lointains qu'en ce moment je me figurais actuels sans me les représenter exactement et que je reverrais mieux tout à l'heure quand je serais tout à fait éveillé.",
@@ -2883,6 +3436,13 @@
   "line": 1433,
   "token": "fixait"
  },
+ "flamber": {
+  "fr": "Les bûches sèches flambaient gaiement dans l'âtre de la grande salle.",
+  "en": "The dry logs blazed merrily in the hearth of the great hall.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "flambaient"
+ },
  "fleurir": {
   "fr": "Elle eut des étouffements aux premières chaleurs, quand les poiriers fleurirent.",
   "en": "She felt suffocated by the first warmth of the season, when the pear trees came into bloom.",
@@ -2924,6 +3484,13 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 245,
   "token": "forcé"
+ },
+ "forfaire": {
+  "fr": "Jamais ce loyal serviteur n'eût voulu forfaire à l'honneur de sa maison.",
+  "en": "Never would this loyal servant have wished to betray the honor of his house.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "forfaire"
  },
  "forger": {
   "fr": "Pourquoi croire qu'elle goûterait là-bas des plaisirs enivrants qu'elle n'avait pas connus auprès de lui et que seule sa jalousie forgeait de toutes pièces?",
@@ -2974,6 +3541,13 @@
   "line": 1966,
   "token": "frapper"
  },
+ "froisser": {
+  "fr": "Il froissa la lettre avec colère et la jeta au feu sans l'achever.",
+  "en": "He angrily crumpled the letter and threw it into the fire without finishing it.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "froissa"
+ },
  "fréquenter": {
   "fr": "Et ce fut alors que Gervaise s'imagina de fréquenter les bastringues du quartier.",
   "en": "And it was then that Gervaise took it into her head to frequent the dance halls of the neighbourhood.",
@@ -3009,12 +3583,26 @@
   "line": 504,
   "token": "félicité"
  },
+ "férir": {
+  "fr": "Peut-être en avez-vous déjà féru quelqu'une.",
+  "en": "Perhaps you have already smitten one of them.",
+  "source": "moliere-oeuvres-t2.txt",
+  "line": 6544,
+  "token": "féru"
+ },
  "fêter": {
   "fr": "Ce n'est pas par hasard que Genève accueille à un rythme annuel le grand salon international de l'automobile, qui a fêté son centenaire en 2005.",
   "en": "It is no coincidence that Geneva hosts the prestigious international motor show every year — a show that celebrated its centenary in 2005.",
   "source": "fr-cerema-mobilites-decarbonees-2022.txt",
   "line": 429,
   "token": "fêté"
+ },
+ "gager": {
+  "fr": "Je m'en vais gager qu'ils n'ont jamais vu la carte de Tendre.",
+  "en": "I'll wager they have never seen the Map of Tendre.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 12701,
+  "token": "gager"
  },
  "gagner": {
   "fr": "Non, sans doute, je n'ai pas d'argent. J'ai quatre sous pour le lavoir... Je n'en gagne pas comme certaines femmes.",
@@ -3037,6 +3625,13 @@
   "line": 483,
   "token": "gardions"
  },
+ "gemmer": {
+  "fr": "Au printemps, les résiniers gemmaient les pins pour en recueillir la sève.",
+  "en": "In spring, the resin-tappers tapped the pines to collect their sap.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "gemmaient"
+ },
  "glisser": {
   "fr": "Il se décida à la glisser dans la poche de son gilet, quand il vit, sur la commode, un reste de jambon dans un papier, avec un bout de pain.",
   "en": "He made up his mind to slip it into his waistcoat pocket, when he noticed on the dresser a leftover piece of ham in a paper wrapper, along with a heel of bread.",
@@ -3057,6 +3652,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 106,
   "token": "goûter"
+ },
+ "gracier": {
+  "fr": "Le roi gracia le condamné à la veille même de son supplice.",
+  "en": "The king pardoned the condemned man on the very eve of his execution.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "gracia"
  },
  "grandir": {
   "fr": "Le lever de soleil qui grandissait au-dessus du réveil énorme de Paris l'éblouissait.",
@@ -3086,6 +3688,13 @@
   "line": 325,
   "token": "grouper"
  },
+ "guerroyer": {
+  "fr": "Les barons guerroyaient sans cesse contre leurs voisins pour un arpent de terre.",
+  "en": "The barons waged war endlessly against their neighbors over an acre of land.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "guerroyaient"
+ },
  "guider": {
   "fr": "Nous guidant à tâtons sous la voûte obscure et puissamment nervurée comme la membrane d'une immense chauve-souris de pierre, Théodore et sa sœur nous éclairaient d'une bougie le tombeau de la petite fille de Sigebert.",
   "en": "Leading us by touch under the dark vault, powerfully ribbed like the membrane of an immense stone bat, Théodore and his sister lit with a candle the tomb of Sigebert's little daughter.",
@@ -3099,6 +3708,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 4137,
   "token": "guérir"
+ },
+ "gâter": {
+  "fr": "Le privilége qu'ont les pédants de gâter la raison.",
+  "en": "The privilege that pedants have of spoiling reason.",
+  "source": "lafontaine-fables.txt",
+  "line": 9875,
+  "token": "gâter"
  },
  "généraliser": {
   "fr": "En septembre 2025, la Police cantonale a généralisé l'usage du dispositif incapacitant à impulsion électrique (DI) – communément appelé « Taser » – au sein de la Police mobile.",
@@ -3120,6 +3736,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 4013,
   "token": "géré"
+ },
+ "gésir": {
+  "fr": "Il voit ce corps gisant, le croit privé de vie.",
+  "en": "He sees this body lying there, believes it bereft of life.",
+  "source": "lafontaine-fables.txt",
+  "line": 5739,
+  "token": "gisant"
  },
  "gêner": {
   "fr": "Gervaise, que la lanterne gênait, se haussait, son mouchoir sur les lèvres.",
@@ -3156,6 +3779,13 @@
   "line": null,
   "token": "handicapé"
  },
+ "haïr": {
+  "fr": "Qui ne sauroit haïr ne peut vouloir qu'on meure.",
+  "en": "One who cannot hate cannot wish for anyone's death.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 17400,
+  "token": "haïr"
+ },
  "heurter": {
   "fr": "Ce visage où ne se lit aucune commisération, aucun attendrissement devant la souffrance humaine, aucune crainte de la heurter, et qui est le visage sans douceur, le visage antipathique et sublime de la vraie bonté.",
   "en": "That face in which one reads no commiseration, no tenderness before human suffering, no fear of wounding it — the harsh, antipathetic, and sublime face of true goodness.",
@@ -3163,12 +3793,26 @@
   "line": 3038,
   "token": "heurter"
  },
+ "honnir": {
+  "fr": "La foule honnissait le traître qu'on menait au gibet.",
+  "en": "The crowd reviled the traitor being led to the gallows.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "honnissait"
+ },
  "honorer": {
   "fr": "On pince une dame, n'est-ce pas? mais on ne va pas plus loin; on honore simplement le sexe.",
   "en": "One pinches a lady, doesn't one? but one goes no further; one is simply paying respect to the sex.",
   "source": "zola-lassommoir-1877.txt",
   "line": 5803,
   "token": "honore"
+ },
+ "hâter": {
+  "fr": "Un sergent de bataille allant en chaque endroit faire avancer ses gens et hâter la victoire.",
+  "en": "A battle sergeant going everywhere to push his men forward and hasten the victory.",
+  "source": "lafontaine-fables.txt",
+  "line": 7305,
+  "token": "hâter"
  },
  "héberger": {
   "fr": "Ils hébergeaient,--avec la parfaite innocence d'honnêtes hôteliers qui ont chez eux, sans le savoir, un célèbre brigand,--un des membres les plus élégants du Jockey-Club.",
@@ -3562,6 +4206,13 @@
   "line": 3069,
   "token": "jouir"
  },
+ "jouter": {
+  "fr": "Les chevaliers joutaient en lice devant la cour émerveillée.",
+  "en": "The knights jousted in the lists before the marveling court.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "joutaient"
+ },
  "juger": {
   "fr": "Bientôt, d'ailleurs, il ne fut plus possible de juger les coups.",
   "en": "Before long, it was no longer possible to follow the blows.",
@@ -3582,6 +4233,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 8938,
   "token": "justifiaient"
+ },
+ "lacer": {
+  "fr": "La servante laça le corset de sa maîtresse avant le bal.",
+  "en": "The maid laced up her mistress's corset before the ball.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "laça"
  },
  "laisser": {
   "fr": "L'unique ambition est de laisser une œuvre aussi large et aussi vivante qu'il pourra.",
@@ -3681,6 +4339,13 @@
   "line": null,
   "token": "lova"
  },
+ "luire": {
+  "fr": "Au loin, une faible lumière luisait à la fenêtre de la chaumière.",
+  "en": "In the distance, a faint light gleamed at the window of the cottage.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "luisait"
+ },
  "lutter": {
   "fr": "Après une heure de pluie et de vent contre lesquels j'avais lutté avec allégresse, comme j'arrivais au bord de la mare de Montjouvain, le soleil venait de reparaître.",
   "en": "After an hour of rain and wind against which I had struggled with delight, as I arrived at the edge of the pond at Montjouvain, the sun had just come out again.",
@@ -3701,6 +4366,13 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 366,
   "token": "maintint"
+ },
+ "mander": {
+  "fr": "Le vieux don Louis vient de lui mander que Léon, dans ce jour, de don Alphonse et d'elle attend l'heureux retour.",
+  "en": "Old Don Louis has just sent her word that Leon, this very day, awaits the happy return of Don Alphonse and herself.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 18758,
+  "token": "mander"
  },
  "manger": {
   "fr": "Depuis huit jours, au sortir du Veau à deux têtes, où ils mangeaient, il l'envoyait se coucher avec les enfants et ne reparaissait que tard dans la nuit.",
@@ -3758,6 +4430,20 @@
   "line": 8139,
   "token": "masquer"
  },
+ "mater": {
+  "fr": "Le capitaine mata la révolte des matelots d'une main de fer.",
+  "en": "The captain crushed the sailors' mutiny with an iron hand.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "mata"
+ },
+ "maudire": {
+  "fr": "Le maudissant de très-bon cœur.",
+  "en": "Cursing him with all my heart.",
+  "source": "lafontaine-fables.txt",
+  "line": 6023,
+  "token": "maudissant"
+ },
  "maîtriser": {
   "fr": "Mais, soudain, se maîtrisant: «J'ai voulu, docteur, tenter une analyse, et primo, j'ai délicatement introduit dans un tube...»",
   "en": "But, suddenly pulling himself together: 'I wished, doctor, to attempt an analysis, and first I delicately introduced into a tube...'",
@@ -3771,6 +4457,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 1209,
   "token": "menacer"
+ },
+ "mendier": {
+  "fr": "d'avoir mendié les louanges qu'on m'y donnoit.",
+  "en": "of having begged for the praises that were given to me there.",
+  "source": "moliere-oeuvres-t2.txt",
+  "line": 5750,
+  "token": "mendié"
  },
  "mener": {
   "fr": "M. Madinier ne parlait plus, menait lentement le cortège, qui le suivait en ordre, tous les cous tordus et les yeux en l'air.",
@@ -3849,6 +4542,13 @@
   "line": 502,
   "token": "montrait"
  },
+ "mordre": {
+  "fr": "Quelque chien enragé l'a mordu, je m'assure.",
+  "en": "Some mad dog has bitten him, I'm sure.",
+  "source": "moliere-oeuvres-t2.txt",
+  "line": 6764,
+  "token": "mordu"
+ },
  "motiver": {
   "fr": "Il avait des souvenirs communs qui avaient motivé chez lui le mouvement de s'approcher d'elle, le geste de la saluer.",
   "en": "He had shared memories that had prompted in him the impulse to approach her, the gesture of greeting her.",
@@ -3862,6 +4562,20 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 255,
   "token": "mourut"
+ },
+ "mouvoir": {
+  "fr": "Le firmament se meut, les astres font leur cours.",
+  "en": "The firmament moves, the stars run their course.",
+  "source": "lafontaine-fables.txt",
+  "line": 2535,
+  "token": "meut"
+ },
+ "muer": {
+  "fr": "Chaque année, le serpent mue et abandonne sa vieille peau.",
+  "en": "Each year the snake molts and sheds its old skin.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "mue"
  },
  "multiplier": {
   "fr": "«Mais vous êtes fou! ah! vous êtes fou!» disait-elle avec de petits rires sonores, tandis que les baisers se multipliaient.",
@@ -3912,6 +4626,13 @@
   "line": 401,
   "token": "naviguer"
  },
+ "navrer": {
+  "fr": "Cela me navre de le voir gâcher ainsi un si beau talent.",
+  "en": "It grieves me to see him squander such a fine talent like this.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "navre"
+ },
  "naître": {
   "fr": "Quelquefois, comme Ève naquit d'une côte d'Adam, une femme naissait pendant mon sommeil d'une fausse position de ma cuisse.",
   "en": "Sometimes, just as Eve was born from one of Adam's ribs, a woman would be born during my sleep from an awkward position of my thigh.",
@@ -3933,6 +4654,13 @@
   "line": 11437,
   "token": "nierez"
  },
+ "nombrer": {
+  "fr": "Plus de maux qu'on n'en peut nombrer dans tout un an.",
+  "en": "More woes than one could count in a whole year.",
+  "source": "moliere-oeuvres-t3.txt",
+  "line": 5271,
+  "token": "nombrer"
+ },
  "nommer": {
   "fr": "Mon corps, trop engourdi pour remuer, cherchait à repérer la position de ses membres pour en induire la direction du mur, la place des meubles, pour reconstruire et pour nommer la demeure où il se trouvait.",
   "en": "My body, too numb to move, sought to locate the position of its limbs in order to deduce the direction of the wall and the arrangement of the furniture, to reconstruct and name the dwelling in which it found itself.",
@@ -3953,6 +4681,13 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 291,
   "token": "nourrissait"
+ },
+ "noyer": {
+  "fr": "C'est une femme qui se noie.",
+  "en": "It is a woman who is drowning.",
+  "source": "lafontaine-fables.txt",
+  "line": 3637,
+  "token": "noie"
  },
  "nuire": {
   "fr": "Le grand nombre de chantiers, la vulnérabilité aux perturbations d'une infrastructure en partie obsolète et des problèmes opérationnels supplémentaires nuisent à la performance du fret ferroviaire international.",
@@ -4010,12 +4745,26 @@
   "line": 546,
   "token": "obéis"
  },
+ "occire": {
+  "fr": "Le héros jura d'occire le dragon qui désolait la contrée.",
+  "en": "The hero swore to slay the dragon that was ravaging the land.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "occire"
+ },
  "occuper": {
   "fr": "Mademoiselle Rouault s'occupa de son trousseau.",
   "en": "Mademoiselle Rouault busied herself with her trousseau.",
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 989,
   "token": "occupa"
+ },
+ "octroyer": {
+  "fr": "C'est une liberté qu'il faut qu'elle m'octroie.",
+  "en": "It is a freedom that she must grant me.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 18200,
+  "token": "octroie"
  },
  "offrir": {
   "fr": "Formée du plaisir que j'étais sur le point de goûter, je m'imaginais que c'était elle qui me l'offrait.",
@@ -4108,6 +4857,13 @@
   "line": 105,
   "token": "ouvrir"
  },
+ "ouïr": {
+  "fr": "Merveille de l'ouïr; il faisoit des passages.",
+  "en": "A marvel to hear him; he performed runs and flourishes.",
+  "source": "lafontaine-fables.txt",
+  "line": 8030,
+  "token": "ouïr"
+ },
  "paraître": {
   "fr": "Lorsque l'_Assommoir_ a paru dans un journal, il a été attaqué avec une brutalité sans exemple, dénoncé, chargé de tous les crimes.",
   "en": "When L'Assommoir appeared in a newspaper, it was attacked with unexampled brutality, denounced, and charged with every crime.",
@@ -4198,6 +4954,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 3088,
   "token": "peignant"
+ },
+ "peler": {
+  "fr": "Chemin faisant, il vit le cou du chien pelé.",
+  "en": "Along the way, he saw the dog's neck worn bare of hair.",
+  "source": "lafontaine-fables.txt",
+  "line": 1166,
+  "token": "pelé"
  },
  "pencher": {
   "fr": "Mademoiselle Emma l'aperçut; elle se pencha sur les sacs de blé.",
@@ -4339,6 +5102,13 @@
   "line": 657,
   "token": "plongea"
  },
+ "poindre": {
+  "fr": "Le jour commençait à poindre quand les voyageurs se remirent en route.",
+  "en": "Day was beginning to break when the travelers set off again.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "poindre"
+ },
  "pointer": {
   "fr": "En 2019, un rapport sénatorial alertait pourtant sur « l'urgence déclarée » en pointant le choc climatique inévitable, les risques naturels aggravés et les surmortalités significatives lors des vagues de chaleur.",
   "en": "In 2019, a Senate report nonetheless sounded the alarm about the 'declared emergency', pointing to the inevitable climate shock, heightened natural hazards, and significant excess mortality during heatwaves.",
@@ -4450,6 +5220,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 9896,
   "token": "primer"
+ },
+ "priser": {
+  "fr": "Le travail plus que l'or s'en doit encor priser.",
+  "en": "The workmanship is to be prized even more than the gold.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 14643,
+  "token": "priser"
  },
  "priver": {
   "fr": "Pour une raison toute contingente, ou même sans raison, il me supprimait au dernier moment telle promenade si habituelle, si consacrée, qu'on ne pouvait m'en priver sans parjure.",
@@ -4717,6 +5494,13 @@
   "line": 1178,
   "token": "puni"
  },
+ "pâmer": {
+  "fr": "D'où vous pourroit venir... Ah! bons dieux! elle pâme!",
+  "en": "Where could this come from for you... Ah! good gods! she is fainting!",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 14541,
+  "token": "pâme"
+ },
  "pénétrer": {
   "fr": "Quand elle pénétra la première fois chez eux, elle resta émerveillée de la propreté du logis.",
   "en": "When she entered their home for the first time, she stood amazed at the cleanliness of the place.",
@@ -4737,6 +5521,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 343,
   "token": "quitter"
+ },
+ "quérir": {
+  "fr": "On dépêcha un valet quérir le médecin au village voisin.",
+  "en": "A servant was sent to fetch the doctor from the neighboring village.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "quérir"
  },
  "racheter": {
   "fr": "Elle se le paya, puis racheta pour dix francs au mari d'une blanchisseuse, morte dans la maison de madame Fauconnier, une robe de laine gros bleu, qu'elle refit complètement à sa taille.",
@@ -4765,6 +5556,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 245,
   "token": "ralentissaient"
+ },
+ "rallier": {
+  "fr": "Le capitaine rallia ses hommes dispersés et reforma les rangs.",
+  "en": "The captain rallied his scattered men and re-formed the ranks.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "rallia"
  },
  "ramener": {
   "fr": "Un quincaillier en gros le faisait sortir une fois par mois, le dimanche, après que sa boutique était fermée, l'envoyait se promener sur le port à regarder les bateaux, puis le ramenait au collège dès sept heures, avant le souper.",
@@ -4842,6 +5640,13 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 3094,
   "token": "ravir"
+ },
+ "rayer": {
+  "fr": "D'un trait de plume, il raya son nom de la liste des invités.",
+  "en": "With a stroke of the pen, he crossed his name off the guest list.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "raya"
  },
  "recenser": {
   "fr": "Il avait commencé d'attacher un prix inestimable à ces moments passés chez elle le soir, où il l'asseyait sur ses genoux, lui faisait dire ce qu'elle pensait d'une chose, d'une autre, où il recensait les seuls biens à la possession desquels il tînt maintenant sur terre.",
@@ -4955,6 +5760,13 @@
   "line": 9668,
   "token": "redonnez"
  },
+ "redresser": {
+  "fr": "Pour redresser à tous votre esprit fourvoyé.",
+  "en": "To set straight, in everyone's eyes, your misguided mind.",
+  "source": "moliere-oeuvres-t3.txt",
+  "line": 17456,
+  "token": "redresser"
+ },
  "refaire": {
   "fr": "Il n'abordait une rive que pour retourner à celle d'où il était venu, refaisant éternellement la double traversée.",
   "en": "It would reach one bank only to turn back toward the one it had come from, endlessly repeating the crossing in both directions.",
@@ -5053,6 +5865,13 @@
   "line": 8206,
   "token": "relut"
  },
+ "reluire": {
+  "fr": "Elle astiqua l'argenterie jusqu'à la faire reluire comme un miroir.",
+  "en": "She polished the silverware until she made it gleam like a mirror.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "reluire"
+ },
  "remarquer": {
   "fr": "Elle remarquait parfaitement que le zingueur avait une peur sourde du ménage.",
   "en": "She noticed perfectly well that the zinc-worker had a vague, nagging fear of the household.",
@@ -5066,6 +5885,13 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 8553,
   "token": "rembourser"
+ },
+ "remembrer": {
+  "fr": "La commune a fait remembrer les parcelles morcelées pour faciliter les labours.",
+  "en": "The municipality had the fragmented plots consolidated to make plowing easier.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "remembrer"
  },
  "remercier": {
   "fr": "«Pensez à le remercier intelligiblement de son vin, vous savez qu'il est délicieux et la caisse est énorme», recommanda mon grand-père à ses deux belles-sœurs.",
@@ -5108,6 +5934,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 1353,
   "token": "remporter"
+ },
+ "remuer": {
+  "fr": "Remuer terre et ciel, m'y prendre de tous sens.",
+  "en": "To move heaven and earth, to go about it every which way.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 7178,
+  "token": "remuer"
  },
  "renaître": {
   "fr": "Puis renaissait le souvenir d'une nouvelle attitude; le mur filait dans une autre direction: j'étais dans ma chambre chez Mme de Saint-Loup, à la campagne.",
@@ -5185,6 +6018,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 3172,
   "token": "renvoyait"
+ },
+ "repairer": {
+  "fr": "Le renard repairait au plus profond du bois dès que pointait l'aube.",
+  "en": "The fox would return to its lair deep in the woods as soon as dawn broke.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "repairait"
  },
  "repartir": {
   "fr": "une torpeur la prenait, elle s'arrêta. Ils repartirent; et, d'un mouvement plus rapide, le vicomte, l'entraînant, disparut avec elle jusqu'au bout de la galerie.",
@@ -5325,6 +6165,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 2445,
   "token": "retenu"
+ },
+ "retentir": {
+  "fr": "Le ton dont il parla fit retentir les bois.",
+  "en": "The tone in which he spoke made the woods resound.",
+  "source": "lafontaine-fables.txt",
+  "line": 3142,
+  "token": "retentir"
  },
  "retirer": {
   "fr": "Le père, sans même retirer ses bottes, s'était jeté sur le lit, l'air éreinté, la face marbrée par une nuit blanche.",
@@ -5697,6 +6544,20 @@
   "line": 5661,
   "token": "sacrifier"
  },
+ "saigner": {
+  "fr": "et il n'auroit pas manqué de le purger et de le saigner.",
+  "en": "and he would not have failed to purge him and to bleed him.",
+  "source": "moliere-oeuvres-t3.txt",
+  "line": 4819,
+  "token": "saigner"
+ },
+ "saillir": {
+  "fr": "Un balcon de pierre saillait au-dessus du portail de la vieille demeure.",
+  "en": "A stone balcony jutted out above the gateway of the old dwelling.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "saillait"
+ },
  "saisir": {
   "fr": "Cherchant à approfondir successivement le titre de l'une et le titre de l'autre, puisque c'était tout ce que je connaissais d'elles, pour tâcher de saisir en chacun le plaisir qu'il me promettait et de le comparer à celui que recélait l'autre.",
   "en": "Trying to penetrate the title of each play in turn, since that was all I knew of them, in an attempt to grasp the pleasure each one promised and to compare it with what the other held in store.",
@@ -5767,6 +6628,13 @@
   "line": 142,
   "token": "saura"
  },
+ "secourir": {
+  "fr": "Les passants se précipitèrent pour secourir le vieillard tombé sur le verglas.",
+  "en": "The passers-by rushed to help the old man who had fallen on the ice.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "secourir"
+ },
  "sembler": {
   "fr": "Tout en bavardant, elle dévisageait la jeune femme, d'un air de curiosité aiguë; et elle semblait n'être venue là, se poser sous la fenêtre, que pour savoir.",
   "en": "All the while she chattered, she scrutinized the young woman with sharp curiosity; she seemed to have come there and stationed herself below the window for no other reason than to find out.",
@@ -5795,6 +6663,13 @@
   "line": 318,
   "token": "sentit"
  },
+ "seoir": {
+  "fr": "Cette robe de velours lui seyait à merveille.",
+  "en": "That velvet gown suited her wonderfully.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "seyait"
+ },
  "serrer": {
   "fr": "C'était, derrière la balustrade d'un balcon, un jeune homme en court manteau qui serrait dans ses bras une jeune fille en robe blanche, portant une aumônière à sa ceinture.",
   "en": "There, behind the railing of a balcony, was a young man in a short cloak holding in his arms a young girl in a white dress, a purse hanging at her waist.",
@@ -5808,6 +6683,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 333,
   "token": "servait"
+ },
+ "sevrer": {
+  "fr": "Dont le penchant de l'âge a sevré leurs désirs.",
+  "en": "From which the decline of age has weaned their desires.",
+  "source": "moliere-oeuvres-t3.txt",
+  "line": 17445,
+  "token": "sevré"
  },
  "signaler": {
   "fr": "Lorsque Léonie, d'un bruit des lèvres, du prrrout! dont les ouvriers peintres s'appellent, signala l'approche de la patronne, aussitôt toutes furent sur leurs chaises, le nez dans l'ouvrage.",
@@ -5955,6 +6837,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 526,
   "token": "soupçonnèrent"
+ },
+ "sourdre": {
+  "fr": "Une source claire sourdait entre les rochers au pied de la colline.",
+  "en": "A clear spring welled up among the rocks at the foot of the hill.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "sourdait"
  },
  "sourire": {
   "fr": "Étienne, âgé de quatre ans seulement, souriait, un bras passé au cou de son frère.",
@@ -6229,6 +7118,13 @@
   "line": 2044,
   "token": "tarder"
  },
+ "teindre": {
+  "fr": "Où du sang des dieux même on vit le Xanthe teint!",
+  "en": "Where the Xanthus was seen stained even with the blood of the gods!",
+  "source": "lafontaine-fables.txt",
+  "line": 7558,
+  "token": "teint"
+ },
  "tendre": {
   "fr": "Elle se redressa toute rouge et le regarda par-dessus l'épaule, en lui tendant son nerf de bœuf.",
   "en": "She straightened up, flushed, and looked back at him over her shoulder, handing him his riding whip.",
@@ -6306,6 +7202,20 @@
   "line": 2976,
   "token": "traduisît"
  },
+ "trahir": {
+  "fr": "Ah! crocodile! ah! serpent dangereux! tu me caresses pour me trahir.",
+  "en": "Ah, crocodile! Ah, dangerous serpent! You caress me only to betray me.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 2144,
+  "token": "trahir"
+ },
+ "traire": {
+  "fr": "Chaque matin, la fermière trayait ses vaches avant le lever du soleil.",
+  "en": "Every morning the farmer's wife milked her cows before sunrise.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "trayait"
+ },
  "traiter": {
   "fr": "Elle s'éloignait en traitant les hommes de sacrés fainéants, lorsqu'elle revint, pour crier.",
   "en": "She was walking away, calling men wretched idlers, when she came back to shout.",
@@ -6368,6 +7278,20 @@
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 1640,
   "token": "trompait"
+ },
+ "troubler": {
+  "fr": "Qui te rend si hardi de troubler mon breuvage?",
+  "en": "What makes you so bold as to muddy my drink?",
+  "source": "lafontaine-fables.txt",
+  "line": 1404,
+  "token": "troubler"
+ },
+ "trousser": {
+  "fr": "Le docteur, troussant sa robe derrière son cul.",
+  "en": "The doctor, hiking up his gown behind his backside.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 1702,
+  "token": "troussant"
  },
  "trouver": {
   "fr": "j'étais bien étonné de trouver autour de moi une obscurité, douce et reposante pour mes yeux, mais peut-être plus encore pour mon esprit, à qui elle apparaissait comme une chose sans cause, incompréhensible, comme une chose vraiment obscure.",
@@ -6460,6 +7384,13 @@
   "line": 53,
   "token": "valoriser"
  },
+ "vanter": {
+  "fr": "à se vanter qu'il boiroit la mer.",
+  "en": "to boast that he would drink up the sea.",
+  "source": "lafontaine-fables.txt",
+  "line": 654,
+  "token": "vanter"
+ },
  "varier": {
   "fr": "la lumière, blanchâtre à travers eux, comme par des verres dépolis, quelquefois ne variait pas de la journée.",
   "en": "The light, whitish through the panes as through frosted glass, sometimes did not change throughout the entire day.",
@@ -6480,6 +7411,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 2003,
   "token": "vendu"
+ },
+ "venger": {
+  "fr": "se venger de lui, alla dire au maître qu'il étoit arrivé un prodige.",
+  "en": "to take revenge on him, went and told the master that a prodigy had occurred.",
+  "source": "lafontaine-fables.txt",
+  "line": 458,
+  "token": "venger"
  },
  "venir": {
   "fr": "L'_Assommoir_ est venu à son heure, je l'ai écrit, comme j'écrirai les autres, sans me déranger une seconde de ma ligne droite.",
@@ -6586,6 +7524,20 @@
   "line": 10361,
   "token": "vérifier"
  },
+ "vêtir": {
+  "fr": "Et ce n'est pas pour moi que je me dois vêtir.",
+  "en": "And it is not for myself that I must dress.",
+  "source": "moliere-oeuvres-t2.txt",
+  "line": 341,
+  "token": "vêtir"
+ },
+ "ébaudir": {
+  "fr": "Rendit les gens ébaudis par ses appas et sa prestance.",
+  "en": "She delighted the people with her charms and her bearing.",
+  "source": "moliere-oeuvres-t2.txt",
+  "line": 13952,
+  "token": "ébaudis"
+ },
  "écarter": {
   "fr": "Elle accusait aussi la jeune femme de la bousculer, de l'écarter du lit de son frère.",
   "en": "She also accused the young woman of jostling her and pushing her away from her brother's bedside.",
@@ -6614,6 +7566,13 @@
   "line": 434,
   "token": "échoua"
  },
+ "éclaircir": {
+  "fr": "Sa femme ne comprenoit rien à ce langage: on fit venir Ésope pour l'éclaircir.",
+  "en": "His wife understood nothing of this talk, so Aesop was sent for to enlighten her.",
+  "source": "lafontaine-fables.txt",
+  "line": 566,
+  "token": "éclaircir"
+ },
  "éclairer": {
   "fr": "L'ombrelle, de soie gorge de pigeon, que traversait le soleil, éclairait de reflets mobiles la peau blanche de sa figure.",
   "en": "Her parasol, made of dove-grey silk through which the sun shone, cast shifting reflections of light on the white skin of her face.",
@@ -6627,6 +7586,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 1304,
   "token": "éclatèrent"
+ },
+ "éclisser": {
+  "fr": "Le rebouteux éclissa la jambe brisée du blessé avec deux planchettes.",
+  "en": "The bonesetter splinted the injured man's broken leg with two small boards.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "éclissa"
  },
  "économiser": {
   "fr": "Depuis six semaines qu'elle travaillait, elle avait économisé les sept francs du châle et les deux francs cinquante du bonnet.",
@@ -6656,6 +7622,13 @@
   "line": 3313,
   "token": "écrasé"
  },
+ "écrier": {
+  "fr": "Nous ferons notre devoir de nous écrier comme il faut sur tout ce qu'on dira.",
+  "en": "We shall do our duty of exclaiming properly at everything that is said.",
+  "source": "moliere-oeuvres-t1.txt",
+  "line": 13377,
+  "token": "écrier"
+ },
  "écrire": {
   "fr": "Le soir de chaque jeudi, il écrivait une longue lettre à sa mère, avec de l'encre rouge et trois pains à cacheter.",
   "en": "Every Thursday evening he wrote a long letter to his mother, using red ink and three sealing wafers.",
@@ -6669,6 +7642,13 @@
   "source": "ch-ge-rapport-gestion-conseil-etat-2006.txt",
   "line": 461,
   "token": "édité"
+ },
+ "égarer": {
+  "fr": "Un bûcheron venoit de rompre ou d'égarer le bois dont il avoit emmanché sa cognée.",
+  "en": "A woodcutter had just broken or lost the wooden handle he had fitted to his axe.",
+  "source": "lafontaine-fables.txt",
+  "line": 13627,
+  "token": "égarer"
  },
  "élaborer": {
   "fr": "Sans que je me souciasse de la contradiction qu'il y avait à vouloir regarder et toucher avec les organes des sens ce qui avait été élaboré par la rêverie et non perçu par eux.",
@@ -6719,6 +7699,13 @@
   "line": 7629,
   "token": "émergeaient"
  },
+ "émerveiller": {
+  "fr": "Le spectacle des étoiles filantes émerveillait les enfants.",
+  "en": "The sight of the shooting stars filled the children with wonder.",
+  "source": "Claude (Opus 4.8)",
+  "line": null,
+  "token": "émerveillait"
+ },
  "émettre": {
   "fr": "Il laisse éblouir sa vue, plutôt qu'il ne leur jette des regards, par les rayons qu'émet vers lui l'azur lumineux et résistant des eaux.",
   "en": "He lets his gaze be dazzled, rather than casting looks at them, by the rays that the luminous, resistant blue of the waters sends towards him.",
@@ -6740,12 +7727,26 @@
   "line": 394,
   "token": "épargner"
  },
+ "épier": {
+  "fr": "Essayez un peu à m'écrire secrètement de petits billets doux, à épier les momens que mon mari n'y sera pas.",
+  "en": "Try, for once, secretly writing me little love notes, and watching for the moments when my husband is away.",
+  "source": "moliere-oeuvres-t4.txt",
+  "line": 5095,
+  "token": "épier"
+ },
  "épouser": {
   "fr": "Il aurait pu être beau, spirituel, distingué, attirant, tels qu'ils étaient sans doute, ceux qu'avaient épousés ses anciennes camarades du couvent.",
   "en": "He might have been handsome, witty, distinguished, attractive — as were, no doubt, the husbands her former convent friends had married.",
   "source": "flaubert-madame-bovary-1857.txt",
   "line": 1687,
   "token": "épousés"
+ },
+ "épouvanter": {
+  "fr": "Pourriez-vous être favorable aux jeux innocents d'une fable, et voir, sans vous épouvanter, un lion qu'Amour sut dompter?",
+  "en": "Could you look kindly on the innocent games of a fable, and behold, without taking fright, a lion that Love managed to tame?",
+  "source": "lafontaine-fables.txt",
+  "line": 3799,
+  "token": "épouvanter"
  },
  "éprouver": {
   "fr": "Je pouvais me réciter des vers que j'aimais sans que les premiers me fissent éprouver aucune émotion.",
@@ -6844,6 +7845,13 @@
   "source": "ch-fed-ofcom-haut-debit-2025.txt",
   "line": 55,
   "token": "évaluer"
+ },
+ "éveiller": {
+  "fr": "Il se réveilla en sursaut, et en s'éveillant: Qu'est ceci? dit-il, ma voix est devenue libre.",
+  "en": "He woke with a start, and on waking said: What is this? My voice has become free.",
+  "source": "lafontaine-fables.txt",
+  "line": 451,
+  "token": "éveillant"
  },
  "éviter": {
   "fr": "C'est pour éviter ce gros homme : vous savez, l'apothicaire.",

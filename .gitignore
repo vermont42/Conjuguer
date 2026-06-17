@@ -37,3 +37,6 @@ corpus/working/*
 !corpus/working/build_tail_index.py
 !corpus/working/build_literature_examples.py
 !corpus/working/mine_examples.workflow.js
+!corpus/working/build_classical_index.py
+!corpus/working/merge_classical.py
+!corpus/working/mine_classical.workflow.js
