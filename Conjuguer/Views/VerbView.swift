@@ -64,8 +64,8 @@ struct VerbView: View {
             .scrollFade()
         }
 
-        if let example = ExampleData.example(for: verb) {
-          exampleCard(example)
+        if ExampleData.example(for: verb) != nil || chansonExample != nil {
+          exampleCard(ExampleData.example(for: verb))
             .scrollFade()
         }
       }
@@ -166,36 +166,40 @@ struct VerbView: View {
     return Text(label + valuePart)
   }
 
-  private func exampleCard(_ example: Example) -> some View {
+  private func exampleCard(_ example: Example?) -> some View {
     VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
-      Text(chansonExample == nil ? L.VerbView.exampleUse : L.VerbView.exampleUses)
+      Text(example != nil && chansonExample != nil ? L.VerbView.exampleUses : L.VerbView.exampleUse)
         .subheadingLabel()
         .accessibilityAddTraits(.isHeader)
 
-      Text(example.fr)
-        .bodyLabel()
-        .frenchPronunciation()
+      if let example {
+        Text(example.fr)
+          .bodyLabel()
+          .frenchPronunciation()
 
-      Text(example.en)
-        .translationLabel()
-        .englishPronunciation()
+        Text(example.en)
+          .translationLabel()
+          .englishPronunciation()
 
-      Text(example.provenance.attribution)
-        .smallLabel()
-        .rightAligned()
+        Text(example.provenance.attribution)
+          .smallLabel()
+          .rightAligned()
+      }
 
       if let chanson = chansonExample {
-        chansonSection(chanson)
+        chansonSection(chanson, showDivider: example != nil)
       }
     }
     .card()
     .accessibilityIdentifier("verb_example")
   }
 
-  private func chansonSection(_ chanson: ChansonExample) -> some View {
+  private func chansonSection(_ chanson: ChansonExample, showDivider: Bool) -> some View {
     VStack(alignment: .leading, spacing: 6) {
-      Divider()
-        .padding(.vertical, 4)
+      if showDivider {
+        Divider()
+          .padding(.vertical, 4)
+      }
 
       Text(L.VerbView.chansonHeading)
         .smallLabel()

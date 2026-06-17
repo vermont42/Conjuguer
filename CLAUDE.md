@@ -261,7 +261,7 @@ of the shipped app target**; only the finished JSON is bundled.
 | Folder | Contents | Tracked? | Role |
 |---|---|---|---|
 | `corpus/originals/` | Domain-tier subfolders of raw sources: `literature/` (PDFs of Proust, Zola, Flaubert + `chanson-roland-oxford.txt`), `government/` (Swiss/French public-document `.txt`), `technology/` (Swiss NCSC cyber/IT, PD), `wikipedia/` (French Wikipedia, CC BY-SA) | **No** | Raw source material — large and re-fetchable |
-| `corpus/grokked/` | `chanson.md` | **Yes** | Hand-built parsed intermediate: numbered Old French with the modern infinitive bracketed per line, plus a line-by-line Claude translation |
+| `corpus/grokked/` | `chanson.md`, `chanson_descendants.json` | **Yes** | Hand-built parsed intermediate: numbered Old French with the modern infinitive bracketed per line, plus a line-by-line Claude translation. `chanson_descendants.json` is the verified Old-French-head → modern-descendant table (see the reflex policy below) |
 | `corpus/working/` | tracked build scripts (`build_chanson_examples.py`, `build_corpus_index.py`, `build_tail_index.py`, `build_literature_examples.py`, `mine_examples.workflow.js`); ignored intermediates (`forms.json`, `corpus_index.json`, `tail_index.json`, `shards/`) and `*.md` progress notes | **Mixed** | Build scripts + regenerable intermediates |
 | `corpus/json/` | `chanson_examples.json`, `literature_examples.json` | **Yes** | Finished exports, bundled into the app |
 
@@ -276,10 +276,30 @@ all downloaded public-domain texts.) When adding files under `corpus/`, remember
 whitelist: anything new under a tracked subfolder is committed automatically; new
 ignored content needs a matching `!`/exclude pair.
 
-**`build_chanson_examples.py`** parses `grokked/chanson.md` per laisse, resolves each bracketed
-gloss to a canonical `verbs.xml` key (`in="…"`), and writes `json/chanson_examples.json`
-keyed by infinitif. It reports coverage and *unmatched* gloss tokens rather than silently
-dropping them. This hand-bracket-then-resolve approach suits the one fully-treated poem.
+**`build_chanson_examples.py`** parses `grokked/chanson.md` per laisse and writes
+`json/chanson_examples.json` **and the bundled copy `Conjuguer/Models/chanson_examples.json`**
+(the app loads the latter — both must stay in sync; the script writes both). It reports coverage
+and *unmatched* gloss tokens. This hand-bracket-then-resolve approach suits the one fully-treated
+poem.
+
+**Reflex-only attachment policy.** A bracket gloss is either `head (modern)` — `head` is the
+Old French verb actually in the line, `modern` a hand-written meaning — or a bare modern lemma.
+An example is attached to a modern verb **only when the line genuinely contains that verb's own
+word** (its etymological ancestor form); otherwise the app shows no Chanson section for it. So:
+- **bare token** (`brandir`) → the line contains that verb directly → attach.
+- **`head (modern)` where `head` has a verified modern descendant in `verbs.xml`** → attach to
+  the **descendant**, the verb whose ancestor the line really contains (a reflex): `oïr (entendre)`
+  → **ouïr**, `eslire (choisir)` → **élire**, `desclore (ouvrir)` → **déclore**, `ferir (frapper)`
+  → **férir**. The descendant may be any of the ~6,300 verbs, not just the usage-ranked ~980.
+- **`head (modern)` where `head` left no surviving descendant in the dict** → **dropped**. The
+  verb itself never appears in the poem (the gloss is only a synonym), so e.g. `frapper`, `tuer`,
+  `choisir`, `ouvrir` get no Chanson example rather than one whose word isn't theirs.
+
+The head→descendant decisions live in `grokked/chanson_descendants.json`, the merged result of a
+per-head English-Wiktionary etymology audit (parallel subagents; the per-slice `working/audit_*.json`
+outputs are ignored intermediates) plus a few manual overrides for doublets whose modern sense
+diverged from the Roland usage (`targier`, `chalengier`, `asmer`, `tenser`). Re-run the audit and
+regenerate that table if the bracketing changes; this script only consumes it.
 
 **Modern-prose pass — generated-forms index + subagent select/translate.** The pass over the
 novels (and government tier) moves the expensive work *off* the LLM and into deterministic code,

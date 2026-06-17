@@ -7,18 +7,6 @@
    "tr": "For each day he gives himself up to death."
   },
   {
-   "laisse": "XXXV",
-   "line": 465,
-   "of": "Mais de s'espee ne volt mie guerpir;",
-   "tr": "But he would by no means give up his sword;"
-  },
-  {
-   "laisse": "XL",
-   "line": 536,
-   "of": "Meilz voelt murir que guerpir sun barnet.»",
-   "tr": "He would rather die than abandon his noble company.»"
-  },
-  {
    "laisse": "LXXIV",
    "line": 928,
    "of": "Franceis murrunt, si a nus s'abandunent;",
@@ -35,18 +23,6 @@
    "line": 1535,
    "of": "Brochet le bien, le frein li abandunet,",
    "tr": "He spurs it hard, gives it free rein,"
-  },
-  {
-   "laisse": "CXXV",
-   "line": 1658,
-   "of": "Voelent u nun, si guerpissent le camp.",
-   "tr": "Willing or not, they abandon the field."
-  },
-  {
-   "laisse": "CXLII",
-   "line": 1908,
-   "of": "Ja pur murir le camp ne guerpirunt.»",
-   "tr": "Even on pain of death they will not abandon the field.»"
   }
  ],
  "abattre": [
@@ -160,12 +136,6 @@
   },
   {
    "laisse": "CXLVI",
-   "line": 1954,
-   "of": "E flurs (e) e cristaus en acraventet jus;",
-   "tr": "And cuts away its flowers and crystals;"
-  },
-  {
-   "laisse": "CXLVI",
    "line": 1956,
    "of": "Brandist sun colp, si l'ad mort abatut,",
    "tr": "He brandishes his blow, and has struck him dead,"
@@ -191,26 +161,12 @@
    "tr": "They are well absolved and released from their sins,"
   }
  ],
- "accabler": [
-  {
-   "laisse": "II",
-   "line": 15,
-   "of": "«Oëz, seignurs, quel pecchet nus encumbret:",
-   "tr": "«Hear, my lords, what calamity weighs upon us:"
-  }
- ],
  "accomplir": [
   {
    "laisse": "XXII",
    "line": 309,
    "of": "Ademplir voeill vostre comandement.» AOI.",
    "tr": "I will fulfill your command.» AOI."
-  },
-  {
-   "laisse": "XXX",
-   "line": 395,
-   "of": "Par quele gent quiet il espleiter tant?»",
-   "tr": "With what people does he think to achieve so much?»"
   }
  ],
  "accorder": [
@@ -219,6 +175,14 @@
    "line": 74,
    "of": "Par voz saveirs sem puez acorder,",
    "tr": "By your wisdom, if you can bring me to an accord,"
+  }
+ ],
+ "accueillir": [
+  {
+   "laisse": "LIV",
+   "line": 689,
+   "of": "Sis aquillit e tempeste e ored:",
+   "tr": "A storm and a tempest seized them:"
   }
  ],
  "acheminer": [
@@ -235,14 +199,6 @@
    "tr": "Toward sweet France they have all set out. AOI."
   }
  ],
- "achever": [
-  {
-   "laisse": "CXII",
-   "line": 1464,
-   "of": "Tantes batailles en avum afinees!",
-   "tr": "So many battles have we ended with them!"
-  }
- ],
  "acquitter": [
   {
    "laisse": "XXXVII",
@@ -251,22 +207,10 @@
    "tr": "If I wish to ransom the life of my body,"
   },
   {
-   "laisse": "LIX",
-   "line": 759,
-   "of": "Que as espees ne seit einz eslegiet.»",
-   "tr": "That shall not first be paid for at the point of swords.»"
-  },
-  {
    "laisse": "LXIX",
    "line": 869,
    "of": "De tute Espaigne aquiterai les pans",
    "tr": "I will clear of foes the lands of all Spain"
-  },
-  {
-   "laisse": "XC",
-   "line": 1151,
-   "of": "Mais as espees l'estuvrat esleger.» AOI.",
-   "tr": "But it will have to be settled with swords.» AOI."
   }
  ],
  "adorer": [
@@ -289,20 +233,100 @@
    "tr": "There is no pagan who does not pray to him and adore him."
   }
  ],
- "affiner": [
+ "adouber": [
   {
-   "laisse": "IX",
-   "line": 132,
-   "of": "Tant i avrat de besanz esmerez",
-   "tr": "there will be so much of it in refined bezants"
+   "laisse": "LV",
+   "line": 713,
+   "of": "Escuz as cols e lances adubees.",
+   "tr": "shields at their necks and lances equipped."
+  },
+  {
+   "laisse": "LXXVIII",
+   "line": 993,
+   "of": "Vunt s'aduber desuz une sapide.",
+   "tr": "They go to arm themselves beneath a pine tree."
+  },
+  {
+   "laisse": "LXXIX",
+   "line": 994,
+   "of": "Paien s'adubent des osbercs sarazineis,",
+   "tr": "The pagans arm themselves with Saracen hauberks,"
+  },
+  {
+   "laisse": "XC",
+   "line": 1143,
+   "of": "Adobez sunt a lei de chevalers",
+   "tr": "They are equipped in the manner of knights"
+  },
+  {
+   "laisse": "CXXXV",
+   "line": 1791,
+   "of": "Adubez vos, si criez vostre enseigne,",
+   "tr": "Arm yourselves, cry out your war-cry,"
+  },
+  {
+   "laisse": "CXXXVI",
+   "line": 1795,
+   "of": "Franceis descendent, si adubent lor cors",
+   "tr": "The French dismount, and they equip their bodies"
   }
  ],
- "agir": [
+ "advenir": [
   {
-   "laisse": "XXXVII",
-   "line": 497,
-   "of": "Tant ad erret nen est dreiz que plus vivet.",
-   "tr": "He has gone so far that it is not right that he live longer."
+   "laisse": "XXV",
+   "line": 335,
+   "of": "De cest message nos avendrat grant perte.»",
+   "tr": "From this mission great loss will befall us.»"
+  },
+  {
+   "laisse": "XXXV",
+   "line": 456,
+   "of": "- «Sire,» dist Guenes, «mei l'avent a suffrir;",
+   "tr": "- «Sire,» said Ganelon, «it falls to me to endure it;"
+  },
+  {
+   "laisse": "LXVII",
+   "line": 836,
+   "of": "Enoit m'avint un avisiun d'angele,",
+   "tr": "Last night an angel's vision came to me,"
+  },
+  {
+   "laisse": "CXXVII",
+   "line": 1684,
+   "of": "As quatre [es]turs lor est avenut ben;",
+   "tr": "In the four assaults it went well for them;"
+  }
+ ],
+ "affermer": [
+  {
+   "laisse": "CLI",
+   "line": 2032,
+   "of": "Afermet est a ses estreus d'or fin:",
+   "tr": "He is held fast in his stirrups of fine gold:"
+  }
+ ],
+ "affiler": [
+  {
+   "laisse": "CXXVI",
+   "line": 1664,
+   "of": "Sur l'erbe verte li cler sancs s'en afilet.",
+   "tr": "On the green grass the bright blood flows away."
+  }
+ ],
+ "affiner": [
+  {
+   "laisse": "CXII",
+   "line": 1464,
+   "of": "Tantes batailles en avum afinees!",
+   "tr": "So many battles have we ended with them!"
+  }
+ ],
+ "affubler": [
+  {
+   "laisse": "XXXV",
+   "line": 462,
+   "of": "Afublez est d'un mantel sabelin,",
+   "tr": "He is wrapped in a sable mantle,"
   }
  ],
  "aider": [
@@ -473,10 +497,28 @@
  ],
  "ajuster": [
   {
+   "laisse": "LXVIII",
+   "line": 851,
+   "of": ".IIII.C. milie en ajustet en .III. jurz.",
+   "tr": "Four hundred thousand he gathers in three days."
+  },
+  {
    "laisse": "LXXIV",
    "line": 919,
    "of": "Devant Marsilie as altres si s'ajust,",
    "tr": "Before Marsile he joins the others,"
+  },
+  {
+   "laisse": "XCI",
+   "line": 1169,
+   "of": "A cez paroles vunt les oz ajustant. AOI.",
+   "tr": "At these words the hosts go closing in. AOI."
+  },
+  {
+   "laisse": "XCII",
+   "line": 1187,
+   "of": "Francs e paiens, as les vus ajustez.",
+   "tr": "Franks and pagans, now they are joined in battle."
   },
   {
    "laisse": "CXII",
@@ -1037,20 +1079,6 @@
    "tr": "Had he been alive, I would have brought him."
   }
  ],
- "amuser": [
-  {
-   "laisse": "VIII",
-   "line": 111,
-   "of": "As tables juent pur els esbaneier",
-   "tr": "At backgammon they play to amuse themselves"
-  },
-  {
-   "laisse": "LXXVIII",
-   "line": 977,
-   "of": "Greignor fais portet par giu, quant il s'enveiset,",
-   "tr": "For sport, when he amuses himself, he carries a greater load"
-  }
- ],
  "angoisser": [
   {
    "laisse": "CL",
@@ -1059,23 +1087,21 @@
    "tr": "Oliver feels that death greatly anguishes him."
   }
  ],
- "annoncer": [
+ "appareiller": [
   {
-   "laisse": "XIV",
-   "line": 204,
-   "of": "Nuncerent vos cez paroles meïsme.",
-   "tr": "They announced to you these very words."
+   "laisse": "LI",
+   "line": 643,
+   "of": "«L'aveir Carlun est il apareillez?»",
+   "tr": "«Is Charles's tribute made ready?»"
+  },
+  {
+   "laisse": "XC",
+   "line": 1144,
+   "of": "E de bataille sunt tuit apareillez.",
+   "tr": "And are all made ready for battle."
   }
  ],
- "apaiser": [
-  {
-   "laisse": "XVIII",
-   "line": 263,
-   "of": "Franceis se taisent: as les vus aquisez.",
-   "tr": "The Franks fall silent: behold them quieted."
-  }
- ],
- "apparaître": [
+ "apparoir": [
   {
    "laisse": "LVIII",
    "line": 737,
@@ -1101,12 +1127,6 @@
    "line": 69,
    "of": "Des plus feluns dís en ad apelez:",
    "tr": "Of the most felonious he has summoned ten of them:"
-  },
-  {
-   "laisse": "XXVII",
-   "line": 352,
-   "of": "Noble vassal vos i solt hom clamer.",
-   "tr": "A noble vassal one was wont to call you there."
   },
   {
    "laisse": "XXXVIII",
@@ -1219,12 +1239,6 @@
    "line": 468,
    "of": "Envers le rei s'est Guenes aproismet,",
    "tr": "Toward the king Ganelon has drawn near,"
-  },
-  {
-   "laisse": "LIII",
-   "line": 661,
-   "of": "Li empereres aproismet sun repaire.",
-   "tr": "The emperor approaches his homeward way."
   }
  ],
  "appuyer": [
@@ -1241,42 +1255,6 @@
    "line": 992,
    "of": "Ki de bataille s'argüent,e hasteient:",
    "tr": "Who urge themselves on to battle, and make haste:"
-  }
- ],
- "arracher": [
-  {
-   "laisse": "LVI",
-   "line": 722,
-   "of": "Par tel air l'at estrussee e brandie,",
-   "tr": "With such force he wrenched and brandished it,"
-  },
-  {
-   "laisse": "CXXXVII",
-   "line": 1821,
-   "of": "Icil li peilent la barbe e les gernuns;",
-   "tr": "These pluck out his beard and his mustaches;"
-  }
- ],
- "arranger": [
-  {
-   "laisse": "XV",
-   "line": 215,
-   "of": "Si duist sa barbe, afaitad sun gernun,",
-   "tr": "He smoothed his beard, arranged his mustache,"
-  }
- ],
- "arriver": [
-  {
-   "laisse": "XXV",
-   "line": 335,
-   "of": "De cest message nos avendrat grant perte.»",
-   "tr": "From this mission great loss will befall us.»"
-  },
-  {
-   "laisse": "LXVII",
-   "line": 836,
-   "of": "Enoit m'avint un avisiun d'angele,",
-   "tr": "Last night an angel's vision came to me,"
   }
  ],
  "arrêter": [
@@ -1353,36 +1331,6 @@
  ],
  "asseoir": [
   {
-   "laisse": "VIII",
-   "line": 110,
-   "of": "Sur palies blancs siedent cil cevaler,",
-   "tr": "Upon white silks those knights are seated,"
-  },
-  {
-   "laisse": "VIII",
-   "line": 116,
-   "of": "La siet li reis, ki dulce france tient.",
-   "tr": "There sits the king who holds sweet France."
-  },
-  {
-   "laisse": "XVII",
-   "line": 251,
-   "of": "Alez sedeir, quant nuls ne vos sumunt.»",
-   "tr": "Go sit down, since no one summons you.»"
-  },
-  {
-   "laisse": "XIX",
-   "line": 272,
-   "of": "«Alez sedeir desur cel palie blanc!",
-   "tr": "«Go sit down upon that white silk cloth!"
-  },
-  {
-   "laisse": "XXIX",
-   "line": 383,
-   "of": "Er matin sedeit li emperere suz l'umbre;",
-   "tr": "Yesterday morning the emperor sat in the shade;"
-  },
-  {
    "laisse": "XXXV",
    "line": 452,
    "of": "Qu'el faldestoed s'es[t] Marsilies asis.",
@@ -1397,12 +1345,12 @@
    "tr": "He will come to besiege you in Saragossa;"
   }
  ],
- "asséner": [
+ "assurer": [
   {
-   "laisse": "LXXIX",
-   "line": 1013,
-   "of": "Or guart chascuns que granz colps (l')[i] empleit,",
-   "tr": "Now let each man take care to strike great blows there,"
+   "laisse": "CIV",
+   "line": 1321,
+   "of": "Li quens Rollant mie ne s'asoüret,",
+   "tr": "Count Roland does not spare himself at all,"
   }
  ],
  "attarder": [
@@ -1445,6 +1393,20 @@
    "line": 1421,
    "of": "Ne Carlemagne, ki as porz les atent.",
    "tr": "Nor Charlemagne, who awaits them at the passes."
+  }
+ ],
+ "avaler": [
+  {
+   "laisse": "LVII",
+   "line": 730,
+   "of": "D'enz de la sale uns veltres avalat,",
+   "tr": "From within the hall a hound came bounding down,"
+  },
+  {
+   "laisse": "LXXXI",
+   "line": 1037,
+   "of": "Cum il einz pout, del pui est avalet,",
+   "tr": "As fast as he could, he came down from the hill,"
   }
  ],
  "avoir": [
@@ -3803,6 +3765,20 @@
    "tr": "there he will follow you, so says my lord.»"
   }
  ],
+ "bailler": [
+  {
+   "laisse": "XXXV",
+   "line": 453,
+   "of": "Dist l'algalifes: «Mal nos avez baillit,",
+   "tr": "The caliph said: «You have served us ill,"
+  },
+  {
+   "laisse": "XXXVII",
+   "line": 488,
+   "of": "«Carle me mandet, ki France ad en baillie,",
+   "tr": "«Charles, who has France in his keeping, commands me,"
+  }
+ ],
  "baiser": [
   {
    "laisse": "XLV",
@@ -3837,6 +3813,14 @@
    "tr": "he bows his head, and begins to think. AOI."
   }
  ],
+ "balayer": [
+  {
+   "laisse": "LXXVIII",
+   "line": 976,
+   "of": "Jusqu'a la tere si chevoel li balient;",
+   "tr": "His hair sweeps down to the ground;"
+  }
+ ],
  "battre": [
   {
    "laisse": "XCI",
@@ -3857,14 +3841,6 @@
    "tr": "They beat him soundly with rods and with sticks;"
   }
  ],
- "blanchir": [
-  {
-   "laisse": "XVIII",
-   "line": 261,
-   "of": "Par ceste barbe que veez [blancheier],",
-   "tr": "By this beard that you see growing white,"
-  }
- ],
  "blesser": [
   {
    "laisse": "XLIV",
@@ -3877,18 +3853,6 @@
    "line": 1847,
    "of": "Si est blecet, ne quit que anme i remaigne.",
    "tr": "He is so wounded, I do not think a soul remains in him."
-  },
-  {
-   "laisse": "CXLVII",
-   "line": 1964,
-   "of": "Oliver sent qu'il est a mort nasfret.",
-   "tr": "Oliver feels that he is wounded to death."
-  },
-  {
-   "laisse": "CXLIX",
-   "line": 1989,
-   "of": "E Oliver ki est a mort nasfret:",
-   "tr": "And Oliver, who is wounded to death:"
   }
  ],
  "blâmer": [
@@ -3917,6 +3881,22 @@
    "tr": "He kills them both, let who will blame or praise it."
   }
  ],
+ "blêmir": [
+  {
+   "laisse": "XLIV",
+   "line": 590,
+   "of": "La gent de France iert blecee e blesmie;",
+   "tr": "The host of France will be wounded and bruised;"
+  }
+ ],
+ "bouter": [
+  {
+   "laisse": "L",
+   "line": 641,
+   "of": "Il les ad prises, en sa hoese les butet, AOI.",
+   "tr": "He took them, into his boot he stuffed them, AOI."
+  }
+ ],
  "brandir": [
   {
    "laisse": "XXXVII",
@@ -3929,12 +3909,6 @@
    "line": 722,
    "of": "Par tel air l'at estrussee e brandie,",
    "tr": "With such force he wrenched and brandished it,"
-  },
-  {
-   "laisse": "XCI",
-   "line": 1155,
-   "of": "Mais sun espiet vait li bers palmeiant,",
-   "tr": "But the baron goes brandishing his spear,"
   },
   {
    "laisse": "XCIII",
@@ -3963,36 +3937,6 @@
  ],
  "briser": [
   {
-   "laisse": "I",
-   "line": 5,
-   "of": "Mur ne citet n'i est remés a fraindre",
-   "tr": "no wall or city is left to be breached"
-  },
-  {
-   "laisse": "XVI",
-   "line": 237,
-   "of": "Od voz caables avez fruiset ses murs,",
-   "tr": "With your siege engines you have shattered his walls,"
-  },
-  {
-   "laisse": "XXXVII",
-   "line": 486,
-   "of": "Freint le seel, getet en ad la cire,",
-   "tr": "He breaks the seal, has cast away the wax,"
-  },
-  {
-   "laisse": "LIII",
-   "line": 663,
-   "of": "Li quens Rollant il l'ad e prise e fraite;",
-   "tr": "Count Roland had taken and shattered it;"
-  },
-  {
-   "laisse": "XCIII",
-   "line": 1199,
-   "of": "L'escut li freint e l'osberc li desclot,",
-   "tr": "He shatters his shield and breaks open his hauberk,"
-  },
-  {
    "laisse": "XCIII",
    "line": 1200,
    "of": "Trenchet le piz, si li briset les os,",
@@ -4005,152 +3949,140 @@
    "tr": "In two halves he has broken his neck;"
   },
   {
-   "laisse": "XCIV",
-   "line": 1227,
-   "of": "L'escut li freint e l'osberc li derumpt,",
-   "tr": "He shatters his shield and tears apart his hauberk,"
-  },
-  {
-   "laisse": "XCV",
-   "line": 1247,
-   "of": "L'escut li freinst, l'osberc li descumfist,",
-   "tr": "He shattered his shield, he broke apart his hauberk,"
-  },
-  {
-   "laisse": "XCVI",
-   "line": 1263,
-   "of": "Tute li freint la bucle de cristal,",
-   "tr": "He shatters the boss of crystal all over it,"
-  },
-  {
-   "laisse": "XCVII",
-   "line": 1270,
-   "of": "L'escut li freint e l'osberc li desmailet,",
-   "tr": "He shatters his shield and breaks apart the mail of his hauberk,"
-  },
-  {
-   "laisse": "XCVIII",
-   "line": 1276,
-   "of": "L'escut li freinst, ki est a flurs e ad ór,",
-   "tr": "He shattered his shield, which is wrought with flowers and gold,"
-  },
-  {
-   "laisse": "XCIX",
-   "line": 1283,
-   "of": "L'escut li freint desuz l'oree bucle,",
-   "tr": "He shatters his shield beneath the gilded boss,"
-  },
-  {
-   "laisse": "C",
-   "line": 1292,
-   "of": "L'escut del col li freint e escantelet,",
-   "tr": "He shatters and smashes to pieces the shield at his neck,"
-  },
-  {
-   "laisse": "CII",
-   "line": 1305,
-   "of": "L'escut li freinst, l'osberc li descumfist,",
-   "tr": "He shattered his shield, he tore apart his hauberk,"
-  },
-  {
-   "laisse": "CIII",
-   "line": 1314,
-   "of": "L'escut li freint suz la bucle d'or mer,",
-   "tr": "He shatters his shield beneath the boss of pure gold,"
-  },
-  {
-   "laisse": "CIII",
-   "line": 1317,
-   "of": "La hanste fruisset, mie n'en a(d)[b]atiet.",
-   "tr": "The shaft splinters, none of it is struck down."
-  },
-  {
-   "laisse": "CIV",
-   "line": 1323,
-   "of": "A .XV. cols l'ad fraite e [...] perdue,",
-   "tr": "At fifteen blows he has broken and lost it,"
-  },
-  {
-   "laisse": "CIV",
-   "line": 1326,
-   "of": "L'elme li freint u li carbuncle luisent,",
-   "tr": "He breaks his helm where the carbuncles gleam,"
-  },
-  {
-   "laisse": "CVI",
-   "line": 1354,
-   "of": "L'escut li freint, ki est ad or e a flur,",
-   "tr": "He shatters his shield, which is adorned with gold and flowers,"
-  },
-  {
    "laisse": "CVI",
    "line": 1359,
    "of": "La hanste briset e esclicet josqu'as poinz.",
    "tr": "His lance breaks and splinters all the way to his fists."
+  }
+ ],
+ "brocher": [
+  {
+   "laisse": "LXXXIX",
+   "line": 1125,
+   "of": "Sun cheval broche e muntet un lariz,",
+   "tr": "He spurs his horse and climbs a hillock,"
+  },
+  {
+   "laisse": "XCII",
+   "line": 1184,
+   "of": "Brochent ad ait pur le plus tost aler,",
+   "tr": "They spur hard to go all the faster,"
+  },
+  {
+   "laisse": "XCIII",
+   "line": 1197,
+   "of": "Sun cheval brochet, laiset curre a esforz,",
+   "tr": "He spurs his horse, lets it run at full force,"
+  },
+  {
+   "laisse": "XCIV",
+   "line": 1225,
+   "of": "Le cheval brochet des oriez esperuns,",
+   "tr": "He spurs his horse with his golden spurs,"
+  },
+  {
+   "laisse": "XCV",
+   "line": 1245,
+   "of": "Sun cheval brochet des esperuns d'or fin,",
+   "tr": "He spurs his horse with the spurs of fine gold,"
+  },
+  {
+   "laisse": "C",
+   "line": 1290,
+   "of": "Sun cheval (...) brochet, si li laschet la resne,",
+   "tr": "Spurs his horse, lets loose the rein,"
+  },
+  {
+   "laisse": "CIII",
+   "line": 1313,
+   "of": "Le cheval brochet, vait ferir Oliver:",
+   "tr": "He spurs his horse, goes to strike Oliver:"
+  },
+  {
+   "laisse": "CIV",
+   "line": 1325,
+   "of": "Sun cheval brochet, si vait ferir Chernuble:",
+   "tr": "He spurs his horse, and goes to strike Chernuble:"
   },
   {
    "laisse": "CVIII",
-   "line": 1384,
-   "of": "Lur dous espiez enz el cors li unt frait,",
-   "tr": "Their two spears they have shattered in his body,"
-  },
-  {
-   "laisse": "CIX",
-   "line": 1398,
-   "of": "Tant hanste i ad e fraite e sanglente,",
-   "tr": "So many a lance there is, both shattered and bloody,"
-  },
-  {
-   "laisse": "CXVIII",
-   "line": 1574,
-   "of": "L'escut li freint e l'osberc li derumpt,",
-   "tr": "He shatters his shield and tears apart his hauberk,"
-  },
-  {
-   "laisse": "CXXII",
-   "line": 1618,
-   "of": "L'escut vermeill li freint, de col li portet;",
-   "tr": "He shatters his vermilion shield, tears it from his neck;"
-  },
-  {
-   "laisse": "CXLII",
-   "line": 1892,
-   "of": "L'escut li freint e l'osberc li derumpt,",
-   "tr": "He breaks his shield and tears apart his hauberk,"
-  }
- ],
- "brûler": [
-  {
-   "laisse": "XVI",
-   "line": 238,
-   "of": "Ses citez arses e ses humes vencuz;",
-   "tr": "Burned his cities and vanquished his men;"
+   "line": 1381,
+   "of": "Laschent lor reisnes, brochent amdui a ait,",
+   "tr": "They slacken their reins, both spur eagerly,"
   },
   {
    "laisse": "CXIV",
-   "line": 1500,
-   "of": "Esterminals e carbuncles ki ardent;",
-   "tr": "esterminals and carbuncles that blaze;"
+   "line": 1496,
+   "of": "Li arcevesque brochet par tant grant vasselage:",
+   "tr": "The archbishop spurs with such great valor:"
+  },
+  {
+   "laisse": "CXVI",
+   "line": 1535,
+   "of": "Brochet le bien, le frein li abandunet,",
+   "tr": "He spurs it hard, gives it free rein,"
+  },
+  {
+   "laisse": "CXVII",
+   "line": 1548,
+   "of": "Sun cheval brochet des esperuns d'or mier,",
+   "tr": "He spurs his horse with spurs of pure gold,"
+  },
+  {
+   "laisse": "CXVIII",
+   "line": 1572,
+   "of": "Brochet le bien des aguz esperuns,",
+   "tr": "He spurs it well with sharp spurs,"
+  },
+  {
+   "laisse": "CXIX",
+   "line": 1581,
+   "of": "Sun ceval brochet, si li curt ad esforz;",
+   "tr": "He spurs his horse, and rushes at him with all his might;"
+  },
+  {
+   "laisse": "CXXII",
+   "line": 1616,
+   "of": "Laschet la resne, des esperuns le brochet,",
+   "tr": "He slackens the rein, spurs it with his spurs,"
+  },
+  {
+   "laisse": "CXXIII",
+   "line": 1633,
+   "of": "Sun ceval brochet, ki oït del cuntence.",
+   "tr": "He spurs his horse, which heard the dispute."
+  },
+  {
+   "laisse": "CXXXII",
+   "line": 1736,
+   "of": "Le cheval brochet des esperuns d'or mer,",
+   "tr": "He spurs his horse with the spurs of pure gold,"
+  },
+  {
+   "laisse": "CXXXVI",
+   "line": 1800,
+   "of": "Brochent ad ait tant cum durent li port.",
+   "tr": "They spur eagerly as far as the passes extend."
+  },
+  {
+   "laisse": "CXLII",
+   "line": 1890,
+   "of": "Brochet le ben, si vait ferir Bevon,",
+   "tr": "spurs it well, and goes to strike Beuve,"
+  },
+  {
+   "laisse": "CXLV",
+   "line": 1943,
+   "of": "Brochet le ben des esperuns a or,",
+   "tr": "He spurs it hard with his spurs of gold,"
   }
  ],
  "bénir": [
-  {
-   "laisse": "XXVI",
-   "line": 340,
-   "of": "De sa main destre l'ad asols e seignet,",
-   "tr": "With his right hand he absolved and blessed him,"
-  },
   {
    "laisse": "LXXXIX",
    "line": 1137,
    "of": "E l'arcevesque de Deu les beneïst:",
    "tr": "And the archbishop blessed them in God's name:"
-  },
-  {
-   "laisse": "XC",
-   "line": 1141,
-   "of": "E l'arcevesque de Deu les ad seignez;",
-   "tr": "And the archbishop has blessed them in God's name;"
   },
   {
    "laisse": "CXLIII",
@@ -4163,14 +4095,6 @@
    "line": 2016,
    "of": "E beneïst Karlun e France dulce,",
    "tr": "And to bless Charles and sweet France,"
-  }
- ],
- "camper": [
-  {
-   "laisse": "LV",
-   "line": 709,
-   "of": "Franc se herbergent par tute la cuntree.",
-   "tr": "The Franks make camp throughout the countryside."
   }
  ],
  "ceindre": [
@@ -4217,6 +4141,38 @@
    "line": 1457,
    "of": "La traïsun ne poet estre celee;",
    "tr": "The treason cannot be concealed;"
+  }
+ ],
+ "chaloir": [
+  {
+   "laisse": "XV",
+   "line": 227,
+   "of": "Ne li chalt, sire, de quel mort nus muriuns.",
+   "tr": "Cares not, sire, by what death we may die."
+  },
+  {
+   "laisse": "CIX",
+   "line": 1404,
+   "of": "De ço qui calt? N'en avrunt sucurance.",
+   "tr": "What does it matter? They will have no help from it."
+  },
+  {
+   "laisse": "CXXXVI",
+   "line": 1804,
+   "of": "De ço qui calt? car demuret i unt trop.",
+   "tr": "What does it matter? For they have tarried too long."
+  },
+  {
+   "laisse": "CXXXVIII",
+   "line": 1839,
+   "of": "De ço qui calt? car ne lur valt nient.",
+   "tr": "But what use is it? It avails them nothing."
+  },
+  {
+   "laisse": "CXLIII",
+   "line": 1912,
+   "of": "De ço qui calt? Se fuit s'en est Marsilies,",
+   "tr": "What does it matter? Marsile has fled,"
   }
  ],
  "chanter": [
@@ -4277,46 +4233,12 @@
    "line": 33,
    "of": "Cinquante carre, qu'en ferat carier:",
    "tr": "Fifty carts, that he will have carried away:"
-  }
- ],
- "charroyer": [
+  },
   {
    "laisse": "IX",
    "line": 131,
    "of": "Cinquante care, que carier en ferez;",
    "tr": "fifty carts, which you will have carted away;"
-  }
- ],
- "chercher": [
-  {
-   "laisse": "XXXI",
-   "line": 404,
-   "of": "Que il querreient, que Rollant fust ocis.",
-   "tr": "That they would seek a way for Roland to be killed."
-  },
-  {
-   "laisse": "XCI",
-   "line": 1166,
-   "of": "Cist paien vont grant martirie querant.",
-   "tr": "These pagans go seeking great martyrdom."
-  },
-  {
-   "laisse": "CIV",
-   "line": 1333,
-   "of": "Trenchet l'eschine, hunc n'i out quis [joi]nture,",
-   "tr": "He cuts through the spine, never seeking a joint there,"
-  },
-  {
-   "laisse": "CXXVIII",
-   "line": 1698,
-   "of": "Dist Oliver: «Jo nel sai cument quere.",
-   "tr": "Said Oliver: «I know not how to seek it."
-  },
-  {
-   "laisse": "CXXXIV",
-   "line": 1780,
-   "of": "Suz cel n'ad gent ki [l']osast (re)querre en champ.",
-   "tr": "Under heaven there is no man who would dare seek him out in the field."
   }
  ],
  "chevaucher": [
@@ -4471,27 +4393,103 @@
    "tr": "These men ride fiercely and with wrath,"
   }
  ],
- "choisir": [
+ "choir": [
   {
-   "laisse": "XX",
-   "line": 275,
-   "of": "«Car m'eslisez un barun de ma marche,",
-   "tr": "«Now choose me a baron of my march,"
+   "laisse": "XXV",
+   "line": 333,
+   "of": "Quant le dut prendre, si li caït a tere.",
+   "tr": "When he had to take it, it fell from him to the ground."
   },
   {
-   "laisse": "LXIV",
-   "line": 802,
-   "of": "Entr'e[l]s eslisent .XX. milie chevalers. AOI.",
-   "tr": "Among themselves they choose twenty thousand knights. AOI."
+   "laisse": "XLIII",
+   "line": 578,
+   "of": "Carlles verrat sun grant orguill cadeir;",
+   "tr": "Charles will see his great pride fall;"
   },
   {
-   "laisse": "LXX",
-   "line": 877,
-   "of": "Eslisez mei .XII. de voz baruns,",
-   "tr": "Choose me twelve of your barons,"
+   "laisse": "LX",
+   "line": 764,
+   "of": "Qui[d]ás, le guant me caïst en la place,",
+   "tr": "Did you think the glove would fall to me on the spot,"
+  },
+  {
+   "laisse": "LXI",
+   "line": 769,
+   "of": "Que il me chedet, cum fist a Guenelun",
+   "tr": "that it should fall from me, as it happened to Ganelon"
+  },
+  {
+   "laisse": "LXXVIII",
+   "line": 981,
+   "of": "Pluie n'i chet, rusee n'i adeiset,",
+   "tr": "No rain falls there, no dew settles there,"
+  },
+  {
+   "laisse": "LXXXIV",
+   "line": 1064,
+   "of": "Ne France dulce ja cheet en viltet!",
+   "tr": "Nor sweet France ever fall into disgrace!"
+  },
+  {
+   "laisse": "XCVI",
+   "line": 1267,
+   "of": "Li paiens chet cuntreval a un quat;",
+   "tr": "The pagan falls down dead at one blow;"
+  },
+  {
+   "laisse": "CVI",
+   "line": 1356,
+   "of": "E la cervele li chet as piez desuz;",
+   "tr": "And his brains fall down at his feet;"
+  },
+  {
+   "laisse": "CX",
+   "line": 1425,
+   "of": "Chiedent i fuildres e menut e suvent,",
+   "tr": "Thunderbolts fall there, both small and frequent,"
+  },
+  {
+   "laisse": "CXVII",
+   "line": 1551,
+   "of": "Brandist sun colp e li Sarrazins chiet;",
+   "tr": "He brandishes his blow and the Saracen falls;"
+  },
+  {
+   "laisse": "CXLVIII",
+   "line": 1980,
+   "of": "Encuntre tere en cheent les esclaces.",
+   "tr": "The clots of it fall to the ground."
+  },
+  {
+   "laisse": "CLI",
+   "line": 2033,
+   "of": "Quel part qu'il alt, ne poet mie chaïr.",
+   "tr": "Wherever he may go, he cannot fall."
+  }
+ ],
+ "châtier": [
+  {
+   "laisse": "CXXXII",
+   "line": 1737,
+   "of": "Vint tresqu'a els, sis prist a castier:",
+   "tr": "Came right up to them, and began to rebuke them:"
+  }
+ ],
+ "cingler": [
+  {
+   "laisse": "LIV",
+   "line": 688,
+   "of": "Einz qu'il oüssent .IIII. liues siglet,",
+   "tr": "Before they had sailed four leagues,"
   }
  ],
  "clamer": [
+  {
+   "laisse": "XXVII",
+   "line": 352,
+   "of": "Noble vassal vos i solt hom clamer.",
+   "tr": "A noble vassal one was wont to call you there."
+  },
   {
    "laisse": "LXXXIX",
    "line": 1132,
@@ -4499,10 +4497,52 @@
    "tr": "Confess your sins, and pray to God for mercy!"
   },
   {
+   "laisse": "XCI",
+   "line": 1161,
+   "of": "E cil de France le cleiment a guarant.",
+   "tr": "And those of France acclaim him as their protector."
+  },
+  {
+   "laisse": "CXVI",
+   "line": 1533,
+   "of": "Siet el ceval qu'il cleimet Barbamusche,",
+   "tr": "He sits on the horse he calls Barbamusche,"
+  },
+  {
+   "laisse": "CXVIII",
+   "line": 1564,
+   "of": "N'i ad eschipre quis cleim se par loi nun.",
+   "tr": "There is no sailor who does not claim him as his rightful master."
+  },
+  {
+   "laisse": "CXVIII",
+   "line": 1570,
+   "of": "Siet el cheval qu'il cleimet Gramimund,",
+   "tr": "He sits on the horse he calls Gramimund,"
+  },
+  {
+   "laisse": "CXX",
+   "line": 1596,
+   "of": "Siet el ceval qu'il cleimet Salt Perdut:",
+   "tr": "He sits on the horse that he calls Salt Perdut:"
+  },
+  {
+   "laisse": "CXXII",
+   "line": 1614,
+   "of": "Siet el cheval que il cleimet Marmorie,",
+   "tr": "He sits on the horse that he calls Marmorie,"
+  },
+  {
    "laisse": "CXXIV",
    "line": 1650,
    "of": "E cil d'Espaigne s'en cleiment tuit dolent.",
    "tr": "And those of Spain lament over it, all grieving."
+  },
+  {
+   "laisse": "CLI",
+   "line": 2031,
+   "of": "Sur sun ceval que cleimet Veillantif.",
+   "tr": "Upon his horse that is called Veillantif."
   }
  ],
  "combattre": [
@@ -4529,12 +4569,6 @@
    "line": 878,
    "of": "Sim cumbatrai as .XII. cumpaignuns.»",
    "tr": "And I will fight the twelve companions.»"
-  },
-  {
-   "laisse": "XCIII",
-   "line": 1191,
-   "of": "«Feluns Franceis, hoi justerez as noz,",
-   "tr": "«Felon French, today you shall joust with ours,"
   },
   {
    "laisse": "CXV",
@@ -4599,12 +4633,6 @@
    "tr": "With joined hands he will be at your command;"
   },
   {
-   "laisse": "LXXV",
-   "line": 936,
-   "of": "Ne Oliver, ki les altres cadelet;",
-   "tr": "Nor Oliver, who commands the others;"
-  },
-  {
    "laisse": "LXXXIX",
    "line": 1138,
    "of": "Par penitence les cumandet a ferir.",
@@ -4667,12 +4695,18 @@
    "tr": "The archbishop begins the battle."
   }
  ],
- "comploter": [
+ "comparer": [
   {
-   "laisse": "XXXVIII",
-   "line": 511,
-   "of": "La purparolent la traïson seinz dreit. AOI.",
-   "tr": "There they plot the treason without right. AOI."
+   "laisse": "XXXIV",
+   "line": 449,
+   "of": "Einz vos avrunt li meillor comperee.»",
+   "tr": "Before the best men shall have paid dearly for you.»"
+  },
+  {
+   "laisse": "CXXIII",
+   "line": 1634,
+   "of": "Ki quel cumpert, venuz en sunt ensemble.",
+   "tr": "Whoever pays for it, they have come together."
   }
  ],
  "conduire": [
@@ -4681,12 +4715,6 @@
    "line": 46,
    "of": "Ne nus seiuns cunduiz a mendeier.» AOI.",
    "tr": "And that we be reduced to begging.» AOI."
-  },
-  {
-   "laisse": "XL",
-   "line": 525,
-   "of": "Par tantes teres ad sun cors demened,",
-   "tr": "Through so many lands he has driven his body,"
   },
   {
    "laisse": "XL",
@@ -4827,24 +4855,6 @@
    "line": 20,
    "of": "Cunseilez mei cume mi savie hume,",
    "tr": "Counsel me, as my wise men,"
-  },
-  {
-   "laisse": "XIV",
-   "line": 206,
-   "of": "Loerent vos alques de legerie.",
-   "tr": "They advised you somewhat foolishly."
-  },
-  {
-   "laisse": "XV",
-   "line": 226,
-   "of": "Ki ço vos lodet que cest plait degetuns,",
-   "tr": "Whoever advises you that we reject this agreement,"
-  },
-  {
-   "laisse": "XL",
-   "line": 532,
-   "of": "Tant nel vos sai ne preiser ne loer",
-   "tr": "I cannot so praise him to you nor extol him"
   }
  ],
  "consentir": [
@@ -4863,12 +4873,34 @@
    "tr": "And Blancandrin, to set forth the matter."
   }
  ],
+ "contrarier": [
+  {
+   "laisse": "CXXXII",
+   "line": 1735,
+   "of": "Li arceves[ques] les ót cuntrarier,",
+   "tr": "The archbishop heard them quarreling,"
+  },
+  {
+   "laisse": "CXXXII",
+   "line": 1739,
+   "of": "Pur Deu vos pri, ne vos cuntraliez!",
+   "tr": "For God's sake I pray you, do not quarrel!"
+  }
+ ],
  "contredire": [
   {
    "laisse": "XIV",
    "line": 195,
    "of": "En piez se drecet, si li vint cuntredire.",
    "tr": "Rises to his feet, and came to contradict him."
+  }
+ ],
+ "convenir": [
+  {
+   "laisse": "XIII",
+   "line": 192,
+   "of": "Dient Franceis: «Il nus i cuvent guarde!» AOI.",
+   "tr": "The Franks say: «We must be on our guard in this!» AOI."
   }
  ],
  "corner": [
@@ -4903,6 +4935,20 @@
    "tr": "For a single hare he goes blowing his horn all day,"
   }
  ],
+ "corroyer": [
+  {
+   "laisse": "XI",
+   "line": 161,
+   "of": ".XII. serjanz les unt ben cunreez.",
+   "tr": "Twelve sergeants have well equipped them."
+  },
+  {
+   "laisse": "XXVII",
+   "line": 343,
+   "of": "De guarnemenz se prent a cunreer,",
+   "tr": "He sets about equipping himself with gear,"
+  }
+ ],
  "coucher": [
   {
    "laisse": "II",
@@ -4911,24 +4957,10 @@
    "tr": "Upon a block of blue-grey marble he lies down,"
   },
   {
-   "laisse": "CXXX",
-   "line": 1719,
-   "of": "Ne jerrei(e)z ja mais entre sa brace!» AOI.",
-   "tr": "You shall never lie in her arms!» AOI."
-  },
-  {
    "laisse": "CL",
    "line": 2012,
    "of": "Descent a piet, a l[a] tere se culchet,",
    "tr": "He dismounts on foot, lies down on the ground,"
-  }
- ],
- "couler": [
-  {
-   "laisse": "CXXVI",
-   "line": 1664,
-   "of": "Sur l'erbe verte li cler sancs s'en afilet.",
-   "tr": "On the green grass the bright blood flows away."
   }
  ],
  "courir": [
@@ -5051,12 +5083,6 @@
  ],
  "croire": [
   {
-   "laisse": "X",
-   "line": 150,
-   "of": "E sin avrez, ço quid, de plus gentilz.",
-   "tr": "And you shall have, I think, [some] of more noble birth."
-  },
-  {
    "laisse": "XIV",
    "line": 196,
    "of": "Il dist al rei: «Ja mar crerez Marsilie.",
@@ -5067,12 +5093,6 @@
    "line": 220,
    "of": "E dist al rei: «Ja mar crerez bricun,",
    "tr": "And said to the king: «Never to your harm will you believe a knave,"
-  },
-  {
-   "laisse": "XXX",
-   "line": 395,
-   "of": "Par quele gent quiet il espleiter tant?»",
-   "tr": "With what people does he think to achieve so much?»"
   },
   {
    "laisse": "XLIII",
@@ -5093,12 +5113,6 @@
    "tr": "Concerning the pagan king, lord, believe in truth,"
   },
   {
-   "laisse": "LX",
-   "line": 764,
-   "of": "Qui[d]ás, le guant me caïst en la place,",
-   "tr": "Did you think the glove would fall to me on the spot,"
-  },
-  {
    "laisse": "LXXIX",
    "line": 1006,
    "of": "Dist Oliver: «Sire cumpainz, ce crei,",
@@ -5111,34 +5125,18 @@
    "tr": "He does not believe in God, the son of holy Mary;"
   },
   {
-   "laisse": "CXIV",
-   "line": 1504,
-   "of": "Enpres sun colp ne quid que un dener vaillet,",
-   "tr": "After his blow I think it is not worth a denier,"
-  },
-  {
-   "laisse": "CXXIII",
-   "line": 1630,
-   "of": "Si grant doel ad que par mi quiet fendre;",
-   "tr": "He has such great grief that he thinks he will split apart;"
-  },
-  {
-   "laisse": "CXXIII",
-   "line": 1632,
-   "of": "Tel as ocis que mult cher te quid vendre!»",
-   "tr": "You have killed one such that I think I will sell him to you very dear!»"
-  },
-  {
    "laisse": "CXXXI",
    "line": 1726,
    "of": "Sem(e) creïsez, venuz i fust mi sire;",
    "tr": "Had you trusted me, my lord would have come here;"
-  },
+  }
+ ],
+ "crouler": [
   {
-   "laisse": "CXXXIX",
-   "line": 1847,
-   "of": "Si est blecet, ne quit que anme i remaigne.",
-   "tr": "He is so wounded, I do not think a soul remains in him."
+   "laisse": "XXXIV",
+   "line": 442,
+   "of": "De sun algeir ad la hanste crollee.",
+   "tr": "With his javelin he has shaken the shaft."
   }
  ],
  "croître": [
@@ -5201,12 +5199,6 @@
    "tr": "There is not one who does not cry «Munjoie!» AOI."
   },
   {
-   "laisse": "CXXXV",
-   "line": 1790,
-   "of": "Cil l'at traït ki vos en roevet feindre.",
-   "tr": "He who asks you to feign indifference has betrayed him."
-  },
-  {
    "laisse": "CXLIX",
    "line": 1998,
    "of": "Si li demandet dulcement e suef:",
@@ -5219,12 +5211,6 @@
    "line": 162,
    "of": "La noit demurent tresque vint al jur cler.",
    "tr": "The night they remain until the bright day came."
-  },
-  {
-   "laisse": "LXXVIII",
-   "line": 983,
-   "of": "Dient alquanz que diables i meignent.",
-   "tr": "Some say that devils dwell there."
   },
   {
    "laisse": "CXXXVI",
@@ -5253,34 +5239,16 @@
    "tr": "And the messengers dismounted on foot,"
   },
   {
-   "laisse": "XXVII",
-   "line": 356,
-   "of": "Que estrait estes de mult grant parented.»",
-   "tr": "Since you are descended from a very great lineage.»"
-  },
-  {
    "laisse": "XXXI",
    "line": 406,
    "of": "Que en Sarraguce descendent suz un if.",
    "tr": "That in Saragossa they dismount beneath a yew."
   },
   {
-   "laisse": "LVII",
-   "line": 730,
-   "of": "D'enz de la sale uns veltres avalat,",
-   "tr": "From within the hall a hound came bounding down,"
-  },
-  {
    "laisse": "LXV",
    "line": 810,
    "of": "N'en descendrat pur malvaises nuveles,",
    "tr": "He will not come down from them for any bad news,"
-  },
-  {
-   "laisse": "LXXXI",
-   "line": 1037,
-   "of": "Cum il einz pout, del pui est avalet,",
-   "tr": "As fast as he could, he came down from the hill,"
   },
   {
    "laisse": "LXXXIX",
@@ -5781,12 +5749,6 @@
    "tr": "Blancandrin said: «Roland is most fearsome,"
   },
   {
-   "laisse": "XXXI",
-   "line": 411,
-   "of": "N'i ad celoi ki mot sunt ne mot tint,",
-   "tr": "There is none among them who speaks a word nor utters a word,"
-  },
-  {
    "laisse": "XXXII",
    "line": 416,
    "of": "E dist al rei: «Salvez seiez de Mahun",
@@ -6091,12 +6053,6 @@
    "line": 1006,
    "of": "Dist Oliver: «Sire cumpainz, ce crei,",
    "tr": "Oliver said: «Sir comrade, I believe"
-  },
-  {
-   "laisse": "LXXX",
-   "line": 1027,
-   "of": "«Mis parrastre est, ne voeill que mot en suns.»",
-   "tr": "«He is my stepfather, I do not wish that you say a word of it.»"
   },
   {
    "laisse": "LXXXII",
@@ -6801,12 +6757,34 @@
    "tr": "The Franks say: «Greatly do our men decline!»"
   }
  ],
+ "déclore": [
+  {
+   "laisse": "XCIII",
+   "line": 1199,
+   "of": "L'escut li freint e l'osberc li desclot,",
+   "tr": "He shatters his shield and breaks open his hauberk,"
+  },
+  {
+   "laisse": "CXXII",
+   "line": 1619,
+   "of": "Aprof li ad sa bronie desclose,",
+   "tr": "Then he has ripped open his hauberk,"
+  }
+ ],
  "découdre": [
   {
    "laisse": "CXLV",
    "line": 1945,
    "of": "Le blanc osberc li ad descust el cors,",
    "tr": "He has split open the white hauberk against his body,"
+  }
+ ],
+ "défaillir": [
+  {
+   "laisse": "CXXXI",
+   "line": 1733,
+   "of": "Oi nus defalt la leial cumpaignie:",
+   "tr": "Today the loyal fellowship fails us:"
   }
  ],
  "défaire": [
@@ -6827,18 +6805,6 @@
    "line": 934,
    "of": "«En Rencesvals irai l'orgoill desfaire.",
    "tr": "«To Roncevaux I will go to undo their pride."
-  },
-  {
-   "laisse": "XCV",
-   "line": 1247,
-   "of": "L'escut li freinst, l'osberc li descumfist,",
-   "tr": "He shattered his shield, he broke apart his hauberk,"
-  },
-  {
-   "laisse": "CII",
-   "line": 1305,
-   "of": "L'escut li freinst, l'osberc li descumfist,",
-   "tr": "He shattered his shield, he tore apart his hauberk,"
   }
  ],
  "défendre": [
@@ -6863,6 +6829,40 @@
    "tr": "In no way had you defied me!»"
   }
  ],
+ "déguerpir": [
+  {
+   "laisse": "XXXV",
+   "line": 465,
+   "of": "Mais de s'espee ne volt mie guerpir;",
+   "tr": "But he would by no means give up his sword;"
+  },
+  {
+   "laisse": "XL",
+   "line": 536,
+   "of": "Meilz voelt murir que guerpir sun barnet.»",
+   "tr": "He would rather die than abandon his noble company.»"
+  },
+  {
+   "laisse": "CXXV",
+   "line": 1658,
+   "of": "Voelent u nun, si guerpissent le camp.",
+   "tr": "Willing or not, they abandon the field."
+  },
+  {
+   "laisse": "CXLII",
+   "line": 1908,
+   "of": "Ja pur murir le camp ne guerpirunt.»",
+   "tr": "Even on pain of death they will not abandon the field.»"
+  }
+ ],
+ "déjeter": [
+  {
+   "laisse": "XV",
+   "line": 226,
+   "of": "Ki ço vos lodet que cest plait degetuns,",
+   "tr": "Whoever advises you that we reject this agreement,"
+  }
+ ],
  "démailler": [
   {
    "laisse": "XCVII",
@@ -6879,6 +6879,20 @@
    "tr": "Whoever had seen him dismember the Saracens,"
   }
  ],
+ "démener": [
+  {
+   "laisse": "XL",
+   "line": 525,
+   "of": "Par tantes teres ad sun cors demened,",
+   "tr": "Through so many lands he has driven his body,"
+  },
+  {
+   "laisse": "CXXXIX",
+   "line": 1844,
+   "of": "N'i ad icel ne demeint irance",
+   "tr": "There is not one of them but feels grief"
+  }
+ ],
  "démentir": [
   {
    "laisse": "LXIII",
@@ -6887,12 +6901,12 @@
    "tr": "May God confound me, if I belie my lineage!"
   }
  ],
- "dénombrer": [
+ "démontrer": [
   {
-   "laisse": "CXII",
-   "line": 1450,
-   "of": ".XX. escheles ad li reis anumbrees.",
-   "tr": "The king has counted twenty battalions."
+   "laisse": "XXXIX",
+   "line": 514,
+   "of": "Quant por ferir vus demustrai grant ire.",
+   "tr": "when I showed you great anger by making to strike you."
   }
  ],
  "départir": [
@@ -6917,12 +6931,12 @@
    "tr": "That between my hands my lance was shattered,"
   }
  ],
- "désarçonner": [
+ "déranger": [
   {
-   "laisse": "CXVII",
-   "line": 1555,
-   "of": ".VII. Arrabiz i ad deschevalcet:",
-   "tr": "He has unhorsed seven Arabs:"
+   "laisse": "LXV",
+   "line": 809,
+   "of": "Gualter desrenget les destreiz e les tertres,",
+   "tr": "Gautier ranges over the passes and the hills,"
   }
  ],
  "déserter": [
@@ -6933,32 +6947,20 @@
    "tr": "today laid waste by such cruel ruin."
   }
  ],
- "déshonorer": [
-  {
-   "laisse": "XLIX",
-   "line": 631,
-   "of": "Par quel mesure le poüssum hunir.»",
-   "tr": "As to by what means we might dishonor him.»"
-  },
-  {
-   "laisse": "LXXVII",
-   "line": 969,
-   "of": "Franceis murrunt e France en ert hunie;",
-   "tr": "The French will die and France will be shamed by it;"
-  },
-  {
-   "laisse": "CXLIII",
-   "line": 1926,
-   "of": "Que dulce France par nus ne seit hunie!",
-   "tr": "Let sweet France not be dishonored through us!"
-  }
- ],
  "désirer": [
   {
    "laisse": "CXIII",
    "line": 1481,
    "of": "Cum il le vit, a ferir le desiret.",
    "tr": "As soon as he saw him, he longed to strike him."
+  }
+ ],
+ "détordre": [
+  {
+   "laisse": "LXI",
+   "line": 772,
+   "of": "Si duist sa barbe, e detoerst sun gernun;",
+   "tr": "He smoothed his beard, and twisted his moustache;"
   }
  ],
  "détourner": [
@@ -6977,20 +6979,28 @@
    "tr": "Through Ganelon France will be destroyed,"
   }
  ],
- "dévaster": [
-  {
-   "laisse": "LV",
-   "line": 703,
-   "of": "Carles li magnes ad Espaigne guastede",
-   "tr": "Charles the Great has laid waste to Spain,"
-  }
- ],
  "effrayer": [
   {
    "laisse": "XXXIII",
    "line": 438,
    "of": "Li reis Marsilies en fut mult esfreed.",
    "tr": "King Marsile was much frightened by this."
+  }
+ ],
+ "embattre": [
+  {
+   "laisse": "XCVI",
+   "line": 1266,
+   "of": "Sun bon espiet enz el cors li enbat.",
+   "tr": "He drives his good spear into the body."
+  }
+ ],
+ "embroncher": [
+  {
+   "laisse": "CL",
+   "line": 2018,
+   "of": "Falt li le coer, le helme li embrunchet,",
+   "tr": "His heart fails him, his helmet droops down,"
   }
  ],
  "emmener": [
@@ -7009,12 +7019,12 @@
    "tr": "He held a javelin, which was feathered with gold,"
   }
  ],
- "empêcher": [
+ "employer": [
   {
-   "laisse": "CIII",
-   "line": 1318,
-   "of": "Ultre s'en vait, qu'il n'i ad desturber;",
-   "tr": "He passes on beyond, for there is nothing to stop him;"
+   "laisse": "LXXIX",
+   "line": 1013,
+   "of": "Or guart chascuns que granz colps (l')[i] empleit,",
+   "tr": "Now let each man take care to strike great blows there,"
   }
  ],
  "enchaîner": [
@@ -7031,20 +7041,12 @@
    "tr": "And chain him up just like a bear;"
   }
  ],
- "encourager": [
+ "encombrer": [
   {
-   "laisse": "CXXVIII",
-   "line": 1691,
-   "of": "«Bel sire, chers cumpainz, pur Deu, que vos enhaitet?",
-   "tr": "«Fair lord, dear comrade, in God's name, what cheers you?"
-  }
- ],
- "endurcir": [
-  {
-   "laisse": "CXII",
-   "line": 1459,
-   "of": "Bataille avrum e forte [e] aduree,",
-   "tr": "We shall have a battle, hard and grueling,"
+   "laisse": "II",
+   "line": 15,
+   "of": "«Oëz, seignurs, quel pecchet nus encumbret:",
+   "tr": "«Hear, my lords, what calamity weighs upon us:"
   }
  ],
  "endurer": [
@@ -7061,20 +7063,140 @@
    "tr": "And endure both fierce cold and great heat,"
   }
  ],
- "enfoncer": [
-  {
-   "laisse": "XCVI",
-   "line": 1266,
-   "of": "Sun bon espiet enz el cors li enbat.",
-   "tr": "He drives his good spear into the body."
-  }
- ],
  "enfouir": [
   {
    "laisse": "CXXXII",
    "line": 1748,
    "of": "Enfuerunt [nos] en aitres de musters;",
    "tr": "They will bury us in the churchyards of minsters;"
+  }
+ ],
+ "enfreindre": [
+  {
+   "laisse": "I",
+   "line": 5,
+   "of": "Mur ne citet n'i est remés a fraindre",
+   "tr": "no wall or city is left to be breached"
+  },
+  {
+   "laisse": "XXXVII",
+   "line": 486,
+   "of": "Freint le seel, getet en ad la cire,",
+   "tr": "He breaks the seal, has cast away the wax,"
+  },
+  {
+   "laisse": "LIII",
+   "line": 663,
+   "of": "Li quens Rollant il l'ad e prise e fraite;",
+   "tr": "Count Roland had taken and shattered it;"
+  },
+  {
+   "laisse": "XCIII",
+   "line": 1199,
+   "of": "L'escut li freint e l'osberc li desclot,",
+   "tr": "He shatters his shield and breaks open his hauberk,"
+  },
+  {
+   "laisse": "XCIV",
+   "line": 1227,
+   "of": "L'escut li freint e l'osberc li derumpt,",
+   "tr": "He shatters his shield and tears apart his hauberk,"
+  },
+  {
+   "laisse": "XCV",
+   "line": 1247,
+   "of": "L'escut li freinst, l'osberc li descumfist,",
+   "tr": "He shattered his shield, he broke apart his hauberk,"
+  },
+  {
+   "laisse": "XCVI",
+   "line": 1263,
+   "of": "Tute li freint la bucle de cristal,",
+   "tr": "He shatters the boss of crystal all over it,"
+  },
+  {
+   "laisse": "XCVII",
+   "line": 1270,
+   "of": "L'escut li freint e l'osberc li desmailet,",
+   "tr": "He shatters his shield and breaks apart the mail of his hauberk,"
+  },
+  {
+   "laisse": "XCVIII",
+   "line": 1276,
+   "of": "L'escut li freinst, ki est a flurs e ad ór,",
+   "tr": "He shattered his shield, which is wrought with flowers and gold,"
+  },
+  {
+   "laisse": "XCIX",
+   "line": 1283,
+   "of": "L'escut li freint desuz l'oree bucle,",
+   "tr": "He shatters his shield beneath the gilded boss,"
+  },
+  {
+   "laisse": "C",
+   "line": 1292,
+   "of": "L'escut del col li freint e escantelet,",
+   "tr": "He shatters and smashes to pieces the shield at his neck,"
+  },
+  {
+   "laisse": "CII",
+   "line": 1305,
+   "of": "L'escut li freinst, l'osberc li descumfist,",
+   "tr": "He shattered his shield, he tore apart his hauberk,"
+  },
+  {
+   "laisse": "CIII",
+   "line": 1314,
+   "of": "L'escut li freint suz la bucle d'or mer,",
+   "tr": "He shatters his shield beneath the boss of pure gold,"
+  },
+  {
+   "laisse": "CIV",
+   "line": 1323,
+   "of": "A .XV. cols l'ad fraite e [...] perdue,",
+   "tr": "At fifteen blows he has broken and lost it,"
+  },
+  {
+   "laisse": "CIV",
+   "line": 1326,
+   "of": "L'elme li freint u li carbuncle luisent,",
+   "tr": "He breaks his helm where the carbuncles gleam,"
+  },
+  {
+   "laisse": "CVI",
+   "line": 1354,
+   "of": "L'escut li freint, ki est ad or e a flur,",
+   "tr": "He shatters his shield, which is adorned with gold and flowers,"
+  },
+  {
+   "laisse": "CVIII",
+   "line": 1384,
+   "of": "Lur dous espiez enz el cors li unt frait,",
+   "tr": "Their two spears they have shattered in his body,"
+  },
+  {
+   "laisse": "CIX",
+   "line": 1398,
+   "of": "Tant hanste i ad e fraite e sanglente,",
+   "tr": "So many a lance there is, both shattered and bloody,"
+  },
+  {
+   "laisse": "CXVIII",
+   "line": 1574,
+   "of": "L'escut li freint e l'osberc li derumpt,",
+   "tr": "He shatters his shield and tears apart his hauberk,"
+  },
+  {
+   "laisse": "CXXII",
+   "line": 1618,
+   "of": "L'escut vermeill li freint, de col li portet;",
+   "tr": "He shatters his vermilion shield, tears it from his neck;"
+  },
+  {
+   "laisse": "CXLII",
+   "line": 1892,
+   "of": "L'escut li freint e l'osberc li derumpt,",
+   "tr": "He breaks his shield and tears apart his hauberk,"
   }
  ],
  "enfuir": [
@@ -7115,38 +7237,12 @@
    "tr": "What does it matter? Marsile has fled,"
   }
  ],
- "enhardir": [
+ "enluminer": [
   {
-   "laisse": "CXV",
-   "line": 1523,
-   "of": "A icest mot si s'esbaldissent Franc,",
-   "tr": "At this word the Franks take heart,"
-  }
- ],
- "enlever": [
-  {
-   "laisse": "XVI",
-   "line": 236,
-   "of": "Vos li avez tuz ses castels toluz,",
-   "tr": "You have taken from him all his castles,"
-  },
-  {
-   "laisse": "CXIV",
-   "line": 1487,
-   "of": "Siet el cheval qu'il tolit a Grossaille,",
-   "tr": "He sits on the horse that he took from Grossaille,"
-  },
-  {
-   "laisse": "CXVI",
-   "line": 1532,
-   "of": "A l'emperere si toldrat la curone.",
-   "tr": "And from the emperor he will take away the crown."
-  },
-  {
-   "laisse": "CXLVI",
-   "line": 1961,
-   "of": "Vaillant a un dener que m'i aies tolut,",
-   "tr": "That you took from me a single denier's worth,"
+   "laisse": "XL",
+   "line": 535,
+   "of": "De tel barnage l'ad Deus enluminet,",
+   "tr": "With such nobility has God illumined him,"
   }
  ],
  "enquérir": [
@@ -7175,18 +7271,6 @@
  ],
  "entendre": [
   {
-   "laisse": "II",
-   "line": 15,
-   "of": "«Oëz, seignurs, quel pecchet nus encumbret:",
-   "tr": "«Hear, my lords, what calamity weighs upon us:"
-  },
-  {
-   "laisse": "IV",
-   "line": 55,
-   "of": "N'orrat de nos paroles ne nuveles.",
-   "tr": "He will hear of us neither word nor news."
-  },
-  {
    "laisse": "XVI",
    "line": 232,
    "of": "E dist al rei: «Ben l'avez entendud,",
@@ -7199,244 +7283,16 @@
    "tr": "There is wisdom in it, provided it be heeded."
   },
   {
-   "laisse": "XX",
-   "line": 292,
-   "of": "Respunt Rollant: «Orgoill ói e folage.",
-   "tr": "Rollant answers: «I hear arrogance and folly."
-  },
-  {
-   "laisse": "XXI",
-   "line": 302,
-   "of": "Quant l'ot Rollant, si cumençat a rire. AOI.",
-   "tr": "When Roland heard it, he began to laugh. AOI."
-  },
-  {
-   "laisse": "XXIV",
-   "line": 321,
-   "of": "Oït l'avez, sur vos le jugent Franc.»",
-   "tr": "You have heard it, the Franks judge it against you.»"
-  },
-  {
-   "laisse": "XXV",
-   "line": 336,
-   "of": "- «Seignurs» dist Guenes, «vos en orrez noveles!»",
-   "tr": "- «Lords,» said Ganelon, «you will hear news of it!»"
-  },
-  {
-   "laisse": "XXXI",
-   "line": 412,
-   "of": "Pur les nuveles qu'il vuldreient oïr.",
-   "tr": "Because of the news they would wish to hear."
-  },
-  {
-   "laisse": "XXXII",
-   "line": 423,
-   "of": "Par lui orrez si avrez pais u nun.»",
-   "tr": "From him you will hear whether you will have peace or not.»"
-  },
-  {
-   "laisse": "XXXII",
-   "line": 424,
-   "of": "Respunt Marsilie: «Or diet, nus l'orrum!» AOI.",
-   "tr": "Marsile replies: «Let him speak now, we shall hear him!» AOI."
-  },
-  {
-   "laisse": "XXXV",
-   "line": 455,
-   "of": "Vos le doüssez esculter e oïr.»",
-   "tr": "You ought to have listened to him and heard him out.»"
-  },
-  {
-   "laisse": "XXXVII",
-   "line": 499,
-   "of": "Quant l'oït Guenes, l'espee en ad branlie;",
-   "tr": "When Ganelon heard this, he brandished his sword;"
-  },
-  {
-   "laisse": "XL",
-   "line": 522,
-   "of": "De Carlemagne vos voeill oïr parler.",
-   "tr": "I want to hear you speak of Charlemagne."
-  },
-  {
-   "laisse": "XLV",
-   "line": 601,
-   "of": "Quan l'ot Marsilie, si l'ad baiset el col,",
-   "tr": "When Marsile heard this, he kissed him on the neck,"
-  },
-  {
-   "laisse": "LVIII",
-   "line": 745,
-   "of": "Quant l'ot li reis, fierement le reguardet,",
-   "tr": "When the king heard this, fiercely he looks at him,"
-  },
-  {
-   "laisse": "LIX",
-   "line": 751,
-   "of": "Li quens Rollant quant il s'oït juger,",
-   "tr": "Count Roland, when he hears himself thus assigned,"
-  },
-  {
-   "laisse": "LX",
-   "line": 761,
-   "of": "Quant ot Rollant, qu'il ert en la rereguarde,",
-   "tr": "When Roland heard that he would be in the rearguard,"
-  },
-  {
    "laisse": "LXII",
    "line": 776,
    "of": "E dist al rei: «Ben l'avez entendut;",
    "tr": "And he said to the king: «You have heard it well;"
   },
   {
-   "laisse": "LXVI",
-   "line": 817,
-   "of": "De .XV. lius en ot hom la rimur.",
-   "tr": "From fifteen leagues away one could hear their din."
-  },
-  {
-   "laisse": "LXXIV",
-   "line": 927,
-   "of": "Asez orrez, laquele irat desure.",
-   "tr": "Soon you will hear which one will prevail."
-  },
-  {
-   "laisse": "LXXIX",
-   "line": 1005,
-   "of": "Granz est la noise, si l'oïrent Franceis.",
-   "tr": "Great is the din, and the French heard it."
-  },
-  {
-   "laisse": "LXXXIII",
-   "line": 1052,
-   "of": "Si l'orrat Carles, si returnerat l'ost.»",
-   "tr": "Charles will hear it, and he will turn back the army.»"
-  },
-  {
-   "laisse": "LXXXIV",
-   "line": 1060,
-   "of": "Si l'orrat Carles, ferat l'ost returner,",
-   "tr": "Charles will hear it, will make the army turn back,"
-  },
-  {
-   "laisse": "LXXXV",
-   "line": 1071,
-   "of": "Si l'orrat Carles, ki est as porz passant.",
-   "tr": "Charles will hear it, he who is passing through the mountain passes."
-  },
-  {
-   "laisse": "XCII",
-   "line": 1181,
-   "of": "Ki dunc oïst «Munjoie» demander,",
-   "tr": "Whoever then had heard them call «Munjoie»"
-  },
-  {
-   "laisse": "XCIII",
-   "line": 1196,
-   "of": "Quant l'ot Rollant, Deus! si grant doel en out!",
-   "tr": "When Roland heard it, God! such great grief he had!"
-  },
-  {
-   "laisse": "XCIV",
-   "line": 1224,
-   "of": "Ot le Oliver, sin ad mult grant irur;",
-   "tr": "Oliver hears him, and feels very great wrath at it;"
-  },
-  {
-   "laisse": "XCV",
-   "line": 1243,
-   "of": "Ben l'entendit li arc[e]vesques Turpin.",
-   "tr": "Archbishop Turpin heard him well."
-  },
-  {
-   "laisse": "CVIII",
-   "line": 1386,
-   "of": "Ne l'oï dire ne jo mie nel sai",
-   "tr": "I never heard it told, nor do I know at all"
-  },
-  {
-   "laisse": "CXXIII",
-   "line": 1629,
-   "of": "Ben ad oït que Franceis se dementent;",
-   "tr": "He has clearly heard that the Franks are lamenting;"
-  },
-  {
-   "laisse": "CXXIII",
-   "line": 1633,
-   "of": "Sun ceval brochet, ki oït del cuntence.",
-   "tr": "He spurs his horse, which heard the dispute."
-  },
-  {
-   "laisse": "CXXIX",
-   "line": 1701,
-   "of": "Si l'orrat Carles, ki est as porz passant.",
-   "tr": "So Charles, who is passing through the passes, will hear it."
-  },
-  {
-   "laisse": "CXXX",
-   "line": 1712,
-   "of": "Jo cornerai, si l'orrat li reis Karles.»",
-   "tr": "I will sound the horn, and King Charles will hear it.»"
-  },
-  {
-   "laisse": "CXXXII",
-   "line": 1735,
-   "of": "Li arceves[ques] les ót cuntrarier,",
-   "tr": "The archbishop heard them quarreling,"
-  },
-  {
-   "laisse": "CXXXIII",
-   "line": 1754,
-   "of": "Granz .XXX. liwes l'oïrent il respundre.",
-   "tr": "They heard it echo back a full thirty leagues."
-  },
-  {
-   "laisse": "CXXXIII",
-   "line": 1755,
-   "of": "Karles l'oït e ses cumpaignes tutes.",
-   "tr": "Charles heard it, and all his companions."
-  },
-  {
-   "laisse": "CXXXIV",
-   "line": 1764,
-   "of": "Karles l'entent, ki est as porz passant.",
-   "tr": "Charles hears it, who is passing through the gorges."
-  },
-  {
-   "laisse": "CXXXIV",
-   "line": 1765,
-   "of": "Naimes li duc l'oïd, si l'escultent li Franc.",
-   "tr": "Naimes the duke heard it, and the Franks listen to it."
-  },
-  {
-   "laisse": "CXXXIV",
-   "line": 1766,
-   "of": "Ce dist li reis: «Jo oi le corn Rollant!",
-   "tr": "The king says: «I hear Roland's horn!"
-  },
-  {
    "laisse": "CXXXV",
    "line": 1786,
    "of": "Karles l'oït e ses Franceis l'entendent,",
    "tr": "Charles hears it and his Franks hear it,"
-  },
-  {
-   "laisse": "CXXXV",
-   "line": 1793,
-   "of": "Asez oez que Rollant se dementet!»",
-   "tr": "You hear well enough that Roland laments!»"
-  },
-  {
-   "laisse": "CXLIX",
-   "line": 2002,
-   "of": "Dist Oliver: «Or vos oi jo parler;",
-   "tr": "Oliver says: «Now I hear you speak;"
-  },
-  {
-   "laisse": "CL",
-   "line": 2022,
-   "of": "Jamais en tere n'orrez plus dolent hume!",
-   "tr": "Never on earth will you hear a more grieving man!"
   }
  ],
  "entreprendre": [
@@ -7549,6 +7405,20 @@
    "tr": "To your wife I will send two necklaces;"
   }
  ],
+ "errer": [
+  {
+   "laisse": "XI",
+   "line": 167,
+   "of": "Par cels de France voelt il del tut errer. AOI.",
+   "tr": "Through those of France he wishes to act in everything. AOI."
+  },
+  {
+   "laisse": "XXXVII",
+   "line": 497,
+   "of": "Tant ad erret nen est dreiz que plus vivet.",
+   "tr": "He has gone so far that it is not right that he live longer."
+  }
+ ],
  "escrimer": [
   {
    "laisse": "VIII",
@@ -7557,20 +7427,54 @@
    "tr": "And the nimble young squires fence."
   }
  ],
+ "esquiver": [
+  {
+   "laisse": "LXXXVII",
+   "line": 1096,
+   "of": "Ja pur murir n'eschiverunt bataille.",
+   "tr": "Never, even on pain of death, will they shun battle."
+  }
+ ],
  "ester": [
+  {
+   "laisse": "XIX",
+   "line": 265,
+   "of": "E dist al rei: «Laisez ester voz Francs!",
+   "tr": "And said to the king: «Let your Franks be!"
+  },
   {
    "laisse": "LIV",
    "line": 671,
    "of": "Sur l'erbe verte estut devant sun tref.",
    "tr": "On the green grass he stood before his tent."
+  },
+  {
+   "laisse": "LXXXII",
+   "line": 1046,
+   "of": "El camp estez, que ne seium vencuz!",
+   "tr": "Hold the field, that we be not vanquished!»"
+  },
+  {
+   "laisse": "LXXXIX",
+   "line": 1134,
+   "of": "Se vos murez, esterez seinz martirs,",
+   "tr": "If you die, you will be holy martyrs,"
   }
  ],
- "estimer": [
+ "exploiter": [
   {
-   "laisse": "L",
-   "line": 636,
-   "of": "«Car mult vos priset mi sire e tuit si hume.",
-   "tr": "«For my lord esteems you greatly, and all his men."
+   "laisse": "XXX",
+   "line": 395,
+   "of": "Par quele gent quiet il espleiter tant?»",
+   "tr": "With what people does he think to achieve so much?»"
+  }
+ ],
+ "extraire": [
+  {
+   "laisse": "XXVII",
+   "line": 356,
+   "of": "Que estrait estes de mult grant parented.»",
+   "tr": "Since you are descended from a very great lineage.»"
   }
  ],
  "faillir": [
@@ -8225,56 +8129,6 @@
    "tr": "You never did me wrong, nor did I wrong you."
   }
  ],
- "falloir": [
-  {
-   "laisse": "VIII",
-   "line": 119,
-   "of": "S'est, kil demandet, ne l estoet enseigner.",
-   "tr": "He is so, whoever seeks him, that there is no need to point him out."
-  },
-  {
-   "laisse": "XIII",
-   "line": 192,
-   "of": "Dient Franceis: «Il nus i cuvent guarde!» AOI.",
-   "tr": "The Franks say: «We must be on our guard in this!» AOI."
-  },
-  {
-   "laisse": "XXIII",
-   "line": 310,
-   "of": "«En Sarraguce sai ben, [qu']aler m'estoet.",
-   "tr": "«I know well that I must go to Saragossa."
-  },
-  {
-   "laisse": "XXIII",
-   "line": 313,
-   "of": "Sin ai un filz, ja plus bels n'en estoet:",
-   "tr": "and by her I have a son, there is none more handsome:"
-  },
-  {
-   "laisse": "XXIII",
-   "line": 318,
-   "of": "Puisquel comant, aler vus en estoet.»",
-   "tr": "Since I command it, you must go.»"
-  },
-  {
-   "laisse": "XC",
-   "line": 1151,
-   "of": "Mais as espees l'estuvrat esleger.» AOI.",
-   "tr": "But it will have to be settled with swords.» AOI."
-  },
-  {
-   "laisse": "XCV",
-   "line": 1242,
-   "of": "Or est le jur qu'els estuvrat murir.»",
-   "tr": "Now is the day when they must die.»"
-  },
-  {
-   "laisse": "XCV",
-   "line": 1257,
-   "of": "Nuveles vos di: mort vos estoet susfrir.",
-   "tr": "News I tell you: you must suffer death."
-  }
- ],
  "feindre": [
   {
    "laisse": "CXXXV",
@@ -8289,12 +8143,6 @@
    "line": 304,
    "of": "Dunc ad tel doel pur poi d'ire ne fent,",
    "tr": "then he has such grief that he nearly bursts from rage,"
-  },
-  {
-   "laisse": "XCIII",
-   "line": 1199,
-   "of": "L'escut li freint e l'osberc li desclot,",
-   "tr": "He shatters his shield and breaks open his hauberk,"
   },
   {
    "laisse": "CX",
@@ -8339,6 +8187,14 @@
    "line": 711,
    "of": "Halbercs vestuz e tres bien fermeez",
    "tr": "hauberks donned and very well fastened,"
+  }
+ ],
+ "fiancer": [
+  {
+   "laisse": "III",
+   "line": 41,
+   "of": "U dis u vint pur lui afiancer.",
+   "tr": "Either ten or twenty, to give him assurance."
   }
  ],
  "fier": [
@@ -8399,12 +8255,12 @@
    "tr": "If I find Roland, he will be finished by death,"
   }
  ],
- "fixer": [
+ "flamber": [
   {
-   "laisse": "CLI",
-   "line": 2032,
-   "of": "Afermet est a ses estreus d'or fin:",
-   "tr": "He is held fast in his stirrups of fine gold:"
+   "laisse": "LXXIX",
+   "line": 1003,
+   "of": "N'unt guarnement que tut ne reflambeit.",
+   "tr": "They have no piece of armor that does not all blaze with light."
   }
  ],
  "fleurir": [
@@ -8415,21 +8271,55 @@
    "tr": "White is his beard and all blossomed his head,"
   }
  ],
- "flotter": [
+ "forfaire": [
   {
-   "laisse": "IV",
-   "line": 48,
-   "of": "E par la barbe ki al piz me ventelet,",
-   "tr": "And by the beard that flutters on my chest,"
+   "laisse": "XLVI",
+   "line": 608,
+   "of": "La traïsun jurat, e si s'en est forsfait. AOI.",
+   "tr": "He swore the betrayal, and thus made himself guilty of it. AOI."
   },
   {
-   "laisse": "LXXVIII",
-   "line": 976,
-   "of": "Jusqu'a la tere si chevoel li balient;",
-   "tr": "His hair sweeps down to the ground;"
+   "laisse": "CVIII",
+   "line": 1392,
+   "of": "Ço dist Turpin: «Icist nos ert forsfait.»",
+   "tr": "Turpin says: «This one has done us wrong.»"
+  },
+  {
+   "laisse": "CLI",
+   "line": 2028,
+   "of": "Nem fesis mal ne jo nel te forsfis.",
+   "tr": "You never did me wrong, nor did I wrong you."
   }
  ],
- "frapper": [
+ "froisser": [
+  {
+   "laisse": "XVI",
+   "line": 237,
+   "of": "Od voz caables avez fruiset ses murs,",
+   "tr": "With your siege engines you have shattered his walls,"
+  },
+  {
+   "laisse": "CIII",
+   "line": 1317,
+   "of": "La hanste fruisset, mie n'en a(d)[b]atiet.",
+   "tr": "The shaft splinters, none of it is struck down."
+  }
+ ],
+ "fuir": [
+  {
+   "laisse": "XCV",
+   "line": 1255,
+   "of": "Nostre Franceis n'unt talent de fuïr.",
+   "tr": "Our Franks have no wish to flee."
+  },
+  {
+   "laisse": "CXXIV",
+   "line": 1642,
+   "of": "Fuïr s'en voel, mais ne li valt nient:",
+   "tr": "He wishes to flee from it, but it avails him nothing:"
+  }
+ ],
+ "férir": [
   {
    "laisse": "XXXIII",
    "line": 440,
@@ -8905,65 +8795,15 @@
    "tr": "I have struck you, so forgive me for it!»"
   }
  ],
- "fuir": [
+ "gager": [
   {
-   "laisse": "XCV",
-   "line": 1255,
-   "of": "Nostre Franceis n'unt talent de fuïr.",
-   "tr": "Our Franks have no wish to flee."
-  },
-  {
-   "laisse": "CXXIV",
-   "line": 1642,
-   "of": "Fuïr s'en voel, mais ne li valt nient:",
-   "tr": "He wishes to flee from it, but it avails him nothing:"
-  }
- ],
- "féliciter": [
-  {
-   "laisse": "CXLV",
-   "line": 1949,
-   "of": "Tort nos ad fait: nen est dreiz qu'il s'en lot,",
-   "tr": "He has wronged us: it is not right that he should boast of it,"
+   "laisse": "XXXIX",
+   "line": 515,
+   "of": "Guaz vos en dreit par cez pels sabelines;",
+   "tr": "I pledge you amends by these sable furs;"
   }
  ],
  "garantir": [
-  {
-   "laisse": "III",
-   "line": 41,
-   "of": "U dis u vint pur lui afiancer.",
-   "tr": "Either ten or twenty, to give him assurance."
-  },
-  {
-   "laisse": "LXXVII",
-   "line": 968,
-   "of": "Jo vos plevis qu'en vermeill sanc ert mise.",
-   "tr": "I pledge to you that it will be set in crimson blood."
-  },
-  {
-   "laisse": "LXXXIII",
-   "line": 1058,
-   "of": "Jo vos plevis, tuz sunt jugez a mort.» AOI.",
-   "tr": "I pledge you, all are condemned to death.» AOI."
-  },
-  {
-   "laisse": "LXXXIV",
-   "line": 1069,
-   "of": "Jo vos plevis, tuz sunt a mort livrez.» AOI.",
-   "tr": "I pledge you, they are all delivered up to death.» AOI."
-  },
-  {
-   "laisse": "LXXXV",
-   "line": 1072,
-   "of": "Je vos plevis, ja returnerunt Franc.»",
-   "tr": "I guarantee you, the Franks will return at once.»"
-  },
-  {
-   "laisse": "CXXIX",
-   "line": 1702,
-   "of": "Jo vos plevis ja returnerunt Franc.»",
-   "tr": "I pledge to you the Franks will return at once.»"
-  },
   {
    "laisse": "CXL",
    "line": 1863,
@@ -8991,6 +8831,12 @@
    "tr": "Guard him well, for I shall never see him again with my eyes.»"
   },
   {
+   "laisse": "XXXVII",
+   "line": 487,
+   "of": "Guardet al bref, vit la raisun escrite:",
+   "tr": "He looks at the letter, saw the writing set down there:"
+  },
+  {
    "laisse": "LII",
    "line": 650,
    "of": "Guardez de nos ne turnez le curage.",
@@ -9015,10 +8861,34 @@
    "tr": "Now let each man take care to strike great blows there,"
   },
   {
+   "laisse": "LXXX",
+   "line": 1018,
+   "of": "Guardet su destre par mi un val herbus,",
+   "tr": "He looks to his right across a grassy valley,"
+  },
+  {
+   "laisse": "LXXXVII",
+   "line": 1103,
+   "of": "Guardez amunt devers les porz d'Espaigne:",
+   "tr": "Look up toward the passes of Spain:"
+  },
+  {
    "laisse": "XCIII",
    "line": 1192,
    "of": "Traït vos ad ki a guarder vos out.",
    "tr": "He who should have guarded you has betrayed you."
+  },
+  {
+   "laisse": "XCIV",
+   "line": 1230,
+   "of": "Guardet a tere, veit gesir le glutun,",
+   "tr": "He looks to the ground, sees the wretch lying there,"
+  },
+  {
+   "laisse": "XCV",
+   "line": 1251,
+   "of": "Guardet arere, veit le glutun gesir,",
+   "tr": "He looks behind, sees the wretch lying there,"
   },
   {
    "laisse": "CXXXVII",
@@ -9057,30 +8927,6 @@
  ],
  "guerroyer": [
   {
-   "laisse": "III",
-   "line": 35,
-   "of": "En ceste tere ad asez osteiet;",
-   "tr": "In this land he has campaigned long enough;"
-  },
-  {
-   "laisse": "XL",
-   "line": 528,
-   "of": "Quant ert il mais recreanz d'osteier?»",
-   "tr": "When will he ever be weary of waging war?»"
-  },
-  {
-   "laisse": "XLI",
-   "line": 543,
-   "of": "Quant ert il mais recreanz d'osteier?»",
-   "tr": "when will he ever be weary of waging war?»"
-  },
-  {
-   "laisse": "XLII",
-   "line": 556,
-   "of": "Quant ier il mais d'osteier recreant?»",
-   "tr": "When will he ever weary of waging war?»"
-  },
-  {
    "laisse": "XLIII",
    "line": 579,
    "of": "N'avrat talent, que ja mais vus guerreit.» AOI.",
@@ -9115,6 +8961,12 @@
    "tr": "Charles answers: «He may yet be saved.» AOI."
   },
   {
+   "laisse": "XXVII",
+   "line": 354,
+   "of": "Par Charlemagne n'er(cs) guariz ne tensez.",
+   "tr": "Will not be protected nor defended by Charlemagne."
+  },
+  {
    "laisse": "LXXXIX",
    "line": 1133,
    "of": "Asoldrai vos pur voz anmes guarir.",
@@ -9125,6 +8977,38 @@
    "line": 1241,
    "of": "Ja pur Charles n'i ert un sul guarit:",
    "tr": "Never, for all of Charles, shall a single one be saved:"
+  },
+  {
+   "laisse": "CIII",
+   "line": 1316,
+   "of": "Deus le guarit, qu'el(l) cors ne l'ad tuchet.",
+   "tr": "God protects him, for it did not touch his body."
+  },
+  {
+   "laisse": "CXI",
+   "line": 1439,
+   "of": "De cent millers n'en poent guarir dous.",
+   "tr": "Of a hundred thousand not two of them can escape."
+  },
+  {
+   "laisse": "CXVI",
+   "line": 1537,
+   "of": "Nel poet guarir sun escut ne sa bronie:",
+   "tr": "Neither his shield nor his hauberk can protect him:"
+  },
+  {
+   "laisse": "CXXXVIII",
+   "line": 1836,
+   "of": "E p[ri]ent Deu qu'il guarisset Rollant",
+   "tr": "And they pray to God that He keep Roland safe"
+  }
+ ],
+ "gâter": [
+  {
+   "laisse": "LV",
+   "line": 703,
+   "of": "Carles li magnes ad Espaigne guastede",
+   "tr": "Charles the Great has laid waste to Spain,"
   }
  ],
  "gésir": [
@@ -9165,6 +9049,12 @@
    "tr": "So many good vassals you see lying upon the ground!"
   },
   {
+   "laisse": "CXXX",
+   "line": 1719,
+   "of": "Ne jerrei(e)z ja mais entre sa brace!» AOI.",
+   "tr": "You shall never lie in her arms!» AOI."
+  },
+  {
    "laisse": "CXXXIX",
    "line": 1842,
    "of": "Desur (...) sa brunie li gist sa blanche barbe.",
@@ -9197,6 +9087,26 @@
    "tr": "Under heaven there is no man he would so wish to hate;"
   }
  ],
+ "honnir": [
+  {
+   "laisse": "XLIX",
+   "line": 631,
+   "of": "Par quel mesure le poüssum hunir.»",
+   "tr": "As to by what means we might dishonor him.»"
+  },
+  {
+   "laisse": "LXXVII",
+   "line": 969,
+   "of": "Franceis murrunt e France en ert hunie;",
+   "tr": "The French will die and France will be shamed by it;"
+  },
+  {
+   "laisse": "CXLIII",
+   "line": 1926,
+   "of": "Que dulce France par nus ne seit hunie!",
+   "tr": "Let sweet France not be dishonored through us!"
+  }
+ ],
  "hâter": [
   {
    "laisse": "LXXVIII",
@@ -9207,50 +9117,10 @@
  ],
  "héberger": [
   {
-   "laisse": "XI",
-   "line": 160,
-   "of": "Les dis messages ad fait enz hosteler;",
-   "tr": "The ten messengers he has had lodged within;"
-  }
- ],
- "illuminer": [
-  {
-   "laisse": "XL",
-   "line": 535,
-   "of": "De tel barnage l'ad Deus enluminet,",
-   "tr": "With such nobility has God illumined him,"
-  }
- ],
- "importer": [
-  {
-   "laisse": "XV",
-   "line": 227,
-   "of": "Ne li chalt, sire, de quel mort nus muriuns.",
-   "tr": "Cares not, sire, by what death we may die."
-  },
-  {
-   "laisse": "CIX",
-   "line": 1404,
-   "of": "De ço qui calt? N'en avrunt sucurance.",
-   "tr": "What does it matter? They will have no help from it."
-  },
-  {
-   "laisse": "CXXXVI",
-   "line": 1804,
-   "of": "De ço qui calt? car demuret i unt trop.",
-   "tr": "What does it matter? For they have tarried too long."
-  },
-  {
-   "laisse": "CXXXVIII",
-   "line": 1839,
-   "of": "De ço qui calt? car ne lur valt nient.",
-   "tr": "But what use is it? It avails them nothing."
-  },
-  {
-   "laisse": "CXLIII",
-   "line": 1912,
-   "of": "De ço qui calt? Se fuit s'en est Marsilies,",
-   "tr": "What does it matter? Marsile has fled,"
+   "laisse": "LV",
+   "line": 709,
+   "of": "Franc se herbergent par tute la cuntree.",
+   "tr": "The Franks make camp throughout the countryside."
   }
  ],
  "incliner": [
@@ -9267,48 +9137,18 @@
    "tr": "At that word the one bowed to the other."
   }
  ],
- "inquiéter": [
+ "issir": [
   {
-   "laisse": "III",
-   "line": 27,
-   "of": "E dist al rei: «Ore ne vus esmaiez!",
-   "tr": "And he said to the king: «Now do not be dismayed!"
+   "laisse": "XCIV",
+   "line": 1220,
+   "of": "Ist de la prese, si se met en bandun,",
+   "tr": "He springs out of the press and flings himself forward,"
   },
-  {
-   "laisse": "LXXIV",
-   "line": 920,
-   "of": "Ço dist al rei: «Ne vos esmaiez unches!",
-   "tr": "He said to the king: «Never be dismayed!"
-  },
-  {
-   "laisse": "LXXVII",
-   "line": 962,
-   "of": "E dist al rei: «Ne vos esmaiez mie!",
-   "tr": "And said to the king: «Do not be dismayed at all!"
-  }
- ],
- "inviter": [
-  {
-   "laisse": "XVII",
-   "line": 251,
-   "of": "Alez sedeir, quant nuls ne vos sumunt.»",
-   "tr": "Go sit down, since no one summons you.»"
-  }
- ],
- "irriter": [
-  {
-   "laisse": "LXII",
-   "line": 777,
-   "of": "Li quens Rollant, il est mult irascut.",
-   "tr": "Count Roland, he is very angry."
-  }
- ],
- "jaillir": [
   {
    "laisse": "CXXXIV",
-   "line": 1761,
-   "of": "Par mi la buche en salt fors li cler sancs.",
-   "tr": "Out through his mouth the bright blood leaps forth."
+   "line": 1774,
+   "of": "Fors s'en eissirent li Sarrazins dedenz,",
+   "tr": "The Saracens within sallied forth,"
   }
  ],
  "jeter": [
@@ -9381,28 +9221,10 @@
    "tr": "At Roncevaux I will go to join Roland,"
   },
   {
-   "laisse": "XCI",
-   "line": 1169,
-   "of": "A cez paroles vunt les oz ajustant. AOI.",
-   "tr": "At these words the hosts go closing in. AOI."
-  },
-  {
-   "laisse": "XCII",
-   "line": 1187,
-   "of": "Francs e paiens, as les vus ajustez.",
-   "tr": "Franks and pagans, now they are joined in battle."
-  },
-  {
    "laisse": "CL",
    "line": 2014,
    "of": "Cuntre le ciel ambesdous ses mains juintes,",
    "tr": "Toward heaven both his hands joined,"
-  },
-  {
-   "laisse": "CL",
-   "line": 2019,
-   "of": "Trestut le cors a la tere li justet.",
-   "tr": "His whole body sinks down to the ground."
   }
  ],
  "jouer": [
@@ -9423,6 +9245,26 @@
    "line": 1476,
    "of": "Unches nuls hom nel vit juer ne rire.",
    "tr": "Never did any man see him play or laugh."
+  }
+ ],
+ "jouter": [
+  {
+   "laisse": "XCIII",
+   "line": 1191,
+   "of": "«Feluns Franceis, hoi justerez as noz,",
+   "tr": "«Felon French, today you shall joust with ours,"
+  },
+  {
+   "laisse": "CXLVII",
+   "line": 1975,
+   "of": "«Sire cumpaign, a mei car vus justez!",
+   "tr": "«Lord companion, come now, join me here!"
+  },
+  {
+   "laisse": "CL",
+   "line": 2019,
+   "of": "Trestut le cors a la tere li justet.",
+   "tr": "His whole body sinks down to the ground."
   }
  ],
  "juger": [
@@ -9518,18 +9360,6 @@
   }
  ],
  "jurer": [
-  {
-   "laisse": "XXXI",
-   "line": 403,
-   "of": "Que l'un a l'altre la sue feit plevit,",
-   "tr": "That each pledged his faith to the other,"
-  },
-  {
-   "laisse": "XXXVIII",
-   "line": 507,
-   "of": "De nostre prod m'ad plevie sa feid.»",
-   "tr": "He has pledged me his faith concerning our advantage.»"
-  },
   {
    "laisse": "XLVI",
    "line": 605,
@@ -9739,38 +9569,6 @@
    "tr": "Charlemagne left you at the passes to your sorrow!"
   }
  ],
- "lamenter": [
-  {
-   "laisse": "CIX",
-   "line": 1403,
-   "of": "Karles li magnes en pluret, si se demente.",
-   "tr": "Charles the Great weeps for it, and laments."
-  },
-  {
-   "laisse": "CXXIII",
-   "line": 1629,
-   "of": "Ben ad oït que Franceis se dementent;",
-   "tr": "He has clearly heard that the Franks are lamenting;"
-  },
-  {
-   "laisse": "CXXXV",
-   "line": 1793,
-   "of": "Asez oez que Rollant se dementet!»",
-   "tr": "You hear well enough that Roland laments!»"
-  },
-  {
-   "laisse": "CXXXVIII",
-   "line": 1835,
-   "of": "N'i ad celoi n'i plurt e se dement,",
-   "tr": "There is not one of them who does not weep and lament,"
-  },
-  {
-   "laisse": "CL",
-   "line": 2021,
-   "of": "Rollant li ber le pluret, sil duluset;",
-   "tr": "Roland the brave weeps for him, laments him;"
-  }
- ],
  "laver": [
   {
    "laisse": "CXXXIV",
@@ -9843,20 +9641,6 @@
    "tr": "By force you will be taken and bound;"
   }
  ],
- "lisser": [
-  {
-   "laisse": "XV",
-   "line": 215,
-   "of": "Si duist sa barbe, afaitad sun gernun,",
-   "tr": "He smoothed his beard, arranged his mustache,"
-  },
-  {
-   "laisse": "LXI",
-   "line": 772,
-   "of": "Si duist sa barbe, e detoerst sun gernun;",
-   "tr": "He smoothed his beard, and twisted his moustache;"
-  }
- ],
  "livrer": [
   {
    "laisse": "XVII",
@@ -9915,16 +9699,46 @@
    "tr": "Well will he be able to pay his soldiers with it."
   },
   {
+   "laisse": "IX",
+   "line": 133,
+   "of": "Dunt bien purrez voz soldeiers luer.",
+   "tr": "that you will well be able to pay your soldiers."
+  },
+  {
+   "laisse": "XIV",
+   "line": 206,
+   "of": "Loerent vos alques de legerie.",
+   "tr": "They advised you somewhat foolishly."
+  },
+  {
+   "laisse": "XV",
+   "line": 226,
+   "of": "Ki ço vos lodet que cest plait degetuns,",
+   "tr": "Whoever advises you that we reject this agreement,"
+  },
+  {
    "laisse": "XXXII",
    "line": 420,
    "of": "Loat sun Deu, ne fist altre respuns.",
    "tr": "Praised his God, made no other reply."
   },
   {
+   "laisse": "XL",
+   "line": 532,
+   "of": "Tant nel vos sai ne preiser ne loer",
+   "tr": "I cannot so praise him to you nor extol him"
+  },
+  {
    "laisse": "CXIX",
    "line": 1588,
    "of": "Ambure ocit, ki quel blasme ne quil lot.",
    "tr": "He kills them both, let who will blame or praise it."
+  },
+  {
+   "laisse": "CXLV",
+   "line": 1949,
+   "of": "Tort nos ad fait: nen est dreiz qu'il s'en lot,",
+   "tr": "He has wronged us: it is not right that he should boast of it,"
   }
  ],
  "luire": [
@@ -10079,22 +9893,6 @@
    "tr": "Neither wolf nor pig nor dog shall eat of us.»"
   }
  ],
- "manifester": [
-  {
-   "laisse": "CXXXIX",
-   "line": 1844,
-   "of": "N'i ad icel ne demeint irance",
-   "tr": "There is not one of them but feels grief"
-  }
- ],
- "manquer": [
-  {
-   "laisse": "CXXXI",
-   "line": 1733,
-   "of": "Oi nus defalt la leial cumpaignie:",
-   "tr": "Today the loyal fellowship fails us:"
-  }
- ],
  "mater": [
   {
    "laisse": "LXXI",
@@ -10221,12 +10019,6 @@
    "line": 584,
    "of": "Sa rereguarde avrat detres sei mise;",
    "tr": "He will have placed his rearguard behind him;"
-  },
-  {
-   "laisse": "L",
-   "line": 641,
-   "of": "Il les ad prises, en sa hoese les butet, AOI.",
-   "tr": "He took them, into his boot he stuffed them, AOI."
   },
   {
    "laisse": "LXXIV",
@@ -10397,14 +10189,6 @@
    "tr": "He thrust his spear out through the middle of his breast,"
   }
  ],
- "meurtrir": [
-  {
-   "laisse": "XLIV",
-   "line": 590,
-   "of": "La gent de France iert blecee e blesmie;",
-   "tr": "The host of France will be wounded and bruised;"
-  }
- ],
  "monter": [
   {
    "laisse": "VII",
@@ -10486,12 +10270,6 @@
   }
  ],
  "montrer": [
-  {
-   "laisse": "XXXIX",
-   "line": 514,
-   "of": "Quant por ferir vus demustrai grant ire.",
-   "tr": "when I showed you great anger by making to strike you."
-  },
   {
    "laisse": "CVII",
    "line": 1369,
@@ -10781,6 +10559,12 @@
  ],
  "mouvoir": [
   {
+   "laisse": "XX",
+   "line": 290,
+   "of": "Jo t'en muvra[i] un si grant contr[a]ire",
+   "tr": "I will stir up against you such a great calamity"
+  },
+  {
    "laisse": "CIV",
    "line": 1335,
    "of": "Apres li dist: «Culvert, mar i moüstes!",
@@ -10837,44 +10621,34 @@
    "tr": "He cannot help but be terrified by it,"
   }
  ],
- "naviguer": [
+ "mêler": [
   {
-   "laisse": "LIV",
-   "line": 688,
-   "of": "Einz qu'il oüssent .IIII. liues siglet,",
-   "tr": "Before they had sailed four leagues,"
+   "laisse": "XVIII",
+   "line": 257,
+   "of": "Jo me crendreie, que vos vos meslisez.",
+   "tr": "I would fear that you would come to blows."
   }
  ],
- "nommer": [
+ "navrer": [
   {
-   "laisse": "CXVI",
-   "line": 1533,
-   "of": "Siet el ceval qu'il cleimet Barbamusche,",
-   "tr": "He sits on the horse he calls Barbamusche,"
+   "laisse": "CXLVII",
+   "line": 1964,
+   "of": "Oliver sent qu'il est a mort nasfret.",
+   "tr": "Oliver feels that he is wounded to death."
   },
   {
-   "laisse": "CXVIII",
-   "line": 1570,
-   "of": "Siet el cheval qu'il cleimet Gramimund,",
-   "tr": "He sits on the horse he calls Gramimund,"
-  },
+   "laisse": "CXLIX",
+   "line": 1989,
+   "of": "E Oliver ki est a mort nasfret:",
+   "tr": "And Oliver, who is wounded to death:"
+  }
+ ],
+ "nombrer": [
   {
-   "laisse": "CXX",
-   "line": 1596,
-   "of": "Siet el ceval qu'il cleimet Salt Perdut:",
-   "tr": "He sits on the horse that he calls Salt Perdut:"
-  },
-  {
-   "laisse": "CXXII",
-   "line": 1614,
-   "of": "Siet el cheval que il cleimet Marmorie,",
-   "tr": "He sits on the horse that he calls Marmorie,"
-  },
-  {
-   "laisse": "CLI",
-   "line": 2031,
-   "of": "Sur sun ceval que cleimet Veillantif.",
-   "tr": "Upon his horse that is called Veillantif."
+   "laisse": "CXII",
+   "line": 1450,
+   "of": ".XX. escheles ad li reis anumbrees.",
+   "tr": "The king has counted twenty battalions."
   }
  ],
  "nourrir": [
@@ -10893,12 +10667,162 @@
    "tr": "There they were drowned, never will you see them again;"
   }
  ],
- "occuper": [
+ "occire": [
   {
-   "laisse": "LXV",
-   "line": 805,
-   "of": "Si purpernez les deserz e les tertres,",
-   "tr": "And occupy the wastelands and the hills,"
+   "laisse": "III",
+   "line": 43,
+   "of": "Par nun d'ocire i enveierai le men.",
+   "tr": "Even at the risk of death I will send mine."
+  },
+  {
+   "laisse": "VIII",
+   "line": 102,
+   "of": "Ne seit ocis, u devient chrestien.",
+   "tr": "Who is not slain, or becomes a Christian."
+  },
+  {
+   "laisse": "X",
+   "line": 149,
+   "of": "Pa[r] num de ocire i metrai un mien filz,",
+   "tr": "At risk of being slain, I will put there a son of mine,"
+  },
+  {
+   "laisse": "XIV",
+   "line": 213,
+   "of": "Si vengez cels que li fels fist ocire!» AOI.",
+   "tr": "And avenge those whom the villain had killed!» AOI."
+  },
+  {
+   "laisse": "XXIX",
+   "line": 391,
+   "of": "Seit, ki l'ociet, tute pais puis avriúmes.» AOI.",
+   "tr": "Were someone to slay him, we should then have full peace.» AOI."
+  },
+  {
+   "laisse": "XXXI",
+   "line": 404,
+   "of": "Que il querreient, que Rollant fust ocis.",
+   "tr": "That they would seek a way for Roland to be killed."
+  },
+  {
+   "laisse": "XLIV",
+   "line": 581,
+   "of": "«Cum faitement purrai Rollant ocire?»",
+   "tr": "«How might I be able to kill Roland?»"
+  },
+  {
+   "laisse": "LXIX",
+   "line": 867,
+   "of": "Jo l'ocirai a mun espiet trenchant.",
+   "tr": "I will kill him with my sharp spear."
+  },
+  {
+   "laisse": "LXX",
+   "line": 884,
+   "of": "Il est juget que nus les ocirum.» AOI.",
+   "tr": "It is judged that we shall kill them.» AOI."
+  },
+  {
+   "laisse": "LXXVII",
+   "line": 963,
+   "of": "En Rencesvals irai Rollant ocire,",
+   "tr": "To Roncevaux I will go to slay Roland,"
+  },
+  {
+   "laisse": "CII",
+   "line": 1308,
+   "of": "Des .XII. pers li .X. en sunt ocis;",
+   "tr": "Of the Twelve Peers, ten of them are slain;"
+  },
+  {
+   "laisse": "CVI",
+   "line": 1358,
+   "of": "Pois ad ocis Turgis e Esturguz;",
+   "tr": "Then he has slain Turgis and Esturguz;"
+  },
+  {
+   "laisse": "CVIII",
+   "line": 1389,
+   "of": "E l'arcevesque lor ocist Siglorel,",
+   "tr": "And the archbishop slew Siglorel for them,"
+  },
+  {
+   "laisse": "CXIII",
+   "line": 1484,
+   "of": "Mielz est mult que jo l'alge ocire.",
+   "tr": "It is far better that I go and slay him."
+  },
+  {
+   "laisse": "CXIV",
+   "line": 1488,
+   "of": "Ço ert uns reis qu'l ocist en Denemarche.",
+   "tr": "He was a king whom he slew in Denmark."
+  },
+  {
+   "laisse": "CXVII",
+   "line": 1553,
+   "of": "Puis ad ocis le duc Alphaïen;",
+   "tr": "Then he has slain Duke Alphaïen;"
+  },
+  {
+   "laisse": "CXVIII",
+   "line": 1567,
+   "of": "Le patriarche ocist devant les funz.",
+   "tr": "He slew the patriarch before the baptismal fonts."
+  },
+  {
+   "laisse": "CXIX",
+   "line": 1588,
+   "of": "Ambure ocit, ki quel blasme ne quil lot.",
+   "tr": "He kills them both, let who will blame or praise it."
+  },
+  {
+   "laisse": "CXXI",
+   "line": 1608,
+   "of": "Tel ad ocis dunt al coer me regrette.»",
+   "tr": "You have slain one for whom my heart grieves.»"
+  },
+  {
+   "laisse": "CXXII",
+   "line": 1622,
+   "of": "Sun cumpaignun Gerers ocit uncore",
+   "tr": "His companion Gerier he slays as well"
+  },
+  {
+   "laisse": "CXXIII",
+   "line": 1632,
+   "of": "Tel as ocis que mult cher te quid vendre!»",
+   "tr": "You have killed one such that I think I will sell him to you very dear!»"
+  },
+  {
+   "laisse": "CXXIV",
+   "line": 1649,
+   "of": "Ambure ocist seinz nul recoevrement,",
+   "tr": "He slew both without any recovery,"
+  },
+  {
+   "laisse": "CXXVII",
+   "line": 1686,
+   "of": "Tuz sunt ocis cist Franceis chevalers,",
+   "tr": "All are slain, these French knights,"
+  },
+  {
+   "laisse": "CXL",
+   "line": 1866,
+   "of": "De doel murra, se altre ne m'i ocit.",
+   "tr": "I shall die of grief, if nothing else slays me."
+  },
+  {
+   "laisse": "CXLII",
+   "line": 1894,
+   "of": "Puis ad ocis Yvoeries e Ivon",
+   "tr": "then he has killed Yvoire and Yvon,"
+  },
+  {
+   "laisse": "CXLII",
+   "line": 1898,
+   "of": "A si grant tort m'ociz mes cumpaignuns!",
+   "tr": "So very wrongly you kill my companions!"
   }
  ],
  "octroyer": [
@@ -10941,12 +10865,6 @@
  ],
  "oser": [
   {
-   "laisse": "XXXV",
-   "line": 454,
-   "of": "Que li Franceis asmastes a ferir;",
-   "tr": "In that you dared to strike the Frenchman;"
-  },
-  {
    "laisse": "CXXXIV",
    "line": 1780,
    "of": "Suz cel n'ad gent ki [l']osast (re)querre en champ.",
@@ -10973,12 +10891,252 @@
    "tr": "Charles's battle-cry he does not wish to forget:"
   }
  ],
- "ouvrir": [
+ "ouïr": [
   {
-   "laisse": "CXXII",
-   "line": 1619,
-   "of": "Aprof li ad sa bronie desclose,",
-   "tr": "Then he has ripped open his hauberk,"
+   "laisse": "II",
+   "line": 15,
+   "of": "«Oëz, seignurs, quel pecchet nus encumbret:",
+   "tr": "«Hear, my lords, what calamity weighs upon us:"
+  },
+  {
+   "laisse": "IV",
+   "line": 55,
+   "of": "N'orrat de nos paroles ne nuveles.",
+   "tr": "He will hear of us neither word nor news."
+  },
+  {
+   "laisse": "XX",
+   "line": 292,
+   "of": "Respunt Rollant: «Orgoill ói e folage.",
+   "tr": "Rollant answers: «I hear arrogance and folly."
+  },
+  {
+   "laisse": "XXI",
+   "line": 302,
+   "of": "Quant l'ot Rollant, si cumençat a rire. AOI.",
+   "tr": "When Roland heard it, he began to laugh. AOI."
+  },
+  {
+   "laisse": "XXIV",
+   "line": 321,
+   "of": "Oït l'avez, sur vos le jugent Franc.»",
+   "tr": "You have heard it, the Franks judge it against you.»"
+  },
+  {
+   "laisse": "XXV",
+   "line": 336,
+   "of": "- «Seignurs» dist Guenes, «vos en orrez noveles!»",
+   "tr": "- «Lords,» said Ganelon, «you will hear news of it!»"
+  },
+  {
+   "laisse": "XXXI",
+   "line": 412,
+   "of": "Pur les nuveles qu'il vuldreient oïr.",
+   "tr": "Because of the news they would wish to hear."
+  },
+  {
+   "laisse": "XXXII",
+   "line": 423,
+   "of": "Par lui orrez si avrez pais u nun.»",
+   "tr": "From him you will hear whether you will have peace or not.»"
+  },
+  {
+   "laisse": "XXXII",
+   "line": 424,
+   "of": "Respunt Marsilie: «Or diet, nus l'orrum!» AOI.",
+   "tr": "Marsile replies: «Let him speak now, we shall hear him!» AOI."
+  },
+  {
+   "laisse": "XXXV",
+   "line": 455,
+   "of": "Vos le doüssez esculter e oïr.»",
+   "tr": "You ought to have listened to him and heard him out.»"
+  },
+  {
+   "laisse": "XXXVII",
+   "line": 499,
+   "of": "Quant l'oït Guenes, l'espee en ad branlie;",
+   "tr": "When Ganelon heard this, he brandished his sword;"
+  },
+  {
+   "laisse": "XL",
+   "line": 522,
+   "of": "De Carlemagne vos voeill oïr parler.",
+   "tr": "I want to hear you speak of Charlemagne."
+  },
+  {
+   "laisse": "XLV",
+   "line": 601,
+   "of": "Quan l'ot Marsilie, si l'ad baiset el col,",
+   "tr": "When Marsile heard this, he kissed him on the neck,"
+  },
+  {
+   "laisse": "LVIII",
+   "line": 745,
+   "of": "Quant l'ot li reis, fierement le reguardet,",
+   "tr": "When the king heard this, fiercely he looks at him,"
+  },
+  {
+   "laisse": "LIX",
+   "line": 751,
+   "of": "Li quens Rollant quant il s'oït juger,",
+   "tr": "Count Roland, when he hears himself thus assigned,"
+  },
+  {
+   "laisse": "LX",
+   "line": 761,
+   "of": "Quant ot Rollant, qu'il ert en la rereguarde,",
+   "tr": "When Roland heard that he would be in the rearguard,"
+  },
+  {
+   "laisse": "LXVI",
+   "line": 817,
+   "of": "De .XV. lius en ot hom la rimur.",
+   "tr": "From fifteen leagues away one could hear their din."
+  },
+  {
+   "laisse": "LXXIV",
+   "line": 927,
+   "of": "Asez orrez, laquele irat desure.",
+   "tr": "Soon you will hear which one will prevail."
+  },
+  {
+   "laisse": "LXXIX",
+   "line": 1005,
+   "of": "Granz est la noise, si l'oïrent Franceis.",
+   "tr": "Great is the din, and the French heard it."
+  },
+  {
+   "laisse": "LXXXIII",
+   "line": 1052,
+   "of": "Si l'orrat Carles, si returnerat l'ost.»",
+   "tr": "Charles will hear it, and he will turn back the army.»"
+  },
+  {
+   "laisse": "LXXXIV",
+   "line": 1060,
+   "of": "Si l'orrat Carles, ferat l'ost returner,",
+   "tr": "Charles will hear it, will make the army turn back,"
+  },
+  {
+   "laisse": "LXXXV",
+   "line": 1071,
+   "of": "Si l'orrat Carles, ki est as porz passant.",
+   "tr": "Charles will hear it, he who is passing through the mountain passes."
+  },
+  {
+   "laisse": "XCII",
+   "line": 1181,
+   "of": "Ki dunc oïst «Munjoie» demander,",
+   "tr": "Whoever then had heard them call «Munjoie»"
+  },
+  {
+   "laisse": "XCIII",
+   "line": 1196,
+   "of": "Quant l'ot Rollant, Deus! si grant doel en out!",
+   "tr": "When Roland heard it, God! such great grief he had!"
+  },
+  {
+   "laisse": "XCIV",
+   "line": 1224,
+   "of": "Ot le Oliver, sin ad mult grant irur;",
+   "tr": "Oliver hears him, and feels very great wrath at it;"
+  },
+  {
+   "laisse": "XCV",
+   "line": 1243,
+   "of": "Ben l'entendit li arc[e]vesques Turpin.",
+   "tr": "Archbishop Turpin heard him well."
+  },
+  {
+   "laisse": "CVIII",
+   "line": 1386,
+   "of": "Ne l'oï dire ne jo mie nel sai",
+   "tr": "I never heard it told, nor do I know at all"
+  },
+  {
+   "laisse": "CXXIII",
+   "line": 1629,
+   "of": "Ben ad oït que Franceis se dementent;",
+   "tr": "He has clearly heard that the Franks are lamenting;"
+  },
+  {
+   "laisse": "CXXIII",
+   "line": 1633,
+   "of": "Sun ceval brochet, ki oït del cuntence.",
+   "tr": "He spurs his horse, which heard the dispute."
+  },
+  {
+   "laisse": "CXXIX",
+   "line": 1701,
+   "of": "Si l'orrat Carles, ki est as porz passant.",
+   "tr": "So Charles, who is passing through the passes, will hear it."
+  },
+  {
+   "laisse": "CXXX",
+   "line": 1712,
+   "of": "Jo cornerai, si l'orrat li reis Karles.»",
+   "tr": "I will sound the horn, and King Charles will hear it.»"
+  },
+  {
+   "laisse": "CXXXII",
+   "line": 1735,
+   "of": "Li arceves[ques] les ót cuntrarier,",
+   "tr": "The archbishop heard them quarreling,"
+  },
+  {
+   "laisse": "CXXXIII",
+   "line": 1754,
+   "of": "Granz .XXX. liwes l'oïrent il respundre.",
+   "tr": "They heard it echo back a full thirty leagues."
+  },
+  {
+   "laisse": "CXXXIII",
+   "line": 1755,
+   "of": "Karles l'oït e ses cumpaignes tutes.",
+   "tr": "Charles heard it, and all his companions."
+  },
+  {
+   "laisse": "CXXXIV",
+   "line": 1764,
+   "of": "Karles l'entent, ki est as porz passant.",
+   "tr": "Charles hears it, who is passing through the gorges."
+  },
+  {
+   "laisse": "CXXXIV",
+   "line": 1765,
+   "of": "Naimes li duc l'oïd, si l'escultent li Franc.",
+   "tr": "Naimes the duke heard it, and the Franks listen to it."
+  },
+  {
+   "laisse": "CXXXIV",
+   "line": 1766,
+   "of": "Ce dist li reis: «Jo oi le corn Rollant!",
+   "tr": "The king says: «I hear Roland's horn!"
+  },
+  {
+   "laisse": "CXXXV",
+   "line": 1786,
+   "of": "Karles l'oït e ses Franceis l'entendent,",
+   "tr": "Charles hears it and his Franks hear it,"
+  },
+  {
+   "laisse": "CXXXV",
+   "line": 1793,
+   "of": "Asez oez que Rollant se dementet!»",
+   "tr": "You hear well enough that Roland laments!»"
+  },
+  {
+   "laisse": "CXLIX",
+   "line": 2002,
+   "of": "Dist Oliver: «Or vos oi jo parler;",
+   "tr": "Oliver says: «Now I hear you speak;"
+  },
+  {
+   "laisse": "CL",
+   "line": 2022,
+   "of": "Jamais en tere n'orrez plus dolent hume!",
+   "tr": "Never on earth will you hear a more grieving man!"
   }
  ],
  "pardonner": [
@@ -11137,18 +11295,6 @@
    "tr": "Never will you see this first month pass"
   },
   {
-   "laisse": "LVI",
-   "line": 717,
-   "of": "Tresvait le jur, la noit est aserie.",
-   "tr": "The day passes, the night falls dark."
-  },
-  {
-   "laisse": "LVIII",
-   "line": 737,
-   "of": "Tresvait la noit, e apert la clere albe.",
-   "tr": "The night passes, and the bright dawn appears."
-  },
-  {
    "laisse": "LXIII",
    "line": 790,
    "of": "Passez les porz trestut soürement:",
@@ -11191,14 +11337,6 @@
    "tr": "So Charles, who is passing through the passes, will hear it."
   }
  ],
- "payer": [
-  {
-   "laisse": "IX",
-   "line": 133,
-   "of": "Dunt bien purrez voz soldeiers luer.",
-   "tr": "that you will well be able to pay your soldiers."
-  }
- ],
  "peindre": [
   {
    "laisse": "CXXXVII",
@@ -11207,12 +11345,12 @@
    "tr": "And those shields, which are finely painted with flowers,"
   }
  ],
- "pencher": [
+ "peler": [
   {
-   "laisse": "CL",
-   "line": 2018,
-   "of": "Falt li le coer, le helme li embrunchet,",
-   "tr": "His heart fails him, his helmet droops down,"
+   "laisse": "CXXXVII",
+   "line": 1821,
+   "of": "Icil li peilent la barbe e les gernuns;",
+   "tr": "These pluck out his beard and his mustaches;"
   }
  ],
  "penser": [
@@ -11395,14 +11533,6 @@
    "tr": "So that he strikes him down [dead], whoever may be grieved by it or not,"
   }
  ],
- "piller": [
-  {
-   "laisse": "XXIX",
-   "line": 385,
-   "of": "E out predet dejuste Carcasonie;",
-   "tr": "And had taken booty near Carcassonne;"
-  }
- ],
  "plaindre": [
   {
    "laisse": "LXVII",
@@ -11535,6 +11665,14 @@
    "tr": "Roland the brave weeps for him, laments him;"
   }
  ],
+ "poindre": [
+  {
+   "laisse": "CXXXIX",
+   "line": 1843,
+   "of": "Puignent ad ait tuit li barun de France;",
+   "tr": "The barons of France spur on eagerly;"
+  }
+ ],
  "porter": [
   {
    "laisse": "V",
@@ -11661,52 +11799,6 @@
    "line": 1877,
    "of": "Ki armes portet e en bon cheval set;",
    "tr": "Who bears arms and sits upon a good horse;"
-  }
- ],
- "pourchasser": [
-  {
-   "laisse": "CXXV",
-   "line": 1659,
-   "of": "Par vive force les encacerent Franc. AOI.",
-   "tr": "By living force the Franks pursue them. AOI."
-  }
- ],
- "pousser": [
-  {
-   "laisse": "XCIII",
-   "line": 1203,
-   "of": "Enpeint le ben, fait li brandir le cors,",
-   "tr": "Drives it home well, makes the body sway,"
-  },
-  {
-   "laisse": "XCV",
-   "line": 1249,
-   "of": "Empeint le ben, que mort le fait brandir,",
-   "tr": "Drives it well in, so that he makes him reel dead,"
-  },
-  {
-   "laisse": "XCVII",
-   "line": 1272,
-   "of": "Empeint le bien, par mi le cors li passet,",
-   "tr": "Drives it home hard, runs it right through his body,"
-  },
-  {
-   "laisse": "XCIX",
-   "line": 1286,
-   "of": "Empeinst le ben, tut le fer li mist ultre,",
-   "tr": "Thrusts it well, sends the iron clean through him,"
-  },
-  {
-   "laisse": "CXVI",
-   "line": 1539,
-   "of": "Empeint le ben, tut le fer li mist ultre,",
-   "tr": "Drives it in hard, sends all the iron through,"
-  },
-  {
-   "laisse": "CXXXIII",
-   "line": 1752,
-   "of": "Empeint le ben, par grant vertut le sunet.",
-   "tr": "He grips it well, sounds it with great force."
   }
  ],
  "pouvoir": [
@@ -12365,6 +12457,12 @@
    "tr": "I cannot so praise him to you nor extol him"
   },
   {
+   "laisse": "L",
+   "line": 636,
+   "of": "«Car mult vos priset mi sire e tuit si hume.",
+   "tr": "«For my lord esteems you greatly, and all his men."
+  },
+  {
    "laisse": "CXVII",
    "line": 1558,
    "of": "Encuntre mei fait asez a preiser.",
@@ -12377,66 +12475,12 @@
    "tr": "those whom they have slain, one can well count them;"
   }
  ],
- "proclamer": [
-  {
-   "laisse": "XCI",
-   "line": 1161,
-   "of": "E cil de France le cleiment a guarant.",
-   "tr": "And those of France acclaim him as their protector."
-  }
- ],
  "promettre": [
   {
    "laisse": "CXV",
    "line": 1518,
    "of": "Pramis nus est, fin prendrum a itant,",
    "tr": "It is promised to us, we shall come to our end thereby,"
-  }
- ],
- "protéger": [
-  {
-   "laisse": "XXVII",
-   "line": 354,
-   "of": "Par Charlemagne n'er(cs) guariz ne tensez.",
-   "tr": "Will not be protected nor defended by Charlemagne."
-  },
-  {
-   "laisse": "CIII",
-   "line": 1316,
-   "of": "Deus le guarit, qu'el(l) cors ne l'ad tuchet.",
-   "tr": "God protects him, for it did not touch his body."
-  },
-  {
-   "laisse": "CXVI",
-   "line": 1537,
-   "of": "Nel poet guarir sun escut ne sa bronie:",
-   "tr": "Neither his shield nor his hauberk can protect him:"
-  },
-  {
-   "laisse": "CXXXVIII",
-   "line": 1836,
-   "of": "E p[ri]ent Deu qu'il guarisset Rollant",
-   "tr": "And they pray to God that He keep Roland safe"
-  },
-  {
-   "laisse": "CXL",
-   "line": 1863,
-   "of": "Jo ne vos pois tenser ne guarantir.",
-   "tr": "I cannot protect you nor save you."
-  }
- ],
- "préparer": [
-  {
-   "laisse": "LI",
-   "line": 643,
-   "of": "«L'aveir Carlun est il apareillez?»",
-   "tr": "«Is Charles's tribute made ready?»"
-  },
-  {
-   "laisse": "XC",
-   "line": 1144,
-   "of": "E de bataille sunt tuit apareillez.",
-   "tr": "And are all made ready for battle."
   }
  ],
  "présenter": [
@@ -12451,14 +12495,6 @@
    "line": 655,
    "of": "Le grant aveir en presentez al rei Carles,",
    "tr": "Present its great wealth to King Charles,"
-  }
- ],
- "pâlir": [
-  {
-   "laisse": "XXXVII",
-   "line": 485,
-   "of": "Marsilies fut esculurez de l'ire;",
-   "tr": "Marsile was pale with rage;"
   }
  ],
  "pâmer": [
@@ -12487,24 +12523,44 @@
    "tr": "At this word the marquis swoons"
   }
  ],
- "quereller": [
+ "quérir": [
   {
-   "laisse": "XVIII",
-   "line": 257,
-   "of": "Jo me crendreie, que vos vos meslisez.",
-   "tr": "I would fear that you would come to blows."
+   "laisse": "XXXI",
+   "line": 404,
+   "of": "Que il querreient, que Rollant fust ocis.",
+   "tr": "That they would seek a way for Roland to be killed."
   },
   {
-   "laisse": "CXXXII",
-   "line": 1735,
-   "of": "Li arceves[ques] les ót cuntrarier,",
-   "tr": "The archbishop heard them quarreling,"
+   "laisse": "XCI",
+   "line": 1166,
+   "of": "Cist paien vont grant martirie querant.",
+   "tr": "These pagans go seeking great martyrdom."
   },
   {
-   "laisse": "CXXXII",
-   "line": 1739,
-   "of": "Pur Deu vos pri, ne vos cuntraliez!",
-   "tr": "For God's sake I pray you, do not quarrel!"
+   "laisse": "CIV",
+   "line": 1333,
+   "of": "Trenchet l'eschine, hunc n'i out quis [joi]nture,",
+   "tr": "He cuts through the spine, never seeking a joint there,"
+  },
+  {
+   "laisse": "CXXVIII",
+   "line": 1698,
+   "of": "Dist Oliver: «Jo nel sai cument quere.",
+   "tr": "Said Oliver: «I know not how to seek it."
+  },
+  {
+   "laisse": "CXXXIV",
+   "line": 1780,
+   "of": "Suz cel n'ad gent ki [l']osast (re)querre en champ.",
+   "tr": "Under heaven there is no man who would dare seek him out in the field."
+  }
+ ],
+ "racheter": [
+  {
+   "laisse": "CXXXVIII",
+   "line": 1832,
+   "of": "E tuit rachatent encuntre l'olifant.",
+   "tr": "And all of them answer back the call of the oliphant."
   }
  ],
  "raconter": [
@@ -12527,14 +12583,6 @@
    "tr": "Came to the French, told them everything."
   }
  ],
- "railler": [
-  {
-   "laisse": "CXXXIV",
-   "line": 1779,
-   "of": "Devant ses pers vait il ore gabant.",
-   "tr": "Before his peers he goes now boasting."
-  }
- ],
  "rallier": [
   {
    "laisse": "CIII",
@@ -12551,28 +12599,12 @@
    "tr": "whoever may recall them, they will never return. AOI."
   }
  ],
- "rapporter": [
+ "rayer": [
   {
-   "laisse": "CXXVIII",
-   "line": 1699,
-   "of": "Mielz voeill murir que hunte nus seit retraite.» AOI.",
-   "tr": "I would rather die than that shame be reported of us.» AOI."
-  }
- ],
- "rassembler": [
-  {
-   "laisse": "LXVIII",
-   "line": 851,
-   "of": ".IIII.C. milie en ajustet en .III. jurz.",
-   "tr": "Four hundred thousand he gathers in three days."
-  }
- ],
- "rassurer": [
-  {
-   "laisse": "CIV",
-   "line": 1321,
-   "of": "Li quens Rollant mie ne s'asoüret,",
-   "tr": "Count Roland does not spare himself at all,"
+   "laisse": "CXLVIII",
+   "line": 1979,
+   "of": "Li sancs tuz clers par mi le cors li raiet:",
+   "tr": "The bright blood streams down across his body:"
   }
  ],
  "recevoir": [
@@ -12717,27 +12749,7 @@
    "tr": "When he straightens up, his face looked most proud;"
   }
  ],
- "refuser": [
-  {
-   "laisse": "XXXIX",
-   "line": 518,
-   "of": "Guenes respunt: «Jo nel desotrei mie.",
-   "tr": "Ganelon answers: «I do not refuse it at all."
-  }
- ],
  "regarder": [
-  {
-   "laisse": "XX",
-   "line": 285,
-   "of": "Tant par fut bels tuit si per l'en esguardent.",
-   "tr": "He was so very handsome that all his peers gaze at him."
-  },
-  {
-   "laisse": "XXXVII",
-   "line": 487,
-   "of": "Guardet al bref, vit la raisun escrite:",
-   "tr": "He looks at the letter, saw the writing set down there:"
-  },
   {
    "laisse": "LVIII",
    "line": 738,
@@ -12751,34 +12763,10 @@
    "tr": "When the king heard this, fiercely he looks at him,"
   },
   {
-   "laisse": "LXXX",
-   "line": 1018,
-   "of": "Guardet su destre par mi un val herbus,",
-   "tr": "He looks to his right across a grassy valley,"
-  },
-  {
-   "laisse": "LXXXVII",
-   "line": 1103,
-   "of": "Guardez amunt devers les porz d'Espaigne:",
-   "tr": "Look up toward the passes of Spain:"
-  },
-  {
    "laisse": "XCI",
    "line": 1162,
    "of": "Vers Sarrazins reguardet fierement",
    "tr": "Toward the Saracens he looks fiercely"
-  },
-  {
-   "laisse": "XCIV",
-   "line": 1230,
-   "of": "Guardet a tere, veit gesir le glutun,",
-   "tr": "He looks to the ground, sees the wretch lying there,"
-  },
-  {
-   "laisse": "XCV",
-   "line": 1251,
-   "of": "Guardet arere, veit le glutun gesir,",
-   "tr": "He looks behind, sees the wretch lying there,"
   },
   {
    "laisse": "CXL",
@@ -12817,22 +12805,6 @@
    "line": 2025,
    "of": "Mult dulcement a regreter le prist:",
    "tr": "Very tenderly he began to lament him:"
-  }
- ],
- "rejeter": [
-  {
-   "laisse": "XV",
-   "line": 226,
-   "of": "Ki ço vos lodet que cest plait degetuns,",
-   "tr": "Whoever advises you that we reject this agreement,"
-  }
- ],
- "rejoindre": [
-  {
-   "laisse": "CXLVII",
-   "line": 1975,
-   "of": "«Sire cumpaign, a mei car vus justez!",
-   "tr": "«Lord companion, come now, join me here!"
   }
  ],
  "reluire": [
@@ -12877,20 +12849,6 @@
    "tr": "You have no baron who would ever change it."
   }
  ],
- "rencontrer": [
-  {
-   "laisse": "CXXIV",
-   "line": 1637,
-   "of": "Enmi sa veie ad encuntret Rollant.",
-   "tr": "In the middle of his path he encountered Roland."
-  },
-  {
-   "laisse": "CXLIX",
-   "line": 1993,
-   "of": "Sun cumpaignun, cum il l'at encontret,",
-   "tr": "His companion, as he has encountered him,"
-  }
- ],
  "rendre": [
   {
    "laisse": "XLIV",
@@ -12923,15 +12881,7 @@
    "tr": "They guard him until they hand him back to Charles."
   }
  ],
- "renoncer": [
-  {
-   "laisse": "LXIX",
-   "line": 871,
-   "of": "Las serat Carles, si recrerrunt si Franc;",
-   "tr": "Charles will be weary, his Franks will give up;"
-  }
- ],
- "rentrer": [
+ "repairer": [
   {
    "laisse": "III",
    "line": 36,
@@ -12975,32 +12925,6 @@
    "tr": "Count Roland has returned to the field:"
   }
  ],
- "renverser": [
-  {
-   "laisse": "XCIX",
-   "line": 1287,
-   "of": "Pleine sa hanste el camp mort le tresturnet.",
-   "tr": "With his lance at full length casts him dead from the saddle."
-  },
-  {
-   "laisse": "CVI",
-   "line": 1357,
-   "of": "Mort le tresturnet od tut .VII.C. des lur.",
-   "tr": "He casts him down dead, along with seven hundred of their men."
-  },
-  {
-   "laisse": "CVIII",
-   "line": 1385,
-   "of": "Mort le tresturnent tres enmi un guaret,",
-   "tr": "Dead they tumble him down in the middle of a fallow field."
-  },
-  {
-   "laisse": "CXVI",
-   "line": 1540,
-   "of": "Pleine sa hanste el camp mort le tresturnet.",
-   "tr": "With his lance's full length flings him dead in the field."
-  }
- ],
  "reprocher": [
   {
    "laisse": "LXI",
@@ -13023,136 +12947,12 @@
    "tr": "They go through the field, and they seek their own,"
   }
  ],
- "resplendir": [
-  {
-   "laisse": "LXXIX",
-   "line": 1003,
-   "of": "N'unt guarnement que tut ne reflambeit.",
-   "tr": "They have no piece of armor that does not all blaze with light."
-  }
- ],
  "ressembler": [
   {
    "laisse": "CXXXIV",
    "line": 1770,
    "of": "Par tels paroles vus resemblez enfant.",
    "tr": "By such words you seem like a child."
-  }
- ],
- "rester": [
-  {
-   "laisse": "I",
-   "line": 4,
-   "of": "N'i ad castel ki devant lui remaigne;",
-   "tr": "There is no fortress that stands against him;"
-  },
-  {
-   "laisse": "I",
-   "line": 5,
-   "of": "Mur ne citet n'i est remés a fraindre",
-   "tr": "no wall or city is left to be breached"
-  },
-  {
-   "laisse": "VIII",
-   "line": 101,
-   "of": "En la citet nen ad remes paien,",
-   "tr": "In the city there remains no pagan,"
-  },
-  {
-   "laisse": "XIX",
-   "line": 265,
-   "of": "E dist al rei: «Laisez ester voz Francs!",
-   "tr": "And said to the king: «Let your Franks be!"
-  },
-  {
-   "laisse": "XX",
-   "line": 282,
-   "of": "E est remes en sun blialt de palie.",
-   "tr": "And he remained in his tunic of silk."
-  },
-  {
-   "laisse": "XLV",
-   "line": 598,
-   "of": "Si remeindreient les merveilluses óz;",
-   "tr": "And the marvelous armies would be left behind;"
-  },
-  {
-   "laisse": "XLV",
-   "line": 600,
-   "of": "Tere Major remeindreit en repos.»",
-   "tr": "The Great Land would remain in peace.»"
-  },
-  {
-   "laisse": "LV",
-   "line": 714,
-   "of": "En un bruill par sum les puis remestrent,",
-   "tr": "In a wood atop the heights they halted,"
-  },
-  {
-   "laisse": "LXVII",
-   "line": 826,
-   "of": "Li .XII. per sunt remes en Espaigne.",
-   "tr": "The Twelve Peers have remained in Spain."
-  },
-  {
-   "laisse": "LXXII",
-   "line": 907,
-   "of": "Si nus remeindrat Espaigne en quitedet.»",
-   "tr": "And so Spain will remain to us in freedom.»"
-  },
-  {
-   "laisse": "LXXVII",
-   "line": 965,
-   "of": "Li .XII. per sunt remes en martirie.",
-   "tr": "The Twelve Peers are left there in martyrdom."
-  },
-  {
-   "laisse": "LXXXII",
-   "line": 1046,
-   "of": "El camp estez, que ne seium vencuz!",
-   "tr": "Hold the field, that we be not vanquished!»"
-  },
-  {
-   "laisse": "LXXXVII",
-   "line": 1108,
-   "of": "Nus remeindrum en estal en la place;",
-   "tr": "We will remain firm in our place;"
-  },
-  {
-   "laisse": "LXXXIX",
-   "line": 1134,
-   "of": "Se vos murez, esterez seinz martirs,",
-   "tr": "If you die, you will be holy martyrs,"
-  },
-  {
-   "laisse": "CII",
-   "line": 1309,
-   "of": "Ne mes que dous n'en i ad remes vifs;",
-   "tr": "No more than two of them have remained alive there;"
-  },
-  {
-   "laisse": "CXXVIII",
-   "line": 1694,
-   "of": "De tels barons cum or remeint deserte!",
-   "tr": "Of such barons how she now remains bereft!"
-  },
-  {
-   "laisse": "CXXXIX",
-   "line": 1847,
-   "of": "Si est blecet, ne quit que anme i remaigne.",
-   "tr": "He is so wounded, I do not think a soul remains in him."
-  },
-  {
-   "laisse": "CXLIII",
-   "line": 1913,
-   "of": "Remes i est sis uncles, Marganices,",
-   "tr": "His uncle Marganice has remained there,"
-  },
-  {
-   "laisse": "CXLVIII",
-   "line": 1984,
-   "of": "E! France dulce, cun hoi remendras guaste",
-   "tr": "Ah! sweet France, how laid waste you will remain today,"
   }
  ],
  "retenir": [
@@ -13221,14 +13021,6 @@
    "tr": "whoever may recall them, they will never return. AOI."
   }
  ],
- "revendiquer": [
-  {
-   "laisse": "CXLIII",
-   "line": 1925,
-   "of": "Si calengez e voz (e) mors e voz vies!",
-   "tr": "And contest both your deaths and your lives!"
-  }
- ],
  "revoir": [
   {
    "laisse": "CIX",
@@ -13241,14 +13033,6 @@
    "line": 1420,
    "of": "Ne reverrunt lor peres ne lor parenz",
    "tr": "They will not see again their fathers nor their kinsmen,"
-  }
- ],
- "revêtir": [
-  {
-   "laisse": "XXXV",
-   "line": 462,
-   "of": "Afublez est d'un mantel sabelin,",
-   "tr": "He is wrapped in a sable mantle,"
   }
  ],
  "rire": [
@@ -13303,28 +13087,10 @@
  ],
  "rompre": [
   {
-   "laisse": "II",
-   "line": 19,
-   "of": "Ne n'ai tel gent ki la sue derumpet.",
-   "tr": "Nor have I such a host as might break his."
-  },
-  {
-   "laisse": "XCIV",
-   "line": 1227,
-   "of": "L'escut li freint e l'osberc li derumpt,",
-   "tr": "He shatters his shield and tears apart his hauberk,"
-  },
-  {
    "laisse": "XCVI",
    "line": 1265,
    "of": "L'osberc li rumpt entresque a la charn,",
    "tr": "He breaks the hauberk right through to the flesh,"
-  },
-  {
-   "laisse": "XCIX",
-   "line": 1284,
-   "of": "De sun osberc li derumpit les dubles,",
-   "tr": "Tears apart the doubled mail of his hauberk,"
   },
   {
    "laisse": "C",
@@ -13345,18 +13111,6 @@
    "tr": "So many a gonfalon torn and so many a standard!"
   },
   {
-   "laisse": "CXVI",
-   "line": 1542,
-   "of": "Ferez, paien, pur la presse derumpre!»",
-   "tr": "Strike, pagans, to break the press!»"
-  },
-  {
-   "laisse": "CXVIII",
-   "line": 1574,
-   "of": "L'escut li freint e l'osberc li derumpt,",
-   "tr": "He shatters his shield and tears apart his hauberk,"
-  },
-  {
    "laisse": "CXX",
    "line": 1600,
    "of": "De sun osberc li ad les pans rumput,",
@@ -13373,28 +13127,6 @@
    "line": 1784,
    "of": "De sun cervel rumput en est li temples.",
    "tr": "The temple of his brain is burst."
-  },
-  {
-   "laisse": "CXLII",
-   "line": 1892,
-   "of": "L'escut li freint e l'osberc li derumpt,",
-   "tr": "He breaks his shield and tears apart his hauberk,"
-  }
- ],
- "ruisseler": [
-  {
-   "laisse": "CXLVIII",
-   "line": 1979,
-   "of": "Li sancs tuz clers par mi le cors li raiet:",
-   "tr": "The bright blood streams down across his body:"
-  }
- ],
- "réchapper": [
-  {
-   "laisse": "CXI",
-   "line": 1439,
-   "of": "De cent millers n'en poent guarir dous.",
-   "tr": "Of a hundred thousand not two of them can escape."
   }
  ],
  "réclamer": [
@@ -13403,26 +13135,6 @@
    "line": 8,
    "of": "Mahumet sert e Apollin recleimet:",
    "tr": "serves Mahomet and calls upon Apollin;"
-  },
-  {
-   "laisse": "CXVIII",
-   "line": 1564,
-   "of": "N'i ad eschipre quis cleim se par loi nun.",
-   "tr": "There is no sailor who does not claim him as his rightful master."
-  }
- ],
- "réfléchir": [
-  {
-   "laisse": "XXXIII",
-   "line": 425,
-   "of": "Mais li quens Guenes se fut ben purpenset.",
-   "tr": "But Count Ganelon had thought it over well."
-  },
-  {
-   "laisse": "XCII",
-   "line": 1177,
-   "of": "Pur deu vos pri, ben seiez purpensez",
-   "tr": "For God's sake I pray you, be well resolved"
   }
  ],
  "répondre": [
@@ -13757,14 +13469,6 @@
    "tr": "Roland answers: «I have no hurt at all."
   }
  ],
- "réprimander": [
-  {
-   "laisse": "CXXXII",
-   "line": 1737,
-   "of": "Vint tresqu'a els, sis prist a castier:",
-   "tr": "Came right up to them, and began to rebuke them:"
-  }
- ],
  "saigner": [
   {
    "laisse": "CXLIX",
@@ -13773,13 +13477,15 @@
    "tr": "He has bled so much that his eyes are clouded;"
   }
  ],
- "saisir": [
+ "saillir": [
   {
-   "laisse": "LIV",
-   "line": 689,
-   "of": "Sis aquillit e tempeste e ored:",
-   "tr": "A storm and a tempest seized them:"
-  },
+   "laisse": "CXXXIV",
+   "line": 1761,
+   "of": "Par mi la buche en salt fors li cler sancs.",
+   "tr": "Out through his mouth the bright blood leaps forth."
+  }
+ ],
+ "saisir": [
   {
    "laisse": "LVI",
    "line": 721,
@@ -14025,14 +13731,6 @@
    "tr": "«God!» said the count, «now I know not what to do."
   }
  ],
- "secouer": [
-  {
-   "laisse": "XXXIV",
-   "line": 442,
-   "of": "De sun algeir ad la hanste crollee.",
-   "tr": "With his javelin he has shaken the shaft."
-  }
- ],
  "secourir": [
   {
    "laisse": "LXXXIV",
@@ -14088,6 +13786,36 @@
   }
  ],
  "seoir": [
+  {
+   "laisse": "VIII",
+   "line": 110,
+   "of": "Sur palies blancs siedent cil cevaler,",
+   "tr": "Upon white silks those knights are seated,"
+  },
+  {
+   "laisse": "VIII",
+   "line": 116,
+   "of": "La siet li reis, ki dulce france tient.",
+   "tr": "There sits the king who holds sweet France."
+  },
+  {
+   "laisse": "XVII",
+   "line": 251,
+   "of": "Alez sedeir, quant nuls ne vos sumunt.»",
+   "tr": "Go sit down, since no one summons you.»"
+  },
+  {
+   "laisse": "XIX",
+   "line": 272,
+   "of": "«Alez sedeir desur cel palie blanc!",
+   "tr": "«Go sit down upon that white silk cloth!"
+  },
+  {
+   "laisse": "XXIX",
+   "line": 383,
+   "of": "Er matin sedeit li emperere suz l'umbre;",
+   "tr": "Yesterday morning the emperor sat in the shade;"
+  },
   {
    "laisse": "CVIII",
    "line": 1379,
@@ -14175,20 +13903,34 @@
    "tr": "So long, through all time, you have served me,"
   }
  ],
+ "sevrer": [
+  {
+   "laisse": "CVII",
+   "line": 1371,
+   "of": "Tute la teste li ad par mi sevree,",
+   "tr": "He has cut his whole head clean in two,"
+  }
+ ],
+ "signer": [
+  {
+   "laisse": "XXVI",
+   "line": 340,
+   "of": "De sa main destre l'ad asols e seignet,",
+   "tr": "With his right hand he absolved and blessed him,"
+  },
+  {
+   "laisse": "XC",
+   "line": 1141,
+   "of": "E l'arcevesque de Deu les ad seignez;",
+   "tr": "And the archbishop has blessed them in God's name;"
+  }
+ ],
  "signifier": [
   {
    "laisse": "V",
    "line": 73,
    "of": "Ço senefiet pais e humilitet.",
    "tr": "This signifies peace and humility."
-  }
- ],
- "sommer": [
-  {
-   "laisse": "LXXVIII",
-   "line": 978,
-   "of": "Que .IIII. mulez ne funt, quant il sumeient.",
-   "tr": "Than four pack-mules bear when they are laden."
   }
  ],
  "songer": [
@@ -14207,6 +13949,12 @@
  ],
  "sonner": [
   {
+   "laisse": "XXXI",
+   "line": 411,
+   "of": "N'i ad celoi ki mot sunt ne mot tint,",
+   "tr": "There is none among them who speaks a word nor utters a word,"
+  },
+  {
    "laisse": "LIV",
    "line": 700,
    "of": "Par mi cel ost funt mil grailles suner;",
@@ -14223,6 +13971,12 @@
    "line": 1004,
    "of": "Sunent mil grailles por ço que plus bel seit:",
    "tr": "A thousand trumpets sound so that it may be more splendid:"
+  },
+  {
+   "laisse": "LXXX",
+   "line": 1027,
+   "of": "«Mis parrastre est, ne voeill que mot en suns.»",
+   "tr": "«He is my stepfather, I do not wish that you say a word of it.»"
   },
   {
    "laisse": "LXXXIII",
@@ -14309,20 +14063,6 @@
    "tr": "Those trumpets sound, both in the rear and in the van,"
   }
  ],
- "sortir": [
-  {
-   "laisse": "XCIV",
-   "line": 1220,
-   "of": "Ist de la prese, si se met en bandun,",
-   "tr": "He springs out of the press and flings himself forward,"
-  },
-  {
-   "laisse": "CXXXIV",
-   "line": 1774,
-   "of": "Fors s'en eissirent li Sarrazins dedenz,",
-   "tr": "The Saracens within sallied forth,"
-  }
- ],
  "souffrir": [
   {
    "laisse": "XXXV",
@@ -14361,12 +14101,12 @@
    "tr": "It is a marvel that God suffers him so long."
   }
  ],
- "soulager": [
+ "sourdre": [
   {
-   "laisse": "XXI",
-   "line": 301,
-   "of": "Que jo n'esclair ceste meie grant ire.»",
-   "tr": "To relieve this great wrath of mine.»"
+   "laisse": "CXI",
+   "line": 1447,
+   "of": "Li reis Marsilie od sa grant ost lor surt. AOI.",
+   "tr": "King Marsile with his great host surges upon them. AOI."
   }
  ],
  "soutenir": [
@@ -14421,56 +14161,6 @@
    "tr": "His companion comes following after him,"
   }
  ],
- "surgir": [
-  {
-   "laisse": "CXI",
-   "line": 1447,
-   "of": "Li reis Marsilie od sa grant ost lor surt. AOI.",
-   "tr": "King Marsile with his great host surges upon them. AOI."
-  }
- ],
- "susciter": [
-  {
-   "laisse": "XX",
-   "line": 290,
-   "of": "Jo t'en muvra[i] un si grant contr[a]ire",
-   "tr": "I will stir up against you such a great calamity"
-  }
- ],
- "séparer": [
-  {
-   "laisse": "XCIII",
-   "line": 1201,
-   "of": "Tute l'eschine li desevret del dos,",
-   "tr": "Severs the whole spine from his back,"
-  },
-  {
-   "laisse": "CVII",
-   "line": 1371,
-   "of": "Tute la teste li ad par mi sevree,",
-   "tr": "He has cut his whole head clean in two,"
-  },
-  {
-   "laisse": "CXLVII",
-   "line": 1976,
-   "of": "A grant dulor ermes hoi desevrez.» AOI.",
-   "tr": "With great sorrow shall we today be parted.» AOI."
-  },
-  {
-   "laisse": "CXLIX",
-   "line": 2008,
-   "of": "Par tel [...] amur as les vus desevred!",
-   "tr": "With such love there you see them part!"
-  }
- ],
- "taillader": [
-  {
-   "laisse": "CXLIX",
-   "line": 1995,
-   "of": "Tut li detrenchet d'ici qu'al nasel;",
-   "tr": "He cleaves it all the way down to the nasal;"
-  }
- ],
  "tailler": [
   {
    "laisse": "CV",
@@ -14503,32 +14193,6 @@
    "line": 1026,
    "of": "- «Tais Oliver,» li quens Rollant respunt,",
    "tr": "- «Be silent, Oliver,» Count Roland replies,"
-  }
- ],
- "tarder": [
-  {
-   "laisse": "XXVI",
-   "line": 338,
-   "of": "Quant aler dei, n'i ai plus que targer.»",
-   "tr": "Since I must depart, there is no more reason for me to tarry.»"
-  },
-  {
-   "laisse": "LII",
-   "line": 659,
-   "of": "Guenes respunt: «Mei est vis que trop targe!»",
-   "tr": "Ganelon answers: «It seems to me that I tarry too long!»"
-  },
-  {
-   "laisse": "CV",
-   "line": 1345,
-   "of": "E Oliver de ferir ne se target,",
-   "tr": "And Oliver does not delay in striking,"
-  },
-  {
-   "laisse": "CX",
-   "line": 1414,
-   "of": "Li .XII. per ne s'en targent nient,",
-   "tr": "The Twelve Peers do not hold back at all,"
   }
  ],
  "teindre": [
@@ -14849,114 +14513,6 @@
    "tr": "He grips Halteclere, whose steel was burnished,"
   }
  ],
- "tirer": [
-  {
-   "laisse": "LXV",
-   "line": 811,
-   "of": "Enceis qu'en seient. VII.C. espees traites.",
-   "tr": "Before seven hundred swords be drawn."
-  },
-  {
-   "laisse": "CIV",
-   "line": 1324,
-   "of": "Trait Durendal, sa bone espee nue,",
-   "tr": "He draws Durendal, his good naked sword,"
-  },
-  {
-   "laisse": "CVI",
-   "line": 1365,
-   "of": "- «Ne la poi traire,» Oliver li respunt,",
-   "tr": "- «I could not draw it,» Oliver answers him,"
-  },
-  {
-   "laisse": "CVII",
-   "line": 1367,
-   "of": "Danz Oliver trait ad sa bone espee,",
-   "tr": "Lord Oliver has drawn his good sword,"
-  }
- ],
- "tomber": [
-  {
-   "laisse": "XXV",
-   "line": 333,
-   "of": "Quant le dut prendre, si li caït a tere.",
-   "tr": "When he had to take it, it fell from him to the ground."
-  },
-  {
-   "laisse": "XLIII",
-   "line": 578,
-   "of": "Carlles verrat sun grant orguill cadeir;",
-   "tr": "Charles will see his great pride fall;"
-  },
-  {
-   "laisse": "LX",
-   "line": 764,
-   "of": "Qui[d]ás, le guant me caïst en la place,",
-   "tr": "Did you think the glove would fall to me on the spot,"
-  },
-  {
-   "laisse": "LXI",
-   "line": 769,
-   "of": "Que il me chedet, cum fist a Guenelun",
-   "tr": "that it should fall from me, as it happened to Ganelon"
-  },
-  {
-   "laisse": "LXXVIII",
-   "line": 981,
-   "of": "Pluie n'i chet, rusee n'i adeiset,",
-   "tr": "No rain falls there, no dew settles there,"
-  },
-  {
-   "laisse": "LXXXIV",
-   "line": 1064,
-   "of": "Ne France dulce ja cheet en viltet!",
-   "tr": "Nor sweet France ever fall into disgrace!"
-  },
-  {
-   "laisse": "XCVI",
-   "line": 1267,
-   "of": "Li paiens chet cuntreval a un quat;",
-   "tr": "The pagan falls down dead at one blow;"
-  },
-  {
-   "laisse": "CVI",
-   "line": 1356,
-   "of": "E la cervele li chet as piez desuz;",
-   "tr": "And his brains fall down at his feet;"
-  },
-  {
-   "laisse": "CX",
-   "line": 1425,
-   "of": "Chiedent i fuildres e menut e suvent,",
-   "tr": "Thunderbolts fall there, both small and frequent,"
-  },
-  {
-   "laisse": "CXVII",
-   "line": 1551,
-   "of": "Brandist sun colp e li Sarrazins chiet;",
-   "tr": "He brandishes his blow and the Saracen falls;"
-  },
-  {
-   "laisse": "CXLVIII",
-   "line": 1980,
-   "of": "Encuntre tere en cheent les esclaces.",
-   "tr": "The clots of it fall to the ground."
-  },
-  {
-   "laisse": "CLI",
-   "line": 2033,
-   "of": "Quel part qu'il alt, ne poet mie chaïr.",
-   "tr": "Wherever he may go, he cannot fall."
-  }
- ],
- "tordre": [
-  {
-   "laisse": "LXI",
-   "line": 772,
-   "of": "Si duist sa barbe, e detoerst sun gernun;",
-   "tr": "He smoothed his beard, and twisted his moustache;"
-  }
- ],
  "toucher": [
   {
    "laisse": "LXIX",
@@ -14965,22 +14521,10 @@
    "tr": "On a mule, prodding it with a stick."
   },
   {
-   "laisse": "LXXVIII",
-   "line": 981,
-   "of": "Pluie n'i chet, rusee n'i adeiset,",
-   "tr": "No rain falls there, no dew settles there,"
-  },
-  {
    "laisse": "CIII",
    "line": 1316,
    "of": "Deus le guarit, qu'el(l) cors ne l'ad tuchet.",
    "tr": "God protects him, for it did not touch his body."
-  },
-  {
-   "laisse": "CXLIX",
-   "line": 1996,
-   "of": "Mais en la teste ne l'ad mie adeset.",
-   "tr": "But he has not at all touched the head."
   }
  ],
  "tourner": [
@@ -15041,12 +14585,30 @@
    "tr": "He who asks you to feign indifference has betrayed him."
   }
  ],
- "traiter": [
+ "traire": [
   {
-   "laisse": "XXXV",
-   "line": 453,
-   "of": "Dist l'algalifes: «Mal nos avez baillit,",
-   "tr": "The caliph said: «You have served us ill,"
+   "laisse": "LXV",
+   "line": 811,
+   "of": "Enceis qu'en seient. VII.C. espees traites.",
+   "tr": "Before seven hundred swords be drawn."
+  },
+  {
+   "laisse": "CIV",
+   "line": 1324,
+   "of": "Trait Durendal, sa bone espee nue,",
+   "tr": "He draws Durendal, his good naked sword,"
+  },
+  {
+   "laisse": "CVI",
+   "line": 1365,
+   "of": "- «Ne la poi traire,» Oliver li respunt,",
+   "tr": "- «I could not draw it,» Oliver answers him,"
+  },
+  {
+   "laisse": "CVII",
+   "line": 1367,
+   "of": "Danz Oliver trait ad sa bone espee,",
+   "tr": "Lord Oliver has drawn his good sword,"
   }
  ],
  "trancher": [
@@ -15247,21 +14809,7 @@
    "tr": "Through so many lands he has worn out his body,"
   }
  ],
- "tromper": [
-  {
-   "laisse": "VII",
-   "line": 95,
-   "of": "Nes poet guarder que alques ne l'engignent. AOI.",
-   "tr": "He cannot guard against their deceiving him in some way. AOI."
-  }
- ],
  "troubler": [
-  {
-   "laisse": "LXXXI",
-   "line": 1036,
-   "of": "E lui meïsme en est mult esguaret.",
-   "tr": "And he himself is much troubled by it."
-  },
   {
    "laisse": "CXLIX",
    "line": 1990,
@@ -15281,6 +14829,12 @@
    "line": 701,
    "of": "Franc desherbergent, funt lur sumers trosser:",
    "tr": "The Franks break camp, have their pack-horses loaded:"
+  },
+  {
+   "laisse": "LVI",
+   "line": 722,
+   "of": "Par tel air l'at estrussee e brandie,",
+   "tr": "With such force he wrenched and brandished it,"
   }
  ],
  "trouver": [
@@ -15349,164 +14903,6 @@
    "line": 1929,
    "of": "Cuntre un des noz en truverat morz .XV.,",
    "tr": "For one of ours he will find fifteen of them dead,"
-  }
- ],
- "tuer": [
-  {
-   "laisse": "III",
-   "line": 43,
-   "of": "Par nun d'ocire i enveierai le men.",
-   "tr": "Even at the risk of death I will send mine."
-  },
-  {
-   "laisse": "VIII",
-   "line": 102,
-   "of": "Ne seit ocis, u devient chrestien.",
-   "tr": "Who is not slain, or becomes a Christian."
-  },
-  {
-   "laisse": "X",
-   "line": 149,
-   "of": "Pa[r] num de ocire i metrai un mien filz,",
-   "tr": "At risk of being slain, I will put there a son of mine,"
-  },
-  {
-   "laisse": "XIV",
-   "line": 213,
-   "of": "Si vengez cels que li fels fist ocire!» AOI.",
-   "tr": "And avenge those whom the villain had killed!» AOI."
-  },
-  {
-   "laisse": "XXIX",
-   "line": 391,
-   "of": "Seit, ki l'ociet, tute pais puis avriúmes.» AOI.",
-   "tr": "Were someone to slay him, we should then have full peace.» AOI."
-  },
-  {
-   "laisse": "XXXI",
-   "line": 404,
-   "of": "Que il querreient, que Rollant fust ocis.",
-   "tr": "That they would seek a way for Roland to be killed."
-  },
-  {
-   "laisse": "XLIV",
-   "line": 581,
-   "of": "«Cum faitement purrai Rollant ocire?»",
-   "tr": "«How might I be able to kill Roland?»"
-  },
-  {
-   "laisse": "LXIX",
-   "line": 867,
-   "of": "Jo l'ocirai a mun espiet trenchant.",
-   "tr": "I will kill him with my sharp spear."
-  },
-  {
-   "laisse": "LXX",
-   "line": 884,
-   "of": "Il est juget que nus les ocirum.» AOI.",
-   "tr": "It is judged that we shall kill them.» AOI."
-  },
-  {
-   "laisse": "LXXVII",
-   "line": 963,
-   "of": "En Rencesvals irai Rollant ocire,",
-   "tr": "To Roncevaux I will go to slay Roland,"
-  },
-  {
-   "laisse": "CII",
-   "line": 1308,
-   "of": "Des .XII. pers li .X. en sunt ocis;",
-   "tr": "Of the Twelve Peers, ten of them are slain;"
-  },
-  {
-   "laisse": "CVI",
-   "line": 1358,
-   "of": "Pois ad ocis Turgis e Esturguz;",
-   "tr": "Then he has slain Turgis and Esturguz;"
-  },
-  {
-   "laisse": "CVIII",
-   "line": 1389,
-   "of": "E l'arcevesque lor ocist Siglorel,",
-   "tr": "And the archbishop slew Siglorel for them,"
-  },
-  {
-   "laisse": "CXIII",
-   "line": 1484,
-   "of": "Mielz est mult que jo l'alge ocire.",
-   "tr": "It is far better that I go and slay him."
-  },
-  {
-   "laisse": "CXIV",
-   "line": 1488,
-   "of": "Ço ert uns reis qu'l ocist en Denemarche.",
-   "tr": "He was a king whom he slew in Denmark."
-  },
-  {
-   "laisse": "CXVII",
-   "line": 1553,
-   "of": "Puis ad ocis le duc Alphaïen;",
-   "tr": "Then he has slain Duke Alphaïen;"
-  },
-  {
-   "laisse": "CXVIII",
-   "line": 1567,
-   "of": "Le patriarche ocist devant les funz.",
-   "tr": "He slew the patriarch before the baptismal fonts."
-  },
-  {
-   "laisse": "CXIX",
-   "line": 1588,
-   "of": "Ambure ocit, ki quel blasme ne quil lot.",
-   "tr": "He kills them both, let who will blame or praise it."
-  },
-  {
-   "laisse": "CXXI",
-   "line": 1608,
-   "of": "Tel ad ocis dunt al coer me regrette.»",
-   "tr": "You have slain one for whom my heart grieves.»"
-  },
-  {
-   "laisse": "CXXII",
-   "line": 1622,
-   "of": "Sun cumpaignun Gerers ocit uncore",
-   "tr": "His companion Gerier he slays as well"
-  },
-  {
-   "laisse": "CXXIII",
-   "line": 1632,
-   "of": "Tel as ocis que mult cher te quid vendre!»",
-   "tr": "You have killed one such that I think I will sell him to you very dear!»"
-  },
-  {
-   "laisse": "CXXIV",
-   "line": 1649,
-   "of": "Ambure ocist seinz nul recoevrement,",
-   "tr": "He slew both without any recovery,"
-  },
-  {
-   "laisse": "CXXVII",
-   "line": 1686,
-   "of": "Tuz sunt ocis cist Franceis chevalers,",
-   "tr": "All are slain, these French knights,"
-  },
-  {
-   "laisse": "CXL",
-   "line": 1866,
-   "of": "De doel murra, se altre ne m'i ocit.",
-   "tr": "I shall die of grief, if nothing else slays me."
-  },
-  {
-   "laisse": "CXLII",
-   "line": 1894,
-   "of": "Puis ad ocis Yvoeries e Ivon",
-   "tr": "then he has killed Yvoire and Yvon,"
-  },
-  {
-   "laisse": "CXLII",
-   "line": 1898,
-   "of": "A si grant tort m'ociz mes cumpaignuns!",
-   "tr": "So very wrongly you kill my companions!"
   }
  ],
  "user": [
@@ -16775,14 +16171,6 @@
    "tr": "Charles's battle-cry he does not wish to forget:"
   }
  ],
- "voyager": [
-  {
-   "laisse": "XI",
-   "line": 167,
-   "of": "Par cels de France voelt il del tut errer. AOI.",
-   "tr": "Through those of France he wishes to act in everything. AOI."
-  }
- ],
  "vêtir": [
   {
    "laisse": "XXIX",
@@ -16809,29 +16197,21 @@
    "tr": "helmets laced on and white hauberks donned."
   }
  ],
- "échapper": [
+ "ébaudir": [
   {
-   "laisse": "XLIV",
-   "line": 593,
-   "of": "De quel que seit Rollant n'estuertrat mie.",
-   "tr": "From one or the other Roland will not escape."
-  }
- ],
- "échoir": [
-  {
-   "laisse": "XXXV",
-   "line": 456,
-   "of": "- «Sire,» dist Guenes, «mei l'avent a suffrir;",
-   "tr": "- «Sire,» said Ganelon, «it falls to me to endure it;"
-  },
-  {
-   "laisse": "CXXVII",
-   "line": 1684,
-   "of": "As quatre [es]turs lor est avenut ben;",
-   "tr": "In the four assaults it went well for them;"
+   "laisse": "CXV",
+   "line": 1523,
+   "of": "A icest mot si s'esbaldissent Franc,",
+   "tr": "At this word the Franks take heart,"
   }
  ],
  "éclaircir": [
+  {
+   "laisse": "LXXVII",
+   "line": 958,
+   "of": "Cele nel veit vers lui ne s'esclargisset;",
+   "tr": "None sees him but she brightens toward him;"
+  },
   {
    "laisse": "CXXXVII",
    "line": 1805,
@@ -16841,16 +16221,24 @@
  ],
  "éclairer": [
   {
+   "laisse": "XXI",
+   "line": 301,
+   "of": "Que jo n'esclair ceste meie grant ire.»",
+   "tr": "To relieve this great wrath of mine.»"
+  },
+  {
    "laisse": "LIII",
    "line": 667,
    "of": "Par main en l'albe, si cum li jurz esclairet,",
    "tr": "At morning, in the dawn, as the day grows bright,"
-  },
+  }
+ ],
+ "éclisser": [
   {
-   "laisse": "LXXVII",
-   "line": 958,
-   "of": "Cele nel veit vers lui ne s'esclargisset;",
-   "tr": "None sees him but she brightens toward him;"
+   "laisse": "CVI",
+   "line": 1359,
+   "of": "La hanste briset e esclicet josqu'as poinz.",
+   "tr": "His lance breaks and splinters all the way to his fists."
   }
  ],
  "écouter": [
@@ -17003,28 +16391,46 @@
    "tr": "It is written in the charters and in the records,"
   }
  ],
- "écrouler": [
+ "égarer": [
   {
-   "laisse": "CX",
-   "line": 1429,
-   "of": "N'en ad recet dunt del mur ne cravent.",
-   "tr": "There is no dwelling whose wall does not crumble."
+   "laisse": "LXXXI",
+   "line": 1036,
+   "of": "E lui meïsme en est mult esguaret.",
+   "tr": "And he himself is much troubled by it."
   }
  ],
- "égaler": [
+ "élire": [
   {
-   "laisse": "CXLVIII",
-   "line": 1983,
-   "of": "Jamais n'iert hume ki tun cors cuntrevaillet.",
-   "tr": "Never will there be a man who equals your worth."
+   "laisse": "XX",
+   "line": 275,
+   "of": "«Car m'eslisez un barun de ma marche,",
+   "tr": "«Now choose me a baron of my march,"
+  },
+  {
+   "laisse": "LXIV",
+   "line": 802,
+   "of": "Entr'e[l]s eslisent .XX. milie chevalers. AOI.",
+   "tr": "Among themselves they choose twenty thousand knights. AOI."
+  },
+  {
+   "laisse": "LXX",
+   "line": 877,
+   "of": "Eslisez mei .XII. de voz baruns,",
+   "tr": "Choose me twelve of your barons,"
   }
  ],
- "élancer": [
+ "émerveiller": [
   {
-   "laisse": "CXXI",
-   "line": 1609,
-   "of": "Sun bon ceval i ad fait esdemetre,",
-   "tr": "He spurred his good horse to leap forward,"
+   "laisse": "XLI",
+   "line": 537,
+   "of": "Dist li paiens: «Mult me puis merveiller",
+   "tr": "The pagan said: «Greatly may I marvel"
+  },
+  {
+   "laisse": "XLIII",
+   "line": 571,
+   "of": "N'i ait Franceis ki tot ne s'en merveilt.",
+   "tr": "That there will be no Frank who does not marvel at it."
   }
  ],
  "épargner": [
@@ -17045,134 +16451,6 @@
    "line": 1882,
    "of": "Respunt Rollant: «Ferez, nes esparignez!»",
    "tr": "Roland answers: «Strike, do not spare them!»"
-  }
- ],
- "éperonner": [
-  {
-   "laisse": "LXXXIX",
-   "line": 1125,
-   "of": "Sun cheval broche e muntet un lariz,",
-   "tr": "He spurs his horse and climbs a hillock,"
-  },
-  {
-   "laisse": "XCII",
-   "line": 1184,
-   "of": "Brochent ad ait pur le plus tost aler,",
-   "tr": "They spur hard to go all the faster,"
-  },
-  {
-   "laisse": "XCIII",
-   "line": 1197,
-   "of": "Sun cheval brochet, laiset curre a esforz,",
-   "tr": "He spurs his horse, lets it run at full force,"
-  },
-  {
-   "laisse": "XCIV",
-   "line": 1225,
-   "of": "Le cheval brochet des oriez esperuns,",
-   "tr": "He spurs his horse with his golden spurs,"
-  },
-  {
-   "laisse": "XCV",
-   "line": 1245,
-   "of": "Sun cheval brochet des esperuns d'or fin,",
-   "tr": "He spurs his horse with the spurs of fine gold,"
-  },
-  {
-   "laisse": "C",
-   "line": 1290,
-   "of": "Sun cheval (...) brochet, si li laschet la resne,",
-   "tr": "Spurs his horse, lets loose the rein,"
-  },
-  {
-   "laisse": "CIII",
-   "line": 1313,
-   "of": "Le cheval brochet, vait ferir Oliver:",
-   "tr": "He spurs his horse, goes to strike Oliver:"
-  },
-  {
-   "laisse": "CIV",
-   "line": 1325,
-   "of": "Sun cheval brochet, si vait ferir Chernuble:",
-   "tr": "He spurs his horse, and goes to strike Chernuble:"
-  },
-  {
-   "laisse": "CVIII",
-   "line": 1381,
-   "of": "Laschent lor reisnes, brochent amdui a ait,",
-   "tr": "They slacken their reins, both spur eagerly,"
-  },
-  {
-   "laisse": "CXIV",
-   "line": 1496,
-   "of": "Li arcevesque brochet par tant grant vasselage:",
-   "tr": "The archbishop spurs with such great valor:"
-  },
-  {
-   "laisse": "CXVI",
-   "line": 1535,
-   "of": "Brochet le bien, le frein li abandunet,",
-   "tr": "He spurs it hard, gives it free rein,"
-  },
-  {
-   "laisse": "CXVII",
-   "line": 1548,
-   "of": "Sun cheval brochet des esperuns d'or mier,",
-   "tr": "He spurs his horse with spurs of pure gold,"
-  },
-  {
-   "laisse": "CXVIII",
-   "line": 1572,
-   "of": "Brochet le bien des aguz esperuns,",
-   "tr": "He spurs it well with sharp spurs,"
-  },
-  {
-   "laisse": "CXIX",
-   "line": 1581,
-   "of": "Sun ceval brochet, si li curt ad esforz;",
-   "tr": "He spurs his horse, and rushes at him with all his might;"
-  },
-  {
-   "laisse": "CXXII",
-   "line": 1616,
-   "of": "Laschet la resne, des esperuns le brochet,",
-   "tr": "He slackens the rein, spurs it with his spurs,"
-  },
-  {
-   "laisse": "CXXIII",
-   "line": 1633,
-   "of": "Sun ceval brochet, ki oït del cuntence.",
-   "tr": "He spurs his horse, which heard the dispute."
-  },
-  {
-   "laisse": "CXXXII",
-   "line": 1736,
-   "of": "Le cheval brochet des esperuns d'or mer,",
-   "tr": "He spurs his horse with the spurs of pure gold,"
-  },
-  {
-   "laisse": "CXXXVI",
-   "line": 1800,
-   "of": "Brochent ad ait tant cum durent li port.",
-   "tr": "They spur eagerly as far as the passes extend."
-  },
-  {
-   "laisse": "CXXXIX",
-   "line": 1843,
-   "of": "Puignent ad ait tuit li barun de France;",
-   "tr": "The barons of France spur on eagerly;"
-  },
-  {
-   "laisse": "CXLII",
-   "line": 1890,
-   "of": "Brochet le ben, si vait ferir Bevon,",
-   "tr": "spurs it well, and goes to strike Beuve,"
-  },
-  {
-   "laisse": "CXLV",
-   "line": 1943,
-   "of": "Brochet le ben des esperuns a or,",
-   "tr": "He spurs it hard with his spurs of gold,"
   }
  ],
  "épier": [
@@ -17197,70 +16475,6 @@
    "tr": "He cannot help but be terrified by it,"
   }
  ],
- "équiper": [
-  {
-   "laisse": "XI",
-   "line": 161,
-   "of": ".XII. serjanz les unt ben cunreez.",
-   "tr": "Twelve sergeants have well equipped them."
-  },
-  {
-   "laisse": "XXVII",
-   "line": 343,
-   "of": "De guarnemenz se prent a cunreer,",
-   "tr": "He sets about equipping himself with gear,"
-  },
-  {
-   "laisse": "LV",
-   "line": 713,
-   "of": "Escuz as cols e lances adubees.",
-   "tr": "shields at their necks and lances equipped."
-  },
-  {
-   "laisse": "LXXVIII",
-   "line": 993,
-   "of": "Vunt s'aduber desuz une sapide.",
-   "tr": "They go to arm themselves beneath a pine tree."
-  },
-  {
-   "laisse": "LXXIX",
-   "line": 994,
-   "of": "Paien s'adubent des osbercs sarazineis,",
-   "tr": "The pagans arm themselves with Saracen hauberks,"
-  },
-  {
-   "laisse": "XC",
-   "line": 1143,
-   "of": "Adobez sunt a lei de chevalers",
-   "tr": "They are equipped in the manner of knights"
-  },
-  {
-   "laisse": "CXXXV",
-   "line": 1791,
-   "of": "Adubez vos, si criez vostre enseigne,",
-   "tr": "Arm yourselves, cry out your war-cry,"
-  },
-  {
-   "laisse": "CXXXVI",
-   "line": 1795,
-   "of": "Franceis descendent, si adubent lor cors",
-   "tr": "The French dismount, and they equip their bodies"
-  }
- ],
- "étonner": [
-  {
-   "laisse": "XLI",
-   "line": 537,
-   "of": "Dist li paiens: «Mult me puis merveiller",
-   "tr": "The pagan said: «Greatly may I marvel"
-  },
-  {
-   "laisse": "XLIII",
-   "line": 571,
-   "of": "N'i ait Franceis ki tot ne s'en merveilt.",
-   "tr": "That there will be no Frank who does not marvel at it."
-  }
- ],
  "éveiller": [
   {
    "laisse": "LVI",
@@ -17273,14 +16487,6 @@
    "line": 736,
    "of": "Carles se dort, mie ne s'esveillat. AOI.",
    "tr": "Charles sleeps on, he did not wake at all. AOI."
-  }
- ],
- "éviter": [
-  {
-   "laisse": "LXXXVII",
-   "line": 1096,
-   "of": "Ja pur murir n'eschiverunt bataille.",
-   "tr": "Never, even on pain of death, will they shun battle."
   }
  ],
  "être": [

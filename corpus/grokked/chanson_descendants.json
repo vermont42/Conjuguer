@@ -1,0 +1,1500 @@
+[
+ {
+  "head": "aconter",
+  "descendant": "raconter",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF aconter (a- + conter < computare); the bare aconter died but the intensive prefixed form raconter is its continuation in the 'tell/recount' sense; conter also survives."
+ },
+ {
+  "head": "acorder",
+  "descendant": "accorder",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF acorder < Vulgar Latin *accordare; survives as Modern French accorder with modernized (doubled-c) spelling."
+ },
+ {
+  "head": "acraventer",
+  "descendant": "acravanter",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF acraventer/cravanter < *crepantare (crepare); continues as the rare/archaic Modern French lemma acravanter (still in fr.Wiktionary); modern écraser/abattre are unrelated roots."
+ },
+ {
+  "head": "acueillir",
+  "descendant": "accueillir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF acueillir < accolligere (ad- + colligere); survives as Modern French accueillir with modernized spelling."
+ },
+ {
+  "head": "adeser",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF adeser < VL *adhaesare (adhaerere); left no Modern French verb lemma — modern 'touch' uses unrelated toucher, and adhérer is a learned borrowing, not a phonetic descendant."
+ },
+ {
+  "head": "aduber",
+  "descendant": "adouber",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF aduber/adober < Frankish *dubban; survives as Modern French adouber (to dub a knight), modernized spelling."
+ },
+ {
+  "head": "adurer",
+  "descendant": "adurer",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF adurer < adurere; still recorded as a vieilli/rare Modern French lemma adurer in fr.Wiktionary, so it continues as itself (not the related endurer/endurcir)."
+ },
+ {
+  "head": "afaitier",
+  "descendant": "affaiter",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF afaitier < *affactare (ad- + factum); continues as the technical/falconry Modern French lemma affaiter ('to train/dress'), modernized spelling; the 'arrange' sense shifted."
+ },
+ {
+  "head": "afermer",
+  "descendant": "affermer",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF afermer < affirmare/firmare; survives as Modern French affermer ('to lease/fix'), modernized spelling continuing the same etymon (affirmer is the learned doublet)."
+ },
+ {
+  "head": "afiancer",
+  "descendant": "fiancer",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF afiancer (a- + fiance < fidare); the prefixed form died but the bare descendant fiancer continues the same etymon and pledging sense in Modern French."
+ },
+ {
+  "head": "afiler",
+  "descendant": "affiler",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF afiler < VL *affilare (ad- + filum); survives as Modern French affiler ('to sharpen'), modernized spelling continuing the same etymon (the 'flow' sense is contextual)."
+ },
+ {
+  "head": "afiner",
+  "descendant": "affiner",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF afiner (a- + fin); survives as Modern French affiner, modernized spelling; the 'finish/achieve' sense gave way to 'refine' but the lemma continues."
+ },
+ {
+  "head": "afubler",
+  "descendant": "affubler",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF afubler < afibulare (ad- + fibula); survives as Modern French affubler, modernized spelling continuing the same etymon."
+ },
+ {
+  "head": "ajuster",
+  "descendant": "ajuster",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF ajuster < VL *adiuxtare (ad- + iuxta); survives unchanged as Modern French ajuster."
+ },
+ {
+  "head": "anombrer",
+  "descendant": "nombrer",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF anombrer (a- + nombrer < numerare); the prefixed form died but the bare descendant nombrer (literary, 'to count/number') continues the etymon; dénombrer is the common modern relative."
+ },
+ {
+  "head": "aorer",
+  "descendant": "adorer",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF aorer < adorare; the inherited aorer was supplanted by the re-Latinized learned form adorer continuing the same etymon adorare."
+ },
+ {
+  "head": "appareiller",
+  "descendant": "appareiller",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "From OF apareillier (VLat *appariculare); survives as modern appareiller (prepare/equip sense) — same lemma, modernized spelling."
+ },
+ {
+  "head": "apparoir",
+  "descendant": "apparoir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "From Lat apparere via OF aparoir; modern apparoir is a defective literary verb (il appert) — recognized lemma."
+ },
+ {
+  "head": "aproismier",
+  "descendant": "approximer",
+  "in_dict": false,
+  "confidence": "low",
+  "note": "From Lat approximare; inherited OF aproismier left only dialectal forms, the standard verb died. Modern approximer continues the etymon as a relearned/semi-learned form."
+ },
+ {
+  "head": "aquiser",
+  "descendant": "accoiser",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF acoisier/aquiser (Lat quietare/*quietiare, 'to quiet'); continues as the archaic/literary verb accoiser (Littre) — not 'apaiser' (different root)."
+ },
+ {
+  "head": "aquiter",
+  "descendant": "acquitter",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "From OF aquiter (a- + quite, Lat quietus); regular descendant is modern acquitter — same lemma, modernized spelling."
+ },
+ {
+  "head": "ardre",
+  "descendant": "ardre",
+  "in_dict": false,
+  "confidence": "high",
+  "note": "From Lat ardere via OF ardre~ardoir; modern ardre survives as an archaic verb (Academie/Wiktionary lemma). Not bruler (replacement root)."
+ },
+ {
+  "head": "arester",
+  "descendant": "arrêter",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "From OF arester (a- + rester, Lat restare); regular descendant is modern arrêter — same lemma, modernized spelling."
+ },
+ {
+  "head": "arguer",
+  "descendant": "arguer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "From Lat arguere; OF arguer continues directly into modern arguer (learned but recognized lemma)."
+ },
+ {
+  "head": "aserir",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF a-serir 'to become evening/night' (Lat serum 'evening'); left no modern French verb lemma — modern uses unrelated phrasing (tomber la nuit)."
+ },
+ {
+  "head": "asmer",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "low",
+  "note": "OVERRIDE: From Lat aestimare; the regular inherited form esmer/asmer died (confused with aimer), replaced by the semi-learned estimer which continues the same etymon. Roland gloss 'oser' is a contextual sense, not the etymon."
+ },
+ {
+  "head": "asseürer",
+  "descendant": "assurer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF asseürer (LLat assecurare); old spelling of modern assurer — same lemma."
+ },
+ {
+  "head": "atargier",
+  "descendant": "attarder",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF a-targier (cf. targier 'tarder', Lat *tardicare); reflexive descendant is modern (s')attarder — same prefixed lemma."
+ },
+ {
+  "head": "avaler",
+  "descendant": "avaler",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF avaler (a- + val, Lat vallis), orig. 'go down'; continues as modern avaler (sense shifted to 'swallow') — same lemma."
+ },
+ {
+  "head": "avenir",
+  "descendant": "advenir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "From Lat advenire via OF avenir; modern descendant verb is advenir (re-latinized spelling). (avenir survives only as the noun.)"
+ },
+ {
+  "head": "aïdier",
+  "descendant": "aider",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF aidier (Lat adiutare); regular descendant is modern aider — same lemma."
+ },
+ {
+  "head": "aürer",
+  "descendant": "adorer",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "From Lat adorare; inherited OF aorer/aürer died, replaced by re-latinized adorer which continues the same etymon."
+ },
+ {
+  "head": "baillir",
+  "descendant": "bailler",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF baillir~bailler (Lat bajulare 'to carry'); continues as the archaic/literary verb bailler ('to give') — recognized lemma. Not 'traiter' (different root)."
+ },
+ {
+  "head": "baleer",
+  "descendant": "balayer",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF baleer/baloier 'to float in the wind, sweep'; the form merged phonetically (baloier > balaier > balayer) into modern balayer (sense narrowed to 'sweep')."
+ },
+ {
+  "head": "blancheier",
+  "descendant": "blanchoyer",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF blancheier (blanc + -eier); the -oyer continuation is modern blanchoyer 'to show white' (literary, Littre/Academie lemma). blanchir is a different (-ir) formation."
+ },
+ {
+  "head": "blecier",
+  "descendant": "blesser",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF blecier/blescier (Frankish *blettjan); regular descendant is modern blesser — same lemma."
+ },
+ {
+  "head": "blesmir",
+  "descendant": "blêmir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF blesmir (Germanic *blasmi/*blami 'pale'); regular descendant is modern blêmir — same lemma, modernized spelling."
+ },
+ {
+  "head": "bouter",
+  "descendant": "bouter",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF boter/bouter (Frankish *botan 'to push'); survives as modern bouter (archaic/literary, e.g. 'bouter le feu') — same lemma."
+ },
+ {
+  "head": "brocher",
+  "descendant": "brocher",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF brochier (broche, Lat brocca); continues as modern brocher — same lemma (the 'spur' sense is archaic but the verb persists)."
+ },
+ {
+  "head": "cadeler",
+  "descendant": "cadeler",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF cadeler 'to lead/command' (Occ capdel, Lat capitellum); survives as the archaic/literary verb cadeler (Littre lemma). Not 'commander' (different root)."
+ },
+ {
+  "head": "capler",
+  "descendant": "chapeler",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF capler/chapler 'to strike, cut' (Lat capulare); continues as modern chapeler (desuet/regional, Wiktionnaire lemma). Roland gloss 'frapper' is a different etymon (Frankish), NOT the descendant."
+ },
+ {
+  "head": "carier",
+  "descendant": "charrier",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF carier/charrier (char, Lat carrus); regular descendant is modern charrier — same lemma."
+ },
+ {
+  "head": "castier",
+  "descendant": "châtier",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF castier > chastier (Lat castigare); regular descendant is modern châtier — same lemma, modernized spelling."
+ },
+ {
+  "head": "chalengier",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OVERRIDE: From LLat calumniare; inherited OF chalengier (gave English 'challenge') died in French, the etymon continues as the relearned calomnier. Not 'revendiquer' (different root)."
+ },
+ {
+  "head": "chaloir",
+  "descendant": "chaloir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "From Lat calere via OF chaloir; modern chaloir is a defective impersonal literary verb (il chaut, peu me chaut) — recognized lemma."
+ },
+ {
+  "head": "cheoir",
+  "descendant": "choir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "From Lat *cadere via OF cheoir; modern descendant is the defective literary verb choir."
+ },
+ {
+  "head": "clamer",
+  "descendant": "clamer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "From Lat clamare via OF clamer; continues directly as modern clamer — same lemma."
+ },
+ {
+  "head": "cliner",
+  "descendant": "incliner",
+  "in_dict": true,
+  "confidence": "low",
+  "note": "OF cliner (Lat clinare 'to lean'); the bare verb did not survive into modern French — the etymon's surviving lemma is the prefixed/relearned incliner (Lat inclinare)."
+ },
+ {
+  "head": "comperer",
+  "descendant": "comparer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "From Lat comparare via OF comperer; the phonetic descendant lemma is modern comparer (the 'pay dearly' sense was the OF meaning of the same etymon)."
+ },
+ {
+  "head": "contrevaloir",
+  "descendant": "contrevaloir",
+  "in_dict": false,
+  "confidence": "high",
+  "note": "From Lat contra valere via OF contrevaloir; survives as modern contrevaloir (literary) — same prefixed lemma."
+ },
+ {
+  "head": "cravanter",
+  "descendant": "cravanter",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF cravanter/craventer (Lat crepantare, from crepare); survives as archaic/regional cravanter (Wiktionnaire lemma). Not 's'écrouler' (different root)."
+ },
+ {
+  "head": "croller",
+  "descendant": "crouler",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF croller/crosler (VLat *corrotulare, frequentative of corruere); regular descendant is modern crouler. Roland gloss 'secouer' is a different root, not the descendant."
+ },
+ {
+  "head": "cuarder",
+  "descendant": "couarder",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF cuarder (denominal from couard 'coward') > modern couarder 'to act like a coward / se couarder', a recognized but rare/literary lemma in Littré, Larousse, fr.Wiktionnaire; matches the Roland sense 'faire le lâche'."
+ },
+ {
+  "head": "cuidier",
+  "descendant": "cuider",
+  "in_dict": false,
+  "confidence": "high",
+  "note": "OF cuidier < Latin cogitare 'to think'; survives as modern French cuider 'to think/believe', a recognized lemma (marked obsolete/archaic). Matches the Roland sense 'croire'."
+ },
+ {
+  "head": "cunreer",
+  "descendant": "corroyer",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF conreer/cunreer < Late Latin conredare 'to prepare/arrange' > modern corroyer; descendant survives but now means 'to curry/dress (leather), work (metal/mortar)', not the Roland sense 'équiper'."
+ },
+ {
+  "head": "cuntralier",
+  "descendant": "contrarier",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF contralier/contrarier < Latin contrariare; continues as modern contrarier 'to thwart/annoy'; meaning drifted from the Roland sense 'se quereller' toward 'oppose/vex'."
+ },
+ {
+  "head": "cuvenir",
+  "descendant": "convenir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF covenir/cuvenir < Latin convenire (re-Latinized spelling in Middle French) > modern convenir; descendant survives but now means 'to suit/agree', not the Roland impersonal sense 'falloir' (be necessary)."
+ },
+ {
+  "head": "decheoir",
+  "descendant": "déchoir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF decheoir < Vulgar Latin *decadere < Latin decidere; continues directly as modern déchoir 'to decline/fall (in status)'; matches the gloss 'déchoir'."
+ },
+ {
+  "head": "defaillir",
+  "descendant": "défaillir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF defaillir (dé- + faillir) > modern défaillir 'to faint, weaken, fail'; preserves the Roland sense 'manquer/fail'."
+ },
+ {
+  "head": "degeter",
+  "descendant": "déjeter",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF degeter/desjeter < Latin dejectare (de- + jactare); continues as modern déjeter; descendant survives but now means 'to warp/deform (wood, spine)', not the Roland sense 'rejeter'."
+ },
+ {
+  "head": "demener",
+  "descendant": "démener",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF demener (de- + mener) > modern démener (now chiefly reflexive se démener 'to struggle/exert oneself'); meaning shifted from the Roland senses 'conduire/manifester'."
+ },
+ {
+  "head": "derompre",
+  "descendant": "dérompre",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF derompre/derumpre < Latin disrumpere; survives as modern dérompre, a recognized lemma (Littré, lalanguefrancaise) but now restricted/specialized (agriculture, falconry, papermaking), not the general Roland sense 'rompre'."
+ },
+ {
+  "head": "derumpre",
+  "descendant": "dérompre",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "Variant spelling of derompre; OF derumpre < Latin disrumpere > modern dérompre, a recognized but specialized lemma; meaning narrowed away from the Roland sense 'rompre'."
+ },
+ {
+  "head": "deschevalcier",
+  "descendant": "déchevaucher",
+  "in_dict": false,
+  "confidence": "low",
+  "note": "OF deschevalchier (des- + chevalchier) > modern déchevaucher, a rare recognized lemma (CNRTL, fr.Wiktionnaire) 'to dismount / separate (bones)'; meaning drifted from the Roland sense 'désarçonner'."
+ },
+ {
+  "head": "desclore",
+  "descendant": "déclore",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF desclore < Vulgar Latin *disclaudere < Latin discludere; continues as modern déclore 'to open/unclose', a recognized (archaic, defective) lemma; matches the Roland sense 'ouvrir/fendre'."
+ },
+ {
+  "head": "desconfire",
+  "descendant": "déconfire",
+  "in_dict": false,
+  "confidence": "high",
+  "note": "OF desconfire (dis- + confire) > modern déconfire; descendant survives but the live sense is now 'to discombobulate' (archaic 'to destroy'), drifted from the Roland sense 'défaire/rout'."
+ },
+ {
+  "head": "descoudre",
+  "descendant": "découdre",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF descoudre (des- + coudre) > modern découdre 'to unstitch/unsew'; preserves the Roland sense 'découdre'."
+ },
+ {
+  "head": "desfaire",
+  "descendant": "défaire",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF desfaire < Early Medieval Latin disfacere > Middle French desfaire > modern défaire 'to undo/take apart'; preserves the Roland sense 'défaire'."
+ },
+ {
+  "head": "desherberger",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF desherbergier (des- + herbergier 'to lodge') left no recognized modern French verb lemma; 'desherberger' is not in modern dictionaries (modern equivalent 'déloger/lever le camp' is a different formation)."
+ },
+ {
+  "head": "desmailler",
+  "descendant": "démailler",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF desmailler (des- + maille) continues as modern démailler 'to unravel/unmesh'; the Roland sense 'break the chainmail (maille)' is the same root sense applied to armor."
+ },
+ {
+  "head": "desotreier",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF desotroier/desotreier (des- + otroier 'to grant') left no modern French verb lemma; 'désoctroyer' is not a recognized modern lemma (only octroyer survives, the positive form)."
+ },
+ {
+  "head": "desrengier",
+  "descendant": "déranger",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF desrengier (des- + rengier 'to put in line') > modern déranger; descendant survives but now means 'to disturb/disarrange', drifted from the Roland sense 'quitter les rangs' (the original 11th-c. sense per CNRTL)."
+ },
+ {
+  "head": "dessevrer",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF dessevrer < Vulgar Latin *disseperare left no modern French verb lemma (it survived only into English 'dissever'); modern French sevrer descends from the unprefixed OF sevrer, a different etymon."
+ },
+ {
+  "head": "destorber",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF destorber < Latin disturbare left no modern French verb lemma (it survived only into English 'disturb'); modern French uses unrelated roots troubler/déranger for the Roland sense 'empêcher'."
+ },
+ {
+  "head": "detordre",
+  "descendant": "détordre",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF detordre (de- + tordre) > modern détordre 'to untwist'; preserves the Roland twisting sense 'tordre' (de- nuance of un-twisting)."
+ },
+ {
+  "head": "detrenchier",
+  "descendant": "détrancher",
+  "in_dict": false,
+  "confidence": "low",
+  "note": "OF detrenchier (de- + trenchier) > modern détrancher, a marginal recognized lemma (Cordial) 'to cut up'; matches the Roland sense 'taillader'; low confidence as it is barely lexicalized in modern dictionaries."
+ },
+ {
+  "head": "doluser",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF doloser/dolouser < Latin dolere did not survive into modern French as a verb lemma; the related OF doloir is itself archaic/defunct and only the adjective dolent persists, so no modern verb continues this exact etymon."
+ },
+ {
+  "head": "duire",
+  "descendant": "duire",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF duire < Latin ducere 'to lead'; survives as modern duire, an obsolete/literary lemma meaning 'to train (esp. a bird)'; meaning shifted from the Roland sense 'lisser' (to smooth)."
+ },
+ {
+  "head": "démontrer",
+  "descendant": "démontrer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "Latin demonstrare; head is already the modern spelling (OF demustrer), a living modern French verb lemma — direct descendant."
+ },
+ {
+  "head": "départir",
+  "descendant": "départir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "Latin dispartire/de+partir; head is the modern spelling, still a recognized (literary) modern French verb lemma — direct descendant."
+ },
+ {
+  "head": "embattre",
+  "descendant": "embattre",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF embatre (en+batre) survives as modern French embattre (post-1990 spelling of embatre), a recognized verb lemma — direct descendant."
+ },
+ {
+  "head": "embruncher",
+  "descendant": "embroncher",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF embruncher, variant of embroncher; embroncher survives as a technical modern French verb (roofing/carpentry) — phonetic descendant of the same etymon."
+ },
+ {
+  "head": "empeindre",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF empeindre 'to push/strike' < Latin impingere left no modern French verb lemma (modern uses pousser); not to be confused with empreindre < imprimere, a different etymon."
+ },
+ {
+  "head": "empleier",
+  "descendant": "employer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF empleier/emploiier < Latin implicare; regular descendant is modern French employer."
+ },
+ {
+  "head": "enchacier",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF enchacier 'to pursue' (en+chacier) left no modern verb lemma in that sense (modern uses pourchasser/chasser); modern enchâsser is a homograph from en+châsse, a different etymon."
+ },
+ {
+  "head": "encombrer",
+  "descendant": "encombrer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF encombrer (en+combre < Gaulish *comboros); survives unchanged as the modern French verb encombrer — direct descendant."
+ },
+ {
+  "head": "encontrer",
+  "descendant": "encontrer",
+  "in_dict": false,
+  "confidence": "high",
+  "note": "OF encontrer < Late Latin incontrare; survives as the literary modern French verb encontrer (alongside the prefixed rencontrer) — direct descendant."
+ },
+ {
+  "head": "engigner",
+  "descendant": "engeigner",
+  "in_dict": false,
+  "confidence": "high",
+  "note": "OF engignier 'to deceive' < Latin ingeniare; survives as the archaic/literary modern French verb engeigner — direct descendant."
+ },
+ {
+  "head": "enhaitier",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF enhaitier 'to encourage' (en+hait, of Germanic origin) left no modern French verb lemma; modern uses encourager (unrelated root)."
+ },
+ {
+  "head": "enhelder",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "high",
+  "note": "OF enhelder 'to fit a hilt' (from Germanic helt 'sword hilt') left no modern French verb lemma; the verb died with Old French."
+ },
+ {
+  "head": "enluminer",
+  "descendant": "enluminer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF enluminer < Latin inluminare; survives unchanged as the modern French verb enluminer — direct descendant."
+ },
+ {
+  "head": "enveisier",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF enveisier/envoisier 'to enjoy oneself' (< Latin invitiare) left no modern French verb lemma (only the adjective envoisié lingered); modern uses s'amuser."
+ },
+ {
+  "head": "envoluper",
+  "descendant": "envelopper",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF envoluper/envoleper; regular descendant is modern French envelopper (same etymon, modernized form)."
+ },
+ {
+  "head": "errer",
+  "descendant": "errer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF errer (the 'travel' sense < Latin iterare, merged with errer < errare); errer survives as a modern French verb lemma — direct descendant."
+ },
+ {
+  "head": "esbaldir",
+  "descendant": "ébaudir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF (s')esbaldir (es+bald, Germanic) > esbaudir > modern (s')ébaudir, an archaic/literary modern French verb lemma — direct descendant."
+ },
+ {
+  "head": "esbaneier",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF esbaneier/esbanoier 'to amuse oneself' did not survive past Middle French (esbanoyer); no modern French verb lemma; modern uses s'amuser."
+ },
+ {
+  "head": "escanteler",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF escanteler 'to break in pieces' (es+cantel) left no modern French verb lemma; modern écarteler is a different root (quartier), modern uses mettre en pièces."
+ },
+ {
+  "head": "eschiver",
+  "descendant": "esquiver",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF eschiver (< Frankish *skiuhan); Wiktionary lists modern French esquiver as its descendant, though via a Spanish-loan detour (eschiver > Sp. esquivar > Fr. esquiver) rather than a straight native phonetic line."
+ },
+ {
+  "head": "esclairier",
+  "descendant": "éclairer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF esclairier < Latin exclariare; regular descendant is modern French éclairer (same etymon, modernized form)."
+ },
+ {
+  "head": "esclargir",
+  "descendant": "éclaircir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF esclargir/esclarcir < Latin exclaricire; regular descendant is modern French éclaircir (same etymon, modernized form)."
+ },
+ {
+  "head": "esclicier",
+  "descendant": "éclisser",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF esclicier 'to fly into splinters' (< Frankish *slitan); regular descendant is modern French éclisser (same etymon; sense narrowed to 'to splint')."
+ },
+ {
+  "head": "escolorer",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF escolorer 'to lose color/turn pale' (es+colorer) left no modern French verb lemma in that sense; modern uses pâlir/se décolorer."
+ },
+ {
+  "head": "escrier",
+  "descendant": "écrier",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF escrier < es+crier; regular descendant is modern French (s')écrier (same etymon, modernized form)."
+ },
+ {
+  "head": "esculter",
+  "descendant": "écouter",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF esculter/escouter < Latin auscultare; regular descendant is modern French écouter (same etymon)."
+ },
+ {
+  "head": "esdemetre",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF esdemetre 'to dash/rush forward' (es+de+metre) left no modern French verb lemma; modern uses s'élancer (different root)."
+ },
+ {
+  "head": "esfreer",
+  "descendant": "effrayer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF esfreer/effreer (< Vulgar Latin *exfridare, Germanic frid); regular descendant is modern French effrayer (same etymon)."
+ },
+ {
+  "head": "esgarder",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF esgarder 'to look at' (es+garder, Germanic wardon) left no surviving modern French verb lemma; the es- form died and modern French uses regarder (re+garder), a different-prefix formation, not a descendant of esgarder."
+ },
+ {
+  "head": "esgarer",
+  "descendant": "égarer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF esgarer (es+garer, Germanic); regular descendant is modern French égarer (same etymon)."
+ },
+ {
+  "head": "eslegier",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF eslegier 'to acquit at law' from ex- + Latin litigare; etymon left no modern French verb lemma (modern uses unrelated acquitter/payer)."
+ },
+ {
+  "head": "eslire",
+  "descendant": "élire",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF eslire (Vulgar Latin exlegere, Latin eligere) → MF eslire → French élire; es- prefix > é-."
+ },
+ {
+  "head": "esmaier",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF esmaier only survives as the noun émoi (via MF esmoy); no modern French verb descendant lemma."
+ },
+ {
+  "head": "esmerer",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF esmerer 'to refine/purify' (Latin exmerare) left only the participle esmeré; no surviving modern French verb lemma (synonym affiner is a different root)."
+ },
+ {
+  "head": "espaenter",
+  "descendant": "épouvanter",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "Spelling variant of OF espoenter (Vulgar Latin *expaventare); → French épouvanter."
+ },
+ {
+  "head": "espargnier",
+  "descendant": "épargner",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF espargnier (Frankish *sparanjan) → French épargner; es- prefix > é-."
+ },
+ {
+  "head": "espier",
+  "descendant": "épier",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF espier (Frankish *spehon) → MF espier → French épier (espionner is a separate later formation)."
+ },
+ {
+  "head": "esploitier",
+  "descendant": "exploiter",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF esploitier/espleitier (Latin explicitare) → French exploiter."
+ },
+ {
+  "head": "espoenter",
+  "descendant": "épouvanter",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF espoenter (Vulgar Latin *expaventare) → French épouvanter."
+ },
+ {
+  "head": "esragier",
+  "descendant": "enrager",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF esragier is an alternative form of enragier (en- + rage); → French enrager."
+ },
+ {
+  "head": "establer",
+  "descendant": "établer",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF establer (Latin stabulare) → French établer 'put in a stable' (archaic/agricultural lemma, still in dictionaries)."
+ },
+ {
+  "head": "ester",
+  "descendant": "ester",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF ester (Latin stare) → French ester, surviving as a rare/archaic legal verb ('ester en justice')."
+ },
+ {
+  "head": "estordre",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF estordre (Latin extorquere) 'wrench away/escape'; popular form left no modern verb lemma (étordre is not modern; extorquer is a later learned re-borrowing, échapper unrelated)."
+ },
+ {
+  "head": "estovoir",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF estovoir, impersonal 'to be necessary' (Latin est opus + -oir); died out leaving no modern French verb lemma (modern uses unrelated falloir)."
+ },
+ {
+  "head": "estraire",
+  "descendant": "extraire",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF estraire (Latin extrahere) → French extraire."
+ },
+ {
+  "head": "estrosser",
+  "descendant": "trousser",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF estrosser/estrousser (es- + trousser, Vulgar Latin *torsare); prefixed form died, the root continues as French trousser."
+ },
+ {
+  "head": "ferir",
+  "descendant": "férir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF ferir (Latin ferire) → French férir, the defective literary verb (sans coup férir); frapper is a different etymon."
+ },
+ {
+  "head": "finer",
+  "descendant": "finir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF finer (Latin finare/finire) → MF finer/finir → French finir continues the etymon."
+ },
+ {
+  "head": "forsfaire",
+  "descendant": "forfaire",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF forsfaire (fors + faire, Latin foris facere) → French forfaire, the archaic/literary defective verb."
+ },
+ {
+  "head": "fraindre",
+  "descendant": "enfreindre",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF fraindre (Latin frangere); bare form died, but the prefixed inherited descendant enfreindre (OF enfraindre) continues the etymon."
+ },
+ {
+  "head": "fruisier",
+  "descendant": "froisser",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF fruisier/froissier (Vulgar Latin *frustiare, from frustum) → French froisser."
+ },
+ {
+  "head": "gaber",
+  "descendant": "gaber",
+  "in_dict": false,
+  "confidence": "high",
+  "note": "OF gaber (Old Norse gabba) → French gaber, surviving (archaic/literary) verb."
+ },
+ {
+  "head": "garder",
+  "descendant": "garder",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF guarder/garder (Frankish *wardon) → French garder unchanged."
+ },
+ {
+  "head": "garir",
+  "descendant": "guérir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF garir/guarir (Frankish *warjan) → French guérir."
+ },
+ {
+  "head": "gesir",
+  "descendant": "gésir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF gesir (Latin iacere) → French gésir, the defective verb (ci-gît)."
+ },
+ {
+  "head": "gracier",
+  "descendant": "gracier",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF gracier 'give thanks' (Medieval Latin gratiare) → French gracier; lemma survives, sense shifted to 'pardon'."
+ },
+ {
+  "head": "guagier",
+  "descendant": "gager",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF guagier/gagier (Frankish *waddi) → French gager."
+ },
+ {
+  "head": "guarir",
+  "descendant": "guérir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF guarir/garir (Frankish *warjan) → French guérir."
+ },
+ {
+  "head": "guaster",
+  "descendant": "gâter",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF guaster/gaster (Latin vastare crossed with Frankish *wostjan) → French gâter."
+ },
+ {
+  "head": "guerpir",
+  "descendant": "déguerpir",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF guerpir (Frankish *werpjan); bare form survives only in legal use, the prefixed descendant déguerpir is the living continuation."
+ },
+ {
+  "head": "guier",
+  "descendant": "guider",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF guier (Frankish *witan) → French guider (with -d- reinforced by Italian guidare); same etymon line."
+ },
+ {
+  "head": "gésir",
+  "descendant": "gésir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF gesir (Latin iacere) → French gésir, the defective verb; same head as 'gesir'."
+ },
+ {
+  "head": "honnir",
+  "descendant": "honnir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF honir (Frankish *haunjan) → MF honnir → French honnir, archaic/literary."
+ },
+ {
+  "head": "hosteler",
+  "descendant": "hôteler",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF hosteler (from ostel/hostel, Medieval Latin hospitale) → French hôteler 'to lodge', a rare/archaic dictionary lemma; héberger is a different (Germanic) root."
+ },
+ {
+  "head": "irascir",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF irascir/iraistre (Latin irasci); only the learned adjective irascible survives, no modern French verb lemma (modern uses s'irriter/se fâcher, different roots)."
+ },
+ {
+  "head": "issir",
+  "descendant": "issir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF issir (Latin exire) → French issir, archaic but still a dictionary lemma (participle issu common)."
+ },
+ {
+  "head": "joster",
+  "descendant": "jouter",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF joster < VL *iuxtare; Wiktionary Descendants -> French jouter (to joust); the modernized continuant."
+ },
+ {
+  "head": "jouster",
+  "descendant": "jouter",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "Variant spelling of joster < *iuxtare; same descendant jouter."
+ },
+ {
+  "head": "loer",
+  "descendant": "louer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF loer < Latin locare (to hire/let); regular descendant is modern louer (rent), which also merges laudare 'praise'."
+ },
+ {
+  "head": "luer",
+  "descendant": "louer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "Variant of OF loer < locare 'to hire/pay'; descendant is modern louer."
+ },
+ {
+  "head": "manoir",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "high",
+  "note": "OF verb manoir < Latin manere survives only as the noun manoir; no modern French verb lemma (meaning now rester/demeurer)."
+ },
+ {
+  "head": "mesler",
+  "descendant": "mêler",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF mesler < VL *misculare; Wiktionary Descendants -> French mêler (s->circumflex); regular descendant."
+ },
+ {
+  "head": "mespenser",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF mes- + penser 'to think ill'; the mes- prefixed verb left no modern lemma (modern uses mal penser); penser survives but is a different unprefixed verb."
+ },
+ {
+  "head": "mouvoir",
+  "descendant": "mouvoir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF movoir/mouvoir < Latin movere; survives unchanged as modern mouvoir."
+ },
+ {
+  "head": "muer",
+  "descendant": "muer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF muer < Latin mutare; survives as modern muer (to moult; the 'ne pouvoir muer' sense is archaic but same lemma)."
+ },
+ {
+  "head": "nasfrer",
+  "descendant": "navrer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF nafrer/navrer/nasfrer 'to wound' (prob. < Old Norse nafra); regular descendant is modern navrer."
+ },
+ {
+  "head": "neier",
+  "descendant": "noyer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF neier < Latin necare; modernized spelling is noyer (to drown)."
+ },
+ {
+  "head": "noncier",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF noncier < Latin nuntiare; the bare verb (*noncer) died out; modern uses prefixed annoncer/prononcer (anuntiare/pronuntiare), different etyma -> no bare descendant."
+ },
+ {
+  "head": "ocire",
+  "descendant": "occire",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF ocire < VL *occidere; survives as the defective archaic/literary verb occire (infinitive + past part. occis)."
+ },
+ {
+  "head": "osteier",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF osteier/ostoier 'to wage war', denominal of ost 'army'; left no modern verb lemma (modern uses guerroyer)."
+ },
+ {
+  "head": "otreier",
+  "descendant": "octroyer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF otreier/otroiier < Latin auctorizare; Wiktionary: otroiier -> octroyer with learned re-insertion of c; regular descendant."
+ },
+ {
+  "head": "ouïr",
+  "descendant": "ouïr",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF oir/ouir < Latin audire; survives as the defective literary verb ouïr; same lemma."
+ },
+ {
+  "head": "oïr",
+  "descendant": "ouïr",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF oïr < Latin audire; modern continuant is the defective literary verb ouïr."
+ },
+ {
+  "head": "palmeier",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF palmeier/palmoiier 'to brandish' (denominal of palme 'palm of hand'); left no modern verb lemma (modern uses brandir)."
+ },
+ {
+  "head": "peceier",
+  "descendant": "dépecer",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF peceier/pecoiier 'to break in pieces' (denominal of piece); bare form died, but the prefix-preserving continuant dépecer (dé- + piece) survives as the modern descendant of the pecier family."
+ },
+ {
+  "head": "peler",
+  "descendant": "peler",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF peler < Latin pilare/pellis; survives unchanged as modern peler (to peel/strip)."
+ },
+ {
+  "head": "plevir",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "low",
+  "note": "OF plevir 'to pledge' (Frankish origin); no standard modern French verb lemma (only rare legal pleiger, a different derivation); modern uses garantir/jurer."
+ },
+ {
+  "head": "plorer",
+  "descendant": "pleurer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF plorer < Latin plorare; modernized form is pleurer; regular descendant."
+ },
+ {
+  "head": "poindre",
+  "descendant": "poindre",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF poindre < Latin pungere; survives as modern poindre (to dawn/sting), defective/literary; same lemma."
+ },
+ {
+  "head": "porparler",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF porparler 'to plot/negotiate'; the verb died, surviving only as the noun pourparler(s); no modern verb lemma."
+ },
+ {
+  "head": "porpenser",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF porpenser (por- + penser) 'to ponder'; the por-/pour- prefixed verb left no modern lemma (modern uses réfléchir)."
+ },
+ {
+  "head": "porprendre",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "low",
+  "note": "OF porprendre (por- + prendre) 'to occupy/surround'; archaic, survives only via past part. noun pourpris; no modern verb lemma."
+ },
+ {
+  "head": "preer",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF preer/preder < LL praedare 'to plunder'; left no modern verb lemma (gives noun proie; modern uses piller)."
+ },
+ {
+  "head": "priser",
+  "descendant": "priser",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF prisier < LL pretiare; survives as modern priser (to prize/value); same lemma."
+ },
+ {
+  "head": "querre",
+  "descendant": "quérir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF querre < Latin quaerere; modern continuant is the defective literary quérir (to fetch); same etymon."
+ },
+ {
+  "head": "quérir",
+  "descendant": "quérir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF querre/querir < quaerere; modern defective literary verb quérir; same lemma."
+ },
+ {
+  "head": "rachater",
+  "descendant": "racheter",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF rachater (re- + achater) < re- + accaptare; modernized form is racheter; regular descendant (gloss 'echo' is contextual)."
+ },
+ {
+  "head": "raiier",
+  "descendant": "rayer",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF raiier/raier < Latin radiare 'to radiate/stream'; Wiktionary Descendants -> French rayer (noted 'possibly'); the direct phonetic descendant."
+ },
+ {
+  "head": "reconoistre",
+  "descendant": "reconnaître",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF reconoistre (re- + conoistre) < recognoscere; modernized spelling reconnaître; regular descendant."
+ },
+ {
+  "head": "recroire",
+  "descendant": "recroire",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF recroire (re- + croire) < recredere; survives as the rare modern verb recroire (Wiktionary lists it as a current French 3rd-group lemma); same etymon."
+ },
+ {
+  "head": "recuvrer",
+  "descendant": "recouvrer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF recuvrer/recovrer < Latin recuperare; modernized spelling recouvrer (to recover); regular descendant."
+ },
+ {
+  "head": "redrecer",
+  "descendant": "redresser",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF redrecier (re- + drecier) < *directiare; modernized form redresser; regular descendant."
+ },
+ {
+  "head": "referir",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "re-+ferir (L. ferire); the simple etymon survives as defective literary 'férir', but the prefixed 'referir' left no modern French lemma."
+ },
+ {
+  "head": "reflamber",
+  "descendant": "flamber",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "re-+flamber (Frankish *flamber/L. flammare); 'reflamber' itself is not a standard modern lemma, but the etymon continues in the living verb 'flamber'."
+ },
+ {
+  "head": "remaindre",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "high",
+  "note": "OF remaindre/remanoir (L. remanere) is only an Old French lemma; the etymon died in standard modern French, which uses unrelated rester/demeurer."
+ },
+ {
+  "head": "remembrer",
+  "descendant": "remembrer",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "L. rememorari/re-+membrer; 'remembrer' survives as an archaic/literary modern French verb 'to remember', same spelling continuation."
+ },
+ {
+  "head": "repairer",
+  "descendant": "repairer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF repairier (L. repatriare); continues as modern French 'repairer' (also se repairer, of an animal returning to its lair), same etymon."
+ },
+ {
+  "head": "retraire",
+  "descendant": "retraire",
+  "in_dict": false,
+  "confidence": "high",
+  "note": "re-+traire (L. retrahere); 'retraire' is a recognized archaic/legal modern French verb, regular phonetic continuation of the etymon."
+ },
+ {
+  "head": "rover",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "high",
+  "note": "OF rover (L. rogare 'to ask'); descent traced only to Middle French rover, no surviving modern French verb lemma."
+ },
+ {
+  "head": "saillir",
+  "descendant": "saillir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "L. salire 'to leap/gush'; survives directly as modern French 'saillir', same spelling and etymon (the 'gush/spurt' sense matches the Roland 'jaillir')."
+ },
+ {
+  "head": "se démenter",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF (se) dementer (LL. dementare 'drive mad'); no modern lemma survives — modern 'démentir' is a different etymon (de-+mentir); meaning now via unrelated se lamenter."
+ },
+ {
+  "head": "se herberger",
+  "descendant": "héberger",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF (se) herberger (Frankish *heribergon); continues as modern French 'héberger', regular phonetic descendant of the same etymon."
+ },
+ {
+  "head": "se merveiller",
+  "descendant": "émerveiller",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF (se) merveillier (L. mirabilia/*mirabiliare); reflexive 'se merveiller' is archaic, but the etymon survives in the living prefixed verb (s')émerveiller."
+ },
+ {
+  "head": "se porpenser",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF (se) porpenser (por-+penser, L. pensare); the prefixed verb died, leaving no modern lemma — modern uses simple penser/réfléchir."
+ },
+ {
+  "head": "seignier",
+  "descendant": "signer",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF seignier 'to make the sign of the cross/bless' (L. signare); continues (as a refection on 'signe') in modern 'signer', whose reflexive 'se signer' = cross oneself, matching the Roland sense."
+ },
+ {
+  "head": "seiner",
+  "descendant": "saigner",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF seiner/saignier (L. sanguinare 'to bleed'); regular phonetic descendant is modern French 'saigner', matching the Roland sense."
+ },
+ {
+  "head": "semondre",
+  "descendant": "semondre",
+  "in_dict": false,
+  "confidence": "high",
+  "note": "L. summonere; survives as the archaic/literary modern French verb 'semondre' ('to invite/summon'), same spelling continuation."
+ },
+ {
+  "head": "senefier",
+  "descendant": "signifier",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "L. significare; OF inherited senefier was refashioned as the learned modern French 'signifier', continuing the same etymon (the Roland sense 'signifier' matches)."
+ },
+ {
+  "head": "seoir",
+  "descendant": "seoir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "L. sedere; survives as the modern French verb 'seoir' (to suit/be seated), same spelling continuation of the etymon."
+ },
+ {
+  "head": "sevrer",
+  "descendant": "sevrer",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF sevrer (VL. *seperare, variant of L. separare); survives directly as modern French 'sevrer' ('to wean'), inherited doublet of borrowed séparer."
+ },
+ {
+  "head": "sigler",
+  "descendant": "cingler",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF sigler (Old Norse sigla 'to sail'); regular descendant via Middle French singler to modern French 'cingler' (to sail/scud along)."
+ },
+ {
+  "head": "sivre",
+  "descendant": "suivre",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF sivre (VL. *sequere, L. sequi); modern descendant is 'suivre', same etymon with modernized spelling."
+ },
+ {
+  "head": "soleir",
+  "descendant": "souloir",
+  "in_dict": false,
+  "confidence": "high",
+  "note": "L. solere 'to be accustomed'; survives as the obsolete/archaic modern French verb lemma 'souloir', regular descendant of the etymon."
+ },
+ {
+  "head": "sommer",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF somer 'to load a pack animal' (from somme < LL. sauma/L. sagma); this verbal sense left no modern lemma — modern 'sommer' is a different formation (somme 'sum'/'summon')."
+ },
+ {
+  "head": "soner",
+  "descendant": "sonner",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "L. sonare; survives directly as modern French 'sonner' (here glossed 'dire/utter'), same etymon with doubled-n spelling."
+ },
+ {
+  "head": "sourdre",
+  "descendant": "sourdre",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF sourdre (L. surgere); survives as the defective/formal modern French verb 'sourdre' ('to well up'), doublet of surgir."
+ },
+ {
+  "head": "targier",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "low",
+  "note": "OVERRIDE: OF targier/tarder 'to delay' (VL. *tardicare, from L. tardare); the 'delay' verb survives in modern 'tarder' (a sibling formation), while OF targier left no direct same-form lemma — modern 'se targuer' is unrelated."
+ },
+ {
+  "head": "tenser",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "low",
+  "note": "OVERRIDE: OF tenser/tencier (VL. *tentiare, L. tentus); the OF verb's surviving continuation is modern 'tancer' (to scold), though the Roland 'protéger' sense (L. tensare) did not survive."
+ },
+ {
+  "head": "tentir",
+  "descendant": "retentir",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF tentir (*tinnitire, from L. tinnire); the simple verb died, but the etymon survives only in the prefixed modern French verb 'retentir' (re-+tentir)."
+ },
+ {
+  "head": "tolir",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "high",
+  "note": "OF tolir/toldre (L. tollere 'to take away'); descent traced only to Middle French tollir, no surviving modern French lemma — modern uses unrelated enlever/ôter."
+ },
+ {
+  "head": "traire",
+  "descendant": "traire",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "L. trahere 'to pull/draw'; survives as modern French 'traire' (now specialized to 'to milk'), same etymon; Roland sense 'tirer' is the original draw/pull meaning."
+ },
+ {
+  "head": "tramettre",
+  "descendant": "transmettre",
+  "in_dict": true,
+  "confidence": "medium",
+  "note": "OF tramettre (L. transmittere); refashioned learnedly as modern French 'transmettre', continuing the same etymon (Roland sense 'transmettre' matches)."
+ },
+ {
+  "head": "tresaler",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF tresaler (tres-+aler, L. trans+ambulare, 'to pass away/expire'); only an Old/Middle French lemma, no modern French verb — the link to tressaillir is unrelated (tres-+saillir)."
+ },
+ {
+  "head": "tresturner",
+  "descendant": null,
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF tresturner (tres-+turner, L. trans+tornare); the prefixed verb died, leaving no modern lemma — only the simple 'tourner' survives."
+ },
+ {
+  "head": "venteler",
+  "descendant": "venteler",
+  "in_dict": false,
+  "confidence": "medium",
+  "note": "OF venteler (L. ventilare, der. of vent); survives as an archaic modern French verb lemma 'venteler' ('to flutter in the wind'), per fr.Wiktionary, same spelling."
+ },
+ {
+  "head": "voloir",
+  "descendant": "vouloir",
+  "in_dict": true,
+  "confidence": "high",
+  "note": "OF voloir (VL. *volere, L. velle); modern descendant is 'vouloir', same etymon with modernized spelling."
+ }
+]
