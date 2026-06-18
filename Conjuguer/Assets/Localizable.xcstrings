@@ -2120,23 +2120,6 @@
         }
       }
     },
-    "Settings.appIconDescription": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choose Conjuguer’s app icon."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisissez l’icône de Conjuguer."
-          }
-        }
-      }
-    },
     "Settings.pronounGender": {
       "extractionState": "stale",
       "localizations": {

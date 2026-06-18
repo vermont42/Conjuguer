@@ -59,10 +59,10 @@ struct SettingsView: View {
           settingCard(title: L.Settings.appIcon) {
             LazyVGrid(
               columns: Array(
-                repeating: GridItem(.flexible(), spacing: Layout.defaultSpacing),
-                count: 4
+                repeating: GridItem(.flexible(), spacing: Layout.doubleDefaultSpacing),
+                count: 2
               ),
-              spacing: Layout.defaultSpacing
+              spacing: Layout.doubleDefaultSpacing
             ) {
               ForEach(AppIcon.allCases, id: \.self) { appIcon in
                 Button {
@@ -72,10 +72,10 @@ struct SettingsView: View {
                     Image(appIcon.previewAssetName)
                       .resizable()
                       .aspectRatio(1, contentMode: .fit)
-                      .frame(width: 72, height: 72)
-                      .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                      .frame(width: 112, height: 112)
+                      .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
                       .overlay(
-                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        RoundedRectangle(cornerRadius: 25, style: .continuous)
                           .strokeBorder(
                             settings.appIcon == appIcon ? Color.customBlue : Color.clear,
                             lineWidth: 3
@@ -85,6 +85,8 @@ struct SettingsView: View {
 
                     Text(appIcon.localizedName)
                       .settingsLabel()
+                      .foregroundStyle(Color.customRed)
+                      .multilineTextAlignment(.center)
                   }
                   .frame(maxWidth: .infinity)
                 }
@@ -96,9 +98,6 @@ struct SettingsView: View {
             }
             .accessibilityIdentifier("grid_settings_appIcon")
             .sensoryFeedback(.selection, trigger: settings.appIcon)
-
-            Text(L.Settings.appIconDescription)
-              .settingsLabel()
           }
 
           settingCard(title: L.Settings.ratingsAndReviews) {

@@ -173,8 +173,6 @@ enum L {
 
     static func chansonReference(laisse: String, line: Int?) -> String {
       if let line {
-        // Interpolate the line as a bare string so no locale grouping separator appears
-        // (a line reference reads as "1658", not "1,658" / "1 658").
         return String(localized: "VerbView.chansonReference", defaultValue: "Laisse \(laisse), Line \(String(line))")
       } else {
         return String(localized: "VerbView.chansonReferenceNoLine", defaultValue: "Laisse \(laisse)")
@@ -571,10 +569,6 @@ enum L {
 
     static var appIcon: String {
       String(localized: "Settings.appIcon")
-    }
-
-    static var appIconDescription: String {
-      String(localized: "Settings.appIconDescription")
     }
   }
 
