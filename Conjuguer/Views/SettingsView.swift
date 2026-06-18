@@ -56,6 +56,51 @@ struct SettingsView: View {
               .settingsLabel()
           }
 
+          settingCard(title: L.Settings.appIcon) {
+            LazyVGrid(
+              columns: Array(
+                repeating: GridItem(.flexible(), spacing: Layout.defaultSpacing),
+                count: 4
+              ),
+              spacing: Layout.defaultSpacing
+            ) {
+              ForEach(AppIcon.allCases, id: \.self) { appIcon in
+                Button {
+                  settings.appIcon = appIcon
+                } label: {
+                  VStack(spacing: Layout.defaultSpacing) {
+                    Image(appIcon.previewAssetName)
+                      .resizable()
+                      .aspectRatio(1, contentMode: .fit)
+                      .frame(width: 72, height: 72)
+                      .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                      .overlay(
+                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                          .strokeBorder(
+                            settings.appIcon == appIcon ? Color.customBlue : Color.clear,
+                            lineWidth: 3
+                          )
+                      )
+                      .accessibilityHidden(true)
+
+                    Text(appIcon.localizedName)
+                      .settingsLabel()
+                  }
+                  .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("app_icon_\(appIcon.rawValue)")
+                .accessibilityLabel(appIcon.localizedName)
+                .accessibilityAddTraits(settings.appIcon == appIcon ? .isSelected : [])
+              }
+            }
+            .accessibilityIdentifier("grid_settings_appIcon")
+            .sensoryFeedback(.selection, trigger: settings.appIcon)
+
+            Text(L.Settings.appIconDescription)
+              .settingsLabel()
+          }
+
           settingCard(title: L.Settings.ratingsAndReviews) {
             Button(L.Settings.rateOrReview) {
               openURL(RatingsFetcher.reviewURL)

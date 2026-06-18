@@ -8,6 +8,7 @@
 
 import Foundation
 import Observation
+import UIKit
 
 @Observable
 class Settings {
@@ -69,6 +70,17 @@ class Settings {
   static let lastReviewPromptDateKey = "lastReviewPromptDate"
   static let lastReviewPromptDateDefault = Date(timeIntervalSince1970: 0.0)
 
+  var appIcon: AppIcon = appIconDefault {
+    didSet {
+      persist(appIcon, oldValue: oldValue, key: Settings.appIconKey)
+      if appIcon != oldValue {
+        setAppIcon(appIcon)
+      }
+    }
+  }
+  static let appIconKey = "appIcon"
+  static let appIconDefault: AppIcon = .arcDeTriomphe
+
   init(getterSetter: GetterSetter) {
     self.getterSetter = getterSetter
     verbSort = load(key: Settings.verbSortKey, default: Settings.verbSortDefault)
@@ -78,6 +90,22 @@ class Settings {
     pronounGender = load(key: Settings.pronounGenderKey, default: Settings.pronounGenderDefault)
     promptActionCount = load(key: Settings.promptActionCountKey, default: Settings.promptActionCountDefault)
     lastReviewPromptDate = load(key: Settings.lastReviewPromptDateKey, default: Settings.lastReviewPromptDateDefault)
+    appIcon = load(key: Settings.appIconKey, default: Settings.appIconDefault)
+  }
+
+  private func setAppIcon(_ icon: AppIcon) {
+    guard UIApplication.shared.supportsAlternateIcons else {
+      return
+    }
+    let desiredName = icon.alternateIconName
+    guard UIApplication.shared.alternateIconName != desiredName else {
+      return
+    }
+    UIApplication.shared.setAlternateIconName(desiredName) { error in
+      if let error {
+        print("Could not set alternate app icon: \(error.localizedDescription)")
+      }
+    }
   }
 
   private func load<T: SettingValue>(key: String, default defaultValue: T) -> T {
@@ -115,6 +143,7 @@ extension VerbSort: SettingValue {}
 extension ModelSort: SettingValue {}
 extension QuizDifficulty: SettingValue {}
 extension PronounGender: SettingValue {}
+extension AppIcon: SettingValue {}
 
 extension Int: SettingValue {
   var settingString: String {

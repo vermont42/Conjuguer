@@ -568,6 +568,32 @@ enum L {
     static var rateOrReview: String {
       String(localized: "Settings.rateOrReview")
     }
+
+    static var appIcon: String {
+      String(localized: "Settings.appIcon")
+    }
+
+    static var appIconDescription: String {
+      String(localized: "Settings.appIconDescription")
+    }
+  }
+
+  enum AppIcon {
+    static var arcDeTriomphe: String {
+      String(localized: "AppIcon.arcDeTriomphe")
+    }
+
+    static var rooster: String {
+      String(localized: "AppIcon.rooster")
+    }
+
+    static var croissant: String {
+      String(localized: "AppIcon.croissant")
+    }
+
+    static var beret: String {
+      String(localized: "AppIcon.beret")
+    }
   }
 
   enum QuizDifficulty {
