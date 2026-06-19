@@ -106,7 +106,7 @@
       }
     },
     "BrowseView.sortOrder": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -124,7 +124,7 @@
     },
     "Conjuguer": {},
     "ImageInfo.davidCompton": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -141,7 +141,7 @@
       }
     },
     "ImageInfo.joshAdams": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -158,7 +158,7 @@
       }
     },
     "Info.conditionnelPasséHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -175,7 +175,7 @@
       }
     },
     "Info.conditionnelPasséText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -192,7 +192,7 @@
       }
     },
     "Info.conditionnelPrésentHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -209,7 +209,7 @@
       }
     },
     "Info.conditionnelPrésentText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -226,7 +226,7 @@
       }
     },
     "Info.creditsHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -243,7 +243,7 @@
       }
     },
     "Info.creditsText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -260,7 +260,7 @@
       }
     },
     "Info.dedicationHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -277,7 +277,7 @@
       }
     },
     "Info.dedicationText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -294,7 +294,7 @@
       }
     },
     "Info.defectivenessHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -311,7 +311,7 @@
       }
     },
     "Info.defectivenessText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -328,7 +328,7 @@
       }
     },
     "Info.futurAntérieurHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -345,7 +345,7 @@
       }
     },
     "Info.futurAntérieurText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -362,7 +362,7 @@
       }
     },
     "Info.futurSimpleHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -379,7 +379,7 @@
       }
     },
     "Info.futurSimpleText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -396,7 +396,7 @@
       }
     },
     "Info.imparfaitHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -413,7 +413,7 @@
       }
     },
     "Info.imparfaitText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -430,7 +430,7 @@
       }
     },
     "Info.impératifHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -447,7 +447,7 @@
       }
     },
     "Info.impératifPasséHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -464,7 +464,7 @@
       }
     },
     "Info.impératifPasséText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -481,7 +481,7 @@
       }
     },
     "Info.impératifText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -498,7 +498,7 @@
       }
     },
     "Info.indicatifPrésentHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -515,7 +515,7 @@
       }
     },
     "Info.indicatifPrésentText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -532,7 +532,7 @@
       }
     },
     "Info.irregularitiesHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -549,7 +549,7 @@
       }
     },
     "Info.irregularitiesText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -566,7 +566,7 @@
       }
     },
     "Info.participePasséHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -583,7 +583,7 @@
       }
     },
     "Info.participePasséText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -600,7 +600,7 @@
       }
     },
     "Info.participePrésentHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -617,7 +617,7 @@
       }
     },
     "Info.participePrésentText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -634,7 +634,7 @@
       }
     },
     "Info.passéAntérieurHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -651,7 +651,7 @@
       }
     },
     "Info.passéAntérieurText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -668,7 +668,7 @@
       }
     },
     "Info.passéComposéHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -685,7 +685,7 @@
       }
     },
     "Info.passéComposéText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -702,7 +702,7 @@
       }
     },
     "Info.passéSimpleHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -719,7 +719,7 @@
       }
     },
     "Info.passéSimpleText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -736,7 +736,7 @@
       }
     },
     "Info.passéSurcomposéHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -753,7 +753,7 @@
       }
     },
     "Info.passéSurcomposéText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -770,7 +770,7 @@
       }
     },
     "Info.plusQueParfaitHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -787,7 +787,7 @@
       }
     },
     "Info.plusQueParfaitText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -804,7 +804,7 @@
       }
     },
     "Info.questionsAndResponsesHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -821,7 +821,7 @@
       }
     },
     "Info.questionsAndResponsesText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -838,7 +838,7 @@
       }
     },
     "Info.radicalFuturHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -855,7 +855,7 @@
       }
     },
     "Info.radicalFuturText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -872,7 +872,7 @@
       }
     },
     "Info.subjonctifImparfaitHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -889,7 +889,7 @@
       }
     },
     "Info.subjonctifImparfaitText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -906,7 +906,7 @@
       }
     },
     "Info.subjonctifPasséHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -923,7 +923,7 @@
       }
     },
     "Info.subjonctifPasséText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -940,7 +940,7 @@
       }
     },
     "Info.subjonctifPlusQueParfaitHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -957,7 +957,7 @@
       }
     },
     "Info.subjonctifPlusQueParfaitText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -974,7 +974,7 @@
       }
     },
     "Info.subjonctifPrésentHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -991,7 +991,7 @@
       }
     },
     "Info.subjonctifPrésentText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1008,7 +1008,7 @@
       }
     },
     "Info.terminologyHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1025,7 +1025,7 @@
       }
     },
     "Info.terminologyText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1042,7 +1042,7 @@
       }
     },
     "Info.valuePropositionHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1059,7 +1059,7 @@
       }
     },
     "Info.valuePropositionText": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1076,7 +1076,7 @@
       }
     },
     "InfoBrowseView.sectionAbout": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1093,7 +1093,7 @@
       }
     },
     "InfoBrowseView.sectionConcepts": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1110,7 +1110,7 @@
       }
     },
     "InfoBrowseView.sectionTenses": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1127,7 +1127,7 @@
       }
     },
     "ModelBrowseView.searchPrompt": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1144,7 +1144,7 @@
       }
     },
     "ModelSort.alphabetical": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1161,7 +1161,7 @@
       }
     },
     "ModelSort.identifier": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1178,7 +1178,7 @@
       }
     },
     "ModelSort.irregularity": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1195,7 +1195,7 @@
       }
     },
     "ModelView.defective": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1212,7 +1212,7 @@
       }
     },
     "ModelView.endings": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1229,7 +1229,7 @@
       }
     },
     "ModelView.infoButtonHint": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1246,7 +1246,7 @@
       }
     },
     "ModelView.irregular": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1263,7 +1263,7 @@
       }
     },
     "ModelView.parent": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1280,7 +1280,7 @@
       }
     },
     "ModelView.regular": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1297,7 +1297,7 @@
       }
     },
     "ModelView.stemAlterations": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1314,7 +1314,7 @@
       }
     },
     "ModelView.verbUsing": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1331,7 +1331,7 @@
       }
     },
     "ModelView.verbsUsing": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1348,7 +1348,7 @@
       }
     },
     "Navigation.done": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1365,7 +1365,7 @@
       }
     },
     "Navigation.info": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1382,7 +1382,7 @@
       }
     },
     "Navigation.input": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1399,7 +1399,7 @@
       }
     },
     "Navigation.models": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1416,7 +1416,7 @@
       }
     },
     "Navigation.quiz": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1433,7 +1433,7 @@
       }
     },
     "Navigation.results": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1450,7 +1450,7 @@
       }
     },
     "Navigation.settings": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1467,7 +1467,7 @@
       }
     },
     "Navigation.verbs": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1484,7 +1484,7 @@
       }
     },
     "PronounGender.both": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1501,7 +1501,7 @@
       }
     },
     "PronounGender.feminine": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1518,7 +1518,7 @@
       }
     },
     "PronounGender.feminineAbbreviation": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1535,7 +1535,7 @@
       }
     },
     "PronounGender.masculine": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1552,7 +1552,7 @@
       }
     },
     "PronounGender.masculineAbbreviation": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1569,7 +1569,7 @@
       }
     },
     "QuizDifficulty.regular": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1586,7 +1586,7 @@
       }
     },
     "QuizDifficulty.regularDifficulty": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1603,7 +1603,7 @@
       }
     },
     "QuizDifficulty.ridiculous": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1620,7 +1620,7 @@
       }
     },
     "QuizDifficulty.ridiculousDifficulty": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1637,7 +1637,7 @@
       }
     },
     "QuizView.bestScore": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1654,7 +1654,7 @@
       }
     },
     "QuizView.briefing": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1671,7 +1671,7 @@
       }
     },
     "QuizView.conjugation": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1688,7 +1688,7 @@
       }
     },
     "QuizView.cool": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1705,7 +1705,7 @@
       }
     },
     "QuizView.correctAnswer": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1722,7 +1722,7 @@
       }
     },
     "QuizView.elapsed": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1739,7 +1739,7 @@
       }
     },
     "QuizView.gameCenterFailure": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1756,7 +1756,7 @@
       }
     },
     "QuizView.lastAnswer": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1773,7 +1773,7 @@
       }
     },
     "QuizView.none": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1790,7 +1790,7 @@
       }
     },
     "QuizView.progressCount": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1807,7 +1807,7 @@
       }
     },
     "QuizView.progressWithColon": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1824,7 +1824,7 @@
       }
     },
     "QuizView.pronounWithColon": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1841,7 +1841,7 @@
       }
     },
     "QuizView.questionCount": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1858,7 +1858,7 @@
       }
     },
     "QuizView.quit": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1875,7 +1875,7 @@
       }
     },
     "QuizView.score": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1892,7 +1892,7 @@
       }
     },
     "QuizView.scoreWithColon": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1909,7 +1909,7 @@
       }
     },
     "QuizView.start": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1926,7 +1926,7 @@
       }
     },
     "QuizView.tenseWithColon": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1943,7 +1943,7 @@
       }
     },
     "QuizView.translationWithColon": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1960,7 +1960,7 @@
       }
     },
     "QuizView.verbWithColon": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1977,7 +1977,7 @@
       }
     },
     "RatingsFetcher.noRating": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1994,7 +1994,7 @@
       }
     },
     "RatingsFetcher.ratings": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "variations": {
@@ -2035,7 +2035,7 @@
       }
     },
     "ResultsView.correctCount": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2052,7 +2052,7 @@
       }
     },
     "ResultsView.correctWithColon": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2069,7 +2069,7 @@
       }
     },
     "ResultsView.time": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2086,7 +2086,7 @@
       }
     },
     "ResultsView.yourAnswerWithColon": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2121,7 +2121,7 @@
       }
     },
     "Settings.pronounGender": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2138,7 +2138,7 @@
       }
     },
     "Settings.pronounGenderDescription": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2155,7 +2155,7 @@
       }
     },
     "Settings.quizDifficulty": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2172,7 +2172,7 @@
       }
     },
     "Settings.quizDifficultyDescription": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2189,7 +2189,7 @@
       }
     },
     "Settings.rateOrReview": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2206,7 +2206,7 @@
       }
     },
     "Settings.ratingsAndReviews": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2223,7 +2223,7 @@
       }
     },
     "VerbBrowseView.searchPrompt": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2240,7 +2240,7 @@
       }
     },
     "VerbSort.alphabetical": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2257,7 +2257,7 @@
       }
     },
     "VerbSort.frequency": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2274,7 +2274,7 @@
       }
     },
     "VerbView.aspiratedH": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2291,7 +2291,7 @@
       }
     },
     "VerbView.auxiliaryWithColon": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2308,7 +2308,7 @@
       }
     },
     "VerbView.chansonHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2342,7 +2342,7 @@
       }
     },
     "VerbView.chansonReference": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2359,7 +2359,7 @@
       }
     },
     "VerbView.chansonReferenceNoLine": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2376,7 +2376,7 @@
       }
     },
     "VerbView.colorKeyExplanation": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2393,7 +2393,7 @@
       }
     },
     "VerbView.colorKeyIrregular": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2410,7 +2410,7 @@
       }
     },
     "VerbView.colorKeyRegular": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2427,7 +2427,7 @@
       }
     },
     "VerbView.colorKeyTitle": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2444,7 +2444,7 @@
       }
     },
     "VerbView.defective": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2461,7 +2461,7 @@
       }
     },
     "VerbView.dismissColorKey": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2478,7 +2478,7 @@
       }
     },
     "VerbView.etymologyHeading": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2495,7 +2495,7 @@
       }
     },
     "VerbView.exampleUse": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2512,7 +2512,7 @@
       }
     },
     "VerbView.exampleUses": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2529,7 +2529,7 @@
       }
     },
     "VerbView.frequencyWithColon": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2546,7 +2546,7 @@
       }
     },
     "VerbView.modelButtonHint": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2563,7 +2563,7 @@
       }
     },
     "VerbView.modelWithColon": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2580,7 +2580,7 @@
       }
     },
     "VerbView.overview": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2597,7 +2597,7 @@
       }
     },
     "VerbView.personlessConjugations": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2614,7 +2614,7 @@
       }
     },
     "VerbView.reflexive": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2631,7 +2631,7 @@
       }
     },
     "VerbView.showCompoundTenses": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2648,7 +2648,7 @@
       }
     },
     "VerbView.sourceClaude": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2665,7 +2665,7 @@
       }
     },
     "VerbView.sourceFrenchGov": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2682,7 +2682,7 @@
       }
     },
     "VerbView.sourceSwissPublic": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2699,7 +2699,7 @@
       }
     },
     "VerbView.sourceWikipedia": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
