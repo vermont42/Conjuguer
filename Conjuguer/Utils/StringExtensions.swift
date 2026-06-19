@@ -35,7 +35,7 @@ extension String {
   }
 
   static var linkSeparator: Character {
-    "%"
+    "‡"
   }
 
   static var conjugationSeparator: Character {

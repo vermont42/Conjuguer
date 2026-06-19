@@ -46,7 +46,7 @@ class RichTextTests: XCTestCase {
   }
 
   func testLinkSegment() {
-    guard case let .link(text, url) = "%jouer%".bodySegments.first else {
+    guard case let .link(text, url) = "‡jouer‡".bodySegments.first else {
       return XCTFail("Expected a link segment.")
     }
     XCTAssertEqual(text, "jouer")
@@ -54,7 +54,7 @@ class RichTextTests: XCTestCase {
   }
 
   func testHttpLinkKeepsScheme() {
-    guard case let .link(_, url) = "%https://example.com%".bodySegments.first else {
+    guard case let .link(_, url) = "‡https://example.com‡".bodySegments.first else {
       return XCTFail("Expected a link segment.")
     }
     XCTAssertEqual(url.absoluteString, "https://example.com")
