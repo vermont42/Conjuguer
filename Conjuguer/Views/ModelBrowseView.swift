@@ -77,14 +77,7 @@ struct ModelBrowseView: View {
       .navigationDestination(for: VerbModel.self) { model in
         ModelView(model: model)
       }
-      .searchable(text: $searchText, prompt: L.ModelBrowseView.searchPrompt, suggestions: {
-        ForEach(searchResults) { modelAndDecorator in
-          Text("\(modelAndDecorator.model.exemplarWithPossibleExtraLetters)\(modelAndDecorator.decorator)")
-            .tableText()
-            .frenchPronunciation()
-            .searchCompletion(modelAndDecorator.model.exemplarWithPossibleExtraLetters)
-        }
-      })
+      .searchable(text: $searchText, prompt: L.ModelBrowseView.searchPrompt)
     }
     .screenBackground()
     .onChange(of: searchText, initial: true) { _, _ in

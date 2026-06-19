@@ -70,12 +70,7 @@ struct VerbBrowseView: View {
       .navigationDestination(for: Verb.self) { verb in
         VerbView(verb: verb)
       }
-      .searchable(text: $searchText, prompt: L.VerbBrowseView.searchPrompt, suggestions: {
-        ForEach(searchResults) { result in
-          Text(result.infinitifWithPossibleExtraLetters)
-            .searchCompletion(result.infinitifWithPossibleExtraLetters)
-        }
-      })
+      .searchable(text: $searchText, prompt: L.VerbBrowseView.searchPrompt)
     }
     .screenBackground()
     .onChange(of: searchText, initial: true) { _, _ in
