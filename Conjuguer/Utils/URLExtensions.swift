@@ -21,5 +21,7 @@ extension URL {
   static let verbHost = "verb"
   static let verbModelHost = "model"
   static let infoHost = "info"
+  static let quizHost = "quiz"
+  static let randomVerbPath = "random"
   private static let deeplinkComponentCount = 2
 }

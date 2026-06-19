@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct ConjuguerApp: App {
   @State private var verbData = VerbData()
+  @Environment(\.scenePhase) private var scenePhase
 
   var body: some Scene {
     WindowGroup {
@@ -23,8 +25,19 @@ struct ConjuguerApp: App {
       }
       .task {
         await verbData.load()
+        refreshWidgets()
       }
       .onOpenURL(perform: Current.handleURL(_:))
+      .onChange(of: scenePhase) {
+        guard scenePhase == .active else {
+          return
+        }
+        drainPendingWidgetDeeplink()
+        refreshWidgets()
+      }
+      .onChange(of: Current.settings.pronounGender) {
+        refreshWidgets()
+      }
     }
   }
 
@@ -35,5 +48,23 @@ struct ConjuguerApp: App {
 
     SoundPlayer.setup()
     Utterer.setup()
+
+    LiveActivityManager.endAllActivities()
+  }
+
+  @MainActor private func refreshWidgets() {
+    WidgetSnapshotWriter.writeSnapshot()
+    WidgetCenter.shared.reloadAllTimelines()
+  }
+
+  @MainActor private func drainPendingWidgetDeeplink() {
+    guard
+      let deeplink = WidgetConstants.sharedDefaults?.string(forKey: WidgetConstants.pendingDeeplinkKey),
+      let url = URL(string: deeplink)
+    else {
+      return
+    }
+    WidgetConstants.sharedDefaults?.removeObject(forKey: WidgetConstants.pendingDeeplinkKey)
+    Current.handleURL(url)
   }
 }

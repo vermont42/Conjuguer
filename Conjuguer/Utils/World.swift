@@ -143,8 +143,17 @@ class World {
   private func resolveDeeplinkEntity(from url: URL) -> MainTab? {
     switch url.host {
     case URL.verbHost:
-      verb = Verb.verbs[url.pathComponents[1]]
+      if url.pathComponents[1] == URL.randomVerbPath {
+        verb = Verb.verbs.values.randomElement()
+      } else {
+        verb = Verb.verbs[url.pathComponents[1]]
+      }
       return .verbs
+    case URL.quizHost:
+      if quiz.quizState != .inProgress {
+        quiz.start()
+      }
+      return .quiz
     case URL.verbModelHost:
       verbModel = VerbModel.models[url.pathComponents[1]]
       return .models

@@ -5,6 +5,7 @@
 //  Created by Josh Adams on 10/16/21.
 //
 
+import ActivityKit
 import Observation
 import SwiftUI
 
@@ -25,6 +26,16 @@ class Quiz {
   private var timer: Timer?
   private let gameCenter: GameCenter
   private var shouldShuffle = true
+  private var liveActivity: Activity<QuizActivityAttributes>?
+
+  // Elapsed time formatted m:ss for the Live Activity.
+  var elapsedTimeString: String {
+    String(format: "%d:%02d", elapsedTime / 60, elapsedTime % 60)
+  }
+
+  private var correctCount: Int {
+    quizResults.filter { $0.conjugationResult == .totalMatch }.count
+  }
 
   private var personNumbers = CyclingDeck(PersonNumber.allCases)
   private var impératifPersonNumbers = CyclingDeck(PersonNumber.impératifPersonNumbers)
@@ -51,6 +62,7 @@ class Quiz {
     buildQuiz()
     quizState = .inProgress
     announcePublishedProperties()
+    startLiveActivity()
     SoundPlayer.play(Sound.randomGun)
     Current.analytics.recordQuizStart(difficulty: Current.settings.quizDifficulty)
 
@@ -72,7 +84,45 @@ class Quiz {
     SoundPlayer.play(Sound.randomSadTrombone)
     timer?.invalidate()
     quizState = .notStarted
+    endLiveActivity()
     Current.analytics.recordQuizQuit(difficulty: Current.settings.quizDifficulty, lastQuestionIndex: currentQuestionIndex, elapsedTime: elapsedTime)
+  }
+
+  private func startLiveActivity() {
+    endLiveActivity()
+    liveActivity = LiveActivityManager.startQuizActivity(
+      difficulty: difficulty.localizedDifficulty,
+      totalQuestions: questions.count
+    )
+  }
+
+  private func updateLiveActivity(isFinished: Bool) {
+    guard let liveActivity else {
+      return
+    }
+    let state = QuizActivityAttributes.ContentState(
+      currentQuestion: min(currentQuestionIndex + 1, questions.count),
+      score: score,
+      correctCount: correctCount,
+      elapsedTime: elapsedTimeString,
+      isFinished: isFinished
+    )
+    LiveActivityManager.updateQuizActivity(liveActivity, state: state)
+  }
+
+  private func endLiveActivity() {
+    guard let liveActivity else {
+      return
+    }
+    let finalState = QuizActivityAttributes.ContentState(
+      currentQuestion: currentQuestionIndex,
+      score: score,
+      correctCount: correctCount,
+      elapsedTime: elapsedTimeString,
+      isFinished: true
+    )
+    LiveActivityManager.endQuizActivity(liveActivity, finalState: finalState)
+    self.liveActivity = nil
   }
 
   private func resetDecks() {
@@ -279,6 +329,7 @@ class Quiz {
       completeQuiz()
     } else {
       announcePublishedProperties()
+      updateLiveActivity(isFinished: false)
     }
   }
 

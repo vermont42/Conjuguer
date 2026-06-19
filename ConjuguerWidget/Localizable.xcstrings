@@ -1,0 +1,182 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Widget.intentAnswerQuiz" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Answer Quiz" }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Répondre au quiz" }
+        }
+      }
+    },
+    "Widget.intentOpenQuiz" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Open Quiz" }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Ouvrir le quiz" }
+        }
+      }
+    },
+    "Widget.intentOpenRandomVerb" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Open Random Verb" }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Ouvrir un verbe au hasard" }
+        }
+      }
+    },
+    "Widget.liveActivityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Conjuguer Quiz" }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Quiz Conjuguer" }
+        }
+      }
+    },
+    "Widget.paramQuestionID" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Question ID" }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Identifiant de question" }
+        }
+      }
+    },
+    "Widget.paramSelectedAnswer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Selected Answer" }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Réponse sélectionnée" }
+        }
+      }
+    },
+    "Widget.quickQuizDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Launch the conjugation quiz." }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Lancer le quiz de conjugaison." }
+        }
+      }
+    },
+    "Widget.quickQuizName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Quick Quiz" }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Quiz rapide" }
+        }
+      }
+    },
+    "Widget.quizCorrect" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Correct!" }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Correct !" }
+        }
+      }
+    },
+    "Widget.quizDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Test your French verb conjugation skills." }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Testez vos conjugaisons des verbes français." }
+        }
+      }
+    },
+    "Widget.quizIncorrect" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Incorrect" }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Incorrect" }
+        }
+      }
+    },
+    "Widget.quizName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Conjugation Quiz" }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Quiz de conjugaison" }
+        }
+      }
+    },
+    "Widget.randomVerbDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Open a random French verb." }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Ouvrir un verbe français au hasard." }
+        }
+      }
+    },
+    "Widget.randomVerbName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Random Verb" }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Verbe aléatoire" }
+        }
+      }
+    },
+    "Widget.verbOfTheDayDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "A daily French verb with its présent conjugations." }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Un verbe français par jour, avec ses conjugaisons au présent." }
+        }
+      }
+    },
+    "Widget.verbOfTheDayName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Verb of the Day" }
+        },
+        "fr" : {
+          "stringUnit" : { "state" : "translated", "value" : "Verbe du jour" }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
