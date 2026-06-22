@@ -1483,6 +1483,346 @@
         }
       }
     },
+    "Onboarding.browseBody": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explore 6,320 verbs across every conjugation pattern. Tap any verb to see its full conjugation table with irregularities highlighted. Sort verbs by frequency of use for study purposes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorez 6 320 verbes répartis sur tous les modèles de conjugaison. Touchez un verbe pour afficher son tableau de conjugaison complet, avec les irrégularités mises en évidence. Triez les verbes par fréquence d’usage pour faciliter l’étude."
+          }
+        }
+      }
+    },
+    "Onboarding.browseTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Browse 6,320 French Verbs"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parcourez 6 320 verbes français"
+          }
+        }
+      }
+    },
+    "Onboarding.browseVerbsButton": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Browse Verbs"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parcourir les verbes"
+          }
+        }
+      }
+    },
+    "Onboarding.dismiss": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dismiss"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer"
+          }
+        }
+      }
+    },
+    "Onboarding.exploreModelsButton": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explore Verb Models"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer les modèles de verbes"
+          }
+        }
+      }
+    },
+    "Onboarding.getStarted": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get Started"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer"
+          }
+        }
+      }
+    },
+    "Onboarding.learnBody": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read in-depth treatises on every French tense, illustrated with examples from French literature—from the Chanson de Roland to Proust—alongside a history of the French verb."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lisez des traités approfondis sur chaque temps français, illustrés d’exemples tirés de la littérature française — de la Chanson de Roland à Proust — ainsi qu’une histoire du verbe français."
+          }
+        }
+      }
+    },
+    "Onboarding.learnTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deep-Dive Articles"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Articles approfondis"
+          }
+        }
+      }
+    },
+    "Onboarding.modelsBody": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Discover the conjugation models that French verbs follow. Each model captures a distinct pattern of stem changes and endings. Understanding models helps you predict how unfamiliar verbs behave and recognize the irregularities that set them apart."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Découvrez les modèles de conjugaison que suivent les verbes français. Chaque modèle illustre un schéma distinct d’altérations du radical et de terminaisons. Comprendre les modèles vous aide à prévoir le comportement des verbes inconnus et à reconnaître les irrégularités qui les distinguent."
+          }
+        }
+      }
+    },
+    "Onboarding.modelsTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explore Verb Models"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorez les modèles de verbes"
+          }
+        }
+      }
+    },
+    "Onboarding.onboarding": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onboarding"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Présentation"
+          }
+        }
+      }
+    },
+    "Onboarding.quizBody": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take timed quizzes, earn points, and compete on the Game Center leaderboard. Choose regular or ridiculous difficulty. The latter includes tenses rarely seen outside formal or literary writing. The reward for ridiculous difficulty is great: double the score."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faites des quiz chronométrés, gagnez des points et affrontez les autres sur le classement Game Center. Choisissez la difficulté ordinaire ou ridicule. Cette dernière inclut des temps que l’on rencontre rarement en dehors de l’écrit formel ou littéraire. La récompense de la difficulté ridicule est grande : le score est doublé."
+          }
+        }
+      }
+    },
+    "Onboarding.quizTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Test Your Knowledge"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Testez vos connaissances"
+          }
+        }
+      }
+    },
+    "Onboarding.readArticlesButton": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read Articles"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lire les articles"
+          }
+        }
+      }
+    },
+    "Onboarding.showOnboarding": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show Onboarding"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher la présentation"
+          }
+        }
+      }
+    },
+    "Onboarding.showOnboardingDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisit the welcome tour at any time."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revoyez la présentation de bienvenue à tout moment."
+          }
+        }
+      }
+    },
+    "Onboarding.skip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skip"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passer"
+          }
+        }
+      }
+    },
+    "Onboarding.startQuizButton": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take a Quiz"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faire un quiz"
+          }
+        }
+      }
+    },
+    "Onboarding.welcomeBody": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conjuguer helps you learn and practice French verb conjugations across every tense."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conjuguer vous aide à apprendre et à pratiquer la conjugaison des verbes français à tous les temps."
+          }
+        }
+      }
+    },
+    "Onboarding.welcomeTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Master French-Verb Conjugation"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maîtrisez la conjugaison française"
+          }
+        }
+      }
+    },
     "PronounGender.both": {
       "extractionState": "manual",
       "localizations": {

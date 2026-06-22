@@ -21,6 +21,16 @@ struct ConjuguerApp: App {
         case .loaded:
           MainTabView()
             .environment(Current)
+            .fullScreenCover(isPresented: Binding(
+              get: { !Current.settings.hasSeenOnboarding },
+              set: { newValue in
+                if !newValue {
+                  Current.settings.hasSeenOnboarding = true
+                }
+              }
+            )) {
+              OnboardingView()
+            }
         }
       }
       .task {

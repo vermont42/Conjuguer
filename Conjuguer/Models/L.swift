@@ -673,4 +673,86 @@ enum L {
       String(localized: "ModelSort.identifier")
     }
   }
+
+  enum Onboarding {
+    static var skip: String {
+      String(localized: "Onboarding.skip")
+    }
+
+    static var dismiss: String {
+      String(localized: "Onboarding.dismiss")
+    }
+
+    static var getStarted: String {
+      String(localized: "Onboarding.getStarted")
+    }
+
+    static var onboarding: String {
+      String(localized: "Onboarding.onboarding")
+    }
+
+    static var showOnboarding: String {
+      String(localized: "Onboarding.showOnboarding")
+    }
+
+    static var showOnboardingDescription: String {
+      String(localized: "Onboarding.showOnboardingDescription")
+    }
+
+    static var welcomeTitle: String {
+      String(localized: "Onboarding.welcomeTitle")
+    }
+
+    static var welcomeBody: String {
+      String(localized: "Onboarding.welcomeBody")
+    }
+
+    static var browseTitle: String {
+      String(localized: "Onboarding.browseTitle")
+    }
+
+    static var browseBody: String {
+      String(localized: "Onboarding.browseBody")
+    }
+
+    static var browseVerbsButton: String {
+      String(localized: "Onboarding.browseVerbsButton")
+    }
+
+    static var modelsTitle: String {
+      String(localized: "Onboarding.modelsTitle")
+    }
+
+    static var modelsBody: String {
+      String(localized: "Onboarding.modelsBody")
+    }
+
+    static var exploreModelsButton: String {
+      String(localized: "Onboarding.exploreModelsButton")
+    }
+
+    static var quizTitle: String {
+      String(localized: "Onboarding.quizTitle")
+    }
+
+    static var quizBody: String {
+      String(localized: "Onboarding.quizBody")
+    }
+
+    static var startQuizButton: String {
+      String(localized: "Onboarding.startQuizButton")
+    }
+
+    static var learnTitle: String {
+      String(localized: "Onboarding.learnTitle")
+    }
+
+    static var learnBody: String {
+      String(localized: "Onboarding.learnBody")
+    }
+
+    static var readArticlesButton: String {
+      String(localized: "Onboarding.readArticlesButton")
+    }
+  }
 }

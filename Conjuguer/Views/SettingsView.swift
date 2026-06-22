@@ -11,6 +11,7 @@ struct SettingsView: View {
   @Environment(World.self) private var world
   @Environment(\.openURL) private var openURL
   @State private var rateReviewDescription = ""
+  @State private var showingOnboarding = false
 
   var body: some View {
     @Bindable var settings = world.settings
@@ -111,6 +112,17 @@ struct SettingsView: View {
                 .settingsLabel()
             }
           }
+
+          settingCard(title: L.Onboarding.onboarding) {
+            Button(L.Onboarding.showOnboarding) {
+              world.analytics.recordEvent("tapShowOnboarding")
+              showingOnboarding = true
+            }
+            .funButton()
+
+            Text(L.Onboarding.showOnboardingDescription)
+              .settingsLabel()
+          }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, Layout.doubleDefaultSpacing)
@@ -123,6 +135,9 @@ struct SettingsView: View {
       if description != RatingsFetcher.errorMessage {
         rateReviewDescription = description
       }
+    }
+    .fullScreenCover(isPresented: $showingOnboarding) {
+      OnboardingView(isReshow: true)
     }
     .screenBackground()
   }

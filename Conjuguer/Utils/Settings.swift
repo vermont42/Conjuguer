@@ -81,6 +81,14 @@ class Settings {
   static let appIconKey = "appIcon"
   static let appIconDefault: AppIcon = .arcDeTriomphe
 
+  var hasSeenOnboarding: Bool = hasSeenOnboardingDefault {
+    didSet {
+      persist(hasSeenOnboarding, oldValue: oldValue, key: Settings.hasSeenOnboardingKey)
+    }
+  }
+  static let hasSeenOnboardingKey = "hasSeenOnboarding"
+  static let hasSeenOnboardingDefault = false
+
   init(getterSetter: GetterSetter) {
     self.getterSetter = getterSetter
     verbSort = load(key: Settings.verbSortKey, default: Settings.verbSortDefault)
@@ -91,6 +99,7 @@ class Settings {
     promptActionCount = load(key: Settings.promptActionCountKey, default: Settings.promptActionCountDefault)
     lastReviewPromptDate = load(key: Settings.lastReviewPromptDateKey, default: Settings.lastReviewPromptDateDefault)
     appIcon = load(key: Settings.appIconKey, default: Settings.appIconDefault)
+    hasSeenOnboarding = load(key: Settings.hasSeenOnboardingKey, default: Settings.hasSeenOnboardingDefault)
   }
 
   private func setAppIcon(_ icon: AppIcon) {
@@ -152,6 +161,23 @@ extension Int: SettingValue {
 
   init?(settingString: String) {
     self.init(settingString)
+  }
+}
+
+extension Bool: SettingValue {
+  var settingString: String {
+    self ? "true" : "false"
+  }
+
+  init?(settingString: String) {
+    switch settingString {
+    case "true":
+      self = true
+    case "false":
+      self = false
+    default:
+      return nil
+    }
   }
 }
 
