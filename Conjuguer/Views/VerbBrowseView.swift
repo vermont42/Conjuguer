@@ -10,6 +10,7 @@ import SwiftUI
 
 struct VerbBrowseView: View {
   @Environment(World.self) private var world
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
   @State private var store: BrowseStore<Verb, VerbSort>?
   @State private var searchText = ""
   @State private var searchResults: [Verb] = []
@@ -50,19 +51,7 @@ struct VerbBrowseView: View {
           .accessibilityIdentifier("verb_browse_sort")
           .accessibilityLabel(Text(L.BrowseView.sortOrder))
 
-          List(searchResults) { verb in
-            NavigationLink(value: verb) {
-              verbRow(verb)
-            }
-            .listRowBackground(Color.customBackground)
-          }
-          .listStyle(.plain)
-          .scrollContentBackground(.hidden)
-          .overlay {
-            if searchResults.isEmpty && !searchText.isEmpty {
-              ContentUnavailableView.search(text: searchText)
-            }
-          }
+          verbCollection
         }
         .padding()
       }
@@ -89,6 +78,44 @@ struct VerbBrowseView: View {
     .recordsAppearance(as: "\(VerbBrowseView.self)")
     .onAppear {
       world.reviewPrompter.promptableActionHappened()
+    }
+  }
+
+  @ViewBuilder
+  private var verbCollection: some View {
+    if horizontalSizeClass == .regular {
+      ScrollView {
+        LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
+          ForEach(searchResults) { verb in
+            NavigationLink(value: verb) {
+              verbRow(verb)
+                .card()
+            }
+            .buttonStyle(.plain)
+          }
+        }
+        .padding(.vertical, Layout.defaultSpacing)
+      }
+      .scrollContentBackground(.hidden)
+      .overlay {
+        if searchResults.isEmpty && !searchText.isEmpty {
+          ContentUnavailableView.search(text: searchText)
+        }
+      }
+    } else {
+      List(searchResults) { verb in
+        NavigationLink(value: verb) {
+          verbRow(verb)
+        }
+        .listRowBackground(Color.customBackground)
+      }
+      .listStyle(.plain)
+      .scrollContentBackground(.hidden)
+      .overlay {
+        if searchResults.isEmpty && !searchText.isEmpty {
+          ContentUnavailableView.search(text: searchText)
+        }
+      }
     }
   }
 

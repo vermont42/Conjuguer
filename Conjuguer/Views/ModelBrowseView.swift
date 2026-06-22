@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ModelBrowseView: View {
   @Environment(World.self) private var world
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
   @State private var store: BrowseStore<ModelAndDecorator, ModelSort>?
   @State private var searchText = ""
   @State private var searchResults: [ModelAndDecorator] = []
@@ -49,27 +50,7 @@ struct ModelBrowseView: View {
           .pickerStyle(.segmented)
           .accessibilityLabel(Text(L.BrowseView.sortOrder))
 
-          List(searchResults) { modelAndDecorator in
-            NavigationLink(value: modelAndDecorator.model) {
-              HStack {
-                Text(modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator)
-                  .tableText()
-                if let irregularity = modelAndDecorator.irregularityBadge {
-                  Spacer()
-                  IrregularityBadge(percent: irregularity)
-                }
-              }
-            }
-            .frenchPronunciation()
-            .listRowBackground(Color.customBackground)
-          }
-          .listStyle(.plain)
-          .scrollContentBackground(.hidden)
-          .overlay {
-            if searchResults.isEmpty && !searchText.isEmpty {
-              ContentUnavailableView.search(text: searchText)
-            }
-          }
+          modelCollection
         }
         .padding()
       }
@@ -94,6 +75,56 @@ struct ModelBrowseView: View {
         .sheetDismissable()
     }
     .recordsAppearance(as: "\(ModelBrowseView.self)")
+  }
+
+  @ViewBuilder
+  private var modelCollection: some View {
+    if horizontalSizeClass == .regular {
+      ScrollView {
+        LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
+          ForEach(searchResults) { modelAndDecorator in
+            NavigationLink(value: modelAndDecorator.model) {
+              modelRow(modelAndDecorator)
+                .card()
+            }
+            .buttonStyle(.plain)
+          }
+        }
+        .padding(.vertical, Layout.defaultSpacing)
+      }
+      .scrollContentBackground(.hidden)
+      .overlay {
+        if searchResults.isEmpty && !searchText.isEmpty {
+          ContentUnavailableView.search(text: searchText)
+        }
+      }
+    } else {
+      List(searchResults) { modelAndDecorator in
+        NavigationLink(value: modelAndDecorator.model) {
+          modelRow(modelAndDecorator)
+        }
+        .listRowBackground(Color.customBackground)
+      }
+      .listStyle(.plain)
+      .scrollContentBackground(.hidden)
+      .overlay {
+        if searchResults.isEmpty && !searchText.isEmpty {
+          ContentUnavailableView.search(text: searchText)
+        }
+      }
+    }
+  }
+
+  private func modelRow(_ modelAndDecorator: ModelAndDecorator) -> some View {
+    HStack {
+      Text(modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator)
+        .tableText()
+      if let irregularity = modelAndDecorator.irregularityBadge {
+        Spacer()
+        IrregularityBadge(percent: irregularity)
+      }
+    }
+    .frenchPronunciation()
   }
 
   private func updateSearchResults(playSoundIfEmpty: Bool) {
