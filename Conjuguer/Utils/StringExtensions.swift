@@ -55,21 +55,15 @@ extension String {
     return result
   }
 
-  func trimmingLeadingNewlines() -> String {
-    var result = self
-    while result.hasPrefix("\n") {
-      result.removeFirst()
-    }
-    return result
-  }
-
   var richTextBlocks: [RichTextBlock] {
     var blocks: [RichTextBlock] = []
     var currentText = ""
     var inSubheading = false
 
     func flushBody() {
-      let trimmed = currentText.trimmingLeadingNewlines()
+      // Trim surrounding whitespace so the gaps around subheadings come from
+      // the renderer's spacing, not from stray blank lines in the prose.
+      let trimmed = currentText.trimmingCharacters(in: .whitespacesAndNewlines)
       currentText = ""
       guard !trimmed.isEmpty else {
         return

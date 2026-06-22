@@ -423,8 +423,10 @@ flag-bullet markup. List bullets are literal `•` / `-` characters in the prose
 
 **Subheadings are set off by a blank line on both sides.** A backtick heading runs
 `"…end of paragraph.\n\n\`Next Heading\`\n\nFirst line…"` — `\n\n` before *and* after the
-delimited heading. (`RichTextView` adds its own top padding around subheadings, but the
-established prose convention still inserts the blank lines, and both languages match.)
+delimited heading. The blank lines are for source readability only: `String.richTextBlocks`
+trims the newlines around a backtick heading, so the rendered gap comes from `RichTextView`
+(its `defaultSpacing` plus the subheading's `.padding(.top)`), not from the blank lines. Both
+languages match.
 Before inserting a new section into a long-form Info text, scan the existing headings with
 `re.finditer(r'\`[^\`]+\`', value)` in Python to confirm the article's spacing, since raw
 JSON hides the rendered layout.

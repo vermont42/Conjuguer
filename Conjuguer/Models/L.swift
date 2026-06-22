@@ -357,6 +357,14 @@ enum L {
       String(localized: "Info.defectivenessText")
     }
 
+    static var verbHistoryHeading: String {
+      String(localized: "Info.verbHistoryHeading")
+    }
+
+    static var verbHistoryText: String {
+      String(localized: "Info.verbHistoryText")
+    }
+
     static var participePasséHeading: String {
       String(localized: "Info.participePasséHeading")
     }

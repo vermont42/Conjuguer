@@ -37,6 +37,13 @@ struct RichTextTests {
     )
   }
 
+  @Test func testTrailingNewlinesBeforeSubheadingAreTrimmed() {
+    #expect(
+      "a\n\nb\n\n`Head`".richTextBlocks ==
+      [.body([.plain("a\n\nb")]), .subheading("Head")]
+    )
+  }
+
   @Test func testInternalParagraphBreaksArePreserved() {
     #expect("first\n\nsecond".richTextBlocks == [.body([.plain("first\n\nsecond")])])
   }

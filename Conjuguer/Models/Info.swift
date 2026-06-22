@@ -27,6 +27,7 @@ struct Info: Identifiable, Hashable {
   static let infos: [Info] = [
     Info(heading: L.Info.dedicationHeading, text: L.Info.dedicationText, category: .about, imageInfo: ImageInfo(filename: "Compton", accessibilityLabel: L.ImageInfo.davidCompton)),
     Info(heading: L.Info.valuePropositionHeading, text: L.Info.valuePropositionText, category: .about),
+    Info(heading: L.Info.verbHistoryHeading, text: L.Info.verbHistoryText, category: .concepts),
     Info(heading: L.Info.terminologyHeading, text: L.Info.terminologyText, category: .concepts),
     Info(heading: L.Info.irregularitiesHeading, text: L.Info.irregularitiesText, category: .concepts),
     Info(heading: L.Info.defectivenessHeading, text: L.Info.defectivenessText, category: .concepts),
