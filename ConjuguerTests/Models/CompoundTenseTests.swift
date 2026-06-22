@@ -6,23 +6,23 @@
 //
 
 @testable import Conjuguer
-import XCTest
+import Testing
 
 @MainActor
-class CompoundTenseTests: XCTestCase {
+struct CompoundTenseTests {
   private func assertFeminine(
     _ infinitif: String,
     _ tenseBuilder: (PersonNumber) -> Tense,
     _ expected: [String],
     personNumbers: [PersonNumber] = PersonNumber.allCases
   ) {
-    XCTAssertEqual(expected.count, personNumbers.count, "Expected one conjugation per person-number.")
+    #expect(expected.count == personNumbers.count, "Expected one conjugation per person-number.")
     for (personNumber, conjugation) in zip(personNumbers, expected) {
       T.testConjugation(infinitif: infinitif, tense: tenseBuilder(personNumber), expected: conjugation, extraLetters: nil, pronounGender: .feminine)
     }
   }
 
-  func testCompoundTenses() {
+  @Test func testCompoundTenses() {
     let aller = "aller"
     let avoir = "avoir"
 

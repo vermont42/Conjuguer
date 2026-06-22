@@ -6,22 +6,22 @@
 //
 
 @testable import Conjuguer
-import XCTest
+import Testing
 
 @MainActor
-class ParserTests: XCTestCase {
-  func testVerbParserParsesValidVerb() {
+struct ParserTests {
+  @Test func testVerbParserParsesValidVerb() {
     let xml = """
     <verbs>
       <verb in="parler" tn="to speak" mo="parler"/>
     </verbs>
     """
     let (verbs, _) = VerbParser(xmlString: xml).parse(models: [:])
-    XCTAssertEqual(verbs.count, 1)
-    XCTAssertEqual(verbs["parler"]?.translation, "to speak")
+    #expect(verbs.count == 1)
+    #expect(verbs["parler"]?.translation == "to speak")
   }
 
-  func testVerbParserSkipsVerbMissingRequiredAttributeAndKeepsValidSibling() {
+  @Test func testVerbParserSkipsVerbMissingRequiredAttributeAndKeepsValidSibling() {
     let xml = """
     <verbs>
       <verb in="parler" tn="to speak" mo="parler"/>
@@ -29,12 +29,12 @@ class ParserTests: XCTestCase {
     </verbs>
     """
     let (verbs, _) = VerbParser(xmlString: xml).parse(models: [:])
-    XCTAssertEqual(verbs.count, 1)
-    XCTAssertNotNil(verbs["parler"])
-    XCTAssertNil(verbs["finir"])
+    #expect(verbs.count == 1)
+    #expect(verbs["parler"] != nil)
+    #expect(verbs["finir"] == nil)
   }
 
-  func testVerbParserResetsStateBetweenElements() {
+  @Test func testVerbParserResetsStateBetweenElements() {
     let xml = """
     <verbs>
       <verb in="aller" tn="to go" mo="aller" re="t"/>
@@ -42,11 +42,11 @@ class ParserTests: XCTestCase {
     </verbs>
     """
     let (verbs, _) = VerbParser(xmlString: xml).parse(models: [:])
-    XCTAssertTrue(verbs["aller"]?.isReflexive ?? false)
-    XCTAssertFalse(verbs["parler"]?.isReflexive ?? true)
+    #expect(verbs["aller"]?.isReflexive ?? false)
+    #expect(!(verbs["parler"]?.isReflexive ?? true))
   }
 
-  func testModelParserSkipsModelMissingExemplar() {
+  @Test func testModelParserSkipsModelMissingExemplar() {
     let xml = """
     <models>
       <model id="parler" mo="parler"/>
@@ -54,21 +54,21 @@ class ParserTests: XCTestCase {
     </models>
     """
     let models = VerbModelParser(xmlString: xml).parse()
-    XCTAssertNotNil(models["parler"])
-    XCTAssertNil(models["broken"])
+    #expect(models["parler"] != nil)
+    #expect(models["broken"] == nil)
   }
 
-  func testModelParserDropsMalformedStemAlterations() {
+  @Test func testModelParserDropsMalformedStemAlterations() {
     let xml = """
     <models>
       <model id="test" mo="test" p="é,È,r1s|1,2|x,y,zzz"/>
     </models>
     """
     let models = VerbModelParser(xmlString: xml).parse()
-    XCTAssertEqual(models["test"]?.stemAlterations?.count, 1)
+    #expect(models["test"]?.stemAlterations?.count == 1)
   }
 
-  func testDefectGroupParserSkipsGroupMissingRequiredAttribute() {
+  @Test func testDefectGroupParserSkipsGroupMissingRequiredAttribute() {
     let xml = """
     <defectGroups>
       <defectGroup id="1" en="english" fr="french" du="fA"/>
@@ -76,17 +76,17 @@ class ParserTests: XCTestCase {
     </defectGroups>
     """
     let defectGroups = DefectGroupParser(xmlString: xml).parse()
-    XCTAssertNotNil(defectGroups["1"])
-    XCTAssertNil(defectGroups["2"])
+    #expect(defectGroups["1"] != nil)
+    #expect(defectGroups["2"] == nil)
   }
 
-  func testDefectGroupParserSkipsGroupWithBothUsesOnlyAndDoesntUse() {
+  @Test func testDefectGroupParserSkipsGroupWithBothUsesOnlyAndDoesntUse() {
     let xml = """
     <defectGroups>
       <defectGroup id="1" en="english" fr="french" uo="h2p" du="h1p"/>
     </defectGroups>
     """
     let defectGroups = DefectGroupParser(xmlString: xml).parse()
-    XCTAssertNil(defectGroups["1"])
+    #expect(defectGroups["1"] == nil)
   }
 }

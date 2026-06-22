@@ -6,17 +6,17 @@
 //
 
 @testable import Conjuguer
-import XCTest
+import Testing
 
 @MainActor
-class FuturStemsTests: XCTestCase {
-  func testRegularReFuturStemTrimsTrailingE() {
+struct FuturStemsTests {
+  @Test func testRegularReFuturStemTrimsTrailingE() {
     let model = VerbModel.model(id: Verb.verbs["vendre"]!.model)
-    XCTAssertEqual(model.futurStemsRecursive(infinitif: "vendre"), ["vendr"])
+    #expect(model.futurStemsRecursive(infinitif: "vendre") == ["vendr"])
   }
 
-  func testPayerHasTwoFuturStems() {
+  @Test func testPayerHasTwoFuturStems() {
     let model = VerbModel.model(id: Verb.verbs["payer"]!.model)
-    XCTAssertEqual(model.futurStemsRecursive(infinitif: "payer"), ["payer", "paIer"])
+    #expect(model.futurStemsRecursive(infinitif: "payer") == ["payer", "paIer"])
   }
 }

@@ -4,87 +4,91 @@
 //
 
 @testable import Conjuguer
-import XCTest
+import Foundation
+import Testing
 
-class RichTextTests: XCTestCase {
+@MainActor
+struct RichTextTests {
   // MARK: - Block splitting
 
-  func testPlainTextIsASingleBodyBlock() {
-    XCTAssertEqual("hello world".richTextBlocks, [.body([.plain("hello world")])])
+  @Test func testPlainTextIsASingleBodyBlock() {
+    #expect("hello world".richTextBlocks == [.body([.plain("hello world")])])
   }
 
-  func testSubheadingSplitsFromBody() {
-    XCTAssertEqual(
-      "`Heading`body text".richTextBlocks,
+  @Test func testSubheadingSplitsFromBody() {
+    #expect(
+      "`Heading`body text".richTextBlocks ==
       [.subheading("Heading"), .body([.plain("body text")])]
     )
   }
 
-  func testSubheadingIsTrimmed() {
-    XCTAssertEqual("`  Heading  `".richTextBlocks, [.subheading("Heading")])
+  @Test func testSubheadingIsTrimmed() {
+    #expect("`  Heading  `".richTextBlocks == [.subheading("Heading")])
   }
 
-  func testEmptySubheadingIsDropped() {
-    XCTAssertEqual("``body".richTextBlocks, [.body([.plain("body")])])
+  @Test func testEmptySubheadingIsDropped() {
+    #expect("``body".richTextBlocks == [.body([.plain("body")])])
   }
 
-  func testLeadingNewlinesAfterSubheadingAreTrimmed() {
-    XCTAssertEqual(
-      "`Head`\n\nBody".richTextBlocks,
+  @Test func testLeadingNewlinesAfterSubheadingAreTrimmed() {
+    #expect(
+      "`Head`\n\nBody".richTextBlocks ==
       [.subheading("Head"), .body([.plain("Body")])]
     )
   }
 
-  func testInternalParagraphBreaksArePreserved() {
-    XCTAssertEqual("first\n\nsecond".richTextBlocks, [.body([.plain("first\n\nsecond")])])
+  @Test func testInternalParagraphBreaksArePreserved() {
+    #expect("first\n\nsecond".richTextBlocks == [.body([.plain("first\n\nsecond")])])
   }
 
   // MARK: - Inline segments
 
-  func testBoldSegment() {
-    XCTAssertEqual("a ~b~ c".bodySegments, [.plain("a "), .bold("b"), .plain(" c")])
+  @Test func testBoldSegment() {
+    #expect("a ~b~ c".bodySegments == [.plain("a "), .bold("b"), .plain(" c")])
   }
 
-  func testLinkSegment() {
+  @Test func testLinkSegment() {
     guard case let .link(text, url) = "‡jouer‡".bodySegments.first else {
-      return XCTFail("Expected a link segment.")
+      Issue.record("Expected a link segment.")
+      return
     }
-    XCTAssertEqual(text, "jouer")
-    XCTAssertEqual(url.absoluteString.removingPercentEncoding, "jouer")
+    #expect(text == "jouer")
+    #expect(url.absoluteString.removingPercentEncoding == "jouer")
   }
 
-  func testHttpLinkKeepsScheme() {
+  @Test func testHttpLinkKeepsScheme() {
     guard case let .link(_, url) = "‡https://example.com‡".bodySegments.first else {
-      return XCTFail("Expected a link segment.")
+      Issue.record("Expected a link segment.")
+      return
     }
-    XCTAssertEqual(url.absoluteString, "https://example.com")
+    #expect(url.absoluteString == "https://example.com")
   }
 
-  func testConjugationSegmentEmbedsInPlainText() {
-    XCTAssertEqual(
-      "x $vaUX$ y".bodySegments,
+  @Test func testConjugationSegmentEmbedsInPlainText() {
+    #expect(
+      "x $vaUX$ y".bodySegments ==
       [.plain("x "), .conjugation([.regular("va"), .irregular("ux")]), .plain(" y")]
     )
   }
 
-  func testConjugationContiguousUppercase() {
-    XCTAssertEqual("SUIs".conjugationParts, [.irregular("sui"), .regular("s")])
+  @Test func testConjugationContiguousUppercase() {
+    #expect("SUIs".conjugationParts == [.irregular("sui"), .regular("s")])
   }
 
-  func testConjugationNonContiguousUppercaseSplitsIntoRuns() {
-    XCTAssertEqual(
-      "devIenDr".conjugationParts,
+  @Test func testConjugationNonContiguousUppercaseSplitsIntoRuns() {
+    #expect(
+      "devIenDr".conjugationParts ==
       [.regular("dev"), .irregular("i"), .regular("en"), .irregular("d"), .regular("r")]
     )
   }
 
-  func testConjugationAllRegular() {
-    XCTAssertEqual("joue".conjugationParts, [.regular("joue")])
+  @Test func testConjugationAllRegular() {
+    #expect("joue".conjugationParts == [.regular("joue")])
   }
 
   // MARK: - Graceful handling of authoring errors
 
-  func testUnterminatedBoldRendersAsPlain() {
-    XCTAssertEqual("a ~b".bodySegments, [.plain("a "), .plain("b")])
+  @Test func testUnterminatedBoldRendersAsPlain() {
+    #expect("a ~b".bodySegments == [.plain("a "), .plain("b")])
   }
 }

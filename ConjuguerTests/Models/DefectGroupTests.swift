@@ -6,10 +6,10 @@
 //
 
 @testable import Conjuguer
-import XCTest
+import Testing
 
 @MainActor
-class DefectGroupTests: XCTestCase {
+struct DefectGroupTests {
   private func group(doesntUse: String) -> DefectGroup {
     DefectGroup(id: "test", descriptionEn: "en", descriptionFr: "fr", usesOnly: nil, doesntUse: doesntUse)
   }
@@ -18,54 +18,54 @@ class DefectGroupTests: XCTestCase {
     DefectGroup(id: "test", descriptionEn: "en", descriptionFr: "fr", usesOnly: usesOnly, doesntUse: nil)
   }
 
-  func testH2PMarksSecondPluralImpératifPassé() {
+  @Test func testH2PMarksSecondPluralImpératifPassé() {
     let defectGroup = group(doesntUse: "h2p")
-    XCTAssertTrue(
+    #expect(
       defectGroup.isDefectiveForTense(.impératifPassé(.secondPlural)),
       "h2p must mark the second-plural (vous) impératif passé defective."
     )
-    XCTAssertFalse(
-      defectGroup.isDefectiveForTense(.impératifPassé(.firstPlural)),
+    #expect(
+      !defectGroup.isDefectiveForTense(.impératifPassé(.firstPlural)),
       "h2p must not mark the first-plural (nous) impératif passé — that's h1p's row."
     )
   }
 
-  func testH2PMarksSecondPluralImpératif() {
+  @Test func testH2PMarksSecondPluralImpératif() {
     let defectGroup = group(doesntUse: "h2p")
-    XCTAssertTrue(defectGroup.isDefectiveForTense(.impératif(.secondPlural)))
+    #expect(defectGroup.isDefectiveForTense(.impératif(.secondPlural)))
   }
 
-  func testH1PMarksFirstPlural() {
+  @Test func testH1PMarksFirstPlural() {
     let defectGroup = group(doesntUse: "h1p")
-    XCTAssertTrue(defectGroup.isDefectiveForTense(.impératif(.firstPlural)))
-    XCTAssertTrue(defectGroup.isDefectiveForTense(.impératifPassé(.firstPlural)))
-    XCTAssertFalse(defectGroup.isDefectiveForTense(.impératifPassé(.secondPlural)))
+    #expect(defectGroup.isDefectiveForTense(.impératif(.firstPlural)))
+    #expect(defectGroup.isDefectiveForTense(.impératifPassé(.firstPlural)))
+    #expect(!defectGroup.isDefectiveForTense(.impératifPassé(.secondPlural)))
   }
 
-  func testClorePatternStrikesBothImpératifPasséPlurals() {
+  @Test func testClorePatternStrikesBothImpératifPasséPlurals() {
     let defectGroup = group(doesntUse: "h1p,h2p")
-    XCTAssertTrue(defectGroup.isDefectiveForTense(.impératifPassé(.firstPlural)))
-    XCTAssertTrue(defectGroup.isDefectiveForTense(.impératifPassé(.secondPlural)))
+    #expect(defectGroup.isDefectiveForTense(.impératifPassé(.firstPlural)))
+    #expect(defectGroup.isDefectiveForTense(.impératifPassé(.secondPlural)))
   }
 
-  func testFAMarksEveryFuturSimplePerson() {
+  @Test func testFAMarksEveryFuturSimplePerson() {
     let defectGroup = group(doesntUse: "fA")
     for personNumber in PersonNumber.allCases {
-      XCTAssertTrue(defectGroup.isDefectiveForTense(.futurSimple(personNumber)))
+      #expect(defectGroup.isDefectiveForTense(.futurSimple(personNumber)))
     }
-    XCTAssertFalse(defectGroup.isDefectiveForTense(.indicatifPrésent(.firstSingular)))
+    #expect(!defectGroup.isDefectiveForTense(.indicatifPrésent(.firstSingular)))
   }
 
-  func testBarePersonCodeMarksEveryTenseForThatPerson() {
+  @Test func testBarePersonCodeMarksEveryTenseForThatPerson() {
     let defectGroup = group(doesntUse: "1s")
-    XCTAssertTrue(defectGroup.isDefectiveForTense(.indicatifPrésent(.firstSingular)))
-    XCTAssertTrue(defectGroup.isDefectiveForTense(.passéComposé(.firstSingular)))
-    XCTAssertFalse(defectGroup.isDefectiveForTense(.indicatifPrésent(.secondSingular)))
+    #expect(defectGroup.isDefectiveForTense(.indicatifPrésent(.firstSingular)))
+    #expect(defectGroup.isDefectiveForTense(.passéComposé(.firstSingular)))
+    #expect(!defectGroup.isDefectiveForTense(.indicatifPrésent(.secondSingular)))
   }
 
-  func testUsesOnlyImpératifDoesNotMirrorToPassé() {
+  @Test func testUsesOnlyImpératifDoesNotMirrorToPassé() {
     let defectGroup = group(usesOnly: "h2p")
-    XCTAssertFalse(defectGroup.isDefectiveForTense(.impératif(.secondPlural)))
-    XCTAssertTrue(defectGroup.isDefectiveForTense(.impératifPassé(.secondPlural)))
+    #expect(!defectGroup.isDefectiveForTense(.impératif(.secondPlural)))
+    #expect(defectGroup.isDefectiveForTense(.impératifPassé(.secondPlural)))
   }
 }

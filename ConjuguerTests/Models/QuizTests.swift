@@ -6,30 +6,31 @@
 //
 
 @testable import Conjuguer
-import XCTest
+import Testing
 
 @MainActor
-class QuizTests: XCTestCase {
-  func testRegularQuizLifecycle() {
+@Suite(.serialized)
+struct QuizTests {
+  @Test func testRegularQuizLifecycle() {
     Current.settings.quizDifficulty = .regular
     let quiz = Current.quiz
 
     quiz.start()
-    XCTAssertTrue(quiz.quizState == .inProgress)
-    XCTAssertEqual(quiz.questions.count, 30)
+    #expect(quiz.quizState == .inProgress)
+    #expect(quiz.questions.count == 30)
 
     let questionCount = quiz.questions.count
     for _ in 0 ..< questionCount {
       quiz.process(proposedAnswer: "x")
     }
 
-    XCTAssertEqual(quiz.quizResults.count, 30)
-    XCTAssertEqual(quiz.currentQuestionIndex, 30)
-    XCTAssertTrue(quiz.shouldShowResults)
-    XCTAssertTrue(quiz.quizState == .notStarted)
+    #expect(quiz.quizResults.count == 30)
+    #expect(quiz.currentQuestionIndex == 30)
+    #expect(quiz.shouldShowResults)
+    #expect(quiz.quizState == .notStarted)
   }
 
-  func testAllIncorrectAnswersScoreZero() {
+  @Test func testAllIncorrectAnswersScoreZero() {
     Current.settings.quizDifficulty = .regular
     let quiz = Current.quiz
 
@@ -39,6 +40,6 @@ class QuizTests: XCTestCase {
       quiz.process(proposedAnswer: "x")
     }
 
-    XCTAssertEqual(quiz.score, 0)
+    #expect(quiz.score == 0)
   }
 }

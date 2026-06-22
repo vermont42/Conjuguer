@@ -6,19 +6,20 @@
 //
 
 @testable import Conjuguer
-import XCTest
+import Testing
 
 /*
-class GenerateVerbModelTests: XCTestCase {
-  func testGenerateVerbModelTests() {
+@MainActor
+struct GenerateVerbModelTests {
+  @Test func generateVerbModelTests() {
     T.generateVerbModelTests()
   }
 }
 */
 
 @MainActor
-class VerbModelTests: XCTestCase {
-  func testAbsoudre() {
+struct VerbModelTests {
+  @Test func testAbsoudre() {
     // ID: 5-13
     var personNumbersIndex = 0
 
@@ -76,7 +77,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testAccroître() {
+  @Test func testAccroître() {
     // ID: 5-19B
     var personNumbersIndex = 0
 
@@ -134,7 +135,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testAcquérir() {
+  @Test func testAcquérir() {
     // ID: 6-3
     var personNumbersIndex = 0
 
@@ -192,7 +193,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testAller() {
+  @Test func testAller() {
     // ID: 1-9
     var personNumbersIndex = 0
 
@@ -250,7 +251,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testApparoir() {
+  @Test func testApparoir() {
     // ID: 4-1D
     var personNumbersIndex = 0
 
@@ -308,7 +309,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testAppeler() {
+  @Test func testAppeler() {
     // ID: 1-3A
     var personNumbersIndex = 0
 
@@ -366,7 +367,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testAssaillir() {
+  @Test func testAssaillir() {
     // ID: 3-2A
     var personNumbersIndex = 0
 
@@ -424,7 +425,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testAsseoir() {
+  @Test func testAsseoir() {
     // ID: 4-9AB
     var personNumbersIndex = 0
 
@@ -482,7 +483,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testAvoir() {
+  @Test func testAvoir() {
     // ID: 4-10
     var personNumbersIndex = 0
 
@@ -540,7 +541,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testBattre() {
+  @Test func testBattre() {
     // ID: 5-3
     var personNumbersIndex = 0
 
@@ -598,7 +599,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testBoire() {
+  @Test func testBoire() {
     // ID: 5-17
     var personNumbersIndex = 0
 
@@ -656,7 +657,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testBouillir() {
+  @Test func testBouillir() {
     // ID: 3-2C
     var personNumbersIndex = 0
 
@@ -714,7 +715,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testCéder() {
+  @Test func testCéder() {
     // ID: 1-5
     var personNumbersIndex = 0
 
@@ -772,7 +773,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testChauvir() {
+  @Test func testChauvir() {
     // ID: 6-1A
     var personNumbersIndex = 0
 
@@ -830,7 +831,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testChoir() {
+  @Test func testChoir() {
     // ID: 4-11A
     var personNumbersIndex = 0
 
@@ -888,7 +889,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testCirconcire() {
+  @Test func testCirconcire() {
     // ID: 5-8D
     var personNumbersIndex = 0
 
@@ -946,7 +947,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testClore() {
+  @Test func testClore() {
     // ID: 5-27
     var personNumbersIndex = 0
 
@@ -1004,7 +1005,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testConduire() {
+  @Test func testConduire() {
     // ID: 5-9A
     var personNumbersIndex = 0
 
@@ -1062,7 +1063,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testConnaître() {
+  @Test func testConnaître() {
     // ID: 5-20
     var personNumbersIndex = 0
 
@@ -1120,7 +1121,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testCoudre() {
+  @Test func testCoudre() {
     // ID: 5-14
     var personNumbersIndex = 0
 
@@ -1178,7 +1179,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testCourir() {
+  @Test func testCourir() {
     // ID: 6-4
     var personNumbersIndex = 0
 
@@ -1236,7 +1237,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testCouvrir() {
+  @Test func testCouvrir() {
     // ID: 3-1
     var personNumbersIndex = 0
 
@@ -1294,7 +1295,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testCroire() {
+  @Test func testCroire() {
     // ID: 5-18
     var personNumbersIndex = 0
 
@@ -1352,7 +1353,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testCroître() {
+  @Test func testCroître() {
     // ID: 5-19A
     var personNumbersIndex = 0
 
@@ -1410,7 +1411,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testCueillir() {
+  @Test func testCueillir() {
     // ID: 3-2B
     var personNumbersIndex = 0
 
@@ -1468,7 +1469,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testDevoir() {
+  @Test func testDevoir() {
     // ID: 4-2A
     var personNumbersIndex = 0
 
@@ -1526,7 +1527,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testDépecer() {
+  @Test func testDépecer() {
     // ID: 1-6A
     var personNumbersIndex = 0
 
@@ -1584,7 +1585,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testDire() {
+  @Test func testDire() {
     // ID: 5-8A
     var personNumbersIndex = 0
 
@@ -1642,7 +1643,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testEmployer() {
+  @Test func testEmployer() {
     // ID: 1-7A
     var personNumbersIndex = 0
 
@@ -1700,7 +1701,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testEnvoyer() {
+  @Test func testEnvoyer() {
     // ID: 1-8
     var personNumbersIndex = 0
 
@@ -1758,7 +1759,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testEster() {
+  @Test func testEster() {
     // ID: 1-10
     var personNumbersIndex = 0
 
@@ -1816,7 +1817,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testExclure() {
+  @Test func testExclure() {
     // ID: 5-16A
     var personNumbersIndex = 0
 
@@ -1874,7 +1875,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testÉchoir() {
+  @Test func testÉchoir() {
     // ID: 4-11B
     var personNumbersIndex = 0
 
@@ -1932,7 +1933,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testÉcrire() {
+  @Test func testÉcrire() {
     // ID: 5-7
     var personNumbersIndex = 0
 
@@ -1990,7 +1991,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testÊtre() {
+  @Test func testÊtre() {
     // ID: 5-26
     var personNumbersIndex = 0
 
@@ -2048,7 +2049,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testFaillir() {
+  @Test func testFaillir() {
     // ID: 4-12
     var personNumbersIndex = 0
 
@@ -2106,7 +2107,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testFaire() {
+  @Test func testFaire() {
     // ID: 5-23
     var personNumbersIndex = 0
 
@@ -2164,7 +2165,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testFalloir() {
+  @Test func testFalloir() {
     // ID: 4-5C
     var personNumbersIndex = 0
 
@@ -2222,7 +2223,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testFérir() {
+  @Test func testFérir() {
     // ID: 2-4
     var personNumbersIndex = 0
 
@@ -2280,7 +2281,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testFiche() {
+  @Test func testFiche() {
     // ID: 1-11
     var personNumbersIndex = 0
 
@@ -2338,7 +2339,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testFinir() {
+  @Test func testFinir() {
     // ID: 2-1
     var personNumbersIndex = 0
 
@@ -2396,7 +2397,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testForclore() {
+  @Test func testForclore() {
     // ID: 5-27A
     var personNumbersIndex = 0
 
@@ -2454,7 +2455,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testFoutre() {
+  @Test func testFoutre() {
     // ID: 5-1C
     var personNumbersIndex = 0
 
@@ -2512,7 +2513,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testFrire() {
+  @Test func testFrire() {
     // ID: 5-11A
     var personNumbersIndex = 0
 
@@ -2570,7 +2571,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testFuir() {
+  @Test func testFuir() {
     // ID: 6-2
     var personNumbersIndex = 0
 
@@ -2628,7 +2629,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testGésir() {
+  @Test func testGésir() {
     // ID: 5-28
     var personNumbersIndex = 0
 
@@ -2686,7 +2687,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testHaïrFrance() {
+  @Test func testHaïrFrance() {
     // ID: 2-3A
     var personNumbersIndex = 0
 
@@ -2744,7 +2745,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testHaïrQuébec() {
+  @Test func testHaïrQuébec() {
     // ID: 2-3B
     var personNumbersIndex = 0
 
@@ -2802,7 +2803,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testInclure() {
+  @Test func testInclure() {
     // ID: 5-16B
     var personNumbersIndex = 0
 
@@ -2860,7 +2861,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testIssir() {
+  @Test func testIssir() {
     // ID: 6-8
     var personNumbersIndex = 0
 
@@ -2918,7 +2919,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testJeter() {
+  @Test func testJeter() {
     // ID: 1-3B
     var personNumbersIndex = 0
 
@@ -2976,7 +2977,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testLancer() {
+  @Test func testLancer() {
     // ID: 1-2A
     var personNumbersIndex = 0
 
@@ -3034,7 +3035,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testLire() {
+  @Test func testLire() {
     // ID: 5-10
     var personNumbersIndex = 0
 
@@ -3092,7 +3093,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testManger() {
+  @Test func testManger() {
     // ID: 1-2B
     var personNumbersIndex = 0
 
@@ -3150,7 +3151,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testMaudire() {
+  @Test func testMaudire() {
     // ID: 2-2
     var personNumbersIndex = 0
 
@@ -3208,7 +3209,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testMettre() {
+  @Test func testMettre() {
     // ID: 5-4
     var personNumbersIndex = 0
 
@@ -3266,7 +3267,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testMoudre() {
+  @Test func testMoudre() {
     // ID: 5-15
     var personNumbersIndex = 0
 
@@ -3324,7 +3325,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testMourir() {
+  @Test func testMourir() {
     // ID: 6-5
     var personNumbersIndex = 0
 
@@ -3382,7 +3383,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testMouvoir() {
+  @Test func testMouvoir() {
     // ID: 4-3A
     var personNumbersIndex = 0
 
@@ -3440,7 +3441,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testNaître() {
+  @Test func testNaître() {
     // ID: 5-21
     var personNumbersIndex = 0
 
@@ -3498,7 +3499,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testNuire() {
+  @Test func testNuire() {
     // ID: 5-9B
     var personNumbersIndex = 0
 
@@ -3556,7 +3557,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testOuïrTrad() {
+  @Test func testOuïrTrad() {
     // ID: 2-5
     var personNumbersIndex = 0
 
@@ -3614,7 +3615,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testParler() {
+  @Test func testParler() {
     // ID: 1-1
     var personNumbersIndex = 0
 
@@ -3672,7 +3673,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testPartir() {
+  @Test func testPartir() {
     // ID: 6-1
     var personNumbersIndex = 0
 
@@ -3730,7 +3731,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testPayer() {
+  @Test func testPayer() {
     // ID: 1-7B
     var personNumbersIndex = 0
 
@@ -3788,7 +3789,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testPeser() {
+  @Test func testPeser() {
     // ID: 1-4
     var personNumbersIndex = 0
 
@@ -3846,7 +3847,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testPlaindre() {
+  @Test func testPlaindre() {
     // ID: 5-12
     var personNumbersIndex = 0
 
@@ -3904,7 +3905,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testPlaire() {
+  @Test func testPlaire() {
     // ID: 5-22A
     var personNumbersIndex = 0
 
@@ -3962,7 +3963,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testPleuvoir() {
+  @Test func testPleuvoir() {
     // ID: 4-4
     var personNumbersIndex = 0
 
@@ -4020,7 +4021,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testPourvoir() {
+  @Test func testPourvoir() {
     // ID: 4-1C
     var personNumbersIndex = 0
 
@@ -4078,7 +4079,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testPouvoir() {
+  @Test func testPouvoir() {
     // ID: 4-6
     var personNumbersIndex = 0
 
@@ -4136,7 +4137,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testPrendre() {
+  @Test func testPrendre() {
     // ID: 5-2
     var personNumbersIndex = 0
 
@@ -4194,7 +4195,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testPrédire() {
+  @Test func testPrédire() {
     // ID: 5-8B
     var personNumbersIndex = 0
 
@@ -4252,7 +4253,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testPrévaloir() {
+  @Test func testPrévaloir() {
     // ID: 4-5B
     var personNumbersIndex = 0
 
@@ -4310,7 +4311,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testPrévoir() {
+  @Test func testPrévoir() {
     // ID: 4-1B
     var personNumbersIndex = 0
 
@@ -4368,7 +4369,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testPromouvoir() {
+  @Test func testPromouvoir() {
     // ID: 4-3B
     var personNumbersIndex = 0
 
@@ -4426,7 +4427,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testProtéger() {
+  @Test func testProtéger() {
     // ID: 1-6C
     var personNumbersIndex = 0
 
@@ -4484,7 +4485,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testRapiécer() {
+  @Test func testRapiécer() {
     // ID: 1-6B
     var personNumbersIndex = 0
 
@@ -4542,7 +4543,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testRecevoir() {
+  @Test func testRecevoir() {
     // ID: 4-2B
     var personNumbersIndex = 0
 
@@ -4600,7 +4601,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testRendre() {
+  @Test func testRendre() {
     // ID: 5-1A
     var personNumbersIndex = 0
 
@@ -4658,7 +4659,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testRire() {
+  @Test func testRire() {
     // ID: 5-11
     var personNumbersIndex = 0
 
@@ -4716,7 +4717,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testRompre() {
+  @Test func testRompre() {
     // ID: 5-1B
     var personNumbersIndex = 0
 
@@ -4774,7 +4775,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testSavoir() {
+  @Test func testSavoir() {
     // ID: 4-7
     var personNumbersIndex = 0
 
@@ -4832,7 +4833,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testSuffire() {
+  @Test func testSuffire() {
     // ID: 5-8C
     var personNumbersIndex = 0
 
@@ -4890,7 +4891,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testSuivre() {
+  @Test func testSuivre() {
     // ID: 5-5
     var personNumbersIndex = 0
 
@@ -4948,7 +4949,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testSurseoir() {
+  @Test func testSurseoir() {
     // ID: 4-9C
     var personNumbersIndex = 0
 
@@ -5006,7 +5007,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testTaire() {
+  @Test func testTaire() {
     // ID: 5-22B
     var personNumbersIndex = 0
 
@@ -5064,7 +5065,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testTraire() {
+  @Test func testTraire() {
     // ID: 5-24
     var personNumbersIndex = 0
 
@@ -5122,7 +5123,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testVaincre() {
+  @Test func testVaincre() {
     // ID: 5-25
     var personNumbersIndex = 0
 
@@ -5180,7 +5181,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testValoir() {
+  @Test func testValoir() {
     // ID: 4-5A
     var personNumbersIndex = 0
 
@@ -5238,7 +5239,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testVenir() {
+  @Test func testVenir() {
     // ID: 6-7
     var personNumbersIndex = 0
 
@@ -5296,7 +5297,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testVêtir() {
+  @Test func testVêtir() {
     // ID: 6-6
     var personNumbersIndex = 0
 
@@ -5354,7 +5355,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testVivre() {
+  @Test func testVivre() {
     // ID: 5-6
     var personNumbersIndex = 0
 
@@ -5412,7 +5413,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testVoir() {
+  @Test func testVoir() {
     // ID: 4-1A
     var personNumbersIndex = 0
 
@@ -5470,7 +5471,7 @@ class VerbModelTests: XCTestCase {
     }
   }
 
-  func testVouloir() {
+  @Test func testVouloir() {
     // ID: 4-8
     var personNumbersIndex = 0
 

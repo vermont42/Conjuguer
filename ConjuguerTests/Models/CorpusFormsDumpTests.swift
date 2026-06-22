@@ -6,7 +6,8 @@
 //
 
 @testable import Conjuguer
-import XCTest
+import Foundation
+import Testing
 
 // NOT a behavioral test — a build-time corpus tool that happens to ride the test target so it
 // can reuse the app's authoritative `Conjugator` (and the already-bootstrapped verb data).
@@ -23,12 +24,12 @@ import XCTest
 // Run on demand (it writes a file; it asserts nothing about behavior):
 //   run_tests.sh --only-testing ConjuguerTests/CorpusFormsDumpTests
 @MainActor
-class CorpusFormsDumpTests: XCTestCase {
+struct CorpusFormsDumpTests {
   // Drop single-character tokens ("a", "y", "e"): ultra-noisy and the verbs that emit them
   // (avoir, aller, …) are covered many times over by their longer forms.
   private static let minFormLength = 2
 
-  func testDumpUsageRankedVerbForms() throws {
+  @Test func testDumpUsageRankedVerbForms() throws {
     // Repo root from this file's compile-time path: …/ConjuguerTests/Models/<file> → up three.
     let outURL = URL(filePath: #filePath)
       .deletingLastPathComponent()  // Models/
@@ -39,7 +40,7 @@ class CorpusFormsDumpTests: XCTestCase {
     let ranked = Verb.verbs.values
       .filter { $0.frequency != nil }
       .sorted { ($0.frequency ?? 0) < ($1.frequency ?? 0) }
-    XCTAssertFalse(ranked.isEmpty, "Verb data not loaded — expected the usage-ranked set.")
+    #expect(!ranked.isEmpty, "Verb data not loaded — expected the usage-ranked set.")
 
     // form → set of verb ids that produce it.
     var index: [String: Set<String>] = [:]
@@ -93,7 +94,7 @@ class CorpusFormsDumpTests: XCTestCase {
   // top — e.g. the Chanson-only verbs that have a Chanson example but no modern example. Same
   // form/verb-id schema as the ranked dump; kept as a separate file so the canonical forms.json
   // (ranked-only) the literature index relies on is untouched.
-  func testDumpAllVerbForms() throws {
+  @Test func testDumpAllVerbForms() throws {
     let outURL = URL(filePath: #filePath)
       .deletingLastPathComponent()  // Models/
       .deletingLastPathComponent()  // ConjuguerTests/
@@ -101,7 +102,7 @@ class CorpusFormsDumpTests: XCTestCase {
       .appending(path: "corpus/working/forms_all.json")
 
     let allVerbs = Verb.verbs.values.sorted { $0.infinitif < $1.infinitif }
-    XCTAssertFalse(allVerbs.isEmpty, "Verb data not loaded.")
+    #expect(!allVerbs.isEmpty, "Verb data not loaded.")
 
     var index: [String: Set<String>] = [:]
     var conjugationCount = 0

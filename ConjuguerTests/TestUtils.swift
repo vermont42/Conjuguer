@@ -6,7 +6,8 @@
 //
 
 @testable import Conjuguer
-import XCTest
+import Foundation
+import Testing
 
 @MainActor
 enum T {
@@ -17,11 +18,18 @@ enum T {
     return value
   }
 
-  static func testConjugation(infinitif: String, tense: Tense, expected: String, extraLetters: String?, pronounGender: PronounGender? = nil) {
+  static func testConjugation(
+    infinitif: String,
+    tense: Tense,
+    expected: String,
+    extraLetters: String?,
+    pronounGender: PronounGender? = nil,
+    sourceLocation: SourceLocation = #_sourceLocation
+  ) {
     if let value = Conjugator.conjugatedString(infinitif: infinitif, tense: tense, extraLetters: extraLetters, pronounGender: pronounGender) {
-      XCTAssertEqual(expected, value)
+      #expect(expected == value, sourceLocation: sourceLocation)
     } else {
-      XCTFail("Conjugation failed. Expected: \(expected)")
+      Issue.record("Conjugation failed. Expected: \(expected)", sourceLocation: sourceLocation)
     }
   }
 
@@ -35,15 +43,19 @@ enum T {
 //
 
 @testable import Conjuguer
-import XCTest
+import Testing
 
-class GenerateVerbModelTests: XCTestCase {
-  func testGenerateVerbModelTests() {
+/*
+@MainActor
+struct GenerateVerbModelTests {
+  @Test func generateVerbModelTests() {
     T.generateVerbModelTests()
   }
 }
+*/
 
-class VerbModelTests: XCTestCase {
+@MainActor
+struct VerbModelTests {
 """
     print(firstPart)
 
@@ -55,7 +67,7 @@ class VerbModelTests: XCTestCase {
     )
 
     for model in models {
-      var output = "  func test" + model.exemplar.capitalizingFirstLetter() + (model.extraLetters?.replacingOccurrences(of: ".", with: "").capitalizingFirstLetter() ?? "") + "() {\n    // ID: \(model.id)\n    var personNumbersIndex = 0\n\n"
+      var output = "  @Test func test" + model.exemplar.capitalizingFirstLetter() + (model.extraLetters?.replacingOccurrences(of: ".", with: "").capitalizingFirstLetter() ?? "") + "() {\n    // ID: \(model.id)\n    var personNumbersIndex = 0\n\n"
       let extraLettersComponent: String
       if let extraLetters = model.extraLetters {
         extraLettersComponent = "\"\(extraLetters)\""
