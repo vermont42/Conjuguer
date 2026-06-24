@@ -253,7 +253,7 @@ struct TutorView: View {
     messages.append(userMessage)
     inputText = ""
     isGenerating = true
-    SoundPlayer.play(.chirp)
+    Current.soundPlayer.play(.chirp)
     saveMessages()
 
     Task {
@@ -261,11 +261,11 @@ struct TutorView: View {
         let response = try await Current.languageModelService.sendTutorMessage(trimmed)
         let assistantMessage = TutorMessage(role: .assistant, content: response)
         messages.append(assistantMessage)
-        SoundPlayer.play(.chirp)
+        Current.soundPlayer.play(.chirp)
       } catch {
         let errorMessage = TutorMessage(role: .assistant, content: L.Tutor.unavailable)
         messages.append(errorMessage)
-        SoundPlayer.play(.chirp)
+        Current.soundPlayer.play(.chirp)
       }
       isGenerating = false
       saveMessages()

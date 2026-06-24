@@ -56,7 +56,7 @@ struct ConjuguerApp: App {
 
     Modifiers.modifyAppearances()
 
-    SoundPlayer.setup()
+    Current.soundPlayer.setup()
     Utterer.setup()
 
     LiveActivityManager.endAllActivities()

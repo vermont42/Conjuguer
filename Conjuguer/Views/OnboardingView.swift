@@ -116,7 +116,7 @@ struct OnboardingView: View {
 
         if currentPage == lastPageTag {
           Button(L.Onboarding.getStarted) {
-            SoundPlayer.play(.chime)
+            Current.soundPlayer.play(.chime)
             finishOnboarding()
           }
           .funButton()
@@ -208,7 +208,7 @@ private struct OnboardingPageView: View {
 
       if let navigationButtonTitle {
         Button(navigationButtonTitle) {
-          SoundPlayer.play(.chime)
+          Current.soundPlayer.play(.chime)
           switch navigationAction {
           case .navigateToTab(let tab):
             Current.selectedTab = tab

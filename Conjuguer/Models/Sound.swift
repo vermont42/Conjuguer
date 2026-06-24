@@ -13,13 +13,22 @@ enum Sound: String {
   case buzz
   case chime
   case chirp
+  case chomp
+  case enemyFire
   case gun1
   case gun2
+  case longFire1
+  case longFire2
+  case longFire3
+  case pop
   case sadTrombone1
   case sadTrombone2
   case sadTrombone3
   case sadTrombone4
+  case shieldActivate
   case silence
+
+  private static let longFires: [Sound] = [.longFire1, .longFire2, .longFire3]
 
   static var randomGun: Sound {
     randomSound(base: "gun", count: 2, defaultSound: .gun1)
@@ -31,6 +40,10 @@ enum Sound: String {
 
   static var randomSadTrombone: Sound {
     randomSound(base: "sadTrombone", count: 4, defaultSound: .sadTrombone1)
+  }
+
+  static var randomLongFire: Sound {
+    longFires.randomElement() ?? .longFire1
   }
 
   private static func randomSound(base: String, count: Int, defaultSound: Sound) -> Sound {

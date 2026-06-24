@@ -22,7 +22,7 @@ enum BrowseSearch {
     }
     let filtered = items.filter { matches($0, query) }
     if filtered.isEmpty && playSoundIfEmpty {
-      SoundPlayer.play(.randomSadTrombone)
+      Current.soundPlayer.play(.randomSadTrombone)
     }
     return filtered
   }

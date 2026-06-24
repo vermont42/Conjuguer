@@ -46,6 +46,14 @@ class Settings {
   static let bestScoreKey = "bestScore"
   static let bestScoreDefault = 0
 
+  var gameHighScore: Int = gameHighScoreDefault {
+    didSet {
+      persist(gameHighScore, oldValue: oldValue, key: Settings.gameHighScoreKey)
+    }
+  }
+  static let gameHighScoreKey = "gameHighScore"
+  static let gameHighScoreDefault = 0
+
   var pronounGender: PronounGender = pronounGenderDefault {
     didSet {
       persist(pronounGender, oldValue: oldValue, key: Settings.pronounGenderKey)
@@ -95,6 +103,7 @@ class Settings {
     modelSort = load(key: Settings.modelSortKey, default: Settings.modelSortDefault)
     quizDifficulty = load(key: Settings.quizDifficultyKey, default: Settings.quizDifficultyDefault)
     bestScore = load(key: Settings.bestScoreKey, default: Settings.bestScoreDefault)
+    gameHighScore = load(key: Settings.gameHighScoreKey, default: Settings.gameHighScoreDefault)
     pronounGender = load(key: Settings.pronounGenderKey, default: Settings.pronounGenderDefault)
     promptActionCount = load(key: Settings.promptActionCountKey, default: Settings.promptActionCountDefault)
     lastReviewPromptDate = load(key: Settings.lastReviewPromptDateKey, default: Settings.lastReviewPromptDateDefault)

@@ -93,12 +93,12 @@ struct InputView: View {
     )
     Verb.verbs[infinitif] = verb
     conjugate(infinitif, extraLetters: nil)
-    SoundPlayer.play(.chime)
+    Current.soundPlayer.play(.chime)
   }
 
   private func outputError(_ error: String) {
     Swift.print(error)
-    SoundPlayer.play(Sound.randomSadTrombone)
+    Current.soundPlayer.play(Sound.randomSadTrombone)
   }
 
   private func resetFields() {

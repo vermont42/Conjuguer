@@ -33,10 +33,15 @@ struct GameView: View {
         endGameButton
       }
       .overlay(alignment: .topTrailing) {
-        scoreLabel
+        statusLabels
       }
       .overlay(alignment: .bottomLeading) {
         arrowControls
+      }
+      .overlay {
+        if gameState.phase == .gameOver {
+          gameOverOverlay
+        }
       }
       .onAppear {
         gameState.configure(screenSize: geometry.size)
@@ -46,6 +51,9 @@ struct GameView: View {
     // overlays (quit button, score, arrows) stay clear of the status bar and
     // home indicator. The black still bleeds full-screen behind everything.
     .background(Color.black.ignoresSafeArea())
+    .onDisappear {
+      gameState.stopMusic()
+    }
   }
 
   private var gameField: some View {
@@ -68,9 +76,25 @@ struct GameView: View {
           .position(x: target.x, y: target.y)
       }
 
+      ForEach(gameState.deathEffects) { effect in
+        deathEffectView(effect)
+      }
+
+      ForEach(gameState.drops) { drop in
+        Text(drop.kind.emoji)
+          .font(.system(size: GameState.dropSize))
+          .position(x: drop.x, y: drop.y)
+      }
+
       ForEach(gameState.bullets) { bullet in
         Text("🇫🇷")
           .font(.system(size: GameState.bulletSize))
+          .position(x: bullet.x, y: bullet.y)
+      }
+
+      ForEach(gameState.enemyBullets) { bullet in
+        Text("🏴󠁧󠁢󠁥󠁮󠁧󠁿")
+          .font(.system(size: GameState.enemyBulletSize))
           .position(x: bullet.x, y: bullet.y)
       }
 
@@ -79,9 +103,46 @@ struct GameView: View {
         .aspectRatio(1, contentMode: .fit)
         .frame(width: GameState.playerSize, height: GameState.playerSize)
         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .opacity(max(0.1, gameState.playerHealth))
+        .overlay {
+          if gameState.shieldActive {
+            Circle()
+              .stroke(Color.cyan, lineWidth: 3)
+              .frame(width: GameState.playerSize + 14, height: GameState.playerSize + 14)
+              .opacity(0.6 + 0.4 * sin(gameState.sineTime * 3))
+          }
+        }
         .position(x: gameState.playerX, y: gameState.playerY)
         .accessibilityHidden(true)
     }
+  }
+
+  private func deathEffectView(_ effect: DeathEffect) -> some View {
+    let scale = 1.0 - effect.progress
+    let opacity = Double(scale)
+    let radius = effect.progress * 25
+
+    return ZStack {
+      if let assetName = effect.assetName {
+        Image(assetName)
+          .resizable()
+          .aspectRatio(1, contentMode: .fit)
+          .frame(width: GameState.targetSize, height: GameState.targetSize)
+          .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+          .scaleEffect(scale)
+          .opacity(opacity)
+      }
+
+      ForEach(0 ..< DeathEffect.particleCount, id: \.self) { index in
+        let angle = Double(index) * (.pi * 2.0 / Double(DeathEffect.particleCount))
+        Circle()
+          .fill(index.isMultiple(of: 2) ? Color.customRed : Color.customBlue)
+          .frame(width: 8 * scale, height: 8 * scale)
+          .opacity(opacity)
+          .offset(x: cos(angle) * radius, y: sin(angle) * radius)
+      }
+    }
+    .position(x: effect.x, y: effect.y)
   }
 
   private var endGameButton: some View {
@@ -97,12 +158,71 @@ struct GameView: View {
     .accessibilityIdentifier("button_game_endGame")
   }
 
-  private var scoreLabel: some View {
-    Text(L.Game.score(gameState.score))
-      .font(buttonFont)
-      .foregroundStyle(.white)
-      .padding(Layout.doubleDefaultSpacing)
-      .accessibilityIdentifier("label_game_score")
+  private var statusLabels: some View {
+    VStack(alignment: .trailing, spacing: Layout.defaultSpacing) {
+      Text(L.Game.score(gameState.score))
+        .foregroundStyle(.white)
+        .accessibilityIdentifier("label_game_score")
+
+      Text(L.Game.health(Int((gameState.playerHealth * 100).rounded())))
+        .foregroundStyle(healthColor)
+        .accessibilityIdentifier("label_game_health")
+    }
+    .font(buttonFont)
+    .padding(Layout.doubleDefaultSpacing)
+  }
+
+  private var healthColor: Color {
+    let percent = Int((gameState.playerHealth * 100).rounded())
+    if percent > 50 {
+      return .customGreen
+    } else if percent > 25 {
+      return .yellow
+    } else {
+      return .customRed
+    }
+  }
+
+  private var gameOverOverlay: some View {
+    ZStack {
+      Color.black.opacity(0.75)
+        .ignoresSafeArea()
+
+      VStack(spacing: Layout.doubleDefaultSpacing) {
+        Text(L.Game.gameOver)
+          .font(.largeTitle)
+          .bold()
+          .foregroundStyle(Color.customRed)
+
+        Text(L.Game.finalScore(gameState.finalScore))
+          .font(.title2)
+          .foregroundStyle(.white)
+
+        if gameState.isNewHighScore {
+          Text(L.Game.newHighScore)
+            .font(.headline)
+            .foregroundStyle(Color.customGreen)
+        } else {
+          Text(L.Game.highScore(gameState.highScore))
+            .font(.headline)
+            .foregroundStyle(.white)
+        }
+
+        Button(L.Game.playAgain) {
+          gameState.restart()
+        }
+        .funButton()
+        .padding(.top, Layout.doubleDefaultSpacing)
+        .accessibilityIdentifier("button_game_playAgain")
+
+        Button(L.Game.quit) {
+          dismiss()
+        }
+        .funButton(tint: .customRed)
+        .accessibilityIdentifier("button_game_quit")
+      }
+      .padding(Layout.tripleDefaultSpacing)
+    }
   }
 
   private var arrowControls: some View {

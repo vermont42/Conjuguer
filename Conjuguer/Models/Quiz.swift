@@ -63,7 +63,7 @@ class Quiz {
     quizState = .inProgress
     announcePublishedProperties()
     startLiveActivity()
-    SoundPlayer.play(Sound.randomGun)
+    Current.soundPlayer.play(Sound.randomGun)
     Current.analytics.recordQuizStart(difficulty: Current.settings.quizDifficulty)
 
     timer = Timer.scheduledTimer(
@@ -81,7 +81,7 @@ class Quiz {
   }
 
   func quit() {
-    SoundPlayer.play(Sound.randomSadTrombone)
+    Current.soundPlayer.play(Sound.randomSadTrombone)
     timer?.invalidate()
     quizState = .notStarted
     endLiveActivity()
@@ -303,7 +303,7 @@ class Quiz {
     }
     let conjugationResult = ConjugationResult.score(correctAnswers: correctAnswers, proposedAnswer: proposedAnswer)
     if currentQuestionIndex != questions.count - 1 {
-      SoundPlayer.play(conjugationResult.sound)
+      Current.soundPlayer.play(conjugationResult.sound)
     }
     score += conjugationResult.score * difficulty.scoreModifier
     correctnessScore += conjugationResult.percentCorrect
@@ -342,7 +342,7 @@ class Quiz {
       Current.settings.bestScore = score
     }
     shouldShowResults = true
-    SoundPlayer.play(Sound.randomApplause)
+    Current.soundPlayer.play(Sound.randomApplause)
     gameCenter.reportScore(score)
     Current.analytics.recordQuizCompletion(difficulty: Current.settings.quizDifficulty, elapsedTime: elapsedTime, score: score)
     quit()

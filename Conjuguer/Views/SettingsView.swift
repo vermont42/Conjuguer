@@ -125,7 +125,7 @@ struct SettingsView: View {
               .settingsLabel()
           }
 
-          settingCard(title: L.Game.playGame) {
+          settingCard(title: L.Game.sectionTitle) {
             Button(L.Game.playGame) {
               world.analytics.recordEvent("tapPlayGame")
               showingGame = true

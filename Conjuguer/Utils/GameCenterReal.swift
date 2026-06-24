@@ -22,7 +22,7 @@ class GameCenterReal: NSObject, GameCenter {
         onViewController.present(viewController, animated: true, completion: nil)
       } else if self.localPlayer.isAuthenticated {
         self.isAuthenticated = true
-        SoundPlayer.play(.randomApplause)
+        Current.soundPlayer.play(.randomApplause)
         self.localPlayer.loadDefaultLeaderboardIdentifier { identifier, _ in
           Task { @MainActor in
             self.leaderboardIdentifier = identifier

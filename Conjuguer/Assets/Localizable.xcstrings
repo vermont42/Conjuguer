@@ -140,6 +140,74 @@
         }
       }
     },
+    "Game.finalScore": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Final score: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Score final : %lld"
+          }
+        }
+      }
+    },
+    "Game.gameOver": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Game Over"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partie terminée"
+          }
+        }
+      }
+    },
+    "Game.health": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Health: %lld%%"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Santé : %lld %%"
+          }
+        }
+      }
+    },
+    "Game.highScore": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "High score: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meilleur score : %lld"
+          }
+        }
+      }
+    },
     "Game.moveLeft": {
       "extractionState": "manual",
       "localizations": {
@@ -174,6 +242,40 @@
         }
       }
     },
+    "Game.newHighScore": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New High Score!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveau record !"
+          }
+        }
+      }
+    },
+    "Game.playAgain": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Play Again"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rejouer"
+          }
+        }
+      }
+    },
     "Game.playGame": {
       "extractionState": "manual",
       "localizations": {
@@ -197,13 +299,30 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pilot the Arc de Triomphe and pelt roosters and croissants with berets."
+            "value": "Pilot the Arc de Triomphe and pelt roosters, berets, and croissants. Grab the power-ups!"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pilotez l’Arc de Triomphe et bombardez coqs et croissants de bérets."
+            "value": "Pilotez l’Arc de Triomphe et bombardez coqs, bérets et croissants. Attrapez les bonus !"
+          }
+        }
+      }
+    },
+    "Game.quit": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quit"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitter"
           }
         }
       }
@@ -221,6 +340,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Score : %lld"
+          }
+        }
+      }
+    },
+    "Game.sectionTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "France-Themed Game"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeu sur le thème de la France"
           }
         }
       }
@@ -3473,7 +3609,8 @@
         }
       }
     },
-    "🇫🇷": {}
+    "🇫🇷": {},
+    "🏴󠁧󠁢󠁥󠁮󠁧󠁿": {}
   },
   "version": "1.0"
 }

@@ -30,6 +30,7 @@ class World {
   var reviewPrompter: ReviewPrompter
   var getterSetter: GetterSetter
   var languageModelService: LanguageModelService
+  var soundPlayer: SoundPlayer
   var verb: Verb?
   var verbModel: VerbModel?
   var info: Info?
@@ -48,6 +49,7 @@ class World {
     reviewPrompter: ReviewPrompter,
     getterSetter: GetterSetter,
     languageModelService: LanguageModelService,
+    soundPlayer: SoundPlayer,
     session: URLSession
   ) {
     self.settings = settings
@@ -57,6 +59,7 @@ class World {
     self.reviewPrompter = reviewPrompter
     self.getterSetter = getterSetter
     self.languageModelService = languageModelService
+    self.soundPlayer = soundPlayer
     self.session = session
   }
 
@@ -87,6 +90,7 @@ class World {
       reviewPrompter: ReviewPrompterReal(settings: settings),
       getterSetter: getterSetter,
       languageModelService: LanguageModelServiceReal(),
+      soundPlayer: SoundPlayerReal(),
       session: URLSession.shared
     )
   }()
@@ -105,6 +109,7 @@ class World {
       reviewPrompter: ReviewPrompterReal(settings: settings),
       getterSetter: getterSetter,
       languageModelService: LanguageModelServiceReal(),
+      soundPlayer: SoundPlayerReal(),
       session: fakeSession
     )
   }()
@@ -123,6 +128,7 @@ class World {
       reviewPrompter: ReviewPrompterDummy(),
       getterSetter: getterSetter,
       languageModelService: LanguageModelServiceDummy(),
+      soundPlayer: SoundPlayerDummy(),
       session: fakeSession
     )
   }()

@@ -6,36 +6,20 @@
 //  Copyright © 2015 Josh Adams. All rights reserved.
 //
 
-import AVFoundation
+@MainActor
+protocol SoundPlayer {
+  func setup()
+  func play(_ sound: Sound, shouldDebounce: Bool, volume: Float)
+  func startMusic()
+  func stopMusic()
+}
 
-class SoundPlayer {
-  private static let soundPlayer = SoundPlayer()
-  private var sounds: [String: AVAudioPlayer]
-  private static let soundExtension = "mp3"
-  private static var instantOfLastPlay: TimeInterval = 0.0
-
-  private init () {
-    sounds = Dictionary()
+extension SoundPlayer {
+  func play(_ sound: Sound) {
+    play(sound, shouldDebounce: true, volume: 1.0)
   }
 
-  static func play(_ sound: Sound) {
-    if soundPlayer.sounds[sound.rawValue] == nil {
-      if let audioUrl = Bundle.main.url(forResource: sound.rawValue, withExtension: soundExtension) {
-        do {
-          try soundPlayer.sounds[sound.rawValue] = AVAudioPlayer.init(contentsOf: audioUrl)
-        } catch {}
-      }
-    }
-    let instantOfCurrentPlay = Date().timeIntervalSince1970
-    let minSoundInterval: TimeInterval = 1.0
-    if instantOfCurrentPlay - instantOfLastPlay > minSoundInterval {
-      soundPlayer.sounds[sound.rawValue]?.play()
-      instantOfLastPlay = instantOfCurrentPlay
-    }
-  }
-
-  static func setup() {
-    AudioSession.configure()
-    play(.silence) // https://forums.developer.apple.com/thread/23160
+  func play(_ sound: Sound, shouldDebounce: Bool) {
+    play(sound, shouldDebounce: shouldDebounce, volume: 1.0)
   }
 }

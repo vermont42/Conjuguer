@@ -581,6 +581,10 @@ enum L {
   }
 
   enum Game {
+    static var sectionTitle: String {
+      String(localized: "Game.sectionTitle")
+    }
+
     static var playGame: String {
       String(localized: "Game.playGame")
     }
@@ -603,6 +607,34 @@ enum L {
 
     static func score(_ value: Int) -> String {
       String(localized: "Game.score", defaultValue: "Score: \(value)")
+    }
+
+    static func health(_ value: Int) -> String {
+      String(localized: "Game.health", defaultValue: "Health: \(value)%")
+    }
+
+    static var gameOver: String {
+      String(localized: "Game.gameOver")
+    }
+
+    static func finalScore(_ value: Int) -> String {
+      String(localized: "Game.finalScore", defaultValue: "Final score: \(value)")
+    }
+
+    static func highScore(_ value: Int) -> String {
+      String(localized: "Game.highScore", defaultValue: "High score: \(value)")
+    }
+
+    static var newHighScore: String {
+      String(localized: "Game.newHighScore")
+    }
+
+    static var playAgain: String {
+      String(localized: "Game.playAgain")
+    }
+
+    static var quit: String {
+      String(localized: "Game.quit")
     }
   }
 
