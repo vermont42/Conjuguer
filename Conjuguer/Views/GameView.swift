@@ -46,6 +46,9 @@ struct GameView: View {
       .onAppear {
         gameState.configure(screenSize: geometry.size)
       }
+      .onChange(of: geometry.size) { _, newSize in
+        gameState.updateScreenSize(newSize)
+      }
     }
     // The GeometryReader respects the safe area, so its size and the edge
     // overlays (quit button, score, arrows) stay clear of the status bar and

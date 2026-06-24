@@ -91,6 +91,43 @@ final class GameState {
     Current.soundPlayer.startMusic()
   }
 
+  /// Re-anchors the world when the viewport changes (device rotation). The player
+  /// is bottom-anchored, so updating `screenSize` alone repositions it; the targets,
+  /// projectiles, drops, and stars are shifted by half the width delta so the whole
+  /// cluster stays horizontally centered (keeping each entity's offset from center),
+  /// and the widened starfield is topped up on its newly exposed flanks.
+  func updateScreenSize(_ newSize: CGSize) {
+    guard newSize.width > 0, newSize.height > 0 else {
+      return
+    }
+    guard didConfigure else {
+      configure(screenSize: newSize)
+      return
+    }
+    let oldSize = screenSize
+    guard newSize != oldSize else {
+      return
+    }
+    let dx = (newSize.width - oldSize.width) / 2.0
+
+    for index in targets.indices {
+      targets[index].x += dx
+    }
+    for index in bullets.indices {
+      bullets[index].x += dx
+    }
+    for index in enemyBullets.indices {
+      enemyBullets[index].x += dx
+    }
+    for index in drops.indices {
+      drops[index].x += dx
+    }
+    playerX = min(max(playerX + dx, 0), newSize.width)
+
+    screenSize = newSize
+    reflowStars(dx: dx, oldSize: oldSize, newSize: newSize)
+  }
+
   func restart() {
     seedWorld()
     Current.soundPlayer.startMusic()
@@ -143,6 +180,38 @@ final class GameState {
           kind: Target.Kind.allCases.randomElement() ?? .rooster,
           x: CGFloat.random(in: Self.targetSize ... (screenSize.width - Self.targetSize)),
           y: CGFloat.random(in: 0 ... (screenSize.height / 2))
+        )
+      )
+    }
+  }
+
+  /// Shifts the existing starfield to stay with the centered scene, then fills the
+  /// freshly exposed left/right bands when the viewport widens (or trims stars that
+  /// slid off-screen when it narrows, so repeated rotations don't accumulate stars).
+  private func reflowStars(dx: CGFloat, oldSize: CGSize, newSize: CGSize) {
+    for index in stars.indices {
+      stars[index].x += dx
+    }
+
+    guard newSize.width > oldSize.width, dx > 0 else {
+      stars.removeAll { $0.x < 0 || $0.x > newSize.width }
+      return
+    }
+
+    // Keep star density uniform: add stars proportional to the new width gained.
+    let density = Double(Self.starCount) / Double(oldSize.width)
+    let extraCount = Int((density * Double(newSize.width - oldSize.width)).rounded())
+    for offset in 0 ..< extraCount {
+      // Alternate the two newly exposed bands: [0, dx] on the left, [width - dx, width] on the right.
+      let x = offset.isMultiple(of: 2)
+        ? CGFloat.random(in: 0 ... dx)
+        : CGFloat.random(in: (newSize.width - dx) ... newSize.width)
+      stars.append(
+        Star(
+          x: x,
+          y: CGFloat.random(in: 0 ... newSize.height),
+          size: CGFloat.random(in: 1.0 ... 2.5),
+          opacity: Double.random(in: 0.15 ... 0.5)
         )
       )
     }
