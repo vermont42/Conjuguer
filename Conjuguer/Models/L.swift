@@ -762,5 +762,71 @@ enum L {
     static var readArticlesButton: String {
       String(localized: "Onboarding.readArticlesButton")
     }
+
+    static var aiTitle: String {
+      String(localized: "Onboarding.aiTitle")
+    }
+
+    static var aiBody: String {
+      String(localized: "Onboarding.aiBody")
+    }
+
+    static var meetTutorButton: String {
+      String(localized: "Onboarding.meetTutorButton")
+    }
+  }
+
+  enum Tutor {
+    static var heading: String {
+      String(localized: "Tutor.heading")
+    }
+
+    static var description: String {
+      String(localized: "Tutor.description")
+    }
+
+    static var getSampleQuery: String {
+      String(localized: "Tutor.getSampleQuery")
+    }
+
+    static var getSampleQueryDescription: String {
+      String(localized: "Tutor.getSampleQueryDescription")
+    }
+
+    static var poweredBy: String {
+      String(localized: "Tutor.poweredBy")
+    }
+
+    static var inputPlaceholder: String {
+      String(localized: "Tutor.inputPlaceholder")
+    }
+
+    static var send: String {
+      String(localized: "Tutor.send")
+    }
+
+    static var unavailable: String {
+      String(localized: "Tutor.unavailable")
+    }
+
+    static var unableToAnswer: String {
+      String(localized: "Tutor.unableToAnswer")
+    }
+
+    static var reasonAppleIntelligenceOff: String {
+      String(localized: "Tutor.reasonAppleIntelligenceOff")
+    }
+
+    static var reasonDeviceNotEligible: String {
+      String(localized: "Tutor.reasonDeviceNotEligible")
+    }
+
+    static var reasonModelNotReady: String {
+      String(localized: "Tutor.reasonModelNotReady")
+    }
+
+    static var reasonUnknown: String {
+      String(localized: "Tutor.reasonUnknown")
+    }
   }
 }

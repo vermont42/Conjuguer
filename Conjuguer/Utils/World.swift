@@ -28,10 +28,13 @@ class World {
   var quiz: Quiz
   var analytics: AnalyticsService
   var reviewPrompter: ReviewPrompter
+  var getterSetter: GetterSetter
+  var languageModelService: LanguageModelService
   var verb: Verb?
   var verbModel: VerbModel?
   var info: Info?
   var selectedTab: MainTab = .verbs
+  var shouldNavigateToTutor = false
   var session: URLSession
 
   private static let fakeRatingsCount = 1
@@ -43,6 +46,8 @@ class World {
     quiz: Quiz,
     analytics: AnalyticsService,
     reviewPrompter: ReviewPrompter,
+    getterSetter: GetterSetter,
+    languageModelService: LanguageModelService,
     session: URLSession
   ) {
     self.settings = settings
@@ -50,6 +55,8 @@ class World {
     self.quiz = quiz
     self.analytics = analytics
     self.reviewPrompter = reviewPrompter
+    self.getterSetter = getterSetter
+    self.languageModelService = languageModelService
     self.session = session
   }
 
@@ -67,7 +74,8 @@ class World {
   }
 
   static let device: World = {
-    let settings = Settings(getterSetter: GetterSetterReal())
+    let getterSetter = GetterSetterReal()
+    let settings = Settings(getterSetter: getterSetter)
     let gameCenter = GameCenterReal.shared
     let quiz = Quiz(gameCenter: gameCenter)
     let analytics = AnalyticsServiceReal()
@@ -77,12 +85,15 @@ class World {
       quiz: quiz,
       analytics: analytics,
       reviewPrompter: ReviewPrompterReal(settings: settings),
+      getterSetter: getterSetter,
+      languageModelService: LanguageModelServiceReal(),
       session: URLSession.shared
     )
   }()
 
   static let simulator: World = {
-    let settings = Settings(getterSetter: GetterSetterReal())
+    let getterSetter = GetterSetterReal()
+    let settings = Settings(getterSetter: getterSetter)
     let gameCenter = GameCenterStub()
     let quiz = Quiz(gameCenter: gameCenter)
     let analytics = AnalyticsServiceSpy()
@@ -92,12 +103,15 @@ class World {
       quiz: quiz,
       analytics: analytics,
       reviewPrompter: ReviewPrompterReal(settings: settings),
+      getterSetter: getterSetter,
+      languageModelService: LanguageModelServiceReal(),
       session: fakeSession
     )
   }()
 
   static let unitTest: World = {
-    let settings = Settings(getterSetter: GetterSetterFake())
+    let getterSetter = GetterSetterFake()
+    let settings = Settings(getterSetter: getterSetter)
     let gameCenter = GameCenterStub()
     let quiz = Quiz(gameCenter: gameCenter)
     let analytics = AnalyticsServiceSpy()
@@ -107,6 +121,8 @@ class World {
       quiz: quiz,
       analytics: analytics,
       reviewPrompter: ReviewPrompterDummy(),
+      getterSetter: getterSetter,
+      languageModelService: LanguageModelServiceDummy(),
       session: fakeSession
     )
   }()
