@@ -2,14 +2,6 @@
 //  GameState.swift
 //  Conjuguer
 //
-//  The Arc de Triomphe minigame's model and frame-by-frame game loop. Modeled on
-//  Konjugieren's GameState: a single @Observable state object whose update(currentTime:)
-//  is driven by GameView's TimelineView(.animation). All motion is computed manually
-//  from a per-frame delta time; there is no physics engine.
-//
-//  Per the design sketch this build intentionally omits rotation lock, sound, player
-//  collisions, waves, and player health.
-//
 
 import Observation
 import SwiftUI
@@ -17,44 +9,26 @@ import SwiftUI
 @MainActor
 @Observable
 final class GameState {
-  // MARK: - Tunable constants
-
   static let playerSize: CGFloat = 64.0
-  /// Distance of the player's center from the bottom edge.
   static let playerBottomInset: CGFloat = 96.0
-  /// Horizontal player speed while an arrow is held, and the return-to-center speed.
   static let playerSpeed: CGFloat = 320.0
-
   static let bulletSize: CGFloat = 36.0
   static let bulletSpeed: CGFloat = 620.0
-  /// Minimum interval between shots — matches Konjugieren's rapid-fire cadence.
   static let fireInterval: CGFloat = 0.3
-
   static let targetSize: CGFloat = 52.0
-  /// Downward scroll speed of the whole world (targets + stars).
   static let scrollSpeed: CGFloat = 90.0
-  /// Average seconds between target spawns.
   static let spawnInterval: CGFloat = 0.7
-
   static let starCount = 60
-
-  // MARK: - World
 
   var screenSize: CGSize = .zero
   var playerX: CGFloat = 0.0
-
   var bullets: [Bullet] = []
   var targets: [Target] = []
   var stars: [Star] = []
   var score = 0
 
-  // MARK: - Input
-
-  /// Set by holding the on-screen arrows. Releasing both returns the player to center.
   var movingLeft = false
   var movingRight = false
-
-  // MARK: - Loop bookkeeping
 
   private var lastUpdateTime: Date?
   private var fireCooldown: CGFloat = 0.0
@@ -64,8 +38,6 @@ final class GameState {
   var playerY: CGFloat {
     screenSize.height - Self.playerBottomInset
   }
-
-  // MARK: - Setup
 
   /// Called once the view knows its size. Centers the player and seeds the world.
   func configure(screenSize: CGSize) {
@@ -97,8 +69,6 @@ final class GameState {
     }
   }
 
-  // MARK: - Input actions
-
   func fire() {
     guard fireCooldown <= 0 else {
       return
@@ -106,8 +76,6 @@ final class GameState {
     bullets.append(Bullet(x: playerX, y: playerY - Self.playerSize / 2))
     fireCooldown = Self.fireInterval
   }
-
-  // MARK: - Game loop
 
   func update(currentTime: Date) {
     let dt: CGFloat
@@ -235,7 +203,6 @@ final class GameState {
     }
   }
 
-  /// Axis-aligned bounding-box overlap test (matches Konjugieren's collision style).
   private static func intersects(
     a: CGPoint,
     aSize: CGFloat,
