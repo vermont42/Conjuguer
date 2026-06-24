@@ -580,6 +580,32 @@ enum L {
     }
   }
 
+  enum Game {
+    static var playGame: String {
+      String(localized: "Game.playGame")
+    }
+
+    static var playGameDescription: String {
+      String(localized: "Game.playGameDescription")
+    }
+
+    static var endGame: String {
+      String(localized: "Game.endGame")
+    }
+
+    static var moveLeft: String {
+      String(localized: "Game.moveLeft")
+    }
+
+    static var moveRight: String {
+      String(localized: "Game.moveRight")
+    }
+
+    static func score(_ value: Int) -> String {
+      String(localized: "Game.score", defaultValue: "Score: \(value)")
+    }
+  }
+
   enum AppIcon {
     static var arcDeTriomphe: String {
       String(localized: "AppIcon.arcDeTriomphe")

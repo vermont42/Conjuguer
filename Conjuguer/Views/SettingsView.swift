@@ -12,6 +12,7 @@ struct SettingsView: View {
   @Environment(\.openURL) private var openURL
   @State private var rateReviewDescription = ""
   @State private var showingOnboarding = false
+  @State private var showingGame = false
 
   var body: some View {
     @Bindable var settings = world.settings
@@ -123,6 +124,17 @@ struct SettingsView: View {
             Text(L.Onboarding.showOnboardingDescription)
               .settingsLabel()
           }
+
+          settingCard(title: L.Game.playGame) {
+            Button(L.Game.playGame) {
+              world.analytics.recordEvent("tapPlayGame")
+              showingGame = true
+            }
+            .funButton()
+
+            Text(L.Game.playGameDescription)
+              .settingsLabel()
+          }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, Layout.doubleDefaultSpacing)
@@ -138,6 +150,9 @@ struct SettingsView: View {
     }
     .fullScreenCover(isPresented: $showingOnboarding) {
       OnboardingView(isReshow: true)
+    }
+    .fullScreenCover(isPresented: $showingGame) {
+      GameView()
     }
     .screenBackground()
   }
