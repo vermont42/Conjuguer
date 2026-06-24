@@ -15,7 +15,9 @@ struct OnboardingView: View {
   @State private var getStartedOffset: CGFloat = 100
   @State private var getStartedOpacity: Double = 0
 
-  private let lastPageTag = 4
+  private var lastPageTag: Int {
+    Current.languageModelService.isAvailable ? 5 : 4
+  }
   fileprivate static let entranceAnimation = Animation.spring(response: 0.6, dampingFraction: 0.7).delay(0.3)
 
   init(isReshow: Bool = false) {
@@ -87,6 +89,18 @@ struct OnboardingView: View {
           )
           .tag(3)
 
+          if Current.languageModelService.isAvailable {
+            OnboardingPageView(
+              symbolName: "brain.head.profile.fill",
+              title: L.Onboarding.aiTitle,
+              bodyText: L.Onboarding.aiBody,
+              navigationButtonTitle: L.Onboarding.meetTutorButton,
+              navigationAction: .navigateToTutor,
+              onNavigate: { finishOnboarding() }
+            )
+            .tag(4)
+          }
+
           OnboardingPageView(
             symbolName: "figure.water.fitness",
             title: L.Onboarding.learnTitle,
@@ -137,6 +151,7 @@ struct OnboardingView: View {
 private enum OnboardingNavigationAction {
   case none
   case navigateToTab(MainTab)
+  case navigateToTutor
 }
 
 private struct OnboardingPageView: View {
@@ -197,6 +212,9 @@ private struct OnboardingPageView: View {
           switch navigationAction {
           case .navigateToTab(let tab):
             Current.selectedTab = tab
+          case .navigateToTutor:
+            Current.selectedTab = .info
+            Current.shouldNavigateToTutor = true
           case .none:
             break
           }
