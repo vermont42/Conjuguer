@@ -1,0 +1,43 @@
+Version 2.0
+
+
+English
+
+Version 2.0 is the biggest update to Conjuguer since launch, adding an on-device AI tutor, real literature examples, Home and Lock Screen widgets, a France-themed arcade game, and a top-to-bottom visual refresh.
+
+The headline feature is the Conjugation Tutor on the Info tab. Powered by Apple Intelligence and running entirely on your device, it answers your questions about French verbs and tenses in plain language and remembers your conversation between visits. The Tutor requires a device that supports Apple Intelligence; an explanatory note appears when it is unavailable.
+
+Verbs now come with a sense of history and context. Etymologies trace the origins of nearly a thousand of the most common verbs, and example sentences show verbs used in real, properly sourced writing, from the Chanson de Roland and the fables of La Fontaine and the plays of Molière to Wikipedia and public-domain reference texts. Sources are credited on the Info tab.
+
+Conjuguer reaches beyond the app, too. A Verb of the Day widget brings a daily verb and its présent conjugations to your Home Screen and Lock Screen, you can start a quiz straight from Control Center, and a Live Activity follows an in-progress quiz from the Lock Screen and Dynamic Island.
+
+For a change of pace, a France-themed Arc de Triomphe arcade game is tucked into Settings, complete with power-ups, combat, music, haptics, and a high score.
+
+New Conjuguer users are welcomed by a first-launch tour that is re-openable any time.
+
+You can dress up your Home Screen with alternate app icons: the Arc, a rooster, a croissant, or a béret.
+
+The rest of the app has been refreshed throughout: cleaner cards and color keys, grouped Info articles, richer quiz screens, adaptive iPad layouts, live search filtering of the verb and model lists, helpful in-app tips, and a history of the French verb system.
+
+This release also fixes deep-link navigation, corrects the conjugation of several archaic and defective verbs, and resolves a number of smaller issues. Everything is fully localized in English and French.
+
+
+Français
+
+La version 2.0 est la plus grande mise à jour de Conjuguer depuis son lancement : elle ajoute un tuteur intelligent fonctionnant sur l'appareil, de véritables exemples littéraires, des widgets pour l'écran d'accueil et l'écran verrouillé, un jeu d'arcade aux couleurs de la France et une refonte visuelle de fond en comble.
+
+La nouveauté phare est le tuteur de conjugaison, sur l'onglet Infos. Propulsé par Apple Intelligence et fonctionnant entièrement sur votre appareil, il répond à vos questions sur les verbes et les temps français dans un langage clair et garde la mémoire de vos échanges d'une visite à l'autre. Le tuteur nécessite un appareil compatible avec Apple Intelligence ; une note explicative s'affiche lorsqu'il n'est pas disponible.
+
+Les verbes s'accompagnent désormais d'un sens de l'histoire et du contexte. Les étymologies retracent l'origine de près de mille des verbes les plus courants, et des phrases d'exemple montrent les verbes employés dans des textes réels et dûment référencés, de la Chanson de Roland aux fables de La Fontaine et aux pièces de Molière, jusqu'à Wikipédia et à des textes de référence du domaine public. Les sources sont créditées sur l'onglet Infos.
+
+Conjuguer s'étend aussi au-delà de l'application. Un widget « Verbe du jour » apporte un verbe quotidien et ses conjugaisons au présent sur votre écran d'accueil et votre écran verrouillé, vous pouvez lancer un quiz directement depuis le centre de contrôle, et une activité en direct suit un quiz en cours depuis l'écran verrouillé et l'île dynamique.
+
+Pour changer de rythme, un jeu d'arcade aux couleurs de la France, sur le thème de l'Arc de Triomphe, se cache dans les Réglages, avec bonus, combat, musique, retours haptiques et meilleur score.
+
+Les nouveaux utilisateurs de Conjuguer sont accueillis par une visite guidée au premier lancement, que l'on peut rouvrir à tout moment.
+
+Vous pouvez habiller votre écran d'accueil avec d'autres icônes de l'application : l'Arc, un coq, un croissant ou un béret.
+
+Le reste de l'application a été rafraîchi de part en part : cartes et légendes de couleurs plus nettes, articles d'Infos regroupés, écrans de quiz enrichis, mises en page adaptées à l'iPad, filtrage en direct des listes de verbes et de modèles, astuces intégrées et une histoire du système verbal français.
+
+Cette version corrige également la navigation par lien profond, rectifie la conjugaison de plusieurs verbes archaïques et défectifs, et résout un certain nombre de problèmes mineurs. Tout est entièrement localisé en anglais et en français.
