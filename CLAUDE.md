@@ -387,6 +387,34 @@ p.write_text(t)
 python3 -c "import json; json.load(open('Conjuguer/Assets/Localizable.xcstrings'))"
 ```
 
+### Canonical format — do NOT reflexively revert the catalog
+
+`Localizable.xcstrings` is stored in **Xcode's canonical String Catalog format**
+(space before colons — `"key" : {` — and expanded empty objects, `{\n\n    }`).
+This format is a **stable fixpoint**: Xcode re-serializing it produces byte-identical
+output, so it no longer drifts on its own. (It was normalized once in the
+`l10n: normalize Localizable.xcstrings to Xcode's canonical format` commit.)
+
+**The build does NOT rewrite the catalog.** `SWIFT_EMIT_LOC_STRINGS = NO`, so
+`xcodebuild` never extracts/writes strings — clean *and* incremental builds leave
+the file byte-identical (verified by SHA). The recurring ~4,700-line whitespace
+"churn" seen in older sessions came from the **Xcode IDE app** (when open)
+re-serializing the catalog to canonical format on save/indexing, **not** from
+`build_app.sh`. Now that the committed file is already canonical, the IDE has
+nothing to reformat.
+
+**Consequence:** do **not** blanket-`git checkout -- Conjuguer/Assets/Localizable.xcstrings`
+after a build to "remove churn" (older guidance and sessions did this — it was
+treating a symptom and risked discarding real edits). If the working tree shows the
+catalog modified, that is a **real change** — inspect the diff (`git diff`) and keep
+or discard it deliberately.
+
+**When editing externally (Python):** new keys you insert may not exactly match
+Xcode's canonical whitespace. That is harmless — the file stays valid and builds
+fine; the only cost is a small one-key formatting delta the IDE may later
+canonicalize. Don't hand-fight it. To stay perfectly canonical, emit
+`"key" : {` (space before colon) in inserted blocks, or let Xcode re-save once.
+
 ### Searching Within Localizable.xcstrings
 
 Each localization value in `Localizable.xcstrings` occupies a single very long JSON line. Grep matches against these lines are truncated to `[Omitted long matching line]`, making Grep results useless for inspecting content. Instead:
