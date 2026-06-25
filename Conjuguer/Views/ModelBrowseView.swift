@@ -7,6 +7,7 @@
 
 import Observation
 import SwiftUI
+import TipKit
 
 struct ModelBrowseView: View {
   @Environment(World.self) private var world
@@ -14,6 +15,7 @@ struct ModelBrowseView: View {
   @State private var store: BrowseStore<ModelAndDecorator, ModelSort>?
   @State private var searchText = ""
   @State private var searchResults: [ModelAndDecorator] = []
+  private let exploreModelsTip = ExploreModelsTip()
 
   var body: some View {
     Group {
@@ -49,6 +51,8 @@ struct ModelBrowseView: View {
           }
           .pickerStyle(.segmented)
           .accessibilityLabel(Text(L.BrowseView.sortOrder))
+
+          TipView(exploreModelsTip)
 
           modelCollection
         }

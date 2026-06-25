@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct QuizView: View {
   @Environment(World.self) private var world
@@ -262,6 +263,7 @@ struct QuizView: View {
 
   private func start() {
     quiz.start()
+    TryQuizTip().invalidate(reason: .actionPerformed)
     Task { @MainActor in
       conjugationFieldIsFocused = true
     }

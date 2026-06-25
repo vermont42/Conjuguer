@@ -7,6 +7,7 @@
 
 import Observation
 import SwiftUI
+import TipKit
 
 struct VerbBrowseView: View {
   @Environment(World.self) private var world
@@ -14,6 +15,7 @@ struct VerbBrowseView: View {
   @State private var store: BrowseStore<Verb, VerbSort>?
   @State private var searchText = ""
   @State private var searchResults: [Verb] = []
+  private let tryQuizTip = TryQuizTip()
 
   var body: some View {
     Group {
@@ -50,6 +52,8 @@ struct VerbBrowseView: View {
           .pickerStyle(.segmented)
           .accessibilityIdentifier("verb_browse_sort")
           .accessibilityLabel(Text(L.BrowseView.sortOrder))
+
+          TipView(tryQuizTip)
 
           verbCollection
         }

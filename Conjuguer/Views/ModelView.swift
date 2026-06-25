@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct ModelView: View {
   @Environment(World.self) private var world
@@ -47,6 +48,9 @@ struct ModelView: View {
       .padding(.horizontal, Layout.doubleDefaultSpacing)
     }
     .screenBackground()
+    .onAppear {
+      ExploreModelsTip().invalidate(reason: .actionPerformed)
+    }
     .environment(\.openURL, OpenURLAction { url in
       guard
         url.isDeeplink,

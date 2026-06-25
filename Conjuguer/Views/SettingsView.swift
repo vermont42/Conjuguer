@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct SettingsView: View {
   @Environment(World.self) private var world
@@ -13,6 +14,8 @@ struct SettingsView: View {
   @State private var rateReviewDescription = ""
   @State private var showingOnboarding = false
   @State private var showingGame = false
+  private let changeDifficultyTip = ChangeDifficultyTip()
+  private let playGameTip = PlayGameTip()
 
   var body: some View {
     @Bindable var settings = world.settings
@@ -41,6 +44,10 @@ struct SettingsView: View {
 
             Text(L.Settings.quizDifficultyDescription)
               .settingsLabel()
+          }
+          .popoverTip(changeDifficultyTip)
+          .onChange(of: settings.quizDifficulty) {
+            changeDifficultyTip.invalidate(reason: .actionPerformed)
           }
 
           settingCard(title: L.Settings.pronounGender) {
@@ -128,9 +135,11 @@ struct SettingsView: View {
           settingCard(title: L.Game.sectionTitle) {
             Button(L.Game.playGame) {
               world.analytics.recordEvent("tapPlayGame")
+              playGameTip.invalidate(reason: .actionPerformed)
               showingGame = true
             }
             .funButton()
+            .popoverTip(playGameTip)
 
             Text(L.Game.playGameDescription)
               .settingsLabel()

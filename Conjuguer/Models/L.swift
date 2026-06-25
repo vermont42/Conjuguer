@@ -588,6 +588,42 @@ enum L {
     }
   }
 
+  // Tip title/message are read from the `Tip` protocol's nonisolated requirements, so
+  // these accessors are `nonisolated` despite the module's default main-actor isolation.
+  enum Tips {
+    nonisolated static var tryQuizTitle: String {
+      String(localized: "Tips.tryQuizTitle")
+    }
+
+    nonisolated static var tryQuizMessage: String {
+      String(localized: "Tips.tryQuizMessage")
+    }
+
+    nonisolated static var exploreModelsTitle: String {
+      String(localized: "Tips.exploreModelsTitle")
+    }
+
+    nonisolated static var exploreModelsMessage: String {
+      String(localized: "Tips.exploreModelsMessage")
+    }
+
+    nonisolated static var changeDifficultyTitle: String {
+      String(localized: "Tips.changeDifficultyTitle")
+    }
+
+    nonisolated static var changeDifficultyMessage: String {
+      String(localized: "Tips.changeDifficultyMessage")
+    }
+
+    nonisolated static var playGameTitle: String {
+      String(localized: "Tips.playGameTitle")
+    }
+
+    nonisolated static var playGameMessage: String {
+      String(localized: "Tips.playGameMessage")
+    }
+  }
+
   enum Game {
     static var sectionTitle: String {
       String(localized: "Game.sectionTitle")

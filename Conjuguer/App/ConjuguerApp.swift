@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 import WidgetKit
 
 struct ConjuguerApp: App {
@@ -60,6 +61,10 @@ struct ConjuguerApp: App {
     Utterer.setup()
 
     LiveActivityManager.endAllActivities()
+
+    if TipDisplay.tipsEnabled {
+      try? Tips.configure()
+    }
   }
 
   @MainActor private func refreshWidgets() {

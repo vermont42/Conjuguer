@@ -2951,6 +2951,142 @@
         }
       }
     },
+    "Tips.changeDifficultyMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try Ridiculous difficulty for a greater challenge with more tenses to conjugate."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essayez la difficulté Ridicule pour un plus grand défi avec davantage de temps à conjuguer."
+          }
+        }
+      }
+    },
+    "Tips.changeDifficultyTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change Quiz Difficulty"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changez la difficulté du quiz"
+          }
+        }
+      }
+    },
+    "Tips.exploreModelsMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discover the conjugation patterns that group French verbs, and see how regular or irregular each one is."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Découvrez les modèles de conjugaison qui regroupent les verbes français, et voyez à quel point chacun est régulier ou irrégulier."
+          }
+        }
+      }
+    },
+    "Tips.exploreModelsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explore Verb Models"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explorez les modèles de verbes"
+          }
+        }
+      }
+    },
+    "Tips.playGameMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Defend France’s honor in an arcade game piloting the Arc de Triomphe."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Défendez l’honneur de la France dans un jeu d’arcade aux commandes de l’Arc de Triomphe."
+          }
+        }
+      }
+    },
+    "Tips.playGameTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play the Game"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jouez au jeu"
+          }
+        }
+      }
+    },
+    "Tips.tryQuizMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test your knowledge of French verb conjugations with a timed quiz."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Testez vos connaissances des conjugaisons des verbes français avec un quiz chronométré."
+          }
+        }
+      }
+    },
+    "Tips.tryQuizTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try the Quiz"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essayez le quiz"
+          }
+        }
+      }
+    },
     "Tutor.description" : {
       "extractionState" : "manual",
       "localizations" : {

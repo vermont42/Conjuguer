@@ -8,6 +8,7 @@
 import ActivityKit
 import Observation
 import SwiftUI
+import TipKit
 
 @Observable
 class Quiz {
@@ -343,6 +344,7 @@ class Quiz {
     }
     shouldShowResults = true
     Current.soundPlayer.play(Sound.randomApplause)
+    ChangeDifficultyTip.quizCompleted.sendDonation()
     gameCenter.reportScore(score)
     Current.analytics.recordQuizCompletion(difficulty: Current.settings.quizDifficulty, elapsedTime: elapsedTime, score: score)
     quit()
