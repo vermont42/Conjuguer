@@ -41,6 +41,77 @@ final class GameState {
   static let autofireInterval: CGFloat = 0.3
   static let autofireVolume: Float = 0.5
 
+  // Mechanic 1: dive-bombers.
+  static let diveInterval: CGFloat = 12.0
+  static let diveWarningDuration: CGFloat = 0.5
+  static let diveDuration: CGFloat = 2.4
+  static let diveDepthFactor: CGFloat = 0.7
+  static let diveWidthAmplitude: CGFloat = 70.0
+  static let diveScoreMultiplier = 2
+  static let smokeInterval: CGFloat = 0.045
+
+  // Cyclic specials (mechanics 2–4): one at a time, picked from a shuffled bag.
+  static let firstSpecialDelay: CGFloat = 10.0
+  static let specialInterval: CGFloat = 18.0
+
+  // Mechanic 2: bouncing ball.
+  static let ballSize: CGFloat = 44.0
+  static let ballBaseSpeed: CGFloat = 230.0
+  static let ballDuration: CGFloat = 15.0
+  static let ballSpeedUpPerBounce: CGFloat = 1.08
+  static let ballMaxSpeed: CGFloat = 900.0
+
+  // Mechanic 3: ghost hunt.
+  static let ghostCountRange: ClosedRange<Int> = 2 ... 3
+  static let ghostSize: CGFloat = 48.0
+  static let ghostDescentSpeed: CGFloat = 55.0
+  static let ghostChaseSpeed: CGFloat = 150.0
+  static let ghostFleeSpeed: CGFloat = 120.0
+  static let ghostExitSpeed: CGFloat = 220.0
+  static let ghostDevourScore = 25
+  static let dotSize: CGFloat = 24.0
+  static let dotScore = 2
+  static let dotDropInterval: CGFloat = 0.35
+  static let chandelierSize: CGFloat = 40.0
+  static let chandelierFallSpeed: CGFloat = 60.0
+  static let frightDuration: CGFloat = 5.0
+  static let devourDuration: CGFloat = 0.4
+
+  // Mechanic 4: hen, eggs, hatchlings.
+  static let henSize: CGFloat = 48.0
+  static let henSpeedH: CGFloat = 150.0
+  static let henSpeedV: CGFloat = 28.0
+  static let henLayInterval: CGFloat = 1.6
+  static let eggSize: CGFloat = 30.0
+  static let eggInitialFallSpeed: CGFloat = 180.0
+  static let eggGravity: CGFloat = 420.0
+  static let eggBounceRestitution: CGFloat = 0.6
+  static let eggHatchTime: CGFloat = 4.0
+  static let eggScore = 5
+  static let chickSize: CGFloat = 30.0
+  static let chickSpeed: CGFloat = 130.0
+
+  // Mechanic 5: robot boss.
+  static let bossScoreThreshold = 200
+  static let bossScoreStep = 400
+  static let brainSize: CGFloat = 44.0
+  static let brainDriftSpeed: CGFloat = 220.0
+  static let brainScore = 25
+  static let boltAppearDelay: CGFloat = 1.0
+  static let conversionDelay: CGFloat = 1.0
+  static let robotMinionSize: CGFloat = 56.0
+  static let robotArmHitZone: CGFloat = 14.0
+  static let robotMinionScore = 50
+  // The whole dive arc is traversed over this duration, so a longer duration =
+  // a slower swoop. 3.7 ≈ 2.6 / 0.7, i.e. 30% slower than before.
+  static let robotDiveDuration: CGFloat = 3.7
+  static let robotDivePause: CGFloat = 2.0
+  static let robotFireInterval: CGFloat = 1.3
+  static let robotBulletSize: CGFloat = 16.0
+  static let robotBulletSpeed: CGFloat = 480.0
+  static let screenShakeDuration: CGFloat = 0.25
+  static let screenShakeMagnitude: CGFloat = 9.0
+
   var screenSize: CGSize = .zero
   var playerX: CGFloat = 0.0
   var playerHealth: CGFloat = 1.0
@@ -60,6 +131,21 @@ final class GameState {
   var autofireActive = false
   var sineTime: Double = 0.0
 
+  // Mechanic state (see GameState+*.swift). All rendered by GameView.
+  var smoke: [Smoke] = []
+  var ball: GameBall?
+  var ghosts: [Ghost] = []
+  var noteDots: [NoteDot] = []
+  var chandelier: Chandelier?
+  var frightActive = false
+  var hen: Hen?
+  var eggs: [Egg] = []
+  var chicks: [Chick] = []
+  var robotBrain: RobotBrain?
+  var robotMinion: RobotMinion?
+  var robotBullets: [RobotBullet] = []
+  var screenShake: CGFloat = 0.0
+
   var movingLeft = false
   var movingRight = false
 
@@ -75,6 +161,18 @@ final class GameState {
   private var autofireCooldown: CGFloat = 0.0
   private var autofireSound: Sound = .longFire1
   private var didConfigure = false
+
+  // Mechanic scheduling. These are accessed from the GameState+*.swift mechanic
+  // extensions, so they are internal (not private) — extensions in other files
+  // cannot see file-private members.
+  var diveCooldown: CGFloat = GameState.diveInterval
+  var smokeCooldown: CGFloat = 0.0
+  var smokeColorCycle = 0
+  var frightTimer: CGFloat = 0.0
+  var specialCooldown: CGFloat = GameState.firstSpecialDelay
+  var specialBag: [SpecialMechanic] = []
+  var activeSpecial: SpecialMechanic?
+  var nextBossScore = GameState.bossScoreThreshold
 
   var playerY: CGFloat {
     screenSize.height - Self.playerBottomInset
@@ -112,6 +210,7 @@ final class GameState {
 
     for index in targets.indices {
       targets[index].x += dx
+      targets[index].homeX += dx
     }
     for index in bullets.indices {
       bullets[index].x += dx
@@ -122,6 +221,27 @@ final class GameState {
     for index in drops.indices {
       drops[index].x += dx
     }
+    for index in ghosts.indices {
+      ghosts[index].x += dx
+    }
+    for index in noteDots.indices {
+      noteDots[index].x += dx
+    }
+    for index in eggs.indices {
+      eggs[index].x += dx
+    }
+    for index in chicks.indices {
+      chicks[index].x += dx
+    }
+    for index in robotBullets.indices {
+      robotBullets[index].x += dx
+    }
+    ball?.x += dx
+    chandelier?.x += dx
+    hen?.x += dx
+    robotBrain?.x += dx
+    robotMinion?.x += dx
+    robotMinion?.homeX += dx
     playerX = min(max(playerX + dx, 0), newSize.width)
 
     screenSize = newSize
@@ -156,6 +276,26 @@ final class GameState {
     shieldTimer = 0
     autofireTimer = 0
     autofireCooldown = 0
+
+    smoke = []
+    ball = nil
+    ghosts = []
+    noteDots = []
+    chandelier = nil
+    frightActive = false
+    frightTimer = 0
+    hen = nil
+    eggs = []
+    chicks = []
+    robotBrain = nil
+    robotMinion = nil
+    robotBullets = []
+    screenShake = 0
+    diveCooldown = Self.diveInterval
+    specialCooldown = Self.firstSpecialDelay
+    specialBag = []
+    activeSpecial = nil
+    nextBossScore = Self.bossScoreThreshold
 
     fireCooldown = 0
     spawnCooldown = 0
@@ -248,14 +388,23 @@ final class GameState {
     updateEnemyBullets(dt: dt)
     updateStars(dt: dt)
     updateTargets(dt: dt)
+    updateDivers(dt: dt)
     spawnTargets(dt: dt)
     updateDrops(dt: dt)
     updateDeathEffects(dt: dt)
+    updateSmoke(dt: dt)
     updateShieldAndAutofire(dt: dt)
     attemptEnemyFire(dt: dt)
     attemptDrops(dt: dt)
+    updateSpecials(dt: dt) // schedules Mechanics 2–4 (ball / ghosts / hen-yard)
+    updateBall(dt: dt)     // Mechanic 2
+    updateGhosts(dt: dt)   // Mechanic 3
+    updateHenyard(dt: dt)  // Mechanic 4
+    updateRobot(dt: dt)    // Mechanic 5 (boss)
+    updateScreenShake(dt: dt)
     resolveBulletHits()
     resolvePlayerHits()
+    resolveMechanicCollisions()
     collectDrops()
     checkGameOver()
   }
@@ -275,12 +424,24 @@ final class GameState {
       playerX += step
     }
 
-    // Wrap horizontally around the screen edges.
+    // Wrap horizontally around the screen edges. Fleeing off an edge is also the
+    // player's escape from the hen-yard's chicks (Mechanic 4), which can't be shot.
     if playerX < 0 {
       playerX += screenSize.width
+      escapeChicksThroughEdge()
     } else if playerX > screenSize.width {
       playerX -= screenSize.width
+      escapeChicksThroughEdge()
     }
+  }
+
+  private func escapeChicksThroughEdge() {
+    guard !chicks.isEmpty else {
+      return
+    }
+    chicks.removeAll()
+    Current.soundPlayer.play(.chime, shouldDebounce: false)
+    HapticPlayer.playImpact(.medium)
   }
 
   private func updateBullets(dt: CGFloat) {
@@ -317,7 +478,9 @@ final class GameState {
 
   private func updateTargets(dt: CGFloat) {
     let distance = Self.scrollSpeed * dt
-    for index in targets.indices {
+    // Diving targets (Mechanic 1) are positioned by updateDivers, and a frozen
+    // host (Mechanic 5) is held in place by the brain-core, so neither scrolls.
+    for index in targets.indices where !targets[index].isDiving && !targets[index].isFrozen {
       targets[index].y += distance
     }
     targets.removeAll { $0.y > screenSize.height + Self.targetSize }
@@ -378,7 +541,7 @@ final class GameState {
   }
 
   /// Indices of targets currently in the top half of the screen.
-  private var topHalfTargetIndices: [Int] {
+  var topHalfTargetIndices: [Int] {
     targets.indices.filter { targets[$0].y > 0 && targets[$0].y <= screenSize.height / 2 }
   }
 
@@ -440,20 +603,28 @@ final class GameState {
   private func resolveBulletHits() {
     var survivingBullets: [Bullet] = []
     var hitTargetIDs: Set<UUID> = []
+    var didAceKill = false // a mid-dive kill (Mechanic 1) — worth double, sounds special.
 
     for bullet in bullets {
       var hit = false
       for target in targets where !hitTargetIDs.contains(target.id) {
+        let hitSize = Self.targetSize * target.renderScale
         if Self.intersects(
           a: CGPoint(x: bullet.x, y: bullet.y),
           aSize: Self.bulletSize,
           b: CGPoint(x: target.x, y: target.y),
-          bSize: Self.targetSize
+          bSize: hitSize
         ) {
           hitTargetIDs.insert(target.id)
           deathEffects.append(DeathEffect(x: target.x, y: target.y, assetName: target.kind.assetName))
           hit = true
-          score += Self.scorePerKill
+          let isAce = target.isDiving && target.diveWarningTimer <= 0
+          if isAce {
+            didAceKill = true
+            score += Self.scorePerKill * Self.diveScoreMultiplier
+          } else {
+            score += Self.scorePerKill
+          }
           break
         }
       }
@@ -465,8 +636,13 @@ final class GameState {
     if !hitTargetIDs.isEmpty {
       bullets = survivingBullets
       targets.removeAll { hitTargetIDs.contains($0.id) }
-      Current.soundPlayer.play(.chomp, shouldDebounce: false, volume: 0.5)
-      HapticPlayer.playImpact(.medium)
+      if didAceKill {
+        Current.soundPlayer.play(.randomGun, shouldDebounce: false, volume: 0.7)
+        HapticPlayer.playImpact(.heavy)
+      } else {
+        Current.soundPlayer.play(.chomp, shouldDebounce: false, volume: 0.5)
+        HapticPlayer.playImpact(.medium)
+      }
     }
   }
 
@@ -500,7 +676,7 @@ final class GameState {
     }
   }
 
-  private func registerPlayerHit() {
+  func registerPlayerHit() {
     deathEffects.append(DeathEffect(x: playerX, y: playerY, assetName: nil))
     if shieldActive {
       HapticPlayer.playImpact(.light)
@@ -562,12 +738,38 @@ final class GameState {
     Current.soundPlayer.play(.randomSadTrombone, shouldDebounce: false)
   }
 
-  private static func intersects(
+  static func intersects(
     a: CGPoint,
     aSize: CGFloat,
     b: CGPoint,
     bSize: CGFloat
   ) -> Bool {
     abs(a.x - b.x) < (aSize + bSize) / 2 && abs(a.y - b.y) < (aSize + bSize) / 2
+  }
+
+  /// Drops a small reward shower at a point — used as the climax payoff when the
+  /// robot boss (Mechanic 5) is defeated.
+  func showerDrops(at point: CGPoint, kinds: [DropKind]) {
+    for (offset, kind) in kinds.enumerated() {
+      let angle = Double(offset) * (.pi * 2 / Double(max(1, kinds.count)))
+      drops.append(
+        Drop(
+          x: point.x + CGFloat(cos(angle)) * 30,
+          y: point.y + CGFloat(sin(angle)) * 30,
+          kind: kind
+        )
+      )
+    }
+  }
+
+  func triggerScreenShake() {
+    screenShake = Self.screenShakeDuration
+  }
+
+  private func updateScreenShake(dt: CGFloat) {
+    guard screenShake > 0 else {
+      return
+    }
+    screenShake = max(0, screenShake - dt)
   }
 }

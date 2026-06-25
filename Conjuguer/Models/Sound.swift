@@ -10,23 +10,32 @@ enum Sound: String {
   case applause1
   case applause2
   case applause3
+  case brainConvert
+  case brainLockOn
   case buzz
   case chime
   case chirp
   case chomp
+  case cluck
+  case eggCrack
   case enemyFire
+  case ghostSpooky
   case gun1
   case gun2
   case longFire1
   case longFire2
   case longFire3
+  case magicActivate
+  case playerHit
   case pop
+  case robotWeapon
   case sadTrombone1
   case sadTrombone2
   case sadTrombone3
   case sadTrombone4
   case shieldActivate
   case silence
+  case soccerKick
 
   private static let longFires: [Sound] = [.longFire1, .longFire2, .longFire3]
 
