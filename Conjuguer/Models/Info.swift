@@ -52,6 +52,7 @@ struct Info: Identifiable, Hashable {
     Info(heading: L.Info.subjonctifPlusQueParfaitHeading, text: L.Info.subjonctifPlusQueParfaitText, category: .tenses, alwaysUsesFrenchPronunciation: true),
     Info(heading: L.Info.impératifPasséHeading, text: L.Info.impératifPasséText, category: .tenses, alwaysUsesFrenchPronunciation: true),
     Info(heading: L.Info.questionsAndResponsesHeading, text: L.Info.questionsAndResponsesText, category: .about),
+    Info(heading: L.Info.gameInstructionsHeading, text: L.Info.gameInstructionsText, category: .about),
     Info(heading: L.Info.creditsHeading, text: L.Info.creditsText, category: .about, imageInfo: ImageInfo(filename: "Adams", accessibilityLabel: L.ImageInfo.joshAdams))
   ]
 

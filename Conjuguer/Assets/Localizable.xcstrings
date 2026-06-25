@@ -633,6 +633,40 @@
         }
       }
     },
+    "Info.gameInstructionsHeading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Game Instructions"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instructions du jeu"
+          }
+        }
+      }
+    },
+    "Info.gameInstructionsText": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You can launch a France-themed arcade game from the ~Settings~ tab. You pilot the ~Arc de Triomphe~ and defend it against a falling horde.\n\n`Controls`\n\nHold the on-screen ~arrows~ to move left and right; you wrap around the screen edges. Tap the ~right half~ of the screen to fire. Your bullets travel straight up.\n\n`Enemies and Health`\n\nRoosters, croissants, and berets fall from the top. The nearest enemy periodically fires an England flag at you. Every hit costs health, shown at the top right. When your health runs out, the game ends and your high score is saved.\n\n`Power-Ups`\n\nCatch a falling treat for an edge: a ~baguette~ restores health, a bunch of ~grapes~ grants temporary autofire, and a wedge of ~cheese~ raises a shield that blocks hits for a few seconds.\n\n`Special Threats`\n\nFive special threats interrupt the falling horde:\n\n~La Patrouille de France~: an enemy peels off and swoops toward your column, telegraphed by a warning sign. Shoot it mid-dive for double points.\n\n~Le Ballon des Bleus~: a soccer ball ricochets around the arena, smashing enemies. It hurts you on contact unless your shield is up; shoot it to change its course.\n\n~Le Fantôme de l’Opéra~: ghosts drift down dropping musical notes you can catch for points. Shoot the chandelier to make every ghost flee, then touch one to devour it for a bonus.\n\n~La Basse-Cour~: a hen lays bouncing eggs. Shoot the eggs before they hatch into chicks. A chick chases you along the ground and cannot be shot — flee off the side of the screen to escape it.\n\n~Goldorak~: once your score is high enough, a brain converts an enemy into an armored robot. Shoot off its arms, then its body. Defeat it for a shower of power-ups."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous pouvez lancer un jeu d’arcade sur le thème de la France depuis l’onglet ~Réglages~. Vous pilotez l’~Arc de Triomphe~ et le défendez contre une horde qui tombe.\n\n`Commandes`\n\nMaintenez les ~flèches~ à l’écran pour vous déplacer à gauche et à droite ; vous réapparaissez de l’autre côté de l’écran. Touchez la ~moitié droite~ de l’écran pour tirer. Vos projectiles montent tout droit.\n\n`Ennemis et santé`\n\nDes coqs, des croissants et des bérets tombent du haut. L’ennemi le plus proche tire régulièrement un drapeau anglais vers vous. Chaque coup vous coûte de la santé, affichée en haut à droite. Quand votre santé est épuisée, la partie se termine et votre meilleur score est enregistré.\n\n`Bonus`\n\nAttrapez une gourmandise qui tombe pour prendre l’avantage : une ~baguette~ restaure la santé, une grappe de ~raisin~ accorde un tir automatique temporaire, et un morceau de ~fromage~ lève un bouclier qui bloque les coups pendant quelques secondes.\n\n`Menaces spéciales`\n\nCinq menaces spéciales interrompent la horde :\n\n~La Patrouille de France~ : un ennemi se détache et plonge vers votre colonne, annoncé par un panneau d’avertissement. Abattez-le en plein piqué pour doubler les points.\n\n~Le Ballon des Bleus~ : un ballon de football ricoche dans l’arène en fracassant les ennemis. Il vous blesse au contact, sauf si votre bouclier est levé ; tirez dessus pour modifier sa trajectoire.\n\n~Le Fantôme de l’Opéra~ : des fantômes descendent en laissant tomber des notes de musique que vous pouvez attraper pour des points. Tirez sur le lustre pour faire fuir tous les fantômes, puis touchez-en un pour le dévorer et gagner un bonus.\n\n~La Basse-Cour~ : une poule pond des œufs rebondissants. Tirez sur les œufs avant qu’ils n’éclosent en poussins. Un poussin vous poursuit au sol et ne peut pas être abattu — fuyez par le côté de l’écran pour lui échapper.\n\n~Goldorak~ : lorsque votre score est assez élevé, un cerveau transforme un ennemi en robot blindé. Détruisez ses bras, puis son corps. Vainquez-le pour une pluie de bonus."
+          }
+        }
+      }
+    },
     "Info.imparfaitHeading": {
       "extractionState": "manual",
       "localizations": {

@@ -333,6 +333,14 @@ enum L {
       String(localized: "Info.valuePropositionText")
     }
 
+    static var gameInstructionsHeading: String {
+      String(localized: "Info.gameInstructionsHeading")
+    }
+
+    static var gameInstructionsText: String {
+      String(localized: "Info.gameInstructionsText")
+    }
+
     static var purposeAndUseHeading: String {
       String(localized: "Info.purposeAndUseHeading")
     }
