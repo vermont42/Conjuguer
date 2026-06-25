@@ -2,7 +2,7 @@
 //  GameState+RobotBoss.swift
 //  Conjuguer
 //
-//  Mechanic 5 — Goldorak (converter robot mini-boss). Once the player crosses a
+//  Mechanic 5 — Robot (converter robot mini-boss). Once the player crosses a
 //  score threshold a 🧠 brain-core appears, drifts, locks onto an on-screen
 //  enemy (charging ⚡), and converts it into a 🤖 robot minion flanked by two 🦾
 //  arms. The arms must be shot off (left/right hit zones) before the body is

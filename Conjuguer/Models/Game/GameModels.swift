@@ -207,7 +207,7 @@ struct Chick: Identifiable {
   var y: CGFloat
 }
 
-// MARK: - Mechanic 5: Goldorak (converter robot mini-boss)
+// MARK: - Mechanic 5: Robot (converter robot mini-boss)
 
 enum BrainPhase {
   case ascending
