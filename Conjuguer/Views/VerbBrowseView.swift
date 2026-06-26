@@ -142,6 +142,7 @@ struct VerbBrowseView: View {
           .accessibilityHidden(true)
       }
     }
+    .accessibilityIdentifier("verb_row_\(verb.infinitif)")
   }
 
   private func updateSearchResults(playSoundIfEmpty: Bool) {

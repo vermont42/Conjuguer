@@ -129,6 +129,7 @@ struct ModelBrowseView: View {
       }
     }
     .frenchPronunciation()
+    .accessibilityIdentifier("model_row_\(modelAndDecorator.model.exemplar)")
   }
 
   private func updateSearchResults(playSoundIfEmpty: Bool) {

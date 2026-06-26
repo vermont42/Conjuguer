@@ -249,6 +249,7 @@ struct QuizView: View {
     .buttonLabel()
     .lineLimit(1)
     .minimumScaleFactor(0.7)
+    .accessibilityIdentifier("quiz_start_button")
 
     if reduceMotion {
       base

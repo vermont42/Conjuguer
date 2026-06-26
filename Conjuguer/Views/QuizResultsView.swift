@@ -27,6 +27,7 @@ struct QuizResultsView: View {
             .numericText()
             .lineLimit(1)
             .minimumScaleFactor(0.5)
+            .accessibilityIdentifier("results_score")
         }
         .padding(.top, Layout.defaultSpacing)
 

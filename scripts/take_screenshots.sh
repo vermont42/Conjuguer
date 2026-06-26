@@ -1,0 +1,550 @@
+#!/usr/bin/env bash
+# Drive ios-build-verify (and axe/simctl directly) through the 36 App Store
+# screenshots described in docs/screenshot-plan.md.
+#
+# Usage:
+#   scripts/take_screenshots.sh  # all 36
+#   scripts/take_screenshots.sh --device "iPhone 17 Pro Max"  # 18
+#   scripts/take_screenshots.sh --lang fr  # 18
+#   scripts/take_screenshots.sh --view model_browse  # 4
+#   scripts/take_screenshots.sh --device "iPhone 17 Pro Max" --lang fr --view quiz_results  # 1
+#
+# See docs/screenshot-playbook.md for setup, recovery guidance, and a
+# cross-referenced workarounds index. Calibration values and per-view nav
+# functions are inline below.
+#
+# Compatible with macOS bash 3.2 (system default): uses case-statement lookup
+# functions instead of associative arrays.
+
+set -euo pipefail
+
+# ---------------------------------------------------------------------------
+# Constants
+# ---------------------------------------------------------------------------
+
+APP_BUNDLE_ID='software.racecondition.Conjuguer'
+# Onboarding is normally suppressed by pre-seeding hasSeenOnboarding=true (see
+# seed_defaults). These labels are a belt-and-suspenders fallback for the
+# wait_for_render loop in case onboarding still surfaces. (workaround #11)
+ONBOARDING_LABELS=( "Skip" "Passer" )
+
+DEVICES=( "iPhone 17 Pro Max" "iPad Pro 13-inch (M4)" )
+LANGS=( en fr )
+VIEWS=( verb_browse verb_view model_browse model_view quiz_mid \
+        info_browse info_view quiz_results settings )
+
+# ---------------------------------------------------------------------------
+# Lookup tables (case statements; bash 3.2-compatible)
+# ---------------------------------------------------------------------------
+
+appearance_for() {
+  case "$1" in
+    verb_browse)  echo dark  ;;
+    verb_view)    echo light ;;
+    model_browse) echo dark  ;;
+    model_view)   echo light ;;
+    quiz_mid)     echo dark  ;;
+    info_browse)  echo light ;;
+    info_view)    echo dark  ;;
+    quiz_results) echo light ;;
+    settings)     echo dark  ;;
+  esac
+}
+
+# Resolve a simulator UDID by its exact device name. Unlike Konjugieren's driver
+# (which hardcoded UDIDs to dodge _resolve_udid.sh's paren-in-name regex bug),
+# this matches the name as a literal in Python, so the iPad's Apple-default name
+# "iPad Pro 13-inch (M4)" works unchanged — no sim renaming needed.
+udid_for() {
+  xcrun simctl list devices available | python3 -c '
+import sys, re
+name = sys.argv[1]
+for line in sys.stdin:
+    m = re.match(r"\s+(.*?) \(([0-9A-Fa-f-]{36})\) \(", line.rstrip())
+    if m and m.group(1) == name:
+        print(m.group(2))
+        break
+' "$1"
+}
+
+# Tab-bar pixel centers (logical points). Order: verbs models quiz info settings.
+# Starting calibration from Konjugieren (same 5-tab layout, same devices); verify
+# on first run and adjust if a tap lands on the wrong tab. iPhone uses the bottom
+# pill tab bar (y=899.3); iPad uses a top segmented tab bar (y=54).
+tab_coords_for() {
+  case "$1" in
+    "iPhone 17 Pro Max")     echo "67,899.3 142.7,899.3 220,899.3 296.2,899.3 372.6,899.3" ;;
+    "iPad Pro 13-inch (M4)") echo "355,54 441.5,54 523,54 587.75,54 667.25,54" ;;
+  esac
+}
+
+# iPad's verb_browse anchor renders slowly (6,320 verbs in regular size class).
+wait_budget_for() {
+  case "$1" in
+    "iPhone 17 Pro Max")     echo 10 ;;
+    "iPad Pro 13-inch (M4)") echo 20 ;;
+  esac
+}
+
+# ---------------------------------------------------------------------------
+# CLI parsing
+# ---------------------------------------------------------------------------
+
+DEVICE_FILTER=""
+LANG_FILTER=""
+VIEW_FILTER=""
+
+usage() {
+  sed -n '2,15p' "$0" | sed 's/^# \?//'
+  exit 0
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --device) DEVICE_FILTER="$2"; shift 2 ;;
+    --lang)   LANG_FILTER="$2";   shift 2 ;;
+    --view)   VIEW_FILTER="$2";   shift 2 ;;
+    -h|--help) usage ;;
+    *) echo "unknown arg: $1" >&2; exit 2 ;;
+  esac
+done
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+log() { echo "[take_screenshots] $*" >&2; }
+
+# Per-iteration state (set inside loop):
+UDID=""
+DEVICE=""
+DEVICE_SLUG=""
+WAIT_FOR_RENDER_BUDGET_S=10
+CURRENT_TAB_CENTERS=()
+
+apply_device_state() {
+  DEVICE="$1"
+  UDID=$(udid_for "$DEVICE")
+  [[ -n "$UDID" ]] || { log "no available simulator named '$DEVICE' — see Simulator Setup in the playbook"; exit 2; }
+  DEVICE_SLUG="${DEVICE// /-}"
+  WAIT_FOR_RENDER_BUDGET_S=$(wait_budget_for "$DEVICE")
+  IFS=' ' read -ra CURRENT_TAB_CENTERS <<< "$(tab_coords_for "$DEVICE")"
+}
+
+ensure_booted() {
+  if ! xcrun simctl list devices booted | grep -q "$UDID"; then
+    log "booting $DEVICE ($UDID) — iPad first-boot can take ~70s"
+    xcrun simctl boot "$UDID"
+  fi
+  xcrun simctl bootstatus "$UDID" -b >/dev/null
+}
+
+set_appearance() {
+  xcrun simctl ui "$UDID" appearance "$1" >/dev/null
+}
+
+terminate_app() {
+  xcrun simctl terminate "$UDID" "$APP_BUNDLE_ID" >/dev/null 2>&1 || true
+}
+
+uninstall_app() {
+  xcrun simctl uninstall "$UDID" "$APP_BUNDLE_ID" >/dev/null 2>&1 || true
+}
+
+install_app() {
+  xcrun simctl install "$UDID" "$1"
+}
+
+# Pre-seed two persisted Settings values (both stored as strings via
+# GetterSetterReal → UserDefaults; see Settings.swift) so the sweep isn't
+# interrupted:
+#   - hasSeenOnboarding = true  → OnboardingView never shows (workaround #2/#11).
+#   - lastReviewPromptDate = now → ReviewPrompterReal's 180-day cooldown blocks
+#     every StoreKit review prompt this run (workaround #7).
+# Bool/Date SettingValue decoders accept the string forms "true" and the unix
+# epoch, so -string is correct for both.
+seed_defaults() {
+  xcrun simctl spawn "$UDID" defaults write "$APP_BUNDLE_ID" hasSeenOnboarding -string true >/dev/null 2>&1 || true
+  xcrun simctl spawn "$UDID" defaults write "$APP_BUNDLE_ID" lastReviewPromptDate -string "$(date +%s)" >/dev/null 2>&1 || true
+}
+
+launch_with_lang() {
+  local lang="$1" locale
+  case "$lang" in
+    en) locale='en_US' ;;
+    fr) locale='fr_FR' ;;
+    *) log "unknown lang: $lang"; return 1 ;;
+  esac
+  xcrun simctl launch "$UDID" "$APP_BUNDLE_ID" \
+    -AppleLanguages "($lang)" \
+    -AppleLocale "$locale" \
+    -CONJUGUER_QUIZ_FIXTURE screenshot >/dev/null
+}
+
+axe_tree() {
+  axe describe-ui --udid "$UDID" 2>/dev/null || echo "{}"
+}
+
+# jq predicate that matches an element whose AXUniqueId is exactly $id OR begins
+# with "$id-". SwiftUI propagates accessibilityIdentifier through the row's
+# NavigationLink wrapper, so a row tagged "verb_row_avoir" surfaces in the AXTree
+# as "verb_row_avoir-verb_row_avoir". The "-" boundary keeps the prefix match from
+# colliding with sibling ids (e.g. verb_row_avoir vs verb_row_aller). (workaround #3)
+ID_MATCH='select(.AXUniqueId? != null and (.AXUniqueId == $id or (.AXUniqueId | startswith($id + "-"))))'
+
+axe_has_id() {
+  axe_tree | jq -e --arg id "$1" "[.. | objects | $ID_MATCH] | length > 0" >/dev/null 2>&1
+}
+
+wait_for_render() {
+  local anchor="${1:-verb_browse_sort}"
+  local deadline=$(($(date +%s) + WAIT_FOR_RENDER_BUDGET_S))
+  while [[ $(date +%s) -lt $deadline ]]; do
+    local tree
+    tree=$(axe_tree)
+    if echo "$tree" | jq -e --arg id "$anchor" \
+        "[.. | objects | $ID_MATCH] | length > 0" \
+        >/dev/null 2>&1; then
+      return 0
+    fi
+    for label in "${ONBOARDING_LABELS[@]}"; do
+      if echo "$tree" | jq -e --arg l "$label" \
+          '[.. | objects | select(.AXLabel? == $l)] | length > 0' \
+          >/dev/null 2>&1; then
+        axe tap --label "$label" --udid "$UDID" >/dev/null 2>&1 || true
+        break
+      fi
+    done
+    sleep 0.5
+  done
+  log "wait_for_render timed out (${WAIT_FOR_RENDER_BUDGET_S}s) on $DEVICE for $anchor"
+  return 5
+}
+
+verify_screen_loaded() {
+  wait_for_render "$1"
+}
+
+# Return the AXFrame "x y w h" of the first element whose AXUniqueId matches $1,
+# or empty string if none is currently rendered.
+frame_of() {
+  axe_tree | jq -r --arg id "$1" \
+    "[.. | objects | $ID_MATCH][0].AXFrame // \"\"" \
+    | sed -E 's/[{},]/ /g; s/  +/ /g'
+}
+
+# SwiftUI propagates accessibilityIdentifier to child elements, so `axe tap --id`
+# refuses to disambiguate when multiple matches exist; it also throws a Swift
+# typeMismatch in some iPad screen states. So we extract the first match's frame
+# and tap its center via coords. (workarounds #3 and #9)
+tap_id() {
+  tap_id_first "$1"
+}
+
+tap_id_first() {
+  local id="$1" frame x y w h cx cy
+  frame=$(frame_of "$id")
+  if [[ -z "$frame" ]]; then
+    log "tap_id_first: no element with id '$id'"
+    return 1
+  fi
+  read -r x y w h <<< "$frame"
+  cx=$(awk "BEGIN{printf \"%.2f\", $x + $w/2}")
+  cy=$(awk "BEGIN{printf \"%.2f\", $y + $h/2}")
+  axe tap -x "$cx" -y "$cy" --udid "$UDID" >/dev/null
+  sleep 0.7
+}
+
+# The soft keyboard is suppressed by default because Simulator.app forwards host
+# hardware-keyboard events. Cmd+K is Simulator's "Toggle Software Keyboard" —
+# sent via AppleScript. Idempotent: checks for the "space" key in the AXTree
+# first. Raises the target sim's window before the keystroke so the right window
+# catches it when both sims are booted. (workarounds #6 and #10)
+ensure_soft_keyboard() {
+  local count window_match
+  count=$(axe_tree | jq '[.. | objects | select((.AXLabel? // "" | ascii_downcase) == "space")] | length' 2>/dev/null || echo 0)
+  if [[ "$count" -gt 0 ]]; then
+    return 0
+  fi
+  case "$DEVICE" in
+    "iPhone 17 Pro Max")     window_match="iPhone" ;;
+    "iPad Pro 13-inch (M4)") window_match="iPad" ;;
+    *) window_match="" ;;
+  esac
+  osascript -e 'tell application "Simulator" to activate' \
+            -e 'delay 0.2' \
+            -e "tell application \"System Events\" to tell process \"Simulator\" to perform action \"AXRaise\" of (first window whose title contains \"$window_match\")" \
+            -e 'delay 0.3' \
+            -e 'tell application "System Events" to keystroke "k" using {command down}' \
+            >/dev/null 2>&1 || {
+    # Non-fatal: a missing soft keyboard only costs the spec's "keyboard visible"
+    # detail; the screenshot is still worth taking. Grant osascript Accessibility
+    # permission (see Prerequisites) to fix.
+    log "warning: AppleScript Cmd+K failed (grant osascript Accessibility permission)"
+    return 0
+  }
+  sleep 0.7
+}
+
+# axe type lacks HID-keycode mappings for non-ASCII characters (French accents
+# é è à ç ô î û …), so route typing through the system pasteboard + Cmd+V. Works
+# for any Unicode and bypasses the soft-vs-hardware keyboard distinction.
+# (workaround #5)
+type_via_pasteboard() {
+  local text="$1"
+  printf '%s' "$text" | xcrun simctl pbcopy "$UDID"
+  sleep 0.15
+  axe key-combo --modifiers 227 --key 25 --udid "$UDID" >/dev/null  # Cmd+V
+}
+
+tap_tab() {
+  local tab_name="$1" index
+  case "$tab_name" in
+    verbs)    index=0 ;;
+    models)   index=1 ;;
+    quiz)     index=2 ;;
+    info)     index=3 ;;
+    settings) index=4 ;;
+    *) log "unknown tab: $tab_name"; return 1 ;;
+  esac
+  local center="${CURRENT_TAB_CENTERS[$index]}"
+  axe tap -x "${center%,*}" -y "${center#*,}" --udid "$UDID" >/dev/null
+  sleep 0.7
+}
+
+swipe_up_pts() {
+  local pts="$1"
+  [[ "$pts" -le 0 ]] && return 0
+  local start_y=600
+  local end_y=$((start_y - pts))
+  axe swipe --start-x 200 --start-y "$start_y" \
+            --end-x 200 --end-y "$end_y" --duration 1.0 \
+            --udid "$UDID" >/dev/null
+  sleep 0.5
+}
+
+# Scroll the current list until the element with id $1 has its top edge at or
+# above $2 (logical points). $3 = max swipes, $4 = per-swipe distance (smaller =
+# finer landing, less overshoot). More robust than a fixed per-device scroll
+# table for the deep Info-list rows (the Tenses section sits below the About +
+# Concepts sections). Overshoot guard: a lazy list drops off-screen rows from the
+# AXTree, so once we've seen the row and it then vanishes, it has scrolled above
+# the top — stop there (the section header is sticky and stays pinned at top).
+scroll_until_top() {
+  local id="$1" target_y="$2" max_iters="${3:-15}" step="${4:-120}" i frame y seen=0
+  for (( i = 0; i < max_iters; i++ )); do
+    frame=$(frame_of "$id")
+    if [[ -n "$frame" ]]; then
+      seen=1
+      read -r _ y _ _ <<< "$frame"
+      if awk "BEGIN{exit !($y <= $target_y)}"; then
+        return 0
+      fi
+    elif [[ "$seen" -eq 1 ]]; then
+      return 0
+    fi
+    swipe_up_pts "$step"
+  done
+  log "scroll_until_top: '$id' not at/above y=$target_y after $max_iters swipes"
+  return 0
+}
+
+read_fixture_answers_path() {
+  local data_dir
+  data_dir=$(xcrun simctl get_app_container "$UDID" "$APP_BUNDLE_ID" data 2>/dev/null)
+  echo "$data_dir/Documents/screenshot_fixture_answers.json"
+}
+
+take_screenshot() {
+  local slug="$1"
+  mkdir -p "$(pwd)/docs/screenshots"
+  local ts out
+  ts=$(date +%Y%m%d-%H%M%S)
+  out="$(pwd)/docs/screenshots/${ts}-${slug}.png"
+  axe screenshot --udid "$UDID" --output "$out" >/dev/null
+  log "captured: $out"
+}
+
+# ---------------------------------------------------------------------------
+# Per-view nav functions
+# ---------------------------------------------------------------------------
+
+nav_verb_browse() {
+  : # default landing; wait_for_render already ran in main loop. Frequency sort
+    # is the default (Settings.verbSortDefault = .frequency), so être is on top.
+}
+
+nav_verb_view() {
+  tap_id_first verb_row_avoir
+}
+
+nav_model_browse() {
+  tap_tab models
+  # Irregularity sort is the default (Settings.modelSortDefault = .irregularity),
+  # which puts the most irregular model (être) at/near the top per the spec.
+  verify_screen_loaded model_row_être
+}
+
+nav_model_view() {
+  tap_tab models
+  tap_id_first model_row_être
+}
+
+nav_quiz_mid() {
+  tap_tab quiz
+  tap_id quiz_start_button
+  sleep 1.0  # let Quiz.start() write the fixture file + render the first question
+  local fixture first_answer
+  fixture=$(read_fixture_answers_path)
+  first_answer=$(jq -r '.[0].answer' "$fixture")
+  tap_id input_quiz_conjugation
+  type_via_pasteboard "$first_answer"
+  ensure_soft_keyboard
+  sleep 0.3  # let the keyboard settle before the screenshot
+}
+
+nav_info_browse() {
+  tap_tab info
+  # The segmented/animated tab can finish its highlight before the NavigationStack
+  # swaps content; anchor on the first info row so the screenshot waits for the list.
+  verify_screen_loaded info_row_dedication
+  # Spec: scroll so the "TENSES" (FR "TEMPS") section header is at top. The Tenses
+  # section is third (after About + Concepts), so bring its first row (participe
+  # passé) just under the pinned header. Tune the target_y if the header is clipped.
+  scroll_until_top info_row_participe_passe 200
+}
+
+nav_info_view() {
+  tap_tab info
+  verify_screen_loaded info_row_dedication
+  # Indicatif Présent lives partway down the Tenses section; scroll it into the
+  # safe middle band (clear of the tab bar) before tapping.
+  scroll_until_top info_row_indicatif_present 400
+  tap_id_first info_row_indicatif_present
+}
+
+nav_quiz_results() {
+  tap_tab quiz
+  tap_id quiz_start_button
+  sleep 1.0
+  local fixture answer i
+  fixture=$(read_fixture_answers_path)
+  tap_id input_quiz_conjugation
+  for i in $(seq 0 29); do
+    answer=$(jq -r ".[$i].answer" "$fixture")
+    type_via_pasteboard "$answer"
+    axe key 40 --udid "$UDID" >/dev/null   # Return; submitAnswer() re-focuses the field
+    sleep 0.3
+  done
+  sleep 1.0  # let the results sheet animate in
+  if ! axe_has_id results_score; then
+    log "results_score not in AX tree; attempting review-prompt dismiss"
+    dismiss_review_prompt
+    sleep 0.7
+  fi
+  verify_screen_loaded results_score
+}
+
+# Fallback only: seed_defaults should keep the StoreKit review prompt from ever
+# firing, but if one slips through it is the system dialog, so its button labels
+# are system-localized ("Not Now" / "Pas maintenant"). The modal opaques the AX
+# tree, but describe-ui --point inside it returns each element. Sweep a vertical
+# line and tap the bottommost AXButton. (workaround #12)
+dismiss_review_prompt() {
+  local x_center y last_button_y=""
+  case "$DEVICE" in
+    "iPhone 17 Pro Max")     x_center=220 ;;
+    "iPad Pro 13-inch (M4)") x_center=512 ;;
+    *) return 0 ;;
+  esac
+  for y in 540 575 610 645 680 715; do
+    if axe describe-ui --point "${x_center},${y}" --udid "$UDID" 2>/dev/null \
+       | grep -qE '"role" : "AXButton"'; then
+      last_button_y=$y
+    fi
+  done
+  if [[ -n "$last_button_y" ]]; then
+    axe tap -x "$x_center" -y "$last_button_y" --udid "$UDID" >/dev/null 2>&1
+    sleep 0.5
+    return 0
+  fi
+  log "review-prompt button not found in vertical sweep"
+  return 0
+}
+
+nav_settings() {
+  tap_tab settings
+  # Spec: Quiz Difficulty picker at top — it is the first control, so no scroll.
+}
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+resolve_ibv_scripts() {
+  local path
+  path=$(find ~/.claude -path '*ios-build-verify*' -name build_app.sh 2>/dev/null | head -1)
+  [[ -n "$path" ]] || { log "ios-build-verify scripts not found"; exit 2; }
+  echo "$(dirname "$path")"
+}
+
+resolve_app_path() {
+  local built_dir
+  built_dir=$(xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer \
+    -destination 'generic/platform=iOS Simulator' \
+    -showBuildSettings 2>/dev/null \
+    | awk -F= '/^[[:space:]]+BUILT_PRODUCTS_DIR / { gsub(/^[ \t]+|[ \t]+$/, "", $2); print $2; exit }')
+  [[ -n "$built_dir" ]] || { log "could not resolve BUILT_PRODUCTS_DIR"; exit 2; }
+  echo "$built_dir/Conjuguer.app"
+}
+
+filter_skip() {
+  local value="$1" filter="$2"
+  [[ -z "$filter" ]] && return 1
+  [[ "$value" == "$filter" ]] && return 1
+  return 0
+}
+
+main() {
+  IBV_SCRIPTS=$(resolve_ibv_scripts)
+  log "ibv scripts: $IBV_SCRIPTS"
+
+  log "building once (install per device after)"
+  "$IBV_SCRIPTS/build_app.sh"
+
+  local app_path
+  app_path=$(resolve_app_path)
+  [[ -d "$app_path" ]] || { log "app bundle not found at $app_path"; exit 2; }
+  log "app bundle: $app_path"
+
+  for device in "${DEVICES[@]}"; do
+    if filter_skip "$device" "$DEVICE_FILTER"; then continue; fi
+    apply_device_state "$device"
+    log "===== device: $device ($UDID) ====="
+    ensure_booted
+    log "uninstalling + installing fresh"
+    uninstall_app
+    install_app "$app_path"
+    seed_defaults
+
+    for lang in "${LANGS[@]}"; do
+      if filter_skip "$lang" "$LANG_FILTER"; then continue; fi
+
+      for view in "${VIEWS[@]}"; do
+        if filter_skip "$view" "$VIEW_FILTER"; then continue; fi
+
+        log "--- $device / $lang / $view ---"
+        set_appearance "$(appearance_for "$view")"
+        terminate_app
+        launch_with_lang "$lang"
+        wait_for_render
+        "nav_$view"
+        take_screenshot "${DEVICE_SLUG}-${lang}-${view}"
+      done
+    done
+  done
+
+  log "done."
+}
+
+main "$@"

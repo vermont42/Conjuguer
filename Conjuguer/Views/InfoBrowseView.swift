@@ -112,6 +112,7 @@ struct InfoBrowseView: View {
     Text(info.heading)
       .tableText()
       .frenchPronunciation(forReal: info.alwaysUsesFrenchPronunciation)
+      .accessibilityIdentifier("info_row_\(info.stableKey)")
   }
 
   @ViewBuilder

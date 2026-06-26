@@ -172,6 +172,17 @@ class Quiz {
   }
 
   private func buildQuiz() {
+    #if DEBUG
+    // Screenshot driver hook: when launched with `-CONJUGUER_QUIZ_FIXTURE screenshot`,
+    // build a deterministic 30-question quiz and export the correct answers so the
+    // screenshot driver can type them. See docs/screenshot-playbook.md.
+    if UserDefaults.standard.string(forKey: "CONJUGUER_QUIZ_FIXTURE") == "screenshot" {
+      questions = generateScreenshotFixture()
+      exportFixtureAnswers(questions)
+      return
+    }
+    #endif
+
     switch Current.settings.quizDifficulty {
     case .regular:
       [regularErVerb, regularErVerb, regularIrVerb, regularIrVerb, regularReVerb, bigThreeVerb, indicatifPrésentStemChangerVerb].forEach {
@@ -246,6 +257,72 @@ class Quiz {
       questions.shuffle()
     }
   }
+
+  #if DEBUG
+  // A fixed, locale-independent 30-question plan for App Store screenshots. The
+  // verbs are all common enough to exist in every build of verbs.xml, and the
+  // tenses are picked to look representative (présent, passé composé, imparfait,
+  // futur, conditionnel, impératif). See docs/screenshot-playbook.md.
+  private func generateScreenshotFixture() -> [QuizQuestion] {
+    let plan: [(infinitif: String, tense: Tense)] = [
+      ("parler", .indicatifPrésent(.firstSingular)),
+      ("avoir", .indicatifPrésent(.thirdSingular)),
+      ("être", .indicatifPrésent(.firstSingular)),
+      ("aller", .futurSimple(.thirdSingular)),
+      ("finir", .indicatifPrésent(.secondSingular)),
+      ("faire", .passéComposé(.firstSingular)),
+      ("prendre", .passéComposé(.thirdSingular)),
+      ("venir", .passéComposé(.thirdSingular)),
+      ("voir", .indicatifPrésent(.thirdSingular)),
+      ("pouvoir", .indicatifPrésent(.firstSingular)),
+      ("vouloir", .indicatifPrésent(.firstSingular)),
+      ("devoir", .indicatifPrésent(.firstSingular)),
+      ("savoir", .indicatifPrésent(.firstSingular)),
+      ("dire", .indicatifPrésent(.secondPlural)),
+      ("manger", .imparfait(.firstPlural)),
+      ("donner", .indicatifPrésent(.thirdPlural)),
+      ("aimer", .conditionnelPrésent(.firstSingular)),
+      ("partir", .passéComposé(.thirdSingular)),
+      ("mettre", .indicatifPrésent(.firstSingular)),
+      ("connaître", .indicatifPrésent(.thirdSingular)),
+      ("écrire", .imparfait(.firstSingular)),
+      ("lire", .indicatifPrésent(.thirdSingular)),
+      ("boire", .indicatifPrésent(.thirdPlural)),
+      ("croire", .indicatifPrésent(.firstSingular)),
+      ("recevoir", .indicatifPrésent(.firstSingular)),
+      ("ouvrir", .indicatifPrésent(.thirdSingular)),
+      ("sentir", .indicatifPrésent(.firstSingular)),
+      ("rendre", .indicatifPrésent(.thirdSingular)),
+      ("choisir", .futurSimple(.firstSingular)),
+      ("penser", .impératif(.secondSingular))
+    ]
+    return plan.map { spec in
+      QuizQuestion(verb: Verb.verbForInfinitif(spec.infinitif), tense: spec.tense)
+    }
+  }
+
+  // Write the correct answers for the fixture to Documents/screenshot_fixture_answers.json
+  // so the driver can read and type them. The exported answer is the first of any
+  // slash-separated alternates, which the quiz scores as a total match.
+  private func exportFixtureAnswers(_ questions: [QuizQuestion]) {
+    let payload = questions.map { question -> [String: String] in
+      let conjugated = Conjugator.conjugatedString(infinitif: question.verb.infinitif, tense: question.tense, extraLetters: nil) ?? ""
+      let answer = conjugated.components(separatedBy: Tense.alternateConjugationSeparator).first ?? conjugated
+      return [
+        "infinitif": question.verb.infinitif,
+        "tense": "\(question.tense)",
+        "answer": answer
+      ]
+    }
+    guard
+      let data = try? JSONSerialization.data(withJSONObject: payload, options: .prettyPrinted),
+      let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+    else {
+      return
+    }
+    try? data.write(to: docs.appendingPathComponent("screenshot_fixture_answers.json"))
+  }
+  #endif
 
   private var personNumber: PersonNumber {
     personNumbers.next()
