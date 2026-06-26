@@ -14,6 +14,32 @@ struct GameView: View {
   @Environment(\.dismiss) private var dismiss
   @State private var gameState = GameState()
 
+  // Geometry of the bottom-left move controls, shared by `arrowControls` (which
+  // lays the buttons out) and `controlRect(in:)` (which carves out the no-fire
+  // zone). Keeping them in one place stops the tap test from drifting from the
+  // visible buttons.
+  private static let arrowButtonSize: CGFloat = 64
+  private static let arrowSpacing = Layout.tripleDefaultSpacing
+  private static let arrowInset = Layout.tripleDefaultSpacing
+  // A little forgiveness around the visible buttons so a near-miss tap on a
+  // control doesn't fire instead.
+  private static let controlPadding = Layout.defaultSpacing
+
+  // The rectangle (in `.local` coordinates) occupied by the arrow controls,
+  // padded slightly. Taps inside it are reserved for movement and never fire.
+  private func controlRect(in size: CGSize) -> CGRect {
+    let width = Self.arrowButtonSize * 2 + Self.arrowSpacing
+    let height = Self.arrowButtonSize
+    let originX = Self.arrowInset - Self.controlPadding
+    let originY = size.height - Self.arrowInset - height - Self.controlPadding
+    return CGRect(
+      x: originX,
+      y: originY,
+      width: width + Self.controlPadding * 2,
+      height: height + Self.controlPadding * 2
+    )
+  }
+
   var body: some View {
     GeometryReader { geometry in
       TimelineView(.animation) { timeline in
@@ -25,8 +51,9 @@ struct GameView: View {
       }
       .contentShape(Rectangle())
       .onTapGesture(coordinateSpace: .local) { location in
-        // Tapping the right half fires a bullet; the left half holds the arrows.
-        if location.x > geometry.size.width / 2 {
+        // Tapping anywhere outside the arrow-control rectangle fires a bullet;
+        // taps inside it are reserved for the move controls and never fire.
+        if !controlRect(in: geometry.size).contains(location) {
           gameState.fire()
         }
       }
@@ -364,7 +391,7 @@ struct GameView: View {
   }
 
   private var arrowControls: some View {
-    HStack(spacing: Layout.tripleDefaultSpacing) {
+    HStack(spacing: Self.arrowSpacing) {
       arrowButton(systemName: "arrowtriangle.left.fill", label: L.Game.moveLeft) { isPressed in
         gameState.movingLeft = isPressed
       }
@@ -373,8 +400,8 @@ struct GameView: View {
         gameState.movingRight = isPressed
       }
     }
-    .padding(.leading, Layout.tripleDefaultSpacing)
-    .padding(.bottom, Layout.tripleDefaultSpacing)
+    .padding(.leading, Self.arrowInset)
+    .padding(.bottom, Self.arrowInset)
   }
 
   private func arrowButton(
@@ -385,7 +412,7 @@ struct GameView: View {
     Image(systemName: systemName)
       .font(.system(size: 44, weight: .bold))
       .foregroundStyle(.white)
-      .frame(width: 64, height: 64)
+      .frame(width: Self.arrowButtonSize, height: Self.arrowButtonSize)
       .contentShape(Rectangle())
       // minimumDistance 0 makes this a press-and-hold control: pressed on touch
       // down, released on lift, so the player moves only while the arrow is held.
