@@ -25,6 +25,10 @@ extension GameState {
   }
 
   func updateBall(dt: CGFloat) {
+    if ballInvulnerabilityTimer > 0 {
+      ballInvulnerabilityTimer -= dt
+    }
+
     guard var current = ball else {
       return
     }
@@ -108,14 +112,17 @@ extension GameState {
     }
 
     // Striking the player hurts, but the cheese shield protects (like every
-    // other threat).
-    if Self.intersects(
+    // other threat). A brief post-hit invulnerability to the ball keeps a single
+    // overlap (which can span several frames at speed) from registering more than
+    // one 25% hit.
+    if ballInvulnerabilityTimer <= 0, Self.intersects(
       a: CGPoint(x: current.x, y: current.y),
       aSize: Self.ballSize,
       b: CGPoint(x: playerX, y: playerY),
       bSize: Self.playerSize
     ) {
       registerPlayerHit()
+      ballInvulnerabilityTimer = Self.ballInvulnerabilityDuration
       Current.soundPlayer.play(.playerHit, shouldDebounce: false)
       current.velocityY = -abs(current.velocityY)
     }

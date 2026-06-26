@@ -60,6 +60,9 @@ final class GameState {
   static let ballDuration: CGFloat = 15.0
   static let ballSpeedUpPerBounce: CGFloat = 1.08
   static let ballMaxSpeed: CGFloat = 900.0
+  // After a ball hit, the player is invulnerable to the ball (and the ball only)
+  // for this long, so a single overlap can't register on multiple frames.
+  static let ballInvulnerabilityDuration: CGFloat = 1.0
 
   // Mechanic 3: ghost hunt.
   static let ghostCountRange: ClosedRange<Int> = 2 ... 3
@@ -172,6 +175,8 @@ final class GameState {
   var specialCooldown: CGFloat = GameState.firstSpecialDelay
   var specialBag: [SpecialMechanic] = []
   var activeSpecial: SpecialMechanic?
+  // Counts down after a ball hit; while > 0 the ball can't damage the player.
+  var ballInvulnerabilityTimer: CGFloat = 0.0
   var nextBossScore = GameState.bossScoreThreshold
 
   var playerY: CGFloat {
@@ -186,7 +191,39 @@ final class GameState {
     didConfigure = true
     highScore = Current.settings.gameHighScore
     seedWorld()
+    warmGameGlyphs()
+    Current.soundPlayer.warmUpSounds()
     Current.soundPlayer.startMusic()
+  }
+
+  // Warm the emoji glyph cache off the main thread at game start so the first
+  // on-screen render of each sprite glyph doesn't stall the render thread (~0.5s
+  // each, worst for the flag/tag-sequence emoji). Sizes mirror GameView's usage.
+  private func warmGameGlyphs() {
+    let glyphs: [(String, CGFloat)] = [
+      ("🇫🇷", Self.bulletSize),
+      ("🏴󠁧󠁢󠁥󠁮󠁧󠁿", Self.enemyBulletSize),
+      ("⚽", Self.ballSize),
+      ("👻", Self.ghostSize),
+      ("😱", Self.ghostSize),
+      ("💨", Self.ghostSize),
+      ("🐔", Self.henSize),
+      ("🥚", Self.eggSize),
+      ("🐣", Self.chickSize),
+      ("🥖", Self.dropSize),
+      ("🍇", Self.dropSize),
+      ("🧀", Self.dropSize),
+      ("🎵", Self.dotSize),
+      ("🔮", Self.chandelierSize),
+      ("⚠️", Self.targetSize * 0.7),
+      ("🧠", Self.brainSize),
+      ("⚡", Self.brainSize * 0.8),
+      ("🤖", Self.robotMinionSize),
+      ("🦾", Self.robotMinionSize * 0.55)
+    ]
+    Task.detached(priority: .userInitiated) {
+      GlyphWarmer.warm(glyphs)
+    }
   }
 
   /// Re-anchors the world when the viewport changes (device rotation). The player
@@ -295,6 +332,7 @@ final class GameState {
     specialCooldown = Self.firstSpecialDelay
     specialBag = []
     activeSpecial = nil
+    ballInvulnerabilityTimer = 0
     nextBossScore = Self.bossScoreThreshold
 
     fireCooldown = 0

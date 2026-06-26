@@ -6,7 +6,7 @@
 //  Copyright © 2016 Josh Adams. All rights reserved.
 //
 
-enum Sound: String {
+enum Sound: String, CaseIterable {
   case applause1
   case applause2
   case applause3
