@@ -82,7 +82,7 @@ tab_coords_for() {
 wait_budget_for() {
   case "$1" in
     "iPhone 17 Pro Max")     echo 10 ;;
-    "iPad Pro 13-inch (M4)") echo 20 ;;
+    "iPad Pro 13-inch (M4)") echo 45 ;;
   esac
 }
 

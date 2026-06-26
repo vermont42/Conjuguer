@@ -42,6 +42,7 @@ App Store screenshots only — 9 views × 2 languages × 2 devices = 36 PNGs. No
 - Two simulators named `iPhone 17 Pro Max` and `iPad Pro 13-inch (M4)` (see "Simulator Setup"). The driver resolves their UDIDs by name at run time — no hardcoding.
 - **Disable TipKit tips first (then restore).** Set `TipDisplay.tipsEnabled = false` in
   [`Conjuguer/Models/ConjuguerTips.swift`](../Conjuguer/Models/ConjuguerTips.swift) **before** running the driver, and restore it to `true` afterward. This is a compile-time master switch: when `false`, `ConjuguerApp` skips `Tips.configure()`, so every `TipView` (notably "Try the Quiz" on VerbBrowseView and "Explore Models" on ModelBrowseView) and `.popoverTip(_:)` stays hidden — no per-call-site changes needed. The driver builds once at start, so the flag must be flipped before you launch it. Leaving tips on means a tip card can land in the VerbBrowseView/ModelBrowseView screenshots.
+- **Clean the iPad status bar (App Store polish).** The driver does *not* manage the status bar, so iPad shots ship with whatever the simulator's clock and **system language** produce — and the iPad status bar shows a *date* (e.g. a German `Freitag 26. Juni` if the sim's system language is German), which looks unprofessional on an EN/FR listing. iPhone shots are unaffected (the notch shows only the time). Set a clean status bar before the iPad sweep — see **"Clean Status Bar"** below. (Not needed for iPhone.)
 
 ## Quick Start
 
@@ -129,6 +130,103 @@ xcrun simctl create "iPad Pro 13-inch (M4)" \
 
 **No sim renaming needed.** Konjugieren's driver hardcoded UDIDs and renamed the iPad to dodge `_resolve_udid.sh`'s regex-special-char bug (parens in `TARGET_SIM`). Conjuguer's driver bypasses `_resolve_udid.sh` entirely and matches the device name as a Python string literal, so `iPad Pro 13-inch (M4)` works unchanged.
 
+## Clean Status Bar
+
+The driver itself never touches the status bar, so by default every shot carries the
+simulator's live clock, battery, and signal state — and on **iPad** the status bar also
+shows a **date**, rendered in the simulator's **system language** (independent of the
+app's `-AppleLanguages` override). A sim whose system language is German thus stamps
+`Freitag 26. Juni` onto otherwise-English/French iPad screenshots. iPhone shots are
+unaffected — the notch shows only the time, no date.
+
+Fixing this is two independent pieces:
+
+1. **`simctl status_bar override`** — pins the time/battery/signal to clean values. This is
+   per-device and **cleared on every shutdown/reboot**, but it **persists across
+   `uninstall`/`install` and app relaunches**, so set it once and leave the device booted
+   for the whole sweep. (`take_screenshots.sh` only boots when the device is *not* already
+   booted and never reboots, so the override survives a full run.)
+
+   ```bash
+   UDID=$(xcrun simctl list devices available | \
+     awk -F '[()]' '/iPad Pro 13-inch \(M4\) \(/{print $4; exit}')   # the iOS-26 one
+   xcrun simctl status_bar "$UDID" override \
+     --time "9:41" \
+     --dataNetwork wifi --wifiMode active --wifiBars 3 \
+     --cellularMode notSupported \
+     --batteryState charged --batteryLevel 100
+   ```
+
+   Caveats learned the hard way:
+   - **`--time` only accepts a plain clock string** like `"9:41"`. `"9:41 AM"` and even a
+     well-formed ISO string (`2026-06-26T09:41:00`) are rejected as *"Invalid, non-ISO
+     date/time string"* on this runtime. Use `"9:41"`; the system renders the AM/PM and the
+     *date* itself from the real clock + system language (step 2), not from `--time`.
+   - **`--cellularMode notSupported`** hides the cellular signal — correct for a Wi-Fi iPad
+     (forcing `--cellularBars` instead paints a bogus "Carrier" onto a Wi-Fi-only device).
+   - Verify with `xcrun simctl status_bar "$UDID" list`; reset with `… status_bar "$UDID" clear`.
+
+2. **System language → fixes the iPad date's language.** `status_bar override` has **no
+   date flag**; the date label follows the device's *system* language. Set it (and reboot,
+   which is also when you must **re-apply the override** since reboot clears it):
+
+   ```bash
+   lang=en   # or fr
+   case "$lang" in en) loc=en_US ;; fr) loc=fr_FR ;; esac
+   xcrun simctl spawn "$UDID" defaults write -g AppleLanguages -array "$lang"
+   xcrun simctl spawn "$UDID" defaults write -g AppleLocale -string "$loc"
+   xcrun simctl shutdown "$UDID"; xcrun simctl boot "$UDID"
+   xcrun simctl bootstatus "$UDID" -b >/dev/null
+   # re-apply the status_bar override here (cleared by the reboot)
+   ```
+
+   Because the system language must match each screenshot's language to localize the date
+   (English date on EN shots, French on FR), capture the iPad **one language at a time**:
+   set system language → reboot → re-apply override → shoot all 9 views of that language →
+   repeat for the other language. This is orthogonal to the per-cell reliability loop below,
+   which also runs the iPad a language at a time.
+
+> **Why not bake this into the driver?** The override is trivial to script, but the
+> per-language *reboot* (needed for the date) doesn't fit the driver's one-boot-per-device
+> loop (it shoots both languages in a single boot). Keeping the status-bar setup as an
+> operator step above avoids restructuring the driver around reboots. iPhone needs none of
+> this.
+
+## iPad reliability — duplicate sims, render budget, per-cell fallback
+
+Three iPad-specific failure modes surfaced in practice (none affect iPhone):
+
+- **Wrong duplicate simulator / old iPadOS.** `udid_for()` returns the *first* name match
+  in `simctl list` order, which is grouped by runtime ascending — so if the machine has
+  `iPad Pro 13-inch (M4)` instances on iOS 18.x *and* 26.x, it picks an **18.x** one and
+  the install dies with *"Requires a Newer Version of iPadOS … Have 18.0; need 26.0"*. Fix
+  without deleting the user's other sims by **renaming the stale-OS duplicates out of the
+  way** (reversible) so only the iOS-26 device matches the exact name:
+  ```bash
+  xcrun simctl rename <UDID-of-iOS18-iPad> "iPad Pro 13-inch (M4) iOS18-PARKED"
+  # …re-run sweep…  then restore:
+  xcrun simctl rename <UDID> "iPad Pro 13-inch (M4)"
+  ```
+  Confirm the survivor with the `udid_for` Python snippet (workaround #13) before running.
+- **Render budget.** The iPad cold-parses 6,320 verbs in a regular-size-class grid on every
+  launch; render time is variable and intermittently exceeds the original 20 s budget, so
+  `wait_budget_for "iPad Pro 13-inch (M4)"` is now **45 s**. A *single* `wait_for_render`
+  timeout still aborts the whole sweep (`set -e`), so generous headroom matters.
+- **Per-cell fallback.** The *first* launch after a fresh `install` has never hung; only
+  2nd+ relaunches within one driver run intermittently exceed even 45 s. The robust path is
+  therefore to invoke the driver **one cell at a time** (`--lang L --view V`) with a small
+  retry loop — every cell becomes a first-launch-after-install, and a transient miss costs
+  one cell, not the run:
+  ```bash
+  for view in verb_browse verb_view model_browse model_view quiz_mid \
+              info_browse info_view quiz_results settings; do
+    for attempt in 1 2 3; do
+      scripts/take_screenshots.sh --device "iPad Pro 13-inch (M4)" --lang en --view "$view" && break
+    done
+  done
+  ```
+  Keep the device booted across the loop so the status-bar override (above) persists.
+
 ## Workarounds
 
 Compact reference. The driver's inline comments hold the full WHY for each — cross-references point at the relevant function.
@@ -171,6 +269,9 @@ Compact reference. The driver's inline comments hold the full WHY for each — c
 
 13. **Dynamic UDID resolution** (`take_screenshots.sh::udid_for`)
     *Symptom:* `_resolve_udid.sh`'s regex match breaks on the iPad's paren-bearing default name. *Fix:* resolve UDIDs by exact device name with a Python literal comparison, so no hardcoded UDIDs and no sim renaming.
+
+14. **Status bar (time + iPad date language)** (operator step, not in the driver — see *Clean Status Bar*)
+    *Symptom:* iPad shots carry the live clock and a system-language date (e.g. German `Freitag 26. Juni`). *Fix:* `simctl status_bar override --time "9:41" …` (persists across install, cleared on reboot) for the clock/battery/signal, plus a per-language **system-language change + reboot** to localize the iPad date. `--time` rejects `"9:41 AM"`/ISO strings — pass a bare `"9:41"`.
 
 ## Per-View Navigation Recipes
 
