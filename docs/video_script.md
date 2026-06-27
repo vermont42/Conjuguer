@@ -4,31 +4,31 @@ Use iPhone 17 Pro Max and iPad Pro 13" (M5) simulators.
 
 Ensure that the raw edit is exactly 32 seconds *without* transitions. There are 5 clips, so 4 half-second transitions between them shrink the length by 2 seconds, down to 30 seconds, the App Store limit. (FCP's default transition duration is 1 second; this assumes it has been set to 0.5 second in Settings ▸ Editing.)
 
-First Clip
+First Clip - six seconds
 Starts out at top of VerbBrowse view. Sort by frequency. Slowly scroll down for five seconds.
 Label:
 6,320 French verbs — from abaisser to zyeuter, sorted alphabetically or by frequency.
 6 320 verbes français — d’abaisser à zyeuter, classés par ordre alphabétique ou par fréquence.
 
-Second Clip
+Second Clip - six seconds
 Starts out at top of être's Verb view. Slowly scroll down for five seconds.
 Label:
 Every conjugation of every verb — seventeen tenses at a glance.
 Toutes les conjugaisons de chaque verbe — dix-sept temps d’un seul coup d’œil.
 
-Third Clip
+Third Clip - six seconds
 Starts out on ModelBrowseView, sorted by irregularity. Wait two seconds. Tap recevoir model. Wait one second. Slowly scroll down for two seconds.
 Label:
 Regular, irregular, and everything between — explore all 95 conjugation models.
 Réguliers, irréguliers et tout l’entre-deux — explorez les 95 modèles de conjugaison.
 
-Fourth Clip
+Fourth Clip - seven seconds
 Starts out on QuizVew. Start. Type answer. Submit. Repeat once.
 Label:
 Quiz mode: Thirty timed questions to sharpen your conjugation skills.
 Mode quiz : trente questions chronométrées pour aiguiser vos talents de conjugaison.
 
-Fifth Clip
+Fifth Clip - seven seconds
 Starts out on InfoBrowseView scrolled to top. Scroll down so that indicatif présent is centered. Tap it. Slowly scroll down.
 Label:
 From Proto-Indo-European to modern French — the story behind every tense.
