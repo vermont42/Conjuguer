@@ -17,7 +17,7 @@ Every conjugation of every verb — seventeen tenses at a glance.
 Toutes les conjugaisons de chaque verbe — dix-sept temps d’un seul coup d’œil.
 
 Third Clip
-Starts out on ModelBrowseView, sorted by irregularity. Wait two seconds. Tap the top (most irregular) model. Wait one second. Slowly scroll down for two seconds.
+Starts out on ModelBrowseView, sorted by irregularity. Wait two seconds. Tap recevoir model. Wait one second. Slowly scroll down for two seconds.
 Label:
 Regular, irregular, and everything between — explore all 95 conjugation models.
 Réguliers, irréguliers et tout l’entre-deux — explorez les 95 modèles de conjugaison.
