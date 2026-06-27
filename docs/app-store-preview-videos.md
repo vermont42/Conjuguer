@@ -11,22 +11,27 @@ read directly off that library's projects.
 
 ```
 Library  (.fcpbundle file)        ← e.g. "Conjuguer"     (top-level document)
- └─ Event  (dated container)      ← e.g. "6-26-26"       (holds media + projects)
+ └─ Event  (container)            ← e.g. "Event"         (holds media + projects)
      └─ Project  (a timeline)     ← one per video        (what you export)
 ```
 
 - **Library** — the whole document. One per app.
 - **Event** — a folder inside the library holding your media clips *and* projects.
-  Name it with the date (matches the Konjugieren convention, e.g. `2-8-26`).
+  Named simply `Event` here. (Konjugieren used a date, e.g. `2-8-26`; a plain name is
+  fine since there's only one.)
 - **Smart Collections** — auto-created by FCP; ignore.
 - **Project** — an editable timeline that exports to a video file. You create one per
   video.
 
 ## Projects to create
 
-In the dated Event, create four Projects (**File ▸ New ▸ Project**, or ⌘N → click
+In the Event, create four Projects (**File ▸ New ▸ Project**, or ⌘N → click
 **Custom Settings**, set **Video → Format: Custom**, enter the resolution, set
 **Rate: 30**):
+
+> **You must set Video → Format to "Custom" first.** The default format (1080p HD) only
+> offers fixed landscape presets (1920×1080, etc.); the resolution fields don't become
+> editable — and you can't type a portrait size — until Format = **Custom**.
 
 | Project          | Format | Resolution    | Rate |
 |------------------|--------|---------------|------|
