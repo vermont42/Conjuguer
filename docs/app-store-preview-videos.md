@@ -45,17 +45,32 @@ These are Apple's standard App Store app-preview sizes:
 > primary size *and* it has an exact-pixel simulator match (see below), so there's no
 > rescaling.
 
-## Simulators to record from (exact pixel matches — zero scaling)
+## Simulators to record from
 
-| Project size                 | Simulator                                  | Native resolution |
-|------------------------------|--------------------------------------------|-------------------|
-| 1320 × 2868 (iPhone 6.9″)    | **`iPhone 17 Pro Max`**                    | 1320 × 2868 ✅ |
-| 2048 × 2732 (iPad 12.9″)     | **`iPad Pro (12.9-inch) (6th generation)`** | 2048 × 2732 ✅ |
+| Project size                 | Simulator                       | Native resolution | vs. project |
+|------------------------------|---------------------------------|-------------------|-------------|
+| 1320 × 2868 (iPhone 6.9″)    | **`iPhone 17 Pro Max`** (iOS 26) | 1320 × 2868       | exact match ✅ |
+| 2048 × 2732 (iPad 12.9″)     | **`iPad Pro 13-inch (M5)`** (iOS 26) | 2064 × 2752   | ~0.78% downscale (see below) |
 
-Both record at exactly the project resolution — no aspect-ratio reframing.
+The iPhone records at exactly the project resolution — no reframing.
 
-> Avoid the newer **iPad Pro 13-inch (M4/M5)** sims here: they're 2064 × 2752, which
-> would rescale into the 2048 × 2732 project. Use the **12.9″ 6th generation**.
+### Why the iPad uses the 13″ M5, not the 12.9″ 6th gen
+
+The exact-pixel iPad would be the **iPad Pro (12.9-inch) (6th generation)** (native
+2048 × 2732). **It cannot be used:** Conjuguer's deployment target is **iOS 26.0**, but
+that device only exists on iOS ≤ 18 runtimes (Apple dropped it from the iOS 26 runtime
+in favor of the 13″ M4/M5). An iOS-26 app won't install on it, and `xcodebuild` rejects
+the destination outright.
+
+So record on the **iPad Pro 13-inch (M5)** (the only iOS-26 iPad Pro). Its native
+2064 × 2752 scales into the 2048 × 2732 project as a **uniform ~0.78% downscale with an
+identical 3:4 aspect ratio** — no cropping, no letterboxing, visually imperceptible. The
+delivered file is still a valid 2048 × 2732, which App Store Connect accepts. Bonus: both
+iPhone and iPad footage then share the same iOS 26 look.
+
+> When you drop the 13″ M5 recording onto the 2048 × 2732 timeline, FCP will offer to
+> change project settings to match the clip (2064 × 2752). **Decline** — keep the project
+> at 2048 × 2732 so the export is an accepted App Store size; the sub-1% scale is fine.
 
 ### Recording
 
@@ -64,19 +79,29 @@ Both record at exactly the project resolution — no aspect-ratio reframing.
   Simulator *window* may be displayed scaled down.
 - To get the simulator UDIDs:
   ```bash
-  xcrun simctl list devices available | grep -iE 'iPhone 17 Pro Max|iPad Pro \(12.9-inch\) \(6th'
+  xcrun simctl list devices available | grep -iE 'iPhone 17 Pro Max|iPad Pro 13-inch \(M5\)'
   ```
-- Build/install the current app before recording (the project's build skill):
+- Build/install the current app onto a recording simulator before recording. The
+  `ios-build-verify` build skill is pinned to the iPhone 17 / iOS 26 sim in its config,
+  so for these specific devices build by UDID directly:
   ```bash
-  export IBV_SCRIPTS=$(dirname "$(find ~/.claude -path '*ios-build-verify*' -name build_app.sh 2>/dev/null | head -1)")
-  "$IBV_SCRIPTS/build_app.sh"
+  UDID=<sim-udid>   # iPhone 17 Pro Max, or iPad Pro 13-inch (M5)
+  xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer \
+    -destination "platform=iOS Simulator,id=$UDID" \
+    -derivedDataPath build/preview-dd build
+  xcrun simctl bootstatus "$UDID" -b
+  xcrun simctl install "$UDID" \
+    "$(find build/preview-dd/Build/Products -name Conjuguer.app | head -1)"
+  xcrun simctl launch "$UDID" software.racecondition.Conjuguer
   ```
 
 ### Placing clips on the timeline
 
-When you drop a recording onto its timeline, FCP should report **"matches project
-settings"** (no rescale). If it instead offers to *change project settings to fit the
-clip*, **decline** — the project resolution is already correct.
+- **iPhone (1320 × 2868):** the recording matches the project exactly — FCP reports
+  **"matches project settings"** (no rescale). Nothing to do.
+- **iPad (2064 × 2752 → 2048 × 2732):** FCP will offer to *change project settings to
+  fit the clip*. **Decline** — keep the project at 2048 × 2732 (an accepted App Store
+  size); the uniform ~0.78% downscale is imperceptible.
 
 ## Frame rate provenance
 

@@ -1,5 +1,7 @@
 Script and Playbook for iOS App Store Previews
 
+Use iPhone 17 Pro Max and iPad Pro 13" (M5) simulators.
+
 Ensure that videos are exactly 34 seconds *without* transitions. Inserting half-second transitions between clips will shrink length down to 30 seconds, the limit.
 
 First Clip
