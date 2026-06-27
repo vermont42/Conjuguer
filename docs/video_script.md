@@ -29,7 +29,7 @@ Quiz mode: Thirty timed questions to sharpen your conjugation skills.
 Mode quiz : trente questions chronométrées pour aiguiser vos talents de conjugaison.
 
 Fifth Clip
-Starts out on InfoBrowseView just below dedication. Scroll down so that indicatif présent is centered. Tap it. Slowly scroll down.
+Starts out on InfoBrowseView scrolled to top. Scroll down so that indicatif présent is centered. Tap it. Slowly scroll down.
 Label:
 From Proto-Indo-European to modern French — the story behind every tense.
 Du proto-indo-européen au français moderne — l’histoire derrière chaque temps.
