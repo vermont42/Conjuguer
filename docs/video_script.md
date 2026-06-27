@@ -2,7 +2,7 @@ Script and Playbook for iOS App Store Previews
 
 Use iPhone 17 Pro Max and iPad Pro 13" (M5) simulators.
 
-Ensure that videos are exactly 34 seconds *without* transitions. Inserting half-second transitions between clips will shrink length down to 30 seconds, the limit.
+Ensure that the raw edit is exactly 32 seconds *without* transitions. There are 5 clips, so 4 half-second transitions between them shrink the length by 2 seconds, down to 30 seconds, the App Store limit. (FCP's default transition duration is 1 second; this assumes it has been set to 0.5 second in Settings ▸ Editing.)
 
 First Clip
 Starts out at top of VerbBrowse view. Sort by frequency. Slowly scroll down for five seconds.
