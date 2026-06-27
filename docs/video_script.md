@@ -19,7 +19,7 @@ Toutes les conjugaisons de chaque verbe — dix-sept temps d’un seul coup d’
 Third Clip - six seconds
 Starts out on ModelBrowseView, sorted by irregularity. Wait two seconds. Tap recevoir model. Wait one second. Slowly scroll down for two seconds.
 Label:
-Regular, irregular, and everything between — explore all 95 conjugation models.
+Regular, irregular, and everything in between — explore all 95 conjugation models.
 Réguliers, irréguliers et tout l’entre-deux — explorez les 95 modèles de conjugaison.
 
 Fourth Clip - seven seconds
