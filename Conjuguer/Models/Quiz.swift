@@ -223,20 +223,20 @@ class Quiz {
 
     case .ridiculous:
       let ridiculousQuestions: [(String, Tense)] = [
-        ("ester", .indicatifPrésent(.firstSingular)),
-        ("gésir", .participePassé),
-        ("gésir", .passéSimple(personNumber)),
+        ("réaliser", .indicatifPrésent(.firstSingular)),
+        ("devenir", .participePassé),
+        ("voir", .passéSimple(personNumber)),
         ("choir", .participePassé),
         ("clore", .indicatifPrésent(personNumber)),
-        ("courre", .futurSimple(personNumber)),
-        ("fiche", .participePassé),
+        ("partir", .futurSimple(personNumber)),
+        ("naître", .participePassé),
         ("avoir", .subjonctifImparfait(personNumber)),
         ("avoir", .subjonctifPrésent(personNumber)),
         ("aller", .subjonctifPrésent(personNumber)),
         ("être", .passéSimple(personNumber)),
         ("être", .subjonctifImparfait(personNumber)),
-        ("béer", .indicatifPrésent(personNumber)),
-        ("braire", .passéSimple(personNumber)),
+        ("parler", .indicatifPrésent(personNumber)),
+        ("prendre", .passéSimple(personNumber)),
         ("bruire", .subjonctifPrésent(personNumber)),
         ("falloir", .subjonctifImparfait(personNumber)),
         ("faillir", .subjonctifPrésent(personNumber)),
@@ -247,11 +247,11 @@ class Quiz {
         ("promouvoir", .passéSimple(personNumber)),
         ("pouvoir", .subjonctifPrésent(personNumber)),
         ("plaindre", .passéSimple(personNumber)),
-        ("issir", .participePassé),
+        ("recevoir", .participePassé),
         ("lire", .passéSimple(personNumber)),
         ("mettre", .indicatifPrésent(personNumber)),
         ("moudre", .indicatifPrésent(personNumber)),
-        ("paître", .imparfait(personNumber)),
+        ("ouvrir", .imparfait(personNumber)),
         ("mouvoir", .passéSimple(personNumber))
       ]
       ridiculousQuestions.forEach { infinitif, tense in
