@@ -8,12 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0338F169273C229700FD796C /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0338F168273C229700FD796C /* GameKit.framework */; };
+		036307CE2FF41CA400C9264F /* TelemetryDeck in Frameworks */ = {isa = PBXBuildFile; productRef = 036307CD2FF41CA400C9264F /* TelemetryDeck */; };
 		03A0DE4E2FE4AB0B008C4737 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A0DE4D2FE4AB0B008C4737 /* WidgetKit.framework */; };
 		03A0DE502FE4AB0B008C4737 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A0DE4F2FE4AB0B008C4737 /* SwiftUI.framework */; };
 		03A0DE5F2FE4AB0D008C4737 /* ConjuguerWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 03A0DE4C2FE4AB0B008C4737 /* ConjuguerWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		03AE93E0274322EF00233105 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 03AE93DF274322EF00233105 /* AWSCognitoAuthPlugin */; };
-		03AE93E2274322EF00233105 /* AWSPinpointAnalyticsPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 03AE93E1274322EF00233105 /* AWSPinpointAnalyticsPlugin */; };
-		03AE93E4274322EF00233105 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 03AE93E3274322EF00233105 /* Amplify */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +53,7 @@
 		03A0DE4D2FE4AB0B008C4737 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		03A0DE4F2FE4AB0B008C4737 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		03C196282FE4C33900353E69 /* ConjuguerWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ConjuguerWidgetExtension.entitlements; sourceTree = "<group>"; };
+		036307D02FF41CA400C9264F /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Conjuguer/Secrets.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -62,6 +61,8 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				Secrets.example.xcconfig,
+				Secrets.xcconfig,
 			);
 			target = 036DB789259FD6500013C3B7 /* Conjuguer */;
 		};
@@ -82,7 +83,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		0341A6D42FCC691800B61C2F /* Conjuguer */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (0341A7452FCC691800B61C2F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {Analytics/amplifyconfiguration.json = text.json; Analytics/awsconfiguration.json = text.json; }; explicitFolders = (); path = Conjuguer; sourceTree = "<group>"; };
+		0341A6D42FCC691800B61C2F /* Conjuguer */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (0341A7452FCC691800B61C2F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Conjuguer; sourceTree = "<group>"; };
 		0341A74B2FCC692000B61C2F /* ConjuguerTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (0341A7502FCC692000B61C2F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ConjuguerTests; sourceTree = "<group>"; };
 		03A0DE512FE4AB0B008C4737 /* ConjuguerWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (03A0DE642FE4AB0D008C4737 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ConjuguerWidget; sourceTree = "<group>"; };
 		03C1962A2FE4C54D00353E69 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
@@ -94,9 +95,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0338F169273C229700FD796C /* GameKit.framework in Frameworks */,
-				03AE93E4274322EF00233105 /* Amplify in Frameworks */,
-				03AE93E2274322EF00233105 /* AWSPinpointAnalyticsPlugin in Frameworks */,
-				03AE93E0274322EF00233105 /* AWSCognitoAuthPlugin in Frameworks */,
+				036307CE2FF41CA400C9264F /* TelemetryDeck in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +134,7 @@
 				03C1962A2FE4C54D00353E69 /* Shared */,
 				03C196282FE4C33900353E69 /* ConjuguerWidgetExtension.entitlements */,
 				0341A6D42FCC691800B61C2F /* Conjuguer */,
+				036307D02FF41CA400C9264F /* Secrets.xcconfig */,
 				0341A74B2FCC692000B61C2F /* ConjuguerTests */,
 				03A0DE512FE4AB0B008C4737 /* ConjuguerWidget */,
 				036DB78B259FD6500013C3B7 /* Products */,
@@ -175,9 +175,7 @@
 			);
 			name = Conjuguer;
 			packageProductDependencies = (
-				03AE93DF274322EF00233105 /* AWSCognitoAuthPlugin */,
-				03AE93E1274322EF00233105 /* AWSPinpointAnalyticsPlugin */,
-				03AE93E3274322EF00233105 /* Amplify */,
+				036307CD2FF41CA400C9264F /* TelemetryDeck */,
 			);
 			productName = Conjuguer;
 			productReference = 036DB78A259FD6500013C3B7 /* Conjuguer.app */;
@@ -259,7 +257,7 @@
 			);
 			mainGroup = 036DB781259FD6500013C3B7;
 			packageReferences = (
-				03AE93DE274322EF00233105 /* XCRemoteSwiftPackageReference "amplify-ios" */,
+				036307CC2FF41CA400C9264F /* XCRemoteSwiftPackageReference "SwiftSDK" */,
 			);
 			productRefGroup = 036DB78B259FD6500013C3B7 /* Products */;
 			projectDirPath = "";
@@ -456,6 +454,7 @@
 		};
 		036DB7B0259FD6510013C3B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 036307D02FF41CA400C9264F /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -485,6 +484,7 @@
 		};
 		036DB7B1259FD6510013C3B7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 036307D02FF41CA400C9264F /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -675,31 +675,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		03AE93DE274322EF00233105 /* XCRemoteSwiftPackageReference "amplify-ios" */ = {
+		036307CC2FF41CA400C9264F /* XCRemoteSwiftPackageReference "SwiftSDK" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/aws-amplify/amplify-ios";
+			repositoryURL = "https://github.com/TelemetryDeck/SwiftSDK";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.14.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		03AE93DF274322EF00233105 /* AWSCognitoAuthPlugin */ = {
+		036307CD2FF41CA400C9264F /* TelemetryDeck */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 03AE93DE274322EF00233105 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSCognitoAuthPlugin;
-		};
-		03AE93E1274322EF00233105 /* AWSPinpointAnalyticsPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 03AE93DE274322EF00233105 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSPinpointAnalyticsPlugin;
-		};
-		03AE93E3274322EF00233105 /* Amplify */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 03AE93DE274322EF00233105 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = Amplify;
+			package = 036307CC2FF41CA400C9264F /* XCRemoteSwiftPackageReference "SwiftSDK" */;
+			productName = TelemetryDeck;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

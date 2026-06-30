@@ -117,7 +117,7 @@ private struct RecordsAppearance: ViewModifier {
   func body(content: Content) -> some View {
     content
       .onAppear {
-        world.analytics.recordViewAppeared(name)
+        world.analytics.signal(name: .viewAppeared, parameters: [ParameterKey.viewName.rawValue: name])
       }
   }
 }

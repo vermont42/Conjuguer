@@ -237,8 +237,8 @@ type. Practical consequences:
   Likewise, deleting a file needs no project edit. This is why new test classes get their own
   files (e.g. `DeeplinkTests.swift`) rather than being appended to an existing file.
 - **All test doubles live in the app target** (`TestApp.swift`, `GetterSetterFake.swift`,
-  `GameCenterStub.swift`, `ReviewPrompterDummy.swift`, `AnalyticsServiceSpy.swift`,
-  `AnalyticsLocaleStub.swift`, `URLProtocolStub.swift`), referenced by `World.swift` for the
+  `GameCenterStub.swift`, `ReviewPrompterDummy.swift`, `AnalyticsSpy.swift`,
+  `URLProtocolStub.swift`), referenced by `World.swift` for the
   simulator/unitTest configs, so the whole `Conjuguer/` tree compiles into one target.
 - The only files inside the synced folders excluded from a target are the per-target
   `Info.plist`s (via `membershipExceptions`); `Conjuguer.entitlements` is wired through
@@ -269,9 +269,22 @@ was dead code and has been removed; `Verb.maxFrequency` holds the highest rank.)
 ### Dependency Injection
 
 The `World` pattern (`Utils/World.swift`) provides dependency injection via a global `Current` variable. Three configurations exist:
-- `device` - Production with real analytics (AWS Amplify/Pinpoint), GameKit, real URLSession
+- `device` - Production with real analytics (TelemetryDeck), GameKit, real URLSession
 - `simulator` - Uses test analytics/GameCenter, stubbed URLSession
 - `unitTest` - Uses in-memory settings (GetterSetterFake), test doubles
+
+### Analytics (TelemetryDeck)
+
+Analytics run through the `Analytics` protocol (`Analytics/Analytics.swift`): events are the
+`AnalyticsName` enum, parameters keyed by `ParameterKey`, sent via
+`Current.analytics.signal(name:parameters:)` (with a no-parameter `signal(name:)` convenience).
+`AnalyticsReal` wraps the TelemetryDeck SDK; `AnalyticsSpy` records signals for tests. The
+TelemetryDeck app ID is **never committed**: it lives in `Conjuguer/Secrets.xcconfig` (gitignored;
+copy `Conjuguer/Secrets.example.xcconfig` to create it), is exposed to the app target as the
+`TELEMETRY_DECK_APP_ID` build setting via the target's `baseConfigurationReference`, surfaced
+through the `TelemetryDeckAppID` Info.plist key, and read in `ConjuguerApp.init()` →
+`Current.analytics.initialize(appID:)`. (There is no `Locale` abstraction; the one VoiceOver site
+that needed region/language reads `Locale.current` directly.)
 
 ### Protocol-Based Abstractions
 
@@ -279,16 +292,15 @@ All external services have protocol abstractions with production and test implem
 - `GetterSetter` → `GetterSetterReal` / `GetterSetterFake`
 - `GameCenter` → `GameCenterReal` / `GameCenterStub`
 - `ReviewPrompter` → `ReviewPrompterReal` / `ReviewPrompterDummy`
-- `AnalyticsService` → `AnalyticsServiceReal` (AWS Pinpoint) / `AnalyticsServiceSpy`
-- `AnalyticsLocale` → `AnalyticsLocaleReal` / `AnalyticsLocaleStub` (named `AnalyticsLocale`, not `Locale`, to avoid shadowing `Foundation.Locale`)
+- `Analytics` → `AnalyticsReal` (TelemetryDeck) / `AnalyticsSpy`
 
 > **Convention — adding a new behavior protocol with real + test-double conformances.** Name the protocol a **plain role noun** — no `-able`/`-Protocol`/`-ing` suffix (`GetterSetter`, `GameCenter`, `ReviewPrompter`). Name the production conformer `<Protocol>Real` and the test double `<Protocol><Role>`, where `<Role>` is the [Fowler test-double type](https://martinfowler.com/bliki/TestDouble.html) that matches what the double actually *does*:
 > - **`Fake`** — a working implementation with a production-unsuitable shortcut, e.g. an in-memory store (`GetterSetterFake`).
-> - **`Stub`** — returns canned answers, no real logic (`GameCenterStub`, `AnalyticsLocaleStub`).
-> - **`Spy`** — a stub that *also records* how it was called, for assertions (`AnalyticsServiceSpy`).
+> - **`Stub`** — returns canned answers, no real logic (`GameCenterStub`).
+> - **`Spy`** — a stub that *also records* how it was called, for assertions (`AnalyticsSpy`).
 > - **`Mock`** — pre-programmed with expectations it verifies. **`Dummy`** — fills a slot but is never exercised for its behavior (`ReviewPrompterDummy`).
 >
-> Because the protocol and all its conformers share a prefix, they **sort together in Xcode's Project Navigator** — the point of the convention (and consistent with the `CatFancy-final` app). One type per file, filename = type name (synced folders bundle them automatically). **Check for a name collision** before settling on the protocol name: the bare noun must be free, so the production type takes `…Real` (the protocol `GameCenter` is only available because the former `GameCenter` class became `GameCenterReal`), and `AnalyticsLocale` avoids shadowing `Foundation.Locale`. Wire the real conformer into `World.device` and the double into `World.simulator` / `.unitTest`. Doubles that conform to a **system** protocol rather than an app one stay outside the scheme — `URLProtocolStub` (Foundation `URLProtocol`) and `TestApp` (SwiftUI `App`, whose real counterpart is `ConjuguerApp`).
+> Because the protocol and all its conformers share a prefix, they **sort together in Xcode's Project Navigator** — the point of the convention (and consistent with the `CatFancy-final` app). One type per file, filename = type name (synced folders bundle them automatically). **Check for a name collision** before settling on the protocol name: the bare noun must be free, so the production type takes `…Real` (the protocol `GameCenter` is only available because the former `GameCenter` class became `GameCenterReal`). Wire the real conformer into `World.device` and the double into `World.simulator` / `.unitTest`. Doubles that conform to a **system** protocol rather than an app one stay outside the scheme — `URLProtocolStub` (Foundation `URLProtocol`) and `TestApp` (SwiftUI `App`, whose real counterpart is `ConjuguerApp`).
 
 ### SwiftUI Structure
 

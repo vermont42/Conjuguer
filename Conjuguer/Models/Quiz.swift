@@ -65,7 +65,9 @@ class Quiz {
     announcePublishedProperties()
     startLiveActivity()
     Current.soundPlayer.play(Sound.randomGun)
-    Current.analytics.recordQuizStart(difficulty: Current.settings.quizDifficulty)
+    Current.analytics.signal(name: .quizStart, parameters: [
+      ParameterKey.difficulty.rawValue: Current.settings.quizDifficulty.rawValue
+    ])
 
     timer = Timer.scheduledTimer(
       withTimeInterval: 1.0,
@@ -86,7 +88,11 @@ class Quiz {
     timer?.invalidate()
     quizState = .notStarted
     endLiveActivity()
-    Current.analytics.recordQuizQuit(difficulty: Current.settings.quizDifficulty, lastQuestionIndex: currentQuestionIndex, elapsedTime: elapsedTime)
+    Current.analytics.signal(name: .quizQuit, parameters: [
+      ParameterKey.difficulty.rawValue: Current.settings.quizDifficulty.rawValue,
+      ParameterKey.lastQuestionIndex.rawValue: "\(currentQuestionIndex)",
+      ParameterKey.elapsedTime.rawValue: "\(elapsedTime)"
+    ])
   }
 
   private func startLiveActivity() {
@@ -423,7 +429,11 @@ class Quiz {
     Current.soundPlayer.play(Sound.randomApplause)
     ChangeDifficultyTip.quizCompleted.sendDonation()
     gameCenter.reportScore(score)
-    Current.analytics.recordQuizCompletion(difficulty: Current.settings.quizDifficulty, elapsedTime: elapsedTime, score: score)
+    Current.analytics.signal(name: .quizCompletion, parameters: [
+      ParameterKey.difficulty.rawValue: Current.settings.quizDifficulty.rawValue,
+      ParameterKey.score.rawValue: "\(score)",
+      ParameterKey.elapsedTime.rawValue: "\(elapsedTime)"
+    ])
     quit()
   }
 
@@ -433,8 +443,8 @@ class Quiz {
       Task { @MainActor in
         try? await Task.sleep(for: .seconds(announcementDelay))
         let currentLocaleString: String
-        let currentRegion = Current.analytics.analyticsLocale.regionCode
-        let currentLanguage = Current.analytics.analyticsLocale.languageCode
+        let currentRegion = Locale.current.region?.identifier ?? "none"
+        let currentLanguage = Locale.current.language.languageCode?.identifier ?? "none"
         if currentLanguage == "fr" {
           currentLocaleString = Utterer.frenchLocaleString
         } else {

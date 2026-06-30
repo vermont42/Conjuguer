@@ -2,22 +2,11 @@
 Conjuguer.xcodeproj/project.xcworkspace/xcuserdata/
 Conjuguer.xcodeproj/xcuserdata/
 
-#amplify-do-not-edit-begin
-amplify
-build/
-dist/
-node_modules/
-aws-exports.js
-awsconfiguration.json
-amplifyconfiguration.json
-amplifyconfiguration.dart
-amplify-build-config.json
-amplify-gradle-config.json
-amplifytools.xcconfig
-.secret-*
-**.sample
-#amplify-do-not-edit-end
+# TelemetryDeck app ID — copy Conjuguer/Secrets.example.xcconfig to
+# Conjuguer/Secrets.xcconfig and fill in your app ID. Never commit Secrets.xcconfig.
+Conjuguer/Secrets.xcconfig
 # ios-build-verify
+build/
 build.log
 .claude/ios-build-verify.*
 docs/screenshots/

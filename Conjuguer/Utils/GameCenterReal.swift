@@ -28,11 +28,11 @@ class GameCenterReal: NSObject, GameCenter {
             self.leaderboardIdentifier = identifier
           }
         }
-        Current.analytics.recordGameCenterAuthSucceeded()
+        Current.analytics.signal(name: .gameCenterAuthSucceeded)
         completion?(true)
       } else {
         self.isAuthenticated = false
-        Current.analytics.recordGameCenterAuthFailed()
+        Current.analytics.signal(name: .gameCenterAuthFailed)
         completion?(false)
       }
     }

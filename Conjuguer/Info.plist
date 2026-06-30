@@ -20,6 +20,8 @@
 	<string>$(MARKETING_VERSION)</string>
   <key>CFBundleSpokenName</key>
   <string>con jew gay</string>
+	<key>TelemetryDeckAppID</key>
+	<string>$(TELEMETRY_DECK_APP_ID)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

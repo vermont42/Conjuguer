@@ -123,7 +123,7 @@ struct SettingsView: View {
 
           settingCard(title: L.Onboarding.onboarding) {
             Button(L.Onboarding.showOnboarding) {
-              world.analytics.recordEvent("tapShowOnboarding")
+              world.analytics.signal(name: .tapShowOnboarding)
               showingOnboarding = true
             }
             .funButton()
@@ -134,7 +134,7 @@ struct SettingsView: View {
 
           settingCard(title: L.Game.sectionTitle) {
             Button(L.Game.playGame) {
-              world.analytics.recordEvent("tapPlayGame")
+              world.analytics.signal(name: .tapPlayGame)
               playGameTip.invalidate(reason: .actionPerformed)
               showingGame = true
             }

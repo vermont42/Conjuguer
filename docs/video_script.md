@@ -8,7 +8,7 @@ First Clip - six seconds
 Starts out at top of VerbBrowse view. Sort by frequency. Slowly scroll down for five seconds.
 Label:
 6,320 French verbs — from abaisser to zyeuter, sorted alphabetically or by frequency.
-6 320 verbes français — d’abaisser à zyeuter, classés par ordre alphabétique ou par fréquence.
+6 320 verbes français — d’abaisser à zyeuter, classés par ordre alphabétique ou par fréquence.
 
 Second Clip - six seconds
 Starts out at top of être's Verb view. Slowly scroll down for five seconds.

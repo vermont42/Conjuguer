@@ -26,7 +26,7 @@ class World {
   var settings: Settings
   var gameCenter: GameCenter
   var quiz: Quiz
-  var analytics: AnalyticsService
+  var analytics: Analytics
   var reviewPrompter: ReviewPrompter
   var getterSetter: GetterSetter
   var languageModelService: LanguageModelService
@@ -45,7 +45,7 @@ class World {
     settings: Settings,
     gameCenter: GameCenter,
     quiz: Quiz,
-    analytics: AnalyticsService,
+    analytics: Analytics,
     reviewPrompter: ReviewPrompter,
     getterSetter: GetterSetter,
     languageModelService: LanguageModelService,
@@ -81,7 +81,7 @@ class World {
     let settings = Settings(getterSetter: getterSetter)
     let gameCenter = GameCenterReal.shared
     let quiz = Quiz(gameCenter: gameCenter)
-    let analytics = AnalyticsServiceReal()
+    let analytics = AnalyticsReal()
     return World(
       settings: settings,
       gameCenter: gameCenter,
@@ -100,7 +100,7 @@ class World {
     let settings = Settings(getterSetter: getterSetter)
     let gameCenter = GameCenterStub()
     let quiz = Quiz(gameCenter: gameCenter)
-    let analytics = AnalyticsServiceSpy()
+    let analytics = AnalyticsSpy()
     return World(
       settings: settings,
       gameCenter: gameCenter,
@@ -119,7 +119,7 @@ class World {
     let settings = Settings(getterSetter: getterSetter)
     let gameCenter = GameCenterStub()
     let quiz = Quiz(gameCenter: gameCenter)
-    let analytics = AnalyticsServiceSpy()
+    let analytics = AnalyticsSpy()
     return World(
       settings: settings,
       gameCenter: gameCenter,
