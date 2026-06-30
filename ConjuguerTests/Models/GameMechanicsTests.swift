@@ -25,7 +25,7 @@ struct GameMechanicsTests {
 
   // MARK: Mechanic 1 — dive-bombers
 
-  @Test func diveLaunchesAndChargesUp() {
+  @Test func diveLaunchesAndChargesUp() throws {
     let game = makeGame()
     game.targets = [Target(kind: .rooster, x: 200, y: 100)]
     game.diveCooldown = 0
@@ -35,9 +35,9 @@ struct GameMechanicsTests {
 
     // After the telegraph window the diver loses its warning and scales up.
     game.updateDivers(dt: GameState.diveWarningDuration + 0.1)
-    let diver = try? #require(game.targets.first { $0.isDiving })
-    #expect(diver?.diveWarningTimer ?? 1 <= 0)
-    #expect(diver?.renderScale == 1.3)
+    let diver = try #require(game.targets.first { $0.isDiving })
+    #expect(diver.diveWarningTimer <= 0)
+    #expect(diver.renderScale == 1.3)
   }
 
   @Test func diversLeaveSmokeTrail() {
@@ -106,11 +106,11 @@ struct GameMechanicsTests {
     #expect(game.chandelier != nil)
   }
 
-  @Test func shootingChandelierTriggersFright() {
+  @Test func shootingChandelierTriggersFright() throws {
     let game = makeGame()
     game.spawnGhosts()
-    let chandelier = try? #require(game.chandelier)
-    game.bullets = [Bullet(x: chandelier?.x ?? 0, y: chandelier?.y ?? 0)]
+    let chandelier = try #require(game.chandelier)
+    game.bullets = [Bullet(x: chandelier.x, y: chandelier.y)]
     game.collideGhosts()
     #expect(game.frightActive)
     #expect(game.chandelier == nil)
@@ -215,7 +215,7 @@ struct GameMechanicsTests {
     #expect(game.targets.first { $0.id == low.id }?.isFrozen == false)
   }
 
-  @Test func convertedMinionRestsAtHorizontalCenter() {
+  @Test func convertedMinionRestsAtHorizontalCenter() throws {
     let game = makeGame()
     // Host is off-center (near the right), but the minion should still rest center.
     game.targets = [Target(kind: .rooster, x: 300, y: 80)]
@@ -226,9 +226,9 @@ struct GameMechanicsTests {
       game.updateRobot(dt: 0.5)
       iterations += 1
     }
-    let minion = try? #require(game.robotMinion)
-    #expect(minion?.homeX == game.screenSize.width / 2)
-    #expect(minion?.homeY == 80) // vertical position unchanged
+    let minion = try #require(game.robotMinion)
+    #expect(minion.homeX == game.screenSize.width / 2)
+    #expect(minion.homeY == 80) // vertical position unchanged
   }
 
   @Test func frozenHostDoesNotScroll() {
