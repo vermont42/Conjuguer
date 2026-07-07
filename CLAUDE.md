@@ -2,6 +2,18 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## TODO: implement the code-review findings
+
+A full code review (2026-07-07) is captured, ranked, and verified in
+[`docs/code-review-findings.md`](docs/code-review-findings.md) — 43 findings across four severity
+tiers, each with a `file:line` and a concrete fix, followed by a phased implementation sequence.
+**They are not yet implemented**, with one exception: finding #38 (the `CorpusFormsDumpTests`
+`.disabled` trim) is already applied. Start with Tier 1: the `nousPrésentStem`
+imparfait/participe-présent bug (~35 verbs), the widget daily-quiz person/tense correlation, the
+robot-minion dive-bomb per-frame damage, the quiz-completion `.quizQuit` double-signal, and the
+negative `info` deep-link crash. Keep this section current — check off or delete items here as they
+land, and remove the section once the doc is fully worked through.
+
 ## Build and Test Commands
 
 This project uses the **`ios-build-verify` Claude Code skill** for building, testing,

@@ -21,9 +21,12 @@ import Testing
 // One form can map to several verbs (homographs: "suis" → être & suivre); the builder records
 // the occurrence under each candidate and lets the LLM-selection step disambiguate from context.
 //
-// Run on demand (it writes a file; it asserts nothing about behavior):
+// Disabled by default (see the @Suite trait): it asserts nothing about behavior, writes files, and
+// runs ~1.25M conjugations (~47s — 97% of the whole test suite's execution time). To regenerate the
+// corpus dumps on demand, temporarily remove the `.disabled(...)` trait, then:
 //   run_tests.sh --only-testing ConjuguerTests/CorpusFormsDumpTests
 @MainActor
+@Suite(.disabled("Build-time corpus tool, not a behavioral test — see the file header to run on demand."))
 struct CorpusFormsDumpTests {
   // Drop single-character tokens ("a", "y", "e"): ultra-noisy and the verbs that emit them
   // (avoir, aller, …) are covered many times over by their longer forms.
