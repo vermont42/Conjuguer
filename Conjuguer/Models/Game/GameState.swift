@@ -63,6 +63,10 @@ final class GameState {
   // After a ball hit, the player is invulnerable to the ball (and the ball only)
   // for this long, so a single overlap can't register on multiple frames.
   static let ballInvulnerabilityDuration: CGFloat = 1.0
+  // After a diving-minion hit, the player is invulnerable to the minion for this
+  // long, so one dive pass (which overlaps the player's row for ~20 frames) costs
+  // one 25% hit instead of instant death.
+  static let minionInvulnerabilityDuration: CGFloat = 1.0
 
   // Mechanic 3: ghost hunt.
   static let ghostCountRange: ClosedRange<Int> = 2 ... 3
@@ -177,6 +181,8 @@ final class GameState {
   var activeSpecial: SpecialMechanic?
   // Counts down after a ball hit; while > 0 the ball can't damage the player.
   var ballInvulnerabilityTimer: CGFloat = 0.0
+  // Counts down after a diving-minion hit; while > 0 the minion can't damage the player.
+  var minionInvulnerabilityTimer: CGFloat = 0.0
   var nextBossScore = GameState.bossScoreThreshold
 
   var playerY: CGFloat {
@@ -333,6 +339,7 @@ final class GameState {
     specialBag = []
     activeSpecial = nil
     ballInvulnerabilityTimer = 0
+    minionInvulnerabilityTimer = 0
     nextBossScore = Self.bossScoreThreshold
 
     fireCooldown = 0

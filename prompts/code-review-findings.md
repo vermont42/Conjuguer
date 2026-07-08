@@ -27,8 +27,12 @@ A suggested implementation sequence is at the end.
 
 ## Tier 1 — Correctness bugs that ship to users
 
-### 1. Imparfait and participe présent are wrong for ~35 verbs (core conjugation engine) — _runtime-confirmed_
+### 1. Imparfait and participe présent are wrong for ~35 verbs (core conjugation engine) — _runtime-confirmed_ — ✅ **implemented 2026-07-08**
 **Category:** bug · **Severity: High** · **`Conjuguer/Models/Conjugator.swift:230`**
+
+> Fixed: `nousPrésentStem` now strips only the trailing `-ons`/`-ONS` ending, per alternate
+> form (the `asseoir → "asseYons/assOYons"` alternate case was caught in test and handled by
+> splitting on `Tense.alternateConjugationSeparator`). Regression coverage: `NousPrésentStemTests`.
 
 `nousPrésentStem` derives the imparfait / participe-présent stem by stripping the `-ons` ending
 from the *nous* présent form, but it uses a **global** replacement:
@@ -72,8 +76,11 @@ This preserves the currently-correct `maudire → maudissant` and `couvrir → c
 (both runtime-verified) while fixing the 35 broken verbs. Add a `Conjugator`/`VerbModelTests`
 case for `consommer` imparfait + participe présent so the regression is pinned.
 
-### 2. Daily-quiz widget: person and tense are perfectly correlated — _confirmed_
+### 2. Daily-quiz widget: person and tense are perfectly correlated — _confirmed_ — ✅ **implemented 2026-07-08**
 **Category:** bug · **Severity: High** · **`Conjuguer/Utils/WidgetSnapshotWriter.swift:104-105`**
+
+> Fixed: tense index is now `(seed / PersonNumber.allCases.count) % quizTenseFamilies.count`,
+> decorrelating it from the person. Also corrected the "simple tenses" comment (passéComposé is compound).
 
 ```swift
 let personNumber = PersonNumber.allCases[seed % PersonNumber.allCases.count]   // seed % 6
@@ -89,8 +96,11 @@ ils/elles→conditionnel présent). Only **6 of 36** possible combinations ever 
 `let tenseIndex = (seed / PersonNumber.allCases.count) % quizTenseFamilies.count`.
 (Minor: the comment on line 13 calls these "the simple tenses" but `passéComposé` is compound.)
 
-### 3. Robot-minion dive-bomb deals per-frame damage — instant death — _confirmed_
+### 3. Robot-minion dive-bomb deals per-frame damage — instant death — _confirmed_ — ✅ **implemented 2026-07-08**
 **Category:** bug · **Severity: High** · **`Conjuguer/Models/Game/GameState+RobotBoss.swift:284-298`**
+
+> Fixed: mirrored the ball's fix — added `minionInvulnerabilityDuration`/`minionInvulnerabilityTimer`,
+> decremented in `updateRobotMinion`, gated `collideMinionWithPlayer` on it, set on hit, reset in `seedWorld`.
 
 This is the un-fixed twin of the soccer-ball overdamage bug that commit `9bb4f3e` fixed with a
 1-second invulnerability window. The diving minion has the same exposure with **no** guard:
@@ -125,8 +135,11 @@ read by the widget — the staleness signal exists and is ignored.
 parameterized) and let providers select by date and emit multi-day timelines; at minimum compare
 `dateString` to today and render an "open Conjuguer to refresh" state.
 
-### 5. Quiz completion emits a spurious `.quizQuit` analytics event (and quit sound) — _confirmed_
+### 5. Quiz completion emits a spurious `.quizQuit` analytics event (and quit sound) — _confirmed_ — ✅ **implemented 2026-07-08**
 **Category:** bug · **Severity: High** · **`Conjuguer/Models/Quiz.swift:420-438`**
+
+> Fixed: extracted a private `teardown()` (invalidate timer, `endLiveActivity()`, `quizState = .notStarted`);
+> `completeQuiz()` now calls `teardown()` directly, and the sad-trombone + `.quizQuit` signal stay in `quit()`.
 
 `completeQuiz()` reuses `quit()` for teardown:
 
@@ -190,8 +203,10 @@ file compiles under two different language modes and isolation defaults.
 **Fix:** set the widget target to 26.0 and `SWIFT_VERSION = 6.0` (+ `MainActor` default) unless 26.2
 is a deliberate API floor — in which case document why and raise the app to match.
 
-### 9. Negative `info` deep-link index crashes the app — _confirmed reachable_
+### 9. Negative `info` deep-link index crashes the app — _confirmed reachable_ — ✅ **implemented 2026-07-08**
 **Category:** bug · **Severity: Medium** · **`Conjuguer/Utils/World.swift:183-188`**
+
+> Fixed: the guard now uses `Info.infos.indices.contains(infoIndex)`, rejecting negative indices.
 
 ```swift
 guard let infoIndex = Int(url.pathComponents[1]), infoIndex < Info.infos.count else { return nil }
@@ -401,12 +416,12 @@ Grouped; each is Low unless noted.
 
 ## Suggested implementation sequence
 
-**Phase 1 — ship-blocking correctness (do first, each is small and independently testable):**
-1. Fix `nousPrésentStem` trailing-strip (#1) and add a `consommer` regression test.
-2. Decorrelate the widget quiz person/tense (#2).
-3. Add the robot-minion invulnerability window (#3).
-4. Split `Quiz.completeQuiz()` teardown from `quit()` (#5).
-5. Guard the negative `info` deep-link index (#9).
+**Phase 1 — ship-blocking correctness (do first, each is small and independently testable):** ✅ **complete 2026-07-08** (all 171 tests pass)
+1. ✅ Fix `nousPrésentStem` trailing-strip (#1) and add a `consommer` regression test (`NousPrésentStemTests`).
+2. ✅ Decorrelate the widget quiz person/tense (#2).
+3. ✅ Add the robot-minion invulnerability window (#3).
+4. ✅ Split `Quiz.completeQuiz()` teardown from `quit()` (#5).
+5. ✅ Guard the negative `info` deep-link index (#9).
 
 **Phase 2 — release hygiene / compliance (before the next App Store submission):**
 6. Rewrite the privacy policy for TelemetryDeck + regenerate HTML (#6).

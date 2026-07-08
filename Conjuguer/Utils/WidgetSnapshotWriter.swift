@@ -10,7 +10,8 @@ enum WidgetSnapshotWriter {
     Calendar.current.date(from: DateComponents(year: 2025, month: 1, day: 1)) ?? Date()
   }()
 
-  // The simple tenses a daily quiz question is drawn from (all carry a person-number).
+  // The tenses a daily quiz question is drawn from (all carry a person-number;
+  // passéComposé is compound, the rest are simple).
   private static let quizTenseFamilies: [(PersonNumber) -> Tense] = [
     Tense.indicatifPrésent,
     Tense.passéComposé,
@@ -102,7 +103,10 @@ enum WidgetSnapshotWriter {
     let daysSinceReference = Calendar.current.dateComponents([.day], from: referenceDate, to: date).day ?? 0
     let seed = abs(daysSinceReference)
     let personNumber = PersonNumber.allCases[seed % PersonNumber.allCases.count]
-    let makeTense = quizTenseFamilies[seed % quizTenseFamilies.count]
+    // Decorrelate the tense from the person: both collections have 6 elements, so
+    // indexing both by `seed % 6` would weld each person to a single tense forever.
+    let tenseIndex = (seed / PersonNumber.allCases.count) % quizTenseFamilies.count
+    let makeTense = quizTenseFamilies[tenseIndex]
     let tense = makeTense(personNumber)
 
     let correctAnswer = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: nil) ?? "—"

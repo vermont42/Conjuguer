@@ -124,6 +124,10 @@ extension GameState {
   }
 
   private func updateRobotMinion(dt: CGFloat) {
+    if minionInvulnerabilityTimer > 0 {
+      minionInvulnerabilityTimer -= dt
+    }
+
     guard var minion = robotMinion else {
       return
     }
@@ -282,6 +286,9 @@ extension GameState {
   }
 
   private func collideMinionWithPlayer() {
+    guard minionInvulnerabilityTimer <= 0 else {
+      return
+    }
     guard let minion = robotMinion, minion.isDiving else {
       return
     }
@@ -294,6 +301,7 @@ extension GameState {
       return
     }
     registerPlayerHit()
+    minionInvulnerabilityTimer = Self.minionInvulnerabilityDuration
     Current.soundPlayer.play(.playerHit, shouldDebounce: false)
   }
 

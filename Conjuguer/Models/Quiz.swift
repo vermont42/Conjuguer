@@ -85,14 +85,21 @@ class Quiz {
 
   func quit() {
     Current.soundPlayer.play(Sound.randomSadTrombone)
-    timer?.invalidate()
-    quizState = .notStarted
-    endLiveActivity()
     Current.analytics.signal(name: .quizQuit, parameters: [
       ParameterKey.difficulty.rawValue: Current.settings.quizDifficulty.rawValue,
       ParameterKey.lastQuestionIndex.rawValue: "\(currentQuestionIndex)",
       ParameterKey.elapsedTime.rawValue: "\(elapsedTime)"
     ])
+    teardown()
+  }
+
+  // Pure teardown shared by quit() and completeQuiz(). Completing a quiz must NOT
+  // route through quit(), which would emit a spurious .quizQuit signal and play the
+  // sad-trombone quit sound over the completion applause.
+  private func teardown() {
+    timer?.invalidate()
+    quizState = .notStarted
+    endLiveActivity()
   }
 
   private func startLiveActivity() {
@@ -434,7 +441,7 @@ class Quiz {
       ParameterKey.score.rawValue: "\(score)",
       ParameterKey.elapsedTime.rawValue: "\(elapsedTime)"
     ])
-    quit()
+    teardown()
   }
 
   private func announcePublishedProperties() {

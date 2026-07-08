@@ -227,8 +227,22 @@ enum Conjugator {
     }
     let ons = IndicatifPrésentGroup.s.présentEndingForPersonNumber(.firstPlural)
     let ONS = ons.uppercased()
-    return value.replacingOccurrences(of: ons, with: "")
-      .replacingOccurrences(of: ONS, with: "")
-      .replacingOccurrences(of: Tense.irregularEndingMarker, with: "")
+    // Strip only the *trailing* -ons ending, not every occurrence: a global
+    // replace would mangle any verb whose stem contains an internal "ons"
+    // (consommer, conseiller, considérer, …). The nous form can carry two
+    // alternates joined by the separator (e.g. asseoir → "asseYons/assOYons"), so
+    // strip the trailing ending from each alternate independently.
+    return value
+      .components(separatedBy: Tense.alternateConjugationSeparator)
+      .map { alternate in
+        var stem = alternate.replacingOccurrences(of: Tense.irregularEndingMarker, with: "")
+        if stem.hasSuffix(ons) {
+          stem = String(stem.dropLast(ons.count))
+        } else if stem.hasSuffix(ONS) {
+          stem = String(stem.dropLast(ONS.count))
+        }
+        return stem
+      }
+      .joined(separator: Tense.alternateConjugationSeparator)
   }
 }

@@ -7,12 +7,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A full code review (2026-07-07) is captured, ranked, and verified in
 [`prompts/code-review-findings.md`](prompts/code-review-findings.md) — 43 findings across four severity
 tiers, each with a `file:line` and a concrete fix, followed by a phased implementation sequence.
-**They are not yet implemented**, with one exception: finding #38 (the `CorpusFormsDumpTests`
-`.disabled` trim) is already applied. Start with Tier 1: the `nousPrésentStem`
-imparfait/participe-présent bug (~35 verbs), the widget daily-quiz person/tense correlation, the
-robot-minion dive-bomb per-frame damage, the quiz-completion `.quizQuit` double-signal, and the
-negative `info` deep-link crash. Keep this section current — check off or delete items here as they
-land, and remove the section once the doc is fully worked through.
+**Phase 1 (ship-blocking correctness) is done (2026-07-08):** #1 `nousPrésentStem` trailing-strip
+(+ `NousPrésentStemTests`), #2 widget quiz person/tense decorrelation, #3 robot-minion
+invulnerability window, #5 `Quiz.completeQuiz()`/`quit()` split, #9 negative `info` deep-link guard.
+Finding #38 (the `CorpusFormsDumpTests` `.disabled` trim) was already applied earlier.
+**Next up:** Phase 2 (release hygiene / compliance) — privacy policy #6, committed app ID #7,
+widget deployment target #8, README/tooling #43. Keep this section current — check off or delete
+items here as they land, and remove the section once the doc is fully worked through.
 
 ## Build and Test Commands
 
