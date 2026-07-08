@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## TODO: implement the code-review findings
 
 A full code review (2026-07-07) is captured, ranked, and verified in
-[`docs/code-review-findings.md`](docs/code-review-findings.md) — 43 findings across four severity
+[`prompts/code-review-findings.md`](prompts/code-review-findings.md) — 43 findings across four severity
 tiers, each with a `file:line` and a concrete fix, followed by a phased implementation sequence.
 **They are not yet implemented**, with one exception: finding #38 (the `CorpusFormsDumpTests`
 `.disabled` trim) is already applied. Start with Tier 1: the `nousPrésentStem`
