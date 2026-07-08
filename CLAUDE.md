@@ -2,65 +2,6 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## TODO: implement the code-review findings
-
-A full code review (2026-07-07) is captured, ranked, and verified in
-[`prompts/code-review-findings.md`](prompts/code-review-findings.md) — 43 findings across four severity
-tiers, each with a `file:line` and a concrete fix, followed by a phased implementation sequence.
-**Phase 1 (ship-blocking correctness) is done (2026-07-08):** #1 `nousPrésentStem` trailing-strip
-(+ `NousPrésentStemTests`), #2 widget quiz person/tense decorrelation, #3 robot-minion
-invulnerability window, #5 `Quiz.completeQuiz()`/`quit()` split, #9 negative `info` deep-link guard.
-Finding #38 (the `CorpusFormsDumpTests` `.disabled` trim) was already applied earlier.
-**Phase 2 (release hygiene / compliance) is done (2026-07-08):** #6 privacy policy rewritten for
-TelemetryDeck (`.md` + `.html` regenerated), #7 committed app ID redacted from `prompts/analytics.md`
-(+ policy wording reconciled above), #8 widget target lowered to iOS 26.0 / raised to Swift 6 +
-`MainActor` isolation (surfaced & fixed a real `AnswerQuizIntent.perform()` isolation bug), #43
-README refreshed (verb count, 2.0 features, Secrets step) + `launchAnalytics.sh` deleted +
-`.claude/settings.local.json` untracked. (Remaining #43 corpus/tooling sub-items deferred.)
-**Phase 3 (widget & Live Activity robustness) is done (2026-07-08):** #4 multi-day snapshot rotation
-(app now writes 7 daily snapshots to `widget-snapshots.json`; both providers emit per-day timeline
-entries with `.atEnd`), #11 FNV-1a shuffle seed (replaces the randomly-seeded `Hasher`), #14 DST-safe
-midnight math, #16 `LargeWidgetView` paradigm bounds guard, #18 locale-/calendar-independent date
-strings — #14/#18 consolidated into a new `Shared/WidgetDateHelper.swift` used by both targets — and
-#13 serialized Live Activity update/end via a chained-`Task` tail + rolling `staleDate: .now + 300`.
-**Phase 4 (correctness edges & concurrency polish) is done (2026-07-08):** #10 `VerbConjugations.clearCache()`
-called from `Settings.pronounGender.didSet` on change (cached cells bake in the gender's pronouns), #12
-per-sound debounce clock (`instantOfLastPlayBySound: [Sound: TimeInterval]` replaces the single shared
-`instantOfLastPlay`), #15 replaced the LMS 5-second forever-poll with an on-demand
-`refreshAvailability()` (added to the `LanguageModelService` protocol + both conformers) called from the
-app's `scenePhase == .active` hook, #17 `Mutex(0)` (`import Synchronization`) guards `ConjugationTool.callCount`
-instead of `nonisolated(unsafe)`, #28 `seedWorld()` now resets `movingLeft`/`movingRight`/`sineTime`/
-`smokeCooldown`/`smokeColorCycle`, #30 `update(currentTime:)` clamps the sim step to `min(rawDt, 1.0/30.0)`
-after the hitch guard.
-**Phase 5 (test coverage) is done (2026-07-08):** #38 (done earlier), #39 quiz-scoring via the
-`Quiz(gameCenter:shouldShuffle: false)` seam (`QuizTests` now asserts the all-correct regular score
-750 = 300 + 450 elapsed bonus, the `.ridiculous` ×2 multiplier → 1050, and `bestScore` write-back),
-#40 new `WidgetSnapshotWriterTests` (verb-of-the-day determinism/rotation, distractor dedup, person/tense
-decorrelation, `yyyy-MM-dd`/`questionID` shape, `truncateToSentenceBoundary` — made internal for the test),
-#41 deep-link branch coverage (`quiz`/`model`/`verb/random`, out-of-range/non-numeric `info`, and
-scheme/component/host rejections), #19 `LocalizationTests` language-pinned via `Conjuguer.xcscheme`'s
-`TestAction` (`language = "en"` / `region = "US"`), #42 pre-commit hook hardened (`--diff-filter=ACMR`,
-`-z` NUL-terminated `read -d ''`, `#!/bin/bash`). Test count 169 → **192 in 16 suites**.
-**Phase 6 (readability & polish) is substantially done (2026-07-08):** #21 `print()` → per-category `os.Logger`s
-(new `Conjuguer/Utils/Log.swift`, `nonisolated enum Log`; 9 sites, dynamic parts `privacy: .public`), #22
-`InfoBrowseView` tutor-unavailable cell is now a `Button` + `@Environment(\.openURL)` (was `.onTapGesture` +
-`UIApplication.shared.open`), #24 `RatingsFetcher.fetchRatingsDescription()` returns `String?` (sentinel deleted,
-caller `if let`), #25 `Quiz.elapsedTimeString` reuses `Int.timeString`, #26 dead `@available(iOS 26, *)` /
-`#if canImport(FoundationModels)` removed from `LanguageModelServiceReal`, #27 the four user-runtime `fatalError`s
-(`Conjugator.nousPrésentStem`, `VerbConjugations.rawConjugation`, `Quiz.process`, `Verb.verbForInfinitif`) degrade
-via `assertionFailure` + fallback. Opportunistic Tier-3 also landed: #29 `sineTime` wraps at `4π`, #31 `HapticPlayer`
-caches one prepared generator per style, #32 `AnswerQuizIntent` guards the tapped question ID before scoring, and
-#23 opaque nav-bar (per the app owner's call, `Modifiers.modifyAppearances()` was deleted so the nav bar / segmented
-pickers use default Apple styling).
-#36 minigame Game Center submission is resolved as won't-fix (score is local-only by design). #20 unlocalized tutor
-chips landed 2026-07-08. The widget-polish trio also landed 2026-07-08: #33 etymology-truncation tilde rebalance +
-real-form quiz distractors (no more synthetic `xx` padding), #34 Live Activity `Text(_, style: .timer)` via a
-`startDate` in `ContentState` + an 8s lingering finished state (`isFinished` now load-bearing), and #35 skip the
-snapshot write + `reloadAllTimelines()` when the freshly-encoded bytes match the on-disk file (test count 192 → 196).
-**Deferred** (heaviest, left for a deliberate follow-up): #37 minigame de-duplication and the #43 corpus/tooling
-sub-items. Keep this section current — check off or delete items here as they land, and remove the section once the
-doc is fully worked through.
-
 ## Build and Test Commands
 
 This project uses the **`ios-build-verify` Claude Code skill** for building, testing,

@@ -535,7 +535,16 @@ Grouped; each is Low unless noted.
   tracked with machine-local paths and broad permission grants (`git rm --cached` + gitignore it); `docs/literature-example-corpus.md`
   has three conflicting "current coverage" figures and an incomplete script table; `merge_classical.py` writes only one
   of the two JSON copies the doc says must stay in sync; `scripts/take_screenshots.sh` and the corpus workflow JS assume
-  cwd = repo root / hardcode an absolute `REPO` path.
+  cwd = repo root / hardcode an absolute `REPO` path. **Fixed (README/`launchAnalytics.sh`/`settings.local.json` in
+  Phase 2; corpus/tooling sub-items 2026-07-08):** `docs/literature-example-corpus.md` now leads with a single
+  source-of-truth coverage figure (1126 entries = 982 ranked + 144 Chanson-only, 100%) and demotes the 974/951/963
+  in-narrative numbers to explicitly-historical waypoints, plus its script table now lists all eight tracked build
+  scripts (was missing the classical tier's `build_classical_index.py`/`mine_classical.workflow.js`/`merge_classical.py`);
+  `merge_classical.py` now writes **both** the `corpus/json/` export and the bundled `Conjuguer/Models/` copy (matching
+  `build_chanson_examples.py`'s dual-write); `scripts/take_screenshots.sh` resolves the repo root from `${BASH_SOURCE}`
+  and `cd`s there (so the relative-cwd `build_app.sh` + `-project`/screenshot paths all work from any directory); and both
+  `mine_examples.workflow.js`/`mine_classical.workflow.js` replace the hardcoded absolute `REPO` with a `'.'` default
+  (subagents Read relative to the repo-root cwd), overridable via `args.repo`.
 
 ---
 
@@ -578,5 +587,8 @@ Grouped; each is Low unless noted.
     `firstBulletIndex`/`removeOverlappingPlayer`/`collectOverlappingPlayer` (three collision shapes), backed by new
     `GameProjectileTests`/`GameDiveArcTests`/`GameCollisionTests`. Test count 196 → **217 in 19 suites** (the minigame
     went from zero unit coverage to a full projectile/dive/collision net).
-    **Deferred** (corpus/tooling only, outside the shipped app target): the remaining #43 sub-items
-    (`docs/literature-example-corpus.md` coverage figures, `merge_classical.py` dual-write, screenshot-script cwd).
+    ✅ Also landed the remaining #43 corpus/tooling sub-items (2026-07-08): reconciled
+    `docs/literature-example-corpus.md` to a single source-of-truth coverage figure + completed its script table,
+    made `merge_classical.py` dual-write both `literature_examples.json` copies, and made `scripts/take_screenshots.sh`
+    + both corpus workflow JS files cwd-independent (repo-root resolution / `'.'`-relative default). **All 43 findings
+    are now resolved** (#36 as won't-fix).

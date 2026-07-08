@@ -5,13 +5,21 @@
 Roland* example nested where one exists. It is a build-time data pipeline, **not part
 of the shipped app target**; only the finished JSON is bundled.
 
+**Current coverage (single source of truth).** `literature_examples.json` covers **all 982
+usage-ranked verbs + the 144 Chanson-only special verbs = 1126 entries (100%)** — mined from
+the corpus tiers, with a residue of Claude-authored sentences where no open corpus uses the
+verb verbally (82 entries, flagged `"source": "Claude (Opus 4.8)"` / `"line": null`). The
+per-stage percentages quoted in the pipeline narrative below (e.g. 974/982, 963/982) are
+**historical waypoints** captured while the pipeline was being built up, *not* the current
+total; when they conflict, this figure governs.
+
 **Pipeline stages (folders):**
 
 | Folder | Contents | Tracked? | Role |
 |---|---|---|---|
 | `corpus/originals/` | Domain-tier subfolders of raw sources: `literature/` (PDFs of Proust, Zola, Flaubert + `chanson-roland-oxford.txt`), `government/` (Swiss/French public-document `.txt`), `technology/` (Swiss NCSC cyber/IT, PD), `wikipedia/` (French Wikipedia, CC BY-SA) | **No** | Raw source material — large and re-fetchable |
 | `corpus/grokked/` | `chanson.md`, `chanson_descendants.json` | **Yes** | Hand-built parsed intermediate: numbered Old French with the modern infinitive bracketed per line, plus a line-by-line Claude translation. `chanson_descendants.json` is the verified Old-French-head → modern-descendant table (see the reflex policy below) |
-| `corpus/working/` | tracked build scripts (`build_chanson_examples.py`, `build_corpus_index.py`, `build_tail_index.py`, `build_literature_examples.py`, `mine_examples.workflow.js`); ignored intermediates (`forms.json`, `corpus_index.json`, `tail_index.json`, `shards/`) and `*.md` progress notes | **Mixed** | Build scripts + regenerable intermediates |
+| `corpus/working/` | tracked build scripts — Chanson: `build_chanson_examples.py`; modern-prose: `build_corpus_index.py`, `build_tail_index.py`, `build_literature_examples.py`, `mine_examples.workflow.js`; classical tier: `build_classical_index.py`, `mine_classical.workflow.js`, `merge_classical.py`. Ignored intermediates (`forms.json`, `forms_all.json`, `corpus_index.json`, `tail_index.json`, `classical_index.json`, `mined_classical.json`, `shards/`, `audit_*.json`) and `*.md` progress notes | **Mixed** | Build scripts + regenerable intermediates |
 | `corpus/json/` | `chanson_examples.json`, `literature_examples.json` | **Yes** | Finished exports, bundled into the app |
 
 **`.gitignore` rule — track only durable artifacts.** The repo tracks finished JSON
@@ -77,9 +85,10 @@ so subagents only do the part that needs judgment. Three stages:
    earliest candidate that is a genuine *verbal* use (rejecting same-spelled nouns like "ancre"),
    re-opens the source at the line for the full clean sentence, and translates it — returning a
    schema-validated array. Write the aggregate to `json/literature_examples.json`, then
-   `build_literature_examples.py report <json>` prints the final author balance. Current coverage:
-   **974/982 ranked verbs (99.2%)**; the 8 zero-coverage verbs are the technical tail
-   (`télécharger`, `reconstruire`, …) for the future technology tier.
+   `build_literature_examples.py report <json>` prints the final author balance. This literature-tier
+   pass reached **974/982 ranked verbs (99.2%)** at the time (a historical waypoint — see the
+   single-source-of-truth figure at the top); the 8 zero-coverage verbs were the technical tail
+   (`télécharger`, `reconstruire`, …) for the then-future technology tier.
 
 **Future work (partially built):** the three novels won't cover the technical tail of the
 ranked verbs, so government- and technology-domain fallback corpora (mirroring
@@ -87,8 +96,9 @@ Konjugieren's `corpus/government/` and `corpus/technology/` tiers) supplement th
 `corpus/originals/`. The **government** tier now exists (`corpus/originals/government/`,
 Swiss/French public documents — see `prompts/get-government-corpus.md` and
 `docs/government-corpus-licensing.md`); the modern-prose pass over the literature + government
-tiers is **built and run** (stages 1–3 above) — `json/literature_examples.json` currently holds
-**951/982** verbs with a balanced example + translation.
+tiers is **built and run** (stages 1–3 above) — `json/literature_examples.json` held
+**951/982** verbs with a balanced example + translation at that stage (another historical
+waypoint; the top-of-doc figure is the current total).
 
 **Tail rescue (`build_tail_index.py`).** Verbs whose surface form equals a common noun
 (`signer`/`signe`, `programmer`/`programme`) initially came back null because the literature-first
@@ -115,7 +125,7 @@ latter four). Each has a tracked provenance manifest under `docs/` recording att
   is the only open source of the consumer/encyclopedic register the software/general verbs need.
   CC BY-SA's attribution + share-alike obligations are documented in that manifest.
 
-Corpus mining reached **963/982 (98.1%)**. The final 19 — inherent form-collisions
+Automated corpus mining topped out at **963/982 (98.1%)**. The final 19 — inherent form-collisions
 (`faillir`↔*falloir*, `plaire`↔"plus", `violer`↔"violent") and noun/adjective-dominant verbs no
 open corpus uses verbally — were filled with **original Claude-authored example sentences**
 (`docs/authored-examples.md`), each carrying `"source": "Claude (Opus 4.8)"` + `"line": null` in
@@ -134,5 +144,6 @@ distinctively-verbal token) → **`mine_classical.workflow.js`** (4 shards, suba
 noun/adjective/pronoun homographs) → **`merge_classical.py`** (merges into `literature_examples.json`
 keyed by verb, refuses to overwrite the existing 982). Result: **81 classical-mined** (36 La
 Fontaine, 45 Molière) + **63 authored** (`docs/classical-authored.md` — 45 absent-from-tier +
-18 homograph-only). Both the `corpus/json/` and bundled `Conjuguer/Models/` copies of
-`literature_examples.json` must stay in sync (the app loads the latter via `ExampleData.swift`).
+18 homograph-only). `merge_classical.py` writes **both** the `corpus/json/` export and the bundled
+`Conjuguer/Models/literature_examples.json` copy (the app loads the latter via `ExampleData.swift`),
+so the two stay in sync — mirroring `build_chanson_examples.py`'s dual-write of `chanson_examples.json`.

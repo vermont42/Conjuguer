@@ -20,8 +20,12 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CORPUS = os.path.dirname(HERE)
+REPO = os.path.dirname(CORPUS)
 LIT_JSON = os.path.join(CORPUS, "json", "literature_examples.json")
 CHANSON_JSON = os.path.join(CORPUS, "json", "chanson_examples.json")
+# The app loads literature_examples from Conjuguer/Models (via ExampleData.swift),
+# so both the corpus export and the bundled copy must stay in sync — write both.
+BUNDLED_LIT_JSON = os.path.join(REPO, "Conjuguer", "Models", "literature_examples.json")
 
 
 def targets():
@@ -77,7 +81,8 @@ def main():
         add(e, added_authored)
 
     out = {k: lit[k] for k in sorted(lit)}
-    json.dump(out, open(LIT_JSON, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    for dest in (LIT_JSON, BUNDLED_LIT_JSON):
+        json.dump(out, open(dest, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
     covered = set(added_mined) | set(added_authored)
     missing = sorted(want - covered - (set(lit) & want))

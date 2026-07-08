@@ -19,6 +19,15 @@
 set -euo pipefail
 
 # ---------------------------------------------------------------------------
+# Repo root (cwd-independent)
+# ---------------------------------------------------------------------------
+# Resolve the repo root from this script's own location (scripts/ is one level
+# below the root) so the driver works from any working directory — screenshots
+# land under <repo>/docs/screenshots and Conjuguer.xcodeproj resolves absolutely.
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+REPO_ROOT=$(cd "$SCRIPT_DIR/.." && pwd)
+
+# ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
 
@@ -357,10 +366,10 @@ read_fixture_answers_path() {
 
 take_screenshot() {
   local slug="$1"
-  mkdir -p "$(pwd)/docs/screenshots"
+  mkdir -p "$REPO_ROOT/docs/screenshots"
   local ts out
   ts=$(date +%Y%m%d-%H%M%S)
-  out="$(pwd)/docs/screenshots/${ts}-${slug}.png"
+  out="$REPO_ROOT/docs/screenshots/${ts}-${slug}.png"
   axe screenshot --udid "$UDID" --output "$out" >/dev/null
   log "captured: $out"
 }
@@ -490,7 +499,7 @@ resolve_ibv_scripts() {
 
 resolve_app_path() {
   local built_dir
-  built_dir=$(xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer \
+  built_dir=$(xcodebuild -project "$REPO_ROOT/Conjuguer.xcodeproj" -scheme Conjuguer \
     -destination 'generic/platform=iOS Simulator' \
     -showBuildSettings 2>/dev/null \
     | awk -F= '/^[[:space:]]+BUILT_PRODUCTS_DIR / { gsub(/^[ \t]+|[ \t]+$/, "", $2); print $2; exit }')
@@ -506,6 +515,11 @@ filter_skip() {
 }
 
 main() {
+  # ios-build-verify's build_app.sh resolves its config + project relative to the
+  # current directory, so anchor cwd at the repo root regardless of where the
+  # driver was invoked from.
+  cd "$REPO_ROOT"
+
   IBV_SCRIPTS=$(resolve_ibv_scripts)
   log "ibv scripts: $IBV_SCRIPTS"
 

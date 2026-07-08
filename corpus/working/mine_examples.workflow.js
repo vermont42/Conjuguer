@@ -13,7 +13,6 @@ export const meta = {
 // The workflow RETURNS { examples: [...] }; write it to corpus/json/literature_examples.json,
 // then `python3 build_literature_examples.py report corpus/json/literature_examples.json`.
 
-const REPO = '/Users/josh/Desktop/workspace/Conjuguer'
 // args may arrive as an object or a JSON string; tolerate both. Falls back to the known shard
 // count (build_literature_examples.py shard currently produces 33) so a bare launch still works.
 let parsedArgs = args
@@ -25,6 +24,10 @@ if (typeof parsedArgs === 'string') {
   }
 }
 const SHARD_COUNT = (parsedArgs && parsedArgs.shardCount) || 33
+// Repo root for the paths handed to subagents. Defaults to '.' — subagents Read
+// relative to the session's working directory (the repo root), so no absolute path is
+// baked in. Override with args.repo (an absolute path) for an out-of-tree run.
+const REPO = (parsedArgs && parsedArgs.repo) || '.'
 
 const SCHEMA = {
   type: 'object',
@@ -55,7 +58,7 @@ function promptFor(i) {
   const shard = `${REPO}/corpus/working/shards/shard_${String(i).padStart(3, '0')}.json`
   return `You are mining French literature for one clean example sentence per verb, for a French-verb learning app.
 
-Read the shard file \`${shard}\`. It is a JSON object mapping each verb (infinitive) to a pre-ordered list of candidate occurrences { doc, line, token, text }: doc = source .txt path (under ${REPO}), line = 1-based line number, token = the matched surface form, text = a ±100-char snippet (… marks truncation).
+Read the shard file \`${shard}\`. It is a JSON object mapping each verb (infinitive) to a pre-ordered list of candidate occurrences { doc, line, token, text }: doc = source .txt path (repo-relative, resolve it under ${REPO}), line = 1-based line number, token = the matched surface form, text = a ±100-char snippet (… marks truncation).
 
 For EVERY verb in the shard:
 1. The candidate list is already ordered so the FIRST candidate is the preferred author — the ordering deliberately balances Flaubert / Proust / Zola across verbs, so RESPECT it: walk the list and choose the EARLIEST candidate that is a genuine, natural VERBAL use of that exact verb. Skip a candidate whose token is actually a same-spelled noun or adjective (e.g. "ancre" the anchor vs. the verb ancrer), or whose snippet is an unusable fragment.

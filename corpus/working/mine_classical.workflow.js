@@ -12,12 +12,15 @@ export const meta = {
 //   Workflow({ scriptPath: 'corpus/working/mine_classical.workflow.js', args: { shardCount: 4 } })
 // RETURNS { examples: [...] }; merge into corpus/json/literature_examples.json keyed by verb.
 
-const REPO = '/Users/josh/Desktop/workspace/Conjuguer'
 let parsedArgs = args
 if (typeof parsedArgs === 'string') {
   try { parsedArgs = JSON.parse(parsedArgs) } catch (e) { parsedArgs = null }
 }
 const SHARD_COUNT = (parsedArgs && parsedArgs.shardCount) || 4
+// Repo root for the paths handed to subagents. Defaults to '.' — subagents Read
+// relative to the session's working directory (the repo root), so no absolute path is
+// baked in. Override with args.repo (an absolute path) for an out-of-tree run.
+const REPO = (parsedArgs && parsedArgs.repo) || '.'
 
 const SCHEMA = {
   type: 'object',
@@ -52,7 +55,7 @@ function promptFor(i) {
   const shard = `${REPO}/corpus/working/shards/shard_${String(i).padStart(3, '0')}.json`
   return `You are mining 17th-century French literature (La Fontaine's *Fables* and Molière's *Œuvres complètes*) for ONE clean example sentence per verb, for a French-verb learning app. These are archaic/literary verbs (occire = to slay, quérir = to fetch, gésir = to lie, ouïr = to hear, honnir = to shame, …) — the example should show the verb used as a genuine VERB.
 
-Read the shard file \`${shard}\`. It is a JSON object mapping each verb (bare infinitive) to a pre-ordered list of candidate occurrences { doc, line, token, text }: doc = source .txt path (under ${REPO}), line = 1-based physical line number, token = the matched surface form, text = a ±100-char snippet (… marks truncation). The list is ordered so the most distinctively-verbal tokens (infinitive/participle/gerund) come first — respect that ordering.
+Read the shard file \`${shard}\`. It is a JSON object mapping each verb (bare infinitive) to a pre-ordered list of candidate occurrences { doc, line, token, text }: doc = source .txt path (repo-relative, resolve it under ${REPO}), line = 1-based physical line number, token = the matched surface form, text = a ±100-char snippet (… marks truncation). The list is ordered so the most distinctively-verbal tokens (infinitive/participle/gerund) come first — respect that ordering.
 
 CRITICAL — reject homographs. Many candidates match a same-spelled NOUN, ADJECTIVE, or PRONOUN, not the verb. Known traps in this batch: ${FALSE_POSITIVES}. For each candidate, read its snippet (and the source line) and confirm the token is genuinely the conjugated VERB in context (subject performing the action), not the homograph. Skip any candidate that is the noun/adjective/pronoun.
 
