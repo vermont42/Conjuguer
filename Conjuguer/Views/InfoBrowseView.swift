@@ -51,6 +51,7 @@ struct InfoBrowseView: View {
         .sheetDismissable()
     }
     .recordsAppearance(as: "\(InfoBrowseView.self)")
+    .onAppear { world.languageModelService.refreshAvailability() }
   }
 
   @ViewBuilder
