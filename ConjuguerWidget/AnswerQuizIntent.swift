@@ -31,6 +31,13 @@ struct AnswerQuizIntent: AppIntent {
       return .result()
     }
 
+    // If the snapshot rotated between render and tap, the tapped answer belongs to a
+    // question that is no longer shown — don't record a mismatched result; just refresh.
+    guard questionID == snapshot.quizQuestion.questionID else {
+      WidgetCenter.shared.reloadTimelines(ofKind: "QuizWidget")
+      return .result()
+    }
+
     let isCorrect = selectedAnswer == snapshot.quizQuestion.correctAnswer
     defaults.set(true, forKey: WidgetConstants.quizAnsweredKey)
     defaults.set(isCorrect, forKey: WidgetConstants.quizCorrectKey)

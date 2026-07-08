@@ -8,6 +8,7 @@
 
 import Foundation
 import Observation
+import os
 import UIKit
 
 @Observable
@@ -125,7 +126,7 @@ class Settings {
     }
     UIApplication.shared.setAlternateIconName(desiredName) { error in
       if let error {
-        print("Could not set alternate app icon: \(error.localizedDescription)")
+        Log.settings.error("Could not set alternate app icon: \(error.localizedDescription, privacy: .public)")
       }
     }
   }

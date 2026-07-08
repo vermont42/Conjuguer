@@ -41,9 +41,21 @@ decorrelation, `yyyy-MM-dd`/`questionID` shape, `truncateToSentenceBoundary` —
 scheme/component/host rejections), #19 `LocalizationTests` language-pinned via `Conjuguer.xcscheme`'s
 `TestAction` (`language = "en"` / `region = "US"`), #42 pre-commit hook hardened (`--diff-filter=ACMR`,
 `-z` NUL-terminated `read -d ''`, `#!/bin/bash`). Test count 169 → **192 in 16 suites**.
-**Next up:** Phase 6 (readability & polish, opportunistic) — #21, #22, #24, #26, #27, #37, and the
-remaining Tier-3 items. Keep this section current — check off or delete items here as they land, and
-remove the section once the doc is fully worked through.
+**Phase 6 (readability & polish) is substantially done (2026-07-08):** #21 `print()` → per-category `os.Logger`s
+(new `Conjuguer/Utils/Log.swift`, `nonisolated enum Log`; 9 sites, dynamic parts `privacy: .public`), #22
+`InfoBrowseView` tutor-unavailable cell is now a `Button` + `@Environment(\.openURL)` (was `.onTapGesture` +
+`UIApplication.shared.open`), #24 `RatingsFetcher.fetchRatingsDescription()` returns `String?` (sentinel deleted,
+caller `if let`), #25 `Quiz.elapsedTimeString` reuses `Int.timeString`, #26 dead `@available(iOS 26, *)` /
+`#if canImport(FoundationModels)` removed from `LanguageModelServiceReal`, #27 the four user-runtime `fatalError`s
+(`Conjugator.nousPrésentStem`, `VerbConjugations.rawConjugation`, `Quiz.process`, `Verb.verbForInfinitif`) degrade
+via `assertionFailure` + fallback. Opportunistic Tier-3 also landed: #29 `sineTime` wraps at `4π`, #31 `HapticPlayer`
+caches one prepared generator per style, #32 `AnswerQuizIntent` guards the tapped question ID before scoring, and
+#23 opaque nav-bar (per the app owner's call, `Modifiers.modifyAppearances()` was deleted so the nav bar / segmented
+pickers use default Apple styling).
+**Deferred** (heavier / design calls): #37 minigame de-duplication, #20 unlocalized tutor chips,
+#33 etymology-truncation markup, #34 Live Activity `.timer` text, #35 skip-unchanged snapshot write, #36 minigame
+Game Center submission. Keep this section current — check off or delete items here as they land, and remove the
+section once the doc is fully worked through.
 
 ## Build and Test Commands
 

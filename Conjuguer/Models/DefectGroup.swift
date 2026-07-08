@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os
 
 struct DefectGroup {
   static var defectGroups: [String: DefectGroup] = [:]
@@ -63,7 +64,10 @@ struct DefectGroup {
     }
 
     guard var tenses = Tense.tensesForShorthand(code) else {
-      print("Skipping unrecognized defect code \(code) in defect group \(id).")
+      // Bind id to a local: the os interpolation's escaping autoclosure can't capture
+      // the mutating self of this method.
+      let groupId = id
+      Log.parsing.error("Skipping unrecognized defect code \(code, privacy: .public) in defect group \(groupId, privacy: .public).")
       return
     }
 

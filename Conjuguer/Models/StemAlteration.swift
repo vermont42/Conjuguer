@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os
 
 nonisolated struct StemAlteration: Hashable {
   let type: StemAlterationType
@@ -19,14 +20,14 @@ nonisolated struct StemAlteration: Hashable {
     let components = xmlString.components(separatedBy: VerbModelParser.xmlSeparator)
 
     guard components.count >= 3 else {
-      print("Skipping partial alteration: XML string \(xmlString) did not have enough components.")
+      Log.parsing.error("Skipping partial alteration: XML string \(xmlString, privacy: .public) did not have enough components.")
       return nil
     }
 
     let startIndexOfAlterationsInXml: Int
     if let convertedStartIndexFromLast = Int(components[0]) {
       guard let convertedCharsToReplaceCount = Int(components[1]) else {
-        print("Skipping partial alteration \(xmlString): \(components[1]) is not a valid Int.")
+        Log.parsing.error("Skipping partial alteration \(xmlString, privacy: .public): \(components[1], privacy: .public) is not a valid Int.")
         return nil
       }
       type = .indexBased(startIndexFromLast: convertedStartIndexFromLast, charsToReplaceCount: convertedCharsToReplaceCount)
@@ -52,7 +53,7 @@ nonisolated struct StemAlteration: Hashable {
         isInheritedAlteration = false
       default:
         guard let tenses = Tense.tensesForShorthand(alteration) else {
-          print("Skipping partial alteration \(xmlString): unrecognized component \(alteration).")
+          Log.parsing.error("Skipping partial alteration \(xmlString, privacy: .public): unrecognized component \(alteration, privacy: .public).")
           return nil
         }
         set.formUnion(tenses)

@@ -29,9 +29,10 @@ class Quiz {
   private var shouldShuffle = true
   private var liveActivity: Activity<QuizActivityAttributes>?
 
-  // Elapsed time formatted m:ss for the Live Activity.
+  // Elapsed time for the Live Activity. Reuses Int.timeString so it matches the in-app
+  // formatting past an hour (1:01:05, not 61:05) rather than diverging.
   var elapsedTimeString: String {
-    String(format: "%d:%02d", elapsedTime / 60, elapsedTime % 60)
+    elapsedTime.timeString
   }
 
   private var correctCount: Int {
@@ -389,8 +390,14 @@ class Quiz {
     let question = questions[currentQuestionIndex]
     let verb = question.verb
     let tense = question.tense
-    guard let correctAnswers = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: nil) else {
-      fatalError("Conjugation failed.")
+    let correctAnswers: String
+    if let answers = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: nil) {
+      correctAnswers = answers
+    } else {
+      // Unreachable with today's data; degrade to an empty correct answer (scored as
+      // incorrect) so the quiz still advances instead of crashing mid-run.
+      assertionFailure("Conjugation failed.")
+      correctAnswers = ""
     }
     let conjugationResult = ConjugationResult.score(correctAnswers: correctAnswers, proposedAnswer: proposedAnswer)
     if currentQuestionIndex != questions.count - 1 {

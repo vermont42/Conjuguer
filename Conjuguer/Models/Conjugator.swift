@@ -223,7 +223,10 @@ enum Conjugator {
 
   static func nousPrésentStem(infinitif: String, extraLetters: String? = nil) -> String {
     guard let value = Conjugator.conjugatedString(infinitif: infinitif, tense: .indicatifPrésent(.firstPlural), extraLetters: extraLetters) else {
-      fatalError("Could not conjugate nous indicatifPrésent for \(infinitif).")
+      // Unreachable with today's data, but a future data typo shouldn't crash a user
+      // mid-conjugation. Assert for the debug signal and degrade to an empty stem.
+      assertionFailure("Could not conjugate nous indicatifPrésent for \(infinitif).")
+      return ""
     }
     let ons = IndicatifPrésentGroup.s.présentEndingForPersonNumber(.firstPlural)
     let ONS = ons.uppercased()

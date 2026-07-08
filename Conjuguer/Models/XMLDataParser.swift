@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os
 
 nonisolated class XMLDataParser: NSObject, XMLParserDelegate {
   let parser: XMLParser?
@@ -30,7 +31,7 @@ nonisolated class XMLDataParser: NSObject, XMLParserDelegate {
 
   func require(_ key: String, from attributes: [String: String], element: String) -> String? {
     guard let value = attributes[key] else {
-      print("Skipping <\(element)>: required attribute '\(key)' is missing.")
+      Log.parsing.error("Skipping <\(element, privacy: .public)>: required attribute '\(key, privacy: .public)' is missing.")
       currentElementIsValid = false
       return nil
     }

@@ -77,8 +77,20 @@ struct Verb: Identifiable, Hashable {
   static func verbForInfinitif(_ infinitif: String) -> Verb {
     if let verb = verbs[infinitif] {
       return verb
-    } else {
-      fatalError("Could not retrieve verb for \(infinitif).")
     }
+    // Unreachable with today's data (callers pass known infinitifs); a future data typo
+    // degrades to a placeholder regular -er verb rather than crashing the user.
+    assertionFailure("Could not retrieve verb for \(infinitif).")
+    return Verb(
+      infinitif: infinitif,
+      translation: "",
+      model: "1-1",
+      auxiliary: .avoir,
+      isReflexive: false,
+      hasAspiratedH: false,
+      frequency: nil,
+      extraLetters: nil,
+      defectGroupId: nil
+    )
   }
 }

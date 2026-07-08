@@ -6,13 +6,14 @@
 //
 
 import AVFoundation
+import os
 
 enum AudioSession {
   static func configure() {
     do {
       try AVAudioSession.sharedInstance().setCategory(.playback, options: .mixWithOthers)
     } catch {
-      print("Could not configure audio session: \(error.localizedDescription)")
+      Log.audio.error("Could not configure audio session: \(error.localizedDescription, privacy: .public)")
     }
   }
 }

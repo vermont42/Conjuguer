@@ -130,7 +130,10 @@ struct VerbConjugations {
 
   static func rawConjugation(verb: Verb, tense: Tense) -> String {
     guard let conjugation = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) else {
-      fatalError("Could not conjugate \(verb.infinitif) for \(tense.titleCaseName).")
+      // Unreachable with today's data; a future data typo degrades to an empty cell
+      // rather than crashing the user mid-browse.
+      assertionFailure("Could not conjugate \(verb.infinitif) for \(tense.titleCaseName).")
+      return ""
     }
     return conjugation
   }

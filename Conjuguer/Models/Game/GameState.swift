@@ -438,7 +438,11 @@ final class GameState {
     // intersection tests. Normal ~1/60s frames are well under this cap.
     let dt = min(rawDt, 1.0 / 30.0)
 
-    sineTime += Double(dt) * 3.0
+    // Wrap at 4π so long sessions don't push the phase argument of sin(sineTime * k)
+    // into the hundreds of thousands. 4π is an even multiple of 2π and keeps every
+    // multiplier used in GameView (integer factors plus the 1.5 hen factor) continuous
+    // across the wrap.
+    sineTime = (sineTime + Double(dt) * 3.0).truncatingRemainder(dividingBy: 4.0 * .pi)
 
     updateCooldowns(dt: dt)
     updatePlayer(dt: dt)

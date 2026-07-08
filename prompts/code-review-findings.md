@@ -367,40 +367,68 @@ Grouped; each is Low unless noted.
 - **21. `print()` in production paths** (9 sites: `Settings.swift:124`, `VerbModel.swift:75`,
   `XMLDataParser.swift:33`, `StemAlteration.swift:22/29/55`, `DefectGroupParser.swift`, `AudioSession.swift:15`,
   `DefectGroup.swift`): unfilterable and lost in release. The repo already has an `os.Logger` precedent in
-  `LanguageModelServiceReal`; route these through per-category `Logger`s.
+  `LanguageModelServiceReal`; route these through per-category `Logger`s. — ✅ **implemented 2026-07-08**: new
+  `Conjuguer/Utils/Log.swift` (`nonisolated enum Log`) exposes per-category `Logger`s (`parsing`, `settings`,
+  `audio`, `verbModel`); all 9 `print` sites now log via them at `.error` with `privacy: .public` on the dynamic
+  parts. (`import os` added to each using file; `DefectGroup`/`DefectGroupParser` bind the captured property to a
+  local so the `os` interpolation's escaping autoclosure doesn't capture mutating/reference `self`.) The `print`
+  sites in the `InputView` dev tool and `GameCenterStub` test double were intentionally left as-is.
 - **22. `.onTapGesture` + `UIApplication.shared.open`** (`InfoBrowseView.swift:179-184`): the tutor-unavailable
-  cell should be a `Button` calling the `\.openURL` environment action (already used in `SettingsView.swift`).
+  cell should be a `Button` calling the `\.openURL` environment action (already used in `SettingsView.swift`). — ✅
+  **implemented 2026-07-08**: `tutorUnavailableCell` now returns a `Button { openURL(url) }` (via a new
+  `@Environment(\.openURL)`) for the `.appleIntelligenceNotEnabled` state, falling back to a plain
+  `tutorUnavailableContent` for the informational reasons; the `.onTapGesture` + `UIApplication.shared.open` are gone.
 - **23. Opaque nav-bar appearance fights iOS 26 glass** (`Modifiers.swift:11-28`, _design call_):
   `configureWithOpaqueBackground()` app-wide is at odds with the app's own `.buttonStyle(.glass)`. Consider
   per-stack `.toolbarBackground(...)`; keep the branded Work Sans title fonts if desired, but as a deliberate
-  choice.
+  choice. — ✅ **implemented 2026-07-08**: per the app owner's call, dropped the customization entirely and went
+  with default Apple behavior — `Modifiers.modifyAppearances()` (the opaque nav-bar `UINavigationBarAppearance` +
+  Work Sans/`customBlue` title fonts and the `UISegmentedControl` title-color proxy) is deleted along with its
+  `ConjuguerApp.init()` call, so the nav bar uses the system glass appearance and the segmented pickers use the
+  system style.
 - **24. Stringly-typed error sentinel** (`RatingsFetcher.swift:12,47` + `SettingsView.swift:156`):
   `fetchRatingsDescription()` returns `"Fetching failed."` and the caller string-compares it. Return `String?`
-  and `if let`.
+  and `if let`. — ✅ **implemented 2026-07-08**: `fetchRatingsDescription()` now returns `String?` (`nil` on failure);
+  the `errorMessage` sentinel is deleted and the `SettingsView` caller is a plain `if let`.
 - **25. `elapsedTimeString` vs `Int.timeString` divergence** (`Quiz.swift:33-35`): the Live Activity's
   `String(format: "%d:%02d", ...)` shows `61:05` where the in-app `Int.timeString` shows `1:01:05` past an hour.
-  Reuse `elapsedTime.timeString`.
+  Reuse `elapsedTime.timeString`. — ✅ **implemented 2026-07-08**: `elapsedTimeString` now returns
+  `elapsedTime.timeString`, matching the in-app formatting past an hour.
 - **26. Dead availability annotations** (`LanguageModelServiceReal.swift:17,206`): `@available(iOS 26, *)` and
-  `#if canImport(FoundationModels)` can never exclude anything at a 26.0 floor. Delete them.
+  `#if canImport(FoundationModels)` can never exclude anything at a 26.0 floor. Delete them. — ✅ **implemented
+  2026-07-08**: both `@available(iOS 26, *)` attributes and the `#if canImport(FoundationModels)` fence are gone;
+  `import FoundationModels` is now unconditional.
 - **27. `fatalError` in user-runtime paths** (`Quiz.swift:386`, `VerbConjugations.swift:126`, `Conjugator.swift:226`,
   `Verb.swift:81`): unreachable with today's data, but a future data typo becomes a user crash mid-quiz. Degrade
-  gracefully with `assertionFailure` for the debug signal; keep hard crashes for parse-time integrity only.
+  gracefully with `assertionFailure` for the debug signal; keep hard crashes for parse-time integrity only. — ✅
+  **implemented 2026-07-08**: all four are now `assertionFailure` + a graceful fallback —
+  `Conjugator.nousPrésentStem`/`VerbConjugations.rawConjugation` return `""`, `Quiz.process` treats the missing
+  conjugation as an empty correct answer (scored incorrect, quiz still advances), and `Verb.verbForInfinitif`
+  returns a placeholder regular `-er` verb. The parse-time `fatalError`s (`VerbModel`, `PersonNumber`, the XML
+  group inits) are left as hard crashes.
 - **28. `restart()` leaves transient game fields unreset** (`GameState.swift:297-345`) — ✅ **implemented 2026-07-08**: `movingLeft`/`movingRight`,
   `sineTime`, `smokeCooldown`, `smokeColorCycle` survive a restart; a held arrow at game-over makes the ship drift
   on "Play Again." Reset them in `seedWorld`. **Fixed:** `seedWorld()` now zeroes all five.
 - **29. `sineTime` accumulates unbounded** (`GameState.swift:135,421`): never wrapped or reset; long sessions push
   `sin(sineTime * 47)` phase arguments into the hundreds of thousands (cosmetic drift). Wrap with
-  `truncatingRemainder` and reset in `seedWorld`.
+  `truncatingRemainder` and reset in `seedWorld`. — ✅ **implemented 2026-07-08**: the accumulation now wraps with
+  `.truncatingRemainder(dividingBy: 4.0 * .pi)` (an even multiple of 2π that keeps every GameView multiplier —
+  integer factors plus the 1.5 hen factor — continuous across the wrap); the `seedWorld` reset was already added in
+  Phase 4 (#28).
 - **30. dt clamp permits a ~1s catch-up step** (`GameState.swift:407-419`) — ✅ **implemented 2026-07-08**: a 0.9s hitch is applied in full
   (ball moves ~810pt in one step, can tunnel intersection tests). Clamp to a max sim step, e.g.
   `min(rawDt, 1.0/30.0)`. **Fixed:** `update(currentTime:)` keeps the `rawDt < 1` first-frame/background
   guard, then applies `let dt = min(rawDt, 1.0 / 30.0)` to every sub-update.
 - **31. `HapticPlayer` allocates a fresh generator per hit** (`HapticPlayer.swift:9-11`): `UIImpactFeedbackGenerator(...)`
-  per call with no `prepare()` — churn and weaker/late haptics. Cache one generator per style and `prepare()`.
+  per call with no `prepare()` — churn and weaker/late haptics. Cache one generator per style and `prepare()`. — ✅
+  **implemented 2026-07-08**: `HapticPlayer` now caches one `prepare()`-d generator per `FeedbackStyle` in a static
+  dictionary and re-`prepare()`s after each `impactOccurred()` to keep the Taptic Engine warm.
 - **32. `AnswerQuizIntent` scores without matching the question ID** (`AnswerQuizIntent.swift:33-36`): stores
   correctness under the tapped `questionID` without checking it equals `snapshot.quizQuestion.questionID`; if the
   snapshot rotated between render and tap, the stored record is wrong (hidden today by the provider's ID gate).
-  Guard on ID equality before scoring.
+  Guard on ID equality before scoring. — ✅ **implemented 2026-07-08**: `perform()` now guards
+  `questionID == snapshot.quizQuestion.questionID` before scoring; on a mismatch (snapshot rotated between render and
+  tap) it skips the write and just reloads the timeline.
 - **33. Etymology truncation can cut inside `~…~` markup** (`WidgetSnapshotWriter.swift:149-165`): an odd tilde
   count bolds the whole tail; the `correctAnswer + "xx"` distractor fallback can surface fake options like
   `parlonsxx`. Rebalance a dangling tilde after truncation; prefer real forms from other tenses as distractors.
@@ -494,5 +522,8 @@ Grouped; each is Low unless noted.
 **Phase 5 — test coverage (lock in the above, then broaden):** ✅ **complete 2026-07-08** (192 tests in 16 suites pass; up from 169)
 12. ✅ Took `CorpusFormsDumpTests` out of the default run (#38, earlier); ✅ added quiz-scoring (#39), ✅ `WidgetSnapshotWriter` (#40), and ✅ deep-link-branch (#41) suites; ✅ pinned `LocalizationTests` language via the scheme `TestAction` (#19); ✅ hardened the pre-commit hook (#42).
 
-**Phase 6 — readability & polish (opportunistic, low risk):**
-13. `Logger` migration (#21), `Button`+`openURL` (#22), sentinel→`String?` (#24), dead-availability cleanup (#26), `fatalError`→`assertionFailure` in runtime paths (#27), minigame de-duplication (#37), and the remaining Tier-3 items as they're touched.
+**Phase 6 — readability & polish (opportunistic, low risk):** ✅ **substantially complete 2026-07-08** (192 tests in 16 suites pass; app + widget build clean; SwiftLint `--strict` clean)
+13. ✅ `Logger` migration (#21, new `Conjuguer/Utils/Log.swift`), ✅ `Button`+`openURL` (#22), ✅ sentinel→`String?` (#24), ✅ dead-availability cleanup (#26), ✅ `fatalError`→`assertionFailure` in runtime paths (#27). Opportunistically also landed the cheap Tier-3 items ✅ `elapsedTimeString`→`Int.timeString` (#25), ✅ `sineTime` wrap (#29), ✅ `HapticPlayer` cached generators (#31), and ✅ `AnswerQuizIntent` question-ID guard (#32).
+    ✅ Also landed #23 opaque nav-bar — the app owner opted for default Apple behavior, so the appearance-proxy
+    customization was removed entirely.
+    **Deferred** (heavier or design calls, left for a deliberate follow-up): #37 minigame de-duplication (large refactor of untested game code), #20 unlocalized tutor chips (needs `fr` translations or a deliberate-English note), #33 etymology-truncation markup rebalance, #34 Live Activity `Text(style: .timer)` / dead `isFinished`, #35 skip-unchanged snapshot write, and #36 minigame Game Center submission (flagged local-only choice).

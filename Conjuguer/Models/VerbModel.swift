@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os
 
 struct VerbModel: Identifiable, Hashable {
   static var models: [String: VerbModel] = [:]
@@ -72,7 +73,7 @@ struct VerbModel: Identifiable, Hashable {
         .joined(separator: ", ")
       )
     } catch {
-      print("Could not build deep-linked verb list for model \(id): \(error.localizedDescription)")
+      Log.verbModel.error("Could not build deep-linked verb list for model \(id, privacy: .public): \(error.localizedDescription, privacy: .public)")
       return AttributedString("")
     }
   }

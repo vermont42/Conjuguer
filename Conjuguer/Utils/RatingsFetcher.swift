@@ -9,7 +9,6 @@ import Foundation
 
 enum RatingsFetcher {
   static let iTunesID = "1588624373"
-  static let errorMessage = "Fetching failed."
 
   private static let urlInitializationMessage = " URL could not be initialized."
 
@@ -35,7 +34,9 @@ enum RatingsFetcher {
     let results: [Result]
   }
 
-  @MainActor static func fetchRatingsDescription() async -> String {
+  // Returns nil (rather than a sentinel string the caller must string-compare) when the
+  // ratings lookup fails, so the caller can simply `if let` a real description.
+  @MainActor static func fetchRatingsDescription() async -> String? {
     let request = URLRequest(url: RatingsFetcher.iTunesURL)
     let exhortation = " Ajoutez la vôtre." // Not a bug.
 
@@ -44,7 +45,7 @@ enum RatingsFetcher {
       let response = try? JSONDecoder().decode(LookupResponse.self, from: data),
       response.results.count == 1
     else {
-      return errorMessage
+      return nil
     }
 
     let ratingsCount = response.results[0].userRatingCountForCurrentVersion ?? 0

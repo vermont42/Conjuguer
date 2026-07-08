@@ -10,6 +10,7 @@ import SwiftUI
 struct InfoBrowseView: View {
   @Environment(World.self) private var world
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+  @Environment(\.openURL) private var openURL
   @State private var navigationPath = NavigationPath()
 
   private static let tutorRoute = "tutor"
@@ -157,7 +158,24 @@ struct InfoBrowseView: View {
     .contentShape(Rectangle())
   }
 
+  @ViewBuilder
   private func tutorUnavailableCell(reason: LanguageModelUnavailability) -> some View {
+    // Only the "Apple Intelligence off" state links anywhere (to Settings); the other
+    // reasons are informational. When it does link, use a Button + the openURL action
+    // rather than an .onTapGesture + UIApplication.shared.open.
+    if reason == .appleIntelligenceNotEnabled, let url = URL(string: UIApplication.openSettingsURLString) {
+      Button {
+        openURL(url)
+      } label: {
+        tutorUnavailableContent(reason: reason)
+      }
+      .buttonStyle(.plain)
+    } else {
+      tutorUnavailableContent(reason: reason)
+    }
+  }
+
+  private func tutorUnavailableContent(reason: LanguageModelUnavailability) -> some View {
     HStack(alignment: .top, spacing: Layout.defaultSpacing) {
       VStack(alignment: .leading, spacing: 4) {
         Text(L.Tutor.heading)
@@ -177,12 +195,6 @@ struct InfoBrowseView: View {
         .accessibilityHidden(true)
     }
     .contentShape(Rectangle())
-    .onTapGesture {
-      guard reason == .appleIntelligenceNotEnabled, let url = URL(string: UIApplication.openSettingsURLString) else {
-        return
-      }
-      UIApplication.shared.open(url)
-    }
   }
 
   private func reasonText(_ reason: LanguageModelUnavailability) -> String {

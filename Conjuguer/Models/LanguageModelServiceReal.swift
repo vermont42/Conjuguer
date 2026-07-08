@@ -6,16 +6,16 @@
 //
 
 import Foundation
+import FoundationModels
 import os
 import Synchronization
 
-#if canImport(FoundationModels)
-import FoundationModels
-#endif
+// The app's deployment target is iOS 26.0, so FoundationModels is always importable and
+// every symbol below is unconditionally available — no `@available(iOS 26, *)` guards or
+// `#if canImport(FoundationModels)` fences are needed (they could never exclude anything).
 
 nonisolated private let lmsLogger = Logger(subsystem: "software.racecondition.Conjuguer", category: "LanguageModelService")
 
-@available(iOS 26, *)
 @MainActor
 @Observable
 class LanguageModelServiceReal: LanguageModelService {
@@ -198,7 +198,6 @@ class LanguageModelServiceReal: LanguageModelService {
   }
 }
 
-@available(iOS 26, *)
 struct ConjugationTool: Tool {
   let name = "conjugateVerb"
   let description = "Look up a French verb conjugation"

@@ -7,27 +7,6 @@
 
 import SwiftUI
 
-enum Modifiers {
-  static func modifyAppearances() {
-    let navBarAppearance = UINavigationBarAppearance()
-    navBarAppearance.configureWithOpaqueBackground()
-    navBarAppearance.backgroundColor = UIColor(Color.customBackground)
-    navBarAppearance.shadowColor = .clear
-    UIFont(name: workSansSemiBold, size: 24).map {
-      navBarAppearance.largeTitleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customBlue)]
-    }
-    UIFont(name: workSansSemiBold, size: 18).map {
-      navBarAppearance.titleTextAttributes = [.font: $0, .foregroundColor: UIColor(Color.customBlue)]
-    }
-    UINavigationBar.appearance().standardAppearance = navBarAppearance
-    UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
-    UINavigationBar.appearance().compactAppearance = navBarAppearance
-
-    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color.customBlue)], for: .selected)
-    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color.customBlue)], for: .normal)
-  }
-}
-
 extension View {
   func leftAligned() -> some View {
     modifier(LeftAligned())

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os
 
 nonisolated class DefectGroupParser: XMLDataParser {
   private let defectGroupTag = "defectGroup"
@@ -68,7 +69,7 @@ nonisolated class DefectGroupParser: XMLDataParser {
         let currentUsesOnly = currentUsesOnly,
         let currentDoesntUse = currentDoesntUse
       {
-        print("Skipping <\(defectGroupTag)> \(currentId): both usesOnly (\(currentUsesOnly)) and doesntUse (\(currentDoesntUse)) were specified.")
+        Log.parsing.error("Skipping <\(self.defectGroupTag, privacy: .public)> \(self.currentId, privacy: .public): both usesOnly (\(currentUsesOnly, privacy: .public)) and doesntUse (\(currentDoesntUse, privacy: .public)) were specified.")
         return
       }
 

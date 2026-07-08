@@ -152,8 +152,7 @@ struct SettingsView: View {
     .padding(.top, Layout.tripleDefaultSpacing)
     .recordsAppearance(as: "\(SettingsView.self)")
     .task {
-      let description = await RatingsFetcher.fetchRatingsDescription()
-      if description != RatingsFetcher.errorMessage {
+      if let description = await RatingsFetcher.fetchRatingsDescription() {
         rateReviewDescription = description
       }
     }
