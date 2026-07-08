@@ -423,11 +423,11 @@ Grouped; each is Low unless noted.
 4. ✅ Split `Quiz.completeQuiz()` teardown from `quit()` (#5).
 5. ✅ Guard the negative `info` deep-link index (#9).
 
-**Phase 2 — release hygiene / compliance (before the next App Store submission):**
-6. Rewrite the privacy policy for TelemetryDeck + regenerate HTML (#6).
-7. Redact the committed app ID and reconcile the CLAUDE.md policy (#7).
-8. Lower the widget deployment target to 26.0 and align Swift version (#8).
-9. Refresh README (verb count, features, Secrets step) and delete `launchAnalytics.sh`; untrack `settings.local.json` (#43).
+**Phase 2 — release hygiene / compliance (before the next App Store submission):** ✅ **complete 2026-07-08** (all 171 tests pass, app + widget build clean)
+6. ✅ Rewrote the privacy policy for TelemetryDeck + regenerated HTML (#6): both `privacyPolicy4.md`/`.html` now name TelemetryDeck, add the `tapPlayGame`/`tapShowOnboarding` events + elapsed time, and describe TelemetryDeck's anonymization.
+7. ✅ Redacted the committed app ID (#7): the UUID in `prompts/analytics.md` is now `<TELEMETRY_DECK_APP_ID>`, and CLAUDE.md's policy wording is reconciled (kept-out-of-working-tree, with a history-exposure caveat + rotate note).
+8. ✅ Lowered the widget deployment target to 26.0 and aligned Swift version (#8): widget target now `IPHONEOS_DEPLOYMENT_TARGET = 26.0`, `SWIFT_VERSION = 6.0`, `SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor`; the Swift-6 upgrade surfaced a real actor-isolation error in `AnswerQuizIntent.perform()`, fixed by marking it `@MainActor`.
+9. ✅ Refreshed README (#43): 6,314 → 6,320 verbs, added a 2.0-features section (quiz, minigame, tutor, widgets, l10n) + a Secrets build step, noted the screenshots are pre-2.0; deleted `launchAnalytics.sh`; untracked `.claude/settings.local.json` (`git rm --cached` + gitignore). (Remaining #43 sub-items — corpus-doc coverage figures, `merge_classical.py`, screenshot-script cwd — are corpus/tooling cleanups deferred to a later pass.)
 
 **Phase 3 — widget & Live Activity robustness:**
 10. Multi-day snapshot rotation (#4), FNV-1a shuffle seed (#11), DST-safe midnight helper (#14), `LargeWidgetView` bounds guard (#16), `en_US_POSIX` formatter (#18), serialized Live Activity updates + `staleDate` (#13).

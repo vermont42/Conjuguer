@@ -1,6 +1,8 @@
 .DS_Store
 Conjuguer.xcodeproj/project.xcworkspace/xcuserdata/
 Conjuguer.xcodeproj/xcuserdata/
+# Machine-local Claude Code permission grants — not shared.
+.claude/settings.local.json
 
 # TelemetryDeck app ID — copy Conjuguer/Secrets.example.xcconfig to
 # Conjuguer/Secrets.xcconfig and fill in your app ID. Never commit Secrets.xcconfig.

@@ -11,9 +11,15 @@ tiers, each with a `file:line` and a concrete fix, followed by a phased implemen
 (+ `NousPrésentStemTests`), #2 widget quiz person/tense decorrelation, #3 robot-minion
 invulnerability window, #5 `Quiz.completeQuiz()`/`quit()` split, #9 negative `info` deep-link guard.
 Finding #38 (the `CorpusFormsDumpTests` `.disabled` trim) was already applied earlier.
-**Next up:** Phase 2 (release hygiene / compliance) — privacy policy #6, committed app ID #7,
-widget deployment target #8, README/tooling #43. Keep this section current — check off or delete
-items here as they land, and remove the section once the doc is fully worked through.
+**Phase 2 (release hygiene / compliance) is done (2026-07-08):** #6 privacy policy rewritten for
+TelemetryDeck (`.md` + `.html` regenerated), #7 committed app ID redacted from `prompts/analytics.md`
+(+ policy wording reconciled above), #8 widget target lowered to iOS 26.0 / raised to Swift 6 +
+`MainActor` isolation (surfaced & fixed a real `AnswerQuizIntent.perform()` isolation bug), #43
+README refreshed (verb count, 2.0 features, Secrets step) + `launchAnalytics.sh` deleted +
+`.claude/settings.local.json` untracked. (Remaining #43 corpus/tooling sub-items deferred.)
+**Next up:** Phase 3 (widget & Live Activity robustness) — #4, #11, #14, #16, #18, #13. Keep this
+section current — check off or delete items here as they land, and remove the section once the doc
+is fully worked through.
 
 ## Build and Test Commands
 
@@ -292,11 +298,14 @@ Analytics run through the `Analytics` protocol (`Analytics/Analytics.swift`): ev
 `AnalyticsName` enum, parameters keyed by `ParameterKey`, sent via
 `Current.analytics.signal(name:parameters:)` (with a no-parameter `signal(name:)` convenience).
 `AnalyticsReal` wraps the TelemetryDeck SDK; `AnalyticsSpy` records signals for tests. The
-TelemetryDeck app ID is **never committed**: it lives in `Conjuguer/Secrets.xcconfig` (gitignored;
-copy `Conjuguer/Secrets.example.xcconfig` to create it), is exposed to the app target as the
-`TELEMETRY_DECK_APP_ID` build setting via the target's `baseConfigurationReference`, surfaced
+TelemetryDeck app ID is **kept out of the working tree**: it lives in `Conjuguer/Secrets.xcconfig`
+(gitignored; copy `Conjuguer/Secrets.example.xcconfig` to create it), is exposed to the app target
+as the `TELEMETRY_DECK_APP_ID` build setting via the target's `baseConfigurationReference`, surfaced
 through the `TelemetryDeckAppID` Info.plist key, and read in `ConjuguerApp.init()` →
-`Current.analytics.initialize(appID:)`. (There is no `Locale` abstraction; the one VoiceOver site
+`Current.analytics.initialize(appID:)`. (Caveat: the ID leaked into an early `prompts/analytics.md`
+commit and is therefore in git history — since redacted from the working tree. A TelemetryDeck app
+ID ships inside the app binary and is not a signing credential, so the practical risk is low; rotate
+it in the TelemetryDeck dashboard if you want the historical value fully retired.) (There is no `Locale` abstraction; the one VoiceOver site
 that needed region/language reads `Locale.current` directly.)
 
 ### Protocol-Based Abstractions

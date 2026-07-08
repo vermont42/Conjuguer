@@ -1,20 +1,22 @@
 Privacy Policy
 ===================
 
-Conjuguer uses the Amazon Web Services&trade; analytics product, Pinpoint&trade;, to track certain information or "analytics". These analytics consist of:
+Conjuguer uses TelemetryDeck&trade;, a privacy-focused analytics service, to track certain anonymous usage information or "analytics". These analytics consist of:
 
 * Launching the app
 * Each screen visited
 * Starting a quiz
-* Quitting a quiz, with number of verbs conjugated
+* Quitting a quiz, with the number of verbs conjugated and elapsed time
 * Finishing a quiz, with score
-* Game Center&trade; authentication
+* Game Center&trade; authentication (success or failure)
+* Tapping to play the minigame
+* Tapping to show the onboarding
 * App version
 * Unique installs
 * Device model
 * Country and language of user
 
-Conjuguer does _not_ track any personally identifiable user information.
+Conjuguer does _not_ track any personally identifiable user information. TelemetryDeck is designed for privacy: it collects no IP addresses, assigns no cross-app advertising identifiers, and derives any per-install signal from a one-way, salted hash so that individual users cannot be identified or tracked across apps.
 
 As demonstrated in the following example, analytics inform future development of Conjuguer.
 

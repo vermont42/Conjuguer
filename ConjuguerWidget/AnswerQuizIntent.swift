@@ -22,6 +22,7 @@ struct AnswerQuizIntent: AppIntent {
     self.questionID = questionID
   }
 
+  @MainActor
   func perform() async throws -> some IntentResult {
     guard
       let defaults = WidgetConstants.sharedDefaults,
