@@ -506,7 +506,10 @@ final class GameState {
     HapticPlayer.playImpact(.medium)
   }
 
-  private func updateBullets(dt: CGFloat) {
+  // Player bullets rise at a fixed speed and cull only past the top edge, so
+  // (unlike the enemy/robot bullets) they don't use the shared advanceAndCull.
+  // internal (not private) so GameProjectileTests can pin this.
+  func updateBullets(dt: CGFloat) {
     let distance = Self.bulletSpeed * dt
     for index in bullets.indices {
       bullets[index].y -= distance
@@ -514,17 +517,95 @@ final class GameState {
     bullets.removeAll { $0.y < -Self.bulletSize }
   }
 
-  private func updateEnemyBullets(dt: CGFloat) {
-    for index in enemyBullets.indices {
-      enemyBullets[index].x += enemyBullets[index].velocityX * dt
-      enemyBullets[index].y += enemyBullets[index].velocityY * dt
+  func updateEnemyBullets(dt: CGFloat) {
+    advanceAndCull(&enemyBullets, size: Self.enemyBulletSize, dt: dt)
+  }
+
+  /// Integrates each projectile by its velocity, then culls any that have left
+  /// the screen past a `size` margin on every edge. Shared by the enemy-bullet
+  /// and robot-bullet loops; the only per-mechanic difference is
+  /// the sprite `size` used for the cull margin.
+  func advanceAndCull<P: MovingProjectile>(_ projectiles: inout [P], size: CGFloat, dt: CGFloat) {
+    for index in projectiles.indices {
+      projectiles[index].x += projectiles[index].velocityX * dt
+      projectiles[index].y += projectiles[index].velocityY * dt
     }
-    enemyBullets.removeAll {
-      $0.y > screenSize.height + Self.enemyBulletSize
-        || $0.y < -Self.enemyBulletSize
-        || $0.x < -Self.enemyBulletSize
-        || $0.x > screenSize.width + Self.enemyBulletSize
+    projectiles.removeAll {
+      $0.y > screenSize.height + size
+        || $0.y < -size
+        || $0.x < -size
+        || $0.x > screenSize.width + size
     }
+  }
+
+  /// The velocity for a projectile fired from `source` straight at the player,
+  /// normalized to `speed`. Shared by enemy fire and robot fire;
+  /// the only per-mechanic difference is the projectile `speed`.
+  func homingVelocityTowardPlayer(from source: CGPoint, speed: CGFloat) -> CGVector {
+    let dx = playerX - source.x
+    let dy = playerY - source.y
+    let length = max(1, hypot(dx, dy))
+    return CGVector(dx: dx / length * speed, dy: dy / length * speed)
+  }
+
+  /// The position on the sine-modulated dive arc at progress `t` (0...1): a
+  /// baseline Y linearly interpolated from `startY` to `endY`, plus a
+  /// 4·depth·t·(1−t) parabolic dip, with x oscillating `diveWidthAmplitude`
+  /// around `homeX` via sin(t·4π). Shared by the dive-bombers (Mechanic 1) and
+  /// the robot minion's swoop (Mechanic 5), which differ only in `endY`
+  /// (exit-off-bottom vs return-home) and `depth`.
+  static func diveArc(t: CGFloat, startY: CGFloat, endY: CGFloat, depth: CGFloat, homeX: CGFloat) -> CGPoint {
+    let baselineY = startY + (endY - startY) * t
+    let dip = 4 * depth * t * (1 - t)
+    let x = homeX + diveWidthAmplitude * CGFloat(sin(Double(t) * .pi * 4))
+    return CGPoint(x: x, y: baselineY + dip)
+  }
+
+  /// The index of the first player bullet overlapping an entity centered at
+  /// `center` with the given `size`, or nil. The core of the "shoot this one
+  /// entity" collisions — brain, minion, chandelier, hen, and the ball re-aim;
+  /// the caller removes the bullet and applies the effect.
+  func firstBulletIndex(hitting center: CGPoint, size: CGFloat) -> Int? {
+    bullets.firstIndex { bullet in
+      Self.intersects(a: CGPoint(x: bullet.x, y: bullet.y), aSize: Self.bulletSize, b: center, bSize: size)
+    }
+  }
+
+  /// Removes every element of `entities` (each sized `size`) overlapping the
+  /// player and returns whether any were removed. The player-hit sweep shared
+  /// by enemy bullets, falling enemies, robot bullets, and chicks;
+  /// the caller decides the consequence (registerPlayerHit, sound).
+  func removeOverlappingPlayer<E: GamePositioned>(_ entities: inout [E], size: CGFloat) -> Bool {
+    let countBefore = entities.count
+    entities.removeAll { entity in
+      Self.intersects(
+        a: CGPoint(x: entity.x, y: entity.y),
+        aSize: size,
+        b: CGPoint(x: playerX, y: playerY),
+        bSize: Self.playerSize
+      )
+    }
+    return entities.count != countBefore
+  }
+
+  /// Removes and returns every element of `entities` (each sized `size`) the
+  /// player is overlapping — the collect-on-contact pickups, drops and note
+  /// dots; the caller applies the per-catch effect.
+  func collectOverlappingPlayer<E: GamePositioned & Identifiable>(_ entities: inout [E], size: CGFloat) -> [E] {
+    let caught = entities.filter { entity in
+      Self.intersects(
+        a: CGPoint(x: entity.x, y: entity.y),
+        aSize: size,
+        b: CGPoint(x: playerX, y: playerY),
+        bSize: Self.playerSize
+      )
+    }
+    guard !caught.isEmpty else {
+      return []
+    }
+    let caughtIDs = Set(caught.map(\.id))
+    entities.removeAll { caughtIDs.contains($0.id) }
+    return caught
   }
 
   private func updateStars(dt: CGFloat) {
@@ -607,7 +688,7 @@ final class GameState {
     targets.indices.filter { targets[$0].y > 0 && targets[$0].y <= screenSize.height / 2 }
   }
 
-  private func attemptEnemyFire(dt: CGFloat) {
+  func attemptEnemyFire(dt: CGFloat) {
     enemyFireCooldown -= dt
     guard enemyFireCooldown <= 0 else {
       return
@@ -620,15 +701,16 @@ final class GameState {
     }
 
     let shooter = targets[shooterIndex]
-    let dx = playerX - shooter.x
-    let dy = playerY - shooter.y
-    let length = max(1, hypot(dx, dy))
+    let velocity = homingVelocityTowardPlayer(
+      from: CGPoint(x: shooter.x, y: shooter.y),
+      speed: Self.enemyBulletSpeed
+    )
     enemyBullets.append(
       EnemyBullet(
         x: shooter.x,
         y: shooter.y,
-        velocityX: dx / length * Self.enemyBulletSpeed,
-        velocityY: dy / length * Self.enemyBulletSpeed
+        velocityX: velocity.dx,
+        velocityY: velocity.dy
       )
     )
     Current.soundPlayer.play(.enemyFire, shouldDebounce: false)
@@ -708,32 +790,16 @@ final class GameState {
     }
   }
 
-  private func resolvePlayerHits() {
+  // internal (not private) so GameCollisionTests can characterize the player-hit
+  // sweep; collectDrops likewise for the collect-caught shape.
+  func resolvePlayerHits() {
     // Enemy bullets striking the player.
-    let bulletCountBefore = enemyBullets.count
-    enemyBullets.removeAll { bullet in
-      Self.intersects(
-        a: CGPoint(x: bullet.x, y: bullet.y),
-        aSize: Self.enemyBulletSize,
-        b: CGPoint(x: playerX, y: playerY),
-        bSize: Self.playerSize
-      )
-    }
-    if enemyBullets.count != bulletCountBefore {
+    if removeOverlappingPlayer(&enemyBullets, size: Self.enemyBulletSize) {
       registerPlayerHit()
     }
 
     // Enemies striking the player.
-    let targetCountBefore = targets.count
-    targets.removeAll { target in
-      Self.intersects(
-        a: CGPoint(x: target.x, y: target.y),
-        aSize: Self.targetSize,
-        b: CGPoint(x: playerX, y: playerY),
-        bSize: Self.playerSize
-      )
-    }
-    if targets.count != targetCountBefore {
+    if removeOverlappingPlayer(&targets, size: Self.targetSize) {
       registerPlayerHit()
     }
   }
@@ -748,20 +814,8 @@ final class GameState {
     }
   }
 
-  private func collectDrops() {
-    let caught = drops.filter { drop in
-      Self.intersects(
-        a: CGPoint(x: drop.x, y: drop.y),
-        aSize: Self.dropSize,
-        b: CGPoint(x: playerX, y: playerY),
-        bSize: Self.playerSize
-      )
-    }
-    guard !caught.isEmpty else {
-      return
-    }
-    let caughtIDs = Set(caught.map(\.id))
-    drops.removeAll { caughtIDs.contains($0.id) }
+  func collectDrops() {
+    let caught = collectOverlappingPlayer(&drops, size: Self.dropSize)
     for drop in caught {
       applyDrop(drop.kind)
     }

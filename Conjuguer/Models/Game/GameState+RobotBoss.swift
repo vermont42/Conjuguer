@@ -142,11 +142,16 @@ extension GameState {
         minion.diveProgress = 0
         minion.divePauseTimer = 0
       } else {
-        let depth = screenSize.height * Self.diveDepthFactor
-        let baselineY = minion.diveStartY * (1 - t) + minion.homeY * t
-        let dip = 4 * depth * t * (1 - t)
-        minion.y = baselineY + dip
-        minion.x = minion.homeX + Self.diveWidthAmplitude * CGFloat(sin(Double(t) * .pi * 4))
+        // Swoop down toward the player and back up to the home row.
+        let point = Self.diveArc(
+          t: t,
+          startY: minion.diveStartY,
+          endY: minion.homeY,
+          depth: screenSize.height * Self.diveDepthFactor,
+          homeX: minion.homeX
+        )
+        minion.x = point.x
+        minion.y = point.y
       }
     } else {
       minion.divePauseTimer += dt
@@ -166,34 +171,30 @@ extension GameState {
     robotMinion = minion
   }
 
-  private func fireRobotBullet(from minion: RobotMinion) {
-    let dx = playerX - minion.x
-    let dy = playerY - minion.y
-    let length = max(1, hypot(dx, dy))
+  // internal (not private) so GameProjectileTests can characterize the homing
+  // fire vector directly. The vector math and the integrate-and-cull are shared
+  // with enemy fire via GameState.homingVelocityTowardPlayer / advanceAndCull
+  // (finding #37).
+  func fireRobotBullet(from minion: RobotMinion) {
+    let velocity = homingVelocityTowardPlayer(
+      from: CGPoint(x: minion.x, y: minion.y),
+      speed: Self.robotBulletSpeed
+    )
     let isRed = robotBullets.count.isMultiple(of: 2)
     robotBullets.append(
       RobotBullet(
         x: minion.x,
         y: minion.y,
-        velocityX: dx / length * Self.robotBulletSpeed,
-        velocityY: dy / length * Self.robotBulletSpeed,
+        velocityX: velocity.dx,
+        velocityY: velocity.dy,
         isRed: isRed
       )
     )
     Current.soundPlayer.play(.robotWeapon, shouldDebounce: true, volume: 0.6)
   }
 
-  private func updateRobotBullets(dt: CGFloat) {
-    for index in robotBullets.indices {
-      robotBullets[index].x += robotBullets[index].velocityX * dt
-      robotBullets[index].y += robotBullets[index].velocityY * dt
-    }
-    robotBullets.removeAll {
-      $0.y > screenSize.height + Self.robotBulletSize
-        || $0.y < -Self.robotBulletSize
-        || $0.x < -Self.robotBulletSize
-        || $0.x > screenSize.width + Self.robotBulletSize
-    }
+  func updateRobotBullets(dt: CGFloat) {
+    advanceAndCull(&robotBullets, size: Self.robotBulletSize, dt: dt)
   }
 
   func collideRobot() {
@@ -207,14 +208,10 @@ extension GameState {
     guard var brain = robotBrain else {
       return
     }
-    guard let bulletIndex = bullets.firstIndex(where: { bullet in
-      Self.intersects(
-        a: CGPoint(x: bullet.x, y: bullet.y),
-        aSize: Self.bulletSize,
-        b: CGPoint(x: brain.x, y: brain.y),
-        bSize: Self.brainSize
-      )
-    }) else {
+    guard let bulletIndex = firstBulletIndex(
+      hitting: CGPoint(x: brain.x, y: brain.y),
+      size: Self.brainSize
+    ) else {
       return
     }
     bullets.remove(at: bulletIndex)
@@ -238,14 +235,10 @@ extension GameState {
     guard var minion = robotMinion else {
       return
     }
-    guard let bulletIndex = bullets.firstIndex(where: { bullet in
-      Self.intersects(
-        a: CGPoint(x: bullet.x, y: bullet.y),
-        aSize: Self.bulletSize,
-        b: CGPoint(x: minion.x, y: minion.y),
-        bSize: Self.robotMinionSize
-      )
-    }) else {
+    guard let bulletIndex = firstBulletIndex(
+      hitting: CGPoint(x: minion.x, y: minion.y),
+      size: Self.robotMinionSize
+    ) else {
       return
     }
     let bullet = bullets[bulletIndex]
@@ -306,16 +299,7 @@ extension GameState {
   }
 
   private func collideRobotBulletsWithPlayer() {
-    let countBefore = robotBullets.count
-    robotBullets.removeAll { bullet in
-      Self.intersects(
-        a: CGPoint(x: bullet.x, y: bullet.y),
-        aSize: Self.robotBulletSize,
-        b: CGPoint(x: playerX, y: playerY),
-        bSize: Self.playerSize
-      )
-    }
-    if robotBullets.count != countBefore {
+    if removeOverlappingPlayer(&robotBullets, size: Self.robotBulletSize) {
       registerPlayerHit()
       Current.soundPlayer.play(.playerHit, shouldDebounce: false)
     }

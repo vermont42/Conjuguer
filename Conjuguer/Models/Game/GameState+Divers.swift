@@ -60,13 +60,16 @@ extension GameState {
         continue
       }
 
-      let startY = targets[index].diveStartY
-      // Ease downward toward the bottom with a mild parabolic acceleration.
-      let baselineY = startY + (exitY - startY) * t
-      let dip = Self.diveDepthFactor * Self.targetSize * 4 * t * (1 - t)
-      targets[index].y = baselineY + dip
-      targets[index].x = targets[index].homeX
-        + Self.diveWidthAmplitude * CGFloat(sin(Double(t) * .pi * 4))
+      // Ease downward off the bottom edge with a mild parabolic acceleration.
+      let point = Self.diveArc(
+        t: t,
+        startY: targets[index].diveStartY,
+        endY: exitY,
+        depth: Self.diveDepthFactor * Self.targetSize,
+        homeX: targets[index].homeX
+      )
+      targets[index].x = point.x
+      targets[index].y = point.y
     }
 
     if !divedOutIDs.isEmpty {

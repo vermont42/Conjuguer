@@ -3,9 +3,9 @@
 _Snapshot: 2026-07-08._
 
 This file tracks the findings from [`code-review-findings.md`](code-review-findings.md) that are **not yet
-implemented**. Phases 1–6 of that review are done; every Tier-1/Tier-2 finding and most of Tier-3 is
-implemented (see the phase summaries in the source doc). What remains are heavier refactors, content/product
-calls, and repo-tooling cleanups — all deliberately deferred, none ship-blocking.
+implemented**. Phases 1–6 of that review are done, as is the heaviest refactor (#37); every Tier-1/Tier-2 finding
+and all of Tier-3 is implemented (see the phase summaries in the source doc). What remains is only the #43
+corpus/tooling cleanup — outside the shipped app target, deliberately deferred, not ship-blocking.
 
 For fully-implemented items and the original ranking/rationale, see `code-review-findings.md`. Finding **#36**
 (minigame Game Center submission) is closed as **won't-fix** — the score is local-only by design. Finding **#20**
@@ -14,22 +14,13 @@ the sibling app Conjugar's pattern, verified in a French-locale sim launch — a
 The widget-polish trio **#33** (etymology tilde rebalance + real-form distractors), **#34** (Live Activity
 `Text(_, style: .timer)` + lingering finished state), and **#35** (skip-unchanged snapshot write/reload) was
 **implemented 2026-07-08** (test count 192 → 196) and is no longer listed below.
-
----
-
-## Code findings
-
-### #37 — Minigame duplication
-- **Where:** `Conjuguer/Models/Game/GameState.swift` vs `GameState+RobotBoss.swift` / `+Divers.swift` /
-  `+Ghosts.swift` / `+Henyard.swift`
-- **Severity:** Low · **Type:** simplification
-- **Problem:** near-identical logic is copied across mechanics: projectile integrate-and-cull + homing fire
-  (`updateEnemyBullets`/`updateRobotBullets`, `attemptEnemyFire`/`fireRobotBullet`), the dive-arc parabola+sine
-  (`+Divers` vs `+RobotBoss`), and three collision shapes (shoot-one-entity, player-hit sweep, collect-caught).
-- **Fix:** a `MovingProjectile` protocol + a shared `diveArc(...)` helper + three small generic collision
-  helpers would remove ~150 lines.
-- **Why deferred:** **largest and riskiest** item. The minigame has **no unit-test coverage**, so this refactor
-  must be verified by driving the game manually in the simulator (all mechanics, collisions, and boss phases).
+Finding **#37** (minigame duplication) was **implemented 2026-07-08** (device-verified; test count 196 → **217 in
+19 suites**) — a characterize-then-extract micro-cycle that added `MovingProjectile`/`advanceAndCull` +
+`homingVelocityTowardPlayer` (projectiles), `diveArc(...)` (dive-arc), and `GamePositioned` +
+`firstBulletIndex`/`removeOverlappingPlayer`/`collectOverlappingPlayer` (three collision shapes), each backed by a
+new characterization suite (`GameProjectileTests`/`GameDiveArcTests`/`GameCollisionTests`) so the minigame went from
+zero unit coverage to a full projectile/dive/collision net. It is no longer listed below; see `code-review-findings.md`
+for the full write-up.
 
 ---
 
@@ -59,5 +50,5 @@ and untracked `.claude/settings.local.json`. **Still open** are the corpus/tooli
 
 ## Suggested order if picked up
 
-1. **#43** corpus/tooling cleanup (independent of the app) →
-2. **#37** last, with a full manual game playthrough as the verification gate.
+The only work left is the **#43** corpus/tooling cleanup (independent of the shipped app target). Read
+`docs/literature-example-corpus.md` and the corpus policy in `CLAUDE.md` before touching anything under `corpus/`.

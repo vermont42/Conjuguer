@@ -112,14 +112,10 @@ extension GameState {
     guard let current = hen else {
       return
     }
-    guard let bulletIndex = bullets.firstIndex(where: { bullet in
-      Self.intersects(
-        a: CGPoint(x: bullet.x, y: bullet.y),
-        aSize: Self.bulletSize,
-        b: CGPoint(x: current.x, y: current.y),
-        bSize: Self.henSize
-      )
-    }) else {
+    guard let bulletIndex = firstBulletIndex(
+      hitting: CGPoint(x: current.x, y: current.y),
+      size: Self.henSize
+    ) else {
       return
     }
     bullets.remove(at: bulletIndex)
@@ -160,20 +156,9 @@ extension GameState {
   }
 
   private func collideChicksWithPlayer() {
-    let hitIndices = chicks.indices.filter { index in
-      Self.intersects(
-        a: CGPoint(x: chicks[index].x, y: chicks[index].y),
-        aSize: Self.chickSize,
-        b: CGPoint(x: playerX, y: playerY),
-        bSize: Self.playerSize
-      )
+    if removeOverlappingPlayer(&chicks, size: Self.chickSize) {
+      registerPlayerHit()
+      Current.soundPlayer.play(.playerHit, shouldDebounce: false)
     }
-    guard !hitIndices.isEmpty else {
-      return
-    }
-    let hitIDs = Set(hitIndices.map { chicks[$0].id })
-    chicks.removeAll { hitIDs.contains($0.id) }
-    registerPlayerHit()
-    Current.soundPlayer.play(.playerHit, shouldDebounce: false)
   }
 }

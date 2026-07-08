@@ -124,19 +124,10 @@ extension GameState {
   }
 
   private func collectNoteDots() {
-    let caught = noteDots.filter { dot in
-      Self.intersects(
-        a: CGPoint(x: dot.x, y: dot.y),
-        aSize: Self.dotSize,
-        b: CGPoint(x: playerX, y: playerY),
-        bSize: Self.playerSize
-      )
-    }
+    let caught = collectOverlappingPlayer(&noteDots, size: Self.dotSize)
     guard !caught.isEmpty else {
       return
     }
-    let caughtIDs = Set(caught.map(\.id))
-    noteDots.removeAll { caughtIDs.contains($0.id) }
     score += caught.count * Self.dotScore
     Current.soundPlayer.play(.chirp, shouldDebounce: false)
     HapticPlayer.playImpact(.light)
@@ -146,14 +137,10 @@ extension GameState {
     guard let item = chandelier else {
       return
     }
-    guard let bulletIndex = bullets.firstIndex(where: { bullet in
-      Self.intersects(
-        a: CGPoint(x: bullet.x, y: bullet.y),
-        aSize: Self.bulletSize,
-        b: CGPoint(x: item.x, y: item.y),
-        bSize: Self.chandelierSize
-      )
-    }) else {
+    guard let bulletIndex = firstBulletIndex(
+      hitting: CGPoint(x: item.x, y: item.y),
+      size: Self.chandelierSize
+    ) else {
       return
     }
     bullets.remove(at: bulletIndex)

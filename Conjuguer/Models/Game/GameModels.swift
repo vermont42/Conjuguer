@@ -253,6 +253,38 @@ struct RobotBullet: Identifiable {
   let isRed: Bool // alternates red / yellow
 }
 
+// MARK: - Shared projectile behavior
+
+/// A projectile that drifts by a fixed velocity each frame — an enemy bullet or
+/// a robot bullet. `GameState.advanceAndCull(_:size:dt:)` integrates and culls
+/// any conformer, so the two update loops share one implementation.
+/// (The player's own bullets are excluded: they rise at a fixed speed with no
+/// per-bullet velocity, and cull only past the top edge.)
+protocol MovingProjectile {
+  var x: CGFloat { get set }
+  var y: CGFloat { get set }
+  var velocityX: CGFloat { get }
+  var velocityY: CGFloat { get }
+}
+
+extension EnemyBullet: MovingProjectile {}
+extension RobotBullet: MovingProjectile {}
+
+/// Anything with a screen position, so the generic player-collision helpers
+/// (`GameState.removeOverlappingPlayer` / `collectOverlappingPlayer`) can sweep
+/// or collect a homogeneous array of entities against the player.
+protocol GamePositioned {
+  var x: CGFloat { get }
+  var y: CGFloat { get }
+}
+
+extension EnemyBullet: GamePositioned {}
+extension RobotBullet: GamePositioned {}
+extension Target: GamePositioned {}
+extension Chick: GamePositioned {}
+extension Drop: GamePositioned {}
+extension NoteDot: GamePositioned {}
+
 /// The cyclic "special" mechanics — only one runs at a time, picked from a
 /// shuffled bag on a timer. The dive-bombers (Mechanic 1) and the robot boss
 /// (Mechanic 5) are scheduled separately (ambient timer / score threshold).

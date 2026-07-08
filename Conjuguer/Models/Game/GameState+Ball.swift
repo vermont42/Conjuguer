@@ -96,14 +96,10 @@ extension GameState {
     }
 
     // Player bullets re-aim the ball (random horizontal kick).
-    if let bulletIndex = bullets.firstIndex(where: { bullet in
-      Self.intersects(
-        a: CGPoint(x: bullet.x, y: bullet.y),
-        aSize: Self.bulletSize,
-        b: CGPoint(x: current.x, y: current.y),
-        bSize: Self.ballSize
-      )
-    }) {
+    if let bulletIndex = firstBulletIndex(
+      hitting: CGPoint(x: current.x, y: current.y),
+      size: Self.ballSize
+    ) {
       bullets.remove(at: bulletIndex)
       current.velocityY = -abs(current.velocityY)
       current.velocityX += CGFloat.random(in: -80 ... 80)

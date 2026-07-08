@@ -470,7 +470,24 @@ Grouped; each is Low unless noted.
   integrate-and-cull + homing-fire (`updateEnemyBullets`/`updateRobotBullets`, `attemptEnemyFire`/`fireRobotBullet`),
   the dive-arc parabola+sine (`+Divers` vs `+RobotBoss`), and three collision shapes (shoot-one-entity, player-hit
   sweep, collect-caught) are near-identical. A `MovingProjectile` protocol + a `diveArc(...)` helper + three small
-  generic collision helpers would remove ~150 lines.
+  generic collision helpers would remove ~150 lines. — ✅ **implemented 2026-07-08** (device-verified; test count
+  196 → **217 in 19 suites**). Because the minigame had **zero** unit coverage, this was done as a strict
+  characterize-then-extract micro-cycle per behavior (pin current behavior with new tests → extract → re-verify green):
+  - **Projectiles** — new `MovingProjectile` protocol + `GameState.advanceAndCull(_:size:dt:)` (shared by the
+    enemy/robot bullet loops) and `homingVelocityTowardPlayer(from:speed:)` (shared by enemy/robot fire); net
+    `GameProjectileTests` (10).
+  - **Dive-arc** — `GameState.diveArc(t:startY:endY:depth:homeX:)` (baseline lerp + `4·depth·t·(1−t)` parabola +
+    `sin(t·4π)` x-oscillation), shared by the dive-bombers and the robot-minion swoop; net `GameDiveArcTests` (4,
+    tolerance-based since unifying the lerp spelling shifts the robot baseline by a sub-ULP).
+  - **Collisions** — new `GamePositioned` protocol + `firstBulletIndex(hitting:size:)` (brain/minion/chandelier/hen/
+    ball-reaim), `removeOverlappingPlayer(_:size:)` (enemy bullets, falling enemies, robot bullets, chicks), and
+    `collectOverlappingPlayer(_:size:)` (drops, note dots); net `GameCollisionTests` (7).
+
+  Scope held to the clean matches: `resolveBulletHits` (multi-bullet ace-logic sweep), `shootEggs` (bullet-vs-*any*-egg),
+  and `collideBall`'s ball-vs-targets block were deliberately left alone as genuinely different shapes. Lining the
+  collisions up surfaced one latent (pre-existing) inconsistency — `collideGhostsWithPlayer` registers one hit *per*
+  overlapping ghost, so a 2–3 ghost swarm can cost 50–75% in a single frame, unlike every threat routed through the
+  one-hit-per-frame `removeOverlappingPlayer`; the app owner opted to keep it (a swarm hurting more is acceptable).
 
 ---
 
@@ -556,4 +573,10 @@ Grouped; each is Low unless noted.
     ✅ Also landed the widget-polish trio (2026-07-08): #33 etymology-truncation tilde rebalance + real-form
     distractors, #34 Live Activity `Text(_, style: .timer)` via a `startDate` in `ContentState` + lingering finished
     state, and #35 skip-unchanged snapshot write/reload. Test count 192 → **196 in 16 suites**.
-    **Deferred** (heaviest, left for a deliberate follow-up): #37 minigame de-duplication (large refactor of untested game code).
+    ✅ Also landed #37 minigame de-duplication (2026-07-08, device-verified) via a characterize-then-extract
+    micro-cycle: shared `advanceAndCull`/`homingVelocityTowardPlayer` (projectiles), `diveArc(...)` (dive-arc), and
+    `firstBulletIndex`/`removeOverlappingPlayer`/`collectOverlappingPlayer` (three collision shapes), backed by new
+    `GameProjectileTests`/`GameDiveArcTests`/`GameCollisionTests`. Test count 196 → **217 in 19 suites** (the minigame
+    went from zero unit coverage to a full projectile/dive/collision net).
+    **Deferred** (corpus/tooling only, outside the shipped app target): the remaining #43 sub-items
+    (`docs/literature-example-corpus.md` coverage figures, `merge_classical.py` dual-write, screenshot-script cwd).
