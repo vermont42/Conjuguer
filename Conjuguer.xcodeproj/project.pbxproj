@@ -47,13 +47,13 @@
 
 /* Begin PBXFileReference section */
 		0338F168273C229700FD796C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		036307D02FF41CA400C9264F /* Conjuguer/Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Conjuguer/Secrets.xcconfig; sourceTree = "<group>"; };
 		036DB78A259FD6500013C3B7 /* Conjuguer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conjuguer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		036DB79B259FD6510013C3B7 /* ConjuguerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConjuguerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03A0DE4C2FE4AB0B008C4737 /* ConjuguerWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ConjuguerWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		03A0DE4D2FE4AB0B008C4737 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		03A0DE4F2FE4AB0B008C4737 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		03C196282FE4C33900353E69 /* ConjuguerWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ConjuguerWidgetExtension.entitlements; sourceTree = "<group>"; };
-		036307D02FF41CA400C9264F /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Conjuguer/Secrets.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -134,7 +134,7 @@
 				03C1962A2FE4C54D00353E69 /* Shared */,
 				03C196282FE4C33900353E69 /* ConjuguerWidgetExtension.entitlements */,
 				0341A6D42FCC691800B61C2F /* Conjuguer */,
-				036307D02FF41CA400C9264F /* Secrets.xcconfig */,
+				036307D02FF41CA400C9264F /* Conjuguer/Secrets.xcconfig */,
 				0341A74B2FCC692000B61C2F /* ConjuguerTests */,
 				03A0DE512FE4AB0B008C4737 /* ConjuguerWidget */,
 				036DB78B259FD6500013C3B7 /* Products */,
@@ -454,7 +454,7 @@
 		};
 		036DB7B0259FD6510013C3B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 036307D02FF41CA400C9264F /* Secrets.xcconfig */;
+			baseConfigurationReference = 036307D02FF41CA400C9264F /* Conjuguer/Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -484,7 +484,7 @@
 		};
 		036DB7B1259FD6510013C3B7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 036307D02FF41CA400C9264F /* Secrets.xcconfig */;
+			baseConfigurationReference = 036307D02FF41CA400C9264F /* Conjuguer/Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

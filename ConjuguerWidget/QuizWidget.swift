@@ -19,18 +19,29 @@ struct QuizProvider: TimelineProvider {
   }
 
   func getSnapshot(in context: Context, completion: @escaping (QuizEntry) -> Void) {
-    completion(makeEntry())
-  }
-
-  func getTimeline(in context: Context, completion: @escaping (Timeline<QuizEntry>) -> Void) {
-    let nextMidnight = Calendar.current.startOfDay(for: Date()).addingTimeInterval(86400)
-    completion(Timeline(entries: [makeEntry()], policy: .after(nextMidnight)))
-  }
-
-  private func makeEntry() -> QuizEntry {
     let snapshot = SnapshotReader.read() ?? SnapshotReader.placeholder
+    completion(makeEntry(snapshot: snapshot, date: Date()))
+  }
+
+  // One entry per precomputed day so the quiz question rotates at midnight without an
+  // app relaunch. Only today's stored answer state can match a given day's questionID,
+  // so future days render as unanswered questions until their day arrives.
+  func getTimeline(in context: Context, completion: @escaping (Timeline<QuizEntry>) -> Void) {
+    let snapshots = SnapshotReader.readAll()
+    guard !snapshots.isEmpty else {
+      completion(Timeline(entries: [makeEntry(snapshot: SnapshotReader.placeholder, date: Date())], policy: .atEnd))
+      return
+    }
+    let entries = snapshots.map { snapshot in
+      let date = WidgetDateHelper.date(fromDateString: snapshot.dateString) ?? Date()
+      return makeEntry(snapshot: snapshot, date: date)
+    }
+    completion(Timeline(entries: entries, policy: .atEnd))
+  }
+
+  private func makeEntry(snapshot: WidgetSnapshot, date: Date) -> QuizEntry {
     let (isAnswered, wasCorrect) = readQuizState(snapshot: snapshot)
-    return QuizEntry(date: Date(), snapshot: snapshot, isAnswered: isAnswered, wasCorrect: wasCorrect)
+    return QuizEntry(date: date, snapshot: snapshot, isAnswered: isAnswered, wasCorrect: wasCorrect)
   }
 
   // Answer state only counts if it was recorded for the question currently on display.

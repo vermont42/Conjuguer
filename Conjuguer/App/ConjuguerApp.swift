@@ -69,7 +69,7 @@ struct ConjuguerApp: App {
   }
 
   @MainActor private func refreshWidgets() {
-    WidgetSnapshotWriter.writeSnapshot()
+    WidgetSnapshotWriter.writeSnapshots()
     WidgetCenter.shared.reloadAllTimelines()
   }
 

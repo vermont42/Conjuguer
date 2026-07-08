@@ -6,8 +6,13 @@
 import Foundation
 
 enum WidgetSnapshotWriter {
+  // How many daily snapshots to precompute (today plus the next N - 1 days) so the
+  // widget can rotate at midnight from its own timeline without waiting for the app
+  // to relaunch.
+  static let futureDayCount = 7
+
   private static let referenceDate: Date = {
-    Calendar.current.date(from: DateComponents(year: 2025, month: 1, day: 1)) ?? Date()
+    WidgetDateHelper.calendar.date(from: DateComponents(year: 2025, month: 1, day: 1)) ?? Date()
   }()
 
   // The tenses a daily quiz question is drawn from (all carry a person-number;
@@ -21,15 +26,27 @@ enum WidgetSnapshotWriter {
     Tense.conditionnelPrésent
   ]
 
-  @MainActor static func writeSnapshot() {
+  @MainActor static func writeSnapshots() {
+    let snapshots = generateSnapshots()
     guard
-      let snapshot = generateSnapshot(),
-      let url = WidgetConstants.snapshotURL,
-      let data = try? JSONEncoder().encode(snapshot)
+      !snapshots.isEmpty,
+      let url = WidgetConstants.snapshotsURL,
+      let data = try? JSONEncoder().encode(snapshots)
     else {
       return
     }
     try? data.write(to: url, options: .atomic)
+  }
+
+  // One snapshot per day for today plus the next `dayCount - 1` days.
+  @MainActor static func generateSnapshots(from date: Date = Date(), dayCount: Int = futureDayCount) -> [WidgetSnapshot] {
+    let startOfToday = WidgetDateHelper.startOfDay(for: date)
+    return (0 ..< dayCount).compactMap { offset in
+      guard let day = WidgetDateHelper.calendar.date(byAdding: .day, value: offset, to: startOfToday) else {
+        return nil
+      }
+      return generateSnapshot(date: day)
+    }
   }
 
   @MainActor static func generateSnapshot(date: Date = Date()) -> WidgetSnapshot? {
@@ -69,7 +86,7 @@ enum WidgetSnapshotWriter {
   }
 
   @MainActor static func verbOfTheDay(from eligible: [Verb], date: Date) -> Verb {
-    let daysSinceReference = Calendar.current.dateComponents([.day], from: referenceDate, to: date).day ?? 0
+    let daysSinceReference = WidgetDateHelper.calendar.dateComponents([.day], from: referenceDate, to: date).day ?? 0
     let index = abs(daysSinceReference * 127) % eligible.count
     return eligible[index]
   }
@@ -100,7 +117,7 @@ enum WidgetSnapshotWriter {
   }
 
   @MainActor private static func generateQuizQuestion(verb: Verb, date: Date) -> WidgetQuizQuestion {
-    let daysSinceReference = Calendar.current.dateComponents([.day], from: referenceDate, to: date).day ?? 0
+    let daysSinceReference = WidgetDateHelper.calendar.dateComponents([.day], from: referenceDate, to: date).day ?? 0
     let seed = abs(daysSinceReference)
     let personNumber = PersonNumber.allCases[seed % PersonNumber.allCases.count]
     // Decorrelate the tense from the person: both collections have 6 elements, so
@@ -169,8 +186,6 @@ enum WidgetSnapshotWriter {
   }
 
   static func dateString(for date: Date) -> String {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd"
-    return formatter.string(from: date)
+    WidgetDateHelper.dateString(for: date)
   }
 }

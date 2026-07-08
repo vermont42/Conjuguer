@@ -121,8 +121,14 @@ The minion is neither retired nor made invulnerable, and its dive parabola
 **Fix:** mirror the ball's fix — after `registerPlayerHit()`, set a minion invulnerability timer or
 retire/bounce the dive so one pass costs one hit.
 
-### 4. Widget snapshot never rotates at midnight — stale "Verb of the Day" / frozen quiz — _confirmed_
+### 4. Widget snapshot never rotates at midnight — stale "Verb of the Day" / frozen quiz — _confirmed_ — ✅ **implemented 2026-07-08**
 **Category:** bug · **Severity: High** · **`ConjuguerWidget/VerbDuJourWidget.swift:24-29`, `QuizWidget.swift:25-28`**
+
+> Fixed: the app now precomputes `WidgetSnapshotWriter.futureDayCount` (7) daily snapshots
+> (`generateSnapshots` / `writeSnapshots`) into a new `widget-snapshots.json`; `SnapshotReader`
+> gains `readAll()` + a date-selecting `read(for:)`, and both providers emit one timeline entry
+> per day (each placed at that day's midnight via `WidgetDateHelper.date(fromDateString:)`) with a
+> `.atEnd` reload policy — so the widget rotates the verb/quiz on its own without an app relaunch.
 
 Both providers build a one-entry timeline with `.after(nextMidnight)`, but the reload just
 re-reads `widget-snapshot.json`, which **only the app rewrites** (`ConjuguerApp.swift:71-74`, on
@@ -233,8 +239,12 @@ regression of the exact feature that setting controls.
 **Fix:** clear `VerbConjugations.cache` when `pronounGender` changes (e.g. from the setting's
 `didSet`, or observe it), or fold the gender into the cache key.
 
-### 11. Widget "deterministic" answer shuffle uses a randomly-seeded `Hasher` — _confirmed_
+### 11. Widget "deterministic" answer shuffle uses a randomly-seeded `Hasher` — _confirmed_ — ✅ **implemented 2026-07-08**
 **Category:** bug · **Severity: Medium** · **`ConjuguerWidget/Views/QuizWidgetView.swift:89-99`**
+
+> Fixed: `shuffledAnswers` now seeds `SeededRNG` from a process-independent FNV-1a hash of the
+> question ID's UTF-8 bytes instead of `Hasher`, so the button order is stable across reloads and
+> extension-process recycling.
 
 The comment says "deterministic shuffle keyed on the question ID so the layout is stable across
 reloads," but the seed comes from `Hasher()`/`finalize()`, and Swift's `Hasher` is seeded randomly
@@ -256,8 +266,14 @@ debounce is meant to be per-sound.
 **Fix:** key the last-play instant per `Sound` (`[Sound: TimeInterval]`), or only bump the clock on
 debounced plays.
 
-### 13. Live Activity update/end are unordered fire-and-forget Tasks; `staleDate` is always nil — _confirmed_
+### 13. Live Activity update/end are unordered fire-and-forget Tasks; `staleDate` is always nil — _confirmed_ — ✅ **implemented 2026-07-08**
 **Category:** concurrency / bug · **Severity: Medium** · **`Conjuguer/Utils/LiveActivityManager.swift:40-52,26,39,49`**
+
+> Fixed: update/end/end-all now route through a private `enqueue(_:)` that chains each ActivityKit
+> call onto a serial `activityChain` `Task` tail (`await previous?.value` first), so states apply in
+> submission order and `end` can't race a pending `update`; `start`/`update` pass a rolling
+> `staleDate: .now + 300`. The redundant `@MainActor` closure annotations are gone (the enqueued
+> closures are `@MainActor`-isolated to legally capture the non-Sendable `Activity`).
 
 `updateQuizActivity`/`endQuizActivity` each spawn a detached `Task { @MainActor in await activity.update/end(...) }`
 and return. Unstructured tasks carry no ordering guarantee across suspension points, so two rapid
@@ -269,8 +285,13 @@ activity on the Lock Screen for up to the ~8h system cap (cleaned only at next l
 **Fix:** serialize the updates (chain a `Task` tail, or make the functions `async` and `await` them
 from `Quiz`), and pass `staleDate: .now + 300` (refreshed each update).
 
-### 14. Widget timeline "next midnight" math breaks on DST days — _confirmed_
+### 14. Widget timeline "next midnight" math breaks on DST days — _confirmed_ — ✅ **implemented 2026-07-08**
 **Category:** bug · **Severity: Medium** · **`ConjuguerWidget/VerbDuJourWidget.swift:27`, `QuizWidget.swift:26`**
+
+> Fixed: the fragile `startOfDay + 86400` math is gone. Timeline entries are now placed at each
+> day's true midnight via `WidgetDateHelper` (a shared `Calendar(identifier: .gregorian)` doing
+> `startOfDay` / `date(byAdding: .day)`), and the multi-day timeline (#4) uses `.atEnd` rather than
+> a hand-computed `.after(nextMidnight)`.
 
 `Calendar.current.startOfDay(for: Date()).addingTimeInterval(86400)` is 01:00 next day on a
 23-hour spring-forward day (an extra stale hour) and 23:00 the *same* day on a 25-hour fall-back
@@ -292,8 +313,12 @@ wakes the process every 5 seconds forever — even when the Info tab is never op
 Observation of `SystemLanguageModel.availability`, instead of a fixed poll; if a poll is kept, store
 the task and cancel it in `deinit`.
 
-### 16. `LargeWidgetView` hard-indexes the paradigm and can crash the extension — _confirmed_
+### 16. `LargeWidgetView` hard-indexes the paradigm and can crash the extension — _confirmed_ — ✅ **implemented 2026-07-08**
 **Category:** bug · **Severity: Medium** · **`ConjuguerWidget/Views/LargeWidgetView.swift:39-40`**
+
+> Fixed: the présent-paradigm `Grid` is now gated behind `snapshot.présentParadigm.count >= 6`, so a
+> short/corrupt/old-format decoded snapshot renders without the row (rather than trapping on the
+> fixed `[row]` / `[row + 3]` indexing).
 
 `conjugationCell(snapshot.présentParadigm[row])` / `[row + 3]` for `row in 0..<3` assumes exactly 6
 entries; a short/corrupt/old-format decoded snapshot crashes the widget process. `SmallWidgetView`
@@ -311,10 +336,14 @@ Grouped; each is Low unless noted.
   from a nonisolated async `call(arguments:)` and reset from `@MainActor` — unsynchronized cross-isolation
   state, safe only by today's temporal serialization. Use a `Mutex` (iOS 18+), or make it a per-session
   instance counter and delete `resetCallCount()`.
-- **18. `DateFormatter` without `en_US_POSIX`** (`WidgetSnapshotWriter.swift:167-171`): `yyyy-MM-dd` under the
+- **18. `DateFormatter` without `en_US_POSIX`** (`WidgetSnapshotWriter.swift:167-171`) — ✅ **implemented 2026-07-08**: `yyyy-MM-dd` under the
   user's calendar emits era years on Buddhist/Japanese calendars, flowing into `questionID`. Pin
   `formatter.locale = Locale(identifier: "en_US_POSIX")` (and `referenceDate` to a Gregorian calendar);
-  hoist the formatter out of the per-call path.
+  hoist the formatter out of the per-call path. **Fixed:** `dateString(for:)` now delegates to
+  `WidgetDateHelper`, which formats from a fixed `Calendar(identifier: .gregorian)` via
+  `String(format: "%04d-%02d-%02d", …)` — locale-/calendar-independent and allocation-free (no
+  `DateFormatter` at all); `WidgetSnapshotWriter.referenceDate` and the day-diff math also use that
+  Gregorian calendar.
 - **19. `LocalizationTests` not language-pinned** (`ConjuguerTests/LocalizationTests.swift:20-30`): assert English
   literals with no `-AppleLanguages (en)` in the scheme's `TestAction`, so they fail on a French sim/CI.
   Pin the language or assert against the key / `String(localized:locale:)`.
@@ -429,8 +458,8 @@ Grouped; each is Low unless noted.
 8. ✅ Lowered the widget deployment target to 26.0 and aligned Swift version (#8): widget target now `IPHONEOS_DEPLOYMENT_TARGET = 26.0`, `SWIFT_VERSION = 6.0`, `SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor`; the Swift-6 upgrade surfaced a real actor-isolation error in `AnswerQuizIntent.perform()`, fixed by marking it `@MainActor`.
 9. ✅ Refreshed README (#43): 6,314 → 6,320 verbs, added a 2.0-features section (quiz, minigame, tutor, widgets, l10n) + a Secrets build step, noted the screenshots are pre-2.0; deleted `launchAnalytics.sh`; untracked `.claude/settings.local.json` (`git rm --cached` + gitignore). (Remaining #43 sub-items — corpus-doc coverage figures, `merge_classical.py`, screenshot-script cwd — are corpus/tooling cleanups deferred to a later pass.)
 
-**Phase 3 — widget & Live Activity robustness:**
-10. Multi-day snapshot rotation (#4), FNV-1a shuffle seed (#11), DST-safe midnight helper (#14), `LargeWidgetView` bounds guard (#16), `en_US_POSIX` formatter (#18), serialized Live Activity updates + `staleDate` (#13).
+**Phase 3 — widget & Live Activity robustness:** ✅ **complete 2026-07-08** (all 171 tests pass, app + widget build clean)
+10. ✅ Multi-day snapshot rotation (#4), FNV-1a shuffle seed (#11), DST-safe midnight helper (#14), `LargeWidgetView` bounds guard (#16), `en_US_POSIX`-equivalent date formatting (#18), serialized Live Activity updates + `staleDate` (#13). New `Shared/WidgetDateHelper.swift` consolidates the calendar/date-string/midnight logic across the app + widget; snapshots moved from a single `widget-snapshot.json` to a multi-day `widget-snapshots.json`.
 
 **Phase 4 — correctness edges & concurrency polish:**
 11. Invalidate the `VerbConjugations` cache on pronoun-gender change (#10), per-sound debounce clock (#12), replace the 5-second LMS poll (#15), `Mutex` the `callCount` (#17), reset transient game state in `seedWorld` (#28) and clamp the sim step (#30).

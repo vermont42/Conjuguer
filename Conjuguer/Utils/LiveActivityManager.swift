@@ -7,6 +7,16 @@ import ActivityKit
 import Foundation
 
 enum LiveActivityManager {
+  // A force-quit mid-quiz leaves a frozen "in-progress" activity on the Lock Screen
+  // until the system cap; a rolling staleDate lets the system mark it stale instead.
+  // Refreshed on every update so an actively-answered quiz never reads as stale.
+  private static let staleInterval: TimeInterval = 300
+
+  // Serial tail so ActivityKit calls apply in submission order: unstructured Tasks
+  // carry no ordering guarantee across suspension points, so two rapid answers could
+  // otherwise apply out of order and `end` could race a pending `update`.
+  private static var activityChain: Task<Void, Never>?
+
   static func startQuizActivity(
     difficulty: String,
     totalQuestions: Int
@@ -23,7 +33,7 @@ enum LiveActivityManager {
       elapsedTime: "0:00",
       isFinished: false
     )
-    let content = ActivityContent(state: initialState, staleDate: nil)
+    let content = ActivityContent(state: initialState, staleDate: Date.now.addingTimeInterval(staleInterval))
 
     do {
       return try Activity.request(attributes: attributes, content: content, pushType: nil)
@@ -36,8 +46,8 @@ enum LiveActivityManager {
     _ activity: Activity<QuizActivityAttributes>,
     state: QuizActivityAttributes.ContentState
   ) {
-    let content = ActivityContent(state: state, staleDate: nil)
-    Task { @MainActor in
+    let content = ActivityContent(state: state, staleDate: Date.now.addingTimeInterval(staleInterval))
+    enqueue {
       await activity.update(content)
     }
   }
@@ -47,16 +57,25 @@ enum LiveActivityManager {
     finalState: QuizActivityAttributes.ContentState
   ) {
     let content = ActivityContent(state: finalState, staleDate: nil)
-    Task { @MainActor in
+    enqueue {
       await activity.end(content, dismissalPolicy: .immediate)
     }
   }
 
   static func endAllActivities() {
-    Task { @MainActor in
+    enqueue {
       for activity in Activity<QuizActivityAttributes>.activities {
         await activity.end(nil, dismissalPolicy: .immediate)
       }
+    }
+  }
+
+  // Chains work onto the serial tail, so each ActivityKit call awaits the previous one.
+  private static func enqueue(_ operation: @escaping @MainActor () async -> Void) {
+    let previous = activityChain
+    activityChain = Task { @MainActor in
+      await previous?.value
+      await operation()
     }
   }
 }

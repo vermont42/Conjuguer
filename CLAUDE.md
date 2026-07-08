@@ -17,7 +17,13 @@ TelemetryDeck (`.md` + `.html` regenerated), #7 committed app ID redacted from `
 `MainActor` isolation (surfaced & fixed a real `AnswerQuizIntent.perform()` isolation bug), #43
 README refreshed (verb count, 2.0 features, Secrets step) + `launchAnalytics.sh` deleted +
 `.claude/settings.local.json` untracked. (Remaining #43 corpus/tooling sub-items deferred.)
-**Next up:** Phase 3 (widget & Live Activity robustness) — #4, #11, #14, #16, #18, #13. Keep this
+**Phase 3 (widget & Live Activity robustness) is done (2026-07-08):** #4 multi-day snapshot rotation
+(app now writes 7 daily snapshots to `widget-snapshots.json`; both providers emit per-day timeline
+entries with `.atEnd`), #11 FNV-1a shuffle seed (replaces the randomly-seeded `Hasher`), #14 DST-safe
+midnight math, #16 `LargeWidgetView` paradigm bounds guard, #18 locale-/calendar-independent date
+strings — #14/#18 consolidated into a new `Shared/WidgetDateHelper.swift` used by both targets — and
+#13 serialized Live Activity update/end via a chained-`Task` tail + rolling `staleDate: .now + 300`.
+**Next up:** Phase 4 (correctness edges & concurrency polish) — #10, #12, #15, #17, #28, #30. Keep this
 section current — check off or delete items here as they land, and remove the section once the doc
 is fully worked through.
 

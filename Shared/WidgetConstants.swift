@@ -12,7 +12,7 @@ import Foundation
 // interactive quiz's answer state and the pending widget/control deeplink.
 enum WidgetConstants {
   static let appGroupID = "group.software.racecondition.Conjuguer"
-  static let snapshotFilename = "widget-snapshot.json"
+  static let snapshotsFilename = "widget-snapshots.json"
   static let quizAnsweredKey = "widgetQuizAnswered"
   static let quizCorrectKey = "widgetQuizCorrect"
   static let quizQuestionIDKey = "widgetQuizQuestionID"
@@ -22,8 +22,8 @@ enum WidgetConstants {
     FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupID)
   }
 
-  static var snapshotURL: URL? {
-    sharedContainerURL?.appendingPathComponent(snapshotFilename)
+  static var snapshotsURL: URL? {
+    sharedContainerURL?.appendingPathComponent(snapshotsFilename)
   }
 
   static var sharedDefaults: UserDefaults? {

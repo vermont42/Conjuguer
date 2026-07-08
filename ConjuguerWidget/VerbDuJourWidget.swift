@@ -21,11 +21,21 @@ struct VerbDuJourProvider: TimelineProvider {
     completion(VerbDuJourEntry(date: Date(), snapshot: snapshot))
   }
 
+  // One entry per precomputed day, each placed at that day's midnight so WidgetKit
+  // rotates the verb of the day on its own. `.atEnd` reloads once the buffer is
+  // exhausted (the app also refreshes on foreground).
   func getTimeline(in context: Context, completion: @escaping (Timeline<VerbDuJourEntry>) -> Void) {
-    let snapshot = SnapshotReader.read() ?? SnapshotReader.placeholder
-    let entry = VerbDuJourEntry(date: Date(), snapshot: snapshot)
-    let nextMidnight = Calendar.current.startOfDay(for: Date()).addingTimeInterval(86400)
-    completion(Timeline(entries: [entry], policy: .after(nextMidnight)))
+    let snapshots = SnapshotReader.readAll()
+    guard !snapshots.isEmpty else {
+      let entry = VerbDuJourEntry(date: Date(), snapshot: SnapshotReader.placeholder)
+      completion(Timeline(entries: [entry], policy: .atEnd))
+      return
+    }
+    let entries = snapshots.map { snapshot in
+      let date = WidgetDateHelper.date(fromDateString: snapshot.dateString) ?? Date()
+      return VerbDuJourEntry(date: date, snapshot: snapshot)
+    }
+    completion(Timeline(entries: entries, policy: .atEnd))
   }
 }
 
