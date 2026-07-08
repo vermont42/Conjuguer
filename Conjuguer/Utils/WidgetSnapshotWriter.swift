@@ -26,16 +26,26 @@ enum WidgetSnapshotWriter {
     Tense.conditionnelPrésent
   ]
 
-  @MainActor static func writeSnapshots() {
+  // Returns whether the on-disk snapshot actually changed, so the caller can skip the
+  // (budget-limited) widget reload when nothing moved.
+  @discardableResult
+  @MainActor static func writeSnapshots() -> Bool {
     let snapshots = generateSnapshots()
     guard
       !snapshots.isEmpty,
       let url = WidgetConstants.snapshotsURL,
       let data = try? JSONEncoder().encode(snapshots)
     else {
-      return
+      return false
+    }
+    // The snapshot is keyed on the calendar day and the pronoun-gender setting, so
+    // re-foregrounding within the same day re-encodes identical bytes. Skip both the
+    // write and the reload in that case rather than spending the reload budget on a no-op.
+    if let existing = try? Data(contentsOf: url), existing == data {
+      return false
     }
     try? data.write(to: url, options: .atomic)
+    return true
   }
 
   // One snapshot per day for today plus the next `dayCount - 1` days.
@@ -139,6 +149,10 @@ enum WidgetSnapshotWriter {
     )
   }
 
+  // The most common verbs, conjugated in the same tense/person, are the real-form
+  // fallback distractors for a verb too defective to supply three of its own.
+  private static let fillerInfinitifs = ["être", "avoir", "aller", "faire"]
+
   @MainActor private static func generateWrongAnswers(
     verb: Verb,
     makeTense: (PersonNumber) -> Tense,
@@ -159,6 +173,8 @@ enum WidgetSnapshotWriter {
       candidates.append(form)
     }
 
+    // Nearest-miss distractors first: same tense, other persons; then same person,
+    // other tenses — the most plausible wrong answers for this verb.
     for otherPerson in PersonNumber.allCases where otherPerson != personNumber {
       consider(Conjugator.conjugatedString(infinitif: verb.infinitif, tense: makeTense(otherPerson), extraLetters: nil))
     }
@@ -167,8 +183,21 @@ enum WidgetSnapshotWriter {
       consider(Conjugator.conjugatedString(infinitif: verb.infinitif, tense: otherFamily(personNumber), extraLetters: nil))
     }
 
-    while candidates.count < 3 {
-      candidates.append(correctAnswer + String(repeating: "x", count: candidates.count + 1))
+    // Broaden to the full tense × person cross-product before any fallback, so
+    // distractors stay real conjugations of this verb.
+    for family in quizTenseFamilies {
+      for otherPerson in PersonNumber.allCases {
+        consider(Conjugator.conjugatedString(infinitif: verb.infinitif, tense: family(otherPerson), extraLetters: nil))
+      }
+    }
+
+    // Last resort for pathologically defective verbs with too few distinct forms:
+    // borrow real conjugations of the most common verbs rather than emitting
+    // synthetic (and obviously fake) `xx`-padded strings.
+    for filler in fillerInfinitifs {
+      for otherPerson in PersonNumber.allCases {
+        consider(Conjugator.conjugatedString(infinitif: filler, tense: makeTense(otherPerson), extraLetters: nil))
+      }
     }
 
     return Array(candidates.prefix(3))
@@ -180,9 +209,22 @@ enum WidgetSnapshotWriter {
     }
     let prefix = String(text.prefix(maxLength))
     if let lastPeriod = prefix.lastIndex(of: ".") {
-      return String(prefix[...lastPeriod])
+      return rebalanceTildes(String(prefix[...lastPeriod]))
     }
-    return prefix + "…"
+    return rebalanceTildes(prefix) + "…"
+  }
+
+  // Etymology snippets use `~…~` bold markup. A mid-string cut can leave an unclosed
+  // `~` opener, which the widget's parser (splitting on `~`) would render as bold
+  // running to the end of the snippet. Drop the dangling opener so the tail stays plain.
+  static func rebalanceTildes(_ text: String) -> String {
+    guard !text.filter({ $0 == "~" }).count.isMultiple(of: 2) else {
+      return text
+    }
+    guard let lastTilde = text.lastIndex(of: "~") else {
+      return text
+    }
+    return String(text[..<lastTilde]) + String(text[text.index(after: lastTilde)...])
   }
 
   static func dateString(for date: Date) -> String {

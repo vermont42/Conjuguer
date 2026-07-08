@@ -12,6 +12,10 @@ enum LiveActivityManager {
   // Refreshed on every update so an actively-answered quiz never reads as stale.
   private static let staleInterval: TimeInterval = 300
 
+  // How long the finished results state lingers on the Lock Screen before the system
+  // dismisses it, instead of vanishing the instant the quiz completes.
+  private static let finishedLingerInterval: TimeInterval = 8
+
   // Serial tail so ActivityKit calls apply in submission order: unstructured Tasks
   // carry no ordering guarantee across suspension points, so two rapid answers could
   // otherwise apply out of order and `end` could race a pending `update`.
@@ -19,7 +23,8 @@ enum LiveActivityManager {
 
   static func startQuizActivity(
     difficulty: String,
-    totalQuestions: Int
+    totalQuestions: Int,
+    startDate: Date
   ) -> Activity<QuizActivityAttributes>? {
     guard ActivityAuthorizationInfo().areActivitiesEnabled else {
       return nil
@@ -30,6 +35,7 @@ enum LiveActivityManager {
       currentQuestion: 1,
       score: 0,
       correctCount: 0,
+      startDate: startDate,
       elapsedTime: "0:00",
       isFinished: false
     )
@@ -57,8 +63,11 @@ enum LiveActivityManager {
     finalState: QuizActivityAttributes.ContentState
   ) {
     let content = ActivityContent(state: finalState, staleDate: nil)
+    let dismissalDate = Date.now.addingTimeInterval(finishedLingerInterval)
     enqueue {
-      await activity.end(content, dismissalPolicy: .immediate)
+      // Let the finished results state linger briefly instead of dismissing the instant
+      // the quiz completes, so the final score is actually visible on the Lock Screen.
+      await activity.end(content, dismissalPolicy: .after(dismissalDate))
     }
   }
 

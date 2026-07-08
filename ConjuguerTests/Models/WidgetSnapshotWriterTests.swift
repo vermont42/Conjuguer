@@ -52,6 +52,29 @@ struct WidgetSnapshotWriterTests {
     #expect(Set(question.wrongAnswers).count == question.wrongAnswers.count, "Distractors must be unique.")
   }
 
+  @Test func testSnapshotWrongAnswersAreNeverSyntheticPadding() {
+    // Finding 33: the old fallback appended `correctAnswer + "xx…"` when it ran out of
+    // real forms, surfacing fake options like `parlonsxx`. Sweeping many days, no
+    // distractor may be the correct answer with a trailing run of `x` padding.
+    let start = day("2025-01-01")
+    for offset in 0 ..< 40 {
+      guard
+        let date = WidgetDateHelper.calendar.date(byAdding: .day, value: offset, to: start),
+        let snapshot = WidgetSnapshotWriter.generateSnapshot(date: date)
+      else {
+        continue
+      }
+      let question = snapshot.quizQuestion
+      for wrong in question.wrongAnswers where wrong.hasPrefix(question.correctAnswer) {
+        let suffix = wrong.dropFirst(question.correctAnswer.count)
+        #expect(
+          !(!suffix.isEmpty && suffix.allSatisfy { $0 == "x" }),
+          "Distractor \"\(wrong)\" for \"\(question.correctAnswer)\" is synthetic `x` padding."
+        )
+      }
+    }
+  }
+
   @Test func testSnapshotDecorrelatesPersonAndTense() {
     // Finding 2: person and tense were welded (both indexed by seed % 6), so only 6 of
     // 36 combinations ever appeared. Sweeping 36 consecutive days must surface well more
@@ -101,5 +124,24 @@ struct WidgetSnapshotWriterTests {
   @Test func testTruncateAppendsEllipsisWhenNoBoundary() {
     // No period in the prefix, so the truncation falls back to an ellipsis.
     #expect(WidgetSnapshotWriter.truncateToSentenceBoundary("Supercalifragilistic", maxLength: 5) == "Super…")
+  }
+
+  // MARK: rebalanceTildes (finding 33)
+
+  @Test func testTruncateDropsDanglingBoldOpener() {
+    // Cutting inside `~…~` bold markup would leave an odd tilde count, which the widget's
+    // etymology parser renders as bold running to the end. The dangling opener is dropped.
+    let text = "Du latin ~parabolare~, mot très ~long et interminable qui déborde largement."
+    let truncated = WidgetSnapshotWriter.truncateToSentenceBoundary(text, maxLength: 45)
+    #expect(truncated.filter { $0 == "~" }.count.isMultiple(of: 2), "Tilde count must be balanced after truncation.")
+  }
+
+  @Test func testRebalanceLeavesBalancedTextUnchanged() {
+    let balanced = "Du latin ~parabolare~, « raconter »."
+    #expect(WidgetSnapshotWriter.rebalanceTildes(balanced) == balanced)
+  }
+
+  @Test func testRebalanceStripsSingleDanglingTilde() {
+    #expect(WidgetSnapshotWriter.rebalanceTildes("Du latin ~parabolare") == "Du latin parabolare")
   }
 }

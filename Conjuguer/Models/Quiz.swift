@@ -28,6 +28,9 @@ class Quiz {
   private let gameCenter: GameCenter
   private var shouldShuffle = true
   private var liveActivity: Activity<QuizActivityAttributes>?
+  // The instant the timer started, handed to the Live Activity so its Lock Screen /
+  // Dynamic Island timer animates via the OS rather than a per-answer frozen String.
+  private var liveActivityStartDate = Date.now
 
   // Elapsed time for the Live Activity. Reuses Int.timeString so it matches the in-app
   // formatting past an hour (1:01:05, not 61:05) rather than diverging.
@@ -105,9 +108,11 @@ class Quiz {
 
   private func startLiveActivity() {
     endLiveActivity()
+    liveActivityStartDate = Date.now
     liveActivity = LiveActivityManager.startQuizActivity(
       difficulty: difficulty.localizedDifficulty,
-      totalQuestions: questions.count
+      totalQuestions: questions.count,
+      startDate: liveActivityStartDate
     )
   }
 
@@ -119,6 +124,7 @@ class Quiz {
       currentQuestion: min(currentQuestionIndex + 1, questions.count),
       score: score,
       correctCount: correctCount,
+      startDate: liveActivityStartDate,
       elapsedTime: elapsedTimeString,
       isFinished: isFinished
     )
@@ -133,6 +139,7 @@ class Quiz {
       currentQuestion: currentQuestionIndex,
       score: score,
       correctCount: correctCount,
+      startDate: liveActivityStartDate,
       elapsedTime: elapsedTimeString,
       isFinished: true
     )

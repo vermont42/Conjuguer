@@ -440,14 +440,28 @@ Grouped; each is Low unless noted.
   tap) it skips the write and just reloads the timeline.
 - **33. Etymology truncation can cut inside `~…~` markup** (`WidgetSnapshotWriter.swift:149-165`): an odd tilde
   count bolds the whole tail; the `correctAnswer + "xx"` distractor fallback can surface fake options like
-  `parlonsxx`. Rebalance a dangling tilde after truncation; prefer real forms from other tenses as distractors.
+  `parlonsxx`. Rebalance a dangling tilde after truncation; prefer real forms from other tenses as distractors. — ✅
+  **implemented 2026-07-08**: `truncateToSentenceBoundary` now runs the truncated snippet through a new
+  `rebalanceTildes` helper that drops a dangling `~` opener (keeping the tilde count even); `generateWrongAnswers`
+  broadens to the full tense × person cross-product of the verb's own conjugations, then falls back to real
+  conjugations of the most common verbs (`être`/`avoir`/`aller`/`faire`) — the synthetic `xx` padding is gone.
+  New `WidgetSnapshotWriterTests` pin both (`testTruncateDropsDanglingBoldOpener`, `testRebalanceStripsSingleDanglingTilde`,
+  `testSnapshotWrongAnswersAreNeverSyntheticPadding`).
 - **34. Live Activity `elapsedTime` is a frozen String; `isFinished` is dead** (`QuizActivityAttributes.swift:20`,
   `LiveActivityManager.swift:24/51`): the Dynamic Island timer freezes between answers, and the final state is
   pushed then dismissed `.immediate` so nobody sees it. Put the start `Date` in the attributes and render
-  `Text(_, style: .timer)`; drop `isFinished` or render a lingering results state.
+  `Text(_, style: .timer)`; drop `isFinished` or render a lingering results state. — ✅ **implemented 2026-07-08**:
+  `ContentState` now carries a `startDate`; the widget renders a new `QuizElapsedText` that shows
+  `Text(startDate, style: .timer)` while in progress (OS-animated) and the frozen final `elapsedTime` once
+  `isFinished` — so `isFinished` is now load-bearing. `endQuizActivity` dismisses with `.after(.now + 8s)` instead
+  of `.immediate`, letting the finished results linger on the Lock Screen. `Quiz` owns the `startDate` and threads
+  it through `startQuizActivity(…, startDate:)`.
 - **35. Unconditional snapshot rewrite + `reloadAllTimelines()` on every foreground**
   (`ConjuguerApp.swift:42-48,71-74`): spends widget reload budget even when the bytes are identical. Compare the
-  newly encoded `Data` to the existing file and skip write+reload when unchanged.
+  newly encoded `Data` to the existing file and skip write+reload when unchanged. — ✅ **implemented 2026-07-08**:
+  `writeSnapshots()` is now `@discardableResult -> Bool`, comparing the freshly encoded `Data` against the on-disk
+  file and returning `false` (skipping the write) when identical; `refreshWidgets()` only calls
+  `reloadAllTimelines()` when the write reports a change.
 - **36. Minigame high score is never submitted to Game Center** (`GameState.swift:764-777`): persists to
   `Current.settings.gameHighScore` but never calls `Current.gameCenter.reportScore(_:)` (only `Quiz` does). Flagging
   so the local-only choice is explicit. — ✅ **resolved 2026-07-08** (won't-fix / by design): the app owner confirmed
@@ -539,4 +553,7 @@ Grouped; each is Low unless noted.
     ✅ #36 resolved as won't-fix (minigame score is local-only by design; not reported to Game Center).
     ✅ Also landed #20 tutor-chip localization (2026-07-08, after the initial Phase-6 pass) — locale-switched
     `frenchSuggestions` array following the sibling **Conjugar**'s pattern; verified in a French-locale sim launch.
-    **Deferred** (heavier or design calls, left for a deliberate follow-up): #37 minigame de-duplication (large refactor of untested game code), #33 etymology-truncation markup rebalance, #34 Live Activity `Text(style: .timer)` / dead `isFinished`, and #35 skip-unchanged snapshot write.
+    ✅ Also landed the widget-polish trio (2026-07-08): #33 etymology-truncation tilde rebalance + real-form
+    distractors, #34 Live Activity `Text(_, style: .timer)` via a `startDate` in `ContentState` + lingering finished
+    state, and #35 skip-unchanged snapshot write/reload. Test count 192 → **196 in 16 suites**.
+    **Deferred** (heaviest, left for a deliberate follow-up): #37 minigame de-duplication (large refactor of untested game code).

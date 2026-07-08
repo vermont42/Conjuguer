@@ -11,40 +11,13 @@ For fully-implemented items and the original ranking/rationale, see `code-review
 (minigame Game Center submission) is closed as **won't-fix** — the score is local-only by design. Finding **#20**
 (unlocalized tutor chips) was **implemented 2026-07-08** — a locale-switched `frenchSuggestions` array following
 the sibling app Conjugar's pattern, verified in a French-locale sim launch — and is no longer listed below.
+The widget-polish trio **#33** (etymology tilde rebalance + real-form distractors), **#34** (Live Activity
+`Text(_, style: .timer)` + lingering finished state), and **#35** (skip-unchanged snapshot write/reload) was
+**implemented 2026-07-08** (test count 192 → 196) and is no longer listed below.
 
 ---
 
 ## Code findings
-
-### #33 — Etymology truncation can cut inside `~…~` markup
-- **Where:** `Conjuguer/Utils/WidgetSnapshotWriter.swift:149-165`
-- **Severity:** Low · **Type:** bug
-- **Problem:** an odd tilde count after truncation bolds the whole tail; separately, the
-  `correctAnswer + "xx"` distractor fallback can surface fake options like `parlonsxx`.
-- **Fix:** rebalance a dangling `~` after truncating; prefer real conjugated forms from other tenses as
-  quiz distractors instead of the `xx` padding.
-- **Why deferred:** low-risk and self-contained — a good next pick. `WidgetSnapshotWriterTests` already exists
-  and would be the place to pin the fix.
-
-### #34 — Live Activity `elapsedTime` is a frozen String; `isFinished` is dead
-- **Where:** `Conjuguer/Models/QuizActivityAttributes.swift:20`, `Conjuguer/Utils/LiveActivityManager.swift:24/51`
-- **Severity:** Low · **Type:** bug / polish
-- **Problem:** the Dynamic Island / Lock Screen timer freezes between answers (it's a String pushed per
-  update), and the final state is pushed then dismissed `.immediate`, so nobody sees the finished state. The
-  `isFinished` flag is effectively dead.
-- **Fix:** put the start `Date` in the `ContentState`/attributes and render `Text(_, style: .timer)` so the OS
-  animates it; drop `isFinished` or render a lingering results state instead of dismissing immediately.
-- **Why deferred:** touches the Live Activity update path (recently reworked in Phase 3, finding #13); worth
-  doing carefully with a device check.
-
-### #35 — Unconditional snapshot rewrite + `reloadAllTimelines()` on every foreground
-- **Where:** `Conjuguer/App/ConjuguerApp.swift` (snapshot-write + widget-reload hooks)
-- **Severity:** Low · **Type:** performance
-- **Problem:** the app re-encodes the widget snapshot and calls `reloadAllTimelines()` on every foreground even
-  when the bytes are identical, spending the limited widget reload budget for nothing.
-- **Fix:** compare the newly-encoded `Data` to the existing file and skip both the write and the reload when
-  unchanged.
-- **Why deferred:** low-risk optimization; bundle it with #34 or #33 in a widget-polish pass.
 
 ### #37 — Minigame duplication
 - **Where:** `Conjuguer/Models/Game/GameState.swift` vs `GameState+RobotBoss.swift` / `+Divers.swift` /
@@ -86,7 +59,5 @@ and untracked `.claude/settings.local.json`. **Still open** are the corpus/tooli
 
 ## Suggested order if picked up
 
-1. **#33** (self-contained, already has a test suite) →
-2. **#35** + **#34** as one widget/Live-Activity polish pass →
-3. **#43** corpus/tooling cleanup (independent of the app) →
-4. **#37** last, with a full manual game playthrough as the verification gate.
+1. **#43** corpus/tooling cleanup (independent of the app) →
+2. **#37** last, with a full manual game playthrough as the verification gate.

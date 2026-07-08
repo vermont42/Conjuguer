@@ -68,8 +68,10 @@ struct ConjuguerApp: App {
   }
 
   @MainActor private func refreshWidgets() {
-    WidgetSnapshotWriter.writeSnapshots()
-    WidgetCenter.shared.reloadAllTimelines()
+    // Only spend the limited widget reload budget when the snapshot actually changed.
+    if WidgetSnapshotWriter.writeSnapshots() {
+      WidgetCenter.shared.reloadAllTimelines()
+    }
   }
 
   @MainActor private func drainPendingWidgetDeeplink() {

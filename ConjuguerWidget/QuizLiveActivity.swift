@@ -30,7 +30,7 @@ struct QuizLiveActivity: Widget {
           .font(.headline)
         }
         DynamicIslandExpandedRegion(.center) {
-          Text(verbatim: context.state.elapsedTime)
+          QuizElapsedText(state: context.state)
             .font(.title2)
             .monospacedDigit()
         }
@@ -85,7 +85,7 @@ private struct QuizLockScreenView: View {
           Text(verbatim: "\(context.state.currentQuestion) / \(context.attributes.totalQuestions)")
             .monospacedDigit()
           Text(verbatim: "·")
-          Text(verbatim: context.state.elapsedTime)
+          QuizElapsedText(state: context.state)
             .monospacedDigit()
         }
         .font(.subheadline)
@@ -93,5 +93,20 @@ private struct QuizLockScreenView: View {
       }
     }
     .padding()
+  }
+}
+
+// While the quiz is in progress the OS animates the elapsed time from `startDate`
+// (`Text(_, style: .timer)`); once finished, the frozen final time is shown so the
+// timer does not keep counting past completion.
+private struct QuizElapsedText: View {
+  let state: QuizActivityAttributes.ContentState
+
+  var body: some View {
+    if state.isFinished {
+      Text(verbatim: state.elapsedTime)
+    } else {
+      Text(state.startDate, style: .timer)
+    }
   }
 }
