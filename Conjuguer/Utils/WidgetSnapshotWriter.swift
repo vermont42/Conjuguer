@@ -174,7 +174,7 @@ enum WidgetSnapshotWriter {
     return Array(candidates.prefix(3))
   }
 
-  private static func truncateToSentenceBoundary(_ text: String, maxLength: Int) -> String {
+  static func truncateToSentenceBoundary(_ text: String, maxLength: Int) -> String {
     guard text.count > maxLength else {
       return text
     }

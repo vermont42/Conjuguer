@@ -66,4 +66,99 @@ struct DeeplinkTests {
     #expect(Current.verbModel?.id == model?.id, "In-app link must not clear the sibling verbModel.")
     #expect(Current.selectedTab == .models)
   }
+
+  @Test func testQuizDeeplinkStartsQuizAndSwitchesTab() {
+    resetCurrent()
+    Current.selectedTab = .settings
+
+    Current.handleURL(url("conjuguer://quiz/start"))
+
+    #expect(Current.selectedTab == .quiz)
+    #expect(Current.quiz.quizState == .inProgress)
+  }
+
+  @Test func testModelDeeplinkSelectsModel() {
+    resetCurrent()
+    Current.selectedTab = .verbs
+
+    Current.handleURL(url("conjuguer://model/4-2B"))
+
+    #expect(Current.verbModel?.id == "4-2B")
+    #expect(Current.selectedTab == .models)
+  }
+
+  @Test func testRandomVerbDeeplinkSelectsSomeVerb() {
+    resetCurrent()
+    Current.selectedTab = .settings
+
+    Current.handleURL(url("conjuguer://verb/random"))
+
+    #expect(Current.verb != nil, "The random-verb link must resolve to a verb.")
+    #expect(Current.selectedTab == .verbs)
+  }
+
+  @Test func testNegativeInfoIndexIsRejectedWithoutCrashing() {
+    resetCurrent()
+    Current.selectedTab = .settings
+
+    // Finding 9: `-1` passes the upper-bound check but must be rejected by the
+    // `indices.contains` guard rather than trapping on `Info.infos[-1]`.
+    Current.handleURL(url("conjuguer://info/-1"))
+
+    #expect(Current.info == nil)
+    #expect(Current.selectedTab == .settings, "An out-of-range info link must not switch the tab.")
+  }
+
+  @Test func testTooLargeInfoIndexIsRejected() {
+    resetCurrent()
+    Current.selectedTab = .settings
+
+    Current.handleURL(url("conjuguer://info/9999"))
+
+    #expect(Current.info == nil)
+    #expect(Current.selectedTab == .settings)
+  }
+
+  @Test func testNonNumericInfoIndexIsRejected() {
+    resetCurrent()
+    Current.selectedTab = .settings
+
+    Current.handleURL(url("conjuguer://info/abc"))
+
+    #expect(Current.info == nil)
+    #expect(Current.selectedTab == .settings)
+  }
+
+  @Test func testWrongSchemeIsIgnored() {
+    resetCurrent()
+    Current.selectedTab = .settings
+
+    Current.handleURL(url("https://verb/parler"))
+
+    #expect(Current.verb == nil, "A non-conjuguer scheme must not resolve an entity.")
+    #expect(Current.selectedTab == .settings)
+  }
+
+  @Test func testWrongComponentCountIsIgnored() {
+    resetCurrent()
+    Current.selectedTab = .settings
+
+    // `conjuguer://verb` has no path component, so it fails the component-count guard.
+    Current.handleURL(url("conjuguer://verb"))
+
+    #expect(Current.verb == nil)
+    #expect(Current.selectedTab == .settings)
+  }
+
+  @Test func testUnknownHostIsIgnored() {
+    resetCurrent()
+    Current.selectedTab = .settings
+
+    Current.handleURL(url("conjuguer://bogus/thing"))
+
+    #expect(Current.verb == nil)
+    #expect(Current.verbModel == nil)
+    #expect(Current.info == nil)
+    #expect(Current.selectedTab == .settings, "An unknown host must not switch the tab.")
+  }
 }

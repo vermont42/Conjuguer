@@ -356,9 +356,11 @@ Grouped; each is Low unless noted.
   `String(format: "%04d-%02d-%02d", …)` — locale-/calendar-independent and allocation-free (no
   `DateFormatter` at all); `WidgetSnapshotWriter.referenceDate` and the day-diff math also use that
   Gregorian calendar.
-- **19. `LocalizationTests` not language-pinned** (`ConjuguerTests/LocalizationTests.swift:20-30`): assert English
+- **19. `LocalizationTests` not language-pinned** (`ConjuguerTests/LocalizationTests.swift:20-30`) — ✅ **implemented 2026-07-08**: assert English
   literals with no `-AppleLanguages (en)` in the scheme's `TestAction`, so they fail on a French sim/CI.
-  Pin the language or assert against the key / `String(localized:locale:)`.
+  Pin the language or assert against the key / `String(localized:locale:)`. **Fixed:** the shared
+  `Conjuguer.xcscheme` `TestAction` now pins `language = "en"` / `region = "US"`, so the English-literal
+  assertions hold regardless of the host sim/CI language.
 - **20. Unlocalized tutor suggestion chips** (`TutorView.swift:22-39`): 16 user-facing English strings bypass
   `L`/xcstrings in a bilingual app. Route through `L.Tutor` with `fr` translations, or comment that English
   prompts are a deliberate model-quality choice.
@@ -433,19 +435,31 @@ Grouped; each is Low unless noted.
   incremental build + sim boot). The 1.25M conjugations are inherent to what the tool does, so the fix is to **trim,
   not optimize**: move both methods behind an opt-in trait excluded from CI (`.disabled("run manually")` or a
   filtered `.tags(.tool)` in a test plan), or lift the logic into a standalone `swift` script outside the test target.
-- **39. Quiz scoring is barely tested; the deterministic seam is unused** (`QuizTests.swift:14-44`): tests submit
+- **39. Quiz scoring is barely tested; the deterministic seam is unused** (`QuizTests.swift:14-44`) — ✅ **implemented 2026-07-08**: tests submit
   `"x"` ×30 and assert only counts and `score == 0`. The `.ridiculous` score multiplier, the elapsed-time bonus
   (`score >= 150`), and the `bestScore` write-back are untested, and the `Quiz(gameCenter:shouldShuffle:)` seam added
   for deterministic testing is never constructed. Add a `shouldShuffle: false` suite feeding known-correct answers.
-- **40. `WidgetSnapshotWriter` is entirely untested** despite an injectable `date:` seam on every method. Cover the
+  **Fixed:** `QuizTests` now builds a `Quiz(gameCenter:shouldShuffle: false)`, reads its deterministic question list,
+  and feeds each conjugation's first alternate — asserting the all-correct regular score (300 + 450 elapsed bonus =
+  750), the `.ridiculous` ×2 multiplier (1050), and `bestScore` write-back (won't overwrite with a lower score).
+- **40. `WidgetSnapshotWriter` is entirely untested** despite an injectable `date:` seam on every method — ✅ **implemented 2026-07-08**. Cover the
   day-index hash, `generateWrongAnswers` (dedup + padding), and `truncateToSentenceBoundary` with fixed dates. (This
-  suite would have caught findings 2 and 33.)
-- **41. Deep-link tests miss most branches** (`DeeplinkTests.swift`): no coverage of `quiz`, `model`, `verb/random`,
-  the out-of-range `info` index (finding 9), or the malformed-URL rejections. Add them.
-- **42. `.githooks/pre-commit` correctness gaps** (`:30`): lints the working-tree file rather than the staged blob
+  suite would have caught findings 2 and 33.) **Fixed:** new `WidgetSnapshotWriterTests` covers `verbOfTheDay`
+  determinism + daily rotation, distractor dedup/exclusion via `generateSnapshot`, the person/tense decorrelation
+  (>6 distinct pairs across 36 days — pins finding 2), the calendar-independent `yyyy-MM-dd` string + `questionID`
+  shape, and `truncateToSentenceBoundary` (unchanged / sentence-boundary cut / ellipsis fallback). Made
+  `truncateToSentenceBoundary` internal so the test target can reach it.
+- **41. Deep-link tests miss most branches** (`DeeplinkTests.swift`) — ✅ **implemented 2026-07-08**: no coverage of `quiz`, `model`, `verb/random`,
+  the out-of-range `info` index (finding 9), or the malformed-URL rejections. Add them. **Fixed:** added `quiz/start`
+  (starts quiz + selects tab), `model/4-2B`, `verb/random`, negative + too-large + non-numeric `info` index (all
+  rejected without crashing or switching tab), and wrong-scheme / wrong-component-count / unknown-host rejections.
+- **42. `.githooks/pre-commit` correctness gaps** (`:30`) — ✅ **implemented 2026-07-08**: lints the working-tree file rather than the staged blob
   (false pass/block with `git add -p`); `--diff-filter=ACM` omits `R` (a renamed-and-modified `.swift` escapes);
   `git diff --name-only` C-quotes non-ASCII paths (plausible in a French project) so accented filenames are skipped.
-  Use `--diff-filter=ACMR` and `-z`-terminated output with `read -d ''`.
+  Use `--diff-filter=ACMR` and `-z`-terminated output with `read -d ''`. **Fixed:** the hook now filters
+  `--diff-filter=ACMR` and reads `-z` NUL-terminated paths via `read -r -d ''` over a process substitution (shebang
+  bumped to `#!/bin/bash` for those features). The staged-blob-vs-working-tree gap is inherent to SwiftLint's
+  `--use-script-input-files` (it needs real file paths) and is left as a documented limitation.
 - **43. Stale/dead repo files:** `README.md` says 6,314 verbs (actual 6,320), mentions no 2.0 features (quiz, game,
   tutor, widgets), ships pre-2.0 screenshots, and omits the mandatory `cp Secrets.example.xcconfig Secrets.xcconfig`
   build step; `launchAnalytics.sh` is a dead `amplify console analytics` one-liner; `.claude/settings.local.json` is
@@ -477,8 +491,8 @@ Grouped; each is Low unless noted.
 **Phase 4 — correctness edges & concurrency polish:** ✅ **complete 2026-07-08** (all 171 tests pass, app + widget build clean)
 11. ✅ Invalidate the `VerbConjugations` cache on pronoun-gender change (#10), ✅ per-sound debounce clock (#12), ✅ replace the 5-second LMS poll with a `scenePhase`-driven `refreshAvailability()` (#15), ✅ `Mutex` the `callCount` (#17), ✅ reset transient game state in `seedWorld` (#28) and ✅ clamp the sim step to `min(rawDt, 1.0/30.0)` (#30).
 
-**Phase 5 — test coverage (lock in the above, then broaden):**
-12. Take `CorpusFormsDumpTests` out of the default run (#38); add quiz-scoring (#39), `WidgetSnapshotWriter` (#40), and deep-link-branch (#41) suites; pin `LocalizationTests` language (#19); harden the pre-commit hook (#42).
+**Phase 5 — test coverage (lock in the above, then broaden):** ✅ **complete 2026-07-08** (192 tests in 16 suites pass; up from 169)
+12. ✅ Took `CorpusFormsDumpTests` out of the default run (#38, earlier); ✅ added quiz-scoring (#39), ✅ `WidgetSnapshotWriter` (#40), and ✅ deep-link-branch (#41) suites; ✅ pinned `LocalizationTests` language via the scheme `TestAction` (#19); ✅ hardened the pre-commit hook (#42).
 
 **Phase 6 — readability & polish (opportunistic, low risk):**
 13. `Logger` migration (#21), `Button`+`openURL` (#22), sentinel→`String?` (#24), dead-availability cleanup (#26), `fatalError`→`assertionFailure` in runtime paths (#27), minigame de-duplication (#37), and the remaining Tier-3 items as they're touched.

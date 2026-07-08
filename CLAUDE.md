@@ -32,9 +32,18 @@ app's `scenePhase == .active` hook, #17 `Mutex(0)` (`import Synchronization`) gu
 instead of `nonisolated(unsafe)`, #28 `seedWorld()` now resets `movingLeft`/`movingRight`/`sineTime`/
 `smokeCooldown`/`smokeColorCycle`, #30 `update(currentTime:)` clamps the sim step to `min(rawDt, 1.0/30.0)`
 after the hitch guard.
-**Next up:** Phase 5 (test coverage) — #38 (done), #39, #40, #41, #19, #42. Keep this
-section current — check off or delete items here as they land, and remove the section once the doc
-is fully worked through.
+**Phase 5 (test coverage) is done (2026-07-08):** #38 (done earlier), #39 quiz-scoring via the
+`Quiz(gameCenter:shouldShuffle: false)` seam (`QuizTests` now asserts the all-correct regular score
+750 = 300 + 450 elapsed bonus, the `.ridiculous` ×2 multiplier → 1050, and `bestScore` write-back),
+#40 new `WidgetSnapshotWriterTests` (verb-of-the-day determinism/rotation, distractor dedup, person/tense
+decorrelation, `yyyy-MM-dd`/`questionID` shape, `truncateToSentenceBoundary` — made internal for the test),
+#41 deep-link branch coverage (`quiz`/`model`/`verb/random`, out-of-range/non-numeric `info`, and
+scheme/component/host rejections), #19 `LocalizationTests` language-pinned via `Conjuguer.xcscheme`'s
+`TestAction` (`language = "en"` / `region = "US"`), #42 pre-commit hook hardened (`--diff-filter=ACMR`,
+`-z` NUL-terminated `read -d ''`, `#!/bin/bash`). Test count 169 → **192 in 16 suites**.
+**Next up:** Phase 6 (readability & polish, opportunistic) — #21, #22, #24, #26, #27, #37, and the
+remaining Tier-3 items. Keep this section current — check off or delete items here as they land, and
+remove the section once the doc is fully worked through.
 
 ## Build and Test Commands
 

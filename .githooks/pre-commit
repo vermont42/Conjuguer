@@ -1,6 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Pre-commit hook: lint staged Swift files with SwiftLint.
+#
+# Uses bash for NUL-terminated `read -d ''` + process substitution (so the loop's
+# `count` survives into the SwiftLint invocation).
 #
 # SwiftLint used to run as an Xcode "Run SwiftLint" build phase on every build.
 # It now runs here instead, so it gates commits without slowing every build.
@@ -18,17 +21,21 @@ if ! command -v swiftlint >/dev/null 2>&1; then
   exit 0
 fi
 
-# Expose staged Swift files (Added/Copied/Modified) to SwiftLint via the
-# SCRIPT_INPUT_FILE_* protocol so it lints only what is being committed and
-# returns a proper exit code.
+# Expose staged Swift files to SwiftLint via the SCRIPT_INPUT_FILE_* protocol so
+# it lints only what is being committed and returns a proper exit code.
+#
+# --diff-filter=ACMR includes Renamed files (a renamed-and-modified .swift would
+# otherwise escape linting). -z / read -d '' uses NUL-terminated paths so accented
+# filenames (plausible in a French project) aren't C-quoted and skipped.
 count=0
-while IFS= read -r file; do
-  [ -z "$file" ] && continue
+while IFS= read -r -d '' file; do
+  case "$file" in
+    *.swift) ;;
+    *) continue ;;
+  esac
   export "SCRIPT_INPUT_FILE_$count=$file"
   count=$((count + 1))
-done <<EOF
-$(git diff --cached --name-only --diff-filter=ACM | grep '\.swift$')
-EOF
+done < <(git diff --cached --name-only -z --diff-filter=ACMR)
 
 if [ "$count" -eq 0 ]; then
   exit 0
