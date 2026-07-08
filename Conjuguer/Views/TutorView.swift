@@ -19,7 +19,11 @@ struct TutorView: View {
 #endif
   @FocusState private var isInputFocused: Bool
 
-  private static let suggestions = [
+  private static var isFrench: Bool {
+    Locale.current.language.languageCode?.identifier == "fr"
+  }
+
+  private static let englishSuggestions = [
     "Conjugate parler in the présent.",
     "What is the passé composé of aller?",
     "What is the participe passé of prendre?",
@@ -37,6 +41,29 @@ struct TutorView: View {
     "Conjugate mettre in the plus-que-parfait.",
     "How do you say \u{2018}they would sing\u{2019} in French?"
   ]
+
+  private static let frenchSuggestions = [
+    "Conjuguez parler au présent.",
+    "Quel est le passé composé d\u{2019}aller ?",
+    "Quel est le participe passé de prendre ?",
+    "Conjuguez finir au futur simple.",
+    "Quel est l\u{2019}impératif d\u{2019}être ?",
+    "Comment dit-on « j\u{2019}aurais parlé » en français ?",
+    "Quel est le subjonctif présent de faire ?",
+    "Conjuguez venir à l\u{2019}imparfait.",
+    "Comment dit-on « nous avions fini » en français ?",
+    "Quel est le conditionnel présent de pouvoir ?",
+    "Conjuguez prendre au passé composé.",
+    "Quelles sont toutes les conjugaisons d\u{2019}avoir au présent ?",
+    "Comment conjugue-t-on vouloir au passé simple ?",
+    "Quel est le futur simple de voir ?",
+    "Conjuguez mettre au plus-que-parfait.",
+    "Comment dit-on « ils chanteraient » en français ?"
+  ]
+
+  private static var suggestions: [String] {
+    isFrench ? frenchSuggestions : englishSuggestions
+  }
 
   var body: some View {
     ZStack {

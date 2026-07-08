@@ -361,9 +361,18 @@ Grouped; each is Low unless noted.
   Pin the language or assert against the key / `String(localized:locale:)`. **Fixed:** the shared
   `Conjuguer.xcscheme` `TestAction` now pins `language = "en"` / `region = "US"`, so the English-literal
   assertions hold regardless of the host sim/CI language.
-- **20. Unlocalized tutor suggestion chips** (`TutorView.swift:22-39`): 16 user-facing English strings bypass
-  `L`/xcstrings in a bilingual app. Route through `L.Tutor` with `fr` translations, or comment that English
-  prompts are a deliberate model-quality choice.
+- **20. Unlocalized tutor suggestion chips** (`TutorView.swift:22-39`) — ✅ **implemented 2026-07-08**: 16
+  user-facing English strings bypassed `L`/xcstrings in a bilingual app. Route through `L.Tutor` with `fr`
+  translations, or comment that English prompts are a deliberate model-quality choice. **Fixed:** adopted the
+  sibling app **Conjugar**'s locale-switched parallel-array pattern rather than the String Catalog — a private
+  `isFrench` (`Locale.current.language.languageCode?.identifier == "fr"`), an `englishSuggestions` array (the
+  original 16, unchanged) and a new `frenchSuggestions` array (16 natural-French translations: guillemets `« »`,
+  curly apostrophes for elisions, French grammatical terms preserved, target French phrase in the "how do you
+  say…" prompts), and a computed `suggestions` selector. The call site already read `Self.suggestions`, so no
+  call-site change. Deliberate deviation from the app's `L` convention — these are model *prompts*, not UI labels,
+  and belong in code near the tutor; the whole three-app family (Conjugar done, Conjuguer done, Konjugieren
+  planned in its `docs/localize-tutor-suggestions.md`) shares this approach. Count kept at 16. Verified in a
+  French-locale simulator launch (screenshot `docs/screenshots/*-tutor-fr-suggestions.png`).
 - **21. `print()` in production paths** (9 sites: `Settings.swift:124`, `VerbModel.swift:75`,
   `XMLDataParser.swift:33`, `StemAlteration.swift:22/29/55`, `DefectGroupParser.swift`, `AudioSession.swift:15`,
   `DefectGroup.swift`): unfilterable and lost in release. The repo already has an `os.Logger` precedent in
@@ -528,4 +537,6 @@ Grouped; each is Low unless noted.
     ✅ Also landed #23 opaque nav-bar — the app owner opted for default Apple behavior, so the appearance-proxy
     customization was removed entirely.
     ✅ #36 resolved as won't-fix (minigame score is local-only by design; not reported to Game Center).
-    **Deferred** (heavier or design calls, left for a deliberate follow-up): #37 minigame de-duplication (large refactor of untested game code), #20 unlocalized tutor chips (needs `fr` translations or a deliberate-English note), #33 etymology-truncation markup rebalance, #34 Live Activity `Text(style: .timer)` / dead `isFinished`, and #35 skip-unchanged snapshot write.
+    ✅ Also landed #20 tutor-chip localization (2026-07-08, after the initial Phase-6 pass) — locale-switched
+    `frenchSuggestions` array following the sibling **Conjugar**'s pattern; verified in a French-locale sim launch.
+    **Deferred** (heavier or design calls, left for a deliberate follow-up): #37 minigame de-duplication (large refactor of untested game code), #33 etymology-truncation markup rebalance, #34 Live Activity `Text(style: .timer)` / dead `isFinished`, and #35 skip-unchanged snapshot write.

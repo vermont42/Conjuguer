@@ -8,20 +8,13 @@ implemented (see the phase summaries in the source doc). What remains are heavie
 calls, and repo-tooling cleanups — all deliberately deferred, none ship-blocking.
 
 For fully-implemented items and the original ranking/rationale, see `code-review-findings.md`. Finding **#36**
-(minigame Game Center submission) is closed as **won't-fix** — the score is local-only by design.
+(minigame Game Center submission) is closed as **won't-fix** — the score is local-only by design. Finding **#20**
+(unlocalized tutor chips) was **implemented 2026-07-08** — a locale-switched `frenchSuggestions` array following
+the sibling app Conjugar's pattern, verified in a French-locale sim launch — and is no longer listed below.
 
 ---
 
 ## Code findings
-
-### #20 — Unlocalized tutor suggestion chips
-- **Where:** `Conjuguer/Views/TutorView.swift:22-39`
-- **Severity:** Low · **Type:** localization
-- **Problem:** 16 user-facing English suggestion-chip strings bypass `L`/`Localizable.xcstrings` in an
-  otherwise-bilingual (en/fr) app.
-- **Fix:** route them through a new `L.Tutor.*` group with `fr` translations — **or** make a deliberate call
-  that English prompts are a model-quality choice and leave a comment saying so.
-- **Why deferred:** needs real French translation work (or a product decision), not a mechanical edit.
 
 ### #33 — Etymology truncation can cut inside `~…~` markup
 - **Where:** `Conjuguer/Utils/WidgetSnapshotWriter.swift:149-165`
@@ -95,6 +88,5 @@ and untracked `.claude/settings.local.json`. **Still open** are the corpus/tooli
 
 1. **#33** (self-contained, already has a test suite) →
 2. **#35** + **#34** as one widget/Live-Activity polish pass →
-3. **#20** once the en-vs-fr decision is made →
-4. **#43** corpus/tooling cleanup (independent of the app) →
-5. **#37** last, with a full manual game playthrough as the verification gate.
+3. **#43** corpus/tooling cleanup (independent of the app) →
+4. **#37** last, with a full manual game playthrough as the verification gate.
