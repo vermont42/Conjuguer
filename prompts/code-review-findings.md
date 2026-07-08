@@ -441,7 +441,8 @@ Grouped; each is Low unless noted.
   newly encoded `Data` to the existing file and skip write+reload when unchanged.
 - **36. Minigame high score is never submitted to Game Center** (`GameState.swift:764-777`): persists to
   `Current.settings.gameHighScore` but never calls `Current.gameCenter.reportScore(_:)` (only `Quiz` does). Flagging
-  so the local-only choice is explicit.
+  so the local-only choice is explicit. — ✅ **resolved 2026-07-08** (won't-fix / by design): the app owner confirmed
+  the minigame high score is intentionally local-only and is **not** reported to Game Center. No code change.
 - **37. Minigame duplication** (`GameState.swift` vs `+RobotBoss`/`+Divers`/`+Ghosts`/`+Henyard`): projectile
   integrate-and-cull + homing-fire (`updateEnemyBullets`/`updateRobotBullets`, `attemptEnemyFire`/`fireRobotBullet`),
   the dive-arc parabola+sine (`+Divers` vs `+RobotBoss`), and three collision shapes (shoot-one-entity, player-hit
@@ -526,4 +527,5 @@ Grouped; each is Low unless noted.
 13. ✅ `Logger` migration (#21, new `Conjuguer/Utils/Log.swift`), ✅ `Button`+`openURL` (#22), ✅ sentinel→`String?` (#24), ✅ dead-availability cleanup (#26), ✅ `fatalError`→`assertionFailure` in runtime paths (#27). Opportunistically also landed the cheap Tier-3 items ✅ `elapsedTimeString`→`Int.timeString` (#25), ✅ `sineTime` wrap (#29), ✅ `HapticPlayer` cached generators (#31), and ✅ `AnswerQuizIntent` question-ID guard (#32).
     ✅ Also landed #23 opaque nav-bar — the app owner opted for default Apple behavior, so the appearance-proxy
     customization was removed entirely.
-    **Deferred** (heavier or design calls, left for a deliberate follow-up): #37 minigame de-duplication (large refactor of untested game code), #20 unlocalized tutor chips (needs `fr` translations or a deliberate-English note), #33 etymology-truncation markup rebalance, #34 Live Activity `Text(style: .timer)` / dead `isFinished`, #35 skip-unchanged snapshot write, and #36 minigame Game Center submission (flagged local-only choice).
+    ✅ #36 resolved as won't-fix (minigame score is local-only by design; not reported to Game Center).
+    **Deferred** (heavier or design calls, left for a deliberate follow-up): #37 minigame de-duplication (large refactor of untested game code), #20 unlocalized tutor chips (needs `fr` translations or a deliberate-English note), #33 etymology-truncation markup rebalance, #34 Live Activity `Text(style: .timer)` / dead `isFinished`, and #35 skip-unchanged snapshot write.

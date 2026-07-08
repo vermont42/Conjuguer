@@ -52,10 +52,10 @@ via `assertionFailure` + fallback. Opportunistic Tier-3 also landed: #29 `sineTi
 caches one prepared generator per style, #32 `AnswerQuizIntent` guards the tapped question ID before scoring, and
 #23 opaque nav-bar (per the app owner's call, `Modifiers.modifyAppearances()` was deleted so the nav bar / segmented
 pickers use default Apple styling).
-**Deferred** (heavier / design calls): #37 minigame de-duplication, #20 unlocalized tutor chips,
-#33 etymology-truncation markup, #34 Live Activity `.timer` text, #35 skip-unchanged snapshot write, #36 minigame
-Game Center submission. Keep this section current — check off or delete items here as they land, and remove the
-section once the doc is fully worked through.
+#36 minigame Game Center submission is resolved as won't-fix (score is local-only by design). **Deferred** (heavier /
+design calls): #37 minigame de-duplication, #20 unlocalized tutor chips, #33 etymology-truncation markup, #34 Live
+Activity `.timer` text, #35 skip-unchanged snapshot write. Keep this section current — check off or delete items here
+as they land, and remove the section once the doc is fully worked through.
 
 ## Build and Test Commands
 
