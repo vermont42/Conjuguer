@@ -7,6 +7,7 @@
 
 import Foundation
 import os
+import Synchronization
 
 #if canImport(FoundationModels)
 import FoundationModels
@@ -29,18 +30,12 @@ class LanguageModelServiceReal: LanguageModelService {
     let snapshot = Self.snapshot(of: model.availability)
     self.isAvailable = snapshot.isAvailable
     self.unavailabilityReason = snapshot.reason
-    Task { [weak self] in
-      while !Task.isCancelled {
-        try? await Task.sleep(for: .seconds(5))
-        guard let self else {
-          return
-        }
-        self.refreshAvailability()
-      }
-    }
   }
 
-  private func refreshAvailability() {
+  // Re-read model availability on demand (the app calls this when the scene becomes
+  // active) instead of a fixed forever-poll, which woke the process every 5s for the
+  // service's whole lifetime even when the tutor was never opened.
+  func refreshAvailability() {
     let snapshot = Self.snapshot(of: model.availability)
     if snapshot.isAvailable != isAvailable {
       isAvailable = snapshot.isAvailable
@@ -208,11 +203,14 @@ struct ConjugationTool: Tool {
   let name = "conjugateVerb"
   let description = "Look up a French verb conjugation"
 
-  nonisolated(unsafe) private static var callCount = 0
+  // call(arguments:) is nonisolated and can run off the main actor, while
+  // resetCallCount() runs on the main actor, so this counter is mutated across
+  // isolation domains — guard it with a Mutex rather than nonisolated(unsafe).
+  private static let callCount = Mutex(0)
   private static let maxCallsPerSession = 3
 
   static func resetCallCount() {
-    callCount = 0
+    callCount.withLock { $0 = 0 }
   }
 
   @Generable(description: "A French verb conjugation lookup")
@@ -232,8 +230,11 @@ struct ConjugationTool: Tool {
   }
 
   func call(arguments: Arguments) async throws -> String {
-    Self.callCount += 1
-    if Self.callCount > Self.maxCallsPerSession {
+    let count = Self.callCount.withLock { count -> Int in
+      count += 1
+      return count
+    }
+    if count > Self.maxCallsPerSession {
       lmsLogger.warning("Tool call limit reached (\(Self.maxCallsPerSession))")
       return "Limit reached. Respond with the conjugations you already have."
     }

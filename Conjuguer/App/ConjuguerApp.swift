@@ -45,6 +45,7 @@ struct ConjuguerApp: App {
         }
         drainPendingWidgetDeeplink()
         refreshWidgets()
+        Current.languageModelService.refreshAvailability()
       }
       .onChange(of: Current.settings.pronounGender) {
         refreshWidgets()

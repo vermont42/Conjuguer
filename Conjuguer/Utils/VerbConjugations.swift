@@ -47,6 +47,13 @@ struct VerbConjugations {
     return conjugations
   }
 
+  // The cached simple-tense cells bake in the pronoun (il/elle, ils/elles), which
+  // depends on Current.settings.pronounGender at build time. Clear the cache when
+  // that setting changes so already-viewed verbs re-render with the new pronouns.
+  @MainActor static func clearCache() {
+    cache.removeAll()
+  }
+
   static let simpleSpecs: [TenseSpec] = [
     TenseSpec(builder: { .indicatifPrésent($0) }, personNumbers: PersonNumber.allCases),
     TenseSpec(builder: { .passéSimple($0) }, personNumbers: PersonNumber.allCases),

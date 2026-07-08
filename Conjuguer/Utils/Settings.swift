@@ -57,6 +57,10 @@ class Settings {
   var pronounGender: PronounGender = pronounGenderDefault {
     didSet {
       persist(pronounGender, oldValue: oldValue, key: Settings.pronounGenderKey)
+      if pronounGender != oldValue {
+        // The cached conjugation cells bake in the gender's pronouns, so drop them.
+        VerbConjugations.clearCache()
+      }
     }
   }
   static let pronounGenderKey = "pronounGender"

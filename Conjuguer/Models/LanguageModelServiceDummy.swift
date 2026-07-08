@@ -10,6 +10,8 @@ class LanguageModelServiceDummy: LanguageModelService {
   var isAvailable: Bool { false }
   var unavailabilityReason: LanguageModelUnavailability? { .deviceNotEligible }
 
+  func refreshAvailability() {}
+
   func sendTutorMessage(_ message: String) async throws -> String {
     ""
   }

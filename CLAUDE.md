@@ -23,7 +23,16 @@ entries with `.atEnd`), #11 FNV-1a shuffle seed (replaces the randomly-seeded `H
 midnight math, #16 `LargeWidgetView` paradigm bounds guard, #18 locale-/calendar-independent date
 strings — #14/#18 consolidated into a new `Shared/WidgetDateHelper.swift` used by both targets — and
 #13 serialized Live Activity update/end via a chained-`Task` tail + rolling `staleDate: .now + 300`.
-**Next up:** Phase 4 (correctness edges & concurrency polish) — #10, #12, #15, #17, #28, #30. Keep this
+**Phase 4 (correctness edges & concurrency polish) is done (2026-07-08):** #10 `VerbConjugations.clearCache()`
+called from `Settings.pronounGender.didSet` on change (cached cells bake in the gender's pronouns), #12
+per-sound debounce clock (`instantOfLastPlayBySound: [Sound: TimeInterval]` replaces the single shared
+`instantOfLastPlay`), #15 replaced the LMS 5-second forever-poll with an on-demand
+`refreshAvailability()` (added to the `LanguageModelService` protocol + both conformers) called from the
+app's `scenePhase == .active` hook, #17 `Mutex(0)` (`import Synchronization`) guards `ConjugationTool.callCount`
+instead of `nonisolated(unsafe)`, #28 `seedWorld()` now resets `movingLeft`/`movingRight`/`sineTime`/
+`smokeCooldown`/`smokeColorCycle`, #30 `update(currentTime:)` clamps the sim step to `min(rawDt, 1.0/30.0)`
+after the hitch guard.
+**Next up:** Phase 5 (test coverage) — #38 (done), #39, #40, #41, #19, #42. Keep this
 section current — check off or delete items here as they land, and remove the section once the doc
 is fully worked through.
 

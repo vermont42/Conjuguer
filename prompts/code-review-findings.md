@@ -227,8 +227,11 @@ lookups); only the array-indexed info host is exposed.
 **Fix:** `guard let infoIndex = Int(...), Info.infos.indices.contains(infoIndex) else { return nil }`.
 (The tests agent also flags that `quiz`/`model`/`random`/rejection branches are untested — see 24.)
 
-### 10. `VerbConjugations` cache is never invalidated on a pronoun-gender change — _confirmed_
+### 10. `VerbConjugations` cache is never invalidated on a pronoun-gender change — _confirmed_ — ✅ **implemented 2026-07-08**
 **Category:** bug · **Severity: Medium** · **`Conjuguer/Utils/VerbConjugations.swift:38-48`**
+
+> Fixed: added `VerbConjugations.clearCache()`, called from `Settings.pronounGender`'s `didSet` when the
+> value actually changes, so already-viewed verbs re-render with the new gender's pronouns.
 
 `memoized(for:)` keys the cache on infinitive only and is **write-only** (no clear anywhere). The
 cached simple-tense cells bake in the pronoun (`il`/`elle`, `ils`/`elles`), which depends on
@@ -254,8 +257,12 @@ question's buttons can reorder between renders — defeating the intent and enab
 **Fix:** replace `Hasher` with a stable hash of `questionID`'s UTF-8 bytes (e.g. FNV-1a) feeding the
 seeded RNG.
 
-### 12. Debounced game sounds are almost never audible (shared, unconditionally-updated clock) — _confirmed_
+### 12. Debounced game sounds are almost never audible (shared, unconditionally-updated clock) — _confirmed_ — ✅ **implemented 2026-07-08**
 **Category:** bug · **Severity: Medium** · **`Conjuguer/Utils/SoundPlayerReal.swift:145-160`**
+
+> Fixed: the single shared `instantOfLastPlay` is now `instantOfLastPlayBySound: [Sound: TimeInterval]`,
+> so each sound's 1-second debounce window is tracked independently rather than being reset by every
+> non-debounced SFX.
 
 `instantOfLastPlay` is a single timestamp shared across all sounds and updated on **every** play,
 debounced or not. During active play the non-debounced SFX (`.pop` per shot, `.chomp` per kill,
@@ -301,8 +308,12 @@ budget). A French-learning audience largely lives in DST-observing CET.
 **Fix:** `calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: now))`, extracted into
 one shared helper used by both providers.
 
-### 15. `LanguageModelServiceReal` polls availability every 5 seconds forever — _confirmed_
+### 15. `LanguageModelServiceReal` polls availability every 5 seconds forever — _confirmed_ — ✅ **implemented 2026-07-08**
 **Category:** concurrency / performance · **Severity: Medium** · **`Conjuguer/Models/LanguageModelServiceReal.swift:28-41`**
+
+> Fixed: deleted the never-cancelled 5-second poll `Task` from `init()`; `refreshAvailability()` is now a
+> `LanguageModelService` protocol method (implemented by `…Real` + `…Dummy`) that the app calls from its
+> `scenePhase == .active` `onChange` handler in `ConjuguerApp`.
 
 `init()` spawns an unstructured, never-stored, never-cancelled `Task` looping
 `while !Task.isCancelled { try? await Task.sleep(for: .seconds(5)); refreshAvailability() }`. The
@@ -332,10 +343,11 @@ entries; a short/corrupt/old-format decoded snapshot crashes the widget process.
 
 Grouped; each is Low unless noted.
 
-- **17. `nonisolated(unsafe)` shared static `callCount`** (`LanguageModelServiceReal.swift:211`): mutated
+- **17. `nonisolated(unsafe)` shared static `callCount`** (`LanguageModelServiceReal.swift:211`) — ✅ **implemented 2026-07-08**: mutated
   from a nonisolated async `call(arguments:)` and reset from `@MainActor` — unsynchronized cross-isolation
   state, safe only by today's temporal serialization. Use a `Mutex` (iOS 18+), or make it a per-session
-  instance counter and delete `resetCallCount()`.
+  instance counter and delete `resetCallCount()`. **Fixed:** now a `Mutex(0)` (`import Synchronization`);
+  `call` increments via `withLock`, `resetCallCount()` zeroes via `withLock`.
 - **18. `DateFormatter` without `en_US_POSIX`** (`WidgetSnapshotWriter.swift:167-171`) — ✅ **implemented 2026-07-08**: `yyyy-MM-dd` under the
   user's calendar emits era years on Buddhist/Japanese calendars, flowing into `questionID`. Pin
   `formatter.locale = Locale(identifier: "en_US_POSIX")` (and `referenceDate` to a Gregorian calendar);
@@ -371,15 +383,16 @@ Grouped; each is Low unless noted.
 - **27. `fatalError` in user-runtime paths** (`Quiz.swift:386`, `VerbConjugations.swift:126`, `Conjugator.swift:226`,
   `Verb.swift:81`): unreachable with today's data, but a future data typo becomes a user crash mid-quiz. Degrade
   gracefully with `assertionFailure` for the debug signal; keep hard crashes for parse-time integrity only.
-- **28. `restart()` leaves transient game fields unreset** (`GameState.swift:297-345`): `movingLeft`/`movingRight`,
+- **28. `restart()` leaves transient game fields unreset** (`GameState.swift:297-345`) — ✅ **implemented 2026-07-08**: `movingLeft`/`movingRight`,
   `sineTime`, `smokeCooldown`, `smokeColorCycle` survive a restart; a held arrow at game-over makes the ship drift
-  on "Play Again." Reset them in `seedWorld`.
+  on "Play Again." Reset them in `seedWorld`. **Fixed:** `seedWorld()` now zeroes all five.
 - **29. `sineTime` accumulates unbounded** (`GameState.swift:135,421`): never wrapped or reset; long sessions push
   `sin(sineTime * 47)` phase arguments into the hundreds of thousands (cosmetic drift). Wrap with
   `truncatingRemainder` and reset in `seedWorld`.
-- **30. dt clamp permits a ~1s catch-up step** (`GameState.swift:407-419`): a 0.9s hitch is applied in full
+- **30. dt clamp permits a ~1s catch-up step** (`GameState.swift:407-419`) — ✅ **implemented 2026-07-08**: a 0.9s hitch is applied in full
   (ball moves ~810pt in one step, can tunnel intersection tests). Clamp to a max sim step, e.g.
-  `min(rawDt, 1.0/30.0)`.
+  `min(rawDt, 1.0/30.0)`. **Fixed:** `update(currentTime:)` keeps the `rawDt < 1` first-frame/background
+  guard, then applies `let dt = min(rawDt, 1.0 / 30.0)` to every sub-update.
 - **31. `HapticPlayer` allocates a fresh generator per hit** (`HapticPlayer.swift:9-11`): `UIImpactFeedbackGenerator(...)`
   per call with no `prepare()` — churn and weaker/late haptics. Cache one generator per style and `prepare()`.
 - **32. `AnswerQuizIntent` scores without matching the question ID** (`AnswerQuizIntent.swift:33-36`): stores
@@ -461,8 +474,8 @@ Grouped; each is Low unless noted.
 **Phase 3 — widget & Live Activity robustness:** ✅ **complete 2026-07-08** (all 171 tests pass, app + widget build clean)
 10. ✅ Multi-day snapshot rotation (#4), FNV-1a shuffle seed (#11), DST-safe midnight helper (#14), `LargeWidgetView` bounds guard (#16), `en_US_POSIX`-equivalent date formatting (#18), serialized Live Activity updates + `staleDate` (#13). New `Shared/WidgetDateHelper.swift` consolidates the calendar/date-string/midnight logic across the app + widget; snapshots moved from a single `widget-snapshot.json` to a multi-day `widget-snapshots.json`.
 
-**Phase 4 — correctness edges & concurrency polish:**
-11. Invalidate the `VerbConjugations` cache on pronoun-gender change (#10), per-sound debounce clock (#12), replace the 5-second LMS poll (#15), `Mutex` the `callCount` (#17), reset transient game state in `seedWorld` (#28) and clamp the sim step (#30).
+**Phase 4 — correctness edges & concurrency polish:** ✅ **complete 2026-07-08** (all 171 tests pass, app + widget build clean)
+11. ✅ Invalidate the `VerbConjugations` cache on pronoun-gender change (#10), ✅ per-sound debounce clock (#12), ✅ replace the 5-second LMS poll with a `scenePhase`-driven `refreshAvailability()` (#15), ✅ `Mutex` the `callCount` (#17), ✅ reset transient game state in `seedWorld` (#28) and ✅ clamp the sim step to `min(rawDt, 1.0/30.0)` (#30).
 
 **Phase 5 — test coverage (lock in the above, then broaden):**
 12. Take `CorpusFormsDumpTests` out of the default run (#38); add quiz-scoring (#39), `WidgetSnapshotWriter` (#40), and deep-link-branch (#41) suites; pin `LocalizationTests` language (#19); harden the pre-commit hook (#42).

@@ -9,7 +9,11 @@ import Foundation
 class SoundPlayerReal: SoundPlayer {
   private var sounds: [String: AVAudioPlayer] = [:]
   private let soundExtension = "mp3"
-  private var instantOfLastPlay: TimeInterval = 0.0
+  // Last-play instant keyed per sound so each sound's debounce window is independent.
+  // A single shared clock was bumped by every (even non-debounced) play, so during
+  // active play the frequent non-debounced SFX kept it fresh and any debounced sound
+  // was almost always dropped.
+  private var instantOfLastPlayBySound: [Sound: TimeInterval] = [:]
   private var musicPlayer: AVAudioPlayer?
   private var savedMusicTime: TimeInterval?
   private static let musicName = "danseMacabre"
@@ -144,6 +148,7 @@ class SoundPlayerReal: SoundPlayer {
 
     let instantOfCurrentPlay = Date().timeIntervalSince1970
     let minSoundInterval: TimeInterval = 1.0
+    let instantOfLastPlay = instantOfLastPlayBySound[sound] ?? 0.0
     if !shouldDebounce || (instantOfCurrentPlay - instantOfLastPlay > minSoundInterval) {
       guard let player = sounds[sound.rawValue] else {
         return
@@ -156,7 +161,7 @@ class SoundPlayerReal: SoundPlayer {
       Self.playbackQueue.async {
         box.player.play()
       }
-      instantOfLastPlay = instantOfCurrentPlay
+      instantOfLastPlayBySound[sound] = instantOfCurrentPlay
     }
   }
 }

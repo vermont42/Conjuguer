@@ -308,6 +308,14 @@ final class GameState {
     finalScore = 0
     isNewHighScore = false
 
+    // Reset transient input/animation state so a held arrow at game-over doesn't
+    // drift the ship on "Play Again," and the smoke/sine animators start fresh.
+    movingLeft = false
+    movingRight = false
+    sineTime = 0
+    smokeCooldown = 0
+    smokeColorCycle = 0
+
     bullets = []
     enemyBullets = []
     targets = []
@@ -412,18 +420,23 @@ final class GameState {
   }
 
   func update(currentTime: Date) {
-    let dt: CGFloat
+    let rawDt: CGFloat
     if let last = lastUpdateTime {
-      dt = CGFloat(currentTime.timeIntervalSince(last))
+      rawDt = CGFloat(currentTime.timeIntervalSince(last))
     } else {
-      dt = 0
+      rawDt = 0
     }
     lastUpdateTime = currentTime
 
     // Skip the first frame and any large hitch (e.g. returning from background).
-    guard dt > 0, dt < 1, didConfigure, phase == .playing else {
+    guard rawDt > 0, rawDt < 1, didConfigure, phase == .playing else {
       return
     }
+
+    // Clamp the simulation step so a sub-second hitch (e.g. 0.9s) isn't applied in
+    // one giant step — that moves the ball ~810pt at once and can tunnel through the
+    // intersection tests. Normal ~1/60s frames are well under this cap.
+    let dt = min(rawDt, 1.0 / 30.0)
 
     sineTime += Double(dt) * 3.0
 
