@@ -144,9 +144,12 @@ struct SettingsView: View {
             Text(L.Game.playGameDescription)
               .settingsLabel()
           }
+
+          aboutFooter
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, Layout.doubleDefaultSpacing)
+        .padding(.bottom, Layout.tripleDefaultSpacing)
       }
     }
     .padding(.top, Layout.tripleDefaultSpacing)
@@ -176,5 +179,39 @@ struct SettingsView: View {
       content()
     }
     .card()
+  }
+
+  // A quiet footer beneath the settings cards: the app's name in its brand blue over
+  // the marketing/build version. The version reads from the bundle's Info dictionary,
+  // so it tracks releases without a code edit; `.numericText()` keeps the digits
+  // monospaced (matching the app's other numeric readouts). Combined into one
+  // accessibility element so VoiceOver announces "Conjuguer, v1.2 (34)" in one swipe.
+  private var aboutFooter: some View {
+    VStack(spacing: Layout.defaultSpacing / 2) {
+      Text(verbatim: "Conjuguer")
+        .font(subheadingFont)
+        .foregroundStyle(Color.customBlue)
+
+      if let version = Self.versionString {
+        Text(verbatim: version)
+          .font(captionFont)
+          .foregroundStyle(Color.customGray)
+          .numericText()
+      }
+    }
+    .frame(maxWidth: .infinity)
+    .padding(.top, Layout.doubleDefaultSpacing)
+    .accessibilityElement(children: .combine)
+  }
+
+  private static var versionString: String? {
+    let info = Bundle.main.infoDictionary
+    guard let short = info?["CFBundleShortVersionString"] as? String else {
+      return nil
+    }
+    if let build = info?["CFBundleVersion"] as? String {
+      return "v\(short) (\(build))"
+    }
+    return "v\(short)"
   }
 }
