@@ -36,6 +36,8 @@ struct ConjuguerApp: App {
       }
       .task {
         await verbData.load()
+        // Replay any deeplink that arrived (via onOpenURL) before the data was ready.
+        Current.drainPendingDeeplink()
         refreshWidgets()
       }
       .onOpenURL(perform: Current.handleURL(_:))

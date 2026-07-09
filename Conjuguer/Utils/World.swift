@@ -37,6 +37,9 @@ class World {
   var selectedTab: MainTab = .verbs
   var shouldNavigateToTutor = false
   var session: URLSession
+  // A deeplink that arrived before VerbData finished loading (the cold-launch race — see
+  // handleURL). ConjuguerApp replays it via drainPendingDeeplink() once the data is ready.
+  @ObservationIgnored var pendingDeeplink: URL?
 
   private static let fakeRatingsCount = 1
   private static let fakeSession = URLSession.stubSession(ratingsCount: fakeRatingsCount)
@@ -141,6 +144,15 @@ class World {
       return
     }
 
+    // On cold launch a widget's URL can arrive via onOpenURL before VerbData finishes its
+    // off-main-actor parse, so entity lookups would silently fail (nil verb) while the tab
+    // still switched — landing on VerbBrowseView instead of VerbView. Stash the URL and let
+    // ConjuguerApp replay it via drainPendingDeeplink() once the data is loaded.
+    guard !Verb.verbs.isEmpty else {
+      pendingDeeplink = url
+      return
+    }
+
     verb = nil
     verbModel = nil
     info = nil
@@ -148,6 +160,15 @@ class World {
     if let tab = resolveDeeplinkEntity(from: url) {
       selectedTab = tab
     }
+  }
+
+  // Replays a deeplink deferred during cold-launch loading. A no-op when none is pending.
+  func drainPendingDeeplink() {
+    guard let url = pendingDeeplink else {
+      return
+    }
+    pendingDeeplink = nil
+    handleURL(url)
   }
 
   func handleInAppURL(_ url: URL) {

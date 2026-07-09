@@ -25,6 +25,7 @@ struct DeeplinkTests {
     Current.verb = nil
     Current.verbModel = nil
     Current.info = nil
+    Current.pendingDeeplink = nil
   }
 
   @Test func testHandleURLSwitchesTab() {
@@ -148,6 +149,31 @@ struct DeeplinkTests {
 
     #expect(Current.verb == nil)
     #expect(Current.selectedTab == .settings)
+  }
+
+  @Test func testDrainPendingDeeplinkReplaysDeferredLink() {
+    resetCurrent()
+    Current.selectedTab = .settings
+
+    // Simulates the cold-launch case: handleURL deferred a widget link (stored it in
+    // pendingDeeplink) because VerbData had not loaded yet.
+    Current.pendingDeeplink = url("conjuguer://verb/parler")
+
+    Current.drainPendingDeeplink()
+
+    #expect(Current.verb?.infinitif == "parler", "Draining must resolve the deferred verb.")
+    #expect(Current.selectedTab == .verbs, "Draining must switch to the verb's tab.")
+    #expect(Current.pendingDeeplink == nil, "Draining must clear the pending deeplink.")
+  }
+
+  @Test func testDrainPendingDeeplinkIsNoOpWhenNonePending() {
+    resetCurrent()
+    Current.selectedTab = .settings
+
+    Current.drainPendingDeeplink()
+
+    #expect(Current.verb == nil)
+    #expect(Current.selectedTab == .settings, "Draining with nothing pending must not change state.")
   }
 
   @Test func testUnknownHostIsIgnored() {
