@@ -4,9 +4,9 @@
 //
 //  Mechanic 2 — Le Ballon des Bleus. A ⚽ enters from the top and ricochets off
 //  all four walls (speeding up 1.08× per bounce), destroying any enemy it
-//  strikes (Breakout-style) and damaging the player on contact — the shield does
-//  NOT protect, to keep it scary. The player can re-aim it by shooting it. It
-//  self-expires after ~15 s.
+//  strikes (Breakout-style) and damaging the player on contact — unless the
+//  cheese shield is up, which blocks it like every other threat. The player can
+//  re-aim it by shooting it. It self-expires after ~15 s.
 //
 
 import UIKit
