@@ -167,6 +167,26 @@ If `swiftlint` isn't installed the hook prints a warning and lets the commit thr
   line. (Seen in practice: an inline `guard … else { return }` passed the build but blocked
   the commit under `--strict`.)
 
+## Comments
+
+Code should be well-written and therefore self-explanatory. Explanatory and MARK
+comments result in clutter and increased maintenance burden. Only use comments for the
+following purposes:
+
+* File headers
+* TODOs
+* Hacks or workarounds
+
+When reviewing or writing code, do not add — and do not flag as missing — comments
+outside those purposes. The one carve-out is **durable, non-obvious rationale**: a
+comment that answers "why is the code like this?" and states a fact a future reader
+can't recover from the code itself — a French phonological/conjugation rule that
+explains why an expected value looks wrong, a Swift-concurrency isolation constraint, an
+ordering guarantee, a deliberate silent-failure/degrade-not-crash path, a measured
+cold-start cost, a magic-number/color-hex explanation, or an SE-number/radar workaround.
+A comment that merely restates the identifier or narrates the next line is clutter —
+delete it. When a comment is borderline, lean toward deletion.
+
 ## Testing (Swift Testing)
 
 The unit tests use **Swift Testing** (`import Testing`): suites are `struct`s,
