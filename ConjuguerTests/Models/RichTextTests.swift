@@ -9,8 +9,6 @@ import Testing
 
 @MainActor
 struct RichTextTests {
-  // MARK: - Block splitting
-
   @Test func testPlainTextIsASingleBodyBlock() {
     #expect("hello world".richTextBlocks == [.body([.plain("hello world")])])
   }
@@ -47,8 +45,6 @@ struct RichTextTests {
   @Test func testInternalParagraphBreaksArePreserved() {
     #expect("first\n\nsecond".richTextBlocks == [.body([.plain("first\n\nsecond")])])
   }
-
-  // MARK: - Inline segments
 
   @Test func testBoldSegment() {
     #expect("a ~b~ c".bodySegments == [.plain("a "), .bold("b"), .plain(" c")])
@@ -92,8 +88,6 @@ struct RichTextTests {
   @Test func testConjugationAllRegular() {
     #expect("joue".conjugationParts == [.regular("joue")])
   }
-
-  // MARK: - Graceful handling of authoring errors
 
   @Test func testUnterminatedBoldRendersAsPlain() {
     #expect("a ~b".bodySegments == [.plain("a "), .plain("b")])

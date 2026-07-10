@@ -76,7 +76,6 @@ extension GameState {
       return
     }
 
-    // Bricks: any enemy the ball touches is destroyed and deflects it.
     if let index = targets.firstIndex(where: { target in
       Self.intersects(
         a: CGPoint(x: current.x, y: current.y),
@@ -95,7 +94,6 @@ extension GameState {
       HapticPlayer.playImpact(.medium)
     }
 
-    // Player bullets re-aim the ball (random horizontal kick).
     if let bulletIndex = firstBulletIndex(
       hitting: CGPoint(x: current.x, y: current.y),
       size: Self.ballSize

@@ -34,7 +34,6 @@ struct GameDiveArcTests {
     abs(a - b) < tolerance
   }
 
-  /// The arc position the app is expected to compute at progress `t`.
   private func expectedArc(
     t: CGFloat,
     startY: CGFloat,
@@ -47,8 +46,6 @@ struct GameDiveArcTests {
     let x = homeX + GameState.diveWidthAmplitude * CGFloat(sin(Double(t) * .pi * 4))
     return CGPoint(x: x, y: baselineY + dip)
   }
-
-  // MARK: Mechanic 1 — dive-bomber arc
 
   @Test func diverTracesSineParabolaArc() throws {
     let game = makeGame()
@@ -68,7 +65,7 @@ struct GameDiveArcTests {
     let expected = expectedArc(
       t: t,
       startY: 100,
-      endY: game.screenSize.height + GameState.targetSize, // exits off the bottom
+      endY: game.screenSize.height + GameState.targetSize,
       depth: GameState.diveDepthFactor * GameState.targetSize,
       homeX: 250
     )
@@ -90,10 +87,8 @@ struct GameDiveArcTests {
 
     game.updateDivers(dt: 0.1) // pushes diveProgress past 1.0
 
-    #expect(game.targets.isEmpty) // a completed dive exits the field
+    #expect(game.targets.isEmpty)
   }
-
-  // MARK: Mechanic 5 — robot minion swoop
 
   @Test func robotMinionTracesSineParabolaArc() throws {
     let game = makeGame()
@@ -111,7 +106,7 @@ struct GameDiveArcTests {
     let expected = expectedArc(
       t: t,
       startY: 90,
-      endY: 90, // the minion returns to its home row
+      endY: 90,
       depth: game.screenSize.height * GameState.diveDepthFactor,
       homeX: 200
     )
@@ -133,7 +128,7 @@ struct GameDiveArcTests {
 
     let landed = try #require(game.robotMinion)
     #expect(landed.isDiving == false)
-    #expect(landed.x == 200) // snapped back to homeX
-    #expect(landed.y == 90)  // snapped back to homeY
+    #expect(landed.x == 200)
+    #expect(landed.y == 90)
   }
 }

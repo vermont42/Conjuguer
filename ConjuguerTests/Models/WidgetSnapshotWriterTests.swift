@@ -18,8 +18,6 @@ struct WidgetSnapshotWriterTests {
     return date
   }
 
-  // MARK: verbOfTheDay day-index hash
-
   @Test func testVerbOfTheDayIsDeterministicForADate() {
     let eligible = WidgetSnapshotWriter.eligibleVerbs()
     #expect(!eligible.isEmpty)
@@ -37,8 +35,6 @@ struct WidgetSnapshotWriterTests {
     let tomorrow = WidgetSnapshotWriter.verbOfTheDay(from: eligible, date: day("2025-06-16"))
     #expect(today.infinitif != tomorrow.infinitif, "Consecutive days should rotate the verb.")
   }
-
-  // MARK: generateSnapshot / generateWrongAnswers (dedup + padding)
 
   @Test func testSnapshotWrongAnswersAreDistinctAndExcludeCorrect() {
     guard let snapshot = WidgetSnapshotWriter.generateSnapshot(date: day("2025-06-15")) else {
@@ -94,8 +90,6 @@ struct WidgetSnapshotWriterTests {
     #expect(pairs.count > 6, "Person and tense must be decorrelated (found \(pairs.count) distinct pairs).")
   }
 
-  // MARK: date strings
-
   @Test func testDateStringIsCalendarIndependentYMD() {
     #expect(WidgetSnapshotWriter.dateString(for: day("2025-03-07")) == "2025-03-07")
   }
@@ -109,14 +103,11 @@ struct WidgetSnapshotWriterTests {
     #expect(snapshot.dateString == "2025-03-07")
   }
 
-  // MARK: truncateToSentenceBoundary
-
   @Test func testTruncateReturnsShortTextUnchanged() {
     #expect(WidgetSnapshotWriter.truncateToSentenceBoundary("Hello world.", maxLength: 100) == "Hello world.")
   }
 
   @Test func testTruncateCutsAtLastSentenceBoundary() {
-    // prefix(25) = "First sentence. Second se"; the last "." is kept, the rest dropped.
     let text = "First sentence. Second sentence goes on."
     #expect(WidgetSnapshotWriter.truncateToSentenceBoundary(text, maxLength: 25) == "First sentence.")
   }
@@ -125,8 +116,6 @@ struct WidgetSnapshotWriterTests {
     // No period in the prefix, so the truncation falls back to an ellipsis.
     #expect(WidgetSnapshotWriter.truncateToSentenceBoundary("Supercalifragilistic", maxLength: 5) == "Super…")
   }
-
-  // MARK: rebalanceTildes (finding 33)
 
   @Test func testTruncateDropsDanglingBoldOpener() {
     // Cutting inside `~…~` bold markup would leave an odd tilde count, which the widget's

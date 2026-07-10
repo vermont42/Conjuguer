@@ -28,7 +28,6 @@ struct DefectivityAuditTests {
     for verb in ["traire", "extraire", "soustraire", "distraire", "abstraire", "raire"] {
       #expect(isDefective(verb, .passéSimple(.thirdSingular)), "\(verb): passé simple must be defective.")
       #expect(isDefective(verb, .subjonctifImparfait(.thirdSingular)), "\(verb): subj. imparfait must be defective.")
-      // Surviving tenses stay usable.
       #expect(!isDefective(verb, .imparfait(.firstSingular)), "\(verb): imparfait must survive (je trayais).")
       #expect(!isDefective(verb, .futurSimple(.firstSingular)), "\(verb): futur must survive (je trairai).")
       #expect(!isDefective(verb, .indicatifPrésent(.firstSingular)), "\(verb): présent must survive (je trais).")

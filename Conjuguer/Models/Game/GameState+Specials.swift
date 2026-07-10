@@ -37,8 +37,6 @@ extension GameState {
     }
   }
 
-  /// Called once per frame after the standard bullet/player collisions. Each
-  /// mechanic resolves its own bullet/player interactions here.
   func resolveMechanicCollisions() {
     collideBall()
     collideGhosts()

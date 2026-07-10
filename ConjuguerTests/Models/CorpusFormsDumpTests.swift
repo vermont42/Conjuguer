@@ -35,9 +35,9 @@ struct CorpusFormsDumpTests {
   @Test func testDumpUsageRankedVerbForms() throws {
     // Repo root from this file's compile-time path: …/ConjuguerTests/Models/<file> → up three.
     let outURL = URL(filePath: #filePath)
-      .deletingLastPathComponent()  // Models/
-      .deletingLastPathComponent()  // ConjuguerTests/
-      .deletingLastPathComponent()  // repo root
+      .deletingLastPathComponent()
+      .deletingLastPathComponent()
+      .deletingLastPathComponent()
       .appending(path: "corpus/working/forms.json")
 
     let ranked = Verb.verbs.values
@@ -45,7 +45,6 @@ struct CorpusFormsDumpTests {
       .sorted { ($0.frequency ?? 0) < ($1.frequency ?? 0) }
     #expect(!ranked.isEmpty, "Verb data not loaded — expected the usage-ranked set.")
 
-    // form → set of verb ids that produce it.
     var index: [String: Set<String>] = [:]
     var conjugationCount = 0
 
@@ -99,9 +98,9 @@ struct CorpusFormsDumpTests {
   // (ranked-only) the literature index relies on is untouched.
   @Test func testDumpAllVerbForms() throws {
     let outURL = URL(filePath: #filePath)
-      .deletingLastPathComponent()  // Models/
-      .deletingLastPathComponent()  // ConjuguerTests/
-      .deletingLastPathComponent()  // repo root
+      .deletingLastPathComponent()
+      .deletingLastPathComponent()
+      .deletingLastPathComponent()
       .appending(path: "corpus/working/forms_all.json")
 
     let allVerbs = Verb.verbs.values.sorted { $0.infinitif < $1.infinitif }

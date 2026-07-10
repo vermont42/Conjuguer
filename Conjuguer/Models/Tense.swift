@@ -187,8 +187,6 @@ nonisolated enum Tense: Hashable {
     return " - \(personNumber.pronounWithGender)"
   }
 
-  // MARK: - Tense-shorthand codec
-
   // The single source of truth for the tense-shorthand grammar (e.g. "r1s", "bA", "pp")
   // hand-parsed by StemAlteration and DefectGroup. A shorthand is a tense letter followed by
   // a PersonNumber short name ("1s"…"3p") or "A" (all person-numbers for the family); the three

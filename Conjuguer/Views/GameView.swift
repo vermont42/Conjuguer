@@ -87,8 +87,8 @@ struct GameView: View {
     }
   }
 
-  // Mechanic 5: a brief screen shake on boss conversion/defeat. Deterministic
-  // (driven by sineTime) so it needs no per-frame randomness in the view.
+  // A brief screen shake on boss conversion/defeat. Deterministic (driven by
+  // sineTime) so it needs no per-frame randomness in the view.
   private var shakeOffset: CGSize {
     let shake = gameState.screenShake
     guard shake > 0 else {
@@ -173,7 +173,6 @@ struct GameView: View {
         .position(x: bullet.x, y: bullet.y)
     }
 
-    // Mechanic 5: the robot minion's fast red/yellow rectangle bullets.
     ForEach(gameState.robotBullets) { bullet in
       RoundedRectangle(cornerRadius: 2, style: .continuous)
         .fill(bullet.isRed ? Color.customRed : Color.yellow)
@@ -182,9 +181,7 @@ struct GameView: View {
     }
   }
 
-  // Mechanics 1–5 sprites, grouped to keep the main ZStack readable.
   @ViewBuilder private var mechanicSprites: some View {
-    // Mechanic 1: telegraph an incoming dive with ⚠️ in the target column.
     ForEach(gameState.targets.filter { $0.isDiving && $0.diveWarningTimer > 0 }) { target in
       Text("⚠️")
         .font(.system(size: GameState.targetSize * 0.7))
@@ -192,7 +189,6 @@ struct GameView: View {
         .opacity(0.5 + 0.5 * sin(gameState.sineTime * 6))
     }
 
-    // Mechanic 3: musical-note dots, chandelier, ghosts.
     ForEach(gameState.noteDots) { dot in
       Text("🎵")
         .font(.system(size: GameState.dotSize))
@@ -211,7 +207,6 @@ struct GameView: View {
         .position(x: ghost.x, y: ghost.y)
     }
 
-    // Mechanic 4: hen, eggs, chicks.
     if let hen = gameState.hen {
       Text("🐔")
         .font(.system(size: GameState.henSize))
@@ -230,7 +225,6 @@ struct GameView: View {
         .position(x: chick.x, y: chick.y)
     }
 
-    // Mechanic 2: the bouncing ball.
     if let ball = gameState.ball {
       Text("⚽")
         .font(.system(size: GameState.ballSize))
@@ -241,7 +235,6 @@ struct GameView: View {
   }
 
   @ViewBuilder private var robotSprites: some View {
-    // Mechanic 5: brain-core (+ lock-on bolt) and the robot minion (+ arms).
     if let brain = gameState.robotBrain {
       Text("🧠")
         .font(.system(size: GameState.brainSize))

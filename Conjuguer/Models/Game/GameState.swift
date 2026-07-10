@@ -41,7 +41,6 @@ final class GameState {
   static let autofireInterval: CGFloat = 0.3
   static let autofireVolume: Float = 0.5
 
-  // Mechanic 1: dive-bombers.
   static let diveInterval: CGFloat = 12.0
   static let diveWarningDuration: CGFloat = 0.5
   static let diveDuration: CGFloat = 2.4
@@ -54,7 +53,6 @@ final class GameState {
   static let firstSpecialDelay: CGFloat = 10.0
   static let specialInterval: CGFloat = 18.0
 
-  // Mechanic 2: bouncing ball.
   static let ballSize: CGFloat = 44.0
   static let ballBaseSpeed: CGFloat = 230.0
   static let ballDuration: CGFloat = 15.0
@@ -68,7 +66,6 @@ final class GameState {
   // one 25% hit instead of instant death.
   static let minionInvulnerabilityDuration: CGFloat = 1.0
 
-  // Mechanic 3: ghost hunt.
   static let ghostCountRange: ClosedRange<Int> = 2 ... 3
   static let ghostSize: CGFloat = 48.0
   static let ghostDescentSpeed: CGFloat = 55.0
@@ -84,7 +81,6 @@ final class GameState {
   static let frightDuration: CGFloat = 5.0
   static let devourDuration: CGFloat = 0.4
 
-  // Mechanic 4: hen, eggs, hatchlings.
   static let henSize: CGFloat = 48.0
   static let henSpeedH: CGFloat = 150.0
   static let henSpeedV: CGFloat = 28.0
@@ -98,7 +94,6 @@ final class GameState {
   static let chickSize: CGFloat = 30.0
   static let chickSpeed: CGFloat = 130.0
 
-  // Mechanic 5: robot boss.
   static let bossScoreThreshold = 200
   static let bossScoreStep = 400
   static let brainSize: CGFloat = 44.0
@@ -138,7 +133,6 @@ final class GameState {
   var autofireActive = false
   var sineTime: Double = 0.0
 
-  // Mechanic state (see GameState+*.swift). All rendered by GameView.
   var smoke: [Smoke] = []
   var ball: GameBall?
   var ghosts: [Ghost] = []
@@ -179,9 +173,7 @@ final class GameState {
   var specialCooldown: CGFloat = GameState.firstSpecialDelay
   var specialBag: [SpecialMechanic] = []
   var activeSpecial: SpecialMechanic?
-  // Counts down after a ball hit; while > 0 the ball can't damage the player.
   var ballInvulnerabilityTimer: CGFloat = 0.0
-  // Counts down after a diving-minion hit; while > 0 the minion can't damage the player.
   var minionInvulnerabilityTimer: CGFloat = 0.0
   var nextBossScore = GameState.bossScoreThreshold
 
@@ -232,11 +224,6 @@ final class GameState {
     }
   }
 
-  /// Re-anchors the world when the viewport changes (device rotation). The player
-  /// is bottom-anchored, so updating `screenSize` alone repositions it; the targets,
-  /// projectiles, drops, and stars are shifted by half the width delta so the whole
-  /// cluster stays horizontally centered (keeping each entity's offset from center),
-  /// and the widened starfield is topped up on its newly exposed flanks.
   func updateScreenSize(_ newSize: CGSize) {
     guard newSize.width > 0, newSize.height > 0 else {
       return
@@ -378,9 +365,6 @@ final class GameState {
     }
   }
 
-  /// Shifts the existing starfield to stay with the centered scene, then fills the
-  /// freshly exposed left/right bands when the viewport widens (or trims stars that
-  /// slid off-screen when it narrows, so repeated rotations don't accumulate stars).
   private func reflowStars(dx: CGFloat, oldSize: CGSize, newSize: CGSize) {
     for index in stars.indices {
       stars[index].x += dx
@@ -395,7 +379,6 @@ final class GameState {
     let density = Double(Self.starCount) / Double(oldSize.width)
     let extraCount = Int((density * Double(newSize.width - oldSize.width)).rounded())
     for offset in 0 ..< extraCount {
-      // Alternate the two newly exposed bands: [0, dx] on the left, [width - dx, width] on the right.
       let x = offset.isMultiple(of: 2)
         ? CGFloat.random(in: 0 ... dx)
         : CGFloat.random(in: (newSize.width - dx) ... newSize.width)
@@ -458,11 +441,11 @@ final class GameState {
     updateShieldAndAutofire(dt: dt)
     attemptEnemyFire(dt: dt)
     attemptDrops(dt: dt)
-    updateSpecials(dt: dt) // schedules Mechanics 2–4 (ball / ghosts / hen-yard)
-    updateBall(dt: dt)     // Mechanic 2
-    updateGhosts(dt: dt)   // Mechanic 3
-    updateHenyard(dt: dt)  // Mechanic 4
-    updateRobot(dt: dt)    // Mechanic 5 (boss)
+    updateSpecials(dt: dt)
+    updateBall(dt: dt)
+    updateGhosts(dt: dt)
+    updateHenyard(dt: dt)
+    updateRobot(dt: dt)
     updateScreenShake(dt: dt)
     resolveBulletHits()
     resolvePlayerHits()
@@ -521,10 +504,6 @@ final class GameState {
     advanceAndCull(&enemyBullets, size: Self.enemyBulletSize, dt: dt)
   }
 
-  /// Integrates each projectile by its velocity, then culls any that have left
-  /// the screen past a `size` margin on every edge. Shared by the enemy-bullet
-  /// and robot-bullet loops; the only per-mechanic difference is
-  /// the sprite `size` used for the cull margin.
   func advanceAndCull<P: MovingProjectile>(_ projectiles: inout [P], size: CGFloat, dt: CGFloat) {
     for index in projectiles.indices {
       projectiles[index].x += projectiles[index].velocityX * dt
@@ -538,9 +517,6 @@ final class GameState {
     }
   }
 
-  /// The velocity for a projectile fired from `source` straight at the player,
-  /// normalized to `speed`. Shared by enemy fire and robot fire;
-  /// the only per-mechanic difference is the projectile `speed`.
   func homingVelocityTowardPlayer(from source: CGPoint, speed: CGFloat) -> CGVector {
     let dx = playerX - source.x
     let dy = playerY - source.y
@@ -548,12 +524,6 @@ final class GameState {
     return CGVector(dx: dx / length * speed, dy: dy / length * speed)
   }
 
-  /// The position on the sine-modulated dive arc at progress `t` (0...1): a
-  /// baseline Y linearly interpolated from `startY` to `endY`, plus a
-  /// 4·depth·t·(1−t) parabolic dip, with x oscillating `diveWidthAmplitude`
-  /// around `homeX` via sin(t·4π). Shared by the dive-bombers (Mechanic 1) and
-  /// the robot minion's swoop (Mechanic 5), which differ only in `endY`
-  /// (exit-off-bottom vs return-home) and `depth`.
   static func diveArc(t: CGFloat, startY: CGFloat, endY: CGFloat, depth: CGFloat, homeX: CGFloat) -> CGPoint {
     let baselineY = startY + (endY - startY) * t
     let dip = 4 * depth * t * (1 - t)
@@ -561,20 +531,12 @@ final class GameState {
     return CGPoint(x: x, y: baselineY + dip)
   }
 
-  /// The index of the first player bullet overlapping an entity centered at
-  /// `center` with the given `size`, or nil. The core of the "shoot this one
-  /// entity" collisions — brain, minion, chandelier, hen, and the ball re-aim;
-  /// the caller removes the bullet and applies the effect.
   func firstBulletIndex(hitting center: CGPoint, size: CGFloat) -> Int? {
     bullets.firstIndex { bullet in
       Self.intersects(a: CGPoint(x: bullet.x, y: bullet.y), aSize: Self.bulletSize, b: center, bSize: size)
     }
   }
 
-  /// Removes every element of `entities` (each sized `size`) overlapping the
-  /// player and returns whether any were removed. The player-hit sweep shared
-  /// by enemy bullets, falling enemies, robot bullets, and chicks;
-  /// the caller decides the consequence (registerPlayerHit, sound).
   func removeOverlappingPlayer<E: GamePositioned>(_ entities: inout [E], size: CGFloat) -> Bool {
     let countBefore = entities.count
     entities.removeAll { entity in
@@ -588,9 +550,6 @@ final class GameState {
     return entities.count != countBefore
   }
 
-  /// Removes and returns every element of `entities` (each sized `size`) the
-  /// player is overlapping — the collect-on-contact pickups, drops and note
-  /// dots; the caller applies the per-catch effect.
   func collectOverlappingPlayer<E: GamePositioned & Identifiable>(_ entities: inout [E], size: CGFloat) -> [E] {
     let caught = entities.filter { entity in
       Self.intersects(
@@ -683,7 +642,6 @@ final class GameState {
     }
   }
 
-  /// Indices of targets currently in the top half of the screen.
   var topHalfTargetIndices: [Int] {
     targets.indices.filter { targets[$0].y > 0 && targets[$0].y <= screenSize.height / 2 }
   }
@@ -747,7 +705,7 @@ final class GameState {
   private func resolveBulletHits() {
     var survivingBullets: [Bullet] = []
     var hitTargetIDs: Set<UUID> = []
-    var didAceKill = false // a mid-dive kill (Mechanic 1) — worth double, sounds special.
+    var didAceKill = false
 
     for bullet in bullets {
       var hit = false
@@ -793,12 +751,10 @@ final class GameState {
   // internal (not private) so GameCollisionTests can characterize the player-hit
   // sweep; collectDrops likewise for the collect-caught shape.
   func resolvePlayerHits() {
-    // Enemy bullets striking the player.
     if removeOverlappingPlayer(&enemyBullets, size: Self.enemyBulletSize) {
       registerPlayerHit()
     }
 
-    // Enemies striking the player.
     if removeOverlappingPlayer(&targets, size: Self.targetSize) {
       registerPlayerHit()
     }
@@ -863,8 +819,6 @@ final class GameState {
     abs(a.x - b.x) < (aSize + bSize) / 2 && abs(a.y - b.y) < (aSize + bSize) / 2
   }
 
-  /// Drops a small reward shower at a point — used as the climax payoff when the
-  /// robot boss (Mechanic 5) is defeated.
   func showerDrops(at point: CGPoint, kinds: [DropKind]) {
     for (offset, kind) in kinds.enumerated() {
       let angle = Double(offset) * (.pi * 2 / Double(max(1, kinds.count)))

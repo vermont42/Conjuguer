@@ -34,16 +34,11 @@ struct Target: Identifiable {
   let kind: Target.Kind
   var x: CGFloat
   var y: CGFloat
-  // Mechanic 1 (dive-bombers): a target normally falls straight down, but a
-  // selected one peels off into a sine-modulated parabola toward the player's
-  // column. While diving it scales up so it reads as "charged."
   var isDiving = false
   var diveWarningTimer: CGFloat = 0 // > 0 while telegraphing the dive with ⚠️
   var diveProgress: CGFloat = 0     // 0 … 1 across the dive arc
   var diveStartY: CGFloat = 0
   var homeX: CGFloat = 0            // target column (player's x when the dive launched)
-  // Mechanic 5 (robot boss): the brain-core freezes its host enemy near the top
-  // so it stops scrolling and the fight stays up there.
   var isFrozen = false
 
   var renderScale: CGFloat {
@@ -60,9 +55,9 @@ struct EnemyBullet: Identifiable {
 }
 
 enum DropKind: CaseIterable {
-  case baguette // restores health
-  case grape    // grants autofire
-  case cheese   // grants a temporary shield
+  case baguette
+  case grape
+  case cheese
 
   var emoji: String {
     switch self {
@@ -113,8 +108,6 @@ enum GamePhase {
   case gameOver
 }
 
-// MARK: - Mechanic 1: Tricolore dive smoke trail
-
 struct Smoke: Identifiable {
   static let duration: CGFloat = 0.45
 
@@ -130,8 +123,6 @@ struct Smoke: Identifiable {
   }
 }
 
-// MARK: - Mechanic 2: Le Ballon des Bleus (bouncing ball)
-
 struct GameBall: Identifiable {
   let id = UUID()
   var x: CGFloat
@@ -140,8 +131,6 @@ struct GameBall: Identifiable {
   var velocityY: CGFloat
   var remainingTime: CGFloat
 }
-
-// MARK: - Mechanic 3: Le Fantôme de l'Opéra (ghost hunt)
 
 enum GhostPhase {
   case descending
@@ -183,8 +172,6 @@ struct Chandelier: Identifiable {
   var y: CGFloat
 }
 
-// MARK: - Mechanic 4: La Basse-Cour (hen, eggs, hatchlings)
-
 struct Hen: Identifiable {
   let id = UUID()
   var x: CGFloat
@@ -206,8 +193,6 @@ struct Chick: Identifiable {
   var x: CGFloat
   var y: CGFloat
 }
-
-// MARK: - Mechanic 5: Robot (converter robot mini-boss)
 
 enum BrainPhase {
   case ascending
@@ -253,13 +238,6 @@ struct RobotBullet: Identifiable {
   let isRed: Bool // alternates red / yellow
 }
 
-// MARK: - Shared projectile behavior
-
-/// A projectile that drifts by a fixed velocity each frame — an enemy bullet or
-/// a robot bullet. `GameState.advanceAndCull(_:size:dt:)` integrates and culls
-/// any conformer, so the two update loops share one implementation.
-/// (The player's own bullets are excluded: they rise at a fixed speed with no
-/// per-bullet velocity, and cull only past the top edge.)
 protocol MovingProjectile {
   var x: CGFloat { get set }
   var y: CGFloat { get set }
@@ -270,9 +248,6 @@ protocol MovingProjectile {
 extension EnemyBullet: MovingProjectile {}
 extension RobotBullet: MovingProjectile {}
 
-/// Anything with a screen position, so the generic player-collision helpers
-/// (`GameState.removeOverlappingPlayer` / `collectOverlappingPlayer`) can sweep
-/// or collect a homogeneous array of entities against the player.
 protocol GamePositioned {
   var x: CGFloat { get }
   var y: CGFloat { get }
@@ -285,11 +260,8 @@ extension Chick: GamePositioned {}
 extension Drop: GamePositioned {}
 extension NoteDot: GamePositioned {}
 
-/// The cyclic "special" mechanics — only one runs at a time, picked from a
-/// shuffled bag on a timer. The dive-bombers (Mechanic 1) and the robot boss
-/// (Mechanic 5) are scheduled separately (ambient timer / score threshold).
 enum SpecialMechanic: CaseIterable {
-  case ball     // Mechanic 2
-  case ghosts   // Mechanic 3
-  case henyard  // Mechanic 4
+  case ball
+  case ghosts
+  case henyard
 }

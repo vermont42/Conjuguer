@@ -33,8 +33,6 @@ struct GameCollisionTests {
     return game
   }
 
-  // MARK: Shape A — shoot-one-entity
-
   @Test func bulletShootingHenClearsItAndScores() {
     let game = makeGame()
     game.hen = Hen(x: 100, y: 100, movingRight: true)
@@ -58,8 +56,6 @@ struct GameCollisionTests {
     #expect(game.bullets.isEmpty)
     #expect(game.robotBrain?.hitsRemaining == 2)
   }
-
-  // MARK: Shape B — player-hit sweep
 
   @Test func enemyBulletSweepHurtsPlayerAndClears() {
     let game = makeGame()
@@ -96,8 +92,6 @@ struct GameCollisionTests {
     #expect(game.robotBullets.isEmpty)
     #expect(game.playerHealth < 1.0)
   }
-
-  // MARK: Shape C — collect-caught
 
   @Test func collectingDropRestoresHealth() {
     let game = makeGame()

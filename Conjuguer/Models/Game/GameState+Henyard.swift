@@ -35,7 +35,6 @@ extension GameState {
       return
     }
     current.x += (current.movingRight ? 1 : -1) * Self.henSpeedH * dt
-    // Vertical zig-zag.
     current.y += CGFloat(sin(sineTime * 1.5)) * Self.henSpeedV * dt
 
     current.layTimer += dt

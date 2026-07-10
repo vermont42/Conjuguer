@@ -184,7 +184,6 @@ class LanguageModelServiceReal: LanguageModelService {
       || lowercased.contains("cannot do that")
       || lowercased.contains("can't continue")
       || lowercased.contains("cannot continue")
-      // French redirects
       || lowercased.contains("je ne peux pas vous aider")
       || lowercased.contains("je ne peux pas répondre")
       || lowercased.contains("je suis une ia")

@@ -24,7 +24,6 @@ extension GameState {
     }
     diveCooldown = Self.diveInterval
 
-    // Eligible: a top-half target that is not already diving.
     let candidates = topHalfTargetIndices.filter { !targets[$0].isDiving }
     guard let index = candidates.randomElement() else {
       return
@@ -34,7 +33,6 @@ extension GameState {
     targets[index].diveWarningTimer = Self.diveWarningDuration
     targets[index].diveProgress = 0
     targets[index].diveStartY = targets[index].y
-    // The dive aims at the player's current column; the ⚠️ telegraphs it there.
     targets[index].homeX = playerX
     Current.soundPlayer.play(.buzz, shouldDebounce: false)
   }
@@ -45,7 +43,6 @@ extension GameState {
 
     for index in targets.indices where targets[index].isDiving {
       if targets[index].diveWarningTimer > 0 {
-        // Telegraph window: hold position, count down, then begin the arc here.
         targets[index].diveWarningTimer -= dt
         if targets[index].diveWarningTimer <= 0 {
           targets[index].diveStartY = targets[index].y
@@ -60,7 +57,6 @@ extension GameState {
         continue
       }
 
-      // Ease downward off the bottom edge with a mild parabolic acceleration.
       let point = Self.diveArc(
         t: t,
         startY: targets[index].diveStartY,

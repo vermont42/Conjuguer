@@ -36,17 +36,15 @@ struct GameProjectileTests {
     abs(a - b) < tolerance
   }
 
-  // MARK: Integrate-and-cull — player bullets
-
   @Test func playerBulletsMoveStraightUp() {
     let game = makeGame()
     game.bullets = [Bullet(x: 100, y: 500)]
 
-    game.updateBullets(dt: 0.5) // bulletSpeed 620 * 0.5 = 310 upward
+    game.updateBullets(dt: 0.5)
 
     #expect(game.bullets.count == 1)
-    #expect(game.bullets.first?.x == 100) // no horizontal drift
-    #expect(game.bullets.first?.y == 190) // 500 - 310
+    #expect(game.bullets.first?.x == 100)
+    #expect(game.bullets.first?.y == 190)
   }
 
   @Test func playerBulletsCullPastTopEdgeOnly() {
@@ -60,16 +58,14 @@ struct GameProjectileTests {
     #expect(game.bullets.first?.y == -30)
   }
 
-  // MARK: Integrate-and-cull — enemy bullets
-
   @Test func enemyBulletsIntegrateByVelocity() {
     let game = makeGame()
     game.enemyBullets = [EnemyBullet(x: 100, y: 100, velocityX: 200, velocityY: 300)]
 
     game.updateEnemyBullets(dt: 0.5)
 
-    #expect(game.enemyBullets.first?.x == 200) // 100 + 200 * 0.5
-    #expect(game.enemyBullets.first?.y == 250) // 100 + 300 * 0.5
+    #expect(game.enemyBullets.first?.x == 200)
+    #expect(game.enemyBullets.first?.y == 250)
   }
 
   @Test func enemyBulletsCullOnAllFourEdges() {
@@ -77,11 +73,11 @@ struct GameProjectileTests {
     // enemyBulletSize 30 in a 400x800 field: bounds are x < -30, x > 430,
     // y < -30, y > 830. One bullet just past each edge, plus one in-bounds.
     game.enemyBullets = [
-      EnemyBullet(x: 200, y: -31, velocityX: 0, velocityY: 0),  // past top
-      EnemyBullet(x: 200, y: 831, velocityX: 0, velocityY: 0),  // past bottom
-      EnemyBullet(x: -31, y: 400, velocityX: 0, velocityY: 0),  // past left
-      EnemyBullet(x: 431, y: 400, velocityX: 0, velocityY: 0),  // past right
-      EnemyBullet(x: 200, y: 400, velocityX: 0, velocityY: 0)   // in bounds
+      EnemyBullet(x: 200, y: -31, velocityX: 0, velocityY: 0),
+      EnemyBullet(x: 200, y: 831, velocityX: 0, velocityY: 0),
+      EnemyBullet(x: -31, y: 400, velocityX: 0, velocityY: 0),
+      EnemyBullet(x: 431, y: 400, velocityX: 0, velocityY: 0),
+      EnemyBullet(x: 200, y: 400, velocityX: 0, velocityY: 0)
     ]
 
     game.updateEnemyBullets(dt: 0)
@@ -90,8 +86,6 @@ struct GameProjectileTests {
     #expect(game.enemyBullets.first?.x == 200)
     #expect(game.enemyBullets.first?.y == 400)
   }
-
-  // MARK: Integrate-and-cull — robot bullets (same logic, robotBulletSize 16)
 
   @Test func robotBulletsIntegrateByVelocity() {
     let game = makeGame()
@@ -107,11 +101,11 @@ struct GameProjectileTests {
     let game = makeGame()
     // robotBulletSize 16: bounds are x < -16, x > 416, y < -16, y > 816.
     game.robotBullets = [
-      RobotBullet(x: 200, y: -17, velocityX: 0, velocityY: 0, isRed: true),  // past top
-      RobotBullet(x: 200, y: 817, velocityX: 0, velocityY: 0, isRed: true),  // past bottom
-      RobotBullet(x: -17, y: 400, velocityX: 0, velocityY: 0, isRed: true),  // past left
-      RobotBullet(x: 417, y: 400, velocityX: 0, velocityY: 0, isRed: true),  // past right
-      RobotBullet(x: 200, y: 400, velocityX: 0, velocityY: 0, isRed: true)   // in bounds
+      RobotBullet(x: 200, y: -17, velocityX: 0, velocityY: 0, isRed: true),
+      RobotBullet(x: 200, y: 817, velocityX: 0, velocityY: 0, isRed: true),
+      RobotBullet(x: -17, y: 400, velocityX: 0, velocityY: 0, isRed: true),
+      RobotBullet(x: 417, y: 400, velocityX: 0, velocityY: 0, isRed: true),
+      RobotBullet(x: 200, y: 400, velocityX: 0, velocityY: 0, isRed: true)
     ]
 
     game.updateRobotBullets(dt: 0)
@@ -121,14 +115,12 @@ struct GameProjectileTests {
     #expect(game.robotBullets.first?.y == 400)
   }
 
-  // MARK: Homing fire — enemy fire
-
   @Test func enemyFireAimsAtPlayerFromNearestCandidate() throws {
     let game = makeGame()
     // Player sits at screen center: playerX 200, playerY 800 - 112 = 688.
     // Two top-half candidates; the one nearer the player's column fires.
-    let near = Target(kind: .rooster, x: 260, y: 100) // |260 - 200| = 60
-    let far = Target(kind: .beret, x: 100, y: 100)    // |100 - 200| = 100
+    let near = Target(kind: .rooster, x: 260, y: 100)
+    let far = Target(kind: .beret, x: 100, y: 100)
     game.targets = [far, near]
 
     // Cooldown starts at enemyFireInterval, so one call with that dt fires.
@@ -136,7 +128,7 @@ struct GameProjectileTests {
 
     #expect(game.enemyBullets.count == 1)
     let bullet = try #require(game.enemyBullets.first)
-    #expect(bullet.x == near.x) // originates from the nearer shooter
+    #expect(bullet.x == near.x)
     #expect(bullet.y == near.y)
 
     // Velocity is normalize(player - shooter) * enemyBulletSpeed.
@@ -158,8 +150,6 @@ struct GameProjectileTests {
 
     #expect(game.enemyBullets.isEmpty)
   }
-
-  // MARK: Homing fire — robot fire
 
   @Test func robotFireAimsAtPlayerWithAlternatingColor() throws {
     let game = makeGame()

@@ -48,7 +48,6 @@ enum WidgetSnapshotWriter {
     return true
   }
 
-  // One snapshot per day for today plus the next `dayCount - 1` days.
   @MainActor static func generateSnapshots(from date: Date = Date(), dayCount: Int = futureDayCount) -> [WidgetSnapshot] {
     let startOfToday = WidgetDateHelper.startOfDay(for: date)
     return (0 ..< dayCount).compactMap { offset in

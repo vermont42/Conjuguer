@@ -23,8 +23,6 @@ struct GameMechanicsTests {
     return game
   }
 
-  // MARK: Mechanic 1 — dive-bombers
-
   @Test func diveLaunchesAndChargesUp() throws {
     let game = makeGame()
     game.targets = [Target(kind: .rooster, x: 200, y: 100)]
@@ -51,13 +49,11 @@ struct GameMechanicsTests {
     #expect(!game.smoke.isEmpty)
   }
 
-  // MARK: Mechanic 2 — bouncing ball
-
   @Test func ballBouncesOffWalls() {
     let game = makeGame()
     game.ball = GameBall(x: 1, y: 400, velocityX: -100, velocityY: 60, remainingTime: 10)
     game.updateBall(dt: 0.1)
-    #expect((game.ball?.velocityX ?? 0) > 0) // reflected off the left wall
+    #expect((game.ball?.velocityX ?? 0) > 0)
   }
 
   @Test func ballDestroysTargets() {
@@ -97,8 +93,6 @@ struct GameMechanicsTests {
     #expect(game.activeSpecial == nil)
   }
 
-  // MARK: Mechanic 3 — ghost hunt
-
   @Test func ghostsSpawnWithChandelier() {
     let game = makeGame()
     game.spawnGhosts()
@@ -133,8 +127,6 @@ struct GameMechanicsTests {
     game.collideGhosts()
     #expect(game.playerHealth < 1.0)
   }
-
-  // MARK: Mechanic 4 — hen, eggs, hatchlings
 
   @Test func henLaysEggs() {
     let game = makeGame()
@@ -179,7 +171,7 @@ struct GameMechanicsTests {
     game.update(currentTime: .now) // first frame just seeds the clock (dt = 0)
     game.update(currentTime: Date(timeIntervalSinceNow: 0.05))
     #expect(game.chicks.isEmpty)
-    #expect(game.playerX <= game.screenSize.width) // wrapped back on-screen
+    #expect(game.playerX <= game.screenSize.width)
   }
 
   @Test func chickHurtsPlayer() {
@@ -190,8 +182,6 @@ struct GameMechanicsTests {
     #expect(game.playerHealth < 1.0)
     #expect(game.chicks.isEmpty)
   }
-
-  // MARK: Mechanic 5 — robot boss
 
   @Test func bossSpawnsAtScoreThreshold() {
     let game = makeGame()
@@ -228,7 +218,7 @@ struct GameMechanicsTests {
     }
     let minion = try #require(game.robotMinion)
     #expect(minion.homeX == game.screenSize.width / 2)
-    #expect(minion.homeY == 80) // vertical position unchanged
+    #expect(minion.homeY == 80)
   }
 
   @Test func frozenHostDoesNotScroll() {
@@ -263,6 +253,6 @@ struct GameMechanicsTests {
     game.collideRobot()
     #expect(game.robotMinion == nil)
     #expect(game.score > before)
-    #expect(!game.drops.isEmpty) // the climax reward shower
+    #expect(!game.drops.isEmpty)
   }
 }

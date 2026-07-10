@@ -22,7 +22,6 @@ extension GameState {
     chandelier = nil
     frightActive = false
     frightTimer = 0
-    // The chandelier appears partway through the descent.
     chandelier = Chandelier(x: screenSize.width / 2, y: Self.ghostSize)
     Current.soundPlayer.play(.ghostSpooky, shouldDebounce: false)
   }

@@ -28,13 +28,12 @@ extension GameState {
     // Lock onto the topmost enemy and freeze it so the whole fight stays near the
     // top of the screen, well away from the player.
     guard let hostIndex = topmostHostIndex() else {
-      return // No eligible enemy yet; try again next frame.
+      return
     }
     nextBossScore = score + Self.bossScoreStep
     targets[hostIndex].isFrozen = true
     let host = targets[hostIndex]
     robotBrain = RobotBrain(
-      // Enter from the side opposite the host and drift across to it, near the top.
       x: host.x < screenSize.width / 2 ? screenSize.width : 0,
       y: brainHoverY(for: host.y),
       targetTargetID: host.id
@@ -42,14 +41,12 @@ extension GameState {
     Current.soundPlayer.play(.brainLockOn, shouldDebounce: false)
   }
 
-  /// The highest on-screen enemy that can host the conversion.
   private func topmostHostIndex() -> Int? {
     targets.indices
       .filter { !targets[$0].isDiving && !targets[$0].isFrozen && targets[$0].y >= 0 }
       .min(by: { targets[$0].y < targets[$1].y })
   }
 
-  /// Keeps the brain just above its host but always on-screen.
   private func brainHoverY(for hostY: CGFloat) -> CGFloat {
     max(hostY - Self.brainSize, Self.brainSize / 2)
   }
@@ -59,7 +56,6 @@ extension GameState {
       return
     }
 
-    // Re-acquire if the player shot the host (or it otherwise vanished).
     guard let hostIndex = targets.firstIndex(where: { $0.id == brain.targetTargetID }) else {
       if let newHostIndex = topmostHostIndex() {
         targets[newHostIndex].isFrozen = true
@@ -76,7 +72,6 @@ extension GameState {
 
     switch brain.phase {
     case .ascending:
-      // Drift horizontally toward the frozen host, then lock on.
       let dx = host.x - brain.x
       let step = Self.brainDriftSpeed * dt
       if step >= abs(dx) {
@@ -142,7 +137,6 @@ extension GameState {
         minion.diveProgress = 0
         minion.divePauseTimer = 0
       } else {
-        // Swoop down toward the player and back up to the home row.
         let point = Self.diveArc(
           t: t,
           startY: minion.diveStartY,
