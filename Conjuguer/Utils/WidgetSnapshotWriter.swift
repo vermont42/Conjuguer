@@ -82,7 +82,7 @@ enum WidgetSnapshotWriter {
       etymologySnippet: etymology,
       exampleFrench: example?.fr,
       exampleEnglish: example?.en,
-      exampleSource: example?.source,
+      exampleSource: example.map { $0.provenance.attribution },
       quizQuestion: quiz,
       dateString: dateString(for: date)
     )

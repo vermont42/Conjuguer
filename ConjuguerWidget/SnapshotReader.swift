@@ -44,7 +44,7 @@ enum SnapshotReader {
       etymologySnippet: "Du latin ~parabolare~, « raconter ».",
       exampleFrench: "Elle parle français couramment.",
       exampleEnglish: "She speaks French fluently.",
-      exampleSource: "Exemple",
+      exampleSource: "— Exemple",
       quizQuestion: WidgetQuizQuestion(
         infinitif: "parler",
         tenseDisplay: "Indicatif Présent",

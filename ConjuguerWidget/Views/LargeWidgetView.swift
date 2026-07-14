@@ -52,11 +52,14 @@ struct LargeWidgetView: View {
           Text(french)
             .font(.caption2)
             .italic()
-            .lineLimit(2)
+            .lineLimit(4)
           if let source = snapshot.exampleSource {
-            Text(verbatim: "— \(source)")
+            // provenance.attribution already carries the "— " lead-in and the real
+            // book/author, so render it verbatim rather than re-prefixing a filename.
+            Text(verbatim: source)
               .font(.system(size: 9))
               .foregroundStyle(.tertiary)
+              .lineLimit(2)
           }
         }
       }
@@ -66,7 +69,7 @@ struct LargeWidgetView: View {
         Text(widgetEtymology: etymology)
           .font(.caption2)
           .foregroundStyle(.secondary)
-          .lineLimit(3)
+          .lineLimit(6)
       }
 
       Spacer(minLength: 0)
