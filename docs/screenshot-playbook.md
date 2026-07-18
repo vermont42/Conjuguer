@@ -1,5 +1,14 @@
 # Screenshot Playbook
 
+> **⚠️ Updated 2026-07-18 — NOT RE-TESTED.** This playbook and
+> `scripts/take_screenshots.sh` were refreshed from findings made while porting the same
+> harness to the sibling app **Conjugar**, and from a large machine-wide simulator prune the
+> same day. The changes are believed correct but **no cell of this sweep has been run since**,
+> and no simulator was booted to confirm. Treat the first run as a verification run: shoot a
+> single cell (`--lang fr --view quiz_results`) and inspect it before trusting a full sweep.
+> Specifically unverified here: the iPad tab coordinates (see *Per-View Navigation Recipes*)
+> and the keyboard probe points (workaround #6).
+
 Captures App Store screenshots for Conjuguer via `scripts/take_screenshots.sh`. The driver carries the calibration values, per-view navigation, and the workarounds inline as comments; this playbook is the prose-and-procedure wrapper around it.
 
 ## Running it from a fresh Claude session
@@ -38,8 +47,8 @@ App Store screenshots only — 9 views × 2 languages × 2 devices = 36 PNGs. No
   ```bash
   export IBV_SCRIPTS=$(dirname "$(find ~/.claude -path '*ios-build-verify*' -name build_app.sh 2>/dev/null | head -1)")
   ```
-- macOS Accessibility permission granted to `osascript`. System Settings → Privacy & Security → Accessibility → add `/usr/bin/osascript`. The driver depends on this for the soft-keyboard Cmd+K toggle (workaround #6).
-- Two simulators named `iPhone 17 Pro Max` and `iPad Pro 13-inch (M4)` (see "Simulator Setup"). The driver resolves their UDIDs by name at run time — no hardcoding.
+- macOS Accessibility permission granted to `osascript`. System Settings → Privacy & Security → Accessibility → add `/usr/bin/osascript`. The driver depends on this for the soft-keyboard Cmd+K toggle (workaround #6). **Granted on this machine as of 2026-07-18.** A *missing* permission is not the only way the AXRaise step fails: a freshly-activated Simulator briefly reports no windows and the resulting `-1719 "Invalid index"` looks identical to a permission problem. The driver now waits 0.5 s after `activate` for that reason.
+- Two simulators named `iPhone 17 Pro Max` and `iPad Pro 13-inch (M4)` (see "Simulator Setup"). The driver resolves their UDIDs by name at run time — no hardcoding. **Confirm exactly one iOS-26 device matches each name before running:** `udid_for()` takes the first match in `simctl list` order, which is oldest-runtime-first, so a stale-runtime duplicate silently wins. Both names resolved cleanly on 2026-07-18 after the prune.
 - **Disable TipKit tips first (then restore).** Set `TipDisplay.tipsEnabled = false` in
   [`Conjuguer/Models/ConjuguerTips.swift`](../Conjuguer/Models/ConjuguerTips.swift) **before** running the driver, and restore it to `true` afterward. This is a compile-time master switch: when `false`, `ConjuguerApp` skips `Tips.configure()`, so every `TipView` (notably "Try the Quiz" on VerbBrowseView and "Explore Models" on ModelBrowseView) and `.popoverTip(_:)` stays hidden — no per-call-site changes needed. The driver builds once at start, so the flag must be flipped before you launch it. Leaving tips on means a tip card can land in the VerbBrowseView/ModelBrowseView screenshots.
 - **Clean the iPad status bar (App Store polish).** The driver does *not* manage the status bar, so iPad shots ship with whatever the simulator's clock and **system language** produce — and the iPad status bar shows a *date* (e.g. a German `Freitag 26. Juni` if the sim's system language is German), which looks unprofessional on an EN/FR listing. iPhone shots are unaffected (the notch shows only the time). Set a clean status bar before the iPad sweep — see **"Clean Status Bar"** below. (Not needed for iPhone.)
@@ -114,19 +123,43 @@ done
 
 ## Simulator Setup
 
-The driver targets two simulators by name and resolves their UDIDs at run time (`udid_for()` matches the exact device name from `xcrun simctl list devices available`). You only need the two devices to exist with the default names. To (re)create either after `simctl erase` or `simctl delete unavailable`:
+The driver targets two simulators by name and resolves their UDIDs at run time (`udid_for()` matches the exact device name from `xcrun simctl list devices available`). You only need the two devices to exist with the default names.
+
+> **Prune note (2026-07-18).** This machine was pruned hard that day: every iOS 18 device,
+> every iOS 26.0 device, and all 305 devices on uninstalled runtimes were deleted (354 devices
+> → 37). Both names still resolve, and the `iPad Pro 13-inch (M4)` that `udid_for()` now finds
+> is a **freshly created iOS 26.3 device** — it is not the sim that was in place when this
+> playbook was first written. That is the main reason this file is marked untested.
+>
+> Because this driver resolves **by name**, it is exposed to a hazard a UDID-hardcoding driver
+> is not: `udid_for()` returns the *first* match in `simctl list` order, which is
+> oldest-runtime-first. A leftover same-named sim on an older runtime therefore wins, and the
+> install dies with *"Requires a Newer Version of iOS"*. Note `xcrun simctl delete unavailable`
+> does **not** clear those — a device on an old-but-*installed* runtime is "available" and
+> survives that command. Delete or rename such duplicates by UDID. Check with:
+>
+> ```bash
+> xcrun simctl list devices available | grep -E 'iPhone 17 Pro Max|iPad Pro 13-inch \(M4\)'
+> ```
+
+To (re)create either after `simctl erase` or `simctl delete unavailable`:
 
 ```bash
-RUNTIME=$(xcrun simctl list runtimes | grep -i 'iOS 26.3' | tail -1 | awk -F'[()]' '{print $2}')
+RUNTIME=com.apple.CoreSimulator.SimRuntime.iOS-26-3
 
 xcrun simctl create "iPhone 17 Pro Max" \
   com.apple.CoreSimulator.SimDeviceType.iPhone-17-Pro-Max \
   "$RUNTIME"
 
 xcrun simctl create "iPad Pro 13-inch (M4)" \
-  com.apple.CoreSimulator.SimDeviceType.iPad-Pro-13-inch-M4 \
+  com.apple.CoreSimulator.SimDeviceType.iPad-Pro-13-inch-M4-8GB \
   "$RUNTIME"
 ```
+
+**The device-type id changed.** Xcode 26 splits the M4 into 8 GB and 16 GB variants, so the
+bare `…iPad-Pro-13-inch-M4` no longer resolves — use `…iPad-Pro-13-inch-M4-8GB`. The M4 type is
+still offered on the 26.3 runtime even though a fresh Xcode install seeds only an M5, so
+creating it by hand is the way to get the name this driver expects.
 
 **No sim renaming needed.** Konjugieren's driver hardcoded UDIDs and renamed the iPad to dodge `_resolve_udid.sh`'s regex-special-char bug (parens in `TARGET_SIM`). Conjuguer's driver bypasses `_resolve_udid.sh` entirely and matches the device name as a Python string literal, so `iPad Pro 13-inch (M4)` works unchanged.
 
@@ -246,8 +279,24 @@ Compact reference. The driver's inline comments hold the full WHY for each — c
 5. **Unicode typing via pasteboard** (`take_screenshots.sh::type_via_pasteboard`)
    *Symptom:* `axe type` lacks HID-keycode mappings for French accents (é è à ç ô î û ë …). *Fix:* paste via `simctl pbcopy` + Cmd+V (`axe key-combo --modifiers 227 --key 25`). Conjugated quiz answers are full of accents, so every quiz answer routes through this.
 
-6. **Soft keyboard suppression** (`take_screenshots.sh::ensure_soft_keyboard`)
-   *Symptom:* Simulator forwards host hardware-keyboard events; the soft keyboard is suppressed by default. *Fix:* send Cmd+K via `osascript` (Simulator's "Toggle Software Keyboard"); idempotent — checks the AXTree for a "space" key first.
+6. **Soft keyboard suppression** (`take_screenshots.sh::ensure_soft_keyboard, keyboard_is_visible`)
+   *Symptom:* Simulator forwards host hardware-keyboard events; the soft keyboard is suppressed by default. *Fix:* send Cmd+K via `osascript` (Simulator's "Toggle Software Keyboard").
+
+   **Corrected 2026-07-18 — the idempotency guard was broken.** It counted AXTree elements
+   labelled `space`, which is *always zero*: the keyboard runs in its own process and does not
+   appear in a full `axe describe-ui` dump at all. Since Cmd+K is a **toggle** whose state
+   persists in Simulator across app launches, the guard never firing means the second
+   `quiz_mid` cell of a sweep switches the keyboard back **off** — the four `quiz_mid` shots
+   alternate keyboard/no-keyboard, silently, in a run that reports success. `describe-ui
+   --point` *can* see the keyboard (same trick as workaround #12 on the StoreKit modal), so
+   `keyboard_is_visible` now probes a mid-keyboard coordinate and treats a ≤2-character label
+   (`g`) as keys-present. Not the space bar — it reports a blank label, indistinguishable from
+   "nothing found". `ensure_soft_keyboard` also re-checks after toggling and warns if it did
+   not land.
+
+   The probe points (`220,760` iPhone / `516,1120` iPad) were validated on iOS 26.3 in
+   Conjugar. They are a property of the **device**, not the app, and this driver's two sims are
+   the same device types — but they have not been run against *this* app. Verify on first use.
 
 7. **StoreKit review-prompt suppression** (`take_screenshots.sh::seed_defaults`)
    *Symptom:* the StoreKit review modal (`ReviewPrompterReal`, used even in the simulator World config) opaques the AXTree mid-loop. It fires when `promptActionCount % 10 == 0` **and** ≥180 days since `lastReviewPromptDate`. *Fix:* pre-seed `lastReviewPromptDate` to now via `simctl spawn defaults write`, so the 180-day cooldown blocks every prompt this run. (Fallback: workaround #12.)
@@ -260,6 +309,19 @@ Compact reference. The driver's inline comments hold the full WHY for each — c
 
 10. **Multi-sim window focus** (`take_screenshots.sh::ensure_soft_keyboard`)
     *Symptom:* with both sims booted, Cmd+K hits whichever Simulator window is frontmost. *Fix:* AXRaise the target sim's window by title-substring match before sending the keystroke.
+
+    **The match is by device *family* substring (`iPhone` / `iPad`), so it disambiguates only
+    while exactly one simulator per family is booted** — which is what a normal sweep produces.
+    Boot a second iPhone or iPad (easy while testing) and AXRaise can raise the wrong window;
+    the keystroke lands on a sim that isn't being screenshotted and `quiz_mid` comes out
+    keyboard-less. Observed in Conjugar with four windows open. Workaround #6's post-toggle
+    check catches it and logs `soft keyboard still not visible after Cmd+K`; if you see that,
+    run `osascript -e 'tell application "System Events" to tell process "Simulator" to get name
+    of every window'` and shut down extra sims of that family.
+
+    Also note the AppleScript's `delay` after `activate` is now **0.5 s** (was 0.2 s): a
+    freshly-activated Simulator briefly reports no windows, and the resulting `-1719 "Invalid
+    index"` error reads exactly like a missing Accessibility permission. It is not one.
 
 11. **Localized onboarding labels** (`take_screenshots.sh::ONBOARDING_LABELS`)
     *Symptom:* the onboarding-Skip button label is localized (`Skip` / `Passer`). *Fix:* array of all known labels; the wait-for-render loop tries each (fallback to workaround #2's pre-seed).
@@ -274,6 +336,21 @@ Compact reference. The driver's inline comments hold the full WHY for each — c
     *Symptom:* iPad shots carry the live clock and a system-language date (e.g. German `Freitag 26. Juni`). *Fix:* `simctl status_bar override --time "9:41" …` (persists across install, cleared on reboot) for the clock/battery/signal, plus a per-language **system-language change + reboot** to localize the iPad date. `--time` rejects `"9:41 AM"`/ISO strings — pass a bare `"9:41"`.
 
 ## Per-View Navigation Recipes
+
+> **Tab coordinates are unverified since 2026-07-18.** The sibling app Conjugar re-measured its
+> iPad tab centers from the AXTree and found the shared inherited values (`355 / 441.5 / 523 /
+> 587.75 / 667.25`) landed inside the right tab but 3–6 pt off-center. **Those corrected numbers
+> do not transfer to this app** — iPad tab widths follow the localized label text, and French
+> labels differ from Spanish. Re-measure here rather than copying; unlike the iPhone pill (whose
+> children are not exposed, so those coords can only be confirmed by tapping), the iPad's top
+> bar reports each tab as an `AXRadioButton`:
+>
+> ```bash
+> axe describe-ui --udid <IPAD_UDID> \
+>   | jq '[.. | objects | select(.role? == "AXRadioButton")] | .[] | {AXLabel, AXFrame}'
+> ```
+>
+> Center = `x + w/2`. An off-center-but-working tap is the early warning that geometry drifted.
 
 | # | View | Mode | Driver function | Notes |
 |---|---|---|---|---|

@@ -264,15 +264,54 @@ tap_id_first() {
   sleep 0.7
 }
 
+# Is the soft keyboard currently on screen?
+#
+# The keyboard belongs to a separate process, so it does NOT appear in the app's
+# `axe describe-ui` tree at all — a full-tree dump of a screen with the keyboard
+# plainly visible returns zero keyboard elements. `describe-ui --point` *does*
+# see it (the same trick the review-prompt dismiss uses on the StoreKit modal),
+# so probe a coordinate in the middle of the key field and ask what is under it:
+# a single-character label ("g") means keys are there; anything longer is the
+# app's own content showing through, i.e. no keyboard.
+#
+# The point is deliberately mid-keyboard rather than on the space bar: space
+# reports a blank label, indistinguishable from "nothing found".
+#
+# Probe points were validated on iPhone 17 Pro Max and iPad Pro 13-inch (M4) on
+# iOS 26.3 (in the sibling app Conjugar). They are a property of the *device*,
+# not the app, and both apps target these same two device types — so they carry
+# over. Re-check if the device list changes.
+keyboard_is_visible() {
+  local probe labels
+  case "$DEVICE" in
+    "iPhone 17 Pro Max")     probe="220,760"  ;;
+    "iPad Pro 13-inch (M4)") probe="516,1120" ;;
+    *) return 1 ;;
+  esac
+  labels=$(axe describe-ui --point "$probe" --udid "$UDID" 2>/dev/null \
+    | jq -r '[.. | objects | select(.AXLabel? != null and .AXLabel != "") | .AXLabel] | join("|")' 2>/dev/null)
+  [[ -n "$labels" && ${#labels} -le 2 ]]
+}
+
 # The soft keyboard is suppressed by default because Simulator.app forwards host
 # hardware-keyboard events. Cmd+K is Simulator's "Toggle Software Keyboard" —
-# sent via AppleScript. Idempotent: checks for the "space" key in the AXTree
-# first. Raises the target sim's window before the keystroke so the right window
-# catches it when both sims are booted. (workarounds #6 and #10)
+# sent via AppleScript. Raises the target sim's window before the keystroke so
+# the right window catches it when both sims are booted. (workarounds #6 and #10)
+#
+# Cmd+K is a TOGGLE whose state persists in Simulator across app launches and
+# across cells, so the visibility guard is load-bearing, not an optimization:
+# without it the second quiz_mid cell of a sweep toggles the keyboard back OFF
+# and the four quiz_mid shots alternate keyboard/no-keyboard. The original guard
+# counted AXTree elements labelled "space", which on iOS 26 is always zero (see
+# keyboard_is_visible), so it never fired — the bug this replaces.
+#
+# NOTE the window match is by device *family* substring, so it is unambiguous
+# only while exactly one simulator per family is booted (what a normal sweep
+# produces). A stray second iPhone/iPad sim can make AXRaise pick the wrong
+# window; the post-toggle check below is what surfaces that.
 ensure_soft_keyboard() {
-  local count window_match
-  count=$(axe_tree | jq '[.. | objects | select((.AXLabel? // "" | ascii_downcase) == "space")] | length' 2>/dev/null || echo 0)
-  if [[ "$count" -gt 0 ]]; then
+  local window_match
+  if keyboard_is_visible; then
     return 0
   fi
   case "$DEVICE" in
@@ -280,8 +319,12 @@ ensure_soft_keyboard() {
     "iPad Pro 13-inch (M4)") window_match="iPad" ;;
     *) window_match="" ;;
   esac
+  # `delay 0.5`, not 0.2: with a freshly-activated Simulator the window list is
+  # briefly unenumerable and AXRaise fails with -1719 "Invalid index", which
+  # reads exactly like a missing-permission failure and sends you chasing the
+  # wrong thing.
   osascript -e 'tell application "Simulator" to activate' \
-            -e 'delay 0.2' \
+            -e 'delay 0.5' \
             -e "tell application \"System Events\" to tell process \"Simulator\" to perform action \"AXRaise\" of (first window whose title contains \"$window_match\")" \
             -e 'delay 0.3' \
             -e 'tell application "System Events" to keystroke "k" using {command down}' \
@@ -292,7 +335,13 @@ ensure_soft_keyboard() {
     log "warning: AppleScript Cmd+K failed (grant osascript Accessibility permission)"
     return 0
   }
-  sleep 0.7
+  sleep 0.9
+  # Confirm the toggle landed. Cmd+K is fire-and-forget — osascript returns 0
+  # whether or not Simulator acted — so without this a keyboard-less quiz_mid
+  # shot is silent.
+  if ! keyboard_is_visible; then
+    log "warning: soft keyboard still not visible after Cmd+K on $DEVICE"
+  fi
 }
 
 # axe type lacks HID-keycode mappings for non-ASCII characters (French accents
