@@ -123,7 +123,8 @@ struct InfoBrowseView: View {
       NavigationLink(value: Self.tutorRoute) {
         tutorCell
       }
-    } else if let reason = world.languageModelService.unavailabilityReason {
+    } else if let reason = world.languageModelService.unavailabilityReason,
+              TutorDisplay.tutorUnavailableRowEnabled {
       tutorUnavailableCell(reason: reason)
     }
   }
@@ -136,7 +137,8 @@ struct InfoBrowseView: View {
           .card()
       }
       .buttonStyle(.plain)
-    } else if let reason = world.languageModelService.unavailabilityReason {
+    } else if let reason = world.languageModelService.unavailabilityReason,
+              TutorDisplay.tutorUnavailableRowEnabled {
       tutorUnavailableCell(reason: reason)
         .card()
     }

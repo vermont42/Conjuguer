@@ -21,8 +21,10 @@ and docs/screenshot-plan.md first, then drive scripts/take_screenshots.sh to pro
 36 (9 views × en/fr × iPhone 17 Pro Max + iPad Pro 13-inch (M4)).
 
 Before running:
-- Set TipDisplay.tipsEnabled = false in Conjuguer/Models/ConjuguerTips.swift, and
-  restore it to true when all screenshots are captured.
+- Set BOTH kill switches to false in Conjuguer/Models/ConjuguerTips.swift —
+  TipDisplay.tipsEnabled and TutorDisplay.tutorUnavailableRowEnabled — and restore
+  both to true when all screenshots are captured. See "Disable tips and the tutor
+  row first" for the sed commands.
 - Confirm both simulators exist (see "Simulator Setup") and that jq + axe are on PATH.
 
 After running:
@@ -49,9 +51,41 @@ App Store screenshots only — 9 views × 2 languages × 2 devices = 36 PNGs. No
   ```
 - macOS Accessibility permission granted to `osascript`. System Settings → Privacy & Security → Accessibility → add `/usr/bin/osascript`. The driver depends on this for the soft-keyboard Cmd+K toggle (workaround #6). **Granted on this machine as of 2026-07-18.** A *missing* permission is not the only way the AXRaise step fails: a freshly-activated Simulator briefly reports no windows and the resulting `-1719 "Invalid index"` looks identical to a permission problem. The driver now waits 0.5 s after `activate` for that reason.
 - Two simulators named `iPhone 17 Pro Max` and `iPad Pro 13-inch (M4)` (see "Simulator Setup"). The driver resolves their UDIDs by name at run time — no hardcoding. **Confirm exactly one iOS-26 device matches each name before running:** `udid_for()` takes the first match in `simctl list` order, which is oldest-runtime-first, so a stale-runtime duplicate silently wins. Both names resolved cleanly on 2026-07-18 after the prune.
-- **Disable TipKit tips first (then restore).** Set `TipDisplay.tipsEnabled = false` in
-  [`Conjuguer/Models/ConjuguerTips.swift`](../Conjuguer/Models/ConjuguerTips.swift) **before** running the driver, and restore it to `true` afterward. This is a compile-time master switch: when `false`, `ConjuguerApp` skips `Tips.configure()`, so every `TipView` (notably "Try the Quiz" on VerbBrowseView and "Explore Models" on ModelBrowseView) and `.popoverTip(_:)` stays hidden — no per-call-site changes needed. The driver builds once at start, so the flag must be flipped before you launch it. Leaving tips on means a tip card can land in the VerbBrowseView/ModelBrowseView screenshots.
+- **Disable TipKit tips *and* the tutor row first (then restore both).** Both switches live in
+  [`Conjuguer/Models/ConjuguerTips.swift`](../Conjuguer/Models/ConjuguerTips.swift) and must be `false` **before** you launch the driver (it builds once at start), then restored to `true`. `TipDisplay.tipsEnabled = false` makes `ConjuguerApp` skip `Tips.configure()`, so every `TipView` (notably "Try the Quiz" on VerbBrowseView and "Explore Models" on ModelBrowseView) and `.popoverTip(_:)` stays hidden — no per-call-site changes needed. `TutorDisplay.tutorUnavailableRowEnabled = false` drops the tutor *unavailability* cell from InfoBrowseView. See **"Disable tips and the tutor row first"** below for the copy-paste `sed` commands and what each costs you if forgotten.
 - **Clean the iPad status bar (App Store polish).** The driver does *not* manage the status bar, so iPad shots ship with whatever the simulator's clock and **system language** produce — and the iPad status bar shows a *date* (e.g. a German `Freitag 26. Juni` if the sim's system language is German), which looks unprofessional on an EN/FR listing. iPhone shots are unaffected (the notch shows only the time). Set a clean status bar before the iPad sweep — see **"Clean Status Bar"** below. (Not needed for iPhone.)
+
+## Disable tips and the tutor row first (then restore)
+
+Two compile-time switches, both in [`Conjuguer/Models/ConjuguerTips.swift`](../Conjuguer/Models/ConjuguerTips.swift), both ordinarily `true`. **Set both to `false` before running the driver and restore both afterward.** The driver builds once at start, so they must be flipped *before* you launch it.
+
+| Switch | Effect when `false` | What you get if you forget |
+|---|---|---|
+| `TipDisplay.tipsEnabled` | `ConjuguerApp` skips `Tips.configure()`, so every `TipView` / `.popoverTip(_:)` stays hidden. | A tip card lands in one of the browse/quiz/settings shots. |
+| `TutorDisplay.tutorUnavailableRowEnabled` | `InfoBrowseView` drops the tutor **unavailability cell** (both size-class branches). Only that cell — the working `NavigationLink` is untouched. | Both **iPad** `info_browse` shots carry "Apple Intelligence is still getting ready." (iPhone escapes it only via the scroll target — see the Tutor gotcha.) |
+
+Use the `-e` form below. A single expression with `;`-separated substitutions split across
+lines with a trailing backslash **fails on macOS** — BSD `sed` reports `newline can not be
+used as a string delimiter` and changes nothing. Always eyeball the `grep` afterward: `sed`
+exits 0 when a pattern matches nothing, so a renamed switch fails *silently* and the sweep
+proceeds with tips and the tutor row still on.
+
+```bash
+# before the sweep
+sed -i '' \
+  -e 's/static let tipsEnabled = true/static let tipsEnabled = false/' \
+  -e 's/static let tutorUnavailableRowEnabled = true/static let tutorUnavailableRowEnabled = false/' \
+  Conjuguer/Models/ConjuguerTips.swift
+grep -n 'tipsEnabled = \|tutorUnavailableRowEnabled = ' Conjuguer/Models/ConjuguerTips.swift  # both must read false
+
+# after the sweep — restore
+sed -i '' \
+  -e 's/static let tipsEnabled = false/static let tipsEnabled = true/' \
+  -e 's/static let tutorUnavailableRowEnabled = false/static let tutorUnavailableRowEnabled = true/' \
+  Conjuguer/Models/ConjuguerTips.swift
+
+git diff --stat Conjuguer/Models/ConjuguerTips.swift   # must be empty when you are done
+```
 
 ## Quick Start
 
@@ -94,11 +128,28 @@ App Store Connect's upload dialog takes one (device × locale) at a time and ord
 
 ```
 docs/screenshots/version_<N>/
-├── iPhone_English/{1..9}.png
-├── iPhone_French/{1..9}.png
-├── iPad_English/{1..9}.png
-└── iPad_French/{1..9}.png
+├── iPhone_English/{1..10}.png
+├── iPhone_French/{1..10}.png
+├── iPad_English/{1..10}.png
+└── iPad_French/{1..10}.png
 ```
+
+> **`10.png` is not a driver view — carry it forward by hand.** Slots 1–9 come from `VIEWS`;
+> slot 10 is a **hand-captured arcade-game shot** (the game behind *Game Instructions*), which
+> the driver has never produced. Its status bar was set differently (`100%`, an unrelated date),
+> so it is visibly not from a sweep. The projection snippet below only emits 1–9, so a bundle
+> regenerated straight from `latest/` **silently loses slot 10** — the shipped bundle would go
+> from 10 screenshots to 9 with no error. After projecting, copy it over explicitly:
+>
+> ```bash
+> for f in iPhone_English iPhone_French iPad_English iPad_French; do
+>   cp "version_<PREV>/$f/10.png" "version_<N>/$f/10.png"
+> done
+> ```
+>
+> (Discovered 2026-07-18 while cutting `version_4`: `version_3` had 10 files per folder where
+> this section documented 9.) If the game shot is ever re-taken, do it by hand and mind that its
+> status bar will not match the swept cells unless you set the override first.
 
 `<N>` increments per release (`version_3`, `version_4`, …). The row number is the `#` column in the "Per-View Navigation Recipes" table below (1 = VerbBrowseView … 9 = SettingsView). To regenerate after a re-shoot:
 
@@ -119,7 +170,7 @@ for src in latest/*.png; do
 done
 ```
 
-`latest/` stays untouched as the timestamped archive; `version_<N>/` is a regenerable projection — re-running the snippet after a re-shoot produces the same 36 files. If the playbook table ever reorders, edit only the inner `case` block.
+`latest/` stays untouched as the timestamped archive; `version_<N>/` is a regenerable projection — re-running the snippet after a re-shoot produces the same 36 files (slots 1–9 × 4 folders; slot 10 is the hand-copied game shot above, for 40 in the shipped bundle). If the playbook table ever reorders, edit only the inner `case` block.
 
 ## Simulator Setup
 
@@ -335,6 +386,9 @@ Compact reference. The driver's inline comments hold the full WHY for each — c
 14. **Status bar (time + iPad date language)** (operator step, not in the driver — see *Clean Status Bar*)
     *Symptom:* iPad shots carry the live clock and a system-language date (e.g. German `Freitag 26. Juni`). *Fix:* `simctl status_bar override --time "9:41" …` (persists across install, cleared on reboot) for the clock/battery/signal, plus a per-language **system-language change + reboot** to localize the iPad date. `--time` rejects `"9:41 AM"`/ISO strings — pass a bare `"9:41"`.
 
+15. **Tutor-row kill switch** (`TutorDisplay.tutorUnavailableRowEnabled`, operator step — not in the driver)
+    *Symptom:* the simulator can never reach Apple Intelligence — `World.simulator` injects the *real* `LanguageModelServiceReal`, so `SystemLanguageModel.availability` resolves against the host and fails — so `InfoBrowseView` renders "Apple Intelligence is still getting ready. Please try again later." where the tutor entry goes. On iPad that cell sits in the visible Concepts grid and **shipped in `version_3`'s two iPad `info_browse` shots**. *Fix:* set the switch to `false` before the sweep (see *Disable tips and the tutor row first*), restore after. Only the unavailability cell is gated; the `isAvailable` `NavigationLink` branch is untouched, so the switch structurally cannot hide a working tutor. Both size-class branches (`tutorListRow`, `tutorGridCell`) are gated — verified 2026-07-18 on iPhone 17 and iPad Pro 13-inch (M4), in both switch positions: no ghost `List` row when off, cell returns when on.
+
 ## Per-View Navigation Recipes
 
 > **Tab coordinates are unverified since 2026-07-18.** The sibling app Conjugar re-measured its
@@ -385,6 +439,7 @@ The driver depends on these app-side touchpoints. Renaming any one silently brea
 | `model_row_<exemplar>` identifiers | `model_row_être` settle (screen 3) + `tap_id_first model_row_être` (screen 4) | `Conjuguer/Views/ModelBrowseView.swift` |
 | `info_row_<stableKey>` identifiers | `verify_screen_loaded info_row_dedication` (screens 6 & 7 settle); `info_row_participe_passe` (screen 6 scroll target); `info_row_indicatif_present` (screen 7) | `Conjuguer/Views/InfoBrowseView.swift` + `Info.stableKey` in `Conjuguer/Models/Info.swift` |
 | `Info.stableKey` field | source of every `info_row_<stableKey>` (locale-independent; `heading` is localized) | `Conjuguer/Models/Info.swift` |
+| `TipDisplay.tipsEnabled` / `TutorDisplay.tutorUnavailableRowEnabled` | operator flips both to `false` pre-sweep; renaming either silently breaks the documented `sed` commands, which fail *quietly* (`sed` reports no error when a pattern matches nothing) | `Conjuguer/Models/ConjuguerTips.swift` |
 | `quiz_start_button` identifier | quiz nav for screens 5 and 8 | `Conjuguer/Views/QuizView.swift` |
 | `input_quiz_conjugation` identifier | answer field for screens 5 and 8 | same file |
 | `Quiz.generateScreenshotFixture()` + `exportFixtureAnswers()` | DEBUG-gated 30-pair fixture; JSON written to `Documents/screenshot_fixture_answers.json` when launched with `-CONJUGUER_QUIZ_FIXTURE screenshot` | `Conjuguer/Models/Quiz.swift` |
@@ -444,9 +499,9 @@ Visual review will surface bad cells. Re-run any single one via the `--device` /
 
 ## Known Gotchas
 
-- **Flip TipKit off before the run.** Tips are a compile-time master switch (`TipDisplay.tipsEnabled` in `Conjuguer/Models/ConjuguerTips.swift`). Set it to `false`, run the sweep, then restore `true`. If you forget, the "Try the Quiz" / "Explore Models" tip cards can appear in the VerbBrowseView / ModelBrowseView screenshots. (The driver builds once at start, so the flag must be set first.)
+- **Flip TipKit off before the run — and the tutor row with it.** Tips are a compile-time master switch (`TipDisplay.tipsEnabled` in `Conjuguer/Models/ConjuguerTips.swift`). Set it to `false`, run the sweep, then restore `true`. If you forget, the "Try the Quiz" / "Explore Models" tip cards can appear in the VerbBrowseView / ModelBrowseView screenshots. (The driver builds once at start, so the flag must be set first.) The neighboring `TutorDisplay.tutorUnavailableRowEnabled` needs the same treatment in the same pass — see *Disable tips and the tutor row first*.
 - **Default sorts drive screens 1 and 3.** Screen 1 relies on `Settings.verbSortDefault == .frequency` (être on top); screen 3 on `Settings.modelSortDefault == .irregularity` (être model at/near top). The driver does not change sorts — segmented pickers render with empty AXTree children on iOS 26 and aren't individually addressable by id. A fresh install starts at the defaults, so this holds; if either default changes, re-spec those screens.
 - **The "TENSES" / "TEMPS" scroll is calibration-sensitive.** Screen 6 wants the Tenses section header at the top. `scroll_until_top info_row_participe_passe 170` brings the section's first row near the top so the header shows just above it — tune the target y (170) if the header is clipped or too low. Likewise screen 7's `scroll_until_top info_row_indicatif_present 400` parks that row in the safe middle band before tapping.
-- **Apple Intelligence Tutor surfaces are availability-gated.** The Tutor row in InfoBrowseView (and the AI page in OnboardingView) render only when `languageModelService.isAvailable`. On a simulator without Apple Intelligence the Tutor row shows an "unavailable" cell instead. None of the 9 target screenshot views depend on the Tutor row, so this doesn't affect the sweep — but be aware if the spec ever adds a Tutor-adjacent screen.
+- **Apple Intelligence Tutor surfaces are availability-gated — and this *does* affect the sweep.** The Tutor row in InfoBrowseView (and the AI page in OnboardingView) render only when `languageModelService.isAvailable`. A simulator can never satisfy that (`World.simulator` injects the *real* service, so availability resolves against the host), so the Tutor row shows an "unavailable" cell reading "Apple Intelligence is still getting ready." **On iPad that cell falls inside the `info_browse` shot** — it is present in both iPad cells of the `version_3` bundle on disk. iPhone escapes it only *by accident*: `scroll_until_top info_row_participe_passe 170` pushes Concepts off the top. That is a calibration value, not a guarantee — retune it and iPhone inherits the problem. Set `TutorDisplay.tutorUnavailableRowEnabled = false` before the sweep (workaround #15); the switch gates only the unavailability cell, never the working `NavigationLink`.
 - **Review-prompt cooldown is per-install.** `seed_defaults` pre-seeds `lastReviewPromptDate` for in-run prompts, but a manual screenshot capture of the StoreKit modal would still require uninstalling/reinstalling first.
 - **iPad first-boot is ~70s on a fresh sim.** Data-migration plugins initialize on first boot; subsequent boots are ~22s. The driver's `WAIT_FOR_RENDER_BUDGET_S=20` accommodates the post-launch render poll, but the `xcrun simctl bootstatus -b` step itself can block for ~70s during that initial boot. Don't kill the sweep thinking it's hung — `bootstatus -b` is doing the right thing.
