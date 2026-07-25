@@ -10,12 +10,6 @@ import SwiftUI
 struct InfoView: View {
   @Environment(World.self) private var world
   let info: Info
-  let shouldShowInfoHeading: Bool
-
-  init(info: Info, shouldShowInfoHeading: Bool = false) {
-    self.info = info
-    self.shouldShowInfoHeading = shouldShowInfoHeading
-  }
 
   var body: some View {
     ScrollView {
@@ -30,11 +24,13 @@ struct InfoView: View {
             .accessibilityLabel(imageInfo.accessibilityLabel)
         }
 
-        if shouldShowInfoHeading {
-          Text(info.heading)
-            .headingForegroundLabel()
-            .padding(.bottom, Layout.defaultSpacing)
-        }
+        // The heading lives in the scrolling content, never in a navigation title: headings
+        // like "Subjonctif Plus-que-parfait" truncate as a large title on narrow screens or
+        // at large Dynamic Type sizes, whereas a Text here wraps.
+        Text(info.heading)
+          .headingForegroundLabel()
+          .frenchPronunciation(forReal: info.alwaysUsesFrenchPronunciation)
+          .padding(.bottom, Layout.defaultSpacing)
 
         RichTextView(blocks: info.richTextBlocks)
           .frame(minWidth: 0, maxWidth: 680)
@@ -43,7 +39,6 @@ struct InfoView: View {
       .padding(.leading, Layout.doubleDefaultSpacing)
       .padding(.trailing, Layout.doubleDefaultSpacing)
     }
-    .navigationTitle(shouldShowInfoHeading ? "" : info.heading)
     .recordsAppearance(as: "\(InfoView.self)")
     .screenBackground()
     .environment(\.openURL, OpenURLAction { url in
@@ -83,7 +78,7 @@ struct InfoView: View {
 #if DEBUG
 #Preview {
   PreviewSupport.bootstrap()
-  return InfoView(info: PreviewSupport.sampleInfo, shouldShowInfoHeading: true)
+  return InfoView(info: PreviewSupport.sampleInfo)
     .environment(Current)
 }
 #endif

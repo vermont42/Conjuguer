@@ -115,3 +115,40 @@ captured.
 
 Both switches are restored to `true`; `git diff` on `ConjuguerTips.swift` shows only the
 new `TutorDisplay` enum.
+
+## InfoView: the article heading was a truncating navigation title (2026-07-25)
+
+Josh sent a screenshot of the *Conditionnel Passé* Info article on a 375pt-wide phone at a
+raised Dynamic Type size. The navigation bar read **"Conditionnel Pas…"**. The cause was
+`InfoView`'s `.navigationTitle(shouldShowInfoHeading ? "" : info.heading)`: a UIKit large
+title truncates rather than wraps, and it scales with Dynamic Type, so it runs out of width
+twice over — narrow screen *and* big text. The longest heading, "Subjonctif
+Plus-que-parfait", would truncate even at default type on a modern phone.
+
+Reproducing took a detour. On the configured simulator (iPhone 17, 402pt) at default type,
+"Conditionnel Passé" fits exactly, so the first capture looked fine. Bumping the sim to
+`xcrun simctl ui <udid> content_size extra-extra-extra-large` reproduced it — note the
+option is spelled `content_size` with an underscore, while `simctl`'s own usage text lists
+it that way but the obvious `content-size` guess silently prints the usage block and
+returns success, so a compound command sails past the failure.
+
+There was no clean way to make a large title wrap — SwiftUI gives no hook into the
+navigation bar's title label, and `.navigationBarTitleDisplayMode(.inline)` merely shrinks
+the font and truncates later. The better answer was already in the codebase: `VerbView` and
+`ModelView` set no navigation title at all and render their heading as the first `Text` of
+the scrolling content, where it wraps. `InfoView` was the outlier, and it already had that
+exact layout behind `shouldShowInfoHeading` — which the two sheet call sites passed `true`
+and only the pushed nav destination left `false`. So the fix was to delete the flag, always
+show the in-content heading, and drop `.navigationTitle`. (This also resolves a standing
+code-review note in `prompts/code-review-suggestions-union.md`, which had flagged
+`VerbView.shouldShowVerbHeading` as vestigial and pointed at `InfoView` as the version that
+honored its flag. Now neither has one.)
+
+Small bonus while the heading moved: it now carries
+`.frenchPronunciation(forReal: info.alwaysUsesFrenchPronunciation)`, matching what
+`InfoBrowseView` already does for the identical string in its rows. A navigation title
+could never get that, so VoiceOver had been reading "Conditionnel Passé" with English
+phonology on this screen.
+
+Verified by pushing the worst-case article at XXXL type and at default: the full heading
+renders on both, wrapping when it must. 219 tests pass; SwiftLint `--strict` clean.

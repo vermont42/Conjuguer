@@ -44,7 +44,7 @@ struct InfoBrowseView: View {
     }
     .screenBackground()
     .sheet(item: $world.info) { info in
-      InfoView(info: info, shouldShowInfoHeading: true)
+      InfoView(info: info)
         .sheetDismissable()
     }
     .sheet(item: $world.verb) { verb in

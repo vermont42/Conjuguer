@@ -69,7 +69,7 @@ struct ModelView: View {
         VerbView(verb: verb)
           .sheetDismissable()
       case .stemAlterationsInfo:
-        InfoView(info: Info.infos[Info.headingToIndex(heading: L.Info.irregularitiesHeading) ?? 0], shouldShowInfoHeading: true)
+        InfoView(info: Info.infos[Info.headingToIndex(heading: L.Info.irregularitiesHeading) ?? 0])
           .sheetDismissable()
       }
     }
