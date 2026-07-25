@@ -258,3 +258,216 @@ Deliberately *not* untranslated alongside it: « activité en direct » and « c
 contrôle ». Those look like the same case but aren't — Apple France does translate Live
 Activities and Control Center, so the French there is already the correct localized name.
 Dynamic Island is the outlier.
+
+## App Store media rejected: two different problems wearing one error (2026-07-25)
+
+Josh hit "The dimensions of one or more previews are wrong" on the 2.0 version page and
+read it as one problem — sizes are off. It was two, and only one of them is what the banner
+says.
+
+**The video.** The banner is about the preview only: it wants 886 × 1920, and
+`English iPhone.mov` was 1320 × 2868. Probing the file turned up three more violations the
+banner never mentions, all of which would have bounced it on the next upload:
+
+- H.264 **Level 5.0**; Apple caps app previews at High Profile **Level 4.0**
+- **15.2 Mbps**; the spec's target is 10–12
+- audio at **126 kbps**; the spec asks for 256 kbps stereo AAC (48 kHz was already fine)
+- a stray **data track** (stream 2), and Apple requires all tracks be enabled
+
+Re-encoded to `~/Desktop/ASC-upload/video/`. Two traps in doing it. First, `-map 0:v:0 -map
+0:a:0` alone did *not* drop the data track — `-dn` was needed. Second, and easy to miss: the
+first re-encode came out **30.014 s** against a hard 30 s maximum, from a source that was
+exactly 30.000. Fixed with `-frames:v 900` (900 ÷ 30 fps = exactly 30.000 s) plus
+`-shortest`. Worth re-probing every output rather than trusting the command; the first
+attempt looked clean and was over the limit.
+
+Aspect ratios don't quite match — 1320:2868 is 0.4603, 886:1920 is 0.4614 — so
+`scale=886:-2,crop=886:1920` scales by width and trims ~3 px off each end rather than
+stretching by 0.24%.
+
+**The screenshots.** Not what Josh assumed. 1320 × 2868 is a *valid* App Store size — for
+the **6.9" display**. The tile he dropped onto is the **6.5" Display** tile, which takes
+only 1242 × 2688 or 1284 × 2778. The version page shows just that one iPhone tile (1.5
+shipped 6.5"); the 6.9" slot is behind "View All Sizes in Media Manager".
+
+Independently, all ten PNGs are **RGBA**, and Apple's spec is explicit: "Images can't
+include alpha channels or transparencies." They'd have failed in the 6.9" slot too. This one
+was invisible from the error banner and only surfaced from `file`/`sips` on the originals —
+worth checking first on any future screenshot batch, since the capture pipeline evidently
+produces alpha by default.
+
+Built both sets under `~/Desktop/ASC-upload/`: a 6.9" set (same pixels, alpha stripped) and
+a 6.5" set (scaled to 1284 wide, 12 px center crop, alpha stripped). Spot-checked the 6.5"
+crop at thumbnail size — status bar and tab bar both survive.
+
+Originals untouched; everything written to a new Desktop folder. Nothing uploaded — that's
+Josh's call. Still to do if he wants them: the French iPhone set and both iPad sets, which
+almost certainly carry the same alpha flaw and the same preview-encoding flaws.
+
+Aside, from reading the live page: the Description field already holds the new English copy
+at 2,007 characters (our file is 1,993 — the field appears to count slightly differently),
+so that part of the listing is in place.
+
+### Follow-up: remaining previews converted, French screenshots fixed (2026-07-25)
+
+The iPad question answered itself on probing: `English iPad.mov` and `French iPad.mov` are
+**2048 × 2732**, and iPad app previews must be **1200 × 1600**. They also repeat every
+secondary flaw the iPhone video had, one of them worse — **Level 5.1** (cap is 4.0), 12.6 /
+13.8 Mbps (target 10–12), 126 kbps audio, and the same stray data track. So: yes, all three
+needed converting, and none of them for the reason the App Store Connect banner gave, since
+that banner only ever mentioned dimensions.
+
+Convenient accident: iPad's 2048 × 2732 is 0.7496 against 1200 × 1600's 0.7500 — near-perfect
+4:3, so the scale-and-crop trims about one pixel. The iPhone pair loses ~3 px per end.
+
+All four previews now: 30.000 s exactly (900 frames), H.264 High L4.0, 30 fps, AAC stereo
+48 kHz ≈ 249 kbps, two streams each, 21–28 MB. Video bit rates land at 5.7–7.6 Mbps against
+Apple's 10–12 "target" — flat UI content gives x264 nothing to spend bits on. It's a target
+rather than a limit, and it can be forced higher if a reviewer ever objects.
+
+French iPhone screenshots had the identical RGBA flaw as the English set, so both variants
+were built the same way. English output folders got renamed to `screenshots_English_*` to
+match.
+
+**Open, and not done because it wasn't asked:** the iPad screenshots
+(`version_4/iPad_English`, `iPad_French`) are **2064 × 2752** — a valid 13" size, so no
+resize needed — but they are **RGBA** too and will be rejected on that alone. One flatten
+pass away from usable.
+
+### Follow-up: iPad screenshots flattened (2026-07-25)
+
+Both iPad sets flattened to RGB. No resize was strictly needed — 2064 × 2752 is a valid 13"
+size — but a 2048 × 2732 (12.9") variant went alongside it, for the same reason the iPhone
+upload failed in the first place: the version page exposes exactly one tile per device
+family, and which size that tile wants depends on what the app shipped last time. The iPhone
+tile turned out to be 6.5" rather than 6.9". Having both iPad sizes on disk means whichever
+tile the iPad section shows, a matching set is ready without another round trip.
+
+2064 × 2752 is exactly 3:4; 2048 × 2732 is 0.74963, so the 12.9" variant scales by height
+and loses one pixel of width.
+
+`~/Desktop/ASC-upload/` is now complete: 8 screenshot folders (2 languages × {iPhone 6.9,
+iPhone 6.5, iPad 13, iPad 12.9}, 10 images each) plus 4 previews. Every file verified for
+dimensions and absence of alpha by assertion rather than by eye — `file`/`sips` output
+filtered for anything that *doesn't* match the expected value, so a silent miss shows up as
+output instead of as a clean-looking run. Nothing uploaded; all originals untouched.
+
+## Hardening the App Store media pipeline against a repeat (2026-07-25)
+
+After fixing the rejected 2.0 media by hand, Josh asked for doc changes so it doesn't
+happen again. Reading the four media docs turned up something better than a gap: a
+**factual error** that actively caused the failure.
+
+`docs/app-store-preview-videos.md` specified Final Cut projects at 1320 × 2868 (iPhone)
+and 2048 × 2732 (iPad) and asserted "These are Apple's standard App Store app-preview
+sizes." They are *screenshot* sizes. Previews take **886 × 1920** (every current iPhone
+class — 6.9/6.5/6.3/6.1, one file serves all) and **1200 × 1600** (iPad). The doc even
+reasoned its way there explicitly, rejecting 886 × 1920 as "the legacy 6.5″ size, still
+accepted" in favor of the size with an exact-pixel simulator match. Pixel-exactness with
+the simulator is worth nothing when the delivered file is a size the store refuses —
+Konjugieren, which the doc was ported from, had it right all along. That note is now
+inverted into a warning that names the mistake, so a future reader hits the correction
+where the error used to live.
+
+Six changes, all applied:
+
+1. **Preview doc**: project table corrected to 886 × 1920 / 1200 × 1600; simulator table
+   reframed around "record native, scale down in the project" with Spatial Conform =
+   **Fill** on iPhone (0.4603 vs 0.4614 — *Fit* would letterbox).
+2. **Preview doc, new "Export settings and conformance" section**: the four violations
+   FCP's default export produced that the error banner never mentioned (Level 5.0/5.1,
+   15–16 Mbps, 126 kbps audio, stray timecode track), plus the ffmpeg normalization pass
+   as a guaranteed-conformance final step. Called out the two non-obvious flags: `-dn` is
+   required because `-map 0:v:0 -map 0:a:0` does *not* drop the data track, and
+   `-frames:v` is how duration gets pinned.
+3. **`video_script.md`**: was engineered to land at exactly 30.000 s — the hard maximum,
+   zero margin. Retargeted to 29 s, citing the 30.014 s re-encode that would have been
+   rejected.
+4. **`take_screenshots.sh`**: flatten each capture at `take_screenshot()`. `axe screenshot`
+   writes RGBA and Apple forbids alpha, which is why all 40 `version_4` files failed. The
+   driver warns rather than dying if `magick` is missing.
+5. **`screenshot-plan.md`**: new section on confirming which display-size *tile* App Store
+   Connect is offering. This was the subtler half of the failure — 1320 × 2868 is a
+   perfectly valid size that was rejected because the page showed a 6.5" tile (1.5 shipped
+   6.5"). Includes downscale recipes for both device families.
+6. **`scripts/verify_store_media.sh`** (new): the durable fix, since docs get skimmed and
+   an executable check does not. Asserts accepted dimensions, no alpha, duration bounds,
+   H.264 level ≤ 4.0, exactly 2 streams, frame rate, audio bit rate.
+
+The verifier was tested against known-bad and known-good inputs rather than assumed
+correct: `version_4` → 40 alpha failures, exit 1; the original `.mov`s → wrong dimensions
++ Level 5.0 + 3 streams + 126 kbps audio, exit 1; `~/Desktop/ASC-upload` → all clear,
+exit 0; bad path → exit 2. It also emits a WARN (not a failure) on the four fixed videos,
+since I encoded them at exactly 30.000 s before writing the 29 s guidance — accurate, and
+a good demonstration that the margin check fires.
+
+One judgment call: the accepted-size lists are hardcoded, so a genuinely new Apple display
+class will look like a broken export. There's a comment at the list saying so, and both
+docs now say to re-read Apple's spec pages each release rather than trusting local tables.
+
+### Follow-up: ported to Konjugieren, and the severity split was wrong (2026-07-25)
+
+Porting today's media hardening to the sibling app turned up evidence that corrected work
+done here earlier in the session.
+
+Konjugieren's shipped 1.2 previews (on disk at `~/Desktop/Final/Konjugieren`) carry H.264
+**Level 5.0/5.1**, **125 kbps** audio, and a **third timecode stream** — and they are live
+on the App Store. So App Store Connect enforces *dimensions* strictly and tolerates the
+codec-detail deviations. `verify_store_media.sh` as first written failed all of those,
+which would have blocked files that demonstrably shipped, and the playbook line claiming
+"everything it checks is something that has actually been rejected or nearly rejected
+here" was simply false.
+
+Both were corrected: the script now grades **blocking** (wrong dimensions, alpha, duration
+outside 15–30 s) versus **advisory** (level, audio bit rate, stream count, no-margin
+duration), with the evidence recorded in a comment at the split so a future reader can
+promote an item if one ever does block an upload. `app-store-preview-videos.md` gained a
+paragraph saying plainly that of its conformance table, dimensions and duration are
+enforced and the rest is cleanup.
+
+Re-tested after the change: `~/Desktop/ASC-upload` → 0 blocking / 4 advisory, exit 0;
+`~/Desktop/Final/Konjugieren` → 3 blocking (two superseded 2048 × 2732 iPad masters plus a
+**30.015 s** file that is genuinely over the cap) / 21 advisory, exit 1; Conjuguer's
+original previews → 12 blocking.
+
+Konjugieren also had two latent problems of its own — every driver-produced `version_2`
+screenshot is RGBA (its four hand-made `10.png` slots are RGB, which is what identifies the
+driver as the source), and that 30.015 s preview. Its `video_script.md` had the same
+zero-margin arithmetic this repo's did. Details in that repo's journal.
+
+### Follow-up: the second rejection — non-square pixels (2026-07-25)
+
+The iPad preview was rejected again after the dimension fix, from the correct Media
+Manager tile, with the same "dimensions are wrong" wording. The file was 1200 × 1600. The
+file was also wrong.
+
+`ffmpeg`'s `scale=W:-2` rounds the computed height to an even number and then **preserves
+the source display aspect by writing a compensating sample aspect ratio** rather than
+accepting the rounding. So the output carried `SAR 2048:2049` — non-square pixels — and a
+*display* aspect of 512:683 instead of 3:4. `width`/`height` read 1200 × 1600 to every
+check I had. App Store Connect evaluates display dimensions and refused it, using the
+identical error message a genuinely mis-sized file produces. The iPhone files had it too:
+`SAR 105930:105877`.
+
+What made this diagnosable was the sibling app: Konjugieren's *accepted* previews probe as
+`SAR 1:1, DAR 3:4`. Comparing a known-good file against a known-bad one field by field
+found in one step what reading the spec would not have — Apple's page says nothing about
+pixel aspect ratio.
+
+Fix is `setsar=1` between the scale and the crop. All four re-encoded; they now match
+Konjugieren's accepted geometry exactly, at 29.000 s (the new guidance) rather than the
+earlier 30.000 s, so the bundle is 0 blocking / 0 advisory.
+
+**The verifier's failure is the more useful lesson.** It checked `width`/`height` and
+passed the file — a check that confirms the thing you thought to measure while the actual
+requirement sits one field over. It now fails on any SAR that isn't 1:1, with the ffprobe
+incantation and the fix in the message.
+
+Also worth recording: my first regression test for the new check was worthless. I re-scaled
+an already-square file and watched it stay square, which proves nothing. The real test
+re-derives the bad file from the original 2048 × 2732 master with the old command,
+confirms `SAR 2048:2049` came back, and then checks the verifier blocks it. A regression
+test that can't reproduce the bug isn't a regression test.
+
+Both repos updated: `setsar=1` in the ffmpeg recipe, the SAR check in both copies of
+`verify_store_media.sh`, and the trap written up in both video docs.

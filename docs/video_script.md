@@ -2,7 +2,9 @@ Script and Playbook for iOS App Store Previews
 
 Use iPhone 17 Pro Max and iPad Pro 13" (M5) simulators.
 
-Ensure that the raw edit is exactly 32 seconds *without* transitions. There are 5 clips, so 4 half-second transitions between them shrink the length by 2 seconds, down to 30 seconds, the App Store limit. (FCP's default transition duration is 1 second; this assumes it has been set to 0.5 second in Settings ▸ Editing.)
+Ensure that the raw edit is exactly 31 seconds *without* transitions. There are 5 clips, so 4 half-second transitions between them shrink the length by 2 seconds, down to 29 seconds. (FCP's default transition duration is 1 second; this assumes it has been set to 0.5 second in Settings ▸ Editing.)
+
+**Aim for 29 seconds, not 30.** 30 s is the App Store's hard *maximum*, and landing on it exactly leaves no margin for rounding: a 30.000 s master re-encoded on 2026-07-25 came out at **30.014 s** and would have been rejected. The clip lengths below sum to 32 s of raw footage; trim a second from the least essential clip, or let the normalization pass in [`app-store-preview-videos.md`](app-store-preview-videos.md) pin the duration with `-frames:v 870` (= 29.000 s at 30 fps).
 
 First Clip - six seconds
 Starts out at top of VerbBrowse view. Sort by frequency. Slowly scroll down for five seconds.

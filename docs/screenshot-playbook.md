@@ -33,6 +33,12 @@ After running:
   targets (the 200/400 values in scroll_until_top) — they were calibrated on iPhone only.
 - Assemble docs/screenshots/latest/ and the numbered version_<N>/ upload bundle per the
   playbook (this is the next release, so use the next version_N).
+- Run scripts/verify_store_media.sh docs/screenshots/version_<N> and fix anything it
+  reports BEFORE uploading. Visual review cannot see an alpha channel or a wrong
+  display-size slot; this catches both.
+- Confirm which display-size tile App Store Connect is actually offering — see
+  "Confirm which slot App Store Connect is offering" in docs/screenshot-plan.md. A
+  correct capture uploaded to the wrong tile is rejected.
 ```
 
 Gotchas the session should keep in mind (also covered below): this machine may have **duplicate simulators** with those two names — `udid_for()` takes the first match by list order, so if a run targets the wrong device, prune dupes (`xcrun simctl delete unavailable`). The full sweep is ~30–45 min and the iPad's first boot can block ~70s — that's `bootstatus -b` working, not a hang.
@@ -104,6 +110,15 @@ The `--device` value is the device-class label (with parens). UDIDs are resolved
 ## Outputs
 
 The driver writes timestamped PNGs to `docs/screenshots/<timestamp>-<device>-<lang>-<view>.png` (gitignored). One file per cell per run; iterating with `--view` accumulates timestamped versions.
+
+> **Alpha channels — flattened at capture since 2026-07-25.** `axe screenshot` writes
+> **RGBA**, and App Store Connect rejects any screenshot carrying an alpha channel
+> ("Images can't include alpha channels or transparencies"). `take_screenshot()` now pipes
+> each capture through `magick … -alpha remove -alpha off` immediately, so fresh sweeps are
+> compliant. Two consequences worth knowing: **`magick` is now effectively required** (the
+> driver warns and continues without it, producing rejectable PNGs), and **every bundle
+> shot before that date is non-compliant** — all 40 files of `version_4` were RGBA and
+> failed at upload. Flatten old bundles before reusing them.
 
 For App Store Connect upload, copy the latest version of each cell to `docs/screenshots/latest/`:
 
@@ -499,6 +514,21 @@ Visual review will surface bad cells. Re-run any single one via the `--device` /
 
 ## Known Gotchas
 
+- **A valid screenshot size can still be the wrong size.** App Store Connect's version page
+  exposes **one tile per device family**, and which display size it accepts follows what the
+  app shipped previously — not what's current. Conjuguer 1.5 shipped 6.5", so the 2.0 page
+  offered only an *iPhone 6.5" Display* tile and rejected this driver's 6.9" captures
+  (1320 × 2868), which are a perfectly valid App Store size. Read the accepted sizes off the
+  drop zone before building a bundle; 6.9" uploads go through **View All Sizes in Media
+  Manager**. Downscale recipes for both device families are in
+  [`docs/screenshot-plan.md`](screenshot-plan.md).
+- **Run `scripts/verify_store_media.sh` before every upload.** It asserts accepted
+  dimensions, absence of alpha, and (for previews) duration, H.264 level, stream count,
+  frame rate, and audio bit rate — none of which is visible in a screenshot review. It
+  grades in two tiers: **blocking** for what is known to stop an upload (wrong dimensions,
+  alpha, duration outside 15–30 s) and **advisory** for spec deviations that App Store
+  Connect has accepted in practice (sibling app Konjugieren shipped previews at Level
+  5.0/5.1 with 125 kbps audio and a stray timecode track).
 - **Flip TipKit off before the run — and the tutor row with it.** Tips are a compile-time master switch (`TipDisplay.tipsEnabled` in `Conjuguer/Models/ConjuguerTips.swift`). Set it to `false`, run the sweep, then restore `true`. If you forget, the "Try the Quiz" / "Explore Models" tip cards can appear in the VerbBrowseView / ModelBrowseView screenshots. (The driver builds once at start, so the flag must be set first.) The neighboring `TutorDisplay.tutorUnavailableRowEnabled` needs the same treatment in the same pass — see *Disable tips and the tutor row first*.
 - **Default sorts drive screens 1 and 3.** Screen 1 relies on `Settings.verbSortDefault == .frequency` (être on top); screen 3 on `Settings.modelSortDefault == .irregularity` (être model at/near top). The driver does not change sorts — segmented pickers render with empty AXTree children on iOS 26 and aren't individually addressable by id. A fresh install starts at the defaults, so this holds; if either default changes, re-spec those screens.
 - **The "TENSES" / "TEMPS" scroll is calibration-sensitive.** Screen 6 wants the Tenses section header at the top. `scroll_until_top info_row_participe_passe 170` brings the section's first row near the top so the header shows just above it — tune the target y (170) if the header is clipped or too low. Likewise screen 7's `scroll_until_top info_row_indicatif_present 400` parks that row in the safe middle band before tapping.

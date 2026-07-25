@@ -420,6 +420,14 @@ take_screenshot() {
   ts=$(date +%Y%m%d-%H%M%S)
   out="$REPO_ROOT/docs/screenshots/${ts}-${slug}.png"
   axe screenshot --udid "$UDID" --output "$out" >/dev/null
+  # axe writes RGBA; App Store Connect rejects any screenshot with an alpha
+  # channel ("Images can't include alpha channels or transparencies"), so
+  # flatten at capture rather than discovering it at upload time.
+  if command -v magick >/dev/null 2>&1; then
+    magick "$out" -background white -alpha remove -alpha off "$out"
+  else
+    log "WARNING: magick not found; $out keeps its alpha channel and will be rejected"
+  fi
   log "captured: $out"
 }
 
