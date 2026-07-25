@@ -152,3 +152,109 @@ phonology on this screen.
 
 Verified by pushing the worst-case article at XXXL type and at default: the full heading
 renders on both, wrapping when it must. 219 tests pass; SwiftLint `--strict` clean.
+
+## App Store description refreshed for 2.0 (2026-07-25)
+
+`docs/description.txt` had been carrying launch-era numbers. Rather than trust them, every
+numeric claim got re-derived from the shipping data files:
+
+- **5,222 regular / 1,098 irregular** (was 5,217 / 1,097). Computed by walking
+  `verbModels.xml`'s `pa` inheritance chain and treating a model as regular when no ancestor
+  contributes a stem alteration (`p`) and the participe ending is lowercase — the same two
+  inputs `VerbModel.computeIrregularities()` uses. Exactly three models qualify: `1-1`
+  (parler), `2-1` (finir), `5-1A`. Total checks out at 6,320, matching CLAUDE.md.
+- **Seventy-seven defective verbs** (was sixty-six). 73 verbs carry a `dg` attribute
+  directly; four more (chauvir, contrefoutre, déclore, refoutre) inherit defectiveness from
+  their model, and the parser resolves both, so 77 is the honest number. The three exotics
+  named in the copy — ester, issir, gésir — are all verb-level `dg`, so they survive the
+  recount.
+- **981 frequency ranks, être → ancrer** — still exactly right (`Verb.maxFrequency = 981`;
+  rank 1 is être, 981 is ancrer). Aside: 982 verbs carry an `fr` attribute because *sortir*
+  appears twice at rank 56. Not worth mentioning in marketing copy, but noted here in case a
+  future session sees the off-by-one and thinks the constant is stale.
+- **réaliser has eight translations** — verified against its `tn` attribute. Claim holds.
+- Etymologies: 986 verbs (`Etymologies.json`, en + fr both 986) → "nearly a thousand".
+  Examples: 1,126 verbs in `literature_examples.json` → "more than 1,100"; 332 nested
+  *Chanson de Roland* entries.
+
+Added the four features Josh asked for (Tutor, widgets, etymologies, example uses). The
+widget paragraph goes beyond the release notes deliberately: the notes mention only the
+Verb of the Day widget, Control Center, and the Live Activity, but the target also ships
+`QuizWidget` (answerable in place via `AnswerQuizIntent`) and `RandomVerbControl` alongside
+`QuickQuizControl`, so the copy names all four surfaces.
+
+Deliberately left out, since the ask was scoped to those four: the Arc de Triomphe game,
+alternate app icons, and the first-launch tour. Easy to add if Josh wants the description to
+mirror the release notes more closely.
+
+Max length: App Store descriptions cap at **4,000 characters** (subtitle 30, promotional
+text 170, keywords 100). The new copy is 1,829 — no pressure at all, and room to grow if the
+omitted features get added. French translation deferred at Josh's request.
+
+## French for the description; release-notes game paragraph resynced (2026-07-25)
+
+Josh added an arcade-game paragraph to `docs/description.txt` and softened the same
+paragraph in `docs/release-notes-2.0.txt` ("family-friendly", and combat / high score
+dropped from the feature list). Two jobs: retranslate that one release-notes paragraph, and
+translate the whole description.
+
+`git diff` confirmed the release-notes edit was a single line, so only the French game
+sentence moved: `combat` and `meilleur score` deleted, `familial` added. Nothing else in the
+French half needed touching — worth checking rather than assuming, since the English summary
+paragraph (line 6) also mentions the game and could have picked up "family-friendly" but
+didn't.
+
+For the description translation, terminology came from the app's own catalogs rather than
+from invention:
+
+- Tab names from `Localizable.xcstrings`: the Info tab is **Info** in French (not "Infos")
+  and Settings is **Paramètres** (not "Réglages"). `Tutor.heading` is "Tuteur de
+  Conjugaison", so the description says *le tuteur de conjugaison*.
+- Widget names from `ConjuguerWidget/Localizable.xcstrings`: « Verbe du jour », and the quiz
+  widget is "Quiz de conjugaison".
+
+**Known divergence, left alone deliberately:** the release notes' French says *l'onglet
+Infos* and *les Réglages*, which don't match the app's actual French UI. Fixing that wasn't
+part of the ask, and it's Josh's copy, so it stayed — flagged in the reply instead.
+
+Typography follows each file's existing house style, which differs between them:
+`release-notes-2.0.txt` uses straight apostrophes throughout, `description.txt` uses curly
+(`’`) plus curly double quotes in the English half. The French translation therefore uses
+curly apostrophes and guillemets « », and French thousands separators (5 222, 1 098, 1 100).
+The `_all_` / `_full_` underscore emphasis carries over as `_tous_` / `_complètes_`.
+
+Lengths after the edit: English 1,993 characters, French 2,309 — each independently under
+the 4,000-character App Store cap, which is what matters, since the two localizations are
+submitted as separate fields rather than as one file. Twelve paragraphs on each side.
+
+### Follow-up: release-notes French aligned to the app's tab names (2026-07-25)
+
+Josh said align, so the divergence flagged in the previous entry is gone. Four sites in
+`docs/release-notes-2.0.txt`, all in the French half:
+
+- l'onglet **Infos** → l'onglet **Info** (twice: the Tutor paragraph and the sources
+  sentence)
+- se cache dans les **Réglages** → dans les **Paramètres**
+- articles d'Infos regroupés → **articles de l'onglet Info regroupés** — a literal "articles
+  d'Info" reads wrong in French, so this one needed rephrasing rather than a token swap
+
+Done with a Python pass that asserts each old string occurs exactly once before replacing,
+so a silent no-op or an over-broad replace would have thrown instead of quietly producing
+plausible-looking output. The two marketing files now agree with each other and with
+`Localizable.xcstrings`.
+
+Not touched, and worth a decision before the next French copy is written: the French half
+says « l'île dynamique » for Dynamic Island, which Apple France leaves untranslated. Outside
+the alignment ask, and a different question (Apple's own terminology, not Conjuguer's), so
+it stayed.
+
+### Follow-up: Dynamic Island left in English (2026-07-25)
+
+« l'île dynamique » → « la Dynamic Island » in both marketing files (release notes line 33,
+description line 40), matching Apple France, which ships the name untranslated. Feminine
+article, per Apple's own French copy.
+
+Deliberately *not* untranslated alongside it: « activité en direct » and « centre de
+contrôle ». Those look like the same case but aren't — Apple France does translate Live
+Activities and Control Center, so the French there is already the correct localized name.
+Dynamic Island is the outlier.
