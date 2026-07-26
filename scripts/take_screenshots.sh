@@ -362,11 +362,27 @@ ensure_soft_keyboard() {
             -e 'delay 0.5' \
             -e "tell application \"System Events\" to tell process \"Simulator\" to perform action \"AXRaise\" of (first window whose title contains \"$window_match\")" \
             -e 'delay 0.3' \
-            -e 'tell application "System Events" to keystroke "k" using {command down}' \
             >/dev/null 2>&1 || {
     # Non-fatal: a missing soft keyboard only costs the spec's "keyboard visible"
     # detail; the screenshot is still worth taking. Grant osascript Accessibility
     # permission (see Prerequisites) to fix.
+    log "warning: AppleScript Cmd+K failed (grant osascript Accessibility permission)"
+    return 0
+  }
+  # Gate the keystroke on Simulator actually being frontmost. This is not redundant
+  # with the AXRaise above: when the raise silently fails to take focus, `keystroke`
+  # still SUCCEEDS — it just lands in whichever app is frontmost. Observed 2026-07-26
+  # in the Conjugar repo, where a stray Cmd+K launched Fitness on the host Mac while
+  # the sweep reported nothing wrong. osascript returns 0 either way, and the
+  # keyboard_is_visible check below reports only that the keyboard is missing, never
+  # that the keystroke went elsewhere — so without this the misfire is silent.
+  local front
+  front=$(osascript -e 'tell application "System Events" to name of first process whose frontmost is true' 2>/dev/null || true)
+  if [[ "$front" != "Simulator" ]]; then
+    log "warning: frontmost app is '${front:-unknown}', not Simulator — skipping Cmd+K rather than sending it there"
+    return 0
+  fi
+  osascript -e 'tell application "System Events" to keystroke "k" using {command down}' >/dev/null 2>&1 || {
     log "warning: AppleScript Cmd+K failed (grant osascript Accessibility permission)"
     return 0
   }

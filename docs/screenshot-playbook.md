@@ -401,6 +401,17 @@ Compact reference. The driver's inline comments hold the full WHY for each — c
     osascript -e 'tell application "System Events" to tell process "Simulator" to get name of (first window whose title contains "iPhone 17 Pro Max")' # -> iPhone 17 Pro Max – iOS 26.3 (right)
     ```
 
+    **Also fixed 2026-07-26: the keystroke is now gated on Simulator actually being
+    frontmost.** The window match above fixes *which Simulator window* catches Cmd+K; this
+    guards the worse case, where Simulator is not the frontmost **application** at all and the
+    keystroke goes to a different program entirely. Retrying does not help, because
+    `keystroke` *succeeds* — it lands wherever focus is, `osascript` returns 0, and workaround
+    #6's post-toggle check reports only that the keyboard is missing, never that the keystroke
+    went elsewhere. Observed in the Conjugar repo on 2026-07-26, where a stray Cmd+K launched
+    the **Fitness** app on the host Mac while the run reported nothing wrong. The guard queries
+    `name of first process whose frontmost is true` after the AXRaise and skips the keystroke
+    (with a log line naming the app that would have caught it) rather than firing blind.
+
     Workaround #6's post-toggle check is still the thing that surfaces a failure here, and it
     logs `soft keyboard still not visible after Cmd+K`. If you see that line now, list the
     windows (`osascript -e 'tell application "System Events" to tell process "Simulator" to get

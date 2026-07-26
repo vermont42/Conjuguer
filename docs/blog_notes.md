@@ -641,3 +641,45 @@ iPad status bar in this sweep carries a French date (`Dimanche 26 juillet`) even
 English cells, because `status_bar override` cannot set the date's language — that is the
 already-documented workaround #14 (a per-language system-language change plus reboot), an
 operator step for a real release shoot, and this was a verification sweep.
+
+## Two fixes back from Conjugar's port session (2026-07-26)
+
+Conjugar spent a session porting this repo's and Konjugieren's screenshot fixes forward. It
+found two things worth sending back.
+
+**The stored bundles were still RGBA — `version_3` and `version_4`, 40 of 40 each.** The
+flattening added to `take_screenshot` on 2026-07-25 only affects captures taken *after* it,
+and this repo has not re-shot since. `version_4` is the bundle App Store Connect actually
+rejected for alpha; whatever flattened copies were uploaded live outside the repo, so the
+files on disk were the rejected originals with nothing marking them as such. Konjugieren had
+the same situation and handled it deliberately, leaving `version_2` as-is with a "flatten
+then" note in its journal; here there was no note at all, so the next person reusing
+`docs/screenshots/version_4` would have walked straight back into the rejection.
+
+Both bundles are now flattened in place. The check that made this safe rather than
+destructive: every file was confirmed fully opaque first (`%[opaque]` true and minimum alpha
+1 at every pixel), and each flatten was verified to leave the colour data untouched —
+`magick compare -metric AE -alpha off original flattened` returns 0 for all 80 files — before
+the result replaced the original. The archived artifacts still depict exactly what shipped;
+only the empty channel is gone. Both now pass `verify_store_media.sh` clean.
+
+**The Cmd+K keystroke is now gated on Simulator being frontmost.** Workaround #10 was fixed
+on 2026-07-26 by matching the full device name so AXRaise picks the right *window*. The gap
+that remained is one level up: if Simulator is not the frontmost *application* at all, the
+keystroke goes to a different program entirely. Retrying cannot catch it, because
+`keystroke` succeeds — it lands wherever focus happens to be, `osascript` returns 0, and
+workaround #6's post-toggle check reports only that the keyboard is missing, never that the
+keystroke went somewhere else.
+
+This is not theoretical. During Conjugar's measurement session a stray Cmd+K launched the
+**Fitness** app on Josh's Mac; he noticed and asked why, which is the only reason it was
+caught at all. In a real sweep the same misfire costs two keyboard-less `quiz_mid` cells and
+says nothing about the cause. The guard reads `name of first process whose frontmost is true`
+after the AXRaise and, on anything but Simulator, logs the offending app's name instead of
+firing blind.
+
+Not ported here: Conjugar measured its own `STABLE_PIXEL_TOLERANCE` at 7.5e7 over 112
+quiz-screen samples and found a benign-motion outlier at 4.6e7 — well above the 2.5e7 max
+this repo recorded over 18 samples. If that distribution is representative, this repo's floor
+is understated and 5e7 has less headroom than its comment claims. Worth a longer sampling run
+before the next sweep; not changed here on another app's evidence.
