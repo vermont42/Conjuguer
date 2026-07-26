@@ -174,7 +174,16 @@ Four details that are easy to get wrong:
   *display* aspect is 512:683 rather than 3:4. App Store Connect evaluates display
   dimensions and rejects it with the **exact same** "dimensions are wrong" message a
   genuinely mis-sized file gets. This cost a second upload attempt on 2026-07-25 after the
-  dimensions had already been "fixed". Verify with:
+  dimensions had already been "fixed"; the `setsar=1` build was then **accepted, and 2.0
+  submitted successfully**.
+
+  > One caveat on that evidence, so a future reader doesn't over-trust it: the accepted
+  > re-encode changed **two** things at once — it added `setsar=1` *and* moved the duration
+  > from 30.000 s to 29.000 s. SAR is much the likelier cause (Konjugieren shipped a
+  > 30.015 s preview, so the duration cap is evidently not enforced to the millisecond),
+  > but the upload did not isolate the variable.
+
+  Verify with:
 
   ```bash
   ffprobe -v error -select_streams v:0 \

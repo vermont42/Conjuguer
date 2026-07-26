@@ -514,14 +514,15 @@ Visual review will surface bad cells. Re-run any single one via the `--device` /
 
 ## Known Gotchas
 
-- **A valid screenshot size can still be the wrong size.** App Store Connect's version page
-  exposes **one tile per device family**, and which display size it accepts follows what the
-  app shipped previously — not what's current. Conjuguer 1.5 shipped 6.5", so the 2.0 page
+- **Upload through Media Manager, not the version page's tile.** The version page exposes
+  **one tile per device family**, and which display size it accepts follows what the app
+  shipped previously — not what's current. Conjuguer 1.5 shipped 6.5", so the 2.0 page
   offered only an *iPhone 6.5" Display* tile and rejected this driver's 6.9" captures
-  (1320 × 2868), which are a perfectly valid App Store size. Read the accepted sizes off the
-  drop zone before building a bundle; 6.9" uploads go through **View All Sizes in Media
-  Manager**. Downscale recipes for both device families are in
-  [`docs/screenshot-plan.md`](screenshot-plan.md).
+  (1320 × 2868), a perfectly valid App Store size. **View All Sizes in Media Manager**
+  exposes every display size instead, and **2.0 shipped through it with the native
+  1320 × 2868 and 2064 × 2752 captures accepted unchanged** — no downscaling, no
+  regenerated bundle. Keep the downscale recipes in
+  [`docs/screenshot-plan.md`](screenshot-plan.md) as the fallback.
 - **Run `scripts/verify_store_media.sh` before every upload.** It asserts accepted
   dimensions, absence of alpha, and (for previews) duration, H.264 level, stream count,
   frame rate, and audio bit rate — none of which is visible in a screenshot review. It

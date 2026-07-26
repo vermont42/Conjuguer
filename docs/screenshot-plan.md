@@ -27,12 +27,15 @@ what the app shipped last time.** Conjuguer 1.5 shipped 6.5" iPhone screenshots,
 this plan (1320 × 2868) were rejected there on 2026-07-25, despite being a perfectly
 valid App Store size.
 
-Check the tile before generating an upload bundle. The drop zone states its accepted
-sizes verbatim; read them off the page rather than assuming.
+**The resolution, and the recommended path: go through Media Manager and keep the native
+sizes.** 2.0 shipped that way — **View All Sizes in Media Manager** exposes every display
+size regardless of what the version page's single tile offers, and the driver's native
+captures (**1320 × 2868** iPhone 6.9", **2064 × 2752** iPad 13") were accepted there
+unchanged. Do that first; it needs no resizing and keeps the sharpest assets.
 
-- To upload **6.9"** (1320 × 2868) when the page shows a 6.5" tile, go through
-  **View All Sizes in Media Manager**, which exposes every display size.
-- To fill the **6.5"** tile instead, downscale (native capture stays the master):
+The version page's own tile is the fallback, and its accepted sizes are printed in the
+drop zone — read them off the page rather than assuming. To fill a **6.5"** iPhone tile,
+downscale (native capture stays the master):
 
   ```bash
   # 1320 × 2868 → 1284 × 2778 (6.5"), alpha stripped
@@ -56,6 +59,15 @@ stretching to fit.
 
 `axe screenshot` writes **RGBA**, and Apple rejects any screenshot with an alpha channel:
 "Images can't include alpha channels or transparencies." `scripts/take_screenshots.sh`
-now flattens each capture immediately, so a fresh sweep is compliant. Bundles predating
+now flattens each capture immediately, so a fresh sweep is compliant.
+
+**The rejection is about the channel, not about transparency.** The `version_4` captures
+were fully opaque — `magick 1.png -alpha extract -format '%[min],%[max]' info:` reports
+max alpha at every pixel — and were rejected anyway. Apple isn't inspecting content; it
+refuses any file whose *format* admits transparency, which is why this is invisible until
+upload and why "but it looks fine" is not a defense. (Apple publishes no rationale; the
+plausible one is that screenshots get re-derived into scaled variants and JPEG
+representations, and JPEG has no alpha, so partial transparency would need a compositing
+rule that differs between the App Store's light and dark chrome.) Bundles predating
 2026-07-25 (`version_4` and earlier) are **not** — flatten before uploading, and run
 `scripts/verify_store_media.sh` over any bundle before it goes near App Store Connect.

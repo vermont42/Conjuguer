@@ -471,3 +471,33 @@ test that can't reproduce the bug isn't a regression test.
 
 Both repos updated: `setsar=1` in the ffmpeg recipe, the SAR check in both copies of
 `verify_store_media.sh`, and the trap written up in both video docs.
+
+### Outcome: 2.0 media accepted, submission succeeded (2026-07-25)
+
+The `setsar=1` re-encode was accepted and Conjuguer 2.0 went in. Recording what that
+does and does not prove, since the docs written today were based on inference:
+
+**Confirmed.** 886 × 1920 / 1200 × 1600 are the right preview sizes. Square pixels matter.
+Flattened screenshots pass. A 29.000 s preview at H.264 High L4.0 with 256 kbps stereo
+audio and exactly two streams is accepted.
+
+**Not isolated.** The accepted re-encode changed *two* variables at once — it added
+`setsar=1` and moved duration from 30.000 s to 29.000 s. SAR is much the likelier culprit
+(Konjugieren shipped a 30.015 s preview, so the cap clearly isn't enforced to the
+millisecond), but the upload didn't separate them. Noted in the preview doc rather than
+quietly claiming a clean causal result.
+
+**Still unmeasured.** The advisory tier remains advisory on Konjugieren's evidence alone.
+Today's files were conformant on every advisory item, so nothing new was learned about
+whether Level 5.0, 125 kbps audio, or a stray timecode track would block an upload today.
+
+Josh asked why App Store Connect rejects alpha at all. Worth checking rather than
+speculating: the `version_4` captures were **fully opaque** — `magick … -alpha extract`
+reports max alpha at every pixel — so Apple refused a channel containing no information.
+That reframes the rule usefully: it is a *format* check, not a *content* check. Apple
+publishes no rationale, but the plausible one is that screenshots get re-derived into
+scaled variants and JPEG representations, JPEG has no alpha, and partial transparency
+would need a compositing rule that differs between the store's light and dark chrome —
+so refusing the channel outright is cheaper and more deterministic than proving every
+pixel opaque. Written into `screenshot-plan.md` in both repos, because "but it looks fine"
+is the natural (wrong) reaction to this rejection.
