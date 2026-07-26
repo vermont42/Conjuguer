@@ -22,8 +22,14 @@ iOS 26; scheme: `Conjuguer`) and is sourced by every script.
 
 Scripts live under the skill's install path. Resolve it once, then invoke by name:
 
+Resolve it under `~/.claude/plugins/marketplaces`, **not** `~/.claude` broadly: the plugin
+cache (`~/.claude/plugins/cache/ios-build-verify/<version>/`) holds several versions at once
+and is shared across Josh's apps, and `find`'s directory order is unspecified — so the broad
+glob silently picks an arbitrary release. The marketplace clone has no version segment and
+yields exactly one match.
+
 ```bash
-export IBV_SCRIPTS=$(dirname "$(find ~/.claude -path '*ios-build-verify*' -name build_app.sh 2>/dev/null | head -1)")
+export IBV_SCRIPTS=$(dirname "$(find ~/.claude/plugins/marketplaces -path '*ios-build-verify*' -name build_app.sh 2>/dev/null | head -1)")
 
 # Build the app
 "$IBV_SCRIPTS/build_app.sh"

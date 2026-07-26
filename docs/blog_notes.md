@@ -501,3 +501,143 @@ would need a compositing rule that differs between the store's light and dark ch
 so refusing the channel outright is cheaper and more deterministic than proving every
 pixel opaque. Written into `screenshot-plan.md` in both repos, because "but it looks fine"
 is the natural (wrong) reaction to this rejection.
+
+## Six screenshot-driver fixes ported from Konjugieren, plus a seventh found while verifying (2026-07-26)
+
+Konjugieren — the German sibling app — ran its 1.3 screenshot sweep and wrote up six
+defects the sweep exposed, all in a driver that had been ported from *this* repo. Josh
+asked to port the fixes back. The through-line worth keeping is not the six diffs: it is
+that **not one of those failures announced itself**. No non-zero exit, nothing in the log,
+no missing file. Each produced a plausible-looking screenshot of the wrong thing, and two
+had been shipping in Konjugieren's App Store listing for two releases. A green sweep is
+not evidence of a correct sweep. That is the whole argument for doing this work *before* a
+release shoot rather than after.
+
+**Plugin resolution was picking an arbitrary release.** `resolve_ibv_scripts` searched
+`~/.claude` broadly for `ios-build-verify`. That glob matches the marketplace clone *and*
+every version under `plugins/cache/ios-build-verify/<version>/`, which holds several at
+once and is shared across Josh's apps. Confirmed live here: the cache held 0.2.1 and 0.3.1,
+and `find` — whose directory order is unspecified — returned a cache copy first. So which
+release built the App Store screenshots was luck. Narrowed the search to
+`~/.claude/plugins/marketplaces`, which has no version segment and yields exactly one
+match. Fixed the same glob in CLAUDE.md, which had it too.
+
+**`frame_of` now takes the largest-area match, and this one is a safety net here rather
+than a live fix.** An id can match several AXTree elements; `[0]` took whichever
+depth-first reached first. In Konjugieren an iPad Info row exposed its heading as an
+`AXStaticText` sitting *above* the tappable `AXButton`, and tapping non-interactive static
+text does nothing at all — silently — so four cells captured the Info list instead of the
+article. Worth recording that **preferring `AXButton` is the obvious fix and is wrong**:
+Konjugieren tried it first, and on iPad a verb row exposes its translation as a button
+while the infinitive is static text, so that rule taps the translation and stops
+navigating. It fixed `info_view` and broke `verb_view`. Largest-area is the only rule
+correct at all five tap sites, and it has a reason rather than merely fitting the data —
+the element standing for the whole row is the widest one. Then I checked whether Conjuguer
+actually needs it: tabulated every tap site (`verb_row_avoir`, `model_row_être`,
+`quiz_start_button`, `input_quiz_conjugation`, and the three `info_row_*`) on both devices
+in both languages, and **every single one has exactly one match**, so old and new selectors
+agree everywhere today. Kept the change anyway — it costs nothing and it degrades to the
+old behaviour wherever the old behaviour worked — but labelled it honestly in the playbook
+so nobody later reads it as having fixed a bug here.
+
+**The tab coordinates really were another app's measurements.** The iPad row
+(`355 / 441.5 / 523 / 587.75 / 667.25`) was byte-identical to Konjugieren's, which is a
+measurement of *German* labels. Conjuguer's second tab is Models, not Familien. Measured
+from the AXTree: English centres are `386.25 / 469.5 / 547.75 / 612.5 / 692`, so every
+inherited number was 20–30 pt off. They all still *landed inside* the right segment —
+which is exactly why this survived; `Info` cleared its boundary by 6.25 pt. French differs
+again (`Verbes` 369, `Paramètres` 701.5), because the iPad's regular size class sizes each
+segment to its label, so one longer word displaces every centre after it. `tab_coords_for()`
+now takes a language as well as a device, resolved inside the language loop. The iPhone
+needs no equivalent and the reason is structural, not luck: the compact pill distributes
+items into equal-width slots, so a localized label changes the text without moving the slot
+centre. Verified by reverse-probing all five iPhone coordinates in both languages, which is
+the only way — the pill exposes no `AXRadioButton` children at all.
+
+**Waiting for the screen to stop moving is the fix with the broadest reach, and no
+accessibility check can substitute for it.** Switching tabs on iPad cross-fades. The
+outgoing screen's anchor leaves the AX tree within ~0.3 s of the tap while the fade is
+still plainly visible, because AX state answers "has the hierarchy changed" while a
+screenshot is graded on "has the image stopped moving" — and those diverge precisely
+during animation, which is exactly when a capture goes wrong. Konjugieren shipped captures
+with the previous screen's verb list ghosted through them. `wait_for_stable_screen` now
+samples screenshots 0.35 s apart and compares with `magick compare -metric AE` until
+consecutive frames settle. Two implementation details that bite: `magick compare` **exits 1
+whenever the images differ**, which is the normal case, so under `set -o pipefail` the
+assignment fails and `set -e` kills the sweep — hence the load-bearing `|| true`; and the
+metric comes back in scientific notation (`1.53e+10`), so the comparison has to go through
+`awk`, not `[[ -le ]]`.
+
+The tolerance was **measured here, not copied** — Konjugieren's 1e8 is a measurement of a
+different app. It cannot be zero, because Conjuguer's quiz screen never settles: the
+elapsed-time counter ticks with a `.snappy` animation and the cursor blinks. 18
+consecutive-frame samples on the iPhone quiz screen ran 6.4e6–2.5e7 (iPad 2.4e6–6.9e6; a
+static screen such as Settings scores exactly 0). Against that, an iPad tab cross-fade
+sampled 1.2e8 just after the tap, 2.8e10 at the content swap, and 7.4e8 still fading
+0.35 s later. `5e7` is the geometric middle of the 2.5e7 ↔ 1.2e8 gap. Worth flagging that
+this gap is only ~5×, narrower than Konjugieren's, so the honest instruction in the code is
+to re-measure rather than nudge the constant if the "still changing" warning starts
+appearing. An instrumented run proved the mechanism rather than just its silence: tap
+Settings on iPad → sample 1 = 1.53e10 (mid-fade, correctly rejected), sample 2 = 2.36e7
+(settled), 4.42 s total.
+
+**`latest/` accumulated across releases.** The playbook built it with `mkdir -p` and no
+clearing, so a re-shoot left the previous release's files beside the new ones (Konjugieren's
+went 36 → 72), and the numbered-bundle snippet that follows maps `latest/*.png` to slot
+numbers — two candidates per slot, winner decided by glob order. It resolves correctly only
+while timestamps happen to sort in release order. Added the `rm -rf`, and said in prose that
+`latest/` is a per-release *projection*, not an archive; the timestamped originals stay put.
+
+**Fixture answers are now lowercased on the way out of Swift.** `exportFixtureAnswers`
+wrote `Conjugator.conjugatedString(...)` verbatim, which is mixed-case by design —
+uppercase marks irregular characters for red highlighting. Those capitals are correct
+*output*, not a defect, and nothing in the conjugator changed. The problem is narrower and
+purely about the screenshot: the answer field depicts what a *user* typed, and no human
+types `aI faIT`. Checked the two things worth checking before a blanket `.lowercased()`.
+First, grading: `ConjugationResult.score` lowercases both sides and the app compares
+against its own in-memory value, never this file — so scoring is unaffected, and the
+re-shot results screens still read 30/30. Second, whether any of the 30 answers is
+legitimately capitalized — dumped the fixture and none is. Done in Swift rather than the
+driver on purpose: shell `tr '[:upper:]' '[:lower:]'` works on bytes and silently skips
+every accented capital, which in French is most of them.
+
+### The seventh fix, which the verification sweep handed over
+
+Mid-verification Josh mentioned a concurrent session in `../Conjugar.mig` was also driving
+simulators. That turned into a diagnosis rather than a nuisance. The full sweep had logged
+exactly one complaint — `soft keyboard still not visible after Cmd+K`, on both iPhone
+`quiz_mid` cells — and `ensure_soft_keyboard` raises `first window whose title contains
+"iPhone"`, a *family* substring. The other session had `iPhone 17` booted alongside this
+sweep's `iPhone 17 Pro Max`, and System Events enumerated the foreign window first, so
+Cmd+K went to the wrong simulator. Confirmed directly rather than by inference: `contains
+"iPhone"` returns `iPhone 17 – iOS 26.3`, `contains "iPhone 17 Pro Max"` returns the right
+one. Simulator titles its windows `<device name> – iOS <version>`, so matching on the full
+`$DEVICE` removes the whole ambiguity class; the old comment had even predicted this
+failure and left it unfixed. iPad escaped only because its family match happened to hit the
+right window first. This is the same shape as the ported six — a silent degrade that still
+reports success — which is why it was worth fixing rather than just noting.
+
+The two iPhone `quiz_mid` cells from this sweep are therefore keyboard-less and want a
+re-shoot on an uncontested simulator. The re-shoot attempt failed on its own evidence of
+interference: `wait_for_render` timed out because a system modal, **`Open in "Conjugar"?`**,
+was sitting on top of my app on that same simulator. Left it alone rather than tapping
+Cancel — that dialog belongs to another session's run.
+
+**Verification.** All 36 cells captured, exit 0, and **zero** `wait_for_stable_screen`
+warnings across the sweep. Reviewed all 36 as four contact sheets; every cell shows the
+right screen in the right appearance and the right language, with no ghosting, and every
+iPad tab highlight confirms the new per-language coordinates land correctly. One
+false alarm worth recording so the next reader doesn't repeat it: iPad `info_view` looked
+*light* to me in a 320px-wide montage cell and is specced dark — `magick -format
+'%[fx:mean]'` says 0.0695, i.e. plainly dark, and the full-size file confirms it. Don't
+grade appearance from a thumbnail. `verify_store_media.sh` reports 0 blocking / 0 advisory
+on all 36. Full test suite: 219 tests in 19 suites pass. Kill switches restored and
+`git diff --stat` on `ConjuguerTips.swift` is empty.
+
+**Not done, deliberately.** This is not the extraction. Josh plans to factor screenshot
+generation out of Konjugieren, Conjuguer, and Conjugar so the three stop drifting; a
+half-extraction done while applying these would make that harder. Also left alone: the
+iPad status bar in this sweep carries a French date (`Dimanche 26 juillet`) even in the
+English cells, because `status_bar override` cannot set the date's language — that is the
+already-documented workaround #14 (a per-language system-language change plus reboot), an
+operator step for a real release shoot, and this was a verification sweep.

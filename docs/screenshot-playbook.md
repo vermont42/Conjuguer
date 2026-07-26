@@ -53,8 +53,10 @@ App Store screenshots only — 9 views × 2 languages × 2 devices = 36 PNGs. No
 - `axe` CLI on PATH (see `ios-build-verify` SKILL.md for installation).
 - `ios-build-verify` skill installed; resolve its scripts directory once per session:
   ```bash
-  export IBV_SCRIPTS=$(dirname "$(find ~/.claude -path '*ios-build-verify*' -name build_app.sh 2>/dev/null | head -1)")
+  export IBV_SCRIPTS=$(dirname "$(find ~/.claude/plugins/marketplaces -path '*ios-build-verify*' -name build_app.sh 2>/dev/null | head -1)")
   ```
+  Search `marketplaces`, **not** `~/.claude` broadly — the plugin cache holds several
+  versions at once and `find`'s order is unspecified (workaround #18).
 - macOS Accessibility permission granted to `osascript`. System Settings → Privacy & Security → Accessibility → add `/usr/bin/osascript`. The driver depends on this for the soft-keyboard Cmd+K toggle (workaround #6). **Granted on this machine as of 2026-07-18.** A *missing* permission is not the only way the AXRaise step fails: a freshly-activated Simulator briefly reports no windows and the resulting `-1719 "Invalid index"` looks identical to a permission problem. The driver now waits 0.5 s after `activate` for that reason.
 - Two simulators named `iPhone 17 Pro Max` and `iPad Pro 13-inch (M4)` (see "Simulator Setup"). The driver resolves their UDIDs by name at run time — no hardcoding. **Confirm exactly one iOS-26 device matches each name before running:** `udid_for()` takes the first match in `simctl list` order, which is oldest-runtime-first, so a stale-runtime duplicate silently wins. Both names resolved cleanly on 2026-07-18 after the prune.
 - **Disable TipKit tips *and* the tutor row first (then restore both).** Both switches live in
@@ -123,7 +125,7 @@ The driver writes timestamped PNGs to `docs/screenshots/<timestamp>-<device>-<la
 For App Store Connect upload, copy the latest version of each cell to `docs/screenshots/latest/`:
 
 ```bash
-mkdir -p docs/screenshots/latest && \
+rm -rf docs/screenshots/latest && mkdir -p docs/screenshots/latest && \
 for view in verb_browse verb_view model_browse model_view quiz_mid \
             info_browse info_view quiz_results settings; do
   for device in "iPhone-17-Pro-Max" "iPad-Pro-13-inch-(M4)"; do
@@ -136,6 +138,15 @@ done
 ```
 
 `ls -t` orders by modification time; the timestamp embedded in the filename matches mtime to the second, so the two ordering schemes agree.
+
+> **`latest/` is a per-release projection, not an accumulating archive** — hence the
+> leading `rm -rf`. Without it, a re-shoot leaves the previous release's files sitting
+> beside the new ones (the sibling app Konjugieren's went from 36 to 72 this way), and the
+> numbered-bundle snippet below iterates `latest/*.png` mapping each file to a slot number.
+> With two candidates per slot, which one wins depends on glob order. It happens to resolve
+> correctly while timestamps sort in release order — not a property worth betting an upload
+> on. The timestamped originals stay in `docs/screenshots/`, so clearing `latest/` loses
+> nothing.
 
 ### Per-Release Upload Bundles
 
@@ -376,14 +387,25 @@ Compact reference. The driver's inline comments hold the full WHY for each — c
 10. **Multi-sim window focus** (`take_screenshots.sh::ensure_soft_keyboard`)
     *Symptom:* with both sims booted, Cmd+K hits whichever Simulator window is frontmost. *Fix:* AXRaise the target sim's window by title-substring match before sending the keystroke.
 
-    **The match is by device *family* substring (`iPhone` / `iPad`), so it disambiguates only
-    while exactly one simulator per family is booted** — which is what a normal sweep produces.
-    Boot a second iPhone or iPad (easy while testing) and AXRaise can raise the wrong window;
-    the keystroke lands on a sim that isn't being screenshotted and `quiz_mid` comes out
-    keyboard-less. Observed in Conjugar with four windows open. Workaround #6's post-toggle
-    check catches it and logs `soft keyboard still not visible after Cmd+K`; if you see that,
-    run `osascript -e 'tell application "System Events" to tell process "Simulator" to get name
-    of every window'` and shut down extra sims of that family.
+    **Fixed 2026-07-26: the match is now the FULL device name (`$DEVICE`), not a family
+    substring (`iPhone` / `iPad`).** Simulator titles its windows `<device name> – iOS
+    <version>`, so the full name selects exactly one; the family substring did not, and it
+    disambiguated only while exactly one simulator per family was booted. This is not
+    hypothetical — it fired during this very sweep. A concurrent session in a sibling app had
+    `iPhone 17` booted alongside `iPhone 17 Pro Max`, System Events enumerated the foreign
+    window first, Cmd+K went to it, and **both** iPhone `quiz_mid` cells captured
+    keyboard-less while the sweep reported success. Confirmed directly:
+
+    ```bash
+    osascript -e 'tell application "System Events" to tell process "Simulator" to get name of (first window whose title contains "iPhone")'            # -> iPhone 17 – iOS 26.3        (wrong)
+    osascript -e 'tell application "System Events" to tell process "Simulator" to get name of (first window whose title contains "iPhone 17 Pro Max")' # -> iPhone 17 Pro Max – iOS 26.3 (right)
+    ```
+
+    Workaround #6's post-toggle check is still the thing that surfaces a failure here, and it
+    logs `soft keyboard still not visible after Cmd+K`. If you see that line now, list the
+    windows (`osascript -e 'tell application "System Events" to tell process "Simulator" to get
+    name of every window'`) — a *second window for the same device name* would still be
+    ambiguous, as would a device whose name is a prefix of another booted device's.
 
     Also note the AppleScript's `delay` after `activate` is now **0.5 s** (was 0.2 s): a
     freshly-activated Simulator briefly reports no windows, and the resulting `-1719 "Invalid
@@ -404,22 +426,47 @@ Compact reference. The driver's inline comments hold the full WHY for each — c
 15. **Tutor-row kill switch** (`TutorDisplay.tutorUnavailableRowEnabled`, operator step — not in the driver)
     *Symptom:* the simulator can never reach Apple Intelligence — `World.simulator` injects the *real* `LanguageModelServiceReal`, so `SystemLanguageModel.availability` resolves against the host and fails — so `InfoBrowseView` renders "Apple Intelligence is still getting ready. Please try again later." where the tutor entry goes. On iPad that cell sits in the visible Concepts grid and **shipped in `version_3`'s two iPad `info_browse` shots**. *Fix:* set the switch to `false` before the sweep (see *Disable tips and the tutor row first*), restore after. Only the unavailability cell is gated; the `isAvailable` `NavigationLink` branch is untouched, so the switch structurally cannot hide a working tutor. Both size-class branches (`tutorListRow`, `tutorGridCell`) are gated — verified 2026-07-18 on iPhone 17 and iPad Pro 13-inch (M4), in both switch positions: no ghost `List` row when off, cell returns when on.
 
+16. **Frame-to-frame stability wait** (`take_screenshots.sh::wait_for_stable_screen`, `STABLE_PIXEL_TOLERANCE`)
+    *Symptom:* switching tabs on iPad cross-fades, and a capture taken during the fade shows the previous screen ghosted through the new one — which is what the sibling app Konjugieren shipped. Long Info articles have the same shape (slow layout, capture lands mid-render). **No accessibility-based wait can catch either:** the outgoing screen's anchor leaves the AX tree within ~0.3 s of the tap while the fade is still plainly visible, because AX state answers "has the hierarchy changed" while a screenshot is graded on "has the image stopped moving". *Fix:* before each capture, sample screenshots 0.35 s apart and compare with `magick compare -metric AE` until consecutive frames differ by less than `STABLE_PIXEL_TOLERANCE`, giving up after 8 samples with a log line. Degrades to a flat `sleep 1.0` when `magick` is absent. The tolerance is **measured, not guessed** (`5e7`, from an iPhone quiz floor of 6.4e6–2.5e7 against an iPad cross-fade of 1.2e8–2.8e10) and is a property of *this* app — never port it.
+
+17. **Largest-area frame selection** (`take_screenshots.sh::frame_of`)
+    *Symptom:* an id can match several AXTree elements, and taking the depth-first first one taps whichever the traversal happened to reach. In Konjugieren an iPad Info row exposed its heading as an `AXStaticText` *above* the tappable `AXButton`; tapping non-interactive static text does nothing at all, so the sweep captured the wrong screen in all four cells and reported success for two releases. *Fix:* pick the largest-area match — the element standing for the whole row is the widest one. Preferring `AXButton` looks like the fix and is not: on iPad a verb row exposes its translation as a button while the infinitive is static text, so that rule taps the translation instead. Verified 2026-07-26 that Conjuguer currently has exactly **one** match at every tap site on both devices in both languages, so this is a safety net here rather than a live fix.
+
+18. **Pinned plugin resolution** (`take_screenshots.sh::resolve_ibv_scripts`)
+    *Symptom:* `find ~/.claude -path '*ios-build-verify*'` matches both the marketplace clone and every version under `plugins/cache/ios-build-verify/<version>/` (0.2.1 and 0.3.1 were both present), and `find` does not guarantee directory order — so which release built the App Store screenshots was unspecified. *Fix:* search only `~/.claude/plugins/marketplaces`, which has no version segment and yields exactly one match.
+
 ## Per-View Navigation Recipes
 
-> **Tab coordinates are unverified since 2026-07-18.** The sibling app Conjugar re-measured its
-> iPad tab centers from the AXTree and found the shared inherited values (`355 / 441.5 / 523 /
-> 587.75 / 667.25`) landed inside the right tab but 3–6 pt off-center. **Those corrected numbers
-> do not transfer to this app** — iPad tab widths follow the localized label text, and French
-> labels differ from Spanish. Re-measure here rather than copying; unlike the iPhone pill (whose
-> children are not exposed, so those coords can only be confirmed by tapping), the iPad's top
-> bar reports each tab as an `AXRadioButton`:
+> **Tab coordinates were measured here on 2026-07-26** and `tab_coords_for()` now takes a
+> **language** as well as a device. The prior suspicion was correct: the inherited row
+> (`355 / 441.5 / 523 / 587.75 / 667.25`) was a measurement of the sibling app Konjugieren's
+> *German* labels, byte-identical to that app's. Every one of those five taps landed inside
+> the right iPad segment, so the calibration looked verified — but near each segment's left
+> edge, `Info` clearing the boundary by only 6.25 pt.
+>
+> The iPad row is per-language and the iPhone row is not, structurally: the iPad's regular
+> size class sizes each segment to its label, so FR `Verbes` / `Modèles` / `Paramètres`
+> displace every center after them (Verbs 386.25 → Verbes 369). The compact iPhone pill
+> distributes items into equal-width slots, so a longer localized label changes the text
+> without moving the slot center.
+>
+> Re-measure per app and per language; never copy another app's row. The iPad's top bar
+> reports each tab as an `AXRadioButton`:
 >
 > ```bash
 > axe describe-ui --udid <IPAD_UDID> \
 >   | jq '[.. | objects | select(.role? == "AXRadioButton")] | .[] | {AXLabel, AXFrame}'
 > ```
 >
-> Center = `x + w/2`. An off-center-but-working tap is the early warning that geometry drifted.
+> Center = `x + w/2`, `y + h/2`. An off-center-but-working tap is the early warning that
+> geometry drifted. The **iPhone** pill exposes no `AXRadioButton` children at all, so it
+> cannot be measured this way — probe it in reverse, tapping a coordinate and reading back
+> the label:
+>
+> ```bash
+> axe describe-ui --point "296.2,899.3" --udid <IPHONE_UDID> \
+>   | jq -r '[.. | objects | select(.AXLabel? != null and .AXLabel != "") | .AXLabel]'
+> ```
 
 | # | View | Mode | Driver function | Notes |
 |---|---|---|---|---|

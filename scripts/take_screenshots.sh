@@ -77,13 +77,25 @@ for line in sys.stdin:
 }
 
 # Tab-bar pixel centers (logical points). Order: verbs models quiz info settings.
-# Starting calibration from Konjugieren (same 5-tab layout, same devices); verify
-# on first run and adjust if a tap lands on the wrong tab. iPhone uses the bottom
-# pill tab bar (y=899.3); iPad uses a top segmented tab bar (y=54).
+# Measured 2026-07-26 on iOS 26 from each tab's own AXFrame (x + w/2, y + h/2), not
+# ported from a sibling app — the row that shipped here previously was byte-identical
+# to Konjugieren's, i.e. a measurement of *that* app's German labels. Every one of
+# those five numbers landed inside the right iPad segment but near its left edge (Info
+# cleared the edge by 6.25 pt), so the taps worked and the calibration looked verified.
+#
+# The iPad row is per-language and the iPhone row is not, for a structural reason. The
+# iPad's regular size class renders a top segmented bar that sizes each segment to its
+# label, so a longer word displaces every center after it: FR "Verbes"/"Modèles"/
+# "Paramètres" shift all five centers (Verbs 386.25 → Verbes 369). The compact iPhone
+# pill instead distributes items into equal-width slots, so a localized label changes
+# the text without moving the slot center — verified by reverse-probing all five iPhone
+# coordinates in both languages (`axe describe-ui --point`, which is the only way: the
+# pill exposes no AXRadioButton children at all).
 tab_coords_for() {
-  case "$1" in
-    "iPhone 17 Pro Max")     echo "67,899.3 142.7,899.3 220,899.3 296.2,899.3 372.6,899.3" ;;
-    "iPad Pro 13-inch (M4)") echo "355,54 441.5,54 523,54 587.75,54 667.25,54" ;;
+  case "$1/$2" in
+    "iPhone 17 Pro Max"/*)      echo "67,899.3 142.7,899.3 220,899.3 296.2,899.3 372.6,899.3" ;;
+    "iPad Pro 13-inch (M4)"/en) echo "386.25,54 469.5,54 547.75,54 612.5,54 692,54" ;;
+    "iPad Pro 13-inch (M4)"/fr) echo "369,54 461.75,54 544.75,54 609.5,54 701.5,54" ;;
   esac
 }
 
@@ -137,7 +149,15 @@ apply_device_state() {
   [[ -n "$UDID" ]] || { log "no available simulator named '$DEVICE' — see Simulator Setup in the playbook"; exit 2; }
   DEVICE_SLUG="${DEVICE// /-}"
   WAIT_FOR_RENDER_BUDGET_S=$(wait_budget_for "$DEVICE")
-  IFS=' ' read -ra CURRENT_TAB_CENTERS <<< "$(tab_coords_for "$DEVICE")"
+}
+
+# Tab centers depend on the language on iPad (see tab_coords_for), so they are
+# resolved inside the language loop rather than once per device.
+apply_lang_state() {
+  local centers
+  centers=$(tab_coords_for "$DEVICE" "$1")
+  [[ -n "$centers" ]] || { log "no tab centers for '$DEVICE' / '$1'"; exit 2; }
+  IFS=' ' read -ra CURRENT_TAB_CENTERS <<< "$centers"
 }
 
 ensure_booted() {
@@ -234,12 +254,29 @@ verify_screen_loaded() {
   wait_for_render "$1"
 }
 
-# Return the AXFrame "x y w h" of the first element whose AXUniqueId matches $1,
-# or empty string if none is currently rendered.
+# Return the AXFrame "x y w h" of the LARGEST-AREA element whose AXUniqueId matches
+# $1, or empty string if none is currently rendered.
+#
+# Largest-area, not depth-first-first: an id can match several elements, and the one
+# standing for the whole row is the widest. Taking [0] tapped whichever the traversal
+# reached first, which on iPad is sometimes a non-interactive AXStaticText heading
+# sitting above the tappable AXButton — tapping it does nothing at all, silently, so
+# the sweep captured the wrong screen and reported success (Konjugieren's info_view
+# shipped that way for two releases). Preferring AXButton is the tempting fix and is
+# wrong: on iPad a verb row exposes its translation as a button while the infinitive
+# is static text, so that rule taps the translation and stops navigating. Largest-area
+# is the only rule correct at all five tap sites, and it degrades to the old behaviour
+# wherever the old behaviour worked.
+#
+# Selection is in awk rather than jq on purpose: computing area in jq means a regex
+# against the AXFrame string inside a double-quoted bash string that already
+# interpolates $ID_MATCH, and the escaping is unreadable. The sed has already
+# reduced each frame to "x y w h".
 frame_of() {
   axe_tree | jq -r --arg id "$1" \
-    "[.. | objects | $ID_MATCH][0].AXFrame // \"\"" \
-    | sed -E 's/[{},]/ /g; s/  +/ /g'
+    "[.. | objects | $ID_MATCH | select(.AXFrame? != null)] | .[] | .AXFrame" \
+    | sed -E 's/[{},]/ /g; s/  +/ /g' \
+    | awk 'NF >= 4 { area = $3 * $4; if (area > best) { best = area; line = $0 } } END { if (line != "") print line }'
 }
 
 # SwiftUI propagates accessibilityIdentifier to child elements, so `axe tap --id`
@@ -305,20 +342,18 @@ keyboard_is_visible() {
 # counted AXTree elements labelled "space", which on iOS 26 is always zero (see
 # keyboard_is_visible), so it never fired — the bug this replaces.
 #
-# NOTE the window match is by device *family* substring, so it is unambiguous
-# only while exactly one simulator per family is booted (what a normal sweep
-# produces). A stray second iPhone/iPad sim can make AXRaise pick the wrong
-# window; the post-toggle check below is what surfaces that.
+# The window is matched on the FULL device name, not a family substring ("iPhone").
+# Simulator titles its windows "<device name> – iOS <version>", so `$DEVICE` selects
+# exactly one; a family substring does not. Observed 2026-07-26: a concurrent session
+# in a sibling app had "iPhone 17" booted alongside this sweep's "iPhone 17 Pro Max",
+# System Events enumerated the foreign window first, and Cmd+K went to it — so both
+# iPhone quiz_mid cells captured with no keyboard while the sweep reported success.
+# (workarounds #6 and #10)
 ensure_soft_keyboard() {
-  local window_match
+  local window_match="$DEVICE"
   if keyboard_is_visible; then
     return 0
   fi
-  case "$DEVICE" in
-    "iPhone 17 Pro Max")     window_match="iPhone" ;;
-    "iPad Pro 13-inch (M4)") window_match="iPad" ;;
-    *) window_match="" ;;
-  esac
   # `delay 0.5`, not 0.2: with a freshly-activated Simulator the window list is
   # briefly unenumerable and AXRaise fails with -1719 "Invalid index", which
   # reads exactly like a missing-permission failure and sends you chasing the
@@ -413,8 +448,64 @@ read_fixture_answers_path() {
   echo "$data_dir/Documents/screenshot_fixture_answers.json"
 }
 
+# Largest frame-to-frame difference (ImageMagick -metric AE) still considered "settled".
+#
+# MEASURED, not guessed, on iOS 26 on 2026-07-26 — these are Conjuguer's own numbers, so
+# don't port them to another app. It cannot be 0 because the quiz screen never settles:
+# QuizView's elapsed-time counter ticks with a `.snappy` animation and the text cursor
+# blinks. 18 consecutive-frame samples on the iPhone quiz screen ran 6.4e6–2.5e7 (iPad,
+# 2.4e6–6.9e6; a static screen such as Settings scores exactly 0). Against that, an iPad
+# tab cross-fade sampled 1.2e8 just after the tap, 2.8e10 at the content swap, and 7.4e8
+# still fading 0.35 s later. 5e7 is the geometric middle of the 2.5e7 ↔ 1.2e8 gap. That
+# gap is only ~5x, narrower than one might like, so re-measure rather than nudge this if
+# the "still changing after 8 samples" warning starts appearing.
+STABLE_PIXEL_TOLERANCE=50000000
+
+# Block until consecutive screenshots stop differing. No accessibility-based wait can do
+# this job: switching tabs on iPad cross-fades, and the outgoing screen's anchor leaves
+# the AX tree within ~0.3 s of the tap while the fade is still plainly visible. AX state
+# answers "has the view hierarchy changed"; a screenshot is graded on "has the image
+# stopped moving", and the two diverge exactly during animation — which is when a capture
+# goes wrong. Konjugieren shipped tab-switch captures with the previous screen's verb list
+# ghosted through them. This also covers slow layout (the long Info articles) without a
+# per-screen special case.
+wait_for_stable_screen() {
+  local dir previous current differing i
+  if ! command -v magick >/dev/null 2>&1; then
+    sleep 1.0
+    return 0
+  fi
+  dir=$(mktemp -d)
+  previous="$dir/previous.png"
+  current="$dir/current.png"
+  if ! axe screenshot --udid "$UDID" --output "$previous" >/dev/null 2>&1; then
+    rm -rf "$dir"
+    sleep 1.0
+    return 0
+  fi
+  for i in 1 2 3 4 5 6 7 8; do
+    sleep 0.35
+    axe screenshot --udid "$UDID" --output "$current" >/dev/null 2>&1 || break
+    # `|| true` is load-bearing: `magick compare` exits 1 whenever the images differ,
+    # which is the normal case here, and under `set -o pipefail` (:19) that makes the
+    # assignment fail and `set -e` abort the whole sweep.
+    differing=$(magick compare -metric AE "$previous" "$current" null: 2>&1 | awk '{print $1}' || true)
+    # awk, not [[ -le ]]: the metric comes back in scientific notation (1.80683e+10).
+    if [[ -n "$differing" ]] \
+       && awk -v d="$differing" -v t="$STABLE_PIXEL_TOLERANCE" 'BEGIN { exit !(d + 0 <= t + 0) }'; then
+      rm -rf "$dir"
+      return 0
+    fi
+    mv "$current" "$previous"
+  done
+  log "wait_for_stable_screen: screen still changing after 8 samples on $DEVICE"
+  rm -rf "$dir"
+  return 0
+}
+
 take_screenshot() {
   local slug="$1"
+  wait_for_stable_screen
   mkdir -p "$REPO_ROOT/docs/screenshots"
   local ts out
   ts=$(date +%Y%m%d-%H%M%S)
@@ -549,7 +640,12 @@ nav_settings() {
 
 resolve_ibv_scripts() {
   local path
-  path=$(find ~/.claude -path '*ios-build-verify*' -name build_app.sh 2>/dev/null | head -1)
+  # Search only the marketplace clone, never ~/.claude broadly: the plugin cache
+  # (~/.claude/plugins/cache/ios-build-verify/<version>/) holds several versions at
+  # once, shared across apps, and `find`'s directory order is unspecified — so the
+  # broad glob picked an arbitrary release to build App Store screenshots with. The
+  # marketplace clone has no version segment and yields exactly one match.
+  path=$(find ~/.claude/plugins/marketplaces -path '*ios-build-verify*' -name build_app.sh 2>/dev/null | head -1)
   [[ -n "$path" ]] || { log "ios-build-verify scripts not found"; exit 2; }
   echo "$(dirname "$path")"
 }
@@ -600,6 +696,7 @@ main() {
 
     for lang in "${LANGS[@]}"; do
       if filter_skip "$lang" "$LANG_FILTER"; then continue; fi
+      apply_lang_state "$lang"
 
       for view in "${VIEWS[@]}"; do
         if filter_skip "$view" "$VIEW_FILTER"; then continue; fi

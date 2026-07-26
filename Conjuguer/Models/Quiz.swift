@@ -325,6 +325,14 @@ class Quiz {
   // Write the correct answers for the fixture to Documents/screenshot_fixture_answers.json
   // so the driver can read and type them. The exported answer is the first of any
   // slash-separated alternates, which the quiz scores as a total match.
+  //
+  // Lowercased on the way out. Conjugator's mixed case is correct output, not a defect —
+  // uppercase marks irregular characters for red highlighting (see ConjugationText.swift) —
+  // but the answer field in a screenshot depicts what a *user* typed, and no human types
+  // "SUIS". Scoring is unaffected: ConjugationResult.score lowercases both sides, and the
+  // app grades against its own in-memory value, never this file. Lowercasing must happen
+  // here rather than in the driver, because shell `tr '[:upper:]' '[:lower:]'` works on
+  // bytes and silently skips every accented capital.
   private func exportFixtureAnswers(_ questions: [QuizQuestion]) {
     let payload = questions.map { question -> [String: String] in
       let conjugated = Conjugator.conjugatedString(infinitif: question.verb.infinitif, tense: question.tense, extraLetters: nil) ?? ""
@@ -332,7 +340,7 @@ class Quiz {
       return [
         "infinitif": question.verb.infinitif,
         "tense": "\(question.tense)",
-        "answer": answer
+        "answer": answer.lowercased()
       ]
     }
     guard
