@@ -149,16 +149,17 @@ check_video() {
     warn "$f" "H.264 level $((level / 10)).$((level % 10)) exceeds the Level 4.0 spec (accepted in practice)"
   fi
 
-  # 15–30 s is a stated hard range, so duration is a blocking check. A naive re-encode
-  # of a 30.000 s master produced 30.014 s, and Konjugieren has a 30.015 s file on disk
-  # — this is the easiest limit in the pipeline to blow past by accident.
+  # 15–30 s is a stated hard range, so duration is a blocking check. 30.000 s is the
+  # deliberate target, so landing at the cap is not itself suspicious — but note the
+  # check reads format=duration (the container), because that is what overshoots: a
+  # naive re-encode of a 30.000 s master produced 30.014 s and Konjugieren has a
+  # 30.015 s file on disk, both from an AAC tail running past the last video frame.
+  # -frames:v 900 alone does not prevent that; -t 30 does.
   if [[ -n "$dur" ]]; then
     awk -v d="$dur" 'BEGIN { exit !(d > 30.0) }' && \
-      fail "$f" "duration ${dur}s exceeds the 30s maximum; pin it with ffmpeg -frames:v 870 (29.000s)"
+      fail "$f" "duration ${dur}s exceeds the 30s maximum; pin it with ffmpeg -frames:v 900 -t 30 (30.000s) — -frames:v alone leaves an AAC tail past the cap"
     awk -v d="$dur" 'BEGIN { exit !(d < 15.0) }' && \
       fail "$f" "duration ${dur}s is under the 15s minimum"
-    awk -v d="$dur" 'BEGIN { exit !(d > 29.5 && d <= 30.0) }' && \
-      warn "$f" "duration ${dur}s leaves no rounding margin under the 30s cap; aim for 29s"
   fi
 
   # A stray timecode/data track survives -map 0:v:0 -map 0:a:0; only -dn removes it.

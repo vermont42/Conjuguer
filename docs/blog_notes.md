@@ -769,3 +769,81 @@ Verified with a stubbed-`osascript` harness: window present → 1 raise, 1 keyst
 attempt 2. Identical output across all three repos, both scripts pass `bash -n`, and no app
 code was touched. Not verified anywhere: the *recovery* branch, because the windowless state
 proved intermittent and would not reproduce on demand after the fact.
+
+## Reviewing the ported video script (2026-07-26)
+
+Josh rewrote `docs/video_script.md` from Konjugieren's version and asked for an error check.
+Most of the port was faithful and the app-facing claims all hold up against the source of
+truth: 6,320 verbs in `verbs.xml`, `abaisser` first and `zyeuter` last, seventeen tenses in
+`Tense.swift` (eight simple plus nine compound), `avoir` a real model (`id="4-10"`) among 95,
+"Show Compound Tenses" byte-identical to `VerbView.showCompoundTenses`, "Indicatif Présent"
+byte-identical to `Info.indicatifPrésentHeading` (the *French* catalog value lowercases the
+`p`, which matters only for the French clips), and "timed" honest because `Quiz` runs an
+`elapsedTime` counter that feeds `bonusForElapsedTime`.
+
+The real defect was arithmetic. The header asserted 34 seconds of raw footage minus
+half-second transitions landing at 30. Five clips means four transitions, and an FCP
+transition overlaps its own duration of media, so four half-second transitions cost two
+seconds, not four. The stated numbers only cohere with one-*second* transitions — FCP's
+default. The version Josh replaced had said 32/0.5/2 correctly *and* carried the note that
+the library must be switched to 0.5 s in Settings ▸ Editing; dropping that note is what let
+the mismatch look plausible. Restored both. Josh chose 32.
+
+Second regression: the port dropped every per-clip duration and every French label. The
+durations matter because without them there is no way to hit any stated total; the old
+6/6/6/7/7 sums to exactly 32, so they went back verbatim. The French labels matter because
+`app-store-preview-videos.md` says the deliverable is four videos — English and French, iPhone
+and iPad — so half the deliverables had no script. Retranslated, reusing the prior French for
+clips 1, 2, and 4 and writing new lines for the two labels Josh had rewritten. Clip 3's first
+pass rendered "every conjugation model of every French verb" literally, which is redundant in
+French; Josh took the alternative built on the verified count instead, so both languages now
+name the number — `All 95 French conjugation models.` / `Les 95 modèles de conjugaison du
+français.`
+
+On duration policy: Josh wants 30 s and the evidence backs him. The 2.0 rejection was almost
+certainly `setsar=1`, not length — Konjugieren shipped a **30.015 s** preview that App Store
+Connect accepted. The one caveat worth recording is that `-frames:v 900` alone does not
+guarantee a ≤30 s file: it bounds the video stream only, `-shortest` does not retroactively
+trim audio against it, and AAC's 1024-sample frames (~21.3 ms) can push the container past
+30.000 — which is exactly how the earlier 30.014 s file happened. A hard `-t 30` alongside it
+fixes that. Moot for this file in the end: Josh deleted the whole spec section, so the encode
+guidance now lives only in `app-store-preview-videos.md`, and the two docs no longer
+contradict each other on frame count. Josh then asked for that file to be updated, so 30 s is
+now the standard everywhere — see below.
+
+Small fixes: `QuizVew` → `QuizView` (a typo inherited from Konjugieren), the clip-4 label's
+hyphen back to the colon the source used, an `#` on the title so it outranks the `##` below
+it, and a trailing newline.
+
+## Retargeting the preview pipeline to 30 seconds (2026-07-26)
+
+Josh's position throughout was that 30 s is fine, and the evidence agrees with him more than
+the docs did. `app-store-preview-videos.md` had retreated to 29 s after a 30.000 s master
+re-encoded to 30.014 s — but that retreat treated the symptom. The 2.0 rejection was almost
+certainly `setsar=1`, and Konjugieren shipped a **30.015 s** preview that App Store Connect
+accepted, so the cap is demonstrably not enforced to the millisecond. Backing off a full
+second bought margin against a bug rather than fixing it.
+
+The bug is worth writing down precisely, because `-frames:v` looks like it should be
+sufficient and isn't. It bounds the *video* stream only. `-shortest` does not retroactively
+trim audio against it. AAC codes 1024 samples per frame — about 21.3 ms at 48 kHz — so the
+audio track runs on to the next whole frame past the last video frame, and the **container**
+duration, which is what `ffprobe` and App Store Connect actually read, lands over. 30.014 and
+Konjugieren's 30.015 are both that same ~14 ms tail. `-t 30` truncates every output stream and
+removes it. So the pass is now `-frames:v 900 -t 30`, with a `format=duration` check (not a
+video-stream check) as the verification step.
+
+`verify_store_media.sh` had to move with the doc, and this was the part that would have bitten
+silently: its advisory branch warned whenever duration fell in `(29.5, 30.0]` with the message
+"aim for 29s". Under the new target that fires on *every* conformant file, which is how a
+verifier trains people to ignore it. Deleted the branch rather than retuning it — >30.0 already
+fails, 30.000 is now deliberate, and there is no remaining band that means anything. The
+blocking message now names `-frames:v 900 -t 30` and says why `-frames:v` alone is not enough,
+so a future reader hitting a 30.014 s file gets the mechanism at the point of failure instead
+of having to find it in the doc.
+
+Left the historical caveat at `app-store-preview-videos.md:182` intact — the accepted upload
+really did change two variables at once, and that remains true and worth not over-trusting.
+Added a pointer under it recording that the 30 s target is deliberate as of today. Also left
+the older blog entries' 29 s guidance alone: they are dated memory of what was believed then,
+and rewriting them would destroy the only record of why the number moved.

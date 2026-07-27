@@ -147,7 +147,7 @@ that way — blocking versus advisory — rather than treating every spec line a
 | Video bit rate | 10–12 Mbps target | 15–16 Mbps (iPhone), 12.6–13.8 (iPad) |
 | Audio | **256 kbps** stereo AAC, 44.1/48 kHz | 126 kbps |
 | Tracks | video + audio, all enabled | a third **timecode data track** |
-| Duration | 15 s min, **30 s max** | 30.000 s (at the limit — see below) |
+| Duration | 15 s min, **30 s max** | 30.000 s video, but a **30.014 s container** — see below |
 
 Rather than fight the export dialog, treat FCP's output as a master and run every file
 through this normalization pass, which enforces all of the above by construction:
@@ -157,7 +157,7 @@ through this normalization pass, which enforces all of the above by construction
 ffmpeg -y -i "master.mov" \
   -map 0:v:0 -map 0:a:0 -dn -sn \
   -vf "scale=${W}:-2,setsar=1,crop=${W}:${H}" \
-  -frames:v 870 -shortest \
+  -frames:v 900 -t 30 -shortest \
   -c:v libx264 -profile:v high -level 4.0 -pix_fmt yuv420p -r 30 \
   -b:v 11M -maxrate 12M -bufsize 24M \
   -c:a aac -b:a 256k -ar 48000 -ac 2 \
@@ -181,7 +181,10 @@ Four details that are easy to get wrong:
   > re-encode changed **two** things at once — it added `setsar=1` *and* moved the duration
   > from 30.000 s to 29.000 s. SAR is much the likelier cause (Konjugieren shipped a
   > 30.015 s preview, so the duration cap is evidently not enforced to the millisecond),
-  > but the upload did not isolate the variable.
+  > but the upload did not isolate the variable. **As of 2026-07-26 the target is 30 s
+  > again** — see the duration bullet below. Nothing in the accepted-upload evidence
+  > argues for 29 s over 30 s; the earlier retreat to 29 was a reaction to an encode
+  > that overshot the cap, and pinning the *container* duration addresses that directly.
 
   Verify with:
 
@@ -194,9 +197,24 @@ Four details that are easy to get wrong:
 
 - **`-dn` is required.** `-map 0:v:0 -map 0:a:0` alone does *not* drop the data track;
   it survives the mapping and shows up in `ffprobe` as a third stream.
-- **`-frames:v` sets duration exactly.** 870 frames ÷ 30 fps = 29.000 s. Encoding a
-  30.000 s source without it produced **30.014 s** — over the hard maximum — through
-  rounding alone.
+- **`-frames:v 900` is not enough on its own; `-t 30` is what actually caps the file.**
+  900 frames ÷ 30 fps = 30.000 s, but `-frames:v` bounds only the *video* stream, and
+  `-shortest` does not retroactively trim audio against it. AAC codes 1024 samples per
+  frame (~21.3 ms at 48 kHz), so the audio track runs to the next whole frame past 30 s
+  and the **container** duration — which is what `ffprobe` and App Store Connect read —
+  lands slightly over. That is the mechanism behind the **30.014 s** file that a naive
+  re-encode of a 30.000 s master produced, and behind Konjugieren's 30.015 s preview.
+  `-t 30` truncates every output stream at 30.000 s and removes the overshoot. Confirm
+  the container, not just the video stream:
+
+  ```bash
+  ffprobe -v error -show_entries format=duration -of csv=p=0 preview.mp4
+  # want: 30.000000 (or under) — not 30.014
+  ```
+
+  The raw FCP edit should be **32 s** with the four half-second transitions set in
+  Settings ▸ Editing, which lands the export at 30 s before this pass ever runs; see
+  [`video_script.md`](video_script.md) for the per-clip budget.
 - **Bit rate will land under target** (5.7–7.6 Mbps observed) because flat UI content
   gives x264 little to encode. 10–12 Mbps is Apple's *target*, not a floor.
 
