@@ -683,3 +683,41 @@ quiz-screen samples and found a benign-motion outlier at 4.6e7 — well above th
 this repo recorded over 18 samples. If that distribution is representative, this repo's floor
 is understated and 5e7 has less headroom than its comment claims. Worth a longer sampling run
 before the next sweep; not changed here on another app's evidence.
+
+## The Cmd+K guard becomes a retry loop (2026-07-26)
+
+A third round-trip with the Conjugar session, and this one flows the other way: the frontmost
+guard this repo contributed came back improved.
+
+Recap of the guard, added earlier today: `ensure_soft_keyboard` raises the target Simulator
+window and then, before typing, asks System Events which application is actually frontmost —
+because when AXRaise silently fails to take focus, `keystroke` still *succeeds* and lands
+wherever focus happens to be. Conjugar hit that live, sending a stray Cmd+K into the Fitness
+app while the sweep reported nothing wrong.
+
+What that version got wrong was the *shape*, not the check. It did one raise, one frontmost
+check, and gave up if the check failed. But the failure it guards against is not always
+permanent: Simulator may still be coming forward, or another app may be frontmost for a
+moment. Treating a momentary steal as fatal turns it into a keyboard-less `quiz_mid` cell when
+waiting a second would have fixed it. Konjugieren had already folded the identical check into
+a 3× retry loop, which handles both shapes of the problem, and that is now what all three apps
+run.
+
+The subtlety worth writing down is why the loop is not just "retry the thing that failed."
+Retrying a *bare* keystroke is useless — it misfires three times instead of once, because
+`osascript` returns 0 each time. The loop is correct only because the frontmost check lives
+inside it, so every attempt re-raises, re-checks, and types only on success. A persistent
+steal therefore ends with three log lines naming the offending app and **zero** keystrokes
+sent.
+
+Verified with a stubbed harness (fake `osascript` returning a scripted sequence of frontmost
+answers, counting attempts and keystrokes), in this repo and in Conjugar, with identical
+results: clean 1/1, persistent steal 3 attempts and 0 keystrokes, transient steal recovering
+on attempt 2 with 1 keystroke.
+
+One intentional divergence survives, and it should: this repo matches its Simulator window on
+the whole `$DEVICE` string, while Conjugar and Konjugieren use a device-family substring. That
+is the fix from earlier today for the "iPhone" prefix selecting the wrong window here, and it
+is documented in workaround #10 in all three playbooks so nobody "harmonizes" it away. Only
+`scripts/take_screenshots.sh` and `docs/screenshot-playbook.md` changed; no app code, and the
+script passes `bash -n`.

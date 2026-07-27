@@ -358,35 +358,51 @@ ensure_soft_keyboard() {
   # briefly unenumerable and AXRaise fails with -1719 "Invalid index", which
   # reads exactly like a missing-permission failure and sends you chasing the
   # wrong thing.
-  osascript -e 'tell application "Simulator" to activate' \
-            -e 'delay 0.5' \
-            -e "tell application \"System Events\" to tell process \"Simulator\" to perform action \"AXRaise\" of (first window whose title contains \"$window_match\")" \
-            -e 'delay 0.3' \
-            >/dev/null 2>&1 || {
-    # Non-fatal: a missing soft keyboard only costs the spec's "keyboard visible"
-    # detail; the screenshot is still worth taking. Grant osascript Accessibility
-    # permission (see Prerequisites) to fix.
-    log "warning: AppleScript Cmd+K failed (grant osascript Accessibility permission)"
-    return 0
-  }
-  # Gate the keystroke on Simulator actually being frontmost. This is not redundant
-  # with the AXRaise above: when the raise silently fails to take focus, `keystroke`
-  # still SUCCEEDS — it just lands in whichever app is frontmost. Observed 2026-07-26
-  # in the Conjugar repo, where a stray Cmd+K launched Fitness on the host Mac while
-  # the sweep reported nothing wrong. osascript returns 0 either way, and the
-  # keyboard_is_visible check below reports only that the keyboard is missing, never
-  # that the keystroke went elsewhere — so without this the misfire is silent.
+  #
+  # Retried, and never fatal. That unenumerable window list is a race, not a steady
+  # state, and the first quiz_mid cell of a sweep runs moments after a fresh install,
+  # which is exactly when it loses. A genuine permission failure fails all three
+  # attempts and still gets a warning, and the keyboard_is_visible check below reports
+  # the real outcome either way, so continuing costs at most one reviewable screenshot.
+  #
+  # The keystroke is gated on Simulator actually being frontmost, and that guard is
+  # NOT redundant with the AXRaise above. When the raise silently fails to take focus,
+  # `keystroke` still SUCCEEDS — it just lands in whichever app *is* frontmost. Observed
+  # 2026-07-26 in the Conjugar repo, where a stray Cmd+K launched Fitness on the host Mac
+  # while the sweep reported nothing wrong. osascript returns 0 in that case, so a bare
+  # retry loop sees a success, and keyboard_is_visible reports only that the keyboard is
+  # missing, never that the keystroke went elsewhere. Checking frontmost first turns a
+  # silent misfire into a log line naming the app that caught it — and because the check
+  # sits INSIDE the loop, a transient focus steal recovers on the next attempt instead of
+  # costing the cell.
+  local attempt
+  local raised=false
   local front
-  front=$(osascript -e 'tell application "System Events" to name of first process whose frontmost is true' 2>/dev/null || true)
-  if [[ "$front" != "Simulator" ]]; then
-    log "warning: frontmost app is '${front:-unknown}', not Simulator — skipping Cmd+K rather than sending it there"
+  for attempt in 1 2 3; do
+    if osascript -e 'tell application "Simulator" to activate' \
+              -e 'delay 0.5' \
+              -e "tell application \"System Events\" to tell process \"Simulator\" to perform action \"AXRaise\" of (first window whose title contains \"$window_match\")" \
+              -e 'delay 0.3' \
+              >/dev/null 2>&1; then
+      front=$(osascript -e 'tell application "System Events" to name of first process whose frontmost is true' 2>/dev/null || true)
+      if [[ "$front" != "Simulator" ]]; then
+        log "AppleScript Cmd+K attempt $attempt: frontmost is '${front:-unknown}', not Simulator; not sending the keystroke"
+        sleep 1.0
+        continue
+      fi
+      if osascript -e 'tell application "System Events" to keystroke "k" using {command down}' >/dev/null 2>&1; then
+        raised=true
+        break
+      fi
+    fi
+    log "AppleScript Cmd+K attempt $attempt failed; retrying"
+    sleep 1.0
+  done
+  if [[ "$raised" != true ]]; then
+    log "warning: AppleScript Cmd+K failed 3x (accessibility permission for /usr/bin/osascript, or Simulator never came frontmost)"
     return 0
   fi
-  osascript -e 'tell application "System Events" to keystroke "k" using {command down}' >/dev/null 2>&1 || {
-    log "warning: AppleScript Cmd+K failed (grant osascript Accessibility permission)"
-    return 0
-  }
-  sleep 0.9
+  sleep 0.9  # let keyboard slide-up animation complete
   # Confirm the toggle landed. Cmd+K is fire-and-forget — osascript returns 0
   # whether or not Simulator acted — so without this a keyboard-less quiz_mid
   # shot is silent.

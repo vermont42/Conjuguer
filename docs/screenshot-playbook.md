@@ -404,13 +404,25 @@ Compact reference. The driver's inline comments hold the full WHY for each — c
     **Also fixed 2026-07-26: the keystroke is now gated on Simulator actually being
     frontmost.** The window match above fixes *which Simulator window* catches Cmd+K; this
     guards the worse case, where Simulator is not the frontmost **application** at all and the
-    keystroke goes to a different program entirely. Retrying does not help, because
+    keystroke goes to a different program entirely. A *bare* retry does not help, because
     `keystroke` *succeeds* — it lands wherever focus is, `osascript` returns 0, and workaround
     #6's post-toggle check reports only that the keyboard is missing, never that the keystroke
     went elsewhere. Observed in the Conjugar repo on 2026-07-26, where a stray Cmd+K launched
     the **Fitness** app on the host Mac while the run reported nothing wrong. The guard queries
-    `name of first process whose frontmost is true` after the AXRaise and skips the keystroke
-    (with a log line naming the app that would have caught it) rather than firing blind.
+    `name of first process whose frontmost is true` after the AXRaise and refuses to send the
+    keystroke (logging the app that would have caught it) rather than firing blind.
+
+    **Restructured 2026-07-26 into Konjugieren's 3× retry loop**, so all three apps now share
+    one shape (they differ only in how each derives `window_match`: Conjuguer uses the whole
+    `$DEVICE` string, Conjugar and Konjugieren a device-family substring). The frontmost check
+    sits *inside* the loop, which upgrades it from a pure safety valve: a **transient** steal —
+    Simulator still coming forward, another app momentarily frontmost — now recovers on attempt
+    2 instead of costing the cell, which is what the original single-attempt guard did. A
+    **persistent** steal burns all three attempts, sends **zero** keystrokes, and ends in
+    `AppleScript Cmd+K failed 3x (accessibility permission …, or Simulator never came
+    frontmost)`. The loop also absorbs the -1719 AXRaise race, which is a race rather than a
+    steady state. Control flow verified against a stubbed harness in all three cases (clean /
+    transient / persistent).
 
     Workaround #6's post-toggle check is still the thing that surfaces a failure here, and it
     logs `soft keyboard still not visible after Cmd+K`. If you see that line now, list the
