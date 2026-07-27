@@ -721,3 +721,51 @@ is the fix from earlier today for the "iPhone" prefix selecting the wrong window
 is documented in workaround #10 in all three playbooks so nobody "harmonizes" it away. Only
 `scripts/take_screenshots.sh` and `docs/screenshot-playbook.md` changed; no app code, and the
 script passes `bash -n`.
+
+## Ported from Conjugar: the status-bar prep script, and a guard for windowless simulators (2026-07-26)
+
+Conjugar shot its `version_2` App Store bundle today and lost one cell to a failure worth
+importing the defenses for. Its iPad came back from a per-language reboot **booted but with
+no Simulator window**, so `ensure_soft_keyboard`'s `AXRaise of (first window whose title
+contains …)` had nothing to raise, failed three times with `-1719 "Invalid index"`, and the
+`quiz_mid` cell captured without a keyboard. The driver's own warning named two causes —
+missing accessibility permission, Simulator never frontmost — and both were false.
+
+Conjuguer is squarely exposed to this. It has the same `ensure_soft_keyboard`, the same
+`quiz_mid` cell, and — the part that makes it likely rather than theoretical — a playbook
+that prescribes exactly the set-language → `simctl shutdown` → `simctl boot` sequence that
+produces the windowless state, as hand-typed commands.
+
+Two things landed. First, `scripts/prep_screenshot_sim.sh`, which did not exist here: it does
+the *Clean Status Bar* steps in the order that matters (set system language → reboot →
+**re-apply** the override → verify) and prints proof that each landed. That ordering is the
+whole reason the script exists — `status_bar override` survives install/launch but is cleared
+by every reboot, while a language change requires one, so an override set first is silently
+wiped and that language ships with a live wall clock. It also checks the rebooted device has
+a Simulator window and, if not, quits and relaunches Simulator.app, which is the only thing
+that reattaches one (`open -a Simulator --args -CurrentDeviceUDID` is ignored when Simulator
+is already running, and File ▸ Open Simulator clicks without effect).
+
+Second, a window check in `ensure_soft_keyboard` itself, inside the existing 3× loop, right
+before the AXRaise. Detection belongs in the driver even though recovery belongs in prep,
+because the driver is what needs the window and what was reporting the wrong cause. Its
+position inside the loop matters for the same reason the frontmost guard's does: the window
+list is briefly unenumerable just after Simulator activates, so a transient recovers on the
+next attempt while a real windowless device burns all three and sends zero keystrokes. The
+driver does not attempt recovery — quitting Simulator mid-sweep is too blunt.
+
+One deliberate difference preserved: this repo matches the Simulator window on the full
+`$DEVICE` string rather than a family substring, dating from the day a stray `iPhone 17`
+stole this sweep's Cmd+K. The prep script matches the same way, and the executable body of
+`ensure_soft_keyboard` still differs from Conjugar's and Konjugieren's only in that one line.
+
+Also imported: a correction to this playbook's claim that the language dance is iPad-only.
+The *date* is, but the pinned clock is locale-formatted — `en_US` renders `9:41` and `fr_FR`
+renders `09:41` from the identical `--time "9:41"` — so treating only the iPad makes the two
+devices disagree inside the same language.
+
+Verified with a stubbed-`osascript` harness: window present → 1 raise, 1 keystroke; missing →
+3 attempts, 0 keystrokes, three accurate log lines; missing-then-present → recovery on
+attempt 2. Identical output across all three repos, both scripts pass `bash -n`, and no app
+code was touched. Not verified anywhere: the *recovery* branch, because the windowless state
+proved intermittent and would not reproduce on demand after the fact.

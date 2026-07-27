@@ -246,10 +246,29 @@ The driver itself never touches the status bar, so by default every shot carries
 simulator's live clock, battery, and signal state — and on **iPad** the status bar also
 shows a **date**, rendered in the simulator's **system language** (independent of the
 app's `-AppleLanguages` override). A sim whose system language is German thus stamps
-`Freitag 26. Juni` onto otherwise-English/French iPad screenshots. iPhone shots are
-unaffected — the notch shows only the time, no date.
+`Freitag 26. Juni` onto otherwise-English/French iPad screenshots.
 
-Fixing this is two independent pieces:
+> **This is not iPad-only, despite the date being an iPad thing** (learned in Conjugar,
+> 2026-07-26, and ported here). The *pinned clock itself is locale-formatted*: with the
+> identical `--time "9:41"` override, an `en_US` device renders `9:41` and an `fr_FR`
+> device renders `09:41`. So if you set the system language on only one device, or on
+> neither, the iPhone and iPad clocks disagree *within the same language*. Run the
+> language dance on **both** devices; only the *date* handling below is iPad-specific.
+
+**Use [`scripts/prep_screenshot_sim.sh`](../scripts/prep_screenshot_sim.sh)** rather than
+running the steps below by hand. It does them in the order that matters — set system
+language → reboot → **re-apply** the override → verify — and prints the resulting override
+state and `AppleLanguages` so you can see both landed instead of assuming it. It also
+checks that the rebooted device actually has a Simulator *window* (workaround #19).
+
+```bash
+scripts/prep_screenshot_sim.sh "iPhone 17 Pro Max" en      # then shoot --lang en
+scripts/prep_screenshot_sim.sh "iPad Pro 13-inch (M4)" fr  # then shoot --lang fr
+```
+
+Ported from Conjugar 2026-07-26, where the ordering trap below was hit twice in one day.
+The manual steps are kept for reference, and because they document *why* the order is what
+it is:
 
 1. **`simctl status_bar override`** — pins the time/battery/signal to clean values. This is
    per-device and **cleared on every shutdown/reboot**, but it **persists across
@@ -457,6 +476,28 @@ Compact reference. The driver's inline comments hold the full WHY for each — c
 
 18. **Pinned plugin resolution** (`take_screenshots.sh::resolve_ibv_scripts`)
     *Symptom:* `find ~/.claude -path '*ios-build-verify*'` matches both the marketplace clone and every version under `plugins/cache/ios-build-verify/<version>/` (0.2.1 and 0.3.1 were both present), and `find` does not guarantee directory order — so which release built the App Store screenshots was unspecified. *Fix:* search only `~/.claude/plugins/marketplaces`, which has no version segment and yields exactly one match.
+
+19. **A booted simulator can have no Simulator *window*, which silently kills Cmd+K**
+    (`prep_screenshot_sim.sh::ensure_simulator_window`, `take_screenshots.sh::ensure_soft_keyboard`)
+    *Symptom:* one `quiz_mid` cell captured with **no keyboard**, the driver having logged
+    three `AppleScript Cmd+K attempt N failed` lines and then the 3× warning. Both causes
+    that warning used to name were false — the accessibility permission was granted and
+    Simulator did come frontmost. *Cause:* `xcrun simctl boot` does not always make
+    Simulator.app attach a window when Simulator is already running, and a per-language
+    reboot is the usual way in. The device is then **booted but windowless**: `simctl` and
+    `axe` keep working, because they talk to the device rather than the UI, so the rest of
+    the sweep is unaffected — but `AXRaise of (first window whose title contains "$DEVICE")`
+    has nothing to raise and fails with `-1719 "Invalid index"`, which looks exactly like a
+    permission failure. *Fix, in two places:* `prep_screenshot_sim.sh` checks for the window
+    after its reboot and, if absent, quits and relaunches Simulator.app (on launch it
+    attaches a window to every already-booted device); `ensure_soft_keyboard` checks for it
+    inside its existing 3× loop, before each AXRaise, and logs the real cause instead of
+    the misleading one. The driver deliberately does **not** attempt recovery — quitting
+    Simulator mid-sweep is too blunt — so a windowless device still costs one reviewable
+    screenshot, it just no longer costs an hour of chasing permissions.
+    *Observed in Conjugar on 2026-07-26 and ported here the same day; not yet seen in
+    Conjuguer, and the recovery branch has not been exercised end to end anywhere, because
+    the windowless state proved intermittent and would not reproduce on demand.*
 
 ## Per-View Navigation Recipes
 
