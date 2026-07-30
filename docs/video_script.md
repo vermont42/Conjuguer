@@ -49,5 +49,5 @@ Mode quiz : trente questions chronométrées pour aiguiser vos talents de conjug
 Fifth Clip - seven seconds
 Starts out at top of InfoBrowseView. Scroll down so that Indicatif Présent is centered. Tap it. Slowly scroll down.
 Label:
-Everything you need to know about every tense.
-Tout ce qu’il faut savoir sur chaque temps.
+From Proto-Indo-European to modern French — the story behind every tense.
+Du proto-indo-européen au français moderne — l’histoire de chaque temps.
