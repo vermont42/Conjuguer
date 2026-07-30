@@ -1,8 +1,21 @@
 # Plan: Tutor-Row Kill Switch for Screenshots
 
-**Status:** proposed, not implemented.
+**Status:** **implemented** in `05e8da6` (2026-07-18), *"Screenshots: add a tutor-row kill
+switch, fix two playbook bugs"* — the same commit that added this file, which is why the
+line below read "proposed" for twelve days. The switch is
+`TutorDisplay.tutorUnavailableRowEnabled` in `Conjuguer/Models/ConjuguerTips.swift`,
+gating both branches in `Conjuguer/Views/InfoBrowseView.swift`.
 **Ported from:** Conjugar, where this shipped 2026-07-18 as `TutorDisplay.tutorUnavailableRowEnabled`.
-**Estimated size:** ~20 lines of app code, plus playbook and journal prose.
+**Estimated size:** ~20 lines of app code, plus playbook and journal prose. (Actual: 15 + 6.)
+
+> **This file is now design rationale, not a work order.** The operating instructions —
+> the two-switch table and the `sed` commands — live in
+> [`docs/screenshot-playbook.md`](../docs/screenshot-playbook.md) § *Disable tips and the
+> tutor row first*, and that is the copy to keep current. Steps 1–6 below are preserved as
+> the reasoning behind the design (why only the unavailable branch is gated, why
+> compile-time rather than `UserDefaults`, why Conjuguer needed two branches where Conjugar
+> needed one); they have all been carried out. Everything they asked for was done in
+> `05e8da6` except step 5's re-shoot, which happened in the later `version_4` sweep.
 
 ## Why — and this one is not hypothetical
 

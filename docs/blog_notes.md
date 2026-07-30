@@ -847,3 +847,132 @@ really did change two variables at once, and that remains true and worth not ove
 Added a pointer under it recording that the 30 s target is deliberate as of today. Also left
 the older blog entries' 29 s guidance alone: they are dated memory of what was believed then,
 and rewriting them would destroy the only record of why the number moved.
+
+## video_script.md gains the simctl recording commands (2026-07-30)
+
+Josh asked which simulator to record the app-preview clips on, and the answer already
+existed — `app-store-preview-videos.md` § "Simulators to record from" names
+`iPhone 17 Pro Max` (1320 × 2868) and `iPad Pro 13-inch (M5)` (2064 × 2752). Both are
+installed on the iOS 26.3 runtime, so there was nothing to download. But the answer lived
+one document away from `video_script.md`, which is the file actually open while recording,
+so the follow-up was to put the invocations in the script itself — and in the sibling
+scripts in Konjugieren and Conjugar, neither of which has an `app-store-preview-videos.md`
+at all. For those two the script is now the *only* place the recording procedure exists.
+
+The one design decision worth recording: **resolve UDIDs by name at run time, don't paste
+them.** Konjugieren's `take_screenshots.sh` hardcodes `E73F9CB3-…` under the label
+`iPad Pro 13-inch (M4)`, and that UDID today belongs to a device *renamed*
+`Konjugieren iPad Screenshots`. The map still works, but its label is now a lie, which is
+exactly the failure a doc full of pasted UDIDs invites. The resolver added to all three
+scripts is:
+
+```bash
+udid() { xcrun simctl list devices available | sed -n "s/^ *$1 (\([0-9A-F-]\{36\}\)) .*/\1/p" | head -1; }
+```
+
+Verified before shipping it, including the prefix hazard — `iPhone 17` is a prefix of
+`iPhone 17 Pro Max`, and because the pattern requires the name to be followed by ` (` it
+returns the plain 17, not the Pro Max. The parentheses in `iPad Pro 13-inch (M5)` are
+literal in a BRE, so no escaping was needed there either.
+
+Two capture flags that are not the defaults and matter: `--codec h264` (simctl defaults to
+HEVC; H.264 masters drop into Final Cut without transcoding) and `--mask black` (otherwise
+the unmasked framebuffer is written, corners and all — and Apple rejects alpha, the flaw
+that sank the `version_4` screenshots). Also documented that `recordVideo` captures at
+native pixel resolution regardless of how small the Simulator window is drawn, that Ctrl-C
+is the only correct way to stop it (SIGINT is what finalizes the file), and that captures
+are variable-frame-rate up to 60 — the 30 fps cap is an export concern, not a capture one.
+
+Each script now ends its recording section with an `ffprobe` check for `1320,2868,1:1`,
+because dimensions are the one defect the export can't repair, and wrong dimensions are
+what got all four 2.0 previews rejected in the first place.
+
+Konjugieren needed one deviation: its fifth clip carries a standing note that a simulator
+bug forces real hardware, so `simctl` doesn't apply there. That section now says so
+explicitly and points at QuickTime movie recording, with the caveat that a physical device
+records at its own native size (changing the Spatial Conform the clip needs) and shows a
+live clock instead of the pinned 9:41.
+
+**Follow-up the same day: rewritten around hand recording.** Josh doesn't want to drive
+the recording from the shell — he launches the simulator and records by hand — and asked
+the question the whole section should have answered first: does the invocation affect App
+Store Connect at all, or is conformance purely a post-processing concern?
+
+Purely post. Worth stating plainly because it collapses a lot of anxiety: only two
+capture-time facts matter, and neither is a flag. *Which device* you record fixes the
+native pixel size and therefore the aspect and the Spatial Conform; and the capture has to
+be the device framebuffer rather than the Mac screen. Everything ASC enforces — 886 × 1920,
+SAR 1:1, H.264 High ≤ L4.0, ≤ 30 fps, 15–30 s, an AAC track — is imposed by Final Cut and
+the ffmpeg normalize, and the master violates nearly all of it by construction (Simulator
+writes HEVC, variable frame rate up to 60, at native size). So `simctl io recordVideo` and
+File ▸ Record Screen produce equally acceptable masters; the choice is convenience.
+
+So the sections in all three scripts were rewritten: `open -a Simulator` (or `simctl boot`
+plus `open`), Run from Xcode to install, `prep_screenshot_sim.sh` for language + 9:41, then
+**Simulator ▸ File ▸ Record Screen** / **Stop Recording**. Verified those menu items still
+exist in Xcode 26.3 by pulling the strings out of `Simulator.app/Contents/Resources/
+Base.lproj/MainMenu.nib` — "Record Screen" and "Stop Recording" are both there, and
+`Localizable.strings` confirms the output is named `Simulator Screen Recording %@`. The
+`simctl` route survives as one sentence, framed as scriptable-but-equivalent.
+
+One hazard the hand path introduces that the scripted one didn't have: **macOS screen
+recording is the trap.** ⌘⇧5 or QuickTime ▸ New Screen Recording aimed at the Simulator
+*window* captures at point size × display scale with window chrome baked in — on the order
+of 860 × 1864 instead of 1320 × 2868 — and no conform fixes that without upscaling.
+Simulator's own Record Screen is framebuffer-based and immune. That is the one way "record
+it by hand" produces a rejectable file.
+
+I had also written up a second hazard — that a silent capture carries no audio stream and
+`verify_store_media.sh` grades a missing AAC track as blocking — and Josh cut it: the
+previews always carry a music track and he always exports video and audio. The check is
+real, the scenario isn't, so the paragraph came back out of all three scripts. Worth
+remembering as a pattern: a verifier's failure modes are not automatically warnings worth
+printing, and guessing at someone's editing habits is how a playbook accumulates noise.
+
+**Correction, from Josh's actual captures.** He recorded the five English iPhone clips with
+Simulator's built-in Record Screen and left them in `~/Desktop/Clips/English/iPhone/`.
+Probing them settled a claim I had asserted in all three scripts without checking: the
+recordings are **H.264 High, Level 5.0**, not HEVC. The HEVC default I cited is
+`simctl io recordVideo`'s, documented in its `--help`; Simulator's GUI recorder evidently
+differs, which is why `--codec h264` matters on the `simctl` path and is moot on the menu
+path. All three docs corrected.
+
+The rest of the probe is a clean confirmation of the playbook: 1320 × 2868, SAR 1:1,
+yuv420p, no audio track, durations 11.8–38.9 s against 6/6/6/7/7 s targets. Right device,
+right size, generous trim slack.
+
+Frame pacing was the one thing that looked alarming and wasn't. Average frame rates ran
+9.8–52.5 fps, and clip 2 has a **7.3-second stretch with zero frames**. That is variable-
+rate capture working as designed — frames are written when pixels change — and Josh
+confirmed the scrolls varied in speed. Final Cut conforms it to 30 fps and holds the
+stills. Worth writing down because "avg_frame_rate = 9.8" on a 20-second clip reads like a
+broken capture and isn't; the diagnostic that actually answers the question is the
+per-second frame histogram, not the average.
+
+A frame-by-frame content check (four stills per clip, tiled into one contact sheet) matched
+the script: frequency-sorted browse, être with compound tenses through etymology, model
+browse → avoir (4-10), quiz with typed answers, Info → Indicatif Présent. Status bar pinned
+at 9:41 in every clip. One editorial flag raised for Josh: near the top of InfoBrowseView,
+where clip 5 begins, the Conjugation Tutor row reads "Apple Intelligence is still getting
+ready. Please try again later." — a true state of that simulator, and not something to show
+in a store preview.
+
+**Two switches flipped for a re-shoot, and a stale status corrected.** Clip 5 needed the
+tutor-unavailability row gone, and the mechanism already existed — no new code, just
+`TutorDisplay.tutorUnavailableRowEnabled = false` (plus `TipDisplay.tipsEnabled = false`,
+which the playbook always pairs with it, since a TipKit card popping into a browse clip
+would be worse than the tutor row). Verified in the built UI that CONCEPTS drops to its
+four concept rows with no ghost row or separator gap — the specific failure the kill-switch
+plan predicted for the iPhone `List` path. Both must go back to `true` after recording.
+
+While there: `prompts/tutor-row-killswitch.md` still read "Status: proposed, not
+implemented" — and `git log` shows why. Commit `05e8da6` (2026-07-18) *added that file and
+implemented the switch in the same commit*, so the status line was stale the moment it
+landed. A plan document that ships alongside its own implementation will always say
+"proposed" unless someone edits it in that commit, which is an easy thing to miss and a
+mildly dangerous one: the next reader either re-implements a shipped feature or, as nearly
+happened here, distrusts the mechanism and works around it. The file now states the
+implementing commit, marks itself as design rationale rather than a work order, and points
+at `docs/screenshot-playbook.md` for the operating instructions. Checked the one claim
+that could have been wishful — step 5's re-shoot — against `version_4/iPad_English/6.png`:
+CONCEPTS renders four cells, no tutor row.
