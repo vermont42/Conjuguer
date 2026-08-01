@@ -14,6 +14,18 @@ There are nine categories of screenshot:
 
 Create iPhone 6.9" screenshots using iPhone 17 Pro Max simulator. Create iPad 13" screenshots using iPad Pro 13-inch (M4) simulator.
 
+> **On the iPad sim name (2026-08-01).** Xcode 26 splits each iPad Pro into RAM variants, so
+> the device-type id carries a suffix — `…iPad-Pro-13-inch-M4-8GB`, not `…iPad-Pro-13-inch-M4`
+> — and only that variant gets the plain `iPad Pro 13-inch (M4)` name the driver matches (the
+> 16 GB one is named `… (16GB)`). A fresh Xcode install seeds an **M5** instead. An M5 is an
+> equivalent substitute if the M4 is ever unavailable: same 13-inch geometry, same
+> **2064 × 2752** capture, same App Store slot — the sibling app Conjugar moved to
+> `iPad Pro 13-inch (M5)` that day. It is not a drop-in for the *driver*, though: the device
+> name appears in six `case` arms (`DEVICES`, `tab_coords_for`, `wait_budget_for`,
+> `keyboard_is_visible`, `set_keyboard_state`, `dismiss_review_prompt`), and an arm that
+> misses just falls through to its `*)` default and fails somewhere far away.
+
+
 Create all screenshots with the iPhone and iPad running in both English and French modes.
 
 The end product is thirty-six screenshots.
