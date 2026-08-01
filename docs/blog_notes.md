@@ -1049,3 +1049,22 @@ Not verified: the iPad grid path. No iPadOS 26 runtime is installed — the avai
 simulators are iOS 17 and the install fails on `MinimumOSVersion`. The regular-width change
 is mechanical (`NavigationLink` → `Button` with the same label), but it is unexercised.
 219 tests pass; SwiftLint `--strict` is clean on every touched file.
+
+## réaliser etymology: loosen the opening comparison (2026-08-01)
+
+The `réaliser` gloss opened "Unlike the other verbs here, …", which asserted more than it
+could support: the etymology corpus now covers hundreds of verbs, several of which are
+also post-Latin French formations rather than direct inheritances, so "the other verbs
+here" was quietly false. Softened to "Unlike many commonly used verbs," in `en` and
+"À la différence de nombreux verbes courants," in `fr` — same rhetorical setup for the
+"not inherited, but built from ~réel~ + ~-iser~" point, without the universal claim.
+
+Edited `Conjuguer/Models/Etymologies.json` via Python (raw-text replace with a
+`count == 1` assertion per language, then `json.load` to validate) rather than the Edit
+tool. The Etymologies corpus is plain JSON, not a String Catalog, but it carries the same
+hazard: the prose is full of curly quotes and guillemets that are fine, while any ASCII
+`"` touched through a rendered-text editor would land unescaped.
+
+Noticed in passing: the working tree also showed `Localizable.xcstrings` losing an empty
+`"%@%%"` entry — not from this change, and consistent with the documented Xcode-IDE
+re-serialization. Left alone rather than reverted, per the catalog guidance.
