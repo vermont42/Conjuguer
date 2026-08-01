@@ -3358,6 +3358,40 @@
         }
       }
     },
+    "VerbBrowseView.verbCountPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ verbs"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ verbes"
+          }
+        }
+      }
+    },
+    "VerbBrowseView.verbCountSingular" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ verb"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ verbe"
+          }
+        }
+      }
+    },
     "VerbSort.alphabetical" : {
       "extractionState" : "manual",
       "localizations" : {

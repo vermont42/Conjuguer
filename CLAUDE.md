@@ -78,9 +78,17 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `picker_settings_quizDifficulty` | Quiz-difficulty segmented `Picker` in `SettingsView` | 2 segments (Regular, Ridiculous). |
 | `picker_settings_pronounGender` | Pronoun-gender segmented `Picker` in `SettingsView` | 3 segments (Feminine, Masculine, Both). |
 | `verb_example` | Example card in `VerbView` (below etymology) | Wraps the FR sentence, EN translation, source attribution, and nested *Chanson de Roland* example. |
+| `verb_browse_count` | "N VERBS" header above the verb collection | Hidden when the search yields nothing. |
+| `verb_row_<infinitif>` | Row `Button` in `VerbBrowseView` (list and grid) | e.g. `verb_row_avoir`. |
+| `model_row_<exemplar>` | Row `Button` in `ModelBrowseView` (list and grid) | e.g. `model_row_avoir`. |
 
-List rows (verbs, models, info headings) and tab buttons are not yet annotated —
-drive them by `AXLabel` / `tap_tab.sh` for now.
+Put a row's identifier on the tappable `Button`, **not** on the row content inside its
+label: SwiftUI merges the two elements and concatenates their identifiers, yielding
+`verb_row_avoir-verb_row_avoir`, which `tap_id.sh` can't match.
+
+Info headings and tab buttons are not yet annotated — drive them by `AXLabel` /
+`tap_tab.sh` for now. The verb-search field is unannotated too; tap it at its
+`describe_ui` frame (≈ `201,191` on iPhone 17) before `axe type`.
 
 #### iOS 26 control caveats specific to this app
 

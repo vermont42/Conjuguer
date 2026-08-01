@@ -15,6 +15,7 @@ struct ModelBrowseView: View {
   @State private var store: BrowseStore<ModelAndDecorator, ModelSort>?
   @State private var searchText = ""
   @State private var searchResults: [ModelAndDecorator] = []
+  @State private var selectedModel: VerbModel?
   private let exploreModelsTip = ExploreModelsTip()
 
   var body: some View {
@@ -34,32 +35,39 @@ struct ModelBrowseView: View {
     }
   }
 
-  @ViewBuilder
   private func content(store: BrowseStore<ModelAndDecorator, ModelSort>) -> some View {
     @Bindable var store = store
     @Bindable var world = world
 
-    NavigationStack {
+    let sortPicker = Picker("", selection: $store.sort) {
+      ForEach(ModelSort.allCases, id: \.self) { type in
+        Text(type.displayName).tag(type)
+      }
+    }
+    .pickerStyle(.segmented)
+    .accessibilityLabel(Text(L.BrowseView.sortOrder))
+
+    return NavigationStack {
       ZStack {
         Color.customBackground
 
         VStack {
-          Picker("", selection: $store.sort) {
-            ForEach(ModelSort.allCases, id: \.self) { type in
-              Text(type.displayName).tag(type)
-            }
+          if horizontalSizeClass == .regular {
+            sortPicker
           }
-          .pickerStyle(.segmented)
-          .accessibilityLabel(Text(L.BrowseView.sortOrder))
 
           TipView(exploreModelsTip)
 
           modelCollection
+
+          if horizontalSizeClass != .regular {
+            sortPicker
+          }
         }
         .padding()
       }
       .navigationTitle(L.Navigation.models)
-      .navigationDestination(for: VerbModel.self) { model in
+      .navigationDestination(item: $selectedModel) { model in
         ModelView(model: model)
       }
       .searchable(text: $searchText, prompt: L.ModelBrowseView.searchPrompt)
@@ -87,11 +95,14 @@ struct ModelBrowseView: View {
       ScrollView {
         LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
           ForEach(searchResults) { modelAndDecorator in
-            NavigationLink(value: modelAndDecorator.model) {
+            Button {
+              selectedModel = modelAndDecorator.model
+            } label: {
               modelRow(modelAndDecorator)
                 .card()
             }
             .buttonStyle(.plain)
+            .accessibilityIdentifier(Self.rowIdentifier(modelAndDecorator))
           }
         }
         .padding(.vertical, Layout.defaultSpacing)
@@ -104,9 +115,13 @@ struct ModelBrowseView: View {
       }
     } else {
       List(searchResults) { modelAndDecorator in
-        NavigationLink(value: modelAndDecorator.model) {
+        Button {
+          selectedModel = modelAndDecorator.model
+        } label: {
           modelRow(modelAndDecorator)
         }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier(Self.rowIdentifier(modelAndDecorator))
         .listRowBackground(Color.customBackground)
       }
       .listStyle(.plain)
@@ -120,16 +135,22 @@ struct ModelBrowseView: View {
   }
 
   private func modelRow(_ modelAndDecorator: ModelAndDecorator) -> some View {
-    HStack {
-      Text(modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator)
-        .tableText()
-      if let irregularity = modelAndDecorator.irregularityBadge {
-        Spacer()
-        IrregularityBadge(percent: irregularity)
-      }
-    }
-    .frenchPronunciation()
-    .accessibilityIdentifier("model_row_\(modelAndDecorator.model.exemplar)")
+    BrowseRow(
+      title: modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator,
+      badge: modelAndDecorator.irregularityBadge.map { irregularityBadge(percent: $0) }
+    )
+  }
+
+  private static func rowIdentifier(_ modelAndDecorator: ModelAndDecorator) -> String {
+    "model_row_\(modelAndDecorator.model.exemplar)"
+  }
+
+  private func irregularityBadge(percent: Int) -> BrowseRow.Badge {
+    BrowseRow.Badge(
+      text: "\(percent)%",
+      tint: percent == 0 ? .customBlue : .customRed,
+      accessibilityLabel: Text("\(percent)% \(L.ModelView.irregular)")
+    )
   }
 
   private func updateSearchResults(playSoundIfEmpty: Bool) {

@@ -976,3 +976,76 @@ implementing commit, marks itself as design rationale rather than a work order, 
 at `docs/screenshot-playbook.md` for the operating instructions. Checked the one claim
 that could have been wishful — step 5's re-shoot — against `version_4/iPad_English/6.png`:
 CONCEPTS renders four cells, no tutor row.
+
+## Browse rows, unified — and the chevron that wouldn't leave (2026-08-01)
+
+Four small asks against `VerbBrowseView` and `ModelBrowseView`, from
+`prompts/verb_browse_updates.md`, plus a fifth that arrived mid-flight.
+
+**The sort picker moved to the bottom on iPhone**, mirroring Conjugar (Josh's Spanish
+sibling app), where the Frequency/Alphabetical control sits just above the tab bar — a
+thumb's reach from where the hand already is, instead of a screen away at the top. The
+implementation is a plain `if horizontalSizeClass == .regular` fork inside the `VStack`:
+the picker is bound once into a local `let` and placed either above the tip or after the
+collection, so there's no duplicated `Picker` body. iPad keeps it at the top, where it
+reads as a filter over the adaptive grid; on a large canvas, banishing it to the bottom
+edge puts it nowhere near the content it governs. `ModelBrowseView`'s picker was initially
+left at the top, because the prompt named only `VerbBrowseView`; that made the two browse
+screens inconsistent, so it was flagged rather than changed unilaterally, and Josh asked
+for it to move too. Same treatment, same size-class fork — the Irregularity /
+Alphabetical / Identifier control now sits above the tab bar on iPhone.
+
+**The chevrons were the interesting part.** `List` adds a disclosure indicator to any row
+containing a `NavigationLink`, and no modifier turns it off; the folklore fix is a `ZStack`
+with an opacity-0 link behind the row, which works but leaves the row's real content
+outside the tappable/announced element. The deterministic fix was to stop using
+`NavigationLink` in these two screens entirely: rows are `Button`s that set a
+`@State selectedVerb` / `selectedModel`, and the push happens through
+`.navigationDestination(item:)` (iOS 17+). Both the compact `List` and the regular-width
+`LazyVGrid` use the same mechanism now, so `navigationDestination(for:)` is gone from both
+files. VoiceOver reads the row and announces "Button"; the chevron is gone.
+
+That change surfaced a latent accessibility bug. With the identifier on the row *inside*
+the button's label, SwiftUI merges the two elements and **concatenates their identifiers** —
+`describe_ui` showed `verb_row_avoir-verb_row_avoir`, which means `tap_id.sh verb_row_avoir`
+had never worked, chevrons or not. Moving `.accessibilityIdentifier` onto the `Button`
+itself (via a small `rowIdentifier(_:)` helper, since it's applied in both the list and grid
+branches) produced clean ids, verified by tapping through to `VerbView` and `ModelView`.
+CLAUDE.md's identifier table gained the row ids and the gotcha.
+
+**The shared row** is `BrowseRow` (`title`, optional `subtitle`, optional `Badge` of text +
+tint + optional a11y label). The old `IrregularityBadge` in `ModelView.swift` was its only
+badge implementation and is now dead code, deleted; `irregularityBadgeFont` became
+`browseBadgeFont`, since verb ranks wear it too. The verb rank picked up that same pill
+treatment — Conjuguer blue on a 15%-opacity capsule, vertically centered (the old row used
+`HStack(alignment: .firstTextBaseline)`, which pinned "#1" to the infinitif's baseline and
+left it hanging above the two-line row's center). A nil accessibility label means the badge
+is hidden from VoiceOver, which is what the rank wants (it's already in the row's visual
+order and adds nothing spoken); the irregularity badge keeps "73% Irregular".
+
+**Then: a count header, "6,320 VERBS".** Both sibling apps show one, and the number has to
+be locale-formatted — French groups with a narrow no-break space, not a comma. First
+attempt used a String Catalog plural variation selecting on a second `%lld` argument while
+rendering `%2$@` (the formatted string). The build refused it outright: *"Plural variation
+requires referencing the number in the string… use separate top-level strings for one and
+greater than one."* Which is the answer — `verbCountSingular` / `verbCountPlural`, with the
+`count == 1` test in `L.swift`. That test is correct for both shipped languages (French
+would need `count <= 1` if zero were reachable, since French treats 0 as singular, but the
+header is hidden when the search finds nothing). Verified in the simulator: `6,320 VERBS`
+in English, `6 320 verbes` in French (narrow space confirmed via `describe_ui`), and
+`1 verb` after narrowing the search to `rabaisser`.
+
+**The count header was in the wrong container.** Sitting in the screen's `VStack`, above
+the `List`, it was outside the scroll view — so a rubber-band drag at the top of the list,
+which expands `.searchable`'s field downward, drew the search field straight through
+"6,320 VERBS". Fixed by moving it *into* the scrolling content: the first row of the
+`List` (`listRowSeparator(.hidden)`, matching row background) in compact width, and the
+first child of the `ScrollView` above the `LazyVGrid` in regular width. A pinned `Section`
+header would have been the wrong fix — it would stop overlapping the search bar, but it
+still wouldn't move with the verbs, which is what Josh asked for. Verified by dragging the
+list: the count scrolls out of view along with the first rows.
+
+Not verified: the iPad grid path. No iPadOS 26 runtime is installed — the available iPad
+simulators are iOS 17 and the install fails on `MinimumOSVersion`. The regular-width change
+is mechanical (`NavigationLink` → `Button` with the same label), but it is unexercised.
+219 tests pass; SwiftLint `--strict` is clean on every touched file.

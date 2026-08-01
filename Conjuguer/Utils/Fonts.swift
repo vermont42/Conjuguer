@@ -27,4 +27,4 @@ let scoreFont = Font.custom(workSansSemiBold, size: 64.0, relativeTo: .largeTitl
 let gridEndingFont = Font.custom(workSansRegular, size: 16.0, relativeTo: .body)
 let gridPronounFont = Font.custom(workSansRegular, size: 14.0, relativeTo: .footnote)
 let gridTenseLabelFont = Font.custom(workSansSemiBold, size: 14.0, relativeTo: .footnote)
-let irregularityBadgeFont = Font.custom(workSansSemiBold, size: 14.0, relativeTo: .caption)
+let browseBadgeFont = Font.custom(workSansSemiBold, size: 14.0, relativeTo: .caption)

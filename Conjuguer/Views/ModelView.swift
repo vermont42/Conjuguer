@@ -251,24 +251,6 @@ struct ModelView: View {
   }
 }
 
-struct IrregularityBadge: View {
-  let percent: Int
-
-  private var tint: Color {
-    percent == 0 ? .customBlue : .customRed
-  }
-
-  var body: some View {
-    Text("\(percent)%")
-      .font(irregularityBadgeFont)
-      .foregroundStyle(tint)
-      .padding(.horizontal, 10)
-      .padding(.vertical, 3)
-      .background(Capsule().fill(tint.opacity(0.15)))
-      .accessibilityLabel(Text("\(percent)% \(L.ModelView.irregular)"))
-  }
-}
-
 #if DEBUG
 #Preview {
   PreviewSupport.bootstrap()

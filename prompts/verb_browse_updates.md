@@ -1,0 +1,6 @@
+VerbBrowseView and ModelBrowseView can be improved. Please do the following:
+
+1. On iPhone, on VerbBrowseView, move the sort picker to just above the tab bar. See ~/Downloads/conjugar.png , which is from Conjuguer's sibling app, Conjugar, which lives, for now, in ../Conjugar.mig . If the current iPad sort picker is in a good place, leave it there. If you think it should move, move it.
+2. Inspired by ModelBrowseView, on VerbBrowseView, vertically center each rank in its row, make the rank Conjuguer blue, and back it with a semitransparent pill.
+3. Remove the chevrons (>) from VerbBrowseView and ModelBrowseView. I understand the purpose of the chevrons, but those rows are obviously tappable, so the chevrons just add visual clutter.
+4. At this point, VerbBrowseView.verbRow and ModelBrowseView.modelRow are quite similar. The differences are whether there's a dim gray Text, what's in the Texts, and the color of the pill and its background. Unless there is some reason I'm not seeing, make a shared function that both VerbBrowseView and ModelBrowseView can share.

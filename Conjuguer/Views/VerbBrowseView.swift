@@ -15,6 +15,7 @@ struct VerbBrowseView: View {
   @State private var store: BrowseStore<Verb, VerbSort>?
   @State private var searchText = ""
   @State private var searchResults: [Verb] = []
+  @State private var selectedVerb: Verb?
   private let tryQuizTip = TryQuizTip()
 
   var body: some View {
@@ -34,33 +35,40 @@ struct VerbBrowseView: View {
     }
   }
 
-  @ViewBuilder
   private func content(store: BrowseStore<Verb, VerbSort>) -> some View {
     @Bindable var store = store
     @Bindable var world = world
 
-    NavigationStack {
+    let sortPicker = Picker("", selection: $store.sort) {
+      ForEach(VerbSort.allCases, id: \.self) { type in
+        Text(type.displayName).tag(type)
+      }
+    }
+    .pickerStyle(.segmented)
+    .accessibilityIdentifier("verb_browse_sort")
+    .accessibilityLabel(Text(L.BrowseView.sortOrder))
+
+    return NavigationStack {
       ZStack {
         Color.customBackground
 
         VStack {
-          Picker("", selection: $store.sort) {
-            ForEach(VerbSort.allCases, id: \.self) { type in
-              Text(type.displayName).tag(type)
-            }
+          if horizontalSizeClass == .regular {
+            sortPicker
           }
-          .pickerStyle(.segmented)
-          .accessibilityIdentifier("verb_browse_sort")
-          .accessibilityLabel(Text(L.BrowseView.sortOrder))
 
           TipView(tryQuizTip)
 
           verbCollection
+
+          if horizontalSizeClass != .regular {
+            sortPicker
+          }
         }
         .padding()
       }
       .navigationTitle(L.Navigation.verbs)
-      .navigationDestination(for: Verb.self) { verb in
+      .navigationDestination(item: $selectedVerb) { verb in
         VerbView(verb: verb)
       }
       .searchable(text: $searchText, prompt: L.VerbBrowseView.searchPrompt)
@@ -89,13 +97,19 @@ struct VerbBrowseView: View {
   private var verbCollection: some View {
     if horizontalSizeClass == .regular {
       ScrollView {
+        verbCount
+          .padding(.top, Layout.defaultSpacing)
+
         LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
           ForEach(searchResults) { verb in
-            NavigationLink(value: verb) {
+            Button {
+              selectedVerb = verb
+            } label: {
               verbRow(verb)
                 .card()
             }
             .buttonStyle(.plain)
+            .accessibilityIdentifier(Self.rowIdentifier(verb))
           }
         }
         .padding(.vertical, Layout.defaultSpacing)
@@ -107,11 +121,21 @@ struct VerbBrowseView: View {
         }
       }
     } else {
-      List(searchResults) { verb in
-        NavigationLink(value: verb) {
-          verbRow(verb)
+      List {
+        verbCount
+          .listRowBackground(Color.customBackground)
+          .listRowSeparator(.hidden)
+
+        ForEach(searchResults) { verb in
+          Button {
+            selectedVerb = verb
+          } label: {
+            verbRow(verb)
+          }
+          .buttonStyle(.plain)
+          .accessibilityIdentifier(Self.rowIdentifier(verb))
+          .listRowBackground(Color.customBackground)
         }
-        .listRowBackground(Color.customBackground)
       }
       .listStyle(.plain)
       .scrollContentBackground(.hidden)
@@ -123,26 +147,26 @@ struct VerbBrowseView: View {
     }
   }
 
-  private func verbRow(_ verb: Verb) -> some View {
-    HStack(alignment: .firstTextBaseline) {
-      VStack(alignment: .leading, spacing: 2) {
-        Text(verb.infinitifWithPossibleExtraLetters)
-          .tableText()
-          .frenchPronunciation()
-
-        Text(verb.translation)
-          .smallLabel()
-          .englishPronunciation()
-      }
-
-      if let frequency = verb.frequency {
-        Spacer()
-        Text("#\(frequency)")
-          .smallLabel()
-          .accessibilityHidden(true)
-      }
+  @ViewBuilder
+  private var verbCount: some View {
+    if !searchResults.isEmpty {
+      Text(L.VerbBrowseView.verbCount(count: searchResults.count))
+        .subheadingLabel()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityIdentifier("verb_browse_count")
     }
-    .accessibilityIdentifier("verb_row_\(verb.infinitif)")
+  }
+
+  private func verbRow(_ verb: Verb) -> some View {
+    BrowseRow(
+      title: verb.infinitifWithPossibleExtraLetters,
+      subtitle: verb.translation,
+      badge: verb.frequency.map { BrowseRow.Badge(text: "#\($0)", tint: .customBlue) }
+    )
+  }
+
+  private static func rowIdentifier(_ verb: Verb) -> String {
+    "verb_row_\(verb.infinitif)"
   }
 
   private func updateSearchResults(playSoundIfEmpty: Bool) {

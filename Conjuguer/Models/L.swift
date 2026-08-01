@@ -52,6 +52,20 @@ enum L {
     static var searchPrompt: String {
       String(localized: "VerbBrowseView.searchPrompt")
     }
+
+    // Separate singular and plural keys rather than a String Catalog plural variation: the
+    // rendered count is a locale-formatted string, and a variation can only select on the
+    // number it also interpolates. English and French agree that only exactly 1 is singular,
+    // and the caller omits the label entirely at 0.
+    static func verbCount(count: Int) -> String {
+      let formattedCount = count.formatted()
+
+      if count == 1 {
+        return String(localized: "VerbBrowseView.verbCountSingular", defaultValue: "\(formattedCount) verb")
+      } else {
+        return String(localized: "VerbBrowseView.verbCountPlural", defaultValue: "\(formattedCount) verbs")
+      }
+    }
   }
 
   enum ModelBrowseView {
