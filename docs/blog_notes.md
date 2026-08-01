@@ -1068,3 +1068,102 @@ hazard: the prose is full of curly quotes and guillemets that are fine, while an
 Noticed in passing: the working tree also showed `Localizable.xcstrings` losing an empty
 `"%@%%"` entry — not from this change, and consistent with the documented Xcode-IDE
 re-serialization. Left alone rather than reverted, per the catalog guidance.
+
+## iPad grid path verified at last — iPadOS 26.3 is installed now (2026-08-01)
+
+The previous entry closed with "the iPad grid path is unverified: no iPadOS 26 runtime is
+installed, the available iPad simulators are iOS 17, and the install fails on
+`MinimumOSVersion`." That is no longer true — iOS 26.3 (23D8133) is present with eight iPad
+devices, so the regular-width path finally got exercised on iPad Pro 13-inch (M5).
+
+Everything the last change touched holds up on iPad. The three-column `LazyVGrid` renders,
+`verb_browse_count` reads "6,320 VERBS" above it, and 72 `verb_row_<infinitif>` buttons carry
+clean single identifiers — no `verb_row_x-verb_row_x` concatenation, so the "put the id on the
+`Button`, not the label" rule survives the grid path too. The scroll question the iPhone work
+raised answers correctly here: after a swipe, `verb_browse_count` moves from y=201 to y=-738.5
+while `verb_browse_sort` stays pinned at y=154. The count scrolls with the verbs; the sort
+control is chrome. Tapping a grid cell pushes `VerbView`, confirming the `NavigationLink` →
+`Button` conversion works in regular width.
+
+Two traps worth recording, both costing a cycle:
+
+**The skill's verify-half scripts cannot address a simulator whose name contains parentheses.**
+`launch_app.sh` and `_resolve_udid.sh` interpolate `TARGET_SIM` straight into an ERE —
+`grep -E "^[[:space:]]+${TARGET_SIM} \("` — so "iPad Pro 13-inch (M5)" is parsed with `(M5)` as
+a capture group and matches nothing; the script reports "simulator not found" for a device that
+plainly exists. `build_app.sh` is unaffected because `xcodebuild -destination name=` compares
+literally, which makes the failure mode confusing: the build succeeds against the very device
+the launcher then claims is missing. Every iPad and every recent iPhone Pro has parens in its
+name, so this blocks the whole verify half on those devices. Worked around for the verification
+itself by driving `simctl`/`axe` directly against the UDID, then fixed upstream the same day
+(see the next entry).
+
+**`axe describe-ui` fails for the first ~10–25 s after a simulator boots, and says something
+untrue about why.** It exits 1 with "No translation object returned for simulator. This means
+you have likely specified a point onscreen that is invalid or invisible due to a fullscreen
+dialog" — no dialog anywhere, and no point had been specified. `axe screenshot` keeps working
+throughout, which is what makes it feel like a UI problem: screenshots go through the device,
+the accessibility bridge is a separate channel that simply is not up yet.
+
+The first diagnosis here was wrong and is worth recording as such, because it was wrong in a
+seductive way. Running an AppleScript `AXRaise` on the device's window appeared to fix it
+instantly, so the entry originally claimed describe-ui needs the target window raised rather
+than merely present, and filed it as a sibling of the windowless-simulator trap in
+`prep_screenshot_sim.sh`. That survived one confirming observation and no disconfirming ones.
+Testing it properly the next hour killed it: describe-ui works fine with the window backgrounded,
+with it hidden, and with it minimized. What the AXRaise detour actually bought was *time* — two
+tool round-trips, several seconds — during which the bridge finished coming up. A post-hoc
+`simctl shutdown && boot` plus a poll loop showed 19 consecutive rejections before the first
+success, which is the real shape of it.
+
+The cost was never the wait. Every call site in the skill discarded stderr and captured stdout,
+so a bridge that was merely not ready yet arrived downstream as an *empty AXTree* — which the
+skill's own docs teach agents to read as launch-time modal gating. The failure mode is an agent
+hunting for a review prompt or permission alert that does not exist.
+
+Bonus: the first on-screen row after scrolling happened to be `réaliser`, so the same pass
+confirmed the reworded etymology renders — "Unlike many commonly used verbs, ~réaliser~ is not a
+direct inheritance from Latin…" — with markup and the Flaubert *Madame Bovary* example intact.
+
+## Fixing both simulator traps upstream in ios-build-verify 0.3.2 (2026-08-01)
+
+Both traps from the iPad verification got fixed in `../ios-build-verify` rather than worked
+around here. Josh released them as 0.3.2 and bumped the plugin version.
+
+**Literal device-name matching** (`scripts/_sim_udid.sh`, new). One awk pass replaces the
+`grep -E` interpolation, comparing the name as text and requiring the UDID column's leading
+`" ("` so `iPhone 17` still refuses to resolve `iPhone 17 Pro`. `tail -1` keeps preferring the
+newest runtime. Both resolution sites — `_resolve_udid.sh` (booted) and `launch_app.sh`
+(available) — now share it instead of duplicating a subtle pattern.
+
+**A retry-aware AXTree reader** (`scripts/_axe_tree.sh`, new). `axe_describe_ui` retries while
+AXe reports the bridge unreachable and passes every other error straight through with its stderr
+intact, so a genuinely-not-booted device still fails in about a second. All 15 raw
+`axe describe-ui` calls across 12 scripts route through it; past that helper, an empty tree
+really is an empty tree. `_resolve_udid.sh` sources it, so anything resolving a UDID gets it
+for free.
+
+Two things worth remembering from the fixing:
+
+The first version of the wrapper returned success on *every* error path. The cause is a bash
+subtlety worth internalizing: `$?` read after `fi` carries the status of the **if statement**
+(0 when no branch ran), not of the condition. The status has to be captured inside an `else`.
+The bug was invisible in the happy path and would have silently converted every hard failure
+into "empty tree, exit 0" — strictly worse than the problem being fixed.
+
+Verification did not actually require the version bump. The skill scripts read their config from
+`$(pwd)/.claude/ios-build-verify.config.sh` and resolve their helpers from `BASH_SOURCE`, so
+running the *source repo's* scripts with the cwd set to Conjuguer exercises the edits against
+this app while bypassing the plugin cache entirely. That gave a real end-to-end pass — cold-boot
+launch on the iPad, `describe_ui` in both forms, `verify_screen_loaded`, `verify_label_visible`,
+`read_value` including its exit-4 classification, `tap_tab`, `tap_id`, `verify_segment --point`,
+plus an iPhone 17 regression and a bogus-name exit 3 — before anything was released.
+
+**Housekeeping found along the way:** `~/.claude/skills/ios-build-verify` was a symlink pinned to
+the *0.3.1 cache directory*, which is why the skill list showed `ios-build-verify` twice. It
+silently served pre-fix scripts (regex bug included) and a SKILL.md 2.4 KB short of current, and
+being pinned to a version directory it could never pick up an update. Deleted; the plugin
+install covers Conjuguer, Konjugieren, and Calculator3 at the current version. What saved this
+project in practice is the `IBV_SCRIPTS` resolver in CLAUDE.md searching
+`~/.claude/plugins/marketplaces` rather than `~/.claude` broadly — written to avoid picking an
+arbitrary cached version, and it dodged this too.
