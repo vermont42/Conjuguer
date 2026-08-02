@@ -1318,3 +1318,14 @@ One machine-state note for future sessions: `ios-build-verify` is now installed 
 scope in addition to the per-project scope this repo, Konjugieren, and Calculator3 each had —
 that is `claude plugin install`'s default, and it covers every iOS project from one record. The
 now-redundant project-scope entries were left in place; consolidating them is a separate call.
+
+Same-session follow-up: the consolidation happened after all. The three project-scope entries
+are gone and `ios-build-verify` is installed at user scope only, which `~/.claude/settings.json`
+enables globally. Two things worth knowing if this is ever redone. `claude plugin uninstall`
+defaults to `--scope user`, so removing a *project* entry requires an explicit `-s project` —
+the bare command would have removed the one record worth keeping. And the uninstall edits the
+repo: it dropped `"ios-build-verify@ios-build-verify": true` from `enabledPlugins` in this
+repo's checked-in `.claude/settings.json`, which is the change committed alongside this note.
+The `extraKnownMarketplaces` block in that same file was left alone, correctly — it says where
+the marketplace lives, not that the plugin is installed, so a fresh clone still knows where to
+fetch the skill from.
