@@ -270,6 +270,26 @@ Conjuguer is an iOS app for learning French verb conjugations. It conjugates 6,3
 
 ### Project Layout (synchronized folders)
 
+See [`docs/project-structure.md`](docs/project-structure.md) for the full annotated
+directory tree.
+
+**Cache maintenance:** When you add, remove, or rename a source file, update
+`docs/project-structure.md` to match. It is a cache — future contexts rely on it to orient
+without re-reading the tree, so staleness has a real cost. A *wrong* entry costs more than
+a *missing* one, because it gets believed; prioritize fixing renames and repurposed files.
+
+`scripts/check_docs.py` enforces this — run it after moving, renaming, or adding source
+files, or after editing docs:
+
+```bash
+python3 scripts/check_docs.py
+```
+
+It asserts three things a machine can settle: every relative Markdown link resolves, every
+source file appears in `docs/project-structure.md`, and every file that doc names still
+exists. Counts are deliberately *not* checked — `docs/blog_notes.md` and `prompts/`
+describe the tree as it was, and asserting against them would report history as breakage.
+
 The project uses **Xcode synchronized folders** (`PBXFileSystemSynchronizedRootGroup`),
 not classic groups: the two target folders `Conjuguer/` and `ConjuguerTests/` are each
 synced as a root group, and Xcode mirrors their on-disk contents into the targets by file

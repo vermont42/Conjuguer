@@ -1167,3 +1167,119 @@ install covers Conjuguer, Konjugieren, and Calculator3 at the current version. W
 project in practice is the `IBV_SCRIPTS` resolver in CLAUDE.md searching
 `~/.claude/plugins/marketplaces` rather than `~/.claude` broadly — written to avoid picking an
 arbitrary cached version, and it dodged this too.
+
+## KillSwitches.swift gains an onboarding switch (2026-08-02)
+
+The screenshot kill switches — `TipDisplay.tipsEnabled` and
+`TutorDisplay.tutorUnavailableRowEnabled` — had been living at the top of
+`Models/ConjuguerTips.swift`, which was where the first one (tips) naturally belonged and
+where the second one accreted by proximity. They now live together in
+`Utils/KillSwitches.swift`, matching Konjugieren's layout. Pure move; the enum names are
+unchanged, so no call site moved with them. (The file needs no `import Foundation`: two
+enums of `Bool` constants depend on nothing but the language.)
+
+The gap that prompted the move: Konjugieren has a **third** switch, `OnboardingDisplay
+.onboardingEnabled`, and Conjuguer did not. Conjuguer has the same first-launch
+`fullScreenCover` in `ConjuguerApp`, gated only on `!Current.settings.hasSeenOnboarding`
+— so on a freshly-installed simulator the welcome tour auto-presents over whatever screen
+a screenshot sweep or App Store preview recording is trying to capture. The fix is the
+same one-token change Konjugieren uses:
+
+```swift
+get: { OnboardingDisplay.onboardingEnabled && !Current.settings.hasSeenOnboarding },
+```
+
+Two properties of that placement are deliberate and worth not undoing later. Only the
+*automatic* presentation consults the switch — the Settings "Show Onboarding" button
+presents `OnboardingView(isReshow: true)` directly and ignores it, so the flow stays
+manually reachable while the switch is off (an App Store reviewer can still find it).
+And because the cover never presents when the switch is `false`, `hasSeenOnboarding` is
+never written — the sweep doesn't quietly consume the user's first-launch state, so
+flipping the switch back to `true` restores the real behavior on the same install.
+
+`docs/video_script.md` already carried the pre-recording checklist line "ensure that
+values in `KillSwitches.swift` are `false`", phrased generically over the file rather
+than naming each switch — so it covers the new one without an edit. That phrasing was
+luck rather than foresight, but it's the right shape and should stay generic.
+
+Build passes. Not verified in the simulator: exercising it means flipping the switch,
+rebuilding, and uninstalling the app to reset `hasSeenOnboarding`, and the logic is a
+single boolean `&&` on a binding that already worked.
+
+## docs/project-structure.md: porting Konjugieren's file index (2026-08-02)
+
+Josh asked me to add `KillSwitches.swift` to "the index of files" and guessed it lived in
+CLAUDE.md or something CLAUDE.md references. It doesn't — not in this repo. Konjugieren
+has `docs/project-structure.md`, a 299-line annotated tree wired into its CLAUDE.md with a
+"this doc is a cache, update it on add/remove/rename" rule. Conjuguer had no counterpart;
+the only directory tree in the repo was a small one inside the screenshot playbook. Worth
+recording because the misremembering is the interesting part: a doc's existence doesn't
+announce itself across repos, and two sibling apps that share an author, a skill, and most
+of an architecture will keep inviting exactly this confusion.
+
+What the move *did* break, and what nobody would have noticed until it silently misfired:
+`docs/screenshot-playbook.md` referenced `Conjuguer/Models/ConjuguerTips.swift` in eleven
+places, including the copy-paste `sed` commands an operator runs before a sweep. The doc
+itself warns two paragraphs above those commands that `sed` exits 0 when its pattern
+matches nothing — so a stale *path* fails the same quiet way a renamed *switch* would, and
+the sweep proceeds with tips and the tutor row still on. Repointed all eleven, added the
+new onboarding switch to the table and to both `sed` blocks, and verified the commands
+round-trip against the real file (flip all three to `false`, restore, `diff` clean).
+Deliberately left stale: `prompts/tutor-row-killswitch.md` and the journal's own account of
+where the switches used to live. Those are records of what was true then, not instructions.
+
+Then ported the index. 166 Swift files, and the annotations are the expensive part — the
+tree regenerates with one `find`, but "GameState+Henyard.swift — Mechanic 4, La
+Basse-Cour" required opening the file. That asymmetry is the argument for the doc and also
+the argument for keeping it honest: the descriptions are what a future session will believe
+instead of reading. Two entries exist specifically to stop a wrong guess a filename invites
+— `frequencies.xml` looks load-bearing and is bundled but never parsed, and
+`VerbModelTests.swift` looks hand-written and is generated. Verified coverage
+programmatically rather than by eye: extracted every `*.swift` token from the doc and
+diffed it against `find` output, both directions empty.
+
+One nuance worth carrying forward, now also written into CLAUDE.md: the two staleness modes
+are not equally bad. A missing entry costs a session one `find` — it sees the gap and reads
+the file. A wrong entry gets believed. So when the budget for maintenance is short, fix
+renames and repurposed files first and let adds-and-deletes drift.
+
+## scripts/check_docs.py: making the index-staleness rule enforceable (2026-08-02)
+
+Ported the link-and-coverage subset of Konjugieren's `check_docs.py`, and backported to
+Konjugieren's CLAUDE.md the one sentence Conjuguer's cache note had gained in the
+meantime — that a missing index entry and a wrong one are not equally bad. The two repos'
+notes now differ only in Conjuguer's pointer to this script.
+
+Three checks, all chosen because they are true-or-false regardless of when the text was
+written: relative Markdown links resolve; every source file appears in
+`project-structure.md`; every file that doc names still exists. Konjugieren's version also
+asserts corpus counts, commit hashes, and a licensing invariant. Those were deliberately
+left out — not as a first increment, but because the count check there needs a hand-maintained
+CACHE_FILES allowlist to avoid reporting `blog_notes.md` and `roadmap.md` as broken for
+faithfully recording what was true in June. Conjuguer has the same hazard in `prompts/`,
+whose archived session prompts describe the tree as it stood. A count check here would need
+the same allowlist, so it should be added deliberately or not at all.
+
+The first run failed three times, and all three were the checker's fault rather than the
+docs'. The README opens with an image carrying a title attribute —
+`![Conjuguer](Images/Splash.png "Conjuguer's Launch Screen")` — and a naive `[^)]+` target
+swallows the quoted title. `code-review-suggestions-union.md` *describes* Markdown, so the
+literal `[text](url)` appears inside backticks; stripping inline code spans before scanning
+fixes that precisely. And `corpus/grokked/chanson.md` is Old French verse where a bracketed
+gloss abutting a parenthesis is ordinary orthography: line 1811 reads `cur[uçus](ius)`,
+which is link syntax by coincidence and unparseable-around in principle. `corpus/` is source
+text rather than prose about the app, so it joined the skip list. Worth noting that all three
+false positives came from *other* repos' Markdown conventions not being this repo's — the
+kind of thing a port inherits silently.
+
+Then negative-tested all three checks rather than trusting a green run, since a checker that
+cannot fail is worse than none: dropped an unindexed `.swift` into `Shared/` (coverage
+fired), added a phantom filename to the index (phantom check fired), added a dangling link
+(link check fired), restored, and confirmed zero problems and no leftover probe file. The
+green run at the top of this entry means something only because of that.
+
+Josh asked, mid-task, about `../Conjugar.mig`: it has neither the index nor the cache note,
+and its only directory tree is the one inside its screenshot playbook — the same state
+Conjuguer was in this morning. He's handling that repo in a separate session. Recording the
+audit here so that session doesn't have to redo it: Konjugieren has both, Conjuguer now has
+both plus the enforcement script, Conjugar.mig has neither.

@@ -23,7 +23,7 @@ struct ConjuguerApp: App {
           MainTabView()
             .environment(Current)
             .fullScreenCover(isPresented: Binding(
-              get: { !Current.settings.hasSeenOnboarding },
+              get: { OnboardingDisplay.onboardingEnabled && !Current.settings.hasSeenOnboarding },
               set: { newValue in
                 if !newValue {
                   Current.settings.hasSeenOnboarding = true

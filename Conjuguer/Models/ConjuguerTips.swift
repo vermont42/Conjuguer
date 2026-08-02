@@ -8,31 +8,6 @@
 import SwiftUI
 import TipKit
 
-enum TipDisplay {
-  /// Master switch for all TipKit tips. Ordinarily `true`. Set to `false` before
-  /// generating screenshots (then restore to `true`) so no tip ever appears.
-  ///
-  /// When `false`, `ConjuguerApp` skips `Tips.configure()`. TipKit displays nothing
-  /// until it is configured, so every `TipView` and `.popoverTip(_:)` in the app stays
-  /// hidden — no per-call-site changes needed.
-  static let tipsEnabled = true
-}
-
-enum TutorDisplay {
-  /// Master switch for the tutor entry's *unavailability* cell, mirroring
-  /// `TipDisplay.tipsEnabled`. Ordinarily `true`. Set to `false` before generating
-  /// screenshots (then restore to `true`).
-  ///
-  /// The tutor needs Apple Intelligence, which is never available in a simulator —
-  /// `World.simulator` injects the *real* service, so availability resolves against the
-  /// host and fails. `InfoBrowseView` therefore renders a reason cell there ("Apple
-  /// Intelligence is still getting ready…"), which is honest on a device but reads as a
-  /// defect in an App Store screenshot. Only the reason cell is suppressed: when the model
-  /// *is* available the entry still renders its `NavigationLink`, so this switch can never
-  /// hide a working feature.
-  static let tutorUnavailableRowEnabled = true
-}
-
 struct TryQuizTip: Tip {
   var title: Text {
     Text(L.Tips.tryQuizTitle)

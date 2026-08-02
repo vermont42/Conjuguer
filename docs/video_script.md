@@ -83,6 +83,8 @@ ffprobe -v error -select_streams v:0 \
 Dimensions are the one defect the export cannot repair, and wrong dimensions are exactly
 what got all four 2.0 previews rejected.
 
+Ensure that language and region are English and United States or French and France. Ensure that hardware keyboard is disconnected. Ensure that values in KillSwitches.swift are `false`.
+
 First Clip - six seconds
 Starts out at top of VerbBrowseView. Sort by frequency. Slowly scroll down for five seconds.
 Label:
