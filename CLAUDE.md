@@ -42,6 +42,13 @@ export IBV_SCRIPTS=$(dirname "$(find ~/.claude/plugins/marketplaces -path '*ios-
 "$IBV_SCRIPTS/run_tests.sh" --only-testing ConjuguerTests/CompoundTenseTests/testCompoundTenses
 ```
 
+> **Testing an unpublished change to the skill itself.** `ios-build-verify` is developed
+> locally at `~/Desktop/workspace/ios-build-verify` but consumed from GitHub, so the
+> resolved copy is always the *published* one. To exercise local edits, point the variable
+> at the dev repo — `export IBV_SCRIPTS=~/Desktop/workspace/ios-build-verify/skills/ios-build-verify/scripts`
+> — and unset it to return to the published copy. `scripts/take_screenshots.sh` honors a
+> pre-set `IBV_SCRIPTS` too, so one export covers both.
+
 ### Verifying the app (simulator-driven)
 
 The skill can launch the app and inspect/drive the UI so changes can be verified

@@ -1283,3 +1283,38 @@ and its only directory tree is the one inside its screenshot playbook — the sa
 Conjuguer was in this morning. He's handling that repo in a separate session. Recording the
 audit here so that session doesn't have to redo it: Konjugieren has both, Conjuguer now has
 both plus the enforcement script, Conjugar.mig has neither.
+
+## IBV_SCRIPTS becomes the dev/prod switch for ios-build-verify (2026-08-02)
+
+Carried over from a Conjugar session. Conjugar had been invoking `ios-build-verify` through a
+hand-made `~/.claude/skills/ios-build-verify` symlink pointing into the *versioned* plugin
+cache — pinning a release, needing re-pointing on every update, and by then silently gone,
+which broke the build command its CLAUDE.md documented. Conjuguer was never exposed to that:
+it already resolved `IBV_SCRIPTS` against the marketplace clone, and `take_screenshots.sh`
+already carried the comment explaining why the search is scoped to `plugins/marketplaces`
+rather than `~/.claude` broadly. That comment is the reason the Conjugar fix was a five-minute
+job instead of a rediscovery, which is a decent argument for writing the rationale down next to
+the code rather than only in a doc.
+
+The gap that did apply here: the skill is developed locally at
+`~/Desktop/workspace/ios-build-verify` but consumed from GitHub, so both the marketplace clone
+and the cache hold published code, and testing an unpublished change meant publishing it first.
+Since every call site already resolves a scripts directory instead of hardcoding one,
+`IBV_SCRIPTS` *is* the dev/prod switch — export it at the dev repo, unset it to go back. That
+needed only documentation (a blockquote under "Build and Test Commands") and one change to
+`scripts/take_screenshots.sh`, which called `resolve_ibv_scripts` unconditionally and so
+ignored an override.
+
+The tempting way to write that override is `: "${IBV_SCRIPTS:=$(resolve_ibv_scripts)}"`, and it
+is wrong under `set -euo pipefail`. The `:` builtin always succeeds, so the resolver's `exit 2`
+— which runs in a command substitution and therefore leaves only the subshell — is swallowed,
+and the sweep runs on with an *empty* `IBV_SCRIPTS`, invoking `/build_app.sh`. A probe in
+Conjugar confirmed it: `SURVIVED with X=[]`, exit 0. The plain assignment it would have replaced
+aborts correctly, since a failing substitution in an assignment does trip errexit. The guard is
+therefore a boring `if [[ -z "${IBV_SCRIPTS:-}" ]]`, and both branches were exercised against
+this repo's own resolver before the edit was trusted.
+
+One machine-state note for future sessions: `ios-build-verify` is now installed at **user**
+scope in addition to the per-project scope this repo, Konjugieren, and Calculator3 each had —
+that is `claude plugin install`'s default, and it covers every iOS project from one record. The
+now-redundant project-scope entries were left in place; consolidating them is a separate call.

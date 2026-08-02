@@ -808,7 +808,16 @@ main() {
   # driver was invoked from.
   cd "$REPO_ROOT"
 
-  IBV_SCRIPTS=$(resolve_ibv_scripts)
+  # Honor a pre-set IBV_SCRIPTS so an unpublished build of the skill can be exercised
+  # against a real sweep: ios-build-verify is developed at ~/Desktop/workspace/ios-build-verify
+  # but consumed from GitHub, so the resolver above always finds the *published* copy.
+  # Export IBV_SCRIPTS to override; unset it to go back to the published one. An `if`
+  # rather than `: "${IBV_SCRIPTS:=$(resolve_ibv_scripts)}"` -- the `:` builtin always
+  # succeeds, so the resolver's `exit 2` would be swallowed and the sweep would run on
+  # with an empty path.
+  if [[ -z "${IBV_SCRIPTS:-}" ]]; then
+    IBV_SCRIPTS=$(resolve_ibv_scripts)
+  fi
   log "ibv scripts: $IBV_SCRIPTS"
 
   log "building once (install per device after)"
