@@ -104,7 +104,7 @@ All 95 French conjugation models.
 Les 95 modèles de conjugaison du français.
 
 Fourth Clip - seven seconds
-Starts out on QuizView. Start. Type answer. Submit. Repeat once.
+Starts out on QuizView. Start. Type answer. Submit.
 Label:
 Quiz mode: Thirty timed questions to sharpen your conjugation skills.
 Mode quiz : trente questions chronométrées pour aiguiser vos talents de conjugaison.
