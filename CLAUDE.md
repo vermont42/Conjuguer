@@ -12,6 +12,12 @@ changelog: Josh may eventually generate blog posts from these notes, and future 
 sessions rely on them as dated project memory — when older docs conflict, the journal
 shows which truth is current.
 
+## Version Control
+
+**Commit directly to `main`. Do not create branches.** This is a solo project and the default
+"branch before committing" reflex does not apply here. If you find yourself proposing a feature
+branch, don't.
+
 ## Build and Test Commands
 
 This project uses the **`ios-build-verify` Claude Code skill** for building, testing,
