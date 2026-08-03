@@ -1329,3 +1329,46 @@ repo's checked-in `.claude/settings.json`, which is the change committed alongsi
 The `extraKnownMarketplaces` block in that same file was left alone, correctly — it says where
 the marketplace lives, not that the plugin is installed, so a fresh clone still knows where to
 fetch the skill from.
+
+## Recovering from a media-services reset, ported from Konjugieren (2026-08-02)
+
+Josh hit a silent-audio bug in Konjugieren: no sound when starting a quiz or answering a question,
+with audio feedback on, the phone unmuted, and sound apparently still working in that app's game.
+Instrumenting `play` and running the build on the device caught the cause in one line, with the
+session category reading `AVAudioSessionCategorySoloAmbient` and `AVAudioPlayer.play()` returning
+`false`. `.soloAmbient` is the system default that no code in any of these three apps ever sets.
+That pair is the signature of an `AVAudioSession` media-services reset: `mediaserverd` restarts,
+the session reverts to defaults, and every existing `AVAudioPlayer` becomes an orphan that refuses
+to play. Konjugieren's `docs/blog_notes.md` entry "The quiz went silent, and the audio session was
+the reason" has the full trace.
+
+Conjuguer had the same exposure, for the same reason: nothing here observed
+`mediaServicesWereResetNotification` or `interruptionNotification`, `AudioSession.configure` set a
+category but never activated the session, and `sounds` caches an `AVAudioPlayer` per effect for the
+life of the process. One reset would have silenced this app until relaunch too.
+
+The one thing worth recording, because it looks like a defense and is not: `warmUpSounds()` runs at
+every game start from `GameState`, so it is tempting to assume the players get refreshed regularly.
+They do not. It filters to names *absent* from `sounds`, so orphaned players are skipped rather than
+replaced. Nothing short of a relaunch would have recovered.
+
+The fix follows Apple's documented recovery. `AudioSession.configure` now activates the session as
+well as setting the category, and is re-invokable, since that is what recovery needs.
+`SoundPlayerReal.setup` registers for both notifications: a reset triggers `rebuildAudio` (drop
+every player, reconfigure, warm up again, resume the music if it was meant to be playing), and an
+interruption ending just reconfigures, which covers the far more common phone-call and Siri cases
+where the players survive but the session does not.
+
+The in-band retry needed a different shape here than in Konjugieren. That app checks
+`player.play()`'s `Bool` inline; this one dispatches `play()` to `playbackQueue` to keep the
+blocking audio-server round trip off the game loop, and was discarding the result. Since that `Bool`
+is the *only* in-band signal a reset produces, it is now checked on the queue and a `false` hops
+back to the main actor to rebuild. The rebuild is throttled to one per five seconds, because
+without that a game frame playing a persistently failing sound would reallocate every player every
+frame. `isMusicActive` is tracked explicitly rather than read back from `musicPlayer.isPlaying`,
+since an orphaned player's reported state is not trustworthy.
+
+Verifying a real reset is not possible: the simulator delegates audio to the host Mac and has no
+`mediaserverd` to kill, and a device will not restart one. Konjugieren's port of this code was
+verified by posting the notification synthetically and watching the rebuild run, the category
+return to `Playback`, and playback resume. 219 tests in 19 suites pass here.
