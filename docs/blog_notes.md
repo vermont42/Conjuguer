@@ -1421,3 +1421,34 @@ The `latest/` projection was deliberately left alone — it still holds the 2026
 was already out of step with the July bundle `version_4` was cut from, and refreshing four of its
 files would have mixed three sweeps rather than two. `scripts/verify_store_media.sh
 docs/screenshots/version_4` reports 40 images, 0 blocking, 0 advisory.
+
+## A preflight the AX tree could never provide (2026-08-04)
+
+Follow-up to the black-framebuffer incident above. The driver had no way to notice that state, and
+that gap is the interesting part: `wait_for_render` polls the accessibility tree, the accessibility
+tree was *perfectly healthy* the entire time, and the pixels were black. A sweep in that condition
+runs to completion, reports success, and writes 36 black PNGs. The failure is silent by
+construction, because the only channel that can observe it is the one the driver never consulted.
+
+So the guard asserts on pixels. `assert_framebuffer_live` grabs a probe frame and requires
+`magick`'s `%[mean]` above 1 — a threshold rather than `!= 0`, since a nearly-black frame is just as
+dead, while a live dark-mode screen clears it on white status-bar text alone. It retries 10× at 3 s
+because a just-booted device legitimately renders black for a moment, then exits 2.
+`ensure_simulator_app` launches Simulator.app when absent.
+
+The placement mattered more than the check. Both run from `ensure_booted`, but `ensure_booted` was
+only reachable from the per-device loop, which runs *after* `build_app.sh` — so a dead simulator
+would still have cost a ten-minute build before anyone found out. `main` now runs a preflight pass
+over every target device before building, honoring `--device`. Verified by log ordering:
+`preflight: iPhone 17 Pro Max` precedes `building once`.
+
+The abort path could not be verified against the real fault, because the condition never reproduced
+after the reboot. It was verified by substitution instead: pointed at a shut-down device it exits 2
+with the diagnostic; against a live one it returns in about a second. That is weaker evidence than
+catching the real thing, and worth saying plainly rather than letting the tests imply more than they
+show.
+
+Ported verbatim to Konjugieren (workaround #18) and Conjugar.mig (#26), whose `ensure_booted` was
+byte-identical to this one. The wording in all three refuses to claim headless boot as the cause —
+launching Simulator.app did not fix the original failure, and a future session that reads a
+confident causal story here will burn an hour re-testing remedies that were already tried.
