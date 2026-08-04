@@ -1372,3 +1372,49 @@ Verifying a real reset is not possible: the simulator delegates audio to the hos
 `mediaserverd` to kill, and a device will not restart one. Konjugieren's port of this code was
 verified by posting the notification synthetically and watching the rebuild run, the category
 return to `Playback`, and playback resume. 219 tests in 19 suites pass here.
+
+## Re-shooting screenshots 1 and 3 for the new browse views (2026-08-04)
+
+`2bae3b6` ("Browse views: bottom sort picker, shared row, verb count, no chevrons") changed
+VerbBrowseView and ModelBrowseView enough that the `version_4` iPhone screenshots were stale: they
+still showed the sort picker above the rows, chevrons on every row, and no verb-count header. Only
+the iPhone shots needed replacing, and only slots 1 and 3, so this was a two-view re-shoot rather
+than a sweep.
+
+Two things cost most of the session, and neither was the app.
+
+**The simulator has to have a head before you boot it.** `scripts/take_screenshots.sh` calls
+`xcrun simctl boot` and never checks whether Simulator.app is running. It was not. The device
+booted headless, `bootstatus -b` returned success, `axe describe-ui` returned a complete home-screen
+accessibility tree — and then `simctl launch` hung for 21 minutes and had to be killed. Every
+framebuffer capture came back pure black (mean pixel 0) from both `axe screenshot` and `simctl io`
+while the AX tree kept insisting the UI was fine. That split is the diagnostic worth remembering:
+**a live AX tree proves the device is running, not that it is rendering**, and the driver's
+`wait_for_render` polls the AX tree, so it cannot detect this state at all. Launching Simulator.app,
+quitting and relaunching it, `simctl shutdown all`, and `launchctl remove
+com.apple.CoreSimulator.CoreSimulatorService` all failed to clear it; a host reboot did. There was
+also a `screencapture` permission dialog sitting on the host — worth dismissing before blaming the
+graphics stack, since a modal there can stall host-side capture attempts indefinitely.
+
+**`status_bar override --time` renders through the device's system locale.** The existing
+`version_4` iPhone shots show `7:29`–`7:35`, so the four replacements had to blend in rather than
+jump to Apple's `9:41`. Setting `--time "7:30"` produced `07:30` — a leading zero the neighbouring
+eight shots do not have. The sim had drifted to `AppleLanguages = ("en-ES","es-ES")` /
+`AppleLocale = en_001`, which is 24-hour; `simctl status_bar list` echoes the normalized `07:30`
+either way, so the override string is not the tell. Setting `AppleLocale = en_US` + `AppleLanguages
+= ("en")` and rebooting the device (which clears the override — re-apply after) got `7:30` with no
+leading zero. The playbook already documents the language dance for the *iPad date*; it matters on
+iPhone too, for the *clock format*, and that is a distinct reason from the one written down.
+
+Two findings about the app itself, captured rather than fixed:
+
+- ModelBrowseView has no count header. Only VerbBrowseView got one (`verb_browse_count`), which
+  matches the commit message but reads as an inconsistency between two otherwise-parallel screens.
+- The new iPhone `List` draws a **separator above the first row**, so `être` sits under a stray rule
+  where the old layout had the sort picker. Confirmed by cropping old and new captures at the same
+  offset: the old shot has no such line. Minor, but it is in the shipped screenshot now.
+
+The `latest/` projection was deliberately left alone — it still holds the 2026-06-26 sweep, so it
+was already out of step with the July bundle `version_4` was cut from, and refreshing four of its
+files would have mixed three sweeps rather than two. `scripts/verify_store_media.sh
+docs/screenshots/version_4` reports 40 images, 0 blocking, 0 advisory.
