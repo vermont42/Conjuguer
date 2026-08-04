@@ -1383,7 +1383,10 @@ than a sweep.
 
 Two things cost most of the session, and neither was the app.
 
-**The simulator has to have a head before you boot it.** `scripts/take_screenshots.sh` calls
+**A booted simulator can render nothing while insisting it is fine — cause never established.**
+Stated carefully, because the obvious story is not supported: Simulator.app being absent was the
+most visible anomaly, but *launching it did not fix anything*, so "boot it headless and captures go
+black" is a correlation this session did not earn. `scripts/take_screenshots.sh` calls
 `xcrun simctl boot` and never checks whether Simulator.app is running. It was not. The device
 booted headless, `bootstatus -b` returned success, `axe describe-ui` returned a complete home-screen
 accessibility tree — and then `simctl launch` hung for 21 minutes and had to be killed. Every
