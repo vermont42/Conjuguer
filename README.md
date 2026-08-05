@@ -5,53 +5,60 @@ Conjuguer
 
 **Conjuguer** is an iOS™ app for learning French verb conjugations. **Conjuguer** conjugates 6,320 verbs, regular and irregular, in _all_ French verb tenses.
 
-
 **Conjuguer** is available for free download in the iOS App Store™. Tap the button below to install.
 
 [![Install](apple.png)](https://apps.apple.com/us/app/conjuguer/id1588624373)
 
 Alternatively, you can clone this repo and build **Conjuguer** yourself.
 
-While developing **Conjuguer**, I learned about SwiftUI and how to mix it with UIKit.
+While developing **Conjuguer** in 2021, I learned about SwiftUI and how to mix it with UIKit. The app is now SwiftUI throughout, apart from a small UIKit shim that hosts Game Center's authentication UI.
 
-### Version 2.0 Features
+### Features
 
-In addition to browsing verbs, verb models, and tense descriptions, **Conjuguer** 2.0 adds:
+- **Verb browser** — all 6,320 verbs, searchable and sortable by frequency of use or alphabetically, in a list or a grid.
+- **Conjugation views** — every tense for a given verb, with irregular stems and endings picked out in red so that the shape of an irregularity is visible at a glance. Many verbs also carry an etymology and an example sentence drawn from French literature.
+- **Verb models** — the conjugation patterns that the verbs inherit from, ranked by how irregular they are.
+- **Tense reference** — an explanation of each French tense, when to use it, and how it is formed, illustrated with quotations from Proust, the _Chanson de Roland_, and others.
+- **Conjugation quiz** — two difficulty levels, scoring that gives partial credit for a correct skeleton with a dropped accent, a Live Activity, and Game Center leaderboards.
+- **AI tutor** — answers French-conjugation questions on-device, powered by Apple's Foundation Models. Requires Apple Intelligence.
+- **Widgets and controls** — a "Verb of the Day" and a tappable daily quiz on the Home Screen and Lock Screen, plus two Control Center controls.
+- **Retro arcade minigame**, reachable from Settings.
+- **Alternate app icons** — Arc de Triomphe, rooster, croissant, or beret.
+- **English and French** localization throughout, with VoiceOver labels that switch pronunciation between the two languages so that French forms are not read aloud as English.
 
-- A **conjugation quiz** with two difficulty levels, scoring, a Live Activity, and Game Center leaderboards.
-- A **retro arcade minigame** unlocked from the quiz.
-- An **AI tutor** (on-device, powered by Apple's Foundation Models) that answers French-conjugation questions.
-- **Home Screen and Lock Screen widgets** plus a Control Center control: a "Verb of the Day" and a tappable daily quiz.
-- **English and French** localization throughout.
+### Screenshots
+
+| Verb List | Verb | Verb-Model List | Verb Model | Quiz |
+| --- | --- | --- | --- | --- |
+| <img src="Images/verb-browse.png" width="190"> | <img src="Images/verb.png" width="190"> | <img src="Images/model-browse.png" width="190"> | <img src="Images/model.png" width="190"> | <img src="Images/quiz.png" width="190"> |
+
+| Quiz Results | Tense List | Tense Description | Settings | Minigame |
+| --- | --- | --- | --- | --- |
+| <img src="Images/quiz-results.png" width="190"> | <img src="Images/tense-browse.png" width="190"> | <img src="Images/tense.png" width="190"> | <img src="Images/settings.png" width="190"> | <img src="Images/game.png" width="190"> |
 
 ### Building from Source
 
-**Conjuguer** reads its analytics (TelemetryDeck) app ID from a gitignored `Conjuguer/Secrets.xcconfig`
-that is not checked in. Before your first build, create it from the template:
+**Conjuguer** targets iOS 26 and builds with Swift 6. Open `Conjuguer.xcodeproj` in Xcode and build the
+`Conjuguer` scheme.
+
+Before your first build, create the gitignored `Conjuguer/Secrets.xcconfig` from its template. It holds
+the analytics (TelemetryDeck) app ID, which is not checked in:
 
 ```bash
 cp Conjuguer/Secrets.example.xcconfig Conjuguer/Secrets.xcconfig
 ```
 
 Then fill in your own `TELEMETRY_DECK_APP_ID` (or leave the placeholder — the app builds and runs
-either way; analytics simply go nowhere). Open `Conjuguer.xcodeproj` in Xcode and build the
-`Conjuguer` scheme.
+either way; analytics simply go nowhere).
 
-### Screenshots
+To run SwiftLint on each commit, enable the repo's pre-commit hook once per clone:
 
-_(These screenshots predate the 2.0 release and show the verb, model, and tense-description browsers; the quiz, minigame, tutor, and widgets are not pictured.)_
+```bash
+git config core.hooksPath .githooks
+```
 
-| Verb List | Verb |
-| --- | --- |
-| ![](Images/verbs.png) | ![](Images/verb.png) |
-
-| Verb-Model List | Verb Model |
-| --- | --- |
-| ![](Images/models.png) | ![](Images/model.png) |
-
-| Tense-Description List | Tense Description |
-| --- | --- |
-| ![](Images/infos.png) | ![](Images/info.png) |
+Further documentation lives in [`docs/`](docs), starting with the annotated directory tree in
+[`docs/project-structure.md`](docs/project-structure.md).
 
 ### License
 

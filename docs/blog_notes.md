@@ -1543,3 +1543,90 @@ the committed state. 219 tests in 19 suites pass.
 Worth keeping in mind for the next release: `agvtool` also drives `CURRENT_PROJECT_VERSION`, so
 this arrangement stays compatible with it, which an xcconfig holding the version would not have
 been.
+
+## README: de-versioned, re-shot, and put on a diet (2026-08-05)
+
+The README had drifted into being a 2.0 press release: a "Version 2.0 Features" heading, and
+six screenshots that predated 2.0 with an apologetic parenthetical admitting the quiz, minigame,
+tutor, and widgets weren't pictured. Both problems compound with every release — the heading
+goes stale on a version bump, and the disclaimer grows.
+
+Retitled the section to plain **Features** and rewrote the bullets to describe the app rather
+than a delta from some earlier version. That meant checking each claim against source instead
+of carrying the old prose forward, which caught a real error: the 2.0 text said the arcade
+minigame is "unlocked from the quiz." It isn't, and there is no unlock gate at all —
+`SettingsView` presents `GameView()` from a plain button behind a `fullScreenCover`. Fixed to
+"reachable from Settings." Also verified before asserting: the Info tense texts really do quote
+both Proust and the *Chanson de Roland* (13 and 4 `Info.*` keys respectively, by a JSON scan of
+the catalog); there are two Control Center controls (`QuickQuizControl`, `RandomVerbControl`);
+and the VoiceOver claim is stronger than "it's localized" — `accessibilityLabel`s route through
+`L`, and `.frenchPronunciation()` / `.englishPronunciation()` switch the speech language so
+French forms aren't read aloud as English. Added a real *Building from Source* section (iOS 26,
+Swift 6, the `Secrets.xcconfig` copy, the `core.hooksPath` one-liner) and a pointer into `docs/`.
+
+Screenshots: deleted the six 750×1334 relics and rebuilt from
+`docs/screenshots/version_4/iPhone_English` (slots 1–9) plus a hand-shot minigame capture. Used
+the newer minigame shot from `~/Downloads` rather than the bundle's `10.png` — same scene, but
+score 30 with ghosts, a robot, and power-ups on screen instead of an empty opening field.
+
+Two things worth remembering about the image work:
+
+**Layout beats resolution.** First pass kept the old two-column table. Rendered through GitHub's
+own markdown API and viewed in Chrome, each row was over 1000px tall — ten screenshots meant
+~5000px of scrolling. Switched to two five-column tables with `<img width="190">`; the whole
+gallery now fits in roughly two screens. Markdown image syntax can't carry a width, so those
+cells are HTML `<img>` tags, which GitHub renders fine inside a table.
+
+**Dithering is not a free win, and it isn't uniform.** Resized to 800px wide and quantized to a
+256-colour palette, which took the set from ~3.6MB to ~1.1MB. Dropping to 128 colours saved
+another 15% but put visible speckle on the light-theme card backgrounds — rejected on sight.
+Then tried `+dither` (dithering off) at 256 colours, expecting a uniform improvement, and got a
+*split* result: the two light-theme conjugation tables halved (`verb.png` 182KB→90KB,
+`model.png` 182KB→95KB) and looked cleaner, while the dark screens with gradient icon art got
+*worse* (`tense.png` 125KB→157KB, `settings.png` 163KB→170KB). Flat UI colour quantizes exactly,
+so dithering there only adds noise the PNG filter has to encode; gradients genuinely need it.
+Took the smaller variant per image. Final: 45–163KB each, 964KB for all eleven including
+`Splash.png`.
+
+Verification was GitHub's `/markdown` API → a static HTML file → Chrome. Note the browser tool
+refuses `file://` URLs, so the preview has to be served: a scratch directory with symlinks to
+`Images/` and `apple.png`, `python3 -m http.server`, and the relative paths resolve exactly as
+they will on github.com.
+
+Post-review addendum. Josh rewrote the SwiftUI line to "The app is now entirely SwiftUI," which
+is very nearly true and worth being precise about: `Views/GameCenterAuthView.swift` is still a
+`UIViewControllerRepresentable`, and it is the only UIKit bridge left in `Conjuguer/`, `Shared/`,
+and `ConjuguerWidget/`. Softened to "SwiftUI throughout, apart from a small UIKit shim that hosts
+Game Center's authentication UI."
+
+That raised a follow-up: is the shim still required, or is it debt? The shim is a zero-sized
+representable mounted in `QuizView` for one reason — `GKLocalPlayer.authenticateHandler` vends a
+`UIViewController` that the caller must present, so something has to own a presenter.
+
+I first guessed that `GKAccessPoint` could take over, on the theory that activating it
+authenticates the local player as a side effect, which would let `GameCenterAuthView`,
+`GameCenterAuthCoordinator`, and the `onViewController:` parameter all go. **That guess was
+wrong**, and it is recorded here so no future session rediscovers it as fact. Checked against the
+iOS 26.2 SDK headers, which are authoritative for what this project compiles against:
+
+- `GKLocalPlayer.h:255` — on iOS, `authenticateHandler` is still
+  `void(^)(UIViewController *, NSError *)`, `API_AVAILABLE(ios(6.0))`, **not deprecated**.
+- `GKLocalPlayer.h:48` — the watchOS variant of the same property is `void(^)(NSError *)`, with
+  no view controller. The platforms are modelled differently on purpose, which is good evidence
+  that the VC is intrinsic to the iOS presentation model rather than vestigial.
+- `GKAccessPoint.h` — **no mention of authentication anywhere**. Apple's docs for `isActive` say
+  only that the access point "appears after you initialize the local player." It displays; it
+  does not authenticate.
+- `GameKit.swiftmodule/arm64e-apple-ios.swiftinterface` — imports Combine, Foundation, and os.
+  No SwiftUI, no `View` conformances, no async `authenticate` symbol. There is no SwiftUI-native
+  GameKit surface as of this SDK.
+
+There *is* a callback that could replace the `completion:` closure driving the analytics signals:
+`GKPlayerAuthenticationDidChangeNotificationName` (`GKLocalPlayer.h:99`, iOS 4.1+, "posted
+whenever authentication status changes"). But it only observes status — it presents nothing — so
+the shim survives either way, which makes the swap churn without payoff.
+
+Conclusion: `GameCenterAuthView.swift` is a genuine platform constraint, not technical debt. No
+code changed. The lesson worth keeping is procedural: SDK headers settled in one grep what the
+rendered docs could not (Apple's doc pages are JS-rendered, so `WebFetch` returns only the page
+title — use `xcrun --sdk iphoneos --show-sdk-path` and read the headers instead).
