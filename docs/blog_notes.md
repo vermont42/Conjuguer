@@ -1452,3 +1452,94 @@ Ported verbatim to Konjugieren (workaround #18) and Conjugar.mig (#26), whose `e
 byte-identical to this one. The wording in all three refuses to claim headless boot as the cause —
 launching Simulator.app did not fix the original failure, and a future session that reads a
 confident causal story here will burn an hour re-testing remedies that were already tried.
+
+## Release notes for 2.1, drafted from the post-ship diff (2026-08-05)
+
+Josh confirmed from App Store Connect that 2.0 went live about a week ago, which settled a
+question the repo could not answer on its own. `MARKETING_VERSION` was bumped to 2.0 on
+2026-06-25, but the submission was not accepted until 2026-07-25 (`8cd8d83`) — a month later,
+after the media rejections. Reading "since 2.0" off the version bump therefore credits the
+release with a month of work it does not contain, and reading it off the ship date credits it
+with none. The submission commit is the honest cut line, and everything before it — the
+TelemetryDeck migration, all six code-review phases, the minigame fixes, the widget work — is
+in the shipped binary.
+
+That leaves a genuinely small 2.1: five commits touch app code after the submission, and only
+three of them are things a user would notice.
+
+The one that justifies a release at all is the audio recovery fix (`473e3f8`). A media-services
+reset orphans every cached `AVAudioPlayer`, and this app caches one per effect for the life of
+the process, so a single reset silenced it until relaunch. That is a bug worth shipping a
+version for; the browse-view rework is the pleasant thing to put next to it.
+
+Two changes were deliberately left out of the notes. The `réaliser` etymology edit (`5b1e553`)
+is a four-word rewording of one clause — "Unlike the other verbs here" became "Unlike many
+commonly used verbs" — and belongs in a diff, not on a version page. The `Quiz.swift` change
+in `c51e223` lowercases the screenshot fixture's exported answers; it exists only so a driver
+can type plausible-looking input, and no user reaches it.
+
+The rank badge, the count header, and the moved sort picker all came from `2bae3b6`, but the
+count header landed only in `VerbBrowseView` — `ModelBrowseView` has no equivalent. Checked
+before writing, because "both lists now show how many results match" is the kind of sentence
+that is easy to write and wrong.
+
+Written English-only at Josh's request; he will edit the English, and French relocalization
+comes after that rather than before. `MARKETING_VERSION` is still 2.0 — nothing here bumps it.
+
+## French for the 2.1 notes, and a settings toggle that never existed (2026-08-05)
+
+Relocalized the 2.1 notes after Josh approved the English. The translation was routine; the
+useful part was what checking the terminology turned up.
+
+The English claimed the app could fall silent "with audio feedback still switched on." Looking
+up the French label for that setting found no such key, and `Settings.swift` has no sound
+preference at all — Conjuguer has never had an audio toggle. The phrasing had come from the
+audio-fix commit message, which describes Konjugieren's repro on Josh's phone ("audio feedback
+on and the phone unmuted"), and that app's settings are not this one's. Replaced with "for no
+apparent reason," which is both true and a better description of the symptom.
+
+The obvious repair — "even with the device unmuted" — would have been wrong too. `AudioSession`
+sets `.playback` with `.mixWithOthers`, so the app plays through the ring/silent switch by
+design; inviting users to check the mute switch would send them after the wrong thing.
+
+Tab names in the French notes are the app's own: `Navigation.verbs` is "Verbes" and
+`Navigation.models` is "Modèles", read out of the catalog rather than translated freehand, so
+the notes name what a French user actually sees. The sort control is "le sélecteur de tri" and
+the rank badge "une pastille arrondie" — neither is a UI string, so both are prose choices.
+
+Worth generalizing: a commit message is evidence about the commit, not about the app, and this
+one was a port whose narrative belonged to a sibling app. Verifying user-facing claims against
+the catalog and the source is cheap; App Store copy that describes a setting a user cannot find
+is the kind of error that generates support mail.
+
+## One knob for the build number (2026-08-05)
+
+The 2.1 bump was correct — all four `MARKETING_VERSION` sites, app and widget, Debug and
+Release — but checking it surfaced a separate problem in the neighborhood. The build number was
+settable from two unrelated mechanisms: the app's `CFBundleVersion` was the literal string `1`
+in `Conjuguer/Info.plist`, while the widget had no such key at all and generated its plist from
+`CURRENT_PROJECT_VERSION = 1` in its own target settings. They agreed at 1 by coincidence, not
+by construction.
+
+That coincidence is load-bearing. An app extension whose `CFBundleVersion` disagrees with its
+container fails validation at upload, so the failure mode is a rejected submission — and 2.0
+already needed several upload attempts. Bumping to build 2 by editing the Info.plist alone
+would have produced exactly that.
+
+Consolidated onto `CURRENT_PROJECT_VERSION` at the **project** level, removed the widget
+target's own copy so it inherits, and pointed the app's `CFBundleVersion` at
+`$(CURRENT_PROJECT_VERSION)`. Xcode stores project-level settings per configuration, so the
+value physically appears twice in the pbxproj (Debug and Release), but it is one row in Xcode's
+project-level editor and one `replace` from a script. `MARKETING_VERSION` is untouched and
+still lives in four target-level sites; the same consolidation would work for it and was left
+alone as a separate change.
+
+Verified by substitution rather than by reading the diff: set the project-level value to 42,
+built, and confirmed **both** `Conjuguer.app` and the embedded `ConjuguerWidgetExtension.appex`
+reported `CFBundleVersion` 42 with `CFBundleShortVersionString` 2.1 — which proves the widget
+really is inheriting and not falling back to a default. Restored to 1 and rebuilt to confirm
+the committed state. 219 tests in 19 suites pass.
+
+Worth keeping in mind for the next release: `agvtool` also drives `CURRENT_PROJECT_VERSION`, so
+this arrangement stays compatible with it, which an xcconfig holding the version would not have
+been.

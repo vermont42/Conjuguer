@@ -236,6 +236,7 @@ docs/
 ├── project-structure.md            # This file — annotated directory tree
 ├── quiz-best-score-followup.md     # Follow-up spec: best score on the quiz briefing screen
 ├── release-notes-2.0.txt           # 2.0 release notes
+├── release-notes-2.1.txt           # 2.1 release notes
 ├── screenshot-plan.md              # Screenshot capture spec: which views, languages, and devices
 ├── screenshot-playbook.md          # Screenshot workflow: prerequisites, kill switches, driver flags, workarounds, recovery
 ├── screenshots/                    # Captured screenshots produced by the driver

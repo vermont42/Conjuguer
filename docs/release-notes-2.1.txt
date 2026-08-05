@@ -1,0 +1,23 @@
+Version 2.1
+
+
+English
+
+Version 2.1 fixes a bug that could leave Conjuguer silent and makes the verb and model lists easier to use one-handed.
+
+Sound effects could stop playing until the app was relaunched. iOS occasionally restarts the audio system it shares with every app, and it can hand the audio session back after a phone call or a Siri interruption. Conjuguer did not notice either event, so quizzes and the arcade game could fall silent for no apparent reason. The app now watches for both and rebuilds its audio on its own, so sound comes back without a relaunch.
+
+On iPhone, the sort control on the Verbs and Models tabs has moved from the top of the screen to the bottom, a thumb's reach from the tab bar rather than a screen away. On iPad it stays above the grid, where it reads as a filter over the verbs and models it governs.
+
+The Verbs tab now tells you how many verbs match your search. Rows on both tabs have been tidied up, and a verb's frequency rank is now set in a rounded badge.
+
+
+Français
+
+La version 2.1 corrige un problème qui pouvait rendre Conjuguer muet et rend les listes de verbes et de modèles plus faciles à utiliser d'une seule main.
+
+Les effets sonores pouvaient cesser de se faire entendre jusqu'au redémarrage de l'app. iOS relance de temps à autre le système audio qu'il partage avec toutes les apps, et il reprend la session audio le temps d'un appel téléphonique ou d'une intervention de Siri. Conjuguer ne remarquait ni l'un ni l'autre, si bien que les quiz et le jeu d'arcade pouvaient devenir muets sans raison apparente. L'app guette désormais ces deux événements et reconstruit son audio d'elle-même : le son revient sans qu'il faille relancer l'app.
+
+Sur iPhone, le sélecteur de tri des onglets Verbes et Modèles est passé du haut de l'écran vers le bas, à portée de pouce de la barre d'onglets plutôt qu'à l'autre bout de l'écran. Sur iPad, il reste au-dessus de la grille, où il se lit comme un filtre appliqué aux verbes et aux modèles qu'il régit.
+
+L'onglet Verbes indique désormais combien de verbes correspondent à votre recherche. Les lignes des deux onglets ont été épurées, et le rang de fréquence d'un verbe s'affiche maintenant dans une pastille arrondie.
