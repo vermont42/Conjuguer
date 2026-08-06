@@ -8,9 +8,11 @@ Conjuguer.xcodeproj/xcuserdata/
 # Conjuguer/Secrets.xcconfig and fill in your app ID. Never commit Secrets.xcconfig.
 Conjuguer/Secrets.xcconfig
 # ios-build-verify
+# .claude/ios-build-verify.config.sh is deliberately NOT ignored: it holds only project
+# facts (scheme, bundle ID, launch anchor, the hand-measured 5-tab coordinates), and a
+# clone needs it for the documented build path to work.
 build/
 build.log
-.claude/ios-build-verify.*
 docs/screenshots/
 # Apple-copyrighted WWDC transcripts, archived locally for reference only (per their headers)
 docs/wwdc2026-*.txt
