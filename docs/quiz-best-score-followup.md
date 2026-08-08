@@ -2,14 +2,35 @@
 
 ## Status
 
-**Deferred** during the Batch B UI work (`conjuguer-ui-issues.md` → item **#3**, "Fill the
-barren 'not started' quiz screen"). The briefing screen was built, but the *best score* part of
-the recommendation was left out on purpose — see rationale below. Everything else in #3 shipped:
-the `notStartedView()` builder in `QuizView.swift` now shows a glyph, the `readyHeading` headline,
-the `tagline` one-liner, a `.card()` with the active difficulty + "30 questions", and the **Start**
-CTA.
+**✅ RESOLVED — but by a different route than this spec proposes (verified 2026-08-08).**
 
-This document is the spec for a future session that wants to add the best-score readout.
+The briefing screen **does** show a best score today. `Quiz.swift` persists the high score locally
+(`if score > Current.settings.bestScore { Current.settings.bestScore = score }`), and
+`QuizView.notStartedBriefing` renders `Label(L.QuizView.bestScore(world.settings.bestScore),
+systemImage: "trophy")` whenever that value is above 0. No Game Center read was involved: the
+protocol still has no best-score getter, so **none of the GameKit work specced below was done, and
+none of it is needed** for the briefing to show a score.
+
+The spec is kept for the record, and because a *leaderboard-backed* best score (cross-device,
+surviving reinstalls) remains a real alternative to the local `UserDefaults` value if you ever want
+it. If you do revisit it, note that the file names below have all changed — see *Stale anchors*.
+
+**Original status (superseded):** deferred during the Batch B UI work (`conjuguer-ui-issues.md` →
+item **#3**, "Fill the barren 'not started' quiz screen"). The briefing screen was built, but the
+*best score* part of the recommendation was left out on purpose — see rationale below.
+
+## Stale anchors in the spec below
+
+Written before several renames; the spec text is unedited, so translate as you read:
+
+| Spec says | Actually named now |
+|---|---|
+| `GameCenterable.swift` (protocol) | `Conjuguer/Utils/GameCenter.swift` (`protocol GameCenter`) |
+| `GameCenter.swift` (real conformer) | `Conjuguer/Utils/GameCenterReal.swift` |
+| `TestGameCenter.swift` (double) | `Conjuguer/Utils/GameCenterStub.swift` |
+| `notStartedView()` in `QuizView.swift` | `notStartedBriefing` |
+| `en.lproj`/`fr.lproj` `Localizable.strings` | `Conjuguer/Assets/Localizable.xcstrings` (String Catalog) |
+| a new `QuizView.bestScoreWithColon` key | already exists as `L.QuizView.bestScore(_:)` |
 
 ## Why it was deferred
 

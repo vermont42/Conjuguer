@@ -1630,3 +1630,57 @@ Conclusion: `GameCenterAuthView.swift` is a genuine platform constraint, not tec
 code changed. The lesson worth keeping is procedural: SDK headers settled in one grep what the
 rendered docs could not (Apple's doc pages are JS-rendered, so `WebFetch` returns only the page
 title — use `xcrun --sdk iphoneos --show-sdk-path` and read the headers instead).
+
+## Reconciling two audit docs that had gone stale in opposite directions (2026-08-08)
+
+Josh went looking for the SwiftUI audit material to cite in a job-application essay (a Waymo
+prompt: "describe a time you used SwiftUI for a real-world deployment"). Finding it surfaced a
+documentation problem worth recording, because the failure mode is one this repo is structurally
+prone to.
+
+There are **two** audits, four days apart in June 2026, and they are easy to conflate: the
+SwiftUI-modernization audit (~30 numbered issues, Phases 0–8, landed in `fdee834`) and the
+UI/design audit (30 ranked recommendations, Batches A–F, landed in `c67738a`). Their surviving
+docs are `future-swiftui-fixes.md` and `conjuguer-ui-issues.md` respectively.
+
+Both had drifted from the code, in opposite directions.
+
+`conjuguer-ui-issues.md` **understated** what had shipped. The file carries an explicit
+instruction to prepend `✅ DONE —` to each item as it's resolved — and nobody ever did, across
+all six batches. So a document that was actually 29/30 complete read as entirely open. That's the
+worse of the two failures: a stale to-do list doesn't merely fail to inform, it actively
+misdirects, and it would have cost a future session a full re-derivation to discover the work was
+already done. Reconciled by reading the current source view-by-view rather than trusting session
+notes, and each item now carries a `**Shipped:**` line naming the symbol that resolves it, so the
+claim is checkable rather than assertable. Several items shipped *better* than specced — the
+sensory-feedback item, for instance, was specced as two triggers and shipped as one closure keyed
+on the results count, which fires exactly once per submission.
+
+`future-swiftui-fixes.md` **overstated** what remained. Of its four deferred parts, two had been
+made moot by later work (the `UITextView`/`NSAttributedString` pipeline they concerned was deleted
+outright in the code-review batches) and one was done. Only the nav-bar aesthetic decision is
+genuinely open — and it turns out to be the *same* decision as the UI list's item #26, tracked
+independently in two places without either knowing about the other. They're now cross-linked.
+
+**The trap that nearly produced a wrong answer.** The deferred deep-link buffer (Part 2d) specced
+a `@State private var pendingURL` in `ConjuguerApp`. Grepping `pendingURL` returns nothing, and
+the first reconciliation pass duly marked it open. It had in fact shipped a month later in
+`1f359d4`, as `World.pendingDeeplink` drained by `drainPendingDeeplink()` — put on `World` rather
+than the app struct precisely because the widget `.widgetURL` path needed it too, which was the
+bug that forced the fix. The lesson: **a spec's proposed identifier is not evidence of anything.**
+Grepping the name a document *proposed* tests whether the document was followed literally, not
+whether the problem was solved. Verify against behavior — or at minimum grep the concept, not the
+identifier — before writing "still open" next to something.
+
+That same class of drift is why the reconciliation added a *Stale anchors* table to
+`quiz-best-score-followup.md` instead of just closing it: that doc's spec references
+`GameCenterable.swift`, `TestGameCenter.swift`, `notStartedView()`, and `Localizable.strings`, all
+of which have since been renamed (`GameCenter.swift`, `GameCenterStub.swift`,
+`notStartedBriefing`, `Localizable.xcstrings`). The feature it specs also shipped by another route
+entirely — the briefing's best score reads `Settings.bestScore`, persisted locally by `Quiz.swift`,
+so none of the proposed GameKit work was needed. The doc is kept anyway, since a leaderboard-backed
+score remains a real alternative if a cross-device best score is ever wanted.
+
+No code changed. The essay prompt at `~/Desktop/workspace/Conjugar/prompts/essay.md` now carries a
+background section drawn from this reconciliation, including the caveat that both audits were
+AI-assisted and that the essay should characterize that deliberately rather than by omission.

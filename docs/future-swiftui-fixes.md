@@ -84,7 +84,30 @@ parented (`conjuguer://model/2-4`) models in addition to `être`.
 These are documented sub-scopes of already-implemented issues, not new audit findings. Each is
 optional; pick by appetite.
 
-### 2a. Info-article Dynamic Type (from #8 / #12 — see `phase5-verification.md` note 1)
+> **Reconciled 2026-08-08.** Two of these four are now moot and one is done — later work (the UI/design
+> audit in [`conjuguer-ui-issues.md`](conjuguer-ui-issues.md), plus the code-review batches) overtook them:
+>
+> - **2a — moot.** The `UITextView`/`NSAttributedString` pipeline it proposes to fix no longer exists.
+>   `TextView.swift` and `String.attributedText` were retired (code-review item 28) in favor of a native
+>   SwiftUI `RichTextView`, whose `Text` runs scale with Dynamic Type for free. No `UIFontMetrics` needed.
+> - **2b — done, by removal.** `ConstrainedBodyLabel` and its `.dynamicTypeSize(...xLarge)` cap were
+>   deleted outright once the quiz became scrollable (UI-audit #24). A repo-wide grep for
+>   `dynamicTypeSize` returns nothing, so no text in the app is capped.
+> - **2c — still open**, and it is the *same* decision as UI-audit #26 (browse header/content seam).
+>   Neither `.toolbarBackground` nor any nav-bar appearance code exists today. Decide once, close both.
+>   **This is the only genuinely open item in this document.**
+> - **2d — done** (commit `1f359d4`, 2026-07-09), though under different names than specced: the buffer
+>   is `World.pendingDeeplink` drained by `World.drainPendingDeeplink()`, which `ConjuguerApp` calls
+>   right after `verbData.load()` — not a `@State pendingURL` in `ConjuguerApp`. Putting it on `World`
+>   also covers the widget `.widgetURL` path, which was the bug that actually forced the fix. Covered by
+>   `DeeplinkTests`. **Grep for `pendingURL` and you will wrongly conclude it is open** — search
+>   `pendingDeeplink`.
+>
+> Also note: the `Conjuguer.do` worktree this document's *Context* section points at no longer exists,
+> and neither `conjuguer-swiftui-issues.md` nor the `phase*.md` verification notes were carried into this
+> repo. Treat the cited phase docs as unavailable — the code is the record.
+
+### 2a. Info-article Dynamic Type (from #8 / #12 — see `phase5-verification.md` note 1) — ⛔️ MOOT
 **Problem.** The #8 `TextView` fix removed the `uiView.font = preferredFont(.body)` override so the
 Info articles render their designed WorkSans per-run typography (centered subheadings, real bold).
 The trade-off, flagged at the time: those article fonts are now **fixed-size and no longer scale
@@ -98,7 +121,7 @@ styling.
 tests / verify green; spot-check an article (e.g. Terminology) at default and at an accessibility
 size.
 
-### 2b. Reconsider the `dynamicTypeSize(...xLarge)` cap (#12 — `Modifiers.swift:183`)
+### 2b. Reconsider the `dynamicTypeSize(...xLarge)` cap (#12 — `Modifiers.swift:183`) — ✅ DONE (cap removed)
 **Problem.** `ConstrainedBodyLabel` (`Modifiers.swift:178`) caps Dynamic Type at `.xLarge`
 (`.dynamicTypeSize(...DynamicTypeSize.xLarge)`) to protect the quiz layout. The audit asked to
 *reconsider* whether this app-wide-ish cap is necessary. (Note: the custom fonts already scale on
@@ -123,7 +146,7 @@ to `VerbBrowseView` / `ModelBrowseView` / `InfoBrowseView`. This is the issue's 
 **Done when.** A deliberate decision is recorded — either keep the glass (do nothing, note it) or
 apply a uniform `.toolbarBackground` across the three browse screens; build / tests / verify green.
 
-### 2d. Cold-launch deep-link buffer (#28 — see `phase7-part2-verification.md` Notes)
+### 2d. Cold-launch deep-link buffer (#28 — see `phase7-part2-verification.md` Notes) — ✅ DONE
 **Problem.** Now that the 6,314-verb parse runs asynchronously behind `LoadingView`, a deep link
 that arrives **during** the sub-second load reads still-empty stores: `handleURL` switches the tab
 but the target sheet isn't pre-populated (nil lookup, no crash). `.onOpenURL` is already on the
@@ -149,5 +172,6 @@ sheet once data is ready; the warm path is unchanged; build / tests / verify gre
   `.sheet(item:)` on purpose (it needs verb-on-top-of-info stacking — see its inline comment).
   Don't "consolidate" InfoBrowseView.
 - Part 1 (#23) is **done** (`phase8-part1-verification.md`); the original audit list is fully closed.
-  Parts 2a–2d are all that remain — genuinely optional and partly aesthetic — get a human decision on
-  2c before doing it.
+  Of Parts 2a–2d, only **2c** remains (see the reconciliation note above): 2a is moot, 2b and 2d are
+  done. 2c is an aesthetic decision, so it needs a human call before anyone codes it — there is no
+  engineering work left in this document.
