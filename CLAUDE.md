@@ -101,7 +101,11 @@ label: SwiftUI merges the two elements and concatenates their identifiers, yield
 
 Info headings and tab buttons are not yet annotated — drive them by `AXLabel` /
 `tap_tab.sh` for now. The verb-search field is unannotated too; tap it at its
-`describe_ui` frame (≈ `201,191` on iPhone 17) before `axe type`.
+`describe_ui` frame (the lone `AXTextField` on the Verbs tab, `{{16, 70}, {315, 44}}` →
+centre ≈ `173,92` on iPhone 17) before typing. Because verb names carry accents, drive it
+with `type_text.sh --xy 173,92 "<verb>"` (pasteboard route) rather than `axe type`, which
+rejects non-ASCII. Re-measure with `describe_ui.sh` rather than trusting this number: an
+earlier session recorded ≈ `201,191` here, which no longer matches the layout.
 
 #### iOS 26 control caveats specific to this app
 
@@ -279,7 +283,7 @@ array.)
 
 ## Architecture Overview
 
-Conjuguer is an iOS app for learning French verb conjugations. It conjugates 6,320 verbs across all French tenses.
+Conjuguer is an iOS app for learning French verb conjugations. It conjugates 6,332 verbs across all French tenses.
 
 ### Project Layout (synchronized folders)
 
@@ -336,7 +340,7 @@ type. Practical consequences:
 ### Data Loading
 
 Verb and model data is loaded from XML files at app startup via `VerbData.parse()`:
-- `verbs.xml` - All 6,320 verbs (frequency-of-use ships inline via each verb's `fr` attribute)
+- `verbs.xml` - All 6,332 verbs (frequency-of-use ships inline via each verb's `fr` attribute)
 - `verbModels.xml` - Conjugation pattern definitions
 - `defectGroups.xml` - Defective verb groups
 

@@ -16,7 +16,7 @@ enum ExampleSource: Hashable {
   case swissPublic // ch-… and ch-ncsc-… — Swiss public documents, PD (Art. 5 URG).
   case frenchGov // fr-… — French agencies, Licence Ouverte / Etalab 2.0.
   case wikipedia(article: String) // wp-… — French Wikipedia, CC BY-SA 4.0.
-  case claude // AI-authored tail.
+  case claude(model: String) // AI-authored tail; model is the raw source string, e.g. "Claude (Opus 5)".
   case other(String)
 
   init(rawSource: String) {
@@ -37,7 +37,7 @@ enum ExampleSource: Hashable {
     } else if rawSource.hasPrefix("wp-") {
       self = .wikipedia(article: Self.wikipediaArticles[rawSource] ?? Self.cleanedFilename(rawSource))
     } else if rawSource.hasPrefix("Claude") {
-      self = .claude
+      self = .claude(model: rawSource)
     } else {
       self = .other(rawSource)
     }
@@ -61,8 +61,8 @@ enum ExampleSource: Hashable {
       return L.VerbView.sourceFrenchGov
     case .wikipedia(let article):
       return L.VerbView.sourceWikipedia(article)
-    case .claude:
-      return L.VerbView.sourceClaude
+    case .claude(let model):
+      return L.VerbView.sourceClaude(model)
     case .other(let raw):
       return "— " + raw
     }

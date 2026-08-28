@@ -167,6 +167,13 @@
   "line": 99,
   "token": "acquis"
  },
+ "acter": {
+  "fr": "La planification écologique – dont la nécessité a été actée par le président de la République – en constituerait la première étape.",
+  "en": "Ecological planning — the need for which has been formally acknowledged by the President of the Republic — would be its first stage.",
+  "source": "fr-france-strategie-soutenabilites-2022.txt",
+  "line": 43,
+  "token": "actée"
+ },
  "activer": {
   "fr": "Elle avait roulé le fil ; elle le porta à la forge, et là, activant le brasier avec un large éventail de bois, elle le mit à recuire, avant de le passer dans les derniers trous de la filière.",
   "en": "She had wound the wire; she carried it to the forge, and there, stoking the brazier with a wide wooden fan, she put it to anneal before drawing it through the last holes of the wire-drawing plate.",
@@ -418,6 +425,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 807,
   "token": "allumant"
+ },
+ "alléger": {
+  "fr": "Soyez convaincus que l'état, désormais, a les yeux fixés sur vous, qu'il vous encourage, qu'il vous protège, qu'il fera droit à vos justes réclamations et allégera, autant qu'il est en lui, le fardeau de vos pénibles sacrifices!",
+  "en": "Rest assured that the State, henceforth, has its eyes fixed upon you, that it encourages you, that it protects you, that it will grant your just claims and will lighten, so far as it lies within its power, the burden of your painful sacrifices!",
+  "source": "flaubert-madame-bovary-1857.txt",
+  "line": 5818,
+  "token": "allégera"
  },
  "amener": {
   "fr": "Six mois se passèrent encore; et, l'année d'après, Charles fut définitivement envoyé au collège de Rouen, où son père l'amena lui-même, vers la fin d'octobre, à l'époque de la foire Saint-Romain.",
@@ -958,6 +972,13 @@
   "line": 1448,
   "token": "blesse"
  },
+ "bloguer": {
+  "fr": "Depuis qu'elle a pris sa retraite, elle blogue chaque semaine sur les oiseaux de son jardin.",
+  "en": "Ever since she retired, she has been blogging every week about the birds in her garden.",
+  "source": "Claude (Opus 5)",
+  "line": null,
+  "token": "blogue"
+ },
  "bloquer": {
   "fr": "La cyberdéfense comprend également des mesures actives visant à identifier les menaces et les attaquants ainsi qu'à contrer et à bloquer les attaques.",
   "en": "Cyber defence also includes active measures aimed at identifying threats and attackers as well as countering and blocking attacks.",
@@ -1132,6 +1153,13 @@
   "source": "Claude (Opus 4.8)",
   "line": null,
   "token": "carra"
+ },
+ "cartographier": {
+  "fr": "Plusieurs pays mobilisent à cet effet les ODD, soit en cartographiant leur budget à l'aune de ces objectifs, soit en incluant des rapports qualitatifs au document budgétaire principal.",
+  "en": "Several countries draw on the Sustainable Development Goals for this purpose, either by mapping their budget against those objectives or by attaching qualitative reports to the main budget document.",
+  "source": "fr-france-strategie-soutenabilites-2022.txt",
+  "line": 437,
+  "token": "cartographiant"
  },
  "casser": {
   "fr": "il retourna s'étendre sur le lit, en disant qu'il avait sommeil, et qu'elle ne lui cassât pas la tête davantage.",
@@ -2652,6 +2680,13 @@
   "line": 2928,
   "token": "déposant"
  },
+ "dépourvoir": {
+  "fr": "La cigale, ayant chanté tout l'été, se trouva fort dépourvue quand la bise fut venue.",
+  "en": "The cicada, having sung all summer long, found herself sorely destitute when the north wind came.",
+  "source": "lafontaine-fables.txt",
+  "line": 1011,
+  "token": "dépourvue"
+ },
  "députer": {
   "fr": "L'assemblée députa trois de ses membres pour porter la pétition au roi.",
   "en": "The assembly delegated three of its members to bring the petition to the king.",
@@ -2910,6 +2945,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 6404,
   "token": "encadrait"
+ },
+ "encaisser": {
+  "fr": "La section administrative a géré l'ensemble du budget du service et a notamment facturé et encaissé les émoluments pour les prestations des différentes unités, conformément à l'arrêté du 9 mai 2001.",
+  "en": "The administrative section managed the department's entire budget and, in particular, billed and collected the fees for the services of the various units, in accordance with the order of 9 May 2001.",
+  "source": "ch-vs-rapport-gestion-2006.txt",
+  "line": 567,
+  "token": "encaissé"
  },
  "enceindre": {
   "fr": "De puissants remparts enceignaient jadis toute la vieille ville.",
@@ -3869,6 +3911,13 @@
   "source": "proust-du-cote-de-chez-swann-1913.txt",
   "line": 121,
   "token": "imaginais"
+ },
+ "impacter": {
+  "fr": "De fait, d'autres facteurs que la technologie impactent le travail.",
+  "en": "In fact, factors other than technology have an impact on work.",
+  "source": "fr-france-strategie-intelligence-artificielle-travail-2018.txt",
+  "line": 35,
+  "token": "impactent"
  },
  "implanter": {
   "fr": "Sa maxime constante fut de n'en jamais laisser un seul s'implanter chez ma tante, qu'elle mettait d'ailleurs une sorte d'orgueil à ne laisser approcher par personne.",
@@ -5004,6 +5053,13 @@
   "line": 96,
   "token": "permettez"
  },
+ "perpétuer": {
+  "fr": "Les guerres impériales ont perpétué la Révolution.",
+  "en": "The imperial wars perpetuated the Revolution.",
+  "source": "wp-napoleon-ier.txt",
+  "line": 351,
+  "token": "perpétué"
+ },
  "personnaliser": {
   "fr": "Le parcours d'intégration des cheffes et des chefs de service a été complété par un accompagnement personnalisé lors de la prise de fonction.",
   "en": "The onboarding programme for department heads was supplemented by personalised coaching at the time of taking up their posts.",
@@ -5648,6 +5704,13 @@
   "line": null,
   "token": "raya"
  },
+ "recadrer": {
+  "fr": "Le DECS se propose de soumettre au Conseil d'Etat la révision du règlement du 11 décembre 1985 en vue de redéfinir, de recadrer les attributions, la composition, l'intégration et le fonctionnement du Conseil de l'instruction publique.",
+  "en": "The DECS intends to submit to the Council of State a revision of the regulation of 11 December 1985, with a view to redefining and reframing the powers, membership, integration and functioning of the Public Education Council.",
+  "source": "ch-vs-rapport-gestion-2006.txt",
+  "line": 527,
+  "token": "recadrer"
+ },
  "recenser": {
   "fr": "Il avait commencé d'attacher un prix inestimable à ces moments passés chez elle le soir, où il l'asseyait sur ses genoux, lui faisait dire ce qu'elle pensait d'une chose, d'une autre, où il recensait les seuls biens à la possession desquels il tînt maintenant sur terre.",
   "en": "He had begun to attach an inestimable value to those evenings spent with her, when he would seat her on his knee, make her tell him what she thought of one thing or another, and take stock of the only goods whose possession now mattered to him on earth.",
@@ -5752,6 +5815,27 @@
   "source": "ch-fed-ofev-environnement-suisse-2022.txt",
   "line": 609,
   "token": "recycler"
+ },
+ "redessiner": {
+  "fr": "Les frontières dans la répartition des activités de soins se redessinent depuis quelques années.",
+  "en": "The boundaries in the distribution of care activities have been redrawing themselves for some years now.",
+  "source": "fr-ademe-transitions-2050-2021.txt",
+  "line": 407,
+  "token": "redessinent"
+ },
+ "redimensionner": {
+  "fr": "Il redimensionne la fenêtre pour voir les deux documents côte à côte.",
+  "en": "He resizes the window so as to see the two documents side by side.",
+  "source": "Claude (Opus 5)",
+  "line": null,
+  "token": "redimensionne"
+ },
+ "rediriger": {
+  "fr": "Elles peuvent également servir à rediriger automatiquement les navigateurs vers une autre page, à interdire la mise en cache ou l'indexation de la page par les moteurs.",
+  "en": "They can also serve to redirect browsers automatically to another page, or to forbid the caching or indexing of the page by search engines.",
+  "source": "wp-referencement-naturel.txt",
+  "line": 34,
+  "token": "rediriger"
  },
  "redonner": {
   "fr": "Nous voulons seulement que vous mangiez, et que mon mari mange aussi; redonnez de la sole normande à Monsieur, vous voyez bien que la sienne est froide.",
@@ -6368,6 +6452,13 @@
   "source": "zola-lassommoir-1877.txt",
   "line": 471,
   "token": "régnait"
+ },
+ "réinvestir": {
+  "fr": "Si les effets de ces opérations sont limités dans le temps, elles permettent de désorganiser efficacement les acteurs qui doivent réinvestir du temps et de l'argent pour reconstruire leurs infrastructures.",
+  "en": "Although the effects of these operations are limited in time, they effectively disrupt the actors, who must reinvest time and money to rebuild their infrastructure.",
+  "source": "fr-anssi-panorama-cybermenace-2024.txt",
+  "line": 203,
+  "token": "réinvestir"
  },
  "réjouir": {
   "fr": "Lorsqu'il survient une épidémie, il ne sait pas s'il doit se réjouir des décès ou s'affliger des sépultures.",
@@ -7643,12 +7734,26 @@
   "line": 461,
   "token": "édité"
  },
+ "éduquer": {
+  "fr": "Le développement de la santé publique s'accélère dans les années 1920 avec des initiatives pour protéger la santé des mères et des enfants, éduquer les populations à la santé et réduire les maladies liées au lait non pasteurisé.",
+  "en": "The development of public health accelerated in the 1920s with initiatives to protect the health of mothers and children, educate the population about health, and reduce diseases linked to unpasteurized milk.",
+  "source": "fr-sante-publique-demain-2022.txt",
+  "line": 1161,
+  "token": "éduquer"
+ },
  "égarer": {
   "fr": "Un bûcheron venoit de rompre ou d'égarer le bois dont il avoit emmanché sa cognée.",
   "en": "A woodcutter had just broken or lost the wooden handle he had fitted to his axe.",
   "source": "lafontaine-fables.txt",
   "line": 13627,
   "token": "égarer"
+ },
+ "égorger": {
+  "fr": "Il alloit l'égorger, puis le mettre en potage.",
+  "en": "He was about to cut its throat, and then put it in the soup.",
+  "source": "lafontaine-fables.txt",
+  "line": 3509,
+  "token": "égorger"
  },
  "élaborer": {
   "fr": "Sans que je me souciasse de la contradiction qu'il y avait à vouloir regarder et toucher avec les organes des sens ce qui avait été élaboré par la rêverie et non perçu par eux.",

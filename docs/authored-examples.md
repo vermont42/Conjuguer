@@ -1,13 +1,18 @@
 # Authored examples (Claude-original)
 
-The 19 verbs below had **no clean verbal use in any open-licensed corpus tier**
-(literature / government / technology / wikipedia). Their surface forms collide with a common
-noun, adjective, or another verb (e.g. `plaire` ↔ adverb *plus*, `faillir` ↔ *falloir*,
-`violer` ↔ adjective *violent*), so corpus mining could not place them.
+The 21 verbs below had **no clean verbal use in any open-licensed corpus tier**
+(literature / government / technology / wikipedia). Most of their surface forms collide with a
+common noun, adjective, or another verb (e.g. `plaire` ↔ adverb *plus*, `faillir` ↔ *falloir*,
+`violer` ↔ adjective *violent*), so corpus mining could not place them; the last two —
+`bloguer` and `redimensionner`, added on 2026-08-28 — are simply too new and too narrow for the
+tiers to contain them verbally at all (the corpus has the nouns `blog` and `redimensionnement`
+and nothing else).
 
-These example sentences are therefore **original, AI-authored content written by Claude (Opus
-4.8)** — not sourced from any document. In `json/literature_examples.json` each carries
-`"source": "Claude (Opus 4.8)"` (and `"line": null`) so its provenance is explicit and
+These example sentences are therefore **original, AI-authored content** — not sourced from any
+document. In `json/literature_examples.json` each carries `"line": null` and a `source` naming
+the model that wrote it: `"Claude (Opus 4.8)"` for the first nineteen, `"Claude (Opus 5)"` for
+`bloguer` and `redimensionner`. `ExampleSource.claude` carries that string through to the
+displayed attribution, so the app never credits the wrong model. Provenance is explicit and
 queryable; nothing here is attributed to a corpus source it did not come from. (Konjugieren
 handled its corpus stragglers the same way.)
 
@@ -17,6 +22,7 @@ is a rare/neologistic verb; its example is given in the marketing register where
 | Verb | Form | French | English |
 |---|---|---|---|
 | adjoindre | s'adjoindre | Pour mener à bien le projet, la directrice a décidé de s'adjoindre deux spécialistes du climat. | To carry out the project, the director decided to bring on two climate specialists. |
+| bloguer | blogue | Depuis qu'elle a pris sa retraite, elle blogue chaque semaine sur les oiseaux de son jardin. | Ever since she retired, she has been blogging every week about the birds in her garden. |
 | brancher | branchez | Avant de lancer la mise à jour, branchez votre ordinateur sur le secteur. | Before starting the update, plug your computer into the mains. |
 | carrer | carra | Il se carra dans son fauteuil et alluma tranquillement sa pipe. | He settled back squarely in his armchair and calmly lit his pipe. |
 | diplômer | diplômer | Cette école vient de diplômer sa première promotion d'ingénieurs en cybersécurité. | This school has just graduated its first class of cybersecurity engineers. |
@@ -29,6 +35,7 @@ is a rare/neologistic verb; its example is given in the marketing register where
 | lover | lova | Le chat se lova au creux du canapé et ne bougea plus de la soirée. | The cat curled up in the hollow of the sofa and didn't move for the rest of the evening. |
 | ouvrer | ouvré | Ce candélabre d'argent a été patiemment ouvré par un orfèvre vénitien. | This silver candelabrum was patiently wrought by a Venetian goldsmith. |
 | plaire | plu | Ce roman m'a tellement plu que je l'ai lu deux fois de suite. | I enjoyed this novel so much that I read it twice in a row. |
+| redimensionner | redimensionne | Il redimensionne la fenêtre pour voir les deux documents côte à côte. | He resizes the window so as to see the two documents side by side. |
 | référencer | référencer | Une bonne agence saura référencer votre site afin qu'il apparaisse en première page. | A good agency will know how to optimize your website so that it appears on the first page. |
 | sucrer | sucra | Elle sucra légèrement la crème avant de la servir aux invités. | She lightly sweetened the cream before serving it to the guests. |
 | typer | typé | Le réalisateur a délibérément typé ses personnages pour les rendre reconnaissables. | The director deliberately gave his characters strong, recognizable types. |

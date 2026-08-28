@@ -1779,3 +1779,133 @@ has in plausible company (*sous-estimer* ≈ #1,050, *tire-bouchonner* ≈ #5,10
 scaling covers the ten compounds in no source; a hand-maintained editorial file covers nine
 rarities. The research doc gained a *Verbs no corpus lists* section and
 `glaff-frequency-ranking.md` a rewritten decision 5 and pipeline steps to match.
+
+## Seven bad infinitives, thirteen new verbs, and a defective verb that needed a new group (2026-08-28)
+
+The frequency research turned up two side findings in `verbs.xml`: seven infinitives no
+dictionary knows, and a shortlist of common verbs the file simply lacks. This session fixed
+both, then gave the additions the same treatment their neighbours in the top 1,500 already
+have — an etymology in both languages and an example sentence with honest provenance.
+
+`préenir` was a duplicate: *prévenir* already sat 40 lines below with the same model and a
+real frequency rank, so the line was deleted rather than repaired. The other six were
+renamed after confirming each target on fr.wiktionary — including the two I least expected
+to survive, *révolvériser* (« cribler de balles à l'aide d'un révolver », and the 1990
+spelling of an older *revolvériser*) and *désenvaser*, which not only exists but has a
+derivative, *redésenvaser*. Five of the seven had lost a *v* in what looks like one bad
+transcription pass (`préenir`, `récidier`, `réolvériser`, `transaser`, `désenaser`); the
+other two had lost an accent (`eduquer`, `egorger`). Three of the renames changed their
+alphabetical home (`désenvaser`, `révolvériser`, `transvaser`), so the edit script re-inserted
+every moved and new line at its French-collation position rather than editing in place. The
+collation sweep afterwards reports exactly one out-of-order pair, `visionner > visibiliser`,
+which predates this work and involves none of these lines.
+
+`xmllint --valid` did not pass before this session and had nothing to do with the verb list:
+the DOCTYPE declared `in tn mo ay fr dg` but the file also uses `re` (208 times), `ah` (60)
+and `ex` (8). Three `#IMPLIED` declarations later it validates.
+
+### dépourvoir and defect group 27
+
+The plan proposed reusing defect group 13 (*faillir*'s "Impératif is not used. Rare outside
+passé simple and participe passé"), on the strength of dictionaries that list *dépourvoir* in
+the infinitive, passé simple, participe passé and compound tenses. The sources say something
+narrower. The TLFi marks it *Vx.* and restricts it to "[Seulement à l'inf. et aux temps
+composés]", adding the deflating note that its own examples "ne correspondent à aucun usage
+attesté"; fr.Wiktionary says "il n'est guère usité qu'à l'infinitif et surtout au participe
+passé". Neither mentions the passé simple, so group 13's description would have been wrong
+about this verb in the one place it is most specific.
+
+Encoding the right thing meant reading how the `uo`/`du` shorthand actually decodes.
+`Tense.tensesForShorthand` knows only the *simple* tense families (`r x i f c b q h`, plus
+`pp rr sf`) and bare person-numbers; there is no code for a compound family. So a `uo` group —
+which starts from "everything is defective" and un-marks only what it lists — cannot express
+"the compound tenses are used", and `uo="pp"` (groups 6 and 15) in fact marks every compound
+tense defective. The plan anticipated this question and left the answer to be checked; the
+answer is that `uo` can't do it. `du` can: group 27 is
+`du="rA,iA,xA,fA,cA,bA,qA,hA,rr"` — strike every simple tense and the participe présent, and
+what remains is the infinitif, the participe passé, and the eight compound families. That is
+the TLFi's sentence, exactly. `hA` also strikes the impératif passé, via the
+`mirrorImpératifToPassé` pass in `DefectGroup.applyDefect`, which is right: there is no
+imperative at all. In the simulator *dépourvoir* now reads "Defective. Only participe passé
+and compound tenses are used", with *dépourvu* live and *dépourvoyant*, *je dépourvois* and
+the rest struck through.
+
+The conjugation engine is untouched by defectivity, so `AddedVerbsTests` still pins
+`il dépourvut` — *pourvoir*'s passé simple, not *voir*'s `dépourvit`. That was the one
+conjugation worth a test: `mo="4-1C"` is doing real work.
+
+### What the model says about alléger's future
+
+The plan asked which spelling the app produces for *alléger*'s futur — `allégerai` or
+`allègerai`. Model 1-6C (*protéger*) applies its é→è alteration only to `r1s,r2s,r3s,r3p,b1s,
+b2s,b3s,b3p`, so the futur keeps the acute: **allégerai**, matching `protégerai` in the
+generated model tests. Pleasingly, the subagent's etymology reaches the same fork from the
+other side, noting that the traditional `allégera` competes with the 1990 rectifications'
+`allègera` and that both are current — and the Flaubert example mined for the verb happens to
+contain the finite form `allégera` itself.
+
+### Examples: what the corpus had, and what it didn't
+
+Thirteen of the fifteen were mined from the open tiers. The two best finds were literary and
+both La Fontaine: *égorger* from *Le Cygne et le Cuisinier* ("Il alloit l'égorger, puis le
+mettre en potage"), and — for *dépourvoir* — the opening of *La Cigale et la Fourmi*. That
+second choice deserves a note, because the plan explicitly warned off "*dépourvu*-as-adjective".
+There is no finite verbal use of *dépourvoir* anywhere in the corpus, and there could not be:
+the verb is defective precisely down to its participle. "Se trouva fort dépourvue" is that
+participle in predicative use — the verb's only living form — so it is the honest example, and
+the alternative was inventing a sentence in a tense the dictionaries say nobody writes.
+
+*alléger* came from Flaubert's comices-agricoles oration; *perpétuer* from a single clean
+Wikipedia sentence ("Les guerres impériales ont perpétué la Révolution"); *impacter* from
+France Stratégie, where the verb the Académie objects to appears without apology ("d'autres
+facteurs que la technologie impactent le travail"). *acter* was the sneakiest to mine: a stem
+regex on `act[eé]` returns 247 hits that are almost entirely the noun *acte* and Molière's act
+headings, and the one genuine verbal use turned up as a side effect of the *éduquer* search —
+"la planification écologique, dont la nécessité a été actée par le président de la République".
+
+Two verbs had nothing. *bloguer* does not appear in any tier in any form; the corpus has
+`blog`, `blogs`, `Blogger` and `blogosphère`, and no verb. *redimensionner* appears only as the
+noun `redimensionnement`, four times. Both are therefore Claude-authored, which had a
+consequence the plan flagged: `VerbView.sourceClaude` hard-coded "Claude (Opus 4.8)", and this
+session is not Opus 4.8. `ExampleSource.claude` now carries the raw source string as an
+associated value and `L.VerbView.sourceClaude(_:)` takes it as a parameter (`— example written
+by %@` / `— exemple rédigé par %@`), so the 82 existing entries still render "Claude (Opus
+4.8)" — verified on *plaire* in the simulator — and the two new ones render "Claude (Opus 5)".
+Naming the wrong model would have been a small lie told 84 times.
+
+### No Chanson examples, and that is the answer, not a gap
+
+The reflex policy attaches a *Chanson de Roland* line only when it contains the modern verb's
+own ancestor. Greps of `chanson-roland-oxford.txt` and the bracket glosses in `chanson.md`
+found no `aleg-`, `esgorg-`, `desporv-`/`despurv-`, or even `porv-`/`purv-`: *alegier*,
+*esgorgier* and *desporveir* are all absent from the Oxford text. The poem does carry `vestir`
+fifteen times (knights donning mail), which is the ancestor of *vêtir*, **not** of
+*réinvestir* — a learned borrowing of *investīre*, prefixed. Attaching it would have been
+exactly the synonym-shaped mistake the policy exists to prevent. The other twelve verbs are
+later borrowings or modern formations and could not appear in an eleventh-century poem;
+spot-greps for `cadr`, `dessin`, `dimension`, `carte`, `blog`, `impact` and `educ`/`eduq`
+returned zero.
+
+### Recounted, not nudged
+
+`verbs.xml` goes from 6,320 entries to **6,332** (−1 `préenir`, +13 new), over **6,328**
+distinct infinitifs — the gap is the handful of verbs carrying two conjugation patterns
+(*sortir*, *saillir*, …). The regular/irregular split was recomputed from
+`VerbModel.irregularity` in a throwaway test rather than nudged: **5,235 regular / 1,093
+irregular**, replacing a 5,217/1,097 pair that was already stale against a "6,314" total
+nobody had updated. Defective verbs: **72** distinct infinitifs carry a `dg`, replacing
+"sixty-six" / "soixante-six" in both languages. `Info.irregularitiesText`,
+`Info.valuePropositionText`, `Info.creditsText`, both `Onboarding.browse*` strings, README,
+CLAUDE.md and `docs/project-structure.md` all now agree.
+
+Two documentation corrections fell out of the verification pass. `literature_examples.json`
+and its `corpus/json/` twin were *not* byte-identical as the corpus doc claims — the bundled
+copy had a trailing newline the other lacked; both are now written the way
+`merge_classical.py` writes them (`json.dump(..., indent=1)`, no trailing newline) and `cmp`
+is clean. And CLAUDE.md's note that the unannotated verb-search field sits at ≈ `201,191` on
+iPhone 17 is wrong for the current layout: `describe_ui` puts the lone `AXTextField` at
+`{{16, 70}, {315, 44}}`, centre ≈ `173,92`. The stale number cost two wasted taps before I
+measured; the note now says to measure.
+
+All 233 tests pass, including the 14 new ones in `AddedVerbsTests` — which, besides the
+conjugations, assert that the seven old misspellings no longer conjugate at all.

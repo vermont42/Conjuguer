@@ -80,7 +80,7 @@ Conjuguer/
 │   ├── VerbModelParser.swift   # XMLParser delegate for verbModels.xml
 │   ├── verbModels.xml          # Conjugation pattern definitions
 │   ├── VerbParser.swift        # XMLParser delegate for verbs.xml
-│   ├── verbs.xml               # 6,320 verb definitions with inline frequency-of-use ranks
+│   ├── verbs.xml               # 6,332 verb definitions with inline frequency-of-use ranks
 │   ├── XMLDataParser.swift     # Shared XMLParser delegate base for the three parsers
 │   └── Game/
 │       ├── GameModels.swift            # Entity structs/enums (Bullet, Target, EnemyBullet, DropKind, …)
@@ -196,6 +196,7 @@ ConjuguerTests/
 ├── LocalizationTests.swift     # Asserts format-style strings substitute their runtime values
 ├── TestUtils.swift             # T.testConjugation shared assertion (threads #_sourceLocation) and T.generateVerbModelTests
 └── Models/
+    ├── AddedVerbsTests.swift           # Conjugations of the 13 verbs added and 6 misspellings renamed on 2026-08-28, plus dépourvoir's defect group 27
     ├── CompoundTenseTests.swift        # Compound tenses, incl. feminine/plural participe agreement
     ├── ConjugationResultTests.swift    # Parameterized scoring cases for ConjugationResult
     ├── CorpusFormsDumpTests.swift      # Harness: drives Conjugator over the verb set to emit corpus form→lemma JSON for the example pipeline

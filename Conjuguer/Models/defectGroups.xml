@@ -37,4 +37,5 @@
   <defectGroup id="24" en="Usually used with 3s. Occasionally 3p. In poetry, other persons might be appropriate." fr="La 3s est généralement utilisée. Parfois la 3p. En poésie, d'autres personnes pourraient être appropriées." du="1s,2s,1p,2p" />
   <defectGroup id="25" en="Passé simple and subjonctif imparfait are not used." fr="Le passé simple et le subjonctif imparfait ne sont pas utilisés." du="xA,qA" />
   <defectGroup id="26" en="Only participe passé, participe présent, and 3s and 3p are used; passé simple and subjonctif imparfait are not used." fr="Seuls le participe passé, le participe présent, les 3s et 3p sont utilisés ; le passé simple et le subjonctif imparfait ne sont pas utilisés." du="1s,2s,1p,2p,xA,qA" />
+  <defectGroup id="27" en="Only participe passé and compound tenses are used." fr="Seuls le participe passé et les temps composés sont utilisés." du="rA,iA,xA,fA,cA,bA,qA,hA,rr" />
 </defectGroups>

@@ -169,8 +169,8 @@ enum L {
       String(localized: "VerbView.sourceFrenchGov")
     }
 
-    static var sourceClaude: String {
-      String(localized: "VerbView.sourceClaude")
+    static func sourceClaude(_ model: String) -> String {
+      String(localized: "VerbView.sourceClaude", defaultValue: "— example written by \(model)")
     }
 
     static func sourceWikipedia(_ article: String) -> String {

@@ -6,9 +6,11 @@ Roland* example nested where one exists. It is a build-time data pipeline, **not
 of the shipped app target**; only the finished JSON is bundled.
 
 **Current coverage (single source of truth).** `literature_examples.json` covers **all 982
-usage-ranked verbs + the 144 Chanson-only special verbs = 1126 entries (100%)** — mined from
-the corpus tiers, with a residue of Claude-authored sentences where no open corpus uses the
-verb verbally (82 entries, flagged `"source": "Claude (Opus 4.8)"` / `"line": null`). The
+usage-ranked verbs + the 144 Chanson-only special verbs + the 15 verbs added on 2026-08-28 =
+1141 entries (100%)** — mined from the corpus tiers, with a residue of Claude-authored
+sentences where no open corpus uses the verb verbally (84 entries, flagged `"line": null` and a
+`source` naming the authoring model: `"Claude (Opus 4.8)"` for the first 82, `"Claude (Opus
+5)"` for `bloguer` and `redimensionner`). The
 per-stage percentages quoted in the pipeline narrative below (e.g. 974/982, 963/982) are
 **historical waypoints** captured while the pipeline was being built up, *not* the current
 total; when they conflict, this figure governs.
@@ -130,8 +132,8 @@ Automated corpus mining topped out at **963/982 (98.1%)**. The final 19 — inhe
 open corpus uses verbally — were filled with **original Claude-authored example sentences**
 (`docs/authored-examples.md`), each carrying `"source": "Claude (Opus 4.8)"` + `"line": null` in
 the JSON so AI authorship is explicit and never attributed to a corpus it didn't come from.
-`literature_examples.json` now covers the ranked **982 + 144 Chanson-only special verbs = 1126**
-(`100%`). To extend/replace a tier: add sources under it, re-run `build_tail_index.py` + the
+`literature_examples.json` now covers the ranked **982 + 144 Chanson-only special verbs + the 15
+verbs added on 2026-08-28 = 1141** (`100%`). To extend/replace a tier: add sources under it, re-run `build_tail_index.py` + the
 workflow, and merge into `literature_examples.json`.
 
 **Classical tier — the 144 Chanson-only verbs.** `chanson_examples.json` attaches a *Roland*
