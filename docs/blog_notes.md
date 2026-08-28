@@ -2116,3 +2116,58 @@ the prose, or the model — so it is recorded here rather than changed.
 244 tests pass. `docs/release-notes-2.2.txt` gains a paragraph in both languages, since a
 user who has been typing *je considére* into the quiz deserves to know the app was wrong
 rather than assume they were.
+
+## The irregularity metric learns to read endings (2026-08-28)
+
+Yesterday's note recorded a disagreement and left it: `VerbModel.irregularity` scored model
+`3-2A` — *assaillir, défaillir, saillir, tressaillir* — at 0, while `Info.irregularitiesText`
+names only `1-1`, `2-1` and `5-1A` as the regular models. Josh asked for it settled. Of the
+three ways out (fix the metric, fix the prose, fix the model), only the first is defensible:
+*j'assaille* is not a regular -ir conjugation, and `VerbModel.description` prints
+"N% irregular" for every id outside those three, so the model's own screen was reading
+**"0% irregular"** — a sentence that argues with itself.
+
+**The cause.** `computeIrregularities` scored two things: an uppercase participe ending, and
+stem alterations. `3-2A` has neither. Its irregularity lives entirely in its *endings group* —
+it is an -ir verb taking -er présent endings — and the metric never looked there.
+
+**The fix reuses a convention already in the file.** `IndicatifPrésentGroup` and
+`SubjonctifPrésentGroup` already mark the irregular variant by uppercasing the endings they
+produce (`.e(appliesToErVerb: false)` yields `E, ES, E, ONS, EZ, ENT`), which is the same
+uppercase-means-irregular rule the metric already applied to the participe ending and that
+`RichTextView` renders in red. So each group gained a `marksIrregularEndings` property that
+reads it back off the produced endings rather than pattern-matching the associated booleans —
+worth doing because the two enums carry their regular case with *opposite* polarity
+(`.e(appliesToErVerb: true)` is the regular indicatif; `.e(appliesToIrVerb: true)` the
+irregular subjonctif), which is precisely the sort of detail a hand-written list gets wrong
+later. `computeIrregularities` adds one point for each. `PasséSimpleGroup` needed nothing —
+none of its cases produce uppercase.
+
+**The ceiling nearly moved for no reason.** My first version raised `maxIrregularityCount`
+from 41 to 43 on the assumption that the two new clauses could push the top model higher.
+Measuring said otherwise: être's irregularity is all stem alteration, so it gains nothing from
+the endings clauses and its raw count is still 41. With the constant at 43, être dropped from
+a round **100% to 95%** and 69 of 95 models shifted — most of them *downward*, purely from
+dividing by a bigger number. Left at 41, être keeps 100%, nothing exceeds the scale, and only
+34 models change, every one of them *upward*, which is the correct direction for a metric that
+learned to see more irregularity. The lesson is small but general: when a normalizing constant
+is "the observed maximum", check whether the maximum actually moved before raising it.
+
+**Results.** Models scoring 0 are now exactly `1-1`, `2-1`, `5-1A` — metric and prose agree.
+`3-2A` reads 4%. The families that gained are the ones that should: `3-1` 4→9%, `3-2B` 2→7%,
+`3-2C` 17→21%, `2-2` 46→51%, and the -oir/-re models a couple of points each.
+
+**Counts again, a third time.** Four verbs move to the irregular column: **5,223 regular /
+1,103 irregular**, summing to 6,326. `saillir` and `sortir` each carry one regular and one
+irregular pattern, so the rule is now written down rather than assumed — a verb is
+"completely regular", in the Info text's own words, only if *every* pattern it has is.
+
+`IrregularityMetricTests` pins all of it: the zero set equals the three regular ids, `3-2A`
+scores above zero and has no stem alterations (so it can only be the endings clause holding it
+up), no model escapes 0...100 and something still touches 100, and the shipped split matches
+the data. That last one is the important one. These figures have gone stale twice in two days —
+once before I arrived and once by my own hand — and prose is exactly the kind of thing no
+build checks. Now a verb added, removed, or re-modeled fails a test that names the numbers in
+`Info.irregularitiesText`, which is the only moment anyone would think to update it.
+
+248 tests pass.

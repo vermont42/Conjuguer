@@ -79,6 +79,17 @@ nonisolated enum SubjonctifPrésentGroup: Hashable {
     }
   }
 
+  // Same convention as IndicatifPrésentGroup.marksIrregularEndings. Note the two enums carry
+  // their regular case with opposite polarity — `.e(appliesToErVerb: true)` is the regular
+  // indicatif, `.e(appliesToIrVerb: true)` the irregular subjonctif — which is exactly why this
+  // reads the produced endings rather than the associated booleans.
+  var marksIrregularEndings: Bool {
+    PersonNumber.allCases.contains { personNumber in
+      let ending = endingForPersonNumber(personNumber)
+      return ending != ending.lowercased()
+    }
+  }
+
   func endings(stemAlterations: [StemAlteration]?) -> [PersonNumber: String] {
     EndingDisplay.markedEndings(
       personNumbers: PersonNumber.allCases,

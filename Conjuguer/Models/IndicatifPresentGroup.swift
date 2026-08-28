@@ -120,6 +120,16 @@ nonisolated enum IndicatifPrésentGroup: Hashable {
     }
   }
 
+  // Uppercase in an ending is this app's mark of an irregularity, both on screen (red) and in
+  // `VerbModel.computeIrregularities`. Reading it back off the endings keeps the two in step:
+  // a group added later is classified by the letters it actually produces, not by a list here.
+  var marksIrregularEndings: Bool {
+    PersonNumber.allCases.contains { personNumber in
+      let ending = présentEndingForPersonNumber(personNumber)
+      return ending != ending.lowercased()
+    }
+  }
+
   func endings(stemAlterations: [StemAlteration]?) -> [PersonNumber: String] {
     EndingDisplay.markedEndings(
       personNumbers: PersonNumber.allCases,

@@ -202,6 +202,7 @@ ConjuguerTests/
     ├── DeeplinkTests.swift             # conjuguer:// parsing and routing (serialized — mutates Current)
     ├── DefectGroupTests.swift          # Defect-group membership and tense suppression
     ├── DefectivityAuditTests.swift     # Per-family defectivity audit (traire, braire, férir, poindre, …)
+    ├── IrregularityMetricTests.swift   # Keeps VerbModel.irregularity and the Info text in agreement: only 1-1/2-1/5-1A score 0%, and the shipped regular/irregular split matches the data
     ├── FuturStemsTests.swift           # Futur stem derivation, incl. the trailing-e trim for -re verbs
     ├── GameCollisionTests.swift        # Characterization tests for the three collision shapes
     ├── GameDiveArcTests.swift          # Dive-bomber arc geometry (serialized)
