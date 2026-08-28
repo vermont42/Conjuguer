@@ -1,6 +1,6 @@
 # frequency
 
-The build-time pipeline that gives every one of Conjuguer's 6,328 distinct infinitives a
+The build-time pipeline that gives every one of Conjuguer's 6,326 distinct infinitives a
 frequency-of-use ranking. The research behind the source choice — what a paid Sketch Engine
 plan does and does not buy, how the candidate corpora compare on coverage, register, and
 licence — is [`docs/verb-frequency-sources.md`](../docs/verb-frequency-sources.md).
@@ -36,7 +36,8 @@ pin the snapshots the shipped counts came from.
 Sajous, Hathout & Calderone, CLLE-ERSS, Université de Toulouse. 1.4 million inflected forms
 extracted from Wiktionnaire, each carrying lemma frequency counts from three corpora: FrWaC
 (web, ≈ 1.25 billion words), LM10 (ten years of *Le Monde*, ≈ 220 million), and Frantext 20e
-(≈ 29 million). It covers 6,284 of the 6,328 infinitives.
+(≈ 29 million). It lists 6,284 of the 6,326 infinitives, 6,283 of them with a usable FrWaC
+count — see *Quarantined FrWaC counts* for the one exception.
 
 | Fact | Value |
 |---|---|
@@ -90,7 +91,7 @@ shasum -a 256 frequency/glaff-1.2.2.txt frequency/oldiesSubLexicon.txt frequency
 | `apply_counts.py` | `verb-counts.json` → the `hi`/`hn`/`hl`/`hs`/`hp` attributes of `verbs.xml` | yes |
 | `generate_frequencies_txt.py` | `verbs.xml` → `docs/frequencies.txt`, in `VerbParser.ranked(_:)`'s exact order | yes |
 | `verb-counts.json` | One row per distinct infinitive: measured counts and, where needed, `frwac_estimate` | yes |
-| `editorial-counts.json` | The hand-assigned tier: nine verbs, each with a one-line reason | yes |
+| `editorial-counts.json` | The hand-assigned tier: seven verbs, each with a one-line reason | yes |
 | `report.md` | The last build's report | no |
 
 ```bash
@@ -108,18 +109,18 @@ estimate exceeds the clamp. Its Spearman-continuity section only works on the fi
 ## No verb goes without a count
 
 Absence from GLÀFF is not evidence of rarity — it excludes hyphenated compounds *by design*,
-and `sous-estimer` (11.5 per million in subtitles) is not a rare verb. So the 45 infinitives
+and `sous-estimer` (11.5 per million in subtitles) is not a rare verb. So the 43 infinitives
 GLÀFF does not measure get an **estimated** FrWaC-equivalent, stored in `hi` like any other
 count and flagged `hp="y"`, through three tiers in order of preference:
 
-1. **`lexique4-fit`** (25 verbs) — the verb is in Lexique 4, so convert its per-million
+1. **`lexique4-fit`** (26 verbs) — the verb is in Lexique 4, so convert its per-million
    figure with a least-squares fit of `log(frwac)` on `log(lexique4)` over the ≈ 5,600 verbs
    both sources count. The 2026-08-28 fit was `log(frwac) = 7.58 + 0.76·log(lex4)`, R² 0.69,
    typical error ±2.6× — a few hundred rank places mid-list.
 2. **`base-ratio`** (10 verbs) — a compound in no source: the base verb's measured count
    times a prefix ratio, the median of `lexique4(prefix-X) / lexique4(X)` over the pairs
    Lexique 4 does have for that prefix.
-3. **`editorial`** (9 verbs) — a rarity in no source: a hand-assigned count from
+3. **`editorial`** (7 verbs) — a rarity in no source: a hand-assigned count from
    `editorial-counts.json` with a stated reason. Zero is an acceptable entry; the point is
    that the number is chosen rather than missing.
 
@@ -145,10 +146,16 @@ caught exactly one verb. The register outliers the research flagged — `faillir
 `étayer`, *inflated* in Le Monde by a lemmatizer collapsing `fallait` and `étais` onto them,
 not depressed in FrWaC — stay measured, as they should.
 
-## Editorial judgment recorded elsewhere
+## A spelling audit this pipeline provoked
 
-Two of the editorial counts come from GLÀFF measuring a *differently spelled* form of the
-same verb: `haubaner` (102 hits) for `verbs.xml`'s `haubanner`, and `ahaner` (95) for its
-`ahanner`. Both of Conjuguer's spellings look like the variant rather than the standard one.
-Nothing here changes them — the counts are right either way — but they are worth a look the
-next time the verb list is audited.
+The first build's editorial tier had nine verbs rather than seven, because `verbs.xml`
+carried both `ahaner` and `ahanner`, and both `haubaner` and `haubanner` — the standard
+spelling measured by GLÀFF, and a doubled-*n* duplicate with the same translation and the
+same model that no corpus had ever heard of. The duplicates were deleted rather than
+estimated. The unmeasured population went from 45 to 43 without a single count changing,
+which is the shape a data-quality fix should have: the gap closed because the gap was an
+error.
+
+The lesson generalizes. A verb that every corpus misses is sometimes rare and sometimes
+misspelled, and the editorial tier is where the difference shows up, because writing a
+justification for a count forces the question. Read that file's reasons before trusting it.

@@ -981,13 +981,6 @@
   "frantext": 41,
   "lexique4_per_million": 0.032
  },
- "ahanner": {
-  "frwac_estimate": {
-   "count": 95,
-   "method": "editorial",
-   "basis": "GLÀFF measures the modern one-n spelling `ahaner` at 95 FrWaC hits; `verbs.xml`'s `ahanner` is the variant spelling of that same verb."
-  }
- },
  "ahurir": {
   "frwac": 356,
   "lm10": 76,
@@ -20301,13 +20294,6 @@
   "frwac": 102,
   "lm10": 12,
   "frantext": 3
- },
- "haubanner": {
-  "frwac_estimate": {
-   "count": 102,
-   "method": "editorial",
-   "basis": "GLÀFF measures the standard one-n spelling `haubaner` at 102 FrWaC hits; `verbs.xml`'s two-n spelling is that same verb."
-  }
  },
  "hausser": {
   "frwac": 3337,

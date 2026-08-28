@@ -79,7 +79,7 @@ Conjuguer/
 │   ├── VerbModelParser.swift   # XMLParser delegate for verbModels.xml
 │   ├── verbModels.xml          # Conjugation pattern definitions
 │   ├── VerbParser.swift        # XMLParser delegate for verbs.xml
-│   ├── verbs.xml               # 6,332 entries / 6,328 distinct infinitives, with inline corpus hit counts (hi/hn/hl/hs/hp); VerbParser derives the ranks
+│   ├── verbs.xml               # 6,330 entries / 6,326 distinct infinitives, with inline corpus hit counts (hi/hn/hl/hs/hp); VerbParser derives the ranks
 │   ├── XMLDataParser.swift     # Shared XMLParser delegate base for the three parsers
 │   └── Game/
 │       ├── GameModels.swift            # Entity structs/enums (Bullet, Target, EnemyBullet, DropKind, …)
@@ -237,6 +237,7 @@ docs/
 ├── quiz-best-score-followup.md     # Follow-up spec: best score on the quiz briefing screen
 ├── release-notes-2.0.txt           # 2.0 release notes
 ├── release-notes-2.1.txt           # 2.1 release notes
+├── release-notes-2.2.txt           # 2.2 release notes
 ├── screenshot-plan.md              # Screenshot capture spec: which views, languages, and devices
 ├── screenshot-playbook.md          # Screenshot workflow: prerequisites, kill switches, driver flags, workarounds, recovery
 ├── screenshots/                    # Captured screenshots produced by the driver

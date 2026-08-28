@@ -47,11 +47,24 @@ struct AddedVerbsTests {
     T.testConjugation(infinitif: "désenvaser", tense: .indicatifPrésent(.thirdSingular), expected: "désenvase", extraLetters: nil)
   }
 
-  // The seven misspellings are gone, so the conjugator must no longer know them.
+  // The nine misspellings are gone, so the conjugator must no longer know them. The last two
+  // shipped as doubled-n duplicates alongside the standard spelling — every corpus knows
+  // `ahaner` and `haubaner`, none has ever seen `ahanner` or `haubanner`.
   @Test func testMisspellingsNoLongerConjugate() {
-    for misspelling in ["préenir", "récidier", "réolvériser", "transaser", "désenaser", "eduquer", "egorger"] {
+    let misspellings = [
+      "préenir", "récidier", "réolvériser", "transaser", "désenaser", "eduquer", "egorger",
+      "ahanner", "haubanner"
+    ]
+    for misspelling in misspellings {
       #expect(Conjugator.conjugatedString(infinitif: misspelling, tense: .participePassé, extraLetters: nil) == nil)
     }
+  }
+
+  @Test func testStandardSpellingsOfTheFormerDuplicatesSurvive() {
+    T.testConjugation(infinitif: "ahaner", tense: .indicatifPrésent(.thirdSingular), expected: "ahane", extraLetters: nil)
+    T.testConjugation(infinitif: "ahaner", tense: .participePassé, expected: "ahané", extraLetters: nil)
+    T.testConjugation(infinitif: "haubaner", tense: .indicatifPrésent(.thirdSingular), expected: "haubane", extraLetters: nil)
+    T.testConjugation(infinitif: "haubaner", tense: .participePassé, expected: "haubané", extraLetters: nil)
   }
 
   // dépourvoir follows pourvoir (passé simple dépourvut), not voir (which would give dépourvit).

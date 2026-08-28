@@ -283,7 +283,7 @@ array.)
 
 ## Architecture Overview
 
-Conjuguer is an iOS app for learning French verb conjugations. It conjugates 6,332 verbs across all French tenses.
+Conjuguer is an iOS app for learning French verb conjugations. It conjugates 6,330 verbs across all French tenses.
 
 ### Project Layout (synchronized folders)
 
@@ -340,7 +340,7 @@ type. Practical consequences:
 ### Data Loading
 
 Verb and model data is loaded from XML files at app startup via `VerbData.parse()`:
-- `verbs.xml` - All 6,332 entries / 6,328 distinct infinitives. Frequency ships inline as raw
+- `verbs.xml` - All 6,330 entries / 6,326 distinct infinitives. Frequency ships inline as raw
   corpus hit counts (`hi` FrWaC, `hn` Le Monde, `hl` Frantext, `hs` Lexique 4 subtitles, `hp`
   when `hi` is an estimate); `VerbParser.ranked(_:)` derives the 1..n rank once per parse, so
   adding a verb never renumbers the file. The pipeline that produced them lives in

@@ -2009,3 +2009,47 @@ GLÀFF's own README (its licence asks that it travel with redistributed derived 
 SHA-256s for the two 200 MB sources that are gitignored. `frequency/README.md` has the
 re-download recipe. All 240 tests pass, `check_docs.py` is clean — after teaching it that
 `verb-counts.json` is not a file called `counts.json`.
+
+## The editorial tier was hiding two misspellings (2026-08-28)
+
+The GLÀFF build left nine verbs in the editorial tier — the hand-assigned counts for verbs no
+corpus lists. Writing a justification for each one is what caught the problem: two of the nine
+reasons I wrote said, in effect, *this is the same verb as one GLÀFF measures, spelled
+differently*. `verbs.xml` carried `ahaner` **and** `ahanner`, `haubaner` **and** `haubanner`
+— identical translations, identical models (`1-1`), differing by one doubled *n*. TLFi,
+Larousse and Wiktionnaire all give the one-*n* spellings; FrWaC has 95 hits for `ahaner` and
+102 for `haubaner`, and has never seen either doubled form.
+
+So these were not misspellings to correct in place — the correct spelling was already sitting
+on the adjacent line. They were duplicate entries, and the fix was deletion. Both pre-date all
+of this work; `git show fccc793` has them, and so does everything before it. Nine verbs of
+editorial judgment became seven, and the unmeasured population went from 45 to 43 without a
+single count changing. That is the shape a data-quality fix should have: the gap closed
+because the gap was an error, not because I filled it in.
+
+Worth stating for whoever runs the pipeline next. An estimate is where a data problem surfaces
+whether you want it to or not. A verb that every corpus misses is sometimes genuinely rare and
+sometimes just wrong, and the tier that forces you to write down *why* you chose a number is
+the one that tells you which. The seven that survive — *anathémiser*, *bienvenir*,
+*blistériser*, *coupasser*, *humoter*, *lock-outer*, *prompter* — each have a reason that
+holds up: dictionary ghosts, an archaism, a packaging neologism, two anglicisms.
+
+**The ripple.** Verb counts live in more places than feels reasonable, and the previous
+session's "recount everything" pass mapped them, so this was mechanical rather than a hunt:
+6,332 entries → **6,330**, 6,328 distinct infinitives → **6,326**, and the regular split
+5,235 → **5,233** (both deletions were model `1-1`; the irregular 1,093 is untouched). That
+covers `Info.irregularitiesText`, `Info.valuePropositionText`, both `Onboarding.browse*`
+strings in both languages, README, CLAUDE.md, `docs/project-structure.md`, and
+`frequency/README.md`. The value proposition still ends *from être to humoter* — the tail of
+the list did not move, only its length.
+
+`AddedVerbsTests.testMisspellingsNoLongerConjugate` grew from seven misspellings to nine, and
+a new test asserts the survivors still conjugate, so a future data pass can't quietly
+reintroduce either duplicate. 241 tests pass.
+
+**Release notes.** `docs/release-notes-2.2.txt` covers the whole frequency change in both
+languages: every verb ranked rather than the first 981, sorting by frequency now ordering the
+entire list, the ranking computed before shipping so nothing is fetched over the network, and
+the two duplicates removed — which is the honest explanation for why the app now advertises
+6,330 verbs instead of 6,332, a number a returning user might otherwise read as verbs having
+gone missing.

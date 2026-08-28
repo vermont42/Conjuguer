@@ -184,7 +184,6 @@
   <verb in="aguerrir" tn="harden" mo="2-1" hi="1878" hn="582" hl="40" hs="139" />
   <verb in="aguicher" tn="entice" mo="1-1" hi="170" hn="43" hl="20" hs="411" />
   <verb in="ahaner" tn="pant due to exercise" mo="1-1" hi="95" hn="39" hl="41" hs="32" />
-  <verb in="ahanner" tn="pant due to exercise" mo="1-1" hi="95" hp="y" />
   <verb in="ahurir" tn="astound" mo="2-1" hi="356" hn="76" hl="146" hs="95" />
   <verb in="aicher" tn="bait a hook" mo="1-1" hi="3" hn="0" hl="0" hs="3" />
   <verb in="aider" tn="help" mo="1-1" hi="277881" hn="28890" hl="4255" hs="802867" />
@@ -3463,7 +3462,6 @@
   <verb in="hasarder" tn="hazard" mo="1-1" hi="912" hn="515" hl="300" hs="222" ah="t" />
   <verb in="hâter" tn="speed up, hasten" mo="1-1" hi="5002" hn="893" hl="1130" hs="3133" ah="t" />
   <verb in="haubaner" tn="secure with a wire" mo="1-1" hi="102" hn="12" hl="3" ah="t" />
-  <verb in="haubanner" tn="secure with a wire" mo="1-1" hi="102" hp="y" ah="t" />
   <verb in="hausser" tn="raise, shrug" mo="1-1" hi="3337" hn="1154" hl="2516" hs="1513" ah="t" />
   <verb in="haver" tn="cut" mo="1-1" hi="5530" hn="4596" hl="28" hs="8244" ah="t" />
   <verb in="havir" tn="singe" mo="2-1" hi="137" hn="2" hl="0" ah="t" />

@@ -1,0 +1,23 @@
+Version 2.2
+
+
+English
+
+Version 2.2 gives every verb a frequency-of-use ranking, not just the most common ones.
+
+Conjuguer has ranked verbs by how often they are used since 2021, but only 981 of them ever carried a rank. That was not a judgment about which verbs deserve one — the word list Conjuguer's original source could export simply stopped at a thousand entries, and the other five thousand verbs showed no rank at all. Every verb now has one, drawn from a lexicon built at the Université de Toulouse from a corpus of more than a billion words of French. The verbs you already knew the rank of have barely moved; the ones that had no rank now sit where they belong.
+
+Sorting the Verbs tab by frequency therefore orders the whole list rather than the first thousand entries followed by an alphabetical remainder, and every verb's screen shows where it falls. The ranking is worked out once, before the app ships, so nothing is looked up over the network. The Credits screen names the researchers behind the data.
+
+Two verbs appeared twice, each with a misspelled second entry: ahanner beside ahaner, and haubanner beside haubaner. The misspellings are gone, which is why Conjuguer now says 6,330 verbs rather than 6,332.
+
+
+Français
+
+La version 2.2 attribue un rang de fréquence d'utilisation à chaque verbe, et non plus seulement aux plus courants.
+
+Conjuguer classe les verbes selon leur fréquence d'utilisation depuis 2021, mais 981 d'entre eux seulement portaient un rang. Ce n'était pas un jugement sur les verbes qui en méritaient un : la liste que la source d'origine de Conjuguer pouvait exporter s'arrêtait tout simplement à mille entrées, et les cinq mille autres verbes n'affichaient aucun rang. Chaque verbe en a désormais un, tiré d'un lexique constitué à l'Université de Toulouse à partir d'un corpus de plus d'un milliard de mots de français. Les verbes dont vous connaissiez déjà le rang ont à peine bougé ; ceux qui n'en avaient pas occupent maintenant la place qui leur revient.
+
+Trier l'onglet Verbes par fréquence ordonne donc la liste entière, au lieu des mille premières entrées suivies d'un reste alphabétique, et l'écran de chaque verbe indique où il se situe. Le classement est calculé une seule fois, avant la publication de l'app : rien n'est consulté sur le réseau. L'écran Crédits nomme les chercheurs à l'origine de ces données.
+
+Deux verbes figuraient en double, chacun avec une seconde entrée mal orthographiée : ahanner à côté d'ahaner, et haubanner à côté de haubaner. Ces fautes ont disparu, ce qui explique que Conjuguer annonce désormais 6 330 verbes au lieu de 6 332.
