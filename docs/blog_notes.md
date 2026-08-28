@@ -2053,3 +2053,66 @@ entire list, the ranking computed before shipping so nothing is fetched over the
 the two duplicates removed — which is the honest explanation for why the app now advertises
 6,330 verbs instead of 6,332, a number a returning user might otherwise read as verbs having
 gone missing.
+
+## A question about rengrener turns up five mis-modeled verbs (2026-08-28)
+
+Josh asked whether `rengrener` and `rengréner`, both in `verbs.xml` with the same
+translation, were a mistake. They are not. TLFi carries a single entry headed
+*RENGRÉNER, verbe trans.* covering both spellings, noting that the Académie printed `-gré-`
+from 1762 to 1878 and `-gre-` from 1935; Wiktionnaire, via GLÀFF, gives the two lemmas
+identical conjugated forms and identical IPA, down to both infinitives being /ʁɑ̃.gʁe.ne/.
+One verb, two spellings.
+
+They earn separate entries here because the spellings conjugate differently: `rengrener`
+sits on `1-4` (*peser*) and gives *je rengrène, je rengrènerai*; `rengréner` sits on `1-5`
+(*céder*) and gives *je rengrène, je rengrénerai*. Same present, different futur. For an app
+whose subject is conjugation that is information, not redundancy — and it is systematic, not
+a one-off: six pairs share the shape (`assener/asséner`, `gangrener/gangréner`,
+`liserer/lisérer`, `receler/recéler`, `receper/recéper`, `rengrener/rengréner`), which is the
+standard French list of double-spelling verbs of this type. That also gives a clean test for
+telling a deliberate pair from an accident, and it is what separates these from the
+`ahanner`/`haubanner` duplicates deleted earlier today: those shared the *same* model, so the
+second entry produced byte-identical conjugations and carried nothing.
+
+**What the scan found on the way.** Listing every pair of infinitives differing only by
+accents turned up `refréner` (`1-1`) beside `réfréner` (`1-5`). `1-1` is plain *parler* with
+no stem alteration, so the app was producing *je refréne*. That is not possible French: an é
+in the stressed final syllable has to open to è. Both spellings are one verb in TLFi
+(*REFRÉNER, RÉFRÉNER*), both with é→è, so there was no reason for the two to differ.
+
+**The test found four more, and nearly didn't.** Rather than pin one verb I wrote
+`StemAlterationAuditTests`, which runs the conjugator over every -er verb whose stem ends in
+é plus a consonant and fails if the présent still carries a lowercase é with no È anywhere.
+The first version passed — and it passed because I had written a clever guard clause that,
+read carefully, skipped precisely the broken verbs. What caught it was not re-reading the
+code but asking a different question: *how many verbs does this audit actually examine, and
+what models are they on?* 176 verbs, of which four were still on `1-1`. Rewritten without the
+clever line, the audit flagged exactly those four: **`considérer` → *je considére*,
+`interpréter` → *j'interpréte*, `décolérer`, `désaciérer`.** Two of them are common verbs, and
+they have been wrong for as long as the file has existed.
+
+The lesson is about audits, not about French. An audit that passes tells you nothing until
+you know its denominator; a filter that silently matches nothing, or matches the wrong
+things, reads exactly like a clean bill of health. The audit now asserts `examined > 150`
+alongside `offenders.isEmpty`, so a refactor that breaks the filter fails loudly instead of
+going quiet.
+
+**Counts, and a correction to yesterday's.** All five verbs moved from `1-1` to `1-5`, which
+moves them from the regular column to the irregular one. Recomputing with the app's own
+measure (`VerbModel.irregularity == 0`, the method the earlier recount used) gives **5,227
+regular / 1,099 irregular**, summing to 6,326. That is six fewer regular verbs than the
+shipped text claimed, not five: the previous session's 5,235/1,093 was off by one against its
+own method, and I propagated it as 5,233/1,093 after the dedupe. The measured pair is now in
+`Info.irregularitiesText` and `Info.valuePropositionText` in both languages.
+
+One wrinkle noted and deliberately left alone. That metric counts model `3-2A` — *assaillir*,
+*défaillir*, *saillir*, *tressaillir* — as regular, because it scores stem alterations and
+participe endings, and this family's irregularity lives in its endings group instead. Those
+four verbs are not regular by any linguistic reading, and `Info.irregularitiesText` names only
+`1-1`, `2-1` and `5-1A` as the regular models, so the prose and the metric disagree by four
+verbs. That predates all of this work and is a separate decision — whether to fix the metric,
+the prose, or the model — so it is recorded here rather than changed.
+
+244 tests pass. `docs/release-notes-2.2.txt` gains a paragraph in both languages, since a
+user who has been typing *je considére* into the quiz deserves to know the app was wrong
+rather than assume they were.

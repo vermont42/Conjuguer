@@ -1171,7 +1171,7 @@
   <verb in="conseiller" tn="advise, counsel" mo="1-1" hi="83255" hn="6277" hl="1005" hs="28690" />
   <verb in="consentir" tn="consent" mo="6-1" hi="18946" hn="6659" hl="1230" hs="4949" />
   <verb in="conserver" tn="keep in a particular place, retain, conserve, preserve" mo="1-1" hi="136518" hn="23715" hl="1684" hs="13187" />
-  <verb in="considérer" tn="consider" mo="1-1" hi="262879" hn="49050" hl="2892" hs="57953" />
+  <verb in="considérer" tn="consider" mo="1-5" hi="262879" hn="49050" hl="2892" hs="57953" />
   <verb in="consigner" tn="confine to quarters, give someone detention, record, consign" mo="1-1" hi="6494" hn="1131" hl="135" hs="2497" />
   <verb in="consister" tn="consist" mo="1-1" hi="116657" hn="16096" hl="784" hs="7924" />
   <verb in="consoler" tn="comfort, console" mo="1-1" hi="7514" hn="1520" hl="1144" hs="8478" />
@@ -1531,7 +1531,7 @@
   <verb in="décoffrer" tn="remove formwork after setting concrete" mo="1-1" hi="25" hn="2" hl="1" />
   <verb in="décoiffer" tn="mess up someone’s hair, knock someone’s hat off" mo="1-1" hi="1069" hn="147" hl="76" hs="1209" />
   <verb in="décoincer" tn="unjam, loosen, loosen up" mo="1-2A" hi="290" hn="53" hl="5" hs="1101" />
-  <verb in="décolérer" tn="calm down" mo="1-1" hi="289" hn="300" hl="21" hs="47" />
+  <verb in="décolérer" tn="calm down" mo="1-5" hi="289" hn="300" hl="21" hs="47" />
   <verb in="décoller" tn="take off (as a flying vehicle)" mo="1-1" hi="9885" hn="2175" hl="468" hs="18032" />
   <verb in="décolleter" tn="reveal the neckline (as a garment)" mo="1-3B" hi="358" hn="66" hl="91" hs="85" />
   <verb in="décoloniser" tn="decolonize" mo="1-1" hi="462" hn="55" hl="1" hs="3" />
@@ -1935,7 +1935,7 @@
   <verb in="désaccoupler" tn="unbind, separate" mo="1-1" hi="39" hn="0" hl="1" hs="13" />
   <verb in="désaccoutumer" tn="become unaccustomed to" mo="1-1" hi="10" hn="6" hl="3" hs="19" />
   <verb in="désacidifier" tn="deacidify" mo="1-1" hi="36" hn="1" hl="0" />
-  <verb in="désaciérer" tn="deacierate, convert steel into iron" mo="1-1" hi="0" hn="0" hl="0" />
+  <verb in="désaciérer" tn="deacierate, convert steel into iron" mo="1-5" hi="0" hn="0" hl="0" />
   <verb in="désacraliser" tn="deconsecrate" mo="1-1" hi="742" hn="165" hl="0" hs="130" />
   <verb in="désactiver" tn="deactivate, disable" mo="1-1" hi="13990" hn="112" hl="6" hs="9320" />
   <verb in="désadapter" tn="stop being adapted" mo="1-1" hi="29" hn="5" hl="1" />
@@ -3688,7 +3688,7 @@
   <verb in="interpénétrer" tn="interpenetrate" mo="1-5" hi="537" hn="89" hl="2" hs="16" />
   <verb in="interpoler" tn="interpolate" mo="1-1" hi="416" hn="4" hl="9" hs="41" />
   <verb in="interposer" tn="interpose" mo="1-1" hi="3813" hn="1380" hl="242" hs="2291" />
-  <verb in="interpréter" tn="translate, interpret, construe" mo="1-1" hi="46391" hn="10237" hl="422" hs="10797" />
+  <verb in="interpréter" tn="translate, interpret, construe" mo="1-5" hi="46391" hn="10237" hl="422" hs="10797" />
   <verb in="interroger" tn="question, interrogate" mo="1-2B" hi="90547" hn="34858" hl="2496" hs="48174" />
   <verb in="interrompre" tn="interrupt" mo="5-1B" hi="19978" hn="7721" hl="2636" hs="31054" />
   <verb in="intervenir" tn="intervene, take part" mo="6-7" hi="147041" hn="31371" hl="937" hs="22484" />
@@ -5087,7 +5087,7 @@
   <verb in="refourguer" tn="palm off, foist" mo="1-1" hi="308" hn="4" hl="14" hs="959" />
   <verb in="refoutre" tn="put back, return" mo="5-1C" hi="48" hn="4" hl="20" hs="278" />
   <verb in="réfracter" tn="refract" mo="1-1" hi="389" hn="36" hl="20" hs="165" />
-  <verb in="refréner" tn="curb, repress" mo="1-1" hi="94" hn="24" hl="57" hs="95" />
+  <verb in="refréner" tn="curb, repress" mo="1-5" hi="94" hn="24" hl="57" hs="95" />
   <verb in="réfréner" tn="curb, repress" mo="1-5" hi="313" hn="149" hl="18" hs="434" />
   <verb in="réfrigérer" tn="cool, cool down" mo="1-5" hi="1912" hn="159" hl="10" hs="275" />
   <verb in="refroidir" tn="lower the temperature of, cool, cool down, cool off" mo="2-1" hi="15327" hn="856" hl="293" hs="9051" />
