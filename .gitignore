@@ -32,4 +32,13 @@ corpus/working/*
 !corpus/working/mine_examples.workflow.js
 !corpus/working/build_classical_index.py
 !corpus/working/merge_classical.py
-!corpus/working/mine_classical.workflow.js
+!corpus/working/mine_classical.workflow.js# frequency: tracked = the pipeline scripts, the derived per-verb counts, the hand-maintained
+# editorial tier, and GLÀFF's README (its licence asks that it accompany redistribution of
+# derived data). Ignored = the two source lexicons (206 MB, re-downloadable per
+# frequency/README.md) and the generated report.
+frequency/*
+!frequency/README.md
+!frequency/GLAFF-README.txt
+!frequency/*.py
+!frequency/verb-counts.json
+!frequency/editorial-counts.json

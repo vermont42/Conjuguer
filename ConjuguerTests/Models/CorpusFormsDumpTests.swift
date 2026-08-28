@@ -12,7 +12,7 @@ import Testing
 // NOT a behavioral test — a build-time corpus tool that happens to ride the test target so it
 // can reuse the app's authoritative `Conjugator` (and the already-bootstrapped verb data).
 //
-// It emits every single-word surface form of the ~981 usage-ranked verbs to
+// It emits every single-word surface form of the 1,000 most frequent verbs to
 // `corpus/working/forms.json` as `{ "<form>": ["<verb id>", ...] }`. The Python index builder
 // (`corpus/working/build_corpus_index.py`) then does exact whole-token matching against the
 // corpus instead of fragile per-verb stem-grepping — irregulars (veux/voulons/voudrai) and
@@ -32,6 +32,10 @@ struct CorpusFormsDumpTests {
   // (avoir, aller, …) are covered many times over by their longer forms.
   private static let minFormLength = 2
 
+  // Every verb carries a rank now, so the dump needs a cutoff of its own. 1,000 keeps the
+  // set the size it was when the corpus index was first built against the 2021 ranks.
+  private static let rankCutoff = 1000
+
   @Test func testDumpUsageRankedVerbForms() throws {
     // Repo root from this file's compile-time path: …/ConjuguerTests/Models/<file> → up three.
     let outURL = URL(filePath: #filePath)
@@ -41,8 +45,8 @@ struct CorpusFormsDumpTests {
       .appending(path: "corpus/working/forms.json")
 
     let ranked = Verb.verbs.values
-      .filter { $0.frequency != nil }
-      .sorted { ($0.frequency ?? 0) < ($1.frequency ?? 0) }
+      .filter { $0.frequency <= Self.rankCutoff }
+      .sorted { $0.frequency < $1.frequency }
     #expect(!ranked.isEmpty, "Verb data not loaded — expected the usage-ranked set.")
 
     var index: [String: Set<String>] = [:]

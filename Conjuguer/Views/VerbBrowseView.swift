@@ -161,7 +161,7 @@ struct VerbBrowseView: View {
     BrowseRow(
       title: verb.infinitifWithPossibleExtraLetters,
       subtitle: verb.translation,
-      badge: verb.frequency.map { BrowseRow.Badge(text: "#\($0)", tint: .customBlue) }
+      badge: BrowseRow.Badge(text: "#\(verb.frequency)", tint: .customBlue)
     )
   }
 
@@ -183,15 +183,7 @@ enum VerbBrowse {
   static func makeStore(world: World) -> BrowseStore<Verb, VerbSort> {
     let frequencyVerbs = Verb.verbs.values
       .sorted { lhs, rhs in
-        if lhs.frequency == nil && rhs.frequency == nil {
-          return lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
-        } else if lhs.frequency == nil && rhs.frequency != nil {
-          return false
-        } else if lhs.frequency != nil && rhs.frequency == nil {
-          return true
-        } else {
-          return (lhs.frequency ?? 0) < (rhs.frequency ?? 0)
-        }
+        (lhs.frequency, lhs.id) < (rhs.frequency, rhs.id)
       }
 
     let alphabeticVerbs = Verb.verbs.values.sorted { lhs, rhs in

@@ -15,6 +15,7 @@ nonisolated struct ParsedVerbData: Sendable {
   let models: [String: VerbModel]
   let verbs: [String: Verb]
   let defectGroups: [String: DefectGroup]
+  let verbRankCount: Int
 }
 
 // Owns app-launch data loading. The heavy parse runs off the main actor and only the
@@ -37,9 +38,9 @@ final class VerbData {
   // here without touching shared state.
   nonisolated static func parse() -> ParsedVerbData {
     let models = VerbModelParser().parse()
-    let (verbs, populatedModels) = VerbParser().parse(models: models)
+    let (verbs, populatedModels, rankCount) = VerbParser().parse(models: models)
     let defectGroups = DefectGroupParser().parse()
-    return ParsedVerbData(models: populatedModels, verbs: verbs, defectGroups: defectGroups)
+    return ParsedVerbData(models: populatedModels, verbs: verbs, defectGroups: defectGroups, verbRankCount: rankCount)
   }
 
   // Publishes parsed data into the static stores, then runs the derived-data passes that
@@ -48,6 +49,7 @@ final class VerbData {
   static func publish(_ parsed: ParsedVerbData) {
     VerbModel.models = parsed.models
     Verb.verbs = parsed.verbs
+    Verb.rankCount = parsed.verbRankCount
     DefectGroup.defectGroups = parsed.defectGroups
     VerbModel.computeIrregularities()
     VerbModel.sortVerbs()

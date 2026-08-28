@@ -118,11 +118,9 @@ struct VerbView: View {
         .frenchPronunciation()
         .frame(maxWidth: .infinity, alignment: .leading)
 
-      if let frequency = verb.frequency {
-        metaRow(L.VerbView.frequencyWithColon, "\(frequency) / \(Verb.maxFrequency)")
-          .font(bodyFont)
-          .frame(maxWidth: .infinity, alignment: .leading)
-      }
+      metaRow(L.VerbView.frequencyWithColon, "\(verb.frequency) / \(Verb.rankCount)")
+        .font(bodyFont)
+        .frame(maxWidth: .infinity, alignment: .leading)
 
       if
         let defectGroupId = verb.defectGroupId,

@@ -10,7 +10,11 @@ import Foundation
 struct Verb: Identifiable, Hashable {
   static var verbs: [String: Verb] = [:]
   static let minVerbLength = 4
-  static let maxFrequency = 981
+  // The number of distinct infinitives, and so the largest rank `frequency` can take —
+  // the denominator VerbView shows. `VerbData.publish` sets it from the parse, because a
+  // rank's denominator is a property of the data file rather than a constant: the literal
+  // 981 that stood here went stale the moment a verb was added.
+  static var rankCount = 0
 
   var id: String { infinitifWithPossibleExtraLetters }
   let infinitif: String
@@ -19,7 +23,12 @@ struct Verb: Identifiable, Hashable {
   let auxiliary: Auxiliary
   let isReflexive: Bool
   let hasAspiratedH: Bool
-  var frequency: Int?
+  var frequency: Int
+  let hits: Int?
+  let newspaperHits: Int?
+  let literatureHits: Int?
+  let subtitleFrequency: Int?
+  let hitsAreProvisional: Bool
   let extraLetters: String?
   let defectGroupId: String?
 
@@ -30,7 +39,12 @@ struct Verb: Identifiable, Hashable {
     auxiliary: Auxiliary,
     isReflexive: Bool,
     hasAspiratedH: Bool,
-    frequency: Int?,
+    frequency: Int,
+    hits: Int?,
+    newspaperHits: Int?,
+    literatureHits: Int?,
+    subtitleFrequency: Int?,
+    hitsAreProvisional: Bool,
     extraLetters: String?,
     defectGroupId: String?
   ) {
@@ -41,8 +55,19 @@ struct Verb: Identifiable, Hashable {
     self.isReflexive = isReflexive
     self.hasAspiratedH = hasAspiratedH
     self.frequency = frequency
+    self.hits = hits
+    self.newspaperHits = newspaperHits
+    self.literatureHits = literatureHits
+    self.subtitleFrequency = subtitleFrequency
+    self.hitsAreProvisional = hitsAreProvisional
     self.extraLetters = extraLetters
     self.defectGroupId = defectGroupId
+  }
+
+  nonisolated func withFrequency(_ frequency: Int) -> Verb {
+    var verb = self
+    verb.frequency = frequency
+    return verb
   }
 
   var infinitifStem: String {
@@ -58,7 +83,7 @@ struct Verb: Identifiable, Hashable {
     return String(infinitif[..<index])
   }
 
-  var infinitifWithPossibleExtraLetters: String {
+  nonisolated var infinitifWithPossibleExtraLetters: String {
     if let extraLetters = extraLetters {
       return infinitif + " (" + extraLetters + ")"
     } else {
@@ -88,7 +113,12 @@ struct Verb: Identifiable, Hashable {
       auxiliary: .avoir,
       isReflexive: false,
       hasAspiratedH: false,
-      frequency: nil,
+      frequency: rankCount,
+      hits: nil,
+      newspaperHits: nil,
+      literatureHits: nil,
+      subtitleFrequency: nil,
+      hitsAreProvisional: false,
       extraLetters: nil,
       defectGroupId: nil
     )

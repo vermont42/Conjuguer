@@ -76,7 +76,7 @@ enum WidgetSnapshotWriter {
       infinitif: verb.infinitif,
       translation: verb.translation,
       auxiliary: verb.auxiliary.verb,
-      frequency: verb.frequency ?? 0,
+      frequency: verb.frequency,
       présentParadigm: paradigm,
       participePassé: participePassé,
       etymologySnippet: etymology,
@@ -89,9 +89,11 @@ enum WidgetSnapshotWriter {
   }
 
   @MainActor static func eligibleVerbs() -> [Verb] {
+    // Every verb now carries a rank, so rank alone would put abcéder on a lock screen with
+    // no example to show. The pool is the verbs the literature corpus actually covers.
     Verb.verbs.values
-      .filter { $0.frequency != nil }
-      .sorted { ($0.frequency ?? .max, $0.infinitif) < ($1.frequency ?? .max, $1.infinitif) }
+      .filter { ExampleData.example(for: $0) != nil }
+      .sorted { ($0.frequency, $0.infinitif) < ($1.frequency, $1.infinitif) }
   }
 
   @MainActor static func verbOfTheDay(from eligible: [Verb], date: Date) -> Verb {

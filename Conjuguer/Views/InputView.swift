@@ -87,7 +87,12 @@ struct InputView: View {
       auxiliary: isReflexive ? .être : .avoir,
       isReflexive: isReflexive,
       hasAspiratedH: false,
-      frequency: nil,
+      frequency: Verb.rankCount,
+      hits: nil,
+      newspaperHits: nil,
+      literatureHits: nil,
+      subtitleFrequency: nil,
+      hitsAreProvisional: false,
       extraLetters: nil,
       defectGroupId: nil
     )
@@ -179,8 +184,20 @@ struct InputView: View {
         output += "re=\"t\" "
       }
       output += "mo=\"" + verb.model.uppercased() + "\" "
-      if let frequency = verb.frequency {
-        output += "fr=\"\(frequency)\" "
+      if let hits = verb.hits {
+        output += "hi=\"\(hits)\" "
+      }
+      if let newspaperHits = verb.newspaperHits {
+        output += "hn=\"\(newspaperHits)\" "
+      }
+      if let literatureHits = verb.literatureHits {
+        output += "hl=\"\(literatureHits)\" "
+      }
+      if let subtitleFrequency = verb.subtitleFrequency {
+        output += "hs=\"\(subtitleFrequency)\" "
+      }
+      if verb.hitsAreProvisional {
+        output += "hp=\"y\" "
       }
       if let defectGroupId = verb.defectGroupId {
         output += "dg=\"\(defectGroupId)\" "

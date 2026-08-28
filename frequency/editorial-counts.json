@@ -1,0 +1,38 @@
+{
+  "ahanner": {
+    "count": 95,
+    "reason": "GLÀFF measures the modern one-n spelling `ahaner` at 95 FrWaC hits; `verbs.xml`'s `ahanner` is the variant spelling of that same verb."
+  },
+  "anathémiser": {
+    "count": 4,
+    "reason": "Rare variant of `anathématiser`, which GLÀFF measures at 37 FrWaC hits; the variant is a fraction of an already-rare verb."
+  },
+  "bienvenir": {
+    "count": 5,
+    "reason": "Archaic and defective, surviving only in `se faire bienvenir`; GLÀFF files it in the obsolete-entry lexicon, which carries no counts."
+  },
+  "blistériser": {
+    "count": 0,
+    "reason": "Packaging-industry neologism attested in trade prose only; no corpus here lists it."
+  },
+  "coupasser": {
+    "count": 0,
+    "reason": "Pejorative frequentative of `couper` recorded by dictionaries but attested in no corpus here."
+  },
+  "haubanner": {
+    "count": 102,
+    "reason": "GLÀFF measures the standard one-n spelling `haubaner` at 102 FrWaC hits; `verbs.xml`'s two-n spelling is that same verb."
+  },
+  "humoter": {
+    "count": 0,
+    "reason": "Dialectal; a dictionary ghost with no corpus attestation."
+  },
+  "lock-outer": {
+    "count": 8,
+    "reason": "1970s industrial-relations anglicism; hyphenated, so outside GLÀFF, and too rare for the subtitle corpus. A token count keeps it above the never-attested ghosts."
+  },
+  "prompter": {
+    "count": 12,
+    "reason": "Anglicism whose current sense postdates FrWaC (2011) and Lexique 4's subtitles (2018); a token count rather than a zero."
+  }
+}

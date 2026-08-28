@@ -8,6 +8,10 @@
 import Foundation
 
 nonisolated class VerbParser: XMLDataParser {
+  // Every verb is built with this placeholder rank, which `ranked(_:)` overwrites before
+  // `parse(models:)` returns; no verb escapes the parser carrying it.
+  private static let unranked = 0
+
   private let verbTag = "verb"
   private var verbs: [String: Verb] = [:]
   private var models: [String: VerbModel] = [:]
@@ -17,7 +21,11 @@ nonisolated class VerbParser: XMLDataParser {
   private var currentAuxiliary: String?
   private var currentIsReflexive = false
   private var currentHasAspiratedH = false
-  private var currentFrequency: Int?
+  private var currentHits: Int?
+  private var currentNewspaperHits: Int?
+  private var currentLiteratureHits: Int?
+  private var currentSubtitleFrequency: Int?
+  private var currentHitsAreProvisional = false
   private var currentExtraLetters: String?
   private var currentDefectGroupId: String?
 
@@ -29,10 +37,60 @@ nonisolated class VerbParser: XMLDataParser {
     super.init(data: Data(xmlString.utf8))
   }
 
-  func parse(models: [String: VerbModel]) -> (verbs: [String: Verb], models: [String: VerbModel]) {
+  func parse(models: [String: VerbModel]) -> (verbs: [String: Verb], models: [String: VerbModel], rankCount: Int) {
     self.models = models
     parser?.parse()
-    return (verbs, self.models)
+    let (ranked, rankCount) = Self.ranked(verbs)
+    return (ranked, self.models, rankCount)
+  }
+
+  /// Assigns each verb its frequency rank, 1 being the most common, and returns the number
+  /// of distinct infinitives that rank runs to.
+  ///
+  /// `verbs.xml` stores raw corpus hit counts rather than ranks because a rank is a property
+  /// of the corpus, not of the verb: were ranks stored, adding one verb would renumber every
+  /// verb below it, turning a one-line change into a 6,000-line diff. Deriving them here
+  /// costs one sort per launch and keeps the file additive.
+  ///
+  /// The sort descends through the four counts in order of corpus size — FrWaC web hits,
+  /// then Le Monde, then Frantext, then Lexique 4's subtitle frequency — because a smaller
+  /// corpus can only separate verbs a larger one saw equally often. A missing count sorts
+  /// below a measured zero: zero is a corpus that could have seen the verb and did not,
+  /// whereas absence is a corpus that never had the chance. The infinitive settles what is
+  /// left, in French collation, which is load-bearing rather than defensive — 116 verbs share
+  /// a hit count of zero, and without it their order would depend on dictionary iteration.
+  ///
+  /// The four doubled infinitives (haïr, ouïr, saillir, sortir — one entry per model) share
+  /// one rank, since the counts belong to the verb rather than to the entry.
+  private static func ranked(_ verbs: [String: Verb]) -> (verbs: [String: Verb], rankCount: Int) {
+    func counts(_ key: String) -> [Int?] {
+      guard let verb = verbs[key] else {
+        return []
+      }
+      return [verb.hits, verb.newspaperHits, verb.literatureHits, verb.subtitleFrequency]
+    }
+
+    // Grouped by key rather than by value, because a verb's dictionary key carries its
+    // `ex` extra letters and cannot be recomputed from the verb alone.
+    let ordered = Dictionary(grouping: verbs.keys, by: { verbs[$0]?.infinitif ?? $0 })
+      .sorted { lhs, rhs in
+        guard let left = lhs.value.first, let right = rhs.value.first else {
+          return lhs.key.compare(rhs.key, locale: Util.french) == .orderedAscending
+        }
+        for (leftCount, rightCount) in zip(counts(left), counts(right)) where leftCount != rightCount {
+          return (leftCount ?? -1) > (rightCount ?? -1)
+        }
+        return lhs.key.compare(rhs.key, locale: Util.french) == .orderedAscending
+      }
+
+    var ranked: [String: Verb] = [:]
+    ranked.reserveCapacity(verbs.count)
+    for (index, group) in ordered.enumerated() {
+      for key in group.value {
+        ranked[key] = verbs[key]?.withFrequency(index + 1)
+      }
+    }
+    return (ranked, ordered.count)
   }
 
   func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String]) {
@@ -68,12 +126,11 @@ nonisolated class VerbParser: XMLDataParser {
         currentHasAspiratedH = true
       }
 
-      if
-        let frequency = attributeDict["fr"],
-        let frequencyInt = Int(frequency)
-      {
-        currentFrequency = frequencyInt
-      }
+      currentHits = attributeDict["hi"].flatMap { Int($0) }
+      currentNewspaperHits = attributeDict["hn"].flatMap { Int($0) }
+      currentLiteratureHits = attributeDict["hl"].flatMap { Int($0) }
+      currentSubtitleFrequency = attributeDict["hs"].flatMap { Int($0) }
+      currentHitsAreProvisional = attributeDict["hp"] == "y"
 
       if let extraLetters = attributeDict["ex"] {
         currentExtraLetters = extraLetters
@@ -119,7 +176,12 @@ nonisolated class VerbParser: XMLDataParser {
         auxiliary: auxiliary,
         isReflexive: currentIsReflexive,
         hasAspiratedH: currentHasAspiratedH,
-        frequency: currentFrequency,
+        frequency: Self.unranked,
+        hits: currentHits,
+        newspaperHits: currentNewspaperHits,
+        literatureHits: currentLiteratureHits,
+        subtitleFrequency: currentSubtitleFrequency,
+        hitsAreProvisional: currentHitsAreProvisional,
         extraLetters: currentExtraLetters,
         defectGroupId: currentDefectGroupId
       )
@@ -139,7 +201,11 @@ nonisolated class VerbParser: XMLDataParser {
     currentAuxiliary = nil
     currentIsReflexive = false
     currentHasAspiratedH = false
-    currentFrequency = nil
+    currentHits = nil
+    currentNewspaperHits = nil
+    currentLiteratureHits = nil
+    currentSubtitleFrequency = nil
+    currentHitsAreProvisional = false
     currentExtraLetters = nil
     currentDefectGroupId = nil
   }
