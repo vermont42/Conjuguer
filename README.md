@@ -15,7 +15,7 @@ While developing **Conjuguer** in 2021, I learned about SwiftUI and how to mix i
 
 ### Features
 
-- **Verb browser** — all 6,332 verbs, searchable and sortable by frequency of use or alphabetically, in a list or a grid.
+- **Verb browser** — all 6,332 verbs, searchable and sortable by frequency of use or alphabetically, in a list or a grid. Every verb carries a frequency rank, not just the common ones.
 - **Conjugation views** — every tense for a given verb, with irregular stems and endings picked out in red so that the shape of an irregularity is visible at a glance. Many verbs also carry an etymology and an example sentence drawn from French literature.
 - **Verb models** — the conjugation patterns that the verbs inherit from, ranked by how irregular they are.
 - **Tense reference** — an explanation of each French tense, when to use it, and how it is formed, illustrated with quotations from Proust, the _Chanson de Roland_, and others.
@@ -59,6 +59,30 @@ git config core.hooksPath .githooks
 
 Further documentation lives in [`docs/`](docs), starting with the annotated directory tree in
 [`docs/project-structure.md`](docs/project-structure.md).
+
+### Verb frequency
+
+Conjuguer ranks every verb by frequency of use. The counts behind those ranks are derived
+from **GLÀFF 1.2.2** (Sajous, Hathout & Calderone; CLLE-ERSS, Université de Toulouse), a
+lexicon built from Wiktionnaire and released under the [Creative Commons
+Attribution-ShareAlike 3.0](http://creativecommons.org/licenses/by-sa/3.0/) licence, with
+tie-breaks and a handful of compound-verb estimates from **Lexique 4.00** (New, Pallier,
+Schalchli, Bourgin & Gimenes, 2026), released under CC BY-SA 4.0. From 2021 to 2026 the
+rankings came from Lexical Computing's Sketch Engine, which covered the 981 most common
+verbs.
+
+> Franck Sajous, Nabil Hathout et Basilio Calderone (2013). *GLÀFF, un Gros Lexique À tout
+> Faire du Français.* Actes de la 20e conférence sur le Traitement Automatique des Langues
+> Naturelles (TALN 2013), Les Sables d'Olonne, France, pp. 285–298.
+>
+> Boris New, Christophe Pallier, Gauvain Schalchli, Jessica Bourgin & Manuel Gimenes (2026).
+> *Lexique 4.* Behavior Research Methods.
+
+The count attributes in [`Conjuguer/Models/verbs.xml`](Conjuguer/Models/verbs.xml) are
+derived data under CC BY-SA 3.0 — the app's own code is GPL, and the data file carries its
+own notice. The pipeline that produced them, its provenance, and its re-download recipe are
+in [`frequency/README.md`](frequency/README.md); the resulting order is
+[`docs/frequencies.txt`](docs/frequencies.txt).
 
 ### License
 

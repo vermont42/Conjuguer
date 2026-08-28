@@ -50,7 +50,6 @@ Conjuguer/
 │   ├── Etymology.swift         # Lazy-loading etymology lookup by infinitif
 │   ├── Example.swift           # Codable model for a literature example sentence
 │   ├── ExampleSource.swift     # Provenance enum for example sentences (Proust/Zola/Flaubert/La Fontaine/Molière/gov/Wikipedia/Claude) with per-source attribution
-│   ├── frequencies.xml         # Legacy frequency data — bundled but NOT parsed; frequency ships inline in verbs.xml
 │   ├── FuturSimple.swift       # Futur simple endings
 │   ├── ImageInfo.swift         # Image name + caption/credit for Info articles
 │   ├── Imparfait.swift         # Imparfait endings
@@ -75,12 +74,12 @@ Conjuguer/
 │   ├── SubjonctifPresentGroup.swift   # Subjonctif présent ending groups
 │   ├── Tense.swift             # All French tenses; associated PersonNumber where applicable
 │   ├── TutorChatHistory.swift  # Persistence for the tutor's chat messages
-│   ├── Verb.swift              # A verb: infinitif, translation, model reference, auxiliary, frequency; static verbs dictionary
+│   ├── Verb.swift              # A verb: infinitif, translation, model reference, auxiliary, corpus counts, derived rank; static verbs dictionary
 │   ├── VerbModel.swift         # A conjugation pattern: parent for inheritance, stem alterations, ending groups, participe endings
 │   ├── VerbModelParser.swift   # XMLParser delegate for verbModels.xml
 │   ├── verbModels.xml          # Conjugation pattern definitions
 │   ├── VerbParser.swift        # XMLParser delegate for verbs.xml
-│   ├── verbs.xml               # 6,332 verb definitions with inline frequency-of-use ranks
+│   ├── verbs.xml               # 6,332 entries / 6,328 distinct infinitives, with inline corpus hit counts (hi/hn/hl/hs/hp); VerbParser derives the ranks
 │   ├── XMLDataParser.swift     # Shared XMLParser delegate base for the three parsers
 │   └── Game/
 │       ├── GameModels.swift            # Entity structs/enums (Bullet, Target, EnemyBullet, DropKind, …)
@@ -242,7 +241,8 @@ docs/
 ├── screenshot-playbook.md          # Screenshot workflow: prerequisites, kill switches, driver flags, workarounds, recovery
 ├── screenshots/                    # Captured screenshots produced by the driver
 ├── technology-corpus-sources.md    # Provenance manifest for the technology corpus tier
-├── verb-frequency-sources.md       # Research: frequency-of-use sources for all 6,320 verbs (Sketch Engine prices/caps, GLÀFF, Lexique 4 coverage)
+├── frequencies.txt                 # Generated: every distinct infinitive in rank order, one "<rank> <infinitive>" per line
+├── verb-frequency-sources.md       # Research: frequency-of-use sources for all verbs (Sketch Engine prices/caps, GLÀFF, Lexique 4 coverage)
 ├── video_script.md                 # App Store preview script, bilingual captions, and pre-recording checklist
 ├── wikipedia-corpus-sources.md     # Provenance manifest for the Wikipedia corpus tier
 ├── wwdc2026-conjuguer-impact.md    # WWDC 2026 announcements and what they mean for Conjuguer
@@ -261,6 +261,14 @@ corpus/                         # Literature-example pipeline; NOT part of any t
 ├── json/                       # Built example files, copied into Conjuguer/Models/ to ship
 ├── working/                    # Index builders and their build products (build_corpus_index.py, build_classical_index.py, build_tail_index.py, build_literature_examples.py, build_chanson_examples.py)
 └── grokked/                    # Intermediate per-source extraction output
+
+frequency/                      # Verb-frequency pipeline; NOT part of any target. See frequency/README.md
+├── build_counts.py             # GLÀFF + Lexique 4 → verb-counts.json + report.md, with the estimate tiers and gates
+├── apply_counts.py             # verb-counts.json → the hi/hn/hl/hs/hp attributes of verbs.xml
+├── generate_frequencies_txt.py # verbs.xml → docs/frequencies.txt, in VerbParser.ranked's exact order
+├── verb-counts.json            # Per-infinitive measured counts and, where needed, frwac_estimate
+├── editorial-counts.json       # The hand-assigned estimate tier: nine verbs, each with a reason
+└── GLAFF-README.txt            # GLÀFF's own README; its licence asks that it accompany redistribution
 
 Images/                         # README and App Store imagery
 build/                          # Scratch DerivedData for out-of-tree builds (gitignored)

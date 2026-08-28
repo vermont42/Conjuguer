@@ -54,7 +54,7 @@ SOURCE_ROOTS = ["Conjuguer", "ConjuguerTests", "ConjuguerWidget", "Shared"]
 # they are held to the same completeness standard. Scoped to Models/ because that is where the
 # shipped data sits; asset catalogs and sounds are summarized by folder in the index, not listed
 # file by file, and enumerating them would demand a precision the index does not claim.
-DATA_GLOBS = ["Conjuguer/Models/*.xml", "Conjuguer/Models/*.json"]
+DATA_GLOBS = ["Conjuguer/Models/*.xml", "Conjuguer/Models/*.json", "frequency/*.json"]
 
 # The target stops at whitespace so a Markdown image title survives the parse: the README opens
 # with ![Conjuguer](Images/Splash.png "Conjuguer's Launch Screen"), whose target is the path
@@ -68,8 +68,10 @@ CODE_SPAN_RE = re.compile(r"`[^`]*`")
 
 # Filenames as they appear in the index's tree. The character class carries the accented letters
 # because this repo has French-named sources — ConjuguerTests/Models/NousPrésentStemTests.swift
-# would otherwise read as two tokens and go missing.
-FILENAME_RE = re.compile(r"[A-Za-z0-9_+.À-ſ]+\.(?:swift|xml|json)")
+# would otherwise read as two tokens and go missing — and the hyphen because the frequency
+# pipeline's data files are hyphenated, and `verb-counts.json` would otherwise read as
+# `counts.json` and go missing on both sides of the comparison at once.
+FILENAME_RE = re.compile(r"[A-Za-z0-9_+.\-À-ſ]+\.(?:swift|xml|json)")
 
 
 def markdown_files():

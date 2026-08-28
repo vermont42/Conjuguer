@@ -340,12 +340,17 @@ type. Practical consequences:
 ### Data Loading
 
 Verb and model data is loaded from XML files at app startup via `VerbData.parse()`:
-- `verbs.xml` - All 6,332 verbs (frequency-of-use ships inline via each verb's `fr` attribute)
+- `verbs.xml` - All 6,332 entries / 6,328 distinct infinitives. Frequency ships inline as raw
+  corpus hit counts (`hi` FrWaC, `hn` Le Monde, `hl` Frantext, `hs` Lexique 4 subtitles, `hp`
+  when `hi` is an estimate); `VerbParser.ranked(_:)` derives the 1..n rank once per parse, so
+  adding a verb never renumbers the file. The pipeline that produced them lives in
+  `frequency/` — read `frequency/README.md` before touching the counts.
 - `verbModels.xml` - Conjugation pattern definitions
 - `defectGroups.xml` - Defective verb groups
 
-(`frequencies.xml` is bundled but **not** parsed at startup — the former `FrequencyParser`
-was dead code and has been removed; `Verb.maxFrequency` holds the highest rank.)
+(The 2021 `frequencies.xml` export is gone: it was bundled but never parsed. `Verb.rankCount`,
+which `VerbData.publish` sets from the parse, holds the number of distinct infinitives —
+the denominator `VerbView` shows.)
 
 ### Dependency Injection
 

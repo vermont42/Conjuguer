@@ -1,7 +1,10 @@
 # Literature-Example Corpus (`corpus/`)
 
 `corpus/` holds the pipeline that builds literature example sentences for the app's
-~980 **usage-ranked** verbs — one modern-prose example per verb, plus a *Chanson de
+~980 **usage-ranked** verbs. "Usage-ranked" here means the 981 verbs the 2021 Sketch Engine
+export covered, which is the set the corpus was mined for. Every verb now carries a rank
+(see [`frequency/README.md`](../frequency/README.md)), so that phrase names a frozen
+historical set — in practice, "the verbs that have examples" — not a live filter — one modern-prose example per verb, plus a *Chanson de
 Roland* example nested where one exists. It is a build-time data pipeline, **not part
 of the shipped app target**; only the finished JSON is bundled.
 

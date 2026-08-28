@@ -1909,3 +1909,103 @@ measured; the note now says to measure.
 
 All 233 tests pass, including the 14 new ones in `AddedVerbsTests` — which, besides the
 conjugations, assert that the seven old misspellings no longer conjugate at all.
+
+## A frequency rank for every verb: GLÀFF replaces a capped 2021 export (2026-08-28)
+
+Since 2021 Conjuguer has ranked verbs by frequency of use, and since 2021 it has ranked
+exactly 981 of them. That was never a judgment about which verbs deserve a rank; it was
+Sketch Engine's word-list export cap. The research that went looking for a replacement is
+[`docs/verb-frequency-sources.md`](verb-frequency-sources.md) — the short version is that a
+paid Sketch Engine subscription does not lift the cap (it is the same 1,000 items for trial
+and paid accounts alike), a longer list is an individually quoted data purchase, and the best
+free alternative is **GLÀFF 1.2.2**, a CC BY-SA 3.0 lexicon built from Wiktionnaire at
+CLLE-ERSS in Toulouse that ships lemma counts from three corpora. This entry is the build.
+
+**The shape of the change is Konjugieren's, not 2021's.** `verbs.xml` no longer stores a
+rank. It stores counts — `hi` (FrWaC web hits, the primary key), `hn` (Le Monde), `hl`
+(Frantext), `hs` (Lexique 4 subtitles ×1000) — and `VerbParser.ranked(_:)` derives the
+1..6,328 rank once per parse. A rank is a property of the corpus, not of the verb: storing
+ranks means adding one verb renumbers every verb below it, which is how a one-line change
+becomes a 6,000-line diff. `Verb.maxFrequency = 981` became `Verb.rankCount`, which
+`VerbData.publish` sets from the parse, so the denominator `VerbView` shows can't go stale
+either.
+
+**The numbers.** GLÀFF covers 6,284 of the 6,328 distinct infinitives. Spearman against the
+2021 ranks over the 980 verbs both cover is **0.9236**, which is the whole reason web
+register won over subtitle register: the top of the list barely moves. FrWaC's top ten is
+*être, avoir, faire, pouvoir, devoir, aller, voir, dire, mettre, permettre* — the 2021 list
+minus *consulter*. 116 verbs are measured at zero and take the last ranks alphabetically;
+that is honest, since a corpus that could have seen them did not.
+
+The biggest movers are almost all corrections rather than noise. *faillir* #22 → #900 and
+*étayer* #128 → #1519 fall because Le Monde's lemmatizer had been collapsing *fallait* and
+*étais* onto them; FrWaC is the sane one there. *poster* #461 → #54 is the web talking. The
+three suspects the research flagged (*ligner* at 21,696 hits, *ouvrer*, *téter*) are FrWaC
+tagger noise inflating rare verbs, and I left them measured as the plan said to — an oddly
+high rank for a rare verb is a smaller lie than a hand-edited count.
+
+**One count I did not leave alone.** *convaincre* carries 2 FrWaC hits against 503 in
+Frantext, and *every* form including the bare infinitive shows zero occurrences — impossible
+in 1.25 billion words of web text, so it is a failed join rather than a measurement. Shipping
+it would have put *convaincre* at #6,074 of 6,328. Rather than hand-edit the number I added a
+stated rule: a FrWaC count below 2% of the larger of the other two corpora, where that larger
+one is itself at least 200, is treated as *unmeasured* and routed through the estimate tiers
+like any verb GLÀFF lacks. The thresholds sit deliberately far from any honest register
+difference, and on the build day they caught exactly one verb — *faillir* and *étayer*,
+inflated elsewhere rather than depressed in FrWaC, stayed measured. *convaincre* now ranks
+#1,001, clamped, flagged `hp="y"`. Still low for a verb that was #396, but the clamp exists
+so no estimate can ever enter the top of the list, and I would rather it bind here than
+special-case it.
+
+**Nothing is blank.** GLÀFF omits hyphenated compounds by design, so absence from it is not
+evidence of rarity — ranked by absence, *sous-estimer* (11.5 per million in subtitles) would
+fall below *bêcheveter*. The 45 unmeasured infinitives get an estimated FrWaC-equivalent in
+three tiers: 25 **calibrated** from Lexique 4 through a log-log fit
+(`log(frwac) = 7.58 + 0.76·log(lex4)`, R² 0.69, typical error ±2.6×), 10 **scaled** from a
+base verb by a measured prefix ratio, and 9 **editorial**, hand-assigned in
+`frequency/editorial-counts.json` with a written reason each. The calibrated ones land in
+plausible company: *sous-estimer* ≈ #1,050, *sous-entendre* ≈ #1,690, *pique-niquer* ≈
+#2,190, *tire-bouchonner* ≈ #5,160. Every estimate is clamped to the measured count at rank
+1,000 (13,773 hits) and flagged `hp="y"`, so the provisional population stays countable — 45
+of 6,328.
+
+Writing the editorial tier turned up two probable misspellings in `verbs.xml`: GLÀFF measures
+`haubaner` and `ahaner`, one *n* each, where Conjuguer has `haubanner` and `ahanner`. The
+counts are right either way and I used them, with the reason recorded; the spellings are a
+note for the next verb-list audit, not this project's job.
+
+**Two bugs the build found.** First, `VerbParser` keys its dictionary by
+`infinitif + " " + extraLetters` (a space) while `Verb.infinitifWithPossibleExtraLetters`
+formats the same thing with parentheses. My first `ranked(_:)` rebuilt the dictionary from
+the latter and silently dropped `haïr France`, `ouïr`, `saillir`, and the Canadian `sortir` —
+142 test failures, all conjugation, none of them obviously about ranking. Grouping by
+dictionary *key* instead of by value fixed it, and the shared-rank test now pins the
+behavior. Second, Python's French collation and Swift's disagreed on exactly one of 86 tie
+groups: ICU expands `œ` to `oe`, so `œilletonner` sorts after *obvenir*, while stripping
+combining marks leaves the ligature intact and sorts it after every *z*. I verified this the
+direct way — dumped the tie groups, sorted them in a throwaway Swift script with
+`compare(_:locale: Util.french)`, and diffed — and both `french_key()` functions now expand
+the ligatures. 86 groups, 0 mismatches. `docs/frequencies.txt` and the app agree verb for
+verb, which is the point: "verb 400" has to mean the same thing to a future subagent as it
+does to the app.
+
+**The widget pool moved on purpose.** `WidgetSnapshotWriter.eligibleVerbs()` filtered on
+"has a rank", which was a proxy for "is one of the 981 that also have examples and
+etymologies". With every verb ranked, that filter would have put *abcéder* on someone's Lock
+Screen with nothing to show. The pool is now "has a literature example" — 1,144 entries
+instead of 982 — so the verb of the day for a given date changes once, and then is stable.
+
+**Credits.** Adam Kilgarriff's paragraph stays, in the past tense: Sketch Engine supplied the
+rankings of the 981 most common verbs from 2021 to 2026, which is a true credit for five
+years of a feature. Lexique 4 (New, Pallier, Schalchli, Bourgin & Gimenes) joins between
+Nègre and Och; GLÀFF (Sajous, Hathout & Calderone) after Okada & Oguriso, with the note Josh
+asked for — he studied at the Université de Toulouse, where GLÀFF was built. Both languages,
+both rendering correctly in `RichTextView`. `Info.valuePropositionText` no longer says 981;
+it says all 6,328, *from être to humoter*, which is the honest new pair.
+
+The pipeline lives in `frequency/` at the repo root, outside both synchronized target folders
+so nothing ships: three scripts, the tracked `verb-counts.json` and `editorial-counts.json`,
+GLÀFF's own README (its licence asks that it travel with redistributed derived data), and
+SHA-256s for the two 200 MB sources that are gitignored. `frequency/README.md` has the
+re-download recipe. All 240 tests pass, `check_docs.py` is clean — after teaching it that
+`verb-counts.json` is not a file called `counts.json`.
