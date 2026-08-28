@@ -41,9 +41,10 @@ struct IrregularityMetricTests {
     #expect(VerbModel.models.values.contains { $0.irregularity == 100 })
   }
 
-  // The figures in Info.irregularitiesText and Info.valuePropositionText, in both languages.
-  // A verb added, removed, or re-modeled changes these, and the prose has silently gone stale
-  // twice; failing here is the reminder to update it.
+  // The figures in Info.irregularitiesText and Info.valuePropositionText, in both languages,
+  // and in docs/description.txt, the App Store copy — which is outside the test target's reach
+  // and drifted a whole release behind before anyone noticed. A verb added, removed, or
+  // re-modeled changes all three; failing here is the reminder to update them together.
   @Test func testShippingSplitMatchesTheInfoText() {
     var modelsByInfinitif: [String: [String]] = [:]
     for verb in Verb.verbs.values {

@@ -2171,3 +2171,39 @@ build checks. Now a verb added, removed, or re-modeled fails a test that names t
 `Info.irregularitiesText`, which is the only moment anyone would think to update it.
 
 248 tests pass.
+
+## The App Store description had drifted a release behind (2026-08-28)
+
+Updating `docs/description.txt` for the new frequency rankings turned up that it was stale in
+four places, not one, and stale *differently* from the app: it claimed **5,222 regular / 1,098
+irregular**, which sums to 6,320 — the verb total from before the 2026-08-28 additions. `git log`
+explains it: the file was last touched by *App Store copy: refresh the description for 2.0* and
+nothing since, including the recount that fixed the same figures inside the app. Two homes for
+one number, one of them checked by a test and one of them not.
+
+Everything was recomputed from `verbs.xml` rather than carried across from the app's strings:
+
+| Claim | Said | Says now |
+|---|---|---|
+| regular / irregular | 5,222 / 1,098 | **5,223 / 1,103** |
+| defective verbs | seventy-seven | **seventy-two** |
+| verbs with an etymology | nearly a thousand | **more than a thousand** (1,001) |
+| frequency rankings | top 981, *être* to *ancrer* | **all 6,326**, *être* to *humoter* |
+| verbs with an example | more than 1,100 | unchanged — 1,141, still true |
+
+The defective count is the interesting one: seventy-seven was never right. 72 distinct
+infinitives carry a `dg`, which is what the app's own `Info.valuePropositionText` says after the
+earlier recount moved it from sixty-six. The description had a third, unrelated number. Nothing
+reconciled the two documents because nothing ever compared them.
+
+`IrregularityMetricTests.testShippingSplitMatchesTheInfoText` already pins the regular/irregular
+split against live data, so its comment now names `docs/description.txt` as a third place
+carrying the same figures. That is deliberately a comment rather than an assertion: the file is
+prose for a shop window, outside the test target, and the failure it needs to prevent is a human
+forgetting it exists — which a named reminder at the exact moment the numbers change solves, and
+a brittle text-scraping test would only half-solve while adding a new way to fail.
+
+Worth remembering for the next time a count changes: `Info.irregularitiesText`,
+`Info.valuePropositionText`, `Onboarding.browse*`, `README.md`, `CLAUDE.md`,
+`docs/project-structure.md`, `frequency/README.md`, and `docs/description.txt` all quote verb
+counts, in two languages for the first four.

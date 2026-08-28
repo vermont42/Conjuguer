@@ -1,12 +1,12 @@
 Conjuguer is an app for learning French verb conjugations.
 
-Conjuguer conjugates 5,222 regular French verbs and 1,098 irregular French verbs in _all_ tenses.
+Conjuguer conjugates 5,223 regular French verbs and 1,103 irregular French verbs in _all_ tenses.
 
 Every French verb has at least one English translation. In fact, réaliser has eight!
 
 The Conjugation Tutor answers your questions about French verbs and tenses in plain language and remembers your conversation between visits. Powered by Apple Intelligence, it runs entirely on your device and requires a device that supports Apple Intelligence.
 
-Nearly a thousand of the most common verbs come with an etymology tracing the verb’s origins, from Latin and Frankish roots to the modern French you use today.
+More than a thousand of the most common verbs come with an etymology tracing the verb’s origins, from Latin and Frankish roots to the modern French you use today.
 
 More than 1,100 verbs show an example sentence, with English translation, drawn from real, properly sourced writing: Proust, Zola, Flaubert, La Fontaine, Molière, the “Chanson de Roland”, French and Swiss public documents, and Wikipedia. Every source is credited on the Info tab.
 
@@ -14,9 +14,9 @@ Conjuguer reaches beyond the app. A Verb of the Day widget brings a daily verb a
 
 Every tense is fully described, with sample uses from the classics of French literature, including “La chanson de Roland” and “À la recherche du temps perdu”.
 
-Conjuguer has _full_ conjugations for seventy-seven defective French verbs, including exotic ones like ester, issir, and gésir.
+Conjuguer has _full_ conjugations for seventy-two defective French verbs, including exotic ones like ester, issir, and gésir.
 
-Conjuguer has frequency-of-use rankings for the top 981 French verbs, from être to ancrer. These rankings can help focus vocabulary study.
+Conjuguer has frequency-of-use rankings for all 6,326 French verbs, from être to humoter. These rankings can help focus vocabulary study.
 
 Conjuguer includes a quiz mode for gamifying study. Quiz results are available in Game Center™.
 
@@ -27,13 +27,13 @@ Français
 
 Conjuguer est une application pour apprendre la conjugaison des verbes français.
 
-Conjuguer conjugue 5 222 verbes français réguliers et 1 098 verbes français irréguliers à _tous_ les temps.
+Conjuguer conjugue 5 223 verbes français réguliers et 1 103 verbes français irréguliers à _tous_ les temps.
 
 Chaque verbe français a au moins une traduction anglaise. Le verbe réaliser en a même huit !
 
 Le tuteur de conjugaison répond à vos questions sur les verbes et les temps français dans un langage clair et garde la mémoire de vos échanges d’une visite à l’autre. Propulsé par Apple Intelligence, il fonctionne entièrement sur votre appareil et nécessite un appareil compatible avec Apple Intelligence.
 
-Près de mille des verbes les plus courants sont accompagnés d’une étymologie qui retrace leur origine, des racines latines et franciques au français d’aujourd’hui.
+Plus de mille des verbes les plus courants sont accompagnés d’une étymologie qui retrace leur origine, des racines latines et franciques au français d’aujourd’hui.
 
 Plus de 1 100 verbes proposent une phrase d’exemple, accompagnée de sa traduction anglaise, tirée de textes réels et dûment référencés : Proust, Zola, Flaubert, La Fontaine, Molière, la « Chanson de Roland », des documents publics français et suisses, et Wikipédia. Chaque source est créditée sur l’onglet Info.
 
@@ -41,9 +41,9 @@ Conjuguer s’étend au-delà de l’application. Un widget « Verbe du jour » 
 
 Chaque temps est décrit en détail, avec des exemples d’emploi tirés des classiques de la littérature française, dont « La chanson de Roland » et « À la recherche du temps perdu ».
 
-Conjuguer propose les conjugaisons _complètes_ de soixante-dix-sept verbes français défectifs, y compris des verbes aussi rares que ester, issir et gésir.
+Conjuguer propose les conjugaisons _complètes_ de soixante-douze verbes français défectifs, y compris des verbes aussi rares que ester, issir et gésir.
 
-Conjuguer indique la fréquence d’emploi des 981 verbes français les plus courants, d’être à ancrer. Ce classement permet de cibler l’apprentissage du vocabulaire.
+Conjuguer indique la fréquence d’emploi des 6 326 verbes français, d’être à humoter. Ce classement permet de cibler l’apprentissage du vocabulaire.
 
 Conjuguer comprend un mode quiz qui rend l’étude ludique. Les résultats des quiz sont disponibles dans Game Center™.
 
