@@ -241,6 +241,7 @@ docs/
 ├── screenshot-playbook.md          # Screenshot workflow: prerequisites, kill switches, driver flags, workarounds, recovery
 ├── screenshots/                    # Captured screenshots produced by the driver
 ├── technology-corpus-sources.md    # Provenance manifest for the technology corpus tier
+├── verb-frequency-sources.md       # Research: frequency-of-use sources for all 6,320 verbs (Sketch Engine prices/caps, GLÀFF, Lexique 4 coverage)
 ├── video_script.md                 # App Store preview script, bilingual captions, and pre-recording checklist
 ├── wikipedia-corpus-sources.md     # Provenance manifest for the Wikipedia corpus tier
 ├── wwdc2026-conjuguer-impact.md    # WWDC 2026 announcements and what they mean for Conjuguer

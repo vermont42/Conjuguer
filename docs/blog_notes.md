@@ -1684,3 +1684,98 @@ score remains a real alternative if a cross-device best score is ever wanted.
 No code changed. The essay prompt at `~/Desktop/workspace/Conjugar/prompts/essay.md` now carries a
 background section drawn from this reconciliation, including the caveat that both audits were
 AI-assisted and that the essay should characterize that deliberately rather than by omission.
+
+## Frequency data for all 6,320 verbs: the research (2026-08-28)
+
+The verb list has carried Sketch Engine ranks for 981 verbs since 2021, and Konjugieren's
+DWDS success (permission granted 2026-08-26, ranks for all 3,572 verbs) made the gap in
+Conjuguer look like a solvable problem rather than a fact of life. Josh's prompt
+(`prompts/freq_prompt.md`) asked for a research pass: start with Lexical Computing and what a
+paid plan costs, then search widely, using the Chrome MCP where it helped. The result is
+[`verb-frequency-sources.md`](verb-frequency-sources.md).
+
+**The first finding reframed the question.** The 1,000-item cap on word lists from Sketch
+Engine's preloaded corpora is *identical* for trial and paid accounts — the account-limitations
+page lists the same "1,000 items from one list" in both columns. So the €152.04/year freelancer
+plan (found by driving the JS price calculator in Chrome and then reading its backing API at
+`pay.sketchengine.eu/api.cgi?c=pricelist`, which also gave the academic rates) buys nothing
+toward the goal. A longer list is a bespoke, quoted data product with no published price; the
+sample research licence for academics has its fee redacted and forbids commercial use anyway.
+The doc drafts the quote request, and asks in the same email whether one-lemma-per-request API
+querying under a subscription — Konjugieren's DWDS pattern — would be acceptable instead.
+
+**The second finding made paying optional.** GLÀFF, a CC BY-SA 3.0 lexicon built from
+Wiktionnaire at Toulouse, carries lemma counts from FrWaC (1.25 billion words), Le Monde, and
+Frantext. Downloaded from the CNRS mirror on Hugging Face (the Toulouse server refused
+connections) and matched against `verbs.xml`: 6,265 of 6,316 distinct infinitives, and its
+FrWaC ordering agrees with the existing ranks at Spearman 0.924. Lexique 4 — a 2026 release
+that turned up mid-research, 316 million words of subtitles — covers 5,614 and correlates at
+only 0.567, because subtitles rank *vouloir*, *parler*, *aimer*, and *tuer* where the web
+ranks *permettre*, *consulter*, and *utiliser*. That register question is now the real decision,
+and the doc lays it out rather than settling it.
+
+**Things that failed, so nobody retries them.** `get_page_text` returned nothing on Sketch
+Engine's pricing pages (the accessibility tree via `read_page` worked); screenshots came back
+"omitted due to error" all session, so every price was read from the DOM or the API. Leipzig's
+download site sat behind a proof-of-work bot check and answered "This language is not known
+to us" for French at the URL tried. `corpus.leeds.ac.uk` timed out. COW's FRCOW16 is gone —
+Roland Schäfer's May 2025 post says he and Felix Bildhauer paid for the server themselves
+until 2024. And the tempting shortcut of summing a subtitle *form* list through GLÀFF's
+form→lemma map produced *taire* as the third most common French verb, because *tu* is its past
+participle; form lists need a tagger, full stop.
+
+**Side effect.** The coverage runs caught seven `verbs.xml` entries that no dictionary knows:
+five infinitives with a dropped *v* (`préenir`, `récidier`, `réolvériser`, `transaser`,
+`désenaser`) and two missing accents (`eduquer`, `egorger`), plus common verbs the list lacks
+outright (*alléger*, *éduquer*, *encaisser*, *perpétuer*, *égorger*). Those are logged in the
+doc for a separate fix. No code changed; nothing was sent or purchased.
+
+## Two plans out of the frequency research (2026-08-28)
+
+Josh asked for two prompt files to act on the research. Neither has been run.
+
+[`prompts/fix-and-add-verbs.md`](../prompts/fix-and-add-verbs.md) handles the side finding:
+the seven `verbs.xml` entries no lexicon knows. Reading them with their glosses settled what
+each one is — `préenir` carries prévenir's exact gloss and model (`6-7`) and prévenir exists
+forty lines later, so it is a duplicate to delete, while the other six are renames whose
+existing `mo` values already fit the corrected spellings. The "five missing verbs" turned out
+to be three net-new entries (*alléger*, *encaisser*, *perpétuer*) plus the two accent fixes
+(*éduquer*, *égorger*); Josh then pulled the research doc's other ten into scope, so the plan
+adds thirteen entries (6,320 → 6,332), one of them *dépourvoir*, which is defective and so
+drags in `defectGroups.xml` — group 13, *faillir*'s, is the candidate, with a new group as the
+fallback if the dictionaries say "unused" rather than "rare". It also inherits two
+ground truths worth recording: the corpus originals are still on disk, so examples can be
+mined rather than authored, and a grep of the Oxford Roland found no *alegier* or *esgorgier*,
+so the Chanson-example step Josh asked for will most likely end in an honest "none" — the plan
+requires the check anyway, because the reflex table is audited, not guessed. A trap it
+defuses: `VerbView.sourceClaude` hard-codes "Claude (Opus 4.8)", so any example authored by
+this session must not inherit that label.
+
+[`prompts/glaff-frequency-ranking.md`](../prompts/glaff-frequency-ranking.md) is the
+implementation of the research's recommendation, with the decisions pinned so a future
+session does not reopen them: FrWaC primary, LM10 → Frantext → Lexique 4 tie-breaks, counts
+stored as `hi`/`hn`/`hl`/`hs` with absent ≠ zero, ranks derived in `VerbParser.ranked` the
+way Konjugieren does it, duplicate `ex=` entries sharing a rank. Two consumers needed thought
+beyond the parser: the widget's verb-of-the-day pool is "ranked verbs" today, which after the
+change would mean all 6,328 distinct infinitives including *abcéder* with no example, so the plan switches it to
+"verbs with a literature example"; and `Info.valuePropositionText` still promises rankings
+"for the top 981 French verbs, from être to ancrer". Credits keep Lexical Computing as five
+years of history, add GLÀFF and Lexique 4, and carry the line Josh asked for mid-turn: that
+he studied at the Université de Toulouse, where GLÀFF was built. Two later instructions shaped
+both files: neither plan commits (Josh does), and the second plan assumes the first has run
+and says nothing about it — no ordering checks, no "if the other plan has landed" branches.
+
+## Estimates for the verbs no corpus lists (2026-08-28)
+
+Before signing off Josh asked what happens to ranks for verbs outside the corpus — he prefers
+that frequency never be blank, and Konjugieren's estimated counts had served fine. Checking
+the answer exposed a flaw in the second plan as written: its tie-breaker tuple put "absent
+from GLÀFF" below "one FrWaC hit," and GLÀFF omits hyphenated compounds by design, so
+*sous-estimer* — 11.5 per million in subtitles — would have ranked under *bêcheveter*. The fix
+is Konjugieren's `hp`: an estimated count, flagged, clamped below the measured count at rank
+1,000, and reported as a population. A log-log fit of FrWaC on Lexique 4 over the 5,572 verbs
+both list (`7.57 + 0.76·log`, R² 0.69, ±2.6× typical) places the 24 hyphenated verbs Lexique 4
+has in plausible company (*sous-estimer* ≈ #1,050, *tire-bouchonner* ≈ #5,100); base-verb
+scaling covers the ten compounds in no source; a hand-maintained editorial file covers nine
+rarities. The research doc gained a *Verbs no corpus lists* section and
+`glaff-frequency-ranking.md` a rewritten decision 5 and pipeline steps to match.
