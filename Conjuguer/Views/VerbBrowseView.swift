@@ -150,7 +150,9 @@ struct VerbBrowseView: View {
   @ViewBuilder
   private var verbCount: some View {
     if !searchResults.isEmpty {
-      Text(L.VerbBrowseView.verbCount(count: searchResults.count))
+      // Rows outnumber verbs: haïr, ouïr, saillir and sortir each carry two entries, and every
+      // other count the app quotes is the 6,326 distinct infinitives.
+      Text(L.VerbBrowseView.verbCount(count: Set(searchResults.map(\.infinitif)).count))
         .subheadingLabel()
         .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityIdentifier("verb_browse_count")

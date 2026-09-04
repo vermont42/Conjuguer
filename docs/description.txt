@@ -2,7 +2,7 @@ Conjuguer is an app for learning French verb conjugations.
 
 Conjuguer conjugates 5,223 regular French verbs and 1,103 irregular French verbs in _all_ tenses.
 
-Every French verb has at least one English translation. In fact, réaliser has eight!
+Every French verb has at least one English translation. In fact, tanquer has nine!
 
 The Conjugation Tutor answers your questions about French verbs and tenses in plain language and remembers your conversation between visits. Powered by Apple Intelligence, it runs entirely on your device and requires a device that supports Apple Intelligence.
 
@@ -29,7 +29,7 @@ Conjuguer est une application pour apprendre la conjugaison des verbes français
 
 Conjuguer conjugue 5 223 verbes français réguliers et 1 103 verbes français irréguliers à _tous_ les temps.
 
-Chaque verbe français a au moins une traduction anglaise. Le verbe réaliser en a même huit !
+Chaque verbe français a au moins une traduction anglaise. Le verbe tanquer en a même neuf !
 
 Le tuteur de conjugaison répond à vos questions sur les verbes et les temps français dans un langage clair et garde la mémoire de vos échanges d’une visite à l’autre. Propulsé par Apple Intelligence, il fonctionne entièrement sur votre appareil et nécessite un appareil compatible avec Apple Intelligence.
 

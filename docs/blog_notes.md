@@ -2207,3 +2207,55 @@ Worth remembering for the next time a count changes: `Info.irregularitiesText`,
 `Info.valuePropositionText`, `Onboarding.browse*`, `README.md`, `CLAUDE.md`,
 `docs/project-structure.md`, `frequency/README.md`, and `docs/description.txt` all quote verb
 counts, in two languages for the first four.
+
+## tanquer takes réaliser's crown, and 6,326 becomes the one verb count (2026-09-04)
+
+Josh asked for the description's verb counts to be fixed after the conjugation fixes and the
+frequency update. Recomputing every claim from `verbs.xml` showed they were already right: the
+2026-08-28 refresh had landed after all of that work, and
+`IrregularityMetricTests.testShippingSplitMatchesTheInfoText` passed on the live tree. What the
+recount did turn up was two softer kinds of drift.
+
+**réaliser was no longer the champion.** "In fact, réaliser has eight!" was still true, but the
+verb with the most English translations is now *tanquer* with nine (*étendre* and *gâcher* tie
+réaliser at eight). Splitting the `tn` attribute on commas outside parentheses is what makes
+this countable; a naive split overcounts *réaliser*, whose glosses carry commas inside brackets.
+The sentence now names *tanquer* and *nine* in `docs/description.txt` and in
+`Info.valuePropositionText`, both languages. The Info text wraps the verb in `‡…‡`, which
+deep-links to its screen, and *tanquer* resolves the same way *réaliser* did.
+
+**The app quoted two totals.** The description, the Info texts, and the ranking said 6,326, the
+number of distinct infinitives. The README, the onboarding cards, `CLAUDE.md`'s overview line, and
+the 2.2 release notes said 6,330, the number of entries, which counts *haïr*, *ouïr*, *saillir*
+and *sortir* twice for their second models. Both were defensible, and they had coexisted since
+2.0. Josh chose 6,326 everywhere, so every user-facing total now agrees. The two lines that
+describe the file itself, `CLAUDE.md` and `docs/project-structure.md`, say "6,330 entries /
+6,326 distinct infinitives". Those are facts about `verbs.xml`, not copy, and stay.
+
+One place still showed the entry count: the "N VERBS" header on the Verbs tab printed
+`searchResults.count`, 6,330 with an empty search field. Josh asked for it fixed, so the header
+now counts distinct infinitives (`Set(searchResults.map(\.infinitif)).count`) and reads
+"6,326 verbs" in the simulator. Searching *sortir* still lists both rows but counts one verb,
+which matches how the rest of the app talks about it.
+
+**The release notes explained a number nobody saw.** Their last paragraph said the duplicate
+deletions were "why Conjuguer now says 6,330 verbs rather than 6,332" (then, after the
+6,326 pass, "rather than 6,328"). Both are internal waypoints. Version 2.1 shipped saying
+6,320, so a returning user sees the count rise by six, and the reason is the whole of
+`fccc793`, which the notes had skipped: thirteen verbs added, six misspelled infinitives
+renamed, préenir deleted as a duplicate of prévenir, plus the two later duplicate deletions.
+The paragraph now lists the thirteen newcomers, mentions the accent-less *eduquer* and
+*egorger* as the recognisable misspellings, names all three deleted duplicates, and ends
+"6,326 rather than 6,320", in both languages. Lesson for the next release: write the count
+sentence against what the previous version *shipped*, not against the last commit.
+
+## Version 2.2 shipped (2026-09-04)
+
+Josh reports that version 2.2 has shipped: build 1, with every verb ranked by frequency, the
+five é→è fixes, the assaillir rescoring, the thirteen new verbs, and 6,326 as the one verb
+count the app quotes everywhere. The release notes in `docs/release-notes-2.2.txt` and the
+description in `docs/description.txt` are the copy that went with it. The 2.1 baseline for
+the next set of notes is therefore gone; whoever writes the 2.3 notes should diff against
+this commit and remember that 2.2 shipped saying 6,326 verbs, 5,223 regular and 1,103
+irregular, seventy-two defective, from être to humoter, with tanquer as the verb with the
+most translations.

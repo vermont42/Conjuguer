@@ -12,6 +12,14 @@ changelog: Josh may eventually generate blog posts from these notes, and future 
 sessions rely on them as dated project memory — when older docs conflict, the journal
 shows which truth is current.
 
+## Prose style
+
+Generated prose, wherever it lands (release notes, App Store copy, journal entries, commit
+messages, comments, replies to Josh), must never use an em dash to join two clauses that
+each have a subject and a predicate. Start a new sentence instead; that is usually best.
+Less often, a semicolon is appropriate. The rule is about clauses; an em dash around a
+parenthetical aside or a list gloss that is not itself a clause is not what it forbids.
+
 ## Version Control
 
 **Commit directly to `main`. Do not create branches.** This is a solo project and the default
@@ -283,7 +291,7 @@ array.)
 
 ## Architecture Overview
 
-Conjuguer is an iOS app for learning French verb conjugations. It conjugates 6,330 verbs across all French tenses.
+Conjuguer is an iOS app for learning French verb conjugations. It conjugates 6,326 verbs across all French tenses.
 
 ### Project Layout (synchronized folders)
 

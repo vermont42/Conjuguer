@@ -1386,13 +1386,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "~Conjuguer~ is an app for learning French verb conjugations.\n\n~Conjuguer~ conjugates 5,223 regular French verbs and 1,103 irregular French verbs in ~all~ tenses.\n\nEvery French verb has at least one English translation. In fact, ‡réaliser‡ has eight!\n\nEvery tense is fully described, with sample uses from the classics of French literature, including “La chanson de Roland” and “À la recherche du temps perdu”.\n\n~Conjuguer~ has ~full~ conjugations for seventy-two defective French verbs, including exotic ones like ester, issir, and gésir.\n\n~Conjuguer~ has frequency-of-use rankings for all 6,326 French verbs, from être to humoter. These rankings can help focus vocabulary study.\n\n~Conjuguer~ includes a quiz mode for gamifying study. Quiz results are available in Game Center™."
+            "value" : "~Conjuguer~ is an app for learning French verb conjugations.\n\n~Conjuguer~ conjugates 5,223 regular French verbs and 1,103 irregular French verbs in ~all~ tenses.\n\nEvery French verb has at least one English translation. In fact, ‡tanquer‡ has nine!\n\nEvery tense is fully described, with sample uses from the classics of French literature, including “La chanson de Roland” and “À la recherche du temps perdu”.\n\n~Conjuguer~ has ~full~ conjugations for seventy-two defective French verbs, including exotic ones like ester, issir, and gésir.\n\n~Conjuguer~ has frequency-of-use rankings for all 6,326 French verbs, from être to humoter. These rankings can help focus vocabulary study.\n\n~Conjuguer~ includes a quiz mode for gamifying study. Quiz results are available in Game Center™."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "~Conjuguer~ est une application pour apprendre la conjugaison des verbes français.\n\nL’application conjugue 5.223 verbes français réguliers et 1.103 verbes français irréguliers à ~tous~ les temps.\n\nChaque verbe français a au moins une traduction anglaise. En effet, le verbe ‡réaliser‡ en a huit !\n\nChaque temps est décrit en détail, avec des exemples d’utilisation des classiques tirés de la littérature française, dont « La chanson de Roland » et « À la recherche du temps perdu ».\n\n~Conjuguer~ propose des conjugaisons ~complètes~ pour soixante-douze verbes français défectifs, y compris des verbes exotiques comme ester, issir et gésir.\n\n~Conjuguer~ propose des classements de fréquence d’utilisation pour les 6.326 verbes français, d’être à humoter. Ces classements peuvent aider à concentrer l’étude du vocabulaire.\n\n~Conjuguer~ comprend un mode quiz pour gamifier l’étude des verbes. Les résultats des quiz sont disponibles dans Game Center™."
+            "value" : "~Conjuguer~ est une application pour apprendre la conjugaison des verbes français.\n\nL’application conjugue 5.223 verbes français réguliers et 1.103 verbes français irréguliers à ~tous~ les temps.\n\nChaque verbe français a au moins une traduction anglaise. En effet, le verbe ‡tanquer‡ en a neuf !\n\nChaque temps est décrit en détail, avec des exemples d’utilisation des classiques tirés de la littérature française, dont « La chanson de Roland » et « À la recherche du temps perdu ».\n\n~Conjuguer~ propose des conjugaisons ~complètes~ pour soixante-douze verbes français défectifs, y compris des verbes exotiques comme ester, issir et gésir.\n\n~Conjuguer~ propose des classements de fréquence d’utilisation pour les 6.326 verbes français, d’être à humoter. Ces classements peuvent aider à concentrer l’étude du vocabulaire.\n\n~Conjuguer~ comprend un mode quiz pour gamifier l’étude des verbes. Les résultats des quiz sont disponibles dans Game Center™."
           }
         }
       }
@@ -1879,13 +1879,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Explore 6,330 verbs across every conjugation pattern. Tap any verb to see its full conjugation table with irregularities highlighted. Sort verbs by frequency of use for study purposes."
+            "value" : "Explore 6,326 verbs across every conjugation pattern. Tap any verb to see its full conjugation table with irregularities highlighted. Sort verbs by frequency of use for study purposes."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Explorez 6 330 verbes répartis sur tous les modèles de conjugaison. Touchez un verbe pour afficher son tableau de conjugaison complet, avec les irrégularités mises en évidence. Triez les verbes par fréquence d’usage pour faciliter l’étude."
+            "value" : "Explorez 6 326 verbes répartis sur tous les modèles de conjugaison. Touchez un verbe pour afficher son tableau de conjugaison complet, avec les irrégularités mises en évidence. Triez les verbes par fréquence d’usage pour faciliter l’étude."
           }
         }
       }
@@ -1896,13 +1896,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Browse 6,330 French Verbs"
+            "value" : "Browse 6,326 French Verbs"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parcourez 6 330 verbes français"
+            "value" : "Parcourez 6 326 verbes français"
           }
         }
       }

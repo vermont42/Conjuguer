@@ -3,7 +3,7 @@
 Conjuguer
 =========
 
-**Conjuguer** is an iOS™ app for learning French verb conjugations. **Conjuguer** conjugates 6,330 verbs, regular and irregular, in _all_ French verb tenses.
+**Conjuguer** is an iOS™ app for learning French verb conjugations. **Conjuguer** conjugates 6,326 verbs, regular and irregular, in _all_ French verb tenses.
 
 **Conjuguer** is available for free download in the iOS App Store™. Tap the button below to install.
 
@@ -15,7 +15,7 @@ While developing **Conjuguer** in 2021, I learned about SwiftUI and how to mix i
 
 ### Features
 
-- **Verb browser** — all 6,330 verbs, searchable and sortable by frequency of use or alphabetically, in a list or a grid. Every verb carries a frequency rank, not just the common ones.
+- **Verb browser** — all 6,326 verbs, searchable and sortable by frequency of use or alphabetically, in a list or a grid. Every verb carries a frequency rank, not just the common ones.
 - **Conjugation views** — every tense for a given verb, with irregular stems and endings picked out in red so that the shape of an irregularity is visible at a glance. Many verbs also carry an etymology and an example sentence drawn from French literature.
 - **Verb models** — the conjugation patterns that the verbs inherit from, ranked by how irregular they are.
 - **Tense reference** — an explanation of each French tense, when to use it, and how it is formed, illustrated with quotations from Proust, the _Chanson de Roland_, and others.
