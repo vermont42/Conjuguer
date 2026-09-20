@@ -61,8 +61,14 @@ struct VerbModelTests {
 
     var completedTestCount = 0
 
+    // Tie-break on id: haïr is the exemplar of both 2-3A (France) and 2-3B (Québec), and a
+    // comparison on exemplar alone let those two tests swap places between regenerations.
     let models = Array(VerbModel.models.values).sorted(by: { lhs, rhs in
-        lhs.exemplar.caseInsensitiveCompare(rhs.exemplar) == .orderedAscending
+        let comparison = lhs.exemplar.caseInsensitiveCompare(rhs.exemplar)
+        if comparison == .orderedSame {
+          return lhs.id < rhs.id
+        }
+        return comparison == .orderedAscending
       }
     )
 

@@ -1,7 +1,8 @@
 # Verb pass: working plan (2026-09-20)
 
-**Status:** decided. Josh approved the five decisions on 2026-09-20; they are recorded in
-the last section and folded into the stages below. Nothing has run yet except the
+**Status:** Stage A ran on 2026-09-20 and is complete; nothing is committed yet. Josh approved
+the five decisions on 2026-09-20; they are recorded in the last section and folded into the
+stages below. Apart from Stage A, nothing has run yet except the
 measurements. Every number here was computed on 2026-09-20 against
 `Conjuguer/Models/verbs.xml` (6,330 entries, 6,326 distinct infinitives) and
 `literature_examples.json` (1,141 entries covering 1,140 verbs). The journal entries of the
@@ -12,7 +13,7 @@ Order of work: **Stage A** (engine fixes, now) → **Stage 0** (reference data) 
 (deterministic audits) → **pilot** → **Stage 2** (subagent shards) → **Stage 3** (skeptic
 pass and report) → **Stage 4** (apply).
 
-**Progress** (implementers update this line): Stage A ☐ · Stage 0 ☐ · Stage 1 ☐ ·
+**Progress** (implementers update this line): Stage A ✅ 2026-09-20 · Stage 0 ☐ · Stage 1 ☐ ·
 Pilot ☐ · Stage 2 ☐ · Stage 3 ☐ · Stage 4 ☐
 
 ## How implementers keep this plan honest
@@ -115,7 +116,7 @@ dialectal, dated, rare or slang while a plain sense exists (a noisy list, but a 
 the gloss task is mostly sense selection and order for the verbatim majority, and
 translation faithfulness for the rest.
 
-## Stage A: fix the verified engine errors now
+## Stage A: fix the verified engine errors now ✅ 2026-09-20
 
 Decision 1. A small, self-contained commit ahead of the pass, so that the pass verifies
 against a correct engine and a fresh dump. Paste this into a clean session:
@@ -133,7 +134,7 @@ Mark completed steps with ✅ in this plan and add a correction note wherever th
 proved wrong or incomplete. Do not commit; Josh commits.
 ```
 
-### A1. Three model definitions in `verbModels.xml`
+### A1. Three model definitions in `verbModels.xml` ✅ 2026-09-20
 
 | Model | Line (2026-09-20) | Change | Expected forms |
 |---|---|---|---|
@@ -145,7 +146,16 @@ The `p=` syntax is `charsFromEnd,count,replacement,tenses`, so `3,2,EU,r3p` on t
 *pouv* removes *ou* and yields *pEUv* + *ent*. Confirm against `VerbModel.swift` before
 editing rather than trusting this gloss of it.
 
-### A2. Seven re-modeled verbs in `verbs.xml`
+**Correction (2026-09-20):** the gloss is right, and `StemAlteration.init(xmlString:)` is where
+it lives rather than `VerbModel.swift`. All three edits landed as written and produce exactly
+the expected forms. Two notes for later stages. The plan gave line numbers 53, 71 and 68; the
+lines were 53, 71 and 68 as stated, but an implementer should match on the model id rather than
+the line, since any insertion moves them. And `verbModels.xml` does not pass `xmllint --valid`:
+its internal DTD never declared the `p`, `dg` or `sb` attributes, so every model carrying one is
+reported invalid. That is pre-existing and untouched here. `verbs.xml` does pass, which is what
+the Stage 4 acceptance criterion is about.
+
+### A2. Seven re-modeled verbs in `verbs.xml` ✅ 2026-09-20 (eight, in the end)
 
 Edit as text, one attribute per line, keeping the attribute order `in tn [ay] [re] mo …`
 (see the emitter in `InputView.swift`); `git diff --stat` must show only these lines.
@@ -160,7 +170,13 @@ Edit as text, one attribute per line, keeping the attribute order `in tn [ay] [r
 | empaqueter | `1-1` | `1-3B` | jeter | *empaqueTte* |
 | assortir | `1-1` | `2-1` | finir | *assortissons*, *assorti* |
 
-### A3. Seventeen auxiliaries in `verbs.xml`
+**Correction (2026-09-20):** there were eight, not seven. Widening
+`StemAlterationAuditTests` (step A4) to admit an é before two consonants immediately turned up
+**déshypothéquer**, sitting on `1-1` and giving *je déshypothéque*, beside a correctly modeled
+`1-5` *hypothéquer*. It moved to `1-5` with the others. The consequence for the counts is in the
+A4 note. The attribute-order rule held: every one of these lines needed only the `mo` value
+swapped in place, and `git diff` shows one line per verb.
+### A3. Seventeen auxiliaries in `verbs.xml` ✅ 2026-09-20
 
 Add `ay="e"` (after `tn`) to: *advenir*, *apparaître*, *bienvenir*, *demeurer*,
 *intervenir*, *obvenir*, *passer*, *provenir*, *réapparaître*, *redescendre*, *redevenir*,
@@ -169,7 +185,11 @@ the list is decision 4; the verbs deliberately left on avoir are *paraître*,
 *disparaître*, *repasser* and *ressusciter*, and *acharner* goes to the pronominal
 adjudication in Stage 2 instead (its living form is *s'acharner*).
 
-### A4. Tests, counts, notes
+**Correction (2026-09-20):** as written, except that `ay` goes **after `tn`**, not after `in`.
+The existing file spells it `<verb in="aller" tn="go" ay="e" mo="1-9" …>`, which matches the
+`in tn [ay] [re] mo …` order the A2 note gives. None of the seventeen already carried an `ay`.
+
+### A4. Tests, counts, notes ✅ 2026-09-20
 
 - Regenerate `VerbModelTests.swift` the way `TestUtils.swift` documents (uncomment the
   `GenerateVerbModelTests` suite, run it, re-comment it). Its diff should touch exactly the
@@ -189,6 +209,44 @@ adjudication in Stage 2 instead (its living form is *s'acharner*).
 - Simulator: open *pouvoir* and *intervenir* in `VerbView` and screenshot both.
 - Journal entry. Then regenerate the dump in Stage 0, since the audit must run against the
   corrected engine.
+
+**Correction (2026-09-20):** four things the plan did not anticipate.
+
+*The generated test file was not deterministic.* `T.generateVerbModelTests()` sorted the models
+on `exemplar` alone, and *haïr* is the exemplar of both `2-3A` (France) and `2-3B` (Québec), so
+the two `testHaïr…` functions traded places between runs and buried the real diff under 120
+spurious lines. `TestUtils.swift` now breaks the tie on `id`. With that in place the regenerated
+diff is exactly the four lines the plan predicted, touching only `4-6`, `5-8A` and `5-5`.
+Regenerating means uncommenting the `GenerateVerbModelTests` suite, running
+`run_tests.sh --only-testing ConjuguerTests/GenerateVerbModelTests`, and lifting the printed
+source out of `build.log` between the `//  VerbModelTests.swift` header line and the
+`✔ Test generateVerbModelTests` line. The emitted `firstPart` re-comments the generator, so the
+written file is ready as-is; re-running the filter against a file whose generator is already
+commented silently produces nothing, which is worth noticing before overwriting anything.
+
+*The widened stem audit found an eighth verb.* See the A2 note for *déshypothéquer*. The widened
+filter allows one **or two** consonants after the é and drops the mute *u* of a final *qu* or
+*gu* first, which is what admits *déféqu-* (and *lég-*, *délég-*) as well as *léch-*. The number
+of verbs examined rose from 176 to **224**, and the `examined > 150` guard is unchanged.
+
+*The split moved further than the plan predicted.* Six verbs leave the regular models, not five:
+*mener*, *changer*, *lécher*, *déféquer*, *empaqueter* and *déshypothéquer*. *assortir* moves
+`1-1` → `2-1`, which is regular to regular, and *rejeter* moves `1-3A` → `1-3B`, irregular to
+irregular, so neither counts. The shipping split is therefore **5,217 regular / 1,109 irregular**
+of the same 6,326, not 5,218 / 1,108. `IrregularityMetricTests`, both Info texts in both
+languages and `docs/description.txt` now say so. The French `Info.valuePropositionText` had been
+writing the thousands separator as a period (*5.223*); it now uses the space the rest of the
+French copy uses.
+
+*The simulator could not be made to show a compound tense.* `pouvoir` and `intervenir` were both
+opened in `VerbView` and screenshotted (`docs/screenshots/20260920-120555-pouvoir-peuvent.png`
+shows *elles peuvent* with the *eu* in red;
+`docs/screenshots/20260920-120624-intervenir-etre.png` shows *Auxiliary: être*). The passé
+composé itself lives behind a **Show Compound Tenses** toggle, and five attempts to flip it
+(`tap_label.sh`, `tap_xy.sh` on the switch, on the row, after settling) all reported a successful
+tap while `AXValue` stayed `"0"`. Possibly the iOS 26 switch is another control the skill cannot
+drive, like the segmented pickers. *je suis intervenu* is pinned in `EngineAuditTests` instead.
+A future session that needs a compound tense on screen should budget for this.
 
 ## Stage 0: reference data
 

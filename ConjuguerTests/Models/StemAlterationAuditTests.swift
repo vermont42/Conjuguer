@@ -24,22 +24,34 @@ struct StemAlterationAuditTests {
   // separated from the ending by at least one consonant.
   private static let vowels = Set("aeiouyéèêëàâîïôûù")
 
-  private static func stemEndsInÉPlusConsonant(_ infinitif: String) -> Bool {
+  // One consonant is the common shape (céder, considérer); two is just as stressed and was the
+  // gap that let lécher and pénétrer through. A final qu or gu spells a single consonant sound,
+  // so its mute u is dropped before counting — déféquer and léguer are é plus one consonant.
+  private static let maxConsonantsAfterÉ = 2
+
+  private static func stemEndsInÉPlusConsonants(_ infinitif: String) -> Bool {
     guard infinitif.hasSuffix("er") else {
       return false
     }
-    let stem = infinitif.dropLast(2)
-    guard let last = stem.last, !vowels.contains(last) else {
-      return false
+    var stem = Substring(infinitif.dropLast(2))
+    if stem.hasSuffix("qu") || stem.hasSuffix("gu") {
+      stem = stem.dropLast()
     }
-    return stem.dropLast().last == "é"
+
+    var consonants = 0
+    while let last = stem.last, !vowels.contains(last), consonants < maxConsonantsAfterÉ {
+      stem = stem.dropLast()
+      consonants += 1
+    }
+
+    return consonants > 0 && stem.last == "é"
   }
 
   @Test func testNoStressedStemKeepsItsÉ() {
     var examined = 0
     var offenders: [String] = []
 
-    for verb in Verb.verbs.values where Self.stemEndsInÉPlusConsonant(verb.infinitif) {
+    for verb in Verb.verbs.values where Self.stemEndsInÉPlusConsonants(verb.infinitif) {
       guard let présent = Conjugator.conjugatedString(
         infinitif: verb.infinitif,
         tense: .indicatifPrésent(.firstSingular),
@@ -57,7 +69,8 @@ struct StemAlterationAuditTests {
     }
 
     // The filter is the load-bearing half of this audit; if a refactor were to stop matching,
-    // the expectation below would pass vacuously. 176 verbs matched on 2026-08-28.
+    // the expectation below would pass vacuously. 176 verbs matched on 2026-08-28, and 224 on
+    // 2026-09-20 once a second consonant after the é was allowed.
     #expect(examined > 150, "Audit examined only \(examined) verbs — the infinitive filter is broken.")
     #expect(offenders.isEmpty, "Stems that keep é before a mute ending:\n\(offenders.joined(separator: "\n"))")
   }
@@ -77,12 +90,18 @@ struct StemAlterationAuditTests {
     T.testConjugation(infinitif: "réfréner", tense: .participePassé, expected: "réfréné", extraLetters: nil)
   }
 
-  // The four the audit turned up alongside refréner, two of them common verbs.
+  // The four the audit turned up alongside refréner, two of them common verbs, and the three
+  // the widened filter added: lécher and déféquer were named in the verb-pass plan, while
+  // déshypothéquer was a fresh find that had been sitting beside a correctly modeled
+  // hypothéquer.
   @Test(arguments: [
     ("considérer", "considÈre", "considérons"),
     ("interpréter", "interprÈte", "interprétons"),
     ("décolérer", "décolÈre", "décolérons"),
-    ("désaciérer", "désaciÈre", "désaciérons")
+    ("désaciérer", "désaciÈre", "désaciérons"),
+    ("lécher", "lÈche", "léchons"),
+    ("déféquer", "défÈque", "déféquons"),
+    ("déshypothéquer", "déshypothÈque", "déshypothéquons")
   ])
   func testFormerlyRegularStemsNowOpen(infinitif: String, singular: String, plural: String) {
     T.testConjugation(infinitif: infinitif, tense: .indicatifPrésent(.firstSingular), expected: singular, extraLetters: nil)

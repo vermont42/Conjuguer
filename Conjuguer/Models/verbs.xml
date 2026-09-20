@@ -127,7 +127,7 @@
   <verb in="adsorber" tn="adsorb" mo="1-1" hi="561" hn="1" hl="0" hs="3" />
   <verb in="aduler" tn="adulate" mo="1-1" hi="1607" hn="630" hl="44" hs="693" />
   <verb in="adultérer" tn="falsify, fake" mo="1-5" hi="101" hn="10" hl="8" hs="16" />
-  <verb in="advenir" tn="happen, occur" mo="6-7" hi="6780" hn="1691" hl="272" hs="4775" dg="1" />
+  <verb in="advenir" tn="happen, occur" ay="e" mo="6-7" hi="6780" hn="1691" hl="272" hs="4775" dg="1" />
   <verb in="aérer" tn="air, aerate" mo="1-5" hi="4558" hn="358" hl="139" hs="2054" />
   <verb in="affabuler" tn="make up stories, tell a fable" mo="1-1" hi="98" hn="26" hl="5" hs="155" />
   <verb in="affadir" tn="make tasteless, insipid, or bland" mo="2-1" hi="331" hn="245" hl="31" hs="19" />
@@ -301,7 +301,7 @@
   <verb in="apostasier" tn="apostatize" mo="1-1" hi="156" hn="3" hl="2" hs="51" />
   <verb in="apostiller" tn="apostille" mo="1-1" hi="54" hn="2" hl="1" />
   <verb in="apostropher" tn="apostrophize" mo="1-1" hi="490" hn="305" hl="93" hs="73" />
-  <verb in="apparaître" tn="appear" mo="5-20" hi="224822" hn="44456" hl="4864" hs="41399" />
+  <verb in="apparaître" tn="appear" ay="e" mo="5-20" hi="224822" hn="44456" hl="4864" hs="41399" />
   <verb in="appareiller" tn="join or mix together" mo="1-1" hi="2015" hn="225" hl="75" hs="1092" />
   <verb in="apparenter" tn="be related to" mo="1-1" hi="15653" hn="3717" hl="139" hs="1266" />
   <verb in="apparier" tn="pair or match" mo="1-1" hi="746" hn="63" hl="23" hs="95" />
@@ -388,7 +388,7 @@
   <verb in="assoiffer" tn="make thirsty" mo="1-1" hi="1001" hn="202" hl="50" hs="2222" />
   <verb in="assombrir" tn="darken, make gloomy" mo="2-1" hi="1917" hn="810" hl="469" hs="1532" />
   <verb in="assommer" tn="slaughter" mo="1-1" hi="1900" hn="552" hl="494" hs="10579" />
-  <verb in="assortir" tn="match, match up" mo="1-1" hi="15952" hn="4531" hl="161" hs="1804" />
+  <verb in="assortir" tn="match, match up" mo="2-1" hi="15952" hn="4531" hl="161" hs="1804" />
   <verb in="assoupir" tn="make drowsy" mo="2-1" hi="1193" hn="497" hl="421" hs="1788" />
   <verb in="assouplir" tn="soften" mo="2-1" hi="4786" hn="2315" hl="65" hs="519" />
   <verb in="assourdir" tn="deafen" mo="2-1" hi="516" hn="262" hl="331" hs="190" />
@@ -564,7 +564,7 @@
   <verb in="bichonner" tn="groom, titivate" mo="1-1" hi="662" hn="172" hl="29" hs="905" />
   <verb in="bidonner" tn="fabricate, make up" mo="1-1" hi="452" hn="51" hl="30" hs="253" />
   <verb in="bidouiller" tn="fiddle" mo="1-1" hi="1511" hn="71" hl="2" hs="804" />
-  <verb in="bienvenir" tn="welcome" mo="6-7" hi="5" hp="y" />
+  <verb in="bienvenir" tn="welcome" ay="e" mo="6-7" hi="5" hp="y" />
   <verb in="biffer" tn="cross out, cancel" mo="1-1" hi="380" hn="105" hl="49" hs="79" />
   <verb in="bifurquer" tn="bifurcate" mo="1-1" hi="1143" hn="247" hl="56" hs="402" />
   <verb in="bigarrer" tn="variegate, produce a colorful pattern" mo="1-1" hi="85" hn="31" hl="4" hs="16" />
@@ -899,7 +899,7 @@
   <verb in="chanceler" tn="stagger, totter, wobble" mo="1-3A" hi="589" hn="159" hl="307" hs="598" />
   <verb in="chancir" tn="become covered with mould" re="t" mo="2-1" hi="4" hn="0" hl="2" hs="6" />
   <verb in="chanfreiner" tn="chamfer" mo="1-1" hi="146" hn="0" hl="1" />
-  <verb in="changer" tn="change" mo="1-1" hi="249694" hn="41378" hl="7985" hs="429905" />
+  <verb in="changer" tn="change" mo="1-2B" hi="249694" hn="41378" hl="7985" hs="429905" />
   <verb in="chansonner" tn="satirize in song" mo="1-1" hi="11" hn="5" hl="1" hs="6" />
   <verb in="chanter" tn="sing" mo="1-1" hi="62252" hn="13029" hl="4209" hs="128573" />
   <verb in="chantonner" tn="sing, hum" mo="1-1" hi="817" hn="151" hl="417" hs="1440" />
@@ -1615,7 +1615,7 @@
   <verb in="défavoriser" tn="disfavor, disadvantage, discriminate" mo="1-1" hi="6533" hn="1395" hl="6" hs="142" />
   <verb in="défendre" tn="defend, forbid" mo="5-1A" hi="101076" hn="33831" hl="3313" hs="65187" />
   <verb in="défenestrer" tn="defenestrate" mo="1-1" hi="223" hn="68" hl="4" hs="367" />
-  <verb in="déféquer" tn="defecate" mo="1-1" hi="213" hn="30" hl="11" hs="864" />
+  <verb in="déféquer" tn="defecate" mo="1-5" hi="213" hn="30" hl="11" hs="864" />
   <verb in="déférer" tn="remand, grant, bestow" mo="1-5" hi="4920" hn="802" hl="13" hs="269" />
   <verb in="déferler" tn="break (of waves), break out, surge" mo="1-1" hi="1906" hn="839" hl="271" hs="918" />
   <verb in="déferrer" tn="remove iron from" mo="1-1" hi="294" hn="3" hl="7" hs="25" />
@@ -1770,7 +1770,7 @@
   <verb in="démériter" tn="be unworthy" mo="1-1" hi="1208" hn="269" hl="31" hs="51" />
   <verb in="démettre" tn="dismiss, discharge (from a post)" mo="5-4" hi="1288" hn="1510" hl="45" hs="1063" />
   <verb in="démeubler" tn="remove the furniture from" mo="1-1" hi="14" hn="1" hl="16" hs="3" />
-  <verb in="demeurer" tn="live, stay" mo="1-1" hi="84524" hn="28620" hl="4545" hs="8437" />
+  <verb in="demeurer" tn="live, stay" ay="e" mo="1-1" hi="84524" hn="28620" hl="4545" hs="8437" />
   <verb in="démieller" tn="demiell" mo="1-1" hi="0" hn="0" hl="2" hs="6" />
   <verb in="démilitariser" tn="demilitarize" mo="1-1" hi="323" hn="493" hl="1" hs="373" />
   <verb in="déminer" tn="remove mines from" mo="1-1" hi="296" hn="235" hl="3" hs="98" />
@@ -2032,7 +2032,7 @@
   <verb in="déshumaniser" tn="dehumanize" mo="1-1" hi="866" hn="160" hl="2" hs="228" />
   <verb in="déshydrater" tn="dehydrate" mo="1-1" hi="1901" hn="84" hl="4" hs="1424" />
   <verb in="déshydrogéner" tn="dehydrogenate" mo="1-5" hi="3" hn="0" hl="0" />
-  <verb in="déshypothéquer" tn="remove the mortgage from" mo="1-1" hi="1" hn="0" hl="0" />
+  <verb in="déshypothéquer" tn="remove the mortgage from" mo="1-5" hi="1" hn="0" hl="0" />
   <verb in="désigner" tn="designate" mo="1-1" hi="116132" hn="19087" hl="1937" hs="10212" />
   <verb in="désillusionner" tn="burst someone’s bubble, disillusion" mo="1-1" hi="207" hn="63" hl="9" hs="114" />
   <verb in="désincarner" tn="disembody, disincarnate" mo="1-1" hi="331" hn="61" hl="18" hs="89" />
@@ -2511,7 +2511,7 @@
   <verb in="empailler" tn="stuff (a dead animal)" mo="1-1" hi="411" hn="152" hl="65" hs="1013" />
   <verb in="empaler" tn="impale" mo="1-1" hi="397" hn="73" hl="43" hs="1538" />
   <verb in="empanner" tn="gybe" mo="1-1" hi="98" hn="16" hl="1" hs="85" />
-  <verb in="empaqueter" tn="put into a package, imprison" mo="1-1" hi="336" hn="82" hl="78" hs="775" />
+  <verb in="empaqueter" tn="put into a package, imprison" mo="1-3B" hi="336" hn="82" hl="78" hs="775" />
   <verb in="emparer" tn="seize, get hold of, take over" re="t" mo="1-1" hi="16248" hn="5691" hl="1076" hs="10677" />
   <verb in="empâter" tn="coat, enrobe, thicken" mo="1-1" hi="171" hn="103" hl="95" hs="152" />
   <verb in="empatter" tn="buttress" mo="1-1" hi="8" hn="0" hl="0" hs="9" />
@@ -3691,7 +3691,7 @@
   <verb in="interpréter" tn="translate, interpret, construe" mo="1-5" hi="46391" hn="10237" hl="422" hs="10797" />
   <verb in="interroger" tn="question, interrogate" mo="1-2B" hi="90547" hn="34858" hl="2496" hs="48174" />
   <verb in="interrompre" tn="interrupt" mo="5-1B" hi="19978" hn="7721" hl="2636" hs="31054" />
-  <verb in="intervenir" tn="intervene, take part" mo="6-7" hi="147041" hn="31371" hl="937" hs="22484" />
+  <verb in="intervenir" tn="intervene, take part" ay="e" mo="6-7" hi="147041" hn="31371" hl="937" hs="22484" />
   <verb in="intervertir" tn="invert, reverse, interchange" mo="2-1" hi="490" hn="63" hl="29" hs="503" />
   <verb in="interviewer" tn="interview" mo="1-1" hi="4640" hn="600" hl="47" hs="4763" />
   <verb in="intimer" tn="tell, notify with authority" mo="1-1" hi="911" hn="336" hl="72" hs="190" />
@@ -3815,7 +3815,7 @@
   <verb in="latter" tn="lath, beat, cane" mo="1-1" hi="360" hn="11" hl="2" hs="1070" />
   <verb in="laver" tn="wash" mo="1-1" hi="32962" hn="2582" hl="2035" hs="51003" />
   <verb in="layer" tn="cut a path through a forest" mo="1-7B" hi="1636" hn="47" hl="7" hs="44" />
-  <verb in="lécher" tn="lick" mo="1-1" hi="4119" hn="404" hl="611" hs="13639" />
+  <verb in="lécher" tn="lick" mo="1-5" hi="4119" hn="404" hl="611" hs="13639" />
   <verb in="légaliser" tn="legalize" mo="1-1" hi="2819" hn="796" hl="8" hs="892" />
   <verb in="légender" tn="caption" mo="1-1" hi="1837" hn="210" hl="5" hs="92" />
   <verb in="légiférer" tn="legislate" mo="1-5" hi="3209" hn="1014" hl="9" hs="256" />
@@ -4013,7 +4013,7 @@
   <verb in="ménager" tn="husband, conserve, treat gently" mo="1-2B" hi="8053" hn="4023" hl="677" hs="3354" />
   <verb in="mendier" tn="beg, panhandle" mo="1-1" hi="1115" hn="296" hl="197" hs="3114" />
   <verb in="mendigoter" tn="beg, panhandle" mo="1-1" hi="6" hn="0" hl="6" hs="3" />
-  <verb in="mener" tn="lead" mo="1-1" hi="233900" hn="53344" hl="3972" hs="103528" />
+  <verb in="mener" tn="lead" mo="1-4" hi="233900" hn="53344" hl="3972" hs="103528" />
   <verb in="menotter" tn="handcuff" mo="1-1" hi="743" hn="294" hl="4" hs="6120" />
   <verb in="mensualiser" tn="pay monthly" mo="1-1" hi="519" hn="103" hl="0" hs="6" />
   <verb in="mentionner" tn="mention" mo="1-1" hi="96950" hn="4706" hl="244" hs="29028" />
@@ -4227,7 +4227,7 @@
   <verb in="obtempérer" tn="obey, comply with" mo="1-5" hi="752" hn="503" hl="47" hs="1022" />
   <verb in="obtenir" tn="obtain" mo="6-7" hi="352262" hn="65225" hl="2510" hs="140854" />
   <verb in="obturer" tn="seal, close up, hide" mo="1-1" hi="555" hn="53" hl="17" hs="104" />
-  <verb in="obvenir" tn="fall to" mo="6-7" hi="0" hn="0" hl="0" />
+  <verb in="obvenir" tn="fall to" ay="e" mo="6-7" hi="0" hn="0" hl="0" />
   <verb in="obvier" tn="obviate" mo="1-1" hi="204" hn="12" hl="2" hs="6" />
   <verb in="occasionner" tn="provoke, cause" mo="1-1" hi="10885" hn="1121" hl="38" hs="797" />
   <verb in="occidentaliser" tn="westernize" mo="1-1" hi="348" hn="176" hl="1" hs="60" />
@@ -4377,7 +4377,7 @@
   <verb in="parvenir" tn="reach, attain" ay="e" mo="6-7" hi="101603" hn="33268" hl="3962" hs="19972" />
   <verb in="passementer" tn="put trimmings on, decorate with trimmings" mo="1-1" hi="6" hn="1" hl="5" hs="3" />
   <verb in="passepoiler" tn="put piping on" mo="1-1" hi="79" hn="6" hl="1" />
-  <verb in="passer" tn="pass" mo="1-1" hi="842791" hn="154632" hl="36073" hs="1522114" />
+  <verb in="passer" tn="pass" ay="e" mo="1-1" hi="842791" hn="154632" hl="36073" hs="1522114" />
   <verb in="passionner" tn="impassionate, motivate" mo="1-1" hi="31932" hn="6243" hl="1164" hs="5566" />
   <verb in="pasteuriser" tn="pasteurize" mo="1-1" hi="533" hn="93" hl="15" hs="47" />
   <verb in="pasticher" tn="imitate, pastiche" mo="1-1" hi="537" hn="256" hl="6" hs="13" />
@@ -4732,7 +4732,7 @@
   <verb in="protéger" tn="protect" mo="1-6C" hi="158140" hn="20625" hl="1997" hs="173962" />
   <verb in="protester" tn="protest, object" mo="1-1" hi="12554" hn="11165" hl="1460" hs="6918" />
   <verb in="prouver" tn="prove" mo="1-1" hi="58916" hn="13563" hl="1855" hs="106313" />
-  <verb in="provenir" tn="originate (from), arise (from)" mo="6-7" hi="69073" hn="9184" hl="345" hs="18310" />
+  <verb in="provenir" tn="originate (from), arise (from)" ay="e" mo="6-7" hi="69073" hn="9184" hl="345" hs="18310" />
   <verb in="provigner" tn="layer vines" mo="1-1" hi="9" hn="0" hl="0" />
   <verb in="provisionner" tn="fund, set aside funds for" mo="1-1" hi="840" hn="645" hl="2" hs="47" />
   <verb in="provoquer" tn="provoke, bring on, bring about" mo="1-1" hi="85236" hn="35236" hl="1307" hs="35032" />
@@ -4914,7 +4914,7 @@
   <verb in="réaliser" tn="direct (a movie), fulfill (a dream), perform (activities), finish making, carry out, make, realize (make real), realize (become aware)" mo="1-1" hi="534262" hn="60845" hl="1026" hs="105703" />
   <verb in="réaménager" tn="change a layout" mo="1-2B" hi="3911" hn="708" hl="4" hs="358" />
   <verb in="réanimer" tn="reanimate, revive" mo="1-1" hi="827" hn="187" hl="4" hs="2266" />
-  <verb in="réapparaître" tn="reappear, respawn (in a video game)" mo="5-20" hi="5336" hn="1770" hl="272" hs="5025" />
+  <verb in="réapparaître" tn="reappear, respawn (in a video game)" ay="e" mo="5-20" hi="5336" hn="1770" hl="272" hs="5025" />
   <verb in="réapprendre" tn="relearn" mo="5-2" hi="2052" hn="498" hl="40" hs="804" />
   <verb in="réapprovisionner" tn="restock" mo="1-1" hi="389" hn="60" hl="11" hs="737" />
   <verb in="réargenter" tn="resilverplate" mo="1-1" hi="2" hn="0" hl="0" hs="9" />
@@ -5032,9 +5032,9 @@
   <verb in="redéfinir" tn="redefine, override (an inherited method)" mo="2-1" hi="7527" hn="1551" hl="1" hs="759" />
   <verb in="redemander" tn="ask again, ask for more" mo="1-1" hi="2506" hn="348" hl="118" hs="4642" />
   <verb in="redémarrer" tn="restart, reboot" mo="1-1" hi="6166" hn="923" hl="37" hs="3402" />
-  <verb in="redescendre" tn="come back down, go back down, redescend" mo="5-1A" hi="6462" hn="1142" hl="951" hs="8209" />
+  <verb in="redescendre" tn="come back down, go back down, redescend" ay="e" mo="5-1A" hi="6462" hn="1142" hl="951" hs="8209" />
   <verb in="redessiner" tn="redraw, redesign" mo="1-1" hi="2060" hn="605" hl="23" hs="361" />
-  <verb in="redevenir" tn="become again" mo="6-7" hi="12574" hn="4715" hl="1204" hs="19646" />
+  <verb in="redevenir" tn="become again" ay="e" mo="6-7" hi="12574" hn="4715" hl="1204" hs="19646" />
   <verb in="redevoir" tn="owe again" mo="4-2A" hi="104" hn="0" hl="5" hs="95" />
   <verb in="rediffuser" tn="rerun, reshow, rebroadcast" mo="1-1" hi="2066" hn="708" hl="1" hs="222" />
   <verb in="rédiger" tn="proofread, compose" mo="1-2B" hi="173970" hn="9148" hl="577" hs="8589" />
@@ -5146,7 +5146,7 @@
   <verb in="réinviter" tn="reinvite" mo="1-1" hi="124" hn="49" hl="6" hs="272" />
   <verb in="réitérer" tn="reiterate" mo="1-5" hi="6168" hn="2637" hl="64" hs="582" />
   <verb in="rejaillir" tn="splash back, splash up, rebound on, be reflected on" mo="2-1" hi="1406" hn="343" hl="84" hs="446" />
-  <verb in="rejeter" tn="throw back, discharge, refute, reject" mo="1-3A" hi="51954" hn="17191" hl="1694" hs="27506" />
+  <verb in="rejeter" tn="throw back, discharge, refute, reject" mo="1-3B" hi="51954" hn="17191" hl="1694" hs="27506" />
   <verb in="rejoindre" tn="join, join up, rejoin" mo="5-12" hi="121687" hn="21377" hl="3695" hs="107892" />
   <verb in="rejointoyer" tn="regrout" mo="1-7A" hi="59" hn="1" hl="4" hs="3" />
   <verb in="rejouer" tn="replay" mo="1-1" hi="3395" hn="697" hl="37" hs="3775" />
@@ -5199,7 +5199,7 @@
   <verb in="remmailler" tn="mend" mo="1-1" hi="4" hn="1" hl="0" hs="13" />
   <verb in="remmener" tn="remove, take away" mo="1-4" hi="42" hn="3" hl="9" hs="313" />
   <verb in="remodeler" tn="remodel" mo="1-4" hi="2099" hn="659" hl="18" hs="703" />
-  <verb in="remonter" tn="go back up, come back up, climb again, reclimb, go back, return" mo="1-1" hi="72928" hn="15256" hl="4285" hs="70161" />
+  <verb in="remonter" tn="go back up, come back up, climb again, reclimb, go back, return" ay="e" mo="1-1" hi="72928" hn="15256" hl="4285" hs="70161" />
   <verb in="remontrer" tn="show again" mo="1-1" hi="377" hn="147" hl="70" hs="851" />
   <verb in="remordre" tn="rebite, bite again, bite back" mo="5-1A" hi="70" hn="2" hl="10" hs="725" />
   <verb in="remorquer" tn="tow" mo="1-1" hi="1518" hn="170" hl="41" hs="2408" />
@@ -5221,7 +5221,7 @@
   <verb in="remuer" tn="move, twitch, flick" mo="1-1" hi="14291" hn="829" hl="2279" hs="14753" />
   <verb in="rémunérer" tn="remunerate, pay back" mo="1-5" hi="24735" hn="4148" hl="22" hs="1158" />
   <verb in="renâcler" tn="display anger by snorting, display reluctance" mo="1-1" hi="347" hn="413" hl="74" hs="117" />
-  <verb in="renaître" tn="be born again" mo="5-21" hi="8387" hn="2124" hl="965" hs="5503" />
+  <verb in="renaître" tn="be born again" ay="e" mo="5-21" hi="8387" hn="2124" hl="965" hs="5503" />
   <verb in="renauder" tn="protest loudly, become" mo="1-1" hi="203" hn="51" hl="49" hs="16" />
   <verb in="rencaisser" tn="pack in a crate" mo="1-1" hi="4" hn="0" hl="0" hs="3" />
   <verb in="rencarder" tn="inform" mo="1-1" hi="91" hn="3" hl="38" hs="1244" />
@@ -5277,7 +5277,7 @@
   <verb in="reparaître" tn="reappear" mo="5-20" hi="1238" hn="538" hl="681" hs="421" />
   <verb in="réparer" tn="repair, fix, mend" mo="1-1" hi="19455" hn="2689" hl="726" hs="66937" />
   <verb in="reparler" tn="talk again, speak again" mo="1-1" hi="5632" hn="545" hl="297" hs="19687" />
-  <verb in="repartir" tn="leave again, go back, restart, set off again, retort" mo="6-1" hi="35256" hn="6956" hl="2496" hs="48269" />
+  <verb in="repartir" tn="leave again, go back, restart, set off again, retort" ay="e" mo="6-1" hi="35256" hn="6956" hl="2496" hs="48269" />
   <verb in="répartir" tn="distribute, apportion, forward (email)" mo="2-1" hi="68859" hn="7870" hl="240" hs="2446" />
   <verb in="repasser" tn="iron, pass by again, redo (a test)" mo="1-1" hi="16543" hn="2058" hl="942" hs="18880" />
   <verb in="repaver" tn="recobble, repave (Quebec)" mo="1-1" hi="15" hn="15" hl="5" hs="22" />
@@ -5356,7 +5356,7 @@
   <verb in="ressentir" tn="feel" mo="6-1" hi="50022" hn="7397" hl="1968" hs="105006" />
   <verb in="resserrer" tn="retighten" mo="1-1" hi="6138" hn="2452" hl="378" hs="2902" />
   <verb in="resservir" tn="serve again" mo="6-1" hi="1026" hn="137" hl="64" hs="2614" />
-  <verb in="ressortir" tn="go back out, come back out, take back out" mo="6-1" hi="36818" hn="4660" hl="765" hs="18443" />
+  <verb in="ressortir" tn="go back out, come back out, take back out" ay="e" mo="6-1" hi="36818" hn="4660" hl="765" hs="18443" />
   <verb in="ressouder" tn="resolder, solder back together" mo="1-1" hi="416" hn="378" hl="26" hs="348" />
   <verb in="ressourcer" tn="re-energize, revitalize" mo="1-2A" hi="4830" hn="325" hl="11" hs="348" />
   <verb in="ressouvenir" tn="remember, recall" re="t" mo="6-7" hi="171" hn="26" hl="60" hs="38" />
@@ -5388,7 +5388,7 @@
   <verb in="réticuler" tn="cross-link" mo="1-1" hi="13" hn="0" hl="0" hs="19" />
   <verb in="retirer" tn="take off, remove, withdraw" mo="1-1" hi="81224" hn="17474" hl="3196" hs="93791" />
   <verb in="retisser" tn="reweave, replait" mo="1-1" hi="485" hn="89" hl="4" hs="60" />
-  <verb in="retomber" tn="refall, fall again, fall back down" mo="1-1" hi="10824" hn="3256" hl="2051" hs="9437" />
+  <verb in="retomber" tn="refall, fall again, fall back down" ay="e" mo="1-1" hi="10824" hn="3256" hl="2051" hs="9437" />
   <verb in="retordre" tn="retwist, twist again" mo="5-1A" hi="849" hn="180" hl="23" hs="1392" />
   <verb in="rétorquer" tn="retort" mo="1-1" hi="3487" hn="3023" hl="178" hs="380" />
   <verb in="retoucher" tn="retouch, touch up" mo="1-1" hi="3629" hn="480" hl="72" hs="2019" />
@@ -5899,7 +5899,7 @@
   <verb in="surtaxer" tn="overtax" mo="1-1" hi="1627" hn="107" hl="0" hs="130" />
   <verb in="surtondre" tn="dehair" mo="5-1A" hi="0" hn="0" hl="0" />
   <verb in="surveiller" tn="monitor, survey, watch" mo="1-1" hi="33809" hn="6643" hl="1816" hs="95225" />
-  <verb in="survenir" tn="occur, happen unexpectedly" mo="6-7" hi="34025" hn="7207" hl="679" hs="4554" />
+  <verb in="survenir" tn="occur, happen unexpectedly" ay="e" mo="6-7" hi="34025" hn="7207" hl="679" hs="4554" />
   <verb in="survirer" tn="oversteer" mo="1-1" hi="58" hn="1" hl="0" hs="136" />
   <verb in="survivre" tn="survive, outlive" mo="5-6" hi="26540" hn="8123" hl="661" hs="77896" />
   <verb in="survoler" tn="fly over, skip through, fly high, browse quickly" mo="1-1" hi="6007" hn="1491" hl="127" hs="4320" />

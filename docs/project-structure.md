@@ -202,6 +202,7 @@ ConjuguerTests/
     ├── DeeplinkTests.swift             # conjuguer:// parsing and routing (serialized — mutates Current)
     ├── DefectGroupTests.swift          # Defect-group membership and tense suppression
     ├── DefectivityAuditTests.swift     # Per-family defectivity audit (traire, braire, férir, poindre, …)
+    ├── EngineAuditTests.swift          # Hand-written pins for the stage-A verb-pass fixes (peuvent, dites, suivi, the eight re-modeled verbs, the seventeen être auxiliaries), checked against Wiktionary rather than against the engine
     ├── IrregularityMetricTests.swift   # Keeps VerbModel.irregularity and the Info text in agreement: only 1-1/2-1/5-1A score 0%, and the shipped regular/irregular split matches the data
     ├── FuturStemsTests.swift           # Futur stem derivation, incl. the trailing-e trim for -re verbs
     ├── GameCollisionTests.swift        # Characterization tests for the three collision shapes
@@ -240,6 +241,7 @@ docs/
 ├── release-notes-2.0.txt           # 2.0 release notes
 ├── release-notes-2.1.txt           # 2.1 release notes
 ├── release-notes-2.2.txt           # 2.2 release notes
+├── release-notes-2.3.txt           # 2.3 release notes (in progress: stage A of the verb pass)
 ├── screenshot-plan.md              # Screenshot capture spec: which views, languages, and devices
 ├── screenshot-playbook.md          # Screenshot workflow: prerequisites, kill switches, driver flags, workarounds, recovery
 ├── screenshots/                    # Captured screenshots produced by the driver

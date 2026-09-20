@@ -50,7 +50,7 @@
   <model mo="valoir" id="4-5A" ep="U" si="s" se="u" bb="E" p="1,1,UX*,r1s,r2s|1,1,U,r3s|4,3,UD,sf|1,0,IL,b1s,b2s,b3s,b3p" />
   <model mo="prévaloir" id="4-5B" pa="4-5A" p="3,3,L,b1s,b2s,b3s,b3p" />
   <model mo="falloir" id="4-5C" pa="4-5A" p="4,1,,r1s,r2s|2,1,,r3s|4,1,,sf|4,1,,b1s,b2s,b3s,b3p" />
-  <model mo="pouvoir" id="4-6" ep="U" si="s" se="u" bb="E" p="3,3,EUX*,r1s,r2s|3,3,UI,A,r1s|3,3,EU,r3s|4,3,R,sf|4,4,@,xA,pp|3,3,UISS,bA|4,4,UISSe,h2s|3,3,UISSI,h1p,h2p" />
+  <model mo="pouvoir" id="4-6" ep="U" si="s" se="u" bb="E" p="3,3,EUX*,r1s,r2s|3,3,UI,A,r1s|3,3,EU,r3s|4,3,R,sf|4,4,@,xA,pp|3,3,UISS,bA|4,4,UISSe,h2s|3,3,UISSI,h1p,h2p|3,2,EU,r3p" />
   <model mo="savoir" id="4-7" ep="U" si="s" se="u" bb="E" p="1,1,I,r1s,r2s,r3s|4,3,U,sf|3,3,@,xA,pp|1,1,CH,rr|1,1,CH,bA,h1p,h2p|1,1,CHE*,h2s" />
   <model mo="vouloir" id="4-8" ep="U" si="s" se="u" bb="E" p="3,3,EUX*,r1s,r2s|3,3,EU,r3s|3,2,EU,r3p|4,3,D,sf|3,2,EUIL,b1s,b2s,b3s,b3p|3,3,EUILLE*,A,h2s|3,2,EUIL,A,h2p" />
   <model mo="asseoir" id="4-9AB" ep="IS" si="s" se="i" bb="E" p="1,1,IED,r1s,r2s|1,1,IED*,r3s|0,1,Y,r1p,r2p,r3p,bA|4,3,IÉ,sf|2,2,S,xA,pp|1,1,OI,A,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|1,1,OY,A,r1p,r2p,b1p,b2p|5,2,S,A,sf" />
@@ -65,10 +65,10 @@
   <model mo="prendre" id="5-2" pa="5-1A" ep="IS" p="2,2,N,r1p,r2p,b1p,b2p|1,1,N,r3p,b1s,b2s,b3s,b3p|3,3,,xA|3,3,,pp" />
   <model mo="battre" id="5-3" pa="5-1A" p="2,2,T,r1s,r2s,r3s" />
   <model mo="mettre" id="5-4" pa="5-3" p="3,3,,xA|3,3,IS*,pp" />
-  <model mo="suivre" id="5-5" ep="IS" si="s" se="i" bb="e" p="2,2,I,r1s,r2s,r3s" />
+  <model mo="suivre" id="5-5" ep="I" si="s" se="i" bb="e" p="2,2,I,r1s,r2s,r3s" />
   <model mo="vivre" id="5-6" ep="u" si="s" se="i" bb="e" p="2,2,I,r1s,r2s,r3s|2,2,ÉC,pp" />
   <model mo="écrire" id="5-7" ep="T" si="s" se="i" bb="e" p="0,1,V,r1p,r2p,r3p,xA,bA" />
-  <model mo="dire" id="5-8A" ep="T" si="s" se="b" bb="e" p="0,1,S,r1p,r3p|1,1,ÎTES*,N,r2p|0,1,S,bA" />
+  <model mo="dire" id="5-8A" ep="T" si="s" se="b" bb="e" p="0,1,S,r1p,r3p|1,1,ITES*,N,r2p|0,1,S,bA" />
   <model mo="prédire" id="5-8B" pa="5-8A" p="0,1,S,r2p" />
   <model mo="suffire" id="5-8C" pa="5-8B" ep="" p="1,1,@,pp" />
   <model mo="circoncire" id="5-8D" pa="5-8B" ep="S" />

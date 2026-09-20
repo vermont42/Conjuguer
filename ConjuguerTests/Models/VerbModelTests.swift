@@ -1589,7 +1589,7 @@ struct VerbModelTests {
     // ID: 5-8A
     var personNumbersIndex = 0
 
-    for conjugation in ["dis", "dis", "dit", "diSons", "dÎTES", "diSent"] {
+    for conjugation in ["dis", "dis", "dit", "diSons", "dITES", "diSent"] {
       T.testConjugation(infinitif: "dire", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -1636,7 +1636,7 @@ struct VerbModelTests {
 
     var impératifPersonNumbersIndex = 0
 
-    for conjugation in ["dis", "diSons", "dÎTES"] {
+    for conjugation in ["dis", "diSons", "dITES"] {
       T.testConjugation(infinitif: "dire", tense: .impératif(PersonNumber.impératifPersonNumbers[impératifPersonNumbersIndex]), expected: conjugation, extraLetters: nil)
       impératifPersonNumbersIndex += 1
       impératifPersonNumbersIndex %= PersonNumber.impératifPersonNumbers.count
@@ -4083,7 +4083,7 @@ struct VerbModelTests {
     // ID: 4-6
     var personNumbersIndex = 0
 
-    for conjugation in ["pEUX/pUIs", "pEUX", "pEUt", "pouvons", "pouvez", "pouvent"] {
+    for conjugation in ["pEUX/pUIs", "pEUX", "pEUt", "pouvons", "pouvez", "pEUvent"] {
       T.testConjugation(infinitif: "pouvoir", tense: .indicatifPrésent(PersonNumber.allCases[personNumbersIndex]), expected: conjugation, extraLetters: nil)
       personNumbersIndex += 1
       personNumbersIndex %= PersonNumber.allCases.count
@@ -4937,7 +4937,7 @@ struct VerbModelTests {
       personNumbersIndex %= PersonNumber.allCases.count
     }
 
-    T.testConjugation(infinitif: "suivre", tense: .participePassé, expected: "suivIS", extraLetters: nil)
+    T.testConjugation(infinitif: "suivre", tense: .participePassé, expected: "suivI", extraLetters: nil)
     T.testConjugation(infinitif: "suivre", tense: .participePrésent, expected: "suivant", extraLetters: nil)
 
     var impératifPersonNumbersIndex = 0

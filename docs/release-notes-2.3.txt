@@ -1,0 +1,31 @@
+Version 2.3
+
+
+English
+
+Version 2.3 corrects fourteen verbs that Conjuguer conjugated wrongly.
+
+Two of them are among the most common verbs in French. Pouvoir gave ils pouvent, where every French speaker says ils peuvent. Dire gave vous dîtes in the présent, with a circumflex that belongs only to the passé simple. The présent is vous dites, and redire follows it. Suivre, poursuivre and s'ensuivre had a participe passé of suivis instead of suivi, so the passé composé read j'ai suivis.
+
+Eight more verbs were filed under the wrong conjugation pattern, which is a quieter error with the same effect. Mener produced je mene and je menerai rather than je mène and je mènerai. Changer produced nous changons rather than nous changeons, and lost the same e through the imparfait and the passé simple. Rejeter gave je rejetle. Empaqueter gave j'empaquete rather than j'empaquette. Lécher, déféquer and déshypothéquer kept an acute accent where French wants a grave one, giving je léche for je lèche. Assortir was conjugated as though it ended in -er, so nous assortons stood where nous assortissons belongs, and the participe passé came out assorté rather than assorti.
+
+If the quiz ever marked you wrong for typing peuvent, dites or suivi, you were right and the app was not. Sorry.
+
+Seventeen verbs now take être rather than avoir in the compound tenses. The most used of them is intervenir, which gave j'ai intervenu where French says je suis intervenu. The others are advenir, apparaître, bienvenir, demeurer, obvenir, passer, provenir, réapparaître, redescendre, redevenir, remonter, renaître, repartir, ressortir, retomber and survenir. A few French verbs take either auxiliary depending on the sense. Conjuguer gives one auxiliary per verb, chosen to match the sense its translation leads with, which is why paraître, disparaître, repasser and ressusciter stay with avoir.
+
+Six of these verbs leave the regular conjugation patterns for irregular ones, since their stems do change after all. Conjuguer now counts 5,217 completely regular verbs and 1,109 irregular ones, out of the same 6,326.
+
+
+Français
+
+La version 2.3 corrige quatorze verbes que Conjuguer conjuguait mal.
+
+Deux d'entre eux comptent parmi les verbes les plus courants du français. Pouvoir donnait ils pouvent, là où tout francophone dit ils peuvent. Dire donnait vous dîtes au présent, avec un accent circonflexe qui n'appartient qu'au passé simple. Le présent est vous dites, et redire le suit. Suivre, poursuivre et s'ensuivre avaient pour participe passé suivis au lieu de suivi, si bien que le passé composé se lisait j'ai suivis.
+
+Huit autres verbes étaient rattachés au mauvais modèle de conjugaison, erreur plus discrète mais de même effet. Mener produisait je mene et je menerai plutôt que je mène et je mènerai. Changer produisait nous changons plutôt que nous changeons, et perdait le même e à l'imparfait et au passé simple. Rejeter donnait je rejetle. Empaqueter donnait j'empaquete plutôt que j'empaquette. Lécher, déféquer et déshypothéquer gardaient un accent aigu là où le français veut un accent grave, d'où je léche pour je lèche. Assortir était conjugué comme s'il se terminait en -er : nous assortons tenait la place de nous assortissons, et le participe passé sortait assorté au lieu d'assorti.
+
+Si le quiz vous a déjà compté faux pour avoir tapé peuvent, dites ou suivi, vous aviez raison et l'app avait tort. Désolé.
+
+Dix-sept verbes se conjuguent désormais avec être et non avec avoir aux temps composés. Le plus employé est intervenir, qui donnait j'ai intervenu là où le français dit je suis intervenu. Les autres sont advenir, apparaître, bienvenir, demeurer, obvenir, passer, provenir, réapparaître, redescendre, redevenir, remonter, renaître, repartir, ressortir, retomber et survenir. Quelques verbes français admettent l'un ou l'autre auxiliaire selon le sens. Conjuguer attribue un seul auxiliaire par verbe, celui qui correspond au sens que sa traduction met en premier. C'est pourquoi paraître, disparaître, repasser et ressusciter restent avec avoir.
+
+Six de ces verbes quittent les modèles réguliers pour des modèles irréguliers, puisque leur radical change bel et bien. Conjuguer compte maintenant 5 217 verbes entièrement réguliers et 1 109 verbes irréguliers, sur les mêmes 6 326.

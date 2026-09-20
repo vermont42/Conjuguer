@@ -2492,3 +2492,83 @@ short convention: append ✅ and the date to a finished heading, leave wrong tex
 with a dated **Correction** note beneath it, keep the narrative in this journal, and read
 earlier stages' corrections before starting a later one. Every paste-able prompt ends by
 asking for the same. The plan is the status board; the journal stays the story.
+
+## Stage A of the verb pass: fixing the engine before auditing it (2026-09-20)
+
+The verb-pass plan's Stage A was a list of verified engine errors and instructions for
+fixing them, written the same day the errors were found. Almost all of it held. This note
+records the parts that did not, since the later stages read these corrections before they
+start.
+
+The three model edits in `verbModels.xml` were the easy part. Model `4-6` (pouvoir) altered
+its stem for the third-person singular and never for the plural, so *ils* fell through to
+the bare stem and the app printed *ils pouvent*. `4-8` (vouloir) had carried the matching
+rule for *veulent* since the file was written; copying its `3,2,EU,r3p` into pouvoir was a
+one-clause change. Model `5-8A` (dire) wrote its second-plural présent as `ÎTES`, which is
+the passé simple's circumflex in the wrong tense, and `5-5` (suivre) carried `ep="IS"`,
+which is the passé simple's stem in the wrong slot. The plan told me to confirm its gloss of
+the `p=` syntax against `VerbModel.swift` before editing. The gloss was right; the parser
+actually lives in `StemAlteration.init(xmlString:)`. Worth knowing that
+`verbModels.xml` has never passed `xmllint --valid`: its internal DTD declares `id`, `mo`,
+`si`, `se`, `pa`, `ep` and `bb`, but not `p`, `dg` or `sb`, so every model carrying an
+alteration is reported invalid. Pre-existing, left alone, noted in the plan so that Stage
+4's validity check is not read as covering it.
+
+The seven re-modeled verbs turned into eight. The plan asked, as a side task, that
+`StemAlterationAuditTests` be widened so an é followed by *two* consonants is examined, since
+its original filter matched an é exactly one consonant before the ending and that is how
+*lécher* and *déféquer* escaped the August audit. Widening it did more than admit the two
+verbs already on the list. It failed, on **déshypothéquer**, which was sitting on `1-1` and
+giving *je déshypothéque*, one row in `verbs.xml` away from a correctly modeled `1-5`
+*hypothéquer*. That is the whole argument for the audit-as-test shape: the August pass fixed
+five verbs and left a sixth of the same kind behind, and the only thing that found it was
+making the filter's blind spot smaller. *déféquer* needed a second adjustment beyond counting
+two consonants, because its stem ends in *qu*, whose *u* is mute and spells one consonant
+sound. The filter now drops a trailing mute *u* after *q* or *g* before counting, which also
+brings the *-guer* family (*léguer*, *déléguer*, *alléguer*) into view. Examined count went
+from 176 to 224; the `examined > 150` guard that keeps the audit from passing vacuously is
+unchanged.
+
+The count consequence is that six verbs leave the regular models rather than the five the
+plan predicted, so the split is 5,217 / 1,109 rather than 5,218 / 1,108. Two of the
+re-modeled eight do not move the needle: *assortir* goes `1-1` → `2-1`, regular to regular,
+and *rejeter* goes `1-3A` → `1-3B`, irregular to irregular.
+`IrregularityMetricTests.testShippingSplitMatchesTheInfoText` did exactly its job here,
+failing until the two Info texts in both languages and `docs/description.txt` agreed with
+the data. While editing the French `Info.valuePropositionText` I noticed it wrote the
+thousands separator as a period, *5.223*, where the neighbouring French Info text uses a
+space. Normalized to the space.
+
+Regenerating `VerbModelTests.swift` produced a 120-line diff the first time, and only four
+lines of it were real. `T.generateVerbModelTests()` sorts the models with
+`exemplar.caseInsensitiveCompare`, and *haïr* is the exemplar of both `2-3A` (France) and
+`2-3B` (Québec), so the sort is unstable across those two and the `testHaïrFrance` and
+`testHaïrQuébec` functions swapped places. Nothing about haïr had changed. The generator now
+breaks the tie on model id, which puts `2-3A` before `2-3B` and matches what was committed,
+and the regenerated file diffs to exactly *dITES*, *pEUvent* and *suivI*. That is a
+generated file, so an unstable order is not a cosmetic problem: it is noise that hides real
+changes in the one artifact where a real change most needs to be visible.
+
+The new `EngineAuditTests.swift` exists because `VerbModelTests` cannot catch this class of
+error. It is generated from the conjugator's own output, so it happily pinned *pouvent*,
+*dÎTES* and *suivIS* for years and never objected. A test that records what the engine says
+can only ever check the engine against itself. Every expectation in the new file was read
+off Wiktionary's conjugation table first and typed in by hand, including the four verbs that
+*keep* avoir under decision 4 (*paraître*, *disparaître*, *repasser*, *ressusciter*), so a
+later pass does not helpfully "fix" them back.
+
+One thing I could not verify in the simulator. `pouvoir` and `intervenir` both opened in
+`VerbView` and screenshotted cleanly, the first showing *elles peuvent* with the *eu* in red
+and the second showing *Auxiliary: être* in the overview. But the passé composé itself sits
+behind a **Show Compound Tenses** toggle, and five attempts to flip it all reported a
+successful tap while the switch's `AXValue` stayed `"0"`: `tap_label.sh` at the row centre,
+`tap_xy.sh` on the switch's own frame, both again after letting the scroll settle. This
+smells like the iOS 26 segmented-picker problem the project notes already describe, another
+control whose accessibility surface the skill cannot drive. I stopped after five rather than
+keep going, and pinned *je suis intervenu* in the unit test instead. Full suite green: 257
+tests in 23 suites.
+
+The 2.3 release notes are started, in both languages, and they apologize. If the quiz ever
+marked someone down for typing *peuvent*, *dites* or *suivi*, that person was right and the
+app was wrong, and the notes say so in one line. The 2.2 notes set that precedent with
+*considérer*.
