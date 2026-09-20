@@ -2259,3 +2259,236 @@ the next set of notes is therefore gone; whoever writes the 2.3 notes should dif
 this commit and remember that 2.2 shipped saying 6,326 verbs, 5,223 regular and 1,103
 irregular, seventy-two defective, from être to humoter, with tanquer as the verb with the
 most translations.
+
+## Designing the verb pass: Wiktionary as a reference finds engine errors before any subagent runs (2026-09-20)
+
+Josh's brief in `prompts/verb_pass.md` asks for a subagent pass over all 6,326 verbs: check
+each gloss for typos and correctness, verify that each of the 1,140 existing examples matches
+its gloss, and mine or author an example for the 5,186 verbs without one. He asked what the
+gloss check should be grounded on, what else subagents could usefully do, and how to keep the
+cost down (Sonnet for subagents, the `omitClaudeMd` frontmatter key). This session answered
+those questions by measuring rather than by opinion, and the measuring turned up engine
+errors in top-200 verbs. The design is in `prompts/verb-pass-plan.md`; this entry records
+how the numbers were obtained.
+
+**The grounding question.** Three options: the model's own knowledge, a live Wiktionary fetch
+per verb, or bulk extracts. kaikki.org publishes machine-readable extracts of both
+Wiktionaries, so I downloaded the English-Wiktionary French file (551 MB, marked deprecated
+on the site but current to the 2026-09-02 dump) and the French-Wiktionary extract (719 MB
+gzip, 7.5 million lines) into the session scratchpad and filtered each to the app's
+infinitives. A substring prefilter before `json.loads` makes the whole pass take seconds.
+English Wiktionary covers 5,560 of 6,326 verbs, with English glosses carrying register,
+region and transitivity tags, a full conjugation table for 5,527, the auxiliary in the
+compound-tense rows, and a translated example for 1,040. French Wiktionary covers 6,321;
+the five it lacks are *blistériser*, *casse-croûter*, *enfoncer* (surely an extract quirk),
+*enkyster* and *humoter*. So the gloss check can be grounded on data pasted into each
+shard, with the model's unaided knowledge needed for almost nothing, and the report can say
+exactly where it was needed. The compact per-verb extracts and the probe scripts are under
+`corpus/working/wiktionary/`, gitignored and regenerable.
+
+**The conjugation diff.** English Wiktionary's tables come with the extract, so I diffed
+them against `corpus/working/forms_all.json`, the July dump of the app's forms. The first
+run flagged 1,068 verbs, nearly all noise: the 1990 spellings Wiktionary lists beside the
+traditional ones (*cèderai*), hyphenated reflexive imperatives, forms tagged alternative or
+obsolete, IPA leaking in as a form. With filters for those, 154 verbs remained. The five
+é→è verbs fixed on 2026-08-28 all appeared, because the dump predates the fix; those
+canaries are what made the rest of the list worth reading. A throwaway Swift Testing probe
+(written, run once through `Conjugator.conjugatedString`, then deleted) confirmed ten:
+*pouvoir* gives *ils pouvent* (model `4-6` alters the stem for `r3s` but not `r3p`);
+*dire* and *redire* give *vous dîtes* in the présent (model `5-8A` writes `ÎTES` with a
+circumflex, and the display lowercases the irregular marker, so the accent shows);
+*suivre* and *poursuivre* have participe passé *suivis* (model `5-5` has `ep="IS"`);
+*rejeter* gives *rejetle* (on `1-3A`, the *appeler* doubling, instead of `1-3B`);
+*mener* (rank 103), *changer* (rank 93), *lécher*, *déféquer*, *empaqueter* and *assortir*
+sit on plain `1-1` and give *je mene*, *nous changons*, *je léche*, *je déféque*,
+*j'empaquete*, *nous assortons* and *assorté*. `git log -S` puts *mener* and *changer* on
+`1-1` since the first commit of the file in February 2021. The generated `VerbModelTests`
+pin *pouvent*, *dÎTES* and *suivIS*, which is the whole lesson: a test generated from the
+engine checks the engine against itself, and only an external reference can see a data
+error. *lécher* and *déféquer* escaped the August stem-alteration audit; its filter is worth
+re-reading with those two in hand.
+
+`forms_all.json` turned out to be the wrong instrument for this, and the plan says why: it
+is inverted, lowercased (so the uppercase irregular marker collapses and `dÎTES` reads as
+*dîtes* whether or not that is a bug), missing the feminine and plural participles, missing
+single-character forms, and it includes the bare futur stem (`suivr`, `dir`) as a form.
+The pipeline needs a fresh dump shaped verb → tense → form, regenerated after every model
+fix.
+
+**Auxiliary and pronominal flags.** The head templates do not state the auxiliary, but the
+form rows do (`être + past participle`). Excluding rows tagged reflexive, 22 non-reflexive
+verbs that Wiktionary conjugates with être take avoir in the app; the probe confirmed
+*j'ai intervenu*, *il a survenu* and *il a retombé*. The venir family accounts for most of
+them (*intervenir* at rank 194, *survenir*, *advenir*, *provenir*, *redevenir*, *obvenir*,
+*bienvenir*), with *retomber*, *redescendre*, *repartir*, *renaître* and *réapparaître*
+beside. Another 34 take either auxiliary by sense (*passer*, *apparaître*, *paraître*,
+*disparaître*, *demeurer*, *remonter*), which is a modelling decision rather than a fix,
+since the app carries one auxiliary per entry. Wiktionary also has 32 pronominal-only verbs
+that carry no `re` (*s'effondrer*, *s'évaporer*, *s'attabler*, *s'arroger*, *se lamenter*,
+*se prosterner*). Aspirated h agrees for 41 of the app's 59; Wiktionary adds *hachurer*
+and *halogéner*. Defective status disagrees on 42, mostly the app's impersonal weather
+verbs, which Wiktionary tags impersonal rather than defective; low value.
+
+**Examples and glosses.** Two of the 1,141 shipped examples do not contain the verb at all.
+For *envisager* the Proust sentence at line 7908 holds the verb in the clause before the
+one that was recovered; for *représenter* the recovered sentence is the neighbour of the
+one at line 192 that has *sans me les représenter*. Both are the mining subagent taking the
+wrong sentence, and a three-line check finds them. Ten sentences serve two or three verbs
+each, which is fine. On glosses, deterministic lint found one internal duplicate
+(*dissimuler*: "conceal, conceal, dissimulate"), a mix of curly and straight apostrophes,
+one semicolon, and 245 glosses sharing no content word with any Wiktionary gloss. Most of
+those are spelling (*analyse* against *analyze*) or "alternative form of" entries, but
+some are real: *apeurer* is glossed "be frightened" where Wiktionary has "to frighten";
+*abouler*'s only gloss is Wiktionary's dialectal sense "roll along" while the living slang
+sense "hand over" is absent; *baiser* omits "kiss". The subagent's job on glosses is sense
+selection and ordering as much as typos. The brief's counts reconcile: the examples file has
+1,141 entries because *sortir* is keyed twice, so 1,140 verbs have an example and 5,186 do
+not.
+
+**Where the 5,186 examples would come from.** A one-pass token index over all five open
+tiers, using the stale forms dump, gives at least one hit for 2,752 of them (1,955 in the
+novels, 1,297 classical, 1,081 government, 1,027 Wikipedia, 77 technology) and none for
+2,434. French Wiktionary has example sentences for 4,714 of the 5,186, most with an author,
+title and year, and 2,731 have a quotation dated 1925 or earlier (Balzac, Sue, Maupassant).
+That is a decision for Josh: the selection is CC BY-SA like the Wikipedia tier, and the
+quotations are public domain when the author died more than seventy years ago, a rule that
+keys on the author rather than on the edition year the reference shows. Authoring stays the
+fallback, attributed to the model that wrote it.
+
+**Claude Code mechanics.** `omitClaudeMd` needs an agent definition file and Claude Code
+2.1.271 or later; this machine runs 2.1.278. I created a stub at
+`.claude/agents/verb-checker.md` (untracked) and spawned it at once to test; the Agent tool
+answered "Agent type 'verb-checker' not found", so the registry is read at session start,
+and the session that runs the pipeline must begin after the file exists. The Workflow tool's
+`agent()` resolves `agentType` from the same registry, and its authoring reference says
+workflow subagents otherwise receive the CLAUDE.md files. The project CLAUDE.md is 36 KB,
+about 10K tokens per shard, roughly a third of a shard's input; at Sonnet 5 rates that is
+about $4 of a run estimated at $50 to $60, so the key is worth setting but is not the big
+lever. The big lever is the shape the corpus pipeline already uses: deterministic retrieval,
+everything pasted into the prompt, one turn, no tools, schema-validated output.
+
+**What the plan proposes.** Deterministic audits first (conjugation diff, flag comparison,
+gloss lint, example integrity, candidate retrieval into shards of about 35 verbs); Sonnet 5
+shards that judge glosses, verify examples, pick or author a sentence, and adjudicate the
+flagged conflicts; an Opus 5 skeptic pass on every proposed change, since the verb-history
+fact-check dismissed 104 of 188 first-pass findings; a report ordered by frequency rank; and
+scripts to apply what Josh approves. A pilot of three shards with planted canaries decides
+the model and proves the agent definition took effect. Five decisions are listed at the end
+of the plan, the first being whether to fix the ten verified engine errors and the
+venir-family auxiliaries now, ahead of the pass.
+
+Nothing in the app changed this session. The throwaway probe test was deleted after its
+single run; `git status` shows the plan, the brief, and the agent stub as untracked.
+
+## Verb pass: the five decisions, and the plan becomes a working plan (2026-09-20)
+
+Josh answered the five questions at the end of `prompts/verb-pass-plan.md` the same day:
+yes to fixing the verified engine errors ahead of the pass, yes to a public-domain
+Wiktionary-quotation tier for examples, yes to the gloss house style, "use your judgment"
+on verbs that take either auxiliary, and yes to Sonnet 5 for the shards with Opus 5 as the
+skeptic. The plan was rewritten around them.
+
+Two of the answers needed working out. For the quotation tier the public-domain rule is the
+author's death year, not the year printed in the Wiktionary reference, which is usually an
+edition: **author died before 1931** satisfies the French seventy-year term with room for
+the wartime extensions and the United States rule of publication before 1931, with no
+per-author exceptions to maintain. Wikidata supplies the death years; an author that does
+not resolve is treated as protected. For the either-auxiliary verbs the file already had a
+precedent: *monter*, *descendre*, *sortir*, *rentrer* and *retourner* carry être despite
+their transitive avoir uses, so an entry takes the auxiliary of the sense its gloss leads
+with. That gives être to *passer*, *remonter*, *redescendre*, *ressortir*, *repartir*,
+*apparaître*, *réapparaître* and *demeurer*, and leaves *paraître*, *disparaître*,
+*repasser* (glossed "iron" first) and *ressusciter* on avoir. Together with the venir family
+and *retomber*, *renaître* and *bienvenir*, Stage A adds `ay="e"` to seventeen verbs.
+
+Stage A is now a paste-able clean-session prompt with the exact edits: append `3,2,EU,r3p`
+to *pouvoir*'s model, the rule *vouloir* already uses for *veulent*; drop the circumflex
+from `ÎTES` in *dire*'s model; change *suivre*'s participle ending from `IS` to `I`; move
+seven verbs to the models their exemplars use; regenerate the model tests and pin every
+corrected form in a new audit file; recompute the regular/irregular split, which moves from
+5,223 / 1,103 to 5,218 / 1,108 because five verbs leave `1-1`; and open the 2.3 release
+notes with the corrections, as the 2.2 notes did for *considérer*. The gloss lint gained
+its concrete rules from the style decision: the file already favours the curly apostrophe
+(74 glosses to one) and American spelling (*Americanize*, *analyze*), so the style codifies
+what is there rather than changing it.
+
+Josh then asked whether a fresh session could be pointed at the plan and told to execute
+Stage 0. It could not as written: Stage A had a paste-able prompt and named deliverables,
+Stage 0 was a description. It now has both, with the output shapes spelled out (the two
+reference files, a `meta.json` with dump dates, a `conjugations.json` keyed
+`verb → tense.person → form` in the app's own notation, the author table with an overrides
+file) and acceptance criteria that double as proof Stage A landed: the dump must show
+*pEUvent*, *dITES*, *suivI*, *mÈne* and *changEons*. Sizing the author lookup turned up
+6,056 distinct names in the quotation references, 1,248 with two or more quotations, so the
+plan calls for batched SPARQL rather than one request per name, and excludes translations,
+whose rights belong to the translator. The *enfoncer* oddity is a real gap in the kaikki
+French extract, not a filter bug; the English extract covers it and *enkyster*, leaving
+three verbs with no reference at all.
+
+Josh also asked whether the remaining stages would confuse a fresh session, since they were
+descriptions too. They would have. Stage 1, the pilot, Stage 2, Stage 3 and Stage 4 now each
+open with a paste-able prompt and name their scripts, outputs and acceptance criteria, in
+the order the work runs. Writing them forced two design changes worth recording. First, the
+subagents write their own result files and return only a summary through the workflow's
+schema: 6,326 verdicts would come to several megabytes, and the workflow's return value
+lands in the orchestrator's context. Second, the shard file is now a fixed contract between
+Stage 1 and Stage 2, spelled out as JSON in 1.6, so the audit scripts and the subagent
+prompt can be written in different sessions against the same shape. The pilot also gains a
+`context_check` field in the summary, true only if the agent can see Xcode or SwiftLint
+instructions, which is the cheapest proof that `omitClaudeMd` applied. The two agent stubs
+under `.claude/agents/` now carry `tools: Write` for that reason, and a `verb-skeptic` stub
+joins `verb-checker`, so the registry of a later session will know both.
+
+Josh then explained how the glosses were made: English Wiktionary where an entry existed,
+copying some but not all of its senses; the French Wiktionary definition, translated, where
+it did not; other online dictionaries after that. A measurement against today's extracts
+bears it out. Of the 6,326 glosses, 4,581 copy English-Wiktionary senses verbatim, 463
+partly, 516 match no English sense though an entry exists now, 763 have no English entry,
+and 3 have nothing. Among the verbatim ones, 4,484 lead with the entry's first sense, and
+English Wiktionary orders senses by history rather than by use, which is why *abouler* is
+glossed by its dialectal sense alone. That reframes the gloss task: for the verbatim
+majority the subagent judges selection and order, not wording; for the translated minority
+it judges faithfulness to the French definition. Stage 1 now classifies every gloss's
+provenance so each shard says which case it is in, and the per-verb classification from
+this run sits beside the extracts under `corpus/working/wiktionary/`. One consequence for
+the credits: the glosses derive from Wiktionary, CC BY-SA content, and the app has never
+said so. The plan proposes a line in the credits, Josh's to veto.
+
+The rest of the provenance came in two more messages. Beyond English Wiktionary, Josh took
+French definitions from French Wiktionary, then from the TLFi and Le Robert through
+Lexilogos, and rendered them into glosses with Google Translate, sometimes without the
+definition being fully clear to him; Linguee, a bilingual corpus rather than a dictionary,
+filled in after that. That gives the checker a signature for the translated minority: a
+voice flip, a pronominal sense rendered plain, the wrong sense of a polysemous French word,
+and a whole definition carried over where a one-word gloss exists, which is what the 140
+glosses containing "to" mostly look like. The TLFi orders senses historically, as English
+Wiktionary does, so an archaic first sense is a risk on that path too. The lint gained a
+definition-like rule (six or more words, or *someone's*, *something's*, *oneself*), and the
+gloss task names the signature.
+
+Two more clarifications from Josh landed the same afternoon. First, a descriptive gloss was
+often a choice, not an artifact: where no one-word English gloss existed, or where the only
+one was a word he did not know himself despite a large vocabulary, he translated the
+definition on purpose, reasoning that users would not be helped by *accouter* or
+*anastomose*. So the lint's definition-like rule now tells the subagent to tighten where a
+plain word exists and never to replace a phrase with a rare word, and the house style says
+plain phrase over obscure single word. Second, he asked whether future sessions could reach
+the dictionaries with WebFetch or curl, or whether the plan should point them at the Chrome
+MCP. Probing each site with *abouler* answered it and turned up a useful route: the CNRTL
+portal is now a JavaScript app that returns an empty shell to curl and WebFetch alike, but
+its bundle names `/api/word/<word>`, which returns JSON carrying the TLFi, Wiktionnaire and
+Académie 9e entries as HTML with a one-line description and IPA. Le Robert answers curl with
+the definition and a conjugation table in the HTML but refuses WebFetch with a 403;
+WordReference is the reverse, refusing bare curl and answering WebFetch; Larousse, Linguee,
+Lexilogos, the Wiktionary API and Wikidata's SPARQL endpoint answer both; only Reverso
+Context blocks everything and needs the Chrome MCP. The plan gained a "Live lookups" section
+with that table, the WebFetch caveat that it summarizes through a small model, and the
+Chrome MCP's preconditions: invoke the `claude-in-chrome` skill first, Chrome open with the
+extension and the site allowed, a few lookups rather than hundreds, and no dialogs.
+
+Last, Josh asked that implementers mark finished stages and steps with ✅ and annotate the
+plan where it turns out wrong or incomplete. The plan now opens with a Progress line and a
+short convention: append ✅ and the date to a finished heading, leave wrong text in place
+with a dated **Correction** note beneath it, keep the narrative in this journal, and read
+earlier stages' corrections before starting a later one. Every paste-able prompt ends by
+asking for the same. The plan is the status board; the journal stays the story.
