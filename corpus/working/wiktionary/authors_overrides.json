@@ -1,0 +1,43 @@
+{
+ "_readme": {
+  "what": "Hand corrections merged over build_author_table.py's Wikidata resolution, and winning.",
+  "why": "A Wiktionary attribution is not always an rdfs:label: it can name a writing duo, use a title the label spells differently, or be a bare pen name. Each entry below was checked against Wikidata by hand on 2026-09-20; the QID and death year are quoted from the item named.",
+  "joint_attributions": "Where a reference names two authors, death_year is the LATER of the two deaths, because the quotation leaves copyright only when both have.",
+  "shape": "Every other key is an author name exactly as it appears in a reference, mapping to { qid, label, death_year, status, note }."
+ },
+ "Alexandre Dumas": {
+  "qid": "Q38337",
+  "label": "Alexandre Dumas (père)",
+  "death_year": 1870,
+  "status": "resolved (override)",
+  "note": "Four humans carry this label. An unqualified 'Alexandre Dumas' is conventionally père (Q38337, d. 1870); fils is Q169150 (d. 1895). Both died well before 1931, so the public-domain verdict is the same whichever the reference meant."
+ },
+ "Comtesse de Ségur": {
+  "qid": "Q465681",
+  "label": "comtesse de Ségur",
+  "death_year": 1874,
+  "status": "resolved (override)",
+  "note": "Wikidata spells the label with a lowercase c ('comtesse de Ségur'), so the exact-label query missed it."
+ },
+ "Erckmann-Chatrian": {
+  "qid": "Q1348668",
+  "label": "Erckmann-Chatrian",
+  "death_year": 1899,
+  "status": "resolved (override)",
+  "note": "A writing duo, so the item itself carries no death date. Émile Erckmann (Q3246593) died 1899, Alexandre Chatrian (Q2833544) died 1890; the later death governs."
+ },
+ "Gustave Flaubert et Maxime Du Camp": {
+  "qid": "Q918268",
+  "label": "Gustave Flaubert et Maxime Du Camp",
+  "death_year": 1894,
+  "status": "resolved (override)",
+  "note": "Joint attribution: Flaubert (Q43444) died 1880, Du Camp (Q918268) died 1894; the later death governs. The qid names Du Camp, the author the year comes from."
+ },
+ "Sidonie-Gabrielle Colette": {
+  "qid": "Q218679",
+  "label": "Colette",
+  "death_year": 1954,
+  "status": "resolved (override)",
+  "note": "Wikidata labels her by her pen name alone. Died 1954, so her quotations are NOT public domain under the 1931 rule."
+ }
+}

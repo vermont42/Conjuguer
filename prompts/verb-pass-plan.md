@@ -1,8 +1,8 @@
 # Verb pass: working plan (2026-09-20)
 
-**Status:** Stage A ran on 2026-09-20 and is complete; nothing is committed yet. Josh approved
-the five decisions on 2026-09-20; they are recorded in the last section and folded into the
-stages below. Apart from Stage A, nothing has run yet except the
+**Status:** Stage A and Stage 0 both ran on 2026-09-20 and are complete; nothing is committed
+yet. Josh approved the five decisions on 2026-09-20; they are recorded in the last section and
+folded into the stages below. Apart from Stages A and 0, nothing has run yet except the
 measurements. Every number here was computed on 2026-09-20 against
 `Conjuguer/Models/verbs.xml` (6,330 entries, 6,326 distinct infinitives) and
 `literature_examples.json` (1,141 entries covering 1,140 verbs). The journal entries of the
@@ -13,8 +13,8 @@ Order of work: **Stage A** (engine fixes, now) → **Stage 0** (reference data) 
 (deterministic audits) → **pilot** → **Stage 2** (subagent shards) → **Stage 3** (skeptic
 pass and report) → **Stage 4** (apply).
 
-**Progress** (implementers update this line): Stage A ✅ 2026-09-20 · Stage 0 ☐ · Stage 1 ☐ ·
-Pilot ☐ · Stage 2 ☐ · Stage 3 ☐ · Stage 4 ☐
+**Progress** (implementers update this line): Stage A ✅ 2026-09-20 · Stage 0 ✅ 2026-09-20 ·
+Stage 1 ☐ · Pilot ☐ · Stage 2 ☐ · Stage 3 ☐ · Stage 4 ☐
 
 ## How implementers keep this plan honest
 
@@ -248,7 +248,7 @@ tap while `AXValue` stayed `"0"`. Possibly the iOS 26 switch is another control 
 drive, like the segmented pickers. *je suis intervenu* is pinned in `EngineAuditTests` instead.
 A future session that needs a compound tense on screen should budget for this.
 
-## Stage 0: reference data
+## Stage 0: reference data ✅ 2026-09-20
 
 Runs after Stage A, in a clean session; Python plus one Xcode test run, no subagents.
 Paste:
@@ -264,7 +264,7 @@ Mark completed steps with ✅ in this plan and add a correction note wherever th
 proved wrong or incomplete. Do not commit; Josh commits.
 ```
 
-### 0.1 Wiktionary reference files
+### 0.1 Wiktionary reference files ✅ 2026-09-20
 
 `corpus/working/build_wiktionary_reference.py` (tracked: add it to the `.gitignore`
 whitelist beside `build_corpus_index.py`) downloads both extracts into
@@ -298,7 +298,20 @@ them.
 the raw file on 2026-09-20); the English extract covers it. Record any such gap in
 `meta.json`.
 
-### 0.2 Conjugation dump
+**Correction (2026-09-20):** the section is right and the coverage predictions were exact: 5,560
+English, 6,321 French, the same three verbs with no reference at all. Four notes. The raw dumps
+were **not** refetched: the probe session's copies were still on disk, and the script's HEAD
+request found the server's Content-Length unchanged for both (577,617,820 and 718,568,529 bytes),
+which is what the skip check is for. The French reference grew from the probe's 17.8 MB to
+19.9 MB, because keeping every example rather than three roughly triples the quotation pool. The
+plan's `meta.json` spec asked for "the coverage counts" without saying they differ by edition,
+and the first run duly reported `verbs_with_translated_example: 0` and
+`verbs_with_conjugation_forms: 0` for the French edition, which is a category error rather than a
+finding; the counts are now computed per edition. And the dump dates are scraped from kaikki's
+own page footers rather than hardcoded: enwiktionary 2026-09-02, frwiktionary 2026-09-01. The
+three probe scripts were deleted, as the section says to do.
+
+### 0.2 Conjugation dump ✅ 2026-09-20
 
 A new `@Test` in the disabled `CorpusFormsDumpTests` suite, `testDumpAllConjugations`,
 writing `corpus/working/conjugations.json` as `{ "<verb id>": { "<tense key>": "<form>" } }`:
@@ -315,7 +328,20 @@ the wrong shape for auditing (inverted, lowercased so `dÎTES` collapses to *dî
 feminine or plural participles, single-character forms dropped, the bare futur stem
 included as a form).
 
-### 0.3 Author death-year table
+**Correction (2026-09-20):** written and run as specified; 6,330 verb ids × 48 tense keys →
+303,840 forms in 4.3 seconds, and every Stage-A form reads back correctly. Two corrections to the
+recipe. **The `--only-testing` filter must carry the trailing parentheses**:
+`'ConjuguerTests/CorpusFormsDumpTests/testDumpAllConjugations()'`. The spelling this section
+inherits from `prompts/mine-classical-tier.md` omits them, and without them the run reports
+`Test run with 0 tests in 1 suite passed`, exits zero and writes nothing, which is
+indistinguishable from success. CLAUDE.md has the right form; the older prompt does not. (The
+`mine-classical-tier.md` recipe should be corrected too, by whoever next touches it.) Second,
+deleting the test intermediates was not needed on this run, though it is harmless: adding a new
+`@Test` to an existing file recompiled cleanly. Neither `Tense` nor `PersonNumber` carries its
+case name at runtime, so the tense keys come from an explicit table in the test rather than from
+reflection.
+
+### 0.3 Author death-year table ✅ 2026-09-20
 
 `corpus/working/build_author_table.py` (tracked, whitelisted) reads every `ref` in the
 French reference for the verbs without an example plus the 84 whose example is
@@ -333,7 +359,45 @@ as unresolved. Cache the raw answers so a re-run costs nothing. Write
 `authors_overrides.json` last for hand corrections (Dumas père versus fils is the obvious
 one). Under decision 2 a quotation is usable only when `death_year < 1931`.
 
-### 0.4 Acceptance criteria
+**Correction (2026-09-20):** the design holds, but **matching the French `rdfs:label` is not
+enough, and fails silently on the most famous authors.** Wikidata has been migrating labels that
+are spelled identically in every language to the multilingual `mul` label and deleting the
+per-language ones, so Victor Hugo (Q535) and Jean-Paul Sartre (Q9364) have 526 and 354 claims, a
+P570 apiece, and **no French label at all**. A French-only query reports them as non-existent
+people rather than erroring. The first full run therefore returned 3,196 no-matches including
+Hugo, Sartre, Beauvoir, Nerval and Daudet. Balzac keeps his French label, which is why the probe
+that informed this section looked fine. The query now matches `fr`, `mul` and `en`.
+
+Three further changes the section did not anticipate. **Apostrophes:** Wikidata writes U+2019
+while a reference uses either that or a straight U+0027, so *Jules Barbey d'Aurevilly* (13
+quotations, died 1889) matched nothing; every name is now queried under both spellings, which
+affects 263 names. **Namesakes:** the query also asks for `wikibase:sitelinks` and takes the
+leader when it has at least five and at least three times the runner-up, which resolves Hugo
+against his namesakes without touching genuinely confusable pairs. Dumas stays ambiguous among
+four humans, as the section predicts, and is an override. **A canary:** every batch carries
+Honoré de Balzac, and a response that comes back without him is retried rather than cached, since
+the whole class of bug here presents as an empty answer rather than an error.
+
+Counts from the real run: 19,339 references over 5,270 target verbs → 6,151 distinct author names
+(1,593 references dropped as non-person or translation), of which 1,514 resolve to a death year,
+1,490 are humans with no death date (alive, correctly unusable), 2,953 match no label and 194 stay
+ambiguous. **640 authors died before 1931, accounting for 4,731 quotations, and 2,338 verbs have
+at least one public-domain quotation** — against the plan's 2,731 estimate, which was computed
+from edition years rather than death years and is therefore the looser rule. The estimate was
+"about 6,050 distinct names, 1,248 with two or more quotations, Balzac 506"; the real figures are
+6,151, 1,371 and 554, higher because 0.1 now keeps every example rather than three.
+
+Two notes for Stage 1. `authors_overrides.json` holds five hand-checked corrections, each with its
+reasoning in the file; for a joint attribution the death year is the **later** of the two, since
+the quotation leaves copyright only when both authors have. And that file is the one Stage 0
+artifact nothing can regenerate, so **Josh decided on 2026-09-20 to track it**, which widens 0.4's
+fourth criterion by one file. Re-including it took three `.gitignore` lines rather than one, since
+git never descends into a directory it has already excluded: `!corpus/working/wiktionary/`, then
+`corpus/working/wiktionary/*`, then the negation for the file. Everything else under that
+directory (the raw dumps, the reference JSON, `authors.json`, the Wikidata cache) stays ignored,
+and `git add` of the whole directory picks up only the overrides file.
+
+### 0.4 Acceptance criteria ✅ 2026-09-20
 
 - The three JSON files and `meta.json` exist; English coverage is 5,560 give or take a few,
   French 6,321 give or take a few (the dumps move); `conjugations.json` has 6,330 verb ids.
@@ -346,6 +410,19 @@ one). Under decision 2 a quotation is usable only when `death_year < 1931`.
   against the 2,731-verb estimate.
 - `git status` shows only the two scripts, the `.gitignore` whitelist lines, the test file,
   and the journal.
+
+**Correction (2026-09-20):** all four met, with two amendments. Criterion 3's first clause is not
+met and should not be: **169 authors with five or more quotations stay unresolved**, so the
+journal lists them, which is the criterion's own alternative. 92 of the 169 are living authors
+with no death date, which is the right answer rather than a gap; the rest are news organizations,
+pen names, joint attributions and fuller name forms than any label uses, and leaving them
+unresolved is the safe default because unresolved means not public domain. Criterion 4 also shows
+`docs/project-structure.md` modified: CLAUDE.md requires the tree cache to name new source files,
+and `scripts/check_docs.py` is clean. And it shows one more file than the criterion allows,
+`corpus/working/wiktionary/authors_overrides.json`, which Josh decided to track; see the 0.3 note. While adding the whitelist lines I found that
+`!corpus/working/mine_classical.workflow.js` had no trailing newline, so the next block's comment
+was glued onto it and the pattern matched nothing (`git check-ignore --no-index` confirms the file
+fell through to `corpus/working/*`). It survived only because it is already tracked. Fixed.
 
 ## Live lookups: which tool for which site
 

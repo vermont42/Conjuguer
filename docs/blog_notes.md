@@ -2572,3 +2572,161 @@ The 2.3 release notes are started, in both languages, and they apologize. If the
 marked someone down for typing *peuvent*, *dites* or *suivi*, that person was right and the
 app was wrong, and the notes say so in one line. The 2.2 notes set that precedent with
 *considérer*.
+
+## Stage 0 of the verb pass: the reference data, and two ways an exact-label lookup lies (2026-09-20)
+
+Stage 0 builds the reference material the rest of the pass audits against: two per-verb
+Wiktionary extracts, a full conjugation dump from the app's own engine, and a table of
+death years for the authors Wiktionary quotes. No model judges anything yet. Three scripts
+ran and everything they produced is deterministic and re-runnable.
+
+`corpus/working/build_wiktionary_reference.py` downloads the two kaikki.org extracts,
+streams each once with a substring prefilter ahead of `json.loads`, and keeps the verb
+entries whose NFC headword is one of the app's 6,326 infinitives. Coverage came out exactly
+where the September 20 probe put it: 5,560 verbs from the English edition, 6,321 from the
+French, and three verbs — *blistériser*, *casse-croûter*, *humoter* — with no
+machine-readable reference at all. *enfoncer* and *enkyster* are missing from the French
+extract but present in the English one, and `meta.json` records that the gap is in the
+extract itself rather than in the filter, so a later session does not re-investigate it.
+Neither dump was actually refetched: the probe session's copies were still on disk, the
+script's HEAD request reported the same Content-Length for both (577,617,820 and
+718,568,529 bytes), and it skipped the download, which is what that check is for. The
+French file grew from the probe's 17.8 MB to 19.9 MB because the script keeps *every*
+example rather than the probe's first three; candidate retrieval in Stage 1 wants the
+choice.
+
+One small thing I changed from the plan's spec. The first `meta.json` reported
+`verbs_with_translated_example: 0` and `verbs_with_conjugation_forms: 0` for the French
+edition, which reads as a finding and is really a category error: French entries carry no
+`english` key, and the script stores `n_forms` rather than `forms` for them. The counts are
+now per-edition, so the French block reports 6,317 verbs with conjugation forms and does
+not pretend to a field it never collected.
+
+The conjugation dump is a third `@Test` in the disabled `CorpusFormsDumpTests` suite,
+writing `corpus/working/conjugations.json` as verb id → tense key → form. It exists because
+`forms_all.json`, which runs the same conjugator, is the wrong shape for auditing in five
+separate ways: it is inverted so a form's tense is lost, lowercased so `dÎTES` collapses to
+*dîtes* and the irregular-ending markers vanish, flattened across participle agreement,
+stripped of single-character forms, and it folds the bare futur stem in as though it were a
+form. The new dump is verbatim: NFC, not lowercased, alternates left joined by `/`, and
+masculine throughout so the passé composé shows its auxiliary unagreed. 6,330 verb ids ×
+48 tense keys → 303,840 forms, in 4.3 seconds.
+
+That dump is also the proof that Stage A landed, and it reads cleanly: `pouvoir` gives
+*pEUvent*, `dire` gives *dITES*, `suivre` gives *suivI*, `mener` gives *mÈne*, `changer`
+gives *changEons*, and `intervenir`'s first-person passé composé is *SUIs intervenU*. The
+eighth verb Stage A found on its own, *déshypothéquer*, gives *déshypothÈque*.
+
+Running a single one of these dumps cost me a wrong turn worth writing down. The recipe
+inherited from `prompts/mine-classical-tier.md` spells the filter
+`--only-testing ConjuguerTests/CorpusFormsDumpTests/testDumpAllVerbForms`, without
+parentheses. Swift Testing needs the method spelling with them. Without them the run
+reports `Test run with 0 tests in 1 suite passed`, exits zero, writes nothing, and looks
+exactly like success. CLAUDE.md has the parenthesized form; the older prompt does not, and
+I followed the prompt. The file header now carries the correct spelling next to the old one.
+
+### Wikidata does not have a French label for Victor Hugo
+
+`build_author_table.py` reads every reference on a French-Wiktionary example for the 5,270
+verbs the pass may need an example for (5,186 with no example, plus the 84 whose example is
+Claude-authored), parses the author's name out of it, and asks Wikidata for a death year,
+because decision 2 makes a quotation usable only when its author died before 1931. 19,339
+references yielded 6,151 distinct author names, 1,593 references being dropped as
+periodicals, encyclopedias, unattributed text or translations. A translation is dropped
+whole: the translator holds rights of their own, about which the original author's death
+year says nothing.
+
+The first full run resolved 1,395 names and reported 3,196 as having no match on Wikidata
+at all. The no-match list included Jean-Paul Sartre, Simone de Beauvoir, Victor Hugo,
+Gérard de Nerval and Léon Daudet. That is not a plausible answer, so I stopped and dug.
+My first hypothesis was throttling, since the run had drawn a 429 and two 502s and a
+rate-limited endpoint that returns an empty result set rather than an error would produce
+exactly this. Wrong. After a cooldown, `wd:Q535 rdfs:label ?l FILTER(lang(?l)="fr")`
+returned nothing, and `wd:Q535` had only `schema:version` and `schema:dateModified`
+attached. The Wikidata API then gave the real answer: Q535 has 526 claims, has P570 (1885),
+and has **95 labels, none of them French**. Its French label was deleted in favour of a
+`mul` one.
+
+This is the multilingual-label migration. Wikidata now stores a name that is spelled
+identically across languages once, under the `mul` language code, and removes the
+per-language duplicates. A name like *Victor Hugo* or *Jean-Paul Sartre* needs no
+translation, so it moved; *Honoré de Balzac* kept its French label, which is why Balzac
+resolved fine and hid the problem. The plan's instruction to match the French `rdfs:label`
+was written from a probe that happened to use Balzac. The query now matches `fr`, `mul` and
+`en`, and the failure mode is the nasty kind: it does not error, it reports the most famous
+authors in the corpus as unknown people.
+
+Two more fixes came out of the same session. Wikidata writes an apostrophe as U+2019 while
+Wiktionary references use either that or a straight U+0027, and the same author appears
+both ways in the corpus, so *Jules Barbey d'Aurevilly* (13 quotations, died 1889, plainly
+public domain) matched nothing. Each name is now queried under both spellings, and rows are
+credited back to every queried name that spelling stands for; 263 names carrying an
+apostrophe were affected. And where several humans share a label, the query now also asks
+for `wikibase:sitelinks` and takes the leader when it has at least five and at least three
+times the runner-up. That alone resolves Victor Hugo against his namesakes. It deliberately
+does not resolve *Alexandre Dumas*, where four humans share the label and two of them are
+the famous father and son; that is what `authors_overrides.json` is for.
+
+Every batch now carries Honoré de Balzac as a canary. A response that comes back without
+him did not really come back, whatever the HTTP status said, and is retried rather than
+cached as a row of empty answers. Given that the original bug presented as "these people do
+not exist", I wanted the failure to be loud next time.
+
+The final table: 6,151 names, of which 1,514 resolve to a death year, 1,490 are humans with
+no death date (which is to say, alive, and correctly not public domain), 2,953 match no
+label, and 194 stay ambiguous. 640 authors died before 1931, accounting for 4,731 of the
+17,746 quotations, and 2,338 verbs have at least one public-domain quotation available.
+
+That last number is the one worth flagging, because the plan estimated 2,731. The estimate
+came from edition years — verbs with a quotation dated 1925 or earlier — and the rule Josh
+approved is the author's death year, which is strictly harder: a 1925 printing of an author
+who died in 1955 is out, and an unresolved author is out by default. A 15% shortfall against
+an estimate built on a different rule is what I would expect, not a sign either number is
+wrong. It still leaves the Wiktionnaire tier as by far the largest source of examples for
+the 5,186 verbs that have none.
+
+169 authors with five or more quotations remain unresolved. 92 of them are humans with no
+death date, which is the correct answer and not a gap: Annie Ernaux, Amélie Nothomb, Michel
+Houellebecq, Delphine de Vigan, Amin Maalouf, Patrick Modiano and Sylvain Tesson are alive,
+and their quotations were never usable. 75 match no label, and they fall into recognizable
+groups: news organizations that the non-person filter does not know by name (*AFP*, *Le
+Monde*, *Le Devoir*, *Le Monde avec AFP*, *Radio-Canada*, *Jeune Afrique*, *France Mutuelle
+Magazine*), pen names written as the reference pleases (*San-Antonio*, *San Antonio*,
+*Frédéric Dard (San-Antonio)*, *San-Antonio (Frédéric Dard)*, *Jo Barnais*,
+*Louis-Ferdinand Céline (Louis-Ferdinand Destouches)*), joint attributions Wikidata has no
+item for (*Pierre Souvestre et Marcel Allain*, *Benoîte et Flora Groult*), fuller name forms
+than any label uses (*Jean Louis Armand de Quatrefages de Bréau*), and a handful of genuinely
+obscure people (*R.P. Paul Christoff*, 68 quotations, *D. de Prat*, 27). Four are ambiguous
+between namesakes too close to separate by sitelinks. I left all of them unresolved on
+purpose: unresolved means not public domain, so the default is the safe one, and hand-fixing
+a news agency into an "author" would be worse than leaving it alone.
+
+Five hand corrections went into `authors_overrides.json`, each checked against Wikidata by
+hand and each carrying its reasoning in the file. *Alexandre Dumas* is père (Q38337, died
+1870) by convention, and both père and fils died well before 1931, so the verdict is robust
+either way. *Comtesse de Ségur* is labelled with a lowercase c. *Erckmann-Chatrian* is a
+duo whose item has no death date, so it takes the later of Erckmann's 1899 and Chatrian's
+1890. *Gustave Flaubert et Maxime Du Camp* likewise takes Du Camp's 1894 over Flaubert's
+1880. *Sidonie-Gabrielle Colette* is labelled by her pen name alone, died 1954, and is
+therefore **not** public domain, which is worth recording precisely so nobody resolves her
+later and assumes otherwise. For a joint attribution the rule has to be the later death:
+the quotation leaves copyright only when both authors have.
+
+`authors_overrides.json` is hand-made and nothing regenerates it, but it sits under
+`corpus/working/`, which is ignored, and Stage 0's acceptance criterion said the only new
+tracked files are the two scripts. I raised it rather than decide it, and Josh said to
+whitelist it, which is the right call: it is the one Stage 0 artifact a fresh clone could
+not rebuild by re-running something. Re-including it took three lines rather than one,
+because git never descends into a directory it has already excluded, so the directory has
+to be un-ignored, its contents re-ignored, and then the single file excepted. The raw
+dumps, the reference JSON, `authors.json` and the Wikidata cache all stay ignored, and
+`git add corpus/working/wiktionary/` picks up only the overrides file.
+
+While adding the two whitelist entries I found a live bug in `.gitignore`:
+`!corpus/working/mine_classical.workflow.js` had no newline after it, so the next block's
+comment was glued onto the same line and the pattern matched nothing. `git check-ignore
+--no-index` confirms the file was matched by `corpus/working/*` instead. It survives only
+because it is already tracked, and a fresh clone would have been fine too, but the whitelist
+line was dead. Fixed with the missing newline.
+
+Nothing is committed. Full suite green: 258 tests in 23 suites.

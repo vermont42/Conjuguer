@@ -264,7 +264,9 @@ prompts/                        # Archive of the session prompts that produced f
 corpus/                         # Literature-example pipeline; NOT part of any target. See docs/literature-example-corpus.md
 ├── originals/                  # Source texts by tier (classical, literature, government, technology, wikipedia)
 ├── json/                       # Built example files, copied into Conjuguer/Models/ to ship
-├── working/                    # Index builders and their build products (build_corpus_index.py, build_classical_index.py, build_tail_index.py, build_literature_examples.py, build_chanson_examples.py)
+├── working/                    # Index builders and their build products (build_corpus_index.py, build_classical_index.py, build_tail_index.py, build_literature_examples.py, build_chanson_examples.py,
+│                               # merge_classical.py, mine_examples.workflow.js, mine_classical.workflow.js), plus the verb pass's Stage 0 reference
+│                               # builders (build_wiktionary_reference.py and build_author_table.py; see prompts/verb-pass-plan.md)
 └── grokked/                    # Intermediate per-source extraction output
 
 frequency/                      # Verb-frequency pipeline; NOT part of any target. See frequency/README.md

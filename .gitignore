@@ -32,7 +32,20 @@ corpus/working/*
 !corpus/working/mine_examples.workflow.js
 !corpus/working/build_classical_index.py
 !corpus/working/merge_classical.py
-!corpus/working/mine_classical.workflow.js# frequency: tracked = the pipeline scripts, the derived per-verb counts, the hand-maintained
+!corpus/working/mine_classical.workflow.js
+# verb pass (prompts/verb-pass-plan.md): the two Stage 0 reference builders. Their outputs
+# (the kaikki dumps, the per-verb reference JSON, conjugations.json, authors.json) stay
+# ignored: they are large, and re-running these scripts rebuilds any of them.
+!corpus/working/build_wiktionary_reference.py
+!corpus/working/build_author_table.py
+# authors_overrides.json is the exception: hand-checked corrections to the Wikidata
+# resolution, which nothing regenerates. Re-including one file inside an excluded directory
+# takes three lines, because git never descends into a directory it has already excluded.
+!corpus/working/wiktionary/
+corpus/working/wiktionary/*
+!corpus/working/wiktionary/authors_overrides.json
+
+# frequency: tracked = the pipeline scripts, the derived per-verb counts, the hand-maintained
 # editorial tier, and GLÀFF's README (its licence asks that it accompany redistribution of
 # derived data). Ignored = the two source lexicons (206 MB, re-downloadable per
 # frequency/README.md) and the generated report.

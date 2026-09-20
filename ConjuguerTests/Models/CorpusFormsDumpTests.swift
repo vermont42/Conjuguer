@@ -25,6 +25,9 @@ import Testing
 // runs ~1.25M conjugations (~47s — 97% of the whole test suite's execution time). To regenerate the
 // corpus dumps on demand, temporarily remove the `.disabled(...)` trait, then:
 //   run_tests.sh --only-testing ConjuguerTests/CorpusFormsDumpTests
+// A single dump needs the Swift Testing method spelling, trailing parentheses included.
+// Without them the run reports "0 tests in 1 suite" and writes nothing:
+//   run_tests.sh --only-testing 'ConjuguerTests/CorpusFormsDumpTests/testDumpAllConjugations()'
 @MainActor
 @Suite(.disabled("Build-time corpus tool, not a behavioral test — see the file header to run on demand."))
 struct CorpusFormsDumpTests {
@@ -146,6 +149,107 @@ struct CorpusFormsDumpTests {
     print("CorpusFormsDump(all): \(allVerbs.count) verbs → \(conjugationCount) conjugations → "
       + "\(out.count) distinct forms")
     print("CorpusFormsDump(all): wrote \(outURL.path)")
+  }
+
+  // Third dump, for the verb pass rather than the corpus indexers: every verb's conjugation
+  // table to `corpus/working/conjugations.json` as `{ "<verb id>": { "<tense key>": "<form>" } }`,
+  // which `corpus/working/audit_conjugations.py` diffs against Wiktionary's tables.
+  //
+  // forms_all.json cannot serve here even though it runs the same conjugator: it is inverted
+  // (form → verbs, so a form's tense is lost), lowercased (dÎTES collapses to dîtes, hiding the
+  // irregular-ending markers the audit reads), participle-agreement-flattened, stripped of
+  // single-character forms, and it folds in the bare futur stem as though it were a form.
+  @Test func testDumpAllConjugations() throws {
+    let outURL = URL(filePath: #filePath)
+      .deletingLastPathComponent()
+      .deletingLastPathComponent()
+      .deletingLastPathComponent()
+      .appending(path: "corpus/working/conjugations.json")
+
+    let allVerbs = Verb.verbs.values.sorted {
+      $0.infinitifWithPossibleExtraLetters < $1.infinitifWithPossibleExtraLetters
+    }
+    #expect(!allVerbs.isEmpty, "Verb data not loaded.")
+
+    var dump: [String: [String: String]] = [:]
+    var formCount = 0
+    for verb in allVerbs {
+      var table: [String: String] = [:]
+      for (key, tense) in Self.auditedTenses {
+        // Masculine throughout: the simple tenses ignore the gender, and it keeps the passé
+        // composé's participle unagreed so the auxiliary reads as the app conjugates it.
+        guard let conjugation = Conjugator.conjugatedString(
+          infinitif: verb.infinitif,
+          tense: tense,
+          extraLetters: verb.extraLetters,
+          pronounGender: .masculine
+        ) else {
+          continue
+        }
+        // Verbatim: NOT lowercased, so the uppercase irregular-ending markers survive, and the
+        // "/"-joined alternates stay joined.
+        table[key] = conjugation.precomposedStringWithCanonicalMapping
+        formCount += 1
+      }
+      dump[verb.infinitifWithPossibleExtraLetters] = table
+    }
+
+    #expect(dump.count == allVerbs.count, "A verb id collided — ids must be unique.")
+
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+    try encoder.encode(dump).write(to: outURL)
+
+    print("CorpusFormsDump(conjugations): \(dump.count) verbs × \(Self.auditedTenses.count) tense keys "
+      + "→ \(formCount) forms")
+    print("CorpusFormsDump(conjugations): wrote \(outURL.path)")
+  }
+
+  // The audited surface: every simple tense, both participles, and the first-person-singular
+  // passé composé so the auxiliary is visible. radicalFutur is deliberately absent: it is a
+  // stem, not a form a learner ever writes. The key is the Tense case name, a dot, and the
+  // PersonNumber case name; neither enum carries its case name at runtime, hence the table.
+  private static let auditedTenses: [(key: String, tense: Tense)] = {
+    var entries: [(key: String, tense: Tense)] = [
+      ("participePassé", .participePassé),
+      ("participePrésent", .participePrésent)
+    ]
+    let simpleFamilies: [(name: String, make: (PersonNumber) -> Tense)] = [
+      ("indicatifPrésent", Tense.indicatifPrésent),
+      ("passéSimple", Tense.passéSimple),
+      ("imparfait", Tense.imparfait),
+      ("futurSimple", Tense.futurSimple),
+      ("conditionnelPrésent", Tense.conditionnelPrésent),
+      ("subjonctifPrésent", Tense.subjonctifPrésent),
+      ("subjonctifImparfait", Tense.subjonctifImparfait)
+    ]
+    for family in simpleFamilies {
+      entries += PersonNumber.allCases.map { personNumber in
+        (family.name + "." + CorpusFormsDumpTests.personNumberName(personNumber), family.make(personNumber))
+      }
+    }
+    entries += PersonNumber.impératifPersonNumbers.map { personNumber in
+      ("impératif." + CorpusFormsDumpTests.personNumberName(personNumber), Tense.impératif(personNumber))
+    }
+    entries.append(("passéComposé.firstSingular", .passéComposé(.firstSingular)))
+    return entries
+  }()
+
+  private static func personNumberName(_ personNumber: PersonNumber) -> String {
+    switch personNumber {
+    case .firstSingular:
+      return "firstSingular"
+    case .secondSingular:
+      return "secondSingular"
+    case .thirdSingular:
+      return "thirdSingular"
+    case .firstPlural:
+      return "firstPlural"
+    case .secondPlural:
+      return "secondPlural"
+    case .thirdPlural:
+      return "thirdPlural"
+    }
   }
 
   // Lowercase + NFC so forms compare equal to NFC-normalized corpus tokens regardless of how
