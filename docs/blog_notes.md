@@ -3065,3 +3065,180 @@ being right or moot by construction. That is 43, and the plan now states the spl
 session can check itself against it rather than against a round number I liked the sound of.
 
 Nothing is committed.
+
+## Stage A2: twenty more wrong verbs, and a family that was never twelve verbs wide (2026-09-20)
+
+Stage 1 diffed Conjuguer's whole conjugation table against English Wiktionary and came back with
+579 disagreements over 43 verbs. Stage A2 is the session that adjudicated all 43. The plan said
+they were not 43 decisions but 8 plain model errors, 12 spelling changes under decision 6, 6 verbs
+behind 4 broken model definitions, 8 needing a judgement and 9 that were the app being right. That
+arithmetic held exactly, which is the first time in this pass that a count written before the work
+survived the work.
+
+What came out: **twenty verbs corrected**, twelve respelled, four recorded as the app being right,
+nine recorded as moot, three new models, one engine fix that the audit could not see, and a
+paragraph of the plan that turned out to be wrong about the data rather than about a number.
+
+### The twenty
+
+Three of them matter to somebody. **vivre** is the forty-first most used verb in French and it
+conjugated the passé simple on the présent stem: *je vivis* for *je vécus*, *nous vivîmes* for
+*nous vécûmes*, and the same twelve forms wrong again in *survivre* and *revivre*. **relever**
+(152) gave *je releve* and *je releverai*, which is the *mener* bug Stage A fixed, one verb it
+missed. **résoudre** (398) had a participe passé of *résous*.
+
+The rest are quieter. *parfumer* was filed with the -re verbs and produced *je parfums* and a
+participe passé of *parfumu*. *jauger* and *gamberger* lost the e of *nous jaugeons*. *sevrer*
+produced *je seère*, which is not a missing alteration but a broken one. *débriefer*, *déficeler*
+and *briqueter* wanted a grave accent. *amuïr* lost its diaeresis in all 32 of its disagreeing
+forms. *bouillir* gave the impératif *bouille* for *bous*. *faillir* gave *faillu* for *failli*.
+*échoir* gave *échoyant* for *échéant*, the word in *le cas échéant*. And *seoir* and *messeoir*
+were conjugated as though they were *asseoir*.
+
+Three of those needed a diagnosis the plan had not written down.
+
+**vivre needed the endings changed, not just the stem.** The plan named the stem correctly —
+*véc-* rather than *viv-* — and stopped there. But *vécus, vécut, vécûmes* are the **u** passé
+simple endings and model `5-6` carried `se="i"`. Changing only the stem would have produced
+*vécis*. The fix is `se="u"` plus widening the existing participe alteration to `2,2,ÉC,xA,pp`,
+and `xA` buys the subjonctif imparfait for free, because the conjugator resolves that tense
+through the passé simple's person-number.
+
+**bouillir was a deletion.** `3-2C` carried `2,2,ill,h2s`, which the plan read as "builds the
+imperative on the infinitive stem". It is worse than that: it runs *after* `3,3,S*,r1s,r2s` has
+already produced the right *bous*, and puts the *ill* back. The impératif reaches an `r2s` rule
+because `Conjugator` applies an `indicatifPrésent(personNumber)` alteration when conjugating the
+impératif for that person, which is a subtlety worth knowing before editing any model's `h2s`.
+Removing the alteration is the entire fix.
+
+**sevrer is the only verb of its kind.** Model `1-4` (peser) replaces the character two from the
+end of the stem, which is the *e* of *pes-* and the *v* of *sevr-*. The plan asked whether any
+other `1-4` verb has that consonant cluster. Checking all 85 verbs that sit on `1-4` after A2 —
+the 69 that were there plus the 16 moved in — *sevrer* is the only one, so `1-4` is untouched and
+`1-4A` re-indexes its rule to `3,1,È` and `5,1,È`. Same for *résoudre*: `5-13` keeps *absous* for
+*absoudre* and *dissoudre*, and the rule is marked uninherited with the `N` flag that `5-8A` uses
+for *dites*, so the new `5-13A` can supply *résolu* without running on a string the parent rule
+has already chewed.
+
+### The error the audit could not see
+
+While reading *seoir*'s forms I noticed the participe présent of *asseoir*: `asseY/assOYant`. That
+is not a stem alteration problem. `Conjugator` appended the *-ant* once to a stem that can carry
+two alternates joined by a slash, so instead of offering *asseyant* and *assoyant* the app printed
+one run-together word. Four verbs: *asseoir*, *rasseoir*, *seoir*, *messeoir*.
+
+Stage 1.1 could not find this, and the reason is worth keeping. The audit splits an app form on
+the alternate separator and accepts a match on **any** alternate, which is right for *pEUX/pUIs*.
+Here that rule made *assoyant* match and the row never appeared. A checker that accepts any
+alternate cannot notice that the alternates are malformed. Worse, `NousPrésentStemTests` had
+pinned `asseY/assOYant` as an expectation, in a test written by hand to catch exactly this class
+of bug in the *imparfait*, where the same helper gets it right. The imparfait splits and the
+participe présent did not, and the test recorded the difference instead of objecting to it.
+
+### The family that was never twelve verbs wide
+
+Decision 6 said the twelve -eler/-eter verbs move to `1-4`, and that `1-3A` (appeler) and `1-3B`
+(jeter) would then "keep only *appeler*, *jeter* and their compounds, which is what those two
+models are named for". I wrote that sentence and it is wrong. The two models hold **104** verbs.
+After the twelve leave, 92 remain: *atteler*, *ficeler*, *museler*, *épeler*, *étinceler*,
+*feuilleter*, *étiqueter*, *épousseter*, and eighty-four more.
+
+So why did the audit flag exactly twelve? Checking all 104 against the English extract's présent
+third singular sorts them:
+
+| Wiktionary's table gives | Verbs |
+|---|---|
+| the grave spelling only | 12 — exactly the twelve |
+| both spellings | 48 |
+| the doubled spelling only | 6 — *appeler*, *jeter*, *rappeler*, *rejeter*, *projeter*, *interjeter* |
+| no conjugation table | 38 |
+
+The instinct behind the sentence was sound: the six verbs the reference spells only one way really
+are *appeler*, *jeter* and their compounds. What the sentence got wrong is that the model is not
+reserved to them. Forty-eight verbs sit on it where Wiktionary offers both spellings and therefore
+agrees with the app today, and thirty-eight more where it says nothing at all. Rectifying the
+whole family would have contradicted the reference on forty-eight verbs and changed 1,932 forms on
+no evidence, in order to satisfy a claim about what a model is named for.
+
+Decision 6 was therefore applied to the twelve the audit names, plus *déficeler* and *briqueter*
+from A2.1, and to nothing else. Whether the rest of the family should follow is a real question,
+but it is a second decision with a different justification, and the audit does not force it. The
+plan and the decision both carry the correction in place.
+
+### Four verdicts of "the app is right"
+
+The plan's A2.3 listed eight verbs as needing a judgement rather than a fix. Four ended in a fix
+(*faillir*, *échoir*, *seoir*, *messeoir*) and four in the app being right, each for a different
+reason, and the reasons are more interesting than the fixes.
+
+***luire*** and ***reluire***. Wiktionary gives both passé simple paradigms for every person —
+*luis*/*luisis*, *luîmes*/*luisîmes*, *luirent*/*luisirent* — except the third singular, where
+only *luit* appears. A table that offers *luisis* and *luisirent* either side of a missing
+*luisit* has a gap in it, not a judgement. No change.
+
+***sortir (obtain)***. The `ex="obtain"` entry is the jurisprudence sense, *sortir son plein
+effet*, which is a second-group verb used in the third person only. That is precisely what its
+`2-1` and `dg="1"` encode. The English table covers the common sense, and seven of its 22 rows
+land on the third person, which is exactly where the two senses part.
+
+***clamecer***. The app gives *je clamèce*, Wiktionary *je clamece*. But the same `fr-conj-auto`
+template gives *dépèce* for *dépecer*. The difference is a page parameter nobody set, not a
+reading of French. *clamecer* rhymes with *dépecer* and takes its grave accent. Checking the
+reference against itself is worth doing before believing it about a rare verb.
+
+***éclore*, *enclore*, *déclore*, *forclore***. The app already ships *éclot* and Wiktionary gives
+*éclôt*, which is the mirror of the -eler/-eter case with the sides swapped. Decision 6 settles
+it: no change, and after A2 the app is on the rectified side of both halves of the reform. The
+plan suggested widening 1.1's circumflex tolerance to o so this stops surfacing, and I declined.
+The tolerance exists because the 1990 rectifications dropped the circumflex on **i** and **u**;
+ô is not in that rule. Accepting ô wherever the app has o would stop being a 1990 rule and start
+being a licence to miss a real circumflex error anywhere in the data, to save four lines in a file
+that is read once per stage.
+
+### What the re-run says
+
+`audit_conjugations.jsonl` goes from 579 rows over 43 verbs to **87 over 14**, and all fourteen
+are A2.3 or A2.4 verbs: 70 of the 87 rows are `defective_gap`, and the seventeen that are not are
+the verdicts above. Nothing A2 fixed is still listed.
+
+Two other audits moved, and both moves are confirmations rather than noise. `check_examples` went
+from four failures to **three**: *faillir*'s shipped example had been failing because its token
+*failli* was not a form of the verb *according to the app*, and the moment `ep` became `i` it was.
+That is 1.1's finding and 1.4's finding turning out to be the same finding, found from opposite
+directions.
+
+And `build_candidates` lost six sentences — tier candidates 9,855 → 9,849, verbs with a corpus hit
+2,834 → 2,832, verbs with no candidate at all 1,776 → **1,777**. The whole difference is
+*trompeter* (five) and *niveler* (one), whose only corpus matches were the **nouns** *trompette*
+and *nivelle*, which the traditional spelling made look like verb forms. Losing them is the point.
+The tier pass finds example sentences by matching corpus tokens against the engine's own forms, so
+a wrong form mines wrong sentences, and a verb that gains an honest zero is better off than one
+holding five sentences about a musical instrument. This is the mechanical reason A2 had to run
+before Stage 2 rather than after it.
+
+### Counts, and one number nobody had listed
+
+Seven verbs leave the regular models, exactly the seven the plan predicted, so the shipping split
+moves from 5,217 / 1,109 to **5,210 regular / 1,116 irregular** of the same 6,326. *parfumer*
+moving `5-1A` → `1-1` is regular to regular and the twelve decision-6 moves are irregular to
+irregular, so neither touches it.
+
+The plan listed the places that number lives: `IrregularityMetricTests`, both Info texts in both
+languages, `docs/description.txt`. It missed one. `Info.irregularitiesText` also says the irregular
+verbs are conjugated by "one of **ninety-two** irregular-verb models", and A2 adds three models, so
+that is ninety-five now, in English and French. While in there I found that the French
+`Info.valuePropositionText` still wrote the verb count as *6.326* with a period; Stage A's journal
+records fixing that separator for *5 223* and it missed this one. A number in prose is a number
+without a test, and it takes two passes to find them all.
+
+The regenerated `VerbModelTests` diff is 180 added lines and six changed ones. The 180 are the
+three new models. The six are `5-6` twice, `3-2C`, `4-11B`, `4-12` and `4-9AB`, and *absoudre*'s
+test is untouched, which is how I know the `N` on `5-13` did what it was for. `EngineAuditTests`
+grew from nine test functions to twenty-two. The whole suite passes at 274 tests in 23 suites.
+
+*vivre*, *résoudre* and *seoir* were opened in the simulator: *je vécus … elles vécurent*,
+*résolu*, and *il sied / elles siéent / il siéra / seyant*. The release notes for 2.3 now say
+thirty-four verbs rather than fourteen, in both languages, with the twelve respellings in a
+paragraph of their own that says plainly that both spellings are correct French.
+
+Nothing is committed.

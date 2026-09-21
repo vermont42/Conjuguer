@@ -18,6 +18,7 @@
   <model mo="appeler" id="1-3A" pa="1-1" p="0,1,L,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|3,0,L,sf" />
   <model mo="jeter" id="1-3B" pa="1-1" p="0,1,T,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|3,1,tT,sf" />
   <model mo="peser" id="1-4" pa="1-1" p="2,1,È,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|4,1,È,sf" />
+  <model mo="sevrer" id="1-4A" pa="1-1" p="3,1,È,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|5,1,È,sf" />
   <model mo="céder" id="1-5" pa="1-1" p="é,È,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p" />
   <model mo="dépecer" id="1-6A" pa="1-1" p="1,1,Ç,r1p,x1s,x2s,x3s,x1p,x2p|1,1,C,i1p,i2p|1,1,C,b1p,b2p|1,1,Ç,q3p|2,1,È,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|4,1,È,sf" />
   <model mo="rapiécer" id="1-6B" pa="1-1" p="1,1,Ç,r1p,x1s,x2s,x3s,x1p,x2p|1,1,C,i1p,i2p|1,1,C,b1p,b2p|1,1,Ç,q3p|2,1,È,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p" />
@@ -37,7 +38,7 @@
   <model mo="couvrir" id="3-1" ep="T" si="E" se="i" p="1,1,ER,N,pp" bb="E" />
   <model mo="assaillir" id="3-2A" pa="3-1" ep="i" />
   <model mo="cueillir" id="3-2B" pa="3-2A" ep="i" p="2,1,E,sf" />
-  <model mo="bouillir" id="3-2C" pa="3-2A" ep="i" p="3,3,S*,r1s,r2s|3,3,T*,r3s|2,2,ill,h2s" />
+  <model mo="bouillir" id="3-2C" pa="3-2A" ep="i" p="3,3,S*,r1s,r2s|3,3,T*,r3s" />
   <model mo="voir" id="4-1A" ep="U" si="s" se="i" bb="E" p="0,2,OI,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|0,2,OY,r1p,r2p,b1p,b2p|3,2,ER,N,sf" />
   <model mo="prévoir" id="4-1B" pa="4-1A" />
   <model mo="pourvoir" id="4-1C" pa="4-1A" se="u" />
@@ -54,11 +55,12 @@
   <model mo="savoir" id="4-7" ep="U" si="s" se="u" bb="E" p="1,1,I,r1s,r2s,r3s|4,3,U,sf|3,3,@,xA,pp|1,1,CH,rr|1,1,CH,bA,h1p,h2p|1,1,CHE*,h2s" />
   <model mo="vouloir" id="4-8" ep="U" si="s" se="u" bb="E" p="3,3,EUX*,r1s,r2s|3,3,EU,r3s|3,2,EU,r3p|4,3,D,sf|3,2,EUIL,b1s,b2s,b3s,b3p|3,3,EUILLE*,A,h2s|3,2,EUIL,A,h2p" />
   <model mo="asseoir" id="4-9AB" ep="IS" si="s" se="i" bb="E" p="1,1,IED,r1s,r2s|1,1,IED*,r3s|0,1,Y,r1p,r2p,r3p,bA|4,3,IÉ,sf|2,2,S,xA,pp|1,1,OI,A,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|1,1,OY,A,r1p,r2p,b1p,b2p|5,2,S,A,sf" />
+  <model mo="seoir" id="4-9D" ep="IS" si="s" se="i" bb="E" p="1,1,IED,r1s,r2s|1,1,IED*,r3s|1,1,IÉ,r3p,b1s,b2s,b3s,b3p|0,1,Y,r1p,r2p,b1p,b2p|4,3,IÉ,sf|2,2,S,xA,pp" />
   <model mo="surseoir" id="4-9C" ep="IS" si="s" se="i" bb="E" p="2,2,S,xA,pp|1,1,OI,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|1,1,OY,r1p,r2p,b1p,b2p" />
   <model mo="avoir" id="4-10" ep="U" si="s" se="u" bb="E" sb="aY" p="1,1,I*,r1s|2,2,A,r2s|2,2,A*,r3s|2,2,Ont*,r3p|4,3,U,sf|2,2,E,xA|2,2,E,pp|1,1,Y,rr|1,1,I,b1s,b2s|1,1,IT*,b3s|1,1,Yons*,b1p|1,1,Yez*,b2p|1,1,I,b3p|1,1,aIE*,h2s|1,1,Y,h1p,h2p" />
   <model mo="choir" id="4-11A" ep="U" si="s" se="u" bb="E" p="0,2,OI,r1s,r2s,r3s,r3p,b1s,b2s,b3s,b3p|0,2,OY,r1p,r2p,b1p,b2p|3,2,ER,A,sf" dg="6" />
-  <model mo="échoir" id="4-11B" pa="4-11A" p="0,1,E,A,r3s|0,1,É,A,r3p" dg="11" />
-  <model mo="faillir" id="4-12" ep="U" si="e" se="i" bb="E" p="3,3,UX*,r1s,r2s|3,3,UT*,r3s|5,4,UD,A,sf" dg="13" />
+  <model mo="échoir" id="4-11B" pa="4-11A" p="0,1,E,A,r3s|0,1,É,A,r3p|2,2,É,rr" dg="11" />
+  <model mo="faillir" id="4-12" ep="i" si="e" se="i" bb="E" p="3,3,UX*,r1s,r2s|3,3,UT*,r3s|5,4,UD,A,sf" dg="13" />
   <model mo="rendre" id="5-1A" ep="u" si="r" se="i" bb="e" />
   <model mo="rompre" id="5-1B" pa="5-1A" p="0,1,T,r3s" />
   <model mo="foutre" id="5-1C" pa="5-1A" p="2,2,U,r1s,r2s" dg="14" />
@@ -66,7 +68,7 @@
   <model mo="battre" id="5-3" pa="5-1A" p="2,2,T,r1s,r2s,r3s" />
   <model mo="mettre" id="5-4" pa="5-3" p="3,3,,xA|3,3,IS*,pp" />
   <model mo="suivre" id="5-5" ep="I" si="s" se="i" bb="e" p="2,2,I,r1s,r2s,r3s" />
-  <model mo="vivre" id="5-6" ep="u" si="s" se="i" bb="e" p="2,2,I,r1s,r2s,r3s|2,2,ÉC,pp" />
+  <model mo="vivre" id="5-6" ep="u" si="s" se="u" bb="e" p="2,2,I,r1s,r2s,r3s|2,2,ÉC,xA,pp" />
   <model mo="écrire" id="5-7" ep="T" si="s" se="i" bb="e" p="0,1,V,r1p,r2p,r3p,xA,bA" />
   <model mo="dire" id="5-8A" ep="T" si="s" se="b" bb="e" p="0,1,S,r1p,r3p|1,1,ITES*,N,r2p|0,1,S,bA" />
   <model mo="prédire" id="5-8B" pa="5-8A" p="0,1,S,r2p" />
@@ -78,7 +80,8 @@
   <model mo="rire" id="5-11" ep="" si="s" se="b" bb="e" p="1,1,I,N,pp" />
   <model mo="frire" id="5-11A" pa="5-11" ep="T" />
   <model mo="plaindre" id="5-12" ep="T" si="s" se="i" bb="e" p="2,2,N,r1s,r2s,r3s,pp|2,2,GN,r1p,r2p,r3p,xA,bA" />
-  <model mo="absoudre" id="5-13" si="s" se="u" bb="e" p="2,2,U,r1s,r2s,r3s|2,2,LV,r1p,r2p,r3p,bA|2,2,L,xA|1,1,S*,pp" />
+  <model mo="absoudre" id="5-13" si="s" se="u" bb="e" p="2,2,U,r1s,r2s,r3s|2,2,LV,r1p,r2p,r3p,bA|2,2,L,xA|1,1,S*,N,pp" />
+  <model mo="résoudre" id="5-13A" pa="5-13" ep="u" p="2,2,L,pp" />
   <model mo="coudre" id="5-14" ep="u" si="s" se="i" bb="e" p="1,1,D*,r3s|1,1,S,r1p,r2p,r3p,xA,bA,pp" />
   <model mo="moudre" id="5-15" ep="u" si="s" se="u" bb="e" p="1,1,D*,r3s|1,1,L,r1p,r2p,r3p,xA,bA,pp" />
   <model mo="exclure" id="5-16A" ep="" si="s" se="b" bb="e" p="1,1,U,N,pp" />

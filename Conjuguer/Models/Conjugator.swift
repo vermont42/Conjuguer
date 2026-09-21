@@ -158,7 +158,14 @@ enum Conjugator {
       }
       return .success(composedConjugation(stems: stems, ending: ""))
     case .participePrésent:
-      return .success(stems[0] + Tense.participePrésentEnding)
+      // stems[0] can carry two alternates joined by the separator (asseoir → "asseY/assOY"),
+      // so the ending goes on each of them: appending once gave "asseY/assOYant".
+      return .success(
+        stems[0]
+          .components(separatedBy: Tense.alternateConjugationSeparator)
+          .map { $0 + Tense.participePrésentEnding }
+          .joined(separator: Tense.alternateConjugationSeparator)
+      )
     case .radicalFutur:
       return .success(composedConjugation(stems: stems, ending: ""))
     case .impératif(let personNumber):

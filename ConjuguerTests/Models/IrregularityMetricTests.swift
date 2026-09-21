@@ -55,8 +55,8 @@ struct IrregularityMetricTests {
     let regular = modelsByInfinitif.values.count { $0.allSatisfy { Self.regularModelIds.contains($0) } }
     let irregular = modelsByInfinitif.count - regular
 
-    #expect(regular == 5217, "Info text says 5,217 regular verbs; the data says \(regular).")
-    #expect(irregular == 1109, "Info text says 1,109 irregular verbs; the data says \(irregular).")
+    #expect(regular == 5210, "Info text says 5,210 regular verbs; the data says \(regular).")
+    #expect(irregular == 1116, "Info text says 1,116 irregular verbs; the data says \(irregular).")
     #expect(regular + irregular == Verb.rankCount)
   }
 }
