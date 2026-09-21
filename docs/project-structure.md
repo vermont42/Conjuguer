@@ -266,7 +266,10 @@ corpus/                         # Literature-example pipeline; NOT part of any t
 ├── json/                       # Built example files, copied into Conjuguer/Models/ to ship
 ├── working/                    # Index builders and their build products (build_corpus_index.py, build_classical_index.py, build_tail_index.py, build_literature_examples.py, build_chanson_examples.py,
 │                               # merge_classical.py, mine_examples.workflow.js, mine_classical.workflow.js), plus the verb pass's Stage 0 reference
-│                               # builders (build_wiktionary_reference.py and build_author_table.py; see prompts/verb-pass-plan.md)
+│                               # builders (build_wiktionary_reference.py and build_author_table.py) and its Stage 1 audits — verb_pass_lib.py (shared
+│                               # loader: verbs.xml with ranks, conjugations, both Wiktionary references, authors, defect groups), audit_conjugations.py,
+│                               # audit_flags.py, lint_glosses.py (+ gloss_lint_whitelist.txt), check_examples.py, build_candidates.py and
+│                               # build_verb_pass_shards.py, whose outputs land in the ignored working/verb_pass/ (see prompts/verb-pass-plan.md)
 └── grokked/                    # Intermediate per-source extraction output
 
 frequency/                      # Verb-frequency pipeline; NOT part of any target. See frequency/README.md

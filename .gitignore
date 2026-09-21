@@ -38,6 +38,17 @@ corpus/working/*
 # ignored: they are large, and re-running these scripts rebuilds any of them.
 !corpus/working/build_wiktionary_reference.py
 !corpus/working/build_author_table.py
+# Stage 1's six deterministic audits, their shared loader, and the hand-maintained whitelist
+# that keeps the unknown-word rule from reporting a century of ordinary English as suspect.
+# Their outputs live under corpus/working/verb_pass/ and stay ignored: re-running rebuilds them.
+!corpus/working/verb_pass_lib.py
+!corpus/working/audit_conjugations.py
+!corpus/working/audit_flags.py
+!corpus/working/lint_glosses.py
+!corpus/working/check_examples.py
+!corpus/working/build_candidates.py
+!corpus/working/build_verb_pass_shards.py
+!corpus/working/gloss_lint_whitelist.txt
 # authors_overrides.json is the exception: hand-checked corrections to the Wikidata
 # resolution, which nothing regenerates. Re-including one file inside an excluded directory
 # takes three lines, because git never descends into a directory it has already excluded.

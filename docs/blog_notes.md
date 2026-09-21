@@ -2730,3 +2730,338 @@ because it is already tracked, and a fresh clone would have been fine too, but t
 line was dead. Fixed with the missing newline.
 
 Nothing is committed. Full suite green: 258 tests in 23 suites.
+
+## Stage 1 of the verb pass: six deterministic audits, and what they found (2026-09-20)
+
+Stage 1 of `prompts/verb-pass-plan.md` is the half of the pass with no model in it. Six Python
+scripts read the Stage 0 reference data, diff it against the app, and write the shard files that
+are Stage 2's contract. Nothing here judges anything. It only piles up evidence, so that the
+subagents spend their turn on the questions that actually need judgment.
+
+The plan asked for five scripts. There are seven files, because five of the six read the same
+five inputs and each would otherwise have re-derived the verb list, the frequency ranks, the
+defect groups and the form normalization. `verb_pass_lib.py` holds those once.
+
+`build_verb_pass_shards.py` is the sixth script and the whole point of the other five: 181
+shards of 35 verb entries each, ordered by frequency rank, every one of the 6,330 entries in
+exactly one, each carrying its gloss, flags, existing example, both Wiktionaries' senses, its
+candidate sentences, its audit findings and its gloss provenance, all inline. 14.5 MB across the
+set, 80 KB per shard.
+
+### The ranks had to be recomputed, and one number in the plan was stale
+
+Nothing exports the frequency rank; `VerbParser.ranked(_:)` derives it at parse time and the
+app displays it. So `verb_pass_lib` reproduces it: group the entries by infinitif, order by the
+four raw corpus counts in the order (hi, hn, hl, hs) with a missing count sorting last, break
+ties on the infinitif under French collation. Three of the plan's four quoted ranks came back
+exactly — *mener* 103, *changer* 93, *intervenir* 194 — which is the check that matters, because
+those three fix the ordering through the middle of the list. The fourth did not: the plan calls
+*pouvoir* rank 10, and it is rank 4, behind *être*, *avoir* and *faire*. That is the pre-GLÀFF
+2021 export's number, left over in a sentence written before the August reranking. The top of
+the list is now être, avoir, faire, pouvoir, devoir, aller, voir, dire, mettre, permettre, which
+is what a French frequency list looks like.
+
+The earlier temptation was to validate the ranking against `corpus/working/forms.json`, which
+holds exactly the rank ≤ 1000 verbs. It disagreed by about twenty verbs in each direction, and
+that is right, because `forms.json` is a July file built against the 2021 ranks. A cross-check
+is only a cross-check when both sides are the same age.
+
+### 1.1, conjugations: the audit found six engine errors Stage A missed
+
+Diffing the engine's own dump against English Wiktionary's conjugation tables, after dropping
+the systematic differences, leaves **579 disagreements over 43 verbs**. The Stage A verbs are
+all gone from the list, which is the acceptance criterion. What is left includes real errors
+nobody had seen:
+
+- **vivre, survivre, revivre** (ranks 41, 697, 1203) conjugate the passé simple on the present
+  stem: *je vivis*, *nous vivîmes*. It is *je vécus*, *nous vécûmes*. Twelve wrong forms each.
+- **relever** (rank 152) sits on `1-1` and gives *je releve*, *je releverai*. It is *je relève*,
+  *je relèverai* — the *mener* bug exactly, one verb Stage A did not catch.
+- **sevrer** gives *je seère*. Not a missing alteration: a broken one.
+- **jauger** and **gamberger** give *je jaugais*, *je gambergais*, missing the *manger* e — the
+  *changer* bug, twice more.
+- **parfumer** is modeled `5-1A` and produces the imperative *parfums*.
+- **résoudre** gives the participe passé *résous* for *résolu*; **faillir** gives *faillu* for
+  *failli*; **bouillir** gives the imperative *bouille* for *bous*; **luire** and **reluire**
+  give *luisit* for *luit*; **éclore**, **enclore**, **forclore** and **déclore** drop the
+  circumflex of *éclôt*; **échoir** gives *échoyant* for *échéant*; **amuïr** drops the
+  diaeresis throughout.
+
+Two classes of difference are not errors and had to be told apart from them. The first is the
+**-eler/-eter split**: the app spells *déchiquetterais*, *ruissellerais*, *cachetterais* the
+traditional way and Wiktionary gives the grave-accent spelling the 1990 rectifications made the
+recommendation for every verb of the family except *appeler*, *jeter* and their compounds. Both
+are current French. That is 252 of the 579 rows, across twelve verbs, and labelling them
+`wrong_model` would have buried everything above. They get their own `kind`,
+`eler_eter_doubling`, which is a sixth value the plan's vocabulary did not have. Which spelling
+the app should ship is a decision for the pass, not for a diff. (*briqueter* is not in that
+group: Wiktionary offers *both* spellings and the app's `1-1` matches neither, so it is a real
+model error.)
+
+The second is the **defect groups**. Comparing an app form against a Wiktionary form on a tense
+the verb's paradigm marks unused is noise, so `verb_pass_lib` decodes `defectGroups.xml` the way
+`DefectGroup.init` does — the `uo`/`du` shorthands, `rA`/`iA`/`pp`/`h2p` and the rest — and the
+72 rows that land on an unused tense are labelled `defective_gap` rather than counted as engine
+bugs.
+
+Getting to 579 took two passes. The first reported 1,455 rows over 74 verbs, and a third of them
+were pronominal verbs whose Wiktionary table carries the pronoun: *m'abstiendrais* against the
+app's *abstiendrais*. The plan anticipated the reflexive rows, but wiktextract only tags a table
+`reflexive` when the verb *also* has a plain conjugation. A verb Wiktionary treats as
+pronominal-only conjugates its whole table with the pronoun attached and no tag at all. Stripping
+the pronoun from every row rather than from the tagged ones cut 876 phantom disagreements.
+
+### 1.2, flags: 33 pronominal candidates, and an aspirated h the reference could not see
+
+**196 verbs** disagree on a flag: 149 pronominal, 45 defective, 3 aspirated h, 1 auxiliary.
+
+The pronominal count splits cleanly. **33** are verbs Wiktionary treats as pronominal-only that
+carry no `re` — *s'effondrer*, *s'évaporer*, *s'attabler*, *s'arroger*, *se lamenter*,
+*se prosterner*, *se recroqueviller*, and the plan predicted 32 of them. The other 116 run the
+other way: the app marks `re` where at least one Wiktionary sense is not pronominal, which is
+the population Stage 2's task 4 has to adjudicate sense by sense.
+
+Only one auxiliary disagreement survives, *débrayer*, and that is the right answer rather than a
+thin one: Stage A already applied the seventeen. But the first run reported fifteen, including
+*monter*, *descendre*, *partir*, *sortir*, *tomber*, *rentrer* and *retourner* — the canonical
+être verbs, reported as avoir. The cause is that a verb taking either auxiliary by sense carries
+**both** compound-tense rows in the extract, and the avoir one comes first. Reading the first row
+turns decision 4 (one auxiliary per entry, the one the gloss leads with) into fourteen errors.
+Reading every row and standing down when both appear leaves the one real finding.
+
+The aspirated-h check could not be done from the Stage 0 reference at all. wiktextract files
+"French terms with aspirated h" and "French terms with mute h" as **sense** categories, and
+`build_wiktionary_reference.py` keeps only the **entry**-level `categories`, which the English
+edition leaves null for essentially every verb: 22 entries out of 5,560 carry any, and those 22
+are topical ("Sound", "Clothing"). Rather than rebuild the 20-minute reference for one flag,
+`audit_flags.py` makes one pass over the raw English dump for the h-initial verbs and caches the
+answer in `h_classes.json`; when the raw dump is gone it reports the check as unavailable rather
+than silently finding nothing. Three disagreements, against the plan's estimate of two, and one
+of them is an internal inconsistency worth the trip: *haïr (France)* carries `ah="t"` and
+*haïr (Québec)* does not, though aspiration is a property of the word and not of which
+conjugation model a dialect uses.
+
+### 1.3, glosses: 1,138 flagged, and a provenance split that will not reproduce exactly
+
+**1,138 of 6,330 glosses** carry at least one lint hit: 665 definition-like, 284 duplicated
+across verbs, 254 sharing no content word with any English sense, 73 unknown words, 9 British
+spellings, and one each of the four singletons — including the two the plan named as the
+acceptance check, *dissimuler* ("conceal, conceal, dissimulate") and *emboucher* (a straight
+apostrophe).
+
+Two rules had to be rebuilt after seeing their output. The generative British-spelling rules
+were nonsense: stripping `-our` to `-or` turns *four* into *for*, and `-re` to `-er` turns
+*shore* into *shoer* and *where* into *wheer*. Twelve of the first run's twenty-one hits were
+that. British `-our` and `-re` words are a closed set of about fifty, so they are now a table,
+and the nine survivors are all real (*mould* five times, *fulfil*, *judgement*, *moulder*,
+*practise*). The `-ise` rule keeps its generative form but now requires the `-ize` spelling to
+exist *and* the `-ise` spelling not to, so *promise* and *exercise* stop being British.
+
+The unknown-word rule needed a whitelist, as the plan said it would, but for a reason the plan
+did not name: `/usr/share/dict/words` on macOS is Webster's 1934. It has no *blog*, no *email*,
+no *download*, no *privatize*, and no inflected forms at all, so the first run reported 674
+distinct unknown tokens of which the commonest was *one's*. Morphological back-off through the
+regular inflections, stripping possessives, and a 296-line whitelist of modern English and
+proper nouns brings it to 73, and those 73 are worth reading: *someting*, *stupify*,
+*jewelery*, *ornement*, *æquivocate*, and three French words that leaked into English glosses
+(*souffrir*, *tuteur*, *vous*).
+
+The provenance classification is the one number in Stage 1 that does not reproduce the plan's.
+The plan quotes 4,581 all-verbatim / 463 some / 516 none / 763 no-English-entry / 3 none-at-all,
+and points at `gloss_provenance_2026-09-20.json` as the run of record. My reimplementation gives
+**4,606 / 445 / 513 / 763 / 3** — the same shape, within 25 in every class, but differing on 296
+individual verbs, all of them at the boundary between adjacent classes. The probe that produced
+the recorded file was deleted at the end of Stage 0, as Stage 0.1 says to do, so its exact
+matcher is not recoverable. What I could recover from its output is the shape of the match it
+must have used: the record calls *abdiquer* ("abdicate" against "to abdicate (one's powers)"),
+*abouler* ("roll along" against "to roll along a surface") and *acculer* ("corner" against "to
+corner someone") verbatim, so a gloss sense counts as copied when an English sense *starts with*
+it at a word boundary, not only when it equals it. With that rule the counts land within 25;
+without it they land 750 away. I left the computation in the script rather than reading the
+class out of the recorded file, because a script that can be re-run is worth more than a number
+that matches a deleted probe, and because the only thing the class decides is which of two
+adjacent judging instructions a borderline verb gets. 4,492 of the all-verbatim glosses lead
+with the English entry's first sense and 114 do not; 26 are built only from senses tagged
+dialectal, dated, rare or slang while a plain sense exists. The plan's figures were 4,484 and
+47.
+
+### 1.4, examples: the two broken ones, and twelve that only looked broken
+
+**4 of 1,141 examples fail**, and the two the plan named are among them: *envisager* and
+*représenter* both carry a sentence with no form of the verb in it, the neighbour of the one
+that had the hit. *repérer* fails too, as a consequence: it shares *représenter*'s sentence, so
+the shared-sentence check catches the same defect from the other side. The fourth is *faillir*,
+whose token *failli* is not a form of the verb **according to the app**, because the app
+conjugates the participe passé as *faillu*. That is 1.1's finding arriving through a second
+door, and it is the sort of agreement between two independent checks that makes both more
+believable.
+
+The first run reported sixteen. Twelve were the check's fault, in three ways. A mined token often
+carries the reflexive pronoun (*s'adressait*, *s'affaiblissait*, *s'isolèrent*) — the right thing
+to highlight in the sentence, not a form of the verb, so it is stripped before the test. The
+corpus files use the typographic apostrophe and the examples file sometimes the straight one, so
+both are normalized. And `line` points at where the *sentence* starts, not where the token lands:
+*déguerpir*'s Molière line 15751 begins a sentence that hard-wraps, and *déguerpisse* is on
+15753. The check now searches a small window from the recorded line and counts the near misses
+separately (there are two) rather than calling them failures. Finally, three example keys —
+*haïr*, *ouïr*, *saillir* — are bare infinitives where the verb entries carry extra letters.
+That is not a bug: `ExampleData.example(for:)` looks up the id and then falls back to the bare
+infinitif, so one key serves both *haïr (France)* and *haïr (Québec)*. The check resolves keys
+the same way the app does.
+
+### 1.5, candidates: 14,345 sentences for 5,271 verbs, and 1,776 with nothing
+
+**5,271 verb entries** need an example — the 5,186 with none plus the 84 Claude-authored ones,
+give or take the entries that share an infinitive. They got **9,855 corpus sentences, 3,771
+public-domain Wiktionary quotations and 719 translated English-Wiktionary examples**. 2,834
+verbs have at least one corpus hit (the plan estimated 2,752) and 2,102 have at least one usable
+quotation. That last number is lower than Stage 0's 2,338, and should be: Stage 0 counted verbs
+with *any* public-domain quotation, while a candidate must also be a complete sentence with no
+elision, no editorial parenthesis, and under 350 characters.
+
+**1,776 verbs have no candidate at all** and will need an authored sentence. That is the real
+size of the writing task, and it is a third of what `prompts/verb_pass.md` originally assumed,
+which was the point of building the retrieval half first.
+
+### 1.6, the shards, and a pilot that had to be restratified
+
+The contract validates: 181 shards, all 6,330 entries present, each in exactly one shard, ranks
+monotonic across files, every record carrying exactly the fourteen contract keys, every
+candidate one of the three kinds. One field the contract names but does not define is
+`author_needed`; it is set when the verb has no example and no candidate was found for it, so it
+is exactly the 1,776.
+
+The pilot needed rebuilding once. Built as the plan describes — canaries plus filler — it came
+out as the top 105 verbs by rank, because every canary the plan names is a common verb. Those
+verbs nearly all have examples already, so the pilot would have exercised the gloss task
+thoroughly and the example-selection task barely at all. It now draws from three bands (ranks
+1–35, 2000–2035, 5000–5035), one shard each, so a checking model meets a common verb with a full
+English entry, a middle verb with a thin one, and a tail verb with no English entry at all. The
+twelve canaries: five broken glosses (three swapped with another verb's sense, two misspelled),
+the two examples with no verb in them, three candidate lists cut down to same-spelled nouns
+(*pincer*, *neiger*, *doucher* — chosen by filtering on `build_tail_index.verbalness` scoring the
+colliding present-stem form zero), and two quotations by authors who died after 1930
+(*enthousiasmer*, *éprendre*). The homograph and post-1930 canaries are attached only to verbs
+that actually need an example, since selecting one is the task they test.
+
+Nothing is committed. `scripts/check_docs.py` is clean, and `git status` shows the eight new
+tracked files, the `.gitignore` whitelist, `docs/project-structure.md`, this journal and the
+plan.
+
+## Stage A2 and decision 6 go into the plan (2026-09-20)
+
+Reviewing the plan after Stage 1 turned up a gap worth more than the fifteen minutes it took to
+find. Stage 1.1 produced 579 conjugation disagreements over 43 verbs, among them six real engine
+errors, and the plan had nowhere to put them. The Stage 2 result contract is
+`{ id, gloss, example, new_example, flags, notes }`. There is no conjugation field.
+`build_skeptic_shards.py` gathers "every note", so a finding could ride along as free text, but it
+would get no structured verdict, no band in `approvals.json`, and no applier: Stage 4's
+`apply_verb_pass.py` edits `verbs.xml` as text and never touches `verbModels.xml`, which is where
+several of these fixes have to land.
+
+Threading a sixth task through four stages for 43 verbs would be the expensive way to fix that.
+Stage A2 is the cheap way, and it has Stage A's own argument behind it: the pass should verify
+against a correct engine. So A2 sits between Stage 1 and Stage 2, does the twenty verbs that need
+doing, and re-runs Stage 1 afterwards.
+
+That re-run is the part that decides the ordering. `conjugations.json` is the engine's own output,
+and everything else in Stage 1 derives from it: the tier candidates are found by looking corpus
+tokens up in it, and `check_examples` tests each shipped token against it. Fix a model and that
+dump is stale, so the shards are stale. Thirty seconds of rebuild, but it has to happen before
+6,326 verbs get judged and not after. The pilot is a different matter. I checked, and none of the
+43 verbs is in a pilot shard, which is not luck so much as arithmetic: the pilot draws ranks 1–35,
+2000–2035 and 5000–5028, and the affected verbs fall between. The pilot measures the model, not
+the data, so it can run whenever.
+
+Writing A2 meant reading the model definitions rather than trusting the audit's `kind` guesses,
+and the reading changed the shape of the stage. `5-6` (vivre) already carries the *véc-* stem
+alteration; it just applies it to the participe passé alone, so the passé simple and subjonctif
+imparfait are built on *viv-*. `1-4` (peser) replaces the character two from the end, which is
+right for *pes-* and wrong for *sevr-*, where the *e* is three from the end behind a consonant
+cluster. That is why *sevrer* comes out *seère* rather than merely unaltered. `5-13` (absoudre)
+is not broken at all: *absous* verifies correct, and it is *résoudre* that needs its own model for
+*résolu*. And `parfumer`, at rank 1151, is modeled `5-1A`, which is *rendre*, so the app currently
+conjugates *je parfums*, *parfumu*, *il parfumit*. That one is not a subtlety.
+
+So the 43 split four ways: seven plain `mo` errors in `verbs.xml`, seven verbs behind five
+definition errors in `verbModels.xml`, eight that need a judgement rather than a fix (*faillir*'s
+*failli* against *faillu*, *luire*'s *luit* against *luisit*, *seoir* and *messeoir* generally),
+and the rest either decision 6 or noise the audit predicts by construction. The acceptance
+criterion is that every one of the 43 has a verdict, so I checked the section names all 43 rather
+than assuming it; three defective verbs (*issir*, *gésir*, *bruire*) were covered only by a
+blanket sentence and are now named, because a blanket sentence is not a verdict you can audit.
+
+Decision 6 is the -eler/-eter spelling, and it is Josh's. The app spells twelve verbs the
+traditional way (*déchiquette*, *ruissellerai*) and Wiktionary gives the 1990 grave-accent
+spelling (*déchiquète*, *ruissèlerai*). Both are current; the Académie endorses both; the
+rectifications kept the doubling for *appeler*, *jeter* and their compounds, which is exactly what
+models `1-3A` and `1-3B` are named for. 252 of the audit's 579 rows are this one question. I wrote
+three options with their costs and recommended adopting the rectified spelling for the twelve,
+because it agrees with the reference the whole pass is built on and because the app already ships
+the rectified *éclot* where Wiktionary gives *éclôt*. That mirror case matters more than it looks:
+answering one and not the other leaves the app inconsistent with itself, which is worse than
+either answer.
+
+One correction to yesterday's entry and to the Stage 1 note in the plan. I wrote that the
+-eler/-eter class covered nineteen verbs. It covers twelve: 252 rows at 21 rows a verb. Both are
+fixed. *déficeler* and *briqueter* look like they belong to the class and do not. The app has
+them on `1-1`, so it spells them neither way, and they need a model whichever way decision 6 goes.
+
+Nothing is committed. `scripts/check_docs.py` is clean.
+
+## Decision 6 taken: the rectified spelling (2026-09-20)
+
+Josh took decision 6 the day it was written: adopt the 1990 rectified spelling for the twelve
+-eler/-eter verbs. Recording it turned out to be worth more than a checkmark, because the obvious
+question is what the twelve move *to*, and the answer is better than the plan guessed.
+
+They move to `1-4`, which is *peser*, which is the model *mener* moved to in Stage A and the model
+*relever* is about to move to in A2. Its alterations are `2,1,È` on the present stem and `4,1,È`
+on the futur stem: replace one character, two from the end and four from the end. Simulating that
+against all twelve plus *déficeler* and *briqueter* reproduces English Wiktionary's forms exactly,
+every one of the fourteen. *il déchiquète* / *je déchiquèterai*, *il ruissèle* / *je ruissèlerai*,
+*il markète* / *je markèterai*, through to *bêchevète*. So decision 6 costs fourteen one-line `mo`
+edits and no new model at all.
+
+I got the simulation wrong the first time in a way worth writing down, because it is the kind of
+error that looks like a finding. I took the futur stem to be the infinitive minus its *r* and
+counted four characters back from there, which produced *je déchiqèeterai* and twelve other
+monsters. For a `1-1` child the futur stem is the whole infinitive: *peser* → *pèser* → *pèserai*.
+Counting from the right end of the wrong string gives garbage that is plausible enough to
+screenshot. The corrected run matches Wiktionary on all fourteen, and the check is in the plan so
+the A2 session can re-run it rather than take my word.
+
+The nice consequence is what it leaves behind. `1-3A` is named *appeler* and `1-3B` is named
+*jeter*, and after A2 those two models should hold *appeler*, *jeter* and their compounds and
+nothing else, which is exactly the set the rectifications exempted. A model named for a verb
+ought to contain that verb's family. The plan now asks the A2 session to verify that and to
+report anything left behind, because a verb still sitting on `1-3B` afterwards is either a
+thirteenth member of this class the English extract did not cover or a verb the extract got wrong.
+Either is worth knowing.
+
+Decision 6 also settles the mirror case by itself. *éclore*, *enclore*, *déclore* and *forclore*
+already ship the rectified *éclot* where Wiktionary gives the traditional *éclôt*, so the answer
+there is no change, and after A2 the app is on the same side of the 1990 reform in both halves
+of it. That was the argument for picking rectified in the first place, and it is now true rather
+than aspirational.
+
+Folding the decision through A2 shook out three things I had written carelessly. *amuïr* was in
+the model-definition table, which was wrong: it sits on `2-1`, and `2-1` is right for a thousand
+other -ir verbs, so losing the diaeresis is a verb error and belongs in the `mo` table. Its likely
+target is `2-3B`, the Québec *haïr* model, because that is the variant keeping the diaeresis
+throughout, where `2-3A` drops it for *je hais*. That asymmetry is visible in the audit itself:
+*haïr (France)* is absent from it and *haïr (Québec)* is in it.
+
+Second, the regular/irregular arithmetic is smaller than it looks. Only three model ids count as
+regular — `1-1`, `2-1` and `5-1A` — so decision 6's twelve, moving `1-3A`/`1-3B` → `1-4`, are
+irregular to irregular and change nothing. Neither does *parfumer*, which moves `5-1A` → `1-1`,
+regular to regular, despite being the most broken verb in the set. The seven that do move the
+split are the ones leaving `1-1` or `2-1`.
+
+Third, I had written that A2's real work was "the twenty verbs in A2.1 and A2.2", which was never
+true and was not true after the shuffle either. Counted properly: 8 plain `mo` errors, 12
+decision-6 edits, 6 verbs behind 4 definition errors, 8 needing a judgement, 9 that are the app
+being right or moot by construction. That is 43, and the plan now states the split so the A2
+session can check itself against it rather than against a round number I liked the sound of.
+
+Nothing is committed.
