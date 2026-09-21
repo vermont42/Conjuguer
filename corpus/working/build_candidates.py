@@ -36,7 +36,10 @@ MAX_TIER = 5
 MAX_WIKTIONNAIRE = 5
 MAX_ENGLISH = 2
 MAX_SENTENCE = 350
-CONTEXT_LINES = 2
+# Enough lines either way to hold any sentence under MAX_SENTENCE in a hard-wrapped
+# Gutenberg text (about 70 characters a line). A sentence that reaches the edge of this window
+# without meeting a blank line is longer than that, so it is dropped rather than cut.
+CONTEXT_LINES = 8
 SENTENCE_END = ".!?…"
 AUTHORED_PREFIX = "Claude"
 ELIDED = re.compile(r"\[[^\]]*\]|\(\s*…\s*\)|…\s*\]")
@@ -105,9 +108,20 @@ def clean_tier_sentence(sentence):
 
 
 def sentence_around(lines, line_number, token):
-    """The sentence holding `token` on `lines[line_number]`, expanded up to CONTEXT_LINES away."""
-    low = max(0, line_number - CONTEXT_LINES)
-    high = min(len(lines), line_number + CONTEXT_LINES + 1)
+    """The sentence holding `token` on `lines[line_number]`, within its paragraph.
+
+    The block runs out to a blank line, or CONTEXT_LINES away, whichever is nearer. A sentence
+    whose start or end is only the edge of that window, not a blank line or the file's edge, is
+    cut off mid-sentence: an earlier version kept those, and a checker handed one completed it.
+    """
+    low = line_number
+    while low > 0 and line_number - low < CONTEXT_LINES and lines[low - 1].strip():
+        low -= 1
+    high = line_number + 1
+    while high < len(lines) and high - line_number <= CONTEXT_LINES and lines[high].strip():
+        high += 1
+    open_start = low > 0 and bool(lines[low - 1].strip())
+    open_end = high < len(lines) and bool(lines[high].strip())
     offsets, block = [], ""
     for index in range(low, high):
         offsets.append((index, len(block)))
@@ -119,16 +133,24 @@ def sentence_around(lines, line_number, token):
     if position < 0:
         return None
 
-    start = 0
+    start = None
     for index in range(position - 1, -1, -1):
         if block[index] in SENTENCE_END:
             start = index + 1
             break
-    end = len(block)
+    if start is None:
+        if open_start:
+            return None
+        start = 0
+    end = None
     for index in range(position + len(token), len(block)):
         if block[index] in SENTENCE_END:
             end = index + 1
             break
+    if end is None:
+        if open_end:
+            return None
+        end = len(block)
     sentence = clean_tier_sentence(" ".join(block[start:end].split()))
     if not sentence or token not in sentence.lower():
         return None

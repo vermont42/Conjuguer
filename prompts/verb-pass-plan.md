@@ -7,7 +7,10 @@ engine errors with no route through Stages 2–4. Josh took decision 6 on
 Sonnet 5, Haiku 4.5 and Opus 5; Sonnet 5 and Opus 5 passed, Haiku 4.5 failed on provenance, and
 decision 5 stands: **Sonnet 5 for the shards, Opus 5 for the skeptic pass**. Stage 2 started on
 2026-09-20: batch 1 (shards 1–40, 1,400 verbs) ran and validated, and Josh then paused the run.
-Shards 41–181 are pending; `validate_verb_pass.py --pending` prints them.
+It resumed on 2026-09-21: batches 2–4 (shards 41–159) ran and validated, and Josh stopped there
+to stay inside the usage window. Shards 160–181 are pending; `validate_verb_pass.py --pending`
+prints them. Between batches 3 and 4, `build_candidates.py` was fixed to stop truncating long
+corpus sentences and the shards were rebuilt (see the Stage 2 correction of 2026-09-21).
 Josh approved the five decisions on 2026-09-20; they are recorded in the last section and
 folded into the stages below. Apart from Stages A and 0, nothing has run yet except the
 measurements. Every number here was computed on 2026-09-20 against
@@ -30,8 +33,8 @@ pilot**: none of its 43 verbs is in a pilot shard, and the pilot measures the mo
 It does block Stage 2's full run.
 
 **Progress** (implementers update this line): Stage A ✅ 2026-09-20 · Stage 0 ✅ 2026-09-20 ·
-Stage 1 ✅ 2026-09-20 · Stage A2 ✅ 2026-09-20 · Pilot ✅ 2026-09-20 · Stage 2 ☐ (40 of 181
-shards, paused by Josh 2026-09-20) · Stage 3 ☐ ·
+Stage 1 ✅ 2026-09-20 · Stage A2 ✅ 2026-09-20 · Pilot ✅ 2026-09-20 · Stage 2 ☐ (159 of 181
+shards; paused by Josh 2026-09-20, resumed and stopped by him 2026-09-21) · Stage 3 ☐ ·
 Stage 4 ☐
 
 ## How implementers keep this plan honest
@@ -589,6 +592,9 @@ makes one pass over the raw English dump for the h-initial verbs and caches
 finding nothing. Three disagreements, not two, and one is an internal inconsistency: *haïr (France)*
 carries `ah="t"` and *haïr (Québec)* does not, though aspiration is a property of the word.
 
+**Correction (2026-09-21):** the `re` evidence string claimed "no sense tagged pronominal" where
+the test was "not every sense". Reworded mid-Stage 2; see the Stage 2 correction of the same date.
+
 ### 1.3 `lint_glosses.py`
 
 Against the house style (decision 3): duplicate senses within a gloss; a straight
@@ -695,6 +701,10 @@ and will need an authored sentence; that is the real size of the writing task. T
 `build_corpus_index`'s tokenizer and Gutenberg gating, `build_tail_index.verbalness` for the
 ranking, and `build_author_table.author_of` for the reference parsing, so the retrieval behaves the
 way the mining pipeline already does.
+
+**Correction (2026-09-21):** the corpus sentence window was two lines each way and cut any longer
+sentence at the window's edge. Fixed and rebuilt mid-Stage 2; see the Stage 2 correction of the
+same date.
 
 ### 1.6 `build_verb_pass_shards.py` and the shard contract
 
@@ -1307,6 +1317,12 @@ ten agents; the prompt above states the scale, and `/config` ("Dynamic workflow 
 raise the guideline instead. A shard whose agent returns `null` or writes an invalid file is
 re-queued; results are files, so nothing is lost to a crash.
 
+**Correction (2026-09-21):** "a few minutes" per batch of 40 was optimistic. Batches 2, 3 and 4
+took 35, 29 and 29 minutes of wall clock, and 4.3M, 3.6M and 2.9M subagent tokens. The cost falls
+down the list because tail verbs carry shorter evidence. On Josh's subscription the session had
+used 44% of a five-hour usage window partway through batch 3, so plan on two or three batches
+per window, not all of Stage 2.
+
 ### The per-verb task list
 
 This is the contract the pilot turns into the agent definition's rules and the workflow's
@@ -1405,6 +1421,63 @@ match the cleaned candidate exactly. The five left are *synthétiser* and *licen
 edits above), *baigner* (a heading with no `==` markup, which no pattern can tell from prose),
 and *raser* and *gazer*, where the checker fixed the source's own typography (a space before a
 comma, a lower-case initial) on a Wiktionary sentence.
+
+**Progress (2026-09-21): partial, 159 of 181 shards.** The run resumed with batch 2 (shards
+41–80), batch 3 (shard 77 again, then 81–119) and batch 4 (120–159), all on Sonnet 5. Every one
+of the 120 agents returned a summary with `context_check` false. One file failed validation:
+shard 77 held 32 of 35 verbs (*épandre*, *subjuguer* and *repositionner* missing), and its re-run
+in batch 3 was valid. After batch 4, 159 files validate with 5,565 verbs. Josh stopped the run
+there, so shards 160–181 (770 verbs) are pending. The cumulative verdict counts are in the
+journal entry of 2026-09-21. To resume, run `validate_verb_pass.py --pending` and launch the
+workflow over the 22 shards it prints.
+
+**Correction (2026-09-21):** the per-shard count check in the prompt does not catch a short read.
+The shard 77 agent was told to count the verbs before and after, and it returned `verbs: 32`
+with a note saying "all 32 verbs judged". It counted what it had read, not what the file held.
+Only `validate_verb_pass.py`, which compares against the shard itself, caught the gap. Treat the
+agent's `verbs` field as a claim, never as the check.
+
+**Correction (2026-09-21, fixed between batches 3 and 4):** Stage 1.5 truncated long corpus
+sentences, a defect much bigger than the heading and footnote noise fixed on 2026-09-20.
+`sentence_around` looked only `CONTEXT_LINES = 2` lines either side of the token and treated the
+window's edge as a sentence boundary. In a hard-wrapped Gutenberg text a sentence longer than
+five lines was silently cut, so a candidate could start or end mid-clause. It came to light in
+*faner* (shard 65): the checker chose a Flaubert candidate that ended at "…laisser sonner" and
+returned the whole sentence, "…sonner les cloches, pour se pendre…", still citing line 317. The
+completion is verbatim Flaubert (lines 316–321), but it was not in the shard. The fix: the window
+now runs out to the paragraph's blank lines, up to `CONTEXT_LINES = 8` either way, and a sentence
+whose boundary is only the window's edge is dropped instead of cut. Truncated-looking tier
+candidates fell from 2,645 to 717. Those left are a separate, older problem the checkers already
+reject: dialogue split at an inner `!` or `?`, list items and headings. Tier candidates went from
+9,827 to 9,348, verbs with no candidate from 1,777 to 1,823, and `author_needed` from 1,766 to
+1,811. Shards were rebuilt after batch 3, when no agent was reading them. Membership did not
+move; `candidates` changed in 1,693 verbs and `author_needed` in 51 of them. The 119 shards
+already run still validate, but their picks were made from the old lists, and 41 of them are now
+provenance warnings because they matched an old, usually truncated, candidate that no longer
+exists. Shards 120 onward ran on the rebuilt lists. Stage 3 receives those 41 with the other
+warnings. Re-running shards 1–119 on the clean lists is possible, but it would cost about three
+batches to fix 41 verbs.
+
+**Correction (2026-09-21):** "copy a chosen sentence's French verbatim" collides with "one
+complete clean sentence" whenever a Wiktionnaire quotation holds several sentences. The checker
+then keeps one sentence and drops the others (*mûrir*, *récapituler*, *enlacer*, *saccager*,
+*avantager*, *guéer*, *disséquer*, *asséner*), and the validator reports it as a provenance
+warning. That is an excerpt, not a rewrite. Two edits in batch 2 were more than that: *monder*
+kept a subordinate clause of a Theuriet sentence and capitalized it, and *annoter* removed two
+parentheticals from a report sentence. Stage 3 should treat a one-sentence excerpt as acceptable
+and a trimmed sentence as a provenance error. The validator does not yet tell the two apart.
+
+**Correction (2026-09-21, fixed after batch 4):** `audit_flags.py` (1.2) worded its `re`
+evidence wrongly for an app entry marked pronominal-only whose references have some plain
+senses. It said "no sense tagged pronominal in either edition" when the test it ran was "not every
+sense is tagged pronominal". The logic was right and the sentence was false, and checkers kept
+saying so: *infiltrer*, *originer*, *adonner*, *magner*, *moucher*, *droguer*, *désertifier*,
+*chicaner*, *dévergonder* and *autocensurer* all carry a note that the audit's evidence
+contradicts the senses in the same record. Most then judged `app_correct` for the right reason
+anyway. The string now reads "neither edition tags every sense pronominal (some senses may be;
+the app's entry is pronominal-only)". Stage 1.2 and the shards were rebuilt. Only `audits`
+changed, in 116 verbs; the 159 finished files still validate. Stage 3 should read these checker
+notes as a comment on the audit wording, not on the verb.
 
 ## Stage 3: skeptic pass and report
 

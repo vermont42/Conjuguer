@@ -3445,3 +3445,90 @@ heading written as plain text that no pattern can separate from prose (*baigner*
 Wiktionary sentences whose typography the checker corrected (*raser*, *gazer*). Those five go
 to Stage 3. The pilot shards were left alone, so the pilot's record still describes what the
 three models actually saw.
+
+## Stage 2 resumed: 159 of 181 shards, and two defects found upstream (2026-09-21)
+
+The verb pass resumed where Josh paused it the day before, at shard 41. The preconditions held.
+The shards were newer than `conjugations.json`, and `verb-checker` resolved as an agent type. So
+the session went straight to `validate_verb_pass.py --pending` and launched batch 2, shards
+41–80, on Sonnet 5.
+
+Batch 2 ran all 40 agents to completion. One file failed validation: shard 77 held 32 of its 35
+verbs, missing *épandre*, *subjuguer* and *repositionner*. This is the silent short read the pilot
+warned about. What's new is that the agent's own count didn't catch it. The prompt tells each
+agent to count the verbs before it starts and again at the end, and this one did. It returned
+`verbs: 32` and a note saying all 32 had been judged. It counted what it had read, not what the
+file held. The validator compares each result against the shard itself, and that was the only
+thing that noticed. Shard 77 went back into batch 3 and came out whole.
+
+The batch 2 warnings pointed at a bigger problem. Batch 1 had left five provenance warnings after
+yesterday's candidate cleaning. Batch 2 added 22, and they sorted into three groups. The largest
+was harmless. A Wiktionnaire quotation often runs two or three sentences, the prompt asks for
+"one complete clean sentence", and the checker kept one. Then came typography: an underscore
+italic removed, a `--` turned into a dash. Two were real trims, *monder* keeping a subordinate
+clause of a Theuriet sentence and *annoter* dropping two parentheticals from a report. The third
+group was a single verb, *faner*. The checker had chosen a Flaubert candidate that stopped
+mid-clause at "…suppliait le bedeau de lui laisser sonner", and returned the whole sentence, "…sonner
+les cloches, pour se pendre de tout son corps à la grande corde et se sentir emporter par elle dans
+sa volée." Lines 316 to 321 of the Gutenberg text confirm the completion is verbatim Flaubert, but
+none of it was in the shard.
+
+The cause was in `build_candidates.py`. `sentence_around` looked two lines either side of the
+token and treated the edge of that window as a sentence boundary. Gutenberg texts are hard-wrapped
+at about seventy characters, so any sentence longer than five lines was cut, silently, at one end
+or both. A crude check (a candidate that starts lower-case or ends without terminal punctuation)
+found 2,645 of the 9,827 tier candidates looking truncated, about one in four. The fix widens the
+window to the paragraph, bounded by blank lines, up to eight lines either way. That is enough for
+any sentence under the 350-character cap. A sentence whose boundary is still only the window's
+edge is dropped rather than cut. Truncated-looking candidates fell to 717. What remains is an
+older, different problem: dialogue split at an inner exclamation mark ("…! s’exclama son mari"),
+list items, and headings. The checkers already reject those as fragments. Tier candidates fell to
+9,348, and 46 more verbs now have no candidate at all, because their only hits had been fragments.
+`author_needed` rose from 1,766 to 1,811.
+
+Josh asked for the fix "when appropriate". The appropriate moment was between batches, because
+rebuilding the shards rewrites every file and batch 3's agents were reading them. So the code
+changed during batch 3, `candidates.json` was regenerated to measure the effect, and the shards
+were rebuilt only once batch 3 had finished. Membership did not move: `candidates` changed in
+1,693 verbs, and the 119 finished shards still validated. Their picks, though, were made from the
+old lists. Forty-one of them now show up as provenance warnings, because they match an old
+candidate, usually a truncated one, that no longer exists. They go to Stage 3 with the rest.
+Re-running shards 1–119 on the clean lists would cost about three batches to repair 41 verbs,
+which is Josh's call, not the pipeline's. Batch 4 (shards 120–159) ran on the rebuilt lists and
+produced 14 warnings in 1,400 verbs, against 89 in the 2,765 verbs of batches 2 and 3.
+
+The second upstream defect was a sentence, not a bug. Checker after checker (*infiltrer*,
+*originer*, *adonner*, *magner*, *moucher*, *droguer*, *désertifier*, *chicaner*, *dévergonder*,
+*autocensurer*) noted that Stage 1's pronominal audit contradicted the evidence in the same
+record. The audit said "no sense tagged pronominal in either edition" while a pronominal sense sat
+a few lines below. `audit_flags.py` was right about what it tested, which was whether *every*
+sense is pronominal, since the app's `re` flag means pronominal-only. Its evidence string said
+something stronger. It now says "neither edition tags every sense pronominal (some senses may
+be; the app's entry is pronominal-only)". Stage 1.2 and the shards were rebuilt again, touching
+only `audits` in 116 verbs. The checkers mostly reached `app_correct` anyway, for the right
+reason, which says something good about them and something bad about the sentence.
+
+One engine-bug note came back too. The *gésir* checker flagged garbled passé simple forms (*Jus*,
+*Jut*, *gÉÜ*). Those rows are already recorded in A2.4 as `defective_gap`: defect group 17 hides
+every tense but the présent, the imparfait and the participe présent, so no learner sees them.
+
+The three batches took 35, 29 and 29 minutes and 4.3M, 3.6M and 2.9M subagent tokens. The cost
+falls down the list because tail verbs carry less evidence. Josh reported 44% of a five-hour usage
+window used partway through batch 3. After batch 4 he chose to stop, leaving the last 22 shards
+(160–181, 770 verbs) for another session. Across the 159 finished shards, 5,565 verbs:
+
+| Task | Counts |
+|---|---|
+| Gloss | ok 4,653 · style 427 · missing_primary_sense 211 · wrong_sense 132 · order 104 · typo 38 |
+| Existing example | none 4,424 · ok 1,077 · wrong_sense 49 · mistranslation 6 · not_verbal 3 · register 3 · verb_absent 2 · wrong_form 1 |
+| New example | authored 1,973 · tier 1,560 · wiktionnaire 757 · wiktionary_en 136 (1,139 verbs need none) |
+| Flags | re: app_correct 98, change 37, unsure 14 · dg: unsure 22, app_correct 13, change 5 · ay: change 8, unsure 2, app_correct 1 · ah: change 2, unsure 1, app_correct 1 |
+| Notes | 1,218 verbs carry at least one |
+
+Past rank 1,400 almost no verb ships an example, so nearly every result proposes one, and
+authored sentences overtake corpus picks. Among the gloss findings, *vulgariser* is glossed
+"generalize" (confusing it with *généraliser*; it means popularize), *corner* "corner kick"
+(every French sense comes from *corne*, horn), *sévir* carries the typo "rave" for "rage", and
+*lutiner* "ease" for "tease". Warnings stand at 115, all provenance: 72 on corpus sentences, 38
+on Wiktionnaire quotations, 4 on English-Wiktionary quotations, and one `ok` example verdict on a
+verb with no example (*alourdir*). Nothing is committed.

@@ -169,7 +169,8 @@ def main():
                 "app": entry["is_reflexive"],
                 "wiktionary": pronominal,
                 "evidence": ("every sense tagged pronominal in " + "+".join(where)) if where
-                            else "no sense tagged pronominal in either edition",
+                            else "neither edition tags every sense pronominal "
+                                 "(some senses may be; the app's entry is pronominal-only)",
             })
 
         defective = is_defective(english_entries, french_entries)
