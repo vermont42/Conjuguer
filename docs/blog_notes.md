@@ -3712,3 +3712,15 @@ five rejects are the two namesakes and three modern translations. The Brandes tr
 survives: it was published in 1823, so its translator cannot have lived to 1931. The screen
 also missed two translations among the picks that carry no edition year, Tolstoy and Plato.
 Those are flagged too.
+
+`approvals.json` came out at 32,924 lines, and Josh asked how to edit it. Nobody should read
+that file line by line. Most of it can be settled by rule. The 2,467 clean corpus and quotation
+picks have already been checked in code, and the 1,954 upheld authored sentences below rank 1,500
+are the tail the plan meant to approve by category. So the `defaults` block now accepts both,
+and a new `review` decision holds the five doubtful quotations out of that sweep. That leaves
+1,347 items for a human: all 816 gloss changes, every `partly` verdict, the flags and existing
+examples, and the top-rank authored sentences. `build_review_page.py` puts them in a local page,
+one card at a time with both models' reasoning, driven from the keyboard. Its exported
+decisions merge back into `approvals.json`. One thing surfaced along the way:
+`build_report.py` had been regenerating `approvals.json` from scratch, so a rebuild would have
+silently reset every decision to pending. It now carries decisions, values and notes over.

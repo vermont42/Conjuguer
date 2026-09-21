@@ -319,13 +319,16 @@ def main():
 
     approvals = {
         "_readme": [
-            "Set each decision to accept or reject. Stage 4 applies only accept.",
+            "Set each decision to accept or reject. Stage 4 applies only accept. review means a human "
+            "still has to look: no default touches it and Stage 4 does not apply it.",
             "An item's own decision wins. An item still pending takes the first default whose task "
             "and rank band match it (max_rank null means no upper bound); a default never applies "
             "to a partly item. Anything still pending is not applied.",
             "Keys are <task>|<verb id>; flags are flag:<name>|<verb id>; corpus and quotation picks "
             "are pick|<verb id>. A partly item needs a value: put the replacement in value, or its "
-            "accept applies the checker's proposal unchanged.",
+            "accept applies the checker's proposal unchanged. A value is a string (the gloss, the "
+            "English translation, or the flag value), except on a new_example, where it is "
+            "{\"fr\", \"en\"}.",
             "Re-running build_report.py keeps every decision, value and note here, and any item added "
             "by hand.",
         ],

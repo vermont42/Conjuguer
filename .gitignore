@@ -50,13 +50,14 @@ corpus/working/*
 !corpus/working/build_verb_pass_shards.py
 !corpus/working/gloss_lint_whitelist.txt
 # The pilot and Stage 2/3 runner, the pilot scorer, the Stage 2/3 result validator, and the
-# Stage 3 skeptic-shard and report builders. The shard files, the result files, the pilot
+# Stage 3 skeptic-shard, report and review-page builders. The shard files, the result files, the pilot
 # answer key and approvals.json stay ignored under corpus/working/verb_pass/.
 !corpus/working/verb_pass.workflow.js
 !corpus/working/score_pilot.py
 !corpus/working/validate_verb_pass.py
 !corpus/working/build_skeptic_shards.py
 !corpus/working/build_report.py
+!corpus/working/build_review_page.py
 # authors_overrides.json is the exception: hand-checked corrections to the Wikidata
 # resolution, which nothing regenerates. Re-including one file inside an excluded directory
 # takes three lines, because git never descends into a directory it has already excluded.

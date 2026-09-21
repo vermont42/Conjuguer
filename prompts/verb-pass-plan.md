@@ -1703,7 +1703,7 @@ from the 2,547 authored sentences and the 2,590-row pick table.
 
 ## Stage 4: apply
 
-Runs after Josh has edited `approvals.json`. Paste:
+Runs after Josh has edited `approvals.json` using the approach described in `review-instructions.md`. Paste:
 
 ```
 Read @prompts/verb-pass-plan.md, Stage 4, and apply the approved verb-pass changes: write
@@ -1747,7 +1747,12 @@ candidate (`validate_verb_pass.pick_status` returns it), never from the result f
 `late_edition` quotations were added from the triage on 2026-09-21: 65 `accept`, 5 `reject`
 and 3 still `pending` for a check, each with a `note`. Any item may carry a `note`.
 `build_report.py` now keeps every decision, value and note, and any item added by hand, when
-it rebuilds the file. So re-running it is safe.
+it rebuilds the file. So re-running it is safe. Josh set the defaults on 2026-09-21: `pick` accept in every band, `new_example`
+accept from rank 1,501. The five picks the triage left to check are now `review`, a decision
+no default touches and Stage 4 does not apply. A value is a string, or `{fr, en}` on a
+`new_example`. The 1,347 items the defaults leave to a human are read in a local page that
+`build_review_page.py` writes to `verb_pass/review.html`, and `--merge` folds its exported
+decisions back.
 
 Acceptance: `xmllint --valid` passes and the collation check reports only the pre-existing
 `visionner > visibiliser` pair; `cmp` finds the two example copies identical; the full suite
