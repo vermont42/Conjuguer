@@ -1529,33 +1529,90 @@ Paste:
 
 ```
 Read @prompts/verb-pass-plan.md, Stage 3, and carry it out: write build_skeptic_shards.py
-and run it over the Stage 2 results, run verb_pass.workflow.js in skeptic mode on Opus 5
-over the skeptic shards (a workflow is intended; use the Workflow tool), write
-build_report.py and produce docs/verb-pass-report.md and approvals.json, and journal in
-docs/blog_notes.md.
+and run it over the Stage 2 results (once; skip it if the skeptic shards already exist),
+add a --skeptic mode to validate_verb_pass.py, compute the pending list with
+`python3 corpus/working/validate_verb_pass.py --skeptic --pending`, run
+corpus/working/verb_pass.workflow.js in skeptic mode on Opus 5 over the pending shards in
+batches of 40 (a workflow is intended; use the Workflow tool), validate every verdict file
+and re-run shards whose file is missing or invalid, write build_report.py and produce
+docs/verb-pass-report.md and approvals.json, and journal in docs/blog_notes.md.
 Mark completed steps with ✅ in this plan and add a correction note wherever the plan
 proved wrong or incomplete. Do not commit; Josh commits.
 ```
 
-- **`build_skeptic_shards.py`** gathers every proposed change from the results (a gloss
-  verdict other than `ok`, an example verdict other than `ok`, every `new_example`, every
-  flag verdict that would change the app, every note) into shards of 25 items, each item
-  carrying the verb's Wiktionary senses, the current and proposed values, and the checker's
-  evidence, under `corpus/working/verb_pass/skeptic/shards/`.
+**Correction (2026-09-21, before Stage 3 ran):** the prompt above is corrected in place, and
+the scope, the shard contents and the tooling below are revised. As first written, the pass
+gathered "every proposed change … every note", which after Stage 2 is 7,698 items (5,137 new
+examples, 1,094 glosses, 65 example verdicts, 62 flag changes and 1,340 notes). That is about
+308 shards on Opus 5, where the cost table assumed about 1,000 changes. Josh chose a narrower
+scope the same day:
+
+- **To the skeptic (3,767 items, 151 shards of 25):** every gloss verdict other than `ok`
+  (1,093, including 519 `style`), every existing-example verdict other than `ok` or `none`
+  (65), every flag verdict `change` (62), and every **authored** new example (2,547). The
+  authored sentences are where a second model earns its cost, since nothing external backs
+  them: check the grammar, that the token is the verb in the glossed sense, the translation,
+  and the register.
+- **Checked in code, not by the skeptic:** the 2,590 corpus and quotation picks (`tier`,
+  `wiktionnaire`, `wiktionary_en`). `validate_verb_pass.py` already confirms their text
+  verbatim against a candidate and now their citation too. The public-domain rule is a
+  death-year comparison. `build_report.py` runs these checks, lists each pick with its
+  provenance status, and puts every pick with a warning in its own section. Sense fit on
+  picks goes unchecked by a second model, a risk Josh accepted.
+- **Not items at all:** the 1,340 notes. They mostly explain rejected candidates.
+  `build_report.py` prints them under their verbs.
+- **Unsure flag verdicts** (49) are not items either. The report lists them for Josh.
+
+Three more changes follow from the Stage 2 run:
+
+- *Resumability.* Stage 2 took four sessions and needed a validator and a pending list, so
+  Stage 3 gets them from the start. `validate_verb_pass.py --skeptic` validates
+  `skeptic/results/shard_NNN.json` against `skeptic/shards/shard_NNN.json`: the file parses,
+  holds exactly the shard's items in order (match on `id` and `task`), and uses the verdict
+  and severity vocabularies. `--pending` prints the shards without a valid file, and
+  `--counts` prints verdicts by task. Build the shards **once**: rebuilding mid-run would
+  reshuffle items under finished verdict files.
+- *The shard carries its own evidence.* The skeptic's agent definition forbids opening any
+  file but its shard, so the plan's "checks … against `authors.json`" cannot happen at run
+  time. `build_skeptic_shards.py` copies into each item what decides it: the verb's
+  Wiktionary senses from both editions, the current and proposed values, the checker's
+  evidence and notes, and for an authored sentence the conjugation rows for its token, so
+  the form can be checked, plus the verb's full candidate list, because the skeptic's rules
+  refute an authored sentence when a qualifying candidate was passed over. Because quotations are no longer skeptic items, no item needs a death
+  year.
+- *The skeptic's input list.* `.claude/agents/verb-skeptic.md` now names the two new
+  item fields, `candidates` and `conjugations`, for authored items. Its quotation rules stay,
+  unused, in case the scope widens.
+- *Today's direct gloss edits.* The builder reads glosses from the current `verbs.xml`, not
+  from the shards, and drops a gloss item whose proposal already equals the live gloss (today
+  only *chiader*). *enjuiver*, *ratonner* and *molester* had `ok` verdicts and are not items.
+
+Cost: Stage 2 used about 15M subagent tokens for 6,330 verbs on Sonnet 5, at 29–35 minutes
+per batch of 40. Opus 5 at high effort on 151 shards is an estimate, not a measurement:
+roughly 10–15M tokens in four batches, likely two usage windows. The first batch's figures
+should replace this line.
+
+- **`build_skeptic_shards.py`** gathers the items in the scope above (a gloss verdict other
+  than `ok`, an existing-example verdict other than `ok` or `none`, every authored
+  `new_example`, every flag verdict `change`) into shards of 25 items in frequency-rank order,
+  each item carrying the evidence listed above, under
+  `corpus/working/verb_pass/skeptic/shards/`.
 - **Skeptic mode** of the workflow uses `agentType: "verb-skeptic"`; each agent writes
   `skeptic/results/shard_NNN.json` with, per item, `{ id, task, verdict: "upheld" |
-  "partly" | "refuted", severity: "error" | "hedge" | "nitpick", reason }`, and checks a
-  quotation's public-domain claim against `authors.json` as well. The verb-history
+  "partly" | "refuted", severity: "error" | "hedge" | "nitpick", reason }`. The verb-history
   fact-check dismissed 104 of 188 first-pass findings; expect the same shape.
 - **`build_report.py`** writes `docs/verb-pass-report.md`: counts first, then one section
   per task, items ordered by frequency rank, each with the verb, its rank, the current and
   proposed values, the checker's evidence and the skeptic's verdict; refuted items in a
-  short appendix. It also writes `corpus/working/verb_pass/approvals.json` with every upheld
-  item set to `"pending"`. Josh edits that file to `"accept"` or `"reject"`, by item or,
+  short appendix. Corpus and quotation picks get their own section with their provenance
+  status from the deterministic checks, warnings first. It also writes
+  `corpus/working/verb_pass/approvals.json` with every upheld item and every pick without a
+  warning set to `"pending"`. Josh edits that file to `"accept"` or `"reject"`, by item or,
   through a `defaults` block, by task and rank band, so he reads the top 1,500 closely and
   approves the tail by category.
 
-Acceptance: every proposed change has a skeptic verdict; the report opens with the counts by
+Acceptance: every skeptic item has a valid verdict file entry (`--skeptic` reports 0
+pending); every pick has a provenance status; the report opens with the counts by
 task and verdict; the journal records the refutation rate.
 
 ## Stage 4: apply
@@ -1612,7 +1669,7 @@ roughly 600 input tokens per verb.
 | Shard input, 6,326 verbs | 3.8M | Sonnet 5: $8 |
 | Shard output incl. thinking | 2.5M | Sonnet 5: $25 |
 | CLAUDE.md if not omitted, 180 shards × ~10K | 1.8M | Sonnet 5: $4 |
-| Skeptic pass on ~1,000 changes | 1.5M in, 0.4M out | Opus 5: $18 |
+| Skeptic pass on ~1,000 changes (revised 2026-09-21: 3,767 items, 151 shards; see Stage 3) | 1.5M in, 0.4M out | Opus 5: $18 |
 
 About $50 to $60 all in; on a subscription it is plan usage instead. Wall clock: the
 Workflow tool runs at most 16 agents at once, so 180 shards of a few minutes each finish in

@@ -32,6 +32,10 @@ Each entry of `items` is one proposed change:
 - `candidate` — for an example item, the candidate the checker chose, with `author`,
   `year`, `death_year` and `source` where it has them.
 - `audits` — the deterministic Stage 1 findings for the verb.
+- `candidates` — for an authored sentence, every candidate the checker had, so you can tell
+  whether one qualified.
+- `conjugations` — for an authored sentence, the app's conjugation rows for its `token`, so
+  you can check the form.
 
 ## How to decide
 

@@ -3621,3 +3621,27 @@ current English "molest" usually means the sexual abuse of a child, where the Fr
 to manhandle or harass (Wiktionnaire: "Houspiller, maltraiter quelqu'un en paroles ou en
 actions"). It now reads "manhandle, harass". That note is the kind of judgement a verbatim
 comparison can't make, and it came from a checker that had no instruction to make it.
+
+## Rescoping the skeptic pass before it runs (2026-09-21)
+
+Checking whether Stage 3 could start in a fresh session turned up a mismatch of scale. The plan
+budgeted a skeptic pass over "~1,000 changes". But its spec said to gather every proposed change
+and every note, and Stage 2 had produced 7,698 of those: 5,137 new examples, 1,094 gloss
+verdicts, 65 example verdicts, 62 flag changes and 1,340 notes. At 25 items a shard that is
+about 308 shards on Opus 5, well beyond the four sessions Stage 2 needed on Sonnet 5.
+
+Josh chose a narrower scope. The notes are not changes, since most explain a rejected candidate,
+so they go into the report beside their verbs. The 2,590 corpus and quotation picks are checked
+in code instead. The validator already confirms their text verbatim and now their citation, and
+the public-domain rule is a death-year comparison. What a second model does best is judge text
+that nothing external backs. So the skeptic gets the 2,547 authored sentences, along with the
+1,093 gloss changes, 65 example verdicts and 62 flag changes: 3,767 items in 151 shards. The
+accepted gap is that no second model checks whether a quoted sentence fits the glossed sense.
+
+Three smaller holes were fixed in the plan at the same time. Stage 3 had no pending list or
+validator, both of which Stage 2 had to invent mid-run, so `validate_verb_pass.py` is to gain a
+`--skeptic` mode. The plan had the skeptic check death years "against `authors.json`", which
+its own agent definition, limited to reading its shard, forbids. So each item now carries its
+evidence, including the candidate list and conjugation rows an authored sentence is judged
+against. And the shard builder is to read glosses from the live `verbs.xml`, so the *chiader*
+fix made by hand today doesn't come back as a proposal.
