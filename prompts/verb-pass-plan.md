@@ -9,8 +9,10 @@ decision 5 stands: **Sonnet 5 for the shards, Opus 5 for the skeptic pass**. Sta
 2026-09-20: batch 1 (shards 1–40, 1,400 verbs) ran and validated, and Josh then paused the run.
 It resumed on 2026-09-21: batches 2–4 (shards 41–159) ran and validated, and Josh stopped there
 to stay inside the usage window. Batch 5 (shards 160–181) ran later on 2026-09-21, and
-**Stage 2 is complete**: all 181 result files validate, 6,330 entries, none pending. Stage 3
-is next. Between batches 3 and 4, `build_candidates.py` was fixed to stop truncating long
+**Stage 2 is complete**: all 181 result files validate, 6,330 entries, none pending. **Stage 3
+ran and is complete on 2026-09-21**: 3,767 skeptic items in 151 shards on Opus 5, all verdict
+files valid, 14.4% refuted, and `docs/verb-pass-report.md` and `approvals.json` written. Stage 4
+waits on Josh's edits to `approvals.json`. Between batches 3 and 4, `build_candidates.py` was fixed to stop truncating long
 corpus sentences and the shards were rebuilt (see the Stage 2 correction of 2026-09-21).
 Josh approved the five decisions on 2026-09-20; they are recorded in the last section and
 folded into the stages below. Apart from Stages A and 0, nothing has run yet except the
@@ -34,9 +36,8 @@ pilot**: none of its 43 verbs is in a pilot shard, and the pilot measures the mo
 It does block Stage 2's full run.
 
 **Progress** (implementers update this line): Stage A ✅ 2026-09-20 · Stage 0 ✅ 2026-09-20 ·
-Stage 1 ✅ 2026-09-20 · Stage A2 ✅ 2026-09-20 · Pilot ✅ 2026-09-20 · Stage 2 ☐ (159 of 181
-shards; paused by Josh 2026-09-20, resumed and stopped by him 2026-09-21) · Stage 3 ☐ ·
-Stage 4 ☐
+Stage 1 ✅ 2026-09-20 · Stage A2 ✅ 2026-09-20 · Pilot ✅ 2026-09-20 · Stage 2 ✅ 2026-09-21 ·
+Stage 3 ✅ 2026-09-21 · Stage 4 ☐
 
 ## How implementers keep this plan honest
 
@@ -1523,7 +1524,7 @@ the app's entry is pronominal-only)". Stage 1.2 and the shards were rebuilt. Onl
 changed, in 116 verbs; the 159 finished files still validate. Stage 3 should read these checker
 notes as a comment on the audit wording, not on the verb.
 
-## Stage 3: skeptic pass and report
+## Stage 3: skeptic pass and report ✅ 2026-09-21
 
 Paste:
 
@@ -1563,6 +1564,9 @@ scope the same day:
   `build_report.py` prints them under their verbs.
 - **Unsure flag verdicts** (49) are not items either. The report lists them for Josh.
 
+**Correction (2026-09-21, after Stage 3):** there are **46** unsure flag verdicts, not 49. Stage
+2's final counts give re 15, dg 25, ay 3 and ah 3, which sum to 46.
+
 Three more changes follow from the Stage 2 run:
 
 - *Resumability.* Stage 2 took four sessions and needed a validator and a pending list, so
@@ -1592,6 +1596,12 @@ per batch of 40. Opus 5 at high effort on 151 shards is an estimate, not a measu
 roughly 10–15M tokens in four batches, likely two usage windows. The first batch's figures
 should replace this line.
 
+**Correction (2026-09-21, measured):** the estimate was about twice the real cost. The whole
+pass took **6.9M subagent tokens and about 25 minutes of wall clock in one session**, over four
+batches of 40 and a clean-up batch of two. Batch 1 took 2.05M tokens in 7 minutes; batches 2–4
+took 1.76M, 1.58M and 1.45M, at 5 to 6 minutes each. Opus 5 was faster per shard than Sonnet 5 was
+in Stage 2, because a skeptic shard holds 25 items rather than 35 verbs, and most items are short.
+
 - **`build_skeptic_shards.py`** gathers the items in the scope above (a gloss verdict other
   than `ok`, an existing-example verdict other than `ok` or `none`, every authored
   `new_example`, every flag verdict `change`) into shards of 25 items in frequency-rank order,
@@ -1614,6 +1624,82 @@ should replace this line.
 Acceptance: every skeptic item has a valid verdict file entry (`--skeptic` reports 0
 pending); every pick has a provenance status; the report opens with the counts by
 task and verdict; the journal records the refutation rate.
+
+**Correction (2026-09-21): all four met, with the result below and six things the section did
+not anticipate.** `build_skeptic_shards.py` ran once and produced exactly the scoped 3,767 items
+in 151 shards: 1,093 glosses, 65 existing examples, 2,547 authored sentences and 62 flags. After
+the re-runs `validate_verb_pass.py --skeptic` reports 151 of 151 valid and 0 pending. All 2,590
+picks carry a provenance status, the report opens with the counts, and the journal records the
+refutation rate.
+
+| Task | Items | Upheld | Partly | Refuted |
+|---|---|---|---|---|
+| Glosses | 1,093 | 522 | 294 | 277 |
+| Existing examples | 65 | 37 | 14 | 14 |
+| Authored examples | 2,547 | 2,040 | 285 | 222 |
+| Flags | 62 | 32 | 2 | 28 |
+| All | 3,767 | 2,631 | 595 | 541 |
+
+**14.4% refuted**, not the 55% of the verb-history fact-check that this section said to expect.
+The two populations differ. 1,769 of the authored sentences had no candidate at all, so the skeptic
+could only check their grammar, sense and translation, and it refuted 102 of them. Among the 778
+written despite a candidate list, it refuted 120 (15%), mostly because a public-domain quotation
+or a complete corpus sentence had qualified after all. Glosses were refuted at 25%, and
+`style` proposals most often (158 of 519).
+
+- *Agents dropped items on write, not only on read.* 10 of 151 first attempts wrote a well-formed
+  file one to three items short (shards 13, 29, 33, 35, 37, 38, 63, 77, 104, 150), and shard 29
+  failed again on its first re-run. After batch 1 the prompt was changed to state each shard's
+  true item count (`args.itemCounts`, 25 by default). The misses went on at the same rate, and
+  they were not short reads. Shard 29's agent summarized its verdict on *décapiter* and then left
+  that verdict out of the file. Shard 77's agent reported that the shard "holds 24 items" when it
+  holds 25. The dropped items sat mid-file and had nothing in common. As in Stage 2, only the
+  validator's comparison against the shard is a check; a re-run fixes it.
+- *The skeptics applied the gloss apostrophe rule to examples.* Decision 3's curly `’` is the
+  gloss house style. Every one of the 1,141 shipped examples uses the straight apostrophe (846
+  contain one, none the curly), yet 81 `partly` verdicts on examples cite it. The report tags them,
+  and `approvals.json` marks them `"apostrophe": true`. Where the apostrophe is the only
+  objection, the item is effectively upheld. Stage 4 should leave example apostrophes straight.
+- *The public-domain rule passes translations and namesakes.* One skeptic noticed a candidate
+  whose author "died in 1919" in a book of 2017, and others found candidates with death years of
+  1561, 1686 and 1763 against editions of 2010–2019. Among the **picks**, 73 Wiktionnaire
+  quotations were printed more than twenty years after their author's death. Most are reprints
+  (Daudet in 1974, Flaubert's *Correspondance*). But "Michel Lévy, d. 1875" is credited with
+  *Photoshop Elements 8.0* (2010), "Paul Denis, d. 1918" with a book of 2017, and the list holds
+  French translations of Wilde, Irving, Gotthelf, Lima Barreto and Brandes, whose text is the
+  translator's. `pick_status` in `validate_verb_pass.py` now gives these the status
+  `late_edition`. They are listed for a human and left out of `approvals.json`. The root cause is
+  in Stage 0.3: `authors.json` matches a label, not a work, so the fix belongs in
+  `authors_overrides.json`. **Done the same day:** `authors_overrides.json` now makes "Michel Lévy" and
+  "Paul Denis" unresolved. Everywhere else in the reference, Michel Lévy appears only as the
+  publisher, and every Paul Denis reference is modern. A draft triage of the 73, at
+  `corpus/working/verb_pass/late_edition_triage.md` (ignored), suggests 65 accept, 5 reject (the
+  two namesakes and the Wilde, Gotthelf and Lima Barreto translations) and 3 check. It also flags
+  two of the 61 no-year picks as translations: Tolstoy (*béer*) and Plato (*morigéner*).
+  Josh had the suggestions applied to `approvals.json` the same day (see the Stage 4
+  correction).
+- *The validator now tells an excerpt from an edit*, which the Stage 2 correction said it could
+  not. A pick whose text is one sentence lifted unchanged out of a longer candidate is an
+  `excerpt`, which is clean (68 picks). Anything else that fails to match a candidate is
+  `unmatched` (48). Final pick statuses: 2,396 verbatim, 68 excerpt, 73 late_edition, 48
+  unmatched, 3 miscited, 2 wrong_kind, 0 not_public_domain. `validate_verb_pass.py` keeps
+  reporting excerpts as Stage 2 warnings, as before.
+- *The conjugation rows earned their place.* For 16 authored sentences no app form matched the
+  token. Several use the doubled -eler/-eter spelling decision 6 retired (*briquettent*,
+  *dépaquette*, *bêchevette*); others are misspelled or use the wrong verb. The skeptic refuted
+  15 of the 16 and marked the last `partly`. (Splitting the token on hyphens made the first dry run
+  report 40 unmatched, because *sous-estimé* is one form. The builder splits on whitespace only.)
+- *`approvals.json` holds `partly` items too.* The section says "every upheld item". But 595
+  `partly` verdicts include 294 glosses where the skeptic agreed that something was wrong and
+  named the fix. Leaving them out would make Josh re-enter them by hand. So they are in the file
+  with `"value": null`. Josh can type the replacement, or `accept` applies the checker's proposal
+  unchanged, and a `defaults` rule never applies to one. Keys are `<task>|<verb id>`, flags are
+  `flag:<name>|<verb id>` and picks are `pick|<verb id>`. `defaults` holds one rule per task and
+  rank band (1–1,500, 1,501–3,000, 3,001–4,500, 4,501+), all `pending`, and an item's own decision
+  wins. The file has 5,690 items: 3,226 skeptic items and 2,464 clean picks.
+
+The report is 3.3 MB, too large for GitHub to render, so read it in an editor. Its size comes
+from the 2,547 authored sentences and the 2,590-row pick table.
 
 ## Stage 4: apply
 
@@ -1651,6 +1737,17 @@ proved wrong or incomplete. Do not commit; Josh commits.
   any new source file. New, and Josh's to veto: the credits text also acknowledges
   Wiktionary as the main source of the glosses (CC BY-SA), which the app has not said so
   far.
+
+**Correction (2026-09-21, from Stage 3):** read Stage 3's last correction before writing
+`apply_verb_pass.py`. `approvals.json` is not the plain upheld-items list this section assumes.
+It also holds `partly` items with an optional `value`, and `defaults` rules by task and rank band.
+Keys look like `gloss|avoir`, `flag:re|abonner` and `pick|abîmer`. Example apostrophes stay
+straight, as in all 1,141 shipped examples. A pick's `source` and `line` come from the matched
+candidate (`validate_verb_pass.pick_status` returns it), never from the result file.
+`late_edition` quotations were added from the triage on 2026-09-21: 65 `accept`, 5 `reject`
+and 3 still `pending` for a check, each with a `note`. Any item may carry a `note`.
+`build_report.py` now keeps every decision, value and note, and any item added by hand, when
+it rebuilds the file. So re-running it is safe.
 
 Acceptance: `xmllint --valid` passes and the collation check reports only the pre-existing
 `visionner > visibiliser` pair; `cmp` finds the two example copies identical; the full suite

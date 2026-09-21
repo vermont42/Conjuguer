@@ -119,6 +119,14 @@ other than \`ok\`, an example verdict other than \`ok\`/\`none\`, a \`new_exampl
 flag verdict of \`change\`.`
 }
 
+// args.itemCounts maps a skeptic shard number to its item count; the builder cuts shards of
+// 25, so only the last differs. Stage 3 agents dropped items on a short read, and a stated
+// count gives them something to check against that is not what they happened to read.
+function expectedItems(n) {
+  const counts = A.itemCounts || {}
+  return counts[n] || counts[String(n)] || 25
+}
+
 function skepticPrompt(n) {
   const p = paths(n)
   return `Re-examine shard ${n} of the Conjuguer verb pass: proposed changes, not verb data.
@@ -127,11 +135,22 @@ Read \`${p.shard}\`. It is \`{ "shard": ${n}, "items": [ … ] }\`; every entry 
 another model proposed, with the current value, the proposed value, the checker's evidence,
 and the reference senses for the verb. Pass an explicit \`limit\` large enough to read it in
 one call, and continue with further \`offset\`/\`limit\` calls if it comes back truncated.
-**Every item must appear in your result.**
+**Every item must appear in your result.** The shard holds exactly ${expectedItems(n)} items. If
+you have read fewer, you have not reached the end of the file: keep reading until you have
+all ${expectedItems(n)} and have reached the closing brace.
 
 Try to refute each one. Default to \`refuted\` when the evidence in the shard does not
 decide it. Check every quotation's public-domain claim yourself: the author's
 \`death_year\` must be present and strictly less than 1931, and the reason says the year.
+
+Besides the fields your instructions list, an item carries \`gloss_current\` (the live
+gloss), \`checker_verdict\` and \`checker_confidence\` (the checker's own label), and
+\`checker_notes\`. A \`new_example\` item carries \`gloss_proposed\` when the checker also
+proposed a new gloss, so judge the sentence against either. Its \`conjugations\` rows are
+the app's forms matching a word of the token; a row with \`tense_key: null\` means no app
+form of the verb matches the token, which usually means the sentence uses a wrong form or a
+spelling the app does not ship. A \`flag\` item names its \`flag\` and carries the Stage 1
+\`audit\` row for it; for \`dg\` the proposal is described in \`evidence\`.
 
 Write the result to \`${p.result}\` as
 \`{ "shard": ${n}, "results": [ { id, task, verdict, severity, reason }, … ] }\`, one object

@@ -39,5 +39,19 @@
   "death_year": 1954,
   "status": "resolved (override)",
   "note": "Wikidata labels her by her pen name alone. Died 1954, so her quotations are NOT public domain under the 1931 rule."
+ },
+ "Michel Lévy": {
+  "qid": null,
+  "label": null,
+  "death_year": null,
+  "status": "unresolved (override): namesake",
+  "note": "Wikidata's only match, Q16649652 (d. 1875), is the Paris publisher of Michel Lévy frères. The name appears in 80-odd French-Wiktionary references, but only as that publisher. The one reference that names Michel Lévy as AUTHOR is 'Michel Lévy, Photoshop Elements 8.0, 2010', a living namesake. Unresolved, so not public domain. Found by the Stage 3 late_edition check on 2026-09-21."
+ },
+ "Paul Denis": {
+  "qid": null,
+  "label": null,
+  "death_year": null,
+  "status": "unresolved (override): namesake",
+  "note": "Wikidata's only match, Q34994035 (d. 1918), is a French historian. Every reference naming Paul Denis as author is modern: a psychoanalyst's 'Œdipe médecin' (2017) and articles in La France agricole (2021, 2024). Unresolved, so not public domain. Found by the Stage 3 late_edition check on 2026-09-21."
  }
 }

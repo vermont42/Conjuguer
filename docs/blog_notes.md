@@ -3645,3 +3645,70 @@ its own agent definition, limited to reading its shard, forbids. So each item no
 evidence, including the candidate list and conjugation rows an authored sentence is judged
 against. And the shard builder is to read glosses from the live `verbs.xml`, so the *chiader*
 fix made by hand today doesn't come back as a proposal.
+
+## The skeptic pass (2026-09-21)
+
+Stage 3 of the verb pass ran end to end in one session. Opus 5 acted as the skeptic over what the
+Sonnet 5 checkers had proposed. `build_skeptic_shards.py` gathered the scope Josh had chosen that
+morning: 1,093 gloss changes, 65 verdicts on shipped examples, 62 flag changes and 2,547 authored
+sentences. That is 3,767 items in 151 shards of 25, exactly the number the rescoping predicted.
+Each item carries its own evidence, because the skeptic may read nothing but its shard: both
+Wiktionaries' senses, the checker's argument and notes, and for an authored sentence the whole
+candidate list plus the app's conjugation rows for the sentence's token. The four batches took
+about 25 minutes and 6.9M subagent tokens, half what the plan had budgeted.
+
+The skeptic refuted 541 items, **14.4%**. It upheld 2,631 and marked 595 `partly`. The plan had
+said to expect the shape of the earlier verb-history fact-check, which threw out 104 of 188
+findings. That didn't happen, and the reason is the mix of items. Most of the authored sentences
+were written for verbs with no candidate at all, so the skeptic could only check the grammar,
+sense and translation, and it refuted 102 of 1,769. The sharper findings were elsewhere. Of the
+778 sentences a checker wrote despite having candidates, 120 were refuted, usually because a
+public-domain quotation or a complete Proust or Flaubert sentence had qualified all along and the
+checker had misjudged it as truncated. Glosses fared worst: 277 of 1,093 refuted, led by `style`
+rewrites (158 of 519) that swapped one correct gloss for another. Flags were refuted 28 times in
+62.
+
+One cheap deterministic signal did well. The shard builder looks up each authored sentence's
+token among the app's own forms. For 16 sentences there was no match. Several used the doubled
+spelling (*briquettent*, *dépaquette*, *bêchevette*) that decision 6 had just retired from those
+verbs. The skeptic refuted 15 of the 16.
+
+Three things went wrong or turned up sideways.
+
+Agents dropped items again, as in Stage 2, but differently. Ten of 151 first attempts wrote a
+file one to three items short. Telling each agent the true item count after batch 1 changed
+nothing, and the evidence says why: these were not short reads. One agent summarized its verdict
+on *décapiter* and then left that verdict out of the file it wrote. Another insisted its
+25-item shard held 24. The validator caught every case, and a re-run fixed it.
+
+The skeptics also applied a house rule where it doesn't hold. Decision 3's curly apostrophe is
+the gloss style, but 81 `partly` verdicts on example sentences cite straight apostrophes. Every
+one of the 1,141 shipped examples uses the straight one. The report tags those items so Josh can
+treat an apostrophe-only objection as an upheld.
+
+The most useful finding was about quotations, which weren't skeptic items at all. A skeptic
+noticed that one candidate's author "died in 1919" yet wrote a book in 2017, and others found
+death years of 1561 and 1763 against editions of the 2010s. The public-domain rule compares a
+death year and nothing else, so a Wikidata namesake or a translation passes it. Checking the
+picks for the same pattern found 73 Wiktionnaire quotations printed more than twenty years after
+the author died. Most are honest reprints. But "Michel Lévy, d. 1875" turns out to be credited
+with a Photoshop manual, and the list includes French translations of Wilde, Washington Irving
+and Lima Barreto, whose words belong to the translator. Those 73 now carry a `late_edition`
+status and stay out of the approvals file until a human has looked. The real fix is in
+`authors_overrides.json`.
+
+`build_report.py` wrote `docs/verb-pass-report.md` (3.3 MB, so read it in an editor) and
+`approvals.json`, which has 5,690 entries: every upheld or partly item, and every clean pick. The
+plan said to include upheld items only. But 294 of the partly items are glosses where the skeptic
+agreed something was wrong and named the fix, so they are in the file with a `value` field Josh
+can fill. Stage 4 waits on his decisions. Nothing is committed.
+
+Later the same day, the two namesakes went into `authors_overrides.json` as unresolved.
+Wikidata's Michel Lévy is the nineteenth-century publisher, and every other reference that names
+him is an imprint line ("Michel Lévy frères"). Wikidata's Paul Denis is a historian who died in
+1918, while every quotation credited to a Paul Denis dates from 1999 to 2024. A draft triage of
+the 73 late editions sorts them into 65 reprints to accept, 5 to reject and 3 to check. The
+five rejects are the two namesakes and three modern translations. The Brandes translation
+survives: it was published in 1823, so its translator cannot have lived to 1931. The screen
+also missed two translations among the picks that carry no edition year, Tolstoy and Plato.
+Those are flagged too.
