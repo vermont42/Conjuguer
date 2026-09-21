@@ -8,8 +8,9 @@ Sonnet 5, Haiku 4.5 and Opus 5; Sonnet 5 and Opus 5 passed, Haiku 4.5 failed on 
 decision 5 stands: **Sonnet 5 for the shards, Opus 5 for the skeptic pass**. Stage 2 started on
 2026-09-20: batch 1 (shards 1–40, 1,400 verbs) ran and validated, and Josh then paused the run.
 It resumed on 2026-09-21: batches 2–4 (shards 41–159) ran and validated, and Josh stopped there
-to stay inside the usage window. Shards 160–181 are pending; `validate_verb_pass.py --pending`
-prints them. Between batches 3 and 4, `build_candidates.py` was fixed to stop truncating long
+to stay inside the usage window. Batch 5 (shards 160–181) ran later on 2026-09-21, and
+**Stage 2 is complete**: all 181 result files validate, 6,330 entries, none pending. Stage 3
+is next. Between batches 3 and 4, `build_candidates.py` was fixed to stop truncating long
 corpus sentences and the shards were rebuilt (see the Stage 2 correction of 2026-09-21).
 Josh approved the five decisions on 2026-09-20; they are recorded in the last section and
 folded into the stages below. Apart from Stages A and 0, nothing has run yet except the
@@ -1275,7 +1276,7 @@ which sentence a model chose; it now carries `planted_text`, `planted_author` an
 **1,766** verbs needing an authored example, not the 1,776 the 1.5 correction records. Nothing
 else moved.
 
-## Stage 2: the full run
+## Stage 2: the full run ✅ 2026-09-21
 
 Paste:
 
@@ -1322,6 +1323,49 @@ took 35, 29 and 29 minutes of wall clock, and 4.3M, 3.6M and 2.9M subagent token
 down the list because tail verbs carry shorter evidence. On Josh's subscription the session had
 used 44% of a five-hour usage window partway through batch 3, so plan on two or three batches
 per window, not all of Stage 2.
+
+**Correction (2026-09-21, batch 5; Stage 2 complete):** the last 22 shards (160–181, 765
+entries) ran as one batch on Sonnet 5 in 13 minutes and 1.35M subagent tokens. All 22 files
+validated on the first run, so nothing was re-queued, and `context_check` was false in every
+shard. Three things this plan did not anticipate:
+
+- *The validator checked a pick's text but not its citation.* A tier pick could copy a
+  candidate's sentence verbatim and cite a different file or line, and no warning appeared.
+  `validate_verb_pass.py` now warns in two more cases: a tier sentence cited to a file or line
+  other than its candidate's, and a sentence whose text matches a candidate of a different
+  kind. Across the 181 shards that finds four misattributions. *haricoter* (shard 173) cites a
+  Wiktionnaire Balzac quotation (*Les Paysans*) as `moliere-oeuvres-t1.txt` line 762, which is
+  Molière dialogue about a doctor's gown. That source is invented. *cogner* (57) cites Flaubert line 12909 as
+  Zola, *abîmer* (41) cites line 7548 for a sentence at line 717, and *baigner* (33) cites
+  `ch-fed-ofev` for a `fr-cerema` sentence. *voguer* (72) labels an English-Wiktionary
+  quotation `wiktionnaire`. Stage 4 must copy `source` and `line` from the matched candidate,
+  never from the result file.
+- *`source` on a Wiktionnaire pick is free text.* Results carry "wiktionnaire",
+  "fr.wiktionnaire.org", a bare title, or a full author-and-title reference. Stage 4 should
+  normalize it from the matched candidate too.
+- *The `changes_proposed` a checker returns is not a reliable count.* Batch 5's agents disagreed
+  about whether a filled `new_example` counts as a change: some reported 35 of 35, others only
+  their non-`ok` glosses, and two said so in their notes. The number is self-reported and only
+  used in the workflow's log line. Take counts from `validate_verb_pass.py --counts`.
+
+Final counts over 6,330 entries: gloss ok 5,236 · style 519 · missing_primary_sense 221 ·
+wrong_sense 194 · order 111 · typo 49; existing example none 5,185 · ok 1,080 · wrong_sense 50 ·
+mistranslation 6 · not_verbal 3 · register 3 · verb_absent 2 · wrong_form 1; new example
+authored 2,547 · tier 1,588 · wiktionnaire 863 · wiktionary_en 139 · none needed 1,193; flag
+verdicts re 126 app_correct / 41 change / 15 unsure, dg 13 / 9 / 25, ay 1 / 10 / 3, ah 1 / 2 / 3;
+1,325 entries carry notes; 125 warnings for Stage 3.
+
+**Added (2026-09-21, after Stage 2):** Josh read the checkers' notes on two loaded verbs and had
+register labels added to their glosses directly in `verbs.xml`: *enjuiver* is now "(antisemitic)
+cause to become more Jewish" and *ratonner* "(historical, racist) engage in racist attacks". The
+shards and results still carry the old glosses. Both results have `gloss: ok` and propose
+nothing, so Stage 4 leaves the new text alone. The glosses had no register-label precedent.
+The closest is a leading parenthetical like "(of a river) join, flow into…".
+Two more glosses were fixed the same way: *chiader* "defecate" → "work hard on, cram for an
+exam" (the checker's proposal; the old gloss was *chier*'s), and *molester* "molest, maul" →
+"manhandle, harass" (English "molest" now suggests sexual abuse; Wiktionnaire has "Houspiller,
+maltraiter quelqu'un en paroles ou en actions"). The *chiader* result still proposes the same
+text, so Stage 4 should treat it as already applied rather than as a conflict.
 
 ### The per-verb task list
 

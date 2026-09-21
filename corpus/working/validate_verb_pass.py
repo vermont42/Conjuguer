@@ -6,7 +6,8 @@ once each and in file order, every record carrying the six contract keys with ve
 from the fixed vocabularies. A short file is invalid even when it is well formed: the agent
 reads a shard of up to 8,832 lines across several Read calls, and a short read fails silently.
 
-Provenance problems (a chosen sentence that differs from every candidate, a quotation outside
+Provenance problems (a chosen sentence that differs from every candidate, a sentence cited to
+the wrong file, line or kind, a quotation outside
 the public domain, an authored sentence with the wrong source or a line number) do not make a
 file invalid, because a re-run would not reliably fix them; they are listed as warnings for
 Stage 3 to weigh.
@@ -83,7 +84,18 @@ def check_record(record, verb, source_label):
             match = next((c for c in verb.get("candidates") or []
                           if c.get("kind") == kind and normalize(c.get("text")) == chosen), None)
             if match is None:
-                warnings.append(f"{identifier}: {kind} sentence matches no candidate verbatim")
+                other = next((c for c in verb.get("candidates") or []
+                              if normalize(c.get("text")) == chosen), None)
+                if other is None:
+                    warnings.append(f"{identifier}: {kind} sentence matches no candidate verbatim")
+                else:
+                    warnings.append(f"{identifier}: {kind} sentence is a {other.get('kind')} "
+                                    f"candidate ({other.get('author') or other.get('source')!s})")
+            elif kind == "tier" and (new_example.get("source"), new_example.get("line")) != \
+                    (match.get("source"), match.get("line")):
+                warnings.append(f"{identifier}: tier sentence cited as "
+                                f"{new_example.get('source')}:{new_example.get('line')}, "
+                                f"candidate is {match.get('source')}:{match.get('line')}")
             elif kind == "wiktionnaire":
                 death = match.get("death_year")
                 if not isinstance(death, int) or death >= PUBLIC_DOMAIN_BEFORE:

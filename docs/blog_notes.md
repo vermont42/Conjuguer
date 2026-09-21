@@ -3532,3 +3532,92 @@ authored sentences overtake corpus picks. Among the gloss findings, *vulgariser*
 *lutiner* "ease" for "tease". Warnings stand at 115, all provenance: 72 on corpus sentences, 38
 on Wiktionnaire quotations, 4 on English-Wiktionary quotations, and one `ok` example verdict on a
 verb with no example (*alourdir*). Nothing is committed.
+
+## Stage 2 finished: the last 765 verbs, and a citation check the validator lacked (2026-09-21)
+
+The last 22 shards (160–181) ran as one batch on Sonnet 5. Before launching, the session made
+the usual checks. The shards were newer than `conjugations.json`, `verb-checker` was listed as
+an agent type, and `validate_verb_pass.py --pending` printed exactly 160 through 181. The batch
+took 13 minutes and 1.35M subagent tokens, against about 30 minutes and 3–4M for the 40-shard
+batches before it. Every file validated on the first pass. No shard came back short, so nothing
+was re-queued, and `context_check` was false in all 22. Stage 2 is complete: 181 of 181 result
+files, 6,330 entries.
+
+The tail of the frequency list looks different from the head. In these 765 verbs, 62 glosses
+came back `wrong_sense`, about 8%, against 2.4% across the first 5,565. Rare verbs got less
+scrutiny when the glosses were first written, and some were plainly glossed from a neighbour.
+*côcher* (of a bird, to mate) carries "tick, cross", the gloss of the unaccented *cocher*.
+*brasiller* was glossed as if it were *braser*. *postériser* was read through English
+"posterize". *réassigner* was given the everyday sense of *assigner* when the word is legal
+("reissue a summons"). Almost none of these verbs ships an example, so 574 of the 765 got an
+authored sentence. Two checkers met historically loaded verbs, *enjuiver* and *ratonner*. Both
+wrote a factual sentence and left a note on the word's history rather than skipping it. Stage 3
+and Josh should look at those two by name.
+
+The eight new provenance warnings looked like the familiar harmless kind: one sentence kept
+from a multi-sentence Wiktionnaire quotation, and a typo in a quotation silently corrected
+("près" to "prés" in *passementer*). One was not. *haricoter* had a single candidate, a Balzac
+quotation from *Les Paysans* by way of Wiktionnaire. The checker copied it verbatim and labelled
+it a tier corpus sentence from `moliere-oeuvres-t1.txt`, line 762. That line is a line of Molière's
+dialogue about getting hold of a doctor's gown and ten pistoles. The citation was invented. The
+validator only warned because the invented `kind` meant the text matched no tier candidate. It
+had never compared a pick's `source` and `line` with those of the candidate it copied.
+
+So the validator now does. A tier pick cited to a file or line other than its candidate's is a
+warning, and so is a sentence whose text matches a candidate of a different kind. Run over all
+181 shards, it found three more misattributions that had passed silently in earlier batches.
+*cogner* cites Flaubert's line 12909 as Zola's. *abîmer* cites line 7548 of *Madame Bovary*,
+another *abîmer* sentence, for one at line 717. *baigner* cites a Swiss environment report for a
+sentence from a French transport report. *voguer* labels an English-Wiktionary quotation as
+Wiktionnaire. That makes four wrong citations in 6,330 verbs, one of them fabricated. The rate is
+low, but a wrong author in a dictionary app is a visible error, and the lesson is structural:
+Stage 4 should take `source` and `line` from the matched candidate, never from the result
+file. The same goes for the free-text `source` on Wiktionnaire picks, which the checkers wrote
+five different ways.
+
+A smaller finding: the `changes_proposed` count each agent returns means different things to
+different agents. Some counted a filled-in example as a change and reported 35 of 35. Others
+counted only their gloss verdicts, and two explained the ambiguity at length in their notes. It
+only feeds the workflow's log line, so it was left alone. The counts that matter come from
+`validate_verb_pass.py --counts`:
+
+| Task | Counts (6,330 entries) |
+|---|---|
+| Gloss | ok 5,236 · style 519 · missing_primary_sense 221 · wrong_sense 194 · order 111 · typo 49 |
+| Existing example | none 5,185 · ok 1,080 · wrong_sense 50 · mistranslation 6 · not_verbal 3 · register 3 · verb_absent 2 · wrong_form 1 |
+| New example | authored 2,547 · tier 1,588 · wiktionnaire 863 · wiktionary_en 139 (1,193 need none) |
+| Flags | re: app_correct 126, change 41, unsure 15 · dg: unsure 25, app_correct 13, change 9 · ay: change 10, unsure 3, app_correct 1 · ah: unsure 3, change 2, app_correct 1 |
+| Notes | 1,325 entries carry at least one |
+
+There are 125 warnings for Stage 3. Nothing is committed.
+
+## Two loaded verbs get register labels (2026-09-21)
+
+Two batch-5 checkers had written notes on the verbs *enjuiver* and *ratonner*. Both judged the
+glosses accurate, and both flagged the words as loaded. Josh read the notes and chose labels
+over removal. *enjuiver* was glossed "cause to become more Jewish", which is faithful to both
+Wiktionaries but reads as neutral. The word's real use was almost entirely antisemitic,
+Vichy-era propaganda among it. It now reads "(antisemitic) cause to become more Jewish".
+*ratonner*, from the *ratonnades*, the attacks on North Africans around the Algerian War, now
+reads "(historical, racist) engage in racist attacks". Neither Wiktionary entry in the shards
+carried a register tag, which is why no checker could have proposed this as a gloss change. No
+gloss in `verbs.xml` had carried a register label before. The labels go first, as in the
+existing "(of a river) join, flow into…".
+
+The checkers also wrote example sentences for both verbs, and those are still only proposals
+for Stage 3. The *ratonner* sentence is the weaker one. Its "cette période sombre" has no
+referent, and its "groupes armés" misdescribes who carried out ratonnades, often police or
+civilians. The checker also passed over Wiktionnaire's second sense of the verb, cycling slang
+for sitting in the slipstream without taking a turn at the front.
+
+Josh then asked for a sweep of every checker note that called a verb offensive, vulgar or
+loaded. Nothing else was loaded the way *enjuiver* and *ratonner* are, but two glosses were
+misleading, and they were fixed directly the same way. *chiader* was glossed "defecate". No
+Wiktionary supports that, and the likely cause is a slip from *chier*. The verb is slang for
+working hard at something, and it now reads "work hard on, cram for an exam", as its checker
+proposed. So a harmless word had been glossed as a vulgar one. *molester* read "molest, maul",
+verbatim from English Wiktionary, and its checker left it as `ok`. But it added a note that in
+current English "molest" usually means the sexual abuse of a child, where the French verb means
+to manhandle or harass (Wiktionnaire: "Houspiller, maltraiter quelqu'un en paroles ou en
+actions"). It now reads "manhandle, harass". That note is the kind of judgement a verbatim
+comparison can't make, and it came from a checker that had no instruction to make it.
