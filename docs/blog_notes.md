@@ -3356,3 +3356,92 @@ Rebuilding the shards also printed 1,766 verbs needing an authored example where
 note says 1,776. A transposition in the note; nothing moved.
 
 Nothing is committed.
+
+## Stage 2 of the verb pass: the first 1,400 verbs, and a pause (2026-09-20)
+
+Stage 2 is the full run of the verb pass: 181 shards of 35 verbs, each handed to a Sonnet 5
+`verb-checker` subagent through `corpus/working/verb_pass.workflow.js`, in batches of 40. The
+session first confirmed the two preconditions the pilot's correction notes insisted on. The
+shard files are newer than `conjugations.json`, so they carry Stage A2's fixes. And
+`verb-checker` resolved as an agent type, because Claude Code had been restarted since
+`.claude/agents/` was created. No result files existed yet, so all 181 shards were pending.
+
+The plan says to validate every result file against the contract but names no tool for it, and
+`score_pilot.py` is wired to the pilot's three shards. So the first piece of work was
+`corpus/working/validate_verb_pass.py`. It checks each result against its own shard rather than
+merely parsing it: the right shard number, exactly the shard's ids once each and in order, the six
+record keys, and the verdict vocabularies. The count check matters most. The pilot showed that a
+short read of an 8,800-line shard produces a well-formed file with verbs missing from it. Anything
+failing those checks counts as pending, and `--pending` prints the list the next batch should
+take. Provenance problems are reported as warnings instead, since a re-run would not reliably fix
+them: a selected sentence that matches no candidate verbatim, a quotation whose author died in
+1931 or later, an authored sentence with the wrong source or a line number. Run over the pilot's
+Sonnet results, it reported 3 of 3 valid and the same verdict counts `score_pilot.py` gives.
+
+Batch 1, shards 1–40 (ranks 1–1,400), took 21 minutes and 3.8M subagent tokens. All 40 agents
+returned, `context_check` was false in all 40, and all 40 files validated with 35 of 35 verbs. No
+shard needed a re-run. The verdicts over those 1,400 verbs:
+
+| Task | Counts |
+|---|---|
+| Gloss | ok 1,185 · style 102 · missing_primary_sense 72 · order 19 · wrong_sense 14 · typo 8 |
+| Existing example | ok 960 · none 387 · wrong_sense 40 · mistranslation 6 · not_verbal 3 · verb_absent 2 · register 1 · wrong_form 1 |
+| New example | tier 283 · authored 98 · wiktionnaire 23 · wiktionary_en 9 (987 verbs need none) |
+| Flags | re: app_correct 14, change 5, unsure 2 · dg: unsure 9, app_correct 3, change 1 · ay: unsure 2, change 2 · ah: unsure 1 |
+| Notes | 127 verbs carry at least one |
+
+The agents counted 572 verbs carrying a proposed change. Per shard the figure climbs with rank,
+from 3 or 4 near the top to 34 in shard 40. The glosses do not get worse down the list. What
+changes is that the common verbs nearly all ship an example and the verbs past rank 1,000 mostly
+do not, so each of those gets a `new_example`. The two examples Stage 1 found with no form of their
+verb, *envisager* and *représenter*, both came back `verb_absent` with authored replacements. Some
+findings are ones the pass exists to produce: *souffrir*'s gloss is the untranslated French
+infinitive, *rédiger* is glossed "proofread" though it means draft, and *résoudre* leads with a
+chemistry sense, "dissolve".
+
+The warnings were the interesting part. Eleven of the 1,400 selected sentences matched no
+candidate verbatim, against none in the pilot. Nine are the checker cleaning up scraper noise that
+should never have reached it: a Wikipedia section heading glued to the front of a sentence
+(`=== Manifestations culturelles === Le calendrier…`), a footnote number fused to a year
+(`début 202014`), a stray leading `)` or `;`, a space before a comma. Two are real edits of a cited
+sentence, both small. For *synthétiser* the checker dropped a parenthetical English name from
+line 1587 of a public-health report, and for *licencier* it dropped a comma from a Wiktionnaire
+quotation. Neither changes the meaning, but both still carry a citation to text they no longer
+reproduce exactly. So the provenance rule held in spirit and bent in letter. The fix belongs
+upstream: `build_candidates.py` should strip headings and footnote markers so a checker never has
+a reason to edit. Meanwhile the warnings go to Stage 3 as provenance items.
+
+Josh then asked for no further batches, so the run is paused at 40 of 181 shards. The plan's
+Stage 2 carries a partial-progress note rather than a checkmark. Resuming is one command,
+`validate_verb_pass.py --pending`, followed by the next 40 of its list. At batch 1's rate the
+remaining 141 shards are about four more batches, roughly 80 minutes and 13M subagent tokens.
+Nothing is committed.
+
+## Cleaning the corpus candidates at the source (2026-09-20)
+
+Batch 1 of Stage 2 left eleven warnings where a checker had tidied a candidate sentence while
+keeping its citation. Nine of them were tidying junk that `build_candidates.py` should never have
+passed along, so the fix went there rather than into the checker's instructions. A survey of
+all 9,849 corpus candidates found five kinds of junk. Wikipedia section headings sat inline
+(`===== Pakistan ===== Le Pakistan a été…`) in 145. Gutenberg's bracketed footnote calls
+(`prétend[333]`) sat in 233, and a few candidates were a footnote's own text. Government reports
+contributed footnote numbers fused to a year (`depuis début 202014`) or to a word
+(`les Alpes37`). And 168 opened with a stray `)`, `»` or `;` left over from where the sentence
+splitter started.
+
+`clean_tier_sentence` removes all five. The word rule was the only delicate one, because the
+same shape, letters followed by digits, is also `m3`, `dm3`, `km2` and `CO2`. Requiring four
+letters before the digits keeps every unit in the corpus and catches every footnote but one,
+`CO2/an6`, which stays. The year rule is limited to 2010–2029 for the same reason: `193281` is a
+Dunlop patent number, not 1932 plus footnote 81. The first rebuild still left one candidate
+starting `; ;`, because the pattern ate one mark and its space and stopped. It now repeats.
+
+The rebuild changed only candidate lists: 506 verbs, 22 fewer corpus candidates, the same shard
+membership and the same 1,766 verbs needing an authored sentence. Twenty of the changed verbs
+sit in shards 1–40, which have already run. Their results stay valid, and the warnings there
+fall from eleven to five, because the six clean-ups the checker made now match the cleaned
+candidate exactly. What remains is two small real edits (*synthétiser*, *licencier*), one
+heading written as plain text that no pattern can separate from prose (*baigner*), and two
+Wiktionary sentences whose typography the checker corrected (*raser*, *gazer*). Those five go
+to Stage 3. The pilot shards were left alone, so the pilot's record still describes what the
+three models actually saw.

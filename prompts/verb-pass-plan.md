@@ -5,7 +5,9 @@ committed yet. Stage A2 was written into this plan on 2026-09-20, after Stage 1'
 engine errors with no route through Stages 2–4. Josh took decision 6 on
 2026-09-20: the rectified spelling, and A2 applied it. The pilot ran the same three shards on
 Sonnet 5, Haiku 4.5 and Opus 5; Sonnet 5 and Opus 5 passed, Haiku 4.5 failed on provenance, and
-decision 5 stands: **Sonnet 5 for the shards, Opus 5 for the skeptic pass**. Stage 2 is next.
+decision 5 stands: **Sonnet 5 for the shards, Opus 5 for the skeptic pass**. Stage 2 started on
+2026-09-20: batch 1 (shards 1–40, 1,400 verbs) ran and validated, and Josh then paused the run.
+Shards 41–181 are pending; `validate_verb_pass.py --pending` prints them.
 Josh approved the five decisions on 2026-09-20; they are recorded in the last section and
 folded into the stages below. Apart from Stages A and 0, nothing has run yet except the
 measurements. Every number here was computed on 2026-09-20 against
@@ -28,7 +30,8 @@ pilot**: none of its 43 verbs is in a pilot shard, and the pilot measures the mo
 It does block Stage 2's full run.
 
 **Progress** (implementers update this line): Stage A ✅ 2026-09-20 · Stage 0 ✅ 2026-09-20 ·
-Stage 1 ✅ 2026-09-20 · Stage A2 ✅ 2026-09-20 · Pilot ✅ 2026-09-20 · Stage 2 ☐ · Stage 3 ☐ ·
+Stage 1 ✅ 2026-09-20 · Stage A2 ✅ 2026-09-20 · Pilot ✅ 2026-09-20 · Stage 2 ☐ (40 of 181
+shards, paused by Josh 2026-09-20) · Stage 3 ☐ ·
 Stage 4 ☐
 
 ## How implementers keep this plan honest
@@ -1268,13 +1271,20 @@ Paste:
 
 ```
 Read @prompts/verb-pass-plan.md, Stage 2, and run the verb pass: compute the pending shard
-list (shards with no valid result file), run corpus/working/verb_pass.workflow.js in check
-mode over them in batches of 40 with the model decision 5 records (a workflow is intended;
-use the Workflow tool), validate every result file against the contract, re-run shards
-whose file is missing or invalid, summarize the counts, and journal in docs/blog_notes.md.
+list with `python3 corpus/working/validate_verb_pass.py --pending` (shards with no valid
+result file), run corpus/working/verb_pass.workflow.js in check mode over them in batches of
+40 with the model decision 5 records (a workflow is intended; use the Workflow tool), validate
+every result file with validate_verb_pass.py, re-run shards whose file is missing or invalid,
+summarize the counts, and journal in docs/blog_notes.md.
 Mark completed steps with ✅ in this plan and add a correction note wherever the plan
 proved wrong or incomplete. Do not commit; Josh commits.
 ```
+
+**Correction (2026-09-20):** the prompt above is corrected in place. As first written it said to
+"compute the pending shard list" and "validate every result file against the contract" with no
+tool for either, so the first Stage 2 session wrote `validate_verb_pass.py`. The prompt now names
+it, so a resuming session reuses it rather than writing another. It works unchanged for a
+resumed run, because shards with a valid result file are not pending.
 
 **Correction (2026-09-20):** Stage 2 must run against shards built **after** Stage A2, because
 A2 changes `conjugations.json` and every Stage 1 output derives from it. Check that the shard
@@ -1348,6 +1358,53 @@ object in the result contract of the pilot section.
 
 Acceptance: a valid result file for every shard; every verb appears once across them;
 `context_check` false everywhere; the journal reports verdict counts by task.
+
+**Progress (2026-09-20): partial, 40 of 181 shards.** Batch 1 (shards 1–40, ranks 1–1,400) ran
+on Sonnet 5 in 21 minutes and 3.8M subagent tokens: 40 of 40 summaries, `context_check` false in
+all 40, and 40 of 40 result files valid against their shards, with 35 of 35 verbs each, in order.
+No shard needed a re-run. Josh then asked for no further batches, so shards 41–181 have not been
+launched. The verdict counts for batch 1 are in the journal entry of the same date. To resume,
+run `python3 corpus/working/validate_verb_pass.py --pending` and launch the workflow over the
+next 40 of the list it prints.
+
+**Correction (2026-09-20):** the plan says to "validate every result file against the contract"
+but names no tool for it, and `score_pilot.py` only reads the pilot's three shards. Stage 2 adds
+`corpus/working/validate_verb_pass.py` (tracked, whitelisted), which checks each file against its
+own shard: parseable, the right `shard` number, exactly the shard's ids once each and in order,
+the six record keys and the fixed vocabularies. A file failing any of those is pending. It was
+checked first against the pilot's Sonnet results (3 of 3 valid, the same counts
+`score_pilot.py` reports).
+
+**Correction (2026-09-20):** "copy a chosen sentence's French verbatim" held less strictly than
+in the pilot. The validator reports provenance problems as warnings, not failures, because a
+re-run would not reliably fix them. Batch 1 produced 11 of 1,400. Nine are the checker trimming
+scraper noise off a candidate: a wiki heading glued to the front (`=== Manifestations
+culturelles === Le calendrier…`), a footnote digit glued to a year (`début 202014`), a leading
+`)` or `;`, a space before a comma, a line break inside a quotation. Two are real edits of a
+cited sentence. *synthétiser* drops a parenthetical (`(« Local Authority Health Profiles »)`)
+from `fr-sante-publique-demain-2022.txt` line 1587, and *licencier* drops a comma from a
+Wiktionnaire quotation. Neither changes the meaning, but both keep the citation. Stage 3 should
+receive these warnings (`validate_verb_pass.py --warnings`) and judge them as provenance items.
+The noise itself is a Stage 1.5 defect: `build_candidates.py` should strip wiki headings and
+footnote markers before a candidate reaches a checker.
+
+**Correction (2026-09-20, fixed the same day):** `build_candidates.py` now cleans every `tier`
+sentence before it becomes a candidate (`clean_tier_sentence`). It strips wiki headings
+(`== … ==`, 145 candidates had one), bracketed Gutenberg footnote calls (`prétend[333]`, 233),
+report footnote calls fused to a 2010s or 2020s year (`202014` → `2020`) or to a word of four
+letters or more (`Alpes37`), and stray leading `)`, `]`, `»`, `;`, `,` or `:`. A candidate that is
+itself a Gutenberg footnote (`[130] Pour: …`) is dropped. Units keep their digits (`m3`, `dm3`,
+`CO2`), and so does a longer 19xx number, which is usually real (a patent number). The one
+known miss is a footnote call after a word of two or three letters (`CO2/an6`). Candidates and
+shards were rebuilt: only the `candidates` field changed, in 506 verbs across shards 14–175
+(20 of them in the already-run shards 1–40), tier candidates fell from 9,849 to 9,827, every
+verb stayed in its shard, and `author_needed` is still 1,766. The pilot shards were not rebuilt.
+Re-validated against the rebuilt shards, batch 1 still has 40 of 40 files valid, and its
+warnings fall from 11 to 5. The six that cleared are the checker's own clean-ups, which now
+match the cleaned candidate exactly. The five left are *synthétiser* and *licencier* (the real
+edits above), *baigner* (a heading with no `==` markup, which no pattern can tell from prose),
+and *raser* and *gazer*, where the checker fixed the source's own typography (a space before a
+comma, a lower-case initial) on a Wiktionary sentence.
 
 ## Stage 3: skeptic pass and report
 

@@ -9,7 +9,9 @@ quotation could replace those). Up to twelve candidates each, in this order of p
                    One pass per document, tokens looked up in the forms of conjugations.json,
                    the whole sentence recovered around the hit, ranked by how unambiguously
                    verbal the token is (`build_tail_index.verbalness`). At most five, spread
-                   across tiers so one document cannot fill the slate.
+                   across tiers so one document cannot fill the slate. The sentence is
+                   cleaned of the source's apparatus (`clean_tier_sentence`), and one that
+                   is itself a Gutenberg footnote is dropped.
   2. wiktionnaire  French-Wiktionary quotations whose reference names an author who died before
                    1931 in authors.json, whose text is one complete sentence with no elision
                    ([…]) and no editorial parenthesis. At most five.
@@ -39,6 +41,16 @@ SENTENCE_END = ".!?…"
 AUTHORED_PREFIX = "Claude"
 ELIDED = re.compile(r"\[[^\]]*\]|\(\s*…\s*\)|…\s*\]")
 YEAR = re.compile(r"\b(1[0-9]{3}|20[0-9]{2})\b")
+WIKI_HEADING = re.compile(r"={2,}[^=]*={2,}\s*|^[^=]*={2,}\s*|\s*={2,}[^=]*$")
+BRACKET_NOTE = re.compile(r"\s?\[\d{1,4}\]")
+FOOTNOTE_BODY = re.compile(r"^\[\d{1,4}\]")
+# A report's footnote call fused to a year: "depuis début 202014." The year range is kept
+# narrow on purpose, since a longer number starting 19xx is usually real (a patent number).
+YEAR_NOTE = re.compile(r"\b(20[12][0-9])[0-9]{1,3}\b")
+# A footnote call fused to a word: "à travers les Alpes37,". Four letters at least, so that
+# units and formulas (m3, dm3, km2, CO2) keep their digits.
+WORD_NOTE = re.compile(r"(?<=[a-zàâäçéèêëîïôöùûüœæ]{4})[0-9]{1,3}(?=[\s.,;:!?»)]|$)")
+LEADING_STRAY = re.compile(r"^(?:[)\]»;,:]\s*)+")
 
 
 def target_ids(verbs, examples):
@@ -73,6 +85,25 @@ def form_index(targets, conjugations):
     return index
 
 
+def clean_tier_sentence(sentence):
+    """Strip wiki headings, footnote calls and stray leading punctuation; None for a footnote.
+
+    The corpus files keep Wikipedia section headings inline (`=== Pays === Le Pakistan…`),
+    Gutenberg footnote calls in brackets (`prétend[333]`), and report footnote calls fused to
+    the preceding word or year. A checker handed those cleaned them up itself while keeping
+    the citation, which the provenance rule forbids, so they are removed here instead. The
+    cleaned text is the source sentence minus its apparatus, never a reworded one.
+    """
+    if FOOTNOTE_BODY.match(sentence):
+        return None
+    sentence = WIKI_HEADING.sub(" ", sentence)
+    sentence = BRACKET_NOTE.sub("", sentence)
+    sentence = YEAR_NOTE.sub(r"\1", sentence)
+    sentence = WORD_NOTE.sub("", sentence)
+    sentence = LEADING_STRAY.sub("", " ".join(sentence.split()))
+    return sentence
+
+
 def sentence_around(lines, line_number, token):
     """The sentence holding `token` on `lines[line_number]`, expanded up to CONTEXT_LINES away."""
     low = max(0, line_number - CONTEXT_LINES)
@@ -98,7 +129,9 @@ def sentence_around(lines, line_number, token):
         if block[index] in SENTENCE_END:
             end = index + 1
             break
-    sentence = " ".join(block[start:end].split())
+    sentence = clean_tier_sentence(" ".join(block[start:end].split()))
+    if not sentence or token not in sentence.lower():
+        return None
     if len(sentence) > MAX_SENTENCE or len(sentence) < 20:
         return None
     return sentence

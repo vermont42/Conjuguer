@@ -271,7 +271,8 @@ corpus/                         # Literature-example pipeline; NOT part of any t
 │                               # audit_flags.py, lint_glosses.py (+ gloss_lint_whitelist.txt), check_examples.py, build_candidates.py and
 │                               # build_verb_pass_shards.py, whose outputs land in the ignored working/verb_pass/ (see prompts/verb-pass-plan.md);
 │                               # the pass itself runs through verb_pass.workflow.js (check and skeptic modes, one subagent per shard) and its pilot is
-│                               # graded by score_pilot.py against the answer key that build_verb_pass_shards.py --pilot plants beside the pilot shards
+│                               # graded by score_pilot.py against the answer key that build_verb_pass_shards.py --pilot plants beside the pilot shards;
+│                               # validate_verb_pass.py checks Stage 2's result files against their shards and prints the pending list
 └── grokked/                    # Intermediate per-source extraction output
 
 frequency/                      # Verb-frequency pipeline; NOT part of any target. See frequency/README.md
