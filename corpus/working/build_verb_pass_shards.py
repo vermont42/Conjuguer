@@ -238,17 +238,22 @@ def build_pilot(records):
             answer_key[verb] = {"task": "example", "expected_verdict": "verb_absent",
                                 "detail": "the sentence contains no form of the verb"}
     for verb, nouns in homograph_candidates(selection).items():
+        # `author_needed` stays false: the record must look exactly like a verb whose list came
+        # back full, or the canary announces itself and the checker never has to read the list.
         index[verb]["candidates"] = nouns
-        index[verb]["author_needed"] = True
         answer_key[verb] = {"task": "example_selection", "expected_verdict": "reject_all",
-                            "detail": "every candidate uses the same-spelled noun, not the verb"}
+                            "detail": "every candidate uses the same-spelled noun, not the verb",
+                            "planted_tokens": sorted({noun["token"] for noun in nouns})}
     for verb, candidate in post_1930_quotations(selection, french, authors).items():
         if verb in answer_key:
             continue
         index[verb]["candidates"] = [candidate] + index[verb]["candidates"]
         answer_key[verb] = {"task": "example_selection", "expected_verdict": "reject_quotation",
                             "detail": f"{candidate['author']} died in {candidate['death_year']}, "
-                                      f"so the quotation is not public domain"}
+                                      f"so the quotation is not public domain",
+                            "planted_text": candidate["text"],
+                            "planted_author": candidate["author"],
+                            "planted_death_year": candidate["death_year"]}
 
     directory = L.OUT_DIR / "pilot"
     written = write_shards(selection, directory)

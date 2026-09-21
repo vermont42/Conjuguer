@@ -1,9 +1,12 @@
 # Verb pass: working plan (2026-09-20)
 
-**Status:** Stages A, 0, 1 and A2 all ran on 2026-09-20 and are complete; nothing is committed
-yet. Stage A2 was written into this plan on 2026-09-20, after Stage 1's conjugation audit found
+**Status:** Stages A, 0, 1, A2 and the pilot all ran on 2026-09-20 and are complete; nothing is
+committed yet. Stage A2 was written into this plan on 2026-09-20, after Stage 1's conjugation audit found
 engine errors with no route through Stages 2–4. Josh took decision 6 on
-2026-09-20: the rectified spelling, and A2 applied it. The pilot is next. Josh approved the five decisions on 2026-09-20; they are recorded in the last section and
+2026-09-20: the rectified spelling, and A2 applied it. The pilot ran the same three shards on
+Sonnet 5, Haiku 4.5 and Opus 5; Sonnet 5 and Opus 5 passed, Haiku 4.5 failed on provenance, and
+decision 5 stands: **Sonnet 5 for the shards, Opus 5 for the skeptic pass**. Stage 2 is next.
+Josh approved the five decisions on 2026-09-20; they are recorded in the last section and
 folded into the stages below. Apart from Stages A and 0, nothing has run yet except the
 measurements. Every number here was computed on 2026-09-20 against
 `Conjuguer/Models/verbs.xml` (6,330 entries, 6,326 distinct infinitives) and
@@ -25,7 +28,8 @@ pilot**: none of its 43 verbs is in a pilot shard, and the pilot measures the mo
 It does block Stage 2's full run.
 
 **Progress** (implementers update this line): Stage A ✅ 2026-09-20 · Stage 0 ✅ 2026-09-20 ·
-Stage 1 ✅ 2026-09-20 · Stage A2 ✅ 2026-09-20 · Pilot ☐ · Stage 2 ☐ · Stage 3 ☐ · Stage 4 ☐
+Stage 1 ✅ 2026-09-20 · Stage A2 ✅ 2026-09-20 · Pilot ✅ 2026-09-20 · Stage 2 ☐ · Stage 3 ☐ ·
+Stage 4 ☐
 
 ## How implementers keep this plan honest
 
@@ -1119,7 +1123,7 @@ test functions to 22 and pins every corrected form. `conjugations.json` was rege
 all six Stage 1 scripts re-ran against it. `xmllint --valid` passes on `verbs.xml` and
 `verbModels.xml` is still merely well-formed, for the reason A1 gives.
 
-## Pilot before the full run
+## Pilot before the full run ✅ 2026-09-20
 
 Runs after Stage 1, in a clean session, and writes the artifacts Stage 2 and Stage 3 reuse.
 Paste:
@@ -1174,6 +1178,90 @@ both post-1930 quotations rejected; `context_check` false everywhere; the struct
 summary valid in every shard. If Sonnet 5 passes, it is the model; if only Opus 5 passes,
 Opus 5 with a recomputed cost line. Either way, record it in decision 5.
 
+**Correction (2026-09-20): the pilot ran, and five things in this section were wrong or
+missing.** The result, first: all three models caught all twelve canaries, so the canaries
+did not separate them. What separated them was provenance. **Sonnet 5 and Opus 5 pass;
+Haiku 4.5 fails.** Decision 5 stands unchanged.
+
+| | Sonnet 5 | Haiku 4.5 | Opus 5 |
+|---|---|---|---|
+| gloss canaries caught (exact verdict) | 5/5 (5) | 5/5 (5) | 5/5 (5) |
+| broken examples caught | 2/2 | 2/2 | 2/2 |
+| homograph lists rejected | 3/3 | 3/3 | 3/3 |
+| post-1930 quotations rejected | 2/2 | 2/2 | 2/2 |
+| verbs needing an example that got one | 63/63 | 63/63 | 63/63 |
+| attributed sentences **trimmed / rewritten** | 0 / 0 | 4 / **5** | 0 / 0 |
+| unrequested gloss changes (of 100) | 15 | 6 | 18 |
+| flag adjudications wrong (of 3 decidable) | 0 | **3** | 0 |
+| `context_check` | false ×3 | false ×3 | false ×3 |
+| contract violations | none | none | none |
+
+*The agent registry is read once, at process start.* The plan says the two agent
+definitions "must exist before the session that spawns them starts", and they did. They were
+committed four commits before the pilot. It is not enough: the **session process**
+must start after the files exist. This session had been running since before
+`.claude/agents/` was created, and `agentType: "verb-checker"` failed with *"Agent type
+'verb-checker' not found"*, as did a brand-new minimal agent file added mid-session, while
+a fresh `claude --print` in the same directory listed all of them. Claude Code 2.1.278
+documents hot reload "within seconds"; it did not happen here, and no reload command is
+documented. The pilot was driven instead from three fresh headless `claude --print`
+processes, each calling the Workflow tool once
+(a three-line `run_pilot.sh` in the session scratchpad, one invocation per model). **Before
+Stage 2, restart Claude Code**, and check that `verb-checker` resolves before launching 181
+shards. Confirmed the same day: after Josh exited and resumed the session, `verb-checker` and
+`verb-skeptic` were listed among the available agent types with their `Read, Write` tools, so
+a restart is the whole fix.
+
+*The agent cannot be given the shard inline.* This section says `promptFor(n)` "pastes the
+shard JSON inline". A workflow script has no filesystem access, so the only way to paste a
+shard is for the orchestrator to read it first — 14.5 MB across Stage 2, in the context the
+design exists to protect. The workflow therefore names the shard **path** and the agent
+reads it, which is what `mine_examples.workflow.js` already does; `tools:` is `Read, Write`,
+not `Write`. The prompt tells the agent to pass an explicit large `limit` and to keep
+reading until the closing brace, because the top-of-file shard is 8,832 lines and a default
+Read stops at 2,000. All three models chunked it correctly and all nine shards came back
+with 35 of 35 verbs, but the failure mode is silent, so Stage 2 should keep validating the
+count per file.
+
+*`context_check` earns its place.* `omitClaudeMd: true` worked: false in all nine shards,
+and the subagent transcript contains nothing from CLAUDE.md. The only occurrences of
+"SwiftLint" and "ios-build-verify" in it are the two the `context_check` instruction itself
+supplies. The `opts.model` override also beat the definition's `model: sonnet`: the
+transcripts record `claude-sonnet-5`, `claude-haiku-4-5-20251001` and `claude-opus-5`.
+
+*"At most one false alarm among the correct glosses" cannot be scored, and is now reported
+instead.* It assumes the 100 non-canary glosses are verified-correct controls. They are live
+app data, and Stage 1's own lint flagged seventeen of them before any model saw them. Every
+model fails the criterion, and the count measures the data rather than the model: Sonnet's
+15 include *rendre* "render" → "give back, make", *équivoquer* "equivocate, æquivocate" →
+"equivocate" and *banaliser* "banalize" → "make commonplace, trivialize", which are the
+findings the pass exists to produce. `score_pilot.py` keeps the rate as a comparable number
+and drops it from the pass/fail set. Taking its place are two criteria the pilot showed do
+discriminate: **no attributed sentence rewritten**, and **no quotation outside the public
+domain**.
+
+*The canary that decided it was not in the list.* Haiku 4.5 selected corpus sentences and
+then edited them while keeping `source` and `line`. It turned Flaubert's "Un médecin
+d’Yvetot, avec qui dernièrement il s’était trouvé en consultation, l’avait humilié quelque
+peu…" into "Un médecin d’Yvetot l’avait humilié quelque peu…" and still cited
+`flaubert-madame-bovary-1857.txt` line 2337. Five sentences rewritten, four more trimmed.
+Sonnet 5 and Opus 5 copied every selected sentence verbatim and explained each rejection in
+a note. Haiku also got all three decidable flag audits backwards, reading "Wiktionary does
+not mark it defective" as "the app is wrong" for *béer*, *neiger* and *doucher*, where the
+app is right and the reason is that the app stores one value per verb. It wrote 4 notes
+across 105 verbs against 39 for each of the other two.
+
+*Two canaries needed repair before the run.* `build_verb_pass_shards.py --pilot` was setting
+`author_needed: true` on the three homograph verbs, which announces the trap: the field means
+"no candidate was found", and these have three to five. It now stays false. The answer key
+also recorded no *text* for the post-1930 quotations, so nothing could check deterministically
+which sentence a model chose; it now carries `planted_text`, `planted_author` and
+`planted_death_year`, and `planted_tokens` for the homographs.
+
+*One count in Stage 1's correction is off by a transposition.* Rebuilding the shards prints
+**1,766** verbs needing an authored example, not the 1,776 the 1.5 correction records. Nothing
+else moved.
+
 ## Stage 2: the full run
 
 Paste:
@@ -1192,6 +1280,15 @@ proved wrong or incomplete. Do not commit; Josh commits.
 A2 changes `conjugations.json` and every Stage 1 output derives from it. Check that the shard
 files are newer than `conjugations.json` before computing the pending list. It is 181 shards, not
 180.
+
+**Correction (2026-09-20, after the pilot):** two more things to check before launching.
+**Start Claude Code fresh**, then confirm `verb-checker` resolves. The agent registry is
+read once at process start, and a session older than `.claude/agents/` fails all 181 shards
+in a few milliseconds with "Agent type 'verb-checker' not found" (see the pilot section).
+And **validate the entry count of every result file against its shard**, not just its JSON
+validity: the agent reads a shard up to 8,832 lines long across several `Read` calls, and a
+short read produces a well-formed file with verbs missing from it. The shards were rebuilt
+on 2026-09-20 after A2 and are newer than `conjugations.json`.
 
 Mechanics: about 180 shards. The Workflow tool runs at most 16 agents at once, so a batch of
 40 takes a few minutes of wall clock; between batches the orchestrator only recomputes the
@@ -1374,6 +1471,19 @@ single-turn, tool-free shards fed by deterministic retrieval are.
    split the gloss.
 5. **Models.** Sonnet 5 for shards, Opus 5 for the skeptic pass, unless the pilot says
    otherwise. The pilot session records the measured choice here.
+
+   ✅ **Measured 2026-09-20: Sonnet 5 for the shards, Opus 5 for the skeptic pass — the
+   provisional choice, confirmed.** The pilot ran the same three shards (105 verbs, twelve
+   canaries) on all three models. Sonnet 5 and Opus 5 both pass every acceptance criterion;
+   Haiku 4.5 fails, and not on the canaries (it caught all twelve) but on provenance: it
+   rewrote five corpus sentences while keeping the `source` and `line` that cite them, and
+   got all three decidable flag audits backwards. Between the two that pass, Sonnet 5 is
+   chosen because Opus 5's extra spend bought nothing the pilot could measure: identical
+   canary scores, the same zero rewrites, three more gloss proposals of the same kind, and
+   an authoring rate slightly higher (44 of 63 against 40). Opus 5 stays the skeptic, where
+   judging a change someone else proposed is the harder half of the job. The cost line
+   stands as written. Full numbers and the measurement's own limits are in the pilot
+   section's correction note.
 
 ## Decision 6 (added 2026-09-20 after Stage 1)
 

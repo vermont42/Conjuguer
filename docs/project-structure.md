@@ -269,7 +269,9 @@ corpus/                         # Literature-example pipeline; NOT part of any t
 │                               # builders (build_wiktionary_reference.py and build_author_table.py) and its Stage 1 audits — verb_pass_lib.py (shared
 │                               # loader: verbs.xml with ranks, conjugations, both Wiktionary references, authors, defect groups), audit_conjugations.py,
 │                               # audit_flags.py, lint_glosses.py (+ gloss_lint_whitelist.txt), check_examples.py, build_candidates.py and
-│                               # build_verb_pass_shards.py, whose outputs land in the ignored working/verb_pass/ (see prompts/verb-pass-plan.md)
+│                               # build_verb_pass_shards.py, whose outputs land in the ignored working/verb_pass/ (see prompts/verb-pass-plan.md);
+│                               # the pass itself runs through verb_pass.workflow.js (check and skeptic modes, one subagent per shard) and its pilot is
+│                               # graded by score_pilot.py against the answer key that build_verb_pass_shards.py --pilot plants beside the pilot shards
 └── grokked/                    # Intermediate per-source extraction output
 
 frequency/                      # Verb-frequency pipeline; NOT part of any target. See frequency/README.md

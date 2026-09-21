@@ -3242,3 +3242,117 @@ thirty-four verbs rather than fourteen, in both languages, with the twelve respe
 paragraph of their own that says plainly that both spellings are correct French.
 
 Nothing is committed.
+
+## The verb-pass pilot: three models, twelve canaries, and the one that told them apart (2026-09-20)
+
+The pilot's job was to choose the model that will judge 6,326 verbs, and to do it before
+spending a hundred subagents finding out. The plan's design was a set of canaries: plant
+twelve known defects in 105 real verbs, run the same three shards on Sonnet 5, Haiku 4.5 and
+Opus 5, and see which model finds them. Five glosses broken two ways (three swapped for
+another verb's sense, two misspelled), the two shipped examples that contain no form of their
+verb, three candidate lists cut down to sentences where the word is a same-spelled noun, and
+two quotations by authors who died after 1930 and are therefore not public domain.
+
+All three models caught all twelve. Every one of them. The canaries measured nothing.
+
+That is worth saying plainly, because it is the pilot's most useful finding and it is not the
+one the plan expected. A planted defect is a defect someone designed to be findable, and a
+frontier model in 2026 finds them. Haiku 4.5 caught the same twelve Opus 5 did, with the exact
+verdict on each — `typo` for *sng*, `wrong_sense` for *écrire* glossed "read", `verb_absent`
+for *envisager*, all three homograph lists rejected, both Naudeau and Gide refused by death
+year. If the pilot had scored only its answer key it would have concluded that Haiku is as good
+as Opus and cost a twentieth as much.
+
+### What actually separated them
+
+Haiku rewrote the sentences it cited. Not many: five, out of the 28 it selected from candidate
+lists. But the thing it did to them is the thing the whole corpus pipeline exists to prevent.
+Flaubert's line 2337 of *Madame Bovary* reads "Un médecin d’Yvetot, avec qui dernièrement il
+s’était trouvé en consultation, l’avait humilié quelque peu, au lit même du malade, devant les
+parents assemblés." Haiku emitted "Un médecin d’Yvetot l’avait humilié quelque peu, au lit même
+du malade, devant les parents assemblés." — tidier, shorter, better for a learner, and still
+carrying `"source": "flaubert-madame-bovary-1857.txt", "line": 2337`. It is a quotation of a
+sentence that does not exist. Four more it trimmed at one end, which is defensible editing and
+still breaks the rule the agent definition states in as many words: copy the French verbatim,
+because `source` and `line` are a citation. Sonnet 5 and Opus 5 each selected from the same
+lists and altered nothing, zero of 26 and zero of 22.
+
+The same split showed up in judgment. Three of the pilot's four flag audits are decidable from
+the shard: *béer* and *neiger* carry a defective group the Wiktionary extract does not
+corroborate, and *doucher* is marked pronominal where no sense is tagged so. In all three the
+app is right, for the same reason each time: the app stores one value per verb, and the value
+belongs to the sense the gloss leads with. *Neiger* is impersonal; English Wiktionary tags it so
+and its only example is *Il neigeait.* Haiku changed all three, reasoning "the audit found no
+marking in Wiktionary, so the app is wrong", which is reading the audit rather than the
+evidence. Sonnet and Opus both left all three alone and said why. Across 105 verbs Haiku wrote
+four notes; Sonnet and Opus wrote thirty-nine each.
+
+So the acceptance criteria gained two items the plan did not have — no attributed sentence
+rewritten, no quotation outside the public domain — and both are computed by
+`score_pilot.py` from the shards, not from the answer key. They are the criteria a canary
+cannot express, because the failure they catch is not a missed defect but an invented fact.
+
+### A criterion that could not be scored
+
+The plan also asked for "at most one false alarm among the correct glosses". Nobody can meet
+it, and the reason is that the 100 non-canary glosses are not correct glosses; they are the
+app's real data, and `lint_glosses.py` had already flagged seventeen of them before any model
+saw a shard. Sonnet proposed fifteen unrequested gloss changes and they read like the point of
+the exercise: *rendre* "render" → "give back, make", *équivoquer* "equivocate, æquivocate" →
+"equivocate", *banaliser* "banalize" → "make commonplace, trivialize". Counting those as false
+alarms would score the data, not the model. The rate stays in the report as a comparable number
+— Sonnet 15, Opus 18, Haiku 6 — and it is out of the pass/fail set. Haiku's low number is not a
+virtue here; it proposed fewer changes of every kind.
+
+Between the two that passed, Sonnet 5 is the choice, which is where decision 5 already stood.
+Opus 5's extra spend bought nothing measurable: the same twelve canaries, the same zero
+rewrites, three more gloss proposals of the same character, and a marginally higher tendency to
+write its own sentence rather than take one from the list (44 of 63 against 40). Opus stays the
+skeptic, where the work is judging someone else's proposal rather than producing one.
+
+### Two things in the harness that had to be worked around
+
+The pilot could not be launched. `agentType: "verb-checker"` came back "Agent type
+'verb-checker' not found", listing only the built-ins. The agent files had existed for four
+commits. A brand-new minimal agent definition, created mid-session and retried minutes later,
+was equally invisible, while `claude --print` in the same directory listed all four. So the
+registry is read once at process start and this session predated `.claude/agents/`. Claude Code
+2.1.278's documentation says agent-directory changes are picked up within seconds; here nothing
+was, and there is no documented reload. The workaround was to run each of the three pilots from
+a fresh headless `claude --print` process whose only instruction was to call the Workflow tool
+once. That is genuinely a workflow with the real agent definitions, and it kept the pilot on the
+plan's rails, but Stage 2 should simply start in a restarted session and check that the agent
+resolves before it queues 181 shards. Josh exited and resumed right after the pilot, and both agents appeared in
+the list at once, which confirms the diagnosis.
+
+The second was the plan's premise that the workflow would paste each shard into the prompt. A
+workflow script has no filesystem access, so "pasting" means the orchestrator reads the shard
+first — 14.5 MB over Stage 2, into the one context the design exists to keep small. The agent
+reads its own shard instead, exactly as `mine_examples.workflow.js` already does, and `tools:`
+is `Read, Write`. That introduced its own hazard: the top-of-file shard is 8,832 lines and a
+default `Read` stops at 2,000, so a shard can come back three-quarters missing with nothing to
+show for it. The prompt tells the agent to pass a large explicit `limit` and to keep reading
+to the closing brace, and all nine shards came back with 35 of 35. The failure is silent
+enough that Stage 2 should verify the count per file rather than trust it.
+
+`omitClaudeMd: true` did work, which is the other thing the pilot was meant to confirm.
+`context_check` came back false in all nine shards, and grepping a subagent transcript for
+"SwiftLint" and "ios-build-verify" finds only the two mentions the `context_check` instruction
+itself contributes. The per-agent `model` override also beat the definition's own `model:
+sonnet`: the transcripts record `claude-sonnet-5`, `claude-haiku-4-5-20251001` and
+`claude-opus-5`.
+
+### Two canaries that were announcing themselves
+
+Building the pilot shards turned up a flaw in the canaries themselves. The three homograph
+verbs were being written with `author_needed: true`, and that field means "no candidate was
+found". *Pincer* has three candidates, *neiger* five. A model that trusts the field never has
+to read the list, which is the only thing the canary tests. It stays false now. And the answer
+key recorded no text for the two post-1930 quotations, only the author's name, so nothing could
+check deterministically which sentence a model had chosen; it now carries `planted_text`,
+`planted_author` and `planted_death_year`.
+
+Rebuilding the shards also printed 1,766 verbs needing an authored example where the Stage 1
+note says 1,776. A transposition in the note; nothing moved.
+
+Nothing is committed.
