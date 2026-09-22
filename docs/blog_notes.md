@@ -3724,3 +3724,29 @@ one card at a time with both models' reasoning, driven from the keyboard. Its ex
 decisions merge back into `approvals.json`. One thing surfaced along the way:
 `build_report.py` had been regenerating `approvals.json` from scratch, so a rebuild would have
 silently reset every decision to pending. It now carries decisions, values and notes over.
+
+## The false "disk full" banner goes quiet (2026-09-21)
+
+For weeks, Bash calls in this repo kept coming back with "the temp filesystem … is full (0MB
+free) … ENOSPC", and compound commands kept losing their tail end. Both were Claude Code
+harness bugs on this Intel Mac. Bun's darwin-x64 `statfs` returned a block size of 0, so every
+empty-output failure was explained as a full disk (#65166). Separately, the injected
+`grep`/`find` shadow functions could kill Apple's bash 3.2 mid-command (#62642). CLAUDE.md
+grew a section warning future sessions not to believe the banner.
+
+Revisiting #65166 today showed it auto-closed as stale and locked, with no fix recorded. Yet on
+Claude Code 2.1.278 the reproduction, `sh -c 'exit 7'`, now prints a plain `Exit code 7`. The
+binary bundles Bun 1.4.3, which presumably carries Bun's upstream `statfs` fix. The shell
+snapshot no longer shadows `grep` or `find` at all, and `$SHELL` has since moved to Homebrew
+bash 5.3, which the truncation bug never affected. So both symptoms went away without either
+issue saying so. The warnings came out of CLAUDE.md, project and global, since every session
+loads those files and a fixed bug is dead weight there. This entry is the record. If the
+banner ever returns, it is still false: it means an empty-output, non-zero exit, not a full
+disk.
+
+The workarounds got the same audit. The PreToolUse hook that prefixed every Bash command with
+`unset -f grep find rg` had nothing left to remove, so it is gone. The `--allowedTools
+Grep,Glob` flag in the `claude` alias turned out to matter for a different reason than the one
+it was added for: without it, the native build drops the built-in Grep and Glob tools and
+shadows `grep`/`find` with shell functions instead. Those functions ran five compound loops
+under bash 5.3 without truncating anything, so the flag stays for the tools, not as a guard.

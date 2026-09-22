@@ -154,27 +154,6 @@ conjugation → green, a correct skeleton with a dropped accent (e.g. `detends` 
 X in scope" diagnostics for same-module symbols. If `build_app.sh` succeeds, the build
 is authoritative — do not "fix" SourceKit-only diagnostics.
 
-#### False "temp filesystem … is full (0MB free)" errors & truncated Bash output
-
-Two related Claude Code harness bugs (native macOS build, seen through 2.1.173; live
-repros and full analysis in `~/Desktop/claude-code-bug-report.md`):
-
-- The **"Command output was lost: the temp filesystem at …/tasks is full (0MB free) …
-  ENOSPC"** banner is **false** — a broken `statfs` (`bsize=0`) computes 0MB on any
-  volume. It really means the call produced no stdout and exited non-zero (a lone
-  no-match `grep` suffices). Treat it as a plain non-zero exit. Don't chase disk space,
-  and don't prefix commands with `rm -rf` of temp dirs (older advice here did; it was
-  useless, and the broad `tasks/*` variants can delete live capture files of concurrent
-  sessions).
-- **Mid-command output truncation** (sections of a compound command silently missing,
-  sometimes rendered as success) came from the harness shadowing `grep`/`find`/`rg`
-  with embedded tools whose child process can kill the shell. Global mitigations are
-  active on this machine (real ripgrep; `--allowedTools Grep,Glob` in the `claude`
-  alias; a PreToolUse hook prefixing `unset -f grep find rg`). If truncation
-  reappears, re-run via `command grep` / `command find`, and treat missing output as
-  unknown — never as "no matches". `screenshot.sh <slug>` and appending progress to a
-  real file (then `Read`) remain good stdout-free verification channels.
-
 ### Diagnostic fallback (raw xcodebuild)
 
 Useful when `xcbeautify`'s lossy filter drops an early-stage error. Prefer the skill
