@@ -1,0 +1,494 @@
+{
+ "_readme": "Gloss changes that no Stage 2 checker raised, added to the review by hand or by a later sweep. build_report.py turns each into an approvals.json item keyed `gloss:added|<id>`, which no default rule decides. Stage 4 applies an accepted one like a gloss item, taking the text from the item's `value` if Josh wrote one, else from `proposed` here. `origin` is `hand` or `false_friend_sweep`. `card_notes` are false-friend sweep findings on verbs that already have a gloss card: the review page shows the suggestion on that card, and Josh applies it with Edit value. Stage 4 never reads them.",
+ "items": [
+  {
+   "id": "assumer",
+   "proposed": "take on, accept, take responsibility for",
+   "origin": "hand",
+   "added": "2026-09-27",
+   "reason": "False friend. English 'assume' mainly means 'suppose', a sense English Wiktionary tags as an Anglicism in French. The French verb's senses are 'take on (a role)' and 'embrace, accept, own', and Wiktionnaire's are 'Prendre en charge une responsabilité' and 'Accepter pleinement'. The shipped example, 'la Confédération assume …', is translated 'bears'."
+  },
+  {
+   "id": "supporter",
+   "proposed": "bear, put up with, hold up",
+   "origin": "hand",
+   "added": "2026-09-27",
+   "reason": "False friend. English 'support' reads as 'back, encourage', which Wiktionnaire tags as an Anglicism ('Soutenir, encourager'). The everyday French sense, 'Souffrir ; endurer' (put up with, tolerate), is missing. 'hold up' keeps the literal 'Porter ; soutenir', and the Proust example uses 'bore'."
+  },
+  {
+   "id": "sanctionner",
+   "proposed": "punish, penalize, ratify",
+   "origin": "hand",
+   "added": "2026-09-27",
+   "reason": "False friend. English 'sanction' is read as either 'approve' or 'impose sanctions'. English Wiktionary lists both 'to sanction, to punish' and 'to ratify, to make valid', and Wiktionnaire lists 'Approuver, confirmer' and 'Réprimer une infraction … les punir'. Punishing is the common modern use, and the shipped example is translated 'penalize'. The checker proposed 'sanction, punish'. The skeptic refuted it because both English Wiktionary senses begin 'to sanction', which misses that the English word points two ways."
+  },
+  {
+   "id": "gratifier",
+   "proposed": "reward, present with",
+   "origin": "hand",
+   "added": "2026-09-27",
+   "reason": "False friend. English 'gratify' means 'please, satisfy'. Wiktionnaire's sense is 'Favoriser quelqu’un en lui faisant un don, une libéralité', to reward someone or present them with something, and its two ironic senses, 'Attribuer mal à propos' and 'Infliger' (of penalties or blows), follow the same 'present with' pattern."
+  },
+  {
+   "id": "introduire",
+   "proposed": "insert, show in, introduce",
+   "origin": "hand",
+   "added": "2026-09-27",
+   "reason": "Near false friend. English 'introduce' first suggests introducing one person to another, which is French 'présenter'. Wiktionnaire's first senses are 'Faire entrer une chose dans une autre' (insert, put in) and 'Faire entrer, conduire quelqu’un dans un lieu' (show in), which the Madame Bovary example uses: 'l’introduisit dans le vestibule', 'led her into the entrance hall'. 'introduce' stays last for introducing a species, a law or a character."
+  },
+  {
+   "id": "fixer",
+   "proposed": "fasten, fix (in place), set (a date), stare at",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'fix' reads as 'repair', but the French verb mainly means 'fasten, attach, set (a date or price), stare at'."
+  },
+  {
+   "id": "exercer",
+   "proposed": "practice (a profession), exercise (a right or power), exert, train",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'instruct, command, exercise' reads as 'give orders; physical workout', but the French verb mainly means 'practice (a profession), exercise (a right), exert'."
+  },
+  {
+   "id": "nommer",
+   "proposed": "name, call, appoint, nominate",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'nominate' reads as 'propose as a candidate', but the French verb mainly means 'name, call, appoint'."
+  },
+  {
+   "id": "impliquer",
+   "proposed": "involve, imply, implicate",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'implicate, accuse' reads as 'involve in a crime, accuse', but the French verb mainly means 'imply, involve, entail'."
+  },
+  {
+   "id": "exposer",
+   "proposed": "exhibit, display, explain, expose",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'expose' reads as 'reveal, unmask', but the French verb mainly means 'exhibit, display, set out (explain), expose (to risk)'."
+  },
+  {
+   "id": "animer",
+   "proposed": "liven up, host (a show), lead, animate",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'animate' reads as 'bring to life, make cartoons', but the French verb mainly means 'host, lead (a show or meeting), liven up'."
+  },
+  {
+   "id": "délivrer",
+   "proposed": "set free, release, issue (a document), deliver (a message)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'deliver' reads as 'bring packages or mail (that is livrer)', but the French verb mainly means 'set free, issue (a document)'."
+  },
+  {
+   "id": "qualifier",
+   "proposed": "describe (as), call, qualify (for a competition)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'qualify' reads as 'meet requirements, or add reservations', but the French verb mainly means 'describe (as), call'."
+  },
+  {
+   "id": "ranger",
+   "proposed": "tidy up, put away, arrange, park (a car)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'order' reads as 'command, or place an order', but the French verb mainly means 'tidy up, put away'."
+  },
+  {
+   "id": "altérer",
+   "proposed": "impair, spoil, alter, make thirsty",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'alter' reads as 'change neutrally (alter clothes)', but the French verb mainly means 'impair, spoil, falsify (change for the worse)'."
+  },
+  {
+   "id": "léguer",
+   "proposed": "bequeath, hand down, pass on",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'will' reads as 'the future auxiliary or 'want' when read aloud first', but the French verb mainly means 'bequeath, hand down'."
+  },
+  {
+   "id": "relaxer",
+   "proposed": "release (a prisoner), acquit, relax",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'relax' reads as 'loosen up, unwind (the only sense given)', but the French verb mainly means 'acquit, release (a defendant); relax is secondary'."
+  },
+  {
+   "id": "gommer",
+   "proposed": "erase, rub out, tone down, gum",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'gum' reads as 'stick with gum, chew gum', but the French verb mainly means 'erase, rub out'."
+  },
+  {
+   "id": "accommoder",
+   "proposed": "prepare (food), adapt, accommodate",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'accommodate' reads as 'provide lodging for, make room for', but the French verb mainly means 'adapt, prepare (food); s’accommoder de, put up with'."
+  },
+  {
+   "id": "consumer",
+   "proposed": "burn up, waste away, consume (destroy)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'consume' reads as 'eat, drink, or use goods (French consommer)', but the French verb mainly means 'burn up, waste away'."
+  },
+  {
+   "id": "interner",
+   "proposed": "intern (confine), detain, commit (to a psychiatric hospital)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'intern' reads as 'work as an intern', but the French verb mainly means 'confine, detain (in a camp or asylum)'."
+  },
+  {
+   "id": "suppléer",
+   "proposed": "stand in for, make up for, supply (what is missing)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'supply' reads as 'provide, furnish', but the French verb mainly means 'stand in for, make up for'."
+  },
+  {
+   "id": "reformer",
+   "proposed": "re-form, regroup, put back together",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'reform' reads as 'improve, change for the better (French réformer)', but the French verb mainly means 'form again, re-form'."
+  },
+  {
+   "id": "évincer",
+   "proposed": "oust, push aside, evict (legal)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'evict' reads as 'throw a tenant out of a home', but the French verb mainly means 'oust, push aside, supplant'."
+  },
+  {
+   "id": "transpirer",
+   "proposed": "sweat, perspire, leak out (of news)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'transpire' reads as 'happen, turn out', but the French verb mainly means 'sweat, perspire'."
+  },
+  {
+   "id": "vaciller",
+   "proposed": "wobble, sway, flicker, waver",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'vacillate' reads as 'waver in opinion, be indecisive', but the French verb mainly means 'wobble, sway, flicker'."
+  },
+  {
+   "id": "subjuguer",
+   "proposed": "captivate, enthrall, subjugate",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'subjugate' reads as 'conquer, bring under control', but the French verb mainly means 'captivate, enthrall (the conquest sense is literary)'."
+  },
+  {
+   "id": "vaporiser",
+   "proposed": "spray, vaporize",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'vaporize' reads as 'turn into vapor, destroy utterly', but the French verb mainly means 'spray (perfume, a liquid)'."
+  },
+  {
+   "id": "policer",
+   "proposed": "civilize, refine",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'police' reads as 'enforce the law, patrol', but the French verb mainly means 'civilize, refine'."
+  },
+  {
+   "id": "commuter",
+   "proposed": "switch, commute (a sentence)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'commute' reads as 'travel to work', but the French verb mainly means 'switch, commute (a sentence)'."
+  },
+  {
+   "id": "oppresser",
+   "proposed": "weigh on, stifle, make breathless",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'oppress' reads as 'rule tyrannically, persecute (French opprimer)', but the French verb mainly means 'weigh on, stifle, make breathless'."
+  },
+  {
+   "id": "ulcérer",
+   "proposed": "wound deeply, embitter, ulcerate",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'ulcerate' reads as 'form ulcers (medical only)', but the French verb mainly means 'wound deeply, embitter, offend; the medical sense is secondary'."
+  },
+  {
+   "id": "adouber",
+   "proposed": "knight, give one’s blessing to, endorse",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'dub, name' reads as 'nickname, or dub a film', but the French verb mainly means 'knight (historically), endorse, give one’s blessing to'."
+  },
+  {
+   "id": "intervertir",
+   "proposed": "swap, switch around, reverse",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'invert' reads as 'turn upside down', but the French verb mainly means 'swap, switch around (the order of)'."
+  },
+  {
+   "id": "déculpabiliser",
+   "proposed": "ease the guilt of, relieve of guilt",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'exonerate' reads as 'officially clear of blame or a charge', but the French verb mainly means 'relieve of guilt feelings, destigmatize'."
+  },
+  {
+   "id": "mollir",
+   "proposed": "soften, weaken, slacken",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'mollify' reads as 'appease, calm someone’s anger', but the French verb mainly means 'soften, weaken, slacken (as the wind)'."
+  },
+  {
+   "id": "mystifier",
+   "proposed": "fool, hoax, dupe",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'mystify' reads as 'baffle, puzzle', but the French verb mainly means 'fool, hoax, deceive'."
+  },
+  {
+   "id": "fritter",
+   "proposed": "sinter, frit (glass)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'fritter' reads as 'waste (fritter away)', but the French verb mainly means 'frit, sinter (glass or ceramics)'."
+  },
+  {
+   "id": "mythifier",
+   "proposed": "mythologize, turn into a myth",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'mystify' reads as 'baffle, puzzle', but the French verb mainly means 'mythologize, turn into a myth'."
+  },
+  {
+   "id": "circonvenir",
+   "proposed": "get around (someone), manipulate, win over",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'circumvent' reads as 'bypass (a rule or obstacle)', but the French verb mainly means 'get around a person by manipulation, win over'."
+  },
+  {
+   "id": "préjudicier",
+   "proposed": "harm, be detrimental to",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'prejudice' reads as 'bias (prejudice a jury)', but the French verb mainly means 'harm, be detrimental to'."
+  },
+  {
+   "id": "gargouiller",
+   "proposed": "gurgle, rumble",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'gargle' reads as 'rinse one’s throat', but the French verb mainly means 'gurgle, rumble (as a stomach)'."
+  },
+  {
+   "id": "appointer",
+   "proposed": "pay a salary to, sharpen (to a point), appoint (rare)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'appoint' reads as 'name to a post', but the French verb mainly means 'pay a salary to, sharpen to a point'."
+  },
+  {
+   "id": "remâcher",
+   "proposed": "brood over, dwell on, chew again",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'rehash' reads as 'restate old material', but the French verb mainly means 'brood over, ruminate on, chew again'."
+  },
+  {
+   "id": "fraîchir",
+   "proposed": "turn cooler, freshen (of wind)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'freshen' reads as 'make fresh, freshen up', but the French verb mainly means 'turn cooler, (wind) freshen'."
+  },
+  {
+   "id": "parjurer",
+   "proposed": "break one’s oath, perjure oneself",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'forswear, abjure' reads as 'give up, renounce', but the French verb mainly means 'break one’s oath, perjure oneself'."
+  },
+  {
+   "id": "caserner",
+   "proposed": "quarter in barracks, billet",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'barrack' reads as 'heckle (British), or unclear', but the French verb mainly means 'quarter (troops) in barracks'."
+  },
+  {
+   "id": "engraver",
+   "proposed": "run aground, cover with gravel",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'ground' reads as 'punish a child, or electrical ground', but the French verb mainly means 'run aground (in gravel), cover with gravel'."
+  },
+  {
+   "id": "clopiner",
+   "proposed": "limp, hobble",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'halt' reads as 'stop', but the French verb mainly means 'limp, hobble'."
+  },
+  {
+   "id": "doigter",
+   "proposed": "finger (music), mark the fingering",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'finger' reads as 'touch with the fingers', but the French verb mainly means 'finger (music), mark the fingering of a piece'."
+  },
+  {
+   "id": "infatuer",
+   "proposed": "make conceited, infatuate",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'infatuate' reads as 'inspire foolish love', but the French verb mainly means 'make conceited, full of oneself'."
+  },
+  {
+   "id": "cémenter",
+   "proposed": "case-harden (steel), carburize",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'cement' reads as 'bond or fix with cement', but the French verb mainly means 'case-harden (steel) by cementation'."
+  },
+  {
+   "id": "diaprer",
+   "proposed": "variegate, dapple",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'diaper' reads as 'put a diaper on', but the French verb mainly means 'variegate, mottle with colors'."
+  },
+  {
+   "id": "détracter",
+   "proposed": "disparage, run down",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'detract' reads as 'take away from, lessen', but the French verb mainly means 'disparage, run down'."
+  },
+  {
+   "id": "déhaler",
+   "proposed": "tow (a ship) out, warp (a ship)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'warp' reads as 'bend out of shape', but the French verb mainly means 'haul or tow (a ship) with its lines'."
+  },
+  {
+   "id": "toupiller",
+   "proposed": "shape with a router, rout (woodworking)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'rout' reads as 'defeat decisively', but the French verb mainly means 'shape with a router (woodworking)'."
+  },
+  {
+   "id": "désajuster",
+   "proposed": "disarrange, put out of adjustment",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'derange' reads as 'drive mad', but the French verb mainly means 'disarrange, put out of adjustment'."
+  },
+  {
+   "id": "agioter",
+   "proposed": "speculate (on the market)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'speculate' reads as 'conjecture, guess', but the French verb mainly means 'speculate on the market (pejorative)'."
+  },
+  {
+   "id": "grossoyer",
+   "proposed": "make a fair copy (of a legal document), engross (law)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'engross' reads as 'absorb someone’s attention', but the French verb mainly means 'write out a fair copy of a legal document'."
+  },
+  {
+   "id": "ferrouter",
+   "proposed": "ship (trucks) by rail, piggyback (freight)",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'piggyback' reads as 'carry on one’s back', but the French verb mainly means 'ship trucks or trailers by rail'."
+  },
+  {
+   "id": "rapointir",
+   "proposed": "sharpen again",
+   "origin": "false_friend_sweep",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'repoint' reads as 'redo mortar joints, or aim again', but the French verb mainly means 'sharpen again'."
+  }
+ ],
+ "card_notes": [
+  {
+   "id": "poser",
+   "suggested": "put down (set down), place, ask (a question)",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'put down' reads as 'insult someone; also \"pose\" read as posing for a photo', but the French verb mainly means 'put, place, set down'."
+  },
+  {
+   "id": "recommander",
+   "suggested": "recommend, advise, register (a letter)",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'command, order' reads as 'give orders', but the French verb mainly means 'recommend; register (a letter)'."
+  },
+  {
+   "id": "témoigner",
+   "suggested": "testify, bear witness, show (a feeling)",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'witness' reads as 'see an event happen', but the French verb mainly means 'testify, bear witness, show (a feeling)'."
+  },
+  {
+   "id": "ignorer",
+   "suggested": "be unaware of, not know, ignore",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'ignore' reads as 'disregard deliberately', but the French verb mainly means 'not know, be unaware of'."
+  },
+  {
+   "id": "ravir",
+   "suggested": "delight, snatch, steal",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'ravish' reads as 'rape, or overwhelm with emotion (archaic)', but the French verb mainly means 'delight; literary: snatch, steal'."
+  },
+  {
+   "id": "disputer",
+   "suggested": "quarrel, argue, compete for, play (a match)",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'dispute' reads as 'question the truth of', but the French verb mainly means 'play (a match), compete for'."
+  },
+  {
+   "id": "escompter",
+   "suggested": "expect, count on, discount (a bill)",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'discount' reads as 'disregard, or sell at a lower price', but the French verb mainly means 'expect, count on'."
+  },
+  {
+   "id": "clicher",
+   "suggested": "make a printing plate of, stereotype (printing), photograph",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'stereotype' reads as 'generalize about people', but the French verb mainly means 'make a printing plate (stereotype in printing)'."
+  },
+  {
+   "id": "adjuger",
+   "suggested": "award, auction off, adjudge",
+   "added": "2026-09-27",
+   "reason": "False friend (medium confidence). English 'adjudicate' reads as 'judge a dispute or competition', but the French verb mainly means 'award (a prize, a lot at auction)'."
+  },
+  {
+   "id": "forfaire",
+   "suggested": "fail in one’s duty, betray (one’s honor), forfeit",
+   "added": "2026-09-27",
+   "reason": "False friend (high confidence). English 'forfeit' reads as 'lose or give up something as a penalty', but the French verb mainly means 'fail in one’s duty, betray (forfaire à l’honneur)'."
+  }
+ ]
+}

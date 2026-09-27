@@ -58,6 +58,8 @@ corpus/working/*
 !corpus/working/build_skeptic_shards.py
 !corpus/working/build_report.py
 !corpus/working/build_review_page.py
+# Gloss changes added to the review by hand or by the false-friend sweep. Nothing regenerates them.
+!corpus/working/added_glosses.json
 # authors_overrides.json is the exception: hand-checked corrections to the Wikidata
 # resolution, which nothing regenerates. Re-including one file inside an excluded directory
 # takes three lines, because git never descends into a directory it has already excluded.

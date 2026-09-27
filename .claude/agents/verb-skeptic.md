@@ -57,7 +57,8 @@ Take each item in turn and try to break it.
   the curly apostrophe `’`, parentheses for register, region, or a short object or field
   that fixes which sense of an ambiguous English word is meant (`put down (set down)`,
   `pick up (the phone)`) but never for a definition of a word with only one likely reading,
-  a plain phrase over an obscure word, short enough to read aloud. Before objecting to a
+  a plain phrase over an obscure word. Length is not a defect: a proposal that trims correct
+  senses from a long gloss only to shorten it is refuted. Before objecting to a
   parenthesis, ask whether the gloss misleads without it.
 - **For an example**: the French of a corpus or quotation sentence must be copied verbatim
   from the candidate. Any edit to it is a refutation, because `source` and `line` are a

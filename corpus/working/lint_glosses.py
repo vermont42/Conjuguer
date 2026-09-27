@@ -8,9 +8,9 @@ Two outputs in one file, `corpus/working/verb_pass/gloss_lint.json`:
                      "gloss_provenance": { class, first_sense_is_en_first, only_tagged_senses } } }
 
 The lint rules follow decision 3's house style: bare infinitive, commonest sense first, American
-spelling, the curly apostrophe, parentheses for register, region or disambiguation, a plain
-phrase over an obscure single word, and short enough to read aloud. They flag; they do not
-decide. A descriptive gloss was often Josh's deliberate choice (*accoutrer* is "equip, furnish
+spelling, the curly apostrophe, parentheses for register, region or disambiguation, and a plain
+phrase over an obscure single word. Length is not a defect: Josh dropped the read-aloud limit on
+2026-09-27, so `definition_like` no longer counts words. They flag; they do not decide. A descriptive gloss was often Josh's deliberate choice (*accoutrer* is "equip, furnish
 with dress" rather than "accouter"), so `definition_like` is a list to consider, never a defect.
 
 Provenance matters because it changes what the pass should judge: a gloss copied verbatim from
@@ -28,7 +28,6 @@ import verb_pass_lib as L
 DICT_DIR = pathlib.Path("/usr/share/dict")
 WHITELIST = L.WORKING / "gloss_lint_whitelist.txt"
 DEFINITION_WORDS = ("someone's", "something's", "oneself", "someone’s", "something’s")
-DEFINITION_WORD_COUNT = 6
 TAGGED_AS_MARGINAL = {"dialectal", "dated", "rare", "slang", "obsolete", "archaic"}
 STOPWORDS = {
     "a", "an", "and", "as", "at", "be", "by", "for", "from", "in", "into", "of", "off", "on",
@@ -228,14 +227,8 @@ def lint(entry, english_entries, words, shared_glosses, english):
                 hits.append({"rule": "duplicate_gloss",
                              "detail": f"same gloss as {other}, which shares no English sense"})
 
-    words_in_gloss = len(WORD.findall(gloss))
-    reasons = []
-    if words_in_gloss >= DEFINITION_WORD_COUNT:
-        reasons.append(f"{words_in_gloss} words")
     if any(marker in gloss.lower() for marker in DEFINITION_WORDS):
-        reasons.append("definition phrasing")
-    if reasons:
-        hits.append({"rule": "definition_like", "detail": ", ".join(reasons)})
+        hits.append({"rule": "definition_like", "detail": "definition phrasing"})
     return hits
 
 

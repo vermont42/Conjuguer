@@ -21,11 +21,12 @@ block, or were decided in the late-edition triage:
 
 A rule never applies to a `partly` item, and it never overrides a decision you make yourself.
 
-## What is left for you: 1,347 items
+## What is left for you: 1,408 items
 
 | Group | Items | Why a person has to read it |
 |---|---|---|
 | Glosses | 816 | Users see the gloss most: in the quiz and read aloud by VoiceOver. Most of the skeptic's real disagreements are here. |
+| Added glosses | 61 | Gloss changes no checker raised, mostly false friends. No skeptic judged them (see below). |
 | Authored sentences marked `partly` | 285 | The skeptic found something to fix. 81 of them object only to the apostrophe (see below). |
 | Upheld authored sentences in the top 1,500 | 86 | These are the common verbs, so they're worth a look. |
 | Existing examples | 51 | The checker says a shipped example is flawed. |
@@ -100,7 +101,13 @@ What an accept means depends on the task:
   separated by commas (never semicolons), American spelling, the curly apostrophe `’`,
   parentheses for register or region (as in "(informal)" or "(historical, racist)") or to fix
   which sense of an ambiguous English word is meant (as in "put down (set down)"), and a plain
-  phrase rather than an obscure single word. Keep it short enough to hear aloud.
+  phrase rather than an obscure single word. Length is not a defect.
+- **A long gloss is fine.** Decision 3 first asked for a gloss short enough to hear aloud, two or
+  three senses at most, and the models cut many correct senses to get there. You dropped that
+  rule on 2026-09-27, after *réaliser*'s eight senses were cut to three. Filter the verdict menu
+  to **length rule** to see the cards whose checker or skeptic reasoning leans on length. If a
+  card only trims correct senses, reject it. If it also fixes something real, press **E** and
+  keep the senses it cut.
 - **A parenthesis that disambiguates is allowed.** Decision 3 first said parentheses were for
   register or region only, and the models enforced that. You amended it on 2026-09-27, after
   *déposer*: dropping "(set down)" from "put down (set down)" lets "put down" read as "insult".
@@ -121,6 +128,14 @@ What an accept means depends on the task:
   sense forward in their place. That is wrong. The gloss should say what the verb meant when
   people conjugated it, and the fossil sense may be added. Reject a proposal that swaps one
   for the other, or press **E** to write a gloss that keeps both.
+- **Added glosses and false friends.** A false friend is a gloss whose English word reads in a
+  sense the French verb lacks, as when "fabricate" suggests lying. The checker never looked for
+  these, so on 2026-09-27 five were added by hand and a model sweep of every gloss found the
+  rest. Each became an **added** card, with the evidence in its **Why** row, unless the verb
+  already had a gloss card. In that case the sweep's suggestion appears on the existing card as
+  a **False-friend sweep** row, and you press **E** to use it. Filter the verdict menu to
+  **false friend** for all 71 of them. No skeptic checked the added cards, so read each one as
+  a first opinion. **A** applies the proposed gloss, and **E** lets you write your own.
 - **When unsure, hold rather than guess.** Nothing held ships.
 
 ## A good order
@@ -142,7 +157,8 @@ list shrinks as you work.
 ## Saving
 
 - **Your progress is kept in the browser** (its localStorage for this file) and survives closing
-  the tab. It is tied to this browser and this file's path. It is lost if you clear the
+  the tab. The page started over on 2026-09-27, when the rule changes above made the earlier
+  decisions stale. Decisions from before then sit unused under the page's old storage key. It is tied to this browser and this file's path. It is lost if you clear the
   browser's site data, and another browser won't see it.
 - **Export at the end of every sitting.** Click **Export decisions**. The browser saves
   `verb-pass-decisions.json` to Downloads, holding every decision you've made so far. Then merge

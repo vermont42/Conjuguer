@@ -46,8 +46,7 @@ Each entry of `verbs` is one row of the app's data plus everything gathered abou
 
 ## Gloss house style
 
-The app's glosses are read aloud by VoiceOver in the quiz, so they are short. Normalize to
-this style rather than merely flagging a deviation:
+Normalize to this style rather than merely flagging a deviation:
 
 - Bare infinitive, no leading "to": `eat`, not `to eat`.
 - Senses separated by a comma and a space, commonest first. Never a semicolon.
@@ -60,7 +59,8 @@ this style rather than merely flagging a deviation:
   `drain (to remove the liquid from something)`.
 - A plain multi-word phrase beats an obscure single word. `equip with dress` is better than
   `accouter`; an obscure equivalent may follow the plain phrase but never replace it.
-- Short enough to be read aloud. Two or three senses is plenty.
+- Length is not a defect. A verb with many live senses keeps them all: do not trim a
+  correct gloss to make it shorter. Merge only true duplicates.
 
 ## Gloss provenance: what to judge
 

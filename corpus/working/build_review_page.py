@@ -37,13 +37,13 @@ def default_decision(approvals, task, rank):
 
 def task_of(key):
     task = key.split("|", 1)[0]
-    return "flag" if task.startswith("flag:") else task
+    return task.split(":", 1)[0]
 
 
 def needs_a_human(key, entry, approvals):
     if entry["decision"] not in ("pending", "review"):
         return True
-    if entry["decision"] == "review" or entry.get("verdict") == "partly":
+    if entry["decision"] == "review" or entry.get("verdict") in ("partly", "added"):
         return True
     return default_decision(approvals, task_of(key), entry["rank"]) is None
 
@@ -55,7 +55,8 @@ def band(rank):
     return "?"
 
 
-def skeptic_record(item, entry):
+def skeptic_record(item, entry, card_notes):
+    note = card_notes.get(item["id"]) if item["task"] == "gloss" else None
     record = {
         "key": build_report.item_key(item),
         "id": item["id"], "rank": item["rank"], "band": band(item["rank"]),
@@ -64,6 +65,8 @@ def skeptic_record(item, entry):
         "reason": item["skeptic"].get("reason"),
         "decision": entry["decision"], "value": entry.get("value"), "note": entry.get("note"),
         "apostrophe": bool(entry.get("apostrophe")), "parenthesis": bool(entry.get("parenthesis")),
+        "length": bool(entry.get("length")), "falsefriend": bool(note),
+        "sweep": f"{note['suggested']}. {note['reason']}" if note else None,
         "gloss": item.get("gloss_current"),
         "notes": item.get("checker_notes") or [],
     }
@@ -95,6 +98,18 @@ def skeptic_record(item, entry):
     return record
 
 
+def added_record(added, key, entry):
+    return {
+        "key": key, "id": added["id"], "rank": added["rank"], "band": band(added["rank"]), "task": "gloss",
+        "verdict": "added", "severity": None, "reason": None,
+        "decision": entry["decision"], "value": entry.get("value"), "note": entry.get("note"),
+        "apostrophe": False, "parenthesis": False, "length": False, "falsefriend": True, "sweep": None,
+        "gloss": None, "notes": [], "current": added["current"], "proposed": added["proposed"],
+        "checker": f"added ({added['origin']}), not raised by the checker or judged by the skeptic",
+        "evidence": added["reason"],
+    }
+
+
 def pick_record(pick, key, entry):
     candidate = pick["candidate"] or {}
     source = (f"{candidate.get('source')}:{candidate.get('line')}" if pick["example"]["kind"] == "tier"
@@ -104,7 +119,7 @@ def pick_record(pick, key, entry):
         "key": key, "id": pick["id"], "rank": pick["rank"], "band": band(pick["rank"]), "task": "pick",
         "verdict": pick["status"], "severity": None, "reason": pick["detail"] or None,
         "decision": entry["decision"], "value": None, "note": entry.get("note"), "apostrophe": False,
-        "parenthesis": False, "gloss": None, "notes": [], "current": None,
+        "parenthesis": False, "length": False, "falsefriend": False, "sweep": None, "gloss": None, "notes": [], "current": None,
         "proposed": {"fr": pick["example"].get("fr"), "en": pick["example"].get("en")},
         "checker": f"{pick['example']['kind']} pick", "evidence": source,
         "death_year": candidate.get("death_year"),
@@ -116,14 +131,19 @@ def build():
     verbs, records = build_report.load_stage2()
     items = {build_report.item_key(i): i for i in build_report.load_skeptic()}
     picks = {f"pick|{p['id']}": p for p in build_report.build_picks(verbs, records)}
+    card_notes = build_report.load_card_notes()
+    added = {build_report.ADDED_PREFIX + a["id"]: a
+             for a in build_report.load_added({v["id"]: v for v in lib.load_verbs()})}
     rows = []
     for key, entry in approvals["items"].items():
         if not needs_a_human(key, entry, approvals):
             continue
         if key in items:
-            rows.append(skeptic_record(items[key], entry))
+            rows.append(skeptic_record(items[key], entry, card_notes))
         elif key in picks:
             rows.append(pick_record(picks[key], key, entry))
+        elif key in added:
+            rows.append(added_record(added[key], key, entry))
     order = {"gloss": 0, "example": 1, "flag": 2, "new_example": 3, "pick": 4}
     rows.sort(key=lambda r: (order[r["task"]], r["rank"], r["key"]))
     html = TEMPLATE.replace("/*DATA*/null", json.dumps(rows, ensure_ascii=False).replace("</", "<\\/"))
@@ -210,8 +230,9 @@ textarea { width:100%; font:inherit; color:inherit; background:var(--bg); border
     <option value="example">Existing examples</option><option value="flag">Flags</option>
     <option value="new_example">Authored examples</option><option value="pick">Picks</option></select>
   <select id="verdict"><option value="">Any verdict</option><option value="upheld">upheld</option>
-    <option value="partly">partly</option><option value="apostrophe">partly, apostrophe</option>
-    <option value="parenthesis">parenthesis rule</option>
+    <option value="partly">partly</option><option value="added">added</option><option value="apostrophe">partly, apostrophe</option>
+    <option value="parenthesis">parenthesis rule</option><option value="length">length rule</option>
+    <option value="falsefriend">false friend</option>
     <option value="late_edition">late_edition</option><option value="verbatim">verbatim</option></select>
   <select id="bandsel"><option value="">All ranks</option></select>
   <select id="state"><option value="open">Undecided or held</option><option value="all">All</option>
@@ -224,7 +245,7 @@ textarea { width:100%; font:inherit; color:inherit; background:var(--bg); border
 <main id="main"></main>
 <script>
 const DATA = /*DATA*/null;
-const STORE = "verb-pass-review-v1";
+const STORE = "verb-pass-review-v2";
 let saved = {};
 try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (e) { saved = {}; }
 const byKey = Object.fromEntries(DATA.map(r => [r.key, r]));
@@ -237,7 +258,7 @@ let list = [], pos = 0, editing = false;
 function filter() {
   const t = $("task").value, v = $("verdict").value, b = $("bandsel").value, s = $("state").value;
   list = DATA.filter(r => (!t || r.task === t) && (!b || r.band === b)
-    && (!v || (v === "apostrophe" || v === "parenthesis" ? r[v] : r.verdict === v))
+    && (!v || (["apostrophe", "parenthesis", "length", "falsefriend"].includes(v) ? r[v] : r.verdict === v))
     && (s === "all" || (s === "open") === isOpen(state(r).decision)));
   pos = Math.min(pos, Math.max(0, list.length - 1));
 }
@@ -253,13 +274,16 @@ function render() {
     + `<span class="chip">${esc(r.verdict)}${r.severity ? ", " + esc(r.severity) : ""}</span>`
     + (r.apostrophe ? `<span class="chip">apostrophe</span>` : "")
     + (r.parenthesis ? `<span class="chip">parenthesis rule</span>` : "")
+    + (r.length ? `<span class="chip">length rule</span>` : "")
+    + (r.falsefriend ? `<span class="chip">false friend</span>` : "")
     + `<span class="chip decided-${esc(st.decision)}">${esc(st.decision)}</span></div>`;
   if (r.gloss && r.task !== "gloss") h += row("Gloss", esc(r.gloss) + (r.gloss_proposed ? ` → <span class="proposed">${esc(r.gloss_proposed)}</span>` : ""));
   if (r.current != null) h += row("Current", `<div class="big">${esc(show(r.current))}</div>`);
   h += row(r.task === "example" ? "Proposed English" : "Proposed", `<div class="big proposed">${esc(show(r.proposed))}</div>`);
   if (r.replacement) h += row("Replacement", `<div class="pre">${esc(r.replacement)}</div>`);
   if (r.token) h += row("Token", esc(r.token));
-  h += row("Checker", `<div class="pre">${esc(r.checker)}${r.evidence ? ". " + esc(r.evidence) : ""}</div>`);
+  h += row(r.verdict === "added" ? "Why" : "Checker", `<div class="pre">${esc(r.checker)}${r.evidence ? ". " + esc(r.evidence) : ""}</div>`);
+  if (r.sweep) h += row("False-friend sweep", `<div class="pre">${esc(r.sweep)}</div>`);
   if (r.reason) h += row(r.task === "pick" ? "Status" : "Skeptic", `<div class="pre">${esc(r.reason)}</div>`);
   if (r.death_year) h += row("Death year", esc(r.death_year));
   if (r.note) h += row("Note", `<div class="pre">${esc(r.note)}</div>`);

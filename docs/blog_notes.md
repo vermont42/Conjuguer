@@ -3804,3 +3804,52 @@ The checker and skeptic definitions, the plan's Stage 2 text and the review inst
 carry an exception. A verb out of use as a whole that survives only in a fossil form keeps the
 senses it had in use. The fossil sense may be added, but it never replaces them. Only two cards
 turned on this rule, so the review page gets no new filter this time.
+
+## False friends, long glosses, and a fresh start on the review (2026-09-27)
+
+The *fabriquer* card proposed "make, manufacture, fabricate" in place of a bare "fabricate", and
+I first misjudged it. I argued that the skeptic was wrong to call "fabricate" misleading, since
+Wiktionnaire lists "Inventer" and the verb's own Proust example fabricates a genealogy. Josh set
+it straight. In English the main sense of "fabricate" is "make up, invent to deceive". In French
+it is "manufacture". A bare "fabricate" confuses an English speaker, whatever secondary senses
+the French verb has.
+
+That exposed a gap in the whole pass rather than one bad card. The checker judged a gloss copied
+from English Wiktionary on which senses it kept and in what order. It never asked whether an
+English word would mislead. So a false friend copied verbatim looked correct, and most never got
+a card. A quick hand list found five: *assumer* "assume", *supporter* "support", *sanctionner*
+"sanction", *gratifier* "gratify" and *introduire* "introduce". *Sanctionner* shows how the
+blind spot works. The checker did propose "sanction, punish", and the skeptic refuted it because
+both English senses begin "to sanction".
+
+These became the first **added** cards. The new tracked file `corpus/working/added_glosses.json`
+holds gloss changes no checker raised, and `build_report.py` turns each into a
+`gloss:added|<verb>` item that no default decides. Then four Opus subagents swept all 6,326
+glosses for the same defect, each reading an infinitive and its gloss and nothing else. They
+returned 116 hits. Checking each one against the Wiktionary evidence left 56 new cards and 10
+suggestions for verbs that already had a card, which show on that card as a note. The other 50
+were either fixed already by an existing card or not false friends at all. For example,
+*maronner*'s "maroon" is Wiktionnaire's first sense. The good finds range from the everyday
+(*fixer* "fix", *nommer* "nominate", *exposer* "expose", *délivrer* "deliver") to the obscure
+(*cémenter* "cement", *grossoyer* "engross", *fritter* "fritter"). A few current glosses were
+simply wrong words that happened to look alike, such as *remémorer* "memorize", *célébrer* "put
+a belt around" and *brouter* "gaze". Existing cards already fixed those.
+
+Josh also dropped the rule that a gloss be short enough to read aloud, two or three senses at
+most. *Réaliser* made the case: its eight live senses, including "direct (a movie)", had been cut
+to "carry out, achieve, realize (become aware)". Length is no longer a defect in the agents, the
+plan or the review instructions. The `definition_like` lint no longer counts words, though it
+still flags definition phrasing. As with the parenthesis rule, the review page marks the 189
+cards whose reasoning leans on length.
+
+With three rules changed in one day, Josh decided to start the review over. The page now stores
+decisions under a new localStorage key, so it opens clean without anything being deleted.
+
+Josh's retrospective verdict was that he should have looked more closely at the subagents' work
+before letting them process every verb. The pilot did exist, but it was graded against an answer
+key written under the same house style. So it measured whether the models followed the rules,
+not whether the rules were right. Every problem found today is of that kind: a rule applied
+faithfully and at scale. The parenthesis ban, the read-aloud limit and the tag-driven sense
+order all came from instructions, not from model misbehavior. The lesson for the next pass is to
+put a sample of the pilot's actual proposals in front of Josh as review cards before the full
+run, since a person reading twenty real changes catches a bad rule faster than any grading.

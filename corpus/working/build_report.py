@@ -22,12 +22,15 @@ import collections
 import datetime
 import json
 import re
+import sys
 
 import validate_verb_pass as validator
 import verb_pass_lib as lib
 
 REPORT = lib.REPO / "docs" / "verb-pass-report.md"
 APPROVALS = lib.OUT_DIR / "approvals.json"
+ADDED = lib.REPO / "corpus" / "working" / "added_glosses.json"
+ADDED_PREFIX = "gloss:added|"
 TASKS = ["gloss", "example", "new_example", "flag"]
 TASK_TITLES = {
     "gloss": "Glosses",
@@ -99,6 +102,41 @@ def parenthesis_gloss(item):
     return False
 
 
+LENGTH_RULE = re.compile(r"definition_like|\b\d+[- ]word|read(ing)? aloud|read-aloud|hear aloud|two or three "
+                         r"senses|too long|wordy|\bshorten|\btrim|compress|concise|condens|\blong\b|verbose"
+                         r"|lengthy", re.I)
+
+
+def length_gloss(item):
+    """A gloss item whose checker evidence or skeptic reason leans on length. Josh dropped the
+    read-aloud limit on 2026-09-27, after réaliser's eight live senses were cut to three, so a
+    change that only shortens a correct gloss should not ship."""
+    text = f"{item.get('evidence') or ''} {item['skeptic'].get('reason') or ''}"
+    return item["task"] == "gloss" and bool(LENGTH_RULE.search(text))
+
+
+def load_added(verbs):
+    """The gloss changes no checker raised, from added_glosses.json, with rank and current gloss.
+
+    `verbs` is the live verbs.xml by id, so a card shows what the app ships today."""
+    if not ADDED.exists():
+        return []
+    added = []
+    for entry in lib.load_json(ADDED)["items"]:
+        verb = verbs.get(entry["id"])
+        if verb is None:
+            sys.exit(f"added_glosses.json names {entry['id']!r}, which is not in verbs.xml")
+        added.append({**entry, "rank": verb["rank"], "current": verb["gloss"]})
+    return sorted(added, key=lambda a: (a["rank"], a["id"]))
+
+
+def load_card_notes():
+    """False-friend sweep findings on verbs that already have a gloss card, by verb id."""
+    if not ADDED.exists():
+        return {}
+    return {note["id"]: note for note in lib.load_json(ADDED).get("card_notes", [])}
+
+
 def item_key(item):
     task = f"flag:{item['flag']}" if item["task"] == "flag" else item["task"]
     return f"{task}|{item['id']}"
@@ -162,6 +200,8 @@ def item_block(item):
         verdict += " (mentions the apostrophe; examples use the straight one, see Counts)"
     if parenthesis_gloss(item):
         verdict += " (cites the old parenthesis rule, see Counts)"
+    if length_gloss(item) and item["skeptic"]["verdict"] in ("upheld", "partly"):
+        verdict += " (leans on the dropped length rule, see Counts)"
     lines.append(f"- **Skeptic:** {verdict}. {md(skeptic.get('reason'))}")
     for note in item.get("checker_notes") or []:
         lines.append(f"- *Note:* {md(note)}")
@@ -222,6 +262,8 @@ def carry_over_decisions(approvals):
         hand = {field: old[field] for field in HAND_FIELDS
                 if field in old and old[field] not in (None, "pending")}
         if key not in approvals["items"]:
+            if key.startswith(ADDED_PREFIX):
+                continue
             approvals["items"][key] = old
             carried += 1
         elif hand:
@@ -238,6 +280,7 @@ def main():
     verbs, records = load_stage2()
     items = load_skeptic()
     picks = build_picks(verbs, records)
+    added = load_added({v["id"]: v for v in lib.load_verbs()})
     today = datetime.date.today().isoformat()
 
     tally = collections.defaultdict(collections.Counter)
@@ -299,6 +342,10 @@ def main():
             "rule on 2026-09-27: a parenthesis may also fix which sense of an ambiguous English word is "
             "meant, as in \"put down (set down)\", where a bare \"put down\" could read as an insult. "
             "Upheld and partly ones carry `\"parenthesis\": true` in approvals.json.", "",
+            f"{sum(1 for i in items if length_gloss(i) and i['skeptic']['verdict'] in ('upheld', 'partly')):,} "
+            "upheld or partly gloss items lean on length (a word count, the definition_like lint, or "
+            "\"short enough to read aloud\"). Josh dropped that rule on 2026-09-27, after réaliser's "
+            "eight live senses were cut to three. They carry `\"length\": true` in approvals.json.", "",
             f"Unsure flag verdicts, left for Josh: **{len(unsure)}**. "
             f"Entries carrying checker notes: **{sum(1 for r in records.values() if r.get('notes')):,}**.",
             ""]
@@ -311,6 +358,14 @@ def main():
                 + (f" {len(waiting):,} still await a verdict and are listed with them." if waiting else ""), ""]
         for item in standing + waiting:
             out += [item_block(item), ""]
+
+    out += ["## Added glosses", "",
+            f"{len(added):,} gloss changes that no checker raised, from `corpus/working/added_glosses.json`. "
+            "No skeptic judged them, and no default rule decides them.", ""]
+    for entry in added:
+        out += [f"#### {entry['id']} (rank {entry['rank']})", "",
+                f"- **Gloss:** {md(entry['current'])} → **{md(entry['proposed'])}**",
+                f"- **Why ({entry['origin']}):** {md(entry['reason'])}", ""]
 
     out += ["## Corpus and quotation picks", "",
             f"{len(picks):,} picks, provenance warnings first, then clean picks in rank order.", "",
@@ -360,6 +415,9 @@ def main():
             "accept applies the checker's proposal unchanged. A value is a string (the gloss, the "
             "English translation, or the flag value), except on a new_example, where it is "
             "{\"fr\", \"en\"}.",
+            "gloss:added|<verb id> is a gloss change no checker raised, from "
+            "corpus/working/added_glosses.json, whose proposed text an accept without a value "
+            "applies. Like a partly item, a default never applies to it.",
             "Re-running build_report.py keeps every decision, value and note here, and any item added "
             "by hand.",
         ],
@@ -380,7 +438,14 @@ def main():
                 entry["apostrophe"] = True
         if parenthesis_gloss(item):
             entry["parenthesis"] = True
+        if length_gloss(item):
+            entry["length"] = True
         approvals["items"][item_key(item)] = entry
+    for entry in added:
+        if f"gloss|{entry['id']}" in approvals["items"]:
+            sys.exit(f"added_glosses.json: {entry['id']} already has a gloss card; note it there instead")
+        approvals["items"][ADDED_PREFIX + entry["id"]] = {"decision": "pending", "rank": entry["rank"],
+                                                          "verdict": "added", "value": None}
     for pick in picks:
         if pick["status"] in CLEAN_PICKS:
             approvals["items"][f"pick|{pick['id']}"] = {"decision": "pending", "rank": pick["rank"],

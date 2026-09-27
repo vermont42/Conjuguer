@@ -277,7 +277,8 @@ corpus/                         # Literature-example pipeline; NOT part of any t
 │                               # validate_verb_pass.py checks Stage 2's result files (and, with --skeptic, Stage 3's verdict files) against their shards
 │                               # and prints the pending list; build_skeptic_shards.py gathers Stage 2's proposals into the skeptic's shards, and
 │                               # build_report.py writes docs/verb-pass-report.md and the approvals file Stage 4 reads; build_review_page.py
-│                               # writes a local keyboard-driven review page for that file and merges its exported decisions back
+│                               # writes a local keyboard-driven review page for that file and merges its exported decisions back;
+│                               # the added_glosses JSON file holds gloss changes no checker raised (hand-added, or from the false-friend sweep)
 └── grokked/                    # Intermediate per-source extraction output
 
 frequency/                      # Verb-frequency pipeline; NOT part of any target. See frequency/README.md

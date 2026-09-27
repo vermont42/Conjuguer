@@ -38,6 +38,8 @@ Refutation rate over the 3,767 judged items: **14.4%**.
 
 148 gloss verdicts object to a parenthesis under decision 3's original "parentheses only for register or region". Josh amended the rule on 2026-09-27: a parenthesis may also fix which sense of an ambiguous English word is meant, as in "put down (set down)", where a bare "put down" could read as an insult. Upheld and partly ones carry `"parenthesis": true` in approvals.json.
 
+189 upheld or partly gloss items lean on length (a word count, the definition_like lint, or "short enough to read aloud"). Josh dropped that rule on 2026-09-27, after réaliser's eight live senses were cut to three. They carry `"length": true` in approvals.json.
+
 Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1,325**.
 
 ## Glosses
@@ -52,7 +54,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### réaliser (rank 29)
 - **Gloss:** direct (a movie), fulfill (a dream), perform (activities), finish making, carry out, make, realize (make real), realize (become aware) → **carry out, achieve, realize (become aware)**
 - **Checker:** `style`, medium confidence. The current gloss strings together eight senses verbatim from English Wiktionary ('direct (a movie), fulfill (a dream), perform (activities), finish making, carry out, make, realize (make real), realize (become aware)'); audits.gloss_lint flags it as definition_like at 19 words. House style wants two or three senses that read aloud cleanly; 'carry out, achieve' covers the commonest senses (fulfilling a project/dream, performing/making happen) and 'realize (become aware)' covers the frequent colloquial anglicism sense that a learner will actually encounter.
-- **Skeptic:** partly, nitpick. Trimming the eight-sense, 19-word gloss is right. The replacement is not: 'achieve' is not a quoted sense, it drops the first-listed 'to direct (a movie)', and 'realize (become aware)' is the one sense tagged 'Anglicism, proscribed'. A better trim uses quoted senses, for example 'carry out, fulfill, direct (a movie), realize'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Trimming the eight-sense, 19-word gloss is right. The replacement is not: 'achieve' is not a quoted sense, it drops the first-listed 'to direct (a movie)', and 'realize (become aware)' is the one sense tagged 'Anglicism, proscribed'. A better trim uses quoted senses, for example 'carry out, fulfill, direct (a movie), realize'.
 
 #### arriver (rank 53)
 - **Gloss:** arrive → **arrive, happen**
@@ -68,12 +70,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### poser (rank 71)
 - **Gloss:** pose, ask (a question), put down, stop carrying → **put down, ask (a question), place**
 - **Checker:** `style`, medium confidence. English Wiktionary's first sense is 'to stop carrying, to put down (something or somebody)', its second is 'to ask or pose (a question)', and a later sense is 'to lay, place'; the app's gloss restates 'put down' and 'stop carrying' as two separate items and leads with a bare 'pose', which as a standalone word reads as posing for a photo (a real but minor sense: 'Prendre une certaine attitude pour se faire peindre'). gloss_lint also flags it as definition-like at 8 words.
-- **Skeptic:** upheld, nitpick. English Wiktionary's first sense, 'to stop carrying, to put down', appears in the current gloss as two items, and the gloss leads with 'pose'. 'put down, ask (a question), place' puts the first sense first, keeps 'to ask or pose (a question)', adds the quoted 'to lay, place', and removes the duplicate. This is a style fix, not a correction.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). English Wiktionary's first sense, 'to stop carrying, to put down', appears in the current gloss as two items, and the gloss leads with 'pose'. 'put down, ask (a question), place' puts the first sense first, keeps 'to ask or pose (a question)', adds the quoted 'to lay, place', and removes the duplicate. This is a style fix, not a correction.
 
 #### rechercher (rank 95)
 - **Gloss:** search for, look for, search again, look for again → **search for, look for**
 - **Checker:** `style`, medium confidence. Wiktionary_en groups its senses as 'to search for, seek, to look for' and 'to search again, to look for again'; the app's four-item list repeats 'look for' twice and stacks a minor 're-' nuance onto an already long gloss (gloss_lint: definition_like, 9 words); trimming to the primary sense keeps it short enough for VoiceOver.
-- **Skeptic:** upheld, nitpick. The current gloss repeats 'look for', and gloss_lint flags it as definition_like at 9 words. English Wiktionary's first sense, 'to search for, seek, to look for', carries the verb. Wiktionnaire lists 'Chercher de nouveau' fourth, so dropping the 'again' sense is a defensible trim for length.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss repeats 'look for', and gloss_lint flags it as definition_like at 9 words. English Wiktionary's first sense, 'to search for, seek, to look for', carries the verb. Wiktionnaire lists 'Chercher de nouveau' fourth, so dropping the 'again' sense is a defensible trim for length.
 
 #### rappeler (rank 105)
 - **Gloss:** remind → **call back, remind, remember**
@@ -103,7 +105,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### réserver (rank 134)
 - **Gloss:** reserve, make a reservation (for), book → **reserve, book**
 - **Checker:** `style`, medium confidence. audits.gloss_lint flags the current gloss as definition_like (6 words); 'make a reservation (for)' is a definitional phrase redundant with 'reserve'/'book' and should be trimmed for VoiceOver.
-- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts). The '(for)' parenthesis is neither register nor region, which house style forbids, and gloss_lint flags the phrase as definition_like (6 words). 'reserve, book' keeps both senses from English Wiktionary's 'to reserve, to make a reservation (for), to book'.
+- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The '(for)' parenthesis is neither register nor region, which house style forbids, and gloss_lint flags the phrase as definition_like (6 words). 'reserve, book' keeps both senses from English Wiktionary's 'to reserve, to make a reservation (for), to book'.
 
 #### installer (rank 135)
 - **Gloss:** install, place → **install, place, settle**
@@ -128,12 +130,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### enregistrer (rank 172)
 - **Gloss:** record for later replay or use, save on a computer → **record, save**
 - **Checker:** `style`, high confidence. audits.gloss_lint flags 'definition_like' (10 words); wiktionary_en senses 'to record for later replay or use' and 'to save' condense cleanly to a short, VoiceOver-friendly gloss.
-- **Skeptic:** upheld, nitpick. gloss_lint flags the gloss as definition_like (10 words), and English Wiktionary's senses 'to record for later replay or use' and 'to save' reduce cleanly to 'record, save' with no sense lost.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). gloss_lint flags the gloss as definition_like (10 words), and English Wiktionary's senses 'to record for later replay or use' and 'to save' reduce cleanly to 'record, save' with no sense lost.
 
 #### favoriser (rank 189)
 - **Gloss:** favor, show a preference to something, prioritize → **favor, promote, prioritize**
 - **Checker:** `style`, medium confidence. The shipped gloss carries over wiktionary_en's definition-like phrase 'show a preference to something' (flagged by gloss_lint as definition_like); wiktionary_en also lists 'to promote, encourage, foster' as a third sense, which is the sense the shipped example itself uses ('aimait à favoriser les liaisons' = 'enjoyed encouraging love affairs') but which the current gloss omits.
-- **Skeptic:** upheld, nitpick. 'show a preference to something' is flagged definition_like, and English Wiktionary's untagged 'to promote, encourage, foster' has Wiktionnaire support in 'Aider ; contribuer à', tagged 'common'. 'favor, promote, prioritize' is shorter and covers more.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). 'show a preference to something' is flagged definition_like, and English Wiktionary's untagged 'to promote, encourage, foster' has Wiktionnaire support in 'Aider ; contribuer à', tagged 'common'. 'favor, promote, prioritize' is shorter and covers more.
 
 #### tenter (rank 195)
 - **Gloss:** tempt → **attempt, try, tempt**
@@ -143,12 +145,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### conserver (rank 204)
 - **Gloss:** keep in a particular place, retain, conserve, preserve → **keep, retain, preserve**
 - **Checker:** `style`, medium confidence. gloss_lint flags the current gloss as definition_like (8 words); 'keep in a particular place' is a wordy rendering of wiktionary_en's parenthetical clarifier and can be trimmed to 'keep' without loss.
-- **Skeptic:** upheld, nitpick. 'keep in a particular place' expands English Wiktionary's parenthetical in 'to keep (in a particular place)' into a definition, and gloss_lint flags it (8 words). 'keep, retain, preserve' keeps every distinct sense.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). 'keep in a particular place' expands English Wiktionary's parenthetical in 'to keep (in a particular place)' into a definition, and gloss_lint flags it (8 words). 'keep, retain, preserve' keeps every distinct sense.
 
 #### informer (rank 206)
 - **Gloss:** inform, enlighten, impart knowledge (upon) → **inform, enlighten**
 - **Checker:** `style`, medium confidence. The gloss reproduces wiktionary_en's single combined sense verbatim including the awkward parenthetical '(upon)', which is not a register/region qualifier; 'inform, enlighten' conveys the same coverage more concisely for VoiceOver.
-- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts). '(upon)' is a parenthesis for neither register nor region, which house style forbids, and 'impart knowledge' only restates 'inform, enlighten' from English Wiktionary's 'to inform; to enlighten; to impart knowledge (upon)'.
+- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). '(upon)' is a parenthesis for neither register nor region, which house style forbids, and 'impart knowledge' only restates 'inform, enlighten' from English Wiktionary's 'to inform; to enlighten; to impart knowledge (upon)'.
 
 #### estimer (rank 221)
 - **Gloss:** estimate, calculate roughly, esteem, hold in high regard → **estimate, esteem**
@@ -174,7 +176,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### quitter (rank 266)
 - **Gloss:** leave, quit, discharge somebody from an obligation → **leave, quit**
 - **Checker:** `style`, high confidence. wiktionary_en tags the third sense, "to discharge somebody from an obligation", as obsolete; gloss_lint flags the resulting gloss as "definition_like" (7 words). The primary current senses "leave, quit" are already present and first, so the obsolete tail can be dropped for house style (short, read-aloud gloss).
-- **Skeptic:** upheld, hedge. wiktionary_en tags 'to discharge somebody from an obligation' as 'obsolete', yet the app ships it without any register marker as a third of the gloss. 'leave, quit' is the untagged sense and already leads the gloss.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). wiktionary_en tags 'to discharge somebody from an obligation' as 'obsolete', yet the app ships it without any register marker as a third of the gloss. 'leave, quit' is the untagged sense and already leads the gloss.
 
 #### dépasser (rank 278)
 - **Gloss:** overtake → **exceed, overtake**
@@ -210,12 +212,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### user (rank 322)
 - **Gloss:** use, wear, wear down, wear off, wear out, grind down, run in → **wear out, wear down, use**
 - **Checker:** `style`, medium confidence. wiktionary_en's first sense is a string of six near-synonyms ('to wear, wear down, wear off, wear out, grind down, run in') plus 'to use'; house style calls for two or three senses, not seven — gloss_lint flagged it as 'definition_like, 12 words'.
-- **Skeptic:** upheld, hedge. Both references lead with wearing out: wiktionary_en's first sense is 'to wear, wear down, wear off, wear out…' and Wiktionnaire's is 'Détériorer par l’usage'. 'use' is wiktionary_en's second sense, 'used with de'. The shipped gloss runs to 12 words (gloss_lint) and includes the British phrase 'run in'. 'wear out, wear down, use' is ordered correctly and short.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). Both references lead with wearing out: wiktionary_en's first sense is 'to wear, wear down, wear off, wear out…' and Wiktionnaire's is 'Détériorer par l’usage'. 'use' is wiktionary_en's second sense, 'used with de'. The shipped gloss runs to 12 words (gloss_lint) and includes the British phrase 'run in'. 'wear out, wear down, use' is ordered correctly and short.
 
 #### élaborer (rank 323)
 - **Gloss:** elaborate, draw up, write up, make up, whip up, put together → **develop, work out, put together**
 - **Checker:** `style`, medium confidence. wiktionary_en's first sense alone is 'to draw up, write up, make up, whip up, put together' (5 synonyms) and the gloss strings six total senses together; gloss_lint flagged it as 'definition_like, 11 words'. 'develop, work out' better reflects common modern use ('élaborer un projet/une stratégie').
-- **Skeptic:** partly, nitpick. Trimming the 11-word gloss is fair. But the proposal drops wiktionary_en's first sense, 'to draw up', in favor of 'develop', taken from the biological sense 'to process farther, to produce, to develop, to metabolize', and its modern-usage claim has nothing behind it. A better gloss would be 'draw up, work out, put together'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Trimming the 11-word gloss is fair. But the proposal drops wiktionary_en's first sense, 'to draw up', in favor of 'develop', taken from the biological sense 'to process farther, to produce, to develop, to metabolize', and its modern-usage claim has nothing behind it. A better gloss would be 'draw up, work out, put together'.
 
 #### attribuer (rank 340)
 - **Gloss:** grant, award → **attribute, ascribe, grant, award**
@@ -225,27 +227,27 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### requérir (rank 351)
 - **Gloss:** call for, require, request, summon, demand, need → **require, request, demand**
 - **Checker:** `style`, medium confidence. en Wiktionary senses in order: 'to call for, to require', 'to request, to summon', 'to demand', 'to need' — app strung all four groups (6 words) into one gloss; gloss_lint flagged it definition_like. House style wants two or three senses; the compressed set keeps the same order and drops near-duplicates (call for/summon/need).
-- **Skeptic:** upheld, nitpick. Stage 1 gloss_lint flags the six-sense gloss as definition_like. 'require, request, demand' keeps en Wiktionary's order ('to call for, to require', 'to request, to summon', 'to demand') and drops only near-duplicates.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Stage 1 gloss_lint flags the six-sense gloss as definition_like. 'require, request, demand' keeps en Wiktionary's order ('to call for, to require', 'to request, to summon', 'to demand') and drops only near-duplicates.
 
 #### supposer (rank 356)
 - **Gloss:** suppose, think, reckon, surmise, suggest, imply → **suppose, imply**
 - **Checker:** `style`, medium confidence. en Wiktionary: 'to suppose, to think, to reckon, to surmise' then 'to suggest, to imply' — app strung all six near-synonyms together (gloss_lint flagged definition_like, 6 words). House style wants two or three senses; 'suppose, imply' keeps the same order and the two distinct senses.
-- **Skeptic:** upheld, nitpick. gloss_lint flags definition_like. en Wiktionary has two senses, 'to suppose, to think, to reckon, to surmise' and 'to suggest, to imply', and 'suppose, imply' keeps one head word from each, in order.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). gloss_lint flags definition_like. en Wiktionary has two senses, 'to suppose, to think, to reckon, to surmise' and 'to suggest, to imply', and 'suppose, imply' keeps one head word from each, in order.
 
 #### régler (rank 366)
 - **Gloss:** sort out, settle, set, adjust, regulate, put lines on → **sort out, settle, adjust**
 - **Checker:** `style`, medium confidence. en Wiktionary: 'to sort out, to settle (a problem, a bill)', 'to set, to adjust', 'to regulate', 'to rule; to put lines on' — app strung all four groups together (gloss_lint flagged definition_like, 9 words). House style wants two or three senses; the compressed set keeps the order and the two commonest everyday senses (settle a bill/problem; set/adjust a device), dropping the rarer 'put lines on' (ruling paper).
-- **Skeptic:** upheld, nitpick. gloss_lint flags definition_like (9 words). 'sort out, settle, adjust' keeps en Wiktionary's first two senses in order ('to sort out, to settle (a problem, a bill)', 'to set, to adjust') and drops the specialist 'put lines on'.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). gloss_lint flags definition_like (9 words). 'sort out, settle, adjust' keeps en Wiktionary's first two senses in order ('to sort out, to settle (a problem, a bill)', 'to set, to adjust') and drops the specialist 'put lines on'.
 
 #### remonter (rank 370)
 - **Gloss:** go back up, come back up, climb again, reclimb, go back, return → **go back up, go back**
 - **Checker:** `style`, medium confidence. en Wiktionary's first sense group is 'to go back up, to come back up, to climb again, to reclimb' and a later group is 'to go back, to return'; the app strung all six near-synonyms together (gloss_lint flagged definition_like, 12 words). House style wants two or three senses; the compressed gloss keeps the order and the two distinct sense groups.
-- **Skeptic:** upheld, nitpick. gloss_lint flags definition_like (12 words). 'go back up, go back' keeps the head of en Wiktionary's first sense group ('to go back up, to come back up, …') and of the 'to go back, to return' group, in order.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). gloss_lint flags definition_like (12 words). 'go back up, go back' keeps the head of en Wiktionary's first sense group ('to go back up, to come back up, …') and of the 'to go back, to return' group, in order.
 
 #### commander (rank 385)
 - **Gloss:** tell someone to do something, ask for a product → **order, command**
 - **Checker:** `style`, medium confidence. en wiktionary: 'to order (tell someone to do something)' and 'to order (ask for a product)' — both senses reduce to the single plain word 'order'; the shipped gloss carries over the parenthetical explanations verbatim (flagged definition_like, 9 words).
-- **Skeptic:** upheld, error. The shipped gloss copies the parenthetical explanations from en Wiktionary's 'to order (tell someone to do something)' and 'to order (ask for a product)' and omits the actual verb 'order'. gloss_lint flags it definition_like. 'order, command' is the plain gloss.
+- **Skeptic:** upheld, error (leans on the dropped length rule, see Counts). The shipped gloss copies the parenthetical explanations from en Wiktionary's 'to order (tell someone to do something)' and 'to order (ask for a product)' and omits the actual verb 'order'. gloss_lint flags it definition_like. 'order, command' is the plain gloss.
 
 #### résoudre (rank 398)
 - **Gloss:** dissolve → **solve, resolve**
@@ -265,7 +267,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### récupérer (rank 415)
 - **Gloss:** get back, recover, recuperate, reform, rehabilitate, reclaim, make up → **get back, recover, recuperate**
 - **Checker:** `style`, medium confidence. gloss_lint flags this as definition_like (9 words); house style wants two or three senses, and en wiktionary's first three glosses ('to get back, to recover, to recuperate') already cover the commonest uses without the four extra senses tacked on.
-- **Skeptic:** upheld, nitpick. gloss_lint flags definition_like (9 words). 'get back, recover, recuperate' is en Wiktionary's first sense verbatim and is the commonest use.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). gloss_lint flags definition_like (9 words). 'get back, recover, recuperate' is en Wiktionary's first sense verbatim and is the commonest use.
 
 #### témoigner (rank 418)
 - **Gloss:** witness → **witness, show (a feeling)**
@@ -281,12 +283,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### libérer (rank 443)
 - **Gloss:** liberate, set free, release from captivity, vacate → **liberate, vacate**
 - **Checker:** `style`, medium confidence. gloss_lint flags 'definition_like' (7 words); wiktionary_en's two senses are 'to liberate, to set free, to release from captivity' and 'to vacate, to move out of (e.g. a house)' — 'liberate' and 'set free'/'release from captivity' are near-synonyms, so trimming to one word per sense keeps both senses while meeting the 'two or three senses' house style.
-- **Skeptic:** upheld, nitpick. gloss_lint flags definition_like (7 words). en Wiktionary's two senses are 'to liberate, to set free, to release from captivity' and 'to vacate', and 'liberate, vacate' keeps one head word for each, in order.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). gloss_lint flags definition_like (7 words). en Wiktionary's two senses are 'to liberate, to set free, to release from captivity' and 'to vacate', and 'liberate, vacate' keeps one head word for each, in order.
 
 #### enlever (rank 452)
 - **Gloss:** remove, take off, take away, clear, remove clothes → **remove, take away, take off clothes**
 - **Checker:** `style`, medium confidence. gloss_lint flags 'definition_like' (8 words); wiktionary_en senses are 'to remove, take off, take away, clear' and 'to take off, remove (clothes)' — the app's five-item list repeats 'remove'/'take off' redundantly; trimming to three items keeps the same two senses within house style's 'two or three senses' limit.
-- **Skeptic:** upheld, nitpick. gloss_lint flags definition_like (8 words), and the shipped gloss repeats 'remove' and 'take off'. 'remove, take away, take off clothes' covers en Wiktionary's senses 'to remove, take off, take away, clear' and 'to take off, remove (clothes)' without the repetition.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). gloss_lint flags definition_like (8 words), and the shipped gloss repeats 'remove' and 'take off'. 'remove, take away, take off clothes' covers en Wiktionary's senses 'to remove, take off, take away, clear' and 'to take off, remove (clothes)' without the repetition.
 
 #### dessiner (rank 457)
 - **Gloss:** sketch, draw → **draw, sketch**
@@ -301,12 +303,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### voiler (rank 460)
 - **Gloss:** veil, cover with a veil, become cloudy → **veil, become cloudy**
 - **Checker:** `style`, high confidence. gloss_lint flags 'definition_like' (7 words); 'cover with a veil' merely re-defines 'veil'. wiktionary_en senses are "to veil (cover with a veil)" and "to become cloudy, to become hazy" — 'veil, become cloudy' captures both without restating the first sense.
-- **Skeptic:** upheld, nitpick. gloss_lint flags definition_like (7 words), and 'cover with a veil' just restates 'veil', which is en Wiktionary's own parenthetical in 'to veil (cover with a veil)'. 'veil, become cloudy' keeps both senses.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). gloss_lint flags definition_like (7 words), and 'cover with a veil' just restates 'veil', which is en Wiktionary's own parenthetical in 'to veil (cover with a veil)'. 'veil, become cloudy' keeps both senses.
 
 #### ignorer (rank 462)
 - **Gloss:** ignore, be unaware of, be ignorant of → **ignore, be unaware of**
 - **Checker:** `style`, medium confidence. gloss_lint flags 'definition_like' (7 words); 'be unaware of' and 'be ignorant of' are near-synonyms, so the third clause is redundant per house style's 2-3-sense guidance.
-- **Skeptic:** upheld, nitpick. gloss_lint flags definition_like (7 words). en Wiktionary's second sense 'to be unaware of, to be ignorant of' pairs near-synonyms, so dropping 'be ignorant of' loses no meaning.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). gloss_lint flags definition_like (7 words). en Wiktionary's second sense 'to be unaware of, to be ignorant of' pairs near-synonyms, so dropping 'be ignorant of' loses no meaning.
 
 #### rapprocher (rank 483)
 - **Gloss:** reapproach, approach again, come closer → **bring closer, come closer**
@@ -351,7 +353,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### implanter (rank 536)
 - **Gloss:** build, install, open, establish, instill, embed, implant → **establish, implant**
 - **Checker:** `style`, medium confidence. The app gloss strings all seven wiktionary_en synonyms ('build, install, open, establish, instill, embed, implant'), flagged by gloss_lint as definition-like at 7 words. 'Establish' (sense 2) and 'implant' (sense 4) cover the commonest uses (a business establishing itself, an idea or device being implanted) in two senses per house style.
-- **Skeptic:** upheld, nitpick. Seven stacked synonyms is too long to read aloud. The proposed 'establish, implant' covers wiktionnaire's first sense ('Planter, insérer une chose dans une autre.') and its 'especially' sense about siting a construction.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Seven stacked synonyms is too long to read aloud. The proposed 'establish, implant' covers wiktionnaire's first sense ('Planter, insérer une chose dans une autre.') and its 'especially' sense about siting a construction.
 
 #### confondre (rank 540)
 - **Gloss:** confound → **confuse, mistake**
@@ -371,7 +373,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### rattacher (rank 567)
 - **Gloss:** attach, fix, fix on, put on, link → **attach, link**
 - **Checker:** `style`, medium confidence. gloss_lint flags 'definition_like, 7 words'; en Wiktionary's first sense strings six near-synonyms ('attach, fix, fix on, put on, link') which exceeds house style's two-or-three-sense limit.
-- **Skeptic:** partly, nitpick. Trimming the clunky 'fix, fix on, put on' is reasonable, but the proposal also leaves out Wiktionnaire's first sense 'Attacher de nouveau, attacher ce qui était détaché' (en: 'to reattach, put back on'), which the re- prefix signals. The right gloss is 'reattach, attach, link'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Trimming the clunky 'fix, fix on, put on' is reasonable, but the proposal also leaves out Wiktionnaire's first sense 'Attacher de nouveau, attacher ce qui était détaché' (en: 'to reattach, put back on'), which the re- prefix signals. The right gloss is 'reattach, attach, link'.
 
 #### dévoiler (rank 572)
 - **Gloss:** unveil (remove a veil from) → **unveil, reveal**
@@ -386,12 +388,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### repartir (rank 587)
 - **Gloss:** leave again, go back, restart, set off again, retort → **leave again, restart, retort**
 - **Checker:** `style`, medium confidence. gloss_lint flags 'definition_like, 9 words'; en Wiktionary's three senses are 'to leave again, to go back', 'to restart, to set off again', and 'to retort' — the app strings synonym pairs for the first two senses instead of picking one term each.
-- **Skeptic:** partly, nitpick. The real problem is that 'retort' ships unmarked although English Wiktionary tags it 'archaic, literary' and Wiktionnaire tags it 'literary'. The proposal keeps it unmarked and drops 'go back' (Wiktionnaire: 'partir pour l’endroit d’où l’on était venu'). The right change is 'leave again, go back, restart, retort (literary)'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The real problem is that 'retort' ships unmarked although English Wiktionary tags it 'archaic, literary' and Wiktionnaire tags it 'literary'. The proposal keeps it unmarked and drops 'go back' (Wiktionnaire: 'partir pour l’endroit d’où l’on était venu'). The right change is 'leave again, go back, restart, retort (literary)'.
 
 #### reporter (rank 628)
 - **Gloss:** carry something back, wear again, transfer (an emotion), put back, put off → **postpone, transfer, refer to**
 - **Checker:** `missing_primary_sense`, medium confidence. The 12-word, 5-sense gloss (flagged definition_like) omits wiktionary_en's pronominal sense 'to refer; to check', which is exactly what the app's shipped example demonstrates ('nous reporter pour trouver l'indication' = 'refer back to it'). Trimming to the three commonest senses (postpone being the everyday use, e.g. 'reporter une réunion') both shortens the gloss and covers the example.
-- **Skeptic:** partly, nitpick. The twelve-word gloss is too long to read aloud, but 'refer to' belongs to the pronominal se reporter (en: 'to refer; to check', tagged pronominal), not to reporter. The proposal also drops sense 1 of both references, 'carry back', and its frequency claim for 'postpone' is unsupported. A trim such as 'carry back, put off, transfer' is the right change.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The twelve-word gloss is too long to read aloud, but 'refer to' belongs to the pronominal se reporter (en: 'to refer; to check', tagged pronominal), not to reporter. The proposal also drops sense 1 of both references, 'carry back', and its frequency claim for 'postpone' is unsupported. A trim such as 'carry back, put off, transfer' is the right change.
 
 #### passionner (rank 631)
 - **Gloss:** impassionate, motivate → **fascinate, enthrall**
@@ -432,7 +434,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### entamer (rank 687)
 - **Gloss:** cut into (something), remove a small piece of something → **cut into, begin**
 - **Checker:** `missing_primary_sense`, medium confidence. wiktionary_en's figurative sense 'to start, to begin, initiate' (entamer une discussion) is common and missing from the app gloss, which is also flagged definition_like (9 words) for its wordy literal phrasing.
-- **Skeptic:** upheld, hedge (cites the old parenthesis rule, see Counts). The current gloss is a 9-word definition (definition_like) with a non-register parenthetical '(something)', and it misses the common figurative sense 'to start, to begin, initiate' (Wiktionnaire: 'Commencer ; engager'). 'cut into, begin' fixes both problems.
+- **Skeptic:** upheld, hedge (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current gloss is a 9-word definition (definition_like) with a non-register parenthetical '(something)', and it misses the common figurative sense 'to start, to begin, initiate' (Wiktionnaire: 'Commencer ; engager'). 'cut into, begin' fixes both problems.
 
 #### projeter (rank 692)
 - **Gloss:** plan → **plan, project**
@@ -447,7 +449,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### référencer (rank 718)
 - **Gloss:** list (a product in a catalogue), put (a product on the shelves) → **list, index**
 - **Checker:** `style`, medium confidence. The gloss quotes wiktionary_en's sense verbatim as a full definition with two disambiguating parentheticals, which house style reserves for register/region; a short 'list, index' covers both the catalogue sense (wiktionnaire: 'Inclure dans son catalogue la référence d'un fournisseur') and the modern web-indexing sense shown in the example.
-- **Skeptic:** partly, hedge (cites the old parenthesis rule, see Counts). The current gloss is a 12-word definition with non-register parentheticals and the British 'catalogue', so shortening it is right. But 'index' matches no sense quoted in the shard. The two senses support 'list, stock': 'Inclure dans son catalogue…' and 'put (a product on the shelves)'.
+- **Skeptic:** partly, hedge (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current gloss is a 12-word definition with non-register parentheticals and the British 'catalogue', so shortening it is right. But 'index' matches no sense quoted in the shard. The two senses support 'list, stock': 'Inclure dans son catalogue…' and 'put (a product on the shelves)'.
 
 #### émerger (rank 719)
 - **Gloss:** arrive at the top → **emerge, arrive at the top**
@@ -487,7 +489,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### sauvegarder (rank 778)
 - **Gloss:** safeguard, protect, save (on a computer), back up (computer data) → **safeguard, protect, save, back up**
 - **Checker:** `style`, high confidence. gloss_lint flags this as definition_like (10 words); the clarifying parentheses '(on a computer)' and '(computer data)' are glosses of the gloss, against house style, and are unnecessary once 'save' and 'back up' stand together.
-- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts). House style allows parentheses only for register or region. '(on a computer)' and '(computer data)' are clarifying glosses, and 'safeguard, protect, save, back up' keeps all four wiktionary_en senses ('to save', 'to back up') without them.
+- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). House style allows parentheses only for register or region. '(on a computer)' and '(computer data)' are clarifying glosses, and 'safeguard, protect, save, back up' keeps all four wiktionary_en senses ('to save', 'to back up') without them.
 
 #### avertir (rank 780)
 - **Gloss:** warn, avert → **warn, notify**
@@ -497,7 +499,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### repousser (rank 781)
 - **Gloss:** push back, push out of the way, repel, ward off, turn away → **push back, repel, reject**
 - **Checker:** `missing_primary_sense`, medium confidence. wiktionary_en's fourth sense 'to turn down, dismiss, reject, rule out' (untagged, common in everyday use — 'repousser une offre/demande') is missing from the gloss, which instead piles up four near-synonyms ('push back, push out of the way, repel, ward off, turn away') for a single physical sense; gloss_lint also flags this as definition_like (12 words).
-- **Skeptic:** upheld, hedge. The current gloss leaves out wiktionary_en's untagged 'to turn down, dismiss, reject, rule out' (wiktionnaire 'Rejeter ; refuser'), and it stacks near-synonyms (12 words, flagged definition_like). 'push back, repel, reject' covers the physical, repelling and rejecting senses, and 'push back' also carries 'postpone' in American English.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). The current gloss leaves out wiktionary_en's untagged 'to turn down, dismiss, reject, rule out' (wiktionnaire 'Rejeter ; refuser'), and it stacks near-synonyms (12 words, flagged definition_like). 'push back, repel, reject' covers the physical, repelling and rejecting senses, and 'push back' also carries 'postpone' in American English.
 
 #### conforter (rank 788)
 - **Gloss:** comfort, reinforce → **reinforce, confirm (in a belief)**
@@ -557,7 +559,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### restituer (rank 835)
 - **Gloss:** restitute, restore, bring back, bring back to life → **restore, return, bring back**
 - **Checker:** `style`, medium confidence. the current gloss strings together four near-synonymous senses including the obscure 'restitute'; house style favors two or three senses, so trimming to plain wording is cleaner while still covering the main senses (restore, return, resurrect).
-- **Skeptic:** partly, nitpick. The current gloss is verbatim from wiktionary_en and not wrong, and the 'two or three senses' rule the checker cites is not house style. But 'restitute' is an obscure English word, and Wiktionnaire's first sense is 'Rendre ce qui a été pris…' (give back). The better change is 'return, restore, bring back', leading with the return sense rather than putting 'restore' first.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The current gloss is verbatim from wiktionary_en and not wrong, and the 'two or three senses' rule the checker cites is not house style. But 'restitute' is an obscure English word, and Wiktionnaire's first sense is 'Rendre ce qui a été pris…' (give back). The better change is 'return, restore, bring back', leading with the return sense rather than putting 'restore' first.
 
 #### habiliter (rank 852)
 - **Gloss:** habilitate → **authorize, empower**
@@ -597,7 +599,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### déguster (rank 886)
 - **Gloss:** taste or try food → **taste, savor**
 - **Checker:** `style`, medium confidence. wiktionnaire's first sense is about tasting wine/drink to judge quality, and the second is 'savourer'; 'taste or try food' is a wordy paraphrase where house style wants comma-separated senses.
-- **Skeptic:** upheld, nitpick. wiktionary_en gives 'to try, to taste (food or drink)' and the untagged 'to savor, to relish something'. The current 'taste or try food' wrongly narrows the verb to food, since Wiktionnaire's first sense is about wine, and it uses 'or' where house style wants comma-separated senses. 'taste, savor' is correct and plain.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). wiktionary_en gives 'to try, to taste (food or drink)' and the untagged 'to savor, to relish something'. The current 'taste or try food' wrongly narrows the verb to food, since Wiktionnaire's first sense is about wine, and it uses 'or' where house style wants comma-separated senses. 'taste, savor' is correct and plain.
 
 #### épouser (rank 892)
 - **Gloss:** get married, wed → **marry, wed**
@@ -617,7 +619,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### forger (rank 903)
 - **Gloss:** fashion metal with fire and a hammer, forge → **forge, coin (a word)**
 - **Checker:** `style`, medium confidence. the gloss leads with a long dictionary-style definition ('fashion metal with fire and a hammer') before the plain word 'forge'; house style wants the plain word first, with an obscure equivalent only optionally following, not replacing it.
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). The direction is right: the lint flags the dictionary-style phrase 'fashion metal with fire and a hammer', and the plain word should lead. But '(a word)' is a parenthesis that marks neither register nor region. Use something like 'forge, make up, coin', drawn from 'to create, to conceive, to make up' and 'to coin (a word or phrase)'.
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The direction is right: the lint flags the dictionary-style phrase 'fashion metal with fire and a hammer', and the plain word should lead. But '(a word)' is a parenthesis that marks neither register nor region. Use something like 'forge, make up, coin', drawn from 'to create, to conceive, to make up' and 'to coin (a word or phrase)'.
 
 #### fatiguer (rank 905)
 - **Gloss:** fatigue → **tire, wear out**
@@ -647,12 +649,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### bouleverser (rank 934)
 - **Gloss:** completely and drastically change, overturn, shake, cause a strong emotion, disorganize, turn upside down → **turn upside down, upset, devastate**
 - **Checker:** `style`, medium confidence. The current gloss strings together six near-synonyms across 14 words (flagged by gloss_lint as definition_like), far past the house style's two-or-three-sense, readable-aloud limit, though every sense used is genuinely English Wiktionary's own.
-- **Skeptic:** partly, nitpick. The 14-word gloss (gloss_lint definition_like) really is too long. But the replacement drops English Wiktionary's first sense, "to completely and drastically change, to overturn", and adds "devastate", which neither source lists. A trim like "overturn, upset, turn upside down" keeps the lead sense.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The 14-word gloss (gloss_lint definition_like) really is too long. But the replacement drops English Wiktionary's first sense, "to completely and drastically change, to overturn", and adds "devastate", which neither source lists. A trim like "overturn, upset, turn upside down" keeps the lead sense.
 
 #### refroidir (rank 944)
 - **Gloss:** lower the temperature of, cool, cool down, cool off → **cool, cool down**
 - **Checker:** `style`, medium confidence. The gloss stacks four near-synonyms of the same literal-cooling sense ('lower the temperature of, cool, cool down, cool off'), flagged by gloss_lint as definition_like (9 words), well past the house style's two-or-three-sense limit, without adding any of the figurative senses ('diminish zeal', slang 'kill').
-- **Skeptic:** upheld, nitpick. gloss_lint flags the 9-word gloss as definition_like, and it stacks restatements of English Wiktionary's "to lower the temperature of; to cool" and "to cool down". "cool, cool down" keeps the lead sense and is short enough to read aloud.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). gloss_lint flags the 9-word gloss as definition_like, and it stacks restatements of English Wiktionary's "to lower the temperature of; to cool" and "to cool down". "cool, cool down" keeps the lead sense and is short enough to read aloud.
 
 #### décaler (rank 961)
 - **Gloss:** unload a ship, stagger a shift → **shift, move, stagger**
@@ -673,12 +675,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### renverser (rank 982)
 - **Gloss:** turn over, turn upside down, knock over, run over, spill, overthrow, agitate → **knock over, spill, overthrow**
 - **Checker:** `style`, medium confidence. wiktionary_en lists 7+ transitive senses; house style allows two or three, current gloss strings together 7 near-synonyms ('turn over, turn upside down, knock over, run over, spill, overthrow, agitate').
-- **Skeptic:** partly, nitpick. The 7-sense gloss (definition_like, 12 words) needs trimming. But the proposal drops the lead sense in both sources: English Wiktionary's "to turn over, turn upside down" and Wiktionnaire's "Mettre à l’envers". Keep it first, e.g. "turn over, knock over, spill, overthrow".
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The 7-sense gloss (definition_like, 12 words) needs trimming. But the proposal drops the lead sense in both sources: English Wiktionary's "to turn over, turn upside down" and Wiktionnaire's "Mettre à l’envers". Keep it first, e.g. "turn over, knock over, spill, overthrow".
 
 #### précipiter (rank 988)
 - **Gloss:** throw out, push out, chuck out, throw off, push off, chuck off, precipitate → **throw out, rush, precipitate**
 - **Checker:** `missing_primary_sense`, medium confidence. wiktionnaire's last sense 'S’élancer, aller impétueusement, s’avancer rapidement' (pronominal, 'se précipiter' = to rush/dash forward) is a very common modern use and is entirely missing from the current 7-item gloss; the shipped example itself ('se précipita' = 'rushed forward') uses this missing sense.
-- **Skeptic:** upheld, hedge. The 13-word gloss (definition_like) repeats one sense six ways and leaves out English Wiktionary's "to rush (hasten, do something too fast)" and reflexive "to dash" (Wiktionnaire "S’élancer…"). "throw out, rush, precipitate" keeps the lead sense and adds the missing one. The claim about the shipped example can't be checked from the shard and wasn't needed.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). The 13-word gloss (definition_like) repeats one sense six ways and leaves out English Wiktionary's "to rush (hasten, do something too fast)" and reflexive "to dash" (Wiktionnaire "S’élancer…"). "throw out, rush, precipitate" keeps the lead sense and adds the missing one. The claim about the shipped example can't be checked from the shard and wasn't needed.
 
 #### postuler (rank 989)
 - **Gloss:** postulate, posit → **apply for, postulate**
@@ -703,7 +705,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### simuler (rank 1050)
 - **Gloss:** simulate, feign, make like, emulate, pretend to be, dive (in sports) → **simulate, feign, dive (sports)**
 - **Checker:** `style`, high confidence. en wiktionary: 'to feign, to fake, to put on, to pretend to have' (transitive) and 'to dive (to pretend to be fouled...)' (intransitive, sports); the current gloss piles five synonyms onto the first sense alone, more than VoiceOver needs.
-- **Skeptic:** upheld, nitpick. The current 11-word gloss contains 'emulate' and 'pretend to be', which none of the quoted senses support (en: 'to feign, to fake, to put on, to pretend to have'). 'simulate, feign, dive (sports)' keeps both en senses and is short enough to read aloud.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current 11-word gloss contains 'emulate' and 'pretend to be', which none of the quoted senses support (en: 'to feign, to fake, to put on, to pretend to have'). 'simulate, feign, dive (sports)' keeps both en senses and is short enough to read aloud.
 
 #### déménager (rank 1051)
 - **Gloss:** move (an object from a place to another), move house → **move an object, move house**
@@ -723,7 +725,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### encourir (rank 1094)
 - **Gloss:** expose oneself to something inconvenient, run a risk → **incur, run a risk**
 - **Checker:** `style`, high confidence. wiktionary_en's own first sense is 'to incur (to expose oneself to something inconvenient)'; the app's gloss kept only the parenthetical explanation and dropped the plain word 'incur', which the audit's gloss_lint flagged as 'definition_like'.
-- **Skeptic:** upheld, nitpick. WE sense 1 reads 'to incur (to expose oneself to something inconvenient)'; the app kept only the parenthetical explanation and dropped the headword 'incur', so 'incur, run a risk' is shorter and matches both WE senses.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). WE sense 1 reads 'to incur (to expose oneself to something inconvenient)'; the app kept only the parenthetical explanation and dropped the headword 'incur', so 'incur, run a risk' is shorter and matches both WE senses.
 
 #### formaliser (rank 1095)
 - **Gloss:** formalize, legalize → **formalize, take offense**
@@ -764,18 +766,18 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### contourner (rank 1147)
 - **Gloss:** circumvent, bypass, skirt around, travel from one place to another, visit several places → **go around, bypass, circumvent**
 - **Checker:** `style`, medium confidence. The gloss_lint audit flags this as 'definition_like' at 13 words; WE's own two senses ('to circumvent, to bypass, to skirt around' and 'to travel from one place to another, to visit several places') are wordy phrases better trimmed to short, commonly-heard senses for VoiceOver.
-- **Skeptic:** upheld, nitpick. The 13-word gloss is flagged definition_like, and its tail 'travel from one place to another, visit several places' has no counterpart among Wiktionnaire's senses. 'go around, bypass, circumvent' follows 'Faire le tour de quelque chose' and the figurative 'Éviter de respecter en exploitant un biais'.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The 13-word gloss is flagged definition_like, and its tail 'travel from one place to another, visit several places' has no counterpart among Wiktionnaire's senses. 'go around, bypass, circumvent' follows 'Faire le tour de quelque chose' and the figurative 'Éviter de respecter en exploitant un biais'.
 
 #### déjeuner (rank 1163)
 - **Gloss:** eat lunch, to have lunch → **eat lunch**
 - **Checker:** `style`, high confidence. 'eat lunch' and 'to have lunch' are the same English Wiktionary sense restated twice, with a stray leading 'to'; house style wants one concise phrasing, not a duplicate.
-- **Skeptic:** upheld, nitpick. 'eat lunch, to have lunch' restates one WE sense twice and carries a stray leading 'to', both of which house style forbids. 'eat lunch' keeps the sense.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). 'eat lunch, to have lunch' restates one WE sense twice and carries a stray leading 'to', both of which house style forbids. 'eat lunch' keeps the sense.
 - *Note:* Several tier candidates use 'déjeuner'/'déjeuné' as a noun (the meal), not the verb; rejected those as not_verbal.
 
 #### minimiser (rank 1166)
 - **Gloss:** lessen the importance of in the mind of people, belittle, downplay, understate, reduce the effect of, minimize → **belittle, downplay, minimize**
 - **Checker:** `style`, high confidence. The current gloss is a 17-word verbatim copy of English Wiktionary's full definition line ('lessen the importance of in the mind of people; to belittle, downplay, understate') plus a duplicate of the third sense; house style wants two or three short senses.
-- **Skeptic:** upheld, nitpick. The 17-word gloss copies WE's whole definition line, including 'lessen the importance of in the mind of people', and is flagged definition_like. 'belittle, downplay, minimize' covers WE sense 1 and Wiktionnaire's 'Rendre minimal' and 'faire passer pour moindre'.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The 17-word gloss copies WE's whole definition line, including 'lessen the importance of in the mind of people', and is flagged definition_like. 'belittle, downplay, minimize' covers WE sense 1 and Wiktionnaire's 'Rendre minimal' and 'faire passer pour moindre'.
 
 #### tabler (rank 1181)
 - **Gloss:** base one’s scheming on something → **count on, bank on, reckon on**
@@ -811,7 +813,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### envelopper (rank 1245)
 - **Gloss:** wrap someone or something, cover, envelop → **wrap, cover, envelop**
 - **Checker:** `style`, medium confidence. The gloss_lint audit flags this as definition-like (6 words); the plain 'wrap' alone conveys 'wrap someone or something' without the extra qualifier, matching English Wiktionary's two senses 'to wrap someone or something, to cover' and 'to envelop'.
-- **Skeptic:** upheld, nitpick. The gloss_lint audit flags 'definition_like' (6 words). 'someone or something' adds nothing, and 'wrap, cover, envelop' keeps every sense of English Wiktionary's 'to wrap someone or something, to cover' and 'to envelop' while being short enough to read aloud.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The gloss_lint audit flags 'definition_like' (6 words). 'someone or something' adds nothing, and 'wrap, cover, envelop' keeps every sense of English Wiktionary's 'to wrap someone or something, to cover' and 'to envelop' while being short enough to read aloud.
 
 #### concerter (rank 1251)
 - **Gloss:** concert, plan → **plan, concert**
@@ -831,7 +833,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### déplier (rank 1270)
 - **Gloss:** unfold (undo the action of folding) → **unfold**
 - **Checker:** `style`, high confidence. wiktionary_en's sense is verbatim 'to unfold (undo the action of folding)'; the parenthetical restates the gloss itself rather than giving register or region, against house style, and 'unfold' alone conveys the same meaning.
-- **Skeptic:** upheld, nitpick. The parenthetical in 'to unfold (undo the action of folding)' explains the word instead of marking register or region, which house style forbids, and gloss_lint flags it 'definition_like'. 'unfold' alone says the same thing.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The parenthetical in 'to unfold (undo the action of folding)' explains the word instead of marking register or region, which house style forbids, and gloss_lint flags it 'definition_like'. 'unfold' alone says the same thing.
 
 #### redire (rank 1279)
 - **Gloss:** resay, say again, retell, tell again → **say again, retell**
@@ -857,7 +859,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### espacer (rank 1298)
 - **Gloss:** space out, allow gaps or intervals between → **space out, spread apart**
 - **Checker:** `style`, medium confidence. gloss_lint flagged 'definition_like' (7 words); the second clause 'allow gaps or intervals between' reads as a definition rather than a short readable sense.
-- **Skeptic:** partly, nitpick. The clause “allow gaps or intervals between” does read as a definition (lint: definition_like, 7 words). But “spread apart” does not appear in any reference sense, while wiktionary_en's “to space out” covers everything. The right change is simply “space out”.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The clause “allow gaps or intervals between” does read as a definition (lint: definition_like, 7 words). But “spread apart” does not appear in any reference sense, while wiktionary_en's “to space out” covers everything. The right change is simply “space out”.
 - *Note:* All candidates use 'espace' as the noun ('space'), not the verb, so none qualified.
 
 #### pallier (rank 1301)
@@ -878,24 +880,24 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### arborer (rank 1317)
 - **Gloss:** sport clothes, wear a facial expression → **sport, wear, display**
 - **Checker:** `style`, low confidence. gloss_lint flagged 'definition_like' (6 words); 'sport clothes, wear a facial expression' reads as two mini-definitions rather than short senses, when wiktionary_en's own senses ('to sport (clothes, a badge)', 'to wear (a facial expression)', 'to fly, display (a flag)') can be compressed to three plain verbs.
-- **Skeptic:** upheld, hedge. “sport clothes” reads as a noun phrase meaning sportswear, and the shipped gloss leaves out wiktionary_en's third sense, “to fly, display (a flag)”. “sport, wear, display” follows the three wiktionary_en senses in plain verbs.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). “sport clothes” reads as a noun phrase meaning sportswear, and the shipped gloss leaves out wiktionary_en's third sense, “to fly, display (a flag)”. “sport, wear, display” follows the three wiktionary_en senses in plain verbs.
 
 #### plafonner (rank 1318)
 - **Gloss:** cap, put an upper limit on, reach one’s upper limit → **cap, plateau, level off**
 - **Checker:** `style`, medium confidence. gloss_lint flagged 'definition_like' (10 words); wiktionary_en's senses 'to cap (put an upper limit on)' and 'to reach one's upper limit' can be rendered as the shorter, equally accurate 'cap, plateau, level off'.
-- **Skeptic:** upheld, nitpick. Lint flags the shipped gloss as definition_like (10 words). “cap” matches wiktionary_en's “to cap (put an upper limit on)”, and “plateau, level off” renders the intransitive “to reach one's upper limit” (Wiktionnaire: “Atteindre son meilleur niveau… sans pouvoir le dépasser”) more briefly.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Lint flags the shipped gloss as definition_like (10 words). “cap” matches wiktionary_en's “to cap (put an upper limit on)”, and “plateau, level off” renders the intransitive “to reach one's upper limit” (Wiktionnaire: “Atteindre son meilleur niveau… sans pouvoir le dépasser”) more briefly.
 - *Note:* The only candidate, a Théophile Gautier quotation, uses 'plafonnée' in the older 'ceilinged/roofed' sense (a forest with a canopy), which is not covered by the app's modern 'cap/reach a limit' gloss, so it was rejected.
 
 #### libeller (rank 1327)
 - **Gloss:** write, make out, write out (a check), price, price up → **write out (a check), price**
 - **Checker:** `style`, medium confidence. gloss_lint flagged 'definition_like' (10 words); the current gloss stacks five near-synonymous phrases, more than the two or three a VoiceOver quiz gloss should carry; wiktionary_en's two senses reduce cleanly to 'write out (a check), price'.
-- **Skeptic:** partly, nitpick. Trimming the five stacked phrases is right. But the proposal drops the drafting sense that Wiktionnaire leads with (“Rédiger… une demande judiciaire ou administrative”, “Exposer, formuler”), and “(a check)” is not a register or region label. A better gloss would be something like “word, make out, price”.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Trimming the five stacked phrases is right. But the proposal drops the drafting sense that Wiktionnaire leads with (“Rédiger… une demande judiciaire ou administrative”, “Exposer, formuler”), and “(a check)” is not a register or region label. A better gloss would be something like “word, make out, price”.
 - *Note:* All three candidates use the unrelated noun 'libelle' (a lampoon/pamphlet), not the verb, so none qualified.
 
 #### gâcher (rank 1357)
 - **Gloss:** ruin, spoil, mar, wreck, waste, mess up, botch, bungle → **ruin, spoil, waste, botch**
 - **Checker:** `style`, medium confidence. The current gloss strings together all eight of Wiktionary's near-synonyms ('ruin, spoil, mar, wreck, waste, mess up, botch, bungle'), which is too long for a VoiceOver quiz item; house style calls for two or three senses.
-- **Skeptic:** upheld, nitpick. Stage 1 gloss_lint flags the eight-synonym gloss as 'definition_like' (9 words), which breaks the read-aloud rule. Every word kept ('ruin, spoil, waste, botch') comes from the en senses 'to ruin, spoil, mar, wreck, waste' and 'to mess up, botch, bungle', and the commonest sense still leads.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Stage 1 gloss_lint flags the eight-synonym gloss as 'definition_like' (9 words), which breaks the read-aloud rule. Every word kept ('ruin, spoil, waste, botch') comes from the en senses 'to ruin, spoil, mar, wreck, waste' and 'to mess up, botch, bungle', and the commonest sense still leads.
 - *Note:* No candidate qualified: several use the literal 'mix mortar/mud' sense the gloss doesn't cover, and the rest are truncated mid-sentence.
 
 #### modeler (rank 1361)
@@ -907,7 +909,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### diagnostiquer (rank 1369)
 - **Gloss:** diagnose (determine the root cause of) → **diagnose**
 - **Checker:** `style`, high confidence. gloss_lint flagged 'definition_like' (6 words); house style disfavors a parenthetical gloss-of-the-gloss like '(determine the root cause of)' when the plain infinitive 'diagnose' already covers both the literal (wiktionnaire: 'Reconnaitre une maladie par ses symptômes') and figurative senses.
-- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts). House style allows parentheses only for register or region, and '(determine the root cause of)' is a definition. gloss_lint also flags 'definition_like'. The bare 'diagnose' matches en 'to diagnose' and covers both Wiktionnaire senses.
+- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). House style allows parentheses only for register or region, and '(determine the root cause of)' is a definition. gloss_lint also flags 'definition_like'. The bare 'diagnose' matches en 'to diagnose' and covers both Wiktionnaire senses.
 
 #### essuyer (rank 1379)
 - **Gloss:** wipe, dry → **wipe, dry, endure (a setback)**
@@ -928,12 +930,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### feuilleter (rank 1428)
 - **Gloss:** leaf through, turn the pages of (a book) rapidly, reading short sections at random → **leaf through, laminate**
 - **Checker:** `style`, medium confidence. English Wiktionary sense 2, 'to laminate (cause to separate into thin layers)', is dropped entirely, while sense 1 is copied with its own parenthetical explanation still attached ('leaf through, turn the pages of (a book) rapidly, reading short sections at random'), which just restates 'leaf through' at length — too long to be read aloud.
-- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts). The current gloss copies the definition inside English Wiktionary's parentheses ('turn the pages of (a book) rapidly…'). That is 14 words, flagged definition_like, and uses a non-register parenthesis. 'leaf through, laminate' keeps English sense 1 and adds the untagged sense 2 'to laminate (cause to separate into thin layers)'.
+- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current gloss copies the definition inside English Wiktionary's parentheses ('turn the pages of (a book) rapidly…'). That is 14 words, flagged definition_like, and uses a non-register parenthesis. 'leaf through, laminate' keeps English sense 1 and adds the untagged sense 2 'to laminate (cause to separate into thin layers)'.
 
 #### river (rank 1429)
 - **Gloss:** drive a rivet, set a rivet → **rivet, fix firmly**
 - **Checker:** `style`, medium confidence. The gloss just restates the definition ('drive a rivet, set a rivet') instead of the plain English verb 'rivet', which covers the literal sense and also carries the figurative use Wiktionnaire lists ('Attacher, assujettir', 'Fixer attentivement, en parlant du regard' — as in English 'riveted to the spot').
-- **Skeptic:** upheld, nitpick. English Wiktionary's 'to drive/set a rivet' is plainly the English verb 'rivet'. The current gloss says it twice as a phrase (flagged definition_like), and 'fix firmly' covers Wiktionnaire's figurative 'Attacher, assujettir à quelque chose'.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). English Wiktionary's 'to drive/set a rivet' is plainly the English verb 'rivet'. The current gloss says it twice as a phrase (flagged definition_like), and 'fix firmly' covers Wiktionnaire's figurative 'Attacher, assujettir à quelque chose'.
 - *Note:* The candidate list's token 'river' (Jones/Morrison/Styron book-list line) is an English word incidentally matched, not the French verb, so it was skipped; the noun 'rive' (riverbank) candidates were also skipped as non-verbal.
 
 #### mépriser (rank 1431)
@@ -950,12 +952,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### étoffer (rank 1438)
 - **Gloss:** upholster, stuff, pad out, flesh out → **flesh out, pad out, stuff, upholster**
 - **Checker:** `order`, medium confidence. gloss_lint flags this as definition-like/long; the figurative "flesh out" sense (Wiktionnaire: "Renforcer, donner de la consistance" / "Donner de l'ampleur, du volume") is the commoner current use, ahead of the literal upholstery sense.
-- **Skeptic:** upheld, hedge. The current gloss leads with 'upholster', which is first in neither reference. English Wiktionary lists it second, and two of Wiktionnaire's three top-level senses are 'Renforcer, donner de la consistance' and 'Donner de l’ampleur, du volume', both flesh out or pad out. The reorder uses only verbatim English senses.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). The current gloss leads with 'upholster', which is first in neither reference. English Wiktionary lists it second, and two of Wiktionnaire's three top-level senses are 'Renforcer, donner de la consistance' and 'Donner de l’ampleur, du volume', both flesh out or pad out. The reorder uses only verbatim English senses.
 
 #### jaillir (rank 1449)
 - **Gloss:** spurt out, gush forth, spring out, thrust up, jut out, emerge from → **gush out, spurt out, spring out**
 - **Checker:** `style`, medium confidence. gloss_lint flags this as definition-like (12 words, six senses); house style wants two or three senses, and English Wiktionary's first two senses ("to spurt out, gush forth", "to spring out") already cover the core meaning.
-- **Skeptic:** partly, nitpick. Trimming the 12-word, six-sense gloss (flagged definition_like) is right. But nothing supports rewording 'gush forth' as 'gush out' or reordering the senses. English Wiktionary's first two senses give 'spurt out, gush forth, spring out' verbatim.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Trimming the 12-word, six-sense gloss (flagged definition_like) is right. But nothing supports rewording 'gush forth' as 'gush out' or reordering the senses. English Wiktionary's first two senses give 'spurt out, gush forth, spring out' verbatim.
 
 #### sévir (rank 1452)
 - **Gloss:** crack down, clamp down, rave → **crack down, clamp down, rage**
@@ -992,7 +994,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### liquider (rank 1486)
 - **Gloss:** liquidate, pay off, settle (a debt), kill → **liquidate, settle a debt, kill**
 - **Checker:** `style`, low confidence. the gloss packs four phrases into one reading where 'liquidate' and 'pay off, settle (a debt)' largely restate the same idea; condensing keeps the same senses shorter to read aloud.
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). The current gloss is correct; the one real defect is the non-register parenthesis '(a debt)', which the proposal removes. But Wiktionnaire tags 'Tuer quelqu’un' `slang`, so the better gloss is 'liquidate, settle a debt, kill (slang)'.
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current gloss is correct; the one real defect is the non-register parenthesis '(a debt)', which the proposal removes. But Wiktionnaire tags 'Tuer quelqu’un' `slang`, so the better gloss is 'liquidate, settle a debt, kill (slang)'.
 - *Note:* All candidates used the unrelated noun/adjective 'liquide' (liquid) rather than the verb, so a sentence was authored.
 
 #### resserrer (rank 1491)
@@ -1003,7 +1005,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### survoler (rank 1507)
 - **Gloss:** fly over, skip through, fly high, browse quickly → **fly over, skim through, fly high**
 - **Checker:** `style`, medium confidence. English Wiktionary gives three senses: 'to fly over' (transitive), 'to skip through, to browse quickly', and 'to fly high'; the app's four-item gloss splits the second sense into two near-synonyms, making it longer than house style wants.
-- **Skeptic:** upheld, nitpick. The 8-word gloss is flagged definition_like, and 'skip through' and 'browse quickly' split a single wiktionary_en sense ('to skip through, to browse quickly'). 'Skim through' renders Wiktionnaire's 'Lire un texte de façon rapide et superficielle' in one plain phrase. The other senses stay in order.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The 8-word gloss is flagged definition_like, and 'skip through' and 'browse quickly' split a single wiktionary_en sense ('to skip through, to browse quickly'). 'Skim through' renders Wiktionnaire's 'Lire un texte de façon rapide et superficielle' in one plain phrase. The other senses stay in order.
 
 #### répercuter (rank 1514)
 - **Gloss:** echo (sound), reflect (light) → **echo (sound), pass on (a cost), reflect (light)**
@@ -1018,12 +1020,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### sillonner (rank 1526)
 - **Gloss:** crisscross, cut across, furrow, go back and forth (across) → **crisscross, furrow**
 - **Checker:** `style`, medium confidence. English Wiktionary's single sense line strings together four near-synonyms ('to crisscross; cut across; furrow; to go back and forth (across)'); the app copied all four verbatim, which is too long for VoiceOver — two words say the same thing.
-- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts). The 9-word gloss is flagged definition_like. It strings four near-synonyms from a single wiktionary_en sense and uses a non-register parenthesis '(across)'. 'Crisscross, furrow' keeps both of the ideas behind Wiktionnaire's 'Parcourir en tous sens' and 'Faire des sillons'.
+- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The 9-word gloss is flagged definition_like. It strings four near-synonyms from a single wiktionary_en sense and uses a non-register parenthesis '(across)'. 'Crisscross, furrow' keeps both of the ideas behind Wiktionnaire's 'Parcourir en tous sens' and 'Faire des sillons'.
 
 #### ensuivre (rank 1532)
 - **Gloss:** follow, come next, result, come as a result → **come next, result**
 - **Checker:** `style`, medium confidence. English Wiktionary's senses are archaic 'to follow', defective-reflexive 'to follow, to come next', and defective-reflexive 'to ensue, to result, to come as a result'; the app's four-item gloss restates the same two ideas twice.
-- **Skeptic:** partly, nitpick. Trimming the 8-word, definition_like gloss is right. But the proposal drops 'follow', the plain word behind Wiktionnaire's non-dated 'Suivre ; venir à la suite de' and wiktionary_en's 'to follow, to come next', while keeping the stiffer 'come next'. It should read 'follow, result' (or 'ensue, result').
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Trimming the 8-word, definition_like gloss is right. But the proposal drops 'follow', the plain word behind Wiktionnaire's non-dated 'Suivre ; venir à la suite de' and wiktionary_en's 'to follow, to come next', while keeping the stiffer 'come next'. It should read 'follow, result' (or 'ensue, result').
 
 #### médiatiser (rank 1533)
 - **Gloss:** mediatize → **publicize, give media coverage**
@@ -1056,17 +1058,17 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### surplomber (rank 1550)
 - **Gloss:** overhang, overlook, hang over, hand above → **overhang, overlook**
 - **Checker:** `typo`, high confidence. wiktionary_en's third sense reads 'to hang over, to hang above'; the app's gloss has 'hand above', a typo for 'hang above', and strings together three near-synonyms of 'overhang', past house style's two-or-three-sense limit.
-- **Skeptic:** upheld, error. The app ships the typo 'hand above', where wiktionary_en reads 'to hang over, to hang above'. The remaining items restate 'overhang', so 'overhang, overlook' fixes the error and clears the definition_like lint.
+- **Skeptic:** upheld, error (leans on the dropped length rule, see Counts). The app ships the typo 'hand above', where wiktionary_en reads 'to hang over, to hang above'. The remaining items restate 'overhang', so 'overhang, overlook' fixes the error and clears the definition_like lint.
 
 #### encombrer (rank 1556)
 - **Gloss:** block off, clutter, clutter up, congest, encumber, burden, jam → **clutter, block, encumber**
 - **Checker:** `style`, medium confidence. gloss_lint flagged this as definition-like (9 words); the current gloss strings together seven near-synonyms across wiktionary_en's three senses, well past house style's two-or-three-sense limit.
-- **Skeptic:** upheld, nitpick. The current gloss strings seven near-synonyms from three wiktionary_en senses, too long to read aloud; 'clutter, block, encumber' keeps the first two senses ('to block off, to clutter…', 'to encumber, to burden') in plain words. Style trim only, as the current gloss isn't wrong.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss strings seven near-synonyms from three wiktionary_en senses, too long to read aloud; 'clutter, block, encumber' keeps the first two senses ('to block off, to clutter…', 'to encumber, to burden') in plain words. Style trim only, as the current gloss isn't wrong.
 
 #### intriguer (rank 1559)
 - **Gloss:** puzzle, make interested or curious, scheme, connive → **intrigue, scheme**
 - **Checker:** `style`, medium confidence. gloss_lint flagged this as definition-like (7 words); wiktionary_en's two senses, 'to puzzle; to make interested or curious' and 'to scheme, to connive', can be rendered in two short words instead of four.
-- **Skeptic:** partly, nitpick. The current gloss is correct, just wordy ('make interested or curious'). The proposal drops 'puzzle', which wiktionary_en lists first ('to puzzle; to make interested or curious') and which isn't an echo of the French. Better: 'intrigue, puzzle, scheme'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The current gloss is correct, just wordy ('make interested or curious'). The proposal drops 'puzzle', which wiktionary_en lists first ('to puzzle; to make interested or curious') and which isn't an echo of the French. Better: 'intrigue, puzzle, scheme'.
 - *Note:* Several tier candidates use the noun 'les intrigues'/'une intrigue', not the verb; they were passed over.
 
 #### élancer (rank 1567)
@@ -1088,23 +1090,23 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### originer (rank 1572)
 - **Gloss:** define the origin of, have one’s origin → **originate**
 - **Checker:** `style`, high confidence. Wiktionnaire's two rare senses, 'Définir l’origine de' (transitive) and 'Avoir son origine' (pronominal), are both covered naturally by the single English cognate 'originate' (usable transitively or intransitively), shortening the definition-like gloss gloss_lint flagged.
-- **Skeptic:** partly, hedge. The app ships this verb pronominal-only (re=true, 'suis originé'), so the gloss should render 'Avoir son origine' (pronominal, rare), and 'originate' does that. But transitive English 'originate' means to create, not 'Définir l’origine de', so the checker's claim that it covers both senses is wrong. Adopt 'originate' on the pronominal sense only.
+- **Skeptic:** partly, hedge (leans on the dropped length rule, see Counts). The app ships this verb pronominal-only (re=true, 'suis originé'), so the gloss should render 'Avoir son origine' (pronominal, rare), and 'originate' does that. But transitive English 'originate' means to create, not 'Définir l’origine de', so the checker's claim that it covers both senses is wrong. Adopt 'originate' on the pronominal sense only.
 - *Note:* All candidates use the noun 'origine', not the verb 'originer'; a sentence was authored.
 
 #### rabattre (rank 1583)
 - **Gloss:** make something lower, close, shut down, fold over, reduce, deduct, diminish → **pull down, close, reduce**
 - **Checker:** `style`, medium confidence. The gloss strings together seven senses ('make something lower, close, shut down, fold over, reduce, deduct, diminish'), far past the two-or-three-sense limit for a VoiceOver-read gloss; trimmed to the three commonest current uses (folding/pulling something down, closing it, and reducing a price or amount).
-- **Skeptic:** upheld, nitpick. Seven items are too long to read aloud. 'pull down, close, reduce' is supported by wiktionary_en 'to pull down (a skirt)', 'to close, shut (down)' and 'to reduce, deduct, diminish', and by Wiktionnaire 'Rabaisser, faire descendre' and 'Diminuer…'.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Seven items are too long to read aloud. 'pull down, close, reduce' is supported by wiktionary_en 'to pull down (a skirt)', 'to close, shut (down)' and 'to reduce, deduct, diminish', and by Wiktionnaire 'Rabaisser, faire descendre' and 'Diminuer…'.
 
 #### rééditer (rank 1599)
 - **Gloss:** reedit, reissue, republish, rerelease, redo, rerun, repeat → **reissue, republish, redo**
 - **Checker:** `style`, medium confidence. The gloss strings together seven near-synonyms from a single wiktionary_en sense ('reedit, reissue, republish, rerelease, redo, rerun, repeat'), far past the two-or-three-sense limit for a gloss read aloud by VoiceOver; trimmed to the three commonest current meanings.
-- **Skeptic:** upheld, nitpick. Seven near-synonyms from one wiktionary_en sense are too long to read aloud. 'reissue, republish, redo' covers Wiktionnaire's 'Donner une nouvelle édition' and its familiar 'Faire de nouveau la même chose', and drops the ambiguous 'reedit'.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Seven near-synonyms from one wiktionary_en sense are too long to read aloud. 'reissue, republish, redo' covers Wiktionnaire's 'Donner une nouvelle édition' and its familiar 'Faire de nouveau la même chose', and drops the ambiguous 'reedit'.
 
 #### escompter (rank 1616)
 - **Gloss:** discount because of a payment by anticipation, anticipate, be in the hope of → **discount (a bill), anticipate**
 - **Checker:** `style`, high confidence. gloss_lint flags 'definition_like, 13 words'; the current gloss reads as a definition rather than a house-style gloss, even though it is verbatim from wiktionary_en's phrasing.
-- **Skeptic:** partly, error (cites the old parenthesis rule, see Counts). The current 13-word gloss is a definition, not a gloss, so the direction is right. But the proposed '(a bill)' uses parentheses for an object, which house style reserves for register or region. It also drops the hope sense ('to be in the hope of'). Better: 'anticipate, count on, discount a bill'.
+- **Skeptic:** partly, error (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current 13-word gloss is a definition, not a gloss, so the direction is right. But the proposed '(a bill)' uses parentheses for an object, which house style reserves for register or region. It also drops the hope sense ('to be in the hope of'). Better: 'anticipate, count on, discount a bill'.
 
 #### remanier (rank 1622)
 - **Gloss:** reknead, reuse, reorganize, revise → **reuse, reorganize, revise**
@@ -1150,7 +1152,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### ferrer (rank 1674)
 - **Gloss:** clad in iron, be clad in iron, shoe (a horse) → **shoe (a horse), clad in iron**
 - **Checker:** `order`, medium confidence. Wiktionnaire tags the horseshoeing sense 'especially' under the general 'Garnir de fer', signaling it as the leading, commonest application; English Wiktionary's historical order (clad in iron first) should be reordered to match.
-- **Skeptic:** partly, nitpick. The reorder is unsupported. Both editions list iron-cladding first ('to clad in iron' and 'Garnir de fer'), and 'especially' marks the horseshoeing sense as narrower, not as commoner. Dropping the redundant 'be clad in iron' is right, though (gloss_lint 'definition_like, 10 words'), so the gloss should be 'clad in iron, shoe (a horse)'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The reorder is unsupported. Both editions list iron-cladding first ('to clad in iron' and 'Garnir de fer'), and 'especially' marks the horseshoeing sense as narrower, not as commoner. Dropping the redundant 'be clad in iron' is right, though (gloss_lint 'definition_like, 10 words'), so the gloss should be 'clad in iron, shoe (a horse)'.
 
 #### régulariser (rank 1679)
 - **Gloss:** regulate (make regular), straighten out (a situation, an irregularity) → **regularize, straighten out**
@@ -1190,7 +1192,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### léser (rank 1779)
 - **Gloss:** wrong, do wrong by (someone), produce a lesion in → **harm, wrong, cause a lesion in**
 - **Checker:** `style`, medium confidence. gloss_lint flagged the gloss as definition-like (9 words); the parenthetical '(someone)' is a gloss-of-the-gloss rather than a register/region marker, against house style.
-- **Skeptic:** partly, nitpick. The current gloss's '(someone)' is a gloss-of-the-gloss, not a register or region marker, so it breaks house style. But nothing in the shard supports moving 'harm' ahead of 'wrong': the first en sense reads 'to wrong; to do wrong by (someone); to harm, to hurt'. The right change is 'wrong, harm, cause a lesion in'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The current gloss's '(someone)' is a gloss-of-the-gloss, not a register or region marker, so it breaks house style. But nothing in the shard supports moving 'harm' ahead of 'wrong': the first en sense reads 'to wrong; to do wrong by (someone); to harm, to hurt'. The right change is 'wrong, harm, cause a lesion in'.
 
 #### gaver (rank 1780)
 - **Gloss:** force-feed → **force-feed, gorge oneself, get on someone's nerves (slang)**
@@ -1201,12 +1203,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### échelonner (rank 1783)
 - **Gloss:** position (people, objects, etc.) at intervals → **space out, stagger**
 - **Checker:** `style`, medium confidence. Wiktionary_en senses 2-3, 'to space (something) out' / 'to spread, stagger (payments, etc.)', give a shorter phrasing that reads better aloud than the 6-word first-sense definition currently shipped ('position (people, objects, etc.) at intervals'), while covering the same commonest sense.
-- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts). The current gloss carries '(people, objects, etc.)', a non-register parenthetical that house style forbids. The proposal takes its words from en senses 'to space (something) out' and 'to spread, stagger (payments, etc.)', which are both untagged, so the replacement is accurate and shorter.
+- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current gloss carries '(people, objects, etc.)', a non-register parenthetical that house style forbids. The proposal takes its words from en senses 'to space (something) out' and 'to spread, stagger (payments, etc.)', which are both untagged, so the replacement is accurate and shorter.
 
 #### retrancher (rank 1791)
 - **Gloss:** deduct, take away, cut out, cut down, cut off, kill → **deduct, cut off, cut down**
 - **Checker:** `style`, medium confidence. Six near-synonyms exceed house style's two-or-three-sense guideline (gloss_lint flagged it as definition-like, 10 words); trimming to 'deduct, cut off, cut down' keeps the core untagged transitive senses and drops the archaic-tagged 'kill' sense.
-- **Skeptic:** upheld, hedge. The shipped 'kill' sense is tagged 'archaic' in en Wiktionary ('to kill, to snuff out, to bump off'), yet it ships with no register marker. The proposed 'deduct, cut off, cut down' keeps the untagged transitive and intransitive senses.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). The shipped 'kill' sense is tagged 'archaic' in en Wiktionary ('to kill, to snuff out, to bump off'), yet it ships with no register marker. The proposed 'deduct, cut off, cut down' keeps the untagged transitive and intransitive senses.
 
 #### fustiger (rank 1798)
 - **Gloss:** fustigate, publicly criticize → **publicly criticize, fustigate**
@@ -1226,7 +1228,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### présager (rank 1816)
 - **Gloss:** predict, foresee, foretell, forewarn, portend, presage → **foretell, portend, forewarn**
 - **Checker:** `style`, medium confidence. Six near-synonyms (gloss_lint flagged this as definition-like) exceed house style's two-or-three-sense guideline; the proposed trim keeps the core wiktionary_en senses and drops the self-referential 'presage', which merely repeats the infinitive.
-- **Skeptic:** partly, nitpick. Trimming six near-synonyms is defensible for reading aloud. But the proposal drops 'predict', the first en sense ('to predict, to foresee, foretell'), and keeps the minor 'forewarn'. The right change is 'predict, foretell, portend'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Trimming six near-synonyms is defensible for reading aloud. But the proposal drops 'predict', the first en sense ('to predict, to foresee, foretell'), and keeps the minor 'forewarn'. The right change is 'predict, foretell, portend'.
 
 #### carrer (rank 1821)
 - **Gloss:** square → **square, settle in**
@@ -1242,7 +1244,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### rehausser (rank 1827)
 - **Gloss:** reraise, raise up, raise higher, lift higher, emphasize → **raise, heighten, emphasize**
 - **Checker:** `style`, high confidence. gloss_lint flagged this as 'definition_like' (8 words); house style wants two or three senses, not four near-synonyms strung together ('reraise, raise up, raise higher, lift higher').
-- **Skeptic:** upheld, nitpick. 'reraise' is poker jargon, and the gloss strings together four near-synonyms for one sense. The proposed 'raise, heighten, emphasize' covers en's 'raise up, raise higher' and 'to emphasise' and Wiktionnaire's 'Hausser davantage', and it uses American spelling.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). 'reraise' is poker jargon, and the gloss strings together four near-synonyms for one sense. The proposed 'raise, heighten, emphasize' covers en's 'raise up, raise higher' and 'to emphasise' and Wiktionnaire's 'Hausser davantage', and it uses American spelling.
 
 #### arpenter (rank 1833)
 - **Gloss:** survey land → **pace, walk up and down, survey land**
@@ -1252,7 +1254,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### récuser (rank 1839)
 - **Gloss:** object, make an objection, impugn, challenge, recuse → **challenge, recuse**
 - **Checker:** `style`, medium confidence. gloss_lint flagged this as 'definition_like' (7 words); house style wants two or three senses, not the five near-synonyms currently strung together ('object, make an objection, impugn, challenge, recuse').
-- **Skeptic:** upheld, nitpick. Every Wiktionnaire sense means rejecting a judge, witness or authority ('Refuser de soumettre sa cause à la connaissance… d’un juge'), which 'challenge, recuse' covers. 'object, make an objection' is a redundant pair that makes the gloss too long to read aloud. Note that 'two or three senses' is not actually a house-style rule.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Every Wiktionnaire sense means rejecting a judge, witness or authority ('Refuser de soumettre sa cause à la connaissance… d’un juge'), which 'challenge, recuse' covers. 'object, make an objection' is a redundant pair that makes the gloss too long to read aloud. Note that 'two or three senses' is not actually a house-style rule.
 
 #### marteler (rank 1849)
 - **Gloss:** strike with a hammer, hammer → **hammer, drive home (a point)**
@@ -1279,7 +1281,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### excepter (rank 1891)
 - **Gloss:** exclude, not count, make an exception → **exclude**
 - **Checker:** `style`, high confidence. English Wiktionary's sole sense is 'to exclude (not to count, to make an exception for)'; the parenthetical restates the same sense rather than adding a distinct one, flagged by gloss_lint as definition_like.
-- **Skeptic:** upheld, nitpick. English Wiktionary has one sense, 'to exclude (not to count, to make an exception for)'. The app split its parenthetical into extra senses, and 'make an exception' misstates the transitive verb, which means to make an exception of something. 'exclude' alone is accurate and short.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). English Wiktionary has one sense, 'to exclude (not to count, to make an exception for)'. The app split its parenthetical into extra senses, and 'make an exception' misstates the transitive verb, which means to make an exception of something. 'exclude' alone is accurate and short.
 
 #### mouler (rank 1895)
 - **Gloss:** mould, fit tightly → **mold, fit tightly**
@@ -1320,18 +1322,18 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### exhiber (rank 1929)
 - **Gloss:** exhibit, show, show off, show round → **exhibit, show off, show round**
 - **Checker:** `style`, medium confidence. wiktionary_en has three senses ('to exhibit'; 'to show, show round, show off'; reflexive 'to show off'); the app's four-item list ('exhibit, show, show off, show round') pads out near-synonyms beyond house style's two-or-three-sense guidance and was flagged by gloss_lint as definition-like.
-- **Skeptic:** partly, nitpick. Shortening is reasonable, but the proposal drops the plainest word, 'show', and keeps 'show round', which is British usage (American English says 'show around'). The right cut is 'exhibit, show, show off'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Shortening is reasonable, but the proposal drops the plainest word, 'show', and keeps 'show round', which is British usage (American English says 'show around'). The right cut is 'exhibit, show, show off'.
 - *Note:* All four candidates for this verb are truncated mid-sentence (cut off with a dangling clause or abbreviation), so none qualified; wrote a new sentence instead.
 
 #### tasser (rank 1934)
 - **Gloss:** pile together, put into a pile, compress, pack vertically → **pile up, compress**
 - **Checker:** `style`, medium confidence. wiktionary_en's first two senses ('to pile together, to put into a pile' and 'to compress or to pack vertically') are each rendered as a pair of near-synonyms, producing a 9-word gloss flagged by gloss_lint; condensing to one phrase per sense keeps the same coverage and order.
-- **Skeptic:** upheld, nitpick. The current gloss is nine words (flagged by gloss_lint's definition_like) and pairs up near-synonyms. 'pile up, compress' covers English Wiktionary senses 1 and 2 and Wiktionnaire's 'Mettre des choses en tas, en réduire le volume par la pression' in the same order, and is short enough to read aloud.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss is nine words (flagged by gloss_lint's definition_like) and pairs up near-synonyms. 'pile up, compress' covers English Wiktionary senses 1 and 2 and Wiktionnaire's 'Mettre des choses en tas, en réduire le volume par la pression' in the same order, and is short enough to read aloud.
 
 #### fuser (rank 1935)
 - **Gloss:** melt, fuse, gush, spurt, ring out, sound out → **melt, gush, ring out**
 - **Checker:** `style`, medium confidence. wiktionary_en's three senses ('to melt or fuse', 'to gush or spurt', 'to ring out, sound out') are each doubled into synonym pairs, producing a 6-item gloss flagged by gloss_lint; one word per sense preserves the same order and coverage.
-- **Skeptic:** upheld, nitpick. Six items (flagged definition_like) cover only three English Wiktionary senses: 'to melt or fuse', 'to gush or spurt', 'to ring out, sound out'. One word per sense keeps the coverage and order and meets the read-aloud rule.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Six items (flagged definition_like) cover only three English Wiktionary senses: 'to melt or fuse', 'to gush or spurt', 'to ring out, sound out'. One word per sense keeps the coverage and order and meets the read-aloud rule.
 - *Note:* Most candidates only match the unrelated noun 'fusion(s)' (mergers), not the verb 'fuser'; only the Moselly quotation is a genuine verbal use.
 
 #### harceler (rank 1938)
@@ -1373,17 +1375,17 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### terrasser (rank 2015)
 - **Gloss:** fortify or buttress with a mound of earth, bring down, strike down, overcome, conquer → **strike down, overwhelm, defeat**
 - **Checker:** `order`, medium confidence. wiktionary_en leads with 'to fortify or buttress with a mound of earth' (the historical, earthworks sense) ahead of 'to floor, bring down' and 'to bring down, defeat thoroughly'; the figurative 'strike down/overwhelm' sense (as in 'terrassé par une maladie') is the commoner one today and the gloss is also too long to read aloud (14 words).
-- **Skeptic:** partly, nitpick. At 14 words (the definition_like lint), the current gloss is too long to read aloud, so shortening it is right. But 'overwhelm' appears in no quoted sense, the 'terrassé par une maladie' use is not in the shard, and dropping the earthwork sense that both references list first is not justified. A better gloss would be 'bring down, floor, defeat, bank with earth', or it could keep the fortify sense in first place, shortened.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). At 14 words (the definition_like lint), the current gloss is too long to read aloud, so shortening it is right. But 'overwhelm' appears in no quoted sense, the 'terrassé par une maladie' use is not in the shard, and dropping the earthwork sense that both references list first is not justified. A better gloss would be 'bring down, floor, defeat, bank with earth', or it could keep the fortify sense in first place, shortened.
 
 #### désintéresser (rank 2029)
 - **Gloss:** give money to (somebody) as a compensation for something → **pay off, compensate, lose interest (in)**
 - **Checker:** `style`, medium confidence. wiktionary_en's leading sense is verbose ('give money to (somebody) as a compensation for something'); the reflexive sense 'lose interest in' is very common ('se désintéresser de') and worth keeping in a short gloss.
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). The current gloss is a 9-word definition with '(somebody)', a parenthesis that is neither register nor region, so it breaks house style, and 'compensate, pay off' captures Wiktionnaire's 'en le dédommageant de ce qu’il perd'. But 'lose interest (in)' is the sense tagged pronominal/reflexive ('se désintéresser') and reintroduces a non-register parenthesis. The right change is 'compensate, pay off', unless the app's entry is pronominal.
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current gloss is a 9-word definition with '(somebody)', a parenthesis that is neither register nor region, so it breaks house style, and 'compensate, pay off' captures Wiktionnaire's 'en le dédommageant de ce qu’il perd'. But 'lose interest (in)' is the sense tagged pronominal/reflexive ('se désintéresser') and reintroduces a non-register parenthesis. The right change is 'compensate, pay off', unless the app's entry is pronominal.
 
 #### maquiller (rank 2038)
 - **Gloss:** disguise, apply makeup, dress up, embellish, fabricate → **disguise, apply makeup, fabricate**
 - **Checker:** `style`, medium confidence. wiktionary_en's first sense strings five near-synonyms together ('to disguise, cover or apply makeup (to); to dress up, to embellish'); trimmed to the house style's two-or-three-sense limit while keeping the two distinct meanings (cosmetic vs. fabricate a story).
-- **Skeptic:** partly, nitpick. Five senses is too long to read aloud, so trimming is fair. But the commonest sense should lead: Wiktionnaire's first, untagged sense is 'Farder ; recouvrir de fard', while 'Travestir' is tagged 'broadly'. Use 'apply makeup, disguise, fabricate' instead of leading with 'disguise'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Five senses is too long to read aloud, so trimming is fair. But the commonest sense should lead: Wiktionnaire's first, untagged sense is 'Farder ; recouvrir de fard', while 'Travestir' is tagged 'broadly'. Use 'apply makeup, disguise, fabricate' instead of leading with 'disguise'.
 
 #### trôner (rank 2042)
 - **Gloss:** sit on a throne → **occupy a place of honor, hold court**
@@ -1419,7 +1421,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### démouler (rank 2071)
 - **Gloss:** turn out (remove from a mould) → **turn out (remove from a mold)**
 - **Checker:** `style`, high confidence. gloss_lint flags British spelling; house style requires American spelling (mold, not mould).
-- **Skeptic:** partly, nitpick. 'mould' → 'mold' is right under the American-spelling rule, which gloss_lint flags. But the proposal keeps '(remove from a mold)', a parenthetical that is neither register nor region and is flagged 'definition_like'. Use 'unmold, turn out' instead.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). 'mould' → 'mold' is right under the American-spelling rule, which gloss_lint flags. But the proposal keeps '(remove from a mold)', a parenthetical that is neither register nor region and is flagged 'definition_like'. Use 'unmold, turn out' instead.
 
 #### meurtrir (rank 2087)
 - **Gloss:** murder, hurt → **bruise, hurt, murder (archaic)**
@@ -1447,7 +1449,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### zoner (rank 2099)
 - **Gloss:** wander around, wander about, sleep, go to sleep → **wander around, sleep**
 - **Checker:** `style`, medium confidence. English Wiktionary lists 'to wander around, wander about' as one sense and 'to sleep'/'to go to sleep' as near-duplicate senses; the app gloss strings together four near-synonymous phrases where two would read aloud more cleanly.
-- **Skeptic:** upheld, nitpick. 'wander around, wander about' is one English Wiktionary sense repeated with a synonym, and 'go to sleep' is the reflexive form of 'sleep', so the 8-word gloss that gloss_lint flags is padding. 'wander around, sleep' keeps both senses. Both senses are tagged 'colloquial' or 'slang', so a register label such as '(slang)' would also be worth adding.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). 'wander around, wander about' is one English Wiktionary sense repeated with a synonym, and 'go to sleep' is the reflexive form of 'sleep', so the 8-word gloss that gloss_lint flags is padding. 'wander around, sleep' keeps both senses. Both senses are tagged 'colloquial' or 'slang', so a register label such as '(slang)' would also be worth adding.
 
 #### laminer (rank 2110)
 - **Gloss:** laminate → **laminate, crush**
@@ -1556,7 +1558,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### intercaler (rank 2298)
 - **Gloss:** intercalate, insert, join in a ruck → **insert, intercalate**
 - **Checker:** `order`, medium confidence. Wiktionnaire's broader, untagged sense 'Ajouter quelque chose après coup' (insert) is the common modern use, while the calendar-specific 'intercalate (add an extra day)' is narrower; 'join in a ruck' is an obscure rugby-only sense not needed with two clearer senses already present.
-- **Skeptic:** upheld, nitpick. The Stage 1 lint flags the gloss as definition_like; "intercalate" is an obscure word glossed in en.wiktionary as narrowly "(add an extra day)", so the plain "insert" should lead per house style, and the rugby-only "join in a ruck" can go to keep it short.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The Stage 1 lint flags the gloss as definition_like; "intercalate" is an obscure word glossed in en.wiktionary as narrowly "(add an extra day)", so the plain "insert" should lead per house style, and the rugby-only "join in a ruck" can go to keep it short.
 
 #### pisser (rank 2304)
 - **Gloss:** urinate → **piss**
@@ -1590,7 +1592,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### magnifier (rank 2347)
 - **Gloss:** exalt with praise (usually in reference to God) → **extol, glorify (esp. God)**
 - **Checker:** `style`, medium confidence. wiktionary_en: 'to exalt with praise; usually in reference to God' is a full definition sentence (gloss_lint flagged 'definition_like, 8 words'); a plain verb pair reads more naturally for VoiceOver.
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). The current gloss is definition-like (lint: 8 words) and puts non-register material in parentheses, so the direction is right. But "(esp. God)" repeats the parenthesis problem and adds an abbreviation that does not read aloud well. Wiktionnaire's "Exalter par de grandes louanges" does not restrict the sense to God. Use "glorify, extol".
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current gloss is definition-like (lint: 8 words) and puts non-register material in parentheses, so the direction is right. But "(esp. God)" repeats the parenthesis problem and adds an abbreviation that does not read aloud well. Wiktionnaire's "Exalter par de grandes louanges" does not restrict the sense to God. Use "glorify, extol".
 
 #### dénouer (rank 2356)
 - **Gloss:** unknot → **unknot, resolve**
@@ -1611,7 +1613,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### pimenter (rank 2383)
 - **Gloss:** spice, spice up, season with spices → **spice, spice up**
 - **Checker:** `style`, medium confidence. English Wiktionary gives 'to spice, to season with spices' and 'to spice up'; 'season with spices' just restates 'spice', making the gloss redundant for VoiceOver.
-- **Skeptic:** upheld, nitpick. The lint flagged the gloss ('definition_like, 6 words'), and 'season with spices' only restates 'spice' from the same en-wiktionary sense ('to spice, to season with spices'). Trimming it to 'spice, spice up' loses no sense.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The lint flagged the gloss ('definition_like, 6 words'), and 'season with spices' only restates 'spice' from the same en-wiktionary sense ('to spice, to season with spices'). Trimming it to 'spice, spice up' loses no sense.
 
 #### discriminer (rank 2385)
 - **Gloss:** differentiate → **discriminate, differentiate**
@@ -1627,12 +1629,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### enliser (rank 2392)
 - **Gloss:** get (a ship or vehicle) stuck in mud or sand → **bog down, get stuck in mud or sand**
 - **Checker:** `style`, medium confidence. Lint flagged the ten-word definition-like phrasing; 'bog down' is a plain English equivalent that also covers the figurative reflexive sense ('to get bogged down').
-- **Skeptic:** upheld, nitpick. The current gloss is a 10-word definition (lint 'definition_like, 10 words') with a parenthetical that is neither register nor region. 'bog down' is plain English, and it covers both Wiktionnaire's 'Enfoncer ... dans un sol meuble' and the figurative sense 'to get bogged down'.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss is a 10-word definition (lint 'definition_like, 10 words') with a parenthetical that is neither register nor region. 'bog down' is plain English, and it covers both Wiktionnaire's 'Enfoncer ... dans un sol meuble' and the figurative sense 'to get bogged down'.
 
 #### poncer (rank 2394)
 - **Gloss:** rub down with an abrasive, sand → **sand, rub down with an abrasive**
 - **Checker:** `style`, medium confidence. 'Sand' is the plain English verb for this action; leading with it before the descriptive phrase matches house style ('a plain multi-word phrase... may be followed by an obscure equivalent').
-- **Skeptic:** upheld, nitpick. Both parts are verbatim from en-wiktionary ('to rub down with an abrasive, to sand'). Leading with the plain one-word 'sand' before the descriptive phrase fits house style's preference for a plain phrase that is short enough to read aloud. The change is order only.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Both parts are verbatim from en-wiktionary ('to rub down with an abrasive, to sand'). Leading with the plain one-word 'sand' before the descriptive phrase fits house style's preference for a plain phrase that is short enough to read aloud. The change is order only.
 
 #### dénuder (rank 2402)
 - **Gloss:** render nude → **strip, expose**
@@ -1642,7 +1644,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### émietter (rank 2404)
 - **Gloss:** crumble (make into crumbs), eat away at → **crumble, eat away at**
 - **Checker:** `style`, medium confidence. 'Crumble' is unambiguous without a clarifying parenthetical; house style reserves parentheses for register or region.
-- **Skeptic:** upheld, nitpick. The parenthetical '(make into crumbs)' marks neither register nor region, and the lint flagged 'definition_like, 7 words'. Wiktionnaire's only sense, 'Réduire en miettes', is fully covered by 'crumble'.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The parenthetical '(make into crumbs)' marks neither register nor region, and the lint flagged 'definition_like, 7 words'. Wiktionnaire's only sense, 'Réduire en miettes', is fully covered by 'crumble'.
 
 #### appareiller (rank 2424)
 - **Gloss:** join or mix together → **cast off, join or mix together**
@@ -1685,7 +1687,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### tutoyer (rank 2496)
 - **Gloss:** address (someone) in French using the familiar second-person pronoun tu → **address informally as tu**
 - **Checker:** `style`, medium confidence. Current gloss is a 10-word definition (flagged definition_like); en Wiktionary's own gloss 'to thou (to address (someone) using the informal second-person pronoun tu...)' supports a shorter plain rendering.
-- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts). The current gloss is a 10-word definition flagged definition_like, and its “(someone)” breaks the rule that parentheses are for register or region only. “address informally as tu” keeps en sense 1 (“address (someone) using the informal second-person pronoun tu”) and is short enough to read aloud.
+- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current gloss is a 10-word definition flagged definition_like, and its “(someone)” breaks the rule that parentheses are for register or region only. “address informally as tu” keeps en sense 1 (“address (someone) using the informal second-person pronoun tu”) and is short enough to read aloud.
 
 #### bâcler (rank 2497)
 - **Gloss:** bang out → **bang out, botch**
@@ -1705,17 +1707,17 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### refiler (rank 2516)
 - **Gloss:** give or pass something to someone, pass off → **pass on, palm off**
 - **Checker:** `style`, medium confidence. Current gloss is an 8-word definition (flagged definition_like); en Wiktionary's own two senses are 'to give or pass something to someone' and 'to palm off', which shorten cleanly to 'pass on, palm off'.
-- **Skeptic:** upheld, nitpick. The current gloss is flagged definition_like, and its “pass off” misstates en sense 2, “to palm off”. “pass on, palm off” maps directly onto en’s two senses. Both senses are tagged informal, so “(informal)” may be added.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss is flagged definition_like, and its “pass off” misstates en sense 2, “to palm off”. “pass on, palm off” maps directly onto en’s two senses. Both senses are tagged informal, so “(informal)” may be added.
 
 #### shooter (rank 2521)
 - **Gloss:** shoot the ball forward in an attempt to place it in the opponent’s goal → **shoot (soccer), shoot up (slang)**
 - **Checker:** `style`, medium confidence. en.wiktionary sense 1 ('to shoot the ball forward...') and sense 2 ('to shoot up, inject oneself with drugs', pronominal) support the two senses; the current gloss is a full 14-word definition (gloss_lint: definition_like) rather than a short VoiceOver-friendly gloss.
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). Shortening the 14-word definition_like gloss is right, and “shoot up (slang)” marks register correctly. But “(soccer)” is a domain label, and house style allows parentheses only for register or region. The right change is something like “shoot at goal, shoot up (slang)”.
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). Shortening the 14-word definition_like gloss is right, and “shoot up (slang)” marks register correctly. But “(soccer)” is a domain label, and house style allows parentheses only for register or region. The right change is something like “shoot at goal, shoot up (slang)”.
 
 #### intérioriser (rank 2535)
 - **Gloss:** internalize, interiorize, accept, receive, take in, take on, assume → **internalize, take on**
 - **Checker:** `style`, medium confidence. en.wiktionary sense 1, 'to internalize, to interiorize', is the clearest match; the shipped gloss strings together seven senses (gloss_lint: definition_like), far more than VoiceOver needs.
-- **Skeptic:** partly, nitpick. The Stage 1 lint 'definition_like' (9 words) supports trimming a seven-item list that is too long to read aloud, but 'take on' ('to take on, to assume', en sense 3) is not the best second sense. Wiktionnaire's 'Faire sien, s'approprier mentalement' matches en sense 2's 'take in' better, so ship 'internalize, take in'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The Stage 1 lint 'definition_like' (9 words) supports trimming a seven-item list that is too long to read aloud, but 'take on' ('to take on, to assume', en sense 3) is not the best second sense. Wiktionnaire's 'Faire sien, s'approprier mentalement' matches en sense 2's 'take in' better, so ship 'internalize, take in'.
 
 #### attendrir (rank 2538)
 - **Gloss:** make softer → **soften, move (to compassion)**
@@ -1730,7 +1732,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### lorgner (rank 2563)
 - **Gloss:** ogle, leer, covet, look at using a monocle, look ahead to → **ogle, leer, covet**
 - **Checker:** `style`, medium confidence. Gloss_lint flagged it as 'definition_like' (11 words); English Wiktionary lists five separate transitive senses (ogle, leer, covet, look through a monocle, look ahead to) which is too many for a VoiceOver gloss — trimmed to the three commonest figurative senses.
-- **Skeptic:** upheld, nitpick. The Stage 1 lint 'definition_like' (11 words) shows the gloss is too long to read aloud. 'ogle, leer, covet' keeps en senses 1 to 3, which match wiktionnaire's 'Regarder ... avec envie', 'Regarder avec insistance' and 'Convoiter'. Dropping the lorgnette sense and 'look ahead to', which is found only in en, loses little.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The Stage 1 lint 'definition_like' (11 words) shows the gloss is too long to read aloud. 'ogle, leer, covet' keeps en senses 1 to 3, which match wiktionnaire's 'Regarder ... avec envie', 'Regarder avec insistance' and 'Convoiter'. Dropping the lorgnette sense and 'look ahead to', which is found only in en, loses little.
 
 #### écorcher (rank 2583)
 - **Gloss:** skin → **graze, skin, mispronounce**
@@ -1740,7 +1742,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### désamorcer (rank 2587)
 - **Gloss:** defuse (e.g. a weapon), prevent something from happen → **defuse, forestall**
 - **Checker:** `typo`, high confidence. The shipped gloss cuts off mid-word ('prevent something from happen'); English Wiktionary gives 'to defuse (e.g. a weapon)' and 'to forestall, to hinder, to prevent something from happening' — trimmed to two words and the truncation fixed.
-- **Skeptic:** upheld, error (cites the old parenthesis rule, see Counts). The shipped gloss is ungrammatical ("prevent something from happen"). "defuse, forestall" comes straight from the English senses "to defuse (e.g. a weapon)" and "to forestall, to hinder, to prevent something from happening", and it drops the non-register parentheses.
+- **Skeptic:** upheld, error (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The shipped gloss is ungrammatical ("prevent something from happen"). "defuse, forestall" comes straight from the English senses "to defuse (e.g. a weapon)" and "to forestall, to hinder, to prevent something from happening", and it drops the non-register parentheses.
 - *Note:* The only candidate (Jenny Fischer, 'Next Stop', 2017) is attributed a death_year of 1919, which is impossible for a book published in 2017; the death_year is clearly bad data, so the candidate was rejected regardless of the public-domain rule.
 
 #### affleurer (rank 2603)
@@ -1751,7 +1753,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### cadastrer (rank 2606)
 - **Gloss:** survey land for the purpose of taxation → **survey land, register in the land registry**
 - **Checker:** `style`, medium confidence. wiktionnaire gives two senses, 'Faire sur le terrain l'opération du cadastre' (survey) and 'Inscrire au cadastre' (register); the current gloss folds both into one wordy definition-like phrase ('survey land for the purpose of taxation') rather than two short senses.
-- **Skeptic:** upheld, nitpick. Wiktionnaire lists two untagged senses, "Faire sur le terrain l’opération du cadastre" and "Inscrire au cadastre". The current gloss covers only the first, and "for the purpose of taxation" is not in either sense. The proposal covers both in plain phrases.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Wiktionnaire lists two untagged senses, "Faire sur le terrain l’opération du cadastre" and "Inscrire au cadastre". The current gloss covers only the first, and "for the purpose of taxation" is not in either sense. The proposal covers both in plain phrases.
 
 #### martyriser (rank 2624)
 - **Gloss:** martyr, bully, torment → **torment, bully, martyr**
@@ -1801,7 +1803,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### navrer (rank 2689)
 - **Gloss:** cause great pain or affliction, upset, dismay → **grieve, dismay**
 - **Checker:** `style`, high confidence. gloss_lint flags the current gloss as 'definition_like' (7 words); English Wiktionary's own senses 'to cause great pain or affliction' and 'to upset; dismay' condense naturally to the shorter, VoiceOver-friendly 'grieve, dismay.'
-- **Skeptic:** partly, nitpick. The shipped gloss is correct but long (gloss_lint 'definition_like', 7 words), so shortening it is reasonable. The proposed 'grieve, dismay' drops Wiktionnaire's 'Contrarier, fâcher quelqu’un' (English 'to upset'), and 'grieve' reads as intransitive. A better gloss would be 'distress, upset, dismay'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The shipped gloss is correct but long (gloss_lint 'definition_like', 7 words), so shortening it is reasonable. The proposed 'grieve, dismay' drops Wiktionnaire's 'Contrarier, fâcher quelqu’un' (English 'to upset'), and 'grieve' reads as intransitive. A better gloss would be 'distress, upset, dismay'.
 
 #### ficeler (rank 2690)
 - **Gloss:** tie up, to truss → **tie up, truss**
@@ -1811,12 +1813,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### répugner (rank 2704)
 - **Gloss:** repel, disgust, be loath to, be reluctant to → **repel, disgust, be reluctant to**
 - **Checker:** `style`, medium confidence. wiktionary_en sense 2 is a single sense written 'to be loath or reluctant (to do something)'; splitting it into 'be loath to, be reluctant to' is redundant for a spoken gloss.
-- **Skeptic:** upheld, nitpick. English Wiktionary gives this as one sense, 'to be loath or reluctant (to do something)', so shipping both 'be loath to' and 'be reluctant to' is redundant, and gloss_lint flags the gloss as definition_like (8 words). The trimmed gloss loses no sense.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). English Wiktionary gives this as one sense, 'to be loath or reluctant (to do something)', so shipping both 'be loath to' and 'be reluctant to' is redundant, and gloss_lint flags the gloss as definition_like (8 words). The trimmed gloss loses no sense.
 
 #### sursauter (rank 2705)
 - **Gloss:** make a sudden movement by being surprised → **jump, start**
 - **Checker:** `style`, medium confidence. wiktionary_en: 'to make a sudden movement by being surprised; to start, jump' — the plain synonyms it already offers are shorter and read aloud better.
-- **Skeptic:** upheld, nitpick. The shipped gloss is a definition, not a gloss (gloss_lint 'definition_like', 7 words). English Wiktionary's own sense ends with the plain synonyms 'to start, jump', which the proposal uses.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The shipped gloss is a definition, not a gloss (gloss_lint 'definition_like', 7 words). English Wiktionary's own sense ends with the plain synonyms 'to start, jump', which the proposal uses.
 
 #### ressasser (rank 2706)
 - **Gloss:** sieve again, obsess over → **obsess over, sieve again**
@@ -1826,12 +1828,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### emmagasiner (rank 2710)
 - **Gloss:** put in a store, store up, stock up → **store, stock up**
 - **Checker:** `style`, medium confidence. wiktionary_en gives 'to store (in a shop, in a store)' and 'to store up, to stock up' — 'store up' and 'stock up' overlap; condensing keeps the gloss short.
-- **Skeptic:** upheld, nitpick. gloss_lint flags the gloss as definition_like (8 words), and 'put in a store' is an awkward rendering of English Wiktionary's 'to store (in a shop, in a store)'. 'store, stock up' covers both English Wiktionary senses in fewer words.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). gloss_lint flags the gloss as definition_like (8 words), and 'put in a store' is an awkward rendering of English Wiktionary's 'to store (in a shop, in a store)'. 'store, stock up' covers both English Wiktionary senses in fewer words.
 
 #### encarter (rank 2734)
 - **Gloss:** to put in, insert (an insert to a publication) → **insert a flyer**
 - **Checker:** `style`, medium confidence. English Wiktionary's only sense is 'to put in, insert (an insert to a publication)'; gloss_lint flags a leading 'to' and a 9-word definition-like gloss. Rendering as a short bare-infinitive phrase fits house style.
-- **Skeptic:** partly, nitpick. The current gloss does break house style: it has a leading 'to', and its parenthetical is neither register nor region. But 'insert a flyer' builds an object into the gloss, so it cannot gloss 'encarter un échantillon' (the shard's own example). The fr senses are 'Insérer un encart' and 'Mettre, insérer un carton'. Use 'insert, put in' instead.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The current gloss does break house style: it has a leading 'to', and its parenthetical is neither register nor region. But 'insert a flyer' builds an object into the gloss, so it cannot gloss 'encarter un échantillon' (the shard's own example). The fr senses are 'Insérer un encart' and 'Mettre, insérer un carton'. Use 'insert, put in' instead.
 
 #### piéter (rank 2746)
 - **Gloss:** measure a hide → **walk (of a bird), plant one’s feet firmly**
@@ -1864,7 +1866,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### engourdir (rank 2814)
 - **Gloss:** numb, make numb, dull, deaden, blunt → **numb, dull, deaden**
 - **Checker:** `style`, medium confidence. The current gloss strings together five senses ('numb, make numb, dull, deaden, blunt'), redundant ('numb'/'make numb') and too long to read aloud; Wiktionary's first two senses trim to three plain words.
-- **Skeptic:** upheld, nitpick. The current five-item gloss repeats itself ('numb, make numb') and trips gloss_lint 'definition_like'. 'numb, dull, deaden' keeps EN's two untagged transitive senses ('to numb, make numb'; 'to dull, deaden, blunt') in order and is short enough to read aloud.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current five-item gloss repeats itself ('numb, make numb') and trips gloss_lint 'definition_like'. 'numb, dull, deaden' keeps EN's two untagged transitive senses ('to numb, make numb'; 'to dull, deaden, blunt') in order and is short enough to read aloud.
 
 #### barder (rank 2823)
 - **Gloss:** bard, clad → **bard, clad, kick off (get rough)**
@@ -1905,12 +1907,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### dépayser (rank 2889)
 - **Gloss:** move somebody from their usual country or place → **disorient, give a change of scenery**
 - **Checker:** `missing_primary_sense`, medium confidence. the app's gloss uses only wiktionary_en's first sense, tagged 'dated'; the 'broadly' sense ('to disorient') and the 'figuratively' sense ('to give a change of scenery') are the current everyday uses and are dropped entirely.
-- **Skeptic:** upheld, error. The current gloss is the only sense tagged 'dated' in both English Wiktionary and Wiktionnaire ('Faire sortir quelqu’un d’un pays…', dated). The live senses are 'to disorient' (broadly) and 'to give a change of scenery' (figuratively), and the proposal uses both. It also fixes the definition_like lint.
+- **Skeptic:** upheld, error (leans on the dropped length rule, see Counts). The current gloss is the only sense tagged 'dated' in both English Wiktionary and Wiktionnaire ('Faire sortir quelqu’un d’un pays…', dated). The live senses are 'to disorient' (broadly) and 'to give a change of scenery' (figuratively), and the proposal uses both. It also fixes the definition_like lint.
 
 #### écarteler (rank 2891)
 - **Gloss:** pull a body apart by the four limbs, divide a shield into four parts → **draw and quarter, divide a shield into four parts**
 - **Checker:** `style`, medium confidence. wiktionary_en itself renders the first sense as 'to draw and quarter', a plain idiomatic English term the app's paraphrase 'pull a body apart by the four limbs' needlessly avoids.
-- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts). English Wiktionary's first sense reads 'to draw and quarter (… to pull a body apart by the four limbs)'. The app ships the explanatory parenthesis in place of the plain term, and it trips the definition_like lint (14 words). 'draw and quarter' is shorter and idiomatic.
+- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). English Wiktionary's first sense reads 'to draw and quarter (… to pull a body apart by the four limbs)'. The app ships the explanatory parenthesis in place of the plain term, and it trips the definition_like lint (14 words). 'draw and quarter' is shorter and idiomatic.
 
 #### dépiter (rank 2897)
 - **Gloss:** sadden, upset → **vex, annoy**
@@ -1940,12 +1942,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### dessaisir (rank 2926)
 - **Gloss:** disseize, dispossess, or deprive of (the possession or the administration of) → **dispossess, deprive of, relinquish**
 - **Checker:** `style`, medium confidence. The current gloss copies English Wiktionary's full first-sense definition verbatim, including a parenthetical clause ('the possession or the administration of'), which the gloss_lint audit flags as 'definition_like' (11 words); it is also too long for VoiceOver and omits the common reflexive sense 'to relinquish, give up' (e.g. a court relinquishing a case), shown in several of the verb's own examples.
-- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts). The current gloss is English Wiktionary's definition copied verbatim, with the obscure 'disseize' and a non-register parenthetical, and gloss_lint flags it as definition_like (11 words). 'dispossess, deprive of, relinquish' comes from English Wiktionary sense 1 ('dispossess, or deprive of') and the untagged sense 2 ('to relinquish'), and it is short enough to read aloud.
+- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current gloss is English Wiktionary's definition copied verbatim, with the obscure 'disseize' and a non-register parenthetical, and gloss_lint flags it as definition_like (11 words). 'dispossess, deprive of, relinquish' comes from English Wiktionary sense 1 ('dispossess, or deprive of') and the untagged sense 2 ('to relinquish'), and it is short enough to read aloud.
 
 #### endeuiller (rank 2928)
 - **Gloss:** take on an air of mourning → **cast into mourning**
 - **Checker:** `style`, low confidence. The French definition ('Donner à quelque chose un air, une apparence de deuil') is transitive — something endeuille a place or object — but the current gloss 'take on an air of mourning' reads as intransitive/reflexive, the wrong voice; English Wiktionary's own alternative phrasing 'cause to mourn' was dropped even though it is clearer, and gloss_lint flags the current wording as definition-like (6 words).
-- **Skeptic:** upheld, error. English Wiktionary tags the sense 'transitive', and Wiktionnaire's only sense, 'Donner à quelque chose un air, une apparence de deuil', has a direct object. The current 'take on an air of mourning' reads as intransitive, which is the wrong voice. 'cast into mourning' matches English Wiktionary's 'cause to mourn'.
+- **Skeptic:** upheld, error (leans on the dropped length rule, see Counts). English Wiktionary tags the sense 'transitive', and Wiktionnaire's only sense, 'Donner à quelque chose un air, une apparence de deuil', has a direct object. The current 'take on an air of mourning' reads as intransitive, which is the wrong voice. 'cast into mourning' matches English Wiktionary's 'cause to mourn'.
 
 #### moisir (rank 2938)
 - **Gloss:** go moldy, moulder, hang around, gather dust → **go moldy, molder, hang around, gather dust**
@@ -2000,12 +2002,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### torcher (rank 3004)
 - **Gloss:** wipe with a cloth to remove dirt → **wipe down, clean off**
 - **Checker:** `style`, medium confidence. The app's gloss copies English Wiktionary's full definition-style sense ('to wipe with a cloth to remove dirt'), flagged by gloss_lint as definition-like (7 words); house style favors a short phrase for the same sense.
-- **Skeptic:** partly, nitpick. The current value is a 7-word definition, flagged 'definition_like' by gloss_lint, so shortening it is right. But 'wipe down' suggests surfaces, while the senses cover plates and 'Essuyer le derrière'. Use a plain 'wipe, wipe clean'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The current value is a 7-word definition, flagged 'definition_like' by gloss_lint, so shortening it is right. But 'wipe down' suggests surfaces, while the senses cover plates and 'Essuyer le derrière'. Use a plain 'wipe, wipe clean'.
 
 #### grouiller (rank 3005)
 - **Gloss:** mill about, swarm with people, swarm, crawl → **swarm, teem, crawl**
 - **Checker:** `style`, medium confidence. The app's gloss ('mill about, swarm with people, swarm, crawl') strings together four near-synonymous phrases, flagged by gloss_lint as definition-like (7 words); a shorter list conveys the same English Wiktionary senses ('to mill about, swarm with people' / 'to swarm or crawl').
-- **Skeptic:** upheld, nitpick. The current value says 'swarm' twice ('swarm with people, swarm') and was flagged 'definition_like'. 'swarm, teem, crawl' keeps English Wiktionary's 'to swarm or crawl', and 'teem' renders Wiktionnaire's 'abonder, pulluler'.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current value says 'swarm' twice ('swarm with people, swarm') and was flagged 'definition_like'. 'swarm, teem, crawl' keeps English Wiktionary's 'to swarm or crawl', and 'teem' renders Wiktionnaire's 'abonder, pulluler'.
 
 #### essorer (rank 3007)
 - **Gloss:** dry out, to hang out to dry, wring, wring out → **dry out, hang out to dry, wring, wring out**
@@ -2021,7 +2023,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### juguler (rank 3017)
 - **Gloss:** stamp out, kick out, do away with, get rid of → **stamp out, do away with**
 - **Checker:** `style`, medium confidence. wiktionary_en's single sense is 'to stamp out, kick out, do away with (to get rid of)', where the parenthetical only glosses 'do away with'; the app listed all four as separate items, which is more than house style wants read aloud.
-- **Skeptic:** partly, error. Removing 'kick out' is right, since no French sense means expel. But the leading sense Wiktionnaire tags 'common' is 'Maîtriser, arrêter ou contenir efficacement, le développement de quelque chose', which is curbing, not abolishing. The gloss should be 'curb, contain, stamp out', not 'stamp out, do away with'.
+- **Skeptic:** partly, error (leans on the dropped length rule, see Counts). Removing 'kick out' is right, since no French sense means expel. But the leading sense Wiktionnaire tags 'common' is 'Maîtriser, arrêter ou contenir efficacement, le développement de quelque chose', which is curbing, not abolishing. The gloss should be 'curb, contain, stamp out', not 'stamp out, do away with'.
 
 #### cribler (rank 3024)
 - **Gloss:** sift → **sift, riddle**
@@ -2037,12 +2039,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### raccompagner (rank 3028)
 - **Gloss:** take back, take home, drive home, drive back, walk home, walk back → **walk back, drive back, see home**
 - **Checker:** `style`, medium confidence. wiktionary_en gives one sense with several transport-specific renderings ('to walk back, to take back, to drive back'); the app's gloss spells out six near-synonyms, more than house style wants read aloud.
-- **Skeptic:** partly, nitpick. The current gloss is correct but runs to six near-synonyms (flagged definition_like, 12 words), so trimming it is fair. 'see home' appears only in an example's translation, not in a gloss. The trim should use the sense's own wording, 'walk back, take back, drive back', or 'take home, walk home, drive home'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The current gloss is correct but runs to six near-synonyms (flagged definition_like, 12 words), so trimming it is fair. 'see home' appears only in an example's translation, not in a gloss. The trim should use the sense's own wording, 'walk back, take back, drive back', or 'take home, walk home, drive home'.
 
 #### composter (rank 3041)
 - **Gloss:** stamp a ticket, create compost, add compost to the ground → **stamp a ticket, compost**
 - **Checker:** `style`, medium confidence. Wiktionnaire's first two senses ('amender une terre avec du compost' and 'faire du compost') are both covered by the single English verb 'compost'; the third, distinct sense (validating a ticket) is kept separately.
-- **Skeptic:** upheld, nitpick. The English verb 'compost' covers both Wiktionnaire senses, 'Amender une terre avec du compost' and 'Faire du compost', so collapsing the two definition-like phrases (lint: definition_like, 10 words) loses nothing. 'stamp a ticket', wiktionary_en's first sense, stays first.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The English verb 'compost' covers both Wiktionnaire senses, 'Amender une terre avec du compost' and 'Faire du compost', so collapsing the two definition-like phrases (lint: definition_like, 10 words) loses nothing. 'stamp a ticket', wiktionary_en's first sense, stays first.
 
 #### épancher (rank 3049)
 - **Gloss:** pour, pour out, erupt, spit out, spurt out → **pour out, spurt out, pour one’s heart out**
@@ -2105,7 +2107,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### pétiller (rank 3117)
 - **Gloss:** be fizzy, bubble, bubble up, crackle, sparkle → **sparkle, bubble, crackle**
 - **Checker:** `style`, medium confidence. Flagged by gloss_lint as definition-like (7 words); the current gloss strings together five senses from en.wiktionary, more than the two or three the house style calls for a VoiceOver-read gloss.
-- **Skeptic:** partly, nitpick. Trimming the 7-word gloss is fair, but the proposal moves 'sparkle' to the front. En's lead sense is 'to fizz, to be fizzy, bubble, bubble up', and 'to sparkle, twinkle' is third, so the reorder breaks commonest-first with no evidence. A trim that keeps the order, 'fizz, bubble, crackle, sparkle', would be right.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Trimming the 7-word gloss is fair, but the proposal moves 'sparkle' to the front. En's lead sense is 'to fizz, to be fizzy, bubble, bubble up', and 'to sparkle, twinkle' is third, so the reorder breaks commonest-first with no evidence. A trim that keeps the order, 'fizz, bubble, crackle, sparkle', would be right.
 
 #### spatialiser (rank 3122)
 - **Gloss:** launch into space → **spatialize, launch into space**
@@ -2115,7 +2117,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### dépérir (rank 3128)
 - **Gloss:** fade away, decline, wither (away), go downhill → **decline, fade away, wither**
 - **Checker:** `style`, medium confidence. Flagged by gloss_lint as definition-like (7 words); en.wiktionary's single sense already lists four near-synonyms, more than the two or three the house style calls for.
-- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts). The proposal follows en's sense order ('to decline, to fade away, to wither away…'), shortens the 7-word gloss flagged by lint, and removes '(away)', a non-register parenthesis the house style forbids. No sense is lost that 'decline' and 'fade away' don't cover.
+- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The proposal follows en's sense order ('to decline, to fade away, to wither away…'), shortens the 7-word gloss flagged by lint, and removes '(away)', a non-register parenthesis the house style forbids. No sense is lost that 'decline' and 'fade away' don't cover.
 
 #### impatienter (rank 3136)
 - **Gloss:** become impatient, make impatient → **make impatient, become impatient**
@@ -2152,7 +2154,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### jaunir (rank 3156)
 - **Gloss:** go yellow, turn yellow, make yellow, ripen (as a banana) → **turn yellow, ripen (as a banana), make yellow**
 - **Checker:** `style`, medium confidence. English Wiktionary lists an intransitive 'to go yellow, to turn yellow' sense, a second intransitive sense adding 'to ripen', and a transitive 'to make yellow'; the shipped gloss pads the first sense with a redundant synonym pair ('go yellow, turn yellow'), which house style discourages.
-- **Skeptic:** partly, nitpick. Dropping the redundant 'go yellow' is a fair trim of a 10-word gloss. But moving 'ripen' ahead of 'make yellow' has no support (Wiktionnaire leads with transitive 'Rendre jaune'), and '(as a banana)' is a parenthetical that is neither register nor region. The right change is 'turn yellow, make yellow, ripen'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Dropping the redundant 'go yellow' is a fair trim of a 10-word gloss. But moving 'ripen' ahead of 'make yellow' has no support (Wiktionnaire leads with transitive 'Rendre jaune'), and '(as a banana)' is a parenthetical that is neither register nor region. The right change is 'turn yellow, make yellow, ripen'.
 
 #### lacer (rank 3158)
 - **Gloss:** ace, lace up → **lace, lace up**
@@ -2211,12 +2213,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### ouiller (rank 3236)
 - **Gloss:** add wine to a barrel to replace evaporated wine → **top up a wine barrel**
 - **Checker:** `style`, medium confidence. The current 9-word definition-style gloss can be shortened to a plainer phrase without losing meaning; wiktionnaire's 'Remplacer... celui qui a diminué dans un tonneau par suite de l'évaporation' is the same idea as 'topping up' a barrel.
-- **Skeptic:** upheld, nitpick. The current gloss is a 9-word definition, which gloss_lint flags as 'definition_like'. 'Top up a wine barrel' is the plain trade phrase for Wiktionnaire’s 'Remplacer… celui qui a diminué dans un tonneau par suite de l’évaporation' and loses nothing a learner needs.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss is a 9-word definition, which gloss_lint flags as 'definition_like'. 'Top up a wine barrel' is the plain trade phrase for Wiktionnaire’s 'Remplacer… celui qui a diminué dans un tonneau par suite de l’évaporation' and loses nothing a learner needs.
 
 #### lésiner (rank 3251)
 - **Gloss:** skimp, overly limit one’s spending, be frugal to an excessive degree → **skimp, be stingy**
 - **Checker:** `style`, medium confidence. The current 11-word gloss is definition-like; wiktionnaire's 'Agir avec lésinerie ; économiser à l'extrême' is well covered by the shorter, plainer 'skimp, be stingy.'
-- **Skeptic:** upheld, nitpick. The current 11-word gloss is flagged 'definition_like', and its three clauses say the same thing. 'Skimp, be stingy' covers 'Agir avec lésinerie ; économiser à l’extrême' plainly and keeps the lead word 'skimp'.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current 11-word gloss is flagged 'definition_like', and its three clauses say the same thing. 'Skimp, be stingy' covers 'Agir avec lésinerie ; économiser à l’extrême' plainly and keeps the lead word 'skimp'.
 - *Note:* The only candidate uses 'lésine' as a noun ('his stinginess'), not the verb, so it was rejected.
 
 #### introniser (rank 3252)
@@ -2237,12 +2239,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### soutirer (rank 3267)
 - **Gloss:** rack (beer or wine) → **extract by cunning, rack (wine)**
 - **Checker:** `missing_primary_sense`, medium confidence. French Wiktionary's second sense, 'Se faire donner par adresse, obtenir par finesse ou par importunité' (extract by cunning, e.g. 'soutirer de l'argent'), is the common figurative use, confirmed by the corpus candidate about cybercriminals extracting money; English Wiktionary carries only the technical wine-racking sense, which the app's gloss also limits itself to.
-- **Skeptic:** partly, hedge. Wiktionnaire’s untagged second sense 'Se faire donner par adresse, obtenir par finesse ou par importunité' is missing from the app, so adding it is right. Moving it first rests on a corpus candidate the shard does not contain. The proposal also trims '(beer or wine)' to '(wine)' without cause. Better: append the sense after the lead, e.g. 'rack (beer or wine), wheedle out of, extract'.
+- **Skeptic:** partly, hedge (leans on the dropped length rule, see Counts). Wiktionnaire’s untagged second sense 'Se faire donner par adresse, obtenir par finesse ou par importunité' is missing from the app, so adding it is right. Moving it first rests on a corpus candidate the shard does not contain. The proposal also trims '(beer or wine)' to '(wine)' without cause. Better: append the sense after the lead, e.g. 'rack (beer or wine), wheedle out of, extract'.
 
 #### enchérir (rank 3274)
 - **Gloss:** make more expensive, bid, make a bid, become more expensive → **bid, become more expensive**
 - **Checker:** `style`, medium confidence. gloss_lint flags this as definition-like (10 words); 'make more expensive' and 'become more expensive' express the same core sense in transitive/intransitive form, so the gloss can be tightened to the two genuinely distinct senses ('to bid' and 'to become more expensive'), still in English Wiktionary's order.
-- **Skeptic:** partly, nitpick. The current gloss is correct but padded: 'bid, make a bid' repeats English Wiktionary's 'to bid; to make a bid'. The proposal goes further and drops 'make more expensive', which is English Wiktionary's first sense and Wiktionnaire's 'Rendre plus cher', and those are not the same sense as the intransitive 'Devenir plus cher'. The right change drops only the duplicate, giving 'bid, make more expensive, become more expensive'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The current gloss is correct but padded: 'bid, make a bid' repeats English Wiktionary's 'to bid; to make a bid'. The proposal goes further and drops 'make more expensive', which is English Wiktionary's first sense and Wiktionnaire's 'Rendre plus cher', and those are not the same sense as the intransitive 'Devenir plus cher'. The right change drops only the duplicate, giving 'bid, make more expensive, become more expensive'.
 - *Note:* All five candidates use enchérir in the figurative 'add to what was said' sense, which is not among the gloss's senses; a sentence was authored instead to illustrate the 'bid' sense.
 
 #### mordiller (rank 3275)
@@ -2269,7 +2271,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### vilipender (rank 3348)
 - **Gloss:** vilipend, vilify, revile, scorn, despise, condemn → **vilify, revile, condemn**
 - **Checker:** `style`, medium confidence. wiktionary_en gives six near-synonyms ('vilipend, vilify, revile, scorn, despise, condemn'); house style wants two or three senses, commonest first, for VoiceOver brevity.
-- **Skeptic:** partly, nitpick. Trimming a six-word list that leads with the rare 'vilipend' is right under the read-aloud rule. But the proposal keeps 'condemn' and drops 'scorn', and scorn is the core of Wiktionnaire's "Traiter… avec beaucoup de mépris ; dénigrer, attaquer verbalement". Use 'vilify, revile, scorn'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Trimming a six-word list that leads with the rare 'vilipend' is right under the read-aloud rule. But the proposal keeps 'condemn' and drops 'scorn', and scorn is the core of Wiktionnaire's "Traiter… avec beaucoup de mépris ; dénigrer, attaquer verbalement". Use 'vilify, revile, scorn'.
 
 #### crêper (rank 3361)
 - **Gloss:** curl like a crêpe → **crimp, backcomb (hair)**
@@ -2325,7 +2327,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### flageller (rank 3458)
 - **Gloss:** beat severely with a scourge or a whip → **whip, flog**
 - **Checker:** `style`, high confidence. English Wiktionary: 'to beat severely, with a scourge or a whip' — the current gloss is definition-like (flagged by gloss_lint); 'whip, flog' is the plain equivalent.
-- **Skeptic:** upheld, nitpick. The current gloss copies a dictionary definition ('to beat severely, with a scourge or a whip'), and gloss_lint flags it as definition_like at 8 words. 'whip, flog' says the same thing (Wiktionnaire: 'Soumettre au supplice du fouet') in plain words that are short enough to read aloud.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss copies a dictionary definition ('to beat severely, with a scourge or a whip'), and gloss_lint flags it as definition_like at 8 words. 'whip, flog' says the same thing (Wiktionnaire: 'Soumettre au supplice du fouet') in plain words that are short enough to read aloud.
 - *Note:* The 'tier' candidate is cut off mid-clause ('...comme les rayons d'un') and was rejected as truncated.
 
 #### siliconer (rank 3484)
@@ -2341,7 +2343,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### tressaillir (rank 3498)
 - **Gloss:** wince → **shudder, start**
 - **Checker:** `wrong_sense`, medium confidence. wiktionnaire: "Éprouver une agitation vive et passagère à la suite d’une émotion subite" (a sudden full-body start/shudder from a startling emotion), and en wiktionary lists "to twitch, start, shudder, jump"; none of these support "wince", which describes a facial grimace of pain, a different action.
-- **Skeptic:** partly, error. The direction is right: English Wiktionary gives "to thrill, shiver, quiver" and "to twitch, start, shudder, jump", Wiktionnaire gives "agitation vive et passagère à la suite d’une émotion subite", and none of these is "wince", which means a grimace of pain. But a bare "start" will be read aloud as "begin". A better gloss is "quiver, shudder, jump".
+- **Skeptic:** partly, error (leans on the dropped length rule, see Counts). The direction is right: English Wiktionary gives "to thrill, shiver, quiver" and "to twitch, start, shudder, jump", Wiktionnaire gives "agitation vive et passagère à la suite d’une émotion subite", and none of these is "wince", which means a grimace of pain. But a bare "start" will be read aloud as "begin". A better gloss is "quiver, shudder, jump".
 
 #### étinceler (rank 3502)
 - **Gloss:** spark, sparkle, twinkle → **sparkle, twinkle, spark**
@@ -2402,7 +2404,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### vanner (rank 3568)
 - **Gloss:** kid, crack jokes, provide a river with sluice gates or floodgates → **tire out, kid, crack jokes**
 - **Checker:** `missing_primary_sense`, medium confidence. wiktionary_en tags 'to knacker, tire out, flush' (colloquial) and wiktionnaire has 'Épuiser, exténuer, claquer' (familiar) — the very common colloquial 'wear out/exhausted' sense (cf. 'être vanné') is omitted entirely from the current gloss, which instead leads with the rarer literal 'winnow'-adjacent senses.
-- **Skeptic:** partly, hedge. Adding the missing 'to knacker, tire out, flush' (colloquial) and dropping the long sluice-gate sense are both justified. But the evidence misreads the current gloss, which leads with 'kid', not with winnow senses. The proposal also drops 'to winnow', the untagged first sense in both references, and leads with a tagged colloquial sense without marking it. A better gloss would be 'kid, crack jokes, tire out (colloquial), winnow'.
+- **Skeptic:** partly, hedge (leans on the dropped length rule, see Counts). Adding the missing 'to knacker, tire out, flush' (colloquial) and dropping the long sluice-gate sense are both justified. But the evidence misreads the current gloss, which leads with 'kid', not with winnow senses. The proposal also drops 'to winnow', the untagged first sense in both references, and leads with a tagged colloquial sense without marking it. A better gloss would be 'kid, crack jokes, tire out (colloquial), winnow'.
 - *Note:* The only candidate ('la bella Vanna') is the proper name of a person in a Botticelli painting, not the verb — rejected as not verbal.
 
 #### fraiser (rank 3577)
@@ -2420,7 +2422,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### éconduire (rank 3604)
 - **Gloss:** get rid of (someone), dismiss, refuse, reject → **turn away, dismiss, refuse**
 - **Checker:** `style`, medium confidence. gloss_lint flags it as 'definition_like' (7 words); wiktionary_en's two senses are 'to dismiss, to get rid of (someone)' and 'to refuse, to reject', which compress to a shorter three-word gloss without dropping a sense.
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). The current gloss breaks house style with '(someone)', a parenthesis that marks neither register nor region, and it is long. But the checker's claim of compression 'without dropping a sense' is false: 'get rid of' is dropped, and 'turn away' appears in neither quoted sense. A better change would be 'dismiss, get rid of, refuse', which uses the quoted senses without the parenthesis.
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current gloss breaks house style with '(someone)', a parenthesis that marks neither register nor region, and it is long. But the checker's claim of compression 'without dropping a sense' is false: 'get rid of' is dropped, and 'turn away' appears in neither quoted sense. A better change would be 'dismiss, get rid of, refuse', which uses the quoted senses without the parenthesis.
 - *Note:* The first tier candidate (flaubert line 7586) is cut off mid-sentence with no closing punctuation, so it was rejected.
 
 #### plâtrer (rank 3626)
@@ -2463,7 +2465,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### vouvoyer (rank 3739)
 - **Gloss:** address someone using the formal pronoun vous rather than the informal tu → **address formally, using vous**
 - **Checker:** `style`, medium confidence. English Wiktionary's definition-style gloss ('to address someone using the formal pronoun vous rather than the informal tu') is accurate but far too long to be read aloud by VoiceOver; shortened while preserving the sense.
-- **Skeptic:** upheld, nitpick. The shipped gloss is a 12-word definition (Stage 1 definition_like: "12 words") and too long to read aloud. "address formally, using vous" keeps the sense of "S’adresser à une personne en employant vous au lieu de tu".
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The shipped gloss is a 12-word definition (Stage 1 definition_like: "12 words") and too long to read aloud. "address formally, using vous" keeps the sense of "S’adresser à une personne en employant vous au lieu de tu".
 - *Note:* The only candidate attributes a 2016 web publication ('Jadis éternel') to Louis Racine, who died in 1763 — an evident authorship/date mismatch — so it was rejected.
 
 #### turlupiner (rank 3750)
@@ -2505,13 +2507,13 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### viner (rank 3805)
 - **Gloss:** add alcohol to a wine to conserve it → **fortify (wine)**
 - **Checker:** `style`, medium confidence. wiktionary_en itself offers the short synonym 'fortify' alongside the long definition-style gloss; shorter suits VoiceOver.
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). The direction is right: the current 8-word gloss is definition-like, and en-Wiktionary itself ends with '; fortify'. But '(wine)' violates the house rule of parentheses only for register or region. Use the plain phrase 'fortify wine' instead.
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The direction is right: the current 8-word gloss is definition-like, and en-Wiktionary itself ends with '; fortify'. But '(wine)' violates the house rule of parentheses only for register or region. Use the plain phrase 'fortify wine' instead.
 - *Note:* All five candidates match 'Vine' the app/website or the plant/pruning sense, not the verb 'viner'.
 
 #### embuer (rank 3827)
 - **Gloss:** envelop in mist → **fog up, mist over**
 - **Checker:** `style`, medium confidence. Wiktionnaire: 'Couvrir de buée' and 'Voiler les yeux de larmes' describe a window or a person's eyes fogging/misting, which reads more naturally in English as 'fog up, mist over' than 'envelop in mist'.
-- **Skeptic:** upheld, hedge. Wiktionnaire's first sense is 'Couvrir de buée'. Buée is condensation on a surface, not mist in the air, so 'envelop in mist' misleads. The third sense, 'Voiler les yeux de larmes', also fits 'mist over'. 'fog up, mist over' is plain and matches the senses.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). Wiktionnaire's first sense is 'Couvrir de buée'. Buée is condensation on a surface, not mist in the air, so 'envelop in mist' misleads. The third sense, 'Voiler les yeux de larmes', also fits 'mist over'. 'fog up, mist over' is plain and matches the senses.
 
 #### désemplir (rank 3866)
 - **Gloss:** (partially) empty (something that is full up) → **empty, always be full (usually negated)**
@@ -2536,7 +2538,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### chantourner (rank 3914)
 - **Gloss:** carve or hollow out a piece of wood, stone, or marble into a predetermined shape → **carve or hollow into a shape (wood, stone, marble)**
 - **Checker:** `style`, medium confidence. gloss_lint flags the shipped gloss as 15 words, definition-like; the same meaning fits in fewer words for VoiceOver
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). Shortening the 15-word gloss is right, but the replacement uses a parenthesis for materials, which house style reserves for register or region. It also keeps 'stone', which Wiktionnaire does not list ('une pièce de bois, de métal, de marbre'), and drops metal. The right change is a short gloss that follows 'Couper en dehors ou évider en dedans… suivant un profil', e.g. 'cut out or hollow out to a set shape'.
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). Shortening the 15-word gloss is right, but the replacement uses a parenthesis for materials, which house style reserves for register or region. It also keeps 'stone', which Wiktionnaire does not list ('une pièce de bois, de métal, de marbre'), and drops metal. The right change is a short gloss that follows 'Couper en dehors ou évider en dedans… suivant un profil', e.g. 'cut out or hollow out to a set shape'.
 
 #### empierrer (rank 3926)
 - **Gloss:** metal (a road) → **surface with crushed stone, metal (a road)**
@@ -2562,7 +2564,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### entortiller (rank 3947)
 - **Gloss:** wrap around, twist around, envelop, win over, persuade → **wrap around, twist around, win over**
 - **Checker:** `style`, medium confidence. The current gloss packs five senses ('wrap around, twist around, envelop, win over, persuade') into one VoiceOver line; house style calls for two or three senses at most, so it should be trimmed while keeping the two main senses (literal wrap/twist and figurative win over).
-- **Skeptic:** upheld, nitpick. Stage 1 flags the five-sense gloss as 'definition_like' (8 words). The trim keeps the literal 'wrap around, twist around' and the figurative 'win over' from English Wiktionary's first two senses, and drops only near-duplicates ('envelop', 'persuade').
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Stage 1 flags the five-sense gloss as 'definition_like' (8 words). The trim keeps the literal 'wrap around, twist around' and the figurative 'win over' from English Wiktionary's first two senses, and drops only near-duplicates ('envelop', 'persuade').
 
 #### louvoyer (rank 3955)
 - **Gloss:** tack, navigate → **tack, hedge**
@@ -2577,7 +2579,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### carotter (rank 3971)
 - **Gloss:** extort something from someone by abusing good faith → **swindle, con**
 - **Checker:** `style`, medium confidence. wiktionnaire: 'lui extorquer cette chose, en abusant de sa bonne foi' and, more broadly, 'l'escroquer, l'abuser, le tromper' (slang); the app's gloss carries over the whole French definition rather than a short equivalent.
-- **Skeptic:** partly, nitpick. The current gloss is correct but reads as an eight-word definition, so shortening it is fair. Every quoted sense of it is tagged 'slang', though, and the proposal drops the register. The right change is 'swindle, con (slang)'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The current gloss is correct but reads as an eight-word definition, so shortening it is fair. Every quoted sense of it is tagged 'slang', though, and the proposal drops the register. The right change is 'swindle, con (slang)'.
 
 #### délurer (rank 3992)
 - **Gloss:** render delirious → **make streetwise, sharpen the wits of**
@@ -2599,7 +2601,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### émécher (rank 4019)
 - **Gloss:** trim the wick of a candle → **make tipsy, trim a candle wick**
 - **Checker:** `missing_primary_sense`, medium confidence. Every candidate sentence uses 'éméché' in the common colloquial sense (tipsy from drink), matching wiktionnaire's second, unfilled sense tagged 'familiar, figuratively'; the literal wick-trimming sense given alone is comparatively rare in modern use.
-- **Skeptic:** upheld, hedge. Wiktionnaire's second sense is tagged 'familiar, figuratively' and its text is blank, but all four Zola candidates ('il était rentré éméché', 'rentrait éméché ou poivré') show that the living use is 'tipsy'. The current six-word gloss (flagged definition_like) omits that sense, and the proposal adds it and shortens the literal sense.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). Wiktionnaire's second sense is tagged 'familiar, figuratively' and its text is blank, but all four Zola candidates ('il était rentré éméché', 'rentrait éméché ou poivré') show that the living use is 'tipsy'. The current six-word gloss (flagged definition_like) omits that sense, and the proposal adds it and shortens the literal sense.
 - *Note:* All four candidates use 'éméché' as a predicate adjective ('il était éméché'), not a clearly verbal form, so none was used as-is.
 
 #### quérir (rank 4020)
@@ -2621,7 +2623,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### épiloguer (rank 4052)
 - **Gloss:** criticize someone minutely → **nitpick, ramble on about**
 - **Checker:** `missing_primary_sense`, medium confidence. en Wiktionary tags the 'criticize minutely' sense 'dated'; the current, untagged-in-spirit sense is 'to make long comments, often superfluous...to blather on', matching the French definition's second half ('faire des commentaires longs et superflus'), which the app's gloss drops entirely.
-- **Skeptic:** upheld, hedge. The en sense the current gloss paraphrases is tagged 'dated'. Wiktionnaire's single untagged sense covers both halves: 'faire des critiques par le détail, faire des commentaires longs et superflus'. The current gloss drops the second half. 'nitpick, ramble on about' covers both halves in plain words, matching the en '; to nitpick' and '; to blather on'.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). The en sense the current gloss paraphrases is tagged 'dated'. Wiktionnaire's single untagged sense covers both halves: 'faire des critiques par le détail, faire des commentaires longs et superflus'. The current gloss drops the second half. 'nitpick, ramble on about' covers both halves in plain words, matching the en '; to nitpick' and '; to blather on'.
 - *Note:* The only candidate was a chapter heading ('ÉPILOGUE'), the noun, not the verb, so a sentence had to be authored.
 
 #### déglutir (rank 4053)
@@ -2637,7 +2639,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### contre-indiquer (rank 4099)
 - **Gloss:** counterindicate, contraindicate → **contraindicate**
 - **Checker:** `style`, medium confidence. en.wiktionary's only sense is 'to contraindicate'; 'counterindicate' is a rare calque not used by standard English dictionaries, and having two near-identical synonyms for one sense clutters a VoiceOver-read gloss
-- **Skeptic:** upheld, nitpick. English Wiktionary’s only sense is 'to contraindicate', and the current gloss leads with the rarer variant of the same word (provenance: first_sense_is_en_first false). A single 'contraindicate' is the plain, read-aloud form.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). English Wiktionary’s only sense is 'to contraindicate', and the current gloss leads with the rarer variant of the same word (provenance: first_sense_is_en_first false). A single 'contraindicate' is the plain, read-aloud form.
 
 #### embobiner (rank 4101)
 - **Gloss:** wind up, reel up, wrap up → **reel in, wind up, wrap up**
@@ -2647,7 +2649,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### embosser (rank 4130)
 - **Gloss:** emboss, moor a vessel with cables from both the prow and the stern → **emboss, moor a ship fore and aft**
 - **Checker:** `style`, medium confidence. en.wiktionary senses 'to emboss' and 'to moor a vessel with cables from both the prow and the stern' are correct in selection/order but the second clause is longer than VoiceOver style wants
-- **Skeptic:** upheld, nitpick. The current second sense is 13 words, far past 'short enough to read aloud'. 'moor a ship fore and aft' faithfully renders both en.wiktionary ('from both the prow and the stern') and Wiktionnaire ('Amarrer un vaisseau de l’avant et de l’arrière'). The sense order is unchanged.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current second sense is 13 words, far past 'short enough to read aloud'. 'moor a ship fore and aft' faithfully renders both en.wiktionary ('from both the prow and the stern') and Wiktionnaire ('Amarrer un vaisseau de l’avant et de l’arrière'). The sense order is unchanged.
 
 #### confluer (rank 4141)
 - **Gloss:** (of a river) join, flow into (another river), flood together → **(of rivers) join, converge**
@@ -2662,7 +2664,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### chamarrer (rank 4157)
 - **Gloss:** enhance a fabric or garment with sumptuous ornaments → **bedeck, deck out gaudily**
 - **Checker:** `style`, medium confidence. wiktionnaire: 'Parer d’un assemblage de couleurs éclatantes et mal assorties' (deck out in a garish, mismatched assortment of colors); the current gloss is a full 8-word definition where a short pair of senses would read aloud better
-- **Skeptic:** upheld, hedge. Wiktionnaire's lead sense is 'Parer d’un assemblage de couleurs éclatantes et mal assorties', and its figurative sense is 'Couvrir de nombreuses décorations'. 'Bedeck, deck out gaudily' covers both. The current 8-word definition says 'sumptuous', which misses the 'mal assorties' connotation, and Stage 1 lint flagged it as definition_like.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). Wiktionnaire's lead sense is 'Parer d’un assemblage de couleurs éclatantes et mal assorties', and its figurative sense is 'Couvrir de nombreuses décorations'. 'Bedeck, deck out gaudily' covers both. The current 8-word definition says 'sumptuous', which misses the 'mal assorties' connotation, and Stage 1 lint flagged it as definition_like.
 
 #### bourlinguer (rank 4158)
 - **Gloss:** tack against the wind → **roam, get about, tack against the wind**
@@ -2672,7 +2674,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### recorder (rank 4166)
 - **Gloss:** say something repetitively in order to learn → **learn by heart, restring**
 - **Checker:** `style`, medium confidence. English Wiktionary's own example 'As-tu recordé ta leçon?' shows the core sense is 'learn by heart'; the app's phrasing is a wordy definition (flagged by gloss_lint as definition-like), so it was tightened; the second en sense 'to restring' is kept.
-- **Skeptic:** partly, nitpick. Tightening the definition-like gloss and adding 'restring' (en sense 2; Wiktionnaire 'Regarnir de cordes') are both right. But 'learn by heart' misstates Wiktionnaire's 'Répéter quelque chose, afin de ... l’apprendre par cœur': the verb is the repeating, and learning is only its aim. Use 'rehearse, go over, restring'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Tightening the definition-like gloss and adding 'restring' (en sense 2; Wiktionnaire 'Regarnir de cordes') are both right. But 'learn by heart' misstates Wiktionnaire's 'Répéter quelque chose, afin de ... l’apprendre par cœur': the verb is the repeating, and learning is only its aim. Use 'rehearse, go over, restring'.
 - *Note:* The sole wiktionnaire candidate (Laclos) contains a stray wiki-markup artifact ("''") and a broken word ("dHéloïse"), so it was rejected as unclean; wrote an authored sentence instead.
 
 #### déprogrammer (rank 4168)
@@ -2698,7 +2700,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### dropper (rank 4204)
 - **Gloss:** drop (a golf ball in a position other than it has landed) → **drop**
 - **Checker:** `style`, medium confidence. 'dropper' is a direct English loanword; a bare 'drop' naturally covers both the golf sense and wiktionary_en's other listed sense, 'to drop (to forget, cease talking about)', and reads far better aloud than the 12-word definition-like phrase flagged by gloss_lint.
-- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts). The current 12-word gloss puts a definition in parentheses, which the house style reserves for register or region, and it names only golf. Wiktionnaire also gives the untagged senses 'Abandonner, laisser tomber' and the rugby drop goal, and English Wiktionary gives 'to drop (to forget, cease talking about)', so bare 'drop' covers the verb better.
+- **Skeptic:** upheld, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current 12-word gloss puts a definition in parentheses, which the house style reserves for register or region, and it names only golf. Wiktionnaire also gives the untagged senses 'Abandonner, laisser tomber' and the rugby drop goal, and English Wiktionary gives 'to drop (to forget, cease talking about)', so bare 'drop' covers the verb better.
 
 #### écluser (rank 4224)
 - **Gloss:** pass through a lock → **pass through a lock, drink, booze**
@@ -2792,7 +2794,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### esquinter (rank 4361)
 - **Gloss:** damage, ruin, or wear out, especially through use or misuse → **damage, wreck, wear out**
 - **Checker:** `style`, high confidence. wiktionary_en's sense matches, but the app gloss copies the full ten-word definition verbatim rather than short synonyms; 'damage, wreck, wear out' covers the same sense concisely for VoiceOver.
-- **Skeptic:** upheld, nitpick. The current gloss is the full ten-word wiktionary_en definition ('to damage, ruin, or wear out, especially through use or misuse'), which the lint flags as definition_like. 'damage, wreck, wear out' keeps that sense and can be read aloud.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss is the full ten-word wiktionary_en definition ('to damage, ruin, or wear out, especially through use or misuse'), which the lint flags as definition_like. 'damage, wreck, wear out' keeps that sense and can be read aloud.
 
 #### désaccorder (rank 4366)
 - **Gloss:** disagree → **put out of tune, disagree**
@@ -2808,7 +2810,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### enficher (rank 4371)
 - **Gloss:** plug the male part of a device into the female part designed to receive it → **plug in**
 - **Checker:** `style`, high confidence. wiktionary_en's and wiktionnaire's definitions both describe simply plugging a device's male connector into a female one; the current 15-word gloss is a full definition rather than a short VoiceOver-friendly phrase.
-- **Skeptic:** upheld, nitpick. The current gloss is the 15-word wiktionary_en definition, which the lint flags as definition_like. Both editions describe plugging a male connector into a female one ('Enfoncer un équipement dans un équipement prévu pour le recevoir'), which 'plug in' states plainly.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss is the 15-word wiktionary_en definition, which the lint flags as definition_like. Both editions describe plugging a male connector into a female one ('Enfoncer un équipement dans un équipement prévu pour le recevoir'), which 'plug in' states plainly.
 
 #### fourrager (rank 4381)
 - **Gloss:** fodder, forage → **rummage through, forage**
@@ -2874,7 +2876,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### réveillonner (rank 4443)
 - **Gloss:** celebrate Christmas Eve or New Year’s Eve, especially by having dinner with friends and/or family → **celebrate Christmas Eve or New Year’s Eve**
 - **Checker:** `style`, high confidence. gloss_lint flags the 16-word gloss as 'definition_like'; 'especially by having dinner with friends and/or family' is elaboration best trimmed for VoiceOver, per Wiktionary's own sense 'to celebrate Christmas Eve or New Year's Eve...'.
-- **Skeptic:** upheld, nitpick. gloss_lint flags the 16-word gloss as "definition_like", which breaks the read-aloud rule. The trimmed "celebrate Christmas Eve or New Year’s Eve" keeps the core of Wiktionary's sense and Wiktionnaire's "Faire le réveillon", and keeps the curly apostrophe.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). gloss_lint flags the 16-word gloss as "definition_like", which breaks the read-aloud rule. The trimmed "celebrate Christmas Eve or New Year’s Eve" keeps the core of Wiktionary's sense and Wiktionnaire's "Faire le réveillon", and keeps the curly apostrophe.
 
 #### enfariner (rank 4444)
 - **Gloss:** flour (cover with flour) → **flour**
@@ -2900,13 +2902,13 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### catastropher (rank 4473)
 - **Gloss:** stagger a person with an announcement → **shock, astound**
 - **Checker:** `style`, medium confidence. gloss_lint flags the 6-word definition-like phrasing; a short pair of plain synonyms conveys Wiktionnaire's 'Atterrer, comme à l'annonce d'une catastrophe' without spelling out the definition.
-- **Skeptic:** partly, nitpick. The current gloss is a definition-like phrase (lint: 6 words), so shortening it is right. But Wiktionnaire's sense is 'Atterrer', which means dismay or devastate, and 'astound' suggests amazement, which can be positive. Use 'shock, devastate' or 'stun, dismay' instead.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The current gloss is a definition-like phrase (lint: 6 words), so shortening it is right. But Wiktionnaire's sense is 'Atterrer', which means dismay or devastate, and 'astound' suggests amazement, which can be positive. Use 'shock, devastate' or 'stun, dismay' instead.
 - *Note:* All tier candidates use the noun 'catastrophe(s)', not the verb, and were rejected.
 
 #### locher (rank 4474)
 - **Gloss:** shake, come loose (said of a hoof, particularly in Belgium, Normandy, and the Vosges) → **shake, come loose (said of a horseshoe)**
 - **Checker:** `wrong_sense`, medium confidence. Wiktionnaire's dated sense reads 'Se disait souvent du fer d'un cheval' — the horse's shoe (le fer), not its hoof; the app's gloss mistranslates 'fer' as 'hoof.'
-- **Skeptic:** upheld, error. Wiktionnaire says 'Se disait souvent du fer d’un cheval'. 'Fer' is the horseshoe, not the hoof, so the shipped gloss is wrong. The proposal fixes that and also shortens a 14-word gloss that lint flags as definition-like.
+- **Skeptic:** upheld, error (leans on the dropped length rule, see Counts). Wiktionnaire says 'Se disait souvent du fer d’un cheval'. 'Fer' is the horseshoe, not the hoof, so the shipped gloss is wrong. The proposal fixes that and also shortens a 14-word gloss that lint flags as definition-like.
 - *Note:* The tier and wiktionary_en candidates bundle 'locher des noix' into a run-on, exclamation-heavy dialogue fragment unsuitable as a clean standalone sentence, so an authored one was used instead.
 
 #### maroufler (rank 4479)
@@ -2933,7 +2935,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### emboucher (rank 4521)
 - **Gloss:** place one’s lips against the mouthpiece of a wind instrument, place the bit in a horse's mouth → **put to one’s lips (a wind instrument), bit (a horse)**
 - **Checker:** `style`, medium confidence. gloss_lint flags both a straight apostrophe and a 17-word definition-like gloss; the two core wiktionary_en senses ('to place one's lips against the mouthpiece of a wind instrument', 'to place the bit in a horse's mouth') can be compressed to house style while keeping both senses.
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). The lint is real: the current gloss mixes a curly 'one’s' with a straight 'horse's'. But the replacement uses parentheses for objects, which house style reserves for register or region, and 'bit' as a verb is obscure. Better: 'put a wind instrument to one’s lips, put a bit in a horse’s mouth'.
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The lint is real: the current gloss mixes a curly 'one’s' with a straight 'horse's'. But the replacement uses parentheses for objects, which house style reserves for register or region, and 'bit' as a verb is obscure. Better: 'put a wind instrument to one’s lips, put a bit in a horse’s mouth'.
 - *Note:* Rejected the 'mal embouché' candidate: it is an idiomatic adjective ('foul-mouthed'), not a use of the mouthpiece/bit senses the gloss covers.
 
 #### pioncer (rank 4542)
@@ -3010,7 +3012,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### dégrever (rank 4664)
 - **Gloss:** unburden, take a weight off someone’s shoulders → **unburden, give tax relief**
 - **Checker:** `style`, medium confidence. gloss_lint flagged the current gloss as 7-word definition-like phrasing; wiktionnaire's senses are about relieving a taxpayer of a tax, which 'give tax relief' states more concisely while keeping 'unburden' from wiktionary_en.
-- **Skeptic:** partly, error. Every Wiktionnaire sense is fiscal: ‘Décharger le contribuable d’un impôt’ and ‘Éteindre les hypothèques’. The shipped figurative ‘take a weight off someone’s shoulders’ has no support there, so replacing it is right. The commonest sense should lead, though: use ‘give tax relief to, unburden’.
+- **Skeptic:** partly, error (leans on the dropped length rule, see Counts). Every Wiktionnaire sense is fiscal: ‘Décharger le contribuable d’un impôt’ and ‘Éteindre les hypothèques’. The shipped figurative ‘take a weight off someone’s shoulders’ has no support there, so replacing it is right. The commonest sense should lead, though: use ‘give tax relief to, unburden’.
 
 #### pelotonner (rank 4674)
 - **Gloss:** wind up into a ball → **curl up, wind into a ball**
@@ -3020,7 +3022,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### calorifuger (rank 4677)
 - **Gloss:** provide insulation to prevent heat loss → **insulate**
 - **Checker:** `style`, medium confidence. gloss_lint flagged the current gloss as 6-word definition phrasing; wiktionnaire's 'Assurer une bonne isolation... pour éviter les déperditions de chaleur' is well captured by the plain verb 'insulate'.
-- **Skeptic:** upheld, nitpick. The current six-word phrase is a definition, not a gloss; gloss_lint flagged it ‘definition_like’, and it breaks the read-aloud rule. ‘insulate’ is the plain English verb for ‘Assurer une bonne isolation… pour éviter les déperditions de chaleur’, as in insulating pipes.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current six-word phrase is a definition, not a gloss; gloss_lint flagged it ‘definition_like’, and it breaks the read-aloud rule. ‘insulate’ is the plain English verb for ‘Assurer une bonne isolation… pour éviter les déperditions de chaleur’, as in insulating pipes.
 
 #### fulgurer (rank 4684)
 - **Gloss:** fulgurate → **emit lightning, fulgurate**
@@ -3051,7 +3053,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### poquer (rank 4711)
 - **Gloss:** in pétanque, throw the boule up high so that it stops dead when it hits the ground → **bump, dent**
 - **Checker:** `missing_primary_sense`, medium confidence. The app's gloss uses only the sense tagged 'obsolete' in both en.wiktionary and fr.wiktionnaire (the pétanque sense), while plain, untagged senses exist: fr.wiktionnaire 'Heurter, se heurter' and 'Marquer de coups, meurtrir, battre' / 'Abîmer' (the everyday, chiefly Québécois sense 'to bump/dent').
-- **Skeptic:** partly, error. The current gloss is a 17-word definition of the sense tagged 'obsolete' in both editions, while Wiktionnaire lists untagged 'Heurter, se heurter', 'Marquer de coups, meurtrir, battre' and 'Abîmer', so a change is warranted. But 'dent' narrows 'Abîmer' (damage), and the 'chiefly Québécois' claim has no region tag in the shard. The gloss should follow the untagged senses, for example 'bump, bruise, damage'.
+- **Skeptic:** partly, error (leans on the dropped length rule, see Counts). The current gloss is a 17-word definition of the sense tagged 'obsolete' in both editions, while Wiktionnaire lists untagged 'Heurter, se heurter', 'Marquer de coups, meurtrir, battre' and 'Abîmer', so a change is warranted. But 'dent' narrows 'Abîmer' (damage), and the 'chiefly Québécois' claim has no region tag in the shard. The gloss should follow the untagged senses, for example 'bump, bruise, damage'.
 
 #### dinguer (rank 4721)
 - **Gloss:** ding (hit or strike) → **go flying, fall hard**
@@ -3072,7 +3074,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### jasper (rank 4758)
 - **Gloss:** apply different colors of paint flowing together in order to make it look like jasper stone → **mottle paint to imitate jasper stone**
 - **Checker:** `style`, medium confidence. The gloss is English Wiktionary's full 16-word definition verbatim ('apply different colors of paint flowing together in order to make it look like jasper stone'), too long for VoiceOver; French Wiktionnaire's shorter 'Bigarrer de diverses couleurs en imitant le jaspe' supports trimming, not changing, the sense.
-- **Skeptic:** partly, nitpick. Trimming the 16-word definition is right, but 'mottle paint' puts the wrong thing in object position. The verb colors a surface ('Jasper la tranche d’un livre'; 'Bigarrer de diverses couleurs en imitant le jaspe'), not paint. Use 'mottle to imitate jasper' or 'marble like jasper'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Trimming the 16-word definition is right, but 'mottle paint' puts the wrong thing in object position. The verb colors a surface ('Jasper la tranche d’un livre'; 'Bigarrer de diverses couleurs en imitant le jaspe'), not paint. Use 'mottle to imitate jasper' or 'marble like jasper'.
 
 #### dialectiser (rank 4764)
 - **Gloss:** develop using a dialectical approach → **treat dialectically**
@@ -3082,7 +3084,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### graniter (rank 4783)
 - **Gloss:** granite → **paint to imitate granite**
 - **Checker:** `style`, medium confidence. French Wiktionnaire: 'Imiter le granit avec de la couleur.' — the bare noun 'granite' as a gloss for a verb reads oddly aloud; a plain phrase names the action directly.
-- **Skeptic:** upheld, error. The only sense is 'Imiter le granit avec de la couleur.' 'granite' is not an English verb and tells a learner nothing about the action. 'paint to imitate granite' renders the sense directly and is short enough to read aloud.
+- **Skeptic:** upheld, error (leans on the dropped length rule, see Counts). The only sense is 'Imiter le granit avec de la couleur.' 'granite' is not an English verb and tells a learner nothing about the action. 'paint to imitate granite' renders the sense directly and is short enough to read aloud.
 
 #### doublonner (rank 4810)
 - **Gloss:** duplicate → **overlap, be redundant**
@@ -3127,7 +3129,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### transhumer (rank 4880)
 - **Gloss:** move livestock according to transhumance, move according to transhumance → **move livestock seasonally (transhumance)**
 - **Checker:** `style`, medium confidence. wiktionary_en's two senses ('to move livestock according to transhumance' / 'to move according to transhumance') are near-duplicates once condensed; a single concise phrase reads better aloud and keeps the same primary sense.
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). Condensing the 9-word near-duplicate pair is right, but '(transhumance)' puts in parentheses something that is neither register nor region, which house style forbids. Use 'move livestock seasonally' (or add 'move to seasonal pasture' for Wiktionnaire's intransitive herd sense).
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). Condensing the 9-word near-duplicate pair is right, but '(transhumance)' puts in parentheses something that is neither register nor region, which house style forbids. Use 'move livestock seasonally' (or add 'move to seasonal pasture' for Wiktionnaire's intransitive herd sense).
 
 #### calancher (rank 4882)
 - **Gloss:** die → **die (slang)**
@@ -3137,12 +3139,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### surarmer (rank 4884)
 - **Gloss:** overarm → **over-arm, over-equip with weapons**
 - **Checker:** `wrong_sense`, medium confidence. wiktionnaire: 'Armer excessivement' (over-equip militarily); English 'overarm' is an unrelated word describing a throwing/swimming motion, so the calqued gloss does not convey the actual French sense to an English reader.
-- **Skeptic:** partly, hedge. 'overarm' does come verbatim from English Wiktionary, but it mostly reads as the throwing term, and Wiktionnaire's 'Armer excessivement' is clearer. The proposed 'over-arm' just re-hyphenates the same ambiguous word, and 'over-equip with weapons' is wordy. Use 'arm excessively'.
+- **Skeptic:** partly, hedge (leans on the dropped length rule, see Counts). 'overarm' does come verbatim from English Wiktionary, but it mostly reads as the throwing term, and Wiktionnaire's 'Armer excessivement' is clearer. The proposed 'over-arm' just re-hyphenates the same ambiguous word, and 'over-equip with weapons' is wordy. Use 'arm excessively'.
 
 #### décatir (rank 4885)
 - **Gloss:** get rid of the finish that the manufacturer of a woolen fabric gave to it → **decatize (wool fabric)**
 - **Checker:** `style`, medium confidence. the current gloss is the full French dictionary definition carried over verbatim (15 words, flagged definition_like); 'decatize' is the standard English textile term for this exact process.
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). The current gloss is a 15-word calque of 'Débarrasser du cati, de l’apprêt que le fabricant a donné à une étoffe de laine', so shortening it is right. But 'decatize' is an obscure word and '(wool fabric)' puts non-register text in parentheses, both against house style. Use a plain phrase such as 'remove the finish from wool fabric'.
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current gloss is a 15-word calque of 'Débarrasser du cati, de l’apprêt que le fabricant a donné à une étoffe de laine', so shortening it is right. But 'decatize' is an obscure word and '(wool fabric)' puts non-register text in parentheses, both against house style. Use a plain phrase such as 'remove the finish from wool fabric'.
 - *Note:* Both candidates use 'décati(t)' in an adjectival or unrelated figurative sense (worn cloth; a woman 'se décatit' = ages/wears out), not the literal textile-finishing sense the gloss covers; rejected.
 
 #### cabotiner (rank 4886)
@@ -3180,7 +3182,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### champlever (rank 4937)
 - **Gloss:** dig into a surface to carve a figure into it or to insert enamel ornaments → **hollow out for enamel inlay**
 - **Checker:** `style`, medium confidence. French Wiktionary: 'Creuser une surface pour y tailler une figure ou y incruster des ornements en émail'; the shipped 15-word gloss is a full definition rather than a short phrase suitable for VoiceOver.
-- **Skeptic:** partly, nitpick. The current 15-word gloss is a translated definition, too long to read aloud, so shortening it is right. But 'hollow out for enamel inlay' drops the other half of Wiktionnaire's sense, 'pour y tailler une figure'. A better gloss is 'carve out, hollow out for enamel'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The current 15-word gloss is a translated definition, too long to read aloud, so shortening it is right. But 'hollow out for enamel inlay' drops the other half of Wiktionnaire's sense, 'pour y tailler une figure'. A better gloss is 'carve out, hollow out for enamel'.
 
 #### démailler (rank 4961)
 - **Gloss:** unmask → **unravel**
@@ -3191,7 +3193,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### frégater (rank 4965)
 - **Gloss:** build with a long hull → **build a ship frigate-style**
 - **Checker:** `wrong_sense`, medium confidence. French Wiktionary: 'Donner à un bâtiment la forme d'une frégate... le faire bas sur l'eau, peu chargé d'œuvres mortes et à tillac étroit' — the defining traits are being low in the water with a narrow deck, not a 'long hull'.
-- **Skeptic:** upheld, error. Wiktionnaire's only sense, 'Donner à un bâtiment la forme d’une frégate, c'est-à-dire le faire bas sur l’eau, peu chargé d’œuvres mortes et à tillac étroit', says nothing about a long hull. The shipped gloss is unsupported, and 'build a ship frigate-style' follows the definition.
+- **Skeptic:** upheld, error (leans on the dropped length rule, see Counts). Wiktionnaire's only sense, 'Donner à un bâtiment la forme d’une frégate, c'est-à-dire le faire bas sur l’eau, peu chargé d’œuvres mortes et à tillac étroit', says nothing about a long hull. The shipped gloss is unsupported, and 'build a ship frigate-style' follows the definition.
 - *Note:* Both tier candidates use 'frégate(s)' as a noun (the ship type), not the verb.
 
 #### revouloir (rank 4966)
@@ -3232,7 +3234,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### massicoter (rank 5026)
 - **Gloss:** cut with a paper or sheet-metal cutter → **cut with a paper cutter**
 - **Checker:** `wrong_sense`, medium confidence. Wiktionnaire: 'Couper au massicot.' — a massicot is specifically a paper-cutting guillotine used in printing and bookbinding, not a sheet-metal tool; the added 'sheet-metal cutter' is unsupported.
-- **Skeptic:** upheld, hedge. The only reference sense is Wiktionnaire's 'Couper au massicot', and a massicot is a paper guillotine. Nothing in the shard supports the 'sheet-metal cutter' half of the 7-word gloss the lint flagged, and 'cut with a paper cutter' is shorter and matches the sense.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). The only reference sense is Wiktionnaire's 'Couper au massicot', and a massicot is a paper guillotine. Nothing in the shard supports the 'sheet-metal cutter' half of the 7-word gloss the lint flagged, and 'cut with a paper cutter' is shorter and matches the sense.
 
 #### crachoter (rank 5030)
 - **Gloss:** spittle, splutter, crackle → **splutter, crackle**
@@ -3280,7 +3282,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### décapoter (rank 5114)
 - **Gloss:** put down the hood of a convertible car → **put down a convertible's top**
 - **Checker:** `style`, medium confidence. English Wiktionary: 'to put down the soft top / hood of a convertible (car)' — faithful but wordy for a spoken gloss.
-- **Skeptic:** upheld, nitpick. The checker's point about wordiness is weak, but the change is right on house style. The en sense reads "soft top / hood of a convertible", so "hood" here is the British word, and an American reader of "hood of a convertible car" pictures the engine cover. "put down a convertible’s top" is shorter and unambiguous in American English. The apostrophe must be the curly ’.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The checker's point about wordiness is weak, but the change is right on house style. The en sense reads "soft top / hood of a convertible", so "hood" here is the British word, and an American reader of "hood of a convertible car" pictures the engine cover. "put down a convertible’s top" is shorter and unambiguous in American English. The apostrophe must be the curly ’.
 
 #### gréser (rank 5120)
 - **Gloss:** glaze → **smooth with sandstone**
@@ -3315,7 +3317,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### bourreler (rank 5159)
 - **Gloss:** cruelly torment someone with a painful feeling → **torment**
 - **Checker:** `style`, high confidence. FR 'Remplir de tourment' (fill with torment), commonly seen as 'bourrelé de remords' (tormented by remorse); the current gloss is a wordy definition rather than a short gloss.
-- **Skeptic:** upheld, nitpick. The current gloss is a seven-word definition (lint 'definition_like'). 'Torment' renders Wiktionnaire's 'Remplir de tourment' directly and meets the short, plain house style. The other sense, 'Former des bourrelets', is tagged 'rare', so leaving it out is fine.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss is a seven-word definition (lint 'definition_like'). 'Torment' renders Wiktionnaire's 'Remplir de tourment' directly and meets the short, plain house style. The other sense, 'Former des bourrelets', is tagged 'rare', so leaving it out is fine.
 
 #### ratiociner (rank 5181)
 - **Gloss:** ratiocinate → **reason pedantically, ratiocinate**
@@ -3346,7 +3348,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### encocher (rank 5195)
 - **Gloss:** notch, put a notch in, nock → **notch, nock**
 - **Checker:** `style`, medium confidence. wiktionary_en: 'to notch, put a notch in' and 'to nock (an arrow)'; 'put a notch in' duplicates 'notch' and the gloss_lint flagged it as definition-like/too long.
-- **Skeptic:** upheld, nitpick. Both senses stay: 'to notch, put a notch in' and 'to nock (an arrow)'. 'put a notch in' only restates 'notch', which gloss_lint flagged as definition_like (6 words), so trimming it is a clean style fix with no loss of meaning.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Both senses stay: 'to notch, put a notch in' and 'to nock (an arrow)'. 'put a notch in' only restates 'notch', which gloss_lint flagged as definition_like (6 words), so trimming it is a clean style fix with no loss of meaning.
 - *Note:* Both candidates use 'encoche' as the noun (a notch on a bicycle rim, a mark near an eye), not the verb; rejected and a new sentence authored.
 
 #### liaisonner (rank 5196)
@@ -3393,7 +3395,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### cotonner (rank 5256)
 - **Gloss:** cover oneself with cotton-like fuzz → **become covered in fuzz**
 - **Checker:** `style`, low confidence. wiktionnaire pronominal sense: 'Se couvrir d'un léger duvet analogue au coton, en parlant principalement d'étoffes.'; the current gloss reads as a full definition rather than a short phrase
-- **Skeptic:** upheld, nitpick. The sense is 'Se couvrir d’un léger duvet … en parlant principalement d’étoffes'. It is said of fabric, so 'cover oneself' wrongly suggests an agent doing it deliberately. 'become covered in fuzz' is shorter, clears the definition_like lint and fits the app's pronominal-only entry.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The sense is 'Se couvrir d’un léger duvet … en parlant principalement d’étoffes'. It is said of fabric, so 'cover oneself' wrongly suggests an agent doing it deliberately. 'become covered in fuzz' is shorter, clears the definition_like lint and fits the app's pronominal-only entry.
 
 #### rebouter (rank 5283)
 - **Gloss:** push again, deflesh again, repin, renail → **treat by bonesetting, push again**
@@ -3434,7 +3436,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### placardiser (rank 5341)
 - **Gloss:** gradually remove the powers and responsibilities of an employee → **sideline, marginalize an employee**
 - **Checker:** `style`, medium confidence. wiktionnaire: 'Mettre à l'écart un employé... en lui ôtant progressivement ses prérogatives et responsabilités' is a full definition; the plain English business term 'sideline (an employee)' conveys the same idea more briefly, fitting VoiceOver-length house style.
-- **Skeptic:** partly, nitpick. The current gloss is accurate but is a nine-word definition (definition_like), which the house style for length disfavors, and 'Mettre à l'écart un employé' is what 'sideline' means. But the proposal puts one sense in two comma-separated halves, with 'an employee' attached only to the second. It should be 'sideline an employee'.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The current gloss is accurate but is a nine-word definition (definition_like), which the house style for length disfavors, and 'Mettre à l'écart un employé' is what 'sideline' means. But the proposal puts one sense in two comma-separated halves, with 'an employee' attached only to the second. It should be 'sideline an employee'.
 
 #### contrister (rank 5343)
 - **Gloss:** grieve for → **sadden, distress**
@@ -3454,7 +3456,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### remplumer (rank 5351)
 - **Gloss:** put flesh on the bones, begin to recover weight loss → **regain weight, put on flesh**
 - **Checker:** `style`, medium confidence. wiktionary_en's idiomatic reflexive sense 'to put flesh on the bones (begin to recover weight loss)' uses a parenthetical to gloss the gloss itself, against house style; wiktionnaire's parallel sense is simply 'Reprendre du poids.'
-- **Skeptic:** upheld, nitpick. The current gloss is 10 words and flagged definition_like, and 'recover weight loss' is garbled English. 'regain weight, put on flesh' matches Wiktionnaire's 'Reprendre du poids'.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss is 10 words and flagged definition_like, and 'recover weight loss' is garbled English. 'regain weight, put on flesh' matches Wiktionnaire's 'Reprendre du poids'.
 
 #### octavier (rank 5357)
 - **Gloss:** octavate → **overblow, jump an octave**
@@ -3484,7 +3486,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### débanaliser (rank 5375)
 - **Gloss:** cause something to lose its banal character → **make distinctive**
 - **Checker:** `style`, medium confidence. Wiktionnaire: 'Faire perdre son caractère banal à quelque chose' — the shipped gloss is a 7-word definition-like phrase (flagged), which house style prefers shortened to a plain equivalent.
-- **Skeptic:** partly, nitpick. Shortening the flagged 7-word definition is fair, but 'Faire perdre son caractère banal' means making something less ordinary, which is not the same as making it 'distinctive.' Use 'make less banal, make less ordinary' instead.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Shortening the flagged 7-word definition is fair, but 'Faire perdre son caractère banal' means making something less ordinary, which is not the same as making it 'distinctive.' Use 'make less banal, make less ordinary' instead.
 
 #### décadrer (rank 5381)
 - **Gloss:** remove frame from → **go out of frame, remove from its frame**
@@ -3494,7 +3496,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### déjauger (rank 5382)
 - **Gloss:** remove a boat at least partially from water → **plane (of a boat)**
 - **Checker:** `style`, medium confidence. Wiktionnaire's 'especially' sense, 'Sortir volontairement la proue du bateau, grâce à la vitesse acquise,' describes the standard nautical term 'to plane'; the shipped gloss is an 8-word definition-like phrase (flagged).
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). Shortening the flagged 8-word gloss is right, but 'plane (of a boat)' uses parentheses for something other than register or region and drops Wiktionnaire's main sense, 'Sortir un bateau au moins en partie de l’eau.' Use 'lift out of the water, plane' instead.
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). Shortening the flagged 8-word gloss is right, but 'plane (of a boat)' uses parentheses for something other than register or region and drops Wiktionnaire's main sense, 'Sortir un bateau au moins en partie de l’eau.' Use 'lift out of the water, plane' instead.
 
 #### filouter (rank 5394)
 - **Gloss:** steal → **swindle, cheat**
@@ -3555,7 +3557,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### cuveler (rank 5530)
 - **Gloss:** use planks to prop up a mine and prevent its collapse → **shore up a mine shaft with planking**
 - **Checker:** `style`, low confidence. fr.wiktionary: 'Revêtir les parois d'un puits de mine de planches... afin d'empêcher les éboulements' — the shipped gloss is a full 11-word definition rather than a short VoiceOver-friendly phrase
-- **Skeptic:** upheld, nitpick. The sense 'Revêtir les parois d’un puits de mine de planches… afin d’empêcher les éboulements' concerns a mine shaft, not 'a mine'. 'shore up a mine shaft with planking' is both more accurate and far shorter than the 11-word definition-style gloss.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The sense 'Revêtir les parois d’un puits de mine de planches… afin d’empêcher les éboulements' concerns a mine shaft, not 'a mine'. 'shore up a mine shaft with planking' is both more accurate and far shorter than the 11-word definition-style gloss.
 
 #### tanquer (rank 5532)
 - **Gloss:** get stuck, plant oneself, drive in, plant, stand someone up, stay put, fail, skip, crash → **drive in, get stuck, crash**
@@ -3580,7 +3582,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### refouiller (rank 5550)
 - **Gloss:** re-search → **search again, dig again**
 - **Checker:** `style`, medium confidence. fr.wiktionary: 'Fouiller à nouveau' — the hyphenated coinage 're-search' is confusable with 'research' and reads awkwardly for VoiceOver
-- **Skeptic:** upheld, nitpick. The coinage 're-search' sounds like 'research' when read aloud, which breaks the read-aloud rule. 'search again, dig again' is a plain rendering of Wiktionnaire's lead sense, 'Fouiller à nouveau'.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The coinage 're-search' sounds like 'research' when read aloud, which breaks the read-aloud rule. 'search again, dig again' is a plain rendering of Wiktionnaire's lead sense, 'Fouiller à nouveau'.
 
 #### désoperculer (rank 5553)
 - **Gloss:** open the alveoli of → **uncap (honeycomb)**
@@ -3595,12 +3597,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### carguer (rank 5560)
 - **Gloss:** fold or to roll up the sails against their yards and sometimes against the mast, by means of the cargoes → **brail up (sails)**
 - **Checker:** `wrong_sense`, medium confidence. fr.wiktionary: 'Plier, retrousser les voiles... par le moyen des cargues' — 'cargues' are the brailing ropes, mistranslated in the shipped gloss as 'cargoes'; the gloss is also far too long (20 words) for house style
-- **Skeptic:** partly, error (cites the old parenthesis rule, see Counts). The shipped gloss is wrong: 'cargoes' mistranslates 'cargues' (the ropes that gather the sails), it contains a stray 'or to', and it runs 20 words. But the proposed '(sails)' puts an object in parentheses against house style, and 'brail' is obscure. A better gloss is 'furl sails, brail up', following 'Plier, retrousser les voiles'.
+- **Skeptic:** partly, error (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The shipped gloss is wrong: 'cargoes' mistranslates 'cargues' (the ropes that gather the sails), it contains a stray 'or to', and it runs 20 words. But the proposed '(sails)' puts an object in parentheses against house style, and 'brail' is obscure. A better gloss is 'furl sails, brail up', following 'Plier, retrousser les voiles'.
 
 #### rucher (rank 5581)
 - **Gloss:** pile up hay stacks in the form of a beehive → **stack hay in beehive mounds, shirr fabric**
 - **Checker:** `style`, medium confidence. English Wiktionary: "to pile up hay stacks in the form of a beehive" and "to shirr or to pleat an item of clothing patterned after a beehive" — the app's gloss is flagged definition_like (10 words); a shorter two-sense phrasing reads better aloud.
-- **Skeptic:** upheld, nitpick. The current gloss is Wiktionary's 10-word definition, flagged definition_like, and it omits the second sense that both editions list: "to shirr or to pleat an item of clothing" and "Plisser ou froncer en ruche". The proposal keeps the haystack sense first, adds the second, and is short enough to read aloud.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss is Wiktionary's 10-word definition, flagged definition_like, and it omits the second sense that both editions list: "to shirr or to pleat an item of clothing" and "Plisser ou froncer en ruche". The proposal keeps the haystack sense first, adds the second, and is short enough to read aloud.
 - *Note:* All five tier candidates match the noun "ruche/ruches" (beehive), not the verb "rucher"; rejected as not_verbal.
 
 #### désenvaser (rank 5583)
@@ -3611,7 +3613,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### viroler (rank 5586)
 - **Gloss:** decorate with rings surrounding bugles or hunting horns → **fit with a ferrule**
 - **Checker:** `wrong_sense`, medium confidence. French Wiktionary: "Garnir de viroles" (fit with ferrules) — a general term for reinforcing rings on tool handles, canes, etc.; nothing in the evidence supports the app's narrower restriction to bugles or hunting horns.
-- **Skeptic:** upheld, hedge. The only reference sense is the unrestricted "Garnir de viroles", which does not support the app's narrowing to "bugles or hunting horns" or the word "decorate". The current gloss is also flagged definition_like. "fit with a ferrule" renders the sense directly.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). The only reference sense is the unrestricted "Garnir de viroles", which does not support the app's narrowing to "bugles or hunting horns" or the word "decorate". The current gloss is also flagged definition_like. "fit with a ferrule" renders the sense directly.
 
 #### recéder (rank 5588)
 - **Gloss:** transfer something back → **give back, sell on**
@@ -3675,7 +3677,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### déraser (rank 5668)
 - **Gloss:** undermine → **level off (a wall or piece of ground)**
 - **Checker:** `wrong_sense`, medium confidence. wiktionnaire: 'Abattre le sommet d’un mur ou les parties proéminentes d’un terrain pour parfaire son niveau.' — this is a leveling/trimming operation, not 'undermine' (which means to weaken a structure from below).
-- **Skeptic:** partly, error (cites the old parenthesis rule, see Counts). "undermine" is wrong: all three Wiktionnaire senses mean trimming masonry or ground down to a level ("Abattre le sommet d’un mur ou les parties proéminentes d’un terrain pour parfaire son niveau"). The replacement puts an object in parentheses, which house style reserves for register or region. Use "level off, trim down" instead.
+- **Skeptic:** partly, error (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). "undermine" is wrong: all three Wiktionnaire senses mean trimming masonry or ground down to a level ("Abattre le sommet d’un mur ou les parties proéminentes d’un terrain pour parfaire son niveau"). The replacement puts an object in parentheses, which house style reserves for register or region. Use "level off, trim down" instead.
 
 #### encartonner (rank 5670)
 - **Gloss:** put in or insert (an insert to a publication) → **pack into cartons, insert (a sheet) in a publication**
@@ -3700,12 +3702,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### mégisser (rank 5685)
 - **Gloss:** taw → **tan (a hide) into soft leather, taw**
 - **Checker:** `style`, medium confidence. wiktionnaire: 'Tanner une peau pour en faire un cuir souple.' — 'taw' alone is very obscure; house style prefers the plain phrase first, with the technical term optionally following.
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). "taw" is correct but obscure, and house style prefers a plain phrase, so the direction is right. The replacement puts "(a hide)" in parentheses, which house style reserves for register or region, and it is long. Use "tan into soft leather", based on Wiktionnaire's "Tanner une peau pour en faire un cuir souple".
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). "taw" is correct but obscure, and house style prefers a plain phrase, so the direction is right. The replacement puts "(a hide)" in parentheses, which house style reserves for register or region, and it is long. Use "tan into soft leather", based on Wiktionnaire's "Tanner une peau pour en faire un cuir souple".
 
 #### correctionnaliser (rank 5688)
 - **Gloss:** move a punishable act from the category of crimes that fall under the assize court to that of misdemeanors that fall under the criminal courts → **downgrade (a crime) to a misdemeanor**
 - **Checker:** `style`, medium confidence. wiktionnaire's 25-word definition ('Faire passer un fait punissable de la catégorie des crimes... dans celle des délits...') is carried over verbatim; house style calls for a short, VoiceOver-readable gloss.
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). The 25-word current gloss is a copied definition and should be shortened, but the proposal's "(a crime)" breaks house style, which allows parentheses only for register or region. Use "downgrade a felony to a misdemeanor" instead.
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The 25-word current gloss is a copied definition and should be shortened, but the proposal's "(a crime)" breaks house style, which allows parentheses only for register or region. Use "downgrade a felony to a misdemeanor" instead.
 
 #### postériser (rank 5698)
 - **Gloss:** posterize → **make into a poster, represent as a poster**
@@ -3726,7 +3728,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### voussoyer (rank 5714)
 - **Gloss:** address someone using the formal pronoun vous rather than the informal tu → **address someone as vous**
 - **Checker:** `style`, medium confidence. Wiktionnaire: "Variante de vouvoyer." (dated); the current gloss is a long definition-like clause (flagged by gloss_lint as 12 words with an unknown word "vous") rather than a short VoiceOver-friendly phrase.
-- **Skeptic:** partly, nitpick. Shortening the 12-word definition is right. But Wiktionnaire tags the verb "dated" and "alt-of" vouvoyer, and the proposal leaves out that register even though the checker cites it. Use "(dated) address as vous".
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Shortening the 12-word definition is right. But Wiktionnaire tags the verb "dated" and "alt-of" vouvoyer, and the proposal leaves out that register even though the checker cites it. Use "(dated) address as vous".
 
 #### galéjer (rank 5715)
 - **Gloss:** tease → **joke, tell tall tales**
@@ -3741,7 +3743,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### boyauter (rank 5719)
 - **Gloss:** experience a paroxysm of laughter → **double up with laughter**
 - **Checker:** `style`, medium confidence. Wiktionnaire's only sense, "Se tordre de rire" (colloquial), literally "twist oneself with laughter"; a plainer idiomatic phrase suits VoiceOver better than the clinical "experience a paroxysm of laughter".
-- **Skeptic:** upheld, nitpick. The only sense is "Se tordre de rire" (colloquial), and "double up with laughter" is its idiomatic English equivalent. The current "experience a paroxysm of laughter" is correct but clinical and long, against the rule to prefer a plain phrase that is short enough to read aloud.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The only sense is "Se tordre de rire" (colloquial), and "double up with laughter" is its idiomatic English equivalent. The current "experience a paroxysm of laughter" is correct but clinical and long, against the rule to prefer a plain phrase that is short enough to read aloud.
 
 #### hameçonner (rank 5724)
 - **Gloss:** put a hook on, scam → **phish, scam**
@@ -3772,7 +3774,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### ébouter (rank 5767)
 - **Gloss:** hew off the point (of something) → **trim the end off**
 - **Checker:** `style`, high confidence. same sense as en-Wiktionary's 'to hew off the point (of something)'/wiktionnaire's 'Ôter le ou les bouts de quelque-chose'; the clarifying parenthetical is dropped per house style (parens reserved for register/region)
-- **Skeptic:** upheld, nitpick. The parenthetical '(of something)' is a clarification, not register or region, so it breaks house style, and 'hew off the point' is archaic. 'trim the end off' is a plain rendering of Wiktionnaire's first sense, 'Ôter le ou les bouts de quelque-chose', and fits the bean and plank senses tagged 'especially'.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The parenthetical '(of something)' is a clarification, not register or region, so it breaks house style, and 'hew off the point' is archaic. 'trim the end off' is a plain rendering of Wiktionnaire's first sense, 'Ôter le ou les bouts de quelque-chose', and fits the bean and plank senses tagged 'especially'.
 
 #### zinzinuler (rank 5770)
 - **Gloss:** warble (as a bird) → **warble**
@@ -3808,7 +3810,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### repleuvoir (rank 5800)
 - **Gloss:** rain again, rain for a second time → **rain again**
 - **Checker:** `style`, high confidence. gloss_lint flags this seven-word gloss as definition-like; wiktionary_en's 'to rain again, to rain for a second time' can be shortened to 'rain again' for VoiceOver without losing the sense.
-- **Skeptic:** upheld, nitpick. The gloss_lint 'definition_like' (7 words) finding stands, and 'rain for a second time' only restates 'rain again' (Wiktionnaire: 'Pleuvoir de nouveau'). Trimming to 'rain again' loses no sense and is easier to read aloud.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The gloss_lint 'definition_like' (7 words) finding stands, and 'rain for a second time' only restates 'rain again' (Wiktionnaire: 'Pleuvoir de nouveau'). Trimming to 'rain again' loses no sense and is easier to read aloud.
 
 #### dragéifier (rank 5805)
 - **Gloss:** coat, cover → **sugar-coat (a pill or candy)**
@@ -3906,12 +3908,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### décavaillonner (rank 5965)
 - **Gloss:** work the soil as close as possible to the vines, where a plow cannot reach, in order to weed → **till the soil close to the vines**
 - **Checker:** `style`, medium confidence. Wiktionnaire: 'Travailler la terre au plus près des ceps, là où la charrue ordinaire ne peut intervenir, afin de désherber [...]' — the shipped gloss is the full French definition carried over verbatim (19 words), too long to read aloud.
-- **Skeptic:** upheld, nitpick. The shipped gloss is a 19-word near-verbatim rendering of 'Travailler la terre au plus près des ceps, là où la charrue ordinaire ne peut intervenir...', which breaks the read-aloud rule. 'till the soil close to the vines' keeps the core of the sense.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The shipped gloss is a 19-word near-verbatim rendering of 'Travailler la terre au plus près des ceps, là où la charrue ordinaire ne peut intervenir...', which breaks the read-aloud rule. 'till the soil close to the vines' keeps the core of the sense.
 
 #### embarbouiller (rank 5972)
 - **Gloss:** make dirty, apply coarsely brushed paint → **smear, confuse**
 - **Checker:** `style`, medium confidence. Wiktionnaire lists 'Barbouiller; salir' (smear, dirty) and 'Devenir flou ou confus, embrouiller' (confuse); both surviving quotations use the figurative confuse/muddle sense, so it belongs in the gloss, stated more concisely than 'apply coarsely brushed paint'.
-- **Skeptic:** partly, hedge. The current gloss leaves out Wiktionnaire's second sense, 'Devenir flou ou confus, embrouiller, brouiller'. But 'smear, confuse' drops the 'salir' half of the first sense ('Barbouiller ; salir'). The quotations the checker cites are not in the shard. A better gloss is 'smear, dirty, muddle'.
+- **Skeptic:** partly, hedge (leans on the dropped length rule, see Counts). The current gloss leaves out Wiktionnaire's second sense, 'Devenir flou ou confus, embrouiller, brouiller'. But 'smear, confuse' drops the 'salir' half of the first sense ('Barbouiller ; salir'). The quotations the checker cites are not in the shard. A better gloss is 'smear, dirty, muddle'.
 
 #### dépoitrailler (rank 5974)
 - **Gloss:** uncover or reveal one’s breasts → **bare someone's chest**
@@ -3952,7 +3954,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### chancir (rank 5994)
 - **Gloss:** become covered with mould → **mold, go moldy**
 - **Checker:** `style`, medium confidence. English Wiktionary: 'to rot, to mould' is a plain intransitive verb; the app's wordy 'become covered with mould' also carries the flagged British spelling ('mould' → 'mold').
-- **Skeptic:** upheld, nitpick. The current gloss has the British spelling that the Stage 1 lint caught ('mould → mold') and is wordier than the English sense 'to rot, to mould'. 'mold, go moldy' matches 'Moisir' and follows house style.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss has the British spelling that the Stage 1 lint caught ('mould → mold') and is wordier than the English sense 'to rot, to mould'. 'mold, go moldy' matches 'Moisir' and follows house style.
 
 #### transfiler (rank 5996)
 - **Gloss:** splice → **lace (canvas) together, whip (rope end)**
@@ -3962,12 +3964,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### bornoyer (rank 6006)
 - **Gloss:** look at with one eye closed to verify alignment or surface flatness → **sight along, eyeball for straightness**
 - **Checker:** `style`, medium confidence. Wiktionnaire: 'Regarder d’un œil en fermant l’autre, pour mieux connaître si un alignement est bien droit, si une surface est bien plane.' is a full definition (flagged definition_like, 12 words); shortened to the plain construction-trade term 'sight along'.
-- **Skeptic:** upheld, nitpick. The current gloss is a 12-word definition (Stage 1 definition_like), too long to read aloud. 'sight along, eyeball for straightness' keeps the meaning of 'Regarder d’un œil en fermant l’autre, pour mieux connaître si un alignement est bien droit' in plain words.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss is a 12-word definition (Stage 1 definition_like), too long to read aloud. 'sight along, eyeball for straightness' keeps the meaning of 'Regarder d’un œil en fermant l’autre, pour mieux connaître si un alignement est bien droit' in plain words.
 
 #### éfaufiler (rank 6010)
 - **Gloss:** undo the weft of a fabric by pulling the threads → **unravel, fray (fabric)**
 - **Checker:** `style`, medium confidence. Wiktionnaire: 'Défaire la trame d’un tissu en tirant des fils.' is a full definition (flagged definition_like, 10 words); shortened to the plain equivalent 'unravel, fray.'
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). The 10-word shipped gloss, a translation of 'Défaire la trame d’un tissu en tirant des fils', is too long to read aloud, so shortening it is right. But '(fabric)' is an object parenthetical, and house style keeps parentheses for register or region. Use something like 'unravel, pull the threads from'.
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The 10-word shipped gloss, a translation of 'Défaire la trame d’un tissu en tirant des fils', is too long to read aloud, so shortening it is right. But '(fabric)' is an object parenthetical, and house style keeps parentheses for register or region. Use something like 'unravel, pull the threads from'.
 
 #### anathémiser (rank 6017)
 - **Gloss:** anathemetize → **anathematize**
@@ -3997,7 +3999,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### squattériser (rank 6064)
 - **Gloss:** squat, tie up → **squat**
 - **Checker:** `wrong_sense`, high confidence. English Wiktionary's only sense is 'to squat, to illegally occupy a place'; nothing in either dictionary supports 'tie up', which appears to be an unrelated addition.
-- **Skeptic:** upheld, error. Neither English Wiktionary's only sense, 'to squat, to illegally occupy a place', nor Wiktionnaire's 'Squatter, occuper sans accord du propriétaire' supports 'tie up'. The shard carries no evidence for the second sense, so the gloss should be trimmed to 'squat'.
+- **Skeptic:** upheld, error (leans on the dropped length rule, see Counts). Neither English Wiktionary's only sense, 'to squat, to illegally occupy a place', nor Wiktionnaire's 'Squatter, occuper sans accord du propriétaire' supports 'tie up'. The shard carries no evidence for the second sense, so the gloss should be trimmed to 'squat'.
 
 #### brillantiner (rank 6066)
 - **Gloss:** apply Brillantine → **apply brilliantine to hair**
@@ -4007,7 +4009,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### convivialiser (rank 6068)
 - **Gloss:** cause someone or something to become convivial → **make convivial**
 - **Checker:** `style`, high confidence. Wiktionnaire's primary sense: 'Rendre convivial.'; the shipped gloss is a definition-like paraphrase rather than a short VoiceOver-friendly phrase.
-- **Skeptic:** upheld, nitpick. Wiktionnaire's first sense is 'Rendre convivial.', and 'make convivial' renders it directly. The seven-word 'cause someone or something to become convivial', which the Stage 1 lint flags as definition_like, breaks the house rule that a gloss be short enough to read aloud.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Wiktionnaire's first sense is 'Rendre convivial.', and 'make convivial' renders it directly. The seven-word 'cause someone or something to become convivial', which the Stage 1 lint flags as definition_like, breaks the house rule that a gloss be short enough to read aloud.
 
 #### désembouteiller (rank 6069)
 - **Gloss:** remove from a bottle → **relieve congestion, unclog traffic**
@@ -4042,7 +4044,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### déroder (rank 6110)
 - **Gloss:** thin a forest by clearing dead trees → **thin a forest, clear dead wood**
 - **Checker:** `style`, medium confidence. fr.wiktionary gives two senses, 'Éclaircir une forêt' (thin a forest) and 'Nettoyer une forêt de ses éléments morts' (clear dead wood); the current 7-word gloss (flagged definition_like) runs them together awkwardly.
-- **Skeptic:** upheld, nitpick. Wiktionnaire lists two separate senses, 'Éclaircir une forêt' and 'Nettoyer une forêt de ses éléments morts', but the current gloss merges them, as if thinning were done by clearing dead trees. The proposal splits them with a comma in house style and is shorter.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Wiktionnaire lists two separate senses, 'Éclaircir une forêt' and 'Nettoyer une forêt de ses éléments morts', but the current gloss merges them, as if thinning were done by clearing dead trees. The proposal splits them with a comma in house style and is shorter.
 
 #### organsiner (rank 6121)
 - **Gloss:** organzine → **twist silk into organzine**
@@ -4068,7 +4070,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### désentoiler (rank 6145)
 - **Gloss:** strip → **transfer a painting onto a new canvas**
 - **Checker:** `wrong_sense`, medium confidence. wiktionnaire: "Retirer de dessus la toile la couche de peinture qui constitue un tableau et la reporter sur une toile neuve." — a specific art-conservation technique (transferring the paint layer to a fresh canvas), not the generic 'strip'
-- **Skeptic:** upheld, hedge. The only sense is 'Retirer de dessus la toile la couche de peinture qui constitue un tableau et la reporter sur une toile neuve', a specific transfer technique that the bare 'strip' does not convey. The proposed 'transfer a painting onto a new canvas' matches it and is short enough to read aloud.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). The only sense is 'Retirer de dessus la toile la couche de peinture qui constitue un tableau et la reporter sur une toile neuve', a specific transfer technique that the bare 'strip' does not convey. The proposed 'transfer a painting onto a new canvas' matches it and is short enough to read aloud.
 
 #### bigophoner (rank 6153)
 - **Gloss:** play a bigophone → **phone, call (slang)**
@@ -4078,7 +4080,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### michetonner (rank 6155)
 - **Gloss:** engage in prostitution on a non-full-time basis → **engage in casual prostitution (slang)**
 - **Checker:** `style`, medium confidence. wiktionnaire's first sense: "Se prostituer occasionnellement, sans en faire son métier." (slang) — the same sense, said more briefly for VoiceOver
-- **Skeptic:** upheld, nitpick. The current gloss trips the definition_like lint (7 words) and leaves out the register that Wiktionnaire tags as "slang" on "Se prostituer occasionnellement, sans en faire son métier." The proposal means the same thing, is shorter, and puts the register in parentheses as house style allows.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss trips the definition_like lint (7 words) and leaves out the register that Wiktionnaire tags as "slang" on "Se prostituer occasionnellement, sans en faire son métier." The proposal means the same thing, is shorter, and puts the register in parentheses as house style allows.
 
 #### toussailler (rank 6158)
 - **Gloss:** cough → **cough slightly, cough on and off**
@@ -4093,7 +4095,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### vousoyer (rank 6160)
 - **Gloss:** address someone using the formal pronoun vous rather than the informal tu → **address as vous**
 - **Checker:** `style`, medium confidence. Wiktionnaire: 'Variante de vouvoyer' (variant of vouvoyer, to use the formal 'vous' with someone) — the current gloss is a full definition rather than a short phrase.
-- **Skeptic:** upheld, nitpick. Wiktionnaire gives only "Variante de vouvoyer" (alt-of). The current 12-word definition trips the definition_like lint and is too long to read aloud. "address as vous" keeps the meaning in house-style length.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). Wiktionnaire gives only "Variante de vouvoyer" (alt-of). The current 12-word definition trips the definition_like lint and is too long to read aloud. "address as vous" keeps the meaning in house-style length.
 
 #### décliqueter (rank 6164)
 - **Gloss:** remove the click from → **release the catch of**
@@ -4119,7 +4121,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### enchatonner (rank 6186)
 - **Gloss:** attach a jewel on the collet of a ring → **set a jewel in a ring**
 - **Checker:** `style`, medium confidence. English Wiktionary: 'to attach a jewel on the collet of a ring' — 'collet' is obscure jewelry jargon that VoiceOver users won't recognize; the current gloss keeps the whole definition rather than a plain phrase.
-- **Skeptic:** upheld, nitpick. The current gloss copies English Wiktionary's 'to attach a jewel on the collet of a ring' verbatim: nine words, with the obscure 'collet'. House style prefers a plain phrase short enough to read aloud, and 'set a jewel in a ring' faithfully renders 'Enchâsser une pièce de joaillerie sur le chaton d'une bague'.
+- **Skeptic:** upheld, nitpick (leans on the dropped length rule, see Counts). The current gloss copies English Wiktionary's 'to attach a jewel on the collet of a ring' verbatim: nine words, with the obscure 'collet'. House style prefers a plain phrase short enough to read aloud, and 'set a jewel in a ring' faithfully renders 'Enchâsser une pièce de joaillerie sur le chaton d'une bague'.
 
 #### estrapader (rank 6191)
 - **Gloss:** hang something from the yardarm → **subject to the strappado (torture)**
@@ -4166,7 +4168,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### démoucheter (rank 6222)
 - **Gloss:** remove the protective end from a foil, making the foil into a dangerous weapon → **remove the safety tip from a foil (fencing)**
 - **Checker:** `style`, medium confidence. wiktionnaire, ‘Dégarnir (un fleuret) de son bouton, l’aiguiser pour en faire une arme offensive.’; the shipped gloss restates the whole definition where a shorter fencing-specific phrase suffices
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). The current 14-word gloss is correct but too long to read aloud (definition_like, 14 words), so shortening it is justified. The proposed ‘(fencing)’ is a domain label, and house style allows parentheses only for register or region. Ship ‘remove the safety tip from a foil’.
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current 14-word gloss is correct but too long to read aloud (definition_like, 14 words), so shortening it is justified. The proposed ‘(fencing)’ is a domain label, and house style allows parentheses only for register or region. Ship ‘remove the safety tip from a foil’.
 
 #### dégluer (rank 6225)
 - **Gloss:** remove birdlime (from) → **remove birdlime**
@@ -4176,7 +4178,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### duplexer (rank 6238)
 - **Gloss:** link two points (with cables, wires, etc.) → **link up, connect two locations**
 - **Checker:** `style`, medium confidence. wiktionary_en: 'to link two points (with cables, wires, etc.)' is verbatim but reads as a definition (flagged 'definition_like'); the broadcasting sense is better said briefly.
-- **Skeptic:** partly, nitpick. The current gloss is the verbatim en.wiktionary sense and is accurate, but its parenthetical '(with cables, wires, etc.)' is not a register or region tag, which breaks house style. The checker’s 'broadcasting sense' appears nowhere in the shard, so the right change is simply to drop the parenthetical, giving 'link two points', not to rewrite the gloss.
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). The current gloss is the verbatim en.wiktionary sense and is accurate, but its parenthetical '(with cables, wires, etc.)' is not a register or region tag, which breaks house style. The checker’s 'broadcasting sense' appears nowhere in the shard, so the right change is simply to drop the parenthetical, giving 'link two points', not to rewrite the gloss.
 
 #### bêcheveter (rank 6241)
 - **Gloss:** upend → **place head-to-tail, upend**
@@ -4186,7 +4188,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### congréer (rank 6243)
 - **Gloss:** wrap a line with wire so as to fill the voids between the strands → **worm a rope (nautical)**
 - **Checker:** `style`, medium confidence. wiktionnaire: 'Entourer un cordage avec de la ligne... de manière à remplir les vides entre les torons' describes exactly the nautical technique called 'worming' a rope, which is far shorter than the carried-over 14-word definition (flagged 'definition_like').
-- **Skeptic:** partly, error. The current gloss is wrong on one point. Wiktionnaire wraps the rope 'avec de la ligne ou du quarantenier' (small line, tarred yarn), not wire, and the gloss is also 14 words long. But 'worm a rope' swaps the description for a rare technical word, which house style forbids. The right fix is a short plain phrase such as 'fill a rope’s grooves with yarn (nautical)'.
+- **Skeptic:** partly, error (leans on the dropped length rule, see Counts). The current gloss is wrong on one point. Wiktionnaire wraps the rope 'avec de la ligne ou du quarantenier' (small line, tarred yarn), not wire, and the gloss is also 14 words long. But 'worm a rope' swaps the description for a rare technical word, which house style forbids. The right fix is a short plain phrase such as 'fill a rope’s grooves with yarn (nautical)'.
 
 #### coposséder (rank 6247)
 - **Gloss:** co-own, coown → **co-own**
@@ -4201,7 +4203,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### démutiser (rank 6256)
 - **Gloss:** cause someone or someting to cease being mute → **restore speech, teach to speak**
 - **Checker:** `typo`, high confidence. wiktionnaire: 'Faire cesser d'être muet, en rendant la parole à un muet, ou en initiant un sourd à l'usage de la parole.' — the shipped gloss has a plain typo ('someting', flagged 'unknown_word') and is otherwise a wordy 8-word paraphrase (flagged 'definition_like').
-- **Skeptic:** upheld, error. The shipped gloss contains a real misspelling, 'someting' (unknown_word lint). The proposal 'restore speech, teach to speak' matches the Wiktionnaire sense 'en rendant la parole à un muet, ou en initiant un sourd à l’usage de la parole' and is shorter.
+- **Skeptic:** upheld, error (leans on the dropped length rule, see Counts). The shipped gloss contains a real misspelling, 'someting' (unknown_word lint). The proposal 'restore speech, teach to speak' matches the Wiktionnaire sense 'en rendant la parole à un muet, ou en initiant un sourd à l’usage de la parole' and is shorter.
 
 #### désaciérer (rank 6261)
 - **Gloss:** deacierate, convert steel into iron → **decarburize, convert steel into iron**
@@ -4237,7 +4239,7 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### fransquillonner (rank 6281)
 - **Gloss:** speak French in an affected manner to avoid showing one’s accent, particularly in Belgium → **speak French affectedly to hide one's accent (Belgium)**
 - **Checker:** `style`, medium confidence. fr.wiktionary: "Parler le français de façon affectée, en évitant de montrer son accent"; the existing gloss is a full sentence-length definition rather than a short VoiceOver-friendly phrase
-- **Skeptic:** partly, nitpick. Shortening the 14-word gloss is right, and "hide one’s accent" follows "en évitant de montrer son accent". But the proposal writes "one's" with a straight apostrophe, and house style requires ’. Ship "speak French affectedly to hide one’s accent (Belgium)".
+- **Skeptic:** partly, nitpick (leans on the dropped length rule, see Counts). Shortening the 14-word gloss is right, and "hide one’s accent" follows "en évitant de montrer son accent". But the proposal writes "one's" with a straight apostrophe, and house style requires ’. Ship "speak French affectedly to hide one’s accent (Belgium)".
 
 #### rempiéter (rank 6310)
 - **Gloss:** knit-on → **reknit a stocking foot, rebuild a foundation**
@@ -4263,12 +4265,12 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 #### tauder (rank 6321)
 - **Gloss:** deploy the bimini, tighten the bimini → **rig an awning**
 - **Checker:** `style`, medium confidence. Wiktionnaire (dated): "Déployer, tendre le taud" — 'taud' is a boat awning/tarpaulin, not the modern 'bimini'; the doubled 'deploy... tighten...' phrasing is also redundant for a VoiceOver gloss.
-- **Skeptic:** upheld, hedge. The sense is "Déployer, tendre le taud", and a taud is a generic awning or tarpaulin, not the specific modern 'bimini'. The current gloss also repeats itself and trips the definition_like lint. 'rig an awning' is plain and accurate. Because the sense is tagged 'dated', '(dated)' could optionally be added.
+- **Skeptic:** upheld, hedge (leans on the dropped length rule, see Counts). The sense is "Déployer, tendre le taud", and a taud is a generic awning or tarpaulin, not the specific modern 'bimini'. The current gloss also repeats itself and trips the definition_like lint. 'rig an awning' is plain and accurate. Because the sense is tagged 'dated', '(dated)' could optionally be added.
 
 #### tchiper (rank 6322)
 - **Gloss:** make a sucking sound to show disapproval or contempt → **suck one’s teeth (in disapproval)**
 - **Checker:** `style`, medium confidence. Wiktionnaire's definition describes the well-known Caribbean/Antillean 'teeth-sucking' gesture, which English idiom already names concisely as 'suck one's teeth'.
-- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts). The current gloss is correct but 9 words long and flagged definition_like, and 'suck one’s teeth' names the gesture in "un mouvement de succion" concisely. But '(in disapproval)' uses parentheses for something other than a register or region, which house style forbids. Use 'suck one’s teeth'.
+- **Skeptic:** partly, nitpick (cites the old parenthesis rule, see Counts) (leans on the dropped length rule, see Counts). The current gloss is correct but 9 words long and flagged definition_like, and 'suck one’s teeth' names the gesture in "un mouvement de succion" concisely. But '(in disapproval)' uses parentheses for something other than a register or region, which house style forbids. Use 'suck one’s teeth'.
 
 #### tranchefiler (rank 6323)
 - **Gloss:** bind (a book) → **sew a headband (bookbinding)**
@@ -19419,6 +19421,315 @@ Unsure flag verdicts, left for Josh: **46**. Entries carrying checker notes: **1
 - **Flag `dg`:** — → **add a defect group (see evidence)**
 - **Checker:** French Wiktionary places pleuvasser in the category 'Verbes défectifs en français'; like pleuvoir it is a weather verb used only in impersonal (3rd person) forms, so dg should not be null.
 - **Skeptic:** partly, error. The audit shows the fr category "Verbes défectifs en français", and the app ships impératif.secondSingular and firstSingular forms ("pleuvasse") for a weather verb used only impersonally, so dg = null is wrong. But the proposal names no group ("add a defect group (see evidence)", defect_group_description null). Assign the same impersonal, third-person-only group that pleuvoir uses.
+
+## Added glosses
+
+61 gloss changes that no checker raised, from `corpus/working/added_glosses.json`. No skeptic judged them, and no default rule decides them.
+
+#### fixer (rank 106)
+
+- **Gloss:** fix, fasten → **fasten, fix (in place), set (a date), stare at**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'fix' reads as 'repair', but the French verb mainly means 'fasten, attach, set (a date or price), stare at'.
+
+#### exercer (rank 180)
+
+- **Gloss:** instruct, command, exercise, practice, do → **practice (a profession), exercise (a right or power), exert, train**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'instruct, command, exercise' reads as 'give orders; physical workout', but the French verb mainly means 'practice (a profession), exercise (a right), exert'.
+
+#### nommer (rank 216)
+
+- **Gloss:** nominate, name, call → **name, call, appoint, nominate**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'nominate' reads as 'propose as a candidate', but the French verb mainly means 'name, call, appoint'.
+
+#### impliquer (rank 234)
+
+- **Gloss:** implicate, accuse, imply → **involve, imply, implicate**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'implicate, accuse' reads as 'involve in a crime, accuse', but the French verb mainly means 'imply, involve, entail'.
+
+#### exposer (rank 296)
+
+- **Gloss:** expose → **exhibit, display, explain, expose**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'expose' reads as 'reveal, unmask', but the French verb mainly means 'exhibit, display, set out (explain), expose (to risk)'.
+
+#### animer (rank 304)
+
+- **Gloss:** animate → **liven up, host (a show), lead, animate**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'animate' reads as 'bring to life, make cartoons', but the French verb mainly means 'host, lead (a show or meeting), liven up'.
+
+#### délivrer (rank 375)
+
+- **Gloss:** set free, deliver → **set free, release, issue (a document), deliver (a message)**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'deliver' reads as 'bring packages or mail (that is livrer)', but the French verb mainly means 'set free, issue (a document)'.
+
+#### introduire (rank 381)
+
+- **Gloss:** introduce, insert, put in → **insert, show in, introduce**
+- **Why (hand):** Near false friend. English 'introduce' first suggests introducing one person to another, which is French 'présenter'. Wiktionnaire's first senses are 'Faire entrer une chose dans une autre' (insert, put in) and 'Faire entrer, conduire quelqu’un dans un lieu' (show in), which the Madame Bovary example uses: 'l’introduisit dans le vestibule', 'led her into the entrance hall'. 'introduce' stays last for introducing a species, a law or a character.
+
+#### supporter (rank 440)
+
+- **Gloss:** support, bear → **bear, put up with, hold up**
+- **Why (hand):** False friend. English 'support' reads as 'back, encourage', which Wiktionnaire tags as an Anglicism ('Soutenir, encourager'). The everyday French sense, 'Souffrir ; endurer' (put up with, tolerate), is missing. 'hold up' keeps the literal 'Porter ; soutenir', and the Proust example uses 'bore'.
+
+#### qualifier (rank 450)
+
+- **Gloss:** qualify → **describe (as), call, qualify (for a competition)**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'qualify' reads as 'meet requirements, or add reservations', but the French verb mainly means 'describe (as), call'.
+
+#### assumer (rank 522)
+
+- **Gloss:** assume, take responsibility → **take on, accept, take responsibility for**
+- **Why (hand):** False friend. English 'assume' mainly means 'suppose', a sense English Wiktionary tags as an Anglicism in French. The French verb's senses are 'take on (a role)' and 'embrace, accept, own', and Wiktionnaire's are 'Prendre en charge une responsabilité' and 'Accepter pleinement'. The shipped example, 'la Confédération assume …', is translated 'bears'.
+
+#### ranger (rank 712)
+
+- **Gloss:** order, arrange → **tidy up, put away, arrange, park (a car)**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'order' reads as 'command, or place an order', but the French verb mainly means 'tidy up, put away'.
+
+#### sanctionner (rank 756)
+
+- **Gloss:** sanction → **punish, penalize, ratify**
+- **Why (hand):** False friend. English 'sanction' is read as either 'approve' or 'impose sanctions'. English Wiktionary lists both 'to sanction, to punish' and 'to ratify, to make valid', and Wiktionnaire lists 'Approuver, confirmer' and 'Réprimer une infraction … les punir'. Punishing is the common modern use, and the shipped example is translated 'penalize'. The checker proposed 'sanction, punish'. The skeptic refuted it because both English Wiktionary senses begin 'to sanction', which misses that the English word points two ways.
+
+#### altérer (rank 1140)
+
+- **Gloss:** alter, fiddle with → **impair, spoil, alter, make thirsty**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'alter' reads as 'change neutrally (alter clothes)', but the French verb mainly means 'impair, spoil, falsify (change for the worse)'.
+
+#### léguer (rank 1589)
+
+- **Gloss:** will, bequeath, hand down, pass on → **bequeath, hand down, pass on**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'will' reads as 'the future auxiliary or 'want' when read aloud first', but the French verb mainly means 'bequeath, hand down'.
+
+#### relaxer (rank 1594)
+
+- **Gloss:** relax → **release (a prisoner), acquit, relax**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'relax' reads as 'loosen up, unwind (the only sense given)', but the French verb mainly means 'acquit, release (a defendant); relax is secondary'.
+
+#### gommer (rank 1600)
+
+- **Gloss:** gum, erase, rub out → **erase, rub out, tone down, gum**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'gum' reads as 'stick with gum, chew gum', but the French verb mainly means 'erase, rub out'.
+
+#### accommoder (rank 1677)
+
+- **Gloss:** accommodate → **prepare (food), adapt, accommodate**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'accommodate' reads as 'provide lodging for, make room for', but the French verb mainly means 'adapt, prepare (food); s’accommoder de, put up with'.
+
+#### consumer (rank 1757)
+
+- **Gloss:** consume, use up → **burn up, waste away, consume (destroy)**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'consume' reads as 'eat, drink, or use goods (French consommer)', but the French verb mainly means 'burn up, waste away'.
+
+#### interner (rank 1834)
+
+- **Gloss:** intern, imprison → **intern (confine), detain, commit (to a psychiatric hospital)**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'intern' reads as 'work as an intern', but the French verb mainly means 'confine, detain (in a camp or asylum)'.
+
+#### suppléer (rank 1937)
+
+- **Gloss:** supply, replace → **stand in for, make up for, supply (what is missing)**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'supply' reads as 'provide, furnish', but the French verb mainly means 'stand in for, make up for'.
+
+#### reformer (rank 2082)
+
+- **Gloss:** reform, get/put back together → **re-form, regroup, put back together**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'reform' reads as 'improve, change for the better (French réformer)', but the French verb mainly means 'form again, re-form'.
+
+#### gratifier (rank 2157)
+
+- **Gloss:** gratify, reward → **reward, present with**
+- **Why (hand):** False friend. English 'gratify' means 'please, satisfy'. Wiktionnaire's sense is 'Favoriser quelqu’un en lui faisant un don, une libéralité', to reward someone or present them with something, and its two ironic senses, 'Attribuer mal à propos' and 'Infliger' (of penalties or blows), follow the same 'present with' pattern.
+
+#### évincer (rank 2167)
+
+- **Gloss:** evict, depose, knock out → **oust, push aside, evict (legal)**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'evict' reads as 'throw a tenant out of a home', but the French verb mainly means 'oust, push aside, supplant'.
+
+#### transpirer (rank 2180)
+
+- **Gloss:** transpire, perspire, sweat → **sweat, perspire, leak out (of news)**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'transpire' reads as 'happen, turn out', but the French verb mainly means 'sweat, perspire'.
+
+#### vaciller (rank 2553)
+
+- **Gloss:** vacillate, flicker out → **wobble, sway, flicker, waver**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'vacillate' reads as 'waver in opinion, be indecisive', but the French verb mainly means 'wobble, sway, flicker'.
+
+#### subjuguer (rank 2687)
+
+- **Gloss:** subjugate, enthrall, captivate → **captivate, enthrall, subjugate**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'subjugate' reads as 'conquer, bring under control', but the French verb mainly means 'captivate, enthrall (the conquest sense is literary)'.
+
+#### vaporiser (rank 2745)
+
+- **Gloss:** vaporize → **spray, vaporize**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'vaporize' reads as 'turn into vapor, destroy utterly', but the French verb mainly means 'spray (perfume, a liquid)'.
+
+#### policer (rank 2774)
+
+- **Gloss:** police → **civilize, refine**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'police' reads as 'enforce the law, patrol', but the French verb mainly means 'civilize, refine'.
+
+#### commuter (rank 2848)
+
+- **Gloss:** commute, switch → **switch, commute (a sentence)**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'commute' reads as 'travel to work', but the French verb mainly means 'switch, commute (a sentence)'.
+
+#### oppresser (rank 3216)
+
+- **Gloss:** oppress, squeeze to prevent breathing → **weigh on, stifle, make breathless**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'oppress' reads as 'rule tyrannically, persecute (French opprimer)', but the French verb mainly means 'weigh on, stifle, make breathless'.
+
+#### ulcérer (rank 3292)
+
+- **Gloss:** ulcerate → **wound deeply, embitter, ulcerate**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'ulcerate' reads as 'form ulcers (medical only)', but the French verb mainly means 'wound deeply, embitter, offend; the medical sense is secondary'.
+
+#### adouber (rank 3377)
+
+- **Gloss:** dub, name → **knight, give one’s blessing to, endorse**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'dub, name' reads as 'nickname, or dub a film', but the French verb mainly means 'knight (historically), endorse, give one’s blessing to'.
+
+#### intervertir (rank 3752)
+
+- **Gloss:** invert, reverse, interchange → **swap, switch around, reverse**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'invert' reads as 'turn upside down', but the French verb mainly means 'swap, switch around (the order of)'.
+
+#### déculpabiliser (rank 3854)
+
+- **Gloss:** exonerate → **ease the guilt of, relieve of guilt**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'exonerate' reads as 'officially clear of blame or a charge', but the French verb mainly means 'relieve of guilt feelings, destigmatize'.
+
+#### mollir (rank 3868)
+
+- **Gloss:** mollify, become soft → **soften, weaken, slacken**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'mollify' reads as 'appease, calm someone’s anger', but the French verb mainly means 'soften, weaken, slacken (as the wind)'.
+
+#### mystifier (rank 3967)
+
+- **Gloss:** mystify, fool → **fool, hoax, dupe**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'mystify' reads as 'baffle, puzzle', but the French verb mainly means 'fool, hoax, deceive'.
+
+#### fritter (rank 4007)
+
+- **Gloss:** fritter, sinter → **sinter, frit (glass)**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'fritter' reads as 'waste (fritter away)', but the French verb mainly means 'frit, sinter (glass or ceramics)'.
+
+#### mythifier (rank 4023)
+
+- **Gloss:** mystify, make mysterious → **mythologize, turn into a myth**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'mystify' reads as 'baffle, puzzle', but the French verb mainly means 'mythologize, turn into a myth'.
+
+#### circonvenir (rank 4447)
+
+- **Gloss:** circumvent → **get around (someone), manipulate, win over**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'circumvent' reads as 'bypass (a rule or obstacle)', but the French verb mainly means 'get around a person by manipulation, win over'.
+
+#### préjudicier (rank 4453)
+
+- **Gloss:** prejudice → **harm, be detrimental to**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'prejudice' reads as 'bias (prejudice a jury)', but the French verb mainly means 'harm, be detrimental to'.
+
+#### gargouiller (rank 4480)
+
+- **Gloss:** gargle, rumble → **gurgle, rumble**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'gargle' reads as 'rinse one’s throat', but the French verb mainly means 'gurgle, rumble (as a stomach)'.
+
+#### appointer (rank 4516)
+
+- **Gloss:** salary, appoint, sharpen → **pay a salary to, sharpen (to a point), appoint (rare)**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'appoint' reads as 'name to a post', but the French verb mainly means 'pay a salary to, sharpen to a point'.
+
+#### remâcher (rank 4651)
+
+- **Gloss:** rehash → **brood over, dwell on, chew again**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'rehash' reads as 'restate old material', but the French verb mainly means 'brood over, ruminate on, chew again'.
+
+#### fraîchir (rank 4777)
+
+- **Gloss:** freshen → **turn cooler, freshen (of wind)**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'freshen' reads as 'make fresh, freshen up', but the French verb mainly means 'turn cooler, (wind) freshen'.
+
+#### parjurer (rank 4779)
+
+- **Gloss:** forswear, abjure → **break one’s oath, perjure oneself**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'forswear, abjure' reads as 'give up, renounce', but the French verb mainly means 'break one’s oath, perjure oneself'.
+
+#### caserner (rank 4797)
+
+- **Gloss:** barrack → **quarter in barracks, billet**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'barrack' reads as 'heckle (British), or unclear', but the French verb mainly means 'quarter (troops) in barracks'.
+
+#### engraver (rank 4830)
+
+- **Gloss:** ground → **run aground, cover with gravel**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'ground' reads as 'punish a child, or electrical ground', but the French verb mainly means 'run aground (in gravel), cover with gravel'.
+
+#### clopiner (rank 4863)
+
+- **Gloss:** limp, hobble, halt → **limp, hobble**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'halt' reads as 'stop', but the French verb mainly means 'limp, hobble'.
+
+#### doigter (rank 4883)
+
+- **Gloss:** finger → **finger (music), mark the fingering**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'finger' reads as 'touch with the fingers', but the French verb mainly means 'finger (music), mark the fingering of a piece'.
+
+#### infatuer (rank 5305)
+
+- **Gloss:** infatuate → **make conceited, infatuate**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'infatuate' reads as 'inspire foolish love', but the French verb mainly means 'make conceited, full of oneself'.
+
+#### cémenter (rank 5421)
+
+- **Gloss:** cement → **case-harden (steel), carburize**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'cement' reads as 'bond or fix with cement', but the French verb mainly means 'case-harden (steel) by cementation'.
+
+#### diaprer (rank 5566)
+
+- **Gloss:** variegate, diaper → **variegate, dapple**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'diaper' reads as 'put a diaper on', but the French verb mainly means 'variegate, mottle with colors'.
+
+#### détracter (rank 5602)
+
+- **Gloss:** detract → **disparage, run down**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'detract' reads as 'take away from, lessen', but the French verb mainly means 'disparage, run down'.
+
+#### déhaler (rank 5638)
+
+- **Gloss:** warp → **tow (a ship) out, warp (a ship)**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'warp' reads as 'bend out of shape', but the French verb mainly means 'haul or tow (a ship) with its lines'.
+
+#### toupiller (rank 5651)
+
+- **Gloss:** rout → **shape with a router, rout (woodworking)**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'rout' reads as 'defeat decisively', but the French verb mainly means 'shape with a router (woodworking)'.
+
+#### désajuster (rank 5862)
+
+- **Gloss:** derange, disturb → **disarrange, put out of adjustment**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'derange' reads as 'drive mad', but the French verb mainly means 'disarrange, put out of adjustment'.
+
+#### agioter (rank 5911)
+
+- **Gloss:** speculate → **speculate (on the market)**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'speculate' reads as 'conjecture, guess', but the French verb mainly means 'speculate on the market (pejorative)'.
+
+#### grossoyer (rank 5995)
+
+- **Gloss:** engross → **make a fair copy (of a legal document), engross (law)**
+- **Why (false_friend_sweep):** False friend (high confidence). English 'engross' reads as 'absorb someone’s attention', but the French verb mainly means 'write out a fair copy of a legal document'.
+
+#### ferrouter (rank 6193)
+
+- **Gloss:** piggyback → **ship (trucks) by rail, piggyback (freight)**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'piggyback' reads as 'carry on one’s back', but the French verb mainly means 'ship trucks or trailers by rail'.
+
+#### rapointir (rank 6305)
+
+- **Gloss:** repoint → **sharpen again**
+- **Why (false_friend_sweep):** False friend (medium confidence). English 'repoint' reads as 'redo mortar joints, or aim again', but the French verb mainly means 'sharpen again'.
 
 ## Corpus and quotation picks
 

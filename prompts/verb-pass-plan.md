@@ -1403,7 +1403,8 @@ object in the result contract of the pilot section.
    register or region, a multi-word phrase where no plain single word exists (an obscure
    one-word equivalent such as *accouter* or *anastomose* may follow the plain phrase but
    never replace it), and short enough to be read aloud (the quiz speaks the gloss under
-   VoiceOver).
+   VoiceOver). (**Amended 2026-09-27:** the read-aloud limit is dropped. Length is not a
+   defect, and a correct sense is never cut only to shorten a gloss.)
 2. **Existing example verdict**: verb used verbally in a glossed sense, translation
    faithful, form correct, register fit for learners. Propose a fix only to the English;
    a corpus sentence is flagged, never rewritten, so provenance stays honest.
@@ -1757,6 +1758,13 @@ no default touches and Stage 4 does not apply. A value is a string, or `{fr, en}
 `build_review_page.py` writes to `verb_pass/review.html`, and `--merge` folds its exported
 decisions back.
 
+**Correction (2026-09-27, added glosses):** `approvals.json` also holds `gloss:added|<id>` items.
+These are gloss changes that no checker raised, found by hand or by the false-friend sweep, and
+kept in the tracked `corpus/working/added_glosses.json`. No skeptic judged them and no default
+decides them. `apply_verb_pass.py` applies an accepted one like a gloss item, using its `value`
+if Josh wrote one and the file's `proposed` otherwise. `build_report.py` refuses an added verb
+that already has a `gloss|<id>` item, so one verb never has two gloss changes waiting.
+
 Acceptance: `xmllint --valid` passes and the collation check reports only the pre-existing
 `visionner > visibiliser` pair; `cmp` finds the two example copies identical; the full suite
 passes; `scripts/check_docs.py` is clean; the simulator shows a quotation with its
@@ -1800,7 +1808,10 @@ single-turn, tool-free shards fed by deterministic retrieval are.
    "put down (set down)", where a bare "put down" can read as "insult". A parenthesis that
    only defines a word with one likely reading is still out. Stages 2 and 3 ran under the
    original rule, so the review page marks the verdicts that relied on it (the
-   `parenthesis rule` filter).
+   `parenthesis rule` filter). **Also amended 2026-09-27:** Josh dropped the rule that a
+   gloss be short enough to read aloud, after *réaliser*'s eight live senses were cut to three.
+   A long gloss is not a defect, and a correct sense is never cut only to shorten it. The
+   review page marks the verdicts that relied on length (the `length rule` filter).
 4. **Verbs that take either auxiliary.** One auxiliary per entry, chosen by the sense the
    entry's gloss leads with, which is the precedent already in the file (*monter*,
    *descendre*, *sortir*, *rentrer* and *retourner* are être despite their transitive avoir
