@@ -1392,7 +1392,10 @@ object in the result contract of the pilot section.
    are judged from knowledge,
    and the verdict says so. "Commonest" rests on the Wiktionary tags, on French
    Wiktionary's sense order, which tends to lead with current usage where English
-   Wiktionary leads with the oldest, and on judgment; the verdict names the sense. An
+   Wiktionary leads with the oldest, and on judgment; the verdict names the sense.
+   (**Amended 2026-09-27**, after *issir*: a verb out of use as a whole that survives only
+   in a fossil form, such as a participle (*issu de*) or a set phrase (*ester en justice*),
+   keeps the senses it had in use. The fossil sense may be added but never replaces them.) An
    English sense added or reworded since the glosses were written is not by itself an
    error. The subagent normalizes to the approved house style rather than merely flagging:
    bare infinitive without "to", senses ordered commonest first, American spelling

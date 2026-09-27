@@ -49,7 +49,9 @@ Take each item in turn and try to break it.
   a refutation, and the reason quotes the sense.
 - **Is the evidence the deciding evidence?** "French Wiktionary lists this sense second" is
   weaker than a tag reading `dated`. An appeal to frequency with nothing behind it is not
-  evidence.
+  evidence. A tag does not condemn the senses of a verb that is out of use as a whole and
+  survives only in a fossil form (*issu de*, *ester en justice*): those senses are what it
+  meant, so a proposal that swaps them for the fossil sense is refuted.
 - **House style**, which the proposal must also satisfy: bare infinitive with no leading
   "to", commonest sense first, comma-separated senses and no semicolon, American spelling,
   the curly apostrophe `’`, parentheses for register, region, or a short object or field

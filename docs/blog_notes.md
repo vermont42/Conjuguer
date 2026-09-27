@@ -3774,3 +3774,33 @@ upheld or `partly` gloss items whose reason cites the old rule with `"parenthesi
 the review page has a **parenthesis rule** filter and chip for them. The detection is a regex
 over the reasons, tuned so that sentences approving a register or region parenthesis don't
 count. It is a triage aid, and each card still needs a human read.
+
+## Wiktionary's tags are not a verdict on a dead verb (2026-09-27)
+
+The next card that stopped Josh was *issir*. The app glosses it "leave, exit, go out, get out,
+escape, produce". The checker proposed "descend from, derive from". Its reasoning looked
+careful. Wiktionnaire tags "Sortir" obsolete but leaves "Venir ensuite dans la lignée"
+untagged, and the shipped example, Flaubert's "un homme issu de lui", uses that sense. So the
+checker filed the gloss as `missing_primary_sense`. The skeptic caught one slip, that "derive
+from" rests on a sense also tagged obsolete, and suggested "go out, leave (archaic), descend
+from".
+
+Josh's objection went deeper than either model's. *Issir* is no longer in use apart from its
+past participle. When it *was* in use, it meant leave and go out. The untagged sense is the
+adjective *issu de*, not a use of the verb anyone conjugates. The app conjugates every form of
+*issir*, and a learner who meets *il ist* or *issirent* in an old text needs the meaning it had
+then. Treating the tags as an oracle got that backwards. Wiktionary's tags describe
+present-day usage. For a dead verb they tag every real sense obsolete and leave only the
+fossil, so a rule that moves untagged senses first puts the fossil in front.
+
+A sweep of the gloss cards for verbs whose senses are mostly tagged obsolete or archaic, and of
+the defective verbs, found one more of the same kind. *Ester* ("appear in court, be, stay,
+remain, stand") would have shrunk to "appear in court", the meaning that survives in *ester en
+justice*. There the skeptic had already proposed "appear in court, be (archaic)". *Chaloir* is
+a near miss: the proposal drops only "heat", which neither source supports. Everything else the
+sweep found either only reordered senses or concerned verbs still in use.
+
+The checker and skeptic definitions, the plan's Stage 2 text and the review instructions now
+carry an exception. A verb out of use as a whole that survives only in a fossil form keeps the
+senses it had in use. The fossil sense may be added, but it never replaces them. Only two cards
+turned on this rule, so the review page gets no new filter this time.

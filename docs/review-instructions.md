@@ -115,6 +115,12 @@ What an accept means depends on the task:
   menu to **partly, apostrophe**, and for each card check whether the apostrophe is the reason's
   only complaint. If it is, press **A**. If the reason names another problem too, treat the card
   like any other `partly`.
+- **An obsolete verb keeps its old meanings.** When a verb has dropped out of use and survives
+  only in a fossil form, such as *issir* in *issu de* or *ester* in *ester en justice*,
+  Wiktionary tags its real senses obsolete or archaic, and the models then pushed the fossil
+  sense forward in their place. That is wrong. The gloss should say what the verb meant when
+  people conjugated it, and the fossil sense may be added. Reject a proposal that swaps one
+  for the other, or press **E** to write a gloss that keeps both.
 - **When unsure, hold rather than guess.** Nothing held ships.
 
 ## A good order

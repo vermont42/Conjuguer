@@ -79,6 +79,11 @@ words. Judge **selection and order**, not wording:
   `rare`, `slang` or a region, while a plain untagged sense exists? That is
   `missing_primary_sense`. (`only_tagged_senses` in the record flags the shape; confirm it
   against the senses before acting on it.)
+- The exception is a verb that is out of use as a whole and survives only in a fossil form:
+  a participle used as an adjective (*issu de*, from *issir*) or a set phrase (*ester en
+  justice*). Its tagged senses are what the verb meant when people conjugated it, and a
+  learner looks it up after meeting it in an old text. Keep those senses. The fossil sense
+  may be added, but it never replaces them.
 - Touch the wording only for house style. A sense English Wiktionary added or reworded
   since the app's gloss was written is not by itself an error.
 
