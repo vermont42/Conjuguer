@@ -63,7 +63,7 @@ def skeptic_record(item, entry):
         "verdict": item["skeptic"]["verdict"], "severity": item["skeptic"].get("severity"),
         "reason": item["skeptic"].get("reason"),
         "decision": entry["decision"], "value": entry.get("value"), "note": entry.get("note"),
-        "apostrophe": bool(entry.get("apostrophe")),
+        "apostrophe": bool(entry.get("apostrophe")), "parenthesis": bool(entry.get("parenthesis")),
         "gloss": item.get("gloss_current"),
         "notes": item.get("checker_notes") or [],
     }
@@ -104,7 +104,7 @@ def pick_record(pick, key, entry):
         "key": key, "id": pick["id"], "rank": pick["rank"], "band": band(pick["rank"]), "task": "pick",
         "verdict": pick["status"], "severity": None, "reason": pick["detail"] or None,
         "decision": entry["decision"], "value": None, "note": entry.get("note"), "apostrophe": False,
-        "gloss": None, "notes": [], "current": None,
+        "parenthesis": False, "gloss": None, "notes": [], "current": None,
         "proposed": {"fr": pick["example"].get("fr"), "en": pick["example"].get("en")},
         "checker": f"{pick['example']['kind']} pick", "evidence": source,
         "death_year": candidate.get("death_year"),
@@ -211,6 +211,7 @@ textarea { width:100%; font:inherit; color:inherit; background:var(--bg); border
     <option value="new_example">Authored examples</option><option value="pick">Picks</option></select>
   <select id="verdict"><option value="">Any verdict</option><option value="upheld">upheld</option>
     <option value="partly">partly</option><option value="apostrophe">partly, apostrophe</option>
+    <option value="parenthesis">parenthesis rule</option>
     <option value="late_edition">late_edition</option><option value="verbatim">verbatim</option></select>
   <select id="bandsel"><option value="">All ranks</option></select>
   <select id="state"><option value="open">Undecided or held</option><option value="all">All</option>
@@ -236,7 +237,7 @@ let list = [], pos = 0, editing = false;
 function filter() {
   const t = $("task").value, v = $("verdict").value, b = $("bandsel").value, s = $("state").value;
   list = DATA.filter(r => (!t || r.task === t) && (!b || r.band === b)
-    && (!v || (v === "apostrophe" ? r.apostrophe : r.verdict === v))
+    && (!v || (v === "apostrophe" || v === "parenthesis" ? r[v] : r.verdict === v))
     && (s === "all" || (s === "open") === isOpen(state(r).decision)));
   pos = Math.min(pos, Math.max(0, list.length - 1));
 }
@@ -251,6 +252,7 @@ function render() {
   let h = `<div class="card"><h1>${esc(r.id)}</h1><div class="meta"><span class="chip">${esc(r.task)}</span><span class="chip">rank ${r.rank}</span>`
     + `<span class="chip">${esc(r.verdict)}${r.severity ? ", " + esc(r.severity) : ""}</span>`
     + (r.apostrophe ? `<span class="chip">apostrophe</span>` : "")
+    + (r.parenthesis ? `<span class="chip">parenthesis rule</span>` : "")
     + `<span class="chip decided-${esc(st.decision)}">${esc(st.decision)}</span></div>`;
   if (r.gloss && r.task !== "gloss") h += row("Gloss", esc(r.gloss) + (r.gloss_proposed ? ` → <span class="proposed">${esc(r.gloss_proposed)}</span>` : ""));
   if (r.current != null) h += row("Current", `<div class="big">${esc(show(r.current))}</div>`);

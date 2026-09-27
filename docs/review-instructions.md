@@ -98,8 +98,18 @@ What an accept means depends on the task:
   instead applies the checker's version, which the skeptic has just said isn't quite right.
 - **Gloss house style** (decision 3 of the plan): no leading "to", commonest sense first, senses
   separated by commas (never semicolons), American spelling, the curly apostrophe `’`,
-  parentheses only for register or region (as in "(informal)" or "(historical, racist)"), and a
-  plain phrase rather than an obscure single word. Keep it short enough to hear aloud.
+  parentheses for register or region (as in "(informal)" or "(historical, racist)") or to fix
+  which sense of an ambiguous English word is meant (as in "put down (set down)"), and a plain
+  phrase rather than an obscure single word. Keep it short enough to hear aloud.
+- **A parenthesis that disambiguates is allowed.** Decision 3 first said parentheses were for
+  register or region only, and the models enforced that. You amended it on 2026-09-27, after
+  *déposer*: dropping "(set down)" from "put down (set down)" lets "put down" read as "insult".
+  Filter the verdict menu to **parenthesis rule** to see the 118 glosses whose reason leans on
+  the old rule. On each card, ask whether the gloss misleads without the parenthesis. If it
+  does, reject an upheld card that only drops it, or press **E** on a `partly` card and keep
+  the parenthesis in the skeptic's fix ("pick up (the phone)", not "pick up"). If the
+  parenthesis only defines a word with one likely reading, as in "drain (to remove the liquid
+  from something)", the old verdict stands.
 - **Examples keep the straight apostrophe `'`.** All 1,141 shipped examples use it. The curly
   apostrophe is the gloss style only. The skeptic got this wrong 81 times. Filter the verdict
   menu to **partly, apostrophe**, and for each card check whether the apostrophe is the reason's

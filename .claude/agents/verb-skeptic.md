@@ -52,8 +52,11 @@ Take each item in turn and try to break it.
   evidence.
 - **House style**, which the proposal must also satisfy: bare infinitive with no leading
   "to", commonest sense first, comma-separated senses and no semicolon, American spelling,
-  the curly apostrophe `’`, parentheses only for register or region, a plain phrase over an
-  obscure word, short enough to read aloud.
+  the curly apostrophe `’`, parentheses for register, region, or a short object or field
+  that fixes which sense of an ambiguous English word is meant (`put down (set down)`,
+  `pick up (the phone)`) but never for a definition of a word with only one likely reading,
+  a plain phrase over an obscure word, short enough to read aloud. Before objecting to a
+  parenthesis, ask whether the gloss misleads without it.
 - **For an example**: the French of a corpus or quotation sentence must be copied verbatim
   from the candidate. Any edit to it is a refutation, because `source` and `line` are a
   citation. The translation must be faithful. The verb must be used **verbally**, not as a

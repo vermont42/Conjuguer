@@ -21,6 +21,7 @@ Usage:
 import collections
 import datetime
 import json
+import re
 
 import validate_verb_pass as validator
 import verb_pass_lib as lib
@@ -73,6 +74,29 @@ def apostrophe_partly(item):
     reason = (item["skeptic"].get("reason") or "").lower()
     return (item["task"] in ("example", "new_example") and item["skeptic"]["verdict"] == "partly"
             and "apostrophe" in reason)
+
+
+PARENTHESIS_ALLOWED = re.compile(r"allows parenthes\w* for|(?<!non-)register parenthe|allowed by house style"
+                                 r"|exactly what house style allows|register in parenthes|marking register"
+                                 r"|marks register correctly")
+PARENTHESIS_OBJECTION = re.compile(r"non-register|domain (label|note)|parenthes")
+PARENTHESIS_RULE = re.compile(r"register|region|house style|forbid|misuse|clarif|object|domain|explanatory")
+
+
+def parenthesis_gloss(item):
+    """A gloss verdict that leans on decision 3's old "parentheses only for register or region".
+    Josh amended that rule on 2026-09-27 to allow a parenthesis that fixes which sense of an
+    ambiguous English word is meant ("put down (set down)"), so the objection may no longer hold.
+    The reason still has to be read for any other objection."""
+    if item["task"] != "gloss":
+        return False
+    for sentence in re.split(r"(?<=[.;])\s+", item["skeptic"].get("reason") or ""):
+        sentence = sentence.lower()
+        if PARENTHESIS_ALLOWED.search(sentence):
+            continue
+        if PARENTHESIS_OBJECTION.search(sentence) and PARENTHESIS_RULE.search(sentence):
+            return True
+    return False
 
 
 def item_key(item):
@@ -136,6 +160,8 @@ def item_block(item):
         lines.append(f"- **Checker:** {md(item['evidence'])}")
     if apostrophe_partly(item):
         verdict += " (mentions the apostrophe; examples use the straight one, see Counts)"
+    if parenthesis_gloss(item):
+        verdict += " (cites the old parenthesis rule, see Counts)"
     lines.append(f"- **Skeptic:** {verdict}. {md(skeptic.get('reason'))}")
     for note in item.get("checker_notes") or []:
         lines.append(f"- *Note:* {md(note)}")
@@ -268,6 +294,11 @@ def main():
             "style, to example sentences, but all 1,141 shipped examples use the straight one. Where the "
             "apostrophe is the only objection, the item is effectively upheld; those carry "
             "`\"apostrophe\": true` in approvals.json.", "",
+            f"{sum(1 for i in items if parenthesis_gloss(i)):,} gloss verdicts object to a parenthesis "
+            "under decision 3's original \"parentheses only for register or region\". Josh amended the "
+            "rule on 2026-09-27: a parenthesis may also fix which sense of an ambiguous English word is "
+            "meant, as in \"put down (set down)\", where a bare \"put down\" could read as an insult. "
+            "Upheld and partly ones carry `\"parenthesis\": true` in approvals.json.", "",
             f"Unsure flag verdicts, left for Josh: **{len(unsure)}**. "
             f"Entries carrying checker notes: **{sum(1 for r in records.values() if r.get('notes')):,}**.",
             ""]
@@ -347,6 +378,8 @@ def main():
             entry["value"] = None
             if apostrophe_partly(item):
                 entry["apostrophe"] = True
+        if parenthesis_gloss(item):
+            entry["parenthesis"] = True
         approvals["items"][item_key(item)] = entry
     for pick in picks:
         if pick["status"] in CLEAN_PICKS:

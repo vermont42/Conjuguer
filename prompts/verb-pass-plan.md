@@ -1792,7 +1792,12 @@ single-turn, tool-free shards fed by deterministic retrieval are.
 3. **Gloss house style.** Approved as written in Stage 2: bare infinitive, commonest sense
    first, American spelling, curly apostrophe, parentheses only for register or region, and
    a plain phrase over an obscure single word, which was Josh's 2021 practice and is kept
-   on purpose.
+   on purpose. **Amended 2026-09-27:** a parenthesis may also name a short object or field
+   that fixes which sense of an ambiguous English word is meant, as in *déposer*'s
+   "put down (set down)", where a bare "put down" can read as "insult". A parenthesis that
+   only defines a word with one likely reading is still out. Stages 2 and 3 ran under the
+   original rule, so the review page marks the verdicts that relied on it (the
+   `parenthesis rule` filter).
 4. **Verbs that take either auxiliary.** One auxiliary per entry, chosen by the sense the
    entry's gloss leads with, which is the precedent already in the file (*monter*,
    *descendre*, *sortir*, *rentrer* and *retourner* are être despite their transitive avoir

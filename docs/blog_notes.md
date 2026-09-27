@@ -3750,3 +3750,27 @@ Grep,Glob` flag in the `claude` alias turned out to matter for a different reaso
 it was added for: without it, the native build drops the built-in Grep and Glob tools and
 shadows `grep`/`find` with shell functions instead. Those functions ran five compound loops
 under bash 5.3 without truncating anything, so the flag stays for the tools, not as a guard.
+
+## A parenthesis that earns its place (2026-09-27)
+
+Early in the verb-pass review, the *déposer* card proposed trimming "put down (set down), lay
+down" to "put down, lay down". Both models agreed. The checker called "(set down)" a gloss of
+the gloss, and the skeptic said it marked neither register nor region, which is all decision 3
+allowed parentheses for. Josh pointed out what both had missed. A bare "put down" also means
+"insult" in English, and "(set down)" is exactly what rules that reading out.
+
+The rule itself was the problem, and it had been applied everywhere. A sweep of the skeptic's
+reasons found 148 gloss verdicts leaning on it. Many `partly` verdicts wanted a fix that removed
+the very parenthesis that tells the reader which sense is meant: "pick up (the phone)", "shoot
+(an arrow)", "clear (a table)", "cancel (a stamp)". The checker used such parentheses all the
+time. The skeptic, holding the written rule, objected to them all the time.
+
+Decision 3 now allows a parenthesis that names a short object or field to fix which sense of an
+ambiguous English word is meant. A parenthesis that only defines a word with one likely reading,
+such as "drain (to remove the liquid from something)", is still out. The checker and skeptic
+agent definitions, the plan and the review instructions all say so. Nothing is re-run. Instead
+the change copies the fix for the skeptic's apostrophe mistake. `build_report.py` marks the 118
+upheld or `partly` gloss items whose reason cites the old rule with `"parenthesis": true`, and
+the review page has a **parenthesis rule** filter and chip for them. The detection is a regex
+over the reasons, tuned so that sentences approving a register or region parenthesis don't
+count. It is a triage aid, and each card still needs a human read.

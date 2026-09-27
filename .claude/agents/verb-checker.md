@@ -53,8 +53,11 @@ this style rather than merely flagging a deviation:
 - Senses separated by a comma and a space, commonest first. Never a semicolon.
 - American spelling (`-ize`, `color`, `center`), which is what the file already uses.
 - The curly apostrophe `’`, never the straight `'`.
-- Parentheses only for register or region: `nick (slang)`, `(Quebec)`. Not for a gloss of
-  the gloss.
+- Parentheses for register or region: `nick (slang)`, `(Quebec)`. Also for a short object or
+  field that fixes which sense of an ambiguous English word is meant: `put down (set down)`,
+  because a bare "put down" can read as "insult"; `pick up (the phone)`; `cancel (a stamp)`.
+  Not for a definition that restates a word with only one likely reading: `drain`, not
+  `drain (to remove the liquid from something)`.
 - A plain multi-word phrase beats an obscure single word. `equip with dress` is better than
   `accouter`; an obscure equivalent may follow the plain phrase but never replace it.
 - Short enough to be read aloud. Two or three senses is plenty.

@@ -8,10 +8,10 @@ Two outputs in one file, `corpus/working/verb_pass/gloss_lint.json`:
                      "gloss_provenance": { class, first_sense_is_en_first, only_tagged_senses } } }
 
 The lint rules follow decision 3's house style: bare infinitive, commonest sense first, American
-spelling, the curly apostrophe, parentheses only for register or region, a plain phrase over an
-obscure single word, and short enough to read aloud. They flag; they do not decide. A
-descriptive gloss was often Josh's deliberate choice (*accoutrer* is "equip, furnish with
-dress" rather than "accouter"), so `definition_like` is a list to consider, never a defect.
+spelling, the curly apostrophe, parentheses for register, region or disambiguation, a plain
+phrase over an obscure single word, and short enough to read aloud. They flag; they do not
+decide. A descriptive gloss was often Josh's deliberate choice (*accoutrer* is "equip, furnish
+with dress" rather than "accouter"), so `definition_like` is a list to consider, never a defect.
 
 Provenance matters because it changes what the pass should judge: a gloss copied verbatim from
 English Wiktionary is judged on sense SELECTION and ORDER, one that matches no English sense is
