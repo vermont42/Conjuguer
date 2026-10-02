@@ -76,13 +76,16 @@ the model explicitly (`sonnet`, and confirm in the transcripts that it resolved 
 the verb pass did). The first half was translated by Claude (Opus 4.8), so the credits will name
 both models.
 
-One thing to settle with Josh before step 3, cheap to decide now and costly later:
-
-- **Spelling variants in brackets.** The first half sometimes brackets a variant spelling as its own
-  head (`embruncher`, where the modern verb is *embroncher*; `enbrunchet` and `enbrunket` will
-  follow). The descendants table maps heads, so each new spelling needs a row or a bracket that uses
-  an existing head. The recommendation is to bracket with the head the table already knows, and
-  note the manuscript spelling only when it matters.
+**Spelling variants (decided 2026-10-02).** The scribe spells one verb several ways (*embrunchet*,
+*enbrunket*, *enbrunchet*, *enbrunchit*), and the descendants table maps heads, so a bracket that
+invents a head per spelling attaches nothing. At Josh's choice, **a bracket uses the head the table
+or the gloss table already knows**: all four of those forms bracket as `embruncher (pencher)`, never
+as `enbruncher` or `enbrunkier`. The grokking agents receive every head already in
+`chanson_descendants.json` and the gloss table, and are told to reuse one whenever the line's verb is
+a spelling variant of it. The manuscript spelling is noted only when it matters to the reading (a
+form that could be another verb, or an editor's emendation), as a trailing `<!-- spelling: … -->`
+comment, which the build script strips. A genuinely new verb still gets a new head, which step 4
+audits.
 
 ## 3. Grok the laisses (workflow)
 
@@ -100,7 +103,10 @@ After each batch, in code, not by eye:
 - every original line identical to the helper's verse, character for character (the first half had
   silent normalization risks: editorial brackets `[S]erai`, `m(er)ercit`, dropped apostrophes
   `d or`; they must survive);
-- every bracket token either in the gloss table, a bare `verbs.xml` key, or listed as new;
+- every bracket token either in the gloss table, a bare `verbs.xml` key, or listed as new, and each
+  new head checked against the known heads for a likely spelling variant (the *en-*/*em-*, *-ch-*/*-k-*,
+  *u*/*o* and *ei*/*oi* alternations, or a small edit distance); a likely variant goes back to the
+  agent's batch to be rebracketed with the known head;
 - no preamble lines, and a `---` rule between blocks.
 
 Append passing batches to `chanson.md` in order, update the ledger after each, and add new mappings
@@ -118,12 +124,14 @@ a trace. So:
 
 1. Give the script a `--dry-run` (no JSON written) and a report of every head that has no row in
    the table at all, as distinct from a row with `in_dict: false`. Collect the new heads.
-2. Audit each one as the June audit did: does the Old French head have a modern French descendant,
+2. Before auditing a head, rule out a spelling variant of one already in the table, using the same
+   alternations as step 3's check. A variant is fixed in the bracket, not given a row.
+3. Audit each remaining one as the June audit did: does the Old French head have a modern French descendant,
    and is that descendant in `verbs.xml`? Use the local English-Wiktionary extract under
    `corpus/working/wiktionary/` (its etymology text is offline and fast) before any live lookup. The
    June slices (`corpus/working/audit_out_*.json`, ignored) recorded `wiktionary_checked`, and some
    said `false`; the merged table dropped the field. This time keep the evidence in the row's `note`.
-3. Add the rows to `chanson_descendants.json`, with `confidence` and a `note`, in the existing shape.
+4. Add the rows to `chanson_descendants.json`, with `confidence` and a `note`, in the existing shape.
    Never add a verb to `verbs.xml` to give a head somewhere to attach; list candidates for Josh.
 
 **Acceptance:** the script reports no unmatched token that is not either a deliberate drop (a
