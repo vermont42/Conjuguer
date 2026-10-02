@@ -11,6 +11,8 @@ enum WidgetSnapshotWriter {
   // to relaunch.
   static let futureDayCount = 7
 
+  static let verbOfTheDayRankLimit = 1_500
+
   private static let referenceDate: Date = {
     WidgetDateHelper.calendar.date(from: DateComponents(year: 2025, month: 1, day: 1)) ?? Date()
   }()
@@ -89,10 +91,10 @@ enum WidgetSnapshotWriter {
   }
 
   @MainActor static func eligibleVerbs() -> [Verb] {
-    // Every verb now carries a rank, so rank alone would put abcéder on a lock screen with
-    // no example to show. The pool is the verbs the literature corpus actually covers.
+    // The verb pass gave nearly every verb an example, so an example alone would put abcéder on
+    // a lock screen most days. The pool is the most common verbs that have one.
     Verb.verbs.values
-      .filter { ExampleData.example(for: $0) != nil }
+      .filter { $0.frequency <= verbOfTheDayRankLimit && ExampleData.example(for: $0) != nil }
       .sorted { ($0.frequency, $0.infinitif) < ($1.frequency, $1.infinitif) }
   }
 

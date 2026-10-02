@@ -177,6 +177,18 @@ enum L {
       String(localized: "VerbView.sourceWikipedia", defaultValue: "— Wikipédia, « \(article) » (CC BY-SA 4.0)")
     }
 
+    static func sourceWiktionnaire(_ citation: String) -> String {
+      String(localized: "VerbView.sourceWiktionnaire", defaultValue: "— \(citation), via French Wiktionary")
+    }
+
+    static func sourceWiktionary(_ citation: String) -> String {
+      String(localized: "VerbView.sourceWiktionary", defaultValue: "— \(citation), via Wiktionary")
+    }
+
+    static var sourceWiktionaryExample: String {
+      String(localized: "VerbView.sourceWiktionaryExample")
+    }
+
     static var chansonHeading: String {
       String(localized: "VerbView.chansonHeading")
     }

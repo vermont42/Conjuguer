@@ -27,6 +27,13 @@ struct WidgetSnapshotWriterTests {
     #expect(first.infinitif == second.infinitif, "The same day must always yield the same verb.")
   }
 
+  @Test func testEligibleVerbsAreCommonAndHaveExamples() {
+    let eligible = WidgetSnapshotWriter.eligibleVerbs()
+    #expect(eligible.count > 1_000)
+    #expect(eligible.allSatisfy { $0.frequency <= WidgetSnapshotWriter.verbOfTheDayRankLimit })
+    #expect(eligible.allSatisfy { ExampleData.example(for: $0) != nil })
+  }
+
   @Test func testVerbOfTheDayChangesAcrossConsecutiveDays() {
     let eligible = WidgetSnapshotWriter.eligibleVerbs()
     // The index steps by 127 (a prime, < verb count) per day, so adjacent days land

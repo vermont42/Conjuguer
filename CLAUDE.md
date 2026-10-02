@@ -112,8 +112,10 @@ Info headings and tab buttons are not yet annotated — drive them by `AXLabel` 
 `describe_ui` frame (the lone `AXTextField` on the Verbs tab, `{{16, 70}, {315, 44}}` →
 centre ≈ `173,92` on iPhone 17) before typing. Because verb names carry accents, drive it
 with `type_text.sh --xy 173,92 "<verb>"` (pasteboard route) rather than `axe type`, which
-rejects non-ASCII. Re-measure with `describe_ui.sh` rather than trusting this number: an
-earlier session recorded ≈ `201,191` here, which no longer matches the layout.
+rejects non-ASCII. Re-measure with `describe_ui.sh` rather than trusting this number. The field
+moves: on a fresh launch it sits lower (frame y ≈ 169, so tap ≈ `201,191`), and once a search is
+active it rises to the top (tap ≈ `173,70`, seen 2026-10-01). A tap at the old spot silently
+misses, and the text goes nowhere.
 
 #### iOS 26 control caveats specific to this app
 

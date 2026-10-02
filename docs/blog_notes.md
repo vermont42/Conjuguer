@@ -3853,3 +3853,106 @@ faithfully and at scale. The parenthesis ban, the read-aloud limit and the tag-d
 order all came from instructions, not from model misbehavior. The lesson for the next pass is to
 put a sample of the pilot's actual proposals in front of Josh as review cards before the full
 run, since a person reading twenty real changes catches a bad rule faster than any grading.
+
+## Stage 4 of the verb pass: applying the review, and a copyright hole one stage upstream (2026-10-01)
+
+Josh finished reviewing `approvals.json` and Stage 4 applied it. `corpus/working/apply_verb_pass.py`
+resolves each item's effective decision (its own, or the `defaults` rule for its task and rank
+band), applies the accepted ones, and writes target values rather than toggles, so a second run
+changes nothing. That property earned its keep within the hour. The first rerun, meant only as an
+idempotence check, overwrote the run log with an empty one, and a later fix needed the data
+regenerated from HEAD. Both were cheap because rerunning is safe.
+
+The counts. **853 glosses changed**: 504 upheld by the skeptic, 286 `partly`, and 63 added ones
+(the 61 hand and false-friend cards, plus two below). **27 verbs changed flags**: 23 move between
+pronominal and plain, which carries the auxiliary with it for six, *hachurer* gains its aspirated
+h, *cafter* stops being defective, and *pleuvoter* and *pleuvasser* become third-person-only. The
+defective count is now 73. **4,818 examples were added or replaced**: 1,545 corpus sentences, 850
+Wiktionnaire quotations, 100 from English Wiktionary (92 editors' usage examples and 8 public-domain
+quotations), and 2,323 sentences Sonnet 5 wrote, 29 of which replace a flawed shipped example.
+Twelve flawed examples were removed and six retranslated. **5,918 of the 6,326 verbs now show an
+example**, against 1,141 before. 2,406 of those sentences are Claude's own, so for the first time
+the app's examples are more than a third AI-written, and the credits and App Store copy now say so
+rather than calling them all "real, properly sourced writing".
+
+### Cards the rules could not apply
+
+The review page's contract was simple: accept applies the proposal, or your value if you typed one.
+A handful of accepted cards had nothing to apply. Fourteen existing-example cards agreed an
+example was flawed but carried no English fix and no accepted replacement. Asked, Josh chose to
+drop twelve of those examples and keep *détacher* and *cingler*, whose newly accepted glosses now
+cover the sentence's sense. On *agir* and *développer* he had typed a gloss into the example card,
+"act, be about" and "deploy, unfold, develop, code". The fix he meant was to widen the gloss so the
+Proust sentence fits, not to replace it. Yet he had also accepted the authored replacements. He chose
+the gloss and Proust. Four defect-group cards were accepted without the group id the instructions
+asked for. *cafter*'s evidence was unambiguous (clear it). *pleuvoter* and *pleuvasser* follow their
+sibling *pleuviner* into group 22. *rassir* stays as it is, because nothing in the evidence says
+which of its forms are attested. Each answer went into `approvals.json` as an explicit decision with
+a note, so the script never has to guess.
+
+### What the candidate builder threw away
+
+The most important finding was a hole one stage upstream. The plan's public-domain rule (decision 2:
+quote only authors who died before 1931) was enforced on Wiktionnaire quotations, which carry an
+author. English-Wiktionary candidates carried none. Reading the accepted picks, I noticed a
+sentence about Kim Jong Un sacking officials and another about Sinéad O'Connor's social media, which
+are not usage examples anyone writes. The kaikki extract has a `ref` for each, here *Le Figaro*
+2021 and *La Presse* 2024. `build_candidates.py` kept the text and translation and dropped the
+`ref`, so the checkers saw anonymous sentences, the validator saw a verbatim match, and Josh's
+`pick: accept` default, which rested on "an author who died before 1931", let them through. 45 of
+the 137 accepted English picks were quotations, among them Houellebecq, Virginie Despentes, two
+Astérix albums and Édouard Louis.
+
+The apply script now looks every English pick up again. With no `ref` it is an editor's usage
+example, CC BY-SA, and ships credited to Wiktionary. With a `ref` it ships only if it is on a
+hand-checked list of eight public-domain quotations (Corneille, Hugo, Flaubert, Verne, Rollinat,
+Boylesve, Cervantes in Viardot's 1836 translation, and the *Mercure de France* of 1782), credited
+like the Wiktionnaire ones. The other 37 are left out, and their verbs wait for a later pass. The
+real fix belongs in `build_candidates.py`, which should carry the reference forward and apply the
+same rule it already applies to the French edition. The plan records that, and the new
+`docs/wiktionary-quotation-sources.md` records the rule, the extracts, the attribution formats and
+every quoted author.
+
+### The app and the copy
+
+`ExampleSource` gained three cases instead of the plan's one: `.wiktionnaire` and
+`.wiktionaryQuotation`, both parsed from `<prefix>|author|title|year` and shown as "— Honoré de
+Balzac, « La Cousine Bette » (1846), via French Wiktionary", and `.wiktionaryExample`. A year later
+than the author's death is dropped, since it is a reprint's (five Daudet stories are cited from an
+edition of 1974). A new `ExampleSourceTests` suite pins the parsing and checks that every shipped
+example resolves to a known source. A tenfold larger example set had one side effect on the widget.
+The Verb of the Day pool was "verbs with an example", so it would have gone from mostly common verbs
+to nearly all of them, and lock screens would mostly show verbs like *abcéder*. At Josh's choice it
+is now the top 1,500 ranks with an example, 1,458 verbs.
+
+Updating "every verb count" found two that had been wrong for a while. `Info.defectivenessText`
+opened "Sixty-five French verbs are defective" in both languages, though the app had counted 72
+since the 2026-09-04 cleanup, which checked the value proposition but not this article. And the plan
+expected an example count in `Info.valuePropositionText` that was never there. It has one now,
+matching the App Store description. The plan's suggestion that the credits begin acknowledging
+Wiktionary as the source of the glosses turned out to be moot, because the credits' second paragraph
+already does.
+
+In the simulator, *ficher* shows its Hector Malot quotation with the new attribution, and *rendre*
+reads "give back, return, make" where it said "render". The same screen showed the risk Stage 3
+accepted when it left pick translations unreviewed: Malot's "Moi, monsieur le préfet" became "Well
+now, inspector". About 2,500 pick translations have had no second reader.
+
+Builds, the full suite (279 tests), `xmllint --valid`, the collation check, `check_docs.py` and
+strict SwiftLint all pass. Nothing is committed.
+
+## Stage 5 goes into the plan: the 408 verbs still without an example (2026-10-01)
+
+After Stage 4, Josh asked whether 37 verbs lacked examples. The real number is 408, and Stage 4
+caused only 48 of the gaps: the 37 copyrighted English-Wiktionary quotations it skipped and the 11
+flawed examples it dropped. The rest were filtered out before the review ever saw them. The skeptic
+refuted 219 authored sentences, so they never reached `approvals.json`. 53 picks carried provenance
+warnings and were left out by design. And 83 verbs never got a proposal at all, which nothing in
+Stages 2 or 3 noticed, because a null `new_example` is valid under the result contract.
+
+Stage 5 in the plan takes those verbs through the same check-then-skeptic flow with what the first
+run taught. It fixes `build_candidates.py` so English-Wiktionary quotations keep their authors and
+face the public-domain rule. It builds shards from the live glosses, since an example must fit the
+gloss that ships. Each shard records the prior failed attempt, the contract no longer accepts an
+empty proposal, and the skeptic reads every item, picks included. Following the lesson of 2026-09-27,
+the first two shards go to Josh as review cards before the rest run. It has not run yet.

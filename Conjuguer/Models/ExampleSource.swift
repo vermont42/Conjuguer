@@ -16,11 +16,22 @@ enum ExampleSource: Hashable {
   case swissPublic // ch-… and ch-ncsc-… — Swiss public documents, PD (Art. 5 URG).
   case frenchGov // fr-… — French agencies, Licence Ouverte / Etalab 2.0.
   case wikipedia(article: String) // wp-… — French Wikipedia, CC BY-SA 4.0.
+  case wiktionnaire(author: String, title: String?, year: String?) // wiktionnaire|author|title|year — PD quotation via French Wiktionary.
+  case wiktionaryQuotation(author: String, title: String?, year: String?) // wiktionary|author|title|year — PD quotation via English Wiktionary.
+  case wiktionaryExample // wiktionary — usage example written by English Wiktionary's editors, CC BY-SA 4.0.
   case claude(model: String) // AI-authored tail; model is the raw source string, e.g. "Claude (Opus 5)".
   case other(String)
 
   init(rawSource: String) {
-    if rawSource.hasPrefix("proust") {
+    if rawSource.hasPrefix("wiktionnaire|") {
+      let (author, title, year) = Self.citationFields(rawSource)
+      self = .wiktionnaire(author: author, title: title, year: year)
+    } else if rawSource.hasPrefix("wiktionary|") {
+      let (author, title, year) = Self.citationFields(rawSource)
+      self = .wiktionaryQuotation(author: author, title: title, year: year)
+    } else if rawSource == "wiktionary" {
+      self = .wiktionaryExample
+    } else if rawSource.hasPrefix("proust") {
       self = .proust
     } else if rawSource.hasPrefix("zola") {
       self = .zola
@@ -61,11 +72,38 @@ enum ExampleSource: Hashable {
       return L.VerbView.sourceFrenchGov
     case .wikipedia(let article):
       return L.VerbView.sourceWikipedia(article)
+    case let .wiktionnaire(author, title, year):
+      return L.VerbView.sourceWiktionnaire(Self.citation(author: author, title: title, year: year))
+    case let .wiktionaryQuotation(author, title, year):
+      return L.VerbView.sourceWiktionary(Self.citation(author: author, title: title, year: year))
+    case .wiktionaryExample:
+      return L.VerbView.sourceWiktionaryExample
     case .claude(let model):
       return L.VerbView.sourceClaude(model)
     case .other(let raw):
       return "— " + raw
     }
+  }
+
+  private static func citationFields(_ source: String) -> (author: String, title: String?, year: String?) {
+    let fields = source.split(separator: "|", omittingEmptySubsequences: false).dropFirst().map(String.init)
+    func field(_ index: Int) -> String? {
+      index < fields.count && !fields[index].isEmpty ? fields[index] : nil
+    }
+    return (field(0) ?? "", field(1), field(2))
+  }
+
+  // A title that already carries guillemets, such as "« Le Serpent qui danse » dans Les Fleurs du mal", is shown as is.
+  private static func citation(author: String, title: String?, year: String?) -> String {
+    var parts = [author]
+    if let title {
+      parts.append(title.contains("«") ? title : "« \(title) »")
+    }
+    let citation = parts.joined(separator: ", ")
+    guard let year else {
+      return citation
+    }
+    return "\(citation) (\(year))"
   }
 
   private static func cleanedFilename(_ source: String) -> String {

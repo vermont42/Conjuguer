@@ -13,6 +13,12 @@ In `corpus/json/literature_examples.json` each carries `"source": "Claude (Opus 
 AI authorship is explicit and never attributed to a corpus. Each sentence uses the verb in a
 genuinely **verbal** form (the `token` column).
 
+**Update (2026-10-01):** the verb pass replaced *embroncher*'s sentence below. "Embroncha la tête"
+uses a sense in neither Wiktionary, and the app now ships a Claude (Sonnet 5) sentence in the
+glossed sense (see the last section of `docs/authored-examples.md`). The pass also showed that
+*saillir*'s sentence suits the "jut out" entry, not "saillir (mate)", which now has its own. 62 of
+these 63 ship.
+
 **Why authored, two cases:**
 - **absent** (45 verbs) — the verb's word-forms never occur in La Fontaine or Molière at all
   (genuinely archaic: `occire`, `quérir`, `ester`, `chaloir`, `embattre`, …).

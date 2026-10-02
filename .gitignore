@@ -58,6 +58,8 @@ corpus/working/*
 !corpus/working/build_skeptic_shards.py
 !corpus/working/build_report.py
 !corpus/working/build_review_page.py
+# Stage 4's apply script; its log (verb_pass/applied.json) stays ignored.
+!corpus/working/apply_verb_pass.py
 # Gloss changes added to the review by hand or by the false-friend sweep. Nothing regenerates them.
 !corpus/working/added_glosses.json
 # authors_overrides.json is the exception: hand-checked corrections to the Wikidata

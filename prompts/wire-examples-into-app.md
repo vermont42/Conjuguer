@@ -40,6 +40,9 @@ taxonomy below), `line` = 1-based line in the (gitignored) source `.txt` or `nul
 | `ch-ncsc-…` | Swiss OFCS/NCSC cyber/IT guides | PD — Art. 5 URG | Courtesy credit |
 | `wp-…` | French Wikipedia articles | **CC BY-SA 4.0** | **Required** (attribution + license + share-alike) |
 | `Claude (Opus 4.8)` | 82 original AI-authored examples (19 ranked-verb stragglers + 63 archaic Chanson-only verbs no corpus covered) | — | **Credit Claude** |
+| `wiktionnaire\|<author>\|<title>\|<year>` | Quotations from French Wiktionary by authors who died before 1931 (added 2026-10-01 by the verb pass; see `docs/wiktionary-quotation-sources.md`) | Quoted text public domain; Wiktionary CC BY-SA 4.0 | **Required** (author and work on the example; tier and license in the credits) |
+| `wiktionary\|<author>\|<title>\|<year>`, `wiktionary` | Eight public-domain quotations and 92 editors' usage examples from English Wiktionary (2026-10-01) | Public domain / **CC BY-SA 4.0** | **Required** |
+| `Claude (Sonnet 5)` | 2,323 sentences the verb pass authored and Claude (Opus 5) checked (2026-10-01; `docs/authored-examples.md`) | — | **Credit Claude** |
 
 The manifests under `docs/` map each `source` filename → human title + URL + license. Use them to
 build the display-attribution lookup; **`docs/authored-examples.md`** lists the 19 Claude-authored

@@ -49,7 +49,7 @@ Conjuguer/
 │   ├── Etymologies.json        # Bundled verb etymologies keyed by language and infinitif
 │   ├── Etymology.swift         # Lazy-loading etymology lookup by infinitif
 │   ├── Example.swift           # Codable model for a literature example sentence
-│   ├── ExampleSource.swift     # Provenance enum for example sentences (Proust/Zola/Flaubert/La Fontaine/Molière/gov/Wikipedia/Claude) with per-source attribution
+│   ├── ExampleSource.swift     # Provenance enum for example sentences (Proust/Zola/Flaubert/La Fontaine/Molière/gov/Wikipedia/Wiktionary/Claude) with per-source attribution
 │   ├── FuturSimple.swift       # Futur simple endings
 │   ├── ImageInfo.swift         # Image name + caption/credit for Info articles
 │   ├── Imparfait.swift         # Imparfait endings
@@ -203,6 +203,7 @@ ConjuguerTests/
     ├── DefectGroupTests.swift          # Defect-group membership and tense suppression
     ├── DefectivityAuditTests.swift     # Per-family defectivity audit (traire, braire, férir, poindre, …)
     ├── EngineAuditTests.swift          # Hand-written pins for the stage-A verb-pass fixes (peuvent, dites, suivi, the eight re-modeled verbs, the seventeen être auxiliaries), checked against Wiktionary rather than against the engine
+    ├── ExampleSourceTests.swift        # Parsing of example `source` strings (incl. the Wiktionary citation forms), and that every shipped example's source is known
     ├── IrregularityMetricTests.swift   # Keeps VerbModel.irregularity and the Info text in agreement: only 1-1/2-1/5-1A score 0%, and the shipped regular/irregular split matches the data
     ├── FuturStemsTests.swift           # Futur stem derivation, incl. the trailing-e trim for -re verbs
     ├── GameCollisionTests.swift        # Characterization tests for the three collision shapes
@@ -252,6 +253,7 @@ docs/
 ├── verb-frequency-sources.md       # Research: frequency-of-use sources for all verbs (Sketch Engine prices/caps, GLÀFF, Lexique 4 coverage)
 ├── video_script.md                 # App Store preview script, bilingual captions, and pre-recording checklist
 ├── wikipedia-corpus-sources.md     # Provenance manifest for the Wikipedia corpus tier
+├── wiktionary-quotation-sources.md # Provenance manifest for the Wiktionary quotation tier: extracts, public-domain rule, attribution, authors
 ├── wwdc2026-conjuguer-impact.md    # WWDC 2026 announcements and what they mean for Conjuguer
 └── wwdc2026-*-transcript.txt       # Verbatim WWDC 2026 session transcripts (Apple copyrighted)
 
@@ -278,7 +280,9 @@ corpus/                         # Literature-example pipeline; NOT part of any t
 │                               # and prints the pending list; build_skeptic_shards.py gathers Stage 2's proposals into the skeptic's shards, and
 │                               # build_report.py writes docs/verb-pass-report.md and the approvals file Stage 4 reads; build_review_page.py
 │                               # writes a local keyboard-driven review page for that file and merges its exported decisions back;
-│                               # the added_glosses JSON file holds gloss changes no checker raised (hand-added, or from the false-friend sweep)
+│                               # the added_glosses JSON file holds gloss changes no checker raised (hand-added, or from the false-friend sweep);
+│                               # apply_verb_pass.py (Stage 4) applies the accepted approvals to verbs.xml, both example JSON copies and
+│                               # docs/authored-examples.md, and logs what it changed beside the approvals, in the ignored working/verb_pass/
 └── grokked/                    # Intermediate per-source extraction output
 
 frequency/                      # Verb-frequency pipeline; NOT part of any target. See frequency/README.md
