@@ -4118,3 +4118,26 @@ the verb pass from 853 verbs to 874. The provenance manifest's author table was 
 Stage 4. I regenerated it from the shipped examples, after checking that the method reproduced
 the old table exactly: 187 authors and 850 quotations then, 193 and 891 now. Racine and Riccoboni are
 among the new names. The suite passes, the docs check is clean, and nothing is committed.
+
+## Half a *Chanson* (2026-10-02)
+
+Josh asked for the least-used verb with a *Chanson de Roland* example. It is *embroncher*, rank
+6,141, with one example. He called it a hapax, and the raw Oxford text says otherwise: the verb
+occurs four times, as *embrunchet*, *enbrunket*, *enbrunchet* and *enbrunchit*, always of a head or
+face bowed or a helmet drooping. My first guess was that the scribe's spellings had defeated the
+matching. The real reason was bigger. `corpus/grokked/chanson.md`, the hand-built edition the app's
+*Chanson* examples are generated from, stops at verse 2033. The full treatment paused at laisse CLI on
+2026-06-05, at Oliver's death, and never resumed. Every verb's *Chanson* examples come from the first
+half of the poem, and the whole Baligant episode is missing.
+
+I also took back a claim. I had flagged that a third of the examples carry a line number one lower
+than the raw file's, and the June ledger explains it: a folio marker takes a numbered row, and the
+edition uses Bédier's numbering. The ledger leaves one puzzle open. The raw file and Bédier agree
+again by the poem's last line, 4002, so the offset closes somewhere in the second half, and nobody
+has found where.
+
+Josh asked for a plan rather than a patch. `prompts/chanson-second-half-plan.md` settles the
+numbering first, grokks laisses CLII–CCXCI in workflow batches checked in code, audits the new Old
+French heads (the build script currently drops an unknown head without naming it), runs a skeptic
+over every line the app will show, and then regenerates. *embroncher* with four examples is its
+acceptance case. The June prompt now points to the plan, since its paths had gone stale.

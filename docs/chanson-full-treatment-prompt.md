@@ -1,5 +1,11 @@
 # Prompt: Complete the full-treatment edition of *La Chanson de Roland*
 
+> **Superseded for the remaining work (2026-10-02).** Laisses I–CLI are done; the second half is
+> planned in [`prompts/chanson-second-half-plan.md`](../prompts/chanson-second-half-plan.md). The
+> conventions below still apply, but the paths are stale: the edition is `corpus/grokked/chanson.md`,
+> the ledger `corpus/working/chanson_progress.md`, and the raw text
+> `corpus/originals/literature/chanson-roland-oxford.txt`.
+
 This is a **self-contained working prompt** for a future Claude Code session. Paste
 it (or point the session at this file) and follow the three steps in order. It
 assumes no memory of the conversation that produced `corpus/chanson.md`; everything
