@@ -15,11 +15,15 @@ quotation could replace those). Up to twelve candidates each, in this order of p
   2. wiktionnaire  French-Wiktionary quotations whose reference names an author who died before
                    1931 in authors.json, whose text is one complete sentence with no elision
                    ([…]) and no editorial parenthesis. At most five.
-  3. wiktionary_en English-Wiktionary examples that already carry an English translation. At
+  3. wiktionary_en English-Wiktionary examples that already carry an English translation: an
+                   editors' usage example (no `ref`, `usage` true), or a quotation whose
+                   reference names an author who died before 1931 (`english_citation`). At
                    most two.
 
 Writes `corpus/working/verb_pass/candidates.json`:
-`{ "<verb id>": [ { kind, source, line, token, text, english?, author?, title?, year? } ] }`.
+`{ "<verb id>": [ { kind, source, line, token, text, english?, ref?, usage?, author?, title?,
+year?, death_year?, translator? } ] }`. A translated quotation's death_year is the later
+of its author's and translator's.
 A verb with no candidate gets `[]` and is counted.
 
 Usage:  python3 corpus/working/build_candidates.py
@@ -28,7 +32,7 @@ import collections
 import re
 
 import verb_pass_lib as L
-from build_author_table import author_of
+from build_author_table import author_of, english_citation
 from build_corpus_index import TOKEN_RE, gutenberg_bounds, nfc, ordered_docs
 from build_tail_index import verbalness
 
@@ -231,7 +235,14 @@ def quotation_candidates(verb, french, authors):
     return out
 
 
-def english_candidates(verb, english):
+def english_candidates(verb, english, authors):
+    """English-Wiktionary examples with a translation: editors' usage examples, and quotations
+    whose author died before 1931.
+
+    A quotation carries its `ref`, and `usage` is false; an editors' usage example has no `ref`.
+    Until 2026-10-01 the `ref` was dropped here, so quotations from living authors reached the
+    checkers as anonymous usage examples and passed every check.
+    """
     out = []
     for entry in english.get(verb, []):
         for sense in entry.get("senses", []):
@@ -240,10 +251,22 @@ def english_candidates(verb, english):
                 translation = (example.get("english") or "").strip()
                 if not text or not translation:
                     continue
-                out.append({
+                reference = L.nfc((example.get("ref") or "").strip()) or None
+                candidate = {
                     "kind": "wiktionary_en", "source": "en.wiktionary.org", "line": None,
                     "token": None, "text": text, "english": translation,
-                })
+                    "ref": reference, "usage": reference is None,
+                }
+                if reference:
+                    citation = english_citation(reference)
+                    people = [citation["author"], citation["translator"]]
+                    people = [person for person in people if person] if people[0] else []
+                    if not people or not all(L.is_public_domain(authors.get(p)) for p in people):
+                        continue
+                    candidate.update(author=citation["author"], translator=citation["translator"],
+                                     title=citation["title"], year=citation["year"],
+                                     death_year=max(authors[p]["death_year"] for p in people))
+                out.append(candidate)
                 if len(out) >= MAX_ENGLISH:
                     return out
     return out
@@ -269,7 +292,7 @@ def main():
             continue
         found = list(tiers.get(entry["id"], []))
         found += quotation_candidates(entry["infinitive"], french, authors)
-        found += english_candidates(entry["infinitive"], english)
+        found += english_candidates(entry["infinitive"], english, authors)
         candidates[entry["id"]] = found
         for item in found:
             counts[item["kind"]] += 1

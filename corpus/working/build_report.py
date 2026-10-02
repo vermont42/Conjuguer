@@ -15,8 +15,13 @@ shards and verdicts, and the live verbs.xml, and writes:
 A skeptic item whose verdict file is missing or invalid is reported as `pending` and left out
 of approvals.json, so the script can run mid-Stage 3 without pretending to be finished.
 
+With --pass-dir corpus/working/verb_pass/stage5 (Stage 5.5) it reads the Stage 5 files instead,
+where every item is a new example, and writes docs/verb-pass-report-stage5.md and
+verb_pass/stage5/approvals.json, so the Stage 4 report and approvals are never touched.
+
 Usage:
     python3 corpus/working/build_report.py
+    python3 corpus/working/build_report.py --pass-dir corpus/working/verb_pass/stage5
 """
 import collections
 import datetime
@@ -48,6 +53,8 @@ BANDS = [(1, 1500), (1501, 3000), (3001, 4500), (4501, None)]
 def load_stage2():
     verbs, records = {}, {}
     for path in sorted(validator.SHARDS.glob("shard_*.json")):
+        if not (validator.RESULTS / path.name).exists():
+            continue
         shard = lib.load_json(path)
         results = lib.load_json(validator.RESULTS / path.name)["results"]
         for verb, record in zip(shard["verbs"], results):
@@ -139,6 +146,8 @@ def load_card_notes():
 
 def item_key(item):
     task = f"flag:{item['flag']}" if item["task"] == "flag" else item["task"]
+    if task == "new_example" and (item.get("proposed") or {}).get("kind") not in (None, "authored"):
+        task = "pick"
     return f"{task}|{item['id']}"
 
 
@@ -276,7 +285,228 @@ def band_label(low, high):
     return f"{low:,}–{high:,}" if high else f"{low:,}+"
 
 
+PRIOR_TITLES = {
+    "removed": "flawed example removed in Stage 4",
+    "en_quotation": "English-Wiktionary quotation under copyright",
+    "pick_rejected": "pick rejected in review",
+    "pick_provenance": "pick with a provenance warning",
+    "authored_refuted": "authored sentence refuted",
+    "authored_rejected": "authored sentence rejected in review",
+    "none_proposed": "nothing proposed",
+    "stage5_refuted": "Stage 5 proposal refuted, tried again (5b–5e)",
+    "stage5_replaced": "Stage 5 example replaced at Josh's request",
+    "other": "other",
+}
+
+
+def latest_attempts(items):
+    """The last example item per verb, and the last gloss item, so a retry (a later shard)
+    supersedes the refuted attempt. Gloss items come only from Stage 5c."""
+    latest = {}
+    for item in items:
+        latest[(item["id"], item["task"] == "gloss")] = item
+    superseded = len(items) - len(latest)
+    order = sorted(latest.values(), key=lambda i: (i["rank"], i["id"], i["task"] != "gloss"))
+    return order, superseded
+
+
+def stage5_source(item):
+    proposed, candidate = item["proposed"], item.get("candidate") or {}
+    if proposed.get("kind") == "authored":
+        return proposed.get("source")
+    if proposed.get("kind") == "tier":
+        return f"{candidate.get('source') or proposed.get('source')}:{candidate.get('line') or proposed.get('line')}"
+    parts = [candidate.get("author"), candidate.get("translator") and f"trans. {candidate['translator']}",
+             candidate.get("title"), candidate.get("year"),
+             candidate.get("death_year") and f"d. {candidate['death_year']}"]
+    return f"{proposed.get('kind')}: " + (", ".join(str(part) for part in parts if part) or "editors' usage example")
+
+
+def stage5_block(item):
+    proposed, skeptic, prior = item["proposed"], item["skeptic"], item.get("prior") or {}
+    verdict = skeptic["verdict"] + (f", {skeptic['severity']}" if skeptic.get("severity") else "")
+    lines = [f"#### {item['id']} (rank {item['rank']})",
+             f"- **Gloss:** {md(item['gloss_current'])}",
+             f"- **French:** {md(proposed.get('fr'))}",
+             f"- **English:** {md(proposed.get('en'))}",
+             f"- **Source:** {md(stage5_source(item))}"
+             + (f" · provenance `{item['pick_status']}`" if item.get("pick_status") else "")
+             + f" · token {md(proposed.get('token'))}",
+             f"- **Before:** {PRIOR_TITLES.get(prior.get('reason'), prior.get('reason'))}",
+             f"- **Skeptic:** {verdict}. {md(skeptic.get('reason'))}"]
+    for note in item.get("checker_notes") or []:
+        lines.append(f"- *Note:* {md(note)}")
+    return "\n".join(lines)
+
+
+def main_stage5(report, approvals_path):
+    """Stage 5.5: every item is a new example, authored or picked, judged by the skeptic."""
+    global APPROVALS
+    APPROVALS = approvals_path
+    verbs, records = load_stage2()
+    every = load_skeptic()
+    first = {}
+    for item in every:
+        if item["task"] != "gloss":
+            first.setdefault(item["id"], item)
+    first_refuted = sum(1 for i in first.values() if i["skeptic"]["verdict"] == "refuted")
+    items, superseded = latest_attempts(every)
+    glosses = [i for i in items if i["task"] == "gloss"]
+    standing_glosses = {g["id"] for g in glosses if g["skeptic"]["verdict"] in ("upheld", "partly")}
+    orphans = [i["id"] for i in items if i["task"] != "gloss" and i.get("gloss_proposed")
+               and i["id"] not in standing_glosses]
+    items = [i for i in items if i["task"] != "gloss"]
+    listed = lib.load_json(validator.STAGE5 / "verbs.json")
+    today = datetime.date.today().isoformat()
+    kind_of = {i["id"]: ("authored" if i["proposed"].get("kind") == "authored" else "pick") for i in items}
+    tally = collections.defaultdict(collections.Counter)
+    for item in items:
+        tally[kind_of[item["id"]]][item["skeptic"]["verdict"]] += 1
+    by_prior = collections.defaultdict(collections.Counter)
+    for item in items:
+        by_prior[(item.get("prior") or {}).get("reason")][item["skeptic"]["verdict"]] += 1
+    unchecked = [row for row in listed if row["id"] not in kind_of]
+    standing = [i for i in items if i["skeptic"]["verdict"] in ("upheld", "partly")]
+    without = [i for i in items if i["skeptic"]["verdict"] not in ("upheld", "partly")]
+    judged = sum(tally[k][v] for k in tally for v in ("upheld", "partly", "refuted"))
+    refuted = sum(tally[k]["refuted"] for k in tally)
+    pending = sum(tally[k]["pending"] for k in tally)
+    rate = f"{refuted / judged:.1%}" if judged else "n/a"
+    flagged_notes = [(verbs[i]["rank"], i, r["notes"]) for i, r in records.items() if r.get("notes")]
+    flagged_notes.sort(key=lambda row: (row[0], row[1]))
+
+    out = [f"# Verb pass report, Stage 5 ({today})", "",
+           "Generated by `corpus/working/build_report.py --pass-dir corpus/working/verb_pass/stage5` from the "
+           "Stage 5 check results and skeptic verdicts; see Stage 5 of `prompts/verb-pass-plan.md`. Do not edit "
+           "by hand: re-run the script. Decisions go in `corpus/working/verb_pass/stage5/approvals.json`, which "
+           "the same run writes. Stage 5 is example-only: it took the "
+           f"{len(listed):,} verb entries that still had no example after Stage 4 through the pass again, and "
+           "the skeptic read every proposal, corpus and quotation picks included.", "",
+           "## Counts", "",
+           "| Proposal | Items | Upheld | Partly | Refuted | Pending |", "|---|---|---|---|---|---|"]
+    for kind in ("authored", "pick"):
+        row = tally[kind]
+        out.append(f"| {kind} | {sum(row.values()):,} | " + " | ".join(f"{row[v]:,}" for v in VERDICTS) + " |")
+    total = collections.Counter()
+    for row in tally.values():
+        total.update(row)
+    out.append(f"| **All** | **{sum(total.values()):,}** | " +
+               " | ".join(f"**{total[v]:,}**" for v in VERDICTS) + " |")
+    out += ["", f"Refutation rate over the {judged:,} judged items: **{rate}**." +
+            (f" {pending:,} items have no valid verdict yet." if pending else "") +
+            (f" Each verb is counted once, by its latest attempt: {superseded:,} refuted proposals were "
+             "tried again (Stages 5b–5e), and the retry replaces them here. Counting first attempts only, "
+             f"the skeptic refuted {first_refuted:,} of {len(first):,} ({first_refuted / len(first):.1%})."
+             if superseded and first else ""), "",
+            *([f"**Warning:** {len(orphans)} example(s) fit only a gloss proposal the skeptic refuted: "
+               + ", ".join(orphans) + "."] if orphans else []), "",
+            f"**{len(standing):,} verbs have an example standing for review. {len(without) + len(unchecked):,} "
+            "stay without one** if the review accepts everything that stands"
+            + (f", {len(unchecked):,} of them because their check shard has no valid result yet" if unchecked else "")
+            + ".", "",
+            "### By why the verb had no example before", "",
+            "| Before | Verbs | Upheld | Partly | Refuted | Pending |", "|---|---|---|---|---|---|"]
+    for reason, title in PRIOR_TITLES.items():
+        row = by_prior.get(reason)
+        if row:
+            out.append(f"| {title} | {sum(row.values()):,} | " + " | ".join(f"{row[v]:,}" for v in VERDICTS) + " |")
+    if glosses:
+        gloss_standing = [g for g in glosses if g["skeptic"]["verdict"] in ("upheld", "partly")]
+        out += ["", "## Glosses (Stage 5c)", "",
+                f"{len(glosses):,} gloss changes proposed in Stage 5c, for verbs whose example kept failing "
+                f"because the gloss misstated the verb; {len(gloss_standing):,} stand. Each was proposed with "
+                "CNRTL dictionary evidence (TLFi, Académie, Littré) and judged by the skeptic. A verb's "
+                "example below may fit only its proposed gloss, so accept or reject the two together.", ""]
+        for item in glosses:
+            skeptic = item["skeptic"]
+            out += [f"#### {item['id']} (rank {item['rank']})",
+                    f"- **Gloss:** {md(item['current'])} → **{md(item['proposed'])}**",
+                    f"- **Checker:** `{item['checker_verdict']}`, {item.get('checker_confidence')} confidence. "
+                    f"{md(item['evidence'])}",
+                    f"- **Skeptic:** {skeptic['verdict']}"
+                    + (f", {skeptic['severity']}" if skeptic.get("severity") else "") + f". {md(skeptic.get('reason'))}",
+                    ""]
+    out += ["", "## Examples standing", "",
+            f"{len(standing):,} upheld or partly, in rank order. A `partly` verdict says what would fix the "
+            "item; type the corrected French and English as its value, or reject it.", ""]
+    for item in standing:
+        out += [stage5_block(item), ""]
+    out += ["## Verbs that stay without an example", "",
+            "Each verb below stays without an example: the skeptic refuted its Stage 5 proposal"
+            + (", or it has no valid check result yet" if unchecked else "") + ". The reason says what was wrong.", "",
+            "| Rank | Verb | Gloss | Proposed | Source | Skeptic’s reason |", "|---|---|---|---|---|---|"]
+    for item in without:
+        out.append(f"| {item['rank']} | {item['id']} | {md(item['gloss_current'])} | "
+                   f"{md(item['proposed'].get('fr'))} | {md(stage5_source(item))} | "
+                   f"{md(item['skeptic'].get('reason'))} |")
+    for row in unchecked:
+        out.append(f"| {row['rank']} | {row['id']} | {md(row['gloss'])} | — | — | no valid check result |")
+    out += ["", "## Gloss and flag remarks for a later pass", "",
+            "Stage 5 checkers were told to leave glosses and flags alone and to note anything wrong. "
+            f"{len(flagged_notes):,} verbs carry notes; they are not decisions.", ""]
+    for rank, identifier, notes in flagged_notes:
+        out.append(f"- **{identifier}** ({rank}): " + " · ".join(md(n) for n in notes))
+    out.append("")
+    report.write_text("\n".join(out), encoding="utf-8")
+    print(f"  wrote {report.relative_to(lib.REPO)} ({report.stat().st_size:,} bytes)")
+
+    approvals = {
+        "_readme": [
+            "Stage 5. Set each decision to accept or reject; Stage 5.6 applies only accept. review means "
+            "a human still has to look, and nothing applies it.",
+            "An item's own decision wins. A pending item takes the first default whose task and rank band "
+            "match it (max_rank null means no upper bound); a default never applies to a partly item. All "
+            "defaults start pending.",
+            "Keys are new_example|<verb id> for an authored sentence and pick|<verb id> for a corpus or "
+            "quotation pick. A partly item may carry a value {\"fr\", \"en\"}; accept without one applies "
+            "the proposal unchanged.",
+            "Re-running build_report.py keeps every decision, value and note here.",
+        ],
+        "defaults": [{"task": task, "min_rank": low, "max_rank": high, "decision": "pending"}
+                     for task in ("new_example", "pick", "gloss") for low, high in BANDS],
+        "items": {},
+    }
+    for item in standing:
+        entry = {"decision": "pending", "rank": item["rank"], "verdict": item["skeptic"]["verdict"],
+                 "severity": item["skeptic"].get("severity")}
+        if item.get("pick_status"):
+            entry["status"] = item["pick_status"]
+        if item["skeptic"]["verdict"] == "partly":
+            entry["value"] = None
+            if apostrophe_partly(item):
+                entry["apostrophe"] = True
+        approvals["items"][item_key(item)] = entry
+    for item in glosses:
+        verdict = item["skeptic"]["verdict"]
+        if verdict in ("upheld", "partly"):
+            entry = {"decision": "pending", "rank": item["rank"], "verdict": verdict,
+                     "severity": item["skeptic"].get("severity")}
+            if verdict == "partly":
+                entry["value"] = None
+            approvals["items"][item_key(item)] = entry
+    carried = carry_over_decisions(approvals)
+    lib.write_json(APPROVALS, approvals)
+    print(f"  kept {carried:,} hand-made decision(s) from the previous approvals.json")
+    if glosses:
+        print(f"  Stage 5c glosses: {len(glosses)} proposed, "
+              f"{sum(1 for g in glosses if g['skeptic']['verdict'] in ('upheld', 'partly'))} standing")
+    print(f"  {len(approvals['items']):,} approval items; judged {judged:,}, refuted {refuted:,} ({rate}), "
+          f"pending {pending:,}; {len(without) + len(unchecked):,} verbs stay without an example")
+
+
 def main():
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--pass-dir", help="a pass directory other than verb_pass/ (Stage 5: "
+                                           "corpus/working/verb_pass/stage5)")
+    options = parser.parse_args()
+    if options.pass_dir:
+        directory = (lib.REPO / options.pass_dir).resolve()
+        if directory != validator.STAGE5.resolve():
+            sys.exit("--pass-dir supports only corpus/working/verb_pass/stage5")
+        validator.use_pass_dir(validator.STAGE5, example_only=True)
+        main_stage5(lib.REPO / "docs" / "verb-pass-report-stage5.md", validator.STAGE5 / "approvals.json")
+        return
     verbs, records = load_stage2()
     items = load_skeptic()
     picks = build_picks(verbs, records)

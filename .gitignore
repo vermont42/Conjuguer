@@ -58,6 +58,11 @@ corpus/working/*
 !corpus/working/build_skeptic_shards.py
 !corpus/working/build_report.py
 !corpus/working/build_review_page.py
+# Stage 5: the list of verbs still without an example, which the Stage 5 shards are built from.
+# Its output, verb_pass/stage5/, stays ignored like the other pass directories.
+!corpus/working/list_missing_examples.py
+# Stage 5c: fetches CNRTL dictionary entries for a few verbs as evidence; its cache stays ignored.
+!corpus/working/fetch_cnrtl.py
 # Stage 4's apply script; its log (verb_pass/applied.json) stays ignored.
 !corpus/working/apply_verb_pass.py
 # Gloss changes added to the review by hand or by the false-friend sweep. Nothing regenerates them.

@@ -13,10 +13,19 @@ agent needs inline, so the agent runs in a single turn with no tools:
 `author_needed` is true when the verb needs an example and no candidate was found for it, so
 the agent will have to write one.
 
+`--only verbs.json --out <dir>` (both relative to the repository root) shards only the entries a list names, each carrying a `prior`
+field from the list: Stage 5, which takes the verbs still without an example through the pass
+again. The gloss is the live one in verbs.xml, as it is for every run, and the candidates are
+whatever candidates.json holds now.
+
 `--pilot` writes three shards under `verb_pass/pilot/` with the canaries the plan's pilot
 section lists, plus `pilot_answer_key.json` recording what each canary's right answer is.
 
 Usage:  python3 corpus/working/build_verb_pass_shards.py [--pilot]
+        python3 corpus/working/build_verb_pass_shards.py --only corpus/working/verb_pass/stage5/verbs.json \
+            --out corpus/working/verb_pass/stage5/shards
+        python3 corpus/working/build_verb_pass_shards.py --only corpus/working/verb_pass/stage5/retry.json \
+            --out corpus/working/verb_pass/stage5/shards --append
 """
 import argparse
 import collections
@@ -109,12 +118,15 @@ def build_records():
     return records
 
 
-def write_shards(records, directory, size=SHARD_SIZE):
-    if directory.exists():
+def write_shards(records, directory, size=SHARD_SIZE, append=False):
+    first = 1
+    if append and directory.exists():
+        first += max((int(path.stem.split("_")[1]) for path in directory.glob("shard_*.json")), default=0)
+    elif directory.exists():
         shutil.rmtree(directory)
-    directory.mkdir(parents=True)
+    directory.mkdir(parents=True, exist_ok=True)
     written = []
-    for number, start in enumerate(range(0, len(records), size), start=1):
+    for number, start in enumerate(range(0, len(records), size), start=first):
         payload = {"shard": number, "verbs": records[start:start + size]}
         path = directory / f"shard_{number:03d}.json"
         with open(path, "w", encoding="utf-8") as out:
@@ -265,13 +277,38 @@ def build_pilot(records):
               f"{record['task']} → {record['expected_verdict']}")
 
 
+def only(records, path):
+    """The records `path` lists (list_missing_examples.py's verbs.json), each carrying its `prior`."""
+    wanted = {row["id"]: row for row in L.load_json(path)}
+    kept = []
+    for record in records:
+        row = wanted.get(record["id"])
+        if row is not None:
+            extra = {"cnrtl": row["cnrtl"]} if "cnrtl" in row else {}
+            kept.append({**record, "prior": {"reason": row["reason"], **row["prior"]}, **extra})
+    missing = set(wanted) - {record["id"] for record in kept}
+    if missing:
+        raise SystemExit(f"--only names verbs the app does not have: {sorted(missing)[:5]}")
+    return kept
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pilot", action="store_true", help="also write the three pilot shards")
+    parser.add_argument("--only", help="a verbs.json from list_missing_examples.py: shard only these")
+    parser.add_argument("--out", help="the shard directory (default verb_pass/shards)")
+    parser.add_argument("--append", action="store_true",
+                        help="number the new shards after the directory's last one and keep the rest "
+                             "(Stage 5b: retry.json as one more Stage 5 shard)")
     arguments = parser.parse_args()
 
     records = build_records()
-    written = write_shards(records, L.OUT_DIR / "shards")
+    if arguments.only:
+        records = only(records, L.REPO / arguments.only)
+    directory = L.REPO / arguments.out if arguments.out else L.OUT_DIR / "shards"
+    if directory.resolve() == (L.OUT_DIR / "shards").resolve() and arguments.only:
+        raise SystemExit("--only would overwrite the Stage 2 shards; pass --out")
+    written = write_shards(records, directory, append=arguments.append)
     sizes = [path.stat().st_size for path in written]
     print(f"  {len(written)} shards of {SHARD_SIZE}, {len(records):,} verb entries")
     print(f"  shard size: {min(sizes):,} – {max(sizes):,} bytes, "

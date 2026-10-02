@@ -6,9 +6,9 @@ public domain, and the rule (decision 2 of prompts/verb-pass-plan.md) is the aut
 year, not the edition year the reference shows: usable iff the author died before 1931. An
 unresolved author is not public domain.
 
-Reads every `ref` on a French-Wiktionary example for the verbs the pass may need an example for
-(no app example at all, plus the ones whose example is Claude-authored), parses the author's
-name out of the reference, resolves the names against Wikidata's SPARQL endpoint in batches,
+Reads every `ref` on a French- or English-Wiktionary example for the verbs the pass may need an
+example for (no app example at all, plus the ones whose example is Claude-authored), parses the
+author's name out of the reference (`author_of`, `english_citation`), resolves the names against Wikidata's SPARQL endpoint in batches,
 and writes `corpus/working/wiktionary/authors.json`:
 
     { "<name>": { "qid", "label", "death_year" | null, "status" } }
@@ -18,7 +18,7 @@ corrections live (Dumas père versus fils being the obvious one).
 
 Raw SPARQL answers are cached under `wikidata_cache/`, so a re-run costs nothing.
 
-Usage:  python3 corpus/working/build_author_table.py [--batch 100] [--no-network]
+Usage:  python3 corpus/working/build_author_table.py [--batch 100] [--no-network] [--extend]
 """
 import argparse
 import collections
@@ -41,6 +41,7 @@ VERBS_XML = REPO / "Conjuguer" / "Models" / "verbs.xml"
 EXAMPLES = REPO / "corpus" / "json" / "literature_examples.json"
 WIKTIONARY = REPO / "corpus" / "working" / "wiktionary"
 FR_REFERENCE = WIKTIONARY / "wiktionary_fr_verbs.json"
+EN_REFERENCE = WIKTIONARY / "wiktionary_en_verbs.json"
 OUT = WIKTIONARY / "authors.json"
 OVERRIDES = WIKTIONARY / "authors_overrides.json"
 CACHE = WIKTIONARY / "wikidata_cache"
@@ -57,6 +58,20 @@ NOT_A_PERSON = re.compile(
 )
 TRANSLATION = re.compile(r"\btrad(\.|uction|uit)", re.IGNORECASE)
 LEADING_YEAR = re.compile(r"^\(?(1[0-9]{3}|20[0-9]{2})\)?\s*[,:—–-]?\s*")
+# An English-Wiktionary reference opens with its date: "1862, ", "2021 May 2, ", "1913–1927, ",
+# "1974 [recorded 1964], ", "c. 1590, ".
+EN_LEADING_DATE = re.compile(
+    r"^(?:\(Can we date this quote\?\)|(?:c\.\s*|a\.\s*)?(1[0-9]{3}|20[0-9]{2}|1[0-9]-+)"
+    r"(?:\s*[–—-]\s*\d{2,4})?(?:\s+[A-Z][a-z]+(?:\s+\d{1,2})?)?(?:\s*\[[^\]]*\])?)\s*,\s*")
+# "in Louis Viardot, transl., L’Ingénieux Hidalgo…": the quotation is a translation into French.
+EN_TRANSLATOR = re.compile(r"^transl\.?$")
+# "1837, Louis Viardot, “I”, in L’Ingénieux Hidalgo…, translation of original by Miguel de Cervantes"
+ORIGINAL_BY = re.compile(r"^translation of (?:the )?original by (.+)$")
+# The fields between an author and the work's title that locate a passage rather than name it.
+EN_LOCATOR = re.compile(
+    r"^(chapters?|act|scene|book|volumes?|vol\.|tome|part|canto|letter|section|numbers?|pages?|"
+    r"translated by|transl\.|edited by|published|republished|→ISBN|[IVXLC]+(?:\.\d+)?$|\d)",
+    re.IGNORECASE)
 
 # Wikidata occupations that make a label's holder the kind of person a literary quotation is
 # attributed to. Used only to break a tie when one label matches several humans.
@@ -153,24 +168,96 @@ def author_of(reference):
     return name
 
 
+def split_fields(text):
+    """Comma-separated fields, ignoring commas inside “…”, «…», […] and (…)."""
+    fields, depth, current = [], 0, ""
+    for character in text:
+        if character in "“«[(":
+            depth += 1
+        elif character in "”»])" and depth:
+            depth -= 1
+        if character == "," and not depth:
+            fields.append(current.strip())
+            current = ""
+        else:
+            current += character
+    fields.append(current.strip())
+    return [field for field in fields if field]
+
+
+def plain_english_title(field):
+    """A title field without its quotes, its bracketed English gloss and a trailing colon."""
+    field = re.sub(r"\s*\[[^\]]*\]", "", field).strip().rstrip(":").strip()
+    return field.strip("“”\"«» ").strip() or None
+
+
+def english_citation(reference):
+    """{author, title, year} from an English-Wiktionary (kaikki) quotation reference.
+
+    The form is `1862, Victor Hugo, chapter 13, in Les Misérables, …`: a date (a year, perhaps a
+    month and day, perhaps a range or a bracketed recording date), the author, then locators and
+    the title, the work being the field that starts `in ` when there is one. A first field in
+    quotes is an article or song title with no author, and a periodical in that slot fails the
+    lookup, so both resolve to no one. `translated by` names the English translation, which leaves
+    the French text the author's. `trad.` names a French translation, which the translator holds
+    rights in, so it is dropped as the French edition drops it. `X, transl.` is either: Verne
+    `in Agnes Kinloch Kingston, transl.` is an English translation, Cervantes `in Louis Viardot,
+    transl.` a French one. So `translator` is returned, and a caller treats the quotation as
+    public domain only when the translator also died before 1931, as `authors_overrides.json`
+    does for a joint attribution.
+    """
+    match = EN_LEADING_DATE.match(reference.strip())
+    if not match:
+        return {"author": None, "translator": None, "title": None, "year": None}
+    year = match.group(1) if match.group(1) and match.group(1).isdigit() else None
+    fields = split_fields(reference.strip()[match.end():])
+    if not fields or fields[0][:1] in "“\"«" or TRANSLATION.search(reference):
+        return {"author": None, "translator": None, "title": None, "year": year}
+    name = fields[0].strip()
+    if len(name) > 60 or NOT_A_PERSON.match(name) or not re.search(r"[^\W\d_]", name) \
+            or name == name.lower():
+        name = None
+    rest = fields[1:]
+    translator = None
+    if rest and EN_TRANSLATOR.match(rest[0]):
+        translator = name
+    original = next((ORIGINAL_BY.match(field) for field in rest if ORIGINAL_BY.match(field)), None)
+    if original:
+        translator, name = name, original.group(1).strip().rstrip(":").strip()
+    work = next((index for index, field in enumerate(rest) if field.startswith("in ")), None)
+    if work is not None and work + 1 < len(rest) and EN_TRANSLATOR.match(rest[work + 1]):
+        translator = rest[work][3:].strip()
+        title = next((field for field in rest[work + 2:] if not EN_LOCATOR.match(field)), None)
+    elif work is not None:
+        title = rest[work][3:]
+    else:
+        title = next((field for field in rest if not EN_LOCATOR.match(field)), None)
+    return {"author": name, "translator": translator,
+            "title": plain_english_title(title) if title else None, "year": year}
+
+
 def collect_names(verbs):
     reference = json.loads(FR_REFERENCE.read_text(encoding="utf-8"))
+    english = json.loads(EN_REFERENCE.read_text(encoding="utf-8"))
     quotations = collections.Counter()
     dropped = collections.Counter()
     total = 0
     for verb in verbs:
-        for entry in reference.get(verb, []):
-            for sense in entry["senses"]:
-                for example in sense["examples"]:
-                    raw = (example.get("ref") or "").strip()
-                    if not raw:
-                        continue
-                    total += 1
-                    name = author_of(raw)
-                    if name:
-                        quotations[name] += 1
-                    else:
-                        dropped[raw.split(",")[0].strip()[:40]] += 1
+        for edition, parse in ((reference, lambda raw: [author_of(raw)]),
+                               (english, lambda raw: [english_citation(raw)["author"],
+                                                      english_citation(raw)["translator"]])):
+            for entry in edition.get(verb, []):
+                for sense in entry["senses"]:
+                    for example in sense["examples"]:
+                        raw = (example.get("ref") or "").strip()
+                        if not raw:
+                            continue
+                        total += 1
+                        names = [name for name in parse(raw) if name]
+                        for name in names:
+                            quotations[name] += 1
+                        if not names:
+                            dropped[raw.split(",")[0].strip()[:40]] += 1
     return quotations, dropped, total
 
 
@@ -298,6 +385,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--batch", type=int, default=100, help="labels per SPARQL query")
     parser.add_argument("--no-network", action="store_true", help="use only the cache")
+    parser.add_argument("--extend", action="store_true",
+                        help="resolve only names authors.json lacks and merge them in, keeping every "
+                             "existing row (a full run re-batches every name and so misses the cache)")
     args = parser.parse_args()
 
     CACHE.mkdir(parents=True, exist_ok=True)
@@ -312,7 +402,14 @@ def main():
     recurring = [n for n, c in quotations.items() if c >= 2]
     print(f"  names with two or more quotations: {len(recurring)}")
 
-    table = resolve(set(quotations), args.batch, not args.no_network)
+    if args.extend and OUT.exists():
+        existing = json.loads(OUT.read_text(encoding="utf-8"))
+        fresh = set(quotations) - set(existing)
+        print(f"extending {OUT.name}: {len(existing)} names kept, {len(fresh)} new to resolve")
+        table = dict(existing)
+        table.update(resolve(fresh, args.batch, not args.no_network) if fresh else {})
+    else:
+        table = resolve(set(quotations), args.batch, not args.no_network)
 
     if OVERRIDES.exists():
         # A leading underscore marks documentation inside the overrides file, not an author.

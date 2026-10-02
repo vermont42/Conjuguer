@@ -22,14 +22,25 @@ live gloss is dropped.
 Build ONCE. Rebuilding while verdict files exist would reshuffle items under them, so the
 script refuses when the shard directory is non-empty unless given --force.
 
+`--stage5` (Stage 5.4) reads verb_pass/stage5/ instead and widens the scope to **every**
+new_example, picks included: Stage 4 showed what an unchecked pick translation can look like.
+A pick item also carries the candidate it matched, with its death year and reference, and the
+code's provenance status for it; every item carries the verb's `prior` failed attempt. Skeptic
+shard N holds the items of check shard N, one per verb, so a shard can be built as soon as its
+check result validates, and an existing skeptic shard is never rebuilt without --force. A Stage 5c
+verb (one whose shard entry carries `cnrtl` evidence) may also carry a gloss proposal, which becomes
+a `gloss` item ahead of its `new_example`, so that shard can hold more items than verbs.
+
 Usage:
     python3 corpus/working/build_skeptic_shards.py
     python3 corpus/working/build_skeptic_shards.py --dry-run     # counts only, writes nothing
+    python3 corpus/working/build_skeptic_shards.py --stage5
 """
 import argparse
 import re
 import sys
 
+import validate_verb_pass as validator
 import verb_pass_lib as lib
 
 STAGE2_SHARDS = lib.OUT_DIR / "shards"
@@ -146,11 +157,78 @@ def build_items(verb, record, live, conjugations, defect_groups):
     return items
 
 
+def stage5_item(verb, record, live, conjugations):
+    """Every Stage 5 new_example is an item, a pick as much as an authored sentence; a Stage 5c gloss
+    proposal is one more."""
+    proposed = record["new_example"]
+    item = {
+        "id": verb["id"], "infinitive": verb["infinitive"], "rank": verb["rank"],
+        "gloss_current": live["gloss"],
+        "wiktionary_en": verb.get("wiktionary_en"), "wiktionnaire": verb.get("wiktionnaire"),
+        "checker_notes": record.get("notes") or [],
+        "task": "new_example", "current": None, "proposed": proposed, "gloss_proposed": None,
+        "evidence": None, "prior": verb.get("prior"),
+        "candidates": verb.get("candidates") or [],
+        "conjugations": conjugation_rows(verb["id"], verb["infinitive"], proposed.get("token"),
+                                         conjugations),
+    }
+    if proposed.get("kind") != "authored":
+        status, detail, candidate = validator.pick_status(proposed, verb)
+        item.update(candidate=candidate, pick_status=status, pick_detail=detail or None)
+    gloss = record["gloss"]
+    if verb.get("cnrtl") is None:
+        return [item]
+    item["cnrtl"] = verb["cnrtl"]
+    if gloss["verdict"] == "ok" or not gloss.get("proposed") or gloss["proposed"] == live["gloss"]:
+        return [item]
+    item["gloss_proposed"] = gloss["proposed"]
+    gloss_item = {**{key: item[key] for key in ("id", "infinitive", "rank", "gloss_current", "wiktionary_en",
+                                                  "wiktionnaire", "checker_notes", "prior", "cnrtl")},
+                  "task": "gloss", "current": live["gloss"], "proposed": gloss["proposed"],
+                  "checker_verdict": gloss["verdict"], "checker_confidence": gloss.get("confidence"),
+                  "evidence": gloss.get("evidence")}
+    return [gloss_item, item]
+
+
+def build_stage5(options):
+    """One skeptic shard per valid Stage 5 check shard, same number, built once each."""
+    validator.use_pass_dir(validator.STAGE5, example_only=True)
+    live = {entry["id"]: entry for entry in lib.load_verbs()}
+    conjugations = lib.load_conjugations()
+    built, waiting, kept = [], [], 0
+    for path in sorted(validator.SHARDS.glob("shard_*.json")):
+        number = int(path.stem.split("_")[1])
+        target = validator.SKEPTIC_SHARDS / path.name
+        if target.exists() and not options.force:
+            kept += 1
+            continue
+        errors, _, results = validator.validate(number, "Claude (Sonnet 5.5)")
+        if errors:
+            waiting.append(number)
+            continue
+        verbs = lib.load_json(path)["verbs"]
+        items = [item for verb, record in zip(verbs, results)
+                 for item in stage5_item(verb, record, live[verb["id"]], conjugations)]
+        built.append((number, len(items)))
+        if not options.dry_run:
+            lib.write_json(target, {"shard": number, "items": items})
+    print(f"stage 5 skeptic shards: built {len(built)} ({sum(n for _, n in built)} items), "
+          f"kept {kept} already built, waiting on {len(waiting)} check shard(s) without a valid result"
+          + (f": {','.join(map(str, waiting))}" if waiting else ""))
+    if built:
+        print("item counts: " + ", ".join(f"{number}:{count}" for number, count in built))
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--force", action="store_true")
+    parser.add_argument("--stage5", action="store_true",
+                        help="build skeptic shards for the Stage 5 check results under verb_pass/stage5/")
     options = parser.parse_args()
+    if options.stage5:
+        build_stage5(options)
+        return
     existing = list(SKEPTIC_SHARDS.glob("shard_*.json")) if SKEPTIC_SHARDS.exists() else []
     if existing and not (options.dry_run or options.force):
         print(f"{len(existing)} skeptic shards already exist under "

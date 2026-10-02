@@ -14,6 +14,7 @@ export const meta = {
 //     shardDir: 'corpus/working/verb_pass/pilot',
 //     resultsDir: 'corpus/working/verb_pass/pilot/results/sonnet',
 //     model: 'sonnet', modelLabel: 'Sonnet 5' } })
+// Stage 5 adds examplesOnly: true and points shardDir/resultsDir at verb_pass/stage5/.
 //
 // Each agent WRITES ITS OWN RESULT FILE and returns only a summary. The full verdicts
 // cannot come back through the return value: 6,326 of them would be several megabytes in
@@ -41,6 +42,8 @@ const RESULTS_DIR = A.resultsDir ||
   (MODE === 'check' ? 'corpus/working/verb_pass/results'
                     : 'corpus/working/verb_pass/skeptic/results')
 const SHARDS = Array.isArray(A.shards) ? A.shards : []
+const EXAMPLES_ONLY = A.examplesOnly === true
+const GLOSS_TOO = A.glossToo === true   // Stage 5c: a gloss fix may come with the example
 
 const SUMMARY_SCHEMA = {
   type: 'object',
@@ -116,7 +119,95 @@ one object per verb, in file order, keyed by the shard's own \`id\`. Create the 
 the Write tool needs it. Then return the structured summary, where \`verbs\` is how many
 entries the file holds and \`changes_proposed\` is how many of them carry a gloss verdict
 other than \`ok\`, an example verdict other than \`ok\`/\`none\`, a \`new_example\`, or a
-flag verdict of \`change\`.`
+flag verdict of \`change\`.` + (EXAMPLES_ONLY ? examplesOnlyBlock() : '') +
+    (GLOSS_TOO ? glossTooBlock() : '')
+}
+
+// Stage 5c: verbs whose example kept failing because the gloss misstates the verb or the shard's
+// reference was too thin. Each carries `cnrtl`, dictionary text fetched for this run.
+function glossTooBlock() {
+  return `
+
+**This shard is Stage 5c, and it overrides the gloss rule above.** Every verb here has had at least
+one example refuted, usually because the shipped gloss does not match what the verb means, or
+because the shard's own reference was too thin to show how the verb is used. Each verb now carries
+\`cnrtl\`: the entries of the TLFi, the Académie française (8th and 9th editions), Littré and the
+Wiktionnaire from the CNRTL portal, a few concordance snippets with author and date, and under
+\`redirects\` the entry of a verb this one is a spelling variant of. Read it before anything else.
+
+- **Fix the gloss when it is wrong.** If the shipped \`gloss\` does not name what the evidence says
+  the verb means (its commonest sense first), return a real gloss verdict (\`wrong_sense\`,
+  \`missing_primary_sense\`, \`order\`) with \`proposed\` in house style, \`confidence\`, and
+  \`evidence\` quoting the dictionary and naming it (TLFi, Académie 9e, Littré). If the gloss is
+  right, say \`ok\` as before. Keep correct senses: add, reorder or replace, never trim a right one.
+- **Label the register in the gloss** when every sense is dated, regional or a trade term:
+  \`(dated)\`, \`(Quebec)\`, \`(Switzerland)\`, \`(cooperage)\`, \`(fishing)\`, \`(viticulture)\`.
+- **Write the example for the gloss you propose** (or the shipped one, if it is \`ok\`), in a register
+  the evidence supports: a trade term in a plain sentence about that trade, a dated word in a
+  sentence that reads as period or literary French, a regional word in a setting from that region.
+  Use only constructions the dictionaries show: their definitions and examples tell you whether the
+  verb is transitive, intransitive or pronominal, and what it takes as object.
+- **The dictionary examples are evidence, not candidates.** Never copy a TLFi, Académie or Littré
+  example or a concordance snippet as your sentence. The TLFi is copyrighted, and a snippet is not
+  a sentence. Write your own (\`kind: "authored"\`), unless one of \`candidates\` qualifies.
+- A pronominal form is right only when the app conjugates the verb as pronominal (\`flags.re\`
+  true). Say in \`notes\` if you think a flag is wrong, but do not change \`flags\`.
+- \`prior.earlier_attempts\`, when present, lists every refuted attempt before the latest one in
+  \`prior\`. Repeat none of them.
+- \`prior.gloss_attempt\`, when present, is a gloss already proposed in this stage with the
+  reviewer's verdict on it. If the verdict is \`upheld\`, propose that gloss again unchanged; if
+  \`partly\`, propose it as the reviewer's reason corrects it; then write the example for it.
+- **Do not paraphrase a dictionary.** A sentence that reuses a dictionary example's subject, verb
+  and object, or turns a definition's wording into a sentence, is refuted as a copy, however you
+  vary it. Invent your own scene: a different subject, a different object, a different situation,
+  in a construction the dictionaries show.
+- \`prior.hint\`, when present, is a reviewer's note on what the evidence allows for this verb. Follow
+  it unless the dictionaries contradict it, and say so in \`notes\` if they do.`
+}
+
+// Stage 5 (args.examplesOnly): the verbs that still have no example after Stage 4, each with
+// the attempt that failed before. Glosses and flags were settled in Stage 4, so the checker
+// leaves them alone, and it must fill new_example for every verb: Stage 2's prompt let 83 verbs
+// come back with nothing.
+function examplesOnlyBlock() {
+  return `
+
+**This run is Stage 5, and it is example-only.** Every verb in this shard still has no example
+after an earlier pass, and its \`example\` is null. The earlier pass's glosses and flags are
+settled, so:
+
+- Return \`gloss\` as \`{ "verdict": "ok", "proposed": null, "confidence": "high", "evidence":
+  "Stage 5: example only" }\` and \`flags\` as \`[]\`, whatever you think of them. If a gloss or flag
+  looks wrong, say so in \`notes\` for a later pass.
+- \`example\` is \`{ "verdict": "none", "issues": [], "proposed_en": null }\`.
+- **\`new_example\` must be filled for every verb.** A null \`new_example\` makes the whole file
+  invalid. Prefer a candidate when one qualifies; otherwise write one sentence yourself.
+- The sentence must fit the verb's **\`gloss\` as it stands in the shard**, which is the gloss the
+  app ships today. Many glosses changed since the earlier pass.
+- Each verb carries \`prior\`: what was proposed for it before, and why it failed. \`prior.reason\`
+  is one of \`authored_refuted\` (a reviewer refuted the authored sentence: \`skeptic_reason\` says
+  why), \`pick_provenance\` (a candidate was copied with an edit or the wrong citation:
+  \`status\` and \`detail\`), \`en_quotation\` (an English-Wiktionary quotation still under
+  copyright), \`pick_rejected\` (a person rejected the pick: \`note\`), \`removed\` (the old shipped
+  example was flawed: \`checker_issues\`, \`skeptic_reason\`), \`none_proposed\` (nothing was
+  proposed) or \`stage5_refuted\` (a second attempt: the proposal in \`prior\` was made in this
+  same stage and refuted, \`skeptic_reason\` says why, and \`first_reason\` is why the verb had no
+  example before that). **Do not propose the failed sentence again, and do not repeat its flaw.**
+  If a refuted sentence was wrong about the sense, the form, the register or the translation, make
+  sure yours is not. When \`skeptic_reason\` names a candidate that qualified, take that candidate,
+  verbatim, unless it fails a rule above. A form must be one the app conjugates for this verb:
+  do not use a pronominal form for a verb the app does not mark pronominal, nor a variant's
+  spelling.
+- **A pick is the candidate's \`text\` verbatim, or one whole sentence of it lifted unchanged.**
+  Never trim words out of the middle, never fix the source's typography, never re-cite it: copy
+  \`source\` and \`line\` from the candidate you took. Many of these verbs are here because an
+  earlier checker trimmed or re-cited a sentence. If the only usable part of a candidate is a
+  fragment, write a sentence instead.
+- A \`wiktionary_en\` candidate with \`usage: true\` is an editors' usage example. With \`usage:
+  false\` it is a quotation, and it carries \`author\`, \`death_year\` and \`ref\`; the public-domain
+  rule applies to it exactly as to a \`wiktionnaire\` quotation.
+- Translate a pick freshly and faithfully. Do not localize: a French title stays a French title
+  ("monsieur le préfet" is not "inspector").`
 }
 
 // args.itemCounts maps a skeptic shard number to its item count; the builder cuts shards of
@@ -156,7 +247,55 @@ Write the result to \`${p.result}\` as
 \`{ "shard": ${n}, "results": [ { id, task, verdict, severity, reason }, … ] }\`, one object
 per item, in file order. Create the directory if the Write tool needs it. Then return the
 structured summary, where \`verbs\` is how many items the file holds and
-\`changes_proposed\` is how many you left standing (\`upheld\` or \`partly\`).`
+\`changes_proposed\` is how many you left standing (\`upheld\` or \`partly\`).` +
+    (EXAMPLES_ONLY ? skepticExamplesOnlyBlock() : '') + (GLOSS_TOO ? skepticGlossTooBlock() : '')
+}
+
+function skepticGlossTooBlock() {
+  return `
+
+**This shard is Stage 5c.** A verb may carry two items: a \`gloss\` item, when the checker proposed
+a corrected gloss, and its \`new_example\`. Every item carries \`cnrtl\`, dictionary text (TLFi,
+Académie française 8th and 9th editions, Littré, Wiktionnaire, concordance snippets) fetched for
+this run. It is evidence you may cite, and it settles questions the Wiktionary senses could not.
+
+- **A gloss item** is judged as in a gloss pass: is the shipped gloss really wrong, and does the
+  proposal name the verb's commonest sense in house style? Quote the dictionary that decides it. A
+  register label in parentheses for a dated, regional or trade-only verb is house style.
+- **A new_example item** is judged against \`gloss_proposed\` when there is one, and otherwise against
+  \`gloss_current\`. If it fits only the proposed gloss, say so in the reason, since it can ship only
+  with that gloss. The construction must be one the dictionaries show. A sentence that copies a
+  dictionary example or a concordance snippet is refuted: those are not licensed for the app.
+- An item whose verb had earlier attempts lists them in \`prior\` (\`earlier_attempts\`); a proposal
+  that repeats any of them is refuted.
+- \`prior.hint\`, when present, is a requirement from the app's owner or a reviewer, and
+  \`prior.reason\` \`stage5_replaced\` means an example that stood was replaced at the owner's request.
+  A proposal that ignores the hint is refuted.`
+}
+
+function skepticExamplesOnlyBlock() {
+  return `
+
+**This run is Stage 5.** Every item is a \`new_example\` for a verb that still has no example
+after an earlier pass, so a refutation leaves the verb without one. Refute anyway when the
+evidence says to: a wrong example is worse than none.
+
+- An item whose \`proposed.kind\` is \`tier\`, \`wiktionnaire\` or \`wiktionary_en\` is a **pick**.
+  It carries \`candidate\`, the candidate its French matched, and \`pick_status\`, the code's
+  comparison: \`verbatim\` and \`excerpt\` (one whole sentence lifted unchanged) are clean;
+  anything else (\`unmatched\`, \`miscited\`, \`wrong_kind\`, \`not_public_domain\`,
+  \`late_edition\`) is a provenance failure, and the item is refuted unless \`pick_detail\`
+  shows it is harmless. Judge a pick's **translation** as closely as an authored sentence's: it
+  is the checker's own work and no one else has read it. A French title or office translated as
+  something else ("monsieur le préfet" as "inspector") is a mistranslation.
+- For a quotation the public-domain rule is yours to check, on \`candidate.death_year\`; for a
+  \`wiktionary_en\` quotation (\`candidate.usage\` false) as for a \`wiktionnaire\` one. A
+  translated quotation's \`death_year\` is already the later of author and translator.
+- Every item carries \`prior\`, the attempt that failed before and why. A proposal that repeats
+  the failed sentence, or its flaw, is refuted.
+- The sentence must fit \`gloss_current\`, the gloss the app ships now. There is no gloss
+  proposal in this run.
+- Every item here has \`current: null\`.`
 }
 
 if (!SHARDS.length) {

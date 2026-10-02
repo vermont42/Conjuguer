@@ -3956,3 +3956,128 @@ face the public-domain rule. It builds shards from the live glosses, since an ex
 gloss that ships. Each shard records the prior failed attempt, the contract no longer accepts an
 empty proposal, and the skeptic reads every item, picks included. Following the lesson of 2026-09-27,
 the first two shards go to Josh as review cards before the rest run. It has not run yet.
+
+## Stage 5 of the verb pass: 409 verbs, every one with a proposal, 371 standing (2026-10-02)
+
+Stage 5 took the 409 verb entries that still had no example after Stage 4 through the pass a second
+time, and it ran through everything short of Josh's review in one session. Josh asked for the newer
+models where the plan named older ones, so the checkers ran on Sonnet 5.5 and the skeptic on Opus
+5.5. The subagent transcripts confirm both. The workflow passes the aliases `sonnet` and `opus`,
+which now resolve to the 5.5 models. Authored sentences are credited "Claude (Sonnet 5.5)".
+
+### Fixing the copyright hole at its source
+
+Stage 4 found that English-Wiktionary quotations reached the checkers without their authors, so
+Houellebecq and *Le Monde* passed as anonymous usage examples. The fix went where the plan said: the
+candidate builder now keeps each example's `ref`, and an `english_citation` parser in the author
+builder reads the kaikki reference into author, title and year. The references are messier than
+the French ones. They have dates like "2021 May 2", "1913–1927" and "(Can we date this quote?)",
+quoted article titles in the author's slot, and two kinds of translator credit the syntax cannot
+tell apart: "in Louis Viardot, transl." is Cervantes in French, and "in Agnes Kinloch Kingston,
+transl." is Verne in English. Rather than guess, a translated quotation now needs the translator
+dead before 1931 as well as the author, which is how the hand overrides already treat a writing duo.
+All 37 quotations Stage 4 had to skip fail the new rule, and 15 public-domain ones survive as
+candidates (Corneille, Flaubert, Hugo, Proust, Lamartine, Cervantes in Viardot's French).
+
+Resolving the new names hit a cost the cache was supposed to remove. The Wikidata cache is keyed by
+the exact batch of names, so adding 164 names reshuffles every batch and misses the cache for all
+6,000. The author builder gained `--extend`, which resolves only the new names and merges them in.
+An offline dry run of it promptly wrote the 164 new names into the table as "no match", which would
+have hidden them from the real run. I restored the backup and noted the trap in the plan.
+
+### The verb list, and the pilot
+
+`list_missing_examples.py` rebuilt the plan's table of why each verb lacked an example. It matched
+exactly: 219 refuted authored sentences, 83 with nothing proposed, 53 picks with provenance
+warnings, 37 copyrighted quotations, 12 removed examples and 5 rejected picks. Each verb's shard
+entry carries that failed attempt as `prior`, and the prompt tells the checker not to repeat it.
+The contract changed too: a null proposal now makes a result file invalid, which is how 83 verbs
+slipped through Stage 2 unnoticed.
+
+Two pilot shards went to Josh as cards before the rest ran, the habit from 2026-09-27. The cards
+showed one pattern he could have changed: picks run long, a median of 162 characters against 83 for
+the shipped examples, because the prompt takes the first qualifying candidate rather than the
+shortest. They also showed classical verse with its line breaks run together, three sentences in
+the *étoient* spelling, and an explicit Zola line for *baiser*. Josh kept the prompt as it was. The
+app already ships 534 examples over 200 characters and about 360 La Fontaine and Molière lines.
+
+### The run
+
+All twelve check shards were valid on the first try, 409 of 409 proposals, with no trimmed or
+re-cited sentence: 264 authored, 145 picked. The skeptic read every one, picks included, since Stage
+4 had shown an unread pick translation turning Malot's "monsieur le préfet" into "inspector". It
+refuted 9.3%, where Stage 3 refuted 14.4%. The skeptics said why in their own notes: many picks
+were the very candidates the Stage 3 skeptic had named when it refuted an authored sentence, so the
+second attempt had been half-written by the first refutation.
+
+Reading the picks paid off. Eleven of the fourteen `partly` picks are clean citations with a bad
+translation. Zola's slang *laver* ("sell off") had become "wash", *les jours de noce* "wedding
+days", and Bloy's *le chien populaire* "the popular dog". That is a fair sample of what the 2,495
+pick translations Stage 4 shipped unread probably hold, and it strengthens the case for the later
+pass the plan already lists. The refutations had a second lesson. At least ten of the 38 say the
+sentence is right for the French verb and the *gloss* is wrong: *panneauter* glossed "put in a cold
+frame", *empatter* "buttress", *cocotter* "yap". No example can fix those, so they wait for a gloss
+pass.
+
+The whole stage cost about 1.8M subagent tokens and under twenty minutes of agent time, against
+Stage 2's 15M. The report is `docs/verb-pass-report-stage5.md`. The decisions live in a separate
+`verb_pass/stage5/approvals.json` with its own review page, so nothing here can touch Stage 4's
+files. 371 verbs have an example standing for review, and 38 stay without one, whatever the review
+decides. Nothing is applied and nothing is committed. 5.6 runs after Josh reviews.
+
+### Stage 5b: a second try for fourteen (2026-10-02)
+
+Josh asked why 38 verbs still had no example. The answer was that Stage 5 gives each verb one
+attempt, and the refutations sorted into five kinds. Thirteen blame the gloss, so no correct
+sentence can fit until the gloss is fixed. Eleven rest on references too thin to confirm any usage.
+The fourteen cheapest got a second try before his review: wrong forms, candidates the skeptic had
+named that the checker passed over, and defective picks. They ran as a thirteenth Stage 5 shard, with
+the refuted proposal and its reason as the new `prior`. The report counts each verb by its latest
+attempt. Eleven of the fourteen now stand, including the Zola, Racine and La Fontaine lines the
+first skeptic had pointed to. *arriérer*, *insoler* and *déparler* failed again, and two of those
+look like gloss or flag problems in disguise: *insoler* is marked pronominal-only in the app while
+its only reference sense is transitive. 382 verbs now have an example waiting for review, and 27 do
+not.
+
+### Stages 5c–5e: an example for every verb (2026-10-02)
+
+Josh wanted the remaining 27 addressed before he reviewed, so that every verb could have one. They
+needed two things the pass had not had: better evidence, and permission to touch the gloss.
+
+The evidence came from CNRTL, whose JSON API returns the TLFi, both recent Académie editions,
+Littré and the Wiktionnaire in one call, plus concordance snippets. A small fetcher took 27 verbs at
+one request every three seconds and cached every answer. The dictionaries settled questions the
+Wiktionary extracts could not. *pacquer* means packing salted fish into barrels, not "pack".
+*panneauter* means setting nets for rabbits, not using a cold frame. *jabler* means cutting the
+groove that seats a barrel's head. For those verbs the gloss was wrong, so no example could ever
+have passed. One shard was allowed to propose a gloss with its example, and the skeptic judged both.
+22 gloss fixes stand.
+
+Then the examples failed in a way nothing earlier had shown. Handed dictionary text, the checker
+paraphrased it. *rapiner* became the Académie's "Cet intendant rapine sur tout ce qu'il achète"
+with the steward renamed, and the skeptic refuted it as a copy twice over. A rule against
+paraphrasing a dictionary fixed most of them. The last four needed a nudge written from the evidence
+itself. Littré calls *s'insoler* a learned term, so the sentence moved from a gardener to a doctor
+advising convalescents. The Académie says *rentrayer* is *rentraire*, which is tapestry repair, not
+the torn coat two attempts had mended. After four retry shards, every one of the 409 verbs has an
+example standing.
+
+The dead battery mid-run was a useful test. The skeptic agent kept going while the session was
+gone, finished 25 minutes later and wrote a valid file. The rerun I launched to replace it was
+stopped before it wrote anything, and the transcripts showed which agent's Write landed. The
+original's summary had miscounted its own verdicts, which is one more reason the validator, not
+the agent, is the count.
+
+### The Stage 5 review, and what "accept" would have shipped (2026-10-02)
+
+Josh reviewed all 432 Stage 5 cards in one sitting and accepted them. Merging his decisions turned
+up a gap in the review page's contract. It said that accepting a `partly` card without typing a
+value applies the checker's proposal unchanged. For 29 cards that proposal is exactly what the
+skeptic had flagged: Zola's slang *laver* translated as "wash", *les jours de noce* as "wedding
+days", a sentence dating destalinization to after 1956. Nobody reviewing 432 cards retypes 29
+translations, so the default would have shipped the errors. I drafted each fix from the skeptic's
+own wording, Josh approved the list, and they went in as values. Two needed a different sentence
+altogether, because the verbatim French carried a text edition's artifacts ("-- ", "soeur") or a
+missing *se*. The skeptic had already named the replacement candidates. Stage 5.6 now has three
+more things to do than the plan first said: apply 23 glosses, honor a pick's corrected
+translation, and swap two picks for the candidates named in their values.

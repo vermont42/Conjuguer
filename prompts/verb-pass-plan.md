@@ -15,7 +15,11 @@ files valid, 14.4% refuted, and `docs/verb-pass-report.md` and `approvals.json` 
 reviewed `approvals.json` between 2026-09-27 and 2026-10-01, and **Stage 4 ran and is complete on
 2026-10-01**: 853 glosses, 27 verbs' flags and 4,818 new or replaced examples applied, 5,918 of
 the 6,326 verbs now with an example. Nothing from Stage 4 is committed yet. **Stage 5** was
-written into the plan the same day, for the 408 verbs that still have no example; it has not run. Between batches 3 and 4, `build_candidates.py` was fixed to stop truncating long
+written into the plan the same day, for the 408 verbs that still have no example. **Stage 5 ran
+through 5.5 on 2026-10-02**, on Sonnet 5.5 and Opus 5.5 at Josh's request: 409 entries checked and
+all 409 proposals judged by the skeptic, 371 standing and 38 refuted. Retries (5b–5e, with CNRTL
+dictionary evidence and 22 gloss fixes for verbs whose gloss misstated them) left **all 409 with an
+example standing**, and the report, a separate `approvals.json` and a review page are written. It waits for Josh's review before 5.6 applies anything. Between batches 3 and 4, `build_candidates.py` was fixed to stop truncating long
 corpus sentences and the shards were rebuilt (see the Stage 2 correction of 2026-09-21).
 Josh approved the five decisions on 2026-09-20; they are recorded in the last section and
 folded into the stages below. Apart from Stages A and 0, nothing has run yet except the
@@ -41,7 +45,7 @@ It does block Stage 2's full run.
 
 **Progress** (implementers update this line): Stage A ✅ 2026-09-20 · Stage 0 ✅ 2026-09-20 ·
 Stage 1 ✅ 2026-09-20 · Stage A2 ✅ 2026-09-20 · Pilot ✅ 2026-09-20 · Stage 2 ✅ 2026-09-21 ·
-Stage 3 ✅ 2026-09-21 · Stage 4 ✅ 2026-10-01 · Stage 5 ☐
+Stage 3 ✅ 2026-09-21 · Stage 4 ✅ 2026-10-01 · Stage 5 ◐ (5.1–5.5 ✅ 2026-10-02; 5.6 waits for the review)
 
 ## How implementers keep this plan honest
 
@@ -1865,7 +1869,7 @@ proved wrong or incomplete. Do not commit; Josh commits.
 
 Stop after 5.5 and wait for Josh's review; 5.6 is a second session.
 
-### 5.1 Carry English-Wiktionary references through `build_candidates.py`
+### 5.1 Carry English-Wiktionary references through `build_candidates.py` ✅ 2026-10-02
 
 Stage 4 found that `build_candidates.py` keeps a `wiktionary_en` example's text and translation
 but drops its `ref`, so a quotation from Houellebecq or *Le Monde* reached the checkers as an
@@ -1890,7 +1894,42 @@ Rebuild `candidates.json` only. Do **not** rebuild the Stage 2 shards or rerun S
 results are applied, and a rebuild would shift candidates under finished files. Re-run
 `validate_verb_pass.py` afterwards to confirm the Stage 2 files still validate.
 
-### 5.2 The verb list and the Stage 5 shards
+**Correction (2026-10-02, 5.1 done):** done as written, with four things the section did not
+anticipate. Josh asked that Stage 5 run on **Sonnet 5.5** where this plan says Sonnet 5, and on
+**Opus 5.5** where it says Opus 5. Authored sentences are credited `Claude (Sonnet 5.5)`.
+
+- *The parser lives in `build_author_table.py`* (`english_citation`), beside `author_of`, so the
+  author builder and the candidate builder share it. It reads the kaikki form
+  `1862, Victor Hugo, chapter 13, in Les Misérables, …`, plus the variants the extract really has:
+  `2021 May 2, `, `1913–1927, `, `1974 [recorded 1964], `, `c. 1918—1920, `, `18--, ` and
+  `(Can we date this quote?), `. A first field in quotes is an article or a song, so it has no
+  author. The title is the `in …` field when there is one, and otherwise the first field that is
+  not a locator (`chapter`, `act`, `page`, a roman numeral). Of 615 distinct references, 520 name an
+  author, 82 do not, and 13 have no date the pattern reads (most of those are not references at all).
+- *Translations.* `trad.` drops a quotation, as in the French edition. But the English
+  extract also writes `in Louis Viardot, transl., L’Ingénieux Hidalgo…` (Cervantes in French) and
+  `in Agnes Kinloch Kingston, transl., L’Île mystérieuse` (Verne in English), which the syntax
+  cannot tell apart, and `translation of original by Miguel de Cervantes`. So the parser returns a
+  `translator`, and a quotation is public domain only when author and translator both died before
+  1931, as `authors_overrides.json` already does for a joint attribution. A candidate's
+  `death_year` is the later of the two.
+- *`build_author_table.py --extend`.* The SPARQL cache is keyed by the exact batch, so a full
+  re-run with new names re-batches all 6,000 and misses the cache. `--extend` resolves only the
+  names `authors.json` lacks and merges them in: 166 new names, 31 resolved, among them Corneille,
+  Viardot and Cervantes. (A `--no-network --extend` run writes the new names as `no_match`, which
+  would hide them from a later networked run. Do not combine the two.) No namesake needed an override.
+- *The candidate targets moved.* `target_ids` is "no example, or a Claude-authored one", and
+  Stage 4 changed both, so the rebuilt `candidates.json` covers 2,815 entries, the 409 without an
+  example and the 2,406 Claude-authored ones, instead of the 5,185 of 2026-09-21. Nothing but the
+  shard builder reads the file, and the Stage 2 validator reads candidates from the shards, so
+  `validate_verb_pass.py` still reports 181 of 181 valid with the same 122 warnings as the
+  committed validator. English candidates went from 139 to 123: 108 usage examples and 15
+  public-domain quotations. Of the 37 quotations Stage 4 skipped, all 37 fail the new rule. Of the
+  8 Stage 4 shipped through `PUBLIC_DOMAIN_EN_QUOTATIONS`, the parser passes 5 (Corneille, Flaubert,
+  Hugo, Rollinat, and Verne for *dégréer*). It refuses *bâter* and *ramoner* as translations and
+  *prêcher*'s bare "Boylesve" as unresolved. The table stays until 5.6.
+
+### 5.2 The verb list and the Stage 5 shards ✅ 2026-10-02
 
 - **`list_missing_examples.py`** (tracked, whitelisted) writes `verb_pass/stage5/verbs.json`, one
   record per entry that has no example under its id or its infinitive, in rank order, with its
@@ -1914,7 +1953,19 @@ results are applied, and a rebuild would shift candidates under finished files. 
 - A pick is the candidate's text **verbatim**, or one whole sentence of it, never trimmed inside.
   53 of these verbs are here because a checker trimmed or re-cited a sentence.
 
-### 5.3 Pilot as review cards
+**Correction (2026-10-02, 5.2 done):** `list_missing_examples.py` reproduces the Stage 4 table
+exactly: 12 removed, 37 English quotations, 5 rejected picks, 53 provenance warnings, 219 refuted
+authored sentences, 83 with nothing proposed, 409 entries, and by rank 43 / 93 / 273. One
+sentence above is wrong: *sortir* and *sortir (obtain)* do not both lack an example. *sortir
+(exit)* has one, so the 409 entries are 408 infinitives with no example under any entry. The
+builder already reads the live gloss, since `load_verbs()` parses today's `verbs.xml`. The only
+new code was `--only` and `--out` (both relative to the repository root), which attach the
+`prior` record. 12 shards, 210 of the 409 verbs with at least one candidate. The example-only
+instructions are a block that `verb_pass.workflow.js` appends when `args.examplesOnly` is true.
+`validate_verb_pass.py --stage5` points at the Stage 5 directories (`use_pass_dir`), treats a null
+`new_example` as invalid, and warns on a gloss or flag verdict in an example-only file.
+
+### 5.3 Pilot as review cards ✅ 2026-10-02
 
 The lesson of 2026-09-27 (journal: *False friends, long glosses, and a fresh start on the review*)
 was that a person reading twenty real proposals catches a bad rule faster than any grading. So run
@@ -1922,7 +1973,24 @@ the first **two** shards (70 verbs), validate them, and put them in front of Jos
 review page before launching the rest. Adjust the workflow prompt if he objects to a pattern. Then
 run the remaining shards.
 
-### 5.4 Check, then skeptic everything
+**Correction (2026-10-02, 5.3 done):** shards 1 and 2 ran on Sonnet 5.5 (the transcripts record
+`claude-sonnet-5-5`) in under three minutes and 245K subagent tokens. Both files were valid on the
+first run: 70 of 70 verbs, every one with a `new_example`, no provenance warning, `context_check`
+false. The checker took 59 picks (46 corpus, 10 Wiktionnaire, 3 English Wiktionary) and wrote 11
+sentences. No refuted sentence came back. The review page had no way to show a check result
+before a skeptic and an `approvals.json` existed, so `build_review_page.py --pilot 1,2` builds
+cards straight from the results, with a "Previous attempt" row, into `verb_pass/stage5/pilot.html`.
+Each page keeps its decisions under its own localStorage key, so a Stage 5 card cannot pick up
+Stage 4's saved decision for the same verb. Josh was shown four patterns: the picks are long
+(median 162 characters against 83 for shipped examples, and 22 of 59 over 200, because the prompt
+takes the *first* qualifying candidate), there is classical verse with its line breaks run
+together and three sentences in the old spelling (*étoient*), Zola's slang *laver* ("sell off")
+was translated "wash", and *baiser* got an explicit line. He kept the prompt as it was: long
+picks are acceptable (534 shipped examples are over 200 characters), and so are verse and the
+classical spelling (the app ships about 360 La Fontaine and Molière examples). The translation
+and register cases are left to the skeptic and the review.
+
+### 5.4 Check, then skeptic everything ✅ 2026-10-02
 
 - **Check:** `verb_pass.workflow.js` in check mode, Sonnet 5 (decision 5), `shardDir` and
   `resultsDir` under `verb_pass/stage5/`. Validate every file against its shard, and re-run any shard
@@ -1934,7 +2002,39 @@ run the remaining shards.
   with their candidate, death year and reference. `verb-skeptic.md` already has quotation rules,
   kept unused since Stage 3.
 
-### 5.5 Report, approvals, review
+**Correction (2026-10-02, 5.4 done):** the check ran on Sonnet 5.5 and the skeptic on Opus 5.5
+(the transcripts record `claude-sonnet-5-5` and `claude-opus-5-5`; the workflow passes the
+aliases `sonnet` and `opus`, which resolve to the newest model). Shards 3–12 ran as one batch after
+the pilot: all ten valid on the first run, 409 of 409 verbs with a `new_example`, and 8 warnings,
+all clean `excerpt`s. The proposals: 264 authored, 96 corpus, 42 Wiktionnaire, 7 English
+Wiktionary. The check took 853K subagent tokens and about five minutes in all.
+
+- *Skeptic shard N is check shard N.* `build_skeptic_shards.py --stage5` builds one skeptic shard
+  per valid check shard, same number, 35 items (24 in the last), and never rebuilds one that
+  exists. So the pilot's skeptic shards ran while shards 3–12 were still being checked, and "build
+  once" holds without waiting for the whole check. A pick item carries the matched `candidate`,
+  its `pick_status` and detail, and every item carries the verb's `prior`.
+- *The skeptic addendum.* `verb-skeptic.md` was not edited. As for the checker, the workflow
+  appends a Stage 5 block to the skeptic prompt when `args.examplesOnly` is true. It names a pick's
+  provenance statuses, makes the pick translation the skeptic's to judge, and refutes a
+  proposal that repeats its prior flaw.
+- *No dropped items.* All 12 verdict files were valid on the first run, with 409 of 409 items,
+  where Stage 3 lost items in 10 of 151 first attempts. The skeptic took 953K subagent tokens and
+  about eight minutes. **9.3% refuted**: 352 upheld, 19 partly, 38 refuted. Picks were refuted at
+  4% (6 of 145) and authored sentences at 12% (32 of 264). The skeptics themselves explained the
+  low rate: many picks are the very candidates the Stage 3 skeptic had named when it refuted an
+  authored sentence.
+- *Translations were worth the read.* Eleven of the 14 `partly` picks are translation errors in a
+  clean pick: Zola's slang *laver* ("sell off") as "wash", *les jours de noce* as "wedding days",
+  *le chien populaire* as "popular dog", *maîtres fripons* as "rascally masters". This supports
+  the out-of-scope item below about the 2,495 pick translations Stage 4 shipped unread.
+- *Refutations that blame the gloss.* At least ten of the 38 say the sentence fits the French
+  sense but the shipped gloss does not, which no example can fix: *panneauter* "put in a cold
+  frame", *empatter* "buttress", *dévitrifier*, *surcomprimer* "supercharge", *cocoter* and
+  *cocotter* "yap", *rengrener*, *haricoter*, *charpenter*, *rapiner*. They belong to the later gloss
+  pass, with the checkers' notes (145 verbs carry one).
+
+### 5.5 Report, approvals, review ✅ 2026-10-02
 
 `build_report.py` and `build_review_page.py` take a pass directory (default `verb_pass/`, here
 `verb_pass/stage5/`) so the Stage 5 report, `approvals.json` and `review.html` stay separate from
@@ -1943,7 +2043,143 @@ Stage 4's, and a rebuild of either cannot touch the other. Write the report to
 not a week. Refuted items go to the report's appendix as before. For a verb whose item is refuted
 again, the report should say plainly that it stays without an example, rather than hiding it.
 
+**Correction (2026-10-02, 5.5 done):** `build_report.py --pass-dir corpus/working/verb_pass/stage5`
+and `build_review_page.py --pass-dir …` accept only the Stage 5 directory, so neither can be
+pointed at another pass by mistake. The Stage 3 report's sections (glosses, flags, unsure flags,
+added glosses) do not apply to an example-only pass, so the Stage 5 report is its own function,
+`main_stage5`. It gives counts by proposal kind, counts by why the verb had no example before, the
+371 standing items in rank order, a section named "Verbs that stay without an example" with the
+38 refuted ones and the reason for each, and the checkers' gloss and flag remarks. In
+`verb_pass/stage5/approvals.json` an authored sentence is `new_example|<id>` and a pick is
+`pick|<id>`, as in Stage 4, and a pick item also records its provenance `status`. All 371 items and
+all 8 `defaults` (two tasks × four bands) start `pending`. The review page keeps its decisions under its
+own localStorage key, and `--merge` writes to the Stage 5 approvals. One `late_edition` pick
+(*dédommager*: a 1762 text in an 1818 reprint, author dead in 1792) is in the file like any other,
+since the skeptic judged it. By prior reason, the 38 that stay without an example are 28 of the 219
+refuted authored sentences, 4 of the 83 with nothing proposed, 4 of the 53 provenance picks, 1 of
+the 12 removed examples (*baiser*) and 1 of the 37 English quotations. By rank, 1 is in the top
+1,500 (*liquider*), 9 are in 1,501–3,000 and 28 below.
+
+**Added (2026-10-02, Stage 5b):** Josh asked why 38 verbs still had no example, then had the 14
+cheapest retried before his review: a wrong form or construction (*arriérer*, *insoler*, *dribler*,
+*bouler*, *déparler*, *remastiquer*, *tauder*), a candidate the skeptic named that the checker had
+passed over (*acculer*, *transir*, *tonner*), and a defective pick (*cadrer*, *exclamer*,
+*schématiser*, *baiser*). The other 24 were left alone: 13 need a gloss fix first, and 11 have
+references too thin to confirm any usage. `list_missing_examples.py --retry …` writes
+`stage5/retry.json`, each verb's `prior` now its refuted Stage 5 proposal and the skeptic's
+reason (`stage5_refuted`, with the original reason as `first_reason`).
+`build_verb_pass_shards.py --append` adds it to the Stage 5 shards as **shard 13**, and the
+workflow prompt tells the checker to take a candidate the skeptic named. The report and review page
+count each verb once, by its latest attempt (`latest_attempts`), so a retry supersedes the refuted
+proposal. ✅ **Done the same day.** Shard 13 was valid on the first run for both check (Sonnet 5.5)
+and skeptic (Opus 5.5), 89K subagent tokens in all. 11 of the 14 now stand. The checker took the three
+named candidates (Zola for *acculer*, Racine for *transir*, La Fontaine for *tonner*; Racine's 1854
+Didot reprint shows as `late_edition`, judged harmless) and gave *baiser* English Wiktionary's
+explicit usage example, which the skeptic upheld and flagged as Josh's call. Three are refuted again:
+*arriérer* (the transitive "defer payment" sentence does not fit the gloss "tarry, be late"),
+*insoler* (the pronominal again, though the app marks the verb pronominal-only, so the gloss and the
+flag need a look) and *déparler*. The report now reads 382 standing, 27 without an example, and
+6.6% refuted counting each verb by its latest attempt.
+
+**Added (2026-10-02, Stage 5c):** Josh then asked that the other 27 be addressed too, so that every
+verb can have an example before he reviews: the 13 whose gloss misstates the verb, the 11 whose
+reference was too thin, and the 3 that failed 5b. Two things were missing, evidence and permission
+to touch the gloss. `fetch_cnrtl.py` fetches each verb's CNRTL entry, one request every three
+seconds as "Live lookups" allows. The entry holds the TLFi, the Académie 8e and 9e, Littré, the
+Wiktionnaire and concordance snippets, and the script also follows a Wiktionnaire redirect such as
+"Variante de paquer". Answers are cached in `wiktionary/cnrtl_cache/`, and the evidence goes to
+`stage5/cnrtl.json`. The API's `content` holds more sources than this plan's table says (Littré, the
+Académie 8e, concordance, a conjugation table). It is evidence only: the TLFi is ATILF's copyrighted
+compilation and a concordance line is a snippet, so the prompt forbids copying either.
+`list_missing_examples.py --retry … --out retry_5c.json --evidence` attaches it, with every earlier
+refuted attempt, and the 27 run as **shard 14** with `args.glossToo`. That block lets the checker
+propose a corrected gloss in house style, with a register label for a dated, regional or trade-only
+verb, and write the example for that gloss. The skeptic then judges a `gloss` item beside the
+`new_example`. The report gives those glosses their own section, and `approvals.json` holds them as
+`gloss|<id>`, so **5.6 must apply Stage 5c gloss items as well as examples**, and a verb's example
+may fit only its proposed gloss. ✅ **Shard 14 ran the same day.** The check took 117K tokens, and all
+27 examples are authored, since no candidate was usable. The checker proposed 22 gloss fixes and
+kept 5 glosses, which made 49 skeptic items. The skeptic run outlived a dead battery: the session
+lost its connection, the agent kept going for 25 minutes, and it wrote a valid file. A rerun
+launched in the meantime was stopped before it wrote anything. The transcripts show one Write, the
+original's. Its summary miscounted (29 upheld and 13 partly, where the file has 31 and 11), another
+reason to trust only the validator. **All 22 glosses stand** (14 upheld, 8 partly), and 20 of the 27
+examples stand. Five of the 7 refuted examples failed in a new way: they paraphrase a
+dictionary's example or definition (*rapiner* reworks the Académie's "Cet intendant rapine sur tout
+ce qu'il achète"), which the copyright rule forbids.
+
+**Stage 5d (2026-10-02):** those 7 (*liquider*, *harper*, *insoler*, *rapiner*, *bretter*,
+*haricoter*, *rentrayer*) run as **shard 15**. Each carries its whole refutation history and, as
+`prior.gloss_attempt`, its 5c gloss proposal with the skeptic's verdict. The checker re-proposes an
+upheld gloss unchanged, or a partly one as corrected, and the prompt now forbids paraphrasing a
+dictionary in so many words. ✅ Shard 15 ran (127K tokens). *liquider* and *harper* now stand with
+their new glosses, *bretter*'s example stands as `partly` (a translation fix), and *rapiner*'s
+gloss is upheld. Four examples were refuted again: *insoler* (the everyday "sunbathe" scene a third
+time, where Littré calls *s'insoler* a learned term), *rapiner* (the Académie's steward with
+synonyms swapped in), *haricoter* (a prepositional complement no dictionary shows) and *rentrayer*
+(a buffalo hide, under a gloss change the skeptic refuted).
+
+**Stage 5e (2026-10-02):** for those four, the dictionaries already showed a way through, so each
+retry row carries a `prior.hint` written from the evidence. *insoler* gets a learned register
+(heliotherapy, a naturalist), *rapiner* intransitive and away from any dictionary's scene,
+*haricoter* used absolutely as Littré's *verbe neutre*, and *rentrayer* a textile-workshop or
+tapestry setting. For *rentrayer*, the CNRTL entry of *rentraire*, which the Académie calls the
+same verb, was added under `cnrtl.redirects`. They run as **shard 16**. ✅ Shard 16 ran (69K
+tokens). All four stand: *insoler* (a doctor advising convalescents to sun themselves), *rapiner* (a
+boy pilfering at a market, with its upheld gloss), *rentrayer* (a tapestry restorer), and
+*haricoter* as `partly`, with the French kept and the translation to fix.
+
+**Where Stage 5 stands after 5b–5e: every one of the 409 entries has an example standing, 385
+upheld and 24 partly.** 266 are authored and 143 picked. 57 refuted proposals were superseded by
+retries (`latest_attempts`), and on first attempts the skeptic refuted 38 of 409 (9.3%). 24 gloss
+changes were proposed in 5c–5e. 22 stand (17 upheld, 5 partly) and 2 were refuted: *insoler* and
+*rentrayer* keep their shipped glosses, which their final examples fit. Each of the 22 verbs with a
+standing gloss has an example written for the new gloss, so the two must be accepted or rejected
+together, and the report warns if an example ever depends on a refuted gloss (none does).
+`approvals.json` has 431 items: 266 `new_example`, 143 `pick`, 22 `gloss`. The pass checks all
+16 shards. Stage 2 (181 of 181) and Stage 3 (151 of 151) still validate.
+
+**Added (2026-10-02, *baiser*):** Josh asked for a PG example for *baiser*, whose upheld shard-13
+example was English Wiktionary's explicit one. That needs the literary "kiss" sense, which the
+gloss "copulate with" lacked. `list_missing_examples.py` gained `--replace` (retry a verb whose
+example stands, reason `stage5_replaced`) and `--hint` (a requirement stored as `prior.hint`, which
+the checker follows and the skeptic enforces), and it ran as **shard 17**. CNRTL's API answers
+`/api/word/baiser` with the noun *un baiser*, so `fetch_cnrtl.py` now refetches
+`/api/word/<word>/verbe` when the first answer is not a verb but lists one (only *baiser* among the
+31 cached was affected). The checker took a verbatim Flaubert pick in the kiss sense, Homais's
+"…baiser des plats d'argent…", and the skeptic upheld it. The gloss "kiss (literary), copulate with
+(vulgar)" is `partly`: Wiktionnaire's usage note makes the sexual sense the dominant one, so the
+skeptic wants "copulate with (vulgar), kiss (literary)". At Josh's request that order is already set as
+the item's `value` in `stage5/approvals.json` (with a `note`), and the decision is left `pending` for
+his review. `build_report.py` carries a hand-set value across rebuilds. A shorter Dumas line ("Nous baisâmes les
+livres saints…") is in the checker's notes as a fallback.
+
+To review: `open corpus/working/verb_pass/stage5/review.html`, decide, export, then
+`python3 corpus/working/build_review_page.py --pass-dir corpus/working/verb_pass/stage5 --merge
+~/Downloads/verb-pass-decisions.json`. Or set `defaults` in the approvals file by task and band.
+
 ### 5.6 Apply (after Josh's review)
+
+**Added (2026-10-02, the review is done):** Josh reviewed the Stage 5 page on 2026-10-02 and accepted
+all 431 cards he decided. The *baiser* gloss card, which he had skipped, he then accepted in this
+session, so **all 432 items are `accept`**: 266 `new_example`, 143 `pick`, 23 `gloss`. 29 of them
+are `partly` items accepted with no value, which would have applied the checker's proposal unchanged,
+flaw and all ("go off to wash it" for Zola's slang *laver*). At Josh's choice, each now carries the fix
+the skeptic named as its `value` (drafted in `stage5/partly_fixes.json` and approved as listed):
+18 translations, 4 authored French corrections, 5 glosses, and for *ricaner* and *envenimer* a
+different candidate the skeptic named (`value.candidate`), because their French carried
+artifacts that could not be cleaned without breaking the citation. *gazer* stays verbatim ("ça
+gaze?"), with no typographic exception. Beyond what the section below says, `apply_verb_pass.py
+--pass-dir verb_pass/stage5` must therefore:
+
+- apply `gloss|<id>` items (23), using `value` when set, and apply them in the same run as the
+  examples that were written for them;
+- treat a pick's `value` as `{fr, en}`, where `en` replaces the translation and `fr` must still match
+  the candidate verbatim. A `value.candidate` names the replacement candidate, which the script
+  finds in the verb's candidate list and re-checks with `pick_status` before taking its source,
+  line or citation;
+- take every shard's latest attempt per verb (`build_report.latest_attempts`), since 57 proposals
+  were superseded by the retries in shards 13–17.
 
 `apply_verb_pass.py --pass-dir verb_pass/stage5` applies only `new_example` and `pick` items. It
 writes the same JSON format, adds a second marked section to `docs/authored-examples.md`, and leaves

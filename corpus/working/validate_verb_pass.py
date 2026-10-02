@@ -20,6 +20,11 @@ Usage:
     python3 corpus/working/validate_verb_pass.py --skeptic       # Stage 3 verdict files instead
     python3 corpus/working/validate_verb_pass.py --skeptic --pending
     python3 corpus/working/validate_verb_pass.py --skeptic --counts
+    python3 corpus/working/validate_verb_pass.py --stage5 [--skeptic] [--pending] [--counts]
+
+With --stage5, the files are those under verb_pass/stage5/, the authored source defaults to
+"Claude (Sonnet 5.5)", and a record with a null new_example makes its file invalid (Stage 5 is
+example-only and must fill every verb).
 
 With --skeptic, a verdict file under verb_pass/skeptic/results/ is valid when it parses, names
 its shard, holds exactly the shard's items in order (matched on id and task), and every verdict
@@ -48,6 +53,18 @@ NEW_EXAMPLE_KEYS = {"fr", "en", "source", "line", "token", "kind"}
 SKEPTIC_SHARDS = HERE / "verb_pass" / "skeptic" / "shards"
 SKEPTIC_RESULTS = HERE / "verb_pass" / "skeptic" / "results"
 SKEPTIC_VERDICTS = {"upheld", "partly", "refuted"}
+STAGE5 = HERE / "verb_pass" / "stage5"
+# Stage 5 is example-only and must fill every verb: Stage 2's 83 null proposals went unnoticed
+# because the contract allowed them.
+EXAMPLE_ONLY = False
+
+
+def use_pass_dir(directory, example_only=False):
+    """Point the validator (and the report builders that import it) at another pass's files."""
+    global SHARDS, RESULTS, SKEPTIC_SHARDS, SKEPTIC_RESULTS, EXAMPLE_ONLY
+    SHARDS, RESULTS = directory / "shards", directory / "results"
+    SKEPTIC_SHARDS, SKEPTIC_RESULTS = directory / "skeptic" / "shards", directory / "skeptic" / "results"
+    EXAMPLE_ONLY = example_only
 SKEPTIC_SEVERITIES = {"error", "hedge", "nitpick"}
 
 
@@ -97,7 +114,9 @@ def pick_status(new_example, verb):
         return ("miscited", f"tier sentence cited as {new_example.get('source')}:"
                 f"{new_example.get('line')}, candidate is {match.get('source')}:{match.get('line')}",
                 match)
-    if kind == "wiktionnaire":
+    # A wiktionary_en candidate built before 2026-10-01 has no `usage` field and no author, so only
+    # one built since, and marked as a quotation, faces the rule.
+    if kind == "wiktionnaire" or (kind == "wiktionary_en" and match.get("usage") is False):
         death = match.get("death_year")
         if not isinstance(death, int) or death >= PUBLIC_DOMAIN_BEFORE:
             return ("not_public_domain",
@@ -137,6 +156,11 @@ def check_record(record, verb, source_label):
     if not isinstance(record["notes"], list):
         errors.append(f"{identifier}: notes is not a list")
     new_example = record["new_example"]
+    if EXAMPLE_ONLY:
+        if not new_example:
+            errors.append(f"{identifier}: no new_example")
+        if gloss.get("verdict") != "ok" or record["flags"]:
+            warnings.append(f"{identifier}: a gloss or flag verdict in an example-only pass")
     if new_example:
         missing = NEW_EXAMPLE_KEYS - set(new_example)
         if missing:
@@ -257,7 +281,13 @@ def main():
     parser.add_argument("--warnings", action="store_true")
     parser.add_argument("--source", default="Claude (Sonnet 5)")
     parser.add_argument("--skeptic", action="store_true")
+    parser.add_argument("--stage5", action="store_true",
+                        help="the Stage 5 files under verb_pass/stage5/; a null new_example is invalid")
     options = parser.parse_args()
+    if options.stage5:
+        use_pass_dir(STAGE5, example_only=True)
+        if options.source == parser.get_default("source"):
+            options.source = "Claude (Sonnet 5.5)"
     shard_dir = SKEPTIC_SHARDS if options.skeptic else SHARDS
     numbers = sorted(int(p.stem.split("_")[1]) for p in shard_dir.glob("shard_*.json"))
     pending, valid_results, all_warnings, report = [], [], [], []

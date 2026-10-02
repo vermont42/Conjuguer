@@ -12,6 +12,8 @@ Usage:
     python3 corpus/working/build_review_page.py               # writes verb_pass/review.html
     open corpus/working/verb_pass/review.html
     python3 corpus/working/build_review_page.py --merge ~/Downloads/verb-pass-decisions.json
+    python3 corpus/working/build_review_page.py --pilot 1,2   # Stage 5 pilot cards (5.3)
+    python3 corpus/working/build_review_page.py --pass-dir corpus/working/verb_pass/stage5 [--merge …]
 
 Rebuild the page after changing `defaults`, since the item list depends on them.
 """
@@ -20,9 +22,13 @@ import json
 import sys
 
 import build_report
+import validate_verb_pass as validator
 import verb_pass_lib as lib
 
 PAGE = lib.OUT_DIR / "review.html"
+# Each pass keeps its decisions under its own localStorage key, so a Stage 5 page cannot read
+# Stage 4's saved decisions for a verb that appears in both.
+STORE_KEY = "verb-pass-review-v2"
 DECISIONS = {"accept", "reject", "review", "pending"}
 
 
@@ -85,12 +91,17 @@ def skeptic_record(item, entry, card_notes):
                                    f"({replacement.get('kind')})") if replacement else None,
                       checker=item["checker_verdict"],
                       evidence=build_report.evidence_text(item["evidence"]))
-    elif task == "new_example":
+    elif task in ("new_example", "pick"):
         proposed = item["proposed"]
         record.update(current=None, proposed={"fr": proposed.get("fr"), "en": proposed.get("en")},
                       token=proposed.get("token"), gloss_proposed=item.get("gloss_proposed"),
                       candidates=[f"[{c.get('kind')}] {c.get('text')}" for c in item.get("candidates") or []],
-                      checker="authored")
+                      checker="authored", prior=prior_text(item.get("prior")))
+        if task == "pick":
+            candidate = item.get("candidate") or {}
+            record.update(checker=f"{proposed.get('kind')} pick, provenance {item.get('pick_status')}",
+                          evidence=build_report.stage5_source(item), death_year=candidate.get("death_year"),
+                          candidates=[])
     else:
         record.update(current=build_report.show(item["current"]),
                       proposed=build_report.show(item["proposed"]),
@@ -126,6 +137,73 @@ def pick_record(pick, key, entry):
     }
 
 
+def prior_text(prior):
+    """One readable paragraph for a Stage 5 verb's failed earlier attempt."""
+    if not prior:
+        return None
+    reason = prior.get("reason")
+    if reason == "removed":
+        example = prior.get("removed_example") or {}
+        sentence = f"{example.get('fr')}\n{example.get('en')}"
+        why = "; ".join(prior.get("checker_issues") or []) or prior.get("skeptic_reason")
+    elif reason in ("stage5_refuted", "stage5_replaced"):
+        sentence = f"{prior.get('fr')}\n{prior.get('en')}"
+        why = f"{prior.get('skeptic_reason')} (before Stage 5: {prior.get('first_reason')})"
+    elif reason == "none_proposed":
+        sentence, why = "(nothing proposed)", "; ".join(prior.get("checker_notes") or []) or None
+    else:
+        sentence = f"{prior.get('fr')}\n{prior.get('en')}"
+        why = (prior.get("skeptic_reason") or prior.get("detail") or prior.get("why")
+               or prior.get("note"))
+    return f"{reason}\n{sentence}" + (f"\n\nWhy it failed: {why}" if why else "")
+
+
+def pilot_rows(shards):
+    """Cards straight from Stage 5 check results, before any skeptic or approvals.json exists."""
+    rows = []
+    for number in shards:
+        name = f"shard_{number:03d}.json"
+        shard = lib.load_json(validator.SHARDS / name)
+        results = lib.load_json(validator.RESULTS / name)["results"]
+        for verb, record in zip(shard["verbs"], results):
+            chosen = record.get("new_example") or {}
+            row = {
+                "id": verb["id"], "rank": verb["rank"], "band": band(verb["rank"]),
+                "severity": None, "decision": "pending", "value": None, "note": None,
+                "apostrophe": False, "parenthesis": False, "length": False, "falsefriend": False,
+                "sweep": None, "gloss": verb["gloss"], "notes": record.get("notes") or [],
+                "current": None, "proposed": {"fr": chosen.get("fr"), "en": chosen.get("en")},
+                "prior": prior_text(verb.get("prior")),
+            }
+            if chosen.get("kind") == "authored":
+                row.update(key=f"new_example|{verb['id']}", task="new_example", verdict="authored",
+                           reason=None, token=chosen.get("token"), checker=chosen.get("source"),
+                           candidates=[f"[{c.get('kind')}] {c.get('text')}" for c in verb.get("candidates") or []])
+            else:
+                status, detail, candidate = validator.pick_status(chosen, verb)
+                candidate = candidate or {}
+                source = (f"{candidate.get('source')}:{candidate.get('line')}" if chosen.get("kind") == "tier"
+                          else ", ".join(str(part) for part in (candidate.get("author"), candidate.get("title"),
+                                                                 candidate.get("year")) if part))
+                row.update(key=f"pick|{verb['id']}", task="pick", verdict=status, reason=detail or None,
+                           checker=f"{chosen.get('kind')} pick", evidence=source,
+                           death_year=candidate.get("death_year"))
+            rows.append(row)
+    return rows
+
+
+def build_stage5():
+    """Stage 5.5: every standing item is a skeptic item, authored or picked."""
+    validator.use_pass_dir(validator.STAGE5, example_only=True)
+    approvals = lib.load_json(validator.STAGE5 / "approvals.json")
+    latest, _ = build_report.latest_attempts(build_report.load_skeptic())
+    items = {build_report.item_key(i): i for i in latest}
+    rows = [skeptic_record(items[key], entry, {}) for key, entry in approvals["items"].items()
+            if key in items and needs_a_human(key, entry, approvals)]
+    rows.sort(key=lambda r: (r["rank"], r["id"], r["task"] != "gloss"))
+    write_page(rows, validator.STAGE5 / "review.html", "verb-pass-review-stage5")
+
+
 def build():
     approvals = lib.load_json(build_report.APPROVALS)
     verbs, records = build_report.load_stage2()
@@ -146,17 +224,24 @@ def build():
             rows.append(added_record(added[key], key, entry))
     order = {"gloss": 0, "example": 1, "flag": 2, "new_example": 3, "pick": 4}
     rows.sort(key=lambda r: (order[r["task"]], r["rank"], r["key"]))
-    html = TEMPLATE.replace("/*DATA*/null", json.dumps(rows, ensure_ascii=False).replace("</", "<\\/"))
-    PAGE.write_text(html, encoding="utf-8")
+    write_page(rows, PAGE, STORE_KEY)
+
+
+def write_page(rows, page, store_key):
+    html = (TEMPLATE.replace("/*DATA*/null", json.dumps(rows, ensure_ascii=False).replace("</", "<\\/"))
+            .replace('"/*STORE*/"', json.dumps(store_key)))
+    page.parent.mkdir(parents=True, exist_ok=True)
+    page.write_text(html, encoding="utf-8")
     counts = {}
     for row in rows:
         counts[row["task"]] = counts.get(row["task"], 0) + 1
-    print(f"  wrote {PAGE.relative_to(lib.REPO)} ({PAGE.stat().st_size:,} bytes): {len(rows):,} items, "
+    print(f"  wrote {page.relative_to(lib.REPO)} ({page.stat().st_size:,} bytes): {len(rows):,} items, "
           + ", ".join(f"{task} {count}" for task, count in counts.items()))
 
 
-def merge(path):
-    approvals = lib.load_json(build_report.APPROVALS)
+def merge(path, approvals_path=None):
+    approvals_path = approvals_path or build_report.APPROVALS
+    approvals = lib.load_json(approvals_path)
     decisions = lib.load_json(path)
     changed, unknown = 0, []
     for key, decision in decisions.items():
@@ -174,7 +259,7 @@ def merge(path):
             changed += 1
     if unknown:
         sys.exit(f"{len(unknown)} key(s) not in approvals.json, nothing written: {', '.join(unknown[:5])}")
-    lib.write_json(build_report.APPROVALS, approvals)
+    lib.write_json(approvals_path, approvals)
     tally = {}
     for entry in approvals["items"].values():
         tally[entry["decision"]] = tally.get(entry["decision"], 0) + 1
@@ -245,7 +330,7 @@ textarea { width:100%; font:inherit; color:inherit; background:var(--bg); border
 <main id="main"></main>
 <script>
 const DATA = /*DATA*/null;
-const STORE = "verb-pass-review-v2";
+const STORE = "/*STORE*/";
 let saved = {};
 try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (e) { saved = {}; }
 const byKey = Object.fromEntries(DATA.map(r => [r.key, r]));
@@ -287,6 +372,7 @@ function render() {
   if (r.reason) h += row(r.task === "pick" ? "Status" : "Skeptic", `<div class="pre">${esc(r.reason)}</div>`);
   if (r.death_year) h += row("Death year", esc(r.death_year));
   if (r.note) h += row("Note", `<div class="pre">${esc(r.note)}</div>`);
+  if (r.prior) h += row("Previous attempt", `<div class="pre">${esc(r.prior)}</div>`);
   if (r.notes && r.notes.length) h += row("Checker notes", `<ul>${r.notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul>`);
   if (r.candidates && r.candidates.length) h += row(`Candidates (${r.candidates.length})`, `<ul>${r.candidates.map(c => `<li>${esc(c)}</li>`).join("")}</ul>`);
   if (st.value != null) h += row("Your value", `<div class="big">${esc(show(st.value))}</div>`);
@@ -349,9 +435,22 @@ filter(); render();
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--merge", metavar="DECISIONS_JSON")
+    parser.add_argument("--pass-dir", help="corpus/working/verb_pass/stage5 for the Stage 5 page and approvals")
+    parser.add_argument("--pilot", metavar="SHARDS",
+                        help="Stage 5 pilot: cards for these comma-separated stage5 shards, from the "
+                             "check results alone, written to verb_pass/stage5/pilot.html")
     options = parser.parse_args()
-    if options.merge:
-        merge(options.merge)
+    stage5 = bool(options.pass_dir)
+    if stage5 and (lib.REPO / options.pass_dir).resolve() != validator.STAGE5.resolve():
+        sys.exit("--pass-dir supports only corpus/working/verb_pass/stage5")
+    if options.pilot:
+        validator.use_pass_dir(validator.STAGE5, example_only=True)
+        shards = [int(part) for part in options.pilot.split(",")]
+        write_page(pilot_rows(shards), validator.STAGE5 / "pilot.html", "verb-pass-stage5-pilot")
+    elif options.merge:
+        merge(options.merge, validator.STAGE5 / "approvals.json" if stage5 else None)
+    elif stage5:
+        build_stage5()
     else:
         build()
 
