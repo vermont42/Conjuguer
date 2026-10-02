@@ -19,7 +19,7 @@ written into the plan the same day, for the 408 verbs that still have no example
 through 5.5 on 2026-10-02**, on Sonnet 5.5 and Opus 5.5 at Josh's request: 409 entries checked and
 all 409 proposals judged by the skeptic, 371 standing and 38 refuted. Retries (5b–5e, with CNRTL
 dictionary evidence and 22 gloss fixes for verbs whose gloss misstated them) left **all 409 with an
-example standing**, and the report, a separate `approvals.json` and a review page are written. It waits for Josh's review before 5.6 applies anything. Between batches 3 and 4, `build_candidates.py` was fixed to stop truncating long
+example standing**, and the report, a separate `approvals.json` and a review page are written. Josh accepted all 432 items, and **5.6 applied them on 2026-10-02**: 409 examples and 23 glosses, so every one of the 6,326 verbs now has an example. Nothing from 5.6 is committed yet. Between batches 3 and 4, `build_candidates.py` was fixed to stop truncating long
 corpus sentences and the shards were rebuilt (see the Stage 2 correction of 2026-09-21).
 Josh approved the five decisions on 2026-09-20; they are recorded in the last section and
 folded into the stages below. Apart from Stages A and 0, nothing has run yet except the
@@ -2158,7 +2158,7 @@ To review: `open corpus/working/verb_pass/stage5/review.html`, decide, export, t
 `python3 corpus/working/build_review_page.py --pass-dir corpus/working/verb_pass/stage5 --merge
 ~/Downloads/verb-pass-decisions.json`. Or set `defaults` in the approvals file by task and band.
 
-### 5.6 Apply (after Josh's review)
+### 5.6 Apply (after Josh's review) ✅ 2026-10-02
 
 **Added (2026-10-02, the review is done):** Josh reviewed the Stage 5 page on 2026-10-02 and accepted
 all 431 cards he decided. The *baiser* gloss card, which he had skipped, he then accepted in this
@@ -2192,6 +2192,46 @@ verify one Stage 5 verb in the simulator, and journal.
 Acceptance: every Stage 5 shard has a valid result with a `new_example` for every verb; every item
 has a skeptic verdict; the report states how many verbs still lack an example, and why; after
 apply, `cmp` finds the example copies identical, the suite passes, and `check_docs.py` is clean.
+
+**Correction (2026-10-02, 5.6 ran): all the acceptance criteria are met.** Every one of the 17
+Stage 5 shards has a valid result and verdict file. The report states that no verb stays without an
+example. `apply_verb_pass.py --pass-dir corpus/working/verb_pass/stage5` applied all 432 accepted
+items with nothing skipped: 23 glosses, and 409 examples (266 authored, 95 corpus, 41 Wiktionnaire
+quotations, 7 English Wiktionary, of which 6 are usage examples and 1 is a quotation, Proust's for
+*limoger*). The examples file grows from 5,919 to 6,328 entries, and every one of the 6,330 verb
+entries now finds one, since `ExampleData` falls back from *haïr (France)* to *haïr*. `cmp` finds the
+two copies identical, `xmllint --valid` passes, the 23 gloss edits leave every line in place (so
+collation cannot have moved), the suite passes (279 tests in 24 suites), `check_docs.py` is clean,
+and the simulator shows *limoger*'s Proust quotation as "— Marcel Proust, « Le Temps retrouvé (À la
+recherche du temps perdu) », via Wiktionary". A second run changes nothing. Things the section did
+not anticipate:
+
+- *The plan contradicted itself on glosses.* The paragraph above says the script "applies only
+  `new_example` and `pick` items". The review note's three bullets supersede it, and the script
+  applies the gloss items too. It refuses any other task, an item that is not the verb's latest
+  attempt, and an accepted item the skeptic refuted. An example written for a proposed gloss is
+  applied only if that gloss is accepted (all 22 were).
+- *A Stage 4 re-run would have undone two Stage 5 glosses.* *liquider* and *bretter* had accepted
+  Stage 4 gloss items as well. `apply_verb_pass.py` without `--pass-dir` now skips any gloss or
+  example that the Stage 5 approvals accept and reports it as superseded (14 items: those two
+  glosses and 12 Stage 4 example items for verbs Stage 5 filled). Its dry run still changes nothing.
+- *Stage 5 candidates carry their own attribution.* A `wiktionary_en` candidate with a `usage` field
+  is attributed from it: `wiktionary` for an editor's example, or `wiktionary|author|title|year` for
+  a quotation, with any translator credited as "author, trad. translator". `PUBLIC_DOMAIN_EN_QUOTATIONS`
+  is only Stage 4's fallback now. The authored source is read from the proposal ("Claude (Sonnet 5.5)").
+- *A swapped candidate needs a token, and so does a rewritten sentence.* *ricaner* and *envenimer*
+  got a new sentence with no token, and *adjectiver*'s corrected French no longer contained
+  "adjectivent". The script now takes the first word starting with the verb's stem ("ricanait",
+  "envenimées", "adjective") before falling back to the infinitive. The token is metadata the app
+  never reads.
+- *Counts.* The credits, `Info.valuePropositionText`, `docs/description.txt` and the release notes say
+  every verb now; the quotations go from 858 to 900, the editors' usage examples from 92 to 98, the
+  Claude-written examples from 2,406 to 2,672 (the release notes count verbs Claude wrote for, 2,589),
+  and the corpus examples from 1,545 to 1,640. 874 verbs have had their gloss changed (853 in Stage
+  4, 23 in Stage 5, two of them in both). `docs/wiktionary-quotation-sources.md` lists 193
+  French-Wiktionary authors, regenerated from the shipped examples, and the English table gains
+  *limoger*. The Verb of the Day pool grows to every verb in ranks 1–1,500, since all now have an
+  example.
 
 **Out of scope, for a later pass:** a skeptic review of the 2,495 pick translations that Stage 4
 shipped unchecked, and the gloss and flag remarks Stage 5 checkers leave in `notes`.

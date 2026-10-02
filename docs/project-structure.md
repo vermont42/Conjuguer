@@ -287,7 +287,8 @@ corpus/                         # Literature-example pipeline; NOT part of any t
 │                               # Stage 5 (the verbs still without an example): list_missing_examples.py lists them with their failed prior attempt,
 │                               # and the shard, skeptic, validator, report and review-page scripts take --only/--stage5/--pass-dir to run the pass
 │                               # again over working/verb_pass/stage5/ without touching Stage 2–4's files; fetch_cnrtl.py fetches CNRTL
-│                               # dictionary entries (TLFi, Académie, Littré) for a few verbs as evidence for the Stage 5c retry
+│                               # dictionary entries (TLFi, Académie, Littré) for a few verbs as evidence for the Stage 5c retry;
+│                               # apply_verb_pass.py --pass-dir applies Stage 5's approvals (examples and glosses) the same way
 └── grokked/                    # Intermediate per-source extraction output
 
 frequency/                      # Verb-frequency pipeline; NOT part of any target. See frequency/README.md

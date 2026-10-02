@@ -1,9 +1,9 @@
 # Wiktionary quotation sources (provenance manifest)
 
 Provenance for the **Wiktionary tier** of the verb examples, added by Stage 4 of the verb pass
-([`prompts/verb-pass-plan.md`](../prompts/verb-pass-plan.md)) on 2026-10-01. It covers
-850 quotations from French Wiktionary (the Wiktionnaire), 8 quotations from English
-Wiktionary, and 92 usage examples written by English Wiktionary's editors. Every one ships in
+([`prompts/verb-pass-plan.md`](../prompts/verb-pass-plan.md)) on 2026-10-01 and extended by
+Stage 5 on 2026-10-02. It covers 891 quotations from French Wiktionary (the Wiktionnaire), 9
+quotations from English Wiktionary, and 98 usage examples written by English Wiktionary's editors. Every one ships in
 `Conjuguer/Models/literature_examples.json` (and its copy in `corpus/json/`), and its `source`
 field carries the attribution.
 
@@ -36,7 +36,9 @@ The rule compares a death year and nothing else, so two kinds of quotation pass 
   `late_edition` status in `validate_verb_pass.py`) and two with no year (Tolstoy, Plato). Josh
   rejected the translations of Gotthelf (1999), Wilde (1992) and Lima Barreto (1984). He accepted
   those of Washington Irving (1893), Tolstoy and Plato after review, although the references name
-  no translator for any of the three.
+  no translator for any of the three. Stage 5's skeptic judged two more `late_edition` quotations,
+  Riccoboni in an 1818 reprint and Racine in an 1854 one. Both are French originals, and both
+  shipped.
 - **Namesakes.** Wikidata's Michel Lévy (d. 1875) is the publisher, not the author of a 2010
   Photoshop manual, and its Paul Denis (d. 1918) is not the psychoanalyst of 2017. Both names are
   now unresolved in `authors_overrides.json`, and both quotations were rejected.
@@ -44,10 +46,17 @@ The rule compares a death year and nothing else, so two kinds of quotation pass 
 The English-Wiktionary candidates needed a second check. `build_candidates.py` kept each
 quotation's text and translation but dropped its `ref`, so Stage 2's checkers saw quotations from
 Houellebecq, Despentes, Astérix and *Le Monde* as anonymous usage examples, and nothing applied
-the public-domain rule to them. `apply_verb_pass.py` looks each English pick up again in the
-reference. A pick with no `ref` is an editor's usage example, CC BY-SA, and ships as such. A pick
-with a `ref` ships only if it is listed in the script's `PUBLIC_DOMAIN_EN_QUOTATIONS`, the eight
-below. The other 37 accepted English picks were left out, so those verbs have no example yet.
+the public-domain rule to them. In Stage 4, `apply_verb_pass.py` looked each English pick up again
+in the reference. A pick with no `ref` is an editor's usage example, CC BY-SA, and ships as such. A
+pick with a `ref` shipped only if it is listed in the script's `PUBLIC_DOMAIN_EN_QUOTATIONS`, the
+first eight below. The other 37 accepted English picks were left out.
+
+Stage 5.1 fixed the cause. `build_candidates.py` now carries each English quotation's `ref`, parsed
+into author, title, year and any translator, and marks the candidate as a quotation (`usage:
+false`) or an editor's example (`usage: true`). `validate_verb_pass.pick_status` applies the
+public-domain rule to a quotation as it does for the Wiktionnaire, and a translated quotation also
+needs its translator dead before 1931. Stage 5 gave the 37 verbs another attempt, and every one now
+has an example. Only one of them, *limoger*, ships an English quotation, from Proust.
 
 ## Attribution
 
@@ -73,7 +82,9 @@ the English translations some English-Wiktionary examples keep are Creative Comm
 Attribution-ShareAlike 4.0 International (and GFDL). Single sentences are quotation-scale, but the
 share-alike term applies to any substantial adaptation, as for the Wikipedia tier
 ([`wikipedia-corpus-sources.md`](wikipedia-corpus-sources.md)). The English translations of the
-French Wiktionary quotations are Claude's (Sonnet 5), as are 38 of the 100 English-Wiktionary ones.
+French Wiktionary quotations are Claude's: Sonnet 5 for the 850 of Stage 4, Sonnet 5.5 for the 41 of
+Stage 5. So are 38 of the 100 English-Wiktionary examples from Stage 4, and five of the seven from
+Stage 5, which revise Wiktionary's translation (*magasiner* and *gazer* keep it).
 
 ## English-Wiktionary quotations
 
@@ -84,60 +95,62 @@ French Wiktionary quotations are Claude's (Sonnet 5), as are 38 of the 100 Engli
 | bâter | Miguel de Cervantes, trad. Louis Viardot | L’Ingénieux Hidalgo Don Quichotte de la Manche | 1836 |
 | dégréer | Mercure de France | — | 1782 |
 | fourmiller | Maurice Rollinat | Dans les brandes | 1877 |
+| limoger | Marcel Proust | Le Temps retrouvé (À la recherche du temps perdu) | — (the 1927 edition postdates his death) |
 | méprendre | Gustave Flaubert | Madame Bovary | 1857 |
 | prêcher | René Boylesve | Leçon d’amour | 1902 |
 | ramoner | Jules Verne | L’Île mystérieuse | 1874 |
 
 ## French-Wiktionary authors
 
-187 authors, by number of quotations. The death year is the one the public-domain rule used.
+193 authors, by number of quotations. The death year is the one the public-domain rule used.
 
 | Author | Died | Quotations |
 |---|---|---|
-| Honoré de Balzac | 1850 | 140 |
-| Jules Verne | 1905 | 62 |
-| Émile Zola | 1902 | 56 |
-| Théophile Gautier | 1872 | 26 |
-| Joris-Karl Huysmans | 1907 | 25 |
+| Honoré de Balzac | 1850 | 143 |
+| Jules Verne | 1905 | 63 |
+| Émile Zola | 1902 | 57 |
+| Théophile Gautier | 1872 | 28 |
+| Joris-Karl Huysmans | 1907 | 26 |
 | Hector Malot | 1907 | 23 |
 | Octave Mirbeau | 1917 | 23 |
 | Alexandre Dumas | 1870 | 22 |
 | George Sand | 1876 | 22 |
-| Louis Pergaud | 1915 | 18 |
-| Victor Hugo | 1885 | 16 |
+| Louis Pergaud | 1915 | 20 |
+| Victor Hugo | 1885 | 17 |
 | Anatole France | 1924 | 15 |
+| Fortuné du Boisgobey | 1891 | 15 |
 | Edmond Nivoit | 1920 | 14 |
-| Fortuné du Boisgobey | 1891 | 12 |
+| Eugène Sue | 1857 | 11 |
 | Voltaire | 1778 | 11 |
+| Émile Moselly | 1918 | 11 |
+| Gustave Flaubert | 1880 | 10 |
 | Stendhal | 1842 | 10 |
-| Émile Moselly | 1918 | 10 |
 | Alphonse Daudet | 1897 | 9 |
-| Eugène Sue | 1857 | 9 |
 | François-René de Chateaubriand | 1848 | 9 |
+| Jules Vallès | 1885 | 9 |
+| Michel Zévaco | 1918 | 9 |
 | Aloysius Bertrand | 1841 | 8 |
-| Gustave Flaubert | 1880 | 8 |
-| Jules Vallès | 1885 | 8 |
-| Michel Zévaco | 1918 | 8 |
+| Pierre Louÿs | 1925 | 8 |
+| Gustave Aimard | 1883 | 7 |
+| Gérard de Nerval | 1855 | 7 |
 | Jean-Roch Coignet | 1865 | 7 |
 | Pierre Loti | 1923 | 7 |
 | Gustave Flaubert et Maxime Du Camp | 1894 | 6 |
-| Gérard de Nerval | 1855 | 6 |
-| Pierre Louÿs | 1925 | 6 |
 | Charles Deulin | 1877 | 5 |
+| Ernest Renan | 1892 | 5 |
 | Eugène Fromentin | 1876 | 5 |
 | Georges Sorel | 1922 | 5 |
-| Gustave Aimard | 1883 | 5 |
 | Guy de Maupassant | 1893 | 5 |
 | Henry Murger | 1861 | 5 |
+| Hippolyte Taine | 1893 | 5 |
+| Isabelle Eberhardt | 1904 | 5 |
+| Jules Leclercq | 1928 | 5 |
 | Marcel Proust | 1922 | 5 |
 | Comtesse de Ségur | 1874 | 4 |
 | Denis Diderot | 1784 | 4 |
 | Edmond Rostand | 1918 | 4 |
-| Ernest Renan | 1892 | 4 |
-| Hippolyte Taine | 1893 | 4 |
-| Isabelle Eberhardt | 1904 | 4 |
 | Jules Barbey d’Aurevilly | 1889 | 4 |
-| Jules Leclercq | 1928 | 4 |
+| Léon Bloy | 1917 | 4 |
 | Prosper Mérimée | 1870 | 4 |
 | René Boylesve | 1926 | 4 |
 | Émile Gaboriau | 1873 | 4 |
@@ -147,11 +160,11 @@ French Wiktionary quotations are Claude's (Sonnet 5), as are 38 of the 100 Engli
 | Eugène Chavette | 1902 | 3 |
 | Eugène Viollet-le-Duc | 1879 | 3 |
 | Georges-Louis Leclerc de Buffon | 1788 | 3 |
-| Léon Bloy | 1917 | 3 |
 | Abbé Prévost | 1763 | 2 |
 | Albert Meyrac | 1922 | 2 |
 | Alfred Barbou | 1907 | 2 |
 | Amédée Achard | 1875 | 2 |
+| André Theuriet | 1907 | 2 |
 | Charles Baudelaire | 1867 | 2 |
 | Charles Philibert de Lasteyrie | 1849 | 2 |
 | Charles-Louis Philippe | 1909 | 2 |
@@ -162,11 +175,14 @@ French Wiktionary quotations are Claude's (Sonnet 5), as are 38 of the 100 Engli
 | Gustave de Closmadeuc | 1918 | 2 |
 | Jean de La Fontaine | 1695 | 2 |
 | Jean-Jacques Ampère | 1864 | 2 |
+| Jules Michelet | 1874 | 2 |
+| Laurent Tailhade | 1919 | 2 |
 | Leconte de Lisle | 1894 | 2 |
 | Marcel Schwob | 1905 | 2 |
 | Maxime Du Camp | 1894 | 2 |
 | Maximilien de Robespierre | 1794 | 2 |
 | Molière | 1673 | 2 |
+| Montesquieu | 1755 | 2 |
 | Remy de Gourmont | 1915 | 2 |
 | Touchatout | 1910 | 2 |
 | Abel Dufresne | 1866 | 1 |
@@ -179,8 +195,8 @@ French Wiktionary quotations are Claude's (Sonnet 5), as are 38 of the 100 Engli
 | Alfred Franklin | 1917 | 1 |
 | Alfred Jarry | 1907 | 1 |
 | Alfred de Vigny | 1863 | 1 |
+| Amans-Alexis Monteil | 1850 | 1 |
 | André Guettier | 1894 | 1 |
-| André Theuriet | 1907 | 1 |
 | Aristide Bruant | 1925 | 1 |
 | Arthur Mangin | 1887 | 1 |
 | Auguste Barchou de Penhoën | 1855 | 1 |
@@ -219,11 +235,13 @@ French Wiktionary quotations are Claude's (Sonnet 5), as are 38 of the 100 Engli
 | Jean Chapelain | 1674 | 1 |
 | Jean Cruveilhier | 1874 | 1 |
 | Jean Desmarets de Saint-Sorlin | 1676 | 1 |
+| Jean Racine | 1699 | 1 |
 | Jean Richepin | 1926 | 1 |
 | Jean-Antoine Chaptal | 1832 | 1 |
 | Jean-Baptiste de La Quintinie | 1688 | 1 |
 | Jean-Marie Collot d’Herbois |  | 1 |
 | Johann Christian Brandes | 1799 | 1 |
+| Joseph Cahaigne | 1860 | 1 |
 | Joseph Delbœuf | 1896 | 1 |
 | Joseph Déchelette | 1914 | 1 |
 | Joseph Reinach | 1921 | 1 |
@@ -234,24 +252,23 @@ French Wiktionary quotations are Claude's (Sonnet 5), as are 38 of the 100 Engli
 | Jules Gouffé | 1877 | 1 |
 | Jules Laforgue | 1887 | 1 |
 | Jules Lermina | 1915 | 1 |
-| Jules Michelet | 1874 | 1 |
 | Jules de Cuverville | 1912 | 1 |
 | Julien Turgan | 1887 | 1 |
-| Laurent Tailhade | 1919 | 1 |
 | Louis Barron | 1914 | 1 |
 | Louis Figuier | 1894 | 1 |
 | Louis Hémon | 1913 | 1 |
+| Louis Nicolardot | 1888 | 1 |
 | Louis Ulbach | 1889 | 1 |
 | Louis de Rouvroy de Saint-Simon | 1755 | 1 |
 | Louis-Sébastien Lenormand | 1837 | 1 |
 | Lucien Duc | 1915 | 1 |
 | Léon Tolstoï | 1910 | 1 |
 | Léonie d’Aunet | 1879 | 1 |
+| Marie-Jeanne Riccoboni | 1792 | 1 |
 | Marivaux | 1763 | 1 |
 | Maurice Barrès | 1923 | 1 |
 | Maximilien Robespierre | 1794 | 1 |
 | Maximilien Veydt | 1873 | 1 |
-| Montesquieu | 1755 | 1 |
 | Noël du Fail | 1591 | 1 |
 | Olivier de Serres | 1619 | 1 |
 | Paul Adam | 1920 | 1 |
@@ -265,6 +282,7 @@ French Wiktionary quotations are Claude's (Sonnet 5), as are 38 of the 100 Engli
 | Philippe Étienne Lafosse | 1820 | 1 |
 | Pierre Alexis de Ponson du Terrail | 1871 | 1 |
 | Pierre Choderlos de Laclos | 1803 | 1 |
+| Pierre Leroux | 1871 | 1 |
 | Pigault-Lebrun | 1835 | 1 |
 | Platon | -348 | 1 |
 | Raphaël Viau | 1922 | 1 |

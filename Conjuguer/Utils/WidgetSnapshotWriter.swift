@@ -91,7 +91,7 @@ enum WidgetSnapshotWriter {
   }
 
   @MainActor static func eligibleVerbs() -> [Verb] {
-    // The verb pass gave nearly every verb an example, so an example alone would put abcéder on
+    // The verb pass gave every verb an example, so an example alone would put abcéder on
     // a lock screen most days. The pool is the most common verbs that have one.
     Verb.verbs.values
       .filter { $0.frequency <= verbOfTheDayRankLimit && ExampleData.example(for: $0) != nil }

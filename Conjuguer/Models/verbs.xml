@@ -261,7 +261,7 @@
   <verb in="amplifier" tn="amplify" mo="1-1" hi="15373" hn="3597" hl="195" hs="2528" />
   <verb in="amputer" tn="amputate" mo="1-1" hi="3529" hn="1616" hl="85" hs="2690" />
   <verb in="amuïr" tn="become mute" re="t" mo="2-3B" hi="34" hn="0" hl="0" />
-  <verb in="amurer" tn="tack" mo="1-1" hi="48" hn="5" hl="1" hs="25" />
+  <verb in="amurer" tn="haul taut the tack of a sail (nautical)" mo="1-1" hi="48" hn="5" hl="1" hs="25" />
   <verb in="amuser" tn="amuse, entertain" mo="1-1" hi="34829" hn="5909" hl="3411" hs="135886" />
   <verb in="analyser" tn="analyze" mo="1-1" hi="111259" hn="10042" hl="248" hs="19351" />
   <verb in="anastomoser" tn="interconnect forming a network" mo="1-1" hi="145" hn="0" hl="1" hs="22" />
@@ -355,7 +355,7 @@
   <verb in="arrenter" tn="lease out for rent (historical)" mo="1-1" hi="16" hn="0" hl="0" hs="6" />
   <verb in="arrérager" tn="be in arrears" mo="1-2B" hi="2" hn="0" hl="0" />
   <verb in="arrêter" tn="halt, stop, arrest" mo="1-1" hi="222699" hn="38327" hl="13775" hs="998823" />
-  <verb in="arriérer" tn="tarry, be late" mo="1-5" hi="1531" hn="121" hl="47" hs="968" />
+  <verb in="arriérer" tn="put off (a payment), fall behind (dated)" mo="1-5" hi="1531" hn="121" hl="47" hs="968" />
   <verb in="arrimer" tn="stow" mo="1-1" hi="1071" hn="553" hl="57" hs="703" />
   <verb in="arriser" tn="reef a sail" mo="1-1" hi="7" hn="0" hl="0" />
   <verb in="arriver" tn="arrive, happen" ay="e" mo="1-1" hi="372016" hn="59319" hl="21078" hs="1211342" />
@@ -482,7 +482,7 @@
   <verb in="bailler" tn="lend, rent, give (archaic)" mo="1-1" hi="736" hn="42" hl="23" hs="554" />
   <verb in="bâiller" tn="yawn" mo="1-1" hi="751" hn="135" hl="652" hs="934" />
   <verb in="bâillonner" tn="gag, muzzle" mo="1-1" hi="1235" hn="255" hl="62" hs="1557" />
-  <verb in="baiser" tn="copulate with" mo="1-1" hi="3731" hn="394" hl="1240" hs="81316" />
+  <verb in="baiser" tn="copulate with (vulgar), kiss (literary)" mo="1-1" hi="3731" hn="394" hl="1240" hs="81316" />
   <verb in="baisser" tn="lower, turn down, drop" mo="1-1" hi="45100" hn="16174" hl="3662" hs="61551" />
   <verb in="balader" tn="stroll, walk around" mo="1-1" hi="5754" hn="397" hl="284" hs="17329" />
   <verb in="baladodiffuser" tn="podcast" mo="1-1" hi="2" hn="0" hl="0" />
@@ -522,7 +522,7 @@
   <verb in="basculer" tn="topple, tip over" mo="1-1" hi="13310" hn="3687" hl="567" hs="3785" />
   <verb in="baser" tn="base" mo="1-1" hi="94032" hn="7500" hl="70" hs="22358" />
   <verb in="bassiner" tn="bathe with a warm liquid" mo="1-1" hi="614" hn="49" hl="32" hs="627" />
-  <verb in="baster" tn="suffice, give satisfaction" mo="1-1" hi="408" hn="23" hl="32" hs="155" />
+  <verb in="baster" tn="give in (Switzerland), suffice, give satisfaction (dated)" mo="1-1" hi="408" hn="23" hl="32" hs="155" />
   <verb in="batailler" tn="battle" mo="1-1" hi="3026" hn="1164" hl="63" hs="791" />
   <verb in="bateler" tn="conjure, juggle" mo="1-3A" hi="26" hn="3" hl="0" />
   <verb in="bâter" tn="put on a packsaddle" mo="1-1" hi="1138" hn="321" hl="19" hs="92" />
@@ -693,7 +693,7 @@
   <verb in="brêler" tn="tie with rope" mo="1-1" hi="120" hn="2" hl="1" hs="127" />
   <verb in="brésiller" tn="tint or dye with brazilwood" mo="1-1" hi="4" hn="2" hl="0" hs="3" />
   <verb in="bretteler" tn="dress stone with a toothed tool" mo="1-3A" hi="13" hn="0" hl="0" hs="25" />
-  <verb in="bretter" tn="pick a fight, pick a quarrel" mo="1-1" hi="38" hn="3" hl="2" hs="51" />
+  <verb in="bretter" tn="dress stone with a toothed chisel, dawdle (Quebec), pick a quarrel (obsolete)" mo="1-1" hi="38" hn="3" hl="2" hs="51" />
   <verb in="breveter" tn="patent" mo="1-3B" hi="4140" hn="369" hl="18" hs="620" />
   <verb in="bricoler" tn="tinker" mo="1-1" hi="3358" hn="951" hl="110" hs="2911" />
   <verb in="brider" tn="bridle" mo="1-1" hi="3293" hn="920" hl="113" hs="646" />
@@ -914,7 +914,7 @@
   <verb in="charcuter" tn="chop or cut badly, butcher" mo="1-1" hi="235" hn="35" hl="17" hs="1158" />
   <verb in="charger" tn="load up, load, charge" mo="1-2B" hi="236660" hn="53231" hl="3822" hs="83199" />
   <verb in="charmer" tn="charm with magic, charm" mo="1-1" hi="3848" hn="395" hl="269" hs="5544" />
-  <verb in="charpenter" tn="tailor, tailor make" mo="1-1" hi="1307" hn="209" hl="30" hs="25" />
+  <verb in="charpenter" tn="structure (a speech or play), hew timber" mo="1-1" hi="1307" hn="209" hl="30" hs="25" />
   <verb in="charrier" tn="carry, transport, pull one’s leg" mo="1-1" hi="2380" hn="688" hl="337" hs="2696" />
   <verb in="charroyer" tn="transport by cart or wagon" mo="1-7A" hi="30" hn="2" hl="5" />
   <verb in="chartériser" tn="charter (a plane or train)" mo="1-1" hi="7" hn="1" hl="0" />
@@ -1036,8 +1036,8 @@
   <verb in="cocher" tn="tick, cross" mo="1-1" hi="12237" hn="167" hl="34" hs="2358" />
   <verb in="côcher" tn="mate (of a bird)" mo="1-1" hi="7" hn="1" hl="0" hs="3" />
   <verb in="cochonner" tn="mess up" mo="1-1" hi="32" hn="8" hl="11" hs="120" />
-  <verb in="cocoter" tn="yap, jabber, blather" mo="1-1" hi="5" hn="2" hl="4" hs="32" />
-  <verb in="cocotter" tn="yap, jabber, blather" mo="1-1" hi="5" hn="2" hl="3" hs="111" />
+  <verb in="cocoter" tn="stink (slang), yap, jabber, blather" mo="1-1" hi="5" hn="2" hl="4" hs="32" />
+  <verb in="cocotter" tn="stink (slang), yap, jabber, blather" mo="1-1" hi="5" hn="2" hl="3" hs="111" />
   <verb in="cocufier" tn="be unfaithful to, cuckold" mo="1-1" hi="131" hn="11" hl="15" hs="136" />
   <verb in="coder" tn="code, encode" mo="1-1" hi="14804" hn="695" hl="23" hs="2949" />
   <verb in="codifier" tn="codify" mo="1-1" hi="6211" hn="791" hl="20" hs="92" />
@@ -1362,7 +1362,7 @@
   <verb in="crouler" tn="collapse" mo="1-1" hi="1399" hn="452" hl="216" hs="1383" />
   <verb in="croupir" tn="stagnate, wallow, rot" mo="2-1" hi="828" hn="308" hl="89" hs="1152" />
   <verb in="croustiller" tn="get crunchier, crunch, munch" mo="1-1" hi="434" hn="30" hl="4" hs="193" />
-  <verb in="crouter" tn="eat, form a crust" mo="1-1" hi="41" hn="0" hl="0" />
+  <verb in="crouter" tn="eat (slang), form a crust (dated)" mo="1-1" hi="41" hn="0" hl="0" />
   <verb in="croûter" tn="eat, form a crust" mo="1-1" hi="734" hn="31" hl="97" hs="180" />
   <verb in="crucifier" tn="crucify" mo="1-1" hi="1831" hn="184" hl="107" hs="2861" />
   <verb in="crypter" tn="encrypt" mo="1-1" hi="4735" hn="2110" hl="2" hs="3222" />
@@ -1833,7 +1833,7 @@
   <verb in="dépareiller" tn="unmatch" mo="1-1" hi="289" hn="57" hl="39" hs="149" />
   <verb in="déparer" tn="spoil, put out of place" mo="1-1" hi="264" hn="147" hl="37" hs="51" />
   <verb in="déparier" tn="split up a pair, separate a mating pair" mo="1-1" hi="4" hn="0" hl="31" hs="6" />
-  <verb in="déparler" tn="speak nastily" mo="1-1" hi="17" hn="6" hl="16" hs="16" />
+  <verb in="déparler" tn="talk nonsense (regional), speak ill (regional), stop talking (dated)" mo="1-1" hi="17" hn="6" hl="16" hs="16" />
   <verb in="départager" tn="shift the balance between two parties of" mo="1-2B" hi="2488" hn="781" hl="37" hs="592" />
   <verb in="départementaliser" tn="departmentalize" mo="1-1" hi="116" hn="17" hl="0" hs="6" />
   <verb in="départir" tn="divest, dispose of" re="t" mo="6-1" hi="3314" hn="684" hl="119" hs="652" />
@@ -2368,7 +2368,7 @@
   <verb in="écrouir" tn="harden (metal)" mo="2-1" hi="32" hn="0" hl="1" />
   <verb in="écrouler" tn="collapse" re="t" mo="1-1" hi="5903" hn="1549" hl="924" hs="11111" />
   <verb in="écroûter" tn="remove crust" mo="1-1" hi="22" hn="2" hl="0" hs="3" />
-  <verb in="écuisser" tn="split a tree trunk" mo="1-1" hi="7" hn="2" hl="3" />
+  <verb in="écuisser" tn="splinter a tree trunk (forestry)" mo="1-1" hi="7" hn="2" hl="3" />
   <verb in="écumer" tn="foam, foam up, froth, froth up" mo="1-1" hi="1921" hn="373" hl="102" hs="756" />
   <verb in="écurer" tn="clean thoroughly" mo="1-1" hi="7" hn="0" hl="0" hs="3" />
   <verb in="écussonner" tn="graft (a tree)" mo="1-1" hi="21" hn="0" hl="12" />
@@ -2670,7 +2670,7 @@
   <verb in="ennuyer" tn="bore, annoy" mo="1-7A" hi="12970" hn="2074" hl="2026" hs="50269" />
   <verb in="énoncer" tn="enounce, lay out, declare, explain" mo="1-2A" hi="25788" hn="2649" hl="194" hs="1415" />
   <verb in="enorgueillir" tn="make someone proud" mo="2-1" hi="1652" hn="776" hl="80" hs="222" />
-  <verb in="énouer" tn="remove the knots from, unknot" mo="1-1" hi="4" hn="0" hl="0" />
+  <verb in="énouer" tn="remove knots and debris from cloth (textiles)" mo="1-1" hi="4" hn="0" hl="0" />
   <verb in="enquérir" tn="inquire" re="t" mo="6-3" hi="1244" hn="483" hl="289" hs="620" />
   <verb in="enquêter" tn="investigate, survey" mo="1-1" hi="10922" hn="4053" hl="73" hs="33959" />
   <verb in="enquiquiner" tn="annoy" mo="1-1" hi="293" hn="29" hl="27" hs="576" />
@@ -3457,7 +3457,7 @@
   <verb in="harmoniser" tn="harmonize" mo="1-1" hi="11651" hn="1618" hl="45" hs="456" />
   <verb in="harnacher" tn="harness" mo="1-1" hi="301" hn="109" hl="77" hs="180" ah="t" />
   <verb in="harpailler" tn="quarrel, squabble" re="t" mo="1-1" hi="1" hn="0" hl="0" ah="t" />
-  <verb in="harper" tn="grasp forcefully" mo="1-1" hi="230" hn="15" hl="3" hs="8506" ah="t" />
+  <verb in="harper" tn="lift a hind leg high (of a horse), grasp forcefully (dated)" mo="1-1" hi="230" hn="15" hl="3" hs="8506" ah="t" />
   <verb in="harponner" tn="harpoon" mo="1-1" hi="159" hn="35" hl="30" hs="611" ah="t" />
   <verb in="hasarder" tn="hazard" mo="1-1" hi="912" hn="515" hl="300" hs="222" ah="t" />
   <verb in="hâter" tn="speed up, hasten" mo="1-1" hi="5002" hn="893" hl="1130" hs="3133" ah="t" />
@@ -3726,7 +3726,7 @@
   <verb in="italianiser" tn="Italianize" mo="1-1" hi="32" hn="24" hl="0" hs="3" />
   <verb in="itérer" tn="iterate" mo="1-5" hi="446" hn="0" hl="1" hs="16" />
   <verb in="ixer" tn="X-rate, make X-rated" mo="1-1" hi="1881" hn="218" hl="12" hs="6" />
-  <verb in="jabler" tn="create a lip on the end of a barrel" mo="1-1" hi="7" hn="0" hl="0" />
+  <verb in="jabler" tn="cut a groove in barrel staves (cooperage)" mo="1-1" hi="7" hn="0" hl="0" />
   <verb in="jaboter" tn="jabber" mo="1-1" hi="33" hn="0" hl="11" hs="9" />
   <verb in="jacasser" tn="caw (as a magpie), chatter, jabber" mo="1-1" hi="170" hn="27" hl="67" hs="1554" />
   <verb in="jacter" tn="talk, speak, chat" mo="1-1" hi="282" hn="12" hl="160" hs="316" />
@@ -3788,7 +3788,7 @@
   <verb in="laïciser" tn="laicize, secularize" mo="1-1" hi="358" hn="118" hl="4" hs="9" />
   <verb in="lainer" tn="raise the nap (of cloth)" mo="1-1" hi="940" hn="275" hl="3" hs="66" />
   <verb in="laisser" tn="leave, leave alone, allow" mo="1-1" hi="473054" hn="88931" hl="26537" hs="1354038" />
-  <verb in="laitonner" tn="plate with brass" mo="1-1" hi="105" hn="0" hl="1" />
+  <verb in="laitonner" tn="fit with brass wire, plate with brass" mo="1-1" hi="105" hn="0" hl="1" />
   <verb in="laïusser" tn="make a speech" mo="1-1" hi="0" hn="0" hl="1" hs="6" />
   <verb in="lambrisser" tn="panel" mo="1-1" hi="214" hn="48" hl="24" hs="9" />
   <verb in="lamenter" tn="lament, bewail, bemoan" mo="1-1" hi="1804" hn="700" hl="214" hs="1915" />
@@ -3853,7 +3853,7 @@
   <verb in="limoger" tn="fire" mo="1-2B" hi="2356" hn="1724" hl="9" hs="266" />
   <verb in="limousiner" tn="build with stone" mo="1-1" hi="307" hn="45" hl="4" hs="79" />
   <verb in="liquéfier" tn="liquify" mo="1-1" hi="2383" hn="258" hl="51" hs="797" />
-  <verb in="liquider" tn="liquidate, settle a debt, kill" mo="1-1" hi="6171" hn="1380" hl="229" hs="5604" />
+  <verb in="liquider" tn="liquidate, settle (a debt or a matter), sell off, kill (slang)" mo="1-1" hi="6171" hn="1380" hl="229" hs="5604" />
   <verb in="lire" tn="read" mo="5-10" hi="596444" hn="38862" hl="9665" hs="235218" />
   <verb in="liserer" tn="edge with ribbon" mo="1-4" hi="141" hn="3" hl="6" hs="9" />
   <verb in="lisérer" tn="edge with ribbon" mo="1-5" hi="7" hn="4" hl="15" hs="3" />
@@ -3949,7 +3949,7 @@
   <verb in="marger" tn="margin" mo="1-2B" hi="537" hn="64" hl="5" hs="149" />
   <verb in="marginaliser" tn="marginalize" mo="1-1" hi="3477" hn="1810" hl="4" hs="342" />
   <verb in="marginer" tn="write in the margins of" mo="1-1" hi="63" hn="1" hl="0" hs="22" />
-  <verb in="margoter" tn="make a mating call" mo="1-1" hi="33" hn="2" hl="1" />
+  <verb in="margoter" tn="call (of a quail)" mo="1-1" hi="33" hn="2" hl="1" />
   <verb in="margotter" tn="make a mating call" mo="1-1" hi="76" hn="2" hl="7" hs="3" />
   <verb in="marier" tn="wed, marry" mo="1-1" hi="45181" hn="7813" hl="2696" hs="184310" />
   <verb in="mariner" tn="marinate" mo="1-1" hi="5097" hn="305" hl="65" hs="1902" />
@@ -4300,7 +4300,7 @@
   <verb in="ozoniser" tn="ozonize" mo="1-1" hi="14" hn="0" hl="0" />
   <verb in="pacager" tn="graze" mo="1-2B" hi="37" hn="1" hl="3" />
   <verb in="pacifier" tn="pacify" mo="1-1" hi="1746" hn="626" hl="70" hs="335" />
-  <verb in="pacquer" tn="pack" mo="1-1" hi="60" hn="1" hl="0" hs="16" />
+  <verb in="pacquer" tn="pack salted fish in barrels (fishing)" mo="1-1" hi="60" hn="1" hl="0" hs="16" />
   <verb in="pacser" tn="enter into a civil partnership" mo="1-1" hi="13" hn="0" hl="0" hs="73" />
   <verb in="pactiser" tn="make a pact, make a deal" mo="1-1" hi="634" hn="301" hl="38" hs="649" />
   <verb in="paganiser" tn="paganize" mo="1-1" hi="17" hn="5" hl="0" hs="3" />
@@ -4327,7 +4327,7 @@
   <verb in="paner" tn="bread" mo="1-1" hi="2475" hn="130" hl="15" hs="418" />
   <verb in="panifier" tn="turn into bread" mo="1-1" hi="18" hn="2" hl="0" hs="13" />
   <verb in="paniquer" tn="panic" mo="1-1" hi="3006" hn="467" hl="82" hs="24354" />
-  <verb in="panneauter" tn="put in a cold frame" mo="1-1" hi="11" hn="0" hl="2" />
+  <verb in="panneauter" tn="set nets for small game (hunting), cover with panels" mo="1-1" hi="11" hn="0" hl="2" />
   <verb in="panoramiquer" tn="take a panoramic shot" mo="1-1" hi="3170" hn="91" hl="10" hs="41" />
   <verb in="panosser" tn="mop the floor" mo="1-1" hi="0" hn="0" hl="0" />
   <verb in="panser" tn="bandage, dress a wound, groom" mo="1-1" hi="1393" hn="486" hl="154" hs="1475" />
@@ -4850,7 +4850,7 @@
   <verb in="rapetasser" tn="patch up" mo="1-1" hi="21" hn="17" hl="20" hs="3" />
   <verb in="rapetisser" tn="shrink, shorten" mo="1-1" hi="453" hn="86" hl="142" hs="709" />
   <verb in="rapiécer" tn="patch" mo="1-6B" hi="219" hn="105" hl="102" hs="344" />
-  <verb in="rapiner" tn="pillage, plunder" mo="1-1" hi="38" hn="8" hl="4" hs="16" />
+  <verb in="rapiner" tn="pilfer, embezzle, plunder (dated)" mo="1-1" hi="38" hn="8" hl="4" hs="16" />
   <verb in="raplatir" tn="level" mo="2-1" hi="9" hn="4" hl="5" hs="13" />
   <verb in="rapointir" tn="sharpen again" mo="2-1" hi="0" hn="0" hl="0" />
   <verb in="rappareiller" tn="match" mo="1-1" hi="1" hn="0" hl="0" />
@@ -5246,7 +5246,7 @@
   <verb in="rengager" tn="reengage" mo="1-2B" hi="80" hn="9" hl="22" hs="127" />
   <verb in="rengainer" tn="sheathe, holster" mo="1-1" hi="119" hn="28" hl="28" hs="503" />
   <verb in="rengorger" tn="be filled with vanity and conceit" re="t" mo="1-2B" hi="110" hn="59" hl="90" hs="57" />
-  <verb in="rengrener" tn="refill with grain" mo="1-4" hi="0" hn="0" hl="0" />
+  <verb in="rengrener" tn="re-mesh gear teeth, restrike a coin or medal (minting)" mo="1-4" hi="0" hn="0" hl="0" />
   <verb in="rengréner" tn="mesh into a second gear-wheel" mo="1-5" hi="0" hn="0" hl="0" />
   <verb in="renier" tn="renounce, disown" mo="1-1" hi="7207" hn="2299" hl="433" hs="4994" />
   <verb in="renifler" tn="sniff, turn up one’s nose, smell" mo="1-1" hi="1204" hn="139" hl="626" hs="5677" />
@@ -5849,7 +5849,7 @@
   <verb in="surcharger" tn="overcharge, overload, overburden, overcrowd, surcharge" mo="1-2B" hi="4619" hn="1053" hl="172" hs="2918" />
   <verb in="surchauffer" tn="overheat" mo="1-1" hi="1298" hn="275" hl="104" hs="1155" />
   <verb in="surclasser" tn="outclass" mo="1-1" hi="829" hn="229" hl="13" hs="535" />
-  <verb in="surcomprimer" tn="supercharge" mo="1-1" hi="3" hn="0" hl="0" hs="9" />
+  <verb in="surcomprimer" tn="overcompress, raise the compression ratio of (an engine)" mo="1-1" hi="3" hn="0" hl="0" hs="9" />
   <verb in="surcontrer" tn="redouble (in cards)" mo="1-1" hi="10" hn="0" hl="0" hs="3" />
   <verb in="surcouper" tn="overtrump" mo="1-1" hi="25" hn="0" hl="0" hs="3" />
   <verb in="surélever" tn="increase the height of, raise" mo="1-4" hi="2869" hn="249" hl="84" hs="674" />
@@ -6006,7 +6006,7 @@
   <verb in="terrer" tn="spread with soil" mo="1-1" hi="7531" hn="1068" hl="263" hs="2636" />
   <verb in="terrifier" tn="terrify" mo="1-1" hi="1488" hn="336" hl="212" hs="11528" />
   <verb in="terroriser" tn="terrorize, terrify" mo="1-1" hi="2782" hn="1020" hl="207" hs="5627" />
-  <verb in="terser" tn="plow a third time" mo="1-1" hi="4" hn="0" hl="0" hs="3" />
+  <verb in="terser" tn="plow (a vineyard) a third time" mo="1-1" hi="4" hn="0" hl="0" hs="3" />
   <verb in="tester" tn="test" mo="1-1" hi="72967" hn="4440" hl="49" hs="33453" />
   <verb in="tétaniser" tn="tetanize, petrify" mo="1-1" hi="938" hn="563" hl="33" hs="203" />
   <verb in="téter" tn="suckle" mo="1-5" hi="13919" hn="141" hl="133" hs="2146" />

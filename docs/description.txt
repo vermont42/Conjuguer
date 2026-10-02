@@ -8,7 +8,7 @@ The Conjugation Tutor answers your questions about French verbs and tenses in pl
 
 More than a thousand of the most common verbs come with an etymology tracing the verb’s origins, from Latin and Frankish roots to the modern French you use today.
 
-Nearly every verb, 5,918 of 6,326, shows an example sentence with its English translation. More than 3,500 of these come from real, properly sourced writing: Proust, Zola, Flaubert, La Fontaine, Molière, the “Chanson de Roland”, French and Swiss public documents, Wikipedia, and public-domain quotations from Wiktionary, by authors from Balzac and Hugo to Jules Verne. Claude wrote the rest, for verbs no open source uses. Every source is credited on the Info tab.
+Every one of the 6,326 verbs shows an example sentence with its English translation. More than 3,500 of these come from real, properly sourced writing: Proust, Zola, Flaubert, La Fontaine, Molière, the “Chanson de Roland”, French and Swiss public documents, Wikipedia, and public-domain quotations from Wiktionary, by authors from Balzac and Hugo to Jules Verne. Claude wrote the rest, for verbs no open source uses. Every source is credited on the Info tab.
 
 Conjuguer reaches beyond the app. A Verb of the Day widget brings a daily verb and its présent conjugations to your Home Screen and Lock Screen, a quiz widget lets you answer a question without opening the app, Control Center can start a quiz or open a random verb, and a Live Activity follows an in-progress quiz from the Lock Screen and Dynamic Island.
 
@@ -35,7 +35,7 @@ Le tuteur de conjugaison répond à vos questions sur les verbes et les temps fr
 
 Plus de mille des verbes les plus courants sont accompagnés d’une étymologie qui retrace leur origine, des racines latines et franciques au français d’aujourd’hui.
 
-Presque chaque verbe, 5 918 sur 6 326, présente une phrase d’exemple accompagnée de sa traduction anglaise. Plus de 3 500 de ces phrases sont tirées de textes réels et dûment référencés : Proust, Zola, Flaubert, La Fontaine, Molière, la « Chanson de Roland », des documents publics français et suisses, Wikipédia et des citations du domaine public relevées dans le Wiktionnaire, d’auteurs allant de Balzac et Hugo à Jules Verne. Claude a rédigé les autres, pour les verbes qu’aucune source ouverte n’emploie. Chaque source est créditée sur l’onglet Info.
+Chacun des 6 326 verbes présente une phrase d’exemple accompagnée de sa traduction anglaise. Plus de 3 500 de ces phrases sont tirées de textes réels et dûment référencés : Proust, Zola, Flaubert, La Fontaine, Molière, la « Chanson de Roland », des documents publics français et suisses, Wikipédia et des citations du domaine public relevées dans le Wiktionnaire, d’auteurs allant de Balzac et Hugo à Jules Verne. Claude a rédigé les autres, pour les verbes qu’aucune source ouverte n’emploie. Chaque source est créditée sur l’onglet Info.
 
 Conjuguer s’étend au-delà de l’application. Un widget « Verbe du jour » apporte un verbe quotidien et ses conjugaisons au présent sur votre écran d’accueil et votre écran verrouillé, un widget de quiz vous permet de répondre à une question sans ouvrir l’application, le centre de contrôle peut lancer un quiz ou ouvrir un verbe au hasard, et une activité en direct suit un quiz en cours depuis l’écran verrouillé et la Dynamic Island.
 

@@ -4081,3 +4081,40 @@ altogether, because the verbatim French carried a text edition's artifacts ("-- 
 missing *se*. The skeptic had already named the replacement candidates. Stage 5.6 now has three
 more things to do than the plan first said: apply 23 glosses, honor a pick's corrected
 translation, and swap two picks for the candidates named in their values.
+
+## Stage 5.6: an example for every verb (2026-10-02)
+
+Josh's review left 432 accepted items, and applying them took one new mode in the script that
+applied Stage 4. `apply_verb_pass.py --pass-dir corpus/working/verb_pass/stage5` reads Stage 5's
+approvals, takes each verb's latest attempt across the seventeen shards, and writes the same files
+Stage 4 wrote. It refuses anything odd rather than guessing: a task Stage 5 never had, an accepted
+item that is not the verb's latest attempt, an item the skeptic refuted. The first dry run applied
+everything and skipped nothing. 23 glosses changed and 409 examples went in: 266 written by Claude,
+95 from the corpus, 41 Wiktionnaire quotations and 7 from English Wiktionary. With them, every one of
+the 6,326 verbs has an example sentence. Before the verb pass, the app had 1,141.
+
+Two details needed care. The approved fixes for *ricaner* and *envenimer* swap in a different
+candidate, the one the skeptic had named. The script finds it by the fields Josh's value gives,
+the file and line for Zola, the author for Gustave Aimard, and then runs it through the same
+provenance check as any other pick. Neither the swapped sentences nor *adjectiver*'s corrected one
+had a matching token, so the script now takes the first word built on the verb's stem. The app
+never reads the token, but the data should not lie.
+
+The second was a trap in the order of the stages. *liquider* and *bretter* had their glosses
+changed in Stage 4 and again in Stage 5. Stage 4's script writes target values, so running it
+again, which it was built to allow, would have quietly put the Stage 4 glosses back. It now defers
+to Stage 5 for any gloss or example Stage 5 accepted, and says so. Its dry run still changes nothing.
+
+The English-Wiktionary fix from 5.1 showed up in the result. Stage 4 had to skip 37 English
+quotations because their authors had been stripped out, among them *limoger*'s *Le Monde* piece.
+Stage 5's candidates carry their authors, and *limoger* now ships a Proust line from *Le Temps
+retrouvé*, credited on screen as "— Marcel Proust, « Le Temps retrouvé (À la recherche du temps
+perdu) », via Wiktionary". The 1927 edition year is dropped because Proust died in 1922.
+
+The counts moved everywhere they appear. The credits, the Info text, the App Store description and
+the release notes now say every verb has an example rather than "nearly every". The Wiktionary
+quotations rose from 858 to 900, Claude's examples from 2,406 to 2,672, and the glosses changed by
+the verb pass from 853 verbs to 874. The provenance manifest's author table was built by hand in
+Stage 4. I regenerated it from the shipped examples, after checking that the method reproduced
+the old table exactly: 187 authors and 850 quotations then, 193 and 891 now. Racine and Riccoboni are
+among the new names. The suite passes, the docs check is clean, and nothing is committed.

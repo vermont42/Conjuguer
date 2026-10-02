@@ -1,10 +1,10 @@
 # Authored examples (Claude-original)
 
-This file records every example sentence Claude wrote rather than found. It has three parts: the
+This file records every example sentence Claude wrote rather than found. It has four parts: the
 21 below, the 63 archaic verbs of the *Chanson de Roland* in
-[`classical-authored.md`](classical-authored.md), and the 2,323 sentences of the verb pass in the
-last section. On 2026-10-01 the verb pass replaced one of the 63, *embroncher*, whose sentence used a
-sense neither Wiktionary gives.
+[`classical-authored.md`](classical-authored.md), the 2,323 sentences of the verb pass, and the 266
+of its Stage 5 in the last section. On 2026-10-01 the verb pass replaced one of the 63, *embroncher*,
+whose sentence used a sense neither Wiktionary gives.
 
 The 21 verbs below had **no clean verbal use in any open-licensed corpus tier**
 (literature / government / technology / wikipedia). Most of their surface forms collide with a
@@ -2382,3 +2382,280 @@ Stage 2 of the verb pass (`prompts/verb-pass-plan.md`) had Claude (Sonnet 5) wri
 | 6326 | humoter | humote | Le vieillard humote son bouillon avec précaution. | The old man sips his broth cautiously, sucking it in. |
 
 <!-- verb-pass:end -->
+
+<!-- verb-pass-stage5:start -->
+
+## Stage 5 of the verb pass (266 verbs, applied 2026-10-02)
+
+Stage 5 of the verb pass took the verbs that still had no example after Stage 4. Claude (Sonnet 5.5) wrote a sentence for each verb that no corpus sentence or public-domain quotation served, some of them with CNRTL dictionary evidence (Stages 5c–5e), and Claude (Opus 5.5) checked every one. The rows below are the ones Josh accepted, in frequency-rank order, with the corrections he approved for the skeptic's `partly` verdicts. Each carries `"source": "Claude (Sonnet 5.5)"` and `"line": null`.
+
+| Rank | Verb | Form | French | English |
+|---|---|---|---|---|
+| 78 | sortir (obtain) | sortissait | La décision sortissait son plein effet dès le lendemain de la signature. | The decision took full effect the day after it was signed. |
+| 799 | trancher | tranché | Papa a tranché le jambon en fines lamelles pour le pique-nique. | Dad sliced the ham into thin strips for the picnic. |
+| 1137 | dialoguer | dialogué | Après leur dispute, les deux voisins ont enfin dialogué calmement pendant une heure. | After their quarrel, the two neighbors finally talked calmly for an hour. |
+| 1168 | saturer | saturé | Le chimiste a saturé la solution en ajoutant du sel jusqu'à ce qu'il ne se dissolve plus. | The chemist saturated the solution by adding salt until no more would dissolve. |
+| 1365 | terrer | terré | Avant les gelées, le jardinier a terré le pied des rosiers pour protéger les racines. | Before the frosts, the gardener banked soil around the base of the rosebushes to protect the roots. |
+| 1486 | liquider | liquide | Le magasin de meubles liquide tous ses canapés à moitié prix avant les travaux. | The furniture store is selling off all its sofas at half price before the renovations. |
+| 1565 | marrer | marre | Je me marre toujours quand mon grand-père raconte ses blagues de pêcheur. | I always crack up when my grandfather tells his fishing jokes. |
+| 1682 | cadrer | cadre | Son récit ne cadre pas du tout avec ce que les témoins ont raconté. | His account doesn't fit at all with what the witnesses described. |
+| 1787 | médicaliser | médicaliser | On a tendance à médicaliser des problèmes qui relèvent simplement de la vie quotidienne. | There is a tendency to medicalize problems that are simply part of everyday life. |
+| 1802 | déjanter | déjanté | Le pneu a déjanté dans le virage, et la voiture a fini dans le fossé. | The tire came off the rim in the curve, and the car ended up in the ditch. |
+| 1831 | mouvementer | mouvementer | Le kiné m'a demandé de mouvementer doucement mon poignet plusieurs fois par jour. | The physiotherapist asked me to gently move my wrist several times a day. |
+| 1896 | bouler | boule | Au printemps, le pigeon boule et tourne autour de la femelle en roucoulant. | In spring, the pigeon puffs up its throat and struts around the female, cooing. |
+| 1903 | exclamer | se sont exclamés | En voyant le feu d'artifice, les enfants se sont exclamés : « Quelle merveille ! » | Seeing the fireworks, the children exclaimed, “How marvelous!” |
+| 1904 | démanteler | démantelé | La police a démantelé un important réseau de trafiquants en moins d'une semaine. | The police dismantled a major network of traffickers in less than a week. |
+| 2019 | historier | historiait | Le vieux pêcheur historiait longuement ses aventures en mer, et les enfants l'écoutaient sans bouger. | The old fisherman told his adventures at sea at great length, and the children listened without moving. |
+| 2033 | épingler | épinglé | Elle a épinglé un petit badge sur le revers de sa veste avant de sortir. | She pinned a small badge to the lapel of her jacket before going out. |
+| 2097 | graduer | graduait | Le fabricant graduait chaque éprouvette en millilitres avant de la mettre en vente. | The manufacturer marked each test tube with milliliter graduations before putting it on sale. |
+| 2150 | clicher | cliché | Depuis le balcon, le reporter a cliché la manifestation avant que la police n'arrive. | From the balcony, the reporter photographed the demonstration before the police arrived. |
+| 2319 | brader | brade | Le magasin brade tous ses manteaux d'hiver à la fin de la saison. | The store is selling off all its winter coats at rock-bottom prices at the end of the season. |
+| 2512 | cloisonner | cloisonné | Ils ont cloisonné le grenier pour y aménager deux petites chambres. | They partitioned the attic to create two small bedrooms. |
+| 2522 | oxyder | oxydé | L'humidité a oxydé les vis du portail en quelques mois. | The humidity oxidized the gate's screws within a few months. |
+| 2564 | diligenter | diligenter | Le directeur a demandé à ses équipes de diligenter le traitement des dossiers urgents avant la fin de la semaine. | The director asked his teams to expedite the processing of the urgent files before the end of the week. |
+| 2598 | schématiser | a schématisé | Pour nous expliquer le fonctionnement du moteur, le professeur a schématisé chaque étape au tableau. | To explain how the engine works, the teacher sketched out each step on the board. |
+| 2605 | tiédir | a tiédi | Le café a tiédi pendant qu'elle répondait au téléphone. | The coffee turned lukewarm while she was on the phone. |
+| 2627 | surtaxer | a surtaxé | Le maire a surtaxé les habitants du quartier, qui paient maintenant bien plus d'impôts que leurs voisins. | The mayor overtaxed the residents of the neighborhood, who now pay far more tax than their neighbors. |
+| 2644 | enclaver | enclavé | Ce petit village est enclavé entre deux montagnes, sans route directe vers la ville. | This little village is shut in between two mountains, with no direct road to the city. |
+| 2676 | carburer | carbure | Depuis la révision, le moteur de la vieille voiture carbure parfaitement, même en côte. | Since the service, the old car's engine runs perfectly, even uphill. |
+| 2680 | arriérer | a arriéré | Le fermier a arriéré le paiement de ses fermages jusqu'à la récolte. | The farmer put off paying his rent until the harvest. |
+| 2723 | dévoyer | ont dévoyé | Ses mauvaises fréquentations ont dévoyé le jeune homme, qui a abandonné ses études. | His bad company led the young man astray, and he dropped out of school. |
+| 2754 | abstraire | abstrait | Le philosophe abstrait la notion de beauté des objets particuliers qui la manifestent. | The philosopher abstracts the notion of beauty from the particular objects that display it. |
+| 2769 | réinscrire | a réinscrit | Elle a réinscrit son fils au club de natation pour la rentrée de septembre. | She signed her son up again at the swimming club for the September restart. |
+| 2773 | effriter | effritent | La pluie et le gel effritent peu à peu les murs de la vieille église. | Rain and frost gradually crumble the walls of the old church. |
+| 2791 | tiercer | tierce | Le fermier tierce ses champs à la fin de l'été, juste avant les semailles d'automne. | The farmer gives his fields their third plowing at the end of summer, just before the autumn sowing. |
+| 2818 | charpenter | charpentent | Les compagnons charpentent les poutres du toit dans l'atelier. | The journeymen are hewing the roof beams in the workshop. |
+| 2876 | raréfier | ont raréfié | Les chasseurs ont raréfié le gibier dans toute la vallée. | Hunters have made game scarcer throughout the valley. |
+| 2972 | ajourer | a ajouré | L'artisan a ajouré le panneau de bois pour y dessiner de petites étoiles. | The craftsman perforated the wooden panel to form little stars in it. |
+| 2993 | débaucher | a débauché | Faute de commandes, la fabrique a débauché une dizaine d'ouvriers en mars. | For lack of orders, the factory laid off about ten workers in March. |
+| 3031 | dilapider | a dilapidé | Le fils a dilapidé en quelques années toute la fortune que son père avait mise de côté. | In just a few years the son squandered the entire fortune his father had set aside. |
+| 3061 | magner | magner | Il faut se magner si on veut attraper le dernier train ce soir. | We have to hurry up if we want to catch the last train tonight. |
+| 3077 | pourfendre | pourfendu | Dans son discours, le député a pourfendu la politique du gouvernement. | In his speech, the deputy attacked the government's policy. |
+| 3105 | délester | délesté | Le pilote a délesté la montgolfière de deux sacs de sable pour reprendre de l'altitude. | The pilot dropped two sandbags of ballast from the hot-air balloon to regain altitude. |
+| 3110 | palabrer | palabré | Les villageois ont palabré toute la soirée sous l'arbre sans prendre aucune décision. | The villagers talked on and on all evening under the tree without reaching any decision. |
+| 3184 | défausser | défausse | L'ouvrier défausse la barre d'acier à coups de marteau avant de la souder. | The worker straightens the steel bar with hammer blows before welding it. |
+| 3207 | carbonater | carbonatent | Les chimistes carbonatent la solution en y ajoutant du carbonate de sodium. | The chemists carbonate the solution by adding sodium carbonate to it. |
+| 3259 | chialer | chialer | Arrête de chialer, ce n'est qu'un petit bobo ! | Stop crying, it's only a little boo-boo! |
+| 3292 | ulcérer | ulcéré | Cette injustice a longtemps ulcéré le vieux soldat. | That injustice embittered the old soldier for a long time. |
+| 3318 | mâtiner | mâtine | Ce romancier mâtine ses récits policiers d'humour noir. | This novelist blends black humor into his crime stories. |
+| 3330 | kilométrer | kilométrer | On a décidé de kilométrer la nouvelle route en posant une borne tous les kilomètres. | They decided to mark the new road with kilometer posts, placing one every kilometer. |
+| 3369 | croûter | croûter | Viens croûter avec nous, il y a des pâtes pour tout le monde. | Come eat with us, there's pasta for everyone. |
+| 3382 | tuber | tubent | Les ouvriers tubent la tôle pour fabriquer des conduits de ventilation. | The workers form the sheet metal into tubes to make ventilation ducts. |
+| 3436 | claironner | claironne | Chaque matin, le soldat claironne le réveil devant la caserne. | Every morning, the soldier sounds reveille on his bugle in front of the barracks. |
+| 3479 | délaver | délavé | Le soleil a délavé les couleurs du vieux drapeau. | The sun has faded the colors of the old flag. |
+| 3483 | compartimenter | compartimenté | Pour gagner de la place, l'architecte a compartimenté le grand hangar en plusieurs ateliers. | To save space, the architect divided the large hangar into several workshops. |
+| 3533 | trompeter | trompeter | Inutile de trompeter la nouvelle avant que tout soit officiellement décidé. | There's no point trumpeting the news before everything has been officially decided. |
+| 3563 | bagarrer | bagarrer | Ces gamins adorent se bagarrer dans la cour de récréation. | Those kids love to scrap in the schoolyard. |
+| 3566 | picoler | picoler | Il passe ses soirées à picoler au bar avec ses copains. | He spends his evenings boozing at the bar with his buddies. |
+| 3574 | pointiller | pointiller | Arrêtez de pointiller sur chaque virgule et passons à l'essentiel. | Stop quibbling over every comma and let's get to the point. |
+| 3611 | étuver | étuve | Le laboratoire étuve les échantillons à cent degrés pendant une heure. | The laboratory dries the samples in a drying oven at one hundred degrees for an hour. |
+| 3645 | truster | trustent | Quelques grands groupes trustent le marché de la distribution dans la région. | A few big companies monopolize the distribution market in the region. |
+| 3666 | peinturer | peinturé | Nous avons peinturé les murs du salon en bleu pâle. | We painted the living room walls pale blue. |
+| 3670 | interpénétrer | interpénètrent | Dans ce quartier, les cultures s'interpénètrent depuis des siècles. | In this neighborhood, the cultures have interpenetrated for centuries. |
+| 3679 | poiler | poilés | On s'est tous poilés devant ce film hier soir. | We all laughed our heads off at that movie last night. |
+| 3690 | orbiter | orbite | Le satellite orbite autour de la Terre toutes les quatre-vingt-dix minutes. | The satellite orbits the Earth every ninety minutes. |
+| 3729 | phagocyter | phagocytent | Les globules blancs phagocytent les bactéries qui pénètrent dans le sang. | White blood cells phagocytize the bacteria that enter the bloodstream. |
+| 3748 | intriquer | intriquent | Dans ce roman, les destins des personnages s'intriquent peu à peu. | In this novel, the characters' destinies gradually become intertwined. |
+| 3778 | engoncer | engonce | Ce gros manteau l'engonce : on dirait qu'il n'a plus de cou. | That bulky coat swallows him up: it looks as if he has no neck left. |
+| 3788 | castagner | castagner | Après le match, les supporters ont fini par se castagner devant le stade. | After the match, the fans ended up scrapping outside the stadium. |
+| 3812 | glisser-déposer | glisser-déposer | Pour ajouter la photo, il suffit de glisser-déposer le fichier dans la fenêtre. | To add the photo, just drag and drop the file into the window. |
+| 3825 | alcooliser | alcoolisé | Le barman a alcoolisé le jus de fruits sans prévenir les clients. | The bartender spiked the fruit juice with alcohol without warning the customers. |
+| 3877 | égrainer | égrainait | Assise sur le perron, elle égrainait des épis de maïs pour nourrir les poules. | Sitting on the front steps, she shelled ears of corn to feed the chickens. |
+| 3906 | baster | baster | Les vignerons de Lavaux ont refusé de baster devant les exigences du canton. | The Lavaux winegrowers refused to give in to the canton's demands. |
+| 3926 | empierrer | empierré | Les ouvriers ont empierré le chemin de terre avant l'arrivée de l'hiver. | The workers surfaced the dirt road with crushed stone before winter arrived. |
+| 3990 | gourer | gouré | Je me suis gouré de route et nous avons roulé une heure pour rien. | I took the wrong road and we drove for an hour for nothing. |
+| 3994 | potasser | potasser | Il a passé tout le week-end à potasser ses cours de chimie avant l'examen. | He spent the whole weekend cramming his chemistry lessons before the exam. |
+| 3999 | étrenner | étrenné | Elle a étrenné sa nouvelle robe le soir de l'anniversaire de sa sœur. | She wore her new dress for the first time on the evening of her sister's birthday. |
+| 4002 | imperméabiliser | imperméabiliser | Il faut imperméabiliser ces bottes avec un spray avant la randonnée. | You need to waterproof these boots with a spray before the hike. |
+| 4026 | sous-tendre | sous-tend | Cette théorie sous-tend l'ensemble de son raisonnement. | This theory underlies the whole of his reasoning. |
+| 4039 | détourer | détouré | Le graphiste a détouré la photo pour supprimer l'arrière-plan. | The graphic designer cut the subject out of the photo to remove the background. |
+| 4083 | corseter | corsetait | La couturière corsetait la mariée avec soin avant la cérémonie. | The seamstress carefully fitted the bride into her corset before the ceremony. |
+| 4097 | ébrécher | ébréché | Il a ébréché son verre en le posant trop fort sur l'évier. | He chipped his glass by setting it down too hard on the sink. |
+| 4099 | contre-indiquer | contre-indique | Le médecin contre-indique ce traitement aux personnes qui souffrent d'allergies. | The doctor advises against this treatment for people with allergies. |
+| 4140 | déboîter | déboîté | Il a déboîté les deux éléments du tuyau pour le nettoyer. | He pulled the two sections of the pipe apart to clean it. |
+| 4182 | mazouter | mazouté | La marée noire a mazouté des centaines d'oiseaux sur toute la côte. | The oil spill covered hundreds of birds in oil all along the coast. |
+| 4213 | résiner | résiné | Il a résiné la coque du bateau pour la rendre étanche. | He coated the boat's hull with resin to make it watertight. |
+| 4219 | gamberger | gamberger | Laisse-moi gamberger un peu avant de te donner ma réponse. | Let me think it over for a bit before I give you my answer. |
+| 4293 | vrombir | vrombissent | Les abeilles vrombissent autour des fleurs du jardin pendant tout l'après-midi. | The bees hum around the flowers in the garden all afternoon. |
+| 4308 | désaxer | désaxé | La mort de sa femme l'a complètement désaxé. | His wife's death completely unbalanced him. |
+| 4326 | platiner | platine | L'atelier platine les contacts électriques pour qu'ils résistent mieux à la corrosion. | The workshop plates the electrical contacts with platinum so that they resist corrosion better. |
+| 4336 | harper | harpait | Le vétérinaire a observé que la jument harpait légèrement en sortant de son box. | The vet noticed that the mare was hitching a hind leg slightly as she came out of her stall. |
+| 4471 | tripatouiller | tripatouillé | Quelqu'un a tripatouillé les comptes de l'entreprise avant l'audit. | Someone tampered with the company's accounts before the audit. |
+| 4534 | déplumer | déplumé | Le chat a attrapé l'oiseau et l'a à moitié déplumé avant que nous intervenions. | The cat caught the bird and had half plucked it before we stepped in. |
+| 4552 | baratiner | baratiner | Il essaie de baratiner la serveuse pour obtenir son numéro de téléphone. | He is trying to chat up the waitress to get her phone number. |
+| 4577 | rechausser | rechaussé | Après la plage, la mère a rechaussé l'enfant avant de rentrer à la maison. | After the beach, the mother put the child's shoes back on before heading home. |
+| 4591 | relaver | relave | Le lave-vaisselle n'a pas bien nettoyé les assiettes, alors je les relave à la main. | The dishwasher didn't clean the plates properly, so I'm rewashing them by hand. |
+| 4597 | insoler | s'insoler | Le médecin conseille aux convalescents de s'insoler progressivement, dix minutes le premier jour, puis un peu plus chaque matin. | The doctor advises convalescents to expose themselves to the sun gradually, ten minutes the first day, then a little more each morning. |
+| 4614 | dépiler | dépile | Le tanneur dépile les peaux dans un bain de chaux avant de les travailler. | The tanner removes the hair from the hides in a lime bath before working them. |
+| 4615 | putréfier | putréfie | La chaleur de l'été putréfie rapidement la viande laissée au soleil. | The summer heat quickly rots meat left out in the sun. |
+| 4625 | invertir | invertit | Le télescope invertit l'image : le haut devient le bas. | The telescope inverts the image: the top becomes the bottom. |
+| 4626 | caleter | caleter | Quand les flics sont arrivés, on a dû caleter vite fait. | When the cops showed up, we had to make ourselves scarce in a hurry. |
+| 4690 | engrener | engrène | Chaque matin, le meunier engrène la trémie du moulin avant de lancer la meule. | Every morning the miller fills the mill's hopper with grain before starting the millstone. |
+| 4827 | fuseler | fuseler | Le menuisier va fuseler les pieds de la chaise pour les rendre plus élégants. | The carpenter is going to shape the chair legs like spindles to make them more elegant. |
+| 4834 | rétamer | rétamé | Le chaudronnier a rétamé les vieilles casseroles de cuivre de ma grand-mère. | The coppersmith re-tinned my grandmother's old copper pots. |
+| 4841 | frigorifier | frigorifie | Cette usine frigorifie le poisson dès son arrivée du port pour le conserver. | This plant refrigerates the fish as soon as it arrives from the port, to preserve it. |
+| 4844 | laitonner | laitonne | L'atelier laitonne les pièces de fer pour leur donner un bel éclat doré. | The workshop brass-plates the iron parts to give them a handsome golden sheen. |
+| 4893 | chourer | chouré | Quelqu'un m'a chouré mon portable dans le métro. | Somebody swiped my phone on the metro. |
+| 4897 | forclore | forclore | Le tribunal peut forclore le plaignant qui a laissé passer le délai de recours. | The court may debar a plaintiff who has let the appeal deadline pass. |
+| 4901 | débriefer | débriefer | Après l'exercice, le capitaine va débriefer toute l'équipe. | After the exercise, the captain is going to debrief the whole team. |
+| 4926 | ressuyer | ressuyé | Le jardinier a ressuyé les outils mouillés avant de les ranger. | The gardener dried off the wet tools before putting them away. |
+| 4957 | décomprimer | décomprime | Après la remontée, le médecin décomprime lentement le plongeur dans un caisson. | After the ascent, the doctor slowly decompresses the diver in a chamber. |
+| 4958 | cornaquer | cornaque | Un guide local cornaque les touristes à travers les ruelles de la vieille ville. | A local guide shows the tourists around the alleys of the old town. |
+| 4965 | frégater | frégaté | Le chantier a frégaté ce navire marchand pour lui donner la ligne basse et élancée d'une frégate. | The shipyard built this merchant ship frigate-style to give it the low, sleek lines of a frigate. |
+| 4977 | exonder | s'exondent | À marée basse, les rochers s'exondent et les oiseaux viennent y chercher des crabes. | At low tide, the rocks emerge from the water and the birds come to look for crabs. |
+| 5010 | créner | crène | Le fondeur crène la lettre f, dont l'œil déborde du corps. | The typefounder kerns the letter f, whose face overhangs the body. |
+| 5038 | clochardiser | clochardisé | Après son licenciement et son divorce, Paul a clochardisé en moins d'un an. | After losing his job and his marriage, Paul turned into a tramp in less than a year. |
+| 5078 | striduler | stridulent | Le soir, les grillons stridulent dans l'herbe derrière la maison. | In the evening, the crickets chirp in the grass behind the house. |
+| 5098 | zyeuter | zyeuter | Arrête de zyeuter mon assiette, tu as déjà mangé ! | Stop eyeing my plate, you've already eaten! |
+| 5102 | tringler | tringlé | Dans ce film, le héros se vante d'avoir tringlé la femme de son patron. | In this film, the hero boasts of having shagged his boss's wife. |
+| 5103 | remouiller | remouiller | Le linge a séché trop vite, alors je dois le remouiller avant de le repasser. | The laundry dried too fast, so I have to dampen it again before ironing it. |
+| 5118 | pacquer | pacquent | Avant le départ du bateau, les ouvriers pacquent les morues salées dans des barils. | Before the boat leaves, the workers pack the salted cod in barrels. |
+| 5119 | décorder | décordé | Après l'ascension, le guide a décordé le blessé et l'a installé sur le brancard. | After the climb, the guide untied the injured man from the rope and laid him on the stretcher. |
+| 5123 | trépaner | trépané | Le chirurgien a trépané le patient pour soulager la pression sur son cerveau. | The surgeon trepanned the patient to relieve the pressure on his brain. |
+| 5126 | démancher | démanché | Paul a démanché la vieille pioche pour y mettre un manche neuf. | Paul took the handle off the old pickaxe to fit a new one. |
+| 5136 | invaginer | s'invagine | Chez l'embryon, la paroi de la blastula s'invagine pour former la gastrula. | In the embryo, the wall of the blastula invaginates to form the gastrula. |
+| 5137 | retapisser | retapissé | Mon grand-père a retapissé les fauteuils du salon avec un beau velours vert. | My grandfather reupholstered the living-room armchairs in a lovely green velvet. |
+| 5138 | instiguer | instiguait | Le meneur instiguait ses camarades à la révolte contre le directeur. | The ringleader was inciting his classmates to revolt against the headmaster. |
+| 5149 | désaliéner | désaliéner | Pour Marx, seule une société plus juste pourrait désaliéner les travailleurs. | For Marx, only a fairer society could free workers from their alienation. |
+| 5154 | décalcifier | décalcifier | Une alimentation pauvre en vitamine D peut décalcifier les os d'un enfant. | A diet low in vitamin D can decalcify a child's bones. |
+| 5182 | ratiboiser | ratiboisé | Au poker, mon cousin m'a ratiboisé tout mon argent de poche. | At poker, my cousin cleaned me out of all my pocket money. |
+| 5187 | rétreindre | rétreint | Le forgeron rétreint le tube d'acier à coups de marteau pour en réduire le diamètre. | The blacksmith hammers the steel tube narrower to reduce its diameter. |
+| 5193 | tontiner | tontinent | Chaque mois, mes cousins tontinent avec leurs amis pour pouvoir financer un voyage. | Every month, my cousins take part in a tontine with their friends so they can fund a trip. |
+| 5214 | amurer | amure | Sur l'ordre du capitaine, le matelot amure la misaine. | On the captain's order, the sailor hauls the foresail's tack taut. |
+| 5299 | crouter | crouter | Il est midi passé, on va crouter un morceau avec les copains ? | It's past noon, shall we go grab a bite with the guys? |
+| 5310 | alunir | aluni | Le 20 juillet 1969, Armstrong et Aldrin ont aluni dans la mer de la Tranquillité. | On July 20, 1969, Armstrong and Aldrin landed in the Sea of Tranquility. |
+| 5317 | tapiner | tapiné | Les gars ont tapiné toute la semaine sur le chantier pour finir à temps. | The guys slogged away all week on the building site to finish on time. |
+| 5334 | rapiner | rapinait | Au marché, le gamin rapinait dès que les marchands tournaient le dos. | At the market, the kid pilfered whenever the merchants turned their backs. |
+| 5336 | bretter | a bretté | L'apprenti a bretté toutes les dalles de grès avant la pose. | The apprentice dressed all the sandstone slabs with a toothed chisel before they were laid. |
+| 5341 | placardiser | placardisé | Après son refus de la mutation, la direction a placardisé Claire en lui retirant peu à peu ses dossiers. | After she refused the transfer, management sidelined Claire by gradually taking her files away. |
+| 5352 | rebiquer | rebiquent | Ses cheveux rebiquent toujours à l'arrière, même après un coup de peigne. | His hair always sticks up at the back, even after a run of the comb. |
+| 5367 | bigler | bigle | Depuis sa naissance, le petit garçon bigle un peu de l'œil gauche. | Since birth, the little boy has had a slight squint in his left eye. |
+| 5381 | décadrer | décadré | Avant de vendre le tableau, l'antiquaire l'a décadré avec précaution. | Before selling the painting, the antiques dealer carefully took it out of its frame. |
+| 5383 | ouatiner | ouatine | La couturière ouatine la doublure de ce manteau pour qu'il tienne plus chaud. | The seamstress quilts the lining of this coat with wadding so that it keeps warmer. |
+| 5384 | margoter | margote | Dans les blés, une caille margote dès le lever du jour. | In the wheat fields, a quail is calling from daybreak. |
+| 5423 | réaléser | réalésé | Le garagiste a réalésé les cylindres du moteur avant de monter de nouveaux pistons. | The mechanic rebored the engine cylinders before fitting new pistons. |
+| 5424 | visibiliser | visibilise | Cette exposition visibilise le travail des femmes dans l'agriculture. | This exhibition makes women's work in agriculture visible. |
+| 5425 | russifier | russifier | Au dix-neuvième siècle, le tsar a voulu russifier les provinces conquises. | In the nineteenth century, the tsar wanted to Russify the conquered provinces. |
+| 5426 | estoquer | estoqué | Le chevalier a estoqué son adversaire d'un coup d'épée en pleine poitrine. | The knight ran his opponent through with a sword thrust to the chest. |
+| 5428 | calfater | calfatent | Les charpentiers calfatent la coque du bateau avec de l'étoupe et du goudron. | The shipwrights are caulking the boat's hull with oakum and tar. |
+| 5429 | dératiser | dératisé | La mairie a dératisé tout le quartier après l'invasion de rats. | The town hall rid the whole neighborhood of rats after the infestation. |
+| 5430 | désadapter | désadapter | Une longue hospitalisation risque de désadapter un patient de sa vie quotidienne. | A long hospital stay can leave a patient unsuited to daily life. |
+| 5433 | craqueter | craquetait | Le bois sec craquetait doucement dans la cheminée. | The dry wood was crackling softly in the fireplace. |
+| 5435 | japoniser | japonise | Le chef japonise les recettes françaises en y ajoutant du miso et du yuzu. | The chef gives French recipes a Japanese twist by adding miso and yuzu. |
+| 5437 | réensemencer | réensemencé | Les agriculteurs ont réensemencé le champ de blé après les fortes pluies. | The farmers reseeded the wheat field after the heavy rains. |
+| 5439 | surmédicaliser | surmédicaliser | On reproche à ce système de surmédicaliser les accouchements normaux. | The system is criticized for overmedicalizing normal births. |
+| 5441 | surhausser | surhaussé | On a surhaussé le mur du jardin pour se protéger des regards. | They raised the garden wall to shield themselves from prying eyes. |
+| 5445 | dribler | drible | Le jeune attaquant drible le gardien et marque un but magnifique. | The young striker dribbles past the goalkeeper and scores a magnificent goal. |
+| 5448 | syntoniser | syntonise | L'ingénieur syntonise les deux circuits sur la même fréquence. | The engineer tunes the two circuits to the same frequency. |
+| 5449 | engober | engobe | La potière engobe le vase avant de le mettre au four. | The potter coats the vase with slip before putting it in the kiln. |
+| 5450 | insolubiliser | insolubilise | Ce traitement chimique insolubilise les métaux lourds présents dans le sol. | This chemical treatment makes the heavy metals in the soil insoluble. |
+| 5451 | suiffer | suiffe | Le matelot suiffe les cordages pour les protéger de l'humidité. | The sailor coats the ropes with tallow to protect them from damp. |
+| 5452 | plucher | pluche | Mon vieux pull de laine pluche dès qu'on le lave. | My old wool sweater gets fluffy as soon as it is washed. |
+| 5453 | délainer | délaine | Le tanneur délaine les peaux de mouton avant de les traiter. | The tanner removes the wool from the sheepskins before treating them. |
+| 5455 | blatérer | blatère | Dans le pré, le bélier blatère avec insistance. | In the meadow, the ram bleats insistently. |
+| 5540 | désarrimer | désarrimé | Le roulis a désarrimé les caisses, qui ont glissé d'un bord à l'autre de la cale. | The rolling of the ship broke the crates loose from their lashings, and they slid from one side of the hold to the other. |
+| 5594 | briqueter | briqueté | Les ouvriers ont briqueté la cour de la vieille maison avant l'été. | The workers paved the old house's courtyard with brick before summer. |
+| 5595 | panifier | panifie | Le boulanger panifie la farine de seigle pour faire un pain plus dense. | The baker turns rye flour into bread to make a denser loaf. |
+| 5608 | déparler | déparles | Tu déparles, mon vieux, tu n'as rien compris à ce qu'on t'a dit. | You're talking nonsense, pal, you didn't understand a word of what you were told. |
+| 5631 | dérader | déradé | Pendant la tempête, le cargo a déradé après la rupture de ses amarres et a dérivé vers le large. | During the storm, the freighter was driven from its anchorage after its mooring lines snapped, and drifted out to sea. |
+| 5642 | désenvoûter | désenvoûter | Le sorcier a promis de désenvoûter la jeune fille que l'on disait ensorcelée. | The sorcerer promised to lift the spell from the girl who was said to be bewitched. |
+| 5653 | grammaticaliser | grammaticalisé | Avec le temps, le français a grammaticalisé le mot « pas », devenu un simple marqueur de négation. | Over time, French grammaticalized the word “pas”, which became a mere marker of negation. |
+| 5654 | guiper | guipe | L'électricien guipe le fil de cuivre de ruban isolant. | The electrician wraps the copper wire in insulating tape. |
+| 5662 | louveter | louveté | La louve a louveté dans sa tanière au début du printemps. | The she-wolf whelped in her den at the start of spring. |
+| 5670 | encartonner | encartonnent | Les ouvriers encartonnent les bouteilles avant de les expédier. | The workers pack the bottles into cartons before shipping them. |
+| 5676 | mâchurer | mâchuré | Le ramoneur a mâchuré le mur blanc avec ses doigts noirs de suie. | The chimney sweep smeared the white wall with his soot-black fingers. |
+| 5679 | conglomérer | conglomère | Avec le temps, la pression conglomère les grains de sable en une roche dure. | Over time, pressure binds the grains of sand together into a hard rock. |
+| 5753 | panneauter | panneaute | Le braconnier panneaute à la lisière du bois pour prendre des lapins. | The poacher sets nets at the edge of the woods to catch rabbits. |
+| 5794 | houpper | houppait | Elle houppait les fils de soie pour garnir le coussin. | She arranged the silk threads in tufts to trim the cushion. |
+| 5806 | envoiler | s'est envoilé | L'acier s'est envoilé pendant la trempe. | The steel warped during hardening. |
+| 5818 | vacuoliser | vacuoliser | Sous le microscope, on voit le cytoplasme se vacuoliser peu à peu. | Under the microscope, you can see the cytoplasm gradually vacuolize. |
+| 5823 | calter | ont calté | Les cambrioleurs ont calté dès qu'ils ont entendu la sirène. | The burglars bolted as soon as they heard the siren. |
+| 5844 | empatter | empattent | Pour éviter l'effondrement, les maçons empattent le vieux mur de la ferme. | To prevent a collapse, the masons are buttressing the old wall of the farm. |
+| 5846 | ablater | ablate | Le vent chargé de sable ablate lentement la surface du rocher. | The sand-laden wind slowly ablates the surface of the rock. |
+| 5847 | cacaber | cacabe | Au loin, une perdrix cacabe dans les blés. | In the distance, a partridge calls out in the wheat. |
+| 5848 | déprolétariser | déprolétariser | Cette politique cherche à déprolétariser les quartiers ouvriers. | This policy aims to deproletarize the working-class neighborhoods. |
+| 5849 | écacher | écache | Le forgeron écache le fer rouge sous le marteau. | The blacksmith flattens the red-hot iron under the hammer. |
+| 5850 | émotter | émotte | Le paysan émotte son champ avec une herse avant de semer. | The farmer breaks up the clods in his field with a harrow before sowing. |
+| 5851 | nitrifier | nitrifient | Certaines bactéries du sol nitrifient l'ammoniac en nitrates. | Some soil bacteria nitrify ammonia into nitrates. |
+| 5852 | périphraser | périphrasait | Il périphrasait sans cesse pour éviter de dire la vérité. | He kept using roundabout phrasing to avoid telling the truth. |
+| 5854 | tenonner | tenonne | Le menuisier tenonne les deux extrémités de la traverse. | The carpenter puts tenons on both ends of the crosspiece. |
+| 5855 | lock-outer | a lock-outé | La direction a lock-outé tous les ouvriers après trois semaines de grève. | Management locked out all the workers after three weeks of strikes. |
+| 5858 | désassortir | a désassorti | En remplaçant un seul fauteuil, il a désassorti tout le salon. | By replacing just one armchair, he spoiled the match of the whole living room set. |
+| 5860 | déstaliniser | déstaliniser | Khrouchtchev a voulu déstaliniser l'Union soviétique à partir de 1956. | Khrushchev set out to destalinize the Soviet Union from 1956 on. |
+| 5863 | adjectiver | adjectivent | Le français adjective volontiers les participes passés. | French readily adjectivizes past participles. |
+| 5864 | biologiser | biologisent | Certains auteurs biologisent les comportements sociaux au lieu de les expliquer par l'histoire. | Some authors analyze social behavior from a strictly biological point of view instead of explaining it through history. |
+| 5866 | écuisser | a écuissé | Le bûcheron a mal abattu le chêne et l'a écuissé en le faisant tomber. | The woodcutter felled the oak badly and splintered its trunk as it fell. |
+| 5868 | volleyer | volleye | Au filet, il volleye la balle de coup droit. | At the net, he volleys the ball with a forehand. |
+| 5869 | autorépliquer | s'autoréplique | Le virus informatique s'autoréplique sur chaque machine du réseau. | The computer virus replicates itself on every machine on the network. |
+| 5870 | entredétruire | se sont entredétruites | Les deux factions rivales se sont entredétruites en quelques années. | The two rival factions destroyed each other within a few years. |
+| 5871 | vermiller | vermille | Le sanglier vermille dans la terre humide sous les chênes. | The wild boar digs around in the damp ground beneath the oaks for worms. |
+| 5873 | côcher | côche | Le coq côche la poule dans la basse-cour. | The rooster mates with the hen in the farmyard. |
+| 5874 | toronner | toronne | Elle toronne le chanvre pour fabriquer une corde solide. | She twists the hemp into strands to make a strong rope. |
+| 5875 | aciérer | acièrent | Les forgerons acièrent le fer pour en faire des lames solides. | The smiths convert the iron into steel to make strong blades. |
+| 5876 | chartériser | a chartérisé | La compagnie a chartérisé un avion pour emmener les supporters. | The company chartered a plane to take the fans. |
+| 5891 | dévitrifier | dévitrifier | Une chaleur prolongée peut dévitrifier le verre et le rendre opaque. | Prolonged heat can devitrify glass and make it opaque. |
+| 5895 | jabler | jable | Le tonnelier jable les douves pour y loger le fond du tonneau. | The cooper cuts a groove in the staves to seat the head of the barrel. |
+| 5900 | rabioter | rabiote | Ce commerçant rabiote toujours quelques centimes sur la monnaie rendue. | That shopkeeper always skims a few cents off the change he gives back. |
+| 5907 | passementer | passemente | Elle passemente les rideaux du salon avec un galon doré. | She trims the living room curtains with a gold braid. |
+| 5917 | bistourner | a bistourné | Il a bistourné la clé dans la serrure et l'a faussée. | He twisted the key the wrong way in the lock and bent it out of shape. |
+| 5928 | sablonner | sablonnent | Les ouvriers sablonnent l'allée pour qu'elle ne soit plus glissante. | The workers cover the path with sand so that it is no longer slippery. |
+| 5934 | cocoter | cocote | Ça cocote dans le vestiaire après le match. | It stinks in the locker room after the game. |
+| 5935 | cocotter | cocotte | Ouvre la fenêtre, ça cocotte dans cette chambre depuis le match de foot. | Open the window, it's been stinking in this room since the soccer game. |
+| 5944 | squeezer | squeezer | Au bridge, il a réussi à squeezer son adversaire au dernier tour. | At bridge, he managed to squeeze his opponent on the last trick. |
+| 5953 | désaper | désape | Il désape son petit frère avant de le mettre dans le bain. | He undresses his little brother before putting him in the bath. |
+| 5971 | bienvenir | bienvenir | Il sait se faire bienvenir de tous ses nouveaux collègues. | He knows how to make himself welcome to all his new colleagues. |
+| 5991 | dépaqueter | dépaquetons | Après le déménagement, nous dépaquetons les cartons un par un. | After the move, we unpack the boxes one by one. |
+| 6001 | violoner | violoner | Il passe ses soirées à violoner sans jamais faire de progrès. | He spends his evenings fiddling on the violin without ever making progress. |
+| 6005 | terser | tersera | Le vigneron tersera sa vigne en juin, après les deux premiers labours. | The winegrower will give his vineyard its third plowing in June, after the first two. |
+| 6011 | énouer | énouent | Les ouvrières énouent le drap de laine avec de petites pincettes avant de le teindre. | The workers pick the knots and debris out of the woolen cloth with small tweezers before dyeing it. |
+| 6018 | dégober | dégobent | Les ostréiculteurs dégobent les huîtres dans des bassins d'eau claire avant de les vendre. | The oyster farmers purge the oysters in clean-water basins before selling them. |
+| 6019 | vasouiller | vasouillé | Pris de court par la question, le candidat a vasouillé pendant toute sa réponse. | Caught off guard by the question, the candidate floundered through his whole answer. |
+| 6020 | respectabiliser | respectabiliser | Ce nouveau titre ne suffira pas à respectabiliser son entreprise aux yeux des banques. | This new title will not be enough to make his company respectable in the eyes of the banks. |
+| 6021 | démailloter | démaillote | La puéricultrice démaillote le bébé pour lui donner son bain. | The nursery nurse unswaddles the baby to give him his bath. |
+| 6022 | jodler | jodlent | Dans la vallée, les bergers jodlent pour s'appeler d'un versant à l'autre. | In the valley, the shepherds yodel to call to each other from one slope to the other. |
+| 6023 | haricoter | a haricoté | Pendant des années, le père Lucas a haricoté sans jamais faire fortune. | For years, old Lucas made petty deals without ever making a fortune. |
+| 6024 | moufeter | moufeter | Il a obéi sans moufeter, de peur de contrarier le patron. | He obeyed without a word of protest, for fear of upsetting the boss. |
+| 6025 | partouser | partousent | Selon la rumeur, ils partousent chaque week-end dans cette grande villa. | According to the rumor, they have orgies every weekend in that big villa. |
+| 6026 | désapprovisionner | désapprovisionner | Le fournisseur a décidé de désapprovisionner les petits magasins du quartier. | The supplier decided to stop supplying the small shops in the neighborhood. |
+| 6027 | enfûter | enfûte | Le vigneron enfûte le vin nouveau dès la fin du mois d'octobre. | The winemaker puts the new wine into casks as early as the end of October. |
+| 6029 | forlonger | forlongé | Le cheval a forlongé tous ses poursuivants dans la dernière ligne droite. | The horse outdistanced all its pursuers on the final straight. |
+| 6030 | décrêper | décrêpe | Le coiffeur lui décrêpe les cheveux avec un lissage à la kératine. | The hairdresser removes the frizz from her hair with a keratin smoothing treatment. |
+| 6031 | entreregarder | entreregardent | Les deux enfants s'entreregardent sans oser dire un mot. | The two children look at each other without daring to say a word. |
+| 6033 | déharnacher | déharnache | Le charretier déharnache les chevaux à la tombée du soir. | The carter unharnesses the horses at nightfall. |
+| 6034 | dessangler | dessangle | Il dessangle son cheval avant de le brosser. | He loosens his horse's girth before brushing it. |
+| 6036 | intailler | intaille | Le graveur intaille une émeraude pour en faire un sceau. | The engraver etches an emerald to make it into a seal. |
+| 6037 | béqueter | béqueter | Les moineaux viennent béqueter les miettes sur la terrasse. | The sparrows come to peck at the crumbs on the terrace. |
+| 6038 | emmouscailler | emmouscailler | Arrête de m'emmouscailler avec tes questions, je suis occupé ! | Stop bothering me with your questions, I am busy! |
+| 6040 | déclaveter | déclaveter | Il faut déclaveter l'essieu avant de pouvoir retirer la roue. | You have to remove the key from the axle before you can take off the wheel. |
+| 6043 | surcomprimer | a surcomprimé | Pour gagner en puissance, le préparateur a surcomprimé le moteur de la moto. | To gain power, the tuner raised the compression ratio of the motorcycle's engine. |
+| 6044 | aicher | aiche | Le pêcheur aiche son hameçon avec un ver de terre. | The fisherman baits his hook with an earthworm. |
+| 6045 | enlier | enlie | Le maçon enlie soigneusement les pierres en élevant le mur. | The mason carefully interlocks the stones as he raises the wall. |
+| 6046 | entabler | entable | Le cheval s'entable quand le cavalier tire trop fort sur les rênes. | The horse gets its hips ahead of its shoulders when the rider pulls too hard on the reins. |
+| 6047 | envider | envide | Elle envide le fil sur une bobine avant de commencer à tisser. | She winds the thread onto a spool before starting to weave. |
+| 6048 | schlitter | schlittaient | Autrefois, les bûcherons schlittaient les troncs jusqu'à la vallée. | In the past, the lumberjacks used to sled the logs down to the valley. |
+| 6049 | acétifier | acétifient | Des bactéries acétifient le vin et le transforment peu à peu en vinaigre. | Bacteria acetify the wine and gradually turn it into vinegar. |
+| 6050 | bégueter | bégueter | J'entends une chèvre bégueter derrière la grange. | I hear a goat bleating behind the barn. |
+| 6051 | délignifier | délignifier | Cette usine doit délignifier la pâte à papier avant de la blanchir. | This mill has to delignify the paper pulp before bleaching it. |
+| 6078 | déchlorurer | déchlorurer | Le chimiste doit déchlorurer la solution avant de l'analyser. | The chemist has to remove the chlorides from the solution before analyzing it. |
+| 6086 | entremanger | s'entremangent | Les poissons affamés s'entremangent dans le bassin. | The starving fish eat one another in the pond. |
+| 6092 | remastiquer | remastiqua | Le gamin avait posé son chewing-gum sur la table ; il le reprit et le remastiqua. | The kid had set his chewing gum down on the table; he picked it up and chewed it again. |
+| 6113 | enfleurer | enfleurer | Le parfumeur va enfleurer cette graisse avec des pétales de jasmin. | The perfumer is going to scent this fat with jasmine petals. |
+| 6124 | rentrayer | rentrayait | Dans l'atelier de restauration, la tapissière rentrayait avec patience les trous de la vieille tenture, fil après fil. | In the restoration workshop, the tapestry worker patiently reweaved the holes in the old hanging, thread by thread. |
+| 6125 | sarmenter | sarmenter | Après la taille, toute la famille vient sarmenter dans les vignes. | After pruning, the whole family comes to collect the cut vine shoots in the vineyard. |
+| 6158 | toussailler | toussaille | Le vieil homme toussaille dans son fauteuil depuis ce matin. | The old man has been coughing on and off in his armchair since this morning. |
+| 6184 | désengrener | désengrener | Il faut désengrener le pignon avant de démonter la boîte de vitesses. | You have to throw the pinion out of gear before taking the gearbox apart. |
+| 6194 | gabarier | gabarie | L'ouvrier gabarie la pièce métallique avant de l'assembler. | The worker checks the metal part against a template before assembling it. |
+| 6197 | insculpter | insculpte | L'orfèvre insculpte son poinçon sur chaque pièce d'argenterie. | The silversmith stamps his hallmark on every piece of silverware. |
+| 6204 | rappareiller | rappareiller | Je cherche à rappareiller cette assiette avec les autres du service. | I am trying to match this plate with the others from the set. |
+| 6238 | duplexer | duplexer | Les techniciens vont duplexer les deux salles de conférence par une liaison vidéo. | The technicians are going to link up the two conference rooms with a video connection. |
+| 6241 | bêcheveter | bêcheveter | Il faut bêcheveter les sardines dans la boîte pour gagner de la place. | You have to place the sardines head-to-tail in the tin to save space. |
+| 6243 | congréer | congréer | Le gabier va congréer le cordage pour combler les vides entre les torons. | The sailor is going to worm the rope to fill the gaps between the strands. |
+| 6263 | désalper | désalpent | Chaque automne, les vaches désalpent au son des cloches. | Every autumn, the cows come down from the high pastures to the sound of bells. |
+| 6270 | ébiseler | ébiseler | L'artisan va ébiseler le bord de ce miroir pour lui donner du cachet. | The craftsman is going to bevel the edge of this mirror to give it character. |
+| 6280 | époutir | époutir | On doit époutir cette étoffe de laine avant de la teindre. | This wool cloth has to have its specks picked out before it is dyed. |
+| 6285 | hannetonner | hannetonner | Autrefois, les paysans allaient hannetonner chaque printemps. | In the old days, farmers would go and exterminate June bugs every spring. |
+| 6308 | recouponner | recouponner | La banque doit recouponner ces titres dont tous les coupons ont été détachés. | The bank has to reissue coupons for these securities, all of whose coupons have been detached. |
+| 6311 | rengrener | rengrène | Après le réglage, le mécanicien rengrène les pignons pour que les dents s'emboîtent bien. | After the adjustment, the mechanic re-engages the pinions so the teeth mesh properly. |
+| 6321 | tauder | taudent | Dès que le soleil tape, les matelots taudent pour abriter tout l'équipage. | As soon as the sun beats down, the sailors rig the awning to shelter the whole crew. |
+
+<!-- verb-pass-stage5:end -->
