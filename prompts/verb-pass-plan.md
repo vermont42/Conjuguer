@@ -1838,7 +1838,7 @@ log goes to the ignored `verb_pass/applied.json`. Things the section did not ant
   *ficher*'s "Moi, monsieur le préfet" became "Well now, inspector". A later pass could put the
   2,495 pick translations in front of a skeptic.
 
-## Stage 5: the verbs still without an example
+## Stage 5: the verbs still without an example ✅ 2026-10-02
 
 Added 2026-10-01, after Stage 4. 408 infinitives (409 entries: *sortir* and *sortir (obtain)*
 both lack one) still show no example. Stage 4 caused only 48 of the gaps. The rest are verbs that
