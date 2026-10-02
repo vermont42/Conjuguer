@@ -70,11 +70,14 @@ the prompt specifies, a translation that is the model's own, and `<!-- uncertain
 The established gloss table is the consistency anchor: subagents receive it whole, and the
 orchestrator adds each batch's new mappings before the next batch starts.
 
-Two things to settle with Josh before step 3, both cheap to decide now and costly later:
+**Model (decided 2026-10-02).** Every subagent in this plan, the grokking agents of step 3, the
+head auditors of step 4 and the skeptics of step 5, runs on **Sonnet 5.5**, at Josh's choice. Pass
+the model explicitly (`sonnet`, and confirm in the transcripts that it resolved to Sonnet 5.5, as
+the verb pass did). The first half was translated by Claude (Opus 4.8), so the credits will name
+both models.
 
-- **Model.** The first half was translated by Claude (Opus 4.8), and the credits say so. Old French
-  rewards the strongest model. The recommendation is Opus 5.5 for the grokking agents and the
-  skeptic, which means the credits name two models.
+One thing to settle with Josh before step 3, cheap to decide now and costly later:
+
 - **Spelling variants in brackets.** The first half sometimes brackets a variant spelling as its own
   head (`embruncher`, where the modern verb is *embroncher*; `enbrunchet` and `enbrunket` will
   follow). The descendants table maps heads, so each new spelling needs a row or a bracket that uses
@@ -132,7 +135,7 @@ The app shows only lines whose bracket attaches to a verb, with their translatio
 — Chanson de Roland". Those lines are what a user reads, so every one of them in the new half gets a
 skeptic: is the verb really in the line (and is the attached modern verb its reflex, not a synonym),
 does the translation render the line faithfully, and is the line transcribed exactly? About 1,500
-lines; shards of about 120, one Opus 5.5 agent each, verdicts `upheld`, `partly` (with the fix) or
+lines; shards of about 120, one Sonnet 5.5 agent each, verdicts `upheld`, `partly` (with the fix) or
 `refuted`, written to files and validated in code as the verb pass did. Lines without an attachment
 get no skeptic; their brackets and translations still sit in `chanson.md`, but the app never shows
 them.
@@ -156,7 +159,8 @@ Run `build_chanson_examples.py` for real: it writes both JSON copies. Then:
 ## 7. Counts, credits, docs
 
 - **Credits** (`Info.creditsText`, both languages): the sentence "their English translations are
-  original work by Claude (Opus 4.8)" must name both models and say which half each translated.
+  original work by Claude (Opus 4.8)" must name both models and say which half each translated
+  (Opus 4.8 for verses 1–2033, Sonnet 5.5 for 2034–4002).
   Grep the catalog for any *Chanson* count first. Catalog edits that touch an ASCII `"` go through
   Python, per CLAUDE.md.
 - **`docs/literature-example-corpus.md`:** the *Chanson* section's counts and the statement of
