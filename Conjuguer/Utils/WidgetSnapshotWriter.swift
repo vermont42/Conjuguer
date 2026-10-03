@@ -210,11 +210,37 @@ enum WidgetSnapshotWriter {
     guard text.count > maxLength else {
       return text
     }
-    let prefix = String(text.prefix(maxLength))
-    if let lastPeriod = prefix.lastIndex(of: ".") {
-      return rebalanceTildes(String(prefix[...lastPeriod]))
+    let prefixEnd = text.index(text.startIndex, offsetBy: maxLength)
+    var searchEnd = prefixEnd
+    while let period = text[..<searchEnd].lastIndex(of: ".") {
+      let candidate = String(text[...period]) + closingQuote(after: period, in: text)
+      if quotesBalance(candidate) {
+        return rebalanceTildes(candidate)
+      }
+      searchEnd = period
     }
-    return rebalanceTildes(prefix) + "…"
+    return rebalanceTildes(String(text[..<prefixEnd])) + "…"
+  }
+
+  // American punctuation ends a sentence inside a quoted gloss with the period before the
+  // closing quote (“to emboss.”), so that quote belongs to the snippet even when it falls just
+  // past `maxLength`.
+  private static func closingQuote(after period: String.Index, in text: String) -> String {
+    let rest = text[text.index(after: period)...]
+    if rest.hasPrefix("”") {
+      return "”"
+    }
+    for spacing in ["", " ", "\u{00A0}", "\u{202F}"] where rest.hasPrefix(spacing + "»") {
+      return spacing + "»"
+    }
+    return ""
+  }
+
+  // A period inside a gloss (the dots of « ne... pas ») is not a sentence end; cutting there
+  // would leave the quotation open.
+  private static func quotesBalance(_ text: String) -> Bool {
+    text.filter { $0 == "“" }.count == text.filter { $0 == "”" }.count
+      && text.filter { $0 == "«" }.count == text.filter { $0 == "»" }.count
   }
 
   // Etymology snippets use `~…~` bold markup. A mid-string cut can leave an unclosed

@@ -67,6 +67,12 @@ corpus/working/*
 !corpus/working/fetch_cnrtl.py
 # Stage 4's apply script; its log (verb_pass/applied.json) stays ignored.
 !corpus/working/apply_verb_pass.py
+# Etymology tail (prompts/etymology-tail-plan.md): the Stage 0 evidence builder and the wave tool.
+# Their outputs (evidence.json, the headword index cache, the wave shards, results and verdicts)
+# stay ignored under corpus/working/etymology/.
+!corpus/working/build_etymology_evidence.py
+!corpus/working/etymology_wave.py
+!corpus/working/etymology_wave.workflow.js
 # Gloss changes added to the review by hand or by the false-friend sweep. Nothing regenerates them.
 !corpus/working/added_glosses.json
 # authors_overrides.json is the exception: hand-checked corrections to the Wikidata

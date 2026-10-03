@@ -291,7 +291,12 @@ corpus/                         # Literature-example pipeline; NOT part of any t
 │                               # apply_verb_pass.py --pass-dir applies Stage 5's approvals (examples and glosses) the same way;
 │                               # chanson_source.py emits the Roland's second half (laisses CLII–CCXCI) as Bédier-numbered rows
 │                               # for the grokking agents, and --check asserts that numbering (see prompts/chanson-second-half-plan.md);
-│                               # build_chanson_examples.py --dry-run reports Old French heads missing from the grokked/ descendants table
+│                               # build_chanson_examples.py --dry-run reports Old French heads missing from the grokked/ descendants table;
+│                               # the etymology tail (prompts/etymology-tail-plan.md): build_etymology_evidence.py gathers each uncovered verb's
+│                               # Wiktionary etymologies, parsed formation and base material into an evidence file in the ignored working/etymology/,
+│                               # and etymology_wave.py builds the affix library (the etymology-affixes JSON file in prompts/) and selects, validates, merges
+│                               # and reports each wave, which etymology_wave.workflow.js runs through the etymology-writer and
+│                               # etymology-skeptic agents in .claude/agents/
 └── grokked/                    # Intermediate per-source extraction output
 
 frequency/                      # Verb-frequency pipeline; NOT part of any target. See frequency/README.md

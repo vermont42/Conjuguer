@@ -1,0 +1,2027 @@
+{
+  "dé-": {
+    "group": [
+      "dé-",
+      "dés-",
+      "des-",
+      "de-"
+    ],
+    "allomorphy": "dé- before a consonant (défaire, déplacer). dés- before a vowel or a mute h, so that the s is pronounced [z] (désobéir, désintérêt, déshabiller). des- before a base-initial s, written with a doubled s so that it stays [s] and without the accent (dessécher, dessouder, desseller), but not always (déstabiliser, désulfurer). de- without accent is not a live form: it survives only in words that come from Latin dē- or from Old French de-/des- (devenir, demander, demeurer), where the prefix is no longer separable. In the Latin-to-French descent, Old French had both des- and de- (TLFi), so dessiller and déciller are the same prefix.",
+    "origin_en": "From Old French ~des-~, from Latin ~dis-~ (“apart”), itself from Proto-Indo-European *~dwís~. English Wiktionary adds that Late Latin ~dē ex~ (~dē-~ “from” + ~ex-~ “out”) blended in, and that some words borrow Latin ~dē-~ directly; the TLFi derives ~dé-~ from ~dis-~ alone.",
+    "origin_fr": "De l'ancien français ~des-~, issu du latin ~dis-~ (« séparé, à part »), lui-même de l'indo-européen *~dwís~. Le Wiktionnaire anglais y ajoute le croisement avec le latin tardif ~dē ex~ (~dē-~ « depuis » + ~ex-~ « hors de ») et, pour certains mots, un emprunt direct au latin ~dē-~ ; le TLFi fait remonter ~dé-~ au seul ~dis-~.",
+    "senses": [
+      "reversal of the base verb, the commonest use (défaire, déplier, débloquer, désinstaller, dégeler)",
+      "removal or deprivation, from a noun: dé- + noun + -er (dépanner, débarquer, déplumer; TLFi: the simple opposite verb usually does not exist)",
+      "cessation or negation of a state, often with -iser on an adjective or noun (déculpabiliser, dédramatiser, déstaliniser)",
+      "causation or setting in motion (English Wiktionary lists déclencher, démarrer, décoller), but in these verbs the base is a noun or a different verb, not a verb with an opposite",
+      "separation, going away (figurative in déménager)",
+      "intensive, with no clear reversal (dénier, démener, démultiplier, per fr.Wiktionary)"
+    ],
+    "productive": "Fully productive today. The TLFi calls it one of the most productive prefixes of French. New verbs are mostly dé- + adjective or noun + -er or -iser, in politics, psychology, technical and slang vocabulary (déculpabiliser, désinstaller). Dubois, cited by the TLFi, says the sense of physical removal is no longer used in new coinages.",
+    "examples": [
+      "défaire",
+      "débloquer",
+      "déplier",
+      "décharger",
+      "déconnecter",
+      "dégeler",
+      "désinstaller",
+      "démonter"
+    ],
+    "cognates": [
+      "Spanish and Catalan des- (déborder is cognate with desbordar)",
+      "English dis- (a separate borrowing from Latin dis-; English Wiktionary compares the neological borrowing dis- with dé-)",
+      "Latin dis-, the direct source"
+    ],
+    "pitfalls": "Many dé- verbs are not 'un-' + base. (1) Latin verbs that arrived with de-/dis- already fused: devoir (debere), devenir (devenire), demander, définir, décider, destiner, déclarer, déterminer, désigner, décrire (Old French descrivre), défendre, demeurer, désirer, démontrer, détruire, dénoncer, descendre, détenir, décliner, désoler, décevoir (Latin decipere, not dé- + cevoir). Do not write 'dé- + X' for these. (2) Surface analysis only: dépendre, délivrer and déposer can be read as dé- + pendre, livrer, poser, but Wiktionary traces them to Latin (délivrer from Late Latin deliberare, unrelated to Classical deliberare). débattre and détailler come from Old French (debatre, detailler) and Wiktionary calls them 'equivalent to' dé- + battre and de- + tailler. Say 'from Latin' or 'from Old French' and give the surface analysis only as a note. (3) Base is a noun, not a verb: déplacer (place), dégager (gage), déclencher (clenche), dévoiler (voile), déborder (bord), déménager (ménage), débuter (but). Name the noun. (4) démarrer is dé- + amarrer, and the TLFi stresses that démarrer is not désamarrer; développer is from Old French des- + voloper, a base that no longer exists in French (it is not dé- + envelopper). (5) dessiner is from Italian disegnare, a doublet of désigner, and has nothing to do with the prefix; déjeuner is disputed (dé- + jeûner or a Vulgar Latin verb). (6) The first letters 'des-' or 'dé-' also begin roots that are not the prefix (désirer, descendre, dessiner). Before writing 'dé- + base', check that (a) removing dé- leaves a real French word, (b) the verb's sense is reversal, removal or cessation relative to it, and (c) Wiktionary does not trace the verb to a Latin verb in de-/dis-. For prefix-stacking verbs (désinstaller) the base is the verb after dés-, not 'dé- + sinstaller'.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/dé-",
+      "https://en.wiktionary.org/wiki/dé-#French",
+      "https://www.cnrtl.fr/definition/dé-",
+      "https://en.wiktionary.org/wiki/devoir",
+      "https://en.wiktionary.org/wiki/devenir",
+      "https://en.wiktionary.org/wiki/demander",
+      "https://en.wiktionary.org/wiki/développer",
+      "https://en.wiktionary.org/wiki/définir",
+      "https://en.wiktionary.org/wiki/décider",
+      "https://en.wiktionary.org/wiki/destiner",
+      "https://en.wiktionary.org/wiki/déclarer",
+      "https://en.wiktionary.org/wiki/déterminer",
+      "https://en.wiktionary.org/wiki/déposer",
+      "https://en.wiktionary.org/wiki/désigner",
+      "https://en.wiktionary.org/wiki/dessiner",
+      "https://en.wiktionary.org/wiki/décrire",
+      "https://en.wiktionary.org/wiki/défendre",
+      "https://en.wiktionary.org/wiki/dépendre",
+      "https://en.wiktionary.org/wiki/demeurer",
+      "https://en.wiktionary.org/wiki/délivrer",
+      "https://en.wiktionary.org/wiki/désirer",
+      "https://en.wiktionary.org/wiki/démontrer",
+      "https://en.wiktionary.org/wiki/détruire",
+      "https://en.wiktionary.org/wiki/dénoncer",
+      "https://en.wiktionary.org/wiki/descendre",
+      "https://en.wiktionary.org/wiki/détenir",
+      "https://en.wiktionary.org/wiki/décliner",
+      "https://en.wiktionary.org/wiki/décevoir",
+      "https://en.wiktionary.org/wiki/désoler",
+      "https://en.wiktionary.org/wiki/débuter",
+      "https://en.wiktionary.org/wiki/déplacer",
+      "https://en.wiktionary.org/wiki/dégager",
+      "https://en.wiktionary.org/wiki/déclencher",
+      "https://en.wiktionary.org/wiki/dévoiler",
+      "https://en.wiktionary.org/wiki/débattre",
+      "https://en.wiktionary.org/wiki/détailler",
+      "https://en.wiktionary.org/wiki/déborder",
+      "https://en.wiktionary.org/wiki/déménager",
+      "https://en.wiktionary.org/wiki/démarrer",
+      "https://en.wiktionary.org/wiki/déjeuner",
+      "https://en.wiktionary.org/wiki/déployer",
+      "https://en.wiktionary.org/wiki/découvrir"
+    ],
+    "skeptic": "upheld"
+  },
+  "re-": {
+    "group": [
+      "re-",
+      "ré-",
+      "r-",
+      "ra-"
+    ],
+    "allomorphy": "re- [ʁə] is the ordinary form before a consonant (refaire, repasser). ré- [ʁe] appears before a consonant in older or learned verbs (réciter, rédiger) and in modern coinages before a vowel (réaffirmer, réécouter, where the vowel is kept apart). r- is the form before a vowel in older verbs (rouvrir, rabaisser). ra- is an old form in some inherited verbs (raconter, rafraîchir, ramasser). fr.Wiktionary labels ra- 'archaic'. In the data, ramasser is glossed 're- augmentatif' in one source and 'r-' in another, so the label differs between sources.",
+    "origin_en": "From Latin ~re-~ (“back, again”), which also exists in the fuller form ~red-~ in some Latin words; en.Wiktionary traces it to Proto-Italic *~wre-~.",
+    "origin_fr": "Du latin ~re-~ (« en arrière, de nouveau »), qui existe aussi sous la forme pleine ~red-~ dans certains mots latins ; le wiktionnaire anglais le fait remonter à l'italique commun *~wre-~.",
+    "senses": [
+      "repetition: 'do again' (refaire, repasser, repenser, redécouvrir)",
+      "return to a former state or place (refermer, retomber, redevenir)",
+      "reaction or opposition (rebondir, rejaillir)",
+      "approach or distance (rapprocher, retarder)",
+      "causative on adjectives (raffermir, ralentir)",
+      "intensive, with no sense of repetition (refroidir, ramasser per the sources' wording)"
+    ],
+    "productive": "Fully productive: re-/ré- attaches to almost any verb, in all registers. Old forms in r-/ra- are no longer coined.",
+    "examples": [
+      "refaire",
+      "repasser",
+      "redécouvrir",
+      "reconduire",
+      "refermer",
+      "redevenir"
+    ],
+    "cognates": [
+      "English re- (borrowed via Old French and Latin; en.Wiktionary)",
+      "Italian ri-, Spanish and Portuguese re- (listed as equivalents on en.Wiktionary)"
+    ],
+    "pitfalls": "Most verbs beginning with r- or re- in the app are NOT 'again + verb'. (1) Inherited from Latin already prefixed: rendre (Latin reddere), recevoir (recipere), répondre (respondere), rester (restare), réduire (reducere), rédiger (redigere), reconnaître (recognoscere), réserver (reservare), respecter (respectare), résumer (resumere), révéler (revelare). Treat these as inherited whole words, not re- + a French verb. (2) remplir is r- + emplir (the vowel of re- drops before the vowel of emplir); the sense is 'fill up', not 'fill again', so it is not a repetition use. Do not analyse it as re- + *plir. (3) Other origin: réaliser is réel + -iser (not re- + *aliser); réussir was borrowed from Italian riuscire; risquer is not re- + *isquer. (4) Opaque or lexicalised sense: regarder, redouter (both named as fossilised by fr.Wiktionary), retirer in 'withdraw' senses, rester. Many others in the list (retrouver, revenir, reprendre, rejoindre, regrouper, rassembler, raconter, rappeler) do have a French base (trouver, venir, prendre, joindre, grouper, assembler, aconter, appeler), but the sense may be shifted. The 'ré-' form before a vowel in modern verbs (réaffirmer) is fine. Check before writing 're- + base': that the base exists as a French verb, that it is attested earlier than the derived verb, and that the meaning is repetition, return, or a documented intensive. If the verb is in Latin with re-, say so.",
+    "sources": [
+      "https://en.wiktionary.org/wiki/re-",
+      "https://fr.wiktionary.org/wiki/re-",
+      "input_2.json evidence_samples"
+    ],
+    "skeptic": "partly"
+  },
+  "en-": {
+    "group": [
+      "en-",
+      "em-"
+    ],
+    "allomorphy": "en- is the base form. em- replaces it before b, m and p (embarquer, embellir, emmener, empoisonner, emporter). Before other consonants and before vowels the form stays en- (enrouler, enfiler, enfuir). Two spellings, one prefix: em- is only a spelling variant of en-.",
+    "origin_en": "From Latin ~in-~ (“in, into”), through Old French ~en-~. fr.Wiktionary also ties the sense of removal or departure (as in ~enfuir~) to Latin ~inde~ (“from there”).",
+    "origin_fr": "Du latin ~in-~ (« dans, en »), par l'ancien français ~en-~. Le Wiktionnaire rattache aussi le sens d'éloignement (comme dans ~enfuir~) au latin ~inde~ (« de là »).",
+    "senses": [
+      "locative: put in or into, surround (entourer, enrouler)",
+      "inchoative or factitive: become or make (enrichir, embellir)",
+      "away, from (enfuir; compare s'en aller)",
+      "provide with N, with a noun base (englober, enraciner)"
+    ],
+    "productive": "Treated by fr.Wiktionary as still productive. In the evidence samples the typical coinage is en- + noun + -er (englober, enraciner) or en- + verb (enrouler, enfuir).",
+    "examples": [
+      "enrouler",
+      "enfuir",
+      "enrichir",
+      "entourer",
+      "embellir",
+      "enraciner"
+    ],
+    "cognates": [
+      "English en-/em- (equivalent prefix, e.g. enrich, embark; en.Wiktionary treats the French prefix as inherited from Old French and Latin in-)"
+    ],
+    "pitfalls": "Very many verbs that begin with en-/em- are not en- + a French base. Many were inherited or borrowed already formed from Latin in- verbs: entendre (Latin intendere), entrer (intrare), employer (implicare), envahir (invadere), enseigner (insignare), envoyer (Late Latin inviare), ennuyer. In these the 'base' (tendre, trer, ployer...) is either absent or has a different meaning, so do not write en- + base. Also check: (1) entre-, not en-, in entreprendre, entretenir, entraîner is a different case (see the entre- card; entraîner is en- + traîner); (2) emparer is not em- + parer in the sense a learner would guess, so verify before analysing; (3) the verb needs a base that exists as a French word and gives the sense: embaucher (sample: from débaucher by prefix substitution, or en- + bauche), encourir (calque of Latin incurrere, built on courir), empresser (en- + presser). Other app verbs that are plain en- + base: enlever, emporter, emmener, embarquer, enfermer, enrichir, encadrer, enterrer, emballer, encaisser. Do not confuse with the pronoun/adverb en or s'en aller, which are separate words. Before writing en- + base, check (a) a French base exists, (b) the meaning is predictable from base + locative/inchoative sense, (c) Wiktionary does not say 'inherited from Latin'.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/en-",
+      "https://en.wiktionary.org/wiki/en-#French"
+    ],
+    "skeptic": "upheld"
+  },
+  "é-": {
+    "group": [
+      "é-",
+      "es-",
+      "ex-"
+    ],
+    "allomorphy": "é- is the ordinary modern form (écourter, élargir). es- is the Old French form; it survives in spelling inside a few older words (essuyer, essor, essayer per fr.Wiktionary) and in a few verbs where the modern é- replaced it (émerveiller < esmerveillier). ex- is the learned Latin form, kept in verbs borrowed or built on Latin (expatrier, effleurer, exclure) and, with a hyphen, in the noun sense 'former' (ex-mari), which is not a verb sense. Before another f the ex- assimilates (effleurer). A sibling is the Old French s-impure e- (see pitfalls).",
+    "origin_en": "From Old French ~es-~, from Latin ~ex-~ (“out of, away from”), which became ~e-~ before certain consonants.",
+    "origin_fr": "De l'ancien français ~es-~, issu du latin ~ex-~ (« hors de, loin de »), qui devint ~e-~ devant certaines consonnes.",
+    "senses": [
+      "separation, removal, moving out (égoutter 'drain the drops off', ébranler, étirer 'stretch out')",
+      "extraction or emergence (éclore, émincer 'cut thin')",
+      "intensive or resultative, no clear sense of removal (éclaircir, élargir, essouffler 'leave breathless')"
+    ],
+    "productive": "Only weakly productive in modern French; most é- verbs are old (Old French es- plus a base). Recent coinages are rare and ex- is the form that fr.Wiktionary treats as the learned, living one for new words in the noun-prefix sense 'former'.",
+    "examples": [
+      "égoutter",
+      "émincer",
+      "étirer",
+      "écourter",
+      "élancer",
+      "ébranler"
+    ],
+    "cognates": [
+      "Latin ex- and ē- (en.Wiktionary), source of English ex- and e- in borrowed words",
+      "Greek-derived exo- and ecto- are listed by fr.Wiktionary as etymological relatives"
+    ],
+    "pitfalls": "The app list is dominated by verbs that merely begin with é- or ex-. (1) Prothetic e-: Latin words that began with s + consonant gained an e- in Old French (escrire, estudier, establir, esperer), so écrire, étudier, établir, espérer are NOT é- + base; there is no base without the e-. (2) Learned Latin ex- verbs inherited or borrowed already formed: exister, expliquer, exprimer, exercer, exiger, exposer, explorer, exploiter, examiner, exclure, extraire, exécuter, éliminer, élire, émettre, évoquer, évoluer, élaborer, éditer. The base (e.g. -sister, -pliquer) is not a French verb, or the Latin compound is not a French derivation. (3) Verbs from a Latin ex- compound whose simple verb exists in French but the formation happened in Latin: étendre (extendere), élever (elevare). essayer is from a noun (essai), per the fr.Wiktionary list under es-, and échanger is Old French es- + changer, so check both before writing é- + base. (4) Not every é- + X is subtractive: éclaircir, élargir show no removal. (5) The input evidence is itself inconsistent: émerveiller is 'é- + merveille + -er' in one source and an inherited Old French verb in another; effleurer is ex- + fleurer in one analysis and has a second origin from fleur 'surface' in another; éclaircir is from Late Latin *exclaricire in one source and 'claircir + é-' in another. fr.Wiktionary also lists évaluer and éradiquer among its é- verbs, so do not assume a Latin compound without checking. Say plainly which analysis is used. A writer must confirm (a) a French base exists (goutter, mincer, tirer, branler, court) and (b) the verb is not attested in Latin as an ex- compound.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/é-",
+      "https://en.wiktionary.org/wiki/é-",
+      "https://fr.wiktionary.org/wiki/ex-",
+      "https://fr.wiktionary.org/wiki/es-"
+    ],
+    "skeptic": "partly"
+  },
+  "a-": {
+    "group": [
+      "a-",
+      "ad-",
+      "ac-"
+    ],
+    "allomorphy": "The source is Latin ad-. In modern French the prefix is spelled a- before many consonants (abaisser, aboutir, amener, arriver), and the consonant of the base is often doubled after it: ac- (accoutumer, accroupir, accouder), af- (affamer, affiner, affranchir), as- (assoiffer, assainir), at- (atterrir), ap- (appauvrir, aplatir). The sources do not state a rule for when the doubling occurs; it is a per-word spelling, a trace of Latin assimilation of -d- to the next consonant. Verbs that look like ab- (aborder, abaisser, abêtir) are often a- + a base that begins with b. A separate Greek privative a- (an- before a vowel: amoral, acéphale) is a different affix and is not what this card covers.",
+    "origin_en": "From Latin ~ad-~ (“to, toward”), from the preposition ~ad~, by way of Old French ~a-~. The consonant of ~ad-~ assimilated to the next one, which is why French also spells it ~ac-~, ~af-~, ~as-~ and ~at-~.",
+    "origin_fr": "Du latin ~ad-~ (« vers, à »), issu de la préposition ~ad~, par l'ancien français ~a-~. La consonne de ~ad-~ s'assimilait à la suivante, d'où les graphies françaises ~ac-~, ~af-~, ~as-~ et ~at-~.",
+    "senses": [
+      "passage into a state or quality: a- + adjective or noun + -ir or -er, 'to make A' or 'to become like N' (arrondir, adoucir, alourdir, appauvrir, aplatir, assouplir, atterrir)",
+      "attributive, 'give N to' (affamer, assoiffer)",
+      "locative, 'put on, onto' (accouder, accroupir)",
+      "directional, 'bring to, lead to' (aboutir, aliter)",
+      "inchoative or no clear sense (arranger, aposter, assigner)"
+    ],
+    "productive": "No longer productive (fr.Wiktionary, citing the TLFi). Apart from amocher (1867, 'rendre moche') there are no new coinages; ra- and en- are used instead, and the weak productivity seems due to the revival of privative a-. This is the TLFi's 20th-century account.",
+    "examples": [
+      "arrondir",
+      "atterrir",
+      "adoucir",
+      "alourdir",
+      "appauvrir",
+      "aplatir",
+      "assouplir",
+      "affiner",
+      "abaisser"
+    ],
+    "cognates": [
+      "English ad- with assimilated ac-, af-, ap-, as-, at- in words from Latin or French (accept, affirm, adapt)",
+      "Latin ad-, the direct source"
+    ],
+    "pitfalls": "Most verbs that begin with a are NOT 'a- + base'. (1) Latin verbs with ad- already fused: attendre (attendere), apporter, annoncer (adnuntiare), appliquer, apparaître, apprendre (apprehendere), appeler, adapter, adopter, associer, accéder, affirmer, accepter, acheter (a doublet of accepter, from *accaptare), accueillir (*accolligere), arrêter (ad + restare), ajouter (*adiuxtare), aider (adiutare), appuyer, atteindre, acquérir, appartenir. Do not write 'a- + X' where X is not a French verb or word. (2) Surface analysis only: assurer (Latin *assecurare; synchronically a- + sûr + -er), arriver (adripare; a- + rive + -er), accorder (Latin *accordare; synchronically accord + -er, not a- + corder), accompagner (from compaing, 'companion'), adresser (a- + drecier). Mark them as inherited, with the surface analysis as a note. (3) The a- is part of the root: aimer (amare), avoir (habere), aller, analyser (analyse + -er, Greek ana-), animer (Latin animare), augmenter (Latin augmentare), autoriser (Latin auctorizare, from the author noun). None of these contains ad-. (4) avancer is from Latin ab ante, so its a- is ab-, not ad-. (5) Some verbs Wiktionary labels ab- (aviver, attrouper) are best treated as a- formations (see the ab- card). (6) Verbs with a- + base beginning with b look like ab-: aborder (a- + bord + -er), abaisser (a- + baisser). (7) Greek privative a- (amoral) is a different prefix. Before writing 'a- + base', check that the base is a French word that exists, that the sense is 'to make, to bring, to put' toward it, and that Wiktionary does not trace the verb to a Latin verb in ad-. Note also that the a- + noun/adjective verbs usually take -er or -ir at the same time (parasynthesis): there is no verb *terrir behind atterrir.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/a-",
+      "https://en.wiktionary.org/wiki/a-#French",
+      "https://en.wiktionary.org/wiki/assurer",
+      "https://en.wiktionary.org/wiki/arriver",
+      "https://en.wiktionary.org/wiki/aborder",
+      "https://en.wiktionary.org/wiki/abaisser",
+      "https://en.wiktionary.org/wiki/affranchir",
+      "https://en.wiktionary.org/wiki/atterrir",
+      "https://en.wiktionary.org/wiki/affiner",
+      "https://en.wiktionary.org/wiki/aboutir",
+      "https://en.wiktionary.org/wiki/accompagner",
+      "https://en.wiktionary.org/wiki/accorder",
+      "https://en.wiktionary.org/wiki/adresser",
+      "https://en.wiktionary.org/wiki/afficher",
+      "https://en.wiktionary.org/wiki/amener",
+      "https://en.wiktionary.org/wiki/attendre",
+      "https://en.wiktionary.org/wiki/annoncer",
+      "https://en.wiktionary.org/wiki/apporter",
+      "https://en.wiktionary.org/wiki/appliquer",
+      "https://en.wiktionary.org/wiki/apparaître",
+      "https://en.wiktionary.org/wiki/apprendre",
+      "https://en.wiktionary.org/wiki/appeler",
+      "https://en.wiktionary.org/wiki/arrêter",
+      "https://en.wiktionary.org/wiki/ajouter",
+      "https://en.wiktionary.org/wiki/aider",
+      "https://en.wiktionary.org/wiki/appuyer",
+      "https://en.wiktionary.org/wiki/avancer",
+      "https://en.wiktionary.org/wiki/accepter",
+      "https://en.wiktionary.org/wiki/acheter",
+      "https://en.wiktionary.org/wiki/accueillir",
+      "https://en.wiktionary.org/wiki/atteindre",
+      "https://en.wiktionary.org/wiki/aimer",
+      "https://en.wiktionary.org/wiki/avoir",
+      "https://en.wiktionary.org/wiki/aller",
+      "https://en.wiktionary.org/wiki/analyser",
+      "https://en.wiktionary.org/wiki/adapter",
+      "https://en.wiktionary.org/wiki/affirmer"
+    ],
+    "skeptic": "partly"
+  },
+  "ab-": {
+    "group": [
+      "ab-"
+    ],
+    "allomorphy": "The group names only ab-, a Latin prefix. In Latin it has variants, and the sources disagree on the details: fr.Wiktionary has a- before m and v and abs- before c, t, p; English Wiktionary has a- (written ā-) before b, m, v, abs- before c and t, au- before f and as- before p. French verbs with this prefix keep it as ab-, abs- or a- only in Latin loans (absorber, abstenir, abstraire, abroger, abolir). For the app, treat ab- as a fossil, not as a living French prefix. The two verbs that fr.Wiktionary labels with ab- (aviver, attrouper) are a different story, see pitfalls.",
+    "origin_en": "From Latin ~ab-~ (“from, away from”), the prefix use of the preposition ~ab~, itself from Proto-Indo-European *~h₂epo~ (“off, away”). English ~off~ and ~of~ are cognate.",
+    "origin_fr": "Du latin ~ab-~ (« loin de, à partir de »), emploi préfixal de la préposition ~ab~, elle-même issue de l'indo-européen *~h₂epo~ (« loin de »). L'anglais ~off~ et ~of~ en sont des apparentés.",
+    "senses": [
+      "separation, going away (abstraire 'draw away', abhorrer 'shrink back from')",
+      "removal, deprivation or deviation (Latin senses; fr.Wiktionary: éloignement, privation, déviation)",
+      "completion (fr.Wiktionary: aberrant, 'complètement égaré'; Latin abuti, absumere)"
+    ],
+    "productive": "Not productive in French. English Wiktionary marks the English counterpart 'no longer productive'. French verbs in ab- are Latin loans.",
+    "examples": [],
+    "cognates": [
+      "English ab- (absorb, abnormal), from Latin",
+      "German ab- (a separable prefix, from Germanic *ab, cognate with English off)",
+      "Greek apo- (English Wiktionary lists apo- and off- as doublets of Latin ab-)"
+    ],
+    "pitfalls": "Almost every French verb that begins with ab- is NOT 'ab- + French base'. (1) Latin loans in which Latin ab- is already fused: absorber, abroger, abolir, abdiquer, abjurer, abstraire, abstenir, absoudre, abhorrer, abonder. They are 'from Latin X', not 'ab- + French verb'; absorber, abstraire and abstenir have no French verb after ab-. These are fossils, so the card gives no transparent example. (2) abattre (Late Latin abbattere, from battere), abréger (Late Latin abbreviare) and abreuver (*abbiberare, from bibere) have a doubled b from Latin ad- assimilated (well-established Latin morphology), not ab-; they are inherited Latin verbs too. (3) Very often the initial a- is the prefix a- (Latin ad-) followed by a base that begins with b: aborder (a- + bord + -er), abaisser (a- + baisser), abêtir (a- + bête + -ir), abâtardir (a- + bâtard + -ir), aboucher (a- + bouche + -er), abrutir (a- + brute + -ir), abonner (a- + borne), aboutir (a- + bouter). Use the a- card. (4) Wiktionary's two 'ab-' labels do not hold up: aviver is given as ab- + vif by fr.Wiktionary but as a- + vif + -er by English Wiktionary, and nothing in the sources shows a Latin ab- sense (separation, completion) in either aviver or attrouper (troupe). Treat them as a- formations, with the double t of attrouper following the usual a- doubling, and flag the discrepancy. (5) Other origins: abandonner (Frankish bann), abîmer (Greek abussos, where the a- is Greek), aboyer (onomatopoeic), abuser (abus + -er), absenter (absent + -er), abriter (abri), abasourdir (ab + assourdir, per English Wiktionary). Before writing 'ab- + base', check that a French verb remains after ab-, that its sense is 'away from' or 'completely', and that the verb is not a- + a base in b-.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/ab-",
+      "https://en.wiktionary.org/wiki/ab-",
+      "https://fr.wiktionary.org/wiki/aviver",
+      "https://en.wiktionary.org/wiki/aviver",
+      "https://fr.wiktionary.org/wiki/attrouper",
+      "https://en.wiktionary.org/wiki/aborder",
+      "https://en.wiktionary.org/wiki/abaisser",
+      "https://en.wiktionary.org/wiki/abêtir",
+      "https://en.wiktionary.org/wiki/abâtardir",
+      "https://en.wiktionary.org/wiki/aboucher",
+      "https://en.wiktionary.org/wiki/abrutir",
+      "https://en.wiktionary.org/wiki/abonner",
+      "https://en.wiktionary.org/wiki/aboutir",
+      "https://en.wiktionary.org/wiki/abandonner",
+      "https://en.wiktionary.org/wiki/abriter",
+      "https://en.wiktionary.org/wiki/abuser",
+      "https://en.wiktionary.org/wiki/absenter",
+      "https://en.wiktionary.org/wiki/abîmer",
+      "https://en.wiktionary.org/wiki/aboyer",
+      "https://en.wiktionary.org/wiki/abattre",
+      "https://en.wiktionary.org/wiki/abréger",
+      "https://en.wiktionary.org/wiki/abreuver",
+      "https://en.wiktionary.org/wiki/absorber",
+      "https://en.wiktionary.org/wiki/abroger",
+      "https://en.wiktionary.org/wiki/abolir",
+      "https://en.wiktionary.org/wiki/abonder",
+      "https://en.wiktionary.org/wiki/abdiquer",
+      "https://en.wiktionary.org/wiki/abstenir",
+      "https://en.wiktionary.org/wiki/abstraire",
+      "https://en.wiktionary.org/wiki/absoudre",
+      "https://en.wiktionary.org/wiki/abhorrer",
+      "https://en.wiktionary.org/wiki/abjurer",
+      "https://en.wiktionary.org/wiki/abasourdir"
+    ],
+    "skeptic": "partly"
+  },
+  "con-": {
+    "group": [
+      "con-",
+      "co-",
+      "com-"
+    ],
+    "allomorphy": "Latin con- becomes com- before b, m, p in inherited or learned words (comparaître, composer, compter); co- before a vowel (coéditer, cogérer) and before many consonants in modern coinages (cofinancer, coproduire, cosigner, copiloter); con- before other consonants (concélébrer, confédérer). fr.Wiktionary also lists col- before l and cor- before r (Latin assimilation, not in this card's group). Modern coinages use co-; con- and com- belong to words that come from Latin.",
+    "origin_en": "From Latin ~con-~ (“with, together”), from the preposition ~cum~ (“with”).",
+    "origin_fr": "Du latin ~con-~ (« avec, ensemble »), issu de la préposition ~cum~ (« avec »).",
+    "senses": [
+      "joint action with others (cofinancer, coproduire, cosigner, coéditer, cogérer, copiloter)",
+      "with or together (concélébrer, confédérer)",
+      "intensive: 'thoroughly', no sense of togetherness (as in Latin concludere, 'close well')"
+    ],
+    "productive": "Productive in the form co-, for joint or shared activity (cogérer, copiloter, cofinancer), in all registers. con- and com- are no longer used to coin verbs.",
+    "examples": [
+      "cosigner",
+      "coproduire",
+      "cofinancer",
+      "cogérer",
+      "copiloter"
+    ],
+    "cognates": [
+      "English con-/com-/co- (borrowed via Latin and French)",
+      "Spanish, Portuguese and Italian con-/co-/com- (same Latin source; en.Wiktionary lists many languages)"
+    ],
+    "pitfalls": "Most verbs beginning with con-, com-, co- in the app are not formed in French. (1) Inherited from Latin with con-/com- already attached: connaître (cognoscere), comprendre, concevoir, conduire, contenir, construire, conclure, convenir, composer (Latin componere, reshaped on poser), compter (computare), consommer, conseiller, commander, comparer, commenter, communiquer, condamner, confirmer, consulter, couvrir (Latin cooperire). A writer should call these inherited, not 'con- + base'. (2) Not con- at all: couper (from coup + -er), courir (Latin currere), commencer (Vulgar Latin *cominitiare, not com- + *mencer), contrôler (from contre-rôle, so contre-, not con-). The group's forms are all Latin-derived; the real French formation is co-. (3) Where the French base exists, the verb may still be Latin-inherited: comparaître is a remaking of Old French comparoir (Latin comparere) per fr.Wiktionary, 'dérivé de paraître avec le préfixe con-'. Check before writing 'co- + base': the base is a French verb, the sense is 'jointly with another', and the verb is not older than the base.",
+    "sources": [
+      "https://en.wiktionary.org/wiki/co-",
+      "https://en.wiktionary.org/wiki/con-",
+      "https://fr.wiktionary.org/wiki/con-",
+      "input_2.json evidence_samples"
+    ],
+    "skeptic": "partly"
+  },
+  "mé-": {
+    "group": [
+      "mé-",
+      "més-"
+    ],
+    "allomorphy": "més- is used before a vowel (mésestimer, mésuser, mésallier) and mé- before a consonant (méconnaître, médire, méfier, mécontenter, méjuger). Old French mes- stood before both vowels and consonants, and en.Wiktionary says mes- was used before consonants as well until the 18th century. Messeoir keeps the double s from mes- + seoir. Spelling is the only difference; the sense is the same.",
+    "origin_en": "From Old French ~mes-~ (“badly, wrongly”), from Frankish *~missa-~, from Proto-Germanic *~missa-~.",
+    "origin_fr": "De l'ancien français ~mes-~ (« mal, à tort »), du francique *~missa-~, issu du proto-germanique *~missa-~.",
+    "senses": [
+      "wrongly, badly (méjuger, mésestimer, mésuser, méconnaître)",
+      "negation or reversal: 'not' or 'un-' (méfier, mécontenter)",
+      "error or insufficiency (méprendre, mécontenter)"
+    ],
+    "productive": "Not productive: fr.Wiktionary says it has been largely replaced by mal, mauvais or a negation. Compounds such as mésaventure and mécontent remain in use, and no new verbs are coined with it.",
+    "examples": [
+      "méconnaître",
+      "méfier",
+      "mésestimer",
+      "méjuger"
+    ],
+    "cognates": [
+      "English mis- (from the same Germanic source, as en.Wiktionary's Frankish *missa- and Proto-Germanic *missa- entry shows)",
+      "German miss- (same Proto-Germanic source)"
+    ],
+    "pitfalls": "Most verbs beginning with mé- in the app are not 'mé- + verb'. (1) Greek or Latin roots: méditer (Latin meditari), mériter (Latin meritare), métamorphoser, métamorphiser, métaboliser (Greek meta-), médiatiser and médicaliser (from média and médical), mécaniser (mécanique), météoriser (météore), méduser (méduse), métrer (mètre). (2) Noun bases that happen to start with mé-: médailler (médaille), mécher (mèche), mégoter (mégot), mégisser (mégis), métisser (métis), mémoriser (mémoire). (3) Other derivations: mélanger (from mêler), ménager (from ménage). (4) Real mé- derivations in the list: méprendre (mé- + prendre) and mépriser (Old French mespriser, mes- + priser; fr.Wiktionary lists it under mé-). Also, fr.Wiktionary has a separate préfixe més- that is an elided form of méso- (mésencéphale, mésentère); it is not the same affix. Check before writing 'mé- + base': the base exists as a French verb with a meaning that the pejorative or negative sense changes (connaître → méconnaître); if the word starts with mé- but the rest is not a verb, it is not this affix. Several of these verbs come into French as Old French mes- forms (médire from mesdire, messeoir from meseoir) and are inherited rather than coined.",
+    "sources": [
+      "https://en.wiktionary.org/wiki/mé-",
+      "https://en.wiktionary.org/wiki/més-",
+      "https://fr.wiktionary.org/wiki/mé-",
+      "https://fr.wiktionary.org/wiki/més-",
+      "input_2.json evidence_samples"
+    ],
+    "skeptic": "partly"
+  },
+  "entre-": {
+    "group": [
+      "entre-",
+      "entr-"
+    ],
+    "allomorphy": "entre- is the usual form (entrevoir, entremêler). entr- appears before a vowel in entrouvrir (the evidence sample gives 'entr-'), and fr.Wiktionary also gives the elided entr' (entr'aimer). Many verbs are written fused (entrecouper), others with a hyphen (entre-tuer, entre-déchirer, entre-regarder), and the same verb can have both spellings (entretuer, entre-tuer; fr.Wiktionary says the hyphen was the traditional pre-1990 spelling).",
+    "origin_en": "From Old French ~entre-~, from Latin ~inter~ (“between”).",
+    "origin_fr": "De l'ancien français ~entre-~, issu du latin ~inter~ (« entre »).",
+    "senses": [
+      "reciprocal action, mostly with pronominal verbs (s'entraider, s'entre-tuer, s'entrechoquer)",
+      "partial or 'half' action, a diminished degree (entrouvrir)",
+      "in between, among (entrelacer, entrecouper, entremêler)",
+      "distribution or mediation (entremettre)"
+    ],
+    "productive": "fr.Wiktionary calls it a productive prefix found in hundreds of compounds; in verbs the reciprocal hyphenated type (entre-déchirer, entre-dévorer) is a literary or rhetorical formation.",
+    "examples": [
+      "entrouvrir",
+      "entrelacer",
+      "entrecouper",
+      "s'entraider",
+      "entrechoquer"
+    ],
+    "cognates": [
+      "English inter- (Latin inter, borrowed separately; fr.Wiktionary lists inter- as a synonym in composition)"
+    ],
+    "pitfalls": "Not every verb that begins entr- has entre-. entraîner is en- + traîner, and entraver is en- + trave (a noun); neither means 'between'. entrer is Latin intrare, not entre- + a verb. entreprendre and entretenir are old compounds of entre- with prendre and tenir, but their senses (undertake, maintain) are not compositional, so write only that they are old and lexicalized, not 'between + take'. entretoiser, entrevoûter, entretailler are built on a noun or verb with a technical sense; check the base. entrevoir: en.Wiktionary says inherited from Vulgar Latin *intervidere, so it is not a French formation in that source, even though fr.Wiktionary says dérivé de voir. Hyphenated forms such as entre-égorger, entredévorer, entredétruire are reciprocal literary coinages. Before calling a verb entre- + base, check that the base is a French verb and that the sense is reciprocal, partial or 'between'.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/entre-",
+      "https://en.wiktionary.org/wiki/entre-#French"
+    ],
+    "skeptic": "partly"
+  },
+  "trans-": {
+    "group": [
+      "trans-",
+      "tré-",
+      "tres-",
+      "tra-"
+    ],
+    "allomorphy": "trans- is the learned Latin form, used in productive and technical formation (transvaser, transcoder, transborder). tres- is the Old French form, preserved in spelling in tressaillir, tressauter; tré- is the modern spelling of the same (trépasser, trébucher; fr.Wiktionary: Old French tres 'beyond' from Latin trans, with cognates Breton tre-, tra- and Picard tér-). en.Wiktionary calls trans- a learned borrowing and a doublet of très. tra- in the input is an Italian-type reduction (travestir, from Italian travestire with tra-, per the sources) and in fr.Wiktionary is listed as a variant of trans-. tre-/tra- forms are not productive.",
+    "origin_en": "Learned borrowing from Latin ~trans-~ (“across, beyond”). The older forms ~tres-~ (later ~tré-~) came from the same Latin preposition through Old French.",
+    "origin_fr": "Emprunt savant au latin ~trans-~ (« à travers, au-delà »). Les formes plus anciennes ~tres-~ (puis ~tré-~) viennent du même mot latin par l'ancien français.",
+    "senses": [
+      "across, through, over (transpercer, tressaillir 'jump across', transborder)",
+      "from one place or state to another (transvaser, transcoder, transvider)",
+      "beyond, to excess or to the other side (trépasser 'pass over, die')",
+      "intensive with no clear sense (tressauter)"
+    ],
+    "productive": "trans- is productive in technical and learned French (transcoder, transborder). tré-/tres- are not productive today. fr.Wiktionary also lists a sense about trans identity (transgenre) which is not a verb sense in the app.",
+    "examples": [
+      "transpercer",
+      "transvaser",
+      "transcoder",
+      "trépasser",
+      "tressaillir",
+      "transborder"
+    ],
+    "cognates": [
+      "English trans- (borrowed from Latin)",
+      "English trespass (from Old French trespasser; fr.Wiktionary cross-refers to it)",
+      "Breton tre- and tra-; Picard tér- (fr.Wiktionary)"
+    ],
+    "pitfalls": "Most app verbs starting tra- or trans- are NOT prefix + French verb. Do not analyze: travailler (not from a verb travailler minus tra-), traiter, traduire, traverser, trancher, traîner, traquer, tracasser, trafiquer, traumatiser, tranquilliser, trépigner, tracter, trémousser; their tra-/tré- is part of the root or of a Latin or other-language word and there is no French base left after removing it. Learned verbs like transmettre, transférer, transcrire, transposer, transgresser, transcender, transformer, transpirer, transplanter, transfuser, transmuter were taken from Latin (or built on Latin models) and are not French trans- + a French verb; the base (-mettre aside) is often not a free word in French. transir and transiter are not trans- + ir/iter. Some are Italian: travestir comes from Italian travestire (and an earlier French transvestir). trébucher is usually listed as an Old French trebuchier (tres- + *buchier from buc 'trunk') so the base buchier no longer exists as a modern verb, although fr.Wiktionary glosses it as tré- + bûcher; say which. Check before writing 'trans- + base': (a) the base is a living French verb or noun, (b) the verb is attested in French as a recent formation (transcoder, transborder), not as a Latin borrowing.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/trans-",
+      "https://en.wiktionary.org/wiki/trans-",
+      "https://fr.wiktionary.org/wiki/tré-",
+      "https://en.wiktionary.org/wiki/tres-"
+    ],
+    "skeptic": "upheld"
+  },
+  "sous-": {
+    "group": [
+      "sous-",
+      "sou-"
+    ],
+    "allomorphy": "sous- is the usual form and is hyphenated in most verbs (sous-estimer, sous-louer, sous-traiter). sou- is the fused variant in soutirer and soupeser (evidence samples), and soustraire is written fused with sous-. Which verbs are hyphenated and which fused is lexical, not a phonological rule; check the dictionary spelling.",
+    "origin_en": "From the preposition and adverb ~sous~ (“under”), itself from Latin ~subtus~; fr.Wiktionary dates the prefix to Old French ~sos-~ (880). en.Wiktionary derives it instead from Latin ~sub~ via Old French ~sus-~ and ~sous-~.",
+    "origin_fr": "De la préposition et adverbe ~sous~, issu du latin ~subtus~; le Wiktionnaire date le préfixe de l'ancien français ~sos-~ (880). Le Wiktionnaire anglais le fait plutôt venir du latin ~sub~ par l'ancien français ~sus-~ et ~sous-~.",
+    "senses": [
+      "insufficiency or too little (sous-estimer, sous-payer, sous-évaluer, sous-employer, sous-exposer)",
+      "secondary or delegated action (sous-louer, sous-traiter)",
+      "below, underneath, from beneath (soutirer, soupeser, sous-titrer)",
+      "subordination or subdivision (mostly in nouns: sous-préfet, sous-classe)"
+    ],
+    "productive": "Productive, especially in the 'too little' and 'secondary' senses (sous-évaluer, sous-exposer, sous-employer).",
+    "examples": [
+      "sous-estimer",
+      "sous-louer",
+      "sous-payer",
+      "sous-traiter",
+      "soutirer",
+      "soupeser"
+    ],
+    "cognates": [
+      "English sub- (same Latin sub; en.Wiktionary treats it as the English equivalent)"
+    ],
+    "pitfalls": "Most verbs that begin sou-/sous- are inherited from Latin verbs in sub- or sub-prefixed forms, not French sous- + base: soutenir (Latin sustinere), soumettre (submittere), souffrir, souscrire (subscribere), sourire (subridere), souvenir (subvenire), soulever (sublevare), soulager, soupirer (suspirare), souffler (sufflare), sourdre (surgere). Others begin with sou- by accident: souhaiter (Old French souhaidier, of Germanic origin; do not analyse as sous- + haiter), soucier, souiller. Others are built on a noun that happens to begin sou-: soufrer (soufre), sourciller (sourcil), soupçonner (soupçon), soutacher (soutache), soumissionner (soumission). soustraire is Latin subtrahere reshaped; the fr.Wiktionary gloss says 'by surface analysis' it can be read as sous- + traire, and en.Wiktionary adds the influence of souscrire, so say it is old, not freshly formed. sous-entendre and sous-titrer are genuine, but sous-entendre is a long-lexicalized sense 'imply'; check. Before writing sous- + base, check that (a) the base is a French verb that exists on its own, (b) the sense is 'too little', 'secondary' or 'underneath', (c) the verb is not marked as inherited from a Latin sub- verb.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/sous-",
+      "https://en.wiktionary.org/wiki/sous-#French"
+    ],
+    "skeptic": "upheld"
+  },
+  "ca-": {
+    "group": [
+      "ca-",
+      "cha-"
+    ],
+    "allomorphy": "ca- and cha- are the same obscure pseudo-prefix in different dialect-influenced forms (fr.Wiktionary lists cha- as the variant). Do not treat them as a Latin prefix with a regular rule; the sources give no phonological conditions.",
+    "origin_en": "Of obscure origin: a popular pseudo-prefix (variant ~cha-~), as in ~caboche~.",
+    "origin_fr": "D'origine obscure : pseudo-préfixe de la langue populaire (variante ~cha-~), comme dans ~caboche~.",
+    "senses": [
+      "no clear sense; a tautological or expressive element in popular words (cabosser 'dent', from bosse 'bump')"
+    ],
+    "productive": "Not productive. Only a handful of popular or familiar words show it.",
+    "examples": [
+      "cabosser"
+    ],
+    "cognates": [
+      "Breton ka- (fr.Wiktionary)"
+    ],
+    "pitfalls": "Almost every app verb beginning ca- or cha- has nothing to do with this pseudo-prefix: changer, charger, cacher, calculer, chanter, causer, casser, chauffer, chasser, capter, calmer, capturer, caresser, cantonner, chavirer, chambouler, cailler etc. Their ca-/cha- is part of an ordinary Latin, Germanic or other root. Only cabosser (ca- + bosse + -er) is clearly analyzed with ca-. chagriner is disputed in the sources: fr.Wiktionary gives cha- + grigner, or a denominal from chagrin 'skin' (also Middle French chagrigner); en.Wiktionary gives 'maybe chat or ca- (see caboche); by surface analysis chagrin + -er'. Homograph warning: chagrin 'sorrow' versus chagrin 'tanned skin'. Say 'obscure' rather than choosing an analysis. Do not generalize from these two verbs.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/ca-"
+    ],
+    "skeptic": "upheld"
+  },
+  "far-": {
+    "group": [
+      "far-"
+    ],
+    "allomorphy": "One form, far-, attested in a single French verb (farfouiller). No variants, no conditioning. The sources give no rule because there is nothing to generalise from.",
+    "origin_en": "Of uncertain origin. French Wiktionary treats ~far-~ as a prefix “of uncertain origin” in ~farfouiller~ (~far-~ + ~fouiller~), and no source consulted gives an etymon.",
+    "origin_fr": "D'origine incertaine. Le Wiktionnaire français décrit ~far-~ comme un préfixe « d'origine incertaine » dans ~farfouiller~ (~far-~ + ~fouiller~), et aucune source consultée ne donne d'étymon.",
+    "senses": [
+      "no sense is assigned to far- by any source consulted; farfouiller means 'to rummage untidily' (fr.Wiktionary, familiar), but that meaning belongs to the verb, not to a proven prefix"
+    ],
+    "productive": "No. A single verb, in familiar register. The sources do not present far- as a prefix that is used to coin new verbs.",
+    "examples": [
+      "farfouiller"
+    ],
+    "cognates": [
+      "None established. English Wiktionary lists Old English, Middle English and Old Saxon far- (a form of for-) and Scottish Gaelic far-, but no source consulted ties French far- to any of them."
+    ],
+    "pitfalls": "Say only that farfouiller is 'fouiller with a prefix far- of uncertain origin'. Do not give far- a Latin, Germanic or reduplicative origin, and do not link it to the Germanic for-/far- prefix: no source supports that. Do not give far- a sense such as 'intensive' or 'disorderly'. The other verb in the app that begins far, fariner, is not a far- verb: it is farine + -er (English Wiktionary). Before calling another verb 'far- + base', check that the remainder after far- is itself a French verb and that Wiktionary says so; otherwise far- is just the start of the root.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/farfouiller",
+      "https://en.wiktionary.org/wiki/far-",
+      "https://en.wiktionary.org/wiki/fariner",
+      "https://en.wiktionary.org/wiki/farfouiller",
+      "https://fr.wiktionary.org/wiki/far-"
+    ],
+    "skeptic": "upheld"
+  },
+  "pour-": {
+    "group": [
+      "pour-"
+    ],
+    "allomorphy": "Only one form, pour-, invariable, before consonants (pourfendre, pourchasser, pourlécher, pourvoir).",
+    "origin_en": "From Latin ~per-~ or ~pro~ (fr.Wiktionary names both); the sources do not choose between them.",
+    "origin_fr": "Du latin ~per-~ ou ~pro~ (le wiktionnaire français cite les deux, sans trancher).",
+    "senses": [
+      "completion, perfect or thorough action (pourfendre, pourlécher)",
+      "forward, in pursuit (pourchasser, poursuivre)"
+    ],
+    "productive": "Not productive: no verb has been coined with pour- in modern French. The few verbs that have it are old.",
+    "examples": [
+      "pourfendre",
+      "pourchasser",
+      "pourlécher"
+    ],
+    "cognates": [
+      "No clear cognate prefix was confirmed in the sources; the English preposition-prefix pur- in purchase and pursue is related to the same Old French forms, but the sources did not state it, so it is not claimed here. Breton pour- and peur- are listed as equivalents on fr.Wiktionary."
+    ],
+    "pitfalls": "The pour- verbs are very few and old. The writer must not assume the prefix is the preposition pour 'for'; the sources derive it from Latin per- or pro. Check each verb: pourvoir is Latin providere via Old French (pour- stands for Latin pro-), so it is an inherited prefixed verb, not pour- + voir in a modern sense; poursuivre is Old French (pour- + suivre in appearance, with the sense 'continue to follow'); pourchasser is pour- + chasser; pourlécher is pour- + lécher; pourfendre is pour- + fendre (fr.Wiktionary: 'dérivé de fendre, avec le préfixe pour-'). Where a verb starts with pour- but the sources do not say pour-, do not claim it. The sense 'completion' may not hold in every verb, so say only what the sources say.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/pour-",
+      "https://www.cnrtl.fr/definition/pour-",
+      "input_2.json evidence_samples"
+    ],
+    "skeptic": "partly"
+  },
+  "for-": {
+    "group": [
+      "for-"
+    ],
+    "allomorphy": "A single form. In fourvoyer it is spelled four- (the o became ou) while forfaire and forclore keep for-. fr.Wiktionary notes the prefix is related to the words fors and hors.",
+    "origin_en": "From Old French ~for-~, of disputed origin: from Late Latin ~forīs~ (“outside”) shaped on a Frankish prefix *~fur-~, or from ~fors~ (“outside”).",
+    "origin_fr": "De l'ancien français ~for-~, d'origine discutée : du latin tardif ~forīs~ (« dehors ») calqué sur un préfixe francique *~fur-~, ou de ~fors~ (« dehors »).",
+    "senses": [
+      "wrongly or astray (fourvoyer)",
+      "outside, exclusion (forclore)",
+      "error, wrong action (forfaire)"
+    ],
+    "productive": "Not productive. fr.Wiktionary marks it rare and non-productive today; only a few old verbs keep it.",
+    "examples": [
+      "fourvoyer",
+      "forfaire",
+      "forclore"
+    ],
+    "cognates": [
+      "English for- (forbid, forget; Germanic cognate, not borrowed from French)"
+    ],
+    "pitfalls": "Do not treat verbs that begin with for- as for- + base. formuler, formaliser, formater come from forme/formel; fortifier is Latin fortificare (see the -ifier card); forniquer from Latin fornicari; none contains this prefix. forlonger, forligner, forlancer, forjeter are rare hunting or archaic verbs; check their entries before calling them for- + base. formoler: check. Evidence disagrees on the origin: fr.Wiktionary describes forclore as fors + clore, en.Wiktionary as for- + clore, and the fourvoyer entry in en.Wiktionary suggests a calque of Frankish *farleidian. Say 'old prefix, origin debated' rather than choosing. Because the prefix is dead, a new verb will never be for- + base; only fourvoyer, forfaire and forclore (all inherited from Old French) belong here.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/for-",
+      "https://en.wiktionary.org/wiki/for-#French"
+    ],
+    "skeptic": "partly"
+  },
+  "par-": {
+    "group": [
+      "par-"
+    ],
+    "allomorphy": "Single form par-, a variant of Latin per- as it was inherited into French (fr.Wiktionary: variant of per-). The vowel a (rather than e) is the regular French development before r. The learned form per- survives in borrowed words (perforer, persister, perpétuer). No other allomorphs.",
+    "origin_en": "Inherited from Latin ~per-~ (“through, thoroughly”).",
+    "origin_fr": "Hérité du latin ~per-~ (« à travers, complètement »).",
+    "senses": [
+      "thoroughly, to the end, completion (parachever 'bring to full completion', parfaire)",
+      "intensive with no clear sense (parsemer, parfiler)",
+      "through, across (parcourir)"
+    ],
+    "productive": "Not productive today. The few par- verbs are old or literary; parachever and parfaire are literary.",
+    "examples": [
+      "parachever",
+      "parsemer",
+      "parfiler",
+      "parfaire",
+      "parcourir"
+    ],
+    "cognates": [
+      "English per- (borrowed from Latin)",
+      "Latin per-, the common source (en.Wiktionary: inherited from Latin per-)"
+    ],
+    "pitfalls": "Many app verbs begin with par- and are not prefix + base: participer (Latin participare, from part- + capere), partager (part + -ager), pardonner (Late Latin perdonare), paraître (Latin parēscere; the par- is part of the root parēre, not a prefix), parvenir (Latin pervenire), parjurer (Latin perjurare), parodier and paraphraser (Greek para- compounds), paralyser, paramétrer, parachuter, parapher, parafer, paraffiner (para- is a different prefix, from Greek or Italian parare), parader, parasiter, parquer (parc), parqueter (parquet), parcheminer (parchemin), parrainer (parrain), parementer, parlementer (parlement), partouzer (partouze), parfondre (the sources do not say; treat as unverified, par- + fondre if a writer verifies it). parfumer: Middle French parfumer is probably from Old Occitan parfumer or Italian perfumare, so the 'par- + fumer' analysis is disputed; cite 'perfume' accordingly. Check that the verb has a French base after removing par- (achever, semer, filer) and that the sense is completion or intensification.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/par-",
+      "https://en.wiktionary.org/wiki/par-"
+    ],
+    "skeptic": "partly"
+  },
+  "per-": {
+    "group": [
+      "per-"
+    ],
+    "allomorphy": "One form, per-, pronounced /pɛʁ/. It is a learned Latin prefix, not a native French one, and it never changes shape in French. (In Latin the r assimilated before i or j, which has no bearing on French verbs.) fr.Wiktionary lists a second homograph, per- = 'permanent' as in pergélisol, which is a clipping and not a verb prefix.",
+    "origin_en": "From Latin ~per-~ (“through”), the prefix use of the preposition ~per~, inherited from Proto-Italic *~peri-~. French Wiktionary links it to Latin ~pro-~ and ~prae-~ and compares English ~for-~ and German ~ver-~.",
+    "origin_fr": "Du latin ~per-~ (« à travers »), emploi préfixal de la préposition ~per~, hérité de l'italique commun *~peri-~. Le Wiktionnaire français le rapproche des préfixes latins ~pro-~ et ~prae-~ et de l'anglais ~for-~ et de l'allemand ~ver-~.",
+    "senses": [
+      "intensive or completive, 'thoroughly' (persifler, if the siffler etymology is right)",
+      "through, throughout (the Latin sense; fr.Wiktionary notes trans- is more frequent in French)",
+      "in chemistry, the highest oxidation level (perchlorate, peroxyde)",
+      "deviation, wrongness (Latin perire, pervertere; only in Latin loans)"
+    ],
+    "productive": "Marginal. As a prefix attached to a French verb it appears only in learned or technical coinages, such as pervibrer (a concrete-working term). The chemistry prefix per- also underlies words such as peroxyder (peroxyde + -er). There is no source claiming a general productivity.",
+    "examples": [
+      "pervibrer",
+      "persifler"
+    ],
+    "cognates": [
+      "English per- (perforate, perturb), in words from Latin or French; the app's perforer and perturber are the French counterparts, borrowed from Latin perforare and perturbare",
+      "English for- and German ver- (French Wiktionary's comparison for the Latin source)",
+      "Latin per-, the direct source"
+    ],
+    "pitfalls": "Nearly every verb that begins with per is not 'per- + French verb'. (1) Latin loans that arrived whole: perturber, persister, persuader, perpétuer, perpétrer, persévérer, perforer, pervertir, percuter, permuter, percevoir (Vulgar Latin *percipere), perdurer, permettre (Latin permittere; English Wiktionary says 'based on French mettre', so permettre does parse as per- + mettre, but it is inherited, not formed in French). (2) The per is part of a noun root: personnaliser (personnel + -iser), personnifier (personne + -ifier), perfectionner (perfection + -er), permanenter (permanente + -er), perquisitionner (perquisition + -er), peroxyder (peroxyde + -er). (3) persécuter is a back-formation from persécuteur. (4) persifler is disputed: fr.Wiktionary says it is 'most often' per- + siffler (intensive), but another view derives it from the play Persiflès by Racot de Grandval. Say the etymology is disputed. (5) percher and other verbs for which Wiktionary gives no per- analysis should not be called per- verbs. A transparent per- verb is rare in the app: pervibrer is the clear one. Before writing 'per- + base', check that the remainder is a French verb (vibrer, siffler) and that the verb is not a Latin loan.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/per-",
+      "https://en.wiktionary.org/wiki/per-",
+      "https://fr.wiktionary.org/wiki/persifler",
+      "https://en.wiktionary.org/wiki/persifler",
+      "https://fr.wiktionary.org/wiki/pervibrer",
+      "https://en.wiktionary.org/wiki/permettre",
+      "https://en.wiktionary.org/wiki/percevoir",
+      "https://en.wiktionary.org/wiki/perturber",
+      "https://en.wiktionary.org/wiki/persuader",
+      "https://en.wiktionary.org/wiki/persister",
+      "https://en.wiktionary.org/wiki/perdurer",
+      "https://en.wiktionary.org/wiki/perpétuer",
+      "https://en.wiktionary.org/wiki/perpétrer",
+      "https://en.wiktionary.org/wiki/persécuter",
+      "https://en.wiktionary.org/wiki/percuter",
+      "https://en.wiktionary.org/wiki/persévérer",
+      "https://en.wiktionary.org/wiki/perforer",
+      "https://en.wiktionary.org/wiki/pervertir",
+      "https://en.wiktionary.org/wiki/permuter",
+      "https://en.wiktionary.org/wiki/personnaliser",
+      "https://en.wiktionary.org/wiki/personnifier",
+      "https://en.wiktionary.org/wiki/perfectionner",
+      "https://en.wiktionary.org/wiki/permanenter",
+      "https://en.wiktionary.org/wiki/perquisitionner",
+      "https://en.wiktionary.org/wiki/peroxyder"
+    ],
+    "skeptic": "upheld"
+  },
+  "sur-": {
+    "group": [
+      "sur-"
+    ],
+    "allomorphy": "One form, invariable, always written sur- and joined without a hyphen to the base in verbs (surcharger, surpasser). Old French also had sour- and sor- (English Wiktionary). Pronounced /syʁ/, homophone of the preposition sur and of sûr. It contrasts with sous- (under), and sus- and super- are synonyms.",
+    "origin_en": "From Old French ~sur-~ (also ~sour-~ and ~sor-~), a syncopated form of Latin ~super-~ (“over, above”). It is a doublet of the learned French prefix ~super-~.",
+    "origin_fr": "De l'ancien français ~sur-~ (aussi ~sour-~ et ~sor-~), forme syncopée du latin ~super-~ (« au-dessus de »). C'est un doublet du préfixe savant ~super-~.",
+    "senses": [
+      "excess, beyond a normal level, the most productive sense (surcharger, surchauffer, surestimer, surexploiter, surmener, surtaxer)",
+      "over, above, on the surface (surmonter, surplomber, survoler, surnager, surélever)",
+      "repetition or a second layer on the same support (surimposer, surcreuser, surpiquer, surnommer)",
+      "superiority in rank or quality (surclasser, surpasser)",
+      "prolongation after a limit (survivre, survenir)"
+    ],
+    "productive": "Productive. The TLFi lists many coinages of the excess type in technical and general language (suralimenter, surexploiter, surligner), and fr.Wiktionary gives surconsommation and surproduction. It is common in the press and in technical registers.",
+    "examples": [
+      "surcharger",
+      "surchauffer",
+      "surestimer",
+      "surgeler",
+      "surligner",
+      "surpasser",
+      "survoler",
+      "surnager"
+    ],
+    "cognates": [
+      "English sur- (not productive; surname, surreply), borrowed from Old French",
+      "English super-, over- and hyper- (English Wiktionary lists them as doublets or equivalents of sur-)",
+      "German über-, Spanish sobre- and Italian sopra-, sovra-, sor- as equivalents in meaning (not shown by the sources to be borrowed from French)"
+    ],
+    "pitfalls": "Not every verb that begins with sur is sur- + a French verb. (1) surprendre: Old French sorprendre ('to overtake'); the sense 'to surprise' has drifted from 'over' + 'take', and sorprendre and sousprendre merged. Say 'from Old French sorprendre, sor- + prendre' rather than a plain 'excess + prendre'. (2) Old French descent: survivre (Old French survivre, from Latin supervivo; equivalent to sur- + vivre) and surveiller (Old French surveillier; by surface analysis sur- + veiller) parse as sur- + vivre and sur- + veiller, but they are inherited from Old French rather than coined in modern French. (3) The base is a noun or not the verb it seems: surplomber (plomb + -er), suriner (from surin, slang for a knife, + -er), surfiler (from surfil + -er), while the TLFi counts surfiler and surjeter among sur- + verb. (4) surseoir: Wiktionary gives sur + seoir, a doublet of superséder; its meaning is 'to defer', not 'to over-sit'. (5) Verbs whose etymology Wiktionary does not give (sursauter, surfacer, surhausser, surgeonner) need checking before any 'sur- + base' claim; surfacer fits the noun surface better than a verb *facer. (6) The preposition sur and the adjective sûr are homophones, unrelated. Check that the base is a French verb or noun, that the sense is 'over, beyond, again or on top', and that Wiktionary says 'sur-' and not a Latin verb.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/sur-",
+      "https://en.wiktionary.org/wiki/sur-#French",
+      "https://www.cnrtl.fr/definition/sur-",
+      "https://en.wiktionary.org/wiki/surprendre",
+      "https://en.wiktionary.org/wiki/survenir",
+      "https://en.wiktionary.org/wiki/surveiller",
+      "https://en.wiktionary.org/wiki/survivre",
+      "https://en.wiktionary.org/wiki/surmonter",
+      "https://en.wiktionary.org/wiki/surnommer",
+      "https://en.wiktionary.org/wiki/survoler",
+      "https://en.wiktionary.org/wiki/surplomber",
+      "https://en.wiktionary.org/wiki/surélever",
+      "https://en.wiktionary.org/wiki/surgeler",
+      "https://en.wiktionary.org/wiki/surnager",
+      "https://en.wiktionary.org/wiki/suriner",
+      "https://en.wiktionary.org/wiki/surfiler",
+      "https://en.wiktionary.org/wiki/surseoir",
+      "https://en.wiktionary.org/wiki/surfacer",
+      "https://en.wiktionary.org/wiki/sursauter"
+    ],
+    "skeptic": "partly"
+  },
+  "contre-": {
+    "group": [
+      "contre-"
+    ],
+    "allomorphy": "Written contre- (before a consonant, [kɔ̃.tʁə]); fr.Wiktionary also lists contr- before vowels and an archaic contr'. Verbs in the app appear both hyphenated and fused (contre-attaquer, contre-passer, contre-tirer, contremanifester and contre-manifester); the 1990 spelling reform allows welding (contrattaquer), so a hyphen is a spelling choice and not a different affix.",
+    "origin_en": "From Latin ~contra~ (“against”).",
+    "origin_fr": "Du latin ~contra~ (« contre »).",
+    "senses": [
+      "opposition: 'counter-' (contre-attaquer, contre-indiquer, contrebattre)",
+      "counterbalance or compensation (contrebalancer)",
+      "verification or second action in the same direction (contresigner, contrepasser)",
+      "music: very high register (a noun sense, not seen on verbs)"
+    ],
+    "productive": "Productive for new verbs in all registers (contre-attaquer, contre-manifester, contre-indiquer).",
+    "examples": [
+      "contre-attaquer",
+      "contresigner",
+      "contrebalancer",
+      "contre-indiquer",
+      "contrebattre"
+    ],
+    "cognates": [
+      "English counter- (borrowed through Old French from Latin contra)",
+      "Spanish, Italian contra-/contro- (same Latin source)"
+    ],
+    "pitfalls": "Check whether the verb is a derivation in French or already Latin or Old French. contrefaire is inherited from Old French contrefaire (from Late Latin *contrāfaciō), which en.Wiktionary says is 'by surface analysis' contre- + faire; contredire (Latin contradicere) and contrevenir (Latin contravenire) are Latin forms already prefixed. contrecarrer is 'dénominal de contre-carre' on fr.Wiktionary but 'contre- + carrer' on en.Wiktionary; the sources differ. Contrôler is not in the app list but comes from contre-rôle, not contre-. Hyphenated and fused entries (contre-passer / contrepasser, contre-tirer, contre-manifester / contremanifester) are the same verb in two spellings.",
+    "sources": [
+      "https://en.wiktionary.org/wiki/contre-",
+      "https://fr.wiktionary.org/wiki/contre-",
+      "input_2.json evidence_samples"
+    ],
+    "skeptic": "partly"
+  },
+  "pré-": {
+    "group": [
+      "pré-"
+    ],
+    "allomorphy": "A single form. It attaches directly to the base, usually without a hyphen (préchauffer, préétablir, préexister, prédéterminer), though fr.Wiktionary notes that hyphenated variants exist in some compounds (pré-adolescent). Before a vowel the spelling varies by word; check the dictionary.",
+    "origin_en": "From Latin ~prae-~ (“before, in front of”).",
+    "origin_fr": "Du latin ~prae-~ (« avant, devant »).",
+    "senses": [
+      "beforehand, in advance (préchauffer, prépayer, présélectionner)",
+      "earlier in time or order, preceding (prédéterminer)",
+      "in front of, over (prédominer)"
+    ],
+    "productive": "Productive in technical, administrative and everyday vocabulary (préchauffer, prépayer, présélectionner).",
+    "examples": [
+      "préchauffer",
+      "prépayer",
+      "présélectionner",
+      "prédéterminer",
+      "prédominer"
+    ],
+    "cognates": [
+      "English pre- (from Latin prae-, borrowed directly or through French)"
+    ],
+    "pitfalls": "Most verbs that begin pré- were inherited or borrowed whole from Latin prae- verbs, so 'pré- + base' is a surface analysis at best: présenter (praesentare), préparer, prévoir (praevidere), prévenir, préférer, précéder, présider, prétendre, préserver, prévaloir, précipiter, prédire, présumer, prémunir, préjuger, préluder. Several do not contain the prefix at all: préciser (from the adjective précis + -er), précariser (précaire + -iser), présager (présage), prétexter (prétexte), préfacer (préface), préfixer (préfixe), prélasser (prélat + -asser), préconiser. prénommer and préméditer: check. The sample predisposer is 'inherited from Middle French, by surface analysis pré- + disposer', and préposer means 'put in charge', not 'put in advance', so its sense is not a plain pré- + poser. Before writing pré- + base, check that (a) the base is a French verb in its own right (chauffer, payer, établir, supposer), (b) the sense is 'beforehand' or 'earlier', (c) the entry is not marked as inherited or borrowed from Latin prae-.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/pré-",
+      "https://en.wiktionary.org/wiki/pré-#French"
+    ],
+    "skeptic": "partly"
+  },
+  "inter-": {
+    "group": [
+      "inter-"
+    ],
+    "allomorphy": "Single form inter-, a learned Latin prefix. It is the same before vowels and consonants (interagir, interclasser). The inherited, vernacular equivalent is entre- (interjeter has the Old French doublet entrejeter).",
+    "origin_en": "From Latin ~inter-~ (“between, amid”).",
+    "origin_fr": "Du latin ~inter-~ (« entre, parmi »).",
+    "senses": [
+      "reciprocal action, among each other (interagir, interpénétrer, interconnecter)",
+      "between, in an interval or intermediate position (interclasser 'merge sorted items')",
+      "interruption or obstruction (interdire, intercepter; mostly in Latin-borrowed verbs)"
+    ],
+    "productive": "Productive in technical, scientific and administrative French (interconnecter, interagir). fr.Wiktionary notes that interagir may also be a back-formation from interaction (1874).",
+    "examples": [
+      "interagir",
+      "interconnecter",
+      "interpénétrer",
+      "interclasser"
+    ],
+    "cognates": [
+      "English inter- (borrowed from Latin via French)",
+      "Italian and Spanish inter- (same Latin prefix)",
+      "French entre- is the native synonym (fr.Wiktionary)"
+    ],
+    "pitfalls": "Most app verbs in inter- are Latin borrowings that already carry inter-, with no French base: intervenir (Latin intervenire), interdire (interdicere), interroger, interpréter, interpeller, interrompre, interposer, intercepter, interférer, intercaler, intercéder, intervertir, interpoler. Say 'borrowed from Latin X', not 'inter- + base'. interviewer is from English interview (itself from Middle French entrevue), not inter- + viewer. internationaliser is international + -iser; the inter- is inside the adjective. interloquer is from Latin interloqui via a legal sense, not inter- + loquer. interligner and interfolier were not verified. fr.Wiktionary also notes the Old French entre- forms (entrejeter), which were inherited, so interjeter replaced an older verb. Confirm a French base (agir, connecter, classer, pénétrer) and that the verb is a French formation.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/inter-",
+      "https://en.wiktionary.org/wiki/inter-"
+    ],
+    "skeptic": "partly"
+  },
+  "in-": {
+    "group": [
+      "in-"
+    ],
+    "allomorphy": "Two different prefixes spelled in-, both from Latin in-. (1) Privative or negative in-, 'not, without', which forms antonyms of adjectives and, rarely, nouns. Before l, m, r it appears as il-, im-, ir- and before b, m, p as im-; those forms are outside this card's group. (2) Locative in-, 'in, into, toward', much less active, which competes with en- (enduire, emballer). Pronounced /ɛ̃/ before a consonant and /in/ before a vowel, mute h or n (English Wiktionary). In verbs the base may be a verb (infiltrer, inactiver), an adjective (indurer from dur; inactiver from inactif) or a noun/adjective via a Latin loan (intimider from timide).",
+    "origin_en": "From Latin ~in-~, which is two prefixes: negative ~in-~ (“not, without”), from Proto-Indo-European *~n̥-~, and locative ~in-~ (“in, into”), from the preposition ~in~.",
+    "origin_fr": "Du latin ~in-~, qui recouvre deux préfixes : le négatif ~in-~ (« sans, non »), de l'indo-européen *~n̥-~, et le locatif ~in-~ (« dans, vers »), de la préposition ~in~.",
+    "senses": [
+      "locative, 'put into' a base (infiltrer, 'filtrer' + in-)",
+      "negation or deprivation of a quality, through an adjective (inactiver 'rendre inactif', indifférer from indifférent)",
+      "'make A', causative on an adjective (indurer 'rendre dur', intimider 'to make timid, to frighten')",
+      "no clear sense (most learned Latin verbs: inscrire, inspirer)"
+    ],
+    "productive": "The negative in- still forms adjectives and nouns, in learned or technical registers; as a verb-forming prefix on a French base it is rare (infiltrer, inactiver, indifférer, indurer). The locative in- is described as much less active than the negative one and as competing with en-.",
+    "examples": [
+      "infiltrer",
+      "inactiver"
+    ],
+    "cognates": [
+      "English in- (negative, as in inactive; locative, as in infiltrate), from the same Latin source",
+      "German un-, Greek a-/an- and Sanskrit a-/an- (correspondences of the negative Latin in-, per fr.Wiktionary)",
+      "Latin in-, the direct source"
+    ],
+    "pitfalls": "Almost all app verbs that begin with in are NOT 'in- + French base'. (1) Latin loans in which in- is already fused: inscrire, indiquer, intégrer, inviter, informer, inclure, inspirer, investir, insister, inciter, inquiéter, initier, instituer, instaurer, induire, incarner, inaugurer, invoquer, inverser, instruire, incliner, innover, infliger, introduire. Say 'from Latin X'. (2) Many that start with in are really inter- or intro-: intervenir, interdire, interroger, interrompre, interpréter, interpeller, introduire; inter- is a different prefix. (3) insérer and incorporer have no etymology in the sources consulted; do not analyse them. (4) The in is not a prefix at all: installer (Medieval Latin installare), intituler (Middle French entituler, in which in- replaced en-). (5) Noun or adjective bases + -er/-iser, so in is part of the base: intéresser (intérêt + -er), influencer (influence + -er), informatiser (informatique + -iser), indexer (index + -er), individualiser (individuel + -iser), inventer (back-formation from inventeur). (6) The truly formed in- verbs are few and disputed: inactiver ('in- + activer or inactif + -er'), indifférer (in- on the base of indifférent), intimider (fr.Wiktionary: timide + in- + -er, English Wiktionary: a borrowing from Medieval Latin intimidare). Say which analysis the source gives. Before writing 'in- + base', check that the remainder after in- is a French word, say whether the prefix is the negative or the locative one, and check that the verb is not a Latin loan or an inter-/intro- verb.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/in-",
+      "https://en.wiktionary.org/wiki/in-",
+      "https://fr.wiktionary.org/wiki/indifférer",
+      "https://fr.wiktionary.org/wiki/indurer",
+      "https://fr.wiktionary.org/wiki/intimider",
+      "https://en.wiktionary.org/wiki/intimider",
+      "https://en.wiktionary.org/wiki/inactiver",
+      "https://fr.wiktionary.org/wiki/infiltrer",
+      "https://en.wiktionary.org/wiki/inscrire",
+      "https://en.wiktionary.org/wiki/indiquer",
+      "https://en.wiktionary.org/wiki/installer",
+      "https://en.wiktionary.org/wiki/intégrer",
+      "https://en.wiktionary.org/wiki/inviter",
+      "https://en.wiktionary.org/wiki/intéresser",
+      "https://en.wiktionary.org/wiki/intervenir",
+      "https://en.wiktionary.org/wiki/informer",
+      "https://en.wiktionary.org/wiki/interdire",
+      "https://en.wiktionary.org/wiki/interroger",
+      "https://en.wiktionary.org/wiki/interpréter",
+      "https://en.wiktionary.org/wiki/interpeller",
+      "https://en.wiktionary.org/wiki/interrompre",
+      "https://en.wiktionary.org/wiki/introduire",
+      "https://en.wiktionary.org/wiki/intituler",
+      "https://en.wiktionary.org/wiki/inventer",
+      "https://en.wiktionary.org/wiki/influencer",
+      "https://en.wiktionary.org/wiki/informatiser",
+      "https://en.wiktionary.org/wiki/indexer",
+      "https://en.wiktionary.org/wiki/individualiser",
+      "https://en.wiktionary.org/wiki/incarner",
+      "https://en.wiktionary.org/wiki/induire",
+      "https://en.wiktionary.org/wiki/inclure",
+      "https://en.wiktionary.org/wiki/instruire",
+      "https://en.wiktionary.org/wiki/incliner",
+      "https://en.wiktionary.org/wiki/investir",
+      "https://en.wiktionary.org/wiki/inspirer",
+      "https://en.wiktionary.org/wiki/insister",
+      "https://en.wiktionary.org/wiki/inciter",
+      "https://en.wiktionary.org/wiki/inquiéter",
+      "https://en.wiktionary.org/wiki/initier",
+      "https://en.wiktionary.org/wiki/instituer",
+      "https://en.wiktionary.org/wiki/instaurer",
+      "https://en.wiktionary.org/wiki/inaugurer",
+      "https://en.wiktionary.org/wiki/invoquer",
+      "https://en.wiktionary.org/wiki/inverser",
+      "https://en.wiktionary.org/wiki/infliger",
+      "https://en.wiktionary.org/wiki/innover"
+    ],
+    "skeptic": "upheld"
+  },
+  "auto-": {
+    "group": [
+      "auto-"
+    ],
+    "allomorphy": "One form, auto-, with or without hyphen depending on spelling convention (the 1990 reform favours fusion except when awkward vowel combinations result).",
+    "origin_en": "From Ancient Greek ~αὐτός~ (“self”).",
+    "origin_fr": "Du grec ancien ~αὐτός~ (« soi-même »).",
+    "senses": [
+      "reflexive: done to or by oneself (autocensurer, autoproclamer)",
+      "automatic or self-acting (autorépliquer, autofinancer)",
+      "automobile: a separate prefix (autoroute); not found on verbs"
+    ],
+    "productive": "Productive in learned and technical coinages, especially in the reflexive sense (autoproclamer, autocensurer, autorépliquer).",
+    "examples": [
+      "autocensurer",
+      "autoproclamer",
+      "autofinancer",
+      "autodétruire"
+    ],
+    "cognates": [
+      "English auto- (learned borrowing from Greek, en.Wiktionary)",
+      "German selbst-, Russian samo- are equivalents (not cognates)"
+    ],
+    "pitfalls": "The many verbs in the app that begin with auto- are mostly not 'auto- + verb'. autoriser is from Latin auctorizare (via the noun for author), not auto-; automatiser is from automate + -iser, since automate comes from Greek automatos; autopsier is from autopsie; autographier from autographe. Check before writing 'auto- + base': the base is a French verb and the sense is 'self', as in censurer, proclamer, financer, détruire. Do not confuse with the automobile auto- (autoroute), a shortening of automobile.",
+    "sources": [
+      "https://en.wiktionary.org/wiki/auto-",
+      "https://fr.wiktionary.org/wiki/auto-",
+      "input_2.json evidence_samples"
+    ],
+    "skeptic": "upheld"
+  },
+  "post-": {
+    "group": [
+      "post-"
+    ],
+    "allomorphy": "A single form, attached without a hyphen in these verbs (postdater, postposer, postsynchroniser), although post- is hyphenated before some bases in other words (post-Brexit, post-traumatique in fr.Wiktionary).",
+    "origin_en": "From Latin ~post~ (“after, behind”).",
+    "origin_fr": "Du latin ~post~ (« après, derrière »).",
+    "senses": [
+      "after, later (postdater, postsynchroniser)",
+      "behind, placed after (postposer)"
+    ],
+    "productive": "Productive, mainly in adjectives and nouns (postopératoire, postmodernisme); in verbs only a handful of technical coinages (postdater, postsynchroniser).",
+    "examples": [
+      "postdater",
+      "postposer",
+      "postsynchroniser"
+    ],
+    "cognates": [
+      "English post- (from the same Latin post, borrowed directly or through French)"
+    ],
+    "pitfalls": "The app verbs that begin post- are not post- + verb: postuler is Latin postulare, postillonner comes from postillon, postfacer from the noun postface, postériser from the adjective postérieur (check). Sources disagree on postposer: fr.Wiktionary calls it post- + poser, en.Wiktionary says it comes from Latin postponere, altered on French poser. Say 'after + poser' only with that caveat. postdater is from the noun postdate + -er (en.Wiktionary), which itself is post- + date. Before writing post- + base, check that the base is a French verb and the sense is 'after'.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/post-",
+      "https://en.wiktionary.org/wiki/post-#French"
+    ],
+    "skeptic": "upheld"
+  },
+  "dis-": {
+    "group": [
+      "dis-"
+    ],
+    "allomorphy": "Single form dis-. Latin dis- is reduced to di- before some consonants and assimilates to dif- before f (fr.Wiktionary), so words like différer, diffuser, diviser are not French dis- derivations. dis- is the learned doublet of the inherited prefixes dé- / dés- (en.Wiktionary).",
+    "origin_en": "Learned borrowing from Latin ~dis-~ (“apart, in different directions”), unlike the inherited prefix ~dé-~.",
+    "origin_fr": "Emprunt savant au latin ~dis-~ (« séparément, en sens opposés »), à la différence du préfixe hérité ~dé-~.",
+    "senses": [
+      "negation or reversal (discréditer, discontinuer)",
+      "separation or dispersal (Latin senses: dissocier, disperser)",
+      "difference, intensity (fr.Wiktionary lists these for the Latin source)"
+    ],
+    "productive": "Barely productive. Few recent verbs are coined with dis-; dé-/dés- is the productive prefix. discréditer and discontinuer are the two input examples.",
+    "examples": [
+      "discréditer",
+      "discontinuer"
+    ],
+    "cognates": [
+      "English dis- (borrowed through French and Latin)",
+      "Italian dis-/s- and Spanish des- (the latter is the inherited form)"
+    ],
+    "pitfalls": "Nearly every app verb in dis- is a Latin borrowing or a verb built on another base: disposer (Latin disponere influenced by ponere, via Old French), disparaître (not a simple dis- + paraître in the sources), distinguer, discuter, distribuer, dispenser, disputer, dissoudre, disperser, dissimuler, dissocier, dissiper, distiller, discerner, distraire, dissuader, disséminer, discriminer, disséquer, disloquer, disserter, distendre, discourir, disjoindre, distordre, dissoner. Do not say 'dis- + base' unless the base verb exists with the right sense. discipliner (from discipline), distancer and distancier (from distance), discrétiser (from discret), disjoncter (from disjoncteur), dispatcher (English), discounter (English), discutailler (discuter + -ailler), disputailler (disputer + -ailler) are formed on other bases. disqualifier is dis- + qualifier (English disqualify), which the app also lists under -ifier. disculper and disgracier not verified. Check: base exists, and the sense is negation or reversal.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/dis-",
+      "https://en.wiktionary.org/wiki/dis-"
+    ],
+    "skeptic": "upheld"
+  },
+  "sub-": {
+    "group": [
+      "sub-"
+    ],
+    "allomorphy": "In French verbs formed from a French base, sub- keeps its shape (subdiviser, subdéléguer, subodorer). The assimilated variants suc-, suf-, sug-, sup- and su- (and sus-) come from Latin, where the b changed to the following consonant: they are found in inherited or learned words (succéder, suffixer, suggérer, supporter, suspect), not in French coinages. English Wiktionary makes the same point for English. The inherited French counterpart of sub- is sous-. Pronounced /syb/.",
+    "origin_en": "From Latin ~sub-~ (“under”), from the preposition ~sub~, which French Wiktionary derives from a Proto-Indo-European root *~upo~, whence also Greek ~hypo-~ and English ~up~.",
+    "origin_fr": "Du latin ~sub-~ (« sous »), issu de la préposition ~sub~, que le Wiktionnaire français rattache à une racine indo-européenne *~upo~, d'où aussi le grec ~hypo-~ et l'anglais ~up~.",
+    "senses": [
+      "below, secondary, at a lower level (subdiviser 'divide again', subdéléguer 'delegate in turn')",
+      "inferiority (fr.Wiktionary: 'une notion d'infériorité'; substellaire, subsaharien, mostly adjectives)"
+    ],
+    "productive": "Weak for verbs. The French verb examples are few and learned (subdiviser, subdéléguer), and fr.Wiktionary sends subdéléguer to sous-déléguer, which shows the competing inherited form sous-. The sources give no productivity rating for sub-.",
+    "examples": [
+      "subdiviser",
+      "subdéléguer"
+    ],
+    "cognates": [
+      "English sub- (from Latin; English Wiktionary: doublet of hypo-)",
+      "Greek hypo- and English up, from the same Proto-Indo-European root, per fr.Wiktionary",
+      "Czech pod and Russian pod, listed by fr.Wiktionary",
+      "Portuguese sub- (Latin prefix; fr.Wiktionary)"
+    ],
+    "pitfalls": "Most verbs in the app that begin with sub are Latin loans, not 'sub- + French base'. (1) Latin loans: substituer, subsister, submerger, subvenir (a doublet of souvenir), subjuguer, subvertir, subroger, suborner, subsumer (Medieval Latin subsumere). Say 'from Latin X'. (2) The sub is inside the root: subtiliser (subtil + -iser) and substantiver (substantif + -er) are not 'under' + verb. (3) subordonner, subventionner and sublimer have no usable etymology in the sources consulted (subventionner is marked missing), so do not analyse them as sub- + base. (4) Assimilated forms hide the prefix in verbs that start with su- (supporter, suggérer, succéder, suffire, suspendre): they are Latin sub- but not French sub-; never present them as 'sub- + base'. (5) The prefix exists in French as sub- only in learned coinages: before writing 'sub- + base', check that the remainder is a French verb (diviser, déléguer, odorer) and that the sense is 'below, secondary, in turn'. The pair subdiviser/subdéléguer (the latter with sous-déléguer) and subodorer are the transparent ones here.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/sub-",
+      "https://en.wiktionary.org/wiki/sub-",
+      "https://fr.wiktionary.org/wiki/subdéléguer",
+      "https://en.wiktionary.org/wiki/subdiviser",
+      "https://en.wiktionary.org/wiki/subodorer",
+      "https://en.wiktionary.org/wiki/substituer",
+      "https://en.wiktionary.org/wiki/subsister",
+      "https://en.wiktionary.org/wiki/submerger",
+      "https://en.wiktionary.org/wiki/subvenir",
+      "https://en.wiktionary.org/wiki/subjuguer",
+      "https://en.wiktionary.org/wiki/subvertir",
+      "https://en.wiktionary.org/wiki/subroger",
+      "https://en.wiktionary.org/wiki/subsumer",
+      "https://en.wiktionary.org/wiki/suborner",
+      "https://en.wiktionary.org/wiki/subtiliser",
+      "https://en.wiktionary.org/wiki/substantiver",
+      "https://en.wiktionary.org/wiki/subventionner"
+    ],
+    "skeptic": "upheld"
+  },
+  "télé-": {
+    "group": [
+      "télé-"
+    ],
+    "allomorphy": "One form, télé-, [te.le]. fr.Wiktionary says it may appear as tél- before certain sounds; none of the app verbs shows it.",
+    "origin_en": "From Ancient Greek ~τῆλε~ (“far, at a distance”).",
+    "origin_fr": "Du grec ancien ~τῆλε~ (« loin, à distance »).",
+    "senses": [
+      "at a distance, remote (téléguider, télécharger, télécommander)",
+      "television (télédiffuser; here télé- is a clipping of télévision)",
+      "telephone, cable car: other senses listed on fr.Wiktionary (téléphérique), not found on verbs"
+    ],
+    "productive": "Productive in technical and media vocabulary (télétravailler, télécharger).",
+    "examples": [
+      "téléguider",
+      "télédiffuser",
+      "télécharger"
+    ],
+    "cognates": [
+      "English tele- (learned borrowing from Greek via French or Latin)",
+      "Spanish, Italian, German tele- (same Greek source)"
+    ],
+    "pitfalls": "Several app verbs starting with télé- are not 'télé- + verb'. téléphoner comes from téléphone + -er and téléviser from télévision, with an accepted clipping; télégraphier from télégraphe + -ier. Likewise télécommander and télécharger are plausible télé- + commander and télé- + charger, but check whether the noun télécommande or téléchargement came first. Writers should check: the base verb exists and the 'at a distance' sense applies. The two senses ('far' and 'television') are different; télédiffuser and téléguider, from fr.Wiktionary 'de diffuser, avec le préfixe télé-', are fine as examples.",
+    "sources": [
+      "https://en.wiktionary.org/wiki/télé-",
+      "https://fr.wiktionary.org/wiki/télé-",
+      "input_2.json evidence_samples"
+    ],
+    "skeptic": "partly"
+  },
+  "radio-": {
+    "group": [
+      "radio-"
+    ],
+    "allomorphy": "A single form, attached without a hyphen. It has two roots in the sources: the radiation sense and the broadcasting sense (radio as a medium), which the fr and en pages list together.",
+    "origin_en": "From Latin ~radius~ (“ray, beam”), in words about the radiation of a wave, including radioactivity and radio broadcasting.",
+    "origin_fr": "Du latin ~radius~ (« rayon »), dans des mots relatifs au rayonnement d'une onde, dont la radioactivité et la radiodiffusion.",
+    "senses": [
+      "by radio, with radio waves (radioguider, radiodiffuser)"
+    ],
+    "productive": "Productive in technical vocabulary; only a few verbs are built directly on it.",
+    "examples": [
+      "radiodiffuser",
+      "radioguider"
+    ],
+    "cognates": [
+      "English radio- (same Latin radius; English radioactive, radiotherapy)"
+    ],
+    "pitfalls": "radiographier and radiobaliser are not radio- + a base verb: radiographier is built on radiographie, radiobaliser on radiobalise (a noun), so there is no verb graphier or baliser sense in play to prefix. Check that the verb really is radio- + an independent verb (diffuser, guider) before using this card. The two senses of radio- (rays versus broadcasting) should not be conflated: radiodiffuser and radioguider are about radio waves.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/radio-",
+      "https://en.wiktionary.org/wiki/radio-#French"
+    ],
+    "skeptic": "upheld"
+  },
+  "super-": {
+    "group": [
+      "super-"
+    ],
+    "allomorphy": "Single form super-. It is the learned doublet of the inherited prefix sur- (en.Wiktionary); in French many words that had super- were replaced by sur- (fr.Wiktionary), so super- + verb is rare.",
+    "origin_en": "Learned borrowing from Latin ~super-~ (“over, above”), a doublet of ~sur-~.",
+    "origin_fr": "Emprunt savant au latin ~super-~ (« au-dessus, sur »), doublet de ~sur-~.",
+    "senses": [
+      "over, above, in place of (superposer 'put on top of')",
+      "superior degree, intensive (supermarché, superchouette; mainly nouns and adjectives)"
+    ],
+    "productive": "Productive for nouns and adjectives in informal and modern French, under English influence (fr.Wiktionary). For verbs it is rare; superposer is a calque of Latin superponere.",
+    "examples": [
+      "superposer"
+    ],
+    "cognates": [
+      "English super- (borrowed from Latin)",
+      "French sur- (doublet, inherited)"
+    ],
+    "pitfalls": "superviser is not super- + viser. It is either from English supervise or from Latin supervidere, not from the French verb viser, so the base is not viser; check. The prefix sur- (surveiller, surpasser) is the inherited doublet and should be cited as sur-, not super-. Do not analyze words with super as part of a root. The sense 'superior degree' is mainly for nouns and adjectives; for verbs the spatial sense 'over' is the one attested.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/super-",
+      "https://en.wiktionary.org/wiki/super-"
+    ],
+    "skeptic": "upheld"
+  },
+  "mal-": {
+    "group": [
+      "mal-"
+    ],
+    "allomorphy": "One form in the group, mal-, joined to the base without a hyphen (maltraiter). fr.Wiktionary also lists a variant mau-, which is not in the group. It is the same word as the adverb mal, so a verb in mal- is a compound of mal and a verb. The prefixes il-, im-, in-, ir- and non- appear on fr.Wiktionary as synonyms (other negatives), not as variants.",
+    "origin_en": "From Old French ~mal-~, from the adverb ~mal~ (“badly”), which comes from Latin ~male~ (“badly”), from ~malus~ (“bad”).",
+    "origin_fr": "De l'ancien français ~mal-~, issu de l'adverbe ~mal~ (« mal »), lui-même du latin ~male~ (« mal »), de ~malus~ (« mauvais »).",
+    "senses": [
+      "badly, wrongly done (maltraiter 'to treat badly', malmener 'to handle roughly')",
+      "the opposite of the base (fr.Wiktionary: le contraire de son signifié normal; mostly adjectives and nouns, as in malhonnête)"
+    ],
+    "productive": "Limited for verbs: the app has very few. The sources give no productivity rating for mal-.",
+    "examples": [
+      "maltraiter",
+      "malmener"
+    ],
+    "cognates": [
+      "English mal- (from Old French mal-, per English Wiktionary)",
+      "Esperanto mal- (a borrowing from French mal-, Zamenhof 1887)"
+    ],
+    "pitfalls": "Do not equate every verb that begins with mal with this prefix. (1) malaxer is from Latin malaxare (from Greek malasso, 'to soften'), not 'badly' + axer. (2) malléabiliser is malléable + -iser; the mal- there is the start of the adjective malléable. (3) Verbs for which the sources give no mal- analysis should be checked before calling them mal- verbs. (4) The transparent ones are maltraiter (mal- + traiter) and malmener (mal + mener). Before writing 'mal- + base', check that the remainder is a French verb and that 'badly' or 'wrongly' is the meaning. Note also that fr.Wiktionary's variant mau- is a different spelling, not covered here.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/mal-",
+      "https://en.wiktionary.org/wiki/mal-",
+      "https://en.wiktionary.org/wiki/maltraiter",
+      "https://en.wiktionary.org/wiki/malmener",
+      "https://en.wiktionary.org/wiki/malaxer",
+      "https://en.wiktionary.org/wiki/malléabiliser"
+    ],
+    "skeptic": "partly"
+  },
+  "juxta-": {
+    "group": [
+      "juxta-"
+    ],
+    "allomorphy": "One form, juxta- [ʒyk.sta]; the Latin spelling is iuxta.",
+    "origin_en": "From Latin ~iuxta~ (“near, beside”).",
+    "origin_fr": "Du latin ~iuxta~ (« près de, à côté de »).",
+    "senses": [
+      "next to, beside (juxtaposer)"
+    ],
+    "productive": "Used mainly in anatomical, medical and scientific vocabulary (juxtacortical, juxtacrine); it forms very few verbs.",
+    "examples": [
+      "juxtaposer"
+    ],
+    "cognates": [
+      "English juxta- (from Latin; en.Wiktionary says it is no longer productive or restricted in modern English)"
+    ],
+    "pitfalls": "Only juxtaposer is in the app list. Whether it is French juxta- + poser (fr.Wiktionary) or borrowed from Latin iūxtāpōnō (en.Wiktionary offers either) is unresolved, so a writer should state both possibilities. Nothing else beginning with 'juxta' should be assumed to be this prefix without checking that the rest is a verb.",
+    "sources": [
+      "https://en.wiktionary.org/wiki/juxta-",
+      "https://fr.wiktionary.org/wiki/juxta-",
+      "input_2.json evidence_samples"
+    ],
+    "skeptic": "partly"
+  },
+  "poly-": {
+    "group": [
+      "poly-"
+    ],
+    "allomorphy": "A single form, attached without a hyphen.",
+    "origin_en": "From Ancient Greek ~πολύς~ (“many, much”).",
+    "origin_fr": "Du grec ancien ~πολύς~ (« nombreux, beaucoup »).",
+    "senses": [
+      "many, multiple (polycopier, 'make many copies')"
+    ],
+    "productive": "Productive in scientific and technical nouns and adjectives (polyamide, polymère); as a verb prefix only polycopier is in the data.",
+    "examples": [
+      "polycopier"
+    ],
+    "cognates": [
+      "English poly- (same Greek source)"
+    ],
+    "pitfalls": "polymériser is not poly- + a verb: it comes from polymère + -iser (polymère is itself poly- + Greek meros 'part'); there is no verb mériser. polycopier is genuinely poly- + copier, tied to the noun polycopié (a duplicated document). Before writing poly- + base, check that the base is an independent verb.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/poly-",
+      "https://en.wiktionary.org/wiki/polycopier"
+    ],
+    "skeptic": "upheld"
+  },
+  "héli-": {
+    "group": [
+      "héli-"
+    ],
+    "allomorphy": "Single form héli-. It is a clipped, metanalyzed form of hélicoptère, not an ancient prefix. It is pronounced e.li. Keep it distinct from hélio-, which is Greek for 'sun' and belongs to heliocentric words.",
+    "origin_en": "Extracted from ~hélicoptère~ by metanalysis; the word goes back to Greek ~ἕλιξ~ (“spiral”) via Latin ~helix~.",
+    "origin_fr": "Extrait de ~hélicoptère~ par métanalyse ; le mot remonte au grec ~ἕλιξ~ (« spirale ») par le latin ~helix~.",
+    "senses": [
+      "by or from a helicopter (hélitreuiller 'winch up by helicopter')"
+    ],
+    "productive": "Productive only within helicopter vocabulary (héliport, hélisauvetage, héligare per fr.Wiktionary). fr.Wiktionary lists a second, rarer sense 'helix-shaped' (hélitron).",
+    "examples": [
+      "hélitreuiller"
+    ],
+    "cognates": [
+      "English heli- (as in heliport, clipped from helicopter; same Greek source)"
+    ],
+    "pitfalls": "No other app verb uses it. Do not confuse with hélio- (sun) or with hélicoïdal (helix). Check that the verb really concerns helicopters; the base (treuiller) is an ordinary French verb.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/héli-"
+    ],
+    "skeptic": "partly"
+  },
+  "rétro-": {
+    "group": [
+      "rétro-"
+    ],
+    "allomorphy": "One form, rétro-. Pronounced /ʁe.tʁo/ as a prefix and /ʁe.tʁɔ/ inside a word (fr.Wiktionary). It is a learned prefix, written with the accent, and not a variant of re-.",
+    "origin_en": "Learned borrowing from Latin ~retrō~ (“backward, behind”); English Wiktionary compares French ~arrière~ (“behind”).",
+    "origin_fr": "Emprunt savant au latin ~retrō~ (« en arrière, derrière ») ; le Wiktionnaire anglais le rapproche du français ~arrière~ (« derrière »).",
+    "senses": [
+      "backward, back (rétrograder 'go backward'; fr.Wiktionary: 'en arrière, retour')",
+      "retroactively, with effect on the past (rétroagir)"
+    ],
+    "productive": "Rare for verbs and learned in register. The sources give no productivity rating; rétroagir is one of very few verbs in the app that look formed on a French base.",
+    "examples": [
+      "rétroagir"
+    ],
+    "cognates": [
+      "English retro- (the French entry is glossed 'retro-, back, behind')",
+      "Latin retrō, the direct source"
+    ],
+    "pitfalls": "rétrograder and rétrocéder look like rétro- + a verb, but they are Latin loans: rétrograder from Late Latin retrogradare and rétrocéder from Latin retrocedere. Say 'learned borrowing from Latin'. Only rétroagir is cited as rétro- + agir. The adjective and noun retro (the clipped form, as in 'rétro' fashion) is a different word. Before writing 'rétro- + base', check that the remainder is a French verb (agir) and that the sense is 'backward' or 'retroactively', and that the verb is not itself in Latin.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/rétro-",
+      "https://en.wiktionary.org/wiki/rétro-",
+      "https://fr.wiktionary.org/wiki/rétroagir",
+      "https://en.wiktionary.org/wiki/rétrograder",
+      "https://en.wiktionary.org/wiki/rétrocéder"
+    ],
+    "skeptic": "upheld"
+  },
+  "pyro-": {
+    "group": [
+      "pyro-"
+    ],
+    "allomorphy": "One form, pyro-. en.Wiktionary notes the variant pyr- before a vowel or h in English; no French verb in the list shows it.",
+    "origin_en": "From Ancient Greek ~πῦρ~ (“fire”).",
+    "origin_fr": "Du grec ancien ~πῦρ~ (« feu »).",
+    "senses": [
+      "fire or heat (pyrograver: 'engrave with fire')"
+    ],
+    "productive": "Used for technical and scientific terms (pyrolyse, pyrotechnie); it forms almost no verbs.",
+    "examples": [
+      "pyrograver"
+    ],
+    "cognates": [
+      "English pyro- (from Greek via Latin; en.Wiktionary)",
+      "Related to English fire, from Proto-Indo-European *péh₂wr̥ (en.Wiktionary traces pûr to it)"
+    ],
+    "pitfalls": "pyrograver is the only app verb with this prefix. A writer must not treat pyro- as an everyday verb prefix. Sources also list a 'fever' sense and a chemistry sense (acids), which do not apply to pyrograver.",
+    "sources": [
+      "https://en.wiktionary.org/wiki/pyro-",
+      "https://fr.wiktionary.org/wiki/pyro-",
+      "input_2.json evidence_samples"
+    ],
+    "skeptic": "partly"
+  },
+  "anté-": {
+    "group": [
+      "anté-"
+    ],
+    "allomorphy": "A single form (pronounced like ante-, /ɑ̃te/), attached without a hyphen.",
+    "origin_en": "From Latin ~ante-~ (“before”).",
+    "origin_fr": "Du latin ~ante-~ (« avant »).",
+    "senses": [
+      "before, in front of (antéposer)",
+      "earlier in time (in nouns and adjectives: antédiluvien)"
+    ],
+    "productive": "Learned and rare. Mostly in nouns and adjectives (antécédent, anténatal); antéposer is a grammatical term.",
+    "examples": [
+      "antéposer"
+    ],
+    "cognates": [
+      "English ante- (same Latin source)"
+    ],
+    "pitfalls": "No app verb merely resembles anté-. Check that a verb is not confused with anti- (opposition, as in antichrist, which comes from anti-, not anté-), or with anticiper, which is Latin anticipare and not anté- + a verb. Before writing anté- + base, check that the base is an independent verb; antéposer is anté- + poser ('to place in front'). A neighbour of pré- and post-, antonym of post-.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/anté-",
+      "https://fr.wiktionary.org/wiki/antéposer"
+    ],
+    "skeptic": "upheld"
+  },
+  "bis-": {
+    "group": [
+      "bis-"
+    ],
+    "allomorphy": "The input form is bis-, but the one verb (bistourner) goes back to Old French bestorner, so its bis- may be the Old French bes-/be- form of another element, not the Latin 'twice' prefix; the sources do not settle this. The standard French prefix bis- is Latin 'twice' (bisannuel, biscuit).",
+    "origin_en": "The common French prefix ~bis-~ comes from Latin ~bis~ (“twice”). The sources do not give a Latin source for the ~bis-~ of ~bistourner~ (Old French ~bestorner~).",
+    "origin_fr": "Le préfixe français courant ~bis-~ vient du latin ~bis~ (« deux fois »). Les sources ne donnent pas d'origine latine pour le ~bis-~ de ~bistourner~ (ancien français ~bestorner~).",
+    "senses": [
+      "twice (bisannuel, biscuit: Latin bis)",
+      "unclear for bistourner; fr.Wiktionary gives only 'dérivé de tourner avec le préfixe bis-'"
+    ],
+    "productive": "No, not for verbs. The 'twice' prefix is used for nouns and adjectives (bisannuel, biscotte).",
+    "examples": [
+      "bistourner"
+    ],
+    "cognates": [
+      "Italian bis- (fr.Wiktionary); Italian has a second bis- with pejorative sense (bisunto)"
+    ],
+    "pitfalls": "The app verbs beginning bis- are NOT bis- + verb: biseauter (from biseau), biscuiter (from biscuit, itself 'twice cooked'), bistrer (from bistre 'brown pigment'), bisquer (origin not verified; do not call it bis-). Only bistourner is given as bis- + tourner, and even there the sense is not documented in the sources used, so the 'twice' reading cannot be assumed. A writer should say 'bis-, an old prefix of unclear meaning' or skip the prefix.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/bis-",
+      "https://en.wiktionary.org/wiki/bis-"
+    ],
+    "skeptic": "partly"
+  },
+  "syn-": {
+    "group": [
+      "syn-"
+    ],
+    "allomorphy": "syn- is pronounced /sin/ before a vowel and /sɛ̃/ before a consonant. The n assimilates in Greek-derived words: sym- before b, m, p (symbole, sympathie), syl- before l (syllabe), syr- before r, and a bare sy- or sys- before s or z (système, syzygie). Those variants are not in this card's group; a verb in syn- keeps the n before most other consonants (syncristalliser, before c).",
+    "origin_en": "From Ancient Greek ~σύν~ (~sún~, “with, together”). English Wiktionary compares Sanskrit ~सम्~ (~sam-~).",
+    "origin_fr": "Du grec ancien ~σύν~ (~sún~, « avec, ensemble »). Le Wiktionnaire anglais le rapproche du sanskrit ~सम्~ (~sam-~).",
+    "senses": [
+      "together, jointly (syncristalliser 'to crystallise together')",
+      "concomitance, simultaneity, identity (in learned compounds)"
+    ],
+    "productive": "Rare and learned, in scientific vocabulary. The sources give no productivity rating, and the app has a single verb formed on a French base (syncristalliser).",
+    "examples": [
+      "syncristalliser"
+    ],
+    "cognates": [
+      "English syn- (with the variants syl-, sym-, syr-, sys-), from the same Greek",
+      "Latin con-/com- as the Latin counterpart (fr.Wiktionary lists con- as a synonym)",
+      "Sanskrit sam- (English Wiktionary)"
+    ],
+    "pitfalls": "Almost all app verbs that begin with syn are NOT 'syn- + verb'. (1) synthétiser (from synthèse, itself from Greek), synchroniser (synchrone + -iser), syndiquer (syndicat + -er), syncoper (syncope + -er): the base is a noun or adjective in syn-, or a Greek word; there is no French verb *thétiser, *chroniser, *diquer or *coper. (2) syndicaliser and syntoniser have no etymology in the sources consulted; do not analyse them as syn- + base. (3) Only syncristalliser is cited as syn- + cristalliser. Before writing 'syn- + base', check that a French verb remains after syn- and that the sense is 'together'. Note that sym-, syl-, syr- and sys- are the same prefix before certain consonants.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/syn-",
+      "https://en.wiktionary.org/wiki/syn-",
+      "https://fr.wiktionary.org/wiki/syncristalliser",
+      "https://en.wiktionary.org/wiki/synthétiser",
+      "https://en.wiktionary.org/wiki/synchroniser",
+      "https://en.wiktionary.org/wiki/syndiquer",
+      "https://en.wiktionary.org/wiki/syncoper",
+      "https://en.wiktionary.org/wiki/syndicaliser",
+      "https://en.wiktionary.org/wiki/syntoniser"
+    ],
+    "skeptic": "upheld"
+  },
+  "-er": {
+    "group": [
+      "-er",
+      "-ir"
+    ],
+    "allomorphy": "-er is the infinitive ending of the first conjugation, and the ending added to a noun or adjective to coin a verb: alerte → alerter, téléphone → téléphoner, filtre → filtrer. -ir is the second-conjugation ending (finir, with -iss- in the plural), used mostly for verbs from adjectives meaning 'become A' (grand → grandir, gros → grossir), often with a prefix (a-, é-, en-: adoucir, élargir, enrichir). After a vowel-final base the ending may appear as -ter (see the -t- card). Note that -er and -ir are two different endings (Latin -are versus -ire and -ere); they are grouped here only because both turn a base into a verb.",
+    "origin_en": "From Latin ~-are~, the ending of first-conjugation infinitives (~cantare~ gives ~chanter~); the second-conjugation ending ~-ir~ comes from Latin ~-ire~ and ~-ere~.",
+    "origin_fr": "Du latin ~-are~, terminaison des infinitifs de la première conjugaison (~cantare~ donne ~chanter~) ; la terminaison ~-ir~ de la deuxième conjugaison vient du latin ~-ire~ et ~-ere~.",
+    "senses": [
+      "denominal -er: 'provide with N' (meubler, vacciner, facturer), 'make into or use N' (filtrer, gazer, coder), 'act or speak like N' or 'carry out N' (raisonner, téléphoner, alerter, bosser)",
+      "from a base with a derived sense depending on the noun: 'work on N' or 'apply N'",
+      "deadjectival -ir: 'make or become A' (affiner, grandir, blêmir, grossir)"
+    ],
+    "productive": "-er is fully productive and is the default for new verbs, including slang and technical coinages (coder, bosser, gazer). -ir: en.Wiktionary calls it 'no longer productive' while fr.Wiktionary says it stays productive with prefixes (a-, é-, en-). The two sources differ; new coinages in -ir are rare and almost always have a prefix.",
+    "examples": [
+      "alerter",
+      "téléphoner",
+      "filtrer",
+      "meubler",
+      "vacciner",
+      "coder",
+      "facturer"
+    ],
+    "cognates": [
+      "Italian -are/-ire, Spanish -ar/-ir (same Latin endings, inherited; fr.Wiktionary lists Spanish -ar and Italian -are)"
+    ],
+    "pitfalls": "Most verbs in -er and -ir are inherited from Latin or Germanic and were never formed by adding -er to a French noun: chanter (Latin cantare), aller (via Late Latin, per fr.Wiktionary the example 'ambulare'), dormir and finir (Latin dormire, finire). A writer must check three things before saying 'noun + -er': (1) the noun exists in French and is attested earlier than the verb; (2) the verb is not already in Latin or Old French under the same shape; (3) the meaning matches a denominal sense. Sources can disagree: hacher is 'dénominal de hache' on fr.Wiktionary but 'inherited from Middle French, from Old French hacher, from Frankish *hakkōn' on en.Wiktionary; raisonner (Old French raisnier) is 'dénominal de raison'; bosser is 'probably bosse + -er' (or from boss), with an uncertain semantic path. Prefixed verbs (embaucher from débaucher by prefix substitution, per fr.Wiktionary; en.Wiktionary: en- + bauche + -er) carry two affixes, so name both. For -ir, many verbs are inherited Latin forms (dormir, partir, sortir, choisir), and only those from an adjective with 'become' sense, usually with a-, é- or en-, are French formations. Verbs in -ir of the 'haïr' or 'maudire' shapes are inherited. The app's list for this card was empty, so no verb-by-verb check was possible.",
+    "sources": [
+      "https://en.wiktionary.org/wiki/-er",
+      "https://en.wiktionary.org/wiki/-ir",
+      "https://fr.wiktionary.org/wiki/-er",
+      "https://fr.wiktionary.org/wiki/-ir",
+      "input_2.json evidence_samples"
+    ],
+    "skeptic": "partly"
+  },
+  "-t-": {
+    "group": [
+      "-t-",
+      "-ter"
+    ],
+    "allomorphy": "-t- is not an affix with a meaning. It is a euphonic (epenthetic) consonant that appears between a base ending in a vowel and the verbal ending -er, so the combination -ter is felt as a suffix (biseau → biseauter, clou → clouter, queue → queuter, yoyo → yoyoter, pian(o) → pianoter, flou → flouter, réseau → réseauter). It prevents a hiatus. fr.Wiktionary treats -ter as a variant of -er; en.Wiktionary treats the -t- as euphonic. The sources do not state a fixed rule for when it is inserted.",
+    "origin_en": "Not an affix of its own: ~-t-~ is an epenthetic consonant inserted before the verbal ending ~-er~, which comes from Latin ~-are~.",
+    "origin_fr": "Ce n'est pas un affixe à part : ~-t-~ est une consonne épenthétique insérée devant la terminaison verbale ~-er~, qui vient du latin ~-are~.",
+    "senses": [
+      "no meaning of its own; the sense is that of -er (denominal: 'provide with N', 'work on N'): biseauter 'cut at a bevel', clouter 'stud with nails'",
+      "with a prefix as well: dénoyauter, dépiauter (dé- + noun + -t-er) 'remove N'"
+    ],
+    "productive": "Productive as a variant of -er, mostly for denominal verbs in informal or technical registers (yoyoter, queuter, réseauter).",
+    "examples": [
+      "biseauter",
+      "clouter",
+      "dénoyauter",
+      "pianoter"
+    ],
+    "cognates": [
+      "No cognate affix: it is a feature of French phonology"
+    ],
+    "pitfalls": "Do not call -t- a suffix with a meaning. Most app verbs ending in -ter have a t that belongs to the root, so there is no -ter affix: rester (Latin restare), présenter, porter, ajouter, éviter, limiter, traiter (Latin tractare), accepter, contacter, adapter, acheter, adopter, hésiter, visiter, nécessiter, quitter, compter (Latin computare), monter, écouter, raconter. A true -t- verb needs: (1) a noun or word base that ends in a vowel (clou, biseau, queue, yoyo, noyau); (2) that base exists in French independently; (3) a verb without the t would be a different or non-existing word or would have a hiatus (clouer exists as 'nail', clouter as 'stud', so check sense); (4) no Latin ancestor. dépiauter shows a Picard base piau (a form of peau) + epenthetic -t-. Where the base noun itself ends in t (e.g., a noun like 'rapport'), the t belongs to the noun and is not epenthetic. The evidence words the same pattern differently: biseauter is given as 'biseau + -ter', clouter as 'clou + -t- + -er'; both describe the same epenthetic t.",
+    "sources": [
+      "https://en.wiktionary.org/wiki/-ter",
+      "https://fr.wiktionary.org/wiki/-ter",
+      "input_2.json evidence_samples"
+    ],
+    "skeptic": "partly"
+  },
+  "-iser": {
+    "group": [
+      "-iser",
+      "-ise"
+    ],
+    "allomorphy": "-iser is the only form that forms French verbs. The group lists -ise, but fr.Wiktionary gives -ise only as the British English counterpart of -ize, so treat it as the same suffix without its infinitive ending, not as a second French verb suffix. A separate noun suffix -ise (bêtise, franchise) is a different affix and gives no verbs. The stem often changes before -iser: final -el, -al or -ique may be dropped or reshaped (réel to réaliser, numérique to numériser, informatique to informatiser, automate to automatiser).",
+    "origin_en": "Borrowed into Old French as ~-iser~ (earlier ~-izer~) from Late Latin ~-izāre~, which transcribed Greek verbs. fr.Wiktionary instead dates its productive use to the mid-sixteenth century (~latiniser~, ~gréciser~).",
+    "origin_fr": "Emprunté en ancien français sous la forme ~-iser~ (d'abord ~-izer~) au latin tardif ~-izāre~, qui transcrivait des verbes grecs. Le Wiktionnaire en date plutôt l'emploi productif du milieu du XVIᵉ siècle (~latiniser~, ~gréciser~).",
+    "senses": [
+      "make or render A (moderniser, actualiser, concrétiser)",
+      "cause to become, convert into N (numériser, carboniser)",
+      "treat with, subject to N or to a person's or place's name (pasteuriser, galvaniser)",
+      "provide with N (informatiser, hospitaliser)"
+    ],
+    "productive": "Fully productive, in technical, administrative and journalistic registers (informatiser, numériser, dollariser, sarkozyser in fr.Wiktionary).",
+    "examples": [
+      "moderniser",
+      "centraliser",
+      "actualiser",
+      "automatiser",
+      "hospitaliser",
+      "scolariser"
+    ],
+    "cognates": [
+      "English -ize/-ise (same Late Latin and Greek source, reached English through French and Latin)",
+      "French -oyer (en.Wiktionary: -iser is a doublet of the inherited -oyer)"
+    ],
+    "pitfalls": "Many verbs in -iser are not formed in French from a base + -iser; they were borrowed whole from Latin or Greek: baptiser (Late Latin baptizare), civiliser (check the entry), organiser. In some verbs the -is- belongs to the root and the verb ends in -er, not -iser: croiser (croix + -er), diviser and réviser (Latin divisare, revisere), épuiser, apaiser (a- + paix), déguiser (dé- + guise), préciser (précis + -er), maîtriser, favoriser (favori), autoriser. Do not split these as X + -iser. Réaliser is a genuine -iser formation (réel + -iser with stem change per fr.Wiktionary), but an older sense of 'realize' may come through English; check. Before writing base + -iser, check that (a) the base is an existing French noun or adjective, with the stem change if any (réel/réal-, numérique/numér-), (b) the sense is 'make A', 'convert into N' or 'treat with N', (c) the entry is not marked as borrowed from Latin or Greek. Prefixed verbs such as décentraliser are dé- + centraliser, not dé- + central + -iser.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/-iser",
+      "https://en.wiktionary.org/wiki/-iser#French"
+    ],
+    "skeptic": "upheld"
+  },
+  "-ifier": {
+    "group": [
+      "-ifier",
+      "-fier"
+    ],
+    "allomorphy": "-ifier is the usual form; -fier is the older variant. fr.Wiktionary (as summarized) says -fier was historically used when the stem already ended in -i or with Latin stems in -fico/-ficare (putréfier, liquéfier, stupéfier), while -ifier spread because French was used to the -i- of Latin compounds (-ificare). Today -ifier is much more common; -fier is used for a few later coinages (nazifier, zombifier, wikifier). The stem often changes: a noun or adjective loses its final vowel or letters (complexe + -ifier, intense + -ifier, authentique -> authentifier, personne -> personnifier).",
+    "origin_en": "From Latin ~-(i)ficāre~, which goes back to ~facere~ (“to make”).",
+    "origin_fr": "Du latin ~-(i)ficāre~, qui remonte à ~facere~ (« faire »).",
+    "senses": [
+      "to make A, to render adjective-like (complexifier 'make complex', intensifier, densifier, fluidifier, humidifier)",
+      "to turn into or put in the form of N (plastifier, codifier 'put into a code', stratifier, personnifier)",
+      "to organize or treat according to N (planifier 'organize by a plan', classifier)"
+    ],
+    "productive": "Productive: new verbs are still coined in learned, technical and journalistic registers (complexifier, planifier, authentifier). Some are also calques of English -ify (codifier, per fr.Wiktionary, may also come from English codify, attested 1800).",
+    "examples": [
+      "planifier",
+      "intensifier",
+      "codifier",
+      "authentifier",
+      "complexifier",
+      "personnifier"
+    ],
+    "cognates": [
+      "English -ify (from Old French -ifier, from Latin -ificare)",
+      "Italian -ificare and Spanish -ificar (same Latin source)"
+    ],
+    "pitfalls": "Many app verbs ending in -ifier are inherited from Latin -ificare or borrowed from Latin already formed, with no French base: modifier, justifier, vérifier, signifier, sacrifier, qualifier, spécifier, certifier, notifier, amplifier, ratifier, édifier, rectifier, fortifier, purifier, glorifier, gratifier, fructifier, magnifier, sanctifier, crucifier, pacifier, terrifier, horrifier, béatifier, falsifier, identifier, simplifier, diversifier, clarifier, unifier, quantifier, ramifier. Check: if the Latin verb in -ficare exists, call it a Latin borrowing, not a French noun + -ifier. Verbs in -éfier (liquéfier, raréfier, putréfier) come from Latin -facere, via the -fier line, not from an -ifier derivation; the source distinguishes -fier from -ifier. Prefixed forms are prefix + an existing -ifier verb: disqualifier, requalifier, réunifier, démystifier. confier is NOT -ifier: it is con- + fier (Latin confidere), the -fi- is the root. clarifier, simplifier and similar may be Latin or French, so cite the Latin etymon when known.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/-ifier",
+      "https://en.wiktionary.org/wiki/-ifier",
+      "https://fr.wiktionary.org/wiki/-fier"
+    ],
+    "skeptic": "upheld"
+  },
+  "-ier": {
+    "group": [
+      "-ier"
+    ],
+    "allomorphy": "No allomorphy: fr.Wiktionary describes domicilier's ending as the verbal suffix -er, en.Wiktionary writes domicile + -ier. Treat every verb on this card as base + the verb ending of the -er card. Do not trace it to the noun suffix -ier (Latin -ārius), which forms nouns such as argentier and does not form verbs.",
+    "origin_en": "Not a verb suffix with a history of its own. In verbs such as ~domicilier~ (from ~domicile~) and ~pontifier~ (from ~pontife~), the ending is the ordinary verb ending ~-er~ after the base; the sources disagree only on what to call it. The noun suffix ~-ier~, from Latin ~-ārius~, is a different affix.",
+    "origin_fr": "Pas un suffixe verbal doté d'une histoire propre. Dans des verbes comme ~domicilier~ (de ~domicile~) et ~pontifier~ (de ~pontife~), la terminaison est la désinence verbale ordinaire ~-er~ ajoutée à la base ; les sources ne divergent que sur son nom. Le suffixe nominal ~-ier~, du latin ~-ārius~, est un autre affixe.",
+    "senses": [
+      "make or turn into N, act like N (pontifier, quintessencier)",
+      "provide with N, put in N (domicilier)",
+      "treat as or by means of N (holographier)"
+    ],
+    "productive": "Not a productive verb suffix. The handful of verbs the sources analyze this way (domicilier, pontifier, quintessencier, holographier) are isolated formations.",
+    "examples": [
+      "domicilier",
+      "pontifier"
+    ],
+    "cognates": [],
+    "pitfalls": "This card is dangerous to apply by default. The input list shows almost every app verb ending in -ier is not X + -ier. Many are Latin -ificare verbs in -ifier (modifier, identifier, vérifier, justifier, signifier, qualifier, simplifier, diversifier, certifier, spécifier, notifier, sacrifier, amplifier, planifier), where -ifier is the ending, not -ier. Many others are inherited or borrowed from Latin verbs in -iare or -icare: publier, oublier, étudier, associer, varier, apprécier, négocier, initier, envier, dédier, marier. relier and remercier are re- + lier and re- + merci + verb ending, and the -ier is part of the base. copier is from the noun copie. The sources say domicilier is from domicile and pontifier from pontife, and fr and en differ on how to name the suffix (fr calls it the verbal suffix -er, en calls it -ier). Say 'base noun + verb ending -ier' only for verbs whose base noun ends in -e or a consonant and which are not in the Latin lists above. Before writing noun + -ier, check that (a) the base is an existing French noun (domicile, pontife, quintessence), (b) the verb is not marked inherited or borrowed from Latin, (c) the ending is not -ifier.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/-ier",
+      "https://en.wiktionary.org/wiki/-ier#French"
+    ],
+    "skeptic": "refuted; origin rewritten by the orchestrator from the skeptic's finding"
+  },
+  "-oyer": {
+    "group": [
+      "-oyer",
+      "-ayer",
+      "-eyer"
+    ],
+    "allomorphy": "-oyer is the regular form after a stem (côtoyer, tournoyer); -ayer appears in a few verbs (balayer, bégayer) and -eyer is listed in fr.Wiktionary as a variant (the sources give no example here). -oyer is pronounced wa.je; fr.Wiktionary notes Littré recorded an [ɔ.je] pronunciation. In conjugation the -y- becomes -i- before a silent e (côtoie, tournoie); -ayer verbs may keep y or take i (balaie or balaye). tutoyer has an intercalary -t- (tu + -t- + -oyer).",
+    "origin_en": "From Old French ~-oiier~, from Late Latin ~-izāre~ (Vulgar Latin ~-idiare~ in one account); ~-iser~ is the learned doublet.",
+    "origin_fr": "De l'ancien français ~-oiier~, issu du bas latin ~-izāre~ (du latin vulgaire ~-idiare~ dans une autre présentation) ; ~-iser~ en est le doublet savant.",
+    "senses": [
+      "repeated or continuing action (tournoyer 'keep turning', louvoyer, larmoyer)",
+      "to be or behave like N, to emit N (flamboyer 'blaze', verdoyer 'be green', foudroyer, chatoyer, rougeoyer)",
+      "to treat or address with N, to apply N (tutoyer, vouvoyer, côtoyer 'go along the côte', apitoyer 'move to pity')"
+    ],
+    "productive": "Not productive for new verbs today. The ending exists in older verbs; modern coinages use -iser. vouvoyer was made on the pattern of tutoyer (the sources do not give a date).",
+    "examples": [
+      "côtoyer",
+      "tutoyer",
+      "tournoyer",
+      "foudroyer",
+      "flamboyer",
+      "larmoyer"
+    ],
+    "cognates": [
+      "French -iser (doublet from the same Late Latin -izāre)",
+      "English -ize (from Latin -izāre via Greek)"
+    ],
+    "pitfalls": "Do NOT assume every verb in -oyer or -ayer is a suffixed derivation. Many app verbs ending in -oyer, -ayer, -uyer owe the y to the Latin root, not to the suffix: envoyer, renvoyer, fourvoyer, dévoyer, convoyer (from voie via en-/con-), employer, déployer (Latin plicare), payer and its prefixed forms prépayer, repayer, surpayer, sous-payer (Latin pacare), essayer (from the noun essai), effrayer, enrayer, délayer, relayer, déblayer, remblayer, embrayer, débrayer, pagayer, monnayer (monnaie), nettoyer (net + -oyer, a true derivative), octroyer (Old French otroier), corroyer, zézayer. For each, the y-alternation is a conjugation fact, not proof that the suffix was added. Ondoyer (onde) and atermoyer (a- + terme) are real -oyer derivatives, not Latin-root verbs (standard French morphology). Check that the base noun or verb exists (côte, tourner, foudre, tu, flamme) and that the sense is repetition, emission or being like N. The sources disagree on the Latin source (-izāre vs -idiare); both are given. balayer is disputed: fr.Wiktionary gives balai or baler + -ayer, en.Wiktionary gives balai + -er.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/-oyer",
+      "https://en.wiktionary.org/wiki/-oyer"
+    ],
+    "skeptic": "partly"
+  },
+  "-oter": {
+    "group": [
+      "-oter",
+      "-otter",
+      "-ot"
+    ],
+    "allomorphy": "-oter is the usual spelling (clignoter, tapoter, siffloter); -otter is the spelling of a closed set of verbs (baisotter, bouillotter, cachotter, frisotter, and, by their base noun, boulotter, grelotter, culotter, calotter, marcotter), and some verbs hesitate (couchoter or couchotter, dansoter or dansotter, mangeoter or mangeotter). The double t in -otter follows the base noun: nouns in -otte or some in -ot give -otter, nouns in -ote or -o give -oter (pelote/peloter, numéro/numéroter). The 1960s spelling-reform proposals would drop the double letter in the exceptions (TLFi). -ot is not a verb suffix; it is the diminutive suffix from which -oter was built (-ot + -er). The form -ot is listed only so that evidence naming the diminutive -ot (siffloter: « avec le suffixe diminutif -ot ») finds this card. It is not a verb suffix itself: it is the noun and adjective diminutive from which -oter was built with the verb ending -er.",
+    "origin_en": "Inherited from Middle French ~-oter~, from Old French ~-oter~, itself built from ~-ot~ + ~-er~.",
+    "origin_fr": "Hérité du moyen français ~-oter~, issu de l'ancien français ~-oter~, lui-même formé de ~-ot~ + ~-er~.",
+    "senses": [
+      "diminutive: a small, light action (tapoter 'tap lightly', picoter 'prick repeatedly', chipoter)",
+      "frequentative: an action repeated in small bursts (clignoter, siffloter, toussoter, grignoter)",
+      "attenuative or pejorative, colloquial (vivoter 'live meagerly', traficoter)",
+      "denominal, on a noun (chevroter 'to quaver, to bleat', papilloter)"
+    ],
+    "productive": "Yes, in familiar register. The TLFi says -ot(t)er is 'vivant tout au long de l'histoire de la langue', especially in the 15th and 16th centuries, and cites traficoter (mid-20th century) as a recent creation; fr.Wiktionary flags the suffix as familiar.",
+    "examples": [
+      "tapoter",
+      "siffloter",
+      "clignoter",
+      "toussoter",
+      "vivoter",
+      "picoter",
+      "grignoter"
+    ],
+    "cognates": [
+      "No cognate affix is established by the sources consulted. French Wiktionary lists competing suffixes -ailler, -ocher and -eter in French."
+    ],
+    "pitfalls": "The final letters -oter or -otter are NOT proof of this suffix. The TLFi (remark 1) names the false positives: verbs formed on a noun in -ot, -ote, -otte or -o with plain -er. (1) Noun in -ot + -er: pivoter (pivot), comploter (complot), raboter (rabot), saboter (sabot), ligoter (ligot), ergoter (ergot), grelotter (grelot), boulotter, boycotter (boycott). (2) Noun in -ote/-otte + -er: piloter (pilote), menotter (menotte), marcotter (marcotte), culotter, capoter (capote). (3) Noun in -o + -er: numéroter (numéro; English Wiktionary writes numéro + -oter, the TLFi counts it with the false positives), siroter (sirop). (4) Latin loans: annoter (adnotare), connoter (Medieval Latin connotare), sangloter (singultare). (5) Other origins: dénoter (dé- + noter), revoter (re- + voter), tricoter (Frankish), chuchoter (imitative), mijoter (dialectal), radoter (Old French), escamoter (Occitan), shooter (English), papoter (an onomatopoeic base + -oter, a true suffix case), barboter and caboter (uncertain). The true -oter verbs have a base verb and a diminutive or frequentative sense: clignoter (cligner), tapoter (taper), siffloter (siffler), toussoter (tousser), vivoter (vivre), picoter (piquer), grignoter (grigner), gigoter (giguer), clapoter (claper). Before writing 'X + -oter', check that X is a French verb (or an onomatopoeic base) and that the sense is 'a little, repeatedly'. If the base is a noun ending in -ot, -ote, -otte or -o, write 'noun + -er'.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/-oter",
+      "https://en.wiktionary.org/wiki/-oter",
+      "https://www.cnrtl.fr/definition/-oter",
+      "https://en.wiktionary.org/wiki/numéroter",
+      "https://en.wiktionary.org/wiki/piloter",
+      "https://en.wiktionary.org/wiki/grignoter",
+      "https://en.wiktionary.org/wiki/annoter",
+      "https://en.wiktionary.org/wiki/connoter",
+      "https://en.wiktionary.org/wiki/dénoter",
+      "https://en.wiktionary.org/wiki/revoter",
+      "https://en.wiktionary.org/wiki/boycotter",
+      "https://en.wiktionary.org/wiki/shooter",
+      "https://en.wiktionary.org/wiki/saboter",
+      "https://en.wiktionary.org/wiki/pivoter",
+      "https://en.wiktionary.org/wiki/comploter",
+      "https://en.wiktionary.org/wiki/raboter",
+      "https://en.wiktionary.org/wiki/menotter",
+      "https://en.wiktionary.org/wiki/ligoter",
+      "https://en.wiktionary.org/wiki/ergoter",
+      "https://en.wiktionary.org/wiki/grelotter",
+      "https://en.wiktionary.org/wiki/marcotter",
+      "https://en.wiktionary.org/wiki/dorloter",
+      "https://en.wiktionary.org/wiki/mijoter",
+      "https://en.wiktionary.org/wiki/tricoter",
+      "https://en.wiktionary.org/wiki/chuchoter",
+      "https://en.wiktionary.org/wiki/sangloter",
+      "https://en.wiktionary.org/wiki/radoter",
+      "https://en.wiktionary.org/wiki/escamoter",
+      "https://en.wiktionary.org/wiki/capoter",
+      "https://en.wiktionary.org/wiki/papoter",
+      "https://en.wiktionary.org/wiki/chipoter",
+      "https://en.wiktionary.org/wiki/siroter",
+      "https://en.wiktionary.org/wiki/gigoter",
+      "https://en.wiktionary.org/wiki/clapoter",
+      "https://en.wiktionary.org/wiki/clignoter",
+      "https://en.wiktionary.org/wiki/siffloter",
+      "https://en.wiktionary.org/wiki/picoter",
+      "https://en.wiktionary.org/wiki/toussoter",
+      "https://en.wiktionary.org/wiki/vivoter",
+      "https://en.wiktionary.org/wiki/barboter",
+      "https://en.wiktionary.org/wiki/caboter"
+    ],
+    "skeptic": "partly"
+  },
+  "-ailler": {
+    "group": [
+      "-ailler"
+    ],
+    "allomorphy": "One form, -ailler [a.je], attached to a verb stem (crier → criailler) or, less often, a noun (mouche → mouchailler). The stem's ending is dropped: crier → cri-, discuter → discut-.",
+    "origin_en": "Either inherited from Latin ~-āculāre~ or built in French from the noun suffix ~-aille~ and the verbal ending ~-er~; the sources differ.",
+    "origin_fr": "Soit hérité du latin ~-āculāre~, soit formé en français à partir du suffixe nominal ~-aille~ et de la terminaison verbale ~-er~ ; les sources divergent.",
+    "senses": [
+      "frequentative: repeated, petty action (tirailler, tournailler, traînailler)",
+      "pejorative: do badly or without conviction (discutailler, criticailler, couchailler, rimailler, criailler)"
+    ],
+    "productive": "Productive for informal, often humorous or contemptuous coinages (disputailler, discutailler, criticailler).",
+    "examples": [
+      "tirailler",
+      "discutailler",
+      "criailler",
+      "traînailler",
+      "tournailler"
+    ],
+    "cognates": [
+      "No cognate in other languages is stated in the sources; none is claimed"
+    ],
+    "pitfalls": "Many verbs ending in -ailler in the app are not 'verb + -ailler'. (1) Noun in -aille + -er: batailler (bataille), mitrailler (mitraille), ferrailler (ferraille), rempailler/empailler (paille), entailler (taille), détailler (taille), ravitailler/avitailler (vitaille). The -ailler here is -aille + -er, an accidental match. (2) Other nouns: dérailler (rail), médailler (médaille), cisailler (cisaille), tenailler (tenaille), gouailler, chamailler, pinailler. (3) travailler comes from Vulgar Latin *tripaliare, not -ailler. Derived forms with re- or dé- (retravailler, débroussailler, retailler, remailler) follow their base. Real -ailler verbs are ones whose base is a verb and whose sense is a pejorative frequentative: tirailler (tirer), criailler (crier), traînailler (traîner), discutailler, disputailler, écrivailler, sonnailler, tournailler. Check before writing: the base verb exists and the sense is 'do repeatedly or badly'. rimailler: fr.Wiktionary says 'de rimer avec le suffixe péjoratif -ailler' but en.Wiktionary says 'from rimaille + -er'; the sources differ. fr.Wiktionary treats the suffix as possibly inherited from Latin -aculare.",
+    "sources": [
+      "https://en.wiktionary.org/wiki/-ailler",
+      "https://fr.wiktionary.org/wiki/-ailler",
+      "input_2.json evidence_samples"
+    ],
+    "skeptic": "upheld"
+  },
+  "-asser": {
+    "group": [
+      "-asser",
+      "-asse"
+    ],
+    "allomorphy": "-asser is the verbal form. -asse is the stem of the same suffix before the infinitive ending: fr.Wiktionary gives -asse alongside -asser, and the evidence sample écrivasser says 'suffixe -asse'. The sample coupasser has -asser. Before the suffix the base loses its final vowel or ending (rêver to rêv-asser, écrire to écriv-asser, grogner to grogn-asser).",
+    "origin_en": "A French suffix of the fifteenth century, formed from ~-ace~ and ~-asse~ with the verb ending ~-er~.",
+    "origin_fr": "Suffixe français du XVᵉ siècle, formé à partir de ~-ace~ et de ~-asse~ avec la terminaison verbale ~-er~.",
+    "senses": [
+      "pejorative or depreciative: do X badly or without result (rêvasser, écrivasser)",
+      "frequentative: repeat X (traînasser, grognasser)",
+      "diminutive: do X weakly or lightly (pleuvasser, brouillasser)"
+    ],
+    "productive": "Still productive in familiar speech, notably for weather verbs (pleuvasser, brouillasser) per fr.Wiktionary; fr.Wiktionary notes it is used especially in western France and Canada.",
+    "examples": [
+      "rêvasser",
+      "grognasser",
+      "écrivasser",
+      "traînasser",
+      "bavasser"
+    ],
+    "cognates": [
+      "none given in the sources"
+    ],
+    "pitfalls": "Most app verbs that end in -asser are not base + -asser. fr.Wiktionary says outright that amasser, fracasser and ressasser have different etymologies. Many contain the base passer (dépasser, repasser, surpasser, outrepasser, trépasser, contre-passer: all prefix + passer, where the -asser is just the end of passer), classer (reclasser, déclasser, surclasser, interclasser) or chasser (pourchasser). Others are built on a noun ending in -ace/-asse: cuirasser (cuirasse), matelasser (matelas), cadenasser (cadenas), crevasser (crevasse), encrasser and décrasser (crasse), compasser (compas), terrasser (terrasse or terre; check), dégueulasser (dégueulasse). embrasser is en- + bras + -er; entasser is en- + tas + -er; ramasser is from amasser; délasser is dé- + las; prélasser comes from prélat. concasser is from Latin conquassare. harasser, tabasser, jacasser, croasser, fricasser: check. The genuine verbal ones, per fr.Wiktionary, are rêvasser, traînasser, tracasser, bavasser, paperasser, potasser, pleuvasser, brouillasser. fr.Wiktionary derives tracasser from traquer and potasser from potache, so the base is not always the obvious verb. Before writing verb + -asser, check that (a) the base is a French verb or noun that remains clearly present in the meaning, (b) the sense is pejorative, frequentative or diminutive, (c) the verb is not a prefix + passer, classer or chasser.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/-asser"
+    ],
+    "skeptic": "partly"
+  },
+  "-eter": {
+    "group": [
+      "-eter",
+      "-et-"
+    ],
+    "allomorphy": "-eter is -et + -er (fr.Wiktionary). The -et- can also be read as a form inside the verb (haleter, from haler + -et-). Before a silent e the t is either doubled (jette-type: il cliquette, tachette) or the e opens to è (il halète, corsète); the 1990 reform extended the è type. Both patterns belong to the same suffix and do not change the sense.",
+    "origin_en": "Formed in French from the suffixes ~-et~ and ~-er~.",
+    "origin_fr": "Formé en français des suffixes ~-et~ et ~-er~.",
+    "senses": [
+      "diminutive: do a little or on a small scale (tacheter 'mark with small spots', moucheter, pelleter)",
+      "frequentative: do repeatedly or in short bursts (cliqueter, haleter, becqueter)",
+      "no clear sense: a verb made from a noun (pailleter)"
+    ],
+    "productive": "Not productive today. Verbs in -eter are old; modern coinages use other patterns.",
+    "examples": [
+      "tacheter",
+      "moucheter",
+      "haleter",
+      "cliqueter",
+      "pelleter",
+      "becqueter"
+    ],
+    "cognates": [
+      "None firmly established in the sources used"
+    ],
+    "pitfalls": "Most -eter verbs are NOT 'base + -eter'. Three groups: (1) the stem is already a noun in -et and -er is simply added: feuilleter (feuillet), fureter (furet), fileter (filet), crocheter (crochet), colleter (collet), décolleter (dé- + collet + -er), cacheter (cachet), breveter (brevet), riveter (rivet), souffleter (soufflet), caqueter and hoqueter (onomatopoeia), étiqueter (étiquette), trompeter (trompette). (2) Inherited Latin: acheter (Vulgar Latin accaptare), and its prefixed forms racheter. (3) jeter-based: rejeter, projeter, interjeter, déjeter (jeter is from Latin iactare, not -eter). Conjugation (jette/achète) is a separate fact. A writer must check whether -et belongs to a noun (use 'noun in -et + -er') or is the suffix (tacheter, moucheter). The sources themselves disagree: haleter is haler + -et-; pelleter is pelle + -et + -er; becqueter is bec + -eter or becquer + -eter.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/-eter"
+    ],
+    "skeptic": "partly"
+  },
+  "-eler": {
+    "group": [
+      "-eler"
+    ],
+    "allomorphy": "One suffix form, but the spelling of the stem is not uniform: some -eler verbs double the l before a mute e (il appelle, il bosselle, il ficelle) and others take è (il gèle, il cisèle, il modèle). The TLFi lists each verb as elle or èle (for instance èle in celer, congeler, déceler, dégeler, démanteler, écarteler, geler, marteler, modeler, peler, receler; elle in appeler, atteler, bosseler, chanceler, ensorceler, ficeler, jumeler, museler, niveler, renouveler, ruisseler). The spelling is a property of the verb and does not show whether the suffix is present.",
+    "origin_en": "According to the TLFi, ~-eler~ either descends from the Latin suffix ~-illare~, which already had a diminutive sense (~titillare~, ~vacillare~), or was built secondarily in French on the noun suffixes ~-el~, ~-eau~ and ~-elle~.",
+    "origin_fr": "Selon le TLFi, ~-eler~ est soit issu du suffixe latin ~-illare~, qui avait déjà une valeur diminutive (~titillare~, ~vacillare~), soit créé secondairement en français sur les suffixes nominaux ~-el~, ~-eau~ et ~-elle~.",
+    "senses": [
+      "diminutive or frequentative on a verb: a small repeated action (craqueler 'crack finely')",
+      "on a noun in -eau, -el, -elle: 'form or provide with N' (bosseler 'former des bosses', denteler 'to indent, to notch'; the TLFi also lists agneler, botteler, cordeler, cuveler, amonceler)"
+    ],
+    "productive": "Very little. The TLFi says -eler is 'fort peu productif' and has been supplanted by other diminutive suffixes (-iller): sautiller replaced sauteler, ventiler replaced venteler.",
+    "examples": [
+      "craqueler",
+      "bosseler"
+    ],
+    "cognates": [
+      "Latin -illare (the likely source; TLFi), as in titillare and vacillare",
+      "Related French suffixes -iller, -ouiller, -ailler (fr.Wiktionary)",
+      "English -le in crackle (English Wiktionary compares craqueler)"
+    ],
+    "pitfalls": "Most verbs ending in -eler are NOT formed with this suffix. The TLFi lists homophonous endings: appeler (Latin appellare, learned), atteler (Latin *attelare), celer, chanceler (Latin cancellare), ensorceler, épeler, étinceler, geler. (1) Latin loans or inherited Latin verbs: appeler and rappeler, congeler, chanceler, atteler. (2) Verbs on a French verb celer or geler: déceler and receler (dé-/re- + celer), dégeler, surgeler (prefix + geler), dételer (dé- + atteler). Write 'prefix + verb', not '-eler'. (3) Verbs from another language: grommeler (Old French grumeler, from Middle Dutch grommelen, itself a frequentative), épeler (Frankish). (4) Verbs that are a noun in -eau, -el or -elle + plain -er, which the TLFi lists as type B of -eler but which English Wiktionary treats as noun + -er: niveler (niveau), jumeler (jumeau), morceler (morceau), museler (musel), ficeler (ficelle), marteler (martel), étinceler (étincelle), carreler (carrel), pommeler (pommel), amonceler (a- + moncel + -er), ciseler (Old French cisel), ensorceler (sorcier + -er, with dissimilation). Prefer 'noun + -er' here and mention the -eler family only as background. (5) Disputed or opaque: harceler (from herser, 'to harrow'), écarteler, démanteler (no etymology given). The cleanest -eler cases are the ones with a verb base and a frequentative sense: craqueler (craquer) and the old cases in the TLFi (gratteler, panteler). Before writing 'verb + -eler', check that the base is a French verb or noun, that the sense is diminutive or frequentative, and that Wiktionary does not give a Latin etymon.",
+    "sources": [
+      "https://www.cnrtl.fr/definition/-eler",
+      "https://fr.wiktionary.org/wiki/-eler",
+      "https://en.wiktionary.org/wiki/craqueler",
+      "https://en.wiktionary.org/wiki/denteler",
+      "https://en.wiktionary.org/wiki/bosseler",
+      "https://en.wiktionary.org/wiki/pommeler",
+      "https://en.wiktionary.org/wiki/appeler",
+      "https://en.wiktionary.org/wiki/renouveler",
+      "https://en.wiktionary.org/wiki/déceler",
+      "https://en.wiktionary.org/wiki/receler",
+      "https://en.wiktionary.org/wiki/atteler",
+      "https://en.wiktionary.org/wiki/congeler",
+      "https://en.wiktionary.org/wiki/chanceler",
+      "https://en.wiktionary.org/wiki/grommeler",
+      "https://en.wiktionary.org/wiki/harceler",
+      "https://en.wiktionary.org/wiki/écarteler",
+      "https://en.wiktionary.org/wiki/ensorceler",
+      "https://en.wiktionary.org/wiki/étinceler",
+      "https://en.wiktionary.org/wiki/niveler",
+      "https://en.wiktionary.org/wiki/jumeler",
+      "https://en.wiktionary.org/wiki/morceler",
+      "https://en.wiktionary.org/wiki/museler",
+      "https://en.wiktionary.org/wiki/ficeler",
+      "https://en.wiktionary.org/wiki/marteler",
+      "https://en.wiktionary.org/wiki/ciseler",
+      "https://en.wiktionary.org/wiki/carreler",
+      "https://en.wiktionary.org/wiki/amonceler",
+      "https://en.wiktionary.org/wiki/dégeler",
+      "https://en.wiktionary.org/wiki/surgeler",
+      "https://en.wiktionary.org/wiki/dételer"
+    ],
+    "skeptic": "partly"
+  },
+  "-iller": {
+    "group": [
+      "-iller"
+    ],
+    "allomorphy": "One form, -iller [i.je], added to a verb stem or noun stem (sauter → sautiller, mordre → mordiller, gosier → égosiller). The base's last letters change: sauter → saut-, mordre → mord-, fendre → fend-. fr.Wiktionary gives the learned equivalent -iculer (immatriculer, gesticuler).",
+    "origin_en": "From Old French ~-ille~ or from Latin ~-iculare~; fr.Wiktionary offers both. en.Wiktionary had no French page for it.",
+    "origin_fr": "De l'ancien français ~-ille~ ou du latin ~-iculare~ ; le wiktionnaire français propose les deux. Le wiktionnaire anglais n'a pas de page française.",
+    "senses": [
+      "frequentative or diminutive: repeated small action (sautiller, mordiller, fendiller, pendiller)",
+      "pejorative or imprecise (bousiller, nasiller)"
+    ],
+    "productive": "The sources give no productivity rating, and the verbs cited are old; no recent coinage is attested in them.",
+    "examples": [
+      "sautiller",
+      "mordiller",
+      "fendiller",
+      "pendiller"
+    ],
+    "cognates": [
+      "Old Occitan -ilhar and Breton -ilhañ (fr.Wiktionary lists the Breton forms; en.Wiktionary compares Old Occitan fendilhar)"
+    ],
+    "pitfalls": "Most -iller verbs in the app are not 'base + -iller'. (1) Inherited from Latin: conseiller (Latin consiliare), mouiller (Vulgar Latin molliare), osciller (oscillare), distiller (distillare), vaciller (vacillare), titiller (titillare), surveiller and réveiller (from veiller, Latin vigilare). (2) Noun in -il, -ille or -eil + -er, so the -ill- belongs to the noun: fusiller (fusil), sommeiller (sommeil), ensoleiller (soleil), rouiller (rouille), fourmiller (fourmi). (3) Other bases: habiller, maquiller, gaspiller, brouiller, embrouiller, débrouiller, tortiller, éparpiller. Here -iller is not a clearly separate suffix and their origins vary or are uncertain, so check each. (4) Prefixed: déconseiller, déshabiller, agenouiller follow their base. Real derivations: sautiller (sauter), mordiller (mordre), fendiller (fendre; en.Wiktionary says possibly from Vulgar Latin *findiclāre instead), pendiller (pendre), égosiller (é- + gosier + -iller, from Old French esgosiller 'cut the throat'). bousiller: fr.Wiktionary says it comes from Occitan bosilhar; en.Wiktionary says bouse + -iller; the sources differ. nasiller is 'de nez' (fr), with a form that is not simple nez + -iller. Check: the base word is attested and the sense is a repeated or small action; otherwise it is an inherited word.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/-iller",
+      "input_2.json evidence_samples"
+    ],
+    "skeptic": "partly"
+  },
+  "-ouiller": {
+    "group": [
+      "-ouiller"
+    ],
+    "allomorphy": "A single form. It is added to a verb or noun base after the base loses its ending (glander to glandouiller, pendre to pendouiller, vase to vasouiller). fr.Wiktionary says the suffix is -ouille plus the infinitive ending -er.",
+    "origin_en": "Formed in French from ~-ouille~ and the verb ending ~-er~; fr.Wiktionary leaves the date unconfirmed.",
+    "origin_fr": "Formé en français à partir de ~-ouille~ et de la terminaison verbale ~-er~ ; le Wiktionnaire ne confirme pas la date.",
+    "senses": [
+      "diminutive or familiar: do X in a small, weak way (mâchouiller, crachouiller, pendouiller)",
+      "pejorative or idle action (glandouiller)",
+      "from a noun base (vasouiller, bafouiller, vadrouiller)"
+    ],
+    "productive": "A familiar, colloquial suffix. fr.Wiktionary lists many formations; the sources give no verdict beyond that.",
+    "examples": [
+      "glandouiller",
+      "pendouiller",
+      "vasouiller",
+      "mâchouiller"
+    ],
+    "cognates": [
+      "none given in the sources; fr.Wiktionary lists Breton -ouilhañ as an equivalent"
+    ],
+    "pitfalls": "Most app verbs that end in -ouiller are not base + -ouiller. Many are formed on a root that already ends in -ouiller or -ouille: brouiller (débrouiller, embrouiller), rouiller (dérouiller), mouiller (remouiller), fouiller (refouiller, farfouiller, trifouiller), souiller, houille (déhouiller), grenouille (grenouiller), gargouille (gargouiller), verrou (verrouiller, déverrouiller), genou (agenouiller). dépouiller is inherited from Latin despoliare. fr.Wiktionary itself lists bafouiller, vadrouiller, bredouiller as suffix examples on nominal bases, but their bases are unclear to a learner; do not guess a base. gazouiller, chatouiller, gribouiller, patrouiller, barbouiller, bidouiller, magouiller, zigouiller, cafouiller: check; the sources do not settle them. Genuine verbal-base formations with the familiar nuance: glandouiller, pendouiller, mâchouiller, crachouiller, gratouiller, grattouiller (check). Before writing base + -ouiller, check that (a) a base verb or noun is present in the meaning (glander, pendre, vase), (b) the sense is diminutive or pejorative, (c) the verb is not on an -ouille noun or on mouiller/fouiller/brouiller/rouiller.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/-ouiller"
+    ],
+    "skeptic": "upheld"
+  },
+  "-iner": {
+    "group": [
+      "-iner"
+    ],
+    "allomorphy": "Single form -iner. The sources analyze it as a suffix on verbs (piéter + -iner) or as -in + -er; no allomorphs.",
+    "origin_en": "The sources give no etymology for ~-iner~ itself. The evidence samples analyze it as a verb suffix (~piétiner~ from ~piéter~); it may be ~-in~ plus ~-er~, but this is unconfirmed.",
+    "origin_fr": "Les sources ne donnent pas d'étymologie pour ~-iner~ lui-même. Les exemples l'analysent comme un suffixe verbal (~piétiner~ de ~piéter~) ; ce pourrait être ~-in~ plus ~-er~, mais rien ne le confirme.",
+    "senses": [
+      "expressive or frequentative, repeated small action (piétiner 'stamp, keep stepping')",
+      "colloquial or slang flavor (enquiquiner, jaspiner)"
+    ],
+    "productive": "Not productive. Only a few colloquial, expressive verbs show it; piétiner is dated 1866 for the sense 'not advance'.",
+    "examples": [
+      "piétiner",
+      "jaspiner",
+      "enquiquiner"
+    ],
+    "cognates": [
+      "None established in the sources used"
+    ],
+    "pitfalls": "The great majority of app verbs ending in -iner are NOT formed with a suffix -iner. Groups: (1) Latin -inare verbs, borrowed or inherited: destiner, déterminer, terminer, imaginer, examiner, dominer, éliminer, décliner, combiner, deviner (divinare), contaminer, incliner, fasciner, illuminer, culminer, exterminer, disséminer, obstiner, prédominer, incriminer, confiner, entériner, dessiner (Latin designare via Italian). (2) Denominals from a noun already ending in -in(e): cuisiner (cuisine), assassiner (assassin), vacciner (vaccin), enraciner (racine), acheminer (chemin), cheminer, parrainer (parrain), avoisiner (voisin), mariner (marin, marine), peaufiner (peau + fin), affiner and raffiner (fin). (3) Other: freiner (frein), drainer (English drain). enquiquiner and jaspiner are in the input as -iner but their analyses are uncertain (kiki, japper). A writer must check whether the -in belongs to a noun or Latin root before using this card.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/-in"
+    ],
+    "skeptic": "upheld"
+  },
+  "-onner": {
+    "group": [
+      "-onner"
+    ],
+    "allomorphy": "One form. The spelling is -onner with a double n; the older spelling -oner (téléphoner, and many verbs until the 18th century) has a single n and is a different ending (TLFi). Verbs from a noun in -on take a plain -er, which produces the same letters -onner (fonction + -er) without involving this suffix. The suffix itself is -on + -er, so it may appear as -on-er in analyses (chanter + -on + -er).",
+    "origin_en": "According to the TLFi, ~-onner~ perhaps comes from the Latin frequentative suffixes ~-inare~ or ~-inire~; French Wiktionary analyses it as ~-on~ + ~-er~.",
+    "origin_fr": "Selon le TLFi, ~-onner~ vient peut-être des suffixes fréquentatifs latins ~-inare~ ou ~-inire~ ; le Wiktionnaire français l'analyse comme ~-on~ + ~-er~.",
+    "senses": [
+      "frequentative or diminutive on a verb: an action repeated or attenuated, often familiar (chantonner 'sing softly', mâchonner 'chew away', tâtonner)",
+      "dull continuous noise, on an onomatopoeic base (bougonner, ronchonner, marmonner, fredonner)",
+      "disorderly or pejorative action (fouillonner, brouillonner)",
+      "rarely on a noun (griffonner)"
+    ],
+    "productive": "Weak, in familiar register. The TLFi says -onner was rare until the 19th century and mainly formed verbs of a dull continuous noise, with some neologisms (grinçonner, goûtonner, fouillonner). Most new verbs in -onner today are not formed with this suffix.",
+    "examples": [
+      "chantonner",
+      "mâchonner",
+      "tâtonner",
+      "griffonner"
+    ],
+    "cognates": [
+      "No cognate affix is established by the sources consulted. The TLFi suggests the Latin frequentative suffixes -inare or -inire as a possible source."
+    ],
+    "pitfalls": "This is the card with the largest false-positive set. Nearly every verb in the app that ends in -onner (and especially -ionner) is a noun in -on, -ion, -onne or -ond + the plain verb ending -er, and the TLFi names this as the homograph case (frissonner, couronner, plafonner). Examples: fonctionner (fonction), sélectionner, mentionner, passionner, positionner, sanctionner, raisonner, conditionner, soupçonner, fusionner, impressionner, occasionner, questionner, démissionner, façonner, couronner (couronne), plafonner (plafond), cantonner (canton), additionner, sillonner (sillon), rayonner (rayon), jalonner, actionner, visionner. Write 'noun + -er' for these, naming the noun. Other false positives: Latin descent (ordonner from ordinare, with the spelling of donner; pardonner from perdonare; résonner from resonare), prefix + donner (redonner, abandonner from a ban donner), randonner (Old French randonner, from randon), assaisonner (a- + saison + -er), empoisonner (en- + poison + -er). The true -onner verbs have a base verb or an onomatopoeic base and a frequentative or diminutive sense: chantonner (chanter), mâchonner (mâcher), tâtonner (tâter), griffonner (griffer), plus fredonner, bougonner, marmonner. Before writing 'verb + -onner', check that a French verb (or an imitative base) precedes -onner and that the sense is 'softly, repeatedly, aimlessly'. If a noun in -on or -ion precedes -ner, say 'noun + -er'.",
+    "sources": [
+      "https://www.cnrtl.fr/definition/-onner",
+      "https://fr.wiktionary.org/wiki/-onner",
+      "https://en.wiktionary.org/wiki/chantonner",
+      "https://en.wiktionary.org/wiki/mâchonner",
+      "https://en.wiktionary.org/wiki/tâtonner",
+      "https://en.wiktionary.org/wiki/griffonner",
+      "https://en.wiktionary.org/wiki/fonctionner",
+      "https://en.wiktionary.org/wiki/sélectionner",
+      "https://en.wiktionary.org/wiki/mentionner",
+      "https://en.wiktionary.org/wiki/passionner",
+      "https://en.wiktionary.org/wiki/positionner",
+      "https://en.wiktionary.org/wiki/sanctionner",
+      "https://en.wiktionary.org/wiki/raisonner",
+      "https://en.wiktionary.org/wiki/conditionner",
+      "https://en.wiktionary.org/wiki/soupçonner",
+      "https://en.wiktionary.org/wiki/fusionner",
+      "https://en.wiktionary.org/wiki/impressionner",
+      "https://en.wiktionary.org/wiki/occasionner",
+      "https://en.wiktionary.org/wiki/questionner",
+      "https://en.wiktionary.org/wiki/démissionner",
+      "https://en.wiktionary.org/wiki/façonner",
+      "https://en.wiktionary.org/wiki/couronner",
+      "https://en.wiktionary.org/wiki/plafonner",
+      "https://en.wiktionary.org/wiki/cantonner",
+      "https://en.wiktionary.org/wiki/assaisonner",
+      "https://en.wiktionary.org/wiki/additionner",
+      "https://en.wiktionary.org/wiki/sillonner",
+      "https://en.wiktionary.org/wiki/rayonner",
+      "https://en.wiktionary.org/wiki/empoisonner",
+      "https://en.wiktionary.org/wiki/jalonner",
+      "https://en.wiktionary.org/wiki/visionner",
+      "https://en.wiktionary.org/wiki/actionner",
+      "https://en.wiktionary.org/wiki/ordonner",
+      "https://en.wiktionary.org/wiki/pardonner",
+      "https://en.wiktionary.org/wiki/résonner",
+      "https://en.wiktionary.org/wiki/abandonner",
+      "https://en.wiktionary.org/wiki/redonner",
+      "https://en.wiktionary.org/wiki/randonner"
+    ],
+    "skeptic": "upheld"
+  },
+  "-ocher": {
+    "group": [
+      "-ocher"
+    ],
+    "allomorphy": "One form, -ocher, added to a noun or verb stem (boule → boulocher, flâner → flânocher). It is described as 'from -oche + -er'.",
+    "origin_en": "Formed in French from the suffix ~-oche~ and the verbal ending ~-er~.",
+    "origin_fr": "Formé en français à partir du suffixe ~-oche~ et de la terminaison verbale ~-er~.",
+    "senses": [
+      "pejorative or familiar: do poorly or in a petty way (flânocher, boulocher 'form small balls, pill')",
+      "popular register with deprecatory value (balocher, pétocher)"
+    ],
+    "productive": "Only a few verbs, informal in register; fr.Wiktionary calls it a 'popular suffix with deprecatory value'. It is not used to coin new verbs in general.",
+    "examples": [
+      "boulocher",
+      "flânocher"
+    ],
+    "cognates": [
+      "No cognate in other languages was found beyond Breton -ochañ (fr.Wiktionary); no cognate is claimed"
+    ],
+    "pitfalls": "Almost all the app verbs ending in -ocher are not derived with this suffix. In accrocher, décrocher, raccrocher (croc), empocher, rempocher (poche), embrocher, débrocher (broche), décocher, encocher (coche), enrocher, dérocher (roc), talocher (taloche), the -och- is part of the base noun and the ending is just -er. approcher, rapprocher and reprocher come from Latin-derived bases, not from -ocher. ricocher is from ricochet. guillocher is from guilloche. Treat any verb as -ocher only when the sources say so and the base noun or verb (without -och-) exists: boulocher (boule + -oche + -er per en.Wiktionary; fr.Wiktionary has it as 'dérivé de boule, avec le suffixe -ocher', the two differ on whether -oche is a separate step). rabibocher is listed by fr.Wiktionary as an -ocher word, but its base is unclear, so avoid analysing it. The others listed (balocher, flânocher, garrocher, mignocher, pétocher) are from fr.Wiktionary's examples.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/-ocher",
+      "input_2.json evidence_samples"
+    ],
+    "skeptic": "upheld"
+  },
+  "-âcher": {
+    "group": [
+      "-âcher"
+    ],
+    "allomorphy": "A single form; the circumflex marks an old lost s (rabascher became rabâcher, per fr.Wiktionary).",
+    "origin_en": "Of unclear origin. fr.Wiktionary analyses ~rabâcher~ as the radical ~rab-~ plus ~-âcher~, from Old French ~rabascher~; en.Wiktionary derives it from a root *~rabb-~, possibly from a substrate.",
+    "origin_fr": "D'origine incertaine. Le Wiktionnaire français analyse ~rabâcher~ comme le radical ~rab-~ plus ~-âcher~, issu de l'ancien français ~rabascher~ ; le Wiktionnaire anglais le dérive d'une racine *~rabb-~, peut-être d'un substrat.",
+    "senses": [
+      "frequentative or noisy repeated action (rabâcher: 'say the same things again and again')"
+    ],
+    "productive": "Not productive. Only rabâcher is in the data, and it is not a clean 'base + suffix' case.",
+    "examples": [
+      "rabâcher"
+    ],
+    "cognates": [
+      "none given in the sources"
+    ],
+    "pitfalls": "Do not write 'base + -âcher' for any verb. Even for rabâcher the sources disagree: fr.Wiktionary sees a radical rab- (compare rabouin 'devil, goblin') plus the suffix, en.Wiktionary a root *rabb- that may come from a substrate, and Old French had rabaster 'make noise'. relâcher is inherited from Latin relaxare, so it contains no suffix; remâcher is re- + mâcher (see the re- card), and the -âcher is part of mâcher. Other verbs in -âcher (lâcher, tâcher, fâcher) are not formed with this suffix. A writer who has only the verb rabâcher should say 'of uncertain origin' and give both proposals.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/rabâcher"
+    ],
+    "skeptic": "partly"
+  },
+  "-in": {
+    "group": [
+      "-in"
+    ],
+    "allomorphy": "Single form -in, feminine -ine. It is a noun and adjective suffix, not a verb-forming suffix. A verb in -iner can contain it plus the verbal -er.",
+    "origin_en": "From Latin ~-īnus~.",
+    "origin_fr": "Du latin ~-īnus~.",
+    "senses": [
+      "diminutive or pejorative (oursin, plaisantin)",
+      "belonging or relation (marin, périgordin)",
+      "for ratatiner: -in as a diminutive on tatin 'small amount', per fr.Wiktionary"
+    ],
+    "productive": "Productive for demonyms and some nouns; not a verb-forming suffix.",
+    "examples": [
+      "ratatiner"
+    ],
+    "cognates": [
+      "Latin -īnus (source)"
+    ],
+    "pitfalls": "ratatiner has a disputed origin: fr.Wiktionary gives ra- + tatin ('small amount', itself tant + diminutive -in), and en.Wiktionary says onomatopoeic. Say 'uncertain' rather than choosing. The suffix -in is NOT a verb suffix; a verb in -iner is not evidence of -in. For verbs ending in -iner see the -iner card. Do not use this card for destiner, déterminer, etc.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/-in"
+    ],
+    "skeptic": "upheld"
+  },
+  "-type": {
+    "group": [
+      "-type"
+    ],
+    "allomorphy": "One form. It is a noun-forming element, so a verb in -typer is the noun in -type plus the verb ending -er, not a verb suffix. There is no shape change.",
+    "origin_en": "From Ancient Greek ~τύπος~ (~túpos~, “mark, impression”), the source of French ~type~. French Wiktionary treats ~-type~ as forming nouns about imprints (printing, photography, genetics).",
+    "origin_fr": "Du grec ancien ~τύπος~ (~túpos~, « empreinte, marque »), d'où le français ~type~. Le Wiktionnaire français décrit ~-type~ comme formant des substantifs relatifs aux empreintes (imprimerie, photographie, génétique).",
+    "senses": [
+      "forms nouns for an imprint, print or reproduction (ronéotype; photographic and printing terms)",
+      "in the verb ronéotyper, 'to reproduce on a Roneo duplicator' (fr.Wiktionary: composé de ronéo, avec le suffixe -type)"
+    ],
+    "productive": "Productive for scientific and technical nouns; for verbs, hardly at all. The sources give no productivity rating. The only app verb here, ronéotyper, names an obsolete duplicating machine.",
+    "examples": [
+      "ronéotyper"
+    ],
+    "cognates": [
+      "English -type (from Ancient Greek tupos, 'mark, type')",
+      "Greek tupos, the direct source"
+    ],
+    "pitfalls": "Do not call -type a verb-forming suffix. The sources show -type as a noun-forming element (ronéotype, ronéotypie), so ronéotyper is best explained as built on the noun ronéotype (itself from Ronéo, a trademark from English Roneo, 1901, and type) plus the verb ending -er; fr.Wiktionary's wording 'ronéo + suffixe -type' is shorter but loose. State the trademark origin (Roneo, a portmanteau of rotary and neo-). The synonym ronéoter is ronéo + -er. No other verb in the app ends in -type. If a writer meets another verb ending in -typer, check whether the base is a noun in -type; do not assume a prefix-and-suffix pattern.",
+    "sources": [
+      "https://fr.wiktionary.org/wiki/-type",
+      "https://en.wiktionary.org/wiki/-type",
+      "https://fr.wiktionary.org/wiki/ronéotyper",
+      "https://fr.wiktionary.org/wiki/ronéotype",
+      "https://fr.wiktionary.org/wiki/ronéo",
+      "https://fr.wiktionary.org/wiki/ronéoter"
+    ],
+    "skeptic": "upheld"
+  }
+}

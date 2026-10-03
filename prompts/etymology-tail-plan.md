@@ -1,6 +1,7 @@
 # Etymologies for the other 5,325 verbs: working plan (2026-10-03)
 
-**Status:** planned; nothing run yet. Mark each stage ✅ with a dated correction note wherever the plan
+**Status:** stages 0–2 ✅ and the wave 0 pilot run on 2026-10-03 (see the notes under each stage and the
+ledger). Mark each stage ✅ with a dated correction note wherever the plan
 proves wrong, as the Chanson and verb-pass plans did. Do not commit; Josh commits.
 
 `Etymologies.json` covers 1,001 of the 6,326 infinitives: the 981 most used, the select verbs, and a
@@ -71,7 +72,7 @@ wave, and do not commit; Josh commits.
 
 ---
 
-## 0. Evidence file
+## 0. Evidence file ✅
 
 Write `corpus/working/build_etymology_evidence.py` (tracked; whitelist it in `.gitignore` beside the
 other tracked `corpus/working/` scripts). It reads only local files, never the network:
@@ -125,7 +126,32 @@ bases, and record them in this plan as a correction note if they differ much fro
 **Acceptance:** 5,325 records; every verb absent from `Etymologies.json` is present; the counts are
 printed and recorded.
 
-## 1. Affix library
+> **✅ Done 2026-10-03. Correction notes.**
+> - **Counts.** Tier: short 3,485, rich 1,708, none 132. Evidence: both 3,599, fr 1,451, en 143, none
+>   132 (so 5,050 fr and 3,742 en, as measured above). `formation.kind`: suffix 1,774, prefix 1,169,
+>   parasynthetic 201, compound 39, none 2,142. The prefix derivations' bases are covered 461,
+>   missing 510, nonverb 191, unknown 7, against the estimate of 351 / 412 / 271 out of about 1,030:
+>   the parse finds more prefix derivations, and more of their bases are app verbs. 441 distinct
+>   bases are missing verbs. 2,106 records carry `base_word_evidence`. The evidence names 87 distinct
+>   affixes, not about 95, once the parser stopped reading "le suffixe **verbal** -er" as an affix.
+> - **English raw dump.** `base_word_evidence` needs English etymologies for nouns and adjectives,
+>   which `wiktionary_en_verbs.json` lacks. They come from `wiktionary/raw/kaikki-French.jsonl`, the
+>   en.Wiktionary dump the plan did not name. Scanning both dumps takes about 90 s, so the builder
+>   caches a headword index at `corpus/working/etymology/wiktionary_etym_index.pkl` (ignored;
+>   `--rebuild-index` refreshes it).
+> - **Homographs.** A headword's étymologies cover all its homographs, in order. *ficher*'s first is
+>   Latin *figere* and its third is "Dénominal de fiche", and *fiche* is itself an app verb (the
+>   variant infinitive), so a naive parse made *fiche* the base of *ficher* and pulled it forward.
+>   The parser now stops at the first text that names an older source language or hedges.
+> - **English "X + Y".** Only a sentence that is wholly a formation counts ("From dé- + jouer.",
+>   "By surface analysis, a- + doux + -ir."). Links deep in a chain ("from Old French es- + garer")
+>   and glosses ("to take heed") produced bases like *heed* and *escirer*.
+> - **`nonverb`** also covers a verb the app lacks (*apeser*, *patter*), not only nouns and adjectives.
+> - **Two tier rules added.** An entry with no parse, no source language and a long text (over 200
+>   characters, like *abasourdir*'s slang history) is `rich`, not `short`. An internal derivation
+>   whose text also offers a Latin or Old French alternative ("ou du latin *rescribere*") is `rich`.
+
+## 1. Affix library ✅
 
 Collect every affix that `evidence.json` names (about 95), grouped by allomorph: *dé-/dés-/des-/de-*,
 *re-/ré-/r-/ra-*, *en-/em-*, *é-/es-/ex-*, *a-/ad-*, *con-/co-/com-*, *mé-/més-*, and so on. The
@@ -173,7 +199,28 @@ that used it.
 valid JSON; tildes are even and `en`/`fr` tilde counts match within each card; every allomorph maps
 to exactly one card.
 
-## 2. Wave tooling and agents
+> **✅ Done 2026-10-03. Correction notes.**
+> - **57 cards, not about 95.** The 87 affixes group into 57 cards (`AFFIX_GROUPS` in
+>   `etymology_wave.py`), so the 4 writers took about 14 cards each, not 24. `affix-batches` writes
+>   their inputs (each card's allomorphs, the verbs using it, evidence samples, and app verbs that
+>   merely look like it, for the pitfalls); `affix-assemble` merges the parts, applies the skeptic
+>   fixes and `affixes/overrides.json`, and runs the acceptance checks.
+> - **The skeptic had no web.** With `tools: Read, Write` it cannot open the URLs a writer cites, so
+>   each card carries `source_notes`, a quotation or close paraphrase per source, and the skeptic
+>   judges against those. Assembly strips them. Writers marked which pitfall lists rest on general
+>   knowledge rather than a fetched page.
+> - **Agent definitions load late.** The first launch failed in 27 ms with "agent type
+>   'etymology-affix-writer' not found": definitions written during a session are not in its
+>   registry. They appeared at the next user turn without a restart.
+> - **Results.** Upheld 27, partly 29, refuted 1. Most `partly` fixes removed an example that the
+>   card's own pitfalls called a fossil (*médire*, *poursuivre*, *parfumer*, *entrevoir*) or an
+>   unsupported claim, and two added missing tildes. *-ier* was refuted (no source describes a
+>   verb-forming *-ier*), and its origin was rewritten as a pointer to the plain verb ending. The
+>   skeptic dropped *-ot* from the *-oter* group as not an allomorph, but *siffloter*'s evidence names
+>   it, so it stays in the group with a sentence saying why. Cost: 6 agents, 685k subagent tokens,
+>   24 minutes. cnrtl.fr refused WebFetch; one writer used Chrome for five TLFi pages.
+
+## 2. Wave tooling and agents ✅
 
 ### Selection with bases first
 
@@ -293,7 +340,30 @@ reruns whole.
      evidence beside it.
 7. Update the ledger below, journal the wave in `docs/blog_notes.md`, and stop.
 
-## 3. Wave 0: the pilot
+> **✅ Built 2026-10-03. Correction notes.**
+> - **Files.** `corpus/working/etymology_wave.py` (affix and wave subcommands, plus `reshard` for a
+>   rerun shard) and `corpus/working/etymology_wave.workflow.js` (args `{ wave, shards }`), both
+>   tracked. Outcomes accumulate in `corpus/working/etymology/status.json`; `select` skips verbs
+>   marked `skipped`, puts `deferred` ones first, and gives `refuted` ones a `history` note. A lookup
+>   the orchestrator does goes in `corpus/working/etymology/lookups.json`, which `select` and
+>   `reshard` attach to the verb as `lookup`.
+> - **The skeptic reads the writer's results file** and picks out the rich entries itself. A
+>   workflow cannot run code between the stages, so there is no separate skeptic shard.
+> - **A `none` verb weighs 2.5**, like a rich one, since its writer has to go to the web.
+> - **The result shape adds `web`** (`none`, `webfetch` or `chrome`), for the report's web count.
+> - **Validator.** The formation check (base and affix bolded) is a flag, not a reject, because the
+>   parse is a heuristic the writer may correct. The root check runs on every entry: it flags a
+>   bolded reconstruction or a macron form absent from the shard's evidence, ignoring diacritics
+>   (Wiktionary writes *stare* where entries write *stāre*). An em dash followed by a finite verb is
+>   flagged for a skim. `merge` applies the mechanical markup fixes first.
+> - **The worked example was wrong.** The *ester* example carried over from `etymology-pipeline.md`
+>   analyzed *rester* as *re-* + *ester* (it is Latin *restāre*, as the app's own *rester* entry
+>   says), called English *stay* a cognate "through the same root" (it is a loan from an
+>   Anglo-Norman form of *ester*), and had a 48-word first paragraph, below the rich tier's floor.
+>   At Josh's request the copy in `etymology-writer.md` was rewritten; the shipped *ester* entry in
+>   `Etymologies.json` still has the old text.
+
+## 3. Wave 0: the pilot ✅
 
 About 100 verbs: the first by rank after the covered ones, plus pull-forward. The head of the list
 is the most used of the rest, so the pilot will run **richer than average**, and later waves will be
@@ -314,6 +384,42 @@ Beyond the normal wave report:
 - **In the app.** Build, run the suite, and in the simulator open one short-tier verb and one
   rich-tier verb from the pilot. Check the etymology card and the widget snapshot's 360-character
   truncation.
+
+> **✅ Run 2026-10-03. Correction notes.** The full report, with the twenty sample cards, is
+> `corpus/working/etymology/waves/w00/report.md` (ignored). Do not rerun `report --wave 0`: it would
+> overwrite the hand-written *Pilot extras*, *Decisions* and *Proposed wave size* sections.
+> - **Result.** 100 verbs selected (64 heuristic-rich, 35 short, 1 none; *muer* and *masser* pulled
+>   forward for *remuer* and *ramasser*). 91 merged, 9 deferred, none refuted or skipped. Writers moved
+>   16 verbs to short (15 rich, the 1 none) and none the other way. Skeptics: 22 upheld, 27 partly, 0
+>   refuted. One verb used the web, none Chrome.
+> - **Run as two workflows** (s01–s04 and s05–s07), because 7 shards with a skeptic each is 14 agents.
+> - **The rich length was wrong.** The decisions table's "120–220 words a paragraph" never described
+>   the shipped entries: their first paragraph's median is 76 words (en), and 81% are under 90. The
+>   writers matched the house, and the validator's 90-word floor rejected 21 of 62 entries in the first
+>   half. The floor is now 50 words (`RICH_MIN`), below the shipped 10th percentile.
+> - **Skeptic stubs.** Two skeptics deleted every claim beyond the shard that had no cited source,
+>   which left nine rich entries at 21–45 words a paragraph. The plan says a `partly` text ships, but
+>   these were the supported core of excellent entries, padded with filler. `merge` now defers such a
+>   verb (with a `history` note) unless `--demote-stubs` is passed, which ships the stub as one short
+>   paragraph. The policy question behind it is decision 1 in the report.
+> - **Passé composé check.** The plan's pattern flagged every present passive (*est formé*, *est issu*)
+>   and every *fut* + participle (a passé simple passive). The validator now flags *avoir* + participle
+>   and *être* + the participle of a verb that takes *être*. Two real slips were fixed by hand
+>   (*abroger*'s *a pris* → *prit*, *redouter*'s *est devenu* → *devint*); the other hits were
+>   resultative perfects (*le français a gardé*), left as they are.
+> - **Token accounting.** A workflow transcript opens with the harness relaying the session's latest
+>   user request (which is why the affix writers mentioned the *ester* fix), and usage is streamed over
+>   several lines per message. `report` searches every user line for the task header and keeps the last
+>   usage per message id.
+> - **Load cost.** About 9.9 MB projected; the cold decode of a 10.2 MB synthetic file took 65 ms on
+>   the simulator, so no split is proposed (see the report for the device caveat).
+> - **Widget.** `truncateToSentenceBoundary` dropped the closing ” when a sentence ended inside a
+>   quoted gloss (62 shipped English entries), and cut inside « ne... pas » in one French one. At Josh's
+>   request it now keeps a closing ” or » that follows the period and never cuts where a quotation is
+>   left open; three tests cover it, and no snippet of the 1,092 entries is left unbalanced.
+> - **Josh's calls after the report (2026-10-03).** The workflow stays as it is: same briefs, same
+>   skeptic. The shipped *ester* entry now carries the corrected worked-example text. The nine deferred
+>   verbs lead wave 1 under the unchanged briefs, so expect some to be cut to stubs and deferred again.
 
 ## 4. Later waves
 
@@ -336,7 +442,8 @@ own, with web lookups for every verb.
 
 | Wave | Date | Size | Merged | Skipped / refuted / deferred | Usage Δ (5-h %) | Tokens | Remaining |
 |---|---|---|---|---|---|---|---|
-| 0 (pilot) | | ~100 | | | | | 5,325 |
+| 0 (pilot) | 2026-10-03 | 100 | 91 | 0 / 0 / 9 (skeptic stubs) | 12 → 17 (≤ 5) | 2.50M (writers 1.92M, skeptics 0.58M) | 5,234 |
+| 1 | | 900 proposed, awaiting Josh | | | | | |
 
 ## Out of scope
 

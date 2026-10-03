@@ -132,6 +132,21 @@ struct WidgetSnapshotWriterTests {
     #expect(truncated.filter { $0 == "~" }.count.isMultiple(of: 2), "Tilde count must be balanced after truncation.")
   }
 
+  @Test func testTruncateKeepsClosingQuoteAfterPeriod() {
+    let text = "It began as artisans' cant from the sense “to emboss.” Later it meant to work hard."
+    #expect(WidgetSnapshotWriter.truncateToSentenceBoundary(text, maxLength: 60) == "It began as artisans' cant from the sense “to emboss.”")
+  }
+
+  @Test func testTruncateKeepsClosingGuillemetAfterPeriod() {
+    let text = "Il signifiait « tenir debout. » Le sens moderne vint plus tard."
+    #expect(WidgetSnapshotWriter.truncateToSentenceBoundary(text, maxLength: 35) == "Il signifiait « tenir debout. »")
+  }
+
+  @Test func testTruncateSkipsPeriodInsideGloss() {
+    let text = "Du latin ~necesse~. On l'analyse en ~ne-~ (« ne... pas ») et ~cedere~, mot très long."
+    #expect(WidgetSnapshotWriter.truncateToSentenceBoundary(text, maxLength: 60) == "Du latin ~necesse~.")
+  }
+
   @Test func testRebalanceLeavesBalancedTextUnchanged() {
     let balanced = "Du latin ~parabolare~, « raconter »."
     #expect(WidgetSnapshotWriter.rebalanceTildes(balanced) == balanced)

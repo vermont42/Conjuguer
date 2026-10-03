@@ -4216,3 +4216,53 @@ for the two-paragraph tier only; and a 100-verb pilot to measure the cost before
 size. Each wave is one session, and Josh decides after each one, based on his five-hour usage,
 whether to run another. One risk is flagged for the pilot to measure: the file should grow from
 2.5 MB to roughly 8–10 MB, and the app decodes both languages of it on first use.
+
+## The etymology pilot: 91 verbs, and a length rule nobody had measured (2026-10-03)
+
+The first session of the etymology tail ran stages 0 through 3 of `prompts/etymology-tail-plan.md`:
+the evidence file, the affix library, the wave tooling, and a 100-verb pilot.
+
+The evidence builder reads the raw Wiktionary dumps and parses each missing verb's étymologie into a
+formation. The first parse looked fine until *ficher* turned up as a derivative of *fiche*. French
+Wiktionary lists the étymologies of all homographs in order, and *ficher*'s third one, for a
+different sense, says "Dénominal de fiche"; *fiche* is also an app verb, the variant infinitive, so
+the wave tool would have written *fiche* first. The parser now stops at the first text that names an
+older source. English "X + Y" analyses needed the same care: a link deep in a chain ("from Old French
+es- + garer") and the glosses beside it had produced bases like *heed*.
+
+The affix library came out at 57 cards for 87 allomorphs. The plan gave the affix skeptic only Read
+and Write, which meant it could not open the URLs the writers cited, so the writers recorded a short
+quotation from each source and the skeptic judged against those. It upheld 27 cards, fixed 29 (most
+often an example that the card's own pitfalls called a fossil, like *médire* or *poursuivre*), and
+refuted *-ier*: no source describes a verb-forming *-ier* at all. The agent definitions were also a
+lesson. Claude Code reads `.claude/agents/` at session start, so the first launch died in 27 ms with
+"agent type not found". The types appeared at the next turn without a restart.
+
+Before the pilot, Josh pointed out that the *ester* worked example, carried over from the original
+pipeline, broke the rules it was meant to teach. It called *rester* "*re-* + *ester*" (it is Latin
+*restāre*, as the app's own *rester* entry says), it called English *stay* a cognate "through the same
+root" (it is a loan from an Anglo-Norman form of *ester*), and its first paragraph was 48 words. That
+example now teaches the fossil-prefix trap instead of committing it.
+
+The pilot itself cost 14 Sonnet agents, 2.5M tokens and at most 5 points of Josh's five-hour window.
+The first validation rejected a third of the rich entries for paragraphs under 90 words, and the
+measurement that settled it took one line: the 1,001 shipped entries have a median first paragraph
+of 76 words. The plan's "120–220 words a paragraph" had been copied from the old prompt and never
+checked against what that prompt actually produced. The floor is now 50.
+
+The more interesting failure was the skeptics. The writers added PIE roots and word families from
+memory, as the original pipeline's writers did with the web. Two skeptics read "no cited source" as
+"unsupported" and cut nine entries to stubs, removing facts that are standard and correct (*choir*'s
+*chute*, *échéance* and *chance*). The other five kept plausible claims. Shipping the stubs would have
+given some of the most-used verbs the thinnest cards in the app, so they were deferred, and the
+sourcing policy is now Josh's call: cite or omit, judge by plausibility, or carry more evidence
+offline. In the end 91 entries merged, the app shows them correctly, the projected 10 MB file decodes
+in 65 ms on the simulator, and the widget check turned up an older bug, where a snippet that ends in
+a quoted gloss loses its closing quote. The proposal for wave 1 is 900 verbs.
+
+After reading the report, Josh kept the workflow as it is: the skeptic caught about one real error in
+every five rich entries (a miscopied PIE root, a wrong French word, a disputed origin told as fact),
+and its verdicts apply themselves, so there is nothing to referee. He asked for two fixes instead. The
+shipped *ester* entry now carries the corrected text, and the widget's snippet truncation keeps a
+closing quote that follows the cut period and never cuts inside a quotation, which repairs the 65
+existing snippets that ended inside an open “ or «.
