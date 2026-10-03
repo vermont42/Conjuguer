@@ -1,6 +1,6 @@
 # The second half of the *Chanson de Roland*: working plan (2026-10-02)
 
-**Status:** not started. Written on 2026-10-02 after Josh noticed that *embroncher*'s single
+**Status:** complete (2026-10-02); each step carries a ✅ and its corrections. It was written on 2026-10-02 after Josh noticed that *embroncher*'s single
 *Chanson* example could not be the whole story. It wasn't: the verb occurs four times in the Oxford
 text (verses 2019, 3505, 3645 and 3816 by the raw file's numbering), and the app shows only the first,
 because `corpus/grokked/chanson.md` stops at verse 2033. The full treatment stopped at laisse CLI on
@@ -36,7 +36,22 @@ or incomplete. Do not commit; Josh commits.
 
 Today `chanson_examples.json` has 332 keys and 3,057 examples.
 
-## 1. Settle the numbering first
+## 1. Settle the numbering first ✅
+
+> **Correction (2026-10-02).** The premise below was wrong in three ways. (a) The offset does not
+> return to zero somewhere after 2034; it returns *inside the first half*, and the "Bédier = raw − 1"
+> rule only held for 1312–1388. Bédier gives *Esprieris* two numbers ("1388-9"), Mortier numbers the
+> gap after 1665, and the raw file numbers a stray verse at 1823 that both editors leave unnumbered.
+> (b) So `chanson.md` itself had drifted one or two below Bédier from 1389 to the end of CLI, and
+> *embroncher*'s example saying 2018 was **not** correct: it is Bédier 2019. (c) CLI ends at 2034 and
+> the second half starts at **2035**, not 2034. Only one reference was needed per check: Bédier's own
+> margin numbers (Wikisource) and Mortier's (Augustana) agree at all 106 anchors in 1300–2034 outside
+> Bédier's transposed block, and at every anchor in 2035–4002 apart from two Wikisource marker slips.
+> The first half was renumbered (numbers only; 1389 and 1666 became numbered lacuna lines, the stray
+> verse an `<!-- unnumbered -->` comment), and `chanson.md` now runs 1–2034 gap-free. The helper is
+> `corpus/working/chanson_source.py` (tracked); `--check` passes with 14 Bédier anchors. Bédier also
+> prints an unnumbered gap after 2055 that the raw file lacks, so the helper emits a `# lacuna:` row
+> there. The finding is in `chanson_progress.md` and the raw file's header.
 
 The raw file's numbers are not all Bédier's, and the ledger says so: the folio marker `f.24rv` takes
 row 1311, so from laisse CIII the raw number runs one ahead of Bédier, and `chanson.md` uses
@@ -60,7 +75,14 @@ note and in the raw file's header, which currently claims canonical numbering th
 June prompt's rules say), and at least ten anchors spread across the range match the reference
 edition.
 
-## 2. Refresh the conventions
+## 2. Refresh the conventions ✅
+
+> **Done 2026-10-02.** The June prompt's paths are refreshed and it carries the numbering finding.
+> The agents did not receive the June mappings table: it had drifted from the edition (it lists
+> `oïr (entendre)` where `chanson.md` brackets `ouïr`, for instance). They received a consolidated
+> `conventions.md` and a `known_heads.md` generated from the brackets actually in `chanson.md` plus
+> `chanson_descendants.json` (head, glosses used, the modern verb it attaches to, a sample verse),
+> both under the ignored `corpus/working/chanson_batches/`.
 
 Fix the stale paths in `docs/chanson-full-treatment-prompt.md` (or replace its path references with
 a pointer to this plan), and give it the numbering finding. The conventions themselves stay: one
@@ -87,7 +109,23 @@ form that could be another verb, or an editor's emendation), as a trailing `<!--
 comment, which the build script strips. A genuinely new verb still gets a new head, which step 4
 audits.
 
-## 3. Grok the laisses (workflow)
+## 3. Grok the laisses (workflow) ✅
+
+> **Done 2026-10-02, with corrections.** (a) A workflow script has no filesystem access, so "check
+> in code after each batch" meant running the batches in three waves (b01–b04, b05–b09, b10–b14) and
+> checking between waves; the known-heads table was regenerated before each wave, which is how "the
+> orchestrator adds each batch's new mappings before the next batch starts" works with parallel
+> agents. 14 agents, all confirmed `claude-sonnet-5-5` in the transcripts, about 4.5 minutes per wave.
+> (b) The spelling-variant screen (`check_batch.py`) over-fires on short heads (it flagged *agier*
+> ~ *guier*, *orer* ~ *aorer*, *desver* ~ *dessevrer*); 21 heads reviewed as distinct verbs sit in
+> `accepted_heads.json`. It also cannot see two batches inventing different heads for one new verb,
+> which happened twice (*esgruigner*/*esgrunier*, *malmettre*/*malmetre*) and was unified by hand.
+> (c) Two failure modes the plan did not anticipate: a bare token that is a real but rare verb
+> absent from `verbs.xml` (*tressuer*, *ressaillir*), and a new verb given the spelling of a known
+> head with another etymon (*luer* "smear" < *lutare* would have attached to *louer* through the
+> known *luer* < *locare*; rebracketed `luter (souiller)`). The conventions gained a rule for each
+> before wave 2. No batch needed a full rerun; seven bracket tokens were fixed directly. Result:
+> 1,968 lines, 104 `uncertain` and 18 `spelling` comments.
 
 140 laisses, CLII–CCXCI. The June prompt's per-laisse subagent pattern worked; run it as a workflow
 in batches. A batch of about ten laisses (roughly 140 lines) per agent gives about fourteen agents.
@@ -115,7 +153,24 @@ to the gloss table. A failing batch reruns alone.
 **Acceptance:** `chanson.md` runs 1–4002, 291 laisses, every original line has a translation line,
 and the checker passes over the whole file.
 
-## 4. Audit the new Old French heads
+## 4. Audit the new Old French heads ✅
+
+> **Done 2026-10-02.** `build_chanson_examples.py` now takes `--dry-run`, reports heads with no table
+> row separately from synonym-only drops, and skips the `N. [lacuna — …]` lines (which it would
+> otherwise have parsed as a verb bracket). The second half brought 63 new heads; the variant screen
+> had already run in step 3, so all 63 were audited. 27 attach to a modern descendant in `verbs.xml`
+> and 36 have none. Evidence is in each row's `note`. The local Wiktionary extract was enough for
+> most. For 14 borderline descendants the TLFi was fetched once each through the existing
+> `fetch_cnrtl.py` (cache only, no `--evidence`, so the verb pass's Stage 5 file is untouched). It
+> confirmed *aloer* → allouer and cites these very Roland verses under *appendre*, *ressortir*,
+> *manœuvrer*, *bondir*, *défouler* and *arraisonner*. It also ruled out *defenir* → définir (a Latin
+> borrowing), *luter* (a 1532 borrowing) and *lister* (a 1962 coinage). Its Roland citations give
+> six more independent checks of the step 1 numbering, and all agree. The dry run now reports no
+> missing head. The only unmatched tokens are first-half brackets, left alone per *Out of scope* and
+> listed for Josh: `mercier` (2 lines; not in `verbs.xml`, modern remercier) and `reclamer` (2014, a
+> typo for `réclamer`). At Josh's request the typo was then fixed, giving *réclamer* verse 2014 and
+> bringing the total to 5,983 examples; `mercier` is the only unmatched token left. Candidate `verbs.xml` additions that would give a dropped head somewhere to
+> attach, none added: *tressuer*, *ressaillir*, *entiercer*, *désordonner*, *mercier*.
 
 `build_chanson_examples.py` names the bare tokens it cannot resolve, but not the `head (modern)`
 heads missing from `chanson_descendants.json`. It counts a missing head under "dropped (synonym
@@ -137,7 +192,23 @@ a trace. So:
 **Acceptance:** the script reports no unmatched token that is not either a deliberate drop (a
 synonym-only gloss) or listed for Josh.
 
-## 5. Skeptic over every line the app will show (workflow)
+## 5. Skeptic over every line the app will show (workflow) ✅
+
+> **Done 2026-10-02.** 1,793 second-half lines attach a verb (2,925 attachments), in 15 shards of
+> ≤120, one Sonnet 5.5 agent each (189 model calls, all `claude-sonnet-5-5`). Verdicts, validated in
+> code (`apply_verdicts.py`): **1,764 upheld (98.4%), 23 partly (1.3%), 6 refuted (0.3%)**. All 29
+> fixes were accepted and applied. Refutations: `garder` for *reguardet* (→ regarder, 2239), `attirer`
+> for *atraire* (2256), `fleurir` for attributive *barbe flurie* (2605), `avoir` for the preposition
+> *ad* (2667), `être` for the presentative *Ais* "behold" (3818), and `assiéger` for *asise* (→ seoir,
+> 3997). Most partly fixes added a missing `mourir` to an *est mort* compound (six lines), plus
+> translation fixes: the speaker at 2137, the comparatives at 2265 and 2868, a split speech at
+> 3168–3169, and person/number at 3217 and 3661. Two fixes needed new table rows (*atraire*, no
+> descendant in `verbs.xml`; *douter*), added with notes. **Correction:** a 98% uphold rate invited a
+> leniency check the plan did not ask for. A code probe listing bare lemmas that share no stem with
+> their verse turned up two misses the skeptics upheld, both fixed by hand: *enclin* (an adjective)
+> attached to incliner at 3504, and *espandre* attached to répandre instead of épandre at 3617. The
+> twenty-card sample was shown to Josh in the session report rather than as a stop before the run,
+> since the run only writes verdict files and nothing was applied unseen.
 
 The app shows only lines whose bracket attaches to a verb, with their translation, under "Old French
 — Chanson de Roland". Those lines are what a user reads, so every one of them in the new half gets a
@@ -153,7 +224,18 @@ right answer is no attachment) or flag the line `<!-- uncertain -->` and drop it
 Josh a sample of twenty cards (the habit from the verb pass) before the full skeptic run, and a
 summary of the refutations after it.
 
-## 6. Regenerate and apply
+## 6. Regenerate and apply ✅
+
+> **Done 2026-10-02.** Both JSON copies are byte-identical. *embroncher* has four examples, at **2019**
+> (not 2018; see step 1), 3505, 3645 and 3816. The first half is unchanged apart from the
+> renumbering: diffed against the pre-run JSON with the step 1 mapping applied, the only difference
+> is the stray verse's two attachments (être, mourir), dropped with the verse. Totals go from 332 keys
+> and 3,057 examples to **432 keys and 5,982 examples** (5,983 after the `reclamer` fix below). **100 verbs** gain their first *Chanson*
+> example, and all 100 already had a literature example. The suite passes (279 tests in 24 suites);
+> `CorpusFormsDumpTests` is a dump tool with no *Chanson* assertion, so nothing there needed
+> changing. In the simulator *embroncher*'s sword button cycles 3505 → 3645 → 3816 → 2019 → 3505.
+> The view starts on a random example by design. The button sits low in a long scroll view, so the
+> drive needed `axe swipe` with an explicit UDID, because `_sim_udid.sh` printed nothing here.
 
 Run `build_chanson_examples.py` for real: it writes both JSON copies. Then:
 
@@ -164,7 +246,16 @@ Run `build_chanson_examples.py` for real: it writes both JSON copies. Then:
 - build, run the suite (`CorpusFormsDumpTests` mentions Chanson-only verbs; check it), and in the
   simulator open *embroncher* and press the sword button through all four.
 
-## 7. Counts, credits, docs
+## 7. Counts, credits, docs ✅
+
+> **Done 2026-10-02, with corrections.** The credits split at **2034/2035**, not 2033/2034 (step 1).
+> The catalog had no *Chanson* count to update; only the credits sentence changed, in both
+> languages. Beyond the plan's list: `chanson.md`'s own header (translators, numbering note, the stale
+> raw-file path); the corpus doc's reflex-policy example, which named `ouvrir` as a verb with no
+> *Chanson* example, though the second half gives it three genuine ones (*uverte*); and a dated note in
+> `docs/classical-authored.md`, since 45 of its 63 verbs gained occurrences. The release-notes paragraph
+> was first drafted for Josh, since the plan made it his call, and then added to both languages of
+> `docs/release-notes-2.3.txt` at his request. `check_docs.py` is clean.
 
 - **Credits** (`Info.creditsText`, both languages): the sentence "their English translations are
   original work by Claude (Opus 4.8)" must name both models and say which half each translated

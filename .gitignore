@@ -26,6 +26,8 @@ corpus/*
 !corpus/working/
 corpus/working/*
 !corpus/working/build_chanson_examples.py
+# Emits the Roland's second half with Bédier numbers for the 2026-10 full treatment.
+!corpus/working/chanson_source.py
 !corpus/working/build_corpus_index.py
 !corpus/working/build_tail_index.py
 !corpus/working/build_literature_examples.py

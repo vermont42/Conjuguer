@@ -288,7 +288,10 @@ corpus/                         # Literature-example pipeline; NOT part of any t
 │                               # and the shard, skeptic, validator, report and review-page scripts take --only/--stage5/--pass-dir to run the pass
 │                               # again over working/verb_pass/stage5/ without touching Stage 2–4's files; fetch_cnrtl.py fetches CNRTL
 │                               # dictionary entries (TLFi, Académie, Littré) for a few verbs as evidence for the Stage 5c retry;
-│                               # apply_verb_pass.py --pass-dir applies Stage 5's approvals (examples and glosses) the same way
+│                               # apply_verb_pass.py --pass-dir applies Stage 5's approvals (examples and glosses) the same way;
+│                               # chanson_source.py emits the Roland's second half (laisses CLII–CCXCI) as Bédier-numbered rows
+│                               # for the grokking agents, and --check asserts that numbering (see prompts/chanson-second-half-plan.md);
+│                               # build_chanson_examples.py --dry-run reports Old French heads missing from the grokked/ descendants table
 └── grokked/                    # Intermediate per-source extraction output
 
 frequency/                      # Verb-frequency pipeline; NOT part of any target. See frequency/README.md

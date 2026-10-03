@@ -4141,3 +4141,51 @@ numbering first, grokks laisses CLII–CCXCI in workflow batches checked in code
 French heads (the build script currently drops an unknown head without naming it), runs a skeptic
 over every line the app will show, and then regenerates. *embroncher* with four examples is its
 acceptance case. The June prompt now points to the plan, since its paths had gone stale.
+
+## The other half of the *Chanson* (2026-10-02)
+
+The plan said to settle the numbering before grokking a line, and that turned out to be most of the
+interest. The ledger's rule was "Bédier = raw − 1 from laisse CIII", and the plan assumed the offset
+closed somewhere in the second half. I fetched two independently numbered texts, Bédier's own
+edition on French Wikisource (margin numbers every fifth verse) and Mortier's on Bibliotheca
+Augustana, and aligned the raw file against them by content. The offset closes in the *first* half.
+Bédier prints "1388-9" against one conflated verse, Mortier numbers a lost line after 1665, and the
+raw file numbers a stray verse at 1823, "(Morz est Turpin le guerreier Charlun)", that both editors
+leave unnumbered. Net effect: the raw file is exact from 1824 to the end, and `chanson.md` had been
+one or two below Bédier from verse 1389 on. So the claim I took back in the last entry was right
+after all. *embroncher*'s first example is verse 2019, not 2018, and laisse CLI ends at 2034. The two
+references agree at 106 anchors in that stretch, and the TLFi later supplied six more for free: it
+cites Roland verses by Bédier number under *appendre*, *ressortir*, *manœuvrer*, *bondir*,
+*défouler* and *arraisonner*, and every one matched. I renumbered the first half (numbers only, two
+lost lines becoming numbered lacuna lines, the stray verse becoming a comment), and wrote
+`corpus/working/chanson_source.py` to hand the agents the second half already in Bédier's numbers.
+
+The grokking ran on Sonnet 5.5, at Josh's choice: fourteen batches of about ten laisses, in three
+waves, because a workflow script cannot read files and the checks had to run between waves. Each
+wave took about four and a half minutes. The checker compared every verse with the source byte for
+byte, and nothing ever failed that test. What it caught were bracket problems. Two rare verbs
+(*tressuer*, *ressaillir*) were given as bare lemmas the dictionary lacks. One new verb borrowed the
+spelling of a known head: *luer* "smear" < *lutare* would have filed a line under *louer* through
+the existing *luer* "pay" < *locare*. Twice, two batches invented different heads for the same new
+verb. The spelling-variant screen over-fired on short heads (*orer* ~ *aorer*, *agier* ~ *guier*), so
+reviewed heads went on an accept list. No batch needed a rerun; seven tokens were fixed by hand.
+
+The new half brought 63 Old French heads the descendants table had never seen. Previously the build
+script would have dropped them without a word, counted as synonym-only. It now has a `--dry-run`
+that names them. 27 attach to a modern verb (*estoner* → étonner, *nagier* → nager, *guaitier* →
+guetter, *trespasser* → trépasser), and the evidence sits in each row's note.
+
+The skeptics, also Sonnet 5.5, read the 1,793 second-half lines that attach a verb. They upheld
+98.4%, partly upheld 1.3% and refuted 0.3%. Every one of the 29 complaints was right. The best
+caught a speaker the translation had reversed (Roland addresses Turpin at 2137, not the other way
+round), a preposition *ad* read as *avoir*, and two comparatives ("farther than a crossbow can
+shoot") flattened into equalities. A rate that high made me suspicious, so I probed in code for bare
+lemmas sharing no stem with their verse. That turned up two misses the skeptics had upheld: the
+adjective *enclin* filed under *incliner*, and *espandre* under *répandre* rather than its true
+descendant *épandre*.
+
+The result: `chanson_examples.json` goes from 3,057 examples on 332 verbs to 5,983 on 432, and 100
+verbs get their first *Chanson* example. (The last of those examples comes from fixing a first-half typo,
+`reclamer` for `réclamer` at 2014, which Josh asked for along with the release-notes paragraph.) In the simulator *embroncher*'s sword button now cycles
+through four verses, 2019, 3505, 3645 and 3816. The credits name both translators: Opus 4.8 for
+verses 1–2034, Sonnet 5.5 for 2035–4002. Nothing is committed.

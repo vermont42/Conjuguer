@@ -39,7 +39,12 @@ Resolution order for a single synonym token (paren `modern` or bare token):
   4. reflexive stripped        `se coucher` -> "coucher", `s'en aller` -> "aller"
 Slash alternatives (`estraire (descendre/être issu)`) try each part.
 A token that resolves to nothing is reported as unmatched, never silently dropped.
+
+A paren head with no row in the descendants table at all is reported separately
+("heads missing from the table"), so a new head is never mistaken for a deliberate
+synonym-only drop. `--dry-run` prints the report without writing either JSON copy.
 """
+import argparse
 import json
 import os
 import re
@@ -56,6 +61,7 @@ OUT_JSON = os.path.join(ROOT, "json", "chanson_examples.json")
 BUNDLED_JSON = os.path.join(os.path.dirname(ROOT), "Conjuguer", "Models", "chanson_examples.json")
 
 COMMENT_RE = re.compile(r"<!--.*?-->")
+LACUNA_LINE = "[lacuna — line lost in Oxford ms]"
 NUM_RE = re.compile(r"^(\d+)\.\s+(.*)$")
 # the verb bracket is the LAST [...] at end of line (after stripping any comment)
 TAIL_BRACKET_RE = re.compile(r"\[([^\[\]]*)\]\s*$")
@@ -68,13 +74,14 @@ def load_verb_keys():
 
 
 def load_descendants():
-    """head -> modern descendant verb key, only for heads whose descendant is
-    a verified verbs.xml entry (the "reattach" set)."""
-    table = {}
+    """(head -> modern descendant verb key for heads whose descendant is a
+    verified verbs.xml entry (the "reattach" set), every head with a row)."""
+    table, all_heads = {}, set()
     for row in json.load(open(DESCENDANTS, encoding="utf-8")):
+        all_heads.add(row["head"])
         if row.get("in_dict") and row.get("descendant"):
             table[row["head"]] = row["descendant"]
-    return table
+    return table, all_heads
 
 
 def split_top_commas(s):
@@ -151,8 +158,12 @@ def parse_blocks(text):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dry-run", action="store_true", help="report only; write no JSON")
+    args = parser.parse_args()
     keys = load_verb_keys()
-    descendants = load_descendants()
+    descendants, table_heads = load_descendants()
+    missing_heads = defaultdict(list)
     text = open(CHANSON, encoding="utf-8").read()
 
     index = defaultdict(list)
@@ -177,6 +188,8 @@ def main():
                 continue
             num = int(m.group(1))
             body = COMMENT_RE.sub("", m.group(2)).rstrip()
+            if body == LACUNA_LINE:
+                continue
             bm = TAIL_BRACKET_RE.search(body)
             if not bm:
                 continue
@@ -202,6 +215,8 @@ def main():
                         key = descendants[head]
                         reattached += 1
                     else:
+                        if head not in table_heads:
+                            missing_heads[head].append(num)
                         dropped_synonym += 1
                         continue
                 else:
@@ -218,9 +233,10 @@ def main():
 
     # stable output: sort keys, examples already in document order
     out = {k: index[k] for k in sorted(index)}
-    for path in (OUT_JSON, BUNDLED_JSON):
-        json.dump(out, open(path, "w", encoding="utf-8"),
-                  ensure_ascii=False, indent=1)
+    if not args.dry_run:
+        for path in (OUT_JSON, BUNDLED_JSON):
+            json.dump(out, open(path, "w", encoding="utf-8"),
+                      ensure_ascii=False, indent=1)
 
     # ---- report ----
     print(f"verbs.xml keys           : {len(keys)}")
@@ -233,12 +249,22 @@ def main():
     print(f"  -> {100*len(out)/len(keys):.1f}% of the dictionary has >=1 example")
     print(f"unmatched gloss tokens   : {sum(unmatched.values())} "
           f"({len(unmatched)} distinct)")
-    print(f"\nJSON written to {os.path.relpath(OUT_JSON, os.path.dirname(ROOT))}")
+    print(f"heads missing from table : {len(missing_heads)} "
+          f"({sum(len(v) for v in missing_heads.values())} uses)")
+    if args.dry_run:
+        print("\n--dry-run: no JSON written")
+    else:
+        print(f"\nJSON written to {os.path.relpath(OUT_JSON, os.path.dirname(ROOT))}")
 
     counts = sorted(((len(v), k) for k, v in out.items()), reverse=True)
     print("\nTop 20 verbs by example count:")
     for c, k in counts[:20]:
         print(f"  {c:4d}  {k}")
+
+    if missing_heads:
+        print("\nHeads with no row in chanson_descendants.json (audit or rebracket):")
+        for head, nums in sorted(missing_heads.items()):
+            print(f"  {head!r}: lines {', '.join(map(str, nums))}")
 
     if unmatched:
         print("\nUnmatched gloss tokens (fix in verbs.xml or the bracket):")

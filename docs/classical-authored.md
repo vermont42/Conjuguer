@@ -19,6 +19,11 @@ glossed sense (see the last section of `docs/authored-examples.md`). The pass al
 *saillir*'s sentence suits the "jut out" entry, not "saillir (mate)", which now has its own. 62 of
 these 63 ship.
 
+**Update (2026-10-02):** the second half of the *Chanson* (verses 2035–4002) gave 45 of these 63
+verbs more *Roland* occurrences, with the largest gains for *repairer* (7 → 24), *occire* (26 → 43),
+*enfreindre* (21 → 35), *jouter* (3 → 13) and *ester* (4 → 14). None lost its example and none
+changed category, so the sentences below stand. The sword button now cycles through the whole poem.
+
 **Why authored, two cases:**
 - **absent** (45 verbs) — the verb's word-forms never occur in La Fontaine or Molière at all
   (genuinely archaic: `occire`, `quérir`, `ester`, `chaloir`, `embattre`, …).

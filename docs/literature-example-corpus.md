@@ -18,6 +18,14 @@ per-stage percentages quoted in the pipeline narrative below (e.g. 974/982, 963/
 **historical waypoints** captured while the pipeline was being built up, *not* the current
 total; when they conflict, this figure governs.
 
+**Chanson coverage (2026-10-02).** `grokked/chanson.md` covers the whole poem: 291 laisses, Bédier
+verses 1–4002. Laisses I–CLI (1–2034) were translated by Claude (Opus 4.8) in June 2026, and
+CLII–CCXCI (2035–4002) by Claude (Sonnet 5.5) on 2026-10-02 (`prompts/chanson-second-half-plan.md`).
+`chanson_examples.json` attaches **5,983 examples to 432 verbs**. Before the second half it held
+3,057 examples on 332 verbs, and every figure below that predates 2026-10-02 counts only the first
+half. On the same day the first half's line numbers were corrected to Bédier's from verse 1389 on.
+They had drifted one or two below it; see `working/chanson_progress.md`.
+
 **Pipeline stages (folders):**
 
 | Folder | Contents | Tracked? | Role |
@@ -55,13 +63,17 @@ word** (its etymological ancestor form); otherwise the app shows no Chanson sect
   → **férir**. The descendant may be any of the ~6,300 verbs, not just the usage-ranked ~980.
 - **`head (modern)` where `head` left no surviving descendant in the dict** → **dropped**. The
   verb itself never appears in the poem (the gloss is only a synonym), so e.g. `frapper`, `tuer`,
-  `choisir`, `ouvrir` get no Chanson example rather than one whose word isn't theirs.
+  `choisir` get no Chanson example rather than one whose word isn't theirs.
 
 The head→descendant decisions live in `grokked/chanson_descendants.json`, the merged result of a
 per-head English-Wiktionary etymology audit (parallel subagents; the per-slice `working/audit_*.json`
 outputs are ignored intermediates) plus a few manual overrides for doublets whose modern sense
 diverged from the Roland usage (`targier`, `chalengier`, `asmer`, `tenser`). Re-run the audit and
-regenerate that table if the bracketing changes; this script only consumes it.
+regenerate that table if the bracketing changes; this script only consumes it. The second half
+(2026-10-02) added 65 heads, audited by hand against the local Wiktionary extract and, for 14
+borderline descendants, the TLFi. This time the evidence is kept in each row's `note`. Run
+`build_chanson_examples.py --dry-run` after any bracketing change: it lists heads that have no row
+at all, separately from deliberate synonym-only drops.
 
 **Modern-prose pass — generated-forms index + subagent select/translate.** The pass over the
 novels (and government tier) moves the expensive work *off* the LLM and into deterministic code,
@@ -139,8 +151,10 @@ the JSON so AI authorship is explicit and never attributed to a corpus it didn't
 verbs added on 2026-08-28 = 1141** (`100%`). To extend/replace a tier: add sources under it, re-run `build_tail_index.py` + the
 workflow, and merge into `literature_examples.json`.
 
-**Classical tier — the 144 Chanson-only verbs.** `chanson_examples.json` attaches a *Roland*
-example to 332 verbs; **144** of those are not in the ranked 982 (archaic reflexes the poem
+**Classical tier — the 144 Chanson-only verbs.** (Written when the poem's first half was the
+whole edition. The second half, on 2026-10-02, brought the total to 432 verbs. The 100 new ones all
+already had a modern example from the verb pass, so the classical tier was not re-mined.)
+`chanson_examples.json` attached a *Roland* example to 332 verbs; **144** of those are not in the ranked 982 (archaic reflexes the poem
 contains: `occire`, `quérir`, `gésir`, `ouïr`, `honnir`, …). To honor each with a *modern* example
 below its Chanson one, the classical tier was mined via **`build_classical_index.py`** (targets the
 144 — recomputed as `chanson − lit`, keyed by **bare infinitive**; uses `forms_all.json` over all

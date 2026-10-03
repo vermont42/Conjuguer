@@ -2,20 +2,29 @@
 
 > **Superseded for the remaining work (2026-10-02).** Laisses I–CLI are done; the second half is
 > planned in [`prompts/chanson-second-half-plan.md`](../prompts/chanson-second-half-plan.md). The
-> conventions below still apply, but the paths are stale: the edition is `corpus/grokked/chanson.md`,
-> the ledger `corpus/working/chanson_progress.md`, and the raw text
-> `corpus/originals/literature/chanson-roland-oxford.txt`.
+> conventions below still apply (paths refreshed on 2026-10-02). The second-half grokking agents
+> receive a consolidated copy of them, plus a generated table of every head already used, rather
+> than the mappings table below.
+>
+> **Numbering (corrected 2026-10-02).** The raw file's row numbers are *not* Bédier's throughout,
+> and the "canonical = source − 1 from laisse CIII" rule below held only for 1312–1388. Against
+> Bédier's own margin numbers and Mortier's, the raw file runs +1 for 1312–1389, 0 for 1390–1665,
+> −1 for 1666–1822, numbers a stray verse at 1823 that both editors leave unnumbered, and is exact
+> from 1824 to 4002. `chanson.md`'s first half was renumbered to match (CLI ends at 2034); the second
+> half starts at 2035. `corpus/working/chanson_source.py` emits it with Bédier numbers. Numbered
+> lacunae: 1389, 1666, 3146, 3390, 3494. Unnumbered gaps (a `<!-- lacuna -->` note, no number): after
+> 1777 and after 2055. Details in `corpus/working/chanson_progress.md`.
 
 This is a **self-contained working prompt** for a future Claude Code session. Paste
 it (or point the session at this file) and follow the three steps in order. It
-assumes no memory of the conversation that produced `corpus/chanson.md`; everything
+assumes no memory of the conversation that produced `corpus/grokked/chanson.md`; everything
 needed is restated below.
 
 ---
 
 ## Objective
 
-Build out `corpus/chanson.md` into the **complete** *Chanson de Roland* (Oxford
+Build out `corpus/grokked/chanson.md` into the **complete** *Chanson de Roland* (Oxford
 manuscript, the standard Bédier numbering, **~4,002 lines across 291 laisses**),
 giving every laisse the same "full treatment":
 
@@ -27,17 +36,17 @@ giving every laisse the same "full treatment":
 The work is large (~8,000 annotated output lines) and must be done in **chunks
 across multiple turns**, with a progress ledger so any session can resume.
 
-> **Current state (authoritative source = `corpus/progress.md`).** Laisses **I–XI
+> **Current state (authoritative source = `corpus/working/chanson_progress.md`).** Laisses **I–XI
 > (lines 1–167)** are complete and already in the per-laisse-block format described
 > below; the one-time restructure from the old two-section layout is **done**. Do
-> **not** re-migrate. Read `corpus/progress.md` for the exact resume point and pick up
+> **not** re-migrate. Read `corpus/working/chanson_progress.md` for the exact resume point and pick up
 > from the next laisse.
 
 ---
 
 ## Conventions (must match the existing file exactly)
 
-These are the rules already in force in `corpus/chanson.md`. Do not change them;
+These are the rules already in force in `corpus/grokked/chanson.md`. Do not change them;
 extend them.
 
 ### Line numbering
@@ -286,7 +295,7 @@ nearest modern equivalent and note the doubt rather than inventing certainty.
   `<!-- uncertain: ... -->` HTML comment rather than guessing silently.
 
 ### Target document structure (per-laisse blocks)
-Each laisse in `corpus/chanson.md` is a **self-contained block** — original (with verb
+Each laisse in `corpus/grokked/chanson.md` is a **self-contained block** — original (with verb
 brackets) immediately followed by its translation. This layout is already in force for
 laisses I–XI; **append new laisses in the same shape** (separated by a `---` rule), and
 do not revert to the old two-section layout. Shape:
@@ -310,13 +319,13 @@ Keep the existing top-of-file header (source attribution, convention note,
 - **Laisse I** retains its original **UT-Austin Bédier** text (`amet`, `Saraguce`,
   `emperere`) — do not re-transcribe it.
 - **Laisses II–291** are transcribed **verbatim** from the working raw source
-  `corpus/chanson-roland-oxford.txt` (Orbis Latinus / orbilat), including its editorial
+  `corpus/originals/literature/chanson-roland-oxford.txt` (Orbis Latinus / orbilat), including its editorial
   brackets (`[S]erai`, `Char[l]es`), parentheticals (`(...)`, `m(er)ercit`), and its
   dropped apostrophes (`d argent`, `d or`). There is **no further edition switching**;
   this is recorded in the `chanson.md` header.
 
 ### Lacunae (read before transcribing — easy to mis-number)
-`corpus/chanson-roland-oxford.txt` contains **6 lacuna rows** (see its header): 3
+`corpus/originals/literature/chanson-roland-oxford.txt` contains **6 lacuna rows** (see its header): 3
 *unnumbered* narrative gaps (around laisses ~C–CL) and 3 that *occupy a numbered Bédier
 slot* (a line lost in Oxford, in the Baligant section). Handle them explicitly:
 - **Unnumbered lacuna** → emit **no** output line; add a `<!-- lacuna: narrative gap,
@@ -324,16 +333,16 @@ slot* (a line lost in Oxford, in the Baligant section). Handle them explicitly:
 - **Numbered lacuna** → **keep the canonical number**, write the original line as
   `N. [lacuna — line lost in Oxford ms]` (no verb bracket), and a matching translation
   line `N. [lacuna]`. This preserves the gap-free count of exactly 4,002.
-Whenever you cross a lacuna, note it in `corpus/progress.md`.
+Whenever you cross a lacuna, note it in `corpus/working/chanson_progress.md`.
 
 ---
 
 ## Step 1 — Download the original to `corpus/`
 
 > **STATUS: DONE (2026-06).** The verified original is at
-> `corpus/chanson-roland-oxford.txt` — 4,002 Bédier-numbered lines, 291 laisses
+> `corpus/originals/literature/chanson-roland-oxford.txt` — 4,002 Bédier-numbered lines, 291 laisses
 > (I–CCXCI), from Orbis Latinus (orbilat.com), Oxford/Digby 23. Endpoints and the
-> laisse-VIII anchor (line 96) match `corpus/chanson.md`. See that file's header for
+> laisse-VIII anchor (line 96) match `corpus/grokked/chanson.md`. See that file's header for
 > the lacuna-numbering and edition caveats. A future run can skip to Step 2.
 
 Goal: a clean, complete, machine-readable Old French Oxford text saved verbatim, to
@@ -348,7 +357,7 @@ work from offline so later chunks don't depend on re-fetching.
      (`lachansonderolandatkjenkins`) — these are **scans/OCR**; usable only if a
      clean text layer exists.
    Use the Claude in Chrome MCP (`mcp__claude-in-chrome__*`) or `WebFetch` to fetch.
-2. **Save it** to `corpus/chanson-roland-oxford.txt` (raw original only). Preserve
+2. **Save it** to `corpus/originals/literature/chanson-roland-oxford.txt` (raw original only). Preserve
    laisse divisions and, if the source provides them, line numbers.
 3. **Verify before proceeding:**
    - First line is `Carles li reis, nostre emperere magnes`.
@@ -367,12 +376,12 @@ Pick a **chunk size that fits comfortably in a single careful turn** — suggest
 **one laisse at a time**, or up to ~150 lines, whichever is smaller for dense
 laisses. Then:
 
-1. Read the next un-done range from `corpus/chanson-roland-oxford.txt`, starting
+1. Read the next un-done range from `corpus/originals/literature/chanson-roland-oxford.txt`, starting
    where the progress ledger says (Step 3).
 2. For each line in the chunk: keep the canonical number, transcribe the original
    verbatim, append the verb bracket per the conventions, and write your
    translation line.
-3. Append the completed laisse block(s) to `corpus/chanson.md` in the per-laisse
+3. Append the completed laisse block(s) to `corpus/grokked/chanson.md` in the per-laisse
    structure above (each new block preceded by a `---` rule).
 4. Update the progress ledger (below).
 5. Add any new verbs encountered to the mappings table in this file.
@@ -385,7 +394,7 @@ The source is tab-separated `<lineNo>\t<verse>` with `Laisse <roman>` headers. L
 laisse boundaries and read a range with:
 
 ```bash
-grep -n "^Laisse " corpus/chanson-roland-oxford.txt          # roman-numeral headers + file offsets
+grep -n "^Laisse " corpus/originals/literature/chanson-roland-oxford.txt          # roman-numeral headers + file offsets
 # then Read the file at the offset for the laisses you want
 ```
 
@@ -401,7 +410,7 @@ This is the workflow that proved fast and accurate. For a batch of N laisses:
    **return only the finished markdown block** (no preamble) in the exact
    `## Laisse … / **Original** / **Translation**` shape.
 3. The orchestrator assembles the returned blocks in order, appends them to
-   `corpus/chanson.md`, runs the consistency check (Step 3.3), updates the ledger, and
+   `corpus/grokked/chanson.md`, runs the consistency check (Step 3.3), updates the ledger, and
    adds new verbs to the mappings table.
 
 A batch of ~10 laisses per turn is comfortable. Subagents occasionally emit a stray
@@ -411,7 +420,7 @@ preamble line before the block — strip it during assembly.
 
 ## Step 3 — Loop the chunks until done
 
-1. Maintain a **progress ledger** so any session can resume. Keep it in `corpus/progress.md`,
+1. Maintain a **progress ledger** so any session can resume. Keep it in `corpus/working/chanson_progress.md`,
    recording: last completed laisse number (Roman), last completed line number, and date.
    Example: `Last completed: laisse XXIV / line 326 (2026-06-xx).`
 2. Repeat **Step 2** for each subsequent chunk, resuming from the ledger, until
@@ -423,7 +432,7 @@ preamble line before the block — strip it during assembly.
    identical):
 
    ```bash
-   python3 - corpus/chanson.md <<'EOF'
+   python3 - corpus/grokked/chanson.md <<'EOF'
    import re, sys
    txt = open(sys.argv[1]).read()
    blocks = re.split(r'^## Laisse ', txt, flags=re.M)[1:]
