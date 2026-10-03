@@ -4302,3 +4302,28 @@ perfects ("le français a gardé") or false hits, but eleven narrated a single p
 pris", "est venu par le français") where the brief asks for the passé simple, and I fixed them by hand.
 `Etymologies.json` now covers 1,950 of 6,326 verbs at 4.0 MB, all 282 tests pass, and 4,376 verbs remain.
 The next 1,200 are 41% rich, so a 1,200-verb wave should cost about 46 points.
+
+## Choosing the etymology sourcing policy (2026-10-03)
+
+After wave 1, Josh handed me the question the pilot had left open: what may an etymology claim
+without a citation? The data from two waves pointed one way. Every skeptic catch that improved an
+entry was a wrong fact. *Préface* was listed as a relative of *prédire*, *exaspérer* was put in the
+*acerbus* family, English *grin* was called a descendant of a Frankish verb, and a PIE root was
+miscopied. A skeptic finds those by knowing better, not by asking for a source. "No source cited," on
+the other hand, had produced nothing but losses: 35 deferred and 4 refuted entries whose cut material
+was standard and right.
+
+So the rule is now a fence rather than a blanket. The verb's own chain, its dates and attestations
+still come from the evidence. Textbook background, meaning the Latin source's parts, the French words
+sharing the root and the well-known cognates, may stand uncited if the skeptic judges it correct.
+Reconstructions, dates, attributions, sense-development stories and anything contested still need the
+evidence or a cited URL, because those are where memory has actually slipped. Invented color is cut as
+before. Requiring citations for everything would have put a web lookup behind every rich verb, and
+adding the dump's related-terms lists as evidence would have meant builder work for a gain the fence
+mostly gives for free.
+
+Two mechanical changes follow from it. A skeptic no longer refutes an entry for being thin; it returns
+the supported core as one paragraph, and `merge` now ships that as a short entry by default instead of
+deferring it. And the deferred and refuted verbs, which lead wave 2 at Josh's new size of 1,200, carry
+history notes that describe the new rules. The old notes would have steered their writers toward
+one-paragraph entries.

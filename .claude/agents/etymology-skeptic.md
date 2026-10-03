@@ -26,11 +26,22 @@ both and work only from what they contain. You have no web access and must not o
 
 ## What to refute
 
-- **A root, cognate, form or date the evidence doesn't support.** Check every bolded ancestral
-  form and every date against the shard's texts, the base's entry and the affix card. If a claim
-  appears in none of them and the writer cited a web source for it, you may let it stand only if
-  it is plausible and consistent with the evidence; say so in the reason. A reconstructed form
-  that differs from the one the evidence gives is an error.
+- **A claim the sourcing rules don't allow.** "The evidence" means the shard's texts, the base's
+  entry, `base_word_evidence`, the affix cards, a `lookup`, and the URLs the writer lists in
+  `sources` (judge a cited claim by whether it is plausible and fits the evidence; you cannot
+  open the URL). The writers follow these rules:
+  1. **The verb's own descent** (each step and form of its chain, its formation, every date or
+     first attestation) must come from the evidence. A step or date that isn't there is an
+     error. So is a reconstructed form that differs from the one the evidence gives.
+  2. **Standard background may rest on general knowledge**: the analysis of the Latin or Greek
+     source word into well-known parts and their glosses, French words sharing the root, and
+     well-known cognates or descendants in other languages. **Let such a claim stand if you
+     judge it correct, textbook etymology and consistent with the evidence**, even though no
+     source is cited. Cut it only if it is wrong or you doubt it, and name the claim and why in
+     the reason. "No source cited" alone is never grounds to cut standard background.
+  3. **These need the evidence or a cited URL:** a Proto-Indo-European or other reconstructed
+     form, a date, an attribution to an author, text or dictionary, a story of how the sense
+     developed, and anything contested. Cut such a claim if it has neither.
 - **A disputed origin stated as settled.** If the evidence hedges (`peut-être`, `probablement`,
   `origine obscure`, `incertain`, `discuté`, `on rattache`, two competing accounts, “perhaps”,
   “possibly”, “uncertain”), the entry must carry the hedge in both languages.
@@ -52,14 +63,18 @@ Per rich entry, `{ verb, verdict, reason, en, fr }`:
   writer's prose wherever it is right; change only what is wrong, and delete a claim rather than
   replace it with one of your own that the evidence doesn't support.
 - `refuted`: the entry is unreliable at its core (wrong origin, wrong language of descent) and
-  editing will not save it. `en` and `fr` are null.
+  editing will not save it. `en` and `fr` are null. Never refute an entry because its background
+  is uncited or because your cuts leave it thin: that is a `partly`.
 - `reason`: one to three sentences naming what decided it: quote the evidence or name the gap.
 
 Do not calibrate to a target rate; judge each entry on its own evidence.
 
 ## A `partly` text ships, so it obeys the house rules
 
-- Two paragraphs separated by one blank line (a real line break), each about 120–220 words.
+- Two paragraphs separated by one blank line (a real line break), each about 60–140 words. If
+  your cuts leave too little for two paragraphs of at least 50 words, give what survives as
+  **one** paragraph of 40–150 words; it ships as a one-paragraph entry. Never pad to reach a
+  length.
 - **Bold** every cited word-form, ancestral form, cognate, affix and root with a **single tilde on
   each side** (`~stāre~`), and nothing else. Never `~~`. The count of `~` is even, and **`en` and
   `fr` have the same count** (they bold the same forms).

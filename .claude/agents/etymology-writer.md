@@ -53,9 +53,35 @@ The shard file is JSON:
 
 ## Evidence first
 
-The shard's evidence is your primary source. Go to the web **only** when a verb's `evidence` is
-`none`, or when its French and English texts disagree on the chain of descent. Record every URL
-you use in that verb's `sources`, and set `web` to `webfetch` or `chrome` (otherwise `none`).
+The shard's evidence is your primary source. Go to the web when a verb's `evidence` is `none`,
+when its French and English texts disagree on the chain of descent, or (optionally, rich tier
+only) to source a reconstruction you want to include (see *Sourcing*). Record every URL you use
+in that verb's `sources`, and set `web` to `webfetch` or `chrome` (otherwise `none`).
+
+## Sourcing: what may rest on general knowledge
+
+"The evidence" below means the shard's texts, the base's entry, `base_word_evidence`, the affix
+cards, a `lookup`, and any URL you list in `sources`. A skeptic checks every rich entry by these
+rules.
+
+1. **The verb's own descent must come from the evidence.** That means each step and form of its
+   chain (Latin, Frankish, Old French, an English or Italian loan), its formation, and every
+   date or first attestation.
+2. **Standard background may rest on general knowledge.** This covers the analysis of the Latin
+   or Greek source word into well-known parts (~ex-~ + ~cēdere~) and their glosses. It also
+   covers French words that share the root (~excès~, ~céder~) and well-known cognates or
+   descendants in Italian, Spanish, Portuguese, English or German. Include such a claim only if
+   it is textbook etymology you are sure of and it fits the evidence. Name it in `notes` as
+   general knowledge. If you are not sure, leave it out.
+3. **These need the evidence or a cited URL, never memory alone:** a Proto-Indo-European or other
+   reconstructed form (*~steh₂-~), a date, an attribution to an author, text or dictionary, a
+   story of how the sense developed, and anything contested. For a rich entry you may fetch the
+   en.Wiktionary page for the reconstruction (or the source word) and cite it. Otherwise, omit
+   the claim.
+4. **Never invent color**: no literal images, scenes or sense stories that no source gives.
+
+A short, accurate entry beats a long one padded with claims you cannot stand behind. If the
+supported material does not fill two paragraphs, write one (see *Tiers*).
 
 ## Research (when you do go to the web)
 
@@ -128,7 +154,8 @@ the base and the affix (`~traduire~`, `~re-~`). Give the base's origin briefly, 
 `base_etymology_*` or `base_word_evidence`. Give the affix's sense from its card. Add, if the
 evidence has one, a date of first attestation or a notable sense shift.
 
-**`rich`: two paragraphs, ~120–220 words each:**
+**`rich`: two paragraphs, the first about 60–110 words and the second about 80–140** (the house
+style of the shipped entries; never pad to reach them):
 
 1. **Descent.** The chain from the modern French verb back through Old/Middle French to Latin
    (or Frankish/Germanic, Greek, etc.) and, where well established, the Proto-Indo-European

@@ -661,7 +661,7 @@ def cmd_merge(args):
                 if sk["verdict"] == "partly":
                     vd = next(x for x in load_json(d / "verdicts" / f"{name}.json")["results"] if x.get("verb") == v)
                     fixed = {"en": mechanical_fix(vd["en"]), "fr": mechanical_fix(vd["fr"])}
-                    if sk["rejects"] and not args.demote_stubs:
+                    if sk["rejects"] and args.defer_stubs:
                         outcomes[v] = ("deferred", "the skeptic cut the entry below the rich floor, mostly by deleting "
                                        "uncited claims beyond the shard; rerun once those claims can be sourced")
                         continue
@@ -910,8 +910,10 @@ def main():
     p = sub.add_parser("merge")
     p.add_argument("--wave", type=int, required=True)
     p.add_argument("--dry-run", action="store_true")
-    p.add_argument("--demote-stubs", action="store_true",
-                   help="ship a skeptic text too short for two paragraphs as one short paragraph instead of deferring it")
+    # Since wave 1 the skeptic keeps uncited standard background, so a text it cuts below the rich
+    # floor is genuinely thin, and it ships as one short paragraph unless --defer-stubs is passed.
+    p.add_argument("--defer-stubs", action="store_true",
+                   help="defer a skeptic text too short for two paragraphs instead of shipping it as one short paragraph")
     p = sub.add_parser("report")
     p.add_argument("--wave", type=int, required=True)
     p.add_argument("--transcripts", nargs="*", help="workflow transcript directories")

@@ -21,6 +21,7 @@ wave is one session. Every subagent runs on **Sonnet 5.5**.
 | Research | **Offline evidence first, web for gaps.** Each shard carries the evidence. A writer goes to the web only for a verb with no evidence, or where the sources conflict. If a site blocks WebFetch, the writer uses claude-in-chrome. |
 | Skeptic | **Rich tier only.** Every entry gets the code validator. Sonnet skeptics check the two-paragraph entries. A one-paragraph entry gets a code check that the base and affix it names match the evidence. |
 | Wave size | **Pilot, then size.** Wave 0 is about 100 verbs and measures the cost. Josh sets the size of later waves from that. |
+| Sourcing (after wave 1) | Josh left it to Claude, who chose a split. The verb's own chain, dates and attestations come from the evidence. Textbook background (the Latin source's parts, French words sharing the root, well-known cognates) may stand uncited if the skeptic judges it correct. Reconstructions, dates, attributions, sense-development stories and contested claims need the evidence or a cited URL. Invented color is always cut. Both agent briefs carry the rules (*Sourcing* in `etymology-writer.md`). |
 | Order | Most used first (`docs/frequencies.txt`, which matches the app's ranks), except that a base is always written before its derivatives (see stage 2). |
 
 ## What the data looks like (measured 2026-10-03)
@@ -448,6 +449,21 @@ own, with web lookups for every verb.
 > - **Passé composé.** Eleven French sentences narrated a single past borrowing in the passé composé
 >   ("l'anglais a pris", "est venu par") and were set in the passé simple by hand after the merge. The
 >   other 77 hits were resultative perfects or false positives.
+> - **Sourcing policy, decided after the wave** (Josh asked Claude to choose). The pilot's options were
+>   (a) cite or omit, (b) plausibility and (c) more offline evidence. The choice is (b) with a fence.
+>   Uncited *standard background* stands if the skeptic judges it correct: the Latin source's parts,
+>   the French family, well-known cognates. *Reconstructions, dates, attributions, sense stories and
+>   contested claims* still need the evidence or a cited URL, and the writer may fetch the en.Wiktionary
+>   reconstruction page for one. The reasons: across both waves every skeptic catch that mattered was a
+>   wrong fact (*préface* under *prédire*, *exaspérer* under *acerbus*, *grin* from Frankish, a miscopied
+>   PIE root), and the skeptic catches those by judging, not by asking for a citation. Meanwhile "no
+>   source cited" cost 35 deferrals and 4 refutations of standard, correct material. Option (a) would add
+>   a web lookup to every rich verb, and (c) needs builder work for a gain that (b) mostly gives for
+>   free. The fence keeps memory away from the claims where it has actually slipped: reconstructions
+>   and stories. Also changed: the skeptic never refutes for thinness and returns one paragraph when its
+>   cuts leave too little; `merge` ships such a text as short by default (`--defer-stubs` restores
+>   deferral); the deferred and refuted verbs' `history` notes now describe the new rules; and both
+>   briefs give the house rich length (about 60–110 and 80–140 words) in place of 120–220.
 > - **Next size.** The next 1,200 verbs are 41% heuristic-rich, against 54% this time. By this wave's
 >   per-tier costs, 900 verbs would cost about 34 points, 1,000 about 38 and 1,200 about 46. The proposal
 >   is 1,200, which stays under the 60% cap. At that size the 4,376 left take four waves.
@@ -469,7 +485,7 @@ own, with web lookups for every verb.
 |---|---|---|---|---|---|---|---|
 | 0 (pilot) | 2026-10-03 | 100 | 91 | 0 / 0 / 9 (skeptic stubs) | 12 → 17 (≤ 5) | 2.50M (writers 1.92M, skeptics 0.58M) | 5,234 |
 | 1 | 2026-10-03 | 900 (Josh, 2026-10-03) | 858 | 0 / 4 / 35 (skeptic stubs 34, *dicter* tildes 1); 3 rejected (writer paragraph under 50 words) | 20 → 56 (36) | 22.7M (writers 17.7M, skeptics 5.1M) | 4,376 |
-| 2 | | 900 (carried over; proposal 1,200, see stage 4) | | | | | |
+| 2 | | 1,200 (Josh, 2026-10-03) | | | | | |
 
 ## Out of scope
 
