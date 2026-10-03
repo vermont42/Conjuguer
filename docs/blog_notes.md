@@ -4266,3 +4266,39 @@ and its verdicts apply themselves, so there is nothing to referee. He asked for 
 shipped *ester* entry now carries the corrected text, and the widget's snippet truncation keeps a
 closing quote that follows the cut period and never cuts inside a quotation, which repairs the 65
 existing snippets that ended inside an open “ or «.
+
+## Etymology wave 1: 858 verbs in fifteen workflows (2026-10-03)
+
+The first full wave of `prompts/etymology-tail-plan.md` asked for 900 verbs, and the selection came
+back richer than the pilot had predicted. The pilot's cost model assumed a third of the remaining
+verbs would need two paragraphs; the 900 most used of them were 54% rich by the heuristic, because
+the head of the list is where the Latin and Frankish verbs live. The estimate went from 31 points of
+Josh's five-hour window to about 40 before anything launched.
+
+The session keeps a workflow under ten agents, so the wave ran as fourteen workflows of four shards
+each, writer and then skeptic, back to back. Each took four to five minutes. That speed was the
+surprise: the whole wave of 114 Sonnet agents finished in about 75 minutes, and it cost 22.7M tokens
+and 36 points, under the revised estimate. Writers demoted 132 heuristic-rich verbs to one paragraph
+when the evidence held nothing beyond a bare Latin source, so 356 entries shipped in two paragraphs and
+544 in one.
+
+The pilot's nine deferred verbs led the wave, and all nine merged this time. They carried a `history`
+note saying a skeptic had cut them for uncited claims, and the writer of their shard read it as advice:
+it wrote four of them as one plain paragraph that no skeptic would need to cut. The skeptics' habit
+did not change, though. Again some cut every claim beyond the shard, and 34 rich entries ended up below
+the 50-word paragraph floor, so they are deferred to lead wave 2. Two skeptics also refuted verbs outright
+(*ménager*, *ressusciter*, *celer*, *jeûner*) on the ground that the shard's one line left nothing to
+build on once the uncited family and cognates were gone. None of the four was refuted for a wrong fact.
+
+Three writers gave up on verbs that are plain derivations, *réorganiser*, *épauler* and *empiler*, because
+neither Wiktionary had an étymologie for them. The plan reserves such lookups for the orchestrator, so I
+fetched each verb's TLFi entry through `fetch_cnrtl.py`, one request each, and reran the three in two
+tiny shards. That turned up a small bug: `merge` would have let the original shard's "skipped" record
+shadow the rerun, so a rerun shard now wins. *Épauler* was a good reminder of why the evidence matters:
+its *é-* looks like a prefix and isn't, since the verb is *épaule* + *-er*.
+
+After the merge I read the 88 French sentences the passé composé check flagged. Most were resultative
+perfects ("le français a gardé") or false hits, but eleven narrated a single past borrowing ("l'anglais a
+pris", "est venu par le français") where the brief asks for the passé simple, and I fixed them by hand.
+`Etymologies.json` now covers 1,950 of 6,326 verbs at 4.0 MB, all 282 tests pass, and 4,376 verbs remain.
+The next 1,200 are 41% rich, so a 1,200-verb wave should cost about 46 points.

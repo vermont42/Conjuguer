@@ -1,7 +1,7 @@
 # Etymologies for the other 5,325 verbs: working plan (2026-10-03)
 
-**Status:** stages 0–2 ✅ and the wave 0 pilot run on 2026-10-03 (see the notes under each stage and the
-ledger). Mark each stage ✅ with a dated correction note wherever the plan
+**Status:** stages 0–2 ✅, the wave 0 pilot and wave 1 run on 2026-10-03 (see the notes under each stage
+and the ledger). Mark each stage ✅ with a dated correction note wherever the plan
 proves wrong, as the Chanson and verb-pass plans did. Do not commit; Josh commits.
 
 `Etymologies.json` covers 1,001 of the 6,326 infinitives: the 981 most used, the select verbs, and a
@@ -427,6 +427,31 @@ Each later session runs one wave (stage 2, *One wave*) at the ledger's size, the
 whether to run the next one. Near the end, the remaining `none` verbs may form a small wave of their
 own, with web lookups for every verb.
 
+> **Wave 1 run 2026-10-03. Correction notes.** The report is `corpus/working/etymology/waves/w01/report.md`
+> (ignored).
+> - **Run as 15 workflows of at most 9 agents** (14 of four or five shards, then one rerun shard), back to
+>   back. Each took 4 to 5 minutes, so the 114 agents took about 75 minutes of wall clock.
+> - **Richer than the cost model.** `select` gave 54% heuristic-rich, not the 34% the pilot's model
+>   assumed. Writers demoted 132 of the 488 (and the 4 `none` verbs) to short, so 356 shipped rich. Cost
+>   was 22.7M tokens and 36 points, about 0.63M tokens a point (the pilot measured 0.5M).
+> - **The pilot's nine deferred verbs all merged.** Their `history` note told the writers why they had
+>   been cut, and the writers demoted four of them (*excéder*, *conforter*, *spécifier* and *réguler*) to
+>   short rather than write claims a skeptic would strip. The other five shipped rich. Expect the same for this wave's 35.
+> - **Writers skipped three plain derivations** (*réorganiser*, *épauler*, *empiler*) as "no reliable
+>   source". The orchestrator fetched each verb's TLFi entry with `fetch_cnrtl.py`, recorded it in
+>   `lookups.json`, and reran the verbs as shards s57 and s58. All three merged. `merge` now skips a
+>   verb's record in a shard when a later shard reran it; before that fix, the earlier shard's `skipped`
+>   record would have shadowed the rerun.
+> - **Three upheld entries fell just under the rich floor** (*ponctuer*, *coïncider* and *osciller*, first
+>   paragraphs of 44–47 words) and were rejected. `select` will pick them up again. Lowering `RICH_MIN` to
+>   40 would have shipped them; that is Josh's call.
+> - **Passé composé.** Eleven French sentences narrated a single past borrowing in the passé composé
+>   ("l'anglais a pris", "est venu par") and were set in the passé simple by hand after the merge. The
+>   other 77 hits were resultative perfects or false positives.
+> - **Next size.** The next 1,200 verbs are 41% heuristic-rich, against 54% this time. By this wave's
+>   per-tier costs, 900 verbs would cost about 34 points, 1,000 about 38 and 1,200 about 46. The proposal
+>   is 1,200, which stays under the 60% cap. At that size the 4,376 left take four waves.
+
 ## 5. Finishing (when the ledger reaches zero, or Josh calls it)
 
 - `prompts/etymology-pipeline.md`: its *Status* and *Goal* should say that all verbs are covered and
@@ -443,7 +468,8 @@ own, with web lookups for every verb.
 | Wave | Date | Size | Merged | Skipped / refuted / deferred | Usage Δ (5-h %) | Tokens | Remaining |
 |---|---|---|---|---|---|---|---|
 | 0 (pilot) | 2026-10-03 | 100 | 91 | 0 / 0 / 9 (skeptic stubs) | 12 → 17 (≤ 5) | 2.50M (writers 1.92M, skeptics 0.58M) | 5,234 |
-| 1 | | 900 (Josh, 2026-10-03) | | | | | |
+| 1 | 2026-10-03 | 900 (Josh, 2026-10-03) | 858 | 0 / 4 / 35 (skeptic stubs 34, *dicter* tildes 1); 3 rejected (writer paragraph under 50 words) | 20 → 56 (36) | 22.7M (writers 17.7M, skeptics 5.1M) | 4,376 |
+| 2 | | 900 (carried over; proposal 1,200, see stage 4) | | | | | |
 
 ## Out of scope
 

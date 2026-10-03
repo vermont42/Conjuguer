@@ -637,6 +637,9 @@ def cmd_merge(args):
             info = val["entries"].get(v)
             if not info:
                 continue
+            # A verb rerun in a later shard (reshard --start) is judged by that shard alone.
+            if info["shard"] != name:
+                continue
             if info["state"] == "skipped":
                 outcomes[v] = ("skipped", e.get("skipped"))
                 continue
