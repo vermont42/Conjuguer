@@ -4189,3 +4189,30 @@ verbs get their first *Chanson* example. (The last of those examples comes from 
 `reclamer` for `réclamer` at 2014, which Josh asked for along with the release-notes paragraph.) In the simulator *embroncher*'s sword button now cycles
 through four verses, 2019, 3505, 3645 and 3816. The credits name both translators: Opus 4.8 for
 verses 1–2034, Sonnet 5.5 for 2035–4002. Nothing is committed.
+
+## Planning etymologies for the other 5,325 verbs (2026-10-03)
+
+`Etymologies.json` covers 1,001 of the 6,326 infinitives, so 5,325 verbs have no etymology card.
+The plan to fill them is `prompts/etymology-tail-plan.md`. Before writing it, I measured what the
+local Wiktionary dumps already hold, and the numbers changed the plan's shape. French Wiktionary
+has an étymologie for 5,050 of the missing verbs and English Wiktionary has one for 3,742. Only 132
+have neither. But the texts are short: the median French one is 40 characters, and about 2,270 are
+transparent derivations like *retraduire*, "De traduire avec le préfixe re-". The original
+pipeline's two paragraphs of 120–220 words in each language would mostly be padding for those, and
+padding is where invention creeps in.
+
+So Josh chose tiers. Derivations and thin-evidence verbs get one paragraph; verbs with a real
+history keep two. He also asked for reuse. The writer of *retraduire* receives *traduire*'s
+existing entry and a card for *re-*, and rewrites the chain in its own words. That led to a
+build-time affix library, written and skeptic-checked once before any verb, since a card for *dé-*
+(389 verbs) or *re-* (252) gets reused hundreds of times. Reuse also forces an order: 412 bases are
+themselves among the missing verbs, so a wave pulls a missing base forward and holds its
+derivatives back a wave.
+
+The other decisions: offline evidence first, carried in each shard, with web lookups only for
+gaps, and claude-in-chrome when a site blocks WebFetch; Sonnet 5.5 for every subagent, from agent
+definitions with `omitClaudeMd: true`, so each brief has to carry the em-dash rule itself; skeptics
+for the two-paragraph tier only; and a 100-verb pilot to measure the cost before Josh sets the wave
+size. Each wave is one session, and Josh decides after each one, based on his five-hour usage,
+whether to run another. One risk is flagged for the pilot to measure: the file should grow from
+2.5 MB to roughly 8–10 MB, and the app decodes both languages of it on first use.
