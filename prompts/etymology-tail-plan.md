@@ -65,9 +65,9 @@ a correction note wherever the plan proved wrong. Do not commit; Josh commits.
 
 ```
 Read @prompts/etymology-tail-plan.md and run the next wave of stage 4 at the size recorded in the
-wave ledger, with workflows; use the Workflow tool. Before starting, ask me for my five-hour usage
-percentage; ask again at the end. Stop after the wave and report. Update the ledger, journal the
-wave, and do not commit; Josh commits.
+wave ledger, with workflows; use the Workflow tool. Ask me for my five-hour usage percentage right
+before the first workflow launches, and again right after the last one finishes. Stop after the
+wave and report. Update the ledger, journal the wave, and do not commit; Josh commits.
 ```
 
 ---
@@ -443,7 +443,7 @@ own, with web lookups for every verb.
 | Wave | Date | Size | Merged | Skipped / refuted / deferred | Usage Δ (5-h %) | Tokens | Remaining |
 |---|---|---|---|---|---|---|---|
 | 0 (pilot) | 2026-10-03 | 100 | 91 | 0 / 0 / 9 (skeptic stubs) | 12 → 17 (≤ 5) | 2.50M (writers 1.92M, skeptics 0.58M) | 5,234 |
-| 1 | | 900 proposed, awaiting Josh | | | | | |
+| 1 | | 900 (Josh, 2026-10-03) | | | | | |
 
 ## Out of scope
 
