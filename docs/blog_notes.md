@@ -4378,3 +4378,52 @@ learned doublets, the cognates, the verb's modern senses. The sourcing rules all
 The brief now says so outright, keeps a verb of Latin, Greek or Frankish descent in two paragraphs even
 on one line of evidence, and asks for a specific reason to demote. The skeptic brief calls that shape
 the house style. Wave 3 should cost about 50 points instead of 45 as a result.
+
+## Etymology wave 3: two paragraphs again, and a window that reset (2026-10-03)
+
+Wave 3 of `prompts/etymology-tail-plan.md` took the next 1,600 verbs, from *déménager* at rank 1051 down
+to about rank 4,700, plus a few bases pulled forward, and merged 1,599 of them. `Etymologies.json` now covers 4,749 of 6,326 verbs at 7.3
+MB, the 282 tests pass, and 1,577 verbs remain. The one verb left out is *chouiner* ("to whine"). Neither
+Wiktionary nor the TLFi has an etymology for it, and the rule is that no entry beats an invented one.
+
+The wave was a test of the brief change Josh asked for after wave 2, when only 22% of entries shipped in
+two paragraphs. The old brief told writers to demote a verb "when there is nothing more to say", and a
+writer holding a one-line étymologie took that literally. The new one keeps a verb of Latin, Greek or
+Frankish descent in two paragraphs and fills the second with the root's French family, its doublets
+and its cognates. It worked. Writers kept 84% of the heuristic-rich verbs rich, and 394 shipped in two
+paragraphs: 86% of the heuristic-rich count, against wave 2's 51%. As a share of all 1,599 it is only
+25%, because this stretch of the list is mostly transparent French derivations like *déménager* and
+*rétrécir*, which have one paragraph's worth of story. The skeptics still cut 42 entries to one
+paragraph, and again refuted nothing.
+
+The run itself was uneventful: seventy-nine shards in twenty workflows, two in flight at a time, and no
+529s this time. Josh's five-hour window stood at 44% at launch, which left little margin for a wave the
+model priced at 50 points. So I paused at the halfway mark to ask. The reading was 65%, twenty-one points
+for the first forty shards, and the wave continued. By the end the window had reset to zero, so the
+wave's full cost can only be estimated. The first forty shards used 47% of the workflows' tokens, which
+puts the whole wave at about 45 points. That is 0.86M tokens a point against wave 2's 0.62M, partly
+because writers read more per verb than before.
+
+Ninety-four entries failed the length check, against sixty in wave 2, and went back to their writers
+with their own drafts attached. Re-sharding them turned up a latent bug. `reshard` named its shards `r80`
+and up by default, and `merge` takes the later shard's record when a verb appears twice. Sorted by name,
+`r80` comes before `s01`, so the rejected first draft would have shadowed its revision. Wave 2 had
+dodged this by passing `--prefix s`. I caught it before launch and made `s` the default.
+
+Twenty-two verbs came back skipped or flagged. Most were plain derivations whose Wiktionary pages lack an
+étymologie (*pilonner*, *veiner*, *complimenter*), and two were spelling variants that only redirect
+(*ariser*, *recéler*). For each one I fetched the TLFi entry with `fetch_cnrtl.py`. For *contre-manifester*,
+which the TLFi lacks, I used the Académie's ninth edition. All but *chouiner* merged from the revision
+shards. The skeptic for one shard left *égailler* out of its verdict file, so I checked that entry against
+the TLFi myself, date by date, and upheld it.
+
+The sweep for pipeline talk found less than in wave 2, but not nothing. Twelve sentences ended with a
+parenthetical "(general knowledge)" or « (connaissance générale) », as if the writer were footnoting
+itself, and six said "the shard's sources". All are gone. Hedges like "the sources do not say how the
+sense developed" stay, since about three hundred shipped entries use them and a reader takes them at
+face value. Of 136 French sentences the passé composé check flagged, twenty narrated a single past event
+(« l'anglais a pris », « la réforme de 1990 a soudé ») and went into the passé simple.
+
+What is left is 1,246 verbs the heuristic calls short, 233 rich and 98 with no evidence at all. At this
+wave's rates that is about 44 points, so the proposal is to finish in one wave, launched early in a
+fresh window, with the 98 evidence-less verbs as the main uncertainty.

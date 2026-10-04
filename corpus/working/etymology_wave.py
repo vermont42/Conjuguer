@@ -949,7 +949,7 @@ def main():
     p = sub.add_parser("reshard")
     p.add_argument("--wave", type=int, required=True)
     p.add_argument("--verbs", required=True, help="comma-separated")
-    p.add_argument("--prefix", default="r")
+    p.add_argument("--prefix", default="s")
     p.add_argument("--start", type=int, default=1)
     p.add_argument("--revise", action="store_true",
                    help="attach each verb's failure from the wave's outcomes.json (run merge --dry-run first)")

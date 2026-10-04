@@ -1,6 +1,6 @@
 # Etymologies for the other 5,325 verbs: working plan (2026-10-03)
 
-**Status:** stages 0–2 ✅, the wave 0 pilot and waves 1 and 2 run on 2026-10-03 (see the notes under each
+**Status:** stages 0–2 ✅, the wave 0 pilot and waves 1, 2 and 3 run on 2026-10-03 (see the notes under each
 stage and the ledger). Mark each stage ✅ with a dated correction note wherever the plan
 proves wrong, as the Chanson and verb-pass plans did. Do not commit; Josh commits.
 
@@ -509,6 +509,31 @@ own, with web lookups for every verb.
 >   The skeptic brief says that shape is the house style. If writers keep about 85% of heuristic-rich
 >   verbs rich, wave 3 costs about 50 points rather than 45, still under the cap. The verbs demoted in
 >   waves 1 and 2 are not rewritten.
+>
+> **Wave 3 run 2026-10-03. Correction notes.** The report is `corpus/working/etymology/waves/w03/report.md`
+> (ignored); its *Wave 3 extras* and *Proposed next wave* sections are hand-written, so do not rerun
+> `report --wave 3`.
+> - **The brief change worked.** Writers kept 84% of heuristic-rich verbs rich, and 394 of the 1,599 merged shipped in two
+>   paragraphs: 86% of the heuristic-rich count, against wave 2's 51%. Skeptics cut 42 to one paragraph and
+>   refuted nothing.
+> - **The window reset mid-wave.** Usage read 44% at launch and 65% after s01–s40, and the window had reset by
+>   the end. The wave's cost is estimated by scaling the halfway reading by the workflows' token counts: about 45
+>   points, or 0.86M transcript tokens a point (wave 2: 0.62M). Writers used more tokens a verb than in wave 2,
+>   about 18k a short verb against 14k. For a clean reading, launch a wave early in a fresh window.
+> - **`reshard` sorted reruns first.** Its default prefix was `r`, and `r80` sorts before `s01`, so `merge` would
+>   have let the first, rejected draft shadow its revision. Wave 2 had passed `--prefix s`. The default is now `s`.
+> - **94 length rejects** (wave 2: 60) and 21 skipped or redirect-only verbs with TLFi lookups reran as revision
+>   shards s80–s88, and all merged. *chouiner* has no etymology anywhere and stays skipped. One workflow ran five
+>   shards (10 agents), one over the guideline.
+> - **Jargon still leaks.** 12 « (general knowledge) » asides and 6 “the shard's sources” phrases reached the merge
+>   despite the brief, and were removed by hand. The hedge “the sources do not say…” is house style (about 300
+>   shipped entries) and stays.
+> - **Passé composé.** 20 of 136 flagged French sentences narrated a single past event and were set in the passé
+>   simple.
+> - **Next size.** 1,577 verbs remain: 1,246 heuristic-short, 233 rich and 98 with no evidence. By this wave's
+>   per-verb costs that is about 44 points, under the 60% cap, so the proposal is one final wave of all 1,577.
+>   The `none` verbs gather at the tail and need the web, which is the main risk to the estimate.
+>   Josh chose 1,577.
 
 ## 5. Finishing (when the ledger reaches zero, or Josh calls it)
 
@@ -528,7 +553,8 @@ own, with web lookups for every verb.
 | 0 (pilot) | 2026-10-03 | 100 | 91 | 0 / 0 / 9 (skeptic stubs) | 12 → 17 (≤ 5) | 2.50M (writers 1.92M, skeptics 0.58M) | 5,234 |
 | 1 | 2026-10-03 | 900 (Josh, 2026-10-03) | 858 | 0 / 4 / 35 (skeptic stubs 34, *dicter* tildes 1); 3 rejected (writer paragraph under 50 words) | 20 → 56 (36) | 22.7M (writers 17.7M, skeptics 5.1M) | 4,376 |
 | 2 | 2026-10-03 | 1,200 (Josh, 2026-10-03) | 1,200 | 0 / 0 / 0 (60 length rejects, 5 writer skips and 1 dropped verb all rerun and merged within the wave) | 3 → 42 (39) | 24.3M (writers 19.3M, skeptics 4.9M) | 3,176 |
-| 3 | | 1,600 (Josh, 2026-10-03) | | | | | |
+| 3 | 2026-10-03 | 1,600 (Josh, 2026-10-03) | 1,599 | 1 (*chouiner*, no source) / 0 / 0 (94 length rejects and 21 lookups all rerun and merged within the wave) | 44 → 65 at s40; window reset before the end, ≈ 45 estimated | 38.7M (writers 32.0M, skeptics 6.7M) | 1,577 |
+| 4 | | 1,577, the rest (Josh, 2026-10-03) | | | | | |
 
 ## Out of scope
 
