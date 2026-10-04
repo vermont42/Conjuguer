@@ -1,7 +1,7 @@
 # Etymologies for the other 5,325 verbs: working plan (2026-10-03)
 
-**Status:** stages 0–2 ✅, the wave 0 pilot and waves 1, 2 and 3 run on 2026-10-03 (see the notes under each
-stage and the ledger). Mark each stage ✅ with a dated correction note wherever the plan
+**Status:** stages 0–2 ✅, the wave 0 pilot and waves 1–4 run on 2026-10-03 (see the notes under each
+stage and the ledger). Stage 4 is done: all 6,326 verbs have an etymology. Stage 5 (finishing) is next. Mark each stage ✅ with a dated correction note wherever the plan
 proves wrong, as the Chanson and verb-pass plans did. Do not commit; Josh commits.
 
 `Etymologies.json` covers 1,001 of the 6,326 infinitives: the 981 most used, the select verbs, and a
@@ -534,6 +534,35 @@ own, with web lookups for every verb.
 >   per-verb costs that is about 44 points, under the 60% cap, so the proposal is one final wave of all 1,577.
 >   The `none` verbs gather at the tail and need the web, which is the main risk to the estimate.
 >   Josh chose 1,577.
+>
+> **Wave 4 run 2026-10-03, the last. Correction notes.** The report is `corpus/working/etymology/waves/w04/report.md`
+> (ignored); its *Wave 4 extras* section is hand-written, so do not rerun `report --wave 4`.
+> - **Result.** 1,571 merged: the 1,553 selected less 5 skipped, plus the 23 derivatives `select` had pushed to a
+>   wave 5. 46 points (1% → 47%) and 36.2M tokens, about 0.79M a point, against the estimate of 44.
+> - **The pushed derivatives ran inside the wave.** After the first pass, `merge` ran once so that the pushed verbs'
+>   bases were covered, and the derivatives went into the rerun shards with their bases' entries attached. `merge`
+>   overwrites by verb, so running it after each round is safe; hand fixes wait for the last run. A `select` for a
+>   final wave cannot do this itself, since it pushes a derivative before its base has merged.
+> - **Writers skipped `none` verbs without trying the web.** 87 verbs came back skipped or `needs_lookup`, against
+>   wave 3's 22; many writers said "evidence none, web not tried" although the brief tells them to search. The
+>   orchestrator fetched all of them with `fetch_cnrtl.py` (adding the noun's étymologie when the TLFi files a verb
+>   « Mot issu de l'entrée » a noun) or checked fr.Wiktionary directly, and 82 merged. *cafeter*, *chougner*,
+>   *dégober*, *déhotter* and *blistériser* had no etymology in those sources, nor did wave 3's *chouiner*.
+> - **The last six, after the wave (Josh: every verb gets one).** Sources WebFetch could reach did it, without Chrome
+>   (which was not connected; Le Robert, Littré and Bob refuse WebFetch). The Académie's 10th edition (new entry,
+>   June 2026) derives *chouiner* from *ouin ouin* and lists *chougner* as its variant. The *Dictionnaire des
+>   régionalismes de France* derives *déhotter* from Old French *hot* (“obstacle”), Cotgrave 1611. Wiktionary's
+>   1849 and 1852 citations make *dégober* the Norman oyster-farmers' word for *dégorger* (its formation is stated as
+>   only apparent). *cafeter* is a variant of *cafter* and an Ardennes word for drinking coffee; *blistériser* is
+>   *blister* + *-iser*. They ran as shard s86 (all short, so no skeptic; the orchestrator cut one invented claim
+>   from *chouiner*) and were merged on their own, since a full `merge` would have undone the hand fixes.
+> - **103 rejects** (98 length, one tilde mismatch, one tier label in the wrong field) revised and merged; five needed
+>   a second revision.
+> - **Hand fixes.** Jargon in 7 entries, 8 sentences naming the app or a « glossaire », and 21 French sentences moved to
+>   the passé simple. Seven entries from earlier waves still name the app's gloss (*arrimer*, *zapper*, …); they are
+>   listed in the report for stage 5.
+> - **`enjuiver`** is in the app's verb list, and its entry calls it an antisemitic coinage. Josh keeps it (2026-10-03):
+>   it is not an obscenity, and the entry marks it as antisemitic.
 
 ## 5. Finishing (when the ledger reaches zero, or Josh calls it)
 
@@ -554,7 +583,7 @@ own, with web lookups for every verb.
 | 1 | 2026-10-03 | 900 (Josh, 2026-10-03) | 858 | 0 / 4 / 35 (skeptic stubs 34, *dicter* tildes 1); 3 rejected (writer paragraph under 50 words) | 20 → 56 (36) | 22.7M (writers 17.7M, skeptics 5.1M) | 4,376 |
 | 2 | 2026-10-03 | 1,200 (Josh, 2026-10-03) | 1,200 | 0 / 0 / 0 (60 length rejects, 5 writer skips and 1 dropped verb all rerun and merged within the wave) | 3 → 42 (39) | 24.3M (writers 19.3M, skeptics 4.9M) | 3,176 |
 | 3 | 2026-10-03 | 1,600 (Josh, 2026-10-03) | 1,599 | 1 (*chouiner*, no source) / 0 / 0 (94 length rejects and 21 lookups all rerun and merged within the wave) | 44 → 65 at s40; window reset before the end, ≈ 45 estimated | 38.7M (writers 32.0M, skeptics 6.7M) | 1,577 |
-| 4 | | 1,577, the rest (Josh, 2026-10-03) | | | | | |
+| 4 | 2026-10-03 | 1,577, the rest (Josh, 2026-10-03) | 1,577 | 0 / 0 / 0 (103 rejects, 87 lookups and the 23 pushed derivatives rerun within the wave; *chouiner*, *chougner*, *cafeter*, *dégober*, *déhotter*, *blistériser* from lookups found after it) | 1 → 47 (46) | 36.2M (writers 30.1M, skeptics 6.1M) | 0 |
 
 ## Out of scope
 

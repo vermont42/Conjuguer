@@ -4427,3 +4427,60 @@ face value. Of 136 French sentences the passé composé check flagged, twenty na
 What is left is 1,246 verbs the heuristic calls short, 233 rich and 98 with no evidence at all. At this
 wave's rates that is about 44 points, so the proposal is to finish in one wave, launched early in a
 fresh window, with the 98 evidence-less verbs as the main uncertainty.
+
+## Etymology wave 4: the last 1,571 verbs (2026-10-03)
+
+The fourth wave was meant to be the last, and it was. Josh opened it in a fresh window at 1% and chose
+to run all 1,577 remaining verbs at once. `select` took 1,553 of them. The other 23 were derivatives
+whose bases were in the same wave (*décrépir* waits for *crépir*, *rengainer* for *engainer*), and the
+base-first rule pushes such a verb to the next wave. With no next wave planned, that rule needed a
+workaround. After the first pass I ran `merge` once, which put the bases into `Etymologies.json`, and
+then resharded the derivatives into the rerun shards with their bases' entries attached. Three
+derivatives (*débucher*, *désenverguer*, *renvider*) had bases that were themselves being revised, so
+they waited for a final one-shard round. `merge` overwrites by verb, so running it several times is
+harmless, as long as the hand fixes come after the last run.
+
+The main pass was seventy shards in eighteen workflows, two in flight at a time, then fifteen rerun
+shards in five more: 161 Sonnet agents with no failures, in about forty-five minutes. The usage reading
+at the end was 47%, so the wave cost 46 points against an estimate of 44, about 0.79M transcript tokens
+a point.
+
+The surprise was the skips. Wave 3 had 22. This wave had 87, because writers in perhaps half the shards
+met a verb with no evidence and skipped it without searching, writing "evidence none, web not tried"
+in their own summaries. The brief tells them to go to the web for exactly these verbs. Rather than
+rerun shards and hope, I fetched each verb from CNRTL with `fetch_cnrtl.py` and built the lookups from
+the cached answers. One pattern needed handling. The TLFi often has no article of its own for a rare
+verb and files it under its noun (« Mot issu de l'entrée LAITON »), so the lookup builder follows that
+pointer and adds the noun's étymologie: *laitonner* gets brass's Arabic and Turkish history that way. Fifteen verbs
+needed a direct check instead. Most were spelling variants whose real entry is elsewhere in the
+app (*kifer* for *kiffer*, *snifer* for *sniffer*, *poutser* for the Swiss *poutzer*), and a few were
+transparent *entre-* compounds whose Wiktionary pages say only « Étymologie manquante ». 82 merged.
+Five verbs had no etymology in any of those sources: *cafeter*, *chougner*, *dégober*, *déhotter* and
+*blistériser*. With wave 3's *chouiner*, that left six verbs of 6,326 without one, and Josh wanted
+all of them done. The plan was to use the browser, since Le Robert and the slang dictionary Bob refuse
+WebFetch, but the Chrome extension was not connected, and a web search found what was needed anyway.
+The Académie's tenth edition added *chouiner* in June 2026, derived from *ouin ouin*, the noise of a
+child crying, and lists *chougner* as its variant. The *Dictionnaire des régionalismes de France* has a
+full article on *déhotter*: Old French *hot*, “obstacle”, so the verb is getting your cart out of the
+mud, attested in Cotgrave in 1611 and still alive in Champagne and the Ardennes before Paris slang made
+it “clear off”. *dégober* has no stated etymology anywhere, but Wiktionary's citations from 1849 and
+1852 call it the Norman oyster-farmers' word for *dégorger*, and its entry says the *dé-* + *gober*
+formation is only apparent. *cafeter* turned out to be two verbs (a spelling of *cafter*, and an Ardennes
+word for drinking coffee), and *blistériser* is *blister* + *-iser*. One writer handled all six; I cut one
+invented aside from *chouiner* and merged them on their own.
+
+The length check rejected 103 drafts, and all of them merged after revision, five on a second try. The
+other checks found less than before. Seven entries leaked pipeline talk ("a detail that is general
+knowledge rather than part of the evidence", « la glose du corpus »), and eight sentences named the app
+or a « glossaire » ("the meaning given in the app's gloss"). Both kinds are fixed in this wave's
+entries. Seven entries from earlier waves still say "the app's gloss", and they are listed for the
+finishing pass. Twenty-one French sentences narrated a single borrowing in the passé composé and now
+use the passé simple.
+
+One entry deserves Josh's eye: *enjuiver*, which is in the app's verb list. The writer described it
+accurately as a pejorative, antisemitic coinage, in both languages. Josh decided it stays: it is not an
+obscenity, and the entry marks it as antisemitic.
+
+`Etymologies.json` is 8.4 MB with all 6,326 verbs, under the pilot's projection of 9.9 MB. Stage 4 is
+done. What remains is stage 5, the finishing pass: the pipeline docs, `project-structure.md` and a closing
+journal entry.
