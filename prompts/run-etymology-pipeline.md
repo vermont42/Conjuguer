@@ -1,5 +1,10 @@
 # Run the etymology pipeline (clean-session prompt)
 
+> **Superseded (2026-10-03).** Every verb now has an etymology. The 1,001 verbs this prompt
+> covered are done, and the other 5,325 were written by
+> [`etymology-tail-plan.md`](etymology-tail-plan.md), which has its own paste-to-run prompt and is
+> the place to start for a verb added to the app later. The prompt below is kept as history.
+
 Paste this into a fresh session to generate the next batch of French verb etymologies.
 It works verbatim every time — resume is automatic (progress is derived by diffing the
 work-list against the keys already in `Etymologies.json`; there is no stored "next verb").

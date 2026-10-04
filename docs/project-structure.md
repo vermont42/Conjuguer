@@ -264,7 +264,18 @@ scripts/
 └── verify_store_media.sh       # Validates exported screenshots/previews against App Store Connect's requirements
 
 prompts/                        # Archive of the session prompts that produced features and investigations
-                                # (historical records — their file paths reflect the tree as it was then)
+                                # (historical records — their file paths reflect the tree as it was then).
+                                # Two files are live data, not prompts: the etymology-affixes JSON file, the build-time affix library the
+                                # etymology writers read (never shipped), and etymology-tail-plan.md's wave ledger, the current record
+                                # of how every verb got its etymology
+
+.claude/agents/                 # Subagent definitions with their whole briefs, run by the corpus pipelines' workflows
+├── etymology-affix-writer.md   # Writes the affix library's cards (etymology tail, stage 1)
+├── etymology-affix-skeptic.md  # Checks those cards against the writer's source notes
+├── etymology-writer.md         # Writes a shard's English and French etymologies; the canonical etymology brief
+├── etymology-skeptic.md        # Checks a shard's two-paragraph etymologies against its evidence
+├── verb-checker.md             # Verb pass: checks a shard's glosses, examples and flags against Wiktionary
+└── verb-skeptic.md             # Verb pass: tries to refute the checker's proposed changes
 
 corpus/                         # Literature-example pipeline; NOT part of any target. See docs/literature-example-corpus.md
 ├── originals/                  # Source texts by tier (classical, literature, government, technology, wikipedia)

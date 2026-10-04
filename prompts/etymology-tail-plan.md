@@ -1,7 +1,7 @@
 # Etymologies for the other 5,325 verbs: working plan (2026-10-03)
 
 **Status:** stages 0–2 ✅, the wave 0 pilot and waves 1–4 run on 2026-10-03 (see the notes under each
-stage and the ledger). Stage 4 is done: all 6,326 verbs have an etymology. Stage 5 (finishing) is next. Mark each stage ✅ with a dated correction note wherever the plan
+stage and the ledger). Stages 4 and 5 are done: all 6,326 verbs have an etymology, and the plan is complete. Mark each stage ✅ with a dated correction note wherever the plan
 proves wrong, as the Chanson and verb-pass plans did. Do not commit; Josh commits.
 
 `Etymologies.json` covers 1,001 of the 6,326 infinitives: the 981 most used, the select verbs, and a
@@ -574,6 +574,19 @@ own, with web lookups for every verb.
 - List the verbs that are still skipped, for Josh.
 - Release notes, if Josh wants a line ("every verb now has an etymology"), in both languages.
 - A journal entry summing up the whole run.
+
+> **✅ Done 2026-10-03. Correction notes.**
+> - **Pipeline docs.** `etymology-pipeline.md` now opens by saying the work is complete, points here, and names
+>   `.claude/agents/etymology-writer.md` as the canonical brief (its own template keeps the old, wrong *ester*
+>   example as history). `run-etymology-pipeline.md` carries a superseded note.
+> - **`project-structure.md`** gains a `.claude/agents/` entry and a note on the affix library. It names the
+>   library as “the etymology-affixes JSON file”, because `check_docs.py` treats any `.json` filename outside the
+>   target folders as a phantom.
+> - **Skipped verbs:** none. The last six were written from the Académie, the DRF and Wiktionary (see wave 4).
+> - **App references.** Six entries from earlier waves named the app's gloss (*décoiffer*, *intoxiquer*,
+>   *palpiter*, *zapper*, *émailler*, *épancher*), and now state the sense directly. The wave 4 notes counted
+>   seven, but the seventh, *arrimer*, was a false match on “in the appropriate manner”.
+> - **Release notes.** Josh approved a paragraph for 2.3, in both languages, after the one on example sentences.
 
 ## Wave ledger
 

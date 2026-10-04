@@ -2,6 +2,20 @@
 
 ## Status
 
+**Complete (2026-10-03).** Every one of the app's 6,326 infinitives has an etymology in both
+languages. This pipeline wrote the first 1,001 (the 981 most used, the select verbs and a few
+more); [`etymology-tail-plan.md`](etymology-tail-plan.md) wrote the other 5,325 in waves, and its
+ledger and correction notes are the current record. To add an etymology for a verb added to the
+app later, follow that plan's *One wave* procedure on the new verbs.
+
+**Canonical prompt.** The writer's brief now lives in
+[`.claude/agents/etymology-writer.md`](../.claude/agents/etymology-writer.md), with the skeptic's in
+`etymology-skeptic.md` beside it. The *Subagent prompt template* below is the original it grew from
+and is kept as history; where the two differ, the agent definition is right. (Its *ester* worked
+example in particular was wrong, and was corrected only in the agent definition.)
+
+The rest of this section describes the pipeline as it ran before the tail plan.
+
 Seeded and live. `Conjuguer/Models/Etymologies.json` exists, `Etymology.swift` already
 reads it (etym-starter.md step 4 is done), and the first verbs are in. **There is no stored "next
 verb"** — resume by diffing the work-list against the keys already in `Etymologies.json`
@@ -10,7 +24,7 @@ one-liner. Just start at **Step 1** each session; Step 0 (seeding) is already co
 
 ## Goal
 
-Populate `Conjuguer/Models/Etymologies.json` with an etymology for every verb in the
+(Met. See *Status*.) Populate `Conjuguer/Models/Etymologies.json` with an etymology for every verb in the
 work-list (`etymology-verbs.json` — the 981 most-used verbs — plus the select verbs
 below), in **both English and French**. The app reads this file via `Etymology.swift`
 (see `etym-starter.md`, step 4).

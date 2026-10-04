@@ -4484,3 +4484,45 @@ obscenity, and the entry marks it as antisemitic.
 `Etymologies.json` is 8.4 MB with all 6,326 verbs, under the pilot's projection of 9.9 MB. Stage 4 is
 done. What remains is stage 5, the finishing pass: the pipeline docs, `project-structure.md` and a closing
 journal entry.
+
+## Every verb has an etymology: the tail project in sum (2026-10-03)
+
+At the start of today, 1,001 of Conjuguer's 6,326 verbs had an etymology card. Tonight all of them do.
+The other 5,325 were written in one day, in a pilot and four waves, each wave a session that stopped and
+reported so Josh could decide whether his five-hour usage window could take another.
+
+The shape of the work came from measuring before writing. Most of the missing verbs turned out to be
+transparent French formations (*retraduire*, *scolariser*), so the plan tiered the entries: one
+paragraph for a derivation, two for a verb with a real Latin, Greek or Germanic history. An evidence
+file built from both Wiktionaries gave every writer its verb's étymologie, its parsed formation and its
+base's existing entry, and an affix library of 57 cards, written once and checked by skeptics, gave the
+writers the meaning of *dé-*, *re-* or *-iser* without a lookup each time. Everything ran on Sonnet
+agents whose briefs live in `.claude/agents/`: a writer for every shard, and a skeptic for every entry
+long enough to need one.
+
+The ledger totals: 5,325 verbs, about 125M subagent tokens, and roughly 170 points of usage across the
+five sessions (the pilot's cost is a bound, and wave 3's is an estimate because the window reset
+mid-wave). Skeptics refuted four entries in the whole run, all in wave 1, and none after the sourcing
+policy changed. Most of what they did was trim: unsupported color, a date with no source, a cognate
+nobody had checked.
+
+Several lessons changed the plan along the way, and the correction notes record each one. The house
+length for a two-paragraph entry was never the "120 to 220 words a paragraph" the plan assumed; the
+shipped entries were shorter, and the validator had to learn that from the pilot. "No source cited"
+cost more good material than it saved, so the policy moved to letting standard background stand while
+still demanding sources for dates, reconstructions and stories. A writer told to demote a verb "when
+there is nothing more to say" demoted almost everything; telling it what a second paragraph could hold
+brought the two-paragraph share back. And writers leak their working vocabulary into prose ("general
+knowledge", "the shard's gloss", "the app's gloss") however clearly the brief forbids it, so every wave
+ended with a sweep for it, and this last pass cleaned up six older entries that named the app.
+
+The hardest verbs came last. Wiktionary has nothing for a few hundred rare verbs, and in the final wave
+the writers often skipped them without searching. The TLFi, fetched one verb at a time, covered most of
+those. The last six needed other books: the Académie's tenth edition for *chouiner*, added in June 2026,
+and Pierre Rézeau's dictionary of regionalisms for *déhotter*, a Champagne word for getting a cart
+out of the mud.
+
+`Etymologies.json` is now 8.5 MB, and the cold decode measured during the pilot suggests that size is
+fine. The longest entry the tail added is *illuminer*'s, at 260 words in English; *avoir*, from the
+original pipeline, is still the longest of all at 383. Version 2.3's release notes now say every verb has
+an etymology.
