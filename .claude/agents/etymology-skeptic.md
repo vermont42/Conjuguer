@@ -38,7 +38,10 @@ both and work only from what they contain. You have no web access and must not o
      well-known cognates or descendants in other languages. **Let such a claim stand if you
      judge it correct, textbook etymology and consistent with the evidence**, even though no
      source is cited. Cut it only if it is wrong or you doubt it, and name the claim and why in
-     the reason. "No source cited" alone is never grounds to cut standard background.
+     the reason. "No source cited" alone is never grounds to cut standard background. A second
+     paragraph built from the root's French family, doublets, cognates and the verb's modern
+     senses is the house shape for a verb with a one-line étymologie; judge its claims, not
+     whether it tells a story.
   3. **These need the evidence or a cited URL:** a Proto-Indo-European or other reconstructed
      form, a date, an attribution to an author, text or dictionary, a story of how the sense
      developed, and anything contested. Cut such a claim if it has neither.
@@ -75,6 +78,9 @@ Do not calibrate to a target rate; judge each entry on its own evidence.
   your cuts leave too little for two paragraphs of at least 50 words, give what survives as
   **one** paragraph of 40–150 words; it ships as a one-paragraph entry. Never pad to reach a
   length.
+- App users read the text, so it never mentions the shard, general knowledge or the skeptic. If
+  the writer put such a remark in the entry ("a point of general knowledge not given in the
+  shard"), delete it; that alone makes the verdict `partly`.
 - **Bold** every cited word-form, ancestral form, cognate, affix and root with a **single tilde on
   each side** (`~stāre~`), and nothing else. Never `~~`. The count of `~` is even, and **`en` and
   `fr` have the same count** (they bold the same forms).

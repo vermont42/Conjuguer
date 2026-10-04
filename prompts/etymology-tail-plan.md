@@ -1,7 +1,7 @@
 # Etymologies for the other 5,325 verbs: working plan (2026-10-03)
 
-**Status:** stages 0–2 ✅, the wave 0 pilot and wave 1 run on 2026-10-03 (see the notes under each stage
-and the ledger). Mark each stage ✅ with a dated correction note wherever the plan
+**Status:** stages 0–2 ✅, the wave 0 pilot and waves 1 and 2 run on 2026-10-03 (see the notes under each
+stage and the ledger). Mark each stage ✅ with a dated correction note wherever the plan
 proves wrong, as the Chanson and verb-pass plans did. Do not commit; Josh commits.
 
 `Etymologies.json` covers 1,001 of the 6,326 infinitives: the 981 most used, the select verbs, and a
@@ -467,6 +467,48 @@ own, with web lookups for every verb.
 > - **Next size.** The next 1,200 verbs are 41% heuristic-rich, against 54% this time. By this wave's
 >   per-tier costs, 900 verbs would cost about 34 points, 1,000 about 38 and 1,200 about 46. The proposal
 >   is 1,200, which stays under the 60% cap. At that size the 4,376 left take four waves.
+>
+> **Wave 2 run 2026-10-03. Correction notes.** The report is `corpus/working/etymology/waves/w02/report.md`
+> (ignored).
+> - **Two workflows at a time.** The 68 shards ran as 17 workflows of four shards, two in flight at once,
+>   so the whole wave, reruns included, took 40 minutes of wall clock against wave 1's 75.
+> - **529 Overloaded.** The API returned 529s to seven writers across two workflows, three or four
+>   minutes in. Six of them had already written complete results files, so their shards reran as
+>   skeptic-only workflows (`skipWrite`); only *s23*'s writer reran. Check the results file before
+>   rerunning a failed writer.
+> - **60 length rejects, against wave 1's 3.** Writers wrote rich first paragraphs of 38–49 words and short
+>   entries of 20–39. Rather than leave them to wave 3, they reran within the wave as revision shards
+>   s69–s73 with *reshard `--revise`*: it attaches each verb's failing draft as `previous_draft` and the
+>   reason as `history`, so the writer revises instead of starting over. All 60 passed. The same shards
+>   carried the five verbs writers had skipped (with TLFi lookups) and *déambuler*, which *s14*'s writer
+>   left out of its results.
+> - **Pipeline jargon in the prose.** The brief said to *name general-knowledge claims in `notes`*, and
+>   about 65 writers wrote it into the entry instead ("a point of general knowledge not given in the
+>   shard", « relève de la culture générale », « les sources du dossier »). Most skeptics left it. The
+>   orchestrator removed it from every merged text by hand. The same sweep found the same leak in wave 1's
+>   *gâter*, *mutualiser*, *brouiller* and *insulter*, now fixed. The validator flags it (`PIPELINE_JARGON`),
+>   and both briefs now say the entry text never mentions the shard, general knowledge or the skeptic.
+>   Three entries (*inhiber*, *exhumer*, *commuter*) fell under the rich floor once the remark was gone
+>   and ship as one paragraph.
+> - **Demotion is the norm now.** Writers moved 226 heuristic-rich verbs to short and skeptics 27 more,
+>   so 264 of 1,200 shipped rich (22%). No skeptic refuted anything.
+> - **Passé composé.** 19 of 114 flagged French sentences narrated a single past event and were set in
+>   the passé simple by hand; the rest are resultative perfects.
+> - **Next size.** The next 1,600 verbs are 30% heuristic-rich. By this wave's per-tier costs (writer
+>   14.2k tokens a short verb, 18.2k a rich one, skeptic 16.5k a rich entry; 0.62M tokens a point),
+>   1,200 would cost about 34 points, 1,500 about 43 and 1,600 about 45. The proposal is 1,600, which
+>   stays under the 60% cap and covers the 3,176 left in two waves. The 132 `none` verbs concentrate at
+>   the tail, so the last wave will cost more per verb. Josh chose 1,600.
+> - **More two-paragraph entries (Josh, after the wave).** Only 22% shipped rich, and Josh wants more.
+>   The cause was the writer brief: it said to demote "when there is nothing more to say" and
+>   described the second paragraph as a sense story, which needs a source, so writers read a one-line
+>   étymologie as nothing to say. The brief now keeps a verb of Latin, Greek, Frankish or other older
+>   descent rich even on one line of evidence, with a second paragraph built from the root's French
+>   family, doublets, cognates and modern senses (rule 2 material), and demotes only a transparent
+>   French formation, a modern borrowing whose story belongs to its base, or an obscure source word.
+>   The skeptic brief says that shape is the house style. If writers keep about 85% of heuristic-rich
+>   verbs rich, wave 3 costs about 50 points rather than 45, still under the cap. The verbs demoted in
+>   waves 1 and 2 are not rewritten.
 
 ## 5. Finishing (when the ledger reaches zero, or Josh calls it)
 
@@ -485,7 +527,8 @@ own, with web lookups for every verb.
 |---|---|---|---|---|---|---|---|
 | 0 (pilot) | 2026-10-03 | 100 | 91 | 0 / 0 / 9 (skeptic stubs) | 12 → 17 (≤ 5) | 2.50M (writers 1.92M, skeptics 0.58M) | 5,234 |
 | 1 | 2026-10-03 | 900 (Josh, 2026-10-03) | 858 | 0 / 4 / 35 (skeptic stubs 34, *dicter* tildes 1); 3 rejected (writer paragraph under 50 words) | 20 → 56 (36) | 22.7M (writers 17.7M, skeptics 5.1M) | 4,376 |
-| 2 | | 1,200 (Josh, 2026-10-03) | | | | | |
+| 2 | 2026-10-03 | 1,200 (Josh, 2026-10-03) | 1,200 | 0 / 0 / 0 (60 length rejects, 5 writer skips and 1 dropped verb all rerun and merged within the wave) | 3 → 42 (39) | 24.3M (writers 19.3M, skeptics 4.9M) | 3,176 |
+| 3 | | 1,600 (Josh, 2026-10-03) | | | | | |
 
 ## Out of scope
 

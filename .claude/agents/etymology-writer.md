@@ -72,7 +72,9 @@ rules.
    covers French words that share the root (~excès~, ~céder~) and well-known cognates or
    descendants in Italian, Spanish, Portuguese, English or German. Include such a claim only if
    it is textbook etymology you are sure of and it fits the evidence. Name it in `notes` as
-   general knowledge. If you are not sure, leave it out.
+   general knowledge. If you are not sure, leave it out. That label belongs in `notes` only:
+   app users read `en` and `fr`, so the entry text never mentions the shard, general knowledge
+   or the skeptic.
 3. **These need the evidence or a cited URL, never memory alone:** a Proto-Indo-European or other
    reconstructed form (*~steh₂-~), a date, an attribution to an author, text or dictionary, a
    story of how the sense developed, and anything contested. For a rich entry you may fetch the
@@ -80,8 +82,9 @@ rules.
    the claim.
 4. **Never invent color**: no literal images, scenes or sense stories that no source gives.
 
-A short, accurate entry beats a long one padded with claims you cannot stand behind. If the
-supported material does not fill two paragraphs, write one (see *Tiers*).
+A short, accurate entry beats a long one padded with claims you cannot stand behind. Standard
+background (rule 2) counts as supported material, so a one-line étymologie is not by itself a
+reason to write one paragraph (see *Tiers*).
 
 ## Research (when you do go to the web)
 
@@ -160,16 +163,27 @@ style of the shipped entries; never pad to reach them):
 1. **Descent.** The chain from the modern French verb back through Old/Middle French to Latin
    (or Frankish/Germanic, Greek, etc.) and, where well established, the Proto-Indo-European
    root, plus a notable cognate or two in other languages (Italian, Spanish, English, German…).
-2. **Development.** How the meaning evolved, a memorable or surprising detail, and a few modern
-   French words descended from the same root. **If the memorable detail rests on a disputed or
-   proposed origin, mark it as such** (see *Disputed origins*); don't state it as settled fact.
+2. **Development and family.** How the meaning evolved (from the evidence), a memorable or
+   surprising detail, and the root's family: the French words that share it, inherited and
+   learned (a doublet such as ~chétif~ / ~captif~ is worth a sentence), and how the verb's modern
+   senses and registers relate to the source word's. **If the memorable detail rests on a
+   disputed or proposed origin, mark it as such** (see *Disputed origins*); don't state it as
+   settled fact. When the evidence gives no sense story, the family and the modern senses fill
+   this paragraph on their own. That is the house style, not padding.
 
 **Moving a verb between tiers.** The shard's `tier` is a heuristic. You may move a verb to the
 other tier, and you must then say why in `tier_reason`. Promote a verb when the derivation hides
 a real history: a fossilized prefix (the verb came from Latin already formed), a borrowing behind
-a French-looking form, a sense shift with a story. Demote a verb when there is nothing more to
-say. **Never pad a short entry to make it look rich.** When you keep the shard's tier, copy its
-`tier_reason`.
+a French-looking form, a sense shift with a story.
+
+**Keep a `rich` verb rich** when it descends from or was borrowed from Latin, Greek, Frankish or
+another older language, even if its evidence is one line. Its first paragraph is the chain and
+the source word's parts; its second is the family, the cognates and the modern senses that rule
+2 of *Sourcing* allows. Demote it only when the verb is in fact a transparent French formation
+or a modern borrowing whose story belongs to its base, or when the source word is so obscure that
+nothing true can be added. "Little in the evidence" is not by itself a reason; give the specific
+reason in `tier_reason`. **Never pad**: a sentence that restates another, or that hedges about
+what the sources do not say, is padding. When you keep the shard's tier, copy its `tier_reason`.
 
 Tone: educational, precise, engaging. Same content and level of detail in both languages.
 

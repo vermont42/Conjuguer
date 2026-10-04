@@ -409,7 +409,45 @@ def cmd_reshard(args):
     if unknown:
         raise SystemExit(f"not in evidence.json: {unknown}")
     names = write_shards(args.wave, verbs, ev, name_prefix=args.prefix, start=args.start)
+    if args.revise:
+        attach_revisions(args.wave, names)
     print(f"wrote {', '.join(names)}")
+
+
+REVISE_NOTE = (
+    "wave {wave}: your first draft, in `previous_draft`, failed the length check ({reason}). Revise it "
+    "rather than starting over, and keep what is right. A rich entry needs two paragraphs of at least 50 "
+    "words each (aim for about 60-110 and 80-140); a short entry is one paragraph of 40-150 words. Add "
+    "only supported material: the base's or source word's origin, the affix's sense, a date or sense the "
+    "evidence gives, or standard background you are sure of. If a rich entry cannot reach 50 words a "
+    "paragraph that way, write it as one short paragraph. Never pad.")
+SKIPPED_NOTE = ("wave {wave}: the first writer skipped this verb for lack of evidence. The orchestrator has "
+                "since added a dictionary entry as `lookup`; write from it.")
+
+
+def attach_revisions(n, names):
+    """Gives each rerun verb the reason its first pass failed and, for a length reject, its draft."""
+    d = wave_dir(n)
+    outcomes = load_json(d / "outcomes.json")
+    drafts = {}
+    for name in wave_shard_names(d):
+        if name in names:
+            continue
+        rp = d / "results" / f"{name}.json"
+        if rp.exists():
+            drafts.update(load_json(rp))
+    for name in names:
+        path = d / "shards" / f"{name}.json"
+        shard = load_json(path)
+        for rec in shard["verbs"]:
+            o = outcomes.get(rec["verb"], {})
+            if o.get("outcome") == "rejected":
+                rec["history"] = REVISE_NOTE.format(wave=n, reason=o["note"])
+                e = drafts[rec["verb"]]
+                rec["previous_draft"] = {"tier": e.get("tier"), "en": e.get("en"), "fr": e.get("fr")}
+            elif o.get("outcome") == "skipped":
+                rec["history"] = SKIPPED_NOTE.format(wave=n)
+        write_json(path, shard)
 
 
 # ---------------------------------------------------------------- validation
@@ -445,6 +483,13 @@ def words(p):
     return len(p.split())
 
 
+# Writers' working vocabulary that must never ship: wave 2 found "a point of general knowledge not
+# given in the shard" (and in French "culture générale", "le dossier") inside entries, and wave 1 had
+# shipped "the shard's source" and "les sources du dossier".
+PIPELINE_JARGON = re.compile(r"\bshards?\b|general knowledge|connaissances? générales?|culture générale|"
+                             r"\bthe skeptic\b|\bdu dossier\b|\ble dossier n|\bin the evidence\b", re.I)
+
+
 def entry_problems(verb, entry, rec, cards, tier=None):
     """Returns (rejects, flags) for one entry. `rec` is the shard record."""
     rejects, flags = [], []
@@ -474,6 +519,8 @@ def entry_problems(verb, entry, rec, cards, tier=None):
             rejects.append(f"unknown tier {tier!r}")
         if EMDASH_CLAUSE.search(t):
             flags.append(f"{lang}: em dash may join two clauses: …{EMDASH_CLAUSE.search(t).group(0)[:60]}…")
+        for m in PIPELINE_JARGON.finditer(t):
+            flags.append(f"{lang}: pipeline jargon: …{t[max(0, m.start() - 40):m.end() + 40]}…")
     if texts["en"].count("~") != texts["fr"].count("~"):
         rejects.append(f"en/fr tilde mismatch ({texts['en'].count('~')}/{texts['fr'].count('~')})")
     for m in PASSE_COMPOSE.finditer(texts["fr"]):
@@ -904,6 +951,8 @@ def main():
     p.add_argument("--verbs", required=True, help="comma-separated")
     p.add_argument("--prefix", default="r")
     p.add_argument("--start", type=int, default=1)
+    p.add_argument("--revise", action="store_true",
+                   help="attach each verb's failure from the wave's outcomes.json (run merge --dry-run first)")
     p = sub.add_parser("validate")
     p.add_argument("--wave", type=int, required=True)
     p.add_argument("--fix", action="store_true", help="apply the mechanical markup fixes in place")

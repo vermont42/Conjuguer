@@ -4327,3 +4327,54 @@ the supported core as one paragraph, and `merge` now ships that as a short entry
 deferring it. And the deferred and refuted verbs, which lead wave 2 at Josh's new size of 1,200, carry
 history notes that describe the new rules. The old notes would have steered their writers toward
 one-paragraph entries.
+
+## Etymology wave 2: 1,200 verbs in forty minutes, and the words "general knowledge" (2026-10-03)
+
+Wave 2 of `prompts/etymology-tail-plan.md` took the next 1,200 verbs, with the 35 deferred and 4 refuted
+verbs from wave 1 at the head. The 68 shards ran as seventeen workflows of four, as before, but this time
+two were in flight at once. The whole wave, reruns included, took forty minutes of wall clock against
+wave 1's seventy-five, and it cost 39 points of Josh's five-hour window (3% to 42%) and 24.3M tokens.
+Every one of the 1,200 verbs merged. `Etymologies.json` now covers 3,150 of 6,326 verbs at 5.4 MB, the
+282 tests pass, and 3,176 verbs remain.
+
+The first surprise was the API. Seven writers in two workflows died three or four minutes in with "529
+Overloaded". Before rerunning anything, I looked at their results files, and six were complete. The
+writers had finished the work and failed while reporting it. The workflow script already had a
+`skipWrite` switch, so those six shards went straight to their skeptics, and only one writer reran.
+
+The second was length. Wave 1 rejected three entries for falling under the paragraph floors; this wave
+rejected sixty, mostly rich first paragraphs of 38 to 49 words. Leaving them for wave 3 would have meant
+writing them again from nothing, so `reshard` gained a `--revise` option. It hands the writer its own
+failed draft and the reason it failed, with instructions to revise rather than restart and never to pad.
+All sixty passed on the second try, in five small shards that also carried the five verbs writers had
+skipped for lack of evidence. For those I fetched one TLFi entry each, plus the TLFi entries for the base
+nouns *robe* and *dalle*, since *enrober* and *daller* make little sense without them.
+
+The third surprise was the one that mattered for readers. The writer brief told writers to label textbook
+background "general knowledge" in their `notes`. About sixty-five of them put the label in the entry
+itself: "a point of general knowledge not given in the shard", « relève de la culture générale », « les
+sources du dossier ». The skeptics mostly let it pass, because it is not a wrong fact. It is the pipeline
+talking to itself in front of an app user. I stripped every instance from the merged texts, partly by
+pattern and partly by hand, and the same sweep turned up four wave-1 entries with the same leak (*gâter*,
+*mutualiser*, *brouiller*, *insulter*). The validator now flags this vocabulary, and both briefs say the
+entry text never mentions the shard, general knowledge or the skeptic.
+
+The writers have taken the sourcing fence to heart, perhaps too far. They demoted 226 heuristic-rich verbs
+to one paragraph, the skeptics cut 27 more down to one, and only 264 of the 1,200 shipped in two
+paragraphs. No skeptic refuted anything. On the passé composé check, 19 of 114 flagged French sentences
+narrated a single past borrowing or influence ("l'anglais a pris", "est entré en français") and went into
+the passé simple; the rest were resultative perfects.
+
+The next 1,600 verbs are 30% rich by the heuristic. At this wave's per-tier costs that is about 45 points,
+under the 60% cap, and two waves of that size would finish the list. The catch is the 132 verbs with no
+Wiktionary evidence at all, which gather at the tail and will need a web lookup each.
+
+After reading the report, Josh said he wants more two-paragraph entries, and confirmed 1,600 for wave 3.
+The low share was the writer brief's doing. It told writers to demote a verb "when there is nothing more
+to say" and described the second paragraph as the story of a sense, which needs a source, so a writer
+holding a one-line étymologie concluded there was nothing to say. Yet the two-paragraph entries that
+already ship mostly fill the second paragraph with the root's family: the French words sharing it, the
+learned doublets, the cognates, the verb's modern senses. The sourcing rules allow all of that uncited.
+The brief now says so outright, keeps a verb of Latin, Greek or Frankish descent in two paragraphs even
+on one line of evidence, and asks for a specific reason to demote. The skeptic brief calls that shape
+the house style. Wave 3 should cost about 50 points instead of 45 as a result.
