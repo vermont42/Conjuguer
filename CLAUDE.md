@@ -65,92 +65,12 @@ export IBV_SCRIPTS=$(dirname "$(find ~/.claude/plugins/marketplaces -path '*ios-
 
 ### Verifying the app (simulator-driven)
 
-The skill can launch the app and inspect/drive the UI so changes can be verified
-beyond unit tests:
-
-```bash
-"$IBV_SCRIPTS/build_app.sh"                  # COMPILE first — launch_app.sh does NOT build (see warning below)
-"$IBV_SCRIPTS/launch_app.sh"                 # boot + install the last-built .app + launch + wait-for-render
-"$IBV_SCRIPTS/screenshot.sh <context-slug>"  # capture a PNG under docs/screenshots/
-"$IBV_SCRIPTS/describe_ui.sh"                # dump the accessibility tree
-"$IBV_SCRIPTS/tap_tab.sh <verbs|models|quiz|info|settings>"  # tap a main tab
-```
-
-> **⚠️ `launch_app.sh` does NOT compile.** It resolves `BUILT_PRODUCTS_DIR` via
-> `xcodebuild -showBuildSettings` (which doesn't build), then installs whatever `.app`
-> already exists there and launches it. **After editing source, you MUST run
-> `build_app.sh` (or `run_tests.sh`) first** — otherwise `launch_app.sh` reinstalls the
-> *previous* binary and your screenshots show pre-edit UI. (`launch_app.sh` does terminate
-> the running process before install, so a stale *process* isn't the issue — a stale
-> *build* is.) A symptom: edit → `launch_app.sh` → screenshot is byte-identical to the
-> last one across multiple different edits. Always `build_app.sh && launch_app.sh`.
-
-The launch anchor is `verb_browse_sort` (the sort `Picker` in `VerbBrowseView`). Add
-more `.accessibilityIdentifier`/`.accessibilityValue` modifiers on a migration-by-use
-basis as verification flows need them. See the skill's `SKILL.md` for the full verify
-surface (named-intent ops, annotation checks, iOS 26 control caveats).
-
-#### Accessibility identifiers added so far
-
-| Identifier | Element | Notes |
-|---|---|---|
-| `verb_browse_sort` | Sort `Picker` in `VerbBrowseView` | Launch anchor (`FIRST_SCREEN_ID`). |
-| `input_quiz_conjugation` | Answer `TextField` in `QuizView` | Carries `.accessibilityValue(input)`, so `read_value`/`set_value`/`type_text --id` work with read-back. |
-| `picker_settings_quizDifficulty` | Quiz-difficulty segmented `Picker` in `SettingsView` | 2 segments (Regular, Ridiculous). |
-| `picker_settings_pronounGender` | Pronoun-gender segmented `Picker` in `SettingsView` | 3 segments (Feminine, Masculine, Both). |
-| `verb_example` | Example card in `VerbView` (below etymology) | Wraps the FR sentence, EN translation, source attribution, and nested *Chanson de Roland* example. |
-| `verb_browse_count` | "N VERBS" header above the verb collection | Hidden when the search yields nothing. |
-| `verb_row_<infinitif>` | Row `Button` in `VerbBrowseView` (list and grid) | e.g. `verb_row_avoir`. |
-| `model_row_<exemplar>` | Row `Button` in `ModelBrowseView` (list and grid) | e.g. `model_row_avoir`. |
-
-Put a row's identifier on the tappable `Button`, **not** on the row content inside its
-label: SwiftUI merges the two elements and concatenates their identifiers, yielding
-`verb_row_avoir-verb_row_avoir`, which `tap_id.sh` can't match.
-
-Info headings and tab buttons are not yet annotated — drive them by `AXLabel` /
-`tap_tab.sh` for now. The verb-search field is unannotated too; tap it at its
-`describe_ui` frame (the lone `AXTextField` on the Verbs tab, `{{16, 70}, {315, 44}}` →
-centre ≈ `173,92` on iPhone 17) before typing. Because verb names carry accents, drive it
-with `type_text.sh --xy 173,92 "<verb>"` (pasteboard route) rather than `axe type`, which
-rejects non-ASCII. Re-measure with `describe_ui.sh` rather than trusting this number. The field
-moves: on a fresh launch it sits lower (frame y ≈ 169, so tap ≈ `201,191`), and once a search is
-active it rises to the top (tap ≈ `173,70`, seen 2026-10-01). A tap at the old spot silently
-misses, and the text goes nowhere.
-
-#### iOS 26 control caveats specific to this app
-
-- **Accented input (é, è, à, ç, …):** `axe type` rejects non-ASCII. The skill's
-  `set_value.sh` / `type_text.sh` (v0.3.0+) auto-route non-ASCII through a
-  `simctl pbcopy` + Cmd+V pasteboard fallback, so French conjugations enter
-  correctly. The quiz field is reachable by id, so prefer `type_text.sh --id
-  input_quiz_conjugation "<answer>"` (gives read-back); the field also auto-focuses
-  after **Start**, so a bare `axe type` into the focused field also works for ASCII.
-- **Segmented pickers** render with empty AXTree children on iOS 26, so segments
-  aren't individually addressable by id. The parent identifier locates the control's
-  frame; `verify_segment.sh` then verifies a segment's label + selected state, but
-  **requires `--segments N` explicitly** (it can't infer the count through the
-  children-empty bug): `--segments 2` for `picker_settings_quizDifficulty`,
-  `--segments 3` for `picker_settings_pronounGender`. To *drive* a selection, compute
-  the segment center from the id'd frame (`x + width*(i+0.5)/N`, `y + height/2`) and
-  `tap_xy.sh`.
-
-#### Completing a quiz (regular difficulty)
-
-A regular-difficulty quiz is 30 questions; `Quiz.process(_:)` advances on every
-submission regardless of correctness, so completion = submit an answer to all 30.
-After **Start**, the answer field auto-focuses; type into `input_quiz_conjugation`
-and send Return (`axe key 40`) per question. The `Progress: N / 30` label tracks
-position; the run ends with a `QuizResultsView` sheet (label `Results`).
-
-The field **stays focused across submissions** (`submitAnswer()` re-sets focus), so a
-fast sweep is: tap it once (`tap_id.sh input_quiz_conjugation`), then loop
-`axe type "<answer>"` + `axe key 40` — batch many pairs into one Bash call and
-`screenshot.sh` between batches to check
-progress. **Caveat:** if focus is lost (e.g. after a `describe_ui`/screenshot detour),
-`axe type`/`axe key 40` silently no-op and the quiz won't advance — re-tap the field by
-id before resuming. To exercise all three result-icon colors, mix outcomes: a correct
-conjugation → green, a correct skeleton with a dropped accent (e.g. `detends` for
-`détends`) → blue partial, junk (`x`) → red.
+Launching, screenshotting, and driving the app in the simulator (accessibility identifiers,
+iOS 26 control caveats, sweeping a quiz to completion) is documented in the
+`verify-in-simulator` skill (`.claude/skills/verify-in-simulator/SKILL.md`). Load it before
+any simulator-driven verification, and keep its identifier table current when you add an
+`.accessibilityIdentifier`. Remember that `launch_app.sh` does **not** compile: run
+`build_app.sh` first, or the screenshots show the previous binary.
 
 **SourceKit vs. the build:** editing a view file often triggers SourceKit "Cannot find
 X in scope" diagnostics for same-module symbols. If `build_app.sh` succeeds, the build
@@ -219,56 +139,11 @@ delete it. When a comment is borderline, lean toward deletion.
 
 ## Testing (Swift Testing)
 
-The unit tests use **Swift Testing** (`import Testing`): suites are `struct`s,
-tests are `@Test func` methods, and assertions are `#expect(...)` / `Issue.record("…")`
-(reach for `try #require(...)` when a later line depends on an unwrapped value). Tests live
-in `ConjuguerTests/`, a synced folder — a new `*.swift` test file is compiled into the
-target automatically, no `project.pbxproj` edit (see *Project Layout* below). Run them with
-the `ios-build-verify` scripts documented under *Build and Test Commands*; the
-`Target/Suite/method()` filter form (note the trailing `()`) is the Swift Testing spelling.
-
-### Shared conjugation helper
-
-`T.testConjugation(...)` in `TestUtils.swift` is the shared assertion for conjugation tests:
-it conjugates and `#expect`s the result, recording an `Issue` on failure. It threads
-`sourceLocation: SourceLocation = #_sourceLocation` so a failure points at the *calling*
-test, not at the helper line. `VerbModelTests.swift` (one `@Test func` per model) is
-**generated** by `T.generateVerbModelTests()`, which emits Swift Testing source — regenerate
-it rather than hand-editing the 5,000-plus lines.
-
-### Suites that touch `@MainActor` code need `@MainActor`
-
-The app module defaults to `MainActor` isolation, so a suite that calls into app code — or
-even just compares two app values inside `#expect` whose `Equatable` conformance is
-main-actor-isolated (e.g. `RichTextBlock`, `TextSegment`, `ConjugationPart`) — must be
-annotated `@MainActor`. Swift Testing runs tests off the main actor by default, and
-**`@MainActor` does not propagate into nested `@Suite` structs** — annotate each one.
-Symptom when it's missing:
-`main actor-isolated conformance of '…' to 'Equatable' cannot be used in nonisolated context`.
-
-### `import Foundation` explicitly
-
-`import Testing` does **not** re-export Foundation transitively. A test file
-that uses `URL`, `Date`, `JSONEncoder`, or Foundation string APIs (`replacingOccurrences`,
-`.capitalized`, …) must `import Foundation` itself, or it fails with `cannot find 'URL' in
-scope` / `property '…' is not available due to missing import of defining module 'Foundation'`.
-
-### Serialize suites that share global state
-
-Swift Testing runs suites and tests in parallel by default. Suites that mutate the global
-`Current` (`DeeplinkTests`, `QuizTests`) or other shared static state (`SettingsTests`) are
-marked `@Suite(.serialized)` so they don't race. There is no `setUp`; do per-test setup at
-the top of each `@Test`. Note a parameterless `init()` used only for reset trips SwiftLint's
-`unneeded_synthesized_initializer` on a struct with no stored properties, so use an explicit
-helper (e.g. `resetCurrent()`) called from each test instead.
-
-### Parameterized tests
-
-When several tests differ only in input values, collapse them into one
-`@Test(arguments: [...])` taking the tuple destructured across parameters —
-`ConjugationResultTests` does this for its scoring cases, and a failure reports the offending
-row. (Mind the `trailing_comma` lint rule: no comma after the last element of the arguments
-array.)
+The unit tests use **Swift Testing** and live in `ConjuguerTests/`, a synced folder. Their
+conventions and gotchas (the shared `T.testConjugation` helper, the generated
+`VerbModelTests.swift` that must be regenerated rather than hand-edited, `@MainActor` suites,
+explicit `import Foundation`, serialized suites) are in `.claude/rules/swift-testing.md`,
+which loads when you work under `ConjuguerTests/`.
 
 ## Architecture Overview
 
@@ -316,16 +191,6 @@ type. Practical consequences:
   should *not* ship — they'd be picked up automatically; exclude them with a membership
   exception or keep them outside the folder.
 
-### Core Domain Model
-
-- **Verb** (`Models/Verb.swift`): Represents a French verb with properties like infinitif, translation, model reference, auxiliary (avoir/être), and frequency data. Stored in a static dictionary keyed by infinitif.
-
-- **VerbModel** (`Models/VerbModel.swift`): Defines conjugation patterns. Models form a hierarchy via `parentId` for inheritance of conjugation rules. Each model specifies stem alterations, endings for different tense groups, and participe endings.
-
-- **Conjugator** (`Models/Conjugator.swift`): The conjugation engine. Takes an infinitif and tense, retrieves the verb and its model, applies stem alterations, and returns the conjugated form. Handles both simple and compound tenses.
-
-- **Tense** (`Models/Tense.swift`): Enum covering all French tenses (indicatif présent, passé composé, subjonctif, etc.). Uses associated values for person/number where applicable.
-
 ### Data Loading
 
 Verb and model data is loaded from XML files at app startup via `VerbData.parse()`:
@@ -340,13 +205,6 @@ Verb and model data is loaded from XML files at app startup via `VerbData.parse(
 (The 2021 `frequencies.xml` export is gone: it was bundled but never parsed. `Verb.rankCount`,
 which `VerbData.publish` sets from the parse, holds the number of distinct infinitives —
 the denominator `VerbView` shows.)
-
-### Dependency Injection
-
-The `World` pattern (`Utils/World.swift`) provides dependency injection via a global `Current` variable. Three configurations exist:
-- `device` - Production with real analytics (TelemetryDeck), GameKit, real URLSession
-- `simulator` - Uses test analytics/GameCenter, stubbed URLSession
-- `unitTest` - Uses in-memory settings (GetterSetterFake), test doubles
 
 ### Analytics (TelemetryDeck)
 
@@ -380,18 +238,6 @@ All external services have protocol abstractions with production and test implem
 >
 > Because the protocol and all its conformers share a prefix, they **sort together in Xcode's Project Navigator** — the point of the convention (and consistent with the `CatFancy-final` app). One type per file, filename = type name (synced folders bundle them automatically). **Check for a name collision** before settling on the protocol name: the bare noun must be free, so the production type takes `…Real` (the protocol `GameCenter` is only available because the former `GameCenter` class became `GameCenterReal`). Wire the real conformer into `World.device` and the double into `World.simulator` / `.unitTest`. Doubles that conform to a **system** protocol rather than an app one stay outside the scheme — `URLProtocolStub` (Foundation `URLProtocol`) and `TestApp` (SwiftUI `App`, whose real counterpart is `ConjuguerApp`).
 
-### SwiftUI Structure
-
-- **MainTabView**: Root view with 5 tabs (Verbs, Models, Quiz, Info, Settings)
-- Uses `@Observable` macro (iOS 17+) for the World class
-- Deep linking support via `onOpenURL` for verb/model/info navigation
-
-### Key Utilities
-
-- **Settings** (`Utils/Settings.swift`): User preferences via protocol-based storage (UserDefaults or Dictionary)
-- **L** (`Models/L.swift`): Localization strings wrapper
-- **SoundPlayer/Utterer**: Audio feedback for quiz interactions
-
 ### Literature-Example Corpus (`corpus/`)
 
 `corpus/` holds a build-time data pipeline (**not part of the shipped app target**)
@@ -408,109 +254,21 @@ The app ships in **English (source) and French** and uses a two-part localizatio
 ### L.swift
 
 Type-safe localization accessors (`Conjuguer/Models/L.swift`), organized by feature into
-nested enums. Each accessor wraps a `String(localized:)` call keyed by a stable identifier:
-
-```swift
-enum L {
-  enum Settings {
-    static var pronounGender: String {
-      String(localized: "Settings.pronounGender")
-    }
-  }
-
-  enum PronounGender {
-    static var feminine: String { String(localized: "PronounGender.feminine") }
-    static var masculine: String { String(localized: "PronounGender.masculine") }
-    static var both: String { String(localized: "PronounGender.both") }
-  }
-}
-```
+nested enums. Each accessor wraps a `String(localized:)` call keyed by a stable identifier.
 
 Accessors that interpolate a runtime value take arguments and pass a `defaultValue` (the
 English source) — e.g. `L.QuizView.score(_:)`, `L.VerbView.sourceWikipedia(_:)`.
 
 ### Localizable.xcstrings
 
-JSON-based string catalog (`Conjuguer/Assets/Localizable.xcstrings`) supporting multiple
-languages. Each key maps to per-language translations:
+The app's string catalog is `Conjuguer/Assets/Localizable.xcstrings`. How to edit it safely
+(an ASCII `"` added through the Edit tool breaks the JSON), search it, write its rich-text
+markup, and relocalize long texts is in `.claude/rules/localization-catalog.md`, which loads
+when you work with any `.xcstrings` file or `L.swift`.
 
-```json
-"Settings.pronounGender" : {
-  "localizations" : {
-    "en" : {
-      "stringUnit" : {
-        "state" : "translated",
-        "value" : "Pronoun Genders"
-      }
-    },
-    "fr" : {
-      "stringUnit" : {
-        "state" : "translated",
-        "value" : "Genres des pronoms"
-      }
-    }
-  }
-}
-```
-
-### Editing Localizable.xcstrings Safely
-
-The Edit tool operates on **rendered text**, not raw JSON. This means the JSON escape sequence `\"` appears as a plain `"` in Edit's view. Consequently, any edit that adds, removes, or changes an ASCII double quote (`"`, U+0022) inside a JSON string value silently produces an unescaped `"` in the raw file, breaking JSON syntax.
-
-**Safe quote types:** Unicode curly quotes (`“` `”` `„`) need no JSON escaping and can be edited freely with the Edit tool. (French body text already uses curly quotes and guillemets `«` `»`, so most prose edits are safe; the hazard is ASCII `"`.)
-
-**The rule:** When an edit to a `.xcstrings` string value involves adding, removing, or changing ASCII `"` (U+0022) characters, use Python via Bash to perform the replacement on the raw file content, not the Edit tool. For example:
-
-```bash
-python3 -c "
-import pathlib
-p = pathlib.Path('Conjuguer/Assets/Localizable.xcstrings')
-t = p.read_text()
-t = t.replace('old escaped content', 'new escaped content')
-p.write_text(t)
-"
-```
-
-**Validation:** After every `.xcstrings` edit (regardless of tool used), validate JSON integrity before building:
-
-```bash
-python3 -c "import json; json.load(open('Conjuguer/Assets/Localizable.xcstrings'))"
-```
-
-### Canonical format — do NOT reflexively revert the catalog
-
-`Localizable.xcstrings` is stored in **Xcode's canonical String Catalog format**
-(space before colons — `"key" : {` — and expanded empty objects, `{\n\n    }`).
-This format is a **stable fixpoint**: Xcode re-serializing it produces byte-identical
-output, so it no longer drifts on its own. (It was normalized once in the
-`l10n: normalize Localizable.xcstrings to Xcode's canonical format` commit.)
-
-**The build does NOT rewrite the catalog.** `SWIFT_EMIT_LOC_STRINGS = NO`, so
-`xcodebuild` never extracts/writes strings — clean *and* incremental builds leave
-the file byte-identical (verified by SHA). The recurring ~4,700-line whitespace
-"churn" seen in older sessions came from the **Xcode IDE app** (when open)
-re-serializing the catalog to canonical format on save/indexing, **not** from
-`build_app.sh`. Now that the committed file is already canonical, the IDE has
-nothing to reformat.
-
-**Consequence:** do **not** blanket-`git checkout -- Conjuguer/Assets/Localizable.xcstrings`
-after a build to "remove churn" (older guidance and sessions did this — it was
-treating a symptom and risked discarding real edits). If the working tree shows the
-catalog modified, that is a **real change** — inspect the diff (`git diff`) and keep
-or discard it deliberately.
-
-**When editing externally (Python):** new keys you insert may not exactly match
-Xcode's canonical whitespace. That is harmless — the file stays valid and builds
-fine; the only cost is a small one-key formatting delta the IDE may later
-canonicalize. Don't hand-fight it. To stay perfectly canonical, emit
-`"key" : {` (space before colon) in inserted blocks, or let Xcode re-save once.
-
-### Searching Within Localizable.xcstrings
-
-Each localization value in `Localizable.xcstrings` occupies a single very long JSON line. Grep matches against these lines are truncated to `[Omitted long matching line]`, making Grep results useless for inspecting content. Instead:
-
-1. **To find which key contains a phrase:** Use Grep to get the line number, then use Read with an offset to view that line.
-2. **To find and replace text:** Use Python via Bash. Use a unique nearby string as an anchor to target the correct language section (e.g., a French word like `pourrait signifier` to distinguish `fr` from `en`).
+**Do not reflexively `git checkout` the catalog after a build.** The build never rewrites it
+(`SWIFT_EMIT_LOC_STRINGS = NO`), so a modified catalog in the working tree is a real change.
+Inspect the diff and keep or discard it deliberately.
 
 ### Adding New Localized Strings
 
@@ -523,77 +281,9 @@ Each localization value in `Localizable.xcstrings` occupies a single very long J
 - Keys follow the pattern: `FeatureName.stringPurpose`
 - Examples: `Settings.pronounGender`, `Navigation.verbs`, `Info.creditsHeading`
 
-### Rich Text Markup in Localizable.xcstrings
-
-Long-form Info text (`dedicationText`, `creditsText`, and the per-tense `Info.*Text`
-explanations) uses a custom markup system parsed by `StringExtensions.swift`
-(`String.richTextBlocks` / `.bodySegments`) and rendered by `RichTextView.swift`:
-
-| Marker | Purpose | Example |
-|--------|---------|---------|
-| `` ` `` | Section subheadings (rendered larger, centered, tagged as headers) | `` `Uses` ``, `` `Conjugation` `` |
-| `~` | Bold/emphasis | `~indicatif présent~`, `~Conjuguer~` |
-| `$...$` | Conjugation color-coding: **uppercase** letters mark irregular characters (rendered red), lowercase are regular | `$aperÇOis$`, `$sUis$` |
-| `‡...‡` | Clickable URLs | `‡https://github.com/vermont42/Conjuguer‡` |
-
-(Conjuguer's parser supports only those four markers — there is no emoji-asset or
-flag-bullet markup. List bullets are literal `•` / `-` characters in the prose.)
-
-**Subheadings are set off by a blank line on both sides.** A backtick heading runs
-`"…end of paragraph.\n\n\`Next Heading\`\n\nFirst line…"` — `\n\n` before *and* after the
-delimited heading. The blank lines are for source readability only: `String.richTextBlocks`
-trims the newlines around a backtick heading, so the rendered gap comes from `RichTextView`
-(its `defaultSpacing` plus the subheading's `.padding(.top)`), not from the blank lines. Both
-languages match.
-Before inserting a new section into a long-form Info text, scan the existing headings with
-`re.finditer(r'\`[^\`]+\`', value)` in Python to confirm the article's spacing, since raw
-JSON hides the rendered layout.
-
-### Relocalization Workflow
-
-When the English version of a long text is edited, the French version must be relocalized:
-
-1. **Translate the prose** while maintaining natural French flow
-2. **Preserve all markup** (`` ` ``, `~`, `$…$`, `‡…‡`) in equivalent positions
-3. **Do NOT localize**:
-   - French grammatical terms already in French — they stay French in *both* languages: `~indicatif présent~`, `~subjonctif imparfait~`, `~passé composé~`, etc.
-   - French example sentences and the conjugated forms inside `$…$` (e.g. `$aperÇOis$`): keep the French sentence; translate only its English gloss/explanation, not the quotation itself
-   - Literary attributions and proper names: `Marcel Proust`, `Du côté de chez Swann`, author/contributor names in `creditsText`, the app name `~Conjuguer~`
-   - URLs (`‡…‡`) and license names (e.g. *Creative Commons Attribution-ShareAlike*)
-4. **Match heading structure** exactly between languages
-
 ### Widget Localization (WidgetL)
 
-The `ConjuguerWidget` extension ships as its own `.appex` bundle with its **own** string
-catalog, `ConjuguerWidget/Localizable.xcstrings` — separate from the app's
-`Conjuguer/Assets/Localizable.xcstrings`. Widget user-facing strings (gallery
-names/descriptions, Control Center labels, Live Activity title, quiz "Correct!"/"Incorrect")
-route through `WidgetL` (`Shared/WidgetL.swift`), the widget's analogue to the app's `L`.
-Its keys are namespaced under a flat `Widget.*` prefix (e.g. `Widget.verbOfTheDayName`),
-grouped into enums for call-site clarity.
-
-Unlike the app's `L` (whose accessors return `String` via `String(localized:)`), every
-`WidgetL` accessor is a single style — a `static let` `LocalizedStringResource(key,
-defaultValue:)`, with the English source carried inline as `defaultValue`:
-
-```swift
-enum WidgetL {
-  enum VerbWidget {
-    static let name = LocalizedStringResource("Widget.verbOfTheDayName", defaultValue: "Verb of the Day")
-    static let description = LocalizedStringResource("Widget.verbOfTheDayDescription", defaultValue: "A daily French verb with its présent conjugations.")
-  }
-}
-```
-
-**Exception — AppIntent titles and `@Parameter(title:)` cannot route through `WidgetL`.**
-`appintentsmetadataprocessor` parses source statically and requires a string literal or a
-direct `LocalizedStringResource(...)` initializer call, not an accessor. So the intent
-metadata keys (`Widget.intentOpenQuiz`, `Widget.intentOpenRandomVerb`,
-`Widget.intentAnswerQuiz`, `Widget.paramQuestionID`, `Widget.paramSelectedAnswer`) are
-written inline in `Shared/OpenQuizIntent.swift`, `Shared/OpenRandomVerbIntent.swift`, and
-`ConjuguerWidget/AnswerQuizIntent.swift`.
-
-`Shared/` compiles into **both** the app and widget targets, but **all `Widget.*` keys —
-including the `Shared/` intents' — live only in the widget catalog**, not the app's. Add
-new widget strings to `ConjuguerWidget/Localizable.xcstrings` and route them through
-`WidgetL` (or inline, for AppIntent metadata).
+The `ConjuguerWidget` extension has its own catalog, `ConjuguerWidget/Localizable.xcstrings`,
+and its own accessor enum, `WidgetL` (`Shared/WidgetL.swift`). All `Widget.*` keys, including
+those the `Shared/` intents use, live only in the widget catalog. The details, including why
+AppIntent titles can't route through `WidgetL`, are in `.claude/rules/widget-localization.md`.

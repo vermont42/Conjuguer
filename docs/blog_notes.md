@@ -4526,3 +4526,33 @@ out of the mud.
 fine. The longest entry the tail added is *illuminer*'s, at 260 words in English; *avoir*, from the
 original pipeline, is still the longest of all at 383. Version 2.3's release notes now say every verb has
 an etymology.
+
+## Shrinking CLAUDE.md: what every session reads versus what some sessions need (2026-10-19)
+
+A `/doctor` pass measured `CLAUDE.md` at 34.7k characters, roughly 8.7k tokens that every session
+loaded before doing anything. Most of that was accurate and hard-won, so the question was not whether
+to keep it but when it should load. The file now holds 16.7k characters, and nothing was lost.
+
+Two kinds of content left. The first was description a session can recover by reading the code: tours
+of `Verb`, `VerbModel`, `Conjugator`, and `Tense`; the three `World` configurations; a SwiftUI and
+utilities overview; and sample Swift and JSON copied from `L.swift` and the string catalog. Those were
+deleted. The second was guidance that matters only for particular work, and it moved rather than
+disappeared. Simulator verification, including the accessibility-identifier table, the iOS 26 control
+caveats, and the recipe for sweeping a quiz to completion, became a project skill at
+`.claude/skills/verify-in-simulator/SKILL.md`, so only its one-line description stays resident. The
+Swift Testing conventions, the string-catalog editing rules, and the WidgetL notes became path-scoped
+rule files under `.claude/rules/`, each loading when a session touches `ConjuguerTests/`, an
+`.xcstrings` file or `L.swift`, or `ConjuguerWidget/` and `Shared/`.
+
+The obvious home for the testing and catalog guidance was a nested `CLAUDE.md` next to the files it
+governs. That would have backfired here. `Conjuguer/` and `ConjuguerTests/` are Xcode synchronized
+folders, so a Markdown file dropped inside one is bundled into the target like any other resource.
+Rule files under `.claude/` give the same lazy loading without shipping a stray document in the app.
+
+A few lines stayed in the root file on purpose, because they guard against mistakes made outside the
+scoped paths. One is that `launch_app.sh` does not compile. Another is the prohibition on reflexively
+checking out the catalog after a build. Each moved section also leaves a one-paragraph pointer, so a
+session that never triggers a rule still knows the rule exists.
+
+The same pass turned off three Swift helper plugins this project had enabled but never invoked in 33
+sessions, along with four unused claude.ai connectors. Both changes live in local, uncommitted settings.
