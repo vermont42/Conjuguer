@@ -35,6 +35,8 @@ The Old French examples from the Chanson de Roland now span the whole poem. Unti
 
 Twenty-three verbs change between pronominal and plain. Sixteen, among them s'attarder, s'entêter, se prosterner and s'enticher, are now conjugated with their pronoun, as French uses them. Seven, among them débarrasser and épouser, lose a pronoun they never required. Hachurer now begins with an aspirated h, so the app writes je hachure rather than j'hachure. Cafter is no longer marked defective, and pleuvoter and pleuvasser, two ways of drizzling, are now conjugated only in the third person singular, like pleuviner. Conjuguer now counts seventy-three defective verbs.
 
+The widgets now handle the four verbs that Conjuguer conjugates two ways: haïr, ouïr, saillir and sortir. When one of them was the verb of the day, the widget showed dashes instead of its forms, and the quiz widget offered answers borrowed from other verbs, such as être. Tapping the widget opened the verb list rather than the verb. The widget now says which conjugation it shows, as in haïr (France), and tapping it opens that verb.
+
 
 Français
 
@@ -69,3 +71,5 @@ Les exemples en ancien français tirés de la Chanson de Roland couvrent désorm
 874 traductions anglaises ont changé. Certaines étaient tout simplement fausses. Brouter était traduit gaze (contempler) au lieu de graze (paître), remémorer memorize (apprendre par cœur) au lieu de recall (se rappeler), et célébrer, on ne sait comment, put a belt around (ceinturer). D'autres étaient des faux amis, des mots anglais qui semblent justes et induisent en erreur : fabriquer était traduit fabricate, qui évoque le mensonge en anglais, et se lit désormais make, manufacture. Beaucoup omettaient le sens le plus courant ou commençaient par un sens ancien. Rendre n'était que render, et devient give back, return, make.
 
 Vingt-trois verbes passent de pronominal à non pronominal, ou l'inverse. Seize d'entre eux, dont s'attarder, s'entêter, se prosterner et s'enticher, se conjuguent désormais avec leur pronom, comme le français les emploie. Sept, dont débarrasser et épouser, perdent un pronom qu'ils n'exigeaient pas. Hachurer commence désormais par un h aspiré : l'app écrit je hachure et non plus j'hachure. Cafter n'est plus marqué comme défectif, et pleuvoter et pleuvasser, deux façons de bruiner, ne se conjuguent plus qu'à la troisième personne du singulier, comme pleuviner. Conjuguer compte désormais soixante-treize verbes défectifs.
+
+Les widgets gèrent désormais les quatre verbes que Conjuguer conjugue de deux façons : haïr, ouïr, saillir et sortir. Quand l'un d'eux était le verbe du jour, le widget affichait des tirets au lieu de ses formes, et le widget de quiz proposait des réponses empruntées à d'autres verbes, comme être. Toucher le widget ouvrait la liste des verbes plutôt que le verbe. Le widget indique désormais quelle conjugaison il affiche, comme haïr (France), et le toucher ouvre ce verbe.
