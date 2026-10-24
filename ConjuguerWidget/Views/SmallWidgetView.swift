@@ -32,7 +32,7 @@ struct SmallWidgetView: View {
         conjugationRow(elles)
       }
     }
-    .widgetURL(WidgetDeeplink.verb(snapshot.infinitif))
+    .widgetURL(WidgetDeeplink.verb(snapshot))
   }
 
   private func conjugationRow(_ conjugation: WidgetConjugation) -> some View {

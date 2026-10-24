@@ -12,6 +12,9 @@ import Foundation
 // runs the conjugation engine itself.
 struct WidgetSnapshot: Codable, Equatable {
   let infinitif: String
+  // Optional so a snapshot written before this field existed still decodes after an
+  // update, rather than blanking the widget until the app next launches.
+  let verbKey: String?
   let translation: String
   let auxiliary: String
   let frequency: Int

@@ -50,7 +50,7 @@ struct QuizWidgetView: View {
         }
       }
     }
-    .widgetURL(WidgetDeeplink.verb(quiz.infinitif))
+    .widgetURL(WidgetDeeplink.verb(entry.snapshot))
   }
 
   private var answeredView: some View {
@@ -69,7 +69,7 @@ struct QuizWidgetView: View {
       }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .widgetURL(WidgetDeeplink.verb(quiz.infinitif))
+    .widgetURL(WidgetDeeplink.verb(entry.snapshot))
   }
 
   private func answerButton(answer: String) -> some View {

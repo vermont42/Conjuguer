@@ -4556,3 +4556,34 @@ session that never triggers a rule still knows the rule exists.
 
 The same pass turned off three Swift helper plugins this project had enabled but never invoked in 33
 sessions, along with four unused claude.ai connectors. Both changes live in local, uncommitted settings.
+
+## Doubled infinitives in the widget (2026-10-23)
+
+Josh spotted haïr as the verb of the day on a flight and the widgets were broken. The large
+widget showed "pp :" with nothing after it and a dash for every présent form. The quiz widget
+offered seras, sera, and serai as answers for haïr's futur simple. Tapping either widget opened
+the verb list instead of haïr.
+
+The cause was the four doubled infinitives (haïr, ouïr, saillir, sortir), which carry one
+entry per conjugation model. `VerbParser` keys them by infinitive plus their `ex` extra
+letters (`"haïr France"`, `"haïr Québec"`), so there is no bare `"haïr"` in `Verb.verbs`.
+`WidgetSnapshotWriter` called the conjugator with `verb.infinitif` and `extraLetters: nil`
+throughout, so every lookup failed. The paradigm fell back to dashes, the participle to an
+empty string, and the quiz's correct answer to a dash. The distractor search then ran out of
+haïr forms and borrowed être's, which explains the seras/sera/serai options. The deeplink was
+built from the same bare infinitive, `Verb.verbs` returned nil, and the app landed on the
+browse tab with no verb selected.
+
+The fix gives `Verb` a `dictionaryKey` property and threads `verb.extraLetters` through every
+conjugation call in the writer. The snapshot now displays `infinitifWithPossibleExtraLetters`
+("haïr (France)"), matching what `VerbView` and the quiz already show. The France and Québec
+conjugations really do differ, so the label is worth having. The snapshot also gains a
+`verbKey` field that `WidgetDeeplink` uses to build the URL. That field is optional on
+purpose. A snapshot written by the previous build lacks it, and a required field would make
+the widget fail to decode until the app next launched, so the widget would show the placeholder.
+
+A smaller fix came along with it. `eligibleVerbs()` broke frequency ties by `infinitif`, and
+the two haïr entries tie on both rank and infinitive, so their relative order depended on
+dictionary iteration. It now sorts by the dictionary key. A new test sweeps each day that
+lands on a doubled infinitive and checks that the snapshot's key resolves and that the verb
+conjugates.

@@ -110,6 +110,28 @@ struct WidgetSnapshotWriterTests {
     #expect(snapshot.dateString == "2025-03-07")
   }
 
+  @Test func testDoubledInfinitifSnapshotsResolveTheirEntry() throws {
+    // Doubled infinitives (haïr France/Québec, ouïr, saillir, sortir) have no bare-infinitif
+    // dictionary key, so conjugating or deeplinking by `infinitif` alone found nothing: the
+    // widget showed dashes and opened the verb list instead of the verb.
+    let eligible = WidgetSnapshotWriter.eligibleVerbs()
+    let start = day("2025-01-01")
+    var checked = 0
+    for offset in 0 ..< eligible.count {
+      let date = try #require(WidgetDateHelper.calendar.date(byAdding: .day, value: offset, to: start))
+      guard WidgetSnapshotWriter.verbOfTheDay(from: eligible, date: date).extraLetters != nil else {
+        continue
+      }
+      let snapshot = try #require(WidgetSnapshotWriter.generateSnapshot(date: date))
+      let verbKey = try #require(snapshot.verbKey)
+      #expect(Verb.verbs[verbKey] != nil, "\(verbKey) must be a Verb.verbs key so the widget deeplink opens it.")
+      #expect(!snapshot.participePassé.isEmpty, "\(verbKey) must conjugate.")
+      #expect(snapshot.quizQuestion.correctAnswer != "—", "\(verbKey) must conjugate.")
+      checked += 1
+    }
+    #expect(checked > 0, "The sweep should reach at least one doubled infinitif.")
+  }
+
   @Test func testTruncateReturnsShortTextUnchanged() {
     #expect(WidgetSnapshotWriter.truncateToSentenceBoundary("Hello world.", maxLength: 100) == "Hello world.")
   }

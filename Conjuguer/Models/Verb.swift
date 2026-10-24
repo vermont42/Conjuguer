@@ -83,6 +83,14 @@ struct Verb: Identifiable, Hashable {
     return String(infinitif[..<index])
   }
 
+  nonisolated var dictionaryKey: String {
+    if let extraLetters = extraLetters {
+      return infinitif + " " + extraLetters
+    } else {
+      return infinitif
+    }
+  }
+
   nonisolated var infinitifWithPossibleExtraLetters: String {
     if let extraLetters = extraLetters {
       return infinitif + " (" + extraLetters + ")"

@@ -29,6 +29,7 @@ enum SnapshotReader {
   static var placeholder: WidgetSnapshot {
     WidgetSnapshot(
       infinitif: "parler",
+      verbKey: "parler",
       translation: "to speak, talk",
       auxiliary: "avoir",
       frequency: 1,

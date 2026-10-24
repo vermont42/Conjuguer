@@ -68,14 +68,15 @@ enum WidgetSnapshotWriter {
 
     let verb = verbOfTheDay(from: eligible, date: date)
     let paradigm = présentParadigm(for: verb)
-    let participePassé = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: .participePassé, extraLetters: nil) ?? ""
+    let participePassé = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: .participePassé, extraLetters: verb.extraLetters) ?? ""
 
     let example = ExampleData.example(for: verb)
     let etymology = Etymology.text(for: verb.infinitif).map { truncateToSentenceBoundary($0, maxLength: 360) }
     let quiz = generateQuizQuestion(verb: verb, date: date)
 
     return WidgetSnapshot(
-      infinitif: verb.infinitif,
+      infinitif: verb.infinitifWithPossibleExtraLetters,
+      verbKey: verb.dictionaryKey,
       translation: verb.translation,
       auxiliary: verb.auxiliary.verb,
       frequency: verb.frequency,
@@ -95,7 +96,7 @@ enum WidgetSnapshotWriter {
     // a lock screen most days. The pool is the most common verbs that have one.
     Verb.verbs.values
       .filter { $0.frequency <= verbOfTheDayRankLimit && ExampleData.example(for: $0) != nil }
-      .sorted { ($0.frequency, $0.infinitif) < ($1.frequency, $1.infinitif) }
+      .sorted { ($0.frequency, $0.dictionaryKey) < ($1.frequency, $1.dictionaryKey) }
   }
 
   @MainActor static func verbOfTheDay(from eligible: [Verb], date: Date) -> Verb {
@@ -106,7 +107,7 @@ enum WidgetSnapshotWriter {
 
   @MainActor private static func présentParadigm(for verb: Verb) -> [WidgetConjugation] {
     PersonNumber.allCases.map { personNumber in
-      let form = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: .indicatifPrésent(personNumber), extraLetters: nil) ?? "—"
+      let form = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: .indicatifPrésent(personNumber), extraLetters: verb.extraLetters) ?? "—"
       return WidgetConjugation(pronoun: compactPronoun(personNumber), form: form)
     }
   }
@@ -139,16 +140,16 @@ enum WidgetSnapshotWriter {
     let makeTense = quizTenseFamilies[tenseIndex]
     let tense = makeTense(personNumber)
 
-    let correctAnswer = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: nil) ?? "—"
+    let correctAnswer = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) ?? "—"
     let wrongAnswers = generateWrongAnswers(verb: verb, makeTense: makeTense, personNumber: personNumber, correctAnswer: correctAnswer)
 
     return WidgetQuizQuestion(
-      infinitif: verb.infinitif,
+      infinitif: verb.infinitifWithPossibleExtraLetters,
       tenseDisplay: tense.titleCaseName,
       pronoun: compactPronoun(personNumber),
       correctAnswer: correctAnswer,
       wrongAnswers: wrongAnswers,
-      questionID: "\(dateString(for: date))-\(verb.infinitif)"
+      questionID: "\(dateString(for: date))-\(verb.infinitifWithPossibleExtraLetters)"
     )
   }
 
@@ -179,18 +180,18 @@ enum WidgetSnapshotWriter {
     // Nearest-miss distractors first: same tense, other persons; then same person,
     // other tenses — the most plausible wrong answers for this verb.
     for otherPerson in PersonNumber.allCases where otherPerson != personNumber {
-      consider(Conjugator.conjugatedString(infinitif: verb.infinitif, tense: makeTense(otherPerson), extraLetters: nil))
+      consider(Conjugator.conjugatedString(infinitif: verb.infinitif, tense: makeTense(otherPerson), extraLetters: verb.extraLetters))
     }
 
     for otherFamily in quizTenseFamilies {
-      consider(Conjugator.conjugatedString(infinitif: verb.infinitif, tense: otherFamily(personNumber), extraLetters: nil))
+      consider(Conjugator.conjugatedString(infinitif: verb.infinitif, tense: otherFamily(personNumber), extraLetters: verb.extraLetters))
     }
 
     // Broaden to the full tense × person cross-product before any fallback, so
     // distractors stay real conjugations of this verb.
     for family in quizTenseFamilies {
       for otherPerson in PersonNumber.allCases {
-        consider(Conjugator.conjugatedString(infinitif: verb.infinitif, tense: family(otherPerson), extraLetters: nil))
+        consider(Conjugator.conjugatedString(infinitif: verb.infinitif, tense: family(otherPerson), extraLetters: verb.extraLetters))
       }
     }
 
