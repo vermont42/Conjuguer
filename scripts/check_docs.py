@@ -11,13 +11,13 @@ Two failures on 2026-08-02, both silent, both from documentation drifting away f
 it describes.
 
 `KillSwitches.swift` was created by moving two enums out of `Models/ConjuguerTips.swift`.
-Eleven references in `docs/screenshot-playbook.md` still named the old path, including the
+Eleven references in `docs/screenshot_playbook.md` still named the old path, including the
 copy-paste `sed` commands an operator runs before an App Store screenshot sweep. That doc warns,
 two paragraphs above those commands, that `sed` exits 0 when its pattern matches nothing — so a
 stale path fails exactly the way a renamed switch would: quietly, with the sweep proceeding and
 tips still on. Nothing failed. Nothing could have.
 
-`docs/project-structure.md` was ported the same day from Konjugieren, where CLAUDE.md calls it a
+`docs/project_structure.md` was ported the same day from Konjugieren, where CLAUDE.md calls it a
 cache and asks that it be updated on every add, remove, or rename. Prose asking to be re-read
 does not get re-read; Konjugieren learned this when four documents claimed a stale verb count and
 one of them shipped the wrong number to the App Store. This does the check instead.
@@ -27,8 +27,9 @@ Scope
 Only claims a machine can settle, and only ones that are true-or-false regardless of when they
 were written. A link either resolves or does not. A file either appears in the index or does not.
 Deliberately absent is anything count-shaped: `docs/blog_notes.md` is dated project memory whose
-value is preserving what was true then, and `prompts/` archives session prompts whose paths
-describe the tree as it was. Checking those would report history as breakage. If a count check is
+value is preserving what was true then, and `plans/` and `prompts/` hold finished plans and
+Josh's prompts whose paths and counts describe the tree as it was. Most of that history sits in
+`plans/` since the sorting of 2026-11-16. Checking those would report history as breakage. If a count check is
 ever added, scope it by file the way Konjugieren's CACHE_FILES does, not by pattern.
 """
 
@@ -44,10 +45,10 @@ REPO = pathlib.Path(__file__).resolve().parent.parent
 # ("cur[uçus](ius)"), and no amount of parser care distinguishes that from a link.
 SKIP_DIRS = {".git", "build", "corpus", "DerivedData", "node_modules", ".build"}
 
-INDEX = "docs/project-structure.md"
+INDEX = "docs/project_structure.md"
 
 # The synchronized target folders plus Shared/, which compiles into both targets. These are the
-# trees project-structure.md promises to describe.
+# trees project_structure.md promises to describe.
 SOURCE_ROOTS = ["Conjuguer", "ConjuguerTests", "ConjuguerWidget", "Shared"]
 
 # Bundled data files live alongside the code that parses them and are indexed the same way, so
@@ -62,15 +63,16 @@ DATA_GLOBS = ["Conjuguer/Models/*.xml", "Conjuguer/Models/*.json", "frequency/*.
 LINK_RE = re.compile(r"\[[^\]]*\]\((\S+?)[)\s]")
 
 # Inline code spans are stripped before links are scanned. Docs that *describe* Markdown quote
-# its syntax — prompts/code-review-suggestions-union.md says links render as `[text](url)` — and
+# its syntax — docs/code_review_suggestions_union.md says links render as `[text](url)` — and
 # a literal placeholder inside backticks is not a claim that a file named "url" exists.
 CODE_SPAN_RE = re.compile(r"`[^`]*`")
 
 # Filenames as they appear in the index's tree. The character class carries the accented letters
 # because this repo has French-named sources — ConjuguerTests/Models/NousPrésentStemTests.swift
-# would otherwise read as two tokens and go missing — and the hyphen because the frequency
-# pipeline's data files are hyphenated, and `verb-counts.json` would otherwise read as
-# `counts.json` and go missing on both sides of the comparison at once.
+# would otherwise read as two tokens and go missing — and the hyphen because a hyphenated name
+# would otherwise lose its first word and go missing on both sides of the comparison at once.
+# No indexed file has had a hyphen since the snake_case rename of 2026-11-16, when the frequency
+# pipeline's `verb-counts.json` became `verb_counts.json`, but nothing stops one being added.
 FILENAME_RE = re.compile(r"[A-Za-z0-9_+.\-À-ſ]+\.(?:swift|xml|json)")
 
 
@@ -116,7 +118,7 @@ def source_files():
 
 
 def check_index_covers_sources():
-    """Every source file appears in project-structure.md.
+    """Every source file appears in project_structure.md.
 
     This is the half that catches an *addition* nobody indexed. It is the cheaper failure of the
     two — a session that finds a file missing from the index reads the file — but it is also the
@@ -128,7 +130,7 @@ def check_index_covers_sources():
 
 
 def check_index_has_no_phantoms():
-    """Every file project-structure.md names still exists.
+    """Every file project_structure.md names still exists.
 
     This is the half that catches a *rename* or a *deletion*, and it is the one worth having.
     A missing entry is a gap a reader notices; a phantom entry is a confident claim that a file
@@ -143,8 +145,8 @@ def check_index_has_no_phantoms():
 
 CHECKS = [
     ("relative links", check_links),
-    ("project-structure.md covers every source file", check_index_covers_sources),
-    ("project-structure.md names no missing file", check_index_has_no_phantoms),
+    ("project_structure.md covers every source file", check_index_covers_sources),
+    ("project_structure.md names no missing file", check_index_has_no_phantoms),
 ]
 
 

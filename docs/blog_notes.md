@@ -1692,7 +1692,7 @@ DWDS success (permission granted 2026-08-26, ranks for all 3,572 verbs) made the
 Conjuguer look like a solvable problem rather than a fact of life. Josh's prompt
 (`prompts/freq_prompt.md`) asked for a research pass: start with Lexical Computing and what a
 paid plan costs, then search widely, using the Chrome MCP where it helped. The result is
-[`verb-frequency-sources.md`](verb-frequency-sources.md).
+[`verb-frequency-sources.md`](verb_frequency_sources.md).
 
 **The first finding reframed the question.** The 1,000-item cap on word lists from Sketch
 Engine's preloaded corpora is *identical* for trial and paid accounts — the account-limitations
@@ -1734,7 +1734,7 @@ doc for a separate fix. No code changed; nothing was sent or purchased.
 
 Josh asked for two prompt files to act on the research. Neither has been run.
 
-[`prompts/fix-and-add-verbs.md`](../prompts/fix-and-add-verbs.md) handles the side finding:
+[`prompts/fix-and-add-verbs.md`](../plans/fix_and_add_verbs.md) handles the side finding:
 the seven `verbs.xml` entries no lexicon knows. Reading them with their glosses settled what
 each one is — `préenir` carries prévenir's exact gloss and model (`6-7`) and prévenir exists
 forty lines later, so it is a duplicate to delete, while the other six are renames whose
@@ -1751,7 +1751,7 @@ requires the check anyway, because the reflex table is audited, not guessed. A t
 defuses: `VerbView.sourceClaude` hard-codes "Claude (Opus 4.8)", so any example authored by
 this session must not inherit that label.
 
-[`prompts/glaff-frequency-ranking.md`](../prompts/glaff-frequency-ranking.md) is the
+[`prompts/glaff-frequency-ranking.md`](../plans/glaff_frequency_ranking.md) is the
 implementation of the research's recommendation, with the decisions pinned so a future
 session does not reopen them: FrWaC primary, LM10 → Frantext → Lexique 4 tie-breaks, counts
 stored as `hi`/`hn`/`hl`/`hs` with absent ≠ zero, ranks derived in `VerbParser.ranked` the
@@ -1915,7 +1915,7 @@ conjugations, assert that the seven old misspellings no longer conjugate at all.
 Since 2021 Conjuguer has ranked verbs by frequency of use, and since 2021 it has ranked
 exactly 981 of them. That was never a judgment about which verbs deserve a rank; it was
 Sketch Engine's word-list export cap. The research that went looking for a replacement is
-[`docs/verb-frequency-sources.md`](verb-frequency-sources.md) — the short version is that a
+[`docs/verb-frequency-sources.md`](verb_frequency_sources.md) — the short version is that a
 paid Sketch Engine subscription does not lift the cap (it is the same 1,000 items for trial
 and paid accounts alike), a longer list is an individually quoted data purchase, and the best
 free alternative is **GLÀFF 1.2.2**, a CC BY-SA 3.0 lexicon built from Wiktionnaire at
@@ -4587,3 +4587,54 @@ the two haïr entries tie on both rank and infinitive, so their relative order d
 dictionary iteration. It now sorts by the dictionary key. A new test sweeps each day that
 lands on a doubled infinitive and checks that the snapshot's key resolves and that the verb
 conjugates.
+
+## Prompts, plans, and documents, sorted and renamed in one pass (2026-11-16)
+
+Konjugieren sorted its prose by authorship and renamed it to snake_case earlier today, and the
+session that did it wrote `plans/location_cleanup.md` so that this repo could do the same in one
+sitting. The rule is Josh's: a prompt is what he writes to get Claude to do something, a plan is
+what Claude writes to get another session to do something, and a document is Claude's output
+that informs. The reason behind it decides the hard cases. He finds files by remembering who
+wrote them and roughly what about, so a file goes where he would look first.
+
+Every file in `prompts/` and `docs/` was read before it was placed, since Konjugieren had
+learned that filenames mislead in both directions. Of the 49 files in `prompts/`, 18 are Josh's,
+and they stayed. Twenty went to `plans/`: the working plans, the clean-session prompts, the
+Gemini prompts for the alligator and the app icons, and the image and the affix library that two
+of those plans use. Eleven went to `docs/`: the code-review findings and their closing
+snapshot, the five reviews of the Fable and Opus eval, the original etymology pipeline with its
+work list, a draft feature request for Claude Code, and the proposed minigame mechanics. Six
+files left `docs/` for `plans/`, among them `screenshot-plan.md`, which Josh began and Claude has
+mostly written since, as its Konjugieren twin had been. In all, 79 files were renamed and 74
+others edited.
+
+The plan opened with a warning, and it held. A published post, the one comparing Fable and Opus
+as code reviewers, links to six of these files and to the `prompts/` folder that held four of
+them. The search for such links was run bare this time and was first seen to find links it
+should find, so its result could be trusted. Josh chose to move the files and repair the post.
+Its ten links were retargeted in the Blog repository and checked against the files on disk here.
+Nothing has been committed or pushed in either repository, so the post's links break only if one
+is pushed without the other. Josh also ruled that the two verb-pass reports, which a stage of
+that plan generated, sit beside the plan in `plans/`, and that the etymology pipeline is a
+description of how something was done and belongs in `docs/`. Asked about the hyphenated names
+outside the three folders, he extended the rename to `frequency/`, `Images/`, and
+`.claude/rules/`.
+
+Konjugieren's rename tool did most of the work and reported one skip, a mention of a Konjugieren
+file in Josh's etymology prompt, which was correct to leave. It could not see three things. The
+WWDC transcripts are ignored by a glob, and after the rename the glob matched nothing, which
+left three files of Apple's copyrighted text one `git add -A` away from the repository. The
+verb-pass report script builds its output path from segments, the folder in one string and the
+filename in another, so the tool renamed the file but not the folder. And `check_docs.py` treats
+every `.json` name in the structure document as a shipped data file, so the JSON files in
+`docs/` and `plans/` are written there with the extension in brackets. A search for every old
+name across tracked and ignored files then found nothing it should not have, and it did find
+the one mention that was skipped on purpose.
+
+Two of the plan's claims did not hold. It said the six agent definitions tell their agents to
+read the plans by path, so that a stale path would leave an agent improvising. They name the
+plan only in their one-line description, and every brief is carried inline. The structure
+document also called `fable_max.md` a list of verbs. It is the 58 etymologies that Fable wrote
+at max effort, and the entry now says so. Ten of Conjugar's files, not counting its journal,
+name this repository's old paths. The Conjugar session working at the same time will read this repository's map of moves,
+`plans/location_cleanup_moves.json`, and its own plan already says so.

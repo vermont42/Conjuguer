@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""frequency/verb-counts.json -> the count attributes of Conjuguer/Models/verbs.xml.
+"""frequency/verb_counts.json -> the count attributes of Conjuguer/Models/verbs.xml.
 
 Edits the XML as text, one substitution per `<verb …/>` tag, because the file is
 hand-indented, carries a DOCTYPE, and keeps a fixed attribute order that a DOM round-trip
@@ -17,7 +17,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VERBS_XML = os.path.join(ROOT, "Conjuguer", "Models", "verbs.xml")
-COUNTS = os.path.join(ROOT, "frequency", "verb-counts.json")
+COUNTS = os.path.join(ROOT, "frequency", "verb_counts.json")
 
 OLD_DTD = '    <!ATTLIST verb fr CDATA #IMPLIED>\n'
 NEW_DTD = (
@@ -77,7 +77,7 @@ def main():
     text = re.sub(r"<verb [^>]*/>", rewrite, text)
 
     if missing:
-        sys.exit(f"{len(missing)} infinitives have no row in verb-counts.json: {', '.join(sorted(set(missing)))}")
+        sys.exit(f"{len(missing)} infinitives have no row in verb_counts.json: {', '.join(sorted(set(missing)))}")
 
     print(f"{changed} verb tags rewritten.")
     if args.dry_run:

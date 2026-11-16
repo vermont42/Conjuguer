@@ -1,6 +1,6 @@
 ---
 name: verb-skeptic
-description: Tries to refute one shard of proposed verb-pass changes (glosses, examples, flags) using the evidence carried in the shard file, writes the shard's verdict file, and returns a one-line summary. Used by Stage 3 of prompts/verb-pass-plan.md.
+description: Tries to refute one shard of proposed verb-pass changes (glosses, examples, flags) using the evidence carried in the shard file, writes the shard's verdict file, and returns a one-line summary. Used by Stage 3 of plans/verb_pass.md.
 model: opus
 effort: high
 omitClaudeMd: true

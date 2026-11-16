@@ -15,7 +15,7 @@ build/
 build.log
 docs/screenshots/
 # Apple-copyrighted WWDC transcripts, archived locally for reference only (per their headers)
-docs/wwdc2026-*.txt
+docs/wwdc2026_*.txt
 # corpus: tracked = finished JSON exports (corpus/json/), the hand-built parsed
 # intermediates (corpus/grokked/ — irreplaceable manual transcription/translation), and
 # the build script. Ignored = source PDFs/text (originals/, large + reconstructable) and
@@ -35,7 +35,7 @@ corpus/working/*
 !corpus/working/build_classical_index.py
 !corpus/working/merge_classical.py
 !corpus/working/mine_classical.workflow.js
-# verb pass (prompts/verb-pass-plan.md): the two Stage 0 reference builders. Their outputs
+# verb pass (plans/verb_pass.md): the two Stage 0 reference builders. Their outputs
 # (the kaikki dumps, the per-verb reference JSON, conjugations.json, authors.json) stay
 # ignored: they are large, and re-running these scripts rebuilds any of them.
 !corpus/working/build_wiktionary_reference.py
@@ -67,7 +67,7 @@ corpus/working/*
 !corpus/working/fetch_cnrtl.py
 # Stage 4's apply script; its log (verb_pass/applied.json) stays ignored.
 !corpus/working/apply_verb_pass.py
-# Etymology tail (prompts/etymology-tail-plan.md): the Stage 0 evidence builder and the wave tool.
+# Etymology tail (plans/etymology_tail.md): the Stage 0 evidence builder and the wave tool.
 # Their outputs (evidence.json, the headword index cache, the wave shards, results and verdicts)
 # stay ignored under corpus/working/etymology/.
 !corpus/working/build_etymology_evidence.py
@@ -88,7 +88,7 @@ corpus/working/wiktionary/*
 # frequency/README.md) and the generated report.
 frequency/*
 !frequency/README.md
-!frequency/GLAFF-README.txt
+!frequency/glaff_readme.txt
 !frequency/*.py
-!frequency/verb-counts.json
-!frequency/editorial-counts.json
+!frequency/verb_counts.json
+!frequency/editorial_counts.json

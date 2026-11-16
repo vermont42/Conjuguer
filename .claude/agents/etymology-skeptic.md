@@ -1,6 +1,6 @@
 ---
 name: etymology-skeptic
-description: Tries to refute the rich-tier etymologies of one shard against the evidence carried in the shard file, writes the shard's verdict file, and returns a one-line summary. Used by the waves of prompts/etymology-tail-plan.md.
+description: Tries to refute the rich-tier etymologies of one shard against the evidence carried in the shard file, writes the shard's verdict file, and returns a one-line summary. Used by the waves of plans/etymology_tail.md.
 model: sonnet
 omitClaudeMd: true
 tools: Read, Write

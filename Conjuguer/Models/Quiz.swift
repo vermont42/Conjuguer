@@ -196,7 +196,7 @@ class Quiz {
     #if DEBUG
     // Screenshot driver hook: when launched with `-CONJUGUER_QUIZ_FIXTURE screenshot`,
     // build a deterministic 30-question quiz and export the correct answers so the
-    // screenshot driver can type them. See docs/screenshot-playbook.md.
+    // screenshot driver can type them. See docs/screenshot_playbook.md.
     if UserDefaults.standard.string(forKey: "CONJUGUER_QUIZ_FIXTURE") == "screenshot" {
       questions = generateScreenshotFixture()
       exportFixtureAnswers(questions)
@@ -283,7 +283,7 @@ class Quiz {
   // A fixed, locale-independent 30-question plan for App Store screenshots. The
   // verbs are all common enough to exist in every build of verbs.xml, and the
   // tenses are picked to look representative (présent, passé composé, imparfait,
-  // futur, conditionnel, impératif). See docs/screenshot-playbook.md.
+  // futur, conditionnel, impératif). See docs/screenshot_playbook.md.
   private func generateScreenshotFixture() -> [QuizQuestion] {
     let plan: [(infinitif: String, tense: Tense)] = [
       ("parler", .indicatifPrésent(.firstSingular)),

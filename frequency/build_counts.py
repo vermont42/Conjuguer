@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""GLÀFF + Lexique 4 -> frequency/verb-counts.json, one row per distinct infinitive.
+"""GLÀFF + Lexique 4 -> frequency/verb_counts.json, one row per distinct infinitive.
 
 Reads the two lexicons downloaded per frequency/README.md, extracts verb-lemma frequency
 counts for every infinitive in Conjuguer/Models/verbs.xml, estimates a FrWaC-equivalent
-count for the infinitives no corpus lists, and writes verb-counts.json plus a report.
+count for the infinitives no corpus lists, and writes verb_counts.json plus a report.
 
 Run from the repo root:  python3 frequency/build_counts.py
 """
@@ -24,8 +24,8 @@ VERBS_XML = os.path.join(ROOT, "Conjuguer", "Models", "verbs.xml")
 GLAFF = os.path.join(FREQ, "glaff-1.2.2.txt")
 OLDIES = os.path.join(FREQ, "oldiesSubLexicon.txt")
 LEXIQUE = os.path.join(FREQ, "Lexique4", "Lexique4.tsv")
-EDITORIAL = os.path.join(FREQ, "editorial-counts.json")
-OUT = os.path.join(FREQ, "verb-counts.json")
+EDITORIAL = os.path.join(FREQ, "editorial_counts.json")
+OUT = os.path.join(FREQ, "verb_counts.json")
 REPORT = os.path.join(FREQ, "report.md")
 
 CLAMP_RANK = 1000
@@ -236,7 +236,7 @@ def main():
     if estimates["unresolved"]:
         failures.append(
             f"{len(estimates['unresolved'])} infinitives have neither a measured nor an estimated "
-            f"count; add them to editorial-counts.json: {', '.join(sorted(estimates['unresolved'], key=french_key))}"
+            f"count; add them to editorial_counts.json: {', '.join(sorted(estimates['unresolved'], key=french_key))}"
         )
     if r_squared < MIN_R_SQUARED:
         failures.append(f"calibration R² {r_squared:.3f} is below {MIN_R_SQUARED}")

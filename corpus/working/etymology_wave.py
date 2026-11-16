@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""The etymology tail's wave tool (prompts/etymology-tail-plan.md, stages 1 and 2).
+"""The etymology tail's wave tool (plans/etymology_tail.md, stages 1 and 2).
 
 Affix library (stage 1):
   affix-batches --batches 4     write the writers' input files from evidence.json
   affix-assemble                merge the writers' parts and the skeptic fixes into
-                                prompts/etymology-affixes.json, then check it
+                                plans/etymology_affixes.json, then check it
 
 Waves (stage 2):
   select   --wave N --size S    pick the next verbs (bases first) and write the shards
@@ -27,7 +27,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 WORK = ROOT / "corpus/working/etymology"
 EVIDENCE = WORK / "evidence.json"
 AFFIX_DIR = WORK / "affixes"
-AFFIX_LIB = ROOT / "prompts/etymology-affixes.json"
+AFFIX_LIB = ROOT / "plans/etymology_affixes.json"
 ETYM = ROOT / "Conjuguer/Models/Etymologies.json"
 FREQ = ROOT / "docs/frequencies.txt"
 

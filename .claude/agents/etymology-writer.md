@@ -1,6 +1,6 @@
 ---
 name: etymology-writer
-description: Writes English and French etymologies for one shard of French verbs from the evidence carried in the shard file (web only for gaps), writes the shard's result file, and returns a one-line summary. Used by the waves of prompts/etymology-tail-plan.md.
+description: Writes English and French etymologies for one shard of French verbs from the evidence carried in the shard file (web only for gaps), writes the shard's result file, and returns a one-line summary. Used by the waves of plans/etymology_tail.md.
 model: sonnet
 omitClaudeMd: true
 ---

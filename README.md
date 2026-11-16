@@ -30,11 +30,11 @@ While developing **Conjuguer** in 2021, I learned about SwiftUI and how to mix i
 
 | Verb List | Verb | Verb-Model List | Verb Model | Quiz |
 | --- | --- | --- | --- | --- |
-| <img src="Images/verb-browse.png" width="190"> | <img src="Images/verb.png" width="190"> | <img src="Images/model-browse.png" width="190"> | <img src="Images/model.png" width="190"> | <img src="Images/quiz.png" width="190"> |
+| <img src="Images/verb_browse.png" width="190"> | <img src="Images/verb.png" width="190"> | <img src="Images/model_browse.png" width="190"> | <img src="Images/model.png" width="190"> | <img src="Images/quiz.png" width="190"> |
 
 | Quiz Results | Tense List | Tense Description | Settings | Minigame |
 | --- | --- | --- | --- | --- |
-| <img src="Images/quiz-results.png" width="190"> | <img src="Images/tense-browse.png" width="190"> | <img src="Images/tense.png" width="190"> | <img src="Images/settings.png" width="190"> | <img src="Images/game.png" width="190"> |
+| <img src="Images/quiz_results.png" width="190"> | <img src="Images/tense_browse.png" width="190"> | <img src="Images/tense.png" width="190"> | <img src="Images/settings.png" width="190"> | <img src="Images/game.png" width="190"> |
 
 ### Building from Source
 
@@ -58,7 +58,7 @@ git config core.hooksPath .githooks
 ```
 
 Further documentation lives in [`docs/`](docs), starting with the annotated directory tree in
-[`docs/project-structure.md`](docs/project-structure.md).
+[`docs/project_structure.md`](docs/project_structure.md).
 
 ### Verb frequency
 

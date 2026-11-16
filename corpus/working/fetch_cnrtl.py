@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fetch CNRTL dictionary entries for a few verbs, as evidence for the verb pass.
 
-Stage 5c of prompts/verb-pass-plan.md: the verbs whose Stage 5 example was refuted because the
+Stage 5c of plans/verb_pass.md: the verbs whose Stage 5 example was refuted because the
 gloss is wrong or the shard's reference is too thin. One request per verb to CNRTL's JSON API
 (TLFi, Wiktionnaire, Académie 8e and 9e, Littré, and concordance lines), a few seconds apart, as
 the plan's "Live lookups" section allows for a handful of single-verb checks; never a scraping

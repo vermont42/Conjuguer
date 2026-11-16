@@ -17,7 +17,7 @@ the order (hi, hn, hl, hs) with a missing count sorting last, and breaks ties on
 under French collation. This module reproduces that, so a rank printed by an audit is the rank
 the app shows.
 
-See prompts/verb-pass-plan.md, Stage 1.
+See plans/verb_pass.md, Stage 1.
 """
 import json
 import locale

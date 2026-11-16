@@ -3,7 +3,7 @@
 The build-time pipeline that gives every one of Conjuguer's 6,326 distinct infinitives a
 frequency-of-use ranking. The research behind the source choice — what a paid Sketch Engine
 plan does and does not buy, how the candidate corpora compare on coverage, register, and
-licence — is [`docs/verb-frequency-sources.md`](../docs/verb-frequency-sources.md).
+licence — is [`docs/verb_frequency_sources.md`](../docs/verb_frequency_sources.md).
 
 This folder sits at the repo root deliberately: `Conjuguer/` is an Xcode *synchronized*
 folder, so any file placed under it joins the app target. Nothing here ships.
@@ -44,8 +44,8 @@ count — see *Quarantined FrWaC counts* for the one exception.
 | Downloaded | 2026-08-28, from the CNRS mirror on Hugging Face |
 | `glaff-1.2.2.txt` | 157,216,000 bytes, SHA-256 `e23a69b397a20e79cc59bbbe1918803a8b3d2df2494249c20538ebd0cfbf05c6` |
 | `oldiesSubLexicon.txt` | 494,635 bytes, SHA-256 `00035c26e0310e83e30bdc542c5292831eb62dfd0e92d0743aaaf6da25acc927` |
-| Licence | CC BY-SA 3.0. `GLAFF-README.txt` is tracked here because the licence asks that it accompany any redistribution, and `verbs.xml` redistributes derived counts |
-| Citation | Sajous, Hathout & Calderone (2013), *GLÀFF, un Gros Lexique À tout Faire du Français*, TALN 2013 — the BibTeX is in `GLAFF-README.txt` |
+| Licence | CC BY-SA 3.0. `glaff_readme.txt` is tracked here because the licence asks that it accompany any redistribution, and `verbs.xml` redistributes derived counts |
+| Citation | Sajous, Hathout & Calderone (2013), *GLÀFF, un Gros Lexique À tout Faire du Français*, TALN 2013 — the BibTeX is in `glaff_readme.txt` |
 | Homepage | `http://redac.univ-tlse2.fr/lexiques/glaff_en.html` (it refused connections on the research day and was back up on the build day; the Hugging Face mirror is the reliable download) |
 
 `oldiesSubLexicon.txt` holds GLÀFF's obsolete, dated, and archaic entries. It carries **no**
@@ -77,7 +77,7 @@ is cheap.
 ```bash
 curl -sSLo frequency/glaff-1.2.2.txt "https://huggingface.co/datasets/datasets-CNRS/GLAFF/resolve/main/data/glaff-1.2.2.txt"
 curl -sSLo frequency/oldiesSubLexicon.txt "https://huggingface.co/datasets/datasets-CNRS/GLAFF/resolve/main/data/oldiesSubLexicon.txt"
-curl -sSLo frequency/GLAFF-README.txt "https://huggingface.co/datasets/datasets-CNRS/GLAFF/raw/main/data/README.txt"
+curl -sSLo frequency/glaff_readme.txt "https://huggingface.co/datasets/datasets-CNRS/GLAFF/raw/main/data/README.txt"
 curl -sSLo frequency/Lexique400.zip "http://www.lexique.org/databases/Lexique400/Lexique400.zip"
 unzip -q frequency/Lexique400.zip -d frequency/
 shasum -a 256 frequency/glaff-1.2.2.txt frequency/oldiesSubLexicon.txt frequency/Lexique400.zip
@@ -87,11 +87,11 @@ shasum -a 256 frequency/glaff-1.2.2.txt frequency/oldiesSubLexicon.txt frequency
 
 | File | Role | Tracked |
 |---|---|---|
-| `build_counts.py` | Both lexicons → `verb-counts.json` + `report.md`; runs the estimate tiers and the gates | yes |
-| `apply_counts.py` | `verb-counts.json` → the `hi`/`hn`/`hl`/`hs`/`hp` attributes of `verbs.xml` | yes |
+| `build_counts.py` | Both lexicons → `verb_counts.json` + `report.md`; runs the estimate tiers and the gates | yes |
+| `apply_counts.py` | `verb_counts.json` → the `hi`/`hn`/`hl`/`hs`/`hp` attributes of `verbs.xml` | yes |
 | `generate_frequencies_txt.py` | `verbs.xml` → `docs/frequencies.txt`, in `VerbParser.ranked(_:)`'s exact order | yes |
-| `verb-counts.json` | One row per distinct infinitive: measured counts and, where needed, `frwac_estimate` | yes |
-| `editorial-counts.json` | The hand-assigned tier: seven verbs, each with a one-line reason | yes |
+| `verb_counts.json` | One row per distinct infinitive: measured counts and, where needed, `frwac_estimate` | yes |
+| `editorial_counts.json` | The hand-assigned tier: seven verbs, each with a one-line reason | yes |
 | `report.md` | The last build's report | no |
 
 ```bash
@@ -121,7 +121,7 @@ count and flagged `hp="y"`, through three tiers in order of preference:
    times a prefix ratio, the median of `lexique4(prefix-X) / lexique4(X)` over the pairs
    Lexique 4 does have for that prefix.
 3. **`editorial`** (7 verbs) — a rarity in no source: a hand-assigned count from
-   `editorial-counts.json` with a stated reason. Zero is an acceptable entry; the point is
+   `editorial_counts.json` with a stated reason. Zero is an acceptable entry; the point is
    that the number is chosen rather than missing.
 
 **The clamp.** No estimate may exceed the measured count at rank 1,000 (13,773 hits on

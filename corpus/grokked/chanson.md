@@ -4,7 +4,7 @@
 291 laisses).* Each laisse is a self-contained block: the **numbered original** Old
 French (with the **modern infinitive of every verb** bracketed at the end of each
 line), immediately followed by a **fresh line-by-line translation** sharing the same
-canonical numbers. See `docs/chanson-full-treatment-prompt.md` for the conventions and
+canonical numbers. See `plans/chanson_full_treatment.md` for the conventions and
 the verb-gloss mappings table.
 
 **Translation note.** The translation below is Claude's own, re-rendered line for line:

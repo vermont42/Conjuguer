@@ -11,7 +11,7 @@ struct Info: Identifiable, Hashable {
   // Stable, locale-independent key used to build the `info_row_<stableKey>`
   // accessibility identifier in InfoBrowseView. Unlike `heading` (localized),
   // this never changes between English and French, so the screenshot driver can
-  // address rows by it. See docs/screenshot-playbook.md.
+  // address rows by it. See docs/screenshot_playbook.md.
   let stableKey: String
   let heading: String
   let richTextBlocks: [RichTextBlock]

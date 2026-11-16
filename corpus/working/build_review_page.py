@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build a local review page for the verb-pass approvals, and merge its decisions back.
 
-Stage 3 of prompts/verb-pass-plan.md, for Josh's reading of approvals.json. The page shows
+Stage 3 of plans/verb_pass.md, for Josh's reading of approvals.json. The page shows
 every item that the `defaults` rules leave to a human (all `partly` items, anything held for
 `review`, and anything no default accepts), one at a time, with the current and proposed
 values and both models' reasoning. Keys: A accept, R reject, E edit the value, U undo,

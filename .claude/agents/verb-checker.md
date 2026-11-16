@@ -1,6 +1,6 @@
 ---
 name: verb-checker
-description: Checks one shard of French verbs (gloss, example sentence, candidate selection, flags) against Wiktionary evidence carried in the shard file, writes the shard's result file, and returns a one-line summary. Used by the verb-pass pipeline (prompts/verb-pass-plan.md).
+description: Checks one shard of French verbs (gloss, example sentence, candidate selection, flags) against Wiktionary evidence carried in the shard file, writes the shard's result file, and returns a one-line summary. Used by the verb-pass pipeline (plans/verb_pass.md).
 model: sonnet
 effort: medium
 omitClaudeMd: true

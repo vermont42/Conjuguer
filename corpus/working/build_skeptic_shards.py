@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Gather the Stage 2 proposals the skeptic re-examines into shards of 25 items.
 
-Stage 3 of prompts/verb-pass-plan.md. The scope Josh chose on 2026-09-21:
+Stage 3 of plans/verb_pass.md. The scope Josh chose on 2026-09-21:
 
     gloss         every gloss verdict other than `ok`
     example       every existing-example verdict other than `ok` or `none`

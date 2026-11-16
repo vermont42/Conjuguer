@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stage 0 of prompts/etymology-tail-plan.md: the per-verb etymology evidence file.
+"""Stage 0 of plans/etymology_tail.md: the per-verb etymology evidence file.
 
 For every infinitive absent from Conjuguer/Models/Etymologies.json, gathers the rank, the
 gloss, the French and English Wiktionary etymology texts, a parsed formation (prefix,

@@ -14,7 +14,7 @@ The raw dumps land in `corpus/working/wiktionary/raw/` (gitignored, re-fetchable
 is skipped when the file is already present at exactly the byte count the server's
 Content-Length reports, so re-running costs two HEAD requests.
 
-Both extracts are CC BY-SA; see docs/wiktionary-quotation-sources.md for what the app uses
+Both extracts are CC BY-SA; see docs/wiktionary_quotation_sources.md for what the app uses
 them for.
 
 Usage:  python3 corpus/working/build_wiktionary_reference.py [--force-download]

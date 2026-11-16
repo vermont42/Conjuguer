@@ -1,6 +1,6 @@
 ---
 name: etymology-affix-writer
-description: Researches and writes the reference cards for one batch of French verb-forming affixes (prefixes and suffixes, grouped by allomorph), writes the batch's card file, and returns a one-line summary. Used by stage 1 of prompts/etymology-tail-plan.md.
+description: Researches and writes the reference cards for one batch of French verb-forming affixes (prefixes and suffixes, grouped by allomorph), writes the batch's card file, and returns a one-line summary. Used by stage 1 of plans/etymology_tail.md.
 model: sonnet
 omitClaudeMd: true
 ---

@@ -1,7 +1,7 @@
 export const meta = {
   name: 'etymology-wave',
   description: 'Write one wave of verb etymologies (etymology-writer per shard) and skeptic-check each shard\'s rich entries (etymology-skeptic)',
-  whenToUse: 'A wave of prompts/etymology-tail-plan.md, after etymology_wave.py select has written the shards',
+  whenToUse: 'A wave of plans/etymology_tail.md, after etymology_wave.py select has written the shards',
   phases: [
     { title: 'Write', detail: 'one etymology-writer per shard, Sonnet' },
     { title: 'Skeptic', detail: 'one etymology-skeptic per shard with rich entries, Sonnet' },

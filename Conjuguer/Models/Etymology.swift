@@ -10,7 +10,7 @@ import Foundation
 // Supplies an etymology for a verb, keyed by infinitif, loaded from the bundled
 // `Etymologies.json`. That file is keyed language → infinitif → text; the text uses
 // `~bold~` markup (see String.etymologyAttributedString) and `\n\n` paragraph breaks.
-// Entries are produced by the pipeline in etymology-pipeline.md.
+// Entries are produced by the pipeline in etymology_pipeline.md.
 enum Etymology {
   @MainActor private static var etymologies: [String: String]?
 

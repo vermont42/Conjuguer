@@ -91,7 +91,7 @@ H.264 High at **Level 5.0**, variable frame rate, at native 1320 × 2868, with n
 track. That is fine and expected.
 
 Both recording simulators ship with the current Xcode and are already installed
-(iOS 26.3). `docs/app-store-preview-videos.md` has the narrative behind the choices.
+(iOS 26.3). `docs/app_store_preview_videos.md` has the narrative behind the choices.
 
 | Deliverable | Simulator | Native capture | On the timeline |
 |---|---|---|---|

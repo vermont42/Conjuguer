@@ -1,6 +1,6 @@
 ---
 name: etymology-affix-skeptic
-description: Tries to refute a batch of French affix reference cards against the source notes the writer recorded, writes the batch's verdict file, and returns a one-line summary. Used by stage 1 of prompts/etymology-tail-plan.md.
+description: Tries to refute a batch of French affix reference cards against the source notes the writer recorded, writes the batch's verdict file, and returns a one-line summary. Used by stage 1 of plans/etymology_tail.md.
 model: sonnet
 omitClaudeMd: true
 tools: Read, Write

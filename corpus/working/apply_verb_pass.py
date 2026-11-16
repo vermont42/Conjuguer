@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Apply the accepted verb-pass changes to the app's data.
 
-Stage 4 of prompts/verb-pass-plan.md. Reads the Stage 2 shards and results, the Stage 3
+Stage 4 of plans/verb_pass.md. Reads the Stage 2 shards and results, the Stage 3
 skeptic items, corpus/working/added_glosses.json and corpus/working/verb_pass/approvals.json,
 and applies every item whose effective decision is `accept`:
 
@@ -34,7 +34,7 @@ The English-Wiktionary candidates carried no author: build_candidates.py dropped
 
 Stage 5.6 (`--pass-dir corpus/working/verb_pass/stage5`) applies the Stage 5 approvals instead:
 `new_example`, `pick` and `gloss` items only, each verb's latest attempt across the shards
-(build_report.latest_attempts), into a second marked section of docs/authored-examples.md. A pick's
+(build_report.latest_attempts), into a second marked section of docs/authored_examples.md. A pick's
 value `{fr, en}` replaces its translation, and its French must still match a candidate; a
 `value.candidate` names a different candidate of the verb, found by its fields and re-checked with
 pick_status. An example written for a proposed gloss is applied only with that gloss. A Stage 4 run
@@ -57,7 +57,7 @@ import validate_verb_pass as validator
 import verb_pass_lib as lib
 
 AUTHORED_SOURCE = "Claude (Sonnet 5)"
-AUTHORED_DOC = lib.REPO / "docs" / "authored-examples.md"
+AUTHORED_DOC = lib.REPO / "docs" / "authored_examples.md"
 DOC_START = "<!-- verb-pass:start -->"
 DOC_END = "<!-- verb-pass:end -->"
 STAGE5_DOC_START = "<!-- verb-pass-stage5:start -->"
@@ -205,7 +205,7 @@ def write_examples(examples):
 def authored_doc(rows):
     out = [DOC_START, "",
            f"## The verb pass ({len(rows):,} verbs, applied 2026-10-01)", "",
-           "Stage 2 of the verb pass (`prompts/verb-pass-plan.md`) had Claude (Sonnet 5) write a sentence "
+           "Stage 2 of the verb pass (`plans/verb_pass.md`) had Claude (Sonnet 5) write a sentence "
            "for each verb that no corpus sentence or public-domain quotation served, and Stage 3 had "
            "Claude (Opus 5) check each one for grammar, sense, translation and register, and for a "
            "qualifying candidate passed over. The rows below are the ones Josh accepted, in "

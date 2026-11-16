@@ -1,7 +1,7 @@
 export const meta = {
   name: 'verb-pass',
   description: 'Check (or skeptically re-examine) shards of French verb data against the Wiktionary evidence assembled in each shard file',
-  whenToUse: 'Stage 2 and Stage 3 of prompts/verb-pass-plan.md, after build_verb_pass_shards.py (check mode) or build_skeptic_shards.py (skeptic mode)',
+  whenToUse: 'Stage 2 and Stage 3 of plans/verb_pass.md, after build_verb_pass_shards.py (check mode) or build_skeptic_shards.py (skeptic mode)',
   phases: [
     { title: 'Check', detail: 'one verb-checker per shard: gloss, example, candidate selection, flags' },
     { title: 'Skeptic', detail: 'one verb-skeptic per shard of proposed changes: refute by default' },

@@ -2,7 +2,7 @@
 """Resolve the authors quoted by French Wiktionary to Wikidata death years.
 
 The verb pass may reuse a Wiktionnaire quotation as an app example only when the quotation is
-public domain, and the rule (decision 2 of prompts/verb-pass-plan.md) is the author's death
+public domain, and the rule (decision 2 of plans/verb_pass.md) is the author's death
 year, not the edition year the reference shows: usable iff the author died before 1931. An
 unresolved author is not public domain.
 

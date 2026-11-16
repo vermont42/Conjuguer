@@ -26,6 +26,68 @@ parenthetical aside or a list gloss that is not itself a clause is not what it f
 "branch before committing" reflex does not apply here. If you find yourself proposing a feature
 branch, don't.
 
+## Prompts, Plans, and Documents
+
+Three folders hold the project's prose, sorted by who wrote a file and what it is for:
+
+- **`prompts/`**: what Josh writes to get Claude to do something.
+- **`plans/`**: what Claude writes to get another session to do something. Orchestrator plans,
+  subagent briefs, handoffs, and resume prompts all count. So do prompts Claude writes for
+  another tool, such as an image generator or Claude in Chrome, and a file Josh began that Claude
+  has mostly written since and that still has work to do.
+- **`docs/`**: Claude's output that holds information and is not a plan: research, audits,
+  findings, playbooks, pipeline descriptions, and reference guides.
+
+The reason is how Josh finds files. He often does not remember a filename, only that he wrote a
+prompt, or that Claude wrote a plan, about some subject. So authorship decides the folder, and
+when a file fits two folders, choose the one where he would look first. A review sheet or report
+that a plan's phase generates stays in `plans/` beside that plan, as the verb-pass reports do.
+A data file or image that one plan reads travels with it, as the etymology affix library does.
+
+Save a new file by this rule and list it in `docs/project_structure.md`, whose one-line
+descriptions are what make a file findable by subject. When a file moves, update the references
+to it, and in `docs/blog_notes.md` retarget link targets only, leaving the words as written.
+Decided in Konjugieren and applied here on 2026-11-16.
+
+## File Naming
+
+**Name files and directories in snake_case, not kebab-case**: `verb_frequency_sources.md`, not
+`verb-frequency-sources.md`. Josh prefers it, and since 2026-11-16 everything in `docs/`,
+`plans/`, `prompts/`, `frequency/`, `Images/`, and `.claude/rules/` follows it. A script that
+builds a filename at runtime must build it in snake_case too.
+
+**Do not repeat in a filename what the folder already says.** A file in `plans/` is a plan and a
+file in `prompts/` is a prompt, so neither word belongs in the name: `plans/verb_pass.md`, not
+`plans/verb-pass-plan.md`. Two files may share a name across folders, as `prompts/verb_pass.md`
+(Josh's ask) and `plans/verb_pass.md` (Claude's plan for it) do. If dropping the word leaves a
+name that no longer identifies the file, name it for its subject instead, as
+`prompts/verb_frequency.md` was.
+
+Some names are not ours to choose. Swift source files are named for their type, as are asset
+catalog entries and fonts (`WorkSans-Bold.ttf`). A name that a tool dictates, such as
+`.claude/ios-build-verify.config.sh`, the agent definitions in `.claude/agents/`, or
+`.githooks/pre-commit`, stays as the tool wants it. A downloaded file keeps its publisher's name.
+`privacyPolicy4.md` at the repo root keeps its name because the App Store listing may point at it.
+
+**Before renaming a file, search `~/Desktop/workspace/Blog` for GitHub URLs that point at it**,
+and stop to ask Josh if a published post links to it, because the link breaks when the rename is
+pushed. A link in an old email is not a reason to stop.
+
+```bash
+grep -rnoE "github\.com/vermont42/Conjuguer/(blob|tree|raw)/[A-Za-z0-9_./-]+" ~/Desktop/workspace/Blog/_posts | sort -u
+```
+
+Run that search bare, with no `timeout` (not installed on this Mac) and no `2>/dev/null`, and
+first confirm it can find a link it should find: it prints links to Swift files in two posts. In
+Konjugieren on 2026-11-16 the wrapped form printed nothing, the silence was read as "no links",
+and the push broke two links in a published post. Exclude `corpus/` from any search of this repo;
+it is 1.5 GB.
+
+**To rename or move a file, use `../Konjugieren/scripts/rename_files.py`**, run from this repo's
+root, which also repairs the references: Markdown link targets, written-out paths, and bare
+names. Its docstring lists what it cannot see. Here it missed two kinds: a `.gitignore` glob
+(`docs/wwdc2026_*.txt`) and a path built from segments (`lib.REPO / "plans" / …`).
+
 ## Build and Test Commands
 
 This project uses the **`ios-build-verify` Claude Code skill** for building, testing,
@@ -142,7 +204,7 @@ delete it. When a comment is borderline, lean toward deletion.
 The unit tests use **Swift Testing** and live in `ConjuguerTests/`, a synced folder. Their
 conventions and gotchas (the shared `T.testConjugation` helper, the generated
 `VerbModelTests.swift` that must be regenerated rather than hand-edited, `@MainActor` suites,
-explicit `import Foundation`, serialized suites) are in `.claude/rules/swift-testing.md`,
+explicit `import Foundation`, serialized suites) are in `.claude/rules/swift_testing.md`,
 which loads when you work under `ConjuguerTests/`.
 
 ## Architecture Overview
@@ -151,11 +213,11 @@ Conjuguer is an iOS app for learning French verb conjugations. It conjugates 6,3
 
 ### Project Layout (synchronized folders)
 
-See [`docs/project-structure.md`](docs/project-structure.md) for the full annotated
+See [`docs/project_structure.md`](docs/project_structure.md) for the full annotated
 directory tree.
 
 **Cache maintenance:** When you add, remove, or rename a source file, update
-`docs/project-structure.md` to match. It is a cache — future contexts rely on it to orient
+`docs/project_structure.md` to match. It is a cache — future contexts rely on it to orient
 without re-reading the tree, so staleness has a real cost. A *wrong* entry costs more than
 a *missing* one, because it gets believed; prioritize fixing renames and repurposed files.
 
@@ -167,9 +229,11 @@ python3 scripts/check_docs.py
 ```
 
 It asserts three things a machine can settle: every relative Markdown link resolves, every
-source file appears in `docs/project-structure.md`, and every file that doc names still
-exists. Counts are deliberately *not* checked — `docs/blog_notes.md` and `prompts/`
-describe the tree as it was, and asserting against them would report history as breakage.
+source file appears in `docs/project_structure.md`, and every file that doc names still
+exists. Counts are deliberately *not* checked. `docs/blog_notes.md`, `plans/`, and `prompts/`
+describe the tree as it was, and asserting against them would report history as breakage. Since
+the sorting of 2026-11-16, `plans/` holds most of that history: the finished plans and their
+generated reports.
 
 The project uses **Xcode synchronized folders** (`PBXFileSystemSynchronizedRootGroup`),
 not classic groups: the two target folders `Conjuguer/` and `ConjuguerTests/` are each
@@ -244,7 +308,7 @@ All external services have protocol abstractions with production and test implem
 that builds literature example sentences for the app's usage-ranked verbs. Its
 folder layout, gitignore policy, build scripts, reflex-attachment policy, corpus
 tiers/licensing, and coverage status are documented in
-[`docs/literature-example-corpus.md`](docs/literature-example-corpus.md). Read that
+[`docs/literature_example_corpus.md`](docs/literature_example_corpus.md). Read that
 doc before touching anything under `corpus/`.
 
 ## Localization System
@@ -263,7 +327,7 @@ English source) — e.g. `L.QuizView.score(_:)`, `L.VerbView.sourceWikipedia(_:)
 
 The app's string catalog is `Conjuguer/Assets/Localizable.xcstrings`. How to edit it safely
 (an ASCII `"` added through the Edit tool breaks the JSON), search it, write its rich-text
-markup, and relocalize long texts is in `.claude/rules/localization-catalog.md`, which loads
+markup, and relocalize long texts is in `.claude/rules/localization_catalog.md`, which loads
 when you work with any `.xcstrings` file or `L.swift`.
 
 **Do not reflexively `git checkout` the catalog after a build.** The build never rewrites it
@@ -286,4 +350,4 @@ Inspect the diff and keep or discard it deliberately.
 The `ConjuguerWidget` extension has its own catalog, `ConjuguerWidget/Localizable.xcstrings`,
 and its own accessor enum, `WidgetL` (`Shared/WidgetL.swift`). All `Widget.*` keys, including
 those the `Shared/` intents use, live only in the widget catalog. The details, including why
-AppIntent titles can't route through `WidgetL`, are in `.claude/rules/widget-localization.md`.
+AppIntent titles can't route through `WidgetL`, are in `.claude/rules/widget_localization.md`.
