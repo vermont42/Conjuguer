@@ -1,6 +1,6 @@
 I was curious about Anthropic's new Fable model, released today, so I ran the experiment described in docs/model_eval_analysis.md . The outputs of the four runs are in docs/code_review_suggestions_*.md . The recommendations, which are a union of the four sessions, are in docs/code_review_suggestions_union.md .
 
-Please write, in /Users/josh/Desktop/workspace/Blog , a blog-post version of the report. Follow the writing style in Blog/writing_style.md . For the hero image, use bayou_jazz_alligator.png , copying it to a new folder in Blog/img . For the image, use this caption and alt text:
+Please write, in /Users/josh/Desktop/workspace/Blog , a blog-post version of the report. Follow the writing style in ideation/writing_style.md . For the hero image, use bayou_jazz_alligator.png , copying it to a new folder in Blog/img . For the image, use this caption and alt text:
 
 > A friendly alligator plays "Fables of Fabus" by Charles Mingus.
 
