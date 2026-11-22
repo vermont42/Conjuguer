@@ -10,7 +10,9 @@ than a missing section would.
 
 ## Search
 
-The Verbs and Models tabs each show a list with a search field and a sort picker.
+The Verbs and Models tabs each show a list with a search field and a sort picker. Since Phase 1 of
+the browse plan (2026-11-22), one function, `VerbSearch.matches`, matches and ranks verbs for both,
+and later callers (reverse lookup, Spotlight, the Look Up intent) are to use it too.
 
 ### Architecture
 
@@ -19,25 +21,46 @@ The Verbs and Models tabs each show a list with a search field and a sort picker
 | `VerbBrowseView.swift` | The Verbs tab: the list (a `List` on iPhone, a `LazyVGrid` of cards on iPad), the sort picker, the search field, and the verb count. `VerbBrowse.makeStore` builds the store |
 | `ModelBrowseView.swift` | The Models tab, built the same way. `ModelBrowse.makeStore` builds the store |
 | `BrowseStore.swift` | A generic `@Observable` store that holds a list presorted for each sort order and persists the chosen order through a closure |
-| `BrowseSearch.swift` | `BrowseSearch.results(in:query:playSoundIfEmpty:matches:)`: filters a list by a predicate that each tab supplies, and plays a sad trombone when a query finds nothing |
-| `BrowseRow.swift` | The row both tabs show: a French title, an English subtitle, and a badge |
-| `VerbSort.swift`, `ModelSort.swift` | The sort orders: Frequency (the default) and Alphabetical for verbs; Irregularity, Alphabetical, and Identifier for models. `Settings` stores the choice |
+| `BrowseSearch.swift` | `BrowseSearch.results(in:query:playSoundIfEmpty:search:)`: every item for a blank query, otherwise what the tab's search closure returns, with a sad trombone when that is nothing |
+| `VerbSearch.swift` | The matching and ranking rule. `MatchKind` names each kind of match, for Phase 3's `matchKind` |
+| `ModelSearch.swift` | Finds a model by its exemplar or by any of its verbs, through `VerbSearch` without glosses |
+| `FrenchLetterKeyRow.swift` | é è ê â î ô û ç keys, with an `insert` closure so the quiz's answer field can adopt it |
+| `BrowseRow.swift` | The row both tabs show: a French title, a subtitle (English gloss, or the French verb that found a model), and a badge |
+| `VerbSort.swift`, `ModelSort.swift` | The sort orders: Frequency (the default) and Alphabetical for verbs; Irregularity, Alphabetical, and Identifier for models. `Settings` stores the choice. Search ignores them |
 
 ### Matching
 
-- **Verbs** match when `infinitifWithPossibleExtraLetters` contains the query by
-  `localizedStandardContains`, which ignores case and accents. Neither the English gloss
-  (`translation`) nor conjugations are searched. A pronominal-only verb is stored without "se", so
-  "se souvenir" finds nothing, and the fold does not turn œ into oe, so "manoeuvrer" finds nothing.
-- **Models** match on `exemplarWithPossibleExtraLetters` the same way. A verb's infinitive does not
-  find its model.
-- **Order.** Results keep the list's order, so under Alphabetical the exact infinitive can be far
-  down (venir is 19th of 19, after advenir). Nothing ranks an exact match first.
+- **The query.** Trimmed and lowercased. For the French side, a leading "se " or "s'" (or "s’")
+  is dropped, since pronominal verbs are stored without it; a bare "s'" searches as "s". For the
+  English side, a leading "to " is dropped. Extra letters (haïr's "France", sortir's "exit") are
+  not searched.
+- **Folding.** `VerbSearch.fold` lowercases, turns œ into oe and æ into ae, and strips diacritics,
+  so etre finds être and manoeuvrer finds manœuvrer.
+- **Kinds and tiers.** `MatchKind`, best first: exact infinitive; exact after folding; then one tier
+  holding an infinitive prefix, a whole English meaning (one comma-separated sense of the gloss,
+  its parenthetical note dropped, so "can (food)" means "can"), and a folded prefix; then a whole
+  word of the gloss; then an infinitive substring, literal or folded; then a gloss substring.
+- **Order within a tier** is by frequency rank, whatever the sort order, so venir leads under
+  Alphabetical and "go" puts aller (#6) ahead of gonfler. A folded match ranks below a literal one
+  in the same tier only when the query carries an accent or ligature: pêch puts pêcher before
+  pécher, but pre ranks préparer by its frequency among the bare pre- verbs. The two exact tiers
+  are always apart, so typed mater leads mâter, and pecher shows pêcher and pécher by frequency.
+- **Models.** Every model whose exemplar matches comes first, ranked as the exemplars rank, then
+  every other model that has a matching verb, ranked by its best verb, which the row shows as its
+  subtitle (devenir under venir). Glosses are not searched there.
+- **Field.** Autocapitalization and autocorrection are off. The placeholders are "Infinitive or
+  English meaning" and "Model or verb". While a field is focused, `FrenchLetterKeyRow` replaces the
+  sort picker (on iPhone it then sits just above the keyboard), because a
+  `ToolbarItemGroup(placement: .keyboard)` never appears for the navigation bar's search field on
+  iOS 26.3, as Konjugieren found too. A key appends its letter.
 - **No result.** The list shows `ContentUnavailableView.search`, and `BrowseSearch` plays
-  `Sound.randomSadTrombone`. It plays when the text changes, not when the sort order changes.
+  `Sound.randomSadTrombone`. It plays when the text changes, not when the sort order changes, and
+  not for a query of only spaces.
+- **Cost.** One search over 6,330 verbs takes about 20 ms on the Intel simulator. `VerbSearch`
+  caches each verb's folded keys after the first search.
 
-The table in the browse plan's **Conjuguer Today** section lists what typical queries return
-today and what Phases 1 and 5 make them return.
+The table in the browse plan's **Conjuguer Today** section lists what typical queries returned
+before Phase 1. Conjugations (suis, vais) are not searched until Phase 5.
 
 ### Opening a Verb
 

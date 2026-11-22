@@ -4703,3 +4703,32 @@ asks which one the App Store listing actually serves.
 The deeplink grammar was narrower than its description suggested: a link needs exactly one path
 segment after the host, and no query item is read. Phase 9 replaces it with a written grammar, and
 this document now records the one it replaces.
+
+## Search Finds What People Type (2026-11-22)
+
+Phase 1 of the browse plan replaced the verb list's one-line filter (`localizedStandardContains`
+on the infinitive) with a ranked search, `VerbSearch`, ported in design from Konjugieren. It folds
+accents and the ligatures, so etre finds être and manoeuvrer finds manœuvrer, which the old filter
+could not do because the system's fold leaves œ alone. It drops a leading "se " or "s'", since the
+217 pronominal-only verbs are stored without it, and a leading "to " on the English side. It
+searches the English gloss, so "eat" finds manger and "to go" finds aller. And it ranks: exact
+infinitive first, then the rest by frequency within each kind of match, whatever the list's sort
+order, so venir no longer sits 19th of 19 under Alphabetical.
+
+Konjugieren's ranking did not survive the port intact. Before writing Swift, I simulated it in
+Python against `verbs.xml`, and it failed on French in two ways. French has many verbs beginning
+with "go" (gonfler, goûter, gommer), and a strict "prefix beats English meaning" put a dozen of
+them ahead of aller. And because so many French infinitives carry an accent near the start, a
+strict "literal beats folded" put relever ahead of élever for "eleve", décrire ahead of écrire for
+"ecri", and every bare pre- verb ahead of préparer. German, with fewer marks, may not feel either.
+The fix was to let a prefix, a folded prefix, and a whole English meaning share one tier, ranked
+by frequency, and to let a literal match beat a folded one only when the learner actually typed an
+accent. Typing pêch means pêcher; typing pre says nothing about accents. The exact tiers stay
+strict, so a learner who types mater gets mater before mâter.
+
+Josh chose a row of eight accent keys (é è ê â î ô û ç) from four layouts, leaving out ï and œ
+because search folds them, and no verb form uses à, ù, or ë. As in Konjugieren, a keyboard toolbar
+never appeared for the navigation bar's search field, so the row takes the sort picker's place
+while the field is focused, which on an iPhone is just above the keyboard. Josh also asked that
+the Models tab find a model by any of its verbs: typing devenir now shows venir's model, with
+devenir under it.

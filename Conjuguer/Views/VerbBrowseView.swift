@@ -16,6 +16,7 @@ struct VerbBrowseView: View {
   @State private var searchText = ""
   @State private var searchResults: [Verb] = []
   @State private var selectedVerb: Verb?
+  @FocusState private var searchIsFocused: Bool
   private let tryQuizTip = TryQuizTip()
 
   var body: some View {
@@ -54,7 +55,7 @@ struct VerbBrowseView: View {
 
         VStack {
           if horizontalSizeClass == .regular {
-            sortPicker
+            sortPickerOrKeyRow(sortPicker)
           }
 
           TipView(tryQuizTip)
@@ -62,7 +63,7 @@ struct VerbBrowseView: View {
           verbCollection
 
           if horizontalSizeClass != .regular {
-            sortPicker
+            sortPickerOrKeyRow(sortPicker)
           }
         }
         .padding()
@@ -72,6 +73,9 @@ struct VerbBrowseView: View {
         VerbView(verb: verb)
       }
       .searchable(text: $searchText, prompt: L.VerbBrowseView.searchPrompt)
+      .searchFocused($searchIsFocused)
+      .textInputAutocapitalization(.never)
+      .autocorrectionDisabled()
     }
     .screenBackground()
     .onChange(of: searchText, initial: true) { _, _ in
@@ -171,12 +175,26 @@ struct VerbBrowseView: View {
     "verb_row_\(verb.infinitif)"
   }
 
+  // A keyboard toolbar never appears for the navigation bar's search field (iOS 26.3), so the
+  // accent row takes the sort picker's place while the field is focused. Search ranks its
+  // results whatever the sort order, so the picker has nothing to do then.
+  @ViewBuilder
+  private func sortPickerOrKeyRow(_ sortPicker: some View) -> some View {
+    if searchIsFocused {
+      FrenchLetterKeyRow { letter in
+        searchText.append(letter)
+      }
+    } else {
+      sortPicker
+    }
+  }
+
   private func updateSearchResults(playSoundIfEmpty: Bool) {
     guard let store else {
       return
     }
-    searchResults = BrowseSearch.results(in: store.items, query: searchText, playSoundIfEmpty: playSoundIfEmpty) {
-      $0.infinitifWithPossibleExtraLetters.localizedStandardContains($1)
+    searchResults = BrowseSearch.results(in: store.items, query: searchText, playSoundIfEmpty: playSoundIfEmpty) { query in
+      VerbSearch.matches(for: query, in: store.items, includeGlosses: true).map(\.verb)
     }
   }
 }

@@ -16,6 +16,7 @@ struct ModelBrowseView: View {
   @State private var searchText = ""
   @State private var searchResults: [ModelAndDecorator] = []
   @State private var selectedModel: VerbModel?
+  @FocusState private var searchIsFocused: Bool
   private let exploreModelsTip = ExploreModelsTip()
 
   var body: some View {
@@ -53,7 +54,7 @@ struct ModelBrowseView: View {
 
         VStack {
           if horizontalSizeClass == .regular {
-            sortPicker
+            sortPickerOrKeyRow(sortPicker)
           }
 
           TipView(exploreModelsTip)
@@ -61,7 +62,7 @@ struct ModelBrowseView: View {
           modelCollection
 
           if horizontalSizeClass != .regular {
-            sortPicker
+            sortPickerOrKeyRow(sortPicker)
           }
         }
         .padding()
@@ -71,6 +72,9 @@ struct ModelBrowseView: View {
         ModelView(model: model)
       }
       .searchable(text: $searchText, prompt: L.ModelBrowseView.searchPrompt)
+      .searchFocused($searchIsFocused)
+      .textInputAutocapitalization(.never)
+      .autocorrectionDisabled()
     }
     .screenBackground()
     .onChange(of: searchText, initial: true) { _, _ in
@@ -137,6 +141,8 @@ struct ModelBrowseView: View {
   private func modelRow(_ modelAndDecorator: ModelAndDecorator) -> some View {
     BrowseRow(
       title: modelAndDecorator.model.exemplarWithPossibleExtraLetters + modelAndDecorator.decorator,
+      subtitle: modelAndDecorator.matchedVerb,
+      subtitleIsFrench: true,
       badge: modelAndDecorator.irregularityBadge.map { irregularityBadge(percent: $0) }
     )
   }
@@ -153,12 +159,31 @@ struct ModelBrowseView: View {
     )
   }
 
+  // A keyboard toolbar never appears for the navigation bar's search field (iOS 26.3), so the
+  // accent row takes the sort picker's place while the field is focused. Search ranks its
+  // results whatever the sort order, so the picker has nothing to do then.
+  @ViewBuilder
+  private func sortPickerOrKeyRow(_ sortPicker: some View) -> some View {
+    if searchIsFocused {
+      FrenchLetterKeyRow { letter in
+        searchText.append(letter)
+      }
+    } else {
+      sortPicker
+    }
+  }
+
   private func updateSearchResults(playSoundIfEmpty: Bool) {
     guard let store else {
       return
     }
-    searchResults = BrowseSearch.results(in: store.items, query: searchText, playSoundIfEmpty: playSoundIfEmpty) {
-      $0.model.exemplarWithPossibleExtraLetters.localizedStandardContains($1)
+    let itemsById = Dictionary(store.items.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+    searchResults = BrowseSearch.results(in: store.items, query: searchText, playSoundIfEmpty: playSoundIfEmpty) { query in
+      ModelSearch.matches(for: query, in: store.items.map(\.model), verbs: Array(Verb.verbs.values)).compactMap { match in
+        var item = itemsById[match.model.id]
+        item?.matchedVerb = match.verb?.infinitifWithPossibleExtraLetters
+        return item
+      }
     }
   }
 }
@@ -167,6 +192,7 @@ struct ModelAndDecorator: Identifiable, Hashable {
   let model: VerbModel
   let decorator: String
   var irregularityBadge: Int?
+  var matchedVerb: String?
   var id: String { model.id }
 }
 

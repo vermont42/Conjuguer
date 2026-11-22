@@ -71,7 +71,9 @@ which marks its title French and its subtitle English, in a `Button`. By the tab
 button flattens the row and one locale wins, so either the infinitive or the gloss is probably read
 in the wrong language. This is inferred from Konjugieren's finding and has not been tested here.
 A phase that rebuilds the verb row (Phase 1's search results, Phase 5's matched rows, Phase 10's
-recents) should test it with VoiceOver and adopt the pattern if it is so.
+recents) should test it with VoiceOver and adopt the pattern if it is so. Phase 1 (2026-11-22) kept the row and its `Button`, adding only a French subtitle for the Models
+tab's member matches, so the question is still open; the accessibility tree reads a row as one
+label ("être, be"), and its voice can be judged only by listening.
 
 ## Pattern: A French Value Beside an Interface Label
 
@@ -109,7 +111,8 @@ used only by the quiz.
 
 | Screen | Approach |
 |---|---|
-| `VerbBrowseView`, `ModelBrowseView` | `BrowseRow` in a `Button`: title French, subtitle English (see above) |
+| `VerbBrowseView`, `ModelBrowseView` | `BrowseRow` in a `Button`: title French, subtitle English, or French when it names the verb that found a model (see above) |
+| `FrenchLetterKeyRow` | Each key a `Button` whose letter is marked French |
 | `VerbView` (infinitive, headings, cells) | `.frenchPronunciation()` on each |
 | `VerbView` (gloss) | `.englishPronunciation()` |
 | `VerbView` (model row) | A `Button` whose label is marked French, with a hint that it opens the model |

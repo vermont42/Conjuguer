@@ -24,7 +24,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | Phase | Status | Date | Commit | Ideas | Konjugieren phase |
 |---:|---|---|---|---|---:|
 | 0 | Done | 2026-11-22 | 33de461 | Groundwork | |
-| 1 | Not started | | | A1, A2, A3, A8 | 1 |
+| 1 | Awaiting Josh | 2026-11-22 | | A1, A2, A3, A8 | 1 |
 | 2 | Not started | | | A4, C4 | 2 |
 | 3 | Not started | | | Signals | 3 |
 | 4 | Not started | | | A5 (the map) | 5 |
@@ -305,7 +305,7 @@ look at in the simulator. Two departures, and several findings that later phases
 
 **Ideas:** A1, A2, A3, A8. **Ports:** Konjugieren Phase 1 (`VerbSearch.swift`,
 `GermanLetterKeyRow.swift`; not `SearchScope.swift`, since Conjuguer gets no setting). **Depends
-on:** nothing. **Status:** Not started.
+on:** nothing. **Status:** Awaiting Josh (2026-11-22).
 
 - **A1.** Keep the accent folding `localizedStandardContains` gives, and add the ligatures: œ and
   oe, æ and ae. Strip a leading "se " or "s'" (and "to " for English) before matching, so
@@ -349,6 +349,51 @@ addresses (etre, venir under Alphabetical, go, to go, eat, se souvenir, s'asseoi
 pecher) gives the wanted verb first, and tests pin each case.
 
 **How it differed:**
+
+Built 2026-11-22. Every row the phase addresses gives the wanted verb first, in tests
+(`VerbSearchTests`, 21 tests; `ModelSearchTests`, 6) and in the simulator. The suite ran 310 tests
+in 26 suites, all passing. New files: `VerbSearch.swift`, `ModelSearch.swift`,
+`FrenchLetterKeyRow.swift`. `BrowseSearch` now takes a search closure instead of a predicate.
+
+- **The ranking departs from Konjugieren's.** Its order put a literal infinitive substring above a
+  folded prefix, and a prefix strictly above a whole-word gloss. Simulated on Conjuguer's data, that
+  failed in French: "go" put gonfler, goûter, and a dozen other go- verbs ahead of aller, and an
+  unaccented "eleve" put relever ahead of élever, "ecri" put décrire ahead of écrire, and "pre" put
+  préparer behind every bare pre- verb. So prefix, folded prefix, and a whole English meaning (one
+  comma-separated sense of the gloss, parenthetical dropped) share one tier, ranked by frequency:
+  "go" finds aller (#6) first, "sort" still finds sortir ahead of trier. Within a tier, a folded
+  match ranks below a literal one only when the query itself has an accent or ligature (pêch puts
+  pêcher first; pre ranks préparer by frequency). The two exact tiers stay apart, so typed mater
+  leads mâter and typed tacher leads tâcher, as the phase asked. Full order in
+  `docs/feature_architecture.md` § Search. `MatchKind`'s cases are the vocabulary Phase 3 sends as
+  `matchKind`; their `tier`, not their case order alone, decides rank.
+- **The key row (Josh, 2026-11-22):** one row of eight, é è ê â î ô û ç. ï and œ are left out
+  because search folds them; no French verb form uses à, ù, or ë. Each key is 41 by 46 points on an
+  iPhone 17, a little under the 44-point width I quoted when offering the layout.
+- **The keyboard toolbar did not appear** for the navigation bar's search field on the iOS 26.3
+  simulator with the software keyboard shown, as in Konjugieren. The row replaces the sort picker
+  while the field is focused, which on iPhone puts it just above the keyboard. On iPad the picker,
+  and so the row, sits at the top under the search field. The search ignores the sort order, so
+  the hidden picker costs nothing.
+- **The Models tab finds a model by any of its verbs (Josh, 2026-11-22).** Exemplar matches come
+  first, then models found through a member verb, which the row names as a French subtitle
+  ("devenir" under venir). Glosses are not searched there. The Models tab also got the key row,
+  folding, the new placeholder ("Model or verb"), and autocorrection off.
+- **Extra letters are no longer searched**, as Phase 0 asked me to decide: "France" no longer finds
+  haïr. The doubled entries' distinguishing words are glosses ("exit", "obtain") or regions, and a
+  region is not what anyone types to find a verb.
+- **"s'" alone** searches as "s", so typing "s'asseoir" never sounds the trombone at the
+  apostrophe. A query of only spaces shows the whole list instead of failing.
+- **Autocorrection** is off in code, but the simulator's software keyboard still showed
+  predictions ("going", "good" for go). Not checked on a device.
+- **VoiceOver** for the row's two languages is still untested (see `docs/voiceover.md`): this phase
+  kept the row and its `Button`.
+- **For Phase 2:** the iPad search is still `.automatic` and shows as a toolbar button, so the row
+  is visible only after that button is tapped. **For Phase 5:** "ai" now lists aimer and aider
+  first, and "fait" finds enfaîter; conjugations will change both. **For the Closing:** Konjugieren ranks a
+  folded prefix below every literal substring and whole-word gloss. That may misrank German partial
+  queries typed without umlauts too; I have not checked, and the Closing's note for Konjugieren
+  should suggest testing the shared-tier rule there.
 
 ## Phase 2: When Search Finds Nothing, and Keyboard Lookup
 

@@ -44,6 +44,7 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `verb_browse_count` | "N VERBS" header above the verb collection | Hidden when the search yields nothing. |
 | `verb_row_<infinitif>` | Row `Button` in `VerbBrowseView` (list and grid) | e.g. `verb_row_avoir`. |
 | `model_row_<exemplar>` | Row `Button` in `ModelBrowseView` (list and grid) | e.g. `model_row_avoir`. |
+| `french_letter_key_<letter>` | Accent key in `FrenchLetterKeyRow` (é è ê â î ô û ç) | Shown in place of the sort picker only while a search field is focused, e.g. `french_letter_key_ê`. `tap_id.sh` taps it and the field keeps focus. |
 
 Put a row's identifier on the tappable `Button`, **not** on the row content inside its
 label: SwiftUI merges the two elements and concatenates their identifiers, yielding

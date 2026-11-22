@@ -1488,13 +1488,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search models"
+            "value" : "Model or verb"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rechercher des modèles"
+            "value" : "Modèle ou verbe"
           }
         }
       }
@@ -3344,13 +3344,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search verbs"
+            "value" : "Infinitive or English meaning"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rechercher des verbes"
+            "value" : "Infinitif ou sens anglais"
           }
         }
       }

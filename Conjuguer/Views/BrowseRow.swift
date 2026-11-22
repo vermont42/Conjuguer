@@ -16,6 +16,7 @@ struct BrowseRow: View {
 
   let title: String
   var subtitle: String?
+  var subtitleIsFrench = false
   var badge: Badge?
 
   var body: some View {
@@ -26,9 +27,15 @@ struct BrowseRow: View {
           .frenchPronunciation()
 
         if let subtitle {
-          Text(subtitle)
-            .smallLabel()
-            .englishPronunciation()
+          if subtitleIsFrench {
+            Text(subtitle)
+              .smallLabel()
+              .frenchPronunciation()
+          } else {
+            Text(subtitle)
+              .smallLabel()
+              .englishPronunciation()
+          }
         }
       }
 
