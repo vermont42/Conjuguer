@@ -26,6 +26,15 @@ parenthetical aside or a list gloss that is not itself a clause is not what it f
 "branch before committing" reflex does not apply here. If you find yourself proposing a feature
 branch, don't.
 
+## No Release Before 2027
+
+Josh cannot release Conjuguer, Konjugieren, or Conjugar from his present MacBook until he replaces
+it in 2027 (2026-11-10). Work accumulates on `main`. Do not sequence work around a near release, or
+count on shipping a fix or a signal in order to learn from it. When work leaves a task for release
+time, write it down rather than doing it: release-day steps, such as App Store Connect work, go in
+`docs/release.md`, and privacy-policy lines wait word for word in `docs/privacy_policy_pending.md`.
+Remove this section when the constraint lifts.
+
 ## Prompts, Plans, and Documents
 
 Three folders hold the project's prose, sorted by who wrote a file and what it is for:
@@ -93,8 +102,10 @@ names. Its docstring lists what it cannot see. Here it missed two kinds: a `.git
 This project uses the **`ios-build-verify` Claude Code skill** for building, testing,
 and verifying the app. The build/test scripts pipe `xcodebuild` through `xcbeautify`
 for concise output and tee raw output to `build.log` as a fallback. Per-project
-configuration lives at `.claude/ios-build-verify.config.sh` (target sim: iPhone 17 /
-iOS 26; scheme: `Conjuguer`) and is sourced by every script.
+configuration lives at `.claude/ios-build-verify.config.sh` (target sim: "Conjuguer iPhone 17",
+this project's own iOS 26.3 simulator, so parallel work in Konjugieren and Conjugar never shares a
+device; override with `TARGET_SIM="Conjuguer iPad Pro 11"` for the iPad; scheme: `Conjuguer`) and
+is sourced by every script.
 
 Scripts live under the skill's install path. Resolve it once, then invoke by name:
 
@@ -144,8 +155,8 @@ Useful when `xcbeautify`'s lossy filter drops an early-stage error. Prefer the s
 scripts as the default path so future sessions exercise the skill.
 
 ```bash
-xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer -destination 'platform=iOS Simulator,name=iPhone 17' build
-xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer -destination 'platform=iOS Simulator,name=iPhone 17' test -only-testing:ConjuguerTests/VerbModelTests
+xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer -destination 'platform=iOS Simulator,name=Conjuguer iPhone 17' build
+xcodebuild -project Conjuguer.xcodeproj -scheme Conjuguer -destination 'platform=iOS Simulator,name=Conjuguer iPhone 17' test -only-testing:ConjuguerTests/VerbModelTests
 ```
 
 ### Linting

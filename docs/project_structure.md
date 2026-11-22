@@ -281,6 +281,7 @@ plans/                              # What Claude wrote to get another session (
 ├── alligator_gemini.txt            # The same prompt as plain text, ready to paste
 ├── app_icons_gemini.md             # Gemini prompts for the eight alternate app icons (Arc, rooster, croissant, béret; light and dark)
 ├── bayou_jazz_alligator.png        # The image the alligator prompt produced
+├── browse_and_verb_implementation.md  # Port Konjugieren's browse and verb-page work (search, reverse lookup, related verbs, My Verbs, collections), in phases
 ├── chanson_full_treatment.md       # Working prompt for the full-treatment Chanson de Roland edition; its conventions still apply
 ├── chanson_second_half.md          # Finishing the Chanson's second half (laisses CLII–CCXCI); complete
 ├── etymology_affixes [.json]       # Live data: the affix library, build-time cards for verb-forming affixes that the etymology writers read (never shipped)
@@ -293,6 +294,7 @@ plans/                              # What Claude wrote to get another session (
 ├── location_cleanup.md             # This sorting into prompts/plans/docs and the snake_case rename (2026-11-16)
 ├── location_cleanup_moves [.json]  # Its map of every old path to its new one
 ├── mine_classical_tier.md          # Mine La Fontaine and Molière for the 144 Chanson-only verbs
+├── pedagogy_implementation.md      # Port Konjugieren's quiz pedagogy (levels, corrections, practice record, modes), in phases; runs after the browse plan
 ├── quiz_best_score_followup.md     # Best score on the quiz briefing screen; resolved by a different route
 ├── run_etymology_pipeline.md       # Paste-to-run prompt for one batch of the original etymology pipeline; superseded
 ├── run_etymology_select_verbs.md   # One-shot run of that pipeline for the four select verbs
@@ -320,6 +322,7 @@ prompts/                            # What Josh wrote to get Claude to do someth
 ├── post.md                         # Turn the model eval into a blog post
 ├── rename_objects.md               # Rename the behavior protocols' conformers to Fowler's test-double names
 ├── tutor.md                        # The conjugation tutor
+├── two_plans.md                    # Ask for Conjuguer ports of Konjugieren's browse and pedagogy plans
 ├── verb_browse_updates.md          # Browse views: bottom sort picker, shared row, no chevrons
 ├── verb_frequency.md               # Find frequency-of-use data for every verb (research)
 ├── verb_history.md                 # "A History of the French Verb System": the outline

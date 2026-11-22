@@ -4638,3 +4638,44 @@ document also called `fable_max.md` a list of verbs. It is the 58 etymologies th
 at max effort, and the entry now says so. Ten of Conjugar's files, not counting its journal,
 name this repository's old paths. The Conjugar session working at the same time will read this repository's map of moves,
 `plans/location_cleanup_moves.json`, and its own plan already says so.
+
+## Two Plans Ported from Konjugieren (2026-11-22)
+
+Konjugieren finished two long plans in mid-November: one that made its Verbs and Families tabs
+answer what people ask of them, and one that turned its quiz into a practice tool. Josh asked for
+Conjuguer's versions, written in one session because each plan informs the other. They are
+[`plans/browse_and_verb_implementation.md`](../plans/browse_and_verb_implementation.md) and
+[`plans/pedagogy_implementation.md`](../plans/pedagogy_implementation.md), and they will run in that
+order, a phase per session.
+
+Konjugieren's plans grew from research documents carrying Josh's verdicts. Conjuguer has no such
+documents, so the ports lean on Konjugieren's in a different way. Each phase names the Konjugieren
+phase it ports and tells the session to read that phase's "How it differed" note first, because
+those notes hold most of what was learned the hard way: a keyboard toolbar that never appears over
+a navigation-bar search field, an iPad search field that ignores programmatic focus, a `ShareLink`
+that reports no tap. Josh's German-era decisions are marked as carried over, and the questions
+French reopens are gathered for him to answer in review.
+
+Looking at Conjuguer for the port turned up its own facts. Search ignores accents but not the œ
+ligature, so manoeuvrer finds nothing; it finds no pronominal verb typed with its "se"; and under
+Alphabetical sort, venir comes 19th of the 19 verbs containing it. On aller's page the passé
+composé, the commonest past tense in speech, sits about three screens down behind a toggle that
+is off by default. The quiz gives full credit for any dropped circumflex, so etes passes for êtes,
+and half credit for parle where parlé was asked, with no correction until the end. It asks
+falloir in persons that do not exist. And `manœuvrer` and `écœurer` carry corpus counts of zero,
+probably because the corpora spell them with "oe", which matters once quizzes draw by frequency
+band.
+
+Two Konjugieren phases have no French counterpart (separable verbs, and an article for a tense
+the app lacked), and the pedagogy plan keeps Konjugieren's phase numbers so the two can be read
+side by side. One difference touches privacy: Conjuguer already sends the quiz score, which
+Konjugieren's Decision 5 forbids there, so the plan asks Josh whether to keep it.
+
+Josh answered the eight review questions the same day, and the answers now sit in each plan's
+"Decisions Already Made". Search will always cover English glosses, with no setting. A verb's key
+conjugations are its il forms of the présent, passé composé, and futur (vient · est venu ·
+viendra). The compound-tense toggle stays but starts on, so the passé composé no longer hides
+three screens down. Reverse lookup gets built. On the quiz side, the score leaves analytics and
+the elapsed time goes into bands; agreement with être stays required, to be taught rather than
+waived; reformed 1990 spellings pass in the quiz but stay off the verb page; and the time bonus
+moves to the speed round.
