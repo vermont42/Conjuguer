@@ -25,8 +25,8 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 |---:|---|---|---|---|---:|
 | 0 | Done | 2026-11-22 | 33de461 | Groundwork | |
 | 1 | Done | 2026-11-22 | 1046c7c | A1, A2, A3, A8 | 1 |
-| 2 | Not started | | | A4, C4 | 2 |
-| 3 | Not started | | | Signals | 3 |
+| 2 | Done | 2026-11-22 | | A4, C4 | 2 |
+| 3 | Done | 2026-11-22 | | Signals | 3 |
 | 4 | Not started | | | A5 (the map) | 5 |
 | 5 | Not started | | | A5 (the search) | 6 |
 | 6 | Not started | | | B3, B5's tip | 7 |
@@ -399,7 +399,7 @@ in 26 suites, all passing. New files: `VerbSearch.swift`, `ModelSearch.swift`,
 
 **Ideas:** A4, C4. **Ports:** Konjugieren Phase 2 (`VerbSearch.closestVerb`,
 `VerbSearchCommands.swift`, `VerbSearchArrowKeys.swift`, `URL.mailto`). **Depends on:** Phase 1.
-**Status:** Not started.
+**Status:** Done (2026-11-22).
 
 - **A4.** Keep the sad trombone. Below the empty state, offer the single closest verb by fuzzy
   matching over the folded infinitives and say plainly that it is a guess. Add a line saying that
@@ -426,11 +426,67 @@ through computer use did not reach the device in Konjugieren).
 
 **How it differed:**
 
+Built 2026-11-22. Every "Done when" check passed in the simulator, and the suite ran 321 tests in
+27 suites, all passing (`VerbSearchGuessTests`, 10 tests with 39 cases, and one new
+`DeeplinkTests` test). New files: `FailedVerbSearchView.swift`, `VerbSearchCommands.swift`,
+`VerbSearchArrowKeys.swift`. The design is Konjugieren's; what differs:
+
+- **The guess** is `VerbSearch.closestVerb`, Konjugieren's rule (optimal string alignment distance
+  over folded infinitives, at most one edit per three letters and never more than three, ties to the
+  more frequent verb) with Conjuguer's query handling: "se " and "s'" are dropped and œ folds to oe
+  before measuring, so "se souvnir" guesses souvenir and "s'assoir" asseoir. venier, assoir, and
+  manjer give venir, asseoir, and manger (ahead of manier, also one edit away); xyzzyq gives
+  nothing, and then only the mail line shows. Infinitives only, as in Konjugieren's Phase 2.
+- **The empty state** replaced the overlay with `FailedVerbSearchView`, a scroll view holding
+  `ContentUnavailableView.search` (kept, so its "Check the spelling" line still shows), the heading
+  "A guess at the verb you meant:" ("Le verbe que vous cherchiez, peut-être :"), the guess as a card
+  in the same `BrowseRow` the list uses, and the mail line. The card is used on iPhone too, where
+  the list has plain rows, because the guess stands alone under a heading. The French strings use
+  vous, as the catalog's other sentences do.
+- **The mail line** reads "If you believe that “venier” is a French verb, please email
+  vermontcoder@gmail.com." The subject is "Conjuguer: please add “venier”". The address lives once,
+  as `URL.developerEmail`. The clipboard fallback, its four-second note, and its VoiceOver
+  announcement are Konjugieren's, and the simulator showed them.
+- **Both tabs got the fixed iPad search bar.** Konjugieren's only search was its verb list, so it
+  changed one tab. Conjuguer's Models tab has a search field too, and it would have looked odd for
+  the two tabs to differ, so `BrowseLayout.searchPlacement` serves both. This also settles Phase 1's
+  note: the accent row now shows on iPad as soon as the field is focused, under the bar. **Josh
+  should judge this layout change** (screenshots in the session's report). iPhone is unchanged.
+- **Return and the arrows act only while the field holds a query**, as well as only on the iPad
+  idiom. Konjugieren showed recents in the empty field; Conjuguer has none until Phase 10, and
+  Return opening être from an empty field would surprise. Phase 10 should revisit this.
+- **The highlight** is the card's own accent bar (`.card(accent: .customRed)`) in the iPad grid, and
+  a 20% red row background in the compact list (an iPad in Split View).
+- **Command-F** goes through `World.openVerbSearch()`, which clears a deeplinked verb, model, or
+  article sheet, switches to the Verbs tab, and sets `verbSearchIsRequested`; `VerbBrowseView`
+  pops a pushed verb page, waits 500 ms as Konjugieren found it must, and focuses the field with its
+  text kept. Tested from the Verbs list, a pushed verb page, and the Quiz tab. **Not handled:** a
+  verb sheet that a model page presents from its own state (`ModelView`'s `detailSheet`) stays open
+  over the Models tab when Command-F switches away, and is still there on return. Not tested.
+- **How it was tested.** On "Conjuguer iPad Pro 11", iOS 26.3, with AXe: `axe key-combo --modifiers
+  227 --key 9` for Command-F, `axe key 81`/`82` for ↓/↑, `axe key 40` for Return. Stepped one press
+  at a time and in quick pairs, every move landed where expected, and Return opened the highlighted
+  verb (venger), the first result, and the guess (manjer → manger). One early run, sent before I
+  had a reliable way to read the highlight, appeared to end on the first result after three ↓ and
+  one ↑; I could not reproduce it. Not tried on a Mac or a real iPad. On the iPhone, the empty state
+  was checked in English (light) and French (dark), including the mail tap and the guess tap.
+- **VoiceOver.** The guess card is a `Button` around `BrowseRow`, so it shares the list rows'
+  untested two-language flattening (`docs/voiceover.md`). The mail address is a link inside text,
+  which VoiceOver reaches through the Links rotor.
+- **For Phase 3.** No analytics yet. A page opened from the guess should send `source`
+  `searchGuess`; an open by Return or an arrow is an ordinary search open, with `resultPosition`
+  from `keyboardSelection`.
+- **For Phase 5.** The empty state, and with it the guess, should appear only when the conjugation
+  lookup also fails. `closestVerb` considers infinitives only; decide whether a misspelled
+  conjugation (finnissons for finissons) should guess too, as Konjugieren's later did. `keyboardTargets`
+  in `VerbBrowseView` assumes one row per verb, and `scrollToKeyboardSelection` scrolls by verb id;
+  a conjugation row (suis under être and suivre) changes both.
+
 ## Phase 3: Lookup Signals
 
 **Ideas:** the three signals in the ideas document's "What to Measure". **Ports:** Konjugieren
 Phase 3 (`SearchReport.swift`, `VerbVisit.swift`, `Analytics.swift`). **Depends on:** Phase 1, so
-the match kinds exist. **Status:** Not started.
+the match kinds exist. **Status:** Done (2026-11-22).
 
 - `finishSearch`, sent once per search, with banded `outcome`, `queryLength`, `resultCount`,
   `matchKind`, and `resultPosition`.
@@ -468,6 +524,64 @@ and do not touch `docs/privacy_policy2.txt`. The policy's paragraph saying the a
 check that no parameter can echo the query.
 
 **How it differed:**
+
+Built 2026-11-22 on top of Phase 2's uncommitted changes. The suite ran 352 tests in 30 suites, all
+passing (31 new: `AnalyticsTests`, `SearchReportTests`, `VerbVisitTests`, and five in
+`DeeplinkTests`). New files: `SearchReport.swift`, `VerbVisit.swift`,
+`Shared/OpenRandomVerbControlIntent.swift`. Every name, key, and value is in `Analytics.swift`, and
+`docs/feature_architecture.md` § Analytics has the signal table, the full `source` and `matchKind`
+vocabularies with the phase that will send each unsent value, and the convention. The design is
+Konjugieren's; what differs:
+
+- **`source` rides on `viewAppeared`.** The plan left the choice open. A separate `viewVerbView`
+  would have split TelemetryDeck's series of verb pages in two, so the verb page still sends
+  `viewAppeared` with `viewName` `VerbView`, now with `source`, and no longer through
+  `.recordsAppearance`. One change in meaning: it now also fires, as `resume`, when the app returns
+  from the background with a verb page showing, so that every one pairs with a `leaveVerbView`.
+  The new signals take Konjugieren's names (`finishSearch`, `leaveVerbView`).
+- **A visit is the same for a pushed page and a sheet**: `onAppear` to `onDisappear`, broken by the
+  background. Beyond Konjugieren, the page's own model sheet also ends the visit, and closing it
+  resumes it, because the reader is on the model page. A sheet that something else presents over a
+  page (a deeplinked verb over a pushed one) does not; I left that rare case alone.
+- **No `source` on `finishSearch`.** The plan's five parameters only. Konjugieren added `source` to
+  it in its Phase 11, for searches that Control Center or a quick action opens; Conjuguer's Phase 9
+  should do the same (noted in § Analytics). So `SearchTracker` is Konjugieren's without
+  `fieldOpened(from:)`.
+- **`matchKind`** names `VerbSearch.MatchKind`'s nine cases, including Conjuguer's `glossMeaning`,
+  through an exhaustive switch, plus `guess` and `none`. `conjugation` and `foldedConjugation` are
+  reserved for Phase 5, which may rename them; nothing sends them yet.
+- **The vocabulary** is the plan's list plus `browse`, `search`, `tab`, and `verbPage`. No
+  `handoff`, since no phase plans Handoff, and no `sharedLink`, which Phase 14 may add for its
+  collection links. Sent today: `browse`, `search`, `searchGuess`, `modelPage`, `infoLink`,
+  `widget`, `control`, `shortcut`, `deeplink`, `resume`.
+- **The control needed its own intent**, as in Konjugieren: the Random Verb control and the
+  Shortcuts app ran the same `OpenRandomVerbIntent`. The control now runs
+  `OpenRandomVerbControlIntent` (`isDiscoverable = false`, the same title key), whose link names
+  `control`; the original names `shortcut`. `release.md` asks for a device check that a control
+  installed before the update still works.
+- **Links name their source** with a `source` query item: the widgets
+  (`WidgetDeeplink`), both random-verb intents, and Info articles' verb links. A query item does not
+  change `pathComponents`, so today's parsing holds (tested, with a percent-encoded verb too).
+  `World.verbSource` keeps it for the sheets that present `World.verb`. **Phase 9's grammar should
+  keep this item.** The Models tab's search sends nothing; it is not a verb lookup.
+- **Sections**: `simple` is the présent card, `compound` the passé composé card. With the compound
+  toggle off by default, the etymology card comes on screen with the toggle, so `compound` is rarely
+  the deepest section; I could not show it in a `leaveVerbView` in the simulator for that reason.
+  Phase 6, which turns the toggle on, should check that a leave can report `compound`.
+- **A quirk kept from Konjugieren.** Editing the text after an open begins a new search, so
+  deleting a query letter by letter reports an abandoned search of its last letter or two (seen on
+  the iPad). It inflates `abandoned` slightly at `queryLength` `1-2`.
+- **How it was tested.** With `AnalyticsSpy` logging temporarily (removed), on the iPhone: a browse
+  open, a leave at `example` after scrolling, `resume` after a tab switch and after the background,
+  a search opened at position 2-5 (etre → étreindre, `foldedInfinitivePrefix`), a second open with
+  no second `finishSearch`, `noResult` (xyzzyq), the guess (venier), `abandoned` on backgrounding
+  (ven), a `?source=widget` link, the model sheet ending and resuming a visit, and `modelPage`. On
+  the iPad: Command-F, ↓ ↓, Return (`opened`, position 2-5), and Return on a guess (manjer). Info
+  links and the control were tested through their URLs in unit tests only. Nothing visible changed,
+  so there were no language or appearance checks.
+- **Privacy lines** for all three signals wait in `docs/privacy_policy_pending.md` in English and
+  French, including a sentence for the paragraph after the list so that it stays true.
+  `privacy_policy2.txt` is untouched.
 
 ## Phase 4: The Conjugation Map as a Build Product
 

@@ -66,7 +66,7 @@ struct ModelView: View {
     .sheet(item: $detailSheet) { sheet in
       switch sheet {
       case .verb(let verb):
-        VerbView(verb: verb)
+        VerbView(verb: verb, source: .modelPage)
           .sheetDismissable()
       case .stemAlterationsInfo:
         InfoView(info: Info.infos[Info.headingToIndex(heading: L.Info.irregularitiesHeading) ?? 0])

@@ -34,6 +34,10 @@ material for the release notes.
 4. **Check the screenshots and previews** against the app, by
    [`screenshot_playbook.md`](screenshot_playbook.md) and [`video_script.md`](video_script.md),
    and redo any that show a screen the plans changed.
+5. **Check the Random Verb control on a device** that had it in Control Center before updating.
+   Since browse Phase 3 it runs `OpenRandomVerbControlIntent` instead of `OpenRandomVerbIntent`,
+   so that the verb page can tell the control from the Shortcuts app. The control's kind did not
+   change, so an installed control should run the new intent, but this was never tried on a device.
 
 ## On Release Day
 

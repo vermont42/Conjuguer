@@ -53,6 +53,9 @@ struct ConjuguerApp: App {
         refreshWidgets()
       }
     }
+    .commands {
+      VerbSearchCommands()
+    }
   }
 
   init() {

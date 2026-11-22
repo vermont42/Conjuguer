@@ -32,10 +32,14 @@ class World {
   var languageModelService: LanguageModelService
   var soundPlayer: SoundPlayer
   var verb: Verb?
+  // How `verb` was reached, for its page's `viewAppeared`: a link's `source` item, else `deeplink`.
+  var verbSource: AnalyticsSource = .deeplink
   var verbModel: VerbModel?
   var info: Info?
   var selectedTab: MainTab = .verbs
   var shouldNavigateToTutor = false
+  // Set by Command-F and cleared by VerbBrowseView once it has focused its search field.
+  var verbSearchIsRequested = false
   var session: URLSession
   // A deeplink that arrived before VerbData finished loading (the cold-launch race — see
   // handleURL). ConjuguerApp replays it via drainPendingDeeplink() once the data is ready.
@@ -162,6 +166,16 @@ class World {
     }
   }
 
+  /// Shows the verb list, with any verb page closed, and focuses its search field, keeping
+  /// whatever text the field holds.
+  func openVerbSearch() {
+    verb = nil
+    verbModel = nil
+    info = nil
+    selectedTab = .verbs
+    verbSearchIsRequested = true
+  }
+
   // Replays a deeplink deferred during cold-launch loading. A no-op when none is pending.
   func drainPendingDeeplink() {
     guard let url = pendingDeeplink else {
@@ -186,6 +200,7 @@ class World {
   private func resolveDeeplinkEntity(from url: URL) -> MainTab? {
     switch url.host {
     case URL.verbHost:
+      verbSource = AnalyticsSource.ofDeeplink(url)
       if url.pathComponents[1] == URL.randomVerbPath {
         verb = Verb.verbs.values.randomElement()
       } else {

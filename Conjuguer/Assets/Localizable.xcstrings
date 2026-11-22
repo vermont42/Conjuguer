@@ -46,6 +46,23 @@
         }
       }
     },
+    "VerbBrowseView.addressCopied" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No email app could be opened, so the address has been copied."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune app de messagerie n’a pu s’ouvrir, donc l’adresse a été copiée."
+          }
+        }
+      }
+    },
     "⚠️" : {
 
     },
@@ -3338,6 +3355,40 @@
         }
       }
     },
+    "VerbBrowseView.findVerb" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find a Verb"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chercher un verbe"
+          }
+        }
+      }
+    },
+    "VerbBrowseView.guessIntro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A guess at the verb you meant:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le verbe que vous cherchiez, peut-être :"
+          }
+        }
+      }
+    },
     "VerbBrowseView.searchPrompt" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3385,6 +3436,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ verbe"
+          }
+        }
+      }
+    },
+    "VerbBrowseView.verbRequest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you believe that “%1$@” is a French verb, please email %2$@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si vous pensez que « %1$@ » est un verbe français, écrivez à %2$@."
+          }
+        }
+      }
+    },
+    "VerbBrowseView.verbRequestBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I searched Conjuguer for “%@” and believe that it is a French verb."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J’ai cherché « %@ » dans Conjuguer et je pense que c’est un verbe français."
+          }
+        }
+      }
+    },
+    "VerbBrowseView.verbRequestSubject" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conjuguer: please add “%@”"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conjuguer : merci d’ajouter « %@ »"
           }
         }
       }

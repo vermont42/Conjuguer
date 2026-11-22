@@ -97,6 +97,68 @@ enum VerbSearch {
     }
   }
 
+  /// The verb whose folded infinitive is fewest edits from the folded query, offered when a
+  /// search found nothing. On a tie, the more frequent verb wins. Nil when no verb is near
+  /// enough to be a plausible misspelling.
+  static func closestVerb(to query: String, in verbs: [Verb]) -> Verb? {
+    let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
+    let foldedQuery = Array(fold(frenchQuery(from: trimmed)))
+    guard !trimmed.isEmpty, !foldedQuery.isEmpty else {
+      return nil
+    }
+    let maxDistance = maxGuessDistance(forQueryLength: foldedQuery.count)
+    var best: (verb: Verb, rank: (distance: Int, frequency: Int, id: String))?
+    for verb in verbs {
+      let candidate = Array(keys(for: verb).foldedInfinitif)
+      guard abs(candidate.count - foldedQuery.count) <= maxDistance else {
+        continue
+      }
+      let distance = editDistance(foldedQuery, candidate)
+      guard distance <= maxDistance else {
+        continue
+      }
+      let rank = (distance: distance, frequency: verb.frequency, id: verb.id)
+      if let current = best, current.rank <= rank {
+        continue
+      }
+      best = (verb, rank)
+    }
+    return best?.verb
+  }
+
+  // One edit in three letters, and never more than three, keeps a guess recognizable: venier
+  // finds venir, but a four-letter query never "finds" a verb that shares one letter with it.
+  nonisolated static func maxGuessDistance(forQueryLength length: Int) -> Int {
+    min(3, max(1, length / 3))
+  }
+
+  /// Optimal string alignment distance: insertions, deletions, substitutions, and swaps of two
+  /// adjacent letters each cost one, because a swap is the commonest slip on a keyboard (vneir
+  /// for venir).
+  nonisolated static func editDistance(_ lhs: [Character], _ rhs: [Character]) -> Int {
+    guard !lhs.isEmpty else {
+      return rhs.count
+    }
+    guard !rhs.isEmpty else {
+      return lhs.count
+    }
+    var twoRowsBack = [Int](repeating: 0, count: rhs.count + 1)
+    var previousRow = Array(0...rhs.count)
+    var currentRow = [Int](repeating: 0, count: rhs.count + 1)
+    for i in 1...lhs.count {
+      currentRow[0] = i
+      for j in 1...rhs.count {
+        let substitutionCost = lhs[i - 1] == rhs[j - 1] ? 0 : 1
+        currentRow[j] = min(previousRow[j] + 1, currentRow[j - 1] + 1, previousRow[j - 1] + substitutionCost)
+        if i > 1, j > 1, lhs[i - 1] == rhs[j - 2], lhs[i - 2] == rhs[j - 1] {
+          currentRow[j] = min(currentRow[j], twoRowsBack[j - 2] + 1)
+        }
+      }
+      (twoRowsBack, previousRow, currentRow) = (previousRow, currentRow, twoRowsBack)
+    }
+    return previousRow[rhs.count]
+  }
+
   /// Collapses what a learner without a French keyboard types: accents, the cedilla, and the
   /// ligatures, so that etre finds être and manoeuvrer finds manœuvrer. For matching only.
   nonisolated static func fold(_ text: String) -> String {

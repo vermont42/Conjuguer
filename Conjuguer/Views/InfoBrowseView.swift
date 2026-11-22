@@ -48,7 +48,7 @@ struct InfoBrowseView: View {
         .sheetDismissable()
     }
     .sheet(item: $world.verb) { verb in
-      VerbView(verb: verb)
+      VerbView(verb: verb, source: world.verbSource)
         .sheetDismissable()
     }
     .recordsAppearance(as: "\(InfoBrowseView.self)")

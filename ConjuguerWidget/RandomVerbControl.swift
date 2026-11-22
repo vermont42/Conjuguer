@@ -9,7 +9,7 @@ import WidgetKit
 struct RandomVerbControl: ControlWidget {
   var body: some ControlWidgetConfiguration {
     StaticControlConfiguration(kind: "RandomVerbControl") {
-      ControlWidgetButton(action: OpenRandomVerbIntent()) {
+      ControlWidgetButton(action: OpenRandomVerbControlIntent()) {
         Label {
           Text(WidgetL.Controls.randomVerbName)
         } icon: {

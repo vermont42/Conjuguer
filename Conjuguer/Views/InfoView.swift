@@ -55,7 +55,7 @@ struct InfoView: View {
       }
       return .handled
     } else if Verb.verbs[cleansedUrlString] != nil {
-      URL(string: URL.conjuguerUrlPrefix + "\(URL.verbHost)/\(parenless(firstLetterLowercased(url.absoluteString)))").map {
+      URL(string: URL.conjuguerUrlPrefix + "\(URL.verbHost)/\(parenless(firstLetterLowercased(url.absoluteString)))?source=\(AnalyticsSource.infoLink.rawValue)").map {
         world.handleInAppURL($0)
       }
       return .handled

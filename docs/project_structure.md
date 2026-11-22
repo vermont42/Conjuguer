@@ -24,13 +24,14 @@ Conjuguer/
 ├── Secrets.example.xcconfig    # Template for the secrets config; copy to create the real one
 ├── Secrets.xcconfig            # TelemetryDeck app ID (gitignored; base configuration for the app target)
 ├── Analytics/
-│   ├── Analytics.swift         # Analytics protocol, AnalyticsName event enum, ParameterKey enum
+│   ├── Analytics.swift         # Analytics protocol, AnalyticsName and ParameterKey, and every parameter value: AnalyticsSource, SearchOutcome, SearchMatchKind, VerbPageSection, and the bands (AnalyticsBand)
 │   ├── AnalyticsReal.swift     # TelemetryDeck implementation; funnels calls onto a serial GCD queue because the SDK blocks with DispatchQueue.sync internally
 │   └── AnalyticsSpy.swift      # Test spy recording signals for assertions
 ├── App/
 │   ├── AppLauncher.swift       # Chooses TestApp vs ConjuguerApp based on the unit-test environment
-│   ├── ConjuguerApp.swift      # Main entry point: verb-data load, onboarding cover, deeplinks, widget refresh, Tips.configure()
+│   ├── ConjuguerApp.swift      # Main entry point: verb-data load, onboarding cover, deeplinks, widget refresh, Tips.configure(), the Command-F menu
 │   ├── TestApp.swift           # Minimal App for the unit-test environment
+│   ├── VerbSearchCommands.swift   # Verbs › Find a Verb menu with Command-F, for iPad and Mac keyboards
 │   └── Preview Content/        # Preview-only asset catalog
 ├── Assets/
 │   ├── Assets.xcassets/        # Colors (customBlue, customRed, …), app icons + their preview images, Adams/Compton/Splash images
@@ -78,6 +79,7 @@ Conjuguer/
 │   ├── QuizResult.swift        # One answered question and its ConjugationResult, for the results sheet
 │   ├── QuizState.swift         # Quiz lifecycle enum (not started / in progress / finished)
 │   ├── QuizVerbs.swift         # Curated verb pools the quiz draws from (regular -er/-ir/-re, big three, stem changers, être auxiliaries, irregular participes, top thirty, futur stems)
+│   ├── SearchReport.swift      # SearchTracker (one verb search, first letter to its end) and SearchReport (finishSearch's banded parameters)
 │   ├── Sound.swift             # Sound-effect enum mapping cases to the bundled MP3s
 │   ├── StemAlteration.swift    # A stem alteration: type, chars, the tenses it applies to, additive/inherited flags
 │   ├── SubjonctifPresentGroup.swift   # Subjonctif présent ending groups
@@ -89,7 +91,8 @@ Conjuguer/
 │   ├── verbModels.xml          # Conjugation pattern definitions
 │   ├── VerbParser.swift        # XMLParser delegate for verbs.xml
 │   ├── verbs.xml               # 6,330 entries / 6,326 distinct infinitives, with inline corpus hit counts (hi/hn/hl/hs/hp); VerbParser derives the ranks
-│   ├── VerbSearch.swift        # The one matching and ranking rule for verb search: accent and ligature folding, "se" and "to" stripped, exact then prefix or English meaning then the rest, each by frequency
+│   ├── VerbSearch.swift        # The one matching and ranking rule for verb search: accent and ligature folding, "se" and "to" stripped, exact then prefix or English meaning then the rest, each by frequency; the closest-verb guess when nothing matches
+│   ├── VerbVisit.swift         # VerbDestination (a verb page to push, with its source) and VerbVisit (one stretch of a verb page on screen, for viewAppeared and leaveVerbView)
 │   ├── XMLDataParser.swift     # Shared XMLParser delegate base for the three parsers
 │   └── Game/
 │       ├── GameModels.swift            # Entity structs/enums (Bullet, Target, EnemyBullet, DropKind, …)
@@ -135,20 +138,22 @@ Conjuguer/
 │   ├── SoundPlayerDummy.swift  # No-op double
 │   ├── SoundPlayerReal.swift   # AVAudioPlayer implementation with per-sound debouncing
 │   ├── StringExtensions.swift  # The rich-text markup parser: RichTextBlock / TextSegment from ` ~ $…$ ‡…‡
-│   ├── URLExtensions.swift     # Deeplink URL helpers (conjuguer:// scheme)
+│   ├── URLExtensions.swift     # Deeplink URL helpers (conjuguer:// scheme), the developer address, and a mailto: builder
 │   ├── URLProtocolStub.swift   # URLProtocol subclass stubbing HTTP responses in tests
 │   ├── URLSessionExtension.swift  # Stubbed URLSession factory used by the simulator/test worlds
 │   ├── Util.swift              # French/English Locale constants
 │   ├── Utterer.swift           # AVSpeechSynthesizer wrapper for French and English pronunciation
 │   ├── VerbConjugations.swift  # Builds VerbView's conjugation tables: tense specs, sections, cells, defectivity
+│   ├── VerbSearchArrowKeys.swift  # UIKeyCommand hack that lets ↑ and ↓ move through verb results while the search field is focused
 │   ├── VerbData.swift          # Startup XML parse (verbs, models, defect groups) with a loading/loaded state
 │   ├── VerbSort.swift          # Sort order for the verb browse view (frequency/alphabetical)
 │   ├── WidgetSnapshotWriter.swift # Writes the multi-day widget snapshot bundle to the shared container
-│   └── World.swift             # @Observable DI container (Current) plus MainTab; device/simulator/unitTest configurations
+│   └── World.swift             # @Observable DI container (Current) plus MainTab; device/simulator/unitTest configurations; openVerbSearch() for Command-F
 └── Views/
-    ├── BrowseLayout.swift      # Shared adaptive grid columns for the browse views
+    ├── BrowseLayout.swift      # Shared adaptive grid columns and search-field placement (a fixed bar on iPad and Mac) for the browse views
     ├── BrowseRow.swift         # Shared row/cell used by both browse views, with optional badge and a French or English subtitle
     ├── BrowseSearch.swift      # Shared search plumbing for the browse views: all items for a blank query, the trombone for none
+    ├── FailedVerbSearchView.swift # The verb list's empty state: no results, a guess at the verb meant, and the email-us line
     ├── FrenchLetterKeyRow.swift   # é è ê â î ô û ç keys that replace the sort picker while a search field is focused; reusable by the quiz
     ├── GameCenterAuthView.swift   # UIViewController shim + coordinator for presenting Game Center auth
     ├── GameView.swift          # The retro arcade minigame
@@ -179,10 +184,10 @@ ConjuguerWidget/
 ├── QuickQuizControl.swift      # Control Center button that opens the quiz
 ├── QuizLiveActivity.swift      # Live Activity showing quiz progress and score
 ├── QuizWidget.swift            # Timeline widget for the daily quiz question
-├── RandomVerbControl.swift     # Control Center button that opens a random verb
+├── RandomVerbControl.swift     # Control Center button that opens a random verb (runs OpenRandomVerbControlIntent)
 ├── SnapshotReader.swift        # Reads the snapshot bundle from the shared container into timeline entries
 ├── VerbDuJourWidget.swift      # Timeline widget for the verb of the day
-├── WidgetDeeplink.swift        # Builds conjuguer:// URLs for widget taps
+├── WidgetDeeplink.swift        # Builds conjuguer:// URLs for widget taps, with source=widget
 └── Views/
     ├── AccessoryWidgetView.swift   # Lock Screen accessory families
     ├── LargeWidgetView.swift       # Large family: verb plus full présent paradigm
@@ -194,7 +199,8 @@ ConjuguerWidget/
 
 Shared/                         # Compiles into BOTH the app and widget targets
 ├── OpenQuizIntent.swift        # AppIntent opening the quiz (title written inline — appintentsmetadataprocessor can't read WidgetL accessors)
-├── OpenRandomVerbIntent.swift  # AppIntent opening a random verb (same inline-title constraint)
+├── OpenRandomVerbControlIntent.swift  # The Random Verb control's action: OpenRandomVerbIntent with source=control, hidden from Shortcuts
+├── OpenRandomVerbIntent.swift  # AppIntent opening a random verb from Shortcuts, with source=shortcut (same inline-title constraint)
 ├── QuizActivityAttributes.swift  # ActivityKit model for the quiz Live Activity
 ├── WidgetConstants.swift       # App-group ID, snapshot filename, storage keys
 ├── WidgetDateHelper.swift      # Pinned Gregorian calendar and day-key formatting shared by writer and reader
@@ -207,10 +213,11 @@ ConjuguerTests/
 ├── TestUtils.swift             # T.testConjugation shared assertion (threads #_sourceLocation) and T.generateVerbModelTests
 └── Models/
     ├── AddedVerbsTests.swift           # Conjugations of the 13 verbs added and 6 misspellings renamed on 2026-08-28, plus dépourvoir's defect group 27
+    ├── AnalyticsTests.swift            # The bands, the section order, every match kind's analytics value, and the verb page's screen name
     ├── CompoundTenseTests.swift        # Compound tenses, incl. feminine/plural participe agreement
     ├── ConjugationResultTests.swift    # Parameterized scoring cases for ConjugationResult
     ├── CorpusFormsDumpTests.swift      # Harness: drives Conjugator over the verb set to emit corpus form→lemma JSON for the example pipeline
-    ├── DeeplinkTests.swift             # conjuguer:// parsing and routing (serialized — mutates Current)
+    ├── DeeplinkTests.swift             # conjuguer:// parsing and routing, and the source query item (serialized — mutates Current)
     ├── DefectGroupTests.swift          # Defect-group membership and tense suppression
     ├── DefectivityAuditTests.swift     # Per-family defectivity audit (traire, braire, férir, poindre, …)
     ├── EngineAuditTests.swift          # Hand-written pins for the stage-A verb-pass fixes (peuvent, dites, suivi, the eight re-modeled verbs, the seventeen être auxiliaries), checked against Wiktionary rather than against the engine
@@ -226,10 +233,13 @@ ConjuguerTests/
     ├── ParserTests.swift               # XML parsing of verbs, models, and defect groups
     ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle (serialized — mutates Current)
     ├── RichTextTests.swift             # Rich-text markup parsing into blocks and segments
+    ├── SearchReportTests.swift         # The search tracker's lifecycle, each finishSearch report, and that no parameter can echo the query
     ├── SettingsTests.swift             # Settings defaults, persistence, and malformed-value handling (serialized)
     ├── StemAlterationAuditTests.swift  # Audits every -er verb whose stem ends in é + consonant: the stem must open to è before a mute ending
     ├── VerbModelTests.swift            # GENERATED by T.generateVerbModelTests() — one @Test per verb model, ~5,500 lines. Regenerate rather than hand-edit
+    ├── VerbSearchGuessTests.swift      # The closest-verb guess, edit distance, arrow-key selection, and the mailto: link
     ├── VerbSearchTests.swift           # Verb search: folding, reflexive and "to" stripping, tier ranking, literal-before-folded, order independence
+    ├── VerbVisitTests.swift            # A verb visit's deepest section, resume, and banded dwell
     └── WidgetSnapshotWriterTests.swift # Snapshot-bundle generation, day paging, and change detection
 
 docs/                               # Claude's output that informs: research, reports, playbooks, manifests, App Store copy

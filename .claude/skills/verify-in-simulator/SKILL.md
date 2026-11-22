@@ -45,6 +45,10 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `verb_row_<infinitif>` | Row `Button` in `VerbBrowseView` (list and grid) | e.g. `verb_row_avoir`. |
 | `model_row_<exemplar>` | Row `Button` in `ModelBrowseView` (list and grid) | e.g. `model_row_avoir`. |
 | `french_letter_key_<letter>` | Accent key in `FrenchLetterKeyRow` (é è ê â î ô û ç) | Shown in place of the sort picker only while a search field is focused, e.g. `french_letter_key_ê`. `tap_id.sh` taps it and the field keeps focus. |
+| `search_guess_intro` | "A guess at the verb you meant:" in `FailedVerbSearchView` | Present only when a failed verb search has a guess. |
+| `search_guess_row` | The guess's row `Button` in `FailedVerbSearchView` | `tap_id.sh search_guess_row` opens the guessed verb. |
+| `verb_request_link` | The "please email" line in `FailedVerbSearchView` | Its address is a `mailto:` link; tap the address by frame. The simulator has no Mail, so the tap copies the address and shows `address_copied_note`. |
+| `address_copied_note` | The note under `verb_request_link` | Shows for four seconds after the address is copied. |
 
 Put a row's identifier on the tappable `Button`, **not** on the row content inside its
 label: SwiftUI merges the two elements and concatenates their identifiers, yielding
@@ -59,6 +63,13 @@ rejects non-ASCII. Re-measure with `describe_ui.sh` rather than trusting this nu
 moves: on a fresh launch it sits lower (frame y ≈ 169, so tap ≈ `201,191`), and once a search is
 active it rises to the top (tap ≈ `173,70`, seen 2026-10-01). A tap at the old spot silently
 misses, and the text goes nowhere.
+
+**iPad (since browse Phase 2):** both search fields are fixed bars under the title, and the
+hardware-keyboard path works through AXe: Command-F is `axe key-combo --modifiers 227 --key 9`,
+↓ and ↑ are `axe key 81` and `axe key 82`, Return is `axe key 40`. Escape (`axe key 41`) cancels the
+search and clears its text. Key presses sent to Simulator.app through computer use do not reach the
+device (Konjugieren). `tap_label.sh` did not find the iPad's top tab buttons on 2026-11-22; tap them
+by coordinate (Models ≈ `370,54`, Quiz ≈ `448,54` on the Conjuguer iPad Pro 11).
 
 ## iOS 26 control caveats specific to this app
 

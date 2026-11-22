@@ -71,7 +71,7 @@ struct ModelBrowseView: View {
       .navigationDestination(item: $selectedModel) { model in
         ModelView(model: model)
       }
-      .searchable(text: $searchText, prompt: L.ModelBrowseView.searchPrompt)
+      .searchable(text: $searchText, placement: BrowseLayout.searchPlacement, prompt: L.ModelBrowseView.searchPrompt)
       .searchFocused($searchIsFocused)
       .textInputAutocapitalization(.never)
       .autocorrectionDisabled()

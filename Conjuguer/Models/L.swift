@@ -53,6 +53,30 @@ enum L {
       String(localized: "VerbBrowseView.searchPrompt")
     }
 
+    static var findVerb: String {
+      String(localized: "VerbBrowseView.findVerb")
+    }
+
+    static var guessIntro: String {
+      String(localized: "VerbBrowseView.guessIntro")
+    }
+
+    static var addressCopied: String {
+      String(localized: "VerbBrowseView.addressCopied")
+    }
+
+    static func verbRequest(query: String, address: String) -> String {
+      String(localized: "VerbBrowseView.verbRequest", defaultValue: "If you believe that “\(query)” is a French verb, please email \(address).")
+    }
+
+    static func verbRequestSubject(query: String) -> String {
+      String(localized: "VerbBrowseView.verbRequestSubject", defaultValue: "Conjuguer: please add “\(query)”")
+    }
+
+    static func verbRequestBody(query: String) -> String {
+      String(localized: "VerbBrowseView.verbRequestBody", defaultValue: "I searched Conjuguer for “\(query)” and believe that it is a French verb.")
+    }
+
     // Separate singular and plural keys rather than a String Catalog plural variation: the
     // rendered count is a locale-formatted string, and a variation can only select on the
     // number it also interpolates. English and French agree that only exactly 1 is singular,

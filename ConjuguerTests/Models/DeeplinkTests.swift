@@ -26,6 +26,7 @@ struct DeeplinkTests {
     Current.verbModel = nil
     Current.info = nil
     Current.pendingDeeplink = nil
+    Current.verbSource = .deeplink
   }
 
   @Test func testHandleURLSwitchesTab() {
@@ -186,5 +187,66 @@ struct DeeplinkTests {
     #expect(Current.verbModel == nil)
     #expect(Current.info == nil)
     #expect(Current.selectedTab == .settings, "An unknown host must not switch the tab.")
+  }
+
+  @Test func testOpenVerbSearchClosesPagesAndRequestsFocus() {
+    resetCurrent()
+    Current.selectedTab = .quiz
+    Current.verbSearchIsRequested = false
+    Current.handleURL(url("conjuguer://verb/parler"))
+    Current.verbModel = VerbModel.models.values.first
+
+    Current.openVerbSearch()
+
+    #expect(Current.verb == nil)
+    #expect(Current.verbModel == nil)
+    #expect(Current.selectedTab == .verbs)
+    #expect(Current.verbSearchIsRequested)
+    Current.verbSearchIsRequested = false
+  }
+
+  @Test(arguments: [
+    ("conjuguer://verb/aller?source=widget", AnalyticsSource.widget),
+    ("conjuguer://verb/aller", .deeplink),
+    ("conjuguer://verb/aller?source=bogus", .deeplink),
+    ("conjuguer://verb/aller?source=", .deeplink),
+    ("conjuguer://verb/aller?other=1&source=control", .control)
+  ])
+  func testVerbLinkCarriesItsSource(link: String, source: AnalyticsSource) {
+    resetCurrent()
+    Current.verbSource = .resume
+    Current.handleURL(url(link))
+    #expect(Current.verb?.infinitif == "aller")
+    #expect(Current.verbSource == source)
+  }
+
+  @Test func testSourceItemDoesNotBreakAPercentEncodedVerb() {
+    resetCurrent()
+    Current.handleURL(url("conjuguer://verb/ha%C3%AFr%20France?source=widget"))
+    #expect(Current.verb?.dictionaryKey == "haïr France")
+    #expect(Current.verbSource == .widget)
+  }
+
+  @Test func testQueryItemsDoNotCountAsPathComponents() {
+    #expect(url("conjuguer://quiz/start?source=widget").hasExpectedNumberOfDeeplinkComponents)
+    #expect(!url("conjuguer://verb?source=widget").hasExpectedNumberOfDeeplinkComponents)
+  }
+
+  @Test(arguments: [
+    (OpenRandomVerbIntent.pendingDeeplink, AnalyticsSource.shortcut),
+    (OpenRandomVerbControlIntent.pendingDeeplink, .control)
+  ])
+  func testRandomVerbIntentsNameThemselves(link: String, source: AnalyticsSource) {
+    resetCurrent()
+    Current.handleURL(url(link))
+    #expect(Current.verb != nil)
+    #expect(Current.verbSource == source)
+  }
+
+  @Test func testInfoArticleVerbLinkNamesItself() {
+    resetCurrent()
+    Current.handleInAppURL(url("conjuguer://verb/parler?source=infoLink"))
+    #expect(Current.verb?.infinitif == "parler")
+    #expect(Current.verbSource == .infoLink)
   }
 }

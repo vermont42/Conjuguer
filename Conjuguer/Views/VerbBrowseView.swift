@@ -12,10 +12,15 @@ import TipKit
 struct VerbBrowseView: View {
   @Environment(World.self) private var world
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+  @Environment(\.scenePhase) private var scenePhase
   @State private var store: BrowseStore<Verb, VerbSort>?
   @State private var searchText = ""
   @State private var searchResults: [Verb] = []
-  @State private var selectedVerb: Verb?
+  @State private var searchMatches: [VerbSearch.Match] = []
+  @State private var guess: Verb?
+  @State private var keyboardSelection: Int?
+  @State private var selectedVerb: VerbDestination?
+  @State private var searchTracker = SearchTracker()
   @FocusState private var searchIsFocused: Bool
   private let tryQuizTip = TryQuizTip()
 
@@ -69,17 +74,47 @@ struct VerbBrowseView: View {
         .padding()
       }
       .navigationTitle(L.Navigation.verbs)
-      .navigationDestination(item: $selectedVerb) { verb in
-        VerbView(verb: verb)
+      .navigationDestination(item: $selectedVerb) { destination in
+        VerbView(verb: destination.verb, source: destination.source)
       }
-      .searchable(text: $searchText, prompt: L.VerbBrowseView.searchPrompt)
+      .searchable(text: $searchText, placement: BrowseLayout.searchPlacement, prompt: L.VerbBrowseView.searchPrompt)
       .searchFocused($searchIsFocused)
       .textInputAutocapitalization(.never)
       .autocorrectionDisabled()
+      .onSubmit(of: .search) {
+        // On iPhone, the keyboard's Search key keeps its usual meaning: it only hides the keyboard.
+        if BrowseLayout.isPadOrMac {
+          openKeyboardSelection()
+        }
+      }
     }
     .screenBackground()
     .onChange(of: searchText, initial: true) { _, _ in
+      keyboardSelection = nil
       updateSearchResults(playSoundIfEmpty: true)
+      if let query = searchTracker.textChanged(to: searchText) {
+        signalEndedSearch(query: query)
+      }
+    }
+    .onChange(of: scenePhase) {
+      if scenePhase == .background, let query = searchTracker.finish() {
+        signalEndedSearch(query: query)
+      }
+    }
+    .onChange(of: searchIsFocused) {
+      guard BrowseLayout.isPadOrMac else {
+        return
+      }
+      if searchIsFocused {
+        VerbSearchArrowKeys.install { offset in
+          moveKeyboardSelection(by: offset)
+        }
+      } else {
+        VerbSearchArrowKeys.uninstall()
+      }
+    }
+    .onChange(of: world.verbSearchIsRequested) {
+      focusSearchIfRequested()
     }
     .onChange(of: store.sort) { _, _ in
       withAnimation(.snappy) {
@@ -88,64 +123,69 @@ struct VerbBrowseView: View {
     }
     .sensoryFeedback(.selection, trigger: store.sort)
     .sheet(item: $world.verb) { verb in
-      VerbView(verb: verb)
+      VerbView(verb: verb, source: world.verbSource)
         .sheetDismissable()
     }
     .recordsAppearance(as: "\(VerbBrowseView.self)")
     .onAppear {
       world.reviewPrompter.promptableActionHappened()
+      focusSearchIfRequested()
     }
   }
 
   @ViewBuilder
   private var verbCollection: some View {
-    if horizontalSizeClass == .regular {
-      ScrollView {
-        verbCount
-          .padding(.top, Layout.defaultSpacing)
-
-        LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
-          ForEach(searchResults) { verb in
-            Button {
-              selectedVerb = verb
-            } label: {
-              verbRow(verb)
-                .card()
-            }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier(Self.rowIdentifier(verb))
-          }
-        }
-        .padding(.vertical, Layout.defaultSpacing)
+    if searchResults.isEmpty && isSearching {
+      FailedVerbSearchView(query: trimmedSearchText, guess: guess, guessIsSelected: keyboardSelection == 0) { verb in
+        openGuess(verb)
       }
-      .scrollContentBackground(.hidden)
-      .overlay {
-        if searchResults.isEmpty && !searchText.isEmpty {
-          ContentUnavailableView.search(text: searchText)
+    } else if horizontalSizeClass == .regular {
+      ScrollViewReader { proxy in
+        ScrollView {
+          verbCount
+            .padding(.top, Layout.defaultSpacing)
+
+          LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
+            ForEach(Array(searchResults.enumerated()), id: \.element.id) { index, verb in
+              Button {
+                openResult(verb, at: index)
+              } label: {
+                verbRow(verb)
+                  .card(accent: index == keyboardSelection ? .customRed : nil)
+              }
+              .buttonStyle(.plain)
+              .accessibilityIdentifier(Self.rowIdentifier(verb))
+            }
+          }
+          .padding(.vertical, Layout.defaultSpacing)
+        }
+        .scrollContentBackground(.hidden)
+        .onChange(of: keyboardSelection) {
+          scrollToKeyboardSelection(proxy)
         }
       }
     } else {
-      List {
-        verbCount
-          .listRowBackground(Color.customBackground)
-          .listRowSeparator(.hidden)
+      ScrollViewReader { proxy in
+        List {
+          verbCount
+            .listRowBackground(Color.customBackground)
+            .listRowSeparator(.hidden)
 
-        ForEach(searchResults) { verb in
-          Button {
-            selectedVerb = verb
-          } label: {
-            verbRow(verb)
+          ForEach(Array(searchResults.enumerated()), id: \.element.id) { index, verb in
+            Button {
+              openResult(verb, at: index)
+            } label: {
+              verbRow(verb)
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier(Self.rowIdentifier(verb))
+            .listRowBackground(index == keyboardSelection ? Color.customRed.opacity(0.2) : Color.customBackground)
           }
-          .buttonStyle(.plain)
-          .accessibilityIdentifier(Self.rowIdentifier(verb))
-          .listRowBackground(Color.customBackground)
         }
-      }
-      .listStyle(.plain)
-      .scrollContentBackground(.hidden)
-      .overlay {
-        if searchResults.isEmpty && !searchText.isEmpty {
-          ContentUnavailableView.search(text: searchText)
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .onChange(of: keyboardSelection) {
+          scrollToKeyboardSelection(proxy)
         }
       }
     }
@@ -189,12 +229,124 @@ struct VerbBrowseView: View {
     }
   }
 
+  private var trimmedSearchText: String {
+    searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+  }
+
+  private var isSearching: Bool {
+    !trimmedSearchText.isEmpty
+  }
+
   private func updateSearchResults(playSoundIfEmpty: Bool) {
     guard let store else {
       return
     }
-    searchResults = BrowseSearch.results(in: store.items, query: searchText, playSoundIfEmpty: playSoundIfEmpty) { query in
-      VerbSearch.matches(for: query, in: store.items, includeGlosses: true).map(\.verb)
+    searchMatches = isSearching ? VerbSearch.matches(for: searchText, in: store.items, includeGlosses: true) : []
+    searchResults = BrowseSearch.results(in: store.items, query: searchText, playSoundIfEmpty: playSoundIfEmpty) { _ in
+      searchMatches.map(\.verb)
+    }
+    guess = searchResults.isEmpty && isSearching ? VerbSearch.closestVerb(to: searchText, in: store.items) : nil
+  }
+
+  /// The rows that Return and the arrow keys move through: the results, or the guess when a
+  /// search found nothing. None while the field is blank, since the whole list is no search.
+  private var keyboardTargets: [Verb] {
+    guard isSearching else {
+      return []
+    }
+    if searchResults.isEmpty, let guess {
+      return [guess]
+    }
+    return searchResults
+  }
+
+  private func moveKeyboardSelection(by offset: Int) {
+    guard selectedVerb == nil else {
+      return
+    }
+    keyboardSelection = Self.keyboardSelection(after: keyboardSelection, moving: offset, count: keyboardTargets.count)
+  }
+
+  /// The first arrow press lands on the first result, and the selection stops at either end
+  /// rather than wrapping.
+  nonisolated static func keyboardSelection(after current: Int?, moving offset: Int, count: Int) -> Int? {
+    let lastIndex = count - 1
+    guard lastIndex >= 0 else {
+      return nil
+    }
+    guard let current else {
+      return offset > 0 ? 0 : nil
+    }
+    return min(max(current + offset, 0), lastIndex)
+  }
+
+  /// Return opens the highlighted row, else the first result, else the guess.
+  private func openKeyboardSelection() {
+    let targets = keyboardTargets
+    let index = keyboardSelection ?? 0
+    guard targets.indices.contains(index) else {
+      return
+    }
+    if searchResults.isEmpty {
+      openGuess(targets[index])
+    } else {
+      openResult(targets[index], at: index)
+    }
+  }
+
+  /// A row opened while the field holds a query is a search result, and opening it ends the
+  /// search. Opening another row after returning to the same results ends nothing more.
+  private func openResult(_ verb: Verb, at index: Int) {
+    guard isSearching, searchMatches.indices.contains(index) else {
+      selectedVerb = VerbDestination(verb: verb, source: .browse)
+      return
+    }
+    if let query = searchTracker.finish() {
+      signal(.opened(query: query, resultCount: searchMatches.count, kind: searchMatches[index].kind, position: index))
+    }
+    selectedVerb = VerbDestination(verb: verb, source: .search)
+  }
+
+  private func openGuess(_ verb: Verb) {
+    if let query = searchTracker.finish() {
+      signal(.openedGuess(query: query))
+    }
+    selectedVerb = VerbDestination(verb: verb, source: .searchGuess)
+  }
+
+  private func signalEndedSearch(query: String) {
+    guard let store else {
+      return
+    }
+    signal(.ended(query: query, matches: VerbSearch.matches(for: query, in: store.items, includeGlosses: true)))
+  }
+
+  private func signal(_ report: SearchReport) {
+    world.analytics.signal(name: .finishSearch, parameters: report.parameters)
+  }
+
+  private func scrollToKeyboardSelection(_ proxy: ScrollViewProxy) {
+    guard let keyboardSelection, searchResults.indices.contains(keyboardSelection) else {
+      return
+    }
+    withAnimation {
+      proxy.scrollTo(searchResults[keyboardSelection].id)
+    }
+  }
+
+  private func focusSearchIfRequested() {
+    guard world.verbSearchIsRequested else {
+      return
+    }
+    world.verbSearchIsRequested = false
+    Task {
+      if selectedVerb != nil {
+        selectedVerb = nil
+        // Hack: focus requested while the pop animates sets the focus state without making the
+        // field first responder, so typing goes nowhere (Konjugieren). Wait out the animation.
+        try? await Task.sleep(for: .milliseconds(500))
+      }
+      searchIsFocused = true
     }
   }
 }

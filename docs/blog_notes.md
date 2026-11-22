@@ -4732,3 +4732,69 @@ never appeared for the navigation bar's search field, so the row takes the sort 
 while the field is focused, which on an iPhone is just above the keyboard. Josh also asked that
 the Models tab find a model by any of its verbs: typing devenir now shows venir's model, with
 devenir under it.
+
+## When Search Finds Nothing, and a Keyboard on the iPad (2026-11-22)
+
+Phase 2 of the browse plan gave the verb list two things Konjugieren had already built: a guess
+when a search finds nothing, and lookup from a hardware keyboard. The second matters more for
+Conjuguer than for Konjugieren. More than half of Conjuguer's lifetime downloads were volume
+purchases by one Swiss institution, which installed the app on Macs, where a learner reaches for
+Command-F and the arrow keys before the trackpad.
+
+The empty state keeps its sad trombone and the system's "No Results" view, and adds a guess and a
+line asking the learner to email a missing verb. The guess measures edit distance, with a swap of
+two adjacent letters counted as one slip, between the folded query and every folded infinitive. It
+allows one edit per three letters and never more than three, so venier finds venir and assoir
+finds asseoir, but xyzzyq finds nothing and the screen says only "no results" and "email us".
+Ties go to the more frequent verb, which is how manjer finds manger rather than manier, one edit
+away too. The email line is a `mailto:` link with the query filled in; the simulator has no Mail,
+so there it copies the address and says so.
+
+The keyboard work was a port of Konjugieren's hard-won findings rather than a rediscovery. A
+focused text field swallows ↑ and ↓ before any SwiftUI mechanism sees them, so a `UIKeyCommand` on
+the window's root view controller takes them, installed only while the verb field is focused.
+Command-F has to be a top-level menu, because beside the text-editing commands the system's own
+Find item claims it. And iPadOS 26 shrinks a navigation bar's search field into a button that
+ignores programmatic focus, so on iPad the field became a bar under the title that stays put. Here
+the port went one step past Konjugieren: Conjuguer's Models tab has a search field too, so it got
+the same bar, and the two tabs still match. That layout change is Josh's to judge.
+
+Testing the arrows taught a small lesson about reading results. The first run seemed to say that
+three ↓ and one ↑ ended on the first result. The highlight is a thin red bar on a card, and the
+pixel sampler I wrote to find it looked one column too far right for the third column, so it
+reported nothing whenever the bar was there. With the sampler fixed, every press, single or in
+quick pairs, landed where it should. I could not reproduce the first run's reading, and the plan
+says so rather than calling it a fluke.
+
+## Counting Lookups Without Learning What Was Looked Up (2026-11-22)
+
+Phase 3 of the browse plan gave Conjuguer the three lookup signals Konjugieren got on 2026-11-12:
+how a learner reached a verb page, how far down it they read and for how long, and how each search
+ended. The constraint is the privacy policy's promise that the app "does not record … the verbs
+you look up, or any text you type". So nothing names a verb, and every value is a word from a fixed
+list or a band: a query is "3-5" letters long, a result stood "2-5" in the list, a page was open
+"15-60s". A test feeds queries such as "opened", "10+", and "none", words that are themselves
+parameter values, and checks that every parameter still comes from the vocabulary rather than from
+the text.
+
+The one real decision was where `source` should go. Konjugieren sends a dedicated `viewVerbView`.
+Conjuguer has always reported every screen as `viewAppeared` with a `viewName`, and its TelemetryDeck
+history of verb pages is that series. A new signal would have cut the series in two on release day,
+so the verb page keeps `viewAppeared` and gains `source`. Konjugieren's lesson about visits came
+across intact: a page counts one visit per stretch on screen in the foreground, a page that comes
+back starts a new visit marked `resume`, and every arrival pairs with exactly one `leaveVerbView`.
+Conjuguer adds one wrinkle, because its verb page opens a model page in a sheet: opening that sheet
+ends the visit and closing it resumes, since the learner is reading the model, not the verb.
+
+The Random Verb control needed its own intent, as Konjugieren's did. The control and the Shortcuts
+app both ran `OpenRandomVerbIntent`, and an intent cannot tell who ran it, so the control now runs a
+hidden twin whose link says `source=control`. Widgets, Info articles, and both intents name
+themselves with that query item, which the deeplink parser ignored until now and which a test shows
+does not upset its count of path components.
+
+With signals logged temporarily from the simulator's spy, every case behaved as designed, with one
+exception that is a limit of the page rather than of the code. The compound tenses hide behind a
+toggle that is off by default and sits just above the etymology card, so by the time the passé
+composé could show, the etymology already has, and a visit almost never ends at "compound". Phase 6
+turns the toggle on, and should look again. Like everything since Phase 0, none of this reaches a
+learner before the 2027 release; the policy lines wait in `docs/privacy_policy_pending.md`.
