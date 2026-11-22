@@ -246,6 +246,7 @@ docs/                               # Claude's output that informs: research, re
 ├── etymology_pipeline.md           # The original etymology pipeline (first 1,001 verbs): procedure, subagent template, lessons; complete
 ├── etymology_verbs [.json]         # That pipeline's work list: the 981 most-used verbs, by rank
 ├── fable_max.md                    # Model-eval artifact: the 58 etymologies (ranks 886–981) written by Fable 5 at max effort
+├── feature_architecture.md         # How each feature system works (search, analytics, deeplinks, quiz, widgets); the browse and pedagogy plans extend it
 ├── feature_request_context_usage_tool.md  # Draft Claude Code feature request: a model-callable context-usage tool
 ├── frequencies.txt                 # Generated: every distinct infinitive in rank order, one "<rank> <infinitive>" per line
 ├── government_corpus_licensing.md  # Licensing analysis for French/Swiss government documents
@@ -254,8 +255,10 @@ docs/                               # Claude's output that informs: research, re
 ├── model_eval_analysis.md          # Fable 5 vs. Opus 4.8 code-review eval analysis
 ├── new_game_mechanics.md           # Five proposed minigame mechanics, each from Konjugieren's game and a 1980s arcade game
 ├── parallel_feature_worktrees.md   # Building two features in parallel with git worktrees
+├── privacy_policy_pending.md       # Privacy-policy lines for signals built on main, waiting word for word for the release that ships them
 ├── privacy_policy2.txt             # Privacy policy text
 ├── project_structure.md            # This file — annotated directory tree
+├── release.md                      # What the 2027 release must do: App Store Connect steps, release notes, the pending privacy lines
 ├── release_notes_2.0.txt           # 2.0 release notes
 ├── release_notes_2.1.txt           # 2.1 release notes
 ├── release_notes_2.2.txt           # 2.2 release notes
@@ -266,6 +269,7 @@ docs/                               # Claude's output that informs: research, re
 ├── technology_corpus_sources.md    # Provenance manifest for the technology corpus tier
 ├── verb_frequency_sources.md       # Research: frequency-of-use sources for all verbs (Sketch Engine prices/caps, GLÀFF, Lexique 4 coverage)
 ├── video_script.md                 # App Store preview script, bilingual captions, and pre-recording checklist
+├── voiceover.md                    # VoiceOver: marking French and English, tappable rows, spoken conjugations, the quiz's announcements
 ├── wikipedia_corpus_sources.md     # Provenance manifest for the Wikipedia corpus tier
 ├── wiktionary_quotation_sources.md # Provenance manifest for the Wiktionary quotation tier: extracts, public-domain rule, attribution, authors
 ├── wwdc2026_conjuguer_impact.md    # WWDC 2026 announcements and what they mean for Conjuguer

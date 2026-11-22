@@ -4679,3 +4679,27 @@ three screens down. Reverse lookup gets built. On the quiz side, the score leave
 the elapsed time goes into bands; agreement with être stays required, to be taught rather than
 waived; reformed 1990 spellings pass in the quiz but stay off the verb page; and the time bonus
 moves to the speed round.
+
+## Groundwork for the Browse Port: Four Documents (2026-11-22)
+
+Phase 0 of the browse plan wrote the four documents that Konjugieren already had when its plans
+began, so that later phases have somewhere to write. `docs/feature_architecture.md` describes
+search, deeplinks, the quiz, and the widgets as they are today, with an Analytics section left for
+Phase 3. `docs/voiceover.md` explains how French and English text are marked for VoiceOver and how
+the quiz announces its questions. `docs/privacy_policy_pending.md` is where new signals' policy
+lines will wait, and `docs/release.md` lists what release day needs. No app code changed.
+
+Writing down what the code does, rather than what the plan said it did, turned up a few things.
+The verb list's rows mark the infinitive French and the gloss English, but each row sits inside a
+`Button`, and Konjugieren found on a device that a button flattens its children so one language
+wins. So VoiceOver probably reads either "aller" or "go" with the wrong voice. That is inferred, not
+heard, and the voiceover document asks whichever phase rebuilds the row to listen. Nothing on the
+verb page speaks when tapped, which settles a question Phase 8 had left open. Every finished quiz
+goes to the Game Center leaderboard, Ridiculous at double points included, so the scoped quizzes
+of Phase 11 must be kept out on purpose. And there are two privacy policies, a bilingual
+`docs/privacy_policy2.txt` and an older-named `privacyPolicy4.md` at the root, so the release list
+asks which one the App Store listing actually serves.
+
+The deeplink grammar was narrower than its description suggested: a link needs exactly one path
+segment after the host, and no query item is read. Phase 9 replaces it with a written grammar, and
+this document now records the one it replaces.

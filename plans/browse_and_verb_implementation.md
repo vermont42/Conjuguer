@@ -23,7 +23,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 
 | Phase | Status | Date | Commit | Ideas | Konjugieren phase |
 |---:|---|---|---|---|---:|
-| 0 | Not started | | | Groundwork | |
+| 0 | Awaiting Josh | 2026-11-22 | | Groundwork | |
 | 1 | Not started | | | A1, A2, A3, A8 | 1 |
 | 2 | Not started | | | A4, C4 | 2 |
 | 3 | Not started | | | Signals | 3 |
@@ -244,7 +244,7 @@ verbs.
 
 ## Phase 0: Groundwork
 
-**Depends on:** nothing. **Status:** Not started.
+**Depends on:** nothing. **Status:** Awaiting Josh (2026-11-22).
 
 Docs that later phases, and the pedagogy plan, write into. Konjugieren had each before its plans
 began. No app code.
@@ -269,6 +269,37 @@ began. No app code.
 **Done when** the four docs exist and `check_docs.py` passes.
 
 **How it differed:**
+
+Done 2026-11-22 as written: the four docs exist, each is listed in `docs/project_structure.md`, and
+`check_docs.py` reports no problems. No app code changed, so there was nothing to build, test, or
+look at in the simulator. Two departures, and several findings that later phases should read.
+
+- **Analytics is not quite empty.** `feature_architecture.md` § Analytics states the two rules
+  already in force (every screen reports `viewAppeared` with `viewName`; no signal carries a verb
+  or typed text) and leaves the vocabulary to Phase 3.
+- **Two privacy policies.** `docs/privacy_policy2.txt` (bilingual, effective 2026-06-30) and
+  `privacyPolicy4.md` at the root both list the analytics. The pending file names
+  `privacy_policy2.txt` as the plan says, and `release.md` asks that release day check which one the
+  App Store listing serves.
+- **The verb row's languages (Phases 1, 5, 10).** `BrowseRow` marks its title French and its
+  subtitle English, but both tabs wrap it in a `Button`, which by Konjugieren's finding flattens the
+  row so that one locale wins. Not tested here. `voiceover.md` gives the pattern to adopt, and asks
+  the phase that rebuilds the row to test it with VoiceOver. `VerbView.metaRow` also reads its
+  English label ("Auxiliary:") with a French voice.
+- **Phase 8's check.** Nothing on the verb page speaks when tapped: cells have no tap action, and
+  `Utterer` serves only the quiz's announcements. So the context menu replaces no existing tap.
+- **Phase 1.** Search matches `infinitifWithPossibleExtraLetters`, so a doubled infinitive's extra
+  letters are searchable ("France" finds haïr). Decide whether that should survive the new matcher.
+- **Phase 3.** A deeplink needs exactly one path segment after the host (`conjuguer://quiz` alone
+  is ignored), and nothing reads query items yet. `pathComponents` excludes the query, so a
+  `?source=` item should not break the count, but Phase 3 should test it.
+- **Phase 11.** Every completed quiz reports its score to Game Center today, Ridiculous included
+  (at double points). A scoped quiz must be kept out explicitly.
+- **Phase 12.** The writer stores an array of seven `WidgetSnapshot`s, not a bundle with a base
+  date and page offset as Konjugieren's does, so Konjugieren's `displayedSnapshot` has no direct
+  counterpart.
+- **Version.** `MARKETING_VERSION` is 2.2, and `release_notes_2.3.txt` was begun and never shipped.
+  `release.md` leaves the release's number open.
 
 ## Phase 1: Search Finds What People Type
 
