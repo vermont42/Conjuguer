@@ -23,7 +23,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 
 | Phase | Status | Date | Commit | Ideas | Konjugieren phase |
 |---:|---|---|---|---|---:|
-| 0 | Awaiting Josh | 2026-11-22 | | Groundwork | |
+| 0 | Done | 2026-11-22 | 33de461 | Groundwork | |
 | 1 | Not started | | | A1, A2, A3, A8 | 1 |
 | 2 | Not started | | | A4, C4 | 2 |
 | 3 | Not started | | | Signals | 3 |
@@ -244,7 +244,7 @@ verbs.
 
 ## Phase 0: Groundwork
 
-**Depends on:** nothing. **Status:** Awaiting Josh (2026-11-22).
+**Depends on:** nothing. **Status:** Done (2026-11-22).
 
 Docs that later phases, and the pedagogy plan, write into. Konjugieren had each before its plans
 began. No app code.
