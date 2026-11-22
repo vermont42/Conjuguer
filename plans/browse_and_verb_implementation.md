@@ -25,8 +25,8 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 |---:|---|---|---|---|---:|
 | 0 | Done | 2026-11-22 | 33de461 | Groundwork | |
 | 1 | Done | 2026-11-22 | 1046c7c | A1, A2, A3, A8 | 1 |
-| 2 | Done | 2026-11-22 | | A4, C4 | 2 |
-| 3 | Done | 2026-11-22 | | Signals | 3 |
+| 2 | Done | 2026-11-22 | 0827ddf | A4, C4 | 2 |
+| 3 | Done | 2026-11-22 | 0827ddf | Signals | 3 |
 | 4 | Not started | | | A5 (the map) | 5 |
 | 5 | Not started | | | A5 (the search) | 6 |
 | 6 | Not started | | | B3, B5's tip | 7 |
