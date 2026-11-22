@@ -24,7 +24,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | Phase | Status | Date | Commit | Ideas | Konjugieren phase |
 |---:|---|---|---|---|---:|
 | 0 | Done | 2026-11-22 | 33de461 | Groundwork | |
-| 1 | Awaiting Josh | 2026-11-22 | | A1, A2, A3, A8 | 1 |
+| 1 | Done | 2026-11-22 | 1046c7c | A1, A2, A3, A8 | 1 |
 | 2 | Not started | | | A4, C4 | 2 |
 | 3 | Not started | | | Signals | 3 |
 | 4 | Not started | | | A5 (the map) | 5 |
@@ -305,7 +305,7 @@ look at in the simulator. Two departures, and several findings that later phases
 
 **Ideas:** A1, A2, A3, A8. **Ports:** Konjugieren Phase 1 (`VerbSearch.swift`,
 `GermanLetterKeyRow.swift`; not `SearchScope.swift`, since Conjuguer gets no setting). **Depends
-on:** nothing. **Status:** Awaiting Josh (2026-11-22).
+on:** nothing. **Status:** Done (2026-11-22).
 
 - **A1.** Keep the accent folding `localizedStandardContains` gives, and add the ligatures: œ and
   oe, æ and ae. Strip a leading "se " or "s'" (and "to " for English) before matching, so
