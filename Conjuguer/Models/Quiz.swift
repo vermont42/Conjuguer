@@ -12,6 +12,8 @@ import TipKit
 
 @Observable
 class Quiz {
+  static let questionCount = 30
+
   private(set) var quizState = QuizState.notStarted
   private(set) var elapsedTime = 0
   private(set) var score = 0
@@ -19,6 +21,7 @@ class Quiz {
   private(set) var difficulty = QuizDifficulty.regular
   private(set) var currentQuestionIndex = 0
   private(set) var questions: [QuizQuestion] = []
+  private(set) var scope = QuizScope.allVerbs
   private(set) var quizResults: [QuizResult] = []
   var shouldShowResults = false
   private(set) var previousIncorrectAnswer: String?
@@ -60,17 +63,24 @@ class Quiz {
     self.shouldShuffle = shouldShuffle
   }
 
-  func start() {
+  func start(scope: QuizScope = .allVerbs) {
+    self.scope = scope
     resetDecks()
     shuffleDecks()
     resetPublishedProperties()
     buildQuiz()
+    guard !questions.isEmpty else {
+      return
+    }
     quizState = .inProgress
     announcePublishedProperties()
-    startLiveActivity()
+    if scope.startsLiveActivity {
+      startLiveActivity()
+    }
     Current.soundPlayer.play(Sound.randomGun)
     Current.analytics.signal(name: .quizStart, parameters: [
-      ParameterKey.difficulty.rawValue: Current.settings.quizDifficulty.rawValue
+      ParameterKey.difficulty.rawValue: difficulty.rawValue,
+      ParameterKey.source.rawValue: scope.source.rawValue
     ])
 
     timer = Timer.scheduledTimer(
@@ -90,9 +100,10 @@ class Quiz {
   func quit() {
     Current.soundPlayer.play(Sound.randomSadTrombone)
     Current.analytics.signal(name: .quizQuit, parameters: [
-      ParameterKey.difficulty.rawValue: Current.settings.quizDifficulty.rawValue,
+      ParameterKey.difficulty.rawValue: difficulty.rawValue,
       ParameterKey.lastQuestionIndex.rawValue: "\(currentQuestionIndex)",
-      ParameterKey.elapsedTime.rawValue: "\(elapsedTime)"
+      ParameterKey.elapsedTime.rawValue: "\(elapsedTime)",
+      ParameterKey.source.rawValue: scope.source.rawValue
     ])
     teardown()
   }
@@ -184,7 +195,8 @@ class Quiz {
     elapsedTime = 0
     score = 0
     correctnessScore = 0.0
-    difficulty = Current.settings.quizDifficulty
+    // A scoped quiz asks Regular's mix whatever the setting, since Ridiculous is a fixed list.
+    difficulty = scope.isRanked ? Current.settings.quizDifficulty : .regular
     currentQuestionIndex = 0
     questions = []
     quizResults = []
@@ -193,6 +205,12 @@ class Quiz {
   }
 
   private func buildQuiz() {
+    if scope.verbs != nil {
+      var generator = SystemRandomNumberGenerator()
+      questions = scope.questions(using: &generator)
+      return
+    }
+
     #if DEBUG
     // Screenshot driver hook: when launched with `-CONJUGUER_QUIZ_FIXTURE screenshot`,
     // build a deterministic 30-question quiz and export the correct answers so the
@@ -204,7 +222,7 @@ class Quiz {
     }
     #endif
 
-    switch Current.settings.quizDifficulty {
+    switch difficulty {
     case .regular:
       [regularErVerb, regularErVerb, regularIrVerb, regularIrVerb, regularReVerb, bigThreeVerb, indicatifPrésentStemChangerVerb].forEach {
         questions.append(QuizQuestion(verb: $0, tense: .indicatifPrésent(personNumber)))
@@ -406,7 +424,7 @@ class Quiz {
     let verb = question.verb
     let tense = question.tense
     let correctAnswers: String
-    if let answers = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: nil) {
+    if let answers = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) {
       correctAnswers = answers
     } else {
       // Unreachable with today's data; degrade to an empty correct answer (scored as
@@ -451,17 +469,20 @@ class Quiz {
     if score >= minimumScoreThatGetsBonus {
       score += Quiz.bonusForElapsedTime(elapsedTime)
     }
-    if score > Current.settings.bestScore {
-      Current.settings.bestScore = score
+    if scope.isRanked {
+      if score > Current.settings.bestScore {
+        Current.settings.bestScore = score
+      }
+      ChangeDifficultyTip.quizCompleted.sendDonation()
+      gameCenter.reportScore(score)
     }
     shouldShowResults = true
     Current.soundPlayer.play(Sound.randomApplause)
-    ChangeDifficultyTip.quizCompleted.sendDonation()
-    gameCenter.reportScore(score)
     Current.analytics.signal(name: .quizCompletion, parameters: [
-      ParameterKey.difficulty.rawValue: Current.settings.quizDifficulty.rawValue,
+      ParameterKey.difficulty.rawValue: difficulty.rawValue,
       ParameterKey.score.rawValue: "\(score)",
-      ParameterKey.elapsedTime.rawValue: "\(elapsedTime)"
+      ParameterKey.elapsedTime.rawValue: "\(elapsedTime)",
+      ParameterKey.source.rawValue: scope.source.rawValue
     ])
     teardown()
   }

@@ -88,6 +88,7 @@ Conjuguer/
 │   ├── PersonNumber.swift      # 1s…3p with localized pronouns and gendered third-person handling
 │   ├── PronounGender.swift     # Setting enum: feminine/masculine/both
 │   ├── Quiz.swift              # @Observable quiz state: question generation, timer, scoring, Live Activity, Game Center
+│   ├── QuizScope.swift         # What a quiz asks about (every verb, My Verbs, one verb's page), its count and source; Regular's mix over chosen verbs, Test Me's three tenses, Verb.hasCell
 │   ├── QuizDifficulty.swift    # Setting enum: regular vs ridiculous
 │   ├── QuizQuestion.swift      # One quiz question (verb + tense)
 │   ├── QuizResult.swift        # One answered question and its ConjugationResult, for the results sheet
@@ -152,6 +153,7 @@ Conjuguer/
 │   ├── ReviewPrompterDummy.swift  # No-op double
 │   ├── ReviewPrompterReal.swift   # Prompts at an action-count modulo and a minimum interval
 │   ├── Settings.swift          # @Observable user preferences persisted through GetterSetter
+│   ├── SeededRandomNumberGenerator.swift  # SplitMix64, so tests can check random draws with a fixed seed
 │   ├── ShareSheet.swift        # Presents UIActivityViewController with an LPLinkMetadata header, anchored on iPad to a bar button (ShareLink reports no tap)
 │   ├── SoundPlayer.swift       # Protocol for audio playback
 │   ├── SoundPlayerDummy.swift  # No-op double
@@ -187,7 +189,7 @@ Conjuguer/
     ├── OnboardingView.swift    # Multi-page welcome tour; auto-presented on first launch and re-showable from Settings
     ├── QuizResultsView.swift   # End-of-quiz sheet: score, per-question results, leaderboard
     ├── QuizResultView.swift    # One row of the results sheet
-    ├── QuizView.swift          # Quiz gameplay: prompt, answer field, progress, feedback
+    ├── QuizView.swift          # Quiz gameplay: prompt, answer field, progress, feedback; the All Verbs / My Verbs picker; as a sheet, Test Me on a verb page
     ├── RelatedVerbsView.swift  # The verb page's Related Verbs card (built on the same root, same model), RelatedVerbListView, and FlowLayout
     ├── RichTextView.swift      # Renders [RichTextBlock] with subheadings, emphasis, color-coding, links
     ├── SettingsView.swift      # Settings UI: pickers, app icon, ratings, onboarding re-show
@@ -263,6 +265,7 @@ ConjuguerTests/
     ├── ModelSearchTests.swift          # Models found by exemplar or by member verb, exemplars first, each once
     ├── NousPrésentStemTests.swift      # The nous-présent stem that imparfait derives from
     ├── ParserTests.swift               # XML parsing of verbs, models, and defect groups
+    ├── QuizScopeTests.swift            # Quiz scopes: the default quiz unchanged, My Verbs drawing only its verbs in Regular's mix, defective verbs, Test Me's three tenses, unranked scoring, doubled entries graded as themselves, source on every quiz signal
     ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle (serialized — mutates Current)
     ├── RelatedVerbsTests.swift         # Base-finding on known and false pairs, nested roots, the card's two relations, doubled roots, and the model page's two orders
     ├── RichTextTests.swift             # Rich-text markup parsing into blocks and segments

@@ -57,6 +57,10 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `related_list_<infinitif>` | Row `Button` in `RelatedVerbListView` | e.g. `related_list_remettre`. |
 | `verb_share_button` | Share button in `VerbView`'s navigation bar | Opens the share sheet. Tap the sheet's Copy and read the text with `xcrun simctl pbpaste <udid>`. On the iPad it is a popover over the button. |
 | `verb_star_button` | Star button in `VerbView`'s navigation bar (Phase 10) | AXe cannot see navigation-bar buttons on iOS 26; tap it by position, between Done (in a sheet) and Share, and confirm by screenshot (a filled star). |
+| `verb_test_button` | Test Me (clipboard) button in `VerbView`'s navigation bar (Phase 11) | First in the bar, before the star; absent on the six verbs with only an infinitif. Invisible to AXe like the star: tap by position (≈ `250,100` in a sheet on the iPhone 17, ≈ `691,54` pushed on the iPad Pro 11) and confirm by the sheet's "1 / 3". The sheet's Quit is found by `tap_label.sh Quit`; its results' Done at ≈ `352,110` on the iPhone. |
+| `quiz_start_button` | Start `Button` in the Quiz tab's briefing card | Starts the scope chosen in `quiz_scope_picker`. |
+| `quiz_scope_picker` | All Verbs / My Verbs segmented `Picker` in the Quiz tab's briefing card (Phase 11) | 2 segments; tap by frame. Not stored across launches. |
+| `quiz_my_verbs_note` | The line under `quiz_scope_picker` with My Verbs chosen | "Questions about N verbs in My Verbs", or how to add some; `quiz_start_button` is then disabled (`enabled: false` in `describe_ui`). |
 | `recent_verbs_heading` | "Recent" heading over the recents in the empty focused search field | Present only when something has been opened. |
 | `my_verbs_list` | The My Verbs `List` (third segment of `verb_browse_sort`) | Tap the picker's third segment by frame (`x + width*5/6`). Rows keep `verb_row_<infinitif>`. Swipe a row left with `axe swipe --duration 0.4` at its `describe_ui` frame to show Delete. |
 | `my_verbs_starred_heading`, `my_verbs_recent_heading` | Section headings in My Verbs | |

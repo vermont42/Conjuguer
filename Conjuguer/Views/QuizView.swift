@@ -9,10 +9,16 @@ import SwiftUI
 import TipKit
 
 struct QuizView: View {
+  /// Nil for the Quiz tab. A scope makes this a sheet that starts that quiz as it appears and
+  /// closes when the quiz ends.
+  var sheetScope: QuizScope?
+
   @Environment(World.self) private var world
   @Environment(Quiz.self) var quiz
   @Environment(\.accessibilityReduceMotion) private var reduceMotion
+  @Environment(\.dismiss) private var dismiss
   @State private var input = ""
+  @State private var tabScope = TabQuizScope.allVerbs
   @FocusState private var conjugationFieldIsFocused: Bool
   @State private var authCoordinator = GameCenterAuthCoordinator()
   private let feedbackSlotHeight: CGFloat = 64
@@ -27,17 +33,23 @@ struct QuizView: View {
       }
 
       if quiz.quizState == .notStarted {
-        GeometryReader { proxy in
-          ScrollView {
-            notStartedBriefing
-              .frame(maxWidth: .infinity, minHeight: proxy.size.height)
+        if sheetScope == nil {
+          GeometryReader { proxy in
+            ScrollView {
+              notStartedBriefing
+                .frame(maxWidth: .infinity, minHeight: proxy.size.height)
+            }
           }
+        } else {
+          Spacer()
         }
       }
 
-      GameCenterAuthView(coordinator: authCoordinator)
-        .frame(width: 0, height: 0)
-        .accessibilityHidden(true)
+      if sheetScope == nil {
+        GameCenterAuthView(coordinator: authCoordinator)
+          .frame(width: 0, height: 0)
+          .accessibilityHidden(true)
+      }
     }
     .padding(.leading, Layout.doubleDefaultSpacing)
     .padding(.trailing, Layout.doubleDefaultSpacing)
@@ -46,7 +58,11 @@ struct QuizView: View {
       isPresented: $quiz.shouldShowResults,
       onDismiss: {
         quiz.shouldShowResults = false
-        world.gameCenter.showLeaderboard()
+        if sheetScope != nil {
+          dismiss()
+        } else if quiz.scope.isRanked {
+          world.gameCenter.showLeaderboard()
+        }
       },
       content: {
         QuizResultsView()
@@ -54,8 +70,14 @@ struct QuizView: View {
           .sheetDismissable()
       }
     )
-    .recordsAppearance(as: "\(QuizView.self)")
     .onAppear {
+      if let sheetScope {
+        if quiz.quizState == .notStarted, !quiz.shouldShowResults {
+          start(scope: sheetScope)
+        }
+        return
+      }
+      world.analytics.signal(name: .viewAppeared, parameters: [ParameterKey.viewName.rawValue: "\(QuizView.self)"])
       if quiz.quizState == .notStarted && !world.gameCenter.isAuthenticated {
         world.gameCenter.authenticate(onViewController: authCoordinator.viewController)
       }
@@ -225,16 +247,37 @@ struct QuizView: View {
         .multilineTextAlignment(.center)
 
       VStack(spacing: Layout.defaultSpacing) {
-        Label(world.settings.quizDifficulty.localizedDifficultyWithLabel, systemImage: "speedometer")
+        Label(briefedDifficulty.localizedDifficultyWithLabel, systemImage: "speedometer")
         Label(L.QuizView.questionCount, systemImage: "list.number")
-        if world.settings.bestScore > 0 {
+        if tabScope == .allVerbs, world.settings.bestScore > 0 {
           Label(L.QuizView.bestScore(world.settings.bestScore), systemImage: "trophy")
         }
       }
       .smallLabel()
 
+      VStack(spacing: Layout.defaultSpacing) {
+        Picker(L.QuizView.scope, selection: $tabScope.animation(.snappy)) {
+          ForEach(TabQuizScope.allCases, id: \.self) { scope in
+            Text(scope.displayName)
+              .tag(scope)
+          }
+        }
+        .pickerStyle(.segmented)
+        .accessibilityIdentifier("quiz_scope_picker")
+
+        if tabScope == .myVerbs {
+          Text(myVerbsNote)
+            .smallLabel()
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
+            .accessibilityIdentifier("quiz_my_verbs_note")
+        }
+      }
+      .padding(.top, Layout.defaultSpacing)
+
       startButton
         .funButton()
+        .disabled(tabScope == .myVerbs && myVerbs.isEmpty)
         .padding(.top, Layout.defaultSpacing)
     }
     .frame(maxWidth: .infinity)
@@ -262,9 +305,31 @@ struct QuizView: View {
     }
   }
 
+  private var myVerbs: [Verb] {
+    world.learnerVerbs.myVerbs
+  }
+
+  /// A My Verbs quiz asks Regular's mix whatever the setting (`Quiz.resetPublishedProperties`).
+  private var briefedDifficulty: QuizDifficulty {
+    tabScope == .allVerbs ? world.settings.quizDifficulty : .regular
+  }
+
+  private var myVerbsNote: String {
+    myVerbs.isEmpty ? L.QuizView.myVerbsEmpty : L.QuizView.myVerbsCount(myVerbs.count)
+  }
+
   private func start() {
-    quiz.start()
+    switch tabScope {
+    case .allVerbs:
+      start(scope: .allVerbs)
+    case .myVerbs:
+      start(scope: .myVerbs(myVerbs))
+    }
     TryQuizTip().invalidate(reason: .actionPerformed)
+  }
+
+  private func start(scope: QuizScope) {
+    quiz.start(scope: scope)
     Task { @MainActor in
       conjugationFieldIsFocused = true
     }
@@ -274,6 +339,9 @@ struct QuizView: View {
     conjugationFieldIsFocused = false
     input = ""
     quiz.quit()
+    if sheetScope != nil {
+      dismiss()
+    }
   }
 
   private func lastAnswerText(_ incorrectAnswer: String) -> Text {
@@ -288,5 +356,20 @@ struct QuizView: View {
     attributed.foregroundColor = Color.customBlue
     attributed += AttributedString(mixedCaseString: correctAnswer)
     return Text(attributed)
+  }
+}
+
+/// What the Quiz tab's picker offers. A quiz over one verb starts from that verb's page instead.
+enum TabQuizScope: CaseIterable {
+  case allVerbs
+  case myVerbs
+
+  var displayName: String {
+    switch self {
+    case .allVerbs:
+      return L.QuizView.allVerbs
+    case .myVerbs:
+      return L.MyVerbs.title
+    }
   }
 }

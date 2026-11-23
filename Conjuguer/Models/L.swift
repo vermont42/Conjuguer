@@ -219,6 +219,10 @@ enum L {
       String(localized: "VerbView.unstar")
     }
 
+    static var testMe: String {
+      String(localized: "VerbView.testMe")
+    }
+
     static func shareGloss(infinitif: String, gloss: String) -> String {
       String(localized: "VerbView.shareGloss", defaultValue: "\(infinitif), “\(gloss)”")
     }
@@ -377,6 +381,28 @@ enum L {
   enum QuizView {
     static var start: String {
       String(localized: "QuizView.start")
+    }
+
+    static var scope: String {
+      String(localized: "QuizView.scope")
+    }
+
+    static var allVerbs: String {
+      String(localized: "QuizView.allVerbs")
+    }
+
+    static var myVerbsEmpty: String {
+      String(localized: "QuizView.myVerbsEmpty")
+    }
+
+    // Separate singular and plural keys, as `VerbBrowse.verbCount(count:)` explains.
+    static func myVerbsCount(_ count: Int) -> String {
+      let formattedCount = count.formatted()
+      if count == 1 {
+        return String(localized: "QuizView.myVerbsCountSingular", defaultValue: "Questions about \(formattedCount) verb in My Verbs")
+      } else {
+        return String(localized: "QuizView.myVerbsCountPlural", defaultValue: "Questions about \(formattedCount) verbs in My Verbs")
+      }
     }
 
     static var verbWithColon: String {

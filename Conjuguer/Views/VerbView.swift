@@ -125,6 +125,17 @@ struct VerbView: View {
     }
     .screenBackground()
     .toolbar {
+      if verb.canBeQuizzed {
+        ToolbarItem(placement: .topBarTrailing) {
+          Button {
+            detailSheet = .quiz
+          } label: {
+            Label(L.VerbView.testMe, systemImage: "pencil.and.list.clipboard")
+          }
+          .accessibilityIdentifier("verb_test_button")
+        }
+      }
+
       ToolbarItem(placement: .topBarTrailing) {
         starButton
       }
@@ -178,6 +189,8 @@ struct VerbView: View {
       case .relatedList(let destination):
         RelatedVerbListView(destination: destination)
           .sheetDismissable()
+      case .quiz:
+        VerbQuizSheet(verb: verb)
       }
     }
   }
@@ -524,6 +537,7 @@ struct VerbView: View {
     case article(Info)
     case verb(VerbDestination)
     case relatedList(RelatedVerbListDestination)
+    case quiz
 
     var id: String {
       switch self {
@@ -535,8 +549,25 @@ struct VerbView: View {
         return "verb-\(destination.verb.id)"
       case .relatedList(let destination):
         return "related-\(destination.root)"
+      case .quiz:
+        return "quiz"
       }
     }
+  }
+}
+
+/// "Test me on this verb": three questions about the verb in view, in a sheet with its own `Quiz`,
+/// so the learner closes it onto the same page and a quiz in the Quiz tab carries on. While a
+/// question waits, the sheet closes only through Quit, so every quiz started here ends with
+/// `quizQuit` or `quizCompletion`.
+private struct VerbQuizSheet: View {
+  let verb: Verb
+  @State private var quiz = Quiz(gameCenter: Current.gameCenter)
+
+  var body: some View {
+    QuizView(sheetScope: .verbPage(verb))
+      .environment(quiz)
+      .interactiveDismissDisabled(quiz.quizState == .inProgress)
   }
 }
 

@@ -34,7 +34,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 8 | Done | 2026-11-22 | aaf8b31 | B6 | 10 |
 | 9 | Done | 2026-11-22 | 7ba1281 | C1, C2 | 11 |
 | 10 | Done | 2026-11-22 | 2829650 | D1, D2 | 12 |
-| 11 | Not started | | | D2's quiz scope, D3 | 13 |
+| 11 | Done | 2026-11-22 | | D2's quiz scope, D3 | 13 |
 | 12 | Not started | | | D5 | 14 |
 | 13 | Not started | | | D4 | 15 |
 | 14 | Not started | | | D6 | 16 |
@@ -1269,7 +1269,7 @@ offered no change to Konjugieren's layout, so My Verbs is the third segment as t
 ## Phase 11: A Quiz over Chosen Verbs
 
 **Ideas:** D2's quiz scope, D3. **Ports:** Konjugieren Phase 13 (`QuizScope` in `Quiz.swift`,
-`QuizSheet`). **Depends on:** Phase 10. **Status:** Not started.
+`QuizSheet`). **Depends on:** Phase 10. **Status:** Done (2026-11-22).
 
 - A minimal ability for the quiz to take a list of verbs and draw its questions from them.
   Conjuguer builds a quiz from fixed per-tense quotas over curated pools (`QuizVerbs`) at Regular,
@@ -1294,6 +1294,55 @@ with constructors that later phases extend.
 only from My Verbs, the default quiz is unchanged, and tests pin each scope.
 
 **How it differed:**
+
+Built 2026-11-22 in one session. The suite ran 498 tests in 42 suites, all passing, 14 more than
+Phase 10's 484, all in the new `QuizScopeTests`. New files: `Models/QuizScope.swift` (`QuizScope`,
+`QuizTenseSlot`, `Verb.hasCell(_:)` and `canBeQuizzed`) and `Utils/SeededRandomNumberGenerator.swift`.
+`docs/feature_architecture.md` § Quiz Scopes describes it. No question needed Josh. What differs:
+
+- **`QuizScope`** carries the verbs (nil for the default quiz), the question count, and the source,
+  with `.allVerbs`, `.myVerbs(_:)`, and `.verbPage(_:)`. It has no reading index, which German needed
+  for its two-reading verbs. A doubled French infinitive is two `Verb`s already. `isRanked` is
+  `verbs == nil`. **For Phase 14:** add a constructor (source `list`); `questions(using:)` handles
+  any list of verbs.
+- **Regular's mix became `QuizTenseSlot`**, an enum of the eight tenses with their quotas. The
+  default quiz's `buildQuiz` was left as it was, and a test pins that it asks exactly the slots'
+  quotas. **For the pedagogy plan:** that is the seam where levels would swap the mix.
+- **Defective verbs, which German lacks.** Each question asks a cell the verb's defect group allows.
+  A tense no scoped verb has is dropped (a My Verbs quiz of falloir alone asks 27). Test Me's three
+  questions are three different tenses, weighted by Regular's quotas and without the participe
+  présent. A verb with fewer tenses gets more cells of those it has, then its participles. The six
+  verbs used only in the infinitif (`dg="0"`) show no Test Me button.
+- **A scoped quiz is scored and labeled Regular**, whatever the setting, since Ridiculous is a fixed
+  list and a scoped quiz asks Regular's mix. The briefing card says Regular while My Verbs is chosen.
+- **Unranked means more here than in Konjugieren.** Beyond Game Center, a scoped quiz sets no best
+  score, donates nothing to `ChangeDifficultyTip`, and does not open the leaderboard when its results
+  close, which Conjuguer's tab does after every quiz. A My Verbs quiz does start a Live Activity, as
+  a full thirty questions.
+- **No `tapTestVerb`.** Konjugieren sends one, and `feature_architecture.md` expected it. Here the
+  sheet starts its quiz as it appears, so `quizStart` with `verbPage` is the same event, and one
+  fewer privacy line is staged. `difficulty` on the three signals is now the quiz's own, fixed at
+  its start; quit and completion used to read the setting at that moment.
+- **A bug found and fixed:** the quiz graded answers without the verb's extra letters, so sortir
+  (obtain), a finir-like entry, would have been graded as sortir (exit). The curated pools hold no
+  doubled entry; a scoped quiz can. `aDoubledEntryIsGradedAsItself` pins it.
+- **The start screen.** The picker went into the existing briefing card above Start, with a count
+  line, and the best score shows only for All Verbs. Konjugieren's filled start screen (big yellow
+  symbols, tiles, chips), which Josh asked for there after trying it, was not ported, since
+  Conjuguer's card already fills the screen with a symbol and facts. **Josh should judge** whether
+  he wants it here, and whether the unlabeled clipboard symbol is discoverable enough.
+- **Analytics.** `source` on `quizStart`, `quizQuit`, and `quizCompletion` (`tab`, `myVerbs`,
+  `verbPage`). The privacy line is staged as a change to the existing quiz lifecycle bullet.
+- **How it was tested.** On the iPhone, in English and light mode: Test Me on venir's page (a
+  deeplinked sheet) asked conditionnel présent, présent, and passé composé, and the results showed
+  2 of 3 and 20 points; Done and Quit each closed the sheet onto the page. The Quiz tab counted two
+  verbs in My Verbs (être, venir), and the first eight questions of a My Verbs quiz were all about
+  them. In French and dark mode: the card ("Tous les verbes", "Mes verbes", "Questions sur 2 verbes
+  de Mes verbes", "Commencer"). On the iPad, in English: Test Me as a form sheet on a pushed venir
+  page, a tap outside it leaving it up mid-quiz, Quit closing it, and, after Clear emptied My Verbs,
+  the note telling how to add verbs over a disabled Start. **Not tried:** VoiceOver, the Mac, Game
+  Center signed in, a Live Activity on a device, and a completed My Verbs quiz in the simulator
+  (the unit tests complete one).
 
 ## Phase 12: A Verb of the Day Worth Opening
 

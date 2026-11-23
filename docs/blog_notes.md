@@ -5128,3 +5128,50 @@ The privacy policy needed a small but real change, staged for the release. It sa
 not record the verbs you look up", which a list of recent verbs on the device would make untrue.
 The staged text says the app does not *send* them, and a new paragraph says the list stays on the
 device.
+
+## A Quiz over Chosen Verbs (2026-11-22)
+
+Phase 11 of the browse plan let the quiz ask about verbs the learner chose. There are two ways in.
+The Quiz tab's briefing card now has a picker, All Verbs or My Verbs, above Start; with My Verbs
+chosen, a line says how many verbs the quiz will cover, and Start stays disabled until there is at
+least one. And every verb page has a clipboard button in its navigation bar, Test Me, which asks
+three questions about that verb in a sheet and closes back onto the page.
+
+Konjugieren built this first, and its design carried over: a `QuizScope` that says which verbs, how
+many questions, and where the quiz began. What did not carry over was how the questions are built.
+Konjugieren draws a random tense for each question. Conjuguer's Regular quiz is a recipe (seven
+présents, six passés composés, four subjonctifs, three each of the imparfait, futur, conditionnel,
+and impératif, and one participe présent), with each slot drawing from a hand-curated pool. The plan
+said a scoped quiz should keep that mix, so the recipe became an enum of tense slots with their
+quotas, and a test now checks that the default quiz still asks exactly those quotas. A My Verbs quiz
+fills each slot from the learner's verbs in turn, and avoids asking the same cell of the same verb
+twice unless it has no other choice, as with one verb and seven présents.
+
+French brought a problem German did not have: defective verbs. Falloir has only the third-person
+singular, so it has no impératif at all. Choir has nothing but its participe passé, and six verbs,
+such as accroire, are used only in the infinitive. Each question now asks only a cell the verb's
+defect group allows. A tense no chosen verb has is simply dropped, so a My Verbs quiz of falloir
+alone has 27 questions. Test Me's three questions come from three different tenses, weighted the
+way Regular weights them and leaving out the participe présent. A verb with fewer tenses gets more
+cells of the ones it has, then its participles, and the six infinitive-only verbs show no Test Me
+button at all.
+
+Writing a test for the doubled entries turned up a small existing bug. The quiz graded every answer
+without the verb's extra letters, so it would have graded sortir (obtain), which conjugates like
+finir (il sortit), as if it were sortir (exit) (il sort). The curated pools hold no doubled entry,
+so nobody had met it. A quiz over a learner's own verbs could, and it now grades each entry as
+itself.
+
+Josh's rule from Konjugieren held: only the default quiz posts to Game Center, sets the best score,
+or shows the leaderboard. A score over three questions, or over a learner's chosen verbs, compares
+with nothing. Since Ridiculous is a fixed list of thirty pairs and cannot be scoped, a scoped quiz
+always asks Regular's mix and scores as Regular, and the briefing card says so while My Verbs is
+chosen. The three quiz signals gained a `source`, so three-question quizzes cannot inflate the full
+quiz's completion rate. Konjugieren also added a separate tap signal for Test Me, but here the sheet
+starts its quiz the moment it appears, so that tap and the quiz's start are the same event, and the
+privacy policy gained one fewer line.
+
+One thing was left behind on purpose. After trying Konjugieren's version, Josh asked for a much
+fuller start screen there, with a big yellow symbol, fact tiles, and the chosen verbs as chips.
+Conjuguer's start screen was already a briefing card with a symbol and facts, so the picker went
+into that card, and the fuller design waits on Josh's judgment.

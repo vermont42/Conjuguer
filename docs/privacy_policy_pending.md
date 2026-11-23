@@ -200,3 +200,29 @@ Un nouveau paragraphe suit ce paragraphe :
 ```
 L'application conserve une liste des verbes que vous avez ouverts et des verbes que vous avez marqués d'une étoile, afin d'afficher vos verbes récents et « Mes verbes ». Cette liste reste sur votre appareil et n'est jamais envoyée.
 ```
+
+## A quiz over chosen verbs (browse plan, Phase 11, 2026-11-22)
+
+Adds `source` to `quizStart`, `quizQuit`, and `quizCompletion`: where the quiz began, from a fixed
+list (the Quiz tab over every verb, the Quiz tab over My Verbs, or Test Me on a verb's page). It
+does not name the verbs a quiz asks about, not even for Test Me, whose quiz is about one verb. The
+bullet on quiz lifecycle events says so, so this section changes that bullet rather than adding
+one. It is an existing bullet, unlike the ones the sections above add. Only the default quiz posts
+to Game Center now, which section 6's "When you submit a score" already allows.
+
+### English
+
+The bullet on quiz lifecycle events (the second of section 2's list) now reads:
+
+```
+- Quiz lifecycle events (starting, quitting, or completing a quiz), and where the quiz began: the Quiz tab, over every verb or over My Verbs, or a verb's page
+```
+
+### French
+
+Le point sur les événements du cycle de vie d'un quiz (le deuxième de la liste de la section 2)
+devient :
+
+```
+- Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes ou sur « Mes verbes », ou la page d'un verbe
+```

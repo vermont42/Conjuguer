@@ -521,7 +521,7 @@ quiz signals. Values are Konjugieren's names wherever the surface is the same.
 | `recent` | Yes | A recent verb in the empty focused search field (Phase 10) |
 | `myVerbs` | Yes | A verb in My Verbs (Phase 10). For the quiz signals (Phase 11), a quiz over My Verbs |
 | `tab` | Yes | For `finishSearch` only: a search typed in the Verbs tab, Command-F included (Phase 9). For the quiz signals (Phase 11), a quiz begun from the Quiz tab |
-| `verbPage` | Phase 11 | The quiz signals only: Test Me on a verb page |
+| `verbPage` | Yes | The quiz signals only: Test Me on a verb page (Phase 11) |
 | `reviewCard` | Phase 13 | The review card, opened after its conjugations are revealed |
 | `list` | Phase 14 | A verb on a collection's page; for the quiz signals, a collection's quiz |
 
@@ -535,8 +535,9 @@ page passes `modelPage` itself. Phase 9's grammar (§ Deeplinks) keeps the item 
 **The convention for later phases.** A phase that adds a way to reach a verb page passes its value
 in `VerbDestination`, in a link's `source` item, or directly to `VerbView`, marks it sent in the
 table above, and stages its privacy line. Phase 8 added `tapShareVerb`, Phase 10 `tapStarVerb`
-(with `starred`, the state after the tap), and Phase 11 adds `tapTestVerb`. Phase 11 adds `source` to `quizStart`,
-`quizQuit`, and `quizCompletion`.
+(with `starred`, the state after the tap). Phase 11 added `source` to `quizStart`, `quizQuit`, and
+`quizCompletion`, and no `tapTestVerb`: Test Me starts its quiz as its sheet appears, so the tap and
+`quizStart` with `verbPage` are one event.
 
 ## Deeplinks
 
@@ -710,7 +711,8 @@ answers. Rows open with the source `myVerbs`.
 
 ## Quiz
 
-A timed quiz of thirty questions. The learner types each conjugation.
+A timed quiz of thirty questions. The learner types each conjugation. Since Phase 11 of the browse
+plan, a quiz can also ask about chosen verbs (§ Quiz Scopes).
 
 ### Architecture
 
@@ -719,6 +721,7 @@ A timed quiz of thirty questions. The learner types each conjugation.
 | `Quiz.swift` | `@Observable` quiz state: building the questions, the timer, scoring, the Live Activity, Game Center, the quiz signals, and VoiceOver announcements |
 | `QuizVerbs.swift` | The curated verb pools the questions draw from |
 | `QuizDifficulty.swift` | Regular or Ridiculous, chosen in Settings, and each one's score multiplier |
+| `QuizScope.swift` | What a quiz asks about, its question count, and its analytics source; the questions of a quiz over chosen verbs; `QuizTenseSlot`, Regular's tenses and quotas; `Verb.hasCell(_:)` and `canBeQuizzed` |
 | `QuizQuestion.swift`, `QuizResult.swift`, `QuizState.swift` | A question (verb and tense), an answered question, and the quiz's lifecycle |
 | `ConjugationResult.swift` | Grades an answer as a total, partial, or no match |
 | `CyclingDeck.swift` | Deals a pool's elements in order and reshuffles when it runs out |
@@ -762,13 +765,73 @@ alternate the conjugator separates with `Tense.alternateConjugationSeparator` ("
 Each question's points are multiplied by the difficulty's `scoreModifier` (1 for Regular, 2 for
 Ridiculous). A finished quiz scoring at least 150 earns a time bonus, from 450 points for two
 minutes or less down by 50 a minute to nothing past ten. The best score is stored in `Settings`,
-and every completed quiz, at either difficulty, reports its score to Game Center's leaderboard.
-Quitting reports nothing.
+and every completed default quiz, at either difficulty, reports its score to Game Center's
+leaderboard. A scoped quiz does neither (below). Quitting reports nothing.
+
+The answer is graded against the question's own verb entry, extra letters included
+(`Verb.extraLetters`), so sortir (obtain) is graded as finir-like (il sortit) and sortir (exit) as
+partir-like (il sort). Before Phase 11 the quiz passed none, which did not matter while its pools
+held no doubled entry.
+
+### Quiz Scopes
+
+Built 2026-11-22 in Phase 11 of the browse plan, ported from Konjugieren's Phase 13. A `QuizScope`
+says which verbs a quiz asks about (nil for the default quiz), how many questions it asks, and its
+`source`. `Quiz.start(scope:)` defaults to `.allVerbs`, so every older caller (the Start button, the
+`quiz/` link) is unchanged. Browse Phase 14's collections and the pedagogy plan's levels add
+constructors.
+
+| Scope | Questions | Where |
+|---|---|---|
+| `.allVerbs` | The default quiz at the learner's difficulty | The Quiz tab with All Verbs chosen; the `quiz/` link |
+| `.myVerbs(_:)` | 30, Regular's mix over the learner's starred and recent verbs | The Quiz tab with My Verbs chosen |
+| `.verbPage(_:)` | 3, on one verb | Test Me on a verb page |
+
+**Regular's mix over chosen verbs.** `QuizTenseSlot` names Regular's eight tenses with their quotas
+(7, 6, 4, 3, 3, 3, 3, 1); `QuizScopeTests` pins that the default Regular quiz asks exactly these.
+Each question takes the next verb from a shuffled deck of the scope's verbs, and a cell of the
+slot's tense that the verb's defect group has (`Verb.hasCell`), preferring a cell not yet asked of
+that verb. A verb without the tense passes it to the next verb; a tense no verb has is dropped, so
+a My Verbs quiz of only falloir asks 27. A scoped quiz always asks Regular's mix, since Ridiculous
+is a fixed list of pairs, so it is scored and labeled Regular whatever the setting, and the Quiz
+tab's briefing says Regular while My Verbs is chosen.
+
+**Test Me's three questions** ask three different tenses, drawn without replacement with Regular's
+quotas as weights and without the participe présent, since three draws from the full mix would
+too often waste one on a participle and any passé composé already tests the participe passé. A
+verb with fewer tenses (gésir has only the présent and imparfait) is asked further cells of the
+tenses it has, then its participles (choir, which has only its participe passé, is asked that).
+The six verbs that have only their infinitif (accroire, bayer, and their kin) cannot be quizzed
+(`Verb.canBeQuizzed`), and their pages show no Test Me button. Random draws go through an
+injectable `RandomNumberGenerator`; tests use `SeededRandomNumberGenerator`.
+
+**What a scoped quiz leaves out.** Only the default quiz posts to Game Center, sets the best score,
+donates to `ChangeDifficultyTip`, and shows the leaderboard when its results close (Josh's rule for
+Konjugieren, 2026-11-13). Test Me starts no Live Activity; a My Verbs quiz does, being a full
+thirty questions.
+
+**Test Me** is a clipboard button (`pencil.and.list.clipboard`) first in the verb page's navigation
+bar, before the star. It presents `VerbQuizSheet` through the page's `detailSheet`, so the visit
+ends while the sheet shows and resumes after. The sheet holds its own `Quiz`, so a quiz in progress
+in the Quiz tab is untouched, and shows `QuizView(sheetScope:)`, which starts the quiz as it
+appears, sends no `viewAppeared`, skips Game Center sign-in, and closes on Quit or when the results
+close. It cannot be swiped away mid-quiz, so every quiz it starts ends in `quizQuit` or
+`quizCompletion`. On iPad it is a form sheet, and a tap outside it does nothing mid-quiz.
+
+**The Quiz tab's picker** (All Verbs, My Verbs) sits in the briefing card above Start. With My
+Verbs chosen, a line says how many verbs the quiz will ask about, or how to add some, and Start is
+disabled while the list is empty. The best score shows only for All Verbs. The choice is not
+stored. Konjugieren's filled start screen (a big scope symbol, fact tiles, the verbs as chips),
+which Josh asked for there after trying the plain one, was not ported.
 
 ### Signals
 
-`quizStart` (`difficulty`), `quizQuit` (`difficulty`, `lastQuestionIndex`, `elapsedTime`), and
-`quizCompletion` (`difficulty`, `score`, `elapsedTime`).
+`quizStart` (`difficulty`, `source`), `quizQuit` (`difficulty`, `lastQuestionIndex`,
+`elapsedTime`, `source`), and `quizCompletion` (`difficulty`, `score`, `elapsedTime`, `source`).
+`source` is `tab`, `myVerbs`, or `verbPage` (Phase 11), so a three-question quiz does not inflate
+the thirty-question quiz's completion rate. `difficulty` is the quiz's own, set when it starts:
+before Phase 11 quit and completion read the setting at that moment, which a change in Settings
+mid-quiz would have made wrong, and a scoped quiz now reports `regular`.
 
 ## Widgets
 
