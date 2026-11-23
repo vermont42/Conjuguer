@@ -171,17 +171,46 @@ enum Conjugator {
     case .impératif(let personNumber):
       return .success(composedConjugation(stems: stems, ending: model.indicatifPrésentGroupRecursive.impératifEndingForPersonNumber(personNumber)))
     case .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
-      if stems[0].suffix(1) == Tense.irregularEndingMarker {
-        stems[0] = String(stems[0].dropLast())
+      // The participle is built as the participe passé builds it: a stem alteration ending in
+      // the marker is the whole participle (mettre's "mIS*"), so the model's ending must not be
+      // appended too, which gave "j'ai misu".
+      let participle: String
+      if stems[0].hasSuffix(Tense.irregularEndingMarker) {
+        participle = String(stems[0].dropLast())
+      } else {
+        participle = stems[0] + model.participeEndingRecursive
       }
-      let conjugationWithoutAgreement = tense.conjugatedAuxiliary(personNumber: personNumber, auxiliary: verb.auxiliary) + " " + stems[0] + model.participeEndingRecursive
+      let auxiliary = tense.conjugatedAuxiliary(personNumber: personNumber, auxiliary: verb.auxiliary)
       if verb.isReflexive || verb.auxiliary == .être {
         let agreementEnding = pronounGender.participePasséEndingForPersonNumber(personNumber)
-        return .success(conjugationWithoutAgreement + agreementEnding)
+        return .success(auxiliary + " " + agreed(participle: participle, ending: agreementEnding))
       } else {
-        return .success(conjugationWithoutAgreement)
+        return .success(auxiliary + " " + participle)
       }
     }
+  }
+
+  /// The participe passé with an agreement ending ("", "e", "s", or "es") as French writes it.
+  /// Appending the ending is right except in three cases: a final circumflex marks only the
+  /// masculine singular (dû, due, dus), a participle in -s takes no second s (pris, prise, pris),
+  /// and absous and dissous end in -te in the feminine (dissoute). Case is kept, since the
+  /// Conjugator marks irregular letters in uppercase (méprIS gives méprISes).
+  nonisolated static func agreed(participle: String, ending: String) -> String {
+    guard !ending.isEmpty, let last = participle.last else {
+      return participle
+    }
+    var base = participle
+    if last == "û" || last == "Û" {
+      base = String(base.dropLast()) + (last == "û" ? "u" : "U")
+    }
+    let lowercased = base.lowercased()
+    if lowercased.hasSuffix("ous") && ending.hasPrefix("e") {
+      return String(base.dropLast()) + "t" + ending
+    }
+    if lowercased.hasSuffix("s") && ending == "s" {
+      return base
+    }
+    return base + ending
   }
 
   // Finds the first additive stem alteration that applies to any of `tenses` and, if found,

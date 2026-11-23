@@ -706,6 +706,18 @@ design is Konjugieren's; what differs:
   compound cells read "nous nous sommes mépriss" for se méprendre, and likewise for s'éprendre
   and s'enquérir (found in `forms_all.json`). The map does not inherit either: it
   agrees participles itself.
+- **Fixed after the phase, the same day, at Josh's request.** béer moved from defect group 3 to
+  17 (présent, imparfait, participe présent), the Académie's 9th edition's "usité surtout à
+  l'indicatif présent et imparfait, au participe présent et à l'infinitif présent". douer lost
+  its group 6: the TLFi finds it rare outside the infinitive and the compound tenses "sauf chez
+  les écrivains récents", and quotes Gide, Paulhan, and Mounier using finite forms, as the app's
+  Proust example does. Group 3 is now unused. The participle fix uncovered a worse bug in the
+  same lines: every compound tense of the sixteen mettre-family verbs read "j'ai misu", because
+  the compound path appended the model's ending to a participle that a marked stem alteration
+  (mIS*) had already completed. The compound tenses now build the participle as the participe
+  passé does, and agree it through `Conjugator.agreed(participle:ending:)`, which the map's
+  `agreedForms` now shares. The 99% test finds 6,322 of 6,328; the map holds 242,966
+  conjugations. The regenerated corpus dumps changed only in those verbs' forms.
 
 ## Phase 5: Reverse Lookup in Search
 

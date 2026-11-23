@@ -542,7 +542,7 @@
   <verb in="becqueter" tn="peck at, kiss" mo="1-3B" hi="121" hn="10" hl="68" hs="237" />
   <verb in="becter" tn="eat" mo="1-1" hi="63" hn="3" hl="69" hs="101" />
   <verb in="bedonner" tn="have a plump stomach, be paunchy" mo="1-1" hi="13" hn="7" hl="9" hs="28" />
-  <verb in="béer" tn="gape" mo="1-1" hi="3148" hn="310" hl="155" hs="79" dg="3" />
+  <verb in="béer" tn="gape" mo="1-1" hi="3148" hn="310" hl="155" hs="79" dg="17" />
   <verb in="bégayer" tn="stammer" mo="1-7B" hi="660" hn="222" hl="314" hs="1750" />
   <verb in="bégueter" tn="bleat" mo="1-4" hi="3" hn="0" hl="0" />
   <verb in="bêler" tn="baa, bleat" mo="1-1" hi="481" hn="44" hl="49" hs="269" />
@@ -2257,7 +2257,7 @@
   <verb in="doublonner" tn="overlap, be redundant" mo="1-1" hi="112" hn="64" hl="0" hs="3" />
   <verb in="doucher" tn="take a shower" re="t" mo="1-1" hi="3135" hn="208" hl="68" hs="5959" />
   <verb in="doucir" tn="polish, smooth" mo="2-1" hi="22" hn="1" hl="0" hs="9" />
-  <verb in="douer" tn="endow (someone)" mo="1-1" hi="13512" hn="1922" hl="508" hs="30152" dg="6" />
+  <verb in="douer" tn="endow (someone)" mo="1-1" hi="13512" hn="1922" hl="508" hs="30152" />
   <verb in="douiller" tn="hurt" mo="1-1" hi="147" hn="4" hl="18" hs="168" />
   <verb in="douter" tn="doubt" mo="1-1" hi="37663" hn="8352" hl="3270" hs="81373" />
   <verb in="dracher" tn="rain cats and dogs (Belgium)" mo="1-1" hi="3" hn="0" hl="0" dg="22" />

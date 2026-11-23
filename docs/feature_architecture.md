@@ -144,8 +144,9 @@ leaves the map alone, rightly, since a new signature cannot change the map.
   entries stay apart: sors is "sortir exit" only, and sortir is both. Homographs keep every verb
   (suis, vis, tu, été).
 - **The format** is one line per conjugation, `suis⇥suivre⇥être`, sorted by UTF-8 bytes,
-  compressed with LZFSE: 242,923 conjugations, 5.0 MB of text, 615,637 bytes in the bundle, built in
+  compressed with LZFSE: 242,966 conjugations, 5.0 MB of text, 615,655 bytes in the bundle, built in
   about 3.5 seconds by the Release tool. (Konjugieren's holds 50,056 conjugations in 173 KB.)
+  (Figures as of 2026-11-22, after béer's and douer's defect groups were corrected.)
   `sorted()` is not used, because it left 155 keys out of order, and two builds of the same
   data wrote different bytes.
 - **Loading** `ConjugationMap.bundled` took 1.2 seconds in a Debug build on this Intel Mac's

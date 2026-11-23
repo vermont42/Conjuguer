@@ -4846,3 +4846,38 @@ small audit of their own: six are spellings the Conjugator does not produce (the
 an old "emmaillottent"), and two are sentences whose verb's defect group says the form they use
 does not exist: Flaubert's "Une blessure béait", for one. Those, and a Conjugator bug the dumps
 exposed ("nous nous sommes mépriss" for se méprendre), went to Josh rather than into this phase.
+
+## Three Data Bugs the Map Turned Up (2026-11-22)
+
+Phase 4's map left two loose ends, and Josh asked for both to be fixed. Fixing the second
+uncovered a third, which was the worst of the lot.
+
+The first was a pair of defect groups that contradicted the app's own example sentences. béer
+("gape") was marked usable only in its participe présent and présent third singular, yet its
+example is Tolstoy's "Une blessure béait". douer ("endow") was marked participle-only, yet its
+example is Proust's "Elle les douait". The reference works split the difference. The Académie's
+ninth edition says béer is "usité surtout à l'indicatif présent et imparfait, au participe présent
+et à l'infinitif présent", which happens to be exactly what gésir's existing group 17 allows, so
+béer moved there. For douer, the TLFi says it is rare outside the infinitive and the compound
+tenses, then adds "sauf chez les écrivains récents" and quotes Gide, Paulhan, and Mounier using
+finite forms. An app that teaches today's French should side with the recent writers, so douer
+lost its group altogether. A verb-pass pilot in September had judged béer's group right, but only
+in the sense that Wiktionary's silence was not evidence against it. A dated dictionary remark is.
+
+The second was agreement. The Conjugator agreed a compound participle by appending e, s, or es,
+so "nous nous sommes mépris" came out as "mépriss" for se méprendre, s'éprendre, and s'enquérir.
+The map already had the right rule, so the rule moved into the Conjugator, where both now call it.
+
+The third surfaced while I was listing which être verbs end in -s. The dump showed entremettre's
+passé composé as "SUIs entremISu", and then every member of the mettre family, mettre itself
+included, as "aI mISu". A learner who turned on the compound tenses for one of the most common
+verbs in French saw "j'ai misu". The cause was a two-line difference between how the Conjugator
+builds a participe passé and how it builds the participle inside a compound tense. For a
+participle that a stem alteration supplies whole, marked with a trailing asterisk, the first
+drops the marker and stops, and the second dropped the marker and then appended the model's
+ending, a "u" inherited from battre. The bug had sat in the September dump unremarked, probably
+because the compound tenses were hidden behind an off-by-default toggle. Phase 6 turns that toggle
+on, and Phase 6 would have been a bad way to find it.
+
+Each fix is pinned by a test, and the regenerated corpus dumps changed only in the affected verbs'
+forms, which is a useful check that a fix to the engine reached no further than intended.

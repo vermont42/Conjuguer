@@ -95,15 +95,9 @@ nonisolated extension ConjugationMap {
     self.init(text: String(decoding: decompressed, as: UTF8.self))
   }
 
-  /// The participe passé as a text agrees it: feminine, masculine plural, feminine plural. A
-  /// final circumflex marks only the masculine singular (dû, due, dus), a participle in -s does
-  /// not add another (pris, prise, pris), and the -soudre participles change their ending
-  /// (dissous, dissoute).
+  /// The participe passé as a text agrees it: feminine, masculine plural, feminine plural.
   static func agreedForms(ofParticiple participle: String) -> [String] {
-    let base = participle.hasSuffix("û") ? String(participle.dropLast()) + "u" : participle
-    let feminine = base.hasSuffix("ous") ? String(base.dropLast()) + "te" : base + "e"
-    let masculinePlural = base.hasSuffix("s") ? base : base + "s"
-    return [feminine, masculinePlural, feminine + "s"]
+    ["e", "s", "es"].map { Conjugator.agreed(participle: participle, ending: $0) }
   }
 }
 

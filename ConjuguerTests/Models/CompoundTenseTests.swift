@@ -53,4 +53,43 @@ struct CompoundTenseTests {
     assertFeminine(aller, Tense.impératifPassé, ["SOIs allée", "SOYons allées", "SOYez allées"], personNumbers: PersonNumber.impératifPersonNumbers)
     assertFeminine(avoir, Tense.impératifPassé, ["aIE EU", "aYons EU", "aYez EU"], personNumbers: PersonNumber.impératifPersonNumbers)
   }
+
+  // mettre's participle comes whole from a stem alteration ending in the marker (mIS*), which
+  // the compound tenses once followed with the model's ending too: "j'ai misu".
+  @Test(arguments: [
+    ("mettre", Tense.passéComposé(.firstSingular), PronounGender.masculine, "aI mIS"),
+    ("promettre", .plusQueParfait(.thirdPlural), .masculine, "avaient promIS"),
+    ("entremettre", .passéComposé(.firstSingular), .feminine, "SUIs entremISe"),
+    ("entremettre", .passéComposé(.firstPlural), .masculine, "SOMMEs entremIS")
+  ])
+  func testParticipleFromAMarkedStem(infinitif: String, tense: Tense, gender: PronounGender, expected: String) {
+    T.testConjugation(infinitif: infinitif, tense: tense, expected: expected, extraLetters: nil, pronounGender: gender)
+  }
+
+  // A participle in -s takes no second s in the masculine plural.
+  @Test(arguments: [
+    ("méprendre", PronounGender.masculine, "SOMMEs méprIS"),
+    ("méprendre", .feminine, "SOMMEs méprISes"),
+    ("méprendre", .both, "SOMMEs méprIS"),
+    ("éprendre", .masculine, "SOMMEs éprIS"),
+    ("enquérir", .masculine, "SOMMEs enqUiS")
+  ])
+  func testAgreementOfAParticipleInS(infinitif: String, gender: PronounGender, expected: String) {
+    T.testConjugation(infinitif: infinitif, tense: .passéComposé(.firstPlural), expected: expected, extraLetters: nil, pronounGender: gender)
+  }
+
+  @Test(arguments: [
+    ("allé", "", "allé"),
+    ("allé", "e", "allée"),
+    ("allé", "es", "allées"),
+    ("méprIS", "s", "méprIS"),
+    ("méprIS", "es", "méprISes"),
+    ("dû", "e", "due"),
+    ("dû", "s", "dus"),
+    ("dissous", "e", "dissoute"),
+    ("dissous", "s", "dissous")
+  ])
+  func testAgreed(participle: String, ending: String, expected: String) {
+    #expect(Conjugator.agreed(participle: participle, ending: ending) == expected)
+  }
 }

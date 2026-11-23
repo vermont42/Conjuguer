@@ -32,10 +32,10 @@ enum ConjugationMapTests {
     // stays whole; when a word holds a hyphen, its hyphen-separated parts count too, so that
     // souviens-toi yields souviens. An apostrophe ends a word, so that m'abasourdissez yields
     // abasourdissez. A sentence filed under a doubled infinitive's bare form (sortir) counts
-    // for either entry. On 2026-11-22 this found 6,320 of 6,328 (99.87%). Of the eight misses,
-    // two are cells the verb's defect group strikes (béait, douait), and six are spellings the
-    // Conjugator does not produce: étiquètes and markete (the 1990 spellings), emmaillottent,
-    // presurer, redîmé, and s'entrenuisaient.
+    // for either entry. On 2026-11-22 this found 6,322 of 6,328 (99.91%). The six misses are
+    // spellings the Conjugator does not produce: étiquètes and markete (the 1990 spellings),
+    // emmaillottent, presurer, redîmé, and s'entrenuisaient. Two more, béait and douait, were
+    // misses until béer's and douer's defect groups were corrected that day.
     @Test func findsTheVerbOfNearlyEveryExampleSentence() throws {
       let url = try #require(Bundle.main.url(forResource: "literature_examples", withExtension: "json"))
       let examples = try JSONDecoder().decode([String: Example].self, from: Data(contentsOf: url))
