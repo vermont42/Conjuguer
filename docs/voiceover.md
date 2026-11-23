@@ -117,13 +117,19 @@ with VoiceOver running.
 Nothing on the verb page speaks when tapped. A conjugation cell has no tap action, and `Utterer` is
 used only by the quiz.
 
+Since browse Phase 8 each conjugation cell, and the infinitive at the top, carries a named action,
+Copy ("Copier"), from `copyOnLongPress(_:)`, the same choice a long press offers. VoiceOver lists
+it in the actions rotor. It copies the form without the pronoun, as the long press does. Not yet
+tried with VoiceOver running.
+
 ## Pronunciation by Screen
 
 | Screen | Approach |
 |---|---|
 | `VerbBrowseView`, `ModelBrowseView` | `BrowseRow` in a `Button`: title French, subtitle English, or French when it names the verb that found a model (see above); a search's match line French |
 | `FrenchLetterKeyRow` | Each key a `Button` whose letter is marked French |
-| `VerbView` (infinitive, headings, cells) | `.frenchPronunciation()` on each |
+| `VerbView` (infinitive, headings, cells) | `.frenchPronunciation()` on each; the infinitive and each cell a Copy action (Phase 8) |
+| `VerbView` (share button, Phase 8) | A toolbar `Button` whose `Label` reads "Share" ("Partager") |
 | `VerbView` (gloss) | `.englishPronunciation()` |
 | `VerbView` (model row) | A `Button` whose label is marked French, with a hint that it opens the model |
 | `VerbView` (color key) | Each swatch combined into one element. The dismiss button is labeled |

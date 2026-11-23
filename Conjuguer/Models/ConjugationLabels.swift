@@ -137,15 +137,25 @@ extension PersonNumber {
     }
   }
 
-  // The subject (+ reflexive) pronoun that precedes a conjugation, including any elision
-  // (j'/m'/t'/s') implied by the conjugation's first letter.
-  @MainActor func preamble(forConjugation conjugation: String, isReflexive: Bool, hasAspiratedH: Bool) -> String {
-    let normalizedFirstLetter = String(conjugation.first ?? Character(" "))
+  /// Whether a pronoun before `word` loses its vowel (j', m', t', s'): before a vowel or a mute h.
+  nonisolated static func elides(before word: String, hasAspiratedH: Bool) -> Bool {
+    let normalizedFirstLetter = String(word.first ?? Character(" "))
       .folding(options: .diacriticInsensitive, locale: Util.french)
       .lowercased(with: Util.french)
     let firstLetterIsVowel = ["a", "e", "i", "o", "u"].contains(normalizedFirstLetter)
     let firstLetterIsUnaspiratedH = normalizedFirstLetter == "h" && !hasAspiratedH
-    let firstLetterImpliesLiaison = firstLetterIsVowel || firstLetterIsUnaspiratedH
+    return firstLetterIsVowel || firstLetterIsUnaspiratedH
+  }
+
+  /// The third person's reflexive pronoun before `word`, elided where French elides it.
+  nonisolated static func thirdPersonReflexivePronoun(before word: String, hasAspiratedH: Bool) -> String {
+    elides(before: word, hasAspiratedH: hasAspiratedH) ? "s'" : "se "
+  }
+
+  // The subject (+ reflexive) pronoun that precedes a conjugation, including any elision
+  // (j'/m'/t'/s') implied by the conjugation's first letter.
+  @MainActor func preamble(forConjugation conjugation: String, isReflexive: Bool, hasAspiratedH: Bool) -> String {
+    let firstLetterImpliesLiaison = Self.elides(before: conjugation, hasAspiratedH: hasAspiratedH)
 
     let thirdSingular = Current.settings.pronounGender.thirdSingular
     let thirdPlural = Current.settings.pronounGender.thirdPlural

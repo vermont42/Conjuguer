@@ -31,7 +31,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 5 | Done | 2026-11-22 | 1fd6c58 | A5 (the search) | 6 |
 | 6 | Done | 2026-11-22 | 1fd6c58 | B3, B5's tip | 7 |
 | 7 | Done | 2026-11-22 | c9fbd7e | B4, A9 | 9 |
-| 8 | Not started | | | B6 | 10 |
+| 8 | Awaiting Josh | 2026-11-22 | | B6 | 10 |
 | 9 | Not started | | | C1, C2 | 11 |
 | 10 | Not started | | | D1, D2 | 12 |
 | 11 | Not started | | | D2's quiz scope, D3 | 13 |
@@ -1039,7 +1039,7 @@ and `Views/VerbPageNavigation.swift`. `docs/feature_architecture.md` § Related 
 ## Phase 8: Copy and Share
 
 **Ideas:** B6. **Ports:** Konjugieren Phase 10 (`KeyConjugations.swift`, `ShareSheet.swift`).
-**Depends on:** nothing. **Status:** Not started.
+**Depends on:** nothing. **Status:** Awaiting Josh (built 2026-11-22).
 
 - A long press on a conjugation opens a context menu with Copy (Konjugieren's choice: the
   platform's convention, it works with a right-click on a Mac, and it needs no toast). A tap still
@@ -1064,6 +1064,40 @@ reflexive pronoun as the page shows it), and a defective verb, and tests pin the
 conjugations.
 
 **How it differed:**
+
+Built 2026-11-22. The suite ran 421 tests in 38 suites, all passing (9 new in
+`KeyConjugationsTests`, 25 cases with their arguments). New files: `Models/KeyConjugations.swift`
+and `Utils/ShareSheet.swift`. `docs/feature_architecture.md` § Copy and Share has the design. No
+question needed Josh.
+
+- **A tap does not speak today, and still does not.** No cell on the verb page had a tap action,
+  as `docs/voiceover.md` already said, so there was nothing to keep.
+- **The key conjugations** are `Verb.keyConjugations()`, over `Verb.keyTenses`, which later phases
+  should read rather than restate. A form the verb's defect group marks unused is left out, as
+  Konjugieren leaves out a failed one: gésir gives only "gît", accroire nothing, and the share text
+  then drops the line. falloir and the weather verbs keep all three, since their defects spare the
+  il forms. The reflexive pronoun is elided as the cells elide it, through a test that
+  `PersonNumber.preamble` now shares (`elides(before:hasAspiratedH:)`).
+- **The share text cites a pronominal verb with its pronoun**, "se souvenir", though the page's
+  heading shows "souvenir" over a Reflexive note. "souvenir, “remember”" would read as the noun.
+  This is `Verb.citationInfinitif`. The French text says "du verbe aller", not "de aller", which
+  would need an elision for every vowel-initial verb. Its gloss stays English, in guillemets.
+- **What a long press copies** is the form as the cell shows it, lowercase, without the pronoun in
+  the column beside it ("vais"; "souviens-toi" keeps its hyphenated pronoun, which is part of the
+  form). The heading copies the bare infinitive. A struck-through, unused form still copies.
+  `ShareSheet` and the copy modifier are Konjugieren's, nearly unchanged; the share button has an
+  identifier, `verb_share_button`, which Konjugieren's lacks.
+- **Analytics.** `tapShareVerb`, no parameters, staged in `docs/privacy_policy_pending.md` as a
+  change to the same bullet Phase 6 changes. Copying sends nothing.
+- **How it was tested.** On the iPhone, in English and light mode: aller from a deeplink sheet,
+  where the share button sits beside Done; the sheet's header (aller, the Arc de Triomphe icon) and
+  its Copy; the copied text read with `simctl pbpaste`; a long press on "vais" copying "vais", the
+  lifted preview uncropped; se souvenir's text. In French and dark mode: être pushed in the Verbs
+  tab (share button opposite the back button, sheet showing "Copier"), and gésir's text ("gît"
+  alone, guillemets, "du verbe gésir"). On the iPad, in English: the popover appears over the
+  button, with no arrow (iOS 26), placed by the bar-button search rather than the fallback. That
+  `tapShareVerb` fired was inferred from the sheet appearing, since `AnalyticsSpy` does not log.
+  Not tried: Messages, Mail, a device, VoiceOver, a Mac's right-click.
 
 ## Phase 9: Lookup from Outside the App
 

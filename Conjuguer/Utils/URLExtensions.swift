@@ -25,6 +25,16 @@ extension URL {
   static let randomVerbPath = "random"
   private static let deeplinkComponentCount = 2
 
+  /// Conjuguer's App Store page. With no storefront in the path, the App Store opens the
+  /// reader's own.
+  static var appStore: URL {
+    var components = URLComponents()
+    components.scheme = "https"
+    components.host = "apps.apple.com"
+    components.path = "/app/conjuguer/id\(RatingsFetcher.iTunesID)"
+    return components.url ?? URL(filePath: "/")
+  }
+
   static let developerEmail = "vermontcoder@gmail.com"
 
   nonisolated private static let mailtoUnreserved = CharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~")

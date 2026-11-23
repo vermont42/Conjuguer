@@ -66,6 +66,7 @@ struct VerbView: View {
         Text(verb.infinitifWithPossibleExtraLetters)
           .headingLabel()
           .frenchPronunciation()
+          .copyOnLongPress(verb.infinitif)
           .scrollFade()
 
         overviewCard
@@ -123,6 +124,22 @@ struct VerbView: View {
       .padding(.horizontal, Layout.doubleDefaultSpacing)
     }
     .screenBackground()
+    .toolbar {
+      ToolbarItem(placement: .topBarTrailing) {
+        Button {
+          world.analytics.signal(name: .tapShareVerb)
+          ShareSheet.present(
+            text: verb.shareText(),
+            title: verb.citationInfinitif,
+            icon: UIImage(named: world.settings.appIcon.previewAssetName),
+            anchorLabel: L.VerbView.share
+          )
+        } label: {
+          Label(L.VerbView.share, systemImage: "square.and.arrow.up")
+        }
+        .accessibilityIdentifier("verb_share_button")
+      }
+    }
     .onDisappear {
       isOnScreen = false
       endVisit()
@@ -628,6 +645,7 @@ private struct MarkableConjugation: View {
             .padding(-4)
         }
       }
+      .copyOnLongPress(cell.copyText)
   }
 }
 

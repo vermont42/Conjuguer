@@ -69,6 +69,7 @@ Conjuguer/
 │   ├── Imparfait.swift         # Imparfait endings
 │   ├── IndicatifPresentGroup.swift    # Indicatif présent ending groups (e/extendedS/s/ï/r/…) and their XML mapping
 │   ├── Info.swift              # Info article model, the static article list, and InfoCategory (about/concepts/tenses)
+│   ├── KeyConjugations.swift   # Verb.keyConjugations() (the il présent, passé composé, and futur, unlabeled), citationInfinitif (se souvenir), and the share text
 │   ├── L.swift                 # Type-safe localization accessors, nested by feature
 │   ├── LanguageModelService.swift      # Protocol for the on-device tutor, plus TutorMessage and unavailability/error enums
 │   ├── LanguageModelServiceDummy.swift # No-op double for tests
@@ -136,18 +137,19 @@ Conjuguer/
 │   ├── LiveActivityManager.swift  # Creates, updates, and ends the quiz Live Activity
 │   ├── Log.swift               # os.Logger factory with per-category loggers
 │   ├── ModelSort.swift         # Sort order for the model browse view (irregularity/alphabetical/identifier)
-│   ├── Modifiers.swift         # The app's ViewModifier vocabulary (headingLabel, funButton, card, screenBackground, …)
+│   ├── Modifiers.swift         # The app's ViewModifier vocabulary (headingLabel, funButton, card, screenBackground, copyOnLongPress, …)
 │   ├── PreviewSupport.swift    # DEBUG-only bootstrap so SwiftUI previews have parsed verb data
 │   ├── RatingsFetcher.swift    # Fetches the App Store ratings count from the iTunes API
 │   ├── ReviewPrompter.swift    # Protocol for review prompting
 │   ├── ReviewPrompterDummy.swift  # No-op double
 │   ├── ReviewPrompterReal.swift   # Prompts at an action-count modulo and a minimum interval
 │   ├── Settings.swift          # @Observable user preferences persisted through GetterSetter
+│   ├── ShareSheet.swift        # Presents UIActivityViewController with an LPLinkMetadata header, anchored on iPad to a bar button (ShareLink reports no tap)
 │   ├── SoundPlayer.swift       # Protocol for audio playback
 │   ├── SoundPlayerDummy.swift  # No-op double
 │   ├── SoundPlayerReal.swift   # AVAudioPlayer implementation with per-sound debouncing
 │   ├── StringExtensions.swift  # The rich-text markup parser: RichTextBlock / TextSegment from ` ~ $…$ ‡…‡
-│   ├── URLExtensions.swift     # Deeplink URL helpers (conjuguer:// scheme), the developer address, and a mailto: builder
+│   ├── URLExtensions.swift     # Deeplink URL helpers (conjuguer:// scheme), the developer address, a mailto: builder, and the App Store link (URL.appStore)
 │   ├── URLProtocolStub.swift   # URLProtocol subclass stubbing HTTP responses in tests
 │   ├── URLSessionExtension.swift  # Stubbed URLSession factory used by the simulator/test worlds
 │   ├── Util.swift              # French/English Locale constants
@@ -244,6 +246,7 @@ ConjuguerTests/
     ├── GameDiveArcTests.swift          # Dive-bomber arc geometry (serialized)
     ├── GameMechanicsTests.swift        # Special-mechanic scheduling and lifecycle (serialized)
     ├── GameProjectileTests.swift       # Bullet and enemy-bullet behavior (serialized)
+    ├── KeyConjugationsTests.swift      # The key conjugations (reflexive, defective, il agreement), the citation infinitive, the share text, and what a long press copies
     ├── ModelSearchTests.swift          # Models found by exemplar or by member verb, exemplars first, each once
     ├── NousPrésentStemTests.swift      # The nous-présent stem that imparfait derives from
     ├── ParserTests.swift               # XML parsing of verbs, models, and defect groups

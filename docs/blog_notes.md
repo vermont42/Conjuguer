@@ -5023,3 +5023,36 @@ go verb, model, verb, model and come back with the back button.
 The model page also gained a Frequency order. Its verbs stay one run of links, because model 1-1's
 4,859 verbs as rows would cost what Konjugieren paid for a thousand. Sorting them in French
 collation fixed an old bug along the way: écouter used to sort after the z's.
+
+## Copy and Share on the Verb Page (2026-11-22)
+
+Phase 8 of the browse port gave the verb page a share button and let a learner copy any
+conjugation with a long press. Most of the code came from Konjugieren's Phase 10 nearly unchanged,
+because Konjugieren had already paid for the lessons. SwiftUI's `ShareLink` in a toolbar reports no
+tap, so the share signal could not be sent, and giving it a preview removed Copy from the sheet.
+So the button presents `UIActivityViewController` itself, with a header showing the verb and the
+learner's chosen app icon. On the iPad that popover needs an anchor, found by searching the visible
+navigation bars for a button labeled Share. iOS 26 draws it with no arrow, right over the button,
+which looks odd at first, but its position shows the search worked.
+
+The interesting part was French. The shared text carries the verb's key conjugations, the il forms
+of the présent, passé composé, and futur: "va · est allé · ira". Josh chose that set when he
+reviewed the plan. A pronoun-less form has to agree with il, so the participle is masculine even for
+a learner who set the app's pronouns to elle. Reflexive verbs keep their pronoun, elided where
+French elides it: "se souvient · s'est souvenu · se souviendra". The text also names the verb, and
+here the app's own heading was not good enough. Conjuguer stores 217 verbs that exist only as
+pronominals without their "se", so the page says "souvenir" over a note that it is reflexive. A
+message that read "souvenir, 'remember'" would look like the noun. The shared text says "se
+souvenir".
+
+Defective verbs needed a rule. Konjugieren drops a form its conjugator cannot build. Here the
+conjugator builds everything, and the defect groups mark what is not used, so the key conjugations
+leave those out instead. Gésir, which lives on mostly in "ci-gît", shares only "gît". Accroire,
+used only in the infinitive, shares no conjugation line at all.
+
+One small trap was in the French wording. "Toutes les conjugaisons de aller" is wrong, and fixing it
+would mean choosing between "de" and "d'" for every verb. "Toutes les conjugaisons du verbe aller"
+needs no choice.
+
+The plan asked whether a tap on a conjugation still speaks it. It never did. Nothing on the verb
+page speaks, so there was nothing to keep.

@@ -161,6 +161,22 @@ enum L {
       String(localized: "VerbView.relatedHeading")
     }
 
+    static var copy: String {
+      String(localized: "VerbView.copy")
+    }
+
+    static var share: String {
+      String(localized: "VerbView.share")
+    }
+
+    static func shareGloss(infinitif: String, gloss: String) -> String {
+      String(localized: "VerbView.shareGloss", defaultValue: "\(infinitif), “\(gloss)”")
+    }
+
+    static func shareInvitation(infinitif: String, link: String) -> String {
+      String(localized: "VerbView.shareInvitation", defaultValue: "Every conjugation of \(infinitif) is in Conjuguer:\n\(link)")
+    }
+
     static func builtOn(_ root: String) -> String {
       String(localized: "VerbView.builtOn", defaultValue: "Built on \(root)")
     }

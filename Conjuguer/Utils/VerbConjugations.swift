@@ -15,6 +15,13 @@ struct VerbConjugations {
     let display: AttributedString
     let accessibility: String
     let hasRedLetters: Bool
+
+    /// What a long press copies: the form as the cell shows it, without the pronoun beside it and
+    /// in lowercase, since the capitals only mark red letters. An empty cell copies nothing.
+    var copyText: String? {
+      let text = String(display.characters)
+      return text.isEmpty ? nil : text
+    }
   }
 
   struct Section: Identifiable {

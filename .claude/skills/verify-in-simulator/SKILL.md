@@ -55,6 +55,7 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `related_all_model` | The "All N" chip of the card's "Same model" row | Pushes the model page in frequency order. |
 | `related_list_sort` | Frequency/Alphabetical `Picker` in `RelatedVerbListView` | 2 segments. |
 | `related_list_<infinitif>` | Row `Button` in `RelatedVerbListView` | e.g. `related_list_remettre`. |
+| `verb_share_button` | Share button in `VerbView`'s navigation bar | Opens the share sheet. Tap the sheet's Copy and read the text with `xcrun simctl pbpaste <udid>`. On the iPad it is a popover over the button. |
 | `model_verb_order` | Alphabetical/Frequency `Picker` above a model page's verbs | 2 segments; the verbs stay one `Text` of links, so tap a verb at its coordinates. |
 
 An identifier on a container that is not itself one element (a card) is inherited by every element
@@ -79,6 +80,11 @@ hardware-keyboard path works through AXe: Command-F is `axe key-combo --modifier
 search and clears its text. Key presses sent to Simulator.app through computer use do not reach the
 device (Konjugieren). `tap_label.sh` did not find the iPad's top tab buttons on 2026-11-22; tap them
 by coordinate (Models ≈ `370,54`, Quiz ≈ `448,54` on the Conjuguer iPad Pro 11).
+
+**A long press** (a conjugation's Copy menu, since browse Phase 8) is a held touch:
+`axe touch -x <x> -y <y> --down --up --delay 1.2 --udid <udid>` at the cell's `describe_ui` frame
+(the cell's label is the spoken line, e.g. `je vais`). Then tap Copy by coordinate and read
+`simctl pbpaste`. A simulated rating prompt may cover a page at launch; tap Not Now first.
 
 ## iOS 26 control caveats specific to this app
 

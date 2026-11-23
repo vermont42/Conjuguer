@@ -293,6 +293,65 @@ Frequency. The choice is not stored. The list stays a run of `conjuguer://verb/`
 a non-lazy stack peg the CPU. Alphabetical now uses French collation (`Util.french`). The old plain
 sort put écouter after the z's.
 
+## Copy and Share
+
+Phase 8 of the browse plan (2026-11-22) let a learner copy a conjugation and share a verb. It ports
+Konjugieren's Phase 10.
+
+### Architecture
+
+| File | Purpose |
+|------|---------|
+| `Models/KeyConjugations.swift` | `Verb.keyConjugations()`, `Verb.keyTenses`, `Verb.citationInfinitif`, and `Verb.shareText()` |
+| `Utils/ShareSheet.swift` | Presents `UIActivityViewController` with an `LPLinkMetadata` header, and on iPad anchors its popover to the share button |
+| `Utils/Modifiers.swift` | `copyOnLongPress(_:)`: a context menu with Copy, and a VoiceOver action of the same name |
+| `Utils/URLExtensions.swift` | `URL.appStore`, the App Store page with no storefront, so the App Store opens the reader's own |
+
+### Key Conjugations
+
+The il forms of the présent, the passé composé, and the futur simple, in that order (Josh,
+2026-11-22): "vient · est venu · viendra". They stand with no label, here and wherever a later
+phase shows them. The participle agrees with il whatever the pronoun-gender setting, because no
+pronoun stands before it. A reflexive verb keeps its pronoun, elided as its cells elide it
+(`PersonNumber.thirdPersonReflexivePronoun`): "se souvient · s'est souvenu · se souviendra". A
+form the verb's defect group marks unused is left out, so falloir gives all three, gésir gives
+only "gît", and accroire gives none. The function returns mixed case, as the Conjugator writes it,
+so a caller can show red letters (the auxiliary's irregular letters are capitals too); the share
+text lowercases them. Phase 9's Spotlight entries, Phase 13's review card, and the pedagogy plan's
+key-conjugations exercise read `Verb.keyTenses` and this function.
+
+### Sharing
+
+A share button in the verb page's navigation bar (`verb_share_button`) sends:
+
+```
+se souvenir, “remember”
+se souvient · s'est souvenu · se souviendra
+
+Every conjugation of se souvenir is in Conjuguer:
+https://apps.apple.com/app/conjuguer/id1588624373
+```
+
+In French the gloss stands in guillemets and the last lines read "Toutes les conjugaisons du verbe
+se souvenir sont dans Conjuguer :", where "du verbe" spares the sentence an elision (de aller). The
+infinitive is the citation form, with the pronoun of a verb that is only pronominal, though the
+page's heading shows the bare infinitive over its Reflexive note. A verb with no key conjugation
+drops that line. The text carries the App Store link only, never a `conjuguer://` link (carried
+over from Konjugieren, 2026-11-12). The sheet's header shows the citation infinitive and the
+learner's chosen app icon. `ShareLink` is not used: Konjugieren found that in a toolbar it reports
+no tap, so `tapShareVerb` could not be sent, and that a `SharePreview` removed Copy from the sheet.
+On iPad the popover anchors to the bar button whose label is "Share", searched only among what is
+on screen; iOS 26 draws it with no arrow, over the button.
+
+### Copying
+
+A long press on a conjugation, or a right-click on a Mac, opens a context menu with Copy, the
+platform's convention, which needs no "Copied" toast. It copies the form as the cell shows it, in
+lowercase and without the pronoun beside it ("vais", "suis allée", "souviens-toi"), as Konjugieren
+copies "stehe auf". A long press on the infinitive at the top copies it. An empty cell copies
+nothing; a form struck through as unused copies, since it is shown. A tap does nothing, as before:
+nothing on the verb page speaks.
+
 ## Conjugation Map
 
 Since Phase 4 of the browse plan (2026-11-22), the app bundle carries every one-word conjugation
@@ -407,6 +466,9 @@ A tense article's sheet ends the visit as the model sheet does, and closing it r
 **`tapTenseArticle`**, with no parameters, counts taps on a tense heading's article button
 (Phase 6, 2026-11-22). Konjugieren's counterpart is `tapConjugationgroupArticle`.
 
+**`tapShareVerb`**, with no parameters, counts taps on the verb page's share button (Phase 8,
+2026-11-22), whether or not the learner then shares. Copying sends nothing.
+
 **A search** (`SearchTracker`, `SearchReport`) begins with the first non-blank letter and ends
 once. Returning to the results and opening another verb without editing the text sends no second
 `finishSearch`, though the page still reports `search`. Editing the text after an open begins a new
@@ -455,8 +517,8 @@ page passes `modelPage` itself. **Phase 9's grammar should keep this query item.
 
 **The convention for later phases.** A phase that adds a way to reach a verb page passes its value
 in `VerbDestination`, in a link's `source` item, or directly to `VerbView`, marks it sent in the
-table above, and stages its privacy line. Phases 8, 10, and 11 add `tapShareVerb`, `tapStarVerb`
-(with `starred`, the state after the tap), and `tapTestVerb`. Phase 11 adds `source` to `quizStart`,
+table above, and stages its privacy line. Phase 8 added `tapShareVerb`; Phases 10 and 11 add `tapStarVerb`
+(with `starred`, the state after the tap) and `tapTestVerb`. Phase 11 adds `source` to `quizStart`,
 `quizQuit`, and `quizCompletion`.
 
 ## Deeplinks

@@ -87,3 +87,27 @@ Le point sur certaines actions dans l'application devient :
 ```
 - Certaines actions dans l'application, comme l'ouverture du jeu, le réaffichage de l'introduction ou l'ouverture de l'article d'un temps depuis la page d'un verbe, ainsi que la réussite ou l'échec de la connexion à Game Center
 ```
+
+## Sharing a verb (browse plan, Phase 8, 2026-11-22)
+
+Adds the signal `tapShareVerb`, with no parameters: a tap on the share button of a verb's page. It
+does not name the verb, and it does not say whether anything was shared or where. Copying sends
+nothing. Like Phase 6's signal, it changes the bullet about certain in-app actions rather than
+adding one. If the Phase 6 section above has been applied, apply this one after it, since it
+replaces the same bullet.
+
+### English
+
+The bullet about certain in-app actions now reads:
+
+```
+- Certain in-app actions, such as opening the game, reshowing the onboarding, opening a tense's article from a verb's page, or tapping the button that shares a verb's page, and whether Game Center sign-in succeeded
+```
+
+### French
+
+Le point sur certaines actions dans l'application devient :
+
+```
+- Certaines actions dans l'application, comme l'ouverture du jeu, le réaffichage de l'introduction, l'ouverture de l'article d'un temps depuis la page d'un verbe ou un appui sur le bouton de partage de la page d'un verbe, ainsi que la réussite ou l'échec de la connexion à Game Center
+```

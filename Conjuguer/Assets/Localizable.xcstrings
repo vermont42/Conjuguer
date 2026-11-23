@@ -471,6 +471,74 @@
         }
       }
     },
+    "VerbView.copy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier"
+          }
+        }
+      }
+    },
+    "VerbView.share" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partager"
+          }
+        }
+      }
+    },
+    "VerbView.shareGloss" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, “%2$@”"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, « %2$@ »"
+          }
+        }
+      }
+    },
+    "VerbView.shareInvitation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every conjugation of %1$@ is in Conjuguer:\n%2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toutes les conjugaisons du verbe %1$@ sont dans Conjuguer :\n%2$@"
+          }
+        }
+      }
+    },
     "VerbView.builtOn" : {
       "extractionState" : "manual",
       "localizations" : {
