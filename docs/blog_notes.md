@@ -5472,3 +5472,31 @@ have, and insert at the cursor. AXe cannot see that toolbar, so verifying it mea
 coordinate and reading the field back. One small surprise: the iPhone simulator refused to draw
 the app dark after `simctl ui appearance dark`, through several relaunches, while the iPad
 switched at once.
+
+## The Shape of the Answer (2026-11-22)
+
+Pedagogy Phase 2 put the person beside the answer field instead of in the question. The quiz used
+to ask "je (fém.) · passé composé" above an empty box, and nothing told the learner whether the
+box wanted "ai parlé" or "j'ai parlé". Now the question names the tense, and the field sits in a
+frame: `j' [ ]`, `nous (fém.) [ ]`, `(tu) [ ]-toi !`. Konjugieren built the same frame for German on
+2026-11-13. French raised two questions German did not.
+
+The first was elision. Whether the frame shows je or j' depends on the answer's first letter, so
+an eliding frame hints at the answer. For je in a compound tense the hint is sharp: j' means avoir
+and je means être. I offered Josh three mockups: elide, never elide (and accept a typed j'), or a
+neutral j(e). He chose to elide. The frame reads as French, and the quiz is practice, not an exam.
+Building it turned up one case I had wrong: I expected `tu te` for tu t'es souvenue, and the test
+failed because the frame was right.
+
+The second was gender. Agreement with être stays required, so the frame has to say which gender a
+je, tu, nous, or vous answer agrees with. Josh kept the familiar `(fém.)`, now small and gray
+after the pronoun, and limited it to compound tenses, where a participle can agree. It shows for
+every compound tense, avoir verbs included, so it gives nothing away about the auxiliary. In a
+simple tense the mark was only noise.
+
+Konjugieren's notes warned of a focus bug: when a pronoun appeared in front of the field, SwiftUI
+rebuilt the field and the keyboard dropped. Conjuguer's frame keeps the field outside the loops
+that draw the words around it, so typing fifteen answers in a row on the simulator never lost the
+keyboard. VoiceOver reads the frame as one label ("je, feminine, blank"), and il and ils, which
+sound alike, get "singular" and "plural".
+

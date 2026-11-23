@@ -40,6 +40,22 @@ enum PronounGender: String, CaseIterable {
     return ending
   }
 
+  func isFeminine(_ personNumber: PersonNumber) -> Bool {
+    switch self {
+    case .feminine:
+      return true
+    case .masculine:
+      return false
+    case .both:
+      switch personNumber {
+      case .firstSingular, .secondSingular, .thirdSingular:
+        return true
+      case .firstPlural, .secondPlural, .thirdPlural:
+        return false
+      }
+    }
+  }
+
   var thirdSingular: String {
     switch self {
     case .feminine, .both:

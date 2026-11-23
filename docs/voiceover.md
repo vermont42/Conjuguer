@@ -135,15 +135,15 @@ VoiceOver running.
 | `VerbView` (tense headings) | The French name marked French and given the header trait; the second name ("also simple past", "aussi passé défini") a separate element in the interface's language, unmarked; the article button labeled "Info" with the hint "Opens the article about this tense." |
 | `ModelView` | Exemplar, endings, and verbs marked French |
 | `InfoBrowseView`, `InfoView` | `.frenchPronunciation(forReal: info.alwaysUsesFrenchPronunciation)` |
-| `QuizView` | The infinitive and the question French, the gloss English, plus the announcements below |
+| `QuizView` | The infinitive and the question French, the gloss English, plus the announcements below. The answer field's label reads its frame as one prompt in the interface's language ("je, feminine, blank"; "elles se, plural, blank"; "tu, blank, toi"), and the frame's own words are hidden. Not yet heard with VoiceOver |
 
 ## The Quiz's Announcements
 
 A typed quiz moves on without a focus change VoiceOver would notice, so `Quiz` announces each
 question itself. When `UIAccessibility.isVoiceOverRunning`, `announcePublishedProperties()` waits a
 second after each question appears and speaks, through `Utterer.utter(_:localeString:)`, a series
-of label and value pairs: the verb, its translation, the pronoun, the gender, the tense, the
-progress, the score, and the elapsed time. When the last answer was right but spelled another
+of label and value pairs: the verb, its translation, the pronoun, the gender (in a compound tense only, as the
+answer frame shows it), the tense, the progress, the score, and the elapsed time. When the last answer was right but spelled another
 standard way (connait for connaît), the series begins with "Correct. Also spelled:" and the app's
 spelling, which the label beside the checkmark also reads. Each label is spoken in the interface's language (French
 as `fr-FR`, otherwise the device's language and region), each French value in `fr-FR`, and the

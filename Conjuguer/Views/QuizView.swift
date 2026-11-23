@@ -161,7 +161,6 @@ struct QuizView: View {
         let verb = quiz.questions[quiz.currentQuestionIndex].verb
         let tense = quiz.questions[quiz.currentQuestionIndex].tense
         let tenseName = tense.titleCaseName.lowercased()
-        let ask = tense.pronounWithGender == L.QuizView.none ? tenseName : "\(tense.pronounWithGender) · \(tenseName)"
 
         VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
           Text(verb.infinitifWithPossibleExtraLetters)
@@ -173,7 +172,7 @@ struct QuizView: View {
             .smallLabel()
             .englishPronunciation()
 
-          Text(ask)
+          Text(tenseName)
             .font(buttonFont)
             .foregroundStyle(Color.customForeground)
             .frenchPronunciation()
@@ -216,7 +215,18 @@ struct QuizView: View {
     .frame(maxWidth: .infinity, minHeight: feedbackSlotHeight, alignment: .topLeading)
   }
 
+  private var answerFrame: AnswerFrame {
+    quiz.currentQuestionIndex < quiz.questions.count ? quiz.questions[quiz.currentQuestionIndex].answerFrame : .bareBlank
+  }
+
   private var answerField: some View {
+    let frame = answerFrame
+    return AnswerFrameView(frame: frame) {
+      conjugationField(spokenPrompt: frame.spokenPrompt)
+    }
+  }
+
+  private func conjugationField(spokenPrompt: String) -> some View {
     TextField(L.QuizView.conjugation, text: $input, selection: $inputSelection)
       .focused($conjugationFieldIsFocused)
       .textInputAutocapitalization(.never)
@@ -237,6 +247,7 @@ struct QuizView: View {
       )
       .animation(.easeInOut(duration: 0.15), value: conjugationFieldIsFocused)
       .accessibilityIdentifier("input_quiz_conjugation")
+      .accessibilityLabel(spokenPrompt)
       .accessibilityValue(input)
       .toolbar {
         ToolbarItem(placement: .keyboard) {

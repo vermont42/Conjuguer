@@ -47,6 +47,7 @@ Conjuguer/
 │   ├── Sounds/                 # MP3 effects for quiz and game (applause, buzz, chime, guns, ghost, robot, …)
 │   └── WorkSans*.ttf           # Bundled Work Sans faces (regular, semibold, bold)
 ├── Models/
+│   ├── AnswerFrame.swift       # The shape of a quiz answer: the pronoun before the blank, elided to the answer (j', je m'), the gender a compound tense agrees with, the impératif's (tu) and -toi, and the prompt VoiceOver reads
 │   ├── AnswerSpelling.swift    # How the quiz reads a typed answer: case, spacing, the curly apostrophe, and the subject and reflexive pronouns of the asked person
 │   ├── AppIcon.swift           # Alternate app-icon enum (beret/croissant/rooster/arc de triomphe)
 │   ├── Auxiliary.swift         # avoir/être auxiliary enum
@@ -180,6 +181,7 @@ Conjuguer/
 │   ├── WidgetSnapshotWriter.swift # Writes the multi-day widget snapshot bundle to the shared container, drawing each day's verb with VerbDraw and keeping the verb the widget already shows today
 │   └── World.swift             # @Observable DI container (Current) plus MainTab; device/simulator/unitTest configurations; handleURL and the deeplink grammar's effects, openSearch(text:source:) for search links and Command-F
 └── Views/
+    ├── AnswerFrameView.swift   # Draws an AnswerFrame on one line around the answer field, keeping the field's identity, and the keyboard's focus, from one question to the next
     ├── BrowseLayout.swift      # Shared adaptive grid columns and search-field placement (a fixed bar on iPad and Mac) for the browse views
     ├── BrowseRow.swift         # Shared row/cell used by both browse views, with optional badge, a looked-up check, and a French or English subtitle
     ├── BrowseSearch.swift      # Shared search plumbing for the browse views: all items for a blank query, the trombone for none
@@ -197,7 +199,7 @@ Conjuguer/
     ├── OnboardingView.swift    # Multi-page welcome tour; auto-presented on first launch and re-showable from Settings
     ├── QuizResultsView.swift   # End-of-quiz sheet: score, per-question results, leaderboard
     ├── QuizResultView.swift    # One row of the results sheet
-    ├── QuizView.swift          # Quiz gameplay: prompt, answer field with the accent keys, progress, feedback and the app's spelling of a variant; the All Verbs / My Verbs picker; QuizSheet, for Test Me on a verb page and a collection's quiz
+    ├── QuizView.swift          # Quiz gameplay: prompt, answer field framed by its pronoun with the accent keys, progress, feedback and the app's spelling of a variant; the All Verbs / My Verbs picker; QuizSheet, for Test Me on a verb page and a collection's quiz
     ├── RelatedVerbsView.swift  # The verb page's Related Verbs card (built on the same root, same model), RelatedVerbListView, and FlowLayout
     ├── ReviewCardView.swift    # The review card above the verb list: a verb looked up days ago, its key conjugations hidden until a tap, a second tap opening its page
     ├── RichTextView.swift      # Renders [RichTextBlock] with subheadings, emphasis, color-coding, links
@@ -255,6 +257,7 @@ ConjuguerTests/
 ├── TestUtils.swift             # T.testConjugation shared assertion (threads #_sourceLocation) and T.generateVerbModelTests
 └── Models/
     ├── AddedVerbsTests.swift           # Conjugations of the 13 verbs added and 6 misspellings renamed on 2026-08-28, plus dépourvoir's defect group 27
+    ├── AnswerFrameTests.swift          # The frame for each kind of question, one blank in every cell, the frame's words typed with the answer still right, and the spoken prompt
     ├── AnswerSpellingTests.swift       # Normalizing an answer, and the pronouns stripped (or kept) for each person, pronominal verbs, and the impératif
     ├── AnalyticsTests.swift            # The bands, the section order, every match kind's analytics value, and the verb page's screen name
     ├── CompoundTenseTests.swift        # Compound tenses, incl. feminine/plural participe agreement

@@ -235,6 +235,9 @@ class Quiz {
     case "grading":
       questions = generateGradingFixture()
       return
+    case "frames":
+      questions = generateFramesFixture()
+      return
     default:
       break
     }
@@ -418,6 +421,32 @@ class Quiz {
     return Array(repeating: questions, count: 3).flatMap { $0 }
   }
 
+  // One question for each kind of answer frame, repeated to thirty, unshuffled. The frames are
+  // listed in docs/feature_architecture.md § Quiz.
+  private func generateFramesFixture() -> [QuizQuestion] {
+    let plan: [(infinitif: String, tense: Tense)] = [
+      ("parler", .indicatifPrésent(.firstSingular)),
+      ("aimer", .indicatifPrésent(.firstSingular)),
+      ("haïr France", .indicatifPrésent(.firstSingular)),
+      ("parler", .indicatifPrésent(.thirdSingular)),
+      ("parler", .futurSimple(.thirdPlural)),
+      ("parler", .passéComposé(.firstSingular)),
+      ("aller", .passéComposé(.firstPlural)),
+      ("souvenir", .indicatifPrésent(.firstSingular)),
+      ("absenter", .indicatifPrésent(.firstSingular)),
+      ("souvenir", .passéComposé(.secondSingular)),
+      ("souvenir", .impératif(.secondSingular)),
+      ("finir", .impératif(.firstPlural)),
+      ("aller", .impératifPassé(.secondPlural)),
+      ("parler", .participePrésent),
+      ("venir", .participePassé)
+    ]
+    let questions = plan.map { spec in
+      QuizQuestion(verb: Verb.verbForInfinitif(spec.infinitif), tense: spec.tense)
+    }
+    return Array(repeating: questions, count: 2).flatMap { $0 }
+  }
+
   // Write the correct answers for the fixture to Documents/screenshot_fixture_answers.json
   // so the driver can read and type them. The exported answer is the first of any
   // slash-separated alternates, which the quiz scores as a total match.
@@ -591,7 +620,9 @@ class Quiz {
         Utterer.utter(question.verb.translation, localeString: Utterer.englishLocaleString)
         Utterer.utter(L.QuizView.pronounWithColon, localeString: currentLocaleString)
         Utterer.utter(question.tense.pronoun, localeString: Utterer.frenchLocaleString)
-        Utterer.utter(question.tense.gender, localeString: currentLocaleString)
+        if question.tense.isCompound {
+          Utterer.utter(question.tense.gender, localeString: currentLocaleString)
+        }
         Utterer.utter(L.QuizView.tenseWithColon, localeString: currentLocaleString)
         Utterer.utter(question.tense.titleCaseName, localeString: Utterer.frenchLocaleString)
         Utterer.utter(L.QuizView.progressWithColon, localeString: currentLocaleString)

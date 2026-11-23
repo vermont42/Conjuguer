@@ -154,10 +154,14 @@ extension PersonNumber {
   // The subject (+ reflexive) pronoun that precedes a conjugation, including any elision
   // (j'/m'/t'/s') implied by the conjugation's first letter.
   @MainActor func preamble(forConjugation conjugation: String, isReflexive: Bool, hasAspiratedH: Bool) -> String {
+    preamble(forConjugation: conjugation, isReflexive: isReflexive, hasAspiratedH: hasAspiratedH, pronounGender: Current.settings.pronounGender)
+  }
+
+  @MainActor func preamble(forConjugation conjugation: String, isReflexive: Bool, hasAspiratedH: Bool, pronounGender: PronounGender) -> String {
     let firstLetterImpliesLiaison = Self.elides(before: conjugation, hasAspiratedH: hasAspiratedH)
 
-    let thirdSingular = Current.settings.pronounGender.thirdSingular
-    let thirdPlural = Current.settings.pronounGender.thirdPlural
+    let thirdSingular = pronounGender.thirdSingular
+    let thirdPlural = pronounGender.thirdPlural
 
     if isReflexive {
       switch self {
@@ -194,10 +198,6 @@ extension PersonNumber {
 }
 
 extension Tense {
-  @MainActor var pronounWithGender: String {
-    personNumber?.pronounWithGender ?? L.QuizView.none
-  }
-
   @MainActor var pronoun: String {
     personNumber?.pronoun ?? L.QuizView.none
   }

@@ -798,6 +798,7 @@ chosen verbs (§ Quiz Scopes).
 | `QuizScope.swift` | What a quiz asks about, its question count, and its analytics source; the questions of a quiz over chosen verbs; `QuizTenseSlot`, Regular's tenses and quotas; `Verb.hasCell(_:)` and `canBeQuizzed` |
 | `QuizQuestion.swift`, `QuizResult.swift`, `QuizState.swift` | A question (verb and tense), an answered question, and the quiz's lifecycle |
 | `ConjugationResult.swift` | Grades an answer as a total, partial, or no match (`ConjugationResult.grade`), with the conjugation to show beside a right answer spelled another standard way (`AnswerGrade`) |
+| `AnswerFrame.swift`, `AnswerFrameView.swift` | The shape of the expected answer around the field (§ The Answer Frame) |
 | `AnswerSpelling.swift` | Reads a typed answer before grading: case, spacing, the typographic apostrophe, and the pronouns of the asked person |
 | `StandardVariants.swift` | Spellings the quiz accepts beside the conjugator's: the 1990 rectifications and a few doublets that dictionaries list |
 | `CyclingDeck.swift` | Deals a pool's elements in order and reshuffles when it runs out |
@@ -835,6 +836,35 @@ App Store screenshots and exports its answers (see
 questions, three times over, whose right answers exercise the grading below. Typed in order, with
 the feminine default: `il connait`, `je parle`, `j'ai parlé`, `nous sommes allées`, `j'étiquète`,
 `je cèderai`, `je me souviens`, `souviens-toi`, `etes` (a partial match), and `il plait`.
+`-CONJUGUER_QUIZ_FIXTURE frames` asks one question for each kind of answer frame, twice over:
+`je` (parler), `j'` (aimer), `je` (haïr, aspirated h), `elle`, `elles`, `j' (fém.)` (parler,
+passé composé), `nous (fém.)` (aller), `je me`, `je m'` (s'absenter), `tu t' (fém.)`, `(tu) ______-toi !`,
+`(nous) ______ !`, `(vous) (fém.) ______ !` (aller, impératif passé), and the two participles.
+
+### The Answer Frame
+
+The question names the verb and the tense. The person sits beside the field, in the frame that
+`QuizQuestion.answerFrame` builds and `AnswerFrameView` draws on one line:
+
+- **A personal tense** shows its subject pronoun, and a pronominal verb's reflexive one, before
+  the field: `nous ______`, `je me ______`. The pronoun elides as the expected answer requires
+  (`j'`, `je m'`, `tu t'`), through `PersonNumber.preamble`, so it reads as French. That reveals that
+  the answer begins with a vowel or a mute h, and, for je in a compound tense, that the auxiliary
+  is avoir. Josh accepted the hint on 2026-11-22, since the quiz is practice. The third person
+  shows il or elle and ils or elles as the pronoun-gender setting chooses.
+- **A compound tense** adds the gender its participle may agree with, `(fém.)` or `(masc.)`, after
+  je, tu, nous, and vous, whose pronouns do not show it. It shows for every compound tense, avoir
+  verbs included, so that it does not reveal the auxiliary, and for no simple tense.
+- **The impératif** shows the person it addresses, `(tu) ______ !`, since tu and vous take
+  different answers, and a pronominal verb's `-toi`, `-nous`, or `-vous` after the field.
+- **A participle** is a bare field.
+
+The frame's words are not graded. A learner who types them anyway (`j'ai parlé`, `souviens-toi`)
+is still right, through `AnswerSpelling`. The words are hidden from VoiceOver, and the field's
+label reads the frame as one prompt (`AnswerFrame.spokenPrompt`): "je, feminine, blank", with an
+elided pronoun read whole and "singular" or "plural" after il, elle, ils, and elles, which sound
+alike. `AnswerFrameView` keeps the field outside the `ForEach`es that draw the words, so that the
+field keeps its identity, and the keyboard its focus, when the next question's words differ.
 
 ### Grading and Scoring
 

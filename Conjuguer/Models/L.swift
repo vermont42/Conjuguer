@@ -437,6 +437,18 @@ enum L {
       String(localized: "QuizView.conjugation")
     }
 
+    static var blank: String {
+      String(localized: "QuizView.blank")
+    }
+
+    static var singular: String {
+      String(localized: "QuizView.singular")
+    }
+
+    static var plural: String {
+      String(localized: "QuizView.plural")
+    }
+
     static var quit: String {
       String(localized: "QuizView.quit")
     }

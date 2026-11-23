@@ -25,7 +25,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | Phase | Status | Date | Commit | Suggestions | Konjugieren phase |
 |---:|---|---|---|---|---:|
 | 1 | Done | 2026-11-22 | 0d82e5c | T1.3, T1.4, T1.5, and two Conjuguer defects | 1 |
-| 2 | Not started | | | T1.2 | 2 |
+| 2 | Awaiting Josh | 2026-11-22 | | T1.2 | 2 |
 | 3 | Not started | | | T4.1, T4.4, T4.5 | 3 |
 | 4 | Not started | | | T1.6 | 4 |
 | 5 | Not started | | | T2.3, T2.6, T6.7, M1 | 5 |
@@ -469,7 +469,7 @@ answer field; and tests pin each.
 ## Phase 2: The Shape of the Answer
 
 **Suggestions:** T1.2. **Ports:** Konjugieren Phase 2 (`AnswerFrame.swift`,
-`AnswerFrameView.swift`). **Depends on:** Phase 1. **Status:** Not started.
+`AnswerFrameView.swift`). **Depends on:** Phase 1. **Status:** Awaiting Josh.
 
 Show the shape of the expected answer around the field, with the pronoun fixed outside it:
 `nous ______`, `elles ______`. The frame settles the pronoun question. Build it as a component the
@@ -500,6 +500,43 @@ as one prompt ("nous, blank").
 correctly, VoiceOver reads it as one prompt, and tests pin the frame for each kind of question.
 
 **How it differed:**
+
+- **Josh chose on 2026-11-22**, from three mockups each: a frame that **elides** (`j'`, `je m'`,
+  `tu t'`) over one that always shows `je` and `je me`, and over a neutral `j(e)`; the gender as
+  **`(fém.)` or `(masc.)` after the pronoun**, in the caption font and gray, over a tinted badge
+  and over a word on the tense line; and the gender **in compound tenses only**, over every tense.
+  He accepted that eliding reveals the auxiliary for je in a compound tense (j' means avoir),
+  since the quiz is practice. Showing the gender for every compound tense, avoir verbs included,
+  keeps the mark from revealing anything.
+- **The frame's pronoun follows the elision of the expected answer**, so `tu t'` appears for
+  `tu t'es souvenue` as well as `je m'` for s'absenter. The test that first expected `tu te` was
+  wrong, not the frame. It reuses `PersonNumber.preamble`, which now has a variant that takes the
+  pronoun gender, so tests need not set `Current`.
+- **The gender mark sits after all the pronouns**, `je me (fém.)` and `j' (fém.)`, rather than
+  between je and me, so the pronouns read as one group before the field.
+- **The impératif passé** shows its addressee and the gender: `(vous) (fém.) ______ !`. No quiz
+  pool asks it today, but a scoped or later quiz might. A pronominal impératif passé gets no
+  `-toi`.
+- **The ask line now names only the tense.** The pronoun and gender moved into the frame, and
+  `Tense.pronounWithGender`, which only the ask line read, is gone. VoiceOver's announcement
+  still says the pronoun, and says the gender only in a compound tense, to match the frame.
+- **One blank only.** `AnswerFrameView` takes the field as a view builder and draws the frame's
+  words before and after it, outside the `ForEach`es, so the field keeps its identity and the
+  keyboard its focus (the bug Konjugieren found by looking). Konjugieren's multi-blank and
+  sentence machinery was not ported: Phase 15 and Phase 18 add blanks when they need them.
+- **VoiceOver.** The field's label is `AnswerFrame.spokenPrompt` ("je, feminine, blank"; "elles
+  se, plural, blank"; "tu, blank, toi"), with three new strings: blank ("à compléter"),
+  singular, and plural. An elided pronoun is read whole. Read from the accessibility tree, not
+  heard.
+- **A new fixture**, `-CONJUGUER_QUIZ_FIXTURE frames`: fifteen questions, one per kind of frame,
+  twice over, listed in `docs/feature_architecture.md` § Quiz.
+- **Verified** on the iPhone 17 in French (all fifteen frames, light) and in English, and on the
+  iPad Pro 11 in English and dark, with the hardware keyboard. Focus survived every change of
+  frame, and the é key still inserted into the field. The software keyboard was not tried.
+- **Analytics:** none added, so nothing is staged in `docs/privacy_policy_pending.md`.
+- **Tests:** 568 to 571, with `AnswerFrameTests`: the frame for 23 kinds of question, one blank
+  in every cell of eight verbs under each gender setting with the frame's words typed and still
+  graded right, and the spoken prompt.
 
 ## Phase 3: A Correction That Stays
 
