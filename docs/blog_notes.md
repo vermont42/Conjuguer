@@ -5210,3 +5210,38 @@ a My Verbs day's draw. So the writer now reads what it wrote last time and keeps
 In the simulator that was easy to watch. Unstarring venir reordered My Verbs, and a fresh draw
 would have shown être, but the widget kept venir for the rest of the day. The whole week matched
 an independent Python reimplementation of the draw, which also became a test that pins ten days.
+
+## The Review Card (2026-11-22)
+
+Phase 13 of the browse plan ports Konjugieren's review card. When the app opens, or returns from
+the background, the verb list may show one card above its rows: a verb looked up some days ago,
+its gloss, and its three key conjugations hidden under a grey bar. "Recall its conjugations, then
+tap to check." One tap shows them, red letters and all; a second opens the verb's page; the ✕ puts
+the card away. Under it sits the smallest Leitner system that works: a box and a due date per verb,
+on a ladder of 1, 3, 7, 14, and 30 days. Revealing a card moves the verb up a box. Dismissing it
+unrevealed is no review, so the verb comes back tomorrow in the same box. Looking a verb up again,
+by any route but the card, sends it back to the first box, on the theory that a learner who looks
+a verb up has forgotten it. Due dates fall at midnight, so a verb looked up at eleven at night
+waits for the morning rather than an hour.
+
+The port followed Konjugieren's first version of the feature, not the one it has now. Konjugieren
+has since moved the schedule into a practice record for its quiz work. Conjuguer's pedagogy plan
+will do the same, and it starts from a schedule stored as one optional field on each learner verb.
+An optional field means no migration: a verb opened before this phase has no schedule, so it
+counts as looked up on its last open, and a learner with history sees a card on the first day.
+
+French brought one wrinkle that German lacks. Six verbs (accroire, bayer, courre, ester, quérir,
+ravoir) are used only in the infinitive, so they have no key conjugations to hide. A card for one
+of them would ask the learner to recall nothing. The store now passes over them and offers the
+next verb due. Reflexive verbs work as the share text does: souvenir's card reveals "se souvient ·
+s'est souvenu · se souviendra".
+
+Testing meant seeding the learner's record with dates in the past, which taught a small lesson
+about the simulator. `simctl spawn defaults write` looked like the way to write the App Group's
+preferences, and `defaults read` agreed that it had worked, but the app never saw the change: the
+command writes a different file from the one in the group container. Editing the container's plist
+directly works, provided the app is not running, and when the simulator's preferences daemon has
+already cached the domain, a reboot clears it. With that settled, the card behaved as designed on
+the iPhone in both languages and on the iPad, where it stops at 560 points rather than stretching
+across the grid. Dark mode went unseen, because the simulator ignored the appearance switch for
+the whole session.

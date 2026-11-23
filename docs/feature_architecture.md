@@ -522,7 +522,7 @@ quiz signals. Values are Konjugieren's names wherever the surface is the same.
 | `myVerbs` | Yes | A verb in My Verbs (Phase 10). For the quiz signals (Phase 11), a quiz over My Verbs |
 | `tab` | Yes | For `finishSearch` only: a search typed in the Verbs tab, Command-F included (Phase 9). For the quiz signals (Phase 11), a quiz begun from the Quiz tab |
 | `verbPage` | Yes | The quiz signals only: Test Me on a verb page (Phase 11) |
-| `reviewCard` | Phase 13 | The review card, opened after its conjugations are revealed |
+| `reviewCard` | Yes | The review card, tapped after its conjugations are revealed (Phase 13) |
 | `list` | Phase 14 | A verb on a collection's page; for the quiz signals, a collection's quiz |
 
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
@@ -537,7 +537,8 @@ in `VerbDestination`, in a link's `source` item, or directly to `VerbView`, mark
 table above, and stages its privacy line. Phase 8 added `tapShareVerb`, Phase 10 `tapStarVerb`
 (with `starred`, the state after the tap). Phase 11 added `source` to `quizStart`, `quizQuit`, and
 `quizCompletion`, and no `tapTestVerb`: Test Me starts its quiz as its sheet appears, so the tap and
-`quizStart` with `verbPage` are one event.
+`quizStart` with `verbPage` are one event. Phase 13 added `viewReviewCard` and
+`tapRevealReviewCard` (§ The Review Card).
 
 ## Deeplinks
 
@@ -667,8 +668,9 @@ identifier is "VerbEntity/<key>".
 
 Built 2026-11-22 in Phase 10 of the browse plan, ported from Konjugieren's Phase 12. One record of
 the learner's own verbs, kept on the device and never sent: each verb opened (first and last date,
-and a count) and each verb starred. Recents and My Verbs read it now; the browse plan's Phases 11
-to 14 and the pedagogy plan extend it.
+and a count), each verb starred, and, since Phase 13, when each is due on the review card. Recents,
+My Verbs, the quiz's My Verbs scope, the verb of the day, and the review card read it; Phase 14's
+collections and the pedagogy plan will.
 
 | Piece | File | Role |
 |---|---|---|
@@ -709,6 +711,45 @@ verb, star and opens alike (`LearnerVerbs.remove`), since unstarring alone would
 verb from Starred to Recent. A starred verb first asks, in an alert, whether to remove its star;
 its swipe button is not `.destructive`, because that role removes the row before the learner
 answers. Rows open with the source `myVerbs`.
+
+### The Review Card
+
+Built 2026-11-22 in Phase 13 of the browse plan, ported from Konjugieren's Phase 15. Each launch,
+and each return from the background, the verb list shows one card above its rows when a verb is
+due: the verb looked up longest ago among those due ("Looked up 3 days ago", "yesterday" for one),
+its gloss, and its key conjugations hidden under a redacted placeholder over "Recall its
+conjugations, then tap to check." A tap anywhere reveals them, red letters and all; a second tap
+opens the page, with `source` `reviewCard`, and a chevron says so; ✕ dismisses the card. Nothing
+replaces a dismissed card until the next opening, and the card hides while a search, the recents,
+or My Verbs shows. On iPad it stops at 560 points rather than spanning the grid. The Suppress
+Review Card setting (`ReviewCardSuppression`, Off by default, stored as `reviewCardSuppression`)
+hides any card at once and chooses none at later openings; turning it Off chooses one at once. The
+schedule keeps running underneath.
+
+| Piece | Role |
+|---|---|
+| `Shared/ReviewSchedule.swift` | A box and a due date. The ladder is 1, 3, 7, 14, and 30 days, the last repeating; due dates fall at the start of a day |
+| `LearnerVerbs.Entry.review` | The verb's schedule, optional. An entry written before Phase 13 counts as looked up on its last open, so there is no migration |
+| `LearnerVerbs.dueForReview(at:)` | The due keys, longest overdue first, ties broken by key |
+| `LearnerVerbStore.verbDueForReview(at:)` | The first due verb that has key conjugations: accroire and the other verbs used only in the infinitif would have nothing to reveal |
+| `Views/ReviewCardView.swift` | The card. `VerbBrowseView` chooses the verb, once per opening, and applies each tap to the schedule |
+
+**What moves a verb** (Josh for Konjugieren, 2026-11-13, carried over). An open puts it in the
+first box, due the next day, and so does any later open, since looking a verb up again suggests it
+was forgotten. An open from the card itself is the exception (`recordOpen(_:source:)` with
+`reviewCard`). Revealing moves it up a box (`recordReview`). Dismissing before revealing is no
+review: the verb keeps its box and returns the next day (`snoozeReview`). Clear in My Verbs
+forgets the opens and with them the reviews; a starred verb never opened is never due. Keys are
+`Verb.dictionaryKey`s, so haïr's two entries keep their own schedules.
+
+**Signals.** `viewReviewCard`, once per card shown, and `tapRevealReviewCard`, once per reveal,
+with no parameters and no verb. The setting sends nothing.
+
+**For the pedagogy plan.** Its practice record can take this over: a right answer calls what a
+reveal calls (`recordReview`), and a wrong one should send the verb back to the first box, as a
+lookup does (`ReviewSchedule.lookedUp`), without counting an open. Konjugieren's pedagogy phase
+later moved the schedule out of `LearnerVerbs` into a `PracticeRecord` and added `answered` and
+`new` to `ReviewSchedule`; read its `Shared/ReviewSchedule.swift` before extending this one.
 
 ## Quiz
 

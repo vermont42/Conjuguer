@@ -36,7 +36,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 10 | Done | 2026-11-22 | 2829650 | D1, D2 | 12 |
 | 11 | Done | 2026-11-22 | e9a34b5 | D2's quiz scope, D3 | 13 |
 | 12 | Done | 2026-11-22 | 9af3c40 | D5 | 14 |
-| 13 | Not started | | | D4 | 15 |
+| 13 | Done | 2026-11-22 | | D4 | 15 |
 | 14 | Not started | | | D6 | 16 |
 | Closing | Not started | | | Audit, porting notes | Closing |
 
@@ -1432,7 +1432,7 @@ Phase 11's 498, in the new `FrequencyBandTests` and `VerbDrawTests` and a rework
 
 **Ideas:** D4. **Ports:** Konjugieren Phase 15 (`ReviewSchedule.swift` in `Shared/`,
 `ReviewCardView.swift`, `ReviewCardSuppression.swift`). **Depends on:** Phases 8 and 10.
-**Status:** Not started.
+**Status:** Done (2026-11-22).
 
 When the app opens, one card above the verb list offers a verb looked up some days earlier, with
 its key conjugations hidden until tapped. One tap reveals them, a second opens the page, and one
@@ -1450,6 +1450,53 @@ parameters; the card hides while a search, the recents, or My Verbs shows.
 decided, the setting hides it, and tests pin the schedule.
 
 **How it differed:**
+
+Built 2026-11-22 in one session, as Konjugieren's Phase 15 with Conjuguer's names. The suite ran
+536 tests in 45 suites, all passing, 18 more than Phase 12's 518: 17 in the new
+`ReviewScheduleTests` and one in `SettingsTests`. New files: `Shared/ReviewSchedule.swift`,
+`Models/ReviewCardSuppression.swift`, and `Views/ReviewCardView.swift`. `docs/feature_architecture.md`
+§ The Review Card describes it. No question needed Josh. What differs:
+
+- **Ported from Konjugieren's commit 65d5eb6, not its current code.** Konjugieren's pedagogy
+  Phase 11 later moved the schedule out of `LearnerVerbs` into a `PracticeRecord` and added
+  `answered` and `new` to `ReviewSchedule`. This phase builds the browse version, `review` on
+  `LearnerVerbs.Entry`, as the plan asks; the pedagogy plan should read Konjugieren's current
+  `Shared/ReviewSchedule.swift` before extending it.
+- **Keys are `Verb.dictionaryKey`s**, so haïr's two entries keep their own schedules (tested).
+- **A verb with no key conjugations is passed over.** accroire and the five other verbs used only
+  in the infinitif would show an empty card, so `LearnerVerbStore.verbDueForReview` takes the first
+  due verb that has some. German has no such verbs.
+- **An open from the card** keeps the schedule through `recordOpen(_:source:)`, which
+  `VerbView.beginVisit` now calls with its source.
+- **The card** follows Konjugieren's: "Looked up 3 days ago" ("yesterday" for one, "earlier" if the
+  open has no date), the infinitive as the list shows it, the gloss, and the key conjugations under
+  a redacted placeholder. It sits above the list, below the try-quiz tip, not inside the scroll, and
+  hides while a search, the recents, or My Verbs shows. On iPad it stops at 560 points. A
+  pronominal verb shows "souvenir" over "se souvient · s'est souvenu · se souviendra", as its list
+  row does; **Josh may prefer** the citation form, "se souvenir", which the share text uses.
+- **Strings.** The day count uses separate keys for yesterday and for several days, by the
+  catalog's convention, not a plural variation. French: "Consulté hier", "Consulté il y a 3 jours",
+  "Rappelez-vous ses conjugaisons, puis touchez pour vérifier.", and in Settings "Masquer la carte
+  de révision" with Non and Oui for Off and On.
+- **The setting** is a card of its own in Settings, after Pronoun Genders, since Conjuguer has no
+  Search Scope card to share. It sends no signal.
+- **Analytics.** `viewReviewCard` and `tapRevealReviewCard`, no parameters; `reviewCard` is now
+  sent as a source. The privacy lines are staged, replacing Phase 10's in-app-actions bullet and
+  its paragraph about the list on the device.
+- **How it was tested.** On the iPhone, in English and light mode, with the App Group's plist
+  seeded: venir (an old entry with no `review`, opened 4 days earlier), faire (box 1, overdue), and
+  accroire (opened 20 days earlier). The card offered venir ("Looked up 4 days ago"), skipping
+  accroire; a reveal showed "vient · est venu · viendra" in red and blue and wrote box 1, due at the
+  start of 11-25; a tap opened venir's page, counted the open, and left the schedule. A trip to the
+  Home Screen and back offered faire ("10 days ago"). Suppress Review Card On hid it at once and a
+  relaunch showed none; Off brought it back; ✕ before revealing kept faire in box 1, due at the
+  start of 11-23, and a relaunch showed no card. In French: souvenir, "Consulté hier", its
+  reflexive key conjugations wrapping to two lines. On the iPad, in English: prendre's card at 560
+  points beside the grid, revealed and opened. **Not seen:** dark mode, since the iPhone simulator
+  ignored `simctl ui appearance dark` this session (its status bar also stayed frozen at 7:14);
+  VoiceOver; a device. **For seeding:** write the container's plist with `plutil`, with the app
+  terminated, and reboot the simulator if the app still reads the old record, since its
+  preferences daemon caches the domain. `simctl spawn defaults write` writes a different file.
 
 ## Phase 14: Collections
 

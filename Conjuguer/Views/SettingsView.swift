@@ -65,6 +65,21 @@ struct SettingsView: View {
               .settingsLabel()
           }
 
+          settingCard(title: L.Settings.reviewCardSuppression) {
+            Picker("", selection: $settings.reviewCardSuppression) {
+              ForEach(ReviewCardSuppression.allCases, id: \.self) { suppression in
+                Text(suppression.localizedReviewCardSuppression).tag(suppression)
+              }
+            }
+            .pickerStyle(.segmented)
+            .accessibilityIdentifier("picker_settings_reviewCardSuppression")
+            .accessibilityLabel(Text(L.Settings.reviewCardSuppression))
+            .accessibilityValue(settings.reviewCardSuppression.localizedReviewCardSuppression)
+
+            Text(L.Settings.reviewCardSuppressionDescription)
+              .settingsLabel()
+          }
+
           settingCard(title: L.Settings.appIcon) {
             LazyVGrid(
               columns: Array(

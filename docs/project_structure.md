@@ -78,7 +78,7 @@ Conjuguer/
 │   ├── Info.swift              # Info article model, the static article list, and InfoCategory (about/concepts/tenses)
 │   ├── KeyConjugations.swift   # Verb.keyConjugations() (the il présent, passé composé, and futur, unlabeled), citationInfinitif (se souvenir), and the share text
 │   ├── L.swift                 # Type-safe localization accessors, nested by feature
-│   ├── LearnerVerbStore.swift  # @Observable Current.learnerVerbs: records opens and stars in LearnerVerbs, saves each change to the App Group's defaults, and answers in verbs (recent, starred, My Verbs)
+│   ├── LearnerVerbStore.swift  # @Observable Current.learnerVerbs: records opens, stars, and reviews in LearnerVerbs, saves each change to the App Group's defaults, and answers in verbs (recent, starred, My Verbs, the verb due on the review card)
 │   ├── LanguageModelService.swift      # Protocol for the on-device tutor, plus TutorMessage and unavailability/error enums
 │   ├── LanguageModelServiceDummy.swift # No-op double for tests
 │   ├── LanguageModelServiceReal.swift  # FoundationModels implementation, incl. the ConjugationTool the model can call
@@ -96,6 +96,7 @@ Conjuguer/
 │   ├── QuizState.swift         # Quiz lifecycle enum (not started / in progress / finished)
 │   ├── QuizVerbs.swift         # Curated verb pools the quiz draws from (regular -er/-ir/-re, big three, stem changers, être auxiliaries, irregular participes, top thirty, futur stems)
 │   ├── RelatedVerbs.swift      # VerbBase (a verb's base and root: a verbal prefix plus a verb its etymology names, less false pairs), RelatedVerbs, and Verb.related for the verb page's card
+│   ├── ReviewCardSuppression.swift  # The Suppress Review Card setting's Off and On
 │   ├── SearchReport.swift      # SearchTracker (one verb search, first letter to its end) and SearchReport (finishSearch's banded parameters)
 │   ├── Sound.swift             # Sound-effect enum mapping cases to the bundled MP3s
 │   ├── StemAlteration.swift    # A stem alteration: type, chars, the tenses it applies to, additive/inherited flags
@@ -193,6 +194,7 @@ Conjuguer/
     ├── QuizResultView.swift    # One row of the results sheet
     ├── QuizView.swift          # Quiz gameplay: prompt, answer field, progress, feedback; the All Verbs / My Verbs picker; as a sheet, Test Me on a verb page
     ├── RelatedVerbsView.swift  # The verb page's Related Verbs card (built on the same root, same model), RelatedVerbListView, and FlowLayout
+    ├── ReviewCardView.swift    # The review card above the verb list: a verb looked up days ago, its key conjugations hidden until a tap, a second tap opening its page
     ├── RichTextView.swift      # Renders [RichTextBlock] with subheadings, emphasis, color-coding, links
     ├── SettingsView.swift      # Settings UI: pickers, app icon, ratings, onboarding re-show
     ├── TutorTestView.swift     # DEBUG-only batch harness for tutor queries
@@ -229,12 +231,13 @@ ConjuguerWidget/
     └── WidgetEtymologyText.swift   # ~emphasis~ rendering for widget etymology text
 
 Shared/                         # Compiles into BOTH the app and widget targets
-├── LearnerVerbs.swift          # The learner's verb record, keyed by Verb.dictionaryKey: opens (first, last, count) and stars, as JSON in the App Group's defaults so the widget can read it; every later field must be optional
+├── LearnerVerbs.swift          # The learner's verb record, keyed by Verb.dictionaryKey: opens (first, last, count), stars, and review schedules, as JSON in the App Group's defaults so the widget can read it; every later field must be optional
 ├── OpenQuizIntent.swift        # AppIntent opening the quiz (title written inline — appintentsmetadataprocessor can't read WidgetL accessors)
 ├── OpenRandomVerbControlIntent.swift  # The Random Verb control's action: OpenRandomVerbIntent with source=control, hidden from Shortcuts
 ├── OpenRandomVerbIntent.swift  # AppIntent opening a random verb from Shortcuts, with source=shortcut (same inline-title constraint)
 ├── OpenVerbSearchIntent.swift  # The Find a Verb control's action: conjuguer://search?source=control, hidden from Shortcuts
 ├── QuizActivityAttributes.swift  # ActivityKit model for the quiz Live Activity
+├── ReviewSchedule.swift        # The review card's Leitner ladder (1, 3, 7, 14, 30 days): a box and a due date at the start of a day
 ├── WidgetConstants.swift       # App-group ID, snapshot filename, storage keys
 ├── WidgetDateHelper.swift      # Pinned Gregorian calendar and day-key formatting shared by writer and reader
 ├── WidgetL.swift               # LocalizedStringResource accessors for widget strings (the widget's analogue to L)
@@ -271,9 +274,10 @@ ConjuguerTests/
     ├── QuizScopeTests.swift            # Quiz scopes: the default quiz unchanged, My Verbs drawing only its verbs in Regular's mix, defective verbs, Test Me's three tenses, unranked scoring, doubled entries graded as themselves, source on every quiz signal
     ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle (serialized — mutates Current)
     ├── RelatedVerbsTests.swift         # Base-finding on known and false pairs, nested roots, the card's two relations, doubled roots, and the model page's two orders
+    ├── ReviewScheduleTests.swift       # The review ladder, reveal and dismissal, a lookup restarting it, an older entry with no schedule, the longest-overdue verb, verbs with no key conjugations, doubled entries
     ├── RichTextTests.swift             # Rich-text markup parsing into blocks and segments
     ├── SearchReportTests.swift         # The search tracker's lifecycle, each finishSearch report, and that no parameter can echo the query
-    ├── SettingsTests.swift             # Settings defaults, persistence, and malformed-value handling (serialized)
+    ├── SettingsTests.swift             # Settings defaults (Suppress Review Card off), persistence, and malformed-value handling (serialized)
     ├── TenseTableTests.swift           # The verb page's order, each cell's card, articles, second names, and which pages show the color key
     ├── StemAlterationAuditTests.swift  # Audits every -er verb whose stem ends in é + consonant: the stem must open to è before a mute ending
     ├── VerbDrawTests.swift             # The draw: what counts as irregular, the weights, ten days pinned to a Python reimplementation, My Verbs in turn every third day, weighted and one-in-three proportions with fixed seeds

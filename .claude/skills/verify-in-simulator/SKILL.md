@@ -66,6 +66,11 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `my_verbs_starred_heading`, `my_verbs_recent_heading` | Section headings in My Verbs | |
 | `my_verbs_clear_recent` | Clear button in My Verbs' Recent heading | Forgets every open, keeps the stars. |
 | `my_verbs_empty` | My Verbs' empty state | |
+| `review_card` | The review card above the verb list (Phase 13) | Present at a launch or a return from the background when a verb is due. To seed one, write the App Group plist's `learnerVerbs` JSON with a `lastOpened` days ago (see the browse plan's Phase 13 note). A tap anywhere reveals; a second tap opens the page. |
+| `review_card_reveal` | The card's "Recall its conjugations, then tap to check." line | Gone once revealed. |
+| `review_card_conjugations` | The card's revealed key conjugations | Tapping it opens the verb's page with `source` `reviewCard`. |
+| `review_card_dismiss` | The card's ✕ | Before a reveal, snoozes the verb to the next day. |
+| `picker_settings_reviewCardSuppression` | Suppress Review Card segmented `Picker` in `SettingsView` (Phase 13) | 2 segments (Off, On). |
 | `model_verb_order` | Alphabetical/Frequency `Picker` above a model page's verbs | 2 segments; the verbs stay one `Text` of links, so tap a verb at its coordinates. |
 
 An identifier on a container that is not itself one element (a card) is inherited by every element

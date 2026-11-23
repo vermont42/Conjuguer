@@ -226,3 +226,53 @@ devient :
 ```
 - Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes ou sur « Mes verbes », ou la page d'un verbe
 ```
+
+## The review card (browse plan, Phase 13, 2026-11-22)
+
+Adds the signals `viewReviewCard`, sent when the review card above the verb list appears, and
+`tapRevealReviewCard`, sent when a tap reveals its conjugations. Neither has parameters, and
+neither names the verb. Phase 13 also began sending the `reviewCard` source for verb pages, which
+the first bullet of the Phase 3 section covers with "for example". The list kept on the device now
+also holds when each verb is due for review. Apply this section after the Phase 10 section, since
+it replaces the bullet about certain in-app actions and the paragraph about the list that Phase 10
+gives. The Suppress Review Card setting sends nothing.
+
+### English
+
+The bullet about certain in-app actions now reads:
+
+```
+- Certain in-app actions, such as opening the game, reshowing the onboarding, opening a tense's article from a verb's page, tapping the button that shares a verb's page, starring a verb or removing its star, or revealing the conjugations on a review card, and whether Game Center sign-in succeeded
+```
+
+A new bullet follows it:
+
+```
+- That a review card, which offers a verb you looked up some days earlier, was shown
+```
+
+The paragraph about the list kept on the device now reads:
+
+```
+The app keeps a list of the verbs you have opened and the verbs you have starred, with when each is next due for review, so that it can show your recent verbs, My Verbs, and review cards. The list stays on your device and is never sent.
+```
+
+### French
+
+Le point sur certaines actions dans l'application devient :
+
+```
+- Certaines actions dans l'application, comme l'ouverture du jeu, le réaffichage de l'introduction, l'ouverture de l'article d'un temps depuis la page d'un verbe, un appui sur le bouton de partage de la page d'un verbe, l'ajout ou le retrait de l'étoile d'un verbe, ou l'affichage des conjugaisons d'une carte de révision, ainsi que la réussite ou l'échec de la connexion à Game Center
+```
+
+Un nouveau point le suit :
+
+```
+- L'affichage d'une carte de révision, qui vous propose un verbe consulté quelques jours plus tôt
+```
+
+Le paragraphe sur la liste conservée sur l'appareil devient :
+
+```
+L'application conserve une liste des verbes que vous avez ouverts et des verbes que vous avez marqués d'une étoile, avec la date à laquelle chacun doit être révisé, afin d'afficher vos verbes récents, « Mes verbes » et les cartes de révision. Cette liste reste sur votre appareil et n'est jamais envoyée.
+```

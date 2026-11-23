@@ -741,6 +741,14 @@ enum L {
       String(localized: "Settings.pronounGenderDescription")
     }
 
+    static var reviewCardSuppression: String {
+      String(localized: "Settings.reviewCardSuppression")
+    }
+
+    static var reviewCardSuppressionDescription: String {
+      String(localized: "Settings.reviewCardSuppressionDescription")
+    }
+
     static var ratingsAndReviews: String {
       String(localized: "Settings.ratingsAndReviews")
     }
@@ -971,6 +979,43 @@ enum L {
 
     static var ridiculousDifficulty: String {
       String(localized: "QuizDifficulty.ridiculousDifficulty")
+    }
+  }
+
+  enum ReviewCardSuppression {
+    static var off: String {
+      String(localized: "ReviewCardSuppression.off")
+    }
+
+    static var on: String {
+      String(localized: "ReviewCardSuppression.on")
+    }
+  }
+
+  enum ReviewCard {
+    static var dismiss: String {
+      String(localized: "ReviewCard.dismiss")
+    }
+
+    // Separate keys for one day and for several, as `VerbBrowse.verbCount(count:)` explains.
+    // English and French agree that two or more days are plural.
+    static func lookedUp(daysAgo: Int?) -> String {
+      guard let daysAgo, daysAgo > 0 else {
+        return String(localized: "ReviewCard.lookedUpEarlier")
+      }
+      if daysAgo == 1 {
+        return String(localized: "ReviewCard.lookedUpYesterday")
+      }
+      let formattedDays = daysAgo.formatted()
+      return String(localized: "ReviewCard.lookedUpDaysAgo", defaultValue: "Looked up \(formattedDays) days ago")
+    }
+
+    static var openHint: String {
+      String(localized: "ReviewCard.openHint")
+    }
+
+    static var prompt: String {
+      String(localized: "ReviewCard.prompt")
     }
   }
 

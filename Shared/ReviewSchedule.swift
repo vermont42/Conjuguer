@@ -1,0 +1,51 @@
+//
+//  ReviewSchedule.swift
+//  Conjuguer
+//
+//  Created by Josh Adams on 11/22/26.
+//
+
+import Foundation
+
+/// When a verb is next due on the review card, and which box of the ladder it is in. This is the
+/// Leitner system at its smallest: a lookup puts a verb in the first box, a review moves it up
+/// one, and a later lookup sends it back to the first. The pedagogy plan's practice record is
+/// meant to take it over, moving verbs on right and wrong answers.
+///
+/// Due dates fall at the start of a day, so a verb looked up late in the evening waits until the
+/// next morning rather than an hour.
+nonisolated struct ReviewSchedule: Codable, Equatable, Sendable {
+  /// Days between reviews, box by box. The last box repeats. Konjugieren's pedagogy report
+  /// proposed these numbers and warned against agonizing over them, since the evidence singles
+  /// out none.
+  static let intervals = [1, 3, 7, 14, 30]
+
+  let box: Int
+  let due: Date
+
+  /// A verb just looked up.
+  static func lookedUp(at date: Date, calendar: Calendar) -> ReviewSchedule {
+    ReviewSchedule(box: 0, due: dueDate(days: intervals[0], after: date, calendar: calendar))
+  }
+
+  func isDue(at date: Date) -> Bool {
+    due <= date
+  }
+
+  /// The learner recalled the verb's conjugations on the card, so it waits longer next time.
+  func reviewed(at date: Date, calendar: Calendar) -> ReviewSchedule {
+    let next = min(max(box + 1, 0), Self.intervals.count - 1)
+    return ReviewSchedule(box: next, due: Self.dueDate(days: Self.intervals[next], after: date, calendar: calendar))
+  }
+
+  /// The card was dismissed before its conjugations were revealed. That is no review, so the
+  /// verb keeps its box and returns tomorrow.
+  func snoozed(at date: Date, calendar: Calendar) -> ReviewSchedule {
+    ReviewSchedule(box: box, due: Self.dueDate(days: 1, after: date, calendar: calendar))
+  }
+
+  private static func dueDate(days: Int, after date: Date, calendar: Calendar) -> Date {
+    let day = calendar.startOfDay(for: date)
+    return calendar.date(byAdding: .day, value: days, to: day) ?? day.addingTimeInterval(Double(days) * 86_400)
+  }
+}

@@ -40,6 +40,15 @@ struct SettingsTests {
     #expect(reloaded.verbSort == .alphabetical, "verbSort must survive a relaunch.")
   }
 
+  @Test func testReviewCardSuppressionDefaultsToOff() {
+    let store = GetterSetterFake()
+
+    let settings = SettingsTests.makeSettings(getterSetter: store)
+
+    #expect(settings.reviewCardSuppression == .off)
+    #expect(store.get(key: Settings.reviewCardSuppressionKey) == "off")
+  }
+
   @Test func testAllPropertiesRoundTrip() {
     let store = GetterSetterFake()
     let date = Date(timeIntervalSince1970: 1_000_000)
@@ -52,6 +61,7 @@ struct SettingsTests {
     settings.pronounGender = .masculine
     settings.promptActionCount = 7
     settings.lastReviewPromptDate = date
+    settings.reviewCardSuppression = .on
 
     let reloaded = SettingsTests.makeSettings(getterSetter: store)
     #expect(reloaded.verbSort == .alphabetical)
@@ -61,5 +71,6 @@ struct SettingsTests {
     #expect(reloaded.pronounGender == .masculine)
     #expect(reloaded.promptActionCount == 7)
     #expect(reloaded.lastReviewPromptDate == date)
+    #expect(reloaded.reviewCardSuppression == .on)
   }
 }

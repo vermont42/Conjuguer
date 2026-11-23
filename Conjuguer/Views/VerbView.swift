@@ -499,7 +499,7 @@ struct VerbView: View {
     world.analytics.signal(name: .viewAppeared, parameters: newVisit.viewParameters)
     // A page that returns after a tab switch, the background, or its own sheet is not a new open.
     if source != .resume {
-      world.learnerVerbs.recordOpen(verb)
+      world.learnerVerbs.recordOpen(verb, source: source)
     }
   }
 

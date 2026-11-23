@@ -39,6 +39,8 @@ enum AnalyticsName: String {
   case tapTenseArticle
   case tapShareVerb
   case tapStarVerb
+  case viewReviewCard
+  case tapRevealReviewCard
 }
 
 /// How the learner reached a verb page or, once the quiz sends it, began a quiz. One vocabulary

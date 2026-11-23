@@ -83,6 +83,14 @@ class Settings {
   static let lastReviewPromptDateKey = "lastReviewPromptDate"
   static let lastReviewPromptDateDefault = Date(timeIntervalSince1970: 0.0)
 
+  var reviewCardSuppression: ReviewCardSuppression = reviewCardSuppressionDefault {
+    didSet {
+      persist(reviewCardSuppression, oldValue: oldValue, key: Settings.reviewCardSuppressionKey)
+    }
+  }
+  static let reviewCardSuppressionKey = "reviewCardSuppression"
+  static let reviewCardSuppressionDefault: ReviewCardSuppression = .off
+
   var appIcon: AppIcon = appIconDefault {
     didSet {
       persist(appIcon, oldValue: oldValue, key: Settings.appIconKey)
@@ -112,6 +120,7 @@ class Settings {
     pronounGender = load(key: Settings.pronounGenderKey, default: Settings.pronounGenderDefault)
     promptActionCount = load(key: Settings.promptActionCountKey, default: Settings.promptActionCountDefault)
     lastReviewPromptDate = load(key: Settings.lastReviewPromptDateKey, default: Settings.lastReviewPromptDateDefault)
+    reviewCardSuppression = load(key: Settings.reviewCardSuppressionKey, default: Settings.reviewCardSuppressionDefault)
     appIcon = load(key: Settings.appIconKey, default: Settings.appIconDefault)
     hasSeenOnboarding = load(key: Settings.hasSeenOnboardingKey, default: Settings.hasSeenOnboardingDefault)
   }
@@ -167,6 +176,7 @@ extension ModelSort: SettingValue {}
 extension QuizDifficulty: SettingValue {}
 extension PronounGender: SettingValue {}
 extension AppIcon: SettingValue {}
+extension ReviewCardSuppression: SettingValue {}
 
 extension Int: SettingValue {
   var settingString: String {

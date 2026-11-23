@@ -133,6 +133,7 @@ tried with VoiceOver running.
 | `VerbView` (share button, Phase 8) | A toolbar `Button` whose `Label` reads "Share" ("Partager") |
 | `VerbView` (star, Phase 10) | A toolbar `Button` whose `Label` reads "Add to My Verbs" or "Remove from My Verbs" ("Ajouter à Mes verbes", "Retirer de Mes verbes"), so its label says what a tap will do |
 | `VerbBrowseView` (recents and My Verbs, Phase 10) | The same `BrowseRow` in a `Button` as the list; the recents' "Recent" heading and My Verbs' "Starred" and "Recent" headings carry the header trait; a My Verbs row's swipe action is labeled "Delete" ("Supprimer") |
+| `VerbBrowseView` (review card, Phase 13) | The verb-row pattern above: the infinitive (French) and the gloss (English) are separate elements, each a button with the card's action; then the prompt in the interface's language or, once revealed, the key conjugations, marked French, read lowercased and joined by semicolons, with the hint "Opens the verb’s page." The redacted placeholder is hidden, and ✕ is labeled "Dismiss" ("Fermer"). Not tried with VoiceOver |
 | `VerbView` (gloss) | `.englishPronunciation()` |
 | `VerbView` (model row) | A `Button` whose label is marked French, with a hint that it opens the model |
 | `VerbView` (color key) | Each swatch combined into one element. The dismiss button is labeled |

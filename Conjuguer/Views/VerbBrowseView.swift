@@ -25,6 +25,9 @@ struct VerbBrowseView: View {
   @State private var searchIsEngaged = false
   @State private var searchFocusLostAt: Date?
   @State private var verbToUnstar: Verb?
+  @State private var reviewCard: ReviewCardState?
+  @State private var reviewCardIsChosen = false
+  @State private var appWasInBackground = false
   @FocusState private var searchIsFocused: Bool
   private let tryQuizTip = TryQuizTip()
 
@@ -81,6 +84,23 @@ struct VerbBrowseView: View {
 
           TipView(tryQuizTip)
 
+          if let reviewCard, showsReviewCard {
+            ReviewCardView(
+              verb: reviewCard.verb,
+              daysSinceLookup: reviewCard.daysSinceLookup,
+              isRevealed: reviewCard.isRevealed,
+              reveal: revealReviewCard,
+              open: openReviewCard,
+              dismiss: dismissReviewCard
+            )
+            .frame(maxWidth: horizontalSizeClass == .regular ? Self.reviewCardMaxWidth : .infinity)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .transition(.opacity)
+            .onAppear {
+              signalReviewCardShown()
+            }
+          }
+
           // My Verbs is a List of its own, because only a List's rows can be swiped to delete.
           if showsMyVerbs {
             myVerbsList
@@ -116,8 +136,22 @@ struct VerbBrowseView: View {
       }
     }
     .onChange(of: scenePhase) {
-      if scenePhase == .background, let search = searchTracker.finish() {
-        signalEndedSearch(search)
+      switch scenePhase {
+      case .background:
+        appWasInBackground = true
+        if let search = searchTracker.finish() {
+          signalEndedSearch(search)
+        }
+      case .active where appWasInBackground:
+        appWasInBackground = false
+        chooseReviewCard()
+      default:
+        break
+      }
+    }
+    .onChange(of: world.settings.reviewCardSuppression) {
+      if world.settings.reviewCardSuppression == .off, reviewCard == nil {
+        chooseReviewCard()
       }
     }
     .onChange(of: searchIsFocused) {
@@ -152,6 +186,9 @@ struct VerbBrowseView: View {
     .recordsAppearance(as: "\(VerbBrowseView.self)")
     .onAppear {
       world.reviewPrompter.promptableActionHappened()
+      if !reviewCardIsChosen {
+        chooseReviewCard()
+      }
       openRequestedSearch()
     }
     .task {
@@ -273,6 +310,65 @@ struct VerbBrowseView: View {
 
   private var showsMyVerbs: Bool {
     myVerbsIsChosen && !isSearching && !showsRecents
+  }
+
+  private var showsReviewCard: Bool {
+    world.settings.reviewCardSuppression == .off && !isSearching && !showsRecents && !myVerbsIsChosen
+  }
+
+  private static let reviewCardMaxWidth: CGFloat = 560
+
+  /// Each launch, and each return from the background, offers the verb longest overdue, if any.
+  /// The choice is made once per opening, so revealing a card does not swap it for the next one.
+  private func chooseReviewCard() {
+    reviewCardIsChosen = true
+    guard world.settings.reviewCardSuppression == .off else {
+      reviewCard = nil
+      return
+    }
+    reviewCard = world.learnerVerbs.verbDueForReview().map { verb in
+      ReviewCardState(verb: verb, daysSinceLookup: world.learnerVerbs.daysSinceOpened(verb))
+    }
+  }
+
+  private func signalReviewCardShown() {
+    guard reviewCard?.wasSignaled == false else {
+      return
+    }
+    reviewCard?.wasSignaled = true
+    world.analytics.signal(name: .viewReviewCard)
+  }
+
+  private func revealReviewCard() {
+    guard let reviewCard, !reviewCard.isRevealed else {
+      return
+    }
+    world.learnerVerbs.recordReview(reviewCard.verb)
+    world.analytics.signal(name: .tapRevealReviewCard)
+    withAnimation {
+      self.reviewCard?.isRevealed = true
+    }
+  }
+
+  private func openReviewCard() {
+    guard let reviewCard else {
+      return
+    }
+    path.append(VerbDestination(verb: reviewCard.verb, source: .reviewCard))
+  }
+
+  /// A card dismissed before its conjugations were seen was no review, so its verb returns
+  /// tomorrow in the same box.
+  private func dismissReviewCard() {
+    guard let reviewCard else {
+      return
+    }
+    if !reviewCard.isRevealed {
+      world.learnerVerbs.snoozeReview(reviewCard.verb)
+    }
+    withAnimation {
+      self.reviewCard = nil
+    }
   }
 
   private var displayedVerbs: [Verb] {
@@ -601,6 +697,13 @@ struct VerbBrowseView: View {
       searchIsFocused = wantsKeyboard
     }
   }
+}
+
+private struct ReviewCardState {
+  let verb: Verb
+  let daysSinceLookup: Int?
+  var isRevealed = false
+  var wasSignaled = false
 }
 
 enum VerbBrowse {
