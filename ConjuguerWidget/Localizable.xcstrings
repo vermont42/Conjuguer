@@ -147,7 +147,7 @@
           "stringUnit" : { "state" : "translated", "value" : "Correct!" }
         },
         "fr" : {
-          "stringUnit" : { "state" : "translated", "value" : "Correct !" }
+          "stringUnit" : { "state" : "translated", "value" : "Correct !" }
         }
       }
     },

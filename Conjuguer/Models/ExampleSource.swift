@@ -57,15 +57,15 @@ enum ExampleSource: Hashable {
   var attribution: String {
     switch self {
     case .proust:
-      return "— Marcel Proust, « Du côté de chez Swann » (1913)"
+      return "— Marcel Proust, «\u{202F}Du côté de chez Swann\u{202F}» (1913)"
     case .zola:
-      return "— Émile Zola, « L’Assommoir » (1877)"
+      return "— Émile Zola, «\u{202F}L’Assommoir\u{202F}» (1877)"
     case .flaubert:
-      return "— Gustave Flaubert, « Madame Bovary » (1857)"
+      return "— Gustave Flaubert, «\u{202F}Madame Bovary\u{202F}» (1857)"
     case .laFontaine:
-      return "— Jean de La Fontaine, « Fables » (1668–1694)"
+      return "— Jean de La Fontaine, «\u{202F}Fables\u{202F}» (1668–1694)"
     case .moliere:
-      return "— Molière, « Œuvres complètes » (1659–1673)"
+      return "— Molière, «\u{202F}Œuvres complètes\u{202F}» (1659–1673)"
     case .swissPublic:
       return L.VerbView.sourceSwissPublic
     case .frenchGov:
@@ -97,7 +97,7 @@ enum ExampleSource: Hashable {
   private static func citation(author: String, title: String?, year: String?) -> String {
     var parts = [author]
     if let title {
-      parts.append(title.contains("«") ? title : "« \(title) »")
+      parts.append(title.contains("«") ? title : "«\u{202F}\(title)\u{202F}»")
     }
     let citation = parts.joined(separator: ", ")
     guard let year else {

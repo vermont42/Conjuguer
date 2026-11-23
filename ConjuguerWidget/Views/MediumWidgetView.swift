@@ -35,7 +35,7 @@ struct MediumWidgetView: View {
       Spacer(minLength: 0)
 
       HStack(spacing: 3) {
-        Text(verbatim: "pp :")
+        Text(verbatim: "pp\u{202F}:")
           .foregroundStyle(.secondary)
         Text(mixedCase: snapshot.participePassé)
           .fontWeight(.medium)

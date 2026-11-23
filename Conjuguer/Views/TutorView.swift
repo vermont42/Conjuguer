@@ -44,21 +44,21 @@ struct TutorView: View {
 
   private static let frenchSuggestions = [
     "Conjuguez parler au présent.",
-    "Quel est le passé composé d\u{2019}aller ?",
-    "Quel est le participe passé de prendre ?",
+    "Quel est le passé composé d\u{2019}aller\u{202F}?",
+    "Quel est le participe passé de prendre\u{202F}?",
     "Conjuguez finir au futur simple.",
-    "Quel est l\u{2019}impératif d\u{2019}être ?",
-    "Comment dit-on « j\u{2019}aurais parlé » en français ?",
-    "Quel est le subjonctif présent de faire ?",
+    "Quel est l\u{2019}impératif d\u{2019}être\u{202F}?",
+    "Comment dit-on «\u{202F}j\u{2019}aurais parlé\u{202F}» en français\u{202F}?",
+    "Quel est le subjonctif présent de faire\u{202F}?",
     "Conjuguez venir à l\u{2019}imparfait.",
-    "Comment dit-on « nous avions fini » en français ?",
-    "Quel est le conditionnel présent de pouvoir ?",
+    "Comment dit-on «\u{202F}nous avions fini\u{202F}» en français\u{202F}?",
+    "Quel est le conditionnel présent de pouvoir\u{202F}?",
     "Conjuguez prendre au passé composé.",
-    "Quelles sont toutes les conjugaisons d\u{2019}avoir au présent ?",
-    "Comment conjugue-t-on vouloir au passé simple ?",
-    "Quel est le futur simple de voir ?",
+    "Quelles sont toutes les conjugaisons d\u{2019}avoir au présent\u{202F}?",
+    "Comment conjugue-t-on vouloir au passé simple\u{202F}?",
+    "Quel est le futur simple de voir\u{202F}?",
     "Conjuguez mettre au plus-que-parfait.",
-    "Comment dit-on « ils chanteraient » en français ?"
+    "Comment dit-on «\u{202F}ils chanteraient\u{202F}» en français\u{202F}?"
   ]
 
   private static var suggestions: [String] {

@@ -24,7 +24,7 @@ struct ExampleSourceTests {
 
   @Test func testWiktionnaireAttributionCarriesTheCitation() {
     let attribution = ExampleSource(rawSource: "wiktionnaire|Honoré de Balzac|Le Père Goriot|1835").attribution
-    #expect(attribution.contains("Honoré de Balzac, « Le Père Goriot » (1835)"))
+    #expect(attribution.contains("Honoré de Balzac, «\u{202F}Le Père Goriot\u{202F}» (1835)"))
   }
 
   @Test func testTitleWithItsOwnGuillemetsIsNotWrappedAgain() {

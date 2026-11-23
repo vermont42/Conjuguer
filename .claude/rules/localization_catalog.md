@@ -58,6 +58,21 @@ fine; the only cost is a small one-key formatting delta the IDE may later
 canonicalize. Don't hand-fight it. To stay perfectly canonical, emit
 `"key" : {` (space before colon) in inserted blocks, or let Xcode re-save once.
 
+## French Punctuation
+
+A French value puts a narrow no-break space (U+202F) before `:`, `;`, `!`, and `?`, and inside
+guillemets: `Score : %lld`, `Presque ! Encore un essai.`, `« parler »`, each of those spaces being
+U+202F. Josh chose the narrow space for the colon too on 2026-11-23, and both catalogs were swept
+to it. A no-break space also keeps the mark from wrapping onto a line of its own. Type it in
+Python as `"\u202f"` and in Swift as `\u{202F}`; the Edit tool cannot show it apart from a space.
+French typeset in Swift literals, such as `ExampleSource`'s attributions and the tutor's French
+suggestions, follows the same rule.
+
+Leave alone: English values, times (`1:23`), URLs, the irregularity notation in
+`Info.irregularitiesText` (`r1s, r2s: 1, 1, UX*`), and English quoted verbatim inside French
+text, such as the music's license notice in `Info.creditsText` and the `[;]` of a translated
+quotation.
+
 ## Searching Within Localizable.xcstrings
 
 Each localization value in `Localizable.xcstrings` occupies a single very long JSON line. Grep matches against these lines are truncated to `[Omitted long matching line]`, making Grep results useless for inspecting content. Instead:

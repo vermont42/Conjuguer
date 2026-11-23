@@ -24,7 +24,7 @@ struct LargeWidgetView: View {
       }
 
       HStack(spacing: 4) {
-        Text(verbatim: "pp :")
+        Text(verbatim: "pp\u{202F}:")
         Text(mixedCase: snapshot.participePassé)
           .fontWeight(.medium)
       }

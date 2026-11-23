@@ -5536,3 +5536,28 @@ Activity timer counts from a start date. At each update the start date now moves
 time the clock stood still, so the Lock Screen jumps back at Continue. Walking eight fixture
 answers on the simulator took about two minutes and the results said 0:38, which is the point of
 the change. Josh has still to judge the layout on his phone.
+
+## A Narrow Space Before French Punctuation (2026-11-23)
+
+French typesetting puts a thin space before the colon, the semicolon, the exclamation mark, and the
+question mark, and inside guillemets. Conjuguer's French strings did all of this and none of it.
+Before one of those marks, the catalog held about 340 ordinary spaces, which can break a line and
+leave a lone "?" at the start of the next, about 180 no-break spaces, 12 narrow ones, and about 50
+marks with no space at all, mostly the short labels of the quiz ("Score: 12", "Votre réponse:").
+Pedagogy Phase 4's new strings first matched those labels. Josh then chose the careful form: a
+narrow no-break space, U+202F, before every one of the four marks and inside « », the colon
+included, though tradition gives the colon a full-width space.
+
+A script rewrote the French values of both catalogs in place, so that Xcode's formatting survived,
+and checked that no English value moved. 78 values changed. In the long Info articles nearly every
+change swapped one space for another; the short labels gained the space they lacked. A review of every context turned up
+four kinds of colon that are not French punctuation and stayed as they were: times, URLs, the
+irregularity notation of the Info article on irregularities (r1s, r2s: 1, 1, UX*), which is the
+same in both languages, and the English license notice the music's attribution quotes verbatim.
+So did a bracketed semicolon inside the English translation of a Proust sentence. French typeset in
+Swift got the same treatment: the literature attributions' guillemets, the widgets' "pp :", and the
+tutor's French suggestions. The tutor's system prompt did not, since the model reads it and no one
+sees it. The rule now sits in the catalog rules, so new strings follow it.
+
+The data pipelines' French was left alone for now: the etymologies, the literature and *Chanson de
+Roland* examples, and the Wiktionnaire titles that come with their own guillemets.
