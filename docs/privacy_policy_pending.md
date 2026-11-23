@@ -489,3 +489,46 @@ Le point sur les événements du cycle de vie d'un quiz devient :
 ```
 - Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes, sur « Mes verbes » ou sur mesure, la page d'un verbe ou une collection, avec le nom de la collection pour les quatre collections mises en avant (la collection d'un modèle est désignée seulement comme celle d'un modèle) ; pour un quiz sur mesure, si vous avez choisi des temps, des verbes ou les deux, mais pas lesquels
 ```
+
+## Practice sets (pedagogy plan, Phase 10, 2026-11-23)
+
+A custom quiz can be shared as a practice set, through a `conjuguer://` link or a QR code made on
+the device. Adds `tapSharePracticeSet` (`method`, `link` or `qrCode`, and `customChoice`),
+`viewPracticeSet` (`source`, and `outcome`, `opened` or `invalid`), and `tapKeepPracticeSet`, and
+the `source` value `qrCode` (with `sharedLink` and `deeplink`) on the quiz signals of a practice
+set's quiz. None names a tense or a verb. The link itself carries the set's tenses and verbs from
+one device to another, but it travels only where the learner sends it, never to the developer. This
+section replaces the quiz bullet that the custom quiz's section above gives, so apply it after that
+one.
+
+### English
+
+The bullet on quiz lifecycle events now reads:
+
+```
+- Quiz lifecycle events (starting, quitting, or completing a quiz), and where the quiz began: the Quiz tab, over every verb, over My Verbs, or over a custom choice, a verb's page, a collection, or a practice set opened from a shared link or a QR code, with which collection for the four featured ones (a model's collection is named only as a model); for a custom quiz or a practice set, whether it chose tenses, verbs, or both, but not which
+```
+
+New bullets for the list in section 2, after that one:
+
+```
+- When you share your custom quiz as a practice set: whether as a link or as a QR code, and whether it chose tenses, verbs, or both, but not which
+- When you open a practice set: whether it came from a shared link or a QR code, and whether the app could read it
+- When you keep a practice set as your custom quiz
+```
+
+### French
+
+Le point sur les événements du cycle de vie d'un quiz devient :
+
+```
+- Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes, sur « Mes verbes » ou sur mesure, la page d'un verbe, une collection ou une série d'exercices ouverte depuis un lien partagé ou un code QR, avec le nom de la collection pour les quatre collections mises en avant (la collection d'un modèle est désignée seulement comme celle d'un modèle) ; pour un quiz sur mesure ou une série d'exercices, s'il porte sur des temps, des verbes ou les deux, mais pas lesquels
+```
+
+Nouveaux points pour la liste de la section 2, après celui-ci :
+
+```
+- Le partage de votre quiz sur mesure comme série d'exercices : sous forme de lien ou de code QR, et s'il porte sur des temps, des verbes ou les deux, mais pas lesquels
+- L'ouverture d'une série d'exercices : si elle vient d'un lien partagé ou d'un code QR, et si l'application a pu la lire
+- Le fait de garder une série d'exercices comme votre quiz sur mesure
+```

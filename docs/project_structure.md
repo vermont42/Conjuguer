@@ -97,6 +97,7 @@ Conjuguer/
 │   ├── QuizClock.swift         # Setting enum: the Quiz Clock, hide (default) or show
 │   ├── CustomQuiz.swift        # The custom quiz: chosen tenses and a QuizVerbSet (a band, every verb, My Verbs, a collection or model), its stored form, QuizScope.custom
 │   ├── QuizDraw.swift          # The verbs of an unlisted quiz (the default, or a custom quiz over a band) from a band: half irregular, two core verbs, one to three rare derivatives; QuizVerbPool (a tense's kinds of verb, read from the data) and QuizVerbTraits
+│   ├── PracticeSet.swift       # A custom quiz shared as a quiz/set link or QR code: reading and writing the link, the level carried only when needed, My Verbs as a list of 50, its scope, summary, share text, and PracticeSetRequest
 │   ├── QuizScope.swift         # What a quiz asks about (every verb, My Verbs, one verb's page, a collection, a custom choice), its count and source; the level's mix over chosen verbs, Test Me's three tenses, Verb.hasCell, canBeQuizzed(at:)
 │   ├── QuizLevel.swift         # Setting enum: the four quiz levels (Beginner to Advanced) and the tenses each asks; QuizTenseSlot, a tense's cells, weight, and verb pools; each level's frequency band
 │   ├── QuizQuestion.swift      # One quiz question (verb + tense), and whether it is a missed question asked again
@@ -167,6 +168,7 @@ Conjuguer/
 │   ├── ReviewPrompterReal.swift   # Prompts at an action-count modulo and a minimum interval
 │   ├── Settings.swift          # @Observable user preferences persisted through GetterSetter
 │   ├── SeededRandomNumberGenerator.swift  # SplitMix64, so tests can check random draws with a fixed seed
+│   ├── QRCode.swift            # QR codes made on the device with Core Image, black on white, medium error correction
 │   ├── ShareSheet.swift        # Presents UIActivityViewController with an LPLinkMetadata header, anchored on iPad to a bar button or a rect in the page (ShareLink reports no tap)
 │   ├── SoundPlayer.swift       # Protocol for audio playback
 │   ├── SoundPlayerDummy.swift  # No-op double
@@ -189,7 +191,7 @@ Conjuguer/
     ├── BrowseLayout.swift      # Shared adaptive grid columns and search-field placement (a fixed bar on iPad and Mac) for the browse views
     ├── BrowseRow.swift         # Shared row/cell used by both browse views, with optional badge, a looked-up check, and a French or English subtitle
     ├── BrowseSearch.swift      # Shared search plumbing for the browse views: all items for a blank query, the trombone for none
-    ├── CustomQuizView.swift    # The custom quiz's editor (tenses and a verb set, each tap kept at once) and its list of models, pushed onto the Quiz tab
+    ├── CustomQuizView.swift    # The custom quiz's editor (tenses and a verb set, each tap kept at once), its list of models, pushed onto the Quiz tab, and the summary card the tab and a practice set share
     ├── FailedVerbSearchView.swift # The verb list's empty state: no results, a guess at the verb meant, and the email-us line
     ├── FrenchLetterKeyRow.swift   # é è ê â î ô û ç keys that replace the sort picker while a search field is focused, and sit above the keyboard for the quiz's answer field
     ├── GameCenterAuthView.swift   # UIViewController shim + coordinator for presenting Game Center auth
@@ -198,14 +200,15 @@ Conjuguer/
     ├── InfoView.swift          # A single Info article rendered through RichTextView; an optional openLink keeps its links inside a verb page's article sheet
     ├── InputView.swift         # DEBUG-only conjugation scratchpad
     ├── LoadingView.swift       # Splash shown while verbs.xml parses
-    ├── MainTabView.swift       # Root TabView with five tabs
+    ├── MainTabView.swift       # Root TabView with five tabs; presents a practice set's sheet over any tab
     ├── ModelBrowseView.swift   # Searchable, sortable list/grid of verb models, led by the featured collections
     ├── ModelView.swift         # Model detail: endings, stem alterations, and the verbs, alphabetically or by frequency, with the model's collection bar
     ├── OnboardingView.swift    # Multi-page welcome tour; auto-presented on first launch and re-showable from Settings
+    ├── PracticeSetView.swift   # A shared practice set's sheet (its summary, verbs, Start, and Keep as My Custom Quiz, or Not Found) and the full-screen QR view
     ├── QuizCorrectionView.swift # A wrong answer held on its question: the two answers with their differing letters marked, links to the verb and its model, and Continue
     ├── QuizResultsView.swift   # End-of-quiz sheet: score, correct and second-try counts, per-question results, leaderboard
     ├── QuizResultView.swift    # One row of the results sheet, with a slip's first attempt
-    ├── QuizView.swift          # Quiz gameplay: prompt, answer field framed by its pronoun with the accent keys, progress, feedback and the app's spelling of a variant, the held correction and the pages it pushes; the All Verbs / My Verbs / Custom picker and the custom quiz's summary; QuizSheet, for Test Me on a verb page and a collection's quiz
+    ├── QuizView.swift          # Quiz gameplay: prompt, answer field framed by its pronoun with the accent keys, progress, feedback and the app's spelling of a variant, the held correction and the pages it pushes; the All Verbs / My Verbs / Custom picker and the custom quiz's summary and its Share menu (a link or a QR code); QuizSheet, for Test Me on a verb page and a collection's quiz
     ├── RelatedVerbsView.swift  # The verb page's Related Verbs card (built on the same root, same model), RelatedVerbListView, and FlowLayout
     ├── ReviewCardView.swift    # The review card above the verb list: a verb looked up days ago, its key conjugations hidden until a tap, a second tap opening its page
     ├── RichTextView.swift      # Renders [RichTextBlock] with subheadings, emphasis, color-coding, links
@@ -295,6 +298,7 @@ ConjuguerTests/
     ├── QuizLeaderboardTests.swift      # Leaderboards by level: each level's permanent ID, a ranked session reporting to the level it began at, second attempts counted and re-asks not, Ten More and scoped quizzes reporting nothing (nested in QuizTests to share its serialization)
     ├── QuizLevelTests.swift            # Quiz levels: each level's tenses, the weights, every cell in one slot, the default quiz's draw by level, pool, and weight, and the level on the quiz signals
     ├── QuizSessionTests.swift          # Rounds and re-asks: where a miss returns, once; a re-ask's half points; Ten More's continuation, clock, and fresh verbs; first-round ranking; the signals' question counts and duration bands; the abandonment record; the clock setting and the Live Activity's time (serialized — mutates Current)
+    ├── PracticeSetTests.swift          # Practice sets: the pinned link, every tense, verb set, level, and list round-tripped, links that name nothing, what a link keeps, My Verbs as a capped list, the level carried only when needed, the scope, the share text, QR codes read back by Core Image; nested in DeeplinkTests, the quiz/set route; in QuizTests, a session at the set's level
     ├── QuizScopeTests.swift            # Quiz scopes: the default quiz at the learner's level, My Verbs drawing only its verbs at each level, defective verbs, Test Me's three tenses, unranked scoring, doubled entries graded as themselves, source on every quiz signal
     ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle; seeded quizzes that never ask a defective cell; the recorded spelling of a variant; the held correction, its stopped clock, and Continue; a slip's one more try, its half points, and its running clock (serialized — mutates Current)
     ├── RelatedVerbsTests.swift         # Base-finding on known and false pairs, nested roots, the card's two relations, doubled roots, and the model page's two orders

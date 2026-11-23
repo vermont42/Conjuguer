@@ -56,11 +56,14 @@ struct CustomQuiz: Equatable {
 
   static let tensesQueryName = "tenses"
   static let verbsQueryName = "verbs"
+  static let verbListQueryName = "infinitives"
 }
 
 /// Stored as `tenses=indicatif_present,imperatif&verbs=etre`. The keys are permanent, since the
-/// choice is kept between launches and can travel in a link. A key that no longer names anything
-/// is dropped rather than failing the whole choice.
+/// choice is kept between launches and can travel in a link. A list of verbs, which a shared My
+/// Verbs becomes, travels as `infinitives=parler,ha%C3%AFr%20France` in place of `verbs`, each a
+/// `Verb.verbs` key. A key that no longer names anything is dropped rather than failing the whole
+/// choice.
 extension CustomQuiz: RawRepresentable {
   init?(rawValue: String) {
     var components = URLComponents()
@@ -68,7 +71,11 @@ extension CustomQuiz: RawRepresentable {
     let items = components.queryItems ?? []
     let tenseKeys = items.first { $0.name == Self.tensesQueryName }?.value?.split(separator: ",").map(String.init) ?? []
     tenses = Set(tenseKeys.compactMap(QuizTenseSlot.init(key:)))
-    verbSet = items.first { $0.name == Self.verbsQueryName }?.value.flatMap(QuizVerbSet.init(key:))
+    if let key = items.first(where: { $0.name == Self.verbsQueryName })?.value {
+      verbSet = QuizVerbSet(key: key)
+    } else if let list = items.first(where: { $0.name == Self.verbListQueryName })?.value {
+      verbSet = QuizVerbSet(verbKeys: list.split(separator: ",").map(String.init))
+    }
   }
 
   var rawValue: String {
@@ -76,7 +83,9 @@ extension CustomQuiz: RawRepresentable {
     if !tenses.isEmpty {
       items.append(URLQueryItem(name: Self.tensesQueryName, value: orderedTenses.map(\.key).joined(separator: ",")))
     }
-    if let verbSet {
+    if case .list(let verbKeys) = verbSet {
+      items.append(URLQueryItem(name: Self.verbListQueryName, value: verbKeys.joined(separator: ",")))
+    } else if let verbSet {
       items.append(URLQueryItem(name: Self.verbsQueryName, value: verbSet.key))
     }
     var components = URLComponents()
@@ -111,6 +120,8 @@ enum QuizVerbSet: Hashable {
   case all
   case band(FrequencyBand)
   case collection(VerbCollection)
+  /// `Verb.verbs` keys, in the sharer's order, as a practice set carries a shared My Verbs.
+  case list([String])
   case myVerbs
 
   /// The bands and every verb are chosen for their size, not their verbs, so their questions are
@@ -119,7 +130,7 @@ enum QuizVerbSet: Hashable {
     switch self {
     case .all, .band:
       return true
-    case .collection, .myVerbs:
+    case .collection, .list, .myVerbs:
       return false
     }
   }
@@ -154,9 +165,22 @@ enum QuizVerbSet: Hashable {
       return Self.bandKey(band)
     case .collection(let collection):
       return collection.key
+    case .list:
+      return Self.listKey
     case .myVerbs:
       return Self.myVerbsKey
     }
+  }
+
+  /// Repeats are dropped, and a list left empty is no list. Unknown keys are kept, since settings
+  /// load before the verbs are parsed; a key that names no verb asks nothing.
+  init?(verbKeys: [String]) {
+    var seen = Set<String>()
+    let keys = verbKeys.filter { !$0.isEmpty && seen.insert($0).inserted }
+    guard !keys.isEmpty else {
+      return nil
+    }
+    self = .list(keys)
   }
 
   /// The top-100 collection and the top-100 band hold the same verbs under the same key, which
@@ -190,6 +214,8 @@ enum QuizVerbSet: Hashable {
       return nil
     case .collection(let collection):
       return collection.verbs
+    case .list(let verbKeys):
+      return verbKeys.compactMap { Verb.verbs[$0] }
     case .myVerbs:
       return myVerbs
     }
@@ -205,18 +231,29 @@ enum QuizVerbSet: Hashable {
       return L.CustomQuiz.band(band.rankLimit.formatted())
     case .collection(let collection):
       return collection.title
+    case .list:
+      return L.CustomQuiz.verbList(count: listedVerbs(myVerbs: [])?.count ?? 0)
     case .myVerbs:
       return L.MyVerbs.title
     }
   }
 
-  // Semantic ordering: the narrowest band first, then every verb, then the lists.
-  static func editorChoices(showsMyVerbs: Bool) -> [QuizVerbSet] {
-    FrequencyBand.allCases.map(QuizVerbSet.band)
+  // Semantic ordering: the narrowest band first, then every verb, then the lists. A kept practice
+  // set's list is offered only while it is the choice, since nothing in the editor can build one.
+  static func editorChoices(showsMyVerbs: Bool, current: QuizVerbSet? = nil) -> [QuizVerbSet] {
+    var keptList: [QuizVerbSet] = []
+    if case .list = current, let current {
+      keptList = [current]
+    }
+    return FrequencyBand.allCases.map(QuizVerbSet.band)
       + [.all]
       + (showsMyVerbs ? [.myVerbs] : [])
+      + keptList
       + VerbCollection.featured.filter { $0 != .top100 }.map(QuizVerbSet.collection)
   }
+
+  /// What `key` says of a list, whose verbs travel apart from it. It reads back as nothing.
+  static let listKey = "list"
 
   private static let allKey = "all"
   private static let myVerbsKey = "myVerbs"

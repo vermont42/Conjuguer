@@ -71,7 +71,7 @@ struct CustomQuizEditor: View {
       }
       .accessibilityIdentifier("custom_quiz_verbs_by_level")
 
-      ForEach(QuizVerbSet.editorChoices(showsMyVerbs: !myVerbs.isEmpty || custom.verbSet == .myVerbs), id: \.self) { verbSet in
+      ForEach(QuizVerbSet.editorChoices(showsMyVerbs: !myVerbs.isEmpty || custom.verbSet == .myVerbs, current: custom.verbSet), id: \.self) { verbSet in
         Divider()
         CustomQuizChoiceRow(title: verbSet.title, detail: detail(of: verbSet), isSelected: custom.verbSet == verbSet) {
           world.settings.customQuiz.verbSet = verbSet
@@ -121,8 +121,14 @@ struct CustomQuizEditor: View {
       return L.VerbBrowseView.verbCount(count: myVerbs.count)
     case .collection(let collection):
       return L.VerbBrowseView.verbCount(count: collection.verbs.count)
+    case .list:
+      let verbs = verbSet.listedVerbs(myVerbs: []) ?? []
+      let shown = verbs.prefix(Self.listPreviewCount).map(\.infinitifWithPossibleExtraLetters)
+      return shown.joined(separator: ", ") + (verbs.count > shown.count ? ", …" : "")
     }
   }
+
+  private static let listPreviewCount = 6
 }
 
 /// The verb models, one of which a custom quiz may ask. Choosing one returns to the choice.
@@ -237,5 +243,49 @@ extension CustomQuiz {
   @MainActor static func levelVerbsDescription(_ level: QuizLevel) -> String {
     let verbs = level.band.map { QuizVerbSet.band($0).title } ?? QuizVerbSet.all.title
     return L.CustomQuiz.levelVerbs(level: level.localizedName, verbs: verbs)
+  }
+}
+
+/// What a custom quiz or a practice set asks: its tenses and its verbs, each the level's when left
+/// unchosen. `byLevel` words that, "Set by Your Level" for the learner's own quiz and "Set by
+/// Level" for a practice set's.
+struct CustomQuizSummaryCard: View {
+  let custom: CustomQuiz
+  let level: QuizLevel
+  let byLevel: (String) -> String
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      row(
+        L.CustomQuiz.tenses,
+        value: custom.tenses.isEmpty ? byLevel(level.localizedName) : custom.orderedTenses.map(\.name).joined(separator: ", "),
+        valueIsFrench: !custom.tenses.isEmpty
+      )
+      row(
+        L.CustomQuiz.verbs,
+        value: custom.verbSet?.title ?? byLevel(CustomQuiz.levelVerbsDescription(level)),
+        valueIsFrench: custom.verbSet?.isModel == true
+      )
+    }
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .padding(Layout.doubleDefaultSpacing)
+    .background(
+      RoundedRectangle(cornerRadius: 12, style: .continuous)
+        .fill(Color.customForeground.opacity(0.06))
+    )
+    .accessibilityElement(children: .combine)
+  }
+
+  private func row(_ label: String, value: String, valueIsFrench: Bool) -> some View {
+    VStack(alignment: .leading, spacing: 2) {
+      Text(label)
+        .font(captionFont.smallCaps())
+        .foregroundStyle(Color.customGray)
+      Text(value)
+        .font(captionFont)
+        .foregroundStyle(Color.customForeground)
+        .fixedSize(horizontal: false, vertical: true)
+        .frenchPronunciation(forReal: valueIsFrench)
+    }
   }
 }

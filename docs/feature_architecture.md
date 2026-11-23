@@ -508,7 +508,8 @@ same.
 | `verbPage` | Yes | The quiz signals only: Test Me on a verb page |
 | `reviewCard` | Yes | The review card, tapped after its conjugations are revealed |
 | `list` | Yes | A verb on a featured collection's page; for the quiz signals, a collection's quiz |
-| `sharedLink` | Yes | `viewCollection` only: a collection opened from a shared `list/` link |
+| `sharedLink` | Yes | `viewCollection`: a collection opened from a shared `list/` link. `viewPracticeSet` and the quiz signals: a practice set opened from shared text (§ Practice Sets) |
+| `qrCode` | Yes | `viewPracticeSet` and the quiz signals: a practice set opened from its QR code |
 | `quizCorrection` | Yes | The verb link in a quiz's held correction (§ Quiz) |
 | `custom` | Yes | The quiz signals only: a custom quiz from the Quiz tab (§ The Custom Quiz) |
 
@@ -549,12 +550,12 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
   every other route takes exactly one (`URL.hasDeeplinkTarget`); a link that breaks this is ignored.
 - **Text travels in query items, never in the path**, because it can hold spaces, apostrophes, and
   slashes ("j'ai mangé"). Query items modify a route; unknown ones are ignored.
-- **`source`** may follow any route that leads to a verb page, a search, a collection, or a quiz,
-  though the `quiz` route does not read it yet.
+- **`source`** may follow any route that leads to a verb page, a search, a collection, or a quiz.
+  The `quiz` route reads it only for a practice set (`quiz/set`).
   It names the surface that built the link, from `AnalyticsSource`, because a widget or an intent
   can hand the app nothing but a URL. A missing or unknown value counts as `deeplink`.
 - **Builders, not literals.** App code builds links with `URL.verbDeeplink`, `URL.searchDeeplink`,
-  `URL.infoDeeplink`, `URL.modelDeeplink`, and `URL.listDeeplink`, which percent-encode. Only the widget extension and
+  `URL.infoDeeplink`, `URL.modelDeeplink`, `URL.listDeeplink`, and `URL.practiceSetDeeplink`, which percent-encode. Only the widget extension and
   `Shared/`, which cannot see `AnalyticsSource`, write literals (`WidgetDeeplink.verb(_:)`, the
   pending links of `OpenQuizIntent`, `OpenRandomVerbIntent`, `OpenRandomVerbControlIntent`, and
   `OpenVerbSearchIntent`), and `DeeplinkTests` pins each literal's source to the vocabulary.
@@ -565,7 +566,7 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
 | `search` | None | `q`, the text; `source` | The verb list with its search field, any verb page closed. With text, the results show with the keyboard down; with none (or `q` empty), the field is cleared and focused for typing | No |
 | `model` | A model's identifier (`1-1`) | `source`, which a shared model sends as `sharedLink` and nothing reads yet | The model page as a sheet over the Models tab | Yes; `source` is unreleased |
 | `info` | A stable key (`futur_simple`), or a legacy position (`info/0`) | None | The article as a sheet over the Info tab. An unknown key or out-of-range position does nothing | Yes; keys are unreleased |
-| `quiz` | Anything (`OpenQuizIntent` sends `quiz/start`) | None read yet | The Quiz tab, starting a quiz unless one is in progress | Yes |
+| `quiz` | `set`, a practice set; anything else (`OpenQuizIntent` sends `quiz/start`) | For `set`: the custom quiz's stored form (`tenses`, and `verbs` or `infinitives`), `level`, `source` | `set`: the practice set as a sheet over whatever tab is open, never starting a quiz (§ Practice Sets). Anything else: the Quiz tab, starting a quiz unless one is in progress | Yes; `set` is unreleased |
 | `list` | A featured collection's key (`top100`, `etre`, `irregularFutur`, `pronominal`) | `source` | The collection's page as a sheet over the Models tab. An unknown key does nothing. A model's collection is reached by its `model/` link, not by `list/model-<id>` | No |
 
 A `match` is read as search reads a query (`MarkedConjugations(text:on:)`, through
@@ -578,7 +579,7 @@ does ([Reverse Lookup](#reverse-lookup)). Look Up a Verb sends the row's own spe
 | File | Purpose |
 |------|---------|
 | `URLExtensions.swift` | The grammar's constants (routes, query-item names), `isDeeplink`, `hasDeeplinkTarget`, `analyticsSource`, `deeplinkQueryValue(named:)`, and the builders |
-| `World.swift` | `handleURL(_:)` clears `verb`, `verbMarks`, `verbModel`, `collection`, `info`, and `searchRequest`, resolves the link (`resolveDeeplinkEntity(from:)`), and selects the tab. `handleInAppURL(_:)` resolves without clearing or switching tabs, for links inside Info articles. `openSearch(text:source:)` is the search route's effect, which Command-F also uses (`text` nil keeps the field's text) |
+| `World.swift` | `handleURL(_:)` clears `verb`, `verbMarks`, `verbModel`, `collection`, `info`, `searchRequest`, and `practiceSet`, resolves the link (`resolveDeeplinkEntity(from:)`), and selects the tab. `handleInAppURL(_:)` resolves without clearing or switching tabs, for links inside Info articles. `openSearch(text:source:)` is the search route's effect, which Command-F also uses (`text` nil keeps the field's text) |
 | `Info.swift` | `Info.info(deeplinkTarget:)` resolves a stable key or a legacy position |
 | `MatchedConjugation.swift` | `MarkedConjugations(text:on:)` reads a `match` item |
 | `VerbBrowseView.swift` | Consumes `searchRequest` on appear and on change, since a link can arrive before the tab first appears, and presents `verb` with `verbSource` and `verbMarks` |
@@ -610,6 +611,8 @@ conjuguer://info/futur_simple                           → the Futur Simple art
 conjuguer://info/0                                      → the Dedication article (legacy position)
 conjuguer://model/1-9                                   → aller's model
 conjuguer://list/etre?source=sharedLink                 → the Verbs Taking Être collection
+conjuguer://quiz/set?tenses=imparfait&verbs=etre        → a practice set: the imparfait of the verbs taking être
+conjuguer://quiz/set?infinitives=parler,venir&level=beginner&source=qrCode → a practice set over two verbs at Beginner's tenses
 ```
 
 ## Lookup from Outside the App
@@ -1117,6 +1120,7 @@ Collections).
 | `.verbPage(_:)` | 3, on one verb, with no Ten More | Test Me on a verb page |
 | `.collection(_:)` | 10 at the learner's level over a collection's verbs, with Ten More | A collection's Quiz button, on its page or a model's page |
 | `.custom(_:myVerbs:)` | 10 over the learner's chosen tenses, verbs, or both, with Ten More | The Quiz tab with Custom chosen (§ The Custom Quiz) |
+| `PracticeSet.scope(source:)` | 10 over a shared set's tenses and verbs, at the set's level, with Ten More | Start on a practice set's sheet (§ Practice Sets) |
 
 **A scoped quiz uses the learner's level.** Each question draws a tense by its weight from the
 level's tenses that some verb of the scope has, so a tense no verb has is never drawn and a My
@@ -1185,6 +1189,46 @@ order. Each tap is kept at once in `Settings.customQuiz`, which Settings does no
   between launches and can travel in a link. A key that names nothing is dropped and the rest kept,
   except a model's: settings load before the models are parsed, so `model-<id>` is accepted
   unchecked, and a model that names nothing holds no verbs and cannot start.
+
+### Practice Sets
+
+A custom quiz can be shared as a link or a QR code, so that a teacher can hand a class one set
+without accounts or a server. With Custom chosen and Start enabled, Share sits beside Change on the
+Quiz tab, a menu of Share Link and Show QR Code. Share Link opens the share sheet with a summary
+(Tenses, Verbs), a `conjuguer://quiz/set` link, and the App Store link; there is no web domain.
+Show QR Code covers the screen with the link's code, made on the device (`QRCode`, Core Image,
+medium error correction), dark on white in either appearance, with the summary and a line on
+scanning beneath it; the screen stays awake while it shows.
+
+- **Opening a set** (`World.practiceSet`, a `PracticeSetRequest`) shows `PracticeSetView` as a
+  page-sized sheet over whatever tab is open, never starting a quiz unasked. It shows the summary,
+  a list's verbs as chips (twelve, then "and N more"), Start, which runs the quiz in a `QuizSheet`
+  over the set, and Keep as My Custom Quiz, which replaces the learner's custom quiz only when
+  tapped. A later link replaces the sheet. Start is disabled, with the custom quiz's "nothing to
+  ask" line, when no verb of a list has a chosen tense.
+- **The level travels only while a part is left to it**, so everyone who opens a set is asked the
+  same tenses and verbs whatever their own level. `QuizScope.level` makes the set's level win over
+  the learner's in `slots(at:)`, `band(at:)`, and `Quiz.level`, without touching the setting. A
+  kept set, like any custom quiz, uses the learner's level.
+- **My Verbs travels as its verbs**, the first 50, in `infinitives=` (`QuizVerbSet.list`, each a
+  `Verb.verbs` key, so `ha%C3%AFr%20France` names one entry of haïr). Fifty of the longest
+  infinitives, with every tense, still fit a code, where a hundred overflow it: each é takes nine
+  bytes percent-encoded. The editor lists a kept list only while it is the choice, since nothing in
+  the editor can build one. A stored list keeps keys it cannot check, since settings load before
+  the verbs are parsed; a link, read only once they are, drops unknown verbs.
+- **The length does not travel.** Every set is ten questions, then Ten More, as Josh decided for
+  Konjugieren; a length can be added to the link later without breaking it.
+- **Invalid links.** A `quiz/set` link that names no tense or verb set this version knows shows
+  "Practice Set Not Found" with a line that the link may be cut short or need a newer app. Unknown
+  tenses, verb sets, verbs, a model that names nothing, and an unknown level are dropped and the
+  rest kept. A link naming `verbs=myVerbs` drops that part, since it would ask the opener's own.
+- **Unranked, in a sheet.** A set's quiz has `custom`, so it posts nothing and sets no best score,
+  and like a collection's quiz it starts no Live Activity (`QuizScope.isPracticeSet`), since a tap
+  on the activity would open the Quiz tab instead.
+- **Signals.** `tapSharePracticeSet` (`method` `link` or `qrCode`, and `customChoice`),
+  `viewPracticeSet` (`source`, and `outcome` `opened` or `invalid`), and `tapKeepPracticeSet`. The
+  quiz signals of a set's quiz send `source` `sharedLink`, `qrCode`, or `deeplink`, `level` the
+  set's, and `customChoice`. None names a tense or a verb.
 
 ### Signals
 

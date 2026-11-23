@@ -5807,3 +5807,52 @@ signals say only that a custom quiz was begun and whether tenses, verbs, or both
 which. The choice is kept in the app's settings in a form built to be shared
 (`tenses=imparfait,futur_simple&verbs=model-1-3A`), because the next phase turns it into a link and
 a QR code that a teacher can hand to a class.
+
+## Practice Sets to Share (2026-11-23)
+
+Phase 10 of the pedagogy plan makes a custom quiz shareable, as a link or as a QR code, so that a
+teacher can hand a class one practice set without accounts or a server. Conjuguer's largest source of
+downloads was a single Swiss school, so this is the plan's most direct bet on that channel. The
+Custom segment of the Quiz tab gains Share beside Change. Share Link sends a short summary, a
+`conjuguer://quiz/set?…` link, and the App Store link; Show QR Code fills the screen with a code made
+on the device, black on white in either appearance, and keeps the screen awake while a class scans
+it. Opening either shows the set in a sheet over whatever tab is open, with Start and an optional
+Keep as My Custom Quiz. Nothing starts a quiz unasked, and the old `quiz/start` link still starts
+one, so no existing link changed meaning.
+
+Konjugieren built the same feature nine days earlier, and Josh's three answers there carried over
+without a new question: a sheet with Start and Keep, My Verbs shared as its verbs, and no length in
+the link. The link is the custom quiz's stored form from Phase 9 with two additions. The sharer's
+level travels only while some part of the choice is left to the level, so a class all gets the
+same tenses and verbs whatever level each student has set; a new `level` on the quiz's scope makes
+the set's level win without touching anyone's setting. And a shared My Verbs becomes a list of
+dictionary keys, so that `haïr France` and `haïr Québec` stay distinct.
+
+French pushed back in one place. Konjugieren capped a shared list at a hundred verbs, and a test
+there proved that a hundred long infinitives still fit a QR code. The same test here failed: a
+hundred of the longest French infinitives, réimperméabiliser and déresponsabiliser among them,
+made a link of about three thousand bytes, past a code's capacity, because every é becomes nine
+bytes once percent-encoded. German's umlauts are too rare to matter. The cap is now fifty, which
+fits with room to spare even for the longest verbs and every tense, and covers any week's list.
+
+The same failing run caught a second, quieter bug. The scope's tenses and band were computed from
+whatever level the caller passed, so a set at Beginner would still have asked an Advanced
+learner's tenses wherever a caller passed the learner's level. The set's level now wins inside the
+scope itself, not only in the quiz that reads it.
+
+Phase 9's trap waited here too. Settings load before the verbs are parsed, so a kept list cannot
+check that its verbs exist without losing them all at launch. A stored list keeps its keys
+unchecked; a link, which the app reads only after the verbs load, drops the ones it does not know.
+A link that names nothing at all opens a "Practice Set Not Found" sheet rather than doing nothing.
+
+Looking at the screens found two small things. Share sat a few points taller than Change, a
+SwiftUI menu's label being taller than a navigation link's, as Konjugieren had also found. And in
+French, Keep's label wrapped to two lines, so "Garder comme mon quiz sur mesure" became "En faire
+mon quiz sur mesure". Screenshots of the QR view, on the iPhone in both languages and on the iPad
+in dark mode, decode to the exact link.
+
+Two questions remain for devices this Mac cannot be. Whether the iPhone's Camera app offers to
+open a `conjuguer://` code needs Josh's phone. Whether a `conjuguer://` link clicked on a Mac
+reaches the iPad app running there, which matters because the Swiss school's students used Macs,
+is not covered by Apple's documentation and needs a Mac with Apple silicon. On a Mac the link, not
+the code, would be the way in.

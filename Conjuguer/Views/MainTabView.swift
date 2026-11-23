@@ -36,6 +36,11 @@ struct MainTabView: View {
       }
     }
     .tabViewStyle(.sidebarAdaptable)
+    .sheet(item: $world.practiceSet) { request in
+      PracticeSetView(request: request)
+        .sheetDismissable()
+        .presentationSizing(.page)
+    }
     .recordsAppearance(as: "\(MainTabView.self)")
   }
 }

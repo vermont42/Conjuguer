@@ -25,6 +25,7 @@ enum ParameterKey: String {
   case starred
   case collection
   case customChoice
+  case method
 }
 
 enum AnalyticsName: String {
@@ -46,6 +47,9 @@ enum AnalyticsName: String {
   case tapRevealReviewCard
   case viewCollection
   case tapShareCollection
+  case tapSharePracticeSet
+  case viewPracticeSet
+  case tapKeepPracticeSet
 }
 
 /// How the learner reached a verb page or began a quiz. One vocabulary serves every signal that
@@ -62,6 +66,7 @@ enum AnalyticsSource: String, CaseIterable {
   case lookup
   case modelPage
   case myVerbs
+  case qrCode
   case quickAction
   case quizCorrection
   case recent

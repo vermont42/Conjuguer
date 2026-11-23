@@ -33,7 +33,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 7 | Done | 2026-11-23 | 609b1b8 | T2.7, T3.1, T6.5, M2, M3 | 7 |
 | 8 | Done | 2026-11-23 | 3f12ff1 | Decision 4 | 8 |
 | 9 | Done | 2026-11-23 | b181958 | T2.8 | 9 |
-| 10 | Not started | | | T2.9, Decision 8 | 10 |
+| 10 | Done | 2026-11-23 | | T2.9, Decision 8 | 10 |
 | 11 | Not started | | | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
 | 12 | Not started | | | T3.2, T3.3 (the session) | 12 |
 | 13 | Not started | | | T6.1, T6.6 (the leaderboard's place) | 13 |
@@ -1225,7 +1225,7 @@ unchanged; and tests pin scope construction.
 
 **Suggestions:** T2.9, Decision 8. **Ports:** Konjugieren Phase 10 (`PracticeSet.swift`,
 `PracticeSetView.swift`, `QRCode.swift`). **Depends on:** Phase 9 and browse Phase 9's grammar.
-**Status:** Not started.
+**Status:** Done.
 
 Make a chosen scope shareable as a `conjuguer://` link and as a QR code, so a teacher can hand a
 class one practice set without accounts or a server. Conjuguer's largest source of downloads was
@@ -1245,6 +1245,84 @@ one Swiss school, which makes this the plan's most direct bet on schools.
 gracefully, and tests pin encoding and decoding of every scope.
 
 **How it differed:**
+
+- **Konjugieren's three answers carried over, not asked again.** Josh decided them for
+  Konjugieren on 2026-11-14, and nothing in French made one awkward. (1) Opening a set shows a sheet
+  with Start, which runs the quiz in a sheet over it, and Keep as My Custom Quiz, which replaces the
+  learner's custom quiz only when tapped. (2) A shared My Verbs carries its verbs. (3) **The length
+  does not travel**, though this phase's text lists it: every set is ten questions, then Ten More,
+  and a `length` item can be added later without breaking links.
+- **The route.** `conjuguer://quiz/set?tenses=…&verbs=…&level=…&source=…`, the quiz route with a
+  `set` target and the custom quiz's stored form as its query, built by
+  `URL.practiceSetDeeplink`. `quiz/start` and every other target still open the Quiz tab and start
+  a quiz, so existing links keep working.
+- **Decided in the session, not asked,** each Konjugieren's in-session guess carried over, and each
+  one Josh can overrule. (1) The level travels only while a part is left to the level; a set's quiz
+  asks at that level through a new `QuizScope.level`, which wins in `slots(at:)`, `band(at:)`, and
+  `Quiz.level` without touching the setting. A kept set uses the learner's level. (2) A list is a
+  new `QuizVerbSet.list` of `Verb.verbs` keys, stored as `infinitives=` rather than in `verbs=`,
+  so `haïr France` names one entry of a doubled infinitive. The editor lists a kept list only while
+  it is the choice. (3) A link naming `verbs=myVerbs` drops that part. (4) The sheet shows over
+  whatever tab is open, and a later link, or any other link, replaces or closes it. (5) The QR
+  code's link says `source=qrCode` and the shared text's `sharedLink`. (6) Share lives only on the
+  Custom segment, a menu of Share Link and Show QR Code beside Change, and only while Start is
+  enabled. (7) The QR view draws dark modules on white in both appearances, keeps the screen awake,
+  and shows the summary beneath the code.
+- **Departed from Konjugieren.** (1) **A shared list holds 50 verbs, not 100.** A test of a hundred
+  of the longest infinitives with every tense overflowed a QR code: each é takes nine bytes once
+  percent-encoded, which German's few umlauts never pressed. Fifty of the longest fit, and the test
+  now pins that. (2) A stored list keeps keys it cannot check, since `Settings` loads before
+  `VerbData.parse()` fills `Verb.verbs` (Phase 9's model trap again); `PracticeSet(url:)`, which
+  runs only once the verbs are loaded, drops unknown verbs and a model that names nothing.
+  Konjugieren's `QuizVerbSet(infinitives:)` checks at decode and may lose a kept list at launch, if
+  its verbs load after its settings. (3) A set's quiz starts no Live Activity
+  (`QuizScope.isPracticeSet`), as a collection's sheet quiz does not, since a tap on the activity
+  would open the Quiz tab. (4) Start is disabled, with the custom quiz's "nothing to ask" line,
+  when no verb of a list has a chosen tense. (5) The summary labels its lines ("Tenses: …",
+  "Verbs: …") in the share text and the QR caption.
+- **Invalid links.** A `quiz/set` link that names nothing this version knows shows "Practice Set
+  Not Found" ("Série d’exercices introuvable") with a line that the link may be cut short or need a
+  newer app. Unknown keys, verbs, and levels are dropped and the rest kept.
+- **Analytics.** `tapSharePracticeSet` (`method`, `link` or `qrCode`, and `customChoice`),
+  `viewPracticeSet` (`source`, and `outcome`, `opened` or `invalid`), `tapKeepPracticeSet`, the new
+  `method` parameter, and the `qrCode` source on the quiz signals. None names a tense or a verb.
+  Staged in [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md) in both languages.
+- **Strings.** Eighteen `PracticeSet.*` keys and `CustomQuiz.verbList`. "Practice set" is "série
+  d’exercices", a common name in French-speaking schools for a sheet of exercises. Keep was first "Garder comme
+  mon quiz sur mesure", which wrapped to two lines on the iPhone; it is now "En faire mon quiz sur
+  mesure", and once kept, "Devenue mon quiz sur mesure".
+- **Found by looking.** Share sat a few points taller and lower than Change, a Menu's label being
+  taller than a NavigationLink's (Konjugieren saw the same); both labels now fill an HStack of fixed
+  height. The QR view decodes to nothing if screenshotted mid-animation, so the skill's table says
+  to wait.
+- **A Mac.** Apple's pages on running iPhone and iPad apps on a Mac with Apple silicon
+  ([running](https://developer.apple.com/documentation/apple-silicon/running-your-ios-apps-in-macos),
+  [adapting](https://developer.apple.com/documentation/apple-silicon/adapting-ios-code-to-run-in-the-macos-environment))
+  say nothing about custom URL schemes, and this Intel Mac cannot run the iPad app, so whether a
+  `conjuguer://` link clicked in Mail or Messages on a school's Mac reaches the app is unknown. A
+  Mac has no Camera app that scans codes, so on Macs the shared link, not the QR code, is the way
+  in. Added to **Tasks for Josh Outside the Code**.
+- **Tests:** 658 to 681. `PracticeSetTests` is new, 23 functions: the pinned link, every tense,
+  verb set, level, and list round-tripped, a stored list keeping keys a link drops, `verbs=` over
+  `infinitives=`, ten links that open nothing, a link keeping what it can read, My Verbs shared as a
+  capped list, the level travelling only when needed, the scope, a set with nothing to ask, the
+  share text, a generated code read back by Core Image's detector, fifty of the longest verbs still
+  fitting a code, a kept list's persistence, and the editor's kept list; nested in `DeeplinkTests`,
+  the `quiz/set` route without a tab switch or a quiz, its failure, and a later link replacing the
+  set; nested in `QuizTests`, a session at the set's level under a different learner level, and the
+  share signal.
+- **Verified on the iPhone 17** in light, in English: a five-verb set opened by `simctl openurl`
+  (haïr France among its chips), its quiz, Quit back to the set, Keep, the kept list on the Custom
+  segment after a relaunch, Share's menu, the share sheet (Copy gave the expected text), the QR
+  view, whose screenshot decodes to the exact link, and the invalid link. In French: a set at
+  Débutant ("Selon le niveau : Débutant · Les 100 verbes les plus fréquents"), Keep, the QR view
+  (decoding to a link carrying `level=advanced`, the learner's), and the "nothing to ask" state.
+  **On the iPad Pro 11** in English and dark: a set opened by a link at a cold launch, its quiz in
+  a form sheet over the set's page sheet, Keep, the share sheet as a popover anchored to Share, and
+  the QR view, whose screenshot decodes. Not tried: VoiceOver by ear, Ten More on a set
+  (its scope's `continues` is unit-tested), and the Camera app.
+- **Waiting on Josh's phone:** whether the Camera app offers to open a `conjuguer://` QR code.
+  Record the result here.
 
 ## Phase 11: The Practice Record
 
@@ -1598,6 +1676,9 @@ it, sharing produces the agreed text, and tests pin the seeding.
   old one archived.
 - **Checks on his phone** the simulator cannot make: the Camera app opening a `conjuguer://` QR code
   (Phase 10), and anything a phase marks "not tried on a device".
+- **A check on a Mac with Apple silicon**, once he has one: whether a `conjuguer://quiz/set` link
+  clicked in Mail or Messages opens the iPad app running on the Mac (Phase 10). Apple's
+  documentation does not say.
 
 ## Not Built
 

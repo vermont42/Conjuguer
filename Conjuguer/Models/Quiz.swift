@@ -296,7 +296,7 @@ class Quiz {
   private func resetPublishedProperties() {
     elapsedTime = 0
     score = 0
-    level = Current.settings.quizLevel
+    level = scope.level ?? Current.settings.quizLevel
     currentQuestionIndex = 0
     roundCount = 0
     roundFirstResultIndex = 0

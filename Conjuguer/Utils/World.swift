@@ -42,6 +42,8 @@ class World {
   // A featured collection that a `list/` link opens over the Models tab.
   var collection: VerbCollectionDestination?
   var info: Info?
+  // A `quiz/set` link's practice set, shown over whatever tab is open.
+  var practiceSet: PracticeSetRequest?
   var selectedTab: MainTab = .verbs
   var shouldNavigateToTutor = false
   // Set by a search link, Command-F, the control, or the quick action, and cleared by
@@ -218,6 +220,7 @@ class World {
     collection = nil
     info = nil
     searchRequest = nil
+    practiceSet = nil
   }
 
   @discardableResult
@@ -238,6 +241,10 @@ class World {
       verb = found
       return .verbs
     case URL.quizHost:
+      if target == URL.practiceSetTarget {
+        practiceSet = PracticeSetRequest(practiceSet: PracticeSet(url: url), source: url.analyticsSource ?? .deeplink)
+        return nil
+      }
       if quiz.quizState != .inProgress {
         quiz.start()
       }

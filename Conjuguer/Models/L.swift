@@ -1242,6 +1242,88 @@ enum L {
     static var nothingToAsk: String {
       String(localized: "CustomQuiz.nothingToAsk")
     }
+
+    static func verbList(count: Int) -> String {
+      let verbCount = L.VerbBrowseView.verbCount(count: count)
+      return String(localized: "CustomQuiz.verbList", defaultValue: "Verb List · \(verbCount)")
+    }
+  }
+
+  enum PracticeSet {
+    static var title: String {
+      String(localized: "PracticeSet.title")
+    }
+
+    static var description: String {
+      String(localized: "PracticeSet.description")
+    }
+
+    static func byLevel(_ value: String) -> String {
+      String(localized: "PracticeSet.byLevelValue", defaultValue: "Set by Level: \(value)")
+    }
+
+    static func summaryLine(label: String, value: String) -> String {
+      String(localized: "PracticeSet.summaryLine", defaultValue: "\(label): \(value)")
+    }
+
+    static func moreVerbs(_ count: Int) -> String {
+      String(localized: "PracticeSet.moreVerbs", defaultValue: "and \(count) more")
+    }
+
+    static var keep: String {
+      String(localized: "PracticeSet.keep")
+    }
+
+    static var kept: String {
+      String(localized: "PracticeSet.kept")
+    }
+
+    static var keepFooter: String {
+      String(localized: "PracticeSet.keepFooter")
+    }
+
+    static var invalidTitle: String {
+      String(localized: "PracticeSet.invalidTitle")
+    }
+
+    static var invalidDescription: String {
+      String(localized: "PracticeSet.invalidDescription")
+    }
+
+    static var shareLink: String {
+      String(localized: "PracticeSet.shareLink")
+    }
+
+    static var showQRCode: String {
+      String(localized: "PracticeSet.showQRCode")
+    }
+
+    static var scanTitle: String {
+      String(localized: "PracticeSet.scanTitle")
+    }
+
+    static var scanNote: String {
+      String(localized: "PracticeSet.scanNote")
+    }
+
+    static var qrCodeLabel: String {
+      String(localized: "PracticeSet.qrCodeLabel")
+    }
+
+    static var startHint: String {
+      String(localized: "PracticeSet.startHint")
+    }
+
+    static var shareHint: String {
+      String(localized: "PracticeSet.shareHint")
+    }
+
+    static func shareText(summary: String, link: String, appStoreLink: String) -> String {
+      String(
+        localized: "PracticeSet.shareText",
+        defaultValue: "A Conjuguer practice set\n\(summary)\n\nOpen it in Conjuguer:\n\(link)\n\nGet Conjuguer on the App Store:\n\(appStoreLink)"
+      )
+    }
   }
 
   enum PronounGender {

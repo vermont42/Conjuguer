@@ -24,18 +24,29 @@ struct QuizScope {
 
   var custom: CustomQuiz?
 
+  /// A practice set's level, so that everyone who opens the set is asked the same quiz. Nil asks
+  /// at the learner's own level.
+  var level: QuizLevel?
+
+  /// A practice set's quiz runs in a sheet over the set, as a collection's does.
+  var isPracticeSet = false
+
   /// Only the default quiz posts to its level's leaderboard and sets its best score: a score over
   /// the learner's own verbs or tenses, or over three questions, compares with nothing.
   var isRanked: Bool {
     verbs == nil && custom == nil
   }
 
+  /// A practice set's own level wins over `level`, the learner's.
   func slots(at level: QuizLevel) -> [QuizTenseSlot] {
-    custom?.slots(at: level) ?? level.slots
+    let level = self.level ?? level
+    return custom?.slots(at: level) ?? level.slots
   }
 
-  /// The band a mixed quiz draws from, nil for every verb.
+  /// The band a mixed quiz draws from, nil for every verb. A practice set's own level wins over
+  /// `level`, the learner's.
   func band(at level: QuizLevel) -> FrequencyBand? {
+    let level = self.level ?? level
     guard let verbSet = custom?.verbSet, verbSet.mixesVerbs else {
       return level.band
     }
@@ -59,7 +70,7 @@ struct QuizScope {
   /// A quiz on a verb's page is over before a Live Activity would be noticed. A collection's quiz
   /// runs in a sheet over its page, and a tap on the activity would open the Quiz tab instead.
   var startsLiveActivity: Bool {
-    continues && collection == nil
+    continues && collection == nil && !isPracticeSet
   }
 
   static let verbPageQuestionCount = 3

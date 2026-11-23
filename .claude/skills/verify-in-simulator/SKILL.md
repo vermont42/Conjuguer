@@ -96,6 +96,12 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `collection_share_button` | The bar's Share button | The popover anchors to it on iPad. |
 | `collection_sort_order` | Frequency/Alphabetical `Picker` on a collection's page | 2 segments, Frequency first. |
 | `collection_verb_<dictionaryKey>` | A verb row on a collection's page | e.g. `collection_verb_aller`; a green check marks a verb looked up. |
+| `custom_quiz_share_button` | Share, beside Change on the Custom segment | Present only while Start is enabled. A menu: `tap_label.sh "Share Link"` opens the share sheet (Copy at ≈ `68,531` on the iPhone 17, then `simctl pbpaste`), `tap_label.sh "Show QR Code"` the QR view. On the iPad `tap_id.sh` fails; tap by its `describe_ui` frame, and the menu's rows by theirs. The menu items carry `practice_set_share_link` and `practice_set_show_qr_code`, which AXe does not report. |
+| `practice_set_summary`, `practice_set_verbs` | A practice set's summary card and its list's verb chips | Open a set with `xcrun simctl openurl <udid> "conjuguer://quiz/set?tenses=imparfait&verbs=etre"`; it shows over any tab, and works from a cold launch. |
+| `practice_set_start_button`, `practice_set_keep_button` | Start and Keep as My Custom Quiz on a set's sheet | Start opens a `QuizSheet` titled Practice Set; Quit returns to the set. Keep turns disabled ("Kept as My Custom Quiz"). The sheet's Done is `tap_label.sh Done` (`Terminé` in French). |
+| `practice_set_nothing_to_ask` | The line above a disabled Start | `quiz/set?tenses=imperatif&verbs=model-4-5C` (falloir's model) |
+| `practice_set_invalid` | "Practice Set Not Found" | `quiz/set?tenses=aoriste` |
+| `practice_set_qr_code`, `practice_set_qr_summary` | The QR view's code and caption | Decode a screenshot's code with Core Image (`CIDetector` of type `CIDetectorTypeQRCode`) in a short Swift script to check the link. Take the screenshot a second or two after the cover appears; mid-animation it decodes to nothing. |
 
 An identifier on a container that is not itself one element (a card) is inherited by every element
 inside it and overrides theirs, so put a card's identifier on its heading (as `verb_related` is).
