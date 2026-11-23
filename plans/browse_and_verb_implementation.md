@@ -28,8 +28,8 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 2 | Done | 2026-11-22 | 0827ddf | A4, C4 | 2 |
 | 3 | Done | 2026-11-22 | 0827ddf | Signals | 3 |
 | 4 | Done | 2026-11-22 | 7a532ac | A5 (the map) | 5 |
-| 5 | Done | 2026-11-22 | | A5 (the search) | 6 |
-| 6 | Done | 2026-11-22 | | B3, B5's tip | 7 |
+| 5 | Done | 2026-11-22 | 1fd6c58 | A5 (the search) | 6 |
+| 6 | Done | 2026-11-22 | 1fd6c58 | B3, B5's tip | 7 |
 | 7 | Not started | | | B4, A9 | 9 |
 | 8 | Not started | | | B6 | 10 |
 | 9 | Not started | | | C1, C2 | 11 |
