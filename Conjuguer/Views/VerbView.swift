@@ -190,7 +190,7 @@ struct VerbView: View {
         RelatedVerbListView(destination: destination)
           .sheetDismissable()
       case .quiz:
-        VerbQuizSheet(verb: verb)
+        QuizSheet(scope: .verbPage(verb))
       }
     }
   }
@@ -553,21 +553,6 @@ struct VerbView: View {
         return "quiz"
       }
     }
-  }
-}
-
-/// "Test me on this verb": three questions about the verb in view, in a sheet with its own `Quiz`,
-/// so the learner closes it onto the same page and a quiz in the Quiz tab carries on. While a
-/// question waits, the sheet closes only through Quit, so every quiz started here ends with
-/// `quizQuit` or `quizCompletion`.
-private struct VerbQuizSheet: View {
-  let verb: Verb
-  @State private var quiz = Quiz(gameCenter: Current.gameCenter)
-
-  var body: some View {
-    QuizView(sheetScope: .verbPage(verb))
-      .environment(quiz)
-      .interactiveDismissDisabled(quiz.quizState == .inProgress)
   }
 }
 

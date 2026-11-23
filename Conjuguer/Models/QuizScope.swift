@@ -8,13 +8,20 @@
 import Foundation
 
 /// What a quiz asks about, how many questions it asks, and where it was begun. Later work adds
-/// scopes as constructors: browse Phase 14's collections, and the pedagogy plan's levels.
+/// scopes as constructors: browse Phase 14's collections (`collection(_:)`), and the pedagogy
+/// plan's levels.
 struct QuizScope {
   /// Nil asks the default quiz, built from `QuizVerbs` at the learner's difficulty.
   let verbs: [Verb]?
 
   let questionCount: Int
   let source: AnalyticsSource
+
+  /// What a sheet's quiz shows in place of "Quiz": a collection's title.
+  var title: String?
+
+  /// The collection a quiz over a collection asks about, which `quizStart` names.
+  var collection: VerbCollection?
 
   /// Only the default quiz posts to the leaderboard and sets the best score, as Josh decided for
   /// Konjugieren on 2026-11-13: a score over the learner's own verbs, or over three questions,
@@ -23,9 +30,10 @@ struct QuizScope {
     verbs == nil
   }
 
-  /// A quiz on a verb's page is over before a Live Activity would be noticed.
+  /// A quiz on a verb's page is over before a Live Activity would be noticed. A collection's quiz
+  /// runs in a sheet over its page, and a tap on the activity would open the Quiz tab instead.
   var startsLiveActivity: Bool {
-    questionCount == Quiz.questionCount
+    questionCount == Quiz.questionCount && collection == nil
   }
 
   static let verbPageQuestionCount = 3

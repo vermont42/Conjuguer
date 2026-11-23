@@ -37,7 +37,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 11 | Done | 2026-11-22 | e9a34b5 | D2's quiz scope, D3 | 13 |
 | 12 | Done | 2026-11-22 | 9af3c40 | D5 | 14 |
 | 13 | Done | 2026-11-22 | d4b8752 | D4 | 15 |
-| 14 | Not started | | | D6 | 16 |
+| 14 | Done | 2026-11-22 | | D6 | 16 |
 | Closing | Not started | | | Audit, porting notes | Closing |
 
 Konjugieren's Phase 4 (separable verbs) and Phase 8 (a Futur II article) have no Conjuguer
@@ -1501,7 +1501,7 @@ Built 2026-11-22 in one session, as Konjugieren's Phase 15 with Conjuguer's name
 ## Phase 14: Collections
 
 **Ideas:** D6. **Ports:** Konjugieren Phase 16 (`VerbCollection.swift`, `VerbCollectionView.swift`).
-**Depends on:** Phases 9 (the grammar), 10, and 11. **Status:** Not started.
+**Depends on:** Phases 9 (the grammar), 10, and 11. **Status:** Done (2026-11-22).
 
 Fixed lists as places to go, which the ideas document rated strongest for Conjuguer because of
 schools. A list shows how many of its verbs have been opened ("3 of 100 looked up"), can be shared
@@ -1523,6 +1523,64 @@ Models tab. Propose with a mockup or screenshot, as Konjugieren did.
 quiz, and shares, and tests pin membership and the link.
 
 **How it differed:**
+
+Built 2026-11-22 in one session. The suite ran 553 tests in 46 suites, all passing, 17 more than
+Phase 13's 536, all in the new `VerbCollectionTests`. New files: `Models/VerbCollection.swift`
+(`VerbCollection`, `VerbCollectionDestination`, `QuizScope.collection(_:)`) and
+`Views/VerbCollectionView.swift` (the page, `VerbCollectionBar`, and `VerbCollectionRow`).
+`docs/feature_architecture.md` § Collections describes it.
+
+- **Josh's answers (2026-11-22),** each the recommended option, to a proposal with ASCII mockups
+  made before building: all four collections (the top 100, verbs taking être, irregular futur
+  stems, pronominal verbs); a Collections section at the top of the Models tab, with collections
+  hidden while the search field has text; all 99 models as collections, with the bar in each
+  model page's verbs card, shared by the existing `model/<id>` link rather than a second
+  `list/model-<id>`; and a collection page's verbs as rows with the gloss and a check, not a run
+  of links.
+- **The counts.** Top 100: 100 entries. sortir's two entries share rank 78, so the band holds 101,
+  and the page showed "3/101" under a title promising a hundred; the collection keeps the first,
+  sortir "exit". Être: 38. Irregular futur: 91, where a Python estimate from `conjugations.json`
+  said 104. The Swift count is the right one: the extra 13 were hyphenated verbs whose hyphen the
+  script stripped (entre-nuire, sous-entendre) and verbs whose defect group has no futur (quérir,
+  ravoir, issir, choir). Pronominal: 217. Its members are what `verbs.xml` marks reflexive, which
+  includes coucher and habiller, so the description says "verbs that Conjuguer conjugates with a
+  reflexive pronoun" rather than claiming they are only pronominal.
+- **"Irregular futur stem"** is a verb of the third group (`VerbDraw.isIrregular`, Phase 12's
+  definition) or of envoyer's model whose radical du futur, lowercased, is not the infinitive less
+  a final e. That leaves out the first group's spelling changes (appellerai, lèverai) and prévoir
+  and pourvoir, whose futur is regular.
+- **The quiz** runs in `QuizSheet`, which moved out of `VerbView` (it was `VerbQuizSheet`) into
+  `QuizView.swift`, and shows the collection's title where the sheet said "Quiz". **Unlike
+  Konjugieren, a collection's quiz starts no Live Activity**: the activity's tap opens the Quiz tab,
+  not the sheet over the collection, so it would lead away from the quiz it tracks. Konjugieren's
+  starts one; Josh may want that changed there too.
+- **Analytics.** `viewCollection` (`collection`, `source`) for the four featured pages only;
+  `tapShareCollection` (`collection`); `collection` on `quizStart`. **Every model sends
+  `collection` `model`, never its identifier**, because a model of one verb (aller's 1-9) would
+  name the verb, which the policy promises is not sent. Konjugieren sends `ablaut-<exemplar>`,
+  which has the same exposure for its 18 single-verb groups; worth a look in its Closing. A
+  model's page keeps its `viewAppeared` and sends no `viewCollection`. New sources: `sharedLink`;
+  `tab` for a collection opened in the Models tab (Konjugieren's `family`); `list` for a verb opened
+  from a featured page. The privacy lines are staged.
+- **The `model/` route reads no `source`.** A shared model link carries `source=sharedLink`, so a
+  later phase could count it, but nothing does today.
+- **iPad.** The four cards first sat in the models' three-column grid, where titles wrapped to
+  three lines and cards ran to uneven heights. They are now a 2×2 `Grid` of equal cards. On a
+  collection's page the verb cards keep the verb list's grid, uneven heights included.
+- **Small things.** `ShareSheet.present` gained `anchorRect`, as in Konjugieren. `BrowseRow`
+  gained `isChecked`. `URL.modelDeeplink` takes an identifier and an optional `source`, and
+  `URL.listDeeplink` joined the builders.
+- **How it was tested.** On the iPhone, in English and light mode: the Models tab's Collections
+  section; the top 100's page (être and faire checked); avoir opened from it, and "3 of 100" rising
+  to "4 of 100" on return; the quiz sheet titled "100 Most Frequent Verbs" with "1 / 30", and Quit;
+  the share sheet beside its button and its copied text; `model/6-7?source=sharedLink` opening
+  venir's model with "2 of 29 looked up", Quiz, and Share. In French: `list/etre?source=sharedLink`
+  opening "Verbes conjugués avec être" in a sheet ("Consultés : 1 sur 38"), aller pushed inside it
+  with Terminé, and the Models tab then showing 5/100 and 2/38. On the iPad, in English: the 2×2
+  cards, the Pronominal Verbs page as a grid, the share popover anchored to its button, and the
+  copied text citing "se souvenir" and "s'efforcer". **Not seen:** dark mode, since the iPhone
+  simulator again ignored `simctl ui appearance dark` (as in Phase 13); VoiceOver; a completed
+  collection quiz in the simulator (the unit tests start and quit one); a device.
 
 ## Not Carried Over
 

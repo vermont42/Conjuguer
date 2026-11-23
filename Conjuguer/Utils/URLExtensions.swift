@@ -63,8 +63,22 @@ extension URL {
   }
 
   /// `conjuguer://model/1-1`.
-  static func modelDeeplink(_ model: VerbModel) -> URL? {
-    deeplink(host: verbModelHost, target: model.id, queryItems: [])
+  static func modelDeeplink(_ model: VerbModel, source: AnalyticsSource? = nil) -> URL? {
+    modelDeeplink(model.id, source: source)
+  }
+
+  /// `conjuguer://model/6-7?source=sharedLink`, which a model's collection shares.
+  static func modelDeeplink(_ modelID: String, source: AnalyticsSource? = nil) -> URL? {
+    deeplink(host: verbModelHost, target: modelID, queryItems: [
+      source.map { URLQueryItem(name: sourceQueryName, value: $0.rawValue) }
+    ])
+  }
+
+  /// `conjuguer://list/top100?source=sharedLink`, a featured collection.
+  static func listDeeplink(_ collection: VerbCollection, source: AnalyticsSource? = nil) -> URL? {
+    deeplink(host: listHost, target: collection.key, queryItems: [
+      source.map { URLQueryItem(name: sourceQueryName, value: $0.rawValue) }
+    ])
   }
 
   private static func deeplink(host: String, target: String?, queryItems: [URLQueryItem?]) -> URL? {
@@ -83,7 +97,6 @@ extension URL {
   static let infoHost = "info"
   static let quizHost = "quiz"
   static let searchHost = "search"
-  /// Reserved for collections (Phase 14 of the browse plan). Nothing handles it yet.
   static let listHost = "list"
   static let randomVerbPath = "random"
   static let sourceQueryName = "source"

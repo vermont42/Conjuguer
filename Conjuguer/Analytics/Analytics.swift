@@ -23,6 +23,7 @@ enum ParameterKey: String {
   case deepestSection
   case dwell
   case starred
+  case collection
 }
 
 enum AnalyticsName: String {
@@ -41,6 +42,8 @@ enum AnalyticsName: String {
   case tapStarVerb
   case viewReviewCard
   case tapRevealReviewCard
+  case viewCollection
+  case tapShareCollection
 }
 
 /// How the learner reached a verb page or, once the quiz sends it, began a quiz. One vocabulary
@@ -64,6 +67,7 @@ enum AnalyticsSource: String, CaseIterable {
   case reviewCard
   case search
   case searchGuess
+  case sharedLink
   case shortcut
   case spotlight
   case tab

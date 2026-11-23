@@ -1019,6 +1019,67 @@ enum L {
     }
   }
 
+  enum VerbCollection {
+    static var heading: String {
+      String(localized: "VerbCollection.heading")
+    }
+
+    static var lookedUp: String {
+      String(localized: "VerbCollection.lookedUp")
+    }
+
+    static func progress(opened: Int, total: Int) -> String {
+      let formattedOpened = opened.formatted()
+      let formattedTotal = total.formatted()
+      return String(localized: "VerbCollection.progress", defaultValue: "\(formattedOpened) of \(formattedTotal) looked up")
+    }
+
+    static func quizHint(questionCount: Int) -> String {
+      let formattedCount = questionCount.formatted()
+      return String(localized: "VerbCollection.quizHint", defaultValue: "Starts a \(formattedCount)-question quiz on these verbs.")
+    }
+
+    static func shareText(title: String, count: Int, sample: String, link: String, appStoreLink: String) -> String {
+      let formattedCount = count.formatted()
+      return String(
+        localized: "VerbCollection.shareText",
+        defaultValue: "\(title) (\(formattedCount)): \(sample)\n\nOpen it in Conjuguer:\n\(link)\n\nGet Conjuguer on the App Store:\n\(appStoreLink)"
+      )
+    }
+
+    static var top100Title: String {
+      String(localized: "VerbCollection.top100Title")
+    }
+
+    static var top100Description: String {
+      String(localized: "VerbCollection.top100Description")
+    }
+
+    static var êtreTitle: String {
+      String(localized: "VerbCollection.etreTitle")
+    }
+
+    static var êtreDescription: String {
+      String(localized: "VerbCollection.etreDescription")
+    }
+
+    static var irregularFuturTitle: String {
+      String(localized: "VerbCollection.irregularFuturTitle")
+    }
+
+    static var irregularFuturDescription: String {
+      String(localized: "VerbCollection.irregularFuturDescription")
+    }
+
+    static var pronominalTitle: String {
+      String(localized: "VerbCollection.pronominalTitle")
+    }
+
+    static var pronominalDescription: String {
+      String(localized: "VerbCollection.pronominalDescription")
+    }
+  }
+
   enum PronounGender {
     static var feminine: String {
       String(localized: "PronounGender.feminine")

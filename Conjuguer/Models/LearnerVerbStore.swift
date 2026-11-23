@@ -45,6 +45,11 @@ final class LearnerVerbStore {
     record.hasOpened(verb.dictionaryKey)
   }
 
+  /// How many of the verbs have been opened, which a collection shows as its progress.
+  func openedCount(of verbs: [Verb]) -> Int {
+    verbs.count { record.hasOpened($0.dictionaryKey) }
+  }
+
   /// The verb the review card offers: the longest overdue. A verb with no key conjugations, such
   /// as accroire, which is used only in the infinitif, would have nothing to reveal, so it is
   /// passed over.

@@ -78,10 +78,14 @@ class Quiz {
       startLiveActivity()
     }
     Current.soundPlayer.play(Sound.randomGun)
-    Current.analytics.signal(name: .quizStart, parameters: [
+    var startParameters = [
       ParameterKey.difficulty.rawValue: difficulty.rawValue,
       ParameterKey.source.rawValue: scope.source.rawValue
-    ])
+    ]
+    if let collection = scope.collection {
+      startParameters[ParameterKey.collection.rawValue] = collection.analyticsValue
+    }
+    Current.analytics.signal(name: .quizStart, parameters: startParameters)
 
     timer = Timer.scheduledTimer(
       withTimeInterval: 1.0,

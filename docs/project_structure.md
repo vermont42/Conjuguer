@@ -89,7 +89,7 @@ Conjuguer/
 │   ├── PersonNumber.swift      # 1s…3p with localized pronouns and gendered third-person handling
 │   ├── PronounGender.swift     # Setting enum: feminine/masculine/both
 │   ├── Quiz.swift              # @Observable quiz state: question generation, timer, scoring, Live Activity, Game Center
-│   ├── QuizScope.swift         # What a quiz asks about (every verb, My Verbs, one verb's page), its count and source; Regular's mix over chosen verbs, Test Me's three tenses, Verb.hasCell
+│   ├── QuizScope.swift         # What a quiz asks about (every verb, My Verbs, one verb's page, a collection), its count and source; Regular's mix over chosen verbs, Test Me's three tenses, Verb.hasCell
 │   ├── QuizDifficulty.swift    # Setting enum: regular vs ridiculous
 │   ├── QuizQuestion.swift      # One quiz question (verb + tense)
 │   ├── QuizResult.swift        # One answered question and its ConjugationResult, for the results sheet
@@ -107,6 +107,7 @@ Conjuguer/
 │   ├── Verb.swift              # A verb: infinitif, translation, model reference, auxiliary, corpus counts, derived rank; static verbs dictionary
 │   ├── VerbModel.swift         # A conjugation pattern: parent for inheritance, stem alterations, ending groups, participe endings
 │   ├── VerbModelParser.swift   # XMLParser delegate for verbModels.xml
+│   ├── VerbCollection.swift    # The collections: the top 100, verbs taking être, irregular futur stems, pronominal verbs, and each model; membership, links, share text, and QuizScope.collection
 │   ├── VerbDraw.swift          # The verb of the day and every random verb: the top 1,000 weighted toward irregular (third group, aller) and base verbs, with My Verbs every third day or one random draw in three
 │   ├── verbModels.xml          # Conjugation pattern definitions
 │   ├── VerbParser.swift        # XMLParser delegate for verbs.xml
@@ -157,7 +158,7 @@ Conjuguer/
 │   ├── ReviewPrompterReal.swift   # Prompts at an action-count modulo and a minimum interval
 │   ├── Settings.swift          # @Observable user preferences persisted through GetterSetter
 │   ├── SeededRandomNumberGenerator.swift  # SplitMix64, so tests can check random draws with a fixed seed
-│   ├── ShareSheet.swift        # Presents UIActivityViewController with an LPLinkMetadata header, anchored on iPad to a bar button (ShareLink reports no tap)
+│   ├── ShareSheet.swift        # Presents UIActivityViewController with an LPLinkMetadata header, anchored on iPad to a bar button or a rect in the page (ShareLink reports no tap)
 │   ├── SoundPlayer.swift       # Protocol for audio playback
 │   ├── SoundPlayerDummy.swift  # No-op double
 │   ├── SoundPlayerReal.swift   # AVAudioPlayer implementation with per-sound debouncing
@@ -176,7 +177,7 @@ Conjuguer/
 │   └── World.swift             # @Observable DI container (Current) plus MainTab; device/simulator/unitTest configurations; handleURL and the deeplink grammar's effects, openSearch(text:source:) for search links and Command-F
 └── Views/
     ├── BrowseLayout.swift      # Shared adaptive grid columns and search-field placement (a fixed bar on iPad and Mac) for the browse views
-    ├── BrowseRow.swift         # Shared row/cell used by both browse views, with optional badge and a French or English subtitle
+    ├── BrowseRow.swift         # Shared row/cell used by both browse views, with optional badge, a looked-up check, and a French or English subtitle
     ├── BrowseSearch.swift      # Shared search plumbing for the browse views: all items for a blank query, the trombone for none
     ├── FailedVerbSearchView.swift # The verb list's empty state: no results, a guess at the verb meant, and the email-us line
     ├── FrenchLetterKeyRow.swift   # é è ê â î ô û ç keys that replace the sort picker while a search field is focused; reusable by the quiz
@@ -187,12 +188,12 @@ Conjuguer/
     ├── InputView.swift         # DEBUG-only conjugation scratchpad
     ├── LoadingView.swift       # Splash shown while verbs.xml parses
     ├── MainTabView.swift       # Root TabView with five tabs
-    ├── ModelBrowseView.swift   # Searchable, sortable list/grid of verb models
-    ├── ModelView.swift         # Model detail: endings, stem alterations, and the verbs, alphabetically or by frequency
+    ├── ModelBrowseView.swift   # Searchable, sortable list/grid of verb models, led by the featured collections
+    ├── ModelView.swift         # Model detail: endings, stem alterations, and the verbs, alphabetically or by frequency, with the model's collection bar
     ├── OnboardingView.swift    # Multi-page welcome tour; auto-presented on first launch and re-showable from Settings
     ├── QuizResultsView.swift   # End-of-quiz sheet: score, per-question results, leaderboard
     ├── QuizResultView.swift    # One row of the results sheet
-    ├── QuizView.swift          # Quiz gameplay: prompt, answer field, progress, feedback; the All Verbs / My Verbs picker; as a sheet, Test Me on a verb page
+    ├── QuizView.swift          # Quiz gameplay: prompt, answer field, progress, feedback; the All Verbs / My Verbs picker; QuizSheet, for Test Me on a verb page and a collection's quiz
     ├── RelatedVerbsView.swift  # The verb page's Related Verbs card (built on the same root, same model), RelatedVerbListView, and FlowLayout
     ├── ReviewCardView.swift    # The review card above the verb list: a verb looked up days ago, its key conjugations hidden until a tap, a second tap opening its page
     ├── RichTextView.swift      # Renders [RichTextBlock] with subheadings, emphasis, color-coding, links
@@ -200,7 +201,8 @@ Conjuguer/
     ├── TutorTestView.swift     # DEBUG-only batch harness for tutor queries
     ├── TutorView.swift         # Chat interface for the on-device tutor
     ├── VerbBrowseView.swift    # Searchable, sortable list/grid of all verbs (hosts the verb_browse_sort launch anchor)
-    ├── VerbPageNavigation.swift # VerbPagePush and verbPageNavigation(path:done:): the pages a verb or model page pushes, in the Verbs and Models tabs and in every sheet
+    ├── VerbCollectionView.swift # A featured collection's page, VerbCollectionBar (looked-up count, Quiz, Share) for it and every model page, and the Models tab's VerbCollectionRow
+    ├── VerbPageNavigation.swift # VerbPagePush and verbPageNavigation(path:done:): the pages a verb, model, or collection page pushes, in the Verbs and Models tabs and in every sheet
     └── VerbView.swift          # Verb detail: conjugation cards with second names and article buttons, the article sheet, the color key and scroll tip, etymology, example sentence, related verbs
 
 ConjugationMapTool/                 # macOS command-line target; compiles the conjugation core from Conjuguer/ (membership exceptions in project.pbxproj)
@@ -280,6 +282,7 @@ ConjuguerTests/
     ├── SettingsTests.swift             # Settings defaults (Suppress Review Card off), persistence, and malformed-value handling (serialized)
     ├── TenseTableTests.swift           # The verb page's order, each cell's card, articles, second names, and which pages show the color key
     ├── StemAlterationAuditTests.swift  # Audits every -er verb whose stem ends in é + consonant: the stem must open to è before a mute ending
+    ├── VerbCollectionTests.swift       # Collections: stable keys, each one's membership and order, list and model links, share text, progress, and the unranked quiz with its collection parameter
     ├── VerbDrawTests.swift             # The draw: what counts as irregular, the weights, ten days pinned to a Python reimplementation, My Verbs in turn every third day, weighted and one-in-three proportions with fixed seeds
     ├── VerbLookupTests.swift           # Look Up a Verb's findings, answers, and destinations (aller, vais, suis, etait, go, venier)
     ├── VerbModelTests.swift            # GENERATED by T.generateVerbModelTests() — one @Test per verb model, ~5,500 lines. Regenerate rather than hand-edit

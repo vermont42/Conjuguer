@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-/// Pushes a value onto whichever navigation stack shows the verb page or the model page: the
-/// Verbs tab's, the Models tab's, or a sheet's. A page that finds none in its environment presents
-/// a sheet instead.
+/// Pushes a value onto whichever navigation stack shows the verb page, the model page, or a
+/// collection's page: the Verbs tab's, the Models tab's, or a sheet's. A page that finds none in
+/// its environment presents a sheet instead.
 struct VerbPagePush {
   let push: (any Hashable) -> Void
 
@@ -57,6 +57,9 @@ private struct VerbPageNavigation: ViewModifier {
       }
       .navigationDestination(for: RelatedVerbListDestination.self) { destination in
         page(RelatedVerbListView(destination: destination))
+      }
+      .navigationDestination(for: VerbCollectionDestination.self) { destination in
+        page(VerbCollectionView(destination: destination))
       }
       .environment(\.verbPagePush, VerbPagePush { path.append($0) })
   }

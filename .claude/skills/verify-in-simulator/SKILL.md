@@ -72,6 +72,12 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `review_card_dismiss` | The card's ✕ | Before a reveal, snoozes the verb to the next day. |
 | `picker_settings_reviewCardSuppression` | Suppress Review Card segmented `Picker` in `SettingsView` (Phase 13) | 2 segments (Off, On). |
 | `model_verb_order` | Alphabetical/Frequency `Picker` above a model page's verbs | 2 segments; the verbs stay one `Text` of links, so tap a verb at its coordinates. |
+| `collection_row_<key>` | A featured collection's row (iPhone) or card (iPad) atop the Models tab (Phase 14) | Keys `top100`, `etre`, `irregularFutur`, `pronominal`. Hidden while the search field has text. |
+| `collection_progress` | "3 of 100 looked up" in a `VerbCollectionBar`, on a collection's page or a model's verbs card | Read it before and after opening a verb to see the count rise. |
+| `collection_quiz_button` | The bar's Quiz button | Opens a 30-question `QuizSheet` titled with the collection. Absent when no verb can be quizzed (1-10, 2-4). |
+| `collection_share_button` | The bar's Share button | The popover anchors to it on iPad. |
+| `collection_sort_order` | Frequency/Alphabetical `Picker` on a collection's page | 2 segments, Frequency first. |
+| `collection_verb_<dictionaryKey>` | A verb row on a collection's page | e.g. `collection_verb_aller`; a green check marks a verb looked up. |
 
 An identifier on a container that is not itself one element (a card) is inherited by every element
 inside it and overrides theirs, so put a card's identifier on its heading (as `verb_related` is).

@@ -276,3 +276,57 @@ Le paragraphe sur la liste conservée sur l'appareil devient :
 ```
 L'application conserve une liste des verbes que vous avez ouverts et des verbes que vous avez marqués d'une étoile, avec la date à laquelle chacun doit être révisé, afin d'afficher vos verbes récents, « Mes verbes » et les cartes de révision. Cette liste reste sur votre appareil et n'est jamais envoyée.
 ```
+
+## Collections (browse plan, Phase 14, 2026-11-22)
+
+Adds the signals `viewCollection`, sent when the page of one of the four featured collections opens
+(the 100 most frequent verbs, verbs taking être, irregular futur stems, pronominal verbs), and
+`tapShareCollection`, sent when a collection's share button is tapped. Both carry `collection`,
+which names one of the four, or says only `model` for a model's collection, never which model,
+since some models hold a single verb. `viewCollection` also carries `source`: the Models tab, a
+shared link, or another link. `quizStart` gains `collection` for a collection's quiz, and the quiz
+signals and verb pages begin sending the `list` source, which the quiz bullet and the first bullet
+of the Phase 3 section must name or cover. The progress a collection shows is counted on the device
+from the list Phase 10 keeps, so the paragraph about that list gains a mention of it. Apply this
+section after the Phase 11 and 13 sections, since it replaces the quiz bullet and the paragraph
+about the list that they give.
+
+### English
+
+The bullet on quiz lifecycle events now reads:
+
+```
+- Quiz lifecycle events (starting, quitting, or completing a quiz), and where the quiz began: the Quiz tab, over every verb or over My Verbs, a verb's page, or a collection, with which collection for the four featured ones (a model's collection is named only as a model)
+```
+
+A new bullet follows the bullet about the review card:
+
+```
+- That you opened one of the featured collections of verbs (the 100 most frequent verbs, verbs taking être, irregular futur stems, or pronominal verbs), which one, and whether you reached it from the Models tab or a link; and that you tapped a collection's share button, with which collection (a model's collection is named only as a model)
+```
+
+The paragraph about the list kept on the device now reads:
+
+```
+The app keeps a list of the verbs you have opened and the verbs you have starred, with when each is next due for review, so that it can show your recent verbs, My Verbs, review cards, and how many verbs of each collection you have looked up. The list stays on your device and is never sent.
+```
+
+### French
+
+Le point sur les événements du cycle de vie d'un quiz devient :
+
+```
+- Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes ou sur « Mes verbes », la page d'un verbe ou une collection, avec le nom de la collection pour les quatre collections mises en avant (la collection d'un modèle est désignée seulement comme celle d'un modèle)
+```
+
+Un nouveau point suit le point sur la carte de révision :
+
+```
+- L'ouverture de l'une des collections de verbes mises en avant (les 100 verbes les plus fréquents, les verbes conjugués avec être, les radicaux du futur irréguliers ou les verbes pronominaux), laquelle, et si vous l'avez atteinte depuis l'onglet Modèles ou par un lien ; ainsi qu'un appui sur le bouton de partage d'une collection, avec le nom de la collection (la collection d'un modèle est désignée seulement comme celle d'un modèle)
+```
+
+Le paragraphe sur la liste conservée sur l'appareil devient :
+
+```
+L'application conserve une liste des verbes que vous avez ouverts et des verbes que vous avez marqués d'une étoile, avec la date à laquelle chacun doit être révisé, afin d'afficher vos verbes récents, « Mes verbes », les cartes de révision et le nombre de verbes de chaque collection que vous avez consultés. Cette liste reste sur votre appareil et n'est jamais envoyée.
+```

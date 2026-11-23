@@ -24,6 +24,7 @@ struct DeeplinkTests {
   private func resetCurrent() {
     Current.verb = nil
     Current.verbModel = nil
+    Current.collection = nil
     Current.info = nil
     Current.pendingDeeplink = nil
     Current.verbSource = .deeplink

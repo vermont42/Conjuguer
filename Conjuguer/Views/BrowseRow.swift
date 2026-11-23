@@ -21,6 +21,9 @@ struct BrowseRow: View {
   /// A French line below the subtitle, in the accent color: what a search matched, as in
   /// "vais: Indicatif Présent (je)".
   var detail: String?
+
+  /// A check for a verb already looked up, as a collection's page marks its verbs.
+  var isChecked = false
   var badge: Badge?
 
   var body: some View {
@@ -50,8 +53,17 @@ struct BrowseRow: View {
         }
       }
 
-      if let badge {
+      if isChecked || badge != nil {
         Spacer()
+      }
+
+      if isChecked {
+        Image(systemName: "checkmark.circle.fill")
+          .foregroundStyle(Color.customGreen)
+          .accessibilityLabel(Text(L.VerbCollection.lookedUp))
+      }
+
+      if let badge {
         badgeText(badge)
       }
     }

@@ -5245,3 +5245,40 @@ already cached the domain, a reboot clears it. With that settled, the card behav
 the iPhone in both languages and on the iPad, where it stops at 560 points rather than stretching
 across the grid. Dark mode went unseen, because the simulator ignored the appearance switch for
 the whole session.
+
+## Collections, a Place to Go (2026-11-22)
+
+Phase 14 of the browse plan gave Conjuguer collections: fixed lists of verbs a learner can work
+through and a teacher can assign. The ideas document rated this one strongest for Conjuguer, since
+more than half of its downloads went to one Swiss institution's classrooms. Each collection shows
+how many of its verbs have been looked up ("3 of 100 looked up", with a progress bar), starts a
+thirty-question quiz on itself, and shares as a link with the App Store link under it.
+
+The plan said to ask before building, so the session showed Josh ASCII mockups of the Models tab
+and a model page and asked four questions. He took every recommendation: four featured collections
+at the top of the Models tab (the 100 most frequent verbs, the verbs taking être, the verbs with an
+irregular futur stem, and the pronominal verbs), every one of the 99 models as a collection in its
+own page, and each collection's verbs as rows with a check on those already looked up. A model
+keeps its one link, `conjuguer://model/<id>`, rather than gaining a second.
+
+Two numbers needed a second look. The top 100 first showed "3/101", because sortir has two entries
+(exit and obtain) that share a rank, so the band from Phase 12 holds 101. A title promising a
+hundred should count a hundred, so the collection keeps only sortir "exit". The irregular futur
+count came out at 91 in the app, where a quick Python estimate had said 104. The difference was in
+the script, not the app. It had stripped hyphens before comparing, so entre-nuire looked irregular,
+and it had ignored the defect groups, so quérir and ravoir, which have no futur in the app, were
+counted. The app's own conjugator, which asks for the radical du futur directly, was the better
+judge.
+
+Privacy shaped one small decision. A collection's signals name it, but a model's collection sends
+only "model", never which one, because some models hold a single verb, and naming model 1-9 would
+name aller. The policy promises that the verbs a learner looks up are not sent. Konjugieren sends
+the exemplar of each ablaut group, which has the same exposure for its single-verb groups, so the
+note went into the plan for its next pass.
+
+The collection quiz runs in a sheet over the collection, like Test Me, and so it starts no Live
+Activity: tapping one would open the Quiz tab, away from the sheet. On the iPad the four collection
+cards at first shared the models' three-column grid, where they wrapped and ran to uneven heights;
+a two-by-two grid fixed that. Dark mode went unseen again, because the simulator still ignored the
+appearance switch.
+

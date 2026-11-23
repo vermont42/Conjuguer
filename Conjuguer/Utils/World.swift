@@ -38,6 +38,8 @@ class World {
   // The cells a link's `match` item names on `verb`'s page.
   var verbMarks: MarkedConjugations?
   var verbModel: VerbModel?
+  // A featured collection that a `list/` link opens over the Models tab.
+  var collection: VerbCollectionDestination?
   var info: Info?
   var selectedTab: MainTab = .verbs
   var shouldNavigateToTutor = false
@@ -207,6 +209,7 @@ class World {
     verb = nil
     verbMarks = nil
     verbModel = nil
+    collection = nil
     info = nil
     searchRequest = nil
   }
@@ -235,6 +238,12 @@ class World {
       return .quiz
     case URL.verbModelHost:
       verbModel = VerbModel.models[target]
+      return .models
+    case URL.listHost:
+      guard let found = VerbCollection(featuredKey: target) else {
+        return nil
+      }
+      collection = VerbCollectionDestination(collection: found, source: url.analyticsSource ?? .deeplink)
       return .models
     case URL.infoHost:
       guard let found = Info.info(deeplinkTarget: target) else {

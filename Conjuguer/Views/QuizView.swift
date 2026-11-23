@@ -93,8 +93,10 @@ struct QuizView: View {
 
   private var titleRow: some View {
     HStack {
-      Text(L.Navigation.quiz)
+      Text(sheetScope?.title ?? L.Navigation.quiz)
         .headingLabel()
+        .lineLimit(2)
+        .minimumScaleFactor(0.7)
 
       Spacer()
 
@@ -371,5 +373,20 @@ enum TabQuizScope: CaseIterable {
     case .myVerbs:
       return L.MyVerbs.title
     }
+  }
+}
+
+/// A quiz in a sheet with its own `Quiz`: Test Me's three questions about the verb in view, or a
+/// collection's thirty. The learner closes it onto the same page, and a quiz in the Quiz tab
+/// carries on. While a question waits, the sheet closes only through Quit, so every quiz started
+/// here ends with `quizQuit` or `quizCompletion`.
+struct QuizSheet: View {
+  let scope: QuizScope
+  @State private var quiz = Quiz(gameCenter: Current.gameCenter)
+
+  var body: some View {
+    QuizView(sheetScope: scope)
+      .environment(quiz)
+      .interactiveDismissDisabled(quiz.quizState == .inProgress)
   }
 }

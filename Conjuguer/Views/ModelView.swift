@@ -221,6 +221,9 @@ struct ModelView: View {
       Text(L.ModelView.verbsUsing(count: model.verbs.count))
         .subheadingLabel()
 
+      VerbCollectionBar(collection: .model(model.id))
+        .padding(.bottom, Layout.defaultSpacing)
+
       if model.verbs.count > 1 {
         Picker(L.BrowseView.sortOrder, selection: $verbOrder) {
           ForEach([VerbSort.alphabetical, .frequency], id: \.self) { order in

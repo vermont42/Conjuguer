@@ -1,6 +1,227 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "VerbCollection.heading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collections"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collections"
+          }
+        }
+      }
+    },
+    "VerbCollection.lookedUp" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Looked up"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consulté"
+          }
+        }
+      }
+    },
+    "VerbCollection.progress" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ of %2$@ looked up"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consultés : %1$@ sur %2$@"
+          }
+        }
+      }
+    },
+    "VerbCollection.quizHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starts a %@-question quiz on these verbs."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lance un quiz de %@ questions sur ces verbes."
+          }
+        }
+      }
+    },
+    "VerbCollection.shareText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ (%2$@): %3$@\n\nOpen it in Conjuguer:\n%4$@\n\nGet Conjuguer on the App Store:\n%5$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ (%2$@) : %3$@\n\nL’ouvrir dans Conjuguer :\n%4$@\n\nTélécharger Conjuguer sur l’App Store :\n%5$@"
+          }
+        }
+      }
+    },
+    "VerbCollection.top100Title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "100 Most Frequent Verbs"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les 100 verbes les plus fréquents"
+          }
+        }
+      }
+    },
+    "VerbCollection.top100Description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The verbs that turn up most often in French, and the first to know."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les verbes qu’on rencontre le plus souvent en français, et les premiers à connaître."
+          }
+        }
+      }
+    },
+    "VerbCollection.etreTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbs Taking Être"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbes conjugués avec être"
+          }
+        }
+      }
+    },
+    "VerbCollection.etreDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbs that form the passé composé with être, as in je suis allé: mostly verbs of motion or change of state. Some, like monter and passer, take avoir when they have a direct object."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les verbes qui forment le passé composé avec être, comme dans je suis allé : surtout des verbes de mouvement ou de changement d’état. Certains, comme monter et passer, se conjuguent avec avoir quand ils ont un complément d’objet direct."
+          }
+        }
+      }
+    },
+    "VerbCollection.irregularFuturTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Irregular Futur Stems"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Radicaux du futur irréguliers"
+          }
+        }
+      }
+    },
+    "VerbCollection.irregularFuturDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbs whose futur and conditionnel build on a stem other than the infinitive, as in je serai, j’irai, and je viendrai."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les verbes dont le futur et le conditionnel se construisent sur un autre radical que l’infinitif, comme dans je serai, j’irai et je viendrai."
+          }
+        }
+      }
+    },
+    "VerbCollection.pronominalTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pronominal Verbs"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbes pronominaux"
+          }
+        }
+      }
+    },
+    "VerbCollection.pronominalDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbs that Conjuguer conjugates with a reflexive pronoun, as in je me souviens. Their compound tenses take être."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les verbes que Conjuguer conjugue avec un pronom réfléchi, comme dans je me souviens. Leurs temps composés se forment avec être."
+          }
+        }
+      }
+    },
     "ReviewCard.dismiss" : {
       "extractionState" : "manual",
       "localizations" : {

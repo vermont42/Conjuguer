@@ -88,23 +88,52 @@ struct ModelBrowseView: View {
       ModelView(model: model)
         .sheetDismissable()
     }
+    .sheet(item: $world.collection) { destination in
+      VerbCollectionView(destination: destination)
+        .sheetDismissable()
+    }
     .recordsAppearance(as: "\(ModelBrowseView.self)")
+  }
+
+  // The collections lead the tab while it lists every model, and give way to a search's results.
+  private var showsCollections: Bool {
+    searchText.isEmpty
   }
 
   @ViewBuilder
   private var modelCollection: some View {
     if horizontalSizeClass == .regular {
       ScrollView {
-        LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
-          ForEach(searchResults) { modelAndDecorator in
-            Button {
-              path.append(ModelDestination(model: modelAndDecorator.model))
-            } label: {
-              modelRow(modelAndDecorator)
-                .card()
+        VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
+          if showsCollections {
+            sectionHeading(L.VerbCollection.heading)
+
+            // Two by two: at the models' narrower width the titles wrapped and the cards ran
+            // to uneven heights.
+            Grid(horizontalSpacing: Layout.doubleDefaultSpacing, verticalSpacing: Layout.doubleDefaultSpacing) {
+              ForEach(Self.collectionPairs, id: \.first) { pair in
+                GridRow {
+                  ForEach(pair) { collection in
+                    collectionButton(collection, isCard: true)
+                  }
+                }
+              }
             }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier(Self.rowIdentifier(modelAndDecorator))
+
+            sectionHeading(L.Navigation.models)
+          }
+
+          LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
+            ForEach(searchResults) { modelAndDecorator in
+              Button {
+                path.append(ModelDestination(model: modelAndDecorator.model))
+              } label: {
+                modelRow(modelAndDecorator)
+                  .card()
+              }
+              .buttonStyle(.plain)
+              .accessibilityIdentifier(Self.rowIdentifier(modelAndDecorator))
+            }
           }
         }
         .padding(.vertical, Layout.defaultSpacing)
@@ -116,15 +145,34 @@ struct ModelBrowseView: View {
         }
       }
     } else {
-      List(searchResults) { modelAndDecorator in
-        Button {
-          path.append(ModelDestination(model: modelAndDecorator.model))
-        } label: {
-          modelRow(modelAndDecorator)
+      List {
+        if showsCollections {
+          Section {
+            ForEach(VerbCollection.featured) { collection in
+              collectionButton(collection, isCard: false)
+                .listRowBackground(Color.customBackground)
+            }
+          } header: {
+            sectionHeading(L.VerbCollection.heading)
+          }
         }
-        .buttonStyle(.plain)
-        .accessibilityIdentifier(Self.rowIdentifier(modelAndDecorator))
-        .listRowBackground(Color.customBackground)
+
+        Section {
+          ForEach(searchResults) { modelAndDecorator in
+            Button {
+              path.append(ModelDestination(model: modelAndDecorator.model))
+            } label: {
+              modelRow(modelAndDecorator)
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier(Self.rowIdentifier(modelAndDecorator))
+            .listRowBackground(Color.customBackground)
+          }
+        } header: {
+          if showsCollections {
+            sectionHeading(L.Navigation.models)
+          }
+        }
       }
       .listStyle(.plain)
       .scrollContentBackground(.hidden)
@@ -134,6 +182,33 @@ struct ModelBrowseView: View {
         }
       }
     }
+  }
+
+  private static let collectionPairs = stride(from: 0, to: VerbCollection.featured.count, by: 2).map {
+    Array(VerbCollection.featured[$0 ..< min($0 + 2, VerbCollection.featured.count)])
+  }
+
+  @ViewBuilder
+  private func collectionButton(_ collection: VerbCollection, isCard: Bool) -> some View {
+    Button {
+      path.append(VerbCollectionDestination(collection: collection, source: .tab))
+    } label: {
+      if isCard {
+        VerbCollectionRow(collection: collection)
+          .frame(maxHeight: .infinity, alignment: .top)
+          .card()
+      } else {
+        VerbCollectionRow(collection: collection)
+      }
+    }
+    .buttonStyle(.plain)
+    .accessibilityIdentifier("collection_row_\(collection.key)")
+  }
+
+  private func sectionHeading(_ text: String) -> some View {
+    Text(text)
+      .subheadingLabel()
+      .accessibilityAddTraits(.isHeader)
   }
 
   private func modelRow(_ modelAndDecorator: ModelAndDecorator) -> some View {
