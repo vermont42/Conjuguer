@@ -30,7 +30,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 4 | Done | 2026-11-23 | 954eda0 | T1.6 | 4 |
 | 5 | Done | 2026-11-23 | bc2c6e6 | T2.3, T2.6, T6.7, M1 | 5 |
 | 6 | Done | 2026-11-23 | b26cb07 | T2.1, T2.2, T2.5 | 6 |
-| 7 | Awaiting Josh | 2026-11-23 | | T2.7, T3.1, T6.5, M2, M3 | 7 |
+| 7 | Done | 2026-11-23 | 609b1b8 | T2.7, T3.1, T6.5, M2, M3 | 7 |
 | 8 | Not started | | | Decision 4 | 8 |
 | 9 | Not started | | | T2.8 | 9 |
 | 10 | Not started | | | T2.9, Decision 8 | 10 |
@@ -944,7 +944,7 @@ each.
 ## Phase 7: Ten Questions, Then Ten More
 
 **Suggestions:** T2.7, T3.1, T6.5, M2, M3. **Ports:** Konjugieren Phase 7 (`QuizClock.swift`,
-`QuizAbandonment.swift`). **Depends on:** Phases 3 and 5. **Status:** Awaiting Josh.
+`QuizAbandonment.swift`). **Depends on:** Phases 3 and 5. **Status:** Done.
 
 - **T2.7.** The default session is ten questions. Its results offer Ten More, which continues the
   same session and adds to its score.
