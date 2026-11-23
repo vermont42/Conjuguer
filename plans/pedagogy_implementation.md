@@ -28,7 +28,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 2 | Done | 2026-11-22 | b4aa188 | T1.2 | 2 |
 | 3 | Done | 2026-11-23 | bfe5c7f | T4.1, T4.4, T4.5 | 3 |
 | 4 | Done | 2026-11-23 | 954eda0 | T1.6 | 4 |
-| 5 | Awaiting Josh | 2026-11-23 | | T2.3, T2.6, T6.7, M1 | 5 |
+| 5 | Done | 2026-11-23 | bc2c6e6 | T2.3, T2.6, T6.7, M1 | 5 |
 | 6 | Not started | | | T2.1, T2.2, T2.5 | 6 |
 | 7 | Not started | | | T2.7, T3.1, T6.5, M2, M3 | 7 |
 | 8 | Not started | | | Decision 4 | 8 |
@@ -709,7 +709,7 @@ eut/eût.
 ## Phase 5: Levels
 
 **Suggestions:** T2.3, T2.6, T6.7, M1. **Ports:** Konjugieren Phase 5 (`QuizLevel.swift`,
-`QuizDraw.swift`). **Depends on:** Phase 1. **Status:** Awaiting Josh.
+`QuizDraw.swift`). **Depends on:** Phase 1. **Status:** Done.
 
 Replace Regular and Ridiculous with four levels ordered by use, each adding to the one before.
 Konjugieren's ladder came from the report's study of German curricula. French needs its own: read
