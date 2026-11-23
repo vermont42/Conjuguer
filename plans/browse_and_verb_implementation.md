@@ -31,7 +31,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 5 | Done | 2026-11-22 | 1fd6c58 | A5 (the search) | 6 |
 | 6 | Done | 2026-11-22 | 1fd6c58 | B3, B5's tip | 7 |
 | 7 | Done | 2026-11-22 | c9fbd7e | B4, A9 | 9 |
-| 8 | Awaiting Josh | 2026-11-22 | | B6 | 10 |
+| 8 | Done | 2026-11-22 | aaf8b31 | B6 | 10 |
 | 9 | Not started | | | C1, C2 | 11 |
 | 10 | Not started | | | D1, D2 | 12 |
 | 11 | Not started | | | D2's quiz scope, D3 | 13 |
@@ -1039,7 +1039,7 @@ and `Views/VerbPageNavigation.swift`. `docs/feature_architecture.md` § Related 
 ## Phase 8: Copy and Share
 
 **Ideas:** B6. **Ports:** Konjugieren Phase 10 (`KeyConjugations.swift`, `ShareSheet.swift`).
-**Depends on:** nothing. **Status:** Awaiting Josh (built 2026-11-22).
+**Depends on:** nothing. **Status:** Done (2026-11-22).
 
 - A long press on a conjugation opens a context menu with Copy (Konjugieren's choice: the
   platform's convention, it works with a right-click on a Mac, and it needs no toast). A tap still
