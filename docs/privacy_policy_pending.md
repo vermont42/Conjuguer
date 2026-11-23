@@ -463,3 +463,29 @@ La première phrase du paragraphe qui suit la liste devient :
 ```
 La durée d'un quiz est collectée par ordres de grandeur, mais, comme toutes ces statistiques, elle est anonymisée et n'est pas liée à votre identité (voir la section 4). Votre score au quiz n'est pas collecté.
 ```
+
+## A custom quiz (pedagogy plan, Phase 9, 2026-11-23)
+
+The Quiz tab gains a custom quiz over tenses, verbs, or both that the learner chooses. The quiz
+signals send a new `source` value, `custom`, and `quizStart` gains `customChoice`, which says only
+whether tenses, verbs, or both were chosen, never which. A custom quiz over a featured collection
+or a model sends `collection` as a collection's own quiz does, a model's named only as a model. A
+custom quiz posts nothing to Game Center. This section replaces the quiz bullet that the Collections
+section above gives, so apply it after that one. The choice is kept on the device, in the app's
+settings, and is never sent.
+
+### English
+
+The bullet on quiz lifecycle events now reads:
+
+```
+- Quiz lifecycle events (starting, quitting, or completing a quiz), and where the quiz began: the Quiz tab, over every verb, over My Verbs, or over a custom choice, a verb's page, or a collection, with which collection for the four featured ones (a model's collection is named only as a model); for a custom quiz, whether you chose tenses, verbs, or both, but not which
+```
+
+### French
+
+Le point sur les événements du cycle de vie d'un quiz devient :
+
+```
+- Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes, sur « Mes verbes » ou sur mesure, la page d'un verbe ou une collection, avec le nom de la collection pour les quatre collections mises en avant (la collection d'un modèle est désignée seulement comme celle d'un modèle) ; pour un quiz sur mesure, si vous avez choisi des temps, des verbes ou les deux, mais pas lesquels
+```

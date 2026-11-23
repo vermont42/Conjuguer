@@ -85,10 +85,11 @@ struct QuizDrawnQuestion: Equatable {
   let slot: QuizTenseSlot
 }
 
-/// Chooses the verbs of the default quiz, whose verbs the learner did not choose, from the level's
-/// band. Each question draws its tense by weight, as in any quiz. Then the questions get roles and
-/// an exact half of them an irregular verb, and only then does each draw one of its tense's pools
-/// that fits both, and a verb from it, so that the counts come out exact rather than likely.
+/// Chooses the verbs of a quiz whose verbs the learner did not list, from a band: the level's for
+/// the default quiz, or the one a custom quiz chose. Each question draws its tense by weight, as
+/// in any quiz. Then the questions get roles and an exact half of them an irregular verb, and only
+/// then does each draw one of its tense's pools that fits both, and a verb from it, so that the
+/// counts come out exact rather than likely.
 ///
 /// At least two questions ask a core verb. A prefixed verb in `frequentDerivativeBand` draws as
 /// freely as a base verb, since revenir and comprendre are as basic as venir and prendre. Where the
@@ -130,18 +131,29 @@ enum QuizDraw {
     asked earlier: Set<String>,
     using generator: inout some RandomNumberGenerator
   ) -> [QuizDrawnQuestion] {
-    let tenseSlots = level.slots
+    questions(slots: level.slots, band: level.band, count: count, asked: earlier, using: &generator)
+  }
+
+  /// The questions of `slots` over `band`, nil for every verb, as a level's default quiz or a
+  /// custom quiz that left its verbs to a band asks them.
+  @MainActor static func questions(
+    slots tenseSlots: [QuizTenseSlot],
+    band: FrequencyBand?,
+    count: Int,
+    asked earlier: Set<String>,
+    using generator: inout some RandomNumberGenerator
+  ) -> [QuizDrawnQuestion] {
     var slots = (0 ..< count).compactMap { _ in
       QuizTenseSlot.drawWeighted(from: tenseSlots, using: &generator).map { Slot(tense: $0) }
     }
     func candidates(_ tense: QuizTenseSlot, _ pool: QuizVerbPool) -> Candidates {
-      Candidates.of(level: level, slot: tense, pool: pool)
+      Candidates.of(band: band, slot: tense, pool: pool)
     }
     func admits(_ slot: Slot, role: Role, isIrregular: Bool? = nil) -> Bool {
       Set(slot.tense.verbPools).contains { !candidates(slot.tense, $0).verbs(role: role, isIrregular: isIrregular).isEmpty }
     }
 
-    let reachesRareDerivatives = level.verbs.contains(where: isRareDerivative)
+    let reachesRareDerivatives = verbs(in: band).contains(where: isRareDerivative)
     var roleNeeds: [(role: Role, count: Int)] = [(.core, minimumCoreQuestions)]
     if reachesRareDerivatives {
       roleNeeds.append((.rareDerivative, Int.random(in: rareDerivativeRange, using: &generator)))
@@ -193,6 +205,10 @@ enum QuizDraw {
     }
   }
 
+  @MainActor static func verbs(in band: FrequencyBand?) -> [Verb] {
+    band.map(Verb.verbs(in:)) ?? Verb.verbsByFrequency
+  }
+
   private static func freshVerb(from verbs: [Verb], asked: Set<String>, using generator: inout some RandomNumberGenerator) -> Verb? {
     var verb = verbs.randomElement(using: &generator)
     for _ in 0 ..< freshVerbTries {
@@ -236,21 +252,21 @@ enum QuizDraw {
     }
 
     private struct Key: Hashable {
-      let level: QuizLevel
+      let band: FrequencyBand?
       let slot: QuizTenseSlot
       let pool: QuizVerbPool
     }
 
     @MainActor private static var cache: [Key: Candidates] = [:]
 
-    @MainActor static func of(level: QuizLevel, slot: QuizTenseSlot, pool: QuizVerbPool) -> Candidates {
-      let key = Key(level: level, slot: slot, pool: pool)
+    @MainActor static func of(band: FrequencyBand?, slot: QuizTenseSlot, pool: QuizVerbPool) -> Candidates {
+      let key = Key(band: band, slot: slot, pool: pool)
       if let cached = cache[key] {
         return cached
       }
       let cells = slot.cells
       var buckets: [Bucket: [Verb]] = [:]
-      for verb in level.verbs where !QuizDraw.excludedEntries.contains(verb.dictionaryKey) && pool.admits(verb) && cells.contains(where: verb.hasCell) {
+      for verb in QuizDraw.verbs(in: band) where !QuizDraw.excludedEntries.contains(verb.dictionaryKey) && pool.admits(verb) && cells.contains(where: verb.hasCell) {
         let kind: Kind
         if QuizDraw.isCore(verb) {
           kind = .core

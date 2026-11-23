@@ -1174,6 +1174,76 @@ enum L {
     }
   }
 
+  enum CustomQuiz {
+    static var segment: String {
+      String(localized: "CustomQuiz.segment")
+    }
+
+    static var title: String {
+      String(localized: "CustomQuiz.title")
+    }
+
+    static var tenses: String {
+      String(localized: "CustomQuiz.tenses")
+    }
+
+    static var tensesFooter: String {
+      String(localized: "CustomQuiz.tensesFooter")
+    }
+
+    static var verbs: String {
+      String(localized: "CustomQuiz.verbs")
+    }
+
+    static var models: String {
+      String(localized: "CustomQuiz.models")
+    }
+
+    static var byLevel: String {
+      String(localized: "CustomQuiz.byLevel")
+    }
+
+    static func byLevel(_ value: String) -> String {
+      String(localized: "CustomQuiz.byLevelValue", defaultValue: "Set by Your Level: \(value)")
+    }
+
+    static func levelVerbs(level: String, verbs: String) -> String {
+      String(localized: "CustomQuiz.levelVerbs", defaultValue: "\(level) · \(verbs)")
+    }
+
+    static func band(_ count: String) -> String {
+      String(localized: "CustomQuiz.band", defaultValue: "\(count) Most Frequent Verbs")
+    }
+
+    static func everyVerb(_ count: String) -> String {
+      String(localized: "CustomQuiz.everyVerb", defaultValue: "All \(count) Verbs")
+    }
+
+    static var choose: String {
+      String(localized: "CustomQuiz.choose")
+    }
+
+    static var change: String {
+      String(localized: "CustomQuiz.change")
+    }
+
+    static var chooseHint: String {
+      String(localized: "CustomQuiz.chooseHint")
+    }
+
+    static var emptyDescription: String {
+      String(localized: "CustomQuiz.emptyDescription")
+    }
+
+    static var description: String {
+      String(localized: "CustomQuiz.description")
+    }
+
+    static var nothingToAsk: String {
+      String(localized: "CustomQuiz.nothingToAsk")
+    }
+  }
+
   enum PronounGender {
     static var feminine: String {
       String(localized: "PronounGender.feminine")

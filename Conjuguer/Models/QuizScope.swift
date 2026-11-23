@@ -9,7 +9,8 @@ import Foundation
 
 /// What a quiz asks about, how many questions it asks, and where it was begun.
 struct QuizScope {
-  /// Nil asks the default quiz, which `QuizDraw` builds from the band of the learner's level.
+  /// Nil asks a quiz whose verbs `QuizDraw` mixes from a band: the learner's level's, or the one a
+  /// custom quiz chose.
   let verbs: [Verb]?
 
   let questionCount: Int
@@ -21,10 +22,29 @@ struct QuizScope {
   /// The collection a quiz over a collection asks about, which `quizStart` names.
   var collection: VerbCollection?
 
+  var custom: CustomQuiz?
+
   /// Only the default quiz posts to its level's leaderboard and sets its best score: a score over
-  /// the learner's own verbs, or over three questions, compares with nothing.
+  /// the learner's own verbs or tenses, or over three questions, compares with nothing.
   var isRanked: Bool {
-    verbs == nil
+    verbs == nil && custom == nil
+  }
+
+  func slots(at level: QuizLevel) -> [QuizTenseSlot] {
+    custom?.slots(at: level) ?? level.slots
+  }
+
+  /// The band a mixed quiz draws from, nil for every verb.
+  func band(at level: QuizLevel) -> FrequencyBand? {
+    guard let verbSet = custom?.verbSet, verbSet.mixesVerbs else {
+      return level.band
+    }
+    return verbSet.band
+  }
+
+  /// The collection `quizStart` names: a collection's own quiz, or a custom quiz over one.
+  var namedCollection: VerbCollection? {
+    collection ?? custom?.verbSet?.collection
   }
 
   /// Whether the results offer Ten More. Test Me's three questions are a check, not a session.
@@ -54,16 +74,17 @@ struct QuizScope {
     QuizScope(verbs: [verb], questionCount: verbPageQuestionCount, source: .verbPage)
   }
 
-  /// The questions of a quiz over `verbs` at `level`. Empty for the default quiz, which `Quiz`
-  /// builds itself, and for verbs that have none of the cells the level asks.
+  /// The questions of a quiz over `verbs` at `level`. Empty for a mixed quiz, which `Quiz` draws
+  /// through `QuizDraw`, and for verbs that have none of the cells the quiz asks.
   func questions(level: QuizLevel, using generator: inout some RandomNumberGenerator) -> [QuizQuestion] {
     guard let verbs, !verbs.isEmpty else {
       return []
     }
+    let slots = slots(at: level)
     if questionCount < Quiz.questionCount {
-      return Self.distinctCellQuestions(verbs: verbs, slots: level.slots, count: questionCount, using: &generator)
+      return Self.distinctCellQuestions(verbs: verbs, slots: slots, count: questionCount, using: &generator)
     }
-    return Self.levelMixQuestions(verbs: verbs, slots: level.slots, count: questionCount, using: &generator)
+    return Self.levelMixQuestions(verbs: verbs, slots: slots, count: questionCount, using: &generator)
   }
 
   /// Tenses drawn by weight from those that some verb has, each question's verb drawn in turn

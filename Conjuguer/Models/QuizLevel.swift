@@ -61,7 +61,7 @@ enum QuizLevel: String, CaseIterable {
   }
 
   @MainActor var verbs: [Verb] {
-    band.map(Verb.verbs(in:)) ?? Verb.verbsByFrequency
+    QuizDraw.verbs(in: band)
   }
 
   var slots: [QuizTenseSlot] {

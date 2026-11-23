@@ -24,6 +24,7 @@ enum ParameterKey: String {
   case dwell
   case starred
   case collection
+  case customChoice
 }
 
 enum AnalyticsName: String {
@@ -54,6 +55,7 @@ enum AnalyticsName: String {
 enum AnalyticsSource: String, CaseIterable {
   case browse
   case control
+  case custom
   case deeplink
   case infoLink
   case list

@@ -5761,3 +5761,49 @@ version. Konjugieren's attempt to test its boards from a development build found
 until they belong to a version, so the test here waits for that version too, and
 `docs/game_center_setup.md` and `docs/release.md` say what release day must do: submit the boards
 with the version, then archive the board every earlier version posted to.
+
+## Choosing What to Practice (2026-11-23)
+
+Until now a Conjuguer learner could choose a level, or a list of verbs, but not a tense. A learner
+who wanted an evening of nothing but the subjonctif présent, or a teacher whose class had just met
+the passé simple, had to take the level's whole mix and wait for the tense to come up. Phase 9 of
+the pedagogy plan added a third segment to the Quiz tab's picker, Custom (Sur mesure in French),
+beside All Verbs and My Verbs.
+
+Its design came from Konjugieren, which built the same thing nine days earlier. The briefing card
+shows a short summary of the choice and a Choose button, which pushes an editor onto the tab: the
+nineteen tenses the quiz can ask, then the verb sets. Any tense may be chosen at any level, since
+the choice is the learner's. A part left unchosen falls back to the level, so a choice of tenses
+alone asks them of the level's band of verbs, and a choice of verbs alone asks the level's tenses.
+The tab still opens on All Verbs at every launch, so a beginner who never looks at the picker meets
+the same quiz as before.
+
+French offered one set Konjugieren lacked. Konjugieren's verb sets included its ablaut groups; here
+the natural counterpart is the conjugation model. The editor's Models row pushes a list of all of
+them, parler (1-1) with its 4,859 verbs down to models of a single verb, so a learner can drill
+appeler's doubled consonant or venir's stem in whichever tenses they choose. The first quiz tried in
+the simulator, the imparfait and futur simple over appeler's model, opened with "vous ___" of
+ficeler.
+
+Two sorts of verb set behave differently, as in Konjugieren. The frequency bands and the whole
+corpus are chosen for their size, so the draw mixes them as the default quiz does, with half the
+questions irregular and two on the core verbs. A collection, a model, or My Verbs is a list, so the
+quiz takes its verbs in turn. The draw needed only one change to serve both the default quiz and a
+custom one: it now takes a list of tenses and a band rather than a level.
+
+Konjugieren needed a fallback for a restricted tense that no chosen verb could take. Conjuguer has
+no restricted tenses, but it has defective verbs, and a choice can still ask nothing: the impératif
+of falloir's model, say, or a kept choice of My Verbs after the list was cleared. Rather than start
+a quiz with no questions, Start is disabled and a line says why.
+
+Trying it in the simulator found one bug the tests had not. A chosen model disappeared after a
+relaunch while the chosen tenses stayed. The setting is read at launch, before the verb data is
+parsed, and the code that read it back checked that the model existed, which at that moment no
+model did. A model key is now accepted as it comes, and one that names nothing simply has no verbs
+to ask.
+
+A custom quiz never posts to Game Center, since a score over chosen tenses compares with nothing. Its
+signals say only that a custom quiz was begun and whether tenses, verbs, or both were chosen, never
+which. The choice is kept in the app's settings in a form built to be shared
+(`tenses=imparfait,futur_simple&verbs=model-1-3A`), because the next phase turns it into a link and
+a QR code that a teacher can hand to a class.

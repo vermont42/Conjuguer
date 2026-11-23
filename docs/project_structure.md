@@ -95,8 +95,9 @@ Conjuguer/
 │   ├── Quiz.swift              # @Observable quiz state: question generation, rounds of ten and Ten More, re-asks, timer, scoring, Live Activity, Game Center
 │   ├── QuizAbandonment.swift   # The quizzes in progress, kept so the next launch can send quizAbandon for one the app was left during
 │   ├── QuizClock.swift         # Setting enum: the Quiz Clock, hide (default) or show
-│   ├── QuizDraw.swift          # The default quiz's verbs from the level's band: half irregular, two core verbs, one to three rare derivatives; QuizVerbPool (a tense's kinds of verb, read from the data) and QuizVerbTraits
-│   ├── QuizScope.swift         # What a quiz asks about (every verb, My Verbs, one verb's page, a collection), its count and source; the level's mix over chosen verbs, Test Me's three tenses, Verb.hasCell, canBeQuizzed(at:)
+│   ├── CustomQuiz.swift        # The custom quiz: chosen tenses and a QuizVerbSet (a band, every verb, My Verbs, a collection or model), its stored form, QuizScope.custom
+│   ├── QuizDraw.swift          # The verbs of an unlisted quiz (the default, or a custom quiz over a band) from a band: half irregular, two core verbs, one to three rare derivatives; QuizVerbPool (a tense's kinds of verb, read from the data) and QuizVerbTraits
+│   ├── QuizScope.swift         # What a quiz asks about (every verb, My Verbs, one verb's page, a collection, a custom choice), its count and source; the level's mix over chosen verbs, Test Me's three tenses, Verb.hasCell, canBeQuizzed(at:)
 │   ├── QuizLevel.swift         # Setting enum: the four quiz levels (Beginner to Advanced) and the tenses each asks; QuizTenseSlot, a tense's cells, weight, and verb pools; each level's frequency band
 │   ├── QuizQuestion.swift      # One quiz question (verb + tense), and whether it is a missed question asked again
 │   ├── QuizResult.swift        # One answered question, its ConjugationResult, a slip's first attempt, and whether it was a re-ask, with its points, for the results sheet
@@ -188,6 +189,7 @@ Conjuguer/
     ├── BrowseLayout.swift      # Shared adaptive grid columns and search-field placement (a fixed bar on iPad and Mac) for the browse views
     ├── BrowseRow.swift         # Shared row/cell used by both browse views, with optional badge, a looked-up check, and a French or English subtitle
     ├── BrowseSearch.swift      # Shared search plumbing for the browse views: all items for a blank query, the trombone for none
+    ├── CustomQuizView.swift    # The custom quiz's editor (tenses and a verb set, each tap kept at once) and its list of models, pushed onto the Quiz tab
     ├── FailedVerbSearchView.swift # The verb list's empty state: no results, a guess at the verb meant, and the email-us line
     ├── FrenchLetterKeyRow.swift   # é è ê â î ô û ç keys that replace the sort picker while a search field is focused, and sit above the keyboard for the quiz's answer field
     ├── GameCenterAuthView.swift   # UIViewController shim + coordinator for presenting Game Center auth
@@ -203,7 +205,7 @@ Conjuguer/
     ├── QuizCorrectionView.swift # A wrong answer held on its question: the two answers with their differing letters marked, links to the verb and its model, and Continue
     ├── QuizResultsView.swift   # End-of-quiz sheet: score, correct and second-try counts, per-question results, leaderboard
     ├── QuizResultView.swift    # One row of the results sheet, with a slip's first attempt
-    ├── QuizView.swift          # Quiz gameplay: prompt, answer field framed by its pronoun with the accent keys, progress, feedback and the app's spelling of a variant, the held correction and the pages it pushes; the All Verbs / My Verbs picker; QuizSheet, for Test Me on a verb page and a collection's quiz
+    ├── QuizView.swift          # Quiz gameplay: prompt, answer field framed by its pronoun with the accent keys, progress, feedback and the app's spelling of a variant, the held correction and the pages it pushes; the All Verbs / My Verbs / Custom picker and the custom quiz's summary; QuizSheet, for Test Me on a verb page and a collection's quiz
     ├── RelatedVerbsView.swift  # The verb page's Related Verbs card (built on the same root, same model), RelatedVerbListView, and FlowLayout
     ├── ReviewCardView.swift    # The review card above the verb list: a verb looked up days ago, its key conjugations hidden until a tap, a second tap opening its page
     ├── RichTextView.swift      # Renders [RichTextBlock] with subheadings, emphasis, color-coding, links
@@ -270,6 +272,7 @@ ConjuguerTests/
     ├── ConjugationMapTests.swift       # The bundled map equals a fresh build, finds the verb of 99% of example sentences, its entries (homographs, agreement, defects), and its format
     ├── ConjugationMatchTests.swift     # conjugations(matching:): single cells, shared spellings, compound agreement, alternates, defective cells, non-matches
     ├── ConjugationResultTests.swift    # Grading: pronouns, spacing, alternates, required accents and agreement, and the spelling shown for a variant
+    ├── CustomQuizTests.swift           # The custom quiz: its stored form and keys, unknown keys dropped, a part left to the level, lists against bands, never ranked, the choice parameter, what cannot start, chosen tenses at any level, the setting's persistence; nested in QuizTests, sessions that ask only the choice and send custom
     ├── DeeplinkTests.swift             # conjuguer:// parsing and routing: the search route, match, info keys, the builders' round trips, and the source query item (serialized — mutates Current)
     ├── DefectGroupTests.swift          # Defect-group membership and tense suppression
     ├── DefectivityAuditTests.swift     # Per-family defectivity audit (traire, braire, férir, poindre, pouvoir's impératif, …)

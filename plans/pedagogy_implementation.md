@@ -32,7 +32,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 6 | Done | 2026-11-23 | b26cb07 | T2.1, T2.2, T2.5 | 6 |
 | 7 | Done | 2026-11-23 | 609b1b8 | T2.7, T3.1, T6.5, M2, M3 | 7 |
 | 8 | Done | 2026-11-23 | 3f12ff1 | Decision 4 | 8 |
-| 9 | Not started | | | T2.8 | 9 |
+| 9 | Done | 2026-11-23 | | T2.8 | 9 |
 | 10 | Not started | | | T2.9, Decision 8 | 10 |
 | 11 | Not started | | | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
 | 12 | Not started | | | T3.2, T3.3 (the session) | 12 |
@@ -1140,7 +1140,7 @@ walkthrough exists, and tests pin which sessions rank.
 ## Phase 9: Choosing What to Practice
 
 **Suggestions:** T2.8. **Ports:** Konjugieren Phase 9 (`CustomQuiz.swift`, `CustomQuizView.swift`).
-**Depends on:** Phases 5 and 6. **Status:** Not started.
+**Depends on:** Phases 5 and 6. **Status:** Done.
 
 Let the learner choose the scope: tenses, a verb set (a band, a collection, a model, My Verbs), or
 both. Models are a natural scope here, the counterpart of Konjugieren's ablaut groups. A beginner
@@ -1156,6 +1156,70 @@ default, which stays the default; any tense may be chosen, above the learner's l
 unchanged; and tests pin scope construction.
 
 **How it differed:**
+
+- **The layout**, ported from Konjugieren's. The Quiz tab's picker gained a third segment, Custom
+  (Sur mesure). With it chosen, the briefing card shows a summary (Tenses, Verbs), a line saying
+  what Start will do or why it cannot, and Choose or Change, which pushes `CustomQuizEditor` onto
+  the tab's stack: "Set by Your Level" and the nineteen tenses the quiz can ask, in the order the
+  levels add them, each with its second name, then "Set by Your Level" and the verb sets. Models
+  is a further push, `CustomQuizModelList`, every model with verbs in identifier order with its
+  count, as Konjugieren's ablaut groups were. The editor uses the app's cards on its background
+  rather than Konjugieren's plain `List`, and is capped at 680 points wide on an iPad. The tab
+  opens on All Verbs at every launch, so the default stays the default and Custom is one tap from
+  Start. **Josh has not judged the layout**, which the phase asks for before polishing.
+- **The verb sets:** the 100, 300, and 1,000 most frequent verbs, all 6,326, My Verbs (only while
+  it has verbs or is the stored choice), verbs taking être, irregular futur stems, pronominal
+  verbs, and any of the models. The top-100 collection is offered only as the band, which holds the
+  same verbs under the same key.
+- **Decided in the session, not asked,** each Konjugieren's in-session guess carried over, and each
+  one Josh can overrule. (1) A part left unchosen is the level's: tenses alone ask the level's
+  band, a verb set alone the level's tenses. (2) A band or every verb is mixed as the default quiz
+  is (half irregular, two core verbs, rare derivatives); a collection, a model, or My Verbs is a
+  list, asked as a My Verbs quiz is. (3) One verb set at a time. (4) The tip donation follows
+  `isRanked`, as in Phase 7, so a custom quiz donates nothing to `ChangeLevelTip`, unlike
+  Konjugieren's. Konjugieren's fallback for a restricted kind no verb fits (`relaxesRestrictions`)
+  has no counterpart here, since Phase 5 left no restricted cells; instead Start is disabled, with
+  "None of these verbs has any of the chosen tenses.", when no verb of a list has a chosen tense
+  (falloir's model and the impératif), and with the My Verbs line when a kept My Verbs choice meets
+  an empty list.
+- **How it works.** `CustomQuiz` (chosen `QuizTenseSlot`s and an optional `QuizVerbSet`) in
+  `Models/CustomQuiz.swift`, kept in `Settings.customQuiz` as `tenses=…&verbs=…`, with a tense's
+  `Info.stableKey` as its key and `model-<id>` for a model, so that Phase 10 can put the same
+  string in a link. `QuizScope` gained `custom`, `slots(at:)`, `band(at:)`, and `namedCollection`;
+  `isRanked` now also requires `custom == nil`. `QuizDraw.questions` takes slots and a band, with
+  the level form kept as a wrapper, and its candidate cache is keyed by band rather than level.
+  The DEBUG fixtures apply only to the default quiz.
+- **Analytics.** A new `source` value, `custom`, and a new `quizStart` parameter, `customChoice`
+  (`tenses`, `verbs`, or `both`). A custom quiz over a featured collection or a model sends
+  `collection` as a collection's quiz does, a model's as `model`. Staged in
+  [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md) in both languages.
+- **Strings.** The picker's VoiceOver label, "Verbs to Quiz" / "Verbes du quiz", became "What to
+  Quiz" / "Contenu du quiz", as in Konjugieren. Seventeen `CustomQuiz.*` keys are new. Tense names
+  stay French in both languages, as everywhere in the app.
+- **Found by looking.** A chosen model vanished at relaunch, though its tenses stayed: `Settings`
+  loads before `VerbData.parse()` fills `VerbModel.models`, so a key that checked the model's
+  existence always failed. A `model-<id>` key is now accepted unchecked, and a model that names
+  nothing holds no verbs, so its quiz cannot start (a test pins both). Konjugieren's ablaut keys
+  may share the trap. The Choose button first matched Start in size and drew the eye from it, so
+  it is a size smaller.
+- **Verified on the iPhone 17**, in light (the simulator would not render dark that session,
+  though `simctl ui` reported it). In English: the empty Custom segment with Start disabled, the
+  editor's tenses and verb sets, the model list, the imparfait and futur simple over appeler's
+  model kept across a relaunch, a quiz that opened with "vous ___" of ficeler in the imparfait,
+  and the summary's VoiceOver label ("Tenses, Imparfait, Futur Simple, Verbs, appeler (1-3A)").
+  In French: "Sur mesure" fits its segment beside "Tous les verbes", and the summary reads "Selon
+  votre niveau : Avancé · Les 6,326 verbes" (the number follows the simulator's US region). **On
+  the iPad Pro 11** in English and dark: the empty state, the editor at its capped width, the
+  subjonctif présent over the pronominal verbs, and a quiz that asked "nous nous ___" of
+  entredétruire. Not tried: VoiceOver by ear, the Live Activity, Ten More on a custom quiz
+  (unit-tested), and the "nothing to ask" line (unit-tested).
+- **Tests:** 640 to 658. `CustomQuizTests` is new (16 functions: the stored form pinned and round
+  tripped, every tense and verb-set key, the top 100 read back as the band, My Verbs offered only
+  when asked, unknown keys dropped, a model that names nothing, a part left to the level, every
+  verb, lists asked as lists, never ranked, the choice parameter, a model named only as a model,
+  what cannot start, chosen tenses at any level under forty seeds, and the setting's persistence),
+  and two sessions nested in `QuizTests` (chosen tenses asked alone with `custom` and no score
+  posted; a model's quiz asking only its verbs and continuing with Ten More).
 
 ## Phase 10: Practice Sets to Share
 

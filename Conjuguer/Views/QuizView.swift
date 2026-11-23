@@ -33,6 +33,14 @@ struct QuizView: View {
       screen
         .toolbar(.hidden, for: .navigationBar)
         .verbPageNavigation(path: $navigationPath)
+        .navigationDestination(for: CustomQuizDestination.self) { destination in
+          switch destination {
+          case .editor:
+            CustomQuizEditor()
+          case .models:
+            CustomQuizModelList()
+          }
+        }
     }
     .environment(\.isBeneathQuiz, quiz.quizState == .inProgress)
     .accessibilityAction(.magicTap) {
@@ -418,19 +426,24 @@ struct QuizView: View {
         .pickerStyle(.segmented)
         .accessibilityIdentifier("quiz_scope_picker")
 
-        if tabScope == .myVerbs {
+        switch tabScope {
+        case .allVerbs:
+          EmptyView()
+        case .myVerbs:
           Text(myVerbsNote)
             .smallLabel()
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
             .accessibilityIdentifier("quiz_my_verbs_note")
+        case .custom:
+          customQuizSummary
         }
       }
       .padding(.top, Layout.defaultSpacing)
 
       startButton
         .funButton()
-        .disabled(tabScope == .myVerbs && myVerbs.isEmpty)
+        .disabled(!canStart)
         .padding(.top, Layout.defaultSpacing)
     }
     .frame(maxWidth: .infinity)
@@ -466,12 +479,100 @@ struct QuizView: View {
     myVerbs.isEmpty ? L.QuizView.myVerbsEmpty : L.QuizView.myVerbsCount(myVerbs.count)
   }
 
+  private var customQuiz: CustomQuiz {
+    world.settings.customQuiz
+  }
+
+  private var level: QuizLevel {
+    world.settings.quizLevel
+  }
+
+  private var canStart: Bool {
+    switch tabScope {
+    case .allVerbs:
+      return true
+    case .myVerbs:
+      return !myVerbs.isEmpty
+    case .custom:
+      return customQuiz.canBeAsked(at: level, myVerbs: myVerbs)
+    }
+  }
+
+  private var customQuizNote: String {
+    if customQuiz.isEmpty {
+      return L.CustomQuiz.emptyDescription
+    }
+    if customQuiz.canBeAsked(at: level, myVerbs: myVerbs) {
+      return L.CustomQuiz.description
+    }
+    return customQuiz.verbSet == .myVerbs && myVerbs.isEmpty ? L.QuizView.myVerbsEmpty : L.CustomQuiz.nothingToAsk
+  }
+
+  private var customQuizSummary: some View {
+    VStack(spacing: Layout.doubleDefaultSpacing) {
+      if !customQuiz.isEmpty {
+        VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+          summaryRow(
+            L.CustomQuiz.tenses,
+            value: customQuiz.tenses.isEmpty
+              ? L.CustomQuiz.byLevel(level.localizedName)
+              : customQuiz.orderedTenses.map(\.name).joined(separator: ", "),
+            valueIsFrench: !customQuiz.tenses.isEmpty
+          )
+          summaryRow(
+            L.CustomQuiz.verbs,
+            value: customQuiz.verbSet?.title ?? L.CustomQuiz.byLevel(CustomQuiz.levelVerbsDescription(level)),
+            valueIsFrench: customQuiz.verbSet?.isModel == true
+          )
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(Layout.doubleDefaultSpacing)
+        .background(
+          RoundedRectangle(cornerRadius: 12, style: .continuous)
+            .fill(Color.customForeground.opacity(0.06))
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("custom_quiz_summary")
+      }
+
+      Text(customQuizNote)
+        .smallLabel()
+        .multilineTextAlignment(.center)
+        .fixedSize(horizontal: false, vertical: true)
+        .accessibilityIdentifier("custom_quiz_note")
+
+      NavigationLink(value: CustomQuizDestination.editor) {
+        Label(customQuiz.isEmpty ? L.CustomQuiz.choose : L.CustomQuiz.change, systemImage: "slider.horizontal.3")
+          .font(subheadingFont)
+      }
+      .funButton(tint: .customRed)
+      .controlSize(.small)
+      .accessibilityHint(L.CustomQuiz.chooseHint)
+      .accessibilityIdentifier("custom_quiz_choose_button")
+    }
+  }
+
+  private func summaryRow(_ label: String, value: String, valueIsFrench: Bool) -> some View {
+    VStack(alignment: .leading, spacing: 2) {
+      Text(label)
+        .font(captionFont.smallCaps())
+        .foregroundStyle(Color.customGray)
+      Text(value)
+        .font(captionFont)
+        .foregroundStyle(Color.customForeground)
+        .fixedSize(horizontal: false, vertical: true)
+        .frenchPronunciation(forReal: valueIsFrench)
+    }
+  }
+
   private func start() {
     switch tabScope {
     case .allVerbs:
       start(scope: .allVerbs)
     case .myVerbs:
       start(scope: .myVerbs(myVerbs))
+    case .custom:
+      start(scope: .custom(customQuiz, myVerbs: myVerbs))
     }
     TryQuizTip().invalidate(reason: .actionPerformed)
   }
@@ -493,10 +594,13 @@ struct QuizView: View {
   }
 }
 
+// Semantic ordering: the picker's segments, the default first.
 /// What the Quiz tab's picker offers. A quiz over one verb starts from that verb's page instead.
+/// The tab opens on `allVerbs` at every launch, so the default quiz stays the default.
 enum TabQuizScope: CaseIterable {
   case allVerbs
   case myVerbs
+  case custom
 
   var displayName: String {
     switch self {
@@ -504,6 +608,8 @@ enum TabQuizScope: CaseIterable {
       return L.QuizView.allVerbs
     case .myVerbs:
       return L.MyVerbs.title
+    case .custom:
+      return L.CustomQuiz.segment
     }
   }
 }

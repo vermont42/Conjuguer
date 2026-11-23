@@ -48,6 +48,16 @@ class Settings {
   static let quizClockKey = "quizClock"
   static let quizClockDefault: QuizClock = .hide
 
+  /// The Quiz tab's custom quiz, kept between launches beside the default quiz. It is not shown in
+  /// Settings.
+  var customQuiz: CustomQuiz = customQuizDefault {
+    didSet {
+      persist(customQuiz, oldValue: oldValue, key: Settings.customQuizKey)
+    }
+  }
+  static let customQuizKey = "customQuiz"
+  static let customQuizDefault = CustomQuiz()
+
   private(set) var bestScores: [QuizLevel: Int] = [:]
   static let bestScoreDefault = 0
   static func bestScoreKey(_ level: QuizLevel) -> String {
@@ -138,6 +148,7 @@ class Settings {
     modelSort = load(key: Settings.modelSortKey, default: Settings.modelSortDefault)
     quizLevel = load(key: Settings.quizLevelKey, default: Settings.migratedQuizLevel(getterSetter: getterSetter))
     quizClock = load(key: Settings.quizClockKey, default: Settings.quizClockDefault)
+    customQuiz = load(key: Settings.customQuizKey, default: Settings.customQuizDefault)
     bestScores = Dictionary(uniqueKeysWithValues: QuizLevel.allCases.map { level in
       (level, load(key: Settings.bestScoreKey(level), default: Settings.bestScoreDefault))
     })
@@ -215,6 +226,7 @@ extension VerbSort: SettingValue {}
 extension ModelSort: SettingValue {}
 extension QuizLevel: SettingValue {}
 extension QuizClock: SettingValue {}
+extension CustomQuiz: SettingValue {}
 extension PronounGender: SettingValue {}
 extension AppIcon: SettingValue {}
 extension ReviewCardSuppression: SettingValue {}

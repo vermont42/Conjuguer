@@ -510,6 +510,7 @@ same.
 | `list` | Yes | A verb on a featured collection's page; for the quiz signals, a collection's quiz |
 | `sharedLink` | Yes | `viewCollection` only: a collection opened from a shared `list/` link |
 | `quizCorrection` | Yes | The verb link in a quiz's held correction (§ Quiz) |
+| `custom` | Yes | The quiz signals only: a custom quiz from the Quiz tab (§ The Custom Quiz) |
 
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
 a bare `Verb`, and the cells a search matched (`marks`). A link carries `source` as a query item
@@ -787,7 +788,8 @@ verb opened from a collection's page has `source` `list`; one opened from a mode
 ## Quiz
 
 A quiz of ten questions, which Ten More continues by ten more. The learner types each conjugation,
-and a missed question is asked once more. A quiz can also ask about chosen verbs (§ Quiz Scopes).
+and a missed question is asked once more. A quiz can also ask about chosen verbs (§ Quiz Scopes),
+or about tenses and verbs the learner puts together (§ The Custom Quiz).
 
 ### Architecture
 
@@ -796,7 +798,8 @@ and a missed question is asked once more. A quiz can also ask about chosen verbs
 | `Quiz.swift` | `@Observable` quiz state: building the questions, rounds and Ten More (`continueSession()`), re-asks, the timer, scoring, a slip's second attempt (`firstAttempt`), the held correction (`QuizCorrection`), the Live Activity, Game Center, the quiz signals, and VoiceOver announcements |
 | `QuizClock.swift` | The Quiz Clock setting, Hide or Show (§ Rounds, Re-asks, and the Clock) |
 | `QuizAbandonment.swift` | The quizzes in progress, kept so that the next launch can send `quizAbandon` for one the app was left during (§ Signals) |
-| `QuizDraw.swift` | The default quiz's verbs: `QuizDraw`, which draws them from the level's band with a fixed share of irregular, core, and prefixed verbs; `QuizVerbPool`, a kind of verb a tense is asked of, read from the data; and `QuizVerbTraits`, where a model is irregular |
+| `CustomQuiz.swift`, `CustomQuizView.swift` | The custom quiz: `CustomQuiz` (chosen tenses and a `QuizVerbSet`), its stored form, `QuizScope.custom(_:myVerbs:)`, and the editor and model list the Quiz tab pushes (§ The Custom Quiz) |
+| `QuizDraw.swift` | The verbs of a quiz whose verbs were not listed (the default quiz, or a custom quiz over a band): `QuizDraw`, which draws them from a band with a fixed share of irregular, core, and prefixed verbs; `QuizVerbPool`, a kind of verb a tense is asked of, read from the data; and `QuizVerbTraits`, where a model is irregular |
 | `QuizLevel.swift` | The four levels, chosen in Settings, and the tenses each asks; `QuizTenseSlot`, a tense as the quiz asks it, with its cells, its weight, and its pools |
 | `QuizScope.swift` | What a quiz asks about, its question count, and its analytics source; the questions of a quiz over chosen verbs; `Verb.hasCell(_:)` and `canBeQuizzed(at:)` |
 | `QuizQuestion.swift`, `QuizResult.swift`, `QuizState.swift` | A question (verb and tense), an answered question, and the quiz's lifecycle |
@@ -1113,6 +1116,7 @@ Collections).
 | `.myVerbs(_:)` | 10 at the learner's level over the learner's starred and recent verbs, with Ten More | The Quiz tab with My Verbs chosen |
 | `.verbPage(_:)` | 3, on one verb, with no Ten More | Test Me on a verb page |
 | `.collection(_:)` | 10 at the learner's level over a collection's verbs, with Ten More | A collection's Quiz button, on its page or a model's page |
+| `.custom(_:myVerbs:)` | 10 over the learner's chosen tenses, verbs, or both, with Ten More | The Quiz tab with Custom chosen (§ The Custom Quiz) |
 
 **A scoped quiz uses the learner's level.** Each question draws a tense by its weight from the
 level's tenses that some verb of the scope has, so a tense no verb has is never drawn and a My
@@ -1143,17 +1147,50 @@ appears, sends no `viewAppeared`, skips Game Center sign-in, and closes on Quit 
 close. It cannot be swiped away mid-quiz, so every quiz it starts ends in `quizQuit` or
 `quizCompletion`. On iPad it is a form sheet, and a tap outside it does nothing mid-quiz.
 
-**The Quiz tab's picker** (All Verbs, My Verbs) sits in the briefing card above Start. With My
+**The Quiz tab's picker** (All Verbs, My Verbs, Custom) sits in the briefing card above Start. With My
 Verbs chosen, a line says how many verbs the quiz will ask about, or how to add some, and Start is
-disabled while the list is empty. The best score shows only for All Verbs. The choice is not
-stored. Konjugieren's filled start screen (a big scope symbol, fact tiles, the verbs as chips),
+disabled while the list is empty. The best score shows only for All Verbs. The segment chosen is
+not stored, so the tab opens on All Verbs at every launch and the default quiz stays the default. Konjugieren's filled start screen (a big scope symbol, fact tiles, the verbs as chips),
 which Josh asked for there after trying the plain one, was not ported.
+
+### The Custom Quiz
+
+The Custom segment of the Quiz tab's picker lets the learner choose tenses, a set of verbs, or both.
+Its briefing shows a summary (Tenses, Verbs), a line saying what Start will do, and Choose or
+Change, which pushes `CustomQuizEditor` onto the tab's stack. The editor lists "Set by Your Level"
+and the nineteen tenses the quiz can ask, in the order the levels add them, each with its second
+name; then "Set by Your Level", the 100, 300, and 1,000 most frequent verbs, every verb, My Verbs
+(only while it has verbs or is the choice), the three featured collections other than the top 100,
+and Models, a further push (`CustomQuizModelList`) listing every model with verbs in identifier
+order. Each tap is kept at once in `Settings.customQuiz`, which Settings does not show.
+
+- **A part left unchosen is the level's.** Tenses alone ask the level's band; a verb set alone asks
+  the level's tenses. Any tense may be chosen at any level.
+- **A band or every verb is mixed** as the default quiz is, through `QuizDraw.questions(slots:band:…)`
+  with the chosen tenses: half irregular, two core verbs, one to three rare derivatives where the
+  band reaches them. A collection, a model, or My Verbs is a list (`QuizScope.verbs`), asked as
+  § Quiz Scopes describes, over the chosen tenses or the level's.
+- **The top-100 collection is offered only as the band**, which holds the same verbs under the same
+  key, `top100`.
+- **Start is disabled** while nothing is chosen, while a kept choice of My Verbs meets an empty
+  list, and while no verb of a list has any chosen tense (falloir's model and the impératif):
+  `CustomQuiz.canBeAsked(at:myVerbs:)`. The line under the summary says which.
+- **Never ranked.** `QuizScope.isRanked` requires `custom == nil`, so a custom quiz posts to no
+  leaderboard, sets no best score, and donates nothing to `ChangeLevelTip`. It has Ten More and a
+  Live Activity like any ten-question quiz in the tab. The DEBUG quiz fixtures apply only to the
+  default quiz.
+- **The stored form** is `tenses=indicatif_present,imparfait&verbs=etre`: a tense's key is its
+  article's `Info.stableKey`, and a verb set's is `top100`, `top300`, `top1000`, `all`, `myVerbs`,
+  a featured collection's key, or `model-<id>`. The keys are permanent, since the choice is kept
+  between launches and can travel in a link. A key that names nothing is dropped and the rest kept,
+  except a model's: settings load before the models are parsed, so `model-<id>` is accepted
+  unchecked, and a model that names nothing holds no verbs and cannot start.
 
 ### Signals
 
 `quizStart` (`level`, `source`), `quizQuit` (`level`, `lastQuestionIndex`, `duration`, `source`),
 `quizCompletion` (`level`, `questionCount`, `duration`, `source`), and `quizAbandon` (`level`,
-`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, or `list`, so a
+`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, or `custom`, so a
 three-question quiz does not inflate the ten-question quiz's completion rate.
 
 - **No signal carries a score or a count of right or wrong answers.** `lastQuestionIndex` is the
@@ -1173,7 +1210,10 @@ three-question quiz does not inflate the ten-question quiz's completion rate.
   quiz, since a sheet's quiz can run beside the tab's. `level` is `beginner`, `elementary`, `intermediate`, or `advanced`, the
 quiz's own, set when it starts, so a change in Settings mid-quiz cannot mislabel its quit or
 completion. A collection's
-`quizStart` also carries `collection` (§ Collections).
+`quizStart` also carries `collection` (§ Collections), and so does a custom quiz over a featured
+collection or a model, which sends only `model`. A custom quiz's `quizStart` carries
+`customChoice`: `tenses`, `verbs`, or `both`, which says what kind of choice was made without
+saying which tenses or verbs.
 
 ## Widgets
 

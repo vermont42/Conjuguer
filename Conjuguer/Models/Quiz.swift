@@ -136,8 +136,11 @@ class Quiz {
       ParameterKey.level.rawValue: level.rawValue,
       ParameterKey.source.rawValue: scope.source.rawValue
     ]
-    if let collection = scope.collection {
+    if let collection = scope.namedCollection {
       startParameters[ParameterKey.collection.rawValue] = collection.analyticsValue
+    }
+    if let custom = scope.custom {
+      startParameters[ParameterKey.customChoice.rawValue] = custom.choiceParameter
     }
     Current.analytics.signal(name: .quizStart, parameters: startParameters)
     startTimer()
@@ -311,6 +314,18 @@ class Quiz {
     }
 
     #if DEBUG
+    if scope.custom == nil, let fixture = fixtureQuestions() {
+      return fixture
+    }
+    #endif
+
+    let asked = Set(questions.map(\.verb.id))
+    return QuizDraw.questions(slots: scope.slots(at: level), band: scope.band(at: level), count: scope.questionCount, asked: asked, using: &generator)
+      .map(question(of:))
+  }
+
+  #if DEBUG
+  private func fixtureQuestions() -> [QuizQuestion]? {
     // Screenshot driver hook: when launched with `-CONJUGUER_QUIZ_FIXTURE screenshot`,
     // build a deterministic 30-question quiz and export the correct answers so the
     // screenshot driver can type them. See docs/screenshot_playbook.md.
@@ -330,13 +345,10 @@ class Quiz {
     case "levels":
       return generateLevelsFixture()
     default:
-      break
+      return nil
     }
-    #endif
-
-    let asked = Set(questions.map(\.verb.id))
-    return QuizDraw.questions(level: level, count: scope.questionCount, asked: asked, using: &generator).map(question(of:))
   }
+  #endif
 
   /// The question of `tense` for `verb` in the next person from the deck, or in the next person
   /// after it that the verb's defect group has: falloir is asked only in the third-person
