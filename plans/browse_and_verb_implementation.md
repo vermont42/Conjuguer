@@ -32,7 +32,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 6 | Done | 2026-11-22 | 1fd6c58 | B3, B5's tip | 7 |
 | 7 | Done | 2026-11-22 | c9fbd7e | B4, A9 | 9 |
 | 8 | Done | 2026-11-22 | aaf8b31 | B6 | 10 |
-| 9 | Done | 2026-11-22 | | C1, C2 | 11 |
+| 9 | Done | 2026-11-22 | 7ba1281 | C1, C2 | 11 |
 | 10 | Not started | | | D1, D2 | 12 |
 | 11 | Not started | | | D2's quiz scope, D3 | 13 |
 | 12 | Not started | | | D5 | 14 |
