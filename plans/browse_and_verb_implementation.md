@@ -33,7 +33,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 7 | Done | 2026-11-22 | c9fbd7e | B4, A9 | 9 |
 | 8 | Done | 2026-11-22 | aaf8b31 | B6 | 10 |
 | 9 | Done | 2026-11-22 | 7ba1281 | C1, C2 | 11 |
-| 10 | Awaiting Josh | 2026-11-22 | | D1, D2 | 12 |
+| 10 | Done | 2026-11-22 | 2829650 | D1, D2 | 12 |
 | 11 | Not started | | | D2's quiz scope, D3 | 13 |
 | 12 | Not started | | | D5 | 14 |
 | 13 | Not started | | | D4 | 15 |
@@ -1188,7 +1188,7 @@ rest. No question needed Josh. What differs from Konjugieren, and from the phase
 
 **Ideas:** D1, D2 apart from its quiz scope. **Ports:** Konjugieren Phase 12 (`LearnerVerbs.swift`
 in `Shared/`, `LearnerVerbStore.swift`, `SortOrder.swift`). **Depends on:** nothing. **Status:**
-Awaiting Josh (built 2026-11-22).
+Done (2026-11-22).
 
 - One on-device record of the learner's verbs: each verb opened, with dates and a count, and each
   verb starred. Keyed by `dictionaryKey`, so the doubled entries (haïr, ouïr, saillir, sortir)
