@@ -793,12 +793,13 @@ chosen verbs (§ Quiz Scopes).
 
 | File | Purpose |
 |------|---------|
-| `Quiz.swift` | `@Observable` quiz state: building the questions, the timer, scoring, the held correction (`QuizCorrection`), the Live Activity, Game Center, the quiz signals, and VoiceOver announcements |
+| `Quiz.swift` | `@Observable` quiz state: building the questions, the timer, scoring, a slip's second attempt (`firstAttempt`), the held correction (`QuizCorrection`), the Live Activity, Game Center, the quiz signals, and VoiceOver announcements |
 | `QuizVerbs.swift` | The curated verb pools the questions draw from |
 | `QuizDifficulty.swift` | Regular or Ridiculous, chosen in Settings, and each one's score multiplier |
 | `QuizScope.swift` | What a quiz asks about, its question count, and its analytics source; the questions of a quiz over chosen verbs; `QuizTenseSlot`, Regular's tenses and quotas; `Verb.hasCell(_:)` and `canBeQuizzed` |
 | `QuizQuestion.swift`, `QuizResult.swift`, `QuizState.swift` | A question (verb and tense), an answered question, and the quiz's lifecycle |
-| `ConjugationResult.swift` | Grades an answer as a total, partial, or no match (`ConjugationResult.grade`), with the conjugation to show beside a right answer spelled another standard way (`AnswerGrade`) |
+| `ConjugationResult.swift` | Grades an answer as a total or no match (`ConjugationResult.grade`), with the conjugation to show beside a right answer spelled another standard way (`AnswerGrade`); a question's result is also `.secondAttemptMatch` when a slip's second attempt was right |
+| `AnswerSlip.swift` | Whether a wrong answer is a slip that earns one more attempt (§ One More Try) |
 | `AnswerFrame.swift`, `AnswerFrameView.swift` | The shape of the expected answer around the field (§ The Answer Frame) |
 | `AnswerSpelling.swift` | Reads a typed answer before grading: case, spacing, the typographic apostrophe, and the pronouns of the asked person |
 | `AnswerDifference.swift`, `QuizCorrectionView.swift` | The held correction of a wrong answer (§ The Held Correction) |
@@ -837,17 +838,26 @@ App Store screenshots and exports its answers (see
 [`screenshot_playbook.md`](screenshot_playbook.md)). `-CONJUGUER_QUIZ_FIXTURE grading` asks ten
 questions, three times over, whose right answers exercise the grading below. Typed in order, with
 the feminine default: `il connait`, `je parle`, `j'ai parlé`, `nous sommes allées`, `j'étiquète`,
-`je cèderai`, `je me souviens`, `souviens-toi`, `etes` (a partial match), and `il plait`.
+`je cèderai`, `je me souviens`, `souviens-toi`, `êtes`, and `il plait`.
 `-CONJUGUER_QUIZ_FIXTURE frames` asks one question for each kind of answer frame, twice over:
 `je` (parler), `j'` (aimer), `je` (haïr, aspirated h), `elle`, `elles`, `j' (fém.)` (parler,
 passé composé), `nous (fém.)` (aller), `je me`, `je m'` (s'absenter), `tu t' (fém.)`, `(tu) ______-toi !`,
 `(nous) ______ !`, `(vous) (fém.) ______ !` (aller, impératif passé), and the two participles.
 `-CONJUGUER_QUIZ_FIXTURE corrections` asks eight questions, once, each with a wrong answer that
-shows a kind of correction. Typed in order, with the feminine default: `ai parle` and `etes` (partial
-matches, the accent marked), `finisons` (a missing letter, marked only in the right answer),
+shows a kind of correction. Typed in order, with the feminine default: `ai parle` and `etes` (the
+accent marked), `finisons` (a missing letter, marked only in the right answer),
 `allerai` (irai, a different word), `est venu` (the agreement's missing e), `prendent`, `je me
 souvient` (the pronouns dropped, the s marked), and `ecrivias` (a missing accent and a swap). The
-last holds before the results.
+last holds before the results. All but `allerai` and `ecrivias` are slips, so each asks for one
+more try first: type it again to reach its correction.
+`-CONJUGUER_QUIZ_FIXTURE slips` asks twelve questions, once. Typed in order, with the feminine
+default, these earn one more try, which the right answer after them takes for 5 points: `etes`
+(then `êtes`), `achete` (type it again to see a second slip reach the correction), `placa`
+(`plaça`), `ai parle` (`ai parlé`), `suis allé` (`suis allée`, the agreement), `prenent`
+(`prennent`), and `veus` (`veux`). These go straight to the correction: `finirions` (finir's
+conditionnel for its futur), `parle` (the présent for the participe passé parlé), `prit` (the passé
+simple for the subjonctif imparfait prît), `eut` (likewise for eût, and under four letters), and
+`viens` (je's présent for il's vient).
 
 ### The Answer Frame
 
@@ -876,7 +886,8 @@ field keeps its identity, and the keyboard its focus, when the next question's w
 
 ### The Held Correction
 
-A right answer advances at once. A wrong or partly right one holds its question
+A right answer advances at once. A wrong one holds its question, after one more try if it was a
+slip (§ One More Try)
 (`Quiz.correction`): the clock stands still (`Quiz.clockTicked()`), `process(proposedAnswer:)`
 ignores further answers, and `continueAfterCorrection()` moves on, to the results after the last
 question. Return continues, through the field, which keeps the learner's answer and the keyboard;
@@ -884,7 +895,7 @@ the view refocuses the field when it holds, since Return resigns it, and again a
 linked page. The Live Activity's timer cannot pause, so its start date moves later by the time the
 clock stood still at each update. Quitting releases a held correction.
 
-`QuizCorrectionView` sits under the answer field, in a card whose accent is the result's color:
+`QuizCorrectionView` sits under the answer field, in a card with a red accent:
 Your Answer and Correct Answer, a row of links, and Continue, capped at 400 points and centered on
 an iPad. `AnswerDifference.nearest` reads the answer as grading does (`AnswerSpelling.candidates`,
 so a typed pronoun is dropped) and picks the nearest of the cell's "/" alternates, the first
@@ -903,6 +914,34 @@ sheet without Quit. A quiz begun from the verb's page (`QuizScope.isVerbPage`) l
 link. While a quiz is in progress the `isBeneathQuiz` environment value hides Test Me on a pushed
 verb page and the Quiz button of a model's collection bar, so that no quiz starts inside a quiz.
 After Continue the next question's feedback slot is empty, since the correction has been read.
+
+### One More Try
+
+A wrong answer that is only a slip earns one more attempt before the correction
+(`AnswerSlip.isSlip(proposedAnswer:correctAnswers:verb:tense:)`). A slip is within one edit of a
+right spelling (an insertion, deletion, substitution, or swap of two adjacent letters, as in
+`VerbSearch.editDistance`), or differs from it only in accents, cedillas, and diaereses, however
+many: `etes` for êtes, `ai prefere` for ai préféré. The answer is read as grading reads it, so a
+typed pronoun is dropped first, and it is compared with every alternate and `StandardVariants`
+spelling. The right spelling must have four letters or more, spaces and apostrophes not counted,
+so `ete` for été is not a slip, and no compound answer falls under the limit.
+
+**An answer that spells another cell of the verb is not a slip**, however near: `parle` for the
+participe passé parlé is the présent, `prit` for prît the passé simple, and `viens` for il vient
+the wrong person. `Verb.conjugations(matching:)` decides, and a match in the asked cell itself
+does not count, so `suis allé` where the setting asks for suis allée, a participle agreed the
+other way, is a slip.
+
+`Quiz.firstAttempt` holds the slip while the question waits (`isAwaitingSecondAttempt`). The clock
+keeps running, since the learner is still answering. The feedback slot shows "Almost! Try once
+more." in orange (`Color.secondAttempt`), the first attempt stays in the field to edit, and the
+field takes the keyboard back. A chirp and a light tap mark it, not the buzz of a wrong answer. A
+question gets one more attempt at most: a right second attempt scores 5 points (times the
+difficulty's multiplier) and the result `.secondAttemptMatch`, shown by a hollow orange check in
+the next question's feedback slot, and a wrong one goes to the held correction. The results count
+right second attempts apart ("Second Try: 2", under "Correct: 8 / 30", which counts first attempts
+only), and a row whose question took two attempts shows "First Try:" with the slip above Your
+Answer. The Live Activity's correct count is first attempts only.
 
 ### Grading and Scoring
 
@@ -925,12 +964,12 @@ or a participle.
   checkmark and VoiceOver announces before the next question. The verb page keeps the app's
   spelling. Josh's rulings, row by row, are in
   [`plans/pedagogy_phase1_variant_audit.md`](../plans/pedagogy_phase1_variant_audit.md).
-- **Partial match** (5 points, and the correction holds): equal to an alternate or a variant once every diacritic is folded
-  away, so "etait" for "était" and "etes" for "êtes" earn half. The rectifications drop only the
-  circumflex of i and u, and keep it in the passé simple's -îmes and -îtes, the subjonctif
-  imparfait's -ît and -ût, dû, and croître.
-- **No match** (0 points). Agreement is required: "sommes allés" where the pronoun-gender setting
-  asks for allées is wrong.
+- **No match** (0 points). An accent is part of the spelling: "etait" for "était" is wrong, and
+  so is "etes" for "êtes", since the rectifications drop only the circumflex of i and u, and keep
+  it in the passé simple's -îmes and -îtes, the subjonctif imparfait's -ît and -ût, dû, and
+  croître. Agreement is required: "sommes allés" where the pronoun-gender setting asks for allées
+  is wrong. Many such answers are slips, which earn one more try for half the points (§ One More
+  Try).
 
 **The accent keys.** The answer field is an ordinary `TextField`, so `FrenchLetterKeyRow` sits in a
 `ToolbarItem(placement: .keyboard)` above the keyboard, unlike the search fields'. The field binds

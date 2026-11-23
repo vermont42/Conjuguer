@@ -333,8 +333,16 @@ enum L {
       String(localized: "ResultsView.yourAnswerWithColon")
     }
 
-    static func correct(_ score: String, of total: Int) -> String {
-      String(localized: "ResultsView.correctCount", defaultValue: "Correct: \(score) / \(total)")
+    static func correct(_ count: Int, of total: Int) -> String {
+      String(localized: "ResultsView.correctCount", defaultValue: "Correct: \(count) / \(total)")
+    }
+
+    static func secondTry(_ count: Int) -> String {
+      String(localized: "ResultsView.secondTry", defaultValue: "Second Try: \(count)")
+    }
+
+    static var firstTryWithColon: String {
+      String(localized: "ResultsView.firstTryWithColon")
     }
 
     static func time(_ timeString: String) -> String {
@@ -481,8 +489,8 @@ enum L {
       String(localized: "QuizView.incorrect")
     }
 
-    static var partlyRight: String {
-      String(localized: "QuizView.partlyRight")
+    static var almost: String {
+      String(localized: "QuizView.almost")
     }
 
     static func differingLetters(_ letters: String) -> String {

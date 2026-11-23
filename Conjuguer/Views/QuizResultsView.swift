@@ -32,7 +32,13 @@ struct QuizResultsView: View {
         .padding(.top, Layout.defaultSpacing)
 
         VStack(alignment: .leading, spacing: Layout.defaultSpacing / 2) {
-          Text(L.ResultsView.correct(quiz.correctnessScore.asFormattedNumberCorrect(), of: quiz.questions.count))
+          Text(L.ResultsView.correct(quiz.correctCount, of: quiz.questions.count))
+
+          if quiz.secondAttemptCount > 0 {
+            Text(L.ResultsView.secondTry(quiz.secondAttemptCount))
+              .foregroundStyle(Color.secondAttempt)
+              .accessibilityIdentifier("results_second_try")
+          }
 
           Text(quiz.difficulty.localizedDifficultyWithLabel)
 

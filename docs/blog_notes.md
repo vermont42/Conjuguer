@@ -5561,3 +5561,36 @@ sees it. The rule now sits in the catalog rules, so new strings follow it.
 
 The data pipelines' French was left alone for now: the etymologies, the literature and *Chanson de
 Roland* examples, and the Wiktionnaire titles that come with their own guillemets.
+
+## One More Try (2026-11-23)
+
+Pedagogy Phase 4 replaced the partial match. Since 2021, an answer right but for its accents, such
+as etait for était, earned five points of ten, as though the slip were half the work. The
+pedagogy report argued that half credit should be earned by fixing the slip, not by making it. So
+a slip now gets one more try: the answer stays in the field under an orange "Almost! Try once
+more.", and a right second attempt earns five points. A wrong one goes to the correction Phase 3
+built. A question gets one extra attempt at most.
+
+A slip is one edit away from a right spelling (a letter added, dropped, changed, or two swapped),
+or only its accents differ, however many, in an answer of four letters or more. The rule came from
+Konjugieren, where it covers umlauts. French makes the accent half of it do more work, since a
+learner on an English keyboard may drop every accent in an answer, and préféré typed as prefere is
+still one slip.
+
+The rule that keeps it honest is also Konjugieren's: an answer that spells another cell of the verb
+is a grammatical error, however near. parle for the participe passé parlé is the présent, prit for
+the subjonctif imparfait prît is the passé simple, and viens for il vient is the wrong person.
+Each goes straight to the correction. French added a wrinkle. The lookup that answers "which cell is
+this?" matches a compound tense with its participle agreed either way, so suis allé, typed where the
+setting asks for suis allée, matched the very cell asked about and would have counted as another
+conjugation. A match in the asked cell is now ignored. The agreement error stays a slip until a
+later phase can name it.
+
+Removing the partial match removed a small pile with it: a fractional "Correct: 7.5 / 30" and the
+formatter that printed it, a "Partly right" verdict, and the fold that graded etes as half right.
+The results now count right second tries apart, "Second Try: 2" in orange under "Correct", and a
+row shows the first attempt above the second.
+
+On the iPad simulator the build skill's tap-by-identifier and type-by-identifier scripts failed to
+parse the accessibility tree, so the first attempt sent empty answers to a quiz that had not
+started. Tapping by frame and pasting from the pasteboard worked, and the skill's notes now say so.

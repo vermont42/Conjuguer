@@ -84,7 +84,10 @@ struct QuizView: View {
       guard newCount > 0 else {
         return nil
       }
-      return quiz.quizResults.last?.conjugationResult == .totalMatch ? .success : .error
+      return quiz.quizResults.last?.conjugationResult == .noMatch ? .error : .success
+    }
+    .sensoryFeedback(.impact(weight: .light), trigger: quiz.isAwaitingSecondAttempt) { _, isAwaiting in
+      isAwaiting
     }
   }
 
@@ -238,11 +241,18 @@ struct QuizView: View {
     }
   }
 
-  /// The last answer's mark: a right answer's on the next question, a held one's on its own. After
-  /// Continue, the next question starts with a clear slot, since the correction has been read.
+  /// The last answer's mark: a right answer's on the next question, a held one's on its own, and
+  /// after a slip, the request for one more try. After Continue, the next question starts with a
+  /// clear slot, since the correction has been read.
   private var feedbackSlot: some View {
     HStack(alignment: .top, spacing: Layout.defaultSpacing) {
-      if let result = quiz.quizResults.last, quiz.correction != nil || result.conjugationResult == .totalMatch {
+      if quiz.isAwaitingSecondAttempt {
+        Label(L.QuizView.almost, systemImage: "hand.raised.fill")
+          .font(bodyEmphasisFont)
+          .foregroundStyle(Color.secondAttempt)
+          .transition(.opacity.combined(with: .scale(scale: 0.9)))
+          .accessibilityIdentifier("quiz_almost")
+      } else if let result = quiz.quizResults.last, quiz.correction != nil || result.conjugationResult != .noMatch {
         Image(systemName: result.conjugationResult.feedbackIconString)
           .font(.title2)
           .foregroundStyle(result.conjugationResult.feedbackColor)
@@ -258,6 +268,7 @@ struct QuizView: View {
       }
     }
     .frame(maxWidth: .infinity, minHeight: feedbackSlotHeight, alignment: .topLeading)
+    .animation(reduceMotion ? nil : .default, value: quiz.isAwaitingSecondAttempt)
   }
 
   private var answerFrame: AnswerFrame {
@@ -307,7 +318,9 @@ struct QuizView: View {
           return
         }
         quiz.process(proposedAnswer: input)
-        if quiz.correction == nil {
+        if quiz.isAwaitingSecondAttempt {
+          refocusAnswer(after: .milliseconds(50))
+        } else if quiz.correction == nil {
           clearInput()
           conjugationFieldIsFocused = true
         }
@@ -329,14 +342,15 @@ struct QuizView: View {
     inputSelection = nil
   }
 
-  /// Gives the answer field the keyboard while a correction is held, so that Return continues.
-  /// Return resigns the field, and a push takes the keyboard away, yet the focus state can still
-  /// read true afterward, so it is cleared and set again once the field is back on screen.
+  /// Gives the answer field the keyboard while a correction is held, so that Return continues,
+  /// and after a slip, so that the learner can edit the first attempt. Return resigns the field,
+  /// and a push takes the keyboard away, yet the focus state can still read true afterward, so it
+  /// is cleared and set again once the field is back on screen.
   private func refocusAnswer(after delay: Duration) {
     conjugationFieldIsFocused = false
     Task { @MainActor in
       try? await Task.sleep(for: delay)
-      if navigationPath.isEmpty, quiz.correction != nil {
+      if navigationPath.isEmpty, quiz.correction != nil || quiz.isAwaitingSecondAttempt {
         conjugationFieldIsFocused = true
       }
     }

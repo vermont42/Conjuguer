@@ -15,4 +15,6 @@ struct QuizResult: Hashable, Identifiable {
   let correctAnswer: String
   let actualAnswer: String
   var shownSpelling: String?
+  /// The slip that earned a second attempt. `actualAnswer` is the second attempt.
+  var firstAttempt: String?
 }

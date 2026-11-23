@@ -27,7 +27,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 1 | Done | 2026-11-22 | 0d82e5c | T1.3, T1.4, T1.5, and two Conjuguer defects | 1 |
 | 2 | Done | 2026-11-22 | b4aa188 | T1.2 | 2 |
 | 3 | Done | 2026-11-23 | bfe5c7f | T4.1, T4.4, T4.5 | 3 |
-| 4 | Not started | | | T1.6 | 4 |
+| 4 | Awaiting Josh | 2026-11-23 | | T1.6 | 4 |
 | 5 | Not started | | | T2.3, T2.6, T6.7, M1 | 5 |
 | 6 | Not started | | | T2.1, T2.2, T2.5 | 6 |
 | 7 | Not started | | | T2.7, T3.1, T6.5, M2, M3 | 7 |
@@ -627,7 +627,7 @@ marked, both links work and return, and tests pin the state machine.
 ## Phase 4: One More Try
 
 **Suggestions:** T1.6. **Ports:** Konjugieren Phase 4 (`AnswerSlip.swift`). **Depends on:**
-Phase 3. **Status:** Not started.
+Phase 3. **Status:** Awaiting Josh.
 
 Treat a slip as "almost" and allow one more attempt. A right second attempt earns half the points.
 A wrong second attempt goes to Phase 3's correction. **This replaces the partial match**: half
@@ -651,6 +651,60 @@ not, half points are scored and shown, and tests pin each case, including parle/
 eut/eût.
 
 **How it differed:**
+
+- **The wording is as proposed**: "Almost! Try once more." / "Presque ! Encore un essai.",
+  "Second Try: 2" / "Deuxième essai : 2", and "First Try:" / "Premier essai :" on a results row,
+  each French space a narrow no-break space (U+202F). The strings were first built without the
+  space, to match their neighbors ("Correcte: 7 / 30"). Josh then chose, on 2026-11-23, the narrow
+  space before every colon, semicolon, exclamation mark, and question mark, and inside guillemets,
+  and a separate commit swept both catalogs to it before this phase was committed.
+- **The partial match is gone.** `ConjugationResult.grade` returns a total or no match only, so
+  etes for êtes is now wrong as graded. `.partialMatch` became `.secondAttemptMatch`, a question's
+  result that `grade` never returns, worth 5 points times the difficulty's multiplier, with a
+  hollow orange check (`Color.secondAttempt`, system orange, the color Konjugieren chose). Its
+  chirp moved to the "almost" moment. `correctnessScore`, `percentCorrect`, the string
+  `QuizView.partlyRight`, and `DoubleExtension.swift`, whose only use was formatting a score like
+  7.5, went with it. `QuizCorrection` lost its `result`, since only a wrong answer holds now.
+- **The rule** (`AnswerSlip.swift`): within one edit by optimal string alignment, or equal once
+  every diacritic is folded away (`folding(.diacriticInsensitive)`, so cedillas too), against every
+  "/" alternate and `StandardVariants` spelling, reading the answer through
+  `AnswerSpelling.candidates`. Four letters are counted in the right spelling, letters only, as
+  Konjugieren counts them: `ete` for été is not a slip, `vex` for veux is.
+- **Another cell, but not the asked one.** `Verb.conjugations(matching:)` matches a compound cell
+  with its participle agreed either way, so suis allé matches the asked passé composé itself. A
+  match in the asked tense does not count as another cell, which keeps the agreement error a slip,
+  as Phase 1 expected until Phase 14 names it. parle for the participe passé, prit for prît, finit
+  for finît, and viens for il vient are real errors. eut and fut are under four letters anyway, so
+  the four-letter pair prit/prît pins the rule that eut/eût illustrates.
+- **ai parle for ai parlé is a slip**, although parle is a présent: the whole answer is no cell.
+  Only a bare participe passé question meets "parle for parlé" as the plan means it.
+- **The state** is `Quiz.firstAttempt`, set by a slip and cleared once the question is graded.
+  Conjuguer records a result only when a question is graded, so a slip leaves `quizResults`
+  untouched, and `QuizResult.firstAttempt` keeps the slip for the results. A row shows "First Try:"
+  whether the second attempt was right or wrong, a small departure from Konjugieren, which shows it
+  only on a right one. Phase 14 should set `firstAttempt` for a diagnosable error, so the one-try
+  limit holds whatever triggered it.
+- **"The progress."** Conjuguer has no dots. The feedback slot shows "Almost! Try once more." while
+  the question waits, and the hollow orange check on the next question after a right second
+  attempt; the results count second tries apart under "Correct", which counts first attempts only,
+  as does the Live Activity.
+- **The clock runs** through the second attempt, as in Konjugieren.
+- **VoiceOver.** The slip is spoken through `Utterer` in the interface's language, and focus stays
+  in the field. Not heard.
+- **A new fixture**, `-CONJUGUER_QUIZ_FIXTURE slips`: twelve questions, their answers in
+  `docs/feature_architecture.md` § Quiz. The corrections fixture's wrong answers are mostly slips
+  now, so its note says to type each twice.
+- **Analytics:** none added, so nothing is staged in `docs/privacy_policy_pending.md`.
+- **Verified** on the iPhone 17 in French (light) through all twelve: seven slips asked for one
+  more try with the answer still in the field and the keyboard back, a second achete reached the
+  correction, and finirions, parle, prit, eut, and viens went straight to it. The results read 30,
+  "Correcte: 0 / 12", "Deuxième essai: 6", with "Premier essai:" rows. In English, the same line
+  and results. On the iPad Pro 11 in English and dark, the slip, the right second try, and its
+  orange check. There `tap_id.sh` and `type_text.sh` failed to parse the accessibility tree, so the
+  skill now says to tap by frame and paste. Not tried: the software keyboard and VoiceOver by ear.
+- **Tests:** 587 to 593, with `AnswerSlipTests` (26 cases in three tests) and four new `QuizTests`
+  replacing the partial match's one. `ConjugationResultTests` now expects no match for the five
+  former partial matches.
 
 ## Phase 5: Levels
 

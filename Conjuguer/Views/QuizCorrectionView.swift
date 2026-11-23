@@ -12,7 +12,7 @@ extension EnvironmentValues {
   @Entry var isBeneathQuiz = false
 }
 
-/// A wrong or partly right answer, held: what the learner typed and the right answer, with the
+/// A wrong answer, held: what the learner typed and the right answer, with the
 /// letters that differ marked, links to the verb's page and its model's page, and Continue.
 struct QuizCorrectionView: View {
   let question: QuizQuestion
@@ -74,7 +74,7 @@ struct QuizCorrectionView: View {
       .accessibilityIdentifier(Self.continueButtonID)
       .id(Self.continueButtonID)
     }
-    .card(accent: correction.result.feedbackColor)
+    .card(accent: ConjugationResult.noMatch.feedbackColor)
   }
 
   private func answerRow(label: String, text: Text) -> some View {
@@ -116,9 +116,8 @@ struct QuizCorrectionView: View {
   /// "Incorrect. Your Answer: parle. Correct Answer: parlé. Letters that differ: é." The letters
   /// are named only while there are few enough to help.
   private var spokenCorrection: String {
-    let verdict = correction.result == .partialMatch ? L.QuizView.partlyRight : L.QuizView.incorrect
     let given = difference.given.isEmpty ? L.QuizView.none : difference.given
-    var spoken = "\(verdict) \(L.QuizView.yourAnswer) \(given). \(L.QuizView.correctAnswer) \(difference.expected.lowercased())."
+    var spoken = "\(L.QuizView.incorrect) \(L.QuizView.yourAnswer) \(given). \(L.QuizView.correctAnswer) \(difference.expected.lowercased())."
     let letters = difference.expectedMarkedLetters
     if !letters.isEmpty, letters.count <= Self.maxSpokenLetters {
       spoken += " " + L.QuizView.differingLetters(letters.joined(separator: ", "))

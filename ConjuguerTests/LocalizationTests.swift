@@ -13,7 +13,8 @@ struct LocalizationTests {
     #expect(L.QuizView.bestScore(7) == "Best score: 7")
     #expect(L.QuizView.elapsed(seconds: 90) == "Elapsed: 90 seconds")
     #expect(L.QuizView.progress(3, of: 30) == "3 out of 30")
-    #expect(L.ResultsView.correct("12.5", of: 30) == "Correct: 12.5 / 30")
+    #expect(L.ResultsView.correct(12, of: 30) == "Correct: 12 / 30")
+    #expect(L.ResultsView.secondTry(2) == "Second Try: 2")
     #expect(L.ResultsView.time("1:23") == "Time: 1:23")
   }
 

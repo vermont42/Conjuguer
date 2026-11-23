@@ -176,7 +176,6 @@ struct QuizTests {
 
     quiz.process(proposedAnswer: "x")
     let correction = try #require(quiz.correction)
-    #expect(correction.result == .noMatch)
     #expect(correction.difference.given == "x")
     #expect(quiz.currentQuestionIndex == 0)
     #expect(quiz.quizResults.count == 1)
@@ -199,25 +198,85 @@ struct QuizTests {
     quiz.quit()
   }
 
-  @Test func aPartlyRightAnswerHoldsItsQuestion() throws {
-    let quiz = makeDeterministicQuiz(difficulty: .regular)
-    var accented: String?
+  /// Answers every question right until one whose answer has four letters or more, and returns
+  /// that answer with a letter added, which is one slip from it.
+  private func reachASlip(_ quiz: Quiz) throws -> (slip: String, answer: String) {
     for question in quiz.questions {
       let answer = correctAnswer(for: question).lowercased()
-      let folded = answer.folding(options: .diacriticInsensitive, locale: Locale(identifier: "fr"))
-      if folded != answer {
-        accented = folded
-        break
+      if answer.filter(\.isLetter).count >= AnswerSlip.minimumLetterCount {
+        return (answer + "q", answer)
       }
       quiz.process(proposedAnswer: answer)
     }
-    let folded = try #require(accented)
+    throw SlipNotFound()
+  }
+
+  private struct SlipNotFound: Error {}
+
+  @Test func aSlipEarnsOneMoreAttempt() throws {
+    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    let (slip, answer) = try reachASlip(quiz)
+    let index = quiz.currentQuestionIndex
+    let resultCount = quiz.quizResults.count
+    let score = quiz.score
+
+    quiz.process(proposedAnswer: slip)
+    #expect(quiz.isAwaitingSecondAttempt)
+    #expect(quiz.firstAttempt == slip)
+    #expect(quiz.correction == nil)
+    #expect(quiz.currentQuestionIndex == index)
+    #expect(quiz.quizResults.count == resultCount)
+
+    quiz.process(proposedAnswer: answer)
+    #expect(!quiz.isAwaitingSecondAttempt)
+    #expect(quiz.currentQuestionIndex == index + 1)
+    #expect(quiz.score == score + 5)
+    let result = try #require(quiz.quizResults.last)
+    #expect(result.conjugationResult == .secondAttemptMatch)
+    #expect(result.firstAttempt == slip)
+    #expect(result.actualAnswer == answer)
+    #expect(quiz.secondAttemptCount == 1)
+    #expect(quiz.correctCount == index)
+    quiz.quit()
+  }
+
+  @Test func aQuestionGetsOneMoreAttemptAtMost() throws {
+    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    let (slip, _) = try reachASlip(quiz)
     let index = quiz.currentQuestionIndex
 
-    quiz.process(proposedAnswer: folded)
-    #expect(quiz.correction?.result == .partialMatch)
+    quiz.process(proposedAnswer: slip)
+    quiz.process(proposedAnswer: slip)
+    #expect(!quiz.isAwaitingSecondAttempt)
+    #expect(quiz.correction != nil)
     #expect(quiz.currentQuestionIndex == index)
-    #expect(quiz.correction?.difference.expectedMarkedLetters.isEmpty == false)
+    let result = try #require(quiz.quizResults.last)
+    #expect(result.conjugationResult == .noMatch)
+    #expect(result.firstAttempt == slip)
+
+    quiz.continueAfterCorrection()
+    #expect(quiz.currentQuestionIndex == index + 1)
+    #expect(quiz.firstAttempt == nil)
+    quiz.quit()
+  }
+
+  @Test func theClockRunsDuringASecondAttempt() throws {
+    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    let (slip, _) = try reachASlip(quiz)
+    quiz.process(proposedAnswer: slip)
+    quiz.clockTicked()
+    #expect(quiz.elapsedTime == 1)
+    quiz.quit()
+    #expect(!quiz.isAwaitingSecondAttempt)
+  }
+
+  @Test func aRightSecondAttemptEarnsHalfPointsAtRidiculous() throws {
+    let quiz = makeDeterministicQuiz(difficulty: .ridiculous)
+    let (slip, answer) = try reachASlip(quiz)
+    let score = quiz.score
+    quiz.process(proposedAnswer: slip)
+    quiz.process(proposedAnswer: answer)
+    #expect(quiz.score == score + 10)
     quiz.quit()
   }
 

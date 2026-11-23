@@ -17,16 +17,22 @@ class Quiz {
   private(set) var quizState = QuizState.notStarted
   private(set) var elapsedTime = 0
   private(set) var score = 0
-  private(set) var correctnessScore = 0.0
   private(set) var difficulty = QuizDifficulty.regular
   private(set) var currentQuestionIndex = 0
   private(set) var questions: [QuizQuestion] = []
   private(set) var scope = QuizScope.allVerbs
   private(set) var quizResults: [QuizResult] = []
   var shouldShowResults = false
-  /// A wrong or partly right answer, held on its question with the clock stopped until
+  /// A wrong answer, held on its question with the clock stopped until
   /// `continueAfterCorrection()`. A right answer advances at once.
   private(set) var correction: QuizCorrection?
+  /// A slip that earned one more attempt at the current question, which waits for it with the
+  /// clock running. A question gets one more attempt at most, whatever earned it.
+  private(set) var firstAttempt: String?
+
+  var isAwaitingSecondAttempt: Bool {
+    firstAttempt != nil
+  }
 
   private var timer: Timer?
   private let gameCenter: GameCenter
@@ -43,8 +49,13 @@ class Quiz {
     elapsedTime.timeString
   }
 
-  private var correctCount: Int {
+  /// Right on the first attempt. A right second attempt is counted apart.
+  var correctCount: Int {
     quizResults.filter { $0.conjugationResult == .totalMatch }.count
+  }
+
+  var secondAttemptCount: Int {
+    quizResults.filter { $0.conjugationResult == .secondAttemptMatch }.count
   }
 
   private var personNumbers = CyclingDeck(PersonNumber.allCases)
@@ -130,6 +141,7 @@ class Quiz {
     timer?.invalidate()
     quizState = .notStarted
     correction = nil
+    firstAttempt = nil
     endLiveActivity()
   }
 
@@ -219,13 +231,13 @@ class Quiz {
   private func resetPublishedProperties() {
     elapsedTime = 0
     score = 0
-    correctnessScore = 0.0
     // A scoped quiz asks Regular's mix whatever the setting, since Ridiculous is a fixed list.
     difficulty = scope.isRanked ? Current.settings.quizDifficulty : .regular
     currentQuestionIndex = 0
     questions = []
     quizResults = []
     correction = nil
+    firstAttempt = nil
   }
 
   private func buildQuiz() {
@@ -251,6 +263,9 @@ class Quiz {
       return
     case "corrections":
       questions = generateCorrectionsFixture()
+      return
+    case "slips":
+      questions = generateSlipsFixture()
       return
     default:
       break
@@ -479,6 +494,28 @@ class Quiz {
     }
   }
 
+  // Twelve questions, unshuffled, each with a wrong answer to type. The answers, and which of
+  // them earn one more try, are listed in docs/feature_architecture.md § Quiz.
+  private func generateSlipsFixture() -> [QuizQuestion] {
+    let plan: [(infinitif: String, tense: Tense)] = [
+      ("être", .indicatifPrésent(.secondPlural)),
+      ("acheter", .indicatifPrésent(.firstSingular)),
+      ("finir", .futurSimple(.firstPlural)),
+      ("placer", .passéSimple(.thirdSingular)),
+      ("parler", .passéComposé(.firstSingular)),
+      ("aller", .passéComposé(.firstSingular)),
+      ("prendre", .indicatifPrésent(.thirdPlural)),
+      ("parler", .participePassé),
+      ("prendre", .subjonctifImparfait(.thirdSingular)),
+      ("avoir", .subjonctifImparfait(.thirdSingular)),
+      ("venir", .indicatifPrésent(.thirdSingular)),
+      ("vouloir", .indicatifPrésent(.firstSingular))
+    ]
+    return plan.map { spec in
+      QuizQuestion(verb: Verb.verbForInfinitif(spec.infinitif), tense: spec.tense)
+    }
+  }
+
   // Write the correct answers for the fixture to Documents/screenshot_fixture_answers.json
   // so the driver can read and type them. The exported answer is the first of any
   // slash-separated alternates, which the quiz scores as a total match.
@@ -575,12 +612,19 @@ class Quiz {
       correctAnswers = ""
     }
     let grade = ConjugationResult.grade(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense)
-    let conjugationResult = grade.result
-    if conjugationResult != .totalMatch || currentQuestionIndex != questions.count - 1 {
+    let isSecondAttempt = firstAttempt != nil
+    if grade.result == .noMatch, !isSecondAttempt, AnswerSlip.isSlip(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense) {
+      firstAttempt = proposedAnswer
+      Current.soundPlayer.play(.chirp)
+      announceSecondAttempt()
+      return
+    }
+
+    let conjugationResult: ConjugationResult = grade.result == .totalMatch && isSecondAttempt ? .secondAttemptMatch : grade.result
+    if conjugationResult == .noMatch || currentQuestionIndex != questions.count - 1 {
       Current.soundPlayer.play(conjugationResult.sound)
     }
     score += conjugationResult.score * difficulty.scoreModifier
-    correctnessScore += conjugationResult.percentCorrect
     quizResults.append(
       QuizResult(
         infinitif: verb.infinitifWithPossibleExtraLetters,
@@ -588,14 +632,13 @@ class Quiz {
         conjugationResult: conjugationResult,
         correctAnswer: correctAnswers,
         actualAnswer: proposedAnswer,
-        shownSpelling: grade.shownSpelling
+        shownSpelling: grade.shownSpelling,
+        firstAttempt: firstAttempt
       )
     )
-    if conjugationResult == .totalMatch {
-      advance()
-    } else {
+    firstAttempt = nil
+    if conjugationResult == .noMatch {
       correction = QuizCorrection(
-        result: conjugationResult,
         difference: AnswerDifference.nearest(
           answer: proposedAnswer,
           correctAnswers: correctAnswers,
@@ -603,6 +646,8 @@ class Quiz {
           isReflexive: verb.isReflexive
         )
       )
+    } else {
+      advance()
     }
   }
 
@@ -648,19 +693,26 @@ class Quiz {
     teardown()
   }
 
+  private var currentLocaleString: String {
+    let currentRegion = Locale.current.region?.identifier ?? "none"
+    let currentLanguage = Locale.current.language.languageCode?.identifier ?? "none"
+    return currentLanguage == "fr" ? Utterer.frenchLocaleString : currentLanguage + "-" + currentRegion
+  }
+
+  // The first attempt stays in the field for the learner to edit, and VoiceOver's focus with it.
+  private func announceSecondAttempt() {
+    guard UIAccessibility.isVoiceOverRunning else {
+      return
+    }
+    Utterer.utter(L.QuizView.almost, localeString: currentLocaleString)
+  }
+
   private func announcePublishedProperties() {
     if UIAccessibility.isVoiceOverRunning {
       let announcementDelay = 1.0
       Task { @MainActor in
         try? await Task.sleep(for: .seconds(announcementDelay))
-        let currentLocaleString: String
-        let currentRegion = Locale.current.region?.identifier ?? "none"
-        let currentLanguage = Locale.current.language.languageCode?.identifier ?? "none"
-        if currentLanguage == "fr" {
-          currentLocaleString = Utterer.frenchLocaleString
-        } else {
-          currentLocaleString = currentLanguage + "-" + currentRegion
-        }
+        let currentLocaleString = self.currentLocaleString
         let question = questions[currentQuestionIndex]
         if let shownSpelling = quizResults.last?.shownSpelling {
           Utterer.utter(L.QuizView.alsoSpelledWithColon, localeString: currentLocaleString)
@@ -764,7 +816,6 @@ private extension Tense {
 }
 
 struct QuizCorrection: Equatable {
-  let result: ConjugationResult
   let difference: AnswerDifference
 }
 

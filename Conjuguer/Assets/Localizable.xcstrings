@@ -103,19 +103,19 @@
         }
       }
     },
-    "QuizView.partlyRight" : {
+    "QuizView.almost" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Partly right."
+            "value" : "Almost! Try once more."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "En partie juste."
+            "value" : "Presque ! Encore un essai."
           }
         }
       }
@@ -4521,13 +4521,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Correct: %@ / %lld"
+            "value" : "Correct: %lld / %lld"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Correcte : %@ / %lld"
+            "value" : "Correcte : %lld / %lld"
           }
         }
       }
@@ -4545,6 +4545,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Correcte :"
+          }
+        }
+      }
+    },
+    "ResultsView.firstTryWithColon" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First Try:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premier essai :"
+          }
+        }
+      }
+    },
+    "ResultsView.secondTry" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Second Try: %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deuxième essai : %lld"
           }
         }
       }
