@@ -5282,3 +5282,42 @@ cards at first shared the models' three-column grid, where they wrapped and ran 
 a two-by-two grid fixed that. Dark mode went unseen again, because the simulator still ignored the
 appearance switch.
 
+
+## Closing the Browse Plan (2026-11-22)
+
+With Phase 14 committed, every phase of
+[`plans/browse_and_verb_implementation.md`](../plans/browse_and_verb_implementation.md) was done,
+and Josh asked for "Phase 15". The plan has none, since its phases stop at 14; what remained was
+the Closing, so this session did that. No app code changed. The suite still ran 553 tests in 46
+suites, all passing, and `check_docs.py` still found nothing.
+
+The main job was a privacy audit. Fifteen phases had each staged their own lines in
+`docs/privacy_policy_pending.md`, and the risk with piecemeal staging is that something slips
+between the pieces. So the audit started from the code rather than the staging: a diff of
+`Analytics.swift` against the commit before Phase 1, then every call that sends a signal. Nine new
+signals and ten new parameter keys, all covered in English and French, all drawn from a fixed
+vocabulary or a band. Two details made that hold. A search report keeps the length of the query
+rather than the query, and a link's `source` passes through the enum, so a hand-built link cannot
+smuggle text into analytics.
+
+The gap it found lay in an old signal rather than a new one. Every screen reports itself through
+`viewAppeared` with its type name, and the shipped policy lists the kinds of screen: verbs, verb
+models, the quiz, and so on. Phase 7 added a full list of related verbs and Phase 14 a collection's
+page, and both quietly joined that signal without anyone touching the policy's list, because no
+new signal was involved. A new section now stages the bullet with "lists of related verbs" and
+"collections of verbs" added.
+
+The second job was the handoff to the pedagogy plan, whose "What the Browse Plan Leaves" section was
+written before any of this existed and said so. Rewriting it against the code turned up a few
+places where the expectation and the build differ. The accent key row is `FrenchLetterKeyRow`, and
+only the search fields show it, not the quiz. Key conjugations are always masculine, because they
+stand without a pronoun, and can be empty for a verb like accroire. And the number thirty gates
+less than the old list claimed: ranking follows whether a quiz has chosen verbs, and the time bonus
+follows the score.
+
+The last job was a note for the sibling apps. The finding most worth acting on is in Konjugieren:
+its collection signals send `ablaut-<exemplar>`, and the exemplar is an infinitive, so a group of
+one verb names the verb looked up, which its policy says it does not send. I had suspected this in
+Phase 14 and confirmed it in Konjugieren's code here, without editing it. One claim I had drafted
+did not survive the same check: Konjugieren's current quiz already keeps a scoped quiz out of its
+bests, so that point now speaks only to Conjugar.

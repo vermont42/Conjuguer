@@ -38,7 +38,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 12 | Done | 2026-11-22 | 9af3c40 | D5 | 14 |
 | 13 | Done | 2026-11-22 | d4b8752 | D4 | 15 |
 | 14 | Done | 2026-11-22 | 894ddba | D6 | 16 |
-| Closing | Not started | | | Audit, porting notes | Closing |
+| Closing | Awaiting Josh | 2026-11-22 | | Audit, porting notes | Closing |
 
 Konjugieren's Phase 4 (separable verbs) and Phase 8 (a Futur II article) have no Conjuguer
 counterpart; see [Not Carried Over](#not-carried-over).
@@ -1593,7 +1593,7 @@ Phase 13's 536, all in the new `VerbCollectionTests`. New files: `Models/VerbCol
 
 ## Closing
 
-**Status:** Not started.
+**Status:** Awaiting Josh (2026-11-22).
 
 - Run the full suite and `check_docs.py`.
 - Audit the privacy staging: diff `Analytics.swift` against the commit before Phase 1, read every
@@ -1611,3 +1611,76 @@ Phase 13's 536, all in the new `VerbCollectionTests`. New files: `Models/VerbCol
 - Mark this plan finished in its Status section.
 
 **How it differed:**
+
+Done 2026-11-22 in one session, which Josh asked for as "Phase 15": the plan has no Phase 15, and
+the Closing was the only unfinished work. No app code changed.
+
+- **The checks.** 553 tests in 46 suites passed, the count Phase 14 left, and `check_docs.py`
+  found 0 problems after the Closing's edits.
+- **The privacy audit.** `Analytics.swift` was diffed against `3ed3be8`, the commit before Phase 1,
+  and every `signal` call site read. Nine signals (`finishSearch`, `leaveVerbView`,
+  `tapTenseArticle`, `tapShareVerb`, `tapStarVerb`, `viewReviewCard`, `tapRevealReviewCard`,
+  `viewCollection`, `tapShareCollection`) and ten parameter keys (`source`, `outcome`,
+  `queryLength`, `resultCount`, `matchKind`, `resultPosition`, `deepestSection`, `dwell`,
+  `starred`, `collection`) all have staged lines in both languages. Every value is an enum case or
+  a band: `SearchReport` keeps the query's length, not the query; a link's `source` passes through
+  `AnalyticsSource(rawValue:)`, so a crafted link can send only a value of the vocabulary; and
+  `collection` says `model` for every model. **One gap, now staged:** two screens the plan added,
+  `RelatedVerbListView` and `VerbCollectionView`, report themselves through the existing
+  `viewAppeared`, and the policy's bullet on screens did not name them. A new section of
+  `docs/privacy_policy_pending.md` adds "lists of related verbs" and "collections of verbs" to it.
+  No signal carries a verb or typed text.
+- **`feature_architecture.md`** describes search, the signals, the deeplink grammar, the learner's
+  record, and collections as built. One row was narrower than the code: the source table said
+  `deeplink` meant a `verb/` link with no `source`, while a `search` link and a `list/` link fall
+  back to it too. The row now says so.
+- **The pedagogy handoff.** "What the Browse Plan Leaves for This One" in
+  `pedagogy_implementation.md` now gives the names as built, checked against the code. Its
+  corrections: the accent row is `FrenchLetterKeyRow`, and only the two search fields show it;
+  grading's lenient comparison already exists (`ConjugationResult.score`); key conjugations are
+  always masculine and can be empty; `QuizSheet` lives in `QuizView.swift`; and the count of thirty
+  gates less than the old list said, since ranking and the tip follow `isRanked` and the time
+  bonus follows the score.
+
+### For Konjugieren and Conjugar
+
+What this port found that the other apps should look at. Konjugieren's points were checked against
+its code on 2026-11-22; Conjugar's code was not read, so its column of each point is **inference**.
+
+1. **Konjugieren's `collection` value names a verb.** Its `VerbCollection.key` for an ablaut group
+   is `ablaut-<exemplar>`, and it sends that key on `viewCollection`, `tapShareCollection`, and
+   `quizStart`. The exemplar is an infinitive, and a group of one verb names exactly the verb looked
+   up, which its policy says is not sent. Conjuguer sends `model` for every model. Konjugieren could
+   send `ablaut` alone, or the group's number, and restage its line. Conjugar, if it makes its
+   models collections, should follow Conjuguer.
+2. **A collection's quiz and the Live Activity.** Konjugieren's collection quiz starts a Live
+   Activity whose tap opens the Quiz tab, away from the sheet that runs the quiz. Conjuguer starts
+   none (`QuizScope.startsLiveActivity`). Josh may want the same in Konjugieren and Conjugar.
+3. **Konjugieren's search tiers may misrank folded queries.** It ranks a literal infinitive
+   substring above a folded prefix, and a prefix strictly above a whole-word gloss. In French that
+   put gonfler ahead of aller for "go", and relever ahead of élever for "eleve". Conjuguer puts the
+   prefix, the folded prefix, and a whole English meaning in one tier ranked by frequency, and ranks
+   a conjugation in that tier too, since rare verbs' conjugations are often the first letters of
+   common verbs (réer ahead of réaliser for "réa"). Worth testing in Konjugieren with umlauts left
+   out, and worth adopting in Conjugar, whose gloss search and many short Spanish conjugations
+   invite the same misranking.
+4. **Spotlight's indexing cost.** Konjugieren reindexes every launch. With Conjuguer's 6,330
+   entries the key conjugations took seconds of the main actor, so it indexes only when the version,
+   build, or an entries `format` constant changes. Conjugar's 4,811 verbs are likely to need the
+   same.
+5. **An intent before any window.** Conjuguer parses its verbs in the window's `.task`, so an App
+   Intent run in the background found no verbs until `VerbData.ensureLoaded()`. Conjugar should
+   check where it parses before porting Look Up a Verb.
+6. **A scoped quiz is unranked in more ways than Game Center.** Conjuguer's scoped quiz sets no best
+   score, donates no tip, and does not open the leaderboard, which Conjuguer's tab does after every
+   quiz. Konjugieren's current code already keeps a scoped quiz's score out of its bests. Conjugar
+   should check all three when it adds scopes.
+7. **Doubled infinitives.** A quiz over chosen verbs graded sortir (obtain) as sortir (exit),
+   because grading ignored the extra letters; fixed here and pinned. German has no doubled entries,
+   but Conjugar should check whether any of its entries share an infinitive.
+8. **Small things.** Conjuguer's verb share button has an identifier (`verb_share_button`), which
+   Konjugieren's lacks. Konjugieren's article sheet closes to open a linked verb in the Verbs tab;
+   Conjuguer's pushes it inside the sheet, because a verb page here may itself be a sheet. Neither is
+   a defect.
+
+The plan is finished, apart from the two git steps.

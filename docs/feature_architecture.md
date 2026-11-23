@@ -512,7 +512,7 @@ quiz signals. Values are Konjugieren's names wherever the surface is the same.
 | `widget` | Yes | Any home-screen, lock-screen, or quiz widget (`WidgetDeeplink`, `?source=widget`) |
 | `control` | Yes | The Random Verb control in Control Center (`OpenRandomVerbControlIntent`); for `finishSearch`, the Find a Verb control (Phase 9) |
 | `shortcut` | Yes | Open Random Verb run from the Shortcuts app (`OpenRandomVerbIntent`); Phase 9's shortcuts too |
-| `deeplink` | Yes | A `conjuguer://verb/` link with no `source` item, or one outside this vocabulary |
+| `deeplink` | Yes | A `conjuguer://` link with no `source` item, or one outside this vocabulary: a `verb/` link for the verb page, a `search` link for `finishSearch`, a `list/` link for `viewCollection` |
 | `resume` | Yes | The same page appearing again (above) |
 | `related` | Yes | A verb on a verb page's Related Verbs card, or in its full list (Phase 7) |
 | `spotlight` | Yes | A Spotlight result (Phase 9) |

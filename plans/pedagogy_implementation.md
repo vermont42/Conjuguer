@@ -277,29 +277,76 @@ apply: Conjuguer is already listed under Reference.
 
 ## What the Browse Plan Leaves for This One
 
-Expected names, from the browse plan as written. The browse plan's Closing corrects this list;
-trust its notes over this section.
+Corrected 2026-11-22 by the browse plan's Closing, against the code as built at the end of browse
+Phase 14 (`894ddba`). These are the names a phase of this plan will meet.
+[`docs/feature_architecture.md`](../docs/feature_architecture.md) describes each in its section,
+and the browse plan's **How it differed** notes say why each is shaped as it is.
 
-- **Matching.** The browse plan's search function folds accents, which is right for search and
-  wrong for grading (it would accept parle for parlé). Grading needs its own comparison.
-- **Edit distance**, if browse Phase 2's guess uses one (Konjugieren's `VerbSearch.editDistance`,
-  optimal string alignment). Phase 4 needs it.
-- **Which cell is this text?** `Verb.conjugations(matching:)` (browse Phase 4), exact cells only.
-  Phases 4 and 14 call it first on a wrong answer.
-- **The conjugation map** in the bundle (browse Phase 4). Phase 17 reads it.
-- **Key conjugations** (browse Phase 8): the il présent, il passé composé, and il futur simple
-  ("vient · est venu · viendra"), as Josh decided on 2026-11-22. Phases 11 and 15 use them.
-- **The accent key row** (browse Phase 1), with an `insert` closure. Phase 1 puts it on the answer
-  field.
-- **Scopes.** `QuizScope` with `.allVerbs`, `.myVerbs`, `.verbPage`, and `.collection`, an
-  `isRanked` rule, and a quiz sheet for Test Me and collections (browse Phases 11 and 14).
-- **Bands and collections.** `FrequencyBand` and `Verb.isIn(_:)` (browse Phase 12); collections,
-  including models if Josh chose them (browse Phase 14).
-- **A due date per verb.** `ReviewSchedule` on the learner's record, driving the review card
-  (browse Phase 13). Phase 11 folds it into the practice record.
-- **Related verbs and bases** (browse Phase 7). Phase 6's "derivative verbs" reads them.
-- **Thirty is wired in.** The question count gates the Live Activity, the tip donation, the time
-  bonus, and ranking. Phases 5, 7, and 8 revisit each.
+- **Matching.** Search folds accents (`VerbSearch.fold`), which is right for search and wrong for
+  grading (it would accept parle for parlé). Grading has its own comparison,
+  `ConjugationResult.score`, which ignores case, accepts any of a cell's alternate conjugations,
+  counts an answer that lacks only circumflexes as right (`totalMatch`), and one that differs
+  only in other accents as `partialMatch`. Do not route grading through
+  `VerbSearch`.
+- **Edit distance.** `VerbSearch.editDistance(_:_:)`, optimal string alignment over `[Character]`,
+  as in Konjugieren. The guess measures many candidates at once through `BoundedEditDistance` in
+  `ConjugationIndex.swift`, which works over bytes and gives up past a bound. Phase 4 needs the
+  first.
+- **Which cell is this text?** `Verb.conjugations(matching:)` in `Models/ConjugationMatch.swift`,
+  returning `[ConjugationMatch]` (`tense`, `isAgreement`) in the verb page's order. Accents must
+  match exactly; case and spacing do not. A compound cell matches with its participle agreed either
+  way, an impératif matches with or without its pronoun (souviens, souviens-toi), and a cell the
+  defect group lacks never matches. Phases 4 and 14 call it first on a wrong answer.
+- **The conjugation map.** `ConjugationMap` (`Models/ConjugationMap.swift`), written at build time
+  by the `ConjugationMapTool` target into `ConjugationMap.lzfse` and read through
+  `ConjugationMap.bundled`. `ConjugationMap.key(_:)` normalizes a spelling, and
+  `agreedForms(ofParticiple:)` gives allée, allés, allées. `ConjugationIndex` indexes it by folded
+  spelling for search. Phase 17 reads it.
+- **Key conjugations.** `Verb.keyConjugations()` (`Models/KeyConjugations.swift`) returns the il
+  présent, passé composé, and futur simple (`Verb.keyTenses`), "vient · est venu · viendra", as
+  Josh decided on 2026-11-22. They stand without a subject pronoun, so they are always masculine,
+  whatever the pronoun-gender setting, and a reflexive verb keeps its pronoun (se souvient). A form
+  the defect group marks unused is left out: gésir gives only gît, and accroire and the other verbs
+  used only in the infinitif give none, so check for an empty array. Phases 11
+  and 15 use them. Shown with no label, never "principal parts" or "temps primitifs".
+- **The accent key row.** `FrenchLetterKeyRow` (`Views/FrenchLetterKeyRow.swift`), é è ê â î ô û
+  ç, with an `insert: (String) -> Void` closure. Today the Verbs and Models tabs' search fields show
+  it; the quiz's answer field does not. Phase 1 puts it there. Konjugieren's Closing found the same
+  gap in its own quiz.
+- **Scopes.** `QuizScope` (`Models/QuizScope.swift`): `.allVerbs`, `.myVerbs(_:)`,
+  `.verbPage(_:)` (three questions), and `.collection(_:)` (defined in `VerbCollection.swift`).
+  Each carries `verbs` (nil for the default quiz), `questionCount`, `source`, an optional `title`,
+  and an optional `collection`. `isRanked` is `verbs == nil`, so only the default quiz posts to Game
+  Center, sets the best score, and donates `ChangeDifficultyTip`; a scoped quiz is always Regular.
+  `QuizSheet` (in `Views/QuizView.swift`) runs a scoped quiz over a verb page or a collection.
+  A level is to be another constructor.
+- **Bands and collections.** `FrequencyBand` (`.top100`, `.top300`, `.top1000`, by rank),
+  `Verb.isIn(_:)`, and `Verb.verbs(in:)` in `Models/FrequencyBand.swift`. `VerbDraw.isIrregular`
+  (`Models/VerbDraw.swift`) says what counts as irregular. `VerbCollection` has four featured cases
+  (`top100`, `etre`, `irregularFutur`, `pronominal`) and `.model(_:)` for each of the 99 models,
+  with `verbs`, `contains`, and `analyticsValue`, which says only `model` for any model so that a
+  one-verb model never names its verb. Josh chose all 99 models as collections on 2026-11-22.
+- **A due date per verb.** `ReviewSchedule` (`Shared/ReviewSchedule.swift`): a box and a due
+  date on the ladder `intervals` = 1, 3, 7, 14, 30 days, with `lookedUp(at:calendar:)`,
+  `reviewed(at:calendar:)`, `snoozed(at:calendar:)`, and `isDue(at:)`. It is the optional
+  `review` field of `LearnerVerbs.Entry` (`Shared/LearnerVerbs.swift`), and
+  `LearnerVerbStore` (`Current.learnerVerbs`) drives it through `recordOpen(_:source:)`,
+  `recordReview(_:)`, `snoozeReview(_:)`, and `verbDueForReview(at:)`. Entries are keyed by
+  `Verb.dictionaryKey`, so each entry of a doubled infinitive (haïr) keeps its own schedule.
+  **Every field added to the record must be optional**, or older records decode as nothing.
+  This is Konjugieren's browse version (its commit 65d5eb6), not its current one: Konjugieren's
+  pedagogy Phase 11 moved the schedule into a `PracticeRecord` and added `answered` and `new`.
+  Read its current `Shared/ReviewSchedule.swift` before Phase 11 folds this one in.
+- **Related verbs and bases.** `RelatedVerbs` (`Models/RelatedVerbs.swift`), with
+  `RelatedVerbs.base(of:)` for a prefixed verb's base. Phase 6's "derivative verbs" reads them.
+- **The `source` vocabulary.** `AnalyticsSource` in `Analytics/Analytics.swift`. The quiz signals
+  already send `tab`, `myVerbs`, `verbPage`, and `list` (a collection), and `quizStart` sends
+  `collection`. A new quiz entry point adds its value there and stages its privacy line.
+- **Thirty is wired in, though less than expected.** `Quiz.questionCount` is 30. The Live
+  Activity starts only for a thirty-question quiz that is not a collection's
+  (`QuizScope.startsLiveActivity`), and the collection bar's hint names the count. Ranking and the
+  tip donation follow `isRanked`, not the count. The time bonus follows neither: it applies to any
+  quiz whose score reaches 150. Phases 5, 7, and 8 revisit each.
 
 ## Phase 1: Accept What Is Right, Ask What Exists
 

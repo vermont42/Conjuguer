@@ -330,3 +330,29 @@ Le paragraphe sur la liste conservée sur l'appareil devient :
 ```
 L'application conserve une liste des verbes que vous avez ouverts et des verbes que vous avez marqués d'une étoile, avec la date à laquelle chacun doit être révisé, afin d'afficher vos verbes récents, « Mes verbes », les cartes de révision et le nombre de verbes de chaque collection que vous avez consultés. Cette liste reste sur votre appareil et n'est jamais envoyée.
 ```
+
+## Screens the browse plan added (browse plan, Closing, 2026-11-22)
+
+Found by the Closing's audit. Two screens added by the plan report themselves through the existing
+`viewAppeared` signal, with their type names as `viewName`: `RelatedVerbListView`, a verb page's
+full list of related verbs (Phase 7), and `VerbCollectionView`, a featured collection's page
+(Phase 14). Neither names a verb, a model, or a collection; the collection is named only by the
+Phase 14 section's `viewCollection`. The existing bullet on screens lists the kinds of screen, so
+this section changes it rather than adding one. A model's page, collection bar and all, is still
+`ModelView`, which "verb models" covers.
+
+### English
+
+The bullet on screens (the first of section 2's list) now reads:
+
+```
+- Which screens you visit (verbs, lists of related verbs, verb models, collections of verbs, quiz, info articles, settings, and the tutor)
+```
+
+### French
+
+Le point sur les écrans (le premier de la liste de la section 2) devient :
+
+```
+- Les écrans que vous consultez (verbes, listes de verbes apparentés, modèles de verbes, collections de verbes, quiz, articles d'information, paramètres et le tuteur)
+```
