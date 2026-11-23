@@ -355,6 +355,15 @@ when you work with any `.xcstrings` file or `L.swift`.
 (`SWIFT_EMIT_LOC_STRINGS = NO`), so a modified catalog in the working tree is a real change.
 Inspect the diff and keep or discard it deliberately.
 
+### French Punctuation
+
+French text puts a narrow no-break space (U+202F) before `:`, `;`, `!`, and `?`, and inside
+guillemets (`Score : 12`, `« parler »`), wherever it is written: in either catalog, and in French
+typeset in Swift (write `\u{202F}`), such as `ExampleSource`'s attributions and the tutor's French
+suggestions. Josh chose it on 2026-11-23, the colon included. English text and English values
+keep English punctuation. The exceptions (times, URLs, the irregularity notation, English quoted
+verbatim) are listed in `.claude/rules/localization_catalog.md`.
+
 ### Adding New Localized Strings
 
 1. Add the accessor to `L.swift` in the appropriate enum
