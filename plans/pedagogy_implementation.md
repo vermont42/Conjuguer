@@ -25,7 +25,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | Phase | Status | Date | Commit | Suggestions | Konjugieren phase |
 |---:|---|---|---|---|---:|
 | 1 | Done | 2026-11-22 | 0d82e5c | T1.3, T1.4, T1.5, and two Conjuguer defects | 1 |
-| 2 | Awaiting Josh | 2026-11-22 | | T1.2 | 2 |
+| 2 | Done | 2026-11-22 | b4aa188 | T1.2 | 2 |
 | 3 | Not started | | | T4.1, T4.4, T4.5 | 3 |
 | 4 | Not started | | | T1.6 | 4 |
 | 5 | Not started | | | T2.3, T2.6, T6.7, M1 | 5 |
@@ -469,7 +469,7 @@ answer field; and tests pin each.
 ## Phase 2: The Shape of the Answer
 
 **Suggestions:** T1.2. **Ports:** Konjugieren Phase 2 (`AnswerFrame.swift`,
-`AnswerFrameView.swift`). **Depends on:** Phase 1. **Status:** Awaiting Josh.
+`AnswerFrameView.swift`). **Depends on:** Phase 1. **Status:** Done.
 
 Show the shape of the expected answer around the field, with the pronoun fixed outside it:
 `nous ______`, `elles ______`. The frame settles the pronoun question. Build it as a component the
