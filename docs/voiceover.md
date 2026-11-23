@@ -100,9 +100,17 @@ A conjugation cell on the verb page (`TenseSectionView`) shows the pronoun and t
 whole spoken line, pronoun and reflexive pronoun included, lowercased (`VerbConjugations.Cell.accessibility`,
 from `conjugationParts`). The lowercasing matters: the display marks irregular letters by case
 (red capitals, see `ConjugationText.swift`), and VoiceOver would spell "SUIS" letter by letter. The
-personless card (participes and radical du futur) does the same with `personlessAccessibility`.
-Any new place that shows a conjugation, such as a search result that names its match or the key
-conjugations, should give VoiceOver the lowercased spoken form in the same way.
+personless card (participes and radical du futur) does the same, joining its three cells' spoken
+forms. Since browse Phase 6 the personless card gives each cell its own row and element, so
+VoiceOver reads allé, allant, and ir one at a time. Any new place that shows a conjugation, such as the key conjugations, should give VoiceOver
+the lowercased spoken form in the same way. A search result's match line ("vais: Indicatif Présent
+(je)", since browse Phase 5) needs nothing extra: it is built from the map's lowercase keys and
+marked French.
+
+A cell that a search matched (browse Phase 5) carries the accessibility value "Matches your search"
+("Correspond à votre recherche"), so VoiceOver reads the form and then that it is the one found.
+Since Phase 6 the personless card's cells carry it one by one, like the tense cards'. Not yet tried
+with VoiceOver running.
 
 Nothing on the verb page speaks when tapped. A conjugation cell has no tap action, and `Utterer` is
 used only by the quiz.
@@ -111,12 +119,13 @@ used only by the quiz.
 
 | Screen | Approach |
 |---|---|
-| `VerbBrowseView`, `ModelBrowseView` | `BrowseRow` in a `Button`: title French, subtitle English, or French when it names the verb that found a model (see above) |
+| `VerbBrowseView`, `ModelBrowseView` | `BrowseRow` in a `Button`: title French, subtitle English, or French when it names the verb that found a model (see above); a search's match line French |
 | `FrenchLetterKeyRow` | Each key a `Button` whose letter is marked French |
 | `VerbView` (infinitive, headings, cells) | `.frenchPronunciation()` on each |
 | `VerbView` (gloss) | `.englishPronunciation()` |
 | `VerbView` (model row) | A `Button` whose label is marked French, with a hint that it opens the model |
 | `VerbView` (color key) | Each swatch combined into one element. The dismiss button is labeled |
+| `VerbView` (tense headings, Phase 6) | The French name marked French and given the header trait; the second name ("also simple past", "aussi passé défini") a separate element in the interface's language, unmarked; the article button labeled "Info" with the hint "Opens the article about this tense." |
 | `ModelView` | Exemplar, endings, and verbs marked French |
 | `InfoBrowseView`, `InfoView` | `.frenchPronunciation(forReal: info.alwaysUsesFrenchPronunciation)` |
 | `QuizView` | The infinitive and the question French, the gloss English, plus the announcements below |

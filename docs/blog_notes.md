@@ -4881,3 +4881,99 @@ on, and Phase 6 would have been a bad way to find it.
 
 Each fix is pinned by a test, and the regenerated corpus dumps changed only in the affected verbs'
 forms, which is a useful check that a fix to the engine reached no further than intended.
+
+## Reverse Lookup: Typing "suis" Finds Être (2026-11-22)
+
+Phase 5 of [the browse plan](../plans/browse_and_verb_implementation.md) put the conjugation map
+from Phase 4 to work. Typing a conjugation now finds its verb, and the row says why: "suis:
+Indicatif Présent (je)" under être, and "suis: Indicatif Présent (je, tu) · Impératif (tu)" under
+suivre. Opening the row lands on that cell, scrolled to and highlighted.
+
+The first decision was where a conjugation ranks. Konjugieren ranks one above every infinitive
+prefix, so that war finds sein ahead of warten. Before copying that, I simulated it on Conjuguer's
+map in Python, listing every short conjugation whose verb is rarer than a verb it begins. The
+list was damning. réa is the passé simple of réer, rank 2,963, and the first three letters of
+réaliser, rank 29. ente is enter's and entendre's. conte is conter's and contenir's. French has
+thousands of rare verbs whose forms are the beginnings of common ones, and a learner typing "réa"
+is almost always on the way to réaliser. So a conjugation joined the tier that Phase 1 built for
+prefixes and English meanings, ranked by frequency. The short forms the plan worried about (a,
+ai, as, es, eu, vu, su, lu, dû, bu) all came out right without special rules, because their verbs
+are among the commonest there are.
+
+French sentences put more around a conjugation than German ones do, so the query parser grew past
+the plan. It drops subject pronouns, elided or not, and also que, y, en, reflexive pronouns, and ne
+with its pas. "Je ne me suis pas levé" became the hardest case and the most instructive. Only 217
+verbs are stored as pronominal, and lever is not one of them, so its passé composé is "ai levé" and
+"suis levé" matched nothing. When the query carried a reflexive pronoun, the search now tries the
+être auxiliary as the verb's pronominal use. Without one, "est levé" is a passive, and it rightly
+matches nothing.
+
+The guess was the performance story. Konjugieren's guess compares a misspelling with every
+conjugation; Konjugieren has 50,000, and Conjuguer has 243,000. The first version took nine
+seconds per keystroke in a Debug build for a ten-letter word. Three changes brought it under a
+third of a second. A letter-count floor rejects most candidates in one pass, since an edit can
+change at most two letters' counts. The folds are packed as bytes, one array per length. And the
+search measures lengths nearest the query's own first, tightening its limit with each find, so a
+word one edit from a conjugation is never compared at length with everything three edits away.
+The index build fell from 3.3 seconds to 1.0 the same way, by folding only the 107,000 keys that
+have accents.
+
+One small lesson came from the simulator, not the tests. The match line was meant to be red, and it
+came out gray: `smallLabel()` sets its own foreground style, and a modifier closer to the text
+wins. No test would have caught that.
+
+
+## Counting French Tenses to Order the Verb Page (2026-11-22)
+
+Phase 6 of [the browse plan](../plans/browse_and_verb_implementation.md) reordered the verb page
+by how often each tense occurs, as Konjugieren's Phase 7 did for German. The page now leads with
+the présent and the imparfait, keeps the passé simple third, and shows the compound tenses by
+default, passé composé first, with a toggle that remembers a learner who would rather hide them.
+
+The count was the interesting part, because French is harder to count than German. German
+capitalizes its nouns, which settles most noun-or-verb questions before they arise. French spells
+"porte" the same as a door and as "il porte", "fait" the same as a fact and as "il fait", and its
+prepositions include several conjugations: entre, contre, pendant, devant, and puis, which is
+pouvoir's "je puis" far less often than it is "then". So `scripts/count_tenses.py` reads context.
+A subject pronoun before a word fixes its person. A word without one has a noun subject and so is
+third person, which turned out to be the single most useful rule: before it, "les objectifs
+définis" and "mis en œuvre" counted as je définis and je mis, and the passé simple came out at 3%
+of government prose, which writes no passé simple at all. After it, 0.6%.
+
+Some words stay two tenses whatever the context. "Il finit" is a présent or a passé simple, and
+"que je parle" a présent or a subjonctif. Rather than pick one by rule, the script shares such a
+word among its tenses in the proportions that the same folder's unambiguous words show. Zola's
+narrative, full of "il vint" and "elle prit", gives "il finit" mostly to the passé simple; a CNIL
+report gives it to the présent. It is a small expectation-maximization loop, and it lets the
+register decide what the register should decide.
+
+Each count got the same treatment Konjugieren's did: read a random sample of the words behind it
+and fix what is wrong. The impératif needed the most work. Wikipedia's headings ("Ressource
+relative à la santé"), its quoted noun phrases (« concours partiels »), and abbreviations
+("L'art. règle") all looked like orders. The fixes were a sentence that must end in a period or an
+exclamation mark, a quotation mark that starts a sentence only after one ends, and a test of
+whether the folder mostly puts an article before the word. One fix had a side effect worth
+recording: modernizing La Fontaine's "étoit" to "était" by swapping oi for ai also turned
+"parfois" into parfaire and "trois" into traire, so the swap now applies only when it yields an
+imparfait or a conditionnel.
+
+The result was robust. Weighting the five folders equally and pooling them gave the same order in
+both blocks, and the order changed less than I expected: the imparfait and the passé simple swap,
+and so do the impératif and the subjonctif imparfait. The register differences are large, though.
+In the novels the imparfait outnumbers the présent and the plus-que-parfait outnumbers the passé
+composé three to one; in government prose the présent is 85% of the simple block.
+
+Josh made four decisions from one round of questions: remember the toggle, put the participles
+between the blocks, give each tense a second name in the app's language ("also simple past",
+"aussi passé défini"), and keep the color key but show it only where the verb itself is irregular.
+That last one needed a definition, because every compound tense has red letters in its auxiliary,
+so "a page with red letters" would have been every page.
+
+The article sheet taught a navigation lesson. Konjugieren's sheet closes and opens a linked verb in
+the Verbs tab. Conjuguer's verb page is often itself a sheet, from a model page or a deeplink, and
+a second presentation from the tab behind it would fail. So a link inside the article sheet pushes
+inside the sheet, and a verb page found there opens its own articles by pushing too, through an
+environment value, rather than stacking sheets.
+
+One simulator lesson: iOS 26's switch ignores AXe's instant tap. A touch held for 0.15 seconds
+flips it. The verify skill now says so.

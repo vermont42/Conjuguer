@@ -14,7 +14,7 @@ struct VerbSearchGuessTests {
   private static let verbs = Verb.verbs.values.sorted { ($0.frequency, $0.id) < ($1.frequency, $1.id) }
 
   private func guess(_ query: String) -> String? {
-    VerbSearch.closestVerb(to: query, in: Self.verbs)?.infinitif
+    VerbSearch.guess(for: query, in: Self.verbs)?.verb.infinitif
   }
 
   @Test(arguments: [

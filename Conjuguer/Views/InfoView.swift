@@ -11,6 +11,11 @@ struct InfoView: View {
   @Environment(World.self) private var world
   let info: Info
 
+  /// Where the article's links to articles and verbs go. Nil hands them to
+  /// `World.handleInAppURL`. An article opened from a verb page passes its own, so that the
+  /// learner stays there.
+  var openLink: ((URL) -> Void)?
+
   var body: some View {
     ScrollView {
       VStack {
@@ -50,17 +55,21 @@ struct InfoView: View {
     let cleansedUrlString = firstLetterLowercased(parenless(url.absoluteString.removingPercentEncoding ?? ""))
 
     if let infoIndex = Info.headingToIndex(heading: cleansedUrlString) {
-      URL(string: URL.conjuguerUrlPrefix + "\(URL.infoHost)/\(infoIndex)").map {
-        world.handleInAppURL($0)
-      }
+      URL(string: URL.conjuguerUrlPrefix + "\(URL.infoHost)/\(infoIndex)").map(open)
       return .handled
     } else if Verb.verbs[cleansedUrlString] != nil {
-      URL(string: URL.conjuguerUrlPrefix + "\(URL.verbHost)/\(parenless(firstLetterLowercased(url.absoluteString)))?source=\(AnalyticsSource.infoLink.rawValue)").map {
-        world.handleInAppURL($0)
-      }
+      URL(string: URL.conjuguerUrlPrefix + "\(URL.verbHost)/\(parenless(firstLetterLowercased(url.absoluteString)))?source=\(AnalyticsSource.infoLink.rawValue)").map(open)
       return .handled
     } else {
       return .systemAction
+    }
+  }
+
+  private func open(_ url: URL) {
+    if let openLink {
+      openLink(url)
+    } else {
+      world.handleInAppURL(url)
     }
   }
 

@@ -70,11 +70,5 @@ extension Verb {
       .joined(separator: " ")
   }
 
-  private static let cellsInPageOrder: [Tense] = {
-    let personless: [Tense] = [.participePassé, .participePrésent, .radicalFutur]
-    let personal = (VerbConjugations.simpleSpecs + VerbConjugations.compoundSpecs).flatMap { spec in
-      spec.personNumbers.map(spec.builder)
-    }
-    return personless + personal
-  }()
+  private static let cellsInPageOrder = TenseTable.allTenses
 }

@@ -47,12 +47,14 @@ Conjuguer/
 │   ├── chanson_examples.json   # Bundled Chanson de Roland examples keyed by infinitif
 │   ├── ConditionnelPresent.swift  # Conditionnel présent endings
 │   ├── ConjugationLabels.swift # App-only display members of the conjugation core (pronouns, preamble, localized names, model verb links, the settings-gendered Conjugator overloads), kept apart so ConjugationMapTool can compile the core
+│   ├── ConjugationIndex.swift  # The conjugation map indexed for search: by folded spelling (etait → était) and as packed folds for the guess; BoundedEditDistance
 │   ├── ConjugationMap.swift    # Conjugation → verbs map: its rules, LZFSE text format, build(), and the bundled copy; compiled by the app and ConjugationMapTool
 │   ├── ConjugationMatch.swift  # Verb.conjugations(matching:): the cells, in page order, whose conjugation equals a text
+│   ├── ConjugationQuery.swift  # A search query as a conjugation's words: pronouns, elision, que, y, en, and negation dropped ("je ne sais pas" → sais)
 │   ├── ConjugationResult.swift # Answer scoring: total/partial/no match, plus its sound, score, icon, and color
 │   ├── Conjugator.swift        # The conjugation engine: model lookup, stem alterations, simple and compound tenses; takes the pronoun gender explicitly (the app's defaulted overloads are in ConjugationLabels.swift)
 │   ├── ConjugatorError.swift   # Error enum for conjugation failures
-│   ├── ConjuguerTips.swift     # TipKit tips (try the quiz, explore models, change difficulty, play game)
+│   ├── ConjuguerTips.swift     # TipKit tips (try the quiz, explore models, change difficulty, play game, scroll to the verb page's bottom)
 │   ├── CyclingDeck.swift       # Generic deck that deals elements in order and reshuffles on exhaustion
 │   ├── DefectGroup.swift       # A group of defective verbs and the tenses/persons they lack
 │   ├── DefectGroupParser.swift # XMLParser delegate for defectGroups.xml
@@ -73,6 +75,7 @@ Conjuguer/
 │   ├── LanguageModelServiceReal.swift  # FoundationModels implementation, incl. the ConjugationTool the model can call
 │   ├── literature_examples.json # Bundled literature/government/Wikipedia example sentences keyed by infinitif
 │   ├── ModelSearch.swift       # Finds a model by its exemplar or by any of its verbs, through VerbSearch
+│   ├── MatchedConjugation.swift # The conjugation a search result matched, its cells, the row's line ("vais: Indicatif Présent (je)"), and MarkedConjugations for the verb page
 │   ├── PasseSimpleGroup.swift  # Passé simple stem/ending groups (bare/a/i/u/ï/…)
 │   ├── PersonNumber.swift      # 1s…3p with localized pronouns and gendered third-person handling
 │   ├── PronounGender.swift     # Setting enum: feminine/masculine/both
@@ -87,6 +90,7 @@ Conjuguer/
 │   ├── StemAlteration.swift    # A stem alteration: type, chars, the tenses it applies to, additive/inherited flags
 │   ├── SubjonctifPresentGroup.swift   # Subjonctif présent ending groups
 │   ├── Tense.swift             # All French tenses; associated PersonNumber where applicable
+│   ├── TenseTable.swift        # The verb page's cards in order (frequency within each block, docs/tense_frequency.md); each tense's card, article, and second name
 │   ├── TutorChatHistory.swift  # Persistence for the tutor's chat messages
 │   ├── Verb.swift              # A verb: infinitif, translation, model reference, auxiliary, corpus counts, derived rank; static verbs dictionary
 │   ├── VerbModel.swift         # A conjugation pattern: parent for inheritance, stem alterations, ending groups, participe endings
@@ -94,7 +98,8 @@ Conjuguer/
 │   ├── verbModels.xml          # Conjugation pattern definitions
 │   ├── VerbParser.swift        # XMLParser delegate for verbs.xml
 │   ├── verbs.xml               # 6,330 entries / 6,326 distinct infinitives, with inline corpus hit counts (hi/hn/hl/hs/hp); VerbParser derives the ranks
-│   ├── VerbSearch.swift        # The one matching and ranking rule for verb search: accent and ligature folding, "se" and "to" stripped, exact then prefix or English meaning then the rest, each by frequency; the closest-verb guess when nothing matches
+│   ├── VerbSearch+Conjugations.swift # Reverse lookup: a conjugation, one word or compound ("ai mangé", "me suis levé"), finds its verbs
+│   ├── VerbSearch.swift        # The one matching and ranking rule for verb search: accent and ligature folding, "se" and "to" stripped, exact then prefix or English meaning then the rest, each by frequency; the guess, over infinitives and conjugations, when nothing matches
 │   ├── VerbVisit.swift         # VerbDestination (a verb page to push, with its source) and VerbVisit (one stretch of a verb page on screen, for viewAppeared and leaveVerbView)
 │   ├── XMLDataParser.swift     # Shared XMLParser delegate base for the three parsers
 │   └── Game/
@@ -146,7 +151,7 @@ Conjuguer/
 │   ├── URLSessionExtension.swift  # Stubbed URLSession factory used by the simulator/test worlds
 │   ├── Util.swift              # French/English Locale constants
 │   ├── Utterer.swift           # AVSpeechSynthesizer wrapper for French and English pronunciation
-│   ├── VerbConjugations.swift  # Builds VerbView's conjugation tables: tense specs, sections, cells, defectivity
+│   ├── VerbConjugations.swift  # Builds VerbView's conjugation tables from TenseTable: sections, cells, red letters, defectivity
 │   ├── VerbSearchArrowKeys.swift  # UIKeyCommand hack that lets ↑ and ↓ move through verb results while the search field is focused
 │   ├── VerbData.swift          # Startup XML parse (verbs, models, defect groups) with a loading/loaded state
 │   ├── VerbSort.swift          # Sort order for the verb browse view (frequency/alphabetical)
@@ -161,7 +166,7 @@ Conjuguer/
     ├── GameCenterAuthView.swift   # UIViewController shim + coordinator for presenting Game Center auth
     ├── GameView.swift          # The retro arcade minigame
     ├── InfoBrowseView.swift    # Info articles grouped by category; hosts the tutor entry and its unavailability cell
-    ├── InfoView.swift          # A single Info article rendered through RichTextView
+    ├── InfoView.swift          # A single Info article rendered through RichTextView; an optional openLink keeps its links inside a verb page's article sheet
     ├── InputView.swift         # DEBUG-only conjugation scratchpad
     ├── LoadingView.swift       # Splash shown while verbs.xml parses
     ├── MainTabView.swift       # Root TabView with five tabs
@@ -176,7 +181,7 @@ Conjuguer/
     ├── TutorTestView.swift     # DEBUG-only batch harness for tutor queries
     ├── TutorView.swift         # Chat interface for the on-device tutor
     ├── VerbBrowseView.swift    # Searchable, sortable list/grid of all verbs (hosts the verb_browse_sort launch anchor)
-    └── VerbView.swift          # Verb detail: full conjugation tables, etymology, example sentence
+    └── VerbView.swift          # Verb detail: conjugation cards with second names and article buttons, the article sheet, the color key and scroll tip, etymology, example sentence
 
 ConjugationMapTool/                 # macOS command-line target; compiles the conjugation core from Conjuguer/ (membership exceptions in project.pbxproj)
 ├── FormsJSON.swift             # The corpus pipelines' three dumps (forms [.json], forms_all [.json], conjugations [.json]), ported byte-for-byte from the retired CorpusFormsDumpTests
@@ -243,9 +248,11 @@ ConjuguerTests/
     ├── RichTextTests.swift             # Rich-text markup parsing into blocks and segments
     ├── SearchReportTests.swift         # The search tracker's lifecycle, each finishSearch report, and that no parameter can echo the query
     ├── SettingsTests.swift             # Settings defaults, persistence, and malformed-value handling (serialized)
+    ├── TenseTableTests.swift           # The verb page's order, each cell's card, articles, second names, and which pages show the color key
     ├── StemAlterationAuditTests.swift  # Audits every -er verb whose stem ends in é + consonant: the stem must open to è before a mute ending
     ├── VerbModelTests.swift            # GENERATED by T.generateVerbModelTests() — one @Test per verb model, ~5,500 lines. Regenerate rather than hand-edit
-    ├── VerbSearchGuessTests.swift      # The closest-verb guess, edit distance, arrow-key selection, and the mailto: link
+    ├── VerbSearchConjugationTests.swift # Reverse lookup: the plan's queries, short-query ranking, sentences, row lines, landing marks, the conjugation guess, bounded distance
+    ├── VerbSearchGuessTests.swift      # The guess at the verb meant, edit distance, arrow-key selection, and the mailto: link
     ├── VerbSearchTests.swift           # Verb search: folding, reflexive and "to" stripping, tier ranking, literal-before-folded, order independence
     ├── VerbVisitTests.swift            # A verb visit's deepest section, resume, and banded dwell
     └── WidgetSnapshotWriterTests.swift # Snapshot-bundle generation, day paging, and change detection
@@ -290,6 +297,7 @@ docs/                               # Claude's output that informs: research, re
 ├── screenshot_playbook.md          # Screenshot workflow: prerequisites, kill switches, driver flags, workarounds, recovery
 ├── screenshots/                    # Captured screenshots produced by the driver (gitignored)
 ├── technology_corpus_sources.md    # Provenance manifest for the technology corpus tier
+├── tense_frequency.md              # How often each tense occurs in corpus/originals, by folder: the method and counts behind the verb page's order
 ├── verb_frequency_sources.md       # Research: frequency-of-use sources for all verbs (Sketch Engine prices/caps, GLÀFF, Lexique 4 coverage)
 ├── video_script.md                 # App Store preview script, bilingual captions, and pre-recording checklist
 ├── voiceover.md                    # VoiceOver: marking French and English, tappable rows, spoken conjugations, the quiz's announcements
@@ -299,6 +307,7 @@ docs/                               # Claude's output that informs: research, re
 └── wwdc2026_*.txt                  # Three verbatim WWDC 2026 session transcripts (Apple copyrighted, gitignored)
 
 scripts/
+├── count_tenses.py             # Counts each tense in corpus/originals from the map tool's cells; see docs/tense_frequency.md
 ├── prep_screenshot_sim.sh      # Prepares a simulator for a screenshot sweep (status bar, language, region)
 ├── take_screenshots.sh         # Drives ios-build-verify + axe/simctl through the App Store screenshot set; see docs/screenshot_playbook.md
 ├── verify_store_media.sh       # Validates exported screenshots/previews against App Store Connect's requirements

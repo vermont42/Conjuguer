@@ -22,7 +22,11 @@ and later callers (reverse lookup, Spotlight, the Look Up intent) are to use it 
 | `ModelBrowseView.swift` | The Models tab, built the same way. `ModelBrowse.makeStore` builds the store |
 | `BrowseStore.swift` | A generic `@Observable` store that holds a list presorted for each sort order and persists the chosen order through a closure |
 | `BrowseSearch.swift` | `BrowseSearch.results(in:query:playSoundIfEmpty:search:)`: every item for a blank query, otherwise what the tab's search closure returns, with a sad trombone when that is nothing |
-| `VerbSearch.swift` | The matching and ranking rule. `MatchKind` names each kind of match, for Phase 3's `matchKind` |
+| `VerbSearch.swift` | The matching and ranking rule. `MatchKind` names each kind of match, for Phase 3's `matchKind`. Also the guess |
+| `VerbSearch+Conjugations.swift` | Reverse lookup (Phase 5): a conjugation, simple or compound, finds its verbs |
+| `ConjugationQuery.swift` | A query as a conjugation's words: subject and reflexive pronouns, elision, que, y, en, and negation dropped |
+| `ConjugationIndex.swift` | The conjugation map indexed by folded spelling, and the packed folds the guess measures; `BoundedEditDistance` |
+| `MatchedConjugation.swift` | The conjugation a result matched, its cells, the row's line ("vais: Indicatif Présent (je)"), and the `MarkedConjugations` a page opens with |
 | `ModelSearch.swift` | Finds a model by its exemplar or by any of its verbs, through `VerbSearch` without glosses |
 | `FailedVerbSearchView.swift` | The verb list's empty state: `ContentUnavailableView.search`, the guess, and the line asking the learner to email a missing verb |
 | `VerbSearchCommands.swift`, `VerbSearchArrowKeys.swift` | Command-F, and the arrow keys through results, on iPad and Mac |
@@ -39,14 +43,19 @@ and later callers (reverse lookup, Spotlight, the Look Up intent) are to use it 
 - **Folding.** `VerbSearch.fold` lowercases, turns œ into oe and æ into ae, and strips diacritics,
   so etre finds être and manoeuvrer finds manœuvrer.
 - **Kinds and tiers.** `MatchKind`, best first: exact infinitive; exact after folding; then one tier
-  holding an infinitive prefix, a whole English meaning (one comma-separated sense of the gloss,
-  its parenthetical note dropped, so "can (food)" means "can"), and a folded prefix; then a whole
-  word of the gloss; then an infinitive substring, literal or folded; then a gloss substring.
+  holding a conjugation (literal or folded), an infinitive prefix, a whole English meaning (one
+  comma-separated sense of the gloss, its parenthetical note dropped, so "can (food)" means "can"),
+  and a folded prefix; then a whole word of the gloss; then an infinitive substring, literal or
+  folded; then a gloss substring. Each verb appears once, with its best kind; on a tie a
+  conjugation wins, because its row can name the cells.
 - **Order within a tier** is by frequency rank, whatever the sort order, so venir leads under
   Alphabetical and "go" puts aller (#6) ahead of gonfler. A folded match ranks below a literal one
   in the same tier only when the query carries an accent or ligature: pêch puts pêcher before
   pécher, but pre ranks préparer by its frequency among the bare pre- verbs. The two exact tiers
   are always apart, so typed mater leads mâter, and pecher shows pêcher and pécher by frequency.
+  Folded matches also rank below the rest of their tier when the word typed is itself a literal
+  conjugation: mate is mater's, so mater leads and mâter and matérialiser follow the literal
+  prefixes.
 - **Models.** Every model whose exemplar matches comes first, ranked as the exemplars rank, then
   every other model that has a matching verb, ranked by its best verb, which the row shows as its
   subtitle (devenir under venir). Glosses are not searched there.
@@ -62,13 +71,19 @@ and later callers (reverse lookup, Spotlight, the Look Up intent) are to use it 
   vermontcoder@gmail.com", whose address is a `mailto:` link (`URL.mailto`) with the subject and
   body filled in with the query in the learner's language. A device that cannot open the link,
   such as the simulator, copies the address to the clipboard instead and says so for four seconds.
-- **The guess.** `VerbSearch.closestVerb` folds the query as search does (reflexive pronoun
-  dropped, accents and ligatures folded) and measures optimal string alignment distance
-  (Levenshtein plus a swap of two adjacent letters) to every folded infinitive. A guess must be
-  within one edit per three letters, and never more than three; ties go to the more frequent verb.
-  So venier finds venir, assoir asseoir, manjer manger (ahead of manier, also one edit away), and
-  xyzzyq nothing, in which case only the mail line shows. Glosses and conjugations are not
-  considered.
+- **The guess.** `VerbSearch.guess` folds the query as search does (reflexive pronoun dropped,
+  accents and ligatures folded) and measures optimal string alignment distance (Levenshtein plus a
+  swap of two adjacent letters) to every folded infinitive and, since Phase 5, to every folded
+  conjugation when the query is one word once its pronouns are dropped. A guess must be within one
+  edit per three letters, and never more than three; on a tie an infinitive beats a conjugation,
+  then the more frequent verb wins, then the earlier spelling. So venier finds venir, assoir
+  asseoir, manjer manger (ahead of manier, also one edit away), finnissons finir through finissons
+  (whose cells the guess's card names and its page marks), and xyzzyq nothing, in which case only
+  the mail line shows. Glosses are not considered. A Debug build measures 230,000 folds between
+  keystrokes because `BoundedEditDistance` discards most by their letter counts, abandons a
+  comparison once it must exceed the limit, and `ConjugationIndex.nearestFolds` measures lengths
+  nearest the query's first and tightens the limit with each find: at most about 0.3 s, against 9 s
+  without them.
 - **Keyboard (iPad and Mac).** The search field is a bar under the title that stays put
   (`.navigationBarDrawer(displayMode: .always)`, `BrowseLayout.searchPlacement`) on both tabs,
   because iPadOS 26 shrinks `.automatic` search into a toolbar button that ignores `.searchFocused`.
@@ -83,11 +98,61 @@ and later callers (reverse lookup, Spotlight, the Look Up intent) are to use it 
   mechanism. **Return** opens the highlighted result, else the first, else the guess. Return and the
   arrows act only on the iPad idiom (which a Mac running the iPad app also reports) and only while
   the field holds a query, so the iPhone keyboard's Search key behaves as before.
-- **Cost.** One search over 6,330 verbs takes about 20 ms on the Intel simulator. `VerbSearch`
-  caches each verb's folded keys after the first search.
+- **Cost.** One search over 6,330 verbs takes about 20 ms on the Intel simulator, and about 50 ms
+  with reverse lookup, in a Debug build. `VerbSearch` caches each verb's folded keys after the
+  first search.
 
 The table in the browse plan's **Conjuguer Today** section lists what typical queries returned
-before Phase 1. Conjugations (suis, vais) are not searched until Phase 5.
+before Phase 1.
+
+### Reverse Lookup
+
+Since Phase 5 of the browse plan (2026-11-22), a conjugation finds its verb, through the map
+([Conjugation Map](#conjugation-map)) indexed by `ConjugationIndex`.
+
+- **The query.** `ConjugationQuery` splits elided words (j'ai is j' and ai, with ’ read as ') and
+  drops leading words that a sentence puts around a conjugation, while one word remains: subject
+  pronouns, que and qu', ne and n', reflexive pronouns (me, te, se, elided or not, and a second nous
+  or vous), y, and en. After a ne, it drops pas, plus, jamais, rien, point, and guère too. So "je
+  vais", "j'ai", "il y a", "que je sois", "je ne sais pas", and "je me souviens" are vais, ai, a,
+  sois, sais, and souviens. A query of pronouns alone ("j'", "nous") is still being typed, so it
+  plays no trombone when it finds nothing.
+- **One word** is looked up as typed and then folded (`ConjugationIndex.spellings`), so etait finds
+  était. Each verb's cells (`Verb.conjugations(matching:)`) confirm it and name the row; a map entry
+  that is only an infinitive is left to the infinitive search. A hyphenated word is tried whole
+  (arc-boutait), then with the confirming text whole and its verb alone (souviens-toi matches only
+  souvenir's impératif), then as its verb alone (lève-toi, vas-tu, a-t-il).
+- **More than one word** is a compound: the last word, the participle, is looked up as typed and
+  folded, and every spelling of the auxiliary's words is tried against that verb's compound cells,
+  so "ai mangé", "est allée", "avions fini", and "etait allee" work. When the query carried a
+  reflexive pronoun, an avoir verb's compound also matches with être, as its pronominal use: "je
+  me suis levé" is lever's passé composé, je, though the page shows "j'ai levé". Without one, "est
+  levé" is a passive and matches nothing. Every other multi-word query finds only what the
+  infinitive and gloss search finds.
+- **The row** adds a French line in red under the gloss: the conjugation as the app spells it, then
+  each tense once with its matching persons, joined by a dot: "suis: Indicatif Présent (je, tu) ·
+  Impératif (tu)" under suivre. Tense names are `Tense.titleCaseName`, French in both languages.
+  The third persons follow the pronoun setting, except that a participle agreed in the feminine
+  names elle or elles ("est allée: Passé Composé (elle)"). An agreed participe passé alone reads
+  "allées: Participe Passé (accordé)". A pronominal compound keeps its reflexive pronoun ("me suis
+  levé"), because the page's cell does not show it.
+- **Short queries.** Sixteen conjugations have one or two letters: a, ai, as, es, eu, vu, su, lu,
+  bu, dû, mû, né, pu, ri, tu, and va. Sharing the prefix tier puts the common verbs' first (a, ai,
+  and as find avoir; es être; du, typed without its accent, devoir), and lets a rare verb's fall
+  among the verbs the learner may be typing toward: ri lists risquer, then rire, and réa, réer's
+  passé simple, lists réaliser and réagir ahead of réer. A tier above the prefixes, as in
+  Konjugieren, would have put réer first for réa, enter for ente, and conter for conte.
+- **Landing.** Opening a result pushes a `VerbDestination` with `MarkedConjugations`, the matched
+  tenses in page order. `VerbView` shows the compound block when any is compound, even if the
+  learner has hidden it, without changing the stored choice ([Verb Page](#verb-page)). It scrolls
+  to the first marked card (`VerbConjugations.scrollID(for:)`, read from the same `TenseTable` that
+  builds the cards) after its first appearance, tints each marked cell with
+  `Color.markedConjugation`, and gives it the accessibility value "Matches your search". A marked
+  participle is tinted in its row of the personless card. The guess, when guessed from a
+  conjugation, marks its page the same way.
+- **Cost.** `ConjugationIndex.bundled` loads the map (1.2 s in a Debug build) and folds the 107,000
+  keys that have accents (1.0 s), so `VerbBrowseView` builds it from a detached task when the tab
+  first appears. A lookup costs a few `conjugations(matching:)` calls, about 10 ms each.
 
 ### Opening a Verb
 
@@ -95,6 +160,66 @@ A tap in the Verbs tab pushes `VerbView` through `navigationDestination(item: $s
 deeplink instead sets `Current.verb`, which the Verbs tab presents as a sheet (see
 [Deeplinks](#deeplinks)). A model page presents a verb as a sheet of its own (`ModelView`'s
 `detailSheet`), and so does the Info tab for a verb link in an article.
+
+## Verb Page
+
+Phase 6 of the browse plan (2026-11-22) ordered the cards, named them twice, and gave each an
+article. It ports Konjugieren's Phase 7.
+
+### Architecture
+
+| File | Purpose |
+|------|---------|
+| `Models/TenseTable.swift` | `TenseTable`, the page's cards in order, and on `Tense` the card that shows it (`table`), its article (`articleKey`, `article`), and its second name |
+| `Utils/VerbConjugations.swift` | Builds each card's cells from `TenseTable` and notes whether the verb's own cells have red letters (`hasIrregularLetters`) |
+| `Views/VerbView.swift` | The page; `TenseHeading` (name, second name, article button), `MarkableConjugation`, and `TenseArticleSheet` |
+| `Models/ConjuguerTips.swift` | `ScrollToBottomTip` |
+| `scripts/count_tenses.py` | The corpus count behind the order ([`tense_frequency.md`](tense_frequency.md)) |
+
+### The Order
+
+The simple tenses first, then the personless card, then the compound tenses, each block from most
+to least frequent in `corpus/originals` with its five folders weighted equally: présent,
+imparfait, passé simple, futur, conditionnel, subjonctif présent, impératif, subjonctif
+imparfait; then passé composé, plus-que-parfait, conditionnel passé, subjonctif plus-que-parfait,
+subjonctif passé, passé antérieur, futur antérieur, passé surcomposé, impératif passé. The
+personless card (participe passé, participe présent, radical du futur) sits between the blocks,
+where the participe passé introduces the compound tenses built from it (Josh, 2026-11-22). The
+order changes the verb page only: Info, the quiz, and the model page keep theirs. Search's row
+lines and its landing follow it, since `Verb.conjugations(matching:)` reads `TenseTable` too
+("fait: Indicatif Présent (il) · Participe Passé").
+
+### Headings
+
+Each card's heading is the tense's French name, as before, then a red question-mark diamond, the
+model page's button for the irregularities article, which opens the tense's Info article. Under
+the name is a second name in the app's language: "also simple past" in English, "aussi passé
+défini" in French, each the name its learners' textbooks use (Josh, 2026-11-22). Nine French
+tenses have no French alternate, and their catalog value is empty, so no line shows. The
+personless card gives each of its three cells such a heading.
+
+**The article** opens in `TenseArticleSheet`, so closing it returns to the same verb. A link
+inside to another article or to a verb pushes it inside the sheet, and a verb page there pushes
+its own articles rather than presenting another sheet (the `tenseArticleOpener` environment
+value). `InfoView` takes an optional `openLink` for this; without one, its links go to
+`World.handleInAppURL` as before.
+
+### The Compound Block
+
+The "Show Compound Tenses" toggle starts on, and the learner's choice is stored
+(`@AppStorage("showsCompoundTenses")`), so a learner who hides the block finds it hidden on the next
+page and after a relaunch (Josh, 2026-11-22). A search that matched a compound tense shows the block
+on that page anyway, and touching the toggle there stores the new choice.
+
+### The Color Key and the Scroll Tip
+
+The color-key card shows until dismissed (`hasSeenConjugationColorKey`), and since Phase 6 only on a
+page whose verb has red letters of its own, in its simple tenses or personless cells (Josh,
+2026-11-22). Every compound tense has red letters in avoir's or être's forms, so this test leaves
+them out: parler's page shows no key. In the key's place, `ScrollToBottomTip` points to the
+etymology and examples. A page that appears after the key was dismissed unlocks it (a persisted
+TipKit parameter), so the two never appear one straight after the other, and reaching the
+etymology or the examples retires it. Both obey `TipDisplay.tipsEnabled`.
 
 ## Conjugation Map
 
@@ -149,14 +274,14 @@ leaves the map alone, rightly, since a new signature cannot change the map.
   (Figures as of 2026-11-22, after béer's and douer's defect groups were corrected.)
   `sorted()` is not used, because it left 155 keys out of order, and two builds of the same
   data wrote different bytes.
-- **Loading** `ConjugationMap.bundled` took 1.2 seconds in a Debug build on this Intel Mac's
-  simulator, so Phase 5 should touch it from a background task before the first search. It is a
-  `nonisolated static let`.
+- **Loading** `ConjugationMap.bundled` takes 1.2 seconds in a Debug build on this Intel Mac's
+  simulator, so the verb list builds `ConjugationIndex.bundled`, which loads it, from a background
+  task before the first search. It is a `nonisolated static let`.
 
 ### Matching cells
 
 `Verb.conjugations(matching:)` returns every cell whose conjugation equals a text, in the page's
-order (the three personless cells, then `VerbConjugations.simpleSpecs` and `compoundSpecs`), each
+order (`TenseTable.allTenses`: the simple tenses, the three personless cells, the compound tenses), each
 a `ConjugationMatch` of a `Tense` and an `isAgreement` flag. Case and spacing are ignored, and
 accents are not: "etait" matches nothing, so search must fold before it calls. A compound cell
 matches with its participle agreed either way (est allé, est allée). An impératif matches as the
@@ -202,9 +327,13 @@ it now also fires on that return, as `resume`. A sheet that something else prese
 
 **Reaching a section** means a third of its first card on screen (`onScrollVisibilityChange`,
 threshold 0.3): the présent card for `simple`, the passé composé card for `compound`, then the
-etymology and example cards. The compound block shows only when its toggle is on, and it is off by
-default until Phase 6, so `compound` is rare: the toggle sits just above the etymology card, which
-comes on screen with it.
+etymology and example cards. The compound block shows only when its toggle is on. Until Phase 6
+the toggle was off on every page, so `compound` was rare; since Phase 6 it is on by default and
+remembered, so a learner who never hides the block reaches it on the way to the etymology.
+A tense article's sheet ends the visit as the model sheet does, and closing it resumes the visit.
+
+**`tapTenseArticle`**, with no parameters, counts taps on a tense heading's article button
+(Phase 6, 2026-11-22). Konjugieren's counterpart is `tapConjugationgroupArticle`.
 
 **A search** (`SearchTracker`, `SearchReport`) begins with the first non-blank letter and ends
 once. Returning to the results and opening another verb without editing the text sends no second
@@ -216,10 +345,10 @@ doubled infinitive (haïr) counts twice. The Models tab's search sends nothing.
 
 **`matchKind`** is `VerbSearch.MatchKind`'s case by name, through an exhaustive switch
 (`analyticsValue` in `SearchReport.swift`), so a new kind cannot go unnamed: `exactInfinitive`,
-`exactFoldedInfinitive`, `infinitivePrefix`, `glossMeaning`, `foldedInfinitivePrefix`,
-`wholeWordGloss`, `infinitiveSubstring`, `foldedInfinitiveSubstring`, `glossSubstring`; plus
-`guess` and `none`. `conjugation` and `foldedConjugation` are reserved for Phase 5's reverse lookup,
-which may add or rename kinds when it builds them; it must stage their privacy lines.
+`exactFoldedInfinitive`, `conjugation`, `infinitivePrefix`, `glossMeaning`, `foldedConjugation`,
+`foldedInfinitivePrefix`, `wholeWordGloss`, `infinitiveSubstring`, `foldedInfinitiveSubstring`,
+`glossSubstring`; plus `guess` and `none`. `conjugation` and `foldedConjugation` are sent since
+Phase 5. An opened guess reports `guess` whether it came from an infinitive or a conjugation.
 
 ### The `source` vocabulary
 
@@ -246,7 +375,7 @@ quiz signals. Values are Konjugieren's names wherever the surface is the same.
 | `list` | Phase 14 | A verb on a collection's page; for the quiz signals, a collection's quiz |
 
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
-a bare `Verb`; Phase 5 can add the matched cell to it. A link carries `source` as a query item
+a bare `Verb`, and since Phase 5 the cells a search matched (`marks`). A link carries `source` as a query item
 (`conjuguer://verb/aller?source=widget`), because a widget or an intent can hand the app only a
 URL. `World.resolveDeeplinkEntity` stores it in `World.verbSource` (`AnalyticsSource.ofDeeplink`),
 falling back to `deeplink`, and the sheets that present `World.verb` pass it to `VerbView`. A model

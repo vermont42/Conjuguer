@@ -87,10 +87,14 @@ extension VerbSearch.MatchKind {
       return .exactInfinitive
     case .exactFoldedInfinitive:
       return .exactFoldedInfinitive
+    case .conjugation:
+      return .conjugation
     case .infinitivePrefix:
       return .infinitivePrefix
     case .glossMeaning:
       return .glossMeaning
+    case .foldedConjugation:
+      return .foldedConjugation
     case .foldedInfinitivePrefix:
       return .foldedInfinitivePrefix
     case .wholeWordGloss:

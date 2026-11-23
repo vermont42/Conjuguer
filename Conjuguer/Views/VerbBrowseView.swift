@@ -17,7 +17,7 @@ struct VerbBrowseView: View {
   @State private var searchText = ""
   @State private var searchResults: [Verb] = []
   @State private var searchMatches: [VerbSearch.Match] = []
-  @State private var guess: Verb?
+  @State private var guess: VerbSearch.Guess?
   @State private var keyboardSelection: Int?
   @State private var selectedVerb: VerbDestination?
   @State private var searchTracker = SearchTracker()
@@ -75,7 +75,7 @@ struct VerbBrowseView: View {
       }
       .navigationTitle(L.Navigation.verbs)
       .navigationDestination(item: $selectedVerb) { destination in
-        VerbView(verb: destination.verb, source: destination.source)
+        VerbView(verb: destination.verb, source: destination.source, marks: destination.marks)
       }
       .searchable(text: $searchText, placement: BrowseLayout.searchPlacement, prompt: L.VerbBrowseView.searchPrompt)
       .searchFocused($searchIsFocused)
@@ -131,13 +131,25 @@ struct VerbBrowseView: View {
       world.reviewPrompter.promptableActionHappened()
       focusSearchIfRequested()
     }
+    .task {
+      // Loading the map and folding its 243,000 conjugations takes over a second in a Debug
+      // build, which the first keystroke should not wait for.
+      await Task.detached(priority: .utility) {
+        _ = ConjugationIndex.bundled
+      }.value
+    }
   }
 
   @ViewBuilder
   private var verbCollection: some View {
     if searchResults.isEmpty && isSearching {
-      FailedVerbSearchView(query: trimmedSearchText, guess: guess, guessIsSelected: keyboardSelection == 0) { verb in
-        openGuess(verb)
+      FailedVerbSearchView(
+        query: trimmedSearchText,
+        guess: guess,
+        pronounGender: world.settings.pronounGender,
+        guessIsSelected: keyboardSelection == 0
+      ) { guess in
+        openGuess(guess)
       }
     } else if horizontalSizeClass == .regular {
       ScrollViewReader { proxy in
@@ -150,7 +162,7 @@ struct VerbBrowseView: View {
               Button {
                 openResult(verb, at: index)
               } label: {
-                verbRow(verb)
+                verbRow(verb, at: index)
                   .card(accent: index == keyboardSelection ? .customRed : nil)
               }
               .buttonStyle(.plain)
@@ -175,7 +187,7 @@ struct VerbBrowseView: View {
             Button {
               openResult(verb, at: index)
             } label: {
-              verbRow(verb)
+              verbRow(verb, at: index)
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier(Self.rowIdentifier(verb))
@@ -203,12 +215,20 @@ struct VerbBrowseView: View {
     }
   }
 
-  private func verbRow(_ verb: Verb) -> some View {
+  private func verbRow(_ verb: Verb, at index: Int) -> some View {
     BrowseRow(
       title: verb.infinitifWithPossibleExtraLetters,
       subtitle: verb.translation,
+      detail: conjugation(at: index)?.line(pronounGender: world.settings.pronounGender),
       badge: BrowseRow.Badge(text: "#\(verb.frequency)", tint: .customBlue)
     )
+  }
+
+  private func conjugation(at index: Int) -> MatchedConjugation? {
+    guard isSearching, searchMatches.indices.contains(index) else {
+      return nil
+    }
+    return searchMatches[index].conjugation
   }
 
   private static func rowIdentifier(_ verb: Verb) -> String {
@@ -242,10 +262,12 @@ struct VerbBrowseView: View {
       return
     }
     searchMatches = isSearching ? VerbSearch.matches(for: searchText, in: store.items, includeGlosses: true) : []
-    searchResults = BrowseSearch.results(in: store.items, query: searchText, playSoundIfEmpty: playSoundIfEmpty) { _ in
+    // "j'" and "nous" are a conjugation still being typed, and the trombone would sound mid-word.
+    let isStillTyping = ConjugationQuery(searchText).isOnlyPronouns
+    searchResults = BrowseSearch.results(in: store.items, query: searchText, playSoundIfEmpty: playSoundIfEmpty && !isStillTyping) { _ in
       searchMatches.map(\.verb)
     }
-    guess = searchResults.isEmpty && isSearching ? VerbSearch.closestVerb(to: searchText, in: store.items) : nil
+    guess = searchResults.isEmpty && isSearching ? VerbSearch.guess(for: searchText, in: store.items) : nil
   }
 
   /// The rows that Return and the arrow keys move through: the results, or the guess when a
@@ -255,7 +277,7 @@ struct VerbBrowseView: View {
       return []
     }
     if searchResults.isEmpty, let guess {
-      return [guess]
+      return [guess.verb]
     }
     return searchResults
   }
@@ -287,8 +309,8 @@ struct VerbBrowseView: View {
     guard targets.indices.contains(index) else {
       return
     }
-    if searchResults.isEmpty {
-      openGuess(targets[index])
+    if searchResults.isEmpty, let guess {
+      openGuess(guess)
     } else {
       openResult(targets[index], at: index)
     }
@@ -304,14 +326,14 @@ struct VerbBrowseView: View {
     if let query = searchTracker.finish() {
       signal(.opened(query: query, resultCount: searchMatches.count, kind: searchMatches[index].kind, position: index))
     }
-    selectedVerb = VerbDestination(verb: verb, source: .search)
+    selectedVerb = VerbDestination(verb: verb, source: .search, marks: searchMatches[index].conjugation?.marks)
   }
 
-  private func openGuess(_ verb: Verb) {
+  private func openGuess(_ guess: VerbSearch.Guess) {
     if let query = searchTracker.finish() {
       signal(.openedGuess(query: query))
     }
-    selectedVerb = VerbDestination(verb: verb, source: .searchGuess)
+    selectedVerb = VerbDestination(verb: guess.verb, source: .searchGuess, marks: guess.conjugation?.marks)
   }
 
   private func signalEndedSearch(query: String) {

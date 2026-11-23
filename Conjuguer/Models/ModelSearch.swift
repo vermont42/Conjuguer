@@ -8,8 +8,8 @@
 import Foundation
 
 /// Finds a model by its exemplar or by any of its verbs, through `VerbSearch`'s matching, so
-/// that devenir finds venir's model. Glosses are left out: the Models tab names models, and
-/// "go" listing a model for every verb that means it would bury the one sought.
+/// that devenir finds venir's model. Glosses and conjugations are left out: the Models tab names
+/// models, and "go" listing a model for every verb that means it would bury the one sought.
 enum ModelSearch {
   struct Match: Equatable {
     let model: VerbModel
@@ -27,7 +27,7 @@ enum ModelSearch {
     var seenExemplars: Set<String> = []
     var seenVerbs: Set<String> = []
 
-    for match in VerbSearch.matches(for: query, in: verbs, includeGlosses: false) {
+    for match in VerbSearch.matches(for: query, in: verbs, includeGlosses: false, conjugations: nil) {
       guard let model = modelsById[match.verb.model] else {
         continue
       }

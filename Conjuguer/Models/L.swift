@@ -117,6 +117,10 @@ enum L {
       String(localized: "VerbView.overview")
     }
 
+    static var matchesSearch: String {
+      String(localized: "VerbView.matchesSearch")
+    }
+
     static var modelWithColon: String {
       String(localized: "VerbView.modelWithColon")
     }
@@ -149,8 +153,12 @@ enum L {
       String(localized: "VerbView.exampleUses")
     }
 
-    static var personlessConjugations: String {
-      String(localized: "VerbView.personlessConjugations")
+    static func secondName(_ name: String) -> String {
+      String(localized: "VerbView.secondName", defaultValue: "also \(name)")
+    }
+
+    static var articleButtonHint: String {
+      String(localized: "VerbView.articleButtonHint")
     }
 
     static var showCompoundTenses: String {
@@ -640,6 +648,88 @@ enum L {
 
   // Tip title/message are read from the `Tip` protocol's nonisolated requirements, so
   // these accessors are `nonisolated` despite the module's default main-actor isolation.
+  enum TenseSecondName {
+    static var participePassé: String {
+      String(localized: "TenseSecondName.participePassé")
+    }
+
+    static var participePrésent: String {
+      String(localized: "TenseSecondName.participePrésent")
+    }
+
+    static var radicalFutur: String {
+      String(localized: "TenseSecondName.radicalFutur")
+    }
+
+    static var indicatifPrésent: String {
+      String(localized: "TenseSecondName.indicatifPrésent")
+    }
+
+    static var passéSimple: String {
+      String(localized: "TenseSecondName.passéSimple")
+    }
+
+    static var imparfait: String {
+      String(localized: "TenseSecondName.imparfait")
+    }
+
+    static var futurSimple: String {
+      String(localized: "TenseSecondName.futurSimple")
+    }
+
+    static var conditionnelPrésent: String {
+      String(localized: "TenseSecondName.conditionnelPrésent")
+    }
+
+    static var subjonctifPrésent: String {
+      String(localized: "TenseSecondName.subjonctifPrésent")
+    }
+
+    static var subjonctifImparfait: String {
+      String(localized: "TenseSecondName.subjonctifImparfait")
+    }
+
+    static var impératif: String {
+      String(localized: "TenseSecondName.impératif")
+    }
+
+    static var passéComposé: String {
+      String(localized: "TenseSecondName.passéComposé")
+    }
+
+    static var plusQueParfait: String {
+      String(localized: "TenseSecondName.plusQueParfait")
+    }
+
+    static var passéAntérieur: String {
+      String(localized: "TenseSecondName.passéAntérieur")
+    }
+
+    static var passéSurcomposé: String {
+      String(localized: "TenseSecondName.passéSurcomposé")
+    }
+
+    static var futurAntérieur: String {
+      String(localized: "TenseSecondName.futurAntérieur")
+    }
+
+    static var conditionnelPassé: String {
+      String(localized: "TenseSecondName.conditionnelPassé")
+    }
+
+    static var subjonctifPassé: String {
+      String(localized: "TenseSecondName.subjonctifPassé")
+    }
+
+    static var subjonctifPlusQueParfait: String {
+      String(localized: "TenseSecondName.subjonctifPlusQueParfait")
+    }
+
+    static var impératifPassé: String {
+      String(localized: "TenseSecondName.impératifPassé")
+    }
+  }
+
   enum Tips {
     nonisolated static var tryQuizTitle: String {
       String(localized: "Tips.tryQuizTitle")
@@ -671,6 +761,14 @@ enum L {
 
     nonisolated static var playGameMessage: String {
       String(localized: "Tips.playGameMessage")
+    }
+
+    nonisolated static var scrollToBottomTitle: String {
+      String(localized: "Tips.scrollToBottomTitle")
+    }
+
+    nonisolated static var scrollToBottomMessage: String {
+      String(localized: "Tips.scrollToBottomMessage")
     }
   }
 

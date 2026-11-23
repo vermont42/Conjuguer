@@ -7,10 +7,11 @@
 
 import Foundation
 
-/// A verb page to push, with the way the learner reached it.
+/// A verb page to push, with the way the learner reached it and the cells a search matched.
 struct VerbDestination: Hashable {
   let verb: Verb
   let source: AnalyticsSource
+  var marks: MarkedConjugations?
 }
 
 /// One stretch of time during which a verb page is on screen, uncovered by a sheet of its own,

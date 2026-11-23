@@ -46,6 +46,380 @@
         }
       }
     },
+    "TenseSecondName.conditionnelPassé" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "past conditional"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "passé du conditionnel"
+          }
+        }
+      }
+    },
+    "TenseSecondName.conditionnelPrésent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "conditional"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "présent du conditionnel"
+          }
+        }
+      }
+    },
+    "TenseSecondName.futurAntérieur" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "future perfect"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "TenseSecondName.futurSimple" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "future"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "futur de l’indicatif"
+          }
+        }
+      }
+    },
+    "TenseSecondName.imparfait" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "imperfect"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "imparfait de l’indicatif"
+          }
+        }
+      }
+    },
+    "TenseSecondName.impératif" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "imperative"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "impératif présent"
+          }
+        }
+      }
+    },
+    "TenseSecondName.impératifPassé" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "past imperative"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "passé de l’impératif"
+          }
+        }
+      }
+    },
+    "TenseSecondName.indicatifPrésent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "present"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "présent de l’indicatif"
+          }
+        }
+      }
+    },
+    "TenseSecondName.participePassé" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "past participle"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "TenseSecondName.participePrésent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "present participle"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "TenseSecondName.passéAntérieur" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "past anterior"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "TenseSecondName.passéComposé" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "compound past"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "passé indéfini"
+          }
+        }
+      }
+    },
+    "TenseSecondName.passéSimple" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "simple past"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "passé défini"
+          }
+        }
+      }
+    },
+    "TenseSecondName.passéSurcomposé" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "double-compound past"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "TenseSecondName.plusQueParfait" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pluperfect"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "plus-que-parfait de l’indicatif"
+          }
+        }
+      }
+    },
+    "TenseSecondName.radicalFutur" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "future stem"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "TenseSecondName.subjonctifImparfait" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "imperfect subjunctive"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "imparfait du subjonctif"
+          }
+        }
+      }
+    },
+    "TenseSecondName.subjonctifPassé" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "past subjunctive"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "passé du subjonctif"
+          }
+        }
+      }
+    },
+    "TenseSecondName.subjonctifPlusQueParfait" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pluperfect subjunctive"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "conditionnel passé 2e forme"
+          }
+        }
+      }
+    },
+    "TenseSecondName.subjonctifPrésent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "present subjunctive"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "présent du subjonctif"
+          }
+        }
+      }
+    },
+    "Tips.scrollToBottomMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Below the conjugations, the page tells where the verb comes from and shows it in example sentences."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sous les conjugaisons, la page dit d’où vient le verbe et le montre dans des exemples."
+          }
+        }
+      }
+    },
+    "Tips.scrollToBottomTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep Scrolling"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuez à faire défiler"
+          }
+        }
+      }
+    },
     "VerbBrowseView.addressCopied" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -59,6 +433,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucune app de messagerie n’a pu s’ouvrir, donc l’adresse a été copiée."
+          }
+        }
+      }
+    },
+    "VerbView.articleButtonHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the article about this tense."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre l’article sur ce temps."
+          }
+        }
+      }
+    },
+    "VerbView.matchesSearch" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matches your search"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correspond à votre recherche"
+          }
+        }
+      }
+    },
+    "VerbView.secondName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "also %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "aussi %@"
           }
         }
       }
@@ -3395,13 +3820,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Infinitive or English meaning"
+            "value" : "Verb, conjugation, or English meaning"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Infinitif ou sens anglais"
+            "value" : "Verbe, conjugaison ou sens anglais"
           }
         }
       }
@@ -3844,23 +4269,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aperçu"
-          }
-        }
-      }
-    },
-    "VerbView.personlessConjugations" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "P. Passé, P. Présent, R. Futur"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "P. Passé, P. Présent, R. Futur"
           }
         }
       }

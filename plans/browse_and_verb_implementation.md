@@ -28,8 +28,8 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 2 | Done | 2026-11-22 | 0827ddf | A4, C4 | 2 |
 | 3 | Done | 2026-11-22 | 0827ddf | Signals | 3 |
 | 4 | Done | 2026-11-22 | 7a532ac | A5 (the map) | 5 |
-| 5 | Not started | | | A5 (the search) | 6 |
-| 6 | Not started | | | B3, B5's tip | 7 |
+| 5 | Done | 2026-11-22 | | A5 (the search) | 6 |
+| 6 | Done | 2026-11-22 | | B3, B5's tip | 7 |
 | 7 | Not started | | | B4, A9 | 9 |
 | 8 | Not started | | | B6 | 10 |
 | 9 | Not started | | | C1, C2 | 11 |
@@ -723,7 +723,7 @@ design is Konjugieren's; what differs:
 
 **Ideas:** A5, second half. **Ports:** Konjugieren Phase 6 (`ConjugationIndex.swift`,
 `VerbSearchResults.swift`, `MarkedConjugations` in `VerbView.swift`). **Depends on:** Phases 1
-and 4. **Status:** Not started.
+and 4. **Status:** Done (2026-11-22).
 
 - A conjugation finds its verb. Each result row names the match, in the manner of
   "vais: Indicatif présent (je)" under aller. When a conjugation belongs to two verbs (suis), show
@@ -748,12 +748,83 @@ cell, and tests pin each case.
 
 **How it differed:**
 
+Built 2026-11-22. Every "Done when" query gives the wanted rows, in `VerbSearchConjugationTests`
+and in the simulator, and results open onto their marked cells. The suite ran 393 tests in 35
+suites, all passing (27 new test functions in one new suite). New files: `ConjugationIndex.swift`,
+`ConjugationQuery.swift`, `MatchedConjugation.swift`, `VerbSearch+Conjugations.swift`.
+`docs/feature_architecture.md` § Reverse Lookup has the whole design. What differs from
+Konjugieren's, and what the phase left open:
+
+- **The tier, decided by simulation.** Konjugieren ranks a conjugation above every infinitive
+  prefix. Simulated on Conjuguer's map, that put réer (#2,963) ahead of réaliser (#29) for réa,
+  enter ahead of entendre for ente, and conter ahead of contenir for conte, because French
+  conjugations of rare verbs are often the first letters of common ones. So a conjugation, literal
+  or folded, shares Phase 1's prefix tier and ranks there by frequency. The short forms then come
+  out right on their own: a, ai, and as find avoir first; es être; eu avoir; vu voir; su savoir; lu
+  lire; dû and du devoir; bu boire; va aller; pu pouvoir; tu taire; né naître; but ri lists risquer
+  ahead of rire, and mû (mouvoir, #1,647) does not lead the mu- verbs. All are pinned.
+- **Literal before folded.** Phase 1 ranks a folded match below a literal one in its tier only when
+  the query carries an accent. A word typed that is literally a conjugation now does the same,
+  since it spells its accents as meant: mate gives mater first and leaves mâter and matérialiser
+  behind materner. crois gives croire, croiser, then croître.
+- **More of the sentence is dropped than the phase named.** Besides subject pronouns (elided or
+  not) and reflexive pronouns, `ConjugationQuery` drops que and qu', y and en, and ne with the word
+  that completes it (pas, plus, jamais, rien, point, guère), so "que je sois", "il y a", and "je
+  n'ai pas mangé" work. A hyphenated word sheds its pronouns too (lève-toi, vas-tu, a-t-il), while
+  souviens-toi, whole, matches only souvenir's impératif. A query of pronouns alone ("j'", "nous")
+  plays no trombone, since it is a conjugation still being typed; it does show the empty state.
+- **Pronominal compounds.** Only 217 verbs are stored as pronominal, so "je me suis levé" would
+  have found nothing: lever conjugates with avoir. When the query carried a reflexive pronoun and
+  an avoir verb's compound cells reject it, the être auxiliary is tried as the verb's pronominal
+  use, and the row keeps the pronoun ("me suis levé: Passé Composé (je)"). It marks lever's "ai
+  levé", the cell for that tense and person. Without a reflexive pronoun, "est levé" is a passive
+  and matches nothing. asseoir is one such verb too, so "s'est assis" takes this path.
+- **The row's words.** A red French line under the gloss: "suis: Indicatif Présent (je, tu) ·
+  Impératif (tu)". Tense names are `titleCaseName`, French in both languages, and the line is not
+  localized. The third person follows the pronoun setting, except that a feminine agreement names
+  elle or elles ("est allée: Passé Composé (elle)"); "il" beside "allée" read wrong. An agreed
+  participle reads "allées: Participe Passé (accordé)", the plan's "row's own words", in French
+  like the tense names. **For Josh:** the line uses an English colon ("allées: Participe"), not
+  French spacing ("allées : Participe"), in both languages.
+- **The compound block** turns on when a match is compound, since its toggle is still off by
+  default. Phase 6 must keep the landing working when the learner has turned the toggle off; the
+  `@State`'s initial value is where it happens today.
+- **Landing.** `VerbConjugations.scrollID(for:)` reads the same specs that build the cards, so
+  Phase 6's reorder moves the landing with the page if it keeps the specs as the one order. Marked
+  cells get a highlighter yellow (`Color.markedConjugation`): the palette's blue and red already
+  mean regular and irregular letters in the cells. In dark mode it reads olive; Josh may prefer
+  another color.
+- **The guess considers conjugations**, as Konjugieren's did, for a query that is one word once its
+  pronouns are dropped: finnissons and "je finnissons" guess finir through finissons, and the card
+  names and marks the cells. An infinitive wins a tie. `closestVerb` became `guess(for:in:)`.
+  Measuring 230,000 folds took up to 9 s per keystroke in a Debug build at first. A letter-count
+  floor, a bounded byte comparison, and measuring lengths nearest the query's first with a
+  tightening limit brought it to at most 0.3 s.
+- **The index** folds only the 107,000 keys that have accents, and keeps the folds as packed bytes
+  for the guess: 1.0 s to build in a Debug build, after the map's 1.2 s load, down from 3.3 s in the
+  first version. `VerbBrowseView` builds it from a detached task when the tab appears. A Debug
+  search with reverse lookup takes about 50 ms.
+- **Phase 2's notes, settled.** One row per verb still holds (suis is two rows, être and suivre),
+  so `keyboardTargets` and the scroll by verb id needed no change. The empty state, and with it the
+  guess, appears only when this lookup fails too.
+- **Not done.** A folded word that spells two forms of one verb shows only the first in UTF-8
+  order: eleve's row names élevé, not élève too. "vais manger" and other periphrases find nothing.
+  Object pronouns other than y and en (le, la, l', lui) are not dropped.
+- **Analytics.** `conjugation` and `foldedConjugation`, already in `SearchMatchKind`, are now sent.
+  The staged privacy line's examples name "a conjugation" ("une forme conjuguée").
+- **How it was tested.** On the iPhone, in English and light mode: the new placeholder ("Verb,
+  conjugation, or English meaning", which fits), suis (both rows), and "je me suis levée" opened
+  onto lever's marked "ai levé" with the compound block on. In French and dark mode: allées opened
+  onto the marked allé in the personless card, and finnissons showed the guess with its line. On
+  the iPad, in English: "etait allee", then Return, opened onto the marked "était allée". Not
+  tried: VoiceOver, and the Models tab, which this phase leaves alone (`conjugations: nil`).
+
 ## Phase 6: The Verb Page's Sections
 
 **Ideas:** B3 as Josh amended it, and the tip from B5's verdict. **Ports:** Konjugieren Phase 7
 (`ConjugationTable.swift`, `scripts/count_conjugationgroups.py`,
 `docs/conjugationgroup_frequency.md`, `KonjugierenTips.swift`). **Depends on:** nothing; Phase 5
-for the landing order. **Status:** Not started.
+for the landing order. **Status:** Done (2026-11-22).
 
 - **Order by frequency within each block.** Keep simple tenses before compound ones. Within each
   block, order the tenses by how often they occur in Conjuguer's corpus (`corpus/originals/`:
@@ -798,6 +869,83 @@ names; the color key.
 decided, and tests pin the order and the landing.
 
 **How it differed:**
+
+Built 2026-11-22, on top of Phase 5's uncommitted work, which Josh had not yet tried. The suite ran
+401 tests in 36 suites, all passing (8 new in `TenseTableTests`). New files: `TenseTable.swift`,
+`scripts/count_tenses.py`, and `docs/tense_frequency.md`, which has the method, the per-folder
+tables, and the known errors. `docs/feature_architecture.md` § Verb Page has the design.
+
+- **Josh's decisions (2026-11-22).** The toggle's choice is remembered, across pages and
+  relaunches. The personless card goes between the blocks, above the toggle. Second names follow
+  the app's language: English textbook names in English ("also simple past"), French school names
+  in French ("aussi passé défini"), and none where French has no alternate (the participles, the
+  radical du futur, the passé antérieur, the futur antérieur, the passé surcomposé). The color-key
+  card stays, but shows only on a page with red letters. He chose these from the drafts and counts
+  in one round of questions, without changes.
+- **The count.** `count_tenses.py` reads `corpus/working/conjugations.json`, which
+  `ConjugationMapTool` already wrote for the pipelines, so no new tool output was needed, unlike
+  Konjugieren's `--cells-json`. French needed more context rules than German: a subject pronoun
+  fixes a word's person, a word without one is third person, a determiner or preposition makes it
+  a noun, an impératif must open a sentence that ends in a period or "!", and a subjonctif needs
+  que in its clause. A word that stays ambiguous (il finit, présent or passé simple) is shared in
+  the proportions the folder's unambiguous words show, which no German rule needed. Six rounds of
+  reading samples fixed the worst errors: masculine plural participles counted as je/tu passé
+  simple (définis, mis), Wikipedia headings and quoted noun phrases counted as orders, "parfois" and
+  "trois" read as old spellings of parfaire and traire, and "n'a point" read as poindre's passé
+  composé. The *Chanson de Roland* is skipped as Old French.
+- **The order.** Balanced and pooled shares agree in both blocks. The simple block changed in two
+  places: the imparfait now precedes the passé simple, and the impératif precedes the subjonctif
+  imparfait. The compound block is passé composé, plus-que-parfait, conditionnel passé, subjonctif
+  plus-que-parfait, subjonctif passé, passé antérieur, futur antérieur, passé surcomposé,
+  impératif passé. Two pairs are close and turn on the novels: four folders of five put the futur
+  antérieur ahead of the passé antérieur, and the subjonctif plus-que-parfait leads the subjonctif
+  passé on literary "eût été". Equal weighting, as the plan said, decided both. The technology
+  folder holds five compounds in 12,000 words and still counts as a fifth.
+- **`TenseTable`** (`Models/TenseTable.swift`) is the one place the order lives, as Konjugieren's
+  `ConjugationTable` is. `VerbConjugations` builds its cards from it, `scrollID(for:)` reads it, and
+  `Verb.conjugations(matching:)` orders its matches by `TenseTable.allTenses`, so search's row lines
+  follow the page: "fait: Indicatif Présent (il) · Participe Passé", where Phase 5 put the participle
+  first. Scroll identifiers are now the cards' case names (`passéComposé`), not `simple-0`. The
+  simple-tense specs and `personlessScrollID` are gone.
+- **The personless card** gives each of its three cells a heading like a tense card's (name,
+  second name, article button), since each has its own article. Its old heading, "P. Passé,
+  P. Présent, R. Futur", went with the one-line layout, and so did its catalog key.
+- **The article button** is the model page's red question-mark diamond, as the plan suggested,
+  beside the heading rather than at the card's edge. Konjugieren's opens a sheet whose links to
+  verbs close it and open the verb in the Verbs tab. Conjuguer's pushes a linked verb or article
+  inside the sheet instead, because a verb page here may itself be a sheet (from a model page, a
+  deeplink, or the Info tab), and a sheet presented from the Verbs tab behind it would fail. A verb
+  page inside the article sheet pushes its own articles through an environment value
+  (`tenseArticleOpener`) rather than stacking a sheet. Phase 7 may reuse the pattern for related
+  verbs. The new signal `tapTenseArticle` carries no parameters; its policy line amends the
+  in-app-actions bullet in `privacy_policy_pending.md`.
+- **The compound block** is `@AppStorage("showsCompoundTenses")`, true by default. Phase 5's landing
+  still opens the block on a page whose search matched a compound tense, through a per-page flag,
+  without changing the stored choice; touching the toggle there stores the new one. Tested with the
+  toggle off: "ai mangé" opened manger with the block showing and "ai mangé" marked.
+  Phase 3 asked this phase to check that a leave can report `compound`. That landing puts the
+  passé composé card fully on screen with the etymology several screens below, so by `VerbVisit`'s
+  rules its leave reports `compound`. The signal itself was not observed, since the simulator's
+  `AnalyticsSpy` records without logging.
+- **Red letters.** Every compound tense shows red letters in avoir's or être's forms, so "a page
+  with red letters" would have been every page. The key shows when the verb's own simple tenses or
+  personless cells have them: aller and venir show it, parler and finir do not. **For Josh:** a
+  learner who only ever opens regular verbs never sees the key, though the auxiliaries in their
+  compound tenses are red.
+- **The scroll tip** is Konjugieren's, keyed to the color key's stored dismissal rather than to a
+  tip's status: a page that appears after the key was dismissed unlocks it, and reaching the
+  etymology or the examples retires it. A learner who never meets an irregular verb never sees
+  either. Verified on a fresh install: aller's key, dismissed, then venir's page with the tip.
+- **Not done.** No tense-heading text is localized: the headings stay French in both languages,
+  as before. Info, the quiz, and the model page keep their own tense orders.
+- **How it was tested.** On the iPhone, in English and light mode: aller's headings and second
+  names; the Futur Simple article in its sheet; its "parler" link pushed parler inside the sheet,
+  and parler's Imparfait button pushed that article in turn; Done returned to aller. "allées"
+  landed on the personless card between the blocks with allé marked. The toggle, turned off,
+  stayed off on venir's page and after a relaunch. In French and dark mode: the French second
+  names, none under the personless rows, and the tip's French text. On the iPad, in English:
+  prendre's page in a sheet, with the personless card and toggle. Not tried: VoiceOver. A switch
+  ignores AXe's instant tap on iOS 26; the `verify-in-simulator` skill now says to hold the touch.
 
 ## Phase 7: Ways Between Verbs
 

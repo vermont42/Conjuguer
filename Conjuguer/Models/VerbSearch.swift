@@ -12,15 +12,18 @@ import Foundation
 /// them can drift.
 enum VerbSearch {
   // Cases run best first, and `matches` tries them in this order. Cases that share a tier rank
-  // together by frequency: a prefix, a folded prefix, and a whole English meaning are about
-  // equally strong evidence, so "go" finds aller (whose meaning it is) ahead of gonfler (which it
-  // begins), while "sort" still finds sortir ahead of trier. The two exact cases keep separate
+  // together by frequency: a prefix, a folded prefix, a whole English meaning, and a whole
+  // conjugation are about equally strong evidence, so "go" finds aller (whose meaning it is)
+  // ahead of gonfler (which it begins), "ai" finds avoir ahead of aimer, and "réa" finds
+  // réaliser ahead of réer, of which it is a passé simple. The two exact cases keep separate
   // tiers so that mater, typed, leads mâter.
   enum MatchKind: Int, CaseIterable, Comparable {
     case exactInfinitive
     case exactFoldedInfinitive
+    case conjugation
     case infinitivePrefix
     case glossMeaning
+    case foldedConjugation
     case foldedInfinitivePrefix
     case wholeWordGloss
     case infinitiveSubstring
@@ -33,7 +36,7 @@ enum VerbSearch {
         return 0
       case .exactFoldedInfinitive:
         return 1
-      case .infinitivePrefix, .glossMeaning, .foldedInfinitivePrefix:
+      case .conjugation, .infinitivePrefix, .glossMeaning, .foldedConjugation, .foldedInfinitivePrefix:
         return 2
       case .wholeWordGloss:
         return 3
@@ -46,11 +49,15 @@ enum VerbSearch {
 
     var isFolded: Bool {
       switch self {
-      case .exactFoldedInfinitive, .foldedInfinitivePrefix, .foldedInfinitiveSubstring:
+      case .exactFoldedInfinitive, .foldedConjugation, .foldedInfinitivePrefix, .foldedInfinitiveSubstring:
         return true
-      case .exactInfinitive, .infinitivePrefix, .glossMeaning, .wholeWordGloss, .infinitiveSubstring, .glossSubstring:
+      case .exactInfinitive, .conjugation, .infinitivePrefix, .glossMeaning, .wholeWordGloss, .infinitiveSubstring, .glossSubstring:
         return false
       }
+    }
+
+    var isConjugation: Bool {
+      self == .conjugation || self == .foldedConjugation
     }
 
     static func < (lhs: MatchKind, rhs: MatchKind) -> Bool {
@@ -61,15 +68,32 @@ enum VerbSearch {
   struct Match: Equatable {
     let verb: Verb
     let kind: MatchKind
+
+    /// For a conjugation match, the conjugation and the cells it fills. Nil otherwise.
+    let conjugation: MatchedConjugation?
+
+    init(verb: Verb, kind: MatchKind, conjugation: MatchedConjugation? = nil) {
+      self.verb = verb
+      self.kind = kind
+      self.conjugation = conjugation
+    }
   }
 
-  /// Ranked by tier, then by frequency, whatever order `verbs` arrives in.
+  /// Ranked by tier, then by frequency, whatever order `verbs` arrives in, with one match per
+  /// verb, its best. A conjugation is looked up in `conjugations` unless that is nil, as it is
+  /// for the Models tab, which names models rather than finding verbs.
   ///
-  /// Within a tier, a folded match ranks below a literal one only when the query carries an
-  /// accent or a ligature. A learner who types pêch wants pêcher ahead of pécher, but one who
-  /// types pre has told the search nothing about accents and should see préparer by its
-  /// frequency, not after every verb that begins with a bare pre.
-  static func matches(for query: String, in verbs: [Verb], includeGlosses: Bool) -> [Match] {
+  /// Within a tier, a folded match ranks below a literal one when the query carries an accent or
+  /// a ligature. A learner who types pêch wants pêcher ahead of pécher, but one who types pre has
+  /// told the search nothing about accents and should see préparer by its frequency, not after
+  /// every verb that begins with a bare pre. A word typed as a conjugation spells its accents as
+  /// meant, too: mate is mater's, so mâter's mâte and matérialiser wait.
+  static func matches(
+    for query: String,
+    in verbs: [Verb],
+    includeGlosses: Bool,
+    conjugations index: ConjugationIndex? = ConjugationIndex.bundled
+  ) -> [Match] {
     let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
     guard !trimmed.isEmpty else {
       return []
@@ -79,16 +103,43 @@ enum VerbSearch {
     let queryIsMarked = foldedQuery != frenchQuery
     let englishQuery = includeGlosses ? glossQuery(from: trimmed) : nil
 
-    let found = verbs.compactMap { verb -> Match? in
-      kind(of: keys(for: verb), frenchQuery: frenchQuery, foldedQuery: foldedQuery, englishQuery: englishQuery)
-        .map { Match(verb: verb, kind: $0) }
+    var best: [String: Match] = [:]
+    var verbsByKey: [String: Verb] = [:]
+    for verb in verbs {
+      verbsByKey[verb.dictionaryKey] = verb
+      if let kind = kind(of: keys(for: verb), frenchQuery: frenchQuery, foldedQuery: foldedQuery, englishQuery: englishQuery) {
+        best[verb.id] = Match(verb: verb, kind: kind)
+      }
+    }
+
+    let conjugationResults = index.map { conjugationMatches(for: trimmed, index: $0) { verbsByKey[$0] } } ?? []
+    let typedAConjugation = conjugationResults.contains { $0.kind == .conjugation }
+
+    func isDemoted(_ match: Match) -> Bool {
+      (queryIsMarked || typedAConjugation) && match.kind.isFolded
+    }
+
+    func rank(_ match: Match) -> (Int, Int) {
+      (match.kind.tier, isDemoted(match) ? 1 : 0)
+    }
+
+    // On a tie, the conjugation wins, because its row can say which cells the query fills.
+    for match in conjugationResults {
+      if let current = best[match.verb.id], rank(current) < rank(match) {
+        continue
+      }
+      if let current = best[match.verb.id], current.kind.isConjugation, rank(current) <= rank(match) {
+        continue
+      }
+      best[match.verb.id] = match
     }
 
     func sortKey(_ match: Match) -> (Int, Int, Int) {
-      (match.kind.tier, queryIsMarked && match.kind.isFolded ? 1 : 0, match.verb.frequency)
+      let (tier, demotion) = rank(match)
+      return (tier, demotion, match.verb.frequency)
     }
 
-    return found.sorted { lhs, rhs in
+    return best.values.sorted { lhs, rhs in
       let (left, right) = (sortKey(lhs), sortKey(rhs))
       if left != right {
         return left < right
@@ -97,33 +148,75 @@ enum VerbSearch {
     }
   }
 
-  /// The verb whose folded infinitive is fewest edits from the folded query, offered when a
-  /// search found nothing. On a tie, the more frequent verb wins. Nil when no verb is near
-  /// enough to be a plausible misspelling.
-  static func closestVerb(to query: String, in verbs: [Verb]) -> Verb? {
+  /// A verb offered when a search matched nothing, with the conjugation it was guessed from,
+  /// if it was guessed from one.
+  struct Guess: Equatable {
+    let verb: Verb
+    let conjugation: MatchedConjugation?
+  }
+
+  /// The verb whose folded infinitive, or one of whose folded conjugations, is fewest edits from
+  /// the folded query, offered when a search found nothing: finnissons guesses finir through
+  /// finissons. On a tie, an infinitive beats a conjugation, and then the more frequent verb
+  /// wins. Nil when no verb is near enough to be a plausible misspelling. Conjugations are
+  /// considered only for a query that is one word once its pronouns are dropped, and only with
+  /// an index.
+  static func guess(for query: String, in verbs: [Verb], conjugations index: ConjugationIndex? = ConjugationIndex.bundled) -> Guess? {
     let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
     let foldedQuery = Array(fold(frenchQuery(from: trimmed)))
     guard !trimmed.isEmpty, !foldedQuery.isEmpty else {
       return nil
     }
-    let maxDistance = maxGuessDistance(forQueryLength: foldedQuery.count)
-    var best: (verb: Verb, rank: (distance: Int, frequency: Int, id: String))?
-    for verb in verbs {
-      let candidate = Array(keys(for: verb).foldedInfinitif)
-      guard abs(candidate.count - foldedQuery.count) <= maxDistance else {
-        continue
-      }
-      let distance = editDistance(foldedQuery, candidate)
-      guard distance <= maxDistance else {
-        continue
-      }
-      let rank = (distance: distance, frequency: verb.frequency, id: verb.id)
+    // The conjugation's spelling breaks the last tie, so that a guess never depends on the
+    // order in which the index happens to hold its folds.
+    var best: (verb: Verb, conjugation: String?, rank: (distance: Int, isConjugation: Int, frequency: Int, id: String, spelling: String))?
+
+    func consider(_ verb: Verb, conjugation: String?, distance: Int) {
+      let rank = (distance: distance, isConjugation: conjugation == nil ? 0 : 1, frequency: verb.frequency, id: verb.id, spelling: conjugation ?? "")
       if let current = best, current.rank <= rank {
-        continue
+        return
       }
-      best = (verb, rank)
+      best = (verb, conjugation, rank)
     }
-    return best?.verb
+
+    let maxDistance = maxGuessDistance(forQueryLength: foldedQuery.count)
+    var infinitiveDistance = BoundedEditDistance(query: Array(String(foldedQuery).utf8))
+    var verbsByKey: [String: Verb] = [:]
+    for verb in verbs {
+      verbsByKey[verb.dictionaryKey] = verb
+      let distance = keys(for: verb).foldedInfinitifBytes.withUnsafeBufferPointer { candidate in
+        infinitiveDistance.measure(candidate, atMost: maxDistance)
+      }
+      if let distance {
+        consider(verb, conjugation: nil, distance: distance)
+      }
+    }
+
+    let words = ConjugationQuery(trimmed).words
+    if let index, words.count == 1, let word = words.first {
+      let foldedWord = fold(word)
+      let wordMaxDistance = min(maxGuessDistance(forQueryLength: foldedWord.count), best?.rank.distance ?? .max)
+      if let nearest = index.nearestFolds(to: foldedWord, within: wordMaxDistance) {
+        for conjugation in nearest.folds.flatMap(index.conjugations(folding:)) {
+          for verbKey in index.map.verbs(for: conjugation) {
+            guard let verb = verbsByKey[verbKey] else {
+              continue
+            }
+            let isInfinitive = conjugation == ConjugationMap.key(verb.infinitif)
+            consider(verb, conjugation: isInfinitive ? nil : conjugation, distance: nearest.distance)
+          }
+        }
+      }
+    }
+
+    guard let best else {
+      return nil
+    }
+    let cells = best.conjugation.map { best.verb.conjugations(matching: $0) } ?? []
+    let conjugation = best.conjugation.flatMap { text in
+      cells.isEmpty ? nil : MatchedConjugation(text: text, cells: cells)
+    }
+    return Guess(verb: best.verb, conjugation: conjugation)
   }
 
   // One edit in three letters, and never more than three, keeps a guess recognizable: venier
@@ -218,6 +311,7 @@ enum VerbSearch {
   private struct Keys {
     let infinitif: String
     let foldedInfinitif: String
+    let foldedInfinitifBytes: [UInt8]
     let gloss: String
     let meanings: [String]
   }
@@ -235,6 +329,7 @@ enum VerbSearch {
     let keys = Keys(
       infinitif: infinitif,
       foldedInfinitif: fold(infinitif),
+      foldedInfinitifBytes: Array(fold(infinitif).utf8),
       gloss: verb.translation.lowercased(),
       meanings: meanings(of: verb.translation)
     )

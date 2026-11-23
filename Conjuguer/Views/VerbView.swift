@@ -6,15 +6,21 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct VerbView: View {
   @Environment(World.self) private var world
   @Environment(\.scenePhase) private var scenePhase
+  @Environment(\.tenseArticleOpener) private var tenseArticleOpener
   @AppStorage("hasSeenConjugationColorKey") private var hasSeenColorKey = false
+  @AppStorage("showsCompoundTenses") private var showsCompoundTenses = true
   let verb: Verb
   let source: AnalyticsSource
+  let marks: MarkedConjugations?
   private let conjugations: VerbConjugations
-  @State private var shouldShowCompoundTenses = false
+  /// A search that matched a compound tense shows the compound block on this page even when the
+  /// learner has hidden it, without changing the stored choice.
+  @State private var compoundTensesAreForcedOn: Bool
   @State private var detailSheet: DetailSheet?
   @State private var chansonExamples: [ChansonExample]
   @State private var chansonIndex: Int
@@ -22,11 +28,14 @@ struct VerbView: View {
   @State private var visibleSections: Set<VerbPageSection> = []
   @State private var isOnScreen = false
   @State private var hasAppeared = false
+  private let scrollToBottomTip = ScrollToBottomTip()
 
-  init(verb: Verb, source: AnalyticsSource) {
+  init(verb: Verb, source: AnalyticsSource, marks: MarkedConjugations? = nil) {
     self.verb = verb
     self.source = source
+    self.marks = marks
     conjugations = VerbConjugations.memoized(for: verb)
+    _compoundTensesAreForcedOn = State(initialValue: marks?.includesCompoundTense ?? false)
     let examples = ChansonData.examples(for: verb)
     _chansonExamples = State(initialValue: examples)
     // Start on a random occurrence so each launch still varies; the sword button cycles from here.
@@ -38,6 +47,19 @@ struct VerbView: View {
   }
 
   var body: some View {
+    ScrollViewReader { proxy in
+      page
+        .onAppear {
+          scrollToFirstMark(proxy)
+          isOnScreen = true
+          beginVisit(source: hasAppeared ? .resume : source)
+          hasAppeared = true
+          unlockScrollTipIfDue()
+        }
+    }
+  }
+
+  private var page: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
         Text(verb.infinitifWithPossibleExtraLetters)
@@ -48,22 +70,27 @@ struct VerbView: View {
         overviewCard
           .scrollFade()
 
-        if !hasSeenColorKey {
+        if shouldShowColorKey {
           colorKey
             .scrollFade()
+        } else {
+          TipView(scrollToBottomTip)
+            .tipBackground(Color.customBackground)
+        }
+
+        ForEach(conjugations.simpleSections) { section in
+          TenseSectionView(section: section, marks: marks, openArticle: articleOpener(for:))
+            .card()
+            .scrollFade()
+            .id(section.scrollID)
+            .reportsReaching(section.id == conjugations.simpleSections.first?.id ? .simple : nil, to: sectionVisibilityChanged)
         }
 
         personlessCard
           .scrollFade()
+          .id(TenseTable.personless.scrollID)
 
-        ForEach(conjugations.simpleSections) { section in
-          TenseSectionView(section: section)
-            .card()
-            .scrollFade()
-            .reportsReaching(section.id == conjugations.simpleSections.first?.id ? .simple : nil, to: sectionVisibilityChanged)
-        }
-
-        Toggle(isOn: $shouldShowCompoundTenses) {
+        Toggle(isOn: compoundTensesAreShown) {
           Text(L.VerbView.showCompoundTenses)
             .subheadingLabel()
         }
@@ -71,8 +98,8 @@ struct VerbView: View {
         .tint(.customRed)
         .scrollFade()
 
-        if shouldShowCompoundTenses {
-          CompoundTensesView(verb: verb, sectionVisibilityChanged: sectionVisibilityChanged)
+        if compoundTensesAreShown.wrappedValue {
+          CompoundTensesView(verb: verb, marks: marks, openArticle: articleOpener(for:), sectionVisibilityChanged: sectionVisibilityChanged)
         }
 
         if let etymologyText = Etymology.text(for: verb.infinitif) {
@@ -90,11 +117,6 @@ struct VerbView: View {
       .padding(.horizontal, Layout.doubleDefaultSpacing)
     }
     .screenBackground()
-    .onAppear {
-      isOnScreen = true
-      beginVisit(source: hasAppeared ? .resume : source)
-      hasAppeared = true
-    }
     .onDisappear {
       isOnScreen = false
       endVisit()
@@ -121,6 +143,8 @@ struct VerbView: View {
       case .model(let model):
         ModelView(model: model)
           .sheetDismissable()
+      case .article(let info):
+        TenseArticleSheet(info: info)
       }
     }
   }
@@ -286,18 +310,65 @@ struct VerbView: View {
   }
 
   private var personlessCard: some View {
-    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
-      Text(L.VerbView.personlessConjugations)
-        .subheadingLabel()
-        .frenchPronunciation()
+    VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
+      ForEach(conjugations.personlessCells) { cell in
+        VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+          TenseHeading(tense: cell.tense, openArticle: articleOpener(for: cell.tense))
 
-      Text(conjugations.personlessDisplay)
-        .font(bodyFont)
-        .accessibilityLabel(conjugations.personlessAccessibility)
-        .frenchPronunciation()
-        .leftAligned()
+          MarkableConjugation(cell: cell, isMarked: marks?.contains(cell.tense) == true)
+            .leftAligned()
+        }
+      }
     }
     .card()
+  }
+
+  private var compoundTensesAreShown: Binding<Bool> {
+    Binding {
+      showsCompoundTenses || compoundTensesAreForcedOn
+    } set: { isShown in
+      showsCompoundTenses = isShown
+      compoundTensesAreForcedOn = false
+    }
+  }
+
+  private var shouldShowColorKey: Bool {
+    !hasSeenColorKey && conjugations.hasIrregularLetters
+  }
+
+  private func articleOpener(for tense: Tense) -> (() -> Void)? {
+    guard let info = tense.article else {
+      return nil
+    }
+    return {
+      world.analytics.signal(name: .tapTenseArticle)
+      if let tenseArticleOpener {
+        tenseArticleOpener(info)
+      } else {
+        detailSheet = .article(info)
+      }
+    }
+  }
+
+  // The scroll tip waits for a page visit after the color key was closed, rather than replacing
+  // it in place the moment it closes. With tips switched off for screenshots and video, TipKit
+  // is never configured, so this leaves its datastore alone.
+  private func unlockScrollTipIfDue() {
+    guard TipDisplay.tipsEnabled, hasSeenColorKey else {
+      return
+    }
+    ScrollToBottomTip.isUnlocked = true
+  }
+
+  /// A page opened from a search scrolls to the first cell the search matched. The scroll
+  /// waits a turn of the run loop, because on appearance the cards have no frames yet.
+  private func scrollToFirstMark(_ proxy: ScrollViewProxy) {
+    guard !hasAppeared, let firstTense = marks?.tenses.first else {
+      return
+    }
+    Task {
+      proxy.scrollTo(VerbConjugations.scrollID(for: firstTense), anchor: .top)
+    }
   }
 
   private var colorKey: some View {
@@ -369,6 +440,10 @@ struct VerbView: View {
     if isVisible {
       visibleSections.insert(section)
       visit?.reach(section)
+      // A learner who already scrolls to the bottom does not need the advice.
+      if section >= .etymology, TipDisplay.tipsEnabled {
+        scrollToBottomTip.invalidate(reason: .actionPerformed)
+      }
     } else {
       visibleSections.remove(section)
     }
@@ -376,11 +451,14 @@ struct VerbView: View {
 
   private enum DetailSheet: Identifiable, Equatable {
     case model(VerbModel)
+    case article(Info)
 
     var id: String {
       switch self {
       case .model(let model):
         return "model-\(model.id)"
+      case .article(let info):
+        return "article-\(info.stableKey)"
       }
     }
   }
@@ -388,18 +466,28 @@ struct VerbView: View {
 
 private struct CompoundTensesView: View {
   let sections: [VerbConjugations.Section]
+  let marks: MarkedConjugations?
+  let openArticle: (Tense) -> (() -> Void)?
   let sectionVisibilityChanged: (VerbPageSection, Bool) -> Void
 
-  init(verb: Verb, sectionVisibilityChanged: @escaping (VerbPageSection, Bool) -> Void) {
-    sections = VerbConjugations.sections(verb: verb, specs: VerbConjugations.compoundSpecs)
+  init(
+    verb: Verb,
+    marks: MarkedConjugations?,
+    openArticle: @escaping (Tense) -> (() -> Void)?,
+    sectionVisibilityChanged: @escaping (VerbPageSection, Bool) -> Void
+  ) {
+    sections = VerbConjugations.sections(verb: verb, tables: TenseTable.compound)
+    self.marks = marks
+    self.openArticle = openArticle
     self.sectionVisibilityChanged = sectionVisibilityChanged
   }
 
   var body: some View {
     ForEach(sections) { section in
-      TenseSectionView(section: section)
+      TenseSectionView(section: section, marks: marks, openArticle: openArticle)
         .card()
         .scrollFade()
+        .id(section.scrollID)
         .reportsReaching(section.id == sections.first?.id ? .compound : nil, to: sectionVisibilityChanged)
     }
   }
@@ -423,12 +511,12 @@ private extension View {
 
 private struct TenseSectionView: View {
   let section: VerbConjugations.Section
+  let marks: MarkedConjugations?
+  let openArticle: (Tense) -> (() -> Void)?
 
   var body: some View {
     VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
-      Text(section.title)
-        .subheadingLabel()
-        .frenchPronunciation()
+      TenseHeading(tense: section.table.representative, openArticle: openArticle(section.table.representative))
 
       Grid(alignment: .leading, horizontalSpacing: Layout.doubleDefaultSpacing, verticalSpacing: 8) {
         ForEach(section.cells) { cell in
@@ -439,16 +527,139 @@ private struct TenseSectionView: View {
               .gridColumnAlignment(.leading)
               .accessibilityHidden(true)
 
-            Text(cell.display)
-              .font(bodyFont)
-              .frenchPronunciation()
+            MarkableConjugation(cell: cell, isMarked: isMarked(cell))
               .gridColumnAlignment(.leading)
-              .accessibilityLabel(cell.accessibility)
           }
         }
       }
     }
   }
+
+  private func isMarked(_ cell: VerbConjugations.Cell) -> Bool {
+    marks?.contains(cell.tense) == true
+  }
+}
+
+/// A tense's name, the name a textbook also uses, and a button that opens the tense's article.
+private struct TenseHeading: View {
+  let tense: Tense
+  let openArticle: (() -> Void)?
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 2) {
+      HStack(alignment: .firstTextBaseline, spacing: 6) {
+        Text(tense.titleCaseName)
+          .subheadingLabel()
+          .frenchPronunciation()
+          .accessibilityAddTraits(.isHeader)
+
+        if let openArticle {
+          Button(action: openArticle) {
+            Image(systemName: "questionmark.diamond.fill")
+          }
+          .buttonStyle(.borderless)
+          .tint(.customRed)
+          .accessibilityLabel(Text(L.Navigation.info))
+          .accessibilityHint(Text(L.VerbView.articleButtonHint))
+        }
+
+        Spacer(minLength: 0)
+      }
+
+      if let secondName = tense.secondName {
+        Text(L.VerbView.secondName(secondName))
+          .smallLabel()
+      }
+    }
+  }
+}
+
+private struct MarkableConjugation: View {
+  let cell: VerbConjugations.Cell
+  let isMarked: Bool
+
+  var body: some View {
+    Text(cell.display)
+      .font(bodyFont)
+      .frenchPronunciation()
+      .accessibilityLabel(cell.accessibility)
+      .accessibilityValue(Text(isMarked ? L.VerbView.matchesSearch : ""))
+      .background {
+        if isMarked {
+          RoundedRectangle(cornerRadius: 6)
+            .fill(Color.markedConjugation)
+            .padding(-4)
+        }
+      }
+  }
+}
+
+/// A tense's Info article, opened from its heading on the verb page. A link to another article or
+/// to a verb opens it inside the sheet, so that the learner can follow the thread and still close
+/// the sheet onto the same verb page. A verb page inside the sheet opens its own articles here
+/// too, rather than stacking a sheet on the sheet.
+private struct TenseArticleSheet: View {
+  let info: Info
+  @Environment(\.dismiss) private var dismiss
+  @State private var path: [Route] = []
+
+  private enum Route: Hashable {
+    case info(Info)
+    case verb(Verb)
+  }
+
+  var body: some View {
+    NavigationStack(path: $path) {
+      page(InfoView(info: info, openLink: open))
+        .navigationDestination(for: Route.self) { route in
+          switch route {
+          case .info(let info):
+            page(InfoView(info: info, openLink: open))
+          case .verb(let verb):
+            page(VerbView(verb: verb, source: .infoLink))
+          }
+        }
+    }
+    .environment(\.tenseArticleOpener) { info in
+      path.append(.info(info))
+    }
+  }
+
+  private func page(_ content: some View) -> some View {
+    content
+      .toolbar {
+        ToolbarItem(placement: .topBarTrailing) {
+          Button(L.Navigation.done) {
+            dismiss()
+          }
+        }
+      }
+  }
+
+  private func open(_ url: URL) {
+    guard url.isDeeplink, url.hasExpectedNumberOfDeeplinkComponents else {
+      return
+    }
+    let target = url.pathComponents[1]
+    switch url.host {
+    case URL.infoHost:
+      if let index = Int(target), Info.infos.indices.contains(index) {
+        path.append(.info(Info.infos[index]))
+      }
+    case URL.verbHost:
+      if let verb = Verb.verbs[target] {
+        path.append(.verb(verb))
+      }
+    default:
+      break
+    }
+  }
+}
+
+extension EnvironmentValues {
+  /// Set inside a tense article's sheet, so that a verb page there pushes an article instead of
+  /// presenting one.
+  @Entry var tenseArticleOpener: ((Info) -> Void)?
 }
 
 #if DEBUG

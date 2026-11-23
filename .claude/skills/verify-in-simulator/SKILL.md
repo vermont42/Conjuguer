@@ -79,6 +79,10 @@ by coordinate (Models ≈ `370,54`, Quiz ≈ `448,54` on the Conjuguer iPad Pro 
   correctly. The quiz field is reachable by id, so prefer `type_text.sh --id
   input_quiz_conjugation "<answer>"` (gives read-back); the field also auto-focuses
   after **Start**, so a bare `axe type` into the focused field also works for ASCII.
+- **Switches** (the verb page's "Show Compound Tenses" toggle) ignore an instant tap: `tap_xy.sh`,
+  `axe tap --label`, and a swipe across the knob all left it unchanged on 2026-11-22. A held touch
+  flips it: `axe touch -x <x> -y <y> --down --up --delay 0.15 --udid <udid>`, aimed at the switch
+  at the row's right edge. Read the result from the element's `AXValue` (`1` on, `0` off).
 - **Segmented pickers** render with empty AXTree children on iOS 26, so segments
   aren't individually addressable by id. The parent identifier locates the control's
   frame; `verify_segment.sh` then verifies a segment's label + selected state, but

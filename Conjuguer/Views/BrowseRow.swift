@@ -17,6 +17,10 @@ struct BrowseRow: View {
   let title: String
   var subtitle: String?
   var subtitleIsFrench = false
+
+  /// A French line below the subtitle, in the accent color: what a search matched, as in
+  /// "vais: Indicatif Présent (je)".
+  var detail: String?
   var badge: Badge?
 
   var body: some View {
@@ -36,6 +40,13 @@ struct BrowseRow: View {
               .smallLabel()
               .englishPronunciation()
           }
+        }
+
+        if let detail {
+          Text(detail)
+            .font(captionFont)
+            .foregroundStyle(Color.customRed)
+            .frenchPronunciation()
         }
       }
 

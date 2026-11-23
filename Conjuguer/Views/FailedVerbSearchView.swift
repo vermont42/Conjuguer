@@ -9,9 +9,10 @@ import SwiftUI
 
 struct FailedVerbSearchView: View {
   let query: String
-  let guess: Verb?
+  let guess: VerbSearch.Guess?
+  let pronounGender: PronounGender
   let guessIsSelected: Bool
-  let openGuess: (Verb) -> Void
+  let openGuess: (VerbSearch.Guess) -> Void
   @State private var addressWasCopied = false
 
   var body: some View {
@@ -28,9 +29,10 @@ struct FailedVerbSearchView: View {
             openGuess(guess)
           } label: {
             BrowseRow(
-              title: guess.infinitifWithPossibleExtraLetters,
-              subtitle: guess.translation,
-              badge: BrowseRow.Badge(text: "#\(guess.frequency)", tint: .customBlue)
+              title: guess.verb.infinitifWithPossibleExtraLetters,
+              subtitle: guess.verb.translation,
+              detail: guess.conjugation?.line(pronounGender: pronounGender),
+              badge: BrowseRow.Badge(text: "#\(guess.verb.frequency)", tint: .customBlue)
             )
             .card(accent: guessIsSelected ? .customRed : nil)
           }

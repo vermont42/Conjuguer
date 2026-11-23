@@ -10,29 +10,36 @@ import SwiftUI
 struct VerbConjugations {
   struct Cell: Identifiable {
     let id: Int
+    let tense: Tense
     let pronoun: String
     let display: AttributedString
     let accessibility: String
+    let hasRedLetters: Bool
   }
 
   struct Section: Identifiable {
-    let id: Int
-    let title: String
+    let table: TenseTable
     let cells: [Cell]
+
+    var id: TenseTable {
+      table
+    }
+
+    var scrollID: String {
+      table.scrollID
+    }
   }
 
-  struct TenseSpec {
-    let builder: (PersonNumber) -> Tense
-    let personNumbers: [PersonNumber]
-  }
-
-  let personlessDisplay: AttributedString
-  let personlessAccessibility: String
+  let personlessCells: [Cell]
   let simpleSections: [Section]
 
+  /// Whether the verb's own conjugations, not only its auxiliary's, have red letters.
+  let hasIrregularLetters: Bool
+
   init(verb: Verb) {
-    (personlessDisplay, personlessAccessibility) = Self.personless(verb: verb)
-    simpleSections = Self.sections(verb: verb, specs: Self.simpleSpecs)
+    personlessCells = Self.personlessCells(verb: verb)
+    simpleSections = Self.sections(verb: verb, tables: TenseTable.simple)
+    hasIrregularLetters = (personlessCells + simpleSections.flatMap(\.cells)).contains(where: \.hasRedLetters)
   }
 
   @MainActor private static var cache: [String: VerbConjugations] = [:]
@@ -54,49 +61,25 @@ struct VerbConjugations {
     cache.removeAll()
   }
 
-  static let simpleSpecs: [TenseSpec] = [
-    TenseSpec(builder: { .indicatifPrésent($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .passéSimple($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .imparfait($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .futurSimple($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .conditionnelPrésent($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .subjonctifPrésent($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .subjonctifImparfait($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .impératif($0) }, personNumbers: PersonNumber.impératifPersonNumbers)
-  ]
+  /// The card that shows `tense`, for a search's landing. The page and `sections` read the same
+  /// `TenseTable`, so the two cannot disagree.
+  static func scrollID(for tense: Tense) -> String {
+    tense.table.scrollID
+  }
 
-  static let compoundSpecs: [TenseSpec] = [
-    TenseSpec(builder: { .passéComposé($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .plusQueParfait($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .passéAntérieur($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .passéSurcomposé($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .futurAntérieur($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .conditionnelPassé($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .subjonctifPassé($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .subjonctifPlusQueParfait($0) }, personNumbers: PersonNumber.allCases),
-    TenseSpec(builder: { .impératifPassé($0) }, personNumbers: PersonNumber.impératifPersonNumbers)
-  ]
-
-  static func sections(verb: Verb, specs: [TenseSpec]) -> [Section] {
-    specs.enumerated().map { sectionIndex, spec in
-      let cells = spec.personNumbers.enumerated().map { cellIndex, personNumber in
-        cell(verb: verb, tense: spec.builder(personNumber), id: cellIndex)
+  static func sections(verb: Verb, tables: [TenseTable]) -> [Section] {
+    tables.map { table in
+      let cells = table.tenses.enumerated().map { cellIndex, tense in
+        cell(verb: verb, tense: tense, id: cellIndex)
       }
-      return Section(
-        id: sectionIndex,
-        title: spec.builder(spec.personNumbers[0]).titleCaseName,
-        cells: cells
-      )
+      return Section(table: table, cells: cells)
     }
   }
 
-  static func personless(verb: Verb) -> (display: AttributedString, accessibility: String) {
-    let passé = cell(verb: verb, tense: .participePassé, id: 0)
-    let présent = cell(verb: verb, tense: .participePrésent, id: 1)
-    let futur = cell(verb: verb, tense: .radicalFutur, id: 2)
-    let display = passé.display + AttributedString(", ") + présent.display + AttributedString(", ") + futur.display
-    let accessibility = "\(passé.accessibility), \(présent.accessibility), \(futur.accessibility)"
-    return (display, accessibility)
+  static func personlessCells(verb: Verb) -> [Cell] {
+    TenseTable.personless.tenses.enumerated().map { index, tense in
+      cell(verb: verb, tense: tense, id: index)
+    }
   }
 
   static func cell(verb: Verb, tense: Tense, id: Int) -> Cell {
@@ -105,7 +88,14 @@ struct VerbConjugations {
     if isDefective(verb: verb, tense: tense) {
       display.strikethroughStyle = Text.LineStyle.single
     }
-    return Cell(id: id, pronoun: parts.pronoun, display: display, accessibility: parts.spoken)
+    return Cell(
+      id: id,
+      tense: tense,
+      pronoun: parts.pronoun,
+      display: display,
+      accessibility: parts.spoken,
+      hasRedLetters: parts.form.contains(where: \.isUppercase)
+    )
   }
 
   static func conjugationParts(verb: Verb, tense: Tense) -> (pronoun: String, form: String, spoken: String) {
