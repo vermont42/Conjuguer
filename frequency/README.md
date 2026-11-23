@@ -36,8 +36,8 @@ pin the snapshots the shipped counts came from.
 Sajous, Hathout & Calderone, CLLE-ERSS, Université de Toulouse. 1.4 million inflected forms
 extracted from Wiktionnaire, each carrying lemma frequency counts from three corpora: FrWaC
 (web, ≈ 1.25 billion words), LM10 (ten years of *Le Monde*, ≈ 220 million), and Frantext 20e
-(≈ 29 million). It lists 6,284 of the 6,326 infinitives, 6,283 of them with a usable FrWaC
-count — see *Quarantined FrWaC counts* for the one exception.
+(≈ 29 million). It lists 6,284 of the 6,326 infinitives, 6,280 of them with a usable FrWaC
+count — see *Quarantined FrWaC counts* for the four exceptions.
 
 | Fact | Value |
 |---|---|
@@ -56,9 +56,9 @@ rather than an oversight.
 ### Lexique 4.00 — tie-breaker and calibration
 
 New, Pallier, Schalchli, Bourgin & Gimenes (2026). 316 million words of film and television
-subtitles. It covers 5,630 of the infinitives, and matters for two jobs: breaking ties GLÀFF
-leaves, and giving the hyphenated compounds GLÀFF excludes by design a count to calibrate
-from.
+subtitles. It covers 5,633 of the infinitives (three under an `oe` spelling), and matters for
+two jobs: breaking ties GLÀFF leaves, and giving the hyphenated compounds GLÀFF excludes by
+design a count to calibrate from.
 
 | Fact | Value |
 |---|---|
@@ -109,11 +109,11 @@ estimate exceeds the clamp. Its Spearman-continuity section only works on the fi
 ## No verb goes without a count
 
 Absence from GLÀFF is not evidence of rarity — it excludes hyphenated compounds *by design*,
-and `sous-estimer` (11.5 per million in subtitles) is not a rare verb. So the 43 infinitives
-GLÀFF does not measure get an **estimated** FrWaC-equivalent, stored in `hi` like any other
+and `sous-estimer` (11.5 per million in subtitles) is not a rare verb. So the 46 infinitives
+GLÀFF does not usably measure get an **estimated** FrWaC-equivalent, stored in `hi` like any other
 count and flagged `hp="y"`, through three tiers in order of preference:
 
-1. **`lexique4-fit`** (26 verbs) — the verb is in Lexique 4, so convert its per-million
+1. **`lexique4-fit`** (29 verbs) — the verb is in Lexique 4, so convert its per-million
    figure with a least-squares fit of `log(frwac)` on `log(lexique4)` over the ≈ 5,600 verbs
    both sources count. The 2026-08-28 fit was `log(frwac) = 7.58 + 0.76·log(lex4)`, R² 0.69,
    typical error ±2.6× — a few hundred rank places mid-list.
@@ -125,10 +125,13 @@ count and flagged `hp="y"`, through three tiers in order of preference:
    that the number is chosen rather than missing.
 
 **The clamp.** No estimate may exceed the measured count at rank 1,000 (13,773 hits on
-2026-08-28), so an estimate can never place a verb in the top of the list.
+2026-08-28), so an estimate can never place a verb in the top of the list. A quarantined
+row (below) is exempt, because other corpora did measure it and the clamp would only repeat
+the defect: it held `convaincre`, #271 in the subtitles, at #1001, one place outside the
+top-1,000 band the app's verb of the day draws from. Exempt since 2026-11-22, it ranks #490.
 
 **A measured zero stays zero** and is never estimated: a corpus that could have seen the
-verb and did not is data. 116 verbs share a count of zero and take the last ranks in French
+verb and did not is data. 114 verbs share a count of zero and take the last ranks in French
 alphabetical order.
 
 ## Quarantined FrWaC counts
@@ -138,13 +141,23 @@ carries ~0 hits while Le Monde and Frantext count the verb in the hundreds. A
 1.25-billion-word web corpus cannot contain zero occurrences of `convaincre`, so such a
 count is a defect rather than a measurement. `build_counts.py` treats those rows as
 unmeasured and routes them through the estimate tiers, which is why `convaincre` carries
-`hp="y"`.
+`hp="y"`. Le Monde and Frantext stay, as tie-breakers.
 
 The thresholds (FrWaC below 2% of the larger of the other two counts, which must itself be
 at least 200) sit deliberately far from any honest register difference. On 2026-08-28 they
 caught exactly one verb. The register outliers the research flagged — `faillir` and
 `étayer`, *inflated* in Le Monde by a lemmatizer collapsing `fallait` and `étais` onto them,
 not depressed in FrWaC — stay measured, as they should.
+
+**Ligatures.** GLÀFF joined its corpus counts on the spelling with `œ`, while the corpora
+mostly write `oe`, so a verb spelled with the ligature is credited only with the rare tokens
+that kept it: `manœuvrer` and `écœurer` carried zeros in all three corpora and ranked near
+6,280, and `œuvrer` had 18 FrWaC hits. Lexique 4 lists them as `manoeuvrer`, `écoeurer`, and
+`oeuvrer`. Since 2026-11-22, `build_counts.py` looks an `œ` verb up in Lexique 4 under `oe`
+and, when it is there, quarantines all three GLÀFF counts (they share the defect), so the
+verb takes the `lexique4-fit` estimate and ranks about 1,860. `œilletonner`, in neither
+source under either spelling, keeps its zeros. The check that found them was the browse
+plan's Phase 12, which reads the ranks as frequency bands.
 
 ## A spelling audit this pipeline provoked
 

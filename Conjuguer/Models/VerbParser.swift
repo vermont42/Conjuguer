@@ -57,7 +57,7 @@ nonisolated class VerbParser: XMLDataParser {
   /// corpus can only separate verbs a larger one saw equally often. A missing count sorts
   /// below a measured zero: zero is a corpus that could have seen the verb and did not,
   /// whereas absence is a corpus that never had the chance. The infinitive settles what is
-  /// left, in French collation, which is load-bearing rather than defensive — 116 verbs share
+  /// left, in French collation, which is load-bearing rather than defensive — 114 verbs share
   /// a hit count of zero, and without it their order would depend on dictionary iteration.
   ///
   /// The four doubled infinitives (haïr, ouïr, saillir, sortir — one entry per model) share

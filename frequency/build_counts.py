@@ -43,6 +43,19 @@ MIN_R_SQUARED = 0.6
 QUARANTINE_RATIO = 0.02
 QUARANTINE_FLOOR = 200
 
+# GLÀFF's corpus counts were joined on the ligature spelling, so a verb spelled with œ is
+# credited only with the rare tokens that kept the ligature: manœuvrer and écœurer carried
+# zeros, and œuvrer 18 FrWaC hits. Lexique 4 lists the same verbs under `oe` (manoeuvrer,
+# écoeurer, oeuvrer). When it does, GLÀFF's row is quarantined like a failed join, and the
+# verb is estimated from Lexique 4 instead (found 2026-11-22, browse plan Phase 12).
+LIGATURES = (("œ", "oe"), ("Œ", "OE"))
+
+
+def lexique_spelling(infinitif):
+    for ligature, letters in LIGATURES:
+        infinitif = infinitif.replace(ligature, letters)
+    return infinitif
+
 # GLÀFF is `|`-separated with 17 fields; these are the 0-based indices of the three
 # *lemma* absolute-frequency columns (README fields 8, 12, 16). Every inflected form of a
 # lemma repeats the lemma count, so a max over the lemma's rows recovers it.
@@ -184,18 +197,25 @@ def main():
     quarantined = []
     for infinitif in targets:
         row = {}
+        lexique_lemma = infinitif if infinitif in lexique else lexique_spelling(infinitif)
+        spelled_apart = lexique_lemma != infinitif and lexique_lemma in lexique
         if infinitif in glaff:
             frwac, lm10, frantext = glaff[infinitif]
             corroboration = max(lm10, frantext)
-            if corroboration >= QUARANTINE_FLOOR and frwac < QUARANTINE_RATIO * corroboration:
-                quarantined.append((infinitif, frwac, lm10, frantext))
+            if spelled_apart:
+                quarantined.append((infinitif, frwac, lm10, frantext, "ligature"))
+            elif corroboration >= QUARANTINE_FLOOR and frwac < QUARANTINE_RATIO * corroboration:
+                quarantined.append((infinitif, frwac, lm10, frantext, "join"))
+                row["lm10"] = lm10
+                row["frantext"] = frantext
             else:
                 row["frwac"] = frwac
-            row["lm10"] = lm10
-            row["frantext"] = frantext
-        if infinitif in lexique:
-            row["lexique4_per_million"] = lexique[infinitif]
+                row["lm10"] = lm10
+                row["frantext"] = frantext
+        if lexique_lemma in lexique:
+            row["lexique4_per_million"] = lexique[lexique_lemma]
         rows[infinitif] = row
+    corroborated = {entry[0] for entry in quarantined}
 
     measured = sorted((row["frwac"] for row in rows.values() if "frwac" in row), reverse=True)
     clamp = measured[CLAMP_RANK - 1]
@@ -228,7 +248,9 @@ def main():
             else:
                 estimates["unresolved"].append(infinitif)
                 continue
-        count = min(int(round(count)), clamp)
+        # A quarantined verb is not unknown: other corpora measured it, and the clamp would
+        # only repeat the defect. It held convaincre, which subtitles rank #271, at #1001.
+        count = int(round(count)) if infinitif in corroborated else min(int(round(count)), clamp)
         row["frwac_estimate"] = {"count": count, "method": method, "basis": basis}
         estimates[method].append(infinitif)
 
@@ -260,7 +282,10 @@ def main():
 
     if ordered[:3] != ["être", "avoir", "faire"]:
         failures.append(f"FrWaC top three are {ordered[:3]}, not être/avoir/faire")
-    over_clamp = [i for i in targets if rows[i].get("frwac_estimate", {}).get("count", 0) > clamp]
+    over_clamp = [
+        i for i in targets
+        if i not in corroborated and rows[i].get("frwac_estimate", {}).get("count", 0) > clamp
+    ]
     if over_clamp:
         failures.append(f"estimates above the clamp: {over_clamp}")
 
@@ -292,7 +317,7 @@ def main():
           f"R² = {r_squared:.4f}; residual quartiles (log) "
           f"{quartiles[0]:.3f} / {quartiles[1]:.3f} / {quartiles[2]:.3f}, 95th {quartiles[3]:.3f} "
           f"(×{math.exp(quartiles[2]):.2f} at Q3, ×{math.exp(quartiles[3]):.2f} at P95).")
-    write(f"- Clamp (measured count at rank {CLAMP_RANK}): {clamp}.")
+    write(f"- Clamp (measured count at rank {CLAMP_RANK}): {clamp}, waived for quarantined rows.")
     write(f"- Global hyphen prefix ratio: {global_ratio:.4f}; per-prefix: "
           + ", ".join(f"{p} {r:.3f}" for p, r in sorted(ratios.items())) + ".")
     write(f"- Measured zeros: {len(zeros)} in FrWaC, {len(zero_everywhere)} in every source.")
@@ -312,9 +337,10 @@ def main():
 
     write("## Quarantined FrWaC counts\n")
     if quarantined:
-        for infinitif, frwac, lm10, frantext in quarantined:
+        for infinitif, frwac, lm10, frantext, cause in quarantined:
             estimate = rows[infinitif]["frwac_estimate"]
-            write(f"- `{infinitif}`: FrWaC {frwac} against Le Monde {lm10} / Frantext {frantext} — "
+            reason = "a failed join" if cause == "join" else f"a ligature, counted by Lexique 4 as `{lexique_spelling(infinitif)}`"
+            write(f"- `{infinitif}` ({reason}): FrWaC {frwac} against Le Monde {lm10} / Frantext {frantext} — "
                   f"estimated {estimate['count']} ({estimate['method']}), rank #{ranks[infinitif]}")
     else:
         write("None.")

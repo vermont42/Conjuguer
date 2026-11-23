@@ -18,29 +18,42 @@ struct WidgetSnapshotWriterTests {
     return date
   }
 
-  @Test func testVerbOfTheDayIsDeterministicForADate() {
-    let eligible = WidgetSnapshotWriter.eligibleVerbs()
-    #expect(!eligible.isEmpty)
-
-    let first = WidgetSnapshotWriter.verbOfTheDay(from: eligible, date: day("2025-06-15"))
-    let second = WidgetSnapshotWriter.verbOfTheDay(from: eligible, date: day("2025-06-15"))
-    #expect(first.infinitif == second.infinitif, "The same day must always yield the same verb.")
+  @Test func snapshotsCoverTheComingWeekFromTheFrequentBand() {
+    let snapshots = WidgetSnapshotWriter.generateSnapshots(from: day("2026-11-23"))
+    #expect(snapshots.count == WidgetSnapshotWriter.futureDayCount)
+    #expect(snapshots.first?.dateString == "2026-11-23")
+    #expect(snapshots.allSatisfy { $0.frequency <= VerbDraw.frequentBand.rankLimit })
   }
 
-  @Test func testEligibleVerbsAreCommonAndHaveExamples() {
-    let eligible = WidgetSnapshotWriter.eligibleVerbs()
-    #expect(eligible.count > 1_000)
-    #expect(eligible.allSatisfy { $0.frequency <= WidgetSnapshotWriter.verbOfTheDayRankLimit })
-    #expect(eligible.allSatisfy { ExampleData.example(for: $0) != nil })
+  @Test func snapshotsKeepTheVerbTheWidgetShowsToday() throws {
+    let kept = try #require(Verb.verbs["abcéder"])
+    let snapshots = WidgetSnapshotWriter.generateSnapshots(from: day("2026-11-23"), keeping: kept)
+    let fresh = WidgetSnapshotWriter.generateSnapshots(from: day("2026-11-23"))
+    #expect(snapshots.first?.verbKey == "abcéder")
+    #expect(Array(snapshots.dropFirst()) == Array(fresh.dropFirst()))
   }
 
-  @Test func testVerbOfTheDayChangesAcrossConsecutiveDays() {
-    let eligible = WidgetSnapshotWriter.eligibleVerbs()
-    // The index steps by 127 (a prime, < verb count) per day, so adjacent days land
-    // on distinct indices and therefore distinct verbs.
-    let today = WidgetSnapshotWriter.verbOfTheDay(from: eligible, date: day("2025-06-15"))
-    let tomorrow = WidgetSnapshotWriter.verbOfTheDay(from: eligible, date: day("2025-06-16"))
-    #expect(today.infinitif != tomorrow.infinitif, "Consecutive days should rotate the verb.")
+  // The app rewrites the snapshots at every activation. Starring a verb on a day My Verbs owns
+  // would change that day's draw, but the verb already shown must stay.
+  @Test func aRewriteAfterMyVerbsChangeKeepsTodaysVerb() throws {
+    let morning = day("2026-11-22").addingTimeInterval(8 * 3_600)
+    let evening = day("2026-11-22").addingTimeInterval(20 * 3_600)
+    let firstWrite = WidgetSnapshotWriter.generateSnapshots(from: morning)
+    let displayed = try #require(WidgetSnapshotWriter.displayedVerb(in: firstWrite, on: evening))
+    let myVerbs = try [#require(Verb.verbs["être"])]
+    let rewrite = WidgetSnapshotWriter.generateSnapshots(from: evening, myVerbs: myVerbs, keeping: displayed)
+    let unkept = WidgetSnapshotWriter.generateSnapshots(from: evening, myVerbs: myVerbs)
+    #expect(unkept.first?.verbKey == "être", "2026-11-22 is a My Verbs day.")
+    #expect(rewrite.first?.verbKey == firstWrite.first?.verbKey)
+    #expect(rewrite.first == firstWrite.first)
+  }
+
+  @Test func theDisplayedVerbIsTheSnapshotForThatDay() {
+    let snapshots = WidgetSnapshotWriter.generateSnapshots(from: day("2026-11-22"))
+    let secondDay = WidgetSnapshotWriter.displayedVerb(in: snapshots, on: day("2026-11-23"))
+    #expect(secondDay?.dictionaryKey == snapshots[1].verbKey)
+    #expect(WidgetSnapshotWriter.displayedVerb(in: snapshots, on: day("2026-11-21")) == nil)
+    #expect(WidgetSnapshotWriter.displayedVerb(in: [], on: day("2026-11-22")) == nil)
   }
 
   @Test func testSnapshotWrongAnswersAreDistinctAndExcludeCorrect() {
@@ -114,22 +127,16 @@ struct WidgetSnapshotWriterTests {
     // Doubled infinitives (haïr France/Québec, ouïr, saillir, sortir) have no bare-infinitif
     // dictionary key, so conjugating or deeplinking by `infinitif` alone found nothing: the
     // widget showed dashes and opened the verb list instead of the verb.
-    let eligible = WidgetSnapshotWriter.eligibleVerbs()
-    let start = day("2025-01-01")
-    var checked = 0
-    for offset in 0 ..< eligible.count {
-      let date = try #require(WidgetDateHelper.calendar.date(byAdding: .day, value: offset, to: start))
-      guard WidgetSnapshotWriter.verbOfTheDay(from: eligible, date: date).extraLetters != nil else {
-        continue
-      }
-      let snapshot = try #require(WidgetSnapshotWriter.generateSnapshot(date: date))
+    let doubled = VerbDraw.frequentVerbs.filter { $0.extraLetters != nil }
+    #expect(!doubled.isEmpty, "The frequent band should hold at least one doubled infinitif.")
+    for verb in doubled {
+      let snapshot = WidgetSnapshotWriter.generateSnapshot(verb: verb, date: day("2025-01-01"))
       let verbKey = try #require(snapshot.verbKey)
       #expect(Verb.verbs[verbKey] != nil, "\(verbKey) must be a Verb.verbs key so the widget deeplink opens it.")
       #expect(!snapshot.participePassé.isEmpty, "\(verbKey) must conjugate.")
       #expect(snapshot.quizQuestion.correctAnswer != "—", "\(verbKey) must conjugate.")
-      checked += 1
+      #expect(WidgetSnapshotWriter.displayedVerb(in: [snapshot], on: day("2025-01-01")) == verb)
     }
-    #expect(checked > 0, "The sweep should reach at least one doubled infinitif.")
   }
 
   @Test func testTruncateReturnsShortTextUnchanged() {

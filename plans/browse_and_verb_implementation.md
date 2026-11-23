@@ -35,7 +35,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 9 | Done | 2026-11-22 | 7ba1281 | C1, C2 | 11 |
 | 10 | Done | 2026-11-22 | 2829650 | D1, D2 | 12 |
 | 11 | Done | 2026-11-22 | e9a34b5 | D2's quiz scope, D3 | 13 |
-| 12 | Not started | | | D5 | 14 |
+| 12 | Awaiting Josh | 2026-11-22 | | D5 | 14 |
 | 13 | Not started | | | D4 | 15 |
 | 14 | Not started | | | D6 | 16 |
 | Closing | Not started | | | Audit, porting notes | Closing |
@@ -1347,7 +1347,8 @@ Phase 10's 484, all in the new `QuizScopeTests`. New files: `Models/QuizScope.sw
 ## Phase 12: A Verb of the Day Worth Opening
 
 **Ideas:** D5. **Ports:** Konjugieren Phase 14 (`VerbDraw.swift`, `FrequencyBand.swift`,
-`WidgetSnapshotWriter.displayedSnapshot`). **Depends on:** Phase 10. **Status:** Not started.
+`WidgetSnapshotWriter.displayedSnapshot`). **Depends on:** Phase 10. **Status:** Awaiting Josh
+(2026-11-22).
 
 Conjuguer's widget already draws from frequent verbs, so this phase is smaller than Konjugieren's.
 
@@ -1373,6 +1374,59 @@ example today), and whether "irregular" means a model with irregularity above 0%
 keeps today's verb, and tests pin the bands and the draw.
 
 **How it differed:**
+
+Built 2026-11-22 in one session. The suite ran 518 tests in 44 suites, all passing, 20 more than
+Phase 11's 498, in the new `FrequencyBandTests` and `VerbDrawTests` and a reworked
+`WidgetSnapshotWriterTests`. New files: `Models/FrequencyBand.swift` and `Models/VerbDraw.swift`.
+`docs/feature_architecture.md` § Choosing the Verb describes the draw.
+
+- **Josh's answers (2026-11-22).** The band is the top 1,000, as in Konjugieren, not the widget's
+  old 1,500. "Irregular" means the third group as schools teach it: models outside groups 1 and 2,
+  plus aller (about 178 of the top 1,000), not irregularity above 0%, which would also have
+  favored the spelling changes of manger and appeler (about 315). He agreed to both data fixes
+  below.
+- **The data check found two defects, both fixed in `frequency/build_counts.py`.** GLÀFF counts a
+  verb spelled with œ only where the corpus kept the ligature, so manœuvrer and écœurer carried
+  zeros (#6,290 and #6,271) and œuvrer 18 hits (#5,605). Lexique 4 lists them as manoeuvrer,
+  écoeurer, and oeuvrer, which the script never looked up. Now an œ verb is looked up under `oe`,
+  and its GLÀFF counts are quarantined, so it takes the Lexique 4 estimate: #1,858 to #1,876.
+  œilletonner is in neither source and keeps its zeros. Second, convaincre, quarantined since
+  2026-08-28 as a failed join, had its estimate clamped to rank 1,000's count and lost the tie on
+  its defective Le Monde zero, which left it at #1001, one place outside the band. Quarantined
+  rows are now exempt from the clamp, and convaincre ranks #490 (#271 in the subtitles).
+  `docs/frequencies.txt` and `frequency/README.md` were regenerated and updated; 114 verbs now
+  share a count of zero, not 116.
+- **Not fixed, for Josh to judge:** lover ranks #835 on 19,144 FrWaC hits, which probably include
+  the English word, and it came up as a random verb in the simulator. The subtitle-heavy verbs
+  that rank just outside the band (attraper #1030, calmer #1045, virer #1046, baiser #1863) are
+  honest register differences, not defects.
+- **The weight** is Konjugieren's: 2 for an irregular verb, times 2 for a base verb, so aller,
+  venir, and faire count 4, apprendre and parler 2, rappeler 1. A base verb is one
+  `VerbBase.base(of:)` (Phase 7) finds no base for. That reads the etymology in the device's
+  language, so the draw could in principle differ between a French and an English device. On
+  2026-11-22 the two languages agreed on all 1,000 verbs (239 have a base), so it does not today.
+- **The band is 1,001 entries**, since sortir's two entries share a rank. `Verb.verbs(in:)`
+  returns entries; `FrequencyBandTests` pins that each band holds exactly its count of infinitives.
+- **Keeping today's verb** is simpler than in Konjugieren, whose bundle pages with a Next button.
+  Conjuguer's bundle is seven dated snapshots, so `writeSnapshots(now:)` reads the bundle on disk,
+  takes the verb of today's snapshot (`displayedVerb(in:on:)`, by `verbKey`), and keeps it for
+  today. The quiz widget's answered state, keyed by date and infinitive, survives with it.
+- **No new signal.** `viewAppeared` for the verb page with `source` `widget` or `control` already
+  counts these opens, so nothing is staged for the privacy policy and no string was added.
+- **How it was tested.** `VerbDrawTests` pins ten days from 2026-11-22 to a Python
+  reimplementation (in the session's scratchpad: SplitMix64, the model groups, and `VerbBase`'s
+  rule read from `RelatedVerbs.swift`). In the iPhone simulator, in English: the old build's
+  bundle showed baisser today; the new build kept baisser and wrote boire, distribuer, être,
+  prévoir, vendre, and venir for the next six days, matching Python with My Verbs [venir, être]
+  (seven days, the bundle's length). With the bundle deleted, today became venir, a My Verbs day,
+  and a relaunch kept all seven. Unstarring venir reordered My Verbs to [être, venir], for which a
+  fresh draw gives être today; after a trip to Settings and back, today stayed venir while
+  11-25 and 11-28 moved to venir and être. Fourteen `verb/random?source=control` links opened
+  connaître, commencer, lover, rire, appartenir, reprocher, reproduire (all ranked 26 to 835), and
+  être from My Verbs. **Found, not fixed:** a link that arrives while a verb sheet is up is
+  sometimes dropped or arrives late, for a fixed verb as well as `random`, so it predates this
+  phase. **Not tried:** the iPad, French, and dark mode, since nothing in the app's interface
+  changed; the widget's rendering on a Home Screen; and a device.
 
 ## Phase 13: The Review Card
 

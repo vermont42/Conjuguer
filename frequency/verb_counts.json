@@ -7212,7 +7212,7 @@
   "frantext": 503,
   "lexique4_per_million": 67.693,
   "frwac_estimate": {
-   "count": 13773,
+   "count": 47960,
    "method": "lexique4-fit",
    "basis": "Lexique 4 67.6930 per million"
   }
@@ -13711,9 +13711,12 @@
   "frantext": 0
  },
  "écœurer": {
-  "frwac": 0,
-  "lm10": 0,
-  "frantext": 0
+  "lexique4_per_million": 2.301,
+  "frwac_estimate": {
+   "count": 3682,
+   "method": "lexique4-fit",
+   "basis": "Lexique 4 2.3010 per million"
+  }
  },
  "éconduire": {
   "frwac": 575,
@@ -23043,9 +23046,12 @@
   "lexique4_per_million": 18.962
  },
  "manœuvrer": {
-  "frwac": 0,
-  "lm10": 0,
-  "frantext": 0
+  "lexique4_per_million": 2.278,
+  "frwac_estimate": {
+   "count": 3654,
+   "method": "lexique4-fit",
+   "basis": "Lexique 4 2.2780 per million"
+  }
  },
  "manquer": {
   "frwac": 133687,
@@ -24880,9 +24886,12 @@
   "frantext": 0
  },
  "œuvrer": {
-  "frwac": 18,
-  "lm10": 0,
-  "frantext": 0
+  "lexique4_per_million": 2.358,
+  "frwac_estimate": {
+   "count": 3751,
+   "method": "lexique4-fit",
+   "basis": "Lexique 4 2.3580 per million"
+  }
  },
  "offenser": {
   "frwac": 2450,

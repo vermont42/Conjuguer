@@ -573,7 +573,7 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
 
 | Route | Target | Query items | Opens | Since |
 |---|---|---|---|---|
-| `verb` | A `Verb.verbs` key (`aller`; `ha%C3%AFr%20France` for one entry of a doubled infinitive), or `random` | `source`; `match`, a conjugation the page marks as it marks a search's match (`verb/aller?match=vais`) | The verb page as a sheet over the Verbs tab (or the Info tab, for an article's link), scrolled to the first marked cell. `random` draws from all 6,330 entries. An unknown verb opens the Verbs tab and nothing else; a `match` that fills no cell opens the page unmarked | Before 2026; `match` Phase 9 |
+| `verb` | A `Verb.verbs` key (`aller`; `ha%C3%AFr%20France` for one entry of a doubled infinitive), or `random` | `source`; `match`, a conjugation the page marks as it marks a search's match (`verb/aller?match=vais`) | The verb page as a sheet over the Verbs tab (or the Info tab, for an article's link), scrolled to the first marked cell. `random` draws from the 1,000 most frequent verbs, or from My Verbs one time in three (`VerbDraw`, browse Phase 12). An unknown verb opens the Verbs tab and nothing else; a `match` that fills no cell opens the page unmarked | Before 2026; `match` Phase 9 |
 | `search` | None | `q`, the text; `source` | The verb list with its search field, any verb page closed. With text, the results show with the keyboard down; with none (or `q` empty), the field is cleared and focused for typing | Phase 9 |
 | `model` | A model's identifier (`1-1`) | None | The model page as a sheet over the Models tab | Before 2026 |
 | `info` | A stable key (`futur_simple`), or a legacy position (`info/0`) | None | The article as a sheet over the Info tab. An unknown key or out-of-range position does nothing | Before 2026; keys Phase 9 |
@@ -678,7 +678,8 @@ to 14 and the pedagogy plan extend it.
 
 **Where it lives.** The store saves the record as JSON under `LearnerVerbs.storageKey` in the App
 Group's defaults (`WidgetConstants.sharedDefaults`, through `GetterSetterReal(userDefaults:)`), so
-that the widget can decode it with `LearnerVerbs(json:)` without the verb list, as Phase 12 will.
+that the widget can decode it with `LearnerVerbs(json:)` without the verb list. Phase 12 did not
+need that: the app draws the widget's verbs, My Verbs included, when it writes the snapshots.
 Unit tests give it a `GetterSetterFake`. **Every field added later must be optional**: synthesized
 decoding requires every non-optional key, so a new required field would decode every older record
 as nothing, and the learner's verbs would vanish. `LearnerVerbsTests` pins this. No cap on entries.
@@ -855,10 +856,30 @@ conjugator and no verb data, so it shows what the app last wrote.
 
 ### Choosing the Verb
 
-`WidgetSnapshotWriter.eligibleVerbs()` takes the verbs ranked 1,500 or better
-(`verbOfTheDayRankLimit`) that have an example sentence, in rank order. Each day's verb is the one
-at `(days since 2025-01-01 × 127) % count`. The quiz question uses the same verb, with a person and
-one of six tenses (présent, passé composé, futur simple, imparfait, subjonctif présent,
-conditionnel présent) chosen from the day number, and three wrong answers drawn from the verb's own
-other conjugations before any filler. A change of the pronoun-gender setting rewrites the
-snapshots. Phase 12 of the browse plan changes the draw.
+`VerbDraw` (browse Phase 12, ported from Konjugieren's Phase 14) chooses the widget's verb and
+every random verb (the control, `verb/random`, the shortcut). The pool is `FrequencyBand.top1000`,
+the 1,000 most frequent infinitives (1,001 entries, since sortir's two share a rank), weighted so
+that an irregular verb counts double and so does a base verb: aller, venir, and faire count 4,
+apprendre and parler 2, rappeler 1. Irregular means the third group as French schools teach it,
+models outside groups 1 and 2 plus aller (`VerbDraw.isIrregular`), so the spelling changes of
+manger and appeler do not count. A base verb is one `VerbBase.base(of:)` finds no base for. That
+reads the etymology in the device's language, but on 2026-11-22 the English and French texts gave
+the same answer for all 1,000 verbs, so the draw does not depend on the language.
+
+Once My Verbs has entries (starred verbs, then the last 20 opened), it supplies one draw in three.
+For the widget, that is every day whose number since 2025-01-01 is a multiple of three, taking My
+Verbs in turn. Other days draw from the band with SplitMix64 (`SeededRandomNumberGenerator`)
+seeded with the day number, so a day names the same verb in any process. A random verb has a
+one-in-three chance of coming from My Verbs. A random verb opened is a recent verb, so it can
+return as a My Verbs draw until it ages out of the recents.
+
+`WidgetSnapshotWriter.writeSnapshots()` runs at every activation, and My Verbs may have changed
+since the last write. So it first reads the bundle on disk, finds the snapshot for today
+(`displayedVerb(in:on:)`), and keeps that verb for today in the new bundle. The six days after it
+are drawn afresh. `isEligible` still requires an example sentence, which every verb has today.
+
+The quiz question uses the day's verb, with a person and one of six tenses (présent, passé
+composé, futur simple, imparfait, subjonctif présent, conditionnel présent) chosen from the day
+number, and three wrong answers drawn from the verb's own other conjugations before any filler.
+Because today's verb is kept, so are its question ID and the answered state the quiz widget
+stores against it. A change of the pronoun-gender setting rewrites the snapshots.

@@ -1231,7 +1231,7 @@
   <verb in="contrôler" tn="check, examine, control" mo="1-1" hi="97283" hn="22361" hl="446" hs="77323" />
   <verb in="controverser" tn="debate, controvert" mo="1-1" hi="5528" hn="2822" hl="8" hs="620" />
   <verb in="contusionner" tn="bruise" mo="1-1" hi="40" hn="12" hl="6" hs="104" />
-  <verb in="convaincre" tn="convince" mo="5-25" hi="13773" hn="0" hl="503" hs="67693" hp="y" />
+  <verb in="convaincre" tn="convince" mo="5-25" hi="47960" hn="0" hl="503" hs="67693" hp="y" />
   <verb in="convenir" tn="admit, agree, suit, be convenient for" mo="6-7" hi="121070" hn="17422" hl="2228" hs="31614" />
   <verb in="converger" tn="converge" mo="1-2B" hi="6208" hn="1175" hl="105" hs="1000" />
   <verb in="converser" tn="converse" mo="1-1" hi="2037" hn="382" hl="116" hs="797" />
@@ -2343,7 +2343,7 @@
   <verb in="écluser" tn="pass through a lock, drink, booze" mo="1-1" hi="269" hn="44" hl="54" hs="155" />
   <verb in="écobuer" tn="remove roots from earth and burn them" mo="1-1" hi="5" hn="1" hl="0" />
   <verb in="écoconcevoir" tn="design a product respecting the environment" mo="4-1A" hi="7" hn="0" hl="0" />
-  <verb in="écœurer" tn="nauseate, disgust" mo="1-1" hi="0" hn="0" hl="0" />
+  <verb in="écœurer" tn="nauseate, disgust" mo="1-1" hi="3682" hs="2301" hp="y" />
   <verb in="éconduire" tn="turn away, dismiss, refuse" mo="5-9A" hi="575" hn="357" hl="54" hs="595" />
   <verb in="économiser" tn="economize" mo="1-1" hi="15581" hn="1925" hl="174" hs="14047" />
   <verb in="écoper" tn="bail out, get" mo="1-1" hi="1260" hn="346" hl="72" hs="1693" />
@@ -3928,7 +3928,7 @@
   <verb in="manifester" tn="demonstrate, protest" mo="1-1" hi="59321" hn="21634" hl="1078" hs="8642" />
   <verb in="manigancer" tn="conspire, scheme, plot" mo="1-2A" hi="244" hn="63" hl="41" hs="4975" />
   <verb in="manipuler" tn="manipulate" mo="1-1" hi="22151" hn="3300" hl="151" hs="18962" />
-  <verb in="manœuvrer" tn="maneuver" mo="1-1" hi="0" hn="0" hl="0" />
+  <verb in="manœuvrer" tn="maneuver" mo="1-1" hi="3654" hs="2278" hp="y" />
   <verb in="manquer" tn="lack, be missed by, miss" mo="1-1" hi="133687" hn="32046" hl="6343" hs="247231" />
   <verb in="manucurer" tn="manicure" mo="1-1" hi="126" hn="34" hl="14" hs="462" />
   <verb in="manufacturer" tn="manufacture" mo="1-1" hi="707" hn="232" hl="11" hs="193" />
@@ -4239,7 +4239,7 @@
   <verb in="octroyer" tn="grant" mo="1-7A" hi="10223" hn="2355" hl="100" hs="994" />
   <verb in="octupler" tn="octuple, multiply by eight" mo="1-1" hi="16" hn="11" hl="0" hs="60" />
   <verb in="œilletonner" tn="remove buds" mo="1-1" hi="0" hn="0" hl="0" />
-  <verb in="œuvrer" tn="work" mo="1-1" hi="18" hn="0" hl="0" />
+  <verb in="œuvrer" tn="work" mo="1-1" hi="3751" hs="2358" hp="y" />
   <verb in="offenser" tn="offend, hurt" mo="1-1" hi="2450" hn="490" hl="410" hs="15180" />
   <verb in="officialiser" tn="formalize" mo="1-1" hi="4372" hn="1133" hl="3" hs="886" />
   <verb in="officier" tn="officiate" mo="1-1" hi="2970" hn="897" hl="112" hs="8649" />

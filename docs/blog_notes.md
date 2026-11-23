@@ -5175,3 +5175,38 @@ One thing was left behind on purpose. After trying Konjugieren's version, Josh a
 fuller start screen there, with a big yellow symbol, fact tiles, and the chosen verbs as chips.
 Conjuguer's start screen was already a briefing card with a symbol and facts, so the picker went
 into that card, and the fuller design waits on Josh's judgment.
+
+## A Verb of the Day Worth Opening, and Three Verbs the Corpus Could Not Spell (2026-11-22)
+
+Phase 12 of the browse plan ports Konjugieren's verb-of-the-day draw. Conjuguer's widget already
+drew from frequent verbs, stepping through the 1,500 most common in a fixed stride, so the port
+was mostly about what to favor and what to keep. The widget and every random verb (the Control
+Center button, the `verb/random` link, the shortcut) now draw from the 1,000 most frequent verbs,
+where an irregular verb counts double and so does a verb built on no other. Once a learner has
+starred or opened verbs, My Verbs takes every third day, in turn. Konjugieren learned the hard way
+that chance leaves two-week gaps, so the rotation is a calendar, not a coin. Random verbs, drawn
+on demand, keep the one-in-three coin.
+
+"Irregular" needed a decision for French. The app scores each model's irregularity, and anything
+above zero includes manger and appeler, whose only quirk is spelling. Josh chose the school
+definition instead: the third group, plus aller. That is the French counterpart of Konjugieren's
+strong verbs, and it puts faire, prendre, and venir at four times the weight of rappeler.
+
+The phase also asked for a look at the frequency data before trusting it as bands, and the look
+paid off twice. First, every verb spelled with œ was ranked as if nobody used it: manœuvrer and
+écœurer carried zeros and sat near the bottom of 6,326. The GLÀFF lexicon credits such a verb only
+with the tokens where the ligature survived, and most text writes "oe". The second source,
+Lexique 4, had all three verbs all along under their "oe" spellings, but the pipeline never looked
+them up that way. Now it does, and they land around #1,860. Second, convaincre, a verb the
+subtitle corpus ranks #271, sat at #1001. Its web count was already known to be broken, and its
+estimate had been capped at rank 1,000's count by a clamp meant to keep guesses out of the top of
+the list. It then lost the tie on a Le Monde count that is broken in the same way. The clamp now
+spares verbs that other corpora corroborate, and convaincre ranks #490. One more oddity stays for
+Josh: lover ranks #835, probably because a French web corpus is full of the English word.
+
+Konjugieren's other lesson was that "the same verb all day" is not a function of the date alone.
+The app rewrites the widget's week at every activation, and starring a verb at lunch would change
+a My Verbs day's draw. So the writer now reads what it wrote last time and keeps today's verb.
+In the simulator that was easy to watch. Unstarring venir reordered My Verbs, and a fresh draw
+would have shown être, but the widget kept venir for the rest of the day. The whole week matched
+an independent Python reimplementation of the draw, which also became a test that pins ten days.

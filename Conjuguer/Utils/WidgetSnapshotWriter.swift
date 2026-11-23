@@ -11,12 +11,6 @@ enum WidgetSnapshotWriter {
   // to relaunch.
   static let futureDayCount = 7
 
-  static let verbOfTheDayRankLimit = 1_500
-
-  private static let referenceDate: Date = {
-    WidgetDateHelper.calendar.date(from: DateComponents(year: 2025, month: 1, day: 1)) ?? Date()
-  }()
-
   // The tenses a daily quiz question is drawn from (all carry a person-number;
   // passéComposé is compound, the rest are simple).
   private static let quizTenseFamilies: [(PersonNumber) -> Tense] = [
@@ -31,42 +25,70 @@ enum WidgetSnapshotWriter {
   // Returns whether the on-disk snapshot actually changed, so the caller can skip the
   // (budget-limited) widget reload when nothing moved.
   @discardableResult
-  @MainActor static func writeSnapshots() -> Bool {
-    let snapshots = generateSnapshots()
+  @MainActor static func writeSnapshots(now: Date = Date()) -> Bool {
+    guard let url = WidgetConstants.snapshotsURL else {
+      return false
+    }
+    let existing = try? Data(contentsOf: url)
+    let displayed = existing
+      .flatMap { try? JSONDecoder().decode([WidgetSnapshot].self, from: $0) }
+      .flatMap { displayedVerb(in: $0, on: now) }
+    let snapshots = generateSnapshots(from: now, myVerbs: Current.learnerVerbs.myVerbs, keeping: displayed)
     guard
       !snapshots.isEmpty,
-      let url = WidgetConstants.snapshotsURL,
       let data = try? JSONEncoder().encode(snapshots)
     else {
       return false
     }
-    // The snapshot is keyed on the calendar day and the pronoun-gender setting, so
-    // re-foregrounding within the same day re-encodes identical bytes. Skip both the
+    // The snapshot is keyed on the calendar day, the pronoun-gender setting, and My Verbs, so
+    // re-foregrounding within the same day usually re-encodes identical bytes. Skip both the
     // write and the reload in that case rather than spending the reload budget on a no-op.
-    if let existing = try? Data(contentsOf: url), existing == data {
+    if existing == data {
       return false
     }
     try? data.write(to: url, options: .atomic)
     return true
   }
 
-  @MainActor static func generateSnapshots(from date: Date = Date(), dayCount: Int = futureDayCount) -> [WidgetSnapshot] {
+  /// `keeping` is the verb the widget shows today. The app rewrites the snapshots at every
+  /// activation, and My Verbs may have changed since the last write, so a fresh draw could
+  /// replace the verb a learner already saw this morning.
+  @MainActor static func generateSnapshots(from date: Date = Date(), dayCount: Int = futureDayCount, myVerbs: [Verb] = [], keeping displayed: Verb? = nil) -> [WidgetSnapshot] {
     let startOfToday = WidgetDateHelper.startOfDay(for: date)
+    let eligibleMyVerbs = myVerbs.filter(isEligible)
+    let eligibleFrequentVerbs = VerbDraw.frequentVerbs.filter(isEligible)
     return (0 ..< dayCount).compactMap { offset in
       guard let day = WidgetDateHelper.calendar.date(byAdding: .day, value: offset, to: startOfToday) else {
         return nil
       }
-      return generateSnapshot(date: day)
+      let kept = offset == 0 ? displayed : nil
+      guard let verb = kept ?? VerbDraw.verbOfTheDay(on: day, myVerbs: eligibleMyVerbs, frequentVerbs: eligibleFrequentVerbs) else {
+        return nil
+      }
+      return generateSnapshot(verb: verb, date: day)
     }
   }
 
-  @MainActor static func generateSnapshot(date: Date = Date()) -> WidgetSnapshot? {
-    let eligible = eligibleVerbs()
-    guard !eligible.isEmpty else {
-      return nil
-    }
+  /// The verb of the snapshot the widget shows on `date`, if the snapshots cover that day.
+  @MainActor static func displayedVerb(in snapshots: [WidgetSnapshot], on date: Date) -> Verb? {
+    let target = dateString(for: date)
+    return snapshots
+      .first { $0.dateString == target }
+      .flatMap { Verb.verbs[$0.verbKey ?? $0.infinitif] }
+  }
 
-    let verb = verbOfTheDay(from: eligible, date: date)
+  // The verb pass gave every verb an example, so this excludes nothing today. It stays because
+  // the large widget shows the example.
+  @MainActor static func isEligible(_ verb: Verb) -> Bool {
+    ExampleData.example(for: verb) != nil
+  }
+
+  @MainActor static func generateSnapshot(date: Date = Date(), myVerbs: [Verb] = []) -> WidgetSnapshot? {
+    let verb = VerbDraw.verbOfTheDay(on: date, myVerbs: myVerbs.filter(isEligible), frequentVerbs: VerbDraw.frequentVerbs.filter(isEligible))
+    return verb.map { generateSnapshot(verb: $0, date: date) }
+  }
+
+  @MainActor static func generateSnapshot(verb: Verb, date: Date) -> WidgetSnapshot {
     let paradigm = présentParadigm(for: verb)
     let participePassé = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: .participePassé, extraLetters: verb.extraLetters) ?? ""
 
@@ -89,20 +111,6 @@ enum WidgetSnapshotWriter {
       quizQuestion: quiz,
       dateString: dateString(for: date)
     )
-  }
-
-  @MainActor static func eligibleVerbs() -> [Verb] {
-    // The verb pass gave every verb an example, so an example alone would put abcéder on
-    // a lock screen most days. The pool is the most common verbs that have one.
-    Verb.verbs.values
-      .filter { $0.frequency <= verbOfTheDayRankLimit && ExampleData.example(for: $0) != nil }
-      .sorted { ($0.frequency, $0.dictionaryKey) < ($1.frequency, $1.dictionaryKey) }
-  }
-
-  @MainActor static func verbOfTheDay(from eligible: [Verb], date: Date) -> Verb {
-    let daysSinceReference = WidgetDateHelper.calendar.dateComponents([.day], from: referenceDate, to: date).day ?? 0
-    let index = abs(daysSinceReference * 127) % eligible.count
-    return eligible[index]
   }
 
   @MainActor private static func présentParadigm(for verb: Verb) -> [WidgetConjugation] {
@@ -131,8 +139,7 @@ enum WidgetSnapshotWriter {
   }
 
   @MainActor private static func generateQuizQuestion(verb: Verb, date: Date) -> WidgetQuizQuestion {
-    let daysSinceReference = WidgetDateHelper.calendar.dateComponents([.day], from: referenceDate, to: date).day ?? 0
-    let seed = abs(daysSinceReference)
+    let seed = abs(VerbDraw.dayNumber(of: date))
     let personNumber = PersonNumber.allCases[seed % PersonNumber.allCases.count]
     // Decorrelate the tense from the person: both collections have 6 elements, so
     // indexing both by `seed % 6` would weld each person to a single tense forever.
