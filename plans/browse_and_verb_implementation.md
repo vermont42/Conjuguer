@@ -38,7 +38,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 12 | Done | 2026-11-22 | 9af3c40 | D5 | 14 |
 | 13 | Done | 2026-11-22 | d4b8752 | D4 | 15 |
 | 14 | Done | 2026-11-22 | 894ddba | D6 | 16 |
-| Closing | Awaiting Josh | 2026-11-22 | | Audit, porting notes | Closing |
+| Closing | Done | 2026-11-22 | 1f4d553 | Audit, porting notes | Closing |
 
 Konjugieren's Phase 4 (separable verbs) and Phase 8 (a Futur II article) have no Conjuguer
 counterpart; see [Not Carried Over](#not-carried-over).
@@ -1593,7 +1593,7 @@ Phase 13's 536, all in the new `VerbCollectionTests`. New files: `Models/VerbCol
 
 ## Closing
 
-**Status:** Awaiting Josh (2026-11-22).
+**Status:** Done (2026-11-22).
 
 - Run the full suite and `check_docs.py`.
 - Audit the privacy staging: diff `Analytics.swift` against the commit before Phase 1, read every
