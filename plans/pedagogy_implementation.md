@@ -28,7 +28,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 2 | Done | 2026-11-22 | b4aa188 | T1.2 | 2 |
 | 3 | Done | 2026-11-23 | bfe5c7f | T4.1, T4.4, T4.5 | 3 |
 | 4 | Done | 2026-11-23 | 954eda0 | T1.6 | 4 |
-| 5 | Not started | | | T2.3, T2.6, T6.7, M1 | 5 |
+| 5 | Awaiting Josh | 2026-11-23 | | T2.3, T2.6, T6.7, M1 | 5 |
 | 6 | Not started | | | T2.1, T2.2, T2.5 | 6 |
 | 7 | Not started | | | T2.7, T3.1, T6.5, M2, M3 | 7 |
 | 8 | Not started | | | Decision 4 | 8 |
@@ -709,7 +709,7 @@ eut/eût.
 ## Phase 5: Levels
 
 **Suggestions:** T2.3, T2.6, T6.7, M1. **Ports:** Konjugieren Phase 5 (`QuizLevel.swift`,
-`QuizDraw.swift`). **Depends on:** Phase 1. **Status:** Not started.
+`QuizDraw.swift`). **Depends on:** Phase 1. **Status:** Awaiting Josh.
 
 Replace Regular and Ridiculous with four levels ordered by use, each adding to the one before.
 Konjugieren's ladder came from the report's study of German curricula. French needs its own: read
@@ -754,6 +754,101 @@ persons, the thinned tenses appear at their weight under a fixed seed, settings 
 level is sent, and tests pin each level's pool.
 
 **How it differed:**
+
+- **Josh chose the ladder on 2026-11-23**, the sourced one over the draft above. It moves the
+  conditionnel présent to Elementary, the participe présent to Intermediate, and the futur
+  antérieur and subjonctif passé to Advanced:
+
+  | Level | Roughly | Tenses added |
+  |---|---|---|
+  | Beginner (Débutant) | A1 | Indicatif présent; impératif |
+  | Elementary (Élémentaire) | A2 | Passé composé and the participe passé; imparfait; futur simple; conditionnel présent |
+  | Intermediate (Intermédiaire) | B1 | Subjonctif présent; plus-que-parfait; conditionnel passé; participe présent |
+  | Advanced (Avancé) | B2 and above | Futur antérieur; subjonctif passé; passé simple; subjonctif imparfait and plus-que-parfait; passé antérieur; passé surcomposé; impératif passé |
+
+  The sources: the Université de Genève Maison des langues' "Éléments de grammaire A1–A2" and
+  "B1–B2" (2025), whose A1–A2 volume covers the présent, impératif, passé composé, imparfait,
+  futur simple, conditionnel présent, subjonctif présent, and gérondif, and whose B1–B2 volume adds
+  the plus-que-parfait, futur antérieur, conditionnel passé, subjonctif passé, participe présent,
+  and passé simple ("réservé à la langue écrite"); the Clermont-Ferrand CASNAV's B1 sheet after the
+  Eaquals/CIEP 2015 inventory (the subjonctif at B1, the passé simple at B1 for recognition); and
+  Antwerp's B2 inventory (the futur antérieur at B2). The Beacco référentiels themselves and the
+  Lille CASNAV grid could not be fetched.
+- **No restricted cells.** Josh chose, the same day, to ask every tense in every person, over
+  asking the passé simple and passé antérieur only in il and ils and the subjonctif imparfait and
+  plus-que-parfait only in il. So the "restricted cells" of **Done when** do not exist. Only the
+  defect groups restrict, as before.
+- **The weights are Konjugieren's**, as Josh chose: the présent and passé composé 3; the impératif,
+  imparfait, futur simple, conditionnel présent, subjonctif présent, passé simple, and subjonctif
+  imparfait 2; the other compound tenses and both participles 1. They total 30 at Advanced.
+- **The names are Débutant, Élémentaire, Intermédiaire, and Avancé**, and Beginner, Elementary,
+  Intermediate, and Advanced in English (Josh, 2026-11-23). The French adjectives agree with
+  "niveau", which is how the results write them ("Niveau : Avancé").
+- **How the draw works.** `QuizLevel.slots` lists each level's tenses as `QuizTenseSlot`s, which
+  moved from `QuizScope.swift` to `QuizLevel.swift` and grew from eight tenses to all nineteen the
+  quiz can ask, each with `cells`, `weight`, and `verbPools`. Each question draws a slot by weight,
+  then, in the default quiz, one of the slot's curated pools (`QuizVerbPool`, a name for each
+  `QuizVerbs` list), then that pool's next verb from its deck. The pools keep Regular's structure:
+  an être verb or an irregular participle in every compound tense, irregular futur stems in the
+  futur and conditionnel, and for the passé simple and subjonctif imparfait the irregular
+  participles, whose verbs are mostly the ones with irregular passé simple stems. Phase 6 replaces
+  or intersects these with the bands. Ridiculous's thirty fixed pairs are gone, and with them the
+  test that falloir was asked only in il.
+- **Quotas became weights.** Regular asked fixed counts (7, 6, 4, 3, 3, 3, 3, 1); every quiz now
+  draws each question by weight, so a quiz's mix varies. A scoped quiz draws only from the level's
+  tenses that some verb of the scope has, so a My Verbs quiz of only falloir asks thirty questions,
+  not twenty-seven.
+- **`shouldShuffle` is gone** from `Quiz.init`. With weighted draws an unshuffled quiz was no longer
+  deterministic, so tests seed the quiz instead (`Quiz(gameCenter:seed:)`).
+- **Test Me follows the level.** A verb with nothing to ask at the learner's level shows no Test Me
+  button: choir, which has only its participe passé, at Beginner. A collection's Quiz button follows
+  the same rule (`Verb.canBeQuizzed(at:)`). At Beginner, Test Me's three questions are two tenses
+  and a third présent or impératif cell.
+- **The setting** moved to the key `quizLevel`. Conjuguer's `Settings.load` writes the default when a
+  key is missing, so `quizDifficulty` is never removed: the migration runs as `quizLevel`'s default,
+  only when `quizLevel` is absent. Tried on real installs: the iPhone's stored Regular became
+  Elementary, and the iPad's, set to Ridiculous for the test, became Advanced. A fresh install
+  starts at Beginner (a test; no simulator was reset). Seeding a setting needed `defaults` by the
+  plist's full path inside the simulator, since a `plutil` edit was overwritten by the preferences
+  daemon's cache; the `verify-in-simulator` skill now says so.
+- **Tiles, as Konjugieren built them.** A 16-point label shrank "Intermédiaire" below its
+  neighbors on the iPhone, so the four labels use a new 13-point `levelTileFont`. The selected tile
+  has a blue gauge and border and a red label, the colors of the App Icon tiles below it. The Quiz
+  tab's briefing shows "Level: Advanced" with the level's gauge, for My Verbs too, since a scoped
+  quiz now uses the level.
+- **The tip.** `ChangeDifficultyTip` became `ChangeLevelTip`, "Choose Your Level" / "Choisissez
+  votre niveau". Settings attaches its popover tips only while on screen, ported from Konjugieren
+  before seeing the bug here; on the iPad, a quiz finished after visiting Settings showed no tip
+  over its results.
+- **Scoring.** Every level scores 10 a right answer and a right second attempt 5. The multiplier
+  and the time bonus are gone. Until Phase 8 every level posts to the one leaderboard, and the best
+  score is one number across levels. Nothing ships before Phase 8.
+- **Text that named the difficulties.** The onboarding quiz page now names the levels; it still
+  says "timed quizzes", which Phase 7's hidden clock should revisit, as should `Tips.tryQuizMessage`
+  ("a timed quiz"). The README lists the levels. `docs/description.txt`, the App Store text, never
+  named the difficulties, so it is unchanged.
+- **The Live Activity** shows the level's name through `QuizActivityAttributes.level`. Not looked at.
+- **Analytics.** `difficulty` became `level` (`beginner`, `elementary`, `intermediate`,
+  `advanced`) on `quizQuit` and `quizCompletion`, and `quizStart` gained it (M1). Staged in
+  `docs/privacy_policy_pending.md` as a changed bullet in both languages.
+- **A new fixture**, `-CONJUGUER_QUIZ_FIXTURE levels`: eight questions, one in each tense only
+  Advanced asks, with answers in `docs/feature_architecture.md` § Quiz.
+- **Pouvoir has no impératif.** A Beginner quiz asked pouvoir's impératif, which `verbs.xml` gave no
+  defect group, and Regular had asked it of the same pool. Josh agreed on 2026-11-23 that it is
+  not used, so a new defect group 28 ("Impératif is not used.", `du="hA"`, which also strikes the
+  impératif passé) now marks pouvoir. Its page shows both impératifs struck through, and the quiz
+  passes over pouvoir for the impératif.
+- **Verified** on the iPhone 17 in French (light): the tiles, the tip, "Niveau : Avancé" on the
+  briefing, fourteen questions of an Advanced quiz spanning the présent to the passé surcomposé, the
+  `levels` fixture's eight corrections, and its results. In English: the tiles at Beginner, a
+  Beginner quiz of twelve présents and impératifs, and a right Advanced answer scoring 10. On the
+  iPad Pro 11 in English and dark: the tiles at Advanced after the migration, and the fixture's
+  results with no tip over them. Not tried: VoiceOver by ear (each tile reads its name, with the
+  selected trait), the software keyboard, and the Live Activity.
+- **Tests:** 593 to 602, counting `DefectivityAuditTests`' new pouvoir test. `QuizLevelTests` is new (nine tests: each level's tenses, the weights,
+  every cell in one slot, the default quiz's draw by level, pool, and weight, and the level on the
+  signals). `SettingsTests` pins the migration; `QuizTests` and `QuizScopeTests` moved from
+  difficulties and quotas to levels, and five tests of Ridiculous and the quotas went.
 
 ## Phase 6: Which Verbs Are Asked
 

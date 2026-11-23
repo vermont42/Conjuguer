@@ -44,7 +44,7 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `quiz_correction` | The held correction's two answers, one element | Present while a wrong answer holds. Its label is the spoken correction ("Incorrect. Your Answer: …"). Launch with `-CONJUGUER_QUIZ_FIXTURE corrections` for eight kinds. |
 | `quiz_correction_verb`, `quiz_correction_model` | The correction's links | Push the verb's page (scrolled to the asked cell) or the model's page over the quiz. The verb link is absent in Test Me's sheet. Back is the pushed page's top-left button (≈ `37,83` on the iPhone 17 in the tab, ≈ `37,110` in a sheet; ≈ `31,54` on the iPad Pro 11). |
 | `quiz_continue_button` | The correction's Continue | Return in the field does the same. |
-| `picker_settings_quizDifficulty` | Quiz-difficulty segmented `Picker` in `SettingsView` | 2 segments (Regular, Ridiculous). |
+| `quiz_level_<level>` | A level tile in `SettingsView`'s Quiz Level card | `quiz_level_beginner`, `_elementary`, `_intermediate`, `_advanced`; `tap_id.sh` chooses it, and the chosen tile has the selected trait. The four sit in `grid_settings_quizLevel`. |
 | `picker_settings_pronounGender` | Pronoun-gender segmented `Picker` in `SettingsView` | 3 segments (Feminine, Masculine, Both). |
 | `verb_example` | Example card in `VerbView` (below etymology) | Wraps the FR sentence, EN translation, source attribution, and nested *Chanson de Roland* example. |
 | `verb_browse_count` | "N VERBS" header above the verb collection | Hidden when the search yields nothing. |
@@ -140,8 +140,8 @@ coordinates are from 2026-11-22; re-measure with `describe_ui` if one misses.
   aren't individually addressable by id. The parent identifier locates the control's
   frame; `verify_segment.sh` then verifies a segment's label + selected state, but
   **requires `--segments N` explicitly** (it can't infer the count through the
-  children-empty bug): `--segments 2` for `picker_settings_quizDifficulty`,
-  `--segments 3` for `picker_settings_pronounGender`. To *drive* a selection, compute
+  children-empty bug): `--segments 3` for `picker_settings_pronounGender`,
+  `--segments 2` for `picker_settings_reviewCardSuppression`. To *drive* a selection, compute
   the segment center from the id'd frame (`x + width*(i+0.5)/N`, `y + height/2`) and
   `tap_xy.sh`.
 
@@ -153,9 +153,16 @@ coordinates are from 2026-11-22; re-measure with `describe_ui` if one misses.
 dark`, through relaunches, while the iPad took dark at once; check dark on the iPad if the iPhone
 will not switch.
 
-## Completing a quiz (regular difficulty)
+To seed a stored setting, such as an old `quizDifficulty` to watch it migrate, terminate the app and
+write through `defaults` inside the simulator, naming the plist by its full path without
+`.plist`: `xcrun simctl spawn <udid> defaults write "$(xcrun simctl get_app_container <udid>
+software.racecondition.Conjuguer data)/Library/Preferences/software.racecondition.Conjuguer"
+quizDifficulty Ridiculous` (and `defaults delete … quizLevel`). On 2026-11-23 a `plutil` edit of
+the same file was overwritten at launch by the preferences daemon's cached copy.
 
-A regular-difficulty quiz is 30 questions. A right answer advances at once; a wrong one holds its
+## Completing a quiz
+
+A default quiz is 30 questions, at the level chosen in Settings. A right answer advances at once; a wrong one holds its
 correction until Continue, which a second Return also triggers, so a sweep of junk answers sends
 Return twice per question. A slip (one letter off, or only accents wrong, in an answer of four
 letters or more) first asks for one more try and leaves the answer in the field, so text typed next

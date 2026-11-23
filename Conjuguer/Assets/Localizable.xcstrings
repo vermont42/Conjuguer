@@ -3766,13 +3766,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Take timed quizzes, earn points, and compete on the Game Center leaderboard. Choose regular or ridiculous difficulty. The latter includes tenses rarely seen outside formal or literary writing. The reward for ridiculous difficulty is great: double the score."
+            "value" : "Take timed quizzes, earn points, and compete on the Game Center leaderboard. Choose a level from Beginner to Advanced. Each level adds tenses to the one before, and Advanced includes those rarely seen outside formal or literary writing."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Faites des quiz chronométrés, gagnez des points et affrontez les autres sur le classement Game Center. Choisissez la difficulté ordinaire ou ridicule. Cette dernière inclut des temps que l’on rencontre rarement en dehors de l’écrit formel ou littéraire. La récompense de la difficulté ridicule est grande : le score est doublé."
+            "value" : "Faites des quiz chronométrés, gagnez des points et affrontez les autres sur le classement Game Center. Choisissez un niveau, de Débutant à Avancé. Chaque niveau ajoute des temps au précédent, et Avancé inclut ceux que l’on rencontre rarement en dehors de l’écrit formel ou littéraire."
           }
         }
       }
@@ -3998,70 +3998,87 @@
         }
       }
     },
-    "QuizDifficulty.regular" : {
+    "QuizLevel.advanced" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Regular"
+            "value" : "Advanced"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ordinaire"
+            "value" : "Avancé"
           }
         }
       }
     },
-    "QuizDifficulty.regularDifficulty" : {
+    "QuizLevel.beginner" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Regular Difficulty"
+            "value" : "Beginner"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Difficulté ordinaire"
+            "value" : "Débutant"
           }
         }
       }
     },
-    "QuizDifficulty.ridiculous" : {
+    "QuizLevel.elementary" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ridiculous"
+            "value" : "Elementary"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Difficulté ridicule"
+            "value" : "Élémentaire"
           }
         }
       }
     },
-    "QuizDifficulty.ridiculousDifficulty" : {
+    "QuizLevel.intermediate" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ridiculous Difficulty"
+            "value" : "Intermediate"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Difficulté ridicule"
+            "value" : "Intermédiaire"
+          }
+        }
+      }
+    },
+    "QuizLevel.withLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Level: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveau : %@"
           }
         }
       }
@@ -4681,36 +4698,36 @@
         }
       }
     },
-    "Settings.quizDifficulty" : {
+    "Settings.quizLevel" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quiz Difficulty"
+            "value" : "Quiz Level"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Difficulté du quiz"
+            "value" : "Niveau du quiz"
           }
         }
       }
     },
-    "Settings.quizDifficultyDescription" : {
+    "Settings.quizLevelDescription" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This setting determines the difficulty of quizzes. You probably want Regular because Ridiculous includes tenses and verbs that are not in widespread use."
+            "value" : "This setting determines which tenses quizzes ask about. Beginner starts with the présent and the impératif, and each level after it adds the tenses that French courses teach next. Advanced asks about every tense, including the literary ones."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ce paramètre détermine la difficulté des quiz. Vous voulez probablement Ordinaire parce que Ridicule comprend des temps et des verbes qui ne sont pas d’usage très répandu."
+            "value" : "Ce paramètre détermine les temps sur lesquels portent les quiz. Débutant commence par le présent et l’impératif, et chaque niveau suivant ajoute les temps que les cours de français enseignent ensuite. Avancé porte sur tous les temps, y compris les temps littéraires."
           }
         }
       }
@@ -4749,36 +4766,36 @@
         }
       }
     },
-    "Tips.changeDifficultyMessage" : {
+    "Tips.changeLevelMessage" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Try Ridiculous difficulty for a greater challenge with more tenses to conjugate."
+            "value" : "Each level adds tenses to the one before. Move up a level when the quiz feels easy."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Essayez la difficulté Ridicule pour un plus grand défi avec davantage de temps à conjuguer."
+            "value" : "Chaque niveau ajoute des temps au précédent. Passez au niveau supérieur quand le quiz vous semble facile."
           }
         }
       }
     },
-    "Tips.changeDifficultyTitle" : {
+    "Tips.changeLevelTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Change Quiz Difficulty"
+            "value" : "Choose Your Level"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Changez la difficulté du quiz"
+            "value" : "Choisissez votre niveau"
           }
         }
       }

@@ -17,7 +17,7 @@ class Quiz {
   private(set) var quizState = QuizState.notStarted
   private(set) var elapsedTime = 0
   private(set) var score = 0
-  private(set) var difficulty = QuizDifficulty.regular
+  private(set) var level = QuizLevel.beginner
   private(set) var currentQuestionIndex = 0
   private(set) var questions: [QuizQuestion] = []
   private(set) var scope = QuizScope.allVerbs
@@ -36,7 +36,6 @@ class Quiz {
 
   private var timer: Timer?
   private let gameCenter: GameCenter
-  private var shouldShuffle = true
   private var generator: QuizRandomNumberGenerator
   private var liveActivity: LiveActivity?
   // The instant the timer started, handed to the Live Activity so its Lock Screen /
@@ -60,21 +59,11 @@ class Quiz {
 
   private var personNumbers = CyclingDeck(PersonNumber.allCases)
   private var impératifPersonNumbers = CyclingDeck(PersonNumber.impératifPersonNumbers)
-  private var regularErs = CyclingDeck(QuizVerbs.regularErs)
-  private var regularIrs = CyclingDeck(QuizVerbs.regularIrs)
-  private var regularRes = CyclingDeck(QuizVerbs.regularRes)
-  private var bigThrees = CyclingDeck(QuizVerbs.bigThrees)
-  private var indicatifPrésentStemChangers = CyclingDeck(QuizVerbs.indicatifPrésentStemChangers)
-  private var êtreAuxiliaries = CyclingDeck(QuizVerbs.êtreAuxiliaries)
-  private var irregularParticipePassés = CyclingDeck(QuizVerbs.irregularParticipePassés)
-  private var topThirties = CyclingDeck(QuizVerbs.topThirties)
-  private var regularRadicauxFuturs = CyclingDeck(QuizVerbs.regularRadicauxFuturs)
-  private var irregularRadicauxFuturs = CyclingDeck(QuizVerbs.irregularRadicauxFuturs)
+  private var verbDecks = Dictionary(uniqueKeysWithValues: QuizVerbPool.allCases.map { ($0, CyclingDeck($0.infinitifs)) })
 
   /// A `seed` makes every quiz this instance builds repeatable, for tests.
-  init(gameCenter: GameCenter, shouldShuffle: Bool = true, seed: UInt64? = nil) {
+  init(gameCenter: GameCenter, seed: UInt64? = nil) {
     self.gameCenter = gameCenter
-    self.shouldShuffle = shouldShuffle
     generator = QuizRandomNumberGenerator(seeded: seed.map(SeededRandomNumberGenerator.init(seed:)))
   }
 
@@ -94,7 +83,7 @@ class Quiz {
     }
     Current.soundPlayer.play(Sound.randomGun)
     var startParameters = [
-      ParameterKey.difficulty.rawValue: difficulty.rawValue,
+      ParameterKey.level.rawValue: level.rawValue,
       ParameterKey.source.rawValue: scope.source.rawValue
     ]
     if let collection = scope.collection {
@@ -126,7 +115,7 @@ class Quiz {
   func quit() {
     Current.soundPlayer.play(Sound.randomSadTrombone)
     Current.analytics.signal(name: .quizQuit, parameters: [
-      ParameterKey.difficulty.rawValue: difficulty.rawValue,
+      ParameterKey.level.rawValue: level.rawValue,
       ParameterKey.lastQuestionIndex.rawValue: "\(currentQuestionIndex)",
       ParameterKey.elapsedTime.rawValue: "\(elapsedTime)",
       ParameterKey.source.rawValue: scope.source.rawValue
@@ -149,7 +138,7 @@ class Quiz {
     endLiveActivity()
     liveActivityStartDate = Date.now
     liveActivity = Current.liveActivities.start(
-      attributes: QuizActivityAttributes(difficulty: difficulty.localizedDifficulty, totalQuestions: questions.count),
+      attributes: QuizActivityAttributes(level: level.localizedName, totalQuestions: questions.count),
       initialState: QuizActivityAttributes.ContentState(
         currentQuestion: 1,
         score: 0,
@@ -198,41 +187,23 @@ class Quiz {
   private func resetDecks() {
     personNumbers.reset()
     impératifPersonNumbers.reset()
-    regularErs.reset()
-    regularIrs.reset()
-    regularRes.reset()
-    bigThrees.reset()
-    indicatifPrésentStemChangers.reset()
-    êtreAuxiliaries.reset()
-    irregularParticipePassés.reset()
-    topThirties.reset()
-    regularRadicauxFuturs.reset()
-    irregularRadicauxFuturs.reset()
+    for pool in QuizVerbPool.allCases {
+      verbDecks[pool]?.reset()
+    }
   }
 
   private func shuffleDecks() {
-    guard shouldShuffle else {
-      return
-    }
     personNumbers.shuffle(using: &generator)
     impératifPersonNumbers.shuffle(using: &generator)
-    regularErs.shuffle(using: &generator)
-    regularIrs.shuffle(using: &generator)
-    regularRes.shuffle(using: &generator)
-    bigThrees.shuffle(using: &generator)
-    indicatifPrésentStemChangers.shuffle(using: &generator)
-    êtreAuxiliaries.shuffle(using: &generator)
-    irregularParticipePassés.shuffle(using: &generator)
-    topThirties.shuffle(using: &generator)
-    regularRadicauxFuturs.shuffle(using: &generator)
-    irregularRadicauxFuturs.shuffle(using: &generator)
+    for pool in QuizVerbPool.allCases {
+      verbDecks[pool]?.shuffle(using: &generator)
+    }
   }
 
   private func resetPublishedProperties() {
     elapsedTime = 0
     score = 0
-    // A scoped quiz asks Regular's mix whatever the setting, since Ridiculous is a fixed list.
-    difficulty = scope.isRanked ? Current.settings.quizDifficulty : .regular
+    level = Current.settings.quizLevel
     currentQuestionIndex = 0
     questions = []
     quizResults = []
@@ -242,7 +213,7 @@ class Quiz {
 
   private func buildQuiz() {
     if scope.verbs != nil {
-      questions = scope.questions(using: &generator)
+      questions = scope.questions(level: level, using: &generator)
       return
     }
 
@@ -267,97 +238,27 @@ class Quiz {
     case "slips":
       questions = generateSlipsFixture()
       return
+    case "levels":
+      questions = generateLevelsFixture()
+      return
     default:
       break
     }
     #endif
 
-    switch difficulty {
-    case .regular:
-      [regularErVerb, regularErVerb, regularIrVerb, regularIrVerb, regularReVerb, bigThreeVerb, indicatifPrésentStemChangerVerb].forEach {
-        questions.append(question(verb: $0, tense: Tense.indicatifPrésent))
+    let slots = level.slots
+    for _ in 0 ..< scope.questionCount {
+      guard let slot = QuizTenseSlot.drawWeighted(from: slots, using: &generator) else {
+        break
       }
-
-      [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb, êtreAuxiliaryVerb, irregularParticipePasséVerb].forEach {
-        questions.append(question(verb: $0, tense: Tense.passéComposé))
-      }
-
-      [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb].forEach {
-        questions.append(question(verb: $0, tense: Tense.subjonctifPrésent))
-      }
-
-      for _ in 0 ..< 3 {
-        questions.append(question(from: { topThirtyVerb }, tense: Tense.imparfait))
-      }
-
-      [regularRadicalFuturVerb, regularRadicalFuturVerb].forEach {
-        questions.append(question(verb: $0, tense: Tense.futurSimple))
-      }
-      questions.append(question(from: { irregularRadicalFuturVerb }, tense: Tense.futurSimple))
-
-      [regularRadicalFuturVerb, regularRadicalFuturVerb].forEach {
-        questions.append(question(verb: $0, tense: Tense.conditionnelPrésent))
-      }
-      questions.append(question(from: { irregularRadicalFuturVerb }, tense: Tense.conditionnelPrésent))
-
-      for _ in 0 ..< 3 {
-        questions.append(question(from: { topThirtyVerb }, tense: Tense.impératif))
-      }
-
-      questions.append(question(from: { topThirtyVerb }, tense: { _ in .participePrésent }))
-
-    case .ridiculous:
-      let ridiculousQuestions: [(String, Tense)] = [
-        ("réaliser", .indicatifPrésent(.firstSingular)),
-        ("devenir", .participePassé),
-        ("voir", .passéSimple(personNumber)),
-        ("choir", .participePassé),
-        ("clore", .indicatifPrésent(personNumber)),
-        ("partir", .futurSimple(personNumber)),
-        ("naître", .participePassé),
-        ("avoir", .subjonctifImparfait(personNumber)),
-        ("avoir", .subjonctifPrésent(personNumber)),
-        ("aller", .subjonctifPrésent(personNumber)),
-        ("être", .passéSimple(personNumber)),
-        ("être", .subjonctifImparfait(personNumber)),
-        ("parler", .indicatifPrésent(personNumber)),
-        ("prendre", .passéSimple(personNumber)),
-        ("bruire", .subjonctifPrésent(personNumber)),
-        ("falloir", .subjonctifImparfait(personNumber)),
-        ("faillir", .subjonctifPrésent(personNumber)),
-        ("couvrir", .passéSimple(personNumber)),
-        ("maudire", .indicatifPrésent(personNumber)),
-        ("valoir", .subjonctifImparfait(personNumber)),
-        ("résoudre", .indicatifPrésent(personNumber)),
-        ("promouvoir", .passéSimple(personNumber)),
-        ("pouvoir", .subjonctifPrésent(personNumber)),
-        ("plaindre", .passéSimple(personNumber)),
-        ("recevoir", .participePassé),
-        ("lire", .passéSimple(personNumber)),
-        ("mettre", .indicatifPrésent(personNumber)),
-        ("moudre", .indicatifPrésent(personNumber)),
-        ("ouvrir", .imparfait(personNumber)),
-        ("mouvoir", .passéSimple(personNumber))
-      ]
-      ridiculousQuestions.forEach { infinitif, tense in
-        let verb = Verb.verbForInfinitif(infinitif)
-        if let personNumber = tense.personNumber, let constructor = tense.constructor {
-          questions.append(question(verb: verb, tense: constructor, drawn: personNumber))
-        } else {
-          questions.append(QuizQuestion(verb: verb, tense: tense))
-        }
-      }
-    }
-
-    if shouldShuffle {
-      questions.shuffle(using: &generator)
+      questions.append(question(of: slot))
     }
   }
 
   /// The question of `tense` for `verb` in the next person from the deck, or in the next person
   /// after it that the verb's defect group has: falloir is asked only in the third-person
   /// singular. Only a verb without the whole tense, such as faillir in the impératif, gets an
-  /// impossible question, so a pool that holds one draws through `question(from:tense:)`.
+  /// impossible question, so `question(of:)` draws past it.
   private func question(verb: Verb, tense: (PersonNumber) -> Tense) -> QuizQuestion {
     let drawn = tense(.secondSingular).isImpératif ? impératifPersonNumber : personNumber
     return question(verb: verb, tense: tense, drawn: drawn)
@@ -371,18 +272,21 @@ class Quiz {
     return QuizQuestion(verb: verb, tense: tense(personNumber))
   }
 
-  private func question(from nextVerb: () -> Verb, tense: (PersonNumber) -> Tense) -> QuizQuestion {
+  private func question(of slot: QuizTenseSlot) -> QuizQuestion {
+    let pool = slot.verbPools.randomElement(using: &generator) ?? .topThirty
     let maximumDraws = 50
-    var verb = nextVerb()
-    for _ in 1 ..< maximumDraws where !hasTense(verb, tense) {
-      verb = nextVerb()
+    var verb = nextVerb(from: pool)
+    for _ in 1 ..< maximumDraws where !slot.cells.contains(where: verb.hasCell) {
+      verb = nextVerb(from: pool)
     }
-    return question(verb: verb, tense: tense)
+    guard let constructor = slot.constructor else {
+      return QuizQuestion(verb: verb, tense: slot.cells.first ?? .participePassé)
+    }
+    return question(verb: verb, tense: constructor)
   }
 
-  private func hasTense(_ verb: Verb, _ tense: (PersonNumber) -> Tense) -> Bool {
-    let persons = tense(.secondSingular).isImpératif ? PersonNumber.impératifPersonNumbers : PersonNumber.allCases
-    return persons.contains { verb.hasCell(tense($0)) }
+  private func nextVerb(from pool: QuizVerbPool) -> Verb {
+    Verb.verbForInfinitif(verbDecks[pool]?.next() ?? "être")
   }
 
   #if DEBUG
@@ -516,6 +420,24 @@ class Quiz {
     }
   }
 
+  // One question in each tense that only Advanced asks, unshuffled. The answers are listed in
+  // docs/feature_architecture.md § Quiz.
+  private func generateLevelsFixture() -> [QuizQuestion] {
+    let plan: [(infinitif: String, tense: Tense)] = [
+      ("finir", .futurAntérieur(.firstPlural)),
+      ("venir", .subjonctifPassé(.secondSingular)),
+      ("prendre", .passéSimple(.thirdPlural)),
+      ("être", .subjonctifImparfait(.thirdSingular)),
+      ("partir", .subjonctifPlusQueParfait(.firstSingular)),
+      ("voir", .passéAntérieur(.thirdSingular)),
+      ("parler", .passéSurcomposé(.firstSingular)),
+      ("rentrer", .impératifPassé(.secondPlural))
+    ]
+    return plan.map { spec in
+      QuizQuestion(verb: Verb.verbForInfinitif(spec.infinitif), tense: spec.tense)
+    }
+  }
+
   // Write the correct answers for the fixture to Documents/screenshot_fixture_answers.json
   // so the driver can read and type them. The exported answer is the first of any
   // slash-separated alternates, which the quiz scores as a total match.
@@ -555,46 +477,6 @@ class Quiz {
     impératifPersonNumbers.next()
   }
 
-  private var regularErVerb: Verb {
-    Verb.verbForInfinitif(regularErs.next())
-  }
-
-  private var regularIrVerb: Verb {
-    Verb.verbForInfinitif(regularIrs.next())
-  }
-
-  private var regularReVerb: Verb {
-    Verb.verbForInfinitif(regularRes.next())
-  }
-
-  private var bigThreeVerb: Verb {
-    Verb.verbForInfinitif(bigThrees.next())
-  }
-
-  private var indicatifPrésentStemChangerVerb: Verb {
-    Verb.verbForInfinitif(indicatifPrésentStemChangers.next())
-  }
-
-  private var êtreAuxiliaryVerb: Verb {
-    Verb.verbForInfinitif(êtreAuxiliaries.next())
-  }
-
-  private var irregularParticipePasséVerb: Verb {
-    Verb.verbForInfinitif(irregularParticipePassés.next())
-  }
-
-  private var topThirtyVerb: Verb {
-    Verb.verbForInfinitif(topThirties.next())
-  }
-
-  private var regularRadicalFuturVerb: Verb {
-    Verb.verbForInfinitif(regularRadicauxFuturs.next())
-  }
-
-  private var irregularRadicalFuturVerb: Verb {
-    Verb.verbForInfinitif(irregularRadicauxFuturs.next())
-  }
-
   func process(proposedAnswer: String) {
     guard quizState == .inProgress, correction == nil, currentQuestionIndex < questions.count else {
       return
@@ -624,7 +506,7 @@ class Quiz {
     if conjugationResult == .noMatch || currentQuestionIndex != questions.count - 1 {
       Current.soundPlayer.play(conjugationResult.sound)
     }
-    score += conjugationResult.score * difficulty.scoreModifier
+    score += conjugationResult.score
     quizResults.append(
       QuizResult(
         infinitif: verb.infinitifWithPossibleExtraLetters,
@@ -671,21 +553,17 @@ class Quiz {
   }
 
   private func completeQuiz() {
-    let minimumScoreThatGetsBonus = 150
-    if score >= minimumScoreThatGetsBonus {
-      score += Quiz.bonusForElapsedTime(elapsedTime)
-    }
     if scope.isRanked {
       if score > Current.settings.bestScore {
         Current.settings.bestScore = score
       }
-      ChangeDifficultyTip.quizCompleted.sendDonation()
+      ChangeLevelTip.quizCompleted.sendDonation()
       gameCenter.reportScore(score)
     }
     shouldShowResults = true
     Current.soundPlayer.play(Sound.randomApplause)
     Current.analytics.signal(name: .quizCompletion, parameters: [
-      ParameterKey.difficulty.rawValue: difficulty.rawValue,
+      ParameterKey.level.rawValue: level.rawValue,
       ParameterKey.score.rawValue: "\(score)",
       ParameterKey.elapsedTime.rawValue: "\(elapsedTime)",
       ParameterKey.source.rawValue: scope.source.rawValue
@@ -736,31 +614,6 @@ class Quiz {
       }
     }
   }
-
-  private static func bonusForElapsedTime(_ elapsedTime: Int) -> Int {
-    switch elapsedTime {
-    case 0 ... 120:
-      return 450
-    case 121 ... 180:
-      return 400
-    case 181 ... 240:
-      return 350
-    case 241 ... 300:
-      return 300
-    case 301 ... 360:
-      return 250
-    case 361 ... 420:
-      return 200
-    case 421 ... 480:
-      return 150
-    case 481 ... 540:
-      return 100
-    case 541 ... 600:
-      return 50
-    default:
-      return 0
-    }
-  }
 }
 
 private extension Tense {
@@ -770,47 +623,6 @@ private extension Tense {
       return true
     default:
       return false
-    }
-  }
-
-  var constructor: ((PersonNumber) -> Tense)? {
-    switch self {
-    case .indicatifPrésent:
-      return Tense.indicatifPrésent
-    case .passéSimple:
-      return Tense.passéSimple
-    case .imparfait:
-      return Tense.imparfait
-    case .futurSimple:
-      return Tense.futurSimple
-    case .conditionnelPrésent:
-      return Tense.conditionnelPrésent
-    case .subjonctifPrésent:
-      return Tense.subjonctifPrésent
-    case .subjonctifImparfait:
-      return Tense.subjonctifImparfait
-    case .impératif:
-      return Tense.impératif
-    case .passéComposé:
-      return Tense.passéComposé
-    case .plusQueParfait:
-      return Tense.plusQueParfait
-    case .passéAntérieur:
-      return Tense.passéAntérieur
-    case .passéSurcomposé:
-      return Tense.passéSurcomposé
-    case .futurAntérieur:
-      return Tense.futurAntérieur
-    case .conditionnelPassé:
-      return Tense.conditionnelPassé
-    case .subjonctifPassé:
-      return Tense.subjonctifPassé
-    case .subjonctifPlusQueParfait:
-      return Tense.subjonctifPlusQueParfait
-    case .impératifPassé:
-      return Tense.impératifPassé
-    case .participePassé, .participePrésent, .radicalFutur:
-      return nil
     }
   }
 }

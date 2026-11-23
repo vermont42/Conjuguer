@@ -14,7 +14,11 @@ struct SettingsView: View {
   @State private var rateReviewDescription = ""
   @State private var showingOnboarding = false
   @State private var showingGame = false
-  private let changeDifficultyTip = ChangeDifficultyTip()
+  // The tab stays alive once visited, and a popover tip that becomes eligible while it is hidden,
+  // as ChangeLevelTip does when a quiz finishes, would float over another tab pointing at nothing
+  // (Konjugieren, iPadOS 26.3).
+  @State private var isOnScreen = false
+  private let changeLevelTip = ChangeLevelTip()
   private let playGameTip = PlayGameTip()
 
   var body: some View {
@@ -31,23 +35,15 @@ struct SettingsView: View {
 
       ScrollView(.vertical) {
         VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
-          settingCard(title: L.Settings.quizDifficulty) {
-            Picker("", selection: $settings.quizDifficulty) {
-              ForEach(QuizDifficulty.allCases, id: \.self) { quizDifficulty in
-                Text(quizDifficulty.localizedDifficulty).tag(quizDifficulty)
-              }
-            }
-            .pickerStyle(.segmented)
-            .accessibilityIdentifier("picker_settings_quizDifficulty")
-            .accessibilityLabel(Text(L.Settings.quizDifficulty))
-            .accessibilityValue(settings.quizDifficulty.localizedDifficulty)
+          settingCard(title: L.Settings.quizLevel) {
+            quizLevelPicker
 
-            Text(L.Settings.quizDifficultyDescription)
+            Text(L.Settings.quizLevelDescription)
               .settingsLabel()
           }
-          .popoverTip(changeDifficultyTip)
-          .onChange(of: settings.quizDifficulty) {
-            changeDifficultyTip.invalidate(reason: .actionPerformed)
+          .popoverTip(isOnScreen ? changeLevelTip : nil)
+          .onChange(of: settings.quizLevel) {
+            changeLevelTip.invalidate(reason: .actionPerformed)
           }
 
           settingCard(title: L.Settings.pronounGender) {
@@ -154,7 +150,7 @@ struct SettingsView: View {
               showingGame = true
             }
             .funButton()
-            .popoverTip(playGameTip)
+            .popoverTip(isOnScreen ? playGameTip : nil)
 
             Text(L.Game.playGameDescription)
               .settingsLabel()
@@ -169,6 +165,12 @@ struct SettingsView: View {
     }
     .padding(.top, Layout.tripleDefaultSpacing)
     .recordsAppearance(as: "\(SettingsView.self)")
+    .onAppear {
+      isOnScreen = true
+    }
+    .onDisappear {
+      isOnScreen = false
+    }
     .task {
       if let description = await RatingsFetcher.fetchRatingsDescription() {
         rateReviewDescription = description
@@ -181,6 +183,52 @@ struct SettingsView: View {
       GameView()
     }
     .screenBackground()
+  }
+
+  // A segmented control truncates Intermediate and Intermédiaire on an iPhone, so the levels are
+  // tiles, each with a gauge whose needle rises with the level.
+  private var quizLevelPicker: some View {
+    let settings = world.settings
+    return LazyVGrid(
+      columns: Array(repeating: GridItem(.flexible(), spacing: Layout.defaultSpacing), count: QuizLevel.allCases.count),
+      spacing: Layout.defaultSpacing
+    ) {
+      ForEach(QuizLevel.allCases, id: \.self) { quizLevel in
+        let isSelected = settings.quizLevel == quizLevel
+        Button {
+          settings.quizLevel = quizLevel
+        } label: {
+          VStack(spacing: Layout.defaultSpacing / 2) {
+            Image(systemName: quizLevel.systemImage)
+              .font(.system(size: 30))
+              .foregroundStyle(isSelected ? Color.customBlue : Color.customGray)
+              .frame(width: 60, height: 60)
+              .background(
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                  .fill(Color.customBackground)
+              )
+              .overlay(
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                  .strokeBorder(isSelected ? Color.customBlue : Color.clear, lineWidth: 3)
+              )
+              .accessibilityHidden(true)
+
+            Text(quizLevel.localizedName)
+              .font(levelTileFont)
+              .foregroundStyle(isSelected ? Color.customRed : Color.customForeground)
+              .lineLimit(1)
+              .minimumScaleFactor(0.7)
+          }
+          .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(quizLevel.localizedName)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+        .accessibilityIdentifier("quiz_level_\(quizLevel.rawValue)")
+      }
+    }
+    .accessibilityIdentifier("grid_settings_quizLevel")
+    .sensoryFeedback(.selection, trigger: settings.quizLevel)
   }
 
   private func settingCard<Content: View>(

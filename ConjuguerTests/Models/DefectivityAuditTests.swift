@@ -70,6 +70,18 @@ struct DefectivityAuditTests {
     #expect(isDefective("béer", .futurSimple(.thirdSingular)), "futur must be defective.")
   }
 
+  // pouvoir (dg=28): no impératif, simple or passé; every other tense kept.
+  @Test func testPouvoirHasNoImpératif() {
+    #expect(DefectGroup.defectGroups["28"] != nil, "du=hA group must parse.")
+    for personNumber in PersonNumber.impératifPersonNumbers {
+      #expect(isDefective("pouvoir", .impératif(personNumber)), "\(personNumber): impératif must be defective.")
+      #expect(isDefective("pouvoir", .impératifPassé(personNumber)), "\(personNumber): impératif passé must be defective.")
+    }
+    #expect(!isDefective("pouvoir", .indicatifPrésent(.firstSingular)), "je peux must survive.")
+    #expect(!isDefective("pouvoir", .subjonctifPrésent(.thirdSingular)), "qu'il puisse must survive.")
+    #expect(!isDefective("pouvoir", .participePassé), "pu must survive.")
+  }
+
   // douer (no group): the TLFi finds it rare outside the infinitive and
   // the compound tenses "sauf chez les écrivains récents", and the app's example is Proust's
   // "Elle les douait".

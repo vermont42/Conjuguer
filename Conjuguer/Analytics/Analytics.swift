@@ -10,7 +10,7 @@ import Foundation
 
 enum ParameterKey: String {
   case viewName
-  case difficulty
+  case level
   case lastQuestionIndex
   case elapsedTime
   case score

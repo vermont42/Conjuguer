@@ -66,7 +66,7 @@ private struct QuizLockScreenView: View {
       VStack(alignment: .leading, spacing: 8) {
         Text(WidgetL.LiveActivity.title)
           .font(.headline)
-        Text(verbatim: context.attributes.difficulty)
+        Text(verbatim: context.attributes.level)
           .font(.subheadline)
           .foregroundStyle(.secondary)
       }

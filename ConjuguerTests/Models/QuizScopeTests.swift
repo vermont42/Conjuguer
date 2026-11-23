@@ -18,21 +18,13 @@ struct QuizScopeTests {
     try #require(Verb.verbs.values.first { $0.infinitif == infinitif && $0.extraLetters == extraLetters })
   }
 
-  private func questions(_ scope: QuizScope, seed: UInt64) -> [QuizQuestion] {
+  private func questions(_ scope: QuizScope, seed: UInt64, level: QuizLevel = .elementary) -> [QuizQuestion] {
     var generator = SeededRandomNumberGenerator(seed: seed)
-    return scope.questions(using: &generator)
+    return scope.questions(level: level, using: &generator)
   }
 
-  private func slotCounts(_ questions: [QuizQuestion]) -> [QuizTenseSlot: Int] {
-    questions.reduce(into: [:]) { counts, question in
-      if let slot = QuizTenseSlot(tense: question.tense) {
-        counts[slot, default: 0] += 1
-      }
-    }
-  }
-
-  private func regularQuotas() -> [QuizTenseSlot: Int] {
-    Dictionary(uniqueKeysWithValues: QuizTenseSlot.allCases.map { ($0, $0.regularQuota) })
+  private func slots(_ questions: [QuizQuestion]) -> Set<QuizTenseSlot> {
+    Set(questions.compactMap { QuizTenseSlot(tense: $0.tense) })
   }
 
   private func correctAnswer(for question: QuizQuestion) -> String {
@@ -44,49 +36,42 @@ struct QuizScopeTests {
     return conjugated.components(separatedBy: Tense.alternateConjugationSeparator).first ?? conjugated
   }
 
-  @Test func theRegularQuotasMakeAFullQuiz() {
-    #expect(QuizTenseSlot.allCases.reduce(0) { $0 + $1.regularQuota } == Quiz.questionCount)
-  }
-
-  @Test func theDefaultRegularQuizAsksTheSlotQuotas() {
-    Current.settings.quizDifficulty = .regular
-    let quiz = Quiz(gameCenter: GameCenterStub())
+  @Test func theDefaultQuizIsRankedAndAsksTheLearnersLevel() {
+    Current.settings.quizLevel = .intermediate
+    let quiz = Quiz(gameCenter: GameCenterStub(), seed: 3)
     quiz.start()
     #expect(quiz.scope.isRanked)
     #expect(quiz.scope.source == .tab)
-    #expect(quiz.difficulty == .regular)
-    #expect(slotCounts(quiz.questions) == regularQuotas())
+    #expect(quiz.level == .intermediate)
+    #expect(quiz.questions.count == Quiz.questionCount)
+    #expect(slots(quiz.questions).isSubset(of: QuizLevel.intermediate.slots))
     quiz.quit()
+    Current.settings.quizLevel = .elementary
   }
 
-  @Test func theDefaultRidiculousQuizIsUnchanged() {
-    Current.settings.quizDifficulty = .ridiculous
-    let quiz = Quiz(gameCenter: GameCenterStub(), shouldShuffle: false)
-    quiz.start()
-    #expect(quiz.difficulty == .ridiculous)
-    #expect(quiz.questions.count == 30)
-    #expect(quiz.questions.first?.verb.infinitif == "réaliser")
-    #expect(quiz.questions.last?.verb.infinitif == "mouvoir")
-    quiz.quit()
-    Current.settings.quizDifficulty = .regular
-  }
-
-  @Test func aMyVerbsQuizDrawsOnlyFromMyVerbsInRegularsMix() throws {
+  @Test(arguments: QuizLevel.allCases)
+  func aMyVerbsQuizDrawsOnlyFromMyVerbsAtTheLevel(level: QuizLevel) throws {
     let verbs = try [verb("être"), verb("parler"), verb("finir")]
     let ids = Set(verbs.map(\.id))
     for seed in seeds {
-      let asked = questions(.myVerbs(verbs), seed: seed)
+      let asked = questions(.myVerbs(verbs), seed: seed, level: level)
       #expect(asked.count == Quiz.questionCount)
       #expect(asked.allSatisfy { ids.contains($0.verb.id) })
-      #expect(slotCounts(asked) == regularQuotas())
+      #expect(slots(asked).isSubset(of: level.slots))
     }
   }
 
+  // At Beginner each verb has six présents and three impératifs, so every verb has a fresh cell
+  // of either tense for three rounds, and those rounds take the verbs strictly in turn.
   @Test func aMyVerbsQuizTakesItsVerbsInTurn() throws {
     let verbs = try [verb("être"), verb("parler"), verb("finir")]
-    let asked = questions(.myVerbs(verbs), seed: 7)
-    for verb in verbs {
-      #expect(asked.filter { $0.verb.id == verb.id }.count == 10)
+    for seed in seeds {
+      let asked = questions(.myVerbs(verbs), seed: seed, level: .beginner)
+      let firstRound = asked.prefix(verbs.count).map(\.verb.id)
+      #expect(Set(firstRound).count == verbs.count)
+      for index in verbs.count ..< verbs.count * 3 {
+        #expect(asked[index].verb.id == firstRound[index % verbs.count])
+      }
     }
   }
 
@@ -96,20 +81,20 @@ struct QuizScopeTests {
       let asked = questions(.myVerbs([être]), seed: seed)
       #expect(asked.count == Quiz.questionCount)
       for slot in QuizTenseSlot.allCases {
-        let distinct = Set(asked.map(\.tense).filter { slot.cells.contains($0) })
-        #expect(distinct.count == min(slot.regularQuota, slot.cells.count), "\(slot)")
+        let tenses = asked.map(\.tense).filter { slot.cells.contains($0) }
+        #expect(Set(tenses).count == min(tenses.count, slot.cells.count), "\(slot)")
       }
     }
   }
 
-  // falloir has only the third-person singular, so it has no impératif: those three questions
-  // fall to parler, or are dropped when falloir is the only verb.
+  // falloir has only the third-person singular, so it has no impératif: those questions fall to
+  // parler, or are never drawn when falloir is the only verb.
   @Test func aDefectiveVerbIsAskedOnlyTheCellsItHas() throws {
     let falloir = try verb("falloir")
     let parler = try verb("parler")
     for seed in seeds {
       let alone = questions(.myVerbs([falloir]), seed: seed)
-      #expect(alone.count == Quiz.questionCount - QuizTenseSlot.impératif.regularQuota)
+      #expect(alone.count == Quiz.questionCount)
       #expect(alone.allSatisfy { falloir.hasCell($0.tense) })
 
       let mixed = questions(.myVerbs([falloir, parler]), seed: seed)
@@ -126,23 +111,33 @@ struct QuizScopeTests {
       #expect(asked.count == QuizScope.verbPageQuestionCount)
       #expect(asked.allSatisfy { $0.verb.id == venir.id })
       #expect(asked.allSatisfy { $0.tense != .participePassé && $0.tense != .participePrésent })
-      #expect(Set(asked.compactMap { QuizTenseSlot(tense: $0.tense) }).count == 3)
+      #expect(slots(asked).count == 3)
     }
   }
 
-  // Regular weights the présent 7 and the imparfait 3, so the présent turns up in more of the
-  // three-question quizzes.
-  @Test func testMeFavorsTheTensesRegularAsksMost() throws {
+  @Test func testMeAtBeginnerAsksOnlyThePrésentAndTheImpératif() throws {
+    let venir = try verb("venir")
+    for seed in seeds {
+      let asked = questions(.verbPage(venir), seed: seed, level: .beginner)
+      #expect(asked.count == QuizScope.verbPageQuestionCount)
+      #expect(Set(asked.map(\.tense)).count == 3)
+      #expect(slots(asked) == [.indicatifPrésent, .impératif])
+    }
+  }
+
+  // Intermediate weights the présent 3 and the plus-que-parfait 1, so the présent turns up in
+  // more of the three-question quizzes.
+  @Test func testMeFavorsTheHeavierTenses() throws {
     let venir = try verb("venir")
     var présents = 0
-    var imparfaits = 0
+    var plusQueParfaits = 0
     for seed in UInt64(1) ... 2_000 {
-      let slots = Set(questions(.verbPage(venir), seed: seed).compactMap { QuizTenseSlot(tense: $0.tense) })
-      présents += slots.contains(.indicatifPrésent) ? 1 : 0
-      imparfaits += slots.contains(.imparfait) ? 1 : 0
+      let asked = slots(questions(.verbPage(venir), seed: seed, level: .intermediate))
+      présents += asked.contains(.indicatifPrésent) ? 1 : 0
+      plusQueParfaits += asked.contains(.plusQueParfait) ? 1 : 0
     }
-    #expect(présents > imparfaits * 3 / 2)
-    #expect(imparfaits > 200)
+    #expect(présents > plusQueParfaits * 2)
+    #expect(plusQueParfaits > 200)
   }
 
   @Test func testMeOnAVerbWithFewCellsAsksWhatItHas() throws {
@@ -167,9 +162,13 @@ struct QuizScopeTests {
 
   @Test func aVerbWithOnlyItsInfinitifCannotBeQuizzed() throws {
     let accroire = try verb("accroire")
-    #expect(!accroire.canBeQuizzed)
-    #expect(try verb("parler").canBeQuizzed)
-    #expect(try verb("choir").canBeQuizzed)
+    for level in QuizLevel.allCases {
+      #expect(!accroire.canBeQuizzed(at: level))
+      #expect(try verb("parler").canBeQuizzed(at: level))
+    }
+    let choir = try verb("choir")
+    #expect(!choir.canBeQuizzed(at: .beginner))
+    #expect(choir.canBeQuizzed(at: .elementary))
 
     let quiz = Quiz(gameCenter: GameCenterStub())
     quiz.start(scope: .verbPage(accroire))
@@ -177,22 +176,21 @@ struct QuizScopeTests {
     #expect(quiz.questions.isEmpty)
   }
 
-  // A scoped quiz asks Regular's mix, so it scores as Regular even with Ridiculous chosen, and it
-  // leaves the best score alone, as it posts nothing to the leaderboard.
-  @Test func aScopedQuizIsUnrankedAndScoresAsRegular() throws {
-    Current.settings.quizDifficulty = .ridiculous
+  // A scoped quiz leaves the best score alone, as it posts nothing to the leaderboard.
+  @Test func aScopedQuizIsUnrankedAndAsksTheLearnersLevel() throws {
+    Current.settings.quizLevel = .advanced
     Current.settings.bestScore = 0
     let quiz = Quiz(gameCenter: GameCenterStub())
     quiz.start(scope: .myVerbs([try verb("parler"), try verb("finir")]))
     #expect(!quiz.scope.isRanked)
-    #expect(quiz.difficulty == .regular)
+    #expect(quiz.level == .advanced)
     for question in quiz.questions {
       quiz.process(proposedAnswer: correctAnswer(for: question))
     }
     #expect(quiz.shouldShowResults)
-    #expect(quiz.score == 750)
+    #expect(quiz.score == Quiz.questionCount * 10)
     #expect(Current.settings.bestScore == 0)
-    Current.settings.quizDifficulty = .regular
+    Current.settings.quizLevel = .elementary
   }
 
   // sortir (obtain) conjugates like finir and sortir (exit) like partir, so each entry must be
@@ -227,7 +225,10 @@ struct QuizScopeTests {
     defer {
       Current.analytics = original
     }
-    Current.settings.quizDifficulty = .regular
+    Current.settings.quizLevel = .intermediate
+    defer {
+      Current.settings.quizLevel = .elementary
+    }
 
     let quiz = Quiz(gameCenter: GameCenterStub())
     quiz.start(scope: scope)
@@ -241,6 +242,6 @@ struct QuizScopeTests {
     let quizSignals: [AnalyticsName] = [.quizStart, .quizQuit, .quizStart, .quizCompletion]
     #expect(spy.signalNames == quizSignals)
     #expect(spy.signalParameters.allSatisfy { $0[ParameterKey.source.rawValue] == source.rawValue })
-    #expect(spy.signalParameters.allSatisfy { $0[ParameterKey.difficulty.rawValue] == QuizDifficulty.regular.rawValue })
+    #expect(spy.signalParameters.allSatisfy { $0[ParameterKey.level.rawValue] == QuizLevel.intermediate.rawValue })
   }
 }

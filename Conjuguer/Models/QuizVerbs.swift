@@ -28,3 +28,41 @@ enum QuizVerbs {
 
   static let irregularRadicauxFuturs = ["acquérir", "aller", "appeler", "avoir", "dépecer", "employer", "être", "faire", "jeter", "pouvoir", "devoir", "falloir", "envoyer", "mouvoir", "peser", "savoir", "venir", "voir", "vouloir"]
 }
+
+enum QuizVerbPool: CaseIterable {
+  case regularEr
+  case regularIr
+  case regularRe
+  case bigThree
+  case indicatifPrésentStemChanger
+  case êtreAuxiliary
+  case irregularParticipePassé
+  case topThirty
+  case regularRadicalFutur
+  case irregularRadicalFutur
+
+  var infinitifs: [String] {
+    switch self {
+    case .regularEr:
+      return QuizVerbs.regularErs
+    case .regularIr:
+      return QuizVerbs.regularIrs
+    case .regularRe:
+      return QuizVerbs.regularRes
+    case .bigThree:
+      return QuizVerbs.bigThrees
+    case .indicatifPrésentStemChanger:
+      return QuizVerbs.indicatifPrésentStemChangers
+    case .êtreAuxiliary:
+      return QuizVerbs.êtreAuxiliaries
+    case .irregularParticipePassé:
+      return QuizVerbs.irregularParticipePassés
+    case .topThirty:
+      return QuizVerbs.topThirties
+    case .regularRadicalFutur:
+      return QuizVerbs.regularRadicauxFuturs
+    case .irregularRadicalFutur:
+      return QuizVerbs.irregularRadicauxFuturs
+    }
+  }
+}

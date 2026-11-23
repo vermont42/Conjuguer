@@ -44,15 +44,15 @@ struct ExploreModelsTip: Tip {
   }
 }
 
-struct ChangeDifficultyTip: Tip {
+struct ChangeLevelTip: Tip {
   static let quizCompleted = Event(id: "quizCompleted")
 
   var title: Text {
-    Text(L.Tips.changeDifficultyTitle)
+    Text(L.Tips.changeLevelTitle)
   }
 
   var message: Text? {
-    Text(L.Tips.changeDifficultyMessage)
+    Text(L.Tips.changeLevelMessage)
   }
 
   var image: Image? {

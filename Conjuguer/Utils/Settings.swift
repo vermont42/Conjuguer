@@ -31,13 +31,14 @@ class Settings {
   static let modelSortKey = "modelSort"
   static let modelSortDefault: ModelSort = .irregularity
 
-  var quizDifficulty: QuizDifficulty = quizDifficultyDefault {
+  var quizLevel: QuizLevel = quizLevelDefault {
     didSet {
-      persist(quizDifficulty, oldValue: oldValue, key: Settings.quizDifficultyKey)
+      persist(quizLevel, oldValue: oldValue, key: Settings.quizLevelKey)
     }
   }
+  static let quizLevelKey = "quizLevel"
+  static let quizLevelDefault: QuizLevel = .beginner
   static let quizDifficultyKey = "quizDifficulty"
-  static let quizDifficultyDefault: QuizDifficulty = .regular
 
   var bestScore: Int = bestScoreDefault {
     didSet {
@@ -114,7 +115,7 @@ class Settings {
     self.getterSetter = getterSetter
     verbSort = load(key: Settings.verbSortKey, default: Settings.verbSortDefault)
     modelSort = load(key: Settings.modelSortKey, default: Settings.modelSortDefault)
-    quizDifficulty = load(key: Settings.quizDifficultyKey, default: Settings.quizDifficultyDefault)
+    quizLevel = load(key: Settings.quizLevelKey, default: Settings.migratedQuizLevel(getterSetter: getterSetter))
     bestScore = load(key: Settings.bestScoreKey, default: Settings.bestScoreDefault)
     gameHighScore = load(key: Settings.gameHighScoreKey, default: Settings.gameHighScoreDefault)
     pronounGender = load(key: Settings.pronounGenderKey, default: Settings.pronounGenderDefault)
@@ -123,6 +124,20 @@ class Settings {
     reviewCardSuppression = load(key: Settings.reviewCardSuppressionKey, default: Settings.reviewCardSuppressionDefault)
     appIcon = load(key: Settings.appIconKey, default: Settings.appIconDefault)
     hasSeenOnboarding = load(key: Settings.hasSeenOnboardingKey, default: Settings.hasSeenOnboardingDefault)
+  }
+
+  // `load` stores the default when a key is missing, so a stored Regular seldom records a choice.
+  // It becomes Elementary, the level nearest Regular's mix, and Ridiculous becomes Advanced. A new
+  // install, with neither key, starts at Beginner.
+  private static func migratedQuizLevel(getterSetter: GetterSetter) -> QuizLevel {
+    switch getterSetter.get(key: quizDifficultyKey) {
+    case "Ridiculous":
+      return .advanced
+    case .some:
+      return .elementary
+    case .none:
+      return quizLevelDefault
+    }
   }
 
   private func setAppIcon(_ icon: AppIcon) {
@@ -173,7 +188,7 @@ extension SettingValue where Self: RawRepresentable, RawValue == String {
 
 extension VerbSort: SettingValue {}
 extension ModelSort: SettingValue {}
-extension QuizDifficulty: SettingValue {}
+extension QuizLevel: SettingValue {}
 extension PronounGender: SettingValue {}
 extension AppIcon: SettingValue {}
 extension ReviewCardSuppression: SettingValue {}

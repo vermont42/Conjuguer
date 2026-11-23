@@ -383,7 +383,7 @@ struct QuizView: View {
         .multilineTextAlignment(.center)
 
       VStack(spacing: Layout.defaultSpacing) {
-        Label(briefedDifficulty.localizedDifficultyWithLabel, systemImage: "speedometer")
+        Label(world.settings.quizLevel.localizedNameWithLabel, systemImage: world.settings.quizLevel.systemImage)
         Label(L.QuizView.questionCount, systemImage: "list.number")
         if tabScope == .allVerbs, world.settings.bestScore > 0 {
           Label(L.QuizView.bestScore(world.settings.bestScore), systemImage: "trophy")
@@ -443,11 +443,6 @@ struct QuizView: View {
 
   private var myVerbs: [Verb] {
     world.learnerVerbs.myVerbs
-  }
-
-  /// A My Verbs quiz asks Regular's mix whatever the setting (`Quiz.resetPublishedProperties`).
-  private var briefedDifficulty: QuizDifficulty {
-    tabScope == .allVerbs ? world.settings.quizDifficulty : .regular
   }
 
   private var myVerbsNote: String {

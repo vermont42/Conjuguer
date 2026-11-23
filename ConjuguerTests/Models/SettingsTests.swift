@@ -40,6 +40,33 @@ struct SettingsTests {
     #expect(reloaded.verbSort == .alphabetical, "verbSort must survive a relaunch.")
   }
 
+  @Test(arguments: [
+    (nil, QuizLevel.beginner),
+    ("Regular", .elementary),
+    ("Ridiculous", .advanced)
+  ] as [(String?, QuizLevel)])
+  func theStoredDifficultyBecomesALevel(difficulty: String?, level: QuizLevel) {
+    let store = GetterSetterFake()
+    if let difficulty {
+      store.set(key: Settings.quizDifficultyKey, value: difficulty)
+    }
+
+    let settings = SettingsTests.makeSettings(getterSetter: store)
+
+    #expect(settings.quizLevel == level)
+    #expect(store.get(key: Settings.quizLevelKey) == level.rawValue)
+  }
+
+  @Test func aStoredLevelOutranksTheOldDifficulty() {
+    let store = GetterSetterFake()
+    store.set(key: Settings.quizDifficultyKey, value: "Ridiculous")
+    store.set(key: Settings.quizLevelKey, value: QuizLevel.beginner.rawValue)
+
+    let settings = SettingsTests.makeSettings(getterSetter: store)
+
+    #expect(settings.quizLevel == .beginner)
+  }
+
   @Test func testReviewCardSuppressionDefaultsToOff() {
     let store = GetterSetterFake()
 
@@ -56,7 +83,7 @@ struct SettingsTests {
     let settings = SettingsTests.makeSettings(getterSetter: store)
     settings.verbSort = .alphabetical
     settings.modelSort = .identifier
-    settings.quizDifficulty = .ridiculous
+    settings.quizLevel = .intermediate
     settings.bestScore = 42
     settings.pronounGender = .masculine
     settings.promptActionCount = 7
@@ -66,7 +93,7 @@ struct SettingsTests {
     let reloaded = SettingsTests.makeSettings(getterSetter: store)
     #expect(reloaded.verbSort == .alphabetical)
     #expect(reloaded.modelSort == .identifier)
-    #expect(reloaded.quizDifficulty == .ridiculous)
+    #expect(reloaded.quizLevel == .intermediate)
     #expect(reloaded.bestScore == 42)
     #expect(reloaded.pronounGender == .masculine)
     #expect(reloaded.promptActionCount == 7)

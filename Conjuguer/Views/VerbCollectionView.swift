@@ -146,7 +146,7 @@ struct VerbCollectionBar: View {
 
         Spacer()
 
-        if !isBeneathQuiz, verbs.contains(where: \.canBeQuizzed) {
+        if !isBeneathQuiz, verbs.contains(where: { $0.canBeQuizzed(at: world.settings.quizLevel) }) {
           Button {
             isQuizzing = true
           } label: {

@@ -777,12 +777,12 @@ enum L {
   }
 
   enum Settings {
-    static var quizDifficulty: String {
-      String(localized: "Settings.quizDifficulty")
+    static var quizLevel: String {
+      String(localized: "Settings.quizLevel")
     }
 
-    static var quizDifficultyDescription: String {
-      String(localized: "Settings.quizDifficultyDescription")
+    static var quizLevelDescription: String {
+      String(localized: "Settings.quizLevelDescription")
     }
 
     static var pronounGender: String {
@@ -915,12 +915,12 @@ enum L {
       String(localized: "Tips.exploreModelsMessage")
     }
 
-    nonisolated static var changeDifficultyTitle: String {
-      String(localized: "Tips.changeDifficultyTitle")
+    nonisolated static var changeLevelTitle: String {
+      String(localized: "Tips.changeLevelTitle")
     }
 
-    nonisolated static var changeDifficultyMessage: String {
-      String(localized: "Tips.changeDifficultyMessage")
+    nonisolated static var changeLevelMessage: String {
+      String(localized: "Tips.changeLevelMessage")
     }
 
     nonisolated static var playGameTitle: String {
@@ -1016,21 +1016,25 @@ enum L {
     }
   }
 
-  enum QuizDifficulty {
-    static var regular: String {
-      String(localized: "QuizDifficulty.regular")
+  enum QuizLevel {
+    static var beginner: String {
+      String(localized: "QuizLevel.beginner")
     }
 
-    static var ridiculous: String {
-      String(localized: "QuizDifficulty.ridiculous")
+    static var elementary: String {
+      String(localized: "QuizLevel.elementary")
     }
 
-    static var regularDifficulty: String {
-      String(localized: "QuizDifficulty.regularDifficulty")
+    static var intermediate: String {
+      String(localized: "QuizLevel.intermediate")
     }
 
-    static var ridiculousDifficulty: String {
-      String(localized: "QuizDifficulty.ridiculousDifficulty")
+    static var advanced: String {
+      String(localized: "QuizLevel.advanced")
+    }
+
+    static func withLabel(_ name: String) -> String {
+      String(localized: "QuizLevel.withLabel", defaultValue: "Level: \(name)")
     }
   }
 

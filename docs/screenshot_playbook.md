@@ -648,7 +648,7 @@ Compact reference. The driver's inline comments hold the full WHY for each — c
 | 6 | InfoBrowseView | light | `nav_info_browse` | `tap_tab info` → settle on `info_row_dedication` → `scroll_until_top info_row_participe_passe` (Tenses header to top). |
 | 7 | InfoView | dark | `nav_info_view` | `tap_tab info` → `scroll_until_top info_row_indicatif_present` → tap it. |
 | 8 | QuizResultsView | light | `nav_quiz_results` | `tap_tab quiz` → `quiz_start_button` → 30× (paste + Return + sleep 0.3) → `dismiss_review_prompt` if needed → `verify_screen_loaded results_score`. |
-| 9 | SettingsView | dark | `nav_settings` | `tap_tab settings`; Quiz Difficulty picker is first, so no scroll. |
+| 9 | SettingsView | dark | `nav_settings` | `tap_tab settings`; the Quiz Level tiles are first, so no scroll. |
 
 Tab-bar coordinates live in `tab_coords_for()`. iPhone uses the bottom pill tab bar (y=899.3); iPad uses a top segmented tab bar (y=54). Tab order is `verbs models quiz info settings`.
 

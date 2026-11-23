@@ -5594,3 +5594,56 @@ row shows the first attempt above the second.
 On the iPad simulator the build skill's tap-by-identifier and type-by-identifier scripts failed to
 parse the accessibility tree, so the first attempt sent empty answers to a quiz that had not
 started. Tapping by frame and pasting from the pasteboard worked, and the skill's notes now say so.
+
+## Levels (2026-11-23)
+
+Pedagogy Phase 5 replaced Regular and Ridiculous with four levels: Beginner, Elementary,
+Intermediate, and Advanced, or Débutant, Élémentaire, Intermédiaire, and Avancé. Ridiculous had
+been thirty fixed pairs of verb and tense, from réaliser to mouvoir, the same on every run, worth
+double points. Its name told a learner that part of the app was a joke, and the fixed list meant
+that a learner who chose it learned the same thirty cells over and over.
+
+Konjugieren's ladder came from a study of German curricula, so French needed its own. The plan
+drafted one from memory, and the session tested it against what French courses publish. The
+Université de Genève's Maison des langues was the most useful source: its two grammar outlines, A1
+to A2 and B1 to B2, list the tenses each stage teaches. They put the conditionnel présent earlier
+than the draft did, at A2 beside the futur simple, which suits Conjuguer, whose quiz already draws
+the two from the same futur stems. They put the futur antérieur and subjonctif passé later, at B2.
+A Clermont-Ferrand sheet built on the Eaquals inventory placed the subjonctif at B1 and the passé
+simple at B1 for recognition only. Josh took the sourced ladder over the draft. The Beacco
+référentiels, the obvious first source, could not be fetched, nor could a Lille grid that reproduces
+the Eaquals inventory, so the ladder rests on the documents that could be read.
+
+Two of the plan's ideas did not survive Josh's review. The plan suggested asking the literary
+tenses only in the persons that writing uses: the passé simple in il and ils, the subjonctif
+imparfait in il. Josh chose every person. And the weights came over from Konjugieren unchanged:
+three for the présent and passé composé, one for a compound tense whose only new part is its
+auxiliary, two for the rest.
+
+The quiz used to fill fixed quotas (seven présents, six passés composés, and so on). Now every
+question draws a tense by weight, then one of the tense's curated verb pools, then that pool's next
+verb, so the hand-built pools Conjuguer has had since 2021 still decide which verbs come up: an
+être verb or an irregular participle in a compound tense, an irregular stem in the futur. Phase 6
+will cut them down to frequency bands. Scoped quizzes, which always asked Regular's mix because
+Ridiculous was a fixed list, now use the learner's level too, so Test Me on a verb page asks only a
+Beginner's two tenses to a beginner, and choir, which has nothing but its participe passé, offers
+no Test Me at all until Elementary.
+
+Every level now scores ten a right answer. The doubling went, and so did the time bonus of up to
+450 points, which had made speed count for more than accuracy.
+
+A stored Regular becomes Elementary and Ridiculous becomes Advanced. Trying that on a real install
+taught something about simulators: editing the app's preferences plist with plutil while the app
+was stopped did nothing, because the preferences daemon wrote its cached copy back at launch.
+Writing through `defaults` inside the simulator, with the plist's full path, worked.
+
+The level tiles came from Konjugieren, built there because a four-segment picker truncated
+"Intermediate". Here the French was the tighter fit: "Intermédiaire" shrank to fit its column and
+looked smaller than its neighbors, so all four labels got a smaller font.
+
+Trying a Beginner quiz turned up "pouvoir, impératif, nous". The app had always conjugated pouvoir's
+impératif, since its entry carried no defect group, and Regular had asked it too, from the top-thirty
+pool. No one uses it: there is no "peux !" for "be able!". Josh agreed, and a new defect group,
+"Impératif is not used.", now strikes both impératifs on pouvoir's page, so the quiz no longer asks
+them. The existing group that strikes the impératif also says the verb is rare outside the passé
+simple and participe passé, which is faillir's case, not pouvoir's, so pouvoir got a group of its own.

@@ -381,3 +381,26 @@ Le premier point devient :
 ```
 - La façon dont vous avez atteint la page d'un verbe : par exemple depuis une recherche, la liste des verbes, la page d'un modèle, la page d'un autre verbe, la correction d'une réponse au quiz, un article d'information, un widget, le Centre de contrôle, un raccourci ou Spotlight
 ```
+
+## Quiz levels (pedagogy plan, Phase 5, 2026-11-23)
+
+Four levels replace the regular and ridiculous difficulties. The quiz signals send `level` in place
+of `difficulty`, and `quizStart`, which sent no difficulty, now sends it too. The value is one of
+four from a fixed list. This section changes the existing bullet on the difficulty, the third of
+section 2's list, rather than adding one.
+
+### English
+
+The bullet on the quiz difficulty now reads:
+
+```
+- Quiz level (beginner, elementary, intermediate, or advanced) when you start, quit, or complete a quiz
+```
+
+### French
+
+Le point sur le niveau de difficulté du quiz devient :
+
+```
+- Le niveau du quiz (débutant, élémentaire, intermédiaire ou avancé) lorsque vous commencez, abandonnez ou terminez un quiz
+```

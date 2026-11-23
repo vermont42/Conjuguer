@@ -12,12 +12,11 @@ import Testing
 @MainActor
 @Suite(.serialized)
 struct QuizTests {
-  // A quiz built with `shouldShuffle: false` is deterministic: the CyclingDecks stay
-  // in declaration order and the question list is not shuffled, so we can read the
-  // built questions, conjugate each ourselves, and feed the correct answer back.
-  private func makeDeterministicQuiz(difficulty: QuizDifficulty) -> Quiz {
-    Current.settings.quizDifficulty = difficulty
-    let quiz = Quiz(gameCenter: GameCenterStub(), shouldShuffle: false)
+  // A seeded quiz is deterministic, so a test can read the built questions, conjugate each
+  // itself, and feed the correct answer back.
+  private func makeDeterministicQuiz(level: QuizLevel = .elementary) -> Quiz {
+    Current.settings.quizLevel = level
+    let quiz = Quiz(gameCenter: GameCenterStub(), seed: 1)
     quiz.start()
     return quiz
   }
@@ -40,8 +39,8 @@ struct QuizTests {
     }
   }
 
-  @Test func testRegularQuizLifecycle() {
-    Current.settings.quizDifficulty = .regular
+  @Test func testQuizLifecycle() {
+    Current.settings.quizLevel = .elementary
     let quiz = Current.quiz
 
     quiz.start()
@@ -61,7 +60,7 @@ struct QuizTests {
   }
 
   @Test func testAllIncorrectAnswersScoreZero() {
-    Current.settings.quizDifficulty = .regular
+    Current.settings.quizLevel = .elementary
     let quiz = Current.quiz
 
     quiz.start()
@@ -74,27 +73,17 @@ struct QuizTests {
     #expect(quiz.score == 0)
   }
 
-  // 30 total matches at 10 points each = 300 (regular multiplier ×1). Since the timer
-  // does not advance during a synchronous test, elapsedTime stays 0, so completeQuiz()
-  // adds the 0-120s bonus of 450: 300 + 450 = 750. This exercises the score sum, the
-  // ×1 regular multiplier, and the score >= 150 elapsed-time bonus path together.
-  @Test func testAllCorrectRegularQuizScoresWithBonus() {
-    let quiz = makeDeterministicQuiz(difficulty: .regular)
+  // The timer does not advance during a synchronous test, so this is the quickest quiz possible,
+  // and speed adds nothing.
+  @Test(arguments: QuizLevel.allCases)
+  func everyLevelScoresTenARightAnswerAndNothingElse(level: QuizLevel) {
+    let quiz = makeDeterministicQuiz(level: level)
     answerAllCorrectly(quiz)
 
     #expect(quiz.currentQuestionIndex == 30)
     #expect(quiz.shouldShowResults)
-    #expect(quiz.score == 750)
-  }
-
-  // The .ridiculous multiplier doubles each question: 30 × 10 × 2 = 600, plus the same
-  // 450 elapsed-time bonus = 1050. Compared against the regular 750 above, this pins the
-  // scoreModifier's effect.
-  @Test func testAllCorrectRidiculousQuizAppliesMultiplier() {
-    let quiz = makeDeterministicQuiz(difficulty: .ridiculous)
-    answerAllCorrectly(quiz)
-
-    #expect(quiz.score == 1050)
+    #expect(quiz.elapsedTime == 0)
+    #expect(quiz.score == 300)
   }
 
   // A completed quiz whose score beats the stored best writes it back; a subsequent
@@ -102,23 +91,23 @@ struct QuizTests {
   @Test func testBestScoreWriteBack() {
     Current.settings.bestScore = 0
 
-    let winningQuiz = makeDeterministicQuiz(difficulty: .regular)
+    let winningQuiz = makeDeterministicQuiz()
     answerAllCorrectly(winningQuiz)
-    #expect(Current.settings.bestScore == 750)
+    #expect(Current.settings.bestScore == 300)
 
-    let losingQuiz = makeDeterministicQuiz(difficulty: .regular)
+    let losingQuiz = makeDeterministicQuiz()
     let questionCount = losingQuiz.questions.count
     for _ in 0 ..< questionCount {
       losingQuiz.process(proposedAnswer: "x")
       losingQuiz.continueAfterCorrection()
     }
     #expect(losingQuiz.score == 0)
-    #expect(Current.settings.bestScore == 750, "A lower score must not overwrite the stored best.")
+    #expect(Current.settings.bestScore == 300, "A lower score must not overwrite the stored best.")
   }
 
-  @Test(arguments: [QuizDifficulty.regular, .ridiculous])
-  func noSeededQuizAsksADefectiveCell(difficulty: QuizDifficulty) {
-    Current.settings.quizDifficulty = difficulty
+  @Test(arguments: QuizLevel.allCases)
+  func noSeededQuizAsksADefectiveCell(level: QuizLevel) {
+    Current.settings.quizLevel = level
     for seed in UInt64(0) ..< 100 {
       let quiz = Quiz(gameCenter: GameCenterStub(), seed: seed)
       quiz.start()
@@ -130,19 +119,8 @@ struct QuizTests {
     }
   }
 
-  @Test func ridiculousAsksFalloirOnlyInTheThirdPersonSingular() throws {
-    Current.settings.quizDifficulty = .ridiculous
-    for seed in UInt64(0) ..< 20 {
-      let quiz = Quiz(gameCenter: GameCenterStub(), seed: seed)
-      quiz.start()
-      let falloir = try #require(quiz.questions.first { $0.verb.infinitif == "falloir" })
-      #expect(falloir.tense == .subjonctifImparfait(.thirdSingular))
-      quiz.quit()
-    }
-  }
-
   @Test func aSeedRepeatsItsQuiz() {
-    Current.settings.quizDifficulty = .regular
+    Current.settings.quizLevel = .advanced
     func questions(seed: UInt64) -> [String] {
       let quiz = Quiz(gameCenter: GameCenterStub(), seed: seed)
       quiz.start()
@@ -157,9 +135,7 @@ struct QuizTests {
   }
 
   @Test func recordsTheAppsSpellingOfAVariant() throws {
-    Current.settings.quizDifficulty = .regular
-    let quiz = Quiz(gameCenter: GameCenterStub(), shouldShuffle: false)
-    quiz.start()
+    let quiz = makeDeterministicQuiz()
     let question = try #require(quiz.questions.first)
     let conjugation = correctAnswer(for: question).lowercased()
     let variant = try #require(StandardVariants.variants(of: conjugation, verb: question.verb, tense: question.tense).first ?? Optional(conjugation))
@@ -171,7 +147,7 @@ struct QuizTests {
   }
 
   @Test func aWrongAnswerHoldsItsQuestionUntilContinue() throws {
-    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    let quiz = makeDeterministicQuiz()
     let first = try #require(quiz.questions.first)
 
     quiz.process(proposedAnswer: "x")
@@ -190,7 +166,7 @@ struct QuizTests {
   }
 
   @Test func aRightAnswerAdvancesAtOnce() throws {
-    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    let quiz = makeDeterministicQuiz()
     let first = try #require(quiz.questions.first)
     quiz.process(proposedAnswer: correctAnswer(for: first))
     #expect(quiz.correction == nil)
@@ -214,7 +190,7 @@ struct QuizTests {
   private struct SlipNotFound: Error {}
 
   @Test func aSlipEarnsOneMoreAttempt() throws {
-    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    let quiz = makeDeterministicQuiz()
     let (slip, answer) = try reachASlip(quiz)
     let index = quiz.currentQuestionIndex
     let resultCount = quiz.quizResults.count
@@ -241,7 +217,7 @@ struct QuizTests {
   }
 
   @Test func aQuestionGetsOneMoreAttemptAtMost() throws {
-    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    let quiz = makeDeterministicQuiz()
     let (slip, _) = try reachASlip(quiz)
     let index = quiz.currentQuestionIndex
 
@@ -261,7 +237,7 @@ struct QuizTests {
   }
 
   @Test func theClockRunsDuringASecondAttempt() throws {
-    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    let quiz = makeDeterministicQuiz()
     let (slip, _) = try reachASlip(quiz)
     quiz.process(proposedAnswer: slip)
     quiz.clockTicked()
@@ -270,18 +246,18 @@ struct QuizTests {
     #expect(!quiz.isAwaitingSecondAttempt)
   }
 
-  @Test func aRightSecondAttemptEarnsHalfPointsAtRidiculous() throws {
-    let quiz = makeDeterministicQuiz(difficulty: .ridiculous)
+  @Test func aRightSecondAttemptEarnsHalfPointsAtAdvanced() throws {
+    let quiz = makeDeterministicQuiz(level: .advanced)
     let (slip, answer) = try reachASlip(quiz)
     let score = quiz.score
     quiz.process(proposedAnswer: slip)
     quiz.process(proposedAnswer: answer)
-    #expect(quiz.score == score + 10)
+    #expect(quiz.score == score + 5)
     quiz.quit()
   }
 
   @Test func theClockStandsStillWhileACorrectionIsHeld() {
-    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    let quiz = makeDeterministicQuiz()
     quiz.clockTicked()
     #expect(quiz.elapsedTime == 1)
 
@@ -297,7 +273,7 @@ struct QuizTests {
   }
 
   @Test func aWrongLastAnswerShowsItsCorrectionBeforeTheResults() throws {
-    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    let quiz = makeDeterministicQuiz()
     for question in quiz.questions.dropLast() {
       quiz.process(proposedAnswer: correctAnswer(for: question))
     }
@@ -313,7 +289,7 @@ struct QuizTests {
   }
 
   @Test func quittingReleasesAHeldCorrection() {
-    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    let quiz = makeDeterministicQuiz()
     quiz.process(proposedAnswer: "x")
     #expect(quiz.correction != nil)
     quiz.quit()

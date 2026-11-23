@@ -764,8 +764,8 @@ collection's page in the tab's stack.
 than infinitives, so it matches the rows. A star alone does not count, and Clear in My Verbs resets
 every collection's progress, since it forgets the opens.
 
-**The quiz** is `QuizScope.collection(_:)`: thirty unranked questions, Regular's mix over the
-collection's verbs, in a `QuizSheet` over the page, the same sheet Test Me uses, whose title it
+**The quiz** is `QuizScope.collection(_:)`: thirty unranked questions at the learner's level over
+the collection's verbs, in a `QuizSheet` over the page, the same sheet Test Me uses, whose title it
 replaces with the collection's (`QuizScope.title`). Unlike a My Verbs quiz it starts no Live
 Activity, since a tap on the activity would open the Quiz tab rather than the sheet. A collection
 none of whose verbs can be quizzed (ester's 1-10, férir's 2-4) shows no Quiz button.
@@ -794,9 +794,9 @@ chosen verbs (§ Quiz Scopes).
 | File | Purpose |
 |------|---------|
 | `Quiz.swift` | `@Observable` quiz state: building the questions, the timer, scoring, a slip's second attempt (`firstAttempt`), the held correction (`QuizCorrection`), the Live Activity, Game Center, the quiz signals, and VoiceOver announcements |
-| `QuizVerbs.swift` | The curated verb pools the questions draw from |
-| `QuizDifficulty.swift` | Regular or Ridiculous, chosen in Settings, and each one's score multiplier |
-| `QuizScope.swift` | What a quiz asks about, its question count, and its analytics source; the questions of a quiz over chosen verbs; `QuizTenseSlot`, Regular's tenses and quotas; `Verb.hasCell(_:)` and `canBeQuizzed` |
+| `QuizVerbs.swift` | The curated verb pools the default quiz draws from, and `QuizVerbPool`, which names them |
+| `QuizLevel.swift` | The four levels, chosen in Settings, and the tenses each asks; `QuizTenseSlot`, a tense as the quiz asks it, with its cells, its weight, and its pools |
+| `QuizScope.swift` | What a quiz asks about, its question count, and its analytics source; the questions of a quiz over chosen verbs; `Verb.hasCell(_:)` and `canBeQuizzed(at:)` |
 | `QuizQuestion.swift`, `QuizResult.swift`, `QuizState.swift` | A question (verb and tense), an answered question, and the quiz's lifecycle |
 | `ConjugationResult.swift` | Grades an answer as a total or no match (`ConjugationResult.grade`), with the conjugation to show beside a right answer spelled another standard way (`AnswerGrade`); a question's result is also `.secondAttemptMatch` when a slip's second attempt was right |
 | `AnswerSlip.swift` | Whether a wrong answer is a slip that earns one more attempt (§ One More Try) |
@@ -808,32 +808,63 @@ chosen verbs (§ Quiz Scopes).
 | `QuizView.swift`, `QuizResultsView.swift`, `QuizResultView.swift` | The quiz screen and the results sheet |
 | `LiveActivities.swift`, `LiveActivitiesReal.swift`, `LiveActivitiesSpy.swift` | Starts, updates, and ends the quiz's Live Activity through `Current.liveActivities`: ActivityKit on device and in the simulator, a spy under unit tests |
 
-### The Two Difficulties
+### Levels
 
-**Regular** asks thirty questions by fixed quotas, each verb dealt from a `CyclingDeck` over a
-`QuizVerbs` pool and each person from a deck of the six (the impératif from its three):
+The learner chooses a level in Settings, and nothing unlocks. Each level adds tenses to the one
+before, in the order French courses teach them:
 
-| Tense | Questions | Pools |
-|---|---:|---|
-| Indicatif présent | 7 | regular -er (2), regular -ir (2), regular -re, the big three (être, avoir, aller), présent stem changers |
-| Passé composé | 6 | regular -er, -ir, -re, the big three, être auxiliaries, irregular participes passés |
-| Subjonctif présent | 4 | regular -er, -ir, -re, the big three |
-| Imparfait | 3 | the top thirty |
-| Futur simple | 3 | regular futur stems (2), irregular futur stems |
-| Conditionnel présent | 3 | regular futur stems (2), irregular futur stems |
-| Impératif | 3 | the top thirty |
-| Participe présent | 1 | the top thirty |
+| Level | Roughly | Tenses added |
+|---|---|---|
+| Beginner (Débutant) | A1 | Indicatif présent; impératif |
+| Elementary (Élémentaire) | A2 | Passé composé and the participe passé; imparfait; futur simple; conditionnel présent |
+| Intermediate (Intermédiaire) | B1 | Subjonctif présent; plus-que-parfait; conditionnel passé; participe présent |
+| Advanced (Avancé) | B2 and above | Futur antérieur; subjonctif passé; passé simple; subjonctif imparfait and plus-que-parfait; passé antérieur; passé surcomposé; impératif passé |
 
-**Ridiculous** asks thirty fixed pairs of verb and tense (réaliser, choir, bruire, moudre, and so
-on), with the person drawn from the deck. Either way the questions are shuffled.
+The ladder follows the Université de Genève Maison des langues' grammar outlines ("Éléments de
+grammaire A1–A2" and "B1–B2", 2025), the Clermont-Ferrand CASNAV's B1 sheet after the Eaquals/CIEP
+inventory of 2015 (the subjonctif at B1, the passé simple at B1 for recognition), and Antwerp's
+B2 inventory (the futur antérieur at B2). Josh chose it on 2026-11-23, and with it that every
+tense is asked in every person, the literary ones included.
+
+**Weights.** Each question draws a tense by a fixed weight from the level's tenses
+(`QuizTenseSlot.drawWeighted`): the présent and the passé composé 3; the impératif, imparfait,
+futur simple, conditionnel présent, subjonctif présent, passé simple, and subjonctif imparfait 2;
+the other compound tenses and both participles 1. A compound tense other than the passé composé is
+light because only its auxiliary is new. A weight belongs to a tense as a whole, whatever its
+number of cells, and never changes with what the learner has done. At Advanced the weights total
+30, so a plus-que-parfait is one question in thirty.
+
+**Verbs.** The default quiz then takes one of the tense's `verbPools`, the curated `QuizVerbs`
+pools, and deals the pool's next verb from a `CyclingDeck`, and each person from a deck of the six
+(the impératif's from its three):
+
+| Tenses | Pools (one drawn per question) |
+|---|---|
+| Indicatif présent | regular -er (2), regular -ir (2), regular -re, the big three (être, avoir, aller), présent stem changers |
+| Passé composé and every other compound tense | regular -er, -ir, -re, the big three, être auxiliaries, irregular participes passés |
+| Participe passé | regular -er, -ir, -re, irregular participes passés (2) |
+| Subjonctif présent | regular -er, -ir, -re, the big three |
+| Imparfait, impératif, participe présent | the top thirty |
+| Futur simple, conditionnel présent | regular futur stems (2), irregular futur stems |
+| Passé simple, subjonctif imparfait | regular -er, -ir, -re, the big three, irregular participes passés |
+
+**Settings.** The level is stored under `quizLevel`. A new install starts at Beginner. On the first
+launch with levels, a stored `quizDifficulty` of Ridiculous becomes Advanced and anything else
+Elementary, the level nearest Regular's mix; the old key is left in place and no longer read once
+`quizLevel` exists. Settings shows the levels as four tiles, each with a gauge whose needle rises
+with the level, since a segmented control truncates Intermediate and Intermédiaire on an iPhone.
+`ChangeLevelTip` invites a change of level after a finished default quiz. Settings attaches its
+popover tips only while it is on screen, since the tab stays alive once visited, and a tip that
+becomes eligible while it is hidden would float over another tab.
 
 **No question asks a cell the verb lacks.** A drawn person that the verb's defect group marks
 unused gives way to the next person the verb has, so falloir is asked only in the third-person
-singular. A verb without the whole tense, such as faillir in the impératif, gives way to the pool's
-next verb. `Quiz(gameCenter:shouldShuffle:seed:)` takes a seed that makes every draw repeatable;
-`QuizTests` builds a hundred seeded quizzes at each difficulty and finds no defective cell.
+singular. A verb without any cell of the tense, such as faillir in the impératif, gives way to the
+pool's next verb. `Quiz(gameCenter:seed:)` takes a seed that makes every draw repeatable;
+`QuizTests` builds a hundred seeded quizzes at each level and finds no defective cell, and
+`QuizLevelTests` pins each level's tenses, the weights, and the pools.
 
-A debug launch argument, `-CONJUGUER_QUIZ_FIXTURE screenshot`, replaces both with a fixed plan for
+A debug launch argument, `-CONJUGUER_QUIZ_FIXTURE screenshot`, replaces the draw with a fixed plan for
 App Store screenshots and exports its answers (see
 [`screenshot_playbook.md`](screenshot_playbook.md)). `-CONJUGUER_QUIZ_FIXTURE grading` asks ten
 questions, three times over, whose right answers exercise the grading below. Typed in order, with
@@ -858,6 +889,10 @@ default, these earn one more try, which the right answer after them takes for 5 
 conditionnel for its futur), `parle` (the présent for the participe passé parlé), `prit` (the passé
 simple for the subjonctif imparfait prît), `eut` (likewise for eût, and under four letters), and
 `viens` (je's présent for il's vient).
+`-CONJUGUER_QUIZ_FIXTURE levels` asks eight questions, once, one in each tense only Advanced asks.
+The answers, with the feminine default: `aurons fini`, `sois venue`, `prirent`, `fût`, `fusse
+partie`, `eut vu`, `ai eu parlé`, and `soyez rentrées`. A fixture's results show the level chosen
+in Settings.
 
 ### The Answer Frame
 
@@ -936,8 +971,7 @@ other way, is a slip.
 keeps running, since the learner is still answering. The feedback slot shows "Almost! Try once
 more." in orange (`Color.secondAttempt`), the first attempt stays in the field to edit, and the
 field takes the keyboard back. A chirp and a light tap mark it, not the buzz of a wrong answer. A
-question gets one more attempt at most: a right second attempt scores 5 points (times the
-difficulty's multiplier) and the result `.secondAttemptMatch`, shown by a hollow orange check in
+question gets one more attempt at most: a right second attempt scores 5 points and the result `.secondAttemptMatch`, shown by a hollow orange check in
 the next question's feedback slot, and a wrong one goes to the held correction. The results count
 right second attempts apart ("Second Try: 2", under "Correct: 8 / 30", which counts first attempts
 only), and a row whose question took two attempts shows "First Try:" with the slip above Your
@@ -977,11 +1011,9 @@ its `TextSelection`, and a key replaces the selection or inserts at the cursor, 
 cursor after the letter. With a hardware keyboard, iOS draws the toolbar as a floating bar at the
 bottom of the screen.
 
-Each question's points are multiplied by the difficulty's `scoreModifier` (1 for Regular, 2 for
-Ridiculous). A finished quiz scoring at least 150 earns a time bonus, from 450 points for two
-minutes or less down by 50 a minute to nothing past ten. The best score is stored in `Settings`,
-and every completed default quiz, at either difficulty, reports its score to Game Center's
-leaderboard. A scoped quiz does neither (below). Quitting reports nothing.
+Every level scores 10 a right answer and nothing else: there is no multiplier and no time bonus.
+The best score is stored in `Settings`, and every completed default quiz, at any level, reports its
+score to Game Center's one leaderboard. A scoped quiz does neither (below). Quitting reports nothing.
 
 The answer is graded against the question's own verb entry, extra letters included
 (`Verb.extraLetters`), so sortir (obtain) is graded as finir-like (il sortit) and sortir (exit) as
@@ -996,31 +1028,29 @@ Collections).
 
 | Scope | Questions | Where |
 |---|---|---|
-| `.allVerbs` | The default quiz at the learner's difficulty | The Quiz tab with All Verbs chosen; the `quiz/` link |
-| `.myVerbs(_:)` | 30, Regular's mix over the learner's starred and recent verbs | The Quiz tab with My Verbs chosen |
+| `.allVerbs` | The default quiz at the learner's level | The Quiz tab with All Verbs chosen; the `quiz/` link |
+| `.myVerbs(_:)` | 30 at the learner's level over the learner's starred and recent verbs | The Quiz tab with My Verbs chosen |
 | `.verbPage(_:)` | 3, on one verb | Test Me on a verb page |
-| `.collection(_:)` | 30, Regular's mix over a collection's verbs | A collection's Quiz button, on its page or a model's page |
+| `.collection(_:)` | 30 at the learner's level over a collection's verbs | A collection's Quiz button, on its page or a model's page |
 
-**Regular's mix over chosen verbs.** `QuizTenseSlot` names Regular's eight tenses with their quotas
-(7, 6, 4, 3, 3, 3, 3, 1); `QuizScopeTests` pins that the default Regular quiz asks exactly these.
-Each question takes the next verb from a shuffled deck of the scope's verbs, and a cell of the
-slot's tense that the verb's defect group has (`Verb.hasCell`), preferring a cell not yet asked of
-that verb. A verb without the tense passes it to the next verb; a tense no verb has is dropped, so
-a My Verbs quiz of only falloir asks 27. A scoped quiz always asks Regular's mix, since Ridiculous
-is a fixed list of pairs, so it is scored and labeled Regular whatever the setting, and the Quiz
-tab's briefing says Regular while My Verbs is chosen.
+**A scoped quiz uses the learner's level.** Each question draws a tense by its weight from the
+level's tenses that some verb of the scope has, so a tense no verb has is never drawn and a My
+Verbs quiz of only falloir still asks thirty. It then takes the next verb from a shuffled deck of
+the scope's verbs, and a cell of the tense that the verb's defect group has (`Verb.hasCell`),
+preferring a cell not yet asked of that verb. A verb without the tense passes it to the next verb.
 
-**Test Me's three questions** ask three different tenses, drawn without replacement with Regular's
-quotas as weights and without the participe présent, since three draws from the full mix would
-too often waste one on a participle and any passé composé already tests the participe passé. A
-verb with fewer tenses (gésir has only the présent and imparfait) is asked further cells of the
-tenses it has, then its participles (choir, which has only its participe passé, is asked that).
-The six verbs that have only their infinitif (accroire, bayer, and their kin) cannot be quizzed
-(`Verb.canBeQuizzed`), and their pages show no Test Me button. Random draws go through an
+**Test Me's three questions** ask three different tenses of the level, drawn by weight without
+replacement and without participles, since any passé composé already tests the participe passé.
+A verb with fewer tenses (gésir has only the présent and imparfait), or a level with fewer
+(Beginner has two), is asked further cells of the tenses it has, then the level's participles
+(choir, which has only its participe passé, is asked that from Elementary up). A verb with nothing
+at the learner's level cannot be quizzed (`Verb.canBeQuizzed(at:)`), and its page shows no Test Me
+button: the six verbs that have only their infinitif (accroire, bayer, and their kin) at any level,
+and choir at Beginner. A collection's Quiz button follows the same rule. Random draws go through an
 injectable `RandomNumberGenerator`; tests use `SeededRandomNumberGenerator`.
 
 **What a scoped quiz leaves out.** Only the default quiz posts to Game Center, sets the best score,
-donates to `ChangeDifficultyTip`, and shows the leaderboard when its results close (Josh's rule for
+donates to `ChangeLevelTip`, and shows the leaderboard when its results close (Josh's rule for
 Konjugieren, 2026-11-13). Test Me and a collection's quiz start no Live Activity; a My Verbs quiz
 does, being a full thirty questions in the Quiz tab.
 
@@ -1040,11 +1070,12 @@ which Josh asked for there after trying the plain one, was not ported.
 
 ### Signals
 
-`quizStart` (`difficulty`, `source`), `quizQuit` (`difficulty`, `lastQuestionIndex`, `elapsedTime`,
-`source`), and `quizCompletion` (`difficulty`, `score`, `elapsedTime`, `source`). `source` is `tab`,
+`quizStart` (`level`, `source`), `quizQuit` (`level`, `lastQuestionIndex`, `elapsedTime`,
+`source`), and `quizCompletion` (`level`, `score`, `elapsedTime`, `source`). `source` is `tab`,
 `myVerbs`, `verbPage`, or `list`, so a three-question quiz does not inflate the thirty-question
-quiz's completion rate. `difficulty` is the quiz's own, set when it starts, so a change in Settings
-mid-quiz cannot mislabel its quit or completion, and a scoped quiz reports `regular`. A collection's
+quiz's completion rate. `level` is `beginner`, `elementary`, `intermediate`, or `advanced`, the
+quiz's own, set when it starts, so a change in Settings mid-quiz cannot mislabel its quit or
+completion. A collection's
 `quizStart` also carries `collection` (§ Collections).
 
 ## Widgets

@@ -9,7 +9,7 @@ import Foundation
 
 /// What a quiz asks about, how many questions it asks, and where it was begun.
 struct QuizScope {
-  /// Nil asks the default quiz, built from `QuizVerbs` at the learner's difficulty.
+  /// Nil asks the default quiz, built from `QuizVerbs` at the learner's level.
   let verbs: [Verb]?
 
   let questionCount: Int
@@ -49,62 +49,76 @@ struct QuizScope {
     QuizScope(verbs: [verb], questionCount: verbPageQuestionCount, source: .verbPage)
   }
 
-  /// The questions of a quiz over `verbs`. Empty for the default quiz, which `Quiz` builds itself,
-  /// and for verbs that have none of the cells a quiz asks.
-  func questions(using generator: inout some RandomNumberGenerator) -> [QuizQuestion] {
+  /// The questions of a quiz over `verbs` at `level`. Empty for the default quiz, which `Quiz`
+  /// builds itself, and for verbs that have none of the cells the level asks.
+  func questions(level: QuizLevel, using generator: inout some RandomNumberGenerator) -> [QuizQuestion] {
     guard let verbs, !verbs.isEmpty else {
       return []
     }
     if questionCount < Quiz.questionCount {
-      return Self.distinctCellQuestions(verbs: verbs, count: questionCount, using: &generator)
+      return Self.distinctCellQuestions(verbs: verbs, slots: level.slots, count: questionCount, using: &generator)
     }
-    return Self.regularMixQuestions(verbs: verbs, using: &generator)
+    return Self.levelMixQuestions(verbs: verbs, slots: level.slots, count: questionCount, using: &generator)
   }
 
-  /// Regular's tense mix, each question's verb drawn in turn from a shuffled `verbs`. A cell
-  /// already asked of a verb is asked again only when no verb has a fresh one, as happens with a
-  /// single verb's seven présents. A tense that no verb has is dropped, so the quiz is shorter.
-  private static func regularMixQuestions(verbs: [Verb], using generator: inout some RandomNumberGenerator) -> [QuizQuestion] {
+  /// Tenses drawn by weight from those that some verb has, each question's verb drawn in turn
+  /// from a shuffled `verbs`. A cell already asked of a verb is asked again only when no verb has
+  /// a fresh one, as happens with a single verb's seven présents.
+  private static func levelMixQuestions(
+    verbs: [Verb],
+    slots: [QuizTenseSlot],
+    count: Int,
+    using generator: inout some RandomNumberGenerator
+  ) -> [QuizQuestion] {
     let deck = verbs.shuffled(using: &generator)
+    let askable = slots.filter { slot in
+      verbs.contains { verb in
+        slot.cells.contains(where: verb.hasCell)
+      }
+    }
     var cursor = 0
     var asked: Set<AskedCell> = []
     var questions: [QuizQuestion] = []
 
-    for slot in QuizTenseSlot.allCases {
-      for _ in 0 ..< slot.regularQuota {
-        var fresh: QuizQuestion?
-        var repeated: QuizQuestion?
-        for _ in 0 ..< deck.count {
-          let verb = deck[cursor]
-          cursor = (cursor + 1) % deck.count
-          let cells = slot.cells.filter(verb.hasCell)
-          if let tense = cells.filter({ !asked.contains(AskedCell(verbID: verb.id, tense: $0)) }).randomElement(using: &generator) {
-            fresh = QuizQuestion(verb: verb, tense: tense)
-            break
-          }
-          if repeated == nil, let tense = cells.randomElement(using: &generator) {
-            repeated = QuizQuestion(verb: verb, tense: tense)
-          }
+    while questions.count < count, let slot = QuizTenseSlot.drawWeighted(from: askable, using: &generator) {
+      var fresh: QuizQuestion?
+      var repeated: QuizQuestion?
+      for _ in 0 ..< deck.count {
+        let verb = deck[cursor]
+        cursor = (cursor + 1) % deck.count
+        let cells = slot.cells.filter(verb.hasCell)
+        if let tense = cells.filter({ !asked.contains(AskedCell(verbID: verb.id, tense: $0)) }).randomElement(using: &generator) {
+          fresh = QuizQuestion(verb: verb, tense: tense)
+          break
         }
-        if let question = fresh ?? repeated {
-          questions.append(question)
-          asked.insert(AskedCell(verbID: question.verb.id, tense: question.tense))
+        if repeated == nil, let tense = cells.randomElement(using: &generator) {
+          repeated = QuizQuestion(verb: verb, tense: tense)
         }
       }
+      guard let question = fresh ?? repeated else {
+        break
+      }
+      questions.append(question)
+      asked.insert(AskedCell(verbID: question.verb.id, tense: question.tense))
     }
 
-    questions.shuffle(using: &generator)
     return questions
   }
 
-  /// A few questions in different tenses, drawn with Regular's weights and without participles,
+  /// A few questions in different tenses of the level, drawn by weight and without participles,
   /// since a participe passé is tested by any passé composé. A verb that lacks enough tenses is
   /// asked more cells of the tenses it has, and then its participles.
-  private static func distinctCellQuestions(verbs: [Verb], count: Int, using generator: inout some RandomNumberGenerator) -> [QuizQuestion] {
+  private static func distinctCellQuestions(
+    verbs: [Verb],
+    slots levelSlots: [QuizTenseSlot],
+    count: Int,
+    using generator: inout some RandomNumberGenerator
+  ) -> [QuizQuestion] {
     var questions: [QuizQuestion] = []
-    var slots = QuizTenseSlot.allCases.filter { $0 != .participePrésent }
+    let personalSlots = levelSlots.filter { !$0.isParticiple }
+    var slots = personalSlots
 
-    while questions.count < count, let slot = drawWeighted(from: slots, using: &generator) {
+    while questions.count < count, let slot = QuizTenseSlot.drawWeighted(from: slots, using: &generator) {
       slots.removeAll { $0 == slot }
       let candidates = verbs.flatMap { verb in
         slot.cells.filter(verb.hasCell).map { QuizQuestion(verb: verb, tense: $0) }
@@ -116,7 +130,6 @@ struct QuizScope {
 
     if questions.count < count {
       let asked = Set(questions.map { AskedCell(verbID: $0.verb.id, tense: $0.tense) })
-      let personal = QuizTenseSlot.allCases.filter { $0 != .participePrésent }.flatMap(\.cells)
       func unasked(_ tenses: [Tense]) -> [QuizQuestion] {
         verbs.flatMap { verb in
           tenses
@@ -124,103 +137,17 @@ struct QuizScope {
             .map { QuizQuestion(verb: verb, tense: $0) }
         }
       }
-      let fallbacks = unasked(personal).shuffled(using: &generator) + unasked([.participePassé, .participePrésent]).shuffled(using: &generator)
+      let participles = levelSlots.filter(\.isParticiple).flatMap(\.cells)
+      let fallbacks = unasked(personalSlots.flatMap(\.cells)).shuffled(using: &generator) + unasked(participles).shuffled(using: &generator)
       questions += fallbacks.prefix(count - questions.count)
     }
 
     return questions
   }
 
-  private static func drawWeighted(from slots: [QuizTenseSlot], using generator: inout some RandomNumberGenerator) -> QuizTenseSlot? {
-    let total = slots.reduce(0) { $0 + $1.regularQuota }
-    guard total > 0 else {
-      return nil
-    }
-    var roll = Int.random(in: 0 ..< total, using: &generator)
-    for slot in slots {
-      if roll < slot.regularQuota {
-        return slot
-      }
-      roll -= slot.regularQuota
-    }
-    return nil
-  }
-
   private struct AskedCell: Hashable {
     let verbID: String
     let tense: Tense
-  }
-}
-
-/// The tenses of the Regular quiz, with how many questions it asks of each. `Quiz.buildQuiz` asks
-/// these quotas from its curated pools; a scoped quiz asks them of its own verbs.
-enum QuizTenseSlot: CaseIterable {
-  case indicatifPrésent
-  case passéComposé
-  case subjonctifPrésent
-  case imparfait
-  case futurSimple
-  case conditionnelPrésent
-  case impératif
-  case participePrésent
-
-  init?(tense: Tense) {
-    switch tense {
-    case .indicatifPrésent:
-      self = .indicatifPrésent
-    case .passéComposé:
-      self = .passéComposé
-    case .subjonctifPrésent:
-      self = .subjonctifPrésent
-    case .imparfait:
-      self = .imparfait
-    case .futurSimple:
-      self = .futurSimple
-    case .conditionnelPrésent:
-      self = .conditionnelPrésent
-    case .impératif:
-      self = .impératif
-    case .participePrésent:
-      self = .participePrésent
-    default:
-      return nil
-    }
-  }
-
-  var regularQuota: Int {
-    switch self {
-    case .indicatifPrésent:
-      return 7
-    case .passéComposé:
-      return 6
-    case .subjonctifPrésent:
-      return 4
-    case .imparfait, .futurSimple, .conditionnelPrésent, .impératif:
-      return 3
-    case .participePrésent:
-      return 1
-    }
-  }
-
-  var cells: [Tense] {
-    switch self {
-    case .indicatifPrésent:
-      return PersonNumber.allCases.map(Tense.indicatifPrésent)
-    case .passéComposé:
-      return PersonNumber.allCases.map(Tense.passéComposé)
-    case .subjonctifPrésent:
-      return PersonNumber.allCases.map(Tense.subjonctifPrésent)
-    case .imparfait:
-      return PersonNumber.allCases.map(Tense.imparfait)
-    case .futurSimple:
-      return PersonNumber.allCases.map(Tense.futurSimple)
-    case .conditionnelPrésent:
-      return PersonNumber.allCases.map(Tense.conditionnelPrésent)
-    case .impératif:
-      return PersonNumber.impératifPersonNumbers.map(Tense.impératif)
-    case .participePrésent:
-      return [.participePrésent]
-    }
   }
 }
 
@@ -232,8 +159,9 @@ extension Verb {
     return !defectGroup.isDefectiveForTense(tense)
   }
 
-  /// Whether a quiz on this verb's page has anything to ask. Six verbs use only the infinitif.
-  var canBeQuizzed: Bool {
-    QuizTenseSlot.allCases.flatMap(\.cells).contains(where: hasCell) || hasCell(.participePassé)
+  /// Whether a quiz at `level` has anything to ask of this verb. Six verbs use only the
+  /// infinitif, and a few have no présent or impératif to ask a beginner.
+  func canBeQuizzed(at level: QuizLevel) -> Bool {
+    level.slots.flatMap(\.cells).contains(where: hasCell)
   }
 }

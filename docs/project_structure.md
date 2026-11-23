@@ -64,7 +64,7 @@ Conjuguer/
 │   ├── ConjugationResult.swift # Answer grading (ConjugationResult.grade): total or no match and the app's spelling of a variant (AnswerGrade); a right second attempt's result; each result's sound, score, icon, and color
 │   ├── Conjugator.swift        # The conjugation engine: model lookup, stem alterations, simple and compound tenses; takes the pronoun gender explicitly (the app's defaulted overloads are in ConjugationLabels.swift)
 │   ├── ConjugatorError.swift   # Error enum for conjugation failures
-│   ├── ConjuguerTips.swift     # TipKit tips (try the quiz, explore models, change difficulty, play game, scroll to the verb page's bottom)
+│   ├── ConjuguerTips.swift     # TipKit tips (try the quiz, explore models, choose a level, play game, scroll to the verb page's bottom)
 │   ├── CyclingDeck.swift       # Generic deck that deals elements in order and reshuffles on exhaustion
 │   ├── DefectGroup.swift       # A group of defective verbs and the tenses/persons they lack
 │   ├── DefectGroupParser.swift # XMLParser delegate for defectGroups.xml
@@ -93,12 +93,12 @@ Conjuguer/
 │   ├── PersonNumber.swift      # 1s…3p with localized pronouns and gendered third-person handling
 │   ├── PronounGender.swift     # Setting enum: feminine/masculine/both
 │   ├── Quiz.swift              # @Observable quiz state: question generation, timer, scoring, Live Activity, Game Center
-│   ├── QuizScope.swift         # What a quiz asks about (every verb, My Verbs, one verb's page, a collection), its count and source; Regular's mix over chosen verbs, Test Me's three tenses, Verb.hasCell
-│   ├── QuizDifficulty.swift    # Setting enum: regular vs ridiculous
+│   ├── QuizScope.swift         # What a quiz asks about (every verb, My Verbs, one verb's page, a collection), its count and source; the level's mix over chosen verbs, Test Me's three tenses, Verb.hasCell, canBeQuizzed(at:)
+│   ├── QuizLevel.swift         # Setting enum: the four quiz levels (Beginner to Advanced) and the tenses each asks; QuizTenseSlot, a tense's cells, weight, and verb pools
 │   ├── QuizQuestion.swift      # One quiz question (verb + tense)
 │   ├── QuizResult.swift        # One answered question, its ConjugationResult, and a slip's first attempt, for the results sheet
 │   ├── QuizState.swift         # Quiz lifecycle enum (not started / in progress / finished)
-│   ├── QuizVerbs.swift         # Curated verb pools the quiz draws from (regular -er/-ir/-re, big three, stem changers, être auxiliaries, irregular participes, top thirty, futur stems)
+│   ├── QuizVerbs.swift         # Curated verb pools the default quiz draws from (regular -er/-ir/-re, big three, stem changers, être auxiliaries, irregular participes, top thirty, futur stems), named by QuizVerbPool
 │   ├── RelatedVerbs.swift      # VerbBase (a verb's base and root: a verbal prefix plus a verb its etymology names, less false pairs), RelatedVerbs, and Verb.related for the verb page's card
 │   ├── ReviewCardSuppression.swift  # The Suppress Review Card setting's Off and On
 │   ├── SearchReport.swift      # SearchTracker (one verb search, first letter to its end) and SearchReport (finishSearch's banded parameters)
@@ -270,7 +270,7 @@ ConjuguerTests/
     ├── ConjugationResultTests.swift    # Grading: pronouns, spacing, alternates, required accents and agreement, and the spelling shown for a variant
     ├── DeeplinkTests.swift             # conjuguer:// parsing and routing: the search route, match, info keys, the builders' round trips, and the source query item (serialized — mutates Current)
     ├── DefectGroupTests.swift          # Defect-group membership and tense suppression
-    ├── DefectivityAuditTests.swift     # Per-family defectivity audit (traire, braire, férir, poindre, …)
+    ├── DefectivityAuditTests.swift     # Per-family defectivity audit (traire, braire, férir, poindre, pouvoir's impératif, …)
     ├── EngineAuditTests.swift          # Hand-written pins for the stage-A verb-pass fixes (peuvent, dites, suivi, the eight re-modeled verbs, the seventeen être auxiliaries), checked against Wiktionary rather than against the engine
     ├── ExampleSourceTests.swift        # Parsing of example `source` strings (incl. the Wiktionary citation forms), and that every shipped example's source is known
     ├── IrregularityMetricTests.swift   # Keeps VerbModel.irregularity and the Info text in agreement: only 1-1/2-1/5-1A score 0%, and the shipped regular/irregular split matches the data
@@ -286,13 +286,14 @@ ConjuguerTests/
     ├── NousPrésentStemTests.swift      # The nous-présent stem that imparfait derives from
     ├── ParserTests.swift               # XML parsing of verbs, models, and defect groups
     ├── QuizLiveActivityTests.swift     # The quiz's Live Activity through the spy: a tab quiz starts one that Quit or the last answer ends, each other answer updates it, a restart replaces it, and a sheet's quiz starts none
-    ├── QuizScopeTests.swift            # Quiz scopes: the default quiz unchanged, My Verbs drawing only its verbs in Regular's mix, defective verbs, Test Me's three tenses, unranked scoring, doubled entries graded as themselves, source on every quiz signal
+    ├── QuizLevelTests.swift            # Quiz levels: each level's tenses, the weights, every cell in one slot, the default quiz's draw by level, pool, and weight, and the level on the quiz signals
+    ├── QuizScopeTests.swift            # Quiz scopes: the default quiz at the learner's level, My Verbs drawing only its verbs at each level, defective verbs, Test Me's three tenses, unranked scoring, doubled entries graded as themselves, source on every quiz signal
     ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle; seeded quizzes that never ask a defective cell; the recorded spelling of a variant; the held correction, its stopped clock, and Continue; a slip's one more try, its half points, and its running clock (serialized — mutates Current)
     ├── RelatedVerbsTests.swift         # Base-finding on known and false pairs, nested roots, the card's two relations, doubled roots, and the model page's two orders
     ├── ReviewScheduleTests.swift       # The review ladder, reveal and dismissal, a lookup restarting it, an older entry with no schedule, the longest-overdue verb, verbs with no key conjugations, doubled entries
     ├── RichTextTests.swift             # Rich-text markup parsing into blocks and segments
     ├── SearchReportTests.swift         # The search tracker's lifecycle, each finishSearch report, and that no parameter can echo the query
-    ├── SettingsTests.swift             # Settings defaults (Suppress Review Card off), persistence, and malformed-value handling (serialized)
+    ├── SettingsTests.swift             # Settings defaults (Suppress Review Card off), persistence, the quiz difficulty's migration to a level, and malformed-value handling (serialized)
     ├── TenseTableTests.swift           # The verb page's order, each cell's card, articles, second names, and which pages show the color key
     ├── StandardVariantsTests.swift     # Each accepted variant row, and the spellings each row must not accept (vînmes, dû, croître, appeler, jeter, harcelle)
     ├── StemAlterationAuditTests.swift  # Audits every -er verb whose stem ends in é + consonant: the stem must open to è before a mute ending

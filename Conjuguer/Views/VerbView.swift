@@ -126,7 +126,7 @@ struct VerbView: View {
     }
     .screenBackground()
     .toolbar {
-      if verb.canBeQuizzed, !isBeneathQuiz {
+      if verb.canBeQuizzed(at: world.settings.quizLevel), !isBeneathQuiz {
         ToolbarItem(placement: .topBarTrailing) {
           Button {
             detailSheet = .quiz

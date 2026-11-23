@@ -835,7 +835,7 @@ dismiss_review_prompt() {
 
 nav_settings() {
   tap_tab settings
-  # Spec: Quiz Difficulty picker at top — it is the first control, so no scroll.
+  # Spec: the Quiz Level tiles are at the top, the first control, so no scroll.
 }
 
 # ---------------------------------------------------------------------------

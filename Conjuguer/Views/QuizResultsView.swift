@@ -40,7 +40,7 @@ struct QuizResultsView: View {
               .accessibilityIdentifier("results_second_try")
           }
 
-          Text(quiz.difficulty.localizedDifficultyWithLabel)
+          Text(quiz.level.localizedNameWithLabel)
 
           Text(L.ResultsView.time(quiz.elapsedTime.timeString))
         }

@@ -158,7 +158,7 @@ struct VerbCollectionTests {
 
     let keys = Set(VerbCollection.être.verbs.map(\.dictionaryKey))
     var generator = SeededRandomNumberGenerator(seed: 14)
-    let questions = scope.questions(using: &generator)
+    let questions = scope.questions(level: .advanced, using: &generator)
     #expect(questions.count == Quiz.questionCount)
     #expect(questions.allSatisfy { keys.contains($0.verb.dictionaryKey) })
   }
@@ -181,9 +181,9 @@ struct VerbCollectionTests {
   }
 
   @Test func aCollectionWithNothingToAskHidesItsQuiz() {
-    let ester = VerbCollection.model("1-10").verbs.contains { $0.canBeQuizzed }
-    let parler = VerbCollection.model("1-1").verbs.contains { $0.canBeQuizzed }
-    #expect(!ester)
-    #expect(parler)
+    for level in QuizLevel.allCases {
+      #expect(!VerbCollection.model("1-10").verbs.contains { $0.canBeQuizzed(at: level) })
+      #expect(VerbCollection.model("1-1").verbs.contains { $0.canBeQuizzed(at: level) })
+    }
   }
 }
