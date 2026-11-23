@@ -29,7 +29,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 3 | Done | 2026-11-23 | bfe5c7f | T4.1, T4.4, T4.5 | 3 |
 | 4 | Done | 2026-11-23 | 954eda0 | T1.6 | 4 |
 | 5 | Done | 2026-11-23 | bc2c6e6 | T2.3, T2.6, T6.7, M1 | 5 |
-| 6 | Not started | | | T2.1, T2.2, T2.5 | 6 |
+| 6 | Awaiting Josh | 2026-11-23 | | T2.1, T2.2, T2.5 | 6 |
 | 7 | Not started | | | T2.7, T3.1, T6.5, M2, M3 | 7 |
 | 8 | Not started | | | Decision 4 | 8 |
 | 9 | Not started | | | T2.8 | 9 |
@@ -853,7 +853,7 @@ level is sent, and tests pin each level's pool.
 ## Phase 6: Which Verbs Are Asked
 
 **Suggestions:** T2.1, T2.2, T2.5. **Ports:** Konjugieren Phase 6. **Depends on:** Phase 5.
-**Status:** Not started.
+**Status:** Awaiting Josh.
 
 For the default quiz (not a scope, whose verbs are chosen):
 
@@ -880,6 +880,66 @@ derivatives, meets the share, includes the core verbs, leaves scoped quizzes alo
 each.
 
 **How it differed:**
+
+- **Irregular means the third group plus aller** (Josh, 2026-11-23), `VerbDraw.isIrregular`, the
+  rule he chose for the verb of the day. Rendre, attendre, and perdre count as irregular; the
+  spelling changes of manger and appeler do not. Half a default quiz's questions, rounded down,
+  ask an irregular verb, exactly.
+- **The pools became rules, and `QuizVerbs.swift` is gone** (Josh, 2026-11-23). The phase said to
+  intersect each curated pool with the band, but the lists held about 800 verbs, picked from web
+  frequency in 2021, so Advanced would never have reached past them. Each `QuizVerbPool` now
+  admits a verb by a rule read from the data and applied to the band: regular -er is the first
+  group but aller, regular -ir the second group, regular -re rendre's model, an être auxiliary a
+  verb whose data names être (not a pronominal one), and the stem changers, irregular futur stems,
+  and irregular participles read the capitals with which the conjugator marks irregular letters
+  (`QuizVerbTraits`, kept per model). The structure of each tense's pools is Phase 5's, with "the
+  top thirty" become "any verb of the band". The new code is `Models/QuizDraw.swift`.
+- **How the mix works.** Konjugieren's design, with pools added. Every question's tense is drawn by
+  weight; then two questions take the core role, one to three the rare-derivative role (or, at
+  Beginner and Elementary, one the derivative role); then exactly half are made irregular; and only
+  then does each question take one of its tense's pools that holds a verb fitting its role and
+  share, and a verb from it, preferring one not yet asked. A question asking a regular verb so
+  never draws the big three, and one asking an irregular verb never draws regular -er. The person
+  decks stay; the verb decks went.
+- **Konjugieren's reading of T2.2 was carried over** without asking: a prefixed verb in the top 300
+  draws as freely as a base verb (comprendre, revenir, devenir), and beyond it a prefixed verb is a
+  rare derivative, one to three per quiz where the band reaches that far. A derivative is a verb
+  `VerbBase.base(of:)` finds a base for: 19 of the top 100, 66 of the top 300, 239 of the top 1,000.
+- **Sortir to obtain is left out of the default quiz** (Josh, 2026-11-23). The first Beginner quiz
+  in the simulator asked "elles ___" of sortir (obtain), answer sortissent, a legal term that shares
+  sortir's counts and so ranks #78. `QuizDraw.excludedEntries` drops it. The other doubled
+  infinitives (saillir, haïr, ouïr) appear only at Advanced and stay.
+- **A pool of oddities.** The first Advanced quiz asked fiche twice. The irregular-participle pool,
+  crossed with a regular question, held only fiche (fichu), maudire, and féru, and was drawn as
+  often as any other pool, so one verb took 39 of 1,014 non-core questions over 40 quizzes. The pool
+  now admits only irregular verbs, and `noVerbOutsideTheCoreDominatesALevel` fails, as checked, if
+  such a pool returns.
+- **The placeholder check** was browse Phase 12's, which fixed the œ verbs and convaincre. Nothing
+  new was found; lover (#835) is still there, as that note says.
+- **The level's description** in Settings now names verbs: "This setting determines which tenses
+  and verbs quizzes ask about…", with the bands, in both languages, and the README's quiz line
+  says the levels draw on more verbs. `ChangeLevelTip` ("Each level adds tenses to the one before")
+  and the onboarding page are still true and were left.
+- **A test helper conjugated without extra letters.** `QuizTests.correctAnswer(for:)` passed
+  `extraLetters: nil`, which the curated lists never exposed; sortir (exit) at Elementary failed it.
+  It now passes the verb's.
+- **Phase 7.** The rules are per draw, so a ten-question quiz gets five irregular questions, two
+  core, and one to three rare derivatives. Phase 7 should decide whether Ten More draws a fresh mix
+  of ten, as Konjugieren's note also asked.
+- **No analytics and no privacy lines.** Nothing new is sent.
+- **Verified** on the iPhone 17 by answering every question of a real quiz wrongly and reading the
+  results. In English at Beginner: 30 verbs of the top 100 (aller, être, avoir, faire, prendre,
+  comprendre, rester, attendre, définir, agir), all présent or impératif, and, before the fix,
+  sortir (obtain). In French at Advanced: ranks 4 to 6,070, convivialiser and ébaudir beside
+  pouvoir and aller, and fiche twice, before its fix. The Settings description in both languages.
+  On the iPad Pro 11 in English and dark: the description, and an Intermediate quiz of verbs ranked
+  1 to 961 (constituer, sauter, parvenir, licencier, nuire, naître). Not tried: VoiceOver, which
+  this phase gave nothing new to say, and a scoped quiz on a device (a unit test covers it).
+- **Tests:** 602 to 616. `QuizDrawTests` is new (14 tests: the bands, Advanced reaching past the
+  top 1,000, the irregular half, the core verbs, rare and frequent derivatives, repeats, no verb
+  dominating, the pools' rules, sortir, the core verbs' ranks, derivatives, and a scoped quiz left
+  alone). `QuizLevelTests`' pool test now asks the pools' rules. The suite took 129 to 164 seconds
+  across runs, with `VerbDrawTests` at about 80 of them before and after this phase.
 
 ## Phase 7: Ten Questions, Then Ten More
 

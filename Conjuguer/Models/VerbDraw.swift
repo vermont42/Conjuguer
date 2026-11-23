@@ -65,8 +65,7 @@ enum VerbDraw {
     guard verb.model != alleModelID else {
       return true
     }
-    let group = verb.model.split(separator: "-").first.flatMap { Int($0) } ?? 0
-    return group >= firstIrregularGroup
+    return verb.modelGroup >= firstIrregularGroup
   }
 
   @MainActor static func isBase(_ verb: Verb) -> Bool {

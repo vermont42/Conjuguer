@@ -59,7 +59,6 @@ class Quiz {
 
   private var personNumbers = CyclingDeck(PersonNumber.allCases)
   private var impératifPersonNumbers = CyclingDeck(PersonNumber.impératifPersonNumbers)
-  private var verbDecks = Dictionary(uniqueKeysWithValues: QuizVerbPool.allCases.map { ($0, CyclingDeck($0.infinitifs)) })
 
   /// A `seed` makes every quiz this instance builds repeatable, for tests.
   init(gameCenter: GameCenter, seed: UInt64? = nil) {
@@ -187,17 +186,11 @@ class Quiz {
   private func resetDecks() {
     personNumbers.reset()
     impératifPersonNumbers.reset()
-    for pool in QuizVerbPool.allCases {
-      verbDecks[pool]?.reset()
-    }
   }
 
   private func shuffleDecks() {
     personNumbers.shuffle(using: &generator)
     impératifPersonNumbers.shuffle(using: &generator)
-    for pool in QuizVerbPool.allCases {
-      verbDecks[pool]?.shuffle(using: &generator)
-    }
   }
 
   private func resetPublishedProperties() {
@@ -246,19 +239,13 @@ class Quiz {
     }
     #endif
 
-    let slots = level.slots
-    for _ in 0 ..< scope.questionCount {
-      guard let slot = QuizTenseSlot.drawWeighted(from: slots, using: &generator) else {
-        break
-      }
-      questions.append(question(of: slot))
-    }
+    questions = QuizDraw.questions(level: level, count: scope.questionCount, using: &generator).map(question(of:))
   }
 
   /// The question of `tense` for `verb` in the next person from the deck, or in the next person
   /// after it that the verb's defect group has: falloir is asked only in the third-person
-  /// singular. Only a verb without the whole tense, such as faillir in the impératif, gets an
-  /// impossible question, so `question(of:)` draws past it.
+  /// singular. `QuizDraw` never draws a verb without the whole tense, such as faillir in the
+  /// impératif.
   private func question(verb: Verb, tense: (PersonNumber) -> Tense) -> QuizQuestion {
     let drawn = tense(.secondSingular).isImpératif ? impératifPersonNumber : personNumber
     return question(verb: verb, tense: tense, drawn: drawn)
@@ -272,21 +259,11 @@ class Quiz {
     return QuizQuestion(verb: verb, tense: tense(personNumber))
   }
 
-  private func question(of slot: QuizTenseSlot) -> QuizQuestion {
-    let pool = slot.verbPools.randomElement(using: &generator) ?? .topThirty
-    let maximumDraws = 50
-    var verb = nextVerb(from: pool)
-    for _ in 1 ..< maximumDraws where !slot.cells.contains(where: verb.hasCell) {
-      verb = nextVerb(from: pool)
+  private func question(of drawn: QuizDrawnQuestion) -> QuizQuestion {
+    guard let constructor = drawn.slot.constructor else {
+      return QuizQuestion(verb: drawn.verb, tense: drawn.slot.cells.first ?? .participePassé)
     }
-    guard let constructor = slot.constructor else {
-      return QuizQuestion(verb: verb, tense: slot.cells.first ?? .participePassé)
-    }
-    return question(verb: verb, tense: constructor)
-  }
-
-  private func nextVerb(from pool: QuizVerbPool) -> Verb {
-    Verb.verbForInfinitif(verbDecks[pool]?.next() ?? "être")
+    return question(verb: drawn.verb, tense: constructor)
   }
 
   #if DEBUG

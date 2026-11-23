@@ -93,12 +93,12 @@ Conjuguer/
 │   ├── PersonNumber.swift      # 1s…3p with localized pronouns and gendered third-person handling
 │   ├── PronounGender.swift     # Setting enum: feminine/masculine/both
 │   ├── Quiz.swift              # @Observable quiz state: question generation, timer, scoring, Live Activity, Game Center
+│   ├── QuizDraw.swift          # The default quiz's verbs from the level's band: half irregular, two core verbs, one to three rare derivatives; QuizVerbPool (a tense's kinds of verb, read from the data) and QuizVerbTraits
 │   ├── QuizScope.swift         # What a quiz asks about (every verb, My Verbs, one verb's page, a collection), its count and source; the level's mix over chosen verbs, Test Me's three tenses, Verb.hasCell, canBeQuizzed(at:)
-│   ├── QuizLevel.swift         # Setting enum: the four quiz levels (Beginner to Advanced) and the tenses each asks; QuizTenseSlot, a tense's cells, weight, and verb pools
+│   ├── QuizLevel.swift         # Setting enum: the four quiz levels (Beginner to Advanced) and the tenses each asks; QuizTenseSlot, a tense's cells, weight, and verb pools; each level's frequency band
 │   ├── QuizQuestion.swift      # One quiz question (verb + tense)
 │   ├── QuizResult.swift        # One answered question, its ConjugationResult, and a slip's first attempt, for the results sheet
 │   ├── QuizState.swift         # Quiz lifecycle enum (not started / in progress / finished)
-│   ├── QuizVerbs.swift         # Curated verb pools the default quiz draws from (regular -er/-ir/-re, big three, stem changers, être auxiliaries, irregular participes, top thirty, futur stems), named by QuizVerbPool
 │   ├── RelatedVerbs.swift      # VerbBase (a verb's base and root: a verbal prefix plus a verb its etymology names, less false pairs), RelatedVerbs, and Verb.related for the verb page's card
 │   ├── ReviewCardSuppression.swift  # The Suppress Review Card setting's Off and On
 │   ├── SearchReport.swift      # SearchTracker (one verb search, first letter to its end) and SearchReport (finishSearch's banded parameters)
@@ -286,6 +286,7 @@ ConjuguerTests/
     ├── NousPrésentStemTests.swift      # The nous-présent stem that imparfait derives from
     ├── ParserTests.swift               # XML parsing of verbs, models, and defect groups
     ├── QuizLiveActivityTests.swift     # The quiz's Live Activity through the spy: a tab quiz starts one that Quit or the last answer ends, each other answer updates it, a restart replaces it, and a sheet's quiz starts none
+    ├── QuizDrawTests.swift             # The default quiz's verbs: each level's band, half irregular, the core verbs, rare and frequent derivatives, the pools' rules, sortir (obtain) left out, no verb dominating, scoped quizzes untouched
     ├── QuizLevelTests.swift            # Quiz levels: each level's tenses, the weights, every cell in one slot, the default quiz's draw by level, pool, and weight, and the level on the quiz signals
     ├── QuizScopeTests.swift            # Quiz scopes: the default quiz at the learner's level, My Verbs drawing only its verbs at each level, defective verbs, Test Me's three tenses, unranked scoring, doubled entries graded as themselves, source on every quiz signal
     ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle; seeded quizzes that never ask a defective cell; the recorded spelling of a variant; the held correction, its stopped clock, and Continue; a slip's one more try, its half points, and its running clock (serialized — mutates Current)

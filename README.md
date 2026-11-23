@@ -19,7 +19,7 @@ While developing **Conjuguer** in 2021, I learned about SwiftUI and how to mix i
 - **Conjugation views** — every tense for a given verb, with irregular stems and endings picked out in red so that the shape of an irregularity is visible at a glance. Many verbs also carry an etymology and an example sentence drawn from French literature.
 - **Verb models** — the conjugation patterns that the verbs inherit from, ranked by how irregular they are.
 - **Tense reference** — an explanation of each French tense, when to use it, and how it is formed, illustrated with quotations from Proust, the _Chanson de Roland_, and others.
-- **Conjugation quiz** — four levels, from Beginner to Advanced, each adding the tenses that French courses teach next, one more try for half points after a slip or a dropped accent, a Live Activity, and Game Center leaderboards.
+- **Conjugation quiz** — four levels, from Beginner to Advanced, each adding the tenses that French courses teach next and drawing on more verbs, one more try for half points after a slip or a dropped accent, a Live Activity, and Game Center leaderboards.
 - **AI tutor** — answers French-conjugation questions on-device, powered by Apple's Foundation Models. Requires Apple Intelligence.
 - **Widgets and controls** — a "Verb of the Day" and a tappable daily quiz on the Home Screen and Lock Screen, plus two Control Center controls.
 - **Retro arcade minigame**, reachable from Settings.

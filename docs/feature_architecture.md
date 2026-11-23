@@ -794,7 +794,7 @@ chosen verbs (§ Quiz Scopes).
 | File | Purpose |
 |------|---------|
 | `Quiz.swift` | `@Observable` quiz state: building the questions, the timer, scoring, a slip's second attempt (`firstAttempt`), the held correction (`QuizCorrection`), the Live Activity, Game Center, the quiz signals, and VoiceOver announcements |
-| `QuizVerbs.swift` | The curated verb pools the default quiz draws from, and `QuizVerbPool`, which names them |
+| `QuizDraw.swift` | The default quiz's verbs: `QuizDraw`, which draws them from the level's band with a fixed share of irregular, core, and prefixed verbs; `QuizVerbPool`, a kind of verb a tense is asked of, read from the data; and `QuizVerbTraits`, where a model is irregular |
 | `QuizLevel.swift` | The four levels, chosen in Settings, and the tenses each asks; `QuizTenseSlot`, a tense as the quiz asks it, with its cells, its weight, and its pools |
 | `QuizScope.swift` | What a quiz asks about, its question count, and its analytics source; the questions of a quiz over chosen verbs; `Verb.hasCell(_:)` and `canBeQuizzed(at:)` |
 | `QuizQuestion.swift`, `QuizResult.swift`, `QuizState.swift` | A question (verb and tense), an answered question, and the quiz's lifecycle |
@@ -834,9 +834,32 @@ light because only its auxiliary is new. A weight belongs to a tense as a whole,
 number of cells, and never changes with what the learner has done. At Advanced the weights total
 30, so a plus-que-parfait is one question in thirty.
 
-**Verbs.** The default quiz then takes one of the tense's `verbPools`, the curated `QuizVerbs`
-pools, and deals the pool's next verb from a `CyclingDeck`, and each person from a deck of the six
-(the impératif's from its three):
+**Verbs.** The default quiz asks the verbs of the level's band (`QuizLevel.band`): the 100 most
+frequent at Beginner, 300 at Elementary, 1,000 at Intermediate, and all 6,326 at Advanced. A scoped
+quiz asks the verbs chosen, whatever the band. `QuizDraw.questions(level:count:using:)` draws every
+question's tense by weight first, then fixes what the quiz as a whole asks of its verbs, and only
+then draws each question's pool and verb to fit, so that the counts are exact rather than likely:
+
+- **Half irregular.** Half of the questions, rounded down, ask an irregular verb as
+  `VerbDraw.isIrregular` counts them: the third group as French schools teach it, which includes
+  rendre and attendre, plus aller (Josh, 2026-11-23, as for the verb of the day).
+- **Core verbs.** At least two questions ask être, avoir, aller, faire, pouvoir, vouloir, devoir, or
+  savoir (`QuizDraw.coreInfinitifs`).
+- **Prefixed verbs.** A verb with a base (`VerbBase.base(of:)`, as on the verb page) is a
+  derivative. One in the 300 most frequent (`QuizDraw.frequentDerivativeBand`) draws as freely as a
+  base verb, since revenir and comprendre are as basic as venir and prendre. At Intermediate and
+  Advanced, whose bands reach past it, one to three questions, chosen per quiz, ask a rarer
+  derivative, and no other question does. At Beginner and Elementary at least one question asks a
+  derivative.
+- **One entry left out.** Sortir's two entries share its counts, which measure sortir to exit, so
+  the default quiz never asks sortir to obtain (`QuizDraw.excludedEntries`), a legal term that
+  would otherwise rank #78.
+
+Each question then takes one of its tense's `verbPools` that has a verb fitting its share and
+role, and a verb from that pool not yet asked in the quiz where one can be found. Each person comes
+from a deck of the six (the impératif's from its three). A pool is a rule read from the data and
+applied to the band (`QuizVerbPool.admits`), so that the structure of a tense's questions holds at
+every level:
 
 | Tenses | Pools (one drawn per question) |
 |---|---|
@@ -844,9 +867,21 @@ pools, and deals the pool's next verb from a `CyclingDeck`, and each person from
 | Passé composé and every other compound tense | regular -er, -ir, -re, the big three, être auxiliaries, irregular participes passés |
 | Participe passé | regular -er, -ir, -re, irregular participes passés (2) |
 | Subjonctif présent | regular -er, -ir, -re, the big three |
-| Imparfait, impératif, participe présent | the top thirty |
+| Imparfait, impératif, participe présent | any verb of the band |
 | Futur simple, conditionnel présent | regular futur stems (2), irregular futur stems |
 | Passé simple, subjonctif imparfait | regular -er, -ir, -re, the big three, irregular participes passés |
+
+Regular -er is every first-group model but aller's, spelling changes included (manger, appeler);
+regular -ir is the second group; regular -re is rendre's model. An être auxiliary is a verb whose
+data names être, not a pronominal one. The other pools read the capitals with which the conjugator
+marks irregular letters (`QuizVerbTraits`, kept per model): a présent stem changer has a marked
+présent cell (je viens, j'appelle, nous mangeons), an irregular futur stem a marked radical
+(viendr-, appeller-), and an irregular participe passé a marked participle, among irregular verbs
+only, since fichu, maudit, and féru alone would make a pool of oddities whenever a question asks a
+regular verb. A question asking an irregular verb draws only from the pools that hold one, so the
+big three never answer for a regular question. `QuizDrawTests` pins the band, the share, the core
+and derivative counts, the pools' rules, sortir, and that no verb outside the core takes more than
+one question in fifty at Elementary and above.
 
 **Settings.** The level is stored under `quizLevel`. A new install starts at Beginner. On the first
 launch with levels, a stored `quizDifficulty` of Ridiculous becomes Advanced and anything else
@@ -859,8 +894,8 @@ becomes eligible while it is hidden would float over another tab.
 
 **No question asks a cell the verb lacks.** A drawn person that the verb's defect group marks
 unused gives way to the next person the verb has, so falloir is asked only in the third-person
-singular. A verb without any cell of the tense, such as faillir in the impératif, gives way to the
-pool's next verb. `Quiz(gameCenter:seed:)` takes a seed that makes every draw repeatable;
+singular. A verb without any cell of the tense, such as faillir in the impératif, is never drawn
+for it. `Quiz(gameCenter:seed:)` takes a seed that makes every draw repeatable;
 `QuizTests` builds a hundred seeded quizzes at each level and finds no defective cell, and
 `QuizLevelTests` pins each level's tenses, the weights, and the pools.
 

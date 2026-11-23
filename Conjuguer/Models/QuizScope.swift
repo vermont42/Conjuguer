@@ -9,7 +9,7 @@ import Foundation
 
 /// What a quiz asks about, how many questions it asks, and where it was begun.
 struct QuizScope {
-  /// Nil asks the default quiz, built from `QuizVerbs` at the learner's level.
+  /// Nil asks the default quiz, which `QuizDraw` builds from the band of the learner's level.
   let verbs: [Verb]?
 
   let questionCount: Int

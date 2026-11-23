@@ -77,8 +77,7 @@ struct QuizLevelTests {
   func theDefaultQuizDrawsEachTensesVerbsFromItsPools(level: QuizLevel) throws {
     for question in defaultQuizzes(level: level, seeds: 1 ... 20) {
       let slot = try #require(QuizTenseSlot(tense: question.tense))
-      let infinitifs = Set(slot.verbPools.flatMap(\.infinitifs))
-      #expect(infinitifs.contains(question.verb.infinitif), "\(question.verb.infinitif), \(slot)")
+      #expect(slot.verbPools.contains { $0.admits(question.verb) }, "\(question.verb.infinitif), \(slot)")
     }
   }
 

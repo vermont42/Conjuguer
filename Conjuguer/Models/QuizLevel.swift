@@ -46,6 +46,24 @@ enum QuizLevel: String, CaseIterable {
     }
   }
 
+  /// The most frequent verbs the default quiz asks at this level. Nil asks every verb.
+  var band: FrequencyBand? {
+    switch self {
+    case .beginner:
+      return .top100
+    case .elementary:
+      return .top300
+    case .intermediate:
+      return .top1000
+    case .advanced:
+      return nil
+    }
+  }
+
+  @MainActor var verbs: [Verb] {
+    band.map(Verb.verbs(in:)) ?? Verb.verbsByFrequency
+  }
+
   var slots: [QuizTenseSlot] {
     switch self {
     case .beginner:
@@ -180,8 +198,8 @@ enum QuizTenseSlot: CaseIterable {
     }
   }
 
-  /// The curated pools the default quiz draws this tense's verbs from, one pool per question,
-  /// repeated where a pool should come up more often.
+  /// The pools the default quiz draws this tense's verbs from, one pool per question, repeated
+  /// where a pool should come up more often.
   var verbPools: [QuizVerbPool] {
     switch self {
     case .indicatifPrésent:
@@ -193,7 +211,7 @@ enum QuizTenseSlot: CaseIterable {
     case .subjonctifPrésent:
       return [.regularEr, .regularIr, .regularRe, .bigThree]
     case .imparfait, .impératif, .participePrésent:
-      return [.topThirty]
+      return [.anyVerb]
     case .futurSimple, .conditionnelPrésent:
       return [.regularRadicalFutur, .regularRadicalFutur, .irregularRadicalFutur]
     case .passéSimple, .subjonctifImparfait:

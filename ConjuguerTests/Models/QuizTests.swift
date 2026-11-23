@@ -27,7 +27,7 @@ struct QuizTests {
     let conjugated = Conjugator.conjugatedString(
       infinitif: question.verb.infinitif,
       tense: question.tense,
-      extraLetters: nil
+      extraLetters: question.verb.extraLetters
     ) ?? ""
     return conjugated.components(separatedBy: Tense.alternateConjugationSeparator).first ?? conjugated
   }

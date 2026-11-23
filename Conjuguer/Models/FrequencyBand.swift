@@ -8,7 +8,7 @@
 import Foundation
 
 /// The most frequent verbs, in three widths. The verb of the day and the random verb draw from
-/// `top1000`; leveled study is to read all three.
+/// `top1000`, and the quiz's levels from all three (`QuizLevel.band`).
 enum FrequencyBand: Int, CaseIterable {
   case top100 = 100
   case top300 = 300
@@ -21,6 +21,7 @@ enum FrequencyBand: Int, CaseIterable {
 
 extension Verb {
   @MainActor private static var bandCache: [FrequencyBand: [Verb]] = [:]
+  @MainActor private static var cachedVerbsByFrequency: [Verb] = []
 
   /// `frequency` is a rank without gaps, but the two entries of a doubled infinitive (sortir to
   /// exit and to obtain) share one, so a band holds its count of infinitives and may hold an
@@ -38,5 +39,13 @@ extension Verb {
       .sorted { ($0.frequency, $0.dictionaryKey) < ($1.frequency, $1.dictionaryKey) }
     bandCache[band] = verbs
     return verbs
+  }
+
+  @MainActor static var verbsByFrequency: [Verb] {
+    if !cachedVerbsByFrequency.isEmpty {
+      return cachedVerbsByFrequency
+    }
+    cachedVerbsByFrequency = Verb.verbs.values.sorted { ($0.frequency, $0.dictionaryKey) < ($1.frequency, $1.dictionaryKey) }
+    return cachedVerbsByFrequency
   }
 }

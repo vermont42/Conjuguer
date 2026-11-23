@@ -5647,3 +5647,42 @@ pool. No one uses it: there is no "peux !" for "be able!". Josh agreed, and a 
 "Impératif is not used.", now strikes both impératifs on pouvoir's page, so the quiz no longer asks
 them. The existing group that strikes the impératif also says the verb is rare outside the passé
 simple and participe passé, which is faillir's case, not pouvoir's, so pouvoir got a group of its own.
+
+## Which Verbs the Quiz Asks (2026-11-23)
+
+Pedagogy Phase 6 decided which verbs the default quiz asks, and in doing so retired the verb lists
+the quiz had drawn from since 2021. Those lists were good work for their day: a few hundred regular
+-er verbs, the -ir and -re verbs that follow finir and rendre, the être verbs, the verbs with an
+irregular participle, the verbs with an irregular futur stem. Each tense drew from the lists that
+taught it something. The plan said to keep that structure and intersect each list with the
+frequency band of the learner's level: the 100 most frequent verbs at Beginner, 300 at Elementary,
+1,000 at Intermediate, every verb at Advanced.
+
+Measured, the intersection would have kept Advanced inside the lists, about 800 verbs, built from
+web frequency (consulter, sauvegarder, cliquer). So Josh chose to turn each list into a rule read
+from the data and applied to the band. Regular -er became the first group but aller; an être verb,
+one whose data names être. The three lists about irregularity became the conjugator's own marks:
+Conjuguer's conjugator writes irregular letters in capitals so the verb page can color them red
+(the I of je vIens, the U of venU), and a model whose présent, participle, or futur stem carries a capital
+is irregular there. The quiz and the verb page now agree on what is irregular because they read the
+same thing.
+
+The rest came from Konjugieren's Phase 6. Half of each quiz asks an irregular verb, by the rule Josh
+chose for the verb of the day (the third group as schools teach it, plus aller). At least two
+questions ask être, avoir, aller, faire, pouvoir, vouloir, devoir, or savoir. A prefixed verb among
+the 300 most frequent, such as comprendre or revenir, counts as basic, and once the band reaches
+past 300, one to three questions ask a rarer one. The order of the draw is what makes these counts
+exact: tenses first, then roles and the irregular half, and only then a pool and a verb that fit.
+
+Trying it found two things the tests had not. The first Beginner quiz asked "elles ___" of sortir,
+in the sense "to obtain", answer "sortissent", a legal term conjugated like finir. Sortir has two
+entries, and both carry the counts of the common sense, so the rare one ranked #78. Josh had it left
+out of the default quiz. The first Advanced quiz asked fiche twice. A question asking a regular verb
+in a compound tense could draw the irregular-participle pool, and among regular verbs that pool held
+only fiche, maudire, and férir, the regular models with an odd participle (fichu, maudit, féru).
+It was drawn as often as any pool, so one verb took 39 of a thousand questions. The pool now admits
+only irregular verbs, and a new test, checked against the old code, fails if any verb outside the
+core takes more than one question in fifty.
+
+A test helper had passed no extra letters when it conjugated, which had never mattered while the
+lists held no verb with two entries. Sortir to exit, now possible at Elementary, broke it.

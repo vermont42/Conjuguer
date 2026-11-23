@@ -4721,13 +4721,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This setting determines which tenses quizzes ask about. Beginner starts with the présent and the impératif, and each level after it adds the tenses that French courses teach next. Advanced asks about every tense, including the literary ones."
+            "value" : "This setting determines which tenses and verbs quizzes ask about. Beginner starts with the présent and the impératif of the 100 most frequent verbs. Each level after it adds the tenses that French courses teach next and draws from more verbs, 300 and then 1,000. Advanced asks about every tense, including the literary ones, and every verb."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ce paramètre détermine les temps sur lesquels portent les quiz. Débutant commence par le présent et l’impératif, et chaque niveau suivant ajoute les temps que les cours de français enseignent ensuite. Avancé porte sur tous les temps, y compris les temps littéraires."
+            "value" : "Ce paramètre détermine les temps et les verbes sur lesquels portent les quiz. Débutant commence par le présent et l’impératif des 100 verbes les plus fréquents. Chaque niveau suivant ajoute les temps que les cours de français enseignent ensuite et puise dans plus de verbes : 300, puis 1 000. Avancé porte sur tous les temps, y compris les temps littéraires, et sur tous les verbes."
           }
         }
       }
