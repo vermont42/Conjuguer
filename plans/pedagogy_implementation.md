@@ -27,7 +27,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 1 | Done | 2026-11-22 | 0d82e5c | T1.3, T1.4, T1.5, and two Conjuguer defects | 1 |
 | 2 | Done | 2026-11-22 | b4aa188 | T1.2 | 2 |
 | 3 | Done | 2026-11-23 | bfe5c7f | T4.1, T4.4, T4.5 | 3 |
-| 4 | Awaiting Josh | 2026-11-23 | | T1.6 | 4 |
+| 4 | Done | 2026-11-23 | 954eda0 | T1.6 | 4 |
 | 5 | Not started | | | T2.3, T2.6, T6.7, M1 | 5 |
 | 6 | Not started | | | T2.1, T2.2, T2.5 | 6 |
 | 7 | Not started | | | T2.7, T3.1, T6.5, M2, M3 | 7 |
@@ -627,7 +627,7 @@ marked, both links work and return, and tests pin the state machine.
 ## Phase 4: One More Try
 
 **Suggestions:** T1.6. **Ports:** Konjugieren Phase 4 (`AnswerSlip.swift`). **Depends on:**
-Phase 3. **Status:** Awaiting Josh.
+Phase 3. **Status:** Done.
 
 Treat a slip as "almost" and allow one more attempt. A right second attempt earns half the points.
 A wrong second attempt goes to Phase 3's correction. **This replaces the partial match**: half
