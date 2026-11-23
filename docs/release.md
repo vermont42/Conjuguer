@@ -38,6 +38,14 @@ material for the release notes.
    Since browse Phase 3 it runs `OpenRandomVerbControlIntent` instead of `OpenRandomVerbIntent`,
    so that the verb page can tell the control from the Shortcuts app. The control's kind did not
    change, so an installed control should run the new intent, but this was never tried on a device.
+6. **Try the browse plan's Phase 9 surfaces on a device** (added 2026-11-22), which were tried only
+   in the simulator. Look Up a Verb from Siri and from the Shortcuts app: in the simulator the app
+   opened on the right page but its spoken or shown answer never appeared, so check that Siri says
+   "vais: Indicatif Présent (je) of aller" before opening the page. Spotlight: in the simulator only
+   titles matched (aller found its entry; vais, "to go", and souviens found nothing), so check
+   whether a device matches the keywords and alternate names. Add the Find a Verb control to
+   Control Center and tap it. Long-press the icon for the Find a Verb quick action. Record what
+   works in `docs/feature_architecture.md` § Lookup from Outside the App.
 
 ## On Release Day
 

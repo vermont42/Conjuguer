@@ -90,3 +90,18 @@ extension PersonNumber {
     }
   }
 }
+
+extension MarkedConjugations {
+  /// The cells of `verb`'s page that `text` fills, read as search reads it, so that a link's
+  /// `match` item can carry whatever a search row matched: vais, "ai mangé", or "me suis levé" on
+  /// lever. Nil when the text fills none of them.
+  init?(text: String, on verb: Verb, index: ConjugationIndex = .bundled) {
+    let matches = VerbSearch.conjugationMatches(for: text, index: index) { key in
+      key == verb.dictionaryKey ? verb : nil
+    }
+    guard let conjugation = matches.first(where: { $0.verb == verb })?.conjugation else {
+      return nil
+    }
+    self = conjugation.marks
+  }
+}

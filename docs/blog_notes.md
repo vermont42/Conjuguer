@@ -5056,3 +5056,38 @@ needs no choice.
 
 The plan asked whether a tap on a conjugation still speaks it. It never did. Nothing on the verb
 page speaks, so there was nothing to keep.
+
+## Lookup from Outside the App (2026-11-22)
+
+Phase 9 of the browse port let a learner reach Conjuguer without opening it first: a Look Up a
+Verb shortcut that answers "vais: Indicatif Présent (je) of aller" and opens aller's page with vais
+marked, a Find a Verb control and Home Screen quick action that open an empty, focused search, and
+Spotlight entries for every verb. Before any of that, the phase wrote down one deeplink grammar,
+`conjuguer://<route>[/<target>][?items]`, with text only in query items and `source` on any route
+that leads to a page or a search, and replaced every hand-built link in the app with builders.
+
+Konjugieren had done all this in its Phase 11, so most of the design was a port. The interesting
+parts were the places where Conjuguer differs. Konjugieren had App Intents and a verb entity before
+its phase began; Conjuguer had two intents and nothing else, so the scaffolding was built here, and
+kept small. More important, Conjuguer parses its verbs in the window's first task, so an intent
+that the system runs in a background launch, before any window exists, would have looked up a word
+in an empty dictionary and found nothing. Konjugieren never met this, because its data is ready at
+once. A shared, one-time loader now serves the window and the intents alike.
+
+Spotlight cost more here too. Each entry carries the verb's key conjugations, which need the
+Conjugator on the main actor, and Conjuguer has 6,330 entries. Konjugieren reindexes at every
+launch; Conjuguer now indexes only when the app's version changes, so a learner pays those seconds
+once per update rather than every morning.
+
+The `match` item on a verb link was meant to carry a single conjugation. It is read the way search
+reads a query instead, so a link can carry whatever a search row matched, including "me suis levé",
+which marks "ai levé" on lever's page through the pronominal path that Phase 5 built.
+
+Two things Konjugieren reported came out the same in Conjuguer's simulator. The shortcut's answer
+never appeared on screen before the app opened, though the app opened on the right page, and
+Spotlight matched only titles: aller found its entry, showing "va · est allé · ira" over "go", but
+vais and "to go" found nothing. Both are written into `docs/release.md` for a device check, since
+Josh cannot install a release build until 2027. A smaller lesson from testing: the Shortcuts app's
+prompt is short, and a tap aimed at its Done button by guesswork landed on the Random Verb tile
+beneath it, which ran a different shortcut and briefly looked like a bug in this one. The system
+log named the intent that ran, and that settled it.

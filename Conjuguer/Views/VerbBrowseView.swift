@@ -90,16 +90,19 @@ struct VerbBrowseView: View {
     .onChange(of: searchText, initial: true) { _, _ in
       keyboardSelection = nil
       updateSearchResults(playSoundIfEmpty: true)
-      if let query = searchTracker.textChanged(to: searchText) {
-        signalEndedSearch(query: query)
+      if let search = searchTracker.textChanged(to: searchText) {
+        signalEndedSearch(search)
       }
     }
     .onChange(of: scenePhase) {
-      if scenePhase == .background, let query = searchTracker.finish() {
-        signalEndedSearch(query: query)
+      if scenePhase == .background, let search = searchTracker.finish() {
+        signalEndedSearch(search)
       }
     }
     .onChange(of: searchIsFocused) {
+      if !searchIsFocused {
+        searchTracker.fieldClosed()
+      }
       guard BrowseLayout.isPadOrMac else {
         return
       }
@@ -111,8 +114,8 @@ struct VerbBrowseView: View {
         VerbSearchArrowKeys.uninstall()
       }
     }
-    .onChange(of: world.verbSearchIsRequested) {
-      focusSearchIfRequested()
+    .onChange(of: world.searchRequest) {
+      openRequestedSearch()
     }
     .onChange(of: store.sort) { _, _ in
       withAnimation(.snappy) {
@@ -121,13 +124,13 @@ struct VerbBrowseView: View {
     }
     .sensoryFeedback(.selection, trigger: store.sort)
     .sheet(item: $world.verb) { verb in
-      VerbView(verb: verb, source: world.verbSource)
+      VerbView(verb: verb, source: world.verbSource, marks: world.verbMarks)
         .sheetDismissable()
     }
     .recordsAppearance(as: "\(VerbBrowseView.self)")
     .onAppear {
       world.reviewPrompter.promptableActionHappened()
-      focusSearchIfRequested()
+      openRequestedSearch()
     }
     .task {
       // Loading the map and folding its 243,000 conjugations takes over a second in a Debug
@@ -321,24 +324,24 @@ struct VerbBrowseView: View {
       path.append(VerbDestination(verb: verb, source: .browse))
       return
     }
-    if let query = searchTracker.finish() {
-      signal(.opened(query: query, resultCount: searchMatches.count, kind: searchMatches[index].kind, position: index))
+    if let search = searchTracker.finish() {
+      signal(.opened(query: search.query, resultCount: searchMatches.count, kind: searchMatches[index].kind, position: index, source: search.source))
     }
     path.append(VerbDestination(verb: verb, source: .search, marks: searchMatches[index].conjugation?.marks))
   }
 
   private func openGuess(_ guess: VerbSearch.Guess) {
-    if let query = searchTracker.finish() {
-      signal(.openedGuess(query: query))
+    if let search = searchTracker.finish() {
+      signal(.openedGuess(query: search.query, source: search.source))
     }
     path.append(VerbDestination(verb: guess.verb, source: .searchGuess, marks: guess.conjugation?.marks))
   }
 
-  private func signalEndedSearch(query: String) {
+  private func signalEndedSearch(_ search: SearchTracker.Search) {
     guard let store else {
       return
     }
-    signal(.ended(query: query, matches: VerbSearch.matches(for: query, in: store.items, includeGlosses: true)))
+    signal(.ended(query: search.query, matches: VerbSearch.matches(for: search.query, in: store.items, includeGlosses: true), source: search.source))
   }
 
   private func signal(_ report: SearchReport) {
@@ -354,11 +357,24 @@ struct VerbBrowseView: View {
     }
   }
 
-  private func focusSearchIfRequested() {
-    guard world.verbSearchIsRequested else {
+  /// Text that arrives with the request shows as results, with the keyboard down so that they
+  /// are visible. A request with no text, or with empty text, is for typing, so it focuses the
+  /// field. A nil text, Command-F's, keeps what the field holds.
+  private func openRequestedSearch() {
+    guard let request = world.searchRequest, store != nil else {
       return
     }
-    world.verbSearchIsRequested = false
+    world.searchRequest = nil
+    if let text = request.text {
+      if let ended = searchTracker.fieldOpened(from: request.source) {
+        signalEndedSearch(ended)
+      }
+      searchText = text
+      // onChange(of: searchText) does not fire when the text is unchanged, and the request
+      // still begins a search.
+      _ = searchTracker.textChanged(to: text)
+    }
+    let wantsKeyboard = request.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
     Task {
       if !path.isEmpty {
         path = NavigationPath()
@@ -366,7 +382,7 @@ struct VerbBrowseView: View {
         // field first responder, so typing goes nowhere (Konjugieren). Wait out the animation.
         try? await Task.sleep(for: .milliseconds(500))
       }
-      searchIsFocused = true
+      searchIsFocused = wantsKeyboard
     }
   }
 }

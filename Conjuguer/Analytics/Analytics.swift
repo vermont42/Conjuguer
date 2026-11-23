@@ -65,17 +65,6 @@ enum AnalyticsSource: String, CaseIterable {
   case tab
   case verbPage
   case widget
-
-  /// The `source` item of a `conjuguer://` link, which is how a widget, a control, or an Info
-  /// article names itself, since each can hand the app only a URL. A link without one, or with
-  /// a value outside this vocabulary, came from somewhere else.
-  nonisolated static func ofDeeplink(_ url: URL) -> AnalyticsSource {
-    let value = URLComponents(url: url, resolvingAgainstBaseURL: false)?
-      .queryItems?
-      .first { $0.name == ParameterKey.source.rawValue }?
-      .value
-    return value.flatMap(AnalyticsSource.init(rawValue:)) ?? .deeplink
-  }
 }
 
 enum SearchOutcome: String, CaseIterable {

@@ -691,8 +691,8 @@ private struct TenseArticleSheet: View {
     let target = url.pathComponents[1]
     switch url.host {
     case URL.infoHost:
-      if let index = Int(target), Info.infos.indices.contains(index) {
-        path.append(Info.infos[index])
+      if let info = Info.info(deeplinkTarget: target) {
+        path.append(info)
       }
     case URL.verbHost:
       if let verb = Verb.verbs[target] {

@@ -1111,4 +1111,35 @@ enum L {
       String(localized: "Tutor.reasonUnknown")
     }
   }
+
+  enum Lookup {
+    static func verbWithGloss(infinitif: String, gloss: String) -> String {
+      String(localized: "Lookup.verbWithGloss", defaultValue: "\(infinitif), “\(gloss)”")
+    }
+
+    /// `line` is a search row's: "vais: Indicatif Présent (je)".
+    static func conjugation(_ line: String, infinitif: String) -> String {
+      String(localized: "Lookup.conjugation", defaultValue: "\(line) of \(infinitif)")
+    }
+
+    static func otherMatchesOne(_ word: String, verb: String) -> String {
+      String(localized: "Lookup.otherMatchesOne", defaultValue: "Conjuguer has no verb or conjugation spelled “\(word)”, but one verb matches: \(verb).")
+    }
+
+    static func otherMatchesMany(_ word: String, count: Int, verb: String) -> String {
+      String(localized: "Lookup.otherMatchesMany", defaultValue: "Conjuguer has no verb or conjugation spelled “\(word)”, but \(count) verbs match. The first is \(verb).")
+    }
+
+    static func guessVerb(_ word: String, infinitif: String) -> String {
+      String(localized: "Lookup.guessVerb", defaultValue: "Conjuguer has no verb or conjugation spelled “\(word)”. Perhaps you meant \(infinitif).")
+    }
+
+    static func guessConjugation(_ word: String, conjugation: String, infinitif: String) -> String {
+      String(localized: "Lookup.guessConjugation", defaultValue: "Conjuguer has no verb or conjugation spelled “\(word)”. Perhaps you meant \(conjugation), of \(infinitif).")
+    }
+
+    static func nothing(_ word: String) -> String {
+      String(localized: "Lookup.nothing", defaultValue: "Conjuguer has no verb or conjugation spelled “\(word)”.")
+    }
+  }
 }

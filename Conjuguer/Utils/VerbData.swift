@@ -64,12 +64,29 @@ final class VerbData {
   // Async load for the app: the heavy XML parse runs off the main actor (Task.detached),
   // and only the cheap publish runs back on the main actor before the UI is revealed.
   func load() async {
-    if Verb.verbs.isEmpty {
+    await Self.ensureLoaded()
+    state = .loaded
+  }
+
+  private static var loadingTask: Task<Void, Never>?
+
+  // Parses once however many callers ask: the app's window, and an App Intent that the system
+  // runs in a background launch before any window exists.
+  static func ensureLoaded() async {
+    guard Verb.verbs.isEmpty else {
+      return
+    }
+    if let loadingTask {
+      await loadingTask.value
+      return
+    }
+    let task = Task {
       let parsed = await Task.detached(priority: .userInitiated) {
         VerbData.parse()
       }.value
       VerbData.publish(parsed)
     }
-    state = .loaded
+    loadingTask = task
+    await task.value
   }
 }

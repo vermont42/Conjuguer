@@ -13,6 +13,7 @@ struct ConjuguerWidgetBundle: WidgetBundle {
     QuizWidget()
     QuickQuizControl()
     RandomVerbControl()
+    FindVerbControl()
     QuizLiveActivity()
   }
 }

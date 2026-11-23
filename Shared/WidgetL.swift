@@ -10,7 +10,7 @@
 //  Note: AppIntent `title` / `@Parameter(title:)` strings are NOT here. AppIntents extracts
 //  that metadata at compile time and requires a string literal or a direct initializer call,
 //  so it can't reference these constants — those intents keep their explicit `Widget.*` keys
-//  inline (see AnswerQuizIntent, OpenQuizIntent, OpenRandomVerbIntent).
+//  inline (see AnswerQuizIntent, OpenQuizIntent, OpenRandomVerbIntent, OpenVerbSearchIntent).
 //
 
 import Foundation
@@ -33,6 +33,8 @@ enum WidgetL {
     static let quickQuizDescription = LocalizedStringResource("Widget.quickQuizDescription", defaultValue: "Launch the conjugation quiz.")
     static let randomVerbName = LocalizedStringResource("Widget.randomVerbName", defaultValue: "Random Verb")
     static let randomVerbDescription = LocalizedStringResource("Widget.randomVerbDescription", defaultValue: "Open a random French verb.")
+    static let findVerbName = LocalizedStringResource("Widget.findVerbName", defaultValue: "Find a Verb")
+    static let findVerbDescription = LocalizedStringResource("Widget.findVerbDescription", defaultValue: "Search for a verb, a conjugation, or an English meaning.")
   }
 
   enum LiveActivity {

@@ -1,6 +1,40 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Widget.findVerbDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for a verb, a conjugation, or an English meaning."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cherchez un verbe, une forme conjuguée ou un sens anglais."
+          }
+        }
+      }
+    },
+    "Widget.findVerbName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find a Verb"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chercher un verbe"
+          }
+        }
+      }
+    },
     "Widget.intentAnswerQuiz" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -31,6 +65,23 @@
         },
         "fr" : {
           "stringUnit" : { "state" : "translated", "value" : "Ouvrir un verbe au hasard" }
+        }
+      }
+    },
+    "Widget.intentOpenVerbSearch" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find a Verb"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chercher un verbe"
+          }
         }
       }
     },

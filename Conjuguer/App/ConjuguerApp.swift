@@ -5,11 +5,13 @@
 //  Created by Josh Adams on 1/1/21.
 //
 
+import CoreSpotlight
 import SwiftUI
 import TipKit
 import WidgetKit
 
 struct ConjuguerApp: App {
+  @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
   @State private var verbData = VerbData()
   @Environment(\.scenePhase) private var scenePhase
 
@@ -39,8 +41,18 @@ struct ConjuguerApp: App {
         // Replay any deeplink that arrived (via onOpenURL) before the data was ready.
         Current.drainPendingDeeplink()
         refreshWidgets()
+        await VerbSpotlight.indexVerbsIfNeeded()
       }
       .onOpenURL(perform: Current.handleURL(_:))
+      .onContinueUserActivity(CSSearchableItemActionType) { userActivity in
+        guard
+          let identifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
+          let url = URL.verbDeeplink(VerbSpotlight.verbKey(fromSpotlightIdentifier: identifier), source: .spotlight)
+        else {
+          return
+        }
+        Current.handleURL(url)
+      }
       .onChange(of: scenePhase) {
         guard scenePhase == .active else {
           return

@@ -34,12 +34,15 @@ class World {
   var verb: Verb?
   // How `verb` was reached, for its page's `viewAppeared`: a link's `source` item, else `deeplink`.
   var verbSource: AnalyticsSource = .deeplink
+  // The cells a link's `match` item names on `verb`'s page.
+  var verbMarks: MarkedConjugations?
   var verbModel: VerbModel?
   var info: Info?
   var selectedTab: MainTab = .verbs
   var shouldNavigateToTutor = false
-  // Set by Command-F and cleared by VerbBrowseView once it has focused its search field.
-  var verbSearchIsRequested = false
+  // Set by a search link, Command-F, the control, or the quick action, and cleared by
+  // VerbBrowseView once it has shown the field.
+  var searchRequest: SearchRequest?
   var session: URLSession
   // A deeplink that arrived before VerbData finished loading (the cold-launch race — see
   // handleURL). ConjuguerApp replays it via drainPendingDeeplink() once the data is ready.
@@ -140,40 +143,35 @@ class World {
     )
   }()
 
+  /// The grammar is in docs/feature_architecture.md § Deeplinks.
   func handleURL(_ url: URL) {
-    guard
-      url.isDeeplink,
-      url.hasExpectedNumberOfDeeplinkComponents
-    else {
+    guard url.isDeeplink, url.hasDeeplinkTarget else {
       return
     }
 
     // On cold launch a widget's URL can arrive via onOpenURL before VerbData finishes its
     // off-main-actor parse, so entity lookups would silently fail (nil verb) while the tab
     // still switched — landing on VerbBrowseView instead of VerbView. Stash the URL and let
-    // ConjuguerApp replay it via drainPendingDeeplink() once the data is loaded.
+    // ConjuguerApp replay it via drainPendingDeeplink() once the data is loaded. Every entry
+    // point (an intent, the quick action, Spotlight) arrives here, so each inherits this.
     guard !Verb.verbs.isEmpty else {
       pendingDeeplink = url
       return
     }
 
-    verb = nil
-    verbModel = nil
-    info = nil
+    clearDeeplinkTargets()
 
     if let tab = resolveDeeplinkEntity(from: url) {
       selectedTab = tab
     }
   }
 
-  /// Shows the verb list, with any verb page closed, and focuses its search field, keeping
-  /// whatever text the field holds.
-  func openVerbSearch() {
-    verb = nil
-    verbModel = nil
-    info = nil
+  /// Shows the verb list, with any verb page closed, and its search field. Nil `text` keeps
+  /// whatever the field holds, as Command-F does; empty text clears it for typing.
+  func openSearch(text: String?, source: AnalyticsSource) {
+    clearDeeplinkTargets()
     selectedTab = .verbs
-    verbSearchIsRequested = true
+    searchRequest = SearchRequest(text: text, source: source)
   }
 
   // Replays a deeplink deferred during cold-launch loading. A no-op when none is pending.
@@ -186,26 +184,37 @@ class World {
   }
 
   func handleInAppURL(_ url: URL) {
-    guard
-      url.isDeeplink,
-      url.hasExpectedNumberOfDeeplinkComponents
-    else {
+    guard url.isDeeplink, url.hasDeeplinkTarget else {
       return
     }
 
     resolveDeeplinkEntity(from: url)
   }
 
+  private func clearDeeplinkTargets() {
+    verb = nil
+    verbMarks = nil
+    verbModel = nil
+    info = nil
+    searchRequest = nil
+  }
+
   @discardableResult
   private func resolveDeeplinkEntity(from url: URL) -> MainTab? {
+    if url.host == URL.searchHost {
+      searchRequest = SearchRequest(text: url.deeplinkQueryValue(named: URL.searchTextQueryName) ?? "", source: url.analyticsSource ?? .deeplink)
+      return .verbs
+    }
+
+    let target = url.pathComponents[1]
     switch url.host {
     case URL.verbHost:
-      verbSource = AnalyticsSource.ofDeeplink(url)
-      if url.pathComponents[1] == URL.randomVerbPath {
-        verb = Verb.verbs.values.randomElement()
-      } else {
-        verb = Verb.verbs[url.pathComponents[1]]
+      let found = target == URL.randomVerbPath ? Verb.verbs.values.randomElement() : Verb.verbs[target]
+      verbSource = url.analyticsSource ?? .deeplink
+      verbMarks = found.flatMap { verb in
+        url.deeplinkQueryValue(named: URL.matchQueryName).flatMap { MarkedConjugations(text: $0, on: verb) }
       }
+      verb = found
       return .verbs
     case URL.quizHost:
       if quiz.quizState != .inProgress {
@@ -213,19 +222,23 @@ class World {
       }
       return .quiz
     case URL.verbModelHost:
-      verbModel = VerbModel.models[url.pathComponents[1]]
+      verbModel = VerbModel.models[target]
       return .models
     case URL.infoHost:
-      guard
-        let infoIndex = Int(url.pathComponents[1]),
-        Info.infos.indices.contains(infoIndex)
-      else {
+      guard let found = Info.info(deeplinkTarget: target) else {
         return nil
       }
-      info = Info.infos[infoIndex]
+      info = found
       return .info
     default:
       return nil
     }
   }
+}
+
+/// A request, from a link or a command, that the verb list show its search field.
+struct SearchRequest: Equatable {
+  /// Nil keeps what the field holds.
+  let text: String?
+  let source: AnalyticsSource
 }

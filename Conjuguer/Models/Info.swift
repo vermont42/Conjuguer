@@ -72,6 +72,18 @@ struct Info: Identifiable, Hashable {
   static func headingToIndex(heading: String) -> Int? {
     infos.firstIndex { $0.heading.lowercased() == heading.lowercased() }
   }
+
+  /// The article an `info/` link names: by its stable key, or by its position, as links did
+  /// before 2026-11-22 and may still in a widget or shortcut made then.
+  static func info(deeplinkTarget target: String) -> Info? {
+    if let info = infos.first(where: { $0.stableKey == target }) {
+      return info
+    }
+    guard let index = Int(target), infos.indices.contains(index) else {
+      return nil
+    }
+    return infos[index]
+  }
 }
 
 enum InfoCategory: CaseIterable {

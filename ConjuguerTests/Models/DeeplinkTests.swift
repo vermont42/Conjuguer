@@ -27,6 +27,8 @@ struct DeeplinkTests {
     Current.info = nil
     Current.pendingDeeplink = nil
     Current.verbSource = .deeplink
+    Current.verbMarks = nil
+    Current.searchRequest = nil
   }
 
   @Test func testHandleURLSwitchesTab() {
@@ -189,20 +191,19 @@ struct DeeplinkTests {
     #expect(Current.selectedTab == .settings, "An unknown host must not switch the tab.")
   }
 
-  @Test func testOpenVerbSearchClosesPagesAndRequestsFocus() {
+  @Test func testOpenSearchClosesPagesAndRequestsTheField() {
     resetCurrent()
     Current.selectedTab = .quiz
-    Current.verbSearchIsRequested = false
     Current.handleURL(url("conjuguer://verb/parler"))
     Current.verbModel = VerbModel.models.values.first
 
-    Current.openVerbSearch()
+    Current.openSearch(text: nil, source: .tab)
 
     #expect(Current.verb == nil)
     #expect(Current.verbModel == nil)
     #expect(Current.selectedTab == .verbs)
-    #expect(Current.verbSearchIsRequested)
-    Current.verbSearchIsRequested = false
+    #expect(Current.searchRequest == SearchRequest(text: nil, source: .tab))
+    Current.searchRequest = nil
   }
 
   @Test(arguments: [
@@ -248,5 +249,145 @@ struct DeeplinkTests {
     Current.handleInAppURL(url("conjuguer://verb/parler?source=infoLink"))
     #expect(Current.verb?.infinitif == "parler")
     #expect(Current.verbSource == .infoLink)
+  }
+
+  @Test func testASearchLinkRequestsItsTextFromItsSource() {
+    resetCurrent()
+    Current.selectedTab = .quiz
+    Current.handleURL(url("conjuguer://search?q=j%27ai%20mang%C3%A9&source=lookup"))
+    #expect(Current.searchRequest == SearchRequest(text: "j'ai mangé", source: .lookup))
+    #expect(Current.selectedTab == .verbs)
+    #expect(Current.verb == nil)
+  }
+
+  @Test func testASearchLinkWithoutTextClearsTheFieldForTyping() {
+    resetCurrent()
+    Current.handleURL(url("conjuguer://search"))
+    #expect(Current.searchRequest == SearchRequest(text: "", source: .deeplink))
+  }
+
+  @Test func testTheSearchRouteTakesNoTarget() {
+    resetCurrent()
+    Current.selectedTab = .settings
+    Current.handleURL(url("conjuguer://search/venir"))
+    #expect(Current.searchRequest == nil)
+    #expect(Current.selectedTab == .settings)
+  }
+
+  @Test func testAVerbLinkClearsAPendingSearchRequest() {
+    resetCurrent()
+    Current.handleURL(url("conjuguer://search?q=suis"))
+    Current.handleURL(url("conjuguer://verb/aller"))
+    #expect(Current.searchRequest == nil)
+    #expect(Current.verb?.infinitif == "aller")
+  }
+
+  @Test func testAMatchMarksItsCells() throws {
+    resetCurrent()
+    Current.handleURL(url("conjuguer://verb/aller?match=vais&source=lookup"))
+    let marks = try #require(Current.verbMarks)
+    #expect(marks.tenses == [.indicatifPrésent(.firstSingular)])
+    #expect(Current.verbSource == .lookup)
+  }
+
+  @Test func testACompoundMatchMarksTheCompoundTense() throws {
+    resetCurrent()
+    Current.handleURL(url("conjuguer://verb/manger?match=ai%20mang%C3%A9"))
+    let marks = try #require(Current.verbMarks)
+    #expect(marks.includesCompoundTense)
+    #expect(marks.contains(.passéComposé(.firstSingular)))
+  }
+
+  @Test func testAMatchThatFillsNoCellStillOpensThePage() {
+    resetCurrent()
+    Current.handleURL(url("conjuguer://verb/aller?match=xyzzyq"))
+    #expect(Current.verb?.infinitif == "aller")
+    #expect(Current.verbMarks == nil)
+  }
+
+  @Test func testAnInfoLinkNamesItsArticleByKeyOrPosition() {
+    for (index, info) in Info.infos.enumerated() {
+      resetCurrent()
+      Current.handleURL(url("conjuguer://info/\(info.stableKey)"))
+      #expect(Current.info == info)
+      resetCurrent()
+      Current.handleURL(url("conjuguer://info/\(index)"))
+      #expect(Current.info == info)
+    }
+  }
+
+  @Test func testInfoBuilderRoundTrips() throws {
+    for info in Info.infos {
+      resetCurrent()
+      Current.handleURL(try #require(URL.infoDeeplink(info)))
+      #expect(Current.info == info)
+    }
+  }
+
+  @Test(arguments: ["aller", "haïr France", "sortir exit", "s'entre-déchirer", "arc-bouter"])
+  func testVerbBuilderRoundTrips(key: String) throws {
+    guard Verb.verbs[key] != nil else {
+      return
+    }
+    resetCurrent()
+    Current.handleURL(try #require(URL.verbDeeplink(key, source: .widget, match: "j'ai")))
+    #expect(Current.verb?.dictionaryKey == key)
+    #expect(Current.verbSource == .widget)
+  }
+
+  @Test(arguments: ["suis", "j'ai mangé", "to go", "a&b=c#d/e?f", "", "œuvrer"])
+  func testSearchBuilderRoundTrips(text: String) throws {
+    resetCurrent()
+    Current.handleURL(try #require(URL.searchDeeplink(text: text, source: .lookup)))
+    #expect(Current.searchRequest == SearchRequest(text: text, source: .lookup))
+  }
+
+  @Test func testModelBuilderRoundTrips() throws {
+    resetCurrent()
+    let model = try #require(VerbModel.models["4-2B"])
+    Current.handleURL(try #require(URL.modelDeeplink(model)))
+    #expect(Current.verbModel == model)
+  }
+
+  // The control's link is a literal, which Shared/ writes because it cannot reach the builders.
+  @Test func testFindAVerbOpensAnEmptySearch() throws {
+    let links = [
+      (url(OpenVerbSearchIntent.pendingDeeplink), AnalyticsSource.control),
+      (try #require(QuickAction.findVerb.deeplink), .quickAction)
+    ]
+    for (link, source) in links {
+      resetCurrent()
+      Current.selectedTab = .quiz
+      Current.handleURL(link)
+      #expect(Current.searchRequest == SearchRequest(text: "", source: source))
+      #expect(Current.selectedTab == .verbs)
+    }
+  }
+
+  @Test func testASpotlightResultOpensItsVerb() throws {
+    resetCurrent()
+    let key = VerbSpotlight.verbKey(fromSpotlightIdentifier: "VerbEntity/haïr France")
+    Current.handleURL(try #require(URL.verbDeeplink(key, source: .spotlight)))
+    #expect(Current.verb?.dictionaryKey == "haïr France")
+    #expect(Current.verbSource == .spotlight)
+  }
+
+  @Test func testAPendingSearchLinkIsReplayed() {
+    resetCurrent()
+    Current.pendingDeeplink = url("conjuguer://search?q=vais&source=lookup")
+    Current.drainPendingDeeplink()
+    #expect(Current.searchRequest == SearchRequest(text: "vais", source: .lookup))
+    #expect(Current.pendingDeeplink == nil)
+  }
+
+  // A model page's verbs list is a run of these links, which ModelView reads back.
+  @Test func testAModelsVerbLinksNameTheirVerbs() throws {
+    let model = try #require(VerbModel.models["4-2B"])
+    let links = model.verbsWithDeepLinks().runs.compactMap(\.link)
+    #expect(links.count == model.verbs.count)
+    for link in links {
+      #expect(link.hasExpectedNumberOfDeeplinkComponents)
+      #expect(Verb.verbs[link.pathComponents[1]] != nil)
+    }
   }
 }

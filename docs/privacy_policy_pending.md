@@ -111,3 +111,41 @@ Le point sur certaines actions dans l'application devient :
 ```
 - Certaines actions dans l'application, comme l'ouverture du jeu, le réaffichage de l'introduction, l'ouverture de l'article d'un temps depuis la page d'un verbe ou un appui sur le bouton de partage de la page d'un verbe, ainsi que la réussite ou l'échec de la connexion à Game Center
 ```
+
+## Lookup from outside the app (browse plan, Phase 9, 2026-11-22)
+
+Adds `source` to `finishSearch`: where a verb search began, from a fixed list (the Verbs tab, the
+Find a Verb control, the Home Screen quick action, the Look Up a Verb shortcut, or a link). It
+also begins sending three `source` values on the verb page: `spotlight`, `lookup`, and
+`quickAction` (the last for searches only). The first bullet's examples now name Spotlight, since
+it is a kind of surface the list did not suggest, and the third bullet now names where the search
+began. Neither names a verb or carries the word looked up. Apply this section after the Phase 3
+section above, since it replaces two of that section's bullets.
+
+### English
+
+The first bullet now reads:
+
+```
+- How you reached a verb's page: for example from a search, the verb list, a model's page, another verb's page, an info article, a widget, Control Center, a shortcut, or Spotlight
+```
+
+The third bullet now reads:
+
+```
+- When a search for a verb ends: where it began (the verb list, Control Center, a Home Screen quick action, a shortcut, or a link), whether you opened a verb, the kind of match that found it (for example the infinitive, a conjugation, a spelling without accents, or an English meaning), and rough counts: the length of what you typed (1 to 2 letters, 3 to 5, 6 to 9, or 10 or more), how many verbs matched (none, 1, 2 to 10, or more), and where the verb you opened stood in the list (first, second to fifth, or lower)
+```
+
+### French
+
+Le premier point devient :
+
+```
+- La façon dont vous avez atteint la page d'un verbe : par exemple depuis une recherche, la liste des verbes, la page d'un modèle, la page d'un autre verbe, un article d'information, un widget, le Centre de contrôle, un raccourci ou Spotlight
+```
+
+Le troisième point devient :
+
+```
+- À la fin d'une recherche de verbe : son point de départ (la liste des verbes, le Centre de contrôle, une action rapide de l'écran d'accueil, un raccourci ou un lien), si vous avez ouvert un verbe, le type de correspondance qui l'a trouvé (par exemple l'infinitif, une forme conjuguée, une orthographe sans accents ou un sens anglais) et des ordres de grandeur : la longueur de votre saisie (1 à 2 lettres, 3 à 5, 6 à 9, ou 10 et plus), le nombre de verbes trouvés (aucun, 1, de 2 à 10, ou davantage) et la place du verbe ouvert dans la liste (premier, du deuxième au cinquième, ou plus loin)
+```

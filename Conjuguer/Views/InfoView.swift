@@ -55,10 +55,10 @@ struct InfoView: View {
     let cleansedUrlString = firstLetterLowercased(parenless(url.absoluteString.removingPercentEncoding ?? ""))
 
     if let infoIndex = Info.headingToIndex(heading: cleansedUrlString) {
-      URL(string: URL.conjuguerUrlPrefix + "\(URL.infoHost)/\(infoIndex)").map(open)
+      URL.infoDeeplink(Info.infos[infoIndex]).map(open)
       return .handled
-    } else if Verb.verbs[cleansedUrlString] != nil {
-      URL(string: URL.conjuguerUrlPrefix + "\(URL.verbHost)/\(parenless(firstLetterLowercased(url.absoluteString)))?source=\(AnalyticsSource.infoLink.rawValue)").map(open)
+    } else if let verb = Verb.verbs[cleansedUrlString] {
+      URL.verbDeeplink(verb.dictionaryKey, source: .infoLink).map(open)
       return .handled
     } else {
       return .systemAction

@@ -88,9 +88,11 @@ and later callers (reverse lookup, Spotlight, the Look Up intent) are to use it 
   (`.navigationBarDrawer(displayMode: .always)`, `BrowseLayout.searchPlacement`) on both tabs,
   because iPadOS 26 shrinks `.automatic` search into a toolbar button that ignores `.searchFocused`.
   iPhone keeps `.automatic`. **Command-F** is a top-level menu command (Verbs › Find a Verb) that
-  calls `World.openVerbSearch()`: it closes any deeplinked page, switches to the Verbs tab, and sets
-  `verbSearchIsRequested`, which `VerbBrowseView` answers by popping any pushed verb page (waiting
-  500 ms for the pop, or the focus does not take) and focusing the field, keeping its text.
+  calls `World.openSearch(text: nil, source: .tab)`: it closes any deeplinked page, switches to the
+  Verbs tab, and sets `searchRequest`, which `VerbBrowseView` answers by popping any pushed verb page
+  (waiting 500 ms for the pop, or the focus does not take) and focusing the field, keeping its text.
+  Since Phase 9 the `search` route, the Find a Verb control, and the quick action make the same
+  request with text (§ Deeplinks).
   **↑ and ↓** move a highlight through the results in reading order (a red accent bar on a card, a
   red tint on a list row), stopping at either end; the first ↓ lands on the first result. They need
   `VerbSearchArrowKeys`, a `UIKeyCommand` on the window's root view controller installed only while
@@ -444,7 +446,7 @@ series.
 |---|---|---|
 | `viewAppeared` with `viewName` `VerbView` | `source` (below) | When a verb visit begins: the page arrives, or returns with `source` `resume` after another tab, its own model sheet, or the background |
 | `leaveVerbView` | `deepestSection` (`header`, `simple`, `compound`, `etymology`, `example`), `dwell` (`0-5s`, `5-15s`, `15-60s`, `60s+`) | Exactly once for each verb page's `viewAppeared`: when the page leaves the screen, its model sheet opens, or the app goes to the background |
-| `finishSearch` | `outcome` (`opened`, `abandoned`, `noResult`), `queryLength` (`1-2`, `3-5`, `6-9`, `10+`), `resultCount` (`0`, `1`, `2-10`, `11+`), `matchKind` (below), `resultPosition` (`1`, `2-5`, `6+`, `none`) | Once per verb search: when a result or the guess is opened (by tap, Return, or the arrow keys), the field is cleared, or the app goes to the background with text in the field |
+| `finishSearch` | `source` (where the search began: `tab`, `control`, `quickAction`, `lookup`, or `deeplink`; Phase 9), `outcome` (`opened`, `abandoned`, `noResult`), `queryLength` (`1-2`, `3-5`, `6-9`, `10+`), `resultCount` (`0`, `1`, `2-10`, `11+`), `matchKind` (below), `resultPosition` (`1`, `2-5`, `6+`, `none`) | Once per verb search: when a result or the guess is opened (by tap, Return, or the arrow keys), the field is cleared, or the app goes to the background with text in the field |
 
 **A visit** (`VerbVisit`) is one stretch of a verb page on screen, uncovered by its own model
 sheet, with the app in the foreground. It is the same whether the page was pushed (Verbs tab) or
@@ -477,6 +479,13 @@ abandoned search's `matchKind` is that of the top result it passed over. Opening
 `opened`, `resultCount` `0`, `matchKind` `guess`, and position `1`. `resultCount` counts rows, so a
 doubled infinitive (haïr) counts twice. The Models tab's search sends nothing.
 
+**Where a search began** (Phase 9, 2026-11-22, as in Konjugieren's Phase 11) is `finishSearch`'s
+`source`: `tab` for one typed in the Verbs tab, Command-F included, or the surface whose search
+link opened the field (`control`, `quickAction`, `lookup`, or `deeplink` for a link without a
+`source`). Without it, a page reached through the control's search would report only `search`.
+`SearchTracker.fieldOpened(from:)` holds the surface for the next search, `fieldClosed()` forgets it
+if nothing was typed, and a search that the opening interrupts ends there.
+
 **`matchKind`** is `VerbSearch.MatchKind`'s case by name, through an exhaustive switch
 (`analyticsValue` in `SearchReport.swift`), so a new kind cannot go unnamed: `exactInfinitive`,
 `exactFoldedInfinitive`, `conjugation`, `infinitivePrefix`, `glossMeaning`, `foldedConjugation`,
@@ -497,23 +506,26 @@ quiz signals. Values are Konjugieren's names wherever the surface is the same.
 | `modelPage` | Yes | A verb in a model page's list, in the Models tab or in a sheet over a verb page |
 | `infoLink` | Yes | A verb linked from an Info article (`?source=infoLink`) |
 | `widget` | Yes | Any home-screen, lock-screen, or quiz widget (`WidgetDeeplink`, `?source=widget`) |
-| `control` | Yes | The Random Verb control in Control Center (`OpenRandomVerbControlIntent`) |
+| `control` | Yes | The Random Verb control in Control Center (`OpenRandomVerbControlIntent`); for `finishSearch`, the Find a Verb control (Phase 9) |
 | `shortcut` | Yes | Open Random Verb run from the Shortcuts app (`OpenRandomVerbIntent`); Phase 9's shortcuts too |
 | `deeplink` | Yes | A `conjuguer://verb/` link with no `source` item, or one outside this vocabulary |
 | `resume` | Yes | The same page appearing again (above) |
 | `related` | Yes | A verb on a verb page's Related Verbs card, or in its full list (Phase 7) |
-| `spotlight`, `lookup`, `quickAction` | Phase 9 | A Spotlight result; Look Up a Verb; the Home Screen quick action. Phase 9 should also add `source` to `finishSearch`, as Konjugieren's Phase 11 did, for searches these surfaces open |
+| `spotlight` | Yes | A Spotlight result (Phase 9) |
+| `lookup` | Yes | Look Up a Verb, when the word settles one verb (Phase 9). For `finishSearch`, a search the lookup opened |
+| `quickAction` | Yes | For `finishSearch` only: a search the Home Screen quick action opened (Phase 9) |
 | `recent`, `myVerbs` | Phase 10 | A recent verb in the empty focused field; a verb in My Verbs. For the quiz signals (Phase 11), `myVerbs` is a quiz over My Verbs |
-| `tab`, `verbPage` | Phase 11 | The quiz signals only: a quiz begun from the Quiz tab; Test Me on a verb page |
+| `tab` | Yes | For `finishSearch` only: a search typed in the Verbs tab, Command-F included (Phase 9). For the quiz signals (Phase 11), a quiz begun from the Quiz tab |
+| `verbPage` | Phase 11 | The quiz signals only: Test Me on a verb page |
 | `reviewCard` | Phase 13 | The review card, opened after its conjugations are revealed |
 | `list` | Phase 14 | A verb on a collection's page; for the quiz signals, a collection's quiz |
 
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
 a bare `Verb`, and since Phase 5 the cells a search matched (`marks`). A link carries `source` as a query item
 (`conjuguer://verb/aller?source=widget`), because a widget or an intent can hand the app only a
-URL. `World.resolveDeeplinkEntity` stores it in `World.verbSource` (`AnalyticsSource.ofDeeplink`),
+URL. `World.resolveDeeplinkEntity` stores it in `World.verbSource` (`URL.analyticsSource`),
 falling back to `deeplink`, and the sheets that present `World.verb` pass it to `VerbView`. A model
-page passes `modelPage` itself. **Phase 9's grammar should keep this query item.**
+page passes `modelPage` itself. Phase 9's grammar (§ Deeplinks) keeps the item on every route.
 
 **The convention for later phases.** A phase that adds a way to reach a verb page passes its value
 in `VerbDestination`, in a link's `source` item, or directly to `VerbView`, marks it sent in the
@@ -523,51 +535,127 @@ table above, and stages its privacy line. Phase 8 added `tapShareVerb`; Phases 1
 
 ## Deeplinks
 
-The app opens `conjuguer://` links from the widgets, the Control Center controls, Info articles,
-and model pages. There is no web domain, so there are no universal links.
+The app opens `conjuguer://` links from the widgets, the Control Center controls, App Intents, the
+Home Screen quick action, Spotlight, Info articles, and model pages. Anything outside the app that
+can hand Conjuguer only a URL uses one. There is no web domain, so there are no universal links.
 
-### Grammar Today
+### Grammar
+
+Written 2026-11-22 for Phase 9 of
+[`plans/browse_and_verb_implementation.md`](../plans/browse_and_verb_implementation.md), before the
+`search` route was added, so that every route follows one shape. It is Konjugieren's grammar
+(its `docs/feature_architecture.md` § Deeplink System) with Conjuguer's routes.
 
 ```
-conjuguer://<host>/<target>
+conjuguer://<route>[/<target>][?<item>=<value>&…]
 ```
 
-A link must have exactly one path segment after the host (`URL.hasExpectedNumberOfDeeplinkComponents`
-counts two path components, "/" and the target), or it is ignored. Query items do not count as
-path components. The only one read is `source` on a `verb/` link, which names the surface that sent
-it (§ Analytics); every other query item is ignored.
+- **The route** is the host. It names the kind of place: a verb, the search, a model, an article.
+- **The target** is at most one path segment, percent-encoded, naming one thing of that kind: a
+  verb's `Verb.verbs` key, a model's identifier, an article's stable key. `search` takes none, and
+  every other route takes exactly one (`URL.hasDeeplinkTarget`); a link that breaks this is ignored.
+- **Text travels in query items, never in the path**, because it can hold spaces, apostrophes, and
+  slashes ("j'ai mangé"). Query items modify a route; unknown ones are ignored.
+- **`source`** may follow any route that leads to a verb page, a search, or (pedagogy plan) a quiz.
+  It names the surface that built the link, from `AnalyticsSource`, because a widget or an intent
+  can hand the app nothing but a URL. A missing or unknown value counts as `deeplink`.
+- **Builders, not literals.** App code builds links with `URL.verbDeeplink`, `URL.searchDeeplink`,
+  `URL.infoDeeplink`, and `URL.modelDeeplink`, which percent-encode. Only the widget extension and
+  `Shared/`, which cannot see `AnalyticsSource`, write literals (`WidgetDeeplink.verb(_:)`, the
+  pending links of `OpenQuizIntent`, `OpenRandomVerbIntent`, `OpenRandomVerbControlIntent`, and
+  `OpenVerbSearchIntent`), and `DeeplinkTests` pins each literal's source to the vocabulary.
 
-| Host | Target | Opens |
-|---|---|---|
-| `verb` | A verb's `dictionaryKey`, percent-encoded (`aller`; `ha%C3%AFr%20France` for one of a doubled infinitive's entries), or `random`; optionally `?source=` | The verb page as a sheet over the Verbs tab. `random` draws from all 6,330 entries (`Verb.verbs.values.randomElement()`). An unknown verb opens the Verbs tab and nothing else |
-| `model` | A model's identifier (`1-1`) | The model page as a sheet over the Models tab |
-| `info` | A position in `Info.infos` (`info/0`) | The article as a sheet over the Info tab. An out-of-range position does nothing |
-| `quiz` | Anything (`OpenQuizIntent` sends `quiz/start`) | The Quiz tab, starting a quiz unless one is in progress |
+| Route | Target | Query items | Opens | Since |
+|---|---|---|---|---|
+| `verb` | A `Verb.verbs` key (`aller`; `ha%C3%AFr%20France` for one entry of a doubled infinitive), or `random` | `source`; `match`, a conjugation the page marks as it marks a search's match (`verb/aller?match=vais`) | The verb page as a sheet over the Verbs tab (or the Info tab, for an article's link), scrolled to the first marked cell. `random` draws from all 6,330 entries. An unknown verb opens the Verbs tab and nothing else; a `match` that fills no cell opens the page unmarked | Before 2026; `match` Phase 9 |
+| `search` | None | `q`, the text; `source` | The verb list with its search field, any verb page closed. With text, the results show with the keyboard down; with none (or `q` empty), the field is cleared and focused for typing | Phase 9 |
+| `model` | A model's identifier (`1-1`) | None | The model page as a sheet over the Models tab | Before 2026 |
+| `info` | A stable key (`futur_simple`), or a legacy position (`info/0`) | None | The article as a sheet over the Info tab. An unknown key or out-of-range position does nothing | Before 2026; keys Phase 9 |
+| `quiz` | Anything (`OpenQuizIntent` sends `quiz/start`) | None read yet | The Quiz tab, starting a quiz unless one is in progress | Before 2026 |
+| `list` | Reserved for a collection's key (Phase 14) | `source` | Nothing yet: the route is not handled | Reserved Phase 9 |
 
-Phase 9 of the browse plan replaces this section with one written grammar (text in query items,
-`source` on every route, a `search` route, `info/` by stable key) and builders in place of the
-literals listed below.
+A `match` is read as search reads a query (`MarkedConjugations(text:on:)`, through
+`VerbSearch.conjugationMatches`), so it may be anything a search row matched: vais, était, "ai
+mangé", or "me suis levé" on lever's page, which marks "ai levé" as Phase 5's pronominal compounds
+do. Look Up a Verb sends the row's own spelling.
 
 ### Architecture
 
 | File | Purpose |
 |------|---------|
-| `URLExtensions.swift` | The scheme, the hosts, `isDeeplink`, and `hasExpectedNumberOfDeeplinkComponents` |
-| `World.swift` | `handleURL(_:)` clears `verb`, `verbModel`, and `info`, resolves the link (`resolveDeeplinkEntity(from:)`), and selects the tab. `handleInAppURL(_:)` resolves without clearing or switching tabs, for links inside Info articles |
-| `ConjuguerApp.swift` | Receives links through `.onOpenURL`, and on each activation drains a link that a control's intent left in the shared defaults (`WidgetConstants.pendingDeeplinkKey`) |
-| `VerbBrowseView.swift`, `ModelBrowseView.swift`, `InfoBrowseView.swift` | Present `Current.verb`, `Current.verbModel`, and `Current.info` as sheets |
-| `ModelView.swift` | Intercepts its own `verb/` links (the verbs list) through an `OpenURLAction` and presents the verb as a sheet |
-| `InfoView.swift` | Turns an article's links into `info/` or `verb/` links and hands them to `handleInAppURL(_:)` |
+| `URLExtensions.swift` | The grammar's constants (routes, query-item names), `isDeeplink`, `hasDeeplinkTarget`, `analyticsSource`, `deeplinkQueryValue(named:)`, and the builders |
+| `World.swift` | `handleURL(_:)` clears `verb`, `verbMarks`, `verbModel`, `info`, and `searchRequest`, resolves the link (`resolveDeeplinkEntity(from:)`), and selects the tab. `handleInAppURL(_:)` resolves without clearing or switching tabs, for links inside Info articles. `openSearch(text:source:)` is the search route's effect, which Command-F also uses (`text` nil keeps the field's text) |
+| `Info.swift` | `Info.info(deeplinkTarget:)` resolves a stable key or a legacy position |
+| `MatchedConjugation.swift` | `MarkedConjugations(text:on:)` reads a `match` item |
+| `VerbBrowseView.swift` | Consumes `searchRequest` on appear and on change, since a link can arrive before the tab first appears, and presents `verb` with `verbSource` and `verbMarks` |
+| `ModelBrowseView.swift`, `InfoBrowseView.swift` | Present `verbModel` and `info` as sheets; the Info tab also presents `verb`, for an article's verb link |
+| `ModelView.swift` | Intercepts its own `verb/` links (the verbs list, built by `VerbModel.verbsWithDeepLinks`) through an `OpenURLAction` and pushes the verb |
+| `InfoView.swift` | Turns an article's links into `info/` or `verb/` links and hands them to `handleInAppURL(_:)`, or to the verb page's article sheet |
+| `ConjuguerApp.swift` | Receives links through `.onOpenURL`; a Spotlight result through `.onContinueUserActivity(CSSearchableItemActionType)`, turned into a `verb/` link with `source` `spotlight`; and on each activation, a link that a control's or a shortcut's intent left in the shared defaults (`WidgetConstants.pendingDeeplinkKey`) |
+| `QuickActions.swift` | The Home Screen quick action, which hands its `search` link to `handleURL` |
+| `Intents/LookUpVerbIntent.swift` | `OpenLookupResultIntent` hands Look Up a Verb's link to `handleURL` |
 
-**The cold-launch race.** A widget's link can arrive through `.onOpenURL` before `VerbData` has
-finished parsing, when `Verb.verbs` is still empty. `handleURL` then stores the link in
-`pendingDeeplink`, and `ConjuguerApp` replays it with `drainPendingDeeplink()` once the data has
-loaded. Any new entry point must go through `handleURL` so that it inherits this.
+**The cold-launch race.** A link can arrive before `VerbData` has finished parsing, when
+`Verb.verbs` is still empty. `handleURL` then stores it in `pendingDeeplink`, and `ConjuguerApp`
+replays it with `drainPendingDeeplink()` once the data has loaded. Every entry point goes through
+`handleURL`: `.onOpenURL`, the shared defaults' pending link, Spotlight's continuation, the quick
+action (whose scene delegate receives it before any view exists), and Look Up a Verb's result. The
+`search` route waits too, so that its request reaches a verb list that has its verbs. An App Intent
+that needs the verbs before any window exists awaits `VerbData.ensureLoaded()`, which parses once
+however many callers ask.
 
-**Links written as literals.** `VerbModel.verbsWithDeepLinks()` (a model page's verbs list),
-`InfoView.handleInfoLink(_:)`, `WidgetDeeplink.verb(_:)`, `OpenQuizIntent`, `OpenRandomVerbIntent`,
-and `OpenRandomVerbControlIntent` each build their link from strings. Since Phase 3 the Info, widget,
-and random-verb links carry a `source` item.
+### Examples
+
+```
+conjuguer://verb/aller                                  → aller's page
+conjuguer://verb/aller?match=vais&source=lookup         → aller's page at the présent, je vais marked
+conjuguer://verb/manger?match=ai%20mang%C3%A9           → manger's page at the passé composé, the compound block shown
+conjuguer://search?q=suis&source=lookup                 → the verb list searched for "suis" (être and suivre)
+conjuguer://search?source=control                       → the verb list with an empty, focused field
+conjuguer://info/futur_simple                           → the Futur Simple article
+conjuguer://info/0                                      → the Dedication article (legacy position)
+conjuguer://model/1-9                                   → aller's model
+```
+
+## Lookup from Outside the App
+
+Built 2026-11-22 in Phase 9 of the browse plan, ported from Konjugieren's Phase 11. Conjuguer had
+two App Intents and no `AppShortcutsProvider`, `AppEntity`, Spotlight, or quick action before it.
+
+| Surface | Files | What it does |
+|---|---|---|
+| Look Up a Verb | `Intents/LookUpVerbIntent.swift`, `Models/VerbLookup.swift` | Asks for a word, answers ("vais: Indicatif Présent (je) of aller"), and opens the verb's page, marked, when one verb answers; otherwise the search |
+| App Shortcuts | `Intents/ConjuguerShortcuts.swift` | Look Up a Verb, Start Quiz (`OpenQuizIntent`), and Random Verb (`OpenRandomVerbIntent`), with English phrases only |
+| Find a Verb control | `ConjuguerWidget/FindVerbControl.swift`, `Shared/OpenVerbSearchIntent.swift` | Opens the empty, focused search (`search?source=control`) |
+| Quick action | `App/QuickActions.swift` | "Find a Verb" on a long press of the icon: the same search, with `source` `quickAction` |
+| Spotlight | `Intents/VerbEntity.swift`, `Intents/VerbSpotlight.swift` | One entry per verb entry, in the named index `verbs` |
+
+**What Look Up a Verb opens.** `VerbLookup` reads the verb list's own `VerbSearch.matches`, so the
+two cannot disagree. An infinitive (folded or not) and a conjugation both answer, and a folded
+conjugation (etait) answers only when nothing literal does. One answering verb opens its page with
+`match` set to the matched conjugation; two or more (suis: être and suivre), a gloss ("go"), a
+misspelling, or nothing opens the search for the word, where the list shows every match or the
+guess. At most four verbs are named. An infinitive's answer is its citation form, its gloss, and
+its key conjugations with no label ("aller, “go”: va · est allé · ira"); a conjugation's is the
+search row's line and the verb ("vais: Indicatif Présent (je) of aller"; French "…, du verbe
+aller"). The third person follows the pronoun setting, as the row does.
+
+**Why a second intent.** An intent's result can open the app only by naming another intent, so
+Look Up a Verb returns `.result(opensIntent:dialog:)` naming the hidden `OpenLookupResultIntent`,
+which hands the link to `World.handleURL`. A shortcut's phrase can carry only an entity or an enum,
+never free text, so the intent asks for the word, with autocorrection off and the default keyboard,
+which has accents.
+
+**Spotlight.** Each `VerbEntity` (identifier: the `Verb.verbs` key; title: the citation form, "se
+souvenir"; subtitle: the gloss) carries the key conjugations as its description, the gloss's
+meanings and the key conjugations as alternate names, and every one-word conjugation in the
+conjugation map plus the meanings with and without "to" as keywords. Indexing takes several
+seconds of the main actor, since the key conjugations need the Conjugator, so unlike Konjugieren,
+which indexes at every launch, `VerbSpotlight.indexVerbsIfNeeded()` indexes only when the app's
+version and build, or the entries' `format` constant, differ from the last index that succeeded.
+**Raise `format` when the entries change**, or a development build with unchanged version numbers
+keeps the old entries. A tapped result arrives as a `CSSearchableItemActionType` activity whose
+identifier is "VerbEntity/<key>".
 
 ## Quiz
 
@@ -633,7 +721,7 @@ Quitting reports nothing.
 
 ## Widgets
 
-The `ConjuguerWidget` extension holds two widgets, two Control Center controls, and the quiz's Live
+The `ConjuguerWidget` extension holds two widgets, three Control Center controls, and the quiz's Live
 Activity (`ConjuguerWidgetBundle`). It bundles only `Shared/` and `ConjuguerWidget/`, with no
 conjugator and no verb data, so it shows what the app last wrote.
 
@@ -647,7 +735,7 @@ conjugator and no verb data, so it shows what the app last wrote.
 | `SnapshotReader.swift` | Reads the snapshots in the widget |
 | `VerbDuJourWidget.swift` | The verb of the day: small, medium, large, and the rectangular and inline accessory families. One timeline entry per cached day |
 | `QuizWidget.swift`, `AnswerQuizIntent.swift` | The daily quiz question, small and medium, with buttons that grade the tapped answer in place |
-| `QuickQuizControl.swift`, `RandomVerbControl.swift` | Control Center controls. Their intents (`OpenQuizIntent`, `OpenRandomVerbControlIntent` in `Shared/`) store `conjuguer://quiz/start` or `conjuguer://verb/random?source=control` in the shared defaults and open the app, which drains it on activation |
+| `QuickQuizControl.swift`, `RandomVerbControl.swift`, `FindVerbControl.swift` | Control Center controls. Their intents (`OpenQuizIntent`, `OpenRandomVerbControlIntent`, `OpenVerbSearchIntent` in `Shared/`) store `conjuguer://quiz/start`, `conjuguer://verb/random?source=control`, or `conjuguer://search?source=control` in the shared defaults and open the app, which drains it on activation. Find a Verb was added in browse Phase 9 |
 | `QuizLiveActivity.swift` | The quiz's Lock Screen and Dynamic Island presentation |
 | `WidgetDeeplink.swift` | The verb widget's link to the verb's page |
 

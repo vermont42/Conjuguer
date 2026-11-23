@@ -29,10 +29,16 @@ Conjuguer/
 │   └── AnalyticsSpy.swift      # Test spy recording signals for assertions
 ├── App/
 │   ├── AppLauncher.swift       # Chooses TestApp vs ConjuguerApp based on the unit-test environment
-│   ├── ConjuguerApp.swift      # Main entry point: verb-data load, onboarding cover, deeplinks, widget refresh, Tips.configure(), the Command-F menu
+│   ├── ConjuguerApp.swift      # Main entry point: verb-data load, onboarding cover, deeplinks, Spotlight continuation and indexing, widget refresh, Tips.configure(), the Command-F menu
+│   ├── QuickActions.swift      # The Home Screen quick action (Find a Verb), and the app and scene delegates that install and receive it
 │   ├── TestApp.swift           # Minimal App for the unit-test environment
 │   ├── VerbSearchCommands.swift   # Verbs › Find a Verb menu with Command-F, for iPad and Mac keyboards
 │   └── Preview Content/        # Preview-only asset catalog
+├── Intents/
+│   ├── ConjuguerShortcuts.swift # AppShortcutsProvider: Look Up a Verb, Start Quiz, Random Verb, with English phrases
+│   ├── LookUpVerbIntent.swift  # Look Up a Verb (asks for a word, answers, opens the page or search) and the hidden OpenLookupResultIntent it opens with
+│   ├── VerbEntity.swift        # AppEntity and IndexedEntity for a verb entry, with its query
+│   └── VerbSpotlight.swift     # The Spotlight entries (gloss, key conjugations, every conjugation) in the named index, indexed when the app's version changes
 ├── Assets/
 │   ├── Assets.xcassets/        # Colors (customBlue, customRed, …), app icons + their preview images, Adams/Compton/Splash images
 │   ├── LaunchScreen.storyboard # Launch screen
@@ -100,6 +106,7 @@ Conjuguer/
 │   ├── verbModels.xml          # Conjugation pattern definitions
 │   ├── VerbParser.swift        # XMLParser delegate for verbs.xml
 │   ├── verbs.xml               # 6,330 entries / 6,326 distinct infinitives, with inline corpus hit counts (hi/hn/hl/hs/hp); VerbParser derives the ranks
+│   ├── VerbLookup.swift        # What Look Up a Verb says about a word and where it opens the app, read from the verb list's search
 │   ├── VerbSearch+Conjugations.swift # Reverse lookup: a conjugation, one word or compound ("ai mangé", "me suis levé"), finds its verbs
 │   ├── VerbSearch.swift        # The one matching and ranking rule for verb search: accent and ligature folding, "se" and "to" stripped, exact then prefix or English meaning then the rest, each by frequency; the guess, over infinitives and conjugations, when nothing matches
 │   ├── VerbVisit.swift         # VerbDestination (a verb page to push, with its source) and VerbVisit (one stretch of a verb page on screen, for viewAppeared and leaveVerbView)
@@ -149,7 +156,7 @@ Conjuguer/
 │   ├── SoundPlayerDummy.swift  # No-op double
 │   ├── SoundPlayerReal.swift   # AVAudioPlayer implementation with per-sound debouncing
 │   ├── StringExtensions.swift  # The rich-text markup parser: RichTextBlock / TextSegment from ` ~ $…$ ‡…‡
-│   ├── URLExtensions.swift     # Deeplink URL helpers (conjuguer:// scheme), the developer address, a mailto: builder, and the App Store link (URL.appStore)
+│   ├── URLExtensions.swift     # The deeplink grammar's constants and builders (verbDeeplink, searchDeeplink, infoDeeplink, modelDeeplink), the developer address, a mailto: builder, and the App Store link (URL.appStore)
 │   ├── URLProtocolStub.swift   # URLProtocol subclass stubbing HTTP responses in tests
 │   ├── URLSessionExtension.swift  # Stubbed URLSession factory used by the simulator/test worlds
 │   ├── Util.swift              # French/English Locale constants
@@ -159,7 +166,7 @@ Conjuguer/
 │   ├── VerbData.swift          # Startup XML parse (verbs, models, defect groups) with a loading/loaded state
 │   ├── VerbSort.swift          # Sort order for the verb browse view (frequency/alphabetical)
 │   ├── WidgetSnapshotWriter.swift # Writes the multi-day widget snapshot bundle to the shared container
-│   └── World.swift             # @Observable DI container (Current) plus MainTab; device/simulator/unitTest configurations; openVerbSearch() for Command-F
+│   └── World.swift             # @Observable DI container (Current) plus MainTab; device/simulator/unitTest configurations; handleURL and the deeplink grammar's effects, openSearch(text:source:) for search links and Command-F
 └── Views/
     ├── BrowseLayout.swift      # Shared adaptive grid columns and search-field placement (a fixed bar on iPad and Mac) for the browse views
     ├── BrowseRow.swift         # Shared row/cell used by both browse views, with optional badge and a French or English subtitle
@@ -196,6 +203,7 @@ ConjuguerWidget/
 ├── AnswerQuizIntent.swift      # AppIntent for answering the quiz question inside the widget
 ├── Assets.xcassets/            # Widget-specific asset catalog
 ├── ConjuguerWidgetBundle.swift # Widget bundle combining the widgets, controls, and Live Activity
+├── FindVerbControl.swift       # Control Center button that opens the empty, focused verb search (runs OpenVerbSearchIntent)
 ├── Info.plist                  # Widget extension configuration
 ├── Localizable.xcstrings       # Widget-target string catalog (en/fr); holds every Widget.* key, including Shared/'s intents
 ├── QuickQuizControl.swift      # Control Center button that opens the quiz
@@ -218,6 +226,7 @@ Shared/                         # Compiles into BOTH the app and widget targets
 ├── OpenQuizIntent.swift        # AppIntent opening the quiz (title written inline — appintentsmetadataprocessor can't read WidgetL accessors)
 ├── OpenRandomVerbControlIntent.swift  # The Random Verb control's action: OpenRandomVerbIntent with source=control, hidden from Shortcuts
 ├── OpenRandomVerbIntent.swift  # AppIntent opening a random verb from Shortcuts, with source=shortcut (same inline-title constraint)
+├── OpenVerbSearchIntent.swift  # The Find a Verb control's action: conjuguer://search?source=control, hidden from Shortcuts
 ├── QuizActivityAttributes.swift  # ActivityKit model for the quiz Live Activity
 ├── WidgetConstants.swift       # App-group ID, snapshot filename, storage keys
 ├── WidgetDateHelper.swift      # Pinned Gregorian calendar and day-key formatting shared by writer and reader
@@ -235,7 +244,7 @@ ConjuguerTests/
     ├── ConjugationMapTests.swift       # The bundled map equals a fresh build, finds the verb of 99% of example sentences, its entries (homographs, agreement, defects), and its format
     ├── ConjugationMatchTests.swift     # conjugations(matching:): single cells, shared spellings, compound agreement, alternates, defective cells, non-matches
     ├── ConjugationResultTests.swift    # Parameterized scoring cases for ConjugationResult
-    ├── DeeplinkTests.swift             # conjuguer:// parsing and routing, and the source query item (serialized — mutates Current)
+    ├── DeeplinkTests.swift             # conjuguer:// parsing and routing: the search route, match, info keys, the builders' round trips, and the source query item (serialized — mutates Current)
     ├── DefectGroupTests.swift          # Defect-group membership and tense suppression
     ├── DefectivityAuditTests.swift     # Per-family defectivity audit (traire, braire, férir, poindre, …)
     ├── EngineAuditTests.swift          # Hand-written pins for the stage-A verb-pass fixes (peuvent, dites, suivi, the eight re-modeled verbs, the seventeen être auxiliaries), checked against Wiktionary rather than against the engine
@@ -257,10 +266,12 @@ ConjuguerTests/
     ├── SettingsTests.swift             # Settings defaults, persistence, and malformed-value handling (serialized)
     ├── TenseTableTests.swift           # The verb page's order, each cell's card, articles, second names, and which pages show the color key
     ├── StemAlterationAuditTests.swift  # Audits every -er verb whose stem ends in é + consonant: the stem must open to è before a mute ending
+    ├── VerbLookupTests.swift           # Look Up a Verb's findings, answers, and destinations (aller, vais, suis, etait, go, venier)
     ├── VerbModelTests.swift            # GENERATED by T.generateVerbModelTests() — one @Test per verb model, ~5,500 lines. Regenerate rather than hand-edit
     ├── VerbSearchConjugationTests.swift # Reverse lookup: the plan's queries, short-query ranking, sentences, row lines, landing marks, the conjugation guess, bounded distance
     ├── VerbSearchGuessTests.swift      # The guess at the verb meant, edit distance, arrow-key selection, and the mailto: link
     ├── VerbSearchTests.swift           # Verb search: folding, reflexive and "to" stripping, tier ranking, literal-before-folded, order independence
+    ├── VerbSpotlightTests.swift        # The Spotlight entries' description, alternate names, keywords, and identifiers
     ├── VerbVisitTests.swift            # A verb visit's deepest section, resume, and banded dwell
     └── WidgetSnapshotWriterTests.swift # Snapshot-bundle generation, day paging, and change detection
 

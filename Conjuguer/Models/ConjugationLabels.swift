@@ -255,9 +255,8 @@ extension VerbModel {
       }
     }
     do {
-      return try AttributedString(markdown: orderedVerbs.map {
-        let encodedVerb = $0.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? ""
-        return "[\($0)](\(URL.conjuguerUrlPrefix + URL.verbHost)/\(encodedVerb))"
+      return try AttributedString(markdown: orderedVerbs.compactMap { key in
+        URL.verbDeeplink(key).map { "[\(key)](\($0.absoluteString))" }
       }
         .joined(separator: ", ")
       )

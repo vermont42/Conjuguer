@@ -33,7 +33,7 @@ struct SearchReportTests {
   @Test func testClearingTheFieldEndsTheSearch() {
     var tracker = SearchTracker()
     _ = tracker.textChanged(to: "ven")
-    #expect(tracker.textChanged(to: "") == "ven")
+    #expect(tracker.textChanged(to: "")?.query == "ven")
     #expect(tracker.query == nil)
   }
 
@@ -46,13 +46,13 @@ struct SearchReportTests {
   @Test func testTheTrackerKeepsTheTrimmedQuery() {
     var tracker = SearchTracker()
     _ = tracker.textChanged(to: " venir  ")
-    #expect(tracker.finish() == "venir")
+    #expect(tracker.finish()?.query == "venir")
   }
 
   @Test func testAFinishedSearchIsNotFinishedAgain() {
     var tracker = SearchTracker()
     _ = tracker.textChanged(to: "ven")
-    #expect(tracker.finish() == "ven")
+    #expect(tracker.finish()?.query == "ven")
     #expect(tracker.finish() == nil)
     #expect(tracker.textChanged(to: "") == nil)
   }
@@ -62,7 +62,46 @@ struct SearchReportTests {
     _ = tracker.textChanged(to: "ven")
     _ = tracker.finish()
     _ = tracker.textChanged(to: "veni")
-    #expect(tracker.finish() == "veni")
+    #expect(tracker.finish()?.query == "veni")
+  }
+
+  @Test func testASearchBegunInTheTabNamesTheTab() {
+    var tracker = SearchTracker()
+    _ = tracker.textChanged(to: "ven")
+    #expect(tracker.finish()?.source == .tab)
+  }
+
+  // The control, the quick action, and Look Up a Verb open the field, and the search typed or
+  // carried into it is theirs. The next one, typed after it ends, is the tab's again.
+  @Test func testASearchBegunElsewhereNamesWhereItBegan() {
+    var tracker = SearchTracker()
+    #expect(tracker.fieldOpened(from: .control) == nil)
+    _ = tracker.textChanged(to: "v")
+    _ = tracker.textChanged(to: "ven")
+    #expect(tracker.finish() == SearchTracker.Search(query: "ven", source: .control))
+    _ = tracker.textChanged(to: "veni")
+    #expect(tracker.finish()?.source == .tab)
+  }
+
+  @Test func testOpeningTheFieldEndsTheSearchInProgress() {
+    var tracker = SearchTracker()
+    _ = tracker.textChanged(to: "ven")
+    #expect(tracker.fieldOpened(from: .lookup) == SearchTracker.Search(query: "ven", source: .tab))
+    _ = tracker.textChanged(to: "suis")
+    #expect(tracker.finish()?.source == .lookup)
+  }
+
+  @Test func testClosingAnUntouchedFieldForgetsWhoOpenedIt() {
+    var tracker = SearchTracker()
+    _ = tracker.fieldOpened(from: .quickAction)
+    tracker.fieldClosed()
+    _ = tracker.textChanged(to: "ven")
+    #expect(tracker.finish()?.source == .tab)
+  }
+
+  @Test func testTheReportCarriesTheSource() {
+    let report = SearchReport.ended(query: "ven", matches: matches("ven"), source: .control)
+    #expect(report.parameters["source"] == "control")
   }
 
   @Test func testOpenedReportNamesTheOpenedResultsKind() throws {
@@ -70,6 +109,7 @@ struct SearchReportTests {
     #expect(report.outcome == .opened)
     #expect(report.matchKind == .exactInfinitive)
     #expect(report.parameters == [
+      "source": "tab",
       "outcome": "opened",
       "queryLength": "3-5",
       "resultCount": AnalyticsBand.resultCount(matches("venir").count),
@@ -109,6 +149,7 @@ struct SearchReportTests {
   @Test func testOpeningTheGuessIsAnOpenWithNoResults() {
     let report = SearchReport.openedGuess(query: "venier")
     #expect(report.parameters == [
+      "source": "tab",
       "outcome": "opened",
       "queryLength": "6-9",
       "resultCount": "0",
@@ -125,6 +166,7 @@ struct SearchReportTests {
     let vocabulary = Set(
       SearchOutcome.allCases.map(\.rawValue)
         + SearchMatchKind.allCases.map(\.rawValue)
+        + AnalyticsSource.allCases.map(\.rawValue)
         + ["1-2", "3-5", "6-9", "10+", "0", "1", "2-10", "11+", "2-5", "6+", "none"]
     )
     let found = matches(query)
@@ -134,7 +176,7 @@ struct SearchReportTests {
       SearchReport.openedGuess(query: query)
     ]
     for report in reports {
-      #expect(Set(report.parameters.keys) == ["outcome", "queryLength", "resultCount", "matchKind", "resultPosition"])
+      #expect(Set(report.parameters.keys) == ["source", "outcome", "queryLength", "resultCount", "matchKind", "resultPosition"])
       #expect(Set(report.parameters.values).isSubset(of: vocabulary))
     }
   }

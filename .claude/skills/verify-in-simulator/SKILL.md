@@ -86,6 +86,17 @@ by coordinate (Models ≈ `370,54`, Quiz ≈ `448,54` on the Conjuguer iPad Pro 
 (the cell's label is the spoken line, e.g. `je vais`). Then tap Copy by coordinate and read
 `simctl pbpaste`. A simulated rating prompt may cover a page at launch; tap Not Now first.
 
+**Outside the app (since browse Phase 9).** Links: `xcrun simctl openurl <udid> "conjuguer://search?q=suis"`
+(or `verb/aller?match=vais`); terminate the app first to try a cold launch, and allow about 15 seconds
+for the Debug build to load. Spotlight: `axe button home`, tap the Home Screen's Search pill (≈
+`201,718` on the iPhone 17), `axe type` the word, then tap the result at its `describe_ui` frame (the
+row's label is "aller, va · est allé · ira, go"). The quick action: the icon sits in the App Library
+(swipe left past the last page); hold it with `axe touch -x 70 -y 214 --down --up --delay 1.2`, then
+tap Find a Verb (≈ `133,285`). Look Up a Verb: `xcrun simctl launch <udid> com.apple.shortcuts`, tap
+its tile under Conjuguer (≈ `60,340`), `axe type` the word, and tap the prompt's Done at ≈
+`288,239`; a tap lower down dismisses the prompt and may run the Random Verb tile instead. These
+coordinates are from 2026-11-22; re-measure with `describe_ui` if one misses.
+
 ## iOS 26 control caveats specific to this app
 
 - **Accented input (é, è, à, ç, …):** `axe type` rejects non-ASCII. The skill's

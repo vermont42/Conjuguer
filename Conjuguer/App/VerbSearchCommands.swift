@@ -15,7 +15,7 @@ struct VerbSearchCommands: Commands {
   var body: some Commands {
     CommandMenu(L.Navigation.verbs) {
       Button(L.VerbBrowseView.findVerb) {
-        Current.openVerbSearch()
+        Current.openSearch(text: nil, source: .tab)
       }
       .keyboardShortcut("f")
     }

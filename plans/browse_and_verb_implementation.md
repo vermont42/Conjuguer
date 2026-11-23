@@ -32,7 +32,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 6 | Done | 2026-11-22 | 1fd6c58 | B3, B5's tip | 7 |
 | 7 | Done | 2026-11-22 | c9fbd7e | B4, A9 | 9 |
 | 8 | Done | 2026-11-22 | aaf8b31 | B6 | 10 |
-| 9 | Not started | | | C1, C2 | 11 |
+| 9 | Done | 2026-11-22 | | C1, C2 | 11 |
 | 10 | Not started | | | D1, D2 | 12 |
 | 11 | Not started | | | D2's quiz scope, D3 | 13 |
 | 12 | Not started | | | D5 | 14 |
@@ -1104,7 +1104,7 @@ question needed Josh.
 **Ideas:** C1, C2. **Ports:** Konjugieren Phase 11 (`LookUpVerbIntent.swift`,
 `KonjugierenShortcuts.swift`, `VerbEntity.swift`, `VerbSpotlight.swift`, `VerbLookup.swift`,
 `FindVerbControl.swift`, `QuickActions.swift`, `OpenVerbSearchIntent.swift`). **Depends on:**
-Phase 5 for conjugation answers, Phase 8 for key conjugations. **Status:** Not started. Likely to
+Phase 5 for conjugation answers, Phase 8 for key conjugations. **Status:** Done (2026-11-22). Likely to
 split: Conjuguer has none of the App Intents scaffolding Konjugieren had before its Phase 11.
 
 - **The grammar first.** Write one deeplink grammar in `docs/feature_architecture.md` §
@@ -1132,6 +1132,57 @@ the grammar's round trips are tested, and the intent answers for aller, vais, an
 open the search).
 
 **How it differed:**
+
+Built 2026-11-22 in one session, not split. The suite ran 459 tests in 40 suites, all passing, 38
+more than Phase 8's 421 (two new suites, `VerbLookupTests` and `VerbSpotlightTests`, sixteen new
+tests in `DeeplinkTests`, and five in `SearchReportTests`). New files: `Intents/` (`LookUpVerbIntent.swift`, `ConjuguerShortcuts.swift`,
+`VerbEntity.swift`, `VerbSpotlight.swift`), `Models/VerbLookup.swift`, `App/QuickActions.swift`,
+`Shared/OpenVerbSearchIntent.swift`, and `ConjuguerWidget/FindVerbControl.swift`.
+`docs/feature_architecture.md` § Deeplinks has the grammar and § Lookup from Outside the App the
+rest. No question needed Josh. What differs from Konjugieren, and from the phase as written:
+
+- **The grammar** is Konjugieren's with Conjuguer's routes. `verb/` targets stay `Verb.verbs` keys,
+  so each entry of a doubled infinitive keeps its own link. `info/` takes the stable key that
+  `Info` already had for screenshots, and still takes a position. `list/` is reserved and not
+  handled. The builders replaced every literal in app code (`InfoView`, `verbsWithDeepLinks`, the
+  verb page's article sheet); `AnalyticsSource.ofDeeplink` became `URL.analyticsSource`.
+  `verbSearchIsRequested` and `openVerbSearch()` became Konjugieren's `searchRequest` and
+  `openSearch(text:source:)`, which Command-F uses with nil text.
+- **`match` is read as search reads a query**, not by `Verb.conjugations(matching:)` alone, so a
+  link can carry anything a search row matched: "ai mangé", or "me suis levé" on lever.
+- **The App Intents scaffolding was missing**, as the phase warned, and was built small: one
+  `AppShortcutsProvider` (Look Up a Verb, plus the two existing intents, Start Quiz and Random
+  Verb), and a `VerbEntity` with a string query that exists for Spotlight. There is no Open Verb
+  intent with a verb parameter, which Konjugieren had before its Phase 11; nothing asked for one.
+  The phrases are English; the short titles are localized.
+- **An intent can run before any window.** Conjuguer parses its verbs in the window's `.task`,
+  where Konjugieren's are ready at once, so a background launch for Look Up a Verb would have
+  found nothing. `VerbData.ensureLoaded()` now parses once however many callers ask, and the
+  intent and the entity query await it.
+- **Spotlight indexes only when the version changes.** Konjugieren reindexes at every launch.
+  Here the key conjugations of 6,330 entries take seconds of the main actor, so
+  `VerbSpotlight.indexVerbsIfNeeded()` compares the version, build, and a `format` constant with
+  the last successful index. Conjuguer never had default-index entries, so Konjugieren's
+  migration (and its deletion bug) did not apply. The entity's title is the citation form ("se
+  souvenir"), and its identifier the dictionary key.
+- **Analytics.** `finishSearch` gained `source`, as Phase 3 asked; `spotlight`, `lookup`,
+  `quickAction`, and `tab` are now sent. Both staged policy bullets that change are in
+  `privacy_policy_pending.md`'s new section, in both languages.
+- **How it was tested, all in the simulator.** On the iPhone, in English and light mode: the
+  `search` route with text warm (suis, from the Quiz tab) and the empty control link over an open
+  verb sheet; a cold launch from `verb/manger?match=ai%20mangé`, which landed on the marked cell;
+  Spotlight for aller, showing "va · est allé · ira" over "go", and its tap into the page; the
+  quick action cold and warm (it lives in the App Library, since the icon is not on a Home Screen
+  page); Look Up a Verb from the Shortcuts app for vais (aller, "vais" marked), suis (the search,
+  two rows), and aller (its page), and the Random Verb shortcut. In French and dark mode: a
+  `search` link for "j'ai mangé" and the quick action's title, "Chercher un verbe". On the iPad,
+  in English: the `search` route and `verb/être?match=était`.
+- **Not seen, as in Konjugieren.** Look Up a Verb's answer never showed before the app opened, and
+  Spotlight matched only titles: vais, "to go", and souviens found nothing. **Tested in the
+  simulator only**; `release.md` asks for a device check of both, of Siri, and of the control,
+  whose link is tested but which was not added to Control Center.
+- **Seen, not changed.** A `verb/` link leaves the search field's text in place behind the sheet,
+  as before.
 
 ## Phase 10: Recents and My Verbs
 
