@@ -29,7 +29,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 3 | Done | 2026-11-23 | bfe5c7f | T4.1, T4.4, T4.5 | 3 |
 | 4 | Done | 2026-11-23 | 954eda0 | T1.6 | 4 |
 | 5 | Done | 2026-11-23 | bc2c6e6 | T2.3, T2.6, T6.7, M1 | 5 |
-| 6 | Awaiting Josh | 2026-11-23 | | T2.1, T2.2, T2.5 | 6 |
+| 6 | Done | 2026-11-23 | b26cb07 | T2.1, T2.2, T2.5 | 6 |
 | 7 | Not started | | | T2.7, T3.1, T6.5, M2, M3 | 7 |
 | 8 | Not started | | | Decision 4 | 8 |
 | 9 | Not started | | | T2.8 | 9 |
@@ -853,7 +853,7 @@ level is sent, and tests pin each level's pool.
 ## Phase 6: Which Verbs Are Asked
 
 **Suggestions:** T2.1, T2.2, T2.5. **Ports:** Konjugieren Phase 6. **Depends on:** Phase 5.
-**Status:** Awaiting Josh.
+**Status:** Done.
 
 For the default quiz (not a scope, whose verbs are chosen):
 
