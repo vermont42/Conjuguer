@@ -35,7 +35,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 9 | Done | 2026-11-22 | 7ba1281 | C1, C2 | 11 |
 | 10 | Done | 2026-11-22 | 2829650 | D1, D2 | 12 |
 | 11 | Done | 2026-11-22 | e9a34b5 | D2's quiz scope, D3 | 13 |
-| 12 | Awaiting Josh | 2026-11-22 | | D5 | 14 |
+| 12 | Done | 2026-11-22 | 9af3c40 | D5 | 14 |
 | 13 | Not started | | | D4 | 15 |
 | 14 | Not started | | | D6 | 16 |
 | Closing | Not started | | | Audit, porting notes | Closing |
@@ -1347,7 +1347,7 @@ Phase 10's 484, all in the new `QuizScopeTests`. New files: `Models/QuizScope.sw
 ## Phase 12: A Verb of the Day Worth Opening
 
 **Ideas:** D5. **Ports:** Konjugieren Phase 14 (`VerbDraw.swift`, `FrequencyBand.swift`,
-`WidgetSnapshotWriter.displayedSnapshot`). **Depends on:** Phase 10. **Status:** Awaiting Josh
+`WidgetSnapshotWriter.displayedSnapshot`). **Depends on:** Phase 10. **Status:** Done
 (2026-11-22).
 
 Conjuguer's widget already draws from frequent verbs, so this phase is smaller than Konjugieren's.
