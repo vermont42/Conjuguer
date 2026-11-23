@@ -5426,3 +5426,49 @@ launch's `endAll()` would clear it.
 The rename went through `../Konjugieren/scripts/rename_files.py`, excluding
 `docs/code_review_findings.md` and `plans/sweep_comments.md`. Both cite line numbers in the old
 file, and pointing those citations at the new name would have made them wrong.
+
+## Pedagogy Phase 1: Accepting What Is Right (2026-11-22)
+
+The first phase of the pedagogy port is the one Konjugieren's report put first: stop marking
+right answers wrong, and stop asking questions that have no answer. Conjuguer's grading had three
+gaps. It compared the raw text, so " parle " and "je parle" failed. It forgave any missing
+circumflex, so "etes" for êtes earned full marks. And the default quiz drew verbs and persons
+without asking the verb's defect group, so Ridiculous asked falloir's subjonctif imparfait in all
+six persons, though only il faut exists.
+
+The answer is now read before it is graded. Case and runs of spaces are ignored, and a subject
+pronoun of the asked person is stripped, so "j'ai parlé" and "nous sommes allées" pass. The
+simulator's keyboard typed a curly apostrophe for j' every time, which would have failed against
+the conjugator's straight one; normalizing the apostrophe was not in the plan, and the first
+simulated answer would have found it if the tests had not. Pronominal verbs needed a second
+look. The conjugator writes their cells without the reflexive pronoun (souviens), so "je me
+souviens", "me souviens", and the impératif's "souviens-toi" are stripped to it.
+
+The variant audit followed Konjugieren's method with French sources. Mining English Wiktionary
+found 4,296 forms the conjugator lacks, nearly all of them the 1990 rectifications: the grave
+accent in je cèderai, and the -eler and -eter verbs written with è (j'étiquète). The official text
+in the *Journal officiel* settled the details the plan had left open. The circumflex leaves i and
+u except in the passé simple's and subjonctif imparfait's endings, in dû, and in croître, whose
+forms would otherwise read as croire's; the exception explicitly skips derivatives, so accroit
+and redu are correct. Larousse settled the doublets: vouloir's formal veuillons, and il éclôt,
+which the Académie adopted in its ninth edition. Josh accepted every recommended row. The quiz
+accepts each variant and shows the app's spelling beside the checkmark (connaît, with its red î),
+and the verb page keeps its own spellings.
+
+One finding came from a failing test rather than the audit. ruisseler's rectified spelling was
+not a variant, because the verb page already shows il ruissèle. Fifteen other -eler and -eter
+verbs (niveler, ensorceler, cacheter, déchiqueter…) are written the same way, while the rest of
+the app is traditional. Larousse lists both spellings for all sixteen, so the rule now runs both
+ways: whichever spelling the page shows, the other passes. Josh chose to leave the sixteen pages
+as they are.
+
+The defective cells were simpler. A drawn person the verb lacks gives way to the next one it has,
+and a verb that lacks the whole tense (faillir has no impératif) gives way to the pool's next
+verb. `Quiz` now takes a seed, and a test builds a hundred seeded quizzes at each difficulty and
+finds no defective cell.
+
+The accent keys now sit above the quiz's keyboard, as a toolbar the search fields could never
+have, and insert at the cursor. AXe cannot see that toolbar, so verifying it meant tapping keys by
+coordinate and reading the field back. One small surprise: the iPhone simulator refused to draw
+the app dark after `simctl ui appearance dark`, through several relaunches, while the iPad
+switched at once.

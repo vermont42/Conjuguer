@@ -10,18 +10,47 @@ import Testing
 
 @MainActor
 struct ConjugationResultTests {
+  private func grade(_ infinitif: String, _ tense: Tense, _ answer: String) throws -> AnswerGrade {
+    let verb = try #require(Verb.verbs[infinitif])
+    let correctAnswers = try #require(Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters, pronounGender: .feminine))
+    return ConjugationResult.grade(proposedAnswer: answer, correctAnswers: correctAnswers, verb: verb, tense: tense)
+  }
+
   @Test(arguments: [
-    ("parle", "parle", ConjugationResult.totalMatch),
-    ("parle", "Parle", .totalMatch),
-    ("être", "etre", .totalMatch),
-    ("achète", "achete", .partialMatch),
-    ("parle", "xyz", .noMatch),
-    ("paye/paie", "pàie", .partialMatch),
-    ("paye/paie", "paie", .totalMatch),
-    ("plaça", "placa", .partialMatch),
-    ("haïs", "hais", .partialMatch)
+    ("parler", Tense.indicatifPrésent(.firstSingular), "parle", ConjugationResult.totalMatch),
+    ("parler", .indicatifPrésent(.firstSingular), "Parle", .totalMatch),
+    ("parler", .indicatifPrésent(.firstSingular), " parle ", .totalMatch),
+    ("parler", .indicatifPrésent(.firstSingular), "je parle", .totalMatch),
+    ("parler", .passéComposé(.firstSingular), "j'ai parlé", .totalMatch),
+    ("parler", .passéComposé(.firstSingular), "j’ai  parlé", .totalMatch),
+    ("aller", .passéComposé(.firstPlural), "nous sommes allées", .totalMatch),
+    ("souvenir", .indicatifPrésent(.firstSingular), "je me souviens", .totalMatch),
+    ("souvenir", .impératif(.secondSingular), "souviens-toi", .totalMatch),
+    ("payer", .indicatifPrésent(.firstSingular), "paie", .totalMatch),
+    ("payer", .indicatifPrésent(.firstSingular), "paye", .totalMatch),
+    ("acheter", .indicatifPrésent(.firstSingular), "achete", .partialMatch),
+    ("être", .indicatifPrésent(.secondPlural), "etes", .partialMatch),
+    ("payer", .indicatifPrésent(.firstSingular), "pàie", .partialMatch),
+    ("placer", .passéSimple(.thirdSingular), "placa", .partialMatch),
+    ("parler", .passéComposé(.firstSingular), "ai parle", .partialMatch),
+    ("parler", .indicatifPrésent(.firstSingular), "xyz", .noMatch),
+    ("parler", .indicatifPrésent(.firstSingular), "tu parle", .noMatch),
+    ("aller", .passéComposé(.firstPlural), "sommes allés", .noMatch)
   ])
-  func scoresAnswer(correctAnswers: String, proposedAnswer: String, expected: ConjugationResult) {
-    #expect(ConjugationResult.score(correctAnswers: correctAnswers, proposedAnswer: proposedAnswer) == expected)
+  func gradesAnswer(infinitif: String, tense: Tense, answer: String, expected: ConjugationResult) throws {
+    #expect(try grade(infinitif, tense, answer).result == expected)
+  }
+
+  @Test(arguments: [
+    ("connaître", Tense.indicatifPrésent(.thirdSingular), "il connait", "connaÎt"),
+    ("céder", .futurSimple(.firstSingular), "je cèderai", "céderai"),
+    ("étiqueter", .indicatifPrésent(.firstSingular), "j'étiquète", "étiquetTe")
+  ])
+  func showsTheAppsSpellingOfAVariant(infinitif: String, tense: Tense, answer: String, shown: String) throws {
+    #expect(try grade(infinitif, tense, answer) == AnswerGrade(result: .totalMatch, shownSpelling: shown))
+  }
+
+  @Test func showsNoSpellingForTheAppsOwn() throws {
+    #expect(try grade("connaître", .indicatifPrésent(.thirdSingular), "connaît").shownSpelling == nil)
   }
 }

@@ -30,6 +30,7 @@ class Quiz {
   private var timer: Timer?
   private let gameCenter: GameCenter
   private var shouldShuffle = true
+  private var generator: QuizRandomNumberGenerator
   private var liveActivity: LiveActivity?
   // The instant the timer started, handed to the Live Activity so its Lock Screen /
   // Dynamic Island timer animates via the OS rather than a per-answer frozen String.
@@ -58,9 +59,11 @@ class Quiz {
   private var regularRadicauxFuturs = CyclingDeck(QuizVerbs.regularRadicauxFuturs)
   private var irregularRadicauxFuturs = CyclingDeck(QuizVerbs.irregularRadicauxFuturs)
 
-  init(gameCenter: GameCenter, shouldShuffle: Bool = true) {
+  /// A `seed` makes every quiz this instance builds repeatable, for tests.
+  init(gameCenter: GameCenter, shouldShuffle: Bool = true, seed: UInt64? = nil) {
     self.gameCenter = gameCenter
     self.shouldShuffle = shouldShuffle
+    generator = QuizRandomNumberGenerator(seeded: seed.map(SeededRandomNumberGenerator.init(seed:)))
   }
 
   func start(scope: QuizScope = .allVerbs) {
@@ -187,18 +190,18 @@ class Quiz {
     guard shouldShuffle else {
       return
     }
-    personNumbers.shuffle()
-    impératifPersonNumbers.shuffle()
-    regularErs.shuffle()
-    regularIrs.shuffle()
-    regularRes.shuffle()
-    bigThrees.shuffle()
-    indicatifPrésentStemChangers.shuffle()
-    êtreAuxiliaries.shuffle()
-    irregularParticipePassés.shuffle()
-    topThirties.shuffle()
-    regularRadicauxFuturs.shuffle()
-    irregularRadicauxFuturs.shuffle()
+    personNumbers.shuffle(using: &generator)
+    impératifPersonNumbers.shuffle(using: &generator)
+    regularErs.shuffle(using: &generator)
+    regularIrs.shuffle(using: &generator)
+    regularRes.shuffle(using: &generator)
+    bigThrees.shuffle(using: &generator)
+    indicatifPrésentStemChangers.shuffle(using: &generator)
+    êtreAuxiliaries.shuffle(using: &generator)
+    irregularParticipePassés.shuffle(using: &generator)
+    topThirties.shuffle(using: &generator)
+    regularRadicauxFuturs.shuffle(using: &generator)
+    irregularRadicauxFuturs.shuffle(using: &generator)
   }
 
   private func resetPublishedProperties() {
@@ -216,7 +219,6 @@ class Quiz {
 
   private func buildQuiz() {
     if scope.verbs != nil {
-      var generator = SystemRandomNumberGenerator()
       questions = scope.questions(using: &generator)
       return
     }
@@ -225,44 +227,52 @@ class Quiz {
     // Screenshot driver hook: when launched with `-CONJUGUER_QUIZ_FIXTURE screenshot`,
     // build a deterministic 30-question quiz and export the correct answers so the
     // screenshot driver can type them. See docs/screenshot_playbook.md.
-    if UserDefaults.standard.string(forKey: "CONJUGUER_QUIZ_FIXTURE") == "screenshot" {
+    switch UserDefaults.standard.string(forKey: "CONJUGUER_QUIZ_FIXTURE") {
+    case "screenshot":
       questions = generateScreenshotFixture()
       exportFixtureAnswers(questions)
       return
+    case "grading":
+      questions = generateGradingFixture()
+      return
+    default:
+      break
     }
     #endif
 
     switch difficulty {
     case .regular:
       [regularErVerb, regularErVerb, regularIrVerb, regularIrVerb, regularReVerb, bigThreeVerb, indicatifPrésentStemChangerVerb].forEach {
-        questions.append(QuizQuestion(verb: $0, tense: .indicatifPrésent(personNumber)))
+        questions.append(question(verb: $0, tense: Tense.indicatifPrésent))
       }
 
       [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb, êtreAuxiliaryVerb, irregularParticipePasséVerb].forEach {
-        questions.append(QuizQuestion(verb: $0, tense: .passéComposé(personNumber)))
+        questions.append(question(verb: $0, tense: Tense.passéComposé))
       }
 
       [regularErVerb, regularIrVerb, regularReVerb, bigThreeVerb].forEach {
-        questions.append(QuizQuestion(verb: $0, tense: .subjonctifPrésent(personNumber)))
+        questions.append(question(verb: $0, tense: Tense.subjonctifPrésent))
       }
 
-      [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
-        questions.append(QuizQuestion(verb: $0, tense: .imparfait(personNumber)))
+      for _ in 0 ..< 3 {
+        questions.append(question(from: { topThirtyVerb }, tense: Tense.imparfait))
       }
 
-      [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
-        questions.append(QuizQuestion(verb: $0, tense: .futurSimple(personNumber)))
+      [regularRadicalFuturVerb, regularRadicalFuturVerb].forEach {
+        questions.append(question(verb: $0, tense: Tense.futurSimple))
+      }
+      questions.append(question(from: { irregularRadicalFuturVerb }, tense: Tense.futurSimple))
+
+      [regularRadicalFuturVerb, regularRadicalFuturVerb].forEach {
+        questions.append(question(verb: $0, tense: Tense.conditionnelPrésent))
+      }
+      questions.append(question(from: { irregularRadicalFuturVerb }, tense: Tense.conditionnelPrésent))
+
+      for _ in 0 ..< 3 {
+        questions.append(question(from: { topThirtyVerb }, tense: Tense.impératif))
       }
 
-      [regularRadicalFuturVerb, regularRadicalFuturVerb, irregularRadicalFuturVerb].forEach {
-        questions.append(QuizQuestion(verb: $0, tense: .conditionnelPrésent(personNumber)))
-      }
-
-      [topThirtyVerb, topThirtyVerb, topThirtyVerb].forEach {
-        questions.append(QuizQuestion(verb: $0, tense: .impératif(impératifPersonNumber)))
-      }
-
-      questions.append(QuizQuestion(verb: topThirtyVerb, tense: .participePrésent))
+      questions.append(question(from: { topThirtyVerb }, tense: { _ in .participePrésent }))
 
     case .ridiculous:
       let ridiculousQuestions: [(String, Tense)] = [
@@ -298,13 +308,49 @@ class Quiz {
         ("mouvoir", .passéSimple(personNumber))
       ]
       ridiculousQuestions.forEach { infinitif, tense in
-        questions.append(QuizQuestion(verb: Verb.verbForInfinitif(infinitif), tense: tense))
+        let verb = Verb.verbForInfinitif(infinitif)
+        if let personNumber = tense.personNumber, let constructor = tense.constructor {
+          questions.append(question(verb: verb, tense: constructor, drawn: personNumber))
+        } else {
+          questions.append(QuizQuestion(verb: verb, tense: tense))
+        }
       }
     }
 
     if shouldShuffle {
-      questions.shuffle()
+      questions.shuffle(using: &generator)
     }
+  }
+
+  /// The question of `tense` for `verb` in the next person from the deck, or in the next person
+  /// after it that the verb's defect group has: falloir is asked only in the third-person
+  /// singular. Only a verb without the whole tense, such as faillir in the impératif, gets an
+  /// impossible question, so a pool that holds one draws through `question(from:tense:)`.
+  private func question(verb: Verb, tense: (PersonNumber) -> Tense) -> QuizQuestion {
+    let drawn = tense(.secondSingular).isImpératif ? impératifPersonNumber : personNumber
+    return question(verb: verb, tense: tense, drawn: drawn)
+  }
+
+  private func question(verb: Verb, tense: (PersonNumber) -> Tense, drawn: PersonNumber) -> QuizQuestion {
+    let persons = tense(.secondSingular).isImpératif ? PersonNumber.impératifPersonNumbers : PersonNumber.allCases
+    let start = persons.firstIndex(of: drawn) ?? 0
+    let rotated = persons[start...] + persons[..<start]
+    let personNumber = rotated.first { verb.hasCell(tense($0)) } ?? drawn
+    return QuizQuestion(verb: verb, tense: tense(personNumber))
+  }
+
+  private func question(from nextVerb: () -> Verb, tense: (PersonNumber) -> Tense) -> QuizQuestion {
+    let maximumDraws = 50
+    var verb = nextVerb()
+    for _ in 1 ..< maximumDraws where !hasTense(verb, tense) {
+      verb = nextVerb()
+    }
+    return question(verb: verb, tense: tense)
+  }
+
+  private func hasTense(_ verb: Verb, _ tense: (PersonNumber) -> Tense) -> Bool {
+    let persons = tense(.secondSingular).isImpératif ? PersonNumber.impératifPersonNumbers : PersonNumber.allCases
+    return persons.contains { verb.hasCell(tense($0)) }
   }
 
   #if DEBUG
@@ -350,6 +396,28 @@ class Quiz {
     }
   }
 
+  // Ten questions whose right answers the grading accepts only since it reads pronouns and
+  // standard variants, repeated to thirty, unshuffled. The answers to type are in
+  // docs/feature_architecture.md § Grading and Scoring.
+  private func generateGradingFixture() -> [QuizQuestion] {
+    let plan: [(infinitif: String, tense: Tense)] = [
+      ("connaître", .indicatifPrésent(.thirdSingular)),
+      ("parler", .indicatifPrésent(.firstSingular)),
+      ("parler", .passéComposé(.firstSingular)),
+      ("aller", .passéComposé(.firstPlural)),
+      ("étiqueter", .indicatifPrésent(.firstSingular)),
+      ("céder", .futurSimple(.firstSingular)),
+      ("souvenir", .indicatifPrésent(.firstSingular)),
+      ("souvenir", .impératif(.secondSingular)),
+      ("être", .indicatifPrésent(.secondPlural)),
+      ("plaire", .indicatifPrésent(.thirdSingular))
+    ]
+    let questions = plan.map { spec in
+      QuizQuestion(verb: Verb.verbForInfinitif(spec.infinitif), tense: spec.tense)
+    }
+    return Array(repeating: questions, count: 3).flatMap { $0 }
+  }
+
   // Write the correct answers for the fixture to Documents/screenshot_fixture_answers.json
   // so the driver can read and type them. The exported answer is the first of any
   // slash-separated alternates, which the quiz scores as a total match.
@@ -357,7 +425,7 @@ class Quiz {
   // Lowercased on the way out. Conjugator's mixed case is correct output, not a defect —
   // uppercase marks irregular characters for red highlighting (see ConjugationText.swift) —
   // but the answer field in a screenshot depicts what a *user* typed, and no human types
-  // "SUIS". Scoring is unaffected: ConjugationResult.score lowercases both sides, and the
+  // "SUIS". Scoring is unaffected: ConjugationResult.grade lowercases both sides, and the
   // app grades against its own in-memory value, never this file. Lowercasing must happen
   // here rather than in the driver, because shell `tr '[:upper:]' '[:lower:]'` works on
   // bytes and silently skips every accented capital.
@@ -442,7 +510,8 @@ class Quiz {
       assertionFailure("Conjugation failed.")
       correctAnswers = ""
     }
-    let conjugationResult = ConjugationResult.score(correctAnswers: correctAnswers, proposedAnswer: proposedAnswer)
+    let grade = ConjugationResult.grade(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense)
+    let conjugationResult = grade.result
     if currentQuestionIndex != questions.count - 1 {
       Current.soundPlayer.play(conjugationResult.sound)
     }
@@ -454,7 +523,8 @@ class Quiz {
         tense: tense,
         conjugationResult: conjugationResult,
         correctAnswer: correctAnswers,
-        actualAnswer: proposedAnswer
+        actualAnswer: proposedAnswer,
+        shownSpelling: grade.shownSpelling
       )
     )
     if conjugationResult == .noMatch {
@@ -511,6 +581,10 @@ class Quiz {
           currentLocaleString = currentLanguage + "-" + currentRegion
         }
         let question = questions[currentQuestionIndex]
+        if let shownSpelling = quizResults.last?.shownSpelling {
+          Utterer.utter(L.QuizView.alsoSpelledWithColon, localeString: currentLocaleString)
+          Utterer.utter(shownSpelling.lowercased(), localeString: Utterer.frenchLocaleString)
+        }
         Utterer.utter(L.QuizView.verbWithColon, localeString: currentLocaleString)
         Utterer.utter(question.verb.infinitif, localeString: Utterer.frenchLocaleString)
         Utterer.utter(L.QuizView.translationWithColon, localeString: currentLocaleString)
@@ -551,5 +625,73 @@ class Quiz {
     default:
       return 0
     }
+  }
+}
+
+private extension Tense {
+  var isImpératif: Bool {
+    switch self {
+    case .impératif, .impératifPassé:
+      return true
+    default:
+      return false
+    }
+  }
+
+  var constructor: ((PersonNumber) -> Tense)? {
+    switch self {
+    case .indicatifPrésent:
+      return Tense.indicatifPrésent
+    case .passéSimple:
+      return Tense.passéSimple
+    case .imparfait:
+      return Tense.imparfait
+    case .futurSimple:
+      return Tense.futurSimple
+    case .conditionnelPrésent:
+      return Tense.conditionnelPrésent
+    case .subjonctifPrésent:
+      return Tense.subjonctifPrésent
+    case .subjonctifImparfait:
+      return Tense.subjonctifImparfait
+    case .impératif:
+      return Tense.impératif
+    case .passéComposé:
+      return Tense.passéComposé
+    case .plusQueParfait:
+      return Tense.plusQueParfait
+    case .passéAntérieur:
+      return Tense.passéAntérieur
+    case .passéSurcomposé:
+      return Tense.passéSurcomposé
+    case .futurAntérieur:
+      return Tense.futurAntérieur
+    case .conditionnelPassé:
+      return Tense.conditionnelPassé
+    case .subjonctifPassé:
+      return Tense.subjonctifPassé
+    case .subjonctifPlusQueParfait:
+      return Tense.subjonctifPlusQueParfait
+    case .impératifPassé:
+      return Tense.impératifPassé
+    case .participePassé, .participePrésent, .radicalFutur:
+      return nil
+    }
+  }
+}
+
+private struct QuizRandomNumberGenerator: RandomNumberGenerator {
+  var seeded: SeededRandomNumberGenerator?
+  private var system = SystemRandomNumberGenerator()
+
+  init(seeded: SeededRandomNumberGenerator?) {
+    self.seeded = seeded
+  }
+
+  mutating func next() -> UInt64 {
+    if seeded != nil {
+      return seeded!.next()
+    }
+    return system.next()
   }
 }

@@ -112,4 +112,58 @@ struct QuizTests {
     #expect(losingQuiz.score == 0)
     #expect(Current.settings.bestScore == 750, "A lower score must not overwrite the stored best.")
   }
+
+  @Test(arguments: [QuizDifficulty.regular, .ridiculous])
+  func noSeededQuizAsksADefectiveCell(difficulty: QuizDifficulty) {
+    Current.settings.quizDifficulty = difficulty
+    for seed in UInt64(0) ..< 100 {
+      let quiz = Quiz(gameCenter: GameCenterStub(), seed: seed)
+      quiz.start()
+      #expect(quiz.questions.count == 30)
+      for question in quiz.questions where !question.verb.hasCell(question.tense) {
+        Issue.record("Seed \(seed) asked \(question.verb.infinitif), \(question.tense.titleCaseName)\(question.tense.pronounDecorator).")
+      }
+      quiz.quit()
+    }
+  }
+
+  @Test func ridiculousAsksFalloirOnlyInTheThirdPersonSingular() throws {
+    Current.settings.quizDifficulty = .ridiculous
+    for seed in UInt64(0) ..< 20 {
+      let quiz = Quiz(gameCenter: GameCenterStub(), seed: seed)
+      quiz.start()
+      let falloir = try #require(quiz.questions.first { $0.verb.infinitif == "falloir" })
+      #expect(falloir.tense == .subjonctifImparfait(.thirdSingular))
+      quiz.quit()
+    }
+  }
+
+  @Test func aSeedRepeatsItsQuiz() {
+    Current.settings.quizDifficulty = .regular
+    func questions(seed: UInt64) -> [String] {
+      let quiz = Quiz(gameCenter: GameCenterStub(), seed: seed)
+      quiz.start()
+      defer {
+        quiz.quit()
+      }
+      return quiz.questions.map { "\($0.verb.id) \($0.tense)" }
+    }
+    let first = questions(seed: 7)
+    #expect(questions(seed: 7) == first)
+    #expect(questions(seed: 8) != first)
+  }
+
+  @Test func recordsTheAppsSpellingOfAVariant() throws {
+    Current.settings.quizDifficulty = .regular
+    let quiz = Quiz(gameCenter: GameCenterStub(), shouldShuffle: false)
+    quiz.start()
+    let question = try #require(quiz.questions.first)
+    let conjugation = correctAnswer(for: question).lowercased()
+    let variant = try #require(StandardVariants.variants(of: conjugation, verb: question.verb, tense: question.tense).first ?? Optional(conjugation))
+    quiz.process(proposedAnswer: variant)
+    let result = try #require(quiz.quizResults.first)
+    #expect(result.conjugationResult == .totalMatch)
+    #expect(result.shownSpelling == (variant == conjugation ? nil : correctAnswer(for: question)))
+    quiz.quit()
+  }
 }

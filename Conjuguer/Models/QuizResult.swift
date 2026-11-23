@@ -14,4 +14,5 @@ struct QuizResult: Hashable, Identifiable {
   let conjugationResult: ConjugationResult
   let correctAnswer: String
   let actualAnswer: String
+  var shownSpelling: String?
 }

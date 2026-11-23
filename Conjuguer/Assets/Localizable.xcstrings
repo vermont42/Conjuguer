@@ -3998,6 +3998,23 @@
         }
       }
     },
+    "QuizView.alsoSpelledWithColon" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correct. Also spelled:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correct. S’écrit aussi:"
+          }
+        }
+      }
+    },
     "QuizView.correctAnswer" : {
       "extractionState" : "manual",
       "localizations" : {

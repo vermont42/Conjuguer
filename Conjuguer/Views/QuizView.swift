@@ -18,6 +18,7 @@ struct QuizView: View {
   @Environment(\.accessibilityReduceMotion) private var reduceMotion
   @Environment(\.dismiss) private var dismiss
   @State private var input = ""
+  @State private var inputSelection: TextSelection?
   @State private var tabScope = TabQuizScope.allVerbs
   @FocusState private var conjugationFieldIsFocused: Bool
   @State private var authCoordinator = GameCenterAuthCoordinator()
@@ -191,6 +192,13 @@ struct QuizView: View {
           .symbolEffect(.bounce, value: quiz.quizResults.count)
           .accessibilityHidden(true)
 
+        if let shownSpelling = result.shownSpelling {
+          Text(AttributedString(mixedCaseString: shownSpelling))
+            .smallLabel()
+            .accessibilityLabel("\(L.QuizView.alsoSpelledWithColon) \(shownSpelling.lowercased())")
+            .accessibilityIdentifier("quiz_shown_spelling")
+        }
+
         if
           let previousIncorrectAnswer = quiz.previousIncorrectAnswer,
           let previousCorrectAnswer = quiz.previousCorrectAnswer
@@ -209,7 +217,7 @@ struct QuizView: View {
   }
 
   private var answerField: some View {
-    TextField(L.QuizView.conjugation, text: $input)
+    TextField(L.QuizView.conjugation, text: $input, selection: $inputSelection)
       .focused($conjugationFieldIsFocused)
       .textInputAutocapitalization(.never)
       .autocorrectionDisabled()
@@ -230,11 +238,34 @@ struct QuizView: View {
       .animation(.easeInOut(duration: 0.15), value: conjugationFieldIsFocused)
       .accessibilityIdentifier("input_quiz_conjugation")
       .accessibilityValue(input)
+      .toolbar {
+        ToolbarItem(placement: .keyboard) {
+          FrenchLetterKeyRow { letter in
+            insertLetter(letter)
+          }
+        }
+      }
       .onSubmit {
         quiz.process(proposedAnswer: input)
         input = ""
+        inputSelection = nil
         conjugationFieldIsFocused = true
       }
+  }
+
+  /// Replaces the selection, or inserts at the cursor, and leaves the cursor after the letter.
+  private func insertLetter(_ letter: String) {
+    guard
+      case .selection(let range) = inputSelection?.indices,
+      range.lowerBound >= input.startIndex,
+      range.upperBound <= input.endIndex
+    else {
+      input.append(letter)
+      return
+    }
+    let offset = input.distance(from: input.startIndex, to: range.lowerBound) + letter.count
+    input.replaceSubrange(range, with: letter)
+    inputSelection = TextSelection(insertionPoint: input.index(input.startIndex, offsetBy: offset))
   }
 
   private var notStartedBriefing: some View {
@@ -340,6 +371,7 @@ struct QuizView: View {
   private func quit() {
     conjugationFieldIsFocused = false
     input = ""
+    inputSelection = nil
     quiz.quit()
     if sheetScope != nil {
       dismiss()

@@ -38,13 +38,14 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 |---|---|---|
 | `verb_browse_sort` | Sort `Picker` in `VerbBrowseView` | Launch anchor (`FIRST_SCREEN_ID`). Three segments: Frequency, Alphabetical, My Verbs. |
 | `input_quiz_conjugation` | Answer `TextField` in `QuizView` | Carries `.accessibilityValue(input)`, so `read_value`/`set_value`/`type_text --id` work with read-back. |
+| `quiz_shown_spelling` | The app's spelling beside the checkmark, after a right answer spelled another standard way | Launch with `-CONJUGUER_QUIZ_FIXTURE grading` and answer the first question `il connait`; its label is "Correct. Also spelled: connaît". |
 | `picker_settings_quizDifficulty` | Quiz-difficulty segmented `Picker` in `SettingsView` | 2 segments (Regular, Ridiculous). |
 | `picker_settings_pronounGender` | Pronoun-gender segmented `Picker` in `SettingsView` | 3 segments (Feminine, Masculine, Both). |
 | `verb_example` | Example card in `VerbView` (below etymology) | Wraps the FR sentence, EN translation, source attribution, and nested *Chanson de Roland* example. |
 | `verb_browse_count` | "N VERBS" header above the verb collection | Hidden when the search yields nothing. |
 | `verb_row_<infinitif>` | Row `Button` in `VerbBrowseView` (list and grid) | e.g. `verb_row_avoir`. |
 | `model_row_<exemplar>` | Row `Button` in `ModelBrowseView` (list and grid) | e.g. `model_row_avoir`. |
-| `french_letter_key_<letter>` | Accent key in `FrenchLetterKeyRow` (é è ê â î ô û ç) | Shown in place of the sort picker only while a search field is focused, e.g. `french_letter_key_ê`. `tap_id.sh` taps it and the field keeps focus. |
+| `french_letter_key_<letter>` | Accent key in `FrenchLetterKeyRow` (é è ê â î ô û ç) | Shown in place of the sort picker only while a search field is focused, e.g. `french_letter_key_ê`. `tap_id.sh` taps it and the field keeps focus. Over the quiz's answer field the row is a keyboard toolbar that AXe cannot see: tap a key by coordinate (with a hardware keyboard on the iPhone 17, y ≈ 816 and x ≈ 41, 86, 132, 178, 223, 269, 315, 361 for é to ç; on the iPad Pro 11, y ≈ 1167, é at x ≈ 70). Arrow keys (`axe key 80`, left) move the cursor if sent a few tenths of a second apart; faster presses are dropped. |
 | `search_guess_intro` | "A guess at the verb you meant:" in `FailedVerbSearchView` | Present only when a failed verb search has a guess. |
 | `search_guess_row` | The guess's row `Button` in `FailedVerbSearchView` | `tap_id.sh search_guess_row` opens the guessed verb. |
 | `verb_request_link` | The "please email" line in `FailedVerbSearchView` | Its address is a `mailto:` link; tap the address by frame. The simulator has no Mail, so the tap copies the address and shows `address_copied_note`. |
@@ -138,6 +139,14 @@ coordinates are from 2026-11-22; re-measure with `describe_ui` if one misses.
   `--segments 3` for `picker_settings_pronounGender`. To *drive* a selection, compute
   the segment center from the id'd frame (`x + width*(i+0.5)/N`, `y + height/2`) and
   `tap_xy.sh`.
+
+## Launch arguments and appearance
+
+`xcrun simctl launch <udid> software.racecondition.Conjuguer -CONJUGUER_QUIZ_FIXTURE grading
+-AppleLanguages "(fr)" -AppleLocale fr_FR` launches with a quiz fixture and a language. On
+2026-11-22 the Conjuguer iPhone 17 kept drawing the app light after `simctl ui <udid> appearance
+dark`, through relaunches, while the iPad took dark at once; check dark on the iPad if the iPhone
+will not switch.
 
 ## Completing a quiz (regular difficulty)
 

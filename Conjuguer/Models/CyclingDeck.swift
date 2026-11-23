@@ -17,8 +17,8 @@ struct CyclingDeck<Element> {
     index = 0
   }
 
-  mutating func shuffle() {
-    elements.shuffle()
+  mutating func shuffle(using generator: inout some RandomNumberGenerator) {
+    elements.shuffle(using: &generator)
     index = 0
   }
 

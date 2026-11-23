@@ -24,7 +24,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 
 | Phase | Status | Date | Commit | Suggestions | Konjugieren phase |
 |---:|---|---|---|---|---:|
-| 1 | Not started | | | T1.3, T1.4, T1.5, and two Conjuguer defects | 1 |
+| 1 | Awaiting Josh | 2026-11-22 | | T1.3, T1.4, T1.5, and two Conjuguer defects | 1 |
 | 2 | Not started | | | T1.2 | 2 |
 | 3 | Not started | | | T4.1, T4.4, T4.5 | 3 |
 | 4 | Not started | | | T1.6 | 4 |
@@ -376,7 +376,7 @@ and the browse plan's **How it differed** notes say why each is shaped as it is.
 **Suggestions:** T1.3, T1.4, T1.5, and two Conjuguer defects. **Ports:** Konjugieren Phase 1
 (`AnswerSpelling.swift`, `StandardVariants.swift`,
 [`../Konjugieren/plans/pedagogy_phase1_variant_audit.md`](../../Konjugieren/plans/pedagogy_phase1_variant_audit.md)).
-**Depends on:** browse Phase 1 for the key row. **Status:** Not started.
+**Depends on:** browse Phase 1 for the key row. **Status:** Awaiting Josh.
 
 - **Trim and collapse.** Ignore leading and trailing whitespace and runs of spaces, which nothing
   does today. Compound answers have two or three words.
@@ -419,6 +419,52 @@ longer passes; no draw under a fixed seed asks a defective cell; the key row ins
 answer field; and tests pin each.
 
 **How it differed:**
+
+- **Grading moved into `ConjugationResult.grade(proposedAnswer:correctAnswers:verb:tense:)`**,
+  which returns an `AnswerGrade` (the result and, for a variant, the app's spelling). It needs the
+  verb and tense, which the old string-only `score` did not have. `AnswerSpelling` reads the answer
+  first: case, whitespace runs, and the curly apostrophe, which the simulator's keyboard typed for
+  j' in every trial. Without that, "j’ai parlé" would have failed.
+- **Pronouns.** The third-person singular takes il, elle, or on, and the plural ils or elles,
+  whatever the gender setting. Agreement is still graded on the participle, so "il est allée"
+  passes where elle was asked; the pronoun is ignored rather than checked against the gender. The
+  conjugator gives a pronominal verb's cells without the reflexive pronoun (souviens, suis
+  souvenue), so Phase 2 inherits that: a reflexive answer does not include it, and the quiz strips
+  it when typed, along with the impératif's -toi, -nous, and -vous.
+- **The audit is its own file**, [`pedagogy_phase1_variant_audit.md`](pedagogy_phase1_variant_audit.md),
+  with its method, sources per row, and Josh's rulings of 2026-11-22. It mined English Wiktionary
+  (4,296 forms the conjugator lacks, across 308 verbs) and checked the 1990 rows against the
+  *Journal officiel* text in the Académie's PDF, the doublets against Larousse. Josh accepted
+  every recommended row. The official text settled three questions the plan left open: croître
+  keeps every circumflex while accroître and redevoir lose theirs (accroit, redu), mû becomes mu,
+  and of the asseoir family only surseoir's futur changes (sursoirai).
+- **R2 runs both ways.** The verb page writes sixteen -eler and -eter verbs in the rectified
+  spelling already (ruissèle, nivèle, cachète) and the rest traditionally (étiquette), which
+  surfaced when ruisseler's test failed. Larousse lists both for each of the sixteen, so the quiz
+  accepts the doubled consonant for them, and the è for the others. Twenty-six verbs whose
+  traditional spelling has the è (acheter, geler, harceler, modeler) accept no doubled form. Josh
+  chose to leave the sixteen pages as they are.
+- **The dropped circumflex that no rule accepts** (etes for êtes, clot for clôt) is now a partial
+  match, five points, through the existing diacritic fold. Phase 4 replaces the partial match.
+- **Defective cells.** The default quiz asked falloir in every person (Ridiculous's subjonctif
+  imparfait, and the irregular-participle and futur pools) and faillir in the impératif. A drawn
+  person the verb lacks now gives way to the next one it has, and a verb without the whole tense
+  gives way to the pool's next verb. `Quiz` takes a `seed`, and `QuizTests` checks a hundred seeded
+  quizzes at each difficulty. Scoped quizzes already filtered through `Verb.hasCell`.
+- **The key row** is a `ToolbarItem(placement: .keyboard)` and inserts at the cursor through a
+  `TextSelection` binding, as Konjugieren's does. Verified on the iPhone 17 and the iPad Pro 11
+  with the hardware keyboard, where iOS floats the toolbar at the bottom; insertion mid-word
+  landed at the cursor. AXe cannot see the toolbar's keys, so the skill now gives their
+  coordinates. The software keyboard's placement was not tried.
+- **A new fixture**, `-CONJUGUER_QUIZ_FIXTURE grading`: ten questions, three times over, whose
+  answers are listed in `docs/feature_architecture.md` § Quiz.
+- **Verified** in French (light) and English on the iPhone, and in English and dark on the iPad.
+  The iPhone simulator would not draw the app dark after `simctl ui appearance dark`, through
+  relaunches, so dark was checked on the iPad only. VoiceOver's spoken "Correct. Also spelled:"
+  was not heard; the label was read from the accessibility tree.
+- **Analytics:** none added, so nothing is staged in `docs/privacy_policy_pending.md`.
+- **Tests:** 557 to 568, with `AnswerSpellingTests`, `StandardVariantsTests`, a rewritten
+  `ConjugationResultTests`, and four new `QuizTests`.
 
 ## Phase 2: The Shape of the Answer
 

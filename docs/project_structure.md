@@ -47,6 +47,7 @@ Conjuguer/
 │   ├── Sounds/                 # MP3 effects for quiz and game (applause, buzz, chime, guns, ghost, robot, …)
 │   └── WorkSans*.ttf           # Bundled Work Sans faces (regular, semibold, bold)
 ├── Models/
+│   ├── AnswerSpelling.swift    # How the quiz reads a typed answer: case, spacing, the curly apostrophe, and the subject and reflexive pronouns of the asked person
 │   ├── AppIcon.swift           # Alternate app-icon enum (beret/croissant/rooster/arc de triomphe)
 │   ├── Auxiliary.swift         # avoir/être auxiliary enum
 │   ├── ChansonExample.swift    # Codable model for a Chanson de Roland example (laisse, line, old French, translation)
@@ -57,7 +58,7 @@ Conjuguer/
 │   ├── ConjugationMap.swift    # Conjugation → verbs map: its rules, LZFSE text format, build(), and the bundled copy; compiled by the app and ConjugationMapTool
 │   ├── ConjugationMatch.swift  # Verb.conjugations(matching:): the cells, in page order, whose conjugation equals a text
 │   ├── ConjugationQuery.swift  # A search query as a conjugation's words: pronouns, elision, que, y, en, and negation dropped ("je ne sais pas" → sais)
-│   ├── ConjugationResult.swift # Answer scoring: total/partial/no match, plus its sound, score, icon, and color
+│   ├── ConjugationResult.swift # Answer grading (ConjugationResult.grade): total/partial/no match and the app's spelling of a variant (AnswerGrade), plus each result's sound, score, icon, and color
 │   ├── Conjugator.swift        # The conjugation engine: model lookup, stem alterations, simple and compound tenses; takes the pronoun gender explicitly (the app's defaulted overloads are in ConjugationLabels.swift)
 │   ├── ConjugatorError.swift   # Error enum for conjugation failures
 │   ├── ConjuguerTips.swift     # TipKit tips (try the quiz, explore models, change difficulty, play game, scroll to the verb page's bottom)
@@ -99,6 +100,7 @@ Conjuguer/
 │   ├── ReviewCardSuppression.swift  # The Suppress Review Card setting's Off and On
 │   ├── SearchReport.swift      # SearchTracker (one verb search, first letter to its end) and SearchReport (finishSearch's banded parameters)
 │   ├── Sound.swift             # Sound-effect enum mapping cases to the bundled MP3s
+│   ├── StandardVariants.swift  # Spellings the quiz accepts beside the conjugator's: the 1990 rectifications (plait, étiquète, cèderai, absout) and dictionary doublets (veuillons, éclôt)
 │   ├── StemAlteration.swift    # A stem alteration: type, chars, the tenses it applies to, additive/inherited flags
 │   ├── SubjonctifPresentGroup.swift   # Subjonctif présent ending groups
 │   ├── Tense.swift             # All French tenses; associated PersonNumber where applicable
@@ -182,7 +184,7 @@ Conjuguer/
     ├── BrowseRow.swift         # Shared row/cell used by both browse views, with optional badge, a looked-up check, and a French or English subtitle
     ├── BrowseSearch.swift      # Shared search plumbing for the browse views: all items for a blank query, the trombone for none
     ├── FailedVerbSearchView.swift # The verb list's empty state: no results, a guess at the verb meant, and the email-us line
-    ├── FrenchLetterKeyRow.swift   # é è ê â î ô û ç keys that replace the sort picker while a search field is focused; reusable by the quiz
+    ├── FrenchLetterKeyRow.swift   # é è ê â î ô û ç keys that replace the sort picker while a search field is focused, and sit above the keyboard for the quiz's answer field
     ├── GameCenterAuthView.swift   # UIViewController shim + coordinator for presenting Game Center auth
     ├── GameView.swift          # The retro arcade minigame
     ├── InfoBrowseView.swift    # Info articles grouped by category; hosts the tutor entry and its unavailability cell
@@ -195,7 +197,7 @@ Conjuguer/
     ├── OnboardingView.swift    # Multi-page welcome tour; auto-presented on first launch and re-showable from Settings
     ├── QuizResultsView.swift   # End-of-quiz sheet: score, per-question results, leaderboard
     ├── QuizResultView.swift    # One row of the results sheet
-    ├── QuizView.swift          # Quiz gameplay: prompt, answer field, progress, feedback; the All Verbs / My Verbs picker; QuizSheet, for Test Me on a verb page and a collection's quiz
+    ├── QuizView.swift          # Quiz gameplay: prompt, answer field with the accent keys, progress, feedback and the app's spelling of a variant; the All Verbs / My Verbs picker; QuizSheet, for Test Me on a verb page and a collection's quiz
     ├── RelatedVerbsView.swift  # The verb page's Related Verbs card (built on the same root, same model), RelatedVerbListView, and FlowLayout
     ├── ReviewCardView.swift    # The review card above the verb list: a verb looked up days ago, its key conjugations hidden until a tap, a second tap opening its page
     ├── RichTextView.swift      # Renders [RichTextBlock] with subheadings, emphasis, color-coding, links
@@ -253,11 +255,12 @@ ConjuguerTests/
 ├── TestUtils.swift             # T.testConjugation shared assertion (threads #_sourceLocation) and T.generateVerbModelTests
 └── Models/
     ├── AddedVerbsTests.swift           # Conjugations of the 13 verbs added and 6 misspellings renamed on 2026-08-28, plus dépourvoir's defect group 27
+    ├── AnswerSpellingTests.swift       # Normalizing an answer, and the pronouns stripped (or kept) for each person, pronominal verbs, and the impératif
     ├── AnalyticsTests.swift            # The bands, the section order, every match kind's analytics value, and the verb page's screen name
     ├── CompoundTenseTests.swift        # Compound tenses, incl. feminine/plural participe agreement
     ├── ConjugationMapTests.swift       # The bundled map equals a fresh build, finds the verb of 99% of example sentences, its entries (homographs, agreement, defects), and its format
     ├── ConjugationMatchTests.swift     # conjugations(matching:): single cells, shared spellings, compound agreement, alternates, defective cells, non-matches
-    ├── ConjugationResultTests.swift    # Parameterized scoring cases for ConjugationResult
+    ├── ConjugationResultTests.swift    # Grading: pronouns, spacing, alternates, partial and no matches, required agreement, and the spelling shown for a variant
     ├── DeeplinkTests.swift             # conjuguer:// parsing and routing: the search route, match, info keys, the builders' round trips, and the source query item (serialized — mutates Current)
     ├── DefectGroupTests.swift          # Defect-group membership and tense suppression
     ├── DefectivityAuditTests.swift     # Per-family defectivity audit (traire, braire, férir, poindre, …)
@@ -277,13 +280,14 @@ ConjuguerTests/
     ├── ParserTests.swift               # XML parsing of verbs, models, and defect groups
     ├── QuizLiveActivityTests.swift     # The quiz's Live Activity through the spy: a tab quiz starts one that Quit or the last answer ends, each other answer updates it, a restart replaces it, and a sheet's quiz starts none
     ├── QuizScopeTests.swift            # Quiz scopes: the default quiz unchanged, My Verbs drawing only its verbs in Regular's mix, defective verbs, Test Me's three tenses, unranked scoring, doubled entries graded as themselves, source on every quiz signal
-    ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle (serialized — mutates Current)
+    ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle; seeded quizzes that never ask a defective cell; the recorded spelling of a variant (serialized — mutates Current)
     ├── RelatedVerbsTests.swift         # Base-finding on known and false pairs, nested roots, the card's two relations, doubled roots, and the model page's two orders
     ├── ReviewScheduleTests.swift       # The review ladder, reveal and dismissal, a lookup restarting it, an older entry with no schedule, the longest-overdue verb, verbs with no key conjugations, doubled entries
     ├── RichTextTests.swift             # Rich-text markup parsing into blocks and segments
     ├── SearchReportTests.swift         # The search tracker's lifecycle, each finishSearch report, and that no parameter can echo the query
     ├── SettingsTests.swift             # Settings defaults (Suppress Review Card off), persistence, and malformed-value handling (serialized)
     ├── TenseTableTests.swift           # The verb page's order, each cell's card, articles, second names, and which pages show the color key
+    ├── StandardVariantsTests.swift     # Each accepted variant row, and the spellings each row must not accept (vînmes, dû, croître, appeler, jeter, harcelle)
     ├── StemAlterationAuditTests.swift  # Audits every -er verb whose stem ends in é + consonant: the stem must open to è before a mute ending
     ├── VerbCollectionTests.swift       # Collections: stable keys, each one's membership and order, list and model links, share text, progress, and the unranked quiz with its collection parameter
     ├── VerbDrawTests.swift             # The draw: what counts as irregular, the weights, ten days pinned to a Python reimplementation, My Verbs in turn every third day, weighted and one-in-three proportions with fixed seeds
@@ -371,6 +375,7 @@ plans/                              # What Claude wrote to get another session (
 ├── location_cleanup_moves [.json]  # Its map of every old path to its new one
 ├── mine_classical_tier.md          # Mine La Fontaine and Molière for the 144 Chanson-only verbs
 ├── pedagogy_implementation.md      # Port Konjugieren's quiz pedagogy (levels, corrections, practice record, modes), in phases; runs after the browse plan
+├── pedagogy_phase1_variant_audit.md  # The optional standard conjugations (1990 rectifications, doublets) the quiz might accept, with sources and Josh's rulings
 ├── quiz_best_score_followup.md     # Best score on the quiz briefing screen; resolved by a different route
 ├── run_etymology_pipeline.md       # Paste-to-run prompt for one batch of the original etymology pipeline; superseded
 ├── run_etymology_select_verbs.md   # One-shot run of that pipeline for the four select verbs

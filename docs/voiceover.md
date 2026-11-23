@@ -143,7 +143,9 @@ A typed quiz moves on without a focus change VoiceOver would notice, so `Quiz` a
 question itself. When `UIAccessibility.isVoiceOverRunning`, `announcePublishedProperties()` waits a
 second after each question appears and speaks, through `Utterer.utter(_:localeString:)`, a series
 of label and value pairs: the verb, its translation, the pronoun, the gender, the tense, the
-progress, the score, and the elapsed time. Each label is spoken in the interface's language (French
+progress, the score, and the elapsed time. When the last answer was right but spelled another
+standard way (connait for connaît), the series begins with "Correct. Also spelled:" and the app's
+spelling, which the label beside the checkmark also reads. Each label is spoken in the interface's language (French
 as `fr-FR`, otherwise the device's language and region), each French value in `fr-FR`, and the
 translation in `en-US`. `Utterer` speaks through one shared `AVSpeechSynthesizer`, warms the
 voices off the main thread at launch (`Utterer.setup()`), and plays `Sound.silence` after each utterance, a workaround whose forum thread the

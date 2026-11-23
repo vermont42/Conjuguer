@@ -417,6 +417,10 @@ enum L {
       String(localized: "QuizView.pronounWithColon")
     }
 
+    static var alsoSpelledWithColon: String {
+      String(localized: "QuizView.alsoSpelledWithColon")
+    }
+
     static var tenseWithColon: String {
       String(localized: "QuizView.tenseWithColon")
     }

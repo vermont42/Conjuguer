@@ -24,8 +24,8 @@ extension Verb {
   /// quiz asks for it (souviens) and as the page shows it (souviens-toi). Accents must match:
   /// "etait" matches nothing, because a cell is spelled one way, and search folds accents
   /// before it gets here. A cell the verb's defect group lacks never matches, and neither
-  /// does the infinitive, which is not a cell. `ConjugationResult.score` grades more
-  /// leniently, since it forgives a missing circumflex.
+  /// does the infinitive, which is not a cell. `ConjugationResult.grade` is more lenient: it
+  /// ignores the pronouns typed around an answer and accepts `StandardVariants`.
   func conjugations(matching text: String) -> [ConjugationMatch] {
     let wanted = Self.normalizedConjugation(text)
     guard !wanted.isEmpty else {

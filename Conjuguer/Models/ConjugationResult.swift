@@ -7,36 +7,50 @@
 
 import SwiftUI
 
+/// A graded answer. `shownSpelling` is the conjugation as the app writes it, for a right answer
+/// spelled another standard way, such as connait for connaît.
+struct AnswerGrade: Equatable {
+  let result: ConjugationResult
+  let shownSpelling: String?
+}
+
 enum ConjugationResult {
   case totalMatch
   case partialMatch
   case noMatch
 
-  private static let circumflexes: [Character: Character] = ["â": "a", "ê": "e", "î": "i", "ô": "o", "û": "u"]
+  /// Grades a typed answer to `tense` of `verb`, whose "/"-separated conjugations the conjugator
+  /// wrote as `correctAnswers`. A subject pronoun of the asked person is ignored, and so is a
+  /// pronominal verb's reflexive pronoun (`AnswerSpelling.candidates`). An answer spelled as a
+  /// `StandardVariants` variant is a total match whose `shownSpelling` is the conjugator's. An
+  /// answer that differs only in accents, cedillas, or the diaeresis is a partial match.
+  static func grade(proposedAnswer: String, correctAnswers: String, verb: Verb, tense: Tense) -> AnswerGrade {
+    let alternates = correctAnswers.components(separatedBy: Tense.alternateConjugationSeparator)
+    let conjugations = alternates.map { $0.lowercased() }
+    let candidates = AnswerSpelling.candidates(for: proposedAnswer, tense: tense, isReflexive: verb.isReflexive)
 
-  private static func strippingCircumflexes(_ string: String) -> String {
-    String(string.map { circumflexes[$0] ?? $0 })
+    if candidates.contains(where: conjugations.contains) {
+      return AnswerGrade(result: .totalMatch, shownSpelling: nil)
+    }
+
+    var spellings = conjugations
+    for (alternate, conjugation) in zip(alternates, conjugations) {
+      let variants = StandardVariants.variants(of: conjugation, verb: verb, tense: tense)
+      if candidates.contains(where: variants.contains) {
+        return AnswerGrade(result: .totalMatch, shownSpelling: alternate)
+      }
+      spellings += variants
+    }
+
+    let foldedSpellings = Set(spellings.map(folded))
+    if candidates.contains(where: { foldedSpellings.contains(folded($0)) }) {
+      return AnswerGrade(result: .partialMatch, shownSpelling: nil)
+    }
+    return AnswerGrade(result: .noMatch, shownSpelling: nil)
   }
 
-  static func score(correctAnswers: String, proposedAnswer: String) -> ConjugationResult {
-    let correctAnswersLowercased = correctAnswers.lowercased()
-    let proposedAnswerLowercased = proposedAnswer.lowercased()
-    for correctAnswer in correctAnswersLowercased.components(separatedBy: Tense.alternateConjugationSeparator) {
-      if correctAnswer == proposedAnswerLowercased {
-        return .totalMatch
-      }
-      if strippingCircumflexes(correctAnswer) == strippingCircumflexes(proposedAnswerLowercased) {
-        return .totalMatch
-      }
-      let foldOptions: String.CompareOptions = .diacriticInsensitive
-      if
-        correctAnswer.folding(options: foldOptions, locale: Util.french) ==
-        proposedAnswerLowercased.folding(options: foldOptions, locale: Util.french)
-      {
-        return .partialMatch
-      }
-    }
-    return .noMatch
+  private static func folded(_ text: String) -> String {
+    text.folding(options: .diacriticInsensitive, locale: Util.french)
   }
 
   var sound: Sound {

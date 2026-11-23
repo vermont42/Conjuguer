@@ -25,7 +25,7 @@ query use it too.
 | `ModelSearch.swift` | Finds a model by its exemplar or by any of its verbs, through `VerbSearch` without glosses |
 | `FailedVerbSearchView.swift` | The verb list's empty state: `ContentUnavailableView.search`, the guess, and the line asking the learner to email a missing verb |
 | `VerbSearchCommands.swift`, `VerbSearchArrowKeys.swift` | Command-F, and the arrow keys through results, on iPad and Mac |
-| `FrenchLetterKeyRow.swift` | é è ê â î ô û ç keys, with an `insert` closure so the quiz's answer field can adopt it |
+| `FrenchLetterKeyRow.swift` | é è ê â î ô û ç keys, with an `insert` closure: the search fields append, and the quiz's answer field inserts at the cursor |
 | `BrowseRow.swift` | The row both tabs show: a French title, a subtitle (English gloss, or the French verb that found a model), and a badge |
 | `VerbSort.swift`, `ModelSort.swift` | The sort orders: Frequency (the default) and Alphabetical for verbs; Irregularity, Alphabetical, and Identifier for models. `Settings` stores the choice. Search ignores them |
 
@@ -797,7 +797,9 @@ chosen verbs (§ Quiz Scopes).
 | `QuizDifficulty.swift` | Regular or Ridiculous, chosen in Settings, and each one's score multiplier |
 | `QuizScope.swift` | What a quiz asks about, its question count, and its analytics source; the questions of a quiz over chosen verbs; `QuizTenseSlot`, Regular's tenses and quotas; `Verb.hasCell(_:)` and `canBeQuizzed` |
 | `QuizQuestion.swift`, `QuizResult.swift`, `QuizState.swift` | A question (verb and tense), an answered question, and the quiz's lifecycle |
-| `ConjugationResult.swift` | Grades an answer as a total, partial, or no match |
+| `ConjugationResult.swift` | Grades an answer as a total, partial, or no match (`ConjugationResult.grade`), with the conjugation to show beside a right answer spelled another standard way (`AnswerGrade`) |
+| `AnswerSpelling.swift` | Reads a typed answer before grading: case, spacing, the typographic apostrophe, and the pronouns of the asked person |
+| `StandardVariants.swift` | Spellings the quiz accepts beside the conjugator's: the 1990 rectifications and a few doublets that dictionaries list |
 | `CyclingDeck.swift` | Deals a pool's elements in order and reshuffles when it runs out |
 | `QuizView.swift`, `QuizResultsView.swift`, `QuizResultView.swift` | The quiz screen and the results sheet |
 | `LiveActivities.swift`, `LiveActivitiesReal.swift`, `LiveActivitiesSpy.swift` | Starts, updates, and ends the quiz's Live Activity through `Current.liveActivities`: ActivityKit on device and in the simulator, a spy under unit tests |
@@ -821,20 +823,52 @@ chosen verbs (§ Quiz Scopes).
 **Ridiculous** asks thirty fixed pairs of verb and tense (réaliser, choir, bruire, moudre, and so
 on), with the person drawn from the deck. Either way the questions are shuffled.
 
+**No question asks a cell the verb lacks.** A drawn person that the verb's defect group marks
+unused gives way to the next person the verb has, so falloir is asked only in the third-person
+singular. A verb without the whole tense, such as faillir in the impératif, gives way to the pool's
+next verb. `Quiz(gameCenter:shouldShuffle:seed:)` takes a seed that makes every draw repeatable;
+`QuizTests` builds a hundred seeded quizzes at each difficulty and finds no defective cell.
+
 A debug launch argument, `-CONJUGUER_QUIZ_FIXTURE screenshot`, replaces both with a fixed plan for
 App Store screenshots and exports its answers (see
-[`screenshot_playbook.md`](screenshot_playbook.md)).
+[`screenshot_playbook.md`](screenshot_playbook.md)). `-CONJUGUER_QUIZ_FIXTURE grading` asks ten
+questions, three times over, whose right answers exercise the grading below. Typed in order, with
+the feminine default: `il connait`, `je parle`, `j'ai parlé`, `nous sommes allées`, `j'étiquète`,
+`je cèderai`, `je me souviens`, `souviens-toi`, `etes` (a partial match), and `il plait`.
 
 ### Grading and Scoring
 
-`ConjugationResult.score(correctAnswers:proposedAnswer:)` compares lowercased text against each
-alternate the conjugator separates with `Tense.alternateConjugationSeparator` ("/"):
+`ConjugationResult.grade(proposedAnswer:correctAnswers:verb:tense:)` compares the answer with each
+alternate the conjugator separates with `Tense.alternateConjugationSeparator` ("/"). It first reads
+the answer through `AnswerSpelling.candidates`: case, runs of whitespace, and the keyboard's curly
+apostrophe are ignored, and so is a leading subject pronoun of the asked person (je or j', tu, il,
+elle, or on, nous, vous, ils or elles), so "j'ai parlé" is ai parlé. A pronominal verb's cells come
+without their reflexive pronoun (souviens), so "je me souviens", "me souviens", and the impératif's
+"souviens-toi" pass as well. No pronoun is stripped before another person's answer, an impératif,
+or a participle.
 
-- **Total match** (10 points): equal, or equal once circumflexes (â ê î ô û) are removed from
-  both, so a missing circumflex costs nothing.
-- **Partial match** (5 points): equal once every diacritic is folded away, so "etait" for "était"
-  earns half.
-- **No match** (0 points).
+- **Total match** (10 points): equal to an alternate, or to one of its `StandardVariants`. A variant
+  is a second standard spelling: the 1990 rectifications (il plait, il connait, mu, j'étiquète, je
+  cèderai, sursoirai, absout, interpelons, argüe) and doublets Larousse lists (veuillons, il éclôt).
+  The conjugator writes some -eler and -eter verbs the traditional way (étiquette) and some the
+  rectified way (ruissèle), and either spelling passes, except for the verbs whose traditional
+  spelling already has the è (acheter, geler, harceler, modeler). A right answer spelled as a
+  variant carries `AnswerGrade.shownSpelling`, the app's spelling, which the quiz shows beside the
+  checkmark and VoiceOver announces before the next question. The verb page keeps the app's
+  spelling. Josh's rulings, row by row, are in
+  [`plans/pedagogy_phase1_variant_audit.md`](../plans/pedagogy_phase1_variant_audit.md).
+- **Partial match** (5 points): equal to an alternate or a variant once every diacritic is folded
+  away, so "etait" for "était" and "etes" for "êtes" earn half. The rectifications drop only the
+  circumflex of i and u, and keep it in the passé simple's -îmes and -îtes, the subjonctif
+  imparfait's -ît and -ût, dû, and croître.
+- **No match** (0 points). Agreement is required: "sommes allés" where the pronoun-gender setting
+  asks for allées is wrong.
+
+**The accent keys.** The answer field is an ordinary `TextField`, so `FrenchLetterKeyRow` sits in a
+`ToolbarItem(placement: .keyboard)` above the keyboard, unlike the search fields'. The field binds
+its `TextSelection`, and a key replaces the selection or inserts at the cursor, then leaves the
+cursor after the letter. With a hardware keyboard, iOS draws the toolbar as a floating bar at the
+bottom of the screen.
 
 Each question's points are multiplied by the difficulty's `scoreModifier` (1 for Regular, 2 for
 Ridiculous). A finished quiz scoring at least 150 earns a time bonus, from 450 points for two
