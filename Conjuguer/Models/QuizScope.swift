@@ -27,6 +27,11 @@ struct QuizScope {
     verbs == nil
   }
 
+  /// Whether the results offer Ten More. Test Me's three questions are a check, not a session.
+  var continues: Bool {
+    questionCount == Quiz.questionCount
+  }
+
   var isVerbPage: Bool {
     source == .verbPage
   }
@@ -34,7 +39,7 @@ struct QuizScope {
   /// A quiz on a verb's page is over before a Live Activity would be noticed. A collection's quiz
   /// runs in a sheet over its page, and a tap on the activity would open the Quiz tab instead.
   var startsLiveActivity: Bool {
-    questionCount == Quiz.questionCount && collection == nil
+    continues && collection == nil
   }
 
   static let verbPageQuestionCount = 3

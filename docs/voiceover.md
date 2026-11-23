@@ -136,7 +136,7 @@ VoiceOver running.
 | `ModelView` | Exemplar, endings, and verbs marked French |
 | `InfoBrowseView`, `InfoView` | `.frenchPronunciation(forReal: info.alwaysUsesFrenchPronunciation)` |
 | `QuizView` | The infinitive and the question French, the gloss English, plus the announcements below. The answer field's label reads its frame as one prompt in the interface's language ("je, feminine, blank"; "elles se, plural, blank"; "tu, blank, toi"), and the frame's own words are hidden. Not yet heard with VoiceOver |
-| `QuizCorrectionView` | The two answers read as one element, which takes VoiceOver focus when a correction is held: "Incorrect. Your Answer: parle. Correct Answer: parlé. Letters that differ: é." (the letters only when three or fewer), with the hint "Swipe right for the links, then Continue." The verb link is marked French; each link's hint says the quiz waits with its clock stopped. Continue has its own hint, and a Magic Tap also continues. Read from the accessibility tree, not heard |
+| `QuizCorrectionView` | The two answers read as one element, which takes VoiceOver focus when a correction is held: "Incorrect. Your Answer: parle. Correct Answer: parlé. Letters that differ: é. This question will come up again." (the letters only when three or fewer, and the last sentence unless the question is itself a re-ask), with the hint "Swipe right for the links, then Continue." The verb link is marked French; each link's hint says the quiz waits with its clock stopped. Continue has its own hint, and a Magic Tap also continues. Read from the accessibility tree, not heard |
 
 ## The Quiz's Announcements
 
@@ -144,7 +144,9 @@ A typed quiz moves on without a focus change VoiceOver would notice, so `Quiz` a
 question itself. When `UIAccessibility.isVoiceOverRunning`, `announcePublishedProperties()` waits a
 second after each question appears and speaks, through `Utterer.utter(_:localeString:)`, a series
 of label and value pairs: the verb, its translation, the pronoun, the gender (in a compound tense only, as the
-answer frame shows it), the tense, the progress, the score, and the elapsed time. When the last answer was right but spelled another
+answer frame shows it), the tense, the progress, the score, and, with the Quiz Clock set to Show,
+the elapsed time. A re-asked question begins with "Asked Again" / "Question reposée", which its
+capsule on screen also reads. When the last answer was right but spelled another
 standard way (connait for connaît), the series begins with "Correct. Also spelled:" and the app's
 spelling, which the label beside the checkmark also reads. Each label is spoken in the interface's language (French
 as `fr-FR`, otherwise the device's language and region), each French value in `fr-FR`, and the
@@ -154,6 +156,10 @@ code links.
 
 A wrong answer is not announced. It holds the question, and `QuizView` moves VoiceOver focus to
 the correction instead. The next question is announced after Continue.
+
+The results' Ten More has the hint "Continues the quiz with ten more questions. The score carries
+on." After it, focus returns to the answer field and the next question is announced as any other.
+Not yet heard with VoiceOver.
 
 A slip that earns one more try is announced ("Almost! Try once more.", in the interface's
 language, through `Utterer`), and focus stays in the answer field, which still holds the first

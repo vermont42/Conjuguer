@@ -40,6 +40,14 @@ class Settings {
   static let quizLevelDefault: QuizLevel = .beginner
   static let quizDifficultyKey = "quizDifficulty"
 
+  var quizClock: QuizClock = quizClockDefault {
+    didSet {
+      persist(quizClock, oldValue: oldValue, key: Settings.quizClockKey)
+    }
+  }
+  static let quizClockKey = "quizClock"
+  static let quizClockDefault: QuizClock = .hide
+
   var bestScore: Int = bestScoreDefault {
     didSet {
       persist(bestScore, oldValue: oldValue, key: Settings.bestScoreKey)
@@ -116,6 +124,7 @@ class Settings {
     verbSort = load(key: Settings.verbSortKey, default: Settings.verbSortDefault)
     modelSort = load(key: Settings.modelSortKey, default: Settings.modelSortDefault)
     quizLevel = load(key: Settings.quizLevelKey, default: Settings.migratedQuizLevel(getterSetter: getterSetter))
+    quizClock = load(key: Settings.quizClockKey, default: Settings.quizClockDefault)
     bestScore = load(key: Settings.bestScoreKey, default: Settings.bestScoreDefault)
     gameHighScore = load(key: Settings.gameHighScoreKey, default: Settings.gameHighScoreDefault)
     pronounGender = load(key: Settings.pronounGenderKey, default: Settings.pronounGenderDefault)
@@ -189,6 +198,7 @@ extension SettingValue where Self: RawRepresentable, RawValue == String {
 extension VerbSort: SettingValue {}
 extension ModelSort: SettingValue {}
 extension QuizLevel: SettingValue {}
+extension QuizClock: SettingValue {}
 extension PronounGender: SettingValue {}
 extension AppIcon: SettingValue {}
 extension ReviewCardSuppression: SettingValue {}

@@ -404,3 +404,62 @@ Le point sur le niveau de difficulté du quiz devient :
 ```
 - Le niveau du quiz (débutant, élémentaire, intermédiaire ou avancé) lorsque vous commencez, abandonnez ou terminez un quiz
 ```
+
+## Ten questions, then ten more (pedagogy plan, Phase 7, 2026-11-23)
+
+The quiz is now ten questions, which the results offer to continue by ten more, and a missed
+question is asked again. `quizCompletion` stops sending the score, so no signal carries a score
+or a count of right or wrong answers. The elapsed time on `quizQuit` and `quizCompletion` becomes
+`duration`, a band of the time from the quiz's start. `quizCompletion`, sent at each round's
+results, gains `questionCount`, the questions so far (10, 20, and so on). The new `quizAbandon`,
+sent at the next launch, reports a quiz the app was left during, with its level, its source, and
+the question reached. The question reached never counts a question asked again, which would tell
+how many answers were wrong. Only a quiz's first ten questions post to Game Center, which section
+6's "When you submit a score" already allows.
+
+This section changes two existing bullets of section 2's list, the fourth and fifth (the question
+reached, and the score and elapsed time), and the first sentence of the paragraph after the list,
+in the version that the lookup signals section above gives it. On release day, also check
+`privacyPolicy4.md`, whose list names "Finishing a quiz, with score" and whose example says that
+Conjuguer's quizzes have thirty verbs; [`release.md`](release.md) says which policy to bring up to
+date.
+
+### English
+
+The bullet on progress in a quiz now reads:
+
+```
+- How far you progressed in a quiz if you quit early or leave the app during it (the question number reached, reported the next time you open the app)
+```
+
+The bullet on the quiz score and elapsed time now reads:
+
+```
+- Roughly how long a quiz lasted when you complete or quit it (under 3 seconds, 3 to 15 seconds, 15 to 40 seconds, 40 seconds to 2 minutes, or longer), and how many questions it had reached when you complete it (10, or 20 or more if you asked for ten more)
+```
+
+The first sentence of the paragraph after the list now reads:
+
+```
+How long a quiz lasted is collected in rough bands, but, like all of these analytics, it is anonymized and is not tied to your identity (see Section 4). Your quiz score is not collected.
+```
+
+### French
+
+Le point sur la progression dans un quiz devient :
+
+```
+- Votre progression dans un quiz si vous l'abandonnez prématurément ou quittez l'application pendant celui-ci (le numéro de la question atteinte, transmis à la prochaine ouverture de l'application)
+```
+
+Le point sur le score au quiz et le temps écoulé devient :
+
+```
+- La durée approximative d'un quiz lorsque vous le terminez ou l'abandonnez (moins de 3 secondes, de 3 à 15 secondes, de 15 à 40 secondes, de 40 secondes à 2 minutes, ou davantage) et le nombre de questions atteint lorsque vous le terminez (10, ou 20 et plus si vous avez demandé dix questions de plus)
+```
+
+La première phrase du paragraphe qui suit la liste devient :
+
+```
+La durée d'un quiz est collectée par ordres de grandeur, mais, comme toutes ces statistiques, elle est anonymisée et n'est pas liée à votre identité (voir la section 4). Votre score au quiz n'est pas collecté.
+```

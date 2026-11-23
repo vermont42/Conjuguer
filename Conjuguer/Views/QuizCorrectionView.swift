@@ -38,6 +38,14 @@ struct QuizCorrectionView: View {
       VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
         answerRow(label: L.QuizView.yourAnswer, text: Self.givenText(difference))
         answerRow(label: L.QuizView.correctAnswer, text: Self.expectedText(difference))
+
+        if correction.willBeReasked {
+          Label(L.QuizView.willBeAskedAgain, systemImage: "arrow.uturn.backward")
+            .font(captionFont)
+            .foregroundStyle(Color.customGray)
+            .fixedSize(horizontal: false, vertical: true)
+            .accessibilityIdentifier("quiz_correction_will_be_asked_again")
+        }
       }
       .accessibilityElement(children: .ignore)
       .accessibilityLabel(spokenCorrection)
@@ -113,14 +121,17 @@ struct QuizCorrectionView: View {
     .accessibilityIdentifier(identifier)
   }
 
-  /// "Incorrect. Your Answer: parle. Correct Answer: parlé. Letters that differ: é." The letters
-  /// are named only while there are few enough to help.
+  /// "Incorrect. Your Answer: parle. Correct Answer: parlé. Letters that differ: é. This question
+  /// will come up again." The letters are named only while there are few enough to help.
   private var spokenCorrection: String {
     let given = difference.given.isEmpty ? L.QuizView.none : difference.given
     var spoken = "\(L.QuizView.incorrect) \(L.QuizView.yourAnswer) \(given). \(L.QuizView.correctAnswer) \(difference.expected.lowercased())."
     let letters = difference.expectedMarkedLetters
     if !letters.isEmpty, letters.count <= Self.maxSpokenLetters {
       spoken += " " + L.QuizView.differingLetters(letters.joined(separator: ", "))
+    }
+    if correction.willBeReasked {
+      spoken += " " + L.QuizView.willBeAskedAgain
     }
     return spoken
   }

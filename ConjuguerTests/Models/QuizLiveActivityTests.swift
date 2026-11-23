@@ -40,12 +40,13 @@ struct QuizLiveActivityTests {
     let endsBefore = liveActivities.endCount
     let activeCount = liveActivities.activeIDs.count
 
-    for _ in 0 ..< quiz.questions.count {
+    while quiz.quizState == .inProgress {
       quiz.process(proposedAnswer: "x")
       quiz.continueAfterCorrection()
     }
 
-    #expect(liveActivities.updateCount == updatesBefore + Quiz.questionCount - 1)
+    #expect(quiz.questions.count == 2 * Quiz.questionCount, "Each of the ten misses is asked again.")
+    #expect(liveActivities.updateCount == updatesBefore + quiz.questions.count - 1)
     #expect(liveActivities.endCount == endsBefore + 1)
     #expect(liveActivities.activeIDs.count == activeCount - 1)
   }

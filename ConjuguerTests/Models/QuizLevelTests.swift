@@ -84,7 +84,7 @@ struct QuizLevelTests {
   // At Advanced the weights total 30, so the présent's 3 is 10% of the draws, the imparfait's 2
   // is 6.7%, and the plus-que-parfait's 1 is 3.3%.
   @Test func theDefaultQuizDrawsEachTenseAtItsWeight() {
-    let questions = defaultQuizzes(level: .advanced, seeds: 1 ... 200)
+    let questions = defaultQuizzes(level: .advanced, seeds: 1 ... 600)
     let total = QuizLevel.advanced.slots.reduce(0) { $0 + $1.weight }
     #expect(total == 30)
     for slot in [QuizTenseSlot.indicatifPrésent, .imparfait, .plusQueParfait, .participePassé] {

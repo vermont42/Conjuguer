@@ -122,7 +122,14 @@ enum QuizDraw {
     !verb.isIn(frequentDerivativeBand) && isDerivative(verb)
   }
 
-  @MainActor static func questions(level: QuizLevel, count: Int, using generator: inout some RandomNumberGenerator) -> [QuizDrawnQuestion] {
+  /// `asked` holds the IDs of verbs asked earlier in the session, which a draw passes over while
+  /// another verb fits.
+  @MainActor static func questions(
+    level: QuizLevel,
+    count: Int,
+    asked earlier: Set<String>,
+    using generator: inout some RandomNumberGenerator
+  ) -> [QuizDrawnQuestion] {
     let tenseSlots = level.slots
     var slots = (0 ..< count).compactMap { _ in
       QuizTenseSlot.drawWeighted(from: tenseSlots, using: &generator).map { Slot(tense: $0) }
@@ -166,7 +173,7 @@ enum QuizDraw {
       slots[index].isIrregular = offset < irregularNeeded
     }
 
-    var asked: Set<String> = []
+    var asked = earlier
     return slots.compactMap { slot in
       let pools = slot.tense.verbPools
       let fitting = pools.filter { !candidates(slot.tense, $0).verbs(role: slot.role, isIrregular: slot.isIrregular).isEmpty }

@@ -12,8 +12,8 @@ enum ParameterKey: String {
   case viewName
   case level
   case lastQuestionIndex
-  case elapsedTime
-  case score
+  case duration
+  case questionCount
   case source
   case outcome
   case queryLength
@@ -31,6 +31,7 @@ enum AnalyticsName: String {
   case quizStart
   case quizQuit
   case quizCompletion
+  case quizAbandon
   case gameCenterAuthSucceeded
   case gameCenterAuthFailed
   case tapPlayGame
@@ -155,6 +156,23 @@ enum AnalyticsBand {
       return "2-5"
     default:
       return "6+"
+    }
+  }
+
+  /// The time from a quiz's start to its quit or its results. Under three seconds is exploration,
+  /// and over forty a struggle.
+  nonisolated static func quizDuration(_ seconds: TimeInterval) -> String {
+    switch seconds {
+    case ..<3:
+      return "0-3s"
+    case ..<15:
+      return "3-15s"
+    case ..<40:
+      return "15-40s"
+    case ..<120:
+      return "40s-2m"
+    default:
+      return "2m+"
     }
   }
 

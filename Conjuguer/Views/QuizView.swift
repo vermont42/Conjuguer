@@ -56,7 +56,11 @@ struct QuizView: View {
       isPresented: $quiz.shouldShowResults,
       onDismiss: {
         quiz.shouldShowResults = false
-        if sheetScope != nil {
+        if quiz.quizState == .inProgress {
+          Task { @MainActor in
+            conjugationFieldIsFocused = true
+          }
+        } else if sheetScope != nil {
           dismiss()
         } else if quiz.scope.isRanked {
           world.gameCenter.showLeaderboard()
@@ -201,13 +205,15 @@ struct QuizView: View {
           .numericText()
           .animation(.snappy, value: quiz.score)
 
-        Spacer()
+        if quiz.showsClock {
+          Spacer()
 
-        HStack(spacing: Layout.defaultSpacing / 2) {
-          Image(systemName: "clock")
-          Text(quiz.elapsedTime.timeString)
-            .numericText()
-            .animation(.snappy, value: quiz.elapsedTime)
+          HStack(spacing: Layout.defaultSpacing / 2) {
+            Image(systemName: "clock")
+            Text(quiz.elapsedTime.timeString)
+              .numericText()
+              .animation(.snappy, value: quiz.elapsedTime)
+          }
         }
       }
       .smallLabel()
@@ -222,6 +228,16 @@ struct QuizView: View {
         let tenseName = tense.titleCaseName.lowercased()
 
         VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+          if quiz.questions[quiz.currentQuestionIndex].isReask {
+            Label(L.QuizView.askedAgain, systemImage: "arrow.uturn.backward")
+              .font(captionFont)
+              .foregroundStyle(Color.customBlue)
+              .padding(.horizontal, 10)
+              .padding(.vertical, 4)
+              .background(Color.customBlue.opacity(0.1), in: Capsule())
+              .accessibilityIdentifier("quiz_asked_again")
+          }
+
           Text(verb.infinitifWithPossibleExtraLetters)
             .font(largeTitleFont)
             .foregroundStyle(Color.customForeground)
@@ -252,7 +268,7 @@ struct QuizView: View {
           .foregroundStyle(Color.secondAttempt)
           .transition(.opacity.combined(with: .scale(scale: 0.9)))
           .accessibilityIdentifier("quiz_almost")
-      } else if let result = quiz.quizResults.last, quiz.correction != nil || result.conjugationResult != .noMatch {
+      } else if let result = quiz.lastRoundResult, quiz.correction != nil || result.conjugationResult != .noMatch {
         Image(systemName: result.conjugationResult.feedbackIconString)
           .font(.title2)
           .foregroundStyle(result.conjugationResult.feedbackColor)
@@ -492,7 +508,7 @@ enum TabQuizScope: CaseIterable {
 }
 
 /// A quiz in a sheet with its own `Quiz`: Test Me's three questions about the verb in view, or a
-/// collection's thirty. The learner closes it onto the same page, and a quiz in the Quiz tab
+/// collection's ten, which Ten More continues. The learner closes it onto the same page, and a quiz in the Quiz tab
 /// carries on. While a question waits, the sheet closes only through Quit, so every quiz started
 /// here ends with `quizQuit` or `quizCompletion`.
 struct QuizSheet: View {

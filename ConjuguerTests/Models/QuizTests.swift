@@ -33,9 +33,15 @@ struct QuizTests {
   }
 
   private func answerAllCorrectly(_ quiz: Quiz) {
-    let questions = quiz.questions
-    for question in questions {
+    while let question = quiz.currentQuestion, quiz.quizState == .inProgress {
       quiz.process(proposedAnswer: correctAnswer(for: question))
+    }
+  }
+
+  private func answerAllWrongly(_ quiz: Quiz) {
+    while quiz.quizState == .inProgress {
+      quiz.process(proposedAnswer: "x")
+      quiz.continueAfterCorrection()
     }
   }
 
@@ -45,16 +51,14 @@ struct QuizTests {
 
     quiz.start()
     #expect(quiz.quizState == .inProgress)
-    #expect(quiz.questions.count == 30)
+    #expect(quiz.questions.count == 10)
 
-    let questionCount = quiz.questions.count
-    for _ in 0 ..< questionCount {
-      quiz.process(proposedAnswer: "x")
-      quiz.continueAfterCorrection()
-    }
+    answerAllWrongly(quiz)
 
-    #expect(quiz.quizResults.count == 30)
-    #expect(quiz.currentQuestionIndex == 30)
+    #expect(quiz.quizResults.count == 20)
+    #expect(quiz.sessionQuestionCount == 10)
+    #expect(quiz.reaskCount == 10)
+    #expect(quiz.currentQuestionIndex == 20)
     #expect(quiz.shouldShowResults)
     #expect(quiz.quizState == .notStarted)
   }
@@ -64,11 +68,7 @@ struct QuizTests {
     let quiz = Current.quiz
 
     quiz.start()
-    let questionCount = quiz.questions.count
-    for _ in 0 ..< questionCount {
-      quiz.process(proposedAnswer: "x")
-      quiz.continueAfterCorrection()
-    }
+    answerAllWrongly(quiz)
 
     #expect(quiz.score == 0)
   }
@@ -80,10 +80,10 @@ struct QuizTests {
     let quiz = makeDeterministicQuiz(level: level)
     answerAllCorrectly(quiz)
 
-    #expect(quiz.currentQuestionIndex == 30)
+    #expect(quiz.currentQuestionIndex == 10)
     #expect(quiz.shouldShowResults)
     #expect(quiz.elapsedTime == 0)
-    #expect(quiz.score == 300)
+    #expect(quiz.score == 100)
   }
 
   // A completed quiz whose score beats the stored best writes it back; a subsequent
@@ -93,16 +93,12 @@ struct QuizTests {
 
     let winningQuiz = makeDeterministicQuiz()
     answerAllCorrectly(winningQuiz)
-    #expect(Current.settings.bestScore == 300)
+    #expect(Current.settings.bestScore == 100)
 
     let losingQuiz = makeDeterministicQuiz()
-    let questionCount = losingQuiz.questions.count
-    for _ in 0 ..< questionCount {
-      losingQuiz.process(proposedAnswer: "x")
-      losingQuiz.continueAfterCorrection()
-    }
+    answerAllWrongly(losingQuiz)
     #expect(losingQuiz.score == 0)
-    #expect(Current.settings.bestScore == 300, "A lower score must not overwrite the stored best.")
+    #expect(Current.settings.bestScore == 100, "A lower score must not overwrite the stored best.")
   }
 
   @Test(arguments: QuizLevel.allCases)
@@ -111,7 +107,7 @@ struct QuizTests {
     for seed in UInt64(0) ..< 100 {
       let quiz = Quiz(gameCenter: GameCenterStub(), seed: seed)
       quiz.start()
-      #expect(quiz.questions.count == 30)
+      #expect(quiz.questions.count == 10)
       for question in quiz.questions where !question.verb.hasCell(question.tense) {
         Issue.record("Seed \(seed) asked \(question.verb.infinitif), \(question.tense.titleCaseName)\(question.tense.pronounDecorator).")
       }
@@ -283,9 +279,12 @@ struct QuizTests {
     #expect(!quiz.shouldShowResults)
 
     quiz.continueAfterCorrection()
+    #expect(quiz.currentQuestion?.isReask == true, "A miss on the last question is asked again before the results.")
+    #expect(!quiz.shouldShowResults)
+    answerAllCorrectly(quiz)
     #expect(quiz.shouldShowResults)
     #expect(quiz.quizState == .notStarted)
-    #expect(quiz.quizResults.count == 30)
+    #expect(quiz.quizResults.count == 11)
   }
 
   @Test func quittingReleasesAHeldCorrection() {

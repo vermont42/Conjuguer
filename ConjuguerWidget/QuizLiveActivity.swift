@@ -15,7 +15,7 @@ struct QuizLiveActivity: Widget {
       DynamicIsland {
         DynamicIslandExpandedRegion(.leading) {
           Label {
-            Text(verbatim: "\(context.state.currentQuestion)/\(context.attributes.totalQuestions)")
+            Text(verbatim: "\(context.state.currentQuestion)/\(context.state.totalQuestions)")
           } icon: {
             Image(systemName: "list.number")
           }
@@ -30,19 +30,24 @@ struct QuizLiveActivity: Widget {
           .font(.headline)
         }
         DynamicIslandExpandedRegion(.center) {
-          QuizElapsedText(state: context.state)
-            .font(.title2)
-            .monospacedDigit()
+          if context.state.showsTime {
+            QuizElapsedText(state: context.state)
+              .font(.title2)
+              .monospacedDigit()
+          } else {
+            Text(verbatim: context.attributes.level)
+              .font(.headline)
+          }
         }
         DynamicIslandExpandedRegion(.bottom) {
           ProgressView(
             value: Double(context.state.currentQuestion),
-            total: Double(context.attributes.totalQuestions)
+            total: Double(context.state.totalQuestions)
           )
           .tint(.blue)
         }
       } compactLeading: {
-        Text(verbatim: "\(context.state.currentQuestion)/\(context.attributes.totalQuestions)")
+        Text(verbatim: "\(context.state.currentQuestion)/\(context.state.totalQuestions)")
           .font(.caption)
           .monospacedDigit()
       } compactTrailing: {
@@ -82,11 +87,13 @@ private struct QuizLockScreenView: View {
             .monospacedDigit()
         }
         HStack(spacing: 4) {
-          Text(verbatim: "\(context.state.currentQuestion) / \(context.attributes.totalQuestions)")
+          Text(verbatim: "\(context.state.currentQuestion) / \(context.state.totalQuestions)")
             .monospacedDigit()
-          Text(verbatim: "·")
-          QuizElapsedText(state: context.state)
-            .monospacedDigit()
+          if context.state.showsTime {
+            Text(verbatim: "·")
+            QuizElapsedText(state: context.state)
+              .monospacedDigit()
+          }
         }
         .font(.subheadline)
         .foregroundStyle(.secondary)
@@ -96,17 +103,23 @@ private struct QuizLockScreenView: View {
   }
 }
 
+private extension QuizActivityAttributes.ContentState {
+  var showsTime: Bool {
+    startDate != nil
+  }
+}
+
 // While the quiz is in progress the OS animates the elapsed time from `startDate`
 // (`Text(_, style: .timer)`); once finished, the frozen final time is shown so the
-// timer does not keep counting past completion.
+// timer does not keep counting past completion. Nothing shows while the quiz clock is hidden.
 private struct QuizElapsedText: View {
   let state: QuizActivityAttributes.ContentState
 
   var body: some View {
-    if state.isFinished {
-      Text(verbatim: state.elapsedTime)
-    } else {
-      Text(state.startDate, style: .timer)
+    if state.isFinished, let elapsedTime = state.elapsedTime {
+      Text(verbatim: elapsedTime)
+    } else if let startDate = state.startDate {
+      Text(startDate, style: .timer)
     }
   }
 }

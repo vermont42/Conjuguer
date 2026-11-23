@@ -11,6 +11,9 @@ struct QuizResultsView: View {
   @Environment(World.self) private var world
   @Environment(Quiz.self) var quiz
 
+  // As wide as an iPhone's, and no wider on an iPad.
+  private static let tenMoreMaxWidth: CGFloat = 400
+
   var body: some View {
     VStack(alignment: .leading) {
       VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
@@ -32,7 +35,7 @@ struct QuizResultsView: View {
         .padding(.top, Layout.defaultSpacing)
 
         VStack(alignment: .leading, spacing: Layout.defaultSpacing / 2) {
-          Text(L.ResultsView.correct(quiz.correctCount, of: quiz.questions.count))
+          Text(L.ResultsView.correct(quiz.correctCount, of: quiz.sessionQuestionCount))
 
           if quiz.secondAttemptCount > 0 {
             Text(L.ResultsView.secondTry(quiz.secondAttemptCount))
@@ -40,11 +43,35 @@ struct QuizResultsView: View {
               .accessibilityIdentifier("results_second_try")
           }
 
+          if quiz.reaskCount > 0 {
+            Text(L.ResultsView.askedAgain(quiz.reaskCorrectCount, of: quiz.reaskCount))
+              .accessibilityIdentifier("results_asked_again")
+          }
+
           Text(quiz.level.localizedNameWithLabel)
 
-          Text(L.ResultsView.time(quiz.elapsedTime.timeString))
+          if quiz.showsClock {
+            Text(L.ResultsView.time(quiz.elapsedTime.timeString))
+              .accessibilityIdentifier("results_time")
+          }
         }
         .smallLabel()
+
+        if quiz.canContinue {
+          Button {
+            quiz.continueSession()
+          } label: {
+            Label(L.ResultsView.tenMore, systemImage: "plus")
+              .buttonLabel()
+              .frame(maxWidth: Self.tenMoreMaxWidth)
+          }
+          .funButton()
+          .controlSize(.large)
+          .frame(maxWidth: .infinity)
+          .padding(.top, Layout.defaultSpacing)
+          .accessibilityHint(L.ResultsView.tenMoreHint)
+          .accessibilityIdentifier("results_ten_more")
+        }
       }
 
       List(quiz.quizResults) { quizResult in

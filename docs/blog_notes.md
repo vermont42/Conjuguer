@@ -5686,3 +5686,45 @@ core takes more than one question in fifty.
 
 A test helper had passed no extra letters when it conjugated, which had never mattered while the
 lists held no verb with two entries. Sortir to exit, now possible at Elementary, broke it.
+
+## Ten Questions, Then Ten More (2026-11-23)
+
+Pedagogy Phase 7 cut the quiz from thirty questions to ten. Thirty had been a compromise of its own:
+Conjugar, the Spanish app before Conjuguer, asked fifty, and its analytics showed that most
+quizzes went unfinished, so Conjuguer asked thirty, and its old privacy policy still tells that
+story. Konjugieren's research went further. A short session is more likely to be started and
+finished, and the learner who wants more can ask for it: the results now offer Ten More ("Encore
+dix"), which continues the same session, keeps the score and the clock running, and draws a fresh
+mix of ten. Josh accepted it reluctantly for Konjugieren, since ten questions say little about a
+learner, and the decision carried over here unchanged.
+
+The second change is the more interesting one for learning. A missed question now comes back once,
+three questions later, or just before the results if the miss came near the end. The correction
+says so ("Cette question reviendra."), the returning question wears an "Asked Again" capsule, and
+a right answer to it earns 5 points rather than 10. It comes back only once, whatever the second
+answer, so that one stubborn conjugation cannot fill a round. Retrieval a few moments after a
+correction is the cheapest form of spacing there is, and it costs the learner nothing but the
+question.
+
+The clock went too, by default. Conjuguer had always been timed, with a bonus for speed, and Phase 5
+had already retired the bonus. Now a Quiz Clock setting, hidden unless the learner chooses Show,
+decides whether the quiz, its results, VoiceOver, and the Live Activity show any time at all.
+Speed will get its own place in a later speed round.
+
+Three analytics changes came with it, all toward sending less. The score left the completion
+signal, so that no signal carries how well anyone did. Elapsed seconds became bands (under three
+seconds, up to fifteen, up to forty, up to two minutes, longer). And a quiz the app was left
+during, which used to vanish without a trace, is now reported at the next launch with the question
+it had reached. That count skips re-asks on purpose: Konjugieren's closing audit found that a
+position counting re-asks would reveal how many answers were wrong.
+
+Conjuguer departed from Konjugieren in one small way. Ten More's draw is told which verbs the
+session has already asked, so a second round passes over them while another verb fits. And trying
+it on the simulator found a detail no test had: the first question of a new round showed the
+previous round's checkmark in its feedback slot, which now starts each round empty.
+
+The shorter quiz also shrank the samples of two statistical tests by two thirds, and one of them,
+which guards against a single verb dominating a level, began to fail on définir. The top 300 verbs
+hold only a handful of regular -ir verbs, which had sat just under the cap of one question in fifty
+all along. The tests now draw as many questions as before, and the cap is one in forty, which still
+catches the bug it was written for.

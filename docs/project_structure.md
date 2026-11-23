@@ -92,12 +92,14 @@ Conjuguer/
 │   ├── PasseSimpleGroup.swift  # Passé simple stem/ending groups (bare/a/i/u/ï/…)
 │   ├── PersonNumber.swift      # 1s…3p with localized pronouns and gendered third-person handling
 │   ├── PronounGender.swift     # Setting enum: feminine/masculine/both
-│   ├── Quiz.swift              # @Observable quiz state: question generation, timer, scoring, Live Activity, Game Center
+│   ├── Quiz.swift              # @Observable quiz state: question generation, rounds of ten and Ten More, re-asks, timer, scoring, Live Activity, Game Center
+│   ├── QuizAbandonment.swift   # The quizzes in progress, kept so the next launch can send quizAbandon for one the app was left during
+│   ├── QuizClock.swift         # Setting enum: the Quiz Clock, hide (default) or show
 │   ├── QuizDraw.swift          # The default quiz's verbs from the level's band: half irregular, two core verbs, one to three rare derivatives; QuizVerbPool (a tense's kinds of verb, read from the data) and QuizVerbTraits
 │   ├── QuizScope.swift         # What a quiz asks about (every verb, My Verbs, one verb's page, a collection), its count and source; the level's mix over chosen verbs, Test Me's three tenses, Verb.hasCell, canBeQuizzed(at:)
 │   ├── QuizLevel.swift         # Setting enum: the four quiz levels (Beginner to Advanced) and the tenses each asks; QuizTenseSlot, a tense's cells, weight, and verb pools; each level's frequency band
-│   ├── QuizQuestion.swift      # One quiz question (verb + tense)
-│   ├── QuizResult.swift        # One answered question, its ConjugationResult, and a slip's first attempt, for the results sheet
+│   ├── QuizQuestion.swift      # One quiz question (verb + tense), and whether it is a missed question asked again
+│   ├── QuizResult.swift        # One answered question, its ConjugationResult, a slip's first attempt, and whether it was a re-ask, with its points, for the results sheet
 │   ├── QuizState.swift         # Quiz lifecycle enum (not started / in progress / finished)
 │   ├── RelatedVerbs.swift      # VerbBase (a verb's base and root: a verbal prefix plus a verb its etymology names, less false pairs), RelatedVerbs, and Verb.related for the verb page's card
 │   ├── ReviewCardSuppression.swift  # The Suppress Review Card setting's Off and On
@@ -153,7 +155,7 @@ Conjuguer/
 │   ├── Layout.swift            # Spacing constants (8/16/24pt)
 │   ├── LiveActivities.swift    # LiveActivities protocol (Current.liveActivities) and the LiveActivity handle, an ID plus an optional ActivityKit Activity
 │   ├── LiveActivitiesReal.swift  # ActivityKit implementation: the rolling staleDate, the serial activityChain, and the finished state's linger
-│   ├── LiveActivitiesSpy.swift # Test spy under unit tests: counts starts, updates, and ends, and holds the active IDs, so tests request no real activities
+│   ├── LiveActivitiesSpy.swift # Test spy under unit tests: counts starts, updates, and ends, and holds the active IDs and the last state, so tests request no real activities
 │   ├── Log.swift               # os.Logger factory with per-category loggers
 │   ├── ModelSort.swift         # Sort order for the model browse view (irregularity/alphabetical/identifier)
 │   ├── Modifiers.swift         # The app's ViewModifier vocabulary (headingLabel, funButton, card, screenBackground, copyOnLongPress, …)
@@ -288,6 +290,7 @@ ConjuguerTests/
     ├── QuizLiveActivityTests.swift     # The quiz's Live Activity through the spy: a tab quiz starts one that Quit or the last answer ends, each other answer updates it, a restart replaces it, and a sheet's quiz starts none
     ├── QuizDrawTests.swift             # The default quiz's verbs: each level's band, half irregular, the core verbs, rare and frequent derivatives, the pools' rules, sortir (obtain) left out, no verb dominating, scoped quizzes untouched
     ├── QuizLevelTests.swift            # Quiz levels: each level's tenses, the weights, every cell in one slot, the default quiz's draw by level, pool, and weight, and the level on the quiz signals
+    ├── QuizSessionTests.swift          # Rounds and re-asks: where a miss returns, once; a re-ask's half points; Ten More's continuation, clock, and fresh verbs; first-round ranking; the signals' question counts and duration bands; the abandonment record; the clock setting and the Live Activity's time (serialized — mutates Current)
     ├── QuizScopeTests.swift            # Quiz scopes: the default quiz at the learner's level, My Verbs drawing only its verbs at each level, defective verbs, Test Me's three tenses, unranked scoring, doubled entries graded as themselves, source on every quiz signal
     ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle; seeded quizzes that never ask a defective cell; the recorded spelling of a variant; the held correction, its stopped clock, and Continue; a slip's one more try, its half points, and its running clock (serialized — mutates Current)
     ├── RelatedVerbsTests.swift         # Base-finding on known and false pairs, nested roots, the card's two relations, doubled roots, and the model page's two orders

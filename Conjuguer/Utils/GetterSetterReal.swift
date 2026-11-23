@@ -22,4 +22,8 @@ class GetterSetterReal: GetterSetter {
   func set(key: String, value: String) {
     userDefaults.set(value, forKey: key)
   }
+
+  func remove(key: String) {
+    userDefaults.removeObject(forKey: key)
+  }
 }

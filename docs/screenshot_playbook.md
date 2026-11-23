@@ -552,7 +552,7 @@ Compact reference. The driver's inline comments hold the full WHY for each — c
     pasting needs it attached, photographing the keyboard needs it detached. Detaching does
     not disturb the field's contents, so the driver orders them — `set_keyboard_state hidden`
     → paste → `set_keyboard_state visible` → capture — and `nav_quiz_results`, which submits
-    30 answers and never photographs a keyboard, holds `hidden` throughout.
+    10 answers and never photographs a keyboard, holds `hidden` throughout.
     `set_keyboard_state` keeps #10's and #19's window / frontmost / 3× retry guards verbatim,
     including this repo's full-device-name window match; it never reads the menu's checkmark
     (only readable while the menu is open) but clicks and then asks the screen, which is also
@@ -647,16 +647,16 @@ Compact reference. The driver's inline comments hold the full WHY for each — c
 | 5 | QuizView (mid) | dark | `nav_quiz_mid` | `tap_tab quiz` → `quiz_start_button` → `set_keyboard_state hidden` → paste fixture answer 0 → `set_keyboard_state visible`. Captured before submit (keyboard visible per spec). The field is not tapped — it is already focused, and tapping it raises an edit callout (workaround #20). |
 | 6 | InfoBrowseView | light | `nav_info_browse` | `tap_tab info` → settle on `info_row_dedication` → `scroll_until_top info_row_participe_passe` (Tenses header to top). |
 | 7 | InfoView | dark | `nav_info_view` | `tap_tab info` → `scroll_until_top info_row_indicatif_present` → tap it. |
-| 8 | QuizResultsView | light | `nav_quiz_results` | `tap_tab quiz` → `quiz_start_button` → 30× (paste + Return + sleep 0.3) → `dismiss_review_prompt` if needed → `verify_screen_loaded results_score`. |
+| 8 | QuizResultsView | light | `nav_quiz_results` | `tap_tab quiz` → `quiz_start_button` → one paste + Return + sleep 0.3 per fixture answer (10) → `dismiss_review_prompt` if needed → `verify_screen_loaded results_score`. |
 | 9 | SettingsView | dark | `nav_settings` | `tap_tab settings`; the Quiz Level tiles are first, so no scroll. |
 
 Tab-bar coordinates live in `tab_coords_for()`. iPhone uses the bottom pill tab bar (y=899.3); iPad uses a top segmented tab bar (y=54). Tab order is `verbs models quiz info settings`.
 
 ### The quiz fixture
 
-Screens 5 and 8 rely on a DEBUG-only deterministic quiz. When launched with `-CONJUGUER_QUIZ_FIXTURE screenshot`, `Quiz.buildQuiz()` builds a fixed 30-question plan via `generateScreenshotFixture()` and writes the correct answers to `Documents/screenshot_fixture_answers.json` via `exportFixtureAnswers()` (both `#if DEBUG`, in [`Conjuguer/Models/Quiz.swift`](../Conjuguer/Models/Quiz.swift)). The driver reads that JSON (`read_fixture_answers_path`) and types the answers. Each exported `answer` is the first of any slash-separated alternates, which `ConjugationResult.score` scores as a total match — so screen 8 shows a high score with all-green per-question rows.
+Screens 5 and 8 rely on a DEBUG-only deterministic quiz. When launched with `-CONJUGUER_QUIZ_FIXTURE screenshot`, `Quiz.buildQuiz()` builds a fixed ten-question plan via `generateScreenshotFixture()` and writes the correct answers to `Documents/screenshot_fixture_answers.json` via `exportFixtureAnswers()` (both `#if DEBUG`, in [`Conjuguer/Models/Quiz.swift`](../Conjuguer/Models/Quiz.swift)). The driver reads that JSON (`read_fixture_answers_path`) and types the answers. Each exported `answer` is the first of any slash-separated alternates, which `ConjugationResult.score` scores as a total match — so screen 8 shows a high score with all-green per-question rows.
 
-The answer field auto-focuses after **Start** and re-focuses after each submission (`QuizView.submitAnswer()` / `start()`), so the 30-answer sweep is just paste + Return per question against `input_quiz_conjugation`.
+The answer field auto-focuses after **Start** and re-focuses after each submission (`QuizView.submitAnswer()` / `start()`), so the answer sweep is just paste + Return per question against `input_quiz_conjugation`.
 
 ## Recovery Guidance
 
@@ -674,8 +674,8 @@ The driver depends on these app-side touchpoints. Renaming any one silently brea
 | `OnboardingDisplay.onboardingEnabled` / `TipDisplay.tipsEnabled` / `TutorDisplay.tutorUnavailableRowEnabled` | operator flips all three to `false` pre-sweep; renaming any of them silently breaks the documented `sed` commands, which fail *quietly* (`sed` reports no error when a pattern matches nothing) | `Conjuguer/Utils/KillSwitches.swift` |
 | `quiz_start_button` identifier | quiz nav for screens 5 and 8 | `Conjuguer/Views/QuizView.swift` |
 | `input_quiz_conjugation` identifier | answer field for screens 5 and 8 | same file |
-| `Quiz.generateScreenshotFixture()` + `exportFixtureAnswers()` | DEBUG-gated 30-pair fixture; JSON written to `Documents/screenshot_fixture_answers.json` when launched with `-CONJUGUER_QUIZ_FIXTURE screenshot` | `Conjuguer/Models/Quiz.swift` |
-| `results_score` identifier | `verify_screen_loaded results_score` after the 30-answer loop | `Conjuguer/Views/QuizResultsView.swift` |
+| `Quiz.generateScreenshotFixture()` + `exportFixtureAnswers()` | DEBUG-gated ten-pair fixture; JSON written to `Documents/screenshot_fixture_answers.json` when launched with `-CONJUGUER_QUIZ_FIXTURE screenshot` | `Conjuguer/Models/Quiz.swift` |
+| `results_score` identifier | `verify_screen_loaded results_score` after the answer loop | `Conjuguer/Views/QuizResultsView.swift` |
 
 The `info_row_<stableKey>` keys are locale-independent ASCII (e.g. `indicatif_present`, `participe_passe`, `dedication`); `verb_row_<infinitif>` and `model_row_<exemplar>` carry French text (e.g. `verb_row_avoir`, `model_row_être`) — the driver passes them as UTF-8 and matches via `describe-ui` + `jq`, which handles non-ASCII fine.
 

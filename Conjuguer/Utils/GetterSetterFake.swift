@@ -24,4 +24,8 @@ class GetterSetterFake: GetterSetter {
   func set(key: String, value: String) {
     dictionary[key] = value
   }
+
+  func remove(key: String) {
+    dictionary[key] = nil
+  }
 }

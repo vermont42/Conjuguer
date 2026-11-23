@@ -46,6 +46,21 @@ struct SettingsView: View {
             changeLevelTip.invalidate(reason: .actionPerformed)
           }
 
+          settingCard(title: L.Settings.quizClock) {
+            Picker("", selection: $settings.quizClock) {
+              ForEach(QuizClock.allCases, id: \.self) { quizClock in
+                Text(quizClock.localizedQuizClock).tag(quizClock)
+              }
+            }
+            .pickerStyle(.segmented)
+            .accessibilityIdentifier("picker_settings_quizClock")
+            .accessibilityLabel(Text(L.Settings.quizClock))
+            .accessibilityValue(settings.quizClock.localizedQuizClock)
+
+            Text(L.Settings.quizClockDescription)
+              .settingsLabel()
+          }
+
           settingCard(title: L.Settings.pronounGender) {
             Picker("", selection: $settings.pronounGender) {
               ForEach(PronounGender.allCases, id: \.self) { pronounGender in

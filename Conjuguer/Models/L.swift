@@ -348,6 +348,18 @@ enum L {
     static func time(_ timeString: String) -> String {
       String(localized: "ResultsView.time", defaultValue: "Time: \(timeString)")
     }
+
+    static func askedAgain(_ count: Int, of total: Int) -> String {
+      String(localized: "ResultsView.askedAgainCount", defaultValue: "Asked Again: \(count) / \(total)")
+    }
+
+    static var tenMore: String {
+      String(localized: "ResultsView.tenMore")
+    }
+
+    static var tenMoreHint: String {
+      String(localized: "ResultsView.tenMoreHint")
+    }
   }
 
   enum ModelView {
@@ -491,6 +503,14 @@ enum L {
 
     static var almost: String {
       String(localized: "QuizView.almost")
+    }
+
+    static var askedAgain: String {
+      String(localized: "QuizView.askedAgain")
+    }
+
+    static var willBeAskedAgain: String {
+      String(localized: "QuizView.willBeAskedAgain")
     }
 
     static func differingLetters(_ letters: String) -> String {
@@ -785,6 +805,14 @@ enum L {
       String(localized: "Settings.quizLevelDescription")
     }
 
+    static var quizClock: String {
+      String(localized: "Settings.quizClock")
+    }
+
+    static var quizClockDescription: String {
+      String(localized: "Settings.quizClockDescription")
+    }
+
     static var pronounGender: String {
       String(localized: "Settings.pronounGender")
     }
@@ -1035,6 +1063,16 @@ enum L {
 
     static func withLabel(_ name: String) -> String {
       String(localized: "QuizLevel.withLabel", defaultValue: "Level: \(name)")
+    }
+  }
+
+  enum QuizClock {
+    static var hide: String {
+      String(localized: "QuizClock.hide")
+    }
+
+    static var show: String {
+      String(localized: "QuizClock.show")
     }
   }
 

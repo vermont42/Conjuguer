@@ -30,7 +30,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 4 | Done | 2026-11-23 | 954eda0 | T1.6 | 4 |
 | 5 | Done | 2026-11-23 | bc2c6e6 | T2.3, T2.6, T6.7, M1 | 5 |
 | 6 | Done | 2026-11-23 | b26cb07 | T2.1, T2.2, T2.5 | 6 |
-| 7 | Not started | | | T2.7, T3.1, T6.5, M2, M3 | 7 |
+| 7 | Awaiting Josh | 2026-11-23 | | T2.7, T3.1, T6.5, M2, M3 | 7 |
 | 8 | Not started | | | Decision 4 | 8 |
 | 9 | Not started | | | T2.8 | 9 |
 | 10 | Not started | | | T2.9, Decision 8 | 10 |
@@ -944,7 +944,7 @@ each.
 ## Phase 7: Ten Questions, Then Ten More
 
 **Suggestions:** T2.7, T3.1, T6.5, M2, M3. **Ports:** Konjugieren Phase 7 (`QuizClock.swift`,
-`QuizAbandonment.swift`). **Depends on:** Phases 3 and 5. **Status:** Not started.
+`QuizAbandonment.swift`). **Depends on:** Phases 3 and 5. **Status:** Awaiting Josh.
 
 - **T2.7.** The default session is ten questions. Its results offer Ten More, which continues the
   same session and adds to its score.
@@ -973,6 +973,87 @@ clock hides by default, the Live Activity and tip follow the new length, the sig
 and tests pin the re-ask placement and the continuation.
 
 **How it differed:**
+
+- **Nothing was asked of Josh.** The phase had no **Ask Josh**, and Konjugieren's four answers of
+  2026-11-13 were carried over: (1) a default session posts its first round's score, re-asks not
+  counted, to the one leaderboard and the best score, and Ten More's points are never posted
+  (`Quiz.firstRoundScore`, a ceiling of 100), so that Phase 8 has only to change where the score
+  goes; (2) My Verbs and collection quizzes become ten with Ten More, and Test Me keeps its three
+  with none (`QuizScope.continues`); (3) the Live Activity starts with every round of a tab quiz,
+  with a total that counts the session so far; (4) M3's bands are 0-3s, 3-15s, 15-40s, 40s-2m, and
+  2m+. Also as Konjugieren decided in its session: Ten More has no limit, a re-ask may still earn a
+  slip's second attempt, a right re-ask scores 5 on either attempt, and Test Me re-asks too.
+- **Ten More draws a fresh mix of ten**, Phase 6's open question, so every round, the ranked first
+  included, has five irregular questions, two core, and one to three rare derivatives. Unlike
+  Konjugieren's, the draw is seeded with the session's verbs (`QuizDraw.questions(level:count:asked:using:)`),
+  so a later round passes over a verb already asked while another fits; a test pins that two
+  rounds at Advanced share no verb outside the core. A fixture is repeated by Ten More, which makes
+  the continuation checkable in the simulator.
+- **How it works.** `Quiz.questionCount` is a round's 10; `sessionQuestionCount` counts the
+  session's questions without re-asks. A miss inserts `QuizQuestion.reasked` at
+  `Quiz.reaskPosition(after:in:)`, three questions on or at the round's end, and a round ends when
+  `currentQuestionIndex` passes the last question, re-asks included. Scores still accumulate as
+  answers come; `QuizResult.points` gives a re-ask its 5, and the counts (`correctCount`,
+  `secondAttemptCount`, `reaskCount`, `reaskCorrectCount`) are read from the results, re-asks
+  apart. `continueSession()` appends the draw and restarts the timer, the Live Activity, and the
+  abandonment record; it sends no `quizStart`. `QuizActivityAttributes.totalQuestions` moved into
+  the content state, and its start date and elapsed time became optional.
+- **What a learner sees.** The correction says "This question will come up again." / "Cette
+  question reviendra."; a re-ask shows an "Asked Again" / "Question reposée" capsule above the verb,
+  and its results row the same words; the results add "Asked Again: 1 / 2" / "Questions reposées :
+  1 / 2" and a Ten More / "Encore dix" button, capped at 400 points and centered on an iPad; the
+  briefing says "10 questions". The progress counts re-asks (1 / 11 after a miss), as Konjugieren's
+  does. Josh has not judged any of the wording. Konjugieren's diamond dots and wrapping header were
+  not needed: Conjuguer's results have no dot row, and their header is a column.
+- **Found by looking:** the first question of a Ten More round showed the previous round's
+  checkmark in its feedback slot. The slot, and the "also spelled" announcement, now read
+  `Quiz.lastRoundResult`, which is empty at a round's start.
+- **The clock** is a new setting, Quiz Clock / Chronomètre du quiz, Hide / Show (Masquer /
+  Afficher), below Quiz Level. Hidden, the quiz, its results, VoiceOver's announcement, and the Live
+  Activity show no time, and the Dynamic Island's center shows the level instead. The clock still
+  counts while hidden.
+- **Strings that said 30 or "timed"** changed: the briefing's "30 questions", the onboarding quiz
+  page ("Take ten-question quizzes" / "Faites des quiz de dix questions"), and `TryQuizTip`'s
+  message. The App Store description names no count and was not touched. `privacyPolicy4.md` still
+  says that Conjuguer's quizzes have thirty verbs; the privacy section flags it for release day.
+- **Analytics.** `quizCompletion` lost `score` and `elapsedTime` and gained `duration` and
+  `questionCount`, sent at each round's results (10, 20, …). `quizQuit`'s `elapsedTime` became
+  `duration`, wall-clock from the session's start, background included. `lastQuestionIndex` keeps
+  its name and its zero-based meaning, now counting the session's questions without re-asks. The
+  new `quizAbandon` (M2) carries `level`, `lastQuestionIndex`, and `source`, sent at launch by
+  `QuizAbandonment.reportAndClear` for each quiz the last run left mid-question; it needed
+  `GetterSetter.remove(key:)`. All staged in `docs/privacy_policy_pending.md`, in both languages.
+- **Best score.** It is now the first round's score, at most 100, but a best kept from the
+  thirty-question quiz (the iPhone simulator showed 30; a real install may hold hundreds) stands
+  until Phase 8's leaderboards by level replace it. Phase 8 should decide what becomes of it.
+- **Fixtures** were cut to a round: the screenshot fixture asks its first ten, the grading fixture
+  its ten without repeats, and the frames fixture its fifteen. `scripts/take_screenshots.sh`
+  answers as many questions as the fixture holds.
+- **Two tests changed their samples, and one its claim.** Ten-question quizzes hold a third of the
+  draws, so `QuizDrawTests` now draws 120 quizzes rather than 40, and the weight test 600 rather
+  than 200, keeping the samples they were written for. `noVerbOutsideTheCoreDominatesALevel` then
+  still failed at Elementary (définir 19 of 896 non-core questions, 2.1%, against a cap of one in
+  fifty): the top 300 holds only a few regular -ir verbs, which sat at the cap at thirty questions
+  too. Its cap is now one in forty, which the fiche pool Phase 6 removed (3.8%) would still fail.
+- **Verified on the iPhone 17**, light. In French with the `corrections` fixture: "10 questions"
+  on the briefing, a miss's correction with "Cette question reviendra." and the count at 1 / 9, the
+  re-ask with its capsule at 5 / 9, a miss on the last question re-asked before the results, results
+  of 70 (six right, two re-asks at 5) with "Questions reposées : 2 / 2" and no time, and Encore dix
+  resuming at 11 / 18 with the score and the keyboard. In English: the Quiz Clock card set to Show,
+  the clock in the status strip (0:21), results with "Time: 0:49" and "Asked Again" rows, and Ten
+  More carrying the clock on (0:52). A real abandonment: the app terminated at 17 / 24 left
+  `{"level":"advanced","source":"tab","lastQuestionIndex":8}` in its preferences, and the relaunch
+  cleared it. The clock was set back to Hide. **On the iPad Pro 11** in English and dark: the
+  correction line, the re-ask, results of 75 with no time, and Ten More with typing at once. Not
+  tried: VoiceOver by ear, the software keyboard, the Live Activity itself, a Test Me sheet's
+  results (unit-tested: no Ten More), and Game Center.
+- **Tests:** 616 to 631. `QuizSessionTests` is new (15 tests: the re-ask's place and its once
+  only, its half points, Ten More's continuation, clock, fresh verbs, and availability, first-round
+  ranking, the completion and quit signals' counts and bands, the duration bands, the abandonment
+  record and its report, the clock setting, and the Live Activity's time). `QuizTests`,
+  `QuizScopeTests`, and `QuizLiveActivityTests` moved from thirty questions to rounds with re-asks.
+  The suite took 228 seconds, about 9 more than before in the two draw suites; `VerbDrawTests`,
+  untouched, swung from 85 to 175 seconds between runs.
 
 ## Phase 8: Leaderboards by Level
 

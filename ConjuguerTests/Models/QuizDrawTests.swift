@@ -12,7 +12,7 @@ import Testing
 @MainActor
 @Suite(.serialized)
 struct QuizDrawTests {
-  private static let seeds: ClosedRange<UInt64> = 1 ... 40
+  private static let seeds: ClosedRange<UInt64> = 1 ... 120
   private static var quizzesByLevel: [QuizLevel: [[QuizQuestion]]] = [:]
 
   private func quizzes(at level: QuizLevel) -> [[QuizQuestion]] {
@@ -106,13 +106,14 @@ struct QuizDrawTests {
   }
 
   // A pool that holds only a verb or two for some role and share would ask them in quiz after
-  // quiz. The core verbs recur by design, and at Beginner the band's few -ir verbs do too.
+  // quiz. The core verbs recur by design, and so do the band's few regular -ir verbs: at Beginner
+  // most often, and at Elementary each in about 2% of questions, under the cap of one in forty.
   @Test(arguments: [QuizLevel.elementary, .intermediate, .advanced])
   func noVerbOutsideTheCoreDominatesALevel(level: QuizLevel) {
     let questions = quizzes(at: level).joined().filter { !QuizDraw.isCore($0.verb) }
     let counts = Dictionary(grouping: questions, by: \.verb.id).mapValues(\.count)
     let (id, count) = counts.max { $0.value < $1.value } ?? ("", 0)
-    #expect(count * 50 <= questions.count, "\(level): \(id) \(count) of \(questions.count)")
+    #expect(count * 40 <= questions.count, "\(level): \(id) \(count) of \(questions.count)")
   }
 
   @Test func thePoolsReadTheData() throws {

@@ -24,6 +24,12 @@ struct QuizResultView: View {
       Text(quizResult.tense.titleCaseName + quizResult.tense.pronounDecorator)
         .smallLabel()
 
+      if quizResult.isReask {
+        Text(L.QuizView.askedAgain)
+          .smallLabel()
+          .foregroundStyle(Color.customBlue)
+      }
+
       if let firstAttempt = quizResult.firstAttempt {
         answerText(label: L.ResultsView.firstTryWithColon, answer: firstAttempt)
       }

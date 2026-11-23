@@ -41,10 +41,16 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `quiz_shown_spelling` | The app's spelling beside the checkmark, after a right answer spelled another standard way | Launch with `-CONJUGUER_QUIZ_FIXTURE grading` and answer the first question `il connait`; its label is "Correct. Also spelled: connaît". |
 | `quiz_almost` | "Almost! Try once more." in the feedback slot | Present while a slip waits for its second attempt. Launch with `-CONJUGUER_QUIZ_FIXTURE slips` and answer the first question `etes`. |
 | `results_second_try` | "Second Try: N" in `QuizResultsView` | Present only when a second attempt was right. |
+| `results_asked_again` | "Asked Again: N / M" in `QuizResultsView` | Present only when a question was asked again. |
+| `results_time` | "Time: 0:49" in `QuizResultsView` | Present only with the Quiz Clock set to Show. |
+| `results_ten_more` | Ten More in `QuizResultsView` | Absent after Test Me's three questions. `tap_id.sh` works on the iPhone; on the iPad Pro 11 tap ≈ `419,616`. The quiz resumes with the keyboard up. |
+| `quiz_asked_again` | The "Asked Again" capsule above a re-asked question's verb | A missed question returns three questions later, or before the results. |
+| `quiz_correction_will_be_asked_again` | "This question will come up again." in a held correction | Absent from a re-ask's own correction. |
 | `quiz_correction` | The held correction's two answers, one element | Present while a wrong answer holds. Its label is the spoken correction ("Incorrect. Your Answer: …"). Launch with `-CONJUGUER_QUIZ_FIXTURE corrections` for eight kinds. |
 | `quiz_correction_verb`, `quiz_correction_model` | The correction's links | Push the verb's page (scrolled to the asked cell) or the model's page over the quiz. The verb link is absent in Test Me's sheet. Back is the pushed page's top-left button (≈ `37,83` on the iPhone 17 in the tab, ≈ `37,110` in a sheet; ≈ `31,54` on the iPad Pro 11). |
 | `quiz_continue_button` | The correction's Continue | Return in the field does the same. |
 | `quiz_level_<level>` | A level tile in `SettingsView`'s Quiz Level card | `quiz_level_beginner`, `_elementary`, `_intermediate`, `_advanced`; `tap_id.sh` chooses it, and the chosen tile has the selected trait. The four sit in `grid_settings_quizLevel`. |
+| `picker_settings_quizClock` | Quiz Clock segmented `Picker` in `SettingsView` | 2 segments (Hide, Show); Hide is the default. On the iPhone 17 at the top of Settings, Hide ≈ `116,526` and Show ≈ `285,526`. |
 | `picker_settings_pronounGender` | Pronoun-gender segmented `Picker` in `SettingsView` | 3 segments (Feminine, Masculine, Both). |
 | `verb_example` | Example card in `VerbView` (below etymology) | Wraps the FR sentence, EN translation, source attribution, and nested *Chanson de Roland* example. |
 | `verb_browse_count` | "N VERBS" header above the verb collection | Hidden when the search yields nothing. |
@@ -80,7 +86,7 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `model_verb_order` | Alphabetical/Frequency `Picker` above a model page's verbs | 2 segments; the verbs stay one `Text` of links, so tap a verb at its coordinates. |
 | `collection_row_<key>` | A featured collection's row (iPhone) or card (iPad) atop the Models tab | Keys `top100`, `etre`, `irregularFutur`, `pronominal`. Hidden while the search field has text. |
 | `collection_progress` | "3 of 100 looked up" in a `VerbCollectionBar`, on a collection's page or a model's verbs card | Read it before and after opening a verb to see the count rise. |
-| `collection_quiz_button` | The bar's Quiz button | Opens a 30-question `QuizSheet` titled with the collection. Absent when no verb can be quizzed (1-10, 2-4). |
+| `collection_quiz_button` | The bar's Quiz button | Opens a ten-question `QuizSheet` titled with the collection. Absent when no verb can be quizzed (1-10, 2-4). |
 | `collection_share_button` | The bar's Share button | The popover anchors to it on iPad. |
 | `collection_sort_order` | Frequency/Alphabetical `Picker` on a collection's page | 2 segments, Frequency first. |
 | `collection_verb_<dictionaryKey>` | A verb row on a collection's page | e.g. `collection_verb_aller`; a green check marks a verb looked up. |
@@ -162,14 +168,16 @@ the same file was overwritten at launch by the preferences daemon's cached copy.
 
 ## Completing a quiz
 
-A default quiz is 30 questions, at the level chosen in Settings. A right answer advances at once; a wrong one holds its
+A default quiz is a round of 10 questions, at the level chosen in Settings, and each miss adds a
+re-ask three questions on, or before the results, so a sweep of junk answers runs to 20. A right
+answer advances at once; a wrong one holds its
 correction until Continue, which a second Return also triggers, so a sweep of junk answers sends
-Return twice per question. A slip (one letter off, or only accents wrong, in an answer of four
+Return twice per question. Loop until `results_score` appears rather than counting. A slip (one letter off, or only accents wrong, in an answer of four
 letters or more) first asks for one more try and leaves the answer in the field, so text typed next
 is appended to it: set the field's value with `type_text.sh` rather than `axe type` to replace it.
 After **Start**, the answer field auto-focuses; type into `input_quiz_conjugation`
-and send Return (`axe key 40`) per question. The `Progress: N / 30` label tracks
-position; the run ends with a `QuizResultsView` sheet (label `Results`).
+and send Return (`axe key 40`) per question. The `N / M` label tracks
+position, M growing with each re-ask; the run ends with a `QuizResultsView` sheet (label `Results`).
 
 The field **stays focused across submissions** (`QuizView` re-sets focus after each Return), so a
 fast sweep is: tap it once (`tap_id.sh input_quiz_conjugation`), then loop

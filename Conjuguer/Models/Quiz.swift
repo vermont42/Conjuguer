@@ -12,7 +12,10 @@ import TipKit
 
 @Observable
 class Quiz {
-  static let questionCount = 30
+  /// A round's questions, re-asks not counted. Ten More adds another round to the session.
+  static let questionCount = 10
+  /// How many questions come between a miss and its re-ask, fewer near a round's end.
+  static let reaskGap = 3
 
   private(set) var quizState = QuizState.notStarted
   private(set) var elapsedTime = 0
@@ -30,6 +33,15 @@ class Quiz {
   /// clock running. A question gets one more attempt at most, whatever earned it.
   private(set) var firstAttempt: String?
 
+  private(set) var roundCount = 0
+  private var roundFirstResultIndex = 0
+
+  /// The last answer of this round, whose mark the next question shows. A round of Ten More
+  /// starts with none.
+  var lastRoundResult: QuizResult? {
+    quizResults.count > roundFirstResultIndex ? quizResults.last : nil
+  }
+
   var isAwaitingSecondAttempt: Bool {
     firstAttempt != nil
   }
@@ -41,28 +53,66 @@ class Quiz {
   // The instant the timer started, handed to the Live Activity so its Lock Screen /
   // Dynamic Island timer animates via the OS rather than a per-answer frozen String.
   private var liveActivityStartDate = Date.now
+  private var sessionStartDate = Date.now
+  private let now: () -> Date
+  /// Names this quiz's entry in `QuizAbandonment`, since a quiz in a sheet can run beside the Quiz
+  /// tab's.
+  private let abandonmentID = UUID().uuidString
 
-  // Elapsed time for the Live Activity. Reuses Int.timeString so it matches the in-app
-  // formatting past an hour (1:01:05, not 61:05) rather than diverging.
-  var elapsedTimeString: String {
-    elapsedTime.timeString
+  var showsClock: Bool {
+    Current.settings.quizClock == .show
   }
 
-  /// Right on the first attempt. A right second attempt is counted apart.
+  // Elapsed time for the Live Activity, nil while the clock is hidden. Reuses Int.timeString so
+  // it matches the in-app formatting past an hour (1:01:05, not 61:05) rather than diverging.
+  var elapsedTimeString: String? {
+    showsClock ? elapsedTime.timeString : nil
+  }
+
+  var currentQuestion: QuizQuestion? {
+    questions.indices.contains(currentQuestionIndex) ? questions[currentQuestionIndex] : nil
+  }
+
+  /// The session's questions, re-asks not counted.
+  var sessionQuestionCount: Int {
+    questions.filter { !$0.isReask }.count
+  }
+
+  /// Right on the first attempt, re-asks not counted. A right second attempt is counted apart.
   var correctCount: Int {
-    quizResults.filter { $0.conjugationResult == .totalMatch }.count
+    quizResults.filter { !$0.isReask && $0.conjugationResult == .totalMatch }.count
   }
 
   var secondAttemptCount: Int {
-    quizResults.filter { $0.conjugationResult == .secondAttemptMatch }.count
+    quizResults.filter { !$0.isReask && $0.conjugationResult == .secondAttemptMatch }.count
+  }
+
+  var reaskCount: Int {
+    quizResults.filter(\.isReask).count
+  }
+
+  var reaskCorrectCount: Int {
+    quizResults.filter { $0.isReask && $0.conjugationResult != .noMatch }.count
+  }
+
+  /// The first round's points without its re-asks, so that every ranked score has the same
+  /// ceiling, 100. Ten More's points are the learner's alone.
+  var firstRoundScore: Int {
+    quizResults.filter { !$0.isReask }.prefix(scope.questionCount).reduce(0) { $0 + $1.points }
+  }
+
+  var canContinue: Bool {
+    shouldShowResults && quizState == .notStarted && scope.continues && !questions.isEmpty
   }
 
   private var personNumbers = CyclingDeck(PersonNumber.allCases)
   private var impératifPersonNumbers = CyclingDeck(PersonNumber.impératifPersonNumbers)
 
-  /// A `seed` makes every quiz this instance builds repeatable, for tests.
-  init(gameCenter: GameCenter, seed: UInt64? = nil) {
+  /// A `seed` makes every quiz this instance builds repeatable, for tests, and `now` lets them set
+  /// the time a quiz takes.
+  init(gameCenter: GameCenter, seed: UInt64? = nil, now: @escaping () -> Date = { Date.now }) {
     self.gameCenter = gameCenter
+    self.now = now
     generator = QuizRandomNumberGenerator(seeded: seed.map(SeededRandomNumberGenerator.init(seed:)))
   }
 
@@ -71,15 +121,16 @@ class Quiz {
     resetDecks()
     shuffleDecks()
     resetPublishedProperties()
-    buildQuiz()
+    questions = drawQuestions()
     guard !questions.isEmpty else {
       return
     }
+    roundCount = 1
+    sessionStartDate = now()
     quizState = .inProgress
     announcePublishedProperties()
-    if scope.startsLiveActivity {
-      startLiveActivity()
-    }
+    startLiveActivity()
+    recordProgress()
     Current.soundPlayer.play(Sound.randomGun)
     var startParameters = [
       ParameterKey.level.rawValue: level.rawValue,
@@ -89,7 +140,36 @@ class Quiz {
       startParameters[ParameterKey.collection.rawValue] = collection.analyticsValue
     }
     Current.analytics.signal(name: .quizStart, parameters: startParameters)
+    startTimer()
+  }
 
+  /// Ten More: another round in the same session, offered by the results. The score, the clock,
+  /// and the questions so far carry on, and the new questions are a fresh draw, so that every
+  /// round has the default quiz's mix of verbs.
+  func continueSession() {
+    guard canContinue else {
+      return
+    }
+    let more = drawQuestions()
+    guard !more.isEmpty else {
+      return
+    }
+    questions += more
+    roundCount += 1
+    roundFirstResultIndex = quizResults.count
+    shouldShowResults = false
+    correction = nil
+    firstAttempt = nil
+    quizState = .inProgress
+    announcePublishedProperties()
+    startLiveActivity()
+    recordProgress()
+    Current.soundPlayer.play(Sound.randomGun)
+    startTimer()
+  }
+
+  private func startTimer() {
+    timer?.invalidate()
     timer = Timer.scheduledTimer(
       withTimeInterval: 1.0,
       repeats: true,
@@ -111,18 +191,33 @@ class Quiz {
     elapsedTime += 1
   }
 
+  /// The question reached, counted from one, re-asks not counted, which `quizQuit` and
+  /// `quizAbandon` send as an index. A re-ask is inserted only after a wrong answer, so a position
+  /// that counted re-asks would tell how many answers were wrong, and no signal carries accuracy.
+  private var questionReached: Int {
+    questions.prefix(min(currentQuestionIndex + 1, questions.count)).filter { !$0.isReask }.count
+  }
+
+  private var lastQuestionIndex: Int {
+    max(questionReached - 1, 0)
+  }
+
+  private var durationBand: String {
+    AnalyticsBand.quizDuration(now().timeIntervalSince(sessionStartDate))
+  }
+
   func quit() {
     Current.soundPlayer.play(Sound.randomSadTrombone)
     Current.analytics.signal(name: .quizQuit, parameters: [
       ParameterKey.level.rawValue: level.rawValue,
-      ParameterKey.lastQuestionIndex.rawValue: "\(currentQuestionIndex)",
-      ParameterKey.elapsedTime.rawValue: "\(elapsedTime)",
+      ParameterKey.lastQuestionIndex.rawValue: "\(lastQuestionIndex)",
+      ParameterKey.duration.rawValue: durationBand,
       ParameterKey.source.rawValue: scope.source.rawValue
     ])
     teardown()
   }
 
-  // Pure teardown shared by quit() and completeQuiz(). Completing a quiz must NOT
+  // Pure teardown shared by quit() and completeRound(). Completing a round must NOT
   // route through quit(), which would emit a spurious .quizQuit signal and play the
   // sad-trombone quit sound over the completion applause.
   private func teardown() {
@@ -131,56 +226,58 @@ class Quiz {
     correction = nil
     firstAttempt = nil
     endLiveActivity()
+    QuizAbandonment.clear(id: abandonmentID, getterSetter: Current.getterSetter)
+  }
+
+  private func recordProgress() {
+    QuizAbandonment.record(
+      QuizAbandonment.Entry(level: level.rawValue, source: scope.source.rawValue, lastQuestionIndex: lastQuestionIndex),
+      id: abandonmentID,
+      getterSetter: Current.getterSetter
+    )
   }
 
   private func startLiveActivity() {
     endLiveActivity()
-    liveActivityStartDate = Date.now
+    guard scope.startsLiveActivity else {
+      return
+    }
     liveActivity = Current.liveActivities.start(
-      attributes: QuizActivityAttributes(level: level.localizedName, totalQuestions: questions.count),
-      initialState: QuizActivityAttributes.ContentState(
-        currentQuestion: 1,
-        score: 0,
-        correctCount: 0,
-        startDate: liveActivityStartDate,
-        elapsedTime: "0:00",
-        isFinished: false
-      )
+      attributes: QuizActivityAttributes(level: level.localizedName),
+      initialState: liveActivityState(isFinished: false)
     )
   }
 
-  private func updateLiveActivity(isFinished: Bool) {
+  private func updateLiveActivity() {
     guard let liveActivity else {
       return
     }
-    // The Lock Screen's timer counts from its start date and cannot pause, so after a held
-    // correction the start date moves later by the time the clock stood still.
-    liveActivityStartDate = Date.now.addingTimeInterval(-Double(elapsedTime))
-    let state = QuizActivityAttributes.ContentState(
-      currentQuestion: min(currentQuestionIndex + 1, questions.count),
-      score: score,
-      correctCount: correctCount,
-      startDate: liveActivityStartDate,
-      elapsedTime: elapsedTimeString,
-      isFinished: isFinished
-    )
-    Current.liveActivities.update(liveActivity, state: state)
+    Current.liveActivities.update(liveActivity, state: liveActivityState(isFinished: false))
   }
 
   private func endLiveActivity() {
     guard let liveActivity else {
       return
     }
-    let finalState = QuizActivityAttributes.ContentState(
-      currentQuestion: currentQuestionIndex,
+    Current.liveActivities.end(liveActivity, finalState: liveActivityState(isFinished: true))
+    self.liveActivity = nil
+  }
+
+  private func liveActivityState(isFinished: Bool) -> QuizActivityAttributes.ContentState {
+    if !isFinished {
+      // The Lock Screen's timer counts from its start date and cannot pause, so after a held
+      // correction the start date moves later by the time the clock stood still.
+      liveActivityStartDate = Date.now.addingTimeInterval(-Double(elapsedTime))
+    }
+    return QuizActivityAttributes.ContentState(
+      currentQuestion: isFinished ? min(currentQuestionIndex, questions.count) : min(currentQuestionIndex + 1, questions.count),
+      totalQuestions: questions.count,
       score: score,
       correctCount: correctCount,
-      startDate: liveActivityStartDate,
+      startDate: showsClock ? liveActivityStartDate : nil,
       elapsedTime: elapsedTimeString,
-      isFinished: true
+      isFinished: isFinished
     )
-    Current.liveActivities.end(liveActivity, finalState: finalState)
-    self.liveActivity = nil
   }
 
   private func resetDecks() {
@@ -198,16 +295,19 @@ class Quiz {
     score = 0
     level = Current.settings.quizLevel
     currentQuestionIndex = 0
+    roundCount = 0
+    roundFirstResultIndex = 0
     questions = []
     quizResults = []
     correction = nil
     firstAttempt = nil
+    shouldShowResults = false
   }
 
-  private func buildQuiz() {
+  /// A round's questions, a fixture's in DEBUG, which Ten More repeats.
+  private func drawQuestions() -> [QuizQuestion] {
     if scope.verbs != nil {
-      questions = scope.questions(level: level, using: &generator)
-      return
+      return scope.questions(level: level, using: &generator)
     }
 
     #if DEBUG
@@ -216,30 +316,26 @@ class Quiz {
     // screenshot driver can type them. See docs/screenshot_playbook.md.
     switch UserDefaults.standard.string(forKey: "CONJUGUER_QUIZ_FIXTURE") {
     case "screenshot":
-      questions = generateScreenshotFixture()
-      exportFixtureAnswers(questions)
-      return
+      let fixture = generateScreenshotFixture()
+      exportFixtureAnswers(fixture)
+      return fixture
     case "grading":
-      questions = generateGradingFixture()
-      return
+      return generateGradingFixture()
     case "frames":
-      questions = generateFramesFixture()
-      return
+      return generateFramesFixture()
     case "corrections":
-      questions = generateCorrectionsFixture()
-      return
+      return generateCorrectionsFixture()
     case "slips":
-      questions = generateSlipsFixture()
-      return
+      return generateSlipsFixture()
     case "levels":
-      questions = generateLevelsFixture()
-      return
+      return generateLevelsFixture()
     default:
       break
     }
     #endif
 
-    questions = QuizDraw.questions(level: level, count: scope.questionCount, using: &generator).map(question(of:))
+    let asked = Set(questions.map(\.verb.id))
+    return QuizDraw.questions(level: level, count: scope.questionCount, asked: asked, using: &generator).map(question(of:))
   }
 
   /// The question of `tense` for `verb` in the next person from the deck, or in the next person
@@ -267,7 +363,7 @@ class Quiz {
   }
 
   #if DEBUG
-  // A fixed, locale-independent 30-question plan for App Store screenshots. The
+  // A fixed, locale-independent ten-question plan for App Store screenshots. The
   // verbs are all common enough to exist in every build of verbs.xml, and the
   // tenses are picked to look representative (présent, passé composé, imparfait,
   // futur, conditionnel, impératif). See docs/screenshot_playbook.md.
@@ -282,27 +378,7 @@ class Quiz {
       ("prendre", .passéComposé(.thirdSingular)),
       ("venir", .passéComposé(.thirdSingular)),
       ("voir", .indicatifPrésent(.thirdSingular)),
-      ("pouvoir", .indicatifPrésent(.firstSingular)),
-      ("vouloir", .indicatifPrésent(.firstSingular)),
-      ("devoir", .indicatifPrésent(.firstSingular)),
-      ("savoir", .indicatifPrésent(.firstSingular)),
-      ("dire", .indicatifPrésent(.secondPlural)),
-      ("manger", .imparfait(.firstPlural)),
-      ("donner", .indicatifPrésent(.thirdPlural)),
-      ("aimer", .conditionnelPrésent(.firstSingular)),
-      ("partir", .passéComposé(.thirdSingular)),
-      ("mettre", .indicatifPrésent(.firstSingular)),
-      ("connaître", .indicatifPrésent(.thirdSingular)),
-      ("écrire", .imparfait(.firstSingular)),
-      ("lire", .indicatifPrésent(.thirdSingular)),
-      ("boire", .indicatifPrésent(.thirdPlural)),
-      ("croire", .indicatifPrésent(.firstSingular)),
-      ("recevoir", .indicatifPrésent(.firstSingular)),
-      ("ouvrir", .indicatifPrésent(.thirdSingular)),
-      ("sentir", .indicatifPrésent(.firstSingular)),
-      ("rendre", .indicatifPrésent(.thirdSingular)),
-      ("choisir", .futurSimple(.firstSingular)),
-      ("penser", .impératif(.secondSingular))
+      ("manger", .imparfait(.firstPlural))
     ]
     return plan.map { spec in
       QuizQuestion(verb: Verb.verbForInfinitif(spec.infinitif), tense: spec.tense)
@@ -310,7 +386,7 @@ class Quiz {
   }
 
   // Ten questions whose right answers the grading accepts only since it reads pronouns and
-  // standard variants, repeated to thirty, unshuffled. The answers to type are in
+  // standard variants, unshuffled. The answers to type are in
   // docs/feature_architecture.md § Grading and Scoring.
   private func generateGradingFixture() -> [QuizQuestion] {
     let plan: [(infinitif: String, tense: Tense)] = [
@@ -325,13 +401,12 @@ class Quiz {
       ("être", .indicatifPrésent(.secondPlural)),
       ("plaire", .indicatifPrésent(.thirdSingular))
     ]
-    let questions = plan.map { spec in
+    return plan.map { spec in
       QuizQuestion(verb: Verb.verbForInfinitif(spec.infinitif), tense: spec.tense)
     }
-    return Array(repeating: questions, count: 3).flatMap { $0 }
   }
 
-  // One question for each kind of answer frame, repeated to thirty, unshuffled. The frames are
+  // One question for each kind of answer frame, unshuffled. The frames are
   // listed in docs/feature_architecture.md § Quiz.
   private func generateFramesFixture() -> [QuizQuestion] {
     let plan: [(infinitif: String, tense: Tense)] = [
@@ -351,10 +426,9 @@ class Quiz {
       ("parler", .participePrésent),
       ("venir", .participePassé)
     ]
-    let questions = plan.map { spec in
+    return plan.map { spec in
       QuizQuestion(verb: Verb.verbForInfinitif(spec.infinitif), tense: spec.tense)
     }
-    return Array(repeating: questions, count: 2).flatMap { $0 }
   }
 
   // Eight questions, unshuffled, each with a wrong answer to type that shows a kind of marking.
@@ -483,27 +557,34 @@ class Quiz {
     if conjugationResult == .noMatch || currentQuestionIndex != questions.count - 1 {
       Current.soundPlayer.play(conjugationResult.sound)
     }
-    score += conjugationResult.score
-    quizResults.append(
-      QuizResult(
-        infinitif: verb.infinitifWithPossibleExtraLetters,
-        tense: tense,
-        conjugationResult: conjugationResult,
-        correctAnswer: correctAnswers,
-        actualAnswer: proposedAnswer,
-        shownSpelling: grade.shownSpelling,
-        firstAttempt: firstAttempt
-      )
+    let result = QuizResult(
+      infinitif: verb.infinitifWithPossibleExtraLetters,
+      tense: tense,
+      conjugationResult: conjugationResult,
+      correctAnswer: correctAnswers,
+      actualAnswer: proposedAnswer,
+      shownSpelling: grade.shownSpelling,
+      firstAttempt: firstAttempt,
+      isReask: question.isReask
     )
+    score += result.points
+    quizResults.append(result)
     firstAttempt = nil
     if conjugationResult == .noMatch {
+      // A re-ask is not asked a third time, whatever its answer, so that one stubborn question
+      // cannot fill a round.
+      let willBeReasked = !question.isReask
+      if willBeReasked {
+        questions.insert(question.reasked, at: Self.reaskPosition(after: currentQuestionIndex, in: questions.count))
+      }
       correction = QuizCorrection(
         difference: AnswerDifference.nearest(
           answer: proposedAnswer,
           correctAnswers: correctAnswers,
           tense: tense,
           isReflexive: verb.isReflexive
-        )
+        ),
+        willBeReasked: willBeReasked
       )
     } else {
       advance()
@@ -518,31 +599,40 @@ class Quiz {
     advance()
   }
 
+  /// Where a question missed at `index` returns: after `reaskGap` others, or at the round's end,
+  /// before the results, when fewer remain.
+  static func reaskPosition(after index: Int, in count: Int) -> Int {
+    min(index + 1 + reaskGap, count)
+  }
+
   private func advance() {
     currentQuestionIndex += 1
 
     if currentQuestionIndex == questions.count {
-      completeQuiz()
+      completeRound()
     } else {
       announcePublishedProperties()
-      updateLiveActivity(isFinished: false)
+      updateLiveActivity()
+      recordProgress()
     }
   }
 
-  private func completeQuiz() {
-    if scope.isRanked {
-      if score > Current.settings.bestScore {
-        Current.settings.bestScore = score
+  /// Each round ends in its results and a `quizCompletion`, whose question count shows how far
+  /// Ten More carried the session. Only the first round ranks.
+  private func completeRound() {
+    if roundCount == 1, scope.isRanked {
+      if firstRoundScore > Current.settings.bestScore {
+        Current.settings.bestScore = firstRoundScore
       }
       ChangeLevelTip.quizCompleted.sendDonation()
-      gameCenter.reportScore(score)
+      gameCenter.reportScore(firstRoundScore)
     }
     shouldShowResults = true
     Current.soundPlayer.play(Sound.randomApplause)
     Current.analytics.signal(name: .quizCompletion, parameters: [
       ParameterKey.level.rawValue: level.rawValue,
-      ParameterKey.score.rawValue: "\(score)",
-      ParameterKey.elapsedTime.rawValue: "\(elapsedTime)",
+      ParameterKey.questionCount.rawValue: "\(sessionQuestionCount)",
+      ParameterKey.duration.rawValue: durationBand,
       ParameterKey.source.rawValue: scope.source.rawValue
     ])
     teardown()
@@ -568,8 +658,13 @@ class Quiz {
       Task { @MainActor in
         try? await Task.sleep(for: .seconds(announcementDelay))
         let currentLocaleString = self.currentLocaleString
-        let question = questions[currentQuestionIndex]
-        if let shownSpelling = quizResults.last?.shownSpelling {
+        guard let question = currentQuestion else {
+          return
+        }
+        if question.isReask {
+          Utterer.utter(L.QuizView.askedAgain, localeString: currentLocaleString)
+        }
+        if let shownSpelling = lastRoundResult?.shownSpelling {
           Utterer.utter(L.QuizView.alsoSpelledWithColon, localeString: currentLocaleString)
           Utterer.utter(shownSpelling.lowercased(), localeString: Utterer.frenchLocaleString)
         }
@@ -587,7 +682,9 @@ class Quiz {
         Utterer.utter(L.QuizView.progressWithColon, localeString: currentLocaleString)
         Utterer.utter(L.QuizView.progress(currentQuestionIndex + 1, of: questions.count), localeString: currentLocaleString)
         Utterer.utter(L.QuizView.score(score), localeString: currentLocaleString)
-        Utterer.utter(L.QuizView.elapsed(seconds: elapsedTime), localeString: currentLocaleString)
+        if showsClock {
+          Utterer.utter(L.QuizView.elapsed(seconds: elapsedTime), localeString: currentLocaleString)
+        }
       }
     }
   }
@@ -606,6 +703,7 @@ private extension Tense {
 
 struct QuizCorrection: Equatable {
   let difference: AnswerDifference
+  var willBeReasked = false
 }
 
 private struct QuizRandomNumberGenerator: RandomNumberGenerator {

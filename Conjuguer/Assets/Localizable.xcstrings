@@ -120,6 +120,40 @@
         }
       }
     },
+    "QuizView.askedAgain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asked Again"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Question reposée"
+          }
+        }
+      }
+    },
+    "QuizView.willBeAskedAgain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This question will come up again."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette question reviendra."
+          }
+        }
+      }
+    },
     "QuizView.yourAnswer" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -473,6 +507,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Non"
+          }
+        }
+      }
+    },
+    "QuizClock.hide" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masquer"
+          }
+        }
+      }
+    },
+    "QuizClock.show" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher"
           }
         }
       }
@@ -3766,13 +3834,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Take timed quizzes, earn points, and compete on the Game Center leaderboard. Choose a level from Beginner to Advanced. Each level adds tenses to the one before, and Advanced includes those rarely seen outside formal or literary writing."
+            "value" : "Take ten-question quizzes, earn points, and compete on the Game Center leaderboard. Choose a level from Beginner to Advanced. Each level adds tenses to the one before, and Advanced includes those rarely seen outside formal or literary writing."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Faites des quiz chronométrés, gagnez des points et affrontez les autres sur le classement Game Center. Choisissez un niveau, de Débutant à Avancé. Chaque niveau ajoute des temps au précédent, et Avancé inclut ceux que l’on rencontre rarement en dehors de l’écrit formel ou littéraire."
+            "value" : "Faites des quiz de dix questions, gagnez des points et affrontez les autres sur le classement Game Center. Choisissez un niveau, de Débutant à Avancé. Chaque niveau ajoute des temps au précédent, et Avancé inclut ceux que l’on rencontre rarement en dehors de l’écrit formel ou littéraire."
           }
         }
       }
@@ -4344,13 +4412,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "30 questions"
+            "value" : "10 questions"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "30 questions"
+            "value" : "10 questions"
           }
         }
       }
@@ -4617,6 +4685,57 @@
         }
       }
     },
+    "ResultsView.askedAgainCount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asked Again: %lld / %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questions reposées : %lld / %lld"
+          }
+        }
+      }
+    },
+    "ResultsView.tenMore" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten More"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encore dix"
+          }
+        }
+      }
+    },
+    "ResultsView.tenMoreHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continues the quiz with ten more questions. The score carries on."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poursuit le quiz avec dix questions de plus. Le score continue."
+          }
+        }
+      }
+    },
     "ResultsView.yourAnswerWithColon" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4728,6 +4847,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ce paramètre détermine les temps et les verbes sur lesquels portent les quiz. Débutant commence par le présent et l’impératif des 100 verbes les plus fréquents. Chaque niveau suivant ajoute les temps que les cours de français enseignent ensuite et puise dans plus de verbes : 300, puis 1 000. Avancé porte sur tous les temps, y compris les temps littéraires, et sur tous les verbes."
+          }
+        }
+      }
+    },
+    "Settings.quizClock" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quiz Clock"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chronomètre du quiz"
+          }
+        }
+      }
+    },
+    "Settings.quizClockDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This setting determines whether quizzes show the time you take to answer, during the quiz and in its results."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce paramètre détermine si les quiz affichent le temps que vous mettez à répondre, pendant le quiz et dans ses résultats."
           }
         }
       }
@@ -4874,13 +5027,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Test your knowledge of French verb conjugations with a timed quiz."
+            "value" : "Test your knowledge of French verb conjugations with a ten-question quiz."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Testez vos connaissances des conjugaisons des verbes français avec un quiz chronométré."
+            "value" : "Testez vos connaissances des conjugaisons des verbes français avec un quiz de dix questions."
           }
         }
       }

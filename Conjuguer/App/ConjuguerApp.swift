@@ -73,6 +73,7 @@ struct ConjuguerApp: App {
   init() {
     let appID = Bundle.main.infoDictionary?["TelemetryDeckAppID"] as? String ?? ""
     Current.analytics.initialize(appID: appID)
+    QuizAbandonment.reportAndClear(getterSetter: Current.getterSetter, analytics: Current.analytics)
 
     Current.soundPlayer.setup()
     Utterer.setup()

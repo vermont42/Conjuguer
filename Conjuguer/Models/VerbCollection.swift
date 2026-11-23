@@ -213,7 +213,7 @@ struct VerbCollectionDestination: Hashable, Identifiable {
 }
 
 extension QuizScope {
-  /// Thirty unranked questions on the collection's verbs, in a sheet over its page.
+  /// Ten unranked questions on the collection's verbs, in a sheet over its page.
   @MainActor static func collection(_ collection: VerbCollection) -> QuizScope {
     QuizScope(
       verbs: collection.verbs,
