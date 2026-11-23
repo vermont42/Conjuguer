@@ -24,7 +24,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 
 | Phase | Status | Date | Commit | Suggestions | Konjugieren phase |
 |---:|---|---|---|---|---:|
-| 1 | Awaiting Josh | 2026-11-22 | | T1.3, T1.4, T1.5, and two Conjuguer defects | 1 |
+| 1 | Done | 2026-11-22 | 0d82e5c | T1.3, T1.4, T1.5, and two Conjuguer defects | 1 |
 | 2 | Not started | | | T1.2 | 2 |
 | 3 | Not started | | | T4.1, T4.4, T4.5 | 3 |
 | 4 | Not started | | | T1.6 | 4 |
@@ -376,7 +376,7 @@ and the browse plan's **How it differed** notes say why each is shaped as it is.
 **Suggestions:** T1.3, T1.4, T1.5, and two Conjuguer defects. **Ports:** Konjugieren Phase 1
 (`AnswerSpelling.swift`, `StandardVariants.swift`,
 [`../Konjugieren/plans/pedagogy_phase1_variant_audit.md`](../../Konjugieren/plans/pedagogy_phase1_variant_audit.md)).
-**Depends on:** browse Phase 1 for the key row. **Status:** Awaiting Josh.
+**Depends on:** browse Phase 1 for the key row. **Status:** Done.
 
 - **Trim and collapse.** Ignore leading and trailing whitespace and runs of spaces, which nothing
   does today. Compound answers have two or three words.
