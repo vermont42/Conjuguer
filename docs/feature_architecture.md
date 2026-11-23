@@ -509,6 +509,7 @@ same.
 | `reviewCard` | Yes | The review card, tapped after its conjugations are revealed |
 | `list` | Yes | A verb on a featured collection's page; for the quiz signals, a collection's quiz |
 | `sharedLink` | Yes | `viewCollection` only: a collection opened from a shared `list/` link |
+| `quizCorrection` | Yes | The verb link in a quiz's held correction (§ Quiz) |
 
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
 a bare `Verb`, and the cells a search matched (`marks`). A link carries `source` as a query item
@@ -792,7 +793,7 @@ chosen verbs (§ Quiz Scopes).
 
 | File | Purpose |
 |------|---------|
-| `Quiz.swift` | `@Observable` quiz state: building the questions, the timer, scoring, the Live Activity, Game Center, the quiz signals, and VoiceOver announcements |
+| `Quiz.swift` | `@Observable` quiz state: building the questions, the timer, scoring, the held correction (`QuizCorrection`), the Live Activity, Game Center, the quiz signals, and VoiceOver announcements |
 | `QuizVerbs.swift` | The curated verb pools the questions draw from |
 | `QuizDifficulty.swift` | Regular or Ridiculous, chosen in Settings, and each one's score multiplier |
 | `QuizScope.swift` | What a quiz asks about, its question count, and its analytics source; the questions of a quiz over chosen verbs; `QuizTenseSlot`, Regular's tenses and quotas; `Verb.hasCell(_:)` and `canBeQuizzed` |
@@ -800,6 +801,7 @@ chosen verbs (§ Quiz Scopes).
 | `ConjugationResult.swift` | Grades an answer as a total, partial, or no match (`ConjugationResult.grade`), with the conjugation to show beside a right answer spelled another standard way (`AnswerGrade`) |
 | `AnswerFrame.swift`, `AnswerFrameView.swift` | The shape of the expected answer around the field (§ The Answer Frame) |
 | `AnswerSpelling.swift` | Reads a typed answer before grading: case, spacing, the typographic apostrophe, and the pronouns of the asked person |
+| `AnswerDifference.swift`, `QuizCorrectionView.swift` | The held correction of a wrong answer (§ The Held Correction) |
 | `StandardVariants.swift` | Spellings the quiz accepts beside the conjugator's: the 1990 rectifications and a few doublets that dictionaries list |
 | `CyclingDeck.swift` | Deals a pool's elements in order and reshuffles when it runs out |
 | `QuizView.swift`, `QuizResultsView.swift`, `QuizResultView.swift` | The quiz screen and the results sheet |
@@ -840,6 +842,12 @@ the feminine default: `il connait`, `je parle`, `j'ai parlé`, `nous sommes all�
 `je` (parler), `j'` (aimer), `je` (haïr, aspirated h), `elle`, `elles`, `j' (fém.)` (parler,
 passé composé), `nous (fém.)` (aller), `je me`, `je m'` (s'absenter), `tu t' (fém.)`, `(tu) ______-toi !`,
 `(nous) ______ !`, `(vous) (fém.) ______ !` (aller, impératif passé), and the two participles.
+`-CONJUGUER_QUIZ_FIXTURE corrections` asks eight questions, once, each with a wrong answer that
+shows a kind of correction. Typed in order, with the feminine default: `ai parle` and `etes` (partial
+matches, the accent marked), `finisons` (a missing letter, marked only in the right answer),
+`allerai` (irai, a different word), `est venu` (the agreement's missing e), `prendent`, `je me
+souvient` (the pronouns dropped, the s marked), and `ecrivias` (a missing accent and a swap). The
+last holds before the results.
 
 ### The Answer Frame
 
@@ -866,6 +874,36 @@ elided pronoun read whole and "singular" or "plural" after il, elle, ils, and el
 alike. `AnswerFrameView` keeps the field outside the `ForEach`es that draw the words, so that the
 field keeps its identity, and the keyboard its focus, when the next question's words differ.
 
+### The Held Correction
+
+A right answer advances at once. A wrong or partly right one holds its question
+(`Quiz.correction`): the clock stands still (`Quiz.clockTicked()`), `process(proposedAnswer:)`
+ignores further answers, and `continueAfterCorrection()` moves on, to the results after the last
+question. Return continues, through the field, which keeps the learner's answer and the keyboard;
+the view refocuses the field when it holds, since Return resigns it, and again after Back from a
+linked page. The Live Activity's timer cannot pause, so its start date moves later by the time the
+clock stood still at each update. Quitting releases a held correction.
+
+`QuizCorrectionView` sits under the answer field, in a card whose accent is the result's color:
+Your Answer and Correct Answer, a row of links, and Continue, capped at 400 points and centered on
+an iPad. `AnswerDifference.nearest` reads the answer as grading does (`AnswerSpelling.candidates`,
+so a typed pronoun is dropped) and picks the nearest of the cell's "/" alternates, the first
+winning a tie. `AnswerDifference.between` aligns the two with `VerbSearch.editDistance`'s costs and
+marks what the cheapest alignment leaves unmatched: a wrong letter or accent on both sides, an
+extra letter in the learner's answer, a missing one only in the right answer, and a swap on both
+letters. Case is ignored, so a red letter is never a difference. The red letters mark
+irregularity, so a difference is a tinted background instead, struck through in red in the
+learner's answer and underlined in green in the right one.
+
+**The links** open the verb's page, scrolled to the asked cell and marked (`MarkedConjugations`,
+`source` `quizCorrection`), and its model's page. `QuizView` holds its own `NavigationStack`, with
+`verbPageNavigation`, whose root hides the navigation bar, so the pages push over the held
+question and Back returns to it. In a sheet the pushed pages have no Done, which would close the
+sheet without Quit. A quiz begun from the verb's page (`QuizScope.isVerbPage`) leaves out the verb
+link. While a quiz is in progress the `isBeneathQuiz` environment value hides Test Me on a pushed
+verb page and the Quiz button of a model's collection bar, so that no quiz starts inside a quiz.
+After Continue the next question's feedback slot is empty, since the correction has been read.
+
 ### Grading and Scoring
 
 `ConjugationResult.grade(proposedAnswer:correctAnswers:verb:tense:)` compares the answer with each
@@ -887,7 +925,7 @@ or a participle.
   checkmark and VoiceOver announces before the next question. The verb page keeps the app's
   spelling. Josh's rulings, row by row, are in
   [`plans/pedagogy_phase1_variant_audit.md`](../plans/pedagogy_phase1_variant_audit.md).
-- **Partial match** (5 points): equal to an alternate or a variant once every diacritic is folded
+- **Partial match** (5 points, and the correction holds): equal to an alternate or a variant once every diacritic is folded
   away, so "etait" for "était" and "etes" for "êtes" earn half. The rectifications drop only the
   circumflex of i and u, and keep it in the passé simple's -îmes and -îtes, the subjonctif
   imparfait's -ît and -ût, dû, and croître.

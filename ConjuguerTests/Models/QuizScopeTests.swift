@@ -235,6 +235,7 @@ struct QuizScopeTests {
     quiz.start(scope: scope)
     for _ in quiz.questions {
       quiz.process(proposedAnswer: "x")
+      quiz.continueAfterCorrection()
     }
 
     let quizSignals: [AnalyticsName] = [.quizStart, .quizQuit, .quizStart, .quizCompletion]

@@ -129,6 +129,7 @@ struct VerbCollectionView: View {
 struct VerbCollectionBar: View {
   let collection: VerbCollection
   @Environment(World.self) private var world
+  @Environment(\.isBeneathQuiz) private var isBeneathQuiz
   @State private var isQuizzing = false
   @State private var shareButtonFrame = CGRect.zero
 
@@ -145,7 +146,7 @@ struct VerbCollectionBar: View {
 
         Spacer()
 
-        if verbs.contains(where: \.canBeQuizzed) {
+        if !isBeneathQuiz, verbs.contains(where: \.canBeQuizzed) {
           Button {
             isQuizzing = true
           } label: {

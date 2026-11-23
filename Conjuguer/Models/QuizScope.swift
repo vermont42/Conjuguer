@@ -27,6 +27,10 @@ struct QuizScope {
     verbs == nil
   }
 
+  var isVerbPage: Bool {
+    source == .verbPage
+  }
+
   /// A quiz on a verb's page is over before a Live Activity would be noticed. A collection's quiz
   /// runs in a sheet over its page, and a tap on the activity would open the Quiz tab instead.
   var startsLiveActivity: Bool {

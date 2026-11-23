@@ -21,40 +21,37 @@ struct QuizView: View {
   @State private var inputSelection: TextSelection?
   @State private var tabScope = TabQuizScope.allVerbs
   @FocusState private var conjugationFieldIsFocused: Bool
+  @AccessibilityFocusState private var correctionHasAccessibilityFocus: Bool
   @State private var authCoordinator = GameCenterAuthCoordinator()
-  private let feedbackSlotHeight: CGFloat = 64
+  /// Pages opened from a held correction, pushed over the quiz, which waits beneath them.
+  @State private var navigationPath = NavigationPath()
+  private let feedbackSlotHeight: CGFloat = 36
 
   var body: some View {
     @Bindable var quiz = quiz
-    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
-      titleRow
-
-      if quiz.quizState == .inProgress {
-        inProgressContent
-      }
-
-      if quiz.quizState == .notStarted {
-        if sheetScope == nil {
-          GeometryReader { proxy in
-            ScrollView {
-              notStartedBriefing
-                .frame(maxWidth: .infinity, minHeight: proxy.size.height)
-            }
-          }
-        } else {
-          Spacer()
-        }
-      }
-
-      if sheetScope == nil {
-        GameCenterAuthView(coordinator: authCoordinator)
-          .frame(width: 0, height: 0)
-          .accessibilityHidden(true)
+    NavigationStack(path: $navigationPath) {
+      screen
+        .toolbar(.hidden, for: .navigationBar)
+        .verbPageNavigation(path: $navigationPath)
+    }
+    .environment(\.isBeneathQuiz, quiz.quizState == .inProgress)
+    .accessibilityAction(.magicTap) {
+      if quiz.correction != nil {
+        continueAfterCorrection()
       }
     }
-    .padding(.leading, Layout.doubleDefaultSpacing)
-    .padding(.trailing, Layout.doubleDefaultSpacing)
-    .padding(.top, Layout.tripleDefaultSpacing)
+    // A quiz restarted by a link while a correction's page was open must not show that page.
+    .onChange(of: quiz.correction == nil) { _, isReleased in
+      if isReleased, !navigationPath.isEmpty {
+        navigationPath = NavigationPath()
+      }
+    }
+    // Back from a page opened from the correction, the keyboard returns, so Return continues.
+    .onChange(of: navigationPath.isEmpty) { _, isEmpty in
+      if isEmpty, quiz.correction != nil {
+        refocusAnswer(after: .milliseconds(450))
+      }
+    }
     .sheet(
       isPresented: $quiz.shouldShowResults,
       onDismiss: {
@@ -87,8 +84,40 @@ struct QuizView: View {
       guard newCount > 0 else {
         return nil
       }
-      return quiz.previousIncorrectAnswer == nil ? .success : .error
+      return quiz.quizResults.last?.conjugationResult == .totalMatch ? .success : .error
     }
+  }
+
+  private var screen: some View {
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
+      titleRow
+
+      if quiz.quizState == .inProgress {
+        inProgressContent
+      }
+
+      if quiz.quizState == .notStarted {
+        if sheetScope == nil {
+          GeometryReader { proxy in
+            ScrollView {
+              notStartedBriefing
+                .frame(maxWidth: .infinity, minHeight: proxy.size.height)
+            }
+          }
+        } else {
+          Spacer()
+        }
+      }
+
+      if sheetScope == nil {
+        GameCenterAuthView(coordinator: authCoordinator)
+          .frame(width: 0, height: 0)
+          .accessibilityHidden(true)
+      }
+    }
+    .padding(.leading, Layout.doubleDefaultSpacing)
+    .padding(.trailing, Layout.doubleDefaultSpacing)
+    .padding(.top, Layout.tripleDefaultSpacing)
     .screenBackground()
   }
 
@@ -114,14 +143,41 @@ struct QuizView: View {
   }
 
   private var inProgressContent: some View {
-    ScrollView {
-      VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
-        statusStrip
-        questionBlock
-        feedbackSlot
-        answerField
+    ScrollViewReader { proxy in
+      ScrollView {
+        VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
+          statusStrip
+          questionBlock
+          feedbackSlot
+          answerField
+          correctionBlock
+        }
+        .padding(.bottom, Layout.doubleDefaultSpacing)
       }
-      .padding(.bottom, Layout.doubleDefaultSpacing)
+      .onChange(of: quiz.correction != nil) { _, isHeld in
+        guard isHeld else {
+          return
+        }
+        correctionHasAccessibilityFocus = true
+        refocusAnswer(after: .milliseconds(50))
+        withAnimation(reduceMotion ? nil : .default) {
+          proxy.scrollTo(QuizCorrectionView.continueButtonID, anchor: .bottom)
+        }
+      }
+    }
+  }
+
+  @ViewBuilder
+  private var correctionBlock: some View {
+    if let correction = quiz.correction, quiz.currentQuestionIndex < quiz.questions.count {
+      QuizCorrectionView(
+        question: quiz.questions[quiz.currentQuestionIndex],
+        correction: correction,
+        showsVerbLink: !quiz.scope.isVerbPage,
+        accessibilityIsFocused: $correctionHasAccessibilityFocus,
+        onOpen: { navigationPath.append($0) },
+        onContinue: continueAfterCorrection
+      )
     }
   }
 
@@ -182,9 +238,11 @@ struct QuizView: View {
     }
   }
 
+  /// The last answer's mark: a right answer's on the next question, a held one's on its own. After
+  /// Continue, the next question starts with a clear slot, since the correction has been read.
   private var feedbackSlot: some View {
     HStack(alignment: .top, spacing: Layout.defaultSpacing) {
-      if let result = quiz.quizResults.last {
+      if let result = quiz.quizResults.last, quiz.correction != nil || result.conjugationResult == .totalMatch {
         Image(systemName: result.conjugationResult.feedbackIconString)
           .font(.title2)
           .foregroundStyle(result.conjugationResult.feedbackColor)
@@ -196,19 +254,6 @@ struct QuizView: View {
             .smallLabel()
             .accessibilityLabel("\(L.QuizView.alsoSpelledWithColon) \(shownSpelling.lowercased())")
             .accessibilityIdentifier("quiz_shown_spelling")
-        }
-
-        if
-          let previousIncorrectAnswer = quiz.previousIncorrectAnswer,
-          let previousCorrectAnswer = quiz.previousCorrectAnswer
-        {
-          VStack(alignment: .leading, spacing: 2) {
-            lastAnswerText(previousIncorrectAnswer)
-              .smallLabel()
-
-            correctAnswerText(previousCorrectAnswer)
-              .smallLabel()
-          }
         }
       }
     }
@@ -257,11 +302,44 @@ struct QuizView: View {
         }
       }
       .onSubmit {
+        if quiz.correction != nil {
+          continueAfterCorrection()
+          return
+        }
         quiz.process(proposedAnswer: input)
-        input = ""
-        inputSelection = nil
+        if quiz.correction == nil {
+          clearInput()
+          conjugationFieldIsFocused = true
+        }
+      }
+  }
+
+  private func continueAfterCorrection() {
+    clearInput()
+    quiz.continueAfterCorrection()
+    if quiz.quizState == .inProgress {
+      conjugationFieldIsFocused = true
+    } else {
+      conjugationFieldIsFocused = false
+    }
+  }
+
+  private func clearInput() {
+    input = ""
+    inputSelection = nil
+  }
+
+  /// Gives the answer field the keyboard while a correction is held, so that Return continues.
+  /// Return resigns the field, and a push takes the keyboard away, yet the focus state can still
+  /// read true afterward, so it is cleared and set again once the field is back on screen.
+  private func refocusAnswer(after delay: Duration) {
+    conjugationFieldIsFocused = false
+    Task { @MainActor in
+      try? await Task.sleep(for: delay)
+      if navigationPath.isEmpty, quiz.correction != nil {
         conjugationFieldIsFocused = true
       }
+    }
   }
 
   /// Replaces the selection, or inserts at the cursor, and leaves the cursor after the letter.
@@ -381,26 +459,11 @@ struct QuizView: View {
 
   private func quit() {
     conjugationFieldIsFocused = false
-    input = ""
-    inputSelection = nil
+    clearInput()
     quiz.quit()
     if sheetScope != nil {
       dismiss()
     }
-  }
-
-  private func lastAnswerText(_ incorrectAnswer: String) -> Text {
-    var attributed = AttributedString("\(L.QuizView.lastAnswer) ")
-    attributed.foregroundColor = Color.customRed
-    attributed += AttributedString(incorrectAnswer)
-    return Text(attributed)
-  }
-
-  private func correctAnswerText(_ correctAnswer: String) -> Text {
-    var attributed = AttributedString("\(L.QuizView.correctAnswer) ")
-    attributed.foregroundColor = Color.customBlue
-    attributed += AttributedString(mixedCaseString: correctAnswer)
-    return Text(attributed)
   }
 }
 

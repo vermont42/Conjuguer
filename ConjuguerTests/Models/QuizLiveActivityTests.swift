@@ -42,6 +42,7 @@ struct QuizLiveActivityTests {
 
     for _ in 0 ..< quiz.questions.count {
       quiz.process(proposedAnswer: "x")
+      quiz.continueAfterCorrection()
     }
 
     #expect(liveActivities.updateCount == updatesBefore + Quiz.questionCount - 1)

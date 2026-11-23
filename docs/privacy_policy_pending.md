@@ -356,3 +356,28 @@ Le point sur les écrans (le premier de la liste de la section 2) devient :
 ```
 - Les écrans que vous consultez (verbes, listes de verbes apparentés, modèles de verbes, collections de verbes, quiz, articles d'information, paramètres et le tuteur)
 ```
+
+## A quiz's correction (pedagogy plan, Phase 3, 2026-11-23)
+
+The quiz now holds a wrong answer's correction on its question, with links to the verb's page and
+its model's page. A verb page opened from that link sends a new `source` value on `viewAppeared`,
+`quizCorrection`. It names neither the verb nor the answer. A quiz's correction is a kind of
+surface the first bullet's examples did not suggest, so they now name it. The model's page reports
+itself as `ModelView`, as before. Apply this section after the Phase 9 section, since it replaces
+that section's first bullet.
+
+### English
+
+The first bullet now reads:
+
+```
+- How you reached a verb's page: for example from a search, the verb list, a model's page, another verb's page, a quiz's correction, an info article, a widget, Control Center, a shortcut, or Spotlight
+```
+
+### French
+
+Le premier point devient :
+
+```
+- La façon dont vous avez atteint la page d'un verbe : par exemple depuis une recherche, la liste des verbes, la page d'un modèle, la page d'un autre verbe, la correction d'une réponse au quiz, un article d'information, un widget, le Centre de contrôle, un raccourci ou Spotlight
+```

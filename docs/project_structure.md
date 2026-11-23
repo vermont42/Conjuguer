@@ -47,6 +47,7 @@ Conjuguer/
 │   ├── Sounds/                 # MP3 effects for quiz and game (applause, buzz, chime, guns, ghost, robot, …)
 │   └── WorkSans*.ttf           # Bundled Work Sans faces (regular, semibold, bold)
 ├── Models/
+│   ├── AnswerDifference.swift  # Where a wrong answer differs from the nearest right spelling, letter by letter, for the quiz's held correction
 │   ├── AnswerFrame.swift       # The shape of a quiz answer: the pronoun before the blank, elided to the answer (j', je m'), the gender a compound tense agrees with, the impératif's (tu) and -toi, and the prompt VoiceOver reads
 │   ├── AnswerSpelling.swift    # How the quiz reads a typed answer: case, spacing, the curly apostrophe, and the subject and reflexive pronouns of the asked person
 │   ├── AppIcon.swift           # Alternate app-icon enum (beret/croissant/rooster/arc de triomphe)
@@ -197,9 +198,10 @@ Conjuguer/
     ├── ModelBrowseView.swift   # Searchable, sortable list/grid of verb models, led by the featured collections
     ├── ModelView.swift         # Model detail: endings, stem alterations, and the verbs, alphabetically or by frequency, with the model's collection bar
     ├── OnboardingView.swift    # Multi-page welcome tour; auto-presented on first launch and re-showable from Settings
+    ├── QuizCorrectionView.swift # A wrong or partly right answer held on its question: the two answers with their differing letters marked, links to the verb and its model, and Continue
     ├── QuizResultsView.swift   # End-of-quiz sheet: score, per-question results, leaderboard
     ├── QuizResultView.swift    # One row of the results sheet
-    ├── QuizView.swift          # Quiz gameplay: prompt, answer field framed by its pronoun with the accent keys, progress, feedback and the app's spelling of a variant; the All Verbs / My Verbs picker; QuizSheet, for Test Me on a verb page and a collection's quiz
+    ├── QuizView.swift          # Quiz gameplay: prompt, answer field framed by its pronoun with the accent keys, progress, feedback and the app's spelling of a variant, the held correction and the pages it pushes; the All Verbs / My Verbs picker; QuizSheet, for Test Me on a verb page and a collection's quiz
     ├── RelatedVerbsView.swift  # The verb page's Related Verbs card (built on the same root, same model), RelatedVerbListView, and FlowLayout
     ├── ReviewCardView.swift    # The review card above the verb list: a verb looked up days ago, its key conjugations hidden until a tap, a second tap opening its page
     ├── RichTextView.swift      # Renders [RichTextBlock] with subheadings, emphasis, color-coding, links
@@ -257,6 +259,7 @@ ConjuguerTests/
 ├── TestUtils.swift             # T.testConjugation shared assertion (threads #_sourceLocation) and T.generateVerbModelTests
 └── Models/
     ├── AddedVerbsTests.swift           # Conjugations of the 13 verbs added and 6 misspellings renamed on 2026-08-28, plus dépourvoir's defect group 27
+    ├── AnswerDifferenceTests.swift     # The letters marked for a wrong accent, a missing, extra, or swapped letter, and a red letter; the pronouns dropped and the nearest alternate shown
     ├── AnswerFrameTests.swift          # The frame for each kind of question, one blank in every cell, the frame's words typed with the answer still right, and the spoken prompt
     ├── AnswerSpellingTests.swift       # Normalizing an answer, and the pronouns stripped (or kept) for each person, pronominal verbs, and the impératif
     ├── AnalyticsTests.swift            # The bands, the section order, every match kind's analytics value, and the verb page's screen name
@@ -283,7 +286,7 @@ ConjuguerTests/
     ├── ParserTests.swift               # XML parsing of verbs, models, and defect groups
     ├── QuizLiveActivityTests.swift     # The quiz's Live Activity through the spy: a tab quiz starts one that Quit or the last answer ends, each other answer updates it, a restart replaces it, and a sheet's quiz starts none
     ├── QuizScopeTests.swift            # Quiz scopes: the default quiz unchanged, My Verbs drawing only its verbs in Regular's mix, defective verbs, Test Me's three tenses, unranked scoring, doubled entries graded as themselves, source on every quiz signal
-    ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle; seeded quizzes that never ask a defective cell; the recorded spelling of a variant (serialized — mutates Current)
+    ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle; seeded quizzes that never ask a defective cell; the recorded spelling of a variant; the held correction, its stopped clock, and Continue (serialized — mutates Current)
     ├── RelatedVerbsTests.swift         # Base-finding on known and false pairs, nested roots, the card's two relations, doubled roots, and the model page's two orders
     ├── ReviewScheduleTests.swift       # The review ladder, reveal and dismissal, a lookup restarting it, an older entry with no schedule, the longest-overdue verb, verbs with no key conjugations, doubled entries
     ├── RichTextTests.swift             # Rich-text markup parsing into blocks and segments

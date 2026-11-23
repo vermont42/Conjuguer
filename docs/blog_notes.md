@@ -5500,3 +5500,39 @@ that draw the words around it, so typing fifteen answers in a row on the simulat
 keyboard. VoiceOver reads the frame as one label ("je, feminine, blank"), and il and ils, which
 sound alike, get "singular" and "plural".
 
+
+## A Correction That Stays (2026-11-23)
+
+Pedagogy Phase 3 made the quiz stop on a wrong answer. Before, `Quiz.process` moved to the next
+question the moment an answer was graded, so the correction of question 5 appeared on question 6's
+screen as "Last Answer / Correct Answer" while the clock ran on. A partly right answer, such as
+parle for parlé, got a chirp and no correction until the results sheet. The pedagogy report called
+this the change Conjuguer needed most. Learners take in feedback when they have time to read it.
+
+Now a wrong or partly right answer holds its question. The clock stops, and a card under the field
+shows Your Answer and Correct Answer with the differing letters marked, two links, and Continue.
+Return continues as well, so the keyboard never has to leave. A right answer still advances at
+once.
+
+The marking is Konjugieren's alignment, ported. It runs the same edit distance the search's guess
+uses, then walks back through the table and marks whatever the cheapest alignment leaves unmatched.
+French brought one wrinkle. The conjugator writes irregular letters as capitals, which the app
+draws in red, so red cannot mean "wrong" in the right answer. A marked letter there keeps its blue
+or red and gets a green tint and underline, while the learner's wrong letters are struck through
+in red. An accent counts as a letter, so ecrivias for écrivais marks the é and both swapped
+letters. The answer shown is the nearest of the cell's spellings, read the way grading reads it.
+A learner who types "je me souvient" sees souvient against souviens, with only the s marked.
+
+The links needed plumbing the quiz never had. The Quiz tab drew its screen without a navigation
+stack, so a verb page had nowhere to push. `QuizView` now holds its own stack with the bar hidden
+at its root, in the tab and in the Test Me sheet alike. One trap was waiting in the sheet: the
+shared page navigation puts a Done button on every pushed page, and Done there would have closed
+the sheet mid-quiz without Quit, losing the quit signal. The quiz's pushed pages get Back only. A
+new environment value hides Test Me and a collection's Quiz button on those pages, so no quiz
+starts inside a quiz.
+
+The clock was simple to stop in the app and impossible to stop on the Lock Screen, whose Live
+Activity timer counts from a start date. At each update the start date now moves later by the
+time the clock stood still, so the Lock Screen jumps back at Continue. Walking eight fixture
+answers on the simulator took about two minutes and the results said 0:38, which is the point of
+the change. Josh has still to judge the layout on his phone.

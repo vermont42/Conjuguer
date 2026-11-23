@@ -136,6 +136,7 @@ VoiceOver running.
 | `ModelView` | Exemplar, endings, and verbs marked French |
 | `InfoBrowseView`, `InfoView` | `.frenchPronunciation(forReal: info.alwaysUsesFrenchPronunciation)` |
 | `QuizView` | The infinitive and the question French, the gloss English, plus the announcements below. The answer field's label reads its frame as one prompt in the interface's language ("je, feminine, blank"; "elles se, plural, blank"; "tu, blank, toi"), and the frame's own words are hidden. Not yet heard with VoiceOver |
+| `QuizCorrectionView` | The two answers read as one element, which takes VoiceOver focus when a correction is held: "Incorrect. Your Answer: parle. Correct Answer: parlé. Letters that differ: é." ("Partly right." for a partial match; the letters only when three or fewer), with the hint "Swipe right for the links, then Continue." The verb link is marked French; each link's hint says the quiz waits with its clock stopped. Continue has its own hint, and a Magic Tap also continues. Read from the accessibility tree, not heard |
 
 ## The Quiz's Announcements
 
@@ -150,6 +151,9 @@ as `fr-FR`, otherwise the device's language and region), each French value in `f
 translation in `en-US`. `Utterer` speaks through one shared `AVSpeechSynthesizer`, warms the
 voices off the main thread at launch (`Utterer.setup()`), and plays `Sound.silence` after each utterance, a workaround whose forum thread the
 code links.
+
+A wrong or partly right answer is not announced. It holds the question, and `QuizView` moves
+VoiceOver focus to the correction instead. The next question is announced after Continue.
 
 A new quiz screen or exercise that changes its question without moving focus needs the same
 announcement, or an `AccessibilityNotification.Announcement`.

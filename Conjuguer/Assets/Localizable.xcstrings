@@ -1,6 +1,142 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "QuizView.continue" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer"
+          }
+        }
+      }
+    },
+    "QuizView.continueHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Goes on to the next question, or to the results after the last."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passe à la question suivante, ou aux résultats après la dernière."
+          }
+        }
+      }
+    },
+    "QuizView.correctionHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Swipe right for the links, then Continue."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Balayez vers la droite pour les liens, puis Continuer."
+          }
+        }
+      }
+    },
+    "QuizView.correctionLinkHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the page. The quiz waits, its clock stopped."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre la page. Le quiz attend, son chronomètre arrêté."
+          }
+        }
+      }
+    },
+    "QuizView.differingLetters" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letters that differ: %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lettres qui diffèrent: %@."
+          }
+        }
+      }
+    },
+    "QuizView.incorrect" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incorrect."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incorrect."
+          }
+        }
+      }
+    },
+    "QuizView.partlyRight" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partly right."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En partie juste."
+          }
+        }
+      }
+    },
+    "QuizView.yourAnswer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Answer:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre réponse:"
+          }
+        }
+      }
+    },
     "VerbCollection.heading" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4113,23 +4249,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Game Center a subi un echec."
-          }
-        }
-      }
-    },
-    "QuizView.lastAnswer" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Last Answer:"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dernière réponse:"
           }
         }
       }

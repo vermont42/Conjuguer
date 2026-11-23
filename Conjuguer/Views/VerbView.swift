@@ -13,6 +13,7 @@ struct VerbView: View {
   @Environment(\.scenePhase) private var scenePhase
   @Environment(\.tenseArticleOpener) private var tenseArticleOpener
   @Environment(\.verbPagePush) private var verbPagePush
+  @Environment(\.isBeneathQuiz) private var isBeneathQuiz
   @AppStorage("hasSeenConjugationColorKey") private var hasSeenColorKey = false
   @AppStorage("showsCompoundTenses") private var showsCompoundTenses = true
   let verb: Verb
@@ -125,7 +126,7 @@ struct VerbView: View {
     }
     .screenBackground()
     .toolbar {
-      if verb.canBeQuizzed {
+      if verb.canBeQuizzed, !isBeneathQuiz {
         ToolbarItem(placement: .topBarTrailing) {
           Button {
             detailSheet = .quiz

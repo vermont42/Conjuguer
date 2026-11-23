@@ -39,6 +39,9 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `verb_browse_sort` | Sort `Picker` in `VerbBrowseView` | Launch anchor (`FIRST_SCREEN_ID`). Three segments: Frequency, Alphabetical, My Verbs. |
 | `input_quiz_conjugation` | Answer `TextField` in `QuizView` | Carries `.accessibilityValue(input)`, so `read_value`/`set_value`/`type_text --id` work with read-back. |
 | `quiz_shown_spelling` | The app's spelling beside the checkmark, after a right answer spelled another standard way | Launch with `-CONJUGUER_QUIZ_FIXTURE grading` and answer the first question `il connait`; its label is "Correct. Also spelled: connaît". |
+| `quiz_correction` | The held correction's two answers, one element | Present while a wrong or partly right answer holds. Its label is the spoken correction ("Incorrect. Your Answer: …"). Launch with `-CONJUGUER_QUIZ_FIXTURE corrections` for eight kinds. |
+| `quiz_correction_verb`, `quiz_correction_model` | The correction's links | Push the verb's page (scrolled to the asked cell) or the model's page over the quiz. The verb link is absent in Test Me's sheet. Back is the pushed page's top-left button (≈ `37,83` on the iPhone 17 in the tab, ≈ `37,110` in a sheet; ≈ `31,54` on the iPad Pro 11). |
+| `quiz_continue_button` | The correction's Continue | Return in the field does the same. |
 | `picker_settings_quizDifficulty` | Quiz-difficulty segmented `Picker` in `SettingsView` | 2 segments (Regular, Ridiculous). |
 | `picker_settings_pronounGender` | Pronoun-gender segmented `Picker` in `SettingsView` | 3 segments (Feminine, Masculine, Both). |
 | `verb_example` | Example card in `VerbView` (below etymology) | Wraps the FR sentence, EN translation, source attribution, and nested *Chanson de Roland* example. |
@@ -150,18 +153,20 @@ will not switch.
 
 ## Completing a quiz (regular difficulty)
 
-A regular-difficulty quiz is 30 questions; `Quiz.process(_:)` advances on every
-submission regardless of correctness, so completion = submit an answer to all 30.
+A regular-difficulty quiz is 30 questions. A right answer advances at once; a wrong or partly
+right one holds its correction until Continue, which a second Return also triggers, so a sweep of
+junk answers sends Return twice per question.
 After **Start**, the answer field auto-focuses; type into `input_quiz_conjugation`
 and send Return (`axe key 40`) per question. The `Progress: N / 30` label tracks
 position; the run ends with a `QuizResultsView` sheet (label `Results`).
 
-The field **stays focused across submissions** (`submitAnswer()` re-sets focus), so a
+The field **stays focused across submissions** (`QuizView` re-sets focus after each Return), so a
 fast sweep is: tap it once (`tap_id.sh input_quiz_conjugation`), then loop
-`axe type "<answer>"` + `axe key 40` — batch many pairs into one Bash call and
+`axe type "<answer>"` + `axe key 40` (twice after a wrong answer) — batch many pairs into one Bash call and
 `screenshot.sh` between batches to check
 progress. **Caveat:** if focus is lost (e.g. after a `describe_ui`/screenshot detour),
 `axe type`/`axe key 40` silently no-op and the quiz won't advance — re-tap the field by
 id before resuming. To exercise all three result-icon colors, mix outcomes: a correct
 conjugation → green, a correct skeleton with a dropped accent (e.g. `detends` for
-`détends`) → blue partial, junk (`x`) → red.
+`détends`) → blue partial, junk (`x`) → red. The last two hold their correction. With a
+hardware keyboard, Return still continues after Back from a linked page.

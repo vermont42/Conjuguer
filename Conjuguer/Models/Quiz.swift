@@ -24,8 +24,9 @@ class Quiz {
   private(set) var scope = QuizScope.allVerbs
   private(set) var quizResults: [QuizResult] = []
   var shouldShowResults = false
-  private(set) var previousIncorrectAnswer: String?
-  private(set) var previousCorrectAnswer: String?
+  /// A wrong or partly right answer, held on its question with the clock stopped until
+  /// `continueAfterCorrection()`. A right answer advances at once.
+  private(set) var correction: QuizCorrection?
 
   private var timer: Timer?
   private let gameCenter: GameCenter
@@ -98,10 +99,17 @@ class Quiz {
         // assumeIsolated bridges that known main-actor callback back to main-actor isolation
         // to mutate elapsedTime synchronously (no per-tick Task hop, identical timing).
         MainActor.assumeIsolated {
-          self?.elapsedTime += 1
+          self?.clockTicked()
         }
       }
     )
+  }
+
+  func clockTicked() {
+    guard correction == nil else {
+      return
+    }
+    elapsedTime += 1
   }
 
   func quit() {
@@ -121,6 +129,7 @@ class Quiz {
   private func teardown() {
     timer?.invalidate()
     quizState = .notStarted
+    correction = nil
     endLiveActivity()
   }
 
@@ -144,6 +153,9 @@ class Quiz {
     guard let liveActivity else {
       return
     }
+    // The Lock Screen's timer counts from its start date and cannot pause, so after a held
+    // correction the start date moves later by the time the clock stood still.
+    liveActivityStartDate = Date.now.addingTimeInterval(-Double(elapsedTime))
     let state = QuizActivityAttributes.ContentState(
       currentQuestion: min(currentQuestionIndex + 1, questions.count),
       score: score,
@@ -213,8 +225,7 @@ class Quiz {
     currentQuestionIndex = 0
     questions = []
     quizResults = []
-    previousIncorrectAnswer = nil
-    previousCorrectAnswer = nil
+    correction = nil
   }
 
   private func buildQuiz() {
@@ -237,6 +248,9 @@ class Quiz {
       return
     case "frames":
       questions = generateFramesFixture()
+      return
+    case "corrections":
+      questions = generateCorrectionsFixture()
       return
     default:
       break
@@ -447,6 +461,24 @@ class Quiz {
     return Array(repeating: questions, count: 2).flatMap { $0 }
   }
 
+  // Eight questions, unshuffled, each with a wrong answer to type that shows a kind of marking.
+  // The answers are listed in docs/feature_architecture.md § Quiz.
+  private func generateCorrectionsFixture() -> [QuizQuestion] {
+    let plan: [(infinitif: String, tense: Tense)] = [
+      ("parler", .passéComposé(.firstSingular)),
+      ("être", .indicatifPrésent(.secondPlural)),
+      ("finir", .indicatifPrésent(.firstPlural)),
+      ("aller", .futurSimple(.firstSingular)),
+      ("venir", .passéComposé(.thirdSingular)),
+      ("prendre", .indicatifPrésent(.thirdPlural)),
+      ("souvenir", .indicatifPrésent(.firstSingular)),
+      ("écrire", .imparfait(.secondSingular))
+    ]
+    return plan.map { spec in
+      QuizQuestion(verb: Verb.verbForInfinitif(spec.infinitif), tense: spec.tense)
+    }
+  }
+
   // Write the correct answers for the fixture to Documents/screenshot_fixture_answers.json
   // so the driver can read and type them. The exported answer is the first of any
   // slash-separated alternates, which the quiz scores as a total match.
@@ -527,6 +559,9 @@ class Quiz {
   }
 
   func process(proposedAnswer: String) {
+    guard quizState == .inProgress, correction == nil, currentQuestionIndex < questions.count else {
+      return
+    }
     let question = questions[currentQuestionIndex]
     let verb = question.verb
     let tense = question.tense
@@ -541,7 +576,7 @@ class Quiz {
     }
     let grade = ConjugationResult.grade(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense)
     let conjugationResult = grade.result
-    if currentQuestionIndex != questions.count - 1 {
+    if conjugationResult != .totalMatch || currentQuestionIndex != questions.count - 1 {
       Current.soundPlayer.play(conjugationResult.sound)
     }
     score += conjugationResult.score * difficulty.scoreModifier
@@ -556,13 +591,30 @@ class Quiz {
         shownSpelling: grade.shownSpelling
       )
     )
-    if conjugationResult == .noMatch {
-      previousIncorrectAnswer = proposedAnswer
-      previousCorrectAnswer = correctAnswers
+    if conjugationResult == .totalMatch {
+      advance()
     } else {
-      previousIncorrectAnswer = nil
-      previousCorrectAnswer = nil
+      correction = QuizCorrection(
+        result: conjugationResult,
+        difference: AnswerDifference.nearest(
+          answer: proposedAnswer,
+          correctAnswers: correctAnswers,
+          tense: tense,
+          isReflexive: verb.isReflexive
+        )
+      )
     }
+  }
+
+  func continueAfterCorrection() {
+    guard correction != nil else {
+      return
+    }
+    correction = nil
+    advance()
+  }
+
+  private func advance() {
     currentQuestionIndex += 1
 
     if currentQuestionIndex == questions.count {
@@ -709,6 +761,11 @@ private extension Tense {
       return nil
     }
   }
+}
+
+struct QuizCorrection: Equatable {
+  let result: ConjugationResult
+  let difference: AnswerDifference
 }
 
 private struct QuizRandomNumberGenerator: RandomNumberGenerator {

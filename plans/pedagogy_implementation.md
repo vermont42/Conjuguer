@@ -26,7 +26,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 |---:|---|---|---|---|---:|
 | 1 | Done | 2026-11-22 | 0d82e5c | T1.3, T1.4, T1.5, and two Conjuguer defects | 1 |
 | 2 | Done | 2026-11-22 | b4aa188 | T1.2 | 2 |
-| 3 | Not started | | | T4.1, T4.4, T4.5 | 3 |
+| 3 | Awaiting Josh | 2026-11-23 | | T4.1, T4.4, T4.5 | 3 |
 | 4 | Not started | | | T1.6 | 4 |
 | 5 | Not started | | | T2.3, T2.6, T6.7, M1 | 5 |
 | 6 | Not started | | | T2.1, T2.2, T2.5 | 6 |
@@ -541,7 +541,7 @@ correctly, VoiceOver reads it as one prompt, and tests pin the frame for each ki
 ## Phase 3: A Correction That Stays
 
 **Suggestions:** T4.1, T4.4, T4.5. **Ports:** Konjugieren Phase 3 (`QuizCorrectionView.swift`,
-`AnswerDifference.swift`). **Depends on:** nothing; Phase 2 preferably. **Status:** Not started.
+`AnswerDifference.swift`). **Depends on:** nothing; Phase 2 preferably. **Status:** Awaiting Josh.
 
 Today `Quiz.process(proposedAnswer:)` advances before the view redraws, so the correction for
 question n appears on question n + 1's card while the clock runs, and a partial match is never
@@ -571,6 +571,58 @@ the correction, which names the differing letters when there are three or fewer.
 marked, both links work and return, and tests pin the state machine.
 
 **How it differed:**
+
+- **The layout is built, not yet judged** (the Ask Josh above). The correction is a card under the
+  answer field, its accent bar the result's color (red for wrong, blue for partly right): Your
+  Answer and Correct Answer, each label over its answer, a row of two capsule links, and Continue,
+  capped at 400 points and centered on the iPad. The field keeps the learner's answer and the
+  keyboard, so Return continues. Konjugieren's "question's card" has no counterpart here, since
+  Conjuguer's quiz draws no card around the question.
+- **A partly right answer holds too**, as the phase asks, and is spoken "Partly right." It still
+  scores five points until Phase 4 replaces the partial match.
+- **Which right answer is shown.** `AnswerDifference.nearest` reads the answer through
+  `AnswerSpelling.candidates`, so a typed subject or reflexive pronoun, or an impératif's -toi, is
+  dropped, and compares each reading with each "/" alternate, the first winning a tie. The
+  learner's answer is shown as grading reads it, lowercased with a straight apostrophe, rather
+  than in the learner's capitals as in Konjugieren.
+- **The marking** is Konjugieren's alignment, ported. Conjuguer draws regular letters blue and
+  irregular ones red, so a marked letter of the right answer keeps its color over a green tint and
+  a green underline, and a marked letter of the learner's answer is red, tinted, and struck
+  through. The tints were strengthened (0.35 and 0.4) after the iPad's dark screenshots.
+- **Navigation.** The Quiz tab's `QuizView` had no navigation stack. It now holds one, with
+  `verbPageNavigation` and the root's bar hidden, in the tab and in `QuizSheet` alike. Pages pushed
+  in the sheet get no Done, which would have closed the sheet without Quit. The model link reads
+  "Model: venir (6-7)". A quiz restarted by a link while a pushed page shows pops the page.
+- **The clock** stops through `Quiz.clockTicked()`, which the timer calls and tests call directly.
+  The Live Activity's `Text(_, style: .timer)` cannot pause, so its start date moves later by the
+  time the clock stood still each time the activity updates. During a hold the Lock Screen keeps
+  counting and then jumps back at Continue. Not seen on a Lock Screen.
+- **Smaller changes.** The feedback slot is empty after Continue, since the correction has been
+  read, and shrank from 64 to 36 points without the two rows it held. A wrong last answer buzzes,
+  and the applause waits for Continue.
+- **VoiceOver.** `Quiz` does not announce a held answer; focus moves to the correction, which
+  reads "Incorrect. Your Answer: parle. Correct Answer: parlé. Letters that differ: é." (the
+  letters only when three or fewer), with the hint "Swipe right for the links, then Continue."
+  Each link and Continue have hints, and a Magic Tap continues. Read from the accessibility tree,
+  not heard.
+- **Analytics:** one new `source` value, `quizCorrection`, on the verb page's `viewAppeared`.
+  Unlike Konjugieren, whose wording already covered it, Conjuguer's staged bullet lists examples
+  that did not suggest a quiz, so a new section of `docs/privacy_policy_pending.md` adds "a quiz's
+  correction" to them in both languages.
+- **Removed:** `Quiz.previousIncorrectAnswer`, `previousCorrectAnswer`, the rows they fed, and the
+  string `QuizView.lastAnswer`.
+- **A new fixture**, `-CONJUGUER_QUIZ_FIXTURE corrections`: eight questions, once, each with a
+  wrong answer listed in `docs/feature_architecture.md` § Quiz that shows a kind of marking.
+- **Verified** on the iPhone 17 in French (light) through all eight answers: each held with the
+  clock stopped (the results said 0:38 for about two minutes of play), both links opened and Back
+  returned to the held question with Return still continuing, the verb page scrolled to the asked
+  cell and hid Test Me, the model page's collection bar hid its Quiz button, and the last answer
+  held before the results. In English, Test Me's sheet showed no verb link, and its model page
+  pushed with Back and no Done. On the iPad Pro 11 in English and dark, the hold, the verb link,
+  Back, and Return behaved the same. Not tried: the software keyboard, which may cover Continue on
+  a small phone, the iPhone in dark, and VoiceOver by ear.
+- **Tests:** 571 to 587, with `AnswerDifferenceTests` and six new `QuizTests` for the state
+  machine. The tests that answer "x" in a loop now continue after each.
 
 ## Phase 4: One More Try
 

@@ -465,12 +465,40 @@ enum L {
       String(localized: "QuizView.cool")
     }
 
-    static var lastAnswer: String {
-      String(localized: "QuizView.lastAnswer")
+    static var yourAnswer: String {
+      String(localized: "QuizView.yourAnswer")
     }
 
     static var correctAnswer: String {
       String(localized: "QuizView.correctAnswer")
+    }
+
+    static var continueAfterCorrection: String {
+      String(localized: "QuizView.continue")
+    }
+
+    static var incorrect: String {
+      String(localized: "QuizView.incorrect")
+    }
+
+    static var partlyRight: String {
+      String(localized: "QuizView.partlyRight")
+    }
+
+    static func differingLetters(_ letters: String) -> String {
+      String(localized: "QuizView.differingLetters", defaultValue: "Letters that differ: \(letters).")
+    }
+
+    static var correctionHint: String {
+      String(localized: "QuizView.correctionHint")
+    }
+
+    static var continueHint: String {
+      String(localized: "QuizView.continueHint")
+    }
+
+    static var correctionLinkHint: String {
+      String(localized: "QuizView.correctionLinkHint")
     }
 
     static var briefing: String {

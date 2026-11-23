@@ -51,6 +51,7 @@ struct QuizTests {
     let questionCount = quiz.questions.count
     for _ in 0 ..< questionCount {
       quiz.process(proposedAnswer: "x")
+      quiz.continueAfterCorrection()
     }
 
     #expect(quiz.quizResults.count == 30)
@@ -67,6 +68,7 @@ struct QuizTests {
     let questionCount = quiz.questions.count
     for _ in 0 ..< questionCount {
       quiz.process(proposedAnswer: "x")
+      quiz.continueAfterCorrection()
     }
 
     #expect(quiz.score == 0)
@@ -108,6 +110,7 @@ struct QuizTests {
     let questionCount = losingQuiz.questions.count
     for _ in 0 ..< questionCount {
       losingQuiz.process(proposedAnswer: "x")
+      losingQuiz.continueAfterCorrection()
     }
     #expect(losingQuiz.score == 0)
     #expect(Current.settings.bestScore == 750, "A lower score must not overwrite the stored best.")
@@ -164,6 +167,102 @@ struct QuizTests {
     let result = try #require(quiz.quizResults.first)
     #expect(result.conjugationResult == .totalMatch)
     #expect(result.shownSpelling == (variant == conjugation ? nil : correctAnswer(for: question)))
+    quiz.quit()
+  }
+
+  @Test func aWrongAnswerHoldsItsQuestionUntilContinue() throws {
+    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    let first = try #require(quiz.questions.first)
+
+    quiz.process(proposedAnswer: "x")
+    let correction = try #require(quiz.correction)
+    #expect(correction.result == .noMatch)
+    #expect(correction.difference.given == "x")
+    #expect(quiz.currentQuestionIndex == 0)
+    #expect(quiz.quizResults.count == 1)
+
+    quiz.process(proposedAnswer: correctAnswer(for: first))
+    #expect(quiz.quizResults.count == 1, "An answer typed while a correction is held is not graded.")
+
+    quiz.continueAfterCorrection()
+    #expect(quiz.correction == nil)
+    #expect(quiz.currentQuestionIndex == 1)
+    quiz.quit()
+  }
+
+  @Test func aRightAnswerAdvancesAtOnce() throws {
+    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    let first = try #require(quiz.questions.first)
+    quiz.process(proposedAnswer: correctAnswer(for: first))
+    #expect(quiz.correction == nil)
+    #expect(quiz.currentQuestionIndex == 1)
+    quiz.quit()
+  }
+
+  @Test func aPartlyRightAnswerHoldsItsQuestion() throws {
+    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    var accented: String?
+    for question in quiz.questions {
+      let answer = correctAnswer(for: question).lowercased()
+      let folded = answer.folding(options: .diacriticInsensitive, locale: Locale(identifier: "fr"))
+      if folded != answer {
+        accented = folded
+        break
+      }
+      quiz.process(proposedAnswer: answer)
+    }
+    let folded = try #require(accented)
+    let index = quiz.currentQuestionIndex
+
+    quiz.process(proposedAnswer: folded)
+    #expect(quiz.correction?.result == .partialMatch)
+    #expect(quiz.currentQuestionIndex == index)
+    #expect(quiz.correction?.difference.expectedMarkedLetters.isEmpty == false)
+    quiz.quit()
+  }
+
+  @Test func theClockStandsStillWhileACorrectionIsHeld() {
+    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    quiz.clockTicked()
+    #expect(quiz.elapsedTime == 1)
+
+    quiz.process(proposedAnswer: "x")
+    quiz.clockTicked()
+    quiz.clockTicked()
+    #expect(quiz.elapsedTime == 1)
+
+    quiz.continueAfterCorrection()
+    quiz.clockTicked()
+    #expect(quiz.elapsedTime == 2)
+    quiz.quit()
+  }
+
+  @Test func aWrongLastAnswerShowsItsCorrectionBeforeTheResults() throws {
+    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    for question in quiz.questions.dropLast() {
+      quiz.process(proposedAnswer: correctAnswer(for: question))
+    }
+    quiz.process(proposedAnswer: "x")
+    #expect(quiz.correction != nil)
+    #expect(quiz.quizState == .inProgress)
+    #expect(!quiz.shouldShowResults)
+
+    quiz.continueAfterCorrection()
+    #expect(quiz.shouldShowResults)
+    #expect(quiz.quizState == .notStarted)
+    #expect(quiz.quizResults.count == 30)
+  }
+
+  @Test func quittingReleasesAHeldCorrection() {
+    let quiz = makeDeterministicQuiz(difficulty: .regular)
+    quiz.process(proposedAnswer: "x")
+    #expect(quiz.correction != nil)
+    quiz.quit()
+    #expect(quiz.correction == nil)
+
+    quiz.start()
+    #expect(quiz.correction == nil)
+    #expect(quiz.currentQuestionIndex == 0)
     quiz.quit()
   }
 }
