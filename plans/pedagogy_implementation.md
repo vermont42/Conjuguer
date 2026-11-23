@@ -33,7 +33,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 7 | Done | 2026-11-23 | 609b1b8 | T2.7, T3.1, T6.5, M2, M3 | 7 |
 | 8 | Done | 2026-11-23 | 3f12ff1 | Decision 4 | 8 |
 | 9 | Done | 2026-11-23 | b181958 | T2.8 | 9 |
-| 10 | Done | 2026-11-23 | | T2.9, Decision 8 | 10 |
+| 10 | Done | 2026-11-23 | 33da4be | T2.9, Decision 8 | 10 |
 | 11 | Not started | | | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
 | 12 | Not started | | | T3.2, T3.3 (the session) | 12 |
 | 13 | Not started | | | T6.1, T6.6 (the leaderboard's place) | 13 |
