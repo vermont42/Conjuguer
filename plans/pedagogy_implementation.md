@@ -31,7 +31,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 5 | Done | 2026-11-23 | bc2c6e6 | T2.3, T2.6, T6.7, M1 | 5 |
 | 6 | Done | 2026-11-23 | b26cb07 | T2.1, T2.2, T2.5 | 6 |
 | 7 | Done | 2026-11-23 | 609b1b8 | T2.7, T3.1, T6.5, M2, M3 | 7 |
-| 8 | Awaiting Josh | 2026-11-23 | | Decision 4 | 8 |
+| 8 | Done | 2026-11-23 | 3f12ff1 | Decision 4 | 8 |
 | 9 | Not started | | | T2.8 | 9 |
 | 10 | Not started | | | T2.9, Decision 8 | 10 |
 | 11 | Not started | | | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
@@ -1059,7 +1059,7 @@ and tests pin the re-ask placement and the continuation.
 
 **Suggestions:** Decision 4. **Ports:** Konjugieren Phase 8
 ([`../Konjugieren/docs/game_center_setup.md`](../../Konjugieren/docs/game_center_setup.md)).
-**Depends on:** Phases 5 and 7. **Status:** Awaiting Josh.
+**Depends on:** Phases 5 and 7. **Status:** Done.
 
 One leaderboard per level. `GameCenter.reportScore` takes the leaderboard; update `GameCenterReal`
 (which finds today's board with `loadDefaultLeaderboardIdentifier`) and `GameCenterStub`. Scoped
