@@ -20,7 +20,7 @@ struct QuizLiveActivityTests {
 
   @Test func aTabQuizStartsALiveActivityThatQuittingEnds() throws {
     let liveActivities = try spy()
-    let quiz = Quiz(gameCenter: GameCenterStub())
+    let quiz = Quiz(gameCenter: GameCenterSpy())
     let startsBefore = liveActivities.startCount
     let activeBefore = liveActivities.activeIDs
 
@@ -34,7 +34,7 @@ struct QuizLiveActivityTests {
 
   @Test func eachAnswerButTheLastUpdatesTheActivityAndTheLastEndsIt() throws {
     let liveActivities = try spy()
-    let quiz = Quiz(gameCenter: GameCenterStub())
+    let quiz = Quiz(gameCenter: GameCenterSpy())
     quiz.start()
     let updatesBefore = liveActivities.updateCount
     let endsBefore = liveActivities.endCount
@@ -53,7 +53,7 @@ struct QuizLiveActivityTests {
 
   @Test func restartingAQuizReplacesItsActivity() throws {
     let liveActivities = try spy()
-    let quiz = Quiz(gameCenter: GameCenterStub())
+    let quiz = Quiz(gameCenter: GameCenterSpy())
     quiz.start()
     let startsBefore = liveActivities.startCount
     let endsBefore = liveActivities.endCount
@@ -70,7 +70,7 @@ struct QuizLiveActivityTests {
     let liveActivities = try spy()
     let venir = try #require(Verb.verbs["venir"])
     for scope in [QuizScope.verbPage(venir), .collection(.être)] {
-      let quiz = Quiz(gameCenter: GameCenterStub())
+      let quiz = Quiz(gameCenter: GameCenterSpy())
       let startsBefore = liveActivities.startCount
       quiz.start(scope: scope)
       #expect(quiz.quizState == .inProgress)

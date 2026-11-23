@@ -38,7 +38,7 @@ struct QuizScopeTests {
 
   @Test func theDefaultQuizIsRankedAndAsksTheLearnersLevel() {
     Current.settings.quizLevel = .intermediate
-    let quiz = Quiz(gameCenter: GameCenterStub(), seed: 3)
+    let quiz = Quiz(gameCenter: GameCenterSpy(), seed: 3)
     quiz.start()
     #expect(quiz.scope.isRanked)
     #expect(quiz.scope.source == .tab)
@@ -170,17 +170,17 @@ struct QuizScopeTests {
     #expect(!choir.canBeQuizzed(at: .beginner))
     #expect(choir.canBeQuizzed(at: .elementary))
 
-    let quiz = Quiz(gameCenter: GameCenterStub())
+    let quiz = Quiz(gameCenter: GameCenterSpy())
     quiz.start(scope: .verbPage(accroire))
     #expect(quiz.quizState == .notStarted)
     #expect(quiz.questions.isEmpty)
   }
 
-  // A scoped quiz leaves the best score alone, as it posts nothing to the leaderboard.
   @Test func aScopedQuizIsUnrankedAndAsksTheLearnersLevel() throws {
     Current.settings.quizLevel = .advanced
-    Current.settings.bestScore = 0
-    let quiz = Quiz(gameCenter: GameCenterStub())
+    let bestScores = Current.settings.bestScores
+    let gameCenter = GameCenterSpy()
+    let quiz = Quiz(gameCenter: gameCenter)
     quiz.start(scope: .myVerbs([try verb("parler"), try verb("finir")]))
     #expect(!quiz.scope.isRanked)
     #expect(quiz.level == .advanced)
@@ -189,7 +189,8 @@ struct QuizScopeTests {
     }
     #expect(quiz.shouldShowResults)
     #expect(quiz.score == Quiz.questionCount * 10)
-    #expect(Current.settings.bestScore == 0)
+    #expect(Current.settings.bestScores == bestScores)
+    #expect(gameCenter.reports.isEmpty)
     Current.settings.quizLevel = .elementary
   }
 
@@ -197,7 +198,7 @@ struct QuizScopeTests {
   // graded with its own extra letters: il sortit, not il sort.
   @Test func aDoubledEntryIsGradedAsItself() throws {
     let obtain = try verb("sortir", extraLetters: "obtain")
-    let quiz = Quiz(gameCenter: GameCenterStub())
+    let quiz = Quiz(gameCenter: GameCenterSpy())
     quiz.start(scope: .verbPage(obtain))
     let questionCount = quiz.questions.count
     for question in quiz.questions {
@@ -230,7 +231,7 @@ struct QuizScopeTests {
       Current.settings.quizLevel = .elementary
     }
 
-    let quiz = Quiz(gameCenter: GameCenterStub())
+    let quiz = Quiz(gameCenter: GameCenterSpy())
     quiz.start(scope: scope)
     quiz.quit()
     quiz.start(scope: scope)

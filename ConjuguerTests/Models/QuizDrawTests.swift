@@ -24,7 +24,7 @@ struct QuizDrawTests {
       Current.settings.quizLevel = .elementary
     }
     let quizzes = Self.seeds.map { seed in
-      let quiz = Quiz(gameCenter: GameCenterStub(), seed: seed)
+      let quiz = Quiz(gameCenter: GameCenterSpy(), seed: seed)
       quiz.start()
       defer {
         quiz.quit()
@@ -170,7 +170,7 @@ struct QuizDrawTests {
       Current.settings.quizLevel = .elementary
     }
     let verbs = try [verb("parler"), verb("redonner")]
-    let quiz = Quiz(gameCenter: GameCenterStub(), seed: 5)
+    let quiz = Quiz(gameCenter: GameCenterSpy(), seed: 5)
     quiz.start(scope: .myVerbs(verbs))
     defer {
       quiz.quit()

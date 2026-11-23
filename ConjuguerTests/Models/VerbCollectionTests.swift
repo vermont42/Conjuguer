@@ -171,7 +171,7 @@ struct VerbCollectionTests {
       Current.analytics = original
     }
 
-    let quiz = Quiz(gameCenter: GameCenterStub())
+    let quiz = Quiz(gameCenter: GameCenterSpy())
     quiz.start(scope: .collection(.model("6-7")))
     quiz.quit()
 

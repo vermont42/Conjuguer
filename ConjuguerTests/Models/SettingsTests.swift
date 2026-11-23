@@ -67,6 +67,32 @@ struct SettingsTests {
     #expect(settings.quizLevel == .beginner)
   }
 
+  @Test func eachLevelKeepsItsOwnBestScore() {
+    let store = GetterSetterFake()
+    let settings = SettingsTests.makeSettings(getterSetter: store)
+
+    settings.recordScore(70, at: .beginner)
+    settings.recordScore(90, at: .advanced)
+    settings.recordScore(60, at: .advanced)
+
+    #expect(settings.bestScore(at: .beginner) == 70)
+    #expect(settings.bestScore(at: .elementary) == 0)
+    #expect(settings.bestScore(at: .advanced) == 90, "A lower score must not overwrite the stored best.")
+    #expect(store.get(key: "bestScore.advanced") == "90")
+  }
+
+  @Test func theBestScoreAcrossLevelsIsRemoved() {
+    let store = GetterSetterFake()
+    store.set(key: Settings.retiredBestScoreKey, value: "450")
+
+    let settings = SettingsTests.makeSettings(getterSetter: store)
+
+    #expect(store.get(key: Settings.retiredBestScoreKey) == nil)
+    for level in QuizLevel.allCases {
+      #expect(settings.bestScore(at: level) == 0)
+    }
+  }
+
   @Test func testReviewCardSuppressionDefaultsToOff() {
     let store = GetterSetterFake()
 
@@ -84,7 +110,7 @@ struct SettingsTests {
     settings.verbSort = .alphabetical
     settings.modelSort = .identifier
     settings.quizLevel = .intermediate
-    settings.bestScore = 42
+    settings.recordScore(42, at: .advanced)
     settings.pronounGender = .masculine
     settings.promptActionCount = 7
     settings.lastReviewPromptDate = date
@@ -94,7 +120,7 @@ struct SettingsTests {
     #expect(reloaded.verbSort == .alphabetical)
     #expect(reloaded.modelSort == .identifier)
     #expect(reloaded.quizLevel == .intermediate)
-    #expect(reloaded.bestScore == 42)
+    #expect(reloaded.bestScore(at: .advanced) == 42)
     #expect(reloaded.pronounGender == .masculine)
     #expect(reloaded.promptActionCount == 7)
     #expect(reloaded.lastReviewPromptDate == date)

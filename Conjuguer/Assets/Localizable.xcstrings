@@ -3834,13 +3834,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Take ten-question quizzes, earn points, and compete on the Game Center leaderboard. Choose a level from Beginner to Advanced. Each level adds tenses to the one before, and Advanced includes those rarely seen outside formal or literary writing."
+            "value" : "Take ten-question quizzes, earn points, and compete with learners at your level on Game Center. Choose a level from Beginner to Advanced. Each level adds tenses to the one before, and Advanced includes those rarely seen outside formal or literary writing."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Faites des quiz de dix questions, gagnez des points et affrontez les autres sur le classement Game Center. Choisissez un niveau, de Débutant à Avancé. Chaque niveau ajoute des temps au précédent, et Avancé inclut ceux que l’on rencontre rarement en dehors de l’écrit formel ou littéraire."
+            "value" : "Faites des quiz de dix questions, gagnez des points et affrontez les apprenants de votre niveau dans Game Center. Choisissez un niveau, de Débutant à Avancé. Chaque niveau ajoute des temps au précédent, et Avancé inclut ceux que l’on rencontre rarement en dehors de l’écrit formel ou littéraire."
           }
         }
       }

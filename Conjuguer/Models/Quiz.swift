@@ -621,11 +621,9 @@ class Quiz {
   /// Ten More carried the session. Only the first round ranks.
   private func completeRound() {
     if roundCount == 1, scope.isRanked {
-      if firstRoundScore > Current.settings.bestScore {
-        Current.settings.bestScore = firstRoundScore
-      }
+      Current.settings.recordScore(firstRoundScore, at: level)
       ChangeLevelTip.quizCompleted.sendDonation()
-      gameCenter.reportScore(firstRoundScore)
+      gameCenter.reportScore(firstRoundScore, level: level)
     }
     shouldShowResults = true
     Current.soundPlayer.play(Sound.randomApplause)

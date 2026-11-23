@@ -44,6 +44,10 @@ material for the release notes.
    whether a device matches the keywords and alternate names. Add the Find a Verb control to
    Control Center and tap it. Long-press the icon for the Find a Verb quick action. Record what
    works in `docs/feature_architecture.md` § Lookup from Outside the App.
+7. **Add the four level leaderboards to the version** and try them on a device before submitting,
+   by [`game_center_setup.md`](game_center_setup.md) § Testing Before Release. They are in App
+   Store Connect, in "Prepare for Submission", and a development build probably cannot see them
+   until they belong to a version.
 
 ## On Release Day
 
@@ -56,6 +60,9 @@ material for the release notes.
    kept because the App Store listing may point at it. Check which one the listing's privacy URL
    serves, and bring that one up to date with the same lines, or point the listing at the one that
    is current.
+3. **Game Center.** Submit the four level leaderboards with the version, then, once the release
+   is live, archive the old `Leaderboard` and consider making Beginner the default, by
+   [`game_center_setup.md`](game_center_setup.md) § On Release Day.
 
 ## Afterward
 

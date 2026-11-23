@@ -118,7 +118,7 @@ class World {
   static let simulator: World = {
     let getterSetter = GetterSetterReal()
     let settings = Settings(getterSetter: getterSetter)
-    let gameCenter = GameCenterStub()
+    let gameCenter = GameCenterSpy()
     let quiz = Quiz(gameCenter: gameCenter)
     let analytics = AnalyticsSpy()
     return World(
@@ -139,7 +139,7 @@ class World {
   static let unitTest: World = {
     let getterSetter = GetterSetterFake()
     let settings = Settings(getterSetter: getterSetter)
-    let gameCenter = GameCenterStub()
+    let gameCenter = GameCenterSpy()
     let quiz = Quiz(gameCenter: gameCenter)
     let analytics = AnalyticsSpy()
     return World(

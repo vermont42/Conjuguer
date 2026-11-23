@@ -143,7 +143,7 @@ Conjuguer/
 │   ├── Fonts.swift             # Work Sans font constants scaled relative to text styles
 │   ├── GameCenter.swift        # Protocol for Game Center authentication and score reporting
 │   ├── GameCenterReal.swift    # GKLocalPlayer authentication and leaderboard submission
-│   ├── GameCenterStub.swift    # Canned-answer double for tests and the simulator
+│   ├── GameCenterSpy.swift     # Records scores and leaderboards shown, for tests and the simulator
 │   ├── GetterSetter.swift      # Protocol for key-value storage
 │   ├── GetterSetterCodable.swift  # Codable get/set convenience over the string-based protocol
 │   ├── GetterSetterFake.swift  # In-memory dictionary implementation for tests
@@ -289,6 +289,7 @@ ConjuguerTests/
     ├── ParserTests.swift               # XML parsing of verbs, models, and defect groups
     ├── QuizLiveActivityTests.swift     # The quiz's Live Activity through the spy: a tab quiz starts one that Quit or the last answer ends, each other answer updates it, a restart replaces it, and a sheet's quiz starts none
     ├── QuizDrawTests.swift             # The default quiz's verbs: each level's band, half irregular, the core verbs, rare and frequent derivatives, the pools' rules, sortir (obtain) left out, no verb dominating, scoped quizzes untouched
+    ├── QuizLeaderboardTests.swift      # Leaderboards by level: each level's permanent ID, a ranked session reporting to the level it began at, second attempts counted and re-asks not, Ten More and scoped quizzes reporting nothing (nested in QuizTests to share its serialization)
     ├── QuizLevelTests.swift            # Quiz levels: each level's tenses, the weights, every cell in one slot, the default quiz's draw by level, pool, and weight, and the level on the quiz signals
     ├── QuizSessionTests.swift          # Rounds and re-asks: where a miss returns, once; a re-ask's half points; Ten More's continuation, clock, and fresh verbs; first-round ranking; the signals' question counts and duration bands; the abandonment record; the clock setting and the Live Activity's time (serialized — mutates Current)
     ├── QuizScopeTests.swift            # Quiz scopes: the default quiz at the learner's level, My Verbs drawing only its verbs at each level, defective verbs, Test Me's three tenses, unranked scoring, doubled entries graded as themselves, source on every quiz signal
@@ -334,6 +335,7 @@ docs/                               # Claude's output that informs: research, re
 ├── feature_architecture.md         # How each feature system works (search, analytics, deeplinks, quiz, widgets); the browse and pedagogy plans extend it
 ├── feature_request_context_usage_tool.md  # Draft Claude Code feature request: a model-callable context-usage tool
 ├── frequencies.txt                 # Generated: every distinct infinitive in rank order, one "<rank> <infinitive>" per line
+├── game_center_setup.md            # The four level leaderboards in App Store Connect: IDs, settings, names, how they were made, release-day and testing steps
 ├── government_corpus_licensing.md  # Licensing analysis for French/Swiss government documents
 ├── government_corpus_sources.md    # Provenance manifest for the government corpus tier
 ├── literature_example_corpus.md    # READ FIRST before touching corpus/: layout, gitignore policy, build scripts, tiers, coverage

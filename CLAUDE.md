@@ -257,7 +257,7 @@ type. Practical consequences:
   Likewise, deleting a file needs no project edit. This is why new test classes get their own
   files (e.g. `DeeplinkTests.swift`) rather than being appended to an existing file.
 - **All test doubles live in the app target** (`TestApp.swift`, `GetterSetterFake.swift`,
-  `GameCenterStub.swift`, `ReviewPrompterDummy.swift`, `AnalyticsSpy.swift`,
+  `GameCenterSpy.swift`, `ReviewPrompterDummy.swift`, `AnalyticsSpy.swift`,
   `LiveActivitiesSpy.swift`, `URLProtocolStub.swift`), referenced by `World.swift` for the
   simulator/unitTest configs, so the whole `Conjuguer/` tree compiles into one target.
 - The only files inside the synced folders excluded from a target are the per-target
@@ -310,15 +310,15 @@ that needed region/language reads `Locale.current` directly.)
 
 All external services have protocol abstractions with production and test implementations, named in the Fowler test-double convention — `…Real` for the production conformer, `…Fake`/`…Stub`/`…Spy`/`…Dummy` for the double:
 - `GetterSetter` → `GetterSetterReal` / `GetterSetterFake`
-- `GameCenter` → `GameCenterReal` / `GameCenterStub`
+- `GameCenter` → `GameCenterReal` / `GameCenterSpy`
 - `ReviewPrompter` → `ReviewPrompterReal` / `ReviewPrompterDummy`
 - `Analytics` → `AnalyticsReal` (TelemetryDeck) / `AnalyticsSpy`
 - `LiveActivities` → `LiveActivitiesReal` (ActivityKit) / `LiveActivitiesSpy`
 
 > **Convention — adding a new behavior protocol with real + test-double conformances.** Name the protocol a **plain role noun** — no `-able`/`-Protocol`/`-ing` suffix (`GetterSetter`, `GameCenter`, `ReviewPrompter`). Name the production conformer `<Protocol>Real` and the test double `<Protocol><Role>`, where `<Role>` is the [Fowler test-double type](https://martinfowler.com/bliki/TestDouble.html) that matches what the double actually *does*:
 > - **`Fake`** — a working implementation with a production-unsuitable shortcut, e.g. an in-memory store (`GetterSetterFake`).
-> - **`Stub`** — returns canned answers, no real logic (`GameCenterStub`).
-> - **`Spy`** — a stub that *also records* how it was called, for assertions (`AnalyticsSpy`).
+> - **`Stub`** — returns canned answers, no real logic (`URLProtocolStub`).
+> - **`Spy`** — a stub that *also records* how it was called, for assertions (`AnalyticsSpy`, `GameCenterSpy`).
 > - **`Mock`** — pre-programmed with expectations it verifies. **`Dummy`** — fills a slot but is never exercised for its behavior (`ReviewPrompterDummy`).
 >
 > Because the protocol and all its conformers share a prefix, they **sort together in Xcode's Project Navigator** — the point of the convention (and consistent with the `CatFancy-final` app). One type per file, filename = type name (synced folders bundle them automatically). **Check for a name collision** before settling on the protocol name: the bare noun must be free, so the production type takes `…Real` (the protocol `GameCenter` is only available because the former `GameCenter` class became `GameCenterReal`). Wire the real conformer into `World.device` and the double into `World.simulator` / `.unitTest`. Doubles that conform to a **system** protocol rather than an app one stay outside the scheme — `URLProtocolStub` (Foundation `URLProtocol`) and `TestApp` (SwiftUI `App`, whose real counterpart is `ConjuguerApp`).

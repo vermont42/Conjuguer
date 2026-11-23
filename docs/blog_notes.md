@@ -5728,3 +5728,36 @@ which guards against a single verb dominating a level, began to fail on définir
 hold only a handful of regular -ir verbs, which had sat just under the cap of one question in fifty
 all along. The tests now draw as many questions as before, and the cap is one in forty, which still
 catches the bug it was written for.
+
+## A Leaderboard for Each Level (2026-11-23)
+
+Conjuguer had one Game Center leaderboard, and since Phase 5 every level had posted to it. A
+Beginner's perfect ten and an Advanced learner's perfect ten were the same 100 on the same board,
+which says nothing about either. Phase 8 of the pedagogy plan gave each level its own board, as
+Konjugieren had done nine days before.
+
+The code was the small part. The protocol's `reportScore` and `showLeaderboard` now take a level,
+each level names its board's permanent ID (`conjuguer.level.advanced`), and the app stopped asking
+Game Center for its default board, which it had done at every sign-in. The test double that
+pretended to report scores now records them, so it became `GameCenterSpy`, and seven new tests pin
+which sessions rank: the first ten questions of a default quiz, at the level it began at, with a
+second attempt's half points and without a re-ask's. Ten More, My Verbs, collections, and Test Me
+post nothing.
+
+The best score on the briefing card had the same problem as the board, and Josh chose to split it
+the same way. Each level keeps its own best, and the card shows the current level's. The old single
+best could not be split, since nobody knows what level earned it, and on a long-time install it
+came from the thirty-question quiz with a time bonus, so it could be in the hundreds. It is simply
+removed at launch. On the simulator, that took away a best of 30 that had sat on the card since
+Phase 7. Nothing breaks the ties at 100 that ten questions make likely; with the clock hidden by
+default, there is nothing fair to break them with.
+
+The other part of the phase happened in App Store Connect. Rather than write a walkthrough for Josh
+to follow, the session drove Chrome and created the four boards itself: Beginner to Advanced in
+English, Débutant to Avancé in French, each scored 0 to 100, best score kept, high to low. The
+form defaults to low to high, the one setting that would quietly turn a leaderboard upside down,
+and Konjugieren's notes had warned of it. The boards wait in "Prepare for Submission" for the 2027
+version. Konjugieren's attempt to test its boards from a development build found them invisible
+until they belong to a version, so the test here waits for that version too, and
+`docs/game_center_setup.md` and `docs/release.md` say what release day must do: submit the boards
+with the version, then archive the board every earlier version posted to.

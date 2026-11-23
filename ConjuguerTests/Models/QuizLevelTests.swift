@@ -18,7 +18,7 @@ struct QuizLevelTests {
       Current.settings.quizLevel = .elementary
     }
     return seeds.flatMap { seed in
-      let quiz = Quiz(gameCenter: GameCenterStub(), seed: seed)
+      let quiz = Quiz(gameCenter: GameCenterSpy(), seed: seed)
       quiz.start()
       defer {
         quiz.quit()
@@ -106,7 +106,7 @@ struct QuizLevelTests {
       Current.analytics = original
     }
 
-    let quiz = Quiz(gameCenter: GameCenterStub(), seed: 1)
+    let quiz = Quiz(gameCenter: GameCenterSpy(), seed: 1)
     quiz.start()
     #expect(quiz.level == .intermediate)
     quiz.quit()

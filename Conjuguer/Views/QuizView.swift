@@ -63,7 +63,7 @@ struct QuizView: View {
         } else if sheetScope != nil {
           dismiss()
         } else if quiz.scope.isRanked {
-          world.gameCenter.showLeaderboard()
+          world.gameCenter.showLeaderboard(level: quiz.level)
         }
       },
       content: {
@@ -401,8 +401,9 @@ struct QuizView: View {
       VStack(spacing: Layout.defaultSpacing) {
         Label(world.settings.quizLevel.localizedNameWithLabel, systemImage: world.settings.quizLevel.systemImage)
         Label(L.QuizView.questionCount, systemImage: "list.number")
-        if tabScope == .allVerbs, world.settings.bestScore > 0 {
-          Label(L.QuizView.bestScore(world.settings.bestScore), systemImage: "trophy")
+        let bestScore = world.settings.bestScore(at: world.settings.quizLevel)
+        if tabScope == .allVerbs, bestScore > 0 {
+          Label(L.QuizView.bestScore(bestScore), systemImage: "trophy")
         }
       }
       .smallLabel()

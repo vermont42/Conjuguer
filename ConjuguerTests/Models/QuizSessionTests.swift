@@ -14,7 +14,7 @@ import Testing
 struct QuizSessionTests {
   private func makeQuiz(level: QuizLevel = .elementary, seed: UInt64 = 1, now: @escaping () -> Date = { Date.now }) -> Quiz {
     Current.settings.quizLevel = level
-    let quiz = Quiz(gameCenter: GameCenterStub(), seed: seed, now: now)
+    let quiz = Quiz(gameCenter: GameCenterSpy(), seed: seed, now: now)
     quiz.start()
     return quiz
   }
@@ -105,12 +105,11 @@ struct QuizSessionTests {
   }
 
   @Test func tenMoreContinuesTheSessionAndOnlyTheFirstRoundRanks() {
-    Current.settings.bestScore = 0
     let quiz = makeQuiz()
     finishRightly(quiz)
     #expect(quiz.shouldShowResults)
     #expect(quiz.canContinue)
-    #expect(Current.settings.bestScore == 100)
+    #expect(Current.settings.bestScore(at: .elementary) == 100)
 
     quiz.continueSession()
     #expect(quiz.quizState == .inProgress)
@@ -125,8 +124,7 @@ struct QuizSessionTests {
     #expect(quiz.score == 200)
     #expect(quiz.firstRoundScore == 100)
     #expect(quiz.sessionQuestionCount == 2 * Quiz.questionCount)
-    #expect(Current.settings.bestScore == 100, "Ten More's points are not a best score.")
-    Current.settings.bestScore = 0
+    #expect(Current.settings.bestScore(at: .elementary) == 100, "Ten More's points are not a best score.")
   }
 
   @Test func tenMoreKeepsTheClock() {
@@ -166,7 +164,7 @@ struct QuizSessionTests {
     #expect(QuizScope.allVerbs.continues)
 
     Current.settings.quizLevel = .elementary
-    let quiz = Quiz(gameCenter: GameCenterStub(), seed: 1)
+    let quiz = Quiz(gameCenter: GameCenterSpy(), seed: 1)
     quiz.start(scope: .verbPage(parler))
     finishRightly(quiz)
     #expect(quiz.shouldShowResults)

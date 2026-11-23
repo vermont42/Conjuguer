@@ -7,12 +7,12 @@
 //
 
 import GameKit
+import os
 
 class GameCenterReal: NSObject, GameCenter {
   static let shared = GameCenterReal()
   var isAuthenticated = false
   private let localPlayer = GKLocalPlayer.local
-  private var leaderboardIdentifier: String?
 
   private override init() {}
 
@@ -23,11 +23,6 @@ class GameCenterReal: NSObject, GameCenter {
       } else if self.localPlayer.isAuthenticated {
         self.isAuthenticated = true
         Current.soundPlayer.play(.randomApplause)
-        self.localPlayer.loadDefaultLeaderboardIdentifier { identifier, _ in
-          Task { @MainActor in
-            self.leaderboardIdentifier = identifier
-          }
-        }
         Current.analytics.signal(name: .gameCenterAuthSucceeded)
         completion?(true)
       } else {
@@ -38,18 +33,22 @@ class GameCenterReal: NSObject, GameCenter {
     }
   }
 
-  func reportScore(_ score: Int) {
-    guard isAuthenticated, let leaderboardIdentifier else {
+  func reportScore(_ score: Int, level: QuizLevel) {
+    guard isAuthenticated else {
       return
     }
-
-    GKLeaderboard.submitScore(score, context: 0, player: localPlayer, leaderboardIDs: [leaderboardIdentifier], completionHandler: { _ in })
+    let leaderboardID = level.leaderboardID
+    GKLeaderboard.submitScore(score, context: 0, player: localPlayer, leaderboardIDs: [leaderboardID]) { error in
+      if let error {
+        Log.gameCenter.error("Could not report a score to \(leaderboardID, privacy: .public): \(error.localizedDescription, privacy: .public)")
+      }
+    }
   }
 
-  func showLeaderboard() {
-    guard isAuthenticated, let leaderboardIdentifier else {
+  func showLeaderboard(level: QuizLevel) {
+    guard isAuthenticated else {
       return
     }
-    GKAccessPoint.shared.trigger(leaderboardID: leaderboardIdentifier, playerScope: .global, timeScope: .allTime) { }
+    GKAccessPoint.shared.trigger(leaderboardID: level.leaderboardID, playerScope: .global, timeScope: .allTime) { }
   }
 }

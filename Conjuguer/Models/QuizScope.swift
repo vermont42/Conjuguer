@@ -21,8 +21,8 @@ struct QuizScope {
   /// The collection a quiz over a collection asks about, which `quizStart` names.
   var collection: VerbCollection?
 
-  /// Only the default quiz posts to the leaderboard and sets the best score: a score over the
-  /// learner's own verbs, or over three questions, compares with nothing.
+  /// Only the default quiz posts to its level's leaderboard and sets its best score: a score over
+  /// the learner's own verbs, or over three questions, compares with nothing.
   var isRanked: Bool {
     verbs == nil
   }

@@ -31,7 +31,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 5 | Done | 2026-11-23 | bc2c6e6 | T2.3, T2.6, T6.7, M1 | 5 |
 | 6 | Done | 2026-11-23 | b26cb07 | T2.1, T2.2, T2.5 | 6 |
 | 7 | Done | 2026-11-23 | 609b1b8 | T2.7, T3.1, T6.5, M2, M3 | 7 |
-| 8 | Not started | | | Decision 4 | 8 |
+| 8 | Awaiting Josh | 2026-11-23 | | Decision 4 | 8 |
 | 9 | Not started | | | T2.8 | 9 |
 | 10 | Not started | | | T2.9, Decision 8 | 10 |
 | 11 | Not started | | | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
@@ -1059,7 +1059,7 @@ and tests pin the re-ask placement and the continuation.
 
 **Suggestions:** Decision 4. **Ports:** Konjugieren Phase 8
 ([`../Konjugieren/docs/game_center_setup.md`](../../Konjugieren/docs/game_center_setup.md)).
-**Depends on:** Phases 5 and 7. **Status:** Not started.
+**Depends on:** Phases 5 and 7. **Status:** Awaiting Josh.
 
 One leaderboard per level. `GameCenter.reportScore` takes the leaderboard; update `GameCenterReal`
 (which finds today's board with `loadDefaultLeaderboardIdentifier`) and `GameCenterStub`. Scoped
@@ -1076,6 +1076,66 @@ the old leaderboard is retired; raise with Josh whether anything should break th
 walkthrough exists, and tests pin which sessions rank.
 
 **How it differed:**
+
+- **Josh decided four things on 2026-11-23**, each the recommended option. Nothing breaks ties at
+  100 (over folding the time into the score, or weekly recurring boards). The best score becomes
+  one per level, the briefing showing the current level's, and the single best kept across levels
+  is dropped, not migrated, since its level is unknown and it may come from the thirty-question
+  quiz. Closing a default quiz's results still opens a leaderboard, now its level's; Phase 13
+  replaces that with a control on the hub. And Claude was to create the boards in App Store
+  Connect by driving Chrome, as in Konjugieren.
+- **The four leaderboards exist in App Store Connect**, created by this session on 2026-11-23:
+  `conjuguer.level.beginner`, `.elementary`, `.intermediate`, and `.advanced`, each Classic,
+  Integer, 0 to 100, Best Score, High to Low, not hidden, with English (U.S.) and French
+  localizations (Beginner / Débutant and so on, as the live board has English and French) and a
+  description of the first ten questions at that level. Each is in "Prepare for Submission", added
+  to no version. Their settings were read back on each board's page after creation. The live
+  board's ID is `software.racecondition.Conjuguer.Leaderboard`, which the code never named, since
+  `GameCenterReal` found it with `loadDefaultLeaderboardIdentifier`. The IDs follow the
+  `conjuguer.level.*` pattern Konjugieren's document anticipated rather than the live board's
+  reverse-DNS form. No image was added; the live board has one, `icon1024.png`.
+- **The walkthrough, [`docs/game_center_setup.md`](../docs/game_center_setup.md)**, records what
+  exists, as Konjugieren's does: the five boards, their settings and descriptions, the steps as App
+  Store Connect showed them, testing (which waits for the 2027 version, after Konjugieren found
+  its level boards invisible to a development build), and release day (submit the boards with the
+  version, archive the old one, perhaps change the default). [`docs/release.md`](../docs/release.md)
+  has a step before submitting and one on release day. Conjuguer has no
+  `GameCenterResources.gamekit`, unlike Konjugieren, and its shared scheme has no GameKit debug
+  mode to turn off.
+- **The code.** `GameCenter.reportScore(_:level:)` and `showLeaderboard(level:)` replace the
+  level-less pair, with `QuizLevel.leaderboardID` beside the protocol. `GameCenterReal` no longer
+  loads the default leaderboard and logs a failed report to a new `Log.gameCenter`.
+  `GameCenterStub` became `GameCenterSpy`, which records reports and shown boards, as Konjugieren's
+  dummy became a spy; `CLAUDE.md`'s convention now names `URLProtocolStub` as its stub example.
+  Unlike Konjugieren, the protocol kept Conjuguer's shape (a completion-handler `authenticate`, no
+  `showLeaderboards()`), since nothing here shows the list of boards. `QuizScope.isRanked` did not
+  change.
+- **The best score.** `Settings` keeps `bestScores` per level under the keys `bestScore.<level>`,
+  read through `bestScore(at:)` and raised only by `recordScore(_:at:)`, and removes the old
+  `bestScore` key at launch. On the iPhone simulator, the first launch removed the 30 that Phase 7
+  saw there.
+- **Strings.** The onboarding quiz page's "compete on the Game Center leaderboard" became
+  "compete with learners at your level on Game Center" / "affrontez les apprenants de votre niveau
+  dans Game Center". Nothing else names the leaderboard; Conjuguer has no leaderboard button in
+  Settings or the results, unlike Konjugieren.
+- **No analytics and no privacy lines.** Nothing new is sent to the developer. The policy's
+  section 6 already speaks of "quiz leaderboards" and "when you submit a score", which stays true.
+- **Not verified with Game Center.** The simulator worlds use `GameCenterSpy`, and posting needs a
+  signed-in device and, probably, a version that holds the boards (above). **Verified** on the
+  iPhone 17: with `bestScore.elementary` seeded at 80 and an old `bestScore` of 450, the French
+  briefing at Élémentaire showed "Meilleur score : 80" and the 450 was gone from the preferences;
+  in English, Beginner showed no best score and Elementary showed 80. On the iPad Pro 11 in English
+  and dark: Intermediate showed none, and Advanced, seeded at 95, "Best score: 95". The seeded
+  scores were reset to 0 afterward. Not seen: the onboarding page's new sentence, and a best score
+  recorded by a finished quiz on a device (unit-tested).
+- **Tests:** 631 to 640. `QuizLeaderboardTests` is new (7 functions nested in `QuizTests`: each
+  level's literal ID, distinct IDs, a ranked session reporting 100 to each level's board and
+  setting its best, the level fixed at the quiz's start, a second attempt's half points counted
+  and a re-ask's not (85 ranked of a score of 90), Ten More reporting nothing, and three scoped
+  quizzes reporting nothing). `SettingsTests` gained two (each level keeps its own best; the old
+  key is removed). The best-score assertions in `QuizTests`, `QuizSessionTests`, and
+  `QuizScopeTests` moved to `bestScore(at:)`; since a best can only rise, they no longer reset it
+  to 0 between tests.
 
 ## Phase 9: Choosing What to Practice
 

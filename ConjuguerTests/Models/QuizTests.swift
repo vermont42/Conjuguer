@@ -16,7 +16,7 @@ struct QuizTests {
   // itself, and feed the correct answer back.
   private func makeDeterministicQuiz(level: QuizLevel = .elementary) -> Quiz {
     Current.settings.quizLevel = level
-    let quiz = Quiz(gameCenter: GameCenterStub(), seed: 1)
+    let quiz = Quiz(gameCenter: GameCenterSpy(), seed: 1)
     quiz.start()
     return quiz
   }
@@ -86,26 +86,22 @@ struct QuizTests {
     #expect(quiz.score == 100)
   }
 
-  // A completed quiz whose score beats the stored best writes it back; a subsequent
-  // lower-scoring quiz must not overwrite it.
   @Test func testBestScoreWriteBack() {
-    Current.settings.bestScore = 0
-
     let winningQuiz = makeDeterministicQuiz()
     answerAllCorrectly(winningQuiz)
-    #expect(Current.settings.bestScore == 100)
+    #expect(Current.settings.bestScore(at: .elementary) == 100)
 
     let losingQuiz = makeDeterministicQuiz()
     answerAllWrongly(losingQuiz)
     #expect(losingQuiz.score == 0)
-    #expect(Current.settings.bestScore == 100, "A lower score must not overwrite the stored best.")
+    #expect(Current.settings.bestScore(at: .elementary) == 100, "A lower score must not overwrite the stored best.")
   }
 
   @Test(arguments: QuizLevel.allCases)
   func noSeededQuizAsksADefectiveCell(level: QuizLevel) {
     Current.settings.quizLevel = level
     for seed in UInt64(0) ..< 100 {
-      let quiz = Quiz(gameCenter: GameCenterStub(), seed: seed)
+      let quiz = Quiz(gameCenter: GameCenterSpy(), seed: seed)
       quiz.start()
       #expect(quiz.questions.count == 10)
       for question in quiz.questions where !question.verb.hasCell(question.tense) {
@@ -118,7 +114,7 @@ struct QuizTests {
   @Test func aSeedRepeatsItsQuiz() {
     Current.settings.quizLevel = .advanced
     func questions(seed: UInt64) -> [String] {
-      let quiz = Quiz(gameCenter: GameCenterStub(), seed: seed)
+      let quiz = Quiz(gameCenter: GameCenterSpy(), seed: seed)
       quiz.start()
       defer {
         quiz.quit()

@@ -48,13 +48,26 @@ class Settings {
   static let quizClockKey = "quizClock"
   static let quizClockDefault: QuizClock = .hide
 
-  var bestScore: Int = bestScoreDefault {
-    didSet {
-      persist(bestScore, oldValue: oldValue, key: Settings.bestScoreKey)
-    }
-  }
-  static let bestScoreKey = "bestScore"
+  private(set) var bestScores: [QuizLevel: Int] = [:]
   static let bestScoreDefault = 0
+  static func bestScoreKey(_ level: QuizLevel) -> String {
+    "bestScore." + level.rawValue
+  }
+  // Older installs hold one best score across levels, whose level is unknown and which may come
+  // from a thirty-question quiz, so it is removed rather than migrated.
+  static let retiredBestScoreKey = "bestScore"
+
+  func bestScore(at level: QuizLevel) -> Int {
+    bestScores[level] ?? Settings.bestScoreDefault
+  }
+
+  func recordScore(_ score: Int, at level: QuizLevel) {
+    guard score > bestScore(at: level) else {
+      return
+    }
+    bestScores[level] = score
+    getterSetter.set(key: Settings.bestScoreKey(level), value: score.settingString)
+  }
 
   var gameHighScore: Int = gameHighScoreDefault {
     didSet {
@@ -125,7 +138,10 @@ class Settings {
     modelSort = load(key: Settings.modelSortKey, default: Settings.modelSortDefault)
     quizLevel = load(key: Settings.quizLevelKey, default: Settings.migratedQuizLevel(getterSetter: getterSetter))
     quizClock = load(key: Settings.quizClockKey, default: Settings.quizClockDefault)
-    bestScore = load(key: Settings.bestScoreKey, default: Settings.bestScoreDefault)
+    bestScores = Dictionary(uniqueKeysWithValues: QuizLevel.allCases.map { level in
+      (level, load(key: Settings.bestScoreKey(level), default: Settings.bestScoreDefault))
+    })
+    getterSetter.remove(key: Settings.retiredBestScoreKey)
     gameHighScore = load(key: Settings.gameHighScoreKey, default: Settings.gameHighScoreDefault)
     pronounGender = load(key: Settings.pronounGenderKey, default: Settings.pronounGenderDefault)
     promptActionCount = load(key: Settings.promptActionCountKey, default: Settings.promptActionCountDefault)

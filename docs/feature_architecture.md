@@ -1040,8 +1040,8 @@ default, or Show / Afficher. Hidden, the quiz shows no time, nor do its results,
 Activity, or VoiceOver's announcement; the clock still counts. The Live Activity starts with each
 round of a tab quiz; its content state carries the session's total, which re-asks and Ten More
 grow, and its start date and elapsed time are nil while the clock is hidden, when the Dynamic
-Island shows the level in their place. `ChangeLevelTip` is donated, and Game Center and the best
-score are reported, at the first round's results only.
+Island shows the level in their place. `ChangeLevelTip` is donated, and the level's leaderboard and
+best score are reported, at the first round's results only.
 
 ### Grading and Scoring
 
@@ -1078,12 +1078,23 @@ cursor after the letter. With a hardware keyboard, iOS draws the toolbar as a fl
 bottom of the screen.
 
 Every level scores 10 a right answer and nothing else: there is no multiplier and no time bonus.
-The best score is stored in `Settings`, and the first round of every default quiz, at any level,
-reports its score to Game Center's one leaderboard: its ten questions without their re-asks
-(`Quiz.firstRoundScore`), so that every ranked score has a ceiling of 100. Ten More's points and a
-re-ask's are the learner's alone. A scoped quiz does neither (below). Quitting reports nothing. A
-best score kept from the thirty-question quiz may stand above 100 until the leaderboards by level
-replace it.
+The first round of every default quiz reports its score to the leaderboard of the level the quiz
+began at, and keeps it as that level's best score if it is higher: its ten questions without their
+re-asks (`Quiz.firstRoundScore`), so that every ranked score has a ceiling of 100. Ten More's points
+and a re-ask's are the learner's alone. A scoped quiz does neither (below). Quitting reports
+nothing. `Settings` keeps one best score per level (`bestScore(at:)`, `recordScore(_:at:)`, under
+the keys `bestScore.<level>`), and the briefing shows the current level's. The one best score
+across levels that older installs hold, under the key `bestScore`, is removed at launch, not
+migrated, since its level is unknown and it may come from a thirty-question quiz (Josh,
+2026-11-23).
+
+**Leaderboards.** One per level, with the IDs `conjuguer.level.beginner`, `.elementary`,
+`.intermediate`, and `.advanced` (`QuizLevel.leaderboardID` in `Utils/GameCenter.swift`), which App
+Store Connect makes permanent. `GameCenter.reportScore(_:level:)` posts to the level's board, and
+`showLeaderboard(level:)` opens it, as closing a default quiz's results does. Nothing breaks ties at
+100 (Josh, 2026-11-23). `GameCenterSpy` records both calls for tests and the simulator. The boards,
+their settings, and what remains for release day are in
+[`game_center_setup.md`](game_center_setup.md).
 
 The answer is graded against the question's own verb entry, extra letters included
 (`Verb.extraLetters`), so sortir (obtain) is graded as finir-like (il sortit) and sortir (exit) as
@@ -1120,7 +1131,7 @@ and choir at Beginner. A collection's Quiz button follows the same rule. Random 
 injectable `RandomNumberGenerator`; tests use `SeededRandomNumberGenerator`.
 
 **What a scoped quiz leaves out.** Only the default quiz posts to Game Center, sets the best score,
-donates to `ChangeLevelTip`, and shows the leaderboard when its results close (Josh's rule for
+donates to `ChangeLevelTip`, and shows its level's leaderboard when its results close (Josh's rule for
 Konjugieren, 2026-11-13). Test Me and a collection's quiz start no Live Activity; a My Verbs quiz
 does, being a full round in the Quiz tab.
 
