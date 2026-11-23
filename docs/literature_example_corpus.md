@@ -79,15 +79,19 @@ at all, separately from deliberate synonym-only drops.
 novels (and government tier) moves the expensive work *off* the LLM and into deterministic code,
 so subagents only do the part that needs judgment. Three stages:
 
-1. **Form dump (`ConjuguerTests/Models/CorpusFormsDumpTests.swift`).** A build-time tool riding the
-   test target (so it reuses the app's authoritative `Conjugator` and already-loaded verb data),
-   *not* a behavioral test. It conjugates every usage-ranked verb across all tenses/persons and
-   writes `working/forms.json` — `{ "<surface form>": ["<verb id>", …] }`. This makes irregulars
-   (`veux`/`voulons`/`voudrai` → vouloir) and false substrings (`ancr` in "rancœur") non-issues:
-   the index matches whole generated word-forms, not hand-written stem patterns. Run on demand:
-   `run_tests.sh --only-testing ConjuguerTests/CorpusFormsDumpTests`. (Compound tenses emit only the
+1. **Form dump (`scripts/write_forms_json.sh`).** The script builds `ConjugationMapTool`, the
+   macOS target that also writes the app's bundled conjugation map, so the dumps come from the
+   app's own `Conjugator`. It conjugates every usage-ranked verb across all tenses/persons and
+   writes `working/forms.json` — `{ "<surface form>": ["<verb id>", …] }` — along with
+   `forms_all.json` (every verb) and `conjugations.json` (each verb's table, for the verb pass).
+   This makes irregulars (`veux`/`voulons`/`voudrai` → vouloir) and false substrings (`ancr` in
+   "rancœur") non-issues: the index matches whole generated word-forms, not hand-written stem
+   patterns. Run on demand: `scripts/write_forms_json.sh`. (Compound tenses emit only the
    *participle*, not the auxiliary — else "ai" would map to every avoir-verb and make each "j'ai …"
-   a false hit.)
+   a false hit.) Until 2026-11-22 the dumps came from `CorpusFormsDumpTests`, a disabled test
+   harness; the tool's first outputs were byte-identical to its last, and the harness is gone. The
+   dumps keep the harness's rules (radical du futur kept, defective cells kept, one-letter forms
+   dropped), which differ from the app's map; `ConjugationMapTool/FormsJSON.swift` gives both.
 2. **Index build (`build_corpus_index.py`).** ONE tokenizing pass over each source `.txt` (apostrophe-
    and hyphen-splitting, NFC, lowercased), looking every token up in `forms.json`, writing
    `working/corpus_index.json` = `{ "<verb id>": [ {doc, line, token, text}, … ] }`. Candidates are

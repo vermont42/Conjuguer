@@ -127,7 +127,9 @@ nonisolated enum Tense: Hashable {
       return ""
     }
 
-    return Conjugator.conjugatedString(infinitif: verb, tense: tense, extraLetters: nil) ?? ""
+    // The auxiliary is avoir or être, whose own compound tenses take avoir and never agree,
+    // so the gender is immaterial.
+    return Conjugator.conjugatedString(infinitif: verb, tense: tense, extraLetters: nil, pronounGender: .masculine) ?? ""
   }
 
   var shortDisplayName: String {
@@ -166,25 +168,6 @@ nonisolated enum Tense: Hashable {
     case .participePassé, .participePrésent, .radicalFutur:
       return nil
     }
-  }
-
-  @MainActor var pronounWithGender: String {
-    personNumber?.pronounWithGender ?? L.QuizView.none
-  }
-
-  @MainActor var pronoun: String {
-    personNumber?.pronoun ?? L.QuizView.none
-  }
-
-  @MainActor var gender: String {
-    personNumber?.gender ?? L.QuizView.none
-  }
-
-  @MainActor var pronounDecorator: String {
-    guard let personNumber else {
-      return ""
-    }
-    return " - \(personNumber.pronounWithGender)"
   }
 
   // The single source of truth for the tense-shorthand grammar (e.g. "r1s", "bA", "pp")

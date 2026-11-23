@@ -46,8 +46,11 @@ Conjuguer/
 │   ├── ChansonExample.swift    # Codable model for a Chanson de Roland example (laisse, line, old French, translation)
 │   ├── chanson_examples.json   # Bundled Chanson de Roland examples keyed by infinitif
 │   ├── ConditionnelPresent.swift  # Conditionnel présent endings
+│   ├── ConjugationLabels.swift # App-only display members of the conjugation core (pronouns, preamble, localized names, model verb links, the settings-gendered Conjugator overloads), kept apart so ConjugationMapTool can compile the core
+│   ├── ConjugationMap.swift    # Conjugation → verbs map: its rules, LZFSE text format, build(), and the bundled copy; compiled by the app and ConjugationMapTool
+│   ├── ConjugationMatch.swift  # Verb.conjugations(matching:): the cells, in page order, whose conjugation equals a text
 │   ├── ConjugationResult.swift # Answer scoring: total/partial/no match, plus its sound, score, icon, and color
-│   ├── Conjugator.swift        # The conjugation engine: model lookup, stem alterations, simple and compound tenses
+│   ├── Conjugator.swift        # The conjugation engine: model lookup, stem alterations, simple and compound tenses; takes the pronoun gender explicitly (the app's defaulted overloads are in ConjugationLabels.swift)
 │   ├── ConjugatorError.swift   # Error enum for conjugation failures
 │   ├── ConjuguerTips.swift     # TipKit tips (try the quiz, explore models, change difficulty, play game)
 │   ├── CyclingDeck.swift       # Generic deck that deals elements in order and reshuffles on exhaustion
@@ -175,6 +178,10 @@ Conjuguer/
     ├── VerbBrowseView.swift    # Searchable, sortable list/grid of all verbs (hosts the verb_browse_sort launch anchor)
     └── VerbView.swift          # Verb detail: full conjugation tables, etymology, example sentence
 
+ConjugationMapTool/                 # macOS command-line target; compiles the conjugation core from Conjuguer/ (membership exceptions in project.pbxproj)
+├── FormsJSON.swift             # The corpus pipelines' three dumps (forms [.json], forms_all [.json], conjugations [.json]), ported byte-for-byte from the retired CorpusFormsDumpTests
+└── main.swift                  # Parses the three XML files and writes the map (the app's Generate Conjugation Map build phase) and, on request, the dumps
+
 ConjuguerWidget/
 ├── AnswerQuizIntent.swift      # AppIntent for answering the quiz question inside the widget
 ├── Assets.xcassets/            # Widget-specific asset catalog
@@ -215,8 +222,9 @@ ConjuguerTests/
     ├── AddedVerbsTests.swift           # Conjugations of the 13 verbs added and 6 misspellings renamed on 2026-08-28, plus dépourvoir's defect group 27
     ├── AnalyticsTests.swift            # The bands, the section order, every match kind's analytics value, and the verb page's screen name
     ├── CompoundTenseTests.swift        # Compound tenses, incl. feminine/plural participe agreement
+    ├── ConjugationMapTests.swift       # The bundled map equals a fresh build, finds the verb of 99% of example sentences, its entries (homographs, agreement, defects), and its format
+    ├── ConjugationMatchTests.swift     # conjugations(matching:): single cells, shared spellings, compound agreement, alternates, defective cells, non-matches
     ├── ConjugationResultTests.swift    # Parameterized scoring cases for ConjugationResult
-    ├── CorpusFormsDumpTests.swift      # Harness: drives Conjugator over the verb set to emit corpus form→lemma JSON for the example pipeline
     ├── DeeplinkTests.swift             # conjuguer:// parsing and routing, and the source query item (serialized — mutates Current)
     ├── DefectGroupTests.swift          # Defect-group membership and tense suppression
     ├── DefectivityAuditTests.swift     # Per-family defectivity audit (traire, braire, férir, poindre, …)
@@ -293,7 +301,8 @@ docs/                               # Claude's output that informs: research, re
 scripts/
 ├── prep_screenshot_sim.sh      # Prepares a simulator for a screenshot sweep (status bar, language, region)
 ├── take_screenshots.sh         # Drives ios-build-verify + axe/simctl through the App Store screenshot set; see docs/screenshot_playbook.md
-└── verify_store_media.sh       # Validates exported screenshots/previews against App Store Connect's requirements
+├── verify_store_media.sh       # Validates exported screenshots/previews against App Store Connect's requirements
+└── write_forms_json.sh         # Builds ConjugationMapTool and writes corpus/working's forms [.json], forms_all [.json], and conjugations [.json]
 
 plans/                              # What Claude wrote to get another session (or another tool) to do something; finished ones included
 ├── alligator_gemini.md             # Gemini prompt for the bayou-jazz alligator, the model-eval blog post's hero image

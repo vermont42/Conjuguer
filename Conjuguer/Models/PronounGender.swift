@@ -12,17 +12,6 @@ enum PronounGender: String, CaseIterable {
   case masculine = "Masculine"
   case both = "Both"
 
-  var localizedGender: String {
-    switch self {
-    case .feminine:
-      return L.PronounGender.feminine
-    case .masculine:
-      return L.PronounGender.masculine
-    case .both:
-      return L.PronounGender.both
-    }
-  }
-
   func participePasséEndingForPersonNumber(_ personNumber: PersonNumber) -> String {
     let ending: String
     switch self {

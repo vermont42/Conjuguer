@@ -27,7 +27,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 1 | Done | 2026-11-22 | 1046c7c | A1, A2, A3, A8 | 1 |
 | 2 | Done | 2026-11-22 | 0827ddf | A4, C4 | 2 |
 | 3 | Done | 2026-11-22 | 0827ddf | Signals | 3 |
-| 4 | Not started | | | A5 (the map) | 5 |
+| 4 | Done | 2026-11-22 | | A5 (the map) | 5 |
 | 5 | Not started | | | A5 (the search) | 6 |
 | 6 | Not started | | | B3, B5's tip | 7 |
 | 7 | Not started | | | B4, A9 | 9 |
@@ -587,7 +587,7 @@ Konjugieren's; what differs:
 
 **Ideas:** A5, first half. **Ports:** Konjugieren Phase 5 (`ConjugationMapTool/`,
 `ToolWorld.swift`, `ConjugationMap.swift`, `ConjugationMatch.swift`). **Depends on:** nothing.
-Josh confirmed on 2026-11-22 that reverse lookup is built. **Status:** Not started.
+Josh confirmed on 2026-11-22 that reverse lookup is built. **Status:** Done.
 
 - A macOS command-line target that compiles the Conjugator's sources and writes a compact
   conjugation-to-infinitive map for the app bundle.
@@ -624,6 +624,88 @@ at least 99% of the app's example sentences (`literature_examples.json`), with t
 exactly.
 
 **How it differed:**
+
+Built 2026-11-22. Every "Done when" check passed. The suite ran 366 tests in 34 suites, all passing
+(17 new, in `ConjugationMapTests` and `ConjugationMatchTests`; the three disabled
+`CorpusFormsDumpTests` are gone). Nothing visible changed, so there was no simulator check. The
+design is Konjugieren's; what differs:
+
+- **The risks were small, and there is no `ToolWorld`.** The core compiles for macOS under the
+  app's default MainActor isolation once its display members move, unchanged, to the app-only
+  `ConjugationLabels.swift`: `PersonNumber`'s `pronoun`, `pronounWithGender`, `gender`, and
+  `preamble`; `Tense`'s four pronoun accessors; `PronounGender.localizedGender`; and
+  `VerbModel.description` and `verbsWithDeepLinks`. The Conjugator's own `conjugate` and
+  `conjugatedString` now require the pronoun gender, and the app's overloads in the same file
+  default it to the setting, so no call site changed and the tool cannot forget to choose one.
+  Two calls inside the core, for the auxiliary and the nous stem, pass `.masculine`, which cannot
+  matter there. After the move nothing in the core reaches `Current`, so the tool needs no
+  stand-in World; `main.swift`'s header says what to do when a core file starts reaching the app.
+  The parsers needed nothing, since `init(xmlString:)` already existed.
+- **The target was added by editing `project.pbxproj`**, as in Konjugieren, with the same build
+  settings. It borrows 24 app files through a membership exception on the `Conjuguer` folder
+  (`EndingDisplay.swift` was the one surprise). CLAUDE.md's Project Layout now says so.
+  An unsigned `xcodebuild archive` produced an archive holding only the app, with the map inside
+  it, byte-identical to the Release tool's output. **Not tried:** Xcode's own interface, and an Apple Silicon Mac.
+- **The build phase** ("Generate Conjugation Map", after Resources) declares the three XML files
+  and the tool's executable. Measured by the map's timestamp in the built app: an unchanged
+  rebuild skipped it (three times); touching `verbs.xml` ran it; a code edit to
+  `ConjugationMap.swift` relinked the tool and ran it; deleting the tool, which relinked to
+  identical bytes, ran it. **The tool's own timestamp misleads too.** Each switch between a test
+  run and a build re-signs the tool, because its entitlements file differs between the two
+  actions, and the map phase does not rerun for that, which is right, since a signature cannot
+  change the map. Twice this looked like a missed regeneration until the build log showed only
+  `CodeSign … replacing existing signature`.
+- **The size, measured first:** 242,923 conjugations from 6,330 entries, 5.0 MB of text, 615,637
+  bytes compressed, against Konjugieren's 50,056 and 173 KB. Beside the 8.5 MB of etymologies and
+  18 MB of sounds it is small, so nothing was cut. Loading it took 1.2 seconds in a Debug build on
+  this Intel Mac's simulator, so **Phase 5 must touch `ConjugationMap.bundled` from a background
+  task** before the first search.
+- **What goes in.** The infinitive, every simple tense and both participles, each `/` alternate
+  on its own, and the participe passé's agreed forms for every verb, avoir verbs included, since
+  "la lettre qu'il a écrite" agrees too. `agreedForms(ofParticiple:)` handles the four kinds that
+  appending e, s, es gets wrong, found by listing every participle's ending: dû, crû, mû, and redû
+  (due, dus), the 48 in -s (prise, pris), and absous and dissous (dissoute). Left out: the radical
+  du futur, every cell a defect group strikes, and the compound tenses. Values are `Verb.verbs`
+  keys, so "sortir exit" and "sortir obtain" stay apart (sors finds only the first).
+- **The map is sorted by UTF-8 bytes, not by `sorted()`.** The first two builds of the same data
+  wrote different bytes: `sorted()` had left 155 and 161 keys out of order (anathématiserai after
+  anathématiserait), apparently because `precomposedStringWithCanonicalMapping` returns bridged
+  strings whose comparison is not consistent. The test that compares the bundled map with a fresh
+  build compares dictionaries, so it could not see this; the determinism check was a `cmp` of two
+  tool runs.
+- **The tool writes all three of the harness's dumps**, not only `forms.json`:
+  `--forms-json`, `--forms-all-json`, and `--conjugations-json`, through
+  `scripts/write_forms_json.sh`. Konjugieren derived its `forms.json` from the map; here the dumps
+  keep the harness's own rules (the radical du futur and defective cells kept, one-letter forms
+  dropped, only compound participles agreed), because the corpus index was tuned on them, so
+  `FormsJSON.swift` ports the harness's code rather than reading the map. All three were
+  byte-identical to a fresh harness run on the same data, and the harness is deleted. The copies
+  in `corpus/working` had been stale since July and September (4,852 of `forms.json`'s keys
+  differed from a fresh run), and the harness run left them current.
+- **The 99% test** finds 6,320 of 6,328 example sentences (99.87%). A sentence counts when one of
+  its words maps to its verb; a word is a run of letters and hyphens, lowercased, plus its
+  hyphen-separated parts, so arc-boutait stays whole and souviens-toi yields souviens; an
+  apostrophe ends a word. Of the eight misses, two are cells the verb's defect group strikes
+  (Flaubert's "Une blessure béait", and "Elle les douait", for béer and douer, whose groups allow
+  only the participles and a présent 3s), and six are spellings the Conjugator does not produce
+  (étiquètes and markete, the 1990 spellings; emmaillottent, presurer, redîmé, and
+  s'entrenuisaient).
+- **`Verb.conjugations(matching:)`** returns `ConjugationMatch` values of a `Tense` and an
+  `isAgreement` flag, in page order. It matches exactly, as the plan asks: case and spacing
+  ignored, accents not, so Phase 5 folds before calling. Compound cells match agreed either way,
+  the impératif of a reflexive verb matches both "souviens" and "souviens-toi", the participe
+  passé matches agreed with `isAgreement` set, and defective cells and the infinitive never
+  match. The radical du futur is a cell and matches. About 10 ms per verb in a Debug build.
+- **For Phase 5.** The map's keys are not folded: build a folded index at load time for etait and
+  manoeuvre. Short keys are many: a, ai, as, es, eu, vu, su, lu, bu, and dû are all present, and
+  tu is taire's. The infinitive is in the map but is not a cell, and an agreed participle is a
+  cell only with `isAgreement`, so name those in the row's own words.
+- **Found for Josh, not fixed.** The béer and douer defect groups contradict the app's own
+  example sentences, which use their imparfait. And the Conjugator agrees a participle in -s by
+  appending s, so with the pronoun gender set to masculine or both, the verb page's plural
+  compound cells read "nous nous sommes mépriss" for se méprendre, and likewise for s'éprendre
+  and s'enquérir (found in `forms_all.json`). The map does not inherit either: it
+  agrees participles itself.
 
 ## Phase 5: Reverse Lookup in Search
 

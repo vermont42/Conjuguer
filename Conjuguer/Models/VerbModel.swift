@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import os
 
 struct VerbModel: Identifiable, Hashable {
   static var models: [String: VerbModel] = [:]
@@ -49,33 +48,6 @@ struct VerbModel: Identifiable, Hashable {
     self.position = position
     self.extraLetters = extraLetters
     self.defectGroupId = defectGroupId
-  }
-
-  var description: String {
-    switch id {
-    case "1-1":
-      return "\(L.ModelView.regular) -er"
-    case "2-1":
-      return "\(L.ModelView.regular) -ir"
-    case "5-1A":
-      return "\(L.ModelView.regular) -re"
-    default:
-      return "\(irregularity)% \(L.ModelView.irregular)"
-    }
-  }
-
-  func verbsWithDeepLinks() -> AttributedString {
-    do {
-      return try AttributedString(markdown: verbs.map {
-        let encodedVerb = $0.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? ""
-        return "[\($0)](\(URL.conjuguerUrlPrefix + URL.verbHost)/\(encodedVerb))"
-      }
-        .joined(separator: ", ")
-      )
-    } catch {
-      Log.verbModel.error("Could not build deep-linked verb list for model \(id, privacy: .public): \(error.localizedDescription, privacy: .public)")
-      return AttributedString("")
-    }
   }
 
   static func model(id: String) -> VerbModel {

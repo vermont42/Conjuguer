@@ -15,6 +15,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C1A1B2C3D4E5F60718293A0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 036DB782259FD6500013C3B7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C1A1B2C3D4E5F60718293A01;
+			remoteInfo = ConjugationMapTool;
+		};
 		036DB79C259FD6510013C3B7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 036DB782259FD6500013C3B7 /* Project object */;
@@ -54,9 +61,40 @@
 		03A0DE4D2FE4AB0B008C4737 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		03A0DE4F2FE4AB0B008C4737 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		03C196282FE4C33900353E69 /* ConjuguerWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ConjuguerWidgetExtension.entitlements; sourceTree = "<group>"; };
+		C1A1B2C3D4E5F60718293A02 /* ConjugationMapTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ConjugationMapTool; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C1A1B2C3D4E5F60718293A04 /* Exceptions for "Conjuguer" folder in "ConjugationMapTool" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Models/Auxiliary.swift,
+				Models/ConditionnelPresent.swift,
+				Models/ConjugationMap.swift,
+				Models/Conjugator.swift,
+				Models/ConjugatorError.swift,
+				Models/DefectGroup.swift,
+				Models/DefectGroupParser.swift,
+				Models/EndingDisplay.swift,
+				Models/FuturSimple.swift,
+				Models/Imparfait.swift,
+				Models/IndicatifPresentGroup.swift,
+				Models/PasseSimpleGroup.swift,
+				Models/PersonNumber.swift,
+				Models/PronounGender.swift,
+				Models/StemAlteration.swift,
+				Models/SubjonctifPresentGroup.swift,
+				Models/Tense.swift,
+				Models/Verb.swift,
+				Models/VerbModel.swift,
+				Models/VerbModelParser.swift,
+				Models/VerbParser.swift,
+				Models/XMLDataParser.swift,
+				Utils/Log.swift,
+				Utils/Util.swift,
+			);
+			target = C1A1B2C3D4E5F60718293A01 /* ConjugationMapTool */;
+		};
 		0341A7452FCC691800B61C2F /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -83,7 +121,8 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		0341A6D42FCC691800B61C2F /* Conjuguer */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (0341A7452FCC691800B61C2F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Conjuguer; sourceTree = "<group>"; };
+		C1A1B2C3D4E5F60718293A03 /* ConjugationMapTool */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ConjugationMapTool; sourceTree = "<group>"; };
+		0341A6D42FCC691800B61C2F /* Conjuguer */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (0341A7452FCC691800B61C2F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, C1A1B2C3D4E5F60718293A04 /* Exceptions for "Conjuguer" folder in "ConjugationMapTool" target */, ); explicitFileTypes = {}; explicitFolders = (); path = Conjuguer; sourceTree = "<group>"; };
 		0341A74B2FCC692000B61C2F /* ConjuguerTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (0341A7502FCC692000B61C2F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ConjuguerTests; sourceTree = "<group>"; };
 		03A0DE512FE4AB0B008C4737 /* ConjuguerWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (03A0DE642FE4AB0D008C4737 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ConjuguerWidget; sourceTree = "<group>"; };
 		03C1962A2FE4C54D00353E69 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
@@ -115,6 +154,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C1A1B2C3D4E5F60718293A06 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -132,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				03C1962A2FE4C54D00353E69 /* Shared */,
+				C1A1B2C3D4E5F60718293A03 /* ConjugationMapTool */,
 				03C196282FE4C33900353E69 /* ConjuguerWidgetExtension.entitlements */,
 				0341A6D42FCC691800B61C2F /* Conjuguer */,
 				036307D02FF41CA400C9264F /* Conjuguer/Secrets.xcconfig */,
@@ -146,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				036DB78A259FD6500013C3B7 /* Conjuguer.app */,
+				C1A1B2C3D4E5F60718293A02 /* ConjugationMapTool */,
 				036DB79B259FD6510013C3B7 /* ConjuguerTests.xctest */,
 				03A0DE4C2FE4AB0B008C4737 /* ConjuguerWidgetExtension.appex */,
 			);
@@ -155,6 +203,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C1A1B2C3D4E5F60718293A01 /* ConjugationMapTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C1A1B2C3D4E5F60718293A07 /* Build configuration list for PBXNativeTarget "ConjugationMapTool" */;
+			buildPhases = (
+				C1A1B2C3D4E5F60718293A05 /* Sources */,
+				C1A1B2C3D4E5F60718293A06 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C1A1B2C3D4E5F60718293A03 /* ConjugationMapTool */,
+			);
+			name = ConjugationMapTool;
+			packageProductDependencies = (
+			);
+			productName = ConjugationMapTool;
+			productReference = C1A1B2C3D4E5F60718293A02 /* ConjugationMapTool */;
+			productType = "com.apple.product-type.tool";
+		};
 		036DB789259FD6500013C3B7 /* Conjuguer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 036DB7AF259FD6510013C3B7 /* Build configuration list for PBXNativeTarget "Conjuguer" */;
@@ -162,12 +231,14 @@
 				036DB786259FD6500013C3B7 /* Sources */,
 				036DB787259FD6500013C3B7 /* Frameworks */,
 				036DB788259FD6500013C3B7 /* Resources */,
+				C1A1B2C3D4E5F60718293A0C /* Generate Conjugation Map */,
 				03A0DE602FE4AB0D008C4737 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				03A0DE5E2FE4AB0D008C4737 /* PBXTargetDependency */,
+				C1A1B2C3D4E5F60718293A0B /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				0341A6D42FCC691800B61C2F /* Conjuguer */,
@@ -244,6 +315,9 @@
 					03A0DE4B2FE4AB0B008C4737 = {
 						CreatedOnToolsVersion = 26.3;
 					};
+					C1A1B2C3D4E5F60718293A01 = {
+						CreatedOnToolsVersion = 26.3;
+					};
 				};
 			};
 			buildConfigurationList = 036DB785259FD6500013C3B7 /* Build configuration list for PBXProject "Conjuguer" */;
@@ -266,6 +340,7 @@
 				036DB789259FD6500013C3B7 /* Conjuguer */,
 				036DB79A259FD6510013C3B7 /* ConjuguerTests */,
 				03A0DE4B2FE4AB0B008C4737 /* ConjuguerWidgetExtension */,
+				C1A1B2C3D4E5F60718293A01 /* ConjugationMapTool */,
 			);
 		};
 /* End PBXProject section */
@@ -294,6 +369,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C1A1B2C3D4E5F60718293A0C /* Generate Conjugation Map */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Conjuguer/Models/verbs.xml",
+				"$(SRCROOT)/Conjuguer/Models/verbModels.xml",
+				"$(SRCROOT)/Conjuguer/Models/defectGroups.xml",
+				"$(BUILD_DIR)/$(CONFIGURATION)/ConjugationMapTool",
+			);
+			name = "Generate Conjugation Map";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ConjugationMap.lzfse",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Writes the conjugation map into the app bundle. Xcode runs this phase only when an input\n# is newer than the output; the tool is an input, so a change to any Conjugator source,\n# which relinks the tool, regenerates the map too. See ConjugationMapTool/main.swift.\n\"$SCRIPT_INPUT_FILE_3\" --verbs \"$SCRIPT_INPUT_FILE_0\" --verb-models \"$SCRIPT_INPUT_FILE_1\" --defect-groups \"$SCRIPT_INPUT_FILE_2\" --map \"$SCRIPT_OUTPUT_FILE_0\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		036DB786259FD6500013C3B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -316,6 +413,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C1A1B2C3D4E5F60718293A05 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -328,6 +432,11 @@
 			isa = PBXTargetDependency;
 			target = 03A0DE4B2FE4AB0B008C4737 /* ConjuguerWidgetExtension */;
 			targetProxy = 03A0DE5D2FE4AB0D008C4737 /* PBXContainerItemProxy */;
+		};
+		C1A1B2C3D4E5F60718293A0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C1A1B2C3D4E5F60718293A01 /* ConjugationMapTool */;
+			targetProxy = C1A1B2C3D4E5F60718293A0A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -635,6 +744,44 @@
 			};
 			name = Release;
 		};
+		C1A1B2C3D4E5F60718293A08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		C1A1B2C3D4E5F60718293A09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -670,6 +817,15 @@
 			buildConfigurations = (
 				03A0DE612FE4AB0D008C4737 /* Debug */,
 				03A0DE622FE4AB0D008C4737 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C1A1B2C3D4E5F60718293A07 /* Build configuration list for PBXNativeTarget "ConjugationMapTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C1A1B2C3D4E5F60718293A08 /* Debug */,
+				C1A1B2C3D4E5F60718293A09 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

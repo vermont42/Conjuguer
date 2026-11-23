@@ -8,7 +8,7 @@
 import Foundation
 
 enum Conjugator {
-  static func conjugatedString(infinitif: String, tense: Tense, extraLetters: String?, pronounGender: PronounGender? = nil) -> String? {
+  static func conjugatedString(infinitif: String, tense: Tense, extraLetters: String?, pronounGender: PronounGender) -> String? {
     switch conjugate(infinitif: infinitif, tense: tense, extraLetters: extraLetters, pronounGender: pronounGender) {
     case .success(let value):
       return value
@@ -17,7 +17,7 @@ enum Conjugator {
     }
   }
 
-  static func conjugate(infinitif: String, tense: Tense, extraLetters: String?, pronounGender: PronounGender? = nil) -> Result<String, ConjugatorError> {
+  static func conjugate(infinitif: String, tense: Tense, extraLetters: String?, pronounGender: PronounGender) -> Result<String, ConjugatorError> {
     guard infinitif.count >= Verb.minVerbLength else {
       return .failure(.verbTooShort)
     }
@@ -176,7 +176,7 @@ enum Conjugator {
       }
       let conjugationWithoutAgreement = tense.conjugatedAuxiliary(personNumber: personNumber, auxiliary: verb.auxiliary) + " " + stems[0] + model.participeEndingRecursive
       if verb.isReflexive || verb.auxiliary == .être {
-        let agreementEnding = (pronounGender ?? Current.settings.pronounGender).participePasséEndingForPersonNumber(personNumber)
+        let agreementEnding = pronounGender.participePasséEndingForPersonNumber(personNumber)
         return .success(conjugationWithoutAgreement + agreementEnding)
       } else {
         return .success(conjugationWithoutAgreement)
@@ -229,7 +229,7 @@ enum Conjugator {
   }
 
   static func nousPrésentStem(infinitif: String, extraLetters: String? = nil) -> String {
-    guard let value = Conjugator.conjugatedString(infinitif: infinitif, tense: .indicatifPrésent(.firstPlural), extraLetters: extraLetters) else {
+    guard let value = Conjugator.conjugatedString(infinitif: infinitif, tense: .indicatifPrésent(.firstPlural), extraLetters: extraLetters, pronounGender: .masculine) else {
       // Unreachable with today's data, but a future data typo shouldn't crash a user
       // mid-conjugation. Assert for the debug signal and degrade to an empty stem.
       assertionFailure("Could not conjugate nous indicatifPrésent for \(infinitif).")

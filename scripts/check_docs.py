@@ -49,7 +49,7 @@ INDEX = "docs/project_structure.md"
 
 # The synchronized target folders plus Shared/, which compiles into both targets. These are the
 # trees project_structure.md promises to describe.
-SOURCE_ROOTS = ["Conjuguer", "ConjuguerTests", "ConjuguerWidget", "Shared"]
+SOURCE_ROOTS = ["Conjuguer", "ConjuguerTests", "ConjuguerWidget", "Shared", "ConjugationMapTool"]
 
 # Bundled data files live alongside the code that parses them and are indexed the same way, so
 # they are held to the same completeness standard. Scoped to Models/ because that is where the

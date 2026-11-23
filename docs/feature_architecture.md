@@ -96,6 +96,74 @@ deeplink instead sets `Current.verb`, which the Verbs tab presents as a sheet (s
 [Deeplinks](#deeplinks)). A model page presents a verb as a sheet of its own (`ModelView`'s
 `detailSheet`), and so does the Info tab for a verb link in an article.
 
+## Conjugation Map
+
+Since Phase 4 of the browse plan (2026-11-22), the app bundle carries every one-word conjugation
+of every verb, mapped to the verbs it belongs to, so that search can start from a conjugation:
+vais finds aller, and suis finds être and suivre. Phase 5 builds the search on it. Nothing in the
+interface reads it yet.
+
+### Architecture
+
+| File | Purpose |
+|------|---------|
+| `ConjugationMapTool/main.swift` | A macOS command-line target. It parses the three XML files and writes the map, and, when asked, the corpus pipelines' dumps |
+| `ConjugationMapTool/FormsJSON.swift` | The three dumps in `corpus/working` (`forms.json`, `forms_all.json`, `conjugations.json`), ported byte for byte from the retired `CorpusFormsDumpTests` harness. `scripts/write_forms_json.sh` runs them |
+| `Conjuguer/Models/ConjugationMap.swift` | The map's rules, its text format, `build()`, and `ConjugationMap.bundled`. Compiled by the app and by the tool |
+| `Conjuguer/Models/ConjugationMatch.swift` | `Verb.conjugations(matching:)`, app only |
+| `Conjuguer/Models/ConjugationLabels.swift` | The core's display members, which reach `Current.settings` or `L` and so stay out of the tool |
+
+**The tool compiles the app's own conjugation core**: 24 files of `Conjuguer/Models` and
+`Conjuguer/Utils`, listed in a membership exception on the `Conjuguer` folder in
+`project.pbxproj`. The core takes the pronoun gender explicitly; the app's overloads in
+`ConjugationLabels.swift` default it to the setting. A core file that starts reaching `Current`,
+`L`, or SwiftUI breaks the tool's build, and the member belongs in `ConjugationLabels.swift`.
+
+**The build phase.** The app target depends on the tool, so an iOS build builds it for the Mac
+first (host architecture only, no dSYM, `SKIP_INSTALL`). The app's "Generate Conjugation Map"
+Run Script phase, after Resources, declares `verbs.xml`, `verbModels.xml`, `defectGroups.xml`,
+and the tool's executable as inputs and writes `ConjugationMap.lzfse` straight into the bundle, so
+nothing generated is committed. The executable stands for the Conjugator's sources, because Xcode
+relinks it exactly when one of them changes. Measured on 2026-11-22: an unchanged rebuild skipped
+the phase; touching `verbs.xml` ran it; a code edit to `ConjugationMap.swift` relinked the tool
+and ran it; deleting the tool, so that it relinked to identical bytes, ran it too. Judge this by
+the map's timestamp, not by the build log, and not by the tool's timestamp either: each switch
+between a test run and a build re-signs the tool (its entitlements differ between the two), which
+leaves the map alone, rightly, since a new signature cannot change the map.
+
+### The map
+
+- **What a verb contributes**: its infinitive; every simple tense and both participles, each
+  `/`-separated alternate on its own (paie, paye); and the participe passé's agreed forms for
+  every verb, since a text agrees an avoir verb's participle with a preceding object
+  (`ConjugationMap.agreedForms(ofParticiple:)`: allée, allés, allées; dû gives due, dus, dues;
+  pris gives prise and pris; dissous gives dissoute). Left out: the radical du futur, which no
+  text writes; every cell the verb's defect group lacks; and the compound tenses, whose words the
+  map already holds. Entries for avoir and être would otherwise attach to every verb.
+- **Keys** are lowercase and NFC. **Values** are keys of `Verb.verbs`, so a doubled infinitive's
+  entries stay apart: sors is "sortir exit" only, and sortir is both. Homographs keep every verb
+  (suis, vis, tu, été).
+- **The format** is one line per conjugation, `suis⇥suivre⇥être`, sorted by UTF-8 bytes,
+  compressed with LZFSE: 242,923 conjugations, 5.0 MB of text, 615,637 bytes in the bundle, built in
+  about 3.5 seconds by the Release tool. (Konjugieren's holds 50,056 conjugations in 173 KB.)
+  `sorted()` is not used, because it left 155 keys out of order, and two builds of the same
+  data wrote different bytes.
+- **Loading** `ConjugationMap.bundled` took 1.2 seconds in a Debug build on this Intel Mac's
+  simulator, so Phase 5 should touch it from a background task before the first search. It is a
+  `nonisolated static let`.
+
+### Matching cells
+
+`Verb.conjugations(matching:)` returns every cell whose conjugation equals a text, in the page's
+order (the three personless cells, then `VerbConjugations.simpleSpecs` and `compoundSpecs`), each
+a `ConjugationMatch` of a `Tense` and an `isAgreement` flag. Case and spacing are ignored, and
+accents are not: "etait" matches nothing, so search must fold before it calls. A compound cell
+matches with its participle agreed either way (est allé, est allée). An impératif matches as the
+quiz asks for it (souviens) and as a reflexive verb's page shows it (souviens-toi). The participe
+passé also matches agreed, with `isAgreement` set. Defective cells and the infinitive never
+match. The radical du futur is a cell and does match (ir for aller). It needs no map and costs
+about 10 ms per verb in a Debug build, so compute it for a row only when the row is shown.
+
 ## Analytics
 
 Every signal is named in `AnalyticsName`, every parameter key in `ParameterKey`, and every

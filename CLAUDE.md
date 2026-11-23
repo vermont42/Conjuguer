@@ -265,6 +265,15 @@ type. Practical consequences:
   `CODE_SIGN_ENTITLEMENTS` and is not bundled. Don't add new files under a synced folder that
   should *not* ship — they'd be picked up automatically; exclude them with a membership
   exception or keep them outside the folder.
+- **One target borrows app files: `ConjugationMapTool`**, a macOS command-line tool whose own
+  folder is synced, compiles the conjugation core (24 files of `Conjuguer/Models` and
+  `Conjuguer/Utils`) through a membership exception on the `Conjuguer` folder. A file the core
+  newly needs must be added to that list in `project.pbxproj`, and a core file must not reach
+  `Current`, `L`, or SwiftUI: such members go in `Conjuguer/Models/ConjugationLabels.swift`. The
+  app depends on the tool, whose "Generate Conjugation Map" phase writes `ConjugationMap.lzfse`
+  into the bundle. `scripts/write_forms_json.sh` runs it to write the corpus pipelines'
+  `forms.json`, `forms_all.json`, and `conjugations.json`. See
+  [`docs/feature_architecture.md`](docs/feature_architecture.md) § Conjugation Map.
 
 ### Data Loading
 

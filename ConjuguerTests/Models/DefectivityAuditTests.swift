@@ -10,8 +10,9 @@ import Testing
 
 // Guards the TCAF-audit defectivity fixes: the -traire family must lose its (non-existent in
 // modern French) passé simple and subjonctif imparfait, and a few archaic verbs gained/changed
-// defect groups. Asserts against the view-facing `VerbConjugations.isDefective` path (the dump
-// in CorpusFormsDumpTests deliberately ignores defectivity, so it can't validate this).
+// defect groups. Asserts against the view-facing `VerbConjugations.isDefective` path (the form
+// dumps in ConjugationMapTool/FormsJSON.swift deliberately ignore defectivity, so they can't
+// validate this).
 @MainActor
 struct DefectivityAuditTests {
   private func isDefective(_ infinitif: String, _ tense: Tense) -> Bool {

@@ -4798,3 +4798,51 @@ toggle that is off by default and sits just above the etymology card, so by the 
 composé could show, the etymology already has, and a visit almost never ends at "compound". Phase 6
 turns the toggle on, and should look again. Like everything since Phase 0, none of this reaches a
 learner before the 2027 release; the policy lines wait in `docs/privacy_policy_pending.md`.
+
+## The Conjugation Map as a Build Product (2026-11-22)
+
+Phase 4 of the browse plan gave Conjuguer what Konjugieren got on 2026-11-12: a list, built when
+the app is built, of every conjugation of every verb and the verbs it belongs to, so that Phase 5's
+search can start from "vais" and land on aller. It is written by `ConjugationMapTool`, a small
+macOS command-line target that compiles the app's own Conjugator, so the app's tables and the
+map cannot disagree.
+
+Getting the Conjugator to compile for the Mac was a matter of moving code, not rewriting it. The core reached the rest of the app in only two ways: display code (pronouns,
+localized names, the model page's verb links) and one read of the pronoun-gender setting inside
+the Conjugator. The display code moved, unchanged, into an app-only `ConjugationLabels.swift`. The
+setting became a parameter the core requires, with the app's old defaulted signature kept as an
+overload beside the labels, so no call site changed and the tool has to choose a gender. Unlike
+Konjugieren, the tool needed no stand-in for `Current` at all.
+
+French made the map big. Konjugieren's has 50,056 conjugations in 173 KB; Conjuguer's has
+242,923 in about 600 KB, because there are more verbs and more simple tenses, and because every
+participe passé carries its agreed forms. Those are for avoir verbs too ("la lettre qu'il a
+écrite"), and appending e, s, and es turned out to be wrong for exactly three kinds of participle,
+found by listing every participle's last letter: the circumflexed ones (dû gives due and dus), the
+48 ending in s (pris stays pris), and the two in -sous (dissous gives dissoute). Beside 8.5 MB of
+etymologies and 18 MB of sounds, 600 KB did not need cutting. It does take over a second to load
+in the simulator, which Phase 5 will have to hide.
+
+Two surprises came from the build itself. The first two runs of the tool over the same data wrote
+different bytes. `sorted()` had left about 155 keys out of order (anathématiserai after
+anathématiserait), apparently because Foundation's NFC normalization hands back bridged strings
+whose comparisons do not agree with each other. Sorting by UTF-8 bytes fixed it, and a `cmp` of
+two runs now proves it. The second was a false alarm worth recording: twice the tool looked newer
+than the map it should have regenerated. The build log showed why. Switching between a test run
+and a build re-signs the tool, since its entitlements differ between the two, and Xcode, rightly,
+does not regenerate the map for a new signature. Konjugieren had already learned to trust file
+timestamps over build logs. Here even the tool's own timestamp misleads; only the map's counts.
+
+The tool also retired a harness. The corpus pipelines' three dumps used to come from
+`CorpusFormsDumpTests`, a disabled test whose trait had to be removed by hand to run it. The tool
+now writes all three, through `scripts/write_forms_json.sh`, and each was byte-identical to a
+fresh harness run. The dumps deliberately keep the harness's rules rather than the map's, since
+the corpus index was tuned on them. Regenerating them showed that the copies in `corpus/working`
+had gone stale since the summer, which is the kind of drift a script that fails loudly should
+prevent.
+
+The map finds the verb of 6,320 of the app's 6,328 example sentences. The eight misses are a
+small audit of their own: six are spellings the Conjugator does not produce (the 1990 "étiquètes",
+an old "emmaillottent"), and two are sentences whose verb's defect group says the form they use
+does not exist: Flaubert's "Une blessure béait", for one. Those, and a Conjugator bug the dumps
+exposed ("nous nous sommes mépriss" for se méprendre), went to Josh rather than into this phase.

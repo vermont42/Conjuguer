@@ -2,7 +2,7 @@
 """Stage 1.1 — diff the app's conjugations against English Wiktionary's tables.
 
 Reads `corpus/working/conjugations.json` (the engine's own output, dumped by
-`CorpusFormsDumpTests.testDumpAllConjugations`) and `wiktionary_en_verbs.json`, maps
+`scripts/write_forms_json.sh`) and `wiktionary_en_verbs.json`, maps
 Wiktionary's tag sets onto the app's tense keys, and writes one JSONL line per disagreement to
 `corpus/working/verb_pass/audit_conjugations.jsonl`.
 

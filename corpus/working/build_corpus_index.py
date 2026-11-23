@@ -6,8 +6,9 @@ candidate sentences for the ~981 usage-ranked verbs so that LLM subagents only d
 *selection + translation* on a handful of pre-found lines, instead of reading whole documents.
 
 Inputs:
-  - corpus/working/forms.json  : { "<surface form>": ["<verb id>", ...] }, produced by the
-    `CorpusFormsDumpTests` Swift tool driving the app's own Conjugator. Exact whole-token
+  - corpus/working/forms.json  : { "<surface form>": ["<verb id>", ...] }, produced by
+    `scripts/write_forms_json.sh`, which runs ConjugationMapTool, a macOS build of the app's
+    own Conjugator. Exact whole-token
     matching against this map handles irregular stems and avoids substring false positives.
   - corpus/originals/literature/*.txt and .../government/*.txt : the source texts.
 
