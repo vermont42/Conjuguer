@@ -5091,3 +5091,40 @@ Josh cannot install a release build until 2027. A smaller lesson from testing: t
 prompt is short, and a tap aimed at its Done button by guesswork landed on the Random Verb tile
 beneath it, which ran a different shortcut and briefly looked like a bug in this one. The system
 log named the intent that ran, and that settled it.
+
+## Recents and My Verbs (2026-11-22)
+
+Phase 10 of the browse plan gave Conjuguer a memory of the learner's own verbs. Every verb page
+that opens, by any route, is now recorded on the device with its first and last dates and a count,
+and a star in the page's navigation bar marks a verb as one to keep. Two places read the record.
+When the search field is focused and still empty, the list shows the last twenty verbs opened
+instead of all 6,326. And the verb list's picker has a third segment, My Verbs, beside Frequency
+and Alphabetical, listing the starred verbs and then the recent ones, with Clear for the recents
+and a swipe to delete any of them.
+
+This was a port of Konjugieren's Phase 12, and the port's main job was to carry over what
+Konjugieren learned the hard way. Konjugieren shipped its recents and then found, on the iPad,
+that tapping one did nothing. iPadOS ends an empty search's focus at the moment a finger touches
+down elsewhere, so the recents vanished under the finger, and the push that the tap made arrived
+while the search was still animating away, which UIKit silently drops. Conjuguer took both fixes
+before writing a line of its own: the recents follow a flag that lets go of the focus a moment
+later, and a push from a recent waits until no view controller is mid-transition. In the iPad
+simulator, a real tap on a recent verb opened its page the first time. The same fix also covers
+the accent key row from Phase 2, which had followed the focus directly and so probably lost an
+accent tapped into an empty field on the iPad. That case was never tried before; it works now.
+
+One French detail shaped the record. Konjugieren keys verbs by infinitive, but four French
+infinitives (haïr, ouïr, saillir, sortir) have two entries each, with different conjugations and
+different pages. The record keys by the same dictionary key the verb list uses, so the Québécois
+haïr and the French one keep their own opens and stars, and the simulator showed "haïr (Québec)"
+under Recent on its own.
+
+The record lives in the App Group's shared defaults, because Phase 12's verb-of-the-day widget
+will read it, and it carries a rule written in Konjugieren after it nearly lost data: every field
+added later must be optional, since Swift's synthesized decoding would otherwise reject every
+record an older build wrote, and the learner's stars would vanish without a sound. A test pins it.
+
+The privacy policy needed a small but real change, staged for the release. It said the app "does
+not record the verbs you look up", which a list of recent verbs on the device would make untrue.
+The staged text says the app does not *send* them, and a new paragraph says the list stays on the
+device.

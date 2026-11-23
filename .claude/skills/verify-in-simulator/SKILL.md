@@ -36,7 +36,7 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 
 | Identifier | Element | Notes |
 |---|---|---|
-| `verb_browse_sort` | Sort `Picker` in `VerbBrowseView` | Launch anchor (`FIRST_SCREEN_ID`). |
+| `verb_browse_sort` | Sort `Picker` in `VerbBrowseView` | Launch anchor (`FIRST_SCREEN_ID`). Three segments since browse Phase 10: Frequency, Alphabetical, My Verbs. |
 | `input_quiz_conjugation` | Answer `TextField` in `QuizView` | Carries `.accessibilityValue(input)`, so `read_value`/`set_value`/`type_text --id` work with read-back. |
 | `picker_settings_quizDifficulty` | Quiz-difficulty segmented `Picker` in `SettingsView` | 2 segments (Regular, Ridiculous). |
 | `picker_settings_pronounGender` | Pronoun-gender segmented `Picker` in `SettingsView` | 3 segments (Feminine, Masculine, Both). |
@@ -56,6 +56,12 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `related_list_sort` | Frequency/Alphabetical `Picker` in `RelatedVerbListView` | 2 segments. |
 | `related_list_<infinitif>` | Row `Button` in `RelatedVerbListView` | e.g. `related_list_remettre`. |
 | `verb_share_button` | Share button in `VerbView`'s navigation bar | Opens the share sheet. Tap the sheet's Copy and read the text with `xcrun simctl pbpaste <udid>`. On the iPad it is a popover over the button. |
+| `verb_star_button` | Star button in `VerbView`'s navigation bar (Phase 10) | AXe cannot see navigation-bar buttons on iOS 26; tap it by position, between Done (in a sheet) and Share, and confirm by screenshot (a filled star). |
+| `recent_verbs_heading` | "Recent" heading over the recents in the empty focused search field | Present only when something has been opened. |
+| `my_verbs_list` | The My Verbs `List` (third segment of `verb_browse_sort`) | Tap the picker's third segment by frame (`x + width*5/6`). Rows keep `verb_row_<infinitif>`. Swipe a row left with `axe swipe --duration 0.4` at its `describe_ui` frame to show Delete. |
+| `my_verbs_starred_heading`, `my_verbs_recent_heading` | Section headings in My Verbs | |
+| `my_verbs_clear_recent` | Clear button in My Verbs' Recent heading | Forgets every open, keeps the stars. |
+| `my_verbs_empty` | My Verbs' empty state | |
 | `model_verb_order` | Alphabetical/Frequency `Picker` above a model page's verbs | 2 segments; the verbs stay one `Text` of links, so tap a verb at its coordinates. |
 
 An identifier on a container that is not itself one element (a card) is inherited by every element

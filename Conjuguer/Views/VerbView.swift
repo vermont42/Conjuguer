@@ -126,6 +126,10 @@ struct VerbView: View {
     .screenBackground()
     .toolbar {
       ToolbarItem(placement: .topBarTrailing) {
+        starButton
+      }
+
+      ToolbarItem(placement: .topBarTrailing) {
         Button {
           world.analytics.signal(name: .tapShareVerb)
           ShareSheet.present(
@@ -176,6 +180,20 @@ struct VerbView: View {
           .sheetDismissable()
       }
     }
+  }
+
+  private var starButton: some View {
+    let isStarred = world.learnerVerbs.isStarred(verb)
+    return Button {
+      let isNowStarred = world.learnerVerbs.toggleStar(verb)
+      world.analytics.signal(name: .tapStarVerb, parameters: [
+        ParameterKey.starred.rawValue: "\(isNowStarred)"
+      ])
+    } label: {
+      Label(isStarred ? L.VerbView.unstar : L.VerbView.star, systemImage: isStarred ? "star.fill" : "star")
+    }
+    .sensoryFeedback(.selection, trigger: isStarred)
+    .accessibilityIdentifier("verb_star_button")
   }
 
   private var overviewCard: some View {
@@ -466,6 +484,10 @@ struct VerbView: View {
     let newVisit = VerbVisit(source: source, start: .now, visibleSections: visibleSections)
     visit = newVisit
     world.analytics.signal(name: .viewAppeared, parameters: newVisit.viewParameters)
+    // A page that returns after a tab switch, the background, or its own sheet is not a new open.
+    if source != .resume {
+      world.learnerVerbs.recordOpen(verb)
+    }
   }
 
   private func endVisit() {

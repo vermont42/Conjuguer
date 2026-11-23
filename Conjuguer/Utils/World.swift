@@ -31,6 +31,7 @@ class World {
   var getterSetter: GetterSetter
   var languageModelService: LanguageModelService
   var soundPlayer: SoundPlayer
+  var learnerVerbs: LearnerVerbStore
   var verb: Verb?
   // How `verb` was reached, for its page's `viewAppeared`: a link's `source` item, else `deeplink`.
   var verbSource: AnalyticsSource = .deeplink
@@ -60,6 +61,7 @@ class World {
     getterSetter: GetterSetter,
     languageModelService: LanguageModelService,
     soundPlayer: SoundPlayer,
+    learnerVerbs: LearnerVerbStore,
     session: URLSession
   ) {
     self.settings = settings
@@ -70,6 +72,7 @@ class World {
     self.getterSetter = getterSetter
     self.languageModelService = languageModelService
     self.soundPlayer = soundPlayer
+    self.learnerVerbs = learnerVerbs
     self.session = session
   }
 
@@ -101,6 +104,7 @@ class World {
       getterSetter: getterSetter,
       languageModelService: LanguageModelServiceReal(),
       soundPlayer: SoundPlayerReal(),
+      learnerVerbs: sharedLearnerVerbs(),
       session: URLSession.shared
     )
   }()
@@ -120,6 +124,7 @@ class World {
       getterSetter: getterSetter,
       languageModelService: LanguageModelServiceReal(),
       soundPlayer: SoundPlayerReal(),
+      learnerVerbs: sharedLearnerVerbs(),
       session: fakeSession
     )
   }()
@@ -139,9 +144,16 @@ class World {
       getterSetter: getterSetter,
       languageModelService: LanguageModelServiceDummy(),
       soundPlayer: SoundPlayerDummy(),
+      learnerVerbs: LearnerVerbStore(getterSetter: GetterSetterFake()),
       session: fakeSession
     )
   }()
+
+  // The App Group's defaults, so that the widget can read the learner's verbs. Without the
+  // group, as in a build lacking the entitlement, the record falls back to the app's own defaults.
+  private static func sharedLearnerVerbs() -> LearnerVerbStore {
+    LearnerVerbStore(getterSetter: GetterSetterReal(userDefaults: WidgetConstants.sharedDefaults ?? .standard))
+  }
 
   /// The grammar is in docs/feature_architecture.md § Deeplinks.
   func handleURL(_ url: URL) {

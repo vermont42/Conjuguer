@@ -471,6 +471,10 @@ A tense article's sheet ends the visit as the model sheet does, and closing it r
 **`tapShareVerb`**, with no parameters, counts taps on the verb page's share button (Phase 8,
 2026-11-22), whether or not the learner then shares. Copying sends nothing.
 
+**`tapStarVerb`** counts taps on the verb page's star (Phase 10, 2026-11-22), with `starred`
+(`true` or `false`), the state after the tap, so that a count of devices with a starred verb can be
+told from taps that unstar. It does not name the verb.
+
 **A search** (`SearchTracker`, `SearchReport`) begins with the first non-blank letter and ends
 once. Returning to the results and opening another verb without editing the text sends no second
 `finishSearch`, though the page still reports `search`. Editing the text after an open begins a new
@@ -514,7 +518,8 @@ quiz signals. Values are Konjugieren's names wherever the surface is the same.
 | `spotlight` | Yes | A Spotlight result (Phase 9) |
 | `lookup` | Yes | Look Up a Verb, when the word settles one verb (Phase 9). For `finishSearch`, a search the lookup opened |
 | `quickAction` | Yes | For `finishSearch` only: a search the Home Screen quick action opened (Phase 9) |
-| `recent`, `myVerbs` | Phase 10 | A recent verb in the empty focused field; a verb in My Verbs. For the quiz signals (Phase 11), `myVerbs` is a quiz over My Verbs |
+| `recent` | Yes | A recent verb in the empty focused search field (Phase 10) |
+| `myVerbs` | Yes | A verb in My Verbs (Phase 10). For the quiz signals (Phase 11), a quiz over My Verbs |
 | `tab` | Yes | For `finishSearch` only: a search typed in the Verbs tab, Command-F included (Phase 9). For the quiz signals (Phase 11), a quiz begun from the Quiz tab |
 | `verbPage` | Phase 11 | The quiz signals only: Test Me on a verb page |
 | `reviewCard` | Phase 13 | The review card, opened after its conjugations are revealed |
@@ -529,8 +534,8 @@ page passes `modelPage` itself. Phase 9's grammar (§ Deeplinks) keeps the item 
 
 **The convention for later phases.** A phase that adds a way to reach a verb page passes its value
 in `VerbDestination`, in a link's `source` item, or directly to `VerbView`, marks it sent in the
-table above, and stages its privacy line. Phase 8 added `tapShareVerb`; Phases 10 and 11 add `tapStarVerb`
-(with `starred`, the state after the tap) and `tapTestVerb`. Phase 11 adds `source` to `quizStart`,
+table above, and stages its privacy line. Phase 8 added `tapShareVerb`, Phase 10 `tapStarVerb`
+(with `starred`, the state after the tap), and Phase 11 adds `tapTestVerb`. Phase 11 adds `source` to `quizStart`,
 `quizQuit`, and `quizCompletion`.
 
 ## Deeplinks
@@ -656,6 +661,52 @@ version and build, or the entries' `format` constant, differ from the last index
 **Raise `format` when the entries change**, or a development build with unchanged version numbers
 keeps the old entries. A tapped result arrives as a `CSSearchableItemActionType` activity whose
 identifier is "VerbEntity/<key>".
+
+## The Learner's Verbs
+
+Built 2026-11-22 in Phase 10 of the browse plan, ported from Konjugieren's Phase 12. One record of
+the learner's own verbs, kept on the device and never sent: each verb opened (first and last date,
+and a count) and each verb starred. Recents and My Verbs read it now; the browse plan's Phases 11
+to 14 and the pedagogy plan extend it.
+
+| Piece | File | Role |
+|---|---|---|
+| `LearnerVerbs` | `Shared/LearnerVerbs.swift` | The record: a `Codable` value of entries keyed by `Verb.dictionaryKey`, so that each entry of haïr, ouïr, saillir, and sortir keeps its own opens and star |
+| `LearnerVerbStore` | `Models/LearnerVerbStore.swift` | `Current.learnerVerbs`: records, saves each change, and answers in `Verb`s, skipping any key no longer in `verbs.xml` |
+| `VerbListMode` | `Utils/VerbSort.swift` | The verb list's picker: Frequency, Alphabetical, My Verbs |
+
+**Where it lives.** The store saves the record as JSON under `LearnerVerbs.storageKey` in the App
+Group's defaults (`WidgetConstants.sharedDefaults`, through `GetterSetterReal(userDefaults:)`), so
+that the widget can decode it with `LearnerVerbs(json:)` without the verb list, as Phase 12 will.
+Unit tests give it a `GetterSetterFake`. **Every field added later must be optional**: synthesized
+decoding requires every non-optional key, so a new required field would decode every older record
+as nothing, and the learner's verbs would vanish. `LearnerVerbsTests` pins this. No cap on entries.
+
+**An open** is a verb page's arrival by any route: `VerbView.beginVisit` records one whenever it
+sends `viewAppeared` with a source other than `resume`. A page that returns after a tab switch,
+the background, or its own sheet is not a new open.
+
+**The star** is a button in the verb page's navigation bar, before Share. It reads "Add to My
+Verbs" or "Remove from My Verbs" and gives a selection haptic.
+
+**Recents.** While the search field is focused and empty, and anything has been opened, the list
+shows the last twenty verbs opened under "Recent" instead of every verb, with the source `recent`.
+The arrow keys and Return reach them on iPad and Mac. They, and the accent key row, follow
+`searchIsEngaged`, which lets go of the focus 0.7 seconds after the field does: on iPad a tap
+outside an empty field ends its focus at touch-down, so views that followed the focus vanished
+under the finger (Konjugieren). The push from such a tap waits for the search's dismissal to end
+(`ViewControllerTransitions.waitUntilIdle()`), since UIKit drops a push made during it, and an
+accent key tapped then waits likewise, sets the letter, and refocuses the field.
+
+**My Verbs** is the third segment of the verb list's picker, with the starred verbs (newest star
+first) under "Starred" and the recent verbs not starred under "Recent", whose Clear button forgets
+every open and keeps the stars. Search ignores the picker, as it ignores the sort order. Only the
+sort order is remembered across launches, so a relaunch shows the list in its order. My Verbs is a
+`List` of its own, on iPad too, because only a `List`'s rows can be swiped: a swipe deletes a
+verb, star and opens alike (`LearnerVerbs.remove`), since unstarring alone would move an opened
+verb from Starred to Recent. A starred verb first asks, in an alert, whether to remove its star;
+its swipe button is not `.destructive`, because that role removes the row before the learner
+answers. Rows open with the source `myVerbs`.
 
 ## Quiz
 

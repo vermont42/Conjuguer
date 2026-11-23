@@ -75,7 +75,8 @@ in the wrong language. This is inferred from Konjugieren's finding and has not b
 A phase that rebuilds the verb row (Phase 1's search results, Phase 5's matched rows, Phase 10's
 recents) should test it with VoiceOver and adopt the pattern if it is so. Phase 1 (2026-11-22) kept the row and its `Button`, adding only a French subtitle for the Models
 tab's member matches, so the question is still open; the accessibility tree reads a row as one
-label ("être, be"), and its voice can be judged only by listening.
+label ("être, be"), and its voice can be judged only by listening. Phase 10 (2026-11-22) reused
+the same row for the recents and My Verbs, unchanged, and was not tried with VoiceOver either.
 
 ## Pattern: A French Value Beside an Interface Label
 
@@ -130,6 +131,8 @@ tried with VoiceOver running.
 | `FrenchLetterKeyRow` | Each key a `Button` whose letter is marked French |
 | `VerbView` (infinitive, headings, cells) | `.frenchPronunciation()` on each; the infinitive and each cell a Copy action (Phase 8) |
 | `VerbView` (share button, Phase 8) | A toolbar `Button` whose `Label` reads "Share" ("Partager") |
+| `VerbView` (star, Phase 10) | A toolbar `Button` whose `Label` reads "Add to My Verbs" or "Remove from My Verbs" ("Ajouter à Mes verbes", "Retirer de Mes verbes"), so its label says what a tap will do |
+| `VerbBrowseView` (recents and My Verbs, Phase 10) | The same `BrowseRow` in a `Button` as the list; the recents' "Recent" heading and My Verbs' "Starred" and "Recent" headings carry the header trait; a My Verbs row's swipe action is labeled "Delete" ("Supprimer") |
 | `VerbView` (gloss) | `.englishPronunciation()` |
 | `VerbView` (model row) | A `Button` whose label is marked French, with a hint that it opens the model |
 | `VerbView` (color key) | Each swatch combined into one element. The dismiss button is labeled |

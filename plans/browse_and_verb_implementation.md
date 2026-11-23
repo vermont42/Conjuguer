@@ -33,7 +33,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 7 | Done | 2026-11-22 | c9fbd7e | B4, A9 | 9 |
 | 8 | Done | 2026-11-22 | aaf8b31 | B6 | 10 |
 | 9 | Done | 2026-11-22 | 7ba1281 | C1, C2 | 11 |
-| 10 | Not started | | | D1, D2 | 12 |
+| 10 | Awaiting Josh | 2026-11-22 | | D1, D2 | 12 |
 | 11 | Not started | | | D2's quiz scope, D3 | 13 |
 | 12 | Not started | | | D5 | 14 |
 | 13 | Not started | | | D4 | 15 |
@@ -1187,8 +1187,8 @@ rest. No question needed Josh. What differs from Konjugieren, and from the phase
 ## Phase 10: Recents and My Verbs
 
 **Ideas:** D1, D2 apart from its quiz scope. **Ports:** Konjugieren Phase 12 (`LearnerVerbs.swift`
-in `Shared/`, `LearnerVerbStore.swift`, `SortOrder.swift`). **Depends on:** nothing. **Status:** Not
-started.
+in `Shared/`, `LearnerVerbStore.swift`, `SortOrder.swift`). **Depends on:** nothing. **Status:**
+Awaiting Josh (built 2026-11-22).
 
 - One on-device record of the learner's verbs: each verb opened, with dates and a count, and each
   verb starred. Keyed by `dictionaryKey`, so the doubled entries (haïr, ouïr, saillir, sortir)
@@ -1213,6 +1213,58 @@ swipe to delete; the star in the navigation bar; `tapStarVerb` carrying the stat
 Verbs lists both, and tests pin the record's coding and its migration from nothing.
 
 **How it differed:**
+
+Built 2026-11-22 in one session, as Konjugieren's design with Conjuguer's names. The suite ran 484
+tests in 41 suites, all passing, 25 more than Phase 9's 459, all in the new `LearnerVerbsTests`.
+New files: `Shared/LearnerVerbs.swift`, `Models/LearnerVerbStore.swift`, and
+`Utils/ViewControllerTransitions.swift`; `VerbListMode` joined `VerbSort` in `Utils/VerbSort.swift`.
+`docs/feature_architecture.md` § The Learner's Verbs describes it. No question needed Josh, and he
+offered no change to Konjugieren's layout, so My Verbs is the third segment as there. What differs:
+
+- **The record's field is `dictionaryKey`**, not Konjugieren's `infinitiv`, and its keys are
+  `Verb.verbs` keys, so the two entries of haïr, ouïr, saillir, and sortir keep their own opens and
+  stars (tested with haïr, and seen in the simulator as "haïr (Québec)" under Recent). **For Phase
+  12 and the widget:** decode `WidgetConstants.sharedDefaults` at `LearnerVerbs.storageKey` with
+  `LearnerVerbs(json:)`; a key names a verb entry, and its infinitive is the part before any space.
+  Any field added later must be optional; `anEntryWithoutItsOptionalFieldsDecodes` pins it.
+- **The store reaches the App Group** through a new `GetterSetterReal(userDefaults:)`, given
+  `WidgetConstants.sharedDefaults`, falling back to the standard defaults if the group is missing.
+  `World` gained `learnerVerbs`; the unit-test world gives it a `GetterSetterFake`.
+- **The migration from nothing** is a store that starts empty with nothing stored, or with an
+  unreadable record; both are tested. There was no earlier record to migrate.
+- **An open** is recorded in `VerbView.beginVisit`, where `viewAppeared` goes out, whenever the
+  source is not `resume`.
+- **The picker.** `VerbListMode` (Frequency, Alphabetical, My Verbs, in Conjuguer's existing
+  order). Only the sort order is persisted, as `Settings.verbSort` already was; My Verbs is not, so
+  a relaunch returns to the list in its order, as Konjugieren's does. Search ignores the picker.
+- **Konjugieren's iPad fixes were ported up front** rather than rediscovered: the recents and the
+  accent row follow `searchIsEngaged`, which outlasts the field's focus by 0.7 seconds; a push
+  from a recent verb waits for `ViewControllerTransitions.waitUntilIdle()`; an accent key tapped
+  as the search ends waits, sets the letter, and refocuses. The accent row had followed the focus
+  directly since Phase 2, so the same touch-down bug may have dropped an accent tapped on iPad with
+  an empty field; it now works (`é` landed in the field in the simulator).
+- **Recents and the keyboard.** The arrow keys and Return reach the recents, as in Konjugieren. A
+  recent row is drawn with the source settled at draw time (`recent`), since the tap can end the
+  focus before the action runs.
+- **The star** sits before Share in the navigation bar (Test Me, in Phase 11, goes before it, as in
+  Konjugieren). `tapStarVerb` carries `starred`, the state after the tap. Konjugieren's Clear and
+  swipe to delete came with it, with the same alert for a starred verb.
+- **French wording.** "Mes verbes", "Favoris" for Starred, "Récents", "Effacer", and "Ajouter à Mes
+  verbes" / "Retirer de Mes verbes" for the star. Josh may prefer "Avec étoile" to "Favoris".
+- **Analytics.** `recent` and `myVerbs` are now sent. The privacy lines are staged in
+  `privacy_policy_pending.md`: the star in the in-app-actions bullet, "record" becoming "send" in
+  the paragraph after the list, and a new paragraph saying the list stays on the device.
+- **How it was tested.** On the iPhone, in English and light mode: My Verbs empty; aller, haïr
+  (Québec), and être opened by link, être starred from its sheet; after a relaunch, être under
+  Starred and haïr (Québec) and aller under Recent; a My Verbs row opening aller, which moved it to
+  the top of Recent; a swipe deleting haïr; a swipe on être showing the alert, and Cancel keeping
+  it; the empty focused field listing aller and être under Recent, and a recent row opening être.
+  In French and dark mode: My Verbs (Favoris, Récents, Effacer, Mes verbes), and Effacer leaving
+  only être. On the iPad, in English: the recents as a grid in the focused empty field, a real tap
+  on a recent verb opening its page (the case that failed in Konjugieren), and `é` tapped into the
+  empty focused field. AXe cannot see navigation-bar buttons on iOS 26, so the star was tapped by
+  position and checked by screenshot. **Not tried:** VoiceOver, the Mac, a hardware keyboard's
+  arrows through the recents, and the widget reading the record, which waits for Phase 12.
 
 ## Phase 11: A Quiz over Chosen Verbs
 

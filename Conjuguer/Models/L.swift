@@ -92,6 +92,48 @@ enum L {
     }
   }
 
+  enum MyVerbs {
+    static var title: String {
+      String(localized: "MyVerbs.title")
+    }
+
+    static var starred: String {
+      String(localized: "MyVerbs.starred")
+    }
+
+    static var recent: String {
+      String(localized: "MyVerbs.recent")
+    }
+
+    static var clearRecent: String {
+      String(localized: "MyVerbs.clearRecent")
+    }
+
+    static var delete: String {
+      String(localized: "MyVerbs.delete")
+    }
+
+    static var emptyTitle: String {
+      String(localized: "MyVerbs.emptyTitle")
+    }
+
+    static var emptyDescription: String {
+      String(localized: "MyVerbs.emptyDescription")
+    }
+
+    static var unstarConfirm: String {
+      String(localized: "MyVerbs.unstarConfirm")
+    }
+
+    static var unstarMessage: String {
+      String(localized: "MyVerbs.unstarMessage")
+    }
+
+    static func unstarTitle(_ infinitif: String) -> String {
+      String(localized: "MyVerbs.unstarTitle", defaultValue: "Remove the star from “\(infinitif)”?")
+    }
+  }
+
   enum ModelBrowseView {
     static var searchPrompt: String {
       String(localized: "ModelBrowseView.searchPrompt")
@@ -167,6 +209,14 @@ enum L {
 
     static var share: String {
       String(localized: "VerbView.share")
+    }
+
+    static var star: String {
+      String(localized: "VerbView.star")
+    }
+
+    static var unstar: String {
+      String(localized: "VerbView.unstar")
     }
 
     static func shareGloss(infinitif: String, gloss: String) -> String {

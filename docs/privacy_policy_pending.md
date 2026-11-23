@@ -149,3 +149,54 @@ Le troisième point devient :
 ```
 - À la fin d'une recherche de verbe : son point de départ (la liste des verbes, le Centre de contrôle, une action rapide de l'écran d'accueil, un raccourci ou un lien), si vous avez ouvert un verbe, le type de correspondance qui l'a trouvé (par exemple l'infinitif, une forme conjuguée, une orthographe sans accents ou un sens anglais) et des ordres de grandeur : la longueur de votre saisie (1 à 2 lettres, 3 à 5, 6 à 9, ou 10 et plus), le nombre de verbes trouvés (aucun, 1, de 2 à 10, ou davantage) et la place du verbe ouvert dans la liste (premier, du deuxième au cinquième, ou plus loin)
 ```
+
+## My Verbs (browse plan, Phase 10, 2026-11-22)
+
+Adds the signal `tapStarVerb`, with a `starred` parameter saying whether the tap starred the verb
+or removed its star. It does not name the verb. Phase 10 also began sending the `recent` and
+`myVerbs` sources for verb pages, which the first bullet of the Phase 3 section covers with "for
+example". The app now keeps on the device a list of the verbs opened and starred, so the paragraph
+after the list says "send" where it said "record", which the local list would otherwise make
+untrue, and a new paragraph says the list stays on the device. Apply this section after the Phase
+3, 6, and 8 sections above, since it replaces the bullet and the paragraph they give. Section 5's
+"Quiz answers or any text you type" stays true.
+
+### English
+
+The bullet about certain in-app actions now reads:
+
+```
+- Certain in-app actions, such as opening the game, reshowing the onboarding, opening a tense's article from a verb's page, tapping the button that shares a verb's page, or starring a verb or removing its star, and whether Game Center sign-in succeeded
+```
+
+The last sentence of the paragraph after the list now reads:
+
+```
+The app does not send your quiz answers, the verbs you look up, or any text you type.
+```
+
+A new paragraph follows that paragraph:
+
+```
+The app keeps a list of the verbs you have opened and the verbs you have starred, so that it can show your recent verbs and My Verbs. The list stays on your device and is never sent.
+```
+
+### French
+
+Le point sur certaines actions dans l'application devient :
+
+```
+- Certaines actions dans l'application, comme l'ouverture du jeu, le réaffichage de l'introduction, l'ouverture de l'article d'un temps depuis la page d'un verbe, un appui sur le bouton de partage de la page d'un verbe, ou l'ajout ou le retrait de l'étoile d'un verbe, ainsi que la réussite ou l'échec de la connexion à Game Center
+```
+
+La dernière phrase du paragraphe qui suit la liste devient :
+
+```
+L'application n'envoie pas vos réponses au quiz, les verbes que vous consultez, ni aucun texte que vous saisissez.
+```
+
+Un nouveau paragraphe suit ce paragraphe :
+
+```
+L'application conserve une liste des verbes que vous avez ouverts et des verbes que vous avez marqués d'une étoile, afin d'afficher vos verbes récents et « Mes verbes ». Cette liste reste sur votre appareil et n'est jamais envoyée.
+```

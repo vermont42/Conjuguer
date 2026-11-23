@@ -77,6 +77,7 @@ Conjuguer/
 │   ├── Info.swift              # Info article model, the static article list, and InfoCategory (about/concepts/tenses)
 │   ├── KeyConjugations.swift   # Verb.keyConjugations() (the il présent, passé composé, and futur, unlabeled), citationInfinitif (se souvenir), and the share text
 │   ├── L.swift                 # Type-safe localization accessors, nested by feature
+│   ├── LearnerVerbStore.swift  # @Observable Current.learnerVerbs: records opens and stars in LearnerVerbs, saves each change to the App Group's defaults, and answers in verbs (recent, starred, My Verbs)
 │   ├── LanguageModelService.swift      # Protocol for the on-device tutor, plus TutorMessage and unavailability/error enums
 │   ├── LanguageModelServiceDummy.swift # No-op double for tests
 │   ├── LanguageModelServiceReal.swift  # FoundationModels implementation, incl. the ConjugationTool the model can call
@@ -164,7 +165,8 @@ Conjuguer/
 │   ├── VerbConjugations.swift  # Builds VerbView's conjugation tables from TenseTable: sections, cells, red letters, defectivity
 │   ├── VerbSearchArrowKeys.swift  # UIKeyCommand hack that lets ↑ and ↓ move through verb results while the search field is focused
 │   ├── VerbData.swift          # Startup XML parse (verbs, models, defect groups) with a loading/loaded state
-│   ├── VerbSort.swift          # Sort order for the verb browse view (frequency/alphabetical)
+│   ├── VerbSort.swift          # Sort order for the verb browse view (frequency/alphabetical), and VerbListMode, the list picker's three segments (the two orders and My Verbs)
+│   ├── ViewControllerTransitions.swift  # Hack: waits until no view controller is presenting or dismissing, so an iPad push from a tap that ends the search is not dropped
 │   ├── WidgetSnapshotWriter.swift # Writes the multi-day widget snapshot bundle to the shared container
 │   └── World.swift             # @Observable DI container (Current) plus MainTab; device/simulator/unitTest configurations; handleURL and the deeplink grammar's effects, openSearch(text:source:) for search links and Command-F
 └── Views/
@@ -223,6 +225,7 @@ ConjuguerWidget/
     └── WidgetEtymologyText.swift   # ~emphasis~ rendering for widget etymology text
 
 Shared/                         # Compiles into BOTH the app and widget targets
+├── LearnerVerbs.swift          # The learner's verb record, keyed by Verb.dictionaryKey: opens (first, last, count) and stars, as JSON in the App Group's defaults so the widget can read it; every later field must be optional
 ├── OpenQuizIntent.swift        # AppIntent opening the quiz (title written inline — appintentsmetadataprocessor can't read WidgetL accessors)
 ├── OpenRandomVerbControlIntent.swift  # The Random Verb control's action: OpenRandomVerbIntent with source=control, hidden from Shortcuts
 ├── OpenRandomVerbIntent.swift  # AppIntent opening a random verb from Shortcuts, with source=shortcut (same inline-title constraint)
@@ -256,6 +259,7 @@ ConjuguerTests/
     ├── GameMechanicsTests.swift        # Special-mechanic scheduling and lifecycle (serialized)
     ├── GameProjectileTests.swift       # Bullet and enemy-bullet behavior (serialized)
     ├── KeyConjugationsTests.swift      # The key conjugations (reflexive, defective, il agreement), the citation infinitive, the share text, and what a long press copies
+    ├── LearnerVerbsTests.swift         # The learner's record: opens, stars, recents, My Verbs, removal, Clear, JSON coding and an older record's decoding, the store's saving, the doubled entries, and the list modes
     ├── ModelSearchTests.swift          # Models found by exemplar or by member verb, exemplars first, each once
     ├── NousPrésentStemTests.swift      # The nous-présent stem that imparfait derives from
     ├── ParserTests.swift               # XML parsing of verbs, models, and defect groups

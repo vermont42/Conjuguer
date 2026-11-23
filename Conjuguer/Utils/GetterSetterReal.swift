@@ -9,7 +9,11 @@
 import Foundation
 
 class GetterSetterReal: GetterSetter {
-  private let userDefaults = UserDefaults.standard
+  private let userDefaults: UserDefaults
+
+  init(userDefaults: UserDefaults = .standard) {
+    self.userDefaults = userDefaults
+  }
 
   func get(key: String) -> String? {
     userDefaults.string(forKey: key)
