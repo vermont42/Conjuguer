@@ -147,7 +147,9 @@ Conjuguer/
 │   ├── IntExtension.swift      # Elapsed-seconds → h:mm:ss formatting
 │   ├── KillSwitches.swift      # The three screenshot/preview kill switches: OnboardingDisplay.onboardingEnabled, TipDisplay.tipsEnabled, TutorDisplay.tutorUnavailableRowEnabled. All ordinarily true; flipped to false for an App Store sweep — see docs/screenshot_playbook.md and docs/video_script.md
 │   ├── Layout.swift            # Spacing constants (8/16/24pt)
-│   ├── LiveActivityManager.swift  # Creates, updates, and ends the quiz Live Activity
+│   ├── LiveActivities.swift    # LiveActivities protocol (Current.liveActivities) and the LiveActivity handle, an ID plus an optional ActivityKit Activity
+│   ├── LiveActivitiesReal.swift  # ActivityKit implementation: the rolling staleDate, the serial activityChain, and the finished state's linger
+│   ├── LiveActivitiesSpy.swift # Test spy under unit tests: counts starts, updates, and ends, and holds the active IDs, so tests request no real activities
 │   ├── Log.swift               # os.Logger factory with per-category loggers
 │   ├── ModelSort.swift         # Sort order for the model browse view (irregularity/alphabetical/identifier)
 │   ├── Modifiers.swift         # The app's ViewModifier vocabulary (headingLabel, funButton, card, screenBackground, copyOnLongPress, …)
@@ -273,6 +275,7 @@ ConjuguerTests/
     ├── ModelSearchTests.swift          # Models found by exemplar or by member verb, exemplars first, each once
     ├── NousPrésentStemTests.swift      # The nous-présent stem that imparfait derives from
     ├── ParserTests.swift               # XML parsing of verbs, models, and defect groups
+    ├── QuizLiveActivityTests.swift     # The quiz's Live Activity through the spy: a tab quiz starts one that Quit or the last answer ends, each other answer updates it, a restart replaces it, and a sheet's quiz starts none
     ├── QuizScopeTests.swift            # Quiz scopes: the default quiz unchanged, My Verbs drawing only its verbs in Regular's mix, defective verbs, Test Me's three tenses, unranked scoring, doubled entries graded as themselves, source on every quiz signal
     ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle (serialized — mutates Current)
     ├── RelatedVerbsTests.swift         # Base-finding on known and false pairs, nested roots, the card's two relations, doubled roots, and the model page's two orders

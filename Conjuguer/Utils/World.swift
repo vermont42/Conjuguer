@@ -32,6 +32,7 @@ class World {
   var languageModelService: LanguageModelService
   var soundPlayer: SoundPlayer
   var learnerVerbs: LearnerVerbStore
+  var liveActivities: LiveActivities
   var verb: Verb?
   // How `verb` was reached, for its page's `viewAppeared`: a link's `source` item, else `deeplink`.
   var verbSource: AnalyticsSource = .deeplink
@@ -64,6 +65,7 @@ class World {
     languageModelService: LanguageModelService,
     soundPlayer: SoundPlayer,
     learnerVerbs: LearnerVerbStore,
+    liveActivities: LiveActivities,
     session: URLSession
   ) {
     self.settings = settings
@@ -75,6 +77,7 @@ class World {
     self.languageModelService = languageModelService
     self.soundPlayer = soundPlayer
     self.learnerVerbs = learnerVerbs
+    self.liveActivities = liveActivities
     self.session = session
   }
 
@@ -107,6 +110,7 @@ class World {
       languageModelService: LanguageModelServiceReal(),
       soundPlayer: SoundPlayerReal(),
       learnerVerbs: sharedLearnerVerbs(),
+      liveActivities: LiveActivitiesReal(),
       session: URLSession.shared
     )
   }()
@@ -127,6 +131,7 @@ class World {
       languageModelService: LanguageModelServiceReal(),
       soundPlayer: SoundPlayerReal(),
       learnerVerbs: sharedLearnerVerbs(),
+      liveActivities: LiveActivitiesReal(),
       session: fakeSession
     )
   }()
@@ -147,6 +152,7 @@ class World {
       languageModelService: LanguageModelServiceDummy(),
       soundPlayer: SoundPlayerDummy(),
       learnerVerbs: LearnerVerbStore(getterSetter: GetterSetterFake()),
+      liveActivities: LiveActivitiesSpy(),
       session: fakeSession
     )
   }()

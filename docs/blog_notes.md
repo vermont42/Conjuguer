@@ -5380,3 +5380,49 @@ theirs too.
 So that the pedagogy plan's phases do not rebuild the trail, `plans/pedagogy_implementation.md`
 now carries a **Comments and docs** rule in its "How to Work This Plan", and its end-of-phase
 checklist asks each session to read every comment its diff adds.
+
+## Live Activities Through a Current Dependency (2026-11-22)
+
+Konjugieren's session suggested this one, from its commit be21f35 of the same evening. There, the
+static `LiveActivityManager` had let every quiz a test started request a real Live Activity, and
+the simulator's test host granted them until ActivityKit began refusing with
+`targetMaximumExceeded`, 191 times in one run. Replacing the static calls with a protocol on
+`World` and a spy under unit tests halved Konjugieren's suite, from about 105 seconds to 55.
+
+Conjuguer had the same shape: `Quiz` called `LiveActivityManager.startQuizActivity` directly, and
+its `catch` returned nil without a word. Before changing anything, a temporary `print` in the
+request path and in the `catch` measured one full run. The suite made 14 requests and ActivityKit
+refused 7 of them with `targetMaximumExceeded`, so the problem was real here too, only smaller.
+Conjuguer's quiz tests start far fewer thirty-question quizzes than Konjugieren's, and Test Me and
+collection quizzes never ask for an activity.
+
+The change copies Konjugieren's design. `LiveActivities` is the protocol, on `Current` as
+`liveActivities`. `LiveActivitiesReal` is the old manager renamed, and it keeps everything that is
+specifically Conjuguer's: the rolling five-minute `staleDate`, the serial `activityChain` that keeps
+updates and the end in order, and the eight-second linger of the finished state. None of that is in
+the protocol. Because nothing outside ActivityKit can make an `Activity`, the protocol hands back a
+`LiveActivity` handle, an ID plus an optional `Activity`, and `LiveActivitiesSpy` returns handles
+with none. Konjugieren's protocol is generic over the attributes type, because it has a game
+activity as well as a quiz one. Conjuguer has only `QuizActivityAttributes`, so its protocol names
+that type and stays plain. `Quiz` now builds the initial content state itself, as it already built
+the update and final states.
+
+`QuizLiveActivityTests` asserts lifecycle facts against the spy that were untestable before: a tab
+quiz starts one activity, Quit ends it, every answer but the last updates it, the last answer ends
+it, restarting a quiz in progress replaces its activity, and a sheet's quiz (Test Me or a
+collection) starts none. `Current` is shared with suites running in parallel, so each test compares
+the spy's counts before and after its own steps, which are synchronous on the main actor.
+
+The speedup did not carry over. The full suite took 141 seconds against 142 before, so seven
+refused requests were never what made Conjuguer's tests slow. The value here is the tests and an
+honest simulator, not the time.
+
+Konjugieren also made a released quiz end its activity in `deinit`. Conjuguer does not need that
+today. The only quiz that can hold an activity is `Current.quiz`, which lives as long as the app;
+`QuizSheet`'s quizzes are Test Me's or a collection's, and neither starts one. If a released quiz
+ever could hold one, the rolling `staleDate` would mark it stale within five minutes, and the
+launch's `endAll()` would clear it.
+
+The rename went through `../Konjugieren/scripts/rename_files.py`, excluding
+`docs/code_review_findings.md` and `plans/sweep_comments.md`. Both cite line numbers in the old
+file, and pointing those citations at the new name would have made them wrong.

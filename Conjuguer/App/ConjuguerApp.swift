@@ -77,7 +77,7 @@ struct ConjuguerApp: App {
     Current.soundPlayer.setup()
     Utterer.setup()
 
-    LiveActivityManager.endAllActivities()
+    Current.liveActivities.endAll()
 
     if TipDisplay.tipsEnabled {
       try? Tips.configure()

@@ -258,7 +258,7 @@ type. Practical consequences:
   files (e.g. `DeeplinkTests.swift`) rather than being appended to an existing file.
 - **All test doubles live in the app target** (`TestApp.swift`, `GetterSetterFake.swift`,
   `GameCenterStub.swift`, `ReviewPrompterDummy.swift`, `AnalyticsSpy.swift`,
-  `URLProtocolStub.swift`), referenced by `World.swift` for the
+  `LiveActivitiesSpy.swift`, `URLProtocolStub.swift`), referenced by `World.swift` for the
   simulator/unitTest configs, so the whole `Conjuguer/` tree compiles into one target.
 - The only files inside the synced folders excluded from a target are the per-target
   `Info.plist`s (via `membershipExceptions`); `Conjuguer.entitlements` is wired through
@@ -313,6 +313,7 @@ All external services have protocol abstractions with production and test implem
 - `GameCenter` → `GameCenterReal` / `GameCenterStub`
 - `ReviewPrompter` → `ReviewPrompterReal` / `ReviewPrompterDummy`
 - `Analytics` → `AnalyticsReal` (TelemetryDeck) / `AnalyticsSpy`
+- `LiveActivities` → `LiveActivitiesReal` (ActivityKit) / `LiveActivitiesSpy`
 
 > **Convention — adding a new behavior protocol with real + test-double conformances.** Name the protocol a **plain role noun** — no `-able`/`-Protocol`/`-ing` suffix (`GetterSetter`, `GameCenter`, `ReviewPrompter`). Name the production conformer `<Protocol>Real` and the test double `<Protocol><Role>`, where `<Role>` is the [Fowler test-double type](https://martinfowler.com/bliki/TestDouble.html) that matches what the double actually *does*:
 > - **`Fake`** — a working implementation with a production-unsuitable shortcut, e.g. an in-memory store (`GetterSetterFake`).

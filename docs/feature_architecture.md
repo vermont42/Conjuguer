@@ -800,7 +800,7 @@ chosen verbs (§ Quiz Scopes).
 | `ConjugationResult.swift` | Grades an answer as a total, partial, or no match |
 | `CyclingDeck.swift` | Deals a pool's elements in order and reshuffles when it runs out |
 | `QuizView.swift`, `QuizResultsView.swift`, `QuizResultView.swift` | The quiz screen and the results sheet |
-| `LiveActivityManager.swift` | Starts, updates, and ends the quiz's Live Activity |
+| `LiveActivities.swift`, `LiveActivitiesReal.swift`, `LiveActivitiesSpy.swift` | Starts, updates, and ends the quiz's Live Activity through `Current.liveActivities`: ActivityKit on device and in the simulator, a spy under unit tests |
 
 ### The Two Difficulties
 
