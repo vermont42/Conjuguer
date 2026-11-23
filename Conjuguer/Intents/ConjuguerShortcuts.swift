@@ -7,8 +7,8 @@
 
 import AppIntents
 
-// The phrases are English only, as in Konjugieren: offering them in the app's other language
-// was considered and rejected (idea C3 of the browse plan).
+// The phrases are English only by choice: offering them in the app's other language was
+// considered and rejected.
 struct ConjuguerShortcuts: AppShortcutsProvider {
   static var appShortcuts: [AppShortcut] {
     AppShortcut(

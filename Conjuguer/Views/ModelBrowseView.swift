@@ -95,7 +95,6 @@ struct ModelBrowseView: View {
     .recordsAppearance(as: "\(ModelBrowseView.self)")
   }
 
-  // The collections lead the tab while it lists every model, and give way to a search's results.
   private var showsCollections: Bool {
     searchText.isEmpty
   }

@@ -179,8 +179,6 @@ enum VerbCollection: Hashable, Identifiable {
     }
   }
 
-  /// What the share button sends: the title, the count, the first verbs, a link that opens the
-  /// list for someone who has the app, and the App Store link for someone who does not.
   @MainActor func shareText() -> String {
     let verbs = verbs
     let sample = verbs.prefix(Self.shareSampleCount).map(\.citationInfinitif)
@@ -195,7 +193,7 @@ enum VerbCollection: Hashable, Identifiable {
   }
 
   /// `viewCollection`, for a featured collection's page. A model's page reports itself through
-  /// `viewAppeared`, as it always has.
+  /// `viewAppeared` instead.
   @MainActor func signalView(source: AnalyticsSource) {
     Current.analytics.signal(name: .viewCollection, parameters: [
       ParameterKey.collection.rawValue: analyticsValue,

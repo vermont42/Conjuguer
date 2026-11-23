@@ -7,10 +7,10 @@
 
 import Foundation
 
+// TODO: Replace with the practice record, which moves verbs on right and wrong answers.
 /// When a verb is next due on the review card, and which box of the ladder it is in. This is the
 /// Leitner system at its smallest: a lookup puts a verb in the first box, a review moves it up
-/// one, and a later lookup sends it back to the first. The pedagogy plan's practice record is
-/// meant to take it over, moving verbs on right and wrong answers.
+/// one, and a later lookup sends it back to the first.
 ///
 /// Due dates fall at the start of a day, so a verb looked up late in the evening waits until the
 /// next morning rather than an hour.
@@ -23,7 +23,6 @@ nonisolated struct ReviewSchedule: Codable, Equatable, Sendable {
   let box: Int
   let due: Date
 
-  /// A verb just looked up.
   static func lookedUp(at date: Date, calendar: Calendar) -> ReviewSchedule {
     ReviewSchedule(box: 0, due: dueDate(days: intervals[0], after: date, calendar: calendar))
   }

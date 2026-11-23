@@ -18,8 +18,6 @@ enum VerbSpotlight {
     /// first under the description, so the gloss leads.
     let alternateNames: [String]
 
-    /// Every one-word conjugation in the conjugation map, and the gloss's meanings with and
-    /// without "to".
     let keywords: [String]
 
     /// Shown under the title: the key conjugations, which stand alone with no label.
@@ -75,7 +73,6 @@ enum VerbSpotlight {
     )
   }
 
-  /// Every one-word conjugation of each verb entry, keyed as `Verb.verbs` is.
   nonisolated static func conjugationsByVerb(in map: ConjugationMap) -> [String: Set<String>] {
     var conjugations: [String: Set<String>] = [:]
     for (conjugation, keys) in map.verbsByConjugation {

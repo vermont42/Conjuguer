@@ -11,7 +11,7 @@
 /// its tenses occur in the corpus: docs/tense_frequency.md gives the counts, and
 /// scripts/count_tenses.py reproduces them, so change the order there before changing it here.
 /// The personless card sits between the blocks, where its participe passé introduces the compound
-/// tenses built from it, as Josh chose on 2026-11-22.
+/// tenses built from it.
 enum TenseTable: CaseIterable {
   case indicatifPrésent
   case imparfait
@@ -88,7 +88,6 @@ enum TenseTable: CaseIterable {
     }
   }
 
-  /// The identifier the verb page scrolls to.
   var scrollID: String {
     "\(self)"
   }
@@ -193,8 +192,8 @@ extension Tense {
   }
 
   /// The name a textbook also uses, shown under the heading as "also simple past" in English and
-  /// "aussi passé défini" in French: each language gets the names its learners' textbooks use
-  /// (Josh, 2026-11-22). Nil where French has no alternate name.
+  /// "aussi passé défini" in French: each language gets the names its learners' textbooks use.
+  /// Nil where French has no alternate name.
   var secondName: String? {
     let name: String
     switch self {

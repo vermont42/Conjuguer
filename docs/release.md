@@ -3,9 +3,7 @@
 What the next App Store release of Conjuguer must do, gathered in one place. `CLAUDE.md` § No
 Release Before 2027 points here. Add to this document whenever work on `main` leaves a task for
 release time, and delete it, along with that `CLAUDE.md` section, once the release has shipped and
-every item below is done. Written 2026-11-22 for Phase 0 of
-[`plans/browse_and_verb_implementation.md`](../plans/browse_and_verb_implementation.md), modeled on
-Konjugieren's.
+every item below is done.
 
 ## Why There Is No Release Before 2027
 
@@ -35,11 +33,11 @@ material for the release notes.
    [`screenshot_playbook.md`](screenshot_playbook.md) and [`video_script.md`](video_script.md),
    and redo any that show a screen the plans changed.
 5. **Check the Random Verb control on a device** that had it in Control Center before updating.
-   Since browse Phase 3 it runs `OpenRandomVerbControlIntent` instead of `OpenRandomVerbIntent`,
-   so that the verb page can tell the control from the Shortcuts app. The control's kind did not
+   It now runs `OpenRandomVerbControlIntent` rather than the shipped `OpenRandomVerbIntent`, so
+   that the verb page can tell the control from the Shortcuts app. The control's kind did not
    change, so an installed control should run the new intent, but this was never tried on a device.
-6. **Try the browse plan's Phase 9 surfaces on a device** (added 2026-11-22), which were tried only
-   in the simulator. Look Up a Verb from Siri and from the Shortcuts app: in the simulator the app
+6. **Try the lookups from outside the app on a device**, which were tried only in the
+   simulator. Look Up a Verb from Siri and from the Shortcuts app: in the simulator the app
    opened on the right page but its spoken or shown answer never appeared, so check that Siri says
    "vais: Indicatif Présent (je) of aller" before opening the page. Spotlight: in the simulator only
    titles matched (aller found its entry; vais, "to go", and souviens found nothing), so check

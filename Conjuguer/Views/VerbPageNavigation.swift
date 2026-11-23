@@ -22,7 +22,6 @@ extension EnvironmentValues {
   @Entry var verbPagePush: VerbPagePush?
 }
 
-/// A model page to push, in the order its verbs list opens with.
 struct ModelDestination: Hashable {
   let model: VerbModel
   var verbOrder: VerbSort = .alphabetical

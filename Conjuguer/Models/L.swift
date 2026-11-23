@@ -395,7 +395,7 @@ enum L {
       String(localized: "QuizView.myVerbsEmpty")
     }
 
-    // Separate singular and plural keys, as `VerbBrowse.verbCount(count:)` explains.
+    // Separate singular and plural keys, as `VerbBrowseView.verbCount(count:)` explains.
     static func myVerbsCount(_ count: Int) -> String {
       let formattedCount = count.formatted()
       if count == 1 {
@@ -997,7 +997,7 @@ enum L {
       String(localized: "ReviewCard.dismiss")
     }
 
-    // Separate keys for one day and for several, as `VerbBrowse.verbCount(count:)` explains.
+    // Separate keys for one day and for several, as `VerbBrowseView.verbCount(count:)` explains.
     // English and French agree that two or more days are plural.
     static func lookedUp(daysAgo: Int?) -> String {
       guard let daysAgo, daysAgo > 0 else {

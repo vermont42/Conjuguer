@@ -11,9 +11,8 @@ struct Verb: Identifiable, Hashable {
   static var verbs: [String: Verb] = [:]
   static let minVerbLength = 4
   // The number of distinct infinitives, and so the largest rank `frequency` can take —
-  // the denominator VerbView shows. `VerbData.publish` sets it from the parse, because a
-  // rank's denominator is a property of the data file rather than a constant: the literal
-  // 981 that stood here went stale the moment a verb was added.
+  // the denominator VerbView shows. `VerbData.publish` sets it from the parse, because the
+  // count is a property of the data file rather than a constant.
   static var rankCount = 0
 
   var id: String { infinitifWithPossibleExtraLetters }

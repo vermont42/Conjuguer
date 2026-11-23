@@ -73,18 +73,16 @@ struct VerbModel: Identifiable, Hashable {
         }
       }
       // A model can be irregular in its endings alone, with no stem alteration anywhere: the
-      // assaillir family (3-2A) is an -ir verb taking -er présent endings. Scoring only stems
-      // and participe endings rated it 0% irregular, which put four irregular verbs in the
-      // regular column and printed the self-contradictory "0% irregular" on its own screen.
+      // assaillir family (3-2A) is an -ir verb taking -er présent endings, and without these
+      // clauses it would score 0% irregular.
       if model.value.indicatifPrésentGroupRecursive.marksIrregularEndings {
         irregularityCount += 1
       }
       if model.value.subjonctifPrésentGroupRecursive.marksIrregularEndings {
         irregularityCount += 1
       }
-      // The highest count any model reaches, so the scale runs 0...100. être still tops out at
-      // 41 — its irregularity is all stem alteration, and the two clauses above add nothing to
-      // it — so the endings clauses did not move this ceiling.
+      // The highest count any model reaches (être), so the scale runs 0...100. être's
+      // irregularity is all stem alteration, so the endings clauses above add nothing to it.
       let maxIrregularityCount = 41
       models[model.value.id]?.irregularity = Int((Double(irregularityCount) / Double(maxIrregularityCount)) * 100.0)
     }

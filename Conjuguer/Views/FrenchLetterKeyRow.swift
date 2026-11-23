@@ -10,8 +10,8 @@ import SwiftUI
 /// The accented letters French verb forms use, to show above the keyboard. The caller decides
 /// where a letter goes, so a field that tracks its selection can insert at the cursor.
 struct FrenchLetterKeyRow: View {
-  // Josh chose these eight on 2026-11-22. ï and œ, in fourteen verbs between them, are left
-  // out because search folds them (hair finds haïr), and no verb form uses à, ù, or ë.
+  // ï and œ, in fourteen verbs between them, are left out because search folds them (hair
+  // finds haïr), and no verb form uses à, ù, or ë.
   static let letters = ["é", "è", "ê", "â", "î", "ô", "û", "ç"]
 
   let insert: (String) -> Void

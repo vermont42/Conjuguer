@@ -147,7 +147,6 @@ extension PersonNumber {
     return firstLetterIsVowel || firstLetterIsUnaspiratedH
   }
 
-  /// The third person's reflexive pronoun before `word`, elided where French elides it.
   nonisolated static func thirdPersonReflexivePronoun(before word: String, hasAspiratedH: Bool) -> String {
     elides(before: word, hasAspiratedH: hasAspiratedH) ? "s'" : "se "
   }

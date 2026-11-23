@@ -54,7 +54,6 @@ struct VerbLookupTests {
     #expect(lookup("vais").answer(pronounGender: .masculine) == "vais: Indicatif Présent (je) of aller")
   }
 
-  // suis is être's and suivre's, so the lookup names both and opens the search, which lists both.
   @Test func testAConjugationOfTwoVerbsNamesBothAndOpensTheSearch() {
     let found = lookup("suis")
     #expect(Set(conjugatedVerbs(found)) == ["être", "suivre"])

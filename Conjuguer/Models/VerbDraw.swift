@@ -54,15 +54,13 @@ enum VerbDraw {
     return weightedVerb(from: frequentVerbs, using: &generator) ?? myVerbs.first
   }
 
-  /// aller counts 4, venir 2 for its model and 2 for having no base, apprendre 2, parler 2, and
-  /// rappeler 1.
   @MainActor static func weight(of verb: Verb) -> UInt64 {
     (isIrregular(verb) ? favoredFactor : 1) * (isBase(verb) ? favoredFactor : 1)
   }
 
   /// Irregular as French schools teach it, the third group: every model outside the first two
   /// groups, and aller. The spelling changes of manger, lancer, and appeler do not count, though
-  /// `VerbModel.irregularity` scores them above zero. Josh chose this on 2026-11-22.
+  /// `VerbModel.irregularity` scores them above zero.
   static func isIrregular(_ verb: Verb) -> Bool {
     guard verb.model != alleModelID else {
       return true

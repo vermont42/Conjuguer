@@ -35,15 +35,15 @@ struct FrequencyBandTests {
     #expect(Verb.verbs(in: .top100).prefix(3).map(\.infinitif) == ["être", "avoir", "faire"])
   }
 
-  // `convaincre`'s FrWaC count is a failed join, and the estimate that replaced it was clamped to
-  // rank 1,000's count, which left it at #1001 until the clamp was waived for quarantined rows.
+  // `convaincre`'s FrWaC count is a failed join. Its estimate is exempt from the clamp to rank
+  // 1,000's count, which would leave it at #1001.
   @Test func convaincreIsInTheTop1000() throws {
     let convaincre = try #require(Verb.verbs["convaincre"])
     #expect(convaincre.isIn(.top1000))
   }
 
-  // GLÀFF counted these only where the corpus kept the ligature, so they carried zeros and
-  // ranked near the bottom. Their counts now come from Lexique 4's `oe` spellings.
+  // GLÀFF counts these only where the corpus kept the ligature, so their counts come from
+  // Lexique 4's `oe` spellings, flagged provisional.
   @Test(arguments: ["manœuvrer", "écœurer", "œuvrer"])
   func aLigatureVerbIsNoLongerRankedAsUnattested(infinitif: String) throws {
     let verb = try #require(Verb.verbs[infinitif])

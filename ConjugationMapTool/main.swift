@@ -24,8 +24,7 @@
 // compiles changes, and leaves it untouched otherwise.
 //
 // For the dumps, run scripts/write_forms_json.sh, which builds this target and calls it with
-// the right paths. Until 2026-11-22 they came from a disabled test harness,
-// CorpusFormsDumpTests, which this tool replaced; its three outputs were confirmed identical.
+// the right paths.
 //
 // The tool compiles the app's own conjugation sources (the target membership exceptions in
 // project.pbxproj list them), so the map, the app's display, and the dumps all come from one

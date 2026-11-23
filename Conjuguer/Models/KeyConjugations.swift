@@ -52,6 +52,5 @@ extension Verb {
     return lines.joined(separator: "\n") + "\n\n" + L.VerbView.shareInvitation(infinitif: citationInfinitif, link: URL.appStore.absoluteString)
   }
 
-  /// Shared with the pedagogy plan's key-conjugations exercise and the review card.
   static let keyTenses: [Tense] = [.indicatifPrésent(.thirdSingular), .passéComposé(.thirdSingular), .futurSimple(.thirdSingular)]
 }

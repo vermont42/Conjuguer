@@ -94,7 +94,6 @@ private struct RelatedChip: View {
   }
 }
 
-/// Every verb built on one root, by frequency or alphabetically.
 struct RelatedVerbListView: View {
   let destination: RelatedVerbListDestination
   @Environment(\.verbPagePush) private var push
@@ -163,7 +162,6 @@ struct RelatedVerbListView: View {
   }
 }
 
-/// Lays its children out in rows, wrapping to a new row when the next child would not fit.
 struct FlowLayout: SwiftUI.Layout {
   var spacing: CGFloat = 8
 

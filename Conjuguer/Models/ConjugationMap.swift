@@ -95,15 +95,13 @@ nonisolated extension ConjugationMap {
     self.init(text: String(decoding: decompressed, as: UTF8.self))
   }
 
-  /// The participe passé as a text agrees it: feminine, masculine plural, feminine plural.
   static func agreedForms(ofParticiple participle: String) -> [String] {
     ["e", "s", "es"].map { Conjugator.agreed(participle: participle, ending: $0) }
   }
 }
 
 extension ConjugationMap {
-  /// Builds the map from `Verb.verbs`, `VerbModel.models`, and `DefectGroup.defectGroups`,
-  /// which must be loaded.
+  /// `Verb.verbs`, `VerbModel.models`, and `DefectGroup.defectGroups` must already be loaded.
   static func build() -> ConjugationMap {
     var verbsByConjugation: [String: Set<String>] = [:]
     for (verbKey, verb) in Verb.verbs {

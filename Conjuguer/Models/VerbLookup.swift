@@ -11,7 +11,6 @@ import Foundation
 /// the same search the verb list does, so the two cannot disagree.
 struct VerbLookup {
   enum Finding: Equatable {
-    /// The word is this verb's infinitive.
     case infinitive(Verb)
 
     /// The word is a conjugation of this verb: vais, of aller.
@@ -75,7 +74,6 @@ struct VerbLookup {
     }
   }
 
-  /// The answer as the shortcut speaks and shows it, one finding per line.
   func answer(pronounGender: PronounGender) -> String {
     findings.map { finding in
       switch finding {

@@ -7,9 +7,7 @@
 
 import Foundation
 
-/// What a quiz asks about, how many questions it asks, and where it was begun. Later work adds
-/// scopes as constructors: browse Phase 14's collections (`collection(_:)`), and the pedagogy
-/// plan's levels.
+/// What a quiz asks about, how many questions it asks, and where it was begun.
 struct QuizScope {
   /// Nil asks the default quiz, built from `QuizVerbs` at the learner's difficulty.
   let verbs: [Verb]?
@@ -23,9 +21,8 @@ struct QuizScope {
   /// The collection a quiz over a collection asks about, which `quizStart` names.
   var collection: VerbCollection?
 
-  /// Only the default quiz posts to the leaderboard and sets the best score, as Josh decided for
-  /// Konjugieren on 2026-11-13: a score over the learner's own verbs, or over three questions,
-  /// compares with nothing.
+  /// Only the default quiz posts to the leaderboard and sets the best score: a score over the
+  /// learner's own verbs, or over three questions, compares with nothing.
   var isRanked: Bool {
     verbs == nil
   }
@@ -224,7 +221,6 @@ enum QuizTenseSlot: CaseIterable {
 }
 
 extension Verb {
-  /// Whether the verb has `tense`'s cell, which its defect group can lack.
   func hasCell(_ tense: Tense) -> Bool {
     guard let defectGroupId, let defectGroup = DefectGroup.defectGroups[defectGroupId] else {
       return true

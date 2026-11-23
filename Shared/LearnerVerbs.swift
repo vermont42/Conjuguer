@@ -68,17 +68,14 @@ nonisolated struct LearnerVerbs: Codable, Equatable, Sendable {
     entries[key]?.lastOpened != nil
   }
 
-  /// Starred verbs, the most recently starred first.
   var starred: [String] {
     newestFirst(by: \.starred)
   }
 
-  /// Opened verbs, the most recently opened first.
   func recent(limit: Int = recentLimit) -> [String] {
     Array(newestFirst(by: \.lastOpened).prefix(limit))
   }
 
-  /// What My Verbs holds: the starred verbs, then the recent ones not starred.
   var myVerbs: [String] {
     let starred = self.starred
     let starredSet = Set(starred)

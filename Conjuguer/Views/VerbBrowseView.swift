@@ -303,7 +303,6 @@ struct VerbBrowseView: View {
     myVerbsIsChosen ? .myVerbs : VerbListMode(store?.sort ?? Settings.verbSortDefault)
   }
 
-  /// The verbs last opened, shown while the field is focused and empty, before anything is typed.
   private var showsRecents: Bool {
     searchIsEngaged && !isSearching && !world.learnerVerbs.recentVerbs.isEmpty
   }
@@ -601,8 +600,6 @@ struct VerbBrowseView: View {
     keyboardSelection = Self.keyboardSelection(after: keyboardSelection, moving: offset, count: keyboardTargets.count)
   }
 
-  /// The first arrow press lands on the first result, and the selection stops at either end
-  /// rather than wrapping.
   nonisolated static func keyboardSelection(after current: Int?, moving offset: Int, count: Int) -> Int? {
     let lastIndex = count - 1
     guard lastIndex >= 0 else {
@@ -614,7 +611,6 @@ struct VerbBrowseView: View {
     return min(max(current + offset, 0), lastIndex)
   }
 
-  /// Return opens the highlighted row, else the first result, else the guess.
   private func openKeyboardSelection() {
     let targets = keyboardTargets
     let index = keyboardSelection ?? 0

@@ -1,18 +1,13 @@
 # Feature Architecture
 
-How Conjuguer's feature systems work, one section each. Written 2026-11-22 for Phase 0 of
-[`plans/browse_and_verb_implementation.md`](../plans/browse_and_verb_implementation.md) (the
-**browse plan**), modeled on Konjugieren's document of the same name. It starts by describing what
-the app does today, briefly, and the phases of the browse plan and of
-[`plans/pedagogy_implementation.md`](../plans/pedagogy_implementation.md) extend it as they build.
-Keep it true: a section that describes code that has since changed misleads the next session more
-than a missing section would.
+How Conjuguer's feature systems work, one section each. Keep it true: a section that describes code
+that has since changed misleads the next session more than a missing section would.
 
 ## Search
 
-The Verbs and Models tabs each show a list with a search field and a sort picker. Since Phase 1 of
-the browse plan (2026-11-22), one function, `VerbSearch.matches`, matches and ranks verbs for both,
-and later callers (reverse lookup, Spotlight, the Look Up intent) are to use it too.
+The Verbs and Models tabs each show a list with a search field and a sort picker. One function,
+`VerbSearch.matches`, matches and ranks verbs for both, and Look Up a Verb and `VerbEntity`'s string
+query use it too.
 
 ### Architecture
 
@@ -22,8 +17,8 @@ and later callers (reverse lookup, Spotlight, the Look Up intent) are to use it 
 | `ModelBrowseView.swift` | The Models tab, built the same way. `ModelBrowse.makeStore` builds the store |
 | `BrowseStore.swift` | A generic `@Observable` store that holds a list presorted for each sort order and persists the chosen order through a closure |
 | `BrowseSearch.swift` | `BrowseSearch.results(in:query:playSoundIfEmpty:search:)`: every item for a blank query, otherwise what the tab's search closure returns, with a sad trombone when that is nothing |
-| `VerbSearch.swift` | The matching and ranking rule. `MatchKind` names each kind of match, for Phase 3's `matchKind`. Also the guess |
-| `VerbSearch+Conjugations.swift` | Reverse lookup (Phase 5): a conjugation, simple or compound, finds its verbs |
+| `VerbSearch.swift` | The matching and ranking rule. `MatchKind` names each kind of match, for the `matchKind` signal parameter. Also the guess |
+| `VerbSearch+Conjugations.swift` | Reverse lookup: a conjugation, simple or compound, finds its verbs |
 | `ConjugationQuery.swift` | A query as a conjugation's words: subject and reflexive pronouns, elision, que, y, en, and negation dropped |
 | `ConjugationIndex.swift` | The conjugation map indexed by folded spelling, and the packed folds the guess measures; `BoundedEditDistance` |
 | `MatchedConjugation.swift` | The conjugation a result matched, its cells, the row's line ("vais: Indicatif Présent (je)"), and the `MarkedConjugations` a page opens with |
@@ -66,14 +61,14 @@ and later callers (reverse lookup, Spotlight, the Look Up intent) are to use it 
   iOS 26.3, as Konjugieren found too. A key appends its letter.
 - **No result.** `BrowseSearch` plays `Sound.randomSadTrombone` when the text changes, not when
   the sort order changes, and not for a query of only spaces. The Models tab shows
-  `ContentUnavailableView.search`. The Verbs tab shows `FailedVerbSearchView` (since Phase 2): the
+  `ContentUnavailableView.search`. The Verbs tab shows `FailedVerbSearchView`: the
   same view, then a guess, then "If you believe that “…” is a French verb, please email
   vermontcoder@gmail.com", whose address is a `mailto:` link (`URL.mailto`) with the subject and
   body filled in with the query in the learner's language. A device that cannot open the link,
   such as the simulator, copies the address to the clipboard instead and says so for four seconds.
 - **The guess.** `VerbSearch.guess` folds the query as search does (reflexive pronoun dropped,
   accents and ligatures folded) and measures optimal string alignment distance (Levenshtein plus a
-  swap of two adjacent letters) to every folded infinitive and, since Phase 5, to every folded
+  swap of two adjacent letters) to every folded infinitive and to every folded
   conjugation when the query is one word once its pronouns are dropped. A guess must be within one
   edit per three letters, and never more than three; on a tie an infinitive beats a conjugation,
   then the more frequent verb wins, then the earlier spelling. So venier finds venir, assoir
@@ -91,26 +86,23 @@ and later callers (reverse lookup, Spotlight, the Look Up intent) are to use it 
   calls `World.openSearch(text: nil, source: .tab)`: it closes any deeplinked page, switches to the
   Verbs tab, and sets `searchRequest`, which `VerbBrowseView` answers by popping any pushed verb page
   (waiting 500 ms for the pop, or the focus does not take) and focusing the field, keeping its text.
-  Since Phase 9 the `search` route, the Find a Verb control, and the quick action make the same
-  request with text (§ Deeplinks).
+  The `search` route, the Find a Verb control, and the quick action make the same request with
+  text (§ Deeplinks).
   **↑ and ↓** move a highlight through the results in reading order (a red accent bar on a card, a
   red tint on a list row), stopping at either end; the first ↓ lands on the first result. They need
   `VerbSearchArrowKeys`, a `UIKeyCommand` on the window's root view controller installed only while
   the verb field is focused, because a focused text field consumes them ahead of every SwiftUI
   mechanism. **Return** opens the highlighted result, else the first, else the guess. Return and the
   arrows act only on the iPad idiom (which a Mac running the iPad app also reports) and only while
-  the field holds a query, so the iPhone keyboard's Search key behaves as before.
+  the field holds a query, so the iPhone keyboard's Search key keeps its usual behavior.
 - **Cost.** One search over 6,330 verbs takes about 20 ms on the Intel simulator, and about 50 ms
   with reverse lookup, in a Debug build. `VerbSearch` caches each verb's folded keys after the
   first search.
 
-The table in the browse plan's **Conjuguer Today** section lists what typical queries returned
-before Phase 1.
-
 ### Reverse Lookup
 
-Since Phase 5 of the browse plan (2026-11-22), a conjugation finds its verb, through the map
-([Conjugation Map](#conjugation-map)) indexed by `ConjugationIndex`.
+A conjugation finds its verb, through the map ([Conjugation Map](#conjugation-map)) indexed by
+`ConjugationIndex`.
 
 - **The query.** `ConjugationQuery` splits elided words (j'ai is j' and ai, with ’ read as ') and
   drops leading words that a sentence puts around a conjugation, while one word remains: subject
@@ -158,17 +150,15 @@ Since Phase 5 of the browse plan (2026-11-22), a conjugation finds its verb, thr
 
 ### Opening a Verb
 
-A tap in the Verbs tab appends a `VerbDestination` to the tab's `NavigationPath`. A deeplink
-instead sets `Current.verb`, which the Verbs tab presents as a sheet (see
-[Deeplinks](#deeplinks)), and the Info tab does the same for a verb link in an article. Since
-Phase 7, every page that leads to another (a related verb, the model row, a model page's verb
-links) pushes it onto whichever stack shows it, through `VerbPagePush`; see
-[Related Verbs](#related-verbs).
+A tap in the Verbs tab appends a `VerbDestination` to the tab's `NavigationPath`. A deeplink instead
+sets `Current.verb`, which the Verbs tab presents as a sheet (see [Deeplinks](#deeplinks)), and the
+Info tab does the same for a verb link in an article. Every page that leads to another (a related
+verb, the model row, a model page's verb links) pushes it onto whichever stack shows it, through
+`VerbPagePush`; see [Related Verbs](#related-verbs).
 
 ## Verb Page
 
-Phase 6 of the browse plan (2026-11-22) ordered the cards, named them twice, and gave each an
-article. It ports Konjugieren's Phase 7.
+The page orders its cards by frequency, names each tense twice, and gives each tense an article.
 
 ### Architecture
 
@@ -195,18 +185,18 @@ lines and its landing follow it, since `Verb.conjugations(matching:)` reads `Ten
 
 ### Headings
 
-Each card's heading is the tense's French name, as before, then a red question-mark diamond, the
-model page's button for the irregularities article, which opens the tense's Info article. Under
-the name is a second name in the app's language: "also simple past" in English, "aussi passé
-défini" in French, each the name its learners' textbooks use (Josh, 2026-11-22). Nine French
-tenses have no French alternate, and their catalog value is empty, so no line shows. The
-personless card gives each of its three cells such a heading.
+Each card's heading is the tense's French name, then a red question-mark diamond, the model page's
+button for the irregularities article, which opens the tense's Info article. Under the name is a
+second name in the app's language: "also simple past" in English, "aussi passé défini" in French,
+each the name its learners' textbooks use (Josh, 2026-11-22). Nine French tenses have no French
+alternate, and their catalog value is empty, so no line shows. The personless card gives each of its
+three cells such a heading.
 
 **The article** opens in `TenseArticleSheet`, so closing it returns to the same verb. A link
 inside to another article or to a verb pushes it inside the sheet, and a verb page there pushes
 its own articles rather than presenting another sheet (the `tenseArticleOpener` environment
 value). `InfoView` takes an optional `openLink` for this; without one, its links go to
-`World.handleInAppURL` as before.
+`World.handleInAppURL`.
 
 ### The Compound Block
 
@@ -217,18 +207,17 @@ on that page anyway, and touching the toggle there stores the new choice.
 
 ### The Color Key and the Scroll Tip
 
-The color-key card shows until dismissed (`hasSeenConjugationColorKey`), and since Phase 6 only on a
-page whose verb has red letters of its own, in its simple tenses or personless cells (Josh,
-2026-11-22). Every compound tense has red letters in avoir's or être's forms, so this test leaves
-them out: parler's page shows no key. In the key's place, `ScrollToBottomTip` points to the
-etymology and examples. A page that appears after the key was dismissed unlocks it (a persisted
-TipKit parameter), so the two never appear one straight after the other, and reaching the
-etymology or the examples retires it. Both obey `TipDisplay.tipsEnabled`.
+The color-key card shows until dismissed (`hasSeenConjugationColorKey`), and only on a page whose
+verb has red letters of its own, in its simple tenses or personless cells (Josh, 2026-11-22). Every
+compound tense has red letters in avoir's or être's forms, so this test leaves them out: parler's
+page shows no key. In the key's place, `ScrollToBottomTip` points to the etymology and examples. A
+page that appears after the key was dismissed unlocks it (a persisted TipKit parameter), so the two
+never appear one straight after the other, and reaching the etymology or the examples retires it.
+Both obey `TipDisplay.tipsEnabled`.
 
 ## Related Verbs
 
-Phase 7 of the browse plan (2026-11-22) gave the verb page a way to other verbs, and the model
-page a frequency order. It ports Konjugieren's Phase 9.
+The verb page leads to related verbs, and the model page can list its verbs by frequency.
 
 ### Architecture
 
@@ -252,11 +241,10 @@ left: redécouvrir, découvrir, couvrir. Every verb built on a root ends in it, 
 family by suffix and checks each candidate's root.
 
 Measured 2026-11-22: about 1,420 verbs have a base, in about 820 families (poser 23, venir 18,
-mettre 16). Of the 300 most frequent verbs, the 65 with a base are all right. Thirteen are
-compounds formed in Latin whose meaning has drifted (attendre on tendre, demander on mander,
-rester on the archaic ester), and Josh kept them (2026-11-22), as Konjugieren kept verstehen with
-stehen. allier is built on lier by the same reasoning (Latin alligare, ad + ligare), though the
-plan named it as a false pair. The rule reads the etymology in the app's language. Every pair
+mettre 16). Of the 300 most frequent verbs, the 65 with a base are all right. Thirteen are compounds
+formed in Latin whose meaning has drifted (attendre on tendre, demander on mander, rester on the
+archaic ester), and Josh kept them (2026-11-22). allier is built on lier by the same reasoning
+(Latin alligare, ad + ligare). The rule reads the etymology in the app's language. Every pair
 appears in both languages today, so the families are the same in French and English.
 
 ### The Card
@@ -269,10 +257,10 @@ each of up to six chips:
   frequency. More than six adds "All 11", which pushes `RelatedVerbListView`, Frequency first, with
   an Alphabetical control. The choice is not stored.
 - **Same model: venir (6-7)**: the most frequent verb of each other root in the model, by frequency
-  (tenir, appartenir on venir's page; donner, trouver, passer on parler's). Konjugieren showed the
-  root verb of each ablaut root. Here the most frequent verb wins, so demander rather than mander
-  speaks for its root. "All 29" pushes the model page in frequency order. The row is hidden when the
-  model holds only this verb's family (prendre's 5-2). The model row at the top still leads there.
+  (tenir, appartenir on venir's page; donner, trouver, passer on parler's). The most frequent verb
+  wins over the root verb, so demander rather than mander speaks for its root. "All 29" pushes the
+  model page in frequency order. The row is hidden when the model holds only this verb's family
+  (prendre's 5-2). The model row at the top still leads there.
 
 The card is hidden when both rows are empty. Chips are `onTapGesture` with an `accessibilityAction`
 and the button trait, one element each, read in French, as `docs/voiceover.md` asks.
@@ -289,16 +277,15 @@ back to a sheet.
 
 ### The Model Page's Order
 
-A segmented control above "Verbs Using This Model" chooses Alphabetical (the default) or
-Frequency. The choice is not stored. The list stays a run of `conjuguer://verb/` links in one
-`Text` (Josh, 2026-11-22), since model 1-1 has 4,859 verbs and Konjugieren saw about 1,000 rows in
-a non-lazy stack peg the CPU. Alphabetical now uses French collation (`Util.french`). The old plain
-sort put écouter after the z's.
+A segmented control above "Verbs Using This Model" chooses Alphabetical (the default) or Frequency.
+The choice is not stored. The list stays a run of `conjuguer://verb/` links in one `Text` (Josh,
+2026-11-22), since model 1-1 has 4,859 verbs and Konjugieren saw about 1,000 rows in a non-lazy
+stack peg the CPU. Alphabetical uses French collation (`Util.french`), since a plain sort puts
+écouter after the z's.
 
 ## Copy and Share
 
-Phase 8 of the browse plan (2026-11-22) let a learner copy a conjugation and share a verb. It ports
-Konjugieren's Phase 10.
+A learner can copy a conjugation and share a verb.
 
 ### Architecture
 
@@ -312,15 +299,15 @@ Konjugieren's Phase 10.
 ### Key Conjugations
 
 The il forms of the présent, the passé composé, and the futur simple, in that order (Josh,
-2026-11-22): "vient · est venu · viendra". They stand with no label, here and wherever a later
-phase shows them. The participle agrees with il whatever the pronoun-gender setting, because no
-pronoun stands before it. A reflexive verb keeps its pronoun, elided as its cells elide it
-(`PersonNumber.thirdPersonReflexivePronoun`): "se souvient · s'est souvenu · se souviendra". A
-form the verb's defect group marks unused is left out, so falloir gives all three, gésir gives
-only "gît", and accroire gives none. The function returns mixed case, as the Conjugator writes it,
-so a caller can show red letters (the auxiliary's irregular letters are capitals too); the share
-text lowercases them. Phase 9's Spotlight entries, Phase 13's review card, and the pedagogy plan's
-key-conjugations exercise read `Verb.keyTenses` and this function.
+2026-11-22): "vient · est venu · viendra". They stand with no label, here and wherever else they
+show. The participle agrees with il whatever the pronoun-gender setting, because no pronoun stands
+before it. A reflexive verb keeps its pronoun, elided as its cells elide it
+(`PersonNumber.thirdPersonReflexivePronoun`): "se souvient · s'est souvenu · se souviendra". A form
+the verb's defect group marks unused is left out, so falloir gives all three, gésir gives only
+"gît", and accroire gives none. The function returns mixed case, as the Conjugator writes it, so a
+caller can show red letters (the auxiliary's irregular letters are capitals too); the share text
+lowercases them. Spotlight's entries, Look Up a Verb's answers, and the review card read this
+function.
 
 ### Sharing
 
@@ -349,17 +336,15 @@ on screen; iOS 26 draws it with no arrow, over the button.
 
 A long press on a conjugation, or a right-click on a Mac, opens a context menu with Copy, the
 platform's convention, which needs no "Copied" toast. It copies the form as the cell shows it, in
-lowercase and without the pronoun beside it ("vais", "suis allée", "souviens-toi"), as Konjugieren
-copies "stehe auf". A long press on the infinitive at the top copies it. An empty cell copies
-nothing; a form struck through as unused copies, since it is shown. A tap does nothing, as before:
-nothing on the verb page speaks.
+lowercase and without the pronoun beside it ("vais", "suis allée", "souviens-toi"). A long press on
+the infinitive at the top copies it. An empty cell copies nothing; a form struck through as unused
+copies, since it is shown. A tap does nothing: nothing on the verb page speaks.
 
 ## Conjugation Map
 
-Since Phase 4 of the browse plan (2026-11-22), the app bundle carries every one-word conjugation
-of every verb, mapped to the verbs it belongs to, so that search can start from a conjugation:
-vais finds aller, and suis finds être and suivre. Phase 5 builds the search on it. Nothing in the
-interface reads it yet.
+The app bundle carries every one-word conjugation of every verb, mapped to the verbs it belongs to,
+so that search can start from a conjugation: vais finds aller, and suis finds être and suivre.
+[Reverse lookup](#reverse-lookup) and Spotlight's keywords read it.
 
 ### Architecture
 
@@ -401,12 +386,11 @@ leaves the map alone, rightly, since a new signature cannot change the map.
 - **Keys** are lowercase and NFC. **Values** are keys of `Verb.verbs`, so a doubled infinitive's
   entries stay apart: sors is "sortir exit" only, and sortir is both. Homographs keep every verb
   (suis, vis, tu, été).
-- **The format** is one line per conjugation, `suis⇥suivre⇥être`, sorted by UTF-8 bytes,
-  compressed with LZFSE: 242,966 conjugations, 5.0 MB of text, 615,655 bytes in the bundle, built in
-  about 3.5 seconds by the Release tool. (Konjugieren's holds 50,056 conjugations in 173 KB.)
-  (Figures as of 2026-11-22, after béer's and douer's defect groups were corrected.)
-  `sorted()` is not used, because it left 155 keys out of order, and two builds of the same
-  data wrote different bytes.
+- **The format** is one line per conjugation, `suis⇥suivre⇥être`, sorted by UTF-8 bytes, compressed
+  with LZFSE: 242,966 conjugations, 5.0 MB of text, 615,655 bytes in the bundle, built in about 3.5
+  seconds by the Release tool. (Figures as of 2026-11-22, after béer's and douer's defect groups
+  were corrected.) `sorted()` is not used, because it left 155 keys out of order, and two builds of
+  the same data wrote different bytes.
 - **Loading** `ConjugationMap.bundled` takes 1.2 seconds in a Debug build on this Intel Mac's
   simulator, so the verb list builds `ConjugationIndex.bundled`, which loads it, from a background
   task before the first search. It is a `nonisolated static let`.
@@ -437,43 +421,42 @@ wait for the release in [`privacy_policy_pending.md`](privacy_policy_pending.md)
 
 ### Lookup signals
 
-Built in Phase 3 of the browse plan (2026-11-22), ported from Konjugieren's Phase 3. Names match
-Konjugieren's where the signal is new, so the apps can be read side by side; the verb page's
-arrival keeps Conjuguer's `viewAppeared`, so that TelemetryDeck's history of verb pages stays one
-series.
+Names match Konjugieren's where the signal is new, so the apps can be read side by side; the verb
+page's arrival keeps Conjuguer's `viewAppeared`, so that TelemetryDeck's history of verb pages stays
+one series.
 
 | Signal | Parameters | Sent |
 |---|---|---|
 | `viewAppeared` with `viewName` `VerbView` | `source` (below) | When a verb visit begins: the page arrives, or returns with `source` `resume` after another tab, its own model sheet, or the background |
 | `leaveVerbView` | `deepestSection` (`header`, `simple`, `compound`, `etymology`, `example`), `dwell` (`0-5s`, `5-15s`, `15-60s`, `60s+`) | Exactly once for each verb page's `viewAppeared`: when the page leaves the screen, its model sheet opens, or the app goes to the background |
-| `finishSearch` | `source` (where the search began: `tab`, `control`, `quickAction`, `lookup`, or `deeplink`; Phase 9), `outcome` (`opened`, `abandoned`, `noResult`), `queryLength` (`1-2`, `3-5`, `6-9`, `10+`), `resultCount` (`0`, `1`, `2-10`, `11+`), `matchKind` (below), `resultPosition` (`1`, `2-5`, `6+`, `none`) | Once per verb search: when a result or the guess is opened (by tap, Return, or the arrow keys), the field is cleared, or the app goes to the background with text in the field |
+| `finishSearch` | `source` (where the search began: `tab`, `control`, `quickAction`, `lookup`, or `deeplink`), `outcome` (`opened`, `abandoned`, `noResult`), `queryLength` (`1-2`, `3-5`, `6-9`, `10+`), `resultCount` (`0`, `1`, `2-10`, `11+`), `matchKind` (below), `resultPosition` (`1`, `2-5`, `6+`, `none`) | Once per verb search: when a result or the guess is opened (by tap, Return, or the arrow keys), the field is cleared, or the app goes to the background with text in the field |
 
-**A visit** (`VerbVisit`) is one stretch of a verb page on screen, uncovered by its own model
-sheet, with the app in the foreground. It is the same whether the page was pushed (Verbs tab) or
-presented as a sheet (a deeplink, an Info link, a model page). A page that returns starts a new
-visit whose `source` is `resume`, so every verb page's `viewAppeared` pairs with one
-`leaveVerbView`, background time never counts as reading, and arrivals are the visits whose source
-is not `resume`. A resumed visit starts from the deepest section already on screen. Before Phase 3,
-`viewAppeared` for `VerbView` fired on each `onAppear` and never on a return from the background;
-it now also fires on that return, as `resume`. A sheet that something else presents over a page
-(a deeplink's verb over a pushed page, say) does not end the page's visit.
+**A visit** (`VerbVisit`) is one stretch of a verb page on screen, uncovered by its own model sheet,
+with the app in the foreground. It is the same whether the page was pushed (Verbs tab) or presented
+as a sheet (a deeplink, an Info link, a model page). A page that returns starts a new visit whose
+`source` is `resume`, so every verb page's `viewAppeared` pairs with one `leaveVerbView`, background
+time never counts as reading, and arrivals are the visits whose source is not `resume`. A resumed
+visit starts from the deepest section already on screen. The App Store version sent
+`viewAppeared` for `VerbView` on each `onAppear` and never on a return from the background; the
+current code also sends it on that return, as `resume`. A sheet that something else presents over a
+page (a deeplink's verb over a pushed page, say) does not end the page's visit.
 
 **Reaching a section** means a third of its first card on screen (`onScrollVisibilityChange`,
 threshold 0.3): the présent card for `simple`, the passé composé card for `compound`, then the
-etymology and example cards. The compound block shows only when its toggle is on. Until Phase 6
-the toggle was off on every page, so `compound` was rare; since Phase 6 it is on by default and
-remembered, so a learner who never hides the block reaches it on the way to the etymology.
-A tense article's sheet ends the visit as the model sheet does, and closing it resumes the visit.
+etymology and example cards. The compound block shows only when its toggle is on, which is on by
+default and remembered, so a learner who never hides the block reaches it on the way to the
+etymology. A tense article's sheet ends the visit as the model sheet does, and closing it resumes
+the visit.
 
-**`tapTenseArticle`**, with no parameters, counts taps on a tense heading's article button
-(Phase 6, 2026-11-22). Konjugieren's counterpart is `tapConjugationgroupArticle`.
+**`tapTenseArticle`**, with no parameters, counts taps on a tense heading's article button.
+Konjugieren's counterpart is `tapConjugationgroupArticle`.
 
-**`tapShareVerb`**, with no parameters, counts taps on the verb page's share button (Phase 8,
-2026-11-22), whether or not the learner then shares. Copying sends nothing.
+**`tapShareVerb`**, with no parameters, counts taps on the verb page's share button, whether or not
+the learner then shares. Copying sends nothing.
 
-**`tapStarVerb`** counts taps on the verb page's star (Phase 10, 2026-11-22), with `starred`
-(`true` or `false`), the state after the tap, so that a count of devices with a starred verb can be
-told from taps that unstar. It does not name the verb.
+**`tapStarVerb`** counts taps on the verb page's star, with `starred` (`true` or `false`), the state
+after the tap, so that a count of devices with a starred verb can be told from taps that unstar. It
+does not name the verb.
 
 **A search** (`SearchTracker`, `SearchReport`) begins with the first non-blank letter and ends
 once. Returning to the results and opening another verb without editing the text sends no second
@@ -483,24 +466,25 @@ abandoned search's `matchKind` is that of the top result it passed over. Opening
 `opened`, `resultCount` `0`, `matchKind` `guess`, and position `1`. `resultCount` counts rows, so a
 doubled infinitive (haïr) counts twice. The Models tab's search sends nothing.
 
-**Where a search began** (Phase 9, 2026-11-22, as in Konjugieren's Phase 11) is `finishSearch`'s
-`source`: `tab` for one typed in the Verbs tab, Command-F included, or the surface whose search
-link opened the field (`control`, `quickAction`, `lookup`, or `deeplink` for a link without a
-`source`). Without it, a page reached through the control's search would report only `search`.
-`SearchTracker.fieldOpened(from:)` holds the surface for the next search, `fieldClosed()` forgets it
-if nothing was typed, and a search that the opening interrupts ends there.
+**Where a search began** is `finishSearch`'s `source`: `tab` for one typed in the Verbs tab,
+Command-F included, or the surface whose search link opened the field (`control`, `quickAction`,
+`lookup`, or `deeplink` for a link without a `source`). Without it, a page reached through the
+control's search would report only `search`. `SearchTracker.fieldOpened(from:)` holds the surface
+for the next search, `fieldClosed()` forgets it if nothing was typed, and a search that the opening
+interrupts ends there.
 
 **`matchKind`** is `VerbSearch.MatchKind`'s case by name, through an exhaustive switch
 (`analyticsValue` in `SearchReport.swift`), so a new kind cannot go unnamed: `exactInfinitive`,
 `exactFoldedInfinitive`, `conjugation`, `infinitivePrefix`, `glossMeaning`, `foldedConjugation`,
 `foldedInfinitivePrefix`, `wholeWordGloss`, `infinitiveSubstring`, `foldedInfinitiveSubstring`,
-`glossSubstring`; plus `guess` and `none`. `conjugation` and `foldedConjugation` are sent since
-Phase 5. An opened guess reports `guess` whether it came from an infinitive or a conjugation.
+`glossSubstring`; plus `guess` and `none`. An opened guess reports `guess` whether it came from an
+infinitive or a conjugation.
 
 ### The `source` vocabulary
 
-`AnalyticsSource` is one vocabulary for the verb page's `viewAppeared` and, from Phase 11, the
-quiz signals. Values are Konjugieren's names wherever the surface is the same.
+`AnalyticsSource` is one vocabulary for the verb page's `viewAppeared`, `finishSearch`,
+`viewCollection`, and the quiz signals. Values are Konjugieren's names wherever the surface is the
+same.
 
 | Value | Sent today? | Meaning |
 |---|---|---|
@@ -510,37 +494,37 @@ quiz signals. Values are Konjugieren's names wherever the surface is the same.
 | `modelPage` | Yes | A verb in a model page's list, in the Models tab or in a sheet over a verb page |
 | `infoLink` | Yes | A verb linked from an Info article (`?source=infoLink`) |
 | `widget` | Yes | Any home-screen, lock-screen, or quiz widget (`WidgetDeeplink`, `?source=widget`) |
-| `control` | Yes | The Random Verb control in Control Center (`OpenRandomVerbControlIntent`); for `finishSearch`, the Find a Verb control (Phase 9) |
-| `shortcut` | Yes | Open Random Verb run from the Shortcuts app (`OpenRandomVerbIntent`); Phase 9's shortcuts too |
+| `control` | Yes | The Random Verb control in Control Center (`OpenRandomVerbControlIntent`); for `finishSearch`, the Find a Verb control |
+| `shortcut` | Yes | Open Random Verb run from the Shortcuts app or as its App Shortcut (`OpenRandomVerbIntent`) |
 | `deeplink` | Yes | A `conjuguer://` link with no `source` item, or one outside this vocabulary: a `verb/` link for the verb page, a `search` link for `finishSearch`, a `list/` link for `viewCollection` |
 | `resume` | Yes | The same page appearing again (above) |
-| `related` | Yes | A verb on a verb page's Related Verbs card, or in its full list (Phase 7) |
-| `spotlight` | Yes | A Spotlight result (Phase 9) |
-| `lookup` | Yes | Look Up a Verb, when the word settles one verb (Phase 9). For `finishSearch`, a search the lookup opened |
-| `quickAction` | Yes | For `finishSearch` only: a search the Home Screen quick action opened (Phase 9) |
-| `recent` | Yes | A recent verb in the empty focused search field (Phase 10) |
-| `myVerbs` | Yes | A verb in My Verbs (Phase 10). For the quiz signals (Phase 11), a quiz over My Verbs |
-| `tab` | Yes | For `finishSearch` only: a search typed in the Verbs tab, Command-F included (Phase 9). For the quiz signals (Phase 11), a quiz begun from the Quiz tab. For `viewCollection` (Phase 14), a collection opened in the Models tab |
-| `verbPage` | Yes | The quiz signals only: Test Me on a verb page (Phase 11) |
-| `reviewCard` | Yes | The review card, tapped after its conjugations are revealed (Phase 13) |
-| `list` | Yes | A verb on a featured collection's page; for the quiz signals, a collection's quiz (Phase 14) |
-| `sharedLink` | Yes | `viewCollection` only: a collection opened from a shared `list/` link (Phase 14) |
+| `related` | Yes | A verb on a verb page's Related Verbs card, or in its full list |
+| `spotlight` | Yes | A Spotlight result |
+| `lookup` | Yes | Look Up a Verb, when the word settles one verb. For `finishSearch`, a search the lookup opened |
+| `quickAction` | Yes | For `finishSearch` only: a search the Home Screen quick action opened |
+| `recent` | Yes | A recent verb in the empty focused search field |
+| `myVerbs` | Yes | A verb in My Verbs. For the quiz signals, a quiz over My Verbs |
+| `tab` | Yes | For `finishSearch` only: a search typed in the Verbs tab, Command-F included. For the quiz signals, a quiz begun from the Quiz tab. For `viewCollection`, a collection opened in the Models tab |
+| `verbPage` | Yes | The quiz signals only: Test Me on a verb page |
+| `reviewCard` | Yes | The review card, tapped after its conjugations are revealed |
+| `list` | Yes | A verb on a featured collection's page; for the quiz signals, a collection's quiz |
+| `sharedLink` | Yes | `viewCollection` only: a collection opened from a shared `list/` link |
 
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
-a bare `Verb`, and since Phase 5 the cells a search matched (`marks`). A link carries `source` as a query item
+a bare `Verb`, and the cells a search matched (`marks`). A link carries `source` as a query item
 (`conjuguer://verb/aller?source=widget`), because a widget or an intent can hand the app only a
 URL. `World.resolveDeeplinkEntity` stores it in `World.verbSource` (`URL.analyticsSource`),
 falling back to `deeplink`, and the sheets that present `World.verb` pass it to `VerbView`. A model
-page passes `modelPage` itself. Phase 9's grammar (§ Deeplinks) keeps the item on every route.
+page passes `modelPage` itself. The link grammar (§ Deeplinks) keeps the item on every route.
 
-**The convention for later phases.** A phase that adds a way to reach a verb page passes its value
-in `VerbDestination`, in a link's `source` item, or directly to `VerbView`, marks it sent in the
-table above, and stages its privacy line. Phase 8 added `tapShareVerb`, Phase 10 `tapStarVerb`
-(with `starred`, the state after the tap). Phase 11 added `source` to `quizStart`, `quizQuit`, and
-`quizCompletion`, and no `tapTestVerb`: Test Me starts its quiz as its sheet appears, so the tap and
-`quizStart` with `verbPage` are one event. Phase 13 added `viewReviewCard` and
-`tapRevealReviewCard` (§ The Review Card). Phase 14 added `viewCollection` and
-`tapShareCollection`, and `collection` on `quizStart` (§ Collections).
+**The convention for new surfaces.** A change that adds a way to reach a verb page passes its
+value in `VerbDestination`, in a link's `source` item, or directly to `VerbView`, marks it sent in
+the table above, and stages its privacy line. The other browse signals are `tapShareVerb`,
+`tapStarVerb` (with `starred`, the state after the tap), `source` on `quizStart`, `quizQuit`, and
+`quizCompletion`, `viewReviewCard` and `tapRevealReviewCard` (§ The Review Card), and
+`viewCollection`, `tapShareCollection`, and `collection` on `quizStart` (§ Collections). There is
+no `tapTestVerb`: Test Me starts its quiz as its sheet appears, so the tap and `quizStart` with
+`verbPage` are one event.
 
 ## Deeplinks
 
@@ -550,10 +534,8 @@ can hand Conjuguer only a URL uses one. There is no web domain, so there are no 
 
 ### Grammar
 
-Written 2026-11-22 for Phase 9 of
-[`plans/browse_and_verb_implementation.md`](../plans/browse_and_verb_implementation.md), before the
-`search` route was added, so that every route follows one shape. It is Konjugieren's grammar
-(its `docs/feature_architecture.md` § Deeplink System) with Conjuguer's routes.
+Every route follows one shape. It is Konjugieren's grammar (its `docs/feature_architecture.md`
+§ Deeplink System) with Conjuguer's routes.
 
 ```
 conjuguer://<route>[/<target>][?<item>=<value>&…]
@@ -565,8 +547,8 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
   every other route takes exactly one (`URL.hasDeeplinkTarget`); a link that breaks this is ignored.
 - **Text travels in query items, never in the path**, because it can hold spaces, apostrophes, and
   slashes ("j'ai mangé"). Query items modify a route; unknown ones are ignored.
-- **`source`** may follow any route that leads to a verb page, a search, a collection, or (pedagogy
-  plan) a quiz.
+- **`source`** may follow any route that leads to a verb page, a search, a collection, or a quiz,
+  though the `quiz` route does not read it yet.
   It names the surface that built the link, from `AnalyticsSource`, because a widget or an intent
   can hand the app nothing but a URL. A missing or unknown value counts as `deeplink`.
 - **Builders, not literals.** App code builds links with `URL.verbDeeplink`, `URL.searchDeeplink`,
@@ -575,19 +557,19 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
   pending links of `OpenQuizIntent`, `OpenRandomVerbIntent`, `OpenRandomVerbControlIntent`, and
   `OpenVerbSearchIntent`), and `DeeplinkTests` pins each literal's source to the vocabulary.
 
-| Route | Target | Query items | Opens | Since |
+| Route | Target | Query items | Opens | Shipped |
 |---|---|---|---|---|
-| `verb` | A `Verb.verbs` key (`aller`; `ha%C3%AFr%20France` for one entry of a doubled infinitive), or `random` | `source`; `match`, a conjugation the page marks as it marks a search's match (`verb/aller?match=vais`) | The verb page as a sheet over the Verbs tab (or the Info tab, for an article's link), scrolled to the first marked cell. `random` draws from the 1,000 most frequent verbs, or from My Verbs one time in three (`VerbDraw`, browse Phase 12). An unknown verb opens the Verbs tab and nothing else; a `match` that fills no cell opens the page unmarked | Before 2026; `match` Phase 9 |
-| `search` | None | `q`, the text; `source` | The verb list with its search field, any verb page closed. With text, the results show with the keyboard down; with none (or `q` empty), the field is cleared and focused for typing | Phase 9 |
-| `model` | A model's identifier (`1-1`) | `source`, which a shared model sends as `sharedLink` and nothing reads yet | The model page as a sheet over the Models tab | Before 2026; `source` Phase 14 |
-| `info` | A stable key (`futur_simple`), or a legacy position (`info/0`) | None | The article as a sheet over the Info tab. An unknown key or out-of-range position does nothing | Before 2026; keys Phase 9 |
-| `quiz` | Anything (`OpenQuizIntent` sends `quiz/start`) | None read yet | The Quiz tab, starting a quiz unless one is in progress | Before 2026 |
-| `list` | A featured collection's key (`top100`, `etre`, `irregularFutur`, `pronominal`) | `source` | The collection's page as a sheet over the Models tab. An unknown key does nothing. A model's collection is reached by its `model/` link, not by `list/model-<id>` | Phase 14 (reserved in Phase 9) |
+| `verb` | A `Verb.verbs` key (`aller`; `ha%C3%AFr%20France` for one entry of a doubled infinitive), or `random` | `source`; `match`, a conjugation the page marks as it marks a search's match (`verb/aller?match=vais`) | The verb page as a sheet over the Verbs tab (or the Info tab, for an article's link), scrolled to the first marked cell. `random` draws from the 1,000 most frequent verbs, or from My Verbs one time in three (`VerbDraw`). An unknown verb opens the Verbs tab and nothing else; a `match` that fills no cell opens the page unmarked | Yes; `match` is unreleased |
+| `search` | None | `q`, the text; `source` | The verb list with its search field, any verb page closed. With text, the results show with the keyboard down; with none (or `q` empty), the field is cleared and focused for typing | No |
+| `model` | A model's identifier (`1-1`) | `source`, which a shared model sends as `sharedLink` and nothing reads yet | The model page as a sheet over the Models tab | Yes; `source` is unreleased |
+| `info` | A stable key (`futur_simple`), or a legacy position (`info/0`) | None | The article as a sheet over the Info tab. An unknown key or out-of-range position does nothing | Yes; keys are unreleased |
+| `quiz` | Anything (`OpenQuizIntent` sends `quiz/start`) | None read yet | The Quiz tab, starting a quiz unless one is in progress | Yes |
+| `list` | A featured collection's key (`top100`, `etre`, `irregularFutur`, `pronominal`) | `source` | The collection's page as a sheet over the Models tab. An unknown key does nothing. A model's collection is reached by its `model/` link, not by `list/model-<id>` | No |
 
 A `match` is read as search reads a query (`MarkedConjugations(text:on:)`, through
 `VerbSearch.conjugationMatches`), so it may be anything a search row matched: vais, était, "ai
-mangé", or "me suis levé" on lever's page, which marks "ai levé" as Phase 5's pronominal compounds
-do. Look Up a Verb sends the row's own spelling.
+mangé", or "me suis levé" on lever's page, which marks "ai levé" as a search's pronominal compound
+does ([Reverse Lookup](#reverse-lookup)). Look Up a Verb sends the row's own spelling.
 
 ### Architecture
 
@@ -630,8 +612,7 @@ conjuguer://list/etre?source=sharedLink                 → the Verbs Taking Êt
 
 ## Lookup from Outside the App
 
-Built 2026-11-22 in Phase 9 of the browse plan, ported from Konjugieren's Phase 11. Conjuguer had
-two App Intents and no `AppShortcutsProvider`, `AppEntity`, Spotlight, or quick action before it.
+Five surfaces reach Conjuguer from outside the app.
 
 | Surface | Files | What it does |
 |---|---|---|
@@ -660,21 +641,18 @@ which has accents.
 **Spotlight.** Each `VerbEntity` (identifier: the `Verb.verbs` key; title: the citation form, "se
 souvenir"; subtitle: the gloss) carries the key conjugations as its description, the gloss's
 meanings and the key conjugations as alternate names, and every one-word conjugation in the
-conjugation map plus the meanings with and without "to" as keywords. Indexing takes several
-seconds of the main actor, since the key conjugations need the Conjugator, so unlike Konjugieren,
-which indexes at every launch, `VerbSpotlight.indexVerbsIfNeeded()` indexes only when the app's
-version and build, or the entries' `format` constant, differ from the last index that succeeded.
-**Raise `format` when the entries change**, or a development build with unchanged version numbers
-keeps the old entries. A tapped result arrives as a `CSSearchableItemActionType` activity whose
-identifier is "VerbEntity/<key>".
+conjugation map plus the meanings with and without "to" as keywords. Indexing takes several seconds
+of the main actor, since the key conjugations need the Conjugator, so
+`VerbSpotlight.indexVerbsIfNeeded()` indexes only when the app's version and build, or the entries'
+`format` constant, differ from the last index that succeeded. **Raise `format` when the entries
+change**, or a development build with unchanged version numbers keeps the old entries. A tapped
+result arrives as a `CSSearchableItemActionType` activity whose identifier is "VerbEntity/<key>".
 
 ## The Learner's Verbs
 
-Built 2026-11-22 in Phase 10 of the browse plan, ported from Konjugieren's Phase 12. One record of
-the learner's own verbs, kept on the device and never sent: each verb opened (first and last date,
-and a count), each verb starred, and, since Phase 13, when each is due on the review card. Recents,
-My Verbs, the quiz's My Verbs scope, the verb of the day, the review card, and Phase 14's
-collections read it; the pedagogy plan will.
+One record of the learner's own verbs, kept on the device and never sent: each verb opened (first
+and last date, and a count), each verb starred, and when each is due on the review card. Recents, My
+Verbs, the quiz's My Verbs scope, the verb of the day, the review card, and the collections read it.
 
 | Piece | File | Role |
 |---|---|---|
@@ -684,11 +662,11 @@ collections read it; the pedagogy plan will.
 
 **Where it lives.** The store saves the record as JSON under `LearnerVerbs.storageKey` in the App
 Group's defaults (`WidgetConstants.sharedDefaults`, through `GetterSetterReal(userDefaults:)`), so
-that the widget can decode it with `LearnerVerbs(json:)` without the verb list. Phase 12 did not
-need that: the app draws the widget's verbs, My Verbs included, when it writes the snapshots.
+that the widget can decode it with `LearnerVerbs(json:)` without the verb list. The widget does not
+read it today: the app draws the widget's verbs, My Verbs included, when it writes the snapshots.
 Unit tests give it a `GetterSetterFake`. **Every field added later must be optional**: synthesized
-decoding requires every non-optional key, so a new required field would decode every older record
-as nothing, and the learner's verbs would vanish. `LearnerVerbsTests` pins this. No cap on entries.
+decoding requires every non-optional key, so a new required field would decode every older record as
+nothing, and the learner's verbs would vanish. `LearnerVerbsTests` pins this. No cap on entries.
 
 **An open** is a verb page's arrival by any route: `VerbView.beginVisit` records one whenever it
 sends `viewAppeared` with a source other than `resume`. A page that returns after a tab switch,
@@ -718,22 +696,21 @@ answers. Rows open with the source `myVerbs`.
 
 ### The Review Card
 
-Built 2026-11-22 in Phase 13 of the browse plan, ported from Konjugieren's Phase 15. Each launch,
-and each return from the background, the verb list shows one card above its rows when a verb is
-due: the verb looked up longest ago among those due ("Looked up 3 days ago", "yesterday" for one),
-its gloss, and its key conjugations hidden under a redacted placeholder over "Recall its
+Each launch, and each return from the background, the verb list shows one card above its rows when a
+verb is due: the verb looked up longest ago among those due ("Looked up 3 days ago", "yesterday" for
+one), its gloss, and its key conjugations hidden under a redacted placeholder over "Recall its
 conjugations, then tap to check." A tap anywhere reveals them, red letters and all; a second tap
 opens the page, with `source` `reviewCard`, and a chevron says so; ✕ dismisses the card. Nothing
-replaces a dismissed card until the next opening, and the card hides while a search, the recents,
-or My Verbs shows. On iPad it stops at 560 points rather than spanning the grid. The Suppress
-Review Card setting (`ReviewCardSuppression`, Off by default, stored as `reviewCardSuppression`)
-hides any card at once and chooses none at later openings; turning it Off chooses one at once. The
-schedule keeps running underneath.
+replaces a dismissed card until the next opening, and the card hides while a search, the recents, or
+My Verbs shows. On iPad it stops at 560 points rather than spanning the grid. The Suppress Review
+Card setting (`ReviewCardSuppression`, Off by default, stored as `reviewCardSuppression`) hides any
+card at once and chooses none at later openings; turning it Off chooses one at once. The schedule
+keeps running underneath.
 
 | Piece | Role |
 |---|---|
 | `Shared/ReviewSchedule.swift` | A box and a due date. The ladder is 1, 3, 7, 14, and 30 days, the last repeating; due dates fall at the start of a day |
-| `LearnerVerbs.Entry.review` | The verb's schedule, optional. An entry written before Phase 13 counts as looked up on its last open, so there is no migration |
+| `LearnerVerbs.Entry.review` | The verb's schedule, optional. An entry without one counts as looked up on its last open, so there is no migration |
 | `LearnerVerbs.dueForReview(at:)` | The due keys, longest overdue first, ties broken by key |
 | `LearnerVerbStore.verbDueForReview(at:)` | The first due verb that has key conjugations: accroire and the other verbs used only in the infinitif would have nothing to reveal |
 | `Views/ReviewCardView.swift` | The card. `VerbBrowseView` chooses the verb, once per opening, and applies each tap to the schedule |
@@ -751,17 +728,16 @@ with no parameters and no verb. The setting sends nothing.
 
 **For the pedagogy plan.** Its practice record can take this over: a right answer calls what a
 reveal calls (`recordReview`), and a wrong one should send the verb back to the first box, as a
-lookup does (`ReviewSchedule.lookedUp`), without counting an open. Konjugieren's pedagogy phase
+lookup does (`ReviewSchedule.lookedUp`), without counting an open. Konjugieren's pedagogy work
 later moved the schedule out of `LearnerVerbs` into a `PracticeRecord` and added `answered` and
 `new` to `ReviewSchedule`; read its `Shared/ReviewSchedule.swift` before extending this one.
 
 ### Collections
 
-Built 2026-11-22 in Phase 14 of the browse plan, ported from Konjugieren's Phase 16, with Josh's
-choices of that day: four featured collections at the top of the Models tab, and every model a
-collection on its own page. A collection is a fixed list of verbs a learner can finish and a
-teacher can assign. It shows how many of its verbs have been looked up, starts a quiz on itself,
-and shares as a link.
+Josh chose (2026-11-22) four featured collections at the top of the Models tab, and every model a
+collection on its own page. A collection is a fixed list of verbs a learner can finish and a teacher
+can assign. It shows how many of its verbs have been looked up, starts a quiz on itself, and shares
+as a link.
 
 | Collection | Key | Verbs |
 |---|---|---|
@@ -809,8 +785,8 @@ verb opened from a collection's page has `source` `list`; one opened from a mode
 
 ## Quiz
 
-A timed quiz of thirty questions. The learner types each conjugation. Since Phase 11 of the browse
-plan, a quiz can also ask about chosen verbs (§ Quiz Scopes).
+A timed quiz of thirty questions. The learner types each conjugation. A quiz can also ask about
+chosen verbs (§ Quiz Scopes).
 
 ### Architecture
 
@@ -868,23 +844,21 @@ leaderboard. A scoped quiz does neither (below). Quitting reports nothing.
 
 The answer is graded against the question's own verb entry, extra letters included
 (`Verb.extraLetters`), so sortir (obtain) is graded as finir-like (il sortit) and sortir (exit) as
-partir-like (il sort). Before Phase 11 the quiz passed none, which did not matter while its pools
-held no doubled entry.
+partir-like (il sort).
 
 ### Quiz Scopes
 
-Built 2026-11-22 in Phase 11 of the browse plan, ported from Konjugieren's Phase 13. A `QuizScope`
-says which verbs a quiz asks about (nil for the default quiz), how many questions it asks, and its
-`source`. `Quiz.start(scope:)` defaults to `.allVerbs`, so every older caller (the Start button, the
-`quiz/` link) is unchanged. Browse Phase 14's collections and the pedagogy plan's levels add
-constructors: Phase 14 added `.collection(_:)` (§ Collections).
+A `QuizScope` says which verbs a quiz asks about (nil for the default quiz), how many questions it
+asks, and its `source`. `Quiz.start(scope:)` defaults to `.allVerbs`, which the Start button and the
+`quiz/` link use. A new kind of quiz adds a constructor, as collections added `.collection(_:)` (§
+Collections).
 
 | Scope | Questions | Where |
 |---|---|---|
 | `.allVerbs` | The default quiz at the learner's difficulty | The Quiz tab with All Verbs chosen; the `quiz/` link |
 | `.myVerbs(_:)` | 30, Regular's mix over the learner's starred and recent verbs | The Quiz tab with My Verbs chosen |
 | `.verbPage(_:)` | 3, on one verb | Test Me on a verb page |
-| `.collection(_:)` | 30, Regular's mix over a collection's verbs | A collection's Quiz button, on its page or a model's page (Phase 14) |
+| `.collection(_:)` | 30, Regular's mix over a collection's verbs | A collection's Quiz button, on its page or a model's page |
 
 **Regular's mix over chosen verbs.** `QuizTenseSlot` names Regular's eight tenses with their quotas
 (7, 6, 4, 3, 3, 3, 3, 1); `QuizScopeTests` pins that the default Regular quiz asks exactly these.
@@ -925,12 +899,11 @@ which Josh asked for there after trying the plain one, was not ported.
 
 ### Signals
 
-`quizStart` (`difficulty`, `source`), `quizQuit` (`difficulty`, `lastQuestionIndex`,
-`elapsedTime`, `source`), and `quizCompletion` (`difficulty`, `score`, `elapsedTime`, `source`).
-`source` is `tab`, `myVerbs`, `verbPage` (Phase 11), or `list` (Phase 14), so a three-question quiz does not inflate
-the thirty-question quiz's completion rate. `difficulty` is the quiz's own, set when it starts:
-before Phase 11 quit and completion read the setting at that moment, which a change in Settings
-mid-quiz would have made wrong, and a scoped quiz now reports `regular`. A collection's
+`quizStart` (`difficulty`, `source`), `quizQuit` (`difficulty`, `lastQuestionIndex`, `elapsedTime`,
+`source`), and `quizCompletion` (`difficulty`, `score`, `elapsedTime`, `source`). `source` is `tab`,
+`myVerbs`, `verbPage`, or `list`, so a three-question quiz does not inflate the thirty-question
+quiz's completion rate. `difficulty` is the quiz's own, set when it starts, so a change in Settings
+mid-quiz cannot mislabel its quit or completion, and a scoped quiz reports `regular`. A collection's
 `quizStart` also carries `collection` (§ Collections).
 
 ## Widgets
@@ -949,21 +922,21 @@ conjugator and no verb data, so it shows what the app last wrote.
 | `SnapshotReader.swift` | Reads the snapshots in the widget |
 | `VerbDuJourWidget.swift` | The verb of the day: small, medium, large, and the rectangular and inline accessory families. One timeline entry per cached day |
 | `QuizWidget.swift`, `AnswerQuizIntent.swift` | The daily quiz question, small and medium, with buttons that grade the tapped answer in place |
-| `QuickQuizControl.swift`, `RandomVerbControl.swift`, `FindVerbControl.swift` | Control Center controls. Their intents (`OpenQuizIntent`, `OpenRandomVerbControlIntent`, `OpenVerbSearchIntent` in `Shared/`) store `conjuguer://quiz/start`, `conjuguer://verb/random?source=control`, or `conjuguer://search?source=control` in the shared defaults and open the app, which drains it on activation. Find a Verb was added in browse Phase 9 |
+| `QuickQuizControl.swift`, `RandomVerbControl.swift`, `FindVerbControl.swift` | Control Center controls. Their intents (`OpenQuizIntent`, `OpenRandomVerbControlIntent`, `OpenVerbSearchIntent` in `Shared/`) store `conjuguer://quiz/start`, `conjuguer://verb/random?source=control`, or `conjuguer://search?source=control` in the shared defaults and open the app, which drains it on activation |
 | `QuizLiveActivity.swift` | The quiz's Lock Screen and Dynamic Island presentation |
 | `WidgetDeeplink.swift` | The verb widget's link to the verb's page |
 
 ### Choosing the Verb
 
-`VerbDraw` (browse Phase 12, ported from Konjugieren's Phase 14) chooses the widget's verb and
-every random verb (the control, `verb/random`, the shortcut). The pool is `FrequencyBand.top1000`,
-the 1,000 most frequent infinitives (1,001 entries, since sortir's two share a rank), weighted so
-that an irregular verb counts double and so does a base verb: aller, venir, and faire count 4,
-apprendre and parler 2, rappeler 1. Irregular means the third group as French schools teach it,
-models outside groups 1 and 2 plus aller (`VerbDraw.isIrregular`), so the spelling changes of
-manger and appeler do not count. A base verb is one `VerbBase.base(of:)` finds no base for. That
-reads the etymology in the device's language, but on 2026-11-22 the English and French texts gave
-the same answer for all 1,000 verbs, so the draw does not depend on the language.
+`VerbDraw` chooses the widget's verb and every random verb (the control, `verb/random`, the
+shortcut). The pool is `FrequencyBand.top1000`, the 1,000 most frequent infinitives (1,001 entries,
+since sortir's two share a rank), weighted so that an irregular verb counts double and so does a
+base verb: aller, venir, and faire count 4, apprendre and parler 2, rappeler 1. Irregular means the
+third group as French schools teach it, models outside groups 1 and 2 plus aller
+(`VerbDraw.isIrregular`), so the spelling changes of manger and appeler do not count. A base verb is
+one `VerbBase.base(of:)` finds no base for. That reads the etymology in the device's language, but
+on 2026-11-22 the English and French texts gave the same answer for all 1,000 verbs, so the draw
+does not depend on the language.
 
 Once My Verbs has entries (starred verbs, then the last 20 opened), it supplies one draw in three.
 For the widget, that is every day whose number since 2025-01-01 is a multiple of three, taking My

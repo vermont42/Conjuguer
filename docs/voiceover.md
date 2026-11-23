@@ -2,10 +2,8 @@
 
 Conjuguer puts French and English side by side: a French infinitive over its English gloss, French
 conjugations under an English or French interface. VoiceOver reads each element in one language,
-so the app tells it which. Written 2026-11-22 for Phase 0 of
-[`plans/browse_and_verb_implementation.md`](../plans/browse_and_verb_implementation.md), adapted
-from Konjugieren's `docs/voiceover.md`. Follow it for anything tappable on the verb page or in the
-verb list, and add to it when a screen finds a new pattern.
+so the app tells it which. Follow this doc for anything tappable on the verb page or in the verb
+list, and add to it when a screen finds a new pattern.
 
 ## Marking the Language
 
@@ -20,9 +18,9 @@ languages (a tense's name) is read in French, and the others follow the interfac
 
 ## What Works and What Does Not
 
-Konjugieren established these with VoiceOver on a device. They are assumed to hold here, since the
-mechanism is the same SwiftUI environment. Mark a row confirmed for Conjuguer when a session tests
-it here.
+Konjugieren established these with VoiceOver on a device (see its `docs/voiceover.md`). They are
+assumed to hold here, since the mechanism is the same SwiftUI environment. Mark a row confirmed for
+Conjuguer when a session tests it here.
 
 | Approach | Works? | Notes |
 |---|---|---|
@@ -65,18 +63,17 @@ struct VerbRow: View {
 `.isButton` tells VoiceOver that the element does something. The parent opens the page by setting
 its navigation state (in the Verbs tab, its `NavigationPath`; on a verb or model page, the
 `verbPagePush` environment action) rather than through a `NavigationLink`. The Related Verbs
-card's chips (Phase 7) follow this pattern: each chip is one French element with the button trait
-and an action.
+card's chips follow this pattern: each chip is one French element with the button trait and
+an action.
 
-**Today's verb list does not do this.** `VerbBrowseView` and `ModelBrowseView` wrap `BrowseRow`,
+**The verb list does not do this.** `VerbBrowseView` and `ModelBrowseView` wrap `BrowseRow`,
 which marks its title French and its subtitle English, in a `Button`. By the table above, the
 button flattens the row and one locale wins, so either the infinitive or the gloss is probably read
 in the wrong language. This is inferred from Konjugieren's finding and has not been tested here.
-A phase that rebuilds the verb row (Phase 1's search results, Phase 5's matched rows, Phase 10's
-recents) should test it with VoiceOver and adopt the pattern if it is so. Phase 1 (2026-11-22) kept the row and its `Button`, adding only a French subtitle for the Models
-tab's member matches, so the question is still open; the accessibility tree reads a row as one
-label ("être, be"), and its voice can be judged only by listening. Phase 10 (2026-11-22) reused
-the same row for the recents and My Verbs, unchanged, and was not tried with VoiceOver either.
+The search results, the matched rows, the recents, and My Verbs all use this row, and none has been
+tried with VoiceOver. The accessibility tree reads a row as one label ("être, be"), so its voice
+can be judged only by listening. Whoever next rebuilds the verb row should test it with VoiceOver
+and adopt the pattern if the guess holds.
 
 ## Pattern: A French Value Beside an Interface Label
 
@@ -103,25 +100,23 @@ A conjugation cell on the verb page (`TenseSectionView`) shows the pronoun and t
 whole spoken line, pronoun and reflexive pronoun included, lowercased (`VerbConjugations.Cell.accessibility`,
 from `conjugationParts`). The lowercasing matters: the display marks irregular letters by case
 (red capitals, see `ConjugationText.swift`), and VoiceOver would spell "SUIS" letter by letter. The
-personless card (participes and radical du futur) does the same, joining its three cells' spoken
-forms. Since browse Phase 6 the personless card gives each cell its own row and element, so
-VoiceOver reads allé, allant, and ir one at a time. Any new place that shows a conjugation, such as the key conjugations, should give VoiceOver
-the lowercased spoken form in the same way. A search result's match line ("vais: Indicatif Présent
-(je)", since browse Phase 5) needs nothing extra: it is built from the map's lowercase keys and
-marked French.
+personless card (participes and radical du futur) gives each cell its own row and element, so
+VoiceOver reads allé, allant, and ir one at a time, each lowercased the same way. Any new place
+that shows a conjugation should give VoiceOver the lowercased spoken form, as the review card's key
+conjugations do. A search result's match line ("vais: Indicatif Présent (je)") needs nothing
+extra: it is built from the map's lowercase keys and marked French.
 
-A cell that a search matched (browse Phase 5) carries the accessibility value "Matches your search"
-("Correspond à votre recherche"), so VoiceOver reads the form and then that it is the one found.
-Since Phase 6 the personless card's cells carry it one by one, like the tense cards'. Not yet tried
-with VoiceOver running.
+A cell that a search matched carries the accessibility value "Matches your search" ("Correspond à
+votre recherche"), so VoiceOver reads the form and then that it is the one found. The personless
+card's cells carry it one by one, like the tense cards'. Not yet tried with VoiceOver running.
 
 Nothing on the verb page speaks when tapped. A conjugation cell has no tap action, and `Utterer` is
 used only by the quiz.
 
-Since browse Phase 8 each conjugation cell, and the infinitive at the top, carries a named action,
-Copy ("Copier"), from `copyOnLongPress(_:)`, the same choice a long press offers. VoiceOver lists
-it in the actions rotor. It copies the form without the pronoun, as the long press does. Not yet
-tried with VoiceOver running.
+Each conjugation cell, and the infinitive at the top, carries a named action, Copy ("Copier"),
+from `copyOnLongPress(_:)`, the same choice a long press offers. VoiceOver lists it in the actions
+rotor. It copies the form without the pronoun, as the long press does. Not yet tried with
+VoiceOver running.
 
 ## Pronunciation by Screen
 
@@ -129,15 +124,15 @@ tried with VoiceOver running.
 |---|---|
 | `VerbBrowseView`, `ModelBrowseView` | `BrowseRow` in a `Button`: title French, subtitle English, or French when it names the verb that found a model (see above); a search's match line French |
 | `FrenchLetterKeyRow` | Each key a `Button` whose letter is marked French |
-| `VerbView` (infinitive, headings, cells) | `.frenchPronunciation()` on each; the infinitive and each cell a Copy action (Phase 8) |
-| `VerbView` (share button, Phase 8) | A toolbar `Button` whose `Label` reads "Share" ("Partager") |
-| `VerbView` (star, Phase 10) | A toolbar `Button` whose `Label` reads "Add to My Verbs" or "Remove from My Verbs" ("Ajouter à Mes verbes", "Retirer de Mes verbes"), so its label says what a tap will do |
-| `VerbBrowseView` (recents and My Verbs, Phase 10) | The same `BrowseRow` in a `Button` as the list; the recents' "Recent" heading and My Verbs' "Starred" and "Recent" headings carry the header trait; a My Verbs row's swipe action is labeled "Delete" ("Supprimer") |
-| `VerbBrowseView` (review card, Phase 13) | The verb-row pattern above: the infinitive (French) and the gloss (English) are separate elements, each a button with the card's action; then the prompt in the interface's language or, once revealed, the key conjugations, marked French, read lowercased and joined by semicolons, with the hint "Opens the verb’s page." The redacted placeholder is hidden, and ✕ is labeled "Dismiss" ("Fermer"). Not tried with VoiceOver |
+| `VerbView` (infinitive, headings, cells) | `.frenchPronunciation()` on each; the infinitive and each cell a Copy action |
+| `VerbView` (share button) | A toolbar `Button` whose `Label` reads "Share" ("Partager") |
+| `VerbView` (star) | A toolbar `Button` whose `Label` reads "Add to My Verbs" or "Remove from My Verbs" ("Ajouter à Mes verbes", "Retirer de Mes verbes"), so its label says what a tap will do |
+| `VerbBrowseView` (recents and My Verbs) | The same `BrowseRow` in a `Button` as the list; the recents' "Recent" heading and My Verbs' "Starred" and "Recent" headings carry the header trait; a My Verbs row's swipe action is labeled "Delete" ("Supprimer") |
+| `VerbBrowseView` (review card) | The verb-row pattern above: the infinitive (French) and the gloss (English) are separate elements, each a button with the card's action; then the prompt in the interface's language or, once revealed, the key conjugations, marked French, read lowercased and joined by semicolons, with the hint "Opens the verb’s page." The redacted placeholder is hidden, and ✕ is labeled "Dismiss" ("Fermer"). Not tried with VoiceOver |
 | `VerbView` (gloss) | `.englishPronunciation()` |
 | `VerbView` (model row) | A `Button` whose label is marked French, with a hint that it opens the model |
 | `VerbView` (color key) | Each swatch combined into one element. The dismiss button is labeled |
-| `VerbView` (tense headings, Phase 6) | The French name marked French and given the header trait; the second name ("also simple past", "aussi passé défini") a separate element in the interface's language, unmarked; the article button labeled "Info" with the hint "Opens the article about this tense." |
+| `VerbView` (tense headings) | The French name marked French and given the header trait; the second name ("also simple past", "aussi passé défini") a separate element in the interface's language, unmarked; the article button labeled "Info" with the hint "Opens the article about this tense." |
 | `ModelView` | Exemplar, endings, and verbs marked French |
 | `InfoBrowseView`, `InfoView` | `.frenchPronunciation(forReal: info.alwaysUsesFrenchPronunciation)` |
 | `QuizView` | The infinitive and the question French, the gloss English, plus the announcements below |

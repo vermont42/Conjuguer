@@ -46,11 +46,10 @@ enum AnalyticsName: String {
   case tapShareCollection
 }
 
-/// How the learner reached a verb page or, once the quiz sends it, began a quiz. One vocabulary
-/// serves every signal that carries `source`, so that a page and a quiz reached from the same
-/// surface carry the same value, and the names match Konjugieren's and Conjugar's so that the
-/// three apps can be read side by side. `docs/feature_architecture.md` § Analytics says which
-/// values are sent today and which phase sends the rest.
+/// How the learner reached a verb page or began a quiz. One vocabulary serves every signal that
+/// carries `source`, so that a page and a quiz reached from the same surface carry the same
+/// value, and the names match Konjugieren's and Conjugar's so that the three apps can be read
+/// side by side. `docs/feature_architecture.md` § Analytics says which signals send which values.
 enum AnalyticsSource: String, CaseIterable {
   case browse
   case control

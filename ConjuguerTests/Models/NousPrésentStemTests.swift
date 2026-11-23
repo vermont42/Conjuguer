@@ -42,9 +42,9 @@ struct NousPrésentStemTests {
     T.testConjugation(infinitif: "couvrir", tense: .participePrésent, expected: "couvrant", extraLetters: nil)
     T.testConjugation(infinitif: "maudire", tense: .participePrésent, expected: "maudISSant", extraLetters: nil)
 
-    // Alternate *nous* forms ("asseYons/assOYons") must strip the -ons ending off
-    // EACH alternate, not just the trailing one — and the participe présent must likewise put
-    // its ending on each, which it did not until the A2 audit: it printed "asseY/assOYant".
+    // Alternate *nous* forms ("asseYons/assOYons") must strip the -ons ending off EACH
+    // alternate, not just the trailing one. The participe présent must likewise put its ending on
+    // each, not print "asseY/assOYant".
     assertImparfait("asseoir", ["asseYais/assOYais", "asseYais/assOYais", "asseYait/assOYait", "asseYions/assOYions", "asseYiez/assOYiez", "asseYaient/assOYaient"])
     T.testConjugation(infinitif: "asseoir", tense: .participePrésent, expected: "asseYant/assOYant", extraLetters: nil)
   }

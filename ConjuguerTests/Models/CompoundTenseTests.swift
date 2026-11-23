@@ -54,8 +54,8 @@ struct CompoundTenseTests {
     assertFeminine(avoir, Tense.impératifPassé, ["aIE EU", "aYons EU", "aYez EU"], personNumbers: PersonNumber.impératifPersonNumbers)
   }
 
-  // mettre's participle comes whole from a stem alteration ending in the marker (mIS*), which
-  // the compound tenses once followed with the model's ending too: "j'ai misu".
+  // mettre's participle comes whole from a stem alteration ending in the marker (mIS*), so the
+  // compound tenses must not add the model's ending too (*j'ai misu*).
   @Test(arguments: [
     ("mettre", Tense.passéComposé(.firstSingular), PronounGender.masculine, "aI mIS"),
     ("promettre", .plusQueParfait(.thirdPlural), .masculine, "avaient promIS"),

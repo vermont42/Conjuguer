@@ -54,8 +54,8 @@ struct LargeWidgetView: View {
             .italic()
             .lineLimit(4)
           if let source = snapshot.exampleSource {
-            // provenance.attribution already carries the "— " lead-in and the real
-            // book/author, so render it verbatim rather than re-prefixing a filename.
+            // The source already carries its "— " lead-in and the book and author, so it
+            // renders verbatim.
             Text(verbatim: source)
               .font(.system(size: 9))
               .foregroundStyle(.tertiary)

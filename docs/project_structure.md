@@ -361,7 +361,7 @@ plans/                              # What Claude wrote to get another session (
 ├── etymology_tail.md               # Etymologies for the last 5,325 verbs, in waves; its ledger is the current record, and its "One wave" adds a verb
 ├── fix_and_add_verbs.md            # Fix seven misspelled infinitives and add fifteen missing common verbs
 ├── fix_localization_catalog_warnings.md  # Two String Catalog fixes, for Conjuguer and Konjugieren
-├── future_swiftui_fixes.md         # Deferred SwiftUI work (post-Phase-7), for an implementing session
+├── future_swiftui_fixes.md         # Deferred SwiftUI work the SwiftUI-issues pass left, for an implementing session
 ├── get_government_corpus.md        # Acquire the Swiss and French government corpus tier
 ├── glaff_frequency_ranking.md      # Rank every verb from GLÀFF: counts in verbs.xml, ranks at parse time, credits
 ├── location_cleanup.md             # This sorting into prompts/plans/docs and the snake_case rename (2026-11-16)

@@ -383,8 +383,6 @@ struct VerbView: View {
     .card()
   }
 
-  /// Pushes a related page onto the stack that shows this one, or, where there is none, presents
-  /// it in a sheet.
   private func open(_ value: any Hashable) {
     if let verbPagePush {
       verbPagePush(value)

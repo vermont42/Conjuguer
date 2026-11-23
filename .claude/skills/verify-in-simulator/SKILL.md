@@ -36,7 +36,7 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 
 | Identifier | Element | Notes |
 |---|---|---|
-| `verb_browse_sort` | Sort `Picker` in `VerbBrowseView` | Launch anchor (`FIRST_SCREEN_ID`). Three segments since browse Phase 10: Frequency, Alphabetical, My Verbs. |
+| `verb_browse_sort` | Sort `Picker` in `VerbBrowseView` | Launch anchor (`FIRST_SCREEN_ID`). Three segments: Frequency, Alphabetical, My Verbs. |
 | `input_quiz_conjugation` | Answer `TextField` in `QuizView` | Carries `.accessibilityValue(input)`, so `read_value`/`set_value`/`type_text --id` work with read-back. |
 | `picker_settings_quizDifficulty` | Quiz-difficulty segmented `Picker` in `SettingsView` | 2 segments (Regular, Ridiculous). |
 | `picker_settings_pronounGender` | Pronoun-gender segmented `Picker` in `SettingsView` | 3 segments (Feminine, Masculine, Both). |
@@ -56,23 +56,23 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `related_list_sort` | Frequency/Alphabetical `Picker` in `RelatedVerbListView` | 2 segments. |
 | `related_list_<infinitif>` | Row `Button` in `RelatedVerbListView` | e.g. `related_list_remettre`. |
 | `verb_share_button` | Share button in `VerbView`'s navigation bar | Opens the share sheet. Tap the sheet's Copy and read the text with `xcrun simctl pbpaste <udid>`. On the iPad it is a popover over the button. |
-| `verb_star_button` | Star button in `VerbView`'s navigation bar (Phase 10) | AXe cannot see navigation-bar buttons on iOS 26; tap it by position, between Done (in a sheet) and Share, and confirm by screenshot (a filled star). |
-| `verb_test_button` | Test Me (clipboard) button in `VerbView`'s navigation bar (Phase 11) | First in the bar, before the star; absent on the six verbs with only an infinitif. Invisible to AXe like the star: tap by position (≈ `250,100` in a sheet on the iPhone 17, ≈ `691,54` pushed on the iPad Pro 11) and confirm by the sheet's "1 / 3". The sheet's Quit is found by `tap_label.sh Quit`; its results' Done at ≈ `352,110` on the iPhone. |
+| `verb_star_button` | Star button in `VerbView`'s navigation bar | AXe cannot see navigation-bar buttons on iOS 26; tap it by position, between Done (in a sheet) and Share, and confirm by screenshot (a filled star). |
+| `verb_test_button` | Test Me (clipboard) button in `VerbView`'s navigation bar | First in the bar, before the star; absent on the six verbs with only an infinitif. Invisible to AXe like the star: tap by position (≈ `250,100` in a sheet on the iPhone 17, ≈ `691,54` pushed on the iPad Pro 11) and confirm by the sheet's "1 / 3". The sheet's Quit is found by `tap_label.sh Quit`; its results' Done at ≈ `352,110` on the iPhone. |
 | `quiz_start_button` | Start `Button` in the Quiz tab's briefing card | Starts the scope chosen in `quiz_scope_picker`. |
-| `quiz_scope_picker` | All Verbs / My Verbs segmented `Picker` in the Quiz tab's briefing card (Phase 11) | 2 segments; tap by frame. Not stored across launches. |
+| `quiz_scope_picker` | All Verbs / My Verbs segmented `Picker` in the Quiz tab's briefing card | 2 segments; tap by frame. Not stored across launches. |
 | `quiz_my_verbs_note` | The line under `quiz_scope_picker` with My Verbs chosen | "Questions about N verbs in My Verbs", or how to add some; `quiz_start_button` is then disabled (`enabled: false` in `describe_ui`). |
 | `recent_verbs_heading` | "Recent" heading over the recents in the empty focused search field | Present only when something has been opened. |
 | `my_verbs_list` | The My Verbs `List` (third segment of `verb_browse_sort`) | Tap the picker's third segment by frame (`x + width*5/6`). Rows keep `verb_row_<infinitif>`. Swipe a row left with `axe swipe --duration 0.4` at its `describe_ui` frame to show Delete. |
 | `my_verbs_starred_heading`, `my_verbs_recent_heading` | Section headings in My Verbs | |
 | `my_verbs_clear_recent` | Clear button in My Verbs' Recent heading | Forgets every open, keeps the stars. |
 | `my_verbs_empty` | My Verbs' empty state | |
-| `review_card` | The review card above the verb list (Phase 13) | Present at a launch or a return from the background when a verb is due. To seed one, write the App Group plist's `learnerVerbs` JSON with a `lastOpened` days ago (see the browse plan's Phase 13 note). A tap anywhere reveals; a second tap opens the page. |
+| `review_card` | The review card above the verb list | Present at a launch or a return from the background when a verb is due. To seed one, write the App Group plist's `learnerVerbs` JSON with a `lastOpened` days ago. Write it with `plutil` while the app is terminated (`simctl spawn defaults write` writes a different file), and reboot the simulator if the app still reads the old record, since the preferences daemon caches the domain. A tap anywhere reveals; a second tap opens the page. |
 | `review_card_reveal` | The card's "Recall its conjugations, then tap to check." line | Gone once revealed. |
 | `review_card_conjugations` | The card's revealed key conjugations | Tapping it opens the verb's page with `source` `reviewCard`. |
 | `review_card_dismiss` | The card's ✕ | Before a reveal, snoozes the verb to the next day. |
-| `picker_settings_reviewCardSuppression` | Suppress Review Card segmented `Picker` in `SettingsView` (Phase 13) | 2 segments (Off, On). |
+| `picker_settings_reviewCardSuppression` | Suppress Review Card segmented `Picker` in `SettingsView` | 2 segments (Off, On). |
 | `model_verb_order` | Alphabetical/Frequency `Picker` above a model page's verbs | 2 segments; the verbs stay one `Text` of links, so tap a verb at its coordinates. |
-| `collection_row_<key>` | A featured collection's row (iPhone) or card (iPad) atop the Models tab (Phase 14) | Keys `top100`, `etre`, `irregularFutur`, `pronominal`. Hidden while the search field has text. |
+| `collection_row_<key>` | A featured collection's row (iPhone) or card (iPad) atop the Models tab | Keys `top100`, `etre`, `irregularFutur`, `pronominal`. Hidden while the search field has text. |
 | `collection_progress` | "3 of 100 looked up" in a `VerbCollectionBar`, on a collection's page or a model's verbs card | Read it before and after opening a verb to see the count rise. |
 | `collection_quiz_button` | The bar's Quiz button | Opens a 30-question `QuizSheet` titled with the collection. Absent when no verb can be quizzed (1-10, 2-4). |
 | `collection_share_button` | The bar's Share button | The popover anchors to it on iPad. |
@@ -95,19 +95,19 @@ moves: on a fresh launch it sits lower (frame y ≈ 169, so tap ≈ `201,191`), 
 active it rises to the top (tap ≈ `173,70`, seen 2026-10-01). A tap at the old spot silently
 misses, and the text goes nowhere.
 
-**iPad (since browse Phase 2):** both search fields are fixed bars under the title, and the
+**iPad:** both search fields are fixed bars under the title, and the
 hardware-keyboard path works through AXe: Command-F is `axe key-combo --modifiers 227 --key 9`,
 ↓ and ↑ are `axe key 81` and `axe key 82`, Return is `axe key 40`. Escape (`axe key 41`) cancels the
 search and clears its text. Key presses sent to Simulator.app through computer use do not reach the
 device (Konjugieren). `tap_label.sh` did not find the iPad's top tab buttons on 2026-11-22; tap them
 by coordinate (Models ≈ `370,54`, Quiz ≈ `448,54` on the Conjuguer iPad Pro 11).
 
-**A long press** (a conjugation's Copy menu, since browse Phase 8) is a held touch:
+**A long press** (a conjugation's Copy menu) is a held touch:
 `axe touch -x <x> -y <y> --down --up --delay 1.2 --udid <udid>` at the cell's `describe_ui` frame
 (the cell's label is the spoken line, e.g. `je vais`). Then tap Copy by coordinate and read
 `simctl pbpaste`. A simulated rating prompt may cover a page at launch; tap Not Now first.
 
-**Outside the app (since browse Phase 9).** Links: `xcrun simctl openurl <udid> "conjuguer://search?q=suis"`
+**Outside the app.** Links: `xcrun simctl openurl <udid> "conjuguer://search?q=suis"`
 (or `verb/aller?match=vais`); terminate the app first to try a cold launch, and allow about 15 seconds
 for the Debug build to load. Spotlight: `axe button home`, tap the Home Screen's Search pill (≈
 `201,718` on the iPhone 17), `axe type` the word, then tap the result at its `describe_ui` frame (the

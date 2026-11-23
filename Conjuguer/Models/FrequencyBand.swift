@@ -8,7 +8,7 @@
 import Foundation
 
 /// The most frequent verbs, in three widths. The verb of the day and the random verb draw from
-/// `top1000`, and the pedagogy plan's levels will read all three.
+/// `top1000`; leveled study is to read all three.
 enum FrequencyBand: Int, CaseIterable {
   case top100 = 100
   case top300 = 300
@@ -29,7 +29,6 @@ extension Verb {
     frequency <= band.rankLimit
   }
 
-  /// The band's entries, the most frequent first.
   @MainActor static func verbs(in band: FrequencyBand) -> [Verb] {
     if let cached = bandCache[band], !cached.isEmpty {
       return cached

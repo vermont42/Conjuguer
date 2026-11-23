@@ -60,7 +60,7 @@ struct DefectivityAuditTests {
     #expect(!isDefective("poindre", .participePassé), "point (p.p.) must survive.")
   }
 
-  // béer (dg=17, from dg=3 on 2026-11-22): the Académie's 9th edition gives it as "usité surtout à
+  // béer (dg=17): the Académie's 9th edition gives it as "usité surtout à
   // l'indicatif présent et imparfait, au participe présent et à l'infinitif présent", and the
   // app's example is Tolstoy's "Une blessure béait".
   @Test func testBéerKeepsPrésentAndImparfait() {
@@ -70,7 +70,7 @@ struct DefectivityAuditTests {
     #expect(isDefective("béer", .futurSimple(.thirdSingular)), "futur must be defective.")
   }
 
-  // douer (no group, from dg=6 on 2026-11-22): the TLFi finds it rare outside the infinitive and
+  // douer (no group): the TLFi finds it rare outside the infinitive and
   // the compound tenses "sauf chez les écrivains récents", and the app's example is Proust's
   // "Elle les douait".
   @Test func testDouerIsNotDefective() {

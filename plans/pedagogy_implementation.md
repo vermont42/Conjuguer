@@ -87,6 +87,27 @@ sentences or Phase 19's items. Any subagent it launches uses Sonnet (`model: "so
 Agent tool), as Josh decided for Konjugieren on 2026-11-15. The session still runs the machine
 check and reads the drafts itself before Josh reviews them.
 
+**Comments and docs say how things are, not how they got there.** The browse plan's phases left
+about 90 Swift comments and 140 doc references that a sweep on 2026-11-22 had to remove. Follow
+`CLAUDE.md` § Comments: a comment earns its place only as a file header, a TODO, a hack or
+workaround, or rationale the code cannot show. In particular:
+
+- No doc comment that restates a name or signature, such as `/// A verb just looked up.` above
+  `lookedUp(at:)`. Most new properties and helpers need no comment at all.
+- No pointers to plans in code or in living docs: no phase numbers, no "Decision 5", no "the
+  pedagogy plan's practice record". That history belongs in **How it differed** and in
+  `docs/blog_notes.md`. Work this plan leaves for later is a `// TODO:`. In code, also no "as Josh
+  chose on 2026-11-22". A living doc may keep such an attribution where it marks a choice as
+  deliberate, so that no later session "fixes" it.
+- No change narration, such as "used to", "no longer", or "which gave *j'ai misu*". A regression
+  test's comment states the rule the test pins, not the bug it fixed, and is omitted when the
+  test's name and expected values already state it.
+- A Konjugieren citation stays only as the evidence for a workaround, as in "(Konjugieren, iPadOS
+  26.3)".
+- `docs/feature_architecture.md`, `docs/voiceover.md`, and the `verify-in-simulator` skill
+  describe the app as built, with no "since Phase N". `docs/privacy_policy_pending.md` is the
+  exception: its own rules ask each staged section to name its phase and date.
+
 **Every phase finishes the same way.**
 
 1. Build and run the tests with the `ios-build-verify` skill, as `CLAUDE.md` describes. New logic
@@ -129,6 +150,8 @@ check and reads the drafts itself before Josh reviews them.
 6. Update [`docs/project_structure.md`](../docs/project_structure.md) for new, renamed, or
    repurposed files, keep `docs/feature_architecture.md` § Quiz true, add new accessibility
    identifiers to the `verify-in-simulator` skill's table, and run `python3 scripts/check_docs.py`.
+   Read every comment the phase's diff adds (`git diff -U0 | rg '^\+\s*//'`) against **Comments
+   and docs** above, and delete or rewrite any that fail it.
 7. Fill in the Status row and the phase's Status line, write **How it differed**, and append a
    journal entry to `docs/blog_notes.md`.
 8. **Stop before git.** Do not run `git add`, `git commit`, or `git push` until Josh has tried the

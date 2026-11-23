@@ -14,7 +14,6 @@ import Foundation
 struct SearchTracker {
   struct Search: Equatable {
     let query: String
-    /// Where the search began: the Verbs tab, or a surface outside it that opened the field.
     let source: AnalyticsSource
   }
 
@@ -51,7 +50,6 @@ struct SearchTracker {
     }
   }
 
-  /// The search in progress, which this call ends.
   mutating func finish() -> Search? {
     defer {
       search = nil

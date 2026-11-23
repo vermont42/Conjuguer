@@ -28,7 +28,6 @@ final class LearnerVerbStore {
     verbs(record.recent())
   }
 
-  /// The recent verbs that are not also starred, which My Verbs lists below the starred ones.
   var recentUnstarredVerbs: [Verb] {
     verbs(record.recent().filter { !record.isStarred($0) })
   }
@@ -45,7 +44,6 @@ final class LearnerVerbStore {
     record.hasOpened(verb.dictionaryKey)
   }
 
-  /// How many of the verbs have been opened, which a collection shows as its progress.
   func openedCount(of verbs: [Verb]) -> Int {
     verbs.count { record.hasOpened($0.dictionaryKey) }
   }

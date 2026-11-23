@@ -69,7 +69,6 @@ enum WidgetSnapshotWriter {
     }
   }
 
-  /// The verb of the snapshot the widget shows on `date`, if the snapshots cover that day.
   @MainActor static func displayedVerb(in snapshots: [WidgetSnapshot], on date: Date) -> Verb? {
     let target = dateString(for: date)
     return snapshots
@@ -77,8 +76,8 @@ enum WidgetSnapshotWriter {
       .flatMap { Verb.verbs[$0.verbKey ?? $0.infinitif] }
   }
 
-  // The verb pass gave every verb an example, so this excludes nothing today. It stays because
-  // the large widget shows the example.
+  // The large widget shows the verb's example, so a verb without one cannot be the verb of the
+  // day.
   @MainActor static func isEligible(_ verb: Verb) -> Bool {
     ExampleData.example(for: verb) != nil
   }

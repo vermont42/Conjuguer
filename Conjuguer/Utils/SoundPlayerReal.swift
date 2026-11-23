@@ -68,13 +68,12 @@ class SoundPlayerReal: SoundPlayer {
   }
 
   // Media services reset when `mediaserverd` restarts, which another audio-heavy app on the
-  // device can provoke — Konjugieren hit exactly this, traced in its docs/blog_notes.md entry
-  // "The quiz went silent, and the audio session was the reason". The reset reverts this app's
-  // session to the system-default `.soloAmbient` category and orphans every existing
-  // AVAudioPlayer: play() then returns false and the app is silent for the rest of the process,
-  // with no error surfaced anywhere. Apple's prescribed recovery is to rebuild every audio
-  // object and re-establish the session. Interruptions (a phone call, Siri) leave the players
-  // intact but deactivate the session, so those need only reconfiguration.
+  // device can provoke. The reset reverts this app's session to the system-default
+  // `.soloAmbient` category and orphans every existing AVAudioPlayer: play() then returns false
+  // and the app is silent for the rest of the process, with no error surfaced anywhere. Apple's
+  // prescribed recovery is to rebuild every audio object and re-establish the session.
+  // Interruptions (a phone call, Siri) leave the players intact but deactivate the session, so
+  // those need only reconfiguration.
   //
   // Note that warmUpSounds() cannot recover from this on its own even though GameState calls it
   // at every game start: it skips names already present in `sounds`, so orphaned players are

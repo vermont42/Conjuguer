@@ -47,9 +47,8 @@ struct AddedVerbsTests {
     T.testConjugation(infinitif: "désenvaser", tense: .indicatifPrésent(.thirdSingular), expected: "désenvase", extraLetters: nil)
   }
 
-  // The nine misspellings are gone, so the conjugator must no longer know them. The last two
-  // shipped as doubled-n duplicates alongside the standard spelling — every corpus knows
-  // `ahaner` and `haubaner`, none has ever seen `ahanner` or `haubanner`.
+  // `ahanner` and `haubanner` shipped as doubled-n duplicates of the standard spellings. Every
+  // corpus knows `ahaner` and `haubaner`; none has ever seen the doubled forms.
   @Test func testMisspellingsNoLongerConjugate() {
     let misspellings = [
       "préenir", "récidier", "réolvériser", "transaser", "désenaser", "eduquer", "egorger",

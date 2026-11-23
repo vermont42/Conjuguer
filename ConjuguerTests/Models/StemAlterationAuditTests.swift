@@ -90,10 +90,6 @@ struct StemAlterationAuditTests {
     T.testConjugation(infinitif: "réfréner", tense: .participePassé, expected: "réfréné", extraLetters: nil)
   }
 
-  // The four the audit turned up alongside refréner, two of them common verbs, and the three
-  // the widened filter added: lécher and déféquer were named in the verb-pass plan, while
-  // déshypothéquer was a fresh find that had been sitting beside a correctly modeled
-  // hypothéquer.
   @Test(arguments: [
     ("considérer", "considÈre", "considérons"),
     ("interpréter", "interprÈte", "interprétons"),

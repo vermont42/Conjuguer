@@ -5,12 +5,10 @@
 //  Created by Josh Adams on 11/22/26.
 //
 
-// The three dumps the Python pipelines in corpus/working read, ported unchanged from the
-// CorpusFormsDumpTests harness this tool replaced, so that each is byte-identical to the
-// harness's last output. They follow their own rules rather than the conjugation map's: the
-// form dumps keep the radical du futur and defective cells, drop one-letter forms, and agree
-// only the compound tenses' participles, because the corpus index was built and tuned on
-// exactly that. See docs/literature_example_corpus.md.
+// The three dumps the Python pipelines in corpus/working read. They follow their own rules
+// rather than the conjugation map's: the form dumps keep the radical du futur and defective
+// cells, drop one-letter forms, and agree only the compound tenses' participles, because the
+// corpus index was built and tuned on exactly that. See docs/literature_example_corpus.md.
 //
 //   forms.json         { "<form>": ["<verb id>", …] } for the 1,000 most frequent verbs, which
 //                      build_corpus_index.py and build_tail_index.py match whole tokens against

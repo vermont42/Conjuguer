@@ -8,8 +8,7 @@
 import Foundation
 
 /// A cell of a verb's conjugation tables whose conjugation equals a given text. Search names a
-/// result with these (vais: Indicatif Présent, je, of aller), and the quiz can use them to tell
-/// a learner which other cell an answer belongs to.
+/// result with these (vais: Indicatif Présent, je, of aller).
 struct ConjugationMatch: Hashable {
   let tense: Tense
 

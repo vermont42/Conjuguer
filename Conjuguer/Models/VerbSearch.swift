@@ -7,9 +7,8 @@
 
 import Foundation
 
-/// The one matching and ranking rule for verb search. The verb list and the model list use it
-/// today, and reverse lookup, Spotlight, and the Look Up intent are to use it, so that no two of
-/// them can drift.
+/// The one matching and ranking rule for verb search, shared by the verb list, the model list,
+/// Spotlight, and the Look Up intent so that no two of them can drift.
 enum VerbSearch {
   // Cases run best first, and `matches` tries them in this order. Cases that share a tier rank
   // together by frequency: a prefix, a folded prefix, a whole English meaning, and a whole
@@ -68,8 +67,6 @@ enum VerbSearch {
   struct Match: Equatable {
     let verb: Verb
     let kind: MatchKind
-
-    /// For a conjugation match, the conjugation and the cells it fills. Nil otherwise.
     let conjugation: MatchedConjugation?
 
     init(verb: Verb, kind: MatchKind, conjugation: MatchedConjugation? = nil) {
@@ -148,8 +145,6 @@ enum VerbSearch {
     }
   }
 
-  /// A verb offered when a search matched nothing, with the conjugation it was guessed from,
-  /// if it was guessed from one.
   struct Guess: Equatable {
     let verb: Verb
     let conjugation: MatchedConjugation?

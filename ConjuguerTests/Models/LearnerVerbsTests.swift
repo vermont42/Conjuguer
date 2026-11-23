@@ -262,8 +262,6 @@ struct LearnerVerbsTests {
     #expect(store.recentUnstarredVerbs.map(\.infinitif) == ["aller"])
   }
 
-  /// haïr has a French and a Québécois entry, each with its own page, and each keeps its own
-  /// opens and star.
   @Test func theDoubledEntriesStayApart() throws {
     let store = LearnerVerbStore(getterSetter: GetterSetterFake())
     let france = try verb("haïr France")

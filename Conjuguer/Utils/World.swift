@@ -259,7 +259,6 @@ class World {
 
 /// A request, from a link or a command, that the verb list show its search field.
 struct SearchRequest: Equatable {
-  /// Nil keeps what the field holds.
   let text: String?
   let source: AnalyticsSource
 }

@@ -159,7 +159,7 @@ enum Conjugator {
       return .success(composedConjugation(stems: stems, ending: ""))
     case .participePrésent:
       // stems[0] can carry two alternates joined by the separator (asseoir → "asseY/assOY"),
-      // so the ending goes on each of them: appending once gave "asseY/assOYant".
+      // so the ending goes on each of them; appending once would give "asseY/assOYant".
       return .success(
         stems[0]
           .components(separatedBy: Tense.alternateConjugationSeparator)
@@ -173,7 +173,7 @@ enum Conjugator {
     case .passéComposé(let personNumber), .plusQueParfait(let personNumber), .passéAntérieur(let personNumber), .passéSurcomposé(let personNumber), .futurAntérieur(let personNumber), .conditionnelPassé(let personNumber), .subjonctifPassé(let personNumber), .subjonctifPlusQueParfait(let personNumber), .impératifPassé(let personNumber):
       // The participle is built as the participe passé builds it: a stem alteration ending in
       // the marker is the whole participle (mettre's "mIS*"), so the model's ending must not be
-      // appended too, which gave "j'ai misu".
+      // appended too, or the result would be "j'ai misu".
       let participle: String
       if stems[0].hasSuffix(Tense.irregularEndingMarker) {
         participle = String(stems[0].dropLast())

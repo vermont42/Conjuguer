@@ -27,7 +27,7 @@ enum TutorDisplay {
   /// `TipDisplay.tipsEnabled`. Ordinarily `true`. Set to `false` before generating
   /// screenshots (then restore to `true`).
   ///
-  /// The tutor needs Apple Intelligence, which is never available in a simulator —
+  /// The tutor needs Apple Intelligence, which is never available in a simulator.
   /// `World.simulator` injects the *real* service, so availability resolves against the
   /// host and fails. `InfoBrowseView` therefore renders a reason cell there ("Apple
   /// Intelligence is still getting ready…"), which is honest on a device but reads as a

@@ -7,7 +7,6 @@
 
 import Foundation
 
-/// A verb page to push, with the way the learner reached it and the cells a search matched.
 struct VerbDestination: Hashable {
   let verb: Verb
   let source: AnalyticsSource

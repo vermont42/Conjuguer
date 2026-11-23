@@ -5321,3 +5321,62 @@ one verb names the verb looked up, which its policy says it does not send. I had
 Phase 14 and confirmed it in Konjugieren's code here, without editing it. One claim I had drafted
 did not survive the same check: Konjugieren's current quiz already keeps a scoped quiz out of its
 bests, so that point now speaks only to Conjugar.
+
+## A Second Comment Sweep (2026-11-22)
+
+The first sweep, in July (`bee3bec`), brought every Swift comment into line with the policy in
+`CLAUDE.md` and found no paper trail to strip. Conjuguer's engine was original, so unlike Conjugar
+it had no audit citations or "ported from" notes. Four months and about 110 commits later, mostly
+the verb pass and the fifteen phases of the browse plan, that was no longer true. The commits had
+added roughly 1,070 non-header comment lines across 103 files.
+
+Four reviewers each took a quarter of those files. They read the code under every added comment
+against the policy and against the July plan's precedents (`plans/sweep_comments.md`), and between
+them they checked about 440 comment blocks. They flagged 92. The kinds of problem sorted cleanly:
+
+- **About 37 doc comments that restated the code.** The browse work wrote a `///` line above
+  nearly every new property and helper, and many said only what the name said: `/// A verb just
+  looked up.` above `lookedUp(at:)`, `/// The identifier the verb page scrolls to.` above
+  `scrollID`.
+- **About 49 comments carrying the paper trail** that July had found none of. "browse Phase 14's
+  collections", "idea C3 of the browse plan", "Decision 6 of the verb-pass plan", "as Josh chose on
+  2026-11-22", and a lot of change narration ("the case the metric used to miss", "which gave *j'ai
+  misu*"). `EngineAuditTests.swift` alone held 17, because its tests had been written as a log of
+  the bugs they fixed. Its comments now state the rule each test pins: "*je vécus*, never *je
+  vivis*", rather than how model 5-6 once built the passé simple. Where the test name and expected
+  values already said the rule, the comment went.
+- **Seven comments that had become false.** That is worse than clutter, because a reader believes
+  them. Two in `L.swift` pointed at `VerbBrowse.verbCount(count:)`, an enum that is
+  `VerbBrowseView`. `VerbSearch` said Spotlight and Look Up "are to use it" when both already did.
+  `ConjugationMatch` promised a quiz caller that does not exist. `Analytics` said "once the quiz
+  sends it" about a parameter the quiz already sends.
+- **Five em dashes joining two clauses**, against the house prose rule.
+
+One judgment call recurs and is worth writing down. Ten comments cite Konjugieren as the place an
+OS bug was reproduced, such as "(Konjugieren, iPadOS 26.3)" on the iPad search-field and
+navigation-push hacks. Those stay. A hack is only as good as the evidence that the bug exists, and
+the citation tells whoever considers retiring the hack where to look. A sibling-app mention that
+was evidence of nothing, such as "English only, as in Konjugieren", went.
+
+The diff touches comment lines only (90 added, 168 removed, across 49 files), plus one blank line
+that a deleted doc comment would otherwise have stranded. `ReviewSchedule`'s note that the pedagogy
+plan will replace it became a `// TODO:`, which the policy allows and which says the same thing
+without pointing at a plan.
+
+The Markdown docs carried the same trail, and the same commit removes it. Conjugar's
+`docs/project_structure.md` had prompted the question, but here that file was nearly clean: its
+"Stage N" mentions name steps the verb-pass scripts still take. The trail was in
+`docs/feature_architecture.md`, which narrated the browse plan phase by phase ("Since Phase 5 of
+the browse plan (2026-11-22)…") in 91 places, and in `docs/voiceover.md` and the
+`verify-in-simulator` skill, about 30 more. Rewriting those sentences in the present tense meant
+checking each claim against the code, and three had gone stale. The conjugation map's section said
+"Nothing reads it yet" when reverse lookup and Spotlight both do. `voiceover.md` described the
+personless card two contradictory ways. The deeplink table's "Since" column, keyed to phases, now
+says only whether a route has shipped. `docs/privacy_policy_pending.md` keeps its phases by design:
+its own rules require each staged section to name its phase and date, and its sections say which
+to apply after which. Dated records such as `tense_frequency.md` and `code_review_findings.md` keep
+theirs too.
+
+So that the pedagogy plan's phases do not rebuild the trail, `plans/pedagogy_implementation.md`
+now carries a **Comments and docs** rule in its "How to Work This Plan", and its end-of-phase
+checklist asks each session to read every comment its diff adds.

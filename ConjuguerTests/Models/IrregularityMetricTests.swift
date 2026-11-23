@@ -25,8 +25,8 @@ struct IrregularityMetricTests {
   }
 
   @Test func testAssaillirFamilyIsScoredIrregular() {
-    // Its irregularity is entirely in the endings group — no stem alteration, no uppercase
-    // participe ending — which is the case the metric used to miss.
+    // Its irregularity is entirely in the endings group: no stem alteration and no uppercase
+    // participe ending.
     let assaillir = VerbModel.models["3-2A"]
     #expect(assaillir?.stemAlterationsRecursive == nil)
     #expect((assaillir?.irregularity ?? 0) > 0)
@@ -42,9 +42,9 @@ struct IrregularityMetricTests {
   }
 
   // The figures in Info.irregularitiesText and Info.valuePropositionText, in both languages,
-  // and in docs/description.txt, the App Store copy — which is outside the test target's reach
-  // and drifted a whole release behind before anyone noticed. A verb added, removed, or
-  // re-modeled changes all three; failing here is the reminder to update them together.
+  // and in docs/description.txt, the App Store copy, which is outside the test target's reach.
+  // A verb added, removed, or re-modeled changes all three; failing here is the reminder to
+  // update them together.
   @Test func testShippingSplitMatchesTheInfoText() {
     var modelsByInfinitif: [String: [String]] = [:]
     for verb in Verb.verbs.values {
