@@ -156,10 +156,12 @@ Since Phase 5 of the browse plan (2026-11-22), a conjugation finds its verb, thr
 
 ### Opening a Verb
 
-A tap in the Verbs tab pushes `VerbView` through `navigationDestination(item: $selectedVerb)`. A
-deeplink instead sets `Current.verb`, which the Verbs tab presents as a sheet (see
-[Deeplinks](#deeplinks)). A model page presents a verb as a sheet of its own (`ModelView`'s
-`detailSheet`), and so does the Info tab for a verb link in an article.
+A tap in the Verbs tab appends a `VerbDestination` to the tab's `NavigationPath`. A deeplink
+instead sets `Current.verb`, which the Verbs tab presents as a sheet (see
+[Deeplinks](#deeplinks)), and the Info tab does the same for a verb link in an article. Since
+Phase 7, every page that leads to another (a related verb, the model row, a model page's verb
+links) pushes it onto whichever stack shows it, through `VerbPagePush`; see
+[Related Verbs](#related-verbs).
 
 ## Verb Page
 
@@ -220,6 +222,76 @@ them out: parler's page shows no key. In the key's place, `ScrollToBottomTip` po
 etymology and examples. A page that appears after the key was dismissed unlocks it (a persisted
 TipKit parameter), so the two never appear one straight after the other, and reaching the
 etymology or the examples retires it. Both obey `TipDisplay.tipsEnabled`.
+
+## Related Verbs
+
+Phase 7 of the browse plan (2026-11-22) gave the verb page a way to other verbs, and the model
+page a frequency order. It ports Konjugieren's Phase 9.
+
+### Architecture
+
+| File | Purpose |
+|------|---------|
+| `Models/RelatedVerbs.swift` | `VerbBase` (a verb's base and root), `RelatedVerbs`, and `Verb.related`, cached per entry |
+| `Views/RelatedVerbsView.swift` | The card at the bottom of the verb page, `RelatedVerbListView` (every verb built on a root), and `FlowLayout` |
+| `Views/VerbPageNavigation.swift` | `VerbPagePush`, `ModelDestination`, `RelatedVerbListDestination`, and `verbPageNavigation(path:done:)` |
+
+### Finding a Base
+
+French marks no prefix in the data, and a suffix match alone fails (oublier ends in lier). A verb
+is built on a base when one of `VerbBase.prefixes` (allomorphs, as ap- in apprendre, res- in
+ressortir, d- in décrire) leaves a verb of at least three letters, and the verb's etymology in
+`Etymologies.json` names that verb as a word, `~prendre~`. Of two candidates the longer base wins.
+`VerbBase.falsePairs` removes nine pairs that pass but are wrong: the etymology names the base to
+refute the link (supplier/plier, épisser/pisser, délibérer/libérer) or the letters are a
+coincidence (arriver names English ~river~). `VerbBase.knownPairs` adds six that fail because the
+etymology names only the Latin verb (advenir's ~venīre~). The **root** follows bases until none is
+left: redécouvrir, découvrir, couvrir. Every verb built on a root ends in it, so the page finds the
+family by suffix and checks each candidate's root.
+
+Measured 2026-11-22: about 1,420 verbs have a base, in about 820 families (poser 23, venir 18,
+mettre 16). Of the 300 most frequent verbs, the 65 with a base are all right. Thirteen are
+compounds formed in Latin whose meaning has drifted (attendre on tendre, demander on mander,
+rester on the archaic ester), and Josh kept them (2026-11-22), as Konjugieren kept verstehen with
+stehen. allier is built on lier by the same reasoning (Latin alligare, ad + ligare), though the
+plan named it as a false pair. The rule reads the etymology in the app's language. Every pair
+appears in both languages today, so the families are the same in French and English.
+
+### The Card
+
+Josh chose the bottom of the page, below the examples, from screenshots (2026-11-22). Two rows,
+each of up to six chips:
+
+- **Built on prendre**: the root verb first (for a doubled root, the entry that shares this verb's
+  model, so ressortir leads to sortir "exit" and assortir to sortir "obtain"), then the family by
+  frequency. More than six adds "All 11", which pushes `RelatedVerbListView`, Frequency first, with
+  an Alphabetical control. The choice is not stored.
+- **Same model: venir (6-7)**: the most frequent verb of each other root in the model, by frequency
+  (tenir, appartenir on venir's page; donner, trouver, passer on parler's). Konjugieren showed the
+  root verb of each ablaut root. Here the most frequent verb wins, so demander rather than mander
+  speaks for its root. "All 29" pushes the model page in frequency order. The row is hidden when the
+  model holds only this verb's family (prendre's 5-2). The model row at the top still leads there.
+
+The card is hidden when both rows are empty. Chips are `onTapGesture` with an `accessibilityAction`
+and the button trait, one element each, read in French, as `docs/voiceover.md` asks.
+
+### Navigation
+
+`VerbPagePush` is an environment action that each stack injects through `verbPageNavigation`: the
+Verbs tab, the Models tab, every `.sheetDismissable()` sheet, and `TenseArticleSheet`. All four
+hold a `NavigationPath` and register destinations for `VerbDestination`, `ModelDestination`, and
+`RelatedVerbListDestination`. In a sheet, each pushed page gets the Done button too. Josh chose
+(2026-11-22) that the verb page's model row and a model page's verb links push as the chips do,
+so no sheet stacks on a sheet. A page with no `VerbPagePush` in its environment (a preview) falls
+back to a sheet.
+
+### The Model Page's Order
+
+A segmented control above "Verbs Using This Model" chooses Alphabetical (the default) or
+Frequency. The choice is not stored. The list stays a run of `conjuguer://verb/` links in one
+`Text` (Josh, 2026-11-22), since model 1-1 has 4,859 verbs and Konjugieren saw about 1,000 rows in
+a non-lazy stack peg the CPU. Alphabetical now uses French collation (`Util.french`). The old plain
+sort put écouter after the z's.
 
 ## Conjugation Map
 
@@ -367,7 +439,7 @@ quiz signals. Values are Konjugieren's names wherever the surface is the same.
 | `shortcut` | Yes | Open Random Verb run from the Shortcuts app (`OpenRandomVerbIntent`); Phase 9's shortcuts too |
 | `deeplink` | Yes | A `conjuguer://verb/` link with no `source` item, or one outside this vocabulary |
 | `resume` | Yes | The same page appearing again (above) |
-| `related` | Phase 7 | A related verb on a verb page |
+| `related` | Yes | A verb on a verb page's Related Verbs card, or in its full list (Phase 7) |
 | `spotlight`, `lookup`, `quickAction` | Phase 9 | A Spotlight result; Look Up a Verb; the Home Screen quick action. Phase 9 should also add `source` to `finishSearch`, as Konjugieren's Phase 11 did, for searches these surfaces open |
 | `recent`, `myVerbs` | Phase 10 | A recent verb in the empty focused field; a verb in My Verbs. For the quiz signals (Phase 11), `myVerbs` is a quiz over My Verbs |
 | `tab`, `verbPage` | Phase 11 | The quiz signals only: a quiz begun from the Quiz tab; Test Me on a verb page |

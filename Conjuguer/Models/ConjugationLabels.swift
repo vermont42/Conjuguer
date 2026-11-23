@@ -232,9 +232,20 @@ extension VerbModel {
     }
   }
 
-  func verbsWithDeepLinks() -> AttributedString {
+  /// The model's verbs as a run of `conjuguer://verb/` links, alphabetically in French order
+  /// (écouter among the e's, where a plain sort would put it after the z's) or most frequent first.
+  func verbsWithDeepLinks(order: VerbSort = .alphabetical) -> AttributedString {
+    let orderedVerbs: [String]
+    switch order {
+    case .alphabetical:
+      orderedVerbs = verbs.sorted { $0.compare($1, locale: Util.french) == .orderedAscending }
+    case .frequency:
+      orderedVerbs = verbs.sorted { lhs, rhs in
+        (Verb.verbs[lhs]?.frequency ?? Int.max, lhs) < (Verb.verbs[rhs]?.frequency ?? Int.max, rhs)
+      }
+    }
     do {
-      return try AttributedString(markdown: verbs.map {
+      return try AttributedString(markdown: orderedVerbs.map {
         let encodedVerb = $0.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? ""
         return "[\($0)](\(URL.conjuguerUrlPrefix + URL.verbHost)/\(encodedVerb))"
       }

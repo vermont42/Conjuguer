@@ -12,6 +12,7 @@ struct VerbView: View {
   @Environment(World.self) private var world
   @Environment(\.scenePhase) private var scenePhase
   @Environment(\.tenseArticleOpener) private var tenseArticleOpener
+  @Environment(\.verbPagePush) private var verbPagePush
   @AppStorage("hasSeenConjugationColorKey") private var hasSeenColorKey = false
   @AppStorage("showsCompoundTenses") private var showsCompoundTenses = true
   let verb: Verb
@@ -113,6 +114,11 @@ struct VerbView: View {
             .scrollFade()
             .reportsReaching(.example, to: sectionVisibilityChanged)
         }
+
+        if !verb.related.isEmpty {
+          RelatedVerbsView(related: verb.related, open: open)
+            .scrollFade()
+        }
       }
       .padding(.horizontal, Layout.doubleDefaultSpacing)
     }
@@ -140,11 +146,17 @@ struct VerbView: View {
     }
     .sheet(item: $detailSheet) { sheet in
       switch sheet {
-      case .model(let model):
-        ModelView(model: model)
+      case .model(let destination):
+        ModelView(model: destination.model, verbOrder: destination.verbOrder)
           .sheetDismissable()
       case .article(let info):
         TenseArticleSheet(info: info)
+      case .verb(let destination):
+        VerbView(verb: destination.verb, source: destination.source)
+          .sheetDismissable()
+      case .relatedList(let destination):
+        RelatedVerbListView(destination: destination)
+          .sheetDismissable()
       }
     }
   }
@@ -194,7 +206,7 @@ struct VerbView: View {
 
   private func modelRow(_ model: VerbModel) -> some View {
     Button {
-      detailSheet = .model(model)
+      open(ModelDestination(model: model))
     } label: {
       modelReferenceText(model)
         .frenchPronunciation()
@@ -321,6 +333,25 @@ struct VerbView: View {
       }
     }
     .card()
+  }
+
+  /// Pushes a related page onto the stack that shows this one, or, where there is none, presents
+  /// it in a sheet.
+  private func open(_ value: any Hashable) {
+    if let verbPagePush {
+      verbPagePush(value)
+      return
+    }
+    switch value {
+    case let destination as VerbDestination:
+      detailSheet = .verb(destination)
+    case let destination as ModelDestination:
+      detailSheet = .model(destination)
+    case let destination as RelatedVerbListDestination:
+      detailSheet = .relatedList(destination)
+    default:
+      break
+    }
   }
 
   private var compoundTensesAreShown: Binding<Bool> {
@@ -450,15 +481,21 @@ struct VerbView: View {
   }
 
   private enum DetailSheet: Identifiable, Equatable {
-    case model(VerbModel)
+    case model(ModelDestination)
     case article(Info)
+    case verb(VerbDestination)
+    case relatedList(RelatedVerbListDestination)
 
     var id: String {
       switch self {
-      case .model(let model):
-        return "model-\(model.id)"
+      case .model(let destination):
+        return "model-\(destination.model.id)"
       case .article(let info):
         return "article-\(info.stableKey)"
+      case .verb(let destination):
+        return "verb-\(destination.verb.id)"
+      case .relatedList(let destination):
+        return "related-\(destination.root)"
       }
     }
   }
@@ -601,27 +638,20 @@ private struct MarkableConjugation: View {
 private struct TenseArticleSheet: View {
   let info: Info
   @Environment(\.dismiss) private var dismiss
-  @State private var path: [Route] = []
-
-  private enum Route: Hashable {
-    case info(Info)
-    case verb(Verb)
-  }
+  @State private var path = NavigationPath()
 
   var body: some View {
     NavigationStack(path: $path) {
       page(InfoView(info: info, openLink: open))
-        .navigationDestination(for: Route.self) { route in
-          switch route {
-          case .info(let info):
-            page(InfoView(info: info, openLink: open))
-          case .verb(let verb):
-            page(VerbView(verb: verb, source: .infoLink))
-          }
+        .navigationDestination(for: Info.self) { info in
+          page(InfoView(info: info, openLink: open))
+        }
+        .verbPageNavigation(path: $path) {
+          dismiss()
         }
     }
     .environment(\.tenseArticleOpener) { info in
-      path.append(.info(info))
+      path.append(info)
     }
   }
 
@@ -644,11 +674,11 @@ private struct TenseArticleSheet: View {
     switch url.host {
     case URL.infoHost:
       if let index = Int(target), Info.infos.indices.contains(index) {
-        path.append(.info(Info.infos[index]))
+        path.append(Info.infos[index])
       }
     case URL.verbHost:
       if let verb = Verb.verbs[target] {
-        path.append(.verb(verb))
+        path.append(VerbDestination(verb: verb, source: .infoLink))
       }
     default:
       break

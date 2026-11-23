@@ -30,7 +30,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 4 | Done | 2026-11-22 | 7a532ac | A5 (the map) | 5 |
 | 5 | Done | 2026-11-22 | 1fd6c58 | A5 (the search) | 6 |
 | 6 | Done | 2026-11-22 | 1fd6c58 | B3, B5's tip | 7 |
-| 7 | Not started | | | B4, A9 | 9 |
+| 7 | Done | 2026-11-22 | | B4, A9 | 9 |
 | 8 | Not started | | | B6 | 10 |
 | 9 | Not started | | | C1, C2 | 11 |
 | 10 | Not started | | | D1, D2 | 12 |
@@ -951,7 +951,7 @@ tables, and the known errors. `docs/feature_architecture.md` § Verb Page has th
 
 **Ideas:** B4, A9. **Ports:** Konjugieren Phase 9 (`RelatedVerbs.swift`,
 `RelatedVerbsView.swift`). **Depends on:** nothing; Phase 3's `related` source applies if done.
-**Status:** Not started.
+**Status:** Done (2026-11-22).
 
 - **B4.** The verb page leads to related verbs: the base verb and its derivatives (prendre,
   apprendre, comprendre, surprendre; venir, devenir, revenir, convenir), the other frequent verbs
@@ -981,6 +981,60 @@ list opens, a model page sorts both ways, and tests pin the base-finding on a li
 and known false pairs.
 
 **How it differed:**
+
+Built 2026-11-22 on top of Phases 5 and 6. The suite ran 412 tests in 37 suites, all passing (11
+new in `RelatedVerbsTests`). New files: `Models/RelatedVerbs.swift`, `Views/RelatedVerbsView.swift`,
+and `Views/VerbPageNavigation.swift`. `docs/feature_architecture.md` § Related Verbs has the design.
+
+- **Josh's decisions (2026-11-22),** all four from one round of questions, each the recommended
+  option: the card at the bottom of the page, below the examples (chosen from screenshots of
+  venir's and parler's pages); the model row and a model page's verb links push as the chips do,
+  so no sheet stacks on a sheet; the model page's list stays a run of links, reordered; and
+  compounds formed in Latin whose meaning drifted (attendre on tendre, demander on mander, rester
+  on ester) count as built on their base.
+- **Finding a base.** The rule is a verbal prefix (as allomorphs: ap-, res-, d- for décrire) that
+  leaves a verb which the verb's etymology names in `~tildes~`, the longer base winning. Measured in
+  Python first, then ported. Of the 300 most frequent verbs, 65 have a base and all are right. The
+  etymology test caught every suffix coincidence the plan feared (oublier, répondre, ajouter,
+  atteindre, accorder) but let through 9 pairs across the whole list, removed as
+  `VerbBase.falsePairs`: the etymology names the base to refute it (supplier "is tempting to
+  connect with plier", épisser, délibérer, encastrer, débrailler, asservir, enrouer) or names it as
+  something else (arriver's English ~river~, considérer's cognate ~sidérer~). I found them by
+  flagging every pair whose mention fell outside the first paragraph or shared a sentence with a
+  word of negation, 153 in all, and reading each. Six misses whose etymology names only the Latin
+  verb (advenir's ~venīre~) are `VerbBase.knownPairs`. They were found among prefixed verbs that
+  share an irregular model with an unmatched base. Regular -er verbs were not searched for misses.
+- **allier is built on lier** (Latin alligare, ad + ligare), though the plan named it a false pair.
+  By the standard Josh accepted it is a true one. oublier is the plan's real false pair, and the
+  tests pin it.
+- **"Ideally, when the verb shares the base's model"** was not used. Conjuguer splits near
+  relatives into separate models (dire 5-8A, prédire 5-8B; voir 4-1A, prévoir 4-1B), and model 1-1
+  holds 4,859 verbs, so the model test would have dropped good pairs and kept no bad one out.
+- **The model relation** shows the most frequent verb of each other root in the model, not
+  Konjugieren's root verb of each, so demander rather than mander speaks for its root. Its "All 29"
+  chip opens the model page in frequency order rather than a second list. The row is hidden when
+  the model holds only this verb's family (prendre's 5-2). The family row's "All 11" opens
+  `RelatedVerbListView`, Frequency first, as in Konjugieren.
+- **Navigation.** Every stack that shows a verb or model page now holds a `NavigationPath` and
+  injects `VerbPagePush` through `verbPageNavigation(path:done:)`: the Verbs tab (whose
+  `selectedVerb` became the path), the Models tab, every `.sheetDismissable()` sheet, and
+  `TenseArticleSheet`, whose private `Route` enum went away. In a sheet each pushed page also gets
+  Done. Phase 6 suggested reusing its article-sheet pattern; this generalizes it.
+- **The model page's alphabetical order** now uses French collation. The old plain sort put
+  écouter after the z's.
+- **Analytics.** A verb opened from the card or its full list sends `source` `related`, now marked
+  sent. The staged policy bullet's examples now name "another verb's page", in both languages.
+  `RelatedVerbListView` sends `viewAppeared` with its own name. No new signal.
+- **Seen, not fixed.** In English, VoiceOver's label for the verb page's model row ends in
+  "Suivant", because the chevron sits inside the row's French locale. It predates this phase.
+- **How it was tested.** On the iPhone, in English and light mode: venir pushed from a search,
+  with advenir among its 18; tenir pushed from its chip; tenir's model row pushed the model page,
+  whose Frequency order put venir, devenir, tenir first; convenir pushed from that list. In French
+  and dark mode: mettre's card in a deeplink sheet ("Formés sur mettre", "Les 15"), the full list
+  pushed inside the sheet, remettre pushed from it, and Terminé closed the sheet. In the Models
+  tab, a model page's verb link pushed. On the iPad, in English: prendre's card in a sheet, and
+  comprendre pushed inside it. Not tried: VoiceOver, and a verb link inside a tense article since
+  `TenseArticleSheet` moved to a `NavigationPath`. The article sheet itself still opens.
 
 ## Phase 8: Copy and Share
 

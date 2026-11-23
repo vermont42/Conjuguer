@@ -63,8 +63,10 @@ struct VerbRow: View {
 
 `.onTapGesture` handles a finger's tap, `.accessibilityAction` handles VoiceOver's double tap, and
 `.isButton` tells VoiceOver that the element does something. The parent opens the page by setting
-its navigation state (in the Verbs tab, `selectedVerb`, which `navigationDestination(item:)`
-pushes) rather than through a `NavigationLink`.
+its navigation state (in the Verbs tab, its `NavigationPath`; on a verb or model page, the
+`verbPagePush` environment action) rather than through a `NavigationLink`. The Related Verbs
+card's chips (Phase 7) follow this pattern: each chip is one French element with the button trait
+and an action.
 
 **Today's verb list does not do this.** `VerbBrowseView` and `ModelBrowseView` wrap `BrowseRow`,
 which marks its title French and its subtitle English, in a `Button`. By the table above, the

@@ -109,11 +109,14 @@ private struct ScreenBackground: ViewModifier {
   }
 }
 
+/// A sheet's own navigation stack, so that a verb page or a model page in the sheet pushes the
+/// pages it leads to rather than stacking a sheet on the sheet.
 private struct SheetDismissable: ViewModifier {
   @Environment(\.dismiss) private var dismiss
+  @State private var path = NavigationPath()
 
   func body(content: Content) -> some View {
-    NavigationStack {
+    NavigationStack(path: $path) {
       content
         .toolbar {
           ToolbarItem(placement: .topBarTrailing) {
@@ -121,6 +124,9 @@ private struct SheetDismissable: ViewModifier {
               dismiss()
             }
           }
+        }
+        .verbPageNavigation(path: $path) {
+          dismiss()
         }
     }
   }

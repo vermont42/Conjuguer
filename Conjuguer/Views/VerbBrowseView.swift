@@ -19,7 +19,7 @@ struct VerbBrowseView: View {
   @State private var searchMatches: [VerbSearch.Match] = []
   @State private var guess: VerbSearch.Guess?
   @State private var keyboardSelection: Int?
-  @State private var selectedVerb: VerbDestination?
+  @State private var path = NavigationPath()
   @State private var searchTracker = SearchTracker()
   @FocusState private var searchIsFocused: Bool
   private let tryQuizTip = TryQuizTip()
@@ -54,7 +54,7 @@ struct VerbBrowseView: View {
     .accessibilityIdentifier("verb_browse_sort")
     .accessibilityLabel(Text(L.BrowseView.sortOrder))
 
-    return NavigationStack {
+    return NavigationStack(path: $path) {
       ZStack {
         Color.customBackground
 
@@ -74,9 +74,7 @@ struct VerbBrowseView: View {
         .padding()
       }
       .navigationTitle(L.Navigation.verbs)
-      .navigationDestination(item: $selectedVerb) { destination in
-        VerbView(verb: destination.verb, source: destination.source, marks: destination.marks)
-      }
+      .verbPageNavigation(path: $path)
       .searchable(text: $searchText, placement: BrowseLayout.searchPlacement, prompt: L.VerbBrowseView.searchPrompt)
       .searchFocused($searchIsFocused)
       .textInputAutocapitalization(.never)
@@ -283,7 +281,7 @@ struct VerbBrowseView: View {
   }
 
   private func moveKeyboardSelection(by offset: Int) {
-    guard selectedVerb == nil else {
+    guard path.isEmpty else {
       return
     }
     keyboardSelection = Self.keyboardSelection(after: keyboardSelection, moving: offset, count: keyboardTargets.count)
@@ -320,20 +318,20 @@ struct VerbBrowseView: View {
   /// search. Opening another row after returning to the same results ends nothing more.
   private func openResult(_ verb: Verb, at index: Int) {
     guard isSearching, searchMatches.indices.contains(index) else {
-      selectedVerb = VerbDestination(verb: verb, source: .browse)
+      path.append(VerbDestination(verb: verb, source: .browse))
       return
     }
     if let query = searchTracker.finish() {
       signal(.opened(query: query, resultCount: searchMatches.count, kind: searchMatches[index].kind, position: index))
     }
-    selectedVerb = VerbDestination(verb: verb, source: .search, marks: searchMatches[index].conjugation?.marks)
+    path.append(VerbDestination(verb: verb, source: .search, marks: searchMatches[index].conjugation?.marks))
   }
 
   private func openGuess(_ guess: VerbSearch.Guess) {
     if let query = searchTracker.finish() {
       signal(.openedGuess(query: query))
     }
-    selectedVerb = VerbDestination(verb: guess.verb, source: .searchGuess, marks: guess.conjugation?.marks)
+    path.append(VerbDestination(verb: guess.verb, source: .searchGuess, marks: guess.conjugation?.marks))
   }
 
   private func signalEndedSearch(query: String) {
@@ -362,8 +360,8 @@ struct VerbBrowseView: View {
     }
     world.verbSearchIsRequested = false
     Task {
-      if selectedVerb != nil {
-        selectedVerb = nil
+      if !path.isEmpty {
+        path = NavigationPath()
         // Hack: focus requested while the pop animates sets the focus state without making the
         // field first responder, so typing goes nowhere (Konjugieren). Wait out the animation.
         try? await Task.sleep(for: .milliseconds(500))

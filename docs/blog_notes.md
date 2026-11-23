@@ -4977,3 +4977,49 @@ environment value, rather than stacking sheets.
 
 One simulator lesson: iOS 26's switch ignores AXe's instant tap. A touch held for 0.15 seconds
 flips it. The verify skill now says so.
+
+## Ways Between Verbs: Finding a French Verb's Base (2026-11-22)
+
+Phase 7 of the browse plan gives the verb page a Related Verbs card: the verbs built on the same
+base (prendre, apprendre, comprendre, surprendre) and the most frequent verbs of the other bases
+that share its model. Konjugieren had it easy here, because its data marks every German prefix.
+Conjuguer's data marks none, and French makes a suffix match treacherous: oublier ends in lier,
+répondre in pondre, avoir in voir.
+
+The first idea was the plan's: accept a base only when the letters before it are a known verbal
+prefix. That alone accepted avoir as a + voir. The second idea was to require the verb's model to
+match the base's. That fails twice over in Conjuguer: prévoir and prédire have models of their own,
+apart from voir and dire, and model 1-1 holds 4,859 regular verbs, so for most of the language a
+shared model proves nothing.
+
+What worked was the etymologies. The etymology pipeline wrote every infinitive's history with
+the words it cites in tildes, so démettre's says it "is formed from ~mettre~", and oublier's names
+~oblier~ but never ~lier~. A prefix that leaves a verb the etymology names: of the 300 most
+frequent verbs, that rule finds 65 bases, and every one is right. It catches each coincidence the
+plan feared.
+
+It is not perfect across the whole list, and the misses are funny. Supplier's etymology says "it
+is tempting to connect ~supplier~ with ~plier~", in order to say it is wrong. Épisser's explains
+that its é- "is not the French prefix", so "there is no base verb ~pisser~ hiding inside". Arriver
+names English ~river~. To find these I flagged every pair whose mention sat outside the
+etymology's first paragraph, or shared a sentence with a word like "unrelated" or "tempting", and
+read all 153. Nine went on a list of false pairs. Six more pairs went the other way: their
+etymologies cite only the Latin verb (advenir's ~venīre~), which left advenir looking like a
+stranger on venir's own page.
+
+The harder question was what "built on" should mean. Attendre comes from Latin attendere, ad +
+tendere, and tendre from tendere. It was never French a + tendre, and the meanings have drifted
+far apart. Josh kept such pairs, as Konjugieren kept verstehen with stehen, because they conjugate
+alike and that is what this app teaches. By the same reasoning allier is built on lier, though the
+plan had named it as a false pair.
+
+The navigation changed more than the card did. Conjuguer shows a verb page pushed in the Verbs
+tab, but also in sheets: from a deeplink, a model page, or an article. A chip that presented
+another sheet would stack sheets without end. Each stack, the two tabs and every sheet, now holds a
+navigation path and hands its pages a push action through the environment. Josh then chose to
+route the verb page's model row and the model page's verb links through it too, so a learner can
+go verb, model, verb, model and come back with the back button.
+
+The model page also gained a Frequency order. Its verbs stay one run of links, because model 1-1's
+4,859 verbs as rows would cost what Konjugieren paid for a thousand. Sorting them in French
+collation fixed an old bug along the way: écouter used to sort after the z's.

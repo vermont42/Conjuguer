@@ -15,7 +15,7 @@ struct ModelBrowseView: View {
   @State private var store: BrowseStore<ModelAndDecorator, ModelSort>?
   @State private var searchText = ""
   @State private var searchResults: [ModelAndDecorator] = []
-  @State private var selectedModel: VerbModel?
+  @State private var path = NavigationPath()
   @FocusState private var searchIsFocused: Bool
   private let exploreModelsTip = ExploreModelsTip()
 
@@ -48,7 +48,7 @@ struct ModelBrowseView: View {
     .pickerStyle(.segmented)
     .accessibilityLabel(Text(L.BrowseView.sortOrder))
 
-    return NavigationStack {
+    return NavigationStack(path: $path) {
       ZStack {
         Color.customBackground
 
@@ -68,9 +68,7 @@ struct ModelBrowseView: View {
         .padding()
       }
       .navigationTitle(L.Navigation.models)
-      .navigationDestination(item: $selectedModel) { model in
-        ModelView(model: model)
-      }
+      .verbPageNavigation(path: $path)
       .searchable(text: $searchText, placement: BrowseLayout.searchPlacement, prompt: L.ModelBrowseView.searchPrompt)
       .searchFocused($searchIsFocused)
       .textInputAutocapitalization(.never)
@@ -100,7 +98,7 @@ struct ModelBrowseView: View {
         LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
           ForEach(searchResults) { modelAndDecorator in
             Button {
-              selectedModel = modelAndDecorator.model
+              path.append(ModelDestination(model: modelAndDecorator.model))
             } label: {
               modelRow(modelAndDecorator)
                 .card()
@@ -120,7 +118,7 @@ struct ModelBrowseView: View {
     } else {
       List(searchResults) { modelAndDecorator in
         Button {
-          selectedModel = modelAndDecorator.model
+          path.append(ModelDestination(model: modelAndDecorator.model))
         } label: {
           modelRow(modelAndDecorator)
         }

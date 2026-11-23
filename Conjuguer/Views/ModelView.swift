@@ -10,14 +10,17 @@ import TipKit
 
 struct ModelView: View {
   @Environment(World.self) private var world
+  @Environment(\.verbPagePush) private var verbPagePush
   @State private var detailSheet: DetailSheet?
+  @State private var verbOrder: VerbSort
   let model: VerbModel
 
   private static let gridPronouns = ["je", "tu", "il", "nous", "vous", "ils"]
   private static let gridOrder: [PersonNumber] = [.firstSingular, .secondSingular, .thirdSingular, .firstPlural, .secondPlural, .thirdPlural]
 
-  init(model: VerbModel) {
+  init(model: VerbModel, verbOrder: VerbSort = .alphabetical) {
     self.model = model
+    _verbOrder = State(initialValue: verbOrder)
   }
 
   var body: some View {
@@ -60,7 +63,11 @@ struct ModelView: View {
       else {
         return .systemAction
       }
-      detailSheet = .verb(verb)
+      if let verbPagePush {
+        verbPagePush(VerbDestination(verb: verb, source: .modelPage))
+      } else {
+        detailSheet = .verb(verb)
+      }
       return .handled
     })
     .sheet(item: $detailSheet) { sheet in
@@ -213,7 +220,20 @@ struct ModelView: View {
     VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
       Text(L.ModelView.verbsUsing(count: model.verbs.count))
         .subheadingLabel()
-      Text(model.verbsWithDeepLinks())
+
+      if model.verbs.count > 1 {
+        Picker(L.BrowseView.sortOrder, selection: $verbOrder) {
+          ForEach([VerbSort.alphabetical, .frequency], id: \.self) { order in
+            Text(order.displayName)
+              .tag(order)
+          }
+        }
+        .pickerStyle(.segmented)
+        .sensoryFeedback(.selection, trigger: verbOrder)
+        .accessibilityIdentifier("model_verb_order")
+      }
+
+      Text(model.verbsWithDeepLinks(order: verbOrder))
         .font(bodyFont)
         .frenchPronunciation()
     }

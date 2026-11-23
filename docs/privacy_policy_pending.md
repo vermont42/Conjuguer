@@ -29,14 +29,15 @@ or a band. See [`feature_architecture.md`](feature_architecture.md#analytics) fo
 Later phases that send new `source` values (a related verb, Spotlight, My Verbs, and so on) are
 covered by the first bullet's "for example" unless they add a kind of surface it does not suggest.
 Phase 5 (2026-11-22) added the match kinds for conjugations, and the third bullet's examples now
-name them ("a conjugation").
+name them ("a conjugation"). Phase 7 (2026-11-22) began sending `related`, a verb opened from
+another verb's Related Verbs card, and the first bullet's examples now name "another verb's page".
 
 ### English
 
 New bullets for the list in section 2, after the bullet about certain in-app actions:
 
 ```
-- How you reached a verb's page: for example from a search, the verb list, a model's page, an info article, a widget, Control Center, or a shortcut
+- How you reached a verb's page: for example from a search, the verb list, a model's page, another verb's page, an info article, a widget, Control Center, or a shortcut
 - How far down a verb's page you scrolled (its top, the simple tenses, the compound tenses, the etymology, or the example sentences), and roughly how long the page was open (under 5 seconds, 5 to 15 seconds, 15 to 60 seconds, or longer)
 - When a search for a verb ends: whether you opened a verb, the kind of match that found it (for example the infinitive, a conjugation, a spelling without accents, or an English meaning), and rough counts: the length of what you typed (1 to 2 letters, 3 to 5, 6 to 9, or 10 or more), how many verbs matched (none, 1, 2 to 10, or more), and where the verb you opened stood in the list (first, second to fifth, or lower)
 ```
@@ -53,7 +54,7 @@ Nouveaux points pour la liste de la section 2, après le point sur certaines act
 l'application :
 
 ```
-- La façon dont vous avez atteint la page d'un verbe : par exemple depuis une recherche, la liste des verbes, la page d'un modèle, un article d'information, un widget, le Centre de contrôle ou un raccourci
+- La façon dont vous avez atteint la page d'un verbe : par exemple depuis une recherche, la liste des verbes, la page d'un modèle, la page d'un autre verbe, un article d'information, un widget, le Centre de contrôle ou un raccourci
 - Jusqu'où vous avez fait défiler la page d'un verbe (son début, les temps simples, les temps composés, l'étymologie ou les exemples) et, approximativement, combien de temps la page est restée ouverte (moins de 5 secondes, de 5 à 15 secondes, de 15 à 60 secondes, ou davantage)
 - À la fin d'une recherche de verbe : si vous avez ouvert un verbe, le type de correspondance qui l'a trouvé (par exemple l'infinitif, une forme conjuguée, une orthographe sans accents ou un sens anglais) et des ordres de grandeur : la longueur de votre saisie (1 à 2 lettres, 3 à 5, 6 à 9, ou 10 et plus), le nombre de verbes trouvés (aucun, 1, de 2 à 10, ou davantage) et la place du verbe ouvert dans la liste (premier, du deuxième au cinquième, ou plus loin)
 ```

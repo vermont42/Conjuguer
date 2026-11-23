@@ -49,7 +49,16 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `search_guess_row` | The guess's row `Button` in `FailedVerbSearchView` | `tap_id.sh search_guess_row` opens the guessed verb. |
 | `verb_request_link` | The "please email" line in `FailedVerbSearchView` | Its address is a `mailto:` link; tap the address by frame. The simulator has no Mail, so the tap copies the address and shows `address_copied_note`. |
 | `address_copied_note` | The note under `verb_request_link` | Shows for four seconds after the address is copied. |
+| `verb_related` | "Related Verbs" heading of the card at the bottom of `VerbView` | Scroll to the page's bottom first. |
+| `related_<infinitif>` | A verb chip on the Related Verbs card | e.g. `related_tenir`. `tap_id.sh` taps it; the verb pushes onto the current stack. |
+| `related_all_built_on` | The "All N" chip of the card's "Built on …" row | Pushes `RelatedVerbListView`. |
+| `related_all_model` | The "All N" chip of the card's "Same model" row | Pushes the model page in frequency order. |
+| `related_list_sort` | Frequency/Alphabetical `Picker` in `RelatedVerbListView` | 2 segments. |
+| `related_list_<infinitif>` | Row `Button` in `RelatedVerbListView` | e.g. `related_list_remettre`. |
+| `model_verb_order` | Alphabetical/Frequency `Picker` above a model page's verbs | 2 segments; the verbs stay one `Text` of links, so tap a verb at its coordinates. |
 
+An identifier on a container that is not itself one element (a card) is inherited by every element
+inside it and overrides theirs, so put a card's identifier on its heading (as `verb_related` is).
 Put a row's identifier on the tappable `Button`, **not** on the row content inside its
 label: SwiftUI merges the two elements and concatenates their identifiers, yielding
 `verb_row_avoir-verb_row_avoir`, which `tap_id.sh` can't match.

@@ -85,6 +85,7 @@ Conjuguer/
 │   ├── QuizResult.swift        # One answered question and its ConjugationResult, for the results sheet
 │   ├── QuizState.swift         # Quiz lifecycle enum (not started / in progress / finished)
 │   ├── QuizVerbs.swift         # Curated verb pools the quiz draws from (regular -er/-ir/-re, big three, stem changers, être auxiliaries, irregular participes, top thirty, futur stems)
+│   ├── RelatedVerbs.swift      # VerbBase (a verb's base and root: a verbal prefix plus a verb its etymology names, less false pairs), RelatedVerbs, and Verb.related for the verb page's card
 │   ├── SearchReport.swift      # SearchTracker (one verb search, first letter to its end) and SearchReport (finishSearch's banded parameters)
 │   ├── Sound.swift             # Sound-effect enum mapping cases to the bundled MP3s
 │   ├── StemAlteration.swift    # A stem alteration: type, chars, the tenses it applies to, additive/inherited flags
@@ -171,17 +172,19 @@ Conjuguer/
     ├── LoadingView.swift       # Splash shown while verbs.xml parses
     ├── MainTabView.swift       # Root TabView with five tabs
     ├── ModelBrowseView.swift   # Searchable, sortable list/grid of verb models
-    ├── ModelView.swift         # Model detail: endings, stem alterations, example verbs
+    ├── ModelView.swift         # Model detail: endings, stem alterations, and the verbs, alphabetically or by frequency
     ├── OnboardingView.swift    # Multi-page welcome tour; auto-presented on first launch and re-showable from Settings
     ├── QuizResultsView.swift   # End-of-quiz sheet: score, per-question results, leaderboard
     ├── QuizResultView.swift    # One row of the results sheet
     ├── QuizView.swift          # Quiz gameplay: prompt, answer field, progress, feedback
+    ├── RelatedVerbsView.swift  # The verb page's Related Verbs card (built on the same root, same model), RelatedVerbListView, and FlowLayout
     ├── RichTextView.swift      # Renders [RichTextBlock] with subheadings, emphasis, color-coding, links
     ├── SettingsView.swift      # Settings UI: pickers, app icon, ratings, onboarding re-show
     ├── TutorTestView.swift     # DEBUG-only batch harness for tutor queries
     ├── TutorView.swift         # Chat interface for the on-device tutor
     ├── VerbBrowseView.swift    # Searchable, sortable list/grid of all verbs (hosts the verb_browse_sort launch anchor)
-    └── VerbView.swift          # Verb detail: conjugation cards with second names and article buttons, the article sheet, the color key and scroll tip, etymology, example sentence
+    ├── VerbPageNavigation.swift # VerbPagePush and verbPageNavigation(path:done:): the pages a verb or model page pushes, in the Verbs and Models tabs and in every sheet
+    └── VerbView.swift          # Verb detail: conjugation cards with second names and article buttons, the article sheet, the color key and scroll tip, etymology, example sentence, related verbs
 
 ConjugationMapTool/                 # macOS command-line target; compiles the conjugation core from Conjuguer/ (membership exceptions in project.pbxproj)
 ├── FormsJSON.swift             # The corpus pipelines' three dumps (forms [.json], forms_all [.json], conjugations [.json]), ported byte-for-byte from the retired CorpusFormsDumpTests
@@ -245,6 +248,7 @@ ConjuguerTests/
     ├── NousPrésentStemTests.swift      # The nous-présent stem that imparfait derives from
     ├── ParserTests.swift               # XML parsing of verbs, models, and defect groups
     ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle (serialized — mutates Current)
+    ├── RelatedVerbsTests.swift         # Base-finding on known and false pairs, nested roots, the card's two relations, doubled roots, and the model page's two orders
     ├── RichTextTests.swift             # Rich-text markup parsing into blocks and segments
     ├── SearchReportTests.swift         # The search tracker's lifecycle, each finishSearch report, and that no parameter can echo the query
     ├── SettingsTests.swift             # Settings defaults, persistence, and malformed-value handling (serialized)

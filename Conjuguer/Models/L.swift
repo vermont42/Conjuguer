@@ -157,6 +157,22 @@ enum L {
       String(localized: "VerbView.secondName", defaultValue: "also \(name)")
     }
 
+    static var relatedHeading: String {
+      String(localized: "VerbView.relatedHeading")
+    }
+
+    static func builtOn(_ root: String) -> String {
+      String(localized: "VerbView.builtOn", defaultValue: "Built on \(root)")
+    }
+
+    static func sameModel(_ exemplar: String, _ id: String) -> String {
+      String(localized: "VerbView.sameModel", defaultValue: "Same model: \(exemplar) (\(id))")
+    }
+
+    static func allRelated(_ count: Int) -> String {
+      String(localized: "VerbView.allRelated", defaultValue: "All \(count.formatted())")
+    }
+
     static var articleButtonHint: String {
       String(localized: "VerbView.articleButtonHint")
     }

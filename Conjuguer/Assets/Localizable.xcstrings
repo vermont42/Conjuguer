@@ -437,6 +437,23 @@
         }
       }
     },
+    "VerbView.allRelated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les %@"
+          }
+        }
+      }
+    },
     "VerbView.articleButtonHint" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -454,6 +471,23 @@
         }
       }
     },
+    "VerbView.builtOn" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Built on %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formés sur %@"
+          }
+        }
+      }
+    },
     "VerbView.matchesSearch" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -467,6 +501,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Correspond à votre recherche"
+          }
+        }
+      }
+    },
+    "VerbView.relatedHeading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Related Verbs"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbes apparentés"
+          }
+        }
+      }
+    },
+    "VerbView.sameModel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Same model: %1$@ (%2$@)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Même modèle : %1$@ (%2$@)"
           }
         }
       }
