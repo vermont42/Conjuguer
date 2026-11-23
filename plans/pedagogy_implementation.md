@@ -26,7 +26,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 |---:|---|---|---|---|---:|
 | 1 | Done | 2026-11-22 | 0d82e5c | T1.3, T1.4, T1.5, and two Conjuguer defects | 1 |
 | 2 | Done | 2026-11-22 | b4aa188 | T1.2 | 2 |
-| 3 | Awaiting Josh | 2026-11-23 | | T4.1, T4.4, T4.5 | 3 |
+| 3 | Done | 2026-11-23 | bfe5c7f | T4.1, T4.4, T4.5 | 3 |
 | 4 | Not started | | | T1.6 | 4 |
 | 5 | Not started | | | T2.3, T2.6, T6.7, M1 | 5 |
 | 6 | Not started | | | T2.1, T2.2, T2.5 | 6 |
@@ -541,7 +541,7 @@ correctly, VoiceOver reads it as one prompt, and tests pin the frame for each ki
 ## Phase 3: A Correction That Stays
 
 **Suggestions:** T4.1, T4.4, T4.5. **Ports:** Konjugieren Phase 3 (`QuizCorrectionView.swift`,
-`AnswerDifference.swift`). **Depends on:** nothing; Phase 2 preferably. **Status:** Awaiting Josh.
+`AnswerDifference.swift`). **Depends on:** nothing; Phase 2 preferably. **Status:** Done.
 
 Today `Quiz.process(proposedAnswer:)` advances before the view redraws, so the correction for
 question n appears on question n + 1's card while the clock runs, and a partial match is never
