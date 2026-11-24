@@ -44,7 +44,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 18 | Done | 2026-11-23 | 5694ad4 | T5.5 | 18 |
 | 19 | Done | 2026-11-24 | 3077bf4 | T5.6 | 19 |
 | 20 | Done | 2026-11-24 | a809734 | T6.2 | 20 |
-| 21 | Done | 2026-11-24 | | T5.7 | 21 |
+| 21 | Done | 2026-11-24 | 444391d | T5.7 | 21 |
 | 22 | Not started | | | T6.3 | 22 |
 | 23 | Not started | | | T6.6 (personal bests and achievements) | 23 |
 | 24 | Not started | | | T6.8 | 24 |
