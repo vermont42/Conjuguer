@@ -27,9 +27,12 @@ extension QuizScope {
   }
 
   /// What the title bar and the Live Activity call a session whose questions look like any
-  /// quiz's: Review, My Mistakes, Verb Essentials, a model's practice, Name the Conjugation, or
-  /// Phrases à trous.
+  /// quiz's: Review, My Mistakes, Verb Essentials, a model's practice, Name the Conjugation,
+  /// Phrases à trous, or the Speed Round.
   var sessionTitle: String? {
+    if isSpeedRound {
+      return L.SpeedRound.title
+    }
     if isSentences {
       return L.Sentences.title
     }

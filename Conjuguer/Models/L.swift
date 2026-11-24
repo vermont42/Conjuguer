@@ -1484,6 +1484,72 @@ enum L {
     }
   }
 
+  enum SpeedRound {
+    static var title: String {
+      String(localized: "SpeedRound.title")
+    }
+
+    static var description: String {
+      String(localized: "SpeedRound.description")
+    }
+
+    static func descriptionWithBest(_ best: Int) -> String {
+      String(localized: "SpeedRound.descriptionWithBest", defaultValue: "As many right answers as you can in 60 seconds, on forms you have mastered · Best: \(best)")
+    }
+
+    static func locked(needed: Int, mastered: Int) -> String {
+      String(localized: "SpeedRound.locked", defaultValue: "Opens once you have mastered \(needed) forms, those whose next review is a week or more away. So far: \(mastered)")
+    }
+
+    static var startHint: String {
+      String(localized: "SpeedRound.startHint")
+    }
+
+    static var again: String {
+      String(localized: "SpeedRound.again")
+    }
+
+    static var againHint: String {
+      String(localized: "SpeedRound.againHint")
+    }
+
+    static var resultsHeading: String {
+      String(localized: "SpeedRound.resultsHeading")
+    }
+
+    static func rightAnswers(_ count: Int) -> String {
+      String(localized: "SpeedRound.rightAnswers", defaultValue: "Right answers: \(count)")
+    }
+
+    static func timeLeft(_ time: String) -> String {
+      String(localized: "SpeedRound.timeLeft", defaultValue: "Time left: \(time)")
+    }
+
+    static func secondsLeft(_ seconds: Int) -> String {
+      String(localized: "SpeedRound.secondsLeft", defaultValue: "Seconds left: \(seconds)")
+    }
+
+    static var missedWithColon: String {
+      String(localized: "SpeedRound.missedWithColon")
+    }
+
+    static var announceWarning: String {
+      String(localized: "SpeedRound.announceWarning")
+    }
+
+    static func announceTimeUp(_ count: Int) -> String {
+      String(localized: "SpeedRound.announceTimeUp", defaultValue: "Time is up. Right answers: \(count).")
+    }
+
+    static func best(_ best: Int) -> String {
+      String(localized: "SpeedRound.best", defaultValue: "Your best: \(best)")
+    }
+
+    static var newBest: String {
+      String(localized: "SpeedRound.newBest")
+    }
+  }
+
   enum Recognition {
     static var title: String {
       String(localized: "Recognition.title")

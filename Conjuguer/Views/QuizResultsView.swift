@@ -21,16 +21,20 @@ struct QuizResultsView: View {
           .headingLabel()
 
         VStack(alignment: .leading, spacing: 0) {
-          Text(L.QuizView.scoreWithColon)
+          Text(isSpeedRound ? L.SpeedRound.resultsHeading : L.QuizView.scoreWithColon)
             .smallLabel()
 
-          Text("\(quiz.score)")
+          Text("\(isSpeedRound ? quiz.correctCount : quiz.score)")
             .font(scoreFont)
             .foregroundStyle(Color.customBlue)
             .numericText()
             .lineLimit(1)
             .minimumScaleFactor(0.5)
             .accessibilityIdentifier("results_score")
+
+          if isSpeedRound {
+            speedRoundBest
+          }
         }
         .padding(.top, Layout.defaultSpacing)
 
@@ -53,14 +57,28 @@ struct QuizResultsView: View {
               .accessibilityIdentifier("results_level")
           }
 
-          if quiz.showsClock {
+          if quiz.showsClock, !isSpeedRound {
             Text(L.ResultsView.time(quiz.elapsedTime.timeString))
               .accessibilityIdentifier("results_time")
           }
         }
         .smallLabel()
 
-        if quiz.canContinue {
+        if isSpeedRound {
+          Button {
+            quiz.start(scope: .speedRound)
+          } label: {
+            Label(L.SpeedRound.again, systemImage: "bolt.fill")
+              .buttonLabel()
+              .frame(maxWidth: Self.tenMoreMaxWidth)
+          }
+          .funButton()
+          .controlSize(.large)
+          .frame(maxWidth: .infinity)
+          .padding(.top, Layout.defaultSpacing)
+          .accessibilityHint(L.SpeedRound.againHint)
+          .accessibilityIdentifier("results_speed_round_again")
+        } else if quiz.canContinue {
           Button {
             quiz.continueSession()
           } label: {
@@ -92,6 +110,25 @@ struct QuizResultsView: View {
     .padding(.top, Layout.tripleDefaultSpacing)
     .recordsAppearance(as: "\(QuizResultsView.self)")
     .screenBackground()
+  }
+
+  private var isSpeedRound: Bool {
+    quiz.scope.isSpeedRound
+  }
+
+  /// "New personal best!", or the best this round did not beat.
+  @ViewBuilder
+  private var speedRoundBest: some View {
+    if quiz.isNewSpeedRoundBest {
+      Label(L.SpeedRound.newBest, systemImage: "star.fill")
+        .font(bodyEmphasisFont)
+        .foregroundStyle(Color.customGreen)
+        .accessibilityIdentifier("results_speed_round_new_best")
+    } else if let best = quiz.speedRoundPreviousBest {
+      Text(L.SpeedRound.best(best))
+        .smallLabel()
+        .accessibilityIdentifier("results_speed_round_best")
+    }
   }
 
   private var exampleOffers: [UUID: Example] {

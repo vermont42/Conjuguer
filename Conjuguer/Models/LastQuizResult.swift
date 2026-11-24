@@ -24,6 +24,7 @@ struct LastQuizResult: Codable, Equatable {
     case recognition
     case review
     case sentences
+    case speedRound
     case verbEssentials
     case verbPage
   }
@@ -33,7 +34,8 @@ struct LastQuizResult: Codable, Equatable {
   let kind: Kind
   /// The `dictionaryKey` of a verb page's verb, the key of a collection, or a practiced model's id.
   let subject: String?
-  /// Nil for Review and My Mistakes, which do not ask by level.
+  /// Nil for Review, My Mistakes, a model's practice, and the Speed Round, which do not ask by
+  /// level.
   let levelKey: String?
   let score: Int
   let correctCount: Int
@@ -68,7 +70,7 @@ struct LastQuizResult: Codable, Equatable {
       subject = quiz.scope.modelPractice?.modelID
     case .verbPage:
       subject = quiz.scope.verbs?.first?.dictionaryKey
-    case .allVerbs, .custom, .mistakes, .myVerbs, .practiceSet, .recognition, .review, .sentences, .verbEssentials:
+    case .allVerbs, .custom, .mistakes, .myVerbs, .practiceSet, .recognition, .review, .sentences, .speedRound, .verbEssentials:
       subject = nil
     }
     self.init(
@@ -124,6 +126,8 @@ struct LastQuizResult: Codable, Equatable {
       return QuizRecordSession.review.title
     case .sentences:
       return L.Sentences.title
+    case .speedRound:
+      return L.SpeedRound.title
     case .verbEssentials:
       return L.VerbEssentials.title
     case .verbPage:
@@ -151,6 +155,8 @@ extension LastQuizResult.Kind {
       self = .recognition
     } else if scope.isSentences {
       self = .sentences
+    } else if scope.isSpeedRound {
+      self = .speedRound
     } else if scope.isPracticeSet {
       self = .practiceSet
     } else if scope.custom != nil {

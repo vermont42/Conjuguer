@@ -44,7 +44,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 18 | Done | 2026-11-23 | 5694ad4 | T5.5 | 18 |
 | 19 | Done | 2026-11-24 | 3077bf4 | T5.6 | 19 |
 | 20 | Done | 2026-11-24 | a809734 | T6.2 | 20 |
-| 21 | Not started | | | T5.7 | 21 |
+| 21 | Done | 2026-11-24 | | T5.7 | 21 |
 | 22 | Not started | | | T6.3 | 22 |
 | 23 | Not started | | | T6.6 (personal bests and achievements) | 23 |
 | 24 | Not started | | | T6.8 | 24 |
@@ -2394,7 +2394,7 @@ screen.
 ## Phase 21: Speed Round
 
 **Suggestions:** T5.7. **Ports:** Konjugieren Phase 21 (`SpeedRound.swift`). **Depends on:**
-Phases 11 and 20. **Status:** Not started.
+Phases 11 and 20. **Status:** Done.
 
 A speed round over items already mastered, the one place where the clock counts: Paul Nation's
 fluency strand, speed for material already accurate. Conjuguer's old time bonus finds its home
@@ -2411,6 +2411,82 @@ reach the third box.
 scoring.
 
 **How it differed:**
+
+- **Asked of Josh (2026-11-24), before building**, each the recommended option. (1) The phase's
+  Ask Josh: the round **opens at 5 mastered items and repeats them** as a round needs, as in
+  Konjugieren (over opening at any number, at 10, and over topping up with items still learning,
+  which would break "only mastered"). Below 5 the hub's row is no button and says how many are
+  mastered. He was told that nothing is mastered sooner than three days after its first right
+  answer. (2) The French name, **"Contre-la-montre"**, the time trial, over "Partie éclair" and
+  "Sprint". English is "Speed Round".
+- **Carried over from Konjugieren unasked**, being Josh's answers there of 2026-11-15: a miss does
+  not stop the round (no second attempt, even for a slip or a diagnosis; no correction; no
+  re-ask; the clock runs on) and its right answer shows on the next question; a mastered key
+  conjugation asks any cell of its stem the level asks, or its own il cell; a pattern asks a fresh
+  verb of the band; the round records nothing, right or wrong. Also as Konjugieren decided in its
+  session: a row at the foot of Exercises with a bolt; items not otherwise held to the level; one
+  personal best, not one per level, kept by `PracticeStore` and forgotten by Reset Practice, whose
+  description and alert now say so; a round with none right sets no best; results with "Right
+  Answers in 60 Seconds", the count, "New personal best!" or "Your best: n", and Another Round
+  ("Encore une manche"); the Last Quiz row without a score; no counts in the signals.
+- **Departed from Konjugieren.** (1) **Which cells a key conjugation asks** is held to the cells the
+  level's tense asks *of that verb*, by the tense's verb pools, since Conjuguer's slots carry pools
+  where Konjugieren's carried verb restrictions: mastered vient asks il vient, every présent and
+  impératif cell, the imparfait from Elementary, and the participe présent from Intermediate, but
+  never qu'il vienne, because the default quiz asks the subjonctif présent only of regular verbs and
+  être, avoir, and aller. (2) **A pattern avoids repeating its last verb** within a draw where it
+  has more than one, and falls back to any verb when the band has none, as Review does. (3) **The
+  miss line sits in the feedback slot**, under the new question's tense, where a right answer's
+  check appears, rather than above the verb as in Konjugieren, and is written out with its pronoun
+  or addressee (`AnswerFrame.writtenOut`): "venir · (tu) viens !", "aider · j'aide". (4) **The
+  status row shows symbols**, a check with the count and a timer with the time, since "Bonnes
+  réponses : 0" beside "Temps restant : 0:51" wrapped to two lines on the iPhone. VoiceOver reads
+  the words. The bar above it is the minute, red with the digits in the last ten seconds.
+  (5) **The results and the last result name no level** (`asksByLevel`), since the items are not
+  the level's. Konjugieren's focus fix (a hub session taking the keyboard) was already in
+  Conjuguer.
+- **Built as** `Models/SpeedRound.swift` (`SpeedRound`, `QuizScope.speedRound`,
+  `QuizDraw.speedRoundQuestions` and `speedRoundCells`, `SpeedRoundMiss`, `AnswerFrame.writtenOut`,
+  and the DEBUG fixture), with `Quiz`'s `finishSpeedRoundAnswer`, `finishSpeedRound`, a batch drawn
+  in `advance()` as the round reaches its last question, and `clockTicked()` ending the minute.
+  `QuizDraw.patternVerbs` was split out of `patternVerb` so a round reads each pattern's verbs once.
+  Sixteen `SpeedRound.*` strings.
+- **Analytics.** A new `source` value, `speedRound`, with no `questionCount` or
+  `lastQuestionIndex`. Staged in [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md)
+  in both languages: the lifecycle, progress, and duration bullets and the practice-record
+  paragraph, which now names the best. The progress bullet also gains a model's mixed practice,
+  which Phase 16 stopped sending but left out of that bullet.
+- **VoiceOver.** After a miss, "Incorrect. The answer was:" and the answer in French, before the
+  next question; the right answers and seconds left in place of the progress and score; "Ten
+  seconds left."; and "Time is up. Right answers: n." with the best. All through `Utterer`, whose
+  queue may still be reading the last question when the miss is announced. Read from the
+  accessibility tree, not heard.
+- **The fixture.** `-CONJUGUER_QUIZ_FIXTURE speedRound` opens the round whatever the record holds,
+  on eight items. A round on it still writes the device's best and last result.
+- **Tests:** 860 to 880, all passing through `run_tests.sh` (the iPhone simulator is in English).
+  `SpeedRoundTests`, 13 functions (16 cases): the third box as mastered, unaskable items left out,
+  only mastered items at every level (4), each in turn and never twice running over 20 seeds,
+  one item repeated, nothing from nothing, a pattern's band verbs changing, a spelling-change
+  pattern's model, venir's and être's cells by level, falloir in il, the scope, the best across a
+  launch and a reset, and misses written out. Nested in `QuizTests`, 7: nothing mastered starting
+  nothing, a right answer counted and a miss moving on at once, a slip as a miss, the record
+  untouched, every question a mastered item over 25 answers, sixty ticks ending the round with the
+  unanswered question dropped and the best kept then not beaten, and no score posted or counts
+  sent.
+- **Verified on the iPhone 17**, light, with the fixture. In English: the open row, a round whose
+  field had the keyboard at once (se coucher, "est couchée" right), a miss ("venir · venant"), time
+  running out to results of 1 with "New personal best!", Another Round with the keyboard up, the
+  locked row without the fixture ("So far: 0"), and the Last Quiz row without a score. In French:
+  the row with "Record : 1", the title "Contre-la-montre", misses ("aider · j'aide", "faire · elle
+  ferait"), the status row before and after its change to symbols, and results with "Votre record :
+  1" and "Encore une manche". **On the iPad Pro 11**, in English and dark: the row, a round, the
+  last eight seconds red, a miss ("suspendre · elles suspendaient"), and results of 0 with no best
+  line. Not tried: VoiceOver by ear, the software keyboard, large text, a record mastered by real
+  days. The iPhone simulator now holds a best of 1 and a Speed Round as its last result.
+- **For Josh to judge:** the round on his phone; the name and "Encore une manche"; the miss line's
+  place under the tense; the symbols in the status row; and whether the locked row's sentence is
+  too long.
+- **Josh asked for the commit** on 2026-11-24.
 
 ## Phase 22: A Daily Session and a Streak
 

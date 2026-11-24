@@ -6439,3 +6439,40 @@ terminated, and restored it afterward byte for byte. The page writes nothing, so
 One trap: a swipe that starts on the tab bar taps Quiz and pops back to the hub. The suite went
 from 846 to 860 tests, all passing. Josh has yet to judge the page on his phone, which the phase
 requires before it is done.
+
+## Speed Round (2026-11-24)
+
+Pedagogy Phase 21 gives the Quiz tab a Speed Round: sixty seconds of questions on what the
+practice record says is mastered, counting right answers. It is the fluency strand of Paul
+Nation's four, speed for material already accurate, and it is where Conjuguer's old identity as
+a timed quiz now lives. The default quiz retired its time bonus in Phase 5 and hid its clock in
+Phase 7. The French name is "Contre-la-montre", the cycling time trial, which Josh chose over
+"Partie éclair". A time trial is a race against the clock with no rival, and the round ranks
+against nothing but the learner's own best.
+
+The phase's one open question was what the round offers when too few items qualify. An item is
+mastered in the third box of the review ladder, so nothing gets there sooner than three days
+after its first right answer. Josh kept Konjugieren's answer: the round opens at five mastered
+items and repeats them as the minute needs. Below five, the hub's row says how many there are so
+far.
+
+Most of the port was mechanical, and Konjugieren's design carried over whole. A miss never holds
+the round. Its right answer rides on the next question, and the round records nothing either way.
+The interesting difference was in what a mastered key conjugation may ask. Konjugieren asks any
+cell of the same stem that the level asks. Conjuguer's level slots carry verb pools rather than
+verb restrictions, and a straight port would have let mastered vient ask qu'il vienne. The
+default quiz never asks that, because its subjonctif présent pools hold only regular verbs and
+être, avoir, and aller. So the round asks a cell only where the tense's pools admit the verb. A
+test pins venir against être at Intermediate.
+
+The miss line needed one small piece of new machinery. Conjuguer's right answers carry no
+pronoun, so "venir · viens" says too little. `AnswerFrame.writtenOut` fills the question's frame
+with the answer, which gives "(tu) viens !", "j'aide", and "je me souviens", with the narrow
+no-break space before the "!". Its first test expected "il vient" and got "elle vient". The test
+world's pronoun setting defaults to feminine, so the case moved to nous, which no setting
+changes.
+
+Looking at the screens caught one thing the tests could not. In French the status row, "Bonnes
+réponses : 0" beside "Temps restant : 0:51", wrapped to two lines on the iPhone. It now shows a
+check with the count and a timer with the time, and VoiceOver still reads the words. The suite
+went from 860 to 880 tests, all passing. Josh has yet to try the round on his phone.

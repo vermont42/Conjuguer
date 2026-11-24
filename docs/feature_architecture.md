@@ -1198,6 +1198,7 @@ Collections).
 | `.collection(_:)` | 10 at the learner's level over a collection's verbs, with Ten More | A collection's Quiz button, on its page or a model's page |
 | `.custom(_:myVerbs:)` | 10 over the learner's chosen tenses, verbs, or both, with Ten More | The Quiz tab with Custom chosen (§ The Custom Quiz) |
 | `PracticeSet.scope(source:)` | 10 over a shared set's tenses and verbs, at the set's level, with Ten More | Start on a practice set's sheet (§ Practice Sets) |
+| `.speedRound` | As many as the learner answers in 60 seconds, on mastered items, with Another Round | The hub's Speed Round row (§ Speed Round) |
 
 **A scoped quiz uses the learner's level.** Each question draws a tense by its weight from the
 level's tenses that some verb of the scope has, so a tense no verb has is never drawn and a My
@@ -1312,7 +1313,8 @@ scanning beneath it; the screen stays awake while it shows.
 Every final answer, in every scope, moves an item of a record kept on the device and never sent, as
 the answer is given, so a quiz quit after six questions has still practiced six. The sad trombone
 stays. Settings' Reset Practice (`button_settings_resetPractice`), shown while the record or the
-last quiz's result holds anything, erases both behind a confirmation and sends `tapResetPractice`.
+last quiz's result or the Speed Round's best holds anything, erases all three behind a confirmation
+and sends `tapResetPractice`.
 
 **Two kinds of item** (`PracticeItem`). The families were Josh's choice, 2026-11-23.
 
@@ -1420,9 +1422,10 @@ and how the last quiz went. From the top:
 - **Exercises** (`quiz_exercises`): ways to practice beside the quiz, each a row like Review's
   (`QuizHubRow`): Verb Essentials (`quiz_verb_essentials_button`), Name the Conjugation
   (`quiz_recognition_button`), and Phrases à trous (`quiz_sentences_button`), which start at
-  once, and Conjugation Models
+  once, Conjugation Models
   (`quiz_model_practice_button`), whose chevron says it pushes the list of models (§ Model
-  Practice).
+  Practice), and the Speed Round (`quiz_speed_round_button`, or `quiz_speed_round_empty` while
+  fewer than five items are mastered; § Speed Round).
 - **The foot**: the level's best score, when there is one, and a small View Leaderboard button
   (`quiz_leaderboard_button`), shown only while signed in to Game Center, which opens the current
   level's board and sends `tapViewLeaderboard` with `source` `tab`. Competing is beside the point
@@ -1432,9 +1435,10 @@ and how the last quiz went. From the top:
 the session so far, by every scope, Test Me's three questions included. A quit quiz writes
 nothing, since its results were never shown. It keeps a kind (`allVerbs`, `myVerbs`, `verbPage`,
 `collection`, `custom`, `practiceSet`, `review`, `mistakes`, `verbEssentials`, `modelAlone`,
-`modelMixed`, `recognition`, `sentences`) and a verb's `dictionaryKey`, a collection's key, or a practiced model's id rather
-than a title, so that it reads in the current language. Review, My Mistakes, and a model's
-practice keep no level. `PracticeStore` keeps it as JSON under `lastQuizResult` in the App Group's
+`modelMixed`, `recognition`, `sentences`, `speedRound`) and a verb's `dictionaryKey`, a collection's key, or a practiced model's id rather
+than a title, so that it reads in the current language. Review, My Mistakes, a model's practice,
+and the Speed Round keep no level, and the Speed Round's row shows no score, since it counts right
+answers. `PracticeStore` keeps it as JSON under `lastQuizResult` in the App Group's
 defaults, beside the record, on the device and never sent; Reset Practice forgets it, and the
 Practice Record card shows while either exists (`hasAnythingToReset`).
 
@@ -1737,11 +1741,67 @@ review (2026-11-24).
 - **Identifiers.** `choice_setting`, `choice_prompt`, `choice_option_0`, `choice_option_1`,
   `choice_english`, `choice_reason`, and Continue's `quiz_continue_button`.
 
+### Speed Round
+
+Sixty seconds of questions on what the practice record says is mastered, counting right answers:
+speed for material already accurate, the fluency strand of Paul Nation's four, and the one place
+where the clock counts. "Speed Round" in English, "Contre-la-montre" in French (Josh, 2026-11-24).
+A row at the foot of the hub's Exercises, with a bolt.
+
+- **What it asks.** Items in the third box or higher (`MasteryState.masteredBox`, an interval of
+  seven days), in key order, that can still be asked (`SpeedRound.masteredItems(in:)`). Nothing
+  is mastered sooner than three days after its first right answer.
+- **When it opens.** At five mastered items, repeated as the minute needs (Josh, 2026-11-24, as in
+  Konjugieren). Below five, the row is no button and reads "Opens once you have mastered 5 forms,
+  those whose next review is a week or more away. So far: 2". Open, it gives the best when there
+  is one.
+- **The draw** (`QuizDraw.speedRoundQuestions`). Ten at a time, more as the round reaches the last
+  of them. Each item is asked once before any is asked again, and never twice running, across
+  batches too. A key conjugation asks any cell of its stem that the level's tenses ask of its verb,
+  by the tense's verb pools, or its own il cell (`speedRoundCells`): mastered vient asks nous
+  venions at Elementary, but never qu'il vienne, which the default quiz never asks of venir. A
+  pattern asks its own cell of a verb of the band that shares it, a different one each time where
+  there are several, or of any verb where the band has none. Neither is otherwise held to the
+  level, since a mastered item stays mastered when the level changes.
+- **Answering.** A right answer counts and moves on. A miss moves on at once with the clock
+  running: no second attempt, even for a slip or a diagnosed error, no correction, no re-ask. The
+  next question shows the missed one's verb and right answer, written out with its pronoun, in the
+  feedback slot (`speed_round_miss`, `SpeedRoundMiss`): "venir · (tu) viens !".
+- **Nothing is recorded.** A miss does not send an item down the ladder, since speed errors are
+  often haste, and a right answer does not move one up, since a record that counted only a timed
+  round's hits would be one-sided.
+- **The screen.** The bar is the minute; under it a check with the right answers and a timer with
+  the time left (`speed_round_right_answers`, `speed_round_time_left`), as symbols, since the words
+  wrap in French beside the time. They show whatever the Quiz Clock setting, and the last ten
+  seconds are red.
+- **The end.** At zero the question on screen and the rest of the batch are dropped, so the results
+  list what was answered. The results read "Right Answers in 60 Seconds" over the count, then "New
+  personal best!" (`results_speed_round_new_best`) or "Your best: 12"
+  (`results_speed_round_best`), the count of the questions answered, and **Another Round**
+  (`results_speed_round_again`), which starts a fresh minute with the keyboard up. No level, no
+  time, no Ten More, no Live Activity, no Game Center, no best score, no `ChangeLevelTip`.
+- **The best.** One personal best on the device, not one per level, kept by `PracticeStore` as
+  `speedRoundBest` in the App Group's defaults beside the last result, and forgotten by Reset
+  Practice. A round with none right sets none.
+- **Signals.** The quiz signals with `source` `speedRound`, without `questionCount` or
+  `lastQuestionIndex` (`QuizScope.sendsQuestionCounts`), since a round's length is how many
+  questions were answered in a minute. The best is never sent.
+- **VoiceOver.** Each question is announced as in the quiz, preceded after a miss by "Incorrect.
+  The answer was:" and the answer in French, and followed by the right answers and the seconds
+  left in place of the progress and score. "Ten seconds left." at ten, and at the end "Time is up.
+  Right answers: 12." with the best. The miss line, the count, and the time are each one element
+  read in words.
+- **The fixture.** `-CONJUGUER_QUIZ_FIXTURE speedRound` opens the round whatever the record holds,
+  on eight items (`SpeedRound.fixtureItems`): parler's je présent, finir's nous présent, rendre's
+  ils imparfait, manger's nous présent, arriver's il passé composé (an être pattern), and venir's
+  présent, faire's futur, and être's présent key conjugations. A round on it still writes the
+  device's best and last result.
+
 ### Signals
 
 `quizStart` (`level`, `source`), `quizQuit` (`level`, `lastQuestionIndex`, `duration`, `source`),
 `quizCompletion` (`level`, `questionCount`, `duration`, `source`), and `quizAbandon` (`level`,
-`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, `verbEssentials`, `modelAlone`, `modelMixed`, `recognition`, or `sentences`, so a
+`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, `verbEssentials`, `modelAlone`, `modelMixed`, `recognition`, `sentences`, or `speedRound`, so a
 three-question quiz does not inflate the ten-question quiz's completion rate.
 
 - **No signal carries a score or a count of right or wrong answers.** `lastQuestionIndex` is the
@@ -1755,7 +1815,7 @@ three-question quiz does not inflate the ten-question quiz's completion rate.
   questions so far (10, 20, …), so Ten More shows without a signal of its own and Ten More itself
   sends no `quizStart`.
 - **Review and My Mistakes** send neither `questionCount` nor `lastQuestionIndex` (§ Review and
-  My Mistakes).
+  My Mistakes), nor does a mixed model practice or the Speed Round (§ Speed Round).
 - **`quizAbandon`** reports a quiz the app was left during. `QuizAbandonment` keeps one entry per
   `Quiz` in settings, written at the start and at each question and removed at a quit or the
   results, so an entry still there at the next launch belongs to a quiz that ended with the app.

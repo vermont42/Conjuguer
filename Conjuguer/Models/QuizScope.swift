@@ -44,26 +44,30 @@ struct QuizScope {
 
   var isSentences = false
 
+  var isSpeedRound = false
+
   /// Only the default quiz posts to its level's leaderboard and sets its best score: a score over
   /// the learner's own verbs, tenses, or practice record, or over three questions, compares with
   /// nothing.
   var isRanked: Bool {
-    verbs == nil && custom == nil && recordSession == nil && !isVerbEssentials && modelPractice == nil && !isRecognition && !isSentences
+    verbs == nil && custom == nil && recordSession == nil && !isVerbEssentials && modelPractice == nil && !isRecognition && !isSentences && !isSpeedRound
   }
 
-  /// Review and My Mistakes ask whatever the record holds, beyond the level's tenses and band, and a
-  /// model's practice asks its ten most frequent verbs at every level, so their results name no
-  /// level.
+  /// Review, My Mistakes, and the Speed Round ask whatever the record holds, beyond the level's
+  /// tenses and band, and a model's practice asks its ten most frequent verbs at every level, so
+  /// their results name no level.
   var asksByLevel: Bool {
-    recordSession == nil && modelPractice == nil
+    recordSession == nil && modelPractice == nil && !isSpeedRound
   }
 
   /// A Review or My Mistakes session shorter than ten is as long as the learner's due or missed
   /// items, so its signals carry neither the questions asked nor the question reached: either
   /// would tell how many answers were wrong. A mixed model practice's round is as long as the
-  /// known models allow, and which models are known comes from the learner's answers.
+  /// known models allow, and which models are known comes from the learner's answers. A Speed
+  /// Round's length is how many questions the learner answered in a minute, which measures the
+  /// answers themselves.
   var sendsQuestionCounts: Bool {
-    recordSession == nil && modelPractice?.mode != .mixed
+    recordSession == nil && modelPractice?.mode != .mixed && !isSpeedRound
   }
 
   /// Only the default quiz mixes in items the practice record says are due, up to
@@ -101,9 +105,10 @@ struct QuizScope {
   }
 
   /// Whether the results offer Ten More, or for Verb Essentials five more verbs. Test Me's three
-  /// questions are a check, not a session.
+  /// questions are a check, not a session, and a Speed Round's results offer a fresh minute
+  /// instead.
   var continues: Bool {
-    isVerbEssentials || modelPractice != nil || questionCount == Quiz.questionCount
+    !isSpeedRound && (isVerbEssentials || modelPractice != nil || questionCount == Quiz.questionCount)
   }
 
   var isVerbPage: Bool {

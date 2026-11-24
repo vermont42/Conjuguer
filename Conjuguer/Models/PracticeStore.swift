@@ -14,6 +14,8 @@ import Observation
 final class PracticeStore {
   private(set) var record: PracticeRecord
   private(set) var lastResult: LastQuizResult?
+  /// The most right answers in one Speed Round, kept on the device and sent nowhere.
+  private(set) var speedRoundBest: Int?
   private let getterSetter: GetterSetter
   private let calendar: Calendar
   /// The `LearnerVerbs` JSON a first launch with a practice record migrates. It is read at
@@ -43,7 +45,10 @@ final class PracticeStore {
       pendingMigration = getterSetter.get(key: LearnerVerbs.storageKey)
     }
     lastResult = getterSetter.get(key: LastQuizResult.storageKey).flatMap(LastQuizResult.init(json:))
+    speedRoundBest = getterSetter.get(key: Self.speedRoundBestKey).flatMap { Int($0) }
   }
+
+  static let speedRoundBestKey = "speedRoundBest"
 
   var isEmpty: Bool {
     migrateIfNeeded()
@@ -144,7 +149,7 @@ final class PracticeStore {
   }
 
   var hasAnythingToReset: Bool {
-    !isEmpty || lastResult != nil
+    !isEmpty || lastResult != nil || speedRoundBest != nil
   }
 
   func recordResult(_ result: LastQuizResult) {
@@ -154,14 +159,29 @@ final class PracticeStore {
     }
   }
 
-  /// Settings' Reset Practice, which forgets the last result too. The record is saved empty
-  /// rather than removed, so that the next launch does not migrate the old schedules again.
+  /// A finished Speed Round's right answers, kept when they beat the best. Returns whether they
+  /// did. A round with none right sets no best.
+  @discardableResult
+  func recordSpeedRound(_ correctCount: Int) -> Bool {
+    guard correctCount > (speedRoundBest ?? 0) else {
+      return false
+    }
+    speedRoundBest = correctCount
+    getterSetter.set(key: Self.speedRoundBestKey, value: "\(correctCount)")
+    return true
+  }
+
+  /// Settings' Reset Practice, which forgets the last result and the Speed Round's best too. The
+  /// record is saved empty rather than removed, so that the next launch does not migrate the old
+  /// schedules again.
   func reset() {
     pendingMigration = nil
     record.reset()
     save()
     lastResult = nil
     getterSetter.remove(key: LastQuizResult.storageKey)
+    speedRoundBest = nil
+    getterSetter.remove(key: Self.speedRoundBestKey)
   }
 
   private static func cardVerb(of item: PracticeItem) -> Verb? {

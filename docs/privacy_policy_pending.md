@@ -856,3 +856,73 @@ Le paragraphe sur le suivi des exercices devient :
 ```
 L'application conserve aussi un suivi des exercices : pour chaque conjugaison que vos réponses aux quiz et vos consultations ont touchée, si votre dernière réponse était juste et le jour où elle doit être révisée, afin que les quiz et les cartes de révision la reproposent et que l'onglet Quiz puisse afficher ce que vous maîtrisez, ainsi que le résultat de votre dernier quiz, afin que l'onglet Quiz puisse l'afficher. Ce suivi reste sur votre appareil et n'est jamais envoyé. « Réinitialiser le suivi », dans les Paramètres, l'efface.
 ```
+
+## Speed Round (pedagogy plan, Phase 21, 2026-11-24)
+
+The Quiz tab gains the Speed Round ("Contre-la-montre" in French): sixty seconds of questions on
+the conjugations the practice record says are mastered, counting right answers. The quiz signals
+send a new `source` value, `speedRound`. **A round sends no question counts.** `quizCompletion`
+omits `questionCount`, and `quizQuit` and `quizAbandon` omit the question reached, because a
+round's length is how many questions were answered in a minute. Nothing is posted to Game Center,
+which section 6 already allows. The round's best, the most right answers in one round, is kept on
+the device beside the practice record, never sent, and erased by Reset Practice. A round moves
+nothing in the practice record.
+
+This section replaces the quiz lifecycle bullet that the section on Phrases à trous gives, the
+progress bullet that the section on Review and My Mistakes gives, the bullet on how long a quiz
+lasted that the section on model practice gives, and the practice-record paragraph that the section
+on Mastery gives, so apply it after all four. Its progress bullet also names a model's mixed
+practice, which has sent no question reached since the section on model practice but which that
+section left out of the bullet.
+
+### English
+
+The bullet on quiz lifecycle events now reads:
+
+```
+- Quiz lifecycle events (starting, quitting, or completing a quiz), and where the quiz began: the Quiz tab, over every verb, over My Verbs, over a custom choice, as a review of what is due, as practice of your mistakes, or as the Verb Essentials, Name the Conjugation, Sentences, or Speed Round exercise, a verb's page, a collection, a practice set opened from a shared link or a QR code, or the practice of a conjugation model, alone or mixed with models you know, with which collection for the four featured ones (a model's collection, or a model's practice, is named only as a model); for a custom quiz or a practice set, whether it chose tenses, verbs, or both, but not which
+```
+
+The bullet on progress in a quiz now reads:
+
+```
+- How far you progressed in a quiz if you quit early or leave the app during it (the question number reached, reported the next time you open the app), except in a review, in practice of your mistakes, in a model's mixed practice, or in the Speed Round, whose length would reveal how your answers went
+```
+
+The bullet on how long a quiz lasted now reads:
+
+```
+- Roughly how long a quiz lasted when you complete or quit it (under 3 seconds, 3 to 15 seconds, 15 to 40 seconds, 40 seconds to 2 minutes, or longer), and how many questions it had reached when you complete it (10, or 20 or more if you asked for ten more; 15 a round in Verb Essentials; up to 15 a round in a model's practice alone), except for a review, practice of your mistakes, a model's mixed practice, or the Speed Round
+```
+
+The practice-record paragraph now reads:
+
+```
+The app also keeps a practice record: for each conjugation your quiz answers and lookups have touched, whether your last answer was right and when it is next due for review, so that quizzes and review cards can bring it back and the Quiz tab can show what you have mastered, the results of your last quiz, so that the Quiz tab can show them, and your best in the Speed Round. The practice record stays on your device and is never sent. Reset Practice in Settings erases it.
+```
+
+### French
+
+Le point sur les événements du cycle de vie d'un quiz devient :
+
+```
+- Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes, sur « Mes verbes », sur mesure, en révision de ce qui est à revoir, pour revoir vos erreurs ou dans l'exercice « L'essentiel du verbe », « Identifier la forme verbale », « Phrases à trous » ou « Contre-la-montre », la page d'un verbe, une collection, une série d'exercices ouverte depuis un lien partagé ou un code QR, ou l'exercice d'un modèle de conjugaison, seul ou mélangé aux modèles que vous connaissez, avec le nom de la collection pour les quatre collections mises en avant (la collection d'un modèle, ou l'exercice d'un modèle, est désigné seulement comme celui d'un modèle) ; pour un quiz sur mesure ou une série d'exercices, s'il porte sur des temps, des verbes ou les deux, mais pas lesquels
+```
+
+Le point sur la progression dans un quiz devient :
+
+```
+- Votre progression dans un quiz si vous l'abandonnez prématurément ou quittez l'application pendant celui-ci (le numéro de la question atteinte, transmis à la prochaine ouverture de l'application), sauf en révision, pour revoir vos erreurs, dans l'exercice d'un modèle mélangé ou au « Contre-la-montre », dont la longueur révélerait le résultat de vos réponses
+```
+
+Le point sur la durée d'un quiz devient :
+
+```
+- La durée approximative d'un quiz lorsque vous le terminez ou l'abandonnez (moins de 3 secondes, de 3 à 15 secondes, de 15 à 40 secondes, de 40 secondes à 2 minutes, ou davantage) et le nombre de questions atteint lorsque vous le terminez (10, ou 20 et plus si vous avez demandé dix questions de plus ; 15 par série dans « L'essentiel du verbe » ; jusqu'à 15 par série dans l'exercice d'un modèle seul), sauf en révision, pour revoir vos erreurs, dans l'exercice d'un modèle mélangé ou au « Contre-la-montre »
+```
+
+Le paragraphe sur le suivi des exercices devient :
+
+```
+L'application conserve aussi un suivi des exercices : pour chaque conjugaison que vos réponses aux quiz et vos consultations ont touchée, si votre dernière réponse était juste et le jour où elle doit être révisée, afin que les quiz et les cartes de révision la reproposent et que l'onglet Quiz puisse afficher ce que vous maîtrisez, le résultat de votre dernier quiz, afin que l'onglet Quiz puisse l'afficher, et votre record au « Contre-la-montre ». Ce suivi reste sur votre appareil et n'est jamais envoyé. « Réinitialiser le suivi », dans les Paramètres, l'efface.
+```

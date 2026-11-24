@@ -48,17 +48,22 @@ extension QuizDraw {
     return questions
   }
 
-  /// A verb of `verbs` whose `tense` exercises the pattern `item`, drawn at random. A base's own
-  /// verbs share every cell of its pattern and need no conjugating to check, so the rest of its
-  /// family, manger's verbs for parler's, is searched only when none fits.
+  /// A verb of `verbs` whose `tense` exercises the pattern `item`, drawn at random.
   static func patternVerb(
     for item: PracticeItem,
     tense: Tense,
     from verbs: [Verb],
     using generator: inout some RandomNumberGenerator
   ) -> Verb? {
+    patternVerbs(for: item, tense: tense, from: verbs).randomElement(using: &generator)
+  }
+
+  /// The verbs of `verbs` whose `tense` exercises the pattern `item`. A base's own verbs share
+  /// every cell of its pattern and need no conjugating to check, so the rest of its family,
+  /// manger's verbs for parler's, is searched only when none fits.
+  static func patternVerbs(for item: PracticeItem, tense: Tense, from verbs: [Verb]) -> [Verb] {
     guard case let .pattern(model, _, _, _) = item else {
-      return nil
+      return []
     }
     func fits(_ verb: Verb) -> Bool {
       verb.hasCell(tense) && PracticeItem.exercised(by: tense, of: verb) == item
@@ -67,7 +72,7 @@ extension QuizDraw {
     if fitting.isEmpty, PracticeItem.patternBases.contains(model) {
       fitting = verbs.filter { $0.model != model && PracticeItem.patternBase(of: $0) == model && fits($0) }
     }
-    return fitting.randomElement(using: &generator)
+    return fitting
   }
 
   /// The drawn questions with the due ones placed among them at random.

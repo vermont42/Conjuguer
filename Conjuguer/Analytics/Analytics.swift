@@ -85,6 +85,7 @@ enum AnalyticsSource: String, CaseIterable {
   case sentences
   case sharedLink
   case shortcut
+  case speedRound
   case spotlight
   case tab
   case verbEssentials

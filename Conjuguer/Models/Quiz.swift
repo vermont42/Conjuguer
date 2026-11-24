@@ -39,6 +39,16 @@ class Quiz {
   /// `continueAfterCorrection()`, right or wrong, since a choice of two can be a lucky guess and
   /// the reason is the lesson.
   private(set) var heldChoice: Int?
+  /// A Speed Round's last answer when it was wrong, whose right answer the next question shows,
+  /// since the round does not stop for a correction.
+  private(set) var speedRoundMiss: SpeedRoundMiss?
+  /// The best a finished Speed Round had to beat. Nil when there was none.
+  private(set) var speedRoundPreviousBest: Int?
+  private(set) var isNewSpeedRoundBest = false
+
+  var speedRoundSecondsLeft: Int {
+    max(SpeedRound.duration - elapsedTime, 0)
+  }
 
   var isHeld: Bool {
     correction != nil || heldChoice != nil
@@ -226,11 +236,22 @@ class Quiz {
     )
   }
 
+  /// One second of the clock, called by the timer, and by tests, which do not wait a minute. A
+  /// Speed Round ends when its minute is up.
   func clockTicked() {
     guard !isHeld else {
       return
     }
     elapsedTime += 1
+    guard scope.isSpeedRound, quizState == .inProgress else {
+      return
+    }
+    if speedRoundSecondsLeft == SpeedRound.warningSecondsLeft {
+      announceSpeedRoundWarning()
+    }
+    if speedRoundSecondsLeft == 0 {
+      finishSpeedRound()
+    }
   }
 
   /// The question reached, counted from one, re-asks not counted, which `quizQuit` and
@@ -273,6 +294,7 @@ class Quiz {
     firstAttemptDiagnosis = nil
     firstAttemptRecognition = nil
     heldChoice = nil
+    speedRoundMiss = nil
     endLiveActivity()
     QuizAbandonment.clear(id: abandonmentID, getterSetter: Current.getterSetter)
   }
@@ -352,11 +374,25 @@ class Quiz {
     firstAttemptDiagnosis = nil
     firstAttemptRecognition = nil
     heldChoice = nil
+    speedRoundMiss = nil
+    speedRoundPreviousBest = nil
+    isNewSpeedRoundBest = false
     shouldShowResults = false
   }
 
   /// A round's questions, a fixture's in DEBUG, which Ten More repeats.
   private func drawQuestions() -> [QuizQuestion] {
+    if scope.isSpeedRound {
+      return QuizDraw.speedRoundQuestions(
+        for: SpeedRound.items(from: Current.practice),
+        slots: level.slots,
+        band: level.band,
+        count: SpeedRound.batchSize,
+        after: questions.last.map { PracticeItem.exercised(by: $0.tense, of: $0.verb) },
+        using: &generator
+      )
+    }
+
     if let session = scope.modelPractice {
       return QuizDraw.modelPracticeQuestions(for: session, record: Current.practice.record, asked: questions, using: &generator)
     }
@@ -799,12 +835,12 @@ class Quiz {
     }
     let grade = ConjugationResult.grade(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense)
     let isSecondAttempt = firstAttempt != nil
-    let diagnosis = grade.result == .noMatch
+    let diagnosis = grade.result == .noMatch && !scope.isSpeedRound
       ? AnswerDiagnosis.diagnose(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense, pronounGender: pronounGender)
       : nil
     // A diagnosis is checked before a slip, since it says more: suis allé for suis allée is one
     // letter off, and the agreement is what to fix.
-    if grade.result == .noMatch, !isSecondAttempt,
+    if grade.result == .noMatch, !isSecondAttempt, !scope.isSpeedRound,
       diagnosis != nil || AnswerSlip.isSlip(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense) {
       firstAttempt = proposedAnswer
       firstAttemptDiagnosis = diagnosis
@@ -830,6 +866,10 @@ class Quiz {
       sentence: question.sentence?.completed,
       verbKey: verb.dictionaryKey
     )
+    if scope.isSpeedRound {
+      finishSpeedRoundAnswer(result)
+      return
+    }
     // Each final answer goes into the practice record as it is given, so that a quiz quit after
     // six questions has still practiced six. A slip's right second attempt counts as right.
     Current.practice.recordAnswer(verb: verb, tense: tense, isCorrect: conjugationResult != .noMatch, at: now())
@@ -966,6 +1006,26 @@ class Quiz {
     advance()
   }
 
+  /// A Speed Round's answer never holds the round: no second attempt, no correction, no re-ask,
+  /// and nothing recorded. A miss's right answer rides on the next question.
+  private func finishSpeedRoundAnswer(_ result: QuizResult) {
+    score += result.points
+    quizResults.append(result)
+    speedRoundMiss = result.conjugationResult == .noMatch ? SpeedRoundMiss(question: questions[currentQuestionIndex], correctAnswers: result.correctAnswer) : nil
+    advance()
+  }
+
+  /// Time is up. The question on screen, unanswered, and the rest of the batch are dropped, so that
+  /// the results list what was answered, and the right answers are measured against the best.
+  private func finishSpeedRound() {
+    questions = Array(questions.prefix(currentQuestionIndex))
+    speedRoundMiss = nil
+    speedRoundPreviousBest = Current.practice.speedRoundBest
+    isNewSpeedRoundBest = Current.practice.recordSpeedRound(correctCount)
+    announceSpeedRoundEnd()
+    completeRound()
+  }
+
   /// Where a question missed at `index` returns: after `reaskGap` others, or at the round's end,
   /// before the results, when fewer remain.
   static func reaskPosition(after index: Int, in count: Int) -> Int {
@@ -974,9 +1034,16 @@ class Quiz {
 
   private func advance() {
     currentQuestionIndex += 1
+    if scope.isSpeedRound, currentQuestionIndex >= questions.count - 1 {
+      questions += drawQuestions()
+    }
 
     if currentQuestionIndex == questions.count {
-      completeRound()
+      if scope.isSpeedRound {
+        finishSpeedRound()
+      } else {
+        completeRound()
+      }
     } else {
       announcePublishedProperties()
       updateLiveActivity()
@@ -1013,6 +1080,26 @@ class Quiz {
     return currentLanguage == "fr" ? Utterer.frenchLocaleString : currentLanguage + "-" + currentRegion
   }
 
+  private func announceSpeedRoundWarning() {
+    guard UIAccessibility.isVoiceOverRunning else {
+      return
+    }
+    Utterer.utter(L.SpeedRound.announceWarning, localeString: currentLocaleString)
+  }
+
+  private func announceSpeedRoundEnd() {
+    guard UIAccessibility.isVoiceOverRunning else {
+      return
+    }
+    var announcement = L.SpeedRound.announceTimeUp(correctCount)
+    if isNewSpeedRoundBest {
+      announcement += " " + L.SpeedRound.newBest
+    } else if let speedRoundPreviousBest {
+      announcement += " " + L.SpeedRound.best(speedRoundPreviousBest)
+    }
+    Utterer.utter(announcement, localeString: currentLocaleString)
+  }
+
   // The first attempt stays in the field for the learner to edit, and VoiceOver's focus with it.
   private func announceSecondAttempt() {
     guard UIAccessibility.isVoiceOverRunning else {
@@ -1029,6 +1116,10 @@ class Quiz {
         let currentLocaleString = self.currentLocaleString
         guard let question = currentQuestion else {
           return
+        }
+        if let miss = speedRoundMiss {
+          Utterer.utter(L.SpeedRound.missedWithColon, localeString: currentLocaleString)
+          Utterer.utter(miss.answer.lowercased(), localeString: Utterer.frenchLocaleString)
         }
         if let shownSpelling = lastRoundResult?.shownSpelling {
           Utterer.utter(L.QuizView.alsoSpelledWithColon, localeString: currentLocaleString)
@@ -1085,6 +1176,11 @@ class Quiz {
   }
 
   private func announceProgress(localeString: String) {
+    if scope.isSpeedRound {
+      Utterer.utter(L.SpeedRound.rightAnswers(correctCount), localeString: localeString)
+      Utterer.utter(L.SpeedRound.secondsLeft(speedRoundSecondsLeft), localeString: localeString)
+      return
+    }
     Utterer.utter(L.QuizView.progressWithColon, localeString: localeString)
     Utterer.utter(L.QuizView.progress(currentQuestionIndex + 1, of: questions.count), localeString: localeString)
     Utterer.utter(L.QuizView.score(score), localeString: localeString)

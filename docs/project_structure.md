@@ -106,9 +106,9 @@ Conjuguer/
 │   ├── CustomQuiz.swift        # The custom quiz: chosen tenses and a QuizVerbSet (a band, every verb, My Verbs, a collection or model), its stored form, QuizScope.custom
 │   ├── QuizDraw.swift          # The verbs of an unlisted quiz (the default, or a custom quiz over a band) from a band: half irregular, two core verbs, one to three rare derivatives; QuizVerbPool (a tense's kinds of verb, read from the data) and QuizVerbTraits
 │   ├── PracticeItemMapping.swift # Which practice item a question exercises: a regular family's pattern (parler's, finir's, rendre's, or a spelling-change model's where it marks the cell) or an irregular verb's key conjugation by stem; a lookup's items
-│   ├── PracticeStore.swift     # @Observable Current.practice: records answers and lookups in the PracticeRecord, saves it to the App Group's defaults, migrates the review card's old per-verb schedules, offers the review card, keeps the last quiz's results, and resets
+│   ├── PracticeStore.swift     # @Observable Current.practice: records answers and lookups in the PracticeRecord, saves it to the App Group's defaults, migrates the review card's old per-verb schedules, offers the review card, keeps the last quiz's results and the Speed Round's best, and resets
 │   ├── PracticeSet.swift       # A custom quiz shared as a quiz/set link or QR code: reading and writing the link, the level carried only when needed, My Verbs as a list of 50, its scope, summary, share text, and PracticeSetRequest
-│   ├── QuizDueItems.swift      # Up to three due practice items mixed into a default round, within its level's tenses and band; QuizDraw.patternVerb, a verb that shares a pattern
+│   ├── QuizDueItems.swift      # Up to three due practice items mixed into a default round, within its level's tenses and band; QuizDraw.patternVerbs, the verbs that share a pattern
 │   ├── QuizRecordSession.swift # Review and Practice My Mistakes: sessions drawn from the practice record beyond the level's tenses and band, a verb's key conjugations together, QuizScope.recordSession
 │   ├── QuizScope.swift         # What a quiz asks about (every verb, My Verbs, one verb's page, a collection, a custom choice), its count and source; the level's mix over chosen verbs, Test Me's three tenses, Verb.hasCell, canBeQuizzed(at:)
 │   ├── QuizLevel.swift         # Setting enum: the four quiz levels (Beginner to Advanced) and the tenses each asks; QuizTenseSlot, a tense's cells, weight, and verb pools; each level's frequency band
@@ -120,6 +120,7 @@ Conjuguer/
 │   ├── ReviewCardSuppression.swift  # The Suppress Review Card setting's Off and On
 │   ├── SearchReport.swift      # SearchTracker (one verb search, first letter to its end) and SearchReport (finishSearch's banded parameters)
 │   ├── Sound.swift             # Sound-effect enum mapping cases to the bundled MP3s
+│   ├── SpeedRound.swift        # The Speed Round: mastered items, its constants and fixture, QuizScope.speedRound, the draw (each item in turn, a key conjugation's stem cells, a pattern's verbs), SpeedRoundMiss, and AnswerFrame.writtenOut
 │   ├── StandardVariants.swift  # Spellings the quiz accepts beside the conjugator's: the 1990 rectifications (plait, étiquète, cèderai, absout) and dictionary doublets (veuillons, éclôt)
 │   ├── StemAlteration.swift    # A stem alteration: type, chars, the tenses it applies to, additive/inherited flags
 │   ├── SubjonctifPresentGroup.swift   # Subjonctif présent ending groups
@@ -339,6 +340,7 @@ ConjuguerTests/
     ├── RichTextTests.swift             # Rich-text markup parsing into blocks and segments
     ├── SearchReportTests.swift         # The search tracker's lifecycle, each finishSearch report, and that no parameter can echo the query
     ├── SettingsTests.swift             # Settings defaults (Suppress Review Card off), persistence, the quiz difficulty's migration to a level, and malformed-value handling (serialized)
+    ├── SpeedRoundTests.swift           # The Speed Round: mastered items, the draw in turn and never twice running, a pattern's verbs, a key conjugation's cells by level, the scope, the best across a launch and a reset, a miss written out; nested in QuizTests, a round that records nothing, moves on at a miss, ends at sixty ticks, and sends no counts
     ├── TenseTableTests.swift           # The verb page's order, each cell's card, articles, second names, and which pages show the color key
     ├── StandardVariantsTests.swift     # Each accepted variant row, and the spellings each row must not accept (vînmes, dû, croître, appeler, jeter, harcelle)
     ├── StemAlterationAuditTests.swift  # Audits every -er verb whose stem ends in é + consonant: the stem must open to è before a mute ending

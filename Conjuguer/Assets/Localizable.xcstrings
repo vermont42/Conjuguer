@@ -1962,13 +1962,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This button erases your practice record, which remembers how your quiz answers went, when each conjugation is next due for review, and your last quiz’s results. The record stays on this device and is never sent. Your starred and recent verbs stay too."
+            "value" : "This button erases your practice record, which remembers how your quiz answers went, when each conjugation is next due for review, your last quiz’s results, and your Speed Round best. The record stays on this device and is never sent. Your starred and recent verbs stay too."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ce bouton efface votre suivi des exercices, qui retient le résultat de vos réponses aux quiz, le jour où chaque conjugaison revient en révision et le résultat de votre dernier quiz. Ce suivi reste sur cet appareil et n’est jamais envoyé. Vos verbes favoris et récents restent aussi."
+            "value" : "Ce bouton efface votre suivi des exercices, qui retient le résultat de vos réponses aux quiz, le jour où chaque conjugaison revient en révision, le résultat de votre dernier quiz et votre record au contre-la-montre. Ce suivi reste sur cet appareil et n’est jamais envoyé. Vos verbes favoris et récents restent aussi."
           }
         }
       }
@@ -1996,13 +1996,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Every review the app has scheduled, and your last quiz’s results, will be forgotten. This cannot be undone."
+            "value" : "Every review the app has scheduled, your last quiz’s results, and your Speed Round best will be forgotten. This cannot be undone."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toutes les révisions prévues et le résultat de votre dernier quiz seront oubliés. Cette action est irréversible."
+            "value" : "Toutes les révisions prévues, le résultat de votre dernier quiz et votre record au contre-la-montre seront oubliés. Cette action est irréversible."
           }
         }
       }
@@ -3952,6 +3952,278 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Retirer l’étoile de « %@ » ?"
+          }
+        }
+      }
+    },
+    "SpeedRound.again" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Another Round"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encore une manche"
+          }
+        }
+      }
+    },
+    "SpeedRound.againHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starts another 60-second round"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lance une nouvelle manche de 60 secondes"
+          }
+        }
+      }
+    },
+    "SpeedRound.announceTimeUp" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time is up. Right answers: %lld."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temps écoulé. Bonnes réponses : %lld."
+          }
+        }
+      }
+    },
+    "SpeedRound.announceWarning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten seconds left."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus que dix secondes."
+          }
+        }
+      }
+    },
+    "SpeedRound.best" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your best: %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre record : %lld"
+          }
+        }
+      }
+    },
+    "SpeedRound.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As many right answers as you can in 60 seconds, on forms you have mastered"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le plus de bonnes réponses possible en 60 secondes, sur les formes que vous maîtrisez"
+          }
+        }
+      }
+    },
+    "SpeedRound.descriptionWithBest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As many right answers as you can in 60 seconds, on forms you have mastered · Best: %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le plus de bonnes réponses possible en 60 secondes, sur les formes que vous maîtrisez · Record : %lld"
+          }
+        }
+      }
+    },
+    "SpeedRound.locked" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens once you have mastered %lld forms, those whose next review is a week or more away. So far: %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S’ouvre dès que vous maîtrisez %lld formes, celles dont la prochaine révision est à une semaine ou plus. Pour l’instant : %lld"
+          }
+        }
+      }
+    },
+    "SpeedRound.missedWithColon" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incorrect. The answer was:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faux. La réponse était :"
+          }
+        }
+      }
+    },
+    "SpeedRound.newBest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New personal best!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau record personnel !"
+          }
+        }
+      }
+    },
+    "SpeedRound.resultsHeading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Right Answers in 60 Seconds"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bonnes réponses en 60 secondes"
+          }
+        }
+      }
+    },
+    "SpeedRound.rightAnswers" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Right answers: %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bonnes réponses : %lld"
+          }
+        }
+      }
+    },
+    "SpeedRound.secondsLeft" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seconds left: %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Secondes restantes : %lld"
+          }
+        }
+      }
+    },
+    "SpeedRound.startHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starts 60 seconds of questions on what you have mastered"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lance 60 secondes de questions sur ce que vous maîtrisez"
+          }
+        }
+      }
+    },
+    "SpeedRound.timeLeft" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time left: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temps restant : %@"
+          }
+        }
+      }
+    },
+    "SpeedRound.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speed Round"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contre-la-montre"
           }
         }
       }
