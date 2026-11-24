@@ -9492,6 +9492,142 @@
         }
       }
     },
+    "DailyChallenge.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily Challenge"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Défi du jour"
+          }
+        }
+      }
+    },
+    "DailyChallenge.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Five questions, the same for everyone at your level today. Share how you did."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cinq questions, les mêmes pour tous aujourd’hui à votre niveau. Partagez votre résultat."
+          }
+        }
+      }
+    },
+    "DailyChallenge.doneToday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done today: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relevé aujourd’hui : %@"
+          }
+        }
+      }
+    },
+    "DailyChallenge.share" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share Result"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partager le résultat"
+          }
+        }
+      }
+    },
+    "DailyChallenge.startHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starts today’s challenge, five questions at your level"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lance le défi du jour, cinq questions à votre niveau"
+          }
+        }
+      }
+    },
+    "DailyChallenge.shareHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shares today’s result as text, with a link to the same challenge"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partage le résultat du jour sous forme de texte, avec un lien vers le même défi"
+          }
+        }
+      }
+    },
+    "DailyChallenge.spokenResult" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Right on the first try: %1$@ of %2$@. On the second: %3$@. Score: %4$@ of %5$@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du premier coup : %1$@ sur %2$@. Au deuxième essai : %3$@. Score : %4$@ sur %5$@."
+          }
+        }
+      }
+    },
+    "DailyChallenge.shareText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conjuguer · Daily Challenge\n%1$@ · %2$@\n%3$@\n\nTake this challenge in Conjuguer:\n%4$@\n\nGet Conjuguer on the App Store:\n%5$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conjuguer · Défi du jour\n%1$@ · %2$@\n%3$@\n\nRelever ce défi dans Conjuguer :\n%4$@\n\nTélécharger Conjuguer sur l’App Store :\n%5$@"
+          }
+        }
+      }
+    },
     "DailySession.title" : {
       "extractionState" : "manual",
       "localizations" : {

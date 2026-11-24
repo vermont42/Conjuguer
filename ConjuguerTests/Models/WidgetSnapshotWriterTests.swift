@@ -114,12 +114,11 @@ struct WidgetSnapshotWriterTests {
     #expect(WidgetSnapshotWriter.dateString(for: day("2025-03-07")) == "2025-03-07")
   }
 
-  @Test func testQuestionIDEmbedsDateAndInfinitif() {
-    guard let snapshot = WidgetSnapshotWriter.generateSnapshot(date: day("2025-03-07")) else {
-      Issue.record("Expected a snapshot for an eligible-verb day.")
-      return
-    }
-    #expect(snapshot.quizQuestion.questionID == "2025-03-07-\(snapshot.infinitif)")
+  @Test func testQuestionIDEmbedsDateLevelAndVerb() throws {
+    let verb = try #require(Verb.verbs["parler"])
+    let snapshot = WidgetSnapshotWriter.generateSnapshot(verb: verb, date: day("2025-03-07"), level: .intermediate)
+    let asked = try #require(DailyChallenge.questions(for: DailyChallenge.Key(date: day("2025-03-07"), level: .intermediate)).first)
+    #expect(snapshot.quizQuestion.questionID == "2025-03-07-intermediate-\(asked.verb.dictionaryKey)")
     #expect(snapshot.dateString == "2025-03-07")
   }
 

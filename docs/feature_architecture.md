@@ -522,6 +522,9 @@ same.
 | `speedRound` | Yes | The quiz signals only: the Speed Round, from the Quiz tab or its results (§ Speed Round) |
 | `daily` | Yes | The quiz signals only: the daily session, from the Quiz tab or its results (§ Daily Session) |
 | `reminder` | Yes | The quiz signals only: a daily session begun by tapping the daily reminder (`quiz/daily?source=reminder`) |
+| `challenge` | Yes | The quiz signals only: the daily challenge, from the Quiz tab (§ Daily Challenge) |
+| `challengeLink` | Yes | The quiz signals only: a daily challenge opened from a shared result's link (`quiz/challenge?…&source=challengeLink`) |
+| `challengeWidget` | Yes | The quiz signals only: the daily challenge opened by tapping the quiz widget (`quiz/challenge?source=challengeWidget`) |
 
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
 a bare `Verb`, and the cells a search matched (`marks`). A link carries `source` as a query item
@@ -536,7 +539,7 @@ the table above, and stages its privacy line. The other browse signals are `tapS
 `tapStarVerb` (with `starred`, the state after the tap), `source` on `quizStart`, `quizQuit`, and
 `quizCompletion`, `viewReviewCard` and `tapRevealReviewCard` (§ The Review Card), and
 `viewCollection`, `tapShareCollection`, and `collection` on `quizStart` (§ Collections). The Quiz
-tab's View Leaderboard sends `tapViewLeaderboard` and its View Achievements `tapViewAchievements`, each with `source` `tab` (§ The Practice Hub, § Personal Bests and Achievements). There is
+tab's View Leaderboard sends `tapViewLeaderboard` and its View Achievements `tapViewAchievements`, each with `source` `tab` (§ The Practice Hub, § Personal Bests and Achievements). Sharing a daily challenge's result sends `tapShareChallenge` with `level` (§ Daily Challenge). There is
 no `tapTestVerb`: Test Me starts its quiz as its sheet appears, so the tap and `quizStart` with
 `verbPage` are one event.
 
@@ -562,12 +565,13 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
 - **Text travels in query items, never in the path**, because it can hold spaces, apostrophes, and
   slashes ("j'ai mangé"). Query items modify a route; unknown ones are ignored.
 - **`source`** may follow any route that leads to a verb page, a search, a collection, or a quiz.
-  The `quiz` route reads it only for a practice set (`quiz/set`) and a daily session (`quiz/daily`).
+  The `quiz` route reads it only for a practice set (`quiz/set`), a daily session (`quiz/daily`),
+  and a daily challenge (`quiz/challenge`).
   It names the surface that built the link, from `AnalyticsSource`, because a widget or an intent
   can hand the app nothing but a URL. A missing or unknown value counts as `deeplink`.
 - **Builders, not literals.** App code builds links with `URL.verbDeeplink`, `URL.searchDeeplink`,
-  `URL.infoDeeplink`, `URL.modelDeeplink`, `URL.listDeeplink`, `URL.practiceSetDeeplink`, and `URL.dailySessionDeeplink`, which percent-encode. Only the widget extension and
-  `Shared/`, which cannot see `AnalyticsSource`, write literals (`WidgetDeeplink.verb(_:)`, the
+  `URL.infoDeeplink`, `URL.modelDeeplink`, `URL.listDeeplink`, `URL.practiceSetDeeplink`, `URL.dailySessionDeeplink`, and `URL.challengeDeeplink`, which percent-encode. Only the widget extension and
+  `Shared/`, which cannot see `AnalyticsSource`, write literals (`WidgetDeeplink.verb(_:)`, `WidgetDeeplink.challenge`, the
   pending links of `OpenQuizIntent`, `OpenRandomVerbIntent`, `OpenRandomVerbControlIntent`, and
   `OpenVerbSearchIntent`), and `DeeplinkTests` pins each literal's source to the vocabulary.
 
@@ -577,7 +581,7 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
 | `search` | None | `q`, the text; `source` | The verb list with its search field, any verb page closed. With text, the results show with the keyboard down; with none (or `q` empty), the field is cleared and focused for typing | No |
 | `model` | A model's identifier (`1-1`) | `source`, which a shared model sends as `sharedLink` and nothing reads yet | The model page as a sheet over the Models tab | Yes; `source` is unreleased |
 | `info` | A stable key (`futur_simple`), or a legacy position (`info/0`) | None | The article as a sheet over the Info tab. An unknown key or out-of-range position does nothing | Yes; keys are unreleased |
-| `quiz` | `set`, a practice set; `daily`, a daily session; anything else (`OpenQuizIntent` sends `quiz/start`) | For `set`: the custom quiz's stored form (`tenses`, and `verbs` or `infinitives`), `level`, `source`. For `daily`: `source` | `set`: the practice set as a sheet over whatever tab is open, never starting a quiz (§ Practice Sets). `daily`: the Quiz tab, which starts a daily session (`World.dailySessionRequest`) unless a quiz is in progress or showing its results (§ Daily Session). Anything else: the Quiz tab, starting a quiz unless one is in progress | Yes; `set` and `daily` are unreleased |
+| `quiz` | `set`, a practice set; `daily`, a daily session; `challenge`, a daily challenge; anything else (`OpenQuizIntent` sends `quiz/start`) | For `set`: the custom quiz's stored form (`tenses`, and `verbs` or `infinitives`), `level`, `source`. For `daily`: `source`. For `challenge`: `date` (`yyyy-MM-dd`), `level`, `source` | `set`: the practice set as a sheet over whatever tab is open, never starting a quiz (§ Practice Sets). `daily`: the Quiz tab, which starts a daily session (`World.dailySessionRequest`) unless a quiz is in progress or showing its results (§ Daily Session). `challenge`: the Quiz tab, which starts that day's challenge at that level (`World.challengeRequest`), or today's at the learner's level when the date is missing or not a date, unless a quiz is in progress or showing results or the challenge was taken (§ Daily Challenge). Anything else: the Quiz tab, starting a quiz unless one is in progress | Yes; `set`, `daily`, and `challenge` are unreleased |
 | `list` | A featured collection's key (`top100`, `etre`, `irregularFutur`, `pronominal`) | `source` | The collection's page as a sheet over the Models tab. An unknown key does nothing. A model's collection is reached by its `model/` link, not by `list/model-<id>` | No |
 
 A `match` is read as search reads a query (`MarkedConjugations(text:on:)`, through
@@ -590,7 +594,7 @@ does ([Reverse Lookup](#reverse-lookup)). Look Up a Verb sends the row's own spe
 | File | Purpose |
 |------|---------|
 | `URLExtensions.swift` | The grammar's constants (routes, query-item names), `isDeeplink`, `hasDeeplinkTarget`, `analyticsSource`, `deeplinkQueryValue(named:)`, and the builders |
-| `World.swift` | `handleURL(_:)` clears `verb`, `verbMarks`, `verbModel`, `collection`, `info`, `searchRequest`, `practiceSet`, and `dailySessionRequest`, resolves the link (`resolveDeeplinkEntity(from:)`), and selects the tab. `handleInAppURL(_:)` resolves without clearing or switching tabs, for links inside Info articles. `openSearch(text:source:)` is the search route's effect, which Command-F also uses (`text` nil keeps the field's text) |
+| `World.swift` | `handleURL(_:)` clears `verb`, `verbMarks`, `verbModel`, `collection`, `info`, `searchRequest`, `practiceSet`, `dailySessionRequest`, and `challengeRequest`, resolves the link (`resolveDeeplinkEntity(from:)`), and selects the tab. `handleInAppURL(_:)` resolves without clearing or switching tabs, for links inside Info articles. `openSearch(text:source:)` is the search route's effect, which Command-F also uses (`text` nil keeps the field's text) |
 | `Info.swift` | `Info.info(deeplinkTarget:)` resolves a stable key or a legacy position |
 | `MatchedConjugation.swift` | `MarkedConjugations(text:on:)` reads a `match` item |
 | `VerbBrowseView.swift` | Consumes `searchRequest` on appear and on change, since a link can arrive before the tab first appears, and presents `verb` with `verbSource` and `verbMarks` |
@@ -625,6 +629,8 @@ conjuguer://list/etre?source=sharedLink                 → the Verbs Taking Êt
 conjuguer://quiz/set?tenses=imparfait&verbs=etre        → a practice set: the imparfait of the verbs taking être
 conjuguer://quiz/set?infinitives=parler,venir&level=beginner&source=qrCode → a practice set over two verbs at Beginner's tenses
 conjuguer://quiz/daily?source=reminder                  → the Quiz tab, starting a daily session
+conjuguer://quiz/challenge?date=2026-11-24&level=elementary&source=challengeLink → that day's challenge at Elementary
+conjuguer://quiz/challenge?source=challengeWidget       → today's challenge at the learner's level
 ```
 
 ## Lookup from Outside the App
@@ -1205,6 +1211,7 @@ Collections).
 | `PracticeSet.scope(source:)` | 10 over a shared set's tenses and verbs, at the set's level, with Ten More | Start on a practice set's sheet (§ Practice Sets) |
 | `.speedRound` | As many as the learner answers in 60 seconds, on mastered items, with Another Round | The hub's Speed Round row (§ Speed Round) |
 | `.daily(source:)` | 10 at the learner's level, due items first, with no Ten More | The hub's Daily Session row, its results' Another Session, and the reminder (§ Daily Session) |
+| `.challenge(_:source:)` | 5, the same on every device for a day and a level, with no re-ask and no Ten More | The hub's Daily Challenge row, a shared result's link, and the quiz widget (§ Daily Challenge) |
 
 **A scoped quiz uses the learner's level.** Each question draws a tense by its weight from the
 level's tenses that some verb of the scope has, so a tense no verb has is never drawn and a My
@@ -1421,7 +1428,9 @@ and how the last quiz went. From the top:
 - **The level's tile is a menu** (`quiz_level_menu`) of the four levels, with a chevron to say so.
   It writes the same setting as Settings' level tiles, sends nothing (as Settings sends nothing),
   and counts as the action `ChangeLevelTip` suggests.
-- **From Your Practice**: the Daily Session (`quiz_daily_button`, § Daily Session), Review and My
+- **From Your Practice**: the Daily Session (`quiz_daily_button`, § Daily Session), the Daily
+  Challenge (`quiz_challenge_button`, or `quiz_challenge_share_button` once taken; § Daily
+  Challenge), Review and My
   Mistakes (§ Review and My Mistakes), then **Mastery**
   (`quiz_mastery_button`), whose chevron says it pushes a page (§ Mastery), then **Last Quiz**
   (`quiz_last_result`), absent until a quiz has finished: "All Verbs · Elementary · today", then
@@ -1444,7 +1453,7 @@ and how the last quiz went. From the top:
 the session so far, by every scope, Test Me's three questions included. A quit quiz writes
 nothing, since its results were never shown. It keeps a kind (`allVerbs`, `myVerbs`, `verbPage`,
 `collection`, `custom`, `practiceSet`, `review`, `mistakes`, `verbEssentials`, `modelAlone`,
-`modelMixed`, `recognition`, `sentences`, `speedRound`, `daily`) and a verb's `dictionaryKey`, a collection's key, or a practiced model's id rather
+`modelMixed`, `recognition`, `sentences`, `speedRound`, `daily`, `challenge`) and a verb's `dictionaryKey`, a collection's key, or a practiced model's id rather
 than a title, so that it reads in the current language. Review, My Mistakes, a model's practice,
 and the Speed Round keep no level, and the Speed Round's row shows no score, since it counts right
 answers. `PracticeStore` keeps it as JSON under `lastQuizResult` in the App Group's
@@ -1857,6 +1866,70 @@ Your Practice, with a calendar, or a flame once there is a streak.
 - **VoiceOver.** The row reads its title and line, with a hint; at the results, the streak line is
   spoken; Another Session has a hint. The widgets do not show the streak.
 
+### Daily Challenge
+
+Five questions a day at each level, the same on every device on the same date, taken once and
+shared as a short text. "Daily Challenge" in English, "Défi du jour" in French. The second row of
+From Your Practice, under the Daily Session, with crossed flags.
+
+- **The key** (`DailyChallenge.Key`, in `Models/DailyChallenge.swift`) is the day, `yyyy-MM-dd` in
+  the learner's own calendar (`WidgetDateHelper.dateString`), and the level, so learners in
+  different time zones share a challenge by date, not by instant. The seed is the FNV-1a hash
+  (`WidgetQuizQuestion.stableSeed`, in `Shared/`) of `challenge-<day>-<level>`; a test pins both.
+- **The draw** (`DailyChallenge.draw(for:)`) is the default quiz's balanced draw from the level's
+  tenses and band (`QuizDraw.questions`), five questions, drawn again with the same generator until
+  no verb repeats, and then each question's person, all from SplitMix64 seeded by the key. Nothing
+  on the device enters it: not the practice record (no due items), not My Verbs, not the quiz's
+  random source, and no choice question. **The same for everyone holds within a build and a verb
+  list**, since `QuizDraw` uses the standard library's `randomElement` and `shuffled`, and a change
+  to `verbs.xml` moves the bands; tests pin the seed and the draw's determinism rather than a list
+  of questions. The fixtures of `-CONJUGUER_QUIZ_FIXTURE` do not apply.
+- **In the quiz** (`QuizScope.challenge(_:source:)`): at the key's level whatever the learner's, so
+  that a friend's link asks the friend's questions. **No re-ask**, so that the results are the five
+  questions the shared text reports; a wrong answer is still held for its correction, and a slip or
+  a diagnosed error still earns one more try at half points. Answers move the practice record as in
+  any quiz. Never ranked, never continued, and no Live Activity. A quit challenge keeps nothing and
+  can be started again.
+- **The result** (`DailyChallengeResult`): the key and an outcome per question (right, right on
+  the second try, wrong), kept by `PracticeStore` as JSON under `dailyChallengeResults` in the App
+  Group's defaults, the last 12, on the device and never sent. A challenge is taken once: a second
+  finish of the same key keeps the first result. **Reset Practice keeps the results**, since each
+  is a day's result rather than a record of what is known, and forgetting one would reopen its
+  challenge.
+- **The hub's row** (`quiz_challenge_button`) starts today's challenge at the learner's level.
+  Once taken, it reads "Done today: 35 / 50" over five dots and shares the result
+  (`quiz_challenge_share_button`).
+- **The results** show the dots under the score (`results_challenge_dots`) and Share Result
+  (`results_challenge_share`) in Ten More's place. The dots in the app are circles in the results'
+  mark colors (`ChallengeDots`), green, orange, and red; the shared text keeps its emoji, being read
+  in other apps.
+- **The shared text**, as Josh approved it on 2026-11-24, in the app's language:
+
+  ```
+  Conjuguer · Daily Challenge
+  November 24, 2026 · Elementary
+  🟢🟠🔴🟢🟢  35 / 50
+
+  Take this challenge in Conjuguer:
+  conjuguer://quiz/challenge?date=2026-11-24&level=elementary&source=challengeLink
+
+  Get Conjuguer on the App Store:
+  https://apps.apple.com/app/conjuguer/id1588624373
+  ```
+
+  In French: "Conjuguer · Défi du jour", "24 novembre 2026 · Élémentaire", "Relever ce défi dans
+  Conjuguer :", and "Télécharger Conjuguer sur l’App Store :".
+- **Links.** `quiz/challenge` sets `World.challengeRequest`, which the Quiz tab starts on appearing
+  or on the request's change, unless a quiz is under way or showing results. A link to a challenge
+  already taken opens the hub, where the row shows its result.
+- **The widget.** The quiz widget's question for each day is the first question of that day's
+  challenge at the learner's level (§ Widgets), and a tap beside its answers opens the challenge.
+- **Signals.** The quiz signals with `source` `challenge`, `challengeLink`, or `challengeWidget`,
+  and `questionCount`, always 5. `tapShareChallenge` carries `level` and never the result.
+- **VoiceOver.** The dots are read as a sentence ("Right on the first try: 3 of 5. On the second:
+  1. Score: 35 of 50."), on the hub and the results, and spoken through `Utterer` when a challenge
+  finishes. The row and Share Result have hints.
+
 ### Personal Bests and Achievements
 
 **The best at each level.** A ranked session's first results show, under the score, "New personal
@@ -1892,7 +1965,7 @@ descriptions, artwork, and App Store Connect steps are in
 
 `quizStart` (`level`, `source`), `quizQuit` (`level`, `lastQuestionIndex`, `duration`, `source`),
 `quizCompletion` (`level`, `questionCount`, `duration`, `source`), and `quizAbandon` (`level`,
-`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, `verbEssentials`, `modelAlone`, `modelMixed`, `recognition`, `sentences`, `speedRound`, `daily`, or `reminder`, so a
+`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, `verbEssentials`, `modelAlone`, `modelMixed`, `recognition`, `sentences`, `speedRound`, `daily`, `reminder`, `challenge`, `challengeLink`, or `challengeWidget`, so a
 three-question quiz does not inflate the ten-question quiz's completion rate.
 
 - **No signal carries a score or a count of right or wrong answers.** `lastQuestionIndex` is the
@@ -1932,14 +2005,14 @@ conjugator and no verb data, so it shows what the app last wrote.
 | File | Purpose |
 |------|---------|
 | `WidgetSnapshotWriter.swift` (app) | Writes seven daily `WidgetSnapshot`s, today first, to the App Group container, and reports whether the bytes changed so that `ConjuguerApp` reloads timelines only then |
-| `WidgetSnapshot.swift` (`Shared/`) | The serialized verb and quiz question for one day |
+| `WidgetSnapshot.swift` (`Shared/`) | The serialized verb and quiz question for one day, and `WidgetQuizQuestion.stableSeed`, the FNV-1a seed the widget's answer order and the daily challenge share |
 | `WidgetConstants.swift` (`Shared/`) | The App Group, the snapshot file, and the shared-defaults keys (the quiz widget's answer, the pending deeplink) |
 | `SnapshotReader.swift` | Reads the snapshots in the widget |
 | `VerbDuJourWidget.swift` | The verb of the day: small, medium, large, and the rectangular and inline accessory families. One timeline entry per cached day |
 | `QuizWidget.swift`, `AnswerQuizIntent.swift` | The daily quiz question, small and medium, with buttons that grade the tapped answer in place |
 | `QuickQuizControl.swift`, `RandomVerbControl.swift`, `FindVerbControl.swift` | Control Center controls. Their intents (`OpenQuizIntent`, `OpenRandomVerbControlIntent`, `OpenVerbSearchIntent` in `Shared/`) store `conjuguer://quiz/start`, `conjuguer://verb/random?source=control`, or `conjuguer://search?source=control` in the shared defaults and open the app, which drains it on activation |
 | `QuizLiveActivity.swift` | The quiz's Lock Screen and Dynamic Island presentation |
-| `WidgetDeeplink.swift` | The verb widget's link to the verb's page |
+| `WidgetDeeplink.swift` | The verb widget's link to the verb's page, and the quiz widget's to the daily challenge |
 
 ### Choosing the Verb
 
@@ -1965,8 +2038,12 @@ since the last write. So it first reads the bundle on disk, finds the snapshot f
 (`displayedVerb(in:on:)`), and keeps that verb for today in the new bundle. The six days after it
 are drawn afresh. `isEligible` still requires an example sentence, which every verb has today.
 
-The quiz question uses the day's verb, with a person and one of six tenses (présent, passé
-composé, futur simple, imparfait, subjonctif présent, conditionnel présent) chosen from the day
-number, and three wrong answers drawn from the verb's own other conjugations before any filler.
-Because today's verb is kept, so are its question ID and the answered state the quiz widget
-stores against it. A change of the pronoun-gender setting rewrites the snapshots.
+The quiz question is not about the day's verb: it is the first question of that day's daily
+challenge at the learner's level (`WidgetSnapshotWriter.quizQuestion(on:level:fallbackVerb:)`, §
+Daily Challenge), so the widget and the challenge agree. Its three wrong answers are the same
+verb's other cells at that level, from a generator seeded with the question's ID: one of the same
+tense, one of the same person in another tense, and one more of either, before any filler. A
+finite question is offered no impératif or participle, which would stand out among its options.
+The question ID is the day, the level, and the verb's key (`2026-11-24-elementary-venir`), so the
+answered state the quiz widget stores lasts the day unless the level changes. A change of the
+pronoun-gender setting or of the level rewrites the snapshots.

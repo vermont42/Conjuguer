@@ -40,4 +40,17 @@ struct WidgetQuizQuestion: Codable, Equatable {
   let correctAnswer: String
   let wrongAnswers: [String]
   let questionID: String
+
+  // FNV-1a over the UTF-8 bytes: a seed that is the same in every process and on every device.
+  // Swift's `Hasher` is seeded randomly per launch, and WidgetKit recycles the extension process
+  // between reloads, so a Hasher-derived seed would let a question's buttons reorder between
+  // renders, inviting a mid-aim mis-tap, and would give each device its own daily challenge.
+  nonisolated static func stableSeed(for string: String) -> UInt64 {
+    var hash: UInt64 = 0xcbf2_9ce4_8422_2325
+    for byte in string.utf8 {
+      hash ^= UInt64(byte)
+      hash = hash &* 0x0000_0100_0000_01b3
+    }
+    return hash
+  }
 }

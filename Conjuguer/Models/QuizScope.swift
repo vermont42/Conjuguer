@@ -48,11 +48,14 @@ struct QuizScope {
 
   var isDaily = false
 
+  /// A day's challenge, the same five questions on every device on the same date.
+  var challenge: DailyChallenge.Key?
+
   /// Only the default quiz posts to its level's leaderboard and sets its best score: a score over
   /// the learner's own verbs, tenses, or practice record, or over three questions, compares with
   /// nothing.
   var isRanked: Bool {
-    verbs == nil && custom == nil && recordSession == nil && !isVerbEssentials && modelPractice == nil && !isRecognition && !isSentences && !isSpeedRound && !isDaily
+    verbs == nil && custom == nil && recordSession == nil && !isVerbEssentials && modelPractice == nil && !isRecognition && !isSentences && !isSpeedRound && !isDaily && !isChallenge
   }
 
   /// Review, My Mistakes, and the Speed Round ask whatever the record holds, beyond the level's
@@ -112,9 +115,9 @@ struct QuizScope {
 
   /// Whether the results offer Ten More, or for Verb Essentials five more verbs. Test Me's three
   /// questions are a check, not a session, a Speed Round's results offer a fresh minute instead,
-  /// and a daily session's next session is one of its own.
+  /// a daily session's next session is one of its own, and a challenge is taken once.
   var continues: Bool {
-    !isSpeedRound && !isDaily && (isVerbEssentials || modelPractice != nil || questionCount == Quiz.questionCount)
+    !isSpeedRound && !isDaily && !isChallenge && (isVerbEssentials || modelPractice != nil || questionCount == Quiz.questionCount)
   }
 
   var isVerbPage: Bool {

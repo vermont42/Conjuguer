@@ -99,6 +99,49 @@ struct DeeplinkTests {
     #expect(Current.dailySessionRequest == nil)
   }
 
+  /// A shared result's link asks for that day's challenge at that level, and the tab starts it
+  /// unless a quiz is under way or the challenge was taken.
+  @Test func testChallengeDeeplinkRequestsThatChallenge() throws {
+    resetCurrent()
+    let key = try #require(DailyChallenge.Key(day: "2026-11-24", level: .advanced))
+    let link = try #require(URL.challengeDeeplink(key, source: .challengeLink))
+    #expect(link.absoluteString == "conjuguer://quiz/challenge?date=2026-11-24&level=advanced&source=challengeLink")
+    Current.selectedTab = .verbs
+    Current.handleURL(link)
+
+    #expect(Current.selectedTab == .quiz)
+    #expect(Current.challengeRequest?.key == key)
+    #expect(Current.challengeRequest?.source == .challengeLink)
+
+    Current.handleURL(url("conjuguer://verb/parler"))
+    #expect(Current.challengeRequest == nil)
+  }
+
+  @Test func testChallengeWidgetLinkRequestsTodaysChallenge() {
+    resetCurrent()
+    Current.handleURL(url("conjuguer://quiz/challenge?source=challengeWidget"))
+    #expect(Current.challengeRequest?.key == nil)
+    #expect(Current.challengeRequest?.source == .challengeWidget)
+    #expect(Current.selectedTab == .quiz)
+  }
+
+  /// A link with no valid date asks for today's, and one with no known level asks at the
+  /// learner's.
+  @Test func testChallengeDeeplinkFallsBackOnABadDateOrLevel() {
+    let level = Current.settings.quizLevel
+    defer {
+      Current.settings.quizLevel = level
+    }
+    Current.settings.quizLevel = .elementary
+    resetCurrent()
+    Current.handleURL(url("conjuguer://quiz/challenge?date=2026-02-30&level=advanced&source=challengeLink"))
+    #expect(Current.challengeRequest != nil)
+    #expect(Current.challengeRequest?.key == nil)
+
+    Current.handleURL(url("conjuguer://quiz/challenge?date=2026-11-24&level=expert&source=challengeLink"))
+    #expect(Current.challengeRequest?.key == DailyChallenge.Key(day: "2026-11-24", level: .elementary))
+  }
+
   @Test func testModelDeeplinkSelectsModel() {
     resetCurrent()
     Current.selectedTab = .verbs

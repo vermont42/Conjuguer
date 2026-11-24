@@ -11,17 +11,6 @@ enum WidgetSnapshotWriter {
   // to relaunch.
   static let futureDayCount = 7
 
-  // The tenses a daily quiz question is drawn from (all carry a person-number;
-  // passéComposé is compound, the rest are simple).
-  private static let quizTenseFamilies: [(PersonNumber) -> Tense] = [
-    Tense.indicatifPrésent,
-    Tense.passéComposé,
-    Tense.futurSimple,
-    Tense.imparfait,
-    Tense.subjonctifPrésent,
-    Tense.conditionnelPrésent
-  ]
-
   // Returns whether the on-disk snapshot actually changed, so the caller can skip the
   // (budget-limited) widget reload when nothing moved.
   @discardableResult
@@ -40,7 +29,8 @@ enum WidgetSnapshotWriter {
     else {
       return false
     }
-    // The snapshot is keyed on the calendar day, the pronoun-gender setting, and My Verbs, so
+    // The snapshot is keyed on the calendar day, the pronoun-gender setting, the quiz level, and
+    // My Verbs, so
     // re-foregrounding within the same day usually re-encodes identical bytes. Skip both the
     // write and the reload in that case rather than spending the reload budget on a no-op.
     if existing == data {
@@ -87,13 +77,13 @@ enum WidgetSnapshotWriter {
     return verb.map { generateSnapshot(verb: $0, date: date) }
   }
 
-  @MainActor static func generateSnapshot(verb: Verb, date: Date) -> WidgetSnapshot {
+  @MainActor static func generateSnapshot(verb: Verb, date: Date, level: QuizLevel = Current.settings.quizLevel) -> WidgetSnapshot {
     let paradigm = présentParadigm(for: verb)
     let participePassé = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: .participePassé, extraLetters: verb.extraLetters) ?? ""
 
     let example = ExampleData.example(for: verb)
     let etymology = Etymology.text(for: verb.infinitif).map { truncateToSentenceBoundary($0, maxLength: 360) }
-    let quiz = generateQuizQuestion(verb: verb, date: date)
+    let quiz = quizQuestion(on: date, level: level, fallbackVerb: verb)
 
     return WidgetSnapshot(
       infinitif: verb.infinitifWithPossibleExtraLetters,
@@ -137,80 +127,83 @@ enum WidgetSnapshotWriter {
     }
   }
 
-  @MainActor private static func generateQuizQuestion(verb: Verb, date: Date) -> WidgetQuizQuestion {
-    let seed = abs(VerbDraw.dayNumber(of: date))
-    let personNumber = PersonNumber.allCases[seed % PersonNumber.allCases.count]
-    // Decorrelate the tense from the person: both collections have 6 elements, so
-    // indexing both by `seed % 6` would weld each person to a single tense forever.
-    let tenseIndex = (seed / PersonNumber.allCases.count) % quizTenseFamilies.count
-    let makeTense = quizTenseFamilies[tenseIndex]
-    let tense = makeTense(personNumber)
+  /// The quiz widget's question for a day: the first question of that day's challenge at the
+  /// level, so that the widget and the challenge agree.
+  @MainActor static func quizQuestion(on date: Date, level: QuizLevel, fallbackVerb verb: Verb) -> WidgetQuizQuestion {
+    let key = DailyChallenge.Key(date: date, level: level)
+    let question = DailyChallenge.questions(for: key).first ?? QuizQuestion(verb: verb, tense: .indicatifPrésent(.thirdSingular))
+    return quizQuestion(for: question, key: key)
+  }
 
-    let correctAnswer = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) ?? "—"
-    let wrongAnswers = generateWrongAnswers(verb: verb, makeTense: makeTense, personNumber: personNumber, correctAnswer: correctAnswer)
-
+  /// The wrong answers are the verb's other cells at the key's level, chosen by a generator
+  /// seeded with the question's ID: one of the same tense, one of the same person in another
+  /// tense, and one more of either.
+  @MainActor static func quizQuestion(for question: QuizQuestion, key: DailyChallenge.Key) -> WidgetQuizQuestion {
+    let verb = question.verb
+    let tense = question.tense
+    let correctAnswer = conjugation(of: verb, in: tense) ?? "—"
+    let questionID = "\(key.day)-\(key.levelKey)-\(verb.dictionaryKey)"
+    var generator = SeededRandomNumberGenerator(seed: WidgetQuizQuestion.stableSeed(for: questionID))
     return WidgetQuizQuestion(
       infinitif: verb.infinitifWithPossibleExtraLetters,
       tenseDisplay: tense.titleCaseName,
-      pronoun: compactPronoun(personNumber, of: verb),
+      pronoun: tense.personNumber.map { compactPronoun($0, of: verb) },
       correctAnswer: correctAnswer,
-      wrongAnswers: wrongAnswers,
-      questionID: "\(dateString(for: date))-\(verb.infinitifWithPossibleExtraLetters)"
+      wrongAnswers: wrongAnswers(for: question, correctAnswer: correctAnswer, slots: key.level.slots, using: &generator),
+      questionID: questionID
     )
   }
 
-  // The most common verbs, conjugated in the same tense/person, are the real-form
-  // fallback distractors for a verb too defective to supply three of its own.
+  private static let wrongAnswerCount = 3
+
+  // The most common verbs, conjugated in the same cell, are the real-form fallback distractors
+  // for a verb too defective to supply three of its own.
   private static let fillerInfinitifs = ["être", "avoir", "aller", "faire"]
 
-  @MainActor private static func generateWrongAnswers(
-    verb: Verb,
-    makeTense: (PersonNumber) -> Tense,
-    personNumber: PersonNumber,
-    correctAnswer: String
+  @MainActor private static func wrongAnswers(
+    for question: QuizQuestion,
+    correctAnswer: String,
+    slots levelSlots: [QuizTenseSlot],
+    using generator: inout SeededRandomNumberGenerator
   ) -> [String] {
-    var candidates: [String] = []
+    let verb = question.verb
+    let tense = question.tense
+    let asked = QuizTenseSlot(tense: tense)
+    // An impératif carries its pronoun in a pronominal verb (souviens-toi), and a participle
+    // stands without one, so either would stand out among a finite question's options.
+    let isImpératif = asked?.isImpératif ?? false
+    let isParticiple = asked?.isParticiple ?? false
+    let slots = levelSlots.filter { (isImpératif || !$0.isImpératif) && (isParticiple || !$0.isParticiple) }
+    let sameTense = (asked?.cells ?? []).filter { $0 != tense }.shuffled(using: &generator)
+    let samePerson = slots
+      .filter { $0 != asked }
+      .compactMap { slot in slot.cells.first { $0.personNumber != nil && $0.personNumber == tense.personNumber } }
+      .shuffled(using: &generator)
+    let anyCell = slots.flatMap(\.cells).filter { $0 != tense }.shuffled(using: &generator)
 
-    func consider(_ form: String?) {
-      guard
-        let form,
-        form != correctAnswer,
-        !candidates.contains(form),
-        candidates.count < 3
-      else {
+    var answers: [String] = []
+    func take(_ form: String?) {
+      guard let form, form != correctAnswer, !answers.contains(form), answers.count < wrongAnswerCount else {
         return
       }
-      candidates.append(form)
+      answers.append(form)
     }
-
-    // Nearest-miss distractors first: same tense, other persons; then same person,
-    // other tenses — the most plausible wrong answers for this verb.
-    for otherPerson in PersonNumber.allCases where otherPerson != personNumber {
-      consider(Conjugator.conjugatedString(infinitif: verb.infinitif, tense: makeTense(otherPerson), extraLetters: verb.extraLetters))
-    }
-
-    for otherFamily in quizTenseFamilies {
-      consider(Conjugator.conjugatedString(infinitif: verb.infinitif, tense: otherFamily(personNumber), extraLetters: verb.extraLetters))
-    }
-
-    // Broaden to the full tense × person cross-product before any fallback, so
-    // distractors stay real conjugations of this verb.
-    for family in quizTenseFamilies {
-      for otherPerson in PersonNumber.allCases {
-        consider(Conjugator.conjugatedString(infinitif: verb.infinitif, tense: family(otherPerson), extraLetters: verb.extraLetters))
+    func take(from cells: [Tense], upTo count: Int) {
+      for cell in cells where answers.count < count && verb.hasCell(cell) {
+        take(conjugation(of: verb, in: cell))
       }
     }
-
-    // Last resort for pathologically defective verbs with too few distinct forms:
-    // borrow real conjugations of the most common verbs rather than emitting
-    // synthetic (and obviously fake) `xx`-padded strings.
-    for filler in fillerInfinitifs {
-      for otherPerson in PersonNumber.allCases {
-        consider(Conjugator.conjugatedString(infinitif: filler, tense: makeTense(otherPerson), extraLetters: nil))
-      }
+    take(from: sameTense, upTo: 1)
+    take(from: samePerson, upTo: answers.count + 1)
+    take(from: anyCell, upTo: wrongAnswerCount)
+    for filler in fillerInfinitifs where answers.count < wrongAnswerCount {
+      take(Conjugator.conjugatedString(infinitif: filler, tense: tense, extraLetters: nil))
     }
+    return answers
+  }
 
-    return Array(candidates.prefix(3))
+  @MainActor private static func conjugation(of verb: Verb, in tense: Tense) -> String? {
+    Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters)
   }
 
   static func truncateToSentenceBoundary(_ text: String, maxLength: Int) -> String {

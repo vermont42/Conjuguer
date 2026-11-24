@@ -11,4 +11,8 @@ enum WidgetDeeplink {
     let encoded = key.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? key
     return URL(string: "conjuguer://verb/\(encoded)?source=widget")
   }
+
+  /// The quiz widget's question is the first of today's challenge at the learner's level, so a
+  /// tap beside the answers opens the challenge.
+  static let challenge = URL(string: "conjuguer://quiz/challenge?source=challengeWidget")
 }

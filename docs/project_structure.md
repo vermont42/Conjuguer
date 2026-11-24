@@ -71,6 +71,7 @@ Conjuguer/
 │   ├── ConjuguerTips.swift     # TipKit tips (try the quiz, explore models, choose a level, play game, scroll to the verb page's bottom)
 │   ├── CyclingDeck.swift       # Generic deck that deals elements in order and reshuffles on exhaustion
 │   ├── DailyReminder.swift     # The Daily Reminder setting, DailyReminderPlan (a worded notification a day for 14 days, none on a day already done), and World.rescheduleReminders
+│   ├── DailyChallenge.swift    # The daily challenge: five questions a day per level, seeded by the date and level alone; its result, kept on the device, with the shared text; QuizScope.challenge; DailyChallengeRequest
 │   ├── DailySession.swift      # QuizScope.daily, ten questions at the level with due items first; DailySessionRequest; the streak's hub line, results line, and Another Session
 │   ├── DailyStreak.swift       # Finished daily sessions per calendar day and the streak computed from them: one missed day repaired by two sessions the day after
 │   ├── DefectGroup.swift       # A group of defective verbs and the tenses/persons they lack
@@ -266,7 +267,7 @@ ConjuguerWidget/
 ├── RandomVerbControl.swift     # Control Center button that opens a random verb (runs OpenRandomVerbControlIntent)
 ├── SnapshotReader.swift        # Reads the snapshot bundle from the shared container into timeline entries
 ├── VerbDuJourWidget.swift      # Timeline widget for the verb of the day
-├── WidgetDeeplink.swift        # Builds conjuguer:// URLs for widget taps, with source=widget
+├── WidgetDeeplink.swift        # Builds conjuguer:// URLs for widget taps: the verb's page (source=widget) and the quiz widget's daily challenge (source=challengeWidget)
 └── Views/
     ├── AccessoryWidgetView.swift   # Lock Screen accessory families
     ├── LargeWidgetView.swift       # Large family: verb plus full présent paradigm
@@ -288,7 +289,7 @@ Shared/                         # Compiles into BOTH the app and widget targets
 ├── WidgetConstants.swift       # App-group ID, snapshot filename, storage keys
 ├── WidgetDateHelper.swift      # Pinned Gregorian calendar and day-key formatting shared by writer and reader
 ├── WidgetL.swift               # LocalizedStringResource accessors for widget strings (the widget's analogue to L)
-└── WidgetSnapshot.swift        # Codable model for one day of serialized widget state
+└── WidgetSnapshot.swift        # Codable model for one day of serialized widget state; WidgetQuizQuestion.stableSeed, the FNV-1a seed the widget's answer order and the daily challenge share
 
 ConjuguerTests/
 ├── Info.plist                  # Test-bundle configuration (excluded from the target via membershipExceptions)
@@ -309,6 +310,7 @@ ConjuguerTests/
     ├── ConjugationMatchTests.swift     # conjugations(matching:): single cells, shared spellings, compound agreement, alternates, defective cells, non-matches
     ├── ConjugationResultTests.swift    # Grading: pronouns, spacing, alternates, required accents and agreement, and the spelling shown for a variant
     ├── CustomQuizTests.swift           # The custom quiz: its stored form and keys, unknown keys dropped, a part left to the level, lists against bands, never ranked, the choice parameter, what cannot start, chosen tenses at any level, the setting's persistence; nested in QuizTests, sessions that ask only the choice and send custom
+    ├── DailyChallengeTests.swift       # The seed pinned, day round trips and non-dates, the same key drawing the same five, days and levels differing, twenty balanced days per level, a result's points, the approved shared text, the widget asking the challenge's first question; nested in QuizTests, the same five whatever the seed, level, and record, a result kept once and unranked, no re-ask, a quit keeping nothing, the store's twelve, and the signals
     ├── DailySessionTests.swift         # The streak (a day counted once, the repair, two missed days, a 25-hour day, pruning), the bands, the store across a launch and a reset, the lines, the scope, the reminder plan; nested in QuizTests, a session's draw, the streak and its band, a quit not counting, a repair across days, the reminder rescheduled, and reminder as the source
     ├── DeeplinkTests.swift             # conjuguer:// parsing and routing: the search route, match, info keys, the builders' round trips, and the source query item (serialized — mutates Current)
     ├── DefectGroupTests.swift          # Defect-group membership and tense suppression

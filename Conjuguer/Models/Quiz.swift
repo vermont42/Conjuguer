@@ -49,6 +49,8 @@ class Quiz {
   private(set) var isNewBest = false
   /// The streak a finished daily session left, which its results show. Nil for any other quiz.
   private(set) var dailyStreakStatus: DailyStreak.Status?
+  /// A finished challenge's result, which its results show and share. Nil for any other quiz.
+  private(set) var challengeResult: DailyChallengeResult?
 
   var speedRoundSecondsLeft: Int {
     max(SpeedRound.duration - elapsedTime, 0)
@@ -385,11 +387,16 @@ class Quiz {
     previousBest = nil
     isNewBest = false
     dailyStreakStatus = nil
+    challengeResult = nil
     shouldShowResults = false
   }
 
   /// A round's questions, a fixture's in DEBUG, which Ten More repeats.
   private func drawQuestions() -> [QuizQuestion] {
+    if let challenge = scope.challenge {
+      return DailyChallenge.questions(for: challenge)
+    }
+
     if scope.isSpeedRound {
       return QuizDraw.speedRoundQuestions(
         for: SpeedRound.items(from: Current.practice),
@@ -996,8 +1003,9 @@ class Quiz {
       return
     }
     // A re-ask is not asked a third time, whatever its answer, so that one stubborn question
-    // cannot fill a round.
-    let willBeReasked = !question.isReask
+    // cannot fill a round. A challenge asks none, so that its results are the five questions its
+    // shared text reports.
+    let willBeReasked = !question.isReask && !scope.isChallenge
     if willBeReasked {
       let placement = Self.reaskPlacement(of: currentQuestionIndex, in: questions)
       questions.insert(question.reasked(stepID: placement.stepID), at: placement.position)
@@ -1088,6 +1096,10 @@ class Quiz {
       Current.rescheduleReminders(now: now())
       announceDailyStreak()
     }
+    if let challenge = scope.challenge {
+      challengeResult = Current.practice.recordChallenge(DailyChallengeResult(key: challenge, results: quizResults))
+      announceChallengeResult()
+    }
     Current.analytics.signal(name: .quizCompletion, parameters: parameters)
     Current.practice.recordResult(LastQuizResult(quiz: self, date: now()))
     teardown()
@@ -1104,6 +1116,13 @@ class Quiz {
       return
     }
     Utterer.utter(line, localeString: currentLocaleString)
+  }
+
+  private func announceChallengeResult() {
+    guard UIAccessibility.isVoiceOverRunning, let challengeResult else {
+      return
+    }
+    Utterer.utter(challengeResult.spokenSummary, localeString: currentLocaleString)
   }
 
   private func announceRankedBest() {

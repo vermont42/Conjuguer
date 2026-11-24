@@ -28,8 +28,11 @@ extension QuizScope {
 
   /// What the title bar and the Live Activity call a session whose questions look like any
   /// quiz's: Review, My Mistakes, Verb Essentials, a model's practice, Name the Conjugation,
-  /// Phrases à trous, the Speed Round, or the daily session.
+  /// Phrases à trous, the Speed Round, the daily session, or the daily challenge.
   var sessionTitle: String? {
+    if isChallenge {
+      return L.DailyChallenge.title
+    }
     if isDaily {
       return L.DailySession.title
     }

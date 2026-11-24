@@ -50,7 +50,7 @@ struct QuizWidgetView: View {
         }
       }
     }
-    .widgetURL(WidgetDeeplink.verb(entry.snapshot))
+    .widgetURL(WidgetDeeplink.challenge)
   }
 
   private var answeredView: some View {
@@ -69,7 +69,7 @@ struct QuizWidgetView: View {
       }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .widgetURL(WidgetDeeplink.verb(entry.snapshot))
+    .widgetURL(WidgetDeeplink.challenge)
   }
 
   private func answerButton(answer: String) -> some View {
@@ -90,22 +90,9 @@ struct QuizWidgetView: View {
   private var shuffledAnswers: [String] {
     var answers = quiz.wrongAnswers
     answers.append(quiz.correctAnswer)
-    var rng = SeededRNG(seed: Self.fnv1a(quiz.questionID))
+    var rng = SeededRNG(seed: WidgetQuizQuestion.stableSeed(for: quiz.questionID))
     answers.shuffle(using: &rng)
     return answers
-  }
-
-  // FNV-1a over the question ID's UTF-8 bytes: a process-independent seed. Swift's
-  // `Hasher` is seeded randomly per process launch, and WidgetKit recycles the
-  // extension process between reloads, so a Hasher-derived seed would let the same
-  // question's buttons reorder between renders — enabling a mid-aim mis-tap.
-  private static func fnv1a(_ string: String) -> UInt64 {
-    var hash: UInt64 = 0xcbf2_9ce4_8422_2325
-    for byte in string.utf8 {
-      hash ^= UInt64(byte)
-      hash = hash &* 0x0000_0100_0000_01b3
-    }
-    return hash
   }
 }
 

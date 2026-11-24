@@ -6563,3 +6563,54 @@ The simulator check had one mishap. On the iPad, a swipe written in screenshot p
 than points started at the home indicator and shrank the app into a window. The window's green
 button restored it, and the verify skill's notes now warn about it. The suite went from 905 to
 930 tests, all passing.
+
+## The Daily Challenge (2026-11-24)
+
+Phase 24 of the [pedagogy plan](../plans/pedagogy_implementation.md) added the last of the
+report's motivation suggestions: a daily challenge, five questions a day at each level, the same
+on every device on the same date, taken once and shared as a few lines of text. Konjugieren built
+it nine days earlier, and Josh approved its shared text there, so the one question asked here was
+whether Conjuguer's should match. He took Konjugieren's shape with one change of color. Konjugieren's
+dots are yellow, orange, and red because its quiz shows progress dots in those colors. Conjuguer
+has no progress dots, so the shared text uses the colors of its results' marks: 🟢 for right, 🟠
+for right on the second try, 🔴 for wrong. "Défi du jour" sits beside the "Séance du jour" of
+Phase 22.
+
+"The same for everyone" is the whole feature, and it rests on a seed. The challenge's key is the
+learner's own calendar day and the level, so two learners in Paris and Montréal share the 24th's
+challenge even though their 24ths begin six hours apart, as Wordle's players do. The text
+`challenge-2026-11-24-elementary` is hashed with FNV-1a, which gives the same number in every
+process, unlike Swift's `Hasher`, and that number seeds the default quiz's balanced draw. Nothing
+from the device goes in: no due items, no My Verbs, no choice question. A test pins the seed's
+text and its number. It cannot pin the questions themselves, since the standard library's
+`randomElement` and `shuffled` could use the generator differently under a new toolchain, and an
+import of verbs moves the frequency bands. So the promise is the same challenge within a build,
+which is the promise that matters while everyone runs the same release.
+
+Conjuguer's draw needed one thing Konjugieren's did not. Konjugieren's draw returns a finished
+cell. Conjuguer's returns a verb and a tense and lets the quiz's own shuffled decks choose the
+person, and those decks belong to one quiz on one device. So the challenge draws each person
+itself, from the same seeded generator, among the persons the verb's defect group has.
+
+The quiz widget used to ask a question about the verb of the day. Now its question is the first
+of the day's challenge at the learner's level, and tapping it opens the challenge. That changed
+what the widget's three wrong answers can be. The old question came from six tenses that all have
+persons; the challenge can ask an impératif or a participle. The new wrong answers follow
+Konjugieren's recipe, one of the same tense, one of the same person in another tense, one more of
+either, with one rule added for French: a finite question is offered no impératif or participle,
+since "souviens-toi" among four plain forms gives itself away. Changing the level now rewrites the
+widget's bundle, and the simulator showed it: Intermediate asked contracter in the futur, Beginner
+retrouver in the impératif.
+
+The challenge asks no re-ask, so that the results are exactly the five questions the shared text
+reports. A wrong answer still holds its correction, and a slip still earns its second try at half
+points, which is what the orange dot means. In the simulator a slip, "implantes" for "implantez",
+was diagnosed as the présent for tu and corrected on the second try, and Copy from the share sheet
+gave the approved French text, narrow spaces before its colons included.
+
+One small fix came from listening to the accessibility tree rather than looking at the screen.
+The taken row first read "Relevé aujourd’hui : Du premier coup : 3 sur 5…", two colons in a row.
+It now reads the result's sentence alone, the hint already saying it shares today's result. The
+suite went from 930 to 951 tests, all passing. Both simulators' defaults were exported before
+the check and compared key by key afterward; `defaults import` merges rather than replaces, so
+the challenge's new key had to be deleted by hand.

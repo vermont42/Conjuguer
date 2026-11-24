@@ -47,7 +47,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 21 | Done | 2026-11-24 | 444391d | T5.7 | 21 |
 | 22 | Done | 2026-11-24 | a5b2806 | T6.3 | 22 |
 | 23 | Done | 2026-11-24 | 5bb1765 | T6.6 (personal bests and achievements) | 23 |
-| 24 | Not started | | | T6.8 | 24 |
+| 24 | Done | 2026-11-24 | | T6.8 | 24 |
 | Closing | Not started | | | Audit, porting notes | Closing |
 
 The phases keep Konjugieren's numbers, so a session can read the Konjugieren phase of the same
@@ -2720,7 +2720,7 @@ the walkthrough covers achievements.
 ## Phase 24: The Daily Challenge
 
 **Suggestions:** T6.8. **Ports:** Konjugieren Phase 24 (`DailyChallenge.swift`). **Depends on:**
-Phases 5 and 22. **Status:** Not started.
+Phases 5 and 22. **Status:** Done.
 
 A daily shared challenge built on the widget's daily question
 (`WidgetSnapshotWriter.generateQuizQuestion`, seeded by the date): the same short set for everyone
@@ -2737,6 +2737,95 @@ level.
 it, sharing produces the agreed text, and tests pin the seeding.
 
 **How it differed:**
+
+- **Asked of Josh (2026-11-24), before building**, each the recommended option. (1) **The shared
+  text** as Konjugieren's approved shape, with Conjuguer's own colors for the dots: 🟢 right, 🟠 right
+  on the second try, 🔴 wrong, the colors of the results' marks (Conjuguer has no progress dots), over
+  the dots without the points and over no challenge link:
+
+  ```
+  Conjuguer · Daily Challenge
+  November 24, 2026 · Elementary
+  🟢🟠🔴🟢🟢  35 / 50
+
+  Take this challenge in Conjuguer:
+  conjuguer://quiz/challenge?date=2026-11-24&level=elementary&source=challengeLink
+
+  Get Conjuguer on the App Store:
+  https://apps.apple.com/app/conjuguer/id1588624373
+  ```
+
+  In French, "Conjuguer · Défi du jour", "24 novembre 2026 · Élémentaire", "Relever ce défi dans
+  Conjuguer :", and "Télécharger Conjuguer sur l’App Store :", the last as the practice set's text
+  has it. (2) **Konjugieren's other three choices**: once a day per level, after which the row shows
+  the result and shares it; the row under the Daily Session; and the quiz widget asking the
+  challenge's first question, a tap beside its answers opening the challenge.
+- **Carried over from Konjugieren unasked:** the key as the learner's calendar day and the level;
+  the seed as FNV-1a of `challenge-<day>-<level>`, pinned by a test with the text; the default
+  quiz's balanced draw, five questions, drawn again until no verb repeats, with nothing from the
+  device in it (no due items, no My Verbs, no choice question); no re-ask, the correction still held
+  and a slip still earning its second try at half points; answers moving the practice record; never
+  ranked, continued, or given a Live Activity; a quit keeping nothing; the last 12 results kept, and
+  Reset Practice keeping them; a link to a taken challenge opening the hub; a bad date asking for
+  today's and an unknown level the learner's; the dots drawn as circles in the app and emoji only
+  in the shared text; `source` `challenge`, `challengeLink`, and `challengeWidget`, and
+  `tapShareChallenge` with `level`; the dots read as a sentence by VoiceOver.
+- **Departed from Konjugieren.** (1) **The person is drawn too.** Conjuguer's `QuizDraw` returns a
+  verb and a tense, and the quiz's own decks choose the person, so `DailyChallenge.draw(for:)`
+  draws each question's person, among those the verb's defect group has, from the same seeded
+  generator. (2) **The share text takes the dots and points as one argument**, since SwiftLint
+  allows five parameters. (3) **The seed lives on `WidgetQuizQuestion`** in `Shared/`, and the quiz
+  widget's answer order now uses it in place of its own private copy of FNV-1a. (4) **The widget's
+  wrong answers** follow Konjugieren's three (same tense, same person, any), and a finite question is
+  offered no impératif or participle, which would stand out among its options; the existing filler
+  verbs stay as the last resort. Both the question and the answered views open the challenge, since
+  the question is no longer about the verb of the day. (5) **No verb widget's Next to change**:
+  Conjuguer's quiz widget never paged. (6) **The fixtures do not apply**: the challenge is drawn
+  before `-CONJUGUER_QUIZ_FIXTURE` is read, since its questions are already fixed by the day, and
+  a fixture would break the widget's agreement with it. (7) **VoiceOver hears the result** through
+  `Utterer` at the finish, as Phase 22 did for the streak, and the taken row reads the sentence alone
+  rather than after "Done today:", which in French gave two colons in a row.
+- **The widget's question ID** is now the day, the level, and the verb's key
+  (`2026-11-24-intermediate-contracter`), so the answer the widget stores lasts the day unless the
+  level changes, and `ConjuguerApp` rewrites the snapshots when the level changes.
+- **Built as** `Models/DailyChallenge.swift` (`DailyChallenge`, its `Key`, `Outcome`, and draw;
+  `DailyChallengeResult` with the share text and signal; `QuizScope.challenge(_:source:)`;
+  `DailyChallengeRequest`), with `PracticeStore.challengeResults`, `Quiz.challengeResult`,
+  `.challenge` in `LastQuizResult.Kind`, `World.challengeRequest` and `challengeKey(in:level:)`,
+  `URL.challengeDeeplink`, `WidgetDeeplink.challenge`, `WidgetSnapshotWriter.quizQuestion(on:level:fallbackVerb:)`,
+  and `ChallengeDots` in `QuizResultsView.swift`. Eight new strings.
+- **Analytics.** Staged in [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md)
+  in both languages: the lifecycle bullet, the duration bullet (5 in the challenge), a taps bullet,
+  and a paragraph after the practice record's saying the results stay on the device, survive Reset
+  Practice, and go only where the learner shares them.
+- **Tests:** 930 to 951, all passing through `run_tests.sh` (the iPhone simulator is in English).
+  `DailyChallengeTests`, 12 functions: the seed pinned, a day round trip, six days that are not
+  dates, the same key drawing the same five (4 levels), days and levels differing, twenty balanced
+  days per level (cells, band, the verb having the cell, no verb twice, two core verbs, three
+  irregular; 4 levels), a result's points and spoken line, the approved English text in full, the
+  French date, the widget asking the challenge's first question for ten days (4 levels), the
+  snapshot carrying it, and FNV-1a. Six nested in `QuizTests`: the same five whatever the seed, the
+  learner's level, and the record; a result kept once and unranked, a second finish keeping the
+  first; no re-ask; a quit keeping nothing; the store's twelve across a launch and a reset; and the
+  signals. Three in `DeeplinkTests`, and `WidgetSnapshotWriterTests`' question ID test rewritten.
+- **Verified on the iPhone 17**, light, at Intermediate. In French: the hub's row under the
+  Daily Session; the widget's bundle for today asking contracter, vous, futur simple (wrong answers
+  contractera, contractiez, contracte), and `quiz/challenge?source=challengeWidget` opening the
+  challenge on the same question; a challenge of one right, a slip (implantes, diagnosed as the
+  présent for tu) and its right second try, a wrong answer whose correction promised no re-ask, and
+  two right, ending 35 with the dots, the level, and Partager le résultat; Copy in the share sheet
+  giving the approved French text with its narrow spaces; the hub's row taken, "Relevé
+  aujourd’hui : 35 / 50" over the dots, and Last Quiz naming the Défi du jour; a link to the taken
+  challenge opening the hub, and one to the 20th at Advanced starting that challenge (aller, passé
+  antérieur), quit, which wrote nothing. In English: the taken row, Copy from the row giving the
+  approved English text, and Settings' level change rewriting the widget's question (Beginner asks
+  retrouver, impératif, vous) and back. **On the iPad Pro 11**, in English and dark: the row at
+  full width, a challenge from it opening on contracter as the iPhone's did, one right and four
+  wrong ending 10, and Share Result's popover anchored to the button. Both simulators' defaults
+  were restored afterward and compared key by key with copies made before. Not tried: the widget
+  on a home screen (the bundle it reads was checked instead), a tap on it, VoiceOver by ear, two
+  real devices, and a real midnight.
+- **Josh asked for the commit** on 2026-11-24.
 
 ## Tasks for Josh Outside the Code
 

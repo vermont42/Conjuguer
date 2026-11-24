@@ -1567,6 +1567,51 @@ enum L {
     }
   }
 
+  enum DailyChallenge {
+    static var title: String {
+      String(localized: "DailyChallenge.title")
+    }
+
+    static var description: String {
+      String(localized: "DailyChallenge.description")
+    }
+
+    static func doneToday(_ points: String) -> String {
+      String(localized: "DailyChallenge.doneToday", defaultValue: "Done today: \(points)")
+    }
+
+    static var share: String {
+      String(localized: "DailyChallenge.share")
+    }
+
+    static var startHint: String {
+      String(localized: "DailyChallenge.startHint")
+    }
+
+    static var shareHint: String {
+      String(localized: "DailyChallenge.shareHint")
+    }
+
+    static func spokenResult(right: Int, secondTry: Int, count: Int, score: Int, maximum: Int) -> String {
+      let formattedRight = right.formatted()
+      let formattedSecondTry = secondTry.formatted()
+      let formattedCount = count.formatted()
+      let formattedScore = score.formatted()
+      let formattedMaximum = maximum.formatted()
+      return String(
+        localized: "DailyChallenge.spokenResult",
+        defaultValue: "Right on the first try: \(formattedRight) of \(formattedCount). On the second: \(formattedSecondTry). Score: \(formattedScore) of \(formattedMaximum)."
+      )
+    }
+
+    static func shareText(date: String, level: String, tally: String, link: String, appStoreLink: String) -> String {
+      String(
+        localized: "DailyChallenge.shareText",
+        defaultValue: "Conjuguer · Daily Challenge\n\(date) · \(level)\n\(tally)\n\nTake this challenge in Conjuguer:\n\(link)\n\nGet Conjuguer on the App Store:\n\(appStoreLink)"
+      )
+    }
+  }
+
   enum DailyReminder {
     static var heading: String {
       String(localized: "DailyReminder.heading")

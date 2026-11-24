@@ -10,6 +10,7 @@ import SwiftUI
 struct QuizResultsView: View {
   @Environment(World.self) private var world
   @Environment(Quiz.self) var quiz
+  @State private var shareButtonFrame = CGRect.zero
 
   // As wide as an iPhone's, and no wider on an iPad.
   private static let tenMoreMaxWidth: CGFloat = 400
@@ -33,6 +34,14 @@ struct QuizResultsView: View {
             .accessibilityIdentifier("results_score")
 
           bestLine
+
+          if let result = quiz.challengeResult {
+            ChallengeDots(outcomes: result.outcomes, size: 18)
+              .padding(.top, Layout.defaultSpacing / 2)
+              .accessibilityElement(children: .ignore)
+              .accessibilityLabel(result.spokenSummary)
+              .accessibilityIdentifier("results_challenge_dots")
+          }
 
           if let line = quiz.dailyStreakStatus?.resultsLine {
             Label(line, systemImage: "flame.fill")
@@ -99,6 +108,25 @@ struct QuizResultsView: View {
           .padding(.top, Layout.defaultSpacing)
           .accessibilityHint(L.DailySession.anotherHint)
           .accessibilityIdentifier("results_daily_another")
+        } else if let result = quiz.challengeResult {
+          Button {
+            result.share(anchorRect: shareButtonFrame)
+          } label: {
+            Label(L.DailyChallenge.share, systemImage: "square.and.arrow.up")
+              .buttonLabel()
+              .frame(maxWidth: Self.tenMoreMaxWidth)
+          }
+          .funButton()
+          .controlSize(.large)
+          .onGeometryChange(for: CGRect.self) { proxy in
+            proxy.frame(in: .global)
+          } action: { frame in
+            shareButtonFrame = frame
+          }
+          .frame(maxWidth: .infinity)
+          .padding(.top, Layout.defaultSpacing)
+          .accessibilityHint(L.DailyChallenge.shareHint)
+          .accessibilityIdentifier("results_challenge_share")
         } else if quiz.canContinue {
           Button {
             quiz.continueSession()
@@ -176,5 +204,22 @@ struct QuizResultsView: View {
       return L.ModelPractice.anotherRoundHint
     }
     return quiz.scope.isVerbEssentials ? L.VerbEssentials.fiveMoreHint : L.ResultsView.tenMoreHint
+  }
+}
+
+/// A challenge's outcomes as circles in the colors of the results' marks, rather than the shared
+/// text's emoji, which the iOS 26 simulator can draw as blank boxes (Konjugieren, iOS 26.3).
+struct ChallengeDots: View {
+  let outcomes: [DailyChallenge.Outcome]
+  var size: CGFloat = 12
+
+  var body: some View {
+    HStack(spacing: size / 2) {
+      ForEach(Array(outcomes.enumerated()), id: \.offset) { _, outcome in
+        Circle()
+          .fill(outcome.conjugationResult.feedbackColor)
+          .frame(width: size, height: size)
+      }
+    }
   }
 }

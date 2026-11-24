@@ -70,6 +70,10 @@ struct ConjuguerApp: App {
       .onChange(of: Current.settings.pronounGender) {
         refreshWidgets()
       }
+      // The quiz widget asks the first question of the day's challenge at the learner's level.
+      .onChange(of: Current.settings.quizLevel) {
+        refreshWidgets()
+      }
     }
     .commands {
       VerbSearchCommands()

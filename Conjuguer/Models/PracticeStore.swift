@@ -18,6 +18,10 @@ final class PracticeStore {
   private(set) var speedRoundBest: Int?
   /// Kept on the device and sent only as a band.
   private(set) var dailyStreak = DailyStreak()
+  /// The challenges finished lately, the newest last, kept on the device and sent nowhere. Reset
+  /// Practice keeps them, since each is a day's result rather than a record of what is known, and
+  /// forgetting one would let its challenge be taken again.
+  private(set) var challengeResults: [DailyChallengeResult] = []
   private let getterSetter: GetterSetter
   private let calendar: Calendar
   /// The `LearnerVerbs` JSON a first launch with a practice record migrates. It is read at
@@ -49,6 +53,7 @@ final class PracticeStore {
     lastResult = getterSetter.get(key: LastQuizResult.storageKey).flatMap(LastQuizResult.init(json:))
     speedRoundBest = getterSetter.get(key: Self.speedRoundBestKey).flatMap { Int($0) }
     dailyStreak = getterSetter.getCodable(key: DailyStreak.storageKey) ?? DailyStreak()
+    challengeResults = getterSetter.getCodable(key: DailyChallengeResult.storageKey) ?? []
   }
 
   static let speedRoundBestKey = "speedRoundBest"
@@ -174,6 +179,22 @@ final class PracticeStore {
     return true
   }
 
+  func challengeResult(for key: DailyChallenge.Key) -> DailyChallengeResult? {
+    challengeResults.last { $0.key == key }
+  }
+
+  /// A finished challenge, kept unless its key was finished before, since a challenge is taken
+  /// once. Returns the result the challenge keeps.
+  @discardableResult
+  func recordChallenge(_ result: DailyChallengeResult) -> DailyChallengeResult {
+    if let kept = challengeResult(for: result.key) {
+      return kept
+    }
+    challengeResults = Array((challengeResults + [result]).suffix(DailyChallengeResult.keptCount))
+    getterSetter.setCodable(key: DailyChallengeResult.storageKey, value: challengeResults)
+    return result
+  }
+
   /// Returns the streak the session leaves.
   @discardableResult
   func recordDailySession(at date: Date = .now) -> DailyStreak.Status {
@@ -187,8 +208,8 @@ final class PracticeStore {
   }
 
   /// Settings' Reset Practice, which forgets the last result, the Speed Round's best, and the
-  /// daily streak too. The record is saved empty rather than removed, so that the next launch does
-  /// not migrate the old schedules again.
+  /// daily streak too, but keeps the challenges' results. The record is saved empty rather than
+  /// removed, so that the next launch does not migrate the old schedules again.
   func reset() {
     pendingMigration = nil
     record.reset()

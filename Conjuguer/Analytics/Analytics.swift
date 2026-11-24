@@ -56,6 +56,7 @@ enum AnalyticsName: String {
   case tapViewLeaderboard
   case tapViewAchievements
   case tapDailyReminder
+  case tapShareChallenge
 }
 
 /// How the learner reached a verb page or began a quiz. One vocabulary serves every signal that
@@ -64,6 +65,9 @@ enum AnalyticsName: String {
 /// side by side. `docs/feature_architecture.md` § Analytics says which signals send which values.
 enum AnalyticsSource: String, CaseIterable {
   case browse
+  case challenge
+  case challengeLink
+  case challengeWidget
   case control
   case custom
   case daily

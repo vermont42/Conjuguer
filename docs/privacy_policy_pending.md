@@ -1042,3 +1042,73 @@ Le paragraphe sur le suivi des exercices devient :
 ```
 L'application conserve aussi un suivi des exercices : pour chaque conjugaison que vos réponses aux quiz et vos consultations ont touchée, si votre dernière réponse était juste et le jour où elle doit être révisée, afin que les quiz et les cartes de révision la reproposent et que l'onglet Quiz puisse afficher ce que vous maîtrisez, le résultat de votre dernier quiz, afin que l'onglet Quiz puisse l'afficher, votre meilleur score à chaque niveau, votre record au « Contre-la-montre » et les jours où vous avez terminé une séance du jour, afin que l'onglet Quiz puisse afficher votre série. Ce suivi reste sur votre appareil et n'est jamais envoyé. « Réinitialiser le suivi », dans les Paramètres, l'efface. Le rappel quotidien, si vous l'activez, est programmé sur votre appareil, qui en rédige le texte à partir du suivi ; rien de ce rappel n'est envoyé.
 ```
+
+## The daily challenge (pedagogy plan, Phase 24, 2026-11-24)
+
+The Quiz tab gains the daily challenge ("Défi du jour" in French): five questions a day at each
+level, the same on every device on the same date, taken once, whose result the learner can share
+as text. The quiz signals send three new `source` values: `challenge`, for a challenge begun from
+the Quiz tab, `challengeLink`, for one opened from a shared result's link, and `challengeWidget`,
+for one opened by tapping the quiz widget, whose question is now the first of the day's challenge.
+A challenge sends its question count, always five, and posts nothing to Game Center, which section
+6 already allows. Adds `tapShareChallenge`, sent when the learner shares a challenge's result, with
+the parameter `level` and never the result. The shared text holds the result, but it goes only
+where the learner sends it through the system's share sheet. The challenges' results are kept on
+the device, the last twelve, and are not erased by Reset Practice, since forgetting one would let
+its challenge be taken again; a sentence after the practice-record paragraph says so.
+
+This section replaces the quiz lifecycle bullet that the section on the daily session gives and
+the bullet on how long a quiz lasted that the section on the Speed Round gives, so apply it after
+both.
+
+### English
+
+The bullet on quiz lifecycle events now reads:
+
+```
+- Quiz lifecycle events (starting, quitting, or completing a quiz), and where the quiz began: the Quiz tab, over every verb, over My Verbs, over a custom choice, as a review of what is due, as practice of your mistakes, as the daily session, and whether you began it from its reminder, as the daily challenge, and whether you opened it from a shared result or from the quiz widget, or as the Verb Essentials, Name the Conjugation, Sentences, or Speed Round exercise, a verb's page, a collection, a practice set opened from a shared link or a QR code, or the practice of a conjugation model, alone or mixed with models you know, with which collection for the four featured ones (a model's collection, or a model's practice, is named only as a model); for a custom quiz or a practice set, whether it chose tenses, verbs, or both, but not which; and when you finish a daily session, roughly how many days in a row you have finished one (1, 2 to 6, 7 to 29, or 30 or more)
+```
+
+The bullet on how long a quiz lasted now reads:
+
+```
+- Roughly how long a quiz lasted when you complete or quit it (under 3 seconds, 3 to 15 seconds, 15 to 40 seconds, 40 seconds to 2 minutes, or longer), and how many questions it had reached when you complete it (10, or 20 or more if you asked for ten more; 15 a round in Verb Essentials; up to 15 a round in a model's practice alone; 5 in the daily challenge), except for a review, practice of your mistakes, a model's mixed practice, or the Speed Round
+```
+
+A new bullet for the list in section 2, after the last:
+
+```
+- That you shared the result of a daily challenge, and the challenge's level, but not the result
+```
+
+A new paragraph after the practice-record paragraph:
+
+```
+The app also keeps the results of your recent daily challenges on your device, so that each can be taken once and its result shared. They are never sent, and Reset Practice does not erase them. When you share a result, its text goes only where you send it.
+```
+
+### French
+
+Le point sur les événements du cycle de vie d'un quiz devient :
+
+```
+- Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes, sur « Mes verbes », sur mesure, en révision de ce qui est à revoir, pour revoir vos erreurs, en « Séance du jour », et si vous l'avez commencée depuis son rappel, en « Défi du jour », et si vous l'avez ouvert depuis un résultat partagé ou depuis le widget du quiz, ou dans l'exercice « L'essentiel du verbe », « Identifier la forme verbale », « Phrases à trous » ou « Contre-la-montre », la page d'un verbe, une collection, une série d'exercices ouverte depuis un lien partagé ou un code QR, ou l'exercice d'un modèle de conjugaison, seul ou mélangé aux modèles que vous connaissez, avec le nom de la collection pour les quatre collections mises en avant (la collection d'un modèle, ou l'exercice d'un modèle, est désigné seulement comme celui d'un modèle) ; pour un quiz sur mesure ou une série d'exercices, s'il porte sur des temps, des verbes ou les deux, mais pas lesquels ; et lorsque vous terminez une séance du jour, le nombre approximatif de jours d'affilée où vous en avez terminé une (1, de 2 à 6, de 7 à 29, ou 30 et plus)
+```
+
+Le point sur la durée d'un quiz devient :
+
+```
+- La durée approximative d'un quiz lorsque vous le terminez ou l'abandonnez (moins de 3 secondes, de 3 à 15 secondes, de 15 à 40 secondes, de 40 secondes à 2 minutes, ou davantage) et le nombre de questions atteint lorsque vous le terminez (10, ou 20 et plus si vous avez demandé dix questions de plus ; 15 par série dans « L'essentiel du verbe » ; jusqu'à 15 par série dans l'exercice d'un modèle seul ; 5 dans le « Défi du jour »), sauf en révision, pour revoir vos erreurs, dans l'exercice d'un modèle mélangé ou au « Contre-la-montre »
+```
+
+Un nouveau point pour la liste de la section 2, après le dernier :
+
+```
+- Le partage du résultat d'un « Défi du jour », avec le niveau du défi, mais pas le résultat
+```
+
+Un nouveau paragraphe après celui sur le suivi des exercices :
+
+```
+L'application conserve aussi sur votre appareil les résultats de vos derniers « Défis du jour », afin que chacun ne puisse être relevé qu'une fois et que son résultat puisse être partagé. Ils ne sont jamais envoyés, et « Réinitialiser le suivi » ne les efface pas. Lorsque vous partagez un résultat, son texte ne va que là où vous l'envoyez.
+```
