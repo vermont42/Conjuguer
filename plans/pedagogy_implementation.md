@@ -47,7 +47,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 21 | Done | 2026-11-24 | 444391d | T5.7 | 21 |
 | 22 | Done | 2026-11-24 | a5b2806 | T6.3 | 22 |
 | 23 | Done | 2026-11-24 | 5bb1765 | T6.6 (personal bests and achievements) | 23 |
-| 24 | Done | 2026-11-24 | | T6.8 | 24 |
+| 24 | Done | 2026-11-24 | 5651584 | T6.8 | 24 |
 | Closing | Not started | | | Audit, porting notes | Closing |
 
 The phases keep Konjugieren's numbers, so a session can read the Konjugieren phase of the same
