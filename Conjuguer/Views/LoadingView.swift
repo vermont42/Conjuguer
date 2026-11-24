@@ -12,7 +12,7 @@ struct LoadingView: View {
     VStack(spacing: Layout.doubleDefaultSpacing) {
       Image("Splash")
         .resizable()
-        .aspectRatio(contentMode: .fit)
+        .scaledToFit()
         .frame(width: 120)
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         .accessibilityHidden(true)

@@ -67,8 +67,7 @@ nonisolated class DefectGroupParser: XMLDataParser {
 
       if
         let currentUsesOnly = currentUsesOnly,
-        let currentDoesntUse = currentDoesntUse
-      {
+        let currentDoesntUse = currentDoesntUse {
         Log.parsing.error("Skipping <\(self.defectGroupTag, privacy: .public)> \(self.currentId, privacy: .public): both usesOnly (\(currentUsesOnly, privacy: .public)) and doesntUse (\(currentDoesntUse, privacy: .public)) were specified.")
         return
       }

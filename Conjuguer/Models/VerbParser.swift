@@ -114,15 +114,13 @@ nonisolated class VerbParser: XMLDataParser {
 
       if
         let isReflexive = attributeDict["re"],
-        isReflexive == "t"
-      {
+        isReflexive == "t" {
         currentIsReflexive = true
       }
 
       if
         let hasAspiratedH = attributeDict["ah"],
-        hasAspiratedH == "t"
-      {
+        hasAspiratedH == "t" {
         currentHasAspiratedH = true
       }
 

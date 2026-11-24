@@ -92,7 +92,7 @@ nonisolated extension ConjugationMap {
 
   init(compressed data: Data) throws {
     let decompressed = try (data as NSData).decompressed(using: .lzfse) as Data
-    self.init(text: String(decoding: decompressed, as: UTF8.self))
+    self.init(text: String(bytes: decompressed, encoding: .utf8) ?? "")
   }
 
   static func agreedForms(ofParticiple participle: String) -> [String] {

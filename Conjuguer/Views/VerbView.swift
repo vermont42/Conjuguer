@@ -244,8 +244,7 @@ struct VerbView: View {
 
       if
         let defectGroupId = verb.defectGroupId,
-        let defectGroup = DefectGroup.defectGroups[defectGroupId]
-      {
+        let defectGroup = DefectGroup.defectGroups[defectGroupId] {
         Text("\(L.VerbView.defective) " + defectGroup.description())
           .bodyLabel()
       }

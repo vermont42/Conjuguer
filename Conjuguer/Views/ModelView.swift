@@ -31,8 +31,7 @@ struct ModelView: View {
 
         if
           let defectGroupId = model.defectGroupId,
-          let defectGroup = DefectGroup.defectGroups[defectGroupId]
-        {
+          let defectGroup = DefectGroup.defectGroups[defectGroupId] {
           defectiveCard(defectGroup)
             .scrollFade()
         }
@@ -104,8 +103,7 @@ struct ModelView: View {
 
       if
         let parentId = model.parentId,
-        let parent = VerbModel.models[parentId]
-      {
+        let parent = VerbModel.models[parentId] {
         HStack(spacing: 0) {
           Text("\(L.ModelView.parent): ")
             .smallLabel()

@@ -6380,3 +6380,22 @@ The suite went from 829 to 846 tests, all passing. On the iPhone, a real Element
 its choice second, after a typed miss. The keyboard got out of the way for the two sentences and
 came back for the next field after Continue. The iPad showed the card in dark mode with each
 sentence on one line. Josh has yet to try it.
+
+## SwiftLint 0.65.1 (2026-11-24)
+
+Setting up SwiftLint in Konjugieren meant upgrading Homebrew's copy from 0.52.3 (May 2023) to
+0.65.1, because the old one could not parse Swift 6 syntax and misread switch expressions. The
+upgrade cost Conjuguer fourteen new warnings, all fixed here. Nine were `opening_brace`, which now
+wants the `{` of a multi-line `if let …` condition on the condition's last line, not alone below
+it. Autocorrect moved those. Two were `legacy_swiftui_aspect_ratio`: `.aspectRatio(contentMode:
+.fit)` became `.scaledToFit()`, and autocorrect put it on the same line as `.resizable()`, which
+`multiline_function_chains` then flagged, so each went back on its own line. Two were
+`optional_data_string_conversion`, which prefers failable `String(bytes:encoding:)` to
+`String(decoding:as:)` because the latter silently substitutes U+FFFD for invalid bytes.
+`ConjugationIndex.nearestFolds` now skips an undecodable candidate, and the decompressed
+`ConjugationMap` falls back to an empty map, as a missing file does.
+
+The last was a `superfluous_disable_command` on the bracketed `redundant_type_annotation`
+exception around `ScrollToBottomTip.isUnlocked`. TipKit's `@Parameter` macro needs that `: Bool`,
+and 0.52.3 flagged it. 0.65.1 does not, so the bracket and its comment are gone. The macro still
+needs the type, so do not let a future autocorrect strip it. All 846 tests pass.

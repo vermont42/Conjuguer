@@ -88,12 +88,8 @@ struct PlayGameTip: Tip {
 /// visit after the color key was closed, so that the two never appear one straight after the
 /// other, and the page invalidates it once the learner scrolls that far unprompted.
 struct ScrollToBottomTip: Tip {
-  // TipKit's @Parameter macro cannot expand without the explicit type, and it copies a trailing
-  // comment into its expansion, so the lint exception brackets the declaration.
-  // swiftlint:disable redundant_type_annotation
   @Parameter
   static var isUnlocked: Bool = false
-  // swiftlint:enable redundant_type_annotation
 
   var title: Text {
     Text(L.Tips.scrollToBottomTitle)

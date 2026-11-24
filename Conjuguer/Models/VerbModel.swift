@@ -99,8 +99,7 @@ struct VerbModel: Identifiable, Hashable {
     var allStemAlterations: [StemAlteration] = []
     if
       let parentId = parentId,
-      let parentStemAlterations = VerbModel.model(id: parentId).stemAlterationsRecursive
-    {
+      let parentStemAlterations = VerbModel.model(id: parentId).stemAlterationsRecursive {
       allStemAlterations += parentStemAlterations.filter { $0.isInherited }
     }
     if let localStemAlterations = stemAlterations {

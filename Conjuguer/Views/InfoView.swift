@@ -22,7 +22,7 @@ struct InfoView: View {
         if let imageInfo = info.imageInfo {
           Image(imageInfo.filename)
             .resizable()
-            .aspectRatio(contentMode: .fit)
+            .scaledToFit()
             .frame(width: 270)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             .shadow(color: Color.customForeground.opacity(0.2), radius: 8, y: 4)

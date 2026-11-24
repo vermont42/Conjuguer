@@ -75,8 +75,7 @@ struct FailedVerbSearchView: View {
         address,
         subject: L.VerbBrowseView.verbRequestSubject(query: query),
         body: L.VerbBrowseView.verbRequestBody(query: query)
-      )
-    {
+      ) {
       text[range].link = url
     }
     return text

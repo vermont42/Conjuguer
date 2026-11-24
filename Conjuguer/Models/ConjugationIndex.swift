@@ -88,7 +88,9 @@ nonisolated struct ConjugationIndex: Sendable {
           guard let candidateDistance = distance.measure(candidate, atMost: best?.distance ?? limit) else {
             continue
           }
-          let found = String(decoding: candidate, as: UTF8.self)
+          guard let found = String(bytes: candidate, encoding: .utf8) else {
+            continue
+          }
           if let current = best, current.distance == candidateDistance {
             best = (current.folds + [found], candidateDistance)
           } else {
