@@ -38,7 +38,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 12 | Done | 2026-11-23 | 2bc523b | T3.2, T3.3 (the session) | 12 |
 | 13 | Done | 2026-11-23 | 249f7b9 | T6.1, T6.6 (the leaderboard's place) | 13 |
 | 14 | Done | 2026-11-23 | 9568bdd | T4.2, T4.3 | 14 |
-| 15 | Awaiting Josh | 2026-11-23 | | T5.1 | 15 |
+| 15 | Done | 2026-11-23 | 3966644 | T5.1 | 15 |
 | 16 | Not started | | | T5.2 | 16 |
 | 17 | Not started | | | T5.4 | 17 |
 | 18 | Not started | | | T5.5 | 18 |
@@ -1776,7 +1776,7 @@ line, and the prompted second attempt shares Phase 4's mechanism.
 ## Phase 15: Key Conjugations
 
 **Suggestions:** T5.1. **Ports:** Konjugieren Phase 15 (`VerbEssentials.swift`,
-`VerbEssentialsRowView.swift`). **Depends on:** Phases 2 and 11. **Status:** Awaiting Josh.
+`VerbEssentialsRowView.swift`). **Depends on:** Phases 2 and 11. **Status:** Done.
 
 An exercise for irregular verbs: given the infinitive, supply its key conjugations (il présent, il
 passé composé, il futur simple: `il ___ · il ___ · il ___`), each in its own blank of Phase 2's frame, each graded alone, each
