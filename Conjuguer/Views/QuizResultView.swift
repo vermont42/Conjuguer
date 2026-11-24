@@ -17,12 +17,19 @@ struct QuizResultView: View {
           .font(.title2)
           .foregroundStyle(quizResult.conjugationResult.feedbackColor)
 
-        Text(quizResult.infinitif)
-          .subheadingLabel()
+        if let prompt = quizResult.recognitionPrompt {
+          Text(AttributedString(mixedCaseString: prompt))
+            .subheadingLabel()
+        } else {
+          Text(quizResult.infinitif)
+            .subheadingLabel()
+        }
       }
 
-      Text(quizResult.tense.titleCaseName + quizResult.tense.pronounDecorator(pronounGender: quizResult.pronounGender ?? Current.settings.pronounGender))
-        .smallLabel()
+      if quizResult.recognitionPrompt == nil {
+        Text(quizResult.tense.titleCaseName + quizResult.tense.pronounDecorator(pronounGender: quizResult.pronounGender ?? Current.settings.pronounGender))
+          .smallLabel()
+      }
 
       if quizResult.isReask {
         Text(L.QuizView.askedAgain)

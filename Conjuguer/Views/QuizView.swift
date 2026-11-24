@@ -20,6 +20,8 @@ struct QuizView: View {
   @State private var input = ""
   @State private var inputSelection: TextSelection?
   @State private var tabScope = TabQuizScope.allVerbs
+  @State private var recognitionSlot: QuizTenseSlot?
+  @State private var recognitionPerson: PersonNumber?
   @FocusState private var conjugationFieldIsFocused: Bool
   @AccessibilityFocusState private var correctionHasAccessibilityFocus: Bool
   @State private var authCoordinator = GameCenterAuthCoordinator()
@@ -208,12 +210,31 @@ struct QuizView: View {
           if essentialsRows == nil || quiz.isAwaitingSecondAttempt {
             feedbackSlot
           }
+          // The choices come before the field, so that they stay in sight above the keyboard and
+          // Return can check the answer once the infinitive is typed.
+          if let recognition = quiz.currentQuestion?.recognition {
+            RecognitionChoicesView(
+              recognition: recognition,
+              slot: $recognitionSlot,
+              personNumber: $recognitionPerson,
+              isLocked: quiz.correction != nil
+            )
+          }
           VStack(alignment: .leading, spacing: Layout.defaultSpacing / 2) {
             if let currentRow {
               VerbEssentialsRowLabel(tense: currentRow.question.tense)
                 .accessibilityHidden(true)
             }
+            if quiz.currentQuestion?.recognition != nil {
+              Text(L.Recognition.infinitive)
+                .font(captionFont)
+                .foregroundStyle(Color.customBlue)
+                .accessibilityHidden(true)
+            }
             answerField(spokenPrefix: currentRow?.question.tense.titleCaseName.lowercased())
+          }
+          if quiz.currentQuestion?.recognition != nil, quiz.correction == nil {
+            recognitionCheckButton
           }
           correctionBlock
           if let essentialsRows, let currentRowIndex {
@@ -286,9 +307,9 @@ struct QuizView: View {
   private func questionBlock(showsTense: Bool) -> some View {
     Group {
       if quiz.currentQuestionIndex < quiz.questions.count {
-        let verb = quiz.questions[quiz.currentQuestionIndex].verb
-        let tense = quiz.questions[quiz.currentQuestionIndex].tense
-        let tenseName = tense.titleCaseName.lowercased()
+        let question = quiz.questions[quiz.currentQuestionIndex]
+        let verb = question.verb
+        let tenseName = question.tense.titleCaseName.lowercased()
 
         VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
           if quiz.questions[quiz.currentQuestionIndex].isReask {
@@ -301,16 +322,22 @@ struct QuizView: View {
               .accessibilityIdentifier("quiz_asked_again")
           }
 
-          Text(verb.infinitifWithPossibleExtraLetters)
-            .font(largeTitleFont)
-            .foregroundStyle(Color.customForeground)
-            .frenchPronunciation()
+          // The verb, its gloss, and its tense are what a recognition question asks for, so none
+          // is shown.
+          if let recognition = question.recognition {
+            RecognitionPromptView(prompt: recognition.prompt)
+          } else {
+            Text(verb.infinitifWithPossibleExtraLetters)
+              .font(largeTitleFont)
+              .foregroundStyle(Color.customForeground)
+              .frenchPronunciation()
 
-          Text(verb.translation)
-            .smallLabel()
-            .englishPronunciation()
+            Text(verb.translation)
+              .smallLabel()
+              .englishPronunciation()
+          }
 
-          if showsTense {
+          if showsTense, question.recognition == nil {
             Text(tenseName)
               .font(buttonFont)
               .foregroundStyle(Color.customForeground)
@@ -361,14 +388,19 @@ struct QuizView: View {
   /// rather than in the frame.
   private func answerField(spokenPrefix: String?) -> some View {
     let frame = answerFrame
-    let spokenPrompt = [spokenPrefix, frame.spokenPrompt].compactMap { $0 }.joined(separator: ", ")
+    let isRecognition = quiz.currentQuestion?.recognition != nil
+    let spokenPrompt = isRecognition ? L.Recognition.infinitive : [spokenPrefix, frame.spokenPrompt].compactMap { $0 }.joined(separator: ", ")
     return AnswerFrameView(frame: frame) {
-      conjugationField(spokenPrompt: spokenPrompt)
+      conjugationField(
+        placeholder: isRecognition ? L.Recognition.infinitive : L.QuizView.conjugation,
+        spokenPrompt: spokenPrompt,
+        hint: isRecognition ? L.Recognition.fieldHint : nil
+      )
     }
   }
 
-  private func conjugationField(spokenPrompt: String) -> some View {
-    TextField(L.QuizView.conjugation, text: $input, selection: $inputSelection)
+  private func conjugationField(placeholder: String, spokenPrompt: String, hint: String?) -> some View {
+    TextField(placeholder, text: $input, selection: $inputSelection)
       .focused($conjugationFieldIsFocused)
       .textInputAutocapitalization(.never)
       .autocorrectionDisabled()
@@ -390,6 +422,7 @@ struct QuizView: View {
       .accessibilityIdentifier("input_quiz_conjugation")
       .accessibilityLabel(spokenPrompt)
       .accessibilityValue(input)
+      .accessibilityHint(hint ?? "")
       .toolbar {
         ToolbarItem(placement: .keyboard) {
           FrenchLetterKeyRow { letter in
@@ -402,14 +435,62 @@ struct QuizView: View {
           continueAfterCorrection()
           return
         }
-        quiz.process(proposedAnswer: input)
-        if quiz.isAwaitingSecondAttempt {
-          refocusAnswer(after: .milliseconds(50))
-        } else if quiz.correction == nil {
-          clearInput()
-          conjugationFieldIsFocused = true
-        }
+        submit()
       }
+  }
+
+  private func submit() {
+    if quiz.currentQuestion?.recognition != nil {
+      guard let answer = recognitionAnswer else {
+        // Return with a part missing: the field keeps the keyboard, and VoiceOver says what is
+        // missing.
+        UIAccessibility.post(notification: .announcement, argument: L.Recognition.incomplete)
+        refocusField(after: .milliseconds(50))
+        return
+      }
+      quiz.submitRecognition(answer)
+    } else {
+      quiz.process(proposedAnswer: input)
+    }
+    if quiz.isAwaitingSecondAttempt {
+      refocusAnswer(after: .milliseconds(50))
+    } else if quiz.correction == nil {
+      clearInput()
+      conjugationFieldIsFocused = true
+    }
+  }
+
+  /// The recognition answer the card holds, or nil until the infinitive, the tense, and, unless
+  /// it is a participle, the person are all given.
+  private var recognitionAnswer: RecognitionAnswer? {
+    guard let recognitionSlot, !input.trimmingCharacters(in: .whitespaces).isEmpty else {
+      return nil
+    }
+    let answer = RecognitionAnswer(infinitif: input, slot: recognitionSlot, personNumber: recognitionPerson)
+    return answer.tense == nil ? nil : answer
+  }
+
+  private var recognitionCheckButton: some View {
+    Button {
+      submit()
+    } label: {
+      Label(L.Recognition.check, systemImage: "checkmark")
+        .buttonLabel()
+        .frame(maxWidth: 400)
+    }
+    .funButton()
+    .frame(maxWidth: .infinity)
+    .disabled(recognitionAnswer == nil)
+    .accessibilityHint(L.Recognition.checkHint)
+    .accessibilityIdentifier("recognition_check_button")
+  }
+
+  private func refocusField(after delay: Duration) {
+    conjugationFieldIsFocused = false
+    Task { @MainActor in
+      try? await Task.sleep(for: delay)
+      conjugationFieldIsFocused = true
+    }
   }
 
   private func continueAfterCorrection() {
@@ -425,6 +506,8 @@ struct QuizView: View {
   private func clearInput() {
     input = ""
     inputSelection = nil
+    recognitionSlot = nil
+    recognitionPerson = nil
   }
 
   /// Gives the answer field the keyboard while a correction is held, so that Return continues,
@@ -637,6 +720,17 @@ struct QuizView: View {
         TryQuizTip().invalidate(reason: .actionPerformed)
       }
 
+      QuizHubRow(
+        title: L.Recognition.title,
+        detail: L.Recognition.description,
+        systemImage: "text.magnifyingglass",
+        identifier: "quiz_recognition",
+        hint: L.Recognition.startHint
+      ) {
+        start(scope: .recognition)
+        TryQuizTip().invalidate(reason: .actionPerformed)
+      }
+
       NavigationLink(value: ModelPracticeDestination()) {
         QuizHubRowContent(
           title: L.ModelPractice.title,
@@ -782,6 +876,7 @@ struct QuizView: View {
   }
 
   private func start(scope: QuizScope) {
+    clearInput()
     quiz.start(scope: scope)
     Task { @MainActor in
       conjugationFieldIsFocused = true

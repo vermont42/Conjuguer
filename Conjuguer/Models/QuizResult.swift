@@ -20,6 +20,9 @@ struct QuizResult: Hashable, Identifiable {
   var isReask = false
   /// The gender the question was asked in, nil for the learner's setting.
   var pronounGender: PronounGender?
+  /// A Name the Conjugation question's prompt. `correctAnswer` then holds its right answers, one a
+  /// line, and the answers are summaries such as "être · passé simple · nous".
+  var recognitionPrompt: String?
 
   /// A right re-ask earns half points on either attempt, as a right second attempt does.
   var points: Int {

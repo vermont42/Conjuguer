@@ -110,6 +110,7 @@ Conjuguer/
 │   ├── QuizQuestion.swift      # One quiz question (verb + tense), whether it is a missed question asked again, and the step it shares with questions shown on the same screen
 │   ├── QuizResult.swift        # One answered question, its ConjugationResult, a slip's first attempt, and whether it was a re-ask, with its points, for the results sheet
 │   ├── QuizState.swift         # Quiz lifecycle enum (not started / in progress / finished)
+│   ├── Recognition.swift       # Name the Conjugation: the scope, a prompt's every right cell (by the conjugation map, in both genders, a pronominal verb's prompt with its pronoun), the grade part by part, its repair lines, and the correction's answer lines
 │   ├── RelatedVerbs.swift      # VerbBase (a verb's base and root: a verbal prefix plus a verb its etymology names, less false pairs), RelatedVerbs, and Verb.related for the verb page's card
 │   ├── ReviewCardSuppression.swift  # The Suppress Review Card setting's Off and On
 │   ├── SearchReport.swift      # SearchTracker (one verb search, first letter to its end) and SearchReport (finishSearch's banded parameters)
@@ -219,6 +220,7 @@ Conjuguer/
     ├── QuizResultsView.swift   # End-of-quiz sheet: score, correct and second-try counts, per-question results, leaderboard
     ├── QuizResultView.swift    # One row of the results sheet, with a slip's first attempt
     ├── QuizView.swift          # Quiz gameplay: prompt, answer field framed by its pronoun with the accent keys, progress, feedback and the app's spelling of a variant, the held correction and the pages it pushes; the All Verbs / My Verbs / Custom picker and the custom quiz's summary and its Share menu (a link or a QR code); QuizSheet, for Test Me on a verb page and a collection's quiz
+    ├── RecognitionChoicesView.swift # Name the Conjugation's prompt and its tense and person chips
     ├── RelatedVerbsView.swift  # The verb page's Related Verbs card (built on the same root, same model), RelatedVerbListView, and FlowLayout
     ├── ReviewCardView.swift    # The review card above the verb list: an irregular verb looked up or practiced days ago, its key conjugations hidden until a tap, a second tap opening its page
     ├── RichTextView.swift      # Renders [RichTextBlock] with subheadings, emphasis, color-coding, links
@@ -316,6 +318,7 @@ ConjuguerTests/
     ├── PracticeSetTests.swift          # Practice sets: the pinned link, every tense, verb set, level, and list round-tripped, links that name nothing, what a link keeps, My Verbs as a capped list, the level carried only when needed, the scope, the share text, QR codes read back by Core Image; nested in DeeplinkTests, the quiz/set route; in QuizTests, a session at the set's level
     ├── QuizScopeTests.swift            # Quiz scopes: the default quiz at the learner's level, My Verbs drawing only its verbs at each level, defective verbs, Test Me's three tenses, unranked scoring, doubled entries graded as themselves, source on every quiz signal
     ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle; seeded quizzes that never ask a defective cell; the recorded spelling of a variant; the held correction, its stopped clock, and Continue; a slip's one more try, its half points, and its running clock (serialized — mutates Current)
+    ├── RecognitionTests.swift          # Name the Conjugation: the cells of fûmes, suis, vis, parle, fait, me souviens, souviens-toi, finissons, avions pris; the level's tenses; pronominal prompts; the infinitive's spellings; each part's grade and line; the correction's lines; the scope; nested in QuizTests, sessions (the draw at each level, nothing recorded, one more try, the held correction and re-ask)
     ├── RelatedVerbsTests.swift         # Base-finding on known and false pairs, nested roots, the card's two relations, doubled roots, and the model page's two orders
     ├── ReviewScheduleTests.swift       # The review ladder: starts, reviews, snoozes, a new item's first answer, a right answer climbing only when due, a wrong one starting over
     ├── PracticeItemTests.swift         # The practice items: pinned and unreadable keys, which verbs are patterns, spelling-change cells, compound tenses with être, every tense's stem, doubled entries, lookups, the shown stems, items asking their own cell back

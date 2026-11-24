@@ -40,11 +40,13 @@ struct QuizScope {
   /// list of models.
   var modelPractice: ModelPracticeSession?
 
+  var isRecognition = false
+
   /// Only the default quiz posts to its level's leaderboard and sets its best score: a score over
   /// the learner's own verbs, tenses, or practice record, or over three questions, compares with
   /// nothing.
   var isRanked: Bool {
-    verbs == nil && custom == nil && recordSession == nil && !isVerbEssentials && modelPractice == nil
+    verbs == nil && custom == nil && recordSession == nil && !isVerbEssentials && modelPractice == nil && !isRecognition
   }
 
   /// Review and My Mistakes ask whatever the record holds, beyond the level's tenses and band, and a

@@ -40,7 +40,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 14 | Done | 2026-11-23 | 9568bdd | T4.2, T4.3 | 14 |
 | 15 | Done | 2026-11-23 | 3966644 | T5.1 | 15 |
 | 16 | Done | 2026-11-23 | 94df8f9 | T5.2 | 16 |
-| 17 | Not started | | | T5.4 | 17 |
+| 17 | Awaiting Josh | 2026-11-23 | | T5.4 | 17 |
 | 18 | Not started | | | T5.5 | 18 |
 | 19 | Not started | | | T5.6 | 19 |
 | 20 | Not started | | | T6.2 | 20 |
@@ -1990,8 +1990,8 @@ known and how the mix is drawn.
 ## Phase 17: Recognition
 
 **Suggestions:** T5.4. **Ports:** Konjugieren Phase 17 (`Recognition.swift`,
-`RecognitionChoicesView.swift`). **Depends on:** Phase 3 and browse Phase 4's map. **Status:** Not
-started.
+`RecognitionChoicesView.swift`). **Depends on:** Phase 3 and browse Phase 4's map. **Status:**
+Awaiting Josh.
 
 Show a conjugation, such as fûmes, and ask for the infinitive (typed) and the tense and person
 (chosen, since typing their names would test the metalanguage). This is the direction a reader
@@ -2008,6 +2008,62 @@ the infinitive; it serves the English-speaking learners and anyone reading the p
 record, with tests on ambiguous conjugations.
 
 **How it differed:**
+
+- **Asked of Josh (2026-11-23), before building**, each the recommended option. (1) The French
+  name is **"Identifier la forme verbale"**, the worksheet's wording, over "Analyser la forme
+  verbale" and "Reconnaître le verbe"; the English stays Konjugieren's "Name the Conjugation".
+  (2) **Answers are not recorded** in the practice record, as Konjugieren decided, since
+  recognizing fûmes is not evidence of producing it. That reverses this phase's "Done when", which
+  was copied before Konjugieren's answer. (3) **A pronominal verb's prompt keeps its reflexive
+  pronoun** as French writes it (me souviens, s'est souvenue, souviens-toi), over leaving such verbs
+  out and over a bare souviens.
+- **Carried over from Konjugieren unasked**, each a guess Josh can overrule: chips for the tense and
+  the person, above the field; one person chosen, any right one accepted; one more try at half
+  points when any part is right, with a line naming what to check, and the correction at once when
+  nothing is; a part called wrong only when changing it can make the answer right; every right
+  reading accepted and no prompt avoided; the default quiz's draw by level, ten a round with Ten
+  More; never ranked; the prompt's irregular letters in red.
+- **Decided in the session.** (1) **Both genders count**: a compound prompt is matched in either
+  gender, so est allée and est allé both accept aller's il passé composé, and the drawn prompt
+  follows the setting. (2) The person chips read **"il/elle" and "ils/elles"**, since a bare
+  conjugation shows no gender. (3) The infinitive is accepted **with or without se**, and in its
+  1990 rectification (connaitre), whose traditional spelling then shows beside the check. (4) A
+  pronominal verb's **impératif passé is asked as its passé composé**, since no text writes it, and
+  its participe présent reads se souvenant. (5) The tense chips are the level's `QuizTenseSlot`s in
+  the verb page's order, named in French in both languages, as the quiz names tenses. (6) A verb's
+  compound cells are conjugated only when the prompt ends in its participle, which made building a
+  round two to three times faster.
+- **How it is built.** `Recognition.swift` holds `RecognitionQuestion` (the prompt, its cells, the
+  offered tenses, the grade, the answer lines), `RecognitionAnswer`, `RecognitionGrade`, and
+  `QuizScope.recognition`. `QuizQuestion.recognition` marks the question; `Quiz.submitRecognition`
+  shares a new `finish(_:correction:)` with `process`, which scores, re-asks, and holds the
+  correction for both. `QuizCorrection` gained the answer and its grade, `QuizResult` the prompt,
+  and `LastQuizResult.Kind` `recognition`. The answer frame is a bare blank.
+- **Analytics.** A new `source` value, `recognition`; `quizCompletion` keeps its `questionCount`.
+  Staged in [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md) in both languages.
+- **Strings:** eighteen `Recognition.*`.
+- **Tests:** 789 to 807, all passing through `run_tests.sh` (the iPhone simulator is in English).
+  `RecognitionTests`, 14 functions: the cells of nine prompts (fûmes, suis, vis, parle, fait, me
+  souviens, souviens-toi, finissons, avions pris), each cell writing its prompt, the level's
+  tenses, the page order, both genders, six pronominal prompts, nine spellings of an infinitive,
+  ten grades, the six lines, the correction's lines, the rectified spelling, and the scope. Nested
+  in `QuizTests`, 4: the draw at each level, a right round recording nothing with its signals, last
+  result, and Ten More, one more try at half points, and a held correction with its re-ask.
+- **Verified on the iPhone 17**, light. In French with the fixture: the hub's row, fûmes with
+  Advanced's nineteen chips, "Vérifiez l'infinitif. Encore un essai." for îetre, être on the second
+  try, suivre · impératif · tu for suis (right), aller · futur simple · ils/elles for vis (the
+  correction at once, listing vivre's and voir's readings), a sweep to the results (15, the prompt
+  heading each row). In English, a real Intermediate draw (cessons) with all eleven chips, the
+  person row, and Check in sight. **On the iPad Pro 11** in English and dark: the fixture's fûmes
+  with every chip on four rows, être · passé simple · nous right, and suis next with the chips
+  cleared. Not tried: VoiceOver by ear, the software keyboard, the Live Activity.
+- **Seen, not changed.** At Advanced on the iPhone with a hardware keyboard, the floating accent row
+  covers the field's lower half and Check, as Konjugieren saw; Return checks. The chips were made
+  compact after the first look, when they filled the screen.
+- **For Josh to judge:** the name in the title row; the repair lines; "il/elle" on the chips; the
+  red irregular letters in the prompt, which hint at irregularity; whether Advanced's nineteen
+  chips are too many on a phone; and the gap between the prompt and the chips, which is the
+  feedback slot waiting for a line.
 
 ## Phase 18: Sentences with a Blank
 

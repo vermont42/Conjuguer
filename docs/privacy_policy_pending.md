@@ -756,3 +756,34 @@ Le point sur la durée d'un quiz devient :
 ```
 - La durée approximative d'un quiz lorsque vous le terminez ou l'abandonnez (moins de 3 secondes, de 3 à 15 secondes, de 15 à 40 secondes, de 40 secondes à 2 minutes, ou davantage) et le nombre de questions atteint lorsque vous le terminez (10, ou 20 et plus si vous avez demandé dix questions de plus ; 15 par série dans « L'essentiel du verbe » ; jusqu'à 15 par série dans l'exercice d'un modèle seul), sauf en révision, pour revoir vos erreurs ou dans l'exercice d'un modèle mélangé
 ```
+
+## Name the Conjugation (pedagogy plan, Phase 17, 2026-11-23)
+
+The Quiz tab gains Name the Conjugation, an exercise that shows a conjugation and asks for its
+infinitive, tense, and person. The quiz signals send a new `source` value, `recognition`. Its rounds
+are ten questions, and `quizCompletion` sends their count as the default quiz does. Its answers are
+recorded nowhere, not even in the practice record on the device, and nothing is posted to Game
+Center. This section replaces the quiz bullets that the section on model practice gives, so apply
+it after that one.
+
+### English
+
+The bullet on quiz lifecycle events now reads:
+
+```
+- Quiz lifecycle events (starting, quitting, or completing a quiz), and where the quiz began: the Quiz tab, over every verb, over My Verbs, over a custom choice, as a review of what is due, as practice of your mistakes, or as the Verb Essentials or Name the Conjugation exercise, a verb's page, a collection, a practice set opened from a shared link or a QR code, or the practice of a conjugation model, alone or mixed with models you know, with which collection for the four featured ones (a model's collection, or a model's practice, is named only as a model); for a custom quiz or a practice set, whether it chose tenses, verbs, or both, but not which
+```
+
+The bullet on how long a quiz lasted is unchanged: Name the Conjugation's rounds are 10 questions,
+which it already covers.
+
+### French
+
+Le point sur les événements du cycle de vie d'un quiz devient :
+
+```
+- Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes, sur « Mes verbes », sur mesure, en révision de ce qui est à revoir, pour revoir vos erreurs ou dans l'exercice « L'essentiel du verbe » ou « Identifier la forme verbale », la page d'un verbe, une collection, une série d'exercices ouverte depuis un lien partagé ou un code QR, ou l'exercice d'un modèle de conjugaison, seul ou mélangé aux modèles que vous connaissez, avec le nom de la collection pour les quatre collections mises en avant (la collection d'un modèle, ou l'exercice d'un modèle, est désigné seulement comme celui d'un modèle) ; pour un quiz sur mesure ou une série d'exercices, s'il porte sur des temps, des verbes ou les deux, mais pas lesquels
+```
+
+Le point sur la durée d'un quiz ne change pas : les séries d'« Identifier la forme verbale » comptent
+10 questions, ce qu'il couvre déjà.

@@ -1356,6 +1356,80 @@ enum L {
     }
   }
 
+  enum Recognition {
+    static var title: String {
+      String(localized: "Recognition.title")
+    }
+
+    static var description: String {
+      String(localized: "Recognition.description")
+    }
+
+    static var startHint: String {
+      String(localized: "Recognition.startHint")
+    }
+
+    static var promptHeading: String {
+      String(localized: "Recognition.promptHeading")
+    }
+
+    static var promptWithColon: String {
+      String(localized: "Recognition.promptWithColon")
+    }
+
+    static var tenseHeading: String {
+      String(localized: "Recognition.tenseHeading")
+    }
+
+    static var personHeading: String {
+      String(localized: "Recognition.personHeading")
+    }
+
+    static var infinitive: String {
+      String(localized: "Recognition.infinitive")
+    }
+
+    static var check: String {
+      String(localized: "Recognition.check")
+    }
+
+    static var checkHint: String {
+      String(localized: "Recognition.checkHint")
+    }
+
+    static var fieldHint: String {
+      String(localized: "Recognition.fieldHint")
+    }
+
+    static var incomplete: String {
+      String(localized: "Recognition.incomplete")
+    }
+
+    static var checkInfinitive: String {
+      String(localized: "Recognition.checkInfinitive")
+    }
+
+    static var checkTense: String {
+      String(localized: "Recognition.checkTense")
+    }
+
+    static var checkPerson: String {
+      String(localized: "Recognition.checkPerson")
+    }
+
+    static var checkInfinitiveAndTense: String {
+      String(localized: "Recognition.checkInfinitiveAndTense")
+    }
+
+    static var checkInfinitiveAndPerson: String {
+      String(localized: "Recognition.checkInfinitiveAndPerson")
+    }
+
+    static var checkTenseAndPerson: String {
+      String(localized: "Recognition.checkTenseAndPerson")
+    }
+  }
+
   enum VerbEssentials {
     static var title: String {
       String(localized: "VerbEssentials.title")

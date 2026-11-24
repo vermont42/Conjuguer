@@ -6169,3 +6169,60 @@ a future caller cannot skip the rule by accident. A quiz result keeps the gender
 asked in, since the results list is drawn after the verb is out of reach.
 
 The suite went from 784 to 789 tests.
+
+## Reading Backward: Name the Conjugation (2026-11-23)
+
+Phase 17 of the pedagogy plan ports Konjugieren's recognition exercise. Every other exercise in
+Conjuguer runs one way: here is a verb and a cell, produce the conjugation. A reader goes the other
+way. They meet fûmes on a page and need to know it is être, passé simple, nous. Practice tends to
+transfer in the direction it was practiced, so the exercise shows a conjugation and asks for the
+infinitive, typed, and the tense and person, chosen from chips so that nobody is tested on spelling
+"subjonctif plus-que-parfait". Josh named it "Identifier la forme verbale", the wording of a French
+worksheet. In English it keeps Konjugieren's "Name the Conjugation".
+
+### The hard part is that French forms repeat
+
+A bare conjugation is often several things. Suis is être's je présent and also suivre's je and tu
+présent and its tu impératif. Vis is vivre or voir. Parle fills five cells of parler. Fait is a
+participle and also il fait. Konjugieren faced the same question and decided to accept every
+right reading and to avoid no prompt, since telling apart what a form can be is the skill itself.
+Conjuguer follows. The bundled conjugation map, built for reverse search, names the verbs to try
+for each word of the prompt. Each verb's cells in the level's tenses are then conjugated and
+compared, in both genders, so that est allée and est allé both count as aller's passé composé.
+
+Pronominal verbs needed a decision of their own. The conjugator writes souviens for se souvenir's
+je présent and leaves the frame to add "je me". A bare souviens is something no French text
+prints, so Josh chose to show the reflexive pronoun as French writes it: me souviens, s'est
+souvenue, souviens-toi. That gives away part of the person, as it would for any reader. The
+impératif passé of a pronominal verb has no written form at all, so the draw asks its passé composé
+instead.
+
+### Grading in parts
+
+An answer has three parts, and Konjugieren's rule carries over intact: a part is wrong only if
+changing it could make the answer right. So être · indicatif présent · tu for suis is told "Check
+the person", and suivre · passé simple · je is told "Check the tense". A suivre answer is graded
+against suivre's own cells, because the learner typed suivre. If any part is right, the learner
+gets one more try at half points, with that line. If nothing is right, the correction appears at
+once and lists every reading, one line per verb and tense, persons together.
+
+Recognition answers are not recorded in the practice record. The Conjuguer plan had said they
+would be, but it was written before Josh's Konjugieren answer. Asked again, he kept that answer:
+recognizing fûmes does not show that you could produce it.
+
+### What the simulator showed
+
+The first look at Advanced was nineteen fat chips that filled the iPhone, with the field pushed
+under the floating accent row. Smaller type and tighter padding gave back about a third of the
+height. At Intermediate's eleven chips, everything now fits above the key row. At Advanced, Check
+still sits under that row when a hardware keyboard is attached, which Konjugieren also saw, and
+Return checks the answer. A clumsy tap on the field landed on the î key and typed "îetre". The
+grade answered "Vérifiez l'infinitif." That was the right response, and it was a better test than
+the one planned.
+
+Building a round's prompts first took about a quarter second on this Intel Mac, because every
+candidate verb's compound tenses were conjugated twice, once per gender. A cheap filter fixed most
+of it: a compound cell ends in the verb's participle, so a verb whose participle is not the
+prompt's last word skips its compound tenses altogether.
+
+The suite went from 789 to 807 tests. The session ended with Josh still to try the exercise.

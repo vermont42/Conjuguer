@@ -517,6 +517,7 @@ same.
 | `mistakes` | Yes | The quiz signals only: Practice My Mistakes, from the Quiz tab (§ Review and My Mistakes) |
 | `verbEssentials` | Yes | The quiz signals only: Verb Essentials, from the Quiz tab (§ Verb Essentials) |
 | `modelAlone`, `modelMixed` | Yes | The quiz signals only: a model's practice, alone or mixed, from its page or the hub's list (§ Model Practice) |
+| `recognition` | Yes | The quiz signals only: Name the Conjugation, from the Quiz tab (§ Name the Conjugation) |
 
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
 a bare `Verb`, and the cells a search matched (`marks`). A link carries `source` as a query item
@@ -1406,9 +1407,10 @@ and how the last quiz went. From the top:
   (`quiz_last_result`), absent until a quiz has finished: "All Verbs · Elementary · today", then
   "Correct: 7 / 10 · Second Try: 1 · Score: 75".
 - **Exercises** (`quiz_exercises`): ways to practice beside the quiz, each a row like Review's
-  (`QuizHubRow`): Verb Essentials (`quiz_verb_essentials_button`), which starts at once, and
-  Conjugation Models (`quiz_model_practice_button`), whose chevron says it pushes the list of models
-  (§ Model Practice).
+  (`QuizHubRow`): Verb Essentials (`quiz_verb_essentials_button`) and Name the Conjugation
+  (`quiz_recognition_button`), which start at once, and Conjugation Models
+  (`quiz_model_practice_button`), whose chevron says it pushes the list of models (§ Model
+  Practice).
 - **The foot**: the level's best score, when there is one, and a small View Leaderboard button
   (`quiz_leaderboard_button`), shown only while signed in to Game Center, which opens the current
   level's board and sends `tapViewLeaderboard` with `source` `tab`. Competing is beside the point
@@ -1418,7 +1420,7 @@ and how the last quiz went. From the top:
 the session so far, by every scope, Test Me's three questions included. A quit quiz writes
 nothing, since its results were never shown. It keeps a kind (`allVerbs`, `myVerbs`, `verbPage`,
 `collection`, `custom`, `practiceSet`, `review`, `mistakes`, `verbEssentials`, `modelAlone`,
-`modelMixed`) and a verb's `dictionaryKey`, a collection's key, or a practiced model's id rather
+`modelMixed`, `recognition`) and a verb's `dictionaryKey`, a collection's key, or a practiced model's id rather
 than a title, so that it reads in the current language. Review, My Mistakes, and a model's
 practice keep no level. `PracticeStore` keeps it as JSON under `lastQuizResult` in the App Group's
 defaults, beside the record, on the device and never sent; Reset Practice forgets it, and the
@@ -1507,11 +1509,65 @@ voir), each expanding onto the same card. The practice runs in a `QuizSheet` ove
   `model_practice_alone_button`, `model_practice_mixed_button`, `model_practice_mixed_note`,
   `model_practice_known`, and `model_practice_absence_note`.
 
+### Name the Conjugation
+
+The quiz shows a conjugation, such as fûmes, and the learner types its infinitive and chooses its
+tense and person from chips, since typing their names would test the metalanguage. "Identifier la
+forme verbale" in French, after the classroom's exercise (Josh, 2026-11-23). It is the direction a
+reader needs; the default quiz stays production practice.
+
+- **The prompt** (`RecognitionQuestion`) is the conjugation as the conjugator writes it, irregular
+  letters in red, with no subject pronoun. A pronominal verb keeps its reflexive pronoun as French
+  writes it (me souviens, s'est souvenue, souviens-toi, se souvenant), so the pronoun narrows the
+  person as it would for a reader; its impératif passé, which no text writes, is asked as its passé
+  composé. A compound tense of an être verb follows the pronoun-gender setting (est allée).
+- **Every right reading is accepted, and no prompt is avoided** (`RecognitionQuestion.cells`). The
+  conjugation map names the verbs to try, by each word of the prompt, and each verb's cells of the
+  offered tenses are conjugated in both genders and compared: suis is être's je présent and
+  suivre's je and tu présent and tu impératif; vis is vivre's or voir's; parle is five cells of
+  parler; fait is the participe passé or the il présent. Only the level's tenses count, since the
+  learner cannot choose any other.
+- **The infinitive** is graded as typed, case and spacing aside, with or without a pronominal
+  verb's se (se souvenir, s'absenter, souvenir), and in its 1990 rectification (connaitre), after
+  which the traditional spelling shows beside the check, as for a rectified conjugation.
+- **The grade** (`RecognitionQuestion.grade`) is judged against the typed verb's cells when the
+  infinitive is right, and against every cell otherwise, and calls a part wrong only when changing
+  it can make the answer right. An answer with any part right earns one more try at half points,
+  with a line naming what to check ("Check the tense." / "Vérifiez le temps."); an answer with
+  nothing right goes straight to the correction. A participle has no person to judge.
+- **The correction** shows the answer part by part, wrong parts in red and struck through, and
+  every right answer, one line per infinitive and tense with the persons together ("parler ·
+  indicatif présent · je, il/elle"). The results show the prompt above each row.
+- **Not recorded.** Recognizing fûmes is not evidence of producing it, so an answer moves nothing
+  in the practice record (Josh, 2026-11-23), and Review and My Mistakes never see it.
+- **Rounds.** The default quiz's draw from the level's tenses and band, without due items: ten a
+  round, Ten More, a re-ask three questions on. Never ranked, no `ChangeLevelTip`. The results and
+  the last result name the level. The title row and the Live Activity read "Name the Conjugation".
+- **The screen.** The prompt, then the feedback slot, the tense chips in the verb page's order,
+  the person chips once a personal tense is chosen (three for the impératif, none for a
+  participle), the infinitive's field, and Check, enabled once all three are given. Return checks
+  too, and with a part missing it keeps the keyboard and VoiceOver says what to give. The chips are
+  compact, since Advanced offers nineteen; with a hardware keyboard on the iPhone the floating
+  accent row still covers Check at Advanced, so Return is the way there.
+- **VoiceOver.** The question speaks its prompt ("Conjugation: fûmes"), not a verb and gloss. The
+  chips are buttons with the selected trait under headers, the field reads "Infinitive", and the
+  correction reads "Incorrect. Your Answer: aller, futur simple, ils/elles. Correct Answer: vivre,
+  indicatif présent, je, tu; …".
+- **The fixture.** `-CONJUGUER_QUIZ_FIXTURE recognition`, used once Name the Conjugation starts,
+  offers Advanced's tenses for fûmes, suis, vis, parle, fait, est allée (or est allé), me souviens,
+  souviens-toi, finissons, and avions pris. Answers worth trying: `etre` · passé simple · nous for
+  fûmes (check the infinitive), être · indicatif présent · tu for suis (check the person), suivre ·
+  passé simple · je for suis (check the tense), aller · futur simple · ils/elles for vis (nothing
+  right, so the correction at once), and faire · participe passé for fait (right, with no person).
+- **Identifiers.** `quiz_recognition_button`, `recognition_prompt`, `recognition_tense_<slot>`
+  (`recognition_tense_passéSimple`), `recognition_person_<fs|ss|ts|fp|sp|tp>`, and
+  `recognition_check_button`.
+
 ### Signals
 
 `quizStart` (`level`, `source`), `quizQuit` (`level`, `lastQuestionIndex`, `duration`, `source`),
 `quizCompletion` (`level`, `questionCount`, `duration`, `source`), and `quizAbandon` (`level`,
-`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, `verbEssentials`, `modelAlone`, or `modelMixed`, so a
+`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, `verbEssentials`, `modelAlone`, `modelMixed`, or `recognition`, so a
 three-question quiz does not inflate the ten-question quiz's completion rate.
 
 - **No signal carries a score or a count of right or wrong answers.** `lastQuestionIndex` is the

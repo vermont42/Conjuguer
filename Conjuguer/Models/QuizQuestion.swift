@@ -13,12 +13,15 @@ struct QuizQuestion {
   /// The questions shown together on one screen, such as a verb's three key conjugations in Verb
   /// Essentials, share a step. Nil for a question shown alone.
   var stepID: UUID?
+  /// Set for a Name the Conjugation question, whose prompt is a conjugation of `tense` and whose
+  /// answer is a verb and a cell rather than a conjugation.
+  var recognition: RecognitionQuestion?
 
   var reasked: QuizQuestion {
     reasked(stepID: nil)
   }
 
   func reasked(stepID: UUID?) -> QuizQuestion {
-    QuizQuestion(verb: verb, tense: tense, isReask: true, stepID: stepID)
+    QuizQuestion(verb: verb, tense: tense, isReask: true, stepID: stepID, recognition: recognition)
   }
 }

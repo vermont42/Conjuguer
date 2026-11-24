@@ -75,6 +75,7 @@ enum AnalyticsSource: String, CaseIterable {
   case quickAction
   case quizCorrection
   case recent
+  case recognition
   case related
   case resume
   case review

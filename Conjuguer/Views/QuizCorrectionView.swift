@@ -37,8 +37,23 @@ struct QuizCorrectionView: View {
   var body: some View {
     VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
       VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
-        answerRow(label: L.QuizView.yourAnswer, text: Self.givenText(difference))
-        answerRow(label: L.QuizView.correctAnswer, text: Self.expectedText(difference))
+        if let recognition = question.recognition, let answer = correction.recognitionAnswer {
+          answerRow(label: L.QuizView.yourAnswer, text: recognitionGivenText(answer))
+          VStack(alignment: .leading, spacing: 2) {
+            Text(L.QuizView.correctAnswer)
+              .smallLabel()
+            ForEach(recognition.answerLines, id: \.self) { line in
+              Text(verbatim: line)
+                .font(bodyEmphasisFont)
+                .foregroundStyle(Color.customBlue)
+                .fixedSize(horizontal: false, vertical: true)
+                .frenchPronunciation()
+            }
+          }
+        } else {
+          answerRow(label: L.QuizView.yourAnswer, text: Self.givenText(difference))
+          answerRow(label: L.QuizView.correctAnswer, text: Self.expectedText(difference))
+        }
 
         if let diagnosis = correction.diagnosis {
           Label(diagnosis.line, systemImage: "lightbulb.fill")
@@ -134,6 +149,14 @@ struct QuizCorrectionView: View {
   /// will come up again.", with the diagnosis, if any, after the letters. The letters are named
   /// only while there are few enough to help.
   private var spokenCorrection: String {
+    if let recognition = question.recognition, let answer = correction.recognitionAnswer {
+      let expected = recognition.answerLines.map { $0.replacingOccurrences(of: " · ", with: ", ") }.joined(separator: "; ")
+      var spoken = "\(L.QuizView.incorrect) \(L.QuizView.yourAnswer) \(answer.summary.replacingOccurrences(of: " · ", with: ", ")). \(L.QuizView.correctAnswer) \(expected)."
+      if correction.willBeReasked {
+        spoken += " " + L.QuizView.willBeAskedAgain
+      }
+      return spoken
+    }
     let given = difference.given.isEmpty ? L.QuizView.none : difference.given
     var spoken = "\(L.QuizView.incorrect) \(L.QuizView.yourAnswer) \(given). \(L.QuizView.correctAnswer) \(difference.expected.lowercased())."
     let letters = difference.expectedMarkedLetters
@@ -149,6 +172,37 @@ struct QuizCorrectionView: View {
     return spoken
   }
 
+  /// A recognition answer part by part: the infinitive, then the tense and the person, each in red
+  /// where the grade found it wrong. A wrong infinitive is red throughout, since one that lacks
+  /// letters, as venir lacks revenir's, has nothing of its own to mark.
+  private func recognitionGivenText(_ answer: RecognitionAnswer) -> Text {
+    let wrong = correction.recognitionGrade?.wrongParts ?? Set(RecognitionPart.allCases)
+    var result = AttributedString()
+    if wrong.contains(.infinitive) {
+      var infinitive = Self.givenAttributedText(difference)
+      infinitive.foregroundColor = Color.customRed
+      result.append(infinitive)
+    } else {
+      var infinitive = AttributedString(AnswerSpelling.normalized(answer.infinitif))
+      infinitive.foregroundColor = Color.customForeground
+      result.append(infinitive)
+    }
+    let parts: [(String, RecognitionPart)] = [(answer.slot.recognitionName, .tense)]
+      + (answer.personNumber.map { [(RecognitionQuestion.personLabel($0), .person)] } ?? [])
+    for (text, part) in parts {
+      var separator = AttributedString(" · ")
+      separator.foregroundColor = Color.customGray
+      result.append(separator)
+      var piece = AttributedString(text)
+      piece.foregroundColor = wrong.contains(part) ? Color.customRed : Color.customForeground
+      if wrong.contains(part) {
+        piece.strikethroughStyle = Text.LineStyle(pattern: .solid, color: .customRed)
+      }
+      result.append(piece)
+    }
+    return Text(result)
+  }
+
   // The red letters of a conjugation mark its irregularity, so a difference is shown another
   // way: a tinted background, struck through in the learner's answer and underlined in the right
   // one.
@@ -156,6 +210,10 @@ struct QuizCorrectionView: View {
     guard !difference.given.isEmpty else {
       return Text(verbatim: "—").foregroundStyle(Color.customGray)
     }
+    return Text(givenAttributedText(difference))
+  }
+
+  private static func givenAttributedText(_ difference: AnswerDifference) -> AttributedString {
     var result = AttributedString()
     for (character, isMarked) in zip(Array(difference.given), difference.givenMarks) {
       var part = AttributedString(String(character))
@@ -167,7 +225,7 @@ struct QuizCorrectionView: View {
       }
       result.append(part)
     }
-    return Text(result)
+    return result
   }
 
   static func expectedText(_ difference: AnswerDifference) -> Text {

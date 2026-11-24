@@ -34,6 +34,7 @@ class Quiz {
   private(set) var firstAttempt: String?
   /// What was wrong with `firstAttempt`, nil for a slip.
   private(set) var firstAttemptDiagnosis: AnswerDiagnosis?
+  private(set) var firstAttemptRecognition: RecognitionGrade?
 
   private(set) var roundCount = 0
   private var roundFirstResultIndex = 0
@@ -50,6 +51,9 @@ class Quiz {
 
   /// The request for one more try: the diagnosis's line, or "Almost!" for a slip.
   var secondAttemptPrompt: String {
+    if let firstAttemptRecognition {
+      return firstAttemptRecognition.line + " " + L.QuizView.tryOnceMore
+    }
     guard let firstAttemptDiagnosis else {
       return L.QuizView.almost
     }
@@ -188,6 +192,7 @@ class Quiz {
     correction = nil
     firstAttempt = nil
     firstAttemptDiagnosis = nil
+    firstAttemptRecognition = nil
     quizState = .inProgress
     announcePublishedProperties()
     startLiveActivity()
@@ -257,6 +262,7 @@ class Quiz {
     correction = nil
     firstAttempt = nil
     firstAttemptDiagnosis = nil
+    firstAttemptRecognition = nil
     endLiveActivity()
     QuizAbandonment.clear(id: abandonmentID, getterSetter: Current.getterSetter)
   }
@@ -334,6 +340,7 @@ class Quiz {
     correction = nil
     firstAttempt = nil
     firstAttemptDiagnosis = nil
+    firstAttemptRecognition = nil
     shouldShowResults = false
   }
 
@@ -356,6 +363,10 @@ class Quiz {
         using: &generator
       )
       .flatMap { $0 }
+    }
+
+    if scope.isRecognition {
+      return recognitionQuestions()
     }
 
     if scope.verbs != nil {
@@ -387,6 +398,20 @@ class Quiz {
     let drawn = QuizDraw.questions(slots: slots, band: band, count: scope.questionCount - due.count, asked: asked, using: &generator)
       .map(question(of:))
     return QuizDraw.mixing(due, into: drawn, using: &generator)
+  }
+
+  /// The default quiz's draw from the level's tenses and band, with no due items, so that the
+  /// prompts are the conjugations the learner is asked to produce at the level.
+  private func recognitionQuestions() -> [QuizQuestion] {
+    #if DEBUG
+    if UserDefaults.standard.string(forKey: "CONJUGUER_QUIZ_FIXTURE") == "recognition" {
+      return generateRecognitionFixture()
+    }
+    #endif
+    let slots = scope.slots(at: level)
+    return QuizDraw.questions(slots: slots, band: scope.band(at: level), count: scope.questionCount, asked: Set(questions.map(\.verb.id)), using: &generator)
+      .map(question(of:))
+      .map { QuizQuestion.recognizing($0, slots: slots) }
   }
 
   #if DEBUG
@@ -604,6 +629,30 @@ class Quiz {
     }
   }
 
+  // Ten prompts for Name the Conjugation, used only once it is started, each offered every tense
+  // of Advanced, most with more than one right answer: fûmes (être alone), suis (être's je, or
+  // suivre's je, tu, and impératif), vis (vivre's or voir's), parle (five cells of parler), fait
+  // (the participe passé or the présent), est allée or est allé (the setting's gender), me
+  // souviens, souviens-toi, finissons (the présent or the impératif), and avions pris. The answers
+  // worth trying are listed in docs/feature_architecture.md § Name the Conjugation.
+  private func generateRecognitionFixture() -> [QuizQuestion] {
+    let plan: [(infinitif: String, tense: Tense)] = [
+      ("être", .passéSimple(.firstPlural)),
+      ("suivre", .indicatifPrésent(.firstSingular)),
+      ("vivre", .indicatifPrésent(.firstSingular)),
+      ("parler", .subjonctifPrésent(.thirdSingular)),
+      ("faire", .participePassé),
+      ("aller", .passéComposé(.thirdSingular)),
+      ("souvenir", .indicatifPrésent(.firstSingular)),
+      ("souvenir", .impératif(.secondSingular)),
+      ("finir", .indicatifPrésent(.firstPlural)),
+      ("prendre", .plusQueParfait(.firstPlural))
+    ]
+    return plan.map { spec in
+      QuizQuestion.recognizing(QuizQuestion(verb: Verb.verbForInfinitif(spec.infinitif), tense: spec.tense), slots: QuizLevel.advanced.slots)
+    }
+  }
+
   // Write the correct answers for the fixture to Documents/screenshot_fixture_answers.json
   // so the driver can read and type them. The exported answer is the first of any
   // slash-separated alternates, which the quiz scores as a total match.
@@ -690,22 +739,11 @@ class Quiz {
       isReask: question.isReask,
       pronounGender: verb.pronounGender
     )
-    score += result.points
-    quizResults.append(result)
     // Each final answer goes into the practice record as it is given, so that a quiz quit after
     // six questions has still practiced six. A slip's right second attempt counts as right.
     Current.practice.recordAnswer(verb: verb, tense: tense, isCorrect: conjugationResult != .noMatch, at: now())
-    firstAttempt = nil
-    firstAttemptDiagnosis = nil
-    if conjugationResult == .noMatch {
-      // A re-ask is not asked a third time, whatever its answer, so that one stubborn question
-      // cannot fill a round.
-      let willBeReasked = !question.isReask
-      if willBeReasked {
-        let placement = Self.reaskPlacement(of: currentQuestionIndex, in: questions)
-        questions.insert(question.reasked(stepID: placement.stepID), at: placement.position)
-      }
-      correction = QuizCorrection(
+    finish(result) { willBeReasked in
+      QuizCorrection(
         difference: AnswerDifference.nearest(
           answer: proposedAnswer,
           correctAnswers: correctAnswers,
@@ -715,9 +753,81 @@ class Quiz {
         diagnosis: diagnosis,
         willBeReasked: willBeReasked
       )
-    } else {
-      advance()
     }
+  }
+
+  /// A Name the Conjugation answer. An answer with any part right earns one more try at half
+  /// points, its line saying which parts to check; otherwise it goes to the correction, which
+  /// lists every right answer. Recognizing fûmes is not evidence of producing it, so the answer
+  /// moves nothing in the practice record.
+  func submitRecognition(_ answer: RecognitionAnswer) {
+    guard
+      quizState == .inProgress,
+      correction == nil,
+      currentQuestionIndex < questions.count,
+      let recognition = questions[currentQuestionIndex].recognition
+    else {
+      return
+    }
+    let question = questions[currentQuestionIndex]
+    let grade = recognition.grade(answer)
+    let isSecondAttempt = firstAttempt != nil
+    if grade.earnsSecondAttempt, !isSecondAttempt {
+      firstAttempt = answer.summary
+      firstAttemptRecognition = grade
+      Current.soundPlayer.play(.chirp)
+      announceSecondAttempt()
+      return
+    }
+
+    let conjugationResult: ConjugationResult = grade.isCorrect ? (isSecondAttempt ? .secondAttemptMatch : .totalMatch) : .noMatch
+    if conjugationResult == .noMatch || currentQuestionIndex != questions.count - 1 {
+      Current.soundPlayer.play(conjugationResult.sound)
+    }
+    let result = QuizResult(
+      infinitif: question.verb.infinitifWithPossibleExtraLetters,
+      tense: question.tense,
+      conjugationResult: conjugationResult,
+      correctAnswer: recognition.answerLines.joined(separator: "\n"),
+      actualAnswer: answer.summary,
+      shownSpelling: grade.isCorrect ? recognition.preferredSpelling(of: answer.infinitif) : nil,
+      firstAttempt: firstAttempt,
+      isReask: question.isReask,
+      pronounGender: question.verb.pronounGender,
+      recognitionPrompt: recognition.prompt
+    )
+    finish(result) { willBeReasked in
+      QuizCorrection(
+        difference: AnswerDifference.between(
+          given: AnswerSpelling.normalized(answer.infinitif),
+          expected: recognition.nearestInfinitive(to: answer.infinitif)
+        ),
+        willBeReasked: willBeReasked,
+        recognitionAnswer: answer,
+        recognitionGrade: grade
+      )
+    }
+  }
+
+  private func finish(_ result: QuizResult, correction makeCorrection: (_ willBeReasked: Bool) -> QuizCorrection) {
+    let question = questions[currentQuestionIndex]
+    score += result.points
+    quizResults.append(result)
+    firstAttempt = nil
+    firstAttemptDiagnosis = nil
+    firstAttemptRecognition = nil
+    guard result.conjugationResult == .noMatch else {
+      advance()
+      return
+    }
+    // A re-ask is not asked a third time, whatever its answer, so that one stubborn question
+    // cannot fill a round.
+    let willBeReasked = !question.isReask
+    if willBeReasked {
+      let placement = Self.reaskPlacement(of: currentQuestionIndex, in: questions)
+      questions.insert(question.reasked(stepID: placement.stepID), at: placement.position)
+    }
+    correction = makeCorrection(willBeReasked)
   }
 
   func continueAfterCorrection() {
@@ -805,6 +915,14 @@ class Quiz {
         if question.isReask {
           Utterer.utter(L.QuizView.askedAgain, localeString: currentLocaleString)
         }
+        // A recognition question speaks its prompt alone, since the verb and the cell are what it
+        // asks for.
+        if let recognition = question.recognition {
+          Utterer.utter(L.Recognition.promptWithColon, localeString: currentLocaleString)
+          Utterer.utter(recognition.prompt.lowercased(), localeString: Utterer.frenchLocaleString)
+          announceProgress(localeString: currentLocaleString)
+          return
+        }
         Utterer.utter(L.QuizView.verbWithColon, localeString: currentLocaleString)
         Utterer.utter(question.verb.infinitif, localeString: Utterer.frenchLocaleString)
         Utterer.utter(L.QuizView.translationWithColon, localeString: currentLocaleString)
@@ -816,13 +934,17 @@ class Quiz {
         }
         Utterer.utter(L.QuizView.tenseWithColon, localeString: currentLocaleString)
         Utterer.utter(question.tense.titleCaseName, localeString: Utterer.frenchLocaleString)
-        Utterer.utter(L.QuizView.progressWithColon, localeString: currentLocaleString)
-        Utterer.utter(L.QuizView.progress(currentQuestionIndex + 1, of: questions.count), localeString: currentLocaleString)
-        Utterer.utter(L.QuizView.score(score), localeString: currentLocaleString)
-        if showsClock {
-          Utterer.utter(L.QuizView.elapsed(seconds: elapsedTime), localeString: currentLocaleString)
-        }
+        announceProgress(localeString: currentLocaleString)
       }
+    }
+  }
+
+  private func announceProgress(localeString: String) {
+    Utterer.utter(L.QuizView.progressWithColon, localeString: localeString)
+    Utterer.utter(L.QuizView.progress(currentQuestionIndex + 1, of: questions.count), localeString: localeString)
+    Utterer.utter(L.QuizView.score(score), localeString: localeString)
+    if showsClock {
+      Utterer.utter(L.QuizView.elapsed(seconds: elapsedTime), localeString: localeString)
     }
   }
 }
@@ -839,10 +961,13 @@ private extension Tense {
 }
 
 struct QuizCorrection: Equatable {
+  /// For a recognition question, the typed infinitive against the nearest right one.
   let difference: AnswerDifference
   /// What was wrong with the final answer, which may differ from the first attempt's.
   var diagnosis: AnswerDiagnosis?
   var willBeReasked = false
+  var recognitionAnswer: RecognitionAnswer?
+  var recognitionGrade: RecognitionGrade?
 }
 
 private struct QuizRandomNumberGenerator: RandomNumberGenerator {
