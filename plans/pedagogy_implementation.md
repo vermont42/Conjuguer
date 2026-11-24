@@ -36,7 +36,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 10 | Done | 2026-11-23 | 33da4be | T2.9, Decision 8 | 10 |
 | 11 | Done | 2026-11-23 | 915be1c | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
 | 12 | Done | 2026-11-23 | 2bc523b | T3.2, T3.3 (the session) | 12 |
-| 13 | Awaiting Josh | 2026-11-23 | | T6.1, T6.6 (the leaderboard's place) | 13 |
+| 13 | Done | 2026-11-23 | 249f7b9 | T6.1, T6.6 (the leaderboard's place) | 13 |
 | 14 | Not started | | | T4.2, T4.3 | 14 |
 | 15 | Not started | | | T5.1 | 15 |
 | 16 | Not started | | | T5.2 | 16 |
@@ -1543,7 +1543,7 @@ empty states.
 ## Phase 13: The Practice Hub
 
 **Suggestions:** T6.1, T6.6 (the leaderboard's place). **Ports:** Konjugieren Phase 13
-(`LastQuizResult.swift`). **Depends on:** Phases 7, 8, 11, and 12. **Status:** Awaiting Josh.
+(`LastQuizResult.swift`). **Depends on:** Phases 7, 8, 11, and 12. **Status:** Done.
 
 Turn the Quiz tab into a practice hub: what a session is, how long it takes, the current level,
 what is due for review, and the last result. Today's briefing card (a symbol, a paragraph, the
