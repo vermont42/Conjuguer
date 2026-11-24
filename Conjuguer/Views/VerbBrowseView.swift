@@ -296,7 +296,8 @@ struct VerbBrowseView: View {
     guard isSearching, searchMatches.indices.contains(index) else {
       return nil
     }
-    return searchMatches[index].conjugation?.line(pronounGender: world.settings.pronounGender)
+    let match = searchMatches[index]
+    return match.conjugation?.line(pronounGender: match.verb.pronounGender(for: world.settings.pronounGender))
   }
 
   private var listMode: VerbListMode {

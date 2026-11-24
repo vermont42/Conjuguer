@@ -1,6 +1,380 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "ModelPractice.alone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alone"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seul"
+          }
+        }
+      }
+    },
+    "ModelPractice.aloneCellsHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asks up to ten of the conjugations in which this model departs from its base"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demande jusqu’à dix des conjugaisons où ce modèle s’écarte de sa base"
+          }
+        }
+      }
+    },
+    "ModelPractice.aloneEssentialsHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asks three conjugations each of up to five of this model’s verbs"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demande trois conjugaisons d’au plus cinq verbes de ce modèle"
+          }
+        }
+      }
+    },
+    "ModelPractice.anotherRound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Another Round"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encore une série"
+          }
+        }
+      }
+    },
+    "ModelPractice.anotherRoundHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asks another round of this practice. The score carries on."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pose une autre série de cet exercice. Le score continue."
+          }
+        }
+      }
+    },
+    "ModelPractice.base" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every quiz asks this model’s conjugations, so it has no practice of its own."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chaque quiz demande les conjugaisons de ce modèle, qui n’a donc pas d’exercice à lui."
+          }
+        }
+      }
+    },
+    "ModelPractice.descriptionCells" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questions on the conjugations in which this model’s verbs depart from %@, which their pages mark in red."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des questions sur les conjugaisons où les verbes de ce modèle s’écartent de %@, que leurs pages marquent en rouge."
+          }
+        }
+      }
+    },
+    "ModelPractice.descriptionEssentialsAll" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verb Essentials with this model’s verbs."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’essentiel du verbe avec les verbes de ce modèle."
+          }
+        }
+      }
+    },
+    "ModelPractice.descriptionEssentialsFrequent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verb Essentials with this model’s ten most frequent verbs."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’essentiel du verbe avec les dix verbes les plus fréquents de ce modèle."
+          }
+        }
+      }
+    },
+    "ModelPractice.fewMarkedCells" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This model departs from %@ in too few conjugations for a practice of its own."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce modèle s’écarte de %@ en trop peu de conjugaisons pour avoir un exercice à lui."
+          }
+        }
+      }
+    },
+    "ModelPractice.heading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Practice This Model"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Travailler ce modèle"
+          }
+        }
+      }
+    },
+    "ModelPractice.hubDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One model alone, then mixed with the models you know"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un modèle seul, puis mélangé aux modèles que vous connaissez"
+          }
+        }
+      }
+    },
+    "ModelPractice.hubHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the conjugation models, each with its practice"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre les modèles de conjugaison, chacun avec son exercice"
+          }
+        }
+      }
+    },
+    "ModelPractice.known" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Known"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connu"
+          }
+        }
+      }
+    },
+    "ModelPractice.listIntro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pick a model and practice it alone, then mixed with the models you know. The most used come first."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez un modèle et travaillez-le seul, puis mélangé aux modèles que vous connaissez. Les plus employés viennent en premier."
+          }
+        }
+      }
+    },
+    "ModelPractice.mixed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mixed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mélangé"
+          }
+        }
+      }
+    },
+    "ModelPractice.mixedHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asks this model’s conjugations mixed with those of models you know"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demande les conjugaisons de ce modèle mélangées à celles des modèles que vous connaissez"
+          }
+        }
+      }
+    },
+    "ModelPractice.mixedLocked" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mixed opens once you know another model of this kind. You know a model once you have answered half of its practice right."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le mélange s’ouvre dès que vous connaissez un autre modèle de ce genre. Vous connaissez un modèle dès que vous avez bien répondu à la moitié de son exercice."
+          }
+        }
+      }
+    },
+    "ModelPractice.mixedTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mixed: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mélangé : %@"
+          }
+        }
+      }
+    },
+    "ModelPractice.mixedWith" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mixed adds verbs of the models you know: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le mélange ajoute des verbes des modèles que vous connaissez : %@"
+          }
+        }
+      }
+    },
+    "ModelPractice.singleVerb" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One verb is not a pattern, so this model has no practice of its own. Its verb joins other models’ mixed practice once you know it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un seul verbe ne fait pas un modèle, si bien que celui-ci n’a pas d’exercice à lui. Son verbe rejoint le mélange des autres modèles dès que vous le connaissez."
+          }
+        }
+      }
+    },
+    "ModelPractice.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conjugation Models"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modèles de conjugaison"
+          }
+        }
+      }
+    },
     "QuizView.exercises" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -31,7 +31,7 @@ struct FailedVerbSearchView: View {
             BrowseRow(
               title: guess.verb.infinitifWithPossibleExtraLetters,
               subtitle: guess.verb.translation,
-              detail: guess.conjugation?.line(pronounGender: pronounGender),
+              detail: guess.conjugation?.line(pronounGender: guess.verb.pronounGender(for: pronounGender)),
               badge: BrowseRow.Badge(text: "#\(guess.verb.frequency)", tint: .customBlue)
             )
             .card(accent: guessIsSelected ? .customRed : nil)

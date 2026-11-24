@@ -36,24 +36,30 @@ struct QuizScope {
 
   var isVerbEssentials = false
 
+  /// A model's practice, alone or mixed, which runs in a sheet over the model's page or the hub's
+  /// list of models.
+  var modelPractice: ModelPracticeSession?
+
   /// Only the default quiz posts to its level's leaderboard and sets its best score: a score over
   /// the learner's own verbs, tenses, or practice record, or over three questions, compares with
   /// nothing.
   var isRanked: Bool {
-    verbs == nil && custom == nil && recordSession == nil && !isVerbEssentials
+    verbs == nil && custom == nil && recordSession == nil && !isVerbEssentials && modelPractice == nil
   }
 
-  /// Review and My Mistakes ask whatever the record holds, beyond the level's tenses and band, so
-  /// their results name no level.
+  /// Review and My Mistakes ask whatever the record holds, beyond the level's tenses and band, and a
+  /// model's practice asks its ten most frequent verbs at every level, so their results name no
+  /// level.
   var asksByLevel: Bool {
-    recordSession == nil
+    recordSession == nil && modelPractice == nil
   }
 
   /// A Review or My Mistakes session shorter than ten is as long as the learner's due or missed
   /// items, so its signals carry neither the questions asked nor the question reached: either
-  /// would tell how many answers were wrong.
+  /// would tell how many answers were wrong. A mixed model practice's round is as long as the
+  /// known models allow, and which models are known comes from the learner's answers.
   var sendsQuestionCounts: Bool {
-    recordSession == nil
+    recordSession == nil && modelPractice?.mode != .mixed
   }
 
   /// Only the default quiz mixes in items the practice record says are due, up to
@@ -87,7 +93,7 @@ struct QuizScope {
   /// Whether the results offer Ten More, or for Verb Essentials five more verbs. Test Me's three
   /// questions are a check, not a session.
   var continues: Bool {
-    isVerbEssentials || questionCount == Quiz.questionCount
+    isVerbEssentials || modelPractice != nil || questionCount == Quiz.questionCount
   }
 
   var isVerbPage: Bool {

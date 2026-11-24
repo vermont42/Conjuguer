@@ -105,7 +105,7 @@ struct AnswerFrame: Equatable {
 
 extension QuizQuestion {
   var answerFrame: AnswerFrame {
-    let answer = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) ?? ""
-    return .quizFrame(for: tense, answer: answer, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH, pronounGender: Current.settings.pronounGender)
+    let answer = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters, pronounGender: verb.pronounGender) ?? ""
+    return .quizFrame(for: tense, answer: answer, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH, pronounGender: verb.pronounGender)
   }
 }

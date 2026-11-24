@@ -339,6 +339,10 @@ class Quiz {
 
   /// A round's questions, a fixture's in DEBUG, which Ten More repeats.
   private func drawQuestions() -> [QuizQuestion] {
+    if let session = scope.modelPractice {
+      return QuizDraw.modelPracticeQuestions(for: session, record: Current.practice.record, asked: questions, using: &generator)
+    }
+
     if scope.isVerbEssentials {
       #if DEBUG
       if UserDefaults.standard.string(forKey: "CONJUGUER_QUIZ_FIXTURE") == "essentials" {
@@ -647,7 +651,7 @@ class Quiz {
     let verb = question.verb
     let tense = question.tense
     let correctAnswers: String
-    if let answers = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) {
+    if let answers = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters, pronounGender: verb.pronounGender) {
       correctAnswers = answers
     } else {
       // Unreachable with today's data; degrade to an empty correct answer (scored as
@@ -658,7 +662,7 @@ class Quiz {
     let grade = ConjugationResult.grade(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense)
     let isSecondAttempt = firstAttempt != nil
     let diagnosis = grade.result == .noMatch
-      ? AnswerDiagnosis.diagnose(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense, pronounGender: Current.settings.pronounGender)
+      ? AnswerDiagnosis.diagnose(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense, pronounGender: verb.pronounGender)
       : nil
     // A diagnosis is checked before a slip, since it says more: suis allé for suis allée is one
     // letter off, and the agreement is what to fix.
@@ -683,7 +687,8 @@ class Quiz {
       actualAnswer: proposedAnswer,
       shownSpelling: grade.shownSpelling,
       firstAttempt: firstAttempt,
-      isReask: question.isReask
+      isReask: question.isReask,
+      pronounGender: verb.pronounGender
     )
     score += result.points
     quizResults.append(result)
@@ -805,9 +810,9 @@ class Quiz {
         Utterer.utter(L.QuizView.translationWithColon, localeString: currentLocaleString)
         Utterer.utter(question.verb.translation, localeString: Utterer.englishLocaleString)
         Utterer.utter(L.QuizView.pronounWithColon, localeString: currentLocaleString)
-        Utterer.utter(question.tense.pronoun, localeString: Utterer.frenchLocaleString)
+        Utterer.utter(question.tense.pronoun(pronounGender: question.verb.pronounGender), localeString: Utterer.frenchLocaleString)
         if question.tense.isCompound {
-          Utterer.utter(question.tense.gender, localeString: currentLocaleString)
+          Utterer.utter(question.tense.gender(pronounGender: question.verb.pronounGender), localeString: currentLocaleString)
         }
         Utterer.utter(L.QuizView.tenseWithColon, localeString: currentLocaleString)
         Utterer.utter(question.tense.titleCaseName, localeString: Utterer.frenchLocaleString)

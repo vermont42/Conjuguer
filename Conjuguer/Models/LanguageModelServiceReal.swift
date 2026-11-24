@@ -272,7 +272,7 @@ struct ConjugationTool: Tool {
       if imperatif {
         lines.append(personNumber.impératifAndPossibleReflexivePronoun(conjugation, isReflexive: verb.isReflexive).lowercased())
       } else {
-        let preamble = personNumber.preamble(forConjugation: conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+        let preamble = personNumber.preamble(forConjugation: conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH, pronounGender: verb.pronounGender)
         lines.append((preamble + conjugation).lowercased())
       }
     }

@@ -39,7 +39,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 13 | Done | 2026-11-23 | 249f7b9 | T6.1, T6.6 (the leaderboard's place) | 13 |
 | 14 | Done | 2026-11-23 | 9568bdd | T4.2, T4.3 | 14 |
 | 15 | Done | 2026-11-23 | 3966644 | T5.1 | 15 |
-| 16 | Not started | | | T5.2 | 16 |
+| 16 | Awaiting Josh | 2026-11-23 | | T5.2 | 16 |
 | 17 | Not started | | | T5.4 | 17 |
 | 18 | Not started | | | T5.5 | 18 |
 | 19 | Not started | | | T5.6 | 19 |
@@ -1871,7 +1871,7 @@ verb, a pronominal verb, and a verb with an irregular futur stem.
 
 **Suggestions:** T5.2. **Ports:** Konjugieren Phase 16 (`AblautPractice.swift`,
 `AblautPracticeCard.swift`, `AblautPracticeListView.swift`). **Depends on:** Phases 11 and 15.
-**Status:** Not started.
+**Status:** Awaiting Josh.
 
 Work through one model, then mix it with models already practiced, from the Models tab. Conjuguer's
 models are its counterpart of Konjugieren's ablaut groups: verbs that share a pattern of stems and
@@ -1890,6 +1890,102 @@ pattern (Phase 11), decide with Josh what solo practice asks.
 known and how the mix is drawn.
 
 **How it differed:**
+
+- **Asked of Josh (2026-11-23), before building: what a pattern model's practice asks.** The
+  **marked cells**, over "marked cells, bases too" and "irregular models only": a spelling-change
+  model (manger, lancer, appeler, jeter, peser, céder, protéger, employer, payer, envoyer,
+  dépecer, maudire) asks the cells that the practice record keeps as its own patterns (nous
+  mangeons, j'appelle, j'appellerai), each of one of its ten most frequent verbs, in rounds of up
+  to ten, unasked cells first. Parler's, finir's, and rendre's models have none, since every quiz
+  asks them, and neither does a model with fewer than five marked cells (rompre, foutre, férir,
+  ester, haïr's Québec model, ouïr). Each says why on its page.
+- **The mix's composition, the phase's Ask Josh (2026-11-23)**, asked once a venir round alone on
+  the simulator had made venir known and a prendre mix had run: **three of five verbs, or six of
+  ten questions, are the model's own**, as built and as Konjugieren chose, over two of five and
+  over an even share. `QuizDraw.modelMixOwnVerbCount` and `modelMixOwnCellCount`.
+- **Carried over from Konjugieren unasked**, each a guess Josh can overrule: a model is its **ten
+  most frequent verbs** at every level (venir's 29 would otherwise be 87 items); a key conjugation
+  or a marked cell counts once; Mixed opens once another model is known, whether or not this one
+  is; partners take turns one model at a time, and a short side leaves the rest to the other;
+  "Another Round" in place of a count; no level line; nothing ranked.
+- **Decided in the session.** (1) **The two kinds never mix.** A Verb Essentials model mixes only
+  with known Verb Essentials models (aller, être, pouvoir among them once known), and a
+  spelling-change model only with known spelling-change models (sevrer, rapiécer, fiche, haïr's
+  French model among them), since a step of three rows and a single question are different
+  exercises. (2) **The marked cells are the simple tenses without the passé simple and the
+  subjonctif imparfait**, as Verb Essentials asks no literary tense, so a Beginner is not asked
+  nous mangeâmes; a compound tense repeats its participle. Lancer has 11 cells, manger 7, céder 9,
+  appeler 21. (3) The test that every marked cell maps to its model's own pattern for every one of
+  the model's ten verbs passed for all fifteen spelling-change models, so the marks are a model's,
+  not a verb's.
+- **Where it starts**, as Konjugieren: a **Practice This Model** card ("Travailler ce modèle") on
+  each model's page, before Verbs Using This Model, and a **Conjugation Models** row ("Modèles de
+  conjugaison") in the hub's Exercises, with a chevron, pushing `ModelPracticeListView`: the 55
+  models with a practice alone, ordered by each model's most frequent verb (faire, devoir, voir,
+  dire, mettre, prendre), each with the model's irregularity line and a seal when known, expanding
+  onto the same card. `QuizHubRow`'s content became `QuizHubRowContent`, which the pushing row
+  shares. `isBeneathQuiz` already meant "a quiz is in progress", so Konjugieren's fix had no
+  counterpart.
+- **Buttons and titles:** "Alone" / "Seul", "Mixed" / "Mélangé", "Mixed: venir (6-7)" /
+  "Mélangé : venir (6-7)", "Another Round" / "Encore une série". Twenty-two `ModelPractice.*`
+  strings.
+- **The sessions** are `QuizScope.modelPractice(_:)` in a `QuizSheet`, with `collection` set to the
+  model's, so `quizStart` sends `collection` `model`, and no Live Activity starts. The results and
+  the hub's Last Quiz name the model and no level (`LastQuizResult.Kind.modelAlone`, `.modelMixed`,
+  the model's id as subject). Never ranked, no due items, no `ChangeLevelTip`.
+- **Analytics.** New `source` values `modelAlone` and `modelMixed`. **A mixed session sends no
+  counts**, since its length depends on which models are known. Staged in
+  [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md) in both languages.
+- **VoiceOver.** No new quiz state. The card's heading is a header, Alone and Mixed have hints
+  (Alone's says Verb Essentials' three conjugations or a spelling change's conjugations), a closed
+  Mixed reads as dimmed with its reason after it, and a known model's row reads "venir, (6-7),
+  Known, 48% Irregular". Not heard by ear.
+- **Tests:** 764 to 784, all passing through `run_tests.sh` (the iPhone simulator is in English).
+  `ModelPracticeTests`, 16 functions: each model's kind and whether it is practiced alone (16
+  cases), each absence (11), ten most frequent verbs, manger's seven cells, every marked cell its
+  model's own for every verb and never literary or compound, the list's order, known at half for
+  venir, aller, and manger, a wrong answer or a lookup not counting, partners of the same kind, a
+  round alone of five verbs and its second round's new ones, a spelling-change round asking each
+  cell once and its second round the rest, a mix of three and two one model at a time, a short
+  side, a spelling-change mix of six and four, turns, and the scopes and last result. Nested in
+  `QuizTests`, 4: venir alone becoming known and joining prendre's mix, a wrong manger round
+  leaving it unknown, a right one making it known, and Another Round with the signals, the last
+  result, and no score.
+- **Verified on the iPhone 17**, light. In French: the hub's Modèles de conjugaison row, the list,
+  venir's card with Mélangé open on aller (known from the install's record), two venir rounds alone
+  typed by a script that reads each question from the accessibility tree (150 and "Encore une
+  série", no level line), venir then Connu, and a prendre mix of comprendre, méprendre, prendre,
+  contenir, and aller with a re-ask step whose other rows were given. In English: manger's page
+  through `conjuguer://model/1-2B` with Mixed closed and its reason, a manger round of all seven
+  cells in which changais earned Phase 14's "Before a or o, changer keeps an e after the g" and a
+  repair (65, Another Round), the notes on parler's, aller's (with its Known seal), and rompre's
+  pages, and the hub's "manger (1-2B) · today". **On the iPad Pro 11** in English and dark: the hub
+  with the row, the list with prendre expanded, and a prendre round in its form sheet answering
+  reprend. Not tried: VoiceOver by ear, the software keyboard, a model un-knowing on the device
+  (unit-tested), Another Round on the device (unit-tested), and a real day passing.
+- **Seen, not changed.** (1) After the first venir round of 15 right answers venir was not known:
+  only 13 of its 30 items had climbed. venir's own passé composé and futur, answered earlier the
+  same day by Phase 15's fixture, were not yet due, and the ladder moves an item only when due.
+  A second round made it known. Konjugieren noted the same; the ladder is Josh's.
+- **Two older faults, fixed at Josh's request (2026-11-23).** (1) **écoconcevoir was filed under
+  voir's model (4-1A)** in `verbs.xml`, so voir's practice could ask "écoconcevoit". It is now
+  concevoir's (4-2B): écoconçoit, écoconçu. (2) **An impersonal verb followed the pronoun
+  setting** everywhere, so with the feminine default the quiz asked "elle faut" and the verb page
+  showed it. `Verb.isImpersonal` (defect groups 2, 22, and 23, which keep only the third-person
+  singular for apparoir, chaloir, the weather verbs, and falloir, and pleuvoir and repleuvoir by
+  name, since poindre shares pleuvoir's group and takes a real subject) makes
+  `Verb.pronounGender(for:)` masculine. The quiz's frame, grading, diagnosis, spoken question,
+  and results rows (`QuizResult.pronounGender`), the verb page, the tutor's tables, the widget,
+  and the search and Siri lines use it, and the setting-reading `preamble` overload is gone, so no
+  caller can skip it. Pleuvoir's figurative plural takes ils too. Tests 784 to 789
+  (`ImpersonalVerbTests`, 2 functions and 3 nested in `QuizTests`). Seen on the iPhone 17 in
+  French with the feminine default: falloir's page reading "il faut", search for faut reading
+  "Indicatif Présent (il)" for falloir and "(elle)" for faillir, and Test Me on falloir framing
+  "il [ ]" and accepting "avait fallu".
+- **For Josh to judge:** "Mélangé" and "Seul"; "Encore une série"; "Travailler ce modèle"; the
+  card's place on a model's page, before its verbs; whether a spelling-change model should also
+  ask its literary cells at Advanced; and whether parler, finir, and rendre should have a practice
+  after all.
 
 ## Phase 17: Recognition
 

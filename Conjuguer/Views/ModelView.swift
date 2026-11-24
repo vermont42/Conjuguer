@@ -45,6 +45,9 @@ struct ModelView: View {
             .scrollFade()
         }
 
+        ModelPracticeCard(modelID: model.id)
+          .scrollFade()
+
         verbsUsingCard
           .scrollFade()
       }

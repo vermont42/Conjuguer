@@ -18,6 +18,8 @@ struct QuizResult: Hashable, Identifiable {
   /// The slip that earned a second attempt. `actualAnswer` is the second attempt.
   var firstAttempt: String?
   var isReask = false
+  /// The gender the question was asked in, nil for the learner's setting.
+  var pronounGender: PronounGender?
 
   /// A right re-ask earns half points on either attempt, as a right second attempt does.
   var points: Int {

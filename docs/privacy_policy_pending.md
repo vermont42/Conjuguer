@@ -717,3 +717,42 @@ Le point sur la durée d'un quiz devient :
 ```
 - La durée approximative d'un quiz lorsque vous le terminez ou l'abandonnez (moins de 3 secondes, de 3 à 15 secondes, de 15 à 40 secondes, de 40 secondes à 2 minutes, ou davantage) et le nombre de questions atteint lorsque vous le terminez (10, ou 20 et plus si vous avez demandé dix questions de plus ; 15 par série dans « L'essentiel du verbe »), sauf en révision ou pour revoir vos erreurs
 ```
+
+## Model practice (pedagogy plan, Phase 16, 2026-11-23)
+
+Each conjugation model gains a practice, alone and mixed with the models the learner knows, started
+from the model's page or from the Quiz tab's list of models. The quiz signals send two new `source`
+values, `modelAlone` and `modelMixed`, and `quizStart` sends the `collection` value `model`, as a
+model's own quiz already does, so the model is never named. A round alone sends its question count
+as other quizzes do; a mixed round sends none, since its length depends on which models are known,
+and that comes from the learner's answers. Nothing is posted to Game Center. Whether a model is
+known is computed from the practice record on the device and sent nowhere. This section replaces
+the quiz bullets that the section on Verb Essentials gives, so apply it after that one.
+
+### English
+
+The bullet on quiz lifecycle events now reads:
+
+```
+- Quiz lifecycle events (starting, quitting, or completing a quiz), and where the quiz began: the Quiz tab, over every verb, over My Verbs, over a custom choice, as a review of what is due, as practice of your mistakes, or as the Verb Essentials exercise, a verb's page, a collection, a practice set opened from a shared link or a QR code, or the practice of a conjugation model, alone or mixed with models you know, with which collection for the four featured ones (a model's collection, or a model's practice, is named only as a model); for a custom quiz or a practice set, whether it chose tenses, verbs, or both, but not which
+```
+
+The bullet on how long a quiz lasted now reads:
+
+```
+- Roughly how long a quiz lasted when you complete or quit it (under 3 seconds, 3 to 15 seconds, 15 to 40 seconds, 40 seconds to 2 minutes, or longer), and how many questions it had reached when you complete it (10, or 20 or more if you asked for ten more; 15 a round in Verb Essentials; up to 15 a round in a model's practice alone), except for a review, practice of your mistakes, or a model's mixed practice
+```
+
+### French
+
+Le point sur les événements du cycle de vie d'un quiz devient :
+
+```
+- Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes, sur « Mes verbes », sur mesure, en révision de ce qui est à revoir, pour revoir vos erreurs ou dans l'exercice « L'essentiel du verbe », la page d'un verbe, une collection, une série d'exercices ouverte depuis un lien partagé ou un code QR, ou l'exercice d'un modèle de conjugaison, seul ou mélangé aux modèles que vous connaissez, avec le nom de la collection pour les quatre collections mises en avant (la collection d'un modèle, ou l'exercice d'un modèle, est désigné seulement comme celui d'un modèle) ; pour un quiz sur mesure ou une série d'exercices, s'il porte sur des temps, des verbes ou les deux, mais pas lesquels
+```
+
+Le point sur la durée d'un quiz devient :
+
+```
+- La durée approximative d'un quiz lorsque vous le terminez ou l'abandonnez (moins de 3 secondes, de 3 à 15 secondes, de 15 à 40 secondes, de 40 secondes à 2 minutes, ou davantage) et le nombre de questions atteint lorsque vous le terminez (10, ou 20 et plus si vous avez demandé dix questions de plus ; 15 par série dans « L'essentiel du verbe » ; jusqu'à 15 par série dans l'exercice d'un modèle seul), sauf en révision, pour revoir vos erreurs ou dans l'exercice d'un modèle mélangé
+```

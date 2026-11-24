@@ -21,7 +21,7 @@ struct QuizResultView: View {
           .subheadingLabel()
       }
 
-      Text(quizResult.tense.titleCaseName + quizResult.tense.pronounDecorator)
+      Text(quizResult.tense.titleCaseName + quizResult.tense.pronounDecorator(pronounGender: quizResult.pronounGender ?? Current.settings.pronounGender))
         .smallLabel()
 
       if quizResult.isReask {

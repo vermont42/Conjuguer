@@ -90,6 +90,24 @@ struct Verb: Identifiable, Hashable {
     }
   }
 
+  /// Whether the verb's third-person singular is impersonal, so that its subject is il whatever
+  /// the pronoun-gender setting: il faut, il pleut, il neige, il appert. The defect groups that
+  /// keep only the third-person singular for the weather verbs, falloir, apparoir, and chaloir
+  /// say so; pleuvoir shares its group with poindre, which takes a real subject (l'aube point), so
+  /// pleuvoir is named. Pleuvoir's figurative plural (les coups pleuvent) follows il too.
+  nonisolated var isImpersonal: Bool {
+    defectGroupId.map(Self.impersonalDefectGroupIDs.contains) == true || Self.impersonalInfinitifs.contains(infinitif)
+  }
+
+  nonisolated static let impersonalDefectGroupIDs: Set<String> = ["2", "22", "23"]
+  nonisolated static let impersonalInfinitifs: Set<String> = ["pleuvoir", "repleuvoir"]
+
+  /// The pronoun gender the verb is asked and shown in: the learner's setting, or masculine for an
+  /// impersonal verb.
+  nonisolated func pronounGender(for setting: PronounGender) -> PronounGender {
+    isImpersonal ? .masculine : setting
+  }
+
   nonisolated var infinitifWithPossibleExtraLetters: String {
     if let extraLetters = extraLetters {
       return infinitif + " (" + extraLetters + ")"

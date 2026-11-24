@@ -359,7 +359,8 @@ so that search can start from a conjugation: vais finds aller, and suis finds ê
 **The tool compiles the app's own conjugation core**: 24 files of `Conjuguer/Models` and
 `Conjuguer/Utils`, listed in a membership exception on the `Conjuguer` folder in
 `project.pbxproj`. The core takes the pronoun gender explicitly; the app's overloads in
-`ConjugationLabels.swift` default it to the setting. A core file that starts reaching `Current`,
+`ConjugationLabels.swift` default it to the setting. A caller with a verb in hand passes
+`verb.pronounGender` instead, which is masculine for an impersonal verb whatever the setting. A core file that starts reaching `Current`,
 `L`, or SwiftUI breaks the tool's build, and the member belongs in `ConjugationLabels.swift`.
 
 **The build phase.** The app target depends on the tool, so an iOS build builds it for the Mac
@@ -515,6 +516,7 @@ same.
 | `review` | Yes | The quiz signals only: Review, from the Quiz tab (§ Review and My Mistakes) |
 | `mistakes` | Yes | The quiz signals only: Practice My Mistakes, from the Quiz tab (§ Review and My Mistakes) |
 | `verbEssentials` | Yes | The quiz signals only: Verb Essentials, from the Quiz tab (§ Verb Essentials) |
+| `modelAlone`, `modelMixed` | Yes | The quiz signals only: a model's practice, alone or mixed, from its page or the hub's list (§ Model Practice) |
 
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
 a bare `Verb`, and the cells a search matched (`marks`). A link carries `source` as a query item
@@ -796,7 +798,8 @@ verb opened from a collection's page has `source` `list`; one opened from a mode
 A quiz of ten questions, which Ten More continues by ten more. The learner types each conjugation,
 and a missed question is asked once more. A quiz can also ask about chosen verbs (§ Quiz Scopes),
 or about tenses and verbs the learner puts together (§ The Custom Quiz). Verb Essentials asks the
-key conjugations of irregular verbs (§ Verb Essentials).
+key conjugations of irregular verbs (§ Verb Essentials), and each model can be practiced alone and
+then mixed with the models the learner knows (§ Model Practice).
 
 ### Architecture
 
@@ -811,6 +814,7 @@ key conjugations of irregular verbs (§ Verb Essentials).
 | `QuizScope.swift` | What a quiz asks about, its question count, and its analytics source; the questions of a quiz over chosen verbs; `Verb.hasCell(_:)` and `canBeQuizzed(at:)` |
 | `QuizQuestion.swift`, `QuizResult.swift`, `QuizState.swift` | A question (verb, tense, and the step it shares with others on one screen), an answered question, and the quiz's lifecycle |
 | `VerbEssentials.swift`, `VerbEssentialsRowView.swift` | Verb Essentials: its scope, its draw, the rows of a step, and where a missed blank returns (§ Verb Essentials) |
+| `ModelPractice.swift`, `ModelPracticeCard.swift`, `ModelPracticeListView.swift` | A model's practice: what it asks, when a model is known, the draws alone and mixed, the card on a model's page, and the hub's list of models (§ Model Practice) |
 | `ConjugationResult.swift` | Grades an answer as a total or no match (`ConjugationResult.grade`), with the conjugation to show beside a right answer spelled another standard way (`AnswerGrade`); a question's result is also `.secondAttemptMatch` when a slip's second attempt was right |
 | `AnswerSlip.swift` | Whether a wrong answer is a slip that earns one more attempt (§ One More Try) |
 | `AnswerDiagnosis.swift` | Why a wrong answer is wrong, when the Conjugator can say so for certain, as one line (§ Naming the Error) |
@@ -960,7 +964,10 @@ The question names the verb and the tense. The person sits beside the field, in 
   (`j'`, `je m'`, `tu t'`), through `PersonNumber.preamble`, so it reads as French. That reveals that
   the answer begins with a vowel or a mute h, and, for je in a compound tense, that the auxiliary
   is avoir. Josh accepted the hint on 2026-11-22, since the quiz is practice. The third person
-  shows il or elle and ils or elles as the pronoun-gender setting chooses.
+  shows il or elle and ils or elles as the pronoun-gender setting chooses, except for an
+  impersonal verb (`Verb.isImpersonal`: falloir, pleuvoir, the weather verbs, apparoir, chaloir),
+  which is il and ils under any setting, as on its verb page, in search results, in the widget,
+  and in the results' rows (`Verb.pronounGender(for:)`, kept on each `QuizResult`).
 - **A compound tense** adds the gender its participle may agree with, `(fém.)` or `(masc.)`, after
   je, tu, nous, and vous, whose pronouns do not show it. It shows for every compound tense, avoir
   verbs included, so that it does not reveal the auxiliary, and for no simple tense.
@@ -1399,7 +1406,9 @@ and how the last quiz went. From the top:
   (`quiz_last_result`), absent until a quiz has finished: "All Verbs · Elementary · today", then
   "Correct: 7 / 10 · Second Try: 1 · Score: 75".
 - **Exercises** (`quiz_exercises`): ways to practice beside the quiz, each a row like Review's
-  (`QuizHubRow`). Verb Essentials is the one so far (`quiz_verb_essentials_button`).
+  (`QuizHubRow`): Verb Essentials (`quiz_verb_essentials_button`), which starts at once, and
+  Conjugation Models (`quiz_model_practice_button`), whose chevron says it pushes the list of models
+  (§ Model Practice).
 - **The foot**: the level's best score, when there is one, and a small View Leaderboard button
   (`quiz_leaderboard_button`), shown only while signed in to Game Center, which opens the current
   level's board and sends `tapViewLeaderboard` with `source` `tab`. Competing is beside the point
@@ -1408,9 +1417,10 @@ and how the last quiz went. From the top:
 **The last result** (`LastQuizResult`) is written at each round's results, so after Ten More it is
 the session so far, by every scope, Test Me's three questions included. A quit quiz writes
 nothing, since its results were never shown. It keeps a kind (`allVerbs`, `myVerbs`, `verbPage`,
-`collection`, `custom`, `practiceSet`, `review`, `mistakes`, `verbEssentials`) and a verb's `dictionaryKey` or a
-collection's key rather than a title, so that it reads in the current language. Review and My
-Mistakes keep no level. `PracticeStore` keeps it as JSON under `lastQuizResult` in the App Group's
+`collection`, `custom`, `practiceSet`, `review`, `mistakes`, `verbEssentials`, `modelAlone`,
+`modelMixed`) and a verb's `dictionaryKey`, a collection's key, or a practiced model's id rather
+than a title, so that it reads in the current language. Review, My Mistakes, and a model's
+practice keep no level. `PracticeStore` keeps it as JSON under `lastQuizResult` in the App Group's
 defaults, beside the record, on the device and never sent; Reset Practice forgets it, and the
 Practice Record card shows while either exists (`hasAnythingToReset`).
 
@@ -1453,11 +1463,55 @@ the answer frame (`elle [ ]`, `elle s' [ ]`), and Return grades the current one.
   `a venu` (the auxiliary), `est souvenu` (the agreement), `faira` (the futur stem), `a prendu` (a
   regular participle), and `est allé` (the agreement); each earns one more try with its line.
 
+### Model Practice
+
+Each model can be practiced alone, then mixed with the models the learner knows, from a card on the
+model's page (`ModelPracticeCard`, before Verbs Using This Model) or from the hub's **Conjugation
+Models** row ("Modèles de conjugaison"), which pushes `ModelPracticeListView`: the models with a
+practice of their own, the most used first (by each model's most frequent verb: faire, devoir,
+voir), each expanding onto the same card. The practice runs in a `QuizSheet` over either.
+
+- **What a model's practice asks** (`ModelPractice`). A model learned verb by verb (aller and the
+  third group but rendre's family) asks Verb Essentials over its ten most frequent verbs that Verb
+  Essentials asks. A spelling-change model of the first or second group asks its **marked cells**,
+  those the practice record keeps as the model's own patterns (nous mangeons, j'appelle,
+  j'appellerai), each of one of its ten most frequent verbs, in rounds of up to ten, unasked cells
+  first. Its simple tenses only, without the passé simple and the subjonctif imparfait, as Verb
+  Essentials asks no literary tense. Josh chose the marked cells on 2026-11-23.
+- **No practice of its own**, and the card says why (`ModelPractice.Absence`): parler's, finir's,
+  and rendre's models, which every quiz asks; a spelling-change model with fewer than five marked
+  cells (rompre, foutre, férir, ester, haïr's Québec model, ouïr), "This model departs from rendre
+  in too few conjugations"; and a model of one verb (aller, être, pouvoir, sevrer), since one verb
+  is not a pattern. A one-verb model still joins other models' mixes once known. A model with
+  nothing to ask (gésir) shows no card.
+- **Known.** At least half of the model's items past the first box of the practice record: three
+  key conjugations a verb, or one pattern a marked cell. Computed, not stored, so a wrong answer
+  can make a model unknown again. An item already in the record climbs only when due, so a verb
+  practiced or looked up earlier the same day stays in the first box, and a model may need a second
+  round, or tomorrow. The card and the list show a seal.
+- **Mixed** opens once another model of the same kind is known, whether or not this one is (nothing
+  is earned). Verb Essentials mixes take three of a round's five verbs from the model and two from
+  the known models; a spelling-change mix, six of ten questions and four. Partners are taken one
+  model at a time, so a known model of ten verbs does not crowd out one of one, and a short side
+  leaves the rest to the other (Josh, 2026-11-23). The two kinds never mix.
+- **Sessions.** Titled with the model ("venir (6-7)") or "Mixed: venir (6-7)" ("Mélangé : …");
+  the results offer **Another Round** ("Encore une série"), since a round can be short, and name no
+  level. Never ranked, no due items, no `ChangeLevelTip`, no Live Activity (it runs in a sheet).
+- **Signals.** `source` `modelAlone` or `modelMixed`, with `quizStart`'s `collection` `model`, as a
+  model's own quiz sends. A mixed session sends no counts (`QuizScope.sendsQuestionCounts`), since
+  its length depends on which models are known, which comes from the learner's answers.
+- **VoiceOver.** The card's heading is a header, Alone and Mixed have hints, a closed Mixed reads as
+  dimmed with its reason after it, and a known model's row in the list reads "venir, (6-7), Known,
+  48% Irregular". The quiz is Verb Essentials or an ordinary quiz and adds no state.
+- **Identifiers.** `quiz_model_practice_button`, `model_practice_<id>` (a row of the list),
+  `model_practice_alone_button`, `model_practice_mixed_button`, `model_practice_mixed_note`,
+  `model_practice_known`, and `model_practice_absence_note`.
+
 ### Signals
 
 `quizStart` (`level`, `source`), `quizQuit` (`level`, `lastQuestionIndex`, `duration`, `source`),
 `quizCompletion` (`level`, `questionCount`, `duration`, `source`), and `quizAbandon` (`level`,
-`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, or `verbEssentials`, so a
+`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, `verbEssentials`, `modelAlone`, or `modelMixed`, so a
 three-question quiz does not inflate the ten-question quiz's completion rate.
 
 - **No signal carries a score or a count of right or wrong answers.** `lastQuestionIndex` is the

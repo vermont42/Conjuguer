@@ -6082,3 +6082,90 @@ the hub's description broke between "a" and "pris" on the iPhone, so the forms a
 together with no-break spaces.
 
 The suite went from 747 to 764 tests, and the session ended with Josh still to try it.
+
+## Models, One Then Mixed (2026-11-23)
+
+Pedagogy Phase 16 lets a learner practice one conjugation model alone, then mixed with the models
+they already know. The idea comes from Pan et al. (2019), where practicing a pattern alone before
+mixing it helped over two weekly sessions. Nobody has studied conjugation models as such, so it is
+a bet, as it was in Konjugieren, whose ablaut groups are the counterpart of Conjuguer's models.
+
+### The question Konjugieren never had
+
+Every ablaut group in Konjugieren is a set of strong verbs, so its practice was simply Verb
+Essentials over the group's verbs. Conjuguer's 98 models are not all alike. The third group and
+aller are learned verb by verb, so Verb Essentials fits them. But Phase 11 had decided that the
+first and second groups are learned as patterns: nous mangeons is one item shared by every verb
+like manger, and je mange is parler's. Practicing manger's model through "mange · a mangé ·
+mangera" would ask three forms that never show manger's change.
+
+Josh chose to have a spelling-change model ask its marked cells: the cells that the practice
+record keeps as the model's own patterns, which are also the letters the verb page prints in red.
+Manger has seven of them, céder nine, appeler twenty-one. The three bases, parler, finir, and
+rendre, get no practice of their own, since every quiz asks them, and neither do the handful of
+models whose change touches fewer than five cells (rompre's il rompt is the only one of its kind).
+Each of those pages now says why it has no practice, rather than leaving a learner to wonder why
+manger has one and parler does not.
+
+I added one rule of my own, that the passé simple and the subjonctif imparfait are left out. Verb
+Essentials never asks a literary tense, and a Beginner practicing manger should not meet "que nous
+mangeassions". A test checks, for all fifteen spelling-change models, that every marked cell maps
+to the model's own pattern for each of its ten most frequent verbs. It passed the first time, which
+says the marks belong to a model rather than to a verb.
+
+### Two kinds that do not mix
+
+A Verb Essentials round is a step of three rows on one screen, and a spelling-change round is ten
+single questions. Rather than build a round that alternates between the two, a model mixes only
+with known models of its own kind. A mixed venir round draws from prendre and aller, and a mixed
+manger round from appeler and céder. Josh kept Konjugieren's proportions once he had seen it work:
+three of five verbs, or six of ten questions, from the chosen model.
+
+### The ladder, seen from the outside
+
+The first venir round on the simulator answered all fifteen blanks right, and venir still was not
+"known". The record explained it. Phase 15's fixture had asked venir's passé composé and futur
+earlier that day, and an item climbs the ladder only when it is due, so those two stayed in the
+first box, leaving 13 of 30 items past it. A second round made venir known. Konjugieren met the
+same surprise and left the ladder alone, and so did this session.
+
+### Driving it
+
+The simulator rounds were typed by a small script that reads each question's verb, tense, and
+person from the accessibility tree and looks up the answer in the Conjugator's own dump. It needed
+three fixes along the way: compound tenses (the dump keeps only the first person), pronominal
+verbs ("elle se"), and the single-question layout, where the tense is its own element. The run
+also turned up a data error: écoconcevoir is filed under voir's model, so it would conjugate as
+"écoconcevoit". That is now Josh's to decide.
+
+The suite went from 764 to 784 tests, and the session ended with Josh still to try it.
+
+## Il faut, Whatever the Setting (2026-11-23)
+
+Two faults that Phase 16's simulator run turned up, fixed the same day at Josh's request.
+
+The first was data. écoconcevoir, a recent coinage for designing a product with its environmental
+impact in mind, was filed under voir's model in `verbs.xml`, so the app conjugated it as
+"écoconcevoit". It is built on concevoir, and now it is filed under concevoir's model and gives
+écoconçoit and écoconçu. Model practice made the mistake visible, because it asks a model's ten
+most frequent verbs, and voir's model has only five.
+
+The second had been there since the pronoun-gender setting existed. The setting is feminine by
+default, so every third-person singular reads elle, and that included verbs with no subject to
+agree with: the quiz asked "elle faut", and falloir's own page showed it. The fix gives each verb a
+pronoun gender of its own, which is the setting, except masculine for an impersonal verb. Deciding
+which verbs are impersonal came mostly from the data. The defect groups that keep only the
+third-person singular already gather the weather verbs, falloir, apparoir, and chaloir. Pleuvoir is
+the exception. It shares a group with poindre, which takes a real subject (l'aube point), so
+pleuvoir and repleuvoir are named in the code rather than taken from their group. Other verbs used
+only in the third person, such as advenir, incomber, and échoir, are not impersonal (la tâche lui
+incombe), so they still follow the setting.
+
+The harder part was finding every place that chose a pronoun. Grading, the answer frame, the
+diagnosis, the spoken question, the results rows, the verb page, the on-device tutor's tables, the
+widget, and the search and Siri lines each read the setting on their own. They now ask the verb.
+The one helper that read the setting without a verb in hand had no callers left, so it is gone, and
+a future caller cannot skip the rule by accident. A quiz result keeps the gender its question was
+asked in, since the results list is drawn after the verb is out of reach.
+
+The suite went from 784 to 789 tests.

@@ -115,12 +115,12 @@ enum WidgetSnapshotWriter {
   @MainActor private static func présentParadigm(for verb: Verb) -> [WidgetConjugation] {
     PersonNumber.allCases.map { personNumber in
       let form = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: .indicatifPrésent(personNumber), extraLetters: verb.extraLetters) ?? "—"
-      return WidgetConjugation(pronoun: compactPronoun(personNumber), form: form)
+      return WidgetConjugation(pronoun: compactPronoun(personNumber, of: verb), form: form)
     }
   }
 
-  @MainActor private static func compactPronoun(_ personNumber: PersonNumber) -> String {
-    let gender = Current.settings.pronounGender
+  @MainActor private static func compactPronoun(_ personNumber: PersonNumber, of verb: Verb) -> String {
+    let gender = verb.pronounGender
     switch personNumber {
     case .firstSingular:
       return "je"
@@ -152,7 +152,7 @@ enum WidgetSnapshotWriter {
     return WidgetQuizQuestion(
       infinitif: verb.infinitifWithPossibleExtraLetters,
       tenseDisplay: tense.titleCaseName,
-      pronoun: compactPronoun(personNumber),
+      pronoun: compactPronoun(personNumber, of: verb),
       correctAnswer: correctAnswer,
       wrongAnswers: wrongAnswers,
       questionID: "\(dateString(for: date))-\(verb.infinitifWithPossibleExtraLetters)"

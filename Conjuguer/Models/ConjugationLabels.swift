@@ -14,8 +14,7 @@ import os
 // beside the types they extend. See ConjugationMapTool/main.swift.
 
 extension PersonNumber {
-  @MainActor var pronoun: String {
-    let pronounGender = Current.settings.pronounGender
+  func pronoun(pronounGender: PronounGender) -> String {
     let singular = " singulier" // Intentionally not localizing this.
     let plural = " pluriel"
 
@@ -45,8 +44,7 @@ extension PersonNumber {
     }
   }
 
-  @MainActor var pronounWithGender: String {
-    let pronounGender = Current.settings.pronounGender
+  @MainActor func pronounWithGender(pronounGender: PronounGender) -> String {
     let masc = L.PronounGender.masculineAbbreviation
     let fem = L.PronounGender.feminineAbbreviation
 
@@ -96,8 +94,7 @@ extension PersonNumber {
     }
   }
 
-  @MainActor var gender: String {
-    let pronounGender = Current.settings.pronounGender
+  @MainActor func gender(pronounGender: PronounGender) -> String {
     let masc = L.PronounGender.masculine
     let fem = L.PronounGender.feminine
 
@@ -153,10 +150,6 @@ extension PersonNumber {
 
   // The subject (+ reflexive) pronoun that precedes a conjugation, including any elision
   // (j'/m'/t'/s') implied by the conjugation's first letter.
-  @MainActor func preamble(forConjugation conjugation: String, isReflexive: Bool, hasAspiratedH: Bool) -> String {
-    preamble(forConjugation: conjugation, isReflexive: isReflexive, hasAspiratedH: hasAspiratedH, pronounGender: Current.settings.pronounGender)
-  }
-
   @MainActor func preamble(forConjugation conjugation: String, isReflexive: Bool, hasAspiratedH: Bool, pronounGender: PronounGender) -> String {
     let firstLetterImpliesLiaison = Self.elides(before: conjugation, hasAspiratedH: hasAspiratedH)
 
@@ -198,19 +191,26 @@ extension PersonNumber {
 }
 
 extension Tense {
-  @MainActor var pronoun: String {
-    personNumber?.pronoun ?? L.QuizView.none
+  @MainActor func pronoun(pronounGender: PronounGender) -> String {
+    personNumber?.pronoun(pronounGender: pronounGender) ?? L.QuizView.none
   }
 
-  @MainActor var gender: String {
-    personNumber?.gender ?? L.QuizView.none
+  @MainActor func gender(pronounGender: PronounGender) -> String {
+    personNumber?.gender(pronounGender: pronounGender) ?? L.QuizView.none
   }
 
-  @MainActor var pronounDecorator: String {
+  @MainActor func pronounDecorator(pronounGender: PronounGender) -> String {
     guard let personNumber else {
       return ""
     }
-    return " - \(personNumber.pronounWithGender)"
+    return " - \(personNumber.pronounWithGender(pronounGender: pronounGender))"
+  }
+}
+
+extension Verb {
+  /// The gender the verb is asked and shown in under the learner's setting.
+  @MainActor var pronounGender: PronounGender {
+    pronounGender(for: Current.settings.pronounGender)
   }
 }
 

@@ -90,6 +90,7 @@ Conjuguer/
 │   ├── LanguageModelServiceReal.swift  # FoundationModels implementation, incl. the ConjugationTool the model can call
 │   ├── literature_examples.json # Bundled literature/government/Wikipedia example sentences keyed by infinitif
 │   ├── ModelSearch.swift       # Finds a model by its exemplar or by any of its verbs, through VerbSearch
+│   ├── ModelPractice.swift     # A model's practice, alone and mixed: what each model asks (Verb Essentials or its marked cells), when it is known, why a model has none, and the draws
 │   ├── MatchedConjugation.swift # The conjugation a search result matched, its cells, the row's line ("vais: Indicatif Présent (je)"), and MarkedConjugations for the verb page
 │   ├── PasseSimpleGroup.swift  # Passé simple stem/ending groups (bare/a/i/u/ï/…)
 │   ├── PersonNumber.swift      # 1s…3p with localized pronouns and gendered third-person handling
@@ -209,6 +210,8 @@ Conjuguer/
     ├── LoadingView.swift       # Splash shown while verbs.xml parses
     ├── MainTabView.swift       # Root TabView with five tabs; presents a practice set's sheet over any tab
     ├── ModelBrowseView.swift   # Searchable, sortable list/grid of verb models, led by the featured collections
+    ├── ModelPracticeCard.swift # A model's practice on its page and in the hub's list: Alone, Mixed with the known models, or why it has none
+    ├── ModelPracticeListView.swift # The hub's Conjugation Models list: models with a practice, the most used first, each expanding onto its card
     ├── ModelView.swift         # Model detail: endings, stem alterations, and the verbs, alphabetically or by frequency, with the model's collection bar
     ├── OnboardingView.swift    # Multi-page welcome tour; auto-presented on first launch and re-showable from Settings
     ├── PracticeSetView.swift   # A shared practice set's sheet (its summary, verbs, Start, and Keep as My Custom Quiz, or Not Found) and the full-screen QR view
@@ -291,6 +294,7 @@ ConjuguerTests/
     ├── DefectivityAuditTests.swift     # Per-family defectivity audit (traire, braire, férir, poindre, pouvoir's impératif, …)
     ├── EngineAuditTests.swift          # Hand-written pins for the stage-A verb-pass fixes (peuvent, dites, suivi, the eight re-modeled verbs, the seventeen être auxiliaries), checked against Wiktionary rather than against the engine
     ├── ExampleSourceTests.swift        # Parsing of example `source` strings (incl. the Wiktionary citation forms), and that every shipped example's source is known
+    ├── ImpersonalVerbTests.swift       # Impersonal verbs take il under any pronoun setting: which verbs are impersonal, the quiz frame, the verb page, and a quiz result; écoconcevoir conjugated like concevoir
     ├── IrregularityMetricTests.swift   # Keeps VerbModel.irregularity and the Info text in agreement: only 1-1/2-1/5-1A score 0%, and the shipped regular/irregular split matches the data
     ├── FrequencyBandTests.swift        # Each band holds its count of infinitives, the bands nest, and the œ verbs and convaincre rank as the 2026-11-22 data fix left them
     ├── FuturStemsTests.swift           # Futur stem derivation, incl. the trailing-e trim for -re verbs
@@ -301,6 +305,7 @@ ConjuguerTests/
     ├── KeyConjugationsTests.swift      # The key conjugations (reflexive, defective, il agreement), the citation infinitive, the share text, and what a long press copies
     ├── LearnerVerbsTests.swift         # The learner's record: opens, stars, recents, My Verbs, removal, Clear, JSON coding and an older record's decoding, the store's saving, the doubled entries, and the list modes
     ├── ModelSearchTests.swift          # Models found by exemplar or by member verb, exemplars first, each once
+    ├── ModelPracticeTests.swift        # Model practice: each model's kind and absence, ten most frequent verbs, marked cells, known at half, partners of the same kind, the draws alone and mixed, the scopes, and sessions (known after a round, joining a mix, Another Round, signals)
     ├── NousPrésentStemTests.swift      # The nous-présent stem that imparfait derives from
     ├── ParserTests.swift               # XML parsing of verbs, models, and defect groups
     ├── QuizLiveActivityTests.swift     # The quiz's Live Activity through the spy: a tab quiz starts one that Quit or the last answer ends, each other answer updates it, a restart replaces it, and a sheet's quiz starts none

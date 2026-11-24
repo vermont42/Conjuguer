@@ -45,6 +45,9 @@ struct QuizView: View {
             CustomQuizModelList()
           }
         }
+        .navigationDestination(for: ModelPracticeDestination.self) { _ in
+          ModelPracticeListView()
+        }
     }
     .environment(\.isBeneathQuiz, quiz.quizState == .inProgress)
     .accessibilityAction(.magicTap) {
@@ -633,6 +636,18 @@ struct QuizView: View {
         start(scope: .verbEssentials())
         TryQuizTip().invalidate(reason: .actionPerformed)
       }
+
+      NavigationLink(value: ModelPracticeDestination()) {
+        QuizHubRowContent(
+          title: L.ModelPractice.title,
+          detail: L.ModelPractice.hubDescription,
+          systemImage: "square.grid.3x3.fill",
+          accessorySystemImage: "chevron.right"
+        )
+      }
+      .buttonStyle(.plain)
+      .accessibilityHint(L.ModelPractice.hubHint)
+      .accessibilityIdentifier("quiz_model_practice_button")
     }
     .card()
   }
@@ -796,6 +811,7 @@ private struct QuizHubRow: View {
   let start: (() -> Void)?
 
   var body: some View {
+    let content = QuizHubRowContent(title: title, detail: detail, systemImage: systemImage, accessorySystemImage: start == nil ? nil : "play.circle.fill")
     if let start {
       Button(action: start) {
         content
@@ -808,8 +824,17 @@ private struct QuizHubRow: View {
         .accessibilityIdentifier("\(identifier)_empty")
     }
   }
+}
 
-  private var content: some View {
+/// A hub row's symbol, title, detail, and what a tap does: a play symbol for a row that starts a
+/// session, a chevron for one that opens a list.
+private struct QuizHubRowContent: View {
+  let title: String
+  let detail: String
+  let systemImage: String
+  let accessorySystemImage: String?
+
+  var body: some View {
     HStack(spacing: Layout.doubleDefaultSpacing) {
       Image(systemName: systemImage)
         .font(.title2)
@@ -829,9 +854,9 @@ private struct QuizHubRow: View {
 
       Spacer(minLength: 0)
 
-      if start != nil {
-        Image(systemName: "play.circle.fill")
-          .font(.title)
+      if let accessorySystemImage {
+        Image(systemName: accessorySystemImage)
+          .font(accessorySystemImage == "chevron.right" ? .body : .title)
           .foregroundStyle(Color.customBlue)
           .accessibilityHidden(true)
       }

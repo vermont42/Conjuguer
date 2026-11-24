@@ -17,6 +17,8 @@ struct LastQuizResult: Codable, Equatable {
     case collection
     case custom
     case mistakes
+    case modelAlone
+    case modelMixed
     case myVerbs
     case practiceSet
     case review
@@ -27,7 +29,7 @@ struct LastQuizResult: Codable, Equatable {
   static let storageKey = "lastQuizResult"
 
   let kind: Kind
-  /// The `dictionaryKey` of a verb page's verb, or the key of a collection.
+  /// The `dictionaryKey` of a verb page's verb, the key of a collection, or a practiced model's id.
   let subject: String?
   /// Nil for Review and My Mistakes, which do not ask by level.
   let levelKey: String?
@@ -60,6 +62,8 @@ struct LastQuizResult: Codable, Equatable {
     switch kind {
     case .collection:
       subject = quiz.scope.collection?.key
+    case .modelAlone, .modelMixed:
+      subject = quiz.scope.modelPractice?.modelID
     case .verbPage:
       subject = quiz.scope.verbs?.first?.dictionaryKey
     case .allVerbs, .custom, .mistakes, .myVerbs, .practiceSet, .review, .verbEssentials:
@@ -104,6 +108,10 @@ struct LastQuizResult: Codable, Equatable {
       return L.CustomQuiz.title
     case .mistakes:
       return QuizRecordSession.mistakes.title
+    case .modelAlone:
+      return subject.map { ModelPracticeSession(modelID: $0, mode: .alone).title } ?? L.ModelPractice.title
+    case .modelMixed:
+      return subject.map { ModelPracticeSession(modelID: $0, mode: .mixed).title } ?? L.ModelPractice.title
     case .myVerbs:
       return L.MyVerbs.title
     case .practiceSet:
@@ -122,7 +130,9 @@ extension LastQuizResult.Kind {
   /// A practice set is a custom quiz opened from a link or a code, and a custom quiz over a
   /// collection counts as custom, since the learner chose it in the editor.
   init(scope: QuizScope) {
-    if let session = scope.recordSession {
+    if let session = scope.modelPractice {
+      self = session.mode == .alone ? .modelAlone : .modelMixed
+    } else if let session = scope.recordSession {
       switch session {
       case .review:
         self = .review

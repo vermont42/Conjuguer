@@ -29,6 +29,9 @@ extension QuizScope {
   /// What the title bar and the Live Activity call a session whose questions look like any
   /// quiz's: Review, My Mistakes, or Verb Essentials.
   var sessionTitle: String? {
+    if let modelPractice {
+      return modelPractice.title
+    }
     if isVerbEssentials {
       return L.VerbEssentials.title
     }

@@ -82,7 +82,7 @@ struct VerbLookup {
         let conjugations = verb.keyConjugations().map { $0.lowercased() }
         return conjugations.isEmpty ? heading : "\(heading): \(conjugations.joined(separator: " · "))"
       case .conjugation(let conjugation, let verb):
-        return L.Lookup.conjugation(conjugation.line(pronounGender: pronounGender), infinitif: verb.citationInfinitif)
+        return L.Lookup.conjugation(conjugation.line(pronounGender: verb.pronounGender(for: pronounGender)), infinitif: verb.citationInfinitif)
       case .otherMatches(let first, let count):
         let firstVerb = Self.verbWithGloss(first)
         return count == 1

@@ -119,14 +119,14 @@ struct VerbConjugations {
       guard let personNumber = tense.personNumber else {
         return ("", conjugation, conjugation.lowercased())
       }
-      let preamble = personNumber.preamble(forConjugation: conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH)
+      let preamble = personNumber.preamble(forConjugation: conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH, pronounGender: verb.pronounGender)
       let pronoun = preamble.trimmingCharacters(in: .whitespaces)
       return (pronoun, conjugation, (preamble + conjugation).lowercased())
     }
   }
 
   static func rawConjugation(verb: Verb, tense: Tense) -> String {
-    guard let conjugation = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters) else {
+    guard let conjugation = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters, pronounGender: verb.pronounGender) else {
       // Unreachable with today's data; a future data typo degrades to an empty cell
       // rather than crashing the user mid-browse.
       assertionFailure("Could not conjugate \(verb.infinitif) for \(tense.titleCaseName).")

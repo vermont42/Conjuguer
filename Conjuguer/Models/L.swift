@@ -1394,6 +1394,96 @@ enum L {
     }
   }
 
+  enum ModelPractice {
+    static var title: String {
+      String(localized: "ModelPractice.title")
+    }
+
+    static var hubDescription: String {
+      String(localized: "ModelPractice.hubDescription")
+    }
+
+    static var hubHint: String {
+      String(localized: "ModelPractice.hubHint")
+    }
+
+    static var listIntro: String {
+      String(localized: "ModelPractice.listIntro")
+    }
+
+    static var heading: String {
+      String(localized: "ModelPractice.heading")
+    }
+
+    static var descriptionEssentialsAll: String {
+      String(localized: "ModelPractice.descriptionEssentialsAll")
+    }
+
+    static var descriptionEssentialsFrequent: String {
+      String(localized: "ModelPractice.descriptionEssentialsFrequent")
+    }
+
+    static var known: String {
+      String(localized: "ModelPractice.known")
+    }
+
+    static var alone: String {
+      String(localized: "ModelPractice.alone")
+    }
+
+    static var mixed: String {
+      String(localized: "ModelPractice.mixed")
+    }
+
+    static var mixedLocked: String {
+      String(localized: "ModelPractice.mixedLocked")
+    }
+
+    static var singleVerb: String {
+      String(localized: "ModelPractice.singleVerb")
+    }
+
+    static var base: String {
+      String(localized: "ModelPractice.base")
+    }
+
+    static var anotherRound: String {
+      String(localized: "ModelPractice.anotherRound")
+    }
+
+    static var anotherRoundHint: String {
+      String(localized: "ModelPractice.anotherRoundHint")
+    }
+
+    static var aloneEssentialsHint: String {
+      String(localized: "ModelPractice.aloneEssentialsHint")
+    }
+
+    static var aloneCellsHint: String {
+      String(localized: "ModelPractice.aloneCellsHint")
+    }
+
+    static var mixedHint: String {
+      String(localized: "ModelPractice.mixedHint")
+    }
+
+    static func descriptionCells(_ base: String) -> String {
+      String(localized: "ModelPractice.descriptionCells", defaultValue: "Questions on the conjugations in which this model’s verbs depart from \(base), which their pages mark in red.")
+    }
+
+    static func fewMarkedCells(_ base: String) -> String {
+      String(localized: "ModelPractice.fewMarkedCells", defaultValue: "This model departs from \(base) in too few conjugations for a practice of its own.")
+    }
+
+    static func mixedWith(_ models: String) -> String {
+      String(localized: "ModelPractice.mixedWith", defaultValue: "Mixed adds verbs of the models you know: \(models)")
+    }
+
+    static func mixedTitle(_ title: String) -> String {
+      String(localized: "ModelPractice.mixedTitle", defaultValue: "Mixed: \(title)")
+    }
+  }
+
   enum VerbCollection {
     static var heading: String {
       String(localized: "VerbCollection.heading")

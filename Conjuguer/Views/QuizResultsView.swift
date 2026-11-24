@@ -64,7 +64,7 @@ struct QuizResultsView: View {
           Button {
             quiz.continueSession()
           } label: {
-            Label(quiz.scope.isVerbEssentials ? L.VerbEssentials.fiveMore : L.ResultsView.tenMore, systemImage: "plus")
+            Label(continueTitle, systemImage: "plus")
               .buttonLabel()
               .frame(maxWidth: Self.tenMoreMaxWidth)
           }
@@ -72,7 +72,7 @@ struct QuizResultsView: View {
           .controlSize(.large)
           .frame(maxWidth: .infinity)
           .padding(.top, Layout.defaultSpacing)
-          .accessibilityHint(quiz.scope.isVerbEssentials ? L.VerbEssentials.fiveMoreHint : L.ResultsView.tenMoreHint)
+          .accessibilityHint(continueHint)
           .accessibilityIdentifier("results_ten_more")
         }
       }
@@ -91,5 +91,21 @@ struct QuizResultsView: View {
     .padding(.top, Layout.tripleDefaultSpacing)
     .recordsAppearance(as: "\(QuizResultsView.self)")
     .screenBackground()
+  }
+
+  /// A model's practice can ask fewer than five verbs or ten questions a round, so it offers
+  /// another round rather than a count.
+  private var continueTitle: String {
+    if quiz.scope.modelPractice != nil {
+      return L.ModelPractice.anotherRound
+    }
+    return quiz.scope.isVerbEssentials ? L.VerbEssentials.fiveMore : L.ResultsView.tenMore
+  }
+
+  private var continueHint: String {
+    if quiz.scope.modelPractice != nil {
+      return L.ModelPractice.anotherRoundHint
+    }
+    return quiz.scope.isVerbEssentials ? L.VerbEssentials.fiveMoreHint : L.ResultsView.tenMoreHint
   }
 }
