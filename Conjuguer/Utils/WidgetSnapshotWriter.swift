@@ -104,7 +104,7 @@ enum WidgetSnapshotWriter {
       présentParadigm: paradigm,
       participePassé: participePassé,
       etymologySnippet: etymology,
-      exampleFrench: example?.fr,
+      exampleFrench: example?.plainFrench,
       exampleEnglish: example?.en,
       exampleSource: example.map { $0.provenance.attribution },
       quizQuestion: quiz,

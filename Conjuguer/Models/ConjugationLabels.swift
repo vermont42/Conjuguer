@@ -199,9 +199,14 @@ extension Tense {
     personNumber?.gender(pronounGender: pronounGender) ?? L.QuizView.none
   }
 
+  /// " - je (fém.)" for a results row. The gender follows je, tu, nous, and vous only in a compound
+  /// tense, as in the answer frame, since no simple tense agrees with it.
   @MainActor func pronounDecorator(pronounGender: PronounGender) -> String {
     guard let personNumber else {
       return ""
+    }
+    guard isCompound || personNumber == .thirdSingular || personNumber == .thirdPlural else {
+      return " - \(personNumber.pronoun(pronounGender: pronounGender))"
     }
     return " - \(personNumber.pronounWithGender(pronounGender: pronounGender))"
   }

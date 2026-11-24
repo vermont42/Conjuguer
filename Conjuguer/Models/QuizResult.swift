@@ -23,6 +23,10 @@ struct QuizResult: Hashable, Identifiable {
   /// A Name the Conjugation question's prompt. `correctAnswer` then holds its right answers, one a
   /// line, and the answers are summaries such as "être · passé simple · nous".
   var recognitionPrompt: String?
+  /// A Phrases à trous question's sentence, read with its conjugation written in.
+  var sentence: String?
+  /// The `dictionaryKey` of the verb asked, whose example sentence the results can offer.
+  var verbKey: String?
 
   /// A right re-ask earns half points on either attempt, as a right second attempt does.
   var points: Int {
@@ -30,5 +34,19 @@ struct QuizResult: Hashable, Identifiable {
       return conjugationResult.score
     }
     return ConjugationResult.secondAttemptMatch.score
+  }
+}
+
+extension QuizResult {
+  /// The first right answer of each verb, in order, which the results let open the verb's
+  /// example sentence, so that a verb asked three times offers it once.
+  static func firstRightOfEachVerb(in results: [QuizResult]) -> [QuizResult] {
+    var verbs: Set<String> = []
+    return results.filter { result in
+      guard result.conjugationResult != .noMatch, let verbKey = result.verbKey else {
+        return false
+      }
+      return verbs.insert(verbKey).inserted
+    }
   }
 }

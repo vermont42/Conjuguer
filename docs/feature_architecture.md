@@ -518,6 +518,7 @@ same.
 | `verbEssentials` | Yes | The quiz signals only: Verb Essentials, from the Quiz tab (§ Verb Essentials) |
 | `modelAlone`, `modelMixed` | Yes | The quiz signals only: a model's practice, alone or mixed, from its page or the hub's list (§ Model Practice) |
 | `recognition` | Yes | The quiz signals only: Name the Conjugation, from the Quiz tab (§ Name the Conjugation) |
+| `sentences` | Yes | The quiz signals only: Phrases à trous, from the Quiz tab (§ Phrases à trous) |
 
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
 a bare `Verb`, and the cells a search matched (`marks`). A link carries `source` as a query item
@@ -799,8 +800,10 @@ verb opened from a collection's page has `source` `list`; one opened from a mode
 A quiz of ten questions, which Ten More continues by ten more. The learner types each conjugation,
 and a missed question is asked once more. A quiz can also ask about chosen verbs (§ Quiz Scopes),
 or about tenses and verbs the learner puts together (§ The Custom Quiz). Verb Essentials asks the
-key conjugations of irregular verbs (§ Verb Essentials), and each model can be practiced alone and
-then mixed with the models the learner knows (§ Model Practice).
+key conjugations of irregular verbs (§ Verb Essentials), each model can be practiced alone and
+then mixed with the models the learner knows (§ Model Practice), Name the Conjugation asks the
+other way round (§ Name the Conjugation), and Phrases à trous asks a conjugation inside a sentence
+(§ Phrases à trous).
 
 ### Architecture
 
@@ -975,6 +978,8 @@ The question names the verb and the tense. The person sits beside the field, in 
 - **The impératif** shows the person it addresses, `(tu) ______ !`, since tu and vous take
   different answers, and a pronominal verb's `-toi`, `-nous`, or `-vous` after the field.
 - **A participle** is a bare field.
+- **A sentence** (§ Phrases à trous) puts its own words around the field, in place of the
+  pronoun, wrapped word by word.
 
 The frame's words are not graded. A learner who types them anyway (`j'ai parlé`, `souviens-toi`)
 is still right, through `AnswerSpelling`. The words are hidden from VoiceOver, and the field's
@@ -1407,8 +1412,9 @@ and how the last quiz went. From the top:
   (`quiz_last_result`), absent until a quiz has finished: "All Verbs · Elementary · today", then
   "Correct: 7 / 10 · Second Try: 1 · Score: 75".
 - **Exercises** (`quiz_exercises`): ways to practice beside the quiz, each a row like Review's
-  (`QuizHubRow`): Verb Essentials (`quiz_verb_essentials_button`) and Name the Conjugation
-  (`quiz_recognition_button`), which start at once, and Conjugation Models
+  (`QuizHubRow`): Verb Essentials (`quiz_verb_essentials_button`), Name the Conjugation
+  (`quiz_recognition_button`), and Phrases à trous (`quiz_sentences_button`), which start at
+  once, and Conjugation Models
   (`quiz_model_practice_button`), whose chevron says it pushes the list of models (§ Model
   Practice).
 - **The foot**: the level's best score, when there is one, and a small View Leaderboard button
@@ -1420,7 +1426,7 @@ and how the last quiz went. From the top:
 the session so far, by every scope, Test Me's three questions included. A quit quiz writes
 nothing, since its results were never shown. It keeps a kind (`allVerbs`, `myVerbs`, `verbPage`,
 `collection`, `custom`, `practiceSet`, `review`, `mistakes`, `verbEssentials`, `modelAlone`,
-`modelMixed`, `recognition`) and a verb's `dictionaryKey`, a collection's key, or a practiced model's id rather
+`modelMixed`, `recognition`, `sentences`) and a verb's `dictionaryKey`, a collection's key, or a practiced model's id rather
 than a title, so that it reads in the current language. Review, My Mistakes, and a model's
 practice keep no level. `PracticeStore` keeps it as JSON under `lastQuizResult` in the App Group's
 defaults, beside the record, on the device and never sent; Reset Practice forgets it, and the
@@ -1563,11 +1569,73 @@ reader needs; the default quiz stays production practice.
   (`recognition_tense_passéSimple`), `recognition_person_<fs|ss|ts|fp|sp|tp>`, and
   `recognition_check_button`.
 
+### Phrases à trous
+
+A short authored sentence with its verb blanked, so that a conjugation is tied to a meaning:
+"Hier soir, nous [ ] au cinéma." "Sentences" in English, "Phrases à trous" in French (Josh,
+2026-11-23). A mode of its own, a row in the hub's Exercises; the default quiz asks no sentence.
+
+- **The content** is `gap_sentences.json` (`GapSentence`, `GapSentences`): 750 sentences for the 300
+  most frequent verbs, five for each of the first 25 (a présent or impératif, a passé composé, an
+  imparfait, futur, or conditionnel, an Intermediate tense, and a passé simple), three for each of
+  the next 75, and two for each of the next 200, which Beginner never asks. Each has an id
+  (`aller.passéComposé.1`), its verb's key, a `QuizTenseSlot` name and a `PersonNumber` raw value,
+  the French with the conjugation in one pair of braces, the English, `reviewed`, and, for an être
+  verb's compound tense, `gender`. Claude drafted them (Sonnet subagents, from
+  [`plans/gap_sentences.md`](../plans/gap_sentences.md)) and reread every one in place of Josh's
+  review, as he chose. The file is written only by `json.dumps(indent=2, ensure_ascii=False)`,
+  through `scripts/gap_sentences.py`, which merges drafts (typesetting the narrow no-break space and
+  the apostrophe), pre-checks them, writes a review sheet, and approves them.
+- **The machine check** (`GapSentenceTests`) confirms that every pair of braces holds the
+  Conjugator's conjugation of its cell in the sentence's gender, that the quiz accepts it, that a
+  sentence whose answer would vary with the learner's gender setting fixes a gender, that every
+  sentence is asked at some level, and that the top 300 have their counts. The person against the
+  subject, which the Conjugator cannot see when two cells share a form, is the script's `check`,
+  by the subject pronoun before the braces.
+- **One blank.** The braces hold the whole conjugation, auxiliary and participle together, and no
+  pronoun, so no negation, adverb, or inversion splits a compound tense: "Ce matin, j'{ai fini}",
+  never "je n'ai pas fini". A simple tense may stand in a negation ("Je ne {peux} pas").
+- **Agreement is the sentence's.** A sentence's subject fixes an être verb's agreement
+  (`QuizQuestion.pronounGender`), whatever the setting: "Mes cousines {sont arrivées}". For je, tu,
+  nous, and vous in a compound tense the field shows (fém.) or (masc.), from the sentence or, for
+  an avoir verb, the setting, as the one-line frame does, so the mark reveals no auxiliary. An
+  impératif shows (tu), (nous), or (vous), since "{Viens} dîner chez nous" takes viens or venez
+  alike.
+- **The screen.** The verb, its gloss, and the tense, then the sentence laid out word by word
+  (`AnswerFrameView`, `FlowLayout`) with a compact field of one width, so its width does not hint at
+  the answer's length; a word that touches the blank (j', a following "!") stays beside the field.
+  The English is below. Grading, one more try, the diagnosis ("Avec être, le participe s'accorde
+  avec le sujet…" inside a sentence), the held correction, and the practice record work as in the
+  quiz. The correction adds the completed sentence, and each results row shows it.
+- **Rounds.** The level's sentences: the verb in the level's band and the tense among its tenses.
+  Ten a round, the session's unasked sentences first and one a verb where the pool allows; a short
+  pool makes a short round, and Ten More starts over once all are asked. Never ranked, no due
+  items, no `ChangeLevelTip`. The results and the last result name the level.
+- **Drafts.** A debug build asks unreviewed sentences too, with "Draft" / "Brouillon" on the card
+  (`quiz_sentence_draft`), so a new sentence can be tried where a learner meets it; a release build
+  asks only reviewed ones. All 750 are reviewed.
+- **The literary reward.** Every quiz's results offer the verb's example sentence (the verb page's,
+  with its attribution) on the first right row of each verb (`QuizResult.firstRightOfEachVerb`),
+  behind an "Example Use" button (`results_example_<verb key>`). The quiz itself never pauses
+  after a right answer. The reveal sends nothing, since only right rows offer it.
+- **VoiceOver.** The field reads the sentence with "blank" in place of the answer ("Ce couteau,
+  blank, à couper le pain"), with the gender or the addressee where the screen shows one. The
+  question speaks the verb and gloss, then "Sentence:" and that prompt in French, and the English.
+  The correction's spoken text ends with the completed sentence.
+- **The fixture.** `-CONJUGUER_QUIZ_FIXTURE sentences`, used once Phrases à trous starts, asks ten
+  sentences, one for each kind of frame (`Quiz.sentencesFixtureIDs`): viens (tu), sommes allées
+  (fém.), ai eu after j', aille, prenant, écoute before a "!", a fallu, fit, êtes venues, and sommes
+  restés. Answers worth trying: `sommes allés` for the second (the agreement diagnosis, then one
+  more try) and `fait` for fit (the tense named, then the held correction with the sentence).
+- **Identifiers.** `quiz_sentences_button` (or `quiz_sentences_empty`), `quiz_sentence_english`,
+  `quiz_sentence_draft`, `quiz_correction_sentence`, `results_example_<verb key>`, and
+  `results_example_text`.
+
 ### Signals
 
 `quizStart` (`level`, `source`), `quizQuit` (`level`, `lastQuestionIndex`, `duration`, `source`),
 `quizCompletion` (`level`, `questionCount`, `duration`, `source`), and `quizAbandon` (`level`,
-`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, `verbEssentials`, `modelAlone`, `modelMixed`, or `recognition`, so a
+`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, `verbEssentials`, `modelAlone`, `modelMixed`, `recognition`, or `sentences`, so a
 three-question quiz does not inflate the ten-question quiz's completion rate.
 
 - **No signal carries a score or a count of right or wrong answers.** `lastQuestionIndex` is the

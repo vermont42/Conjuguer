@@ -178,7 +178,8 @@ struct FlowLayout: SwiftUI.Layout {
       var x = bounds.minX
       for index in row.indices {
         let size = subviews[index].sizeThatFits(.unspecified)
-        subviews[index].place(at: CGPoint(x: x, y: y), proposal: ProposedViewSize(size))
+        // Centered in its row, so that a sentence's words line up with the field between them.
+        subviews[index].place(at: CGPoint(x: x, y: y + (row.height - size.height) / 2), proposal: ProposedViewSize(size))
         x += size.width + spacing
       }
       y += row.height + spacing

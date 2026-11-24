@@ -1,0 +1,6765 @@
+[
+  {
+    "id": "être.indicatifPrésent.1",
+    "verb": "être",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {sommes} en retard ce matin.",
+    "en": "We are late this morning.",
+    "reviewed": true
+  },
+  {
+    "id": "être.passéComposé.1",
+    "verb": "être",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Hier, il {a été} malade toute la journée.",
+    "en": "Yesterday he was sick all day.",
+    "reviewed": true
+  },
+  {
+    "id": "être.imparfait.1",
+    "verb": "être",
+    "tense": "imparfait",
+    "person": "sp",
+    "fr": "Quand vous {étiez} petits, vous aimiez la mer.",
+    "en": "When you were little, you loved the sea.",
+    "reviewed": true
+  },
+  {
+    "id": "être.subjonctifPrésent.1",
+    "verb": "être",
+    "tense": "subjonctifPrésent",
+    "person": "ss",
+    "fr": "Il faut que tu {sois} à l’heure demain.",
+    "en": "You have to be on time tomorrow.",
+    "reviewed": true
+  },
+  {
+    "id": "être.passéSimple.1",
+    "verb": "être",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Napoléon {fut} empereur des Français.",
+    "en": "Napoleon was emperor of the French.",
+    "reviewed": true
+  },
+  {
+    "id": "avoir.impératif.1",
+    "verb": "avoir",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Aie} confiance en toi !",
+    "en": "Have confidence in yourself!",
+    "reviewed": true
+  },
+  {
+    "id": "avoir.passéComposé.1",
+    "verb": "avoir",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "J’{ai eu} très peur cette nuit.",
+    "en": "I was very scared last night.",
+    "reviewed": true
+  },
+  {
+    "id": "avoir.futurSimple.1",
+    "verb": "avoir",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "Les enfants {auront} des vacances en juillet.",
+    "en": "The children will have a vacation in July.",
+    "reviewed": true
+  },
+  {
+    "id": "avoir.participePrésent.1",
+    "verb": "avoir",
+    "tense": "participePrésent",
+    "fr": "Il est sorti en {ayant} l’air content.",
+    "en": "He left looking happy.",
+    "reviewed": true
+  },
+  {
+    "id": "avoir.passéSimple.1",
+    "verb": "avoir",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Louis XIV {eut} un règne très long.",
+    "en": "Louis XIV had a very long reign.",
+    "reviewed": true
+  },
+  {
+    "id": "faire.indicatifPrésent.1",
+    "verb": "faire",
+    "tense": "indicatifPrésent",
+    "person": "sp",
+    "fr": "Vous {faites} du sport le samedi ?",
+    "en": "Do you play sports on Saturdays?",
+    "reviewed": true
+  },
+  {
+    "id": "faire.passéComposé.1",
+    "verb": "faire",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Qu’est-ce que tu {as fait} hier soir ?",
+    "en": "What did you do last night?",
+    "reviewed": true
+  },
+  {
+    "id": "faire.conditionnelPrésent.1",
+    "verb": "faire",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si j’avais le temps, je {ferais} un gâteau.",
+    "en": "If I had the time, I would make a cake.",
+    "reviewed": true
+  },
+  {
+    "id": "faire.plusQueParfait.1",
+    "verb": "faire",
+    "tense": "plusQueParfait",
+    "person": "tp",
+    "fr": "Quand je suis arrivé, ils {avaient fait} la vaisselle.",
+    "en": "When I arrived, they had done the dishes.",
+    "reviewed": true
+  },
+  {
+    "id": "faire.passéSimple.1",
+    "verb": "faire",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Ce soir-là, le roi {fit} venir son cuisinier.",
+    "en": "That evening the king summoned his cook.",
+    "reviewed": true
+  },
+  {
+    "id": "pouvoir.indicatifPrésent.1",
+    "verb": "pouvoir",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je ne {peux} pas venir ce soir.",
+    "en": "I can't come tonight.",
+    "reviewed": true
+  },
+  {
+    "id": "pouvoir.passéComposé.1",
+    "verb": "pouvoir",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Hier, nous {avons pu} finir à temps.",
+    "en": "Yesterday we were able to finish on time.",
+    "reviewed": true
+  },
+  {
+    "id": "pouvoir.imparfait.1",
+    "verb": "pouvoir",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Quand il était jeune, il {pouvait} courir longtemps.",
+    "en": "When he was young, he could run for a long time.",
+    "reviewed": true
+  },
+  {
+    "id": "pouvoir.subjonctifPrésent.1",
+    "verb": "pouvoir",
+    "tense": "subjonctifPrésent",
+    "person": "tp",
+    "fr": "Bien qu’ils {puissent} partir, ils restent.",
+    "en": "Although they can leave, they are staying.",
+    "reviewed": true
+  },
+  {
+    "id": "pouvoir.passéSimple.1",
+    "verb": "pouvoir",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Personne ne {put} ouvrir la lourde porte.",
+    "en": "Nobody could open the heavy door.",
+    "reviewed": true
+  },
+  {
+    "id": "devoir.indicatifPrésent.1",
+    "verb": "devoir",
+    "tense": "indicatifPrésent",
+    "person": "ss",
+    "fr": "Tu {dois} faire tes devoirs avant le dîner.",
+    "en": "You must do your homework before dinner.",
+    "reviewed": true
+  },
+  {
+    "id": "devoir.passéComposé.1",
+    "verb": "devoir",
+    "tense": "passéComposé",
+    "person": "sp",
+    "fr": "Vous {avez dû} attendre longtemps hier ?",
+    "en": "Did you have to wait long yesterday?",
+    "reviewed": true
+  },
+  {
+    "id": "devoir.futurSimple.1",
+    "verb": "devoir",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "Demain, nous {devrons} nous lever tôt.",
+    "en": "Tomorrow we will have to get up early.",
+    "reviewed": true
+  },
+  {
+    "id": "devoir.conditionnelPassé.1",
+    "verb": "devoir",
+    "tense": "conditionnelPassé",
+    "person": "ss",
+    "fr": "Tu {aurais dû} me prévenir plus tôt.",
+    "en": "You should have warned me earlier.",
+    "reviewed": true
+  },
+  {
+    "id": "devoir.passéSimple.1",
+    "verb": "devoir",
+    "tense": "passéSimple",
+    "person": "tp",
+    "fr": "Les voyageurs {durent} passer la nuit dans l’auberge.",
+    "en": "The travelers had to spend the night at the inn.",
+    "reviewed": true
+  },
+  {
+    "id": "aller.impératif.1",
+    "verb": "aller",
+    "tense": "impératif",
+    "person": "fp",
+    "fr": "{Allons} au marché !",
+    "en": "Let's go to the market!",
+    "reviewed": true
+  },
+  {
+    "id": "aller.passéComposé.1",
+    "verb": "aller",
+    "tense": "passéComposé",
+    "person": "fp",
+    "gender": "f",
+    "fr": "Marie et moi, nous {sommes allées} au cinéma hier soir.",
+    "en": "Marie and I went to the movies last night.",
+    "reviewed": true
+  },
+  {
+    "id": "aller.imparfait.1",
+    "verb": "aller",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "Tous les étés, mes cousins {allaient} à la mer.",
+    "en": "Every summer my cousins went to the beach.",
+    "reviewed": true
+  },
+  {
+    "id": "aller.subjonctifPrésent.1",
+    "verb": "aller",
+    "tense": "subjonctifPrésent",
+    "person": "fs",
+    "fr": "Il faut que j’{aille} chez le médecin.",
+    "en": "I have to go to the doctor.",
+    "reviewed": true
+  },
+  {
+    "id": "aller.passéSimple.1",
+    "verb": "aller",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Le roi {alla} à Versailles pour l’hiver.",
+    "en": "The king went to Versailles for the winter.",
+    "reviewed": true
+  },
+  {
+    "id": "voir.indicatifPrésent.1",
+    "verb": "voir",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les enfants {voient} la neige par la fenêtre.",
+    "en": "The children see the snow through the window.",
+    "reviewed": true
+  },
+  {
+    "id": "voir.passéComposé.1",
+    "verb": "voir",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Tu {as vu} mon livre ce matin ?",
+    "en": "Did you see my book this morning?",
+    "reviewed": true
+  },
+  {
+    "id": "voir.futurSimple.1",
+    "verb": "voir",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "Vous {verrez}, ce film est excellent.",
+    "en": "You'll see, this movie is excellent.",
+    "reviewed": true
+  },
+  {
+    "id": "voir.participePrésent.1",
+    "verb": "voir",
+    "tense": "participePrésent",
+    "fr": "Elle a souri en {voyant} son cadeau.",
+    "en": "She smiled when she saw her gift.",
+    "reviewed": true
+  },
+  {
+    "id": "voir.passéSimple.1",
+    "verb": "voir",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Colomb {vit} la terre le douze octobre 1492.",
+    "en": "Columbus saw land on October 12, 1492.",
+    "reviewed": true
+  },
+  {
+    "id": "dire.impératif.1",
+    "verb": "dire",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Dites} bonjour à votre grand-mère !",
+    "en": "Say hello to your grandmother!",
+    "reviewed": true
+  },
+  {
+    "id": "dire.passéComposé.1",
+    "verb": "dire",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Je lui {ai dit} la vérité hier.",
+    "en": "I told him the truth yesterday.",
+    "reviewed": true
+  },
+  {
+    "id": "dire.conditionnelPrésent.1",
+    "verb": "dire",
+    "tense": "conditionnelPrésent",
+    "person": "ts",
+    "fr": "Si elle savait, elle nous le {dirait}.",
+    "en": "If she knew, she would tell us.",
+    "reviewed": true
+  },
+  {
+    "id": "dire.subjonctifPrésent.1",
+    "verb": "dire",
+    "tense": "subjonctifPrésent",
+    "person": "ss",
+    "fr": "Je veux que tu me {dises} ce qui se passe.",
+    "en": "I want you to tell me what is going on.",
+    "reviewed": true
+  },
+  {
+    "id": "dire.passéSimple.1",
+    "verb": "dire",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Le roi {dit} : « Je reviendrai au printemps. »",
+    "en": "The king said, \"I will return in the spring.\"",
+    "reviewed": true
+  },
+  {
+    "id": "mettre.indicatifPrésent.1",
+    "verb": "mettre",
+    "tense": "indicatifPrésent",
+    "person": "ss",
+    "fr": "Tu {mets} du sucre dans ton café ?",
+    "en": "Do you put sugar in your coffee?",
+    "reviewed": true
+  },
+  {
+    "id": "mettre.passéComposé.1",
+    "verb": "mettre",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Ma mère {a mis} la table avant le dîner.",
+    "en": "My mother set the table before dinner.",
+    "reviewed": true
+  },
+  {
+    "id": "mettre.imparfait.1",
+    "verb": "mettre",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "Petits, nous {mettions} nos bottes quand il pleuvait.",
+    "en": "As kids, we put on our boots when it rained.",
+    "reviewed": true
+  },
+  {
+    "id": "mettre.conditionnelPassé.1",
+    "verb": "mettre",
+    "tense": "conditionnelPassé",
+    "person": "fs",
+    "fr": "S’il avait fait froid, j’{aurais mis} mon manteau.",
+    "en": "If it had been cold, I would have put on my coat.",
+    "reviewed": true
+  },
+  {
+    "id": "mettre.passéSimple.1",
+    "verb": "mettre",
+    "tense": "passéSimple",
+    "person": "tp",
+    "fr": "Les ouvriers {mirent} dix ans à bâtir la cathédrale.",
+    "en": "The workers took ten years to build the cathedral.",
+    "reviewed": true
+  },
+  {
+    "id": "permettre.indicatifPrésent.1",
+    "verb": "permettre",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ce billet vous {permet} d’entrer au musée.",
+    "en": "This ticket lets you enter the museum.",
+    "reviewed": true
+  },
+  {
+    "id": "permettre.passéComposé.1",
+    "verb": "permettre",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Mes parents m’{ont permis} de sortir samedi.",
+    "en": "My parents let me go out on Saturday.",
+    "reviewed": true
+  },
+  {
+    "id": "permettre.futurSimple.1",
+    "verb": "permettre",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "Je vous {permettrai} de partir plus tôt.",
+    "en": "I will allow you to leave earlier.",
+    "reviewed": true
+  },
+  {
+    "id": "permettre.subjonctifPrésent.1",
+    "verb": "permettre",
+    "tense": "subjonctifPrésent",
+    "person": "sp",
+    "fr": "Je suis content que vous me {permettiez} de parler.",
+    "en": "I am glad you are allowing me to speak.",
+    "reviewed": true
+  },
+  {
+    "id": "permettre.passéSimple.1",
+    "verb": "permettre",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Le roi {permit} aux marchands de vendre sur la place.",
+    "en": "The king allowed the merchants to sell in the square.",
+    "reviewed": true
+  },
+  {
+    "id": "prendre.impératif.1",
+    "verb": "prendre",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Prends} ton parapluie, il va pleuvoir !",
+    "en": "Take your umbrella, it's going to rain!",
+    "reviewed": true
+  },
+  {
+    "id": "prendre.passéComposé.1",
+    "verb": "prendre",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Ce matin, nous {avons pris} le train de huit heures.",
+    "en": "This morning we took the eight o'clock train.",
+    "reviewed": true
+  },
+  {
+    "id": "prendre.imparfait.1",
+    "verb": "prendre",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Chaque matin, mon père {prenait} le bus.",
+    "en": "Every morning my father took the bus.",
+    "reviewed": true
+  },
+  {
+    "id": "prendre.participePrésent.1",
+    "verb": "prendre",
+    "tense": "participePrésent",
+    "fr": "Elle a perdu ses clés en {prenant} son manteau.",
+    "en": "She lost her keys while taking her coat.",
+    "reviewed": true
+  },
+  {
+    "id": "prendre.passéSimple.1",
+    "verb": "prendre",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Napoléon {prit} le pouvoir en 1799.",
+    "en": "Napoleon took power in 1799.",
+    "reviewed": true
+  },
+  {
+    "id": "savoir.indicatifPrésent.1",
+    "verb": "savoir",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je ne {sais} pas où est la gare.",
+    "en": "I don't know where the station is.",
+    "reviewed": true
+  },
+  {
+    "id": "savoir.passéComposé.1",
+    "verb": "savoir",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Elle {a su} la nouvelle par sa voisine.",
+    "en": "She learned the news from her neighbor.",
+    "reviewed": true
+  },
+  {
+    "id": "savoir.futurSimple.1",
+    "verb": "savoir",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "Vous {saurez} les résultats lundi.",
+    "en": "You will know the results on Monday.",
+    "reviewed": true
+  },
+  {
+    "id": "savoir.subjonctifPrésent.1",
+    "verb": "savoir",
+    "tense": "subjonctifPrésent",
+    "person": "fs",
+    "fr": "Bien que je ne {sache} pas nager, j’aime la plage.",
+    "en": "Although I can't swim, I like the beach.",
+    "reviewed": true
+  },
+  {
+    "id": "savoir.passéSimple.1",
+    "verb": "savoir",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Le roi {sut} que sa fille revenait.",
+    "en": "The king learned that his daughter was returning.",
+    "reviewed": true
+  },
+  {
+    "id": "falloir.indicatifPrésent.1",
+    "verb": "falloir",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Il {faut} deux heures pour aller à Lyon.",
+    "en": "It takes two hours to get to Lyon.",
+    "reviewed": true
+  },
+  {
+    "id": "falloir.passéComposé.1",
+    "verb": "falloir",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Hier, il {a fallu} attendre une heure.",
+    "en": "Yesterday we had to wait an hour.",
+    "reviewed": true
+  },
+  {
+    "id": "falloir.imparfait.1",
+    "verb": "falloir",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Autrefois, il {fallait} marcher jusqu’au village.",
+    "en": "In the old days, you had to walk to the village.",
+    "reviewed": true
+  },
+  {
+    "id": "falloir.subjonctifPrésent.1",
+    "verb": "falloir",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Bien qu’il {faille} se lever tôt, j’aime ce travail.",
+    "en": "Although you have to get up early, I like this job.",
+    "reviewed": true
+  },
+  {
+    "id": "falloir.passéSimple.1",
+    "verb": "falloir",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Il {fallut} trois jours pour traverser la forêt.",
+    "en": "It took three days to cross the forest.",
+    "reviewed": true
+  },
+  {
+    "id": "donner.impératif.1",
+    "verb": "donner",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Donne} la main à ta sœur !",
+    "en": "Hold your sister's hand!",
+    "reviewed": true
+  },
+  {
+    "id": "donner.passéComposé.1",
+    "verb": "donner",
+    "tense": "passéComposé",
+    "person": "sp",
+    "fr": "Vous m’{avez donné} un bon conseil hier.",
+    "en": "You gave me good advice yesterday.",
+    "reviewed": true
+  },
+  {
+    "id": "donner.conditionnelPrésent.1",
+    "verb": "donner",
+    "tense": "conditionnelPrésent",
+    "person": "fp",
+    "fr": "Si nous gagnions, nous {donnerions} la moitié à l’école.",
+    "en": "If we won, we would give half to the school.",
+    "reviewed": true
+  },
+  {
+    "id": "donner.subjonctifPrésent.1",
+    "verb": "donner",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Je voudrais que ta mère te {donne} ce livre.",
+    "en": "I would like your mother to give you this book.",
+    "reviewed": true
+  },
+  {
+    "id": "donner.passéSimple.1",
+    "verb": "donner",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Le roi {donna} une grande fête pour son mariage.",
+    "en": "The king gave a big party for his wedding.",
+    "reviewed": true
+  },
+  {
+    "id": "trouver.indicatifPrésent.1",
+    "verb": "trouver",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les touristes {trouvent} la ville très jolie.",
+    "en": "The tourists find the city very pretty.",
+    "reviewed": true
+  },
+  {
+    "id": "trouver.passéComposé.1",
+    "verb": "trouver",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Où est-ce que tu {as trouvé} ce chapeau ?",
+    "en": "Where did you find that hat?",
+    "reviewed": true
+  },
+  {
+    "id": "trouver.futurSimple.1",
+    "verb": "trouver",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "Je {trouverai} une solution demain.",
+    "en": "I will find a solution tomorrow.",
+    "reviewed": true
+  },
+  {
+    "id": "trouver.plusQueParfait.1",
+    "verb": "trouver",
+    "tense": "plusQueParfait",
+    "person": "ts",
+    "fr": "Quand nous sommes rentrés, le chat {avait trouvé} la saucisse.",
+    "en": "When we got home, the cat had found the sausage.",
+    "reviewed": true
+  },
+  {
+    "id": "trouver.passéSimple.1",
+    "verb": "trouver",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Le marin {trouva} une île déserte.",
+    "en": "The sailor found a deserted island.",
+    "reviewed": true
+  },
+  {
+    "id": "vouloir.impératif.1",
+    "verb": "vouloir",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Veuillez} patienter un instant, s’il vous plaît.",
+    "en": "Please wait a moment.",
+    "reviewed": true
+  },
+  {
+    "id": "vouloir.passéComposé.1",
+    "verb": "vouloir",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Elle {a voulu} acheter la robe rouge.",
+    "en": "She wanted to buy the red dress.",
+    "reviewed": true
+  },
+  {
+    "id": "vouloir.conditionnelPrésent.1",
+    "verb": "vouloir",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Je {voudrais} un verre d’eau, s’il vous plaît.",
+    "en": "I would like a glass of water, please.",
+    "reviewed": true
+  },
+  {
+    "id": "vouloir.conditionnelPassé.1",
+    "verb": "vouloir",
+    "tense": "conditionnelPassé",
+    "person": "fp",
+    "fr": "Nous {aurions voulu} venir, mais il pleuvait.",
+    "en": "We would have liked to come, but it was raining.",
+    "reviewed": true
+  },
+  {
+    "id": "vouloir.passéSimple.1",
+    "verb": "vouloir",
+    "tense": "passéSimple",
+    "person": "tp",
+    "fr": "Les enfants {voulurent} voir la mer.",
+    "en": "The children wanted to see the sea.",
+    "reviewed": true
+  },
+  {
+    "id": "passer.indicatifPrésent.1",
+    "verb": "passer",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le bus {passe} devant l’école à huit heures.",
+    "en": "The bus goes past the school at eight o'clock.",
+    "reviewed": true
+  },
+  {
+    "id": "passer.passéComposé.1",
+    "verb": "passer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "gender": "f",
+    "fr": "Ma tante {est passée} chez nous dimanche.",
+    "en": "My aunt stopped by our house on Sunday.",
+    "reviewed": true
+  },
+  {
+    "id": "passer.imparfait.1",
+    "verb": "passer",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "Tous les étés, nous {passions} par ce village.",
+    "en": "Every summer we went through this village.",
+    "reviewed": true
+  },
+  {
+    "id": "passer.subjonctifPrésent.1",
+    "verb": "passer",
+    "tense": "subjonctifPrésent",
+    "person": "ss",
+    "fr": "Il faut que tu {passes} par la banque.",
+    "en": "You have to stop by the bank.",
+    "reviewed": true
+  },
+  {
+    "id": "passer.passéSimple.1",
+    "verb": "passer",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Le train {passa} sans s’arrêter.",
+    "en": "The train went by without stopping.",
+    "reviewed": true
+  },
+  {
+    "id": "venir.impératif.1",
+    "verb": "venir",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Viens} dîner chez nous samedi !",
+    "en": "Come have dinner at our place on Saturday!",
+    "reviewed": true
+  },
+  {
+    "id": "venir.passéComposé.1",
+    "verb": "venir",
+    "tense": "passéComposé",
+    "person": "sp",
+    "gender": "f",
+    "fr": "Mesdames, vous {êtes venues} très tôt ce matin.",
+    "en": "Ladies, you came very early this morning.",
+    "reviewed": true
+  },
+  {
+    "id": "venir.futurSimple.1",
+    "verb": "venir",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "Mes cousins {viendront} nous voir en juillet.",
+    "en": "My cousins will come see us in July.",
+    "reviewed": true
+  },
+  {
+    "id": "venir.conditionnelPassé.1",
+    "verb": "venir",
+    "tense": "conditionnelPassé",
+    "person": "fs",
+    "gender": "m",
+    "fr": "Si tu m’avais prévenu, Paul, je {serais venu} te chercher.",
+    "en": "If you had warned me, Paul, I would have come to pick you up.",
+    "reviewed": true
+  },
+  {
+    "id": "venir.passéSimple.1",
+    "verb": "venir",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Un jour, un étranger {vint} frapper à la porte.",
+    "en": "One day a stranger came knocking at the door.",
+    "reviewed": true
+  },
+  {
+    "id": "proposer.indicatifPrésent.1",
+    "verb": "proposer",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je {propose} une promenade au bord du lac.",
+    "en": "I suggest a walk by the lake.",
+    "reviewed": true
+  },
+  {
+    "id": "proposer.passéComposé.1",
+    "verb": "proposer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Le professeur {a proposé} un nouveau jeu.",
+    "en": "The teacher suggested a new game.",
+    "reviewed": true
+  },
+  {
+    "id": "proposer.imparfait.1",
+    "verb": "proposer",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "Chaque dimanche, nos parents {proposaient} une promenade.",
+    "en": "Every Sunday our parents suggested a walk.",
+    "reviewed": true
+  },
+  {
+    "id": "proposer.subjonctifPrésent.1",
+    "verb": "proposer",
+    "tense": "subjonctifPrésent",
+    "person": "sp",
+    "fr": "Il faut que vous {proposiez} une autre date.",
+    "en": "You need to suggest another date.",
+    "reviewed": true
+  },
+  {
+    "id": "proposer.passéSimple.1",
+    "verb": "proposer",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Le maire {proposa} de construire un pont.",
+    "en": "The mayor proposed building a bridge.",
+    "reviewed": true
+  },
+  {
+    "id": "utiliser.impératif.1",
+    "verb": "utiliser",
+    "tense": "impératif",
+    "person": "fp",
+    "fr": "{Utilisons} des sacs en tissu pour le marché !",
+    "en": "Let's use cloth bags for the market!",
+    "reviewed": true
+  },
+  {
+    "id": "utiliser.passéComposé.1",
+    "verb": "utiliser",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Tu {as utilisé} mon stylo ce matin ?",
+    "en": "Did you use my pen this morning?",
+    "reviewed": true
+  },
+  {
+    "id": "utiliser.futurSimple.1",
+    "verb": "utiliser",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "L’école {utilisera} des tablettes l’an prochain.",
+    "en": "The school will use tablets next year.",
+    "reviewed": true
+  },
+  {
+    "id": "utiliser.participePrésent.1",
+    "verb": "utiliser",
+    "tense": "participePrésent",
+    "fr": "Tu gagneras du temps en {utilisant} cette application.",
+    "en": "You will save time by using this app.",
+    "reviewed": true
+  },
+  {
+    "id": "utiliser.passéSimple.1",
+    "verb": "utiliser",
+    "tense": "passéSimple",
+    "person": "tp",
+    "fr": "Les Romains {utilisèrent} des aqueducs pour amener l’eau.",
+    "en": "The Romans used aqueducts to bring in water.",
+    "reviewed": true
+  },
+  {
+    "id": "rendre.indicatifPrésent.1",
+    "verb": "rendre",
+    "tense": "indicatifPrésent",
+    "person": "sp",
+    "fr": "Vous {rendez} les livres à la bibliothèque jeudi.",
+    "en": "You return the books to the library on Thursday.",
+    "reviewed": true
+  },
+  {
+    "id": "rendre.passéComposé.1",
+    "verb": "rendre",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "J’{ai rendu} son stylo à Paul.",
+    "en": "I gave Paul his pen back.",
+    "reviewed": true
+  },
+  {
+    "id": "rendre.imparfait.1",
+    "verb": "rendre",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Cette musique {rendait} tout le monde joyeux.",
+    "en": "That music made everyone cheerful.",
+    "reviewed": true
+  },
+  {
+    "id": "rendre.subjonctifPrésent.1",
+    "verb": "rendre",
+    "tense": "subjonctifPrésent",
+    "person": "tp",
+    "fr": "Le prof veut que les élèves {rendent} leurs devoirs lundi.",
+    "en": "The teacher wants the students to hand in their homework on Monday.",
+    "reviewed": true
+  },
+  {
+    "id": "rendre.passéSimple.1",
+    "verb": "rendre",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Le chevalier {rendit} l’épée au roi.",
+    "en": "The knight gave the sword back to the king.",
+    "reviewed": true
+  },
+  {
+    "id": "rester.impératif.1",
+    "verb": "rester",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Reste} avec nous ce soir !",
+    "en": "Stay with us tonight!",
+    "reviewed": true
+  },
+  {
+    "id": "rester.passéComposé.1",
+    "verb": "rester",
+    "tense": "passéComposé",
+    "person": "fp",
+    "gender": "m",
+    "fr": "Paul et moi, nous {sommes restés} à la maison dimanche.",
+    "en": "Paul and I stayed home on Sunday.",
+    "reviewed": true
+  },
+  {
+    "id": "rester.conditionnelPrésent.1",
+    "verb": "rester",
+    "tense": "conditionnelPrésent",
+    "person": "tp",
+    "fr": "S’il pleuvait, ils {resteraient} à la maison.",
+    "en": "If it rained, they would stay home.",
+    "reviewed": true
+  },
+  {
+    "id": "rester.plusQueParfait.1",
+    "verb": "rester",
+    "tense": "plusQueParfait",
+    "person": "ts",
+    "gender": "f",
+    "fr": "Quand nous sommes arrivés, Léa {était restée} seule.",
+    "en": "When we arrived, Léa had stayed alone.",
+    "reviewed": true
+  },
+  {
+    "id": "rester.passéSimple.1",
+    "verb": "rester",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Le vieux roi {resta} longtemps devant la fenêtre.",
+    "en": "The old king stayed at the window for a long time.",
+    "reviewed": true
+  },
+  {
+    "id": "concerner.indicatifPrésent.1",
+    "verb": "concerner",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Cette règle {concerne} tous les élèves.",
+    "en": "This rule concerns all the students.",
+    "reviewed": true
+  },
+  {
+    "id": "concerner.passéComposé.1",
+    "verb": "concerner",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "L’annonce {a concerné} surtout les parents.",
+    "en": "The announcement mostly concerned the parents.",
+    "reviewed": true
+  },
+  {
+    "id": "concerner.futurSimple.1",
+    "verb": "concerner",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "Ces changements {concerneront} tous les habitants.",
+    "en": "These changes will affect all the residents.",
+    "reviewed": true
+  },
+  {
+    "id": "concerner.subjonctifPrésent.1",
+    "verb": "concerner",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Bien que cela ne nous {concerne} pas, nous écoutons.",
+    "en": "Although it doesn't concern us, we are listening.",
+    "reviewed": true
+  },
+  {
+    "id": "concerner.passéSimple.1",
+    "verb": "concerner",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Cette loi {concerna} d’abord les paysans.",
+    "en": "This law first concerned the peasants.",
+    "reviewed": true
+  },
+  {
+    "id": "présenter.impératif.1",
+    "verb": "présenter",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Présente} ton ami à ta mère !",
+    "en": "Introduce your friend to your mother!",
+    "reviewed": true
+  },
+  {
+    "id": "présenter.passéComposé.1",
+    "verb": "présenter",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Nous {avons présenté} notre projet à la classe.",
+    "en": "We presented our project to the class.",
+    "reviewed": true
+  },
+  {
+    "id": "présenter.futurSimple.1",
+    "verb": "présenter",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "Demain, je {présenterai} mon exposé.",
+    "en": "Tomorrow I will give my presentation.",
+    "reviewed": true
+  },
+  {
+    "id": "présenter.conditionnelPassé.1",
+    "verb": "présenter",
+    "tense": "conditionnelPassé",
+    "person": "fs",
+    "fr": "Si tu avais voulu, je t’{aurais présenté} ma sœur.",
+    "en": "If you had wanted, I would have introduced you to my sister.",
+    "reviewed": true
+  },
+  {
+    "id": "présenter.passéSimple.1",
+    "verb": "présenter",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Le chef {présenta} son plan aux villageois.",
+    "en": "The chief presented his plan to the villagers.",
+    "reviewed": true
+  },
+  {
+    "id": "lire.indicatifPrésent.1",
+    "verb": "lire",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Mes enfants {lisent} un chapitre avant de dormir.",
+    "en": "My children read a chapter before sleeping.",
+    "reviewed": true
+  },
+  {
+    "id": "lire.passéComposé.1",
+    "verb": "lire",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Le week-end dernier, j’{ai lu} un roman policier.",
+    "en": "Last weekend I read a detective novel.",
+    "reviewed": true
+  },
+  {
+    "id": "lire.imparfait.1",
+    "verb": "lire",
+    "tense": "imparfait",
+    "person": "ss",
+    "fr": "Quand tu étais petit, tu {lisais} sous la couverture.",
+    "en": "When you were little, you read under the covers.",
+    "reviewed": true
+  },
+  {
+    "id": "lire.subjonctifPrésent.1",
+    "verb": "lire",
+    "tense": "subjonctifPrésent",
+    "person": "sp",
+    "fr": "Il est important que vous {lisiez} la consigne.",
+    "en": "It is important that you read the instructions.",
+    "reviewed": true
+  },
+  {
+    "id": "lire.passéSimple.1",
+    "verb": "lire",
+    "tense": "passéSimple",
+    "person": "ts",
+    "fr": "Victor Hugo {lut} ses poèmes devant ses amis.",
+    "en": "Victor Hugo read his poems to his friends.",
+    "reviewed": true
+  },
+  {
+    "id": "connaître.indicatifPrésent.1",
+    "verb": "connaître",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Elle {connaît} très bien cette ville.",
+    "en": "She knows this city very well.",
+    "reviewed": true
+  },
+  {
+    "id": "connaître.passéComposé.1",
+    "verb": "connaître",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Nous {avons connu} nos voisins l’été dernier.",
+    "en": "We met our neighbors last summer.",
+    "reviewed": true
+  },
+  {
+    "id": "connaître.subjonctifPrésent.1",
+    "verb": "connaître",
+    "tense": "subjonctifPrésent",
+    "person": "sp",
+    "fr": "Il faut que vous {connaissiez} bien la route.",
+    "en": "You need to know the route well.",
+    "reviewed": true
+  },
+  {
+    "id": "créer.impératif.1",
+    "verb": "créer",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Crée} un compte avant de commencer !",
+    "en": "Create an account before you start!",
+    "reviewed": true
+  },
+  {
+    "id": "créer.passéComposé.1",
+    "verb": "créer",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Ces élèves {ont créé} un journal pour l’école.",
+    "en": "These students created a newspaper for the school.",
+    "reviewed": true
+  },
+  {
+    "id": "créer.futurSimple.1",
+    "verb": "créer",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "L’année prochaine, je {créerai} mon propre site.",
+    "en": "Next year I will create my own website.",
+    "reviewed": true
+  },
+  {
+    "id": "devenir.indicatifPrésent.1",
+    "verb": "devenir",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le ciel {devient} gris avant l’orage.",
+    "en": "The sky turns gray before the storm.",
+    "reviewed": true
+  },
+  {
+    "id": "devenir.passéComposé.1",
+    "verb": "devenir",
+    "tense": "passéComposé",
+    "person": "ts",
+    "gender": "f",
+    "fr": "Ma petite sœur {est devenue} médecin.",
+    "en": "My little sister became a doctor.",
+    "reviewed": true
+  },
+  {
+    "id": "devenir.conditionnelPrésent.1",
+    "verb": "devenir",
+    "tense": "conditionnelPrésent",
+    "person": "sp",
+    "fr": "Si vous travailliez plus, vous {deviendriez} champions.",
+    "en": "If you worked harder, you would become champions.",
+    "reviewed": true
+  },
+  {
+    "id": "réaliser.indicatifPrésent.1",
+    "verb": "réaliser",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {réalisons} un film sur notre village.",
+    "en": "We are making a movie about our village.",
+    "reviewed": true
+  },
+  {
+    "id": "réaliser.passéComposé.1",
+    "verb": "réaliser",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "J’{ai réalisé} mon rêve ce printemps.",
+    "en": "I fulfilled my dream this spring.",
+    "reviewed": true
+  },
+  {
+    "id": "réaliser.futurSimple.1",
+    "verb": "réaliser",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Ce metteur en scène {réalisera} son premier film l’an prochain.",
+    "en": "This director will make his first movie next year.",
+    "reviewed": true
+  },
+  {
+    "id": "écrire.indicatifPrésent.1",
+    "verb": "écrire",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "J’{écris} une carte à ma grand-mère.",
+    "en": "I am writing a card to my grandmother.",
+    "reviewed": true
+  },
+  {
+    "id": "écrire.passéComposé.1",
+    "verb": "écrire",
+    "tense": "passéComposé",
+    "person": "sp",
+    "fr": "Hier soir, vous {avez écrit} un long message.",
+    "en": "Last night you wrote a long message.",
+    "reviewed": true
+  },
+  {
+    "id": "écrire.imparfait.1",
+    "verb": "écrire",
+    "tense": "imparfait",
+    "person": "ss",
+    "fr": "Quand tu étais petit, tu {écrivais} des histoires.",
+    "en": "When you were little, you used to write stories.",
+    "reviewed": true
+  },
+  {
+    "id": "comprendre.impératif.1",
+    "verb": "comprendre",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Comprenez} bien la question avant de répondre.",
+    "en": "Understand the question well before answering.",
+    "reviewed": true
+  },
+  {
+    "id": "comprendre.passéComposé.1",
+    "verb": "comprendre",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Est-ce que tu {as compris} la leçon de ce matin ?",
+    "en": "Did you understand this morning's lesson?",
+    "reviewed": true
+  },
+  {
+    "id": "comprendre.subjonctifPrésent.1",
+    "verb": "comprendre",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Je veux qu’elle {comprenne} mon choix.",
+    "en": "I want her to understand my choice.",
+    "reviewed": true
+  },
+  {
+    "id": "demander.indicatifPrésent.1",
+    "verb": "demander",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Mes parents {demandent} toujours des nouvelles.",
+    "en": "My parents always ask for news.",
+    "reviewed": true
+  },
+  {
+    "id": "demander.passéComposé.1",
+    "verb": "demander",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Ce matin, j’{ai demandé} le chemin à un passant.",
+    "en": "This morning I asked a passerby for directions.",
+    "reviewed": true
+  },
+  {
+    "id": "demander.conditionnelPrésent.1",
+    "verb": "demander",
+    "tense": "conditionnelPrésent",
+    "person": "fp",
+    "fr": "Si nous nous perdions, nous {demanderions} notre chemin.",
+    "en": "If we got lost, we would ask for directions.",
+    "reviewed": true
+  },
+  {
+    "id": "penser.impératif.1",
+    "verb": "penser",
+    "tense": "impératif",
+    "person": "fp",
+    "fr": "{Pensons} à nos amis avant de partir !",
+    "en": "Let's think of our friends before we leave!",
+    "reviewed": true
+  },
+  {
+    "id": "penser.passéComposé.1",
+    "verb": "penser",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Hier, mes amis {ont pensé} à ton anniversaire.",
+    "en": "Yesterday my friends thought of your birthday.",
+    "reviewed": true
+  },
+  {
+    "id": "penser.imparfait.1",
+    "verb": "penser",
+    "tense": "imparfait",
+    "person": "fs",
+    "fr": "À l’époque, je {pensais} que le monde était petit.",
+    "en": "Back then, I thought the world was small.",
+    "reviewed": true
+  },
+  {
+    "id": "porter.indicatifPrésent.1",
+    "verb": "porter",
+    "tense": "indicatifPrésent",
+    "person": "ss",
+    "fr": "Tu {portes} un joli manteau rouge.",
+    "en": "You are wearing a nice red coat.",
+    "reviewed": true
+  },
+  {
+    "id": "porter.passéComposé.1",
+    "verb": "porter",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Il {a porté} les valises jusqu’à la gare.",
+    "en": "He carried the suitcases to the station.",
+    "reviewed": true
+  },
+  {
+    "id": "porter.futurSimple.1",
+    "verb": "porter",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "Vous {porterez} cette robe au mariage de Lucie.",
+    "en": "You will wear this dress to Lucie's wedding.",
+    "reviewed": true
+  },
+  {
+    "id": "agir.indicatifPrésent.1",
+    "verb": "agir",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Il {agit} toujours avec calme.",
+    "en": "He always acts calmly.",
+    "reviewed": true
+  },
+  {
+    "id": "agir.passéComposé.1",
+    "verb": "agir",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Nous {avons agi} trop vite hier soir.",
+    "en": "We acted too quickly last night.",
+    "reviewed": true
+  },
+  {
+    "id": "agir.subjonctifPrésent.1",
+    "verb": "agir",
+    "tense": "subjonctifPrésent",
+    "person": "ss",
+    "fr": "Il faut que tu {agisses} avant qu’il soit trop tard.",
+    "en": "You have to act before it's too late.",
+    "reviewed": true
+  },
+  {
+    "id": "parler.impératif.1",
+    "verb": "parler",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Parle} plus lentement, s’il te plaît.",
+    "en": "Speak more slowly, please.",
+    "reviewed": true
+  },
+  {
+    "id": "parler.passéComposé.1",
+    "verb": "parler",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Hier, les voisins {ont parlé} avec le maire.",
+    "en": "Yesterday the neighbors spoke with the mayor.",
+    "reviewed": true
+  },
+  {
+    "id": "parler.imparfait.1",
+    "verb": "parler",
+    "tense": "imparfait",
+    "person": "sp",
+    "fr": "Quand vous étiez petits, vous {parliez} italien à la maison.",
+    "en": "When you were little, you spoke Italian at home.",
+    "reviewed": true
+  },
+  {
+    "id": "suivre.indicatifPrésent.1",
+    "verb": "suivre",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je {suis} un cours de cuisine le mardi.",
+    "en": "I take a cooking class on Tuesdays.",
+    "reviewed": true
+  },
+  {
+    "id": "suivre.passéComposé.1",
+    "verb": "suivre",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Le chien {a suivi} les enfants jusqu’à l’école.",
+    "en": "The dog followed the children to school.",
+    "reviewed": true
+  },
+  {
+    "id": "suivre.conditionnelPrésent.1",
+    "verb": "suivre",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si tu me le demandais, je te {suivrais} partout.",
+    "en": "If you asked me, I would follow you anywhere.",
+    "reviewed": true
+  },
+  {
+    "id": "laisser.impératif.1",
+    "verb": "laisser",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Laisse} ton sac dans l’entrée.",
+    "en": "Leave your bag in the entryway.",
+    "reviewed": true
+  },
+  {
+    "id": "laisser.passéComposé.1",
+    "verb": "laisser",
+    "tense": "passéComposé",
+    "person": "sp",
+    "fr": "Vous {avez laissé} vos clés sur la table.",
+    "en": "You left your keys on the table.",
+    "reviewed": true
+  },
+  {
+    "id": "laisser.futurSimple.1",
+    "verb": "laisser",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Ma mère {laissera} un mot sur la porte.",
+    "en": "My mother will leave a note on the door.",
+    "reviewed": true
+  },
+  {
+    "id": "tenir.indicatifPrésent.1",
+    "verb": "tenir",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les enfants {tiennent} la main de leur maman.",
+    "en": "The children hold their mother's hand.",
+    "reviewed": true
+  },
+  {
+    "id": "tenir.passéComposé.1",
+    "verb": "tenir",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Hier, j’{ai tenu} la porte à une dame âgée.",
+    "en": "Yesterday I held the door for an elderly lady.",
+    "reviewed": true
+  },
+  {
+    "id": "tenir.subjonctifPrésent.1",
+    "verb": "tenir",
+    "tense": "subjonctifPrésent",
+    "person": "fp",
+    "fr": "Il faut que nous {tenions} bon jusqu’au bout.",
+    "en": "We have to hold on until the end.",
+    "reviewed": true
+  },
+  {
+    "id": "répondre.indicatifPrésent.1",
+    "verb": "répondre",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Elle {répond} toujours vite à mes messages.",
+    "en": "She always answers my messages quickly.",
+    "reviewed": true
+  },
+  {
+    "id": "répondre.passéComposé.1",
+    "verb": "répondre",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Tu {as répondu} à Marie ce matin ?",
+    "en": "Did you answer Marie this morning?",
+    "reviewed": true
+  },
+  {
+    "id": "répondre.futurSimple.1",
+    "verb": "répondre",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "Nous {répondrons} à vos questions demain.",
+    "en": "We will answer your questions tomorrow.",
+    "reviewed": true
+  },
+  {
+    "id": "vivre.indicatifPrésent.1",
+    "verb": "vivre",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {vivons} près de la mer.",
+    "en": "We live near the sea.",
+    "reviewed": true
+  },
+  {
+    "id": "vivre.passéComposé.1",
+    "verb": "vivre",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Mes grands-parents {ont vécu} longtemps à Lyon.",
+    "en": "My grandparents lived in Lyon for a long time.",
+    "reviewed": true
+  },
+  {
+    "id": "vivre.imparfait.1",
+    "verb": "vivre",
+    "tense": "imparfait",
+    "person": "fs",
+    "fr": "Avant, je {vivais} à la campagne.",
+    "en": "I used to live in the countryside.",
+    "reviewed": true
+  },
+  {
+    "id": "aimer.indicatifPrésent.1",
+    "verb": "aimer",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "J’{aime} le chocolat chaud en hiver.",
+    "en": "I like hot chocolate in the winter.",
+    "reviewed": true
+  },
+  {
+    "id": "aimer.passéComposé.1",
+    "verb": "aimer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Mon frère {a aimé} ce livre.",
+    "en": "My brother liked this book.",
+    "reviewed": true
+  },
+  {
+    "id": "aimer.conditionnelPrésent.1",
+    "verb": "aimer",
+    "tense": "conditionnelPrésent",
+    "person": "ss",
+    "fr": "Est-ce que tu {aimerais} venir avec nous ce week-end ?",
+    "en": "Would you like to come with us this weekend?",
+    "reviewed": true
+  },
+  {
+    "id": "ajouter.impératif.1",
+    "verb": "ajouter",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Ajoutez} un peu de sel dans la soupe.",
+    "en": "Add a little salt to the soup.",
+    "reviewed": true
+  },
+  {
+    "id": "ajouter.passéComposé.1",
+    "verb": "ajouter",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Tout à l’heure, j’{ai ajouté} du sucre dans le gâteau.",
+    "en": "A little while ago, I added sugar to the cake.",
+    "reviewed": true
+  },
+  {
+    "id": "ajouter.futurSimple.1",
+    "verb": "ajouter",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Le cuisinier {ajoutera} du poivre à la fin.",
+    "en": "The cook will add pepper at the end.",
+    "reviewed": true
+  },
+  {
+    "id": "assurer.indicatifPrésent.1",
+    "verb": "assurer",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je vous {assure} que tout va bien.",
+    "en": "I assure you that everything is fine.",
+    "reviewed": true
+  },
+  {
+    "id": "assurer.passéComposé.1",
+    "verb": "assurer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Cette équipe {a assuré} la sécurité du concert.",
+    "en": "This team provided security for the concert.",
+    "reviewed": true
+  },
+  {
+    "id": "assurer.subjonctifPrésent.1",
+    "verb": "assurer",
+    "tense": "subjonctifPrésent",
+    "person": "ss",
+    "fr": "Il faut que tu {assures} la sécurité des enfants.",
+    "en": "You have to ensure the children's safety.",
+    "reviewed": true
+  },
+  {
+    "id": "ouvrir.impératif.1",
+    "verb": "ouvrir",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Ouvre} la fenêtre, il fait chaud !",
+    "en": "Open the window, it's hot!",
+    "reviewed": true
+  },
+  {
+    "id": "ouvrir.passéComposé.1",
+    "verb": "ouvrir",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Les magasins {ont ouvert} tôt ce matin.",
+    "en": "The stores opened early this morning.",
+    "reviewed": true
+  },
+  {
+    "id": "ouvrir.imparfait.1",
+    "verb": "ouvrir",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Chaque matin, la boulangère {ouvrait} sa boutique à six heures.",
+    "en": "Every morning the baker opened her shop at six.",
+    "reviewed": true
+  },
+  {
+    "id": "publier.indicatifPrésent.1",
+    "verb": "publier",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ce journal {publie} une enquête chaque semaine.",
+    "en": "This newspaper publishes an investigation every week.",
+    "reviewed": true
+  },
+  {
+    "id": "publier.passéComposé.1",
+    "verb": "publier",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "L’année dernière, j’{ai publié} mon premier livre.",
+    "en": "Last year I published my first book.",
+    "reviewed": true
+  },
+  {
+    "id": "publier.futurSimple.1",
+    "verb": "publier",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "Les éditeurs {publieront} ce roman en mars.",
+    "en": "The publishers will release this novel in March.",
+    "reviewed": true
+  },
+  {
+    "id": "organiser.indicatifPrésent.1",
+    "verb": "organiser",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {organisons} une fête pour son anniversaire.",
+    "en": "We are planning a party for her birthday.",
+    "reviewed": true
+  },
+  {
+    "id": "organiser.passéComposé.1",
+    "verb": "organiser",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Tu {as organisé} le voyage tout seul ?",
+    "en": "Did you plan the trip all by yourself?",
+    "reviewed": true
+  },
+  {
+    "id": "organiser.conditionnelPrésent.1",
+    "verb": "organiser",
+    "tense": "conditionnelPrésent",
+    "person": "sp",
+    "fr": "Si vous aviez le temps, vous {organiseriez} un pique-nique.",
+    "en": "If you had time, you would organize a picnic.",
+    "reviewed": true
+  },
+  {
+    "id": "prévoir.indicatifPrésent.1",
+    "verb": "prévoir",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les météorologues {prévoient} de la pluie demain.",
+    "en": "The meteorologists are forecasting rain tomorrow.",
+    "reviewed": true
+  },
+  {
+    "id": "prévoir.passéComposé.1",
+    "verb": "prévoir",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "J’{ai prévu} un parapluie, au cas où.",
+    "en": "I packed an umbrella, just in case.",
+    "reviewed": true
+  },
+  {
+    "id": "prévoir.imparfait.1",
+    "verb": "prévoir",
+    "tense": "imparfait",
+    "person": "ss",
+    "fr": "Tu {prévoyais} de partir à six heures, non ?",
+    "en": "You were planning to leave at six, weren't you?",
+    "reviewed": true
+  },
+  {
+    "id": "souhaiter.indicatifPrésent.1",
+    "verb": "souhaiter",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {souhaitons} une bonne année à tous.",
+    "en": "We wish everyone a happy new year.",
+    "reviewed": true
+  },
+  {
+    "id": "souhaiter.passéComposé.1",
+    "verb": "souhaiter",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Le directeur {a souhaité} la bienvenue aux élèves.",
+    "en": "The principal welcomed the students.",
+    "reviewed": true
+  },
+  {
+    "id": "souhaiter.subjonctifPrésent.1",
+    "verb": "souhaiter",
+    "tense": "subjonctifPrésent",
+    "person": "ss",
+    "fr": "Maman veut que tu {souhaites} bon anniversaire à ton cousin.",
+    "en": "Mom wants you to wish your cousin a happy birthday.",
+    "reviewed": true
+  },
+  {
+    "id": "offrir.impératif.1",
+    "verb": "offrir",
+    "tense": "impératif",
+    "person": "fp",
+    "fr": "{Offrons} des fleurs à notre professeur !",
+    "en": "Let's give flowers to our teacher!",
+    "reviewed": true
+  },
+  {
+    "id": "offrir.passéComposé.1",
+    "verb": "offrir",
+    "tense": "passéComposé",
+    "person": "sp",
+    "fr": "Pour Noël, vous {avez offert} un beau cadeau à Sophie.",
+    "en": "For Christmas, you gave Sophie a nice gift.",
+    "reviewed": true
+  },
+  {
+    "id": "offrir.imparfait.1",
+    "verb": "offrir",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "Chaque Noël, mes parents {offraient} un livre à chacun.",
+    "en": "Every Christmas, my parents gave each of us a book.",
+    "reviewed": true
+  },
+  {
+    "id": "découvrir.indicatifPrésent.1",
+    "verb": "découvrir",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Chaque matin, mon fils {découvre} un nouveau jeu.",
+    "en": "Every morning my son discovers a new game.",
+    "reviewed": true
+  },
+  {
+    "id": "découvrir.passéComposé.1",
+    "verb": "découvrir",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Hier, nous {avons découvert} un joli café près du port.",
+    "en": "Yesterday we discovered a nice café near the harbor.",
+    "reviewed": true
+  },
+  {
+    "id": "découvrir.futurSimple.1",
+    "verb": "découvrir",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "Vous {découvrirez} la mer pendant les vacances.",
+    "en": "You will discover the sea during the vacation.",
+    "reviewed": true
+  },
+  {
+    "id": "constituer.indicatifPrésent.1",
+    "verb": "constituer",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les filles {constituent} la moitié de la classe.",
+    "en": "The girls make up half of the class.",
+    "reviewed": true
+  },
+  {
+    "id": "constituer.passéComposé.1",
+    "verb": "constituer",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Ce matin, j’{ai constitué} un dossier pour la banque.",
+    "en": "This morning I put together a file for the bank.",
+    "reviewed": true
+  },
+  {
+    "id": "constituer.subjonctifPrésent.1",
+    "verb": "constituer",
+    "tense": "subjonctifPrésent",
+    "person": "tp",
+    "fr": "Il faut que ces élèves {constituent} une équipe.",
+    "en": "These students have to form a team.",
+    "reviewed": true
+  },
+  {
+    "id": "arriver.indicatifPrésent.1",
+    "verb": "arriver",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le bus {arrive} dans cinq minutes.",
+    "en": "The bus arrives in five minutes.",
+    "reviewed": true
+  },
+  {
+    "id": "arriver.passéComposé.1",
+    "verb": "arriver",
+    "tense": "passéComposé",
+    "person": "tp",
+    "gender": "f",
+    "fr": "Mes cousines {sont arrivées} hier soir.",
+    "en": "My cousins arrived last night.",
+    "reviewed": true
+  },
+  {
+    "id": "arriver.futurSimple.1",
+    "verb": "arriver",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "Demain, nous {arriverons} à Lyon avant midi.",
+    "en": "Tomorrow we will arrive in Lyon before noon.",
+    "reviewed": true
+  },
+  {
+    "id": "poster.impératif.1",
+    "verb": "poster",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Poste} cette lettre avant midi, s’il te plaît.",
+    "en": "Mail this letter before noon, please.",
+    "reviewed": true
+  },
+  {
+    "id": "poster.passéComposé.1",
+    "verb": "poster",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Léa {a posté} une photo de son chat.",
+    "en": "Léa posted a photo of her cat.",
+    "reviewed": true
+  },
+  {
+    "id": "poster.conditionnelPrésent.1",
+    "verb": "poster",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si j’avais un timbre, je {posterais} la carte.",
+    "en": "If I had a stamp, I would mail the card.",
+    "reviewed": true
+  },
+  {
+    "id": "choisir.indicatifPrésent.1",
+    "verb": "choisir",
+    "tense": "indicatifPrésent",
+    "person": "sp",
+    "fr": "Vous {choisissez} un dessert ou un fromage ?",
+    "en": "Are you choosing a dessert or a cheese?",
+    "reviewed": true
+  },
+  {
+    "id": "choisir.passéComposé.1",
+    "verb": "choisir",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Tu {as choisi} une belle robe pour la fête.",
+    "en": "You chose a beautiful dress for the party.",
+    "reviewed": true
+  },
+  {
+    "id": "choisir.subjonctifPrésent.1",
+    "verb": "choisir",
+    "tense": "subjonctifPrésent",
+    "person": "fs",
+    "fr": "Mon père veut que je {choisisse} un métier utile.",
+    "en": "My father wants me to choose a useful career.",
+    "reviewed": true
+  },
+  {
+    "id": "attendre.indicatifPrésent.1",
+    "verb": "attendre",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "J’{attends} le train depuis vingt minutes.",
+    "en": "I have been waiting for the train for twenty minutes.",
+    "reviewed": true
+  },
+  {
+    "id": "attendre.passéComposé.1",
+    "verb": "attendre",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Les enfants {ont attendu} leur père devant la porte.",
+    "en": "The children waited for their father in front of the door.",
+    "reviewed": true
+  },
+  {
+    "id": "attendre.imparfait.1",
+    "verb": "attendre",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "Petits, nous {attendions} Noël avec impatience.",
+    "en": "As kids, we waited for Christmas impatiently.",
+    "reviewed": true
+  },
+  {
+    "id": "obtenir.indicatifPrésent.1",
+    "verb": "obtenir",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Elle {obtient} toujours de bonnes notes en maths.",
+    "en": "She always gets good grades in math.",
+    "reviewed": true
+  },
+  {
+    "id": "obtenir.passéComposé.1",
+    "verb": "obtenir",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Nous {avons obtenu} nos billets ce matin.",
+    "en": "We got our tickets this morning.",
+    "reviewed": true
+  },
+  {
+    "id": "obtenir.futurSimple.1",
+    "verb": "obtenir",
+    "tense": "futurSimple",
+    "person": "ss",
+    "fr": "Si tu travailles, tu {obtiendras} ton diplôme.",
+    "en": "If you work, you will get your degree.",
+    "reviewed": true
+  },
+  {
+    "id": "retrouver.impératif.1",
+    "verb": "retrouver",
+    "tense": "impératif",
+    "person": "fp",
+    "fr": "{Retrouvons} nos amis devant le cinéma !",
+    "en": "Let's meet our friends in front of the movie theater!",
+    "reviewed": true
+  },
+  {
+    "id": "retrouver.passéComposé.1",
+    "verb": "retrouver",
+    "tense": "passéComposé",
+    "person": "sp",
+    "fr": "Vous {avez retrouvé} vos clés sous le canapé ?",
+    "en": "Did you find your keys under the couch?",
+    "reviewed": true
+  },
+  {
+    "id": "retrouver.conditionnelPrésent.1",
+    "verb": "retrouver",
+    "tense": "conditionnelPrésent",
+    "person": "tp",
+    "fr": "S’ils cherchaient bien, ils {retrouveraient} leur chien.",
+    "en": "If they looked hard, they would find their dog.",
+    "reviewed": true
+  },
+  {
+    "id": "développer.indicatifPrésent.1",
+    "verb": "développer",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Cette entreprise {développe} une application pour les écoles.",
+    "en": "This company is developing an app for schools.",
+    "reviewed": true
+  },
+  {
+    "id": "développer.passéComposé.1",
+    "verb": "développer",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "L’année dernière, j’{ai développé} un petit jeu vidéo.",
+    "en": "Last year I developed a little video game.",
+    "reviewed": true
+  },
+  {
+    "id": "développer.subjonctifPrésent.1",
+    "verb": "développer",
+    "tense": "subjonctifPrésent",
+    "person": "sp",
+    "fr": "Il faut que vous {développiez} votre vocabulaire.",
+    "en": "You need to build up your vocabulary.",
+    "reviewed": true
+  },
+  {
+    "id": "recevoir.indicatifPrésent.1",
+    "verb": "recevoir",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Mes voisins {reçoivent} souvent des amis le samedi.",
+    "en": "My neighbors often have friends over on Saturdays.",
+    "reviewed": true
+  },
+  {
+    "id": "recevoir.passéComposé.1",
+    "verb": "recevoir",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Tu {as reçu} ma lettre ?",
+    "en": "Did you get my letter?",
+    "reviewed": true
+  },
+  {
+    "id": "recevoir.imparfait.1",
+    "verb": "recevoir",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Autrefois, ma grand-mère {recevait} toute la famille pour les fêtes.",
+    "en": "In the old days, my grandmother hosted the whole family for the holidays.",
+    "reviewed": true
+  },
+  {
+    "id": "travailler.impératif.1",
+    "verb": "travailler",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Travaillez} en silence, s’il vous plaît.",
+    "en": "Work quietly, please.",
+    "reviewed": true
+  },
+  {
+    "id": "travailler.passéComposé.1",
+    "verb": "travailler",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Samedi dernier, nous {avons travaillé} dans le jardin.",
+    "en": "Last Saturday we worked in the garden.",
+    "reviewed": true
+  },
+  {
+    "id": "travailler.futurSimple.1",
+    "verb": "travailler",
+    "tense": "futurSimple",
+    "person": "ss",
+    "fr": "L’année prochaine, tu {travailleras} dans une grande ville.",
+    "en": "Next year you will work in a big city.",
+    "reviewed": true
+  },
+  {
+    "id": "appeler.indicatifPrésent.1",
+    "verb": "appeler",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "J’{appelle} ma mère tous les dimanches.",
+    "en": "I call my mother every Sunday.",
+    "reviewed": true
+  },
+  {
+    "id": "appeler.passéComposé.1",
+    "verb": "appeler",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Le médecin {a appelé} il y a une heure.",
+    "en": "The doctor called an hour ago.",
+    "reviewed": true
+  },
+  {
+    "id": "appeler.conditionnelPrésent.1",
+    "verb": "appeler",
+    "tense": "conditionnelPrésent",
+    "person": "sp",
+    "fr": "Si vous étiez perdus, vous {appelleriez} un taxi.",
+    "en": "If you were lost, you would call a taxi.",
+    "reviewed": true
+  },
+  {
+    "id": "jouer.indicatifPrésent.1",
+    "verb": "jouer",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les enfants {jouent} dans la cour.",
+    "en": "The children are playing in the yard.",
+    "reviewed": true
+  },
+  {
+    "id": "jouer.passéComposé.1",
+    "verb": "jouer",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Hier, j’{ai joué} aux cartes avec ma sœur.",
+    "en": "Yesterday I played cards with my sister.",
+    "reviewed": true
+  },
+  {
+    "id": "jouer.imparfait.1",
+    "verb": "jouer",
+    "tense": "imparfait",
+    "person": "ss",
+    "fr": "Petit, tu {jouais} toujours dehors sous la pluie.",
+    "en": "As a kid, you always played outside in the rain.",
+    "reviewed": true
+  },
+  {
+    "id": "croire.indicatifPrésent.1",
+    "verb": "croire",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je {crois} que Paul est en retard.",
+    "en": "I think Paul is late.",
+    "reviewed": true
+  },
+  {
+    "id": "croire.passéComposé.1",
+    "verb": "croire",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Nous {avons cru} cette histoire pendant des années.",
+    "en": "We believed that story for years.",
+    "reviewed": true
+  },
+  {
+    "id": "croire.subjonctifPrésent.1",
+    "verb": "croire",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Bien qu’il ne le {croie} pas, il a raison.",
+    "en": "Although he doesn't believe it, he is right.",
+    "reviewed": true
+  },
+  {
+    "id": "exister.indicatifPrésent.1",
+    "verb": "exister",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Cette boulangerie {existe} depuis cent ans.",
+    "en": "This bakery has existed for a hundred years.",
+    "reviewed": true
+  },
+  {
+    "id": "exister.passéComposé.1",
+    "verb": "exister",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Ces règles {ont existé} pendant des siècles.",
+    "en": "These rules existed for centuries.",
+    "reviewed": true
+  },
+  {
+    "id": "exister.futurSimple.1",
+    "verb": "exister",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Dans cent ans, cette ville n’{existera} peut-être plus.",
+    "en": "In a hundred years, this town may no longer exist.",
+    "reviewed": true
+  },
+  {
+    "id": "sembler.indicatifPrésent.1",
+    "verb": "sembler",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ce film {semble} très long.",
+    "en": "This movie seems very long.",
+    "reviewed": true
+  },
+  {
+    "id": "sembler.passéComposé.1",
+    "verb": "sembler",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "La question {a semblé} difficile à tout le monde.",
+    "en": "The question seemed hard to everyone.",
+    "reviewed": true
+  },
+  {
+    "id": "sembler.conditionnelPrésent.1",
+    "verb": "sembler",
+    "tense": "conditionnelPrésent",
+    "person": "ts",
+    "fr": "Vu d’avion, le village {semblerait} minuscule.",
+    "en": "Seen from a plane, the village would look tiny.",
+    "reviewed": true
+  },
+  {
+    "id": "envoyer.impératif.1",
+    "verb": "envoyer",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Envoie} un message à ta sœur !",
+    "en": "Send your sister a message!",
+    "reviewed": true
+  },
+  {
+    "id": "envoyer.passéComposé.1",
+    "verb": "envoyer",
+    "tense": "passéComposé",
+    "person": "sp",
+    "fr": "Vous {avez envoyé} le colis lundi dernier ?",
+    "en": "Did you send the package last Monday?",
+    "reviewed": true
+  },
+  {
+    "id": "envoyer.futurSimple.1",
+    "verb": "envoyer",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "Demain, j’{enverrai} une carte à mes grands-parents.",
+    "en": "Tomorrow I will send a card to my grandparents.",
+    "reviewed": true
+  },
+  {
+    "id": "commencer.indicatifPrésent.1",
+    "verb": "commencer",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le film {commence} à vingt heures.",
+    "en": "The movie starts at eight o'clock.",
+    "reviewed": true
+  },
+  {
+    "id": "commencer.passéComposé.1",
+    "verb": "commencer",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Les cours {ont commencé} la semaine dernière.",
+    "en": "Classes started last week.",
+    "reviewed": true
+  },
+  {
+    "id": "commencer.subjonctifPrésent.1",
+    "verb": "commencer",
+    "tense": "subjonctifPrésent",
+    "person": "fp",
+    "fr": "Il faut que nous {commencions} avant la nuit.",
+    "en": "We have to start before nightfall.",
+    "reviewed": true
+  },
+  {
+    "id": "montrer.indicatifPrésent.1",
+    "verb": "montrer",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je {montre} mes photos à mes amis.",
+    "en": "I am showing my photos to my friends.",
+    "reviewed": true
+  },
+  {
+    "id": "montrer.passéComposé.1",
+    "verb": "montrer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Le guide {a montré} la tour du doigt.",
+    "en": "The guide pointed at the tower.",
+    "reviewed": true
+  },
+  {
+    "id": "montrer.imparfait.1",
+    "verb": "montrer",
+    "tense": "imparfait",
+    "person": "sp",
+    "fr": "Chaque soir, vous {montriez} vos devoirs à votre père.",
+    "en": "Every evening you showed your homework to your father.",
+    "reviewed": true
+  },
+  {
+    "id": "représenter.indicatifPrésent.1",
+    "verb": "représenter",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ce tableau {représente} un village au bord de la mer.",
+    "en": "This painting depicts a village by the sea.",
+    "reviewed": true
+  },
+  {
+    "id": "représenter.passéComposé.1",
+    "verb": "représenter",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Dimanche, nous {avons représenté} notre école au concours.",
+    "en": "On Sunday we represented our school at the contest.",
+    "reviewed": true
+  },
+  {
+    "id": "représenter.futurSimple.1",
+    "verb": "représenter",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "Ces élèves {représenteront} la France à la compétition.",
+    "en": "These students will represent France at the competition.",
+    "reviewed": true
+  },
+  {
+    "id": "poser.impératif.1",
+    "verb": "poser",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Pose} ton sac sur la chaise.",
+    "en": "Put your bag down on the chair.",
+    "reviewed": true
+  },
+  {
+    "id": "poser.passéComposé.1",
+    "verb": "poser",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Ce matin, j’{ai posé} une question au professeur.",
+    "en": "This morning I asked the teacher a question.",
+    "reviewed": true
+  },
+  {
+    "id": "poser.conditionnelPrésent.1",
+    "verb": "poser",
+    "tense": "conditionnelPrésent",
+    "person": "fp",
+    "fr": "Si nous osions, nous lui {poserions} la question.",
+    "en": "If we dared, we would ask him the question.",
+    "reviewed": true
+  },
+  {
+    "id": "inscrire.indicatifPrésent.1",
+    "verb": "inscrire",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "J’{inscris} mon fils au club de foot.",
+    "en": "I am signing my son up for the soccer club.",
+    "reviewed": true
+  },
+  {
+    "id": "inscrire.passéComposé.1",
+    "verb": "inscrire",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Marie {a inscrit} son nom sur la liste.",
+    "en": "Marie wrote her name on the list.",
+    "reviewed": true
+  },
+  {
+    "id": "inscrire.futurSimple.1",
+    "verb": "inscrire",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "Demain, nous {inscrirons} les enfants à l’école.",
+    "en": "Tomorrow we will enroll the children in school.",
+    "reviewed": true
+  },
+  {
+    "id": "effectuer.indicatifPrésent.1",
+    "verb": "effectuer",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le pilote {effectue} un dernier contrôle avant le départ.",
+    "en": "The pilot carries out a final check before departure.",
+    "reviewed": true
+  },
+  {
+    "id": "effectuer.passéComposé.1",
+    "verb": "effectuer",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Les élèves {ont effectué} l’expérience en classe.",
+    "en": "The students carried out the experiment in class.",
+    "reviewed": true
+  },
+  {
+    "id": "effectuer.imparfait.1",
+    "verb": "effectuer",
+    "tense": "imparfait",
+    "person": "ss",
+    "fr": "Chaque lundi, tu {effectuais} ce même trajet.",
+    "en": "Every Monday you made that same trip.",
+    "reviewed": true
+  },
+  {
+    "id": "participer.indicatifPrésent.1",
+    "verb": "participer",
+    "tense": "indicatifPrésent",
+    "person": "sp",
+    "fr": "Vous {participez} au concours cette année ?",
+    "en": "Are you taking part in the contest this year?",
+    "reviewed": true
+  },
+  {
+    "id": "participer.passéComposé.1",
+    "verb": "participer",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Tu {as participé} à la fête de l’école ?",
+    "en": "Did you take part in the school party?",
+    "reviewed": true
+  },
+  {
+    "id": "participer.conditionnelPrésent.1",
+    "verb": "participer",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si j’avais le temps, je {participerais} au tournoi.",
+    "en": "If I had time, I would take part in the tournament.",
+    "reviewed": true
+  },
+  {
+    "id": "lier.indicatifPrésent.1",
+    "verb": "lier",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Cette route {lie} les deux villages.",
+    "en": "This road links the two villages.",
+    "reviewed": true
+  },
+  {
+    "id": "lier.passéComposé.1",
+    "verb": "lier",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Le cuisinier {a lié} la sauce avec de la farine.",
+    "en": "The cook thickened the sauce with flour.",
+    "reviewed": true
+  },
+  {
+    "id": "lier.subjonctifPrésent.1",
+    "verb": "lier",
+    "tense": "subjonctifPrésent",
+    "person": "ss",
+    "fr": "Il faut que tu {lies} les deux cordes ensemble.",
+    "en": "You have to tie the two ropes together.",
+    "reviewed": true
+  },
+  {
+    "id": "revenir.indicatifPrésent.1",
+    "verb": "revenir",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je {reviens} de l’école vers cinq heures.",
+    "en": "I come back from school around five.",
+    "reviewed": true
+  },
+  {
+    "id": "revenir.passéComposé.1",
+    "verb": "revenir",
+    "tense": "passéComposé",
+    "person": "tp",
+    "gender": "f",
+    "fr": "Mes cousines {sont revenues} de vacances hier.",
+    "en": "My cousins came back from vacation yesterday.",
+    "reviewed": true
+  },
+  {
+    "id": "revenir.futurSimple.1",
+    "verb": "revenir",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "Vous {reviendrez} nous voir l’année prochaine.",
+    "en": "You'll come back to see us next year.",
+    "reviewed": true
+  },
+  {
+    "id": "chercher.impératif.1",
+    "verb": "chercher",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Cherche} tes clés dans le salon !",
+    "en": "Look for your keys in the living room!",
+    "reviewed": true
+  },
+  {
+    "id": "chercher.passéComposé.1",
+    "verb": "chercher",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Hier, Paul {a cherché} un cadeau pour sa mère.",
+    "en": "Yesterday Paul looked for a gift for his mother.",
+    "reviewed": true
+  },
+  {
+    "id": "chercher.imparfait.1",
+    "verb": "chercher",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "Chaque été, nous {cherchions} des coquillages sur la plage.",
+    "en": "Every summer we looked for shells on the beach.",
+    "reviewed": true
+  },
+  {
+    "id": "sortir_exit.indicatifPrésent.1",
+    "verb": "sortir exit",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les enfants {sortent} de l’école à quatre heures.",
+    "en": "The children leave school at four.",
+    "reviewed": true
+  },
+  {
+    "id": "sortir_exit.passéComposé.1",
+    "verb": "sortir exit",
+    "tense": "passéComposé",
+    "person": "fp",
+    "gender": "m",
+    "fr": "Paul et moi, nous {sommes sortis} avec nos amis samedi.",
+    "en": "Paul and I went out with our friends on Saturday.",
+    "reviewed": true
+  },
+  {
+    "id": "sortir_exit.subjonctifPrésent.1",
+    "verb": "sortir exit",
+    "tense": "subjonctifPrésent",
+    "person": "ss",
+    "fr": "Il faut que tu {sortes} de la maison avant huit heures.",
+    "en": "You have to leave the house before eight.",
+    "reviewed": true
+  },
+  {
+    "id": "servir.indicatifPrésent.1",
+    "verb": "servir",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ce couteau {sert} à couper le pain.",
+    "en": "This knife is used to cut bread.",
+    "reviewed": true
+  },
+  {
+    "id": "servir.passéComposé.1",
+    "verb": "servir",
+    "tense": "passéComposé",
+    "person": "sp",
+    "fr": "Vous {avez servi} le dîner très tard hier.",
+    "en": "You served dinner very late yesterday.",
+    "reviewed": true
+  },
+  {
+    "id": "servir.conditionnelPrésent.1",
+    "verb": "servir",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "S’il faisait beau, je {servirais} le dessert dans le jardin.",
+    "en": "If the weather were nice, I would serve dessert in the garden.",
+    "reviewed": true
+  },
+  {
+    "id": "situer.indicatifPrésent.1",
+    "verb": "situer",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Cet écrivain {situe} son roman à Paris.",
+    "en": "This writer sets his novel in Paris.",
+    "reviewed": true
+  },
+  {
+    "id": "situer.passéComposé.1",
+    "verb": "situer",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Après dix minutes, j’{ai situé} notre village sur la carte.",
+    "en": "After ten minutes, I located our village on the map.",
+    "reviewed": true
+  },
+  {
+    "id": "situer.futurSimple.1",
+    "verb": "situer",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "Demain, nous {situerons} cette histoire dans son époque.",
+    "en": "Tomorrow we will place this story in its time period.",
+    "reviewed": true
+  },
+  {
+    "id": "aider.impératif.1",
+    "verb": "aider",
+    "tense": "impératif",
+    "person": "fp",
+    "fr": "{Aidons} les voisins à déménager !",
+    "en": "Let's help the neighbors move!",
+    "reviewed": true
+  },
+  {
+    "id": "aider.passéComposé.1",
+    "verb": "aider",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Mes parents {ont aidé} mon frère avec ses devoirs hier.",
+    "en": "My parents helped my brother with his homework yesterday.",
+    "reviewed": true
+  },
+  {
+    "id": "aider.conditionnelPrésent.1",
+    "verb": "aider",
+    "tense": "conditionnelPrésent",
+    "person": "ss",
+    "fr": "Si tu étais là, tu {aiderais} ta sœur.",
+    "en": "If you were here, you would help your sister.",
+    "reviewed": true
+  },
+  {
+    "id": "priver.indicatifPrésent.1",
+    "verb": "priver",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Cette punition {prive} les enfants de dessert.",
+    "en": "This punishment deprives the children of dessert.",
+    "reviewed": true
+  },
+  {
+    "id": "priver.passéComposé.1",
+    "verb": "priver",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Hier, j’{ai privé} mon petit frère de télévision.",
+    "en": "Yesterday I took away my little brother's TV privileges.",
+    "reviewed": true
+  },
+  {
+    "id": "priver.imparfait.1",
+    "verb": "priver",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "Les longs hivers {privaient} le village de soleil.",
+    "en": "The long winters deprived the village of sunshine.",
+    "reviewed": true
+  },
+  {
+    "id": "apporter.impératif.1",
+    "verb": "apporter",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Apportez} vos livres demain, s’il vous plaît.",
+    "en": "Bring your books tomorrow, please.",
+    "reviewed": true
+  },
+  {
+    "id": "apporter.passéComposé.1",
+    "verb": "apporter",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Tu {as apporté} un gâteau à la fête samedi.",
+    "en": "You brought a cake to the party on Saturday.",
+    "reviewed": true
+  },
+  {
+    "id": "apporter.subjonctifPrésent.1",
+    "verb": "apporter",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Je veux qu’elle {apporte} du pain pour le dîner.",
+    "en": "I want her to bring bread for dinner.",
+    "reviewed": true
+  },
+  {
+    "id": "annoncer.indicatifPrésent.1",
+    "verb": "annoncer",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {annonçons} une bonne nouvelle à nos amis.",
+    "en": "We are announcing good news to our friends.",
+    "reviewed": true
+  },
+  {
+    "id": "annoncer.passéComposé.1",
+    "verb": "annoncer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Le directeur {a annoncé} la date du voyage ce matin.",
+    "en": "The principal announced the date of the trip this morning.",
+    "reviewed": true
+  },
+  {
+    "id": "annoncer.futurSimple.1",
+    "verb": "annoncer",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "J’{annoncerai} le résultat demain matin.",
+    "en": "I will announce the result tomorrow morning.",
+    "reviewed": true
+  },
+  {
+    "id": "partir.impératif.1",
+    "verb": "partir",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Pars} vite, tu vas manquer le bus !",
+    "en": "Leave quickly, you're going to miss the bus!",
+    "reviewed": true
+  },
+  {
+    "id": "partir.passéComposé.1",
+    "verb": "partir",
+    "tense": "passéComposé",
+    "person": "tp",
+    "gender": "f",
+    "fr": "Elles {sont parties} à la montagne en juillet.",
+    "en": "They went to the mountains in July.",
+    "reviewed": true
+  },
+  {
+    "id": "partir.imparfait.1",
+    "verb": "partir",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Tous les matins, mon père {partait} à sept heures.",
+    "en": "Every morning my father left at seven.",
+    "reviewed": true
+  },
+  {
+    "id": "considérer.indicatifPrésent.1",
+    "verb": "considérer",
+    "tense": "indicatifPrésent",
+    "person": "sp",
+    "fr": "Vous {considérez} cette idée trop risquée ?",
+    "en": "Do you consider this idea too risky?",
+    "reviewed": true
+  },
+  {
+    "id": "considérer.passéComposé.1",
+    "verb": "considérer",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "J’{ai considéré} toutes les options avant de choisir.",
+    "en": "I considered all the options before choosing.",
+    "reviewed": true
+  },
+  {
+    "id": "considérer.conditionnelPrésent.1",
+    "verb": "considérer",
+    "tense": "conditionnelPrésent",
+    "person": "tp",
+    "fr": "Si on leur demandait, ils {considéreraient} la proposition.",
+    "en": "If we asked them, they would consider the proposal.",
+    "reviewed": true
+  },
+  {
+    "id": "cliquer.impératif.1",
+    "verb": "cliquer",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Clique} sur le bouton vert pour commencer.",
+    "en": "Click the green button to start.",
+    "reviewed": true
+  },
+  {
+    "id": "cliquer.passéComposé.1",
+    "verb": "cliquer",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Les élèves {ont cliqué} sur la mauvaise image.",
+    "en": "The students clicked on the wrong picture.",
+    "reviewed": true
+  },
+  {
+    "id": "cliquer.futurSimple.1",
+    "verb": "cliquer",
+    "tense": "futurSimple",
+    "person": "ss",
+    "fr": "Quand tu {cliqueras} sur ce lien, une page s’ouvrira.",
+    "en": "When you click on this link, a page will open.",
+    "reviewed": true
+  },
+  {
+    "id": "continuer.indicatifPrésent.1",
+    "verb": "continuer",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {continuons} tout droit jusqu’au feu.",
+    "en": "We keep going straight to the light.",
+    "reviewed": true
+  },
+  {
+    "id": "continuer.passéComposé.1",
+    "verb": "continuer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Malgré la pluie, Léa {a continué} sa promenade.",
+    "en": "In spite of the rain, Léa continued her walk.",
+    "reviewed": true
+  },
+  {
+    "id": "continuer.subjonctifPrésent.1",
+    "verb": "continuer",
+    "tense": "subjonctifPrésent",
+    "person": "sp",
+    "fr": "Il faut que vous {continuiez} vos efforts.",
+    "en": "You must keep up your efforts.",
+    "reviewed": true
+  },
+  {
+    "id": "définir.indicatifPrésent.1",
+    "verb": "définir",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le dictionnaire {définit} chaque mot simplement.",
+    "en": "The dictionary defines each word simply.",
+    "reviewed": true
+  },
+  {
+    "id": "définir.passéComposé.1",
+    "verb": "définir",
+    "tense": "passéComposé",
+    "person": "sp",
+    "fr": "Vous {avez défini} le problème très clairement.",
+    "en": "You defined the problem very clearly.",
+    "reviewed": true
+  },
+  {
+    "id": "définir.imparfait.1",
+    "verb": "définir",
+    "tense": "imparfait",
+    "person": "fs",
+    "fr": "Au début du projet, je {définissais} les objectifs seul.",
+    "en": "At the start of the project, I set the goals alone.",
+    "reviewed": true
+  },
+  {
+    "id": "décider.indicatifPrésent.1",
+    "verb": "décider",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Mes parents {décident} toujours du menu du dimanche.",
+    "en": "My parents always decide the Sunday menu.",
+    "reviewed": true
+  },
+  {
+    "id": "décider.passéComposé.1",
+    "verb": "décider",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Nous {avons décidé} de voyager en train.",
+    "en": "We decided to travel by train.",
+    "reviewed": true
+  },
+  {
+    "id": "décider.conditionnelPrésent.1",
+    "verb": "décider",
+    "tense": "conditionnelPrésent",
+    "person": "ss",
+    "fr": "Tu {déciderais} vite si tu connaissais les prix.",
+    "en": "You would decide quickly if you knew the prices.",
+    "reviewed": true
+  },
+  {
+    "id": "entendre.indicatifPrésent.1",
+    "verb": "entendre",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "J’{entends} des oiseaux dans le jardin.",
+    "en": "I hear birds in the garden.",
+    "reviewed": true
+  },
+  {
+    "id": "entendre.passéComposé.1",
+    "verb": "entendre",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Tu {as entendu} le tonnerre cette nuit ?",
+    "en": "Did you hear the thunder last night?",
+    "reviewed": true
+  },
+  {
+    "id": "entendre.futurSimple.1",
+    "verb": "entendre",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Personne ne vous {entendra} dans ce bruit.",
+    "en": "No one will hear you in this noise.",
+    "reviewed": true
+  },
+  {
+    "id": "engager.indicatifPrésent.1",
+    "verb": "engager",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le restaurant {engage} un nouveau cuisinier.",
+    "en": "The restaurant is hiring a new cook.",
+    "reviewed": true
+  },
+  {
+    "id": "engager.passéComposé.1",
+    "verb": "engager",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "L’an dernier, nous {avons engagé} deux jeunes mécaniciens.",
+    "en": "Last year we hired two young mechanics.",
+    "reviewed": true
+  },
+  {
+    "id": "engager.imparfait.1",
+    "verb": "engager",
+    "tense": "imparfait",
+    "person": "ss",
+    "fr": "Autrefois, tu {engageais} la conversation avec tout le monde.",
+    "en": "In the past, you struck up a conversation with everyone.",
+    "reviewed": true
+  },
+  {
+    "id": "changer.impératif.1",
+    "verb": "changer",
+    "tense": "impératif",
+    "person": "fp",
+    "fr": "{Changeons} de place pour mieux voir !",
+    "en": "Let's change seats to see better!",
+    "reviewed": true
+  },
+  {
+    "id": "changer.passéComposé.1",
+    "verb": "changer",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "J’{ai changé} de coiffure pour l’été.",
+    "en": "I changed my hairstyle for the summer.",
+    "reviewed": true
+  },
+  {
+    "id": "changer.subjonctifPrésent.1",
+    "verb": "changer",
+    "tense": "subjonctifPrésent",
+    "person": "tp",
+    "fr": "Bien que les temps {changent}, les traditions restent.",
+    "en": "Although times change, traditions remain.",
+    "reviewed": true
+  },
+  {
+    "id": "perdre.indicatifPrésent.1",
+    "verb": "perdre",
+    "tense": "indicatifPrésent",
+    "person": "sp",
+    "fr": "Vous {perdez} votre temps avec ce jeu.",
+    "en": "You are wasting your time with this game.",
+    "reviewed": true
+  },
+  {
+    "id": "perdre.passéComposé.1",
+    "verb": "perdre",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Mon frère {a perdu} son téléphone au parc.",
+    "en": "My brother lost his phone at the park.",
+    "reviewed": true
+  },
+  {
+    "id": "perdre.futurSimple.1",
+    "verb": "perdre",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "Sans carte, les randonneurs {perdront} leur chemin.",
+    "en": "Without a map, the hikers will lose their way.",
+    "reviewed": true
+  },
+  {
+    "id": "rechercher.indicatifPrésent.1",
+    "verb": "rechercher",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les voisins {recherchent} un chat perdu.",
+    "en": "The neighbors are looking for a lost cat.",
+    "reviewed": true
+  },
+  {
+    "id": "rechercher.passéComposé.1",
+    "verb": "rechercher",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Tu {as recherché} ce vieux livre pendant des années.",
+    "en": "You searched for this old book for years.",
+    "reviewed": true
+  },
+  {
+    "id": "rechercher.imparfait.1",
+    "verb": "rechercher",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "À l’époque, nous {recherchions} des appartements bon marché.",
+    "en": "Back then, we were looking for cheap apartments.",
+    "reviewed": true
+  },
+  {
+    "id": "modifier.impératif.1",
+    "verb": "modifier",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Modifiez} le titre avant d’envoyer le texte.",
+    "en": "Change the title before sending the text.",
+    "reviewed": true
+  },
+  {
+    "id": "modifier.passéComposé.1",
+    "verb": "modifier",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "La directrice {a modifié} l’horaire des cours.",
+    "en": "The principal changed the class schedule.",
+    "reviewed": true
+  },
+  {
+    "id": "modifier.conditionnelPrésent.1",
+    "verb": "modifier",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "À ta place, je {modifierais} ce paragraphe.",
+    "en": "In your place, I would change this paragraph.",
+    "reviewed": true
+  },
+  {
+    "id": "lancer.impératif.1",
+    "verb": "lancer",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Lance} la balle à ton frère !",
+    "en": "Throw the ball to your brother!",
+    "reviewed": true
+  },
+  {
+    "id": "lancer.passéComposé.1",
+    "verb": "lancer",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Les enfants {ont lancé} des cailloux dans l’eau.",
+    "en": "The children threw pebbles into the water.",
+    "reviewed": true
+  },
+  {
+    "id": "lancer.futurSimple.1",
+    "verb": "lancer",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "Demain, vous {lancerez} le ballon en premier.",
+    "en": "Tomorrow you will throw the ball first.",
+    "reviewed": true
+  },
+  {
+    "id": "disposer.indicatifPrésent.1",
+    "verb": "disposer",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {disposons} de trois salles pour la fête.",
+    "en": "We have three rooms available for the party.",
+    "reviewed": true
+  },
+  {
+    "id": "disposer.passéComposé.1",
+    "verb": "disposer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Le serveur {a disposé} les verres sur la table.",
+    "en": "The waiter arranged the glasses on the table.",
+    "reviewed": true
+  },
+  {
+    "id": "disposer.subjonctifPrésent.1",
+    "verb": "disposer",
+    "tense": "subjonctifPrésent",
+    "person": "fs",
+    "fr": "Il faut que je {dispose} de plus de temps.",
+    "en": "I need to have more time available.",
+    "reviewed": true
+  },
+  {
+    "id": "expliquer.indicatifPrésent.1",
+    "verb": "expliquer",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le professeur {explique} la leçon au tableau.",
+    "en": "The teacher explains the lesson at the board.",
+    "reviewed": true
+  },
+  {
+    "id": "expliquer.passéComposé.1",
+    "verb": "expliquer",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Hier, j’{ai expliqué} la règle à ma sœur.",
+    "en": "Yesterday I explained the rule to my sister.",
+    "reviewed": true
+  },
+  {
+    "id": "expliquer.conditionnelPrésent.1",
+    "verb": "expliquer",
+    "tense": "conditionnelPrésent",
+    "person": "sp",
+    "fr": "Vous {expliqueriez} mieux avec un dessin.",
+    "en": "You would explain better with a drawing.",
+    "reviewed": true
+  },
+  {
+    "id": "produire.indicatifPrésent.1",
+    "verb": "produire",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Ces vaches {produisent} beaucoup de lait.",
+    "en": "These cows produce a lot of milk.",
+    "reviewed": true
+  },
+  {
+    "id": "produire.passéComposé.1",
+    "verb": "produire",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Cette usine {a produit} mille vélos l’an dernier.",
+    "en": "This factory produced a thousand bicycles last year.",
+    "reviewed": true
+  },
+  {
+    "id": "produire.imparfait.1",
+    "verb": "produire",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Autrefois, notre ferme {produisait} du fromage.",
+    "en": "In the past, our farm produced cheese.",
+    "reviewed": true
+  },
+  {
+    "id": "charger.impératif.1",
+    "verb": "charger",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Chargez} les valises dans le coffre, s’il vous plaît.",
+    "en": "Load the suitcases into the trunk, please.",
+    "reviewed": true
+  },
+  {
+    "id": "charger.futurSimple.1",
+    "verb": "charger",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Demain, Paul {chargera} la voiture avant de partir.",
+    "en": "Tomorrow Paul will load the car before leaving.",
+    "reviewed": true
+  },
+  {
+    "id": "reconnaître.passéComposé.1",
+    "verb": "reconnaître",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Hier, j’{ai reconnu} mon ancien voisin dans la rue.",
+    "en": "Yesterday I recognized my old neighbor on the street.",
+    "reviewed": true
+  },
+  {
+    "id": "reconnaître.conditionnelPrésent.1",
+    "verb": "reconnaître",
+    "tense": "conditionnelPrésent",
+    "person": "ts",
+    "fr": "Si tu changeais de coiffure, personne ne te {reconnaîtrait}.",
+    "en": "If you changed your hairstyle, no one would recognize you.",
+    "reviewed": true
+  },
+  {
+    "id": "mener.indicatifPrésent.1",
+    "verb": "mener",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Ces escaliers {mènent} directement au toit.",
+    "en": "These stairs lead straight to the roof.",
+    "reviewed": true
+  },
+  {
+    "id": "mener.subjonctifPrésent.1",
+    "verb": "mener",
+    "tense": "subjonctifPrésent",
+    "person": "sp",
+    "fr": "Il faut que vous {meniez} les enfants à l’école.",
+    "en": "You need to take the children to school.",
+    "reviewed": true
+  },
+  {
+    "id": "construire.passéComposé.1",
+    "verb": "construire",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "L’année dernière, mes voisins {ont construit} une maison en bois.",
+    "en": "Last year my neighbors built a wooden house.",
+    "reviewed": true
+  },
+  {
+    "id": "construire.imparfait.1",
+    "verb": "construire",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Quand j’étais petit, mon père {construisait} des bateaux.",
+    "en": "When I was little, my father built boats.",
+    "reviewed": true
+  },
+  {
+    "id": "rappeler.impératif.1",
+    "verb": "rappeler",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Rappelle} ta sœur avant midi !",
+    "en": "Call your sister back before noon!",
+    "reviewed": true
+  },
+  {
+    "id": "rappeler.conditionnelPrésent.1",
+    "verb": "rappeler",
+    "tense": "conditionnelPrésent",
+    "person": "fp",
+    "fr": "Nous vous {rappellerions} volontiers si nous avions votre numéro.",
+    "en": "We would gladly call you back if we had your number.",
+    "reviewed": true
+  },
+  {
+    "id": "fixer.passéComposé.1",
+    "verb": "fixer",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Ce matin, nous {avons fixé} la date du mariage.",
+    "en": "This morning we set the date of the wedding.",
+    "reviewed": true
+  },
+  {
+    "id": "fixer.subjonctifPrésent.1",
+    "verb": "fixer",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Je veux que le directeur {fixe} un rendez-vous.",
+    "en": "I want the director to set an appointment.",
+    "reviewed": true
+  },
+  {
+    "id": "bénéficier.indicatifPrésent.1",
+    "verb": "bénéficier",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les étudiants {bénéficient} d’un tarif réduit au musée.",
+    "en": "Students get a reduced rate at the museum.",
+    "reviewed": true
+  },
+  {
+    "id": "bénéficier.futurSimple.1",
+    "verb": "bénéficier",
+    "tense": "futurSimple",
+    "person": "ss",
+    "fr": "Tu {bénéficieras} d’une remise si tu paies avant lundi.",
+    "en": "You'll get a discount if you pay before Monday.",
+    "reviewed": true
+  },
+  {
+    "id": "consulter.indicatifPrésent.1",
+    "verb": "consulter",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je {consulte} la météo avant de sortir.",
+    "en": "I check the weather before going out.",
+    "reviewed": true
+  },
+  {
+    "id": "consulter.imparfait.1",
+    "verb": "consulter",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "Autrefois, les villageois {consultaient} le médecin une fois par an.",
+    "en": "In the past, the villagers saw the doctor once a year.",
+    "reviewed": true
+  },
+  {
+    "id": "apparaître.passéComposé.1",
+    "verb": "apparaître",
+    "tense": "passéComposé",
+    "person": "ts",
+    "gender": "f",
+    "fr": "Une étoile {est apparue} dans le ciel.",
+    "en": "A star appeared in the sky.",
+    "reviewed": true
+  },
+  {
+    "id": "apparaître.futurSimple.1",
+    "verb": "apparaître",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "Les premières fleurs {apparaîtront} bientôt.",
+    "en": "The first flowers will appear soon.",
+    "reviewed": true
+  },
+  {
+    "id": "arrêter.impératif.1",
+    "verb": "arrêter",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Arrêtez} la voiture devant la boulangerie !",
+    "en": "Stop the car in front of the bakery!",
+    "reviewed": true
+  },
+  {
+    "id": "arrêter.imparfait.1",
+    "verb": "arrêter",
+    "tense": "imparfait",
+    "person": "fs",
+    "fr": "Quand il pleuvait, j’{arrêtais} de courir.",
+    "en": "When it rained, I would stop running.",
+    "reviewed": true
+  },
+  {
+    "id": "conduire.indicatifPrésent.1",
+    "verb": "conduire",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {conduisons} lentement dans le brouillard.",
+    "en": "We drive slowly in the fog.",
+    "reviewed": true
+  },
+  {
+    "id": "conduire.conditionnelPrésent.1",
+    "verb": "conduire",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si j’avais mon permis, je {conduirais} ta voiture.",
+    "en": "If I had my license, I would drive your car.",
+    "reviewed": true
+  },
+  {
+    "id": "rencontrer.passéComposé.1",
+    "verb": "rencontrer",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Où est-ce que tu {as rencontré} ta femme ?",
+    "en": "Where did you meet your wife?",
+    "reviewed": true
+  },
+  {
+    "id": "rencontrer.futurSimple.1",
+    "verb": "rencontrer",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "Vous {rencontrerez} le directeur à dix heures.",
+    "en": "You will meet the director at ten o'clock.",
+    "reviewed": true
+  },
+  {
+    "id": "établir.passéComposé.1",
+    "verb": "établir",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "La ville {a établi} de nouvelles règles de circulation.",
+    "en": "The city established new traffic rules.",
+    "reviewed": true
+  },
+  {
+    "id": "établir.subjonctifPrésent.1",
+    "verb": "établir",
+    "tense": "subjonctifPrésent",
+    "person": "fp",
+    "fr": "Il faut que nous {établissions} un horaire clair.",
+    "en": "We need to set up a clear schedule.",
+    "reviewed": true
+  },
+  {
+    "id": "indiquer.indicatifPrésent.1",
+    "verb": "indiquer",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le panneau {indique} la direction de la gare.",
+    "en": "The sign shows the way to the station.",
+    "reviewed": true
+  },
+  {
+    "id": "indiquer.futurSimple.1",
+    "verb": "indiquer",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "Je vous {indiquerai} le chemin jusqu’à la gare.",
+    "en": "I will show you the way to the station.",
+    "reviewed": true
+  },
+  {
+    "id": "viser.indicatifPrésent.1",
+    "verb": "viser",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le joueur {vise} le panier et lance le ballon.",
+    "en": "The player aims at the basket and throws the ball.",
+    "reviewed": true
+  },
+  {
+    "id": "viser.imparfait.1",
+    "verb": "viser",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "À cette époque, nous {visions} la première place.",
+    "en": "Back then, we were aiming for first place.",
+    "reviewed": true
+  },
+  {
+    "id": "contenir.indicatifPrésent.1",
+    "verb": "contenir",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Cette boîte {contient} vingt crayons de couleur.",
+    "en": "This box contains twenty colored pencils.",
+    "reviewed": true
+  },
+  {
+    "id": "contenir.subjonctifPrésent.1",
+    "verb": "contenir",
+    "tense": "subjonctifPrésent",
+    "person": "ss",
+    "fr": "Il faut que tu {contiennes} ta colère.",
+    "en": "You need to hold back your anger.",
+    "reviewed": true
+  },
+  {
+    "id": "oublier.passéComposé.1",
+    "verb": "oublier",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Ce matin, j’{ai oublié} mon parapluie à la maison.",
+    "en": "This morning I forgot my umbrella at home.",
+    "reviewed": true
+  },
+  {
+    "id": "oublier.conditionnelPrésent.1",
+    "verb": "oublier",
+    "tense": "conditionnelPrésent",
+    "person": "sp",
+    "fr": "Vous {oublieriez} votre tête si elle n’était pas attachée.",
+    "en": "You would forget your head if it weren't attached.",
+    "reviewed": true
+  },
+  {
+    "id": "fournir.indicatifPrésent.1",
+    "verb": "fournir",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le restaurant {fournit} les nappes et les couverts.",
+    "en": "The restaurant provides the tablecloths and silverware.",
+    "reviewed": true
+  },
+  {
+    "id": "fournir.futurSimple.1",
+    "verb": "fournir",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "Les organisateurs {fourniront} des casques à tous les participants.",
+    "en": "The organizers will provide helmets to all the participants.",
+    "reviewed": true
+  },
+  {
+    "id": "compter.impératif.1",
+    "verb": "compter",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Comptez} jusqu’à dix, puis venez nous chercher !",
+    "en": "Count to ten, then come find us!",
+    "reviewed": true
+  },
+  {
+    "id": "compter.imparfait.1",
+    "verb": "compter",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Mon grand-père {comptait} toujours ses pas en marchant.",
+    "en": "My grandfather always counted his steps while walking.",
+    "reviewed": true
+  },
+  {
+    "id": "appliquer.passéComposé.1",
+    "verb": "appliquer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "La professeure {a appliqué} la même règle à tous les élèves.",
+    "en": "The teacher applied the same rule to all the students.",
+    "reviewed": true
+  },
+  {
+    "id": "appliquer.subjonctifPrésent.1",
+    "verb": "appliquer",
+    "tense": "subjonctifPrésent",
+    "person": "sp",
+    "fr": "Je veux que vous {appliquiez} cette méthode.",
+    "en": "I want you to apply this method.",
+    "reviewed": true
+  },
+  {
+    "id": "apprendre.passéComposé.1",
+    "verb": "apprendre",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Cette année, mes cousins {ont appris} le piano.",
+    "en": "This year my cousins learned piano.",
+    "reviewed": true
+  },
+  {
+    "id": "apprendre.imparfait.1",
+    "verb": "apprendre",
+    "tense": "imparfait",
+    "person": "ss",
+    "fr": "Quand tu étais petit, tu {apprenais} vite les chansons.",
+    "en": "When you were little, you learned songs quickly.",
+    "reviewed": true
+  },
+  {
+    "id": "adresser.indicatifPrésent.1",
+    "verb": "adresser",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "J’{adresse} cette lettre au maire de la ville.",
+    "en": "I am addressing this letter to the mayor of the town.",
+    "reviewed": true
+  },
+  {
+    "id": "adresser.futurSimple.1",
+    "verb": "adresser",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Le directeur {adressera} la parole aux élèves demain.",
+    "en": "The principal will address the students tomorrow.",
+    "reviewed": true
+  },
+  {
+    "id": "accompagner.passéComposé.1",
+    "verb": "accompagner",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Hier, nous {avons accompagné} grand-mère chez le médecin.",
+    "en": "Yesterday we accompanied Grandma to the doctor.",
+    "reviewed": true
+  },
+  {
+    "id": "accompagner.conditionnelPrésent.1",
+    "verb": "accompagner",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si tu voulais, je t’{accompagnerais} à la gare.",
+    "en": "If you wanted, I would go with you to the station.",
+    "reviewed": true
+  },
+  {
+    "id": "préparer.indicatifPrésent.1",
+    "verb": "préparer",
+    "tense": "indicatifPrésent",
+    "person": "ss",
+    "fr": "Tu {prépares} le dîner ce soir ?",
+    "en": "Are you making dinner tonight?",
+    "reviewed": true
+  },
+  {
+    "id": "préparer.subjonctifPrésent.1",
+    "verb": "préparer",
+    "tense": "subjonctifPrésent",
+    "person": "tp",
+    "fr": "Il faut que les enfants {préparent} leurs sacs.",
+    "en": "The children need to get their bags ready.",
+    "reviewed": true
+  },
+  {
+    "id": "atteindre.passéComposé.1",
+    "verb": "atteindre",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Le randonneur {a atteint} le sommet avant midi.",
+    "en": "The hiker reached the summit before noon.",
+    "reviewed": true
+  },
+  {
+    "id": "atteindre.futurSimple.1",
+    "verb": "atteindre",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "Nous {atteindrons} la côte vers six heures.",
+    "en": "We will reach the coast around six o'clock.",
+    "reviewed": true
+  },
+  {
+    "id": "vendre.indicatifPrésent.1",
+    "verb": "vendre",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Ces marchands {vendent} des fruits frais le dimanche.",
+    "en": "These merchants sell fresh fruit on Sundays.",
+    "reviewed": true
+  },
+  {
+    "id": "vendre.conditionnelPrésent.1",
+    "verb": "vendre",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si j’avais besoin d’argent, je {vendrais} mon vélo.",
+    "en": "If I needed money, I would sell my bike.",
+    "reviewed": true
+  },
+  {
+    "id": "partager.impératif.1",
+    "verb": "partager",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Partage} ton gâteau avec ta petite sœur !",
+    "en": "Share your cake with your little sister!",
+    "reviewed": true
+  },
+  {
+    "id": "partager.imparfait.1",
+    "verb": "partager",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "À l’université, nous {partagions} un petit appartement.",
+    "en": "In college, we shared a small apartment.",
+    "reviewed": true
+  },
+  {
+    "id": "réduire.passéComposé.1",
+    "verb": "réduire",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Les magasins {ont réduit} leurs prix cette semaine.",
+    "en": "The stores cut their prices this week.",
+    "reviewed": true
+  },
+  {
+    "id": "réduire.futurSimple.1",
+    "verb": "réduire",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "L’an prochain, je {réduirai} ma consommation de sucre.",
+    "en": "Next year I will cut down on sugar.",
+    "reviewed": true
+  },
+  {
+    "id": "éviter.indicatifPrésent.1",
+    "verb": "éviter",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "J’{évite} le centre-ville à l’heure de pointe.",
+    "en": "I avoid downtown at rush hour.",
+    "reviewed": true
+  },
+  {
+    "id": "éviter.subjonctifPrésent.1",
+    "verb": "éviter",
+    "tense": "subjonctifPrésent",
+    "person": "ss",
+    "fr": "Il faut que tu {évites} le sucre le soir.",
+    "en": "You need to avoid sugar in the evening.",
+    "reviewed": true
+  },
+  {
+    "id": "paraître.indicatifPrésent.1",
+    "verb": "paraître",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ce problème {paraît} simple, mais il est difficile.",
+    "en": "This problem seems simple, but it is hard.",
+    "reviewed": true
+  },
+  {
+    "id": "paraître.imparfait.1",
+    "verb": "paraître",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Autrefois, ce journal {paraissait} chaque matin.",
+    "en": "In the past, this newspaper came out every morning.",
+    "reviewed": true
+  },
+  {
+    "id": "gagner.passéComposé.1",
+    "verb": "gagner",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Samedi dernier, nous {avons gagné} le match de basket.",
+    "en": "Last Saturday we won the basketball game.",
+    "reviewed": true
+  },
+  {
+    "id": "gagner.futurSimple.1",
+    "verb": "gagner",
+    "tense": "futurSimple",
+    "person": "ss",
+    "fr": "Tu {gagneras} peut-être la course.",
+    "en": "Maybe you will win the race.",
+    "reviewed": true
+  },
+  {
+    "id": "naître.passéComposé.1",
+    "verb": "naître",
+    "tense": "passéComposé",
+    "person": "ts",
+    "gender": "f",
+    "fr": "Ma sœur {est née} en mars.",
+    "en": "My sister was born in March.",
+    "reviewed": true
+  },
+  {
+    "id": "naître.futurSimple.1",
+    "verb": "naître",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Le bébé {naîtra} au mois de mai.",
+    "en": "The baby will be born in May.",
+    "reviewed": true
+  },
+  {
+    "id": "former.indicatifPrésent.1",
+    "verb": "former",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les élèves {forment} un cercle dans la cour.",
+    "en": "The students form a circle in the yard.",
+    "reviewed": true
+  },
+  {
+    "id": "former.conditionnelPrésent.1",
+    "verb": "former",
+    "tense": "conditionnelPrésent",
+    "person": "fp",
+    "fr": "Si nous étions plus nombreux, nous {formerions} deux équipes.",
+    "en": "If there were more of us, we would form two teams.",
+    "reviewed": true
+  },
+  {
+    "id": "réserver.passéComposé.1",
+    "verb": "réserver",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Hier, j’{ai réservé} une table pour ce soir.",
+    "en": "Yesterday I reserved a table for tonight.",
+    "reviewed": true
+  },
+  {
+    "id": "réserver.futurSimple.1",
+    "verb": "réserver",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "Mes parents {réserveront} l’hôtel demain.",
+    "en": "My parents will book the hotel tomorrow.",
+    "reviewed": true
+  },
+  {
+    "id": "installer.indicatifPrésent.1",
+    "verb": "installer",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les ouvriers {installent} la cuisine cette semaine.",
+    "en": "The workers are installing the kitchen this week.",
+    "reviewed": true
+  },
+  {
+    "id": "installer.conditionnelPrésent.1",
+    "verb": "installer",
+    "tense": "conditionnelPrésent",
+    "person": "ss",
+    "fr": "Si tu avais plus de place, tu {installerais} un piano au salon.",
+    "en": "If you had more room, you would put a piano in the living room.",
+    "reviewed": true
+  },
+  {
+    "id": "composer.impératif.1",
+    "verb": "composer",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Composez} le numéro de l’hôtel.",
+    "en": "Dial the hotel's number.",
+    "reviewed": true
+  },
+  {
+    "id": "composer.imparfait.1",
+    "verb": "composer",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Quand il était jeune, Paul {composait} des chansons.",
+    "en": "When he was young, Paul used to compose songs.",
+    "reviewed": true
+  },
+  {
+    "id": "préciser.indicatifPrésent.1",
+    "verb": "préciser",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je {précise} que le musée est fermé le lundi.",
+    "en": "I should point out that the museum is closed on Mondays.",
+    "reviewed": true
+  },
+  {
+    "id": "préciser.subjonctifPrésent.1",
+    "verb": "préciser",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Il faut que le professeur {précise} la date de l’examen.",
+    "en": "The teacher has to specify the date of the exam.",
+    "reviewed": true
+  },
+  {
+    "id": "regarder.impératif.1",
+    "verb": "regarder",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Regarde} ce beau coucher de soleil !",
+    "en": "Look at this beautiful sunset!",
+    "reviewed": true
+  },
+  {
+    "id": "regarder.imparfait.1",
+    "verb": "regarder",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "Le soir, nous {regardions} un film en famille.",
+    "en": "In the evening, we used to watch a movie as a family.",
+    "reviewed": true
+  },
+  {
+    "id": "soutenir.indicatifPrésent.1",
+    "verb": "soutenir",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Mes amis me {soutiennent} quand j’ai un problème.",
+    "en": "My friends support me when I have a problem.",
+    "reviewed": true
+  },
+  {
+    "id": "soutenir.passéComposé.1",
+    "verb": "soutenir",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Hier, tu {as soutenu} ton frère devant tout le monde.",
+    "en": "Yesterday you stood by your brother in front of everyone.",
+    "reviewed": true
+  },
+  {
+    "id": "entrer.passéComposé.1",
+    "verb": "entrer",
+    "tense": "passéComposé",
+    "person": "tp",
+    "gender": "f",
+    "fr": "Mes cousines {sont entrées} dans la maison sans bruit.",
+    "en": "My cousins came into the house quietly.",
+    "reviewed": true
+  },
+  {
+    "id": "entrer.futurSimple.1",
+    "verb": "entrer",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "Vous {entrerez} par la porte de gauche.",
+    "en": "You will enter through the door on the left.",
+    "reviewed": true
+  },
+  {
+    "id": "reprendre.indicatifPrésent.1",
+    "verb": "reprendre",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le cours {reprend} lundi prochain.",
+    "en": "Class starts again next Monday.",
+    "reviewed": true
+  },
+  {
+    "id": "reprendre.conditionnelPrésent.1",
+    "verb": "reprendre",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "À ta place, je {reprendrais} du gâteau.",
+    "en": "If I were you, I would have more cake.",
+    "reviewed": true
+  },
+  {
+    "id": "destiner.passéComposé.1",
+    "verb": "destiner",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Nous {avons destiné} cet argent à l’achat d’un vélo.",
+    "en": "We set this money aside to buy a bike.",
+    "reviewed": true
+  },
+  {
+    "id": "destiner.imparfait.1",
+    "verb": "destiner",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "Ses parents {destinaient} cette chambre au bébé.",
+    "en": "His parents intended this room for the baby.",
+    "reviewed": true
+  },
+  {
+    "id": "limiter.impératif.1",
+    "verb": "limiter",
+    "tense": "impératif",
+    "person": "fp",
+    "fr": "{Limitons} le bruit dans la bibliothèque !",
+    "en": "Let's limit the noise in the library!",
+    "reviewed": true
+  },
+  {
+    "id": "limiter.subjonctifPrésent.1",
+    "verb": "limiter",
+    "tense": "subjonctifPrésent",
+    "person": "tp",
+    "fr": "Il faut que les élèves {limitent} leur temps d’écran.",
+    "en": "Students have to limit their screen time.",
+    "reviewed": true
+  },
+  {
+    "id": "traiter.indicatifPrésent.1",
+    "verb": "traiter",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ce livre {traite} de l’histoire de Paris.",
+    "en": "This book deals with the history of Paris.",
+    "reviewed": true
+  },
+  {
+    "id": "traiter.passéComposé.1",
+    "verb": "traiter",
+    "tense": "passéComposé",
+    "person": "sp",
+    "fr": "Ce matin, vous {avez traité} tous les dossiers.",
+    "en": "This morning you processed all the files.",
+    "reviewed": true
+  },
+  {
+    "id": "accepter.passéComposé.1",
+    "verb": "accepter",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "J’{ai accepté} son invitation avec plaisir.",
+    "en": "I gladly accepted his invitation.",
+    "reviewed": true
+  },
+  {
+    "id": "accepter.futurSimple.1",
+    "verb": "accepter",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Demain, ma sœur {acceptera} sûrement ce travail.",
+    "en": "Tomorrow my sister will surely accept this job.",
+    "reviewed": true
+  },
+  {
+    "id": "imposer.indicatifPrésent.1",
+    "verb": "imposer",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les professeurs {imposent} un silence total pendant l’examen.",
+    "en": "The teachers require total silence during the exam.",
+    "reviewed": true
+  },
+  {
+    "id": "imposer.imparfait.1",
+    "verb": "imposer",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Quand j’étais petit, mon père nous {imposait} une heure de coucher.",
+    "en": "When I was little, my father imposed a bedtime on us.",
+    "reviewed": true
+  },
+  {
+    "id": "contacter.impératif.1",
+    "verb": "contacter",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Contactez} le service client par courriel.",
+    "en": "Contact customer service by email.",
+    "reviewed": true
+  },
+  {
+    "id": "contacter.conditionnelPrésent.1",
+    "verb": "contacter",
+    "tense": "conditionnelPrésent",
+    "person": "ss",
+    "fr": "Si tu avais son numéro, tu {contacterais} Julie.",
+    "en": "If you had her number, you would contact Julie.",
+    "reviewed": true
+  },
+  {
+    "id": "finir.passéComposé.1",
+    "verb": "finir",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Ce soir, nous {avons fini} les devoirs avant le dîner.",
+    "en": "Tonight we finished the homework before dinner.",
+    "reviewed": true
+  },
+  {
+    "id": "finir.subjonctifPrésent.1",
+    "verb": "finir",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Je veux que le film {finisse} avant minuit.",
+    "en": "I want the movie to end before midnight.",
+    "reviewed": true
+  },
+  {
+    "id": "placer.indicatifPrésent.1",
+    "verb": "placer",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {plaçons} les chaises autour de la table.",
+    "en": "We are placing the chairs around the table.",
+    "reviewed": true
+  },
+  {
+    "id": "placer.futurSimple.1",
+    "verb": "placer",
+    "tense": "futurSimple",
+    "person": "ss",
+    "fr": "Tu {placeras} les invités près de la fenêtre.",
+    "en": "You will seat the guests near the window.",
+    "reviewed": true
+  },
+  {
+    "id": "intégrer.indicatifPrésent.1",
+    "verb": "intégrer",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Léa {intègre} l’équipe de natation en septembre.",
+    "en": "Léa joins the swim team in September.",
+    "reviewed": true
+  },
+  {
+    "id": "intégrer.passéComposé.1",
+    "verb": "intégrer",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Cette année, mes deux sœurs {ont intégré} la même école.",
+    "en": "This year my two sisters joined the same school.",
+    "reviewed": true
+  },
+  {
+    "id": "consacrer.indicatifPrésent.1",
+    "verb": "consacrer",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je {consacre} mes dimanches à la lecture.",
+    "en": "I devote my Sundays to reading.",
+    "reviewed": true
+  },
+  {
+    "id": "consacrer.imparfait.1",
+    "verb": "consacrer",
+    "tense": "imparfait",
+    "person": "sp",
+    "fr": "Autrefois, vous {consacriez} deux heures par jour au piano.",
+    "en": "In the past, you spent two hours a day on the piano.",
+    "reviewed": true
+  },
+  {
+    "id": "relever.indicatifPrésent.1",
+    "verb": "relever",
+    "tense": "indicatifPrésent",
+    "person": "ss",
+    "fr": "Tu {relèves} la tête et tu souris.",
+    "en": "You raise your head and smile.",
+    "reviewed": true
+  },
+  {
+    "id": "relever.futurSimple.1",
+    "verb": "relever",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Demain, le professeur {relèvera} les copies à huit heures.",
+    "en": "Tomorrow the teacher will collect the papers at eight.",
+    "reviewed": true
+  },
+  {
+    "id": "télécharger.passéComposé.1",
+    "verb": "télécharger",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Ce matin, Paul {a téléchargé} une nouvelle application.",
+    "en": "This morning Paul downloaded a new app.",
+    "reviewed": true
+  },
+  {
+    "id": "télécharger.subjonctifPrésent.1",
+    "verb": "télécharger",
+    "tense": "subjonctifPrésent",
+    "person": "fp",
+    "fr": "Il faut que nous {téléchargions} le fichier avant la réunion.",
+    "en": "We have to download the file before the meeting.",
+    "reviewed": true
+  },
+  {
+    "id": "voter.indicatifPrésent.1",
+    "verb": "voter",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Dans ma classe, les élèves {votent} pour le meilleur dessin.",
+    "en": "In my class, the students vote for the best drawing.",
+    "reviewed": true
+  },
+  {
+    "id": "voter.conditionnelPrésent.1",
+    "verb": "voter",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si j’étais dans ta classe, je {voterais} pour ce dessin.",
+    "en": "If I were in your class, I would vote for this drawing.",
+    "reviewed": true
+  },
+  {
+    "id": "essayer.impératif.1",
+    "verb": "essayer",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Essaie} ce pull, il est très joli !",
+    "en": "Try on this sweater, it's very pretty!",
+    "reviewed": true
+  },
+  {
+    "id": "essayer.imparfait.1",
+    "verb": "essayer",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Petit, mon frère {essayait} toujours de me battre aux échecs.",
+    "en": "As a kid, my brother always tried to beat me at chess.",
+    "reviewed": true
+  },
+  {
+    "id": "associer.indicatifPrésent.1",
+    "verb": "associer",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {associons} le chocolat à l’enfance.",
+    "en": "We associate chocolate with childhood.",
+    "reviewed": true
+  },
+  {
+    "id": "associer.futurSimple.1",
+    "verb": "associer",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "Vous {associerez} chaque mot à son image.",
+    "en": "You will match each word with its picture.",
+    "reviewed": true
+  },
+  {
+    "id": "signer.passéComposé.1",
+    "verb": "signer",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Hier, tu {as signé} le contrat de location.",
+    "en": "Yesterday you signed the rental agreement.",
+    "reviewed": true
+  },
+  {
+    "id": "signer.futurSimple.1",
+    "verb": "signer",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Le directeur {signera} le document la semaine prochaine.",
+    "en": "The principal will sign the document next week.",
+    "reviewed": true
+  },
+  {
+    "id": "rédiger.passéComposé.1",
+    "verb": "rédiger",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Ce week-end, j’{ai rédigé} mon rapport de stage.",
+    "en": "This weekend I wrote my internship report.",
+    "reviewed": true
+  },
+  {
+    "id": "rédiger.subjonctifPrésent.1",
+    "verb": "rédiger",
+    "tense": "subjonctifPrésent",
+    "person": "tp",
+    "fr": "Le prof veut que les élèves {rédigent} un court texte.",
+    "en": "The teacher wants the students to write a short text.",
+    "reviewed": true
+  },
+  {
+    "id": "remettre.impératif.1",
+    "verb": "remettre",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Remettez} les livres sur l’étagère, s’il vous plaît.",
+    "en": "Put the books back on the shelf, please.",
+    "reviewed": true
+  },
+  {
+    "id": "remettre.imparfait.1",
+    "verb": "remettre",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Chaque soir, ma grand-mère {remettait} les clés dans le tiroir.",
+    "en": "Every evening, my grandmother put the keys back in the drawer.",
+    "reviewed": true
+  },
+  {
+    "id": "spécialiser.indicatifPrésent.1",
+    "verb": "spécialiser",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Cette université {spécialise} ses étudiants dès la deuxième année.",
+    "en": "This university specializes its students starting in the second year.",
+    "reviewed": true
+  },
+  {
+    "id": "spécialiser.conditionnelPrésent.1",
+    "verb": "spécialiser",
+    "tense": "conditionnelPrésent",
+    "person": "fp",
+    "fr": "Avec plus de temps, nous {spécialiserions} notre équipe.",
+    "en": "With more time, we would specialize our team.",
+    "reviewed": true
+  },
+  {
+    "id": "adapter.passéComposé.1",
+    "verb": "adapter",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "J’{ai adapté} la recette pour les enfants.",
+    "en": "I adapted the recipe for the children.",
+    "reviewed": true
+  },
+  {
+    "id": "adapter.subjonctifPrésent.1",
+    "verb": "adapter",
+    "tense": "subjonctifPrésent",
+    "person": "sp",
+    "fr": "Il faut que vous {adaptiez} votre discours au public.",
+    "en": "You need to adapt your speech to the audience.",
+    "reviewed": true
+  },
+  {
+    "id": "payer.indicatifPrésent.1",
+    "verb": "payer",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Aujourd’hui, c’est moi qui {paie} le déjeuner.",
+    "en": "Today I'm the one paying for lunch.",
+    "reviewed": true
+  },
+  {
+    "id": "payer.futurSimple.1",
+    "verb": "payer",
+    "tense": "futurSimple",
+    "person": "ss",
+    "fr": "Tu {paieras} la facture à la fin du mois.",
+    "en": "You will pay the bill at the end of the month.",
+    "reviewed": true
+  },
+  {
+    "id": "acheter.passéComposé.1",
+    "verb": "acheter",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Samedi, nous {avons acheté} du pain et des fruits.",
+    "en": "On Saturday we bought bread and fruit.",
+    "reviewed": true
+  },
+  {
+    "id": "acheter.conditionnelPrésent.1",
+    "verb": "acheter",
+    "tense": "conditionnelPrésent",
+    "person": "ts",
+    "fr": "Si elle avait de l’argent, elle {achèterait} cette robe.",
+    "en": "If she had the money, she would buy that dress.",
+    "reviewed": true
+  },
+  {
+    "id": "inviter.indicatifPrésent.1",
+    "verb": "inviter",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Mes voisins nous {invitent} à dîner ce soir.",
+    "en": "My neighbors are inviting us to dinner tonight.",
+    "reviewed": true
+  },
+  {
+    "id": "inviter.subjonctifPrésent.1",
+    "verb": "inviter",
+    "tense": "subjonctifPrésent",
+    "person": "fs",
+    "fr": "Il faut que j’{invite} Marc à la fête.",
+    "en": "I have to invite Marc to the party.",
+    "reviewed": true
+  },
+  {
+    "id": "exprimer.passéComposé.1",
+    "verb": "exprimer",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Pendant la réunion, tu {as exprimé} clairement ton opinion.",
+    "en": "During the meeting, you expressed your opinion clearly.",
+    "reviewed": true
+  },
+  {
+    "id": "exprimer.imparfait.1",
+    "verb": "exprimer",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Son sourire {exprimait} toute sa joie.",
+    "en": "Her smile expressed all her joy.",
+    "reviewed": true
+  },
+  {
+    "id": "gérer.indicatifPrésent.1",
+    "verb": "gérer",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ma tante {gère} un petit hôtel près de la mer.",
+    "en": "My aunt runs a small hotel near the sea.",
+    "reviewed": true
+  },
+  {
+    "id": "gérer.futurSimple.1",
+    "verb": "gérer",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "L’an prochain, nous {gérerons} ce magasin ensemble.",
+    "en": "Next year we will manage this store together.",
+    "reviewed": true
+  },
+  {
+    "id": "noter.impératif.1",
+    "verb": "noter",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Note} bien l’adresse avant de partir !",
+    "en": "Write the address down carefully before you leave!",
+    "reviewed": true
+  },
+  {
+    "id": "noter.conditionnelPrésent.1",
+    "verb": "noter",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si j’étais toi, je {noterais} son numéro.",
+    "en": "If I were you, I'd write down his number.",
+    "reviewed": true
+  },
+  {
+    "id": "soumettre.passéComposé.1",
+    "verb": "soumettre",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Les élèves {ont soumis} leurs projets hier.",
+    "en": "The students submitted their projects yesterday.",
+    "reviewed": true
+  },
+  {
+    "id": "soumettre.futurSimple.1",
+    "verb": "soumettre",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "Demain, nous {soumettrons} notre demande à la mairie.",
+    "en": "Tomorrow we will submit our request to city hall.",
+    "reviewed": true
+  },
+  {
+    "id": "poursuivre.indicatifPrésent.1",
+    "verb": "poursuivre",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le chat {poursuit} la souris dans le jardin.",
+    "en": "The cat is chasing the mouse in the garden.",
+    "reviewed": true
+  },
+  {
+    "id": "poursuivre.imparfait.1",
+    "verb": "poursuivre",
+    "tense": "imparfait",
+    "person": "fs",
+    "fr": "Quand j’étais petit, je {poursuivais} mes amis dans la cour.",
+    "en": "When I was little, I used to chase my friends around the yard.",
+    "reviewed": true
+  },
+  {
+    "id": "garder.passéComposé.1",
+    "verb": "garder",
+    "tense": "passéComposé",
+    "person": "sp",
+    "fr": "Vous {avez gardé} mes clés pendant tout le week-end ?",
+    "en": "Did you keep my keys all weekend?",
+    "reviewed": true
+  },
+  {
+    "id": "garder.subjonctifPrésent.1",
+    "verb": "garder",
+    "tense": "subjonctifPrésent",
+    "person": "ss",
+    "fr": "Il faut que tu {gardes} ton calme.",
+    "en": "You need to keep your cool.",
+    "reviewed": true
+  },
+  {
+    "id": "accueillir.indicatifPrésent.1",
+    "verb": "accueillir",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Mes grands-parents {accueillent} toujours leurs invités avec le sourire.",
+    "en": "My grandparents always welcome their guests with a smile.",
+    "reviewed": true
+  },
+  {
+    "id": "accueillir.conditionnelPrésent.1",
+    "verb": "accueillir",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si j’avais plus de place, j’{accueillerais} des amis.",
+    "en": "If I had more room, I would host friends.",
+    "reviewed": true
+  },
+  {
+    "id": "enregistrer.passéComposé.1",
+    "verb": "enregistrer",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Ce matin, j’{ai enregistré} une chanson avec mon frère.",
+    "en": "This morning I recorded a song with my brother.",
+    "reviewed": true
+  },
+  {
+    "id": "enregistrer.futurSimple.1",
+    "verb": "enregistrer",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Mon cousin {enregistrera} son premier disque l’an prochain.",
+    "en": "My cousin will record his first album next year.",
+    "reviewed": true
+  },
+  {
+    "id": "augmenter.indicatifPrésent.1",
+    "verb": "augmenter",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le prix du pain {augmente} chaque année.",
+    "en": "The price of bread goes up every year.",
+    "reviewed": true
+  },
+  {
+    "id": "augmenter.imparfait.1",
+    "verb": "augmenter",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "Autrefois, les loyers {augmentaient} lentement.",
+    "en": "In the past, rents rose slowly.",
+    "reviewed": true
+  },
+  {
+    "id": "respecter.impératif.1",
+    "verb": "respecter",
+    "tense": "impératif",
+    "person": "fp",
+    "fr": "{Respectons} les règles du jeu !",
+    "en": "Let's follow the rules of the game!",
+    "reviewed": true
+  },
+  {
+    "id": "respecter.futurSimple.1",
+    "verb": "respecter",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "Vous {respecterez} la date limite, j’espère.",
+    "en": "You will meet the deadline, I hope.",
+    "reviewed": true
+  },
+  {
+    "id": "espérer.indicatifPrésent.1",
+    "verb": "espérer",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "J’{espère} qu’il fera beau demain.",
+    "en": "I hope the weather will be nice tomorrow.",
+    "reviewed": true
+  },
+  {
+    "id": "espérer.imparfait.1",
+    "verb": "espérer",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "Petits, nous {espérions} toujours de la neige à Noël.",
+    "en": "As kids, we always hoped for snow at Christmas.",
+    "reviewed": true
+  },
+  {
+    "id": "améliorer.passéComposé.1",
+    "verb": "améliorer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Marie {a amélioré} son score au dernier test.",
+    "en": "Marie improved her score on the last test.",
+    "reviewed": true
+  },
+  {
+    "id": "améliorer.subjonctifPrésent.1",
+    "verb": "améliorer",
+    "tense": "subjonctifPrésent",
+    "person": "tp",
+    "fr": "Il faut que les joueurs {améliorent} leur jeu d’équipe.",
+    "en": "The players need to improve their teamwork.",
+    "reviewed": true
+  },
+  {
+    "id": "afficher.impératif.1",
+    "verb": "afficher",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Affichez} la liste sur la porte, s’il vous plaît.",
+    "en": "Put the list up on the door, please.",
+    "reviewed": true
+  },
+  {
+    "id": "afficher.imparfait.1",
+    "verb": "afficher",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Le magasin {affichait} ses prix en vitrine.",
+    "en": "The store used to display its prices in the window.",
+    "reviewed": true
+  },
+  {
+    "id": "protéger.indicatifPrésent.1",
+    "verb": "protéger",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ce manteau {protège} bien du froid.",
+    "en": "This coat protects you well from the cold.",
+    "reviewed": true
+  },
+  {
+    "id": "protéger.futurSimple.1",
+    "verb": "protéger",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "Je te {protégerai} toujours, ne t’inquiète pas.",
+    "en": "I will always protect you, don't worry.",
+    "reviewed": true
+  },
+  {
+    "id": "réussir.passéComposé.1",
+    "verb": "réussir",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Tu {as réussi} ton examen de conduite !",
+    "en": "You passed your driving test!",
+    "reviewed": true
+  },
+  {
+    "id": "réussir.subjonctifPrésent.1",
+    "verb": "réussir",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Je veux que ma fille {réussisse} ses études.",
+    "en": "I want my daughter to succeed in her studies.",
+    "reviewed": true
+  },
+  {
+    "id": "exercer.indicatifPrésent.1",
+    "verb": "exercer",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ma tante {exerce} le métier de médecin.",
+    "en": "My aunt works as a doctor.",
+    "reviewed": true
+  },
+  {
+    "id": "exercer.imparfait.1",
+    "verb": "exercer",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "Chaque matin, nous {exercions} nos doigts au piano.",
+    "en": "Every morning we exercised our fingers at the piano.",
+    "reviewed": true
+  },
+  {
+    "id": "sentir.indicatifPrésent.1",
+    "verb": "sentir",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je {sens} une bonne odeur de pain.",
+    "en": "I can smell fresh bread.",
+    "reviewed": true
+  },
+  {
+    "id": "sentir.conditionnelPrésent.1",
+    "verb": "sentir",
+    "tense": "conditionnelPrésent",
+    "person": "ts",
+    "fr": "Si tu cuisinais, la maison {sentirait} bon.",
+    "en": "If you cooked, the house would smell good.",
+    "reviewed": true
+  },
+  {
+    "id": "occuper.passéComposé.1",
+    "verb": "occuper",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Les touristes {ont occupé} toutes les chambres.",
+    "en": "The tourists took all the rooms.",
+    "reviewed": true
+  },
+  {
+    "id": "occuper.futurSimple.1",
+    "verb": "occuper",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Mon cousin {occupera} la chambre du fond cet été.",
+    "en": "My cousin will have the back bedroom this summer.",
+    "reviewed": true
+  },
+  {
+    "id": "intéresser.indicatifPrésent.1",
+    "verb": "intéresser",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Cette histoire m’{intéresse} beaucoup.",
+    "en": "This story interests me a lot.",
+    "reviewed": true
+  },
+  {
+    "id": "intéresser.imparfait.1",
+    "verb": "intéresser",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "Ces vieux films {intéressaient} mon père.",
+    "en": "These old movies used to interest my father.",
+    "reviewed": true
+  },
+  {
+    "id": "réunir.passéComposé.1",
+    "verb": "réunir",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "J’{ai réuni} tous mes amis pour mon anniversaire.",
+    "en": "I got all my friends together for my birthday.",
+    "reviewed": true
+  },
+  {
+    "id": "réunir.futurSimple.1",
+    "verb": "réunir",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "À Noël, nous {réunirons} toute la famille.",
+    "en": "At Christmas we will bring the whole family together.",
+    "reviewed": true
+  },
+  {
+    "id": "adopter.impératif.1",
+    "verb": "adopter",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Adopte} un chiot, il sera ton meilleur ami !",
+    "en": "Adopt a puppy, it will be your best friend!",
+    "reviewed": true
+  },
+  {
+    "id": "adopter.subjonctifPrésent.1",
+    "verb": "adopter",
+    "tense": "subjonctifPrésent",
+    "person": "sp",
+    "fr": "Je voudrais que vous {adoptiez} un chat.",
+    "en": "I would like you to adopt a cat.",
+    "reviewed": true
+  },
+  {
+    "id": "posséder.indicatifPrésent.1",
+    "verb": "posséder",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Mes voisins {possèdent} une grande maison.",
+    "en": "My neighbors own a big house.",
+    "reviewed": true
+  },
+  {
+    "id": "posséder.conditionnelPrésent.1",
+    "verb": "posséder",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si je gagnais au loto, je {posséderais} une île.",
+    "en": "If I won the lottery, I would own an island.",
+    "reviewed": true
+  },
+  {
+    "id": "déclarer.passéComposé.1",
+    "verb": "déclarer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Le maire {a déclaré} la fête ouverte.",
+    "en": "The mayor declared the festival open.",
+    "reviewed": true
+  },
+  {
+    "id": "déclarer.futurSimple.1",
+    "verb": "déclarer",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "À la douane, vous {déclarerez} vos bagages.",
+    "en": "At customs, you will declare your luggage.",
+    "reviewed": true
+  },
+  {
+    "id": "tomber.passéComposé.1",
+    "verb": "tomber",
+    "tense": "passéComposé",
+    "person": "ts",
+    "gender": "f",
+    "fr": "Ma petite sœur {est tombée} dans l’escalier.",
+    "en": "My little sister fell down the stairs.",
+    "reviewed": true
+  },
+  {
+    "id": "tomber.imparfait.1",
+    "verb": "tomber",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "En automne, les feuilles {tombaient} partout.",
+    "en": "In the fall, leaves were falling everywhere.",
+    "reviewed": true
+  },
+  {
+    "id": "favoriser.indicatifPrésent.1",
+    "verb": "favoriser",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le beau temps {favorise} les promenades.",
+    "en": "Nice weather encourages walks.",
+    "reviewed": true
+  },
+  {
+    "id": "favoriser.conditionnelPrésent.1",
+    "verb": "favoriser",
+    "tense": "conditionnelPrésent",
+    "person": "ts",
+    "fr": "Plus de lumière {favoriserait} la croissance des plantes.",
+    "en": "More light would help the plants grow.",
+    "reviewed": true
+  },
+  {
+    "id": "tirer.passéComposé.1",
+    "verb": "tirer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Hier, Paul {a tiré} la corde trop fort.",
+    "en": "Yesterday Paul pulled the rope too hard.",
+    "reviewed": true
+  },
+  {
+    "id": "tirer.imparfait.1",
+    "verb": "tirer",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Avant, une vieille jument {tirait} la charrette.",
+    "en": "In the old days, an old mare pulled the cart.",
+    "reviewed": true
+  },
+  {
+    "id": "citer.indicatifPrésent.1",
+    "verb": "citer",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je {cite} souvent ce poème dans mes cours.",
+    "en": "I often quote this poem in my classes.",
+    "reviewed": true
+  },
+  {
+    "id": "citer.subjonctifPrésent.1",
+    "verb": "citer",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Il faut que le professeur {cite} ses sources.",
+    "en": "The teacher has to cite his sources.",
+    "reviewed": true
+  },
+  {
+    "id": "marquer.passéComposé.1",
+    "verb": "marquer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Notre équipe {a marqué} deux buts samedi.",
+    "en": "Our team scored two goals on Saturday.",
+    "reviewed": true
+  },
+  {
+    "id": "marquer.futurSimple.1",
+    "verb": "marquer",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "Vous {marquerez} la date d’un cercle rouge.",
+    "en": "You will mark the date with a red circle.",
+    "reviewed": true
+  },
+  {
+    "id": "étudier.indicatifPrésent.1",
+    "verb": "étudier",
+    "tense": "indicatifPrésent",
+    "person": "ss",
+    "fr": "Tu {étudies} le français depuis deux ans.",
+    "en": "You have been studying French for two years.",
+    "reviewed": true
+  },
+  {
+    "id": "étudier.conditionnelPrésent.1",
+    "verb": "étudier",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si j’avais le temps, j’{étudierais} l’espagnol.",
+    "en": "If I had the time, I would study Spanish.",
+    "reviewed": true
+  },
+  {
+    "id": "intervenir.passéComposé.1",
+    "verb": "intervenir",
+    "tense": "passéComposé",
+    "person": "tp",
+    "gender": "m",
+    "fr": "Les pompiers {sont intervenus} très vite.",
+    "en": "The firefighters stepped in very quickly.",
+    "reviewed": true
+  },
+  {
+    "id": "intervenir.futurSimple.1",
+    "verb": "intervenir",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Le directeur {interviendra} si le bruit continue.",
+    "en": "The principal will step in if the noise continues.",
+    "reviewed": true
+  },
+  {
+    "id": "tenter.passéComposé.1",
+    "verb": "tenter",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "L’an dernier, nous {avons tenté} l’escalade.",
+    "en": "Last year we tried rock climbing.",
+    "reviewed": true
+  },
+  {
+    "id": "tenter.subjonctifPrésent.1",
+    "verb": "tenter",
+    "tense": "subjonctifPrésent",
+    "person": "ss",
+    "fr": "Il vaut mieux que tu {tentes} ta chance.",
+    "en": "You had better try your luck.",
+    "reviewed": true
+  },
+  {
+    "id": "retenir.impératif.1",
+    "verb": "retenir",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Retenez} bien ce numéro !",
+    "en": "Remember this number well!",
+    "reviewed": true
+  },
+  {
+    "id": "retenir.conditionnelPrésent.1",
+    "verb": "retenir",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si j’étais plus attentif, je {retiendrais} tout.",
+    "en": "If I were more attentive, I would remember everything.",
+    "reviewed": true
+  },
+  {
+    "id": "toucher.indicatifPrésent.1",
+    "verb": "toucher",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le ballon {touche} le filet.",
+    "en": "The ball touches the net.",
+    "reviewed": true
+  },
+  {
+    "id": "toucher.futurSimple.1",
+    "verb": "toucher",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "Demain, nous {toucherons} enfin la côte.",
+    "en": "Tomorrow we will finally reach the coast.",
+    "reviewed": true
+  },
+  {
+    "id": "tourner.passéComposé.1",
+    "verb": "tourner",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Tu {as tourné} à gauche trop tôt.",
+    "en": "You turned left too early.",
+    "reviewed": true
+  },
+  {
+    "id": "tourner.imparfait.1",
+    "verb": "tourner",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Le manège {tournait} lentement sous la pluie.",
+    "en": "The carousel was turning slowly in the rain.",
+    "reviewed": true
+  },
+  {
+    "id": "profiter.impératif.1",
+    "verb": "profiter",
+    "tense": "impératif",
+    "person": "fp",
+    "fr": "{Profitons} du soleil avant la pluie !",
+    "en": "Let's make the most of the sun before the rain!",
+    "reviewed": true
+  },
+  {
+    "id": "profiter.futurSimple.1",
+    "verb": "profiter",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "Les enfants {profiteront} bien des vacances.",
+    "en": "The kids will make the most of the vacation.",
+    "reviewed": true
+  },
+  {
+    "id": "suffire.indicatifPrésent.1",
+    "verb": "suffire",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Un coup de fil {suffit} pour réserver.",
+    "en": "One phone call is enough to book.",
+    "reviewed": true
+  },
+  {
+    "id": "suffire.subjonctifPrésent.1",
+    "verb": "suffire",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Il faut que cela {suffise} jusqu’à demain.",
+    "en": "This has to be enough until tomorrow.",
+    "reviewed": true
+  },
+  {
+    "id": "correspondre.indicatifPrésent.1",
+    "verb": "correspondre",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Cette clé {correspond} à la porte du garage.",
+    "en": "This key fits the garage door.",
+    "reviewed": true
+  },
+  {
+    "id": "correspondre.futurSimple.1",
+    "verb": "correspondre",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "Quand je serai en Chine, je {correspondrai} avec toi par courrier.",
+    "en": "When I'm in China, I'll write to you by mail.",
+    "reviewed": true
+  },
+  {
+    "id": "classer.passéComposé.1",
+    "verb": "classer",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Les élèves {ont classé} leurs feuilles par matière.",
+    "en": "The students filed their sheets by subject.",
+    "reviewed": true
+  },
+  {
+    "id": "classer.conditionnelPrésent.1",
+    "verb": "classer",
+    "tense": "conditionnelPrésent",
+    "person": "ss",
+    "fr": "Si tu avais le temps, tu {classerais} ces photos.",
+    "en": "If you had the time, you would sort these photos.",
+    "reviewed": true
+  },
+  {
+    "id": "contribuer.impératif.1",
+    "verb": "contribuer",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Contribuez} selon vos moyens à la collecte !",
+    "en": "Contribute to the fundraiser as much as you can!",
+    "reviewed": true
+  },
+  {
+    "id": "contribuer.subjonctifPrésent.1",
+    "verb": "contribuer",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Il faut que chacun {contribue} au ménage.",
+    "en": "Everyone needs to help with the housework.",
+    "reviewed": true
+  },
+  {
+    "id": "conserver.passéComposé.1",
+    "verb": "conserver",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Cette année, j’{ai conservé} tous mes tickets de caisse.",
+    "en": "This year I kept all my receipts.",
+    "reviewed": true
+  },
+  {
+    "id": "conserver.futurSimple.1",
+    "verb": "conserver",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "Après l’ouverture, vous {conserverez} ce pot au réfrigérateur.",
+    "en": "After opening it, you will keep this jar in the refrigerator.",
+    "reviewed": true
+  },
+  {
+    "id": "valoir.indicatifPrésent.1",
+    "verb": "valoir",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ce vieux livre {vaut} très cher.",
+    "en": "This old book is worth a lot.",
+    "reviewed": true
+  },
+  {
+    "id": "valoir.subjonctifPrésent.1",
+    "verb": "valoir",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Bien que ce tableau {vaille} peu, je l’adore.",
+    "en": "Although this painting is worth little, I love it.",
+    "reviewed": true
+  },
+  {
+    "id": "informer.indicatifPrésent.1",
+    "verb": "informer",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "J’{informe} toujours mes parents de mes projets.",
+    "en": "I always tell my parents about my plans.",
+    "reviewed": true
+  },
+  {
+    "id": "informer.futurSimple.1",
+    "verb": "informer",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "Demain, nous vous {informerons} de la décision.",
+    "en": "Tomorrow we will inform you of the decision.",
+    "reviewed": true
+  },
+  {
+    "id": "préférer.indicatifPrésent.1",
+    "verb": "préférer",
+    "tense": "indicatifPrésent",
+    "person": "ss",
+    "fr": "Tu {préfères} le thé ou le café ?",
+    "en": "Do you prefer tea or coffee?",
+    "reviewed": true
+  },
+  {
+    "id": "préférer.conditionnelPrésent.1",
+    "verb": "préférer",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Je {préférerais} rester à la maison ce soir.",
+    "en": "I would rather stay home tonight.",
+    "reviewed": true
+  },
+  {
+    "id": "renforcer.passéComposé.1",
+    "verb": "renforcer",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Les ouvriers {ont renforcé} le mur de la cave.",
+    "en": "The workers reinforced the cellar wall.",
+    "reviewed": true
+  },
+  {
+    "id": "renforcer.imparfait.1",
+    "verb": "renforcer",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "Autrefois, nous {renforcions} la clôture chaque hiver.",
+    "en": "In the past we reinforced the fence every winter.",
+    "reviewed": true
+  },
+  {
+    "id": "constater.passéComposé.1",
+    "verb": "constater",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Le médecin {a constaté} une légère amélioration.",
+    "en": "The doctor noted a slight improvement.",
+    "reviewed": true
+  },
+  {
+    "id": "constater.subjonctifPrésent.1",
+    "verb": "constater",
+    "tense": "subjonctifPrésent",
+    "person": "sp",
+    "fr": "Il est étonnant que vous {constatiez} si peu de différence.",
+    "en": "It's surprising that you notice so little difference.",
+    "reviewed": true
+  },
+  {
+    "id": "concevoir.impératif.1",
+    "verb": "concevoir",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Conçois} un plan simple avant de commencer !",
+    "en": "Come up with a simple plan before you start!",
+    "reviewed": true
+  },
+  {
+    "id": "concevoir.imparfait.1",
+    "verb": "concevoir",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "À l’époque, les architectes {concevaient} des maisons en pierre.",
+    "en": "Back then, architects designed stone houses.",
+    "reviewed": true
+  },
+  {
+    "id": "déterminer.indicatifPrésent.1",
+    "verb": "déterminer",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le prix {détermine} souvent notre choix.",
+    "en": "Price often determines our choice.",
+    "reviewed": true
+  },
+  {
+    "id": "déterminer.futurSimple.1",
+    "verb": "déterminer",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "Demain, nous {déterminerons} la date de la réunion.",
+    "en": "Tomorrow we will set the date of the meeting.",
+    "reviewed": true
+  },
+  {
+    "id": "manquer.passéComposé.1",
+    "verb": "manquer",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Hier soir, nous {avons manqué} le dernier bus.",
+    "en": "Last night we missed the last bus.",
+    "reviewed": true
+  },
+  {
+    "id": "manquer.imparfait.1",
+    "verb": "manquer",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Quand j’étais loin, ma famille me {manquait} beaucoup.",
+    "en": "When I was far away, I missed my family a lot.",
+    "reviewed": true
+  },
+  {
+    "id": "autoriser.indicatifPrésent.1",
+    "verb": "autoriser",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les parents {autorisent} les enfants à jouer dehors.",
+    "en": "The parents let the children play outside.",
+    "reviewed": true
+  },
+  {
+    "id": "autoriser.conditionnelPrésent.1",
+    "verb": "autoriser",
+    "tense": "conditionnelPrésent",
+    "person": "ts",
+    "fr": "Si tu demandais, le directeur t’{autoriserait} à partir.",
+    "en": "If you asked, the principal would allow you to leave.",
+    "reviewed": true
+  },
+  {
+    "id": "identifier.impératif.1",
+    "verb": "identifier",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Identifiez} les erreurs dans ce texte.",
+    "en": "Identify the mistakes in this text.",
+    "reviewed": true
+  },
+  {
+    "id": "identifier.imparfait.1",
+    "verb": "identifier",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "Chaque matin, nous {identifiions} les oiseaux du jardin.",
+    "en": "Every morning we identified the birds in the garden.",
+    "reviewed": true
+  },
+  {
+    "id": "acquérir.passéComposé.1",
+    "verb": "acquérir",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Cette année, j’{ai acquis} une petite maison.",
+    "en": "This year I acquired a small house.",
+    "reviewed": true
+  },
+  {
+    "id": "acquérir.futurSimple.1",
+    "verb": "acquérir",
+    "tense": "futurSimple",
+    "person": "ss",
+    "fr": "Avec le temps, tu {acquerras} de l’expérience.",
+    "en": "With time, you will gain experience.",
+    "reviewed": true
+  },
+  {
+    "id": "nommer.passéComposé.1",
+    "verb": "nommer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Le président {a nommé} un nouveau ministre.",
+    "en": "The president appointed a new minister.",
+    "reviewed": true
+  },
+  {
+    "id": "nommer.imparfait.1",
+    "verb": "nommer",
+    "tense": "imparfait",
+    "person": "fs",
+    "fr": "Quand j’étais petit, je {nommais} tous mes jouets.",
+    "en": "When I was little, I named all my toys.",
+    "reviewed": true
+  },
+  {
+    "id": "garantir.indicatifPrésent.1",
+    "verb": "garantir",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je vous {garantis} que le colis arrivera demain.",
+    "en": "I guarantee you that the package will arrive tomorrow.",
+    "reviewed": true
+  },
+  {
+    "id": "garantir.conditionnelPrésent.1",
+    "verb": "garantir",
+    "tense": "conditionnelPrésent",
+    "person": "ts",
+    "fr": "Si vous payiez plus, ce magasin vous {garantirait} un service rapide.",
+    "en": "If you paid more, this store would guarantee you fast service.",
+    "reviewed": true
+  },
+  {
+    "id": "remplir.passéComposé.1",
+    "verb": "remplir",
+    "tense": "passéComposé",
+    "person": "sp",
+    "fr": "Ce matin, vous {avez rempli} tous les formulaires.",
+    "en": "This morning you filled out all the forms.",
+    "reviewed": true
+  },
+  {
+    "id": "remplir.futurSimple.1",
+    "verb": "remplir",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Ce soir, la foule {remplira} la salle.",
+    "en": "Tonight the crowd will fill the hall.",
+    "reviewed": true
+  },
+  {
+    "id": "confirmer.impératif.1",
+    "verb": "confirmer",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Confirme} ton arrivée avant vendredi, s’il te plaît.",
+    "en": "Please confirm your arrival before Friday.",
+    "reviewed": true
+  },
+  {
+    "id": "confirmer.subjonctifPrésent.1",
+    "verb": "confirmer",
+    "tense": "subjonctifPrésent",
+    "person": "fs",
+    "fr": "Il faut que je {confirme} la réservation aujourd’hui.",
+    "en": "I have to confirm the reservation today.",
+    "reviewed": true
+  },
+  {
+    "id": "comporter.indicatifPrésent.1",
+    "verb": "comporter",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ce menu {comporte} trois plats.",
+    "en": "This menu includes three courses.",
+    "reviewed": true
+  },
+  {
+    "id": "comporter.imparfait.1",
+    "verb": "comporter",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "Autrefois, ces maisons {comportaient} une seule pièce.",
+    "en": "In the past, these houses had a single room.",
+    "reviewed": true
+  },
+  {
+    "id": "estimer.indicatifPrésent.1",
+    "verb": "estimer",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "J’{estime} que ce prix est trop élevé.",
+    "en": "I think this price is too high.",
+    "reviewed": true
+  },
+  {
+    "id": "estimer.futurSimple.1",
+    "verb": "estimer",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Demain, l’expert {estimera} les dégâts.",
+    "en": "Tomorrow the expert will estimate the damage.",
+    "reviewed": true
+  },
+  {
+    "id": "entraîner.indicatifPrésent.1",
+    "verb": "entraîner",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {entraînons} l’équipe tous les mercredis.",
+    "en": "We coach the team every Wednesday.",
+    "reviewed": true
+  },
+  {
+    "id": "entraîner.subjonctifPrésent.1",
+    "verb": "entraîner",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Je veux que mon frère t’{entraîne} au tennis.",
+    "en": "I want my brother to train you in tennis.",
+    "reviewed": true
+  },
+  {
+    "id": "communiquer.passéComposé.1",
+    "verb": "communiquer",
+    "tense": "passéComposé",
+    "person": "sp",
+    "fr": "Hier, vous {avez communiqué} les résultats à toute l’équipe.",
+    "en": "Yesterday you shared the results with the whole team.",
+    "reviewed": true
+  },
+  {
+    "id": "communiquer.imparfait.1",
+    "verb": "communiquer",
+    "tense": "imparfait",
+    "person": "ss",
+    "fr": "Quand tu étais au Canada, tu {communiquais} avec nous par vidéo.",
+    "en": "When you were in Canada, you communicated with us by video.",
+    "reviewed": true
+  },
+  {
+    "id": "refuser.passéComposé.1",
+    "verb": "refuser",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Mes voisins {ont refusé} notre invitation.",
+    "en": "My neighbors turned down our invitation.",
+    "reviewed": true
+  },
+  {
+    "id": "refuser.conditionnelPrésent.1",
+    "verb": "refuser",
+    "tense": "conditionnelPrésent",
+    "person": "fp",
+    "fr": "À votre place, nous {refuserions} cette offre.",
+    "en": "If we were you, we would turn down this offer.",
+    "reviewed": true
+  },
+  {
+    "id": "déposer.indicatifPrésent.1",
+    "verb": "déposer",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je {dépose} les enfants à l’école tous les matins.",
+    "en": "I drop the kids off at school every morning.",
+    "reviewed": true
+  },
+  {
+    "id": "déposer.subjonctifPrésent.1",
+    "verb": "déposer",
+    "tense": "subjonctifPrésent",
+    "person": "sp",
+    "fr": "Il faut que vous {déposiez} vos clés à l’accueil.",
+    "en": "You need to leave your keys at the front desk.",
+    "reviewed": true
+  },
+  {
+    "id": "remplacer.passéComposé.1",
+    "verb": "remplacer",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Ce matin, j’{ai remplacé} l’ampoule du salon.",
+    "en": "This morning I replaced the light bulb in the living room.",
+    "reviewed": true
+  },
+  {
+    "id": "remplacer.futurSimple.1",
+    "verb": "remplacer",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "L’an prochain, de nouveaux bus {remplaceront} les vieux.",
+    "en": "Next year, new buses will replace the old ones.",
+    "reviewed": true
+  },
+  {
+    "id": "accorder.indicatifPrésent.1",
+    "verb": "accorder",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "J’{accorde} toujours une seconde chance aux gens.",
+    "en": "I always give people a second chance.",
+    "reviewed": true
+  },
+  {
+    "id": "accorder.conditionnelPrésent.1",
+    "verb": "accorder",
+    "tense": "conditionnelPrésent",
+    "person": "ts",
+    "fr": "Si tu insistais, la banque t’{accorderait} peut-être un prêt.",
+    "en": "If you insisted, the bank might grant you a loan.",
+    "reviewed": true
+  },
+  {
+    "id": "monter.passéComposé.1",
+    "verb": "monter",
+    "tense": "passéComposé",
+    "person": "ts",
+    "gender": "f",
+    "fr": "Tout à l’heure, ma sœur {est montée} au grenier.",
+    "en": "A little while ago, my sister went up to the attic.",
+    "reviewed": true
+  },
+  {
+    "id": "monter.futurSimple.1",
+    "verb": "monter",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "Les prix {monteront} cet été.",
+    "en": "Prices will go up this summer.",
+    "reviewed": true
+  },
+  {
+    "id": "rejoindre.indicatifPrésent.1",
+    "verb": "rejoindre",
+    "tense": "indicatifPrésent",
+    "person": "ss",
+    "fr": "Tu {rejoins} tes amis au café ce soir ?",
+    "en": "Are you joining your friends at the cafe tonight?",
+    "reviewed": true
+  },
+  {
+    "id": "rejoindre.futurSimple.1",
+    "verb": "rejoindre",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "Je vous {rejoindrai} dès que j’aurai fini.",
+    "en": "I'll join you as soon as I'm done.",
+    "reviewed": true
+  },
+  {
+    "id": "accéder.indicatifPrésent.1",
+    "verb": "accéder",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les visiteurs {accèdent} au château par un petit pont.",
+    "en": "Visitors reach the castle by a small bridge.",
+    "reviewed": true
+  },
+  {
+    "id": "accéder.imparfait.1",
+    "verb": "accéder",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "Autrefois, nous {accédions} au grenier par une échelle.",
+    "en": "In the past we reached the attic by a ladder.",
+    "reviewed": true
+  },
+  {
+    "id": "convenir.indicatifPrésent.1",
+    "verb": "convenir",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ce rendez-vous me {convient} très bien.",
+    "en": "This appointment suits me very well.",
+    "reviewed": true
+  },
+  {
+    "id": "convenir.conditionnelPrésent.1",
+    "verb": "convenir",
+    "tense": "conditionnelPrésent",
+    "person": "ts",
+    "fr": "Si vous veniez à dix heures, cela nous {conviendrait}.",
+    "en": "If you came at ten o'clock, that would suit us.",
+    "reviewed": true
+  },
+  {
+    "id": "appartenir.indicatifPrésent.1",
+    "verb": "appartenir",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Cette maison {appartient} à mes grands-parents.",
+    "en": "This house belongs to my grandparents.",
+    "reviewed": true
+  },
+  {
+    "id": "appartenir.imparfait.1",
+    "verb": "appartenir",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "Autrefois, ces champs {appartenaient} à un seul fermier.",
+    "en": "In the past, these fields belonged to a single farmer.",
+    "reviewed": true
+  },
+  {
+    "id": "observer.impératif.1",
+    "verb": "observer",
+    "tense": "impératif",
+    "person": "fp",
+    "fr": "{Observons} le ciel avec ce télescope !",
+    "en": "Let's observe the sky with this telescope!",
+    "reviewed": true
+  },
+  {
+    "id": "observer.futurSimple.1",
+    "verb": "observer",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "Demain, vous {observerez} les étoiles avec le professeur.",
+    "en": "Tomorrow you will observe the stars with the teacher.",
+    "reviewed": true
+  },
+  {
+    "id": "impliquer.passéComposé.1",
+    "verb": "impliquer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Ce projet {a impliqué} beaucoup de monde.",
+    "en": "This project involved a lot of people.",
+    "reviewed": true
+  },
+  {
+    "id": "impliquer.subjonctifPrésent.1",
+    "verb": "impliquer",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Je ne veux pas que ce travail {implique} trop de risques.",
+    "en": "I don't want this job to involve too many risks.",
+    "reviewed": true
+  },
+  {
+    "id": "appuyer.impératif.1",
+    "verb": "appuyer",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Appuie} sur le bouton rouge !",
+    "en": "Press the red button!",
+    "reviewed": true
+  },
+  {
+    "id": "appuyer.futurSimple.1",
+    "verb": "appuyer",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "Demain, j’{appuierai} ta demande auprès du directeur.",
+    "en": "Tomorrow I will support your request with the principal.",
+    "reviewed": true
+  },
+  {
+    "id": "évoquer.indicatifPrésent.1",
+    "verb": "évoquer",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Ces photos {évoquent} de bons souvenirs.",
+    "en": "These photos evoke good memories.",
+    "reviewed": true
+  },
+  {
+    "id": "évoquer.imparfait.1",
+    "verb": "évoquer",
+    "tense": "imparfait",
+    "person": "fs",
+    "fr": "Chaque fois que j’{évoquais} mon voyage, elle changeait de sujet.",
+    "en": "Every time I brought up my trip, she changed the subject.",
+    "reviewed": true
+  },
+  {
+    "id": "consister.indicatifPrésent.1",
+    "verb": "consister",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Son travail {consiste} à répondre au téléphone.",
+    "en": "Her job consists of answering the phone.",
+    "reviewed": true
+  },
+  {
+    "id": "consister.conditionnelPrésent.1",
+    "verb": "consister",
+    "tense": "conditionnelPrésent",
+    "person": "ts",
+    "fr": "En quoi {consisterait} un bon plan ?",
+    "en": "What would a good plan consist of?",
+    "reviewed": true
+  },
+  {
+    "id": "fonctionner.passéComposé.1",
+    "verb": "fonctionner",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Après la réparation, la machine à café {a fonctionné} sans problème.",
+    "en": "After the repair, the coffee machine worked without a problem.",
+    "reviewed": true
+  },
+  {
+    "id": "fonctionner.subjonctifPrésent.1",
+    "verb": "fonctionner",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Je ne crois pas que cette montre {fonctionne} encore.",
+    "en": "I don't think this watch still works.",
+    "reviewed": true
+  },
+  {
+    "id": "désigner.indicatifPrésent.1",
+    "verb": "désigner",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {désignons} un représentant pour la classe.",
+    "en": "We are choosing a representative for the class.",
+    "reviewed": true
+  },
+  {
+    "id": "désigner.futurSimple.1",
+    "verb": "désigner",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "Demain, les élèves {désigneront} un délégué.",
+    "en": "Tomorrow the students will choose a delegate.",
+    "reviewed": true
+  },
+  {
+    "id": "avancer.impératif.1",
+    "verb": "avancer",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Avancez} jusqu’au feu rouge, puis tournez à gauche.",
+    "en": "Go forward to the red light, then turn left.",
+    "reviewed": true
+  },
+  {
+    "id": "avancer.imparfait.1",
+    "verb": "avancer",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Le vieux train {avançait} très lentement dans la vallée.",
+    "en": "The old train moved very slowly through the valley.",
+    "reviewed": true
+  },
+  {
+    "id": "terminer.passéComposé.1",
+    "verb": "terminer",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Ce soir, j’{ai terminé} mes devoirs avant le dîner.",
+    "en": "Tonight I finished my homework before dinner.",
+    "reviewed": true
+  },
+  {
+    "id": "terminer.conditionnelPrésent.1",
+    "verb": "terminer",
+    "tense": "conditionnelPrésent",
+    "person": "sp",
+    "fr": "Si vous aviez plus de temps, vous {termineriez} plus tôt.",
+    "en": "If you had more time, you would finish earlier.",
+    "reviewed": true
+  },
+  {
+    "id": "issir.participePassé.1",
+    "verb": "issir",
+    "tense": "participePassé",
+    "fr": "Mon grand-père est {issu} d’un petit village.",
+    "en": "My grandfather comes from a small village.",
+    "reviewed": true
+  },
+  {
+    "id": "issir.participePassé.2",
+    "verb": "issir",
+    "tense": "participePassé",
+    "fr": "Ce mot est {issu} du latin.",
+    "en": "This word comes from Latin.",
+    "reviewed": true
+  },
+  {
+    "id": "varier.indicatifPrésent.1",
+    "verb": "varier",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les prix {varient} beaucoup d’une ville à l’autre.",
+    "en": "Prices vary a lot from one city to another.",
+    "reviewed": true
+  },
+  {
+    "id": "varier.futurSimple.1",
+    "verb": "varier",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Le menu {variera} chaque semaine.",
+    "en": "The menu will vary every week.",
+    "reviewed": true
+  },
+  {
+    "id": "écouter.impératif.1",
+    "verb": "écouter",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Écoute} ! Tu entends la pluie ?",
+    "en": "Listen! Do you hear the rain?",
+    "reviewed": true
+  },
+  {
+    "id": "écouter.imparfait.1",
+    "verb": "écouter",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "Le soir, nous {écoutions} la radio ensemble.",
+    "en": "In the evening we used to listen to the radio together.",
+    "reviewed": true
+  },
+  {
+    "id": "affirmer.passéComposé.1",
+    "verb": "affirmer",
+    "tense": "passéComposé",
+    "person": "sp",
+    "fr": "Hier, vous {avez affirmé} le contraire devant tout le monde.",
+    "en": "Yesterday you claimed the opposite in front of everyone.",
+    "reviewed": true
+  },
+  {
+    "id": "affirmer.subjonctifPrésent.1",
+    "verb": "affirmer",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Bien qu’elle {affirme} le contraire, je ne la crois pas.",
+    "en": "Although she claims the opposite, I don't believe her.",
+    "reviewed": true
+  },
+  {
+    "id": "couvrir.impératif.1",
+    "verb": "couvrir",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Couvrez} bien les enfants, il fait froid !",
+    "en": "Cover the children well, it's cold!",
+    "reviewed": true
+  },
+  {
+    "id": "couvrir.futurSimple.1",
+    "verb": "couvrir",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "La neige {couvrira} bientôt les montagnes.",
+    "en": "Snow will soon cover the mountains.",
+    "reviewed": true
+  },
+  {
+    "id": "fonder.passéComposé.1",
+    "verb": "fonder",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Deux amis {ont fondé} ce journal en 1950.",
+    "en": "Two friends founded this newspaper in 1950.",
+    "reviewed": true
+  },
+  {
+    "id": "fonder.conditionnelPrésent.1",
+    "verb": "fonder",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si j’avais de l’argent, je {fonderais} une petite entreprise.",
+    "en": "If I had money, I would found a small company.",
+    "reviewed": true
+  },
+  {
+    "id": "transmettre.indicatifPrésent.1",
+    "verb": "transmettre",
+    "tense": "indicatifPrésent",
+    "person": "ss",
+    "fr": "Tu {transmets} mon message à Paul, s’il te plaît ?",
+    "en": "Will you pass my message on to Paul, please?",
+    "reviewed": true
+  },
+  {
+    "id": "transmettre.subjonctifPrésent.1",
+    "verb": "transmettre",
+    "tense": "subjonctifPrésent",
+    "person": "fp",
+    "fr": "Il faut que nous {transmettions} ces documents avant lundi.",
+    "en": "We have to send these documents before Monday.",
+    "reviewed": true
+  },
+  {
+    "id": "aborder.passéComposé.1",
+    "verb": "aborder",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Hier, j’{ai abordé} ce sujet avec mon patron.",
+    "en": "Yesterday I broached that subject with my boss.",
+    "reviewed": true
+  },
+  {
+    "id": "aborder.imparfait.1",
+    "verb": "aborder",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "En classe, ils {abordaient} chaque sujet avec humour.",
+    "en": "In class they tackled every topic with humor.",
+    "reviewed": true
+  },
+  {
+    "id": "diffuser.indicatifPrésent.1",
+    "verb": "diffuser",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Cette chaîne {diffuse} un film chaque soir.",
+    "en": "This channel broadcasts a movie every evening.",
+    "reviewed": true
+  },
+  {
+    "id": "diffuser.futurSimple.1",
+    "verb": "diffuser",
+    "tense": "futurSimple",
+    "person": "sp",
+    "fr": "Vous {diffuserez} l’émission demain à vingt heures.",
+    "en": "You will broadcast the show tomorrow at eight p.m.",
+    "reviewed": true
+  },
+  {
+    "id": "juger.passéComposé.1",
+    "verb": "juger",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Le tribunal {a jugé} cette affaire la semaine dernière.",
+    "en": "The court tried this case last week.",
+    "reviewed": true
+  },
+  {
+    "id": "juger.subjonctifPrésent.1",
+    "verb": "juger",
+    "tense": "subjonctifPrésent",
+    "person": "ss",
+    "fr": "Je veux que tu {juges} par toi-même.",
+    "en": "I want you to judge for yourself.",
+    "reviewed": true
+  },
+  {
+    "id": "dérouler.impératif.1",
+    "verb": "dérouler",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Déroule} le tapis dans le salon !",
+    "en": "Unroll the rug in the living room!",
+    "reviewed": true
+  },
+  {
+    "id": "dérouler.conditionnelPrésent.1",
+    "verb": "dérouler",
+    "tense": "conditionnelPrésent",
+    "person": "tp",
+    "fr": "Si le roi venait, ils {dérouleraient} un tapis rouge.",
+    "en": "If the king came, they would roll out a red carpet.",
+    "reviewed": true
+  },
+  {
+    "id": "saisir.passéComposé.1",
+    "verb": "saisir",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Soudain, j’{ai saisi} la main de ma sœur.",
+    "en": "Suddenly I grabbed my sister's hand.",
+    "reviewed": true
+  },
+  {
+    "id": "saisir.imparfait.1",
+    "verb": "saisir",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Le chat {saisissait} chaque occasion de voler un morceau.",
+    "en": "The cat seized every chance to steal a piece.",
+    "reviewed": true
+  },
+  {
+    "id": "analyser.indicatifPrésent.1",
+    "verb": "analyser",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {analysons} les résultats de l’enquête ensemble.",
+    "en": "We are analyzing the survey results together.",
+    "reviewed": true
+  },
+  {
+    "id": "analyser.futurSimple.1",
+    "verb": "analyser",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Un expert {analysera} cet échantillon demain.",
+    "en": "An expert will analyze this sample tomorrow.",
+    "reviewed": true
+  },
+  {
+    "id": "décrire.impératif.1",
+    "verb": "décrire",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Décris} ta chambre en trois phrases.",
+    "en": "Describe your room in three sentences.",
+    "reviewed": true
+  },
+  {
+    "id": "décrire.conditionnelPrésent.1",
+    "verb": "décrire",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "À ta place, je {décrirais} la scène plus simplement.",
+    "en": "In your place, I would describe the scene more simply.",
+    "reviewed": true
+  },
+  {
+    "id": "compléter.passéComposé.1",
+    "verb": "compléter",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Les élèves {ont complété} le tableau en classe.",
+    "en": "The students completed the chart in class.",
+    "reviewed": true
+  },
+  {
+    "id": "compléter.subjonctifPrésent.1",
+    "verb": "compléter",
+    "tense": "subjonctifPrésent",
+    "person": "sp",
+    "fr": "Il faut que vous {complétiez} ce formulaire avant midi.",
+    "en": "You must complete this form before noon.",
+    "reviewed": true
+  },
+  {
+    "id": "maintenir.indicatifPrésent.1",
+    "verb": "maintenir",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je {maintiens} ma décision, malgré vos objections.",
+    "en": "I stand by my decision, despite your objections.",
+    "reviewed": true
+  },
+  {
+    "id": "maintenir.imparfait.1",
+    "verb": "maintenir",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "Autrefois, nous {maintenions} le jardin en bon état.",
+    "en": "In the past we kept the garden in good condition.",
+    "reviewed": true
+  },
+  {
+    "id": "diriger.indicatifPrésent.1",
+    "verb": "diriger",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ma tante {dirige} une petite école de musique.",
+    "en": "My aunt runs a small music school.",
+    "reviewed": true
+  },
+  {
+    "id": "diriger.futurSimple.1",
+    "verb": "diriger",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "Dans dix ans, nous {dirigerons} peut-être cette entreprise.",
+    "en": "In ten years we may be running this company.",
+    "reviewed": true
+  },
+  {
+    "id": "fermer.passéComposé.1",
+    "verb": "fermer",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Ce matin, tu {as fermé} la porte à clé ?",
+    "en": "Did you lock the door this morning?",
+    "reviewed": true
+  },
+  {
+    "id": "fermer.subjonctifPrésent.1",
+    "verb": "fermer",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Je voudrais que le magasin {ferme} plus tard.",
+    "en": "I wish the store would close later.",
+    "reviewed": true
+  },
+  {
+    "id": "apprécier.indicatifPrésent.1",
+    "verb": "apprécier",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Mes parents {apprécient} beaucoup leur nouveau voisin.",
+    "en": "My parents really like their new neighbor.",
+    "reviewed": true
+  },
+  {
+    "id": "apprécier.conditionnelPrésent.1",
+    "verb": "apprécier",
+    "tense": "conditionnelPrésent",
+    "person": "ss",
+    "fr": "Tu {apprécierais} cette ville si tu y restais.",
+    "en": "You would like this city if you stayed there.",
+    "reviewed": true
+  },
+  {
+    "id": "faciliter.passéComposé.1",
+    "verb": "faciliter",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Ce nouvel outil {a facilité} mon travail.",
+    "en": "This new tool made my work easier.",
+    "reviewed": true
+  },
+  {
+    "id": "faciliter.futurSimple.1",
+    "verb": "faciliter",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Un bon plan {facilitera} la préparation du voyage.",
+    "en": "A good plan will make trip preparation easier.",
+    "reviewed": true
+  },
+  {
+    "id": "transformer.impératif.1",
+    "verb": "transformer",
+    "tense": "impératif",
+    "person": "fp",
+    "fr": "{Transformons} ce vieux garage en atelier !",
+    "en": "Let's turn this old garage into a workshop!",
+    "reviewed": true
+  },
+  {
+    "id": "transformer.imparfait.1",
+    "verb": "transformer",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Ce magicien {transformait} un mouchoir en colombe.",
+    "en": "This magician used to turn a handkerchief into a dove.",
+    "reviewed": true
+  },
+  {
+    "id": "envisager.passéComposé.1",
+    "verb": "envisager",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "L’été dernier, nous {avons envisagé} un long voyage.",
+    "en": "Last summer we considered a long trip.",
+    "reviewed": true
+  },
+  {
+    "id": "envisager.conditionnelPrésent.1",
+    "verb": "envisager",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Dans ce cas, j’{envisagerais} de changer de travail.",
+    "en": "In that case I would consider changing jobs.",
+    "reviewed": true
+  },
+  {
+    "id": "manger.indicatifPrésent.1",
+    "verb": "manger",
+    "tense": "indicatifPrésent",
+    "person": "sp",
+    "fr": "Vous {mangez} souvent des légumes ?",
+    "en": "Do you often eat vegetables?",
+    "reviewed": true
+  },
+  {
+    "id": "manger.futurSimple.1",
+    "verb": "manger",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Demain, ma sœur {mangera} chez nous.",
+    "en": "Tomorrow my sister will eat at our place.",
+    "reviewed": true
+  },
+  {
+    "id": "hésiter.passéComposé.1",
+    "verb": "hésiter",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Il {a hésité} longtemps avant de répondre.",
+    "en": "He hesitated a long time before answering.",
+    "reviewed": true
+  },
+  {
+    "id": "hésiter.imparfait.1",
+    "verb": "hésiter",
+    "tense": "imparfait",
+    "person": "fs",
+    "fr": "Petit, j’{hésitais} toujours devant le plongeoir.",
+    "en": "As a kid, I always hesitated in front of the diving board.",
+    "reviewed": true
+  },
+  {
+    "id": "quitter.passéComposé.1",
+    "verb": "quitter",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Hier, nos voisins {ont quitté} la ville.",
+    "en": "Yesterday our neighbors left the city.",
+    "reviewed": true
+  },
+  {
+    "id": "quitter.subjonctifPrésent.1",
+    "verb": "quitter",
+    "tense": "subjonctifPrésent",
+    "person": "fs",
+    "fr": "Ma mère m’appelle toujours avant que je {quitte} la maison.",
+    "en": "My mother always calls me before I leave the house.",
+    "reviewed": true
+  },
+  {
+    "id": "couper.impératif.1",
+    "verb": "couper",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Coupe} le pain en tranches, s’il te plaît.",
+    "en": "Cut the bread into slices, please.",
+    "reviewed": true
+  },
+  {
+    "id": "couper.imparfait.1",
+    "verb": "couper",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "Quand j’étais petit, mes parents me {coupaient} toujours les cheveux.",
+    "en": "When I was little, my parents always cut my hair.",
+    "reviewed": true
+  },
+  {
+    "id": "souligner.passéComposé.1",
+    "verb": "souligner",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Le professeur {a souligné} l’importance de ce chapitre.",
+    "en": "The teacher emphasized the importance of this chapter.",
+    "reviewed": true
+  },
+  {
+    "id": "souligner.futurSimple.1",
+    "verb": "souligner",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "Demain, je {soulignerai} les mots importants du texte.",
+    "en": "Tomorrow I will underline the important words in the text.",
+    "reviewed": true
+  },
+  {
+    "id": "vérifier.indicatifPrésent.1",
+    "verb": "vérifier",
+    "tense": "indicatifPrésent",
+    "person": "sp",
+    "fr": "Vous {vérifiez} toujours vos bagages avant de partir.",
+    "en": "You always check your luggage before leaving.",
+    "reviewed": true
+  },
+  {
+    "id": "vérifier.conditionnelPrésent.1",
+    "verb": "vérifier",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si j’étais toi, je {vérifierais} l’heure du train.",
+    "en": "If I were you, I would check the train time.",
+    "reviewed": true
+  },
+  {
+    "id": "empêcher.passéComposé.1",
+    "verb": "empêcher",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Hier, la neige {a empêché} les avions de décoller.",
+    "en": "Yesterday the snow kept the planes from taking off.",
+    "reviewed": true
+  },
+  {
+    "id": "empêcher.subjonctifPrésent.1",
+    "verb": "empêcher",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Je ferme la fenêtre pour que le bruit ne t’{empêche} pas de dormir.",
+    "en": "I'm closing the window so the noise won't keep you from sleeping.",
+    "reviewed": true
+  },
+  {
+    "id": "verser.indicatifPrésent.1",
+    "verb": "verser",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "Je {verse} du lait dans mon café.",
+    "en": "I pour milk into my coffee.",
+    "reviewed": true
+  },
+  {
+    "id": "verser.imparfait.1",
+    "verb": "verser",
+    "tense": "imparfait",
+    "person": "tp",
+    "fr": "Chaque mois, mes parents {versaient} un peu d’argent sur mon compte.",
+    "en": "Every month my parents put a little money into my account.",
+    "reviewed": true
+  },
+  {
+    "id": "justifier.passéComposé.1",
+    "verb": "justifier",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Ce matin, nous {avons justifié} notre absence par écrit.",
+    "en": "This morning we explained our absence in writing.",
+    "reviewed": true
+  },
+  {
+    "id": "justifier.futurSimple.1",
+    "verb": "justifier",
+    "tense": "futurSimple",
+    "person": "ss",
+    "fr": "Demain, tu {justifieras} ta réponse devant la classe.",
+    "en": "Tomorrow you will justify your answer in front of the class.",
+    "reviewed": true
+  },
+  {
+    "id": "évaluer.indicatifPrésent.1",
+    "verb": "évaluer",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Le médecin {évalue} la douleur du patient.",
+    "en": "The doctor assesses the patient's pain.",
+    "reviewed": true
+  },
+  {
+    "id": "évaluer.subjonctifPrésent.1",
+    "verb": "évaluer",
+    "tense": "subjonctifPrésent",
+    "person": "tp",
+    "fr": "Il faut que les élèves {évaluent} leurs propres progrès.",
+    "en": "The students need to assess their own progress.",
+    "reviewed": true
+  },
+  {
+    "id": "traduire.impératif.1",
+    "verb": "traduire",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Traduisez} cette phrase en anglais, s’il vous plaît.",
+    "en": "Translate this sentence into English, please.",
+    "reviewed": true
+  },
+  {
+    "id": "traduire.conditionnelPrésent.1",
+    "verb": "traduire",
+    "tense": "conditionnelPrésent",
+    "person": "fs",
+    "fr": "Si j’avais le temps, je {traduirais} ce livre.",
+    "en": "If I had the time, I would translate this book.",
+    "reviewed": true
+  },
+  {
+    "id": "évoluer.passéComposé.1",
+    "verb": "évoluer",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "En dix ans, ce quartier {a évolué} rapidement.",
+    "en": "In ten years, this neighborhood has changed quickly.",
+    "reviewed": true
+  },
+  {
+    "id": "évoluer.imparfait.1",
+    "verb": "évoluer",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "À cette époque, la situation {évoluait} lentement.",
+    "en": "At that time, the situation was changing slowly.",
+    "reviewed": true
+  },
+  {
+    "id": "sélectionner.indicatifPrésent.1",
+    "verb": "sélectionner",
+    "tense": "indicatifPrésent",
+    "person": "fp",
+    "fr": "Nous {sélectionnons} les meilleures photos pour l’album.",
+    "en": "We are picking the best photos for the album.",
+    "reviewed": true
+  },
+  {
+    "id": "sélectionner.futurSimple.1",
+    "verb": "sélectionner",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "Demain, les juges {sélectionneront} les finalistes.",
+    "en": "Tomorrow the judges will select the finalists.",
+    "reviewed": true
+  },
+  {
+    "id": "taire.indicatifPrésent.1",
+    "verb": "taire",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Les témoins {taisent} le nom du coupable.",
+    "en": "The witnesses are keeping quiet about the culprit's name.",
+    "reviewed": true
+  },
+  {
+    "id": "taire.futurSimple.1",
+    "verb": "taire",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "Je {tairai} ton secret, je te le promets.",
+    "en": "I will keep your secret quiet, I promise.",
+    "reviewed": true
+  },
+  {
+    "id": "dépasser.passéComposé.1",
+    "verb": "dépasser",
+    "tense": "passéComposé",
+    "person": "ts",
+    "fr": "Hier, la voiture rouge {a dépassé} le camion.",
+    "en": "Yesterday the red car passed the truck.",
+    "reviewed": true
+  },
+  {
+    "id": "dépasser.conditionnelPrésent.1",
+    "verb": "dépasser",
+    "tense": "conditionnelPrésent",
+    "person": "sp",
+    "fr": "Si vous couriez plus vite, vous {dépasseriez} les autres.",
+    "en": "If you ran faster, you would overtake the others.",
+    "reviewed": true
+  },
+  {
+    "id": "visiter.indicatifPrésent.1",
+    "verb": "visiter",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Chaque été, mes cousins {visitent} un nouveau pays.",
+    "en": "Every summer my cousins visit a new country.",
+    "reviewed": true
+  },
+  {
+    "id": "visiter.futurSimple.1",
+    "verb": "visiter",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "L’été prochain, nous {visiterons} la Bretagne.",
+    "en": "Next summer we will visit Brittany.",
+    "reviewed": true
+  },
+  {
+    "id": "battre.impératif.1",
+    "verb": "battre",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Bats} les blancs en neige avant d’ajouter la farine.",
+    "en": "Beat the egg whites until stiff before adding the flour.",
+    "reviewed": true
+  },
+  {
+    "id": "battre.imparfait.1",
+    "verb": "battre",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Quand j’ai vu le chien, mon cœur {battait} très fort.",
+    "en": "When I saw the dog, my heart was beating very fast.",
+    "reviewed": true
+  },
+  {
+    "id": "imaginer.indicatifPrésent.1",
+    "verb": "imaginer",
+    "tense": "indicatifPrésent",
+    "person": "fs",
+    "fr": "J’{imagine} que tu es fatigué après ce voyage.",
+    "en": "I imagine you're tired after this trip.",
+    "reviewed": true
+  },
+  {
+    "id": "imaginer.imparfait.1",
+    "verb": "imaginer",
+    "tense": "imparfait",
+    "person": "fp",
+    "fr": "Enfants, nous {imaginions} des histoires de pirates.",
+    "en": "As kids, we used to imagine pirate stories.",
+    "reviewed": true
+  },
+  {
+    "id": "révéler.passéComposé.1",
+    "verb": "révéler",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Les résultats {ont révélé} un problème important.",
+    "en": "The results revealed an important problem.",
+    "reviewed": true
+  },
+  {
+    "id": "révéler.futurSimple.1",
+    "verb": "révéler",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "Si tu promets le silence, je te {révélerai} mon secret.",
+    "en": "If you promise to keep quiet, I will tell you my secret.",
+    "reviewed": true
+  },
+  {
+    "id": "regrouper.impératif.1",
+    "verb": "regrouper",
+    "tense": "impératif",
+    "person": "fp",
+    "fr": "{Regroupons} tous les livres sur cette étagère !",
+    "en": "Let's put all the books together on this shelf!",
+    "reviewed": true
+  },
+  {
+    "id": "regrouper.imparfait.1",
+    "verb": "regrouper",
+    "tense": "imparfait",
+    "person": "ts",
+    "fr": "Autrefois, le professeur {regroupait} les élèves par âge.",
+    "en": "In the past, the teacher grouped the students by age.",
+    "reviewed": true
+  },
+  {
+    "id": "signaler.passéComposé.1",
+    "verb": "signaler",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Hier, j’{ai signalé} le problème au directeur.",
+    "en": "Yesterday I reported the problem to the principal.",
+    "reviewed": true
+  },
+  {
+    "id": "signaler.subjonctifPrésent.1",
+    "verb": "signaler",
+    "tense": "subjonctifPrésent",
+    "person": "sp",
+    "fr": "Il faut que vous {signaliez} toute absence à l’école.",
+    "en": "You must notify the school of any absence.",
+    "reviewed": true
+  },
+  {
+    "id": "opposer.indicatifPrésent.1",
+    "verb": "opposer",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ce match {oppose} deux équipes de la région.",
+    "en": "This game pits two teams from the region against each other.",
+    "reviewed": true
+  },
+  {
+    "id": "opposer.futurSimple.1",
+    "verb": "opposer",
+    "tense": "futurSimple",
+    "person": "fp",
+    "fr": "Nous {opposerons} un refus poli à cette demande.",
+    "en": "We will respond to this request with a polite refusal.",
+    "reviewed": true
+  },
+  {
+    "id": "parvenir.passéComposé.1",
+    "verb": "parvenir",
+    "tense": "passéComposé",
+    "person": "tp",
+    "gender": "f",
+    "fr": "Après deux heures, mes amies {sont parvenues} au sommet.",
+    "en": "After two hours, my friends reached the summit.",
+    "reviewed": true
+  },
+  {
+    "id": "parvenir.futurSimple.1",
+    "verb": "parvenir",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "Avec du travail, je {parviendrai} à parler français.",
+    "en": "With hard work, I will manage to speak French.",
+    "reviewed": true
+  },
+  {
+    "id": "défendre.impératif.1",
+    "verb": "défendre",
+    "tense": "impératif",
+    "person": "sp",
+    "fr": "{Défendez} vos idées avec calme !",
+    "en": "Defend your ideas calmly!",
+    "reviewed": true
+  },
+  {
+    "id": "défendre.subjonctifPrésent.1",
+    "verb": "défendre",
+    "tense": "subjonctifPrésent",
+    "person": "fp",
+    "fr": "Il faut que nous {défendions} notre équipe.",
+    "en": "We have to stand up for our team.",
+    "reviewed": true
+  },
+  {
+    "id": "pratiquer.indicatifPrésent.1",
+    "verb": "pratiquer",
+    "tense": "indicatifPrésent",
+    "person": "ss",
+    "fr": "Tu {pratiques} le piano tous les soirs.",
+    "en": "You practice the piano every evening.",
+    "reviewed": true
+  },
+  {
+    "id": "pratiquer.conditionnelPrésent.1",
+    "verb": "pratiquer",
+    "tense": "conditionnelPrésent",
+    "person": "ts",
+    "fr": "Si elle avait le temps, elle {pratiquerait} le yoga.",
+    "en": "If she had the time, she would do yoga.",
+    "reviewed": true
+  },
+  {
+    "id": "figurer.indicatifPrésent.1",
+    "verb": "figurer",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ton nom {figure} sur la liste des invités.",
+    "en": "Your name is on the guest list.",
+    "reviewed": true
+  },
+  {
+    "id": "figurer.futurSimple.1",
+    "verb": "figurer",
+    "tense": "futurSimple",
+    "person": "tp",
+    "fr": "Ces photos {figureront} dans le journal de l’école.",
+    "en": "These photos will appear in the school newspaper.",
+    "reviewed": true
+  },
+  {
+    "id": "marcher.passéComposé.1",
+    "verb": "marcher",
+    "tense": "passéComposé",
+    "person": "fp",
+    "fr": "Ce matin, nous {avons marché} deux heures dans la forêt.",
+    "en": "This morning we walked for two hours in the forest.",
+    "reviewed": true
+  },
+  {
+    "id": "marcher.imparfait.1",
+    "verb": "marcher",
+    "tense": "imparfait",
+    "person": "fs",
+    "fr": "Quand j’étais petit, je {marchais} jusqu’à l’école.",
+    "en": "When I was little, I walked to school.",
+    "reviewed": true
+  },
+  {
+    "id": "nécessiter.indicatifPrésent.1",
+    "verb": "nécessiter",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Ce travail {nécessite} beaucoup de patience.",
+    "en": "This job requires a lot of patience.",
+    "reviewed": true
+  },
+  {
+    "id": "nécessiter.conditionnelPrésent.1",
+    "verb": "nécessiter",
+    "tense": "conditionnelPrésent",
+    "person": "tp",
+    "fr": "Ces réparations {nécessiteraient} plusieurs semaines.",
+    "en": "These repairs would take several weeks.",
+    "reviewed": true
+  },
+  {
+    "id": "mourir.passéComposé.1",
+    "verb": "mourir",
+    "tense": "passéComposé",
+    "person": "ts",
+    "gender": "f",
+    "fr": "Ma grand-mère {est morte} l’hiver dernier.",
+    "en": "My grandmother died last winter.",
+    "reviewed": true
+  },
+  {
+    "id": "mourir.subjonctifPrésent.1",
+    "verb": "mourir",
+    "tense": "subjonctifPrésent",
+    "person": "tp",
+    "fr": "Arrose les plantes avant qu’elles {meurent}.",
+    "en": "Water the plants before they die.",
+    "reviewed": true
+  },
+  {
+    "id": "amener.impératif.1",
+    "verb": "amener",
+    "tense": "impératif",
+    "person": "ss",
+    "fr": "{Amène} ton frère à la fête !",
+    "en": "Bring your brother to the party!",
+    "reviewed": true
+  },
+  {
+    "id": "amener.futurSimple.1",
+    "verb": "amener",
+    "tense": "futurSimple",
+    "person": "fs",
+    "fr": "Demain, j’{amènerai} mes amis au cinéma.",
+    "en": "Tomorrow I will take my friends to the movies.",
+    "reviewed": true
+  },
+  {
+    "id": "étendre.passéComposé.1",
+    "verb": "étendre",
+    "tense": "passéComposé",
+    "person": "fs",
+    "fr": "Ce matin, j’{ai étendu} le linge dans le jardin.",
+    "en": "This morning I hung the laundry out in the yard.",
+    "reviewed": true
+  },
+  {
+    "id": "étendre.imparfait.1",
+    "verb": "étendre",
+    "tense": "imparfait",
+    "person": "sp",
+    "fr": "Quand il faisait beau, vous {étendiez} le linge dehors.",
+    "en": "When the weather was nice, you hung the laundry outside.",
+    "reviewed": true
+  },
+  {
+    "id": "élever.indicatifPrésent.1",
+    "verb": "élever",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Mes grands-parents {élèvent} des poules à la campagne.",
+    "en": "My grandparents raise chickens in the country.",
+    "reviewed": true
+  },
+  {
+    "id": "élever.conditionnelPrésent.1",
+    "verb": "élever",
+    "tense": "conditionnelPrésent",
+    "person": "ss",
+    "fr": "Si tu avais un jardin, tu {élèverais} des lapins.",
+    "en": "If you had a yard, you would raise rabbits.",
+    "reviewed": true
+  },
+  {
+    "id": "exposer.passéComposé.1",
+    "verb": "exposer",
+    "tense": "passéComposé",
+    "person": "tp",
+    "fr": "Les élèves {ont exposé} leurs dessins dans le couloir.",
+    "en": "The students displayed their drawings in the hallway.",
+    "reviewed": true
+  },
+  {
+    "id": "exposer.futurSimple.1",
+    "verb": "exposer",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "L’année prochaine, ce musée {exposera} des tableaux impressionnistes.",
+    "en": "Next year this museum will exhibit Impressionist paintings.",
+    "reviewed": true
+  },
+  {
+    "id": "contrôler.indicatifPrésent.1",
+    "verb": "contrôler",
+    "tense": "indicatifPrésent",
+    "person": "ts",
+    "fr": "Dans le train, le contrôleur {contrôle} les billets.",
+    "en": "On the train, the conductor checks the tickets.",
+    "reviewed": true
+  },
+  {
+    "id": "contrôler.imparfait.1",
+    "verb": "contrôler",
+    "tense": "imparfait",
+    "person": "fs",
+    "fr": "Chaque soir, je {contrôlais} les devoirs de mon fils.",
+    "en": "Every evening I used to check my son's homework.",
+    "reviewed": true
+  },
+  {
+    "id": "mentionner.passéComposé.1",
+    "verb": "mentionner",
+    "tense": "passéComposé",
+    "person": "ss",
+    "fr": "Hier soir, tu {as mentionné} un voyage à Rome.",
+    "en": "Last night you mentioned a trip to Rome.",
+    "reviewed": true
+  },
+  {
+    "id": "mentionner.subjonctifPrésent.1",
+    "verb": "mentionner",
+    "tense": "subjonctifPrésent",
+    "person": "ts",
+    "fr": "Bien qu’elle ne le {mentionne} pas, elle est inquiète.",
+    "en": "Although she doesn't mention it, she is worried.",
+    "reviewed": true
+  },
+  {
+    "id": "interdire.indicatifPrésent.1",
+    "verb": "interdire",
+    "tense": "indicatifPrésent",
+    "person": "tp",
+    "fr": "Mes parents {interdisent} le téléphone à table.",
+    "en": "My parents ban phones at the table.",
+    "reviewed": true
+  },
+  {
+    "id": "interdire.futurSimple.1",
+    "verb": "interdire",
+    "tense": "futurSimple",
+    "person": "ts",
+    "fr": "Bientôt, la mairie {interdira} les voitures en centre-ville.",
+    "en": "Soon the city hall will ban cars downtown.",
+    "reviewed": true
+  },
+  {
+    "id": "supprimer.impératif.1",
+    "verb": "supprimer",
+    "tense": "impératif",
+    "person": "fp",
+    "fr": "{Supprimons} les fichiers inutiles !",
+    "en": "Let's delete the useless files!",
+    "reviewed": true
+  },
+  {
+    "id": "supprimer.conditionnelPrésent.1",
+    "verb": "supprimer",
+    "tense": "conditionnelPrésent",
+    "person": "sp",
+    "fr": "Si vous pouviez, vous {supprimeriez} ce message.",
+    "en": "If you could, you would delete this message.",
+    "reviewed": true
+  }
+]

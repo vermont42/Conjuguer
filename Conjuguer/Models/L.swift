@@ -325,6 +325,10 @@ enum L {
   }
 
   enum ResultsView {
+    static var exampleHint: String {
+      String(localized: "ResultsView.exampleHint")
+    }
+
     static var correctWithColon: String {
       String(localized: "ResultsView.correctWithColon")
     }
@@ -1353,6 +1357,32 @@ enum L {
 
     static var mistakesHint: String {
       String(localized: "PracticeSession.mistakesHint")
+    }
+  }
+
+  enum Sentences {
+    static var title: String {
+      String(localized: "Sentences.title")
+    }
+
+    static var description: String {
+      String(localized: "Sentences.description")
+    }
+
+    static var empty: String {
+      String(localized: "Sentences.empty")
+    }
+
+    static var startHint: String {
+      String(localized: "Sentences.startHint")
+    }
+
+    static var draft: String {
+      String(localized: "Sentences.draft")
+    }
+
+    static var sentenceWithColon: String {
+      String(localized: "Sentences.sentenceWithColon")
     }
   }
 

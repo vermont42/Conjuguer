@@ -111,6 +111,13 @@ so subagents only do the part that needs judgment. Three stages:
    single-source-of-truth figure at the top); the 8 zero-coverage verbs were the technical tail
    (`télécharger`, `reconstruire`, …) for the then-future technology tier.
 
+**Gutenberg's italics.** Project Gutenberg marks italics with underscores, mostly around titles
+(`l'_Assommoir_`, `_Tartuffe_`), and the examples keep that markup as the source has it. The app
+renders each span in italics (`Example.styledFrench`, on the verb page and in a quiz's results) and
+drops the markup where a line is set all one way (`Example.plainFrench`, for the widget), so a
+pipeline writing an example should leave the underscores in. `ExampleSourceTests` fails on an
+unbalanced underscore, which would italicize the rest of a sentence.
+
 **Future work (partially built):** the three novels won't cover the technical tail of the
 ranked verbs, so government- and technology-domain fallback corpora (mirroring
 Konjugieren's `corpus/government/` and `corpus/technology/` tiers) supplement them under

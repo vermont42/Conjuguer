@@ -15,6 +15,8 @@ struct AnswerFrame: Equatable {
     /// and vous take different answers.
     case addressee(String)
     case blank
+    /// A sentence's words around its blank, spaces and punctuation included.
+    case context(String)
     /// The gender a compound tense's participle may agree with, for a person whose pronoun does
     /// not show it.
     case gender(isFeminine: Bool)
@@ -81,6 +83,9 @@ struct AnswerFrame: Equatable {
         return [text]
       case .blank:
         return [L.QuizView.blank]
+      case .context(let text):
+        let trimmed = text.trimmingCharacters(in: .whitespaces.union(.punctuationCharacters))
+        return trimmed.isEmpty ? [] : [trimmed]
       case .gender(let isFeminine):
         return [(isFeminine ? L.PronounGender.feminine : L.PronounGender.masculine).lowercased()]
       case .pronoun(let text):
@@ -104,12 +109,16 @@ struct AnswerFrame: Equatable {
 }
 
 extension QuizQuestion {
-  /// A recognition question's one blank takes the infinitive.
+  /// A recognition question's one blank takes the infinitive, and a sentence's blank stands in
+  /// the sentence.
   var answerFrame: AnswerFrame {
     guard recognition == nil else {
       return .bareBlank
     }
-    let answer = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters, pronounGender: verb.pronounGender) ?? ""
-    return .quizFrame(for: tense, answer: answer, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH, pronounGender: verb.pronounGender)
+    if let sentence {
+      return sentence.frame(pronounGender: pronounGender)
+    }
+    let answer = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters, pronounGender: pronounGender) ?? ""
+    return .quizFrame(for: tense, answer: answer, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH, pronounGender: pronounGender)
   }
 }

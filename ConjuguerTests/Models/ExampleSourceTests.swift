@@ -22,6 +22,23 @@ struct ExampleSourceTests {
     #expect(ExampleSource(rawSource: raw) == expected)
   }
 
+  @Test func everyExamplesItalicsMarkupIsBalanced() throws {
+    let url = try #require(Bundle.main.url(forResource: "literature_examples", withExtension: "json"))
+    let examples = try JSONDecoder().decode([String: Example].self, from: Data(contentsOf: url))
+    let unbalanced = examples.filter { !Example.hasBalancedMarkup($0.value.fr) || $0.value.en.contains("_") }.keys.sorted()
+    #expect(unbalanced.isEmpty, "Unbalanced underscores in \(unbalanced.joined(separator: ", "))")
+  }
+
+  @Test func underscoresBecomeItalicSpans() throws {
+    let example = Example(fr: "L'_Assommoir_ est venu, comme _Nana_.", en: "", source: "", token: "", line: nil)
+    let runs = example.styledFrench.runs.map { (String(example.styledFrench[$0.range].characters), $0.inlinePresentationIntent) }
+
+    #expect(runs.map(\.0) == ["L'", "Assommoir", " est venu, comme ", "Nana", "."])
+    #expect(runs.map { $0.1 == .emphasized } == [false, true, false, true, false])
+    #expect(example.plainFrench == "L'Assommoir est venu, comme Nana.")
+    #expect(String(Example.styled("a_b").characters) == "a_b")
+  }
+
   @Test func testWiktionnaireAttributionCarriesTheCitation() {
     let attribution = ExampleSource(rawSource: "wiktionnaire|Honoré de Balzac|Le Père Goriot|1835").attribution
     #expect(attribution.contains("Honoré de Balzac, «\u{202F}Le Père Goriot\u{202F}» (1835)"))

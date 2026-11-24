@@ -176,5 +176,13 @@ singular, not yet asked". A re-ask's given rows read their conjugation. Start's 
 quiz of three conjugations each of five irregular verbs", and Five More Verbs has its own. Read
 from the accessibility tree, not heard.
 
+In Phrases à trous, a sentence takes the pronoun's place in the series: after the verb and its
+translation come "Sentence:" / "Phrase :", the sentence in `fr-FR` with "blank" where the answer
+goes, and its English in `en-US`, then the tense and the progress. The answer field's label is
+that same prompt ("Ce couteau, blank, à couper le pain", with "feminine" or "tu" where the screen
+marks one), and the correction's spoken text ends with the completed sentence. The results' Example
+Use is a button with the selected trait while open and the hint "Shows a sentence that uses this
+verb, with its source". Read from the accessibility tree, not heard.
+
 A new quiz screen or exercise that changes its question without moving focus needs the same
 announcement, or an `AccessibilityNotification.Announcement`.

@@ -787,3 +787,35 @@ Le point sur les événements du cycle de vie d'un quiz devient :
 
 Le point sur la durée d'un quiz ne change pas : les séries d'« Identifier la forme verbale » comptent
 10 questions, ce qu'il couvre déjà.
+
+## Phrases à trous (pedagogy plan, Phase 18, 2026-11-23)
+
+The Quiz tab gains Phrases à trous ("Sentences" in English), an exercise that asks a conjugation
+inside a short sentence. The quiz signals send a new `source` value, `sentences`. Its rounds are
+ten questions, and `quizCompletion` sends their count as the default quiz does. Its answers go
+into the practice record on the device, as the quiz's do, and nothing is posted to Game Center.
+The results' Example Use, which opens a verb's example sentence, sends nothing. This section
+replaces the quiz lifecycle bullet that the section on Name the Conjugation gives, so apply it
+after that one.
+
+### English
+
+The bullet on quiz lifecycle events now reads:
+
+```
+- Quiz lifecycle events (starting, quitting, or completing a quiz), and where the quiz began: the Quiz tab, over every verb, over My Verbs, over a custom choice, as a review of what is due, as practice of your mistakes, or as the Verb Essentials, Name the Conjugation, or Sentences exercise, a verb's page, a collection, a practice set opened from a shared link or a QR code, or the practice of a conjugation model, alone or mixed with models you know, with which collection for the four featured ones (a model's collection, or a model's practice, is named only as a model); for a custom quiz or a practice set, whether it chose tenses, verbs, or both, but not which
+```
+
+The bullet on how long a quiz lasted is unchanged: a round of Sentences is at most 10 questions,
+which it already covers.
+
+### French
+
+Le point sur les événements du cycle de vie d'un quiz devient :
+
+```
+- Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes, sur « Mes verbes », sur mesure, en révision de ce qui est à revoir, pour revoir vos erreurs ou dans l'exercice « L'essentiel du verbe », « Identifier la forme verbale » ou « Phrases à trous », la page d'un verbe, une collection, une série d'exercices ouverte depuis un lien partagé ou un code QR, ou l'exercice d'un modèle de conjugaison, seul ou mélangé aux modèles que vous connaissez, avec le nom de la collection pour les quatre collections mises en avant (la collection d'un modèle, ou l'exercice d'un modèle, est désigné seulement comme celui d'un modèle) ; pour un quiz sur mesure ou une série d'exercices, s'il porte sur des temps, des verbes ou les deux, mais pas lesquels
+```
+
+Le point sur la durée d'un quiz ne change pas : une série de « Phrases à trous » compte au plus
+10 questions, ce qu'il couvre déjà.

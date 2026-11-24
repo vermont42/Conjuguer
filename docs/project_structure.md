@@ -45,11 +45,11 @@ Conjuguer/
 │   ├── Localizable.xcstrings   # App-target string catalog (en/fr); see CLAUDE.md for the editing hazards
 │   ├── PrivacyInfo.xcprivacy   # Privacy manifest for App Store submission
 │   ├── Sounds/                 # MP3 effects for quiz and game (applause, buzz, chime, guns, ghost, robot, …)
-│   └── WorkSans*.ttf           # Bundled Work Sans faces (regular, semibold, bold)
+│   └── WorkSans*.ttf           # Bundled Work Sans faces (regular, semibold, bold, italic); the regular, semibold, and italic are registered in Info.plist
 ├── Models/
 │   ├── AnswerDiagnosis.swift   # Why a wrong quiz answer is wrong, when the Conjugator can say so for certain (agreement, auxiliary, spelling change, futur stem, another cell, a regular form), as one templated line
 │   ├── AnswerDifference.swift  # Where a wrong answer differs from the nearest right spelling, letter by letter, for the quiz's held correction
-│   ├── AnswerFrame.swift       # The shape of a quiz answer: the pronoun before the blank, elided to the answer (j', je m'), the gender a compound tense agrees with, the impératif's (tu) and -toi, and the prompt VoiceOver reads
+│   ├── AnswerFrame.swift       # The shape of a quiz answer: the pronoun before the blank, elided to the answer (j', je m'), the gender a compound tense agrees with, the impératif's (tu) and -toi, a sentence's words around its blank, and the prompt VoiceOver reads
 │   ├── AnswerSlip.swift        # Whether a wrong answer is a slip that earns one more try: one edit or only accents off, four letters or more, and not another cell of the verb
 │   ├── AnswerSpelling.swift    # How the quiz reads a typed answer: case, spacing, the curly apostrophe, and the subject and reflexive pronouns of the asked person
 │   ├── AppIcon.swift           # Alternate app-icon enum (beret/croissant/rooster/arc de triomphe)
@@ -73,10 +73,12 @@ Conjuguer/
 │   ├── EndingDisplay.swift     # Builds $…$-marked ending strings (irregular chars uppercased) for model display
 │   ├── Etymologies.json        # Bundled verb etymologies keyed by language and infinitif
 │   ├── Etymology.swift         # Lazy-loading etymology lookup by infinitif
-│   ├── Example.swift           # Codable model for a literature example sentence
+│   ├── Example.swift           # Codable model for a literature example sentence; its Gutenberg _underscore_ italics as styled or plain text
 │   ├── ExampleSource.swift     # Provenance enum for example sentences (Proust/Zola/Flaubert/La Fontaine/Molière/gov/Wikipedia/Wiktionary/Claude) with per-source attribution
 │   ├── FrequencyBand.swift     # The top 100, 300, and 1,000 verbs by rank (Verb.isIn, Verb.verbs(in:)); the verb of the day draws from the top 1,000, and the pedagogy levels will read all three
 │   ├── FuturSimple.swift       # Futur simple endings
+│   ├── GapSentence.swift       # Phrases à trous: a sentence with its conjugation in braces, its cell and fixed gender, its frame, which levels ask it, the draw of a round, and the scope
+│   ├── gap_sentences.json      # The 750 Phrases à trous sentences for the 300 most frequent verbs (scripts/gap_sentences.py merges, checks, and approves them)
 │   ├── ImageInfo.swift         # Image name + caption/credit for Info articles
 │   ├── Imparfait.swift         # Imparfait endings
 │   ├── IndicatifPresentGroup.swift    # Indicatif présent ending groups (e/extendedS/s/ï/r/…) and their XML mapping
@@ -107,8 +109,8 @@ Conjuguer/
 │   ├── QuizRecordSession.swift # Review and Practice My Mistakes: sessions drawn from the practice record beyond the level's tenses and band, a verb's key conjugations together, QuizScope.recordSession
 │   ├── QuizScope.swift         # What a quiz asks about (every verb, My Verbs, one verb's page, a collection, a custom choice), its count and source; the level's mix over chosen verbs, Test Me's three tenses, Verb.hasCell, canBeQuizzed(at:)
 │   ├── QuizLevel.swift         # Setting enum: the four quiz levels (Beginner to Advanced) and the tenses each asks; QuizTenseSlot, a tense's cells, weight, and verb pools; each level's frequency band
-│   ├── QuizQuestion.swift      # One quiz question (verb + tense), whether it is a missed question asked again, and the step it shares with questions shown on the same screen
-│   ├── QuizResult.swift        # One answered question, its ConjugationResult, a slip's first attempt, and whether it was a re-ask, with its points, for the results sheet
+│   ├── QuizQuestion.swift      # One quiz question (verb + tense), whether it is a missed question asked again, the step it shares with questions shown on the same screen, a recognition prompt or a sentence, and the gender its answer agrees in
+│   ├── QuizResult.swift        # One answered question, its ConjugationResult, a slip's first attempt, whether it was a re-ask, its sentence, and its points, for the results sheet; which rows offer the verb's example
 │   ├── QuizState.swift         # Quiz lifecycle enum (not started / in progress / finished)
 │   ├── Recognition.swift       # Name the Conjugation: the scope, a prompt's every right cell (by the conjugation map, in both genders, a pronominal verb's prompt with its pronoun), the grade part by part, its repair lines, and the correction's answer lines
 │   ├── RelatedVerbs.swift      # VerbBase (a verb's base and root: a verbal prefix plus a verb its etymology names, less false pairs), RelatedVerbs, and Verb.related for the verb page's card
@@ -196,7 +198,7 @@ Conjuguer/
 │   ├── WidgetSnapshotWriter.swift # Writes the multi-day widget snapshot bundle to the shared container, drawing each day's verb with VerbDraw and keeping the verb the widget already shows today
 │   └── World.swift             # @Observable DI container (Current) plus MainTab; device/simulator/unitTest configurations; handleURL and the deeplink grammar's effects, openSearch(text:source:) for search links and Command-F
 └── Views/
-    ├── AnswerFrameView.swift   # Draws an AnswerFrame on one line around the answer field, keeping the field's identity, and the keyboard's focus, from one question to the next
+    ├── AnswerFrameView.swift   # Draws an AnswerFrame around the answer field, on one line or as a sentence wrapped word by word, keeping the field's identity, and the keyboard's focus, from one question to the next
     ├── BrowseLayout.swift      # Shared adaptive grid columns and search-field placement (a fixed bar on iPad and Mac) for the browse views
     ├── BrowseRow.swift         # Shared row/cell used by both browse views, with optional badge, a looked-up check, and a French or English subtitle
     ├── BrowseSearch.swift      # Shared search plumbing for the browse views: all items for a blank query, the trombone for none
@@ -218,7 +220,7 @@ Conjuguer/
     ├── PracticeSetView.swift   # A shared practice set's sheet (its summary, verbs, Start, and Keep as My Custom Quiz, or Not Found) and the full-screen QR view
     ├── QuizCorrectionView.swift # A wrong answer held on its question: the two answers with their differing letters marked, links to the verb and its model, and Continue
     ├── QuizResultsView.swift   # End-of-quiz sheet: score, correct and second-try counts, per-question results, leaderboard
-    ├── QuizResultView.swift    # One row of the results sheet, with a slip's first attempt
+    ├── QuizResultView.swift    # One row of the results sheet, with a slip's first attempt, a sentence's completed sentence, and the verb's example sentence behind a button
     ├── QuizView.swift          # Quiz gameplay: prompt, answer field framed by its pronoun with the accent keys, progress, feedback and the app's spelling of a variant, the held correction and the pages it pushes; the All Verbs / My Verbs / Custom picker and the custom quiz's summary and its Share menu (a link or a QR code); QuizSheet, for Test Me on a verb page and a collection's quiz
     ├── RecognitionChoicesView.swift # Name the Conjugation's prompt and its tense and person chips
     ├── RelatedVerbsView.swift  # The verb page's Related Verbs card (built on the same root, same model), RelatedVerbListView, and FlowLayout
@@ -304,6 +306,7 @@ ConjuguerTests/
     ├── GameDiveArcTests.swift          # Dive-bomber arc geometry (serialized)
     ├── GameMechanicsTests.swift        # Special-mechanic scheduling and lifecycle (serialized)
     ├── GameProjectileTests.swift       # Bullet and enemy-bullet behavior (serialized)
+    ├── GapSentenceTests.swift          # The machine check of every Phrases à trous sentence against the Conjugator, agreement included; coverage of the top 300; frames, marks, and spoken prompts; the draw; drafts; the reward rows; nested in QuizTests, sessions (each level, a right round recorded with Ten More, a held correction and its re-ask, a sentence's gender over the setting)
     ├── KeyConjugationsTests.swift      # The key conjugations (reflexive, defective, il agreement), the citation infinitive, the share text, and what a long press copies
     ├── LearnerVerbsTests.swift         # The learner's record: opens, stars, recents, My Verbs, removal, Clear, JSON coding and an older record's decoding, the store's saving, the doubled entries, and the list modes
     ├── ModelSearchTests.swift          # Models found by exemplar or by member verb, exemplars first, each once
@@ -396,6 +399,7 @@ docs/                               # Claude's output that informs: research, re
 
 scripts/
 ├── count_tenses.py             # Counts each tense in corpus/originals from the map tool's cells; see docs/tense_frequency.md
+├── gap_sentences.py            # Merges drafted Phrases à trous into gap_sentences.json, pre-checks them, writes a review sheet, and approves them
 ├── prep_screenshot_sim.sh      # Prepares a simulator for a screenshot sweep (status bar, language, region)
 ├── take_screenshots.sh         # Drives ios-build-verify + axe/simctl through the App Store screenshot set; see docs/screenshot_playbook.md
 ├── verify_store_media.sh       # Validates exported screenshots/previews against App Store Connect's requirements
@@ -414,6 +418,7 @@ plans/                              # What Claude wrote to get another session (
 ├── fix_and_add_verbs.md            # Fix seven misspelled infinitives and add fifteen missing common verbs
 ├── fix_localization_catalog_warnings.md  # Two String Catalog fixes, for Conjuguer and Konjugieren
 ├── future_swiftui_fixes.md         # Deferred SwiftUI work the SwiftUI-issues pass left, for an implementing session
+├── gap_sentences.md                # The brief the Sonnet drafters of the Phrases à trous sentences followed: format, cells, agreement, style
 ├── get_government_corpus.md        # Acquire the Swiss and French government corpus tier
 ├── glaff_frequency_ranking.md      # Rank every verb from GLÀFF: counts in verbs.xml, ranks at parse time, credits
 ├── location_cleanup.md             # This sorting into prompts/plans/docs and the snake_case rename (2026-11-16)

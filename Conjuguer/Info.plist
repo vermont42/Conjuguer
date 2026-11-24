@@ -45,6 +45,7 @@
 	<array>
 		<string>WorkSans.ttf</string>
 		<string>WorkSans-SemiBold.ttf</string>
+		<string>WorkSans-Italic.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

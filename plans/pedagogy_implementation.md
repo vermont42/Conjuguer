@@ -41,7 +41,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 15 | Done | 2026-11-23 | 3966644 | T5.1 | 15 |
 | 16 | Done | 2026-11-23 | 94df8f9 | T5.2 | 16 |
 | 17 | Done | 2026-11-23 | 4ffc7a3 | T5.4 | 17 |
-| 18 | Not started | | | T5.5 | 18 |
+| 18 | Awaiting Josh | 2026-11-23 | | T5.5 | 18 |
 | 19 | Not started | | | T5.6 | 19 |
 | 20 | Not started | | | T6.2 | 20 |
 | 21 | Not started | | | T5.7 | 21 |
@@ -2070,7 +2070,7 @@ record, with tests on ambiguous conjugations.
 **Suggestions:** T5.5. **Ports:** Konjugieren Phase 18 (`GapSentence.swift`,
 [`../Konjugieren/plans/gap_sentences_batch_1.md`](../../Konjugieren/plans/gap_sentences_batch_1.md),
 [`../Konjugieren/plans/gap_sentences_batch_2.md`](../../Konjugieren/plans/gap_sentences_batch_2.md)).
-**Depends on:** Phases 2 and 3. **Status:** Not started.
+**Depends on:** Phases 2 and 3. **Status:** Awaiting Josh.
 
 Short authored sentences for the core verbs, with the verb blanked, so the conjugation is tied to a
 meaning.
@@ -2093,6 +2093,107 @@ most frequent verbs, at the levels' tenses; the reward on the results screen.
 appear where decided, and tests pin the check.
 
 **How it differed:**
+
+- **Asked of Josh (2026-11-23), before building**, each the recommended option but one.
+  (1) Sentences are **a mode of their own**, a row in the hub's Exercises, over a sentence now and
+  then in the default quiz and over both. (2) The French name is **"Phrases à trous"**, the
+  classroom's name, over "Phrases" and "En contexte"; the English stays Konjugieren's
+  "Sentences". (3) **All 300 verbs in this session, Claude's full reread in place of Josh's
+  review**, over a first batch for him to review: the phase's Ask Josh (how many a verb) was
+  answered with Konjugieren's final counts, raised by one for the top 25. (4) The literary reward
+  offers **every example, labeled**, the 12 Claude-written ones among the top 300 included, over
+  literary sources only, so that the results and the verb page agree.
+- **Not split.** One session built the app, the machine check, the review script, the brief
+  ([`gap_sentences.md`](gap_sentences.md)), and **750 sentences**: five for each of the 25 most
+  frequent verbs (a présent or impératif, a passé composé, an imparfait, futur, or conditionnel,
+  an Intermediate tense, and a passé simple in a short narrative), three for each of the next 75,
+  and two for each of the next 200. Ten Sonnet subagents drafted ranges of 25 to 34 verbs in
+  parallel, each from the brief and a sheet of its verbs (gloss, auxiliary, defects, and every
+  simple-tense form from `corpus/working/conjugations.json`, the app's own Conjugator). Cells: 181
+  passé composé, 154 présent, 95 futur, 80 imparfait, 71 subjonctif présent, 67 impératif, 63
+  conditionnel présent, 25 passé simple, and a few of the rest.
+- **The machine check passed 745 of 750 on its first run.** The five failures were être compounds
+  with no `gender`: the brief had asked for `"f"` only, so four masculine ones were unmarked, and
+  one feminine one had been missed. The check requires a gender wherever the answer would change
+  with the learner's setting, so the brief now asks for `"m"` too, and the five were fixed by hand.
+  The script's pre-check (simple tenses against the dump, and the subject pronoun before the braces
+  against the person) found nothing wrong; its five flags are noun subjects with an object nous or
+  vous ("Ce billet vous {permet}").
+- **The reread changed 23.** One real error, an unelided "Je {annoncerai}"; one ungrammatical
+  "Pars tôt pour que tu évites" (the same subject wants pour éviter); on mixed with nous or ils
+  twice; unidiomatic French ("mes parents coupaient mes cheveux", "changeait de conversation", "Il
+  me semblerait bon", "chez vous … à la maison", a compound split by "enfin"); odd claims (houses
+  without windows); and English that drifted ("You will maybe win", "had meant" for an imparfait,
+  "I planned for an umbrella"). Then all 750 were approved.
+- **Decided in the session.** (1) **One blank, one pair of braces**, unlike Konjugieren's several:
+  French separates no prefix, so only a negation, an adverb, or an inversion inside a compound tense
+  would need two, and the brief forbids those, which keeps one field and its keyboard focus.
+  (2) **The sentence fixes an être verb's agreement** (`gender`), since its subject shows it;
+  elsewhere the setting applies and changes no answer. (3) **The gender mark** shows beside the
+  field for je, tu, nous, and vous in every compound tense, as in the one-line frame, so it
+  reveals no auxiliary. (4) **An impératif shows (tu), (nous), or (vous)**: the first look on the
+  iPhone showed "{ } dîner chez nous samedi !", which takes viens or venez alike, and the English
+  "Come" does not say which. (5) **Answers are recorded** in the practice record, as the quiz's
+  are, since a sentence is production. (6) The tense shows above the sentence, as in Konjugieren.
+  (7) **A debug build asks drafts**, marked "Draft" / "Brouillon", as Konjugieren did; none remain.
+  (8) The JSON is `Conjuguer/Models/gap_sentences.json`, snake_case as the app's other data files.
+- **How it is built.** `GapSentence.swift` (the sentence, its cell, gender, frame, levels, the
+  round's draw, and `QuizScope.sentences`); `AnswerFrame.Segment.context` and `sentenceWords`,
+  which `AnswerFrameView` lays out word by word in `FlowLayout` (now centering each row's items
+  vertically, which leaves uniform chips as they were) with a 170-point compact field, the word
+  that touches the blank kept beside it; `QuizQuestion.sentence` and `pronounGender`, which
+  `Quiz.process` now grades in; `QuizResult.sentence` and `verbKey`;
+  `QuizResult.firstRightOfEachVerb` for the reward; `LastQuizResult.Kind.sentences`.
+- **The literary reward** is an "Example Use" / "Exemple d'utilisation" button (the verb page's
+  string) on the first right row of each verb in every quiz's results, revealing the verb page's
+  example with its attribution.
+- **Analytics.** A new `source` value, `sentences`; `quizCompletion` keeps its `questionCount`. The
+  reward's reveal sends nothing. Staged in
+  [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md) in both languages.
+- **Strings:** seven, six `Sentences.*` and `ResultsView.exampleHint`.
+- **A fixture**, `-CONJUGUER_QUIZ_FIXTURE sentences`, used only once Phrases à trous starts: ten
+  sentences, one per kind of frame, listed in `docs/feature_architecture.md` § Phrases à trous.
+- **Tests:** 807 to 826, all passing through `run_tests.sh` (the iPhone simulator is in English).
+  `GapSentenceTests`, 15 functions: the file decodes whole; every sentence well formed (ids,
+  braces, cell, apostrophe, narrow spaces); every blank the Conjugator's in its gender and accepted
+  by the grade, and a gender wherever agreement varies; asked at some level; the top 300's counts;
+  frames with the gender and addressee marks, touching words, and spoken prompts; cells that name
+  nothing; each level's band and tenses; drafts; the draw; the scope; the fixture's ids; and the
+  reward's rows. Nested in `QuizTests`, 4: a sentence's gender over the setting, a round at each
+  level of ten verbs, a right round recorded with its signals, last result, and Ten More's unasked
+  sentences, and a held correction with its sentence and re-ask.
+- **Verified on the iPhone 17**, light. In French with the fixture: the hub's row, viens right,
+  sommes allés drawing "Avec être, le participe s'accorde avec le sujet, ici au féminin pluriel.
+  Encore un essai." with (fém.) beside the field, the right second try at half points, fait for fit
+  drawing "C'est l'indicatif présent.", a held correction with "Ce soir-là, le roi fit venir son
+  cuisinier.", the re-ask, and results of 90 whose first rows offered venir's and aller's examples
+  (venir's opened). In English, a real Intermediate draw (servir: "Ce couteau [ ] à couper le
+  pain."), the field's label read from the tree. **On the iPad Pro 11** in English and dark: the
+  fixture's sentence on one line with (fem.), and écouter's "(tu) [ ] ! Tu entends la pluie ?".
+  Not tried: VoiceOver by ear, the software keyboard, the Live Activity, a round answered whole
+  from a real draw, and a release build.
+- **Two older faults, fixed at Josh's request (2026-11-23).** (1) **A results row showed a gender
+  for every je, tu, nous, and vous**, so an impératif read "Impératif - tu (fém.)", in every quiz.
+  `Tense.pronounDecorator` now shows it only for a compound tense, as the answer frame does.
+  (2) **Nine literature examples showed Project Gutenberg's italic underscores** (venir's
+  "L'_Assommoir_ est venu", Tartuffe, ridiculus sum), on the verb page as in the reward. They are
+  now italics: `Example.styledFrench` renders each span with `.emphasized`, which Work Sans Italic
+  (3, below) sets, and `Example.plainFrench` drops the markup for the widget, whose example line is
+  italic throughout. The data keeps the source's markup. (A first fix turned the spans into
+  guillemets in the data; Josh chose italics once the font had them, and that change was undone.)
+  Tests 826 to 829: `AnswerFrameTests.aResultsRowShowsTheGenderWhereTheFrameDoes`,
+  `ExampleSourceTests.everyExamplesItalicsMarkupIsBalanced`, and
+  `ExampleSourceTests.underscoresBecomeItalicSpans`. Seen on the iPhone 17 in French: venir's page
+  reading "L'*Assommoir* est venu". (3) **The sentence lines in the correction
+  and the results were set `.italic()`, which Work Sans could not show**, so they read upright. At
+  Josh's choice the app now bundles and registers `WorkSans-Italic.ttf` (version 2.012, from the
+  Work Sans repository's `fonts/ttf`, the same family and metrics as the bundled 2.009 faces, under
+  the OFL the Info credits already cite), and `.italic()` on the body font takes it. Seen on the
+  iPhone 17 in French: "Viens dîner chez nous samedi !" in italic in a held correction.
+- **For Josh to judge:** "Phrases à trous"; the gray (tu) and (fém.) marks among the words; the
+  English under the sentence, which helps but tells the meaning; the tense shown above the
+  sentence; spécialiser's two sentences, the weakest, since the verb is mostly pronominal; and
+  whether Beginner, whose top 100 have only présent and impératif sentences, has enough of them.
 
 ## Phase 19: Which Tense Would a Speaker Use?
 

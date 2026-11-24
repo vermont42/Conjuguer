@@ -299,7 +299,7 @@ struct VerbView: View {
         .accessibilityAddTraits(.isHeader)
 
       if let example {
-        Text(example.fr)
+        Text(example.styledFrench)
           .bodyLabel()
           .frenchPronunciation()
 

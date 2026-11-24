@@ -77,8 +77,9 @@ struct QuizResultsView: View {
         }
       }
 
+      let examples = exampleOffers
       List(quiz.quizResults) { quizResult in
-        QuizResultView(quizResult: quizResult)
+        QuizResultView(quizResult: quizResult, example: examples[quizResult.id])
           .listRowBackground(Color.customBackground)
           .listRowSeparatorTint(.customForeground)
       }
@@ -91,6 +92,16 @@ struct QuizResultsView: View {
     .padding(.top, Layout.tripleDefaultSpacing)
     .recordsAppearance(as: "\(QuizResultsView.self)")
     .screenBackground()
+  }
+
+  private var exampleOffers: [UUID: Example] {
+    var offers: [UUID: Example] = [:]
+    for result in QuizResult.firstRightOfEachVerb(in: quiz.quizResults) {
+      if let verb = result.verbKey.flatMap({ Verb.verbs[$0] }) {
+        offers[result.id] = ExampleData.example(for: verb)
+      }
+    }
+    return offers
   }
 
   /// A model's practice can ask fewer than five verbs or ten questions a round, so it offers

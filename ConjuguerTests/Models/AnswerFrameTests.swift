@@ -85,4 +85,17 @@ struct AnswerFrameTests {
   func readsFrameAsOnePrompt(infinitif: String, tense: Tense, pronounGender: PronounGender, expected: String) throws {
     #expect(try frame(infinitif, tense, pronounGender).spokenPrompt == expected)
   }
+
+  @Test(arguments: [
+    (Tense.impératif(.secondSingular), PronounGender.feminine, "tu", false),
+    (.indicatifPrésent(.firstPlural), .feminine, "nous", false),
+    (.indicatifPrésent(.thirdSingular), .feminine, "elle", false),
+    (.passéComposé(.firstSingular), .feminine, "je", true),
+    (.impératifPassé(.secondPlural), .masculine, "vous", true)
+  ])
+  func aResultsRowShowsTheGenderWhereTheFrameDoes(tense: Tense, pronounGender: PronounGender, pronoun: String, showsGender: Bool) {
+    let abbreviation = pronounGender == .masculine ? L.PronounGender.masculineAbbreviation : L.PronounGender.feminineAbbreviation
+    #expect(tense.pronounDecorator(pronounGender: pronounGender) == " - " + pronoun + (showsGender ? " (\(abbreviation))" : ""))
+    #expect(Tense.participePassé.pronounDecorator(pronounGender: pronounGender).isEmpty)
+  }
 }

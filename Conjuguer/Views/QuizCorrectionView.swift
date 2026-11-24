@@ -12,8 +12,8 @@ extension EnvironmentValues {
   @Entry var isBeneathQuiz = false
 }
 
-/// A wrong answer, held: what the learner typed and the right answer, with the
-/// letters that differ marked, what was wrong when the Conjugator can say, links to the verb's
+/// A wrong answer, held: what the learner typed and the right answer, with the letters that differ
+/// marked, a sentence completed, what was wrong when the Conjugator can say, links to the verb's
 /// page and its model's page, and Continue.
 struct QuizCorrectionView: View {
   let question: QuizQuestion
@@ -53,6 +53,20 @@ struct QuizCorrectionView: View {
         } else {
           answerRow(label: L.QuizView.yourAnswer, text: Self.givenText(difference))
           answerRow(label: L.QuizView.correctAnswer, text: Self.expectedText(difference))
+        }
+
+        if let sentence = question.sentence {
+          Label {
+            Text(verbatim: sentence.completed)
+              .italic()
+              .frenchPronunciation()
+          } icon: {
+            Image(systemName: "text.quote")
+          }
+          .font(bodyFont)
+          .foregroundStyle(Color.customForeground)
+          .fixedSize(horizontal: false, vertical: true)
+          .accessibilityIdentifier("quiz_correction_sentence")
         }
 
         if let diagnosis = correction.diagnosis {
@@ -165,6 +179,9 @@ struct QuizCorrectionView: View {
     }
     if let diagnosis = correction.diagnosis {
       spoken += " " + diagnosis.line
+    }
+    if let sentence = question.sentence {
+      spoken += " " + sentence.completed
     }
     if correction.willBeReasked {
       spoken += " " + L.QuizView.willBeAskedAgain

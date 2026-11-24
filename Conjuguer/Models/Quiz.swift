@@ -369,6 +369,10 @@ class Quiz {
       return recognitionQuestions()
     }
 
+    if scope.isSentences {
+      return sentenceQuestions()
+    }
+
     if scope.verbs != nil {
       return scope.questions(level: level, using: &generator)
     }
@@ -412,6 +416,21 @@ class Quiz {
     return QuizDraw.questions(slots: slots, band: scope.band(at: level), count: scope.questionCount, asked: Set(questions.map(\.verb.id)), using: &generator)
       .map(question(of:))
       .map { QuizQuestion.recognizing($0, slots: slots) }
+  }
+
+  private func sentenceQuestions() -> [QuizQuestion] {
+    #if DEBUG
+    if UserDefaults.standard.string(forKey: "CONJUGUER_QUIZ_FIXTURE") == "sentences" {
+      return generateSentencesFixture()
+    }
+    #endif
+    return QuizDraw.sentences(
+      from: GapSentences.askable(at: level),
+      count: scope.questionCount,
+      excluded: Set(questions.compactMap(\.sentence?.id)),
+      using: &generator
+    )
+    .compactMap(QuizQuestion.init(sentence:))
   }
 
   #if DEBUG
@@ -653,6 +672,29 @@ class Quiz {
     }
   }
 
+  // Phrases à trous, used only once it is started: one sentence for each kind of frame. The
+  // answers worth typing are listed in docs/feature_architecture.md § Phrases à trous.
+  private func generateSentencesFixture() -> [QuizQuestion] {
+    let ids = Self.sentencesFixtureIDs
+    let sentences = GapSentences.all.filter { ids.contains($0.id) }
+    return ids.compactMap { id in
+      sentences.first { $0.id == id }.flatMap(QuizQuestion.init(sentence:))
+    }
+  }
+
+  static let sentencesFixtureIDs = [
+    "venir.impératif.1",
+    "aller.passéComposé.1",
+    "avoir.passéComposé.1",
+    "aller.subjonctifPrésent.1",
+    "prendre.participePrésent.1",
+    "écouter.impératif.1",
+    "falloir.passéComposé.1",
+    "faire.passéSimple.1",
+    "venir.passéComposé.1",
+    "rester.passéComposé.1"
+  ]
+
   // Write the correct answers for the fixture to Documents/screenshot_fixture_answers.json
   // so the driver can read and type them. The exported answer is the first of any
   // slash-separated alternates, which the quiz scores as a total match.
@@ -699,8 +741,9 @@ class Quiz {
     let question = questions[currentQuestionIndex]
     let verb = question.verb
     let tense = question.tense
+    let pronounGender = question.pronounGender
     let correctAnswers: String
-    if let answers = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters, pronounGender: verb.pronounGender) {
+    if let answers = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters, pronounGender: pronounGender) {
       correctAnswers = answers
     } else {
       // Unreachable with today's data; degrade to an empty correct answer (scored as
@@ -711,7 +754,7 @@ class Quiz {
     let grade = ConjugationResult.grade(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense)
     let isSecondAttempt = firstAttempt != nil
     let diagnosis = grade.result == .noMatch
-      ? AnswerDiagnosis.diagnose(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense, pronounGender: verb.pronounGender)
+      ? AnswerDiagnosis.diagnose(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense, pronounGender: pronounGender)
       : nil
     // A diagnosis is checked before a slip, since it says more: suis allé for suis allée is one
     // letter off, and the agreement is what to fix.
@@ -737,7 +780,9 @@ class Quiz {
       shownSpelling: grade.shownSpelling,
       firstAttempt: firstAttempt,
       isReask: question.isReask,
-      pronounGender: verb.pronounGender
+      pronounGender: pronounGender,
+      sentence: question.sentence?.completed,
+      verbKey: verb.dictionaryKey
     )
     // Each final answer goes into the practice record as it is given, so that a quiz quit after
     // six questions has still practiced six. A slip's right second attempt counts as right.
@@ -794,7 +839,8 @@ class Quiz {
       firstAttempt: firstAttempt,
       isReask: question.isReask,
       pronounGender: question.verb.pronounGender,
-      recognitionPrompt: recognition.prompt
+      recognitionPrompt: recognition.prompt,
+      verbKey: question.verb.dictionaryKey
     )
     finish(result) { willBeReasked in
       QuizCorrection(
@@ -927,10 +973,18 @@ class Quiz {
         Utterer.utter(question.verb.infinitif, localeString: Utterer.frenchLocaleString)
         Utterer.utter(L.QuizView.translationWithColon, localeString: currentLocaleString)
         Utterer.utter(question.verb.translation, localeString: Utterer.englishLocaleString)
-        Utterer.utter(L.QuizView.pronounWithColon, localeString: currentLocaleString)
-        Utterer.utter(question.tense.pronoun(pronounGender: question.verb.pronounGender), localeString: Utterer.frenchLocaleString)
-        if question.tense.isCompound {
-          Utterer.utter(question.tense.gender(pronounGender: question.verb.pronounGender), localeString: currentLocaleString)
+        // A sentence speaks itself in place of the pronoun, with the blank where the answer goes,
+        // and then its English.
+        if let sentence = question.sentence {
+          Utterer.utter(L.Sentences.sentenceWithColon, localeString: currentLocaleString)
+          Utterer.utter(question.answerFrame.spokenPrompt, localeString: Utterer.frenchLocaleString)
+          Utterer.utter(sentence.english, localeString: Utterer.englishLocaleString)
+        } else {
+          Utterer.utter(L.QuizView.pronounWithColon, localeString: currentLocaleString)
+          Utterer.utter(question.tense.pronoun(pronounGender: question.pronounGender), localeString: Utterer.frenchLocaleString)
+          if question.tense.isCompound {
+            Utterer.utter(question.tense.gender(pronounGender: question.pronounGender), localeString: currentLocaleString)
+          }
         }
         Utterer.utter(L.QuizView.tenseWithColon, localeString: currentLocaleString)
         Utterer.utter(question.tense.titleCaseName, localeString: Utterer.frenchLocaleString)

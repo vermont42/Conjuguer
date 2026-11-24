@@ -232,6 +232,14 @@ struct QuizView: View {
                 .accessibilityHidden(true)
             }
             answerField(spokenPrefix: currentRow?.question.tense.titleCaseName.lowercased())
+            if let sentence = quiz.currentQuestion?.sentence {
+              Text(verbatim: sentence.english)
+                .translationLabel()
+                .fixedSize(horizontal: false, vertical: true)
+                .englishPronunciation()
+                .padding(.top, Layout.defaultSpacing / 2)
+                .accessibilityIdentifier("quiz_sentence_english")
+            }
           }
           if quiz.currentQuestion?.recognition != nil, quiz.correction == nil {
             recognitionCheckButton
@@ -322,6 +330,14 @@ struct QuizView: View {
               .accessibilityIdentifier("quiz_asked_again")
           }
 
+          // Only a debug build asks a sentence that has not been approved.
+          if let sentence = question.sentence, !sentence.reviewed {
+            Label(L.Sentences.draft, systemImage: "pencil.and.list.clipboard")
+              .font(captionFont)
+              .foregroundStyle(Color.customGray)
+              .accessibilityIdentifier("quiz_sentence_draft")
+          }
+
           // The verb, its gloss, and its tense are what a recognition question asks for, so none
           // is shown.
           if let recognition = question.recognition {
@@ -394,19 +410,21 @@ struct QuizView: View {
       conjugationField(
         placeholder: isRecognition ? L.Recognition.infinitive : L.QuizView.conjugation,
         spokenPrompt: spokenPrompt,
-        hint: isRecognition ? L.Recognition.fieldHint : nil
+        hint: isRecognition ? L.Recognition.fieldHint : nil,
+        isCompact: frame.isSentence
       )
     }
   }
 
-  private func conjugationField(placeholder: String, spokenPrompt: String, hint: String?) -> some View {
+  private func conjugationField(placeholder: String, spokenPrompt: String, hint: String?, isCompact: Bool) -> some View {
     TextField(placeholder, text: $input, selection: $inputSelection)
       .focused($conjugationFieldIsFocused)
       .textInputAutocapitalization(.never)
       .autocorrectionDisabled()
       .font(bodyFont)
       .foregroundStyle(Color.customForeground)
-      .padding(Layout.doubleDefaultSpacing)
+      .padding(.horizontal, isCompact ? Layout.defaultSpacing * 1.5 : Layout.doubleDefaultSpacing)
+      .padding(.vertical, isCompact ? Layout.defaultSpacing : Layout.doubleDefaultSpacing)
       .background(
         RoundedRectangle(cornerRadius: 12, style: .continuous)
           .fill(Color.customForeground.opacity(0.06))
@@ -730,6 +748,19 @@ struct QuizView: View {
         start(scope: .recognition)
         TryQuizTip().invalidate(reason: .actionPerformed)
       }
+
+      let hasSentences = !GapSentences.askable(at: level).isEmpty
+      QuizHubRow(
+        title: L.Sentences.title,
+        detail: hasSentences ? L.Sentences.description : L.Sentences.empty,
+        systemImage: "text.insert",
+        identifier: "quiz_sentences",
+        hint: L.Sentences.startHint,
+        start: hasSentences ? {
+          start(scope: .sentences)
+          TryQuizTip().invalidate(reason: .actionPerformed)
+        } : nil
+      )
 
       NavigationLink(value: ModelPracticeDestination()) {
         QuizHubRowContent(

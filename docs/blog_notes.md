@@ -6226,3 +6226,108 @@ of it: a compound cell ends in the verb's participle, so a verb whose participle
 prompt's last word skips its compound tenses altogether.
 
 The suite went from 789 to 807 tests. The session ended with Josh still to try the exercise.
+
+## Seven Hundred Fifty Sentences with a Hole in Them (2026-11-23)
+
+Phase 18 of the pedagogy plan ports Konjugieren's Sentences exercise. The quiz shows a short French
+sentence with its verb missing, "Hier soir, nous [ ] au cinéma.", and the learner types the
+conjugation. Both sides of the drill debate agree that practice tied to meaning is the strong
+kind, and a pronoun alone means nothing. In French the exercise is "Phrases à trous", the name a
+French classroom gives it.
+
+### Four answers, one of them bold
+
+Josh answered four questions before any code was written. Sentences are an exercise of their own,
+a row in the Quiz tab's Exercises card, not something mixed into the default quiz. The French name
+is Phrases à trous. Every quiz's results offer a verb's example sentence as a reward on its first
+right answer, including the dozen examples Claude wrote for verbs that literature never quoted,
+labeled as such. The fourth answer was the bold one. In Konjugieren, Josh reviewed a first batch of
+117 sentences before handing the other 619 to Claude's reread. Here he chose to do all 300 verbs in
+one session, with Claude's full reread from the start. Rereading every sentence is a different
+promise from sampling a few, and the session kept it.
+
+### Drafting in parallel
+
+The content is 750 sentences. Each of the 25 most frequent verbs gets five, one per group of
+tenses plus a passé simple in a short narrative ("Napoléon {prit} le pouvoir en 1799."). Verbs 26 to
+100 get three, and verbs 101 to 300 get two. Ten Sonnet subagents each drafted a range of verbs at
+the same time. Each worked from one brief, which is now `plans/gap_sentences.md`, and one sheet
+listing its verbs: gloss, auxiliary, defects, and every simple-tense form as the app's own
+Conjugator writes it, taken from the dump the corpus pipelines use. With the forms in front of
+them, the drafters had little left to get wrong. They finished in about a minute each.
+
+### The check that caught a rule, not a typo
+
+The machine check conjugates each sentence's cell and compares it with the braces. On its first
+run it passed 745 of 750 sentences. All five failures were être verbs in compound tenses. The brief
+had told drafters to mark a sentence's gender only when the subject was feminine. That is not
+enough: "nous {sommes restés}" with no gender would follow the learner's setting, which is feminine
+by default, and expect restées. So the check requires a gender wherever the answer would change
+with the setting, and the brief now asks for "m" as well as "f". The failures were the brief's
+fault, not the drafters'.
+
+### What the reread found
+
+Twenty-three sentences changed. One was a real error that the machine could not see:
+"Je {annoncerai}", where French elides to J'annoncerai. Another was a grammar fault French teachers
+mark in red: "Pars tôt pour que tu évites", where the clause has the same subject and wants "pour
+éviter". The rest were matters of taste and idiom. "On" was mixed with "nous". "Mes parents coupaient
+mes cheveux" became "me coupaient les cheveux". One sentence said "chez vous" and "à la maison"
+together. One claimed that architects once designed houses without windows. On the English side,
+"You will maybe win the race" became "Maybe you will win the race".
+
+### One blank, not two
+
+Konjugieren's sentences can have two blanks, because German separates its prefixes: "{Fängt} der
+Film bald {an}?" French separates nothing, so a second blank would only be needed when a negation,
+an adverb, or an inversion splits a compound tense. The brief forbids that, and "Ce matin, j'{ai
+fini}" replaces "Je n'ai pas fini". The payoff is one field. It keeps the keyboard from one sentence
+to the next, and the layout stays simple: words wrap around a field of fixed width, so the width
+gives away nothing about the answer's length.
+
+### What the simulator showed
+
+The first sentence on screen exposed a hole in the design: "[ ] dîner chez nous samedi !" The
+answer could be viens or venez, and the English, "Come have dinner", does not say which. The
+one-line quiz has always shown "(tu)" before an impératif. Sentences now do the same. The rest
+worked as hoped. "Sommes allés" for "Marie et moi, nous" drew the agreement diagnosis, in French,
+inside the sentence. "Fait" for the king's "fit" was named as the présent. The held correction
+showed the completed sentence. The results offered venir's example from Zola, with its Markdown
+underscores showing, a fault in the example pipeline rather than in this phase.
+
+The suite went from 807 to 826 tests. The session ended with Josh still to try the exercise.
+
+## Two Older Faults: a Gender and Some Underscores (2026-11-23)
+
+The Phase 18 check turned up two faults older than the phase, and Josh asked for both fixed.
+
+The first was the results sheet. Every row for je, tu, nous, or vous named a gender, so an
+impératif read "Impératif - tu (fém.)", as if a command could agree with someone. The answer frame
+has always known better: it shows the gender only for a compound tense, the only kind whose
+participle can agree, and shows it there for avoir verbs too so as not to give the auxiliary
+away. The results label now follows the same rule.
+
+The second was in the data. Nine literature examples still carried Project Gutenberg's
+underscores, its plain-text way of marking italics: "L'_Assommoir_ est venu à son heure", Molière's
+_Tartuffe_, Flaubert's schoolboy copying _ridiculus sum_. Rendering them as italics was the obvious
+fix, and it would have done nothing visible, because Work Sans, the app's font, ships without an
+italic face. (That also means the sentence lines I set `.italic()` in Phase 18 read upright.)
+French has its own answer for a title set without italics: guillemets. So each span became
+« … », the narrow spaces the app uses everywhere, with an elided article moved inside
+the marks: « L'Assommoir » est venu. The conversion lives in the verb-pass library, and the
+script that writes new examples calls it. A test now fails on any underscore that slips back in.
+
+The aside about upright italics did not stay an aside. Asked to choose between deleting the dead
+`.italic()` calls, styling the lines another way, or giving the font an italic, Josh chose the
+italic. The Work Sans repository publishes static italic faces under the same Open Font License the
+Info tab already credits. Its `WorkSans-Italic.ttf` has the same family name and the same metrics as
+the bundled regular face, three minor versions newer, so registering it in `Info.plist` was enough:
+SwiftUI's `.italic()` on the custom body font found the family's italic face, and the completed
+sentence in a correction now slants. With an italic face in hand, Josh then asked for the
+Gutenberg titles in italics too, so the guillemets came out of the data again. The examples keep
+Gutenberg's underscores, which are the source's own record of what was italic, and the app reads
+them: each span renders as emphasis on the verb page and in the results, and the widget, whose
+example line is italic throughout, gets the text with the markup removed. Venir's page now reads
+L'*Assommoir* est venu, as Zola's printer set it. A test fails on an odd number of underscores,
+which would tip the rest of a sentence into italics.
+

@@ -16,12 +16,20 @@ struct QuizQuestion {
   /// Set for a Name the Conjugation question, whose prompt is a conjugation of `tense` and whose
   /// answer is a verb and a cell rather than a conjugation.
   var recognition: RecognitionQuestion?
+  /// Set for a Phrases à trous question, whose blank stands in an authored sentence.
+  var sentence: GapSentence?
+
+  /// The gender the answer agrees in: a sentence's subject's where it fixes one, and otherwise
+  /// the learner's setting, which an impersonal verb overrides.
+  var pronounGender: PronounGender {
+    sentence?.pronounGender ?? verb.pronounGender
+  }
 
   var reasked: QuizQuestion {
     reasked(stepID: nil)
   }
 
   func reasked(stepID: UUID?) -> QuizQuestion {
-    QuizQuestion(verb: verb, tense: tense, isReask: true, stepID: stepID, recognition: recognition)
+    QuizQuestion(verb: verb, tense: tense, isReask: true, stepID: stepID, recognition: recognition, sentence: sentence)
   }
 }
