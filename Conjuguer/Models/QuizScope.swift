@@ -34,11 +34,13 @@ struct QuizScope {
   /// Review or My Mistakes, which draw from the practice record. Nil for every other quiz.
   var recordSession: QuizRecordSession?
 
+  var isVerbEssentials = false
+
   /// Only the default quiz posts to its level's leaderboard and sets its best score: a score over
   /// the learner's own verbs, tenses, or practice record, or over three questions, compares with
   /// nothing.
   var isRanked: Bool {
-    verbs == nil && custom == nil && recordSession == nil
+    verbs == nil && custom == nil && recordSession == nil && !isVerbEssentials
   }
 
   /// Review and My Mistakes ask whatever the record holds, beyond the level's tenses and band, so
@@ -82,9 +84,10 @@ struct QuizScope {
     collection ?? custom?.verbSet?.collection
   }
 
-  /// Whether the results offer Ten More. Test Me's three questions are a check, not a session.
+  /// Whether the results offer Ten More, or for Verb Essentials five more verbs. Test Me's three
+  /// questions are a check, not a session.
   var continues: Bool {
-    questionCount == Quiz.questionCount
+    isVerbEssentials || questionCount == Quiz.questionCount
   }
 
   var isVerbPage: Bool {

@@ -167,5 +167,14 @@ language, through `Utterer`), and focus stays in the answer field, which still h
 attempt to edit. The feedback slot shows the same line, which VoiceOver reads in place. Not yet
 heard with VoiceOver.
 
+In Verb Essentials, a verb's three key conjugations are three questions on one screen. The full
+series is spoken at a step's first blank only; a later blank announces just "Tense:" and its tense,
+since the verb is already on screen. The answer field's label begins with its row's tense
+("passé composé, elle, singular, blank"), and every other row is one element: "indicatif présent,
+elle, singular, vient, right", "…, right on the second try", "…, wrong", or "futur simple, elle,
+singular, not yet asked". A re-ask's given rows read their conjugation. Start's hint is "Starts a
+quiz of three conjugations each of five irregular verbs", and Five More Verbs has its own. Read
+from the accessibility tree, not heard.
+
 A new quiz screen or exercise that changes its question without moving focus needs the same
 announcement, or an `AccessibilityNotification.Announcement`.

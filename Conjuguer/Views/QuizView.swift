@@ -125,6 +125,7 @@ struct QuizView: View {
               VStack(spacing: Layout.doubleDefaultSpacing) {
                 notStartedBriefing
                 recordSessions
+                exercises
                 competitionFoot
               }
               .frame(maxWidth: .infinity, minHeight: proxy.size.height)
@@ -168,23 +169,55 @@ struct QuizView: View {
     }
   }
 
-  /// Review or My Mistakes names itself in the title, since its questions look like any quiz's.
+  /// Review, My Mistakes, or Verb Essentials names itself in the title, since its questions look
+  /// like any quiz's.
   private var tabSessionTitle: String? {
     guard sheetScope == nil, quiz.quizState == .inProgress || quiz.shouldShowResults else {
       return nil
     }
-    return quiz.scope.recordSession?.title
+    return quiz.scope.sessionTitle
   }
 
+  // A Verb Essentials verb shows its three rows, with the answer field in the current one. The
+  // rows before and after the field are separate children around it, so that the field keeps its
+  // place in the hierarchy, and the keyboard its focus, as it moves down the rows.
   private var inProgressContent: some View {
-    ScrollViewReader { proxy in
+    let essentialsRows = quiz.essentialsRows
+    let currentRowIndex = essentialsRows?.firstIndex { row in
+      if case .current = row.content {
+        return true
+      }
+      return false
+    }
+    let currentRow = currentRowIndex.flatMap { essentialsRows?[$0] }
+    return ScrollViewReader { proxy in
       ScrollView {
         VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
           statusStrip
-          questionBlock
-          feedbackSlot
-          answerField
+          questionBlock(showsTense: essentialsRows == nil)
+          if let essentialsRows, let currentRowIndex {
+            ForEach(essentialsRows.prefix(currentRowIndex)) { row in
+              VerbEssentialsRowView(row: row)
+            }
+          }
+          // A Verb Essentials row shows its own answer's mark, so the slot shows only a request
+          // for one more try.
+          if essentialsRows == nil || quiz.isAwaitingSecondAttempt {
+            feedbackSlot
+          }
+          VStack(alignment: .leading, spacing: Layout.defaultSpacing / 2) {
+            if let currentRow {
+              VerbEssentialsRowLabel(tense: currentRow.question.tense)
+                .accessibilityHidden(true)
+            }
+            answerField(spokenPrefix: currentRow?.question.tense.titleCaseName.lowercased())
+          }
           correctionBlock
+          if let essentialsRows, let currentRowIndex {
+            ForEach(essentialsRows.dropFirst(currentRowIndex + 1)) { row in
+              VerbEssentialsRowView(row: row)
+            }
+          }
         }
         .padding(.bottom, Layout.doubleDefaultSpacing)
       }
@@ -247,7 +280,7 @@ struct QuizView: View {
     }
   }
 
-  private var questionBlock: some View {
+  private func questionBlock(showsTense: Bool) -> some View {
     Group {
       if quiz.currentQuestionIndex < quiz.questions.count {
         let verb = quiz.questions[quiz.currentQuestionIndex].verb
@@ -274,11 +307,13 @@ struct QuizView: View {
             .smallLabel()
             .englishPronunciation()
 
-          Text(tenseName)
-            .font(buttonFont)
-            .foregroundStyle(Color.customForeground)
-            .frenchPronunciation()
-            .padding(.top, Layout.defaultSpacing / 2)
+          if showsTense {
+            Text(tenseName)
+              .font(buttonFont)
+              .foregroundStyle(Color.customForeground)
+              .frenchPronunciation()
+              .padding(.top, Layout.defaultSpacing / 2)
+          }
         }
       }
     }
@@ -319,10 +354,13 @@ struct QuizView: View {
     quiz.currentQuestionIndex < quiz.questions.count ? quiz.questions[quiz.currentQuestionIndex].answerFrame : .bareBlank
   }
 
-  private var answerField: some View {
+  /// `spokenPrefix` names a Verb Essentials row's tense, which the screen shows above the field
+  /// rather than in the frame.
+  private func answerField(spokenPrefix: String?) -> some View {
     let frame = answerFrame
+    let spokenPrompt = [spokenPrefix, frame.spokenPrompt].compactMap { $0 }.joined(separator: ", ")
     return AnswerFrameView(frame: frame) {
-      conjugationField(spokenPrompt: frame.spokenPrompt)
+      conjugationField(spokenPrompt: spokenPrompt)
     }
   }
 
@@ -556,18 +594,44 @@ struct QuizView: View {
         .accessibilityIdentifier("quiz_record_sessions")
 
       ForEach(QuizRecordSession.allCases, id: \.self) { session in
-        QuizRecordSessionRow(
-          session: session,
-          askableCount: session.askableCount(from: world.practice),
-          daysUntilNextDue: world.practice.daysUntilNextDue()
-        ) {
-          start(scope: .recordSession(session))
-          TryQuizTip().invalidate(reason: .actionPerformed)
-        }
+        let askableCount = session.askableCount(from: world.practice)
+        QuizHubRow(
+          title: session.title,
+          detail: session.hubDetail(askableCount: askableCount, daysUntilNextDue: world.practice.daysUntilNextDue()),
+          systemImage: session.hubSystemImage,
+          identifier: session.hubIdentifier,
+          hint: session.hubHint,
+          start: askableCount > 0 ? {
+            start(scope: .recordSession(session))
+            TryQuizTip().invalidate(reason: .actionPerformed)
+          } : nil
+        )
       }
 
       if let lastResult = world.practice.lastResult {
         LastQuizResultRow(result: lastResult)
+      }
+    }
+    .card()
+  }
+
+  private var exercises: some View {
+    VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
+      Text(L.QuizView.exercises)
+        .font(subheadingFont)
+        .foregroundStyle(Color.customForeground)
+        .accessibilityAddTraits(.isHeader)
+        .accessibilityIdentifier("quiz_exercises")
+
+      QuizHubRow(
+        title: L.VerbEssentials.title,
+        detail: L.VerbEssentials.description,
+        systemImage: "square.3.layers.3d",
+        identifier: "quiz_verb_essentials",
+        hint: L.VerbEssentials.startHint
+      ) {
+        start(scope: .verbEssentials())
+        TryQuizTip().invalidate(reason: .actionPerformed)
       }
     }
     .card()
@@ -719,25 +783,29 @@ struct QuizView: View {
   }
 }
 
-/// Review or My Mistakes on the Quiz tab: a button that starts the session while it has
-/// questions, and otherwise a line saying why it has none.
-private struct QuizRecordSessionRow: View {
-  let session: QuizRecordSession
-  let askableCount: Int
-  let daysUntilNextDue: Int?
-  let start: () -> Void
+/// A row of the Quiz tab's hub: a button that starts a session while it has questions, and
+/// otherwise a line saying why it has none.
+private struct QuizHubRow: View {
+  let title: String
+  let detail: String
+  let systemImage: String
+  /// Ends in `_button` while the row starts something, and in `_empty` otherwise.
+  let identifier: String
+  let hint: String
+  /// Nil for a row with nothing to start.
+  let start: (() -> Void)?
 
   var body: some View {
-    if askableCount > 0 {
+    if let start {
       Button(action: start) {
         content
       }
       .buttonStyle(.plain)
       .accessibilityHint(hint)
-      .accessibilityIdentifier("quiz_\(identifier)_button")
+      .accessibilityIdentifier("\(identifier)_button")
     } else {
       content
-        .accessibilityIdentifier("quiz_\(identifier)_empty")
+        .accessibilityIdentifier("\(identifier)_empty")
     }
   }
 
@@ -750,7 +818,7 @@ private struct QuizRecordSessionRow: View {
         .accessibilityHidden(true)
 
       VStack(alignment: .leading, spacing: 2) {
-        Text(session.title)
+        Text(title)
           .font(bodyEmphasisFont)
           .foregroundStyle(Color.customForeground)
         Text(detail)
@@ -761,7 +829,7 @@ private struct QuizRecordSessionRow: View {
 
       Spacer(minLength: 0)
 
-      if askableCount > 0 {
+      if start != nil {
         Image(systemName: "play.circle.fill")
           .font(.title)
           .foregroundStyle(Color.customBlue)
@@ -772,9 +840,11 @@ private struct QuizRecordSessionRow: View {
     .contentShape(.rect)
     .accessibilityElement(children: .combine)
   }
+}
 
-  private var detail: String {
-    switch session {
+private extension QuizRecordSession {
+  func hubDetail(askableCount: Int, daysUntilNextDue: Int?) -> String {
+    switch self {
     case .review:
       if askableCount > 0 {
         return L.PracticeSession.reviewCount(askableCount)
@@ -785,8 +855,8 @@ private struct QuizRecordSessionRow: View {
     }
   }
 
-  private var hint: String {
-    switch session {
+  var hubHint: String {
+    switch self {
     case .review:
       return L.PracticeSession.reviewHint
     case .mistakes:
@@ -794,8 +864,8 @@ private struct QuizRecordSessionRow: View {
     }
   }
 
-  private var systemImage: String {
-    switch session {
+  var hubSystemImage: String {
+    switch self {
     case .review:
       return "clock.arrow.circlepath"
     case .mistakes:
@@ -803,12 +873,12 @@ private struct QuizRecordSessionRow: View {
     }
   }
 
-  private var identifier: String {
-    switch session {
+  var hubIdentifier: String {
+    switch self {
     case .review:
-      return "review"
+      return "quiz_review"
     case .mistakes:
-      return "mistakes"
+      return "quiz_mistakes"
     }
   }
 }

@@ -6037,3 +6037,48 @@ that gives no context cannot rule that out. Passer's compound tenses now take av
 variant, the same mechanism as the 1990 spellings, so "j'ai passé" passes and "suis passée" appears
 quietly beside the checkmark. Only passer changed. Monter, sortir, and the rest keep the line about
 the direct object.
+
+## L'essentiel du verbe (2026-11-23)
+
+Pedagogy Phase 15 ports Konjugieren's Verb Essentials. Given an irregular verb, the learner types
+its three key conjugations, the third-person présent, passé composé, and futur: vient, est venu,
+viendra. The verb page has shown those three forms, without a label, since the browse plan. Now
+they can be practiced. Josh named it "L’essentiel du verbe" in French, over "Les incontournables"
+and "Verbe en bref".
+
+### What carried over
+
+Almost everything. Konjugieren had found that the exercise is cheapest as three ordinary quiz
+questions that share a screen, joined by a step ID, and that held here too. Phase 4's one more
+try, Phase 14's diagnosis, the held correction, and the practice record all work per blank with no
+change, and the record already mapped the il présent, passé composé, and futur to the three stems
+it schedules. Typing "a venu" for venir's passé composé produced Phase 14's auxiliary line at
+once. The trick that keeps the keyboard up also carried over: the rows above the field and the
+rows below it are two separate lists around the one field, so the field never moves in SwiftUI's
+hierarchy even as it moves down the screen.
+
+### What French changed
+
+The plan wrote the frame as `il ___`, but the quiz follows the pronoun-gender setting, feminine by
+default, and Josh kept agreement required. So the exercise asks `elle [ ]` and expects "est
+venue". The verb page's key conjugations stay masculine, since they stand without a pronoun.
+Forcing il would have meant threading a gender through grading, frames, diagnoses, and
+corrections for this exercise alone, and it would have taught less. A pronominal verb's frame
+carries its pronoun, so se souvenir reads `elle se`, `elle s'`, `elle se`, and the learner types
+only the verb.
+
+"Irregular" needed a sharper definition than the plan's. `VerbDraw.isIrregular` counts rendre's
+verbs, as French schools do, but the practice record keeps them as patterns, so a rendre blank
+would have moved a pattern item instead of the verb's own. The exercise asks only verbs the record
+learns one by one and that have all three forms, which leaves out gésir, with only "gît".
+
+### What the simulator caught
+
+The first pass showed every answer's mark twice: a check on the row, and the same check again in
+the feedback slot above the next field. The slot exists so that a single-question quiz can show
+the last answer's mark on the next question. Here the row already does that, so the slot now
+appears only to ask for one more try. The second catch was smaller. "prend · a pris · prendra" in
+the hub's description broke between "a" and "pris" on the iPhone, so the forms are now held
+together with no-break spaces.
+
+The suite went from 747 to 764 tests, and the session ended with Josh still to try it.

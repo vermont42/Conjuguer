@@ -275,7 +275,7 @@ class Quiz {
       return
     }
     liveActivity = Current.liveActivities.start(
-      attributes: QuizActivityAttributes(level: scope.recordSession?.title ?? level.localizedName),
+      attributes: QuizActivityAttributes(level: scope.sessionTitle ?? level.localizedName),
       initialState: liveActivityState(isFinished: false)
     )
   }
@@ -339,6 +339,21 @@ class Quiz {
 
   /// A round's questions, a fixture's in DEBUG, which Ten More repeats.
   private func drawQuestions() -> [QuizQuestion] {
+    if scope.isVerbEssentials {
+      #if DEBUG
+      if UserDefaults.standard.string(forKey: "CONJUGUER_QUIZ_FIXTURE") == "essentials" {
+        return generateVerbEssentialsFixture()
+      }
+      #endif
+      return QuizDraw.verbEssentialsSteps(
+        verbs: scope.verbs ?? QuizDraw.verbs(in: scope.band(at: level)),
+        count: QuizScope.verbEssentialsVerbCount,
+        asked: Set(questions.map(\.verb.id)),
+        using: &generator
+      )
+      .flatMap { $0 }
+    }
+
     if scope.verbs != nil {
       return scope.questions(level: level, using: &generator)
     }
@@ -575,6 +590,16 @@ class Quiz {
     }
   }
 
+  // Five verbs for Verb Essentials, used only when it is started: venir (être, an irregular
+  // futur), se souvenir (pronominal), faire (an irregular futur), prendre, and aller (être, and a
+  // futur on another stem). The wrong answers worth typing are listed in
+  // docs/feature_architecture.md § Verb Essentials.
+  private func generateVerbEssentialsFixture() -> [QuizQuestion] {
+    ["venir", "souvenir", "faire", "prendre", "aller"].flatMap { infinitif in
+      QuizDraw.verbEssentialsStep(verb: Verb.verbForInfinitif(infinitif))
+    }
+  }
+
   // Write the correct answers for the fixture to Documents/screenshot_fixture_answers.json
   // so the driver can read and type them. The exported answer is the first of any
   // slash-separated alternates, which the quiz scores as a total match.
@@ -672,7 +697,8 @@ class Quiz {
       // cannot fill a round.
       let willBeReasked = !question.isReask
       if willBeReasked {
-        questions.insert(question.reasked, at: Self.reaskPosition(after: currentQuestionIndex, in: questions.count))
+        let placement = Self.reaskPlacement(of: currentQuestionIndex, in: questions)
+        questions.insert(question.reasked(stepID: placement.stepID), at: placement.position)
       }
       correction = QuizCorrection(
         difference: AnswerDifference.nearest(
@@ -761,12 +787,18 @@ class Quiz {
         guard let question = currentQuestion else {
           return
         }
-        if question.isReask {
-          Utterer.utter(L.QuizView.askedAgain, localeString: currentLocaleString)
-        }
         if let shownSpelling = lastRoundResult?.shownSpelling {
           Utterer.utter(L.QuizView.alsoSpelledWithColon, localeString: currentLocaleString)
           Utterer.utter(shownSpelling.lowercased(), localeString: Utterer.frenchLocaleString)
+        }
+        // A step's later blanks name only their tense, since the verb is already on screen.
+        guard isFirstQuestionOfStep else {
+          Utterer.utter(L.QuizView.tenseWithColon, localeString: currentLocaleString)
+          Utterer.utter(question.tense.titleCaseName, localeString: Utterer.frenchLocaleString)
+          return
+        }
+        if question.isReask {
+          Utterer.utter(L.QuizView.askedAgain, localeString: currentLocaleString)
         }
         Utterer.utter(L.QuizView.verbWithColon, localeString: currentLocaleString)
         Utterer.utter(question.verb.infinitif, localeString: Utterer.frenchLocaleString)

@@ -20,6 +20,7 @@ struct LastQuizResult: Codable, Equatable {
     case myVerbs
     case practiceSet
     case review
+    case verbEssentials
     case verbPage
   }
 
@@ -61,7 +62,7 @@ struct LastQuizResult: Codable, Equatable {
       subject = quiz.scope.collection?.key
     case .verbPage:
       subject = quiz.scope.verbs?.first?.dictionaryKey
-    case .allVerbs, .custom, .mistakes, .myVerbs, .practiceSet, .review:
+    case .allVerbs, .custom, .mistakes, .myVerbs, .practiceSet, .review, .verbEssentials:
       subject = nil
     }
     self.init(
@@ -109,6 +110,8 @@ struct LastQuizResult: Codable, Equatable {
       return L.PracticeSet.title
     case .review:
       return QuizRecordSession.review.title
+    case .verbEssentials:
+      return L.VerbEssentials.title
     case .verbPage:
       return subject.flatMap { Verb.verbs[$0]?.infinitifWithPossibleExtraLetters } ?? subject ?? L.QuizView.allVerbs
     }
@@ -126,6 +129,8 @@ extension LastQuizResult.Kind {
       case .mistakes:
         self = .mistakes
       }
+    } else if scope.isVerbEssentials {
+      self = .verbEssentials
     } else if scope.isPracticeSet {
       self = .practiceSet
     } else if scope.custom != nil {

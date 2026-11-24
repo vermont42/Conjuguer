@@ -514,6 +514,7 @@ same.
 | `custom` | Yes | The quiz signals only: a custom quiz from the Quiz tab (§ The Custom Quiz) |
 | `review` | Yes | The quiz signals only: Review, from the Quiz tab (§ Review and My Mistakes) |
 | `mistakes` | Yes | The quiz signals only: Practice My Mistakes, from the Quiz tab (§ Review and My Mistakes) |
+| `verbEssentials` | Yes | The quiz signals only: Verb Essentials, from the Quiz tab (§ Verb Essentials) |
 
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
 a bare `Verb`, and the cells a search matched (`marks`). A link carries `source` as a query item
@@ -794,7 +795,8 @@ verb opened from a collection's page has `source` `list`; one opened from a mode
 
 A quiz of ten questions, which Ten More continues by ten more. The learner types each conjugation,
 and a missed question is asked once more. A quiz can also ask about chosen verbs (§ Quiz Scopes),
-or about tenses and verbs the learner puts together (§ The Custom Quiz).
+or about tenses and verbs the learner puts together (§ The Custom Quiz). Verb Essentials asks the
+key conjugations of irregular verbs (§ Verb Essentials).
 
 ### Architecture
 
@@ -807,7 +809,8 @@ or about tenses and verbs the learner puts together (§ The Custom Quiz).
 | `QuizDraw.swift` | The verbs of a quiz whose verbs were not listed (the default quiz, or a custom quiz over a band): `QuizDraw`, which draws them from a band with a fixed share of irregular, core, and prefixed verbs; `QuizVerbPool`, a kind of verb a tense is asked of, read from the data; and `QuizVerbTraits`, where a model is irregular |
 | `QuizLevel.swift` | The four levels, chosen in Settings, and the tenses each asks; `QuizTenseSlot`, a tense as the quiz asks it, with its cells, its weight, and its pools |
 | `QuizScope.swift` | What a quiz asks about, its question count, and its analytics source; the questions of a quiz over chosen verbs; `Verb.hasCell(_:)` and `canBeQuizzed(at:)` |
-| `QuizQuestion.swift`, `QuizResult.swift`, `QuizState.swift` | A question (verb and tense), an answered question, and the quiz's lifecycle |
+| `QuizQuestion.swift`, `QuizResult.swift`, `QuizState.swift` | A question (verb, tense, and the step it shares with others on one screen), an answered question, and the quiz's lifecycle |
+| `VerbEssentials.swift`, `VerbEssentialsRowView.swift` | Verb Essentials: its scope, its draw, the rows of a step, and where a missed blank returns (§ Verb Essentials) |
 | `ConjugationResult.swift` | Grades an answer as a total or no match (`ConjugationResult.grade`), with the conjugation to show beside a right answer spelled another standard way (`AnswerGrade`); a question's result is also `.secondAttemptMatch` when a slip's second attempt was right |
 | `AnswerSlip.swift` | Whether a wrong answer is a slip that earns one more attempt (§ One More Try) |
 | `AnswerDiagnosis.swift` | Why a wrong answer is wrong, when the Conjugator can say so for certain, as one line (§ Naming the Error) |
@@ -1395,6 +1398,8 @@ and how the last quiz went. From the top:
 - **From Your Practice**: Review and My Mistakes (§ Review and My Mistakes), then **Last Quiz**
   (`quiz_last_result`), absent until a quiz has finished: "All Verbs · Elementary · today", then
   "Correct: 7 / 10 · Second Try: 1 · Score: 75".
+- **Exercises** (`quiz_exercises`): ways to practice beside the quiz, each a row like Review's
+  (`QuizHubRow`). Verb Essentials is the one so far (`quiz_verb_essentials_button`).
 - **The foot**: the level's best score, when there is one, and a small View Leaderboard button
   (`quiz_leaderboard_button`), shown only while signed in to Game Center, which opens the current
   level's board and sends `tapViewLeaderboard` with `source` `tab`. Competing is beside the point
@@ -1403,17 +1408,56 @@ and how the last quiz went. From the top:
 **The last result** (`LastQuizResult`) is written at each round's results, so after Ten More it is
 the session so far, by every scope, Test Me's three questions included. A quit quiz writes
 nothing, since its results were never shown. It keeps a kind (`allVerbs`, `myVerbs`, `verbPage`,
-`collection`, `custom`, `practiceSet`, `review`, `mistakes`) and a verb's `dictionaryKey` or a
+`collection`, `custom`, `practiceSet`, `review`, `mistakes`, `verbEssentials`) and a verb's `dictionaryKey` or a
 collection's key rather than a title, so that it reads in the current language. Review and My
 Mistakes keep no level. `PracticeStore` keeps it as JSON under `lastQuizResult` in the App Group's
 defaults, beside the record, on the device and never sent; Reset Practice forgets it, and the
 Practice Record card shows while either exists (`hasAnythingToReset`).
 
+### Verb Essentials
+
+Given an irregular verb, the learner types its key conjugations (§ Copy and Share, Key
+Conjugations): the présent, passé composé, and futur simple of the third-person singular, "L’essentiel du
+verbe" in French. The three rows show together, each with its tense above it and its own blank in
+the answer frame (`elle [ ]`, `elle s' [ ]`), and Return grades the current one.
+
+- **One blank, one question.** A verb is three `QuizQuestion`s sharing a `stepID`, so every quiz
+  mechanism applies to each blank unchanged: one more try for a slip or a diagnosis, at half
+  points; the held correction, under its row; and the practice record, where each answer moves its
+  own key conjugation through `PracticeItem.exercised`.
+- **The pronoun follows the setting**, as in any quiz: elle and est venue with the feminine
+  default, il and est venu with masculine. The verb page's key conjugations, which stand without a
+  pronoun, are always masculine.
+- **The field stays put in the hierarchy.** `QuizView` draws the rows before the current one and
+  the rows after it as separate children around the one field, so the field keeps its identity,
+  and the keyboard its focus, as it moves down a row. An answered row shows the right conjugation
+  and its mark, so the feedback slot shows only a request for one more try.
+- **What it asks.** Five verbs a round from the level's band (all verbs at Advanced) that are
+  learned verb by verb and have all three key conjugations (`Verb.isAskedByVerbEssentials`): aller
+  and the third group, but not rendre's verbs, which the record keeps as patterns, nor gésir, nor
+  sortir (obtain). Distinct within a session until the band runs out. The level's tenses do not
+  apply, so a Beginner is asked passés composés and futurs.
+- **Re-asks.** A missed blank returns after the next step, as a step of its own whose other rows
+  are given in gray, and a second miss in the same verb joins it (`Quiz.reaskPlacement`).
+  Returning three questions later, as elsewhere, would drop it among another verb's blanks.
+- **Rounds.** Fifteen questions; the results offer **Five More Verbs** ("Encore cinq verbes") in
+  place of Ten More. Never ranked, no due items mixed in, no `ChangeLevelTip`. The results and the
+  last result name the level, whose band it drew from. The title row and the Live Activity read
+  "Verb Essentials" (`QuizScope.sessionTitle`).
+- **VoiceOver.** The verb is announced at a step's first blank only; a later blank announces its
+  tense. The field's label begins with its row's tense ("passé composé, elle, singular, blank"),
+  and every other row is one element: "indicatif présent, elle, singular, vient, right", or
+  "futur simple, elle, singular, not yet asked".
+- **The fixture.** `-CONJUGUER_QUIZ_FIXTURE essentials` asks venir, se souvenir, faire, prendre,
+  and aller, once Verb Essentials is started. Wrong answers worth typing, with the feminine default:
+  `a venu` (the auxiliary), `est souvenu` (the agreement), `faira` (the futur stem), `a prendu` (a
+  regular participle), and `est allé` (the agreement); each earns one more try with its line.
+
 ### Signals
 
 `quizStart` (`level`, `source`), `quizQuit` (`level`, `lastQuestionIndex`, `duration`, `source`),
 `quizCompletion` (`level`, `questionCount`, `duration`, `source`), and `quizAbandon` (`level`,
-`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, or `mistakes`, so a
+`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, or `verbEssentials`, so a
 three-question quiz does not inflate the ten-question quiz's completion rate.
 
 - **No signal carries a score or a count of right or wrong answers.** `lastQuestionIndex` is the

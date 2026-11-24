@@ -38,7 +38,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 12 | Done | 2026-11-23 | 2bc523b | T3.2, T3.3 (the session) | 12 |
 | 13 | Done | 2026-11-23 | 249f7b9 | T6.1, T6.6 (the leaderboard's place) | 13 |
 | 14 | Done | 2026-11-23 | 9568bdd | T4.2, T4.3 | 14 |
-| 15 | Not started | | | T5.1 | 15 |
+| 15 | Awaiting Josh | 2026-11-23 | | T5.1 | 15 |
 | 16 | Not started | | | T5.2 | 16 |
 | 17 | Not started | | | T5.4 | 17 |
 | 18 | Not started | | | T5.5 | 18 |
@@ -1776,7 +1776,7 @@ line, and the prompted second attempt shares Phase 4's mechanism.
 ## Phase 15: Key Conjugations
 
 **Suggestions:** T5.1. **Ports:** Konjugieren Phase 15 (`VerbEssentials.swift`,
-`VerbEssentialsRowView.swift`). **Depends on:** Phases 2 and 11. **Status:** Not started.
+`VerbEssentialsRowView.swift`). **Depends on:** Phases 2 and 11. **Status:** Awaiting Josh.
 
 An exercise for irregular verbs: given the infinitive, supply its key conjugations (il présent, il
 passé composé, il futur simple: `il ___ · il ___ · il ___`), each in its own blank of Phase 2's frame, each graded alone, each
@@ -1793,6 +1793,79 @@ bref).
 verb, a pronominal verb, and a verb with an irregular futur stem.
 
 **How it differed:**
+
+- **Asked of Josh (2026-11-23), before building.** The French name is **"L’essentiel du verbe"**,
+  over "Les incontournables" and "Verbe en bref". Konjugieren's in-session decisions (one blank
+  graded at a time with all three rows on screen, five verbs a round, an Exercises section of the
+  hub, Five More Verbs) carried over unasked; each is a guess he can overrule.
+- **The pronoun follows the setting, not the plan's `il ___`.** Every blank is an ordinary quiz
+  question of the third-person singular, so with the feminine default it reads `elle [ ]` and
+  expects est venue, as any quiz does since Josh kept agreement required on 2026-11-22. The verb
+  page's key conjugations stay masculine, since they stand without a pronoun. Forcing il would have
+  meant threading a gender through grading, frames, diagnoses, and corrections, for one exercise.
+  For Josh to judge.
+- **One blank, one question**, as in Konjugieren: a verb is three `QuizQuestion`s sharing a new
+  `stepID`. One more try (Phase 4), the diagnosis (Phase 14), the held correction, and the
+  practice record apply per blank unchanged; `PracticeItem.exercised` already maps the il présent,
+  passé composé, and futur to the three stems. The frame (Phase 2) is reused as is, one per row,
+  so a pronominal verb's rows read `elle se`, `elle s'`, `elle se`.
+- **Which verbs.** "Irregular" became `Verb.isAskedByVerbEssentials`: learned verb by verb in the
+  record (aller and the third group, not rendre's family, which `VerbDraw.isIrregular` counts but
+  the record keeps as patterns, so a rendre blank would have moved a pattern item), with all three
+  key conjugations (not gésir), and not sortir (obtain). From the level's band, all verbs at
+  Advanced; the level's tenses do not apply, so a Beginner is asked passés composés and futurs, as
+  Konjugieren's Elementary learner is asked Präteritum. A real Intermediate draw opened on
+  extraire.
+- **The screen.** `QuizView` draws the rows before the current one and those after it around the
+  one field, as Konjugieren does, and the keyboard stayed up as the field moved down. Each row is
+  the tense name in blue above its frame; an answered row shows the right conjugation in the app's
+  red-letter style with its mark, a re-ask's given rows are gray, and a pending row is an empty
+  outlined box. The question block hides its tense line. **Departed from Konjugieren:** the
+  feedback slot shows only the one-more-try prompt, since the first simulator pass showed every
+  row's mark twice, once on the row and once above the next field.
+- **Re-asks**, ported: a missed blank returns after the next step as a step of its own, with its
+  other rows given, and a second miss in the same verb joins it (`Quiz.reaskPlacement`, which
+  replaced the bare `reaskPosition` call in `process`). A miss in a verb that follows a re-ask step
+  returns after that re-ask step, not after the next fresh verb, as in Konjugieren.
+- **The hub.** A new Exercises card ("Exercices") between From Your Practice and the foot, with
+  one row whose detail is "Five irregular verbs, three conjugations each: prend · a pris ·
+  prendra" (no-break spaces keep each form whole). Review's and My Mistakes' row became a shared
+  `QuizHubRow`; their identifiers are unchanged. Start invalidates `TryQuizTip`, as the other rows
+  do. `QuizScope.sessionTitle` names the session in the title row and the Live Activity.
+- **Rounds and results.** Fifteen questions; the results offer "Five More Verbs" / "Encore cinq
+  verbes", which draws verbs the session has not asked while the band lasts. Never ranked, no due
+  items, no `ChangeLevelTip`. Unlike Review, it asks by level (the band), so the results and Last
+  Quiz name the level ("Verb Essentials · Intermediate · today").
+- **Analytics.** A new `source` value, `verbEssentials`. `quizCompletion` keeps its
+  `questionCount`, 15 a round, since a round's length depends on no answer. Staged in
+  [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md) in both languages.
+- **VoiceOver.** The full announcement at a step's first blank; a later blank says only "Tense:"
+  and its tense. The field's label begins with its row's tense, and each other row is one element
+  ("indicatif présent, elle, singular, vient, right"). Not heard by ear.
+- **Strings:** ten, `QuizView.exercises` and nine `VerbEssentials.*`.
+- **A fixture**, `-CONJUGUER_QUIZ_FIXTURE essentials`, used only once Verb Essentials starts:
+  venir, se souvenir, faire, prendre, and aller, with five wrong answers listed in
+  `docs/feature_architecture.md` § Verb Essentials and pinned by a test as diagnosed.
+- **Tests:** 747 to 764, all passing through `run_tests.sh` (the iPhone simulator is in English).
+  `VerbEssentialsTests`, 11 functions: a step's cells, each blank's answers by gender for venir,
+  aller, se souvenir, faire, envoyer, and voir; a pronominal verb's frames; the fixture's diagnosed
+  answers; which verbs are asked (13 cases); the draw over twenty seeds; asked verbs last; the
+  scope; and three re-ask placements. Nested in `QuizTests`, 6: a round's five steps, each blank
+  recorded alone, the rows, a re-ask's given rows, a diagnosed blank's half points, and Five More
+  with the signals, the last result, and no score.
+- **Verified on the iPhone 17**, light. In French, the fixture: the hub's Exercices card, venir's
+  three rows, vient right, a venu prompting "Venir se conjugue avec être…", est venue on the second
+  try at half points, a held futur correction with the futur row's field above it, se souvenir's
+  `elle se` and `elle s'`, a re-ask step with its other rows given, and results of 135 with "Encore
+  cinq verbes". In English, a real draw (extraire) holding a correction with the two rows still to
+  come below it. **On the iPad Pro 11** in English and dark: the hub with the Exercices card, and
+  venir's rows at full width with the auxiliary prompt. Not tried: VoiceOver by ear, the software
+  keyboard, the Live Activity, and Five More on screen (unit-tested).
+- **Seen, not changed.** On the iPad, text typed right after the row's tap did not reach the field,
+  so the first blank went in empty. Konjugieren saw the same with a hardware keyboard.
+- **For Josh to judge:** the name in the title row; elle rather than il; the description's example
+  (prend · a pris · prendra rather than an être verb, so it reads the same under either gender);
+  the gray given rows of a re-ask; and whether Beginner should be asked passé composé and futur.
 
 ## Phase 16: Models, One Then Mixed
 

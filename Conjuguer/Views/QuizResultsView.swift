@@ -64,7 +64,7 @@ struct QuizResultsView: View {
           Button {
             quiz.continueSession()
           } label: {
-            Label(L.ResultsView.tenMore, systemImage: "plus")
+            Label(quiz.scope.isVerbEssentials ? L.VerbEssentials.fiveMore : L.ResultsView.tenMore, systemImage: "plus")
               .buttonLabel()
               .frame(maxWidth: Self.tenMoreMaxWidth)
           }
@@ -72,7 +72,7 @@ struct QuizResultsView: View {
           .controlSize(.large)
           .frame(maxWidth: .infinity)
           .padding(.top, Layout.defaultSpacing)
-          .accessibilityHint(L.ResultsView.tenMoreHint)
+          .accessibilityHint(quiz.scope.isVerbEssentials ? L.VerbEssentials.fiveMoreHint : L.ResultsView.tenMoreHint)
           .accessibilityIdentifier("results_ten_more")
         }
       }

@@ -83,6 +83,7 @@ enum AnalyticsSource: String, CaseIterable {
   case shortcut
   case spotlight
   case tab
+  case verbEssentials
   case verbPage
   case widget
 }

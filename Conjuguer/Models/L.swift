@@ -673,6 +673,10 @@ enum L {
       String(localized: "QuizView.lastQuiz")
     }
 
+    static var exercises: String {
+      String(localized: "QuizView.exercises")
+    }
+
     static var viewLeaderboard: String {
       String(localized: "QuizView.viewLeaderboard")
     }
@@ -1349,6 +1353,44 @@ enum L {
 
     static var mistakesHint: String {
       String(localized: "PracticeSession.mistakesHint")
+    }
+  }
+
+  enum VerbEssentials {
+    static var title: String {
+      String(localized: "VerbEssentials.title")
+    }
+
+    static var description: String {
+      String(localized: "VerbEssentials.description")
+    }
+
+    static var startHint: String {
+      String(localized: "VerbEssentials.startHint")
+    }
+
+    static var fiveMore: String {
+      String(localized: "VerbEssentials.fiveMore")
+    }
+
+    static var fiveMoreHint: String {
+      String(localized: "VerbEssentials.fiveMoreHint")
+    }
+
+    static var notYetAsked: String {
+      String(localized: "VerbEssentials.notYetAsked")
+    }
+
+    static var right: String {
+      String(localized: "VerbEssentials.right")
+    }
+
+    static var rightOnSecondTry: String {
+      String(localized: "VerbEssentials.rightOnSecondTry")
+    }
+
+    static var wrong: String {
+      String(localized: "VerbEssentials.wrong")
     }
   }
 
