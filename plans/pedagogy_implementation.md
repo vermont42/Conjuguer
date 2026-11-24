@@ -35,7 +35,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 9 | Done | 2026-11-23 | b181958 | T2.8 | 9 |
 | 10 | Done | 2026-11-23 | 33da4be | T2.9, Decision 8 | 10 |
 | 11 | Done | 2026-11-23 | 915be1c | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
-| 12 | Awaiting Josh | 2026-11-23 | | T3.2, T3.3 (the session) | 12 |
+| 12 | Done | 2026-11-23 | 2bc523b | T3.2, T3.3 (the session) | 12 |
 | 13 | Not started | | | T6.1, T6.6 (the leaderboard's place) | 13 |
 | 14 | Not started | | | T4.2, T4.3 | 14 |
 | 15 | Not started | | | T5.1 | 15 |
@@ -1451,7 +1451,7 @@ answered, the record survives a relaunch, and tests pin the mapping and the sche
 ## Phase 12: Review and My Mistakes
 
 **Suggestions:** T3.2, T3.3 (the session). **Ports:** Konjugieren Phase 12 (`QuizDueItems.swift`).
-**Depends on:** Phase 11. **Status:** Awaiting Josh.
+**Depends on:** Phase 11. **Status:** Done.
 
 - **Review.** A session of due items from the record: an irregular verb's item asks its key
   conjugation, and a pattern asks that tense and person of a verb of the pattern from the learner's
