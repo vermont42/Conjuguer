@@ -1,6 +1,227 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "PracticeSession.heading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From Your Practice"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "D’après votre suivi"
+          }
+        }
+      }
+    },
+    "PracticeSession.review" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Review"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réviser"
+          }
+        }
+      }
+    },
+    "PracticeSession.mistakes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Practice My Mistakes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revoir mes erreurs"
+          }
+        }
+      }
+    },
+    "PracticeSession.reviewCountSingular" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ question due"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ question à réviser"
+          }
+        }
+      }
+    },
+    "PracticeSession.reviewCountPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ questions due"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ questions à réviser"
+          }
+        }
+      }
+    },
+    "PracticeSession.mistakesCountSingular" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ question missed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ question manquée"
+          }
+        }
+      }
+    },
+    "PracticeSession.mistakesCountPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ questions missed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ questions manquées"
+          }
+        }
+      }
+    },
+    "PracticeSession.reviewNextDueTomorrow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing is due today. The next review is tomorrow."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien à réviser aujourd’hui. La prochaine révision est demain."
+          }
+        }
+      }
+    },
+    "PracticeSession.reviewNextDueDays" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing is due today. The next review is in %@ days."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien à réviser aujourd’hui. La prochaine révision est dans %@ jours."
+          }
+        }
+      }
+    },
+    "PracticeSession.reviewEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing is scheduled yet. Questions you answer in a quiz, and irregular verbs you look up, come due for review a day or more later."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien n’est encore prévu. Les questions auxquelles vous répondez dans un quiz, et les verbes irréguliers que vous consultez, reviennent en révision au bout d’un jour ou plus."
+          }
+        }
+      }
+    },
+    "PracticeSession.mistakesEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No mistakes to practice. A question you miss in a quiz waits here until you answer it right."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune erreur à revoir. Une question manquée dans un quiz vous attend ici jusqu’à ce que vous y répondiez juste."
+          }
+        }
+      }
+    },
+    "PracticeSession.reviewHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starts a quiz of the questions due for review"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commence un quiz des questions à réviser"
+          }
+        }
+      }
+    },
+    "PracticeSession.mistakesHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starts a quiz of the questions you last missed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commence un quiz des questions manquées"
+          }
+        }
+      }
+    },
     "ReviewCard.practicedEarlier" : {
       "extractionState" : "manual",
       "localizations" : {

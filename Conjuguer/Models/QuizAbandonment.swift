@@ -15,7 +15,8 @@ enum QuizAbandonment {
   struct Entry: Codable, Equatable {
     let level: String
     let source: String
-    let lastQuestionIndex: Int
+    /// Nil for Review or My Mistakes, whose question reached is not sent.
+    let lastQuestionIndex: Int?
   }
 
   static let key = "quizzesInProgress"
@@ -41,11 +42,14 @@ enum QuizAbandonment {
       return
     }
     for entry in entries.values {
-      analytics.signal(name: .quizAbandon, parameters: [
+      var parameters = [
         ParameterKey.level.rawValue: entry.level,
-        ParameterKey.lastQuestionIndex.rawValue: "\(entry.lastQuestionIndex)",
         ParameterKey.source.rawValue: entry.source
-      ])
+      ]
+      if let lastQuestionIndex = entry.lastQuestionIndex {
+        parameters[ParameterKey.lastQuestionIndex.rawValue] = "\(lastQuestionIndex)"
+      }
+      analytics.signal(name: .quizAbandon, parameters: parameters)
     }
     getterSetter.remove(key: key)
   }

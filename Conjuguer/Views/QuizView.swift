@@ -117,8 +117,11 @@ struct QuizView: View {
         if sheetScope == nil {
           GeometryReader { proxy in
             ScrollView {
-              notStartedBriefing
-                .frame(maxWidth: .infinity, minHeight: proxy.size.height)
+              VStack(spacing: Layout.doubleDefaultSpacing) {
+                notStartedBriefing
+                recordSessions
+              }
+              .frame(maxWidth: .infinity, minHeight: proxy.size.height)
             }
           }
         } else {
@@ -140,7 +143,7 @@ struct QuizView: View {
 
   private var titleRow: some View {
     HStack {
-      Text(sheetScope?.title ?? L.Navigation.quiz)
+      Text(sheetScope?.title ?? tabSessionTitle ?? L.Navigation.quiz)
         .headingLabel()
         .lineLimit(2)
         .minimumScaleFactor(0.7)
@@ -157,6 +160,14 @@ struct QuizView: View {
         .funButton(tint: .customRed)
       }
     }
+  }
+
+  /// Review or My Mistakes names itself in the title, since its questions look like any quiz's.
+  private var tabSessionTitle: String? {
+    guard sheetScope == nil, quiz.quizState == .inProgress || quiz.shouldShowResults else {
+      return nil
+    }
+    return quiz.scope.recordSession?.title
   }
 
   private var inProgressContent: some View {
@@ -473,6 +484,28 @@ struct QuizView: View {
     }
   }
 
+  private var recordSessions: some View {
+    VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
+      Text(L.PracticeSession.heading)
+        .font(subheadingFont)
+        .foregroundStyle(Color.customForeground)
+        .accessibilityAddTraits(.isHeader)
+        .accessibilityIdentifier("quiz_record_sessions")
+
+      ForEach(QuizRecordSession.allCases, id: \.self) { session in
+        QuizRecordSessionRow(
+          session: session,
+          askableCount: session.askableCount(from: world.practice),
+          daysUntilNextDue: world.practice.daysUntilNextDue()
+        ) {
+          start(scope: .recordSession(session))
+          TryQuizTip().invalidate(reason: .actionPerformed)
+        }
+      }
+    }
+    .card()
+  }
+
   private var myVerbs: [Verb] {
     world.learnerVerbs.myVerbs
   }
@@ -615,6 +648,100 @@ struct QuizView: View {
     quiz.quit()
     if sheetScope != nil {
       dismiss()
+    }
+  }
+}
+
+/// Review or My Mistakes on the Quiz tab: a button that starts the session while it has
+/// questions, and otherwise a line saying why it has none.
+private struct QuizRecordSessionRow: View {
+  let session: QuizRecordSession
+  let askableCount: Int
+  let daysUntilNextDue: Int?
+  let start: () -> Void
+
+  var body: some View {
+    if askableCount > 0 {
+      Button(action: start) {
+        content
+      }
+      .buttonStyle(.plain)
+      .accessibilityHint(hint)
+      .accessibilityIdentifier("quiz_\(identifier)_button")
+    } else {
+      content
+        .accessibilityIdentifier("quiz_\(identifier)_empty")
+    }
+  }
+
+  private var content: some View {
+    HStack(spacing: Layout.doubleDefaultSpacing) {
+      Image(systemName: systemImage)
+        .font(.title2)
+        .foregroundStyle(Color.customBlue)
+        .frame(width: 32)
+        .accessibilityHidden(true)
+
+      VStack(alignment: .leading, spacing: 2) {
+        Text(session.title)
+          .font(bodyEmphasisFont)
+          .foregroundStyle(Color.customForeground)
+        Text(detail)
+          .font(captionFont)
+          .foregroundStyle(Color.customGray)
+          .fixedSize(horizontal: false, vertical: true)
+      }
+
+      Spacer(minLength: 0)
+
+      if askableCount > 0 {
+        Image(systemName: "play.circle.fill")
+          .font(.title)
+          .foregroundStyle(Color.customBlue)
+          .accessibilityHidden(true)
+      }
+    }
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .contentShape(.rect)
+    .accessibilityElement(children: .combine)
+  }
+
+  private var detail: String {
+    switch session {
+    case .review:
+      if askableCount > 0 {
+        return L.PracticeSession.reviewCount(askableCount)
+      }
+      return daysUntilNextDue.map { L.PracticeSession.reviewNextDue(inDays: $0) } ?? L.PracticeSession.reviewEmpty
+    case .mistakes:
+      return askableCount > 0 ? L.PracticeSession.mistakesCount(askableCount) : L.PracticeSession.mistakesEmpty
+    }
+  }
+
+  private var hint: String {
+    switch session {
+    case .review:
+      return L.PracticeSession.reviewHint
+    case .mistakes:
+      return L.PracticeSession.mistakesHint
+    }
+  }
+
+  private var systemImage: String {
+    switch session {
+    case .review:
+      return "clock.arrow.circlepath"
+    case .mistakes:
+      return "arrow.uturn.backward.circle"
+    }
+  }
+
+  private var identifier: String {
+    switch session {
+    case .review:
+      return "review"
+    case .mistakes:
+      return "mistakes"
     }
   }
 }

@@ -1152,6 +1152,62 @@ enum L {
     }
   }
 
+  enum PracticeSession {
+    static var heading: String {
+      String(localized: "PracticeSession.heading")
+    }
+
+    static var review: String {
+      String(localized: "PracticeSession.review")
+    }
+
+    static var mistakes: String {
+      String(localized: "PracticeSession.mistakes")
+    }
+
+    static func reviewCount(_ count: Int) -> String {
+      let formattedCount = count.formatted()
+      if count == 1 {
+        return String(localized: "PracticeSession.reviewCountSingular", defaultValue: "\(formattedCount) question due")
+      } else {
+        return String(localized: "PracticeSession.reviewCountPlural", defaultValue: "\(formattedCount) questions due")
+      }
+    }
+
+    static func mistakesCount(_ count: Int) -> String {
+      let formattedCount = count.formatted()
+      if count == 1 {
+        return String(localized: "PracticeSession.mistakesCountSingular", defaultValue: "\(formattedCount) question missed")
+      } else {
+        return String(localized: "PracticeSession.mistakesCountPlural", defaultValue: "\(formattedCount) questions missed")
+      }
+    }
+
+    static func reviewNextDue(inDays days: Int) -> String {
+      if days <= 1 {
+        return String(localized: "PracticeSession.reviewNextDueTomorrow")
+      }
+      let formattedDays = days.formatted()
+      return String(localized: "PracticeSession.reviewNextDueDays", defaultValue: "Nothing is due today. The next review is in \(formattedDays) days.")
+    }
+
+    static var reviewEmpty: String {
+      String(localized: "PracticeSession.reviewEmpty")
+    }
+
+    static var mistakesEmpty: String {
+      String(localized: "PracticeSession.mistakesEmpty")
+    }
+
+    static var reviewHint: String {
+      String(localized: "PracticeSession.reviewHint")
+    }
+
+    static var mistakesHint: String {
+      String(localized: "PracticeSession.mistakesHint")
+    }
+  }
+
   enum VerbCollection {
     static var heading: String {
       String(localized: "VerbCollection.heading")

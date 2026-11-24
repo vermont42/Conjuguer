@@ -101,8 +101,22 @@ class Quiz {
     quizResults.filter { !$0.isReask }.prefix(scope.questionCount).reduce(0) { $0 + $1.points }
   }
 
+  /// Whether the results offer Ten More. Test Me's three questions do not continue, and Review or
+  /// My Mistakes continues only while the record has an item the session has not asked.
   var canContinue: Bool {
-    shouldShowResults && quizState == .notStarted && scope.continues && !questions.isEmpty
+    guard shouldShowResults, quizState == .notStarted, scope.continues, !questions.isEmpty else {
+      return false
+    }
+    guard let session = scope.recordSession else {
+      return true
+    }
+    let asked = askedItemKeys
+    return session.items(from: Current.practice, at: now()).contains { $0.isAskable && !asked.contains($0.key) }
+  }
+
+  /// The record's items this session has asked, which a Review or My Mistakes round skips.
+  private var askedItemKeys: Set<String> {
+    Set(questions.map { PracticeItem.exercised(by: $0.tense, of: $0.verb).key })
   }
 
   private var personNumbers = CyclingDeck(PersonNumber.allCases)
@@ -211,12 +225,15 @@ class Quiz {
 
   func quit() {
     Current.soundPlayer.play(Sound.randomSadTrombone)
-    Current.analytics.signal(name: .quizQuit, parameters: [
+    var parameters = [
       ParameterKey.level.rawValue: level.rawValue,
-      ParameterKey.lastQuestionIndex.rawValue: "\(lastQuestionIndex)",
       ParameterKey.duration.rawValue: durationBand,
       ParameterKey.source.rawValue: scope.source.rawValue
-    ])
+    ]
+    if scope.sendsQuestionCounts {
+      parameters[ParameterKey.lastQuestionIndex.rawValue] = "\(lastQuestionIndex)"
+    }
+    Current.analytics.signal(name: .quizQuit, parameters: parameters)
     teardown()
   }
 
@@ -234,7 +251,7 @@ class Quiz {
 
   private func recordProgress() {
     QuizAbandonment.record(
-      QuizAbandonment.Entry(level: level.rawValue, source: scope.source.rawValue, lastQuestionIndex: lastQuestionIndex),
+      QuizAbandonment.Entry(level: level.rawValue, source: scope.source.rawValue, lastQuestionIndex: scope.sendsQuestionCounts ? lastQuestionIndex : nil),
       id: abandonmentID,
       getterSetter: Current.getterSetter
     )
@@ -311,6 +328,16 @@ class Quiz {
   private func drawQuestions() -> [QuizQuestion] {
     if scope.verbs != nil {
       return scope.questions(level: level, using: &generator)
+    }
+
+    if let session = scope.recordSession {
+      return QuizDraw.sessionQuestions(
+        for: session.items(from: Current.practice, at: now()),
+        band: scope.band(at: level),
+        excluded: askedItemKeys,
+        limit: scope.questionCount,
+        using: &generator
+      )
     }
 
     #if DEBUG
@@ -648,12 +675,15 @@ class Quiz {
     }
     shouldShowResults = true
     Current.soundPlayer.play(Sound.randomApplause)
-    Current.analytics.signal(name: .quizCompletion, parameters: [
+    var parameters = [
       ParameterKey.level.rawValue: level.rawValue,
-      ParameterKey.questionCount.rawValue: "\(sessionQuestionCount)",
       ParameterKey.duration.rawValue: durationBand,
       ParameterKey.source.rawValue: scope.source.rawValue
-    ])
+    ]
+    if scope.sendsQuestionCounts {
+      parameters[ParameterKey.questionCount.rawValue] = "\(sessionQuestionCount)"
+    }
+    Current.analytics.signal(name: .quizCompletion, parameters: parameters)
     teardown()
   }
 

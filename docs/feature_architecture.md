@@ -512,6 +512,8 @@ same.
 | `qrCode` | Yes | `viewPracticeSet` and the quiz signals: a practice set opened from its QR code |
 | `quizCorrection` | Yes | The verb link in a quiz's held correction (§ Quiz) |
 | `custom` | Yes | The quiz signals only: a custom quiz from the Quiz tab (§ The Custom Quiz) |
+| `review` | Yes | The quiz signals only: Review, from the Quiz tab (§ Review and My Mistakes) |
+| `mistakes` | Yes | The quiz signals only: Practice My Mistakes, from the Quiz tab (§ Review and My Mistakes) |
 
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
 a bare `Verb`, and the cells a search matched (`marks`). A link carries `source` as a query item
@@ -1288,11 +1290,45 @@ before the card, becomes its shown key conjugations' schedule; a regular verb's 
 record is saved even when nothing migrates, and Reset saves it empty rather than removing it, so
 that no later launch reads the old opens as schedules.
 
+### Review and My Mistakes
+
+Two sessions drawn from the practice record, started from a "From Your Practice" card below the
+Quiz tab's briefing card (`QuizRecordSession`, `QuizScope.recordSession`).
+
+- **Review** asks the record's due items, the most overdue first. **Practice My Mistakes** asks the
+  items whose last answer was wrong, the most recently missed first
+  (`PracticeRecord.missedItems()`); an item leaves once answered right, and a lookup does not clear
+  it.
+- **What is asked.** A key conjugation asks its il form of its verb, as the review card shows it. A
+  pattern asks its cell of a verb from the level's band that shares the pattern
+  (`QuizDraw.patternVerb`), or of any verb when the band has none, as it may not for a rare
+  spelling-change model. Neither is held to the level's tenses or band, so Review asks what the
+  default round's due items leave out (a passé simple at Beginner, a rare verb looked up). A verb's
+  due key conjugations sit together in the verb page's order, vient · est venu · viendra · vint,
+  at the place of the first drawn.
+- **Rounds.** Ten items, then Ten More while an askable item remains that the session has not
+  asked. Fewer than ten make a shorter round, whose results say "Correct: 1 / 2". My Mistakes
+  needs the exclusion, since a mistake missed again stays a mistake. Re-asks and one more try work
+  as in any quiz, and every answer moves the record.
+- **Never ranked**, mixing in no due items, and donating nothing to `ChangeLevelTip`. Closing the
+  results does not open the leaderboard. While a session runs or shows its results, the title row
+  reads "Review" or "Practice My Mistakes".
+- **The card.** A row with questions shows their count and a play symbol (`quiz_review_button`,
+  `quiz_mistakes_button`), and a tap starts the session. An empty row is not a button
+  (`quiz_review_empty`, `quiz_mistakes_empty`) and says why: Review gives the days to the next due
+  item, or, with nothing scheduled, says that quiz answers and irregular verbs looked up come due a
+  day or more later; My Mistakes says that a missed question waits there until answered right. Each
+  row is one VoiceOver element, its title and its count or reason, and a startable row has a hint.
+- **No counts in the signals.** A session shorter than ten is as long as the learner's due or
+  missed items, so its length would count wrong answers. `quizCompletion` omits `questionCount`,
+  and `quizQuit` and `quizAbandon` omit `lastQuestionIndex` (`QuizScope.sendsQuestionCounts`);
+  `QuizAbandonment.Entry.lastQuestionIndex` is optional.
+
 ### Signals
 
 `quizStart` (`level`, `source`), `quizQuit` (`level`, `lastQuestionIndex`, `duration`, `source`),
 `quizCompletion` (`level`, `questionCount`, `duration`, `source`), and `quizAbandon` (`level`,
-`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, or `custom`, so a
+`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, or `mistakes`, so a
 three-question quiz does not inflate the ten-question quiz's completion rate.
 
 - **No signal carries a score or a count of right or wrong answers.** `lastQuestionIndex` is the
@@ -1305,6 +1341,8 @@ three-question quiz does not inflate the ten-question quiz's completion rate.
 - **`quizCompletion`** is sent at each round's results, with `questionCount` the session's
   questions so far (10, 20, …), so Ten More shows without a signal of its own and Ten More itself
   sends no `quizStart`.
+- **Review and My Mistakes** send neither `questionCount` nor `lastQuestionIndex` (§ Review and
+  My Mistakes).
 - **`quizAbandon`** reports a quiz the app was left during. `QuizAbandonment` keeps one entry per
   `Quiz` in settings, written at the start and at each question and removed at a quit or the
   results, so an entry still there at the next launch belongs to a quiz that ended with the app.

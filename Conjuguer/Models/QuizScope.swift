@@ -31,10 +31,21 @@ struct QuizScope {
   /// A practice set's quiz runs in a sheet over the set, as a collection's does.
   var isPracticeSet = false
 
+  /// Review or My Mistakes, which draw from the practice record. Nil for every other quiz.
+  var recordSession: QuizRecordSession?
+
   /// Only the default quiz posts to its level's leaderboard and sets its best score: a score over
-  /// the learner's own verbs or tenses, or over three questions, compares with nothing.
+  /// the learner's own verbs, tenses, or practice record, or over three questions, compares with
+  /// nothing.
   var isRanked: Bool {
-    verbs == nil && custom == nil
+    verbs == nil && custom == nil && recordSession == nil
+  }
+
+  /// A Review or My Mistakes session shorter than ten is as long as the learner's due or missed
+  /// items, so its signals carry neither the questions asked nor the question reached: either
+  /// would tell how many answers were wrong.
+  var sendsQuestionCounts: Bool {
+    recordSession == nil
   }
 
   /// Only the default quiz mixes in items the practice record says are due, up to

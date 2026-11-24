@@ -5902,3 +5902,35 @@ second migration would then mistake every recent lookup for a fresh schedule.
 Settings gained Reset Practice behind a confirmation, and the privacy policy's "does not record
 your quiz answers" is staged to become "does not send", with a sentence saying the record stays on
 the device.
+
+## Review and My Mistakes (2026-11-23)
+
+Phase 12 of the pedagogy plan let the learner ask the practice record for a session. Phase 11 had
+given the quiz a memory, but the memory only surfaced three items at a time, mixed into a default
+round, and only those the learner's level asked. Now the Quiz tab has a "From Your Practice" card
+with two rows. Review asks up to ten items that have come due, the most overdue first. Practice My
+Mistakes asks up to ten items whose last answer was wrong, the most recently missed first, and an
+item leaves the list only when it is answered right; looking the verb up does not count.
+
+Most of the design came straight from Konjugieren, where the same phase was built nine days
+earlier. An irregular verb's item asks its il form, and a verb's due key conjugations come
+together in the order the verb page shows them, so a review of venir reads vient, est venu,
+viendra. A pattern, such as parler's nous form of the imparfait, is asked of some verb of the
+learner's band that shares it. Neither session is held to the level's tenses, so Review finally
+reaches the passé simple a Beginner looked up, which the default round leaves waiting.
+
+French forced one departure. In German every weak verb shares the same patterns, so any band holds
+a verb for any weak pattern. In French a pattern can belong to one spelling-change model, and a
+Beginner's hundred most frequent verbs may hold none of that model's verbs. The row would then
+count a question that Start could not ask. So a pattern looks beyond the band when the band has
+nothing, which costs a little rarity and keeps the count honest.
+
+The analytics needed the same care Konjugieren took. A Review of two due items is two questions
+long, so sending its length, or how far the learner got before quitting, would tell how many
+answers had been wrong, which the plan forbids any signal to carry. These sessions send only that
+they began, ended, or were quit, and from which row.
+
+Trying the screens turned up an older problem that this phase did not cause. At Advanced the quiz
+will ask a pronominal verb in the passé surcomposé, and the app's answer for se biler was "elles se
+ont été bilées", which no French speaker would write. It is noted for Josh to decide whether the
+quiz should stop asking that tense of pronominal verbs or the Conjugator should learn a form.

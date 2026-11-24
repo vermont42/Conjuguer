@@ -35,7 +35,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 9 | Done | 2026-11-23 | b181958 | T2.8 | 9 |
 | 10 | Done | 2026-11-23 | 33da4be | T2.9, Decision 8 | 10 |
 | 11 | Done | 2026-11-23 | 915be1c | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
-| 12 | Not started | | | T3.2, T3.3 (the session) | 12 |
+| 12 | Awaiting Josh | 2026-11-23 | | T3.2, T3.3 (the session) | 12 |
 | 13 | Not started | | | T6.1, T6.6 (the leaderboard's place) | 13 |
 | 14 | Not started | | | T4.2, T4.3 | 14 |
 | 15 | Not started | | | T5.1 | 15 |
@@ -1451,7 +1451,7 @@ answered, the record survives a relaunch, and tests pin the mapping and the sche
 ## Phase 12: Review and My Mistakes
 
 **Suggestions:** T3.2, T3.3 (the session). **Ports:** Konjugieren Phase 12 (`QuizDueItems.swift`).
-**Depends on:** Phase 11. **Status:** Not started.
+**Depends on:** Phase 11. **Status:** Awaiting Josh.
 
 - **Review.** A session of due items from the record: an irregular verb's item asks its key
   conjugation, and a pattern asks that tense and person of a verb of the pattern from the learner's
@@ -1469,6 +1469,76 @@ answered, the record survives a relaunch, and tests pin the mapping and the sche
 empty states.
 
 **How it differed:**
+
+- **Nothing was asked of Josh.** The phase lists no Ask Josh items. Konjugieren's in-session
+  choices carried over where French did not make one awkward, and each is a guess he can overrule.
+- **Where the entry points live.** A "From Your Practice" card ("D’après votre suivi") below the
+  Quiz tab's briefing card, on every segment, with a row each for Review ("Réviser") and Practice
+  My Mistakes ("Revoir mes erreurs"). A row with questions shows their count and a play symbol,
+  and a tap starts the session at once. An empty row is not a button and says why: Review gives the
+  days to the next due item ("Nothing is due today. The next review is tomorrow."), or, with nothing
+  scheduled, that quiz answers and irregular verbs looked up come due a day or more later; My
+  Mistakes says that a missed question waits there until answered right. Unlike Konjugieren's, the
+  card sits above the fold on the iPhone 17, since Conjuguer's briefing card is shorter than
+  Konjugieren's hero and tiles. The picker was not extended: a fourth and fifth segment would not
+  fit "Tous les verbes" and "Sur mesure".
+- **What each session asks**, as Konjugieren's. Review: the record's due items, most overdue first.
+  My Mistakes: items whose last answer was wrong, most recently missed first
+  (`PracticeRecord.missedItems()`); a lookup does not clear a mistake. A key conjugation asks its il
+  form, the passé simple's included, of its verb. A pattern asks its cell of a verb from the
+  level's band that shares it, through `QuizDraw.patternVerb`, now shared with Phase 11's due
+  items. **Neither is held to the level's tenses or band**, so Review asks what Phase 11's default
+  rounds leave waiting (a passé simple below Advanced, a rare verb looked up). A verb's due key
+  conjugations sit together in stem order, vient · est venu · viendra · vint, at the place of the
+  first drawn.
+- **Departed from Konjugieren: a pattern no band verb has is asked of any verb.** Konjugieren's
+  weak patterns are shared by every weak verb, so its band always has one. A French
+  spelling-change model may have no verb in a Beginner's top 100, and skipping its pattern would
+  leave a row counting a question that Start could not ask. Every verb is searched only then.
+- **Rounds.** Ten items, then Ten More while an askable item remains that the session has not
+  asked; fewer make a shorter round, whose results say "Correct: 1 / 3". Conjuguer's
+  `sessionQuestionCount` already counted the questions asked, so Konjugieren's change to
+  `Quiz.questionCount` had no counterpart. `canContinue` checks the record for a record session.
+  The Live Activity starts as for any ten-question quiz from the tab.
+- **The title.** While a session runs or shows its results, the Quiz tab's title row reads
+  "Review" or "Practice My Mistakes" ("Réviser", "Revoir mes erreurs"). Conjuguer draws its own
+  title row, so the name shows on the iPad too, which Konjugieren's navigation title could not.
+- **Analytics.** New `source` values `review` and `mistakes`. **A record session sends no counts:**
+  `quizCompletion` omits `questionCount`, and `quizQuit` and `quizAbandon` omit
+  `lastQuestionIndex` (`QuizScope.sendsQuestionCounts`), since a short session's length would be a
+  count of wrong answers. `QuizAbandonment.Entry.lastQuestionIndex` became optional, which still
+  decodes stored entries. Never ranked, so no Game Center post, no best score, no leaderboard on
+  closing the results, and no `ChangeLevelTip` donation. Staged in
+  [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md) in both languages.
+- **VoiceOver.** No new quiz state. Each row is one element, its title and its count or reason,
+  and a startable row has a hint ("Starts a quiz of the questions due for review"). Thirteen
+  `PracticeSession.*` strings.
+- **Found by looking.** The card first carried its identifier on the card itself, which overrode
+  the rows' (the skill's table warns of this); it is now on the heading, `quiz_record_sessions`.
+  Also found, and **not fixed, since it predates this phase:** at Advanced the quiz asks a
+  pronominal verb's passé surcomposé, and the Conjugator answers "elles se ont été bilées" (se
+  biler). The passé surcomposé of a pronominal verb is hardly used, and the form is wrong as
+  written. Josh should decide whether the quiz stops asking it or the Conjugator learns a form.
+- **Tests:** 705 to 718, all passing through `run_tests.sh` (the iPhone simulator is in English).
+  `QuizRecordSessionTests` (7 functions: missed items most recent first with a lookup not clearing
+  one, days to the next due item, a session beyond the level's tenses and band, a pattern no band
+  verb has, a verb's key conjugations together, excluded and unaskable items with the limit, and
+  never ranked) and six nested in `QuizTests` (twelve due items asked as ten then two, a short
+  Review that does not continue, an empty record starting nothing, a mistake leaving once answered
+  right, a mistake missed again not returning in Ten More, and signals without counts and no score
+  posted).
+- **Verified on the iPhone 17**, light. In English, from the real install's record: the card with 3
+  due and 1 missed; a Review titled "Review" asking venir's présent then passé composé then futur;
+  one right and two wrong, with re-asks; results of "Correct: 1 / 3" with no Ten More; the rows
+  after ("Nothing is due today. The next review is tomorrow.", "2 questions missed"); a My Mistakes
+  of venir's two, answered right, 2 / 2; and both empty states. In French: the card's strings, a
+  default quiz quit after three misses, and "Revoir mes erreurs" asking a finir pattern of
+  empuantir, an être passé surcomposé pattern of se biler (Advanced's band is every verb), and
+  vaincre's futur, 0 / 3, no Ten More. **On the iPad Pro 11** in English and dark: the card at full
+  width, a Review whose title shows above the question, a re-ask, and Quit, with the record kept
+  across a relaunch. Not tried: VoiceOver by ear, Ten More from a real record of more than ten
+  (unit-tested), the "nothing scheduled" line on screen (its string is in both catalogs), and a real
+  day passing.
 
 ## Phase 13: The Practice Hub
 

@@ -187,6 +187,26 @@ nonisolated struct PracticeRecord: Codable, Equatable, Sendable {
       .compactMap { PracticeItem(key: $0.key) }
   }
 
+  /// The items whose last answer was wrong, the most recently missed first. A lookup leaves a
+  /// mistake a mistake; only a right answer clears it.
+  func missedItems() -> [PracticeItem] {
+    let missed: [(key: String, answered: Date)] = entries.compactMap { key, entry in
+      guard entry.lastAnswerWasRight == false, let answered = entry.lastAnswered else {
+        return nil
+      }
+      return (key, answered)
+    }
+    return missed
+      .sorted { lhs, rhs in
+        lhs.answered != rhs.answered ? lhs.answered > rhs.answered : lhs.key < rhs.key
+      }
+      .compactMap { PracticeItem(key: $0.key) }
+  }
+
+  func nextDue(after date: Date) -> Date? {
+    entries.values.map(\.schedule.due).filter { $0 > date }.min()
+  }
+
   /// Whole days from `earlier` to `date`, counted by the calendar: 1 for yesterday.
   static func daysBetween(_ earlier: Date, and date: Date, calendar: Calendar = .current) -> Int? {
     calendar.dateComponents([.day], from: calendar.startOfDay(for: earlier), to: calendar.startOfDay(for: date)).day

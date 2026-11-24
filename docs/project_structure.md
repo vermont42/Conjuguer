@@ -100,7 +100,8 @@ Conjuguer/
 │   ├── PracticeItemMapping.swift # Which practice item a question exercises: a regular family's pattern (parler's, finir's, rendre's, or a spelling-change model's where it marks the cell) or an irregular verb's key conjugation by stem; a lookup's items
 │   ├── PracticeStore.swift     # @Observable Current.practice: records answers and lookups in the PracticeRecord, saves it to the App Group's defaults, migrates the review card's old per-verb schedules, offers the review card, and resets
 │   ├── PracticeSet.swift       # A custom quiz shared as a quiz/set link or QR code: reading and writing the link, the level carried only when needed, My Verbs as a list of 50, its scope, summary, share text, and PracticeSetRequest
-│   ├── QuizDueItems.swift      # Up to three due practice items mixed into a default round, within its level's tenses and band
+│   ├── QuizDueItems.swift      # Up to three due practice items mixed into a default round, within its level's tenses and band; QuizDraw.patternVerb, a verb that shares a pattern
+│   ├── QuizRecordSession.swift # Review and Practice My Mistakes: sessions drawn from the practice record beyond the level's tenses and band, a verb's key conjugations together, QuizScope.recordSession
 │   ├── QuizScope.swift         # What a quiz asks about (every verb, My Verbs, one verb's page, a collection, a custom choice), its count and source; the level's mix over chosen verbs, Test Me's three tenses, Verb.hasCell, canBeQuizzed(at:)
 │   ├── QuizLevel.swift         # Setting enum: the four quiz levels (Beginner to Advanced) and the tenses each asks; QuizTenseSlot, a tense's cells, weight, and verb pools; each level's frequency band
 │   ├── QuizQuestion.swift      # One quiz question (verb + tense), and whether it is a missed question asked again
@@ -310,6 +311,7 @@ ConjuguerTests/
     ├── PracticeItemTests.swift         # The practice items: pinned and unreadable keys, which verbs are patterns, spelling-change cells, compound tenses with être, every tense's stem, doubled entries, lookups, the shown stems, items asking their own cell back
     ├── PracticeRecordTests.swift       # The practice record: the ladder through answers, due order, lookups, the card's review, snooze, choice, and caption, patterns and passé simple never on the card, a relaunch, the migration, a reset that stays
     ├── QuizPracticeTests.swift         # Nested in QuizTests: answers kept on quit, every scope writing, due items within the level and band, at most three a round, none in a scoped quiz
+    ├── QuizRecordSessionTests.swift    # Review and My Mistakes: missed items, days to the next due item, beyond the level, a pattern no band verb has, key conjugations together, exclusions and the limit; nested in QuizTests, rounds, Ten More, empty records, and signals without counts
     ├── RichTextTests.swift             # Rich-text markup parsing into blocks and segments
     ├── SearchReportTests.swift         # The search tracker's lifecycle, each finishSearch report, and that no parameter can echo the query
     ├── SettingsTests.swift             # Settings defaults (Suppress Review Card off), persistence, the quiz difficulty's migration to a level, and malformed-value handling (serialized)

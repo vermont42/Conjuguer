@@ -98,6 +98,18 @@ final class PracticeStore {
     return record.dueItems(at: date)
   }
 
+  func missedItems() -> [PracticeItem] {
+    migrateIfNeeded()
+    return record.missedItems()
+  }
+
+  /// Whole days until Review next has an item to ask: 1 for tomorrow. Nil when nothing is
+  /// scheduled.
+  func daysUntilNextDue(at date: Date = .now) -> Int? {
+    migrateIfNeeded()
+    return record.nextDue(after: date).flatMap { PracticeRecord.daysBetween(date, and: $0, calendar: calendar) }
+  }
+
   /// The irregular verb whose shown key conjugation is longest overdue, with each of its due key
   /// conjugations that the card shows. A passé simple, which the card does not show, waits for a
   /// quiz.

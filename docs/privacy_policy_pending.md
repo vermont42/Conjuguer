@@ -590,3 +590,55 @@ L'application conserve une liste des verbes que vous avez ouverts et des verbes 
 
 L'application conserve aussi un suivi des exercices : pour chaque conjugaison que vos réponses aux quiz et vos consultations ont touchée, si votre dernière réponse était juste et le jour où elle doit être révisée, afin que les quiz et les cartes de révision la reproposent. Ce suivi reste sur votre appareil et n'est jamais envoyé. « Réinitialiser le suivi », dans les Paramètres, l'efface.
 ```
+
+## Review and My Mistakes (pedagogy plan, Phase 12, 2026-11-23)
+
+The Quiz tab gains two sessions drawn from the practice record: Review, of the conjugations due
+for review, and Practice My Mistakes, of those whose last answer was wrong. The quiz signals send
+two new `source` values, `review` and `mistakes`. **These sessions send no question counts.**
+`quizCompletion` omits `questionCount`, and `quizQuit` and `quizAbandon` omit the question reached,
+because a session shorter than ten is exactly as long as the learner's due or missed items, so its
+length would be a count of wrong answers. Neither session posts to Game Center, which section 6
+already allows. This section replaces the quiz bullet that the practice sets section above gives,
+so apply it after that one, and it adds a clause to the two bullets the section on ten questions
+gives.
+
+### English
+
+The bullet on quiz lifecycle events now reads:
+
+```
+- Quiz lifecycle events (starting, quitting, or completing a quiz), and where the quiz began: the Quiz tab, over every verb, over My Verbs, over a custom choice, as a review of what is due, or as practice of your mistakes, a verb's page, a collection, or a practice set opened from a shared link or a QR code, with which collection for the four featured ones (a model's collection is named only as a model); for a custom quiz or a practice set, whether it chose tenses, verbs, or both, but not which
+```
+
+The bullet on progress in a quiz now reads:
+
+```
+- How far you progressed in a quiz if you quit early or leave the app during it (the question number reached, reported the next time you open the app), except in a review or in practice of your mistakes, whose length would tell how many answers were wrong
+```
+
+The bullet on how long a quiz lasted now reads:
+
+```
+- Roughly how long a quiz lasted when you complete or quit it (under 3 seconds, 3 to 15 seconds, 15 to 40 seconds, 40 seconds to 2 minutes, or longer), and how many questions it had reached when you complete it (10, or 20 or more if you asked for ten more), except for a review or practice of your mistakes
+```
+
+### French
+
+Le point sur les événements du cycle de vie d'un quiz devient :
+
+```
+- Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes, sur « Mes verbes », sur mesure, en révision de ce qui est à revoir ou pour revoir vos erreurs, la page d'un verbe, une collection ou une série d'exercices ouverte depuis un lien partagé ou un code QR, avec le nom de la collection pour les quatre collections mises en avant (la collection d'un modèle est désignée seulement comme celle d'un modèle) ; pour un quiz sur mesure ou une série d'exercices, s'il porte sur des temps, des verbes ou les deux, mais pas lesquels
+```
+
+Le point sur la progression dans un quiz devient :
+
+```
+- Votre progression dans un quiz si vous l'abandonnez prématurément ou quittez l'application pendant celui-ci (le numéro de la question atteinte, transmis à la prochaine ouverture de l'application), sauf en révision ou pour revoir vos erreurs, dont la longueur révélerait le nombre de réponses fausses
+```
+
+Le point sur la durée d'un quiz devient :
+
+```
+- La durée approximative d'un quiz lorsque vous le terminez ou l'abandonnez (moins de 3 secondes, de 3 à 15 secondes, de 15 à 40 secondes, de 40 secondes à 2 minutes, ou davantage) et le nombre de questions atteint lorsque vous le terminez (10, ou 20 et plus si vous avez demandé dix questions de plus), sauf en révision ou pour revoir vos erreurs
+```

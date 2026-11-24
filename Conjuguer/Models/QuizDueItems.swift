@@ -38,23 +38,36 @@ extension QuizDraw {
           continue
         }
         questions.append(QuizQuestion(verb: verb, tense: tense))
-      case let .pattern(model, _, _, _):
-        func fits(_ verb: Verb) -> Bool {
-          verb.hasCell(tense) && PracticeItem.exercised(by: tense, of: verb) == item
-        }
-        // A base's own verbs share every cell of its pattern and need no conjugating to check, so
-        // the rest of its family, manger's verbs for parler's, is searched only when none fits.
-        var fitting = bandVerbs.filter { $0.model == model && fits($0) }
-        if fitting.isEmpty, PracticeItem.patternBases.contains(model) {
-          fitting = bandVerbs.filter { $0.model != model && PracticeItem.patternBase(of: $0) == model && fits($0) }
-        }
-        guard let verb = fitting.randomElement(using: &generator) else {
+      case .pattern:
+        guard let verb = patternVerb(for: item, tense: tense, from: bandVerbs, using: &generator) else {
           continue
         }
         questions.append(QuizQuestion(verb: verb, tense: tense))
       }
     }
     return questions
+  }
+
+  /// A verb of `verbs` whose `tense` exercises the pattern `item`, drawn at random. A base's own
+  /// verbs share every cell of its pattern and need no conjugating to check, so the rest of its
+  /// family, manger's verbs for parler's, is searched only when none fits.
+  static func patternVerb(
+    for item: PracticeItem,
+    tense: Tense,
+    from verbs: [Verb],
+    using generator: inout some RandomNumberGenerator
+  ) -> Verb? {
+    guard case let .pattern(model, _, _, _) = item else {
+      return nil
+    }
+    func fits(_ verb: Verb) -> Bool {
+      verb.hasCell(tense) && PracticeItem.exercised(by: tense, of: verb) == item
+    }
+    var fitting = verbs.filter { $0.model == model && fits($0) }
+    if fitting.isEmpty, PracticeItem.patternBases.contains(model) {
+      fitting = verbs.filter { $0.model != model && PracticeItem.patternBase(of: $0) == model && fits($0) }
+    }
+    return fitting.randomElement(using: &generator)
   }
 
   /// The drawn questions with the due ones placed among them at random.
