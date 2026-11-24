@@ -819,3 +819,40 @@ Le point sur les événements du cycle de vie d'un quiz devient :
 
 Le point sur la durée d'un quiz ne change pas : une série de « Phrases à trous » compte au plus
 10 questions, ce qu'il couvre déjà.
+
+## Mastery (pedagogy plan, Phase 20, 2026-11-24)
+
+The Quiz tab gains a Mastery page, which shows from the practice record on the device which forms
+and irregular verbs the learner has mastered. The page reports itself through the existing
+`viewAppeared` signal with the `viewName` `MasteryView`, and sends nothing about the record or the
+level. This section changes the screens bullet that the section on screens the browse plan added
+gives, and the practice-record paragraph that the section on the practice hub gives, so apply it
+after both.
+
+### English
+
+The bullet on screens now reads:
+
+```
+- Which screens you visit (verbs, lists of related verbs, verb models, collections of verbs, quiz, your mastery of conjugations, info articles, settings, and the tutor)
+```
+
+The practice-record paragraph now reads:
+
+```
+The app also keeps a practice record: for each conjugation your quiz answers and lookups have touched, whether your last answer was right and when it is next due for review, so that quizzes and review cards can bring it back and the Quiz tab can show what you have mastered, and the results of your last quiz, so that the Quiz tab can show them. The practice record stays on your device and is never sent. Reset Practice in Settings erases it.
+```
+
+### French
+
+Le point sur les écrans devient :
+
+```
+- Les écrans que vous consultez (verbes, listes de verbes apparentés, modèles de verbes, collections de verbes, quiz, votre maîtrise des conjugaisons, articles d'information, paramètres et le tuteur)
+```
+
+Le paragraphe sur le suivi des exercices devient :
+
+```
+L'application conserve aussi un suivi des exercices : pour chaque conjugaison que vos réponses aux quiz et vos consultations ont touchée, si votre dernière réponse était juste et le jour où elle doit être révisée, afin que les quiz et les cartes de révision la reproposent et que l'onglet Quiz puisse afficher ce que vous maîtrisez, ainsi que le résultat de votre dernier quiz, afin que l'onglet Quiz puisse l'afficher. Ce suivi reste sur votre appareil et n'est jamais envoyé. « Réinitialiser le suivi », dans les Paramètres, l'efface.
+```

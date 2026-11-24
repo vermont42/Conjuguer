@@ -832,6 +832,7 @@ sentences a speaker would use (§ Choice Questions).
 | `PracticeItemMapping.swift`, `PracticeStore.swift`, `QuizDueItems.swift` | Which item a question exercises; `Current.practice`, which records answers and lookups and offers the review card; and the due items a default round mixes in |
 | `QuizView.swift`, `QuizResultsView.swift`, `QuizResultView.swift` | The Quiz tab's practice hub (§ The Practice Hub), the quiz screen, and the results sheet |
 | `LastQuizResult.swift` | The last quiz's results, which the hub shows (§ The Practice Hub) |
+| `Mastery.swift`, `MasteryView.swift` | What the practice record has mastered at the level: the regular families' patterns, the spelling-change models' own, and the band's irregular verbs (§ Mastery) |
 | `ChoiceQuestion.swift`, `ChoiceQuestionView.swift`, `choice_questions.json` | The choice question a default round asks from Elementary up: its items, settings, reasons, draw, and card (§ Choice Questions) |
 | `LiveActivities.swift`, `LiveActivitiesReal.swift`, `LiveActivitiesSpy.swift` | Starts, updates, and ends the quiz's Live Activity through `Current.liveActivities`: ActivityKit on device and in the simulator, a spy under unit tests |
 
@@ -1412,7 +1413,8 @@ and how the last quiz went. From the top:
 - **The level's tile is a menu** (`quiz_level_menu`) of the four levels, with a chevron to say so.
   It writes the same setting as Settings' level tiles, sends nothing (as Settings sends nothing),
   and counts as the action `ChangeLevelTip` suggests.
-- **From Your Practice**: Review and My Mistakes (§ Review and My Mistakes), then **Last Quiz**
+- **From Your Practice**: Review and My Mistakes (§ Review and My Mistakes), then **Mastery**
+  (`quiz_mastery_button`), whose chevron says it pushes a page (§ Mastery), then **Last Quiz**
   (`quiz_last_result`), absent until a quiz has finished: "All Verbs · Elementary · today", then
   "Correct: 7 / 10 · Second Try: 1 · Score: 75".
 - **Exercises** (`quiz_exercises`): ways to practice beside the quiz, each a row like Review's
@@ -1435,6 +1437,42 @@ than a title, so that it reads in the current language. Review, My Mistakes, and
 practice keep no level. `PracticeStore` keeps it as JSON under `lastQuizResult` in the App Group's
 defaults, beside the record, on the device and never sent; Reset Practice forgets it, and the
 Practice Record card shows while either exists (`hasAnythingToReset`).
+
+### Mastery
+
+The hub's Mastery row ("Maîtrise") reads "Mastered: 10 of 368 patterns · 1 of 50 verbs" and pushes
+`MasteryView`, which shows what the practice record has made secure at the current level. Josh
+chose its shape on 2026-11-24 from mockups: a display that separates the kinds of item rather than
+a grid of verbs against tenses, which would have shown an irregular verb's présent, impératif, and
+imparfait as three cells always alike, since they are one item.
+
+- **Three states, each its own shape**: mastered (●, the third box or higher, whose interval is
+  seven days, `MasteryState.masteredBox`), learning (◐, any lower box, a lookup included), and not
+  yet practiced (○, no entry). A wrong answer sends an item back to learning.
+- **Regular Verbs** ("Verbes réguliers"): a card per tense of the level, with a row for each family
+  (-er for parler's patterns, -ir for finir's, -re for rendre's) and a mark under each person, or
+  one mark for a participle. A compound tense adds an être row for a family whose band verbs take
+  être (arriver, descendre, or a pronominal verb), since `PracticeItem` keeps those patterns apart.
+- **Spelling Changes** ("Particularités orthographiques"): a card per spelling-change model in the
+  `verbModels.xml` order, titled by its exemplar and its first changed form ("lancer · nous
+  lançons", the irregular letters in red), with a line per tense that marks only the cells the
+  model's change marks. Its other cells are the family's, on the cards above.
+- **Irregular Verbs** ("Verbes irréguliers"): the most frequent verbs of the level's band that are
+  learned verb by verb, at most fifty (thirty-six at Beginner, whose band holds no more), each
+  with its gloss and its key conjugations as far as the level asks: the présent at Beginner, the
+  passé composé and futur from Elementary, the passé simple at Advanced. A verb counts as mastered
+  once each of those is.
+- **Which patterns a level shows**: those a verb of its band can be asked in its tenses, so the
+  page and the default quiz agree: 46 at Beginner, 223 at Elementary, 368 at Intermediate, and 901
+  at Advanced, about half of them spelling changes. Which patterns exist depends only on a verb's
+  model and whether its compound tenses take être, so `Mastery` measures one verb of each kind per
+  cell, skipping a defective one, and caches the result per level. Measuring every verb of
+  Advanced's band would take seconds; a test measures the other three levels that way and checks
+  that the two agree.
+- **The page only shows.** A verb links to nothing, since opening its page is a lookup, which
+  sends its key conjugations back to the first box.
+- **Signals.** The page reports itself through `viewAppeared` with `viewName` `MasteryView`.
+  Nothing about the record or the level is sent.
 
 ### Verb Essentials
 

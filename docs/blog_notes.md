@@ -6399,3 +6399,43 @@ The last was a `superfluous_disable_command` on the bracketed `redundant_type_an
 exception around `ScrollToBottomTip.isUnlocked`. TipKit's `@Parameter` macro needs that `: Bool`,
 and 0.52.3 flagged it. 0.65.1 does not, so the bracket and its comment are gone. The macro still
 needs the type, so do not let a future autocorrect strip it. All 846 tests pass.
+
+## Mastery (2026-11-24)
+
+Pedagogy Phase 20 gives the Quiz tab a Mastery page that shows what the practice record has made
+secure at the learner's level. Konjugieren built the same page with two kinds of item: weak-verb
+patterns, a mark per person in each conjugationgroup, and the key conjugations of its 50 most
+frequent strong verbs. I expected a port. A throwaway probe test showed why it would not be one.
+It asked every band verb every cell of each level and counted the patterns the record could hold.
+The counts were 46 at Beginner, 223 at Elementary, 368 at Intermediate, and 901 at Advanced.
+About half came from the spelling-change models (manger, appeler, payer, and fifteen others),
+whose changed cells Phase 11 had made patterns of their own. The probe also found only 36
+irregular verbs in Beginner's top 100, so Konjugieren's fixed 50, which fit inside its own
+Beginner band, would here have listed 14 verbs a Beginner quiz never asks.
+
+So the mockups I showed Josh had three sections instead of two: the regular families (-er, -ir,
+-re) by tense with a mark under each person, then a card per spelling-change model showing only
+its changed cells, then the irregular verbs with their key conjugations. He chose that split over
+a grid, a row under My Mistakes in From Your Practice, and the band's irregular verbs up to 50,
+each the recommended option. The grid lost on a detail particular to how the record counts. An
+irregular verb's présent, impératif, and imparfait are one item, so in a verb-by-tense grid those
+three cells would always look alike.
+
+The patterns a level shows are the ones a band verb can be asked, so the page agrees with the
+quiz. Computing that the obvious way takes seconds at Advanced. Which patterns exist depends only
+on a verb's model and on whether its compound tenses take être, though, so the page measures one
+verb of each kind per cell and caches the result per level. A test checks the shortcut against
+the slow way at three levels. I ran it once at Advanced as well, where it passed, then left
+Advanced out, because ten seconds is a lot to add to every run.
+
+The page found two things in the record's mapping that a learner will see. Lancer's imparfait
+marks nous and vous (lancions) as changed cells, because the Conjugator capitalizes the c that
+returns there. At Advanced, fiche and maudire fill whole cards with compound tenses, since their
+participles are marked. Both are Phase 11's decisions, faithfully displayed, and Josh may want
+one of them changed.
+
+For the simulator check I seeded mastered items straight into the App Group plist, with the app
+terminated, and restored it afterward byte for byte. The page writes nothing, so that was safe.
+One trap: a swipe that starts on the tab bar taps Quiz and pops back to the hub. The suite went
+from 846 to 860 tests, all passing. Josh has yet to judge the page on his phone, which the phase
+requires before it is done.

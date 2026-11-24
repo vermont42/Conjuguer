@@ -93,6 +93,7 @@ Conjuguer/
 │   ├── LanguageModelServiceDummy.swift # No-op double for tests
 │   ├── LanguageModelServiceReal.swift  # FoundationModels implementation, incl. the ConjugationTool the model can call
 │   ├── literature_examples.json # Bundled literature/government/Wikipedia example sentences keyed by infinitif
+│   ├── Mastery.swift           # What the practice record has mastered at a level: the regular families' patterns by tense, the spelling-change models' own patterns, and the band's irregular verbs with their key conjugations
 │   ├── ModelSearch.swift       # Finds a model by its exemplar or by any of its verbs, through VerbSearch
 │   ├── ModelPractice.swift     # A model's practice, alone and mixed: what each model asks (Verb Essentials or its marked cells), when it is known, why a model has none, and the draws
 │   ├── MatchedConjugation.swift # The conjugation a search result matched, its cells, the row's line ("vais: Indicatif Présent (je)"), and MarkedConjugations for the verb page
@@ -215,6 +216,7 @@ Conjuguer/
     ├── InputView.swift         # DEBUG-only conjugation scratchpad
     ├── LoadingView.swift       # Splash shown while verbs.xml parses
     ├── MainTabView.swift       # Root TabView with five tabs; presents a practice set's sheet over any tab
+    ├── MasteryView.swift       # The hub's Mastery page: a legend, a card per tense for the regular families, a card per spelling-change model, and the irregular verbs
     ├── ModelBrowseView.swift   # Searchable, sortable list/grid of verb models, led by the featured collections
     ├── ModelPracticeCard.swift # A model's practice on its page and in the hub's list: Alone, Mixed with the known models, or why it has none
     ├── ModelPracticeListView.swift # The hub's Conjugation Models list: models with a practice, the most used first, each expanding onto its card
@@ -313,6 +315,7 @@ ConjuguerTests/
     ├── GapSentenceTests.swift          # The machine check of every Phrases à trous sentence against the Conjugator, agreement included; coverage of the top 300; frames, marks, and spoken prompts; the draw; drafts; the reward rows; nested in QuizTests, sessions (each level, a right round recorded with Ten More, a held correction and its re-ask, a sentence's gender over the setting)
     ├── KeyConjugationsTests.swift      # The key conjugations (reflexive, defective, il agreement), the citation infinitive, the share text, and what a long press copies
     ├── LearnerVerbsTests.swift         # The learner's record: opens, stars, recents, My Verbs, removal, Clear, JSON coding and an older record's decoding, the store's saving, the doubled entries, and the list modes
+    ├── MasteryTests.swift              # Mastery: the state by box, each level's patterns and their agreement with every band verb asked, family rows, être rows, participles, spelling-change cells and examples, the band's irregular verbs, stems by level, the display following a seeded record, and where answers land
     ├── ModelSearchTests.swift          # Models found by exemplar or by member verb, exemplars first, each once
     ├── ModelPracticeTests.swift        # Model practice: each model's kind and absence, ten most frequent verbs, marked cells, known at half, partners of the same kind, the draws alone and mixed, the scopes, and sessions (known after a round, joining a mix, Another Round, signals)
     ├── NousPrésentStemTests.swift      # The nous-présent stem that imparfait derives from

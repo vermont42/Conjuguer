@@ -1596,6 +1596,72 @@ enum L {
     }
   }
 
+  enum Mastery {
+    static var title: String {
+      String(localized: "Mastery.title")
+    }
+
+    static func intro(_ level: String) -> String {
+      String(localized: "Mastery.intro", defaultValue: "What your practice has made secure at your level, \(level). A form is mastered once its next review is a week or more away. A wrong answer starts it over.")
+    }
+
+    static var mastered: String {
+      String(localized: "Mastery.mastered")
+    }
+
+    static var learning: String {
+      String(localized: "Mastery.learning")
+    }
+
+    static var notPracticed: String {
+      String(localized: "Mastery.notPracticed")
+    }
+
+    static var regular: String {
+      String(localized: "Mastery.regular")
+    }
+
+    static var regularDescription: String {
+      String(localized: "Mastery.regularDescription")
+    }
+
+    static var spellingChanges: String {
+      String(localized: "Mastery.spellingChanges")
+    }
+
+    static var spellingChangesDescription: String {
+      String(localized: "Mastery.spellingChangesDescription")
+    }
+
+    static var irregular: String {
+      String(localized: "Mastery.irregular")
+    }
+
+    static func irregularDescription(_ count: Int) -> String {
+      String(localized: "Mastery.irregularDescription", defaultValue: "The \(count) most used at your level, each with the conjugations your level asks.")
+    }
+
+    static func count(_ mastered: Int, of total: Int) -> String {
+      String(localized: "Mastery.count", defaultValue: "\(mastered) of \(total)")
+    }
+
+    static func family(_ ending: String) -> String {
+      String(localized: "Mastery.family", defaultValue: "\(ending) verbs")
+    }
+
+    static func familyWithÊtre(_ ending: String) -> String {
+      String(localized: "Mastery.familyWithEtre", defaultValue: "\(ending) verbs with être")
+    }
+
+    static func hubSummary(masteredPatterns: Int, patterns: Int, masteredVerbs: Int, verbs: Int) -> String {
+      String(localized: "Mastery.hubSummary", defaultValue: "Mastered: \(masteredPatterns) of \(patterns) patterns · \(masteredVerbs) of \(verbs) verbs")
+    }
+
+    static var hubHint: String {
+      String(localized: "Mastery.hubHint")
+    }
+  }
+
   enum ModelPractice {
     static var title: String {
       String(localized: "ModelPractice.title")

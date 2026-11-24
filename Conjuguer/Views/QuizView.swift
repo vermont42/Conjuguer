@@ -51,6 +51,9 @@ struct QuizView: View {
         .navigationDestination(for: ModelPracticeDestination.self) { _ in
           ModelPracticeListView()
         }
+        .navigationDestination(for: MasteryDestination.self) { _ in
+          MasteryView()
+        }
     }
     .environment(\.isBeneathQuiz, quiz.quizState == .inProgress)
     .accessibilityAction(.magicTap) {
@@ -757,11 +760,33 @@ struct QuizView: View {
         )
       }
 
+      masteryRow
+
       if let lastResult = world.practice.lastResult {
         LastQuizResultRow(result: lastResult)
       }
     }
     .card()
+  }
+
+  private var masteryRow: some View {
+    let mastery = Mastery(level: level, record: world.practice.record)
+    return NavigationLink(value: MasteryDestination()) {
+      QuizHubRowContent(
+        title: L.Mastery.title,
+        detail: L.Mastery.hubSummary(
+          masteredPatterns: mastery.masteredPatternCount,
+          patterns: mastery.patternCount,
+          masteredVerbs: mastery.masteredVerbCount,
+          verbs: mastery.verbs.count
+        ),
+        systemImage: "chart.bar.doc.horizontal",
+        accessorySystemImage: "chevron.right"
+      )
+    }
+    .buttonStyle(.plain)
+    .accessibilityHint(L.Mastery.hubHint)
+    .accessibilityIdentifier("quiz_mastery_button")
   }
 
   private var exercises: some View {

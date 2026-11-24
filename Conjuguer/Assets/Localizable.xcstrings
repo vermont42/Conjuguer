@@ -188,6 +188,278 @@
         }
       }
     },
+    "Mastery.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastery"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maîtrise"
+          }
+        }
+      }
+    },
+    "Mastery.intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What your practice has made secure at your level, %@. A form is mastered once its next review is a week or more away. A wrong answer starts it over."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce que vos exercices ont consolidé à votre niveau, %@. Une forme est maîtrisée dès que sa prochaine révision est à une semaine ou plus. Une réponse fausse la fait repartir de zéro."
+          }
+        }
+      }
+    },
+    "Mastery.mastered" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastered"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maîtrisé"
+          }
+        }
+      }
+    },
+    "Mastery.learning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Learning"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En cours"
+          }
+        }
+      }
+    },
+    "Mastery.notPracticed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not yet practiced"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas encore travaillé"
+          }
+        }
+      }
+    },
+    "Mastery.regular" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regular Verbs"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbes réguliers"
+          }
+        }
+      }
+    },
+    "Mastery.regularDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Each mark is a form that every verb of its family shares: -er like parler, -ir like finir, -re like rendre. Practicing je parlais practices je chantais too."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chaque marque est une forme que partagent tous les verbes de sa famille : -er comme parler, -ir comme finir, -re comme rendre. S’exercer sur je parlais, c’est aussi s’exercer sur je chantais."
+          }
+        }
+      }
+    },
+    "Mastery.spellingChanges" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spelling Changes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Particularités orthographiques"
+          }
+        }
+      }
+    },
+    "Mastery.spellingChangesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbs like manger and appeler change their spelling in some forms. Each mark is one of those forms, which every verb of the model shares."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des verbes comme manger et appeler changent d’orthographe dans certaines formes. Chaque marque est l’une de ces formes, commune à tous les verbes du modèle."
+          }
+        }
+      }
+    },
+    "Mastery.irregular" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Irregular Verbs"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbes irréguliers"
+          }
+        }
+      }
+    },
+    "Mastery.irregularDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The %lld most used at your level, each with the conjugations your level asks."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les %lld plus fréquents à votre niveau, chacun avec les formes que votre niveau demande."
+          }
+        }
+      }
+    },
+    "Mastery.count" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld of %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld sur %lld"
+          }
+        }
+      }
+    },
+    "Mastery.family" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ verbs"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "verbes en %@"
+          }
+        }
+      }
+    },
+    "Mastery.familyWithEtre" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ verbs with être"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "verbes en %@ avec être"
+          }
+        }
+      }
+    },
+    "Mastery.hubSummary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastered: %lld of %lld patterns · %lld of %lld verbs"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maîtrisé : %lld sur %lld formes · %lld sur %lld verbes"
+          }
+        }
+      }
+    },
+    "Mastery.hubHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows what your practice has mastered, form by form and verb by verb"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montre ce que vos exercices vous ont fait maîtriser, forme par forme et verbe par verbe"
+          }
+        }
+      }
+    },
     "ModelPractice.hubDescription" : {
       "extractionState" : "manual",
       "localizations" : {

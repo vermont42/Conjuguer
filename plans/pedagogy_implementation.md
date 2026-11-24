@@ -43,7 +43,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 17 | Done | 2026-11-23 | 4ffc7a3 | T5.4 | 17 |
 | 18 | Done | 2026-11-23 | 5694ad4 | T5.5 | 18 |
 | 19 | Done | 2026-11-24 | 3077bf4 | T5.6 | 19 |
-| 20 | Not started | | | T6.2 | 20 |
+| 20 | Done | 2026-11-24 | | T6.2 | 20 |
 | 21 | Not started | | | T5.7 | 21 |
 | 22 | Not started | | | T6.3 | 22 |
 | 23 | Not started | | | T6.6 (personal bests and achievements) | 23 |
@@ -2304,7 +2304,7 @@ tests pin the item data's integrity.
 ## Phase 20: Mastery
 
 **Suggestions:** T6.2. **Ports:** Konjugieren Phase 20 (`Mastery.swift`, `MasteryView.swift`).
-**Depends on:** Phases 5, 11, and 13. **Status:** Not started.
+**Depends on:** Phases 5, 11, and 13. **Status:** Done.
 
 Show mastery: the core verbs and patterns against the tenses of the current level, filling in as
 items move up the ladder. The report warns that progress displays are unproven for persistence, so
@@ -2318,6 +2318,78 @@ from mockups, and where it lives in the hub.
 screen.
 
 **How it differed:**
+
+- **Asked of Josh (2026-11-24), before building**, from ASCII mockups at Elementary, each the
+  recommended option. (1) **The split display** over a grid: the regular families by tense, then
+  the spelling-change models, then the irregular verbs. A grid would have shown an irregular verb's
+  présent, impératif, and imparfait as three cells always alike, since they are one item, and a
+  family's cell would have hidden which person is shaky. (2) **A row in From Your Practice**, below
+  My Mistakes, that pushes the page, over a row in Exercises and a card at the foot. (3) **The
+  band's irregular verbs, up to 50**, over a fixed 50 and over 50 base verbs. Konjugieren's fixed
+  50 fit inside its Beginner band; Conjuguer's top 100 holds only 36 irregular verbs, so a fixed 50
+  would have listed 14 that a Beginner quiz never asks.
+- **Departed from Konjugieren: French needs a third section.** The record keeps a spelling-change
+  model's marked cells as patterns of its own (Phase 11), and they are about half of every level's
+  patterns, so they get **Spelling Changes** ("Particularités orthographiques"), a card per model
+  titled by its exemplar and its first changed form ("lancer · nous lançons"), with a line per
+  tense marking only the changed persons. A compound tense's card adds an **être row** for a family
+  whose band verbs take être, since those patterns are kept apart (`takesÊtre`).
+- **Which patterns a level shows, decided in the session**: those a verb of the level's band can
+  be asked in its tenses, so the page and the default quiz agree: 46 at Beginner, 223 at
+  Elementary, 368 at Intermediate, 901 at Advanced. Measuring every band verb at every cell takes
+  seconds at Advanced, so `Mastery` measures one verb of each model and auxiliary per cell (skipping
+  a defective one) and caches the result per level; a test measures the first three levels the
+  slow way and checks that the two agree, and the session ran it once at Advanced too, where it
+  passed. Mastered means the third box (`MasteryState.masteredBox`), as in Konjugieren, and a verb
+  counts once every stem its level asks is mastered: the présent at Beginner, the passé composé and
+  futur from Elementary, the passé simple (vint, which the card never shows) at Advanced.
+- **Carried over from Konjugieren unasked:** three states with three shapes (●, ◐, ○); the page
+  only shows, since opening a verb page is a lookup that resets its key conjugations; one signal
+  of having looked. Conjuguer reports screens through `viewAppeared` and `recordsAppearance`, so
+  the page sends `viewName` `MasteryView` rather than a new `viewMastery`.
+- **Names, proposed in the session:** "Mastery" / "Maîtrise"; the states "Mastered", "Learning",
+  "Not yet practiced" / "Maîtrisé", "En cours", "Pas encore travaillé"; the hub's line "Mastered:
+  10 of 368 patterns · 1 of 50 verbs" / "Maîtrisé : 10 sur 368 formes · 1 sur 50 verbes", where
+  "formes" stands for patterns, since "modèle" already means a conjugation model in the app, and
+  the noun follows the total so that a count of 0 or 1 needs no singular.
+- **Built as** `Mastery.swift` (`MasteryState`, cells, pattern rows and tables, model cards, verb
+  rows, the counts, `stems(askedAt:)`, `coreVerbs(at:)`, `patterns(at:)`, and the cached layout)
+  and `MasteryView.swift` (`MasteryDestination`, the legend, and a view per card), with the row in
+  `QuizView.recordSessions`. Sixteen `Mastery.*` strings.
+- **Analytics.** No new signal; the page's `viewName` is staged in
+  [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md) in both languages, with the
+  practice-record paragraph saying the record shows what has been mastered.
+- **VoiceOver.** Each mark its own element read as its state; in a regular card each pronoun its own
+  French element above its mark; a family read as "-er verbs" or "-er verbs with être"; French
+  marked French and conjugations lowercased; headers with their counts. Read from the accessibility
+  tree, not heard.
+- **Tests:** 846 to 860, all passing through `run_tests.sh` (the iPhone simulator is in English).
+  `MasteryTests`, 14 functions (20 cases): the state by box through a wrong answer, a lookup as
+  learning, each level's pattern count (4), the patterns against every band verb asked (3 levels),
+  the family rows and persons, the être row and participles, Beginner's spelling-change models with
+  manger's cells and the examples "nous mangeons" and "j'appelle", the band's irregular verbs (4:
+  36, 50, 50, 50, none skipped), the stems by level, venir's and falloir's key conjugations at
+  Advanced, the display following a seeded record, a verb mastered by its level's stems, a pattern
+  beyond the level not counted, and answers landing where the mapping sends them.
+- **Verified on the iPhone 17**, light, at Intermediate, with mastered entries seeded into the real
+  record's plist (the record restored afterward, byte for byte, and confirmed after a relaunch; the
+  page wrote nothing while viewed). In English: the hub row ("Mastered: 10 of 368 patterns · 1 of
+  50 verbs"), the legend and the Indicatif Présent card following the seed, the Passé Composé's
+  -er (être) and -re (être) rows, the participles' single marks, lancer's card ("nous lançons", the
+  ç red), and the verbs from être down, faire filled. In French: the hub row, the page's intro,
+  legend, and cards, and "Particularités orthographiques" wrapping beside its count. **On the iPad
+  Pro 11** in English and dark: the hub row ("7 of 368 patterns · 1 of 50 verbs", matching its
+  seed) and the page at its 680-point width; its record restored the same way. Not tried: VoiceOver
+  by ear, large text sizes, Beginner and Advanced on screen (unit-tested), a record built by real
+  days of practice.
+- **For Josh to judge:** the page on his phone, which the phase requires before it is done; the
+  names, above all "formes" and "Maîtrise"; the pronoun over every mark in a regular card, which
+  VoiceOver needs but which repeats; and two things the record's mapping puts on the page, which
+  Phase 11 decided rather than this phase: lancer's imparfait and subjonctif présent show nous and
+  vous (lancions, lanciez) as changed cells, because the Conjugator marks the c that returns there, and fiche's and maudire's compound tenses fill their own cards at Advanced, since their
+  participles (fichu, maudit) are marked.
+- **Josh asked for the commit** on 2026-11-24, which the phase's "judged it on a device-sized
+  screen" required.
 
 ## Phase 21: Speed Round
 
