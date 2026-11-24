@@ -40,7 +40,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 14 | Done | 2026-11-23 | 9568bdd | T4.2, T4.3 | 14 |
 | 15 | Done | 2026-11-23 | 3966644 | T5.1 | 15 |
 | 16 | Done | 2026-11-23 | 94df8f9 | T5.2 | 16 |
-| 17 | Awaiting Josh | 2026-11-23 | | T5.4 | 17 |
+| 17 | Done | 2026-11-23 | 4ffc7a3 | T5.4 | 17 |
 | 18 | Not started | | | T5.5 | 18 |
 | 19 | Not started | | | T5.6 | 19 |
 | 20 | Not started | | | T6.2 | 20 |
@@ -1991,7 +1991,7 @@ known and how the mix is drawn.
 
 **Suggestions:** T5.4. **Ports:** Konjugieren Phase 17 (`Recognition.swift`,
 `RecognitionChoicesView.swift`). **Depends on:** Phase 3 and browse Phase 4's map. **Status:**
-Awaiting Josh.
+Done.
 
 Show a conjugation, such as fûmes, and ask for the infinitive (typed) and the tense and person
 (chosen, since typing their names would test the metalanguage). This is the direction a reader
