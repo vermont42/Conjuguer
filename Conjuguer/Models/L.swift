@@ -398,6 +398,114 @@ enum L {
     }
   }
 
+  enum Diagnosis {
+    static func agreement(_ agreement: String) -> String {
+      String(localized: "Diagnosis.agreement", defaultValue: "With être, the participle agrees with the subject, here \(agreement).")
+    }
+
+    static var feminine: String {
+      String(localized: "Diagnosis.feminine")
+    }
+
+    static var masculine: String {
+      String(localized: "Diagnosis.masculine")
+    }
+
+    static var femininePlural: String {
+      String(localized: "Diagnosis.femininePlural")
+    }
+
+    static var masculinePlural: String {
+      String(localized: "Diagnosis.masculinePlural")
+    }
+
+    static var agreementWithAvoir: String {
+      String(localized: "Diagnosis.agreementWithAvoir")
+    }
+
+    static func wrongAuxiliary(_ infinitif: String, _ expected: String, _ given: String) -> String {
+      String(localized: "Diagnosis.wrongAuxiliary", defaultValue: "\(infinitif) takes \(expected), not \(given), in its compound tenses.")
+    }
+
+    static var pronominalAuxiliary: String {
+      String(localized: "Diagnosis.pronominalAuxiliary")
+    }
+
+    static func auxiliaryWithoutObject(_ infinitif: String) -> String {
+      String(localized: "Diagnosis.auxiliaryWithoutObject", defaultValue: "Without a direct object, \(infinitif) takes être, not avoir.")
+    }
+
+    static var missingAuxiliary: String {
+      String(localized: "Diagnosis.missingAuxiliary")
+    }
+
+    static func otherEntry(_ given: String, _ asked: String) -> String {
+      String(localized: "Diagnosis.otherEntry", defaultValue: "That is \(given). The question asks \(asked).")
+    }
+
+    static func cedilla(_ infinitif: String) -> String {
+      String(localized: "Diagnosis.cedilla", defaultValue: "Before a or o, \(infinitif) writes ç, so the c stays soft.")
+    }
+
+    static func softG(_ infinitif: String) -> String {
+      String(localized: "Diagnosis.softG", defaultValue: "Before a or o, \(infinitif) keeps an e after the g, so the g stays soft.")
+    }
+
+    static func doubledConsonant(_ infinitif: String, _ letter: String) -> String {
+      String(localized: "Diagnosis.doubledConsonant", defaultValue: "Before a silent e, \(infinitif) doubles its \(letter).")
+    }
+
+    static func graveForE(_ infinitif: String) -> String {
+      String(localized: "Diagnosis.graveForE", defaultValue: "Before a silent e, \(infinitif) writes è.")
+    }
+
+    static func graveForEAcute(_ infinitif: String) -> String {
+      String(localized: "Diagnosis.graveForEAcute", defaultValue: "Before a silent e, \(infinitif) changes é to è.")
+    }
+
+    static func yToI(_ infinitif: String) -> String {
+      String(localized: "Diagnosis.yToI", defaultValue: "Before a silent e, \(infinitif) changes y to i.")
+    }
+
+    static func futurStem(_ infinitif: String) -> String {
+      String(localized: "Diagnosis.futurStem", defaultValue: "\(infinitif) has an irregular futur stem, shared by the conditionnel.")
+    }
+
+    static func vousTes(_ infinitif: String) -> String {
+      String(localized: "Diagnosis.vousTes", defaultValue: "With vous, \(infinitif) ends in -tes in the présent.")
+    }
+
+    static func otherPerson(_ pronouns: String) -> String {
+      String(localized: "Diagnosis.otherPerson", defaultValue: "That is the conjugation for \(pronouns).")
+    }
+
+    // French writes "le passé simple" but "l’imparfait", so a tense beginning with a vowel has a
+    // key of its own.
+    static func otherTense(_ tense: String) -> String {
+      String(localized: "Diagnosis.otherTense", defaultValue: "That is the \(tense).")
+    }
+
+    static func otherTenseElided(_ tense: String) -> String {
+      String(localized: "Diagnosis.otherTenseElided", defaultValue: "That is the \(tense).")
+    }
+
+    static func otherTensePersons(_ tense: String, _ pronouns: String) -> String {
+      String(localized: "Diagnosis.otherTensePersons", defaultValue: "That is the \(tense), for \(pronouns).")
+    }
+
+    static func otherTensePersonsElided(_ tense: String, _ pronouns: String) -> String {
+      String(localized: "Diagnosis.otherTensePersonsElided", defaultValue: "That is the \(tense), for \(pronouns).")
+    }
+
+    static func regularForm(_ exemplar: String, _ infinitif: String) -> String {
+      String(localized: "Diagnosis.regularForm", defaultValue: "That is the regular form, as \(exemplar) has it. \(infinitif) is irregular here.")
+    }
+
+    static func otherGroup(_ exemplar: String, _ infinitif: String) -> String {
+      String(localized: "Diagnosis.otherGroup", defaultValue: "That is how verbs like \(exemplar) are conjugated, and \(infinitif) is not one.")
+    }
+  }
+
   enum QuizView {
     static var start: String {
       String(localized: "QuizView.start")
@@ -503,6 +611,10 @@ enum L {
 
     static var almost: String {
       String(localized: "QuizView.almost")
+    }
+
+    static var tryOnceMore: String {
+      String(localized: "QuizView.tryOnceMore")
     }
 
     static var askedAgain: String {

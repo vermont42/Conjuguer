@@ -13,7 +13,8 @@ extension EnvironmentValues {
 }
 
 /// A wrong answer, held: what the learner typed and the right answer, with the
-/// letters that differ marked, links to the verb's page and its model's page, and Continue.
+/// letters that differ marked, what was wrong when the Conjugator can say, links to the verb's
+/// page and its model's page, and Continue.
 struct QuizCorrectionView: View {
   let question: QuizQuestion
   let correction: QuizCorrection
@@ -38,6 +39,14 @@ struct QuizCorrectionView: View {
       VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
         answerRow(label: L.QuizView.yourAnswer, text: Self.givenText(difference))
         answerRow(label: L.QuizView.correctAnswer, text: Self.expectedText(difference))
+
+        if let diagnosis = correction.diagnosis {
+          Label(diagnosis.line, systemImage: "lightbulb.fill")
+            .font(bodyFont)
+            .foregroundStyle(Color.customForeground)
+            .fixedSize(horizontal: false, vertical: true)
+            .accessibilityIdentifier("quiz_correction_diagnosis")
+        }
 
         if correction.willBeReasked {
           Label(L.QuizView.willBeAskedAgain, systemImage: "arrow.uturn.backward")
@@ -122,13 +131,17 @@ struct QuizCorrectionView: View {
   }
 
   /// "Incorrect. Your Answer: parle. Correct Answer: parlé. Letters that differ: é. This question
-  /// will come up again." The letters are named only while there are few enough to help.
+  /// will come up again.", with the diagnosis, if any, after the letters. The letters are named
+  /// only while there are few enough to help.
   private var spokenCorrection: String {
     let given = difference.given.isEmpty ? L.QuizView.none : difference.given
     var spoken = "\(L.QuizView.incorrect) \(L.QuizView.yourAnswer) \(given). \(L.QuizView.correctAnswer) \(difference.expected.lowercased())."
     let letters = difference.expectedMarkedLetters
     if !letters.isEmpty, letters.count <= Self.maxSpokenLetters {
       spoken += " " + L.QuizView.differingLetters(letters.joined(separator: ", "))
+    }
+    if let diagnosis = correction.diagnosis {
+      spoken += " " + diagnosis.line
     }
     if correction.willBeReasked {
       spoken += " " + L.QuizView.willBeAskedAgain

@@ -41,6 +41,12 @@ enum Conjugator {
       return .failure(.verbModelNotRecognized)
     }
 
+    return conjugate(verb: verb, model: model, tense: tense, pronounGender: pronounGender)
+  }
+
+  /// The verb's cell as `model` conjugates it, which need not be the verb's own model: a wrong
+  /// answer may be the verb conjugated as parler, finir, or rendre would be (prendu, ils finent).
+  static func conjugate(verb: Verb, model: VerbModel, tense: Tense, pronounGender: PronounGender) -> Result<String, ConjugatorError> {
     var stems: [String] = [] // Payer and pouvoir have alternate stems, so this needs to be an array.
     var isConjugatingPasséSimple = false
     var isConjugatingSubjonctifImparfait = false
@@ -64,10 +70,10 @@ enum Conjugator {
       }
 
     case .participePrésent:
-        stems.append(nousPrésentStem(infinitif: infinitif, extraLetters: extraLetters))
+        stems.append(nousPrésentStem(verb: verb, model: model))
 
     case .imparfait:
-      let alternatives = nousPrésentStem(infinitif: infinitif, extraLetters: extraLetters).components(separatedBy: Tense.alternateConjugationSeparator)
+      let alternatives = nousPrésentStem(verb: verb, model: model).components(separatedBy: Tense.alternateConjugationSeparator)
       alternatives.forEach {
         stems.append($0)
       }
@@ -94,7 +100,7 @@ enum Conjugator {
       appendAdditiveAlternateStem(to: &stems, from: model, matching: [.subjonctifPrésent(subjonctifPersonNumber)])
 
     case .futurSimple, .conditionnelPrésent, .radicalFutur:
-      stems = model.futurStemsRecursive(infinitif: infinitif)
+      stems = model.futurStemsRecursive(infinitif: verb.infinitif)
 
     case .impératif(let personNumber):
       if !personNumber.isValidForImperatif {
@@ -258,10 +264,19 @@ enum Conjugator {
   }
 
   static func nousPrésentStem(infinitif: String, extraLetters: String? = nil) -> String {
-    guard let value = Conjugator.conjugatedString(infinitif: infinitif, tense: .indicatifPrésent(.firstPlural), extraLetters: extraLetters, pronounGender: .masculine) else {
+    let key = extraLetters.map { infinitif + " " + $0 } ?? infinitif
+    guard let verb = Verb.verbs[key], let model = VerbModel.models[verb.model] else {
+      assertionFailure("Could not find \(infinitif) or its model.")
+      return ""
+    }
+    return nousPrésentStem(verb: verb, model: model)
+  }
+
+  private static func nousPrésentStem(verb: Verb, model: VerbModel) -> String {
+    guard case .success(let value) = conjugate(verb: verb, model: model, tense: .indicatifPrésent(.firstPlural), pronounGender: .masculine) else {
       // Unreachable with today's data, but a future data typo shouldn't crash a user
       // mid-conjugation. Assert for the debug signal and degrade to an empty stem.
-      assertionFailure("Could not conjugate nous indicatifPrésent for \(infinitif).")
+      assertionFailure("Could not conjugate nous indicatifPrésent for \(verb.infinitif).")
       return ""
     }
     let ons = IndicatifPrésentGroup.s.présentEndingForPersonNumber(.firstPlural)

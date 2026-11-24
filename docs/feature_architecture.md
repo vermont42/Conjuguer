@@ -800,7 +800,7 @@ or about tenses and verbs the learner puts together (§ The Custom Quiz).
 
 | File | Purpose |
 |------|---------|
-| `Quiz.swift` | `@Observable` quiz state: building the questions, rounds and Ten More (`continueSession()`), re-asks, the timer, scoring, a slip's second attempt (`firstAttempt`), the held correction (`QuizCorrection`), the Live Activity, Game Center, the quiz signals, and VoiceOver announcements |
+| `Quiz.swift` | `@Observable` quiz state: building the questions, rounds and Ten More (`continueSession()`), re-asks, the timer, scoring, the second attempt a slip or a diagnosis earns (`firstAttempt`, `firstAttemptDiagnosis`), the held correction (`QuizCorrection`), the Live Activity, Game Center, the quiz signals, and VoiceOver announcements |
 | `QuizClock.swift` | The Quiz Clock setting, Hide or Show (§ Rounds, Re-asks, and the Clock) |
 | `QuizAbandonment.swift` | The quizzes in progress, kept so that the next launch can send `quizAbandon` for one the app was left during (§ Signals) |
 | `CustomQuiz.swift`, `CustomQuizView.swift` | The custom quiz: `CustomQuiz` (chosen tenses and a `QuizVerbSet`), its stored form, `QuizScope.custom(_:myVerbs:)`, and the editor and model list the Quiz tab pushes (§ The Custom Quiz) |
@@ -810,10 +810,11 @@ or about tenses and verbs the learner puts together (§ The Custom Quiz).
 | `QuizQuestion.swift`, `QuizResult.swift`, `QuizState.swift` | A question (verb and tense), an answered question, and the quiz's lifecycle |
 | `ConjugationResult.swift` | Grades an answer as a total or no match (`ConjugationResult.grade`), with the conjugation to show beside a right answer spelled another standard way (`AnswerGrade`); a question's result is also `.secondAttemptMatch` when a slip's second attempt was right |
 | `AnswerSlip.swift` | Whether a wrong answer is a slip that earns one more attempt (§ One More Try) |
+| `AnswerDiagnosis.swift` | Why a wrong answer is wrong, when the Conjugator can say so for certain, as one line (§ Naming the Error) |
 | `AnswerFrame.swift`, `AnswerFrameView.swift` | The shape of the expected answer around the field (§ The Answer Frame) |
 | `AnswerSpelling.swift` | Reads a typed answer before grading: case, spacing, the typographic apostrophe, and the pronouns of the asked person |
 | `AnswerDifference.swift`, `QuizCorrectionView.swift` | The held correction of a wrong answer (§ The Held Correction) |
-| `StandardVariants.swift` | Spellings the quiz accepts beside the conjugator's: the 1990 rectifications and a few doublets that dictionaries list |
+| `StandardVariants.swift` | Spellings the quiz accepts beside the conjugator's: the 1990 rectifications, a few doublets that dictionaries list, and passer's compound tenses with avoir |
 | `CyclingDeck.swift` | Deals a pool's elements in order and reshuffles when it runs out |
 | `Shared/PracticeRecord.swift`, `Shared/ReviewSchedule.swift` | The practice record: `PracticeItem`, what an answer exercises, and `PracticeRecord`, a box and a due date per item (§ The Practice Record) |
 | `PracticeItemMapping.swift`, `PracticeStore.swift`, `QuizDueItems.swift` | Which item a question exercises; `Current.practice`, which records answers and lookups and offers the review card; and the due items a default round mixes in |
@@ -914,10 +915,10 @@ for it. `Quiz(gameCenter:seed:)` takes a seed that makes every draw repeatable;
 
 A debug launch argument, `-CONJUGUER_QUIZ_FIXTURE screenshot`, replaces the draw with a fixed plan for
 App Store screenshots and exports its answers (see
-[`screenshot_playbook.md`](screenshot_playbook.md)). `-CONJUGUER_QUIZ_FIXTURE grading` asks ten
-questions, three times over, whose right answers exercise the grading below. Typed in order, with
+[`screenshot_playbook.md`](screenshot_playbook.md)). `-CONJUGUER_QUIZ_FIXTURE grading` asks eleven
+questions whose right answers exercise the grading below. Typed in order, with
 the feminine default: `il connait`, `je parle`, `j'ai parlé`, `nous sommes allées`, `j'étiquète`,
-`je cèderai`, `je me souviens`, `souviens-toi`, `êtes`, and `il plait`.
+`je cèderai`, `je me souviens`, `souviens-toi`, `êtes`, `il plait`, and `j'ai passé`.
 `-CONJUGUER_QUIZ_FIXTURE frames` asks one question for each kind of answer frame, twice over:
 `je` (parler), `j'` (aimer), `je` (haïr, aspirated h), `elle`, `elles`, `j' (fém.)` (parler,
 passé composé), `nous (fém.)` (aller), `je me`, `je m'` (s'absenter), `tu t' (fém.)`, `(tu) ______-toi !`,
@@ -927,16 +928,20 @@ shows a kind of correction. Typed in order, with the feminine default: `ai parle
 accent marked), `finisons` (a missing letter, marked only in the right answer),
 `allerai` (irai, a different word), `est venu` (the agreement's missing e), `prendent`, `je me
 souvient` (the pronouns dropped, the s marked), and `ecrivias` (a missing accent and a swap). The
-last holds before the results. All but `allerai` and `ecrivias` are slips, so each asks for one
-more try first: type it again to reach its correction.
+last holds before the results. All but `ecrivias` are slips or diagnosed errors, so each asks for
+one more try first: type it again to reach its correction, where a diagnosed one keeps its line.
 `-CONJUGUER_QUIZ_FIXTURE slips` asks twelve questions, once. Typed in order, with the feminine
-default, these earn one more try, which the right answer after them takes for 5 points: `etes`
-(then `êtes`), `achete` (type it again to see a second slip reach the correction), `placa`
-(`plaça`), `ai parle` (`ai parlé`), `suis allé` (`suis allée`, the agreement), `prenent`
-(`prennent`), and `veus` (`veux`). These go straight to the correction: `finirions` (finir's
-conditionnel for its futur), `parle` (the présent for the participe passé parlé), `prit` (the passé
-simple for the subjonctif imparfait prît), `eut` (likewise for eût, and under four letters), and
-`viens` (je's présent for il's vient).
+default, every one earns one more try, which the right answer after it takes for 5 points. These
+are slips, which say "Almost!": `etes` (then `êtes`), `ai parle` (`ai parlé`), `prenent`
+(`prennent`), and `veus` (`veux`). The rest are diagnosed (§ Naming the Error), and say why:
+`achete` (type it again to see the line held in the correction), `placa` (`plaça`), `suis allé`
+(`suis allée`, the agreement), `finirions` (finir's conditionnel for its futur), `parle` (the
+présent for the participe passé parlé), `prit` (the passé simple for the subjonctif imparfait
+prît), `eut` (likewise for eût, under four letters), and `viens` (je's présent for il's vient).
+`-CONJUGUER_QUIZ_FIXTURE diagnoses` asks fifteen questions, once, one for each kind of diagnosis.
+Typed in order, with the feminine default: `suis allé`, `ai parlée`, `a venue`, `m'ai souvenue`,
+`a montée`, `parties`, `sortissent`, `mangons`, `appele`, `venirai`, `faisez`, `finissons`,
+`venait`, `prendu`, and `finent`. Each asks for one more try with its line.
 `-CONJUGUER_QUIZ_FIXTURE levels` asks eight questions, once, one in each tense only Advanced asks.
 The answers, with the feminine default: `aurons fini`, `sois venue`, `prirent`, `fût`, `fusse
 partie`, `eut vu`, `ai eu parlé`, and `soyez rentrées`. A fixture's results show the level chosen
@@ -1013,17 +1018,60 @@ so `ete` for été is not a slip, and no compound answer falls under the limit.
 participe passé parlé is the présent, `prit` for prît the passé simple, and `viens` for il vient
 the wrong person. `Verb.conjugations(matching:)` decides, and a match in the asked cell itself
 does not count, so `suis allé` where the setting asks for suis allée, a participle agreed the
-other way, is a slip.
+other way, would be a slip, but the agreement's diagnosis comes first (§ Naming the Error).
 
 `Quiz.firstAttempt` holds the slip while the question waits (`isAwaitingSecondAttempt`). The clock
 keeps running, since the learner is still answering. The feedback slot shows "Almost! Try once
-more." in orange (`Color.secondAttempt`), the first attempt stays in the field to edit, and the
+more.", or a diagnosis's line and "Try once more." (`Quiz.secondAttemptPrompt`), in orange (`Color.secondAttempt`), the first attempt stays in the field to edit, and the
 field takes the keyboard back. A chirp and a light tap mark it, not the buzz of a wrong answer. A
 question gets one more attempt at most: a right second attempt scores 5 points and the result `.secondAttemptMatch`, shown by a hollow orange check in
 the next question's feedback slot, and a wrong one goes to the held correction. The results count
 right second attempts apart ("Second Try: 2", under "Correct: 8 / 10", which counts first attempts
 only), and a row whose question took two attempts shows "First Try:" with the slip above Your
 Answer. The Live Activity's correct count is first attempts only.
+
+### Naming the Error
+
+A wrong answer is diagnosed before it is judged a slip
+(`AnswerDiagnosis.diagnose(proposedAnswer:correctAnswers:verb:tense:pronounGender:)`). Every
+diagnosis is an exact construction from the verb's own tables, compared with the answer as grading
+reads it (`AnswerSpelling.candidates`); nothing is inferred from resemblance, since a wrong
+diagnosis is worse than none. The checks run in this order, and the first that fits wins:
+
+| Diagnosis | Example | Line |
+|---|---|---|
+| `agreement` | suis allé for suis allée | With être, the participle agrees with the subject, here feminine. |
+| `agreementWithAvoir` | ai parlée | With avoir, the participle does not agree with the subject. |
+| `wrongAuxiliary` | ai allé; est mangé | Aller takes être, not avoir, in its compound tenses. |
+| `pronominalAuxiliary` | m'ai souvenu | A pronominal verb takes être in its compound tenses. |
+| `auxiliaryWithoutObject` | a monté | Without a direct object, monter takes être, not avoir. |
+| `missingAuxiliary` | allée alone | This tense needs an auxiliary before the participle. |
+| `otherEntry` | sortissent for sortir (exit) | That is sortir (obtain). The question asks sortir (exit). |
+| `spellingChange` | mangons, commencait, appele, achete, cédent, employe | Before a or o, manger keeps an e after the g, so the g stays soft. |
+| `futurStem` | venirai, envoyerai, voirions | Venir has an irregular futur stem, shared by the conditionnel. |
+| `vousTes` | vous faisez, disez | With vous, faire ends in -tes in the présent. |
+| `otherPerson` | finissons for vous | That is the conjugation for nous. |
+| `otherTense` | venait for the passé simple | That is the imparfait. (With its persons when the asked one is not among them.) |
+| `regularForm` | prendu, ils prendent, a ouvri | That is the regular form, as rendre has it. Prendre is irregular here. |
+| `otherGroup` | ils finent, rendâmes, a metté | That is how verbs like parler are conjugated, and finir is not one. |
+
+The auxiliary checks pass over verbs whose other auxiliary is also standard in some sense
+(demeurer, accourir, apparaître), and passer, whose avoir is accepted, so j'ai passée is the
+agreement with avoir. The être verbs that take avoir with a direct object (monter, sortir, and
+eight more) get the line about the object, which stays true of j'ai monté la
+valise. The spelling change is read from where parler's conjugation of the verb and the right one
+differ, and a difference that is none of the five changes gets no line. The regular and other-group
+forms conjugate the verb with parler's, finir's, or rendre's model
+(`Conjugator.conjugate(verb:model:tense:pronounGender:)`); another cell of the verb is checked
+before them, since a real form the learner recalled is the nearer explanation. Tense names stay
+French, and French elides before a vowel ("C’est l’imparfait"), through a second key.
+
+Every diagnosis earns one more try, sharing the slip's mechanism and its limit of one
+(`Quiz.firstAttemptDiagnosis`), as Josh chose on 2026-11-23. A right
+repair scores 5 points. The held correction shows the diagnosis of the final answer, under the two
+answers with a lightbulb, so a repair wrong in some other way may show none
+(`QuizCorrection.diagnosis`); VoiceOver reads it after the differing letters. Nothing about a
+diagnosis is sent.
 
 ### Rounds, Re-asks, and the Clock
 
@@ -1068,6 +1116,9 @@ or a participle.
 - **Total match** (10 points): equal to an alternate, or to one of its `StandardVariants`. A variant
   is a second standard spelling: the 1990 rectifications (il plait, il connait, mu, j'étiquète, je
   cèderai, sursoirai, absout, interpelons, argüe) and doublets Larousse lists (veuillons, il éclôt).
+  Passer's compound tenses also pass with avoir and an unagreed participle (j'ai passé beside je
+  suis passée), since passer takes avoir with a direct object and the quiz gives no context; Josh
+  chose this on 2026-11-23, for passer alone.
   The conjugator writes some -eler and -eter verbs the traditional way (étiquette) and some the
   rectified way (ruissèle), and either spelling passes, except for the verbs whose traditional
   spelling already has the è (acheter, geler, harceler, modeler). A right answer spelled as a

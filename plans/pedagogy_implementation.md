@@ -37,7 +37,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 11 | Done | 2026-11-23 | 915be1c | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
 | 12 | Done | 2026-11-23 | 2bc523b | T3.2, T3.3 (the session) | 12 |
 | 13 | Done | 2026-11-23 | 249f7b9 | T6.1, T6.6 (the leaderboard's place) | 13 |
-| 14 | Not started | | | T4.2, T4.3 | 14 |
+| 14 | Awaiting Josh | 2026-11-23 | | T4.2, T4.3 | 14 |
 | 15 | Not started | | | T5.1 | 15 |
 | 16 | Not started | | | T5.2 | 16 |
 | 17 | Not started | | | T5.4 | 17 |
@@ -1642,7 +1642,7 @@ both languages, and the leaderboard is one tap away but not in the way.
 ## Phase 14: Naming the Error
 
 **Suggestions:** T4.2, T4.3. **Ports:** Konjugieren Phase 14 (`AnswerDiagnosis.swift`).
-**Depends on:** Phases 3 and 4; Phase 2 for the frame. **Status:** Not started.
+**Depends on:** Phases 3 and 4; Phase 2 for the frame. **Status:** Awaiting Josh.
 
 Diagnose a wrong answer from the conjugator's own knowledge and say it in one templated line with
 Phase 3's correction. No language model: the one careful study the report found (Song et al.
@@ -1682,6 +1682,96 @@ both languages.
 line, and the prompted second attempt shares Phase 4's mechanism.
 
 **How it differed:**
+
+- **Asked of Josh (2026-11-23), before building.** (1) **Every class prompts a repair**, over
+  "rules only, another cell reveals at once" and over "no prompt", as in Konjugieren. (2) **The
+  draft lines were approved as drafted**, in both languages, one line serving both the prompt (with
+  "Try once more." / "Encore un essai." appended) and the correction. (3) **The être verbs that take
+  avoir with a direct object** (descendre, entrer, monter, passer, redescendre, remonter, rentrer,
+  ressortir, retourner, sortir, tomber; passer was later accepted with avoir, below) get "Without a direct object, monter takes être, not avoir."
+  / "Sans complément d’objet direct, monter se conjugue avec être, et non avec avoir.", over no
+  line and over aller's line, which would be false of j'ai passé un examen.
+- **One approved line was reworded while building, for Josh to judge.** The other group's line
+  was "Those are the endings of verbs like parler, and finir is not one." For ils finent, -ent is
+  finir's ending too, and the check also matches an imparfait built on parler's nous stem, whose
+  endings every verb shares. It now reads "That is how verbs like parler are conjugated, and finir
+  is not one." / "C’est ainsi que se conjuguent les verbes comme parler, et finir n’en fait pas
+  partie."
+- **The classes, in the order checked** (`AnswerDiagnosis.swift`), each an exact construction:
+  agreement with être (four agreement names: féminin, masculin, féminin pluriel, masculin
+  pluriel); agreement with avoir (a class the phase did not list: ai parlée); the wrong auxiliary,
+  with a line of its own for pronominal verbs and for the ten of the eleven above that are not passer; a missing auxiliary (not
+  listed: allée alone); another entry of a doubled infinitive (not listed: sortir (obtain)'s
+  sortissent for sortir (exit)); a spelling change missed; the futur stem; vous in -tes (not
+  listed: vous faisez, vous disez); another cell, another person of the asked tense before another
+  tense; the regular form of the infinitive's ending (prendu, ils prendent, a ouvri, ils allent);
+  and another group's conjugation (ils finent, rendâmes, a metté).
+- **Departed from Konjugieren: another cell comes before the regular forms**, not last. The rules
+  about the asked cell (agreement, auxiliary) and the specific spelling, futur, and -tes rules come
+  first, since they say more; but an answer that is a real form of the verb is named as that form
+  before being called a regular conjugation, since a form the learner recalled is the nearer
+  explanation (partit for il part is the passé simple, as well as finir's présent pattern).
+- **Which wins over the slip:** every diagnosis, checked before `AnswerSlip`. So suis allé for
+  suis allée now names the agreement, and nous mangons, j'appele, je céde, placa, and achete, which
+  Phase 4 called slips, name their spelling change. The plan's "decide which class wins" is
+  settled this way.
+- **The spelling change is read, not listed.** The verb is conjugated with parler's model, and the
+  difference between that and the right answer, after the common prefix and suffix, must be c→ç,
+  an e inserted after g, a doubled l or t, e→è, é→è, or y→i. Anything else (envoyer's futur, whose
+  parler form is envoyerai) gets no spelling line and falls through to the futur stem.
+- **No auxiliary line where either is standard.** Demeurer (avoir for "live"), accourir,
+  apparaître, réapparaître, disparaître, convenir, disconvenir, échapper, réchapper, expirer,
+  déchoir, paraître, repartir, ressusciter, trépasser, and vieillir. Their wrong auxiliary gets no
+  line, and may still be a slip.
+- **Not built:** il prena for prit, which no exact construction produces; a regular form for -oir
+  verbs, which have no regular model (their futur stem is caught: voirai, devoirai); and vous
+  faisez in the impératif, since the approved line names the présent.
+- **The Conjugator** gained `conjugate(verb:model:tense:pronounGender:)`, which the
+  infinitive-keyed overload now calls, and `nousPrésentStem` became model-aware, so a hypothetical
+  model's imparfait and participe présent are built on its own nous stem. It is still core code
+  that `ConjugationMapTool` compiles, and reaches nothing new.
+- **The mechanism.** `Quiz.firstAttemptDiagnosis` beside Phase 4's `firstAttempt`, and
+  `Quiz.secondAttemptPrompt`, the line with "Try once more." or "Almost! Try once more.", in the
+  same orange line, hand icon, chirp, and announcement. `QuizCorrection.diagnosis` holds the
+  diagnosis of the final answer, so a repair wrong in an undiagnosable way gets no line. In the
+  correction the line sits under the two answers with a lightbulb, and VoiceOver reads it after
+  the differing letters. Elision needed second keys for the tense lines ("C’est le passé simple",
+  "C’est l’imparfait"). Twenty-seven strings.
+- **Fixtures.** A new `-CONJUGUER_QUIZ_FIXTURE diagnoses`: fifteen questions, one per kind, whose
+  wrong answers are listed in `docs/feature_architecture.md` § Quiz. The slips and corrections
+  fixtures' notes were rewritten, since most of their straight-to-the-correction answers are now
+  diagnosed and earn a second try.
+- **Analytics:** none added, so nothing is staged in `docs/privacy_policy_pending.md`. A diagnosis
+  is a statement about an answer, which Decision 5 keeps on the device.
+- **Tests:** 736 to 746, all passing through `run_tests.sh` (the iPhone simulator is in English).
+  `AnswerDiagnosisTests`, 10 functions: 41 diagnosed cases for real verbs (être, pronominal,
+  doubled-entry, spelling-change, irregular-futur, and third-group verbs), the agreement under each
+  gender setting, 10 answers that get no line (right answers, a variant, slips, nonsense, an empty
+  answer, demeurer, accourir, il prena), the lines in English, and in a seeded quiz a diagnosed
+  error waiting on its question, a right repair at half points, a wrong repair with its own (here
+  no) diagnosis, a diagnosed final answer held with its line, a slip after a diagnosis going to the
+  correction, and a slip still saying "Almost!".
+- **Verified on the iPhone 17**, light. In French, all fifteen fixture kinds prompted, each line
+  read from the accessibility tree and repaired, for 70 points after fourteen repairs; finent
+  twice held its correction with the line, the re-ask notice, and the links, and the spoken
+  correction read the line after "Lettres qui diffèrent : i, s, s." In English, suis allé twice
+  held "With être, the participle agrees with the subject, here feminine." **On the iPad Pro 11**
+  in English and dark: the agreement prompt on two lines at full width, a right repair for 5
+  points, a wrong undiagnosable repair (x) with no line, and a venue twice holding "Venir takes
+  être, not avoir, in its compound tenses." Not tried: VoiceOver by ear and the software keyboard.
+- **Avoir accepted for passer (Josh, 2026-11-23), after he saw the phase's summary.** The quiz
+  expected être for passer and graded j'ai passé wrong, though passer's commonest use takes avoir
+  with an object. Its compound tenses now accept avoir with an unagreed participle as a
+  `StandardVariants` variant (`avoirAlsoAccepted`), shown with the app's être spelling beside the
+  checkmark; j'ai passée is the agreement with avoir. Passer is the only such verb: monter,
+  sortir, and the other nine keep the line about the direct object. The grading fixture gained an
+  eleventh question, passer's passé composé, seen right as `j'ai passé` on the iPhone 17 in French
+  (11 / 11). Tests 746 to 747 (`passerIsRightWithAvoirAndShowsItsÊtreSpelling`, with four
+  accepted and four rejected variants and two diagnosis cases).
+- **For Josh to judge:** the fifteen lines in French on a device; the other group's reworded line;
+  "C’est la forme pour nous" for the wrong person; the lightbulb line in the correction; and
+  whether a diagnosis for parle as the participe passé, "That is the indicatif présent, for je and
+  elle.", names too much.
 
 ## Phase 15: Key Conjugations
 

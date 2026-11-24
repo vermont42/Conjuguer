@@ -783,6 +783,465 @@
         }
       }
     },
+    "QuizView.tryOnceMore" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try once more."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encore un essai."
+          }
+        }
+      }
+    },
+    "Diagnosis.agreement" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "With être, the participle agrees with the subject, here %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avec être, le participe s’accorde avec le sujet, ici au %@."
+          }
+        }
+      }
+    },
+    "Diagnosis.feminine" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "feminine"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "féminin"
+          }
+        }
+      }
+    },
+    "Diagnosis.masculine" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "masculine"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "masculin"
+          }
+        }
+      }
+    },
+    "Diagnosis.femininePlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "feminine plural"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "féminin pluriel"
+          }
+        }
+      }
+    },
+    "Diagnosis.masculinePlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "masculine plural"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "masculin pluriel"
+          }
+        }
+      }
+    },
+    "Diagnosis.agreementWithAvoir" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "With avoir, the participle does not agree with the subject."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avec avoir, le participe ne s’accorde pas avec le sujet."
+          }
+        }
+      }
+    },
+    "Diagnosis.wrongAuxiliary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ takes %2$@, not %3$@, in its compound tenses."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ se conjugue avec %2$@, et non avec %3$@, aux temps composés."
+          }
+        }
+      }
+    },
+    "Diagnosis.pronominalAuxiliary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A pronominal verb takes être in its compound tenses."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un verbe pronominal se conjugue avec être aux temps composés."
+          }
+        }
+      }
+    },
+    "Diagnosis.auxiliaryWithoutObject" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Without a direct object, %@ takes être, not avoir."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sans complément d’objet direct, %@ se conjugue avec être, et non avec avoir."
+          }
+        }
+      }
+    },
+    "Diagnosis.missingAuxiliary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This tense needs an auxiliary before the participle."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce temps demande un auxiliaire avant le participe."
+          }
+        }
+      }
+    },
+    "Diagnosis.otherEntry" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That is %1$@. The question asks %2$@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C’est %1$@. La question porte sur %2$@."
+          }
+        }
+      }
+    },
+    "Diagnosis.cedilla" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Before a or o, %@ writes ç, so the c stays soft."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devant a et o, %@ s’écrit avec ç, pour que le c reste doux."
+          }
+        }
+      }
+    },
+    "Diagnosis.softG" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Before a or o, %@ keeps an e after the g, so the g stays soft."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devant a et o, %@ garde un e après le g, pour que le g reste doux."
+          }
+        }
+      }
+    },
+    "Diagnosis.doubledConsonant" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Before a silent e, %1$@ doubles its %2$@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devant un e muet, %1$@ double son %2$@."
+          }
+        }
+      }
+    },
+    "Diagnosis.graveForE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Before a silent e, %@ writes è."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devant un e muet, %@ s’écrit avec è."
+          }
+        }
+      }
+    },
+    "Diagnosis.graveForEAcute" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Before a silent e, %@ changes é to è."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devant un e muet, %@ change é en è."
+          }
+        }
+      }
+    },
+    "Diagnosis.yToI" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Before a silent e, %@ changes y to i."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devant un e muet, %@ change le y en i."
+          }
+        }
+      }
+    },
+    "Diagnosis.futurStem" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ has an irregular futur stem, shared by the conditionnel."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ a un radical de futur irrégulier, que partage le conditionnel."
+          }
+        }
+      }
+    },
+    "Diagnosis.vousTes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "With vous, %@ ends in -tes in the présent."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avec vous, %@ se termine en -tes au présent."
+          }
+        }
+      }
+    },
+    "Diagnosis.otherPerson" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That is the conjugation for %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C’est la forme pour %@."
+          }
+        }
+      }
+    },
+    "Diagnosis.otherTense" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That is the %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C’est le %@."
+          }
+        }
+      }
+    },
+    "Diagnosis.otherTenseElided" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That is the %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C’est l’%@."
+          }
+        }
+      }
+    },
+    "Diagnosis.otherTensePersons" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That is the %1$@, for %2$@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C’est le %1$@, pour %2$@."
+          }
+        }
+      }
+    },
+    "Diagnosis.otherTensePersonsElided" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That is the %1$@, for %2$@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C’est l’%1$@, pour %2$@."
+          }
+        }
+      }
+    },
+    "Diagnosis.regularForm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That is the regular form, as %1$@ has it. %2$@ is irregular here."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C’est la forme régulière, sur le modèle de %1$@. %2$@ est irrégulier ici."
+          }
+        }
+      }
+    },
+    "Diagnosis.otherGroup" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That is how verbs like %1$@ are conjugated, and %2$@ is not one."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C’est ainsi que se conjuguent les verbes comme %1$@, et %2$@ n’en fait pas partie."
+          }
+        }
+      }
+    },
     "QuizView.askedAgain" : {
       "extractionState" : "manual",
       "localizations" : {

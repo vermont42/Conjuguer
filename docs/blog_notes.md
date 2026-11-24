@@ -5980,3 +5980,60 @@ feminine adjective. A Review or My Mistakes session no longer names a level on i
 asks whatever the record holds regardless of level. One property, `QuizScope.asksByLevel`, now
 decides that for the results, the last quiz's row, and the Live Activity, which shows the session's
 name instead.
+
+## Naming the Error (2026-11-23)
+
+Pedagogy Phase 14 teaches the quiz to say why a wrong answer is wrong, in one line, when the
+Conjugator can say so for certain. "Avec être, le participe s’accorde avec le sujet, ici au
+féminin." "Venir a un radical de futur irrégulier, que partage le conditionnel." "C’est
+l’imparfait." No language model is involved. The research the plan rests on found explanations
+reliable only when a deterministic step establishes the facts first, and a template needs nothing
+more than the facts.
+
+The rule that shaped everything is that a wrong diagnosis is worse than none. So no check guesses
+at what the learner meant. Each one builds the exact wrong answers a particular error would produce
+and asks whether the learner typed one of them. The agreement check builds the asked cell with the
+participle agreed every other way. The auxiliary check builds it with the other auxiliary. The
+spelling-change check conjugates manger as parler would and reads the change from where the two
+spellings differ: an e after a g, a c that should be ç, a doubled l or t, an è, or a y that becomes
+i. The futur check builds the futur on the whole infinitive (venirai, voirai, envoyerai). The
+regular-form check conjugates prendre with rendre's model, which gives prendu and ils prendent,
+and a new entry point in the Conjugator, `conjugate(verb:model:…)`, lets any verb be conjugated
+by any model for that purpose. An answer that matches none of these gets no line. Nonsense gets
+none, and so does "il prena", the plan's own example, because no exact construction produces it.
+
+French made the auxiliary harder than German did. Konjugieren could say "gehen takes sein"
+without qualification. Here, monter, sortir, passer, and eight other être verbs take avoir when
+they have a direct object, so "j'ai passé" is good French in "j'ai passé un examen". I asked Josh
+how to word that, and he chose a line that stays true: "Sans complément d’objet direct, monter se
+conjugue avec être." A few verbs take either auxiliary in some sense (demeurer, accourir,
+apparaître), and they get no auxiliary line at all. The passive needed care in the other
+direction. "Elle est mangée" is good French as a passive, so the line says that manger takes avoir
+in its compound tenses, which is true whatever the learner meant.
+
+Josh decided, as he had for Konjugieren, that every diagnosed error earns the one more try Phase 4
+gave slips, at half points. The diagnosis is checked before the slip, which settles the question
+Phase 4 left open: "suis allé" for "suis allée" is one letter off, but the line about agreement
+says more than "Almost!". The same ordering changed two of the older debug fixtures. Most of the
+"slips" fixture's straight-to-the-correction answers (parle for parlé, prit for prît, viens for
+vient) now earn a second try with a line naming the cell they are.
+
+One approved line was reworded while building. "Those are the endings of verbs like parler" was
+meant for "ils finent", but -ent is finir's ending too; what the learner missed is the -iss- of
+the stem. The line now says "That is how verbs like parler are conjugated, and finir is not one",
+which is true of every answer the check can match.
+
+A smaller French wrinkle was elision. "C’est le passé simple" but "C’est l’imparfait" needed two
+catalog keys, chosen by the tense name's first letter, since no single template can carry both
+articles.
+
+Every one of the fifteen kinds was tried in the simulator, in French on the iPhone and in English
+on the iPhone and on a dark iPad. The 41 diagnosed cases and 10 undiagnosed ones are pinned by
+`AnswerDiagnosisTests`, and the full suite rose from 736 to 746 tests.
+
+After reading the summary, Josh chose to accept avoir for passer. The quiz had always expected
+"je suis passé(e)", but passer's commonest use is transitive ("j'ai passé un examen"), and a quiz
+that gives no context cannot rule that out. Passer's compound tenses now take avoir as a standard
+variant, the same mechanism as the 1990 spellings, so "j'ai passé" passes and "suis passée" appears
+quietly beside the checkmark. Only passer changed. Monter, sortir, and the rest keep the line about
+the direct object.

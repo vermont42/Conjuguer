@@ -39,7 +39,8 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `verb_browse_sort` | Sort `Picker` in `VerbBrowseView` | Launch anchor (`FIRST_SCREEN_ID`). Three segments: Frequency, Alphabetical, My Verbs. |
 | `input_quiz_conjugation` | Answer `TextField` in `QuizView` | Carries `.accessibilityValue(input)`, so `read_value`/`set_value`/`type_text --id` work with read-back. |
 | `quiz_shown_spelling` | The app's spelling beside the checkmark, after a right answer spelled another standard way | Launch with `-CONJUGUER_QUIZ_FIXTURE grading` and answer the first question `il connait`; its label is "Correct. Also spelled: connaît". |
-| `quiz_almost` | "Almost! Try once more." in the feedback slot | Present while a slip waits for its second attempt. Launch with `-CONJUGUER_QUIZ_FIXTURE slips` and answer the first question `etes`. |
+| `quiz_almost` | "Almost! Try once more.", or a diagnosis's line and "Try once more.", in the feedback slot | Present while a slip or a diagnosed error waits for its second attempt; its label is the line. Launch with `-CONJUGUER_QUIZ_FIXTURE slips` and answer the first question `etes`, or with `diagnoses` and `suis allé`. |
+| `quiz_correction_diagnosis` | The diagnosis's line in a held correction | Inside `quiz_correction`, whose label reads it after the differing letters, so AXe reports it only as part of that label. Answer a `diagnoses` fixture question wrongly twice. |
 | `results_second_try` | "Second Try: N" in `QuizResultsView` | Present only when a second attempt was right. |
 | `results_asked_again` | "Asked Again: N / M" in `QuizResultsView` | Present only when a question was asked again. |
 | `results_time` | "Time: 0:49" in `QuizResultsView` | Present only with the Quiz Clock set to Show. |

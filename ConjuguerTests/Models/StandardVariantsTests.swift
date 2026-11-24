@@ -51,7 +51,11 @@ struct StandardVariantsTests {
     ("vouloir", .impératif(.firstPlural), "veuillons"),
     ("vouloir", .subjonctifPrésent(.secondPlural), "veuilliez"),
     ("éclore", .indicatifPrésent(.thirdSingular), "éclôt"),
-    ("enclore", .indicatifPrésent(.thirdSingular), "enclôt")
+    ("enclore", .indicatifPrésent(.thirdSingular), "enclôt"),
+    ("passer", .passéComposé(.firstSingular), "ai passé"),
+    ("passer", .plusQueParfait(.thirdPlural), "avaient passé"),
+    ("passer", .passéSurcomposé(.firstPlural), "avons eu passé"),
+    ("passer", .impératifPassé(.secondSingular), "aie passé")
   ])
   func acceptsVariant(infinitif: String, tense: Tense, variant: String) throws {
     #expect(try variants(infinitif, tense).contains(variant))
@@ -59,6 +63,10 @@ struct StandardVariantsTests {
 
   @Test(arguments: [
     ("venir", Tense.passéSimple(.firstPlural), "vinmes"),
+    ("passer", .passéComposé(.firstSingular), "ai passée"),
+    ("passer", .indicatifPrésent(.firstSingular), "ai passé"),
+    ("monter", .passéComposé(.firstSingular), "ai monté"),
+    ("aller", .passéComposé(.firstSingular), "ai allé"),
     ("venir", .subjonctifImparfait(.thirdSingular), "vint"),
     ("être", .subjonctifImparfait(.thirdSingular), "fut"),
     ("dire", .passéSimple(.secondPlural), "dites"),
@@ -86,5 +94,14 @@ struct StandardVariantsTests {
   ])
   func rejectsNonVariant(infinitif: String, tense: Tense, nonVariant: String) throws {
     #expect(try !variants(infinitif, tense).contains(nonVariant))
+  }
+
+  @Test func passerIsRightWithAvoirAndShowsItsÊtreSpelling() throws {
+    let verb = try #require(Verb.verbs["passer"])
+    let tense = Tense.passéComposé(.firstSingular)
+    let correctAnswers = try #require(Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: nil, pronounGender: .feminine))
+    let grade = ConjugationResult.grade(proposedAnswer: "j'ai passé", correctAnswers: correctAnswers, verb: verb, tense: tense)
+    #expect(grade.result == .totalMatch)
+    #expect(grade.shownSpelling == correctAnswers)
   }
 }

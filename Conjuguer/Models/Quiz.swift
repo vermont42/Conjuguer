@@ -29,9 +29,11 @@ class Quiz {
   /// A wrong answer, held on its question with the clock stopped until
   /// `continueAfterCorrection()`. A right answer advances at once.
   private(set) var correction: QuizCorrection?
-  /// A slip that earned one more attempt at the current question, which waits for it with the
-  /// clock running. A question gets one more attempt at most, whatever earned it.
+  /// A slip or a diagnosed error that earned one more attempt at the current question, which waits
+  /// for it with the clock running. A question gets one more attempt at most, whatever earned it.
   private(set) var firstAttempt: String?
+  /// What was wrong with `firstAttempt`, nil for a slip.
+  private(set) var firstAttemptDiagnosis: AnswerDiagnosis?
 
   private(set) var roundCount = 0
   private var roundFirstResultIndex = 0
@@ -44,6 +46,14 @@ class Quiz {
 
   var isAwaitingSecondAttempt: Bool {
     firstAttempt != nil
+  }
+
+  /// The request for one more try: the diagnosis's line, or "Almost!" for a slip.
+  var secondAttemptPrompt: String {
+    guard let firstAttemptDiagnosis else {
+      return L.QuizView.almost
+    }
+    return firstAttemptDiagnosis.line + " " + L.QuizView.tryOnceMore
   }
 
   private var timer: Timer?
@@ -177,6 +187,7 @@ class Quiz {
     shouldShowResults = false
     correction = nil
     firstAttempt = nil
+    firstAttemptDiagnosis = nil
     quizState = .inProgress
     announcePublishedProperties()
     startLiveActivity()
@@ -245,6 +256,7 @@ class Quiz {
     quizState = .notStarted
     correction = nil
     firstAttempt = nil
+    firstAttemptDiagnosis = nil
     endLiveActivity()
     QuizAbandonment.clear(id: abandonmentID, getterSetter: Current.getterSetter)
   }
@@ -321,6 +333,7 @@ class Quiz {
     quizResults = []
     correction = nil
     firstAttempt = nil
+    firstAttemptDiagnosis = nil
     shouldShowResults = false
   }
 
@@ -377,6 +390,8 @@ class Quiz {
       return generateSlipsFixture()
     case "levels":
       return generateLevelsFixture()
+    case "diagnoses":
+      return generateDiagnosesFixture()
     default:
       return nil
     }
@@ -430,7 +445,7 @@ class Quiz {
     }
   }
 
-  // Ten questions whose right answers the grading accepts only since it reads pronouns and
+  // Eleven questions whose right answers the grading accepts only since it reads pronouns and
   // standard variants, unshuffled. The answers to type are in
   // docs/feature_architecture.md § Grading and Scoring.
   private func generateGradingFixture() -> [QuizQuestion] {
@@ -444,7 +459,8 @@ class Quiz {
       ("souvenir", .indicatifPrésent(.firstSingular)),
       ("souvenir", .impératif(.secondSingular)),
       ("être", .indicatifPrésent(.secondPlural)),
-      ("plaire", .indicatifPrésent(.thirdSingular))
+      ("plaire", .indicatifPrésent(.thirdSingular)),
+      ("passer", .passéComposé(.firstSingular))
     ]
     return plan.map { spec in
       QuizQuestion(verb: Verb.verbForInfinitif(spec.infinitif), tense: spec.tense)
@@ -534,6 +550,31 @@ class Quiz {
     }
   }
 
+  // One question for each class of diagnosis, unshuffled, each with a wrong answer to type. The
+  // answers are listed in docs/feature_architecture.md § Quiz.
+  private func generateDiagnosesFixture() -> [QuizQuestion] {
+    let plan: [(key: String, tense: Tense)] = [
+      ("aller", .passéComposé(.firstSingular)),
+      ("parler", .passéComposé(.firstSingular)),
+      ("venir", .passéComposé(.thirdSingular)),
+      ("souvenir", .passéComposé(.firstSingular)),
+      ("monter", .passéComposé(.thirdSingular)),
+      ("partir", .passéComposé(.firstPlural)),
+      ("sortir exit", .indicatifPrésent(.thirdPlural)),
+      ("manger", .indicatifPrésent(.firstPlural)),
+      ("appeler", .indicatifPrésent(.firstSingular)),
+      ("venir", .futurSimple(.firstSingular)),
+      ("faire", .indicatifPrésent(.secondPlural)),
+      ("finir", .indicatifPrésent(.secondPlural)),
+      ("venir", .passéSimple(.thirdSingular)),
+      ("prendre", .participePassé),
+      ("finir", .indicatifPrésent(.thirdPlural))
+    ]
+    return plan.map { spec in
+      QuizQuestion(verb: Verb.verbForInfinitif(spec.key), tense: spec.tense)
+    }
+  }
+
   // Write the correct answers for the fixture to Documents/screenshot_fixture_answers.json
   // so the driver can read and type them. The exported answer is the first of any
   // slash-separated alternates, which the quiz scores as a total match.
@@ -591,8 +632,15 @@ class Quiz {
     }
     let grade = ConjugationResult.grade(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense)
     let isSecondAttempt = firstAttempt != nil
-    if grade.result == .noMatch, !isSecondAttempt, AnswerSlip.isSlip(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense) {
+    let diagnosis = grade.result == .noMatch
+      ? AnswerDiagnosis.diagnose(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense, pronounGender: Current.settings.pronounGender)
+      : nil
+    // A diagnosis is checked before a slip, since it says more: suis allé for suis allée is one
+    // letter off, and the agreement is what to fix.
+    if grade.result == .noMatch, !isSecondAttempt,
+      diagnosis != nil || AnswerSlip.isSlip(proposedAnswer: proposedAnswer, correctAnswers: correctAnswers, verb: verb, tense: tense) {
       firstAttempt = proposedAnswer
+      firstAttemptDiagnosis = diagnosis
       Current.soundPlayer.play(.chirp)
       announceSecondAttempt()
       return
@@ -618,6 +666,7 @@ class Quiz {
     // six questions has still practiced six. A slip's right second attempt counts as right.
     Current.practice.recordAnswer(verb: verb, tense: tense, isCorrect: conjugationResult != .noMatch, at: now())
     firstAttempt = nil
+    firstAttemptDiagnosis = nil
     if conjugationResult == .noMatch {
       // A re-ask is not asked a third time, whatever its answer, so that one stubborn question
       // cannot fill a round.
@@ -632,6 +681,7 @@ class Quiz {
           tense: tense,
           isReflexive: verb.isReflexive
         ),
+        diagnosis: diagnosis,
         willBeReasked: willBeReasked
       )
     } else {
@@ -699,7 +749,7 @@ class Quiz {
     guard UIAccessibility.isVoiceOverRunning else {
       return
     }
-    Utterer.utter(L.QuizView.almost, localeString: currentLocaleString)
+    Utterer.utter(secondAttemptPrompt, localeString: currentLocaleString)
   }
 
   private func announcePublishedProperties() {
@@ -753,6 +803,8 @@ private extension Tense {
 
 struct QuizCorrection: Equatable {
   let difference: AnswerDifference
+  /// What was wrong with the final answer, which may differ from the first attempt's.
+  var diagnosis: AnswerDiagnosis?
   var willBeReasked = false
 }
 

@@ -47,6 +47,7 @@ Conjuguer/
 │   ├── Sounds/                 # MP3 effects for quiz and game (applause, buzz, chime, guns, ghost, robot, …)
 │   └── WorkSans*.ttf           # Bundled Work Sans faces (regular, semibold, bold)
 ├── Models/
+│   ├── AnswerDiagnosis.swift   # Why a wrong quiz answer is wrong, when the Conjugator can say so for certain (agreement, auxiliary, spelling change, futur stem, another cell, a regular form), as one templated line
 │   ├── AnswerDifference.swift  # Where a wrong answer differs from the nearest right spelling, letter by letter, for the quiz's held correction
 │   ├── AnswerFrame.swift       # The shape of a quiz answer: the pronoun before the blank, elided to the answer (j', je m'), the gender a compound tense agrees with, the impératif's (tu) and -toi, and the prompt VoiceOver reads
 │   ├── AnswerSlip.swift        # Whether a wrong answer is a slip that earns one more try: one edit or only accents off, four letters or more, and not another cell of the verb
@@ -272,6 +273,7 @@ ConjuguerTests/
 ├── TestUtils.swift             # T.testConjugation shared assertion (threads #_sourceLocation) and T.generateVerbModelTests
 └── Models/
     ├── AddedVerbsTests.swift           # Conjugations of the 13 verbs added and 6 misspellings renamed on 2026-08-28, plus dépourvoir's defect group 27
+    ├── AnswerDiagnosisTests.swift      # Each diagnosis for real verbs, answers that get no line, the English lines, and the prompted second attempt in a quiz
     ├── AnswerDifferenceTests.swift     # The letters marked for a wrong accent, a missing, extra, or swapped letter, and a red letter; the pronouns dropped and the nearest alternate shown
     ├── AnswerFrameTests.swift          # The frame for each kind of question, one blank in every cell, the frame's words typed with the answer still right, and the spoken prompt
     ├── AnswerSlipTests.swift           # Slips that earn one more try (etes, suis allé, ai parle) and near misses that do not (parle for parlé, prit for prît, eut, viens for vient)

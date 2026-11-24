@@ -290,9 +290,10 @@ struct QuizView: View {
   private var feedbackSlot: some View {
     HStack(alignment: .top, spacing: Layout.defaultSpacing) {
       if quiz.isAwaitingSecondAttempt {
-        Label(L.QuizView.almost, systemImage: "hand.raised.fill")
+        Label(quiz.secondAttemptPrompt, systemImage: "hand.raised.fill")
           .font(bodyEmphasisFont)
           .foregroundStyle(Color.secondAttempt)
+          .fixedSize(horizontal: false, vertical: true)
           .transition(.opacity.combined(with: .scale(scale: 0.9)))
           .accessibilityIdentifier("quiz_almost")
       } else if let result = quiz.lastRoundResult, quiz.correction != nil || result.conjugationResult != .noMatch {

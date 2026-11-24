@@ -8,8 +8,9 @@
 import Foundation
 
 /// Standard spellings beside the one the conjugator writes: the 1990 rectifications (il plait
-/// beside il plaît, j'amoncèle beside j'amoncelle) and doublets that dictionaries list (il éclôt
-/// beside il éclot). The quiz accepts them, and the verb page keeps the conjugator's spelling.
+/// beside il plaît, j'amoncèle beside j'amoncelle), doublets that dictionaries list (il éclôt
+/// beside il éclot), and passer's compound tenses with avoir (j'ai passé beside je suis passé).
+/// The quiz accepts them, and the verb page keeps the conjugator's spelling.
 enum StandardVariants {
   /// The variants of one lowercased conjugation, as `Conjugator` writes it for `tense` of `verb`:
   /// one alternate, with its auxiliary in a compound tense ("ai absous").
@@ -27,6 +28,7 @@ enum StandardVariants {
     add(withGraveInFuturStem(conjugation, verb: verb, tense: tense))
     add(rectifiedSpelling(conjugation, verb: verb, tense: tense))
     add(doublet(conjugation, infinitif: infinitif, tense: tense))
+    add(withAvoir(conjugation, verb: verb, tense: tense))
 
     let rectified = variants
     for variant in rectified {
@@ -191,6 +193,20 @@ enum StandardVariants {
     default:
       return nil
     }
+  }
+
+  /// Être verbs whose compound tenses the quiz also accepts with avoir.
+  static let avoirAlsoAccepted: Set<String> = ["passer"]
+
+  // Passer takes avoir with a direct object (j'ai passé un examen), its commonest use, and the
+  // quiz gives no context to rule one out. The participle does not agree with avoir.
+  private static func withAvoir(_ conjugation: String, verb: Verb, tense: Tense) -> String? {
+    guard avoirAlsoAccepted.contains(verb.infinitif), !verb.isReflexive, tense.isCompound, let personNumber = tense.personNumber,
+      let participle = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: .participePassé, extraLetters: verb.extraLetters, pronounGender: .masculine)?
+        .components(separatedBy: Tense.alternateConjugationSeparator).first else {
+      return nil
+    }
+    return tense.conjugatedAuxiliary(personNumber: personNumber, auxiliary: .avoir).lowercased() + " " + participle.lowercased()
   }
 
   private static func rewritingEachWord(of conjugation: String, _ rewrite: (inout [Character]) -> Bool) -> String? {
