@@ -83,12 +83,20 @@ extension URL {
 
   /// `conjuguer://quiz/set?tenses=imparfait&verbs=etre&source=qrCode`, a practice set: the custom
   /// quiz's stored form, and the sharer's level while a part is left to it. The quiz route's other
-  /// targets (`quiz/start`) still open the Quiz tab and start a quiz.
+  /// targets but `daily` (`quiz/start`) open the Quiz tab and start a quiz.
   static func practiceSetDeeplink(custom: CustomQuiz, level: QuizLevel?, source: AnalyticsSource) -> URL? {
     var components = URLComponents()
     components.percentEncodedQuery = custom.rawValue
     return deeplink(host: quizHost, target: practiceSetTarget, queryItems: (components.queryItems ?? []) + [
       level.map { URLQueryItem(name: levelQueryName, value: $0.rawValue) },
+      URLQueryItem(name: sourceQueryName, value: source.rawValue)
+    ])
+  }
+
+  /// `conjuguer://quiz/daily?source=reminder`, which opens the Quiz tab and starts a daily session
+  /// unless a quiz is under way or showing its results.
+  static func dailySessionDeeplink(source: AnalyticsSource) -> URL? {
+    deeplink(host: quizHost, target: dailySessionTarget, queryItems: [
       URLQueryItem(name: sourceQueryName, value: source.rawValue)
     ])
   }
@@ -115,6 +123,7 @@ extension URL {
   static let matchQueryName = "match"
   static let searchTextQueryName = "q"
   static let practiceSetTarget = "set"
+  static let dailySessionTarget = "daily"
   static let levelQueryName = "level"
   private static let deeplinkComponentCount = 2
 

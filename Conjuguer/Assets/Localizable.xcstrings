@@ -1962,13 +1962,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This button erases your practice record, which remembers how your quiz answers went, when each conjugation is next due for review, your last quiz’s results, and your Speed Round best. The record stays on this device and is never sent. Your starred and recent verbs stay too."
+            "value" : "This button erases your practice record, which remembers how your quiz answers went, when each conjugation is next due for review, your last quiz’s results, your Speed Round best, and your daily streak. The record stays on this device and is never sent. Your starred and recent verbs stay too."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ce bouton efface votre suivi des exercices, qui retient le résultat de vos réponses aux quiz, le jour où chaque conjugaison revient en révision, le résultat de votre dernier quiz et votre record au contre-la-montre. Ce suivi reste sur cet appareil et n’est jamais envoyé. Vos verbes favoris et récents restent aussi."
+            "value" : "Ce bouton efface votre suivi des exercices, qui retient le résultat de vos réponses aux quiz, le jour où chaque conjugaison revient en révision, le résultat de votre dernier quiz, votre record au contre-la-montre et votre série de séances du jour. Ce suivi reste sur cet appareil et n’est jamais envoyé. Vos verbes favoris et récents restent aussi."
           }
         }
       }
@@ -1996,13 +1996,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Every review the app has scheduled, your last quiz’s results, and your Speed Round best will be forgotten. This cannot be undone."
+            "value" : "Every review the app has scheduled, your last quiz’s results, your Speed Round best, and your daily streak will be forgotten. This cannot be undone."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toutes les révisions prévues, le résultat de votre dernier quiz et votre record au contre-la-montre seront oubliés. Cette action est irréversible."
+            "value" : "Toutes les révisions prévues, le résultat de votre dernier quiz, votre record au contre-la-montre et votre série de séances du jour seront oubliés. Cette action est irréversible."
           }
         }
       }
@@ -9420,6 +9420,448 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "— %@, via le Wiktionnaire"
+          }
+        }
+      }
+    },
+    "DailySession.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily Session"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Séance du jour"
+          }
+        }
+      }
+    },
+    "DailySession.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten questions, starting with what is due for review. Finish one a day to build a streak."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dix questions, en commençant par ce qui est à réviser. Une séance par jour, et votre série s’allonge."
+          }
+        }
+      }
+    },
+    "DailySession.startHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starts ten questions, beginning with what is due for review"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lance dix questions, en commençant par ce qui est à réviser"
+          }
+        }
+      }
+    },
+    "DailySession.another" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Another Session"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encore une séance"
+          }
+        }
+      }
+    },
+    "DailySession.anotherHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starts another daily session"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lance une autre séance du jour"
+          }
+        }
+      }
+    },
+    "DailySession.streakSingular" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streak: 1 day"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Série : 1 jour"
+          }
+        }
+      }
+    },
+    "DailySession.streakPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streak: %@ days"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Série : %@ jours"
+          }
+        }
+      }
+    },
+    "DailySession.streakDoneTodaySingular" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streak: 1 day. Done for today."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Série : 1 jour. C’est fait pour aujourd’hui."
+          }
+        }
+      }
+    },
+    "DailySession.streakDoneTodayPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streak: %@ days. Done for today."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Série : %@ jours. C’est fait pour aujourd’hui."
+          }
+        }
+      }
+    },
+    "DailySession.streakKeepGoingSingular" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streak: 1 day. Today’s session keeps it going."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Série : 1 jour. La séance d’aujourd’hui la prolonge."
+          }
+        }
+      }
+    },
+    "DailySession.streakKeepGoingPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streak: %@ days. Today’s session keeps it going."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Série : %@ jours. La séance d’aujourd’hui la prolonge."
+          }
+        }
+      }
+    },
+    "DailySession.repairTwoSingular" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You missed yesterday. Two sessions today keep your 1-day streak."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous avez manqué hier. Deux séances aujourd’hui sauvent votre série d’un jour."
+          }
+        }
+      }
+    },
+    "DailySession.repairTwoPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You missed yesterday. Two sessions today keep your %@-day streak."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous avez manqué hier. Deux séances aujourd’hui sauvent votre série de %@ jours."
+          }
+        }
+      }
+    },
+    "DailySession.repairOneSingular" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One more session today keeps your 1-day streak."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encore une séance aujourd’hui, et votre série d’un jour est sauvée."
+          }
+        }
+      }
+    },
+    "DailySession.repairOnePlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One more session today keeps your %@-day streak."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encore une séance aujourd’hui, et votre série de %@ jours est sauvée."
+          }
+        }
+      }
+    },
+    "DailyReminder.heading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily Reminder"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rappel quotidien"
+          }
+        }
+      }
+    },
+    "DailyReminder.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This setting determines whether Conjuguer reminds you each day, at the time you choose, to do your daily session. The reminder says how many conjugations are due for review, and it does not come on a day whose session you have finished."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce paramètre détermine si Conjuguer vous rappelle chaque jour, à l’heure choisie, de faire votre séance du jour. Le rappel indique combien de conjugaisons sont à réviser, et il ne vient pas un jour où vous avez déjà terminé votre séance."
+          }
+        }
+      }
+    },
+    "DailyReminder.off" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Off"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non"
+          }
+        }
+      }
+    },
+    "DailyReminder.on" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oui"
+          }
+        }
+      }
+    },
+    "DailyReminder.time" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heure"
+          }
+        }
+      }
+    },
+    "DailyReminder.denied" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications from Conjuguer are off, so the reminder cannot appear. You can allow them in the Settings app."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les notifications de Conjuguer sont désactivées, si bien que le rappel ne peut pas s’afficher. Vous pouvez les autoriser dans l’app Réglages."
+          }
+        }
+      }
+    },
+    "DailyReminder.openSettings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Settings"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir Réglages"
+          }
+        }
+      }
+    },
+    "DailyReminder.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time to Practice"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C’est l’heure de conjuguer"
+          }
+        }
+      }
+    },
+    "DailyReminder.body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your daily session is ready: ten questions in two or three minutes."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre séance du jour vous attend : dix questions en deux ou trois minutes."
+          }
+        }
+      }
+    },
+    "DailyReminder.bodyDueSingular" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your daily session is ready, with 1 conjugation due for review."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre séance du jour vous attend, avec 1 conjugaison à réviser."
+          }
+        }
+      }
+    },
+    "DailyReminder.bodyDuePlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your daily session is ready, with %@ conjugations due for review."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre séance du jour vous attend, avec %@ conjugaisons à réviser."
           }
         }
       }

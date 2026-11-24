@@ -16,6 +16,8 @@ final class PracticeStore {
   private(set) var lastResult: LastQuizResult?
   /// The most right answers in one Speed Round, kept on the device and sent nowhere.
   private(set) var speedRoundBest: Int?
+  /// Kept on the device and sent only as a band.
+  private(set) var dailyStreak = DailyStreak()
   private let getterSetter: GetterSetter
   private let calendar: Calendar
   /// The `LearnerVerbs` JSON a first launch with a practice record migrates. It is read at
@@ -46,6 +48,7 @@ final class PracticeStore {
     }
     lastResult = getterSetter.get(key: LastQuizResult.storageKey).flatMap(LastQuizResult.init(json:))
     speedRoundBest = getterSetter.get(key: Self.speedRoundBestKey).flatMap { Int($0) }
+    dailyStreak = getterSetter.getCodable(key: DailyStreak.storageKey) ?? DailyStreak()
   }
 
   static let speedRoundBestKey = "speedRoundBest"
@@ -149,7 +152,7 @@ final class PracticeStore {
   }
 
   var hasAnythingToReset: Bool {
-    !isEmpty || lastResult != nil || speedRoundBest != nil
+    !isEmpty || lastResult != nil || speedRoundBest != nil || !dailyStreak.isEmpty
   }
 
   func recordResult(_ result: LastQuizResult) {
@@ -171,9 +174,21 @@ final class PracticeStore {
     return true
   }
 
-  /// Settings' Reset Practice, which forgets the last result and the Speed Round's best too. The
-  /// record is saved empty rather than removed, so that the next launch does not migrate the old
-  /// schedules again.
+  /// Returns the streak the session leaves.
+  @discardableResult
+  func recordDailySession(at date: Date = .now) -> DailyStreak.Status {
+    dailyStreak.recordSession(at: date, calendar: calendar)
+    getterSetter.setCodable(key: DailyStreak.storageKey, value: dailyStreak)
+    return dailyStreak.status(at: date, calendar: calendar)
+  }
+
+  func streakStatus(at date: Date = .now) -> DailyStreak.Status {
+    dailyStreak.status(at: date, calendar: calendar)
+  }
+
+  /// Settings' Reset Practice, which forgets the last result, the Speed Round's best, and the
+  /// daily streak too. The record is saved empty rather than removed, so that the next launch does
+  /// not migrate the old schedules again.
   func reset() {
     pendingMigration = nil
     record.reset()
@@ -182,6 +197,8 @@ final class PracticeStore {
     getterSetter.remove(key: LastQuizResult.storageKey)
     speedRoundBest = nil
     getterSetter.remove(key: Self.speedRoundBestKey)
+    dailyStreak = DailyStreak()
+    getterSetter.remove(key: DailyStreak.storageKey)
   }
 
   private static func cardVerb(of item: PracticeItem) -> Verb? {

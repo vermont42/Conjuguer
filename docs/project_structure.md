@@ -69,6 +69,9 @@ Conjuguer/
 │   ├── ConjugatorError.swift   # Error enum for conjugation failures
 │   ├── ConjuguerTips.swift     # TipKit tips (try the quiz, explore models, choose a level, play game, scroll to the verb page's bottom)
 │   ├── CyclingDeck.swift       # Generic deck that deals elements in order and reshuffles on exhaustion
+│   ├── DailyReminder.swift     # The Daily Reminder setting, DailyReminderPlan (a worded notification a day for 14 days, none on a day already done), and World.rescheduleReminders
+│   ├── DailySession.swift      # QuizScope.daily, ten questions at the level with due items first; DailySessionRequest; the streak's hub line, results line, and Another Session
+│   ├── DailyStreak.swift       # Finished daily sessions per calendar day and the streak computed from them: one missed day repaired by two sessions the day after
 │   ├── DefectGroup.swift       # A group of defective verbs and the tenses/persons they lack
 │   ├── DefectGroupParser.swift # XMLParser delegate for defectGroups.xml
 │   ├── defectGroups.xml        # Defective-verb group definitions
@@ -181,6 +184,10 @@ Conjuguer/
 │   ├── ReviewPrompter.swift    # Protocol for review prompting
 │   ├── ReviewPrompterDummy.swift  # No-op double
 │   ├── ReviewPrompterReal.swift   # Prompts at an action-count modulo and a minimum interval
+│   ├── ReminderNotificationDelegate.swift  # Opens a tapped reminder's quiz/daily link; a reminder due while the app is open shows nothing
+│   ├── ReminderScheduler.swift # Protocol for the daily reminder's notifications (Current.reminderScheduler)
+│   ├── ReminderSchedulerReal.swift  # UNUserNotificationCenter implementation: permission, and the reminders replaced as a set, each carrying its link
+│   ├── ReminderSchedulerSpy.swift   # Test spy under unit tests: records each schedule and permission request
 │   ├── Settings.swift          # @Observable user preferences persisted through GetterSetter
 │   ├── SeededRandomNumberGenerator.swift  # SplitMix64, so tests can check random draws with a fixed seed
 │   ├── QRCode.swift            # QR codes made on the device with Core Image, black on white, medium error correction
@@ -300,6 +307,7 @@ ConjuguerTests/
     ├── ConjugationMatchTests.swift     # conjugations(matching:): single cells, shared spellings, compound agreement, alternates, defective cells, non-matches
     ├── ConjugationResultTests.swift    # Grading: pronouns, spacing, alternates, required accents and agreement, and the spelling shown for a variant
     ├── CustomQuizTests.swift           # The custom quiz: its stored form and keys, unknown keys dropped, a part left to the level, lists against bands, never ranked, the choice parameter, what cannot start, chosen tenses at any level, the setting's persistence; nested in QuizTests, sessions that ask only the choice and send custom
+    ├── DailySessionTests.swift         # The streak (a day counted once, the repair, two missed days, a 25-hour day, pruning), the bands, the store across a launch and a reset, the lines, the scope, the reminder plan; nested in QuizTests, a session's draw, the streak and its band, a quit not counting, a repair across days, the reminder rescheduled, and reminder as the source
     ├── DeeplinkTests.swift             # conjuguer:// parsing and routing: the search route, match, info keys, the builders' round trips, and the source query item (serialized — mutates Current)
     ├── DefectGroupTests.swift          # Defect-group membership and tense suppression
     ├── DefectivityAuditTests.swift     # Per-family defectivity audit (traire, braire, férir, poindre, pouvoir's impératif, …)

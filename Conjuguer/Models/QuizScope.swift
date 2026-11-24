@@ -46,11 +46,13 @@ struct QuizScope {
 
   var isSpeedRound = false
 
+  var isDaily = false
+
   /// Only the default quiz posts to its level's leaderboard and sets its best score: a score over
   /// the learner's own verbs, tenses, or practice record, or over three questions, compares with
   /// nothing.
   var isRanked: Bool {
-    verbs == nil && custom == nil && recordSession == nil && !isVerbEssentials && modelPractice == nil && !isRecognition && !isSentences && !isSpeedRound
+    verbs == nil && custom == nil && recordSession == nil && !isVerbEssentials && modelPractice == nil && !isRecognition && !isSentences && !isSpeedRound && !isDaily
   }
 
   /// Review, My Mistakes, and the Speed Round ask whatever the record holds, beyond the level's
@@ -70,11 +72,15 @@ struct QuizScope {
     recordSession == nil && modelPractice?.mode != .mixed && !isSpeedRound
   }
 
-  /// Only the default quiz mixes in items the practice record says are due, up to
-  /// `QuizDraw.dueItemLimit` a round. A quiz over chosen verbs or tenses, or a practice set's, asks
-  /// what was chosen.
+  /// The default quiz mixes in items the practice record says are due, up to
+  /// `QuizDraw.dueItemLimit` a round, and a daily session fills itself with them. A quiz over chosen
+  /// verbs or tenses, or a practice set's, asks what was chosen.
   var mixesDueItems: Bool {
-    isRanked && level == nil
+    (isRanked && level == nil) || isDaily
+  }
+
+  var dueItemLimit: Int {
+    isDaily ? questionCount : QuizDraw.dueItemLimit
   }
 
   /// Only the default quiz, and its Ten More, asks a choice question, one a round from Elementary
@@ -105,10 +111,10 @@ struct QuizScope {
   }
 
   /// Whether the results offer Ten More, or for Verb Essentials five more verbs. Test Me's three
-  /// questions are a check, not a session, and a Speed Round's results offer a fresh minute
-  /// instead.
+  /// questions are a check, not a session, a Speed Round's results offer a fresh minute instead,
+  /// and a daily session's next session is one of its own.
   var continues: Bool {
-    !isSpeedRound && (isVerbEssentials || modelPractice != nil || questionCount == Quiz.questionCount)
+    !isSpeedRound && !isDaily && (isVerbEssentials || modelPractice != nil || questionCount == Quiz.questionCount)
   }
 
   var isVerbPage: Bool {
@@ -118,7 +124,7 @@ struct QuizScope {
   /// A quiz on a verb's page is over before a Live Activity would be noticed. A collection's quiz
   /// runs in a sheet over its page, and a tap on the activity would open the Quiz tab instead.
   var startsLiveActivity: Bool {
-    continues && collection == nil && !isPracticeSet
+    (continues || isDaily) && collection == nil && !isPracticeSet
   }
 
   static let verbPageQuestionCount = 3

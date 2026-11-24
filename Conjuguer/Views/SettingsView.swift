@@ -15,6 +15,7 @@ struct SettingsView: View {
   @State private var showingOnboarding = false
   @State private var showingGame = false
   @State private var isConfirmingReset = false
+  @State private var areRemindersDenied = false
   // The tab stays alive once visited, and a popover tip that becomes eligible while it is hidden,
   // as ChangeLevelTip does when a quiz finishes, would float over another tab pointing at nothing
   // (Konjugieren, iPadOS 26.3).
@@ -59,6 +60,13 @@ struct SettingsView: View {
             .accessibilityValue(settings.quizClock.localizedQuizClock)
 
             Text(L.Settings.quizClockDescription)
+              .settingsLabel()
+          }
+
+          settingCard(title: L.DailyReminder.heading) {
+            dailyReminderControls
+
+            Text(L.DailyReminder.description)
               .settingsLabel()
           }
 
@@ -205,9 +213,17 @@ struct SettingsView: View {
         rateReviewDescription = description
       }
     }
+    // Notifications can be turned off in the Settings app while the reminder is on.
+    .task(id: isOnScreen) {
+      guard isOnScreen, world.settings.dailyReminder == .on else {
+        return
+      }
+      areRemindersDenied = !(await world.reminderScheduler.isAuthorized())
+    }
     .alert(L.Settings.resetPracticeConfirmTitle, isPresented: $isConfirmingReset) {
       Button(L.Settings.resetPracticeConfirm, role: .destructive) {
         world.practice.reset()
+        world.rescheduleReminders()
         world.analytics.signal(name: .tapResetPractice)
       }
       Button(role: .cancel) {}
@@ -222,6 +238,77 @@ struct SettingsView: View {
     }
     .screenBackground()
   }
+
+  @ViewBuilder
+  private var dailyReminderControls: some View {
+    let settings = world.settings
+    Picker("", selection: Binding(get: { settings.dailyReminder }, set: { setDailyReminder($0) })) {
+      ForEach(DailyReminder.allCases, id: \.self) { reminder in
+        Text(reminder.localizedDailyReminder).tag(reminder)
+      }
+    }
+    .pickerStyle(.segmented)
+    .accessibilityIdentifier("picker_settings_dailyReminder")
+    .accessibilityLabel(Text(L.DailyReminder.heading))
+    .accessibilityValue(settings.dailyReminder.localizedDailyReminder)
+
+    if settings.dailyReminder == .on {
+      DatePicker(L.DailyReminder.time, selection: dailyReminderTime, displayedComponents: .hourAndMinute)
+        .font(bodyFont)
+        .foregroundStyle(Color.customForeground)
+        .tint(Color.customBlue)
+        .accessibilityIdentifier("picker_settings_dailyReminderTime")
+    }
+
+    if areRemindersDenied {
+      Text(L.DailyReminder.denied)
+        .font(captionFont)
+        .foregroundStyle(Color.customRed)
+        .accessibilityIdentifier("label_settings_dailyReminderDenied")
+
+      Button(L.DailyReminder.openSettings) {
+        if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
+          openURL(url)
+        }
+      }
+      .funButton()
+      .accessibilityIdentifier("button_settings_openNotificationSettings")
+    }
+  }
+
+  /// Today at the reminder's time, which the picker shows as a time alone.
+  private var dailyReminderTime: Binding<Date> {
+    let settings = world.settings
+    return Binding {
+      let minutes = settings.dailyReminderMinutes
+      return Calendar.current.date(bySettingHour: minutes / 60, minute: minutes % 60, second: 0, of: .now) ?? .now
+    } set: { date in
+      let components = Calendar.current.dateComponents([.hour, .minute], from: date)
+      settings.dailyReminderMinutes = (components.hour ?? 0) * 60 + (components.minute ?? 0)
+      world.rescheduleReminders()
+    }
+  }
+
+  /// Turning the reminder on asks for permission, and a refusal leaves it off, with a line saying
+  /// why. The signal says which: `true`, `false`, or `denied`.
+  private func setDailyReminder(_ reminder: DailyReminder) {
+    guard reminder == .on else {
+      world.settings.dailyReminder = .off
+      areRemindersDenied = false
+      world.rescheduleReminders()
+      world.analytics.signal(name: .tapDailyReminder, parameters: [ParameterKey.enabled.rawValue: "false"])
+      return
+    }
+    Task {
+      let isAllowed = await world.reminderScheduler.requestAuthorization()
+      world.settings.dailyReminder = isAllowed ? .on : .off
+      areRemindersDenied = !isAllowed
+      world.rescheduleReminders()
+      world.analytics.signal(name: .tapDailyReminder, parameters: [ParameterKey.enabled.rawValue: isAllowed ? "true" : Self.deniedValue])
+    }
+  }
+
+  static let deniedValue = "denied"
 
   // A segmented control truncates Intermediate and Intermédiaire on an iPhone, so the levels are
   // tiles, each with a gauge whose needle rises with the level.

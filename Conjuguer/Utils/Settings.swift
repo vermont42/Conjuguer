@@ -48,6 +48,23 @@ class Settings {
   static let quizClockKey = "quizClock"
   static let quizClockDefault: QuizClock = .hide
 
+  var dailyReminder: DailyReminder = dailyReminderDefault {
+    didSet {
+      persist(dailyReminder, oldValue: oldValue, key: Settings.dailyReminderKey)
+    }
+  }
+  static let dailyReminderKey = "dailyReminder"
+  static let dailyReminderDefault: DailyReminder = .off
+
+  /// In minutes after midnight.
+  var dailyReminderMinutes: Int = dailyReminderMinutesDefault {
+    didSet {
+      persist(dailyReminderMinutes, oldValue: oldValue, key: Settings.dailyReminderMinutesKey)
+    }
+  }
+  static let dailyReminderMinutesKey = "dailyReminderMinutes"
+  static let dailyReminderMinutesDefault = DailyReminderPlan.defaultMinutes
+
   /// The Quiz tab's custom quiz, kept between launches beside the default quiz. It is not shown in
   /// Settings.
   var customQuiz: CustomQuiz = customQuizDefault {
@@ -148,6 +165,8 @@ class Settings {
     modelSort = load(key: Settings.modelSortKey, default: Settings.modelSortDefault)
     quizLevel = load(key: Settings.quizLevelKey, default: Settings.migratedQuizLevel(getterSetter: getterSetter))
     quizClock = load(key: Settings.quizClockKey, default: Settings.quizClockDefault)
+    dailyReminder = load(key: Settings.dailyReminderKey, default: Settings.dailyReminderDefault)
+    dailyReminderMinutes = load(key: Settings.dailyReminderMinutesKey, default: Settings.dailyReminderMinutesDefault)
     customQuiz = load(key: Settings.customQuizKey, default: Settings.customQuizDefault)
     bestScores = Dictionary(uniqueKeysWithValues: QuizLevel.allCases.map { level in
       (level, load(key: Settings.bestScoreKey(level), default: Settings.bestScoreDefault))
@@ -226,6 +245,7 @@ extension VerbSort: SettingValue {}
 extension ModelSort: SettingValue {}
 extension QuizLevel: SettingValue {}
 extension QuizClock: SettingValue {}
+extension DailyReminder: SettingValue {}
 extension CustomQuiz: SettingValue {}
 extension PronounGender: SettingValue {}
 extension AppIcon: SettingValue {}

@@ -82,6 +82,23 @@ struct DeeplinkTests {
     #expect(Current.quiz.quizState == .inProgress)
   }
 
+  /// The reminder's link opens the Quiz tab with a request that names it, and starts nothing
+  /// itself: the tab starts the session unless a quiz is under way.
+  @Test func testDailySessionDeeplinkRequestsASession() throws {
+    resetCurrent()
+    let link = try #require(URL.dailySessionDeeplink(source: .reminder))
+    #expect(link.absoluteString == "conjuguer://quiz/daily?source=reminder")
+    Current.selectedTab = .verbs
+    Current.handleURL(link)
+
+    #expect(Current.selectedTab == .quiz)
+    #expect(Current.dailySessionRequest?.source == .reminder)
+    #expect(Current.practiceSet == nil)
+
+    Current.handleURL(url("conjuguer://verb/parler"))
+    #expect(Current.dailySessionRequest == nil)
+  }
+
   @Test func testModelDeeplinkSelectsModel() {
     resetCurrent()
     Current.selectedTab = .verbs

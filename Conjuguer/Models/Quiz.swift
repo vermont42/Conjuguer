@@ -45,6 +45,8 @@ class Quiz {
   /// The best a finished Speed Round had to beat. Nil when there was none.
   private(set) var speedRoundPreviousBest: Int?
   private(set) var isNewSpeedRoundBest = false
+  /// The streak a finished daily session left, which its results show. Nil for any other quiz.
+  private(set) var dailyStreakStatus: DailyStreak.Status?
 
   var speedRoundSecondsLeft: Int {
     max(SpeedRound.duration - elapsedTime, 0)
@@ -377,6 +379,7 @@ class Quiz {
     speedRoundMiss = nil
     speedRoundPreviousBest = nil
     isNewSpeedRoundBest = false
+    dailyStreakStatus = nil
     shouldShowResults = false
   }
 
@@ -443,7 +446,7 @@ class Quiz {
     let slots = scope.slots(at: level)
     let band = scope.band(at: level)
     let due = scope.mixesDueItems
-      ? QuizDraw.dueQuestions(for: Current.practice.dueItems(at: now()), slots: slots, band: band, using: &generator)
+      ? QuizDraw.dueQuestions(for: Current.practice.dueItems(at: now()), slots: slots, band: band, limit: scope.dueItemLimit, using: &generator)
       : []
     let choices = scope.mixesChoiceQuestions ? ChoiceQuestions.askable(at: level) : []
     let asked = Set((questions + due).map(\.verb.id))
@@ -1069,6 +1072,13 @@ class Quiz {
     if scope.sendsQuestionCounts {
       parameters[ParameterKey.questionCount.rawValue] = "\(sessionQuestionCount)"
     }
+    if scope.isDaily {
+      let status = Current.practice.recordDailySession(at: now())
+      dailyStreakStatus = status
+      parameters[ParameterKey.streak.rawValue] = AnalyticsBand.streak(status.length)
+      Current.rescheduleReminders(now: now())
+      announceDailyStreak()
+    }
     Current.analytics.signal(name: .quizCompletion, parameters: parameters)
     Current.practice.recordResult(LastQuizResult(quiz: self, date: now()))
     teardown()
@@ -1078,6 +1088,13 @@ class Quiz {
     let currentRegion = Locale.current.region?.identifier ?? "none"
     let currentLanguage = Locale.current.language.languageCode?.identifier ?? "none"
     return currentLanguage == "fr" ? Utterer.frenchLocaleString : currentLanguage + "-" + currentRegion
+  }
+
+  private func announceDailyStreak() {
+    guard UIAccessibility.isVoiceOverRunning, let line = dailyStreakStatus?.resultsLine else {
+      return
+    }
+    Utterer.utter(line, localeString: currentLocaleString)
   }
 
   private func announceSpeedRoundWarning() {

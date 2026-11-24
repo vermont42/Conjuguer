@@ -6476,3 +6476,39 @@ Looking at the screens caught one thing the tests could not. In French the statu
 réponses : 0" beside "Temps restant : 0:51", wrapped to two lines on the iPhone. It now shows a
 check with the count and a timer with the time, and VoiceOver still reads the words. The suite
 went from 860 to 880 tests, all passing. Josh has yet to try the round on his phone.
+
+## A Daily Session and a Streak (2026-11-24)
+
+Pedagogy Phase 22 gives the Quiz tab a daily session, a streak, and an optional reminder. The
+session is ten questions at the learner's level, filled first with whatever the practice record
+has due and then with the default quiz's draw. Finishing one extends the streak. The French name
+is "Séance du jour", and a streak is a "série", proposed in the session for Josh to judge.
+
+The phase is a port of Konjugieren's, and its rules came across whole: one missed day is repaired
+by two sessions the day after, the bridged day does not count toward the length, the widgets do
+not show the streak, and the streak is sent only in bands. Konjugieren's `DailyStreak` stores
+finished sessions per calendar day and computes the streak from them, keeping only the last two
+runs, since a run can join only the one just before it. It ported almost verbatim, and so did
+its tests. The 25-hour day moved from Berlin to Paris, which turned its clocks back the same
+night.
+
+The draw was where Conjuguer was simpler. Konjugieren wrote a `dailyQuestions` of its own.
+Conjuguer's default quiz already mixed due items into its draw, held to the level's tenses and
+band, up to three a round. A daily session is the same draw with a limit of ten and no choice
+question, so it became a scope flag. `QuizScope.dueItemLimit` is ten for it and three otherwise,
+and `dueQuestions` takes the limit as a parameter.
+
+The reminder schedules one notification a day for two weeks rather than one that repeats. Each
+can then say what that day will have due, or that the streak needs repair, and a day whose
+session is done gets none. One trap was Conjuguer's own. The app rescheduled at every
+activation, and the first activation comes before the verbs finish loading, when nothing counts
+as askable. That would have scheduled two weeks of reminders that each said nothing was due. So
+`rescheduleReminders` leaves the reminders alone until the verbs are loaded, and the launch task
+reschedules once they are.
+
+A tapped reminder opens `conjuguer://quiz/daily?source=reminder`. The other `quiz/` targets start
+a quiz from `World` directly. This one instead leaves a request that the Quiz tab picks up, as
+Konjugieren's does, so the tab's own `start` runs and the answer field gets the keyboard. On the
+simulator the link opened from the Verbs tab straight into a focused "Séance du jour". The
+reminder fired at the minute set, and the seeded repair ran to "Série : 3 jours". The suite went
+from 880 to 905 tests, all passing. Josh has yet to try it on his phone.

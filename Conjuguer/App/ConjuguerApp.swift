@@ -39,6 +39,7 @@ struct ConjuguerApp: App {
       .task {
         await verbData.load()
         Current.practice.migrateIfNeeded()
+        Current.rescheduleReminders()
         // Replay any deeplink that arrived (via onOpenURL) before the data was ready.
         Current.drainPendingDeeplink()
         refreshWidgets()
@@ -55,6 +56,10 @@ struct ConjuguerApp: App {
         Current.handleURL(url)
       }
       .onChange(of: scenePhase) {
+        // The day may have turned, and the record changed, since the reminders were scheduled.
+        if scenePhase == .active || scenePhase == .background {
+          Current.rescheduleReminders()
+        }
         guard scenePhase == .active else {
           return
         }

@@ -45,7 +45,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 19 | Done | 2026-11-24 | 3077bf4 | T5.6 | 19 |
 | 20 | Done | 2026-11-24 | a809734 | T6.2 | 20 |
 | 21 | Done | 2026-11-24 | 444391d | T5.7 | 21 |
-| 22 | Not started | | | T6.3 | 22 |
+| 22 | Done | 2026-11-24 | | T6.3 | 22 |
 | 23 | Not started | | | T6.6 (personal bests and achievements) | 23 |
 | 24 | Not started | | | T6.8 | 24 |
 | Closing | Not started | | | Audit, porting notes | Closing |
@@ -2492,7 +2492,7 @@ scoring.
 
 **Suggestions:** T6.3. **Ports:** Konjugieren Phase 22 (`DailySession.swift`, `DailyStreak.swift`,
 `DailyReminder.swift`, `ReminderSchedulerReal.swift`). **Depends on:** Phases 11, 12, and 13.
-**Status:** Not started.
+**Status:** Done.
 
 A short daily session, a streak that can be repaired, and an optional reminder at a time the
 learner picks. Ask for notification permission only when the learner turns the reminder on. The
@@ -2507,6 +2507,92 @@ reminder, and the streak's length in bands (1, 2-6, 7-29, 30+), all staged.
 controllable clock in tests, and the reminder fires on the simulator at the chosen time.
 
 **How it differed:**
+
+- **Nothing was asked of Josh.** The phase lists no Ask Josh items, and Konjugieren's in-session
+  choices carried over where French did not make one awkward. Each is a guess he can overrule.
+- **Carried over from Konjugieren unasked:** due items first, held to the level's tenses and band,
+  most overdue first, up to all ten, so a due passé simple waits for Review below Advanced; **no
+  choice question**, since a choice moves nothing in the record; **no Ten More**, a second
+  session being one of its own, and **Another Session** in Ten More's place while a repair awaits
+  its second session; never ranked, though it starts a Live Activity; a quit session not counting;
+  the streak's length as days practiced, the bridged day not counted, one session on the day after a
+  missed day showing as a repair in progress; only the last two runs stored; Reset Practice
+  forgetting the streak, its description and alert now saying so; the row first in From Your
+  Practice, a calendar or a flame, always a button; the reminder after the clock in Settings, Off
+  by default, **18:00**, permission asked only on turning it on, a refusal leaving it Off with a red
+  line and Open Settings; **one notification a day for 14 days**, each worded with what that day
+  will have due or the repair it needs, none on a day already done; a tapped reminder starting a
+  session unless a quiz is under way or showing results, and a reminder due while the app is open
+  showing nothing; `tapDailyReminder` with `enabled` `true`, `false`, or `denied`; the streak band
+  of a pending repair being the streak at stake; and `questionCount` sent, the session being ten.
+- **Departed from Konjugieren.** (1) **The draw is the default quiz's**, not a function of its own:
+  Conjuguer's default draw already mixed due items in, so `QuizScope.isDaily` raises
+  `dueItemLimit` from three to ten and `QuizDraw.dueQuestions` takes the limit. The
+  `-CONJUGUER_QUIZ_FIXTURE` fixtures therefore apply to the session too, so no fixture of its own
+  was added; the repair was seeded into the App Group plist instead. (2) **The reminders wait for
+  the verbs.** Conjuguer reschedules at every activation, and the first comes before the verbs load,
+  when nothing counts as askable, so `rescheduleReminders` leaves the scheduled reminders alone
+  until then and the launch task reschedules after the load. (3) **The setting is its own card**,
+  Daily Reminder after Quiz Clock, since Conjuguer's Settings give each setting a card; Off and On
+  are "Non" and "Oui" in French, as Suppress Review Card's are. (4) **The notification delegate has
+  a file of its own** (`ReminderNotificationDelegate.swift`), and the protocol too, by the
+  one-type-per-file convention. (5) **VoiceOver hears the streak line** through `Utterer` when a
+  session finishes, since Conjuguer has no completion announcement to append it to.
+- **Names, proposed in the session:** "Daily Session" / "Séance du jour"; a streak is a "série"
+  ("Série : 3 jours"), though "série" also names a round of model practice ("Encore une série");
+  "Another Session" / "Encore une séance"; "Daily Reminder" / "Rappel quotidien"; the notification's
+  title "Time to Practice" / "C’est l’heure de conjuguer".
+- **Built as** `Models/DailySession.swift` (`QuizScope.daily(source:)`, `DailySessionRequest`, the
+  status's lines), `Models/DailyStreak.swift`, `Models/DailyReminder.swift` (the setting,
+  `ScheduledReminder`, `DailyReminderPlan`, `World.rescheduleReminders`), and in `Utils/`
+  `ReminderScheduler`, `ReminderSchedulerReal`, `ReminderSchedulerSpy`, and
+  `ReminderNotificationDelegate`, with `World.reminderScheduler` and `dailySessionRequest`, the
+  `quiz/daily` route (`URL.dailySessionDeeplink`), `Quiz.dailyStreakStatus`, and `.daily` in
+  `LastQuizResult.Kind`. Twenty-six new strings, and the two Reset Practice lines changed.
+- **Analytics.** `source` values `daily` and `reminder`, `streak` on a daily session's
+  `quizCompletion` (`AnalyticsBand.streak`), and `tapDailyReminder` with `enabled`. Staged in
+  [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md) in both languages: the
+  lifecycle bullet, a new bullet for the reminder, and the practice-record paragraph, which names
+  the streak and says the reminder is written and scheduled on the device. Also found:
+  `docs/feature_architecture.md`'s table of `source` values lacked Phase 21's `speedRound`, now
+  added beside `daily` and `reminder`, as Konjugieren's session found in its own table.
+- **VoiceOver.** The row reads its title and line, with a hint; the results' streak line is spoken
+  at the finish; Another Session has a hint. Read from the accessibility tree, not heard.
+- **Tests:** 880 to 905, all passing through `run_tests.sh` (the iPhone simulator is in English).
+  `DailySessionTests`, 16 functions (22 cases) under a fixed Paris calendar: no streak, a streak
+  through the next day and repairable the day after, a day counted once, two sessions repairing,
+  one session starting anew, two missed days, a 25-hour day, pruning, the bands (7), the store
+  across a launch and a reset, the lines, the scope, and the reminder plan (each day at the time,
+  today's past, a done day skipped with the repair line after, what will be due). Seven nested in
+  `QuizTests`, with `Quiz`'s injected `now`: due items first and nothing beyond the level, ten due
+  items filling the session, the streak and its band with no score posted, a quit not counting, a
+  repair across four days, the reminder rescheduled and cleared, and `reminder` as the source. Plus
+  the setting in `SettingsTests` and the `quiz/daily` route in `DeeplinkTests`.
+- **Verified on the iPhone 17**, light, at Intermediate. In French: the row with no streak; the
+  reminder's link opened with `simctl openurl` from the Verbs tab, straight into "Séance du jour"
+  with the field focused, its first questions the record's due items (falloir, venir); results with
+  "Série : 1 jour" and no Ten More; the row's "Série : 1 jour. C’est fait pour aujourd’hui." and the
+  Last Quiz row naming the session; a seeded streak of the 21st and 22nd reading "Vous avez manqué
+  hier. Deux séances aujourd’hui sauvent votre série de 2 jours."; a first session ending "Encore
+  une séance aujourd’hui, et votre série de 2 jours est sauvée." with Encore une séance, and the
+  second, started from it with the field typing at once, ending "Série : 3 jours". In English:
+  Settings' card, the system's request appearing only on tapping On, Allow, and the time picker at
+  6:00 PM; and the reminder **fired on the simulator at the chosen time** (set two minutes ahead in
+  the defaults, the app in the background), reading "Time to Practice. Your daily session is ready,
+  with 4 conjugations due for review." **On the iPad Pro 11**, in English and dark: the row at full
+  width, a session asking the four due items first and ending "Streak: 1 day", and the request
+  refused, leaving Off with the line and Open Settings. That check found the line drawn in the
+  label color rather than red, since `settingsLabel()` set its own color closer to the text; fixed
+  and seen red. Both simulators' records and settings were restored afterward, the iPhone's checked
+  across a relaunch, and the iPhone's remaining reminders cleared by a launch with the reminder off.
+  **The iPhone simulator now allows Conjuguer's notifications and the iPad's refuses them.** Not
+  tried: tapping the delivered notification (AXe's tap on the Lock Screen cell did not open it, as
+  in Konjugieren), the time picker by tap, Open Settings, VoiceOver by ear, and a real day passing.
+- **For Josh to judge:** the session and the reminder on his phone; the names, above all "Séance du
+  jour" and "série", which also names a round of model practice; the row first in From Your
+  Practice, which pushes My Mistakes lower on the iPhone; 18:00 as the default time; and the
+  notification's title, "C’est l’heure de conjuguer".
+- **Josh asked for the commit** on 2026-11-24.
 
 ## Phase 23: Personal Bests and Achievements
 

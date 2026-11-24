@@ -519,6 +519,9 @@ same.
 | `modelAlone`, `modelMixed` | Yes | The quiz signals only: a model's practice, alone or mixed, from its page or the hub's list (§ Model Practice) |
 | `recognition` | Yes | The quiz signals only: Name the Conjugation, from the Quiz tab (§ Name the Conjugation) |
 | `sentences` | Yes | The quiz signals only: Phrases à trous, from the Quiz tab (§ Phrases à trous) |
+| `speedRound` | Yes | The quiz signals only: the Speed Round, from the Quiz tab or its results (§ Speed Round) |
+| `daily` | Yes | The quiz signals only: the daily session, from the Quiz tab or its results (§ Daily Session) |
+| `reminder` | Yes | The quiz signals only: a daily session begun by tapping the daily reminder (`quiz/daily?source=reminder`) |
 
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
 a bare `Verb`, and the cells a search matched (`marks`). A link carries `source` as a query item
@@ -559,11 +562,11 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
 - **Text travels in query items, never in the path**, because it can hold spaces, apostrophes, and
   slashes ("j'ai mangé"). Query items modify a route; unknown ones are ignored.
 - **`source`** may follow any route that leads to a verb page, a search, a collection, or a quiz.
-  The `quiz` route reads it only for a practice set (`quiz/set`).
+  The `quiz` route reads it only for a practice set (`quiz/set`) and a daily session (`quiz/daily`).
   It names the surface that built the link, from `AnalyticsSource`, because a widget or an intent
   can hand the app nothing but a URL. A missing or unknown value counts as `deeplink`.
 - **Builders, not literals.** App code builds links with `URL.verbDeeplink`, `URL.searchDeeplink`,
-  `URL.infoDeeplink`, `URL.modelDeeplink`, `URL.listDeeplink`, and `URL.practiceSetDeeplink`, which percent-encode. Only the widget extension and
+  `URL.infoDeeplink`, `URL.modelDeeplink`, `URL.listDeeplink`, `URL.practiceSetDeeplink`, and `URL.dailySessionDeeplink`, which percent-encode. Only the widget extension and
   `Shared/`, which cannot see `AnalyticsSource`, write literals (`WidgetDeeplink.verb(_:)`, the
   pending links of `OpenQuizIntent`, `OpenRandomVerbIntent`, `OpenRandomVerbControlIntent`, and
   `OpenVerbSearchIntent`), and `DeeplinkTests` pins each literal's source to the vocabulary.
@@ -574,7 +577,7 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
 | `search` | None | `q`, the text; `source` | The verb list with its search field, any verb page closed. With text, the results show with the keyboard down; with none (or `q` empty), the field is cleared and focused for typing | No |
 | `model` | A model's identifier (`1-1`) | `source`, which a shared model sends as `sharedLink` and nothing reads yet | The model page as a sheet over the Models tab | Yes; `source` is unreleased |
 | `info` | A stable key (`futur_simple`), or a legacy position (`info/0`) | None | The article as a sheet over the Info tab. An unknown key or out-of-range position does nothing | Yes; keys are unreleased |
-| `quiz` | `set`, a practice set; anything else (`OpenQuizIntent` sends `quiz/start`) | For `set`: the custom quiz's stored form (`tenses`, and `verbs` or `infinitives`), `level`, `source` | `set`: the practice set as a sheet over whatever tab is open, never starting a quiz (§ Practice Sets). Anything else: the Quiz tab, starting a quiz unless one is in progress | Yes; `set` is unreleased |
+| `quiz` | `set`, a practice set; `daily`, a daily session; anything else (`OpenQuizIntent` sends `quiz/start`) | For `set`: the custom quiz's stored form (`tenses`, and `verbs` or `infinitives`), `level`, `source`. For `daily`: `source` | `set`: the practice set as a sheet over whatever tab is open, never starting a quiz (§ Practice Sets). `daily`: the Quiz tab, which starts a daily session (`World.dailySessionRequest`) unless a quiz is in progress or showing its results (§ Daily Session). Anything else: the Quiz tab, starting a quiz unless one is in progress | Yes; `set` and `daily` are unreleased |
 | `list` | A featured collection's key (`top100`, `etre`, `irregularFutur`, `pronominal`) | `source` | The collection's page as a sheet over the Models tab. An unknown key does nothing. A model's collection is reached by its `model/` link, not by `list/model-<id>` | No |
 
 A `match` is read as search reads a query (`MarkedConjugations(text:on:)`, through
@@ -587,7 +590,7 @@ does ([Reverse Lookup](#reverse-lookup)). Look Up a Verb sends the row's own spe
 | File | Purpose |
 |------|---------|
 | `URLExtensions.swift` | The grammar's constants (routes, query-item names), `isDeeplink`, `hasDeeplinkTarget`, `analyticsSource`, `deeplinkQueryValue(named:)`, and the builders |
-| `World.swift` | `handleURL(_:)` clears `verb`, `verbMarks`, `verbModel`, `collection`, `info`, `searchRequest`, and `practiceSet`, resolves the link (`resolveDeeplinkEntity(from:)`), and selects the tab. `handleInAppURL(_:)` resolves without clearing or switching tabs, for links inside Info articles. `openSearch(text:source:)` is the search route's effect, which Command-F also uses (`text` nil keeps the field's text) |
+| `World.swift` | `handleURL(_:)` clears `verb`, `verbMarks`, `verbModel`, `collection`, `info`, `searchRequest`, `practiceSet`, and `dailySessionRequest`, resolves the link (`resolveDeeplinkEntity(from:)`), and selects the tab. `handleInAppURL(_:)` resolves without clearing or switching tabs, for links inside Info articles. `openSearch(text:source:)` is the search route's effect, which Command-F also uses (`text` nil keeps the field's text) |
 | `Info.swift` | `Info.info(deeplinkTarget:)` resolves a stable key or a legacy position |
 | `MatchedConjugation.swift` | `MarkedConjugations(text:on:)` reads a `match` item |
 | `VerbBrowseView.swift` | Consumes `searchRequest` on appear and on change, since a link can arrive before the tab first appears, and presents `verb` with `verbSource` and `verbMarks` |
@@ -621,6 +624,7 @@ conjuguer://model/1-9                                   → aller's model
 conjuguer://list/etre?source=sharedLink                 → the Verbs Taking Être collection
 conjuguer://quiz/set?tenses=imparfait&verbs=etre        → a practice set: the imparfait of the verbs taking être
 conjuguer://quiz/set?infinitives=parler,venir&level=beginner&source=qrCode → a practice set over two verbs at Beginner's tenses
+conjuguer://quiz/daily?source=reminder                  → the Quiz tab, starting a daily session
 ```
 
 ## Lookup from Outside the App
@@ -1199,6 +1203,7 @@ Collections).
 | `.custom(_:myVerbs:)` | 10 over the learner's chosen tenses, verbs, or both, with Ten More | The Quiz tab with Custom chosen (§ The Custom Quiz) |
 | `PracticeSet.scope(source:)` | 10 over a shared set's tenses and verbs, at the set's level, with Ten More | Start on a practice set's sheet (§ Practice Sets) |
 | `.speedRound` | As many as the learner answers in 60 seconds, on mastered items, with Another Round | The hub's Speed Round row (§ Speed Round) |
+| `.daily(source:)` | 10 at the learner's level, due items first, with no Ten More | The hub's Daily Session row, its results' Another Session, and the reminder (§ Daily Session) |
 
 **A scoped quiz uses the learner's level.** Each question draws a tense by its weight from the
 level's tenses that some verb of the scope has, so a tense no verb has is never drawn and a My
@@ -1415,7 +1420,8 @@ and how the last quiz went. From the top:
 - **The level's tile is a menu** (`quiz_level_menu`) of the four levels, with a chevron to say so.
   It writes the same setting as Settings' level tiles, sends nothing (as Settings sends nothing),
   and counts as the action `ChangeLevelTip` suggests.
-- **From Your Practice**: Review and My Mistakes (§ Review and My Mistakes), then **Mastery**
+- **From Your Practice**: the Daily Session (`quiz_daily_button`, § Daily Session), Review and My
+  Mistakes (§ Review and My Mistakes), then **Mastery**
   (`quiz_mastery_button`), whose chevron says it pushes a page (§ Mastery), then **Last Quiz**
   (`quiz_last_result`), absent until a quiz has finished: "All Verbs · Elementary · today", then
   "Correct: 7 / 10 · Second Try: 1 · Score: 75".
@@ -1435,7 +1441,7 @@ and how the last quiz went. From the top:
 the session so far, by every scope, Test Me's three questions included. A quit quiz writes
 nothing, since its results were never shown. It keeps a kind (`allVerbs`, `myVerbs`, `verbPage`,
 `collection`, `custom`, `practiceSet`, `review`, `mistakes`, `verbEssentials`, `modelAlone`,
-`modelMixed`, `recognition`, `sentences`, `speedRound`) and a verb's `dictionaryKey`, a collection's key, or a practiced model's id rather
+`modelMixed`, `recognition`, `sentences`, `speedRound`, `daily`) and a verb's `dictionaryKey`, a collection's key, or a practiced model's id rather
 than a title, so that it reads in the current language. Review, My Mistakes, a model's practice,
 and the Speed Round keep no level, and the Speed Round's row shows no score, since it counts right
 answers. `PracticeStore` keeps it as JSON under `lastQuizResult` in the App Group's
@@ -1797,11 +1803,62 @@ A row at the foot of the hub's Exercises, with a bolt.
   présent, faire's futur, and être's présent key conjugations. A round on it still writes the
   device's best and last result.
 
+### Daily Session
+
+Ten questions a day at the learner's level, a streak that one missed day does not break, and an
+optional reminder. "Daily Session" in English, "Séance du jour" in French. The first row of From
+Your Practice, with a calendar, or a flame once there is a streak.
+
+- **What it asks** (`QuizScope.daily(source:)`, in `DailySession.swift`). The default quiz's draw,
+  with the record's due items in place of its three: those the level asks and the band holds, most
+  overdue first, up to all ten (`QuizScope.dueItemLimit`), so a passé simple due below Advanced
+  waits for Review. **No choice question**, since a choice moves nothing in the record, and **no
+  Ten More**: a second session is a session of its own, which a repair counts. Never ranked; it
+  starts a Live Activity, as a ten-question quiz from the tab does. A quit session does not count.
+  The `-CONJUGUER_QUIZ_FIXTURE` fixtures apply to it as to the default quiz.
+- **The streak** (`DailyStreak`), kept by `PracticeStore` as JSON under `dailyStreak` in the App
+  Group's defaults, beside the practice record. It stores finished sessions per calendar day and
+  computes the streak from them. Its length is days practiced. **One missed day is repaired by two
+  sessions the day after**, and the bridged day does not count; one session on that day starts a
+  run of its own and shows as a repair in progress, and if the day ends there, the old streak is
+  gone. Only the last two runs are kept. Days are counted in the calendar, so a 25-hour day is
+  one. Reset Practice forgets the streak.
+- **The hub's line** follows the status: the session's description; "Streak: 3 days. Today's
+  session keeps it going." or "… Done for today."; "You missed yesterday. Two sessions today keep
+  your 3-day streak."; "One more session today keeps your 3-day streak." The row always starts a
+  session, a second on an ordinary day changing nothing.
+- **The results** show the streak (`results_daily_streak`) under the score. While a repair awaits
+  its second session they offer **Another Session** (`results_daily_another`) in Ten More's place.
+- **The reminder.** Settings' Daily Reminder card, after Quiz Clock: Off or On
+  (`picker_settings_dailyReminder`), and while on a time (`picker_settings_dailyReminderTime`),
+  18:00 by default (`Settings.dailyReminder`, `dailyReminderMinutes`). Permission is asked only on
+  turning it on; refused, the setting stays Off with a red line
+  (`label_settings_dailyReminderDenied`) and Open Settings
+  (`button_settings_openNotificationSettings`), which also show while On if notifications were
+  later turned off in the Settings app. `DailyReminderPlan` schedules **one notification a day for
+  14 days** rather than one that repeats, so that each can say what that day will have due ("Your
+  daily session is ready, with 11 conjugations due for review.") or that its streak needs repair,
+  and so that a day whose session is done gets none. `World.rescheduleReminders` replaces them when
+  the setting or the time changes, a daily session finishes, practice is reset, the verbs finish
+  loading, and the app becomes active or goes to the background; a learner away for two weeks stops
+  being reminded. `ReminderScheduler` has `ReminderSchedulerReal` (the notification center) on the
+  device and the simulator, and `ReminderSchedulerSpy` under unit tests.
+- **Tapping a reminder** opens `conjuguer://quiz/daily?source=reminder`
+  (`ReminderNotificationDelegate`, set in `AppDelegate`), which sets `World.dailySessionRequest`;
+  the Quiz tab starts the session on appearing or on the request's change, unless a quiz is under
+  way or showing results. A reminder due while the app is open shows nothing.
+- **Signals.** The quiz signals with `source` `daily` or `reminder`, with `questionCount` as the
+  default quiz sends it. `quizCompletion` adds `streak` (`1`, `2-6`, `7-29`, `30+`), the streak at
+  stake while a repair is pending. `tapDailyReminder` carries `enabled`: `true`, `false`, or
+  `denied` for a learner who turned it on and refused permission.
+- **VoiceOver.** The row reads its title and line, with a hint; at the results, the streak line is
+  spoken; Another Session has a hint. The widgets do not show the streak.
+
 ### Signals
 
 `quizStart` (`level`, `source`), `quizQuit` (`level`, `lastQuestionIndex`, `duration`, `source`),
 `quizCompletion` (`level`, `questionCount`, `duration`, `source`), and `quizAbandon` (`level`,
-`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, `verbEssentials`, `modelAlone`, `modelMixed`, `recognition`, `sentences`, or `speedRound`, so a
+`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, `verbEssentials`, `modelAlone`, `modelMixed`, `recognition`, `sentences`, `speedRound`, `daily`, or `reminder`, so a
 three-question quiz does not inflate the ten-question quiz's completion rate.
 
 - **No signal carries a score or a count of right or wrong answers.** `lastQuestionIndex` is the
@@ -1816,6 +1873,8 @@ three-question quiz does not inflate the ten-question quiz's completion rate.
   sends no `quizStart`.
 - **Review and My Mistakes** send neither `questionCount` nor `lastQuestionIndex` (§ Review and
   My Mistakes), nor does a mixed model practice or the Speed Round (§ Speed Round).
+- **A daily session's `quizCompletion`** also carries `streak`, in `AnalyticsBand.streak`'s bands
+  (§ Daily Session).
 - **`quizAbandon`** reports a quiz the app was left during. `QuizAbandonment` keeps one entry per
   `Quiz` in settings, written at the start and at each question and removed at a quit or the
   results, so an entry still there at the next launch belongs to a quiz that ended with the app.

@@ -13,7 +13,7 @@ extension QuizDraw {
   static let dueItemLimit = 3
 
   /// A question for each due item that the slots ask and the band holds, in the record's order,
-  /// most overdue first, and at most `dueItemLimit`. A key conjugation asks its own cell of its
+  /// most overdue first, and at most `limit`. A key conjugation asks its own cell of its
   /// verb. A pattern asks its cell of a verb from the band that shares the pattern. An item the
   /// level does not ask, such as a passé simple below Advanced, or a looked-up verb beyond the band,
   /// waits, so that the default quiz stays within its level.
@@ -21,6 +21,7 @@ extension QuizDraw {
     for items: [PracticeItem],
     slots: [QuizTenseSlot],
     band: FrequencyBand?,
+    limit: Int = dueItemLimit, // swiftlint:disable:this function_default_parameter_at_end
     using generator: inout some RandomNumberGenerator
   ) -> [QuizQuestion] {
     let bandVerbs = verbs(in: band).filter { !excludedEntries.contains($0.dictionaryKey) }
@@ -28,7 +29,7 @@ extension QuizDraw {
     let askedSlots = Set(slots)
     var questions: [QuizQuestion] = []
 
-    for item in items where questions.count < dueItemLimit {
+    for item in items where questions.count < limit {
       guard let tense = item.tense, let slot = QuizTenseSlot(tense: tense), askedSlots.contains(slot) else {
         continue
       }

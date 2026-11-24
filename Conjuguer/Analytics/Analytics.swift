@@ -26,6 +26,8 @@ enum ParameterKey: String {
   case collection
   case customChoice
   case method
+  case enabled
+  case streak
 }
 
 enum AnalyticsName: String {
@@ -52,6 +54,7 @@ enum AnalyticsName: String {
   case tapKeepPracticeSet
   case tapResetPractice
   case tapViewLeaderboard
+  case tapDailyReminder
 }
 
 /// How the learner reached a verb page or began a quiz. One vocabulary serves every signal that
@@ -62,6 +65,7 @@ enum AnalyticsSource: String, CaseIterable {
   case browse
   case control
   case custom
+  case daily
   case deeplink
   case infoLink
   case list
@@ -77,6 +81,7 @@ enum AnalyticsSource: String, CaseIterable {
   case recent
   case recognition
   case related
+  case reminder
   case resume
   case review
   case reviewCard
@@ -190,6 +195,20 @@ enum AnalyticsBand {
       return "40s-2m"
     default:
       return "2m+"
+    }
+  }
+
+  /// The daily sessions finished on consecutive days, a repair's bridged day not counted.
+  nonisolated static func streak(_ length: Int) -> String {
+    switch length {
+    case ...1:
+      return "1"
+    case 2...6:
+      return "2-6"
+    case 7...29:
+      return "7-29"
+    default:
+      return "30+"
     }
   }
 

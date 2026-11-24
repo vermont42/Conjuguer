@@ -1484,6 +1484,120 @@ enum L {
     }
   }
 
+  enum DailySession {
+    static var title: String {
+      String(localized: "DailySession.title")
+    }
+
+    static var description: String {
+      String(localized: "DailySession.description")
+    }
+
+    static var startHint: String {
+      String(localized: "DailySession.startHint")
+    }
+
+    static var another: String {
+      String(localized: "DailySession.another")
+    }
+
+    static var anotherHint: String {
+      String(localized: "DailySession.anotherHint")
+    }
+
+    static func streak(_ count: Int) -> String {
+      let formattedCount = count.formatted()
+      if count == 1 {
+        return String(localized: "DailySession.streakSingular", defaultValue: "Streak: 1 day")
+      } else {
+        return String(localized: "DailySession.streakPlural", defaultValue: "Streak: \(formattedCount) days")
+      }
+    }
+
+    static func streakDoneToday(_ count: Int) -> String {
+      let formattedCount = count.formatted()
+      if count == 1 {
+        return String(localized: "DailySession.streakDoneTodaySingular", defaultValue: "Streak: 1 day. Done for today.")
+      } else {
+        return String(localized: "DailySession.streakDoneTodayPlural", defaultValue: "Streak: \(formattedCount) days. Done for today.")
+      }
+    }
+
+    static func streakKeepGoing(_ count: Int) -> String {
+      let formattedCount = count.formatted()
+      if count == 1 {
+        return String(localized: "DailySession.streakKeepGoingSingular", defaultValue: "Streak: 1 day. Today’s session keeps it going.")
+      } else {
+        return String(localized: "DailySession.streakKeepGoingPlural", defaultValue: "Streak: \(formattedCount) days. Today’s session keeps it going.")
+      }
+    }
+
+    static func repairTwo(_ count: Int) -> String {
+      let formattedCount = count.formatted()
+      if count == 1 {
+        return String(localized: "DailySession.repairTwoSingular", defaultValue: "You missed yesterday. Two sessions today keep your 1-day streak.")
+      } else {
+        return String(localized: "DailySession.repairTwoPlural", defaultValue: "You missed yesterday. Two sessions today keep your \(formattedCount)-day streak.")
+      }
+    }
+
+    static func repairOne(_ count: Int) -> String {
+      let formattedCount = count.formatted()
+      if count == 1 {
+        return String(localized: "DailySession.repairOneSingular", defaultValue: "One more session today keeps your 1-day streak.")
+      } else {
+        return String(localized: "DailySession.repairOnePlural", defaultValue: "One more session today keeps your \(formattedCount)-day streak.")
+      }
+    }
+  }
+
+  enum DailyReminder {
+    static var heading: String {
+      String(localized: "DailyReminder.heading")
+    }
+
+    static var description: String {
+      String(localized: "DailyReminder.description")
+    }
+
+    static var off: String {
+      String(localized: "DailyReminder.off")
+    }
+
+    static var on: String {
+      String(localized: "DailyReminder.on")
+    }
+
+    static var time: String {
+      String(localized: "DailyReminder.time")
+    }
+
+    static var denied: String {
+      String(localized: "DailyReminder.denied")
+    }
+
+    static var openSettings: String {
+      String(localized: "DailyReminder.openSettings")
+    }
+
+    static var title: String {
+      String(localized: "DailyReminder.title")
+    }
+
+    static var body: String {
+      String(localized: "DailyReminder.body")
+    }
+
+    static func bodyDue(_ count: Int) -> String {
+      let formattedCount = count.formatted()
+      if count == 1 {
+        return String(localized: "DailyReminder.bodyDueSingular", defaultValue: "Your daily session is ready, with 1 conjugation due for review.")
+      } else {
+        return String(localized: "DailyReminder.bodyDuePlural", defaultValue: "Your daily session is ready, with \(formattedCount) conjugations due for review.")
+      }
+    }
+  }
+
   enum SpeedRound {
     static var title: String {
       String(localized: "SpeedRound.title")

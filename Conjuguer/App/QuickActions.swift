@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 /// The Home Screen quick actions, shown on a long press of the app icon. They are installed at
 /// launch rather than declared in Info.plist, so that their titles come from the string catalog
@@ -50,6 +51,7 @@ enum QuickAction: String, CaseIterable {
 final class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
     QuickAction.install()
+    UNUserNotificationCenter.current().delegate = ReminderNotificationDelegate.shared
     return true
   }
 

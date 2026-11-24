@@ -99,6 +99,7 @@ struct QuizView: View {
         return
       }
       world.analytics.signal(name: .viewAppeared, parameters: [ParameterKey.viewName.rawValue: "\(QuizView.self)"])
+      startRequestedDailySession()
       isSignedInToGameCenter = world.gameCenter.isAuthenticated
       if quiz.quizState == .notStarted && !world.gameCenter.isAuthenticated {
         world.gameCenter.authenticate(onViewController: authCoordinator.viewController) { _ in
@@ -107,6 +108,9 @@ struct QuizView: View {
           }
         }
       }
+    }
+    .onChange(of: world.dailySessionRequest) {
+      startRequestedDailySession()
     }
     .sensoryFeedback(trigger: quiz.quizResults.count) { _, newCount in
       guard newCount > 0 else {
@@ -799,6 +803,8 @@ struct QuizView: View {
         .accessibilityAddTraits(.isHeader)
         .accessibilityIdentifier("quiz_record_sessions")
 
+      dailySessionRow
+
       ForEach(QuizRecordSession.allCases, id: \.self) { session in
         let askableCount = session.askableCount(from: world.practice)
         QuizHubRow(
@@ -821,6 +827,20 @@ struct QuizView: View {
       }
     }
     .card()
+  }
+
+  private var dailySessionRow: some View {
+    let streak = world.practice.streakStatus()
+    return QuizHubRow(
+      title: L.DailySession.title,
+      detail: streak.hubDetail,
+      systemImage: streak.length > 0 ? "flame.fill" : "calendar",
+      identifier: "quiz_daily",
+      hint: L.DailySession.startHint
+    ) {
+      start(scope: .daily())
+      TryQuizTip().invalidate(reason: .actionPerformed)
+    }
   }
 
   private var masteryRow: some View {
@@ -1057,6 +1077,21 @@ struct QuizView: View {
     Task { @MainActor in
       conjugationFieldIsFocused = true
     }
+  }
+
+  /// The reminder's daily session, unless a quiz is under way or showing its results, which the
+  /// learner returns to instead.
+  private func startRequestedDailySession() {
+    guard sheetScope == nil, let request = world.dailySessionRequest else {
+      return
+    }
+    world.dailySessionRequest = nil
+    guard quiz.quizState != .inProgress, !quiz.shouldShowResults else {
+      return
+    }
+    navigationPath = NavigationPath()
+    start(scope: .daily(source: request.source))
+    TryQuizTip().invalidate(reason: .actionPerformed)
   }
 
   private func quit() {

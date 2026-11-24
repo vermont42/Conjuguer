@@ -16,6 +16,7 @@ struct LastQuizResult: Codable, Equatable {
     case allVerbs
     case collection
     case custom
+    case daily
     case mistakes
     case modelAlone
     case modelMixed
@@ -70,7 +71,7 @@ struct LastQuizResult: Codable, Equatable {
       subject = quiz.scope.modelPractice?.modelID
     case .verbPage:
       subject = quiz.scope.verbs?.first?.dictionaryKey
-    case .allVerbs, .custom, .mistakes, .myVerbs, .practiceSet, .recognition, .review, .sentences, .speedRound, .verbEssentials:
+    case .allVerbs, .custom, .daily, .mistakes, .myVerbs, .practiceSet, .recognition, .review, .sentences, .speedRound, .verbEssentials:
       subject = nil
     }
     self.init(
@@ -110,6 +111,8 @@ struct LastQuizResult: Codable, Equatable {
       return subject.flatMap(VerbCollection.init(key:))?.title ?? L.PracticeSet.title
     case .custom:
       return L.CustomQuiz.title
+    case .daily:
+      return L.DailySession.title
     case .mistakes:
       return QuizRecordSession.mistakes.title
     case .modelAlone:
@@ -157,6 +160,8 @@ extension LastQuizResult.Kind {
       self = .sentences
     } else if scope.isSpeedRound {
       self = .speedRound
+    } else if scope.isDaily {
+      self = .daily
     } else if scope.isPracticeSet {
       self = .practiceSet
     } else if scope.custom != nil {

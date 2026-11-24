@@ -30,6 +30,19 @@ struct SettingsTests {
     #expect(reloaded.modelSort == .alphabetical, "modelSort must survive a relaunch.")
   }
 
+  @Test func theDailyReminderIsOffAt18AndSurvivesReload() {
+    let store = GetterSetterFake()
+    let settings = SettingsTests.makeSettings(getterSetter: store)
+    #expect(settings.dailyReminder == .off)
+    #expect(settings.dailyReminderMinutes == 18 * 60)
+
+    settings.dailyReminder = .on
+    settings.dailyReminderMinutes = 7 * 60 + 30
+    let reloaded = SettingsTests.makeSettings(getterSetter: store)
+    #expect(reloaded.dailyReminder == .on)
+    #expect(reloaded.dailyReminderMinutes == 450)
+  }
+
   @Test func testVerbSortSurvivesReload() {
     let store = GetterSetterFake()
 

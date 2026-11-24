@@ -926,3 +926,63 @@ Le paragraphe sur le suivi des exercices devient :
 ```
 L'application conserve aussi un suivi des exercices : pour chaque conjugaison que vos réponses aux quiz et vos consultations ont touchée, si votre dernière réponse était juste et le jour où elle doit être révisée, afin que les quiz et les cartes de révision la reproposent et que l'onglet Quiz puisse afficher ce que vous maîtrisez, le résultat de votre dernier quiz, afin que l'onglet Quiz puisse l'afficher, et votre record au « Contre-la-montre ». Ce suivi reste sur votre appareil et n'est jamais envoyé. « Réinitialiser le suivi », dans les Paramètres, l'efface.
 ```
+
+## A daily session and a streak (pedagogy plan, Phase 22, 2026-11-24)
+
+The Quiz tab gains the daily session ("Séance du jour" in French): ten questions at the learner's
+level, beginning with what is due for review. The quiz signals send two new `source` values:
+`daily`, for a session begun from the Quiz tab or from its results, and `reminder`, for one begun
+by tapping the daily reminder, which opens the app and starts the session. A daily session's
+`quizCompletion` also carries the new parameter `streak`, the days in a row on which a daily
+session was finished, in bands (`1`, `2-6`, `7-29`, `30+`); a streak awaiting repair is sent as the
+streak at stake. The session sends its question count as the default quiz does, since it is always
+ten, and posts nothing to Game Center, which section 6 already allows. Adds `tapDailyReminder`,
+sent when the learner turns Settings' Daily Reminder on or off, with the parameter `enabled`
+(`true`, `false`, or `denied` when the learner turned it on and refused the system's request to
+send notifications). The reminder is a local notification, scheduled by the app on the device,
+which writes its text from the practice record; nothing about it leaves the device. The days on
+which daily sessions were finished are kept on the device beside the practice record, sent only as
+the band, and erased by Reset Practice, so the practice-record paragraph names the streak.
+
+This section replaces the quiz lifecycle bullet and the practice-record paragraph that the section
+on the Speed Round gives, so apply it after that section.
+
+### English
+
+The bullet on quiz lifecycle events now reads:
+
+```
+- Quiz lifecycle events (starting, quitting, or completing a quiz), and where the quiz began: the Quiz tab, over every verb, over My Verbs, over a custom choice, as a review of what is due, as practice of your mistakes, as the daily session, and whether you began it from its reminder, or as the Verb Essentials, Name the Conjugation, Sentences, or Speed Round exercise, a verb's page, a collection, a practice set opened from a shared link or a QR code, or the practice of a conjugation model, alone or mixed with models you know, with which collection for the four featured ones (a model's collection, or a model's practice, is named only as a model); for a custom quiz or a practice set, whether it chose tenses, verbs, or both, but not which; and when you finish a daily session, roughly how many days in a row you have finished one (1, 2 to 6, 7 to 29, or 30 or more)
+```
+
+A new bullet for the list in section 2, after the last:
+
+```
+- That you turned the daily reminder on or off in Settings, and whether you allowed notifications
+```
+
+The practice-record paragraph now reads:
+
+```
+The app also keeps a practice record: for each conjugation your quiz answers and lookups have touched, whether your last answer was right and when it is next due for review, so that quizzes and review cards can bring it back and the Quiz tab can show what you have mastered, the results of your last quiz, so that the Quiz tab can show them, your best in the Speed Round, and the days on which you finished a daily session, so that the Quiz tab can show your streak. The practice record stays on your device and is never sent. Reset Practice in Settings erases it. The daily reminder, if you turn it on, is scheduled on your device, which writes what it says from the practice record; nothing about it is sent.
+```
+
+### French
+
+Le point sur les événements du cycle de vie d'un quiz devient :
+
+```
+- Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes, sur « Mes verbes », sur mesure, en révision de ce qui est à revoir, pour revoir vos erreurs, en « Séance du jour », et si vous l'avez commencée depuis son rappel, ou dans l'exercice « L'essentiel du verbe », « Identifier la forme verbale », « Phrases à trous » ou « Contre-la-montre », la page d'un verbe, une collection, une série d'exercices ouverte depuis un lien partagé ou un code QR, ou l'exercice d'un modèle de conjugaison, seul ou mélangé aux modèles que vous connaissez, avec le nom de la collection pour les quatre collections mises en avant (la collection d'un modèle, ou l'exercice d'un modèle, est désigné seulement comme celui d'un modèle) ; pour un quiz sur mesure ou une série d'exercices, s'il porte sur des temps, des verbes ou les deux, mais pas lesquels ; et lorsque vous terminez une séance du jour, le nombre approximatif de jours d'affilée où vous en avez terminé une (1, de 2 à 6, de 7 à 29, ou 30 et plus)
+```
+
+Un nouveau point pour la liste de la section 2, après le dernier :
+
+```
+- L'activation ou la désactivation du rappel quotidien dans les Paramètres, et si vous avez autorisé les notifications
+```
+
+Le paragraphe sur le suivi des exercices devient :
+
+```
+L'application conserve aussi un suivi des exercices : pour chaque conjugaison que vos réponses aux quiz et vos consultations ont touchée, si votre dernière réponse était juste et le jour où elle doit être révisée, afin que les quiz et les cartes de révision la reproposent et que l'onglet Quiz puisse afficher ce que vous maîtrisez, le résultat de votre dernier quiz, afin que l'onglet Quiz puisse l'afficher, votre record au « Contre-la-montre » et les jours où vous avez terminé une séance du jour, afin que l'onglet Quiz puisse afficher votre série. Ce suivi reste sur votre appareil et n'est jamais envoyé. « Réinitialiser le suivi », dans les Paramètres, l'efface. Le rappel quotidien, si vous l'activez, est programmé sur votre appareil, qui en rédige le texte à partir du suivi ; rien de ce rappel n'est envoyé.
+```

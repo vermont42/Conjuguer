@@ -35,6 +35,15 @@ struct QuizResultsView: View {
           if isSpeedRound {
             speedRoundBest
           }
+
+          if let line = quiz.dailyStreakStatus?.resultsLine {
+            Label(line, systemImage: "flame.fill")
+              .font(bodyEmphasisFont)
+              .foregroundStyle(Color.customRed)
+              .fixedSize(horizontal: false, vertical: true)
+              .padding(.top, Layout.defaultSpacing / 2)
+              .accessibilityIdentifier("results_daily_streak")
+          }
         }
         .padding(.top, Layout.defaultSpacing)
 
@@ -78,6 +87,20 @@ struct QuizResultsView: View {
           .padding(.top, Layout.defaultSpacing)
           .accessibilityHint(L.SpeedRound.againHint)
           .accessibilityIdentifier("results_speed_round_again")
+        } else if quiz.dailyStreakStatus?.awaitsRepairSession == true {
+          Button {
+            quiz.start(scope: .daily())
+          } label: {
+            Label(L.DailySession.another, systemImage: "flame.fill")
+              .buttonLabel()
+              .frame(maxWidth: Self.tenMoreMaxWidth)
+          }
+          .funButton()
+          .controlSize(.large)
+          .frame(maxWidth: .infinity)
+          .padding(.top, Layout.defaultSpacing)
+          .accessibilityHint(L.DailySession.anotherHint)
+          .accessibilityIdentifier("results_daily_another")
         } else if quiz.canContinue {
           Button {
             quiz.continueSession()

@@ -34,6 +34,7 @@ class World {
   var learnerVerbs: LearnerVerbStore
   var practice: PracticeStore
   var liveActivities: LiveActivities
+  var reminderScheduler: ReminderScheduler
   var verb: Verb?
   // How `verb` was reached, for its page's `viewAppeared`: a link's `source` item, else `deeplink`.
   var verbSource: AnalyticsSource = .deeplink
@@ -45,6 +46,8 @@ class World {
   var info: Info?
   // A `quiz/set` link's practice set, shown over whatever tab is open.
   var practiceSet: PracticeSetRequest?
+  // A `quiz/daily` link's session, which the Quiz tab starts unless a quiz is under way.
+  var dailySessionRequest: DailySessionRequest?
   var selectedTab: MainTab = .verbs
   var shouldNavigateToTutor = false
   // Set by a search link, Command-F, the control, or the quick action, and cleared by
@@ -70,6 +73,7 @@ class World {
     learnerVerbs: LearnerVerbStore,
     practice: PracticeStore,
     liveActivities: LiveActivities,
+    reminderScheduler: ReminderScheduler,
     session: URLSession
   ) {
     self.settings = settings
@@ -83,6 +87,7 @@ class World {
     self.learnerVerbs = learnerVerbs
     self.practice = practice
     self.liveActivities = liveActivities
+    self.reminderScheduler = reminderScheduler
     self.session = session
   }
 
@@ -118,6 +123,7 @@ class World {
       learnerVerbs: LearnerVerbStore(getterSetter: sharedGetterSetter),
       practice: PracticeStore(getterSetter: sharedGetterSetter),
       liveActivities: LiveActivitiesReal(),
+      reminderScheduler: ReminderSchedulerReal(),
       session: URLSession.shared
     )
   }()
@@ -141,6 +147,7 @@ class World {
       learnerVerbs: LearnerVerbStore(getterSetter: sharedGetterSetter),
       practice: PracticeStore(getterSetter: sharedGetterSetter),
       liveActivities: LiveActivitiesReal(),
+      reminderScheduler: ReminderSchedulerReal(),
       session: fakeSession
     )
   }()
@@ -163,6 +170,7 @@ class World {
       learnerVerbs: LearnerVerbStore(getterSetter: GetterSetterFake()),
       practice: PracticeStore(getterSetter: GetterSetterFake()),
       liveActivities: LiveActivitiesSpy(),
+      reminderScheduler: ReminderSchedulerSpy(),
       session: fakeSession
     )
   }()
@@ -230,6 +238,7 @@ class World {
     info = nil
     searchRequest = nil
     practiceSet = nil
+    dailySessionRequest = nil
   }
 
   @discardableResult
@@ -253,6 +262,10 @@ class World {
       if target == URL.practiceSetTarget {
         practiceSet = PracticeSetRequest(practiceSet: PracticeSet(url: url), source: url.analyticsSource ?? .deeplink)
         return nil
+      }
+      if target == URL.dailySessionTarget {
+        dailySessionRequest = DailySessionRequest(source: url.analyticsSource ?? .deeplink)
+        return .quiz
       }
       if quiz.quizState != .inProgress {
         quiz.start()
