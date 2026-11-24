@@ -47,6 +47,7 @@ Conjuguer/
 │   ├── Sounds/                 # MP3 effects for quiz and game (applause, buzz, chime, guns, ghost, robot, …)
 │   └── WorkSans*.ttf           # Bundled Work Sans faces (regular, semibold, bold, italic); the regular, semibold, and italic are registered in Info.plist
 ├── Models/
+│   ├── Achievement.swift       # The nine Game Center achievements for mastery milestones: permanent IDs, points, each one's progress from the practice record (a level's patterns, the three key conjugations of the pillars or of 10, 25, or 50 irregular verbs, the maison d'être's passés composés), and GameCenter.reportAchievements(in:)
 │   ├── AnswerDiagnosis.swift   # Why a wrong quiz answer is wrong, when the Conjugator can say so for certain (agreement, auxiliary, spelling change, futur stem, another cell, a regular form), as one templated line
 │   ├── AnswerDifference.swift  # Where a wrong answer differs from the nearest right spelling, letter by letter, for the quiz's held correction
 │   ├── AnswerFrame.swift       # The shape of a quiz answer: the pronoun before the blank, elided to the answer (j', je m'), the gender a compound tense agrees with, the impératif's (tu) and -toi, a sentence's words around its blank, and the prompt VoiceOver reads
@@ -161,9 +162,9 @@ Conjuguer/
 │   ├── ConjugationText.swift   # AttributedString(mixedCaseString:) — renders $…$ irregular-character coloring
 │   ├── ExampleData.swift       # Lazy-loading literature-example lookup by infinitif
 │   ├── Fonts.swift             # Work Sans font constants scaled relative to text styles
-│   ├── GameCenter.swift        # Protocol for Game Center authentication and score reporting
-│   ├── GameCenterReal.swift    # GKLocalPlayer authentication and leaderboard submission
-│   ├── GameCenterSpy.swift     # Records scores and leaderboards shown, for tests and the simulator
+│   ├── GameCenter.swift        # Protocol for Game Center authentication, score and achievement reporting, and the leaderboard and achievement views
+│   ├── GameCenterReal.swift    # GKLocalPlayer authentication, leaderboard submission, achievement progress (held until Game Center's own is loaded, only what has risen), and the views
+│   ├── GameCenterSpy.swift     # Records scores, achievement reports, and what was shown, for tests and the simulator
 │   ├── GetterSetter.swift      # Protocol for key-value storage
 │   ├── GetterSetterCodable.swift  # Codable get/set convenience over the string-based protocol
 │   ├── GetterSetterFake.swift  # In-memory dictionary implementation for tests
@@ -294,6 +295,7 @@ ConjuguerTests/
 ├── LocalizationTests.swift     # Asserts format-style strings substitute their runtime values
 ├── TestUtils.swift             # T.testConjugation shared assertion (threads #_sourceLocation) and T.generateVerbModelTests
 └── Models/
+    ├── AchievementTests.swift          # The achievements: each permanent ID, the points, the 50 irregular verbs and the pillars, the maison d'être's twenty items, an empty record, each level's patterns earning its own and the lower levels', one short, learning counting for nothing, all three key conjugations needed and the passé simple not, each step, nothing measured while signed out
     ├── AddedVerbsTests.swift           # Conjugations of the 13 verbs added and 6 misspellings renamed on 2026-08-28, plus dépourvoir's defect group 27
     ├── AnswerDiagnosisTests.swift      # Each diagnosis for real verbs, answers that get no line, the English lines, and the prompted second attempt in a quiz
     ├── AnswerDifferenceTests.swift     # The letters marked for a wrong accent, a missing, extra, or swapped letter, and a red letter; the pronouns dropped and the nearest alternate shown
@@ -342,6 +344,7 @@ ConjuguerTests/
     ├── ReviewScheduleTests.swift       # The review ladder: starts, reviews, snoozes, a new item's first answer, a right answer climbing only when due, a wrong one starting over
     ├── PracticeItemTests.swift         # The practice items: pinned and unreadable keys, which verbs are patterns, spelling-change cells, compound tenses with être, every tense's stem, doubled entries, lookups, the shown stems, items asking their own cell back
     ├── PracticeRecordTests.swift       # The practice record: the ladder through answers, due order, lookups, the card's review, snooze, choice, and caption, patterns and passé simple never on the card, a relaunch, the migration, a reset that stays
+    ├── QuizAchievementTests.swift      # Nested in QuizTests: achievements reported at the results and at a quit and not while signed out, and the per-level bests (new, not beaten, beaten, per level, none after Ten More or an unranked session, none for 0, Reset forgetting them)
     ├── QuizHubTests.swift              # The Quiz tab's last result: its stored form, each scope's kind, titles, collection keys, the store and Reset; nested in QuizTests, a finished, continued, quit, record-session, verb-page, and collection quiz
     ├── QuizPracticeTests.swift         # Nested in QuizTests: answers kept on quit, every scope writing, due items within the level and band, at most three a round, none in a scoped quiz
     ├── QuizRecordSessionTests.swift    # Review and My Mistakes: missed items, days to the next due item, beyond the level, a pattern no band verb has, key conjugations together, exclusions and the limit; nested in QuizTests, rounds, Ten More, empty records, and signals without counts
@@ -424,6 +427,8 @@ scripts/
 └── write_forms_json.sh         # Builds ConjugationMapTool and writes corpus/working's forms [.json], forms_all [.json], and conjugations [.json]
 
 plans/                              # What Claude wrote to get another session (or another tool) to do something; finished ones included
+├── achievement_artwork.md          # gpt-image prompts for the nine Game Center achievements' medallions, in Conjuguer's palette
+├── achievement_artwork_drafts/     # Its eighteen drafts, achievement_<n>-<draft>.png, and two contact sheets (gitignored)
 ├── alligator_gemini.md             # Gemini prompt for the bayou-jazz alligator, the model-eval blog post's hero image
 ├── alligator_gemini.txt            # The same prompt as plain text, ready to paste
 ├── app_icons_gemini.md             # Gemini prompts for the eight alternate app icons (Arc, rooster, croissant, béret; light and dark)
@@ -529,5 +534,6 @@ frequency/                      # Verb-frequency pipeline; NOT part of any targe
 └── glaff_readme.txt            # GLÀFF's own README; its licence asks that it accompany redistribution
 
 Images/                         # README and App Store imagery
+└── achievements/               # The nine Game Center achievements' medallions as uploaded to App Store Connect (JPEG, 1024 × 1024), named for their IDs
 build/                          # Scratch DerivedData for out-of-tree builds (gitignored)
 ```

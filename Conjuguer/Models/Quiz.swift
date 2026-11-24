@@ -42,9 +42,11 @@ class Quiz {
   /// A Speed Round's last answer when it was wrong, whose right answer the next question shows,
   /// since the round does not stop for a correction.
   private(set) var speedRoundMiss: SpeedRoundMiss?
-  /// The best a finished Speed Round had to beat. Nil when there was none.
-  private(set) var speedRoundPreviousBest: Int?
-  private(set) var isNewSpeedRoundBest = false
+  /// The best a finished Speed Round, or a ranked session's first round, had to beat: the most
+  /// right answers in a minute, or the level's best score. Nil when there was none, and for any
+  /// other results.
+  private(set) var previousBest: Int?
+  private(set) var isNewBest = false
   /// The streak a finished daily session left, which its results show. Nil for any other quiz.
   private(set) var dailyStreakStatus: DailyStreak.Status?
 
@@ -214,6 +216,8 @@ class Quiz {
     firstAttemptDiagnosis = nil
     firstAttemptRecognition = nil
     heldChoice = nil
+    previousBest = nil
+    isNewBest = false
     quizState = .inProgress
     announcePublishedProperties()
     startLiveActivity()
@@ -282,6 +286,7 @@ class Quiz {
       parameters[ParameterKey.lastQuestionIndex.rawValue] = "\(lastQuestionIndex)"
     }
     Current.analytics.signal(name: .quizQuit, parameters: parameters)
+    gameCenter.reportAchievements(in: Current.practice.record)
     teardown()
   }
 
@@ -377,8 +382,8 @@ class Quiz {
     firstAttemptRecognition = nil
     heldChoice = nil
     speedRoundMiss = nil
-    speedRoundPreviousBest = nil
-    isNewSpeedRoundBest = false
+    previousBest = nil
+    isNewBest = false
     dailyStreakStatus = nil
     shouldShowResults = false
   }
@@ -1023,8 +1028,8 @@ class Quiz {
   private func finishSpeedRound() {
     questions = Array(questions.prefix(currentQuestionIndex))
     speedRoundMiss = nil
-    speedRoundPreviousBest = Current.practice.speedRoundBest
-    isNewSpeedRoundBest = Current.practice.recordSpeedRound(correctCount)
+    previousBest = Current.practice.speedRoundBest
+    isNewBest = Current.practice.recordSpeedRound(correctCount)
     announceSpeedRoundEnd()
     completeRound()
   }
@@ -1058,10 +1063,14 @@ class Quiz {
   /// Ten More carried the session. Only the first round ranks.
   private func completeRound() {
     if roundCount == 1, scope.isRanked {
-      Current.settings.recordScore(firstRoundScore, at: level)
+      let best = Current.settings.bestScore(at: level)
+      previousBest = best > 0 ? best : nil
+      isNewBest = Current.settings.recordScore(firstRoundScore, at: level)
       ChangeLevelTip.quizCompleted.sendDonation()
       gameCenter.reportScore(firstRoundScore, level: level)
+      announceRankedBest()
     }
+    gameCenter.reportAchievements(in: Current.practice.record)
     shouldShowResults = true
     Current.soundPlayer.play(Sound.randomApplause)
     var parameters = [
@@ -1097,6 +1106,17 @@ class Quiz {
     Utterer.utter(line, localeString: currentLocaleString)
   }
 
+  private func announceRankedBest() {
+    guard UIAccessibility.isVoiceOverRunning else {
+      return
+    }
+    if isNewBest {
+      Utterer.utter(L.ResultsView.newBest, localeString: currentLocaleString)
+    } else if let previousBest {
+      Utterer.utter(L.ResultsView.best(previousBest), localeString: currentLocaleString)
+    }
+  }
+
   private func announceSpeedRoundWarning() {
     guard UIAccessibility.isVoiceOverRunning else {
       return
@@ -1109,10 +1129,10 @@ class Quiz {
       return
     }
     var announcement = L.SpeedRound.announceTimeUp(correctCount)
-    if isNewSpeedRoundBest {
+    if isNewBest {
       announcement += " " + L.SpeedRound.newBest
-    } else if let speedRoundPreviousBest {
-      announcement += " " + L.SpeedRound.best(speedRoundPreviousBest)
+    } else if let previousBest {
+      announcement += " " + L.SpeedRound.best(previousBest)
     }
     Utterer.utter(announcement, localeString: currentLocaleString)
   }

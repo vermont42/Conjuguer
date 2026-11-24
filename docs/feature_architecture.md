@@ -505,7 +505,7 @@ same.
 | `quickAction` | Yes | For `finishSearch` only: a search the Home Screen quick action opened |
 | `recent` | Yes | A recent verb in the empty focused search field |
 | `myVerbs` | Yes | A verb in My Verbs. For the quiz signals, a quiz over My Verbs |
-| `tab` | Yes | For `finishSearch` only: a search typed in the Verbs tab, Command-F included. For the quiz signals, a quiz begun from the Quiz tab; for `tapViewLeaderboard`, the Quiz tab's button. For `viewCollection`, a collection opened in the Models tab |
+| `tab` | Yes | For `finishSearch` only: a search typed in the Verbs tab, Command-F included. For the quiz signals, a quiz begun from the Quiz tab; for `tapViewLeaderboard` and `tapViewAchievements`, the Quiz tab's buttons. For `viewCollection`, a collection opened in the Models tab |
 | `verbPage` | Yes | The quiz signals only: Test Me on a verb page |
 | `reviewCard` | Yes | The review card, tapped after its conjugations are revealed |
 | `list` | Yes | A verb on a featured collection's page; for the quiz signals, a collection's quiz |
@@ -536,7 +536,7 @@ the table above, and stages its privacy line. The other browse signals are `tapS
 `tapStarVerb` (with `starred`, the state after the tap), `source` on `quizStart`, `quizQuit`, and
 `quizCompletion`, `viewReviewCard` and `tapRevealReviewCard` (§ The Review Card), and
 `viewCollection`, `tapShareCollection`, and `collection` on `quizStart` (§ Collections). The Quiz
-tab's View Leaderboard sends `tapViewLeaderboard` with `source` `tab` (§ The Practice Hub). There is
+tab's View Leaderboard sends `tapViewLeaderboard` and its View Achievements `tapViewAchievements`, each with `source` `tab` (§ The Practice Hub, § Personal Bests and Achievements). There is
 no `tapTestVerb`: Test Me starts its quiz as its sheet appears, so the tap and `quizStart` with
 `verbPage` are one event.
 
@@ -1170,7 +1170,8 @@ began at, and keeps it as that level's best score if it is higher: its ten quest
 re-asks (`Quiz.firstRoundScore`), so that every ranked score has a ceiling of 100. Ten More's points
 and a re-ask's are the learner's alone. A scoped quiz does neither (below). Quitting reports
 nothing. `Settings` keeps one best score per level (`bestScore(at:)`, `recordScore(_:at:)`, under
-the keys `bestScore.<level>`), and the Quiz tab's foot shows the current level's. The one best score
+the keys `bestScore.<level>`), the first round's results say whether it was beaten (§ Personal
+Bests and Achievements), and the Quiz tab's foot shows the current level's. The one best score
 across levels that older installs hold, under the key `bestScore`, is removed at launch, not
 migrated, since its level is unknown and it may come from a thirty-question quiz (Josh,
 2026-11-23).
@@ -1432,9 +1433,11 @@ and how the last quiz went. From the top:
   (`quiz_model_practice_button`), whose chevron says it pushes the list of models (§ Model
   Practice), and the Speed Round (`quiz_speed_round_button`, or `quiz_speed_round_empty` while
   fewer than five items are mastered; § Speed Round).
-- **The foot**: the level's best score, when there is one, and a small View Leaderboard button
-  (`quiz_leaderboard_button`), shown only while signed in to Game Center, which opens the current
-  level's board and sends `tapViewLeaderboard` with `source` `tab`. Competing is beside the point
+- **The foot**: the level's best score, when there is one, and two small buttons shown only while
+  signed in to Game Center: View Leaderboard (`quiz_leaderboard_button`), which opens the current
+  level's board and sends `tapViewLeaderboard` with `source` `tab`, and below it View Achievements
+  (`quiz_achievements_button`), which opens Game Center's achievements and sends
+  `tapViewAchievements` with `source` `tab` (§ Personal Bests and Achievements). Competing is beside the point
   of practice, so nothing else opens the leaderboard: closing a quiz's results does not.
 
 **The last result** (`LastQuizResult`) is written at each round's results, so after Ten More it is
@@ -1782,8 +1785,8 @@ A row at the foot of the hub's Exercises, with a bolt.
   seconds are red.
 - **The end.** At zero the question on screen and the rest of the batch are dropped, so the results
   list what was answered. The results read "Right Answers in 60 Seconds" over the count, then "New
-  personal best!" (`results_speed_round_new_best`) or "Your best: 12"
-  (`results_speed_round_best`), the count of the questions answered, and **Another Round**
+  personal best!" (`results_new_best`) or "Your best: 12"
+  (`results_best`), the count of the questions answered, and **Another Round**
   (`results_speed_round_again`), which starts a fresh minute with the keyboard up. No level, no
   time, no Ten More, no Live Activity, no Game Center, no best score, no `ChangeLevelTip`.
 - **The best.** One personal best on the device, not one per level, kept by `PracticeStore` as
@@ -1853,6 +1856,37 @@ Your Practice, with a calendar, or a flame once there is a streak.
   `denied` for a learner who turned it on and refused permission.
 - **VoiceOver.** The row reads its title and line, with a hint; at the results, the streak line is
   spoken; Another Session has a hint. The widgets do not show the streak.
+
+### Personal Bests and Achievements
+
+**The best at each level.** A ranked session's first results show, under the score, "New personal
+best!" with a star in green (`results_new_best`) when its ranked score beat the level's best, or
+"Your best: n" (`results_best`) when it did not, as the Speed Round's results do, under keys of
+their own (`ResultsView.newBest`, `ResultsView.best`). `Settings.recordScore(_:at:)` returns
+whether the score beat the best, and `Quiz.previousBest` and `Quiz.isNewBest` hold the answer for
+the results, for a Speed Round and for a ranked round alike. A score of 0 sets no best and shows no
+line beside a best of 0. Ten More's results show none, since they count more than the ten
+questions ranked, and nor does an unranked session. VoiceOver hears the line through `Utterer` at
+the results. Reset Practice forgets the bests (`Settings.resetBestScores()`) with the record, and
+the Practice Record card shows while a best exists (`Settings.hasBestScore`).
+
+**Achievements.** Nine Game Center achievements for mastery milestones, never for volume of play
+(`Achievement` in `Models/Achievement.swift`): every pattern of each level (four), the three key
+conjugations of the eight pillars (être, avoir, aller, faire, pouvoir, vouloir, devoir, savoir),
+of 10, 25, and all 50 of the Mastery page's irregular verbs, and the passé composé of the
+seventeen verbs of the maison d'être. Each counts what the Mastery page counts, an item in the
+third box. A verb counts once its présent, passé composé, and futur are all mastered
+(`Achievement.isFullyMastered`), whatever the level; the passé simple is not required.
+`Achievement.progress(in:)` gives each one's mastered and required counts, and
+`GameCenter.reportAchievements(in:)` sends them as percentages through
+`reportAchievementProgress(_:)` when the player signs in, at every quiz's results and quit, and
+when a review card is revealed. It measures nothing while signed out; measuring takes about a
+tenth of a second the first time, since it builds every level's pattern layout, and milliseconds
+after. `GameCenterReal` holds reports until `GKAchievement.loadAchievements` says what Game Center
+holds, then sends only what has risen, so a wrong answer's fall never reaches Game Center.
+`GameCenterSpy` records each report. No analytics signal reports an achievement. The IDs, names,
+descriptions, artwork, and App Store Connect steps are in
+[`game_center_setup.md`](game_center_setup.md#the-achievements).
 
 ### Signals
 

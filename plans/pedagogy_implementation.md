@@ -46,7 +46,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 20 | Done | 2026-11-24 | a809734 | T6.2 | 20 |
 | 21 | Done | 2026-11-24 | 444391d | T5.7 | 21 |
 | 22 | Done | 2026-11-24 | a5b2806 | T6.3 | 22 |
-| 23 | Not started | | | T6.6 (personal bests and achievements) | 23 |
+| 23 | Done | 2026-11-24 | | T6.6 (personal bests and achievements) | 23 |
 | 24 | Not started | | | T6.8 | 24 |
 | Closing | Not started | | | Audit, porting notes | Closing |
 
@@ -2597,7 +2597,7 @@ controllable clock in tests, and the reminder fires on the simulator at the chos
 ## Phase 23: Personal Bests and Achievements
 
 **Suggestions:** T6.6 (personal bests and achievements). **Ports:** Konjugieren Phase 23
-(`Achievement.swift`). **Depends on:** Phases 8, 20, and 22. **Status:** Not started.
+(`Achievement.swift`). **Depends on:** Phases 8, 20, and 22. **Status:** Done.
 
 Personal bests per level, kept on the device (replacing the single `bestScore`), and Game Center
 achievements for mastery milestones, not volume of play. Propose a short list to Josh (every Level
@@ -2617,6 +2617,105 @@ Conjuguer's palette (the color sets in `Conjuguer/Assets/Assets.xcassets`: `cust
 the walkthrough covers achievements.
 
 **How it differed:**
+
+- **Asked of Josh (2026-11-24), before building**, each the recommended option. (1) **Nine
+  achievements**, Konjugieren's eight ported plus the phase's être-verb suggestion, 410 of Apple's
+  1,000 points: Premières pierres, Les murs, La voûte, and La clé de voûte (First Stones, The
+  Walls, The Vault, The Keystone) for every pattern of Beginner (46), Elementary (223),
+  Intermediate (368), and Advanced (901), 10, 25, 50, and 100 points; Les piliers (The Pillars)
+  for être, avoir, aller, faire, pouvoir, vouloir, devoir, and savoir, 25; Dix, Vingt-cinq, and
+  Cinquante irréguliers (Ten, Twenty-Five, Fifty Irregulars), 25, 50, and 100; and La maison
+  d'être (The House of Être), 25. Over Konjugieren's eight alone, and over six without the 10 and
+  25 steps. (2) **Reset Practice forgets the per-level bests**, which live in `Settings` rather
+  than the practice store, as it forgets the Speed Round's best and the streak. (3) **The
+  achievements are to be created in App Store Connect by driving Chrome**, as Phase 8's
+  leaderboards were, once Josh has picked the artwork, over a walkthrough alone and over adding a
+  `GameCenterResources.gamekit`. (4) **The best shows on the results**, as in Konjugieren.
+- **The personal bests were mostly there.** Phase 8 had already replaced the single `bestScore`
+  with one per level and shown the level's on the hub's foot, so the phase's "replacing the single
+  `bestScore`" was done. What it added: "New personal best!" with a star, or "Your best: n", under
+  the score of a ranked session's first results (none after Ten More, for an unranked session, or
+  for a 0), spoken through `Utterer`, since Conjuguer has no results announcement to append it to;
+  and the reset. The Speed Round's `speedRoundPreviousBest` and `isNewSpeedRoundBest` became
+  `previousBest` and `isNewBest`, shared by both, and the results' identifiers became
+  `results_new_best` and `results_best`. The ranked line has keys of its own
+  (`ResultsView.newBest`, `ResultsView.best`) with the Speed Round's words, as in Konjugieren.
+  Konjugieren's hub line "Your best at this level" was not ported, the foot's "Best score: n"
+  already saying it.
+- **Decided in the session.** A verb counts when its présent, passé composé, and futur key
+  conjugations are all mastered (`Achievement.isFullyMastered`), whatever the level; the passé
+  simple, which only Advanced asks, is not required, so the verb achievements do not wait for
+  Advanced. The 50 are `Mastery.coreVerbs(at: .elementary)`, the same at every level above
+  Beginner (pinned by a test), and the eight pillars are `QuizDraw.coreInfinitifs`, all among
+  them. The maison d'être is twenty items: eight irregular verbs' passé composé key conjugations
+  and the six persons of each of the -er and -re patterns with être, which the nine regular verbs
+  share. The -re pattern is first asked at Intermediate, whose band holds descendre. A pattern
+  achievement counts `Mastery.patterns(at:)` rather than building a whole `Mastery`. None is
+  hidden, and progress is sent as a percentage.
+- **Departed from Konjugieren.** (1) **Nothing is measured while signed out.**
+  `GameCenter.reportAchievements(in:)` is a protocol extension that returns at once unless
+  `isAuthenticated`, rather than Konjugieren's `World.reportAchievements()` at every launch: a
+  first measurement builds every level's pattern layout (about 0.15 seconds in the tests), and
+  Conjuguer signs in only when the Quiz tab appears, which now reports too. So it is reported at
+  sign-in, at every results and quit, and at a review card's reveal. The quiz reports through its
+  own `gameCenter`, so a test's spy sees it. (2) **View Achievements sits below View Leaderboard**
+  at the hub's foot, not beside it, and Settings gains no row, having no leaderboard row to sit
+  under. (3) **The artwork has its own palette and theme**: Conjuguer's slate blue, rose red,
+  mint white, and charcoal, no gold, and a French Gothic arch; the irregular verbs' numerals and
+  the keystone in the app's irregular-letter red.
+- **The artwork.** Eighteen drafts, two per achievement, made with `gpt-image`
+  (`gpt-image-2.5-sunburst`, high, 1024 × 1024, opaque) for about $0.97, from the prompts in
+  [`achievement_artwork.md`](achievement_artwork.md): a shared preamble giving the color sets' hex
+  values and a round medallion with a slate-blue rim, then a motif each. Both drafts of every motif
+  came out on palette and readable at Game Center's size. **Josh left the pick to Claude**
+  (2026-11-24), which took the first draft of each: the three shields' first drafts share one arch
+  and laurel, and the first vault's plain piers match the keystone's. They are JPEGs at quality 92,
+  as Konjugieren's are, in `Images/achievements/`, outside the app target, since Conjuguer has no
+  `.gamekit` for the build to copy.
+- **Created in App Store Connect** by driving Chrome on 2026-11-24, as Josh chose: all nine, each
+  with its points, Hidden No, and English (U.S.) and French localizations with the image, read
+  back afterward, in "Prepare for Submission" and added to no version. The form allows **30
+  characters for a name and 120 for each description**, which the descriptions as first written
+  overran in French and in the pillars' English, so they were shortened before entry: the French
+  pattern lines say "si sa révision est dans 7 jours ou plus", and the verb lines put the example
+  in parentheses. The form also **defaults Hidden to Yes**. Both are now in the walkthrough.
+- **Analytics.** `tapViewAchievements` with `source` `tab`. No signal for earning one. Staged in
+  [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md) in both languages: the taps
+  bullet, section 6's paragraph and third-party line naming achievements and the percentages sent
+  to Game Center while signed in, and the practice-record paragraph naming the bests.
+- **The walkthrough** is [`docs/game_center_setup.md`](../docs/game_center_setup.md) § The
+  Achievements: IDs, points, the English and French names and pre- and post-earned descriptions,
+  what each counts, Apple's limits and image requirements (as Konjugieren's session read them from
+  Apple's pages on 2026-11-15, nine days earlier, not read again), the steps, the reporting, and
+  release-day testing. [`docs/release.md`](../docs/release.md) gains the step, and
+  [`docs/description.txt`](../docs/description.txt) mentions achievements in both languages.
+- **Strings:** four new (`QuizView.viewAchievements` "Voir les succès", Game Center's own French
+  word; `QuizView.achievementsHint`; `ResultsView.newBest`; `ResultsView.best`), and Reset
+  Practice's description and alert now name "your best scores" / "vos meilleurs scores".
+- **VoiceOver.** The results' best line is spoken at the finish; View Achievements has a hint.
+  Read from the accessibility tree, not heard.
+- **Tests:** 905 to 930, all passing through `run_tests.sh` (the iPhone simulator is in English).
+  `AchievementTests`, 16 functions (29 cases): each ID (9), distinct IDs, the points, the 50 the
+  same at Intermediate and Advanced, the pillars, the maison d'être's twenty items, an empty
+  record, each level's patterns earning its own and the lower levels' (4), one pattern short,
+  learning counting for nothing, all three key conjugations needed, the passé simple not needed,
+  each step (3), the pillars, the maison d'être, and nothing measured while signed out.
+  `QuizAchievementTests`, 10 nested in `QuizTests`: the results reporting every achievement with
+  Beginner's patterns at 100, a quit reporting, nothing signed out, a first best then one not
+  beaten then one beaten, each level its own, none after Ten More, none for a daily session or
+  Test Me, none for 0, and the reset.
+- **Verified on the iPhone 17**, light, with the screenshot fixture. In French at Intermediate,
+  whose best was 100: results reading "Votre record : 100" under the score, and the hub's foot with
+  View Achievements. In English at Beginner: "New personal best!" with the green star, the foot's
+  "Best score: 100", View Leaderboard, and View Achievements, and Settings' Reset Practice
+  description naming the best scores. **On the iPad Pro 11**, in English and dark at Intermediate:
+  "New personal best!" and the foot with both buttons. A swipe given in pixels rather than points
+  shrank the iPad's app into a window, which its green button restored; the skill's table now
+  says so. Both simulators' bests and level were written back to what they held. The two fixture
+  quizzes did write their answers into each simulator's practice record and last result. Not
+  tried: anything signed in to real Game Center (the reports, the banner, the achievements view),
+  the Reset Practice alert, VoiceOver by ear, and an achievement earned by real days.
+- **Josh asked for the commit** on 2026-11-24.
 
 ## Phase 24: The Daily Challenge
 

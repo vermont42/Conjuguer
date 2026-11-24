@@ -180,7 +180,7 @@ struct SettingsView: View {
               .settingsLabel()
           }
 
-          if world.practice.hasAnythingToReset {
+          if world.practice.hasAnythingToReset || world.settings.hasBestScore {
             settingCard(title: L.Settings.practiceRecord) {
               Button(L.Settings.resetPractice) {
                 isConfirmingReset = true
@@ -223,6 +223,7 @@ struct SettingsView: View {
     .alert(L.Settings.resetPracticeConfirmTitle, isPresented: $isConfirmingReset) {
       Button(L.Settings.resetPracticeConfirm, role: .destructive) {
         world.practice.reset()
+        world.settings.resetBestScores()
         world.rescheduleReminders()
         world.analytics.signal(name: .tapResetPractice)
       }

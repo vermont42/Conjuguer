@@ -18,7 +18,7 @@ Conjuguer has _full_ conjugations for seventy-three defective French verbs, incl
 
 Conjuguer has frequency-of-use rankings for all 6,326 French verbs, from être to humoter. These rankings can help focus vocabulary study.
 
-Conjuguer includes a quiz mode for gamifying study. Quiz results are available in Game Center™.
+Conjuguer includes a quiz mode for gamifying study. Quiz results are available in Game Center™, along with achievements for the conjugations you master.
 
 For a change of pace, a family-friendly, France-themed Arc de Triomphe arcade game is tucked into the Settings screen, complete with power-ups, music, and haptics.
 
@@ -45,6 +45,6 @@ Conjuguer propose les conjugaisons _complètes_ de soixante-treize verbes franç
 
 Conjuguer indique la fréquence d’emploi des 6 326 verbes français, d’être à humoter. Ce classement permet de cibler l’apprentissage du vocabulaire.
 
-Conjuguer comprend un mode quiz qui rend l’étude ludique. Les résultats des quiz sont disponibles dans Game Center™.
+Conjuguer comprend un mode quiz qui rend l’étude ludique. Les résultats des quiz sont disponibles dans Game Center™, ainsi que des succès pour les conjugaisons que vous maîtrisez.
 
 Pour changer de rythme, un jeu d’arcade familial aux couleurs de la France, sur le thème de l’Arc de Triomphe, se cache dans l’écran Paramètres, avec bonus, musique et retours haptiques.

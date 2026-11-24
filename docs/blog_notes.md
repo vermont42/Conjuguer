@@ -6512,3 +6512,54 @@ Konjugieren's does, so the tab's own `start` runs and the answer field gets the 
 simulator the link opened from the Verbs tab straight into a focused "Séance du jour". The
 reminder fired at the minute set, and the seeded repair ran to "Série : 3 jours". The suite went
 from 880 to 905 tests, all passing. Josh has yet to try it on his phone.
+
+## Personal Bests and Achievements (2026-11-24)
+
+Pedagogy Phase 23 gives Conjuguer nine Game Center achievements and puts the personal best on the
+results. Josh approved the list before anything was built. Four achievements build a Gothic arch,
+one for every pattern of each level: Premières pierres, Les murs, La voûte, and La clé de voûte.
+Four count irregular verbs: Les piliers (être, avoir, aller, faire, and the four modals), then 10,
+25, and all 50 of the Mastery page's irregular verbs. The ninth, La maison d'être, is the plan's
+own suggestion: the passé composé of the seventeen verbs French schools draw in a house. Every
+one counts what the Mastery page counts, an item in the third box of the review ladder, so
+nothing rewards volume of play.
+
+The maison d'être showed how the practice record thinks. Its seventeen verbs are not seventeen
+items. Eight are irregular, so each brings its own passé composé key conjugation. The other nine
+are regular -er verbs and descendre, which the record keeps as shared patterns, so arriver,
+entrer, rester, and the rest are all the six persons of "-er with être". That makes twenty items,
+built by asking the record's own mapping (`PracticeItem.exercised`) what each verb's passé composé
+exercises, rather than by listing them.
+
+The personal best turned out to be half built. Phase 8 had already split the single best score
+into one per level and shown it at the hub's foot. What remained was the line on the results,
+"New personal best!" or "Your best: n", which the Speed Round already had. So the Speed Round's
+two properties became general ones that a ranked round fills too. Josh also chose to have Reset
+Practice forget the bests, which live in `Settings` rather than beside the record.
+
+One departure from Konjugieren was about cost. Konjugieren reported achievements at every launch.
+Here, the first measurement builds every level's pattern layout, about a tenth of a second, and
+Conjuguer signs in to Game Center only when the Quiz tab appears. So reporting became a protocol
+extension on `GameCenter` that measures nothing while signed out, and signing in reports. The
+real conformer still holds reports until Game Center says what it has, and sends only what has
+risen, since a wrong answer can push an item back down the ladder but an achievement once earned
+stays earned.
+
+The artwork came from `gpt-image`, two drafts per achievement, every prompt naming Conjuguer's
+own colors by hex: a slate-blue rim, charcoal, mint white, and the rose red the app uses for an
+irregular letter, here the keystone and the shields' numerals. Konjugieren's medals were gold on
+black, the German flag's colors; these are deliberately not. Josh liked all eighteen and left the
+pick to me, so the first draft of each went to App Store Connect.
+
+Creating the nine there by driving Chrome taught two things the walkthrough had not known. App
+Store Connect allows 120 characters for an achievement's description, and several French
+descriptions, written without a limit in mind, ran to 140. They were cut before entry, the
+French saying "dans 7 jours" where the English says "a week away". And the form defaults an
+achievement to hidden, the opposite of what a learner aiming at a milestone needs, so each was
+switched before saving. All nine were read back afterward and wait, unsubmitted, for the 2027
+version.
+
+The simulator check had one mishap. On the iPad, a swipe written in screenshot pixels rather
+than points started at the home indicator and shrank the app into a window. The window's green
+button restored it, and the verify skill's notes now warn about it. The suite went from 905 to
+930 tests, all passing.

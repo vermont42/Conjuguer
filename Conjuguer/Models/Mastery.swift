@@ -180,7 +180,11 @@ struct Mastery {
   /// The stems the level asks that the verb has: gésir has no passé composé, and falloir has
   /// every stem in il alone.
   static func stems(askedAt level: QuizLevel, of verb: Verb) -> [PracticeItem.Stem] {
-    stems(askedAt: level).filter { stem in
+    stems(stems(askedAt: level), of: verb)
+  }
+
+  static func stems(_ candidates: [PracticeItem.Stem], of verb: Verb) -> [PracticeItem.Stem] {
+    candidates.filter { stem in
       !VerbConjugations.isDefective(verb: verb, tense: stem.keyTense)
         && Conjugator.conjugatedString(infinitif: verb.infinitif, tense: stem.keyTense, extraLetters: verb.extraLetters, pronounGender: .masculine) != nil
     }

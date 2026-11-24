@@ -16,6 +16,8 @@ class GameCenterSpy: GameCenter {
   var isAuthenticated: Bool
   private(set) var reports: [Report] = []
   private(set) var shownLeaderboardLevels: [QuizLevel] = []
+  private(set) var achievementReports: [[Achievement: Double]] = []
+  private(set) var achievementsShowCount = 0
 
   init(isAuthenticated: Bool = false) {
     self.isAuthenticated = isAuthenticated
@@ -36,5 +38,13 @@ class GameCenterSpy: GameCenter {
 
   func showLeaderboard(level: QuizLevel) {
     shownLeaderboardLevels.append(level)
+  }
+
+  func reportAchievementProgress(_ percentComplete: [Achievement: Double]) {
+    achievementReports.append(percentComplete)
+  }
+
+  func showAchievements() {
+    achievementsShowCount += 1
   }
 }

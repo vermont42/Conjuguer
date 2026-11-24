@@ -54,6 +54,7 @@ enum AnalyticsName: String {
   case tapKeepPracticeSet
   case tapResetPractice
   case tapViewLeaderboard
+  case tapViewAchievements
   case tapDailyReminder
 }
 

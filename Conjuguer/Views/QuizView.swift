@@ -105,6 +105,7 @@ struct QuizView: View {
         world.gameCenter.authenticate(onViewController: authCoordinator.viewController) { _ in
           Task { @MainActor in
             isSignedInToGameCenter = world.gameCenter.isAuthenticated
+            world.gameCenter.reportAchievements(in: world.practice.record)
           }
         }
       }
@@ -767,6 +768,19 @@ struct QuizView: View {
           .controlSize(.small)
           .accessibilityHint(L.QuizView.leaderboardHint)
           .accessibilityIdentifier("quiz_leaderboard_button")
+
+          Button {
+            world.gameCenter.showAchievements()
+            world.analytics.signal(name: .tapViewAchievements, parameters: [ParameterKey.source.rawValue: AnalyticsSource.tab.rawValue])
+          } label: {
+            Label(L.QuizView.viewAchievements, systemImage: "rosette")
+              .font(captionFont)
+          }
+          .buttonStyle(.bordered)
+          .tint(Color.customBlue)
+          .controlSize(.small)
+          .accessibilityHint(L.QuizView.achievementsHint)
+          .accessibilityIdentifier("quiz_achievements_button")
         }
       }
       .frame(maxWidth: .infinity)

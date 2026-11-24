@@ -325,6 +325,14 @@ enum L {
   }
 
   enum ResultsView {
+    static var newBest: String {
+      String(localized: "ResultsView.newBest")
+    }
+
+    static func best(_ best: Int) -> String {
+      String(localized: "ResultsView.best", defaultValue: "Your best: \(best)")
+    }
+
     static var exampleHint: String {
       String(localized: "ResultsView.exampleHint")
     }
@@ -687,6 +695,14 @@ enum L {
 
     static var leaderboardHint: String {
       String(localized: "QuizView.leaderboardHint")
+    }
+
+    static var viewAchievements: String {
+      String(localized: "QuizView.viewAchievements")
+    }
+
+    static var achievementsHint: String {
+      String(localized: "QuizView.achievementsHint")
     }
 
     static func score(_ value: Int) -> String {

@@ -343,6 +343,7 @@ struct VerbBrowseView: View {
       return
     }
     world.practice.recordReview(reviewCard.offer)
+    world.gameCenter.reportAchievements(in: world.practice.record)
     world.analytics.signal(name: .tapRevealReviewCard)
     withAnimation {
       self.reviewCard?.isRevealed = true

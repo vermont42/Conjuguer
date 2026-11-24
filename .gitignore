@@ -14,6 +14,9 @@ Conjuguer/Secrets.xcconfig
 build/
 build.log
 docs/screenshots/
+# The eighteen gpt-image drafts for the Game Center achievements (about 24 MB of PNGs); the nine
+# picked are tracked as JPEGs in Images/achievements/.
+plans/achievement_artwork_drafts/
 # Apple-copyrighted WWDC transcripts, archived locally for reference only (per their headers)
 docs/wwdc2026_*.txt
 # corpus: tracked = finished JSON exports (corpus/json/), the hand-built parsed

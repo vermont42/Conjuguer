@@ -986,3 +986,59 @@ Le paragraphe sur le suivi des exercices devient :
 ```
 L'application conserve aussi un suivi des exercices : pour chaque conjugaison que vos réponses aux quiz et vos consultations ont touchée, si votre dernière réponse était juste et le jour où elle doit être révisée, afin que les quiz et les cartes de révision la reproposent et que l'onglet Quiz puisse afficher ce que vous maîtrisez, le résultat de votre dernier quiz, afin que l'onglet Quiz puisse l'afficher, votre record au « Contre-la-montre » et les jours où vous avez terminé une séance du jour, afin que l'onglet Quiz puisse afficher votre série. Ce suivi reste sur votre appareil et n'est jamais envoyé. « Réinitialiser le suivi », dans les Paramètres, l'efface. Le rappel quotidien, si vous l'activez, est programmé sur votre appareil, qui en rédige le texte à partir du suivi ; rien de ce rappel n'est envoyé.
 ```
+
+## Personal bests and achievements (pedagogy plan, Phase 23, 2026-11-24)
+
+The Quiz tab gains View Achievements, beside View Leaderboard, which sends the new
+`tapViewAchievements` with `source` `tab` and nothing else. While the learner is signed in to Game
+Center, the app reports to Game Center how far each of nine achievements has come, as a
+percentage computed on the device from the practice record; nothing goes to the developer, and no
+signal reports an achievement earned, which would report mastery. Section 6 gains a sentence for
+it, and the Game Center line of the third-party list names achievements. Each level's best score
+was already kept on the device; Reset Practice now erases it too, so the practice-record
+paragraph names the bests. This section replaces the practice-record paragraph that the section on
+the daily session gives, so apply it after that section.
+
+### English
+
+A new bullet for the list in section 2, after the last:
+
+```
+- That you opened your Game Center achievements from the Quiz tab
+```
+
+Section 6's paragraph now reads:
+
+```
+Conjuguer integrates with Apple Game Center for quiz leaderboards and achievements. When you submit a score, or while you are signed in to Game Center, Game Center handles that data according to Apple's privacy policy. The app reports to Game Center how far you have come toward each achievement, as a percentage worked out on your device from the practice record; the developer receives none of it. The developer does not have access to your Game Center identity or personal information through this integration.
+```
+
+The third-party line becomes `Apple Game Center (leaderboards and achievements)`.
+
+The practice-record paragraph now reads:
+
+```
+The app also keeps a practice record: for each conjugation your quiz answers and lookups have touched, whether your last answer was right and when it is next due for review, so that quizzes and review cards can bring it back and the Quiz tab can show what you have mastered, the results of your last quiz, so that the Quiz tab can show them, your best score at each level, your best in the Speed Round, and the days on which you finished a daily session, so that the Quiz tab can show your streak. The practice record stays on your device and is never sent. Reset Practice in Settings erases it. The daily reminder, if you turn it on, is scheduled on your device, which writes what it says from the practice record; nothing about it is sent.
+```
+
+### French
+
+Un nouveau point pour la liste de la section 2, après le dernier :
+
+```
+- L'ouverture de vos succès Game Center depuis l'onglet Quiz
+```
+
+Le paragraphe de la section 6 devient :
+
+```
+Conjuguer s'intègre à Apple Game Center pour les classements et les succès des quiz. Lorsque vous soumettez un score, ou tant que vous êtes connecté à Game Center, Game Center traite ces données conformément à la politique de confidentialité d'Apple. L'application indique à Game Center où vous en êtes de chaque succès, sous la forme d'un pourcentage calculé sur votre appareil à partir du suivi des exercices ; le développeur n'en reçoit rien. Le développeur n'a pas accès à votre identité Game Center ni à vos informations personnelles par le biais de cette intégration.
+```
+
+La ligne des services tiers devient `Apple Game Center (classements et succès)`.
+
+Le paragraphe sur le suivi des exercices devient :
+
+```
+L'application conserve aussi un suivi des exercices : pour chaque conjugaison que vos réponses aux quiz et vos consultations ont touchée, si votre dernière réponse était juste et le jour où elle doit être révisée, afin que les quiz et les cartes de révision la reproposent et que l'onglet Quiz puisse afficher ce que vous maîtrisez, le résultat de votre dernier quiz, afin que l'onglet Quiz puisse l'afficher, votre meilleur score à chaque niveau, votre record au « Contre-la-montre » et les jours où vous avez terminé une séance du jour, afin que l'onglet Quiz puisse afficher votre série. Ce suivi reste sur votre appareil et n'est jamais envoyé. « Réinitialiser le suivi », dans les Paramètres, l'efface. Le rappel quotidien, si vous l'activez, est programmé sur votre appareil, qui en rédige le texte à partir du suivi ; rien de ce rappel n'est envoyé.
+```

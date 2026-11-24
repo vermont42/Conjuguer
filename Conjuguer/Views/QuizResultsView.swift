@@ -32,9 +32,7 @@ struct QuizResultsView: View {
             .minimumScaleFactor(0.5)
             .accessibilityIdentifier("results_score")
 
-          if isSpeedRound {
-            speedRoundBest
-          }
+          bestLine
 
           if let line = quiz.dailyStreakStatus?.resultsLine {
             Label(line, systemImage: "flame.fill")
@@ -139,18 +137,18 @@ struct QuizResultsView: View {
     quiz.scope.isSpeedRound
   }
 
-  /// "New personal best!", or the best this round did not beat.
+  /// "New personal best!", or the best this Speed Round or ranked round did not beat.
   @ViewBuilder
-  private var speedRoundBest: some View {
-    if quiz.isNewSpeedRoundBest {
-      Label(L.SpeedRound.newBest, systemImage: "star.fill")
+  private var bestLine: some View {
+    if quiz.isNewBest {
+      Label(isSpeedRound ? L.SpeedRound.newBest : L.ResultsView.newBest, systemImage: "star.fill")
         .font(bodyEmphasisFont)
         .foregroundStyle(Color.customGreen)
-        .accessibilityIdentifier("results_speed_round_new_best")
-    } else if let best = quiz.speedRoundPreviousBest {
-      Text(L.SpeedRound.best(best))
+        .accessibilityIdentifier("results_new_best")
+    } else if let best = quiz.previousBest {
+      Text(isSpeedRound ? L.SpeedRound.best(best) : L.ResultsView.best(best))
         .smallLabel()
-        .accessibilityIdentifier("results_speed_round_best")
+        .accessibilityIdentifier("results_best")
     }
   }
 

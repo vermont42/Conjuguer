@@ -88,12 +88,26 @@ class Settings {
     bestScores[level] ?? Settings.bestScoreDefault
   }
 
-  func recordScore(_ score: Int, at level: QuizLevel) {
+  /// Returns whether the score beat the level's best. A score of 0 sets none.
+  @discardableResult
+  func recordScore(_ score: Int, at level: QuizLevel) -> Bool {
     guard score > bestScore(at: level) else {
-      return
+      return false
     }
     bestScores[level] = score
     getterSetter.set(key: Settings.bestScoreKey(level), value: score.settingString)
+    return true
+  }
+
+  var hasBestScore: Bool {
+    bestScores.values.contains { $0 > Settings.bestScoreDefault }
+  }
+
+  func resetBestScores() {
+    for level in QuizLevel.allCases {
+      bestScores[level] = Settings.bestScoreDefault
+      getterSetter.remove(key: Settings.bestScoreKey(level))
+    }
   }
 
   var gameHighScore: Int = gameHighScoreDefault {

@@ -48,6 +48,9 @@ material for the release notes.
    by [`game_center_setup.md`](game_center_setup.md) § Testing Before Release. They are in App
    Store Connect, in "Prepare for Submission", and a development build probably cannot see them
    until they belong to a version.
+8. **Add the nine achievements to the version** with the leaderboards, and check on a device that
+   View Achievements lists them, by [`game_center_setup.md`](game_center_setup.md) § Release Day
+   and Testing.
 
 ## On Release Day
 
@@ -60,7 +63,8 @@ material for the release notes.
    kept because the App Store listing may point at it. Check which one the listing's privacy URL
    serves, and bring that one up to date with the same lines, or point the listing at the one that
    is current.
-3. **Game Center.** Submit the four level leaderboards with the version, then, once the release
+3. **Game Center.** Submit the four level leaderboards and the nine achievements with the
+   version, then, once the release
    is live, archive the old `Leaderboard` and consider making Beginner the default, by
    [`game_center_setup.md`](game_center_setup.md) § On Release Day.
 

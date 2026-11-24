@@ -380,8 +380,8 @@ extension QuizTests {
       #expect(quiz.questions.count == 4)
       #expect(quiz.correctCount == 3)
       #expect(quiz.sessionQuestionCount == 4)
-      #expect(quiz.isNewSpeedRoundBest)
-      #expect(quiz.speedRoundPreviousBest == nil)
+      #expect(quiz.isNewBest)
+      #expect(quiz.previousBest == nil)
       #expect(practice.speedRoundBest == 3)
       #expect(!quiz.canContinue)
 
@@ -396,8 +396,8 @@ extension QuizTests {
       #expect(quiz.speedRoundSecondsLeft == SpeedRound.duration)
       quiz.process(proposedAnswer: try correctAnswer(quiz))
       tick(quiz, seconds: SpeedRound.duration)
-      #expect(!quiz.isNewSpeedRoundBest)
-      #expect(quiz.speedRoundPreviousBest == 3)
+      #expect(!quiz.isNewBest)
+      #expect(quiz.previousBest == 3)
       #expect(practice.speedRoundBest == 3)
     }
 
