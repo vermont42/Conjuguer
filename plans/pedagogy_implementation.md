@@ -39,7 +39,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 13 | Done | 2026-11-23 | 249f7b9 | T6.1, T6.6 (the leaderboard's place) | 13 |
 | 14 | Done | 2026-11-23 | 9568bdd | T4.2, T4.3 | 14 |
 | 15 | Done | 2026-11-23 | 3966644 | T5.1 | 15 |
-| 16 | Awaiting Josh | 2026-11-23 | | T5.2 | 16 |
+| 16 | Done | 2026-11-23 | 94df8f9 | T5.2 | 16 |
 | 17 | Not started | | | T5.4 | 17 |
 | 18 | Not started | | | T5.5 | 18 |
 | 19 | Not started | | | T5.6 | 19 |
@@ -1871,7 +1871,7 @@ verb, a pronominal verb, and a verb with an irregular futur stem.
 
 **Suggestions:** T5.2. **Ports:** Konjugieren Phase 16 (`AblautPractice.swift`,
 `AblautPracticeCard.swift`, `AblautPracticeListView.swift`). **Depends on:** Phases 11 and 15.
-**Status:** Awaiting Josh.
+**Status:** Done.
 
 Work through one model, then mix it with models already practiced, from the Models tab. Conjuguer's
 models are its counterpart of Konjugieren's ablaut groups: verbs that share a pattern of stems and
