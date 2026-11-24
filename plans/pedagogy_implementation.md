@@ -42,7 +42,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 16 | Done | 2026-11-23 | 94df8f9 | T5.2 | 16 |
 | 17 | Done | 2026-11-23 | 4ffc7a3 | T5.4 | 17 |
 | 18 | Done | 2026-11-23 | 5694ad4 | T5.5 | 18 |
-| 19 | Awaiting Josh | 2026-11-24 | | T5.6 | 19 |
+| 19 | Done | 2026-11-24 | 3077bf4 | T5.6 | 19 |
 | 20 | Not started | | | T6.2 | 20 |
 | 21 | Not started | | | T5.7 | 21 |
 | 22 | Not started | | | T6.3 | 22 |
@@ -2199,7 +2199,7 @@ appear where decided, and tests pin the check.
 
 **Suggestions:** T5.6. **Ports:** Konjugieren Phase 19 (`ChoiceQuestion.swift`,
 `ChoiceQuestionView.swift`, [`../Konjugieren/plans/choice_questions_batch_1.md`](../../Konjugieren/plans/choice_questions_batch_1.md)).
-**Depends on:** Phase 18 for its content pipeline. **Status:** Awaiting Josh.
+**Depends on:** Phase 18 for its content pipeline. **Status:** Done.
 
 A context and two tenses or moods, with the learner choosing the one a speaker would use, and a
 one-line reason after the choice. French has classic contrasts, perhaps worth more than German's
