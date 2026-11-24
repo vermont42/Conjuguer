@@ -48,7 +48,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 22 | Done | 2026-11-24 | a5b2806 | T6.3 | 22 |
 | 23 | Done | 2026-11-24 | 5bb1765 | T6.6 (personal bests and achievements) | 23 |
 | 24 | Done | 2026-11-24 | 5651584 | T6.8 | 24 |
-| Closing | Done | 2026-11-24 | | Audit, porting notes | Closing |
+| Closing | Done | 2026-11-24 | bd06478 | Audit, porting notes | Closing |
 
 **The plan is finished** (2026-11-24). Every phase is done, and the Closing's audit and its note
 for Konjugieren and Conjugar are at the end of this file.
