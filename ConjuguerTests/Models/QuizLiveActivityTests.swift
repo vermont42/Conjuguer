@@ -41,11 +41,13 @@ struct QuizLiveActivityTests {
     let activeCount = liveActivities.activeIDs.count
 
     while quiz.quizState == .inProgress {
+      quiz.skipChoice(rightly: false)
       quiz.process(proposedAnswer: "x")
       quiz.continueAfterCorrection()
     }
 
-    #expect(quiz.questions.count == 2 * Quiz.questionCount, "Each of the ten misses is asked again.")
+    let choiceCount = quiz.questions.filter { $0.choice != nil }.count
+    #expect(quiz.questions.count == 2 * Quiz.questionCount - choiceCount, "Each typed miss is asked again.")
     #expect(liveActivities.updateCount == updatesBefore + quiz.questions.count - 1)
     #expect(liveActivities.endCount == endsBefore + 1)
     #expect(liveActivities.activeIDs.count == activeCount - 1)

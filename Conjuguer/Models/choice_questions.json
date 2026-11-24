@@ -1,0 +1,1133 @@
+[
+  {
+    "id": "voir.passéComposé.1",
+    "verb": "voir",
+    "person": "fs",
+    "setting": "conversation",
+    "reason": "completedEvent",
+    "right": {
+      "tense": "passéComposé",
+      "fr": "Hier soir, j’{ai vu} un très bon film."
+    },
+    "other": {
+      "tense": "imparfait",
+      "fr": "Hier soir, je {voyais} un très bon film."
+    },
+    "en": "Last night I saw a really good movie.",
+    "reviewed": true
+  },
+  {
+    "id": "finir.passéComposé.1",
+    "verb": "finir",
+    "person": "fp",
+    "setting": "conversation",
+    "reason": "completedEvent",
+    "right": {
+      "tense": "passéComposé",
+      "fr": "Ce matin, nous {avons fini} le travail à dix heures."
+    },
+    "other": {
+      "tense": "imparfait",
+      "fr": "Ce matin, nous {finissions} le travail à dix heures."
+    },
+    "en": "This morning we finished the work at ten.",
+    "reviewed": true
+  },
+  {
+    "id": "partir.passéComposé.1",
+    "verb": "partir",
+    "person": "tp",
+    "gender": "f",
+    "setting": "conversation",
+    "reason": "completedEvent",
+    "right": {
+      "tense": "passéComposé",
+      "fr": "Samedi dernier, mes cousines {sont parties} en vacances."
+    },
+    "other": {
+      "tense": "imparfait",
+      "fr": "Samedi dernier, mes cousines {partaient} en vacances."
+    },
+    "en": "Last Saturday my cousins left on vacation.",
+    "reviewed": true
+  },
+  {
+    "id": "acheter.passéComposé.1",
+    "verb": "acheter",
+    "person": "fs",
+    "setting": "conversation",
+    "reason": "completedEvent",
+    "right": {
+      "tense": "passéComposé",
+      "fr": "La semaine dernière, j’{ai acheté} un vélo."
+    },
+    "other": {
+      "tense": "imparfait",
+      "fr": "La semaine dernière, j’{achetais} un vélo."
+    },
+    "en": "Last week I bought a bike.",
+    "reviewed": true
+  },
+  {
+    "id": "arriver.passéComposé.1",
+    "verb": "arriver",
+    "person": "ts",
+    "gender": "m",
+    "setting": "conversation",
+    "reason": "completedEvent",
+    "right": {
+      "tense": "passéComposé",
+      "fr": "Hier, ton colis {est arrivé} à midi."
+    },
+    "other": {
+      "tense": "imparfait",
+      "fr": "Hier, ton colis {arrivait} à midi."
+    },
+    "en": "Yesterday your package arrived at noon.",
+    "reviewed": true
+  },
+  {
+    "id": "faire.imparfait.1",
+    "verb": "faire",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "pastDescription",
+    "right": {
+      "tense": "imparfait",
+      "fr": "Quand nous sommes arrivés à la plage, il {faisait} très beau."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "Quand nous sommes arrivés à la plage, il {a fait} très beau."
+    },
+    "en": "When we got to the beach, the weather was lovely.",
+    "reviewed": true
+  },
+  {
+    "id": "être.imparfait.1",
+    "verb": "être",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "pastDescription",
+    "right": {
+      "tense": "imparfait",
+      "fr": "La maison de ma grand-mère {était} petite et pleine de fleurs."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "La maison de ma grand-mère {a été} petite et pleine de fleurs."
+    },
+    "en": "My grandmother's house was small and full of flowers.",
+    "reviewed": true
+  },
+  {
+    "id": "avoir.imparfait.1",
+    "verb": "avoir",
+    "person": "fs",
+    "setting": "conversation",
+    "reason": "pastDescription",
+    "right": {
+      "tense": "imparfait",
+      "fr": "À cette époque, j’{avais} les cheveux très longs."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "À cette époque, j’{ai eu} les cheveux très longs."
+    },
+    "en": "Back then I had very long hair.",
+    "reviewed": true
+  },
+  {
+    "id": "porter.imparfait.1",
+    "verb": "porter",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "pastDescription",
+    "right": {
+      "tense": "imparfait",
+      "fr": "Quand je l’ai vue, elle {portait} une robe bleue."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "Quand je l’ai vue, elle {a porté} une robe bleue."
+    },
+    "en": "When I saw her, she was wearing a blue dress.",
+    "reviewed": true
+  },
+  {
+    "id": "jouer.imparfait.1",
+    "verb": "jouer",
+    "person": "fs",
+    "setting": "conversation",
+    "reason": "pastHabit",
+    "right": {
+      "tense": "imparfait",
+      "fr": "Quand j’étais petit, je {jouais} au foot tous les mercredis."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "Quand j’étais petit, j’{ai joué} au foot tous les mercredis."
+    },
+    "en": "When I was little, I played soccer every Wednesday.",
+    "reviewed": true
+  },
+  {
+    "id": "aller.imparfait.1",
+    "verb": "aller",
+    "person": "fp",
+    "gender": "m",
+    "setting": "conversation",
+    "reason": "pastHabit",
+    "right": {
+      "tense": "imparfait",
+      "fr": "Chaque été, nous {allions} chez nos grands-parents."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "Chaque été, nous {sommes allés} chez nos grands-parents."
+    },
+    "en": "Every summer we went to our grandparents' place.",
+    "reviewed": true
+  },
+  {
+    "id": "prendre.imparfait.1",
+    "verb": "prendre",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "pastHabit",
+    "right": {
+      "tense": "imparfait",
+      "fr": "Autrefois, mon père {prenait} le bus pour aller travailler."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "Autrefois, mon père {a pris} le bus pour aller travailler."
+    },
+    "en": "My father used to take the bus to work.",
+    "reviewed": true
+  },
+  {
+    "id": "lire.imparfait.1",
+    "verb": "lire",
+    "person": "sp",
+    "setting": "conversation",
+    "reason": "pastHabit",
+    "right": {
+      "tense": "imparfait",
+      "fr": "Le dimanche, vous {lisiez} le journal au lit."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "Le dimanche, vous {avez lu} le journal au lit."
+    },
+    "en": "On Sundays you used to read the paper in bed.",
+    "reviewed": true
+  },
+  {
+    "id": "travailler.imparfait.1",
+    "verb": "travailler",
+    "person": "fs",
+    "setting": "conversation",
+    "reason": "actionInProgress",
+    "right": {
+      "tense": "imparfait",
+      "fr": "Je {travaillais} quand le téléphone a sonné."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "J’{ai travaillé} quand le téléphone a sonné."
+    },
+    "en": "I was working when the phone rang.",
+    "reviewed": true
+  },
+  {
+    "id": "regarder.imparfait.1",
+    "verb": "regarder",
+    "person": "fp",
+    "setting": "conversation",
+    "reason": "actionInProgress",
+    "right": {
+      "tense": "imparfait",
+      "fr": "Nous {regardions} la télé quand la lumière s’est éteinte."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "Nous {avons regardé} la télé quand la lumière s’est éteinte."
+    },
+    "en": "We were watching TV when the lights went out.",
+    "reviewed": true
+  },
+  {
+    "id": "marcher.imparfait.1",
+    "verb": "marcher",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "actionInProgress",
+    "right": {
+      "tense": "imparfait",
+      "fr": "Ma sœur {marchait} dans la rue quand elle a croisé son professeur."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "Ma sœur {a marché} dans la rue quand elle a croisé son professeur."
+    },
+    "en": "My sister was walking down the street when she ran into her teacher.",
+    "reviewed": true
+  },
+  {
+    "id": "parler.imparfait.1",
+    "verb": "parler",
+    "person": "ss",
+    "setting": "conversation",
+    "reason": "actionInProgress",
+    "right": {
+      "tense": "imparfait",
+      "fr": "Tu {parlais} au téléphone quand je suis entré."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "Tu {as parlé} au téléphone quand je suis entré."
+    },
+    "en": "You were on the phone when I came in.",
+    "reviewed": true
+  },
+  {
+    "id": "avoir.imparfait.2",
+    "verb": "avoir",
+    "person": "fs",
+    "setting": "conversation",
+    "reason": "siImparfait",
+    "right": {
+      "tense": "imparfait",
+      "fr": "Si j’{avais} plus de temps, je voyagerais."
+    },
+    "other": {
+      "tense": "conditionnelPrésent",
+      "fr": "Si j’{aurais} plus de temps, je voyagerais."
+    },
+    "en": "If I had more time, I would travel.",
+    "reviewed": true
+  },
+  {
+    "id": "être.imparfait.2",
+    "verb": "être",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "siImparfait",
+    "right": {
+      "tense": "imparfait",
+      "fr": "Si mon appartement {était} plus grand, j’inviterais tout le monde."
+    },
+    "other": {
+      "tense": "conditionnelPrésent",
+      "fr": "Si mon appartement {serait} plus grand, j’inviterais tout le monde."
+    },
+    "en": "If my apartment were bigger, I'd invite everyone.",
+    "reviewed": true
+  },
+  {
+    "id": "pouvoir.imparfait.1",
+    "verb": "pouvoir",
+    "person": "fp",
+    "setting": "conversation",
+    "reason": "siImparfait",
+    "right": {
+      "tense": "imparfait",
+      "fr": "Si nous {pouvions}, nous partirions demain."
+    },
+    "other": {
+      "tense": "conditionnelPrésent",
+      "fr": "Si nous {pourrions}, nous partirions demain."
+    },
+    "en": "If we could, we'd leave tomorrow.",
+    "reviewed": true
+  },
+  {
+    "id": "savoir.imparfait.1",
+    "verb": "savoir",
+    "person": "ss",
+    "setting": "conversation",
+    "reason": "siImparfait",
+    "right": {
+      "tense": "imparfait",
+      "fr": "Si tu {savais} la vérité, tu serais surpris."
+    },
+    "other": {
+      "tense": "conditionnelPrésent",
+      "fr": "Si tu {saurais} la vérité, tu serais surpris."
+    },
+    "en": "If you knew the truth, you'd be surprised.",
+    "reviewed": true
+  },
+  {
+    "id": "faire.imparfait.2",
+    "verb": "faire",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "siImparfait",
+    "right": {
+      "tense": "imparfait",
+      "fr": "S’il {faisait} beau, on irait au parc."
+    },
+    "other": {
+      "tense": "conditionnelPrésent",
+      "fr": "S’il {ferait} beau, on irait au parc."
+    },
+    "en": "If the weather were nice, we'd go to the park.",
+    "reviewed": true
+  },
+  {
+    "id": "acheter.conditionnelPrésent.1",
+    "verb": "acheter",
+    "person": "fs",
+    "setting": "conversation",
+    "reason": "conditionnelAfterSi",
+    "right": {
+      "tense": "conditionnelPrésent",
+      "fr": "Si je gagnais au loto, j’{achèterais} une maison au bord de la mer."
+    },
+    "other": {
+      "tense": "futurSimple",
+      "fr": "Si je gagnais au loto, j’{achèterai} une maison au bord de la mer."
+    },
+    "en": "If I won the lottery, I'd buy a house by the sea.",
+    "reviewed": true
+  },
+  {
+    "id": "venir.conditionnelPrésent.1",
+    "verb": "venir",
+    "person": "tp",
+    "setting": "conversation",
+    "reason": "conditionnelAfterSi",
+    "right": {
+      "tense": "conditionnelPrésent",
+      "fr": "S’ils avaient une voiture, ils {viendraient} plus souvent."
+    },
+    "other": {
+      "tense": "futurSimple",
+      "fr": "S’ils avaient une voiture, ils {viendront} plus souvent."
+    },
+    "en": "If they had a car, they'd come more often.",
+    "reviewed": true
+  },
+  {
+    "id": "aller.conditionnelPrésent.1",
+    "verb": "aller",
+    "person": "fp",
+    "setting": "conversation",
+    "reason": "conditionnelAfterSi",
+    "right": {
+      "tense": "conditionnelPrésent",
+      "fr": "Si tu étais libre ce soir, nous {irions} au cinéma."
+    },
+    "other": {
+      "tense": "futurSimple",
+      "fr": "Si tu étais libre ce soir, nous {irons} au cinéma."
+    },
+    "en": "If you were free tonight, we'd go to the movies.",
+    "reviewed": true
+  },
+  {
+    "id": "aller.futurSimple.1",
+    "verb": "aller",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "futurAfterSiPrésent",
+    "right": {
+      "tense": "futurSimple",
+      "fr": "Si tu viens samedi, on {ira} à la plage."
+    },
+    "other": {
+      "tense": "conditionnelPrésent",
+      "fr": "Si tu viens samedi, on {irait} à la plage."
+    },
+    "en": "If you come on Saturday, we'll go to the beach.",
+    "reviewed": true
+  },
+  {
+    "id": "appeler.futurSimple.1",
+    "verb": "appeler",
+    "person": "fs",
+    "setting": "conversation",
+    "reason": "futurAfterSiPrésent",
+    "right": {
+      "tense": "futurSimple",
+      "fr": "Si j’ai le temps, je t’{appellerai} ce soir."
+    },
+    "other": {
+      "tense": "conditionnelPrésent",
+      "fr": "Si j’ai le temps, je t’{appellerais} ce soir."
+    },
+    "en": "If I have time, I'll call you tonight.",
+    "reviewed": true
+  },
+  {
+    "id": "être.futurSimple.1",
+    "verb": "être",
+    "person": "sp",
+    "setting": "conversation",
+    "reason": "futurAfterSiPrésent",
+    "right": {
+      "tense": "futurSimple",
+      "fr": "Si vous partez maintenant, vous {serez} à l’heure."
+    },
+    "other": {
+      "tense": "conditionnelPrésent",
+      "fr": "Si vous partez maintenant, vous {seriez} à l’heure."
+    },
+    "en": "If you leave now, you'll be on time.",
+    "reviewed": true
+  },
+  {
+    "id": "vouloir.conditionnelPrésent.1",
+    "verb": "vouloir",
+    "person": "fs",
+    "setting": "request",
+    "reason": "politeRequest",
+    "right": {
+      "tense": "conditionnelPrésent",
+      "fr": "Bonjour, je {voudrais} un café, s’il vous plaît."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Bonjour, je {veux} un café, s’il vous plaît."
+    },
+    "en": "Hello, I'd like a coffee, please.",
+    "reviewed": true
+  },
+  {
+    "id": "pouvoir.conditionnelPrésent.1",
+    "verb": "pouvoir",
+    "person": "sp",
+    "setting": "request",
+    "reason": "politeRequest",
+    "right": {
+      "tense": "conditionnelPrésent",
+      "fr": "{Pourriez}-vous m’indiquer la gare, s’il vous plaît ?"
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "{Pouvez}-vous m’indiquer la gare, s’il vous plaît ?"
+    },
+    "en": "Could you tell me the way to the station, please?",
+    "reviewed": true
+  },
+  {
+    "id": "vouloir.conditionnelPrésent.2",
+    "verb": "vouloir",
+    "person": "fp",
+    "setting": "request",
+    "reason": "politeRequest",
+    "right": {
+      "tense": "conditionnelPrésent",
+      "fr": "Nous {voudrions} deux billets pour Lyon, s’il vous plaît."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Nous {voulons} deux billets pour Lyon, s’il vous plaît."
+    },
+    "en": "We'd like two tickets to Lyon, please.",
+    "reviewed": true
+  },
+  {
+    "id": "savoir.conditionnelPrésent.1",
+    "verb": "savoir",
+    "person": "sp",
+    "setting": "request",
+    "reason": "politeRequest",
+    "right": {
+      "tense": "conditionnelPrésent",
+      "fr": "{Sauriez}-vous où se trouve la poste ?"
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "{Savez}-vous où se trouve la poste ?"
+    },
+    "en": "Would you happen to know where the post office is?",
+    "reviewed": true
+  },
+  {
+    "id": "vouloir.conditionnelPrésent.3",
+    "verb": "vouloir",
+    "person": "fs",
+    "setting": "request",
+    "reason": "politeRequest",
+    "right": {
+      "tense": "conditionnelPrésent",
+      "fr": "Je {voudrais} parler au directeur, s’il vous plaît."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Je {veux} parler au directeur, s’il vous plaît."
+    },
+    "en": "I'd like to speak to the manager, please.",
+    "reviewed": true
+  },
+  {
+    "id": "faire.subjonctifPrésent.1",
+    "verb": "faire",
+    "person": "ss",
+    "setting": "conversation",
+    "reason": "necessity",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "Il faut que tu {fasses} tes devoirs avant le dîner."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Il faut que tu {fais} tes devoirs avant le dîner."
+    },
+    "en": "You have to do your homework before dinner.",
+    "reviewed": true
+  },
+  {
+    "id": "aller.subjonctifPrésent.1",
+    "verb": "aller",
+    "person": "fp",
+    "setting": "conversation",
+    "reason": "necessity",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "Il faut que nous {allions} à la banque demain."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Il faut que nous {allons} à la banque demain."
+    },
+    "en": "We need to go to the bank tomorrow.",
+    "reviewed": true
+  },
+  {
+    "id": "être.subjonctifPrésent.1",
+    "verb": "être",
+    "person": "sp",
+    "setting": "conversation",
+    "reason": "necessity",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "Il est important que vous {soyez} à l’heure."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Il est important que vous {êtes} à l’heure."
+    },
+    "en": "It's important that you be on time.",
+    "reviewed": true
+  },
+  {
+    "id": "partir.subjonctifPrésent.1",
+    "verb": "partir",
+    "person": "fs",
+    "setting": "conversation",
+    "reason": "necessity",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "Il faut que je {parte} avant six heures."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Il faut que je {pars} avant six heures."
+    },
+    "en": "I have to leave before six.",
+    "reviewed": true
+  },
+  {
+    "id": "venir.subjonctifPrésent.1",
+    "verb": "venir",
+    "person": "ss",
+    "setting": "conversation",
+    "reason": "wish",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "Je veux que tu {viennes} à ma fête."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Je veux que tu {viens} à ma fête."
+    },
+    "en": "I want you to come to my party.",
+    "reviewed": true
+  },
+  {
+    "id": "dire.subjonctifPrésent.1",
+    "verb": "dire",
+    "person": "fs",
+    "setting": "conversation",
+    "reason": "wish",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "Mes parents souhaitent que je leur {dise} la vérité."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Mes parents souhaitent que je leur {dis} la vérité."
+    },
+    "en": "My parents want me to tell them the truth.",
+    "reviewed": true
+  },
+  {
+    "id": "prendre.subjonctifPrésent.1",
+    "verb": "prendre",
+    "person": "sp",
+    "setting": "conversation",
+    "reason": "wish",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "J’aimerais que vous {preniez} le temps de lire ma lettre."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "J’aimerais que vous {prenez} le temps de lire ma lettre."
+    },
+    "en": "I'd like you to take the time to read my letter.",
+    "reviewed": true
+  },
+  {
+    "id": "pouvoir.subjonctifPrésent.1",
+    "verb": "pouvoir",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "emotion",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "Je suis contente que ton frère {puisse} venir."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Je suis contente que ton frère {peut} venir."
+    },
+    "en": "I'm glad your brother can come.",
+    "reviewed": true
+  },
+  {
+    "id": "perdre.subjonctifPrésent.1",
+    "verb": "perdre",
+    "person": "ss",
+    "setting": "conversation",
+    "reason": "emotion",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "J’ai peur que tu {perdes} tes clés."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "J’ai peur que tu {perds} tes clés."
+    },
+    "en": "I'm afraid you'll lose your keys.",
+    "reviewed": true
+  },
+  {
+    "id": "faire.subjonctifPrésent.2",
+    "verb": "faire",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "conjunction",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "Bien qu’il {fasse} froid, nous allons nous promener."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Bien qu’il {fait} froid, nous allons nous promener."
+    },
+    "en": "Even though it's cold, we're going for a walk.",
+    "reviewed": true
+  },
+  {
+    "id": "comprendre.subjonctifPrésent.1",
+    "verb": "comprendre",
+    "person": "ss",
+    "setting": "conversation",
+    "reason": "conjunction",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "Je parle lentement pour que tu {comprennes}."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Je parle lentement pour que tu {comprends}."
+    },
+    "en": "I'm speaking slowly so that you understand.",
+    "reviewed": true
+  },
+  {
+    "id": "finir.subjonctifPrésent.1",
+    "verb": "finir",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "conjunction",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "Nous rentrerons avant que le film {finisse}."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Nous rentrerons avant que le film {finit}."
+    },
+    "en": "We'll head home before the movie ends.",
+    "reviewed": true
+  },
+  {
+    "id": "savoir.subjonctifPrésent.1",
+    "verb": "savoir",
+    "person": "fs",
+    "setting": "conversation",
+    "reason": "conjunction",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "Il est parti sans que je le {sache}."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Il est parti sans que je le {sais}."
+    },
+    "en": "He left without my knowing.",
+    "reviewed": true
+  },
+  {
+    "id": "avoir.subjonctifPrésent.1",
+    "verb": "avoir",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "doubt",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "Je ne pense pas qu’il {ait} raison."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Je ne pense pas qu’il {a} raison."
+    },
+    "en": "I don't think he's right.",
+    "reviewed": true
+  },
+  {
+    "id": "être.subjonctifPrésent.2",
+    "verb": "être",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "doubt",
+    "right": {
+      "tense": "subjonctifPrésent",
+      "fr": "Je doute que ce restaurant {soit} ouvert le lundi."
+    },
+    "other": {
+      "tense": "indicatifPrésent",
+      "fr": "Je doute que ce restaurant {est} ouvert le lundi."
+    },
+    "en": "I doubt this restaurant is open on Mondays.",
+    "reviewed": true
+  },
+  {
+    "id": "venir.futurSimple.1",
+    "verb": "venir",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "certainty",
+    "right": {
+      "tense": "futurSimple",
+      "fr": "Je pense qu’elle {viendra} ce soir."
+    },
+    "other": {
+      "tense": "subjonctifPrésent",
+      "fr": "Je pense qu’elle {vienne} ce soir."
+    },
+    "en": "I think she'll come tonight.",
+    "reviewed": true
+  },
+  {
+    "id": "avoir.indicatifPrésent.1",
+    "verb": "avoir",
+    "person": "ss",
+    "setting": "conversation",
+    "reason": "certainty",
+    "right": {
+      "tense": "indicatifPrésent",
+      "fr": "Je suis sûr que tu {as} raison."
+    },
+    "other": {
+      "tense": "subjonctifPrésent",
+      "fr": "Je suis sûr que tu {aies} raison."
+    },
+    "en": "I'm sure you're right.",
+    "reviewed": true
+  },
+  {
+    "id": "pouvoir.indicatifPrésent.1",
+    "verb": "pouvoir",
+    "person": "fp",
+    "setting": "conversation",
+    "reason": "certainty",
+    "right": {
+      "tense": "indicatifPrésent",
+      "fr": "Je crois que nous {pouvons} gagner ce match."
+    },
+    "other": {
+      "tense": "subjonctifPrésent",
+      "fr": "Je crois que nous {puissions} gagner ce match."
+    },
+    "en": "I believe we can win this game.",
+    "reviewed": true
+  },
+  {
+    "id": "venir.futurSimple.2",
+    "verb": "venir",
+    "person": "ss",
+    "setting": "conversation",
+    "reason": "hope",
+    "right": {
+      "tense": "futurSimple",
+      "fr": "J’espère que tu {viendras} me voir cet été."
+    },
+    "other": {
+      "tense": "subjonctifPrésent",
+      "fr": "J’espère que tu {viennes} me voir cet été."
+    },
+    "en": "I hope you'll come see me this summer.",
+    "reviewed": true
+  },
+  {
+    "id": "aller.indicatifPrésent.1",
+    "verb": "aller",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "hope",
+    "right": {
+      "tense": "indicatifPrésent",
+      "fr": "J’espère que ta mère {va} mieux."
+    },
+    "other": {
+      "tense": "subjonctifPrésent",
+      "fr": "J’espère que ta mère {aille} mieux."
+    },
+    "en": "I hope your mother is feeling better.",
+    "reviewed": true
+  },
+  {
+    "id": "savoir.plusQueParfait.1",
+    "verb": "savoir",
+    "person": "fs",
+    "setting": "conversation",
+    "reason": "siPlusQueParfait",
+    "right": {
+      "tense": "plusQueParfait",
+      "fr": "Si j’{avais su}, je serais venu plus tôt."
+    },
+    "other": {
+      "tense": "conditionnelPassé",
+      "fr": "Si j’{aurais su}, je serais venu plus tôt."
+    },
+    "en": "If I had known, I would have come sooner.",
+    "reviewed": true
+  },
+  {
+    "id": "venir.plusQueParfait.1",
+    "verb": "venir",
+    "person": "ss",
+    "gender": "m",
+    "setting": "conversation",
+    "reason": "siPlusQueParfait",
+    "right": {
+      "tense": "plusQueParfait",
+      "fr": "Si tu {étais venu} hier, tu l’aurais rencontrée."
+    },
+    "other": {
+      "tense": "conditionnelPassé",
+      "fr": "Si tu {serais venu} hier, tu l’aurais rencontrée."
+    },
+    "en": "If you had come yesterday, you would have met her.",
+    "reviewed": true
+  },
+  {
+    "id": "partir.plusQueParfait.1",
+    "verb": "partir",
+    "person": "fp",
+    "gender": "m",
+    "setting": "conversation",
+    "reason": "siPlusQueParfait",
+    "right": {
+      "tense": "plusQueParfait",
+      "fr": "Si nous {étions partis} plus tôt, nous n’aurions pas raté le train."
+    },
+    "other": {
+      "tense": "conditionnelPassé",
+      "fr": "Si nous {serions partis} plus tôt, nous n’aurions pas raté le train."
+    },
+    "en": "If we had left earlier, we wouldn't have missed the train.",
+    "reviewed": true
+  },
+  {
+    "id": "écouter.plusQueParfait.1",
+    "verb": "écouter",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "siPlusQueParfait",
+    "right": {
+      "tense": "plusQueParfait",
+      "fr": "S’il {avait écouté} son médecin, il serait en meilleure santé."
+    },
+    "other": {
+      "tense": "conditionnelPassé",
+      "fr": "S’il {aurait écouté} son médecin, il serait en meilleure santé."
+    },
+    "en": "If he had listened to his doctor, he would be healthier.",
+    "reviewed": true
+  },
+  {
+    "id": "entrer.passéSimple.1",
+    "verb": "entrer",
+    "person": "ts",
+    "gender": "m",
+    "setting": "story",
+    "reason": "passéSimpleInWriting",
+    "right": {
+      "tense": "passéSimple",
+      "fr": "Le roi {entra} dans la salle sans dire un mot."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "Le roi {est entré} dans la salle sans dire un mot."
+    },
+    "en": "The king entered the hall without a word.",
+    "reviewed": true
+  },
+  {
+    "id": "ouvrir.passéSimple.1",
+    "verb": "ouvrir",
+    "person": "ts",
+    "setting": "story",
+    "reason": "passéSimpleInWriting",
+    "right": {
+      "tense": "passéSimple",
+      "fr": "La vieille femme {ouvrit} la porte avec prudence."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "La vieille femme {a ouvert} la porte avec prudence."
+    },
+    "en": "The old woman opened the door cautiously.",
+    "reviewed": true
+  },
+  {
+    "id": "répondre.passéSimple.1",
+    "verb": "répondre",
+    "person": "ts",
+    "setting": "story",
+    "reason": "passéSimpleInWriting",
+    "right": {
+      "tense": "passéSimple",
+      "fr": "« Je ne sais pas », {répondit} l’enfant."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "« Je ne sais pas », {a répondu} l’enfant."
+    },
+    "en": "\"I don't know,\" the child answered.",
+    "reviewed": true
+  },
+  {
+    "id": "naître.passéSimple.1",
+    "verb": "naître",
+    "person": "ts",
+    "gender": "m",
+    "setting": "history",
+    "reason": "passéSimpleInWriting",
+    "right": {
+      "tense": "passéSimple",
+      "fr": "Victor Hugo {naquit} à Besançon en 1802."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "Victor Hugo {est né} à Besançon en 1802."
+    },
+    "en": "Victor Hugo was born in Besançon in 1802.",
+    "reviewed": true
+  },
+  {
+    "id": "prendre.passéSimple.1",
+    "verb": "prendre",
+    "person": "tp",
+    "setting": "history",
+    "reason": "passéSimpleInWriting",
+    "right": {
+      "tense": "passéSimple",
+      "fr": "Les révolutionnaires {prirent} la Bastille le 14 juillet 1789."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "Les révolutionnaires {ont pris} la Bastille le 14 juillet 1789."
+    },
+    "en": "The revolutionaries took the Bastille on July 14, 1789.",
+    "reviewed": true
+  },
+  {
+    "id": "devenir.passéSimple.1",
+    "verb": "devenir",
+    "person": "ts",
+    "gender": "m",
+    "setting": "history",
+    "reason": "passéSimpleInWriting",
+    "right": {
+      "tense": "passéSimple",
+      "fr": "Napoléon {devint} empereur en 1804."
+    },
+    "other": {
+      "tense": "passéComposé",
+      "fr": "Napoléon {est devenu} empereur en 1804."
+    },
+    "en": "Napoleon became emperor in 1804.",
+    "reviewed": true
+  },
+  {
+    "id": "rencontrer.passéComposé.1",
+    "verb": "rencontrer",
+    "person": "fs",
+    "setting": "conversation",
+    "reason": "passéComposéInSpeech",
+    "right": {
+      "tense": "passéComposé",
+      "fr": "Tu sais, hier, j’{ai rencontré} ton ancien professeur."
+    },
+    "other": {
+      "tense": "passéSimple",
+      "fr": "Tu sais, hier, je {rencontrai} ton ancien professeur."
+    },
+    "en": "You know, yesterday I ran into your old teacher.",
+    "reviewed": true
+  },
+  {
+    "id": "tomber.passéComposé.1",
+    "verb": "tomber",
+    "person": "ts",
+    "gender": "f",
+    "setting": "conversation",
+    "reason": "passéComposéInSpeech",
+    "right": {
+      "tense": "passéComposé",
+      "fr": "Ma fille {est tombée} de vélo ce matin."
+    },
+    "other": {
+      "tense": "passéSimple",
+      "fr": "Ma fille {tomba} de vélo ce matin."
+    },
+    "en": "My daughter fell off her bike this morning.",
+    "reviewed": true
+  },
+  {
+    "id": "gagner.passéComposé.1",
+    "verb": "gagner",
+    "person": "ts",
+    "setting": "conversation",
+    "reason": "passéComposéInSpeech",
+    "right": {
+      "tense": "passéComposé",
+      "fr": "Tu sais quoi ? On {a gagné} le match !"
+    },
+    "other": {
+      "tense": "passéSimple",
+      "fr": "Tu sais quoi ? On {gagna} le match !"
+    },
+    "en": "Guess what? We won the game!",
+    "reviewed": true
+  }
+]

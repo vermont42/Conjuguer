@@ -236,6 +236,7 @@ struct QuizScopeTests {
     quiz.quit()
     quiz.start(scope: scope)
     while quiz.quizState == .inProgress {
+      quiz.skipChoice(rightly: false)
       quiz.process(proposedAnswer: "x")
       quiz.continueAfterCorrection()
     }

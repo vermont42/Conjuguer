@@ -30,8 +30,12 @@ struct QuizSessionTests {
 
   private func answerRightly(_ quiz: Quiz, count: Int) {
     for _ in 0 ..< count {
-      guard let question = quiz.currentQuestion else {
+      guard let question = quiz.currentQuestion, quiz.quizState == .inProgress else {
         return
+      }
+      if question.choice != nil {
+        quiz.skipChoice()
+        continue
       }
       quiz.process(proposedAnswer: correctAnswer(for: question))
     }
@@ -44,6 +48,7 @@ struct QuizSessionTests {
   }
 
   private func miss(_ quiz: Quiz) {
+    quiz.skipChoice(rightly: false)
     quiz.process(proposedAnswer: "x")
     quiz.continueAfterCorrection()
   }

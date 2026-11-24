@@ -18,6 +18,8 @@ struct QuizQuestion {
   var recognition: RecognitionQuestion?
   /// Set for a Phrases à trous question, whose blank stands in an authored sentence.
   var sentence: GapSentence?
+  /// Set for a choice question, whose answer is one of two sentences.
+  var choice: ChoicePrompt?
 
   /// The gender the answer agrees in: a sentence's subject's where it fixes one, and otherwise
   /// the learner's setting, which an impersonal verb overrides.
@@ -30,6 +32,6 @@ struct QuizQuestion {
   }
 
   func reasked(stepID: UUID?) -> QuizQuestion {
-    QuizQuestion(verb: verb, tense: tense, isReask: true, stepID: stepID, recognition: recognition, sentence: sentence)
+    QuizQuestion(verb: verb, tense: tense, isReask: true, stepID: stepID, recognition: recognition, sentence: sentence, choice: choice)
   }
 }

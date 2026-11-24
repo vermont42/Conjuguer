@@ -16,6 +16,7 @@ disabled_rules:
   - weak_delegate
   - blanket_disable_command
   - large_tuple
+  - inclusive_language
 
 opt_in_rules:
   - closure_end_indentation

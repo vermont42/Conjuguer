@@ -6331,3 +6331,52 @@ example line is italic throughout, gets the text with the markup removed. Venir'
 L'*Assommoir* est venu, as Zola's printer set it. A test fails on an odd number of underscores,
 which would tip the rest of a sentence into italics.
 
+
+## Which Tense Would a Speaker Use? (2026-11-24)
+
+Pedagogy Phase 19 ports Konjugieren's choice questions. The typed quiz asks a learner to produce a
+cell that someone else has named, *imparfait, je*, and never asks the harder question of which cell
+a sentence calls for. A choice question does: it shows a setting, "Dans une conversation", and the
+same sentence twice, "Si j'avais plus de temps, je voyagerais" and "Si j'aurais plus de temps, je
+voyagerais", and the learner taps the one a speaker would say. Right or wrong, the card then holds
+on a one-line reason ("Après si, une hypothèse se met à l'imparfait, jamais au conditionnel"),
+because a choice of two can be a lucky guess and the reason is the lesson.
+
+French gave this more to work with than German did. Josh took all five contrasts on offer: the
+passé composé against the imparfait, the si clauses, the conditionnel of politeness, the subjonctif
+against the indicatif, and the passé simple against the passé composé by register. He also chose
+about sixty items with my full reread standing in for his review, as he had for the Phrases à
+trous sentences. Everything else came over from Konjugieren as Josh decided it there: one choice
+in every default round from Elementary up, the held card, ten points or nothing, no second try and
+no re-ask (either would ask a question whose answer is now known), and nothing written to the
+practice record, since recognizing the right tense is not evidence of producing it.
+
+I drafted the 66 items myself rather than handing ranges to Sonnet subagents, as Phase 18 had
+done. A Phrases à trous sentence is a vehicle for a conjugation. A choice item is a claim about
+French grammar, and each one needed a judgment rather than variety. The machine check, which reads
+each of the two sentences as a Phrases à trous sentence and conjugates it with the app's own
+Conjugator, passed every conjugation on its first run. It caught a different kind of mistake:
+dormir is not among the 300 most frequent verbs and pleuvoir not among the 1,000, so their items
+would never have been asked at their levels. Travailler and faire took their places. The reread
+then changed five items. One wrong sentence was wrong twice over: "vous avez lu toujours" breaks
+word order as well as the tense rule. *Devine quoi* is an English calque. And two polite requests
+did not contrast enough, because "Avez-vous un moment" is already polite. *Je veux* against *je
+voudrais* makes the point that *avez-vous* against *auriez-vous* only gestures at.
+
+The surprise of the session was a test about rester. `QuizDrawTests` checks across 120 seeded
+quizzes that no verb outside the core dominates a level, and with choices in the round, rester
+took 20 of the Elementary questions where the cap allows 19. Two causes turned up, one real and
+one an artifact. The real one: a round now draws nine typed questions, and the rule that half ask
+an irregular verb rounded nine down to four. Two of those four are always core verbs, so only two
+of the other seven were irregular, and regular verbs like rester gained share. Rounding the half
+up restored the balance and leaves a round of ten unchanged. The artifact: I had drawn the choice
+before the typed questions, so every seed's typed draw came from a different stretch of the
+random stream. A probe showed that nine questions drawn from the original stream gave rester 10,
+much as ten had given 11. Drawing the choice afterward means the typed questions are exactly what
+a nine-question round would draw. The test was right to flag this. It just took a probe to see
+which half of the jump was the mix and which half the seed.
+
+The suite went from 829 to 846 tests, all passing. On the iPhone, a real Elementary round asked
+its choice second, after a typed miss. The keyboard got out of the way for the two sentences and
+came back for the next field after Continue. The iPad showed the card in dark mode with each
+sentence on one line. Josh has yet to try it.

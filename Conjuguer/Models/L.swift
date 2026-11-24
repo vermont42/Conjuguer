@@ -1360,6 +1360,104 @@ enum L {
     }
   }
 
+  enum Choice {
+    static var prompt: String {
+      String(localized: "Choice.prompt")
+    }
+
+    static var yourChoice: String {
+      String(localized: "Choice.yourChoice")
+    }
+
+    static var rightChoice: String {
+      String(localized: "Choice.rightChoice")
+    }
+
+    static var correct: String {
+      String(localized: "Choice.correct")
+    }
+
+    static func rightChoiceSentence(_ sentence: String) -> String {
+      String(localized: "Choice.rightChoiceSentence", defaultValue: "The right choice: \(sentence)")
+    }
+
+    static var optionHint: String {
+      String(localized: "Choice.optionHint")
+    }
+
+    static var reasonCompletedEvent: String {
+      String(localized: "Choice.reasonCompletedEvent")
+    }
+
+    static var reasonPastDescription: String {
+      String(localized: "Choice.reasonPastDescription")
+    }
+
+    static var reasonPastHabit: String {
+      String(localized: "Choice.reasonPastHabit")
+    }
+
+    static var reasonActionInProgress: String {
+      String(localized: "Choice.reasonActionInProgress")
+    }
+
+    static var reasonSiImparfait: String {
+      String(localized: "Choice.reasonSiImparfait")
+    }
+
+    static var reasonConditionnelAfterSi: String {
+      String(localized: "Choice.reasonConditionnelAfterSi")
+    }
+
+    static var reasonFuturAfterSiPresent: String {
+      String(localized: "Choice.reasonFuturAfterSiPresent")
+    }
+
+    static var reasonPoliteRequest: String {
+      String(localized: "Choice.reasonPoliteRequest")
+    }
+
+    static var reasonNecessity: String {
+      String(localized: "Choice.reasonNecessity")
+    }
+
+    static var reasonWish: String {
+      String(localized: "Choice.reasonWish")
+    }
+
+    static var reasonEmotion: String {
+      String(localized: "Choice.reasonEmotion")
+    }
+
+    static var reasonConjunction: String {
+      String(localized: "Choice.reasonConjunction")
+    }
+
+    static var reasonDoubt: String {
+      String(localized: "Choice.reasonDoubt")
+    }
+
+    static var reasonCertainty: String {
+      String(localized: "Choice.reasonCertainty")
+    }
+
+    static var reasonHope: String {
+      String(localized: "Choice.reasonHope")
+    }
+
+    static var reasonSiPlusQueParfait: String {
+      String(localized: "Choice.reasonSiPlusQueParfait")
+    }
+
+    static var reasonPasseSimpleInWriting: String {
+      String(localized: "Choice.reasonPasseSimpleInWriting")
+    }
+
+    static var reasonPasseComposeInSpeech: String {
+      String(localized: "Choice.reasonPasseComposeInSpeech")
+    }
+  }
+
   enum Sentences {
     static var title: String {
       String(localized: "Sentences.title")

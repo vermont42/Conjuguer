@@ -24,6 +24,7 @@ struct QuizView: View {
   @State private var recognitionPerson: PersonNumber?
   @FocusState private var conjugationFieldIsFocused: Bool
   @AccessibilityFocusState private var correctionHasAccessibilityFocus: Bool
+  @AccessibilityFocusState private var choiceReasonHasAccessibilityFocus: Bool
   @State private var authCoordinator = GameCenterAuthCoordinator()
   /// `GameCenter` is not observable, so the tab keeps its own copy for the leaderboard button.
   @State private var isSignedInToGameCenter = false
@@ -53,7 +54,7 @@ struct QuizView: View {
     }
     .environment(\.isBeneathQuiz, quiz.quizState == .inProgress)
     .accessibilityAction(.magicTap) {
-      if quiz.correction != nil {
+      if quiz.isHeld {
         continueAfterCorrection()
       }
     }
@@ -220,26 +221,16 @@ struct QuizView: View {
               isLocked: quiz.correction != nil
             )
           }
-          VStack(alignment: .leading, spacing: Layout.defaultSpacing / 2) {
-            if let currentRow {
-              VerbEssentialsRowLabel(tense: currentRow.question.tense)
-                .accessibilityHidden(true)
-            }
-            if quiz.currentQuestion?.recognition != nil {
-              Text(L.Recognition.infinitive)
-                .font(captionFont)
-                .foregroundStyle(Color.customBlue)
-                .accessibilityHidden(true)
-            }
-            answerField(spokenPrefix: currentRow?.question.tense.titleCaseName.lowercased())
-            if let sentence = quiz.currentQuestion?.sentence {
-              Text(verbatim: sentence.english)
-                .translationLabel()
-                .fixedSize(horizontal: false, vertical: true)
-                .englishPronunciation()
-                .padding(.top, Layout.defaultSpacing / 2)
-                .accessibilityIdentifier("quiz_sentence_english")
-            }
+          if let choice = quiz.currentQuestion?.choice {
+            ChoiceQuestionView(
+              choice: choice,
+              chosenIndex: quiz.heldChoice,
+              reasonIsFocused: $choiceReasonHasAccessibilityFocus,
+              onChoose: { quiz.submitChoice($0) },
+              onContinue: continueAfterCorrection
+            )
+          } else {
+            answerBlock(currentRow: currentRow)
           }
           if quiz.currentQuestion?.recognition != nil, quiz.correction == nil {
             recognitionCheckButton
@@ -262,6 +253,48 @@ struct QuizView: View {
         withAnimation(reduceMotion ? nil : .default) {
           proxy.scrollTo(QuizCorrectionView.continueButtonID, anchor: .bottom)
         }
+      }
+      // A choice's reason and Continue appear below its sentences, out of sight on a small screen.
+      .onChange(of: quiz.heldChoice != nil) { _, isHeld in
+        guard isHeld else {
+          return
+        }
+        choiceReasonHasAccessibilityFocus = true
+        withAnimation(reduceMotion ? nil : .default) {
+          proxy.scrollTo(QuizCorrectionView.continueButtonID, anchor: .bottom)
+        }
+      }
+      // A choice question has no field, so the next question's field takes the keyboard once it
+      // is back on screen.
+      .onChange(of: quiz.currentQuestion?.choice != nil) { _, isChoice in
+        guard !isChoice, quiz.quizState == .inProgress else {
+          return
+        }
+        refocusField(after: .milliseconds(100))
+      }
+    }
+  }
+
+  private func answerBlock(currentRow: Quiz.EssentialsRow?) -> some View {
+    VStack(alignment: .leading, spacing: Layout.defaultSpacing / 2) {
+      if let currentRow {
+        VerbEssentialsRowLabel(tense: currentRow.question.tense)
+          .accessibilityHidden(true)
+      }
+      if quiz.currentQuestion?.recognition != nil {
+        Text(L.Recognition.infinitive)
+          .font(captionFont)
+          .foregroundStyle(Color.customBlue)
+          .accessibilityHidden(true)
+      }
+      answerField(spokenPrefix: currentRow?.question.tense.titleCaseName.lowercased())
+      if let sentence = quiz.currentQuestion?.sentence {
+        Text(verbatim: sentence.english)
+          .translationLabel()
+          .fixedSize(horizontal: false, vertical: true)
+          .englishPronunciation()
+          .padding(.top, Layout.defaultSpacing / 2)
+          .accessibilityIdentifier("quiz_sentence_english")
       }
     }
   }
@@ -330,8 +363,8 @@ struct QuizView: View {
               .accessibilityIdentifier("quiz_asked_again")
           }
 
-          // Only a debug build asks a sentence that has not been approved.
-          if let sentence = question.sentence, !sentence.reviewed {
+          // Only a debug build asks a sentence or a choice that has not been approved.
+          if question.sentence?.reviewed == false || question.choice?.question.reviewed == false {
             Label(L.Sentences.draft, systemImage: "pencil.and.list.clipboard")
               .font(captionFont)
               .foregroundStyle(Color.customGray)
@@ -342,6 +375,18 @@ struct QuizView: View {
           // is shown.
           if let recognition = question.recognition {
             RecognitionPromptView(prompt: recognition.prompt)
+          } else if let setting = question.choice?.question.setting {
+            // The setting decides the choice, so it takes the verb's place, with its gloss.
+            Text(verbatim: setting.french)
+              .font(largeTitleFont)
+              .foregroundStyle(Color.customForeground)
+              .fixedSize(horizontal: false, vertical: true)
+              .frenchPronunciation()
+              .accessibilityIdentifier("choice_setting")
+
+            Text(verbatim: setting.english)
+              .smallLabel()
+              .englishPronunciation()
           } else {
             Text(verb.infinitifWithPossibleExtraLetters)
               .font(largeTitleFont)
@@ -353,7 +398,7 @@ struct QuizView: View {
               .englishPronunciation()
           }
 
-          if showsTense, question.recognition == nil {
+          if showsTense, question.recognition == nil, question.choice == nil {
             Text(tenseName)
               .font(buttonFont)
               .foregroundStyle(Color.customForeground)
@@ -377,7 +422,7 @@ struct QuizView: View {
           .fixedSize(horizontal: false, vertical: true)
           .transition(.opacity.combined(with: .scale(scale: 0.9)))
           .accessibilityIdentifier("quiz_almost")
-      } else if let result = quiz.lastRoundResult, quiz.correction != nil || result.conjugationResult != .noMatch {
+      } else if let result = quiz.lastRoundResult, quiz.isHeld || result.conjugationResult != .noMatch {
         Image(systemName: result.conjugationResult.feedbackIconString)
           .font(.title2)
           .foregroundStyle(result.conjugationResult.feedbackColor)

@@ -96,8 +96,10 @@ struct QuizDrawnQuestion: Equatable {
 /// band reaches past it, one to three questions ask a prefixed verb from beyond it, and no other
 /// question does. Where it does not, at least one question asks a prefixed verb.
 enum QuizDraw {
-  /// Half of the questions, rounded down, ask an irregular verb, as `VerbDraw.isIrregular`
-  /// counts them: the third group as French schools teach it, rendre's verbs among them, and aller.
+  /// Half of the questions, rounded up, ask an irregular verb, as `VerbDraw.isIrregular` counts
+  /// them: the third group as French schools teach it, rendre's verbs among them, and aller. Rounded
+  /// up, since the two core verbs are irregular, and a round of nine, beside its choice question or
+  /// a due item, would otherwise leave its other questions mostly regular.
   static let irregularShareDivisor = 2
   static let minimumCoreQuestions = 2
   static let rareDerivativeRange = 1 ... 3
@@ -180,7 +182,7 @@ enum QuizDraw {
         slots[index].isIrregular = admitsIrregular
       }
     }
-    let irregularNeeded = count / irregularShareDivisor - slots.filter { $0.isIrregular == true }.count
+    let irregularNeeded = (count + irregularShareDivisor - 1) / irregularShareDivisor - slots.filter { $0.isIrregular == true }.count
     for (offset, index) in flexible.shuffled(using: &generator).enumerated() {
       slots[index].isIrregular = offset < irregularNeeded
     }

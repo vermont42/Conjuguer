@@ -29,7 +29,7 @@ struct QuizDrawTests {
       defer {
         quiz.quit()
       }
-      return quiz.questions
+      return quiz.questions.filter { $0.choice == nil }
     }
     Self.quizzesByLevel[level] = quizzes
     return quizzes
@@ -48,7 +48,7 @@ struct QuizDrawTests {
   func theDefaultQuizAsksOnlyTheLevelsBand(level: QuizLevel) {
     let limit = level.band?.rankLimit ?? Int.max
     for quiz in quizzes(at: level) {
-      #expect(quiz.count == Quiz.questionCount)
+      #expect(quiz.count == Quiz.questionCount - (level == .beginner ? 0 : 1), "A round from Elementary up asks one choice question.")
       for question in quiz {
         #expect(question.verb.frequency <= limit, "\(question.verb.infinitif) at \(level)")
       }
@@ -64,7 +64,7 @@ struct QuizDrawTests {
   func halfOfEachQuizIsIrregular(level: QuizLevel) {
     for quiz in quizzes(at: level) {
       let irregular = quiz.filter { VerbDraw.isIrregular($0.verb) }.count
-      #expect(irregular == quiz.count / QuizDraw.irregularShareDivisor, "\(level): \(irregular)")
+      #expect(irregular == (quiz.count + 1) / QuizDraw.irregularShareDivisor, "\(level): \(irregular)")
     }
   }
 

@@ -803,7 +803,8 @@ or about tenses and verbs the learner puts together (§ The Custom Quiz). Verb E
 key conjugations of irregular verbs (§ Verb Essentials), each model can be practiced alone and
 then mixed with the models the learner knows (§ Model Practice), Name the Conjugation asks the
 other way round (§ Name the Conjugation), and Phrases à trous asks a conjugation inside a sentence
-(§ Phrases à trous).
+(§ Phrases à trous). From Elementary up, one question of each default round asks which of two
+sentences a speaker would use (§ Choice Questions).
 
 ### Architecture
 
@@ -831,6 +832,7 @@ other way round (§ Name the Conjugation), and Phrases à trous asks a conjugati
 | `PracticeItemMapping.swift`, `PracticeStore.swift`, `QuizDueItems.swift` | Which item a question exercises; `Current.practice`, which records answers and lookups and offers the review card; and the due items a default round mixes in |
 | `QuizView.swift`, `QuizResultsView.swift`, `QuizResultView.swift` | The Quiz tab's practice hub (§ The Practice Hub), the quiz screen, and the results sheet |
 | `LastQuizResult.swift` | The last quiz's results, which the hub shows (§ The Practice Hub) |
+| `ChoiceQuestion.swift`, `ChoiceQuestionView.swift`, `choice_questions.json` | The choice question a default round asks from Elementary up: its items, settings, reasons, draw, and card (§ Choice Questions) |
 | `LiveActivities.swift`, `LiveActivitiesReal.swift`, `LiveActivitiesSpy.swift` | Starts, updates, and ends the quiz's Live Activity through `Current.liveActivities`: ActivityKit on device and in the simulator, a spy under unit tests |
 
 ### Levels
@@ -865,9 +867,11 @@ quiz asks the verbs chosen, whatever the band. `QuizDraw.questions(level:count:u
 question's tense by weight first, then fixes what the quiz as a whole asks of its verbs, and only
 then draws each question's pool and verb to fit, so that the counts are exact rather than likely:
 
-- **Half irregular.** Half of the questions, rounded down, ask an irregular verb as
+- **Half irregular.** Half of the questions, rounded up, ask an irregular verb as
   `VerbDraw.isIrregular` counts them: the third group as French schools teach it, which includes
-  rendre and attendre, plus aller (Josh, 2026-11-23, as for the verb of the day).
+  rendre and attendre, plus aller (Josh, 2026-11-23, as for the verb of the day). Rounded up, since
+  the two core verbs are irregular and a draw of nine, beside a round's choice question or a due
+  item, would otherwise leave its other questions mostly regular.
 - **Core verbs.** At least two questions ask être, avoir, aller, faire, pouvoir, vouloir, devoir, or
   savoir (`QuizDraw.coreInfinitifs`).
 - **Prefixed verbs.** A verb with a base (`VerbBase.base(of:)`, as on the verb page) is a
@@ -1630,6 +1634,70 @@ A short authored sentence with its verb blanked, so that a conjugation is tied t
 - **Identifiers.** `quiz_sentences_button` (or `quiz_sentences_empty`), `quiz_sentence_english`,
   `quiz_sentence_draft`, `quiz_correction_sentence`, `results_example_<verb key>`, and
   `results_example_text`.
+
+### Choice Questions
+
+A setting and the same sentence in two tenses or moods, and the learner taps the one a speaker or
+writer would use: "Si j'avais plus de temps" or "Si j'aurais plus de temps". Not a mode: from
+Elementary up, every default round asks one, Ten More's included, so every ranked round of a level
+asks the same mix (`QuizScope.mixesChoiceQuestions`). My Verbs, custom quizzes, practice sets,
+Review, and the exercises ask none. The design is Konjugieren's, where Josh chose it on 2026-11-15;
+for Conjuguer he chose the five contrasts, about 60 items, and Claude's reread in place of his
+review (2026-11-24).
+
+- **The content** is `choice_questions.json` (`ChoiceQuestion`, `ChoiceQuestions`): 66 items. Each
+  has an id (`avoir.imparfait.2`, by the right sentence's tense), its verb's key, a `PersonNumber`
+  raw value both sentences share, a `gender` where an être verb's agreement shows in either, a
+  `setting` (`ChoiceSetting`: conversation, a polite request, a written story, a history book,
+  shown in French with its English gloss in the verb's place), a `reason` (`ChoiceReason`), the
+  `right` and `other` sentences (each a `QuizTenseSlot` name and the French with the conjugation in
+  braces), the English, and `reviewed`. Each sentence reads as a `GapSentence`, so Phrases à trous'
+  braces, answer, and completed sentence serve both. The file is written only through
+  `scripts/choice_questions.py` (merge, check, review, approve, status); the review sheet is
+  [`plans/choice_questions.md`](../plans/choice_questions.md).
+- **The reasons.** Eighteen one-line strings (`Choice.reason…`), each fixing the level its items are
+  asked from and the tenses its two sentences may take. Elementary (33 items): the passé composé for
+  a completed action, the imparfait for a description, a habit, or an action under way; si with the
+  imparfait, not the conditionnel; the conditionnel présent after si with the imparfait, the futur
+  after si with the présent; the conditionnel of a polite request. Intermediate (24): the subjonctif
+  after necessity, a wish, an emotion, bien que, pour que, avant que, or sans que, and doubt; the
+  indicatif after penser que, croire que, être sûr que, and espérer que; si with the
+  plus-que-parfait, not the conditionnel passé. Advanced (9): the passé simple in a written story
+  or a history book, the passé composé in speech.
+- **The machine check** (`ChoiceQuestionTests`) confirms that both sentences are the Conjugator's
+  conjugations of their cells in the item's gender, that the quiz accepts the right one, that the
+  two sentences differ only in their braces (and an elision before them: "Je {travaillais}",
+  "J'{ai travaillé}"), that the tenses are the reason's, and that each item is asked from its
+  reason's level and not before, which also requires its verb in the level's band. The other
+  sentence's tense may be one the level does not ask, since the learner reads it and never writes
+  it.
+- **The draw.** The typed questions are drawn first, one fewer, so that they come from the
+  generator as a round without a choice would draw them; then the choice, the session's unasked
+  items first, with the right sentence first or second at random (`ChoicePrompt`), placed anywhere
+  but first, so that a round opens on a typed question with the keyboard up.
+- **The card.** The setting and its gloss, "Which fits here?" / "Laquelle convient ici ?", the two
+  sentences as buttons, each with its conjugation in bold blue and its tense named beneath, and the
+  English. A tap holds the card, right or wrong, since a choice of two can be a lucky guess and the
+  reason is the lesson: the right sentence ringed green with a check, a wrong choice ringed red with
+  a cross, the other dimmed, the reason beside a lightbulb, and Continue (Return on a hardware
+  keyboard). The clock stops while it holds (`Quiz.heldChoice`, `isHeld`). After Continue the next
+  question's field takes the keyboard.
+- **Scoring.** 10 points if right, none if wrong, with no second attempt and no re-ask, since either
+  would ask a choice of two whose answer is known. A ranked round still scores out of 100. Choosing
+  is not producing, so the practice record is untouched. The results row shows the right sentence,
+  the chosen conjugation, and the right one.
+- **Signals.** None new: the choice is a question of a default round, whose signals are unchanged.
+- **Drafts.** A debug build asks unreviewed items too, with the Draft label; all 66 are reviewed.
+- **VoiceOver.** The question speaks the setting in French, its gloss, "Which fits here?", and the
+  progress. Each sentence is one button, read as the sentence and its tense; once chosen, its value
+  is "Your choice", "The right choice", or both. Focus moves to the reason, read as "Correct." and
+  the reason, or "Incorrect. The right choice:", the right sentence, and the reason. Magic Tap
+  continues.
+- **The fixture.** `-CONJUGUER_QUIZ_FIXTURE choices`, used when the default quiz starts, asks ten
+  items, the right sentence first and second by turns (`Quiz.choicesFixtureIDs`): si j'avais, ai vu,
+  travaillais, voudrais, ira, fasses, viendras after j'espère, avais su, naquit, and est tombée.
+- **Identifiers.** `choice_setting`, `choice_prompt`, `choice_option_0`, `choice_option_1`,
+  `choice_english`, `choice_reason`, and Continue's `quiz_continue_button`.
 
 ### Signals
 

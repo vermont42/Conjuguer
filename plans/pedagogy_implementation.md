@@ -42,7 +42,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 16 | Done | 2026-11-23 | 94df8f9 | T5.2 | 16 |
 | 17 | Done | 2026-11-23 | 4ffc7a3 | T5.4 | 17 |
 | 18 | Done | 2026-11-23 | 5694ad4 | T5.5 | 18 |
-| 19 | Not started | | | T5.6 | 19 |
+| 19 | Awaiting Josh | 2026-11-24 | | T5.6 | 19 |
 | 20 | Not started | | | T6.2 | 20 |
 | 21 | Not started | | | T5.7 | 21 |
 | 22 | Not started | | | T6.3 | 22 |
@@ -2199,7 +2199,7 @@ appear where decided, and tests pin the check.
 
 **Suggestions:** T5.6. **Ports:** Konjugieren Phase 19 (`ChoiceQuestion.swift`,
 `ChoiceQuestionView.swift`, [`../Konjugieren/plans/choice_questions_batch_1.md`](../../Konjugieren/plans/choice_questions_batch_1.md)).
-**Depends on:** Phase 18 for its content pipeline. **Status:** Not started.
+**Depends on:** Phase 18 for its content pipeline. **Status:** Awaiting Josh.
 
 A context and two tenses or moods, with the learner choosing the one a speaker would use, and a
 one-line reason after the choice. French has classic contrasts, perhaps worth more than German's
@@ -2215,6 +2215,91 @@ sessions from the second level up, rather than as a mode.
 tests pin the item data's integrity.
 
 **How it differed:**
+
+- **Asked of Josh (2026-11-24), before building.** (1) **All five contrasts**: the passé composé or
+  the imparfait, si clauses, the conditionnel of politeness, the subjonctif or the indicatif, and
+  (asked apart, the recommended option) the passé simple or the passé composé by register.
+  (2) **About 60 items, Claude's full reread in place of Josh's review**, over 40 with Josh
+  reviewing, which was recommended, and 40 reread, as he chose for Phrases à trous.
+- **Carried over from Konjugieren unasked**, each Josh's choice there on 2026-11-15 and a guess he
+  can overrule here: one choice a round in every default round from Elementary up, Ten More's
+  included; two named sentences, the conjugation in bold, its tense beneath; the card held after
+  every choice, right or wrong, with the reason and Continue; 10 points or none, with no second
+  attempt and no re-ask; nothing recorded in the practice record; never first in a round; the
+  session's unasked items first; no new signal.
+- **The batch.** 66 items in `Conjuguer/Models/choice_questions.json`, eighteen reasons. Elementary
+  33: the passé composé for a completed action (5); the imparfait for a description (4), a habit
+  (4), or an action under way (4); si with the imparfait, not the conditionnel (5); the
+  conditionnel after si with the imparfait (3) and the futur after si with the présent (3); the
+  conditionnel of a polite request (5). Intermediate 24: the subjonctif after necessity (4), a wish
+  (3), an emotion (2), a conjunction (4), and doubt (2); the indicatif after penser que, croire
+  que, or être sûr que (3) and espérer que (2); si with the plus-que-parfait, not the conditionnel
+  passé (4). Advanced 9: the passé simple in a story or a history book (6), the passé composé in
+  speech (3). Claude drafted all 66 in the session, without subagents, since each item is a
+  judgment of grammar rather than a sentence to vary; `scripts/choice_questions.py` merged them.
+  The machine check caught two whose verbs lay outside their level's band (dormir at Elementary,
+  pleuvoir at Intermediate), which became travailler and faire. **The reread changed five**: the
+  other sentence "vous avez lu toujours", wrong in its word order as well as its tense, lost
+  toujours; "Auriez-vous un moment" and "Est-ce que je pourrais essayer cette veste", whose
+  indicatifs are polite too, became "Nous voudrions deux billets" and "Je voudrais parler au
+  directeur", where "je veux" is curt; the anglicism "Devine quoi" became "Tu sais quoi ? On a
+  gagné"; and one English line. Then all 66 were approved. The sheet is
+  [`choice_questions.md`](choice_questions.md). The likeliest to draw a francophone's objection
+  are the polite requests (Pourriez-vous over Pouvez-vous, Sauriez-vous over Savez-vous, both
+  polite, the conditionnel softer) and the history-book passé simple, which much modern history
+  writing replaces with the présent.
+- **Decided in the session.** (1) **A reason fixes its level and both tenses**
+  (`ChoiceReason.level`, `rightSlots`, `otherSlots`), in place of Konjugieren's level per item, and
+  the check holds every item to them. (2) **Reasons are fixed strings**, the tenses named in
+  French in both languages, since Conjuguer has no setting for tense names. (3) **Four settings**,
+  shown in French with an English gloss in the verb's place: Dans une conversation, Pour demander
+  poliment, Dans un récit écrit, Dans un livre d'histoire. Konjugieren's news report was left out,
+  since French news writes the passé composé. (4) **The two sentences may differ only in their
+  braces and an elision before them** ("Je {travaillais}", "J'{ai travaillé}"), which the check
+  enforces. (5) **The prompt is "Laquelle convient ici ?"**, feminine for la phrase. (6) **The
+  typed questions are drawn first and the choice after**: drawn first, the choice moved every
+  seed's typed draw onto another stream, and at Elementary rester rose from 10 to 20 of the
+  non-core questions in `QuizDrawTests`' 120 seeds, past the cap of one in forty. (7) **The
+  irregular half now rounds up**: with nine typed questions and two irregular core verbs, rounding
+  down left two irregular among the other six. A round of ten is unchanged. (8) The feedback slot
+  shows a held choice's mark as it shows a held correction's.
+- **How it is built.** `ChoiceQuestion.swift` (`ChoiceQuestion`, whose sentences read as
+  `GapSentence`s, `ChoiceSetting`, `ChoiceReason`, `ChoicePrompt`, `ChoiceQuestions`, the draw, and
+  `QuizQuestion(choice:)`); `QuizQuestion.choice`; `QuizScope.mixesChoiceQuestions`;
+  `Quiz.submitChoice`, `heldChoice`, and `isHeld`, which the clock, the answer guards, Continue,
+  and Magic Tap now read; `process` refuses a choice question; `ChoiceQuestionView`. Tests that
+  type their way through a default round skip its choice through a `Quiz.skipChoice(rightly:)`
+  helper in `TestUtils.swift`, and the draw tests measure the typed questions alone.
+- **Analytics.** None new; nothing to stage.
+- **Strings:** 24, all `Choice.*`: the prompt, five for the card and VoiceOver, and eighteen
+  reasons.
+- **A fixture**, `-CONJUGUER_QUIZ_FIXTURE choices`, used when the default quiz starts: ten items of
+  ten reasons, the right sentence first and second by turns.
+- **Tests:** 829 to 846, all passing through `run_tests.sh` (the iPhone simulator is in English).
+  `ChoiceQuestionTests`, 12 functions: the file decodes whole; every item well formed; the two
+  sentences alike but for the braces; both the Conjugator's in the item's gender and the right one
+  accepted; the reason's tenses; asked from the reason's level and not before; every reason and
+  setting used and worded; either order; Beginner none and Advanced all; drafts; the draw; the
+  fixture's ids. Nested in `QuizTests`, 5: one choice a round at each level from Elementary and
+  never first, none in other quizzes, a right choice held with the clock stopped and nothing
+  recorded, a wrong one held and not re-asked, and a ranked round out of 100 whose Ten More asks a
+  new choice. Changed: `testQuizLifecycle` and the Live Activity's count (the choice is not
+  re-asked), the draw and level tests (typed questions only), and `halfOfEachQuizIsIrregular`
+  (rounded up).
+- **Verified on the iPhone 17**, light. In French with the fixture: si j'aurais chosen wrongly (the
+  right sentence ringed green, the chosen red, the reason, Continuer), the tree's labels and values
+  ("Le bon choix", "Votre choix", the reason read as "Incorrect. Le bon choix : …"), voyais wrongly
+  again, eight right, and results of 80 with each row's sentence. In English, a real Elementary
+  draw: the choice came second, after a typed miss, with the keyboard gone; jouais right (the other
+  sentence dimmed, "A past habit…"); after Continue the next field took typing at once; Return on a
+  hardware keyboard continues. **On the iPad Pro 11** in English and dark: the fixture's first item,
+  each sentence on one line, chosen rightly. Not tried: VoiceOver by ear, Ten More from the device
+  (unit-tested), the Live Activity, a release build.
+- **For Josh to judge:** the items, above all the polite requests; "Laquelle convient ici ?" and
+  "Which fits here?"; the setting in the verb's large type; the tense names under the sentences,
+  which Konjugieren shows too and which make the choice partly one of names; a results row's
+  "je (fém.)" on an avoir verb's passé composé, which Phrases à trous rows show the same way; and
+  the irregular half rounding up.
 
 ## Phase 20: Mastery
 

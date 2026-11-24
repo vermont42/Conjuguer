@@ -23,7 +23,7 @@ struct QuizLevelTests {
       defer {
         quiz.quit()
       }
-      return quiz.questions
+      return quiz.questions.filter { $0.choice == nil }
     }
   }
 
@@ -69,7 +69,7 @@ struct QuizLevelTests {
   func theDefaultQuizDrawsOnlyTheLevelsTensesAndEveryOne(level: QuizLevel) {
     let questions = defaultQuizzes(level: level, seeds: 1 ... 40)
     let asked = Set(questions.compactMap { QuizTenseSlot(tense: $0.tense) })
-    #expect(questions.count == 40 * Quiz.questionCount)
+    #expect(questions.count == 40 * (Quiz.questionCount - (level == .beginner ? 0 : 1)), "A round from Elementary up asks one choice question.")
     #expect(asked == Set(level.slots))
   }
 

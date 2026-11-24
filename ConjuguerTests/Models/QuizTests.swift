@@ -34,12 +34,17 @@ struct QuizTests {
 
   private func answerAllCorrectly(_ quiz: Quiz) {
     while let question = quiz.currentQuestion, quiz.quizState == .inProgress {
+      if question.choice != nil {
+        quiz.skipChoice()
+        continue
+      }
       quiz.process(proposedAnswer: correctAnswer(for: question))
     }
   }
 
   private func answerAllWrongly(_ quiz: Quiz) {
     while quiz.quizState == .inProgress {
+      quiz.skipChoice(rightly: false)
       quiz.process(proposedAnswer: "x")
       quiz.continueAfterCorrection()
     }
@@ -55,10 +60,11 @@ struct QuizTests {
 
     answerAllWrongly(quiz)
 
-    #expect(quiz.quizResults.count == 20)
+    // Every miss is asked again but the round's choice question.
+    #expect(quiz.quizResults.count == 19)
     #expect(quiz.sessionQuestionCount == 10)
-    #expect(quiz.reaskCount == 10)
-    #expect(quiz.currentQuestionIndex == 20)
+    #expect(quiz.reaskCount == 9)
+    #expect(quiz.currentQuestionIndex == 19)
     #expect(quiz.shouldShowResults)
     #expect(quiz.quizState == .notStarted)
   }
@@ -170,6 +176,10 @@ struct QuizTests {
   /// that answer with a letter added, which is one slip from it.
   private func reachASlip(_ quiz: Quiz) throws -> (slip: String, answer: String) {
     for question in quiz.questions {
+      if question.choice != nil {
+        quiz.skipChoice()
+        continue
+      }
       let answer = correctAnswer(for: question).lowercased()
       if answer.filter(\.isLetter).count >= AnswerSlip.minimumLetterCount {
         return (answer + "q", answer)
@@ -267,6 +277,10 @@ struct QuizTests {
   @Test func aWrongLastAnswerShowsItsCorrectionBeforeTheResults() throws {
     let quiz = makeDeterministicQuiz()
     for question in quiz.questions.dropLast() {
+      if question.choice != nil {
+        quiz.skipChoice()
+        continue
+      }
       quiz.process(proposedAnswer: correctAnswer(for: question))
     }
     quiz.process(proposedAnswer: "x")

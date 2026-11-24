@@ -184,5 +184,14 @@ marks one), and the correction's spoken text ends with the completed sentence. T
 Use is a button with the selected trait while open and the hint "Shows a sentence that uses this
 verb, with its source". Read from the accessibility tree, not heard.
 
+A choice question speaks its setting in `fr-FR`, the setting's English in `en-US`, "Which fits
+here?" / "Laquelle convient ici ?", and the progress, in place of the verb, the pronoun, and the
+tense. Each of its two sentences is one button, read as the sentence and its tense ("Si j'avais
+plus de temps, je voyagerais., imparfait") with the hint "Chooses this sentence." Once one is
+chosen, a sentence's value is "Your choice", "The right choice", or both, and focus moves to the
+reason, one element read as "Correct." and the reason, or "Incorrect. The right choice:", the right
+sentence, and the reason. Magic Tap continues, as from a held correction. Read from the
+accessibility tree, not heard.
+
 A new quiz screen or exercise that changes its question without moving focus needs the same
 announcement, or an `AccessibilityNotification.Announcement`.

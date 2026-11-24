@@ -56,6 +56,8 @@ Conjuguer/
 │   ├── Auxiliary.swift         # avoir/être auxiliary enum
 │   ├── ChansonExample.swift    # Codable model for a Chanson de Roland example (laisse, line, old French, translation)
 │   ├── chanson_examples.json   # Bundled Chanson de Roland examples keyed by infinitif
+│   ├── ChoiceQuestion.swift    # Choice questions: a setting and one sentence in two tenses or moods, the reasons and the level each sets, the draw of a round's one, and the order shown
+│   ├── choice_questions.json   # The 66 choice questions a default round draws from Elementary up (scripts/choice_questions.py merges, checks, and approves them)
 │   ├── ConditionnelPresent.swift  # Conditionnel présent endings
 │   ├── ConjugationLabels.swift # App-only display members of the conjugation core (pronouns, preamble, localized names, model verb links, the settings-gendered Conjugator overloads), kept apart so ConjugationMapTool can compile the core
 │   ├── ConjugationIndex.swift  # The conjugation map indexed for search: by folded spelling (etait → était) and as packed folds for the guess; BoundedEditDistance
@@ -97,7 +99,7 @@ Conjuguer/
 │   ├── PasseSimpleGroup.swift  # Passé simple stem/ending groups (bare/a/i/u/ï/…)
 │   ├── PersonNumber.swift      # 1s…3p with localized pronouns and gendered third-person handling
 │   ├── PronounGender.swift     # Setting enum: feminine/masculine/both
-│   ├── Quiz.swift              # @Observable quiz state: question generation, rounds of ten and Ten More, re-asks, timer, scoring, Live Activity, Game Center
+│   ├── Quiz.swift              # @Observable quiz state: question generation, rounds of ten and Ten More, re-asks, a round's held choice question, timer, scoring, Live Activity, Game Center
 │   ├── QuizAbandonment.swift   # The quizzes in progress, kept so the next launch can send quizAbandon for one the app was left during
 │   ├── QuizClock.swift         # Setting enum: the Quiz Clock, hide (default) or show
 │   ├── CustomQuiz.swift        # The custom quiz: chosen tenses and a QuizVerbSet (a band, every verb, My Verbs, a collection or model), its stored form, QuizScope.custom
@@ -109,7 +111,7 @@ Conjuguer/
 │   ├── QuizRecordSession.swift # Review and Practice My Mistakes: sessions drawn from the practice record beyond the level's tenses and band, a verb's key conjugations together, QuizScope.recordSession
 │   ├── QuizScope.swift         # What a quiz asks about (every verb, My Verbs, one verb's page, a collection, a custom choice), its count and source; the level's mix over chosen verbs, Test Me's three tenses, Verb.hasCell, canBeQuizzed(at:)
 │   ├── QuizLevel.swift         # Setting enum: the four quiz levels (Beginner to Advanced) and the tenses each asks; QuizTenseSlot, a tense's cells, weight, and verb pools; each level's frequency band
-│   ├── QuizQuestion.swift      # One quiz question (verb + tense), whether it is a missed question asked again, the step it shares with questions shown on the same screen, a recognition prompt or a sentence, and the gender its answer agrees in
+│   ├── QuizQuestion.swift      # One quiz question (verb + tense), whether it is a missed question asked again, the step it shares with questions shown on the same screen, a recognition prompt, a sentence, or a choice, and the gender its answer agrees in
 │   ├── QuizResult.swift        # One answered question, its ConjugationResult, a slip's first attempt, whether it was a re-ask, its sentence, and its points, for the results sheet; which rows offer the verb's example
 │   ├── QuizState.swift         # Quiz lifecycle enum (not started / in progress / finished)
 │   ├── Recognition.swift       # Name the Conjugation: the scope, a prompt's every right cell (by the conjugation map, in both genders, a pronominal verb's prompt with its pronoun), the grade part by part, its repair lines, and the correction's answer lines
@@ -202,6 +204,7 @@ Conjuguer/
     ├── BrowseLayout.swift      # Shared adaptive grid columns and search-field placement (a fixed bar on iPad and Mac) for the browse views
     ├── BrowseRow.swift         # Shared row/cell used by both browse views, with optional badge, a looked-up check, and a French or English subtitle
     ├── BrowseSearch.swift      # Shared search plumbing for the browse views: all items for a blank query, the trombone for none
+    ├── ChoiceQuestionView.swift # A choice question's two sentences, each with its conjugation in bold and its tense, and once one is chosen, the marks, the reason, and Continue
     ├── CustomQuizView.swift    # The custom quiz's editor (tenses and a verb set, each tap kept at once), its list of models, pushed onto the Quiz tab, and the summary card the tab and a practice set share
     ├── FailedVerbSearchView.swift # The verb list's empty state: no results, a guess at the verb meant, and the email-us line
     ├── FrenchLetterKeyRow.swift   # é è ê â î ô û ç keys that replace the sort picker while a search field is focused, and sit above the keyboard for the quiz's answer field
@@ -287,6 +290,7 @@ ConjuguerTests/
     ├── AnswerFrameTests.swift          # The frame for each kind of question, one blank in every cell, the frame's words typed with the answer still right, and the spoken prompt
     ├── AnswerSlipTests.swift           # Slips that earn one more try (etes, suis allé, ai parle) and near misses that do not (parle for parlé, prit for prît, eut, viens for vient)
     ├── AnswerSpellingTests.swift       # Normalizing an answer, and the pronouns stripped (or kept) for each person, pronominal verbs, and the impératif
+    ├── ChoiceQuestionTests.swift       # The machine check of every choice question (both sentences the Conjugator's, alike but for the braces, the reason's tenses, its level and band); the draw; drafts; nested in QuizTests, one choice a default round from Elementary, a held right or wrong choice, and a ranked round out of 100 with Ten More
     ├── AnalyticsTests.swift            # The bands, the section order, every match kind's analytics value, and the verb page's screen name
     ├── CompoundTenseTests.swift        # Compound tenses, incl. feminine/plural participe agreement
     ├── ConjugationMapTests.swift       # The bundled map equals a fresh build, finds the verb of 99% of example sentences, its entries (homographs, agreement, defects), and its format
@@ -398,6 +402,7 @@ docs/                               # Claude's output that informs: research, re
 └── wwdc2026_*.txt                  # Three verbatim WWDC 2026 session transcripts (Apple copyrighted, gitignored)
 
 scripts/
+├── choice_questions.py         # Merges drafted choice questions into choice_questions.json, pre-checks them, writes a review sheet, and approves them
 ├── count_tenses.py             # Counts each tense in corpus/originals from the map tool's cells; see docs/tense_frequency.md
 ├── gap_sentences.py            # Merges drafted Phrases à trous into gap_sentences.json, pre-checks them, writes a review sheet, and approves them
 ├── prep_screenshot_sim.sh      # Prepares a simulator for a screenshot sweep (status bar, language, region)
@@ -413,6 +418,7 @@ plans/                              # What Claude wrote to get another session (
 ├── browse_and_verb_implementation.md  # Port Konjugieren's browse and verb-page work (search, reverse lookup, related verbs, My Verbs, collections), in phases
 ├── chanson_full_treatment.md       # Working prompt for the full-treatment Chanson de Roland edition; its conventions still apply
 ├── chanson_second_half.md          # Finishing the Chanson's second half (laisses CLII–CCXCI); complete
+├── choice_questions.md             # The review sheet of the 66 choice questions, right sentence first, with each reason as the app words it
 ├── etymology_affixes [.json]       # Live data: the affix library, build-time cards for verb-forming affixes that the etymology writers read (never shipped)
 ├── etymology_tail.md               # Etymologies for the last 5,325 verbs, in waves; its ledger is the current record, and its "One wave" adds a verb
 ├── fix_and_add_verbs.md            # Fix seven misspelled infinitives and add fifteen missing common verbs

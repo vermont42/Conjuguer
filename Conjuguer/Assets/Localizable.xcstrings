@@ -732,6 +732,414 @@
         }
       }
     },
+    "Choice.prompt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Which fits here?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laquelle convient ici ?"
+          }
+        }
+      }
+    },
+    "Choice.yourChoice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your choice"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre choix"
+          }
+        }
+      }
+    },
+    "Choice.rightChoice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The right choice"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le bon choix"
+          }
+        }
+      }
+    },
+    "Choice.rightChoiceSentence" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The right choice: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le bon choix : %@"
+          }
+        }
+      }
+    },
+    "Choice.correct" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correct."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bonne réponse."
+          }
+        }
+      }
+    },
+    "Choice.optionHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chooses this sentence."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisit cette phrase."
+          }
+        }
+      }
+    },
+    "Choice.reasonCompletedEvent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A completed action, at a definite moment in the past, takes the passé composé."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une action achevée, à un moment précis du passé, se dit au passé composé."
+          }
+        }
+      }
+    },
+    "Choice.reasonPastDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A past description or state, with no definite start or end, takes the imparfait."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une description ou un état du passé, sans début ni fin précis, se dit à l’imparfait."
+          }
+        }
+      }
+    },
+    "Choice.reasonPastHabit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A past habit, something done again and again, takes the imparfait."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une habitude du passé, ce qu’on faisait souvent, se dit à l’imparfait."
+          }
+        }
+      }
+    },
+    "Choice.reasonActionInProgress" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An action under way when another happens takes the imparfait; the other takes the passé composé."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une action en cours quand une autre survient se dit à l’imparfait ; l’autre, au passé composé."
+          }
+        }
+      }
+    },
+    "Choice.reasonSiImparfait" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After si, a hypothesis takes the imparfait, never the conditionnel."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Après si, une hypothèse se met à l’imparfait, jamais au conditionnel."
+          }
+        }
+      }
+    },
+    "Choice.reasonConditionnelAfterSi" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When si takes the imparfait, the result takes the conditionnel présent."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quand si est suivi de l’imparfait, la conséquence se met au conditionnel présent."
+          }
+        }
+      }
+    },
+    "Choice.reasonFuturAfterSiPresent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When si takes the présent, the result takes the futur simple."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quand si est suivi du présent, la conséquence se met au futur simple."
+          }
+        }
+      }
+    },
+    "Choice.reasonPoliteRequest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To ask politely, speakers soften the request with the conditionnel présent."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour demander poliment, on adoucit la demande avec le conditionnel présent."
+          }
+        }
+      }
+    },
+    "Choice.reasonNecessity" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il faut que and other expressions of necessity take the subjonctif."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il faut que et les autres expressions de nécessité demandent le subjonctif."
+          }
+        }
+      }
+    },
+    "Choice.reasonWish" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A wish or a demand, as with vouloir que, souhaiter que, or aimer que, takes the subjonctif."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La volonté ou le souhait, avec vouloir que, souhaiter que ou aimer que, demande le subjonctif."
+          }
+        }
+      }
+    },
+    "Choice.reasonEmotion" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An emotion, as with être content que or avoir peur que, takes the subjonctif."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une émotion, avec être content que ou avoir peur que, demande le subjonctif."
+          }
+        }
+      }
+    },
+    "Choice.reasonConjunction" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bien que, pour que, avant que, and sans que take the subjonctif."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bien que, pour que, avant que et sans que demandent le subjonctif."
+          }
+        }
+      }
+    },
+    "Choice.reasonDoubt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Doubt, as with je ne pense pas que or je doute que, takes the subjonctif."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le doute, avec je ne pense pas que ou je doute que, demande le subjonctif."
+          }
+        }
+      }
+    },
+    "Choice.reasonCertainty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Penser que, croire que, and être sûr que, when affirmative, take the indicatif."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Penser que, croire que et être sûr que, à la forme affirmative, demandent l’indicatif."
+          }
+        }
+      }
+    },
+    "Choice.reasonHope" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espérer que takes the indicatif, often the futur, unlike souhaiter que."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espérer que demande l’indicatif, souvent le futur, contrairement à souhaiter que."
+          }
+        }
+      }
+    },
+    "Choice.reasonSiPlusQueParfait" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After si, a hypothesis about the past takes the plus-que-parfait, never the conditionnel passé."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Après si, une hypothèse sur le passé se met au plus-que-parfait, jamais au conditionnel passé."
+          }
+        }
+      }
+    },
+    "Choice.reasonPasseSimpleInWriting" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A written narrative, such as a tale, a novel, or a history book, tells its events in the passé simple."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un récit écrit, conte, roman ou livre d’histoire, raconte ses événements au passé simple."
+          }
+        }
+      }
+    },
+    "Choice.reasonPasseComposeInSpeech" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speech no longer uses the passé simple; it tells what happened in the passé composé."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À l’oral, le passé simple ne s’emploie plus : on raconte au passé composé."
+          }
+        }
+      }
+    },
     "Sentences.draft" : {
       "extractionState" : "manual",
       "localizations" : {

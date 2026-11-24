@@ -144,6 +144,10 @@ extension QuizTests {
       var isFirst = true
       while quiz.quizState == .inProgress {
         let question = try #require(quiz.currentQuestion)
+        if question.choice != nil {
+          quiz.skipChoice()
+          continue
+        }
         quiz.process(proposedAnswer: isFirst ? "definitelywrong" : correctAnswer(for: question))
         isFirst = false
         if quiz.correction != nil {

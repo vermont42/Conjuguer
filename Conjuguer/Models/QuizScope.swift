@@ -73,6 +73,12 @@ struct QuizScope {
     isRanked && level == nil
   }
 
+  /// Only the default quiz, and its Ten More, asks a choice question, one a round from Elementary
+  /// up, so that every ranked round of a level asks the same mix.
+  var mixesChoiceQuestions: Bool {
+    isRanked && level == nil
+  }
+
   /// A practice set's own level wins over `level`, the learner's.
   func slots(at level: QuizLevel) -> [QuizTenseSlot] {
     let level = self.level ?? level

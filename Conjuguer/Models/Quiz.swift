@@ -35,6 +35,14 @@ class Quiz {
   /// What was wrong with `firstAttempt`, nil for a slip.
   private(set) var firstAttemptDiagnosis: AnswerDiagnosis?
   private(set) var firstAttemptRecognition: RecognitionGrade?
+  /// The sentence chosen in a choice question, held with its reason and the clock stopped until
+  /// `continueAfterCorrection()`, right or wrong, since a choice of two can be a lucky guess and
+  /// the reason is the lesson.
+  private(set) var heldChoice: Int?
+
+  var isHeld: Bool {
+    correction != nil || heldChoice != nil
+  }
 
   private(set) var roundCount = 0
   private var roundFirstResultIndex = 0
@@ -193,6 +201,7 @@ class Quiz {
     firstAttempt = nil
     firstAttemptDiagnosis = nil
     firstAttemptRecognition = nil
+    heldChoice = nil
     quizState = .inProgress
     announcePublishedProperties()
     startLiveActivity()
@@ -218,7 +227,7 @@ class Quiz {
   }
 
   func clockTicked() {
-    guard correction == nil else {
+    guard !isHeld else {
       return
     }
     elapsedTime += 1
@@ -263,6 +272,7 @@ class Quiz {
     firstAttempt = nil
     firstAttemptDiagnosis = nil
     firstAttemptRecognition = nil
+    heldChoice = nil
     endLiveActivity()
     QuizAbandonment.clear(id: abandonmentID, getterSetter: Current.getterSetter)
   }
@@ -341,6 +351,7 @@ class Quiz {
     firstAttempt = nil
     firstAttemptDiagnosis = nil
     firstAttemptRecognition = nil
+    heldChoice = nil
     shouldShowResults = false
   }
 
@@ -398,10 +409,20 @@ class Quiz {
     let due = scope.mixesDueItems
       ? QuizDraw.dueQuestions(for: Current.practice.dueItems(at: now()), slots: slots, band: band, using: &generator)
       : []
+    let choices = scope.mixesChoiceQuestions ? ChoiceQuestions.askable(at: level) : []
     let asked = Set((questions + due).map(\.verb.id))
-    let drawn = QuizDraw.questions(slots: slots, band: band, count: scope.questionCount - due.count, asked: asked, using: &generator)
+    let count = scope.questionCount - due.count - (choices.isEmpty ? 0 : 1)
+    let drawn = QuizDraw.questions(slots: slots, band: band, count: count, asked: asked, using: &generator)
       .map(question(of:))
-    return QuizDraw.mixing(due, into: drawn, using: &generator)
+    var round = QuizDraw.mixing(due, into: drawn, using: &generator)
+    // Drawn after the typed questions, so that they come from the generator as a round without a
+    // choice would draw them.
+    let choice = QuizDraw.choice(from: choices, excluded: Set(questions.compactMap(\.choice?.question.id)), using: &generator)
+      .flatMap(QuizQuestion.init(choice:))
+    if let choice {
+      round.insert(choice, at: QuizDraw.choicePosition(in: round.count, using: &generator))
+    }
+    return round
   }
 
   /// The default quiz's draw from the level's tenses and band, with no due items, so that the
@@ -455,6 +476,8 @@ class Quiz {
       return generateLevelsFixture()
     case "diagnoses":
       return generateDiagnosesFixture()
+    case "choices":
+      return generateChoicesFixture()
     default:
       return nil
     }
@@ -682,6 +705,29 @@ class Quiz {
     }
   }
 
+  // A default round of ten choice questions, each of a different reason, used only once the
+  // default quiz starts, at whatever level is set, the right sentence first and second by turns.
+  // The items are listed in docs/feature_architecture.md § Choice Questions.
+  private func generateChoicesFixture() -> [QuizQuestion] {
+    let items = ChoiceQuestions.all
+    return Self.choicesFixtureIDs.enumerated().compactMap { index, id in
+      items.first { $0.id == id }.flatMap { QuizQuestion(choice: ChoicePrompt(question: $0, rightIndex: index % 2)) }
+    }
+  }
+
+  static let choicesFixtureIDs = [
+    "avoir.imparfait.2",
+    "voir.passéComposé.1",
+    "travailler.imparfait.1",
+    "vouloir.conditionnelPrésent.1",
+    "aller.futurSimple.1",
+    "faire.subjonctifPrésent.1",
+    "venir.futurSimple.2",
+    "savoir.plusQueParfait.1",
+    "naître.passéSimple.1",
+    "tomber.passéComposé.1"
+  ]
+
   static let sentencesFixtureIDs = [
     "venir.impératif.1",
     "aller.passéComposé.1",
@@ -735,7 +781,7 @@ class Quiz {
   }
 
   func process(proposedAnswer: String) {
-    guard quizState == .inProgress, correction == nil, currentQuestionIndex < questions.count else {
+    guard quizState == .inProgress, !isHeld, currentQuestionIndex < questions.count, questions[currentQuestionIndex].choice == nil else {
       return
     }
     let question = questions[currentQuestionIndex]
@@ -808,7 +854,7 @@ class Quiz {
   func submitRecognition(_ answer: RecognitionAnswer) {
     guard
       quizState == .inProgress,
-      correction == nil,
+      !isHeld,
       currentQuestionIndex < questions.count,
       let recognition = questions[currentQuestionIndex].recognition
     else {
@@ -855,6 +901,41 @@ class Quiz {
     }
   }
 
+  /// A choice question's answer, which holds the card with its reason, right or wrong. A choice of
+  /// two gets no second attempt and no re-ask, since the learner would then know the answer, and
+  /// choosing a sentence is not evidence of producing its conjugation, so the practice record is
+  /// untouched.
+  func submitChoice(_ index: Int) {
+    guard
+      quizState == .inProgress,
+      !isHeld,
+      currentQuestionIndex < questions.count,
+      let choice = questions[currentQuestionIndex].choice,
+      choice.options.indices.contains(index)
+    else {
+      return
+    }
+    let question = questions[currentQuestionIndex]
+    let right = choice.question.rightSentence
+    let conjugationResult: ConjugationResult = index == choice.rightIndex ? .totalMatch : .noMatch
+    if conjugationResult == .noMatch || currentQuestionIndex != questions.count - 1 {
+      Current.soundPlayer.play(conjugationResult.sound)
+    }
+    let result = QuizResult(
+      infinitif: question.verb.infinitifWithPossibleExtraLetters,
+      tense: question.tense,
+      conjugationResult: conjugationResult,
+      correctAnswer: right.answer,
+      actualAnswer: choice.options[index].answer,
+      pronounGender: right.pronounGender ?? question.verb.pronounGender,
+      sentence: right.completed,
+      verbKey: question.verb.dictionaryKey
+    )
+    score += result.points
+    quizResults.append(result)
+    heldChoice = index
+  }
+
   private func finish(_ result: QuizResult, correction makeCorrection: (_ willBeReasked: Bool) -> QuizCorrection) {
     let question = questions[currentQuestionIndex]
     score += result.points
@@ -877,10 +958,11 @@ class Quiz {
   }
 
   func continueAfterCorrection() {
-    guard correction != nil else {
+    guard isHeld else {
       return
     }
     correction = nil
+    heldChoice = nil
     advance()
   }
 
@@ -966,6 +1048,15 @@ class Quiz {
         if let recognition = question.recognition {
           Utterer.utter(L.Recognition.promptWithColon, localeString: currentLocaleString)
           Utterer.utter(recognition.prompt.lowercased(), localeString: Utterer.frenchLocaleString)
+          announceProgress(localeString: currentLocaleString)
+          return
+        }
+        // A choice question speaks its setting and asks which sentence fits. Its two sentences are
+        // buttons, each read with its tense.
+        if let setting = question.choice?.question.setting {
+          Utterer.utter(setting.french, localeString: Utterer.frenchLocaleString)
+          Utterer.utter(setting.english, localeString: Utterer.englishLocaleString)
+          Utterer.utter(L.Choice.prompt, localeString: currentLocaleString)
           announceProgress(localeString: currentLocaleString)
           return
         }

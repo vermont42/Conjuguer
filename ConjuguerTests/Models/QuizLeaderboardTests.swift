@@ -38,6 +38,10 @@ extension QuizTests {
 
     private func finishRightly(_ quiz: Quiz) {
       while let question = quiz.currentQuestion, quiz.quizState == .inProgress {
+        if question.choice != nil {
+          quiz.skipChoice()
+          continue
+        }
         quiz.process(proposedAnswer: correctAnswer(for: question))
       }
     }
@@ -89,6 +93,10 @@ extension QuizTests {
 
       var slipped = false
       while let question = quiz.currentQuestion, quiz.quizState == .inProgress {
+        if question.choice != nil {
+          quiz.skipChoice()
+          continue
+        }
         let answer = correctAnswer(for: question).lowercased()
         if !slipped, !question.isReask, answer.filter(\.isLetter).count >= AnswerSlip.minimumLetterCount {
           quiz.process(proposedAnswer: answer + "q")

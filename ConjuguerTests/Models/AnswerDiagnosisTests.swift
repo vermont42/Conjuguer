@@ -210,8 +210,12 @@ struct AnswerDiagnosisTests {
 
   @Test func aSlipSaysAlmost() throws {
     let quiz = startedQuiz()
-    let question = try #require(quiz.questions.first { correctAnswer(for: $0).filter(\.isLetter).count >= AnswerSlip.minimumLetterCount })
+    let question = try #require(quiz.questions.first { $0.choice == nil && correctAnswer(for: $0).filter(\.isLetter).count >= AnswerSlip.minimumLetterCount })
     while quiz.currentQuestion.map({ correctAnswer(for: $0) }) != correctAnswer(for: question) {
+      if quiz.currentQuestion?.choice != nil {
+        quiz.skipChoice()
+        continue
+      }
       quiz.process(proposedAnswer: correctAnswer(for: try #require(quiz.currentQuestion)))
     }
     quiz.process(proposedAnswer: correctAnswer(for: question) + "q")

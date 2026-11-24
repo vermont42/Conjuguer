@@ -168,3 +168,16 @@ extension Tense {
     }
   }
 }
+
+extension Quiz {
+  /// Chooses a choice question's right sentence, or its other when `rightly` is false, and
+  /// continues past the reason, so that a test that types its answers can go on. Does nothing
+  /// while the current question is typed.
+  @MainActor func skipChoice(rightly: Bool = true) {
+    guard quizState == .inProgress, let choice = currentQuestion?.choice else {
+      return
+    }
+    submitChoice(rightly ? choice.rightIndex : 1 - choice.rightIndex)
+    continueAfterCorrection()
+  }
+}
