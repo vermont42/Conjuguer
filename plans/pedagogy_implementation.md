@@ -37,7 +37,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 11 | Done | 2026-11-23 | 915be1c | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
 | 12 | Done | 2026-11-23 | 2bc523b | T3.2, T3.3 (the session) | 12 |
 | 13 | Done | 2026-11-23 | 249f7b9 | T6.1, T6.6 (the leaderboard's place) | 13 |
-| 14 | Awaiting Josh | 2026-11-23 | | T4.2, T4.3 | 14 |
+| 14 | Done | 2026-11-23 | 9568bdd | T4.2, T4.3 | 14 |
 | 15 | Not started | | | T5.1 | 15 |
 | 16 | Not started | | | T5.2 | 16 |
 | 17 | Not started | | | T5.4 | 17 |
@@ -1642,7 +1642,7 @@ both languages, and the leaderboard is one tap away but not in the way.
 ## Phase 14: Naming the Error
 
 **Suggestions:** T4.2, T4.3. **Ports:** Konjugieren Phase 14 (`AnswerDiagnosis.swift`).
-**Depends on:** Phases 3 and 4; Phase 2 for the frame. **Status:** Awaiting Josh.
+**Depends on:** Phases 3 and 4; Phase 2 for the frame. **Status:** Done.
 
 Diagnose a wrong answer from the conjugator's own knowledge and say it in one templated line with
 Phase 3's correction. No language model: the one careful study the report found (Song et al.
