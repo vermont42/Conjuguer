@@ -41,7 +41,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 15 | Done | 2026-11-23 | 3966644 | T5.1 | 15 |
 | 16 | Done | 2026-11-23 | 94df8f9 | T5.2 | 16 |
 | 17 | Done | 2026-11-23 | 4ffc7a3 | T5.4 | 17 |
-| 18 | Awaiting Josh | 2026-11-23 | | T5.5 | 18 |
+| 18 | Done | 2026-11-23 | 5694ad4 | T5.5 | 18 |
 | 19 | Not started | | | T5.6 | 19 |
 | 20 | Not started | | | T6.2 | 20 |
 | 21 | Not started | | | T5.7 | 21 |
@@ -2070,7 +2070,7 @@ record, with tests on ambiguous conjugations.
 **Suggestions:** T5.5. **Ports:** Konjugieren Phase 18 (`GapSentence.swift`,
 [`../Konjugieren/plans/gap_sentences_batch_1.md`](../../Konjugieren/plans/gap_sentences_batch_1.md),
 [`../Konjugieren/plans/gap_sentences_batch_2.md`](../../Konjugieren/plans/gap_sentences_batch_2.md)).
-**Depends on:** Phases 2 and 3. **Status:** Awaiting Josh.
+**Depends on:** Phases 2 and 3. **Status:** Done.
 
 Short authored sentences for the core verbs, with the verb blanked, so the conjugation is tied to a
 meaning.
