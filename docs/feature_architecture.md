@@ -656,8 +656,9 @@ result arrives as a `CSSearchableItemActionType` activity whose identifier is "V
 ## The Learner's Verbs
 
 One record of the learner's own verbs, kept on the device and never sent: each verb opened (first
-and last date, and a count), each verb starred, and when each is due on the review card. Recents, My
-Verbs, the quiz's My Verbs scope, the verb of the day, the review card, and the collections read it.
+and last date, and a count) and each verb starred. Recents, My Verbs, the quiz's My Verbs scope, the
+verb of the day, and the collections read it. When a verb is due on the review card is the practice
+record's business (§ Quiz, The Practice Record).
 
 | Piece | File | Role |
 |---|---|---|
@@ -701,41 +702,39 @@ answers. Rows open with the source `myVerbs`.
 
 ### The Review Card
 
-Each launch, and each return from the background, the verb list shows one card above its rows when a
-verb is due: the verb looked up longest ago among those due ("Looked up 3 days ago", "yesterday" for
-one), its gloss, and its key conjugations hidden under a redacted placeholder over "Recall its
-conjugations, then tap to check." A tap anywhere reveals them, red letters and all; a second tap
-opens the page, with `source` `reviewCard`, and a chevron says so; ✕ dismisses the card. Nothing
-replaces a dismissed card until the next opening, and the card hides while a search, the recents, or
-My Verbs shows. On iPad it stops at 560 points rather than spanning the grid. The Suppress Review
-Card setting (`ReviewCardSuppression`, Off by default, stored as `reviewCardSuppression`) hides any
-card at once and chooses none at later openings; turning it Off chooses one at once. The schedule
-keeps running underneath.
+Each launch, and each return from the background, the verb list shows one card above its rows when
+an irregular verb's key conjugation is due in the practice record (§ Quiz, The Practice Record): the
+verb whose key conjugation is longest overdue, captioned by what touched it last ("Looked up 3 days
+ago", or "Practiced 3 days ago" when a quiz answer came after the lookup; "yesterday" for one), its
+gloss, and its key conjugations hidden under a redacted placeholder over "Recall its conjugations,
+then tap to check." A tap anywhere reveals them, red letters and all; a second tap opens the page,
+with `source` `reviewCard`, and a chevron says so; ✕ dismisses the card. Nothing replaces a
+dismissed card until the next opening, and the card hides while a search, the recents, or My Verbs
+shows. On iPad it stops at 560 points rather than spanning the grid. The Suppress Review Card
+setting (`ReviewCardSuppression`, Off by default, stored as `reviewCardSuppression`) hides any card
+at once and chooses none at later openings; turning it Off chooses one at once. The schedule keeps
+running underneath.
+
+**Only irregular verbs** reach the card (Josh, 2026-11-23): a regular verb's answers move patterns
+that every verb of its family shares, so a lookup of parler has nothing of its own to schedule. A
+verb with no key conjugations, such as accroire, is passed over, and so is a due passé simple, which
+the card does not show.
 
 | Piece | Role |
 |---|---|
-| `Shared/ReviewSchedule.swift` | A box and a due date. The ladder is 1, 3, 7, 14, and 30 days, the last repeating; due dates fall at the start of a day |
-| `LearnerVerbs.Entry.review` | The verb's schedule, optional. An entry without one counts as looked up on its last open, so there is no migration |
-| `LearnerVerbs.dueForReview(at:)` | The due keys, longest overdue first, ties broken by key |
-| `LearnerVerbStore.verbDueForReview(at:)` | The first due verb that has key conjugations: accroire and the other verbs used only in the infinitif would have nothing to reveal |
-| `Views/ReviewCardView.swift` | The card. `VerbBrowseView` chooses the verb, once per opening, and applies each tap to the schedule |
+| `PracticeStore.cardOffer(at:)` | The verb and its due shown key conjugations, with the days since and whether a lookup or an answer came last |
+| `Views/ReviewCardView.swift` | The card. `VerbBrowseView` chooses the offer, once per opening, and applies each tap to the record |
 
-**What moves a verb** (Josh for Konjugieren, 2026-11-13, carried over). An open puts it in the
-first box, due the next day, and so does any later open, since looking a verb up again suggests it
-was forgotten. An open from the card itself is the exception (`recordOpen(_:source:)` with
-`reviewCard`). Revealing moves it up a box (`recordReview`). Dismissing before revealing is no
-review: the verb keeps its box and returns the next day (`snoozeReview`). Clear in My Verbs
-forgets the opens and with them the reviews; a starred verb never opened is never due. Keys are
-`Verb.dictionaryKey`s, so haïr's two entries keep their own schedules.
+**What moves a key conjugation** (Josh for Konjugieren, 2026-11-13, carried over). An open of the
+verb puts its key conjugations in the first box, due the next day, and so does any later open, since
+looking a verb up again suggests it was forgotten. An open from the card itself is the exception
+(`recordLookup(_:source:)` with `reviewCard`). Revealing moves each due one up a box
+(`recordReview`); one not due keeps its place. Dismissing before revealing is no review: each keeps
+its box and returns the next day (`snooze`). Clear in My Verbs forgets the opens and leaves the
+practice record. Keys are `Verb.dictionaryKey`s, so sortir's two entries keep their own items.
 
 **Signals.** `viewReviewCard`, once per card shown, and `tapRevealReviewCard`, once per reveal,
 with no parameters and no verb. The setting sends nothing.
-
-**For the pedagogy plan.** Its practice record can take this over: a right answer calls what a
-reveal calls (`recordReview`), and a wrong one should send the verb back to the first box, as a
-lookup does (`ReviewSchedule.lookedUp`), without counting an open. Konjugieren's pedagogy work
-later moved the schedule out of `LearnerVerbs` into a `PracticeRecord` and added `answered` and
-`new` to `ReviewSchedule`; read its `Shared/ReviewSchedule.swift` before extending this one.
 
 ### Collections
 
@@ -813,6 +812,8 @@ or about tenses and verbs the learner puts together (§ The Custom Quiz).
 | `AnswerDifference.swift`, `QuizCorrectionView.swift` | The held correction of a wrong answer (§ The Held Correction) |
 | `StandardVariants.swift` | Spellings the quiz accepts beside the conjugator's: the 1990 rectifications and a few doublets that dictionaries list |
 | `CyclingDeck.swift` | Deals a pool's elements in order and reshuffles when it runs out |
+| `Shared/PracticeRecord.swift`, `Shared/ReviewSchedule.swift` | The practice record: `PracticeItem`, what an answer exercises, and `PracticeRecord`, a box and a due date per item (§ The Practice Record) |
+| `PracticeItemMapping.swift`, `PracticeStore.swift`, `QuizDueItems.swift` | Which item a question exercises; `Current.practice`, which records answers and lookups and offers the review card; and the due items a default round mixes in |
 | `QuizView.swift`, `QuizResultsView.swift`, `QuizResultView.swift` | The quiz screen and the results sheet |
 | `LiveActivities.swift`, `LiveActivitiesReal.swift`, `LiveActivitiesSpy.swift` | Starts, updates, and ends the quiz's Live Activity through `Current.liveActivities`: ActivityKit on device and in the simulator, a spy under unit tests |
 
@@ -1229,6 +1230,63 @@ scanning beneath it; the screen stays awake while it shows.
   `viewPracticeSet` (`source`, and `outcome` `opened` or `invalid`), and `tapKeepPracticeSet`. The
   quiz signals of a set's quiz send `source` `sharedLink`, `qrCode`, or `deeplink`, `level` the
   set's, and `customChoice`. None names a tense or a verb.
+
+### The Practice Record
+
+Every final answer, in every scope, moves an item of a record kept on the device and never sent, as
+the answer is given, so a quiz quit after six questions has still practiced six. The sad trombone
+stays. Settings' Reset Practice (`button_settings_resetPractice`), shown while the record holds
+anything, erases it behind a confirmation and sends `tapResetPractice`.
+
+**Two kinds of item** (`PracticeItem`). The families were Josh's choice, 2026-11-23.
+
+- **A pattern** is a tense and person shared by every verb of a regular family: parler's -er (every
+  first-group model but aller's), finir's -ir (the second group), and rendre's -re (rendre's,
+  rompre's, and foutre's models; prendre's, battre's, and mettre's are built on rendre's in
+  `verbModels.xml`, but are irregular). A spelling-change model has patterns of its own only for
+  the cells its change marks with capitals: nous mangeons is manger's pattern and je mange parler's;
+  j'appelle and j'appellerai are appeler's and j'appelais parler's. A compound tense is judged by
+  its participle, since the auxiliary's own capitals say nothing of the verb, and a compound tense
+  conjugated with être, pronominal verbs included, is a pattern apart from avoir's, since it asks
+  the agreement. Key: `pattern:1-2B:indicatif_present:fp`, `pattern:1-1:passe_compose:fs:etre`,
+  `pattern:2-1:participe_passe`.
+- **A key conjugation** is one of an irregular verb's stems: the présent (vient), the passé composé
+  (est venu), the futur (viendra), and the passé simple (vint), which the card does not show (Josh,
+  2026-11-23). The impératif, the imparfait, the subjonctif présent, and the participe présent count
+  against the présent; the participe passé and every compound tense against the passé composé; the
+  conditionnel présent against the futur; the subjonctif imparfait against the passé simple. A
+  review asks the il form. Key: `key:venir:present`, `key:sortir exit:passe_simple`.
+
+Keys are permanent: changing one orphans every learner's schedule for its item. They name verbs by
+`Verb.dictionaryKey`, tenses by `Tense.articleKey`, and persons by `PersonNumber` raw value, so that
+the widget, which has no verb list, can read the record.
+
+**The ladder** is `ReviewSchedule`'s, 1, 3, 7, 14, and 30 days, the last repeating, with due dates
+at the start of a day. A wrong answer starts an item over. A right one moves it up only when it is
+due, so that a pattern asked three times in a session does not climb three boxes in an afternoon. A
+new item answered right enters the second box, and one answered wrong the first. A slip's right
+second attempt counts as right. A re-ask is another answer: after a miss the item is not due, so a
+right re-ask leaves it in the first box.
+
+**Due items in a default round.** Up to three a round (`QuizDraw.dueItemLimit`), the most overdue
+first, placed at random among a draw of seven, in Ten More rounds too. Only the default quiz mixes
+them in (`QuizScope.mixesDueItems`); a scoped quiz, a custom quiz, and a practice set ask what was
+chosen. An item is skipped when the level does not ask its tense (a passé simple below Advanced) or
+its verb is beyond the level's band. A pattern is asked of a verb of the band that shares it,
+preferring the model's own verbs.
+
+**Where it lives.** `PracticeStore` (`Current.practice`) saves JSON under `practiceRecord` in the App
+Group's defaults, through the same `GetterSetterReal` as `LearnerVerbs`. **Every field added to
+`PracticeRecord.Entry` must be optional**, as for `LearnerVerbs`.
+
+**The migration.** Browse's review card kept a schedule per verb on `LearnerVerbs.Entry.review`. A
+launch with no practice record reads the learner's verbs' JSON at once, before anything can save
+them without their old field, and migrates it once the verbs are loaded (`migrateIfNeeded()`, which
+`ConjuguerApp` calls after `VerbData.load()`, and every store method calls first), since only the
+verbs say which are irregular. Each irregular verb's schedule, or its last open for an entry from
+before the card, becomes its shown key conjugations' schedule; a regular verb's is dropped. The
+record is saved even when nothing migrates, and Reset saves it empty rather than removing it, so
+that no later launch reads the old opens as schedules.
 
 ### Signals
 

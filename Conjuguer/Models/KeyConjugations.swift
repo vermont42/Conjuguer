@@ -52,5 +52,6 @@ extension Verb {
     return lines.joined(separator: "\n") + "\n\n" + L.VerbView.shareInvitation(infinitif: citationInfinitif, link: URL.appStore.absoluteString)
   }
 
-  static let keyTenses: [Tense] = [.indicatifPrésent(.thirdSingular), .passéComposé(.thirdSingular), .futurSimple(.thirdSingular)]
+  /// The practice record schedules an irregular verb's key conjugations, so the two lists are one.
+  static let keyTenses = PracticeItem.Stem.shown.map(\.keyTense)
 }

@@ -144,7 +144,7 @@ struct VerbCollectionTests {
     let aller = try #require(Verb.verbs["aller"])
     let venir = try #require(Verb.verbs["venir"])
     #expect(store.openedCount(of: verbs) == 0)
-    store.recordOpen(aller, source: .list)
+    store.recordOpen(aller)
     store.toggleStar(venir)
     #expect(store.openedCount(of: verbs) == 1)
   }

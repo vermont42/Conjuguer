@@ -14,6 +14,7 @@ struct SettingsView: View {
   @State private var rateReviewDescription = ""
   @State private var showingOnboarding = false
   @State private var showingGame = false
+  @State private var isConfirmingReset = false
   // The tab stays alive once visited, and a popover tip that becomes eligible while it is hidden,
   // as ChangeLevelTip does when a quiz finishes, would float over another tab pointing at nothing
   // (Konjugieren, iPadOS 26.3).
@@ -171,6 +172,19 @@ struct SettingsView: View {
               .settingsLabel()
           }
 
+          if !world.practice.isEmpty {
+            settingCard(title: L.Settings.practiceRecord) {
+              Button(L.Settings.resetPractice) {
+                isConfirmingReset = true
+              }
+              .funButton()
+              .accessibilityIdentifier("button_settings_resetPractice")
+
+              Text(L.Settings.resetPracticeDescription)
+                .settingsLabel()
+            }
+          }
+
           aboutFooter
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -190,6 +204,15 @@ struct SettingsView: View {
       if let description = await RatingsFetcher.fetchRatingsDescription() {
         rateReviewDescription = description
       }
+    }
+    .alert(L.Settings.resetPracticeConfirmTitle, isPresented: $isConfirmingReset) {
+      Button(L.Settings.resetPracticeConfirm, role: .destructive) {
+        world.practice.reset()
+        world.analytics.signal(name: .tapResetPractice)
+      }
+      Button(role: .cancel) {}
+    } message: {
+      Text(L.Settings.resetPracticeConfirmMessage)
     }
     .fullScreenCover(isPresented: $showingOnboarding) {
       OnboardingView(isReshow: true)

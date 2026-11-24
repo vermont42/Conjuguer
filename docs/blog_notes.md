@@ -5856,3 +5856,49 @@ open a `conjuguer://` code needs Josh's phone. Whether a `conjuguer://` link cli
 reaches the iPad app running there, which matters because the Swiss school's students used Macs,
 is not covered by Apple's documentation and needs a Mac with Apple silicon. On a Mac the link, not
 the code, would be the way in.
+
+## The Practice Record (2026-11-23)
+
+Phase 11 of the pedagogy plan gave the quiz a memory. Every final answer, in every kind of quiz,
+now moves an item of a practice record kept on the device, as the answer is given, so a learner who
+quits after six questions has still practiced six. Each item has a box and a due date on the
+ladder of 1, 3, 7, 14, and 30 days that the review card already used: a wrong answer sends it back
+to the start, and a right one moves it up, but only when it is due, so that a pattern asked three
+times in one afternoon does not climb three boxes. A default round of ten mixes in up to three
+items that have come due, so a learner who never opens a review still relearns.
+
+The interesting question was what an "item" is in French. Konjugieren's answer was simple: a
+strong German verb is learned through its own key conjugations (fährt, fuhr, ist gefahren), and
+every weak verb shares one set of patterns, since a learner who can write machte can write sagte.
+French has no such tidy split. Josh chose families, cell by cell. Parler's -er, finir's -ir, and
+rendre's -re are the three bases. A spelling-change model such as manger or appeler has patterns of
+its own only where its change shows: nous mangeons and j'appellerai are their own items, while je
+mange and j'appelais count as parler's. The app already marks irregular letters with capitals for
+the red highlighting, so the mapping reads those marks rather than keeping a second list of which
+cells are irregular. A compound tense is judged by its participle alone, because the auxiliary's
+own capitals (sUIS) say nothing about the verb, and an être compound is a pattern apart from an
+avoir one, since it asks for the agreement.
+
+Everything else, aller and the third group, is learned verb by verb through the key conjugations
+the verb page shows: vient · est venu · viendra. French needed a fourth that German did not. The
+passé simple (vint) is built on a stem none of the three shows, so Josh chose a fourth item for it,
+which quizzes move but the review card does not display.
+
+The data held one surprise. Prendre's, battre's, and mettre's models are built on rendre's in the
+model file, as a way of sharing endings, so the first version of the mapping walked up the parent
+chain and filed prendre among the regular -re verbs. A test listing irregular verbs caught it, and
+rendre's family is now named outright: rendre, rompre, and foutre.
+
+The review card moved onto the record. A regular verb has nothing of its own to schedule, since
+its answers move patterns that thousands of verbs share, so, as in Konjugieren, the card now
+offers only irregular verbs, captioned "Looked up 3 days ago" or, when a quiz answer came later,
+"Practiced 3 days ago". The old per-verb schedules migrate once. Here Conjuguer differed from
+Konjugieren for a reason Phase 9 had already met: the app's world loads before the verbs, and only
+the verbs can say which ones are irregular. So the store reads the old record at launch, before
+anything can save over it, and migrates it once the verbs arrive. The migrated record is saved
+even when nothing moved, because the next save of the learner's verbs drops the old field, and a
+second migration would then mistake every recent lookup for a fresh schedule.
+
+Settings gained Reset Practice behind a confirmation, and the privacy policy's "does not record
+your quiz answers" is staged to become "does not send", with a sentence saying the record stays on
+the device.

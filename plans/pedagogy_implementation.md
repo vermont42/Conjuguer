@@ -34,7 +34,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 8 | Done | 2026-11-23 | 3f12ff1 | Decision 4 | 8 |
 | 9 | Done | 2026-11-23 | b181958 | T2.8 | 9 |
 | 10 | Done | 2026-11-23 | 33da4be | T2.9, Decision 8 | 10 |
-| 11 | Not started | | | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
+| 11 | Awaiting Josh | 2026-11-23 | | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
 | 12 | Not started | | | T3.2, T3.3 (the session) | 12 |
 | 13 | Not started | | | T6.1, T6.6 (the leaderboard's place) | 13 |
 | 14 | Not started | | | T4.2, T4.3 | 14 |
@@ -1328,7 +1328,7 @@ gracefully, and tests pin encoding and decoding of every scope.
 
 **Suggestions:** T3.3 (the record), T3.4, T3.5, T6.4. **Ports:** Konjugieren Phase 11
 (`PracticeRecord.swift`, `PracticeItemMapping.swift`, `PracticeStore.swift`,
-`QuizRecordSession.swift`). **Depends on:** Phase 7. **Status:** Not started.
+`QuizRecordSession.swift`). **Depends on:** Phase 7. **Status:** Awaiting Josh.
 
 Give the quiz a memory: a small record per item, a box and a due date, moved up the ladder of 1, 3,
 7, 14, and 30 days by a right answer and back to the start by a wrong one.
@@ -1358,6 +1358,95 @@ Practice control in Settings behind a confirmation; every scope writes to the re
 answered, the record survives a relaunch, and tests pin the mapping and the schedule.
 
 **How it differed:**
+
+- **Asked of Josh (2026-11-23), before building.** (1) **Which models are patterns:** families,
+  cell by cell. Three bases, parler's -er, finir's -ir, and rendre's -re; a spelling-change model
+  (manger, appeler, céder, payer…) has patterns of its own only for the cells its change marks
+  with capitals (nous mangeons, j'appelle, j'appellerai), and its other cells share parler's (je
+  mange, j'appelais). Aller and the rest of the third group are learned verb by verb. (2) **The
+  passé simple** has no key conjugation in Conjuguer (vient · est venu · viendra), so an irregular
+  verb gets a **fourth item, il vint**, which quiz answers move and the subjonctif imparfait counts
+  against, but which the card does not show and a lookup does not schedule. (3) **The review card
+  offers irregular verbs only**, as in Konjugieren: a regular verb's lookup has nothing of its own
+  to schedule, and the migration drops regular verbs' card schedules.
+- **Found while building:** prendre's, battre's, and mettre's models are built on rendre's in
+  `verbModels.xml`, so a parent-chain walk made them patterns. Rendre's family is named instead:
+  rendre's, rompre's, and foutre's models. Every first-group model but aller's, ester's and fiche's
+  included, and every second-group model, ouïr's and haïr's included, belongs to its group's
+  family; the odd ones are families of one or two verbs, which behave as verb by verb would.
+- **The mapping, decided in the session.** Marks are read from the Conjugator's capitals, as
+  `QuizVerbTraits` reads them. A compound tense is judged by its participle alone, since the
+  auxiliary's own capitals (sUIS) say nothing of the verb, and a compound tense conjugated with
+  être, pronominal verbs included, is a pattern apart from avoir's (`takesÊtre`), since it asks the
+  agreement. For an irregular verb, the impératif, imparfait, subjonctif présent, and participe
+  présent count against the présent; the participe passé and every compound tense against the passé
+  composé; the conditionnel against the futur. The cost: a slip in nous venions counts against
+  vient, and a wrong auxiliary in a compound tense against est venu. Keys are
+  `key:venir:present` and `pattern:1-2B:indicatif_present:fp`, built from `Verb.dictionaryKey`,
+  `Tense.articleKey`, and `PersonNumber` raw values; tests pin them. `Verb.keyTenses` is now
+  derived from the shown stems, so the card and the record cannot disagree.
+- **The ladder, as Konjugieren's.** `ReviewSchedule.lookedUp` became `start`, and `new` and
+  `answered(correctly:)` were added: a wrong answer starts over, a right one climbs only when due,
+  a new item answered right enters the second box. A slip's right second attempt counts as right; a
+  re-ask is another answer.
+- **Where it lives.** `Shared/PracticeRecord.swift` (items and record), `Models/PracticeStore.swift`
+  (`Current.practice`, JSON under `practiceRecord` in the App Group's defaults),
+  `Models/PracticeItemMapping.swift`, and `Models/QuizDueItems.swift`. `LearnerVerbs` lost its
+  `review` field and the store its review methods; `recordOpen` lost its `source`, and the verb page
+  records the open and the lookup separately. There was no `QuizErrorHistory` to decide about.
+- **Departed from Konjugieren: the migration waits for the verbs.** Conjuguer's world and settings
+  load before `VerbData` (Phase 9's trap), and only the verbs say which are irregular, so the store
+  reads the old `learnerVerbs` JSON at launch and migrates it in `migrateIfNeeded()`, which
+  `ConjuguerApp` calls after the load and every store method calls first. The record is saved even
+  when nothing migrates, since after the next save of `LearnerVerbs` an entry without `review`
+  would otherwise read as looked up on its last open at a second migration.
+- **Due items in a default round**, as Konjugieren's: up to three, the most overdue first, mixed
+  at random among the drawn seven, in Ten More rounds too, only in the default quiz
+  (`QuizScope.mixesDueItems`, which also excludes a practice set's level), and skipped when the
+  level does not ask the tense or the verb is beyond the band. A pattern is asked of a band verb
+  of the item's own model first, so a parler pattern needs no conjugating to find its verb; due
+  questions sit outside Phase 6's irregular share, as in Konjugieren.
+- **The card's caption** says "Practiced 3 days ago" ("Travaillé il y a 3 jours"), "yesterday", or
+  "earlier" when a quiz answer came after the lookup. The Suppress Review Card description now says
+  "an irregular verb you looked up or practiced" ("un verbe irrégulier consulté ou travaillé").
+- **Reset Practice** ("Réinitialiser le suivi") is a Practice Record card ("Suivi des exercices")
+  at the end of Settings, after the game, shown while the record holds anything, behind an alert
+  ("Every review the app has scheduled will be forgotten. This cannot be undone."). Its
+  description begins "This button erases", since it is a button, not a setting. Nine strings.
+- **Analytics.** `tapResetPractice`, with no parameters. Staged in
+  [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md) in both languages: "does
+  not record your quiz answers" becomes "does not send", the list-on-the-device paragraph loses its
+  review dates, and a new paragraph says the practice record stays on the device.
+- **VoiceOver.** No new quiz state: recording is silent and a due item is an ordinary question.
+  The card's caption is read as before; the alert is the system's.
+- **Tests:** 681 to 705, all passing through `run_tests.sh` (the iPhone simulator is in English).
+  `PracticeItemTests` (13 functions: pinned and unreadable keys, which verbs are patterns and which
+  are not, prendre, battre, and mettre among the latter, the bases' own verbs, spelling-change
+  cells, compound tenses with être, every tense's stem, sortir's two entries, lookups, the shown
+  stems, every irregular verb's lookup agreeing with its key conjugations, items asking their own
+  cell back), `PracticeRecordTests` (16: the ladder through answers, due order, lookups, the
+  card's review, snooze, choice, and caption, patterns and a passé simple never on the card,
+  sortir, a relaunch, the migration, a reset that stays, a migration with nothing to move kept),
+  `QuizPracticeTests` nested in `QuizTests` (6: answers kept on quit, every scope writing, due
+  items within level and band, a default session mixing them in, at most three, none in a scoped
+  quiz or a practice set), and `ReviewScheduleTests` rewritten for the ladder alone (6).
+- **Verified on the iPhone 17**, light. The real install's old record migrated at the first
+  launch: aller, avoir, être, faire, pouvoir, souvenir, and venir came across with their schedules,
+  parler and accroire were dropped, and the card offered aller ("Looked up yesterday"). A default
+  quiz opened with aller's two due key conjugations (passé composé, then présent, both "elle"); quit
+  after ten answers, every one was in the record as given, re-asks included: aller's two, avoir's
+  passé composé, and the patterns `1-1:participe_passe` (surmener), `1-1:plus_que_parfait:ss:etre`
+  (rester), and `5-1A:subjonctif_present:fp` (tondre). In French: aller's card again, since its
+  futur stayed due, captioned "Travaillé plus tôt"; a reveal moved only the futur, to box 1; the
+  Practice Record card ("Suivi des exercices"), its alert, and a reset to an empty record, which a
+  relaunch kept and did not re-migrate. In English: a seeded venir card, "Practiced 2 days ago".
+  **On the iPad Pro 11** in English and dark: the install's migration (prendre, box 1, not yet due,
+  so no card; parler dropped), a seeded venir card at its 560-point width, and the Practice Record
+  card. Not tried: VoiceOver by ear, the widget (which reads nothing of the record yet), and a real
+  day passing.
+- **For Josh to judge:** "Travaillé" for "practiced" on the card; the caption's "earlier" when the
+  last answer was today (Konjugieren's wording, which reads oddly for a card offered the same day a
+  sibling key conjugation was answered); and where the Practice Record card sits in Settings.
 
 ## Phase 12: Review and My Mistakes
 

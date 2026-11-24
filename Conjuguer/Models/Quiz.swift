@@ -319,9 +319,15 @@ class Quiz {
     }
     #endif
 
-    let asked = Set(questions.map(\.verb.id))
-    return QuizDraw.questions(slots: scope.slots(at: level), band: scope.band(at: level), count: scope.questionCount, asked: asked, using: &generator)
+    let slots = scope.slots(at: level)
+    let band = scope.band(at: level)
+    let due = scope.mixesDueItems
+      ? QuizDraw.dueQuestions(for: Current.practice.dueItems(at: now()), slots: slots, band: band, using: &generator)
+      : []
+    let asked = Set((questions + due).map(\.verb.id))
+    let drawn = QuizDraw.questions(slots: slots, band: band, count: scope.questionCount - due.count, asked: asked, using: &generator)
       .map(question(of:))
+    return QuizDraw.mixing(due, into: drawn, using: &generator)
   }
 
   #if DEBUG
@@ -581,6 +587,9 @@ class Quiz {
     )
     score += result.points
     quizResults.append(result)
+    // Each final answer goes into the practice record as it is given, so that a quiz quit after
+    // six questions has still practiced six. A slip's right second attempt counts as right.
+    Current.practice.recordAnswer(verb: verb, tense: tense, isCorrect: conjugationResult != .noMatch, at: now())
     firstAttempt = nil
     if conjugationResult == .noMatch {
       // A re-ask is not asked a third time, whatever its answer, so that one stubborn question

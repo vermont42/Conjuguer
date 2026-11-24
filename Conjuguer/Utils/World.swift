@@ -32,6 +32,7 @@ class World {
   var languageModelService: LanguageModelService
   var soundPlayer: SoundPlayer
   var learnerVerbs: LearnerVerbStore
+  var practice: PracticeStore
   var liveActivities: LiveActivities
   var verb: Verb?
   // How `verb` was reached, for its page's `viewAppeared`: a link's `source` item, else `deeplink`.
@@ -67,6 +68,7 @@ class World {
     languageModelService: LanguageModelService,
     soundPlayer: SoundPlayer,
     learnerVerbs: LearnerVerbStore,
+    practice: PracticeStore,
     liveActivities: LiveActivities,
     session: URLSession
   ) {
@@ -79,6 +81,7 @@ class World {
     self.languageModelService = languageModelService
     self.soundPlayer = soundPlayer
     self.learnerVerbs = learnerVerbs
+    self.practice = practice
     self.liveActivities = liveActivities
     self.session = session
   }
@@ -102,6 +105,7 @@ class World {
     let gameCenter = GameCenterReal.shared
     let quiz = Quiz(gameCenter: gameCenter)
     let analytics = AnalyticsReal()
+    let sharedGetterSetter = sharedDefaults()
     return World(
       settings: settings,
       gameCenter: gameCenter,
@@ -111,7 +115,8 @@ class World {
       getterSetter: getterSetter,
       languageModelService: LanguageModelServiceReal(),
       soundPlayer: SoundPlayerReal(),
-      learnerVerbs: sharedLearnerVerbs(),
+      learnerVerbs: LearnerVerbStore(getterSetter: sharedGetterSetter),
+      practice: PracticeStore(getterSetter: sharedGetterSetter),
       liveActivities: LiveActivitiesReal(),
       session: URLSession.shared
     )
@@ -123,6 +128,7 @@ class World {
     let gameCenter = GameCenterSpy()
     let quiz = Quiz(gameCenter: gameCenter)
     let analytics = AnalyticsSpy()
+    let sharedGetterSetter = sharedDefaults()
     return World(
       settings: settings,
       gameCenter: gameCenter,
@@ -132,7 +138,8 @@ class World {
       getterSetter: getterSetter,
       languageModelService: LanguageModelServiceReal(),
       soundPlayer: SoundPlayerReal(),
-      learnerVerbs: sharedLearnerVerbs(),
+      learnerVerbs: LearnerVerbStore(getterSetter: sharedGetterSetter),
+      practice: PracticeStore(getterSetter: sharedGetterSetter),
       liveActivities: LiveActivitiesReal(),
       session: fakeSession
     )
@@ -154,15 +161,17 @@ class World {
       languageModelService: LanguageModelServiceDummy(),
       soundPlayer: SoundPlayerDummy(),
       learnerVerbs: LearnerVerbStore(getterSetter: GetterSetterFake()),
+      practice: PracticeStore(getterSetter: GetterSetterFake()),
       liveActivities: LiveActivitiesSpy(),
       session: fakeSession
     )
   }()
 
-  // The App Group's defaults, so that the widget can read the learner's verbs. Without the
-  // group, as in a build lacking the entitlement, the record falls back to the app's own defaults.
-  private static func sharedLearnerVerbs() -> LearnerVerbStore {
-    LearnerVerbStore(getterSetter: GetterSetterReal(userDefaults: WidgetConstants.sharedDefaults ?? .standard))
+  // The App Group's defaults, so that the widget can read the learner's verbs and practice.
+  // Without the group, as in a build lacking the entitlement, the records fall back to the app's
+  // own defaults.
+  private static func sharedDefaults() -> GetterSetter {
+    GetterSetterReal(userDefaults: WidgetConstants.sharedDefaults ?? .standard)
   }
 
   /// The grammar is in docs/feature_architecture.md § Deeplinks.

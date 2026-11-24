@@ -829,6 +829,30 @@ enum L {
       String(localized: "Settings.reviewCardSuppressionDescription")
     }
 
+    static var practiceRecord: String {
+      String(localized: "Settings.practiceRecord")
+    }
+
+    static var resetPractice: String {
+      String(localized: "Settings.resetPractice")
+    }
+
+    static var resetPracticeDescription: String {
+      String(localized: "Settings.resetPracticeDescription")
+    }
+
+    static var resetPracticeConfirmTitle: String {
+      String(localized: "Settings.resetPracticeConfirmTitle")
+    }
+
+    static var resetPracticeConfirmMessage: String {
+      String(localized: "Settings.resetPracticeConfirmMessage")
+    }
+
+    static var resetPracticeConfirm: String {
+      String(localized: "Settings.resetPracticeConfirm")
+    }
+
     static var ratingsAndReviews: String {
       String(localized: "Settings.ratingsAndReviews")
     }
@@ -1093,6 +1117,10 @@ enum L {
 
     // Separate keys for one day and for several, as `VerbBrowseView.verbCount(count:)` explains.
     // English and French agree that two or more days are plural.
+    static func caption(daysAgo: Int?, wasLookedUp: Bool) -> String {
+      wasLookedUp ? lookedUp(daysAgo: daysAgo) : practiced(daysAgo: daysAgo)
+    }
+
     static func lookedUp(daysAgo: Int?) -> String {
       guard let daysAgo, daysAgo > 0 else {
         return String(localized: "ReviewCard.lookedUpEarlier")
@@ -1102,6 +1130,17 @@ enum L {
       }
       let formattedDays = daysAgo.formatted()
       return String(localized: "ReviewCard.lookedUpDaysAgo", defaultValue: "Looked up \(formattedDays) days ago")
+    }
+
+    static func practiced(daysAgo: Int?) -> String {
+      guard let daysAgo, daysAgo > 0 else {
+        return String(localized: "ReviewCard.practicedEarlier")
+      }
+      if daysAgo == 1 {
+        return String(localized: "ReviewCard.practicedYesterday")
+      }
+      let formattedDays = daysAgo.formatted()
+      return String(localized: "ReviewCard.practicedDaysAgo", defaultValue: "Practiced \(formattedDays) days ago")
     }
 
     static var openHint: String {

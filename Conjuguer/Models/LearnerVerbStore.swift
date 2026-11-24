@@ -48,31 +48,8 @@ final class LearnerVerbStore {
     verbs.count { record.hasOpened($0.dictionaryKey) }
   }
 
-  /// The verb the review card offers: the longest overdue. A verb with no key conjugations, such
-  /// as accroire, which is used only in the infinitif, would have nothing to reveal, so it is
-  /// passed over.
-  func verbDueForReview(at date: Date = .now) -> Verb? {
-    record.dueForReview(at: date).lazy
-      .compactMap { Verb.verbs[$0] }
-      .first { !$0.keyConjugations().isEmpty }
-  }
-
-  func daysSinceOpened(_ verb: Verb, at date: Date = .now) -> Int? {
-    record.daysSinceOpened(verb.dictionaryKey, at: date)
-  }
-
-  func recordOpen(_ verb: Verb, source: AnalyticsSource, at date: Date = .now) {
-    record.recordOpen(verb.dictionaryKey, at: date, schedulesReview: source != .reviewCard)
-    save()
-  }
-
-  func recordReview(_ verb: Verb, at date: Date = .now) {
-    record.recordReview(verb.dictionaryKey, at: date)
-    save()
-  }
-
-  func snoozeReview(_ verb: Verb, at date: Date = .now) {
-    record.snoozeReview(verb.dictionaryKey, at: date)
+  func recordOpen(_ verb: Verb, at date: Date = .now) {
+    record.recordOpen(verb.dictionaryKey, at: date)
     save()
   }
 

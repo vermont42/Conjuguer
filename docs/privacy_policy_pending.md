@@ -18,7 +18,7 @@ analytics; [`release.md`](release.md) says what to do with it.
 **When adding a signal or parameter on `main`:** add its lines here in English and French, in the
 policy's plain register, naming the bands rather than the code's parameter keys. Name the plan and
 phase that added it, and the date. Never stage a line for a signal that would carry a verb or any
-typed text: the policy says the app does not record the verbs you look up or any text you type, and
+typed text: the policy says the app does not send the verbs you look up or any text you type, and
 that must stay true.
 
 ## Lookup signals (browse plan, Phase 3, 2026-11-22)
@@ -531,4 +531,62 @@ Nouveaux points pour la liste de la section 2, après celui-ci :
 - Le partage de votre quiz sur mesure comme série d'exercices : sous forme de lien ou de code QR, et s'il porte sur des temps, des verbes ou les deux, mais pas lesquels
 - L'ouverture d'une série d'exercices : si elle vient d'un lien partagé ou d'un code QR, et si l'application a pu la lire
 - Le fait de garder une série d'exercices comme votre quiz sur mesure
+```
+
+## The practice record (pedagogy plan, Phase 11, 2026-11-23)
+
+The quiz now keeps a practice record on the device: for each conjugation or pattern a quiz answer
+or a lookup has touched, how the last answer went and when it is next due for review. Quiz answers
+are therefore recorded, on the device, so the policy's "does not record your quiz answers" becomes
+"does not send". The record stays on the device and is never sent, and no signal carries an
+answer, a count of right or wrong answers, or which verb or conjugation was asked. Adds
+`tapResetPractice`, with no parameters, sent when Settings' Reset Practice is confirmed. The review
+card's schedules moved from the list of verbs into the practice record, so the paragraph about the
+list kept on the device changes too. Apply this section after the review card's section, whose
+paragraph it replaces, and after the lookup signals section, whose last sentence it changes. On
+release day, check that section 5's "Quiz answers or any text you type", which lists what is not
+collected, still reads as what is not sent.
+
+### English
+
+A new bullet for the list in section 2, after the last:
+
+```
+- That you reset your practice record in Settings
+```
+
+The last sentence of the paragraph after the list, in the version the lookup signals section gives it, now reads:
+
+```
+The app does not send your quiz answers, the verbs you look up, or any text you type.
+```
+
+The paragraph about the list kept on the device now reads, followed by a new paragraph:
+
+```
+The app keeps a list of the verbs you have opened and the verbs you have starred, so that it can show your recent verbs and My Verbs. The list stays on your device and is never sent.
+
+The app also keeps a practice record: for each conjugation your quiz answers and lookups have touched, whether your last answer was right and when it is next due for review, so that quizzes and review cards can bring it back. The practice record stays on your device and is never sent. Reset Practice in Settings erases it.
+```
+
+### French
+
+Un nouveau point pour la liste de la section 2, après le dernier :
+
+```
+- La réinitialisation de votre suivi des exercices dans les Paramètres
+```
+
+La dernière phrase du paragraphe qui suit la liste, dans la version que donne la section sur les signaux de consultation, devient :
+
+```
+L'application n'envoie pas vos réponses au quiz, les verbes que vous consultez, ni aucun texte que vous saisissez.
+```
+
+Le paragraphe sur la liste conservée sur l'appareil devient, suivi d'un nouveau paragraphe :
+
+```
+L'application conserve une liste des verbes que vous avez ouverts et des verbes que vous avez marqués d'une étoile, afin d'afficher vos verbes récents et « Mes verbes ». Cette liste reste sur votre appareil et n'est jamais envoyée.
+
+L'application conserve aussi un suivi des exercices : pour chaque conjugaison que vos réponses aux quiz et vos consultations ont touchée, si votre dernière réponse était juste et le jour où elle doit être révisée, afin que les quiz et les cartes de révision la reproposent. Ce suivi reste sur votre appareil et n'est jamais envoyé. « Réinitialiser le suivi », dans les Paramètres, l'efface.
 ```

@@ -38,6 +38,7 @@ struct ConjuguerApp: App {
       }
       .task {
         await verbData.load()
+        Current.practice.migrateIfNeeded()
         // Replay any deeplink that arrived (via onOpenURL) before the data was ready.
         Current.drainPendingDeeplink()
         refreshWidgets()

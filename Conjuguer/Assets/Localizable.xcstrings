@@ -1,6 +1,159 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "ReviewCard.practicedEarlier" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Practiced earlier"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Travaillé plus tôt"
+          }
+        }
+      }
+    },
+    "ReviewCard.practicedYesterday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Practiced yesterday"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Travaillé hier"
+          }
+        }
+      }
+    },
+    "ReviewCard.practicedDaysAgo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Practiced %@ days ago"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Travaillé il y a %@ jours"
+          }
+        }
+      }
+    },
+    "Settings.practiceRecord" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Practice Record"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suivi des exercices"
+          }
+        }
+      }
+    },
+    "Settings.resetPractice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset Practice"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réinitialiser le suivi"
+          }
+        }
+      }
+    },
+    "Settings.resetPracticeDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This button erases your practice record, which remembers how your quiz answers went and when each conjugation is next due for review. The record stays on this device and is never sent. Your starred and recent verbs stay too."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce bouton efface votre suivi des exercices, qui retient le résultat de vos réponses aux quiz et le jour où chaque conjugaison revient en révision. Ce suivi reste sur cet appareil et n’est jamais envoyé. Vos verbes favoris et récents restent aussi."
+          }
+        }
+      }
+    },
+    "Settings.resetPracticeConfirmTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset Practice?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réinitialiser le suivi ?"
+          }
+        }
+      }
+    },
+    "Settings.resetPracticeConfirmMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every review the app has scheduled will be forgotten. This cannot be undone."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toutes les révisions prévues seront oubliées. Cette action est irréversible."
+          }
+        }
+      }
+    },
+    "Settings.resetPracticeConfirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réinitialiser"
+          }
+        }
+      }
+    },
     "CustomQuiz.band" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -874,13 +1027,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This setting determines whether the verb list hides the review card, which offers a verb you looked up some days ago and hides its conjugations until you tap."
+            "value" : "This setting determines whether the verb list hides the review card, which offers an irregular verb you looked up or practiced some days ago and hides its conjugations until you tap."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ce paramètre détermine si la liste des verbes masque la carte de révision, qui vous propose un verbe consulté il y a quelques jours et cache ses conjugaisons jusqu’à ce que vous touchiez la carte."
+            "value" : "Ce paramètre détermine si la liste des verbes masque la carte de révision, qui vous propose un verbe irrégulier consulté ou travaillé il y a quelques jours et cache ses conjugaisons jusqu’à ce que vous touchiez la carte."
           }
         }
       }

@@ -37,6 +37,13 @@ struct QuizScope {
     verbs == nil && custom == nil
   }
 
+  /// Only the default quiz mixes in items the practice record says are due, up to
+  /// `QuizDraw.dueItemLimit` a round. A quiz over chosen verbs or tenses, or a practice set's, asks
+  /// what was chosen.
+  var mixesDueItems: Bool {
+    isRanked && level == nil
+  }
+
   /// A practice set's own level wins over `level`, the learner's.
   func slots(at level: QuizLevel) -> [QuizTenseSlot] {
     let level = self.level ?? level

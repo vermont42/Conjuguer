@@ -50,6 +50,7 @@ enum AnalyticsName: String {
   case tapSharePracticeSet
   case viewPracticeSet
   case tapKeepPracticeSet
+  case tapResetPractice
 }
 
 /// How the learner reached a verb page or began a quiz. One vocabulary serves every signal that

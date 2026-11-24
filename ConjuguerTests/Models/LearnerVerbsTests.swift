@@ -200,7 +200,7 @@ struct LearnerVerbsTests {
     let aller = try verb("aller")
     let être = try verb("être")
 
-    store.recordOpen(aller, source: .browse, at: date(1))
+    store.recordOpen(aller, at: date(1))
     #expect(store.toggleStar(être, at: date(2)))
 
     let reloaded = LearnerVerbStore(getterSetter: getterSetter)
@@ -217,7 +217,7 @@ struct LearnerVerbsTests {
     let getterSetter = GetterSetterFake()
     let store = LearnerVerbStore(getterSetter: getterSetter)
     let aller = try verb("aller")
-    store.recordOpen(aller, source: .browse, at: date(1))
+    store.recordOpen(aller, at: date(1))
     store.toggleStar(aller, at: date(2))
 
     store.remove(aller)
@@ -230,7 +230,7 @@ struct LearnerVerbsTests {
   @Test func theStoreSavesAClear() throws {
     let getterSetter = GetterSetterFake()
     let store = LearnerVerbStore(getterSetter: getterSetter)
-    store.recordOpen(try verb("aller"), source: .browse, at: date(1))
+    store.recordOpen(try verb("aller"), at: date(1))
     store.toggleStar(try verb("être"), at: date(2))
 
     store.clearRecents()
@@ -254,8 +254,8 @@ struct LearnerVerbsTests {
     let store = LearnerVerbStore(getterSetter: GetterSetterFake())
     let aller = try verb("aller")
     let être = try verb("être")
-    store.recordOpen(aller, source: .browse, at: date(1))
-    store.recordOpen(être, source: .browse, at: date(2))
+    store.recordOpen(aller, at: date(1))
+    store.recordOpen(être, at: date(2))
     store.toggleStar(être, at: date(3))
 
     #expect(store.recentVerbs.map(\.infinitif) == ["être", "aller"])
@@ -267,7 +267,7 @@ struct LearnerVerbsTests {
     let france = try verb("haïr France")
     let québec = try verb("haïr Québec")
 
-    store.recordOpen(france, source: .browse, at: date(1))
+    store.recordOpen(france, at: date(1))
     store.toggleStar(québec, at: date(2))
 
     #expect(store.hasOpened(france))
