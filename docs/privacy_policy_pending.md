@@ -1112,3 +1112,44 @@ Un nouveau paragraphe après celui sur le suivi des exercices :
 ```
 L'application conserve aussi sur votre appareil les résultats de vos derniers « Défis du jour », afin que chacun ne puisse être relevé qu'une fois et que son résultat puisse être partagé. Ils ne sont jamais envoyés, et « Réinitialiser le suivi » ne les efface pas. Lorsque vous partagez un résultat, son texte ne va que là où vous l'envoyez.
 ```
+
+## Quiz screens and quiz links (pedagogy plan, Closing, 2026-11-24)
+
+Found by the Closing's audit, two values the sections above did not name.
+
+**Two screens.** Two screens of the Quiz tab report themselves through the existing `viewAppeared`
+signal, with their type names as `viewName`: `CustomQuizEditor`, where the learner chooses a custom
+quiz's tenses and verbs (Phase 9), and `ModelPracticeListView`, the Quiz tab's list of conjugation
+models to practice (Phase 16). Neither names a tense, a verb, or a model, and neither sends anything
+about the choices made on it. Both are screens of the quiz, which the screens bullet already lists,
+so the bullet as the section on Mastery gives it stays as it is.
+
+**A quiz begun from a link.** A `conjuguer://quiz/` link without a `source` item starts its quiz
+with the quiz signals' `source` `deeplink`: the default quiz for `quiz/start` or any other target,
+the daily session for `quiz/daily`, the challenge for `quiz/challenge`, and a practice set's quiz
+for `quiz/set`. A link that names a `source` sends that value instead. The app writes a bare
+`quiz/start` for the Quick Quiz control in Control Center and the Start Quiz shortcut, so those
+two send `deeplink`; its other quiz links carry their own `source` (`reminder`, `challengeLink`,
+`challengeWidget`, `sharedLink`, `qrCode`). The value names nothing, but the lifecycle bullet's
+list of where a quiz began did not include a link, Control Center, or a shortcut. This section replaces the quiz lifecycle bullet
+that the section on the daily challenge gives, so apply it after that section.
+
+### English
+
+The bullet on screens is unchanged: "quiz" covers both screens.
+
+The bullet on quiz lifecycle events now reads:
+
+```
+- Quiz lifecycle events (starting, quitting, or completing a quiz), and where the quiz began: the Quiz tab, over every verb, over My Verbs, over a custom choice, as a review of what is due, as practice of your mistakes, as the daily session, and whether you began it from its reminder, as the daily challenge, and whether you opened it from a shared result or from the quiz widget, or as the Verb Essentials, Name the Conjugation, Sentences, or Speed Round exercise, a verb's page, a collection, a practice set opened from a shared link or a QR code, the practice of a conjugation model, alone or mixed with models you know, or a link from outside the app, Control Center, or a shortcut, with which collection for the four featured ones (a model's collection, or a model's practice, is named only as a model); for a custom quiz or a practice set, whether it chose tenses, verbs, or both, but not which; and when you finish a daily session, roughly how many days in a row you have finished one (1, 2 to 6, 7 to 29, or 30 or more)
+```
+
+### French
+
+Le point sur les écrans ne change pas : « quiz » couvre les deux écrans.
+
+Le point sur les événements du cycle de vie d'un quiz devient :
+
+```
+- Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes, sur « Mes verbes », sur mesure, en révision de ce qui est à revoir, pour revoir vos erreurs, en « Séance du jour », et si vous l'avez commencée depuis son rappel, en « Défi du jour », et si vous l'avez ouvert depuis un résultat partagé ou depuis le widget du quiz, ou dans l'exercice « L'essentiel du verbe », « Identifier la forme verbale », « Phrases à trous » ou « Contre-la-montre », la page d'un verbe, une collection, une série d'exercices ouverte depuis un lien partagé ou un code QR, l'exercice d'un modèle de conjugaison, seul ou mélangé aux modèles que vous connaissez, ou un lien venu de l'extérieur de l'application, le Centre de contrôle ou un raccourci, avec le nom de la collection pour les quatre collections mises en avant (la collection d'un modèle, ou l'exercice d'un modèle, est désigné seulement comme celui d'un modèle) ; pour un quiz sur mesure ou une série d'exercices, s'il porte sur des temps, des verbes ou les deux, mais pas lesquels ; et lorsque vous terminez une séance du jour, le nombre approximatif de jours d'affilée où vous en avez terminé une (1, de 2 à 6, de 7 à 29, ou 30 et plus)
+```

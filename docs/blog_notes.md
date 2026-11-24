@@ -6614,3 +6614,49 @@ It now reads the result's sentence alone, the hint already saying it shares toda
 suite went from 930 to 951 tests, all passing. Both simulators' defaults were exported before
 the check and compared key by key afterward; `defaults import` merges rather than replaces, so
 the challenge's new key had to be deleted by hand.
+
+## Closing the Pedagogy Port (2026-11-24)
+
+The last session of the pedagogy port was an audit, not a feature. Twenty-four phases had each
+kept their own privacy lines, docs, and tests, and the Closing's job was to read the whole against
+the code at once, the way no single phase could.
+
+The suite came back clean: 951 tests in 90 suites, the count Phase 24 left. The privacy audit was
+the interesting part. Diffing `Analytics.swift` against the commit before Phase 1 gave nine new
+signals, seven new parameter keys, three retired ones (the score among them), and sixteen new
+`source` values, and every one had its staged lines in English and French. Konjugieren's Closing
+had found a real leak at this step: the question reached on a quit counted re-asks, which are
+inserted only after a wrong answer, so a quit at question 13 of a round of ten told the developer
+that at least three answers were wrong. Conjuguer never had that bug. Its Phase 7 was written after
+Konjugieren's Closing and counted the round's questions alone from the start, a small case of a
+port inheriting a lesson rather than a defect.
+
+What the audit did find was quieter. Two new screens, the custom quiz's editor and the list of
+models to practice, report themselves by type name, and no section had named them. The policy's
+"quiz" already covers both, so no sentence changes, but the release-day check needs to know the
+values exist. The other was a link. A `conjuguer://quiz/daily` or `quiz/challenge` link with no
+`source` reports `deeplink`, and the long bullet listing where a quiz can begin never mentioned a
+link. The new section rewrites the bullet in both languages. Looking for who writes bare quiz
+links turned up one more. `conjuguer://quiz/start`, the default quiz's link, reported `tab`, as
+if the quiz had begun on the Quiz tab, and the Quick Quiz control in Control Center and the Start
+Quiz shortcut both send exactly that link. Josh chose `deeplink` for it, like the other quiz
+routes, so those two now say they came from outside the app, and the bullet names Control Center
+and a shortcut too. Splitting the intent, as Random Verb's already is, would let them say which.
+
+The architecture doc's Quiz section is 1,200 lines, too long to verify comfortably in one sitting.
+Two Sonnet subagents took half each, with instructions to report only claims the code contradicts
+and to cite file and line. Everything they found was checked in the code before it was changed,
+and eight were real. The doc said Reset Practice erases three things, the record, the last result,
+and the Speed Round's best, but by Phase 23 it erased five and rescheduled the reminder too. It
+said every answer moves the practice record, but Name the Conjugation, the choice questions, and
+the Speed Round were each deliberately kept out of it. It counted five spelling changes where the
+code has six. None of these was a phase being careless. Each phase updated the paragraph about its
+own feature, and an older paragraph's summary went stale as later features joined it.
+
+The last task was a note for the sibling apps, and checking it in their code, read-only, made it
+shorter and more useful. A Phase 10 suspicion about Konjugieren losing a kept verb list at launch
+turned out to be impossible there, since Konjugieren parses its verbs before anything reads its
+settings. Konjugieren does send `deeplink` from a bare challenge link without staging it, the same
+gap found here. And Conjugar keeps the quiz score on its ranked round, by Josh's own decision for
+that app, which contradicts this plan's claim that dropping the score makes the three apps agree.
+That one goes to Josh.

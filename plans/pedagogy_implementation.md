@@ -48,7 +48,10 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 22 | Done | 2026-11-24 | a5b2806 | T6.3 | 22 |
 | 23 | Done | 2026-11-24 | 5bb1765 | T6.6 (personal bests and achievements) | 23 |
 | 24 | Done | 2026-11-24 | 5651584 | T6.8 | 24 |
-| Closing | Not started | | | Audit, porting notes | Closing |
+| Closing | Done | 2026-11-24 | | Audit, porting notes | Closing |
+
+**The plan is finished** (2026-11-24). Every phase is done, and the Closing's audit and its note
+for Konjugieren and Conjugar are at the end of this file.
 
 The phases keep Konjugieren's numbers, so a session can read the Konjugieren phase of the same
 number beside its own.
@@ -2849,7 +2852,7 @@ it, sharing produces the agreed text, and tests pin the seeding.
 
 ## Closing
 
-**Status:** Not started.
+**Status:** Done.
 
 - Run the full suite and `check_docs.py`.
 - Audit the privacy staging: diff `Analytics.swift` against the commit before Phase 1, read every
@@ -2862,3 +2865,88 @@ it, sharing produces the agreed text, and tests pin the seeding.
 - Mark this plan finished in its Status section.
 
 **How it differed:**
+
+- **The checks.** `run_tests.sh` ran 951 tests in 90 suites, all passing, the count Phase 24 left,
+  on the iPhone simulator, whose language is English. `check_docs.py` found 0 problems before the
+  Closing's edits and 0 after them. The Closing changed no Swift, so the suite was not run again.
+- **The privacy audit found two unstaged values and no leak.** `Analytics.swift` was diffed against
+  `5bd3650`, the commit before Phase 1, and every `.signal(name:` call site in `Conjuguer/` read, 29
+  of them, with the parameter builders they call (`Shared/` and the widget send nothing). Nine signals (`quizAbandon`, `tapSharePracticeSet`,
+  `viewPracticeSet`, `tapKeepPracticeSet`, `tapResetPractice`, `tapViewLeaderboard`,
+  `tapViewAchievements`, `tapDailyReminder`, `tapShareChallenge`), seven parameter keys (`level`,
+  `duration`, `questionCount`, `customChoice`, `method`, `enabled`, `streak`, with `difficulty`,
+  `elapsedTime`, and `score` retired), and 16 `source` values all have staged lines in both
+  languages. Two values had none, and a new last section of
+  [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md) stages them.
+  (1) **Two `viewName` values**, `CustomQuizEditor` (Phase 9) and `ModelPracticeListView`
+  (Phase 16), which the screens bullet's "quiz" already covers, so no line changes; the section
+  records them so that the release-day check finds them, as the browse plan's Closing did for its
+  screens. (2) **`source` `deeplink` on the quiz signals.** A `quiz/daily` or `quiz/challenge` link
+  without a `source` item, like a practice set's, sends it, and the lifecycle bullet listed no link
+  among where a quiz began. The section replaces that bullet, adding "a link from outside the app,
+  Control Center, or a shortcut" / "un lien venu de l'extérieur de l'application, le Centre de
+  contrôle ou un raccourci", since the Quick Quiz control and the Start Quiz shortcut write a bare
+  `quiz/start` (below).
+- **Decision 5 holds.** No signal carries an answer, a score, a count of right or wrong answers, or
+  a verb. The leak Konjugieren's Closing fixed was never here: `Quiz.questionReached` has counted
+  the round's questions alone since Phase 7, and `QuizSessionTests` pins it with a re-ask on screen.
+  Every session whose length depends on the answers (Review, My Mistakes, a model's mixed practice,
+  the Speed Round) sends no counts (`QuizScope.sendsQuestionCounts`). A model's practice alone sends
+  a count a round that depends on the model, 5 to 15, but never on the answers, and a model is never named;
+  a one-verb model has no practice alone. A link's `source` is read through
+  `AnalyticsSource(rawValue:)`, so a link cannot put its own text into a signal.
+- **`feature_architecture.md` § Quiz** was checked claim by claim against the code by two Sonnet
+  subagents, each taking half, and every discrepancy they reported was confirmed in the code before
+  it was fixed. Eight were stale or wrong: the six spelling changes (the doc said five); the
+  practice record moved by "every final answer, in every scope", when the Speed Round, Name the
+  Conjugation, and choice questions move nothing; Reset Practice erasing "all three", when it
+  erases five things (the daily streak and each level's best too) and reschedules the reminder;
+  due items mixed into the default quiz "only", when the daily session mixes in up to ten; "a draw
+  of seven", which is six from Elementary up, where a choice question takes a place; the Last
+  Quiz's "while either exists"; a custom quiz's collection said to send "only `model`", which
+  is the `collection` value, not a key; and the `frames` fixture asked "twice over", which it is
+  not. The Signals list gained the practice set's and a bare link's sources, and the `source`
+  table's `deeplink` row the quiz links. A sentence on what was not ported from Konjugieren's
+  start screen was cut, and "The sad trombone stays" now says what a quit does. The doc's dated
+  attributions ("(Josh, 2026-11-23)") were kept, since they mark choices as deliberate.
+- **A bare quiz link reports `deeplink`** (Josh, 2026-11-24). `conjuguer://quiz/start`, or any
+  `quiz/` target but `set`, `daily`, and `challenge`, started the default quiz with `source` `tab`,
+  so such a quiz counted as begun from the tab. `World.handle` now starts it with
+  `QuizScope.allVerbs(source:)`, the link's own `source` or `deeplink`, as the other quiz routes
+  do. `OpenQuizIntent`, behind the Quick Quiz control and the Start Quiz shortcut, writes the bare
+  link, so both now send `deeplink`; splitting the intent, as Random Verb's is split, would let
+  them send `control` and `shortcut`. `DeeplinkTests.testQuizDeeplinkStartsQuizAndSwitchesTab`
+  pins both values, and the quiz stays ranked.
+
+### For Konjugieren and Conjugar
+
+What this port found that the other two apps should change. Each point was checked in the
+sibling's code or docs, read-only, on 2026-11-24, unless it says otherwise. Conjugar's own pedagogy
+plan closed on 2026-11-24 as well.
+
+- **Konjugieren: stage `deeplink` on the quiz signals.** Its `World.handle` gives a `quiz/daily` or
+  `quiz/challenge` link without a `source` the value `deeplink`, as Conjuguer's does, and its
+  `docs/privacy_policy_pending.md` names a link only for a practice set. Conjugar's pending policy
+  already names a `quiz` link and `deeplink`. **Sent** to a Konjugieren session at Josh's request
+  (2026-11-24), which staged the line in English and German, uncommitted, for Josh to review.
+- **Conjugar: the score.** Conjuguer's Decisions say that dropping `score` from the quiz signals
+  makes "the three apps agree", but Josh decided on 2026-11-22 that Conjugar keeps `score` on the
+  ranked round, and Conjugar sends it on `completeQuiz` and on `quitQuiz`. Both plans cannot be
+  right about the three apps. A quit's score also counts the right answers before the quit, which
+  is the kind of count Decision 5 keeps off the signals. **Josh chose to drop it** (2026-11-24), and
+  a Conjugar session, at his request, removed `score` from both signals and `ParameterKey`,
+  updated its docs and plan, and staged "No quiz score" in English and Spanish, uncommitted, for
+  Josh to review.
+- **Konjugieren: the launch cost of achievements** (an inference). Konjugieren computes every
+  achievement's progress in `KonjugierenApp.init()`, signed in or not. In Conjuguer a first
+  measurement took about 0.15 seconds in the tests, so Conjuguer reports only while signed in.
+  German's patterns may be cheaper to measure; time it before deciding.
+- **Konjugieren: a kept verb list at launch is safe.** Conjuguer's Phase 10 suspected that
+  `QuizVerbSet(infinitives:)` might drop a kept list if settings decoded before the verbs loaded.
+  `AppLauncher.main()` parses the verbs before anything reads the settings, so nothing to change.
+- **Both, for Josh to judge** (not checked in the siblings' code): Phase 13's caption saying
+  "earlier" for an answer given today, Konjugieren's wording; Phase 14's order, which here names
+  another cell of the verb before calling an answer a regular conjugation, since a form the learner
+  recalled is the nearer explanation; and, on the iPad, text typed right after tapping a Verb
+  Essentials row not reaching the field (Phase 15), which Konjugieren saw with a hardware keyboard
+  and which no app has fixed.

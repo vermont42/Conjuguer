@@ -132,7 +132,12 @@ struct QuizScope {
 
   static let verbPageQuestionCount = 3
 
-  static let allVerbs = QuizScope(verbs: nil, questionCount: Quiz.questionCount, source: .tab)
+  static let allVerbs = allVerbs(source: .tab)
+
+  /// The default quiz begun from somewhere other than the Quiz tab, such as a link.
+  static func allVerbs(source: AnalyticsSource) -> QuizScope {
+    QuizScope(verbs: nil, questionCount: Quiz.questionCount, source: source)
+  }
 
   static func myVerbs(_ verbs: [Verb]) -> QuizScope {
     QuizScope(verbs: verbs, questionCount: Quiz.questionCount, source: .myVerbs)

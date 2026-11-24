@@ -276,7 +276,7 @@ class World {
         return .quiz
       }
       if quiz.quizState != .inProgress {
-        quiz.start()
+        quiz.start(scope: .allVerbs(source: url.analyticsSource ?? .deeplink))
       }
       return .quiz
     case URL.verbModelHost:

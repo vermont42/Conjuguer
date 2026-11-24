@@ -75,11 +75,25 @@ struct DeeplinkTests {
   @Test func testQuizDeeplinkStartsQuizAndSwitchesTab() {
     resetCurrent()
     Current.selectedTab = .settings
+    let original = Current.analytics
+    let spy = AnalyticsSpy()
+    Current.analytics = spy
+    defer {
+      Current.analytics = original
+    }
 
     Current.handleURL(url("conjuguer://quiz/start"))
 
     #expect(Current.selectedTab == .quiz)
     #expect(Current.quiz.quizState == .inProgress)
+    #expect(Current.quiz.scope.isRanked)
+    #expect(spy.signalNames == [.quizStart])
+    #expect(spy.signalParameters.first?[ParameterKey.source.rawValue] == "deeplink")
+
+    Current.quiz.quit()
+    Current.handleURL(url("conjuguer://quiz/start?source=control"))
+    #expect(spy.signalParameters.last?[ParameterKey.source.rawValue] == "control")
+    Current.quiz.quit()
   }
 
   /// The reminder's link opens the Quiz tab with a request that names it, and starts nothing

@@ -497,7 +497,7 @@ same.
 | `widget` | Yes | Any home-screen, lock-screen, or quiz widget (`WidgetDeeplink`, `?source=widget`) |
 | `control` | Yes | The Random Verb control in Control Center (`OpenRandomVerbControlIntent`); for `finishSearch`, the Find a Verb control |
 | `shortcut` | Yes | Open Random Verb run from the Shortcuts app or as its App Shortcut (`OpenRandomVerbIntent`) |
-| `deeplink` | Yes | A `conjuguer://` link with no `source` item, or one outside this vocabulary: a `verb/` link for the verb page, a `search` link for `finishSearch`, a `list/` link for `viewCollection` |
+| `deeplink` | Yes | A `conjuguer://` link with no `source` item, or one outside this vocabulary: a `verb/` link for the verb page, a `search` link for `finishSearch`, a `list/` link for `viewCollection`, a `quiz/` link for the quiz signals (the Quick Quiz control's and the Start Quiz shortcut's among them) |
 | `resume` | Yes | The same page appearing again (above) |
 | `related` | Yes | A verb on a verb page's Related Verbs card, or in its full list |
 | `spotlight` | Yes | A Spotlight result |
@@ -581,7 +581,7 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
 | `search` | None | `q`, the text; `source` | The verb list with its search field, any verb page closed. With text, the results show with the keyboard down; with none (or `q` empty), the field is cleared and focused for typing | No |
 | `model` | A model's identifier (`1-1`) | `source`, which a shared model sends as `sharedLink` and nothing reads yet | The model page as a sheet over the Models tab | Yes; `source` is unreleased |
 | `info` | A stable key (`futur_simple`), or a legacy position (`info/0`) | None | The article as a sheet over the Info tab. An unknown key or out-of-range position does nothing | Yes; keys are unreleased |
-| `quiz` | `set`, a practice set; `daily`, a daily session; `challenge`, a daily challenge; anything else (`OpenQuizIntent` sends `quiz/start`) | For `set`: the custom quiz's stored form (`tenses`, and `verbs` or `infinitives`), `level`, `source`. For `daily`: `source`. For `challenge`: `date` (`yyyy-MM-dd`), `level`, `source` | `set`: the practice set as a sheet over whatever tab is open, never starting a quiz (§ Practice Sets). `daily`: the Quiz tab, which starts a daily session (`World.dailySessionRequest`) unless a quiz is in progress or showing its results (§ Daily Session). `challenge`: the Quiz tab, which starts that day's challenge at that level (`World.challengeRequest`), or today's at the learner's level when the date is missing or not a date, unless a quiz is in progress or showing results or the challenge was taken (§ Daily Challenge). Anything else: the Quiz tab, starting a quiz unless one is in progress | Yes; `set`, `daily`, and `challenge` are unreleased |
+| `quiz` | `set`, a practice set; `daily`, a daily session; `challenge`, a daily challenge; anything else (`OpenQuizIntent` sends `quiz/start`) | For `set`: the custom quiz's stored form (`tenses`, and `verbs` or `infinitives`), `level`, `source`. For `daily`: `source`. For `challenge`: `date` (`yyyy-MM-dd`), `level`, `source` | `set`: the practice set as a sheet over whatever tab is open, never starting a quiz (§ Practice Sets). `daily`: the Quiz tab, which starts a daily session (`World.dailySessionRequest`) unless a quiz is in progress or showing its results (§ Daily Session). `challenge`: the Quiz tab, which starts that day's challenge at that level (`World.challengeRequest`), or today's at the learner's level when the date is missing or not a date, unless a quiz is in progress or showing results or the challenge was taken (§ Daily Challenge). Anything else: the Quiz tab, starting the default quiz unless one is in progress, with the link's `source`, or `deeplink` | Yes; `set`, `daily`, and `challenge` are unreleased |
 | `list` | A featured collection's key (`top100`, `etre`, `irregularFutur`, `pronominal`) | `source` | The collection's page as a sheet over the Models tab. An unknown key does nothing. A model's collection is reached by its `model/` link, not by `list/model-<id>` | No |
 
 A `match` is read as search reads a query (`MarkedConjugations(text:on:)`, through
@@ -945,7 +945,7 @@ App Store screenshots and exports its answers (see
 questions whose right answers exercise the grading below. Typed in order, with
 the feminine default: `il connait`, `je parle`, `j'ai parlé`, `nous sommes allées`, `j'étiquète`,
 `je cèderai`, `je me souviens`, `souviens-toi`, `êtes`, `il plait`, and `j'ai passé`.
-`-CONJUGUER_QUIZ_FIXTURE frames` asks one question for each kind of answer frame, twice over:
+`-CONJUGUER_QUIZ_FIXTURE frames` asks one question for each kind of answer frame:
 `je` (parler), `j'` (aimer), `je` (haïr, aspirated h), `elle`, `elles`, `j' (fém.)` (parler,
 passé composé), `nous (fém.)` (aller), `je me`, `je m'` (s'absenter), `tu t' (fém.)`, `(tu) ______-toi !`,
 `(nous) ______ !`, `(vous) (fém.) ______ !` (aller, impératif passé), and the two participles.
@@ -1091,7 +1091,7 @@ The auxiliary checks pass over verbs whose other auxiliary is also standard in s
 agreement with avoir. The être verbs that take avoir with a direct object (monter, sortir, and
 eight more) get the line about the object, which stays true of j'ai monté la
 valise. The spelling change is read from where parler's conjugation of the verb and the right one
-differ, and a difference that is none of the five changes gets no line. The regular and other-group
+differ, and a difference that is none of the six changes gets no line. The regular and other-group
 forms conjugate the verb with parler's, finir's, or rendre's model
 (`Conjugator.conjugate(verb:model:tense:pronounGender:)`); another cell of the verb is checked
 before them, since a real form the learner recalled is the nearer explanation. Tense names stay
@@ -1197,13 +1197,13 @@ partir-like (il sort).
 ### Quiz Scopes
 
 A `QuizScope` says which verbs a quiz asks about (nil for the default quiz), how many questions it
-asks, and its `source`. `Quiz.start(scope:)` defaults to `.allVerbs`, which the Start button and the
-`quiz/` link use. A new kind of quiz adds a constructor, as collections added `.collection(_:)` (§
+asks, and its `source`. `Quiz.start(scope:)` defaults to `.allVerbs`, whose `source` is `tab`, which the Start
+button uses; the `quiz/` link uses `.allVerbs(source:)` with the link's `source`, or `deeplink`. A new kind of quiz adds a constructor, as collections added `.collection(_:)` (§
 Collections).
 
 | Scope | Questions | Where |
 |---|---|---|
-| `.allVerbs` | The default quiz at the learner's level | The Quiz tab with All Verbs chosen; the `quiz/` link |
+| `.allVerbs`, `.allVerbs(source:)` | The default quiz at the learner's level | The Quiz tab with All Verbs chosen; the `quiz/` link |
 | `.myVerbs(_:)` | 10 at the learner's level over the learner's starred and recent verbs, with Ten More | The Quiz tab with My Verbs chosen |
 | `.verbPage(_:)` | 3, on one verb, with no Ten More | Test Me on a verb page |
 | `.collection(_:)` | 10 at the learner's level over a collection's verbs, with Ten More | A collection's Quiz button, on its page or a model's page |
@@ -1244,9 +1244,7 @@ close. It cannot be swiped away mid-quiz, so every quiz it starts ends in `quizQ
 **The Quiz tab's picker** (All Verbs, My Verbs, Custom) sits in the briefing card above Start. With My
 Verbs chosen, a line says how many verbs the quiz will ask about, or how to add some, and Start is
 disabled while the list is empty. The segment chosen is not stored, so the tab opens on All Verbs
-at every launch and the default quiz stays the default. Of Konjugieren's filled start screen, only
-the fact tiles were ported (§ The Practice Hub); its big scope symbol and its verbs as chips were
-not.
+at every launch and the default quiz stays the default.
 
 ### The Custom Quiz
 
@@ -1323,11 +1321,14 @@ scanning beneath it; the screen stays awake while it shows.
 
 ### The Practice Record
 
-Every final answer, in every scope, moves an item of a record kept on the device and never sent, as
-the answer is given, so a quiz quit after six questions has still practiced six. The sad trombone
-stays. Settings' Reset Practice (`button_settings_resetPractice`), shown while the record or the
-last quiz's result or the Speed Round's best holds anything, erases all three behind a confirmation
-and sends `tapResetPractice`.
+Every final typed answer moves an item of a record kept on the device and never sent, as the
+answer is given, so a quiz quit after six questions has still practiced six. A quit plays the sad
+trombone all the same. The Speed Round, Name the Conjugation, and a choice question move nothing in
+the record. Settings' Reset Practice (`button_settings_resetPractice`), shown while the record, the
+last quiz's result, the Speed Round's best, the daily streak, or a level's best score holds
+anything (`PracticeStore.hasAnythingToReset` and `Settings.hasBestScore`), erases all five behind a
+confirmation, reschedules the daily reminder, and sends `tapResetPractice`. The daily challenges'
+results stay (§ Daily Challenge).
 
 **Two kinds of item** (`PracticeItem`). The families were Josh's choice, 2026-11-23.
 
@@ -1360,9 +1361,9 @@ second attempt counts as right. A re-ask is another answer: after a miss the ite
 right re-ask leaves it in the first box.
 
 **Due items in a default round.** Up to three a round (`QuizDraw.dueItemLimit`), the most overdue
-first, placed at random among a draw of seven, in Ten More rounds too. Only the default quiz mixes
-them in (`QuizScope.mixesDueItems`); a scoped quiz, a custom quiz, and a practice set ask what was
-chosen. An item is skipped when the level does not ask its tense (a passé simple below Advanced) or
+first, placed at random among the round's other questions, in Ten More rounds too. Only the
+default quiz and the daily session mix them in (`QuizScope.mixesDueItems`), the daily session up to
+ten (§ Daily Session); a scoped quiz, a custom quiz, and a practice set ask what was chosen. An item is skipped when the level does not ask its tense (a passé simple below Advanced) or
 its verb is beyond the level's band. A pattern is asked of a verb of the band that shares it,
 preferring the model's own verbs.
 
@@ -1458,7 +1459,8 @@ than a title, so that it reads in the current language. Review, My Mistakes, a m
 and the Speed Round keep no level, and the Speed Round's row shows no score, since it counts right
 answers. `PracticeStore` keeps it as JSON under `lastQuizResult` in the App Group's
 defaults, beside the record, on the device and never sent; Reset Practice forgets it, and the
-Practice Record card shows while either exists (`hasAnythingToReset`).
+Practice Record card shows while it or anything else Reset Practice erases exists (§ The Practice
+Record).
 
 ### Mastery
 
@@ -1965,7 +1967,7 @@ descriptions, artwork, and App Store Connect steps are in
 
 `quizStart` (`level`, `source`), `quizQuit` (`level`, `lastQuestionIndex`, `duration`, `source`),
 `quizCompletion` (`level`, `questionCount`, `duration`, `source`), and `quizAbandon` (`level`,
-`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, `verbEssentials`, `modelAlone`, `modelMixed`, `recognition`, `sentences`, `speedRound`, `daily`, `reminder`, `challenge`, `challengeLink`, or `challengeWidget`, so a
+`lastQuestionIndex`, `source`). `source` is `tab`, `myVerbs`, `verbPage`, `list`, `custom`, `review`, `mistakes`, `verbEssentials`, `modelAlone`, `modelMixed`, `recognition`, `sentences`, `speedRound`, `daily`, `reminder`, `challenge`, `challengeLink`, or `challengeWidget` (a practice set's quiz sends `sharedLink`, `qrCode`, or `deeplink`, and a default quiz, daily session, or challenge begun from a link without a `source` sends `deeplink`, as the Quick Quiz control and the Start Quiz shortcut do through `OpenQuizIntent`'s `quiz/start`), so a
 three-question quiz does not inflate the ten-question quiz's completion rate.
 
 - **No signal carries a score or a count of right or wrong answers.** `lastQuestionIndex` is the
@@ -1990,7 +1992,7 @@ three-question quiz does not inflate the ten-question quiz's completion rate.
 quiz's own, set when it starts, so a change in Settings mid-quiz cannot mislabel its quit or
 completion. A collection's
 `quizStart` also carries `collection` (§ Collections), and so does a custom quiz over a featured
-collection or a model, which sends only `model`. A custom quiz's `quizStart` carries
+collection or a model, whose `collection` names a model only as `model`. A custom quiz's `quizStart` carries
 `customChoice`: `tenses`, `verbs`, or `both`, which says what kind of choice was made without
 saying which tenses or verbs.
 
