@@ -34,7 +34,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 8 | Done | 2026-11-23 | 3f12ff1 | Decision 4 | 8 |
 | 9 | Done | 2026-11-23 | b181958 | T2.8 | 9 |
 | 10 | Done | 2026-11-23 | 33da4be | T2.9, Decision 8 | 10 |
-| 11 | Awaiting Josh | 2026-11-23 | | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
+| 11 | Done | 2026-11-23 | 915be1c | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
 | 12 | Not started | | | T3.2, T3.3 (the session) | 12 |
 | 13 | Not started | | | T6.1, T6.6 (the leaderboard's place) | 13 |
 | 14 | Not started | | | T4.2, T4.3 | 14 |
@@ -1328,7 +1328,7 @@ gracefully, and tests pin encoding and decoding of every scope.
 
 **Suggestions:** T3.3 (the record), T3.4, T3.5, T6.4. **Ports:** Konjugieren Phase 11
 (`PracticeRecord.swift`, `PracticeItemMapping.swift`, `PracticeStore.swift`,
-`QuizRecordSession.swift`). **Depends on:** Phase 7. **Status:** Awaiting Josh.
+`QuizRecordSession.swift`). **Depends on:** Phase 7. **Status:** Done.
 
 Give the quiz a memory: a small record per item, a box and a due date, moved up the ladder of 1, 3,
 7, 14, and 30 days by a right answer and back to the start by a wrong one.
