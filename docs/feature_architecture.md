@@ -504,7 +504,7 @@ same.
 | `quickAction` | Yes | For `finishSearch` only: a search the Home Screen quick action opened |
 | `recent` | Yes | A recent verb in the empty focused search field |
 | `myVerbs` | Yes | A verb in My Verbs. For the quiz signals, a quiz over My Verbs |
-| `tab` | Yes | For `finishSearch` only: a search typed in the Verbs tab, Command-F included. For the quiz signals, a quiz begun from the Quiz tab. For `viewCollection`, a collection opened in the Models tab |
+| `tab` | Yes | For `finishSearch` only: a search typed in the Verbs tab, Command-F included. For the quiz signals, a quiz begun from the Quiz tab; for `tapViewLeaderboard`, the Quiz tab's button. For `viewCollection`, a collection opened in the Models tab |
 | `verbPage` | Yes | The quiz signals only: Test Me on a verb page |
 | `reviewCard` | Yes | The review card, tapped after its conjugations are revealed |
 | `list` | Yes | A verb on a featured collection's page; for the quiz signals, a collection's quiz |
@@ -527,7 +527,8 @@ value in `VerbDestination`, in a link's `source` item, or directly to `VerbView`
 the table above, and stages its privacy line. The other browse signals are `tapShareVerb`,
 `tapStarVerb` (with `starred`, the state after the tap), `source` on `quizStart`, `quizQuit`, and
 `quizCompletion`, `viewReviewCard` and `tapRevealReviewCard` (§ The Review Card), and
-`viewCollection`, `tapShareCollection`, and `collection` on `quizStart` (§ Collections). There is
+`viewCollection`, `tapShareCollection`, and `collection` on `quizStart` (§ Collections). The Quiz
+tab's View Leaderboard sends `tapViewLeaderboard` with `source` `tab` (§ The Practice Hub). There is
 no `tapTestVerb`: Test Me starts its quiz as its sheet appears, so the tap and `quizStart` with
 `verbPage` are one event.
 
@@ -816,7 +817,8 @@ or about tenses and verbs the learner puts together (§ The Custom Quiz).
 | `CyclingDeck.swift` | Deals a pool's elements in order and reshuffles when it runs out |
 | `Shared/PracticeRecord.swift`, `Shared/ReviewSchedule.swift` | The practice record: `PracticeItem`, what an answer exercises, and `PracticeRecord`, a box and a due date per item (§ The Practice Record) |
 | `PracticeItemMapping.swift`, `PracticeStore.swift`, `QuizDueItems.swift` | Which item a question exercises; `Current.practice`, which records answers and lookups and offers the review card; and the due items a default round mixes in |
-| `QuizView.swift`, `QuizResultsView.swift`, `QuizResultView.swift` | The quiz screen and the results sheet |
+| `QuizView.swift`, `QuizResultsView.swift`, `QuizResultView.swift` | The Quiz tab's practice hub (§ The Practice Hub), the quiz screen, and the results sheet |
+| `LastQuizResult.swift` | The last quiz's results, which the hub shows (§ The Practice Hub) |
 | `LiveActivities.swift`, `LiveActivitiesReal.swift`, `LiveActivitiesSpy.swift` | Starts, updates, and ends the quiz's Live Activity through `Current.liveActivities`: ActivityKit on device and in the simulator, a spy under unit tests |
 
 ### Levels
@@ -1092,7 +1094,7 @@ began at, and keeps it as that level's best score if it is higher: its ten quest
 re-asks (`Quiz.firstRoundScore`), so that every ranked score has a ceiling of 100. Ten More's points
 and a re-ask's are the learner's alone. A scoped quiz does neither (below). Quitting reports
 nothing. `Settings` keeps one best score per level (`bestScore(at:)`, `recordScore(_:at:)`, under
-the keys `bestScore.<level>`), and the briefing shows the current level's. The one best score
+the keys `bestScore.<level>`), and the Quiz tab's foot shows the current level's. The one best score
 across levels that older installs hold, under the key `bestScore`, is removed at launch, not
 migrated, since its level is unknown and it may come from a thirty-question quiz (Josh,
 2026-11-23).
@@ -1100,7 +1102,7 @@ migrated, since its level is unknown and it may come from a thirty-question quiz
 **Leaderboards.** One per level, with the IDs `conjuguer.level.beginner`, `.elementary`,
 `.intermediate`, and `.advanced` (`QuizLevel.leaderboardID` in `Utils/GameCenter.swift`), which App
 Store Connect makes permanent. `GameCenter.reportScore(_:level:)` posts to the level's board, and
-`showLeaderboard(level:)` opens it, as closing a default quiz's results does. Nothing breaks ties at
+`showLeaderboard(level:)` opens it from the Quiz tab's View Leaderboard (§ The Practice Hub). Nothing breaks ties at
 100 (Josh, 2026-11-23). `GameCenterSpy` records both calls for tests and the simulator. The boards,
 their settings, and what remains for release day are in
 [`game_center_setup.md`](game_center_setup.md).
@@ -1142,8 +1144,7 @@ and choir at Beginner. A collection's Quiz button follows the same rule. Random 
 injectable `RandomNumberGenerator`; tests use `SeededRandomNumberGenerator`.
 
 **What a scoped quiz leaves out.** Only the default quiz posts to Game Center, sets the best score,
-donates to `ChangeLevelTip`, and shows its level's leaderboard when its results close (Josh's rule for
-Konjugieren, 2026-11-13). Test Me and a collection's quiz start no Live Activity; a My Verbs quiz
+and donates to `ChangeLevelTip` (Josh's rule for Konjugieren, 2026-11-13). Test Me and a collection's quiz start no Live Activity; a My Verbs quiz
 does, being a full round in the Quiz tab.
 
 **Test Me** is a clipboard button (`pencil.and.list.clipboard`) first in the verb page's navigation
@@ -1156,9 +1157,10 @@ close. It cannot be swiped away mid-quiz, so every quiz it starts ends in `quizQ
 
 **The Quiz tab's picker** (All Verbs, My Verbs, Custom) sits in the briefing card above Start. With My
 Verbs chosen, a line says how many verbs the quiz will ask about, or how to add some, and Start is
-disabled while the list is empty. The best score shows only for All Verbs. The segment chosen is
-not stored, so the tab opens on All Verbs at every launch and the default quiz stays the default. Konjugieren's filled start screen (a big scope symbol, fact tiles, the verbs as chips),
-which Josh asked for there after trying the plain one, was not ported.
+disabled while the list is empty. The segment chosen is not stored, so the tab opens on All Verbs
+at every launch and the default quiz stays the default. Of Konjugieren's filled start screen, only
+the fact tiles were ported (§ The Practice Hub); its big scope symbol and its verbs as chips were
+not.
 
 ### The Custom Quiz
 
@@ -1237,8 +1239,8 @@ scanning beneath it; the screen stays awake while it shows.
 
 Every final answer, in every scope, moves an item of a record kept on the device and never sent, as
 the answer is given, so a quiz quit after six questions has still practiced six. The sad trombone
-stays. Settings' Reset Practice (`button_settings_resetPractice`), shown while the record holds
-anything, erases it behind a confirmation and sends `tapResetPractice`.
+stays. Settings' Reset Practice (`button_settings_resetPractice`), shown while the record or the
+last quiz's result holds anything, erases both behind a confirmation and sends `tapResetPractice`.
 
 **Two kinds of item** (`PracticeItem`). The families were Josh's choice, 2026-11-23.
 
@@ -1310,8 +1312,9 @@ Quiz tab's briefing card (`QuizRecordSession`, `QuizScope.recordSession`).
   asked. Fewer than ten make a shorter round, whose results say "Correct: 1 / 2". My Mistakes
   needs the exclusion, since a mistake missed again stays a mistake. Re-asks and one more try work
   as in any quiz, and every answer moves the record.
-- **Never ranked**, mixing in no due items, and donating nothing to `ChangeLevelTip`. Closing the
-  results does not open the leaderboard. While a session runs or shows its results, the title row
+- **Never ranked**, mixing in no due items, and donating nothing to `ChangeLevelTip`. They ask by
+  no level (`QuizScope.asksByLevel`), so their results name none, and their Live Activity shows
+  the session's name where a quiz shows its level. While a session runs or shows its results, the title row
   reads "Review" or "Practice My Mistakes".
 - **The card.** A row with questions shows their count and a play symbol (`quiz_review_button`,
   `quiz_mistakes_button`), and a tap starts the session. An empty row is not a button
@@ -1323,6 +1326,37 @@ Quiz tab's briefing card (`QuizRecordSession`, `QuizScope.recordSession`).
   missed items, so its length would count wrong answers. `quizCompletion` omits `questionCount`,
   and `quizQuit` and `quizAbandon` omit `lastQuestionIndex` (`QuizScope.sendsQuestionCounts`);
   `QuizAbandonment.Entry.lastQuestionIndex` is optional.
+
+### The Practice Hub
+
+The Quiz tab, before a quiz, says what a session is, how long it takes, the level, what is due,
+and how the last quiz went. From the top:
+
+- **The briefing card**: the symbol, a line on what a session does (a correction for a wrong
+  answer, a missed question back later), the scope picker, and for All Verbs and My Verbs three
+  tiles: "10 Questions", "2–3 Minutes", and the level. Custom shows its summary in place of the
+  tiles. Then Start.
+- **The minutes** are a fixed estimate. No timing is kept to derive one, and showing the learner's
+  own times would undo the hidden clock. VoiceOver reads "Two to three minutes".
+- **The level's tile is a menu** (`quiz_level_menu`) of the four levels, with a chevron to say so.
+  It writes the same setting as Settings' level tiles, sends nothing (as Settings sends nothing),
+  and counts as the action `ChangeLevelTip` suggests.
+- **From Your Practice**: Review and My Mistakes (§ Review and My Mistakes), then **Last Quiz**
+  (`quiz_last_result`), absent until a quiz has finished: "All Verbs · Elementary · today", then
+  "Correct: 7 / 10 · Second Try: 1 · Score: 75".
+- **The foot**: the level's best score, when there is one, and a small View Leaderboard button
+  (`quiz_leaderboard_button`), shown only while signed in to Game Center, which opens the current
+  level's board and sends `tapViewLeaderboard` with `source` `tab`. Competing is beside the point
+  of practice, so nothing else opens the leaderboard: closing a quiz's results does not.
+
+**The last result** (`LastQuizResult`) is written at each round's results, so after Ten More it is
+the session so far, by every scope, Test Me's three questions included. A quit quiz writes
+nothing, since its results were never shown. It keeps a kind (`allVerbs`, `myVerbs`, `verbPage`,
+`collection`, `custom`, `practiceSet`, `review`, `mistakes`) and a verb's `dictionaryKey` or a
+collection's key rather than a title, so that it reads in the current language. Review and My
+Mistakes keep no level. `PracticeStore` keeps it as JSON under `lastQuizResult` in the App Group's
+defaults, beside the record, on the device and never sent; Reset Practice forgets it, and the
+Practice Record card shows while either exists (`hasAnythingToReset`).
 
 ### Signals
 

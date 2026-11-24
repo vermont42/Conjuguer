@@ -5934,3 +5934,49 @@ Trying the screens turned up an older problem that this phase did not cause. At 
 will ask a pronominal verb in the passé surcomposé, and the app's answer for se biler was "elles se
 ont été bilées", which no French speaker would write. It is noted for Josh to decide whether the
 quiz should stop asking that tense of pronominal verbs or the Conjugator should learn a form.
+
+## The Quiz Tab Becomes a Practice Hub (2026-11-23)
+
+Phase 13 of the pedagogy plan asked the Quiz tab to say, before anything starts, what a session is,
+how long it takes, the level, what is due, and how the last quiz went. Konjugieren built the same
+hub nine days earlier, so most of the shape came across: three tiles under the scope picker, the
+level's tile a menu, a Last Quiz row under Review and My Mistakes, and the leaderboard demoted to a
+small button at the foot.
+
+The tiles say "10 Questions", "2–3 Minutes", and the level. The minutes are a fixed estimate. The
+app keeps no timings to derive one from, and showing the learner's own times would undo Phase 7's
+hidden clock, so a promise of two or three minutes says what a session costs without measuring
+anyone. The level's tile opens a menu of the four levels and writes the same setting as Settings.
+A hub that shows the level and then sends the learner to another tab to change it would be half a
+hub.
+
+The leaderboard used to open by itself whenever a default quiz's results closed. That made every
+quiz end in a comparison with strangers, which is the opposite of what the plan means by practice
+over examination. Now nothing opens it but its own button, shown only to a player signed in to Game
+Center, and that button sends a new signal saying only that it was tapped from the tab. The best
+score went down to the foot beside it, so the briefing card holds only what the next session will
+do.
+
+The last result is kept on the device beside the practice record and never sent. It stores what
+kind of quiz it was and a verb's or collection's key rather than a title, so the row reads in
+whichever language the app is in today. That mattered more in Conjuguer than in Konjugieren,
+because a verb page's key must tell sortir "exit" from sortir "obtain". Collections needed a small
+addition, `VerbCollection(key:)`, since a model's collection had no way back from its key.
+
+One slip was caught by looking. The onboarding page's new title, "Entraînez-vous à conjuguer",
+appeared in the French simulator still under the old trophy, because the symbol change had been
+forgotten. A clipboard replaced it.
+
+Josh has not yet seen the hub, which the plan asks for before any polishing. The French wording of
+"Start Practicing" ("S’entraîner") and the briefing's new line are guesses for him to weigh, and an
+older wrinkle surfaced along the way: the French results say "Correcte : 0 / 3", which does not
+agree with anything.
+
+### Two older faults, fixed the same day
+
+Josh asked for both wrinkles to be fixed. The French results now say "Bonnes réponses : 0 / 3"
+rather than "Correcte", and each row's correct answer is a "Bonne réponse" rather than a bare
+feminine adjective. A Review or My Mistakes session no longer names a level on its results, since it
+asks whatever the record holds regardless of level. One property, `QuizScope.asksByLevel`, now
+decides that for the results, the last quiz's row, and the Live Activity, which shows the session's
+name instead.

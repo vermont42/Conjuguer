@@ -263,7 +263,7 @@ class Quiz {
       return
     }
     liveActivity = Current.liveActivities.start(
-      attributes: QuizActivityAttributes(level: level.localizedName),
+      attributes: QuizActivityAttributes(level: scope.recordSession?.title ?? level.localizedName),
       initialState: liveActivityState(isFinished: false)
     )
   }
@@ -684,6 +684,7 @@ class Quiz {
       parameters[ParameterKey.questionCount.rawValue] = "\(sessionQuestionCount)"
     }
     Current.analytics.signal(name: .quizCompletion, parameters: parameters)
+    Current.practice.recordResult(LastQuizResult(quiz: self, date: now()))
     teardown()
   }
 

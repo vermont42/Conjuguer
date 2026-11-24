@@ -13,10 +13,12 @@ final class LiveActivitiesSpy: LiveActivities {
   private(set) var endCount = 0
   private(set) var endAllCount = 0
   private(set) var lastState: QuizActivityAttributes.ContentState?
+  private(set) var lastAttributes: QuizActivityAttributes?
 
   func start(attributes: QuizActivityAttributes, initialState: QuizActivityAttributes.ContentState) -> LiveActivity? {
     startCount += 1
     lastState = initialState
+    lastAttributes = attributes
     let id = UUID().uuidString
     activeIDs.insert(id)
     return LiveActivity(id: id, activity: nil)

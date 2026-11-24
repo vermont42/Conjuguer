@@ -48,7 +48,10 @@ struct QuizResultsView: View {
               .accessibilityIdentifier("results_asked_again")
           }
 
-          Text(quiz.level.localizedNameWithLabel)
+          if quiz.scope.asksByLevel {
+            Text(quiz.level.localizedNameWithLabel)
+              .accessibilityIdentifier("results_level")
+          }
 
           if quiz.showsClock {
             Text(L.ResultsView.time(quiz.elapsedTime.timeString))

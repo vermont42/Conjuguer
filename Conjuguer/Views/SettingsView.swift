@@ -172,7 +172,7 @@ struct SettingsView: View {
               .settingsLabel()
           }
 
-          if !world.practice.isEmpty {
+          if world.practice.hasAnythingToReset {
             settingCard(title: L.Settings.practiceRecord) {
               Button(L.Settings.resetPractice) {
                 isConfirmingReset = true

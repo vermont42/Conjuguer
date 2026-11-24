@@ -642,3 +642,41 @@ Le point sur la durée d'un quiz devient :
 ```
 - La durée approximative d'un quiz lorsque vous le terminez ou l'abandonnez (moins de 3 secondes, de 3 à 15 secondes, de 15 à 40 secondes, de 40 secondes à 2 minutes, ou davantage) et le nombre de questions atteint lorsque vous le terminez (10, ou 20 et plus si vous avez demandé dix questions de plus), sauf en révision ou pour revoir vos erreurs
 ```
+
+## The practice hub (pedagogy plan, Phase 13, 2026-11-23)
+
+The Quiz tab keeps the last quiz's results on the device, to show them: what was quizzed, the
+level, the counts of right answers and second tries, the score, and the date. They are kept beside
+the practice record, never sent, and erased by Reset Practice, so the practice-record paragraph
+that the section on the practice record gives now names them. The leaderboard moves from the
+closing of a quiz's results to a View Leaderboard button on the Quiz tab, which sends the new
+`tapViewLeaderboard` with `source` `tab` and nothing else. Apply this section after the section on
+the practice record.
+
+### English
+
+A new bullet for the list in section 2, after the last:
+
+```
+- That you opened a quiz leaderboard from the Quiz tab
+```
+
+The practice-record paragraph now reads:
+
+```
+The app also keeps a practice record: for each conjugation your quiz answers and lookups have touched, whether your last answer was right and when it is next due for review, so that quizzes and review cards can bring it back, and the results of your last quiz, so that the Quiz tab can show them. The practice record stays on your device and is never sent. Reset Practice in Settings erases it.
+```
+
+### French
+
+Un nouveau point pour la liste de la section 2, après le dernier :
+
+```
+- L'ouverture d'un classement du quiz depuis l'onglet Quiz
+```
+
+Le paragraphe sur le suivi des exercices devient :
+
+```
+L'application conserve aussi un suivi des exercices : pour chaque conjugaison que vos réponses aux quiz et vos consultations ont touchée, si votre dernière réponse était juste et le jour où elle doit être révisée, afin que les quiz et les cartes de révision la reproposent, ainsi que le résultat de votre dernier quiz, afin que l'onglet Quiz puisse l'afficher. Ce suivi reste sur votre appareil et n'est jamais envoyé. « Réinitialiser le suivi », dans les Paramètres, l'efface.
+```

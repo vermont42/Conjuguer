@@ -13,6 +13,7 @@ import Observation
 @Observable
 final class PracticeStore {
   private(set) var record: PracticeRecord
+  private(set) var lastResult: LastQuizResult?
   private let getterSetter: GetterSetter
   private let calendar: Calendar
   /// The `LearnerVerbs` JSON a first launch with a practice record migrates. It is read at
@@ -41,6 +42,7 @@ final class PracticeStore {
       record = PracticeRecord()
       pendingMigration = getterSetter.get(key: LearnerVerbs.storageKey)
     }
+    lastResult = getterSetter.get(key: LastQuizResult.storageKey).flatMap(LastQuizResult.init(json:))
   }
 
   var isEmpty: Bool {
@@ -141,12 +143,25 @@ final class PracticeStore {
     save()
   }
 
-  /// Settings' Reset Practice. The record is saved empty rather than removed, so that the next
-  /// launch does not migrate the old schedules again.
+  var hasAnythingToReset: Bool {
+    !isEmpty || lastResult != nil
+  }
+
+  func recordResult(_ result: LastQuizResult) {
+    lastResult = result
+    if let json = result.json {
+      getterSetter.set(key: LastQuizResult.storageKey, value: json)
+    }
+  }
+
+  /// Settings' Reset Practice, which forgets the last result too. The record is saved empty
+  /// rather than removed, so that the next launch does not migrate the old schedules again.
   func reset() {
     pendingMigration = nil
     record.reset()
     save()
+    lastResult = nil
+    getterSetter.remove(key: LastQuizResult.storageKey)
   }
 
   private static func cardVerb(of item: PracticeItem) -> Verb? {

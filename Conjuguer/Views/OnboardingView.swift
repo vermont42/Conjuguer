@@ -80,7 +80,7 @@ struct OnboardingView: View {
           .tag(2)
 
           OnboardingPageView(
-            symbolName: "trophy.fill",
+            symbolName: "pencil.and.list.clipboard",
             title: L.Onboarding.quizTitle,
             bodyText: L.Onboarding.quizBody,
             navigationButtonTitle: L.Onboarding.startQuizButton,

@@ -23,6 +23,8 @@ struct QuizView: View {
   @FocusState private var conjugationFieldIsFocused: Bool
   @AccessibilityFocusState private var correctionHasAccessibilityFocus: Bool
   @State private var authCoordinator = GameCenterAuthCoordinator()
+  /// `GameCenter` is not observable, so the tab keeps its own copy for the leaderboard button.
+  @State private var isSignedInToGameCenter = false
   /// Pages opened from a held correction, pushed over the quiz, which waits beneath them.
   @State private var navigationPath = NavigationPath()
   @State private var isShowingQRCode = false
@@ -72,8 +74,6 @@ struct QuizView: View {
           }
         } else if sheetScope != nil {
           dismiss()
-        } else if quiz.scope.isRanked {
-          world.gameCenter.showLeaderboard(level: quiz.level)
         }
       },
       content: {
@@ -90,8 +90,13 @@ struct QuizView: View {
         return
       }
       world.analytics.signal(name: .viewAppeared, parameters: [ParameterKey.viewName.rawValue: "\(QuizView.self)"])
+      isSignedInToGameCenter = world.gameCenter.isAuthenticated
       if quiz.quizState == .notStarted && !world.gameCenter.isAuthenticated {
-        world.gameCenter.authenticate(onViewController: authCoordinator.viewController)
+        world.gameCenter.authenticate(onViewController: authCoordinator.viewController) { _ in
+          Task { @MainActor in
+            isSignedInToGameCenter = world.gameCenter.isAuthenticated
+          }
+        }
       }
     }
     .sensoryFeedback(trigger: quiz.quizResults.count) { _, newCount in
@@ -120,6 +125,7 @@ struct QuizView: View {
               VStack(spacing: Layout.doubleDefaultSpacing) {
                 notStartedBriefing
                 recordSessions
+                competitionFoot
               }
               .frame(maxWidth: .infinity, minHeight: proxy.size.height)
             }
@@ -418,18 +424,9 @@ struct QuizView: View {
       Text(L.QuizView.briefing)
         .bodyLabel()
         .multilineTextAlignment(.center)
+        .fixedSize(horizontal: false, vertical: true)
 
-      VStack(spacing: Layout.defaultSpacing) {
-        Label(world.settings.quizLevel.localizedNameWithLabel, systemImage: world.settings.quizLevel.systemImage)
-        Label(L.QuizView.questionCount, systemImage: "list.number")
-        let bestScore = world.settings.bestScore(at: world.settings.quizLevel)
-        if tabScope == .allVerbs, bestScore > 0 {
-          Label(L.QuizView.bestScore(bestScore), systemImage: "trophy")
-        }
-      }
-      .smallLabel()
-
-      VStack(spacing: Layout.defaultSpacing) {
+      VStack(spacing: Layout.doubleDefaultSpacing) {
         Picker(L.QuizView.scope, selection: $tabScope.animation(.snappy)) {
           ForEach(TabQuizScope.allCases, id: \.self) { scope in
             Text(scope.displayName)
@@ -441,8 +438,9 @@ struct QuizView: View {
 
         switch tabScope {
         case .allVerbs:
-          EmptyView()
+          sessionFacts
         case .myVerbs:
+          sessionFacts
           Text(myVerbsNote)
             .smallLabel()
             .multilineTextAlignment(.center)
@@ -452,7 +450,6 @@ struct QuizView: View {
           customQuizSummary
         }
       }
-      .padding(.top, Layout.defaultSpacing)
 
       startButton
         .funButton()
@@ -461,6 +458,71 @@ struct QuizView: View {
     }
     .frame(maxWidth: .infinity)
     .card()
+  }
+
+  private var sessionFacts: some View {
+    HStack(alignment: .top, spacing: Layout.defaultSpacing) {
+      QuizFactTile(systemImage: "list.number", value: "\(Quiz.questionCount)", label: L.QuizView.questionsLabel)
+      QuizFactTile(systemImage: "timer", value: L.QuizView.sessionMinutes, label: L.QuizView.minutesLabel, accessibilityLabel: L.QuizView.sessionLength)
+      levelMenu
+    }
+    // Equal heights when one label wraps to two lines.
+    .fixedSize(horizontal: false, vertical: true)
+    .transition(.opacity)
+  }
+
+  private var levelMenu: some View {
+    let settings = world.settings
+    return Menu {
+      Picker(L.QuizView.levelLabel, selection: Binding(get: { settings.quizLevel }, set: { settings.quizLevel = $0 })) {
+        ForEach(QuizLevel.allCases, id: \.self) { quizLevel in
+          Label(quizLevel.localizedName, systemImage: quizLevel.systemImage)
+            .tag(quizLevel)
+        }
+      }
+    } label: {
+      QuizFactTile(systemImage: level.systemImage, value: level.localizedName, label: L.QuizView.levelLabel, showsMenuIndicator: true)
+    }
+    .buttonStyle(.plain)
+    .accessibilityHint(L.QuizView.levelMenuHint)
+    .accessibilityIdentifier("quiz_level_menu")
+    .sensoryFeedback(.selection, trigger: settings.quizLevel)
+    .onChange(of: settings.quizLevel) {
+      ChangeLevelTip().invalidate(reason: .actionPerformed)
+    }
+  }
+
+  /// The best score and the leaderboard sit below everything else, since competing is beside the
+  /// point of practice, though one tap away.
+  @ViewBuilder
+  private var competitionFoot: some View {
+    let bestScore = world.settings.bestScore(at: level)
+    if bestScore > 0 || isSignedInToGameCenter {
+      VStack(spacing: Layout.defaultSpacing) {
+        if bestScore > 0 {
+          Label(L.QuizView.bestScore(bestScore), systemImage: "trophy")
+            .smallLabel()
+            .accessibilityIdentifier("quiz_best_score")
+        }
+
+        if isSignedInToGameCenter {
+          Button {
+            world.gameCenter.showLeaderboard(level: level)
+            world.analytics.signal(name: .tapViewLeaderboard, parameters: [ParameterKey.source.rawValue: AnalyticsSource.tab.rawValue])
+          } label: {
+            Label(L.QuizView.viewLeaderboard, systemImage: "trophy")
+              .font(captionFont)
+          }
+          .buttonStyle(.bordered)
+          .tint(Color.customBlue)
+          .controlSize(.small)
+          .accessibilityHint(L.QuizView.leaderboardHint)
+          .accessibilityIdentifier("quiz_leaderboard_button")
+        }
+      }
+      .frame(maxWidth: .infinity)
+      .padding(.bottom, Layout.doubleDefaultSpacing)
+    }
   }
 
   @ViewBuilder
@@ -501,6 +563,10 @@ struct QuizView: View {
           start(scope: .recordSession(session))
           TryQuizTip().invalidate(reason: .actionPerformed)
         }
+      }
+
+      if let lastResult = world.practice.lastResult {
+        LastQuizResultRow(result: lastResult)
       }
     }
     .card()
@@ -743,6 +809,131 @@ private struct QuizRecordSessionRow: View {
     case .mistakes:
       return "mistakes"
     }
+  }
+}
+
+private struct QuizFactTile: View {
+  let systemImage: String
+  let value: String
+  let label: String
+  var accessibilityLabel: String?
+  var showsMenuIndicator = false
+
+  var body: some View {
+    VStack(spacing: Layout.defaultSpacing / 2) {
+      Image(systemName: systemImage)
+        .font(.title2)
+        .foregroundStyle(Color.customBlue)
+        .contentTransition(.symbolEffect(.replace))
+        .frame(height: 30)
+        .accessibilityHidden(true)
+
+      HStack(spacing: 3) {
+        Text(verbatim: value)
+          .lineLimit(1)
+          .minimumScaleFactor(0.6)
+        if showsMenuIndicator {
+          Image(systemName: "chevron.up.chevron.down")
+            .font(.caption2.bold())
+            .foregroundStyle(Color.customBlue)
+            .accessibilityHidden(true)
+        }
+      }
+      .font(bodyEmphasisFont)
+      .foregroundStyle(Color.customForeground)
+
+      Text(label)
+        .font(captionFont)
+        .foregroundStyle(Color.customGray)
+        .multilineTextAlignment(.center)
+        .lineLimit(2)
+        .minimumScaleFactor(0.8)
+        .fixedSize(horizontal: false, vertical: true)
+
+      Spacer(minLength: 0)
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .padding(.vertical, Layout.defaultSpacing * 1.5)
+    .padding(.horizontal, Layout.defaultSpacing / 2)
+    .background(Color.customBlue.opacity(0.08), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+    .overlay {
+      RoundedRectangle(cornerRadius: 14, style: .continuous)
+        .strokeBorder(Color.customBlue.opacity(0.25), lineWidth: 1)
+    }
+    .contentShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+    .accessibilityElement(children: .combine)
+    .modifier(OptionalAccessibilityLabel(label: accessibilityLabel))
+  }
+}
+
+private struct OptionalAccessibilityLabel: ViewModifier {
+  let label: String?
+
+  func body(content: Content) -> some View {
+    if let label {
+      content.accessibilityLabel(label)
+    } else {
+      content
+    }
+  }
+}
+
+private struct LastQuizResultRow: View {
+  let result: LastQuizResult
+
+  var body: some View {
+    HStack(spacing: Layout.doubleDefaultSpacing) {
+      Image(systemName: "flag.checkered")
+        .font(.title2)
+        .foregroundStyle(Color.customBlue)
+        .frame(width: 32)
+        .accessibilityHidden(true)
+
+      VStack(alignment: .leading, spacing: 2) {
+        Text(L.QuizView.lastQuiz)
+          .font(bodyEmphasisFont)
+          .foregroundStyle(Color.customForeground)
+        Text(verbatim: subjectLine)
+          .font(captionFont)
+          .foregroundStyle(Color.customForeground)
+          .fixedSize(horizontal: false, vertical: true)
+        Text(verbatim: resultLine)
+          .font(captionFont.monospacedDigit())
+          .foregroundStyle(Color.customGray)
+          .fixedSize(horizontal: false, vertical: true)
+      }
+
+      Spacer(minLength: 0)
+    }
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .accessibilityElement(children: .combine)
+    .accessibilityIdentifier("quiz_last_result")
+  }
+
+  private var subjectLine: String {
+    [result.title, result.level?.localizedName, relativeDay].compactMap { $0 }.joined(separator: " · ")
+  }
+
+  private var resultLine: String {
+    var parts = [L.ResultsView.correct(result.correctCount, of: result.questionCount)]
+    if result.secondAttemptCount > 0 {
+      parts.append(L.ResultsView.secondTry(result.secondAttemptCount))
+    }
+    parts.append(L.QuizView.score(result.score))
+    return parts.joined(separator: " · ")
+  }
+
+  private var relativeDay: String? {
+    guard let days = PracticeRecord.daysBetween(result.date, and: .now) else {
+      return nil
+    }
+    let formatter = RelativeDateTimeFormatter()
+    formatter.dateTimeStyle = .named
+    formatter.unitsStyle = .full
+    // The app's language, which can differ from the region's.
+    formatter.locale = Locale(identifier: Bundle.main.preferredLocalizations.first ?? "en")
+    // A clock set back would otherwise make the last quiz tomorrow's.
+    return formatter.localizedString(from: DateComponents(day: -max(days, 0)))
   }
 }
 

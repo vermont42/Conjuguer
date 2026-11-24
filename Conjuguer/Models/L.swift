@@ -533,8 +533,40 @@ enum L {
       String(localized: "QuizView.briefing")
     }
 
-    static var questionCount: String {
-      String(localized: "QuizView.questionCount")
+    static var questionsLabel: String {
+      String(localized: "QuizView.questionsLabel")
+    }
+
+    static var sessionMinutes: String {
+      String(localized: "QuizView.sessionMinutes")
+    }
+
+    static var minutesLabel: String {
+      String(localized: "QuizView.minutesLabel")
+    }
+
+    static var sessionLength: String {
+      String(localized: "QuizView.sessionLength")
+    }
+
+    static var levelLabel: String {
+      String(localized: "QuizView.levelLabel")
+    }
+
+    static var levelMenuHint: String {
+      String(localized: "QuizView.levelMenuHint")
+    }
+
+    static var lastQuiz: String {
+      String(localized: "QuizView.lastQuiz")
+    }
+
+    static var viewLeaderboard: String {
+      String(localized: "QuizView.viewLeaderboard")
+    }
+
+    static var leaderboardHint: String {
+      String(localized: "QuizView.leaderboardHint")
     }
 
     static func score(_ value: Int) -> String {

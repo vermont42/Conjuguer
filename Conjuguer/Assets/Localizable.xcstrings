@@ -313,13 +313,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This button erases your practice record, which remembers how your quiz answers went and when each conjugation is next due for review. The record stays on this device and is never sent. Your starred and recent verbs stay too."
+            "value" : "This button erases your practice record, which remembers how your quiz answers went, when each conjugation is next due for review, and your last quiz’s results. The record stays on this device and is never sent. Your starred and recent verbs stay too."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ce bouton efface votre suivi des exercices, qui retient le résultat de vos réponses aux quiz et le jour où chaque conjugaison revient en révision. Ce suivi reste sur cet appareil et n’est jamais envoyé. Vos verbes favoris et récents restent aussi."
+            "value" : "Ce bouton efface votre suivi des exercices, qui retient le résultat de vos réponses aux quiz, le jour où chaque conjugaison revient en révision et le résultat de votre dernier quiz. Ce suivi reste sur cet appareil et n’est jamais envoyé. Vos verbes favoris et récents restent aussi."
           }
         }
       }
@@ -347,13 +347,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Every review the app has scheduled will be forgotten. This cannot be undone."
+            "value" : "Every review the app has scheduled, and your last quiz’s results, will be forgotten. This cannot be undone."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toutes les révisions prévues seront oubliées. Cette action est irréversible."
+            "value" : "Toutes les révisions prévues et le résultat de votre dernier quiz seront oubliés. Cette action est irréversible."
           }
         }
       }
@@ -4497,13 +4497,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Take ten-question quizzes, earn points, and compete with learners at your level on Game Center. Choose a level from Beginner to Advanced. Each level adds tenses to the one before, and Advanced includes those rarely seen outside formal or literary writing."
+            "value" : "A quiz is ten questions, two or three minutes, with ten more whenever you like. A wrong answer stays on screen with its correction, and a missed question comes back later. The app remembers on your device what you practice and brings each conjugation back for review when it is due. Choose a level from Beginner to Advanced. Each level adds tenses to the one before, and Advanced includes those rarely seen outside formal or literary writing."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Faites des quiz de dix questions, gagnez des points et affrontez les apprenants de votre niveau dans Game Center. Choisissez un niveau, de Débutant à Avancé. Chaque niveau ajoute des temps au précédent, et Avancé inclut ceux que l’on rencontre rarement en dehors de l’écrit formel ou littéraire."
+            "value" : "Un quiz compte dix questions et dure deux ou trois minutes, et dix autres suivent quand vous le voulez. Une réponse fausse reste à l’écran avec sa correction, et une question manquée revient plus tard. L’application retient sur votre appareil ce que vous travaillez et vous repropose chaque conjugaison quand vient le moment de la réviser. Choisissez un niveau, de Débutant à Avancé. Chaque niveau ajoute des temps au précédent, et Avancé inclut ceux que l’on rencontre rarement en dehors de l’écrit formel ou littéraire."
           }
         }
       }
@@ -4514,13 +4514,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Test Your Knowledge"
+            "value" : "Practice Conjugating"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Testez vos connaissances"
+            "value" : "Entraînez-vous à conjuguer"
           }
         }
       }
@@ -4599,13 +4599,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Take a Quiz"
+            "value" : "Start Practicing"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Faire un quiz"
+            "value" : "S’entraîner"
           }
         }
       }
@@ -5160,13 +5160,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Test your knowledge of French conjugation."
+            "value" : "Practice French conjugation. A wrong answer shows its correction, and a missed question comes back later."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Testez vos connaissances en conjugaison française."
+            "value" : "Entraînez-vous à la conjugaison française. Une réponse fausse affiche sa correction, et une question manquée revient plus tard."
           }
         }
       }
@@ -5392,19 +5392,155 @@
         }
       }
     },
-    "QuizView.questionCount" : {
+    "QuizView.questionsLabel" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "10 questions"
+            "value" : "Questions"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "10 questions"
+            "value" : "Questions"
+          }
+        }
+      }
+    },
+    "QuizView.sessionMinutes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2–3"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2–3"
+          }
+        }
+      }
+    },
+    "QuizView.minutesLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minutes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minutes"
+          }
+        }
+      }
+    },
+    "QuizView.sessionLength" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Two to three minutes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deux à trois minutes"
+          }
+        }
+      }
+    },
+    "QuizView.levelLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Level"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveau"
+          }
+        }
+      }
+    },
+    "QuizView.levelMenuHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changes the quiz level"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change le niveau du quiz"
+          }
+        }
+      }
+    },
+    "QuizView.lastQuiz" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last Quiz"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dernier quiz"
+          }
+        }
+      }
+    },
+    "QuizView.viewLeaderboard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View Leaderboard"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voir le classement"
+          }
+        }
+      }
+    },
+    "QuizView.leaderboardHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the Game Center leaderboard for your level"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre le classement Game Center de votre niveau"
           }
         }
       }
@@ -5598,7 +5734,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Correcte : %lld / %lld"
+            "value" : "Bonnes réponses : %lld / %lld"
           }
         }
       }
@@ -5615,7 +5751,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Correcte :"
+            "value" : "Bonne réponse :"
           }
         }
       }
@@ -6013,13 +6149,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Test your knowledge of French verb conjugations with a ten-question quiz."
+            "value" : "Practice French verb conjugations ten questions at a time. What you miss comes back for review."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Testez vos connaissances des conjugaisons des verbes français avec un quiz de dix questions."
+            "value" : "Entraînez-vous à conjuguer les verbes français, dix questions à la fois. Ce que vous manquez revient en révision."
           }
         }
       }

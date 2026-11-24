@@ -43,6 +43,7 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `results_second_try` | "Second Try: N" in `QuizResultsView` | Present only when a second attempt was right. |
 | `results_asked_again` | "Asked Again: N / M" in `QuizResultsView` | Present only when a question was asked again. |
 | `results_time` | "Time: 0:49" in `QuizResultsView` | Present only with the Quiz Clock set to Show. |
+| `results_level` | "Level: Intermediate" in `QuizResultsView` | Absent after Review and Practice My Mistakes, which ask by no level. |
 | `results_ten_more` | Ten More in `QuizResultsView` | Absent after Test Me's three questions. `tap_id.sh` works on the iPhone; on the iPad Pro 11 tap ≈ `419,616`. The quiz resumes with the keyboard up. |
 | `quiz_asked_again` | The "Asked Again" capsule above a re-asked question's verb | A missed question returns three questions later, or before the results. |
 | `quiz_correction_will_be_asked_again` | "This question will come up again." in a held correction | Absent from a re-ask's own correction. |
@@ -71,7 +72,7 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `verb_star_button` | Star button in `VerbView`'s navigation bar | AXe cannot see navigation-bar buttons on iOS 26; tap it by position, between Done (in a sheet) and Share, and confirm by screenshot (a filled star). |
 | `verb_test_button` | Test Me (clipboard) button in `VerbView`'s navigation bar | First in the bar, before the star; absent on the six verbs with only an infinitif. Invisible to AXe like the star: tap by position (≈ `250,100` in a sheet on the iPhone 17, ≈ `691,54` pushed on the iPad Pro 11) and confirm by the sheet's "1 / 3". The sheet's Quit is found by `tap_label.sh Quit`; its results' Done at ≈ `352,110` on the iPhone. |
 | `quiz_start_button` | Start `Button` in the Quiz tab's briefing card | Starts the scope chosen in `quiz_scope_picker`. |
-| `quiz_scope_picker` | All Verbs / My Verbs / Custom segmented `Picker` in the Quiz tab's briefing card | 3 segments; tap by frame (Custom ≈ `314,524` on the iPhone 17 with no best score showing). Not stored across launches. |
+| `quiz_scope_picker` | All Verbs / My Verbs / Custom segmented `Picker` in the Quiz tab's briefing card | 3 segments; tap by frame from `describe_ui`, since the briefing's length moves it. Not stored across launches. |
 | `custom_quiz_summary` | The custom quiz's Tenses and Verbs summary, one element | Present under the picker with Custom chosen and something chosen. |
 | `custom_quiz_note` | The line under the summary | Says what to choose, that Start asks ten questions, or why Start is disabled (no verb has the tenses; My Verbs is empty). |
 | `custom_quiz_choose_button` | Choose / Change, which pushes `CustomQuizEditor` | `tap_id.sh` works. Back is the editor's top-left button (≈ `37,83` on the iPhone 17). |
@@ -79,6 +80,9 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `custom_quiz_verbs_by_level`, `custom_quiz_verbs_<key>` | The editor's verb-set rows | Keys `top100`, `top300`, `top1000`, `all`, `myVerbs`, `etre`, `irregularFutur`, `pronominal`. Scroll down to reach them. |
 | `custom_quiz_verbs_models` | The editor's Models row | Pushes `CustomQuizModelList`, whose rows are `custom_quiz_model-<id>` (`custom_quiz_model-1-3A`); a tap chooses the model and returns to the editor. |
 | `quiz_review_button`, `quiz_mistakes_button` | Review and Practice My Mistakes on the Quiz tab's From Your Practice card | Present while the session has questions; `tap_id.sh` starts it at once. On the iPad tap by frame (Review ≈ `420,813` on the iPad Pro 11). Empty, they are `quiz_review_empty` and `quiz_mistakes_empty`, whose labels say why. The card's heading is `quiz_record_sessions`. |
+| `quiz_level_menu` | The level tile on the Quiz tab's briefing card, a menu of the four levels | Shown for All Verbs and My Verbs. `tap_id.sh` opens it; tap a level by coordinate (on the iPhone 17 with the card scrolled to its tiles, Intermediate ≈ `238,360`). It writes the same setting as Settings. |
+| `quiz_last_result` | The Last Quiz row on the From Your Practice card, one element | Absent until a quiz has shown its results. Finish a My Mistakes session for a quick one. |
+| `quiz_best_score`, `quiz_leaderboard_button` | The best score and View Leaderboard at the foot of the Quiz tab | Scroll down. The button shows only while signed in to Game Center; the simulator's `GameCenterSpy` signs in when the tab appears, so it shows there. |
 | `quiz_my_verbs_note` | The line under `quiz_scope_picker` with My Verbs chosen | "Questions about N verbs in My Verbs", or how to add some; `quiz_start_button` is then disabled (`enabled: false` in `describe_ui`). |
 | `recent_verbs_heading` | "Recent" heading over the recents in the empty focused search field | Present only when something has been opened. |
 | `my_verbs_list` | The My Verbs `List` (third segment of `verb_browse_sort`) | Tap the picker's third segment by frame (`x + width*5/6`). Rows keep `verb_row_<infinitif>`. Swipe a row left with `axe swipe --duration 0.4` at its `describe_ui` frame to show Delete. |
@@ -90,7 +94,7 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `review_card_conjugations` | The card's revealed key conjugations | Tapping it opens the verb's page with `source` `reviewCard`. |
 | `review_card_dismiss` | The card's ✕ | Before a reveal, snoozes the verb to the next day. |
 | `picker_settings_reviewCardSuppression` | Suppress Review Card segmented `Picker` in `SettingsView` | 2 segments (Off, On). |
-| `button_settings_resetPractice` | Reset Practice in `SettingsView`'s Practice Record card | Shown only while the practice record holds anything; opens a confirmation alert whose destructive button erases the record. |
+| `button_settings_resetPractice` | Reset Practice in `SettingsView`'s Practice Record card | Shown only while the practice record or the last quiz's result holds anything; opens a confirmation alert whose destructive button erases both. |
 | `model_verb_order` | Alphabetical/Frequency `Picker` above a model page's verbs | 2 segments; the verbs stay one `Text` of links, so tap a verb at its coordinates. |
 | `collection_row_<key>` | A featured collection's row (iPhone) or card (iPad) atop the Models tab | Keys `top100`, `etre`, `irregularFutur`, `pronominal`. Hidden while the search field has text. |
 | `collection_progress` | "3 of 100 looked up" in a `VerbCollectionBar`, on a collection's page or a model's verbs card | Read it before and after opening a verb to see the count rise. |

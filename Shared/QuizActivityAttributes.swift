@@ -10,6 +10,7 @@ import Foundation
 
 // Live Activity payload for an in-progress quiz (Lock Screen + Dynamic Island).
 nonisolated struct QuizActivityAttributes: ActivityAttributes {
+  /// The quiz's level, or the name of a Review or My Mistakes session, which asks by none.
   let level: String
 
   struct ContentState: Codable, Hashable, Sendable {

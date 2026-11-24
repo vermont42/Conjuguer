@@ -25,6 +25,7 @@ enum VerbCollection: Hashable, Identifiable {
   static let envoyerModelID = "1-8"
   static let shareSampleCount = 6
   private static let modelAnalyticsValue = "model"
+  private static let modelKeyPrefix = "model-"
 
   @MainActor private static var verbsCache: [VerbCollection: [Verb]] = [:]
 
@@ -44,7 +45,7 @@ enum VerbCollection: Hashable, Identifiable {
     case .pronominal:
       return "pronominal"
     case .model(let id):
-      return "model-\(id)"
+      return Self.modelKeyPrefix + id
     }
   }
 
@@ -64,6 +65,17 @@ enum VerbCollection: Hashable, Identifiable {
       return Self.modelAnalyticsValue
     }
     return key
+  }
+
+  /// Any collection's `key`, a model's included.
+  init?(key: String) {
+    if let featured = Self(featuredKey: key) {
+      self = featured
+    } else if key.hasPrefix(Self.modelKeyPrefix), VerbModel.models[String(key.dropFirst(Self.modelKeyPrefix.count))] != nil {
+      self = .model(String(key.dropFirst(Self.modelKeyPrefix.count)))
+    } else {
+      return nil
+    }
   }
 
   var isFeatured: Bool {

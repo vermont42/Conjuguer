@@ -36,7 +36,7 @@ Josh has not yet tried is "Awaiting Josh", with the Commit cell empty until it i
 | 10 | Done | 2026-11-23 | 33da4be | T2.9, Decision 8 | 10 |
 | 11 | Done | 2026-11-23 | 915be1c | T3.3 (the record), T3.4, T3.5, T6.4 | 11 |
 | 12 | Done | 2026-11-23 | 2bc523b | T3.2, T3.3 (the session) | 12 |
-| 13 | Not started | | | T6.1, T6.6 (the leaderboard's place) | 13 |
+| 13 | Awaiting Josh | 2026-11-23 | | T6.1, T6.6 (the leaderboard's place) | 13 |
 | 14 | Not started | | | T4.2, T4.3 | 14 |
 | 15 | Not started | | | T5.1 | 15 |
 | 16 | Not started | | | T5.2 | 16 |
@@ -1543,7 +1543,7 @@ empty states.
 ## Phase 13: The Practice Hub
 
 **Suggestions:** T6.1, T6.6 (the leaderboard's place). **Ports:** Konjugieren Phase 13
-(`LastQuizResult.swift`). **Depends on:** Phases 7, 8, 11, and 12. **Status:** Not started.
+(`LastQuizResult.swift`). **Depends on:** Phases 7, 8, 11, and 12. **Status:** Awaiting Josh.
 
 Turn the Quiz tab into a practice hub: what a session is, how long it takes, the current level,
 what is due for review, and the last result. Today's briefing card (a symbol, a paragraph, the
@@ -1562,6 +1562,82 @@ added.
 both languages, and the leaderboard is one tap away but not in the way.
 
 **How it differed:**
+
+- **Josh has not judged the hub yet**, which the phase asks for before polishing. Everything below
+  was decided in the session, mostly by carrying Konjugieren's choices over, and each is a guess he
+  can overrule.
+- **The layout.** Conjuguer's briefing card stays a card, reordered so that what a session is comes
+  before Start: the symbol, a rewritten line ("Practice French conjugation. A wrong answer shows
+  its correction, and a missed question comes back later." / "Entraînez-vous à la conjugaison
+  française. Une réponse fausse affiche sa correction, et une question manquée revient plus
+  tard."), the picker, three tiles for All Verbs and My Verbs ("10 Questions", "2–3 Minutes", and
+  the level), Custom's summary in their place, and Start. Konjugieren's tiles were ported in
+  Conjuguer's blue; its big scope symbol and verb chips were not, as browse had decided. Then From
+  Your Practice with a new **Last Quiz** row, and at the foot the best score and a small bordered
+  **View Leaderboard**. On the iPhone 17, Review sits above the fold and My Mistakes is nearly
+  whole, as before.
+- **The minutes** are a fixed estimate, as in Konjugieren: no timing is kept, and showing the
+  learner's times would undo the hidden clock. VoiceOver reads "Two to three minutes".
+- **The level tile is a menu**, as in Konjugieren, writing the same setting as Settings and sending
+  nothing. It also invalidates `ChangeLevelTip`, whose suggestion it carries out.
+- **The best score moved to the foot**, beside the leaderboard, out of the briefing's facts, and
+  now shows whatever the segment, since it is no longer part of what Start will do. Konjugieren's
+  hub had dropped its best score; Conjuguer's briefing had one, and the foot keeps it.
+- **The last result** (`LastQuizResult`, kept by `PracticeStore` as JSON under `lastQuizResult` in
+  the App Group) is written at each round's results, so after Ten More it is the session so far,
+  by every scope, Test Me's three questions included; a quit writes nothing. It keeps a kind and a
+  verb's `dictionaryKey` or a collection's key, so it reads in the current language and tells
+  sortir's two entries apart. Review and My Mistakes keep no level. "Practice My Mistakes · today",
+  then "Correct: 0 / 3 · Score: 0"; the date is a `RelativeDateTimeFormatter` in the app's
+  language. Reset Practice forgets it; the Practice Record card now shows while either exists
+  (`hasAnythingToReset`), and its description and alert say so. `VerbCollection(key:)` is new, for
+  a model's collection as well as the featured four.
+- **The leaderboard (T6.6).** Closing a default quiz's results no longer opens it. The hub's button
+  shows only while signed in to Game Center, opens the current level's board, and sends the new
+  `tapViewLeaderboard` with `source` `tab` (Konjugieren already had the signal; Conjuguer had
+  none). `GameCenter` is not observable, so the tab keeps its own `isSignedInToGameCenter`, set on
+  appearing and from `authenticate`'s completion.
+- **Onboarding and tip.** The quiz page is "Practice Conjugating" / "Entraînez-vous à conjuguer",
+  with a clipboard symbol in place of the trophy and "Start Practicing" / "S’entraîner". Its body
+  describes ten questions in two or three minutes, the correction that stays, the re-ask, and
+  review from a record on the device, and no longer mentions points or Game Center. `TryQuizTip`
+  keeps its title and says "Practice French verb conjugations ten questions at a time. What you
+  miss comes back for review." The unused "10 questions" string is gone. Nineteen strings in all,
+  nine of them new.
+- **Analytics and privacy.** `tapViewLeaderboard` and the kept last result are staged in
+  [`docs/privacy_policy_pending.md`](../docs/privacy_policy_pending.md) in both languages.
+- **VoiceOver.** No new quiz state. Each tile is one element, the minutes with their spoken label,
+  the level with a hint ("Changes the quiz level"); the Last Quiz row is one element; the
+  leaderboard button has a hint.
+- **Tests:** 718 to 734, all passing through `run_tests.sh` (the iPhone simulator is in English).
+  `QuizHubTests` (10 functions: the stored form pinned, a round trip, unreadable JSON, an absent
+  level, each scope's kind, titles of a verb, a doubled verb, and collections, every collection
+  found by its key, the store across a launch, a result alone giving Reset something to erase, and
+  Reset forgetting it) and six nested in `QuizTests` (a finished quiz with its injected date, Ten
+  More's session so far, a quit keeping nothing, My Mistakes keeping no level, a verb page naming
+  its verb, a collection naming its key).
+- **Verified on the iPhone 17**, light. In English: the hub, a real My Mistakes session of three
+  wrong answers whose results closed onto the hub with "Practice My Mistakes · today, Correct:
+  0 / 3 · Score: 0" and no leaderboard, the View Leaderboard button (the simulator's spy signs in),
+  and the level menu, from which Intermediate was chosen. In French: the hub with "Intermédiaire"
+  shrunk to fit its tile, "Dernier quiz", "Voir le classement", and the onboarding page, whose
+  trophy then became a clipboard (rebuilt, not seen again on the iPhone). **On the iPad Pro 11**
+  in English and dark: the hub at full width, before and after a My Mistakes session, with the Last
+  Quiz row. Not tried: VoiceOver by ear, the real Game Center sheet, the best score at the foot
+  (no level has one on these simulators), and Ten More's result on screen (unit-tested).
+- **For Josh to judge:** the hub as a whole; the briefing's new line; "2–3 Minutes"; the best score
+  at the foot; "S’entraîner" for "Start Practicing"; and whether the leaderboard button should show
+  for every segment, as it does, or only for All Verbs.
+- **Two older faults, fixed at Josh's request (2026-11-23).** The French results read "Correcte :
+  0 / 3", an adjective agreeing with nothing, and each row's correct answer "Correcte : vaincra".
+  They are now "Bonnes réponses : 0 / 3" and "Bonne réponse : vaincra", which the Last Quiz row
+  shares. And a Review or My Mistakes session's results named the level, though the session asks by
+  none: `QuizScope.asksByLevel` now hides that line (`results_level`), keeps the last result's
+  level nil, and makes the session's Live Activity show its name ("Practice My Mistakes") where a
+  quiz shows its level. Tests 734 to 736 (`onlyARecordSessionAsksByNoLevel`, and
+  `aRecordSessionsLiveActivityNamesTheSession`, for which `LiveActivitiesSpy` now records
+  `lastAttributes`). Seen on the iPhone 17 in French: a My Mistakes session's results with
+  "Bonnes réponses : 0 / 3", no level, and "Bonne réponse :" on each row.
 
 ## Phase 14: Naming the Error
 

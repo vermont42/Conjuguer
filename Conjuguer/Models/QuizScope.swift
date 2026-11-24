@@ -41,6 +41,12 @@ struct QuizScope {
     verbs == nil && custom == nil && recordSession == nil
   }
 
+  /// Review and My Mistakes ask whatever the record holds, beyond the level's tenses and band, so
+  /// their results name no level.
+  var asksByLevel: Bool {
+    recordSession == nil
+  }
+
   /// A Review or My Mistakes session shorter than ten is as long as the learner's due or missed
   /// items, so its signals carry neither the questions asked nor the question reached: either
   /// would tell how many answers were wrong.

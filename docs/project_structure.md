@@ -82,6 +82,7 @@ Conjuguer/
 │   ├── Info.swift              # Info article model, the static article list, and InfoCategory (about/concepts/tenses)
 │   ├── KeyConjugations.swift   # Verb.keyConjugations() (the il présent, passé composé, and futur, unlabeled), citationInfinitif (se souvenir), and the share text
 │   ├── L.swift                 # Type-safe localization accessors, nested by feature
+│   ├── LastQuizResult.swift    # The last quiz's results for the Quiz tab, kept beside the practice record: a kind and a verb or collection key rather than a title, the level, the counts, the score, and the date
 │   ├── LearnerVerbStore.swift  # @Observable Current.learnerVerbs: records opens and stars in LearnerVerbs, saves each change to the App Group's defaults, and answers in verbs (recent, starred, My Verbs)
 │   ├── LanguageModelService.swift      # Protocol for the on-device tutor, plus TutorMessage and unavailability/error enums
 │   ├── LanguageModelServiceDummy.swift # No-op double for tests
@@ -98,7 +99,7 @@ Conjuguer/
 │   ├── CustomQuiz.swift        # The custom quiz: chosen tenses and a QuizVerbSet (a band, every verb, My Verbs, a collection or model), its stored form, QuizScope.custom
 │   ├── QuizDraw.swift          # The verbs of an unlisted quiz (the default, or a custom quiz over a band) from a band: half irregular, two core verbs, one to three rare derivatives; QuizVerbPool (a tense's kinds of verb, read from the data) and QuizVerbTraits
 │   ├── PracticeItemMapping.swift # Which practice item a question exercises: a regular family's pattern (parler's, finir's, rendre's, or a spelling-change model's where it marks the cell) or an irregular verb's key conjugation by stem; a lookup's items
-│   ├── PracticeStore.swift     # @Observable Current.practice: records answers and lookups in the PracticeRecord, saves it to the App Group's defaults, migrates the review card's old per-verb schedules, offers the review card, and resets
+│   ├── PracticeStore.swift     # @Observable Current.practice: records answers and lookups in the PracticeRecord, saves it to the App Group's defaults, migrates the review card's old per-verb schedules, offers the review card, keeps the last quiz's results, and resets
 │   ├── PracticeSet.swift       # A custom quiz shared as a quiz/set link or QR code: reading and writing the link, the level carried only when needed, My Verbs as a list of 50, its scope, summary, share text, and PracticeSetRequest
 │   ├── QuizDueItems.swift      # Up to three due practice items mixed into a default round, within its level's tenses and band; QuizDraw.patternVerb, a verb that shares a pattern
 │   ├── QuizRecordSession.swift # Review and Practice My Mistakes: sessions drawn from the practice record beyond the level's tenses and band, a verb's key conjugations together, QuizScope.recordSession
@@ -310,6 +311,7 @@ ConjuguerTests/
     ├── ReviewScheduleTests.swift       # The review ladder: starts, reviews, snoozes, a new item's first answer, a right answer climbing only when due, a wrong one starting over
     ├── PracticeItemTests.swift         # The practice items: pinned and unreadable keys, which verbs are patterns, spelling-change cells, compound tenses with être, every tense's stem, doubled entries, lookups, the shown stems, items asking their own cell back
     ├── PracticeRecordTests.swift       # The practice record: the ladder through answers, due order, lookups, the card's review, snooze, choice, and caption, patterns and passé simple never on the card, a relaunch, the migration, a reset that stays
+    ├── QuizHubTests.swift              # The Quiz tab's last result: its stored form, each scope's kind, titles, collection keys, the store and Reset; nested in QuizTests, a finished, continued, quit, record-session, verb-page, and collection quiz
     ├── QuizPracticeTests.swift         # Nested in QuizTests: answers kept on quit, every scope writing, due items within the level and band, at most three a round, none in a scoped quiz
     ├── QuizRecordSessionTests.swift    # Review and My Mistakes: missed items, days to the next due item, beyond the level, a pattern no band verb has, key conjugations together, exclusions and the limit; nested in QuizTests, rounds, Ten More, empty records, and signals without counts
     ├── RichTextTests.swift             # Rich-text markup parsing into blocks and segments
