@@ -36,12 +36,31 @@ struct MainTabView: View {
       }
     }
     .tabViewStyle(.sidebarAdaptable)
-    .sheet(item: $world.practiceSet) { request in
+    .sheet(item: $world.routedSheet) { sheet in
+      routedPage(sheet.page)
+    }
+    .recordsAppearance(as: "\(MainTabView.self)")
+  }
+
+  @ViewBuilder
+  private func routedPage(_ page: RoutedSheet.Page) -> some View {
+    switch page {
+    case .verb(let destination):
+      VerbView(verb: destination.verb, source: destination.source, marks: destination.marks)
+        .sheetDismissable()
+    case .model(let model):
+      ModelView(model: model)
+        .sheetDismissable()
+    case .collection(let destination):
+      VerbCollectionView(destination: destination)
+        .sheetDismissable()
+    case .article(let info):
+      ArticleSheet(info: info)
+    case .practiceSet(let request):
       PracticeSetView(request: request)
         .sheetDismissable()
         .presentationSizing(.page)
     }
-    .recordsAppearance(as: "\(MainTabView.self)")
   }
 }
 

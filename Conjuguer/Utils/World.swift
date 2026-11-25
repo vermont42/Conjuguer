@@ -35,17 +35,9 @@ class World {
   var practice: PracticeStore
   var liveActivities: LiveActivities
   var reminderScheduler: ReminderScheduler
-  var verb: Verb?
-  // How `verb` was reached, for its page's `viewAppeared`: a link's `source` item, else `deeplink`.
-  var verbSource: AnalyticsSource = .deeplink
-  // The cells a link's `match` item names on `verb`'s page.
-  var verbMarks: MarkedConjugations?
-  var verbModel: VerbModel?
-  // A featured collection that a `list/` link opens over the Models tab.
-  var collection: VerbCollectionDestination?
-  var info: Info?
-  // A `quiz/set` link's practice set, shown over whatever tab is open.
-  var practiceSet: PracticeSetRequest?
+  // The page a link shows over the tabs: a verb's, a model's, a collection's, an article, or a
+  // practice set. MainTabView presents it, and nothing else presents what a link opens.
+  var routedSheet: RoutedSheet?
   // A `quiz/daily` link's session, which the Quiz tab starts unless a quiz is under way.
   var dailySessionRequest: DailySessionRequest?
   // A `quiz/challenge` link's challenge, from a shared result or the quiz widget, which the Quiz
@@ -225,40 +217,22 @@ class World {
     handle(link)
   }
 
-  /// A link inside an Info article, which opens what it names without closing anything or
-  /// switching tabs.
-  func handleInApp(_ link: Deeplink) {
-    guard let destination = resolve(link) else {
-      return
-    }
-    assign(destination)
-  }
-
   /// What a link opens, looked up. Nil when it names nothing that exists.
   private enum Destination {
-    case verb(Verb, source: AnalyticsSource, marks: MarkedConjugations?)
+    case sheet(RoutedSheet.Page)
     case search(SearchRequest)
-    case model(VerbModel)
-    case collection(VerbCollectionDestination)
-    case info(Info)
-    case practiceSet(PracticeSetRequest)
     case dailySession(DailySessionRequest)
     case challenge(DailyChallengeRequest)
     case startQuiz(source: AnalyticsSource)
 
-    /// The tab the destination shows over. A practice set shows over whatever tab is open.
     var tab: MainTab? {
       switch self {
-      case .verb, .search:
+      case .sheet(let page):
+        return page.tab
+      case .search:
         return .verbs
-      case .model, .collection:
-        return .models
-      case .info:
-        return .info
       case .dailySession, .challenge, .startQuiz:
         return .quiz
-      case .practiceSet:
-        return nil
       }
     }
   }
@@ -274,18 +248,18 @@ class World {
         found = VerbDraw.randomVerb(myVerbs: learnerVerbs.myVerbs)
       }
       return found.map { verb in
-        .verb(verb, source: source, marks: match.flatMap { MarkedConjugations(text: $0, on: verb) })
+        .sheet(.verb(VerbDestination(verb: verb, source: source, marks: match.flatMap { MarkedConjugations(text: $0, on: verb) })))
       }
     case let .search(text, source):
       return .search(SearchRequest(text: text ?? "", source: source))
     case .model(let id, _):
-      return VerbModel.models[id].map(Destination.model)
+      return VerbModel.models[id].map { .sheet(.model($0)) }
     case let .list(key, source):
-      return VerbCollection(featuredKey: key).map { .collection(VerbCollectionDestination(collection: $0, source: source)) }
+      return VerbCollection(featuredKey: key).map { .sheet(.collection(VerbCollectionDestination(collection: $0, source: source))) }
     case .info(let target):
-      return Info.info(deeplinkTarget: target).map(Destination.info)
+      return Info.info(deeplinkTarget: target).map { .sheet(.article($0)) }
     case let .practiceSet(custom, level, source):
-      return .practiceSet(PracticeSetRequest(practiceSet: PracticeSet(linked: custom, level: level), source: source))
+      return .sheet(.practiceSet(PracticeSetRequest(practiceSet: PracticeSet(linked: custom, level: level), source: source)))
     case .dailySession(let source):
       return .dailySession(DailySessionRequest(source: source))
     case let .challenge(day, level, source):
@@ -298,28 +272,11 @@ class World {
 
   private func show(_ destination: Destination) {
     clearDeeplinkTargets()
-    assign(destination)
-    if let tab = destination.tab {
-      selectedTab = tab
-    }
-  }
-
-  private func assign(_ destination: Destination) {
     switch destination {
-    case let .verb(found, source, marks):
-      verbSource = source
-      verbMarks = marks
-      verb = found
+    case .sheet(let page):
+      routedSheet = RoutedSheet(page: page)
     case .search(let request):
       searchRequest = request
-    case .model(let model):
-      verbModel = model
-    case .collection(let destination):
-      collection = destination
-    case .info(let found):
-      info = found
-    case .practiceSet(let request):
-      practiceSet = request
     case .dailySession(let request):
       dailySessionRequest = request
     case .challenge(let request):
@@ -329,16 +286,14 @@ class World {
         quiz.start(scope: .allVerbs(source: source))
       }
     }
+    if let tab = destination.tab {
+      selectedTab = tab
+    }
   }
 
   private func clearDeeplinkTargets() {
-    verb = nil
-    verbMarks = nil
-    verbModel = nil
-    collection = nil
-    info = nil
+    routedSheet = nil
     searchRequest = nil
-    practiceSet = nil
     dailySessionRequest = nil
     challengeRequest = nil
   }

@@ -76,8 +76,8 @@ extension View {
     modifier(ScrollFade())
   }
 
-  func sheetDismissable() -> some View {
-    modifier(SheetDismissable())
+  func sheetDismissable(pushesTenseArticles: Bool = false) -> some View {
+    modifier(SheetDismissable(pushesTenseArticles: pushesTenseArticles))
   }
 
   func screenBackground() -> some View {
@@ -149,6 +149,7 @@ private struct ScreenBackground: ViewModifier {
 /// A sheet's own navigation stack, so that a verb page or a model page in the sheet pushes the
 /// pages it leads to rather than stacking a sheet on the sheet.
 private struct SheetDismissable: ViewModifier {
+  let pushesTenseArticles: Bool
   @Environment(\.dismiss) private var dismiss
   @State private var path = NavigationPath()
 
@@ -162,7 +163,7 @@ private struct SheetDismissable: ViewModifier {
             }
           }
         }
-        .verbPageNavigation(path: $path) {
+        .verbPageNavigation(path: $path, pushesTenseArticles: pushesTenseArticles) {
           dismiss()
         }
     }

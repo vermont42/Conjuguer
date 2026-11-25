@@ -166,7 +166,8 @@ The page orders its cards by frequency, names each tense twice, and gives each t
 |------|---------|
 | `Models/TenseTable.swift` | `TenseTable`, the page's cards in order, and on `Tense` the card that shows it (`table`), its article (`articleKey`, `article`), and its second name |
 | `Utils/VerbConjugations.swift` | Builds each card's cells from `TenseTable` and notes whether the verb's own cells have red letters (`hasIrregularLetters`) |
-| `Views/VerbView.swift` | The page; `TenseHeading` (name, second name, article button), `MarkableConjugation`, and `TenseArticleSheet` |
+| `Views/VerbView.swift` | The page; `TenseHeading` (name, second name, article button) and `MarkableConjugation` |
+| `Views/ArticleSheet.swift` | An article in a sheet with a stack of its own, for a tense's heading, a model page's irregularities, and an `info/` link |
 | `Models/ConjuguerTips.swift` | `ScrollToBottomTip` |
 | `scripts/count_tenses.py` | The corpus count behind the order ([`tense_frequency.md`](tense_frequency.md)) |
 
@@ -192,11 +193,13 @@ each the name its learners' textbooks use (Josh, 2026-11-22). Nine French tenses
 alternate, and their catalog value is empty, so no line shows. The personless card gives each of its
 three cells such a heading.
 
-**The article** opens in `TenseArticleSheet`, so closing it returns to the same verb. A link
+**The article** opens in an `ArticleSheet`, so closing it returns to the same verb. A link
 inside to another article or to a verb pushes it inside the sheet, and a verb page there pushes
-its own articles rather than presenting another sheet (the `tenseArticleOpener` environment
-value). `InfoView` takes an optional `openLink` for this, which receives a `Deeplink`; without
-one, its links go to `World.handleInApp`.
+its own articles rather than presenting another sheet. Each stack says which it does through
+`verbPageNavigation`'s `pushesTenseArticles`, which the Info tab and an article sheet set and
+every other stack clears, so a sheet presented from inside an article sheet, such as Test Me's,
+does not inherit it. `InfoView` reads its links as `InfoView.LinkTarget` values (an article or a
+verb) and pushes them through `verbPagePush`.
 
 ### The Compound Block
 
@@ -225,7 +228,7 @@ The verb page leads to related verbs, and the model page can list its verbs by f
 |------|---------|
 | `Models/RelatedVerbs.swift` | `VerbBase` (a verb's base and root), `RelatedVerbs`, and `Verb.related`, cached per entry |
 | `Views/RelatedVerbsView.swift` | The card at the bottom of the verb page, `RelatedVerbListView` (every verb built on a root), and `FlowLayout` |
-| `Views/VerbPageNavigation.swift` | `VerbPagePush`, `ModelDestination`, `RelatedVerbListDestination`, and `verbPageNavigation(path:done:)` |
+| `Views/VerbPageNavigation.swift` | `VerbPagePush`, `ModelDestination`, `RelatedVerbListDestination`, and `verbPageNavigation(path:pushesTenseArticles:done:)` |
 
 ### Finding a Base
 
@@ -268,9 +271,10 @@ and the button trait, one element each, read in French, as `docs/voiceover.md` a
 ### Navigation
 
 `VerbPagePush` is an environment action that each stack injects through `verbPageNavigation`: the
-Verbs tab, the Models tab, every `.sheetDismissable()` sheet, and `TenseArticleSheet`. All four
-hold a `NavigationPath` and register destinations for `VerbDestination`, `ModelDestination`, and
-`RelatedVerbListDestination`. In a sheet, each pushed page gets the Done button too. Josh chose
+Verbs tab, the Models tab, the Info tab, the Quiz tab, and every `.sheetDismissable()` sheet,
+`ArticleSheet` among them. Each holds a `NavigationPath` and registers destinations for
+`VerbDestination`, `ModelDestination`, `RelatedVerbListDestination`, `VerbCollectionDestination`,
+and `Info`. In a sheet, each pushed page gets the Done button too. Josh chose
 (2026-11-22) that the verb page's model row and a model page's verb links push as the chips do,
 so no sheet stacks on a sheet. A page with no `VerbPagePush` in its environment (a preview) falls
 back to a sheet.
@@ -529,8 +533,8 @@ same.
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
 a bare `Verb`, and the cells a search matched (`marks`). A link carries `source` as a query item
 (`conjuguer://verb/aller?source=widget`), because a widget or an intent can hand the app only a
-URL. `Deeplink(url:)` reads it, falling back to `deeplink`, and `World` stores it in
-`World.verbSource`, and the sheets that present `World.verb` pass it to `VerbView`. A model
+URL. `Deeplink(url:)` reads it, falling back to `deeplink`, and `World` stores it in the
+`VerbDestination` of the routed sheet, which passes it to `VerbView`. A model
 page passes `modelPage` itself. The link grammar (§ Deeplinks) keeps the item on every route.
 
 **The convention for new surfaces.** A change that adds a way to reach a verb page passes its
@@ -580,7 +584,7 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
 
 | Route | Target | Query items | Opens | Shipped |
 |---|---|---|---|---|
-| `verb` | A `Verb.verbs` key (`aller`; `ha%C3%AFr%20France` for one entry of a doubled infinitive), or `random` | `source`; `match`, a conjugation the page marks as it marks a search's match (`verb/aller?match=vais`) | The verb page as a sheet over the Verbs tab (or the Info tab, for an article's link), scrolled to the first marked cell. `random` draws from the 1,000 most frequent verbs, or from My Verbs one time in three (`VerbDraw`). An unknown verb does nothing; a `match` that fills no cell opens the page unmarked | Yes; `match` is unreleased |
+| `verb` | A `Verb.verbs` key (`aller`; `ha%C3%AFr%20France` for one entry of a doubled infinitive), or `random` | `source`; `match`, a conjugation the page marks as it marks a search's match (`verb/aller?match=vais`) | The verb page as a sheet over the Verbs tab, scrolled to the first marked cell. `random` draws from the 1,000 most frequent verbs, or from My Verbs one time in three (`VerbDraw`). An unknown verb does nothing; a `match` that fills no cell opens the page unmarked | Yes; `match` is unreleased |
 | `search` | None | `q`, the text; `source` | The verb list with its search field, any verb page closed. With text, the results show with the keyboard down; with none (or `q` empty), the field is cleared and focused for typing | No |
 | `model` | A model's identifier (`1-1`) | `source`, which a shared model sends as `sharedLink` and nothing reads yet | The model page as a sheet over the Models tab. An unknown model does nothing | Yes; `source` is unreleased |
 | `info` | A stable key (`futur_simple`), or a legacy position (`info/0`) | None | The article as a sheet over the Info tab. An unknown key or out-of-range position does nothing | Yes; keys are unreleased |
@@ -597,13 +601,14 @@ does ([Reverse Lookup](#reverse-lookup)). Look Up a Verb sends the row's own spe
 | File | Purpose |
 |------|---------|
 | `Deeplink.swift` | The grammar: one case per route, holding its targets as keys (`VerbTarget` is a key or `random`) and its query items as values. `init?(url:)` and `url` |
-| `World.swift` | `handleURL(_:)` parses a URL and hands it to `handle(_:)`, which resolves the link to a `Destination` (the verb, model, collection, article, or request it names) first. Only when it resolves does it clear `verb`, `verbMarks`, `verbModel`, `collection`, `info`, `searchRequest`, `practiceSet`, `dailySessionRequest`, and `challengeRequest`, assign the destination, and select its tab, so a link naming nothing closes nothing and drops nothing pending. `handleInApp(_:)` resolves and assigns without clearing or switching tabs, for links inside Info articles. `openSearch(text:source:)` shows a search destination, the same path the search route takes, and Command-F uses it too (`text` nil keeps the field's text) |
+| `World.swift` | `handleURL(_:)` parses a URL and hands it to `handle(_:)`, which resolves the link to a `Destination` (a page for the routed sheet, or a request) first. Only when it resolves does it clear `routedSheet`, `searchRequest`, `dailySessionRequest`, and `challengeRequest`, assign the destination, and select its tab, so a link naming nothing closes nothing and drops nothing pending. `openSearch(text:source:)` shows a search destination, the same path the search route takes, and Command-F uses it too (`text` nil keeps the field's text) |
 | `Info.swift` | `Info.info(deeplinkTarget:)` resolves a stable key or a legacy position |
 | `MatchedConjugation.swift` | `MarkedConjugations(text:on:)` reads a `match` item |
-| `VerbBrowseView.swift` | Consumes `searchRequest` on appear and on change, since a link can arrive before the tab first appears, and presents `verb` with `verbSource` and `verbMarks` |
-| `ModelBrowseView.swift`, `InfoBrowseView.swift` | Present `verbModel`, `collection`, and `info` as sheets; the Info tab also presents `verb`, for an article's verb link |
+| `RoutedSheet.swift` | `RoutedSheet`: what a link shows over the tabs (a verb's page, a model's, a collection's, an article, or a practice set) and the tab beneath it. Each value has its own identity, so a second link to the page already showing presents it afresh, scrolled to the new mark, with a new visit |
+| `MainTabView.swift` | Presents `World.routedSheet`, the one sheet a link opens. No tab presents one, so a tab left loaded off screen cannot present a second copy |
+| `VerbBrowseView.swift` | Consumes `searchRequest` on appear and on change, since a link can arrive before the tab first appears |
 | `ModelView.swift` | Intercepts its own `verb/` links (the verbs list, built by `VerbModel.verbsWithDeepLinks`) through an `OpenURLAction`, reads them with `Deeplink(url:)`, and pushes the verb |
-| `InfoView.swift` | Turns an article's links into `.info` or `.verb` values and hands them to `handleInApp(_:)`, or to the verb page's article sheet |
+| `InfoView.swift` | Reads an article's links as `LinkTarget` values, an article or a verb, and pushes them onto the stack that shows it: the Info tab's or an `ArticleSheet`'s |
 | `ConjuguerApp.swift` | Receives links through `.onOpenURL`; a Spotlight result through `.onContinueUserActivity(CSSearchableItemActionType)`, turned into a `verb/` link with `source` `spotlight`; and on each activation, a link that a control's or a shortcut's intent left in the shared defaults (`WidgetConstants.pendingDeeplinkKey`) |
 | `QuickActions.swift` | The Home Screen quick action, which hands its `search` link to `handleURL` |
 | `Intents/LookUpVerbIntent.swift` | `OpenLookupResultIntent` hands Look Up a Verb's link to `handleURL` |

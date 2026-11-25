@@ -50,7 +50,6 @@ struct VerbBrowseView: View {
 
   private func content(store: BrowseStore<Verb, VerbSort>) -> some View {
     @Bindable var store = store
-    @Bindable var world = world
 
     let listModeBinding = Binding<VerbListMode>(
       get: { listMode },
@@ -179,10 +178,6 @@ struct VerbBrowseView: View {
       }
     }
     .sensoryFeedback(.selection, trigger: listMode)
-    .sheet(item: $world.verb) { verb in
-      VerbView(verb: verb, source: world.verbSource, marks: world.verbMarks)
-        .sheetDismissable()
-    }
     .recordsAppearance(as: "\(VerbBrowseView.self)")
     .onAppear {
       world.reviewPrompter.promptableActionHappened()

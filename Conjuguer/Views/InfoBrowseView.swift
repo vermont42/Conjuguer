@@ -16,8 +16,6 @@ struct InfoBrowseView: View {
   private static let tutorRoute = "tutor"
 
   var body: some View {
-    @Bindable var world = world
-
     NavigationStack(path: $navigationPath) {
       ZStack {
         Color.customBackground
@@ -25,9 +23,7 @@ struct InfoBrowseView: View {
         infoCollection
       }
       .navigationTitle(L.Navigation.info)
-      .navigationDestination(for: Info.self) { info in
-        InfoView(info: info)
-      }
+      .verbPageNavigation(path: $navigationPath, pushesTenseArticles: true)
       .navigationDestination(for: String.self) { destination in
         if destination == Self.tutorRoute {
           TutorView()
@@ -43,14 +39,6 @@ struct InfoBrowseView: View {
       }
     }
     .screenBackground()
-    .sheet(item: $world.info) { info in
-      InfoView(info: info)
-        .sheetDismissable()
-    }
-    .sheet(item: $world.verb) { verb in
-      VerbView(verb: verb, source: world.verbSource, marks: world.verbMarks)
-        .sheetDismissable()
-    }
     .recordsAppearance(as: "\(InfoBrowseView.self)")
     .onAppear { world.languageModelService.refreshAvailability() }
   }

@@ -22,15 +22,9 @@ struct DeeplinkTests {
   // Swift Testing has no setUp; each serialized test clears the shared `Current` entities
   // first so a prior test's state can't leak in.
   private func resetCurrent() {
-    Current.verb = nil
-    Current.verbModel = nil
-    Current.collection = nil
-    Current.info = nil
+    Current.routedSheet = nil
     Current.pendingDeeplink = nil
-    Current.verbSource = .deeplink
-    Current.verbMarks = nil
     Current.searchRequest = nil
-    Current.practiceSet = nil
     Current.dailySessionRequest = nil
     Current.challengeRequest = nil
   }
@@ -43,40 +37,23 @@ struct DeeplinkTests {
     resetCurrent()
     Current.selectedTab = .settings
     Current.handleURL(url("conjuguer://verb/parler"))
-    #expect(Current.verb?.infinitif == "parler")
+    #expect(Current.routedVerb?.verb.infinitif == "parler")
     #expect(Current.selectedTab == .verbs)
 
     Current.selectedTab = .settings
     Current.handleURL(url("conjuguer://info/2"))
-    #expect(Current.info == Info.infos[2])
+    #expect(Current.routedArticle == Info.infos[2])
     #expect(Current.selectedTab == .info)
   }
 
-  @Test func testHandleInAppDoesNotSwitchTab() {
-    resetCurrent()
-    Current.selectedTab = .models
-    Current.handleInApp(.verb(.key("parler")))
-    #expect(Current.verb?.infinitif == "parler")
-    #expect(Current.selectedTab == .models, "In-app verb link must not change the tab.")
-
-    Current.selectedTab = .info
-    Current.handleInApp(.info("3"))
-    #expect(Current.info == Info.infos[3])
-    #expect(Current.selectedTab == .info, "In-app info link must not change the tab.")
-  }
-
-  @Test func testHandleInAppPreservesSiblingEntity() {
-    resetCurrent()
-    let model = VerbModel.models["4-2B"]
-    #expect(model != nil)
-    Current.verbModel = model
-    Current.selectedTab = .models
-
-    Current.handleInApp(.verb(.key("parler")))
-
-    #expect(Current.verb?.infinitif == "parler")
-    #expect(Current.verbModel?.id == model?.id, "In-app link must not clear the sibling verbModel.")
-    #expect(Current.selectedTab == .models)
+  /// An article's links are its rich text's URLs: a heading, percent-encoded, names another
+  /// article, and a verb's name names its page.
+  @Test func anArticlesLinkNamesAnArticleOrAVerb() throws {
+    let article = try #require(Info.infos.first { $0.heading.contains(" ") })
+    let encoded = try #require(article.heading.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))
+    #expect(InfoView.LinkTarget(url: url(encoded)) == .article(article))
+    #expect(InfoView.LinkTarget(url: url("%C3%AAtre")) == .verb(try #require(Verb.verbs["être"])))
+    #expect(InfoView.LinkTarget(url: url("https://fr.wiktionary.org")) == nil)
   }
 
   @Test func testQuizDeeplinkStartsQuizAndSwitchesTab() {
@@ -114,7 +91,7 @@ struct DeeplinkTests {
 
     #expect(Current.selectedTab == .quiz)
     #expect(Current.dailySessionRequest?.source == .reminder)
-    #expect(Current.practiceSet == nil)
+    #expect(Current.routedPracticeSet == nil)
 
     Current.handleURL(url("conjuguer://verb/parler"))
     #expect(Current.dailySessionRequest == nil)
@@ -169,7 +146,7 @@ struct DeeplinkTests {
 
     Current.handleURL(url("conjuguer://model/4-2B"))
 
-    #expect(Current.verbModel?.id == "4-2B")
+    #expect(Current.routedModel?.id == "4-2B")
     #expect(Current.selectedTab == .models)
   }
 
@@ -179,7 +156,7 @@ struct DeeplinkTests {
 
     Current.handleURL(url("conjuguer://verb/random"))
 
-    #expect(Current.verb != nil, "The random-verb link must resolve to a verb.")
+    #expect(Current.routedVerb != nil, "The random-verb link must resolve to a verb.")
     #expect(Current.selectedTab == .verbs)
   }
 
@@ -191,7 +168,7 @@ struct DeeplinkTests {
     // `indices.contains` guard rather than trapping on `Info.infos[-1]`.
     Current.handleURL(url("conjuguer://info/-1"))
 
-    #expect(Current.info == nil)
+    #expect(Current.routedArticle == nil)
     #expect(Current.selectedTab == .settings, "An out-of-range info link must not switch the tab.")
   }
 
@@ -201,7 +178,7 @@ struct DeeplinkTests {
 
     Current.handleURL(url("conjuguer://info/9999"))
 
-    #expect(Current.info == nil)
+    #expect(Current.routedArticle == nil)
     #expect(Current.selectedTab == .settings)
   }
 
@@ -211,7 +188,7 @@ struct DeeplinkTests {
 
     Current.handleURL(url("conjuguer://info/abc"))
 
-    #expect(Current.info == nil)
+    #expect(Current.routedArticle == nil)
     #expect(Current.selectedTab == .settings)
   }
 
@@ -221,7 +198,7 @@ struct DeeplinkTests {
 
     Current.handleURL(url("https://verb/parler"))
 
-    #expect(Current.verb == nil, "A non-conjuguer scheme must not resolve an entity.")
+    #expect(Current.routedVerb == nil, "A non-conjuguer scheme must not resolve an entity.")
     #expect(Current.selectedTab == .settings)
   }
 
@@ -232,7 +209,7 @@ struct DeeplinkTests {
     // `conjuguer://verb` has no path component, so it fails the component-count guard.
     Current.handleURL(url("conjuguer://verb"))
 
-    #expect(Current.verb == nil)
+    #expect(Current.routedVerb == nil)
     #expect(Current.selectedTab == .settings)
   }
 
@@ -246,7 +223,7 @@ struct DeeplinkTests {
 
     Current.drainPendingDeeplink()
 
-    #expect(Current.verb?.infinitif == "parler", "Draining must resolve the deferred verb.")
+    #expect(Current.routedVerb?.verb.infinitif == "parler", "Draining must resolve the deferred verb.")
     #expect(Current.selectedTab == .verbs, "Draining must switch to the verb's tab.")
     #expect(Current.pendingDeeplink == nil, "Draining must clear the pending deeplink.")
   }
@@ -257,13 +234,13 @@ struct DeeplinkTests {
 
     Current.drainPendingDeeplink()
 
-    #expect(Current.verb == nil)
+    #expect(Current.routedVerb == nil)
     #expect(Current.selectedTab == .settings, "Draining with nothing pending must not change state.")
   }
 
   /// A link that names nothing must not close what is showing or drop what is pending (B4 of
-  /// docs/verb_browse_review.md), so each starts with a verb page, a model page, a search, and a
-  /// daily session waiting.
+  /// docs/verb_browse_review.md), so each starts with a verb page, a search, and a daily session
+  /// waiting.
   @Test(arguments: [
     "conjuguer://verb/nonsense",
     "conjuguer://model/nonsense",
@@ -277,9 +254,8 @@ struct DeeplinkTests {
   func testALinkThatNamesNothingChangesNothing(link: String) throws {
     resetCurrent()
     Current.handleURL(url("conjuguer://verb/lire?match=lis&source=lookup"))
-    let marks = try #require(Current.verbMarks)
-    let model = try #require(VerbModel.models["4-2B"])
-    Current.verbModel = model
+    let sheet = try #require(Current.routedSheet)
+    let marks = try #require(Current.routedVerb?.marks)
     let search = SearchRequest(text: "suis", source: .lookup)
     Current.searchRequest = search
     let session = DailySessionRequest(source: .reminder)
@@ -288,10 +264,10 @@ struct DeeplinkTests {
 
     Current.handleURL(url(link))
 
-    #expect(Current.verb?.infinitif == "lire")
-    #expect(Current.verbSource == .lookup)
-    #expect(Current.verbMarks == marks)
-    #expect(Current.verbModel == model)
+    #expect(Current.routedVerb?.verb.infinitif == "lire")
+    #expect(Current.routedVerb?.source == .lookup)
+    #expect(Current.routedVerb?.marks == marks)
+    #expect(Current.routedSheet?.id == sheet.id)
     #expect(Current.searchRequest == search)
     #expect(Current.dailySessionRequest == session)
     #expect(Current.selectedTab == .settings)
@@ -303,9 +279,9 @@ struct DeeplinkTests {
 
     Current.handleURL(url("conjuguer://bogus/thing"))
 
-    #expect(Current.verb == nil)
-    #expect(Current.verbModel == nil)
-    #expect(Current.info == nil)
+    #expect(Current.routedVerb == nil)
+    #expect(Current.routedModel == nil)
+    #expect(Current.routedArticle == nil)
     #expect(Current.selectedTab == .settings, "An unknown host must not switch the tab.")
   }
 
@@ -313,12 +289,10 @@ struct DeeplinkTests {
     resetCurrent()
     Current.selectedTab = .quiz
     Current.handleURL(url("conjuguer://verb/parler"))
-    Current.verbModel = VerbModel.models.values.first
 
     Current.openSearch(text: nil, source: .tab)
 
-    #expect(Current.verb == nil)
-    #expect(Current.verbModel == nil)
+    #expect(Current.routedSheet == nil)
     #expect(Current.selectedTab == .verbs)
     #expect(Current.searchRequest == SearchRequest(text: nil, source: .tab))
     Current.searchRequest = nil
@@ -333,17 +307,16 @@ struct DeeplinkTests {
   ])
   func testVerbLinkCarriesItsSource(link: String, source: AnalyticsSource) {
     resetCurrent()
-    Current.verbSource = .resume
     Current.handleURL(url(link))
-    #expect(Current.verb?.infinitif == "aller")
-    #expect(Current.verbSource == source)
+    #expect(Current.routedVerb?.verb.infinitif == "aller")
+    #expect(Current.routedVerb?.source == source)
   }
 
   @Test func testSourceItemDoesNotBreakAPercentEncodedVerb() {
     resetCurrent()
     Current.handleURL(url("conjuguer://verb/ha%C3%AFr%20France?source=widget"))
-    #expect(Current.verb?.dictionaryKey == "haïr France")
-    #expect(Current.verbSource == .widget)
+    #expect(Current.routedVerb?.verb.dictionaryKey == "haïr France")
+    #expect(Current.routedVerb?.source == .widget)
   }
 
   @Test func testQueryItemsDoNotCountAsPathComponents() throws {
@@ -358,15 +331,8 @@ struct DeeplinkTests {
   func testRandomVerbIntentsNameThemselves(link: String, source: AnalyticsSource) {
     resetCurrent()
     Current.handleURL(url(link))
-    #expect(Current.verb != nil)
-    #expect(Current.verbSource == source)
-  }
-
-  @Test func testInfoArticleVerbLinkNamesItself() throws {
-    resetCurrent()
-    Current.handleInApp(try link("conjuguer://verb/parler?source=infoLink"))
-    #expect(Current.verb?.infinitif == "parler")
-    #expect(Current.verbSource == .infoLink)
+    #expect(Current.routedVerb != nil)
+    #expect(Current.routedVerb?.source == source)
   }
 
   @Test func testASearchLinkRequestsItsTextFromItsSource() {
@@ -376,7 +342,7 @@ struct DeeplinkTests {
     Current.handleURL(url("conjuguer://search?q=j%27ai%20mang%C3%A9&source=lookup"))
     #expect(Current.searchRequest == SearchRequest(text: "j'ai mangé", source: .lookup))
     #expect(Current.selectedTab == .verbs)
-    #expect(Current.verb == nil)
+    #expect(Current.routedVerb == nil)
   }
 
   @Test func testASearchLinkWithoutTextClearsTheFieldForTyping() {
@@ -398,21 +364,21 @@ struct DeeplinkTests {
     Current.handleURL(url("conjuguer://search?q=suis"))
     Current.handleURL(url("conjuguer://verb/aller"))
     #expect(Current.searchRequest == nil)
-    #expect(Current.verb?.infinitif == "aller")
+    #expect(Current.routedVerb?.verb.infinitif == "aller")
   }
 
   @Test func testAMatchMarksItsCells() throws {
     resetCurrent()
     Current.handleURL(url("conjuguer://verb/aller?match=vais&source=lookup"))
-    let marks = try #require(Current.verbMarks)
+    let marks = try #require(Current.routedVerb?.marks)
     #expect(marks.tenses == [.indicatifPrésent(.firstSingular)])
-    #expect(Current.verbSource == .lookup)
+    #expect(Current.routedVerb?.source == .lookup)
   }
 
   @Test func testACompoundMatchMarksTheCompoundTense() throws {
     resetCurrent()
     Current.handleURL(url("conjuguer://verb/manger?match=ai%20mang%C3%A9"))
-    let marks = try #require(Current.verbMarks)
+    let marks = try #require(Current.routedVerb?.marks)
     #expect(marks.includesCompoundTense)
     #expect(marks.contains(.passéComposé(.firstSingular)))
   }
@@ -420,18 +386,18 @@ struct DeeplinkTests {
   @Test func testAMatchThatFillsNoCellStillOpensThePage() {
     resetCurrent()
     Current.handleURL(url("conjuguer://verb/aller?match=xyzzyq"))
-    #expect(Current.verb?.infinitif == "aller")
-    #expect(Current.verbMarks == nil)
+    #expect(Current.routedVerb?.verb.infinitif == "aller")
+    #expect(Current.routedVerb?.marks == nil)
   }
 
   @Test func testAnInfoLinkNamesItsArticleByKeyOrPosition() {
     for (index, info) in Info.infos.enumerated() {
       resetCurrent()
       Current.handleURL(url("conjuguer://info/\(info.stableKey)"))
-      #expect(Current.info == info)
+      #expect(Current.routedArticle == info)
       resetCurrent()
       Current.handleURL(url("conjuguer://info/\(index)"))
-      #expect(Current.info == info)
+      #expect(Current.routedArticle == info)
     }
   }
 
@@ -439,7 +405,7 @@ struct DeeplinkTests {
     for info in Info.infos {
       resetCurrent()
       Current.handleURL(Deeplink.info(info.stableKey).url)
-      #expect(Current.info == info)
+      #expect(Current.routedArticle == info)
     }
   }
 
@@ -454,9 +420,9 @@ struct DeeplinkTests {
     try #require(Verb.verbs[key] != nil)
     resetCurrent()
     Current.handleURL(Deeplink.verb(.key(key), source: .widget, match: match).url)
-    #expect(Current.verb?.dictionaryKey == key)
-    #expect(Current.verbSource == .widget)
-    #expect(Current.verbMarks?.tenses == [marked])
+    #expect(Current.routedVerb?.verb.dictionaryKey == key)
+    #expect(Current.routedVerb?.source == .widget)
+    #expect(Current.routedVerb?.marks?.tenses == [marked])
   }
 
   @Test(arguments: ["suis", "j'ai mangé", "to go", "a&b=c#d/e?f", "", "œuvrer"])
@@ -470,7 +436,7 @@ struct DeeplinkTests {
     resetCurrent()
     let model = try #require(VerbModel.models["4-2B"])
     Current.handleURL(Deeplink.model(model.id).url)
-    #expect(Current.verbModel == model)
+    #expect(Current.routedModel == model)
   }
 
   // The control's link is a literal, which Shared/ writes because it cannot reach the builders.
@@ -492,8 +458,8 @@ struct DeeplinkTests {
     resetCurrent()
     let key = VerbSpotlight.verbKey(fromSpotlightIdentifier: "VerbEntity/haïr France")
     Current.handleURL(Deeplink.verb(.key(key), source: .spotlight).url)
-    #expect(Current.verb?.dictionaryKey == "haïr France")
-    #expect(Current.verbSource == .spotlight)
+    #expect(Current.routedVerb?.verb.dictionaryKey == "haïr France")
+    #expect(Current.routedVerb?.source == .spotlight)
   }
 
   @Test func testAPendingSearchLinkIsReplayed() {

@@ -76,8 +76,7 @@ struct ModelView: View {
         VerbView(verb: verb, source: .modelPage)
           .sheetDismissable()
       case .stemAlterationsInfo:
-        InfoView(info: Info.infos[Info.headingToIndex(heading: L.Info.irregularitiesHeading) ?? 0])
-          .sheetDismissable()
+        ArticleSheet(info: Info.infos[Info.headingToIndex(heading: L.Info.irregularitiesHeading) ?? 0])
       }
     }
     .recordsAppearance(as: "\(ModelView.self)")

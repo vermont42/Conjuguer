@@ -6842,3 +6842,46 @@ and Phase 2 can turn that into an article or a verb.
 The T3 repair found what the review said: "s'entre-déchirer" was never a key, since pronominal
 verbs are stored without the pronoun, so that test row had returned early since it was written.
 It now uses entre-déchirer, requires the verb, and checks the single cell its match marks.
+
+## Browse Fixes, Phase 2: One Routed Sheet (2026-11-25)
+
+Phase 2 of [`plans/verb_browse_fixes.md`](../plans/verb_browse_fixes.md) took the review's worst
+bug, B1, and the shape behind it. A link to a verb set `World.verb`, and two tabs presented it: the
+Verbs tab, always loaded, and the Info tab, which stays loaded once visited. So after one look at
+the Info tab, every widget tap opened the verb page twice, once off screen. UIKit warned about a
+presentation from a detached view controller, and the learner's record counted two opens. Seven
+optionals on `World` and six `.sheet` modifiers on four views became one value, `RoutedSheet`,
+presented by one modifier on `MainTabView`. No tab presents anything a link opens now.
+
+The value carries a `UUID`, which fixed B8 for free. A second link to the verb already showing used
+to change the marks on the page and nothing else, since the sheet's item kept its identity. Now each
+link is a new sheet, so SwiftUI replaces the page, and the new one scrolls to its mark and begins
+its own visit.
+
+B2, a verb link inside a linked article that closed the article and opened nothing, came from the
+article having no stack of its own: its links went back to `World`, which tried to present while the
+article's sheet was up. The verb page's private `TenseArticleSheet` already did the right thing, so
+it became the only way an article is presented, renamed `ArticleSheet`, and reduced to `InfoView`
+inside the same `sheetDismissable` every other sheet uses. The Info tab's articles now push in the
+tab's own stack, which retired `World.handleInApp` altogether.
+
+The environment value that let a verb page in an article sheet push its tense articles was B28: it
+leaked into any sheet presented from inside, where pushes went to a stack hidden underneath. It is a
+Boolean now, set by every stack's `verbPageNavigation`, so a new stack always starts from its own
+answer.
+
+The test I most wanted was one that counts what the learner's record counts, so it hosts
+`MainTabView` in a real window inside the unit-test app, with a `World` of its own so that the
+suites that change `Current` cannot touch it. It visits the Info tab, sends a link, and reads the
+`AnalyticsSpy` and the open count. To check it could fail, I put a second presenter back in the Info
+tab for one run, and it recorded two appearances and an open count of 2. One surprise: replacing a
+presented sheet takes about two seconds on the simulator, a dismissal and then a presentation, so
+the test polls rather than sleeping a fixed second.
+
+The full suite had grown to eight minutes, and two tests in `VerbDrawTests` took 160 seconds of it.
+They checked the widget draw's proportions by drawing 20,000 and 9,000 times from the whole
+1,000-verb band. Each draw weighs every verb on offer, and a verb's weight asks whether its
+etymology names a base, so the tests read etymology prose some 30 million times. The proportions
+can be checked just as well on ten verbs of known weight, since `draw` takes its list as a
+parameter, and the suite now runs in under two seconds. A single draw in the app weighs the band
+once, about 5 milliseconds, which needed no change.

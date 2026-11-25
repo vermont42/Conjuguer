@@ -7,14 +7,11 @@
 
 import SwiftUI
 
+/// An article. Its links to other articles and to verbs push onto the stack that shows it, which
+/// is the Info tab's or an `ArticleSheet`'s.
 struct InfoView: View {
-  @Environment(World.self) private var world
+  @Environment(\.verbPagePush) private var verbPagePush
   let info: Info
-
-  /// Where the article's links to articles and verbs go. Nil hands them to
-  /// `World.handleInApp`. An article opened from a verb page passes its own, so that the
-  /// learner stays there.
-  var openLink: ((Deeplink) -> Void)?
 
   var body: some View {
     ScrollView {
@@ -47,40 +44,45 @@ struct InfoView: View {
     .recordsAppearance(as: "\(InfoView.self)")
     .screenBackground()
     .environment(\.openURL, OpenURLAction { url in
-      handleInfoLink(url)
+      guard let link = LinkTarget(url: url) else {
+        return .systemAction
+      }
+      switch link {
+      case .article(let info):
+        verbPagePush?(info)
+      case .verb(let verb):
+        verbPagePush?(VerbDestination(verb: verb, source: .infoLink))
+      }
+      return .handled
     })
   }
 
-  private func handleInfoLink(_ url: URL) -> OpenURLAction.Result {
-    let cleansedUrlString = firstLetterLowercased(parenless(url.absoluteString.removingPercentEncoding ?? ""))
+  /// What a link in an article's rich text names: another article, by its heading, or a verb.
+  /// Any other URL, such as a web page's, is left to the system.
+  enum LinkTarget: Equatable {
+    case article(Info)
+    case verb(Verb)
 
-    if let infoIndex = Info.headingToIndex(heading: cleansedUrlString) {
-      open(.info(Info.infos[infoIndex].stableKey))
-      return .handled
-    } else if let verb = Verb.verbs[cleansedUrlString] {
-      open(.verb(.key(verb.dictionaryKey), source: .infoLink))
-      return .handled
-    } else {
-      return .systemAction
+    init?(url: URL) {
+      let name = Self.firstLetterLowercased(Self.parenless(url.absoluteString.removingPercentEncoding ?? ""))
+      if let index = Info.headingToIndex(heading: name) {
+        self = .article(Info.infos[index])
+      } else if let verb = Verb.verbs[name] {
+        self = .verb(verb)
+      } else {
+        return nil
+      }
     }
-  }
 
-  private func open(_ link: Deeplink) {
-    if let openLink {
-      openLink(link)
-    } else {
-      world.handleInApp(link)
+    private static func parenless(_ input: String) -> String {
+      input
+        .replacingOccurrences(of: "(", with: "")
+        .replacingOccurrences(of: ")", with: "")
     }
-  }
 
-  private func parenless(_ input: String) -> String {
-    input
-      .replacingOccurrences(of: "(", with: "")
-      .replacingOccurrences(of: ")", with: "")
-  }
-
-  private func firstLetterLowercased(_ input: String) -> String {
-    input.prefix(1).lowercased() + input.dropFirst()
+    private static func firstLetterLowercased(_ input: String) -> String {
+      input.prefix(1).lowercased() + input.dropFirst()
+    }
   }
 }
 

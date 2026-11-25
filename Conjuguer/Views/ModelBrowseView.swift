@@ -38,7 +38,6 @@ struct ModelBrowseView: View {
 
   private func content(store: BrowseStore<ModelAndDecorator, ModelSort>) -> some View {
     @Bindable var store = store
-    @Bindable var world = world
 
     let sortPicker = Picker("", selection: $store.sort) {
       ForEach(ModelSort.allCases, id: \.self) { type in
@@ -84,14 +83,6 @@ struct ModelBrowseView: View {
       }
     }
     .sensoryFeedback(.selection, trigger: store.sort)
-    .sheet(item: $world.verbModel) { model in
-      ModelView(model: model)
-        .sheetDismissable()
-    }
-    .sheet(item: $world.collection) { destination in
-      VerbCollectionView(destination: destination)
-        .sheetDismissable()
-    }
     .recordsAppearance(as: "\(ModelBrowseView.self)")
   }
 

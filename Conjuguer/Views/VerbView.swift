@@ -11,7 +11,7 @@ import TipKit
 struct VerbView: View {
   @Environment(World.self) private var world
   @Environment(\.scenePhase) private var scenePhase
-  @Environment(\.tenseArticleOpener) private var tenseArticleOpener
+  @Environment(\.pushesTenseArticles) private var pushesTenseArticles
   @Environment(\.verbPagePush) private var verbPagePush
   @Environment(\.isBeneathQuiz) private var isBeneathQuiz
   @AppStorage("hasSeenConjugationColorKey") private var hasSeenColorKey = false
@@ -183,7 +183,7 @@ struct VerbView: View {
         ModelView(model: destination.model, verbOrder: destination.verbOrder)
           .sheetDismissable()
       case .article(let info):
-        TenseArticleSheet(info: info)
+        ArticleSheet(info: info)
       case .verb(let destination):
         VerbView(verb: destination.verb, source: destination.source)
           .sheetDismissable()
@@ -419,8 +419,8 @@ struct VerbView: View {
     }
     return {
       world.analytics.signal(name: .tapTenseArticle)
-      if let tenseArticleOpener {
-        tenseArticleOpener(info)
+      if pushesTenseArticles, let verbPagePush {
+        verbPagePush(info)
       } else {
         detailSheet = .article(info)
       }
@@ -684,63 +684,6 @@ private struct MarkableConjugation: View {
       }
       .copyOnLongPress(cell.copyText)
   }
-}
-
-/// A tense's Info article, opened from its heading on the verb page. A link to another article or
-/// to a verb opens it inside the sheet, so that the learner can follow the thread and still close
-/// the sheet onto the same verb page. A verb page inside the sheet opens its own articles here
-/// too, rather than stacking a sheet on the sheet.
-private struct TenseArticleSheet: View {
-  let info: Info
-  @Environment(\.dismiss) private var dismiss
-  @State private var path = NavigationPath()
-
-  var body: some View {
-    NavigationStack(path: $path) {
-      page(InfoView(info: info, openLink: open))
-        .navigationDestination(for: Info.self) { info in
-          page(InfoView(info: info, openLink: open))
-        }
-        .verbPageNavigation(path: $path) {
-          dismiss()
-        }
-    }
-    .environment(\.tenseArticleOpener) { info in
-      path.append(info)
-    }
-  }
-
-  private func page(_ content: some View) -> some View {
-    content
-      .toolbar {
-        ToolbarItem(placement: .topBarTrailing) {
-          Button(L.Navigation.done) {
-            dismiss()
-          }
-        }
-      }
-  }
-
-  private func open(_ link: Deeplink) {
-    switch link {
-    case .info(let target):
-      if let info = Info.info(deeplinkTarget: target) {
-        path.append(info)
-      }
-    case .verb(.key(let key), let source, _):
-      if let verb = Verb.verbs[key] {
-        path.append(VerbDestination(verb: verb, source: source))
-      }
-    default:
-      break
-    }
-  }
-}
-
-extension EnvironmentValues {
-  /// Set inside a tense article's sheet, so that a verb page there pushes an article instead of
-  /// presenting one.
-  @Entry var tenseArticleOpener: ((Info) -> Void)?
 }
 
 #if DEBUG

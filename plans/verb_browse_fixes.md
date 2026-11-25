@@ -29,7 +29,7 @@ empty until it is committed.
 | Phase | Status | Date | Commit | Findings | Waits for Josh |
 |---:|---|---|---|---|---|
 | 1 | Done | 2026-11-25 | `5543a98` | B4, S1 (the parser) | No |
-| 2 | Not started | | | B1, B2, B8, B28, S1 (the sheets) | Yes |
+| 2 | Awaiting Josh | 2026-11-25 | | B1, B2, B8, B28, S1 (the sheets) | Yes |
 | 3 | Not started | | | Multiple windows | Yes |
 | 4 | Not started | | | S2 | No |
 | 5 | Not started | | | B3, B6, B18, B23, B24, B26, S3 (the search model), D5, T1 (the search), K-F1, K-S8 | Yes |
@@ -260,6 +260,67 @@ article, and a verb link in that one; a model page's red diamond and a verb link
 a tense heading's diamond on a verb page, then a verb link, then that page's own diamond.
 
 **How it differed:**
+
+- **`RoutedSheet` is a struct holding a `Page` enum and a `UUID`**, not an enum, so every case gets
+  its identity in one place. `World.routedSheet` replaces `verb`, `verbSource`, `verbMarks`,
+  `verbModel`, `collection`, `info`, and `practiceSet`. `World.Destination` has one `.sheet(Page)`
+  case beside the requests, and `Page.tab` says which tab lies beneath. `MainTabView` presents it,
+  with a practice set still sized `.page`.
+- **The Info tab's articles push in the tab's own stack**, the decision the phase left open. Its
+  `NavigationStack` now takes `verbPageNavigation(pushesTenseArticles: true)`, so an article link
+  pushes the article, a verb link pushes the verb page, and that page's tense diamond pushes its
+  article too. I chose this because the learner is reading articles there, and Back returns along
+  the thread.
+- **`World.handleInApp(_:)` is gone.** Every `InfoView` is now inside a stack that pushes, so
+  nothing needed it. Its three tests went with it. In their place, `anArticlesLinkNamesAnArticleOrAVerb`
+  pins `InfoView.LinkTarget(url:)`, the value an article's link becomes.
+- **`InfoView` has no `openLink`.** It reads `verbPagePush` and pushes the `Info` or the
+  `VerbDestination` itself, since `verbPageNavigation` now registers `Info` on every stack. That
+  meets "takes a value" without a closure that each owner would have had to write the same way.
+  The model page's verb links and an article's links stay URLs inside their `AttributedString`s,
+  since a `Text` link can be nothing else. Each is read back once, where it is tapped.
+- **B28's back channel became a Boolean.** `tenseArticleOpener` is gone. Each stack sets
+  `pushesTenseArticles` through `verbPageNavigation`, and a verb page pushes its article through
+  the ordinary `verbPagePush` when the flag is on. A sheet's `SheetDismissable` and the Quiz tab's
+  stack both set it off, which is what stops the leak. I did not run the review's long path (a
+  verb page in an article sheet, Test Me, a correction's verb link). It is fixed by construction:
+  `QuizView` builds its own stack through `verbPageNavigation`.
+- **`ArticleSheet` is `InfoView` in `.sheetDismissable(pushesTenseArticles: true)`**, in a file of
+  its own. The verb page's diamond, the model page's red diamond, and an `info/` link all use it.
+- **The test of one `viewAppeared` per link hosts `MainTabView` in a window.**
+  `RoutedSheetTests.aLinkedVerbIsPresentedOnce` builds a `World` of its own (so the suites that
+  change `Current` cannot reach the window), loads the Info tab, sends a boire link, and expects
+  one appearance and an `openCount` of 1. It then sends a second boire link with another match and
+  expects a second appearance, which pins B8. With a second presenter put back in the Info tab, it
+  recorded both bugs: two `widget` appearances, an `openCount` of 2, and then a `resume` where the
+  second link's `lookup` should be. Replacing a sheet takes about two seconds on the simulator, so
+  the test polls with a six-second limit rather than sleeping a fixed time. It costs about 13
+  seconds of the run.
+- **Reproduction.** I did not rerun the review's reproductions before changing the code. The
+  reviewer had run both, and the hosted test reproduced B1 against the old shape. After the fix,
+  on the iPhone simulator: the Info tab visited, then `verb/coudre`, gave one page, `openCount` 1,
+  and no presentation warning in the log. `info/passe_compose` and a tap on être pushed être's
+  page inside the article sheet, and its tense diamond pushed that tense's article there. Ten
+  alternating venir and aller links each showed the right page. `verb/aller?match=vais` and then
+  `?match=suis allé` gave a fresh page scrolled to the marked "suis allé". In the Info tab,
+  Irregularities, then cacaber, then its diamond, all pushed in the tab. A model page's red diamond
+  presented the article, whose alunir link pushed inside it. `list/` and `model/` links each
+  replaced a verb page. A link that arrived while a tense article was up over a page in the Verbs
+  tab closed the article and showed the linked page. On the iPad: the Info tab visited, then
+  coudre's link, gave `openCount` 1, and être in a linked article pushed inside the sheet. Neither
+  log held a presentation warning.
+- **Checks.** 955 tests in 91 suites (954, less the three `handleInApp` tests, plus one for
+  `LinkTarget` and three in `RoutedSheetTests`). SwiftLint is clean, and `check_docs.py` passes. No
+  string, signal, or parameter changed, so neither catalog nor privacy staging was touched.
+- **`VerbDrawTests` went from 162 seconds to 1.6** (Josh, 2026-11-25), outside the phase's
+  findings. Each draw weighs every verb it is offered, and a weight reads the verb's etymology, so
+  20,000 draws over the 1,000-verb band made 20 million reads. The proportion tests now draw from
+  ten verbs of the band, four of weight 1, three of 2, and three of 4, or from two verbs beside My
+  Verbs, and the band test makes 50 draws rather than 500. The app's single draws are untouched.
+- **Docs.** `docs/feature_architecture.md`'s paragraph on the verb page's article, § Navigation, § How the source travels,
+  and § Deeplinks' architecture table describe the routed sheet. Phase 1's line under B4 in the
+  review notes that its test now starts from the verb page alone, since a model cannot be open
+  beside it.
 
 ## Phase 3: A Router for Each Window
 

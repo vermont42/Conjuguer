@@ -17,10 +17,7 @@ struct VerbCollectionTests {
   }
 
   private func resetCurrent() {
-    Current.verb = nil
-    Current.verbModel = nil
-    Current.collection = nil
-    Current.info = nil
+    Current.routedSheet = nil
     Current.pendingDeeplink = nil
     Current.searchRequest = nil
   }
@@ -101,20 +98,20 @@ struct VerbCollectionTests {
       resetCurrent()
       Current.selectedTab = .settings
       Current.handleURL(collection.deeplink)
-      #expect(Current.collection == VerbCollectionDestination(collection: collection, source: .sharedLink))
+      #expect(Current.routedCollection == VerbCollectionDestination(collection: collection, source: .sharedLink))
       #expect(Current.selectedTab == .models)
     }
 
     resetCurrent()
     Current.handleURL(try #require(URL(string: "conjuguer://list/top100")))
-    #expect(Current.collection?.source == .deeplink)
+    #expect(Current.routedCollection?.source == .deeplink)
   }
 
   @Test func anUnknownListLinkDoesNothing() throws {
     resetCurrent()
     Current.selectedTab = .settings
     Current.handleURL(try #require(URL(string: "conjuguer://list/nonsense")))
-    #expect(Current.collection == nil)
+    #expect(Current.routedCollection == nil)
     #expect(Current.selectedTab == .settings)
   }
 
@@ -123,7 +120,7 @@ struct VerbCollectionTests {
     let link = VerbCollection.model("4-2B").deeplink
     #expect(link.absoluteString == "conjuguer://model/4-2B?source=sharedLink")
     Current.handleURL(link)
-    #expect(Current.verbModel?.id == "4-2B")
+    #expect(Current.routedModel?.id == "4-2B")
     #expect(Current.selectedTab == .models)
   }
 

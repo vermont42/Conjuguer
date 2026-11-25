@@ -76,6 +76,12 @@ The Verbs tab is always loaded, and the Info tab stays loaded once visited, so f
 link asks two tabs to present, one of them off screen. Measured with one link on a fresh launch,
 then again after visiting the Info tab:
 
+**Fixed on `main` 2026-11-25**, by Phase 2 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): every page a link opens is one
+`RoutedSheet` that `MainTabView` alone presents, and no tab presents one.
+`RoutedSheetTests.aLinkedVerbIsPresentedOnce` hosts `MainTabView` in a window, loads the Info tab,
+and finds one `viewAppeared` and an `openCount` of 1 per link; with a second presenter put back in
+the Info tab, it finds two of each.
+
 | | Info tab never visited | Info tab visited once |
 |---|---|---|
 | UIKit assertion in the log | none | "Presenting view controller … from detached view controller `TabHostingController` is not supported, and may result in incorrect safe area insets and a corrupt root presentation … Will become a hard exception in a future release." |
@@ -103,6 +109,12 @@ shape. The verb page's own article sheet does not: `TenseArticleSheet` pushes in
 **Fix:** give every presented article what `TenseArticleSheet` has, a stack and an `openLink` that
 pushes (see S1).
 
+**Fixed on `main` 2026-11-25**, by Phase 2 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): every presented article is an
+`ArticleSheet`, with a stack of its own, and the Info tab's articles push in the tab's stack.
+`InfoView` reads its links as values and pushes them onto whichever stack shows it, so a verb link
+in a routed article, a model page's irregularities article, or an Info-tab article pushes the verb
+page there.
+
 ### Medium
 
 **B3. On iPad, an accent key tapped in the empty Models search field is lost.** *Reproduced.*
@@ -129,7 +141,9 @@ assign only on success.
 `World.handle(_:)` resolves a parsed `Deeplink` to a value and clears and assigns only when it
 resolves. An unknown `verb/`, `model/`, `list/`, or `info/` target, an unknown host, and a
 malformed link change nothing, and `DeeplinkTests.testALinkThatNamesNothingChangesNothing` starts
-each from an open verb page, a model, a pending search, and a pending daily session.
+each from an open verb page, a model, a pending search, and a pending daily session. (Since Phase 2
+there is one routed sheet, so the test starts from the verb page alone and checks that the sheet
+keeps its identity.)
 
 **B5. A quiz over chosen verbs repeats itself.** *Traced.* Two parts:
 
@@ -171,6 +185,11 @@ the page is not presented again: the new cell is marked, but the page does not s
 (`compoundTensesAreForcedOn` keeps its first value), and no new visit begins, so the second lookup
 sends no `viewAppeared` and records no open. **Fix:** give each routed verb its own identity, as
 `PracticeSetRequest` has.
+
+**Fixed on `main` 2026-11-25**, by Phase 2 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): each `RoutedSheet` has its own
+identity, so a second link to the page showing replaces the sheet with a fresh page, which scrolls
+to the new mark, opens the compound block if the mark needs it, and begins a new visit.
+`RoutedSheetTests` pins the identity and the second visit.
 
 **B9. On iPad, the review card and My Verbs rows push without the workaround.** *Suspected.*
 `pushFromSearch` exists because a tap that ends an empty search pushes during the search's
@@ -291,6 +310,11 @@ the article sheet's path underneath the quiz: nothing visible happens, and an ex
 waiting when the quiz closes. The path is long. The cause is a back channel that no stack scopes.
 **Fix:** have `verbPageNavigation` inject the opener per stack, as it injects `verbPagePush`.
 
+**Fixed on `main` 2026-11-25**, by Phase 2 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the back channel is gone. Each stack
+says through `verbPageNavigation(path:pushesTenseArticles:done:)` whether a verb page on it pushes
+its tense articles, and every stack sets it, so a sheet presented inside an article sheet, which
+builds its own stack, clears it.
+
 **B29. The Related Verbs card's titles read the French verb in an English voice,** and two card
 headings lack the header trait. *Traced in code; not heard.* "Built on prendre" and "Same model:
 venir (6-7)" are each one `Text` with no locale (`RelatedVerbsView.swift:24`, `38`), where
@@ -357,6 +381,12 @@ the article sheet match on `Deeplink(url:)`, `InfoView` hands over values rather
 search route and `openSearch` share one path. The nine optionals and the six sheet modifiers are
 Phase 2's.
 
+**Fixed on `main` 2026-11-25**, by Phase 2 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the nine optionals are one
+`World.routedSheet` and three requests, the routed pages are presented by one `.sheet` on
+`MainTabView`, and an article's links reach `InfoView` as values. The model page's verb links and an
+article's links stay URLs inside their `AttributedString`s, because a `Text` link can be nothing
+else; each is read back once, where it is tapped.
+
 **S2. The "present a sheet when there is no stack" fallback is dead in four views.** Every place
 that builds a `VerbView`, `ModelView`, `RelatedVerbListView`, or `VerbCollectionView` either pushes
 it through `verbPageNavigation` or wraps it in `.sheetDismissable()`, which injects `verbPagePush`
@@ -410,6 +440,10 @@ and exists only to add an `Info` destination. The tense cards, the article sheet
 card could each move to a file unchanged. Scroll targets are strings spelled three ways
 (`TenseTable.scrollID`, `Section.scrollID`, `VerbConjugations.scrollID(for:)`), where `TenseTable`
 is already `Hashable` and could be the id itself.
+
+**Partly fixed on `main` 2026-11-25**, by Phase 2 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `TenseArticleSheet` is gone.
+`ArticleSheet` is `InfoView` in a `.sheetDismissable(pushesTenseArticles: true)`. The rest is
+Phase 9's.
 
 **S5. Related verbs are derived at run time from etymology prose in the interface's language.**
 `VerbBase.base(of:)` accepts a base when the verb's etymology contains `~base~`

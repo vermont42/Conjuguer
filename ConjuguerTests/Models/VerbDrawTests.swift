@@ -95,35 +95,49 @@ struct VerbDrawTests {
     #expect(first == second)
   }
 
-  @Test func theDrawFavorsWeightedVerbsInProportion() {
-    let frequentVerbs = VerbDraw.frequentVerbs
-    let weights = frequentVerbs.map(VerbDraw.weight(of:))
+  /// Each draw weighs every verb it is offered, and a verb's weight reads its etymology, so these
+  /// tests draw from a few verbs of the band rather than all 1,000. Drawing thousands of times from
+  /// the whole band took over two minutes.
+  private func sampleOfEachWeight() throws -> [Verb] {
+    let weighed = VerbDraw.frequentVerbs.map { ($0, VerbDraw.weight(of: $0)) }
+    let sample = [(1, 4), (2, 3), (4, 3)].flatMap { weight, count in
+      weighed.filter { $0.1 == weight }.prefix(count).map(\.0)
+    }
+    try #require(sample.count == 10)
+    return sample
+  }
+
+  @Test func theDrawFavorsWeightedVerbsInProportion() throws {
+    let sample = try sampleOfEachWeight()
+    let weights = sample.map(VerbDraw.weight(of:))
     let total = Double(weights.reduce(0, +))
-    let favoredWeight = Double(zip(frequentVerbs, weights).filter { $0.1 > 1 }.map(\.1).reduce(0, +))
+    let favoredWeight = Double(weights.filter { $0 > 1 }.reduce(0, +))
     let expectedShare = favoredWeight / total
-    let bandShare = Double(weights.filter { $0 > 1 }.count) / Double(frequentVerbs.count)
+    let countShare = Double(weights.filter { $0 > 1 }.count) / Double(sample.count)
+    let favoredKeys = Set(zip(sample, weights).filter { $0.1 > 1 }.map(\.0.dictionaryKey))
 
     var generator = SeededRandomNumberGenerator(seed: 12)
-    let drawCount = 20_000
+    let drawCount = 10_000
     var favored = 0
     for _ in 0 ..< drawCount {
-      if let verb = VerbDraw.draw(goesToMyVerbs: false, myVerbs: [], frequentVerbs: frequentVerbs, using: &generator), VerbDraw.weight(of: verb) > 1 {
+      if let verb = VerbDraw.draw(goesToMyVerbs: false, myVerbs: [], frequentVerbs: sample, using: &generator), favoredKeys.contains(verb.dictionaryKey) {
         favored += 1
       }
     }
     let share = Double(favored) / Double(drawCount)
     #expect(abs(share - expectedShare) < 0.02, "Favored share \(share), expected \(expectedShare).")
-    #expect(share > bandShare + 0.05, "Favored share \(share) should exceed the band's \(bandShare).")
+    #expect(share > countShare + 0.05, "Favored share \(share) should exceed their count's \(countShare).")
   }
 
   @Test func aRandomVerbComesFromMyVerbsAboutOneTimeInThree() throws {
     let myVerbs = try verbs(["abcéder", "zoner"])
     let keys = Set(myVerbs.map(\.dictionaryKey))
+    let frequentVerbs = try verbs(["parler", "finir"])
     var generator = SeededRandomNumberGenerator(seed: 7)
     let drawCount = 9_000
     var fromMyVerbs = 0
     for _ in 0 ..< drawCount {
-      let verb = VerbDraw.randomVerb(myVerbs: myVerbs, frequentVerbs: VerbDraw.frequentVerbs, using: &generator)
+      let verb = VerbDraw.randomVerb(myVerbs: myVerbs, frequentVerbs: frequentVerbs, using: &generator)
       if keys.contains(verb?.dictionaryKey ?? "") {
         fromMyVerbs += 1
       }
@@ -133,9 +147,10 @@ struct VerbDrawTests {
   }
 
   @Test func aRandomVerbWithoutMyVerbsComesFromTheBand() {
+    let frequentVerbs = VerbDraw.frequentVerbs
     var generator = SeededRandomNumberGenerator(seed: 3)
-    for _ in 0 ..< 500 {
-      let verb = VerbDraw.randomVerb(myVerbs: [], frequentVerbs: VerbDraw.frequentVerbs, using: &generator)
+    for _ in 0 ..< 50 {
+      let verb = VerbDraw.randomVerb(myVerbs: [], frequentVerbs: frequentVerbs, using: &generator)
       #expect(verb?.isIn(VerbDraw.frequentBand) == true)
     }
   }

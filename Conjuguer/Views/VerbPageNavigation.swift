@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-/// Pushes a value onto whichever navigation stack shows the verb page, the model page, or a
-/// collection's page: the Verbs tab's, the Models tab's, or a sheet's. A page that finds none in
-/// its environment presents a sheet instead.
+/// Pushes a value onto whichever navigation stack shows the verb page, the model page, a
+/// collection's page, or an article: a tab's or a sheet's. A page that finds none in its
+/// environment presents a sheet instead.
 struct VerbPagePush {
   let push: (any Hashable) -> Void
 
@@ -20,6 +20,9 @@ struct VerbPagePush {
 
 extension EnvironmentValues {
   @Entry var verbPagePush: VerbPagePush?
+  /// Whether a verb page on this stack pushes its tenses' articles rather than presenting them.
+  /// Each stack sets it, so a sheet presented from inside an article sheet does not inherit it.
+  @Entry var pushesTenseArticles = false
 }
 
 struct ModelDestination: Hashable {
@@ -34,16 +37,23 @@ struct RelatedVerbListDestination: Hashable {
 }
 
 extension View {
-  /// Gives a navigation stack the pages a verb page or a model page can push, and the push action
-  /// that reaches them. Apply it to the stack's root content. In a sheet, `done` puts a Done
-  /// button on every pushed page, as on the sheet's first.
-  func verbPageNavigation(path: Binding<NavigationPath>, done: (() -> Void)? = nil) -> some View {
-    modifier(VerbPageNavigation(path: path, done: done))
+  /// Gives a navigation stack the pages a verb page, a model page, or an article can push, and
+  /// the push action that reaches them. Apply it to the stack's root content. In a sheet, `done`
+  /// puts a Done button on every pushed page, as on the sheet's first. A stack that is about
+  /// articles, the Info tab's or an article sheet's, passes `pushesTenseArticles`, so that a verb
+  /// page there pushes a tense's article too, and the learner reads on in the same stack.
+  func verbPageNavigation(
+    path: Binding<NavigationPath>,
+    pushesTenseArticles: Bool = false,
+    done: (() -> Void)? = nil
+  ) -> some View {
+    modifier(VerbPageNavigation(path: path, pushesTenseArticles: pushesTenseArticles, done: done))
   }
 }
 
 private struct VerbPageNavigation: ViewModifier {
   @Binding var path: NavigationPath
+  let pushesTenseArticles: Bool
   let done: (() -> Void)?
 
   func body(content: Content) -> some View {
@@ -60,7 +70,11 @@ private struct VerbPageNavigation: ViewModifier {
       .navigationDestination(for: VerbCollectionDestination.self) { destination in
         page(VerbCollectionView(destination: destination))
       }
+      .navigationDestination(for: Info.self) { info in
+        page(InfoView(info: info))
+      }
       .environment(\.verbPagePush, VerbPagePush { path.append($0) })
+      .environment(\.pushesTenseArticles, pushesTenseArticles)
   }
 
   @ViewBuilder
@@ -68,6 +82,7 @@ private struct VerbPageNavigation: ViewModifier {
     if let done {
       content
         .environment(\.verbPagePush, VerbPagePush { path.append($0) })
+        .environment(\.pushesTenseArticles, pushesTenseArticles)
         .toolbar {
           ToolbarItem(placement: .topBarTrailing) {
             Button(L.Navigation.done, action: done)
@@ -76,6 +91,7 @@ private struct VerbPageNavigation: ViewModifier {
     } else {
       content
         .environment(\.verbPagePush, VerbPagePush { path.append($0) })
+        .environment(\.pushesTenseArticles, pushesTenseArticles)
     }
   }
 }

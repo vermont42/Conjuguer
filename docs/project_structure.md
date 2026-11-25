@@ -122,6 +122,7 @@ Conjuguer/
 │   ├── QuizState.swift         # Quiz lifecycle enum (not started / in progress / finished)
 │   ├── Recognition.swift       # Name the Conjugation: the scope, a prompt's every right cell (by the conjugation map, in both genders, a pronominal verb's prompt with its pronoun), the grade part by part, its repair lines, and the correction's answer lines
 │   ├── RelatedVerbs.swift      # VerbBase (a verb's base and root: a verbal prefix plus a verb its etymology names, less false pairs), RelatedVerbs, and Verb.related for the verb page's card
+│   ├── RoutedSheet.swift       # The one sheet a link opens over the tabs (a verb's, a model's, or a collection's page, an article, a practice set), each with its own identity, and the tab beneath it
 │   ├── ReviewCardSuppression.swift  # The Suppress Review Card setting's Off and On
 │   ├── SearchReport.swift      # SearchTracker (one verb search, first letter to its end) and SearchReport (finishSearch's banded parameters)
 │   ├── Sound.swift             # Sound-effect enum mapping cases to the bundled MP3s
@@ -210,9 +211,10 @@ Conjuguer/
 │   ├── VerbSort.swift          # Sort order for the verb browse view (frequency/alphabetical), and VerbListMode, the list picker's three segments (the two orders and My Verbs)
 │   ├── ViewControllerTransitions.swift  # Hack: waits until no view controller is presenting or dismissing, so an iPad push from a tap that ends the search is not dropped
 │   ├── WidgetSnapshotWriter.swift # Writes the multi-day widget snapshot bundle to the shared container, drawing each day's verb with VerbDraw and keeping the verb the widget already shows today
-│   └── World.swift             # @Observable DI container (Current) plus MainTab; device/simulator/unitTest configurations; handleURL and handle(_:), which resolve a Deeplink before closing anything, handleInApp(_:) for article links, and openSearch(text:source:) for search links and Command-F
+│   └── World.swift             # @Observable DI container (Current) plus MainTab; device/simulator/unitTest configurations; routedSheet, the one sheet a link opens; handleURL and handle(_:), which resolve a Deeplink before closing anything; and openSearch(text:source:) for search links and Command-F
 └── Views/
     ├── AnswerFrameView.swift   # Draws an AnswerFrame around the answer field, on one line or as a sentence wrapped word by word, keeping the field's identity, and the keyboard's focus, from one question to the next
+    ├── ArticleSheet.swift      # An Info article in a sheet with its own stack, whose article and verb links push inside it, as do a verb page's tense articles there
     ├── BrowseLayout.swift      # Shared adaptive grid columns and search-field placement (a fixed bar on iPad and Mac) for the browse views
     ├── BrowseRow.swift         # Shared row/cell used by both browse views, with optional badge, a looked-up check, and a French or English subtitle
     ├── BrowseSearch.swift      # Shared search plumbing for the browse views: all items for a blank query, the trombone for none
@@ -223,10 +225,10 @@ Conjuguer/
     ├── GameCenterAuthView.swift   # UIViewController shim + coordinator for presenting Game Center auth
     ├── GameView.swift          # The retro arcade minigame
     ├── InfoBrowseView.swift    # Info articles grouped by category; hosts the tutor entry and its unavailability cell
-    ├── InfoView.swift          # A single Info article rendered through RichTextView; an optional openLink keeps its links inside a verb page's article sheet
+    ├── InfoView.swift          # A single Info article rendered through RichTextView; LinkTarget reads its links as an article or a verb, which push onto the stack that shows it
     ├── InputView.swift         # DEBUG-only conjugation scratchpad
     ├── LoadingView.swift       # Splash shown while verbs.xml parses
-    ├── MainTabView.swift       # Root TabView with five tabs; presents a practice set's sheet over any tab
+    ├── MainTabView.swift       # Root TabView with five tabs; presents World.routedSheet, the one sheet a link opens, over any tab
     ├── MasteryView.swift       # The hub's Mastery page: a legend, a card per tense for the regular families, a card per spelling-change model, and the irregular verbs
     ├── ModelBrowseView.swift   # Searchable, sortable list/grid of verb models, led by the featured collections
     ├── ModelPracticeCard.swift # A model's practice on its page and in the hub's list: Alone, Mixed with the known models, or why it has none
@@ -248,7 +250,7 @@ Conjuguer/
     ├── VerbBrowseView.swift    # Searchable, sortable list/grid of all verbs (hosts the verb_browse_sort launch anchor)
     ├── VerbCollectionView.swift # A featured collection's page, VerbCollectionBar (looked-up count, Quiz, Share) for it and every model page, and the Models tab's VerbCollectionRow
     ├── VerbEssentialsRowView.swift # A Verb Essentials row other than the answer field's: answered with its mark, given in a re-ask, or still to come; and the tense label above each row
-    ├── VerbPageNavigation.swift # VerbPagePush and verbPageNavigation(path:done:): the pages a verb, model, or collection page pushes, in the Verbs and Models tabs and in every sheet
+    ├── VerbPageNavigation.swift # VerbPagePush and verbPageNavigation(path:pushesTenseArticles:done:): the pages a verb, model, collection page, or article pushes, in every tab's stack and every sheet, and whether a verb page there pushes its tense articles
     └── VerbView.swift          # Verb detail: conjugation cards with second names and article buttons, the article sheet, the color key and scroll tip, etymology, example sentence, related verbs
 
 ConjugationMapTool/                 # macOS command-line target; compiles the conjugation core from Conjuguer/ (membership exceptions in project.pbxproj)
@@ -352,6 +354,7 @@ ConjuguerTests/
     ├── QuizPracticeTests.swift         # Nested in QuizTests: answers kept on quit, every scope writing, due items within the level and band, at most three a round, none in a scoped quiz
     ├── QuizRecordSessionTests.swift    # Review and My Mistakes: missed items, days to the next due item, beyond the level, a pattern no band verb has, key conjugations together, exclusions and the limit; nested in QuizTests, rounds, Ten More, empty records, and signals without counts
     ├── RichTextTests.swift             # Rich-text markup parsing into blocks and segments
+    ├── RoutedSheetTests.swift          # The routed sheet: a fresh identity per link, every page in the one sheet, and MainTabView hosted in a window, where a linked verb begins one visit and records one open after the Info tab has loaded (B1); test accessors for the sheet's page
     ├── SearchReportTests.swift         # The search tracker's lifecycle, each finishSearch report, and that no parameter can echo the query
     ├── SettingsTests.swift             # Settings defaults (Suppress Review Card off), persistence, the quiz difficulty's migration to a level, and malformed-value handling (serialized)
     ├── SpeedRoundTests.swift           # The Speed Round: mastered items, the draw in turn and never twice running, a pattern's verbs, a key conjugation's cells by level, the scope, the best across a launch and a reset, a miss written out; nested in QuizTests, a round that records nothing, moves on at a miss, ends at sixty ticks, and sends no counts
