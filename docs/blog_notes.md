@@ -6726,3 +6726,88 @@ Wikipedia. The README now says that thousands of verbs have a quotation from Fla
 Proust, Molière, or another writer, and calls the rest what they are, example sentences. The
 etymology claim held: `Etymologies.json` has a non-empty entry for all 6,326 verbs in both
 languages.
+
+## Reviewing the Browse Port (2026-11-25)
+
+Josh asked for a review of everything the browse plan built for the Verbs and Models tabs: about
+11,500 added lines in 128 files, which the pedagogy plan has since edited. The findings are in
+[`docs/verb_browse_review.md`](verb_browse_review.md). Nothing was fixed. The open questions and a
+plan, `plans/verb_browse_fixes.md`, wait for Josh to read it.
+
+### How it was done
+
+I read every browse-era file myself, and five Opus reviewers each read one slice without seeing my
+notes: the search core, the verb list, the verb page, the Models tab with collections, and
+deeplinks with intents. Their reports were proposals. I read each against the code, and ran the
+app on Conjuguer's own simulators for the ones a trace could not settle. Josh's prompt asked that
+Konjugieren's review of the German original not anchor this one, so I wrote all of my own findings
+to disk before opening it, and only then checked each of its findings here.
+
+That order paid for itself in both directions. Konjugieren's review found five things in Conjuguer
+that six readers had missed, the best of them that Look Up a Verb cannot open the page of an
+infinitive with a twin (pêcher and pécher, coûter and couter: 26 pairs here). And the independent
+read found what the German review had no reason to look for, since the defects sat in what the
+port added or in what Conjuguer already had.
+
+### What the simulator settled
+
+The plan's Phase 12 had left a note: a link that arrives while a verb sheet is up is sometimes
+dropped or late. Reading suggested why. `VerbBrowseView` and `InfoBrowseView` both attach a sheet
+to `world.verb`, so once the Info tab has been visited, two tabs try to present the same page. One
+link after one visit to the Info tab logged UIKit's "Presenting view controller … from detached
+view controller … Will become a hard exception in a future release", built the page's headings
+fifteen times where a fresh launch built them six times, and stored an `openCount` of 2. So every
+deeplinked verb was counted twice in the learner's record and in the visit signals. The duplicate
+sheet is older than the plan; the plan hung the record and four new entry points on it.
+
+Three more were reproduced. A verb link inside an article opened by an `info/` link closed the
+article and opened nothing, with SwiftUI's "only presenting a single sheet is supported" in the
+log. An unknown `list/` link closed the verb page that was showing, because `handleURL` clears
+before it resolves. And on the iPad, ê tapped in the empty Models search field was lost, while the
+same tap after one typed letter worked: Phase 10 fixed that for the Verbs tab and never moved the
+Models tab's copy over, though the two functions carry the same comment word for word.
+
+One suspicion died. Related verbs are found by reading the etymology for `~base~`, and I expected
+a race in which the base cache filled before the etymologies loaded. They load synchronously on
+first use, so there is none. What remains of that worry is a maintenance trap: the base rule reads
+prose in the interface's language, a reviewer's Python port found the same 1,412 bases in each
+language today, and nothing tests it.
+
+### What was not done
+
+Three findings stayed suspected. Confirming that the review card's push is dropped on iPad meant
+clearing the simulator's recents, which is Josh's test data, so I left it. The control's deferred
+link needs a device, and the index loading on the main actor needs a Release timing. The runs did
+leave marks: the iPhone simulator's record gained opens of rire, boire, and lire, and the iPad's
+review card for venir was revealed. `scripts/count_tenses.py` was not read.
+
+A line-count note for the next review of this size: my own read took most of the session, and the
+five reviewers finished in ten to nineteen minutes each. Their value was less in speed than in
+the findings that come from tracing one input by hand, such as "nous nous sommes levés" losing a
+pronoun on its way through a link, which a read for structure passes over.
+
+## A Plan for the Browse Review's Fixes (2026-11-25)
+
+Josh read the review and answered thirteen questions in three rounds, taking the recommended
+option each time. [`plans/verb_browse_fixes.md`](../plans/verb_browse_fixes.md) turns the answers
+and the review into thirteen phases and a closing. Its shape is Konjugieren's plan of the same
+day: the review is the specification, the plan adds order and decisions, each phase records how it
+differed, and a phase that changes what Josh can see waits for him before git.
+
+Four of his Konjugieren decisions were asked again for Conjuguer and all four held: collection
+progress counts a verb once it has ever been opened, so that Clear and the swipe forget only the
+recent history; `VerbBrowseView` is split in full; the two-day-old migration goes; and the git
+rule is the same. Reading Konjugieren's plan before asking saved a round, because it had already
+found the question that the progress decision raises, where a full forget should live. Here the
+answer is Reset Practice.
+
+Two answers make this plan larger than its model. Routing becomes one routed sheet behind a
+parsed link type, which is the root of four of the bugs the simulator reproduced, and each window
+gets its own router, where Konjugieren's plan only looks at two windows in its closing. So the
+first six phases are a chain: the parser, the sheet, the router, the dead fallbacks, the search
+model, the view's split. The rest stand alone.
+
+The plan had to name five findings that Konjugieren's review made and mine did not. They carry
+that review's labels with a K in front (K-F1, K-S8, and so on), so that a session reading "S8"
+cannot take the idle sort picker for this review's S8, the two identities of a verb. A script
+checked that all 64 of the review's labels appear in the plan.
