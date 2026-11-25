@@ -30,7 +30,7 @@ empty until it is committed.
 |---:|---|---|---|---|---|
 | 1 | Done | 2026-11-25 | `5543a98` | B4, S1 (the parser) | No |
 | 2 | Done | 2026-11-25 | `d36f6d5` | B1, B2, B8, B28, S1 (the sheets) | Yes |
-| 3 | Awaiting Josh | 2026-11-25 | | Multiple windows | Yes |
+| 3 | Done | 2026-11-25 | `f2e962e` | Multiple windows | Yes |
 | 4 | Not started | | | S2 | No |
 | 5 | Not started | | | B3, B6, B18, B23, B24, B26, S3 (the search model), D5, T1 (the search), K-F1, K-S8 | Yes |
 | 6 | Not started | | | B9, S3 (the rest), D4, D7, T1 (the card), the stale review card | Yes |
