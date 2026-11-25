@@ -29,8 +29,9 @@ Conjuguer/
 │   └── AnalyticsSpy.swift      # Test spy recording signals for assertions
 ├── App/
 │   ├── AppLauncher.swift       # Chooses TestApp vs ConjuguerApp based on the unit-test environment
-│   ├── ConjuguerApp.swift      # Main entry point: verb-data load, onboarding cover, deeplinks, Spotlight continuation and indexing, widget refresh, Tips.configure(), the Command-F menu
-│   ├── QuickActions.swift      # The Home Screen quick action (Find a Verb), and the app and scene delegates that install and receive it
+│   ├── ConjuguerApp.swift      # Main entry point: one SceneRoot per window, the launch work (verb-data load, reminders, widget refresh, Spotlight indexing), the app-wide phase changes, Tips.configure(), the Command-F menu
+│   ├── QuickActions.swift      # The Home Screen quick action (Find a Verb), and the app and scene delegates that install it and deliver it to its scene's router
+│   ├── SceneRoot.swift         # One window's content: owns its SceneRouter and tells it its window, the onboarding cover, and the window's links (onOpenURL, Spotlight continuation, the widget's stashed link on activation, a cold launch's replay); -CONJUGUER_SECOND_WINDOW opens a second window in DEBUG
 │   ├── TestApp.swift           # Minimal App for the unit-test environment
 │   ├── VerbSearchCommands.swift   # Verbs › Find a Verb menu with Command-F, for iPad and Mac keyboards
 │   └── Preview Content/        # Preview-only asset catalog
@@ -195,6 +196,7 @@ Conjuguer/
 │   ├── Settings.swift          # @Observable user preferences persisted through GetterSetter
 │   ├── SeededRandomNumberGenerator.swift  # SplitMix64, so tests can check random draws with a fixed seed
 │   ├── QRCode.swift            # QR codes made on the device with Core Image, black on white, medium error correction
+│   ├── SceneRouter.swift       # One window's routing, plus MainTab: its tab, routedSheet (the one sheet a link opens), and its search, daily-session, and challenge requests; handleURL and handle(_:), which resolve a Deeplink before closing anything; openSearch(text:source:); deliver(_:to:) for links that arrive outside a window (quick actions, reminders, intents)
 │   ├── ShareSheet.swift        # Presents UIActivityViewController with an LPLinkMetadata header, anchored on iPad to a bar button or a rect in the page (ShareLink reports no tap)
 │   ├── SoundPlayer.swift       # Protocol for audio playback
 │   ├── SoundPlayerDummy.swift  # No-op double
@@ -206,12 +208,12 @@ Conjuguer/
 │   ├── Util.swift              # French/English Locale constants
 │   ├── Utterer.swift           # AVSpeechSynthesizer wrapper for French and English pronunciation
 │   ├── VerbConjugations.swift  # Builds VerbView's conjugation tables from TenseTable: sections, cells, red letters, defectivity
-│   ├── VerbSearchArrowKeys.swift  # UIKeyCommand hack that lets ↑ and ↓ move through verb results while the search field is focused
+│   ├── VerbSearchArrowKeys.swift  # UIKeyCommand hack that lets ↑ and ↓ move through verb results while the search field is focused, installed per window
 │   ├── VerbData.swift          # Startup XML parse (verbs, models, defect groups) with a loading/loaded state
 │   ├── VerbSort.swift          # Sort order for the verb browse view (frequency/alphabetical), and VerbListMode, the list picker's three segments (the two orders and My Verbs)
 │   ├── ViewControllerTransitions.swift  # Hack: waits until no view controller is presenting or dismissing, so an iPad push from a tap that ends the search is not dropped
 │   ├── WidgetSnapshotWriter.swift # Writes the multi-day widget snapshot bundle to the shared container, drawing each day's verb with VerbDraw and keeping the verb the widget already shows today
-│   └── World.swift             # @Observable DI container (Current) plus MainTab; device/simulator/unitTest configurations; routedSheet, the one sheet a link opens; handleURL and handle(_:), which resolve a Deeplink before closing anything; and openSearch(text:source:) for search links and Command-F
+│   └── World.swift             # @Observable DI container (Current): the services, settings, and stores every window shares; device/simulator/unitTest configurations
 └── Views/
     ├── AnswerFrameView.swift   # Draws an AnswerFrame around the answer field, on one line or as a sentence wrapped word by word, keeping the field's identity, and the keyboard's focus, from one question to the next
     ├── ArticleSheet.swift      # An Info article in a sheet with its own stack, whose article and verb links push inside it, as do a verb page's tense articles there
@@ -315,7 +317,7 @@ ConjuguerTests/
     ├── CustomQuizTests.swift           # The custom quiz: its stored form and keys, unknown keys dropped, a part left to the level, lists against bands, never ranked, the choice parameter, what cannot start, chosen tenses at any level, the setting's persistence; nested in QuizTests, sessions that ask only the choice and send custom
     ├── DailyChallengeTests.swift       # The seed pinned, day round trips and non-dates, the same key drawing the same five, days and levels differing, twenty balanced days per level, a result's points, the approved shared text, the widget asking the challenge's first question; nested in QuizTests, the same five whatever the seed, level, and record, a result kept once and unranked, no re-ask, a quit keeping nothing, the store's twelve, and the signals
     ├── DailySessionTests.swift         # The streak (a day counted once, the repair, two missed days, a 25-hour day, pruning), the bands, the store across a launch and a reset, the lines, the scope, the reminder plan; nested in QuizTests, a session's draw, the streak and its band, a quit not counting, a repair across days, the reminder rescheduled, and reminder as the source
-    ├── DeeplinkTests.swift             # conjuguer:// parsing and routing: the search route, match, info keys, the builders' round trips, and the source query item (serialized — mutates Current)
+    ├── DeeplinkTests.swift             # conjuguer:// parsing and routing through a SceneRouter: the search route, match, info keys, the builders' round trips, and the source query item (serialized — mutates Current's quiz and settings)
     ├── DefectGroupTests.swift          # Defect-group membership and tense suppression
     ├── DefectivityAuditTests.swift     # Per-family defectivity audit (traire, braire, férir, poindre, pouvoir's impératif, …)
     ├── EngineAuditTests.swift          # Hand-written pins for the stage-A verb-pass fixes (peuvent, dites, suivi, the eight re-modeled verbs, the seventeen être auxiliaries), checked against Wiktionary rather than against the engine
@@ -355,6 +357,7 @@ ConjuguerTests/
     ├── QuizRecordSessionTests.swift    # Review and My Mistakes: missed items, days to the next due item, beyond the level, a pattern no band verb has, key conjugations together, exclusions and the limit; nested in QuizTests, rounds, Ten More, empty records, and signals without counts
     ├── RichTextTests.swift             # Rich-text markup parsing into blocks and segments
     ├── RoutedSheetTests.swift          # The routed sheet: a fresh identity per link, every page in the one sheet, and MainTabView hosted in a window, where a linked verb begins one visit and records one open after the Info tab has loaded (B1); test accessors for the sheet's page
+    ├── SceneRouterTests.swift          # Each window's own router: two routers kept apart, a cold launch's link replayed in its own window, a link waiting for its scene's router or for an active window, and the arrow keys kept per window
     ├── SearchReportTests.swift         # The search tracker's lifecycle, each finishSearch report, and that no parameter can echo the query
     ├── SettingsTests.swift             # Settings defaults (Suppress Review Card off), persistence, the quiz difficulty's migration to a level, and malformed-value handling (serialized)
     ├── SpeedRoundTests.swift           # The Speed Round: mastered items, the draw in turn and never twice running, a pattern's verbs, a key conjugation's cells by level, the scope, the best across a launch and a reset, a miss written out; nested in QuizTests, a round that records nothing, moves on at a miss, ends at sixty ticks, and sends no counts

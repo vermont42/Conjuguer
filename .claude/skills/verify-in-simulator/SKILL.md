@@ -207,6 +207,26 @@ software.racecondition.Conjuguer data)/Library/Preferences/software.raceconditio
 quizDifficulty Ridiculous` (and `defaults delete … quizLevel`). On 2026-11-23 a `plutil` edit of
 the same file was overwritten at launch by the preferences daemon's cached copy.
 
+The control's and the shortcuts' stashed link (`widgetPendingDeeplink`) lives in the App Group's
+plist, not the app's: `xcrun simctl spawn <udid> defaults write group.software.racecondition.Conjuguer
+…` writes a stray file under the device's `data/Library/Preferences` that the app never reads
+(2026-11-25). With the app terminated, `plutil -insert widgetPendingDeeplink -string
+"conjuguer://verb/random?source=control"` on `$(xcrun simctl get_app_container <udid>
+software.racecondition.Conjuguer groups | awk '{print $2}')/Library/Preferences/group.software.racecondition.Conjuguer.plist`
+worked, and a launch took it.
+
+## Two windows on the iPad
+
+`-CONJUGUER_SECOND_WINDOW YES` (DEBUG only) asks iPadOS for a second window once the verbs load,
+which neither Command-N through AXe nor a swipe could do (2026-11-25). iPadOS keeps the windows'
+sessions, so a later launch can restore three or more. On the iPad Pro 11 they open full screen, one
+at a time: reach the others through Simulator's Device › App Switcher (computer use, after
+`request_access` for Simulator; select the iPad's window through Simulator's Window menu, since
+another app's window may cover it). The switcher's thumbnails and their subtitles are snapshots
+taken when a window left the screen, so open a window to read its state. `xcrun simctl openurl`
+sends a link to the window in front. `axe key-combo --modifiers 227 --key 9` is Command-F, and
+`axe key 81` and `axe key 82` are ↓ and ↑.
+
 ## Completing a quiz
 
 A default quiz is a round of 10 questions, at the level chosen in Settings, and each miss adds a

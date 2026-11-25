@@ -6885,3 +6885,46 @@ etymology names a base, so the tests read etymology prose some 30 million times.
 can be checked just as well on ten verbs of known weight, since `draw` takes its list as a
 parameter, and the suite now runs in under two seconds. A single draw in the app weighs the band
 once, about 5 milliseconds, which needed no change.
+
+## Browse Fixes, Phase 3: A Router for Each Window (2026-11-25)
+
+Phase 3 of [`plans/verb_browse_fixes.md`](../plans/verb_browse_fixes.md) began by looking, as the
+plan asked, since the review had traced the shared state across windows without running it. The
+first obstacle was opening a second window at all. The iPad simulator ignored Command-N sent through
+AXe, and AXe's swipes do not reach the system's gestures. So the app gained a DEBUG launch argument,
+`-CONJUGUER_SECOND_WINDOW YES`, that calls `requestSceneSessionActivation` once the verbs load. On
+the iPad Pro 11 the windows open full screen, one at a time, and I moved between them through
+Simulator's App Switcher with computer use.
+
+What I saw was worse than the review's trace. A tab switch in one window showed in the other. A
+boire link presented the verb page in both windows, and the learner's record counted two opens 1.3
+seconds apart: B1 again, across windows this time, after Phase 2 had just fixed it inside one. And a
+search link sent while one window was in front filled the other window's field and left the front
+one empty, because both verb lists watched the one `searchRequest` and the wrong one answered first.
+
+The fix moved the routing out of `World` into `SceneRouter`: the tab, the routed sheet, the search,
+daily-session, and challenge requests, and the link held through a cold launch. A new `SceneRoot`
+view owns one per window as `@State` and puts it in the environment, beside `Current`, which keeps
+the services, settings, and stores every window shares. `.onOpenURL`, Spotlight's continuation, and
+the control's stashed link moved into `SceneRoot` with it, so each reaches its own window's router.
+The stashed link is still taken by whichever window becomes active first, which removes it at once.
+
+The harder part was what arrives with no window. A quick action names its `UIScene`, often before
+that scene's SwiftUI content exists. A reminder's response names a target scene. An App Intent names
+nothing. SwiftUI tells a view neither its window nor its scene, so `SceneRoot` puts a small UIKit
+view in its background whose `didMoveToWindow` tells the router its window. With that,
+`SceneRouter.deliver(_:to:)` can find the router for a scene, hold a link until that router
+attaches, or send a link with no scene to the active window, holding it until a window becomes
+active if none is. Command-F needed none of this: SwiftUI's focused scene value is exactly "the
+window in front", so the menu command reads the router through `@FocusedValue`.
+
+The arrow keys had been one static closure and one host. The second window's field never got the
+keys, since the first window still held them, and either window's uninstall took them from both.
+Each window now keeps its own installation, and a key finds its window through the responder that
+received it. The router knows its window, so `VerbBrowseView` installs there.
+
+One small thing came out of the look-first step for future sessions: `simctl spawn defaults write
+group.…` does not write the App Group's plist. It writes a stray file under the device's
+preferences that the app never reads. A `plutil` edit of the container's plist, with the app
+terminated, is what the control's mailbox needed. That is now in the `verify-in-simulator` skill,
+with the two-window procedure.

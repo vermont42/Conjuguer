@@ -51,6 +51,14 @@ material for the release notes.
 8. **Add the nine achievements to the version** with the leaderboards, and check on a device that
    View Achievements lists them, by [`game_center_setup.md`](game_center_setup.md) § Release Day
    and Testing.
+9. **Try two windows on a real iPad, and on a Mac if one is at hand.** Each window owns its
+   routing since the browse fixes' Phase 3 (2026-11-25), which was tried only on the iPad
+   simulator, where the windows were full screen and reached through the app switcher. With two
+   windows side by side: a tab switch in one leaves the other alone; a `conjuguer://` link, a
+   widget's tap, and Look Up a Verb open in one window, not both; Command-F opens the search of the
+   window in front; and ↑ and ↓ move the highlight only in the window whose field is focused. On
+   the Mac, check also that a link does not open a new window, which SwiftUI's `WindowGroup` may do
+   there for an external event.
 
 ## On Release Day
 

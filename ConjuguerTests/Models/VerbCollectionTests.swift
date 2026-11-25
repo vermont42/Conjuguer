@@ -16,12 +16,6 @@ struct VerbCollectionTests {
     Set(collection.verbs.map(\.infinitif))
   }
 
-  private func resetCurrent() {
-    Current.routedSheet = nil
-    Current.pendingDeeplink = nil
-    Current.searchRequest = nil
-  }
-
   @Test func featuredKeysRoundTrip() {
     for collection in VerbCollection.featured {
       #expect(VerbCollection(featuredKey: collection.key) == collection)
@@ -95,33 +89,33 @@ struct VerbCollectionTests {
 
   @Test func aListLinkOpensItsCollection() throws {
     for collection in VerbCollection.featured {
-      resetCurrent()
-      Current.selectedTab = .settings
-      Current.handleURL(collection.deeplink)
-      #expect(Current.routedCollection == VerbCollectionDestination(collection: collection, source: .sharedLink))
-      #expect(Current.selectedTab == .models)
+      let router = SceneRouter()
+      router.selectedTab = .settings
+      router.handleURL(collection.deeplink)
+      #expect(router.routedCollection == VerbCollectionDestination(collection: collection, source: .sharedLink))
+      #expect(router.selectedTab == .models)
     }
 
-    resetCurrent()
-    Current.handleURL(try #require(URL(string: "conjuguer://list/top100")))
-    #expect(Current.routedCollection?.source == .deeplink)
+    let router = SceneRouter()
+    router.handleURL(try #require(URL(string: "conjuguer://list/top100")))
+    #expect(router.routedCollection?.source == .deeplink)
   }
 
   @Test func anUnknownListLinkDoesNothing() throws {
-    resetCurrent()
-    Current.selectedTab = .settings
-    Current.handleURL(try #require(URL(string: "conjuguer://list/nonsense")))
-    #expect(Current.routedCollection == nil)
-    #expect(Current.selectedTab == .settings)
+    let router = SceneRouter()
+    router.selectedTab = .settings
+    router.handleURL(try #require(URL(string: "conjuguer://list/nonsense")))
+    #expect(router.routedCollection == nil)
+    #expect(router.selectedTab == .settings)
   }
 
   @Test func aModelsSharedLinkOpensTheModel() throws {
-    resetCurrent()
+    let router = SceneRouter()
     let link = VerbCollection.model("4-2B").deeplink
     #expect(link.absoluteString == "conjuguer://model/4-2B?source=sharedLink")
-    Current.handleURL(link)
-    #expect(Current.routedModel?.id == "4-2B")
-    #expect(Current.selectedTab == .models)
+    router.handleURL(link)
+    #expect(router.routedModel?.id == "4-2B")
+    #expect(router.selectedTab == .models)
   }
 
   @Test func theShareTextCarriesBothLinksAndCitesPronominals() throws {

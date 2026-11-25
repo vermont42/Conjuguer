@@ -9,6 +9,7 @@ import SwiftUI
 
 struct InfoBrowseView: View {
   @Environment(World.self) private var world
+  @Environment(SceneRouter.self) private var router
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
   @Environment(\.openURL) private var openURL
   @State private var navigationPath = NavigationPath()
@@ -29,12 +30,12 @@ struct InfoBrowseView: View {
           TutorView()
         }
       }
-      .task(id: world.shouldNavigateToTutor) {
-        guard world.shouldNavigateToTutor else {
+      .task(id: router.shouldNavigateToTutor) {
+        guard router.shouldNavigateToTutor else {
           return
         }
         try? await Task.sleep(for: .milliseconds(500))
-        world.shouldNavigateToTutor = false
+        router.shouldNavigateToTutor = false
         navigationPath.append(Self.tutorRoute)
       }
     }

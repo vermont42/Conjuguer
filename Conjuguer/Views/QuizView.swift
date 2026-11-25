@@ -14,6 +14,7 @@ struct QuizView: View {
   var sheetScope: QuizScope?
 
   @Environment(World.self) private var world
+  @Environment(SceneRouter.self) private var router
   @Environment(Quiz.self) var quiz
   @Environment(\.accessibilityReduceMotion) private var reduceMotion
   @Environment(\.dismiss) private var dismiss
@@ -112,10 +113,10 @@ struct QuizView: View {
         }
       }
     }
-    .onChange(of: world.dailySessionRequest) {
+    .onChange(of: router.dailySessionRequest) {
       startRequestedDailySession()
     }
-    .onChange(of: world.challengeRequest) {
+    .onChange(of: router.challengeRequest) {
       startRequestedChallenge()
     }
     .sensoryFeedback(trigger: quiz.quizResults.count) { _, newCount in
@@ -1132,10 +1133,10 @@ struct QuizView: View {
   /// The reminder's daily session, unless a quiz is under way or showing its results, which the
   /// learner returns to instead.
   private func startRequestedDailySession() {
-    guard sheetScope == nil, let request = world.dailySessionRequest else {
+    guard sheetScope == nil, let request = router.dailySessionRequest else {
       return
     }
-    world.dailySessionRequest = nil
+    router.dailySessionRequest = nil
     guard quiz.quizState != .inProgress, !quiz.shouldShowResults else {
       return
     }
@@ -1147,10 +1148,10 @@ struct QuizView: View {
   /// A shared link's or the quiz widget's challenge, unless a quiz is under way or showing its
   /// results, or the challenge was taken already, which leaves the hub showing today's result.
   private func startRequestedChallenge() {
-    guard sheetScope == nil, let request = world.challengeRequest else {
+    guard sheetScope == nil, let request = router.challengeRequest else {
       return
     }
-    world.challengeRequest = nil
+    router.challengeRequest = nil
     guard quiz.quizState != .inProgress, !quiz.shouldShowResults else {
       return
     }

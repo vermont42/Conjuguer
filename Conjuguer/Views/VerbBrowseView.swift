@@ -11,6 +11,7 @@ import TipKit
 
 struct VerbBrowseView: View {
   @Environment(World.self) private var world
+  @Environment(SceneRouter.self) private var router
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
   @Environment(\.scenePhase) private var scenePhase
   @State private var store: BrowseStore<Verb, VerbSort>?
@@ -158,18 +159,18 @@ struct VerbBrowseView: View {
       if !searchIsFocused {
         searchTracker.fieldClosed()
       }
-      guard BrowseLayout.isPadOrMac else {
+      guard BrowseLayout.isPadOrMac, let window = router.window else {
         return
       }
       if searchIsFocused {
-        VerbSearchArrowKeys.install { offset in
+        VerbSearchArrowKeys.install(in: window) { offset in
           moveKeyboardSelection(by: offset)
         }
       } else {
-        VerbSearchArrowKeys.uninstall()
+        VerbSearchArrowKeys.uninstall(from: window)
       }
     }
-    .onChange(of: world.searchRequest) {
+    .onChange(of: router.searchRequest) {
       openRequestedSearch()
     }
     .onChange(of: store.sort) { _, _ in
@@ -665,10 +666,10 @@ struct VerbBrowseView: View {
   /// are visible. A request with no text, or with empty text, is for typing, so it focuses the
   /// field. A nil text, Command-F's, keeps what the field holds.
   private func openRequestedSearch() {
-    guard let request = world.searchRequest, store != nil else {
+    guard let request = router.searchRequest, store != nil else {
       return
     }
-    world.searchRequest = nil
+    router.searchRequest = nil
     if let text = request.text {
       if let ended = searchTracker.fieldOpened(from: request.source) {
         signalEndedSearch(ended)

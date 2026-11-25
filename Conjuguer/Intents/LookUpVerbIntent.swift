@@ -51,7 +51,7 @@ struct OpenLookupResultIntent: AppIntent {
     let url = url
     await MainActor.run {
       if let url {
-        Current.handleURL(url)
+        SceneRouter.deliver(url)
       }
     }
     return .result()

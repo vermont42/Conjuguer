@@ -40,10 +40,18 @@ enum VerbSpotlight {
     return "\(format)-\(marketing)-\(build)"
   }
 
+  // Each window's launch asks for an index, and two windows that launch together would
+  // otherwise both spend those seconds.
+  private(set) static var isIndexing = false
+
   static func indexVerbsIfNeeded() async {
     let version = version
-    guard Current.getterSetter.get(key: indexedVersionKey) != version else {
+    guard !isIndexing, Current.getterSetter.get(key: indexedVersionKey) != version else {
       return
+    }
+    isIndexing = true
+    defer {
+      isIndexing = false
     }
     let conjugations = await Task.detached(priority: .utility) {
       conjugationsByVerb(in: .bundled)

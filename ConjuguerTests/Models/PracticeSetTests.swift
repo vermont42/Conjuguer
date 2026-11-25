@@ -217,40 +217,38 @@ extension DeeplinkTests {
     }
 
     @Test func aSetLinkShowsTheSetWithoutStartingAQuizOrSwitchingTabs() throws {
-      Current.routedSheet = nil
-      Current.selectedTab = .info
+      let router = SceneRouter()
+      router.selectedTab = .info
       let quizState = Current.quiz.quizState
 
-      Current.handleURL(try url("conjuguer://quiz/set?tenses=imparfait&level=beginner&source=qrCode"))
+      router.handleURL(try url("conjuguer://quiz/set?tenses=imparfait&level=beginner&source=qrCode"))
 
-      let request = try #require(Current.routedPracticeSet)
+      let request = try #require(router.routedPracticeSet)
       #expect(request.practiceSet == PracticeSet(custom: CustomQuiz(tenses: [.imparfait]), level: .beginner))
       #expect(request.source == .qrCode)
-      #expect(Current.selectedTab == .info)
+      #expect(router.selectedTab == .info)
       #expect(Current.quiz.quizState == quizState)
-      Current.routedSheet = nil
     }
 
     @Test func aLinkThatNamesNothingShowsWhy() throws {
-      Current.routedSheet = nil
-      Current.handleURL(try url("conjuguer://quiz/set?tenses=aoriste"))
-      let request = try #require(Current.routedPracticeSet)
+      let router = SceneRouter()
+      router.handleURL(try url("conjuguer://quiz/set?tenses=aoriste"))
+      let request = try #require(router.routedPracticeSet)
       #expect(request.practiceSet == nil)
       #expect(request.source == .deeplink)
-      Current.routedSheet = nil
     }
 
     @Test func aLaterLinkReplacesTheSet() throws {
-      Current.handleURL(try url("conjuguer://quiz/set?tenses=imparfait"))
-      let first = try #require(Current.routedPracticeSet)
-      Current.handleURL(try url("conjuguer://quiz/set?verbs=etre"))
-      let second = try #require(Current.routedPracticeSet)
+      let router = SceneRouter()
+      router.handleURL(try url("conjuguer://quiz/set?tenses=imparfait"))
+      let first = try #require(router.routedPracticeSet)
+      router.handleURL(try url("conjuguer://quiz/set?verbs=etre"))
+      let second = try #require(router.routedPracticeSet)
       #expect(first.id != second.id)
       #expect(second.practiceSet?.custom.verbSet == .collection(.être))
 
-      Current.handleURL(try url("conjuguer://verb/parler"))
-      #expect(Current.routedPracticeSet == nil)
-      Current.routedSheet = nil
+      router.handleURL(try url("conjuguer://verb/parler"))
+      #expect(router.routedPracticeSet == nil)
     }
   }
 }

@@ -19,31 +19,21 @@ struct DeeplinkTests {
     return url
   }
 
-  // Swift Testing has no setUp; each serialized test clears the shared `Current` entities
-  // first so a prior test's state can't leak in.
-  private func resetCurrent() {
-    Current.routedSheet = nil
-    Current.pendingDeeplink = nil
-    Current.searchRequest = nil
-    Current.dailySessionRequest = nil
-    Current.challengeRequest = nil
-  }
-
   private func link(_ string: String) throws -> Deeplink {
     try #require(Deeplink(url: url(string)))
   }
 
   @Test func testHandleURLSwitchesTab() {
-    resetCurrent()
-    Current.selectedTab = .settings
-    Current.handleURL(url("conjuguer://verb/parler"))
-    #expect(Current.routedVerb?.verb.infinitif == "parler")
-    #expect(Current.selectedTab == .verbs)
+    let router = SceneRouter()
+    router.selectedTab = .settings
+    router.handleURL(url("conjuguer://verb/parler"))
+    #expect(router.routedVerb?.verb.infinitif == "parler")
+    #expect(router.selectedTab == .verbs)
 
-    Current.selectedTab = .settings
-    Current.handleURL(url("conjuguer://info/2"))
-    #expect(Current.routedArticle == Info.infos[2])
-    #expect(Current.selectedTab == .info)
+    router.selectedTab = .settings
+    router.handleURL(url("conjuguer://info/2"))
+    #expect(router.routedArticle == Info.infos[2])
+    #expect(router.selectedTab == .info)
   }
 
   /// An article's links are its rich text's URLs: a heading, percent-encoded, names another
@@ -57,8 +47,8 @@ struct DeeplinkTests {
   }
 
   @Test func testQuizDeeplinkStartsQuizAndSwitchesTab() {
-    resetCurrent()
-    Current.selectedTab = .settings
+    let router = SceneRouter()
+    router.selectedTab = .settings
     let original = Current.analytics
     let spy = AnalyticsSpy()
     Current.analytics = spy
@@ -66,16 +56,16 @@ struct DeeplinkTests {
       Current.analytics = original
     }
 
-    Current.handleURL(url("conjuguer://quiz/start"))
+    router.handleURL(url("conjuguer://quiz/start"))
 
-    #expect(Current.selectedTab == .quiz)
+    #expect(router.selectedTab == .quiz)
     #expect(Current.quiz.quizState == .inProgress)
     #expect(Current.quiz.scope.isRanked)
     #expect(spy.signalNames == [.quizStart])
     #expect(spy.signalParameters.first?[ParameterKey.source.rawValue] == "deeplink")
 
     Current.quiz.quit()
-    Current.handleURL(url("conjuguer://quiz/start?source=control"))
+    router.handleURL(url("conjuguer://quiz/start?source=control"))
     #expect(spy.signalParameters.last?[ParameterKey.source.rawValue] == "control")
     Current.quiz.quit()
   }
@@ -83,44 +73,44 @@ struct DeeplinkTests {
   /// The reminder's link opens the Quiz tab with a request that names it, and starts nothing
   /// itself: the tab starts the session unless a quiz is under way.
   @Test func testDailySessionDeeplinkRequestsASession() throws {
-    resetCurrent()
+    let router = SceneRouter()
     let link = Deeplink.dailySession(source: .reminder).url
     #expect(link.absoluteString == "conjuguer://quiz/daily?source=reminder")
-    Current.selectedTab = .verbs
-    Current.handleURL(link)
+    router.selectedTab = .verbs
+    router.handleURL(link)
 
-    #expect(Current.selectedTab == .quiz)
-    #expect(Current.dailySessionRequest?.source == .reminder)
-    #expect(Current.routedPracticeSet == nil)
+    #expect(router.selectedTab == .quiz)
+    #expect(router.dailySessionRequest?.source == .reminder)
+    #expect(router.routedPracticeSet == nil)
 
-    Current.handleURL(url("conjuguer://verb/parler"))
-    #expect(Current.dailySessionRequest == nil)
+    router.handleURL(url("conjuguer://verb/parler"))
+    #expect(router.dailySessionRequest == nil)
   }
 
   /// A shared result's link asks for that day's challenge at that level, and the tab starts it
   /// unless a quiz is under way or the challenge was taken.
   @Test func testChallengeDeeplinkRequestsThatChallenge() throws {
-    resetCurrent()
+    let router = SceneRouter()
     let key = try #require(DailyChallenge.Key(day: "2026-11-24", level: .advanced))
     let link = Deeplink.challenge(day: key.day, level: key.level, source: .challengeLink).url
     #expect(link.absoluteString == "conjuguer://quiz/challenge?date=2026-11-24&level=advanced&source=challengeLink")
-    Current.selectedTab = .verbs
-    Current.handleURL(link)
+    router.selectedTab = .verbs
+    router.handleURL(link)
 
-    #expect(Current.selectedTab == .quiz)
-    #expect(Current.challengeRequest?.key == key)
-    #expect(Current.challengeRequest?.source == .challengeLink)
+    #expect(router.selectedTab == .quiz)
+    #expect(router.challengeRequest?.key == key)
+    #expect(router.challengeRequest?.source == .challengeLink)
 
-    Current.handleURL(url("conjuguer://verb/parler"))
-    #expect(Current.challengeRequest == nil)
+    router.handleURL(url("conjuguer://verb/parler"))
+    #expect(router.challengeRequest == nil)
   }
 
   @Test func testChallengeWidgetLinkRequestsTodaysChallenge() {
-    resetCurrent()
-    Current.handleURL(url("conjuguer://quiz/challenge?source=challengeWidget"))
-    #expect(Current.challengeRequest?.key == nil)
-    #expect(Current.challengeRequest?.source == .challengeWidget)
-    #expect(Current.selectedTab == .quiz)
+    let router = SceneRouter()
+    router.handleURL(url("conjuguer://quiz/challenge?source=challengeWidget"))
+    #expect(router.challengeRequest?.key == nil)
+    #expect(router.challengeRequest?.source == .challengeWidget)
+    #expect(router.selectedTab == .quiz)
   }
 
   /// A link with no valid date asks for today's, and one with no known level asks at the
@@ -131,111 +121,111 @@ struct DeeplinkTests {
       Current.settings.quizLevel = level
     }
     Current.settings.quizLevel = .elementary
-    resetCurrent()
-    Current.handleURL(url("conjuguer://quiz/challenge?date=2026-02-30&level=advanced&source=challengeLink"))
-    #expect(Current.challengeRequest != nil)
-    #expect(Current.challengeRequest?.key == nil)
+    let router = SceneRouter()
+    router.handleURL(url("conjuguer://quiz/challenge?date=2026-02-30&level=advanced&source=challengeLink"))
+    #expect(router.challengeRequest != nil)
+    #expect(router.challengeRequest?.key == nil)
 
-    Current.handleURL(url("conjuguer://quiz/challenge?date=2026-11-24&level=expert&source=challengeLink"))
-    #expect(Current.challengeRequest?.key == DailyChallenge.Key(day: "2026-11-24", level: .elementary))
+    router.handleURL(url("conjuguer://quiz/challenge?date=2026-11-24&level=expert&source=challengeLink"))
+    #expect(router.challengeRequest?.key == DailyChallenge.Key(day: "2026-11-24", level: .elementary))
   }
 
   @Test func testModelDeeplinkSelectsModel() {
-    resetCurrent()
-    Current.selectedTab = .verbs
+    let router = SceneRouter()
+    router.selectedTab = .verbs
 
-    Current.handleURL(url("conjuguer://model/4-2B"))
+    router.handleURL(url("conjuguer://model/4-2B"))
 
-    #expect(Current.routedModel?.id == "4-2B")
-    #expect(Current.selectedTab == .models)
+    #expect(router.routedModel?.id == "4-2B")
+    #expect(router.selectedTab == .models)
   }
 
   @Test func testRandomVerbDeeplinkSelectsSomeVerb() {
-    resetCurrent()
-    Current.selectedTab = .settings
+    let router = SceneRouter()
+    router.selectedTab = .settings
 
-    Current.handleURL(url("conjuguer://verb/random"))
+    router.handleURL(url("conjuguer://verb/random"))
 
-    #expect(Current.routedVerb != nil, "The random-verb link must resolve to a verb.")
-    #expect(Current.selectedTab == .verbs)
+    #expect(router.routedVerb != nil, "The random-verb link must resolve to a verb.")
+    #expect(router.selectedTab == .verbs)
   }
 
   @Test func testNegativeInfoIndexIsRejectedWithoutCrashing() {
-    resetCurrent()
-    Current.selectedTab = .settings
+    let router = SceneRouter()
+    router.selectedTab = .settings
 
     // Finding 9: `-1` passes the upper-bound check but must be rejected by the
     // `indices.contains` guard rather than trapping on `Info.infos[-1]`.
-    Current.handleURL(url("conjuguer://info/-1"))
+    router.handleURL(url("conjuguer://info/-1"))
 
-    #expect(Current.routedArticle == nil)
-    #expect(Current.selectedTab == .settings, "An out-of-range info link must not switch the tab.")
+    #expect(router.routedArticle == nil)
+    #expect(router.selectedTab == .settings, "An out-of-range info link must not switch the tab.")
   }
 
   @Test func testTooLargeInfoIndexIsRejected() {
-    resetCurrent()
-    Current.selectedTab = .settings
+    let router = SceneRouter()
+    router.selectedTab = .settings
 
-    Current.handleURL(url("conjuguer://info/9999"))
+    router.handleURL(url("conjuguer://info/9999"))
 
-    #expect(Current.routedArticle == nil)
-    #expect(Current.selectedTab == .settings)
+    #expect(router.routedArticle == nil)
+    #expect(router.selectedTab == .settings)
   }
 
   @Test func testNonNumericInfoIndexIsRejected() {
-    resetCurrent()
-    Current.selectedTab = .settings
+    let router = SceneRouter()
+    router.selectedTab = .settings
 
-    Current.handleURL(url("conjuguer://info/abc"))
+    router.handleURL(url("conjuguer://info/abc"))
 
-    #expect(Current.routedArticle == nil)
-    #expect(Current.selectedTab == .settings)
+    #expect(router.routedArticle == nil)
+    #expect(router.selectedTab == .settings)
   }
 
   @Test func testWrongSchemeIsIgnored() {
-    resetCurrent()
-    Current.selectedTab = .settings
+    let router = SceneRouter()
+    router.selectedTab = .settings
 
-    Current.handleURL(url("https://verb/parler"))
+    router.handleURL(url("https://verb/parler"))
 
-    #expect(Current.routedVerb == nil, "A non-conjuguer scheme must not resolve an entity.")
-    #expect(Current.selectedTab == .settings)
+    #expect(router.routedVerb == nil, "A non-conjuguer scheme must not resolve an entity.")
+    #expect(router.selectedTab == .settings)
   }
 
   @Test func testWrongComponentCountIsIgnored() {
-    resetCurrent()
-    Current.selectedTab = .settings
+    let router = SceneRouter()
+    router.selectedTab = .settings
 
     // `conjuguer://verb` has no path component, so it fails the component-count guard.
-    Current.handleURL(url("conjuguer://verb"))
+    router.handleURL(url("conjuguer://verb"))
 
-    #expect(Current.routedVerb == nil)
-    #expect(Current.selectedTab == .settings)
+    #expect(router.routedVerb == nil)
+    #expect(router.selectedTab == .settings)
   }
 
   @Test func testDrainPendingDeeplinkReplaysDeferredLink() {
-    resetCurrent()
-    Current.selectedTab = .settings
+    let router = SceneRouter()
+    router.selectedTab = .settings
 
     // Simulates the cold-launch case: handleURL deferred a widget link (stored it in
     // pendingDeeplink) because VerbData had not loaded yet.
-    Current.pendingDeeplink = .verb(.key("parler"))
+    router.pendingDeeplink = .verb(.key("parler"))
 
-    Current.drainPendingDeeplink()
+    router.drainPendingDeeplink()
 
-    #expect(Current.routedVerb?.verb.infinitif == "parler", "Draining must resolve the deferred verb.")
-    #expect(Current.selectedTab == .verbs, "Draining must switch to the verb's tab.")
-    #expect(Current.pendingDeeplink == nil, "Draining must clear the pending deeplink.")
+    #expect(router.routedVerb?.verb.infinitif == "parler", "Draining must resolve the deferred verb.")
+    #expect(router.selectedTab == .verbs, "Draining must switch to the verb's tab.")
+    #expect(router.pendingDeeplink == nil, "Draining must clear the pending deeplink.")
   }
 
   @Test func testDrainPendingDeeplinkIsNoOpWhenNonePending() {
-    resetCurrent()
-    Current.selectedTab = .settings
+    let router = SceneRouter()
+    router.selectedTab = .settings
 
-    Current.drainPendingDeeplink()
+    router.drainPendingDeeplink()
 
-    #expect(Current.routedVerb == nil)
-    #expect(Current.selectedTab == .settings, "Draining with nothing pending must not change state.")
+    #expect(router.routedVerb == nil)
+    #expect(router.selectedTab == .settings, "Draining with nothing pending must not change state.")
   }
 
   /// A link that names nothing must not close what is showing or drop what is pending (B4 of
@@ -252,50 +242,50 @@ struct DeeplinkTests {
     "https://verb/parler"
   ])
   func testALinkThatNamesNothingChangesNothing(link: String) throws {
-    resetCurrent()
-    Current.handleURL(url("conjuguer://verb/lire?match=lis&source=lookup"))
-    let sheet = try #require(Current.routedSheet)
-    let marks = try #require(Current.routedVerb?.marks)
+    let router = SceneRouter()
+    router.handleURL(url("conjuguer://verb/lire?match=lis&source=lookup"))
+    let sheet = try #require(router.routedSheet)
+    let marks = try #require(router.routedVerb?.marks)
     let search = SearchRequest(text: "suis", source: .lookup)
-    Current.searchRequest = search
+    router.searchRequest = search
     let session = DailySessionRequest(source: .reminder)
-    Current.dailySessionRequest = session
-    Current.selectedTab = .settings
+    router.dailySessionRequest = session
+    router.selectedTab = .settings
 
-    Current.handleURL(url(link))
+    router.handleURL(url(link))
 
-    #expect(Current.routedVerb?.verb.infinitif == "lire")
-    #expect(Current.routedVerb?.source == .lookup)
-    #expect(Current.routedVerb?.marks == marks)
-    #expect(Current.routedSheet?.id == sheet.id)
-    #expect(Current.searchRequest == search)
-    #expect(Current.dailySessionRequest == session)
-    #expect(Current.selectedTab == .settings)
+    #expect(router.routedVerb?.verb.infinitif == "lire")
+    #expect(router.routedVerb?.source == .lookup)
+    #expect(router.routedVerb?.marks == marks)
+    #expect(router.routedSheet?.id == sheet.id)
+    #expect(router.searchRequest == search)
+    #expect(router.dailySessionRequest == session)
+    #expect(router.selectedTab == .settings)
   }
 
   @Test func testUnknownHostIsIgnored() {
-    resetCurrent()
-    Current.selectedTab = .settings
+    let router = SceneRouter()
+    router.selectedTab = .settings
 
-    Current.handleURL(url("conjuguer://bogus/thing"))
+    router.handleURL(url("conjuguer://bogus/thing"))
 
-    #expect(Current.routedVerb == nil)
-    #expect(Current.routedModel == nil)
-    #expect(Current.routedArticle == nil)
-    #expect(Current.selectedTab == .settings, "An unknown host must not switch the tab.")
+    #expect(router.routedVerb == nil)
+    #expect(router.routedModel == nil)
+    #expect(router.routedArticle == nil)
+    #expect(router.selectedTab == .settings, "An unknown host must not switch the tab.")
   }
 
   @Test func testOpenSearchClosesPagesAndRequestsTheField() {
-    resetCurrent()
-    Current.selectedTab = .quiz
-    Current.handleURL(url("conjuguer://verb/parler"))
+    let router = SceneRouter()
+    router.selectedTab = .quiz
+    router.handleURL(url("conjuguer://verb/parler"))
 
-    Current.openSearch(text: nil, source: .tab)
+    router.openSearch(text: nil, source: .tab)
 
-    #expect(Current.routedSheet == nil)
-    #expect(Current.selectedTab == .verbs)
-    #expect(Current.searchRequest == SearchRequest(text: nil, source: .tab))
-    Current.searchRequest = nil
+    #expect(router.routedSheet == nil)
+    #expect(router.selectedTab == .verbs)
+    #expect(router.searchRequest == SearchRequest(text: nil, source: .tab))
+    router.searchRequest = nil
   }
 
   @Test(arguments: [
@@ -306,17 +296,17 @@ struct DeeplinkTests {
     ("conjuguer://verb/aller?other=1&source=control", .control)
   ])
   func testVerbLinkCarriesItsSource(link: String, source: AnalyticsSource) {
-    resetCurrent()
-    Current.handleURL(url(link))
-    #expect(Current.routedVerb?.verb.infinitif == "aller")
-    #expect(Current.routedVerb?.source == source)
+    let router = SceneRouter()
+    router.handleURL(url(link))
+    #expect(router.routedVerb?.verb.infinitif == "aller")
+    #expect(router.routedVerb?.source == source)
   }
 
   @Test func testSourceItemDoesNotBreakAPercentEncodedVerb() {
-    resetCurrent()
-    Current.handleURL(url("conjuguer://verb/ha%C3%AFr%20France?source=widget"))
-    #expect(Current.routedVerb?.verb.dictionaryKey == "haïr France")
-    #expect(Current.routedVerb?.source == .widget)
+    let router = SceneRouter()
+    router.handleURL(url("conjuguer://verb/ha%C3%AFr%20France?source=widget"))
+    #expect(router.routedVerb?.verb.dictionaryKey == "haïr France")
+    #expect(router.routedVerb?.source == .widget)
   }
 
   @Test func testQueryItemsDoNotCountAsPathComponents() throws {
@@ -329,83 +319,82 @@ struct DeeplinkTests {
     (OpenRandomVerbControlIntent.pendingDeeplink, .control)
   ])
   func testRandomVerbIntentsNameThemselves(link: String, source: AnalyticsSource) {
-    resetCurrent()
-    Current.handleURL(url(link))
-    #expect(Current.routedVerb != nil)
-    #expect(Current.routedVerb?.source == source)
+    let router = SceneRouter()
+    router.handleURL(url(link))
+    #expect(router.routedVerb != nil)
+    #expect(router.routedVerb?.source == source)
   }
 
   @Test func testASearchLinkRequestsItsTextFromItsSource() {
-    resetCurrent()
-    Current.handleURL(url("conjuguer://verb/parler"))
-    Current.selectedTab = .quiz
-    Current.handleURL(url("conjuguer://search?q=j%27ai%20mang%C3%A9&source=lookup"))
-    #expect(Current.searchRequest == SearchRequest(text: "j'ai mangé", source: .lookup))
-    #expect(Current.selectedTab == .verbs)
-    #expect(Current.routedVerb == nil)
+    let router = SceneRouter()
+    router.handleURL(url("conjuguer://verb/parler"))
+    router.selectedTab = .quiz
+    router.handleURL(url("conjuguer://search?q=j%27ai%20mang%C3%A9&source=lookup"))
+    #expect(router.searchRequest == SearchRequest(text: "j'ai mangé", source: .lookup))
+    #expect(router.selectedTab == .verbs)
+    #expect(router.routedVerb == nil)
   }
 
   @Test func testASearchLinkWithoutTextClearsTheFieldForTyping() {
-    resetCurrent()
-    Current.handleURL(url("conjuguer://search"))
-    #expect(Current.searchRequest == SearchRequest(text: "", source: .deeplink))
+    let router = SceneRouter()
+    router.handleURL(url("conjuguer://search"))
+    #expect(router.searchRequest == SearchRequest(text: "", source: .deeplink))
   }
 
   @Test func testTheSearchRouteTakesNoTarget() {
-    resetCurrent()
-    Current.selectedTab = .settings
-    Current.handleURL(url("conjuguer://search/venir"))
-    #expect(Current.searchRequest == nil)
-    #expect(Current.selectedTab == .settings)
+    let router = SceneRouter()
+    router.selectedTab = .settings
+    router.handleURL(url("conjuguer://search/venir"))
+    #expect(router.searchRequest == nil)
+    #expect(router.selectedTab == .settings)
   }
 
   @Test func testAVerbLinkClearsAPendingSearchRequest() {
-    resetCurrent()
-    Current.handleURL(url("conjuguer://search?q=suis"))
-    Current.handleURL(url("conjuguer://verb/aller"))
-    #expect(Current.searchRequest == nil)
-    #expect(Current.routedVerb?.verb.infinitif == "aller")
+    let router = SceneRouter()
+    router.handleURL(url("conjuguer://search?q=suis"))
+    router.handleURL(url("conjuguer://verb/aller"))
+    #expect(router.searchRequest == nil)
+    #expect(router.routedVerb?.verb.infinitif == "aller")
   }
 
   @Test func testAMatchMarksItsCells() throws {
-    resetCurrent()
-    Current.handleURL(url("conjuguer://verb/aller?match=vais&source=lookup"))
-    let marks = try #require(Current.routedVerb?.marks)
+    let router = SceneRouter()
+    router.handleURL(url("conjuguer://verb/aller?match=vais&source=lookup"))
+    let marks = try #require(router.routedVerb?.marks)
     #expect(marks.tenses == [.indicatifPrésent(.firstSingular)])
-    #expect(Current.routedVerb?.source == .lookup)
+    #expect(router.routedVerb?.source == .lookup)
   }
 
   @Test func testACompoundMatchMarksTheCompoundTense() throws {
-    resetCurrent()
-    Current.handleURL(url("conjuguer://verb/manger?match=ai%20mang%C3%A9"))
-    let marks = try #require(Current.routedVerb?.marks)
+    let router = SceneRouter()
+    router.handleURL(url("conjuguer://verb/manger?match=ai%20mang%C3%A9"))
+    let marks = try #require(router.routedVerb?.marks)
     #expect(marks.includesCompoundTense)
     #expect(marks.contains(.passéComposé(.firstSingular)))
   }
 
   @Test func testAMatchThatFillsNoCellStillOpensThePage() {
-    resetCurrent()
-    Current.handleURL(url("conjuguer://verb/aller?match=xyzzyq"))
-    #expect(Current.routedVerb?.verb.infinitif == "aller")
-    #expect(Current.routedVerb?.marks == nil)
+    let router = SceneRouter()
+    router.handleURL(url("conjuguer://verb/aller?match=xyzzyq"))
+    #expect(router.routedVerb?.verb.infinitif == "aller")
+    #expect(router.routedVerb?.marks == nil)
   }
 
   @Test func testAnInfoLinkNamesItsArticleByKeyOrPosition() {
     for (index, info) in Info.infos.enumerated() {
-      resetCurrent()
-      Current.handleURL(url("conjuguer://info/\(info.stableKey)"))
-      #expect(Current.routedArticle == info)
-      resetCurrent()
-      Current.handleURL(url("conjuguer://info/\(index)"))
-      #expect(Current.routedArticle == info)
+      let router = SceneRouter()
+      router.handleURL(url("conjuguer://info/\(info.stableKey)"))
+      #expect(router.routedArticle == info)
+      router.handleURL(url("conjuguer://info/\(index)"))
+      #expect(router.routedArticle == info)
     }
   }
 
   @Test func testInfoBuilderRoundTrips() throws {
     for info in Info.infos {
-      resetCurrent()
-      Current.handleURL(Deeplink.info(info.stableKey).url)
-      #expect(Current.routedArticle == info)
+      let router = SceneRouter()
+      router.handleURL(Deeplink.info(info.stableKey).url)
+      #expect(router.routedArticle == info)
     }
   }
 
@@ -418,25 +407,25 @@ struct DeeplinkTests {
   ])
   func testVerbBuilderRoundTrips(key: String, match: String, marked: Tense) throws {
     try #require(Verb.verbs[key] != nil)
-    resetCurrent()
-    Current.handleURL(Deeplink.verb(.key(key), source: .widget, match: match).url)
-    #expect(Current.routedVerb?.verb.dictionaryKey == key)
-    #expect(Current.routedVerb?.source == .widget)
-    #expect(Current.routedVerb?.marks?.tenses == [marked])
+    let router = SceneRouter()
+    router.handleURL(Deeplink.verb(.key(key), source: .widget, match: match).url)
+    #expect(router.routedVerb?.verb.dictionaryKey == key)
+    #expect(router.routedVerb?.source == .widget)
+    #expect(router.routedVerb?.marks?.tenses == [marked])
   }
 
   @Test(arguments: ["suis", "j'ai mangé", "to go", "a&b=c#d/e?f", "", "œuvrer"])
   func testSearchBuilderRoundTrips(text: String) throws {
-    resetCurrent()
-    Current.handleURL(Deeplink.search(text: text, source: .lookup).url)
-    #expect(Current.searchRequest == SearchRequest(text: text, source: .lookup))
+    let router = SceneRouter()
+    router.handleURL(Deeplink.search(text: text, source: .lookup).url)
+    #expect(router.searchRequest == SearchRequest(text: text, source: .lookup))
   }
 
   @Test func testModelBuilderRoundTrips() throws {
-    resetCurrent()
+    let router = SceneRouter()
     let model = try #require(VerbModel.models["4-2B"])
-    Current.handleURL(Deeplink.model(model.id).url)
-    #expect(Current.routedModel == model)
+    router.handleURL(Deeplink.model(model.id).url)
+    #expect(router.routedModel == model)
   }
 
   // The control's link is a literal, which Shared/ writes because it cannot reach the builders.
@@ -446,28 +435,28 @@ struct DeeplinkTests {
       (QuickAction.findVerb.deeplink.url, .quickAction)
     ]
     for (link, source) in links {
-      resetCurrent()
-      Current.selectedTab = .quiz
-      Current.handleURL(link)
-      #expect(Current.searchRequest == SearchRequest(text: "", source: source))
-      #expect(Current.selectedTab == .verbs)
+      let router = SceneRouter()
+      router.selectedTab = .quiz
+      router.handleURL(link)
+      #expect(router.searchRequest == SearchRequest(text: "", source: source))
+      #expect(router.selectedTab == .verbs)
     }
   }
 
   @Test func testASpotlightResultOpensItsVerb() throws {
-    resetCurrent()
+    let router = SceneRouter()
     let key = VerbSpotlight.verbKey(fromSpotlightIdentifier: "VerbEntity/haïr France")
-    Current.handleURL(Deeplink.verb(.key(key), source: .spotlight).url)
-    #expect(Current.routedVerb?.verb.dictionaryKey == "haïr France")
-    #expect(Current.routedVerb?.source == .spotlight)
+    router.handleURL(Deeplink.verb(.key(key), source: .spotlight).url)
+    #expect(router.routedVerb?.verb.dictionaryKey == "haïr France")
+    #expect(router.routedVerb?.source == .spotlight)
   }
 
   @Test func testAPendingSearchLinkIsReplayed() {
-    resetCurrent()
-    Current.pendingDeeplink = .search(text: "vais", source: .lookup)
-    Current.drainPendingDeeplink()
-    #expect(Current.searchRequest == SearchRequest(text: "vais", source: .lookup))
-    #expect(Current.pendingDeeplink == nil)
+    let router = SceneRouter()
+    router.pendingDeeplink = .search(text: "vais", source: .lookup)
+    router.drainPendingDeeplink()
+    #expect(router.searchRequest == SearchRequest(text: "vais", source: .lookup))
+    #expect(router.pendingDeeplink == nil)
   }
 
   // A model page's verbs list is a run of these links, which ModelView reads back.

@@ -83,8 +83,9 @@ query use it too.
   (`.navigationBarDrawer(displayMode: .always)`, `BrowseLayout.searchPlacement`) on both tabs,
   because iPadOS 26 shrinks `.automatic` search into a toolbar button that ignores `.searchFocused`.
   iPhone keeps `.automatic`. **Command-F** is a top-level menu command (Verbs › Find a Verb) that
-  calls `World.openSearch(text: nil, source: .tab)`: it closes any deeplinked page, switches to the
-  Verbs tab, and sets `searchRequest`, which `VerbBrowseView` answers by popping any pushed verb page
+  calls `openSearch(text: nil, source: .tab)` on the focused window's `SceneRouter`, which it reads
+  through `@FocusedValue(\.sceneRouter)`: it closes that window's deeplinked page, switches it to the
+  Verbs tab, and sets its `searchRequest`, which `VerbBrowseView` answers by popping any pushed verb page
   (waiting 500 ms for the pop, or the focus does not take) and focusing the field, keeping its text.
   The `search` route, the Find a Verb control, and the quick action make the same request with
   text (§ Deeplinks).
@@ -92,7 +93,8 @@ query use it too.
   red tint on a list row), stopping at either end; the first ↓ lands on the first result. They need
   `VerbSearchArrowKeys`, a `UIKeyCommand` on the window's root view controller installed only while
   the verb field is focused, because a focused text field consumes them ahead of every SwiftUI
-  mechanism. **Return** opens the highlighted result, else the first, else the guess. Return and the
+  mechanism. Each window keeps its own installation and its own closure, and a key moves the
+  highlight of the window whose responder chain it arrived through. **Return** opens the highlighted result, else the first, else the guess. Return and the
   arrows act only on the iPad idiom (which a Mac running the iPad app also reports) and only while
   the field holds a query, so the iPhone keyboard's Search key keeps its usual behavior.
 - **Cost.** One search over 6,330 verbs takes about 20 ms on the Intel simulator, and about 50 ms
@@ -577,7 +579,7 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
   `init?(url:)` is the only parser and its `url` the only builder, which percent-encodes and leaves
   out a `source` of `deeplink`, so every route round-trips (`DeeplinkTests.testEveryRouteRoundTrips`).
   App code builds a value (`.verb(.key("aller"), source: .lookup, match: "vais")`) and hands it to
-  `World.handle(_:)`, or its `url` to whatever needs a URL. Only the widget extension and
+  a window's `SceneRouter.handle(_:)`, or its `url` to whatever needs a URL. Only the widget extension and
   `Shared/`, which cannot see `AnalyticsSource`, write literals (`WidgetDeeplink.verb(_:)`, `WidgetDeeplink.challenge`, the
   pending links of `OpenQuizIntent`, `OpenRandomVerbIntent`, `OpenRandomVerbControlIntent`, and
   `OpenVerbSearchIntent`), and `DeeplinkTests` pins each literal's source to the vocabulary.
@@ -588,7 +590,7 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
 | `search` | None | `q`, the text; `source` | The verb list with its search field, any verb page closed. With text, the results show with the keyboard down; with none (or `q` empty), the field is cleared and focused for typing | No |
 | `model` | A model's identifier (`1-1`) | `source`, which a shared model sends as `sharedLink` and nothing reads yet | The model page as a sheet over the Models tab. An unknown model does nothing | Yes; `source` is unreleased |
 | `info` | A stable key (`futur_simple`), or a legacy position (`info/0`) | None | The article as a sheet over the Info tab. An unknown key or out-of-range position does nothing | Yes; keys are unreleased |
-| `quiz` | `set`, a practice set; `daily`, a daily session; `challenge`, a daily challenge; anything else (`OpenQuizIntent` sends `quiz/start`) | For `set`: the custom quiz's stored form (`tenses`, and `verbs` or `infinitives`), `level`, `source`. For `daily`: `source`. For `challenge`: `date` (`yyyy-MM-dd`), `level`, `source` | `set`: the practice set as a sheet over whatever tab is open, never starting a quiz (§ Practice Sets). `daily`: the Quiz tab, which starts a daily session (`World.dailySessionRequest`) unless a quiz is in progress or showing its results (§ Daily Session). `challenge`: the Quiz tab, which starts that day's challenge at that level (`World.challengeRequest`), or today's at the learner's level when the date is missing or not a date, unless a quiz is in progress or showing results or the challenge was taken (§ Daily Challenge). Anything else: the Quiz tab, starting the default quiz unless one is in progress, with the link's `source`, or `deeplink` | Yes; `set`, `daily`, and `challenge` are unreleased |
+| `quiz` | `set`, a practice set; `daily`, a daily session; `challenge`, a daily challenge; anything else (`OpenQuizIntent` sends `quiz/start`) | For `set`: the custom quiz's stored form (`tenses`, and `verbs` or `infinitives`), `level`, `source`. For `daily`: `source`. For `challenge`: `date` (`yyyy-MM-dd`), `level`, `source` | `set`: the practice set as a sheet over whatever tab is open, never starting a quiz (§ Practice Sets). `daily`: the Quiz tab, which starts a daily session (`SceneRouter.dailySessionRequest`) unless a quiz is in progress or showing its results (§ Daily Session). `challenge`: the Quiz tab, which starts that day's challenge at that level (`SceneRouter.challengeRequest`), or today's at the learner's level when the date is missing or not a date, unless a quiz is in progress or showing results or the challenge was taken (§ Daily Challenge). Anything else: the Quiz tab, starting the default quiz unless one is in progress, with the link's `source`, or `deeplink` | Yes; `set`, `daily`, and `challenge` are unreleased |
 | `list` | A featured collection's key (`top100`, `etre`, `irregularFutur`, `pronominal`) | `source` | The collection's page as a sheet over the Models tab. An unknown key does nothing. A model's collection is reached by its `model/` link, not by `list/model-<id>` | No |
 
 A `match` is read as search reads a query (`MarkedConjugations(text:on:)`, through
@@ -601,23 +603,26 @@ does ([Reverse Lookup](#reverse-lookup)). Look Up a Verb sends the row's own spe
 | File | Purpose |
 |------|---------|
 | `Deeplink.swift` | The grammar: one case per route, holding its targets as keys (`VerbTarget` is a key or `random`) and its query items as values. `init?(url:)` and `url` |
-| `World.swift` | `handleURL(_:)` parses a URL and hands it to `handle(_:)`, which resolves the link to a `Destination` (a page for the routed sheet, or a request) first. Only when it resolves does it clear `routedSheet`, `searchRequest`, `dailySessionRequest`, and `challengeRequest`, assign the destination, and select its tab, so a link naming nothing closes nothing and drops nothing pending. `openSearch(text:source:)` shows a search destination, the same path the search route takes, and Command-F uses it too (`text` nil keeps the field's text) |
+| `SceneRouter.swift` | One window's routing: its tab, its routed sheet, and its search, daily-session, and challenge requests. `SceneRoot` owns one per window, so a link, a tab switch, or Command-F in one window leaves the others as they were; the services, settings, and stores stay in `World`, which every window shares. `handleURL(_:)` parses a URL and hands it to `handle(_:)`, which resolves the link to a `Destination` (a page for the routed sheet, or a request) first. Only when it resolves does it clear `routedSheet`, `searchRequest`, `dailySessionRequest`, and `challengeRequest`, assign the destination, and select its tab, so a link naming nothing closes nothing and drops nothing pending. `openSearch(text:source:)` shows a search destination, the same path the search route takes, and Command-F uses it too (`text` nil keeps the field's text). `deliver(_:to:)` routes a link that arrives outside any window: to the named scene's router, or with no scene to the active window's (the key window's when several are active), holding it until that router exists or a window becomes active |
+| `SceneRoot.swift` | One window's content. Owns its `SceneRouter`, tells it its window, publishes it as the focused scene value, and receives the window's links: `.onOpenURL`; a Spotlight result through `.onContinueUserActivity(CSSearchableItemActionType)`, turned into a `verb/` link with `source` `spotlight`; and on each activation of the window, a link that a control's or a shortcut's intent left in the shared defaults (`WidgetConstants.pendingDeeplinkKey`), which the first window to become active takes and removes |
 | `Info.swift` | `Info.info(deeplinkTarget:)` resolves a stable key or a legacy position |
 | `MatchedConjugation.swift` | `MarkedConjugations(text:on:)` reads a `match` item |
 | `RoutedSheet.swift` | `RoutedSheet`: what a link shows over the tabs (a verb's page, a model's, a collection's, an article, or a practice set) and the tab beneath it. Each value has its own identity, so a second link to the page already showing presents it afresh, scrolled to the new mark, with a new visit |
-| `MainTabView.swift` | Presents `World.routedSheet`, the one sheet a link opens. No tab presents one, so a tab left loaded off screen cannot present a second copy |
+| `MainTabView.swift` | Presents its window's `SceneRouter.routedSheet`, the one sheet a link opens. No tab presents one, so a tab left loaded off screen cannot present a second copy |
 | `VerbBrowseView.swift` | Consumes `searchRequest` on appear and on change, since a link can arrive before the tab first appears |
 | `ModelView.swift` | Intercepts its own `verb/` links (the verbs list, built by `VerbModel.verbsWithDeepLinks`) through an `OpenURLAction`, reads them with `Deeplink(url:)`, and pushes the verb |
 | `InfoView.swift` | Reads an article's links as `LinkTarget` values, an article or a verb, and pushes them onto the stack that shows it: the Info tab's or an `ArticleSheet`'s |
-| `ConjuguerApp.swift` | Receives links through `.onOpenURL`; a Spotlight result through `.onContinueUserActivity(CSSearchableItemActionType)`, turned into a `verb/` link with `source` `spotlight`; and on each activation, a link that a control's or a shortcut's intent left in the shared defaults (`WidgetConstants.pendingDeeplinkKey`) |
-| `QuickActions.swift` | The Home Screen quick action, which hands its `search` link to `handleURL` |
-| `Intents/LookUpVerbIntent.swift` | `OpenLookupResultIntent` hands Look Up a Verb's link to `handleURL` |
+| `QuickActions.swift` | The Home Screen quick action, which delivers its `search` link to the router of the scene it was performed in |
+| `Intents/LookUpVerbIntent.swift` | `OpenLookupResultIntent` delivers Look Up a Verb's link to the active window's router |
+| `ReminderNotificationDelegate.swift` | A tapped reminder's link goes to the router of the scene the response targets |
 
 **The cold-launch race.** A link can arrive before `VerbData` has finished parsing, when
-`Verb.verbs` is still empty. `handleURL` then stores it in `pendingDeeplink`, and `ConjuguerApp`
-replays it with `drainPendingDeeplink()` once the data has loaded. Every entry point goes through
-`handleURL`: `.onOpenURL`, the shared defaults' pending link, Spotlight's continuation, the quick
-action (whose scene delegate receives it before any view exists), and Look Up a Verb's result. The
+`Verb.verbs` is still empty. The window's router then stores it in `pendingDeeplink`, and
+`SceneRoot` replays it in that window with `drainPendingDeeplink()` once the data has loaded. Every
+entry point reaches a router's `handle(_:)`: `.onOpenURL`, the shared defaults' pending link,
+Spotlight's continuation, the quick action (whose scene delegate receives it before any view
+exists, so `SceneRouter.deliver` holds it until that scene's router attaches), a reminder, and Look
+Up a Verb's result (which names no window, so it waits for one to become active if none is). The
 `search` route waits too, so that its request reaches a verb list that has its verbs. An App Intent
 that needs the verbs before any window exists awaits `VerbData.ensureLoaded()`, which parses once
 however many callers ask.
@@ -665,7 +670,7 @@ aller"). The third person follows the pronoun setting, as the row does.
 
 **Why a second intent.** An intent's result can open the app only by naming another intent, so
 Look Up a Verb returns `.result(opensIntent:dialog:)` naming the hidden `OpenLookupResultIntent`,
-which hands the link to `World.handleURL`. A shortcut's phrase can carry only an entity or an enum,
+which hands the link to `SceneRouter.deliver`, and so to the active window. A shortcut's phrase can carry only an entity or an enum,
 never free text, so the intent asks for the word, with autocorrection off and the default keyboard,
 which has accents.
 
@@ -675,7 +680,8 @@ meanings and the key conjugations as alternate names, and every one-word conjuga
 conjugation map plus the meanings with and without "to" as keywords. Indexing takes several seconds
 of the main actor, since the key conjugations need the Conjugator, so
 `VerbSpotlight.indexVerbsIfNeeded()` indexes only when the app's version and build, or the entries'
-`format` constant, differ from the last index that succeeded. **Raise `format` when the entries
+`format` constant, differ from the last index that succeeded, and never while an index is already
+under way, since each window's launch asks for one. **Raise `format` when the entries
 change**, or a development build with unchanged version numbers keeps the old entries. A tapped
 result arrives as a `CSSearchableItemActionType` activity whose identifier is "VerbEntity/<key>".
 
@@ -1867,7 +1873,8 @@ Your Practice, with a calendar, or a flame once there is a streak.
   being reminded. `ReminderScheduler` has `ReminderSchedulerReal` (the notification center) on the
   device and the simulator, and `ReminderSchedulerSpy` under unit tests.
 - **Tapping a reminder** opens `conjuguer://quiz/daily?source=reminder`
-  (`ReminderNotificationDelegate`, set in `AppDelegate`), which sets `World.dailySessionRequest`;
+  (`ReminderNotificationDelegate`, set in `AppDelegate`), which sets the targeted window's
+  `SceneRouter.dailySessionRequest`;
   the Quiz tab starts the session on appearing or on the request's change, unless a quiz is under
   way or showing results. A reminder due while the app is open shows nothing.
 - **Signals.** The quiz signals with `source` `daily` or `reminder`, with `questionCount` as the
@@ -1930,7 +1937,7 @@ From Your Practice, under the Daily Session, with crossed flags.
 
   In French: "Conjuguer · Défi du jour", "24 novembre 2026 · Élémentaire", "Relever ce défi dans
   Conjuguer :", and "Télécharger Conjuguer sur l’App Store :".
-- **Links.** `quiz/challenge` sets `World.challengeRequest`, which the Quiz tab starts on appearing
+- **Links.** `quiz/challenge` sets the window's `SceneRouter.challengeRequest`, which the Quiz tab starts on appearing
   or on the request's change, unless a quiz is under way or showing results. A link to a challenge
   already taken opens the hub, where the row shows its result.
 - **The widget.** The quiz widget's question for each day is the first question of that day's

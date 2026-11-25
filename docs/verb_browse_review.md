@@ -602,6 +602,12 @@ Not browse code, and noted in passing:
   shares the one `World`: a link switches tab and presents in every window. The browse work added
   two more single-window assumptions, the static `VerbSearchArrowKeys` (two windows cross their
   arrow keys) and the one `searchRequest`. See the open questions.
+
+  **Fixed on `main` 2026-11-25**, by Phase 3 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md):
+  each window owns a `SceneRouter` holding its tab, its routed sheet, and its requests, and
+  `VerbSearchArrowKeys` keeps a closure per window. Seen first on the iPad simulator with two
+  windows: a tab switch in one showed in the other, one boire link presented the page in both and
+  counted two opens, and a search link sent to the window in front filled the other window's field.
 - **`PracticeStore` migrates a `LearnerVerbs.review` field** that existed on `main` only between
   browse Phase 13 and pedagogy Phase 11, and that no release wrote.
 - **The review card can act on a stale offer:** a card chosen at launch is still revealed, and

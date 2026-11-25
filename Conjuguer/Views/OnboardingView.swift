@@ -163,6 +163,7 @@ private struct OnboardingPageView: View {
   let onNavigate: () -> Void
   let animateContent: Bool
 
+  @Environment(SceneRouter.self) private var router
   @Environment(\.accessibilityReduceMotion) private var reduceMotion
   @State private var contentOffset: CGFloat = 100
   @State private var contentOpacity: Double = 0
@@ -211,10 +212,10 @@ private struct OnboardingPageView: View {
           Current.soundPlayer.play(.chime)
           switch navigationAction {
           case .navigateToTab(let tab):
-            Current.selectedTab = tab
+            router.selectedTab = tab
           case .navigateToTutor:
-            Current.selectedTab = .info
-            Current.shouldNavigateToTutor = true
+            router.selectedTab = .info
+            router.shouldNavigateToTutor = true
           case .none:
             break
           }

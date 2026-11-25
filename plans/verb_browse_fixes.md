@@ -30,7 +30,7 @@ empty until it is committed.
 |---:|---|---|---|---|---|
 | 1 | Done | 2026-11-25 | `5543a98` | B4, S1 (the parser) | No |
 | 2 | Done | 2026-11-25 | `d36f6d5` | B1, B2, B8, B28, S1 (the sheets) | Yes |
-| 3 | Not started | | | Multiple windows | Yes |
+| 3 | Awaiting Josh | 2026-11-25 | | Multiple windows | Yes |
 | 4 | Not started | | | S2 | No |
 | 5 | Not started | | | B3, B6, B18, B23, B24, B26, S3 (the search model), D5, T1 (the search), K-F1, K-S8 | Yes |
 | 6 | Not started | | | B9, S3 (the rest), D4, D7, T1 (the card), the stale review card | Yes |
@@ -351,6 +351,65 @@ two routers with two links and find them independent.
 window, Command-F, and the arrow keys in each field. If he has a Mac to try, the same there.
 
 **How it differed:**
+
+- **What two windows did before** (the look-first step, on the iPad simulator). A tab switch in
+  one window showed in the other. One `verb/boire` link presented the page in both windows and
+  recorded `openCount` 2, its two opens 1.3 seconds apart, which is B1 across windows. A
+  `search?q=vais` link sent while one window was in front filled the other window's field and left
+  the front one's empty. I did not try the arrow keys on the old build, since the windows are full
+  screen there and only one field can be seen at a time. The trace is plain: the second window
+  never got the keys, because the first still held them. Recorded in the review under "Multiple
+  windows".
+- **Opening a second window took a hook.** AXe's Command-N and swipes do nothing there, so
+  `SceneRoot` has a DEBUG launch argument, `-CONJUGUER_SECOND_WINDOW YES`, that requests one. The
+  windows were reached through Simulator's App Switcher with computer use. The procedure is in the
+  `verify-in-simulator` skill.
+- **`SceneRouter`** (`Conjuguer/Utils/SceneRouter.swift`) holds the tab, `routedSheet`, the
+  search, daily-session, and challenge requests, `shouldNavigateToTutor` (onboarding's way to the
+  tutor), and the cold launch's `pendingDeeplink`, with `MainTab` beside it. `World` keeps only the
+  services, settings, and stores. The router reads `World` for the random draw, the quiz level,
+  and the quiz, and takes it in its initializer, so a test can give it its own.
+- **`SceneRoot`** (`Conjuguer/App/SceneRoot.swift`) is each window's content and owns its router
+  as `@State`. `.onOpenURL`, Spotlight's continuation, the cold-launch replay, and the control's
+  stashed link moved there from `ConjuguerApp`. The stashed link is taken on the window's
+  activation and removed at once, so the first window to become active takes it. App-wide work
+  (reminders, widget refreshes, the language model) moved to `Scene`-level `onChange`, which reads
+  the app's phase and runs once however many windows are open.
+- **Links with no window of their own** go through `SceneRouter.deliver(_:to:)`. SwiftUI names no
+  scene to a view, so `SceneRoot` tells its router its window through a small UIKit view's
+  `didMoveToWindow`. A quick action delivers to its scene's router, and waits for it on a launch.
+  A reminder delivers to `response.targetScene`. `OpenLookupResultIntent` names no scene, so its
+  link goes to the active window (the key one when several are active), or waits for the next
+  window to become active. That is the plan's fallback for the intents, and it is the only path
+  they have.
+- **Command-F** reads the focused window's router through `@FocusedValue(\.sceneRouter)`, set by
+  `.focusedSceneValue`, and is disabled when no window is focused.
+- **The arrow keys** keep one installation per window, each with its own key commands and closure.
+  A key finds its window through the view controller that received it. `VerbBrowseView` installs
+  on its router's window.
+- **Spotlight** indexing is guarded by `VerbSpotlight.isIndexing`. It has no test: the guard is
+  three lines, and a test would have to run a real index into `CSSearchableIndex`.
+- **Left as it was: the quiz.** `Current.quiz` is one for the whole app, so a quiz under way shows
+  in both windows' Quiz tabs, and a `quiz/start` link in a second window finds it under way. The
+  plan's list kept the services in `Current`, and the quiz's state is a service's state. A quiz per
+  window would be its own change.
+- **Tests.** `SceneRouterTests` (six): two routers kept apart; a cold launch's link replayed in
+  its own window; a link waiting for its scene's router, and taken once; a link with no window
+  going to the active window's router; one waiting for a window to become active; and the arrow
+  keys per window. With the arrow keys' lookup changed back to a shared closure, the last recorded
+  four issues. The test host has one scene, so no test can tell two scenes apart. That was checked
+  on the simulator instead. The routing tests in `DeeplinkTests`, `VerbCollectionTests`,
+  `PracticeSetTests`, and `RoutedSheetTests` each make a router, so `resetCurrent()` went.
+  961 tests in 92 suites (955 plus six).
+- **On the iPad simulator, after the fix**, with three windows restored: Models chosen in one
+  window left another on Verbs; a `verb/suivre` link opened the page in the front window only, with
+  `openCount` 1; a search link filled the front window's field; Command-F switched the front window
+  from Models to Verbs with the field focused; and ↓ moved the highlight in each of two windows in
+  turn. On the iPhone: a verb link, a search link, a cold launch by `verb/lire?match=lis` (marked),
+  and the control's stashed link on a cold launch (a random verb, the key removed).
+- **For release day,** `docs/release.md` gains a check of two windows side by side on a real iPad
+  and on a Mac, including whether a link on the Mac opens a new window, which SwiftUI may do for
+  an external event.
 
 ## Phase 4: Pages Push, and the Dead Sheets Go
 

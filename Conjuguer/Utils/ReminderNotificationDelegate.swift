@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 import UserNotifications
 
 /// Opens a tapped reminder's link. A reminder due while the app is open shows nothing, since the
@@ -20,8 +21,11 @@ final class ReminderNotificationDelegate: NSObject, UNUserNotificationCenterDele
     else {
       return
     }
+    // The window the reminder was tapped toward, which UIKit gives only on the main actor. The
+    // response is immutable, so carrying it there is safe though it is not marked Sendable.
+    nonisolated(unsafe) let response = response
     await MainActor.run {
-      Current.handleURL(url)
+      SceneRouter.deliver(url, to: response.targetScene)
     }
   }
 

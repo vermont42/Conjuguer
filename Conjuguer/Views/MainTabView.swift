@@ -9,11 +9,12 @@ import SwiftUI
 
 struct MainTabView: View {
   @Environment(World.self) private var world
+  @Environment(SceneRouter.self) private var router
 
   var body: some View {
-    @Bindable var world = world
+    @Bindable var router = router
 
-    TabView(selection: $world.selectedTab) {
+    TabView(selection: $router.selectedTab) {
       Tab(L.Navigation.verbs, systemImage: "book.fill", value: MainTab.verbs) {
         VerbBrowseView()
       }
@@ -36,7 +37,7 @@ struct MainTabView: View {
       }
     }
     .tabViewStyle(.sidebarAdaptable)
-    .sheet(item: $world.routedSheet) { sheet in
+    .sheet(item: $router.routedSheet) { sheet in
       routedPage(sheet.page)
     }
     .recordsAppearance(as: "\(MainTabView.self)")
@@ -69,5 +70,6 @@ struct MainTabView: View {
   PreviewSupport.bootstrap()
   return MainTabView()
     .environment(Current)
+    .environment(SceneRouter())
 }
 #endif

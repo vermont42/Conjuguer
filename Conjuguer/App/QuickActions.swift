@@ -37,13 +37,13 @@ enum QuickAction: String, CaseIterable {
     UIApplication.shared.shortcutItems = allCases.map(\.item)
   }
 
-  /// The link goes through `World.handle`, which holds it until the verbs have loaded when the
-  /// quick action launched the app.
-  static func perform(_ item: UIApplicationShortcutItem) -> Bool {
+  /// The link goes to the router of the window the action was performed in, which holds it
+  /// until the verbs have loaded when the quick action launched the app.
+  static func perform(_ item: UIApplicationShortcutItem, in scene: UIScene) -> Bool {
     guard let link = QuickAction(rawValue: item.type)?.deeplink else {
       return false
     }
-    Current.handle(link)
+    SceneRouter.deliver(link, to: scene)
     return true
   }
 }
@@ -68,11 +68,11 @@ final class QuickActionSceneDelegate: NSObject, UIWindowSceneDelegate {
   /// A quick action that launched the app arrives here, not in the method below.
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     if let item = connectionOptions.shortcutItem {
-      _ = QuickAction.perform(item)
+      _ = QuickAction.perform(item, in: scene)
     }
   }
 
   func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-    completionHandler(QuickAction.perform(shortcutItem))
+    completionHandler(QuickAction.perform(shortcutItem, in: windowScene))
   }
 }
