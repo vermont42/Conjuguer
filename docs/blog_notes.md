@@ -6660,3 +6660,69 @@ settings. Konjugieren does send `deeplink` from a bare challenge link without st
 gap found here. And Conjugar keeps the quiz score on its ranked round, by Josh's own decision for
 that app, which contradicts this plan's claim that dropping the score makes the three apps agree.
 That one goes to Josh.
+
+## The README Catches Up with the Browse and Pedagogy Ports (2026-11-24)
+
+With both ports closed, the README still described the app of August: ten screenshots, a quiz of
+"four levels" and "one more try", and a feature list with no reverse lookup, no practice hub, and
+no etymologies. Josh asked for new screenshots in English and dark mode, the minigame's excepted,
+and for whatever wording the README needed. Konjugieren's README, rewritten on 2026-11-16 after the
+same two plans, was the model: an opening that calls the app two apps in one, a section for each
+half, and screenshots grouped by what the learner is doing.
+
+### Twenty-six screenshots
+
+The App Store driver, `scripts/take_screenshots.sh`, shoots nine fixed screens in alternating
+appearances, so it did not fit. The shots were driven by hand on the project's own simulator, the
+Conjuguer iPhone 17, which took dark mode at once despite the skill's warning that it once would
+not. The status bar was pinned to 9:41 and a full battery with `simctl status_bar`, and cleared
+afterward. The simulator already held a practice record from the pedagogy phases, which made the
+review card, the hub's "12 questions due", and the Mastery page's half-filled circles appear
+without seeding anything.
+
+The quiz fixtures did the rest. `diagnoses` asks aller's passé composé first, and with the
+feminine pronoun setting, typing *ai allée* produced "Aller takes être, not avoir, in its compound
+tenses. Try once more.", and typing it again produced the held correction with its lightbulb.
+`essentials`, `recognition`, `sentences`, and `choices` opened their exercises on known questions.
+The results came from the `screenshot` fixture, whose exported answers a loop pasted in, with one
+slip and one junk answer for a realistic mix. The loop read each question's verb from the
+accessibility tree by its position, and a re-ask broke that, because the "Asked Again" capsule
+takes the verb's place. The Daily Challenge has no fixture, so its five questions were answered by
+hand, one of them in the wrong person to earn an orange dot.
+
+Partway through, Josh asked for the software keyboard in the quiz shots. The simulator had a
+hardware keyboard attached, which floats the accent row over the tab bar and shows no keys. Pasting
+needs the hardware keyboard, since Cmd+V arrives as hardware key events, so each quiz shot pasted
+its answer first and then clicked Simulator's I/O > Keyboard > Connect Hardware Keyboard to detach
+it, the same order `take_screenshots.sh` uses. With the keyboard up, the held correction and Name
+the Conjugation do not fit on one screen. The correction was scrolled to show both answers and the
+diagnosis, and Name the Conjugation to show *fûmes* and the chosen tense, leaving the person chips
+below the keyboard.
+
+The Info tab's tense list was dropped for the top of the Info list, which shows the articles, the
+new history of the French verb system, and the tutor in one screen, where the scrolled tense list
+had ghosted text under the status bar. The images were resized to 800 points wide and quantized to
+256 colours, keeping the smaller of the dithered and undithered versions of each, as in August:
+2.7 MB for all twenty-six. Five old files went, since their screens now have new names.
+
+The run left marks in the simulator's App Group: today's Intermediate challenge is taken, the
+practice record holds the quiz answers typed for the shots, and the hardware keyboard is attached
+again.
+
+### What the text says now
+
+The opening calls the app two apps in one. The reference section covers search by conjugation and
+the conjugation map as a build product, the verb page's order and its last three cards, My Verbs,
+the review card, and collections. The quiz section covers grading, the answer frame,
+`AnswerDiagnosis`, the held correction, levels and bands, the practice record, the five exercises,
+the choice questions, the daily session and challenge, and what analytics never send. A short
+section on the data-driven conjugator, `World`, and the test suite replaces nothing, since the old
+README had none. A note says the App Store's 2.2 predates all of it.
+
+One claim did not survive a check. The first draft said every verb has an example sentence "from
+French literature". `literature_examples.json` has an entry for every verb, but about 2,700 of its
+6,328 were written by Claude when no quotation could be found, and about two hundred more come from
+Wikipedia. The README now says that thousands of verbs have a quotation from Flaubert, Zola,
+Proust, Molière, or another writer, and calls the rest what they are, example sentences. The
+etymology claim held: `Etymologies.json` has a non-empty entry for all 6,326 verbs in both
+languages.
