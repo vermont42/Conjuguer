@@ -28,7 +28,7 @@ empty until it is committed.
 
 | Phase | Status | Date | Commit | Findings | Waits for Josh |
 |---:|---|---|---|---|---|
-| 1 | Done | 2026-11-25 | | B4, S1 (the parser) | No |
+| 1 | Done | 2026-11-25 | `5543a98` | B4, S1 (the parser) | No |
 | 2 | Not started | | | B1, B2, B8, B28, S1 (the sheets) | Yes |
 | 3 | Not started | | | Multiple windows | Yes |
 | 4 | Not started | | | S2 | No |
