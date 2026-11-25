@@ -12,9 +12,9 @@ struct InfoView: View {
   let info: Info
 
   /// Where the article's links to articles and verbs go. Nil hands them to
-  /// `World.handleInAppURL`. An article opened from a verb page passes its own, so that the
+  /// `World.handleInApp`. An article opened from a verb page passes its own, so that the
   /// learner stays there.
-  var openLink: ((URL) -> Void)?
+  var openLink: ((Deeplink) -> Void)?
 
   var body: some View {
     ScrollView {
@@ -55,21 +55,21 @@ struct InfoView: View {
     let cleansedUrlString = firstLetterLowercased(parenless(url.absoluteString.removingPercentEncoding ?? ""))
 
     if let infoIndex = Info.headingToIndex(heading: cleansedUrlString) {
-      URL.infoDeeplink(Info.infos[infoIndex]).map(open)
+      open(.info(Info.infos[infoIndex].stableKey))
       return .handled
     } else if let verb = Verb.verbs[cleansedUrlString] {
-      URL.verbDeeplink(verb.dictionaryKey, source: .infoLink).map(open)
+      open(.verb(.key(verb.dictionaryKey), source: .infoLink))
       return .handled
     } else {
       return .systemAction
     }
   }
 
-  private func open(_ url: URL) {
+  private func open(_ link: Deeplink) {
     if let openLink {
-      openLink(url)
+      openLink(link)
     } else {
-      world.handleInAppURL(url)
+      world.handleInApp(link)
     }
   }
 

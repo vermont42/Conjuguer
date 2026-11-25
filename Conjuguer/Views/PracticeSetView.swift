@@ -188,7 +188,7 @@ struct PracticeSetQRView: View {
 
           // Dark modules on white in either appearance, since some scanners misread a code drawn
           // light on dark.
-          if let url = practiceSet.deeplink(source: .qrCode), let image = QRCode.image(for: url.absoluteString) {
+          if let image = QRCode.image(for: practiceSet.deeplink(source: .qrCode).absoluteString) {
             Image(uiImage: image)
               .interpolation(.none)
               .resizable()

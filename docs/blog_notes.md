@@ -6811,3 +6811,34 @@ The plan had to name five findings that Konjugieren's review made and mine did n
 that review's labels with a K in front (K-F1, K-S8, and so on), so that a session reading "S8"
 cannot take the idle sort picker for this review's S8, the two identities of a verb. A script
 checked that all 64 of the review's labels appear in the plan.
+
+## Browse Fixes, Phase 1: A Link Is Parsed Once (2026-11-25)
+
+The first phase of [`plans/verb_browse_fixes.md`](../plans/verb_browse_fixes.md) replaced the
+deeplink grammar's eight `URL` builders and three hand-written parsers with one enum, `Deeplink`,
+whose `init?(url:)` is the only parser and whose `url` is the only builder. A single test now sends
+an example of every route through both and expects it back, and a switch over the cases means a
+new route cannot be added without that test naming it.
+
+The bug it fixes, B4 of the review, was simple once the link was a value: `World.handleURL`
+cleared every routed sheet and pending request before it knew whether the link named anything, so
+`conjuguer://list/nonsense` closed whatever verb page was up. Now `World.handle(_:)` resolves the
+link to a `Destination` first and clears and assigns only on success. The old tests could not see
+the bug because each began from a cleared state; the new one begins with a verb page, a model, a
+pending search, and a pending daily session, and with the old order put back it fails 25 ways.
+
+One design question had a less obvious answer. The parser must not resolve anything, because a
+link that arrives during a cold launch is parsed before the verbs load and is held until they do.
+But `PracticeSet(url:)` was both parser and resolver: it dropped list verbs this install lacks,
+which needs `Verb.verbs`. So the enum holds the custom quiz as the link spells it, and a new
+`PracticeSet(linked:level:)` does the dropping when `World` resolves. The same split moved the
+daily challenge's key out of the parser, since its fallback level is the learner's setting.
+
+The phase went a step past its brief in one place. With the builders gone, `InfoView` would have
+had to build a URL from an article or verb it already held, only for the next function to parse it
+back, which is exactly the smell the review named. So `InfoView` hands over a `Deeplink` value now,
+and Phase 2 can turn that into an article or a verb.
+
+The T3 repair found what the review said: "s'entre-déchirer" was never a key, since pronominal
+verbs are stored without the pronoun, so that test row had returned early since it was written.
+It now uses entre-déchirer, requires the verb, and checks the single cell its match marks.

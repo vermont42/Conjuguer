@@ -259,8 +259,8 @@ extension VerbModel {
       }
     }
     do {
-      return try AttributedString(markdown: orderedVerbs.compactMap { key in
-        URL.verbDeeplink(key).map { "[\(key)](\($0.absoluteString))" }
+      return try AttributedString(markdown: orderedVerbs.map { key in
+        "[\(key)](\(Deeplink.verb(.key(key)).url.absoluteString))"
       }
         .joined(separator: ", ")
       )

@@ -125,6 +125,12 @@ An unknown `verb/` or `model/` target does that and also switches tab with nothi
 all start from a cleared state, so they cannot see it. **Fix:** resolve first, then clear and
 assign only on success.
 
+**Fixed on `main` 2026-11-25**, by Phase 1 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md):
+`World.handle(_:)` resolves a parsed `Deeplink` to a value and clears and assigns only when it
+resolves. An unknown `verb/`, `model/`, `list/`, or `info/` target, an unknown host, and a
+malformed link change nothing, and `DeeplinkTests.testALinkThatNamesNothingChangesNothing` starts
+each from an open verb page, a model, a pending search, and a pending daily session.
+
 **B5. A quiz over chosen verbs repeats itself.** *Traced.* Two parts:
 
 - *One cell, ten times.* `canBeQuizzed(at:)` asks only whether some cell exists
@@ -344,6 +350,13 @@ The builders are typed and the parser is not. **Shape:** a `Deeplink` enum with 
 clears only on success; one `RoutedSheet` enum presented from one modifier on `MainTabView`; and
 in-app links carried as values (`.verb(Verb)`, `.article(Info)`), never as URLs.
 
+**Partly fixed on `main` 2026-11-25**, by Phase 1 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md):
+the parser. `Deeplink` (`Utils/Deeplink.swift`) is the grammar's only parser and its only builder;
+the `URL` builders, `analyticsSource`, and the three hand-written parsers are gone, `ModelView` and
+the article sheet match on `Deeplink(url:)`, `InfoView` hands over values rather than URLs, and the
+search route and `openSearch` share one path. The nine optionals and the six sheet modifiers are
+Phase 2's.
+
 **S2. The "present a sheet when there is no stack" fallback is dead in four views.** Every place
 that builds a `VerbView`, `ModelView`, `RelatedVerbListView`, or `VerbCollectionView` either pushes
 it through `verbPageNavigation` or wraps it in `.sheetDismissable()`, which injects `verbPagePush`
@@ -526,6 +539,11 @@ and "s'entre-déchirer" is not a key, so that row tests nothing; it also passes 
 nothing and never checks the marks (`DeeplinkTests.swift:402-411`).
 `aDayGivesTheSameVerbEveryTime` calls a pure function twice. The unknown-link tests start with
 nothing open (B4), and `aDefectiveVerbIsAskedOnlyTheCellsItHas` pins B5.
+
+**Partly fixed on `main` 2026-11-25**, by Phase 1 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md):
+`testVerbBuilderRoundTrips` requires each verb, uses entre-déchirer (whose key has no "s'") for its
+pronominal row, and checks the one cell each row's `match` marks; the unknown-link test starts with
+a page open. `aDayGivesTheSameVerbEveryTime` and `aDefectiveVerbIsAskedOnlyTheCellsItHas` remain.
 
 **T4. Nothing tests that a search row's text re-parses to the same cells** (B7), or that related
 verbs agree across the two languages (S5).

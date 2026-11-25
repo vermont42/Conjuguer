@@ -37,7 +37,7 @@ struct VerbLookup {
   /// A verb's page, when one verb answers; otherwise the verb list searched for the word, which
   /// shows every match and, failing them, the guess. suis answers for être and suivre, so it
   /// opens the search.
-  let destination: URL?
+  let destination: Deeplink
 
   init(word: String, verbs: [Verb], index: ConjugationIndex? = .bundled) {
     let trimmed = word.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -68,9 +68,9 @@ struct VerbLookup {
     self.findings = findings
 
     if answers.count == 1, let answer = answers.first {
-      destination = URL.verbDeeplink(answer.verb.dictionaryKey, source: .lookup, match: answer.conjugation?.text)
+      destination = .verb(.key(answer.verb.dictionaryKey), source: .lookup, match: answer.conjugation?.text)
     } else {
-      destination = URL.searchDeeplink(text: trimmed, source: .lookup)
+      destination = .search(text: trimmed, source: .lookup)
     }
   }
 

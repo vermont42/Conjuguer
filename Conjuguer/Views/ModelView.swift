@@ -58,10 +58,8 @@ struct ModelView: View {
     }
     .environment(\.openURL, OpenURLAction { url in
       guard
-        url.isDeeplink,
-        url.hasExpectedNumberOfDeeplinkComponents,
-        url.host == URL.verbHost,
-        let verb = Verb.verbs[url.pathComponents[1]]
+        case .verb(.key(let key), _, _) = Deeplink(url: url),
+        let verb = Verb.verbs[key]
       else {
         return .systemAction
       }

@@ -47,13 +47,10 @@ struct ConjuguerApp: App {
       }
       .onOpenURL(perform: Current.handleURL(_:))
       .onContinueUserActivity(CSSearchableItemActionType) { userActivity in
-        guard
-          let identifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
-          let url = URL.verbDeeplink(VerbSpotlight.verbKey(fromSpotlightIdentifier: identifier), source: .spotlight)
-        else {
+        guard let identifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String else {
           return
         }
-        Current.handleURL(url)
+        Current.handle(.verb(.key(VerbSpotlight.verbKey(fromSpotlightIdentifier: identifier)), source: .spotlight))
       }
       .onChange(of: scenePhase) {
         // The day may have turned, and the record changed, since the reminders were scheduled.

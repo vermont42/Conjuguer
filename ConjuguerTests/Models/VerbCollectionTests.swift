@@ -100,7 +100,7 @@ struct VerbCollectionTests {
     for collection in VerbCollection.featured {
       resetCurrent()
       Current.selectedTab = .settings
-      Current.handleURL(try #require(collection.deeplink))
+      Current.handleURL(collection.deeplink)
       #expect(Current.collection == VerbCollectionDestination(collection: collection, source: .sharedLink))
       #expect(Current.selectedTab == .models)
     }
@@ -120,7 +120,7 @@ struct VerbCollectionTests {
 
   @Test func aModelsSharedLinkOpensTheModel() throws {
     resetCurrent()
-    let link = try #require(VerbCollection.model("4-2B").deeplink)
+    let link = VerbCollection.model("4-2B").deeplink
     #expect(link.absoluteString == "conjuguer://model/4-2B?source=sharedLink")
     Current.handleURL(link)
     #expect(Current.verbModel?.id == "4-2B")
@@ -129,7 +129,7 @@ struct VerbCollectionTests {
 
   @Test func theShareTextCarriesBothLinksAndCitesPronominals() throws {
     let text = VerbCollection.pronominal.shareText()
-    #expect(text.contains(try #require(VerbCollection.pronominal.deeplink).absoluteString))
+    #expect(text.contains(VerbCollection.pronominal.deeplink.absoluteString))
     #expect(text.contains(URL.appStore.absoluteString))
     #expect(text.contains("se "))
 

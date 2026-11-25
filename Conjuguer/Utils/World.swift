@@ -57,9 +57,9 @@ class World {
   // VerbBrowseView once it has shown the field.
   var searchRequest: SearchRequest?
   var session: URLSession
-  // A deeplink that arrived before VerbData finished loading (the cold-launch race — see
-  // handleURL). ConjuguerApp replays it via drainPendingDeeplink() once the data is ready.
-  @ObservationIgnored var pendingDeeplink: URL?
+  // A deeplink that arrived before VerbData finished loading (the cold-launch race; see
+  // handle(_:)). ConjuguerApp replays it via drainPendingDeeplink() once the data is ready.
+  @ObservationIgnored var pendingDeeplink: Deeplink?
 
   private static let fakeRatingsCount = 1
   private static let fakeSession = URLSession.stubSession(ratingsCount: fakeRatingsCount)
@@ -185,52 +185,150 @@ class World {
     GetterSetterReal(userDefaults: WidgetConstants.sharedDefaults ?? .standard)
   }
 
-  /// The grammar is in docs/feature_architecture.md § Deeplinks.
+  /// The grammar is in docs/feature_architecture.md § Deeplinks. A URL that is not a link of the
+  /// grammar does nothing.
   func handleURL(_ url: URL) {
-    guard url.isDeeplink, url.hasDeeplinkTarget else {
-      return
+    if let link = Deeplink(url: url) {
+      handle(link)
     }
+  }
 
+  /// Shows what the link names, with every other routed page closed and every pending request
+  /// dropped, and selects its tab. A link that names nothing that exists changes nothing.
+  func handle(_ link: Deeplink) {
     // On cold launch a widget's URL can arrive via onOpenURL before VerbData finishes its
-    // off-main-actor parse, so entity lookups would silently fail (nil verb) while the tab
-    // still switched — landing on VerbBrowseView instead of VerbView. Stash the URL and let
-    // ConjuguerApp replay it via drainPendingDeeplink() once the data is loaded. Every entry
-    // point (an intent, the quick action, Spotlight) arrives here, so each inherits this.
+    // off-main-actor parse, so every lookup would fail. Stash the link and let ConjuguerApp
+    // replay it via drainPendingDeeplink() once the data is loaded. Every entry point (an
+    // intent, the quick action, Spotlight) arrives here, so each inherits this.
     guard !Verb.verbs.isEmpty else {
-      pendingDeeplink = url
+      pendingDeeplink = link
       return
     }
-
-    clearDeeplinkTargets()
-
-    if let tab = resolveDeeplinkEntity(from: url) {
-      selectedTab = tab
+    guard let destination = resolve(link) else {
+      return
     }
+    show(destination)
   }
 
   /// Shows the verb list, with any verb page closed, and its search field. Nil `text` keeps
   /// whatever the field holds, as Command-F does; empty text clears it for typing.
   func openSearch(text: String?, source: AnalyticsSource) {
-    clearDeeplinkTargets()
-    selectedTab = .verbs
-    searchRequest = SearchRequest(text: text, source: source)
+    show(.search(SearchRequest(text: text, source: source)))
   }
 
   // Replays a deeplink deferred during cold-launch loading. A no-op when none is pending.
   func drainPendingDeeplink() {
-    guard let url = pendingDeeplink else {
+    guard let link = pendingDeeplink else {
       return
     }
     pendingDeeplink = nil
-    handleURL(url)
+    handle(link)
   }
 
-  func handleInAppURL(_ url: URL) {
-    guard url.isDeeplink, url.hasDeeplinkTarget else {
+  /// A link inside an Info article, which opens what it names without closing anything or
+  /// switching tabs.
+  func handleInApp(_ link: Deeplink) {
+    guard let destination = resolve(link) else {
       return
     }
+    assign(destination)
+  }
 
-    resolveDeeplinkEntity(from: url)
+  /// What a link opens, looked up. Nil when it names nothing that exists.
+  private enum Destination {
+    case verb(Verb, source: AnalyticsSource, marks: MarkedConjugations?)
+    case search(SearchRequest)
+    case model(VerbModel)
+    case collection(VerbCollectionDestination)
+    case info(Info)
+    case practiceSet(PracticeSetRequest)
+    case dailySession(DailySessionRequest)
+    case challenge(DailyChallengeRequest)
+    case startQuiz(source: AnalyticsSource)
+
+    /// The tab the destination shows over. A practice set shows over whatever tab is open.
+    var tab: MainTab? {
+      switch self {
+      case .verb, .search:
+        return .verbs
+      case .model, .collection:
+        return .models
+      case .info:
+        return .info
+      case .dailySession, .challenge, .startQuiz:
+        return .quiz
+      case .practiceSet:
+        return nil
+      }
+    }
+  }
+
+  private func resolve(_ link: Deeplink) -> Destination? {
+    switch link {
+    case let .verb(target, source, match):
+      let found: Verb?
+      switch target {
+      case .key(let key):
+        found = Verb.verbs[key]
+      case .random:
+        found = VerbDraw.randomVerb(myVerbs: learnerVerbs.myVerbs)
+      }
+      return found.map { verb in
+        .verb(verb, source: source, marks: match.flatMap { MarkedConjugations(text: $0, on: verb) })
+      }
+    case let .search(text, source):
+      return .search(SearchRequest(text: text ?? "", source: source))
+    case .model(let id, _):
+      return VerbModel.models[id].map(Destination.model)
+    case let .list(key, source):
+      return VerbCollection(featuredKey: key).map { .collection(VerbCollectionDestination(collection: $0, source: source)) }
+    case .info(let target):
+      return Info.info(deeplinkTarget: target).map(Destination.info)
+    case let .practiceSet(custom, level, source):
+      return .practiceSet(PracticeSetRequest(practiceSet: PracticeSet(linked: custom, level: level), source: source))
+    case .dailySession(let source):
+      return .dailySession(DailySessionRequest(source: source))
+    case let .challenge(day, level, source):
+      let key = day.flatMap { DailyChallenge.Key(day: $0, level: level ?? settings.quizLevel) }
+      return .challenge(DailyChallengeRequest(key: key, source: source))
+    case .startQuiz(let source):
+      return .startQuiz(source: source)
+    }
+  }
+
+  private func show(_ destination: Destination) {
+    clearDeeplinkTargets()
+    assign(destination)
+    if let tab = destination.tab {
+      selectedTab = tab
+    }
+  }
+
+  private func assign(_ destination: Destination) {
+    switch destination {
+    case let .verb(found, source, marks):
+      verbSource = source
+      verbMarks = marks
+      verb = found
+    case .search(let request):
+      searchRequest = request
+    case .model(let model):
+      verbModel = model
+    case .collection(let destination):
+      collection = destination
+    case .info(let found):
+      info = found
+    case .practiceSet(let request):
+      practiceSet = request
+    case .dailySession(let request):
+      dailySessionRequest = request
+    case .challenge(let request):
+      challengeRequest = request
+    case .startQuiz(let source):
+      if quiz.quizState != .inProgress {
+        quiz.start(scope: .allVerbs(source: source))
+      }
+    }
   }
 
   private func clearDeeplinkTargets() {
@@ -243,72 +341,6 @@ class World {
     practiceSet = nil
     dailySessionRequest = nil
     challengeRequest = nil
-  }
-
-  @discardableResult
-  private func resolveDeeplinkEntity(from url: URL) -> MainTab? {
-    if url.host == URL.searchHost {
-      searchRequest = SearchRequest(text: url.deeplinkQueryValue(named: URL.searchTextQueryName) ?? "", source: url.analyticsSource ?? .deeplink)
-      return .verbs
-    }
-
-    let target = url.pathComponents[1]
-    switch url.host {
-    case URL.verbHost:
-      let found = target == URL.randomVerbPath ? VerbDraw.randomVerb(myVerbs: learnerVerbs.myVerbs) : Verb.verbs[target]
-      verbSource = url.analyticsSource ?? .deeplink
-      verbMarks = found.flatMap { verb in
-        url.deeplinkQueryValue(named: URL.matchQueryName).flatMap { MarkedConjugations(text: $0, on: verb) }
-      }
-      verb = found
-      return .verbs
-    case URL.quizHost:
-      if target == URL.practiceSetTarget {
-        practiceSet = PracticeSetRequest(practiceSet: PracticeSet(url: url), source: url.analyticsSource ?? .deeplink)
-        return nil
-      }
-      if target == URL.dailySessionTarget {
-        dailySessionRequest = DailySessionRequest(source: url.analyticsSource ?? .deeplink)
-        return .quiz
-      }
-      if target == URL.challengeTarget {
-        challengeRequest = DailyChallengeRequest(key: Self.challengeKey(in: url, level: settings.quizLevel), source: url.analyticsSource ?? .deeplink)
-        return .quiz
-      }
-      if quiz.quizState != .inProgress {
-        quiz.start(scope: .allVerbs(source: url.analyticsSource ?? .deeplink))
-      }
-      return .quiz
-    case URL.verbModelHost:
-      verbModel = VerbModel.models[target]
-      return .models
-    case URL.listHost:
-      guard let found = VerbCollection(featuredKey: target) else {
-        return nil
-      }
-      collection = VerbCollectionDestination(collection: found, source: url.analyticsSource ?? .deeplink)
-      return .models
-    case URL.infoHost:
-      guard let found = Info.info(deeplinkTarget: target) else {
-        return nil
-      }
-      info = found
-      return .info
-    default:
-      return nil
-    }
-  }
-}
-
-extension World {
-  /// The challenge a link names. A link without a valid date asks for today's, and one without a
-  /// known level asks at the learner's.
-  static func challengeKey(in url: URL, level: QuizLevel) -> DailyChallenge.Key? {
-    guard let day = url.deeplinkQueryValue(named: URL.dateQueryName) else {
-      return nil
-    }
-    let linkedLevel = url.deeplinkQueryValue(named: URL.levelQueryName).flatMap(QuizLevel.init(rawValue:)) ?? level
-    return DailyChallenge.Key(day: day, level: linkedLevel)
   }
 }
 

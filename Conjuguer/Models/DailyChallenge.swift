@@ -202,7 +202,7 @@ struct DailyChallengeResult: Codable, Equatable {
       date: formatter.string(from: key.date),
       level: key.level.localizedName,
       tally: "\(dots)  \(pointsLine)",
-      link: URL.challengeDeeplink(key, source: .challengeLink)?.absoluteString ?? "",
+      link: Deeplink.challenge(day: key.day, level: key.level, source: .challengeLink).url.absoluteString,
       appStoreLink: URL.appStore.absoluteString
     )
   }

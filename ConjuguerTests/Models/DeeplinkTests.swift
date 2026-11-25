@@ -30,6 +30,13 @@ struct DeeplinkTests {
     Current.verbSource = .deeplink
     Current.verbMarks = nil
     Current.searchRequest = nil
+    Current.practiceSet = nil
+    Current.dailySessionRequest = nil
+    Current.challengeRequest = nil
+  }
+
+  private func link(_ string: String) throws -> Deeplink {
+    try #require(Deeplink(url: url(string)))
   }
 
   @Test func testHandleURLSwitchesTab() {
@@ -45,27 +52,27 @@ struct DeeplinkTests {
     #expect(Current.selectedTab == .info)
   }
 
-  @Test func testHandleInAppURLDoesNotSwitchTab() {
+  @Test func testHandleInAppDoesNotSwitchTab() {
     resetCurrent()
     Current.selectedTab = .models
-    Current.handleInAppURL(url("conjuguer://verb/parler"))
+    Current.handleInApp(.verb(.key("parler")))
     #expect(Current.verb?.infinitif == "parler")
     #expect(Current.selectedTab == .models, "In-app verb link must not change the tab.")
 
     Current.selectedTab = .info
-    Current.handleInAppURL(url("conjuguer://info/3"))
+    Current.handleInApp(.info("3"))
     #expect(Current.info == Info.infos[3])
     #expect(Current.selectedTab == .info, "In-app info link must not change the tab.")
   }
 
-  @Test func testHandleInAppURLPreservesSiblingEntity() {
+  @Test func testHandleInAppPreservesSiblingEntity() {
     resetCurrent()
     let model = VerbModel.models["4-2B"]
     #expect(model != nil)
     Current.verbModel = model
     Current.selectedTab = .models
 
-    Current.handleInAppURL(url("conjuguer://verb/parler"))
+    Current.handleInApp(.verb(.key("parler")))
 
     #expect(Current.verb?.infinitif == "parler")
     #expect(Current.verbModel?.id == model?.id, "In-app link must not clear the sibling verbModel.")
@@ -100,7 +107,7 @@ struct DeeplinkTests {
   /// itself: the tab starts the session unless a quiz is under way.
   @Test func testDailySessionDeeplinkRequestsASession() throws {
     resetCurrent()
-    let link = try #require(URL.dailySessionDeeplink(source: .reminder))
+    let link = Deeplink.dailySession(source: .reminder).url
     #expect(link.absoluteString == "conjuguer://quiz/daily?source=reminder")
     Current.selectedTab = .verbs
     Current.handleURL(link)
@@ -118,7 +125,7 @@ struct DeeplinkTests {
   @Test func testChallengeDeeplinkRequestsThatChallenge() throws {
     resetCurrent()
     let key = try #require(DailyChallenge.Key(day: "2026-11-24", level: .advanced))
-    let link = try #require(URL.challengeDeeplink(key, source: .challengeLink))
+    let link = Deeplink.challenge(day: key.day, level: key.level, source: .challengeLink).url
     #expect(link.absoluteString == "conjuguer://quiz/challenge?date=2026-11-24&level=advanced&source=challengeLink")
     Current.selectedTab = .verbs
     Current.handleURL(link)
@@ -235,7 +242,7 @@ struct DeeplinkTests {
 
     // Simulates the cold-launch case: handleURL deferred a widget link (stored it in
     // pendingDeeplink) because VerbData had not loaded yet.
-    Current.pendingDeeplink = url("conjuguer://verb/parler")
+    Current.pendingDeeplink = .verb(.key("parler"))
 
     Current.drainPendingDeeplink()
 
@@ -252,6 +259,42 @@ struct DeeplinkTests {
 
     #expect(Current.verb == nil)
     #expect(Current.selectedTab == .settings, "Draining with nothing pending must not change state.")
+  }
+
+  /// A link that names nothing must not close what is showing or drop what is pending (B4 of
+  /// docs/verb_browse_review.md), so each starts with a verb page, a model page, a search, and a
+  /// daily session waiting.
+  @Test(arguments: [
+    "conjuguer://verb/nonsense",
+    "conjuguer://model/nonsense",
+    "conjuguer://list/nonsense",
+    "conjuguer://info/nonsense",
+    "conjuguer://info/9999",
+    "conjuguer://bogus/thing",
+    "conjuguer://verb",
+    "https://verb/parler"
+  ])
+  func testALinkThatNamesNothingChangesNothing(link: String) throws {
+    resetCurrent()
+    Current.handleURL(url("conjuguer://verb/lire?match=lis&source=lookup"))
+    let marks = try #require(Current.verbMarks)
+    let model = try #require(VerbModel.models["4-2B"])
+    Current.verbModel = model
+    let search = SearchRequest(text: "suis", source: .lookup)
+    Current.searchRequest = search
+    let session = DailySessionRequest(source: .reminder)
+    Current.dailySessionRequest = session
+    Current.selectedTab = .settings
+
+    Current.handleURL(url(link))
+
+    #expect(Current.verb?.infinitif == "lire")
+    #expect(Current.verbSource == .lookup)
+    #expect(Current.verbMarks == marks)
+    #expect(Current.verbModel == model)
+    #expect(Current.searchRequest == search)
+    #expect(Current.dailySessionRequest == session)
+    #expect(Current.selectedTab == .settings)
   }
 
   @Test func testUnknownHostIsIgnored() {
@@ -303,9 +346,9 @@ struct DeeplinkTests {
     #expect(Current.verbSource == .widget)
   }
 
-  @Test func testQueryItemsDoNotCountAsPathComponents() {
-    #expect(url("conjuguer://quiz/start?source=widget").hasExpectedNumberOfDeeplinkComponents)
-    #expect(!url("conjuguer://verb?source=widget").hasExpectedNumberOfDeeplinkComponents)
+  @Test func testQueryItemsDoNotCountAsPathComponents() throws {
+    #expect(try link("conjuguer://quiz/start?source=widget") == .startQuiz(source: .widget))
+    #expect(Deeplink(url: url("conjuguer://verb?source=widget")) == nil)
   }
 
   @Test(arguments: [
@@ -319,15 +362,16 @@ struct DeeplinkTests {
     #expect(Current.verbSource == source)
   }
 
-  @Test func testInfoArticleVerbLinkNamesItself() {
+  @Test func testInfoArticleVerbLinkNamesItself() throws {
     resetCurrent()
-    Current.handleInAppURL(url("conjuguer://verb/parler?source=infoLink"))
+    Current.handleInApp(try link("conjuguer://verb/parler?source=infoLink"))
     #expect(Current.verb?.infinitif == "parler")
     #expect(Current.verbSource == .infoLink)
   }
 
   @Test func testASearchLinkRequestsItsTextFromItsSource() {
     resetCurrent()
+    Current.handleURL(url("conjuguer://verb/parler"))
     Current.selectedTab = .quiz
     Current.handleURL(url("conjuguer://search?q=j%27ai%20mang%C3%A9&source=lookup"))
     #expect(Current.searchRequest == SearchRequest(text: "j'ai mangé", source: .lookup))
@@ -394,33 +438,38 @@ struct DeeplinkTests {
   @Test func testInfoBuilderRoundTrips() throws {
     for info in Info.infos {
       resetCurrent()
-      Current.handleURL(try #require(URL.infoDeeplink(info)))
+      Current.handleURL(Deeplink.info(info.stableKey).url)
       #expect(Current.info == info)
     }
   }
 
-  @Test(arguments: ["aller", "haïr France", "sortir exit", "s'entre-déchirer", "arc-bouter"])
-  func testVerbBuilderRoundTrips(key: String) throws {
-    guard Verb.verbs[key] != nil else {
-      return
-    }
+  @Test(arguments: [
+    ("aller", "vais", Tense.indicatifPrésent(.firstSingular)),
+    ("haïr France", "haïssait", .imparfait(.thirdSingular)),
+    ("sortir exit", "sortait", .imparfait(.thirdSingular)),
+    ("entre-déchirer", "entre-déchiraient", .imparfait(.thirdPlural)),
+    ("arc-bouter", "arc-boutera", .futurSimple(.thirdSingular))
+  ])
+  func testVerbBuilderRoundTrips(key: String, match: String, marked: Tense) throws {
+    try #require(Verb.verbs[key] != nil)
     resetCurrent()
-    Current.handleURL(try #require(URL.verbDeeplink(key, source: .widget, match: "j'ai")))
+    Current.handleURL(Deeplink.verb(.key(key), source: .widget, match: match).url)
     #expect(Current.verb?.dictionaryKey == key)
     #expect(Current.verbSource == .widget)
+    #expect(Current.verbMarks?.tenses == [marked])
   }
 
   @Test(arguments: ["suis", "j'ai mangé", "to go", "a&b=c#d/e?f", "", "œuvrer"])
   func testSearchBuilderRoundTrips(text: String) throws {
     resetCurrent()
-    Current.handleURL(try #require(URL.searchDeeplink(text: text, source: .lookup)))
+    Current.handleURL(Deeplink.search(text: text, source: .lookup).url)
     #expect(Current.searchRequest == SearchRequest(text: text, source: .lookup))
   }
 
   @Test func testModelBuilderRoundTrips() throws {
     resetCurrent()
     let model = try #require(VerbModel.models["4-2B"])
-    Current.handleURL(try #require(URL.modelDeeplink(model)))
+    Current.handleURL(Deeplink.model(model.id).url)
     #expect(Current.verbModel == model)
   }
 
@@ -428,7 +477,7 @@ struct DeeplinkTests {
   @Test func testFindAVerbOpensAnEmptySearch() throws {
     let links = [
       (url(OpenVerbSearchIntent.pendingDeeplink), AnalyticsSource.control),
-      (try #require(QuickAction.findVerb.deeplink), .quickAction)
+      (QuickAction.findVerb.deeplink.url, .quickAction)
     ]
     for (link, source) in links {
       resetCurrent()
@@ -442,14 +491,14 @@ struct DeeplinkTests {
   @Test func testASpotlightResultOpensItsVerb() throws {
     resetCurrent()
     let key = VerbSpotlight.verbKey(fromSpotlightIdentifier: "VerbEntity/haïr France")
-    Current.handleURL(try #require(URL.verbDeeplink(key, source: .spotlight)))
+    Current.handleURL(Deeplink.verb(.key(key), source: .spotlight).url)
     #expect(Current.verb?.dictionaryKey == "haïr France")
     #expect(Current.verbSource == .spotlight)
   }
 
   @Test func testAPendingSearchLinkIsReplayed() {
     resetCurrent()
-    Current.pendingDeeplink = url("conjuguer://search?q=vais&source=lookup")
+    Current.pendingDeeplink = .search(text: "vais", source: .lookup)
     Current.drainPendingDeeplink()
     #expect(Current.searchRequest == SearchRequest(text: "vais", source: .lookup))
     #expect(Current.pendingDeeplink == nil)
@@ -461,8 +510,70 @@ struct DeeplinkTests {
     let links = model.verbsWithDeepLinks().runs.compactMap(\.link)
     #expect(links.count == model.verbs.count)
     for link in links {
-      #expect(link.hasExpectedNumberOfDeeplinkComponents)
-      #expect(Verb.verbs[link.pathComponents[1]] != nil)
+      guard case .verb(.key(let key), .deeplink, nil) = Deeplink(url: link) else {
+        Issue.record("Not a verb link: \(link)")
+        continue
+      }
+      #expect(Verb.verbs[key] != nil)
     }
+  }
+
+  @Test func testEveryRouteRoundTrips() {
+    let links: [Deeplink] = [
+      .verb(.key("aller")),
+      .verb(.key("haïr France"), source: .widget, match: "j'ai haï"),
+      .verb(.random, source: .shortcut),
+      .search(text: nil, source: .control),
+      .search(text: "", source: .quickAction),
+      .search(text: "a&b=c#d/e?f", source: .lookup),
+      .model("1-9"),
+      .model("6-7", source: .sharedLink),
+      .list("top100", source: .sharedLink),
+      .info("futur_simple"),
+      .info("0"),
+      .practiceSet(CustomQuiz(tenses: [.imparfait, .futurSimple], verbSet: .collection(.être)), level: nil, source: .sharedLink),
+      .practiceSet(CustomQuiz(verbSet: .list(["parler", "haïr France"])), level: .beginner, source: .qrCode),
+      .practiceSet(CustomQuiz(), level: nil),
+      .dailySession(source: .reminder),
+      .challenge(day: "2026-11-24", level: .advanced, source: .challengeLink),
+      .challenge(day: nil, level: nil, source: .challengeWidget),
+      .startQuiz(source: .control),
+      .startQuiz()
+    ]
+    for link in links {
+      #expect(Deeplink(url: link.url) == link, "\(link.url)")
+    }
+    #expect(Set(links.map(route)) == ["verb", "search", "model", "list", "info", "practiceSet", "dailySession", "challenge", "startQuiz"])
+  }
+
+  /// A new route fails to compile here until it is named, and then fails the round trip above
+  /// until it has an example there.
+  private func route(_ link: Deeplink) -> String {
+    switch link {
+    case .verb:
+      return "verb"
+    case .search:
+      return "search"
+    case .model:
+      return "model"
+    case .list:
+      return "list"
+    case .info:
+      return "info"
+    case .practiceSet:
+      return "practiceSet"
+    case .dailySession:
+      return "dailySession"
+    case .challenge:
+      return "challenge"
+    case .startQuiz:
+      return "startQuiz"
+    }
+  }
+
+  @Test func testALinkWithoutASourceCountsAsADeeplinkAndBuildsWithoutOne() throws {
+    #expect(try link("conjuguer://model/1-9") == .model("1-9", source: .deeplink))
+    #expect(Deeplink.model("1-9").url.absoluteString == "conjuguer://model/1-9")
+    #expect(Deeplink.verb(.key("aller"), source: .lookup, match: "vais").url.absoluteString == "conjuguer://verb/aller?source=lookup&match=vais")
   }
 }

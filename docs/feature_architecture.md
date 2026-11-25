@@ -195,8 +195,8 @@ three cells such a heading.
 **The article** opens in `TenseArticleSheet`, so closing it returns to the same verb. A link
 inside to another article or to a verb pushes it inside the sheet, and a verb page there pushes
 its own articles rather than presenting another sheet (the `tenseArticleOpener` environment
-value). `InfoView` takes an optional `openLink` for this; without one, its links go to
-`World.handleInAppURL`.
+value). `InfoView` takes an optional `openLink` for this, which receives a `Deeplink`; without
+one, its links go to `World.handleInApp`.
 
 ### The Compound Block
 
@@ -529,8 +529,8 @@ same.
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
 a bare `Verb`, and the cells a search matched (`marks`). A link carries `source` as a query item
 (`conjuguer://verb/aller?source=widget`), because a widget or an intent can hand the app only a
-URL. `World.resolveDeeplinkEntity` stores it in `World.verbSource` (`URL.analyticsSource`),
-falling back to `deeplink`, and the sheets that present `World.verb` pass it to `VerbView`. A model
+URL. `Deeplink(url:)` reads it, falling back to `deeplink`, and `World` stores it in
+`World.verbSource`, and the sheets that present `World.verb` pass it to `VerbView`. A model
 page passes `modelPage` itself. The link grammar (§ Deeplinks) keeps the item on every route.
 
 **The convention for new surfaces.** A change that adds a way to reach a verb page passes its
@@ -561,7 +561,7 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
 - **The route** is the host. It names the kind of place: a verb, the search, a model, an article.
 - **The target** is at most one path segment, percent-encoded, naming one thing of that kind: a
   verb's `Verb.verbs` key, a model's identifier, an article's stable key. `search` takes none, and
-  every other route takes exactly one (`URL.hasDeeplinkTarget`); a link that breaks this is ignored.
+  every other route takes exactly one; a link that breaks this is ignored (`Deeplink(url:)` returns nil).
 - **Text travels in query items, never in the path**, because it can hold spaces, apostrophes, and
   slashes ("j'ai mangé"). Query items modify a route; unknown ones are ignored.
 - **`source`** may follow any route that leads to a verb page, a search, a collection, or a quiz.
@@ -569,17 +569,20 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
   and a daily challenge (`quiz/challenge`).
   It names the surface that built the link, from `AnalyticsSource`, because a widget or an intent
   can hand the app nothing but a URL. A missing or unknown value counts as `deeplink`.
-- **Builders, not literals.** App code builds links with `URL.verbDeeplink`, `URL.searchDeeplink`,
-  `URL.infoDeeplink`, `URL.modelDeeplink`, `URL.listDeeplink`, `URL.practiceSetDeeplink`, `URL.dailySessionDeeplink`, and `URL.challengeDeeplink`, which percent-encode. Only the widget extension and
+- **One parser, one builder.** `Deeplink` is the grammar as an enum, one case per route. Its
+  `init?(url:)` is the only parser and its `url` the only builder, which percent-encodes and leaves
+  out a `source` of `deeplink`, so every route round-trips (`DeeplinkTests.testEveryRouteRoundTrips`).
+  App code builds a value (`.verb(.key("aller"), source: .lookup, match: "vais")`) and hands it to
+  `World.handle(_:)`, or its `url` to whatever needs a URL. Only the widget extension and
   `Shared/`, which cannot see `AnalyticsSource`, write literals (`WidgetDeeplink.verb(_:)`, `WidgetDeeplink.challenge`, the
   pending links of `OpenQuizIntent`, `OpenRandomVerbIntent`, `OpenRandomVerbControlIntent`, and
   `OpenVerbSearchIntent`), and `DeeplinkTests` pins each literal's source to the vocabulary.
 
 | Route | Target | Query items | Opens | Shipped |
 |---|---|---|---|---|
-| `verb` | A `Verb.verbs` key (`aller`; `ha%C3%AFr%20France` for one entry of a doubled infinitive), or `random` | `source`; `match`, a conjugation the page marks as it marks a search's match (`verb/aller?match=vais`) | The verb page as a sheet over the Verbs tab (or the Info tab, for an article's link), scrolled to the first marked cell. `random` draws from the 1,000 most frequent verbs, or from My Verbs one time in three (`VerbDraw`). An unknown verb opens the Verbs tab and nothing else; a `match` that fills no cell opens the page unmarked | Yes; `match` is unreleased |
+| `verb` | A `Verb.verbs` key (`aller`; `ha%C3%AFr%20France` for one entry of a doubled infinitive), or `random` | `source`; `match`, a conjugation the page marks as it marks a search's match (`verb/aller?match=vais`) | The verb page as a sheet over the Verbs tab (or the Info tab, for an article's link), scrolled to the first marked cell. `random` draws from the 1,000 most frequent verbs, or from My Verbs one time in three (`VerbDraw`). An unknown verb does nothing; a `match` that fills no cell opens the page unmarked | Yes; `match` is unreleased |
 | `search` | None | `q`, the text; `source` | The verb list with its search field, any verb page closed. With text, the results show with the keyboard down; with none (or `q` empty), the field is cleared and focused for typing | No |
-| `model` | A model's identifier (`1-1`) | `source`, which a shared model sends as `sharedLink` and nothing reads yet | The model page as a sheet over the Models tab | Yes; `source` is unreleased |
+| `model` | A model's identifier (`1-1`) | `source`, which a shared model sends as `sharedLink` and nothing reads yet | The model page as a sheet over the Models tab. An unknown model does nothing | Yes; `source` is unreleased |
 | `info` | A stable key (`futur_simple`), or a legacy position (`info/0`) | None | The article as a sheet over the Info tab. An unknown key or out-of-range position does nothing | Yes; keys are unreleased |
 | `quiz` | `set`, a practice set; `daily`, a daily session; `challenge`, a daily challenge; anything else (`OpenQuizIntent` sends `quiz/start`) | For `set`: the custom quiz's stored form (`tenses`, and `verbs` or `infinitives`), `level`, `source`. For `daily`: `source`. For `challenge`: `date` (`yyyy-MM-dd`), `level`, `source` | `set`: the practice set as a sheet over whatever tab is open, never starting a quiz (§ Practice Sets). `daily`: the Quiz tab, which starts a daily session (`World.dailySessionRequest`) unless a quiz is in progress or showing its results (§ Daily Session). `challenge`: the Quiz tab, which starts that day's challenge at that level (`World.challengeRequest`), or today's at the learner's level when the date is missing or not a date, unless a quiz is in progress or showing results or the challenge was taken (§ Daily Challenge). Anything else: the Quiz tab, starting the default quiz unless one is in progress, with the link's `source`, or `deeplink` | Yes; `set`, `daily`, and `challenge` are unreleased |
 | `list` | A featured collection's key (`top100`, `etre`, `irregularFutur`, `pronominal`) | `source` | The collection's page as a sheet over the Models tab. An unknown key does nothing. A model's collection is reached by its `model/` link, not by `list/model-<id>` | No |
@@ -593,14 +596,14 @@ does ([Reverse Lookup](#reverse-lookup)). Look Up a Verb sends the row's own spe
 
 | File | Purpose |
 |------|---------|
-| `URLExtensions.swift` | The grammar's constants (routes, query-item names), `isDeeplink`, `hasDeeplinkTarget`, `analyticsSource`, `deeplinkQueryValue(named:)`, and the builders |
-| `World.swift` | `handleURL(_:)` clears `verb`, `verbMarks`, `verbModel`, `collection`, `info`, `searchRequest`, `practiceSet`, `dailySessionRequest`, and `challengeRequest`, resolves the link (`resolveDeeplinkEntity(from:)`), and selects the tab. `handleInAppURL(_:)` resolves without clearing or switching tabs, for links inside Info articles. `openSearch(text:source:)` is the search route's effect, which Command-F also uses (`text` nil keeps the field's text) |
+| `Deeplink.swift` | The grammar: one case per route, holding its targets as keys (`VerbTarget` is a key or `random`) and its query items as values. `init?(url:)` and `url` |
+| `World.swift` | `handleURL(_:)` parses a URL and hands it to `handle(_:)`, which resolves the link to a `Destination` (the verb, model, collection, article, or request it names) first. Only when it resolves does it clear `verb`, `verbMarks`, `verbModel`, `collection`, `info`, `searchRequest`, `practiceSet`, `dailySessionRequest`, and `challengeRequest`, assign the destination, and select its tab, so a link naming nothing closes nothing and drops nothing pending. `handleInApp(_:)` resolves and assigns without clearing or switching tabs, for links inside Info articles. `openSearch(text:source:)` shows a search destination, the same path the search route takes, and Command-F uses it too (`text` nil keeps the field's text) |
 | `Info.swift` | `Info.info(deeplinkTarget:)` resolves a stable key or a legacy position |
 | `MatchedConjugation.swift` | `MarkedConjugations(text:on:)` reads a `match` item |
 | `VerbBrowseView.swift` | Consumes `searchRequest` on appear and on change, since a link can arrive before the tab first appears, and presents `verb` with `verbSource` and `verbMarks` |
 | `ModelBrowseView.swift`, `InfoBrowseView.swift` | Present `verbModel`, `collection`, and `info` as sheets; the Info tab also presents `verb`, for an article's verb link |
-| `ModelView.swift` | Intercepts its own `verb/` links (the verbs list, built by `VerbModel.verbsWithDeepLinks`) through an `OpenURLAction` and pushes the verb |
-| `InfoView.swift` | Turns an article's links into `info/` or `verb/` links and hands them to `handleInAppURL(_:)`, or to the verb page's article sheet |
+| `ModelView.swift` | Intercepts its own `verb/` links (the verbs list, built by `VerbModel.verbsWithDeepLinks`) through an `OpenURLAction`, reads them with `Deeplink(url:)`, and pushes the verb |
+| `InfoView.swift` | Turns an article's links into `.info` or `.verb` values and hands them to `handleInApp(_:)`, or to the verb page's article sheet |
 | `ConjuguerApp.swift` | Receives links through `.onOpenURL`; a Spotlight result through `.onContinueUserActivity(CSSearchableItemActionType)`, turned into a `verb/` link with `source` `spotlight`; and on each activation, a link that a control's or a shortcut's intent left in the shared defaults (`WidgetConstants.pendingDeeplinkKey`) |
 | `QuickActions.swift` | The Home Screen quick action, which hands its `search` link to `handleURL` |
 | `Intents/LookUpVerbIntent.swift` | `OpenLookupResultIntent` hands Look Up a Verb's link to `handleURL` |
@@ -1304,7 +1307,8 @@ scanning beneath it; the screen stays awake while it shows.
   infinitives, with every tense, still fit a code, where a hundred overflow it: each é takes nine
   bytes percent-encoded. The editor lists a kept list only while it is the choice, since nothing in
   the editor can build one. A stored list keeps keys it cannot check, since settings load before
-  the verbs are parsed; a link, read only once they are, drops unknown verbs.
+  the verbs are parsed; a link, resolved only once they are (`PracticeSet(linked:level:)`), drops
+  unknown verbs.
 - **The length does not travel.** Every set is ten questions, then Ten More, as Josh decided for
   Konjugieren; a length can be added to the link later without breaking it.
 - **Invalid links.** A `quiz/set` link that names no tense or verb set this version knows shows

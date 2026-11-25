@@ -37,20 +37,11 @@ struct PracticeSet: Equatable {
   /// percent-encoded infinitive takes nine bytes, so a hundred of the longest overflow a code.
   static let maximumListCount = 50
 
-  /// Nil for any other link, and for a `quiz/set` link that names no tense or verb set this
-  /// version knows. Verbs this version lacks are dropped from a list. A link naming My Verbs would
-  /// ask the opener's own, which no sharer means, so that part is dropped.
-  init?(url: URL) {
-    guard
-      url.isDeeplink,
-      url.host == URL.quizHost,
-      url.hasExpectedNumberOfDeeplinkComponents,
-      url.pathComponents[1] == URL.practiceSetTarget,
-      let query = URLComponents(url: url, resolvingAgainstBaseURL: false)?.percentEncodedQuery,
-      var custom = CustomQuiz(rawValue: query)
-    else {
-      return nil
-    }
+  /// The set a `quiz/set` link names, or nil when it names no tense or verb set this version
+  /// knows. Verbs this version lacks are dropped from a list. A link naming My Verbs would ask the
+  /// opener's own, which no sharer means, so that part is dropped. The verbs must have loaded.
+  init?(linked custom: CustomQuiz, level: QuizLevel?) {
+    var custom = custom
     switch custom.verbSet {
     case .myVerbs:
       custom.verbSet = nil
@@ -65,13 +56,13 @@ struct PracticeSet: Equatable {
       return nil
     }
     self.custom = custom
-    level = url.deeplinkQueryValue(named: URL.levelQueryName).flatMap(QuizLevel.init(rawValue:))
+    self.level = level
   }
 
   /// `source` is `sharedLink` in shared text and `qrCode` in a QR code, so that `quizStart` can
   /// tell which reached the learner.
-  func deeplink(source: AnalyticsSource) -> URL? {
-    URL.practiceSetDeeplink(custom: custom, level: level, source: source)
+  func deeplink(source: AnalyticsSource) -> URL {
+    Deeplink.practiceSet(custom, level: level, source: source).url
   }
 
   /// What a quiz over this set asks: the custom quiz's rules, at the set's level.
@@ -110,7 +101,7 @@ struct PracticeSet: Equatable {
   func shareText(levelFallback: QuizLevel) -> String {
     L.PracticeSet.shareText(
       summary: summary(levelFallback: levelFallback),
-      link: deeplink(source: .sharedLink)?.absoluteString ?? "",
+      link: deeplink(source: .sharedLink).absoluteString,
       appStoreLink: URL.appStore.absoluteString
     )
   }

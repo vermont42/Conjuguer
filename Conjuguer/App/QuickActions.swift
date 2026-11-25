@@ -26,10 +26,10 @@ enum QuickAction: String, CaseIterable {
     }
   }
 
-  var deeplink: URL? {
+  var deeplink: Deeplink {
     switch self {
     case .findVerb:
-      return URL.searchDeeplink(text: "", source: .quickAction)
+      return .search(text: "", source: .quickAction)
     }
   }
 
@@ -37,13 +37,13 @@ enum QuickAction: String, CaseIterable {
     UIApplication.shared.shortcutItems = allCases.map(\.item)
   }
 
-  /// The link goes through `World.handleURL`, which holds it until the verbs have loaded when
-  /// the quick action launched the app.
+  /// The link goes through `World.handle`, which holds it until the verbs have loaded when the
+  /// quick action launched the app.
   static func perform(_ item: UIApplicationShortcutItem) -> Bool {
-    guard let url = QuickAction(rawValue: item.type)?.deeplink else {
+    guard let link = QuickAction(rawValue: item.type)?.deeplink else {
       return false
     }
-    Current.handleURL(url)
+    Current.handle(link)
     return true
   }
 }

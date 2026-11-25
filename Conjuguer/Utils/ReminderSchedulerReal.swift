@@ -30,7 +30,7 @@ final class ReminderSchedulerReal: ReminderScheduler {
   }
 
   func schedule(_ reminders: [ScheduledReminder]) {
-    let link = URL.dailySessionDeeplink(source: .reminder)?.absoluteString ?? ""
+    let link = Deeplink.dailySession(source: .reminder).url.absoluteString
     let requests = reminders.map { reminder in
       let content = UNMutableNotificationContent()
       content.title = reminder.title

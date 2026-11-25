@@ -182,12 +182,12 @@ enum VerbCollection: Hashable, Identifiable {
   }
 
   /// `conjuguer://list/etre?source=sharedLink`, or a model's `conjuguer://model/6-7?source=sharedLink`.
-  var deeplink: URL? {
+  var deeplink: URL {
     switch self {
     case .model(let id):
-      return URL.modelDeeplink(id, source: .sharedLink)
+      return Deeplink.model(id, source: .sharedLink).url
     default:
-      return URL.listDeeplink(self, source: .sharedLink)
+      return Deeplink.list(key, source: .sharedLink).url
     }
   }
 
@@ -199,7 +199,7 @@ enum VerbCollection: Hashable, Identifiable {
       title: title,
       count: verbs.count,
       sample: sample.joined(separator: ", ") + more,
-      link: deeplink?.absoluteString ?? "",
+      link: deeplink.absoluteString,
       appStoreLink: URL.appStore.absoluteString
     )
   }

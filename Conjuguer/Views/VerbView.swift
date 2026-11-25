@@ -721,19 +721,15 @@ private struct TenseArticleSheet: View {
       }
   }
 
-  private func open(_ url: URL) {
-    guard url.isDeeplink, url.hasExpectedNumberOfDeeplinkComponents else {
-      return
-    }
-    let target = url.pathComponents[1]
-    switch url.host {
-    case URL.infoHost:
+  private func open(_ link: Deeplink) {
+    switch link {
+    case .info(let target):
       if let info = Info.info(deeplinkTarget: target) {
         path.append(info)
       }
-    case URL.verbHost:
-      if let verb = Verb.verbs[target] {
-        path.append(VerbDestination(verb: verb, source: .infoLink))
+    case .verb(.key(let key), let source, _):
+      if let verb = Verb.verbs[key] {
+        path.append(VerbDestination(verb: verb, source: source))
       }
     default:
       break

@@ -23,49 +23,57 @@ struct PracticeSetTests {
     try #require(Verb.verbs[key])
   }
 
-  private func roundTripped(_ practiceSet: PracticeSet, source: AnalyticsSource = .sharedLink) throws -> PracticeSet? {
-    PracticeSet(url: try #require(practiceSet.deeplink(source: source)))
+  /// The set a link opens, read as `World` reads it.
+  private func opened(_ url: URL) -> PracticeSet? {
+    guard case let .practiceSet(custom, level, _) = Deeplink(url: url) else {
+      return nil
+    }
+    return PracticeSet(linked: custom, level: level)
+  }
+
+  private func roundTripped(_ practiceSet: PracticeSet, source: AnalyticsSource = .sharedLink) -> PracticeSet? {
+    opened(practiceSet.deeplink(source: source))
   }
 
   // The link is permanent: a teacher's printed or projected code must keep opening its set.
   @Test func theLinkIsPinned() throws {
     let practiceSet = PracticeSet(custom: CustomQuiz(tenses: [.futurSimple, .imparfait], verbSet: .collection(.être)), level: nil)
-    #expect(practiceSet.deeplink(source: .sharedLink)?.absoluteString == "conjuguer://quiz/set?tenses=imparfait,futur_simple&verbs=etre&source=sharedLink")
+    #expect(practiceSet.deeplink(source: .sharedLink).absoluteString == "conjuguer://quiz/set?tenses=imparfait,futur_simple&verbs=etre&source=sharedLink")
     let leveled = PracticeSet(custom: CustomQuiz(verbSet: .model("1-3A")), level: .elementary)
-    #expect(leveled.deeplink(source: .qrCode)?.absoluteString == "conjuguer://quiz/set?verbs=model-1-3A&level=elementary&source=qrCode")
+    #expect(leveled.deeplink(source: .qrCode).absoluteString == "conjuguer://quiz/set?verbs=model-1-3A&level=elementary&source=qrCode")
     let list = PracticeSet(custom: CustomQuiz(verbSet: .list(["parler", "haïr France"])), level: .beginner)
-    #expect(list.deeplink(source: .sharedLink)?.absoluteString == "conjuguer://quiz/set?infinitives=parler,ha%C3%AFr%20France&level=beginner&source=sharedLink")
+    #expect(list.deeplink(source: .sharedLink).absoluteString == "conjuguer://quiz/set?infinitives=parler,ha%C3%AFr%20France&level=beginner&source=sharedLink")
   }
 
   @Test func everyTenseRoundTrips() throws {
     for slot in QuizTenseSlot.allCases {
       let practiceSet = PracticeSet(custom: CustomQuiz(tenses: [slot]), level: .advanced)
-      #expect(try roundTripped(practiceSet) == practiceSet)
+      #expect(roundTripped(practiceSet) == practiceSet)
     }
     let all = PracticeSet(custom: CustomQuiz(tenses: Set(QuizTenseSlot.allCases)), level: .beginner)
-    #expect(try roundTripped(all) == all)
+    #expect(roundTripped(all) == all)
   }
 
   @Test func everyVerbSetButMyVerbsRoundTrips() throws {
     let sets = QuizVerbSet.editorChoices(showsMyVerbs: false) + VerbModel.models.keys.map(QuizVerbSet.model)
     for verbSet in sets {
       let practiceSet = PracticeSet(custom: CustomQuiz(tenses: [.passéComposé], verbSet: verbSet), level: nil)
-      #expect(try roundTripped(practiceSet) == practiceSet, "\(verbSet.key)")
+      #expect(roundTripped(practiceSet) == practiceSet, "\(verbSet.key)")
     }
   }
 
   @Test(arguments: QuizLevel.allCases)
   func everyLevelRoundTrips(level: QuizLevel) throws {
     let practiceSet = PracticeSet(custom: CustomQuiz(tenses: [.subjonctifPrésent]), level: level)
-    #expect(try roundTripped(practiceSet)?.level == level)
+    #expect(roundTripped(practiceSet)?.level == level)
   }
 
   @Test func aListRoundTripsInItsOrder() throws {
     let keys = ["venir", "haïr Québec", "aller", "asseoir"]
     let practiceSet = PracticeSet(custom: CustomQuiz(verbSet: .list(keys)), level: .intermediate)
-    let opened = try roundTripped(practiceSet)
-    #expect(opened == practiceSet)
-    #expect(opened?.custom.verbSet?.listedVerbs(myVerbs: [])?.map(\.dictionaryKey) == keys)
+    let reopened = roundTripped(practiceSet)
+    #expect(reopened == practiceSet)
+    #expect(reopened?.custom.verbSet?.listedVerbs(myVerbs: [])?.map(\.dictionaryKey) == keys)
   }
 
   // Settings load before the verbs are parsed, so a kept list cannot check its keys; a link,
@@ -75,8 +83,8 @@ struct PracticeSetTests {
     #expect(stored.verbSet == .list(["parler", "nonverbe"]))
     #expect(stored.verbSet?.listedVerbs(myVerbs: [])?.map(\.infinitif) == ["parler"])
 
-    let opened = try #require(PracticeSet(url: try url("conjuguer://quiz/set?infinitives=parler,nonverbe,venir")))
-    #expect(opened.custom.verbSet == .list(["parler", "venir"]))
+    let linked = try #require(opened(try url("conjuguer://quiz/set?infinitives=parler,nonverbe,venir")))
+    #expect(linked.custom.verbSet == .list(["parler", "venir"]))
   }
 
   @Test func aListTakesPrecedenceOnlyWithoutVerbs() {
@@ -97,13 +105,13 @@ struct PracticeSetTests {
     "konjugieren://quiz/set?tenses=imparfait"
   ])
   func aLinkThatNamesNothingOpensNothing(link: String) throws {
-    #expect(PracticeSet(url: try url(link)) == nil)
+    #expect(opened(try url(link)) == nil)
   }
 
   @Test func aLinkKeepsWhatItCanRead() throws {
-    let opened = try #require(PracticeSet(url: try url("conjuguer://quiz/set?tenses=imparfait,aoriste&verbs=myVerbs&level=expert&extra=1")))
-    #expect(opened.custom == CustomQuiz(tenses: [.imparfait]))
-    #expect(opened.level == nil)
+    let linked = try #require(opened(try url("conjuguer://quiz/set?tenses=imparfait,aoriste&verbs=myVerbs&level=expert&extra=1")))
+    #expect(linked.custom == CustomQuiz(tenses: [.imparfait]))
+    #expect(linked.level == nil)
   }
 
   @Test func sharedMyVerbsTravelAsACappedList() throws {
@@ -155,7 +163,7 @@ struct PracticeSetTests {
     let text = practiceSet.shareText(levelFallback: .advanced)
     #expect(text.contains("Imparfait, Futur Simple"))
     #expect(text.contains(QuizLevel.elementary.localizedName))
-    #expect(text.contains(try #require(practiceSet.deeplink(source: .sharedLink)).absoluteString))
+    #expect(text.contains(practiceSet.deeplink(source: .sharedLink).absoluteString))
     #expect(text.contains(URL.appStore.absoluteString))
     #expect(practiceSet.summary(levelFallback: .advanced).components(separatedBy: "\n").count == 2)
   }
@@ -169,7 +177,7 @@ struct PracticeSetTests {
 
   @Test func theQRCodeReadsBackAsTheLink() throws {
     let practiceSet = PracticeSet(custom: CustomQuiz(tenses: [.passéComposé], verbSet: .collection(.irregularFutur)), level: nil)
-    let link = try #require(practiceSet.deeplink(source: .qrCode)).absoluteString
+    let link = practiceSet.deeplink(source: .qrCode).absoluteString
     #expect(try decodedQRCode(link) == link)
   }
 
@@ -178,9 +186,9 @@ struct PracticeSetTests {
       .sorted { $0.dictionaryKey.utf8.count > $1.dictionaryKey.utf8.count }
       .prefix(PracticeSet.maximumListCount)
     let practiceSet = PracticeSet(sharing: CustomQuiz(tenses: Set(QuizTenseSlot.allCases), verbSet: .myVerbs), level: .advanced, myVerbs: Array(longest))
-    let link = try #require(practiceSet.deeplink(source: .qrCode)).absoluteString
+    let link = practiceSet.deeplink(source: .qrCode).absoluteString
     #expect(try decodedQRCode(link) == link)
-    #expect(PracticeSet(url: try url(link)) == practiceSet)
+    #expect(opened(try url(link)) == practiceSet)
   }
 
   @Test func aKeptListSurvivesARelaunch() {

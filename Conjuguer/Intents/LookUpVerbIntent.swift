@@ -29,7 +29,7 @@ struct LookUpVerbIntent: AppIntent {
     await VerbData.ensureLoaded()
     let (answer, destination) = await MainActor.run {
       let lookup = VerbLookup(word: word, verbs: Array(Verb.verbs.values))
-      return (lookup.answer(pronounGender: Current.settings.pronounGender), lookup.destination)
+      return (lookup.answer(pronounGender: Current.settings.pronounGender), lookup.destination.url)
     }
     let open = OpenLookupResultIntent()
     open.url = destination

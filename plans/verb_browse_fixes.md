@@ -28,7 +28,7 @@ empty until it is committed.
 
 | Phase | Status | Date | Commit | Findings | Waits for Josh |
 |---:|---|---|---|---|---|
-| 1 | Not started | | | B4, S1 (the parser) | No |
+| 1 | Done | 2026-11-25 | | B4, S1 (the parser) | No |
 | 2 | Not started | | | B1, B2, B8, B28, S1 (the sheets) | Yes |
 | 3 | Not started | | | Multiple windows | Yes |
 | 4 | Not started | | | S2 | No |
@@ -186,6 +186,39 @@ the marks a real `match` produces (T3).
 `xcrun simctl openurl <udid> "conjuguer://list/nonsense"` leaves the page up.
 
 **How it differed:**
+
+- **`Deeplink` lives in `Conjuguer/Utils/Deeplink.swift`**, not in `URLExtensions.swift`, which
+  now holds only the App Store link and the mail builder. Its `url` is not optional (a scheme, a
+  host, and a slash-led path always make a URL), so the `?.absoluteString ?? ""` at every caller
+  went. It leaves out a `source` of `deeplink`, which the parser supplies when the item is missing,
+  so the model page's verb links still carry no source.
+- **The practice set's filter moved out of the parser.** `PracticeSet(url:)` dropped verbs this
+  install lacks, which needs `Verb.verbs`, and a link that arrives on a cold launch must parse
+  before the verbs load. So `Deeplink.practiceSet` holds the `CustomQuiz` as the link spells it,
+  and `PracticeSet(linked:level:)` drops what cannot be asked when `World` resolves the link.
+  `World.challengeKey(in:level:)` went the same way: the case holds the date and level, and
+  `World` builds the key.
+- **`World.pendingDeeplink` holds a `Deeplink`**, not a URL.
+- **The search route and `openSearch` share one path** (`show(.search(…))`), rather than the
+  route calling `openSearch` by name. The effect is what the phase asked: the three steps are
+  written once.
+- **`InfoView.openLink` takes a `Deeplink` already**, and `handleInAppURL(_:)` became
+  `handleInApp(_:)`, which takes one. With the builders gone, building a URL there only to parse it
+  back was the one thing left to write, so I wrote the value. Phase 2 still turns it into an
+  article or a verb.
+- **Callers moved to values**: `VerbLookup.destination` and `QuickAction.deeplink` are
+  `Deeplink`s, and Spotlight's continuation hands `World.handle(_:)` a value. The article sheet's
+  pushed verb takes the link's own source, which is `infoLink` as before.
+- **S9's `URL.modelDeeplink(_: VerbModel)` went with the other builders**, so Phase 12 has one
+  item less.
+- **Behavior.** An unknown `verb/` or `model/` target no longer switches the tab;
+  `docs/feature_architecture.md` § Deeplinks says so. A `quiz/start` link still clears what is
+  open, as before.
+- **Checks.** 954 tests in 90 suites (951 plus three). With `clearDeeplinkTargets()` put back
+  before `resolve`, `testALinkThatNamesNothingChangesNothing` recorded 25 issues. On the iPhone
+  simulator, lire's page opened by link stayed up through `list/nonsense`, `verb/nonsense`, and
+  `model/nonsense`; `model/1-9` then replaced it, and the model page's aller link pushed aller's
+  page.
 
 ## Phase 2: One Routed Sheet, and Articles That Push
 

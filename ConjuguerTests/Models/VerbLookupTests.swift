@@ -31,7 +31,7 @@ struct VerbLookupTests {
   @Test func testAnInfinitiveOpensItsPageUnmarked() throws {
     let found = lookup("aller")
     #expect(found.findings == [.infinitive(try verb("aller"))])
-    #expect(found.destination == URL.verbDeeplink("aller", source: .lookup))
+    #expect(found.destination == .verb(.key("aller"), source: .lookup))
   }
 
   @Test func testAnInfinitivesAnswerGivesItsKeyConjugations() {
@@ -47,7 +47,7 @@ struct VerbLookupTests {
   @Test func testAConjugationOpensItsVerbOnTheMatch() {
     let found = lookup("vais")
     #expect(conjugatedVerbs(found) == ["aller"])
-    #expect(found.destination == URL.verbDeeplink("aller", source: .lookup, match: "vais"))
+    #expect(found.destination == .verb(.key("aller"), source: .lookup, match: "vais"))
   }
 
   @Test func testTheAnswerNamesTheCellsAndTheVerb() {
@@ -57,21 +57,23 @@ struct VerbLookupTests {
   @Test func testAConjugationOfTwoVerbsNamesBothAndOpensTheSearch() {
     let found = lookup("suis")
     #expect(Set(conjugatedVerbs(found)) == ["être", "suivre"])
-    #expect(found.destination == URL.searchDeeplink(text: "suis", source: .lookup))
+    #expect(found.destination == .search(text: "suis", source: .lookup))
     #expect(found.answer(pronounGender: .masculine).components(separatedBy: "\n").count == 2)
   }
 
   @Test func testAFoldedConjugationAnswersInTheAppsSpelling() {
     let found = lookup("etait")
     #expect(conjugatedVerbs(found) == ["être"])
-    #expect(found.destination == URL.verbDeeplink("être", source: .lookup, match: "était"))
+    #expect(found.destination == .verb(.key("être"), source: .lookup, match: "était"))
   }
 
   @Test func testAPronominalCompoundOpensTheAvoirVerbOnItsCell() throws {
     let found = lookup("je me suis levé")
     #expect(conjugatedVerbs(found) == ["lever"])
-    let destination = try #require(found.destination)
-    let match = try #require(destination.deeplinkQueryValue(named: URL.matchQueryName))
+    guard case .verb(_, _, let match?) = found.destination else {
+      Issue.record("Expected a verb link with a match, found \(found.destination)")
+      return
+    }
     let marks = try #require(MarkedConjugations(text: match, on: try verb("lever")))
     #expect(marks.contains(.passéComposé(.firstSingular)))
   }
@@ -84,7 +86,7 @@ struct VerbLookupTests {
     }
     #expect(first == (try verb("aller")))
     #expect(count > 1)
-    #expect(found.destination == URL.searchDeeplink(text: "go", source: .lookup))
+    #expect(found.destination == .search(text: "go", source: .lookup))
   }
 
   @Test func testAMisspellingOffersTheGuess() throws {
@@ -95,6 +97,6 @@ struct VerbLookupTests {
   @Test func testNonsenseFindsNothingAndOpensTheTrimmedSearch() {
     let found = lookup("  xyzzyq ")
     #expect(found.findings == [.nothing])
-    #expect(found.destination == URL.searchDeeplink(text: "xyzzyq", source: .lookup))
+    #expect(found.destination == .search(text: "xyzzyq", source: .lookup))
   }
 }

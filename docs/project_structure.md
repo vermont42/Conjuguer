@@ -161,6 +161,7 @@ Conjuguer/
 │   ├── ChansonData.swift       # Lazy-loading Chanson de Roland example lookup
 │   ├── ColorExtension.swift    # Named Color constants from the asset catalog
 │   ├── ConjugationText.swift   # AttributedString(mixedCaseString:) — renders $…$ irregular-character coloring
+│   ├── Deeplink.swift          # The conjuguer:// grammar as an enum: init?(url:) is its only parser and url its only builder; targets are keys, which World resolves
 │   ├── ExampleData.swift       # Lazy-loading literature-example lookup by infinitif
 │   ├── Fonts.swift             # Work Sans font constants scaled relative to text styles
 │   ├── GameCenter.swift        # Protocol for Game Center authentication, score and achievement reporting, and the leaderboard and achievement views
@@ -198,7 +199,7 @@ Conjuguer/
 │   ├── SoundPlayerDummy.swift  # No-op double
 │   ├── SoundPlayerReal.swift   # AVAudioPlayer implementation with per-sound debouncing
 │   ├── StringExtensions.swift  # The rich-text markup parser: RichTextBlock / TextSegment from ` ~ $…$ ‡…‡
-│   ├── URLExtensions.swift     # The deeplink grammar's constants and builders (verbDeeplink, searchDeeplink, infoDeeplink, modelDeeplink), the developer address, a mailto: builder, and the App Store link (URL.appStore)
+│   ├── URLExtensions.swift     # The developer address, a mailto: builder, and the App Store link (URL.appStore)
 │   ├── URLProtocolStub.swift   # URLProtocol subclass stubbing HTTP responses in tests
 │   ├── URLSessionExtension.swift  # Stubbed URLSession factory used by the simulator/test worlds
 │   ├── Util.swift              # French/English Locale constants
@@ -209,7 +210,7 @@ Conjuguer/
 │   ├── VerbSort.swift          # Sort order for the verb browse view (frequency/alphabetical), and VerbListMode, the list picker's three segments (the two orders and My Verbs)
 │   ├── ViewControllerTransitions.swift  # Hack: waits until no view controller is presenting or dismissing, so an iPad push from a tap that ends the search is not dropped
 │   ├── WidgetSnapshotWriter.swift # Writes the multi-day widget snapshot bundle to the shared container, drawing each day's verb with VerbDraw and keeping the verb the widget already shows today
-│   └── World.swift             # @Observable DI container (Current) plus MainTab; device/simulator/unitTest configurations; handleURL and the deeplink grammar's effects, openSearch(text:source:) for search links and Command-F
+│   └── World.swift             # @Observable DI container (Current) plus MainTab; device/simulator/unitTest configurations; handleURL and handle(_:), which resolve a Deeplink before closing anything, handleInApp(_:) for article links, and openSearch(text:source:) for search links and Command-F
 └── Views/
     ├── AnswerFrameView.swift   # Draws an AnswerFrame around the answer field, on one line or as a sentence wrapped word by word, keeping the field's identity, and the keyboard's focus, from one question to the next
     ├── BrowseLayout.swift      # Shared adaptive grid columns and search-field placement (a fixed bar on iPad and Mac) for the browse views
