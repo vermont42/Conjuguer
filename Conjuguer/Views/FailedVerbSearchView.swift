@@ -28,12 +28,7 @@ struct FailedVerbSearchView: View {
           Button {
             openGuess(guess)
           } label: {
-            BrowseRow(
-              title: guess.verb.infinitifWithPossibleExtraLetters,
-              subtitle: guess.verb.translation,
-              detail: guess.conjugation?.line(pronounGender: guess.verb.pronounGender(for: pronounGender)),
-              badge: BrowseRow.Badge(text: "#\(guess.verb.frequency)", tint: .customBlue)
-            )
+            BrowseRow(verb: guess.verb, detail: guess.conjugation?.line(pronounGender: guess.verb.pronounGender(for: pronounGender)))
             .card(accent: guessIsSelected ? .customRed : nil)
           }
           .buttonStyle(.plain)

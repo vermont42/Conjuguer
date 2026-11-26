@@ -19,10 +19,6 @@ struct VerbBrowseView: View {
   @State private var engagement = SearchEngagement()
   @State private var path = NavigationPath()
   @State private var myVerbsIsChosen = false
-  @State private var verbToUnstar: Verb?
-  @State private var reviewCard: ReviewCardState?
-  @State private var reviewCardIsChosen = false
-  @State private var appWasInBackground = false
   @FocusState private var searchIsFocused: Bool
   private let tryQuizTip = TryQuizTip()
 
@@ -44,18 +40,19 @@ struct VerbBrowseView: View {
   }
 
   private func content(store: BrowseStore<Verb, VerbSort>) -> some View {
-    @Bindable var store = store
     @Bindable var search = search
+    let listContent = self.listContent
 
     let listModeBinding = Binding<VerbListMode>(
       get: { listMode },
       set: { mode in
-        if let sort = mode.sort {
+        switch mode {
+        case .sorted(let sort):
           myVerbsIsChosen = false
           withAnimation(.snappy) {
             store.sort = sort
           }
-        } else {
+        case .myVerbs:
           myVerbsIsChosen = true
         }
       }
@@ -81,28 +78,8 @@ struct VerbBrowseView: View {
 
           TipView(tryQuizTip)
 
-          if let reviewCard, showsReviewCard {
-            ReviewCardView(
-              verb: reviewCard.offer.verb,
-              caption: L.ReviewCard.caption(daysAgo: reviewCard.offer.daysSinceActivity, wasLookedUp: reviewCard.offer.wasLookedUp),
-              isRevealed: reviewCard.isRevealed,
-              reveal: revealReviewCard,
-              open: openReviewCard,
-              dismiss: dismissReviewCard
-            )
-            .frame(maxWidth: horizontalSizeClass == .regular ? Self.reviewCardMaxWidth : .infinity)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .transition(.opacity)
-            .onAppear {
-              signalReviewCardShown()
-            }
-          }
-
-          // My Verbs is a List of its own, because only a List's rows can be swiped to delete.
-          if showsMyVerbs {
-            myVerbsList
-          } else {
-            verbCollection(store: store)
+          ReviewCardHost(isShown: listContent.showsReviewCard, open: push) {
+            list(listContent, store: store)
           }
 
           if horizontalSizeClass != .regular {
@@ -123,20 +100,8 @@ struct VerbBrowseView: View {
     }
     .screenBackground()
     .onChange(of: scenePhase) {
-      switch scenePhase {
-      case .background:
-        appWasInBackground = true
+      if scenePhase == .background {
         search.appLeftForeground()
-      case .active where appWasInBackground:
-        appWasInBackground = false
-        chooseReviewCard()
-      default:
-        break
-      }
-    }
-    .onChange(of: world.settings.reviewCardSuppression) {
-      if world.settings.reviewCardSuppression == .off, reviewCard == nil {
-        chooseReviewCard()
       }
     }
     .onChange(of: engagement.isEngaged) {
@@ -165,9 +130,6 @@ struct VerbBrowseView: View {
     .recordsAppearance(as: "\(VerbBrowseView.self)")
     .onAppear {
       world.reviewPrompter.promptableActionHappened()
-      if !reviewCardIsChosen {
-        chooseReviewCard()
-      }
       openRequestedSearch()
     }
     .task {
@@ -180,71 +142,84 @@ struct VerbBrowseView: View {
   }
 
   @ViewBuilder
-  private func verbCollection(store: BrowseStore<Verb, VerbSort>) -> some View {
-    let recents = shownRecents
-    let highlighted = search.highlightedVerbID(recents: recents)
-    if search.hasFailed {
+  private func list(_ listContent: VerbListContent, store: BrowseStore<Verb, VerbSort>) -> some View {
+    switch listContent {
+    case .noResults:
       FailedVerbSearchView(
         query: search.query,
         guess: search.guess,
         pronounGender: world.settings.pronounGender,
-        guessIsSelected: highlighted != nil
+        guessIsSelected: search.highlightedVerbID(recents: []) != nil
       ) { _ in
         if let destination = search.openGuess() {
           push(destination)
         }
       }
-    } else if horizontalSizeClass == .regular {
-      ScrollViewReader { proxy in
-        ScrollView {
-          listHeading
-            .padding(.top, Layout.defaultSpacing)
+    case .myVerbs:
+      MyVerbsList(open: push)
+    case .all, .results, .recents:
+      verbCollection(listContent, store: store)
+    }
+  }
 
-          LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
-            verbRows(store: store, recents: recents, highlighted: highlighted, isCard: true)
+  private func verbCollection(_ listContent: VerbListContent, store: BrowseStore<Verb, VerbSort>) -> some View {
+    let recents = shownRecents
+    let highlighted = search.highlightedVerbID(recents: recents)
+    return ScrollViewReader { proxy in
+      Group {
+        if horizontalSizeClass == .regular {
+          ScrollView {
+            listHeading(listContent)
+              .padding(.top, Layout.defaultSpacing)
+
+            LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
+              verbRows(listContent, store: store, recents: recents, highlighted: highlighted, isCard: true)
+            }
+            .padding(.vertical, Layout.defaultSpacing)
           }
-          .padding(.vertical, Layout.defaultSpacing)
-        }
-        .scrollContentBackground(.hidden)
-        .onChange(of: search.selectedVerbID) {
-          scrollToSelection(proxy)
+        } else {
+          List {
+            listHeading(listContent)
+              .listRowBackground(Color.customBackground)
+              .listRowSeparator(.hidden)
+
+            verbRows(listContent, store: store, recents: recents, highlighted: highlighted, isCard: false)
+          }
+          .listStyle(.plain)
         }
       }
-    } else {
-      ScrollViewReader { proxy in
-        List {
-          listHeading
-            .listRowBackground(Color.customBackground)
-            .listRowSeparator(.hidden)
-
-          verbRows(store: store, recents: recents, highlighted: highlighted, isCard: false)
-        }
-        .listStyle(.plain)
-        .scrollContentBackground(.hidden)
-        .onChange(of: search.selectedVerbID) {
-          scrollToSelection(proxy)
-        }
+      .scrollContentBackground(.hidden)
+      .onChange(of: search.selectedVerbID) {
+        scrollToSelection(proxy)
       }
     }
   }
 
-  /// A search's results with the cells each matched, or with the field empty the recent verbs or
-  /// every verb. A row's source is settled as it is drawn, because a tap can take the focus from
-  /// the field, and with it the recents, before the row's action runs.
+  /// A search's results with the cells each matched, the recent verbs, or every verb. A row's
+  /// source is settled as it is drawn, because a tap can take the focus from the field, and with
+  /// it the recents, before the row's action runs.
   @ViewBuilder
-  private func verbRows(store: BrowseStore<Verb, VerbSort>, recents: [Verb], highlighted: String?, isCard: Bool) -> some View {
-    if search.isSearching {
+  private func verbRows(_ listContent: VerbListContent, store: BrowseStore<Verb, VerbSort>, recents: [Verb], highlighted: String?, isCard: Bool) -> some View {
+    switch listContent {
+    case .results:
       ForEach(search.results) { result in
         verbButton(result.match.verb, detail: matchLine(result.match), isHighlighted: result.id == highlighted, isCard: isCard) {
           push(search.open(result))
         }
       }
-    } else {
-      let source: AnalyticsSource = showsRecents ? .recent : .browse
-      ForEach(showsRecents ? recents : store.items) { verb in
-        verbButton(verb, detail: nil, isHighlighted: verb.id == highlighted, isCard: isCard) {
-          push(VerbDestination(verb: verb, source: source))
-        }
+    case .recents:
+      verbButtons(recents, source: .recent, highlighted: highlighted, isCard: isCard)
+    case .all:
+      verbButtons(store.items, source: .browse, highlighted: highlighted, isCard: isCard)
+    case .noResults, .myVerbs:
+      EmptyView()
+    }
+  }
+
+  private func verbButtons(_ verbs: [Verb], source: AnalyticsSource, highlighted: String?, isCard: Bool) -> some View {
+    ForEach(verbs) { verb in
+      verbButton(verb, detail: nil, isHighlighted: verb.id == highlighted, isCard: isCard) {
+        push(VerbDestination(verb: verb, source: source))
       }
     }
   }
@@ -252,10 +227,10 @@ struct VerbBrowseView: View {
   private func verbButton(_ verb: Verb, detail: String?, isHighlighted: Bool, isCard: Bool, open: @escaping () -> Void) -> some View {
     Button(action: open) {
       if isCard {
-        verbRow(verb, detail: detail)
+        BrowseRow(verb: verb, detail: detail)
           .card(accent: isHighlighted ? .customRed : nil)
       } else {
-        verbRow(verb, detail: detail)
+        BrowseRow(verb: verb, detail: detail)
       }
     }
     .buttonStyle(.plain)
@@ -265,28 +240,19 @@ struct VerbBrowseView: View {
   }
 
   @ViewBuilder
-  private var listHeading: some View {
-    if showsRecents {
+  private func listHeading(_ listContent: VerbListContent) -> some View {
+    if listContent == .recents {
       Text(L.MyVerbs.recent)
         .subheadingLabel()
         .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityAddTraits(.isHeader)
         .accessibilityIdentifier("recent_verbs_heading")
     } else {
-      Text(L.VerbBrowseView.verbCount(count: search.isSearching ? search.verbCount : Verb.rankCount))
+      Text(L.VerbBrowseView.verbCount(count: listContent == .results ? search.verbCount : Verb.rankCount))
         .subheadingLabel()
         .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityIdentifier("verb_browse_count")
     }
-  }
-
-  private func verbRow(_ verb: Verb, detail: String? = nil) -> some View {
-    BrowseRow(
-      title: verb.infinitifWithPossibleExtraLetters,
-      subtitle: verb.translation,
-      detail: detail,
-      badge: BrowseRow.Badge(text: "#\(verb.frequency)", tint: .customBlue)
-    )
   }
 
   private func matchLine(_ match: VerbSearch.Match) -> String? {
@@ -294,198 +260,33 @@ struct VerbBrowseView: View {
   }
 
   private var listMode: VerbListMode {
-    myVerbsIsChosen ? .myVerbs : VerbListMode(store?.sort ?? Settings.verbSortDefault)
+    myVerbsIsChosen ? .myVerbs : .sorted(store?.sort ?? Settings.verbSortDefault)
   }
 
-  private var showsRecents: Bool {
-    engagement.isEngaged && !search.isSearching && !world.learnerVerbs.recentVerbs.isEmpty
+  private var listContent: VerbListContent {
+    VerbListContent(
+      isSearching: search.isSearching,
+      hasFailed: search.hasFailed,
+      isEngaged: engagement.isEngaged,
+      hasRecents: !world.learnerVerbs.recentVerbs.isEmpty,
+      mode: listMode
+    )
   }
 
   /// The recents while the list shows them, which is when Return and the arrow keys reach them.
   private var shownRecents: [Verb] {
-    showsRecents ? world.learnerVerbs.recentVerbs : []
+    listContent == .recents ? world.learnerVerbs.recentVerbs : []
   }
 
-  private var showsMyVerbs: Bool {
-    myVerbsIsChosen && !search.isSearching && !showsRecents
-  }
-
-  private var showsReviewCard: Bool {
-    world.settings.reviewCardSuppression == .off && !search.isSearching && !showsRecents && !myVerbsIsChosen
-  }
-
-  private static let reviewCardMaxWidth: CGFloat = 560
-
-  /// Each launch, and each return from the background, offers the irregular verb whose key
-  /// conjugation is longest overdue in the practice record, if any.
-  /// The choice is made once per opening, so revealing a card does not swap it for the next one.
-  private func chooseReviewCard() {
-    reviewCardIsChosen = true
-    guard world.settings.reviewCardSuppression == .off else {
-      reviewCard = nil
-      return
-    }
-    reviewCard = world.practice.cardOffer().map { ReviewCardState(offer: $0) }
-  }
-
-  private func signalReviewCardShown() {
-    guard reviewCard?.wasSignaled == false else {
-      return
-    }
-    reviewCard?.wasSignaled = true
-    world.analytics.signal(name: .viewReviewCard)
-  }
-
-  private func revealReviewCard() {
-    guard let reviewCard, !reviewCard.isRevealed else {
-      return
-    }
-    world.practice.recordReview(reviewCard.offer)
-    world.gameCenter.reportAchievements(in: world.practice.record)
-    world.analytics.signal(name: .tapRevealReviewCard)
-    withAnimation {
-      self.reviewCard?.isRevealed = true
-    }
-  }
-
-  private func openReviewCard() {
-    guard let reviewCard else {
-      return
-    }
-    path.append(VerbPageRoute.verb(VerbDestination(verb: reviewCard.offer.verb, source: .reviewCard)))
-  }
-
-  /// A card dismissed before its conjugations were seen was no review, so its verb's due key
-  /// conjugations return tomorrow in the same box.
-  private func dismissReviewCard() {
-    guard let reviewCard else {
-      return
-    }
-    if !reviewCard.isRevealed {
-      world.practice.snooze(reviewCard.offer)
-    }
-    withAnimation {
-      self.reviewCard = nil
-    }
-  }
-
+  /// Every push from the tab, the review card's and My Verbs' included, since each can be tapped
+  /// while an empty search is being dismissed.
   private func push(_ destination: VerbDestination) {
     engagement.push(fieldIsEmpty: !search.isSearching) {
       path.append(VerbPageRoute.verb(destination))
     }
   }
 
-  /// The starred verbs, then the recent ones not starred. Search ignores this choice, as it
-  /// ignores the sort order. A swipe deletes a verb, star and opens alike, so it leaves the list;
-  /// a starred verb asks first, since its star was put there on purpose.
-  @ViewBuilder
-  private var myVerbsList: some View {
-    let starred = world.learnerVerbs.starredVerbs
-    let recent = world.learnerVerbs.recentUnstarredVerbs
-    if starred.isEmpty, recent.isEmpty {
-      ContentUnavailableView(L.MyVerbs.emptyTitle, systemImage: "star", description: Text(L.MyVerbs.emptyDescription))
-        .frame(maxHeight: .infinity)
-        .accessibilityIdentifier("my_verbs_empty")
-    } else {
-      List {
-        if !starred.isEmpty {
-          Section {
-            ForEach(starred) { verb in
-              myVerbRow(verb)
-                .swipeActions(edge: .trailing) {
-                  // Not .destructive: that role removes the row at once, before the learner answers.
-                  Button {
-                    verbToUnstar = verb
-                  } label: {
-                    Label(L.MyVerbs.delete, systemImage: "star.slash")
-                  }
-                  .tint(.customRed)
-                }
-            }
-          } header: {
-            myVerbsHeading(L.MyVerbs.starred)
-              .accessibilityIdentifier("my_verbs_starred_heading")
-          }
-        }
-
-        if !recent.isEmpty {
-          Section {
-            ForEach(recent) { verb in
-              myVerbRow(verb)
-                .swipeActions(edge: .trailing) {
-                  Button(role: .destructive) {
-                    withAnimation {
-                      world.learnerVerbs.remove(verb)
-                    }
-                  } label: {
-                    Label(L.MyVerbs.delete, systemImage: "trash")
-                  }
-                }
-            }
-          } header: {
-            HStack(alignment: .firstTextBaseline) {
-              myVerbsHeading(L.MyVerbs.recent)
-                .accessibilityIdentifier("my_verbs_recent_heading")
-
-              Spacer()
-
-              Button(L.MyVerbs.clearRecent) {
-                withAnimation {
-                  world.learnerVerbs.clearRecents()
-                }
-              }
-              .buttonStyle(.borderless)
-              .tint(.customRed)
-              .accessibilityIdentifier("my_verbs_clear_recent")
-            }
-          }
-        }
-      }
-      .listStyle(.plain)
-      .scrollContentBackground(.hidden)
-      .accessibilityIdentifier("my_verbs_list")
-      .alert(
-        L.MyVerbs.unstarTitle(verbToUnstar?.infinitifWithPossibleExtraLetters ?? ""),
-        isPresented: Binding(
-          get: { verbToUnstar != nil },
-          set: { isPresented in
-            if !isPresented {
-              verbToUnstar = nil
-            }
-          }
-        ),
-        presenting: verbToUnstar
-      ) { verb in
-        Button(L.MyVerbs.unstarConfirm, role: .destructive) {
-          withAnimation {
-            world.learnerVerbs.remove(verb)
-          }
-        }
-        Button(role: .cancel) {}
-      } message: { _ in
-        Text(L.MyVerbs.unstarMessage)
-      }
-    }
-  }
-
-  private func myVerbsHeading(_ text: String) -> some View {
-    Text(text)
-      .subheadingLabel()
-      .accessibilityAddTraits(.isHeader)
-  }
-
-  private func myVerbRow(_ verb: Verb) -> some View {
-    Button {
-      path.append(VerbPageRoute.verb(VerbDestination(verb: verb, source: .myVerbs)))
-    } label: {
-      verbRow(verb)
-    }
-    .buttonStyle(.plain)
-    .accessibilityIdentifier(Self.rowIdentifier(verb))
-    .listRowBackground(Color.customBackground)
-  }
-
-  private static func rowIdentifier(_ verb: Verb) -> String {
+  static func rowIdentifier(_ verb: Verb) -> String {
     "verb_row_\(verb.infinitif)"
   }
 
@@ -537,12 +338,6 @@ struct VerbBrowseView: View {
       searchIsFocused = wantsKeyboard
     }
   }
-}
-
-private struct ReviewCardState {
-  let offer: PracticeStore.CardOffer
-  var isRevealed = false
-  var wasSignaled = false
 }
 
 enum VerbBrowse {

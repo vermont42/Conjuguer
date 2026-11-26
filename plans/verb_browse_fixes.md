@@ -33,7 +33,7 @@ empty until it is committed.
 | 3 | Done | 2026-11-25 | `f2e962e` | Multiple windows | Yes |
 | 4 | Done | 2026-11-25 | `8f31dfe` | S2 | No |
 | 5 | Done | 2026-11-26 | `da22b7e` | B3, B6, B18, B23, B24, B26, S3 (the search model), D5, T1 (the search), K-F1, K-S8 | Yes |
-| 6 | Not started | | | B9, S3 (the rest), D4, D7, T1 (the card), the stale review card | Yes |
+| 6 | Awaiting Josh | 2026-11-26 | | B9, S3 (the rest), D4, D7, T1 (the card), the stale review card | Yes |
 | 7 | Not started | | | B7, B13, B14, B15, B21, B22, B25 (the row), B30, G1, G2, G3, S10 | Yes |
 | 8 | Not started | | | B16, B19, S12, the progress decision, the migration, T2 | Yes |
 | 9 | Not started | | | B12, B27, B29, S4, S4a, S5, S6, D8, D9, T1 (the visit), K-G6 | Yes |
@@ -606,6 +606,54 @@ one after it does nothing, a reveal applies once, and the card is chosen once pe
 review card (reveal, open, dismiss, Suppress Review Card on and off), on both devices.
 
 **How it differed:**
+
+- **B9 is real, in both places.** On the iPad simulator, with one starred verb, no recents, and
+  the empty field focused, a tap on the My Verbs row showed no page, and UIKit logged "…while an
+  existing transition or presentation is occurring; the navigation stack will not be updated."
+  That tap still recorded an open (`openCount` 1) of a page never shown. A revealed review card
+  tapped the same way dropped its push with the same message. Both now push through the view's one
+  `push`, which goes through `SearchEngagement.push`. After the fix, the My Verbs tap opened boire,
+  and the card's tap opened aller in three of four tries within three seconds, with no dropped
+  push logged. In one try the field stayed focused and the page arrived about ten seconds later; I
+  could not make it happen again. No unit test can see a dropped push, so B9's test is the
+  simulator's.
+- **`VerbListContent`**, not `ListContent`, since the name stands alone in `Models/`. It is built
+  from five facts (searching, failed, engaged, any recents, the mode) and says whether the card
+  shows. `VerbBrowseView` computes it once per body and switches on it for the list, the rows, the
+  heading, and the recents that Return and the arrows reach.
+- **The card's rules are `ReviewCardModel`'s** (`Models/ReviewCardModel.swift`): the choice once per
+  opening and again after the background, one signal per offer, one reveal, the snooze, and the
+  stale offer. **`ReviewCardHost`** (`Views/ReviewCardHost.swift`) wraps the list in a `VStack` with
+  the card above it, makes the model from the environment's `World` on its first appearance, and
+  forwards the scene phase, the setting, and the record's changes. Wrapping the list, rather than
+  sitting beside it, keeps the host on screen when no card shows, so its `onChange`s always run. The
+  card's position on the iPad was the same to the point before and after.
+- **The stale offer.** `PracticeStore.holds(_:at:)` asks whether each of the offer's items is still
+  due. An unrevealed card that fails it is dropped when the record changes, when it appears, and
+  before a reveal. A revealed card stays, since its own reveal rescheduled its items. An open from
+  the card itself records a lookup that does not reschedule, so the card survives it.
+- **A small change to Suppress Review Card.** Turning it On now drops the card rather than hiding
+  it, so turning it Off again chooses afresh, where before a card kept under the setting came back
+  as it was, revealed or not. The doc's sentence ("hides any card at once … turning it Off chooses
+  one at once") was already true of the new behavior.
+- **D4.** The Verbs tab's grid and list share one `ScrollViewReader` and scroll handler. The Models
+  tab's two branches share `modelButton`, and its overlay and hidden scroll background are applied
+  once. `VerbCollectionView` was the review's example of the split and is unchanged.
+- **Taken early from Phase 10.** `VerbListMode` moved to its own file, which Phase 10 asked for.
+  `BrowseRow(verb:detail:)` is a start on D1: the Verbs tab, My Verbs, and the failed search's guess
+  use it, and `VerbCollectionView` and `RelatedVerbsView` are left for Phase 10.
+- **Tests.** `ReviewCardModelTests` (10) and `VerbListContentTests` (2, one parameterized over seven
+  rows). `LearnerVerbsTests`' list-mode test now pins the new cases. With the stale check turned
+  off, two of the card tests recorded three issues. 1,010 tests in 96 suites (998 plus 12).
+  SwiftLint is clean on the changed files, and `check_docs.py` passes. No string, signal, or
+  parameter changed.
+- **On the iPhone simulator:** the card revealed, opened extraire, kept its revealed state after
+  Back, and was dismissed; Suppress Review Card On hid it, and Off offered a card again; in My
+  Verbs a recent verb's swipe deleted it, a starred verb's swipe raised the alert and Cancel kept
+  it, Clear left only the star, and the starred row opened its page. Both simulators' records were
+  put back from copies taken first.
+- **Docs.** `docs/feature_architecture.md` (the file table, the learner's verbs' table and its
+  sentence on pushes, the review card's paragraph and table) and `docs/project_structure.md`.
 
 ## Phase 7: What Search Understands, and How It Names a Match
 

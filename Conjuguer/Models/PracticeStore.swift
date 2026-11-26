@@ -146,6 +146,12 @@ final class PracticeStore {
     )
   }
 
+  /// Whether each of the offer's items is still due. A lookup of the verb elsewhere, a quiz
+  /// answer, or Reset Practice can end an offer that the card still holds.
+  func holds(_ offer: CardOffer, at date: Date = .now) -> Bool {
+    Set(offer.items).isSubset(of: dueItems(at: date))
+  }
+
   func recordReview(_ offer: CardOffer, at date: Date = .now) {
     record.recordReview(offer.items, at: date, calendar: calendar)
     save()

@@ -277,11 +277,8 @@ struct LearnerVerbsTests {
     #expect(store.myVerbs.map(\.dictionaryKey) == ["haïr Québec", "haïr France"])
   }
 
-  @Test func theListModesMapToTheSortOrders() {
-    #expect(VerbListMode.allCases == [.frequency, .alphabetical, .myVerbs])
-    for sort in VerbSort.allCases {
-      #expect(VerbListMode(sort).sort == sort)
-    }
-    #expect(VerbListMode.myVerbs.sort == nil)
+  @Test func theListModesAreTheSortOrdersAndThenMyVerbs() {
+    #expect(VerbListMode.allCases == [.sorted(.frequency), .sorted(.alphabetical), .myVerbs])
+    #expect(VerbListMode.sorted(.alphabetical).displayName == VerbSort.alphabetical.displayName)
   }
 }

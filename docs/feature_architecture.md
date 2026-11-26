@@ -13,7 +13,7 @@ query use it too.
 
 | File | Purpose |
 |------|---------|
-| `VerbBrowseView.swift` | The Verbs tab: the list (a `List` on iPhone, a `LazyVGrid` of cards on iPad), the sort picker, the search field, and the verb count. `VerbBrowse.makeStore` builds the store |
+| `VerbBrowseView.swift` | The Verbs tab: the navigation stack, the list (a `List` on iPhone, a `LazyVGrid` of cards on iPad) chosen by one `VerbListContent` (all verbs, results, no results, recents, My Verbs), the picker or the key row, and search requests. `VerbBrowse.makeStore` builds the store. My Verbs is `MyVerbsList`, and the review card is `ReviewCardHost` around the list |
 | `VerbSearchModel.swift` | The Verbs tab's search: the text, its results and their count of infinitives, the guess, the keyboard selection, what Return opens, and the `finishSearch` reports. The view keeps the focus and the navigation |
 | `ModelBrowseView.swift` | The Models tab, built the same way. `ModelBrowse.makeStore` builds the store |
 | `BrowseStore.swift` | A generic `@Observable` store that holds a list presorted for each sort order and persists the chosen order through a closure |
@@ -720,7 +720,8 @@ record's business (§ Quiz, The Practice Record).
 |---|---|---|
 | `LearnerVerbs` | `Shared/LearnerVerbs.swift` | The record: a `Codable` value of entries keyed by `Verb.dictionaryKey`, so that each entry of haïr, ouïr, saillir, and sortir keeps its own opens and star |
 | `LearnerVerbStore` | `Models/LearnerVerbStore.swift` | `Current.learnerVerbs`: records, saves each change, and answers in `Verb`s, skipping any key no longer in `verbs.xml` |
-| `VerbListMode` | `Utils/VerbSort.swift` | The verb list's picker: Frequency, Alphabetical, My Verbs |
+| `VerbListMode` | `Utils/VerbListMode.swift` | The verb list's picker: `.sorted(VerbSort)` for Frequency and Alphabetical, then My Verbs |
+| `MyVerbsList` | `Views/MyVerbsList.swift` | The My Verbs list, its swipes, its alert, and Clear |
 
 **Where it lives.** The store saves the record as JSON under `LearnerVerbs.storageKey` in the App
 Group's defaults (`WidgetConstants.sharedDefaults`, through `GetterSetterReal(userDefaults:)`), so
@@ -743,7 +744,7 @@ The arrow keys and Return reach them on iPad and Mac. They, and the accent key r
 follow `SearchEngagement.isEngaged`, which lets go of the focus 0.7 seconds after the field's last
 loss of it: on iPad a tap outside an empty field ends its focus at touch-down, so views that
 followed the focus vanished under the finger (Konjugieren). The push from such a tap, in either
-tab, waits for the search's dismissal to end (`ViewControllerTransitions.waitUntilIdle()`), since
+tab, from a row, a recent verb, a My Verbs row, or the review card, waits for the search's dismissal to end (`ViewControllerTransitions.waitUntilIdle()`), since
 UIKit drops a push made during it, and a later push replaces one still waiting. An accent key
 tapped then waits likewise, with any tapped after it; the letters go in together, the field is
 refocused, and the linger holds until they land. A search request that pops a page waits 500 ms
@@ -770,7 +771,9 @@ gloss, and its key conjugations hidden under a redacted placeholder over "Recall
 then tap to check." A tap anywhere reveals them, red letters and all; a second tap opens the page,
 with `source` `reviewCard`, and a chevron says so; ✕ dismisses the card. Nothing replaces a
 dismissed card until the next opening, and the card hides while a search, the recents, or My Verbs
-shows. On iPad it stops at 560 points rather than spanning the grid. The Suppress Review Card
+shows. A card whose offer no longer holds (its verb looked up from search, a key conjugation
+answered in a quiz, or Reset Practice) leaves as the record changes, before it can be revealed or
+signalled; a revealed card stays, since its own reveal rescheduled what it showed. On iPad it stops at 560 points rather than spanning the grid. The Suppress Review Card
 setting (`ReviewCardSuppression`, Off by default, stored as `reviewCardSuppression`) hides any card
 at once and chooses none at later openings; turning it Off chooses one at once. The schedule keeps
 running underneath.
@@ -783,7 +786,10 @@ the card does not show.
 | Piece | Role |
 |---|---|
 | `PracticeStore.cardOffer(at:)` | The verb and its due shown key conjugations, with the days since and whether a lookup or an answer came last |
-| `Views/ReviewCardView.swift` | The card. `VerbBrowseView` chooses the offer, once per opening, and applies each tap to the record |
+| `PracticeStore.holds(_:at:)` | Whether each of an offer's items is still due |
+| `Models/ReviewCardModel.swift` | The rules: the choice, once per opening and again after the background; one signal per offer; one reveal; a snooze for a dismissal before the reveal; and a stale offer dropped. `ReviewCardModelTests` pins each |
+| `Views/ReviewCardHost.swift` | Draws the card above the list it wraps, and tells the model of the list's appearance, the app's phase, the setting, and the record's changes |
+| `Views/ReviewCardView.swift` | The card itself |
 
 **What moves a key conjugation** (Josh for Konjugieren, 2026-11-13, carried over). An open of the
 verb puts its key conjugations in the first box, due the next day, and so does any later open, since

@@ -212,6 +212,13 @@ quizzes, or who pressed Clear). To confirm on the iPad: Clear the recents, star 
 Verbs, focus the field, and tap the row. I did not, because it meant clearing the simulator's
 record.
 
+**Confirmed and fixed on `main` 2026-11-26**, by Phase 6 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md). On the iPad simulator, with no
+recents, one starred verb, and the empty field focused, a tap on the My Verbs row and a tap on a
+revealed card each showed no page, and UIKit logged "…while an existing transition or presentation
+is occurring; the navigation stack will not be updated." The My Verbs tap also recorded an open of
+a page never shown. Both now push through `SearchEngagement.push`, as the tab's other rows do, and
+after the fix both opened their pages.
+
 **B10. The control's and the shortcuts' links wait for the next activation.** *Suspected. The
 mechanism is older.* The Find a Verb control, both Random Verb intents, and Start Quiz write a link
 into the App Group's defaults, and the app reads it only when the scene becomes active
@@ -460,6 +467,11 @@ the guess, the selection, and the tracker, and reports an ended search from its 
 `BrowseSearch` is gone. `searchFocusLostAt` became `SearchEngagement.isLingering`. The rest
 (`ListContent`, the review card, My Verbs) is Phase 6's.
 
+**The rest fixed on `main` 2026-11-26**, by Phase 6 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): one `VerbListContent` (all, results,
+no results, recents, My Verbs) says what the list shows, and the view switches on it.
+`MyVerbsList` and `ReviewCardHost` have files of their own, and the card's rules are
+`ReviewCardModel`'s, so `reviewCardIsChosen` is the model's private `hasChosen`.
+
 **S4. The verb page is rebuilt about six times per open, and the compound cards are recomputed
 each time.** *Measured.* One open built the page's headings six times in the first seconds, with
 no interaction. `VerbConjugations.memoized` caches the simple cards, but `CompoundTensesView`
@@ -574,6 +586,11 @@ identifier, and the scroll handler, and `ModelBrowseView` repeats the model butt
 empty-search overlay in both of its branches. `VerbCollectionView.verbList` and `verbRows` show the
 split.
 
+**Fixed on `main` 2026-11-26**, by Phase 6 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): in the Verbs tab the scroll handler and the
+`ScrollViewReader` wrap both branches once, and the rows are built by one function; in the Models
+tab one `modelButton` serves both branches, and the empty-search overlay is applied once.
+`VerbCollectionView` was already split and is unchanged.
+
 **D5. The two tabs' search plumbing.** `sortPickerOrKeyRow` with its comment, the `searchable`
 modifiers (placement, capitalization, autocorrection), the store bootstrap, and
 `updateSearchResults` exist in both tabs, and B3 is what the drift cost.
@@ -587,6 +604,9 @@ four sites, one of them browse's (`VerbCollectionView.swift:134`, `165-170`, `19
 
 **D7. `VerbListMode` restates `VerbSort`'s cases** with a conversion each way (`VerbSort.swift`).
 `case sorted(VerbSort), myVerbs` would not.
+
+**Fixed on `main` 2026-11-26**, by Phase 6 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `VerbListMode` is `.sorted(VerbSort)` or
+`.myVerbs`, in `Utils/VerbListMode.swift`.
 
 **D8. Which key conjugations a verb has is decided twice,** in `Verb.keyConjugations()`
 (`KeyConjugations.swift:21-27`) and in the practice schedule (`PracticeItemMapping.swift:66-76`),
@@ -610,6 +630,10 @@ The verb page's visit rules are the same case: that every `viewAppeared` pairs w
 **The search's part fixed on `main` 2026-11-26**, by Phase 5 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md):
 `VerbSearchModelTests` pins which events finish a search and what each reports, and what Return
 opens. The review card and the visit are Phases 6 and 9.
+
+**The review card's part fixed on `main` 2026-11-26**, by Phase 6 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md):
+`ReviewCardModelTests` pins the choice once per opening, a dismissal before and after the reveal,
+one reveal, one signal per offer, and a stale offer dropped. The visit is Phase 9's.
 
 **T2. "A relaunch keeps today's verb" is untested through the disk.** `writeSnapshots(now:)`
 reads `WidgetConstants.snapshotsURL` and `Current` directly, so no test can point it at a file.
@@ -660,6 +684,11 @@ Not browse code, and noted in passing:
   browse Phase 13 and pedagogy Phase 11, and that no release wrote.
 - **The review card can act on a stale offer:** a card chosen at launch is still revealed, and
   signalled, after its verb was looked up or the record reset in the same session.
+
+  **Fixed on `main` 2026-11-26**, by Phase 6 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `PracticeStore.holds(_:at:)` says whether
+  each of an offer's items is still due, and `ReviewCardModel` drops an unrevealed offer that fails
+  it when the record changes, when the card appears, and before a reveal. Seen on the iPad
+  simulator: an unrevealed aller card left the list once aller was opened from search.
 - **A collection's quiz draws uniformly over its entries,** so a quiz from parler's model page
   asks about 87% verbs from outside the 1,000 most frequent, and the pronominal collection about
   94% (a reviewer's Python estimate). See the open questions.

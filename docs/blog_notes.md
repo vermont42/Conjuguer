@@ -6995,3 +6995,34 @@ aside while the deletions go on.
 One thing the review expected did not hold: Return in an empty field never reaches the app on the
 iPad, so the recents can be reached by the arrow keys but opened only by a tap. That was true of
 the old code too. 998 tests now, from 961.
+
+## The Verb List Comes Apart, and Two Taps That Went Nowhere (2026-11-26)
+
+Phase 6 of the browse fixes plan finished taking `VerbBrowseView` apart. After Phase 5 moved the
+search into a model, the view still held four ideas at once: the search, the recent verbs, My
+Verbs, and the review card, each with its own Boolean, and five computed properties that each
+re-derived what the list was showing. Now one value, `VerbListContent`, says it (all verbs,
+results, no results, recents, or My Verbs), and the list, the rows, the heading, and the keyboard
+all switch on that one answer. My Verbs moved into a view of its own with its alert, and the
+review card into a host view and a model whose rules a test can drive.
+
+The plan asked me to confirm a suspicion before fixing it. The review had guessed that on an iPad
+two kinds of tap skipped the workaround the other rows use: a My Verbs row and the review card,
+each tapped while an empty search field is focused. On the iPad simulator, both taps did nothing,
+and UIKit logged its usual complaint about a navigation push made mid-transition. The My Verbs tap
+was worse than nothing. It recorded an open of the verb, so the learner's history gained a page
+they never saw. The fix was one line each: route both through the same push that waits out the
+search's dismissal. After the fix both pages opened. One try of four took ten seconds rather than
+two, and I could not make it happen again, so it is written down rather than explained.
+
+The review card had a quieter bug. It chose its verb when the list first appeared and kept that
+choice all session, so if the learner then looked the verb up from search, which reschedules it,
+the card still offered it, and revealing it moved its schedule a second time. The model now asks
+the practice store whether the offer still holds, every time the record changes, and drops the
+card if not. Watching it on the simulator was satisfying: search aller, open it, come back, and the
+aller card is simply gone.
+
+Ten tests pin the card's rules: chosen once per opening, a dismissal before the reveal snoozes the
+verb and one after does nothing, a reveal counts once, a signal goes once per offer, and a stale
+offer disappears. With the stale check removed, the tests that cover it failed, which is the
+proof that they test something. 1,010 tests now.

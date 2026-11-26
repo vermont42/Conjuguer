@@ -87,3 +87,15 @@ struct BrowseRow: View {
     }
   }
 }
+
+extension BrowseRow {
+  /// A verb's row in the lists that rank verbs: its infinitive, its gloss, and its rank.
+  init(verb: Verb, detail: String? = nil) {
+    self.init(
+      title: verb.infinitifWithPossibleExtraLetters,
+      subtitle: verb.translation,
+      detail: detail,
+      badge: Badge(text: "#\(verb.frequency)", tint: .customBlue)
+    )
+  }
+}

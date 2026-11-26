@@ -105,8 +105,18 @@ struct ModelBrowseView: View {
     !trimmedSearchText.isEmpty
   }
 
-  @ViewBuilder
   private func modelCollection(store: BrowseStore<ModelAndDecorator, ModelSort>) -> some View {
+    modelsAndCollections(store: store)
+      .scrollContentBackground(.hidden)
+      .overlay {
+        if isSearching && searchResults.isEmpty {
+          ContentUnavailableView.search(text: trimmedSearchText)
+        }
+      }
+  }
+
+  @ViewBuilder
+  private func modelsAndCollections(store: BrowseStore<ModelAndDecorator, ModelSort>) -> some View {
     let showsCollections = !isSearching
     let models = isSearching ? searchResults : store.items
     if horizontalSizeClass == .regular {
@@ -132,24 +142,11 @@ struct ModelBrowseView: View {
 
           LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
             ForEach(models) { modelAndDecorator in
-              Button {
-                push(.model(modelAndDecorator.model))
-              } label: {
-                modelRow(modelAndDecorator)
-                  .card()
-              }
-              .buttonStyle(.plain)
-              .accessibilityIdentifier(Self.rowIdentifier(modelAndDecorator))
+              modelButton(modelAndDecorator, isCard: true)
             }
           }
         }
         .padding(.vertical, Layout.defaultSpacing)
-      }
-      .scrollContentBackground(.hidden)
-      .overlay {
-        if isSearching && searchResults.isEmpty {
-          ContentUnavailableView.search(text: trimmedSearchText)
-        }
       }
     } else {
       List {
@@ -166,14 +163,7 @@ struct ModelBrowseView: View {
 
         Section {
           ForEach(models) { modelAndDecorator in
-            Button {
-              push(.model(modelAndDecorator.model))
-            } label: {
-              modelRow(modelAndDecorator)
-            }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier(Self.rowIdentifier(modelAndDecorator))
-            .listRowBackground(Color.customBackground)
+            modelButton(modelAndDecorator, isCard: false)
           }
         } header: {
           if showsCollections {
@@ -182,12 +172,6 @@ struct ModelBrowseView: View {
         }
       }
       .listStyle(.plain)
-      .scrollContentBackground(.hidden)
-      .overlay {
-        if isSearching && searchResults.isEmpty {
-          ContentUnavailableView.search(text: trimmedSearchText)
-        }
-      }
     }
   }
 
@@ -210,6 +194,22 @@ struct ModelBrowseView: View {
     }
     .buttonStyle(.plain)
     .accessibilityIdentifier("collection_row_\(collection.key)")
+  }
+
+  private func modelButton(_ modelAndDecorator: ModelAndDecorator, isCard: Bool) -> some View {
+    Button {
+      push(.model(modelAndDecorator.model))
+    } label: {
+      if isCard {
+        modelRow(modelAndDecorator)
+          .card()
+      } else {
+        modelRow(modelAndDecorator)
+      }
+    }
+    .buttonStyle(.plain)
+    .accessibilityIdentifier(Self.rowIdentifier(modelAndDecorator))
+    .listRowBackground(Color.customBackground)
   }
 
   private func sectionHeading(_ text: String) -> some View {
