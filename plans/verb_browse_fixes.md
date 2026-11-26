@@ -34,7 +34,7 @@ empty until it is committed.
 | 4 | Done | 2026-11-25 | `8f31dfe` | S2 | No |
 | 5 | Done | 2026-11-26 | `da22b7e` | B3, B6, B18, B23, B24, B26, S3 (the search model), D5, T1 (the search), K-F1, K-S8 | Yes |
 | 6 | Done | 2026-11-26 | `cbb5b60` | B9, S3 (the rest), D4, D7, T1 (the card), the stale review card | Yes |
-| 7 | Awaiting Josh | 2026-11-26 | | B7, B13, B14, B15, B21, B22, B25 (the row), B30, G1, G2, G3, S10 | Yes |
+| 7 | Done | 2026-11-26 | `4ca2f5f` | B7, B13, B14, B15, B21, B22, B25 (the row), B30, G1, G2, G3, S10 | Yes |
 | 8 | Not started | | | B16, B19, S12, the progress decision, the migration, T2 | Yes |
 | 9 | Not started | | | B12, B27, B29, S4, S4a, S5, S6, D8, D9, T1 (the visit), K-G6 | Yes |
 | 10 | Not started | | | B17, B25 (the labels), S8, S13, S14, D1, D2, D3, D6, T6 | Yes |
