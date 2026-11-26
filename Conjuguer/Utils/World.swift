@@ -146,10 +146,26 @@ class World {
     )
   }()
 
-  // The App Group's defaults, so that the widget can read the learner's verbs and practice.
-  // Without the group, as in a build lacking the entitlement, the records fall back to the app's
-  // own defaults.
+  // The App Group's defaults, where the learner's verbs and practice have always been kept,
+  // though the widget reads neither: it reads the snapshots the app writes. Without the group, as
+  // in a build lacking the entitlement, the records fall back to the app's own defaults.
   private static func sharedDefaults() -> GetterSetter {
     GetterSetterReal(userDefaults: WidgetConstants.sharedDefaults ?? .standard)
+  }
+}
+
+extension World {
+  /// Settings' Reset Practice: the practice record, the best scores, and which verbs were ever
+  /// opened, so that every collection's progress returns to nothing. Stars, Recent, and the daily
+  /// challenges' results stay.
+  var hasPracticeToReset: Bool {
+    practice.hasAnythingToReset || settings.hasBestScore || learnerVerbs.hasFirstOpens
+  }
+
+  func resetPractice() {
+    practice.reset()
+    settings.resetBestScores()
+    learnerVerbs.forgetFirstOpens()
+    rescheduleReminders()
   }
 }

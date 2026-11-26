@@ -18,45 +18,67 @@ enum WidgetSnapshotWriter {
     guard let url = WidgetConstants.snapshotsURL else {
       return false
     }
+    return writeSnapshots(to: url, myVerbs: Current.learnerVerbs.myVerbs, now: now)
+  }
+
+  /// A missing or unreadable file is written afresh. The snapshots are keyed on the calendar day,
+  /// the pronoun-gender setting, the quiz level, and My Verbs, so re-foregrounding within the
+  /// same day usually encodes identical bytes, and then neither the write nor the reload happens.
+  @discardableResult
+  @MainActor static func writeSnapshots(to url: URL, myVerbs: [Verb], now: Date) -> Bool {
     let existing = try? Data(contentsOf: url)
-    let displayed = existing
-      .flatMap { try? JSONDecoder().decode([WidgetSnapshot].self, from: $0) }
-      .flatMap { displayedVerb(in: $0, on: now) }
-    let snapshots = generateSnapshots(from: now, myVerbs: Current.learnerVerbs.myVerbs, keeping: displayed)
+    let previous = existing.flatMap(WidgetSnapshotBundle.decoded(from:))
     guard
-      !snapshots.isEmpty,
-      let data = try? JSONEncoder().encode(snapshots)
+      let bundle = nextBundle(after: previous, myVerbs: myVerbs, now: now),
+      let data = bundle.encoded,
+      existing != data
     else {
-      return false
-    }
-    // The snapshot is keyed on the calendar day, the pronoun-gender setting, the quiz level, and
-    // My Verbs, so
-    // re-foregrounding within the same day usually re-encodes identical bytes. Skip both the
-    // write and the reload in that case rather than spending the reload budget on a no-op.
-    if existing == data {
       return false
     }
     try? data.write(to: url, options: .atomic)
     return true
   }
 
+  /// The bundle that follows `previous`: today's verb kept, and My Verbs' turns carried on.
+  @MainActor static func nextBundle(after previous: WidgetSnapshotBundle?, myVerbs: [Verb], now: Date) -> WidgetSnapshotBundle? {
+    let displayed = previous.flatMap { displayedVerb(in: $0.snapshots, on: now) }
+    let bundle = generateBundle(from: now, myVerbs: myVerbs, keeping: displayed, lastShown: previous?.myVerbsLastShown ?? [:])
+    return bundle.snapshots.isEmpty ? nil : bundle
+  }
+
   /// `keeping` is the verb the widget shows today. The app rewrites the snapshots at every
   /// activation, and My Verbs may have changed since the last write, so a fresh draw could
-  /// replace the verb a learner already saw this morning.
-  @MainActor static func generateSnapshots(from date: Date = Date(), dayCount: Int = futureDayCount, myVerbs: [Verb] = [], keeping displayed: Verb? = nil) -> [WidgetSnapshot] {
+  /// replace the verb a learner already saw this morning. `lastShown` is the previous bundle's
+  /// `myVerbsLastShown`. Its days from today on were that bundle's plan rather than what the
+  /// widget showed, so this bundle plans them again, and a verb that has left My Verbs is
+  /// forgotten.
+  @MainActor static func generateBundle(
+    from date: Date = Date(),
+    dayCount: Int = futureDayCount,
+    myVerbs: [Verb] = [],
+    keeping displayed: Verb? = nil,
+    lastShown: [String: Date] = [:]
+  ) -> WidgetSnapshotBundle {
     let startOfToday = WidgetDateHelper.startOfDay(for: date)
     let eligibleMyVerbs = myVerbs.filter(isEligible)
+    let eligibleKeys = Set(eligibleMyVerbs.map(\.dictionaryKey))
     let eligibleFrequentVerbs = VerbDraw.frequentVerbs.filter(isEligible)
-    return (0 ..< dayCount).compactMap { offset in
+    var lastShown = lastShown.filter { eligibleKeys.contains($0.key) && $0.value < startOfToday }
+    var snapshots: [WidgetSnapshot] = []
+    for offset in 0 ..< dayCount {
       guard let day = WidgetDateHelper.calendar.date(byAdding: .day, value: offset, to: startOfToday) else {
-        return nil
+        continue
       }
       let kept = offset == 0 ? displayed : nil
-      guard let verb = kept ?? VerbDraw.verbOfTheDay(on: day, myVerbs: eligibleMyVerbs, frequentVerbs: eligibleFrequentVerbs) else {
-        return nil
+      guard let verb = kept ?? VerbDraw.verbOfTheDay(on: day, myVerbs: eligibleMyVerbs, frequentVerbs: eligibleFrequentVerbs, lastShown: lastShown) else {
+        continue
       }
-      return generateSnapshot(verb: verb, date: day)
+      if VerbDraw.isMyVerbsDay(day), eligibleKeys.contains(verb.dictionaryKey) {
+        lastShown[verb.dictionaryKey] = day
+      }
+      snapshots.append(generateSnapshot(verb: verb, date: day))
     }
+    return WidgetSnapshotBundle(snapshots: snapshots, myVerbsLastShown: lastShown)
   }
 
   @MainActor static func displayedVerb(in snapshots: [WidgetSnapshot], on date: Date) -> Verb? {
@@ -70,11 +92,6 @@ enum WidgetSnapshotWriter {
   // day.
   @MainActor static func isEligible(_ verb: Verb) -> Bool {
     ExampleData.example(for: verb) != nil
-  }
-
-  @MainActor static func generateSnapshot(date: Date = Date(), myVerbs: [Verb] = []) -> WidgetSnapshot? {
-    let verb = VerbDraw.verbOfTheDay(on: date, myVerbs: myVerbs.filter(isEligible), frequentVerbs: VerbDraw.frequentVerbs.filter(isEligible))
-    return verb.map { generateSnapshot(verb: $0, date: date) }
   }
 
   @MainActor static func generateSnapshot(verb: Verb, date: Date, level: QuizLevel = Current.settings.quizLevel) -> WidgetSnapshot {

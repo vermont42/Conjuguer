@@ -65,13 +65,70 @@ struct VerbDrawTests {
     #expect(drawn == expected)
   }
 
+  /// Each My Verbs day records its verb, as the writer does, so that the next takes its turn.
   @Test func myVerbsTakeEveryThirdDayInTurn() throws {
     let myVerbs = try verbs(["être", "venir"])
-    let expected = ["être", "boire", "distribuer", "venir", "prévoir", "vendre", "être", "visiter", "admirer", "venir"]
-    let drawn = days(from: "2026-11-22", count: 10).map {
-      VerbDraw.verbOfTheDay(on: $0, myVerbs: myVerbs, frequentVerbs: VerbDraw.frequentVerbs)?.dictionaryKey
+    let expected = ["venir", "boire", "distribuer", "être", "prévoir", "vendre", "venir", "visiter", "admirer", "être"]
+    var lastShown: [String: Date] = [:]
+    var drawn: [String?] = []
+    for date in days(from: "2026-11-22", count: 10) {
+      let verb = VerbDraw.verbOfTheDay(on: date, myVerbs: myVerbs, frequentVerbs: VerbDraw.frequentVerbs, lastShown: lastShown)
+      if VerbDraw.isMyVerbsDay(date), let verb {
+        lastShown[verb.dictionaryKey] = date
+      }
+      drawn.append(verb?.dictionaryKey)
     }
     #expect(drawn == expected)
+  }
+
+  /// The verbs My Verbs days give, each with My Verbs as it stood that day. `listOnTurn` gives
+  /// the list for each turn from the verbs given so far.
+  private func myVerbsDayPicks(turns: Int, listOnTurn: (Int, [String]) throws -> [Verb]) throws -> [(key: String, list: [String])] {
+    let myVerbsDays = days(from: "2026-11-22", count: turns * VerbDraw.myVerbsOdds).filter(VerbDraw.isMyVerbsDay)
+    var lastShown: [String: Date] = [:]
+    var picks: [(key: String, list: [String])] = []
+    for (turn, date) in myVerbsDays.enumerated() {
+      let list = try listOnTurn(turn, picks.map(\.key))
+      let verb = try #require(VerbDraw.verbOfTheDay(on: date, myVerbs: list, frequentVerbs: VerbDraw.frequentVerbs, lastShown: lastShown))
+      lastShown[verb.dictionaryKey] = date
+      picks.append((verb.dictionaryKey, list.map(\.dictionaryKey)))
+    }
+    return picks
+  }
+
+  /// A verb given again must find every verb of that day's list given since its last turn.
+  private func expectNoRepeatWhileAnotherWaits(_ picks: [(key: String, list: [String])], sourceLocation: SourceLocation = #_sourceLocation) {
+    for (index, pick) in picks.enumerated() {
+      guard let previous = picks[..<index].lastIndex(where: { $0.key == pick.key }) else {
+        continue
+      }
+      let givenSince = Set(picks[(previous + 1) ..< index].map(\.key))
+      let waiting = pick.list.filter { $0 != pick.key && !givenSince.contains($0) }
+      #expect(waiting.isEmpty, "Turn \(index) gave \(pick.key) again while \(waiting) waited.", sourceLocation: sourceLocation)
+    }
+  }
+
+  @Test func aVerbAddedBetweenMyVerbsDaysTakesItsTurnBeforeAnyRepeats() throws {
+    let start = try verbs(["aller", "être", "venir"])
+    let grown = try start + verbs(["faire"])
+    let picks = try myVerbsDayPicks(turns: 9) { turn, _ in
+      turn < 2 ? start : grown
+    }
+    #expect(picks.count == 9)
+    expectNoRepeatWhileAnotherWaits(picks)
+  }
+
+  /// Opening the widget's verb moves it to the front of Recent, so My Verbs reorders.
+  @Test func myVerbsWhoseRecentsReorderStillTakeTurns() throws {
+    let verbs = try verbs(["aller", "être", "venir", "faire"])
+    let picks = try myVerbsDayPicks(turns: 8) { _, given in
+      guard let opened = given.last else {
+        return verbs
+      }
+      return verbs.filter { $0.dictionaryKey == opened } + verbs.filter { $0.dictionaryKey != opened }
+    }
+    expectNoRepeatWhileAnotherWaits(picks)
+    #expect(Set(picks.prefix(4).map(\.key)).count == 4)
   }
 
   @Test func myVerbsNeverWaitLongerThanThreeDays() throws {

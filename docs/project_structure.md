@@ -95,7 +95,7 @@ Conjuguer/
 │   ├── KeyConjugations.swift   # Verb.keyConjugations() (the il présent, passé composé, and futur, unlabeled), citationInfinitif (se souvenir), and the share text
 │   ├── L.swift                 # Type-safe localization accessors, nested by feature
 │   ├── LastQuizResult.swift    # The last quiz's results for the Quiz tab, kept beside the practice record: a kind and a verb or collection key rather than a title, the level, the counts, the score, and the date
-│   ├── LearnerVerbStore.swift  # @Observable Current.learnerVerbs: records opens and stars in LearnerVerbs, saves each change to the App Group's defaults, and answers in verbs (recent, starred, My Verbs)
+│   ├── LearnerVerbStore.swift  # @Observable Current.learnerVerbs: records opens and stars in LearnerVerbs, saves each change to the App Group's defaults, sorts its lists once per change, and answers in verbs (recent, starred, My Verbs, collection progress), with Reset Practice's forgetting of first opens
 │   ├── LanguageModelService.swift      # Protocol for the on-device tutor, plus TutorMessage and unavailability/error enums
 │   ├── LanguageModelServiceDummy.swift # No-op double for tests
 │   ├── LanguageModelServiceReal.swift  # FoundationModels implementation, incl. the ConjugationTool the model can call
@@ -113,7 +113,7 @@ Conjuguer/
 │   ├── CustomQuiz.swift        # The custom quiz: chosen tenses and a QuizVerbSet (a band, every verb, My Verbs, a collection or model), its stored form, QuizScope.custom
 │   ├── QuizDraw.swift          # The verbs of an unlisted quiz (the default, or a custom quiz over a band) from a band: half irregular, two core verbs, one to three rare derivatives; QuizVerbPool (a tense's kinds of verb, read from the data) and QuizVerbTraits
 │   ├── PracticeItemMapping.swift # Which practice item a question exercises: a regular family's pattern (parler's, finir's, rendre's, or a spelling-change model's where it marks the cell) or an irregular verb's key conjugation by stem; a lookup's items
-│   ├── PracticeStore.swift     # @Observable Current.practice: records answers and lookups in the PracticeRecord, saves it to the App Group's defaults, migrates the review card's old per-verb schedules, offers the review card and says whether an offer still holds, keeps the last quiz's results and the Speed Round's best, and resets
+│   ├── PracticeStore.swift     # @Observable Current.practice: records answers and lookups in the PracticeRecord, saves it to the App Group's defaults, offers the review card and says whether an offer still holds, keeps the last quiz's results and the Speed Round's best, and resets
 │   ├── PracticeSet.swift       # A custom quiz shared as a quiz/set link or QR code: reading and writing the link, the level carried only when needed, My Verbs as a list of 50, its scope, summary, share text, and PracticeSetRequest
 │   ├── QuizDueItems.swift      # Up to three due practice items mixed into a default round, within its level's tenses and band; QuizDraw.patternVerbs, the verbs that share a pattern
 │   ├── QuizRecordSession.swift # Review and Practice My Mistakes: sessions drawn from the practice record beyond the level's tenses and band, a verb's key conjugations together, QuizScope.recordSession
@@ -140,7 +140,7 @@ Conjuguer/
 │   ├── VerbModel.swift         # A conjugation pattern: parent for inheritance, stem alterations, ending groups, participe endings
 │   ├── VerbModelParser.swift   # XMLParser delegate for verbModels.xml
 │   ├── VerbCollection.swift    # The collections: the top 100, verbs taking être, irregular futur stems, pronominal verbs, and each model; membership, links, share text, and QuizScope.collection
-│   ├── VerbDraw.swift          # The verb of the day and every random verb: the top 1,000 weighted toward irregular (third group, aller) and base verbs, with My Verbs every third day or one random draw in three
+│   ├── VerbDraw.swift          # The verb of the day and every random verb: the top 1,000 weighted toward irregular (third group, aller) and base verbs, with My Verbs every third day, each verb in turn by the day it was last given, or one random draw in three
 │   ├── VerbEssentials.swift    # Verb Essentials: the scope, which verbs it asks, its draw of five, the rows of a verb's step, and where a missed blank returns
 │   ├── verbModels.xml          # Conjugation pattern definitions
 │   ├── VerbParser.swift        # XMLParser delegate for verbs.xml
@@ -200,7 +200,7 @@ Conjuguer/
 │   ├── ReminderSchedulerSpy.swift   # Test spy under unit tests: records each schedule and permission request
 │   ├── SearchEngagement.swift  # Hack: the iPad search field's timed workarounds both browse tabs share: the focus that lingers, the push and the letter that wait for the search's dismissal, and the focus that waits for a pop
 │   ├── Settings.swift          # @Observable user preferences persisted through GetterSetter
-│   ├── SeededRandomNumberGenerator.swift  # SplitMix64, so tests can check random draws with a fixed seed
+│   ├── SeededRandomNumberGenerator.swift  # SplitMix64: draws every learner's verb of the day, the day's challenge, and the widget's quiz options, and lets tests check random draws with a fixed seed
 │   ├── QRCode.swift            # QR codes made on the device with Core Image, black on white, medium error correction
 │   ├── SceneRouter.swift       # One window's routing, plus MainTab: its tab, routedSheet (the one sheet a link opens), and its search, daily-session, and challenge requests; handleURL and handle(_:), which resolve a Deeplink before closing anything; openSearch(text:source:); deliver(_:to:) for links that arrive outside a window (quick actions, reminders, intents)
 │   ├── ShareSheet.swift        # Presents UIActivityViewController with an LPLinkMetadata header, anchored on iPad to a bar button or a rect in the page (ShareLink reports no tap)
@@ -219,7 +219,7 @@ Conjuguer/
 │   ├── VerbSort.swift          # Sort order for the verb browse view (frequency/alphabetical)
 │   ├── VerbListMode.swift      # The verb list picker's three segments: a VerbSort, or My Verbs
 │   ├── ViewControllerTransitions.swift  # Hack: waits until no view controller is presenting or dismissing, so an iPad push from a tap that ends the search is not dropped
-│   ├── WidgetSnapshotWriter.swift # Writes the multi-day widget snapshot bundle to the shared container, drawing each day's verb with VerbDraw and keeping the verb the widget already shows today
+│   ├── WidgetSnapshotWriter.swift # Writes the multi-day widget snapshot bundle to the shared container (or to a file a test names), drawing each day's verb with VerbDraw, carrying My Verbs' turns, and keeping the verb the widget already shows today
 │   └── World.swift             # @Observable DI container (Current): the services, settings, and stores every window shares; device/simulator/unitTest configurations
 └── Views/
     ├── AnswerFrameView.swift   # Draws an AnswerFrame around the answer field, on one line or as a sentence wrapped word by word, keeping the field's identity, and the keyboard's focus, from one question to the next
@@ -292,7 +292,7 @@ ConjuguerWidget/
     └── WidgetEtymologyText.swift   # ~emphasis~ rendering for widget etymology text
 
 Shared/                         # Compiles into BOTH the app and widget targets
-├── LearnerVerbs.swift          # The learner's verb record, keyed by Verb.dictionaryKey: opens (first, last, count) and stars, as JSON in the App Group's defaults so the widget can read it; every later field must be optional
+├── LearnerVerbs.swift          # The learner's verb record, keyed by Verb.dictionaryKey: opens (first, last, count) and stars, as JSON in the App Group's defaults; the first open is collection progress and only Reset Practice forgets it, the last puts a verb in Recent; every later field must be optional
 ├── OpenQuizIntent.swift        # AppIntent opening the quiz (title written inline — appintentsmetadataprocessor can't read WidgetL accessors)
 ├── OpenRandomVerbControlIntent.swift  # The Random Verb control's action: OpenRandomVerbIntent with source=control, hidden from Shortcuts
 ├── OpenRandomVerbIntent.swift  # AppIntent opening a random verb from Shortcuts, with source=shortcut (same inline-title constraint)
@@ -303,7 +303,7 @@ Shared/                         # Compiles into BOTH the app and widget targets
 ├── WidgetConstants.swift       # App-group ID, snapshot filename, storage keys
 ├── WidgetDateHelper.swift      # Pinned Gregorian calendar and day-key formatting shared by writer and reader
 ├── WidgetL.swift               # LocalizedStringResource accessors for widget strings (the widget's analogue to L)
-└── WidgetSnapshot.swift        # Codable model for one day of serialized widget state; WidgetQuizQuestion.stableSeed, the FNV-1a seed the widget's answer order and the daily challenge share
+└── WidgetSnapshot.swift        # WidgetSnapshotBundle, the snapshot file (each day's snapshot and the last day each My Verbs verb was given, read also from the older bare list); the Codable model for one day of serialized widget state; WidgetQuizQuestion.stableSeed, the FNV-1a seed the widget's answer order and the daily challenge share
 
 ConjuguerTests/
 ├── Info.plist                  # Test-bundle configuration (excluded from the target via membershipExceptions)
@@ -341,7 +341,7 @@ ConjuguerTests/
     ├── GameProjectileTests.swift       # Bullet and enemy-bullet behavior (serialized)
     ├── GapSentenceTests.swift          # The machine check of every Phrases à trous sentence against the Conjugator, agreement included; coverage of the top 300; frames, marks, and spoken prompts; the draw; drafts; the reward rows; nested in QuizTests, sessions (each level, a right round recorded with Ten More, a held correction and its re-ask, a sentence's gender over the setting)
     ├── KeyConjugationsTests.swift      # The key conjugations (reflexive, defective, il agreement), the citation infinitive, the share text, and what a long press copies
-    ├── LearnerVerbsTests.swift         # The learner's record: opens, stars, recents, My Verbs, removal, Clear, JSON coding and an older record's decoding, the store's saving, the doubled entries, and the list modes in their order
+    ├── LearnerVerbsTests.swift         # The learner's record: opens, stars, recents (twenty unstarred under My Verbs), removal and Clear keeping progress, Reset Practice's full forget, JSON coding and an older record's decoding, the store's saving and lists, the doubled entries, and the list modes in their order
     ├── MasteryTests.swift              # Mastery: the state by box, each level's patterns and their agreement with every band verb asked, family rows, être rows, participles, spelling-change cells and examples, the band's irregular verbs, stems by level, the display following a seeded record, and where answers land
     ├── ModelSearchTests.swift          # Models found by exemplar or by member verb, exemplars first, each once
     ├── ModelPracticeTests.swift        # Model practice: each model's kind and absence, ten most frequent verbs, marked cells, known at half, partners of the same kind, the draws alone and mixed, the scopes, and sessions (known after a round, joining a mix, Another Round, signals)
@@ -360,7 +360,7 @@ ConjuguerTests/
     ├── RelatedVerbsTests.swift         # Base-finding on known and false pairs, nested roots, the card's two relations, doubled roots, and the model page's two orders
     ├── ReviewScheduleTests.swift       # The review ladder: starts, reviews, snoozes, a new item's first answer, a right answer climbing only when due, a wrong one starting over
     ├── PracticeItemTests.swift         # The practice items: pinned and unreadable keys, which verbs are patterns, spelling-change cells, compound tenses with être, every tense's stem, doubled entries, lookups, the shown stems, items asking their own cell back
-    ├── PracticeRecordTests.swift       # The practice record: the ladder through answers, due order, lookups, the card's review, snooze, choice, and caption, patterns and passé simple never on the card, a relaunch, the migration, a reset that stays
+    ├── PracticeRecordTests.swift       # The practice record: the ladder through answers, due order, lookups, the card's review, snooze, choice, and caption, patterns and passé simple never on the card, a relaunch, a reset that stays
     ├── QuizAchievementTests.swift      # Nested in QuizTests: achievements reported at the results and at a quit and not while signed out, and the per-level bests (new, not beaten, beaten, per level, none after Ten More or an unranked session, none for 0, Reset forgetting them)
     ├── QuizHubTests.swift              # The Quiz tab's last result: its stored form, each scope's kind, titles, collection keys, the store and Reset; nested in QuizTests, a finished, continued, quit, record-session, verb-page, and collection quiz
     ├── QuizPracticeTests.swift         # Nested in QuizTests: answers kept on quit, every scope writing, due items within the level and band, at most three a round, none in a scoped quiz
@@ -376,7 +376,7 @@ ConjuguerTests/
     ├── StandardVariantsTests.swift     # Each accepted variant row, and the spellings each row must not accept (vînmes, dû, croître, appeler, jeter, harcelle)
     ├── StemAlterationAuditTests.swift  # Audits every -er verb whose stem ends in é + consonant: the stem must open to è before a mute ending
     ├── VerbCollectionTests.swift       # Collections: stable keys, each one's membership and order, list and model links, share text, progress, and the unranked quiz with its collection parameter
-    ├── VerbDrawTests.swift             # The draw: what counts as irregular, the weights, ten days pinned to a Python reimplementation, My Verbs in turn every third day, weighted and one-in-three proportions with fixed seeds
+    ├── VerbDrawTests.swift             # The draw: what counts as irregular, the weights, ten days pinned to a Python reimplementation, My Verbs in turn every third day, a list that grows or reorders between turns repeating no verb while another waits, weighted and one-in-three proportions with fixed seeds
     ├── VerbEssentialsTests.swift       # Verb Essentials: a step's three cells, each blank's answer by gender, the frames of a pronominal verb, the fixture's diagnosed answers, which verbs it asks, the draw, the scope, re-ask placement, and sessions (each blank recorded, the rows, a re-ask's given rows, half points, Five More)
     ├── VerbListContentTests.swift      # What the Verbs tab's list shows: a search over the recents over the list mode, and the card only above all verbs
     ├── VerbLookupTests.swift           # Look Up a Verb's findings, answers, and destinations (aller, vais, suis, etait, go, venier)
@@ -387,7 +387,7 @@ ConjuguerTests/
     ├── VerbSearchTests.swift           # Verb search: folding, reflexive and "to" stripping, tier ranking, literal-before-folded, order independence
     ├── VerbSpotlightTests.swift        # The Spotlight entries' description, alternate names, keywords, and identifiers
     ├── VerbVisitTests.swift            # A verb visit's deepest section, resume, and banded dwell
-    └── WidgetSnapshotWriterTests.swift # Snapshot-bundle generation from the band, keeping today's verb through a rewrite, doubled entries, the quiz question, and truncation
+    └── WidgetSnapshotWriterTests.swift # Snapshot-bundle generation from the band, writes through a file (missing, corrupt, another day's, a bare list, an identical rewrite skipped, today's verb kept, My Verbs' turns carried), doubled entries, the quiz question, and truncation
 
 docs/                               # Claude's output that informs: research, reports, playbooks, manifests, App Store copy
 ├── app_store_preview_videos.md     # Final Cut Pro workflow for the App Store preview videos

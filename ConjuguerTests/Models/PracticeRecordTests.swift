@@ -206,55 +206,15 @@ struct PracticeRecordTests {
     #expect(practice.record.entries.keys.allSatisfy { !$0.contains("obtain") })
   }
 
-  @Test func theFirstLoadMigratesIrregularVerbsSchedulesAndDropsRegularOnes() throws {
+  @Test func aResetSurvivesARelaunch() throws {
     let getterSetter = GetterSetterFake()
-    let reviewed = ReviewSchedule(box: 2, due: startOf(20))
-    let reviewJSON = try #require(String(data: JSONEncoder().encode(reviewed), encoding: .utf8))
-    let opened = date(4).timeIntervalSinceReferenceDate
-    let json = #"{"entries":{"#
-      + #""venir":{"dictionaryKey":"venir","openCount":2,"lastOpened":\#(opened),"review":\#(reviewJSON)},"#
-      + #""prendre":{"dictionaryKey":"prendre","openCount":1,"lastOpened":\#(opened)},"#
-      + #""parler":{"dictionaryKey":"parler","openCount":1,"lastOpened":\#(opened),"review":\#(reviewJSON)},"#
-      + #""accroire":{"dictionaryKey":"accroire","openCount":1,"lastOpened":\#(opened)},"#
-      + #""pasunverbe":{"dictionaryKey":"pasunverbe","openCount":1,"lastOpened":\#(opened)}}}"#
-    getterSetter.set(key: LearnerVerbs.storageKey, value: json)
-
     let practice = store(getterSetter)
-    practice.migrateIfNeeded()
-
-    for item in keys("venir") {
-      #expect(practice.record.entry(for: item)?.schedule == reviewed)
-      #expect(practice.record.entry(for: item)?.lastLookedUp == date(4))
-    }
-    // An entry from before the review card counts as looked up on its last open.
-    for item in keys("prendre") {
-      #expect(practice.record.entry(for: item)?.schedule == ReviewSchedule(box: 0, due: startOf(5)))
-    }
-    #expect(practice.record.entries.count == 6)
-    #expect(LearnerVerbs(json: json)?.entries["venir"]?.openCount == 2)
-    #expect(store(getterSetter).record == practice.record)
-  }
-
-  @Test func aResetIsKeptAndDoesNotMigrateAgain() throws {
-    let getterSetter = GetterSetterFake()
-    let opened = date(4).timeIntervalSinceReferenceDate
-    getterSetter.set(key: LearnerVerbs.storageKey, value: #"{"entries":{"venir":{"dictionaryKey":"venir","openCount":1,"lastOpened":\#(opened)}}}"#)
-    let practice = store(getterSetter)
-    #expect(!practice.isEmpty)
+    practice.recordLookup(try verb("venir"), source: .browse, at: date(1))
+    #expect(!store(getterSetter).isEmpty)
 
     practice.reset()
 
     #expect(practice.isEmpty)
     #expect(store(getterSetter).isEmpty)
-  }
-
-  @Test func aMigrationWithNothingToMoveIsStillKept() throws {
-    let getterSetter = GetterSetterFake()
-    let opened = date(4).timeIntervalSinceReferenceDate
-    getterSetter.set(key: LearnerVerbs.storageKey, value: #"{"entries":{"parler":{"dictionaryKey":"parler","openCount":1,"lastOpened":\#(opened)}}}"#)
-
-    store(getterSetter).migrateIfNeeded()
-
-    #expect(getterSetter.get(key: PracticeRecord.storageKey) != nil)
   }
 }

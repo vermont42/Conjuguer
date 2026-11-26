@@ -7,8 +7,9 @@
 
 import Foundation
 
-/// SplitMix64: the same seed gives the same sequence, so tests can check what a random draw
-/// produces over many runs.
+/// SplitMix64: the same seed gives the same sequence on every device and in every process. It
+/// draws every learner's verb of the day, the day's challenge, and the widget's quiz options, and
+/// it lets tests check what a random draw produces over many runs.
 struct SeededRandomNumberGenerator: RandomNumberGenerator {
   private var state: UInt64
 

@@ -7072,3 +7072,44 @@ core, which the build-time tool compiles too. So the phase ended by running the 
 code and from the new and checking that its three dumps came out byte-identical. They did.
 
 The tests came first and ran against the old code, recording 114 issues. 1,019 tests now.
+
+## Progress That Survives Tidying, and a Verb of the Day That Takes Turns (2026-11-26)
+
+Phase 8 of [`plans/verb_browse_fixes.md`](../plans/verb_browse_fixes.md) was about the learner's
+own record of verbs and the widget's draw from it, and it followed Konjugieren's Phase 3 closely,
+because the two apps had the same bugs.
+
+The main one was a collision of two jobs. One date said both "this verb is in Recent" and "this
+verb counts toward a collection". So Clear in My Verbs, a button for tidying a list of at most
+twenty verbs, took "37 of 100 looked up" back to nothing without asking, and so did a swipe on one
+row. The record already stored a second date, `firstOpened`, written on every open and read
+nowhere. Progress now reads it. Clear and the swipe forget only the last open, and Reset Practice
+in Settings, whose alert now says so in both languages, is the one thing that forgets the first.
+
+The plan asked that an entry with a last open and no first open count as opened, as a guard for
+old records. That turned out to be exactly the shape Reset Practice leaves behind for a recent
+verb, since the reset keeps Recent, so honoring the guard would have undone the reset. The git
+history settled it: every build that wrote the record set both dates together. So the guard went.
+
+The widget's bug was quieter. Every third day belongs to My Verbs, and the code took
+`myVerbs[turn % count]`. Recents are newest first, and opening the widget's verb moves it to the
+front, so the next My Verbs day could show it again while another verb waited. The plan suggested
+a stable order instead. Konjugieren had already found why that fails: when the list grows from
+three verbs to four, `turn % count` jumps, and the verb just shown can come back. Taking turns
+needs memory of whose turn it was. So the snapshot file the app writes for the widget now carries
+the last day each My Verbs verb was shown, and a My Verbs day picks the verb shown longest ago. The
+widget never reads that part. One small trap came with it: a dictionary in the file encodes in
+hash order, which changes per launch, and the writer skips the write and the widget reload when
+the bytes have not changed. Sorted keys keep the bytes stable.
+
+The writer also became testable through the disk. It now takes its file and My Verbs rather than
+reaching for the App Group and `Current`, so tests write to a temporary file: missing, corrupt,
+another day's, an older build's bare list, an identical rewrite that must be skipped, and a
+relaunch after starring a verb that must keep today's verb.
+
+The rest was deletion and small honesty. A migration for a field no released build wrote is gone,
+with its helper and tests. The store sorts its lists once per change instead of on every read. My
+Verbs shows twenty unstarred recents rather than twenty recents minus the starred ones. Three
+comments that said the widget reads a record now say it does not. Thirteen of the new tests failed
+against the old logic. 1,035 tests now.
+

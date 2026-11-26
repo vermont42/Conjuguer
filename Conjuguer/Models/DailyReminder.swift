@@ -87,7 +87,6 @@ extension World {
     guard !Verb.verbs.isEmpty else {
       return
     }
-    practice.migrateIfNeeded()
     reminderScheduler.schedule(DailyReminderPlan.reminders(record: practice.record, streak: practice.dailyStreak, minutes: settings.dailyReminderMinutes, now: now))
   }
 }

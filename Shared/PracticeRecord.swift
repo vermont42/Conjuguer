@@ -12,7 +12,7 @@ import Foundation
 /// verb's question exercises a pattern, a tense and person that every verb of the pattern shares,
 /// since a learner who can write je parlais can write je chantais. The app decides which question
 /// maps to which item (`PracticeItemMapping.swift`). This file only names items, so that the
-/// widget, which has no verb list, can read the record.
+/// record needs no verb list.
 nonisolated enum PracticeItem: Hashable, Sendable {
   // The stems an irregular verb's tenses are built on: vient, est venu, viendra, and vint. The
   // first three are the key conjugations the verb page and the review card show, in this order.
@@ -84,7 +84,7 @@ nonisolated enum PracticeItem: Hashable, Sendable {
 
 /// The learner's practice record: a box and a due date for each item a quiz answer, a lookup, or
 /// the review card has touched, and how the last answer went. It is kept in the App Group's shared
-/// defaults, so that a widget or a reminder can read it, and it is never sent anywhere.
+/// defaults, which the widget does not read, and it is never sent anywhere.
 nonisolated struct PracticeRecord: Codable, Equatable, Sendable {
   // A field added later must be optional. Synthesized decoding ignores a default value and
   // requires the key, so any other field would fail to decode every record written before it,
@@ -214,15 +214,6 @@ nonisolated struct PracticeRecord: Codable, Equatable, Sendable {
 
   mutating func reset() {
     entries = [:]
-  }
-
-  /// Folds in a schedule from before the record existed, which only the migration uses. An item
-  /// already in the record keeps its own.
-  mutating func adopt(_ item: PracticeItem, schedule: ReviewSchedule, lastLookedUp: Date?) {
-    guard entries[item.key] == nil else {
-      return
-    }
-    entries[item.key] = Entry(schedule: schedule, lastLookedUp: lastLookedUp)
   }
 
   private mutating func updateDue(_ items: [PracticeItem], at date: Date, _ change: (ReviewSchedule) -> ReviewSchedule) {

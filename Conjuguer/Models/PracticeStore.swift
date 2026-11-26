@@ -24,10 +24,6 @@ final class PracticeStore {
   private(set) var challengeResults: [DailyChallengeResult] = []
   private let getterSetter: GetterSetter
   private let calendar: Calendar
-  /// The `LearnerVerbs` JSON a first launch with a practice record migrates. It is read at
-  /// launch, before anything can save the learner's verbs without their old schedules, and
-  /// migrated once the verbs are loaded, since only they say which verbs are irregular.
-  @ObservationIgnored private var pendingMigration: String?
 
   struct CardOffer: Equatable {
     let verb: Verb
@@ -39,17 +35,10 @@ final class PracticeStore {
     let wasLookedUp: Bool
   }
 
-  /// `getterSetter` must be the store that holds `LearnerVerbs`, since the first launch with a
-  /// practice record migrates its review schedules.
   init(getterSetter: GetterSetter, calendar: Calendar = .current) {
     self.getterSetter = getterSetter
     self.calendar = calendar
-    if let stored = getterSetter.get(key: PracticeRecord.storageKey).flatMap(PracticeRecord.init(json:)) {
-      record = stored
-    } else {
-      record = PracticeRecord()
-      pendingMigration = getterSetter.get(key: LearnerVerbs.storageKey)
-    }
+    record = getterSetter.get(key: PracticeRecord.storageKey).flatMap(PracticeRecord.init(json:)) ?? PracticeRecord()
     lastResult = getterSetter.get(key: LastQuizResult.storageKey).flatMap(LastQuizResult.init(json:))
     speedRoundBest = getterSetter.get(key: Self.speedRoundBestKey).flatMap { Int($0) }
     dailyStreak = getterSetter.getCodable(key: DailyStreak.storageKey) ?? DailyStreak()
@@ -59,38 +48,10 @@ final class PracticeStore {
   static let speedRoundBestKey = "speedRoundBest"
 
   var isEmpty: Bool {
-    migrateIfNeeded()
-    return record.isEmpty
-  }
-
-  /// A learner's verbs from before the practice record carry one review schedule per verb, in a
-  /// `review` field, and an entry older still counts as looked up on its last open. Each irregular
-  /// verb's schedule becomes its key conjugations' schedule. A regular verb's is dropped, since
-  /// the card offers only irregular verbs. The record is saved even when nothing migrates, so that
-  /// no later launch reads the old opens as schedules.
-  func migrateIfNeeded() {
-    guard let legacyJSON = pendingMigration, !Verb.verbs.isEmpty else {
-      return
-    }
-    pendingMigration = nil
-    if let data = legacyJSON.data(using: .utf8), let legacy = try? JSONDecoder().decode(LegacyLearnerVerbs.self, from: data) {
-      for entry in legacy.entries.values {
-        guard
-          let verb = Verb.verbs[entry.dictionaryKey],
-          let schedule = entry.review ?? entry.lastOpened.map({ ReviewSchedule.start(at: $0, calendar: calendar) })
-        else {
-          continue
-        }
-        for item in PracticeItem.keyConjugations(of: verb) {
-          record.adopt(item, schedule: schedule, lastLookedUp: entry.lastOpened)
-        }
-      }
-    }
-    save()
+    record.isEmpty
   }
 
   func recordAnswer(verb: Verb, tense: Tense, isCorrect: Bool, at date: Date = .now) {
-    migrateIfNeeded()
     record.recordAnswer(.exercised(by: tense, of: verb), isCorrect: isCorrect, at: date, calendar: calendar)
     save()
   }
@@ -98,7 +59,6 @@ final class PracticeStore {
   /// A verb page was opened. An open from the review card does not reschedule, since the learner
   /// has just reviewed the verb.
   func recordLookup(_ verb: Verb, source: AnalyticsSource, at date: Date = .now) {
-    migrateIfNeeded()
     let items = PracticeItem.keyConjugations(of: verb)
     guard !items.isEmpty else {
       return
@@ -109,20 +69,17 @@ final class PracticeStore {
 
   /// The items due at `date`, the longest overdue first.
   func dueItems(at date: Date = .now) -> [PracticeItem] {
-    migrateIfNeeded()
-    return record.dueItems(at: date)
+    record.dueItems(at: date)
   }
 
   func missedItems() -> [PracticeItem] {
-    migrateIfNeeded()
-    return record.missedItems()
+    record.missedItems()
   }
 
   /// Whole days until Review next has an item to ask: 1 for tomorrow. Nil when nothing is
   /// scheduled.
   func daysUntilNextDue(at date: Date = .now) -> Int? {
-    migrateIfNeeded()
-    return record.nextDue(after: date).flatMap { PracticeRecord.daysBetween(date, and: $0, calendar: calendar) }
+    record.nextDue(after: date).flatMap { PracticeRecord.daysBetween(date, and: $0, calendar: calendar) }
   }
 
   /// The irregular verb whose shown key conjugation is longest overdue, with each of its due key
@@ -214,10 +171,8 @@ final class PracticeStore {
   }
 
   /// Settings' Reset Practice, which forgets the last result, the Speed Round's best, and the
-  /// daily streak too, but keeps the challenges' results. The record is saved empty rather than
-  /// removed, so that the next launch does not migrate the old schedules again.
+  /// daily streak too, but keeps the challenges' results.
   func reset() {
-    pendingMigration = nil
     record.reset()
     save()
     lastResult = nil
@@ -239,16 +194,5 @@ final class PracticeStore {
     if let json = record.json {
       getterSetter.set(key: PracticeRecord.storageKey, value: json)
     }
-  }
-
-  /// The fields of a `LearnerVerbs` record that the migration reads. Decoding ignores the rest.
-  private struct LegacyLearnerVerbs: Decodable {
-    struct Entry: Decodable {
-      let dictionaryKey: String
-      let lastOpened: Date?
-      let review: ReviewSchedule?
-    }
-
-    let entries: [String: Entry]
   }
 }

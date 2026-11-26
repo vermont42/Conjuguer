@@ -19,7 +19,6 @@ struct ConjuguerApp: App {
       SceneRoot(verbData: verbData)
         .task {
           await verbData.load()
-          Current.practice.migrateIfNeeded()
           Current.rescheduleReminders()
           refreshWidgets()
           await VerbSpotlight.indexVerbsIfNeeded()

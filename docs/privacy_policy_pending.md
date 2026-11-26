@@ -1153,3 +1153,32 @@ Le point sur les événements du cycle de vie d'un quiz devient :
 ```
 - Les événements du cycle de vie d'un quiz (démarrage, abandon ou achèvement d'un quiz) et son point de départ : l'onglet Quiz, sur tous les verbes, sur « Mes verbes », sur mesure, en révision de ce qui est à revoir, pour revoir vos erreurs, en « Séance du jour », et si vous l'avez commencée depuis son rappel, en « Défi du jour », et si vous l'avez ouvert depuis un résultat partagé ou depuis le widget du quiz, ou dans l'exercice « L'essentiel du verbe », « Identifier la forme verbale », « Phrases à trous » ou « Contre-la-montre », la page d'un verbe, une collection, une série d'exercices ouverte depuis un lien partagé ou un code QR, l'exercice d'un modèle de conjugaison, seul ou mélangé aux modèles que vous connaissez, ou un lien venu de l'extérieur de l'application, le Centre de contrôle ou un raccourci, avec le nom de la collection pour les quatre collections mises en avant (la collection d'un modèle, ou l'exercice d'un modèle, est désigné seulement comme celui d'un modèle) ; pour un quiz sur mesure ou une série d'exercices, s'il porte sur des temps, des verbes ou les deux, mais pas lesquels ; et lorsque vous terminez une séance du jour, le nombre approximatif de jours d'affilée où vous en avez terminé une (1, de 2 à 6, de 7 à 29, ou 30 et plus)
 ```
+
+## Collection progress outlasts My Verbs (browse fixes plan, Phase 8, 2026-11-26)
+
+No new signal or parameter. Phase 8 of [`plans/verb_browse_fixes.md`](../plans/verb_browse_fixes.md)
+made a collection's progress count every verb ever opened, so that clearing Recent or deleting a
+verb from My Verbs no longer takes "37 of 100 looked up" back to nothing. The list on the device
+now keeps, for a verb deleted from My Verbs or cleared from Recent, the day it was first opened,
+and only Reset Practice forgets that (Josh, 2026-11-25). The paragraph about the list, as the
+practice record's section gives it, had also lost the collections, which the Collections section
+had added; this version restores them. A sentence says where the full forget lives, so that a
+learner who deletes a verb from My Verbs is not misled about what stays. Apply this section after
+the practice record's section, since it replaces the paragraph that section gives.
+
+### English
+
+The paragraph about the list kept on the device now reads:
+
+```
+The app keeps a list of the verbs you have opened and the verbs you have starred, so that it can show your recent verbs, My Verbs, and how many verbs of each collection you have looked up. The list stays on your device and is never sent. Deleting a verb from My Verbs, or clearing your recent verbs, leaves it counted as looked up; Reset Practice in Settings forgets which verbs you have looked up.
+```
+
+### French
+
+Le paragraphe sur la liste conservée sur l'appareil devient :
+
+```
+L'application conserve une liste des verbes que vous avez ouverts et des verbes que vous avez marqués d'une étoile, afin d'afficher vos verbes récents, « Mes verbes » et le nombre de verbes de chaque collection que vous avez consultés. Cette liste reste sur votre appareil et n'est jamais envoyée. Un verbe supprimé de « Mes verbes », ou effacé de vos verbes récents, reste compté comme consulté ; « Réinitialiser le suivi », dans les Paramètres, oublie les verbes que vous avez consultés.
+```
+

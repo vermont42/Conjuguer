@@ -11,11 +11,11 @@ enum SnapshotReader {
     guard
       let url = WidgetConstants.snapshotsURL,
       let data = try? Data(contentsOf: url),
-      let snapshots = try? JSONDecoder().decode([WidgetSnapshot].self, from: data)
+      let bundle = WidgetSnapshotBundle.decoded(from: data)
     else {
       return []
     }
-    return snapshots
+    return bundle.snapshots
   }
 
   // The snapshot for `date` (default today); falls back to the most-future available

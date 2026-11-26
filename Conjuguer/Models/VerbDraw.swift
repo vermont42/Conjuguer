@@ -34,17 +34,24 @@ enum VerbDraw {
     return draw(goesToMyVerbs: goesToMyVerbs, myVerbs: myVerbs, frequentVerbs: frequentVerbs, using: &generator)
   }
 
-  /// The same verb for the same day and lists, in any process. My Verbs gets every third day
-  /// rather than a chance of one in three, since chance leaves gaps of two weeks, and those days
-  /// take its verbs in turn, since chance repeats one while another waits.
-  @MainActor static func verbOfTheDay(on date: Date, myVerbs: [Verb], frequentVerbs: [Verb]) -> Verb? {
-    let day = dayNumber(of: date)
-    let (turn, dayInTurn) = day.quotientAndRemainder(dividingBy: myVerbsOdds)
-    if dayInTurn == 0, !myVerbs.isEmpty {
-      return myVerbs[(turn % myVerbs.count + myVerbs.count) % myVerbs.count]
+  /// The same verb for the same day, lists, and `lastShown`, in any process. My Verbs gets every
+  /// third day rather than a chance of one in three, since chance leaves gaps of two weeks. Those
+  /// days take the verb whose last My Verbs day is longest ago, a verb never given one first, and
+  /// the key breaks a tie. An index into the list, by turn, cannot serve: opening the widget's
+  /// verb moves it to the front of Recent, and a verb opened between turns changes the list's
+  /// length, so the index lands anywhere, often on the verb just shown.
+  @MainActor static func verbOfTheDay(on date: Date, myVerbs: [Verb], frequentVerbs: [Verb], lastShown: [String: Date] = [:]) -> Verb? {
+    if isMyVerbsDay(date), let verb = myVerbs.min(by: { lhs, rhs in
+      (lastShown[lhs.dictionaryKey] ?? .distantPast, lhs.dictionaryKey) < (lastShown[rhs.dictionaryKey] ?? .distantPast, rhs.dictionaryKey)
+    }) {
+      return verb
     }
-    var generator = SeededRandomNumberGenerator(seed: UInt64(bitPattern: Int64(day)))
+    var generator = SeededRandomNumberGenerator(seed: UInt64(bitPattern: Int64(dayNumber(of: date))))
     return draw(goesToMyVerbs: false, myVerbs: myVerbs, frequentVerbs: frequentVerbs, using: &generator)
+  }
+
+  static func isMyVerbsDay(_ date: Date) -> Bool {
+    dayNumber(of: date) % myVerbsOdds == 0
   }
 
   @MainActor static func draw(goesToMyVerbs: Bool, myVerbs: [Verb], frequentVerbs: [Verb], using generator: inout some RandomNumberGenerator) -> Verb? {

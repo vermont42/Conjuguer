@@ -35,7 +35,7 @@ empty until it is committed.
 | 5 | Done | 2026-11-26 | `da22b7e` | B3, B6, B18, B23, B24, B26, S3 (the search model), D5, T1 (the search), K-F1, K-S8 | Yes |
 | 6 | Done | 2026-11-26 | `cbb5b60` | B9, S3 (the rest), D4, D7, T1 (the card), the stale review card | Yes |
 | 7 | Done | 2026-11-26 | `4ca2f5f` | B7, B13, B14, B15, B21, B22, B25 (the row), B30, G1, G2, G3, S10 | Yes |
-| 8 | Not started | | | B16, B19, S12, the progress decision, the migration, T2 | Yes |
+| 8 | Awaiting Josh | 2026-11-26 | | B16, B19, S12, the progress decision, the migration, T2 | Yes |
 | 9 | Not started | | | B12, B27, B29, S4, S4a, S5, S6, D8, D9, T1 (the visit), K-G6 | Yes |
 | 10 | Not started | | | B17, B25 (the labels), S8, S13, S14, D1, D2, D3, D6, T6 | Yes |
 | 11 | Not started | | | B5, S7, the rare-verb draw | Yes |
@@ -794,7 +794,51 @@ the record's comment about the widget, `SeededRandomNumberGenerator`'s header, t
 count unchanged; Clear, and find every collection's count unchanged; Reset Practice, read its
 alert, and find the counts at zero with the stars still there.
 
-**How it differed:**
+**How it differed:** In B19's mechanism and in two rules of the progress decision, each for a
+reason the code gave, as in Konjugieren's Phase 3. No question for Josh came up. 1,035 tests in
+96 suites (1,019 plus 16).
+
+- **B19 is fixed with state, not a stable order.** The plan's own test fails against a stable
+  order indexed by turn: when the list grows, `turn % count` lands anywhere, and the verb just
+  shown can come again while the new one waits. No function of the day and today's list can know
+  what earlier days showed. A My Verbs day now takes the verb whose last My Verbs day is longest
+  ago (one never given first, the key breaking a tie). Those days travel in the snapshot file,
+  which became `WidgetSnapshotBundle` (the snapshots and `myVerbsLastShown`). The widget's reader
+  and the writer both still read the bare list of snapshots older builds wrote, so an upgrade
+  neither blanks the widget nor changes the verb already shown. A rewrite keeps the days before
+  today and plans the rest again. The bundle encodes with sorted keys: a dictionary in the file
+  would otherwise encode in hash order, and the writer's "same bytes, no reload" check would fail
+  at every activation.
+- **An entry with a last open but no first open does not count as opened.** The plan asked for
+  the opposite, as a guard for old records, but Reset Practice keeping Recent makes that shape
+  meaningful: it is what the reset leaves for a recent verb, and counting it would undo the reset.
+  No old entry has that shape. `recordOpen` has set both dates since the record began in
+  `2829650`, and every other write cleared both, so `hasOpened` reads `firstOpened` alone. A test
+  decodes a full entry from the earlier build and counts it opened.
+- **Clear and the swipe keep `openCount`** with `firstOpened`, where the plan said they forget
+  it, since both describe the verb's whole history and Konjugieren's record does the same. Reset
+  Practice zeroes it. Nothing reads it yet.
+- **Reset Practice moved into `World`.** `World.resetPractice()` and `World.hasPracticeToReset`
+  replace the four calls and the condition in `SettingsView`, so a test reaches them. The button
+  shows while any verb counts as opened; a star alone does not show it.
+- **The migration took more with it:** `PracticeRecord.adopt`, which only it called, and the
+  `migrateIfNeeded()` calls in `ConjuguerApp` and `World.rescheduleReminders`. The test that a
+  reset "does not migrate again" became `aResetSurvivesARelaunch`. The `verify-in-simulator`
+  skill's way of seeding a review card through an old `learnerVerbs` entry went too.
+- **More false widget claims than the plan named.** `PracticeRecord.swift` and `World`'s comment
+  on the shared defaults also said the widget reads a record. Both now say it does not.
+- **S12 has no test that fails without it,** since it changes cost, not behavior.
+  `theStoresListsFollowEachChange` pins that the cached lists follow every change.
+- **The privacy paragraph had drifted.** The practice record's staged section had rewritten the
+  paragraph about the list without the collections that the Collections section had added. A new
+  section restores them and says where the full forget lives, in both languages, with Konjugieren's
+  wording.
+- **Tests.** Every behavior test was run against the old logic, put back temporarily: 13 failed,
+  among them the growth and reorder tests and the B16 test. The writer's tests run through a
+  temporary file. On the Conjuguer iPhone 17 the top 100 read 12 of 100, stayed 12 after parler
+  was swiped out of My Verbs and after Clear, and read 0 after Reset Practice, with être still
+  starred and the button hidden for having nothing left to erase. The iPad showed the new
+  description and alert. The iPhone's record was restored afterward.
 
 ## Phase 9: The Verb Page
 

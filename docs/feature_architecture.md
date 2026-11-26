@@ -744,12 +744,21 @@ record's business (§ Quiz, The Practice Record).
 | `MyVerbsList` | `Views/MyVerbsList.swift` | The My Verbs list, its swipes, its alert, and Clear |
 
 **Where it lives.** The store saves the record as JSON under `LearnerVerbs.storageKey` in the App
-Group's defaults (`WidgetConstants.sharedDefaults`, through `GetterSetterReal(userDefaults:)`), so
-that the widget can decode it with `LearnerVerbs(json:)` without the verb list. The widget does not
-read it today: the app draws the widget's verbs, My Verbs included, when it writes the snapshots.
-Unit tests give it a `GetterSetterFake`. **Every field added later must be optional**: synthesized
-decoding requires every non-optional key, so a new required field would decode every older record as
-nothing, and the learner's verbs would vanish. `LearnerVerbsTests` pins this. No cap on entries.
+Group's defaults (`WidgetConstants.sharedDefaults`, through `GetterSetterReal(userDefaults:)`). The
+widget does not read it: the app draws the widget's verbs, My Verbs included, when it writes the
+snapshots (§ Widgets). Unit tests give it a `GetterSetterFake`. **Every field added later must be
+optional**: synthesized decoding requires every non-optional key, so a new required field would
+decode every record an older build wrote as nothing, and the learner's verbs would vanish on
+upgrade. `LearnerVerbsTests` pins this. No cap on entries. The store sorts its lists once per change
+of the record, and keeps them as keys until read, since it exists before the verbs load.
+
+**Two dates, two jobs** (Josh, 2026-11-25). `firstOpened` says a verb was ever opened, which a
+collection counts as progress (`hasOpened`), and only Reset Practice forgets it, with the count
+(`forgetFirstOpens`). `lastOpened` puts a verb in Recent, and Clear and a swipe in My Verbs forget
+it, so tidying the list costs no progress. An entry left with only `firstOpened` is in neither
+Starred nor Recent. An entry with `lastOpened` and no `firstOpened`, which Reset Practice leaves
+for a recent verb, is recent but not opened; no earlier build wrote that shape, since every open
+has set both dates from the start.
 
 **An open** is a verb page's arrival by any route: `VerbView.beginVisit` records one whenever it
 sends `viewAppeared` with a source other than `resume`. A page that returns after a tab switch,
@@ -772,12 +781,13 @@ for the pop before focusing the field, and a second request during that wait wai
 end. Each of these is a task that the next one cancels.
 
 **My Verbs** is the third segment of the verb list's picker, with the starred verbs (newest star
-first) under "Starred" and the recent verbs not starred under "Recent", whose Clear button forgets
-every open and keeps the stars. Search ignores the picker, as it ignores the sort order. Only the
+first) under "Starred" and the twenty most recent verbs not starred under "Recent" (the starred
+are left out before the limit), whose Clear button empties Recent and keeps the stars and every
+collection's progress. Search ignores the picker, as it ignores the sort order. Only the
 sort order is remembered across launches, so a relaunch shows the list in its order. My Verbs is a
-`List` of its own, on iPad too, because only a `List`'s rows can be swiped: a swipe deletes a
-verb, star and opens alike (`LearnerVerbs.remove`), since unstarring alone would move an opened
-verb from Starred to Recent. A starred verb first asks, in an alert, whether to remove its star;
+`List` of its own, on iPad too, because only a `List`'s rows can be swiped: a swipe takes a verb
+out of My Verbs, forgetting its star and its last open (`LearnerVerbs.remove`), since unstarring
+alone would move an opened verb from Starred to Recent. That it was ever opened stays. A starred verb first asks, in an alert, whether to remove its star;
 its swipe button is not `.destructive`, because that role removes the row before the learner
 answers. Rows open with the source `myVerbs`.
 
@@ -816,7 +826,7 @@ verb puts its key conjugations in the first box, due the next day, and so does a
 looking a verb up again suggests it was forgotten. An open from the card itself is the exception
 (`recordLookup(_:source:)` with `reviewCard`). Revealing moves each due one up a box
 (`recordReview`); one not due keeps its place. Dismissing before revealing is no review: each keeps
-its box and returns the next day (`snooze`). Clear in My Verbs forgets the opens and leaves the
+its box and returns the next day (`snooze`). Clear in My Verbs empties Recent and leaves the
 practice record. Keys are `Verb.dictionaryKey`s, so sortir's two entries keep their own items.
 
 **Signals.** `viewReviewCard`, once per card shown, and `tapRevealReviewCard`, once per reveal,
@@ -849,9 +859,9 @@ as a link.
 while the search field is empty; any text hides both, leaving the results. A row pushes the
 collection's page in the tab's stack.
 
-**Progress** counts the verbs with an open (`LearnerVerbStore.openedCount(of:)`), entries rather
-than infinitives, so it matches the rows. A star alone does not count, and Clear in My Verbs resets
-every collection's progress, since it forgets the opens.
+**Progress** counts the verbs ever opened (`LearnerVerbStore.openedCount(of:)`, on `firstOpened`),
+entries rather than infinitives, so it matches the rows. A star alone does not count. Clear and the
+swipe in My Verbs leave it, and only Reset Practice returns it to nothing (§ The Learner's Verbs).
 
 **The quiz** is `QuizScope.collection(_:)`: ten unranked questions, with Ten More, at the learner's level over
 the collection's verbs, in a `QuizSheet` over the page, the same sheet Test Me uses, whose title it
@@ -1394,10 +1404,12 @@ Every final typed answer moves an item of a record kept on the device and never 
 answer is given, so a quiz quit after six questions has still practiced six. A quit plays the sad
 trombone all the same. The Speed Round, Name the Conjugation, and a choice question move nothing in
 the record. Settings' Reset Practice (`button_settings_resetPractice`), shown while the record, the
-last quiz's result, the Speed Round's best, the daily streak, or a level's best score holds
-anything (`PracticeStore.hasAnythingToReset` and `Settings.hasBestScore`), erases all five behind a
-confirmation, reschedules the daily reminder, and sends `tapResetPractice`. The daily challenges'
-results stay (§ Daily Challenge).
+last quiz's result, the Speed Round's best, the daily streak, a level's best score, or the
+learner's first opens hold anything (`World.hasPracticeToReset`), erases all six behind a
+confirmation (`World.resetPractice()`), reschedules the daily reminder, and sends
+`tapResetPractice`. Forgetting the first opens returns every collection's progress to nothing
+(§ The Learner's Verbs); stars and Recent stay, and so do the daily challenges' results (§ Daily
+Challenge).
 
 **Two kinds of item** (`PracticeItem`). The families were Josh's choice, 2026-11-23.
 
@@ -1439,15 +1451,6 @@ preferring the model's own verbs.
 **Where it lives.** `PracticeStore` (`Current.practice`) saves JSON under `practiceRecord` in the App
 Group's defaults, through the same `GetterSetterReal` as `LearnerVerbs`. **Every field added to
 `PracticeRecord.Entry` must be optional**, as for `LearnerVerbs`.
-
-**The migration.** Browse's review card kept a schedule per verb on `LearnerVerbs.Entry.review`. A
-launch with no practice record reads the learner's verbs' JSON at once, before anything can save
-them without their old field, and migrates it once the verbs are loaded (`migrateIfNeeded()`, which
-`ConjuguerApp` calls after `VerbData.load()`, and every store method calls first), since only the
-verbs say which are irregular. Each irregular verb's schedule, or its last open for an entry from
-before the card, becomes its shown key conjugations' schedule; a regular verb's is dropped. The
-record is saved even when nothing migrates, and Reset saves it empty rather than removing it, so
-that no later launch reads the old opens as schedules.
 
 ### Review and My Mistakes
 
@@ -2076,10 +2079,10 @@ conjugator and no verb data, so it shows what the app last wrote.
 
 | File | Purpose |
 |------|---------|
-| `WidgetSnapshotWriter.swift` (app) | Writes seven daily `WidgetSnapshot`s, today first, to the App Group container, and reports whether the bytes changed so that `ConjuguerApp` reloads timelines only then |
-| `WidgetSnapshot.swift` (`Shared/`) | The serialized verb and quiz question for one day, and `WidgetQuizQuestion.stableSeed`, the FNV-1a seed the widget's answer order and the daily challenge share |
+| `WidgetSnapshotWriter.swift` (app) | Writes a `WidgetSnapshotBundle` of seven daily snapshots, today first, to the App Group container, and reports whether the bytes changed so that `ConjuguerApp` reloads timelines only then |
+| `WidgetSnapshot.swift` (`Shared/`) | `WidgetSnapshotBundle`, the file: the snapshots and the last day each verb of My Verbs was given. The serialized verb and quiz question for one day, and `WidgetQuizQuestion.stableSeed`, the FNV-1a seed the widget's answer order and the daily challenge share |
 | `WidgetConstants.swift` (`Shared/`) | The App Group, the snapshot file, and the shared-defaults keys (the quiz widget's answer, the pending deeplink) |
-| `SnapshotReader.swift` | Reads the snapshots in the widget |
+| `SnapshotReader.swift` | Reads the bundle's snapshots in the widget |
 | `VerbDuJourWidget.swift` | The verb of the day: small, medium, large, and the rectangular and inline accessory families. One timeline entry per cached day |
 | `QuizWidget.swift`, `AnswerQuizIntent.swift` | The daily quiz question, small and medium, with buttons that grade the tapped answer in place |
 | `QuickQuizControl.swift`, `RandomVerbControl.swift`, `FindVerbControl.swift` | Control Center controls. Their intents (`OpenQuizIntent`, `OpenRandomVerbControlIntent`, `OpenVerbSearchIntent` in `Shared/`) store `conjuguer://quiz/start`, `conjuguer://verb/random?source=control`, or `conjuguer://search?source=control` in the shared defaults and open the app, which drains it on activation |
@@ -2099,16 +2102,26 @@ on 2026-11-22 the English and French texts gave the same answer for all 1,000 ve
 does not depend on the language.
 
 Once My Verbs has entries (starred verbs, then the last 20 opened), it supplies one draw in three.
-For the widget, that is every day whose number since 2025-01-01 is a multiple of three, taking My
-Verbs in turn. Other days draw from the band with SplitMix64 (`SeededRandomNumberGenerator`)
+For the widget, that is every day whose number since 2025-01-01 is a multiple of three
+(`VerbDraw.isMyVerbsDay`), taking My Verbs in turn: the verb whose last My Verbs day is longest
+ago, a verb never given one first, the key breaking a tie. An index into the list by turn cannot
+serve, since opening the widget's verb moves it to the front of Recent and a verb opened between
+turns changes the list's length, so the index lands anywhere, often on the verb just shown (B19 of
+[`verb_browse_review.md`](verb_browse_review.md)). Those last days travel in the snapshot file
+(`WidgetSnapshotBundle.myVerbsLastShown`), which the widget does not read. Other days draw from the band with SplitMix64 (`SeededRandomNumberGenerator`)
 seeded with the day number, so a day names the same verb in any process. A random verb has a
 one-in-three chance of coming from My Verbs. A random verb opened is a recent verb, so it can
 return as a My Verbs draw until it ages out of the recents.
 
 `WidgetSnapshotWriter.writeSnapshots()` runs at every activation, and My Verbs may have changed
-since the last write. So it first reads the bundle on disk, finds the snapshot for today
-(`displayedVerb(in:on:)`), and keeps that verb for today in the new bundle. The six days after it
-are drawn afresh. `isEligible` still requires an example sentence, which every verb has today.
+since the last write. It hands the file and My Verbs to `writeSnapshots(to:myVerbs:now:)`, which
+tests point at a file of their own. That reads the bundle on disk (`WidgetSnapshotBundle.decoded(from:)`,
+which also reads the bare list of snapshots that builds before the bundle wrote), finds the snapshot
+for today (`displayedVerb(in:on:)`), and keeps that verb for today in the new bundle
+(`nextBundle(after:myVerbs:now:)`). The six days after it are drawn afresh, and so are the My
+Verbs days the old bundle had planned from today on, since they were a plan rather than what the
+widget showed. A missing or unreadable file is written afresh. The bundle encodes with sorted keys,
+so an unchanged one gives the same bytes, and then neither the write nor the reload happens. `isEligible` still requires an example sentence, which every verb has today.
 
 The quiz question is not about the day's verb: it is the first question of that day's daily
 challenge at the learner's level (`WidgetSnapshotWriter.quizQuestion(on:level:fallbackVerb:)`, §

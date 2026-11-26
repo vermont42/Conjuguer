@@ -273,6 +273,8 @@ as a whole meaning, "belt" becomes a meaning of desserrer, and Spotlight gets na
 (`LearnerVerbs.swift:69-77`, `LearnerVerbStore.swift:31-33`). A learner who starred twelve of the
 last twenty sees eight under Recent.
 
+**Fixed on `main` 2026-11-26**, by Phase 8 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `LearnerVerbs.recentUnstarred` leaves out the starred before it takes twenty, and `myVerbs` uses it. The unused `limit` parameter is gone, and `recent` is a property.
+
 **B17. Doubled entries change places between launches.** *Traced.* The alphabetical verb list
 compares `infinitif` alone over `Verb.verbs.values`, whose order changes with each launch's hash
 seed (`VerbBrowseView.swift:712-714`), so haïr (France) and haïr (Québec) can swap. The
@@ -295,6 +297,8 @@ each. The "address copied" note is left for a later phase.
 `myVerbs[turn % count]` (`VerbDraw.swift:40-45`), and the recents in that list are newest first, so
 opening the widget's verb moves it to the front and the next My Verbs day can show it again while
 another waits. The rotation is fair only over the starred verbs.
+
+**Fixed on `main` 2026-11-26**, by Phase 8 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md). A stable order indexed by turn would not have served: once the list grows, `turn % count` lands anywhere. A My Verbs day now takes the verb whose last My Verbs day is longest ago, and the snapshot file (`WidgetSnapshotBundle.myVerbsLastShown`) carries those days from one write to the next. Tests with a list that grows and one that reorders between turns failed against the old draw.
 
 **B20. Spotlight never deletes an entry.** *Traced.* `indexAppEntities` adds and updates
 (`VerbSpotlight.swift:43-64`). A verb removed from `verbs.xml`, or one whose key changes when it
@@ -568,6 +572,8 @@ itself, "haïr France", where every other screen shows "haïr (France)" (older).
 
 **Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `MatchKind` lost its `Comparable`, and its comment says that `tier` decides rank. Each `Verb` carries `VerbSearchKeys` (the folded infinitive and the gloss's meanings) from the moment it is made, so `keysCache` and its check against a test's verb are gone. `ModelSearch.seenVerbs` is `modelsFoundByAVerb`. The rest of S9 belongs to other phases.
 
+**Fixed on `main` 2026-11-26**, in part, by Phase 8 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `Shared/LearnerVerbs.swift` (and `PracticeRecord.swift`, and `World`'s comment on the shared defaults) now say the widget reads neither record; `SeededRandomNumberGenerator`'s header says it draws every learner's verb of the day; and the test-only `generateSnapshot(date:myVerbs:)` is gone. `isFeatured`, `ModelView`'s `world`, `URL.modelDeeplink(_: VerbModel)`, `FlowLayout`'s home, and `BrowseSearch`'s header remain.
+
 **S10. One rule, several copies.** Lowercase-and-NFC normalization is written in
 `ConjugationMap.key`, `Verb.normalizedConjugation`, `AnswerSpelling.normalized`, and
 `FormsJSON.normalize`. The subject pronouns are listed in `ConjugationQuery` and `AnswerSpelling`.
@@ -584,6 +590,8 @@ says `DeeplinkTests` pins each literal, and it pins three of six.
 ever opened and is read about six times per body pass through `showsRecents`
 (`LearnerVerbStore.swift:27-33`). The record never shrinks, since collection progress needs every
 open.
+
+**Fixed on `main` 2026-11-26**, by Phase 8 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the store sorts its lists once per change of the record and keeps them as keys, mapped to verbs on read, since the store exists before the verbs load.
 
 **S13. The model page rebuilds its list of links in `body`.** `verbsWithDeepLinks(order:)` sorts
 with French collation and parses Markdown for up to 4,859 links (parler's model) on each pass
@@ -668,6 +676,8 @@ reads `WidgetConstants.snapshotsURL` and `Current` directly, so no test can poin
 A future required field in `WidgetSnapshot` would make the decode fail silently and redraw the
 verb at every activation.
 
+**Fixed on `main` 2026-11-26**, by Phase 8 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `writeSnapshots(to:myVerbs:now:)` takes its file and My Verbs, and `nextBundle(after:myVerbs:now:)` is a function from the old bundle to the new. Tests write through a temporary file: a missing one, a corrupt one, another day's, an older build's bare list, an identical rewrite skipped, today's verb kept when My Verbs changes, and My Verbs' turns carried a week on.
+
 **T3. Tests that cannot fail.** `testVerbBuilderRoundTrips` returns early when the key is unknown,
 and "s'entre-déchirer" is not a key, so that row tests nothing; it also passes a `match` that marks
 nothing and never checks the marks (`DeeplinkTests.swift:402-411`).
@@ -712,6 +722,8 @@ Not browse code, and noted in passing:
   counted two opens, and a search link sent to the window in front filled the other window's field.
 - **`PracticeStore` migrates a `LearnerVerbs.review` field** that existed on `main` only between
   browse Phase 13 and pedagogy Phase 11, and that no release wrote.
+
+  **Fixed on `main` 2026-11-26**, by Phase 8 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the migration, its legacy type, `PracticeRecord.adopt`, their tests, and the paragraphs describing them are gone.
 - **The review card can act on a stale offer:** a card chosen at launch is still revealed, and
   signalled, after its verb was looked up or the record reset in the same session.
 
@@ -765,7 +777,7 @@ there; **does not apply** means French or Conjuguer's design has no such thing.
 | **C1** …: Look Up a Verb and twin infinitives | **Carried over** | B30, with 26 pairs here against its 18. I had missed it. |
 | **C2** The widget's My Verbs rotation repeats a verb | **Carried over** | B19. |
 | **C3** The red-letter guard is true for every verb | Did not | Conjuguer's key reads only the simple and personless cells, has no capital "Sie", and Phase 6 saw parler's page without it. |
-| **C4** Tidying My Verbs erases collection progress | **Carried over** | Open question 5. Its two additions hold here too: the swipe erases as Clear does, and `firstOpened` and `openCount` are written on every open and read nowhere, so progress could count `firstOpened`. |
+| **C4** Tidying My Verbs erases collection progress | **Carried over** | Open question 5. Its two additions hold here too: the swipe erases as Clear does, and `firstOpened` and `openCount` are written on every open and read nowhere, so progress could count `firstOpened`. **Fixed on `main` 2026-11-26** by Phase 8: progress counts `firstOpened`, and Reset Practice forgets it. |
 | **C5** "Alphabetical" is code-point order | Did not | Phase 7 gave the model page French collation, and the newer lists use it. `VerbModel.sortVerbs()` still sorts by code point, but every reader re-sorts. The copied comparators are D3. |
 | **C6** Swiss spelling missing from captions | Does not apply | No regional spelling. |
 | **C7** A strong second reading drops out | Does not apply | No readings. |
@@ -787,7 +799,7 @@ there; **does not apply** means French or Conjuguer's design has no such thing.
 | **G1** The widget does not read the learner's record | **Carried over** | S9. |
 | **G2** The frequency doc overstates two Konjunktiv counts | Does not apply | A rule of the German counting script. `scripts/count_tenses.py` is Conjuguer's own, and this review did not read it. |
 | **G3** `DeeplinkTests` pins copies of the widget's links | **Carried over** | S11. |
-| **G4** A migration for data no shipped build wrote | **Carried over** | Seen Outside the Scope. |
+| **G4** A migration for data no shipped build wrote | **Carried over** | Seen Outside the Scope. **Fixed on `main` 2026-11-26** by Phase 8: deleted. |
 | **G5** Dwell time includes time under a sheet | Did not | The page's own sheets end the visit (`VerbView.swift:173-179`). |
 | **G6** The Related Verbs card has no `VerbPageSection` | **Carried over** | Not listed above. The sections are header, simple, compound, etymology, and example. |
 | **G7** Stale prose | Does not apply | Its five are Konjugieren's. The tool's note about a non-atomic write still holds here, since the script sandbox is on. Conjuguer's own stale prose is T5. |

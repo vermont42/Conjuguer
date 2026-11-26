@@ -1996,13 +1996,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This button erases your practice record, which remembers how your quiz answers went, when each conjugation is next due for review, your last quiz’s results, your best scores, your Speed Round best, and your daily streak. The record stays on this device and is never sent. Your starred and recent verbs stay too."
+            "value" : "This button erases your practice record, which remembers how your quiz answers went, when each conjugation is next due for review, your last quiz’s results, your best scores, your Speed Round best, and your daily streak. It also forgets which verbs you have opened, which the collections count as looked up. The record stays on this device and is never sent. Your starred and recent verbs stay."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ce bouton efface votre suivi des exercices, qui retient le résultat de vos réponses aux quiz, le jour où chaque conjugaison revient en révision, le résultat de votre dernier quiz, vos meilleurs scores, votre record au contre-la-montre et votre série de séances du jour. Ce suivi reste sur cet appareil et n’est jamais envoyé. Vos verbes favoris et récents restent aussi."
+            "value" : "Ce bouton efface votre suivi des exercices, qui retient le résultat de vos réponses aux quiz, le jour où chaque conjugaison revient en révision, le résultat de votre dernier quiz, vos meilleurs scores, votre record au contre-la-montre et votre série de séances du jour. Il oublie aussi les verbes que vous avez ouverts, que les collections comptent comme consultés. Ce suivi reste sur cet appareil et n’est jamais envoyé. Vos verbes favoris et récents restent."
           }
         }
       }
@@ -2030,13 +2030,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Every review the app has scheduled, your last quiz’s results, your best scores, your Speed Round best, and your daily streak will be forgotten. This cannot be undone."
+            "value" : "Every review the app has scheduled, your last quiz’s results, your best scores, your Speed Round best, your daily streak, and the verbs each collection counts as looked up will be forgotten. Your starred and recent verbs stay. This cannot be undone."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toutes les révisions prévues, le résultat de votre dernier quiz, vos meilleurs scores, votre record au contre-la-montre et votre série de séances du jour seront oubliés. Cette action est irréversible."
+            "value" : "Toutes les révisions prévues, le résultat de votre dernier quiz, vos meilleurs scores, votre record au contre-la-montre, votre série de séances du jour et les verbes que chaque collection compte comme consultés seront oubliés. Vos verbes favoris et récents restent. Cette action est irréversible."
           }
         }
       }
