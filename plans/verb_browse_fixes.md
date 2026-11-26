@@ -32,7 +32,7 @@ empty until it is committed.
 | 2 | Done | 2026-11-25 | `d36f6d5` | B1, B2, B8, B28, S1 (the sheets) | Yes |
 | 3 | Done | 2026-11-25 | `f2e962e` | Multiple windows | Yes |
 | 4 | Done | 2026-11-25 | `8f31dfe` | S2 | No |
-| 5 | Done | 2026-11-26 | | B3, B6, B18, B23, B24, B26, S3 (the search model), D5, T1 (the search), K-F1, K-S8 | Yes |
+| 5 | Done | 2026-11-26 | `da22b7e` | B3, B6, B18, B23, B24, B26, S3 (the search model), D5, T1 (the search), K-F1, K-S8 | Yes |
 | 6 | Not started | | | B9, S3 (the rest), D4, D7, T1 (the card), the stale review card | Yes |
 | 7 | Not started | | | B7, B13, B14, B15, B21, B22, B25 (the row), B30, G1, G2, G3, S10 | Yes |
 | 8 | Not started | | | B16, B19, S12, the progress decision, the migration, T2 | Yes |
