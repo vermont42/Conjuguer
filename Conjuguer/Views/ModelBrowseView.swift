@@ -116,7 +116,7 @@ struct ModelBrowseView: View {
           LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
             ForEach(searchResults) { modelAndDecorator in
               Button {
-                path.append(ModelDestination(model: modelAndDecorator.model))
+                path.append(VerbPageRoute.model(modelAndDecorator.model))
               } label: {
                 modelRow(modelAndDecorator)
                   .card()
@@ -150,7 +150,7 @@ struct ModelBrowseView: View {
         Section {
           ForEach(searchResults) { modelAndDecorator in
             Button {
-              path.append(ModelDestination(model: modelAndDecorator.model))
+              path.append(VerbPageRoute.model(modelAndDecorator.model))
             } label: {
               modelRow(modelAndDecorator)
             }
@@ -181,7 +181,7 @@ struct ModelBrowseView: View {
   @ViewBuilder
   private func collectionButton(_ collection: VerbCollection, isCard: Bool) -> some View {
     Button {
-      path.append(VerbCollectionDestination(collection: collection, source: .tab))
+      path.append(VerbPageRoute.collection(VerbCollectionDestination(collection: collection, source: .tab)))
     } label: {
       if isCard {
         VerbCollectionRow(collection: collection)

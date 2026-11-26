@@ -11,7 +11,7 @@ import TipKit
 struct ModelView: View {
   @Environment(World.self) private var world
   @Environment(\.verbPagePush) private var verbPagePush
-  @State private var detailSheet: DetailSheet?
+  @State private var isShowingIrregularitiesArticle = false
   @State private var verbOrder: VerbSort
   let model: VerbModel
 
@@ -63,21 +63,11 @@ struct ModelView: View {
       else {
         return .systemAction
       }
-      if let verbPagePush {
-        verbPagePush(VerbDestination(verb: verb, source: .modelPage))
-      } else {
-        detailSheet = .verb(verb)
-      }
+      verbPagePush(.verb(VerbDestination(verb: verb, source: .modelPage)))
       return .handled
     })
-    .sheet(item: $detailSheet) { sheet in
-      switch sheet {
-      case .verb(let verb):
-        VerbView(verb: verb, source: .modelPage)
-          .sheetDismissable()
-      case .stemAlterationsInfo:
-        ArticleSheet(info: Info.infos[Info.headingToIndex(heading: L.Info.irregularitiesHeading) ?? 0])
-      }
+    .sheet(isPresented: $isShowingIrregularitiesArticle) {
+      ArticleSheet(info: Info.infos[Info.headingToIndex(heading: L.Info.irregularitiesHeading) ?? 0])
     }
     .recordsAppearance(as: "\(ModelView.self)")
   }
@@ -194,7 +184,7 @@ struct ModelView: View {
           .subheadingLabel()
 
         Button {
-          detailSheet = .stemAlterationsInfo
+          isShowingIrregularitiesArticle = true
         } label: {
           Image(systemName: "questionmark.diamond.fill")
         }
@@ -256,26 +246,13 @@ struct ModelView: View {
       .font(bodyFont)
       .frenchPronunciation()
   }
-
-  private enum DetailSheet: Identifiable {
-    case verb(Verb)
-    case stemAlterationsInfo
-
-    var id: String {
-      switch self {
-      case .verb(let verb):
-        return "verb-\(verb.id)"
-      case .stemAlterationsInfo:
-        return "stemAlterationsInfo"
-      }
-    }
-  }
 }
 
 #if DEBUG
 #Preview {
   PreviewSupport.bootstrap()
-  return ModelView(model: PreviewSupport.sampleModel)
-    .environment(Current)
+  return PreviewStack {
+    ModelView(model: PreviewSupport.sampleModel)
+  }
 }
 #endif

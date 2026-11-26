@@ -350,7 +350,7 @@ struct VerbBrowseView: View {
     guard let reviewCard else {
       return
     }
-    path.append(VerbDestination(verb: reviewCard.offer.verb, source: .reviewCard))
+    path.append(VerbPageRoute.verb(VerbDestination(verb: reviewCard.offer.verb, source: .reviewCard)))
   }
 
   /// A card dismissed before its conjugations were seen was no review, so its verb's due key
@@ -404,12 +404,12 @@ struct VerbBrowseView: View {
   // that tap, and on iPhone nothing is animating, so both push at once.
   private func pushFromSearch(_ destination: VerbDestination) {
     guard !isSearching, searchFocusLostAt != nil else {
-      path.append(destination)
+      path.append(VerbPageRoute.verb(destination))
       return
     }
     Task {
       await ViewControllerTransitions.waitUntilIdle()
-      path.append(destination)
+      path.append(VerbPageRoute.verb(destination))
     }
   }
 
@@ -529,7 +529,7 @@ struct VerbBrowseView: View {
 
   private func myVerbRow(_ verb: Verb) -> some View {
     Button {
-      path.append(VerbDestination(verb: verb, source: .myVerbs))
+      path.append(VerbPageRoute.verb(VerbDestination(verb: verb, source: .myVerbs)))
     } label: {
       verbRow(verb)
     }
@@ -631,14 +631,14 @@ struct VerbBrowseView: View {
     if let search = searchTracker.finish() {
       signal(.opened(query: search.query, resultCount: searchMatches.count, kind: searchMatches[index].kind, position: index, source: search.source))
     }
-    path.append(VerbDestination(verb: verb, source: .search, marks: searchMatches[index].conjugation?.marks))
+    path.append(VerbPageRoute.verb(VerbDestination(verb: verb, source: .search, marks: searchMatches[index].conjugation?.marks)))
   }
 
   private func openGuess(_ guess: VerbSearch.Guess) {
     if let search = searchTracker.finish() {
       signal(.openedGuess(query: search.query, source: search.source))
     }
-    path.append(VerbDestination(verb: guess.verb, source: .searchGuess, marks: guess.conjugation?.marks))
+    path.append(VerbPageRoute.verb(VerbDestination(verb: guess.verb, source: .searchGuess, marks: guess.conjugation?.marks)))
   }
 
   private func signalEndedSearch(_ search: SearchTracker.Search) {

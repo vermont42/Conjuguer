@@ -118,7 +118,7 @@ struct VerbView: View {
         }
 
         if !verb.related.isEmpty {
-          RelatedVerbsView(related: verb.related, open: open)
+          RelatedVerbsView(related: verb.related)
             .scrollFade()
         }
       }
@@ -179,17 +179,8 @@ struct VerbView: View {
     }
     .sheet(item: $detailSheet) { sheet in
       switch sheet {
-      case .model(let destination):
-        ModelView(model: destination.model, verbOrder: destination.verbOrder)
-          .sheetDismissable()
       case .article(let info):
         ArticleSheet(info: info)
-      case .verb(let destination):
-        VerbView(verb: destination.verb, source: destination.source)
-          .sheetDismissable()
-      case .relatedList(let destination):
-        RelatedVerbListView(destination: destination)
-          .sheetDismissable()
       case .quiz:
         QuizSheet(scope: .verbPage(verb))
       }
@@ -254,7 +245,7 @@ struct VerbView: View {
 
   private func modelRow(_ model: VerbModel) -> some View {
     Button {
-      open(ModelDestination(model: model))
+      verbPagePush(.model(model))
     } label: {
       modelReferenceText(model)
         .frenchPronunciation()
@@ -383,23 +374,6 @@ struct VerbView: View {
     .card()
   }
 
-  private func open(_ value: any Hashable) {
-    if let verbPagePush {
-      verbPagePush(value)
-      return
-    }
-    switch value {
-    case let destination as VerbDestination:
-      detailSheet = .verb(destination)
-    case let destination as ModelDestination:
-      detailSheet = .model(destination)
-    case let destination as RelatedVerbListDestination:
-      detailSheet = .relatedList(destination)
-    default:
-      break
-    }
-  }
-
   private var compoundTensesAreShown: Binding<Bool> {
     Binding {
       showsCompoundTenses || compoundTensesAreForcedOn
@@ -419,8 +393,8 @@ struct VerbView: View {
     }
     return {
       world.analytics.signal(name: .tapTenseArticle)
-      if pushesTenseArticles, let verbPagePush {
-        verbPagePush(info)
+      if pushesTenseArticles {
+        verbPagePush(.article(info))
       } else {
         detailSheet = .article(info)
       }
@@ -510,7 +484,8 @@ struct VerbView: View {
     self.visit = nil
   }
 
-  // The model page, presented over this one, ends the visit, and closing it resumes the visit.
+  // A sheet of the page's own, Test Me or a tense's article, ends the visit, and closing it
+  // resumes the visit.
   private func resumeVisitIfUncovered() {
     guard isOnScreen, detailSheet == nil else {
       return
@@ -532,22 +507,13 @@ struct VerbView: View {
   }
 
   private enum DetailSheet: Identifiable, Equatable {
-    case model(ModelDestination)
     case article(Info)
-    case verb(VerbDestination)
-    case relatedList(RelatedVerbListDestination)
     case quiz
 
     var id: String {
       switch self {
-      case .model(let destination):
-        return "model-\(destination.model.id)"
       case .article(let info):
         return "article-\(info.stableKey)"
-      case .verb(let destination):
-        return "verb-\(destination.verb.id)"
-      case .relatedList(let destination):
-        return "related-\(destination.root)"
       case .quiz:
         return "quiz"
       }
@@ -689,7 +655,8 @@ private struct MarkableConjugation: View {
 #if DEBUG
 #Preview {
   PreviewSupport.bootstrap()
-  return VerbView(verb: PreviewSupport.sampleVerb, source: .browse)
-    .environment(Current)
+  return PreviewStack {
+    VerbView(verb: PreviewSupport.sampleVerb, source: .browse)
+  }
 }
 #endif

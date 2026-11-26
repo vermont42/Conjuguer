@@ -7,33 +7,36 @@
 
 import SwiftUI
 
-/// Pushes a value onto whichever navigation stack shows the verb page, the model page, a
-/// collection's page, or an article: a tab's or a sheet's. A page that finds none in its
-/// environment presents a sheet instead.
-struct VerbPagePush {
-  let push: (any Hashable) -> Void
+/// A page that a verb page, a model page, a collection's page, or an article leads to. Every stack
+/// that shows one registers all of them through `verbPageNavigation`, so none can be pushed where
+/// it has no page.
+enum VerbPageRoute: Hashable {
+  case verb(VerbDestination)
+  case model(VerbModel, order: VerbSort = .alphabetical)
+  /// Every verb built on one root, which a verb page's short list leads to.
+  case relatedList(root: String, verbs: [Verb])
+  case collection(VerbCollectionDestination)
+  case article(Info)
+}
 
-  func callAsFunction(_ value: some Hashable) {
-    push(value)
+/// Pushes a route onto whichever navigation stack shows the page: a tab's or a sheet's.
+struct VerbPagePush {
+  let push: (VerbPageRoute) -> Void
+
+  func callAsFunction(_ route: VerbPageRoute) {
+    push(route)
   }
 }
 
 extension EnvironmentValues {
-  @Entry var verbPagePush: VerbPagePush?
+  /// Every page that pushes is inside a stack that sets this, a sheet's included, so the default
+  /// is reached only by a view shown with no stack around it.
+  @Entry var verbPagePush = VerbPagePush { route in
+    assertionFailure("No stack applies verbPageNavigation above the view that pushed \(route).")
+  }
   /// Whether a verb page on this stack pushes its tenses' articles rather than presenting them.
   /// Each stack sets it, so a sheet presented from inside an article sheet does not inherit it.
   @Entry var pushesTenseArticles = false
-}
-
-struct ModelDestination: Hashable {
-  let model: VerbModel
-  var verbOrder: VerbSort = .alphabetical
-}
-
-/// Every verb built on one root, which a verb page's short list leads to.
-struct RelatedVerbListDestination: Hashable {
-  let root: String
-  let verbs: [Verb]
 }
 
 extension View {
@@ -58,40 +61,44 @@ private struct VerbPageNavigation: ViewModifier {
 
   func body(content: Content) -> some View {
     content
-      .navigationDestination(for: VerbDestination.self) { destination in
-        page(VerbView(verb: destination.verb, source: destination.source, marks: destination.marks))
+      .navigationDestination(for: VerbPageRoute.self) { route in
+        page(route)
+          .toolbar {
+            if let done {
+              ToolbarItem(placement: .topBarTrailing) {
+                Button(L.Navigation.done, action: done)
+              }
+            }
+          }
+          .navigationEnvironment(push: push, pushesTenseArticles: pushesTenseArticles)
       }
-      .navigationDestination(for: ModelDestination.self) { destination in
-        page(ModelView(model: destination.model, verbOrder: destination.verbOrder))
-      }
-      .navigationDestination(for: RelatedVerbListDestination.self) { destination in
-        page(RelatedVerbListView(destination: destination))
-      }
-      .navigationDestination(for: VerbCollectionDestination.self) { destination in
-        page(VerbCollectionView(destination: destination))
-      }
-      .navigationDestination(for: Info.self) { info in
-        page(InfoView(info: info))
-      }
-      .environment(\.verbPagePush, VerbPagePush { path.append($0) })
-      .environment(\.pushesTenseArticles, pushesTenseArticles)
+      .navigationEnvironment(push: push, pushesTenseArticles: pushesTenseArticles)
+  }
+
+  private var push: VerbPagePush {
+    VerbPagePush { path.append($0) }
   }
 
   @ViewBuilder
-  private func page(_ content: some View) -> some View {
-    if let done {
-      content
-        .environment(\.verbPagePush, VerbPagePush { path.append($0) })
-        .environment(\.pushesTenseArticles, pushesTenseArticles)
-        .toolbar {
-          ToolbarItem(placement: .topBarTrailing) {
-            Button(L.Navigation.done, action: done)
-          }
-        }
-    } else {
-      content
-        .environment(\.verbPagePush, VerbPagePush { path.append($0) })
-        .environment(\.pushesTenseArticles, pushesTenseArticles)
+  private func page(_ route: VerbPageRoute) -> some View {
+    switch route {
+    case .verb(let destination):
+      VerbView(verb: destination.verb, source: destination.source, marks: destination.marks)
+    case let .model(model, order):
+      ModelView(model: model, verbOrder: order)
+    case let .relatedList(root, verbs):
+      RelatedVerbListView(root: root, verbs: verbs)
+    case .collection(let destination):
+      VerbCollectionView(destination: destination)
+    case .article(let info):
+      InfoView(info: info)
     }
+  }
+}
+
+private extension View {
+  func navigationEnvironment(push: VerbPagePush, pushesTenseArticles: Bool) -> some View {
+    environment(\.verbPagePush, push)
+      .environment(\.pushesTenseArticles, pushesTenseArticles)
   }
 }

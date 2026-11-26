@@ -11,7 +11,7 @@ import SwiftUI
 /// of the other bases that share its model, with a way to all of each.
 struct RelatedVerbsView: View {
   let related: RelatedVerbs
-  let open: (any Hashable) -> Void
+  @Environment(\.verbPagePush) private var push
 
   var body: some View {
     VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
@@ -27,7 +27,7 @@ struct RelatedVerbsView: View {
           }
           if related.builtOnRoot.count > RelatedVerbs.shortListLength {
             RelatedChip(text: L.VerbView.allRelated(related.builtOnRoot.count), isFrench: false, isBordered: true) {
-              open(RelatedVerbListDestination(root: related.root, verbs: related.builtOnRoot))
+              push(.relatedList(root: related.root, verbs: related.builtOnRoot))
             }
             .accessibilityIdentifier("related_all_built_on")
           }
@@ -40,7 +40,7 @@ struct RelatedVerbsView: View {
             verbChip(verb)
           }
           RelatedChip(text: L.VerbView.allRelated(model.verbs.count), isFrench: false, isBordered: true) {
-            open(ModelDestination(model: model, verbOrder: .frequency))
+            push(.model(model, order: .frequency))
           }
           .accessibilityIdentifier("related_all_model")
         }
@@ -62,7 +62,7 @@ struct RelatedVerbsView: View {
 
   private func verbChip(_ verb: Verb) -> some View {
     RelatedChip(text: verb.infinitifWithPossibleExtraLetters, isFrench: true) {
-      open(VerbDestination(verb: verb, source: .related))
+      push(.verb(VerbDestination(verb: verb, source: .related)))
     }
     .accessibilityIdentifier("related_\(verb.infinitif)")
   }
@@ -95,17 +95,17 @@ private struct RelatedChip: View {
 }
 
 struct RelatedVerbListView: View {
-  let destination: RelatedVerbListDestination
+  let root: String
+  let verbs: [Verb]
   @Environment(\.verbPagePush) private var push
   @State private var order = VerbSort.frequency
-  @State private var sheetVerb: Verb?
 
-  private var verbs: [Verb] {
+  private var orderedVerbs: [Verb] {
     switch order {
     case .frequency:
-      return destination.verbs.sorted(by: Verb.byFrequency)
+      return verbs.sorted(by: Verb.byFrequency)
     case .alphabetical:
-      return destination.verbs.sorted { lhs, rhs in
+      return verbs.sorted { lhs, rhs in
         lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
       }
     }
@@ -125,9 +125,9 @@ struct RelatedVerbListView: View {
         .accessibilityIdentifier("related_list_sort")
 
         VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
-          ForEach(verbs) { verb in
+          ForEach(orderedVerbs) { verb in
             Button {
-              open(verb)
+              push(.verb(VerbDestination(verb: verb, source: .related)))
             } label: {
               BrowseRow(
                 title: verb.infinitifWithPossibleExtraLetters,
@@ -144,21 +144,9 @@ struct RelatedVerbListView: View {
       .padding(.horizontal, Layout.doubleDefaultSpacing)
     }
     .screenBackground()
-    .navigationTitle(L.VerbView.builtOn(destination.root))
+    .navigationTitle(L.VerbView.builtOn(root))
     .navigationBarTitleDisplayMode(.inline)
-    .sheet(item: $sheetVerb) { verb in
-      VerbView(verb: verb, source: .related)
-        .sheetDismissable()
-    }
     .recordsAppearance(as: "\(RelatedVerbListView.self)")
-  }
-
-  private func open(_ verb: Verb) {
-    if let push {
-      push(VerbDestination(verb: verb, source: .related))
-    } else {
-      sheetVerb = verb
-    }
   }
 }
 

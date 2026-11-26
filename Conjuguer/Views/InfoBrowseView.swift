@@ -56,7 +56,7 @@ struct InfoBrowseView: View {
 
               LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
                 ForEach(section.infos) { info in
-                  NavigationLink(value: info) {
+                  NavigationLink(value: VerbPageRoute.article(info)) {
                     infoCell(info)
                       .card()
                   }
@@ -78,7 +78,7 @@ struct InfoBrowseView: View {
         ForEach(Info.sections, id: \.category) { section in
           Section {
             ForEach(section.infos) { info in
-              NavigationLink(value: info) {
+              NavigationLink(value: VerbPageRoute.article(info)) {
                 infoCell(info)
               }
               .listRowBackground(Color.customBackground)

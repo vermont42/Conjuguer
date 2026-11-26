@@ -33,4 +33,19 @@ enum PreviewSupport {
     Info.infos[0]
   }
 }
+
+/// A stack with the pages a previewed verb page, model page, or article can push, as every stack
+/// in the app has.
+struct PreviewStack<Content: View>: View {
+  @ViewBuilder let content: () -> Content
+  @State private var path = NavigationPath()
+
+  var body: some View {
+    NavigationStack(path: $path) {
+      content()
+        .verbPageNavigation(path: $path)
+    }
+    .environment(Current)
+  }
+}
 #endif

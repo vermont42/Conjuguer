@@ -184,7 +184,7 @@ Conjuguer/
 │   ├── Log.swift               # os.Logger factory with per-category loggers
 │   ├── ModelSort.swift         # Sort order for the model browse view (irregularity/alphabetical/identifier)
 │   ├── Modifiers.swift         # The app's ViewModifier vocabulary (headingLabel, funButton, card, screenBackground, copyOnLongPress, …)
-│   ├── PreviewSupport.swift    # DEBUG-only bootstrap so SwiftUI previews have parsed verb data
+│   ├── PreviewSupport.swift    # DEBUG-only bootstrap so SwiftUI previews have parsed verb data, and PreviewStack, the navigation stack a previewed page pushes onto
 │   ├── RatingsFetcher.swift    # Fetches the App Store ratings count from the iTunes API
 │   ├── ReviewPrompter.swift    # Protocol for review prompting
 │   ├── ReviewPrompterDummy.swift  # No-op double
@@ -252,7 +252,7 @@ Conjuguer/
     ├── VerbBrowseView.swift    # Searchable, sortable list/grid of all verbs (hosts the verb_browse_sort launch anchor)
     ├── VerbCollectionView.swift # A featured collection's page, VerbCollectionBar (looked-up count, Quiz, Share) for it and every model page, and the Models tab's VerbCollectionRow
     ├── VerbEssentialsRowView.swift # A Verb Essentials row other than the answer field's: answered with its mark, given in a re-ask, or still to come; and the tense label above each row
-    ├── VerbPageNavigation.swift # VerbPagePush and verbPageNavigation(path:pushesTenseArticles:done:): the pages a verb, model, collection page, or article pushes, in every tab's stack and every sheet, and whether a verb page there pushes its tense articles
+    ├── VerbPageNavigation.swift # VerbPageRoute, VerbPagePush, and verbPageNavigation(path:pushesTenseArticles:done:): the pages a verb, model, collection page, or article pushes, in every tab's stack and every sheet, and whether a verb page there pushes its tense articles
     └── VerbView.swift          # Verb detail: conjugation cards with second names and article buttons, the article sheet, the color key and scroll tip, etymology, example sentence, related verbs
 
 ConjugationMapTool/                 # macOS command-line target; compiles the conjugation core from Conjuguer/ (membership exceptions in project.pbxproj)

@@ -31,7 +31,7 @@ empty until it is committed.
 | 1 | Done | 2026-11-25 | `5543a98` | B4, S1 (the parser) | No |
 | 2 | Done | 2026-11-25 | `d36f6d5` | B1, B2, B8, B28, S1 (the sheets) | Yes |
 | 3 | Done | 2026-11-25 | `f2e962e` | Multiple windows | Yes |
-| 4 | Not started | | | S2 | No |
+| 4 | Done | 2026-11-25 | | S2 | No |
 | 5 | Not started | | | B3, B6, B18, B23, B24, B26, S3 (the search model), D5, T1 (the search), K-F1, K-S8 | Yes |
 | 6 | Not started | | | B9, S3 (the rest), D4, D7, T1 (the card), the stale review card | Yes |
 | 7 | Not started | | | B7, B13, B14, B15, B21, B22, B25 (the row), B30, G1, G2, G3, S10 | Yes |
@@ -432,6 +432,44 @@ each inside a tab and inside a sheet.
 **Tell Josh he could try:** those pushes, on either device. Nothing should look different.
 
 **How it differed:**
+
+- **`VerbPageRoute` has five cases, not four.** Phase 2 registered `Info` as a fifth destination
+  type, so an article is a route too: `.verb`, `.model(_, order:)`, `.relatedList(root:verbs:)`,
+  `.collection`, and `.article`. `ModelDestination` and `RelatedVerbListDestination` became the
+  cases' associated values and are gone. `VerbDestination` and `VerbCollectionDestination` stay,
+  since `RoutedSheet` uses them too. The Info tab's `NavigationLink`s carry `.article` routes, and
+  the tabs append routes to their own paths.
+- **The guard is the compiler, not a test.** `verbPageNavigation` registers one
+  `navigationDestination(for: VerbPageRoute.self)`, whose exhaustive switch gives every case a
+  page, and `VerbPagePush` and `QuizCorrectionView.onOpen` take a route rather than
+  `any Hashable`. No test was added: the phase deletes unreachable code and changes no behavior,
+  so no test could fail before it and pass after. A tab's own `path.append` still takes any
+  `Hashable`, since `NavigationPath` does, so a tab could in principle append a bare
+  `VerbDestination`. None does now.
+- **The push is never nil.** Its environment default asserts, naming the route, so a view shown
+  outside a stack fails loudly in a debug build rather than dropping the tap. The previews of
+  `VerbView`, `ModelView`, and `InfoView` sit in `PreviewStack` (in `PreviewSupport.swift`), a
+  stack with `verbPageNavigation`.
+- **`RelatedVerbsView` reads the push itself**, so `VerbView` no longer passes it an `open`
+  closure. `RelatedVerbListView` takes `root` and `verbs`.
+- **`ModelView`'s one remaining sheet**, the irregularities article, is a Boolean now, since its
+  `DetailSheet` enum had only that case left. `VerbView.DetailSheet` keeps `.article` and `.quiz`,
+  the two sheets a verb page still presents.
+- **`page` writes its environment once**, through a small `navigationEnvironment` helper that the
+  stack's root and every pushed page share, and the Done button is one `if let` in the toolbar.
+- **Checks.** 961 tests in 92 suites, as after Phase 3. SwiftLint is clean on the changed files,
+  and `check_docs.py` passes. No string, signal, or parameter changed. On the iPhone simulator, in
+  the tabs: a collection's row and a verb row from it (Models), the verb page's model row, a model
+  page's verb link, a related chip, a Verbs-tab row, a model row in the Models tab, and in the
+  Info tab an article, a verb link in it, and that page's tense diamond, which pushed the tense's
+  article in the tab. In sheets opened by link: "All 15" of mettre's built-on row and a verb from
+  that list, the model row and a verb link on the model page, "All 4,859" of aimer's same-model
+  row (the model page in frequency order), and a collection's row from `list/etre`. Over a held
+  quiz correction: the model link and the verb link, each pushed and popped. Every pushed page in
+  a sheet kept its Done button. The iPad was not booted, since nothing visible changed.
+- **Also touched.** `docs/feature_architecture.md` § Related Verbs' Navigation describes the route
+  enum, and the paragraph above it that still said a deeplink sets `Current.verb` now names the
+  routed sheet.
 
 ## Phase 5: A Search Model That Both Tabs Share
 

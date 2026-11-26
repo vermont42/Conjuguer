@@ -49,9 +49,9 @@ struct InfoView: View {
       }
       switch link {
       case .article(let info):
-        verbPagePush?(info)
+        verbPagePush(.article(info))
       case .verb(let verb):
-        verbPagePush?(VerbDestination(verb: verb, source: .infoLink))
+        verbPagePush(.verb(VerbDestination(verb: verb, source: .infoLink)))
       }
       return .handled
     })
@@ -89,7 +89,8 @@ struct InfoView: View {
 #if DEBUG
 #Preview {
   PreviewSupport.bootstrap()
-  return InfoView(info: PreviewSupport.sampleInfo)
-    .environment(Current)
+  return PreviewStack {
+    InfoView(info: PreviewSupport.sampleInfo)
+  }
 }
 #endif

@@ -16,7 +16,6 @@ struct VerbCollectionView: View {
   @Environment(\.verbPagePush) private var push
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
   @State private var order = VerbSort.frequency
-  @State private var sheetVerb: Verb?
   @State private var hasSignaledView = false
 
   private var collection: VerbCollection {
@@ -70,10 +69,6 @@ struct VerbCollectionView: View {
     }
     .screenBackground()
     .navigationBarTitleDisplayMode(.inline)
-    .sheet(item: $sheetVerb) { verb in
-      VerbView(verb: verb, source: .list)
-        .sheetDismissable()
-    }
     .onAppear {
       // A return from one of the list's verb pages is not another opening of the list.
       guard !hasSignaledView else {
@@ -101,7 +96,7 @@ struct VerbCollectionView: View {
   private var verbRows: some View {
     ForEach(orderedVerbs) { verb in
       Button {
-        open(verb)
+        push(.verb(VerbDestination(verb: verb, source: .list)))
       } label: {
         BrowseRow(
           title: verb.infinitifWithPossibleExtraLetters,
@@ -113,14 +108,6 @@ struct VerbCollectionView: View {
       }
       .buttonStyle(.plain)
       .accessibilityIdentifier("collection_verb_\(verb.dictionaryKey)")
-    }
-  }
-
-  private func open(_ verb: Verb) {
-    if let push {
-      push(VerbDestination(verb: verb, source: .list))
-    } else {
-      sheetVerb = verb
     }
   }
 }

@@ -399,6 +399,13 @@ type with no registered destination is dropped silently. **Shape:** one `VerbPag
 (verb, model, related list, collection) with one `navigationDestination`, a push action that is
 never nil, and the fallbacks deleted.
 
+**Fixed on `main` 2026-11-25**, by Phase 4 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `VerbPageRoute` has five
+cases (a verb, a model with its order, the verbs built on a root, a collection, and an article,
+which Phase 2 had registered as a fifth type), and `verbPageNavigation` registers one destination
+whose exhaustive switch gives each a page. `VerbPagePush` takes a route and is never nil. Its
+default asserts. The four views' sheets and `VerbView.open(_:)` are gone, as are `ModelDestination`
+and `RelatedVerbListDestination`, and previews push in a `PreviewStack`.
+
 **S3. `VerbBrowseView` is 722 lines holding four state machines.** Thirteen `@State`s and a focus
 state feed `isSearching`, `showsRecents`, `showsMyVerbs`, and `showsReviewCard`, and then
 `displayedVerbs`, `browseSource`, `keyboardTargets`, `listHeading`, and `verbCollection` each

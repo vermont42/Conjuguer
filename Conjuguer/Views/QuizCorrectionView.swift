@@ -21,7 +21,7 @@ struct QuizCorrectionView: View {
   /// False in a quiz begun from the verb's own page, where a link back to it would be circular.
   let showsVerbLink: Bool
   var accessibilityIsFocused: AccessibilityFocusState<Bool>.Binding
-  let onOpen: (any Hashable) -> Void
+  let onOpen: (VerbPageRoute) -> Void
   let onContinue: () -> Void
 
   static let continueButtonID = "quiz_continue_button"
@@ -94,16 +94,16 @@ struct QuizCorrectionView: View {
       HStack(spacing: Layout.defaultSpacing) {
         if showsVerbLink {
           link(Text(verbatim: question.verb.infinitifWithPossibleExtraLetters), systemImage: "book.fill", isFrench: true, identifier: "quiz_correction_verb") {
-            onOpen(VerbDestination(
+            onOpen(.verb(VerbDestination(
               verb: question.verb,
               source: .quizCorrection,
               marks: MarkedConjugations(tenses: [question.tense])
-            ))
+            )))
           }
         }
         if let model = VerbModel.models[question.verb.model] {
           link(modelText(model), systemImage: "key.fill", isFrench: false, identifier: "quiz_correction_model") {
-            onOpen(ModelDestination(model: model))
+            onOpen(.model(model))
           }
         }
       }

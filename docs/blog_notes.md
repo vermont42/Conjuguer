@@ -6928,3 +6928,33 @@ group.…` does not write the App Group's plist. It writes a stray file under th
 preferences that the app never reads. A `plutil` edit of the container's plist, with the app
 terminated, is what the control's mailbox needed. That is now in the `verify-in-simulator` skill,
 with the two-window procedure.
+
+## Browse Fixes, Phase 4: Pages Push, and the Dead Sheets Go (2026-11-25)
+
+Phase 4 of [`plans/verb_browse_fixes.md`](../plans/verb_browse_fixes.md) took the review's S2, a
+cleanup more than a fix. When the related-verbs card arrived on 2026-11-22, every page that could
+lead to another was written to push if it found a push action in its environment, and to present
+a sheet if it did not. Then `.sheetDismissable()` began giving every sheet its own stack, and by
+the time of the review all fourteen places that build a verb page, a model page, a related list,
+or a collection's page put it inside a stack. The sheet fallbacks in four views had become
+unreachable, apart from previews. Worse, the push took `any Hashable`, so a value of a type that
+no stack had registered would have vanished without a sound.
+
+The replacement is one enum, `VerbPageRoute`, with a case for each page: a verb, a model with its
+order, the verbs built on a root, a collection, and an article. The review counted four. Phase 2
+had made articles push in the Info tab and in article sheets, which added a fifth. Each stack
+registers one `navigationDestination` for the enum, and its switch has to cover every case to
+compile. So the promise the review asked for, that nothing can be pushed where it has no page, is
+kept by the compiler rather than by a test. That also meant this phase had no test of its own to
+write. It deletes code nobody could reach and changes no behavior, so no test could fail before it
+and pass after.
+
+The push action is no longer optional. Its environment default is an assertion that names the
+route, so a page shown outside a stack fails loudly in a debug build instead of quietly dropping
+the tap. The previews that once relied on the fallback now sit in a small `PreviewStack`.
+
+Checking the pushes by hand on the simulator held one trap. The Models tab's sort picker floats
+over the bottom of the list, and a tap meant for the row beneath it chose Alphabetical instead.
+And parler's model page, which lists 4,859 verbs as links, takes several seconds to appear, long
+enough that a screenshot two seconds after the tap shows the page you started from. That slowness
+is Phase 10's S13. It is not a dropped push.

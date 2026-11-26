@@ -152,9 +152,9 @@ A conjugation finds its verb, through the map ([Conjugation Map](#conjugation-ma
 
 ### Opening a Verb
 
-A tap in the Verbs tab appends a `VerbDestination` to the tab's `NavigationPath`. A deeplink instead
-sets `Current.verb`, which the Verbs tab presents as a sheet (see [Deeplinks](#deeplinks)), and the
-Info tab does the same for a verb link in an article. Every page that leads to another (a related
+A tap in the Verbs tab appends a `VerbPageRoute.verb` to the tab's `NavigationPath`. A deeplink
+instead becomes the scene router's routed sheet, which `MainTabView` presents (see
+[Deeplinks](#deeplinks)), and a verb link in an article pushes onto the article's own stack. Every page that leads to another (a related
 verb, the model row, a model page's verb links) pushes it onto whichever stack shows it, through
 `VerbPagePush`; see [Related Verbs](#related-verbs).
 
@@ -230,7 +230,7 @@ The verb page leads to related verbs, and the model page can list its verbs by f
 |------|---------|
 | `Models/RelatedVerbs.swift` | `VerbBase` (a verb's base and root), `RelatedVerbs`, and `Verb.related`, cached per entry |
 | `Views/RelatedVerbsView.swift` | The card at the bottom of the verb page, `RelatedVerbListView` (every verb built on a root), and `FlowLayout` |
-| `Views/VerbPageNavigation.swift` | `VerbPagePush`, `ModelDestination`, `RelatedVerbListDestination`, and `verbPageNavigation(path:pushesTenseArticles:done:)` |
+| `Views/VerbPageNavigation.swift` | `VerbPageRoute`, `VerbPagePush`, and `verbPageNavigation(path:pushesTenseArticles:done:)` |
 
 ### Finding a Base
 
@@ -272,14 +272,18 @@ and the button trait, one element each, read in French, as `docs/voiceover.md` a
 
 ### Navigation
 
-`VerbPagePush` is an environment action that each stack injects through `verbPageNavigation`: the
-Verbs tab, the Models tab, the Info tab, the Quiz tab, and every `.sheetDismissable()` sheet,
-`ArticleSheet` among them. Each holds a `NavigationPath` and registers destinations for
-`VerbDestination`, `ModelDestination`, `RelatedVerbListDestination`, `VerbCollectionDestination`,
-and `Info`. In a sheet, each pushed page gets the Done button too. Josh chose
+Every page these screens lead to is a case of `VerbPageRoute`: a verb, a model (with its order),
+the verbs built on a root, a collection, and an article. `verbPageNavigation` registers one
+`navigationDestination` for it, whose exhaustive switch gives every case a page, so no route can
+be pushed where it has none. It also injects `VerbPagePush`, an environment action that takes a
+route, into each stack: the Verbs tab, the Models tab, the Info tab, the Quiz tab, and every
+`.sheetDismissable()` sheet, `ArticleSheet` among them. The tabs append routes to their own
+`NavigationPath`s directly. In a sheet, each pushed page gets the Done button too. Josh chose
 (2026-11-22) that the verb page's model row and a model page's verb links push as the chips do,
-so no sheet stacks on a sheet. A page with no `VerbPagePush` in its environment (a preview) falls
-back to a sheet.
+so no sheet stacks on a sheet. The push is never nil, and nothing falls back to a sheet: every
+place that builds one of these pages puts it in such a stack, previews too, through
+`PreviewStack`. The environment's default, reached only by a view with no stack above it, is an
+assertion.
 
 ### The Model Page's Order
 
