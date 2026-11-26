@@ -24,7 +24,7 @@ struct VerbSpotlightTests {
   @Test func testTheGlossLeadsTheAlternateNames() throws {
     let verb = try #require(Verb.verbs["aller"])
     let names = try text(for: "aller").alternateNames
-    #expect(names.first == VerbSearch.meanings(of: verb.translation).first)
+    #expect(names.first == VerbSearchKeys.meanings(of: verb.translation).first)
     #expect(names.contains("est allé"))
   }
 

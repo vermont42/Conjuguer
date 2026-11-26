@@ -72,7 +72,7 @@ enum VerbSpotlight {
   }
 
   static func text(for verb: Verb, conjugations: Set<String>) -> Text {
-    let meanings = VerbSearch.meanings(of: verb.translation)
+    let meanings = VerbSearchKeys.meanings(of: verb.translation)
     let keyConjugations = verb.keyConjugations().map { $0.lowercased() }
     return Text(
       alternateNames: (meanings + keyConjugations).uniqued(),

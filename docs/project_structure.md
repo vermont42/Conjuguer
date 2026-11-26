@@ -65,7 +65,7 @@ Conjuguer/
 │   ├── ConjugationIndex.swift  # The conjugation map indexed for search: by folded spelling (etait → était) and as packed folds for the guess; BoundedEditDistance
 │   ├── ConjugationMap.swift    # Conjugation → verbs map: its rules, LZFSE text format, build(), and the bundled copy; compiled by the app and ConjugationMapTool
 │   ├── ConjugationMatch.swift  # Verb.conjugations(matching:): the cells, in page order, whose conjugation equals a text
-│   ├── ConjugationQuery.swift  # A search query as a conjugation's words: pronouns, elision, que, y, en, and negation dropped ("je ne sais pas" → sais)
+│   ├── ConjugationQuery.swift  # A search query as a conjugation's words: pronouns (c'est and ça va too), elision, que, y, en, and negation dropped ("je ne sais pas" → sais), for both the conjugation and the infinitive side; and whether it is still being typed ("nous", "dis-m")
 │   ├── ConjugationResult.swift # Answer grading (ConjugationResult.grade): total or no match and the app's spelling of a variant (AnswerGrade); a right second attempt's result; each result's sound, score, icon, and color
 │   ├── Conjugator.swift        # The conjugation engine: model lookup, stem alterations, simple and compound tenses; takes the pronoun gender explicitly (the app's defaulted overloads are in ConjugationLabels.swift)
 │   ├── ConjugatorError.swift   # Error enum for conjugation failures
@@ -148,7 +148,8 @@ Conjuguer/
 │   ├── VerbLookup.swift        # What Look Up a Verb says about a word and where it opens the app, read from the verb list's search
 │   ├── VerbListContent.swift   # What the Verbs tab's list shows (all verbs, results, no results, recents, My Verbs), and whether the review card shows above it
 │   ├── VerbSearch+Conjugations.swift # Reverse lookup: a conjugation, one word or compound ("ai mangé", "me suis levé"), finds its verbs
-│   ├── VerbSearch.swift        # The one matching and ranking rule for verb search: accent and ligature folding, "se" and "to" stripped, exact then prefix or English meaning then the rest, each by frequency; the guess, over infinitives and conjugations, when nothing matches, in a form that runs off the main actor
+│   ├── VerbSearch.swift        # The one matching and ranking rule for verb search: ConjugationQuery's pronouns and "to" stripped, exact then prefix or English meaning then the rest, each by frequency; the guess, over infinitives and conjugations, when nothing matches, in a form that runs off the main actor
+│   ├── VerbSearchKeys.swift    # A verb's infinitive and gloss as search compares them (lowercased, folded, the gloss's meanings), stored on Verb when it is made; the accent fold; compiled by the app and ConjugationMapTool
 │   ├── VerbSearchModel.swift   # The verb list's search: the text, its results and count, the guess found off the main actor, the keyboard selection by verb, what Return opens, and the finishSearch reports
 │   ├── VerbVisit.swift         # VerbDestination (a verb page to push, with its source) and VerbVisit (one stretch of a verb page on screen, for viewAppeared and leaveVerbView)
 │   ├── XMLDataParser.swift     # Shared XMLParser delegate base for the three parsers

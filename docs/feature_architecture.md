@@ -20,11 +20,12 @@ query use it too.
 | `BrowseSearchField.swift` | `browseSearchable`, the field both tabs show, and `SortPickerOrKeyRow` |
 | `SearchEngagement.swift` | The iPad field's timed workarounds, which both tabs share (§ Recents) |
 | `FailedSearchSound.swift` | When the sad trombone sounds |
-| `VerbSearch.swift` | The matching and ranking rule. `MatchKind` names each kind of match, for the `matchKind` signal parameter. Also the guess |
+| `VerbSearch.swift` | The matching and ranking rule. `MatchKind` names each kind of match, for the `matchKind` signal parameter; its `tier` alone ranks it. Also the guess |
+| `VerbSearchKeys.swift` | A verb's infinitive and gloss as search compares them, computed once when the `Verb` is made (it is part of the conjugation core), and the accent fold |
 | `VerbSearch+Conjugations.swift` | Reverse lookup: a conjugation, simple or compound, finds its verbs |
-| `ConjugationQuery.swift` | A query as a conjugation's words: subject and reflexive pronouns, elision, que, y, en, and negation dropped |
+| `ConjugationQuery.swift` | A query as a conjugation's words: subject and reflexive pronouns, elision, que, y, en, and negation dropped, for the infinitive side as well; and whether the query is still being typed |
 | `ConjugationIndex.swift` | The conjugation map indexed by folded spelling, and the packed folds the guess measures; `BoundedEditDistance` |
-| `MatchedConjugation.swift` | The conjugation a result matched, its cells, the row's line ("vais: Indicatif Présent (je)"), and the `MarkedConjugations` a page opens with |
+| `MatchedConjugation.swift` | The conjugation a result matched, its cells, the row's line ("vais : Indicatif Présent (je)"), and the `MarkedConjugations` a page opens with |
 | `ModelSearch.swift` | Finds a model by its exemplar or by any of its verbs, through `VerbSearch` without glosses |
 | `FailedVerbSearchView.swift` | The verb list's empty state: `ContentUnavailableView.search`, the guess, and the line asking the learner to email a missing verb |
 | `VerbSearchCommands.swift`, `VerbSearchArrowKeys.swift` | Command-F, and the arrow keys through results, on iPad and Mac |
@@ -34,15 +35,19 @@ query use it too.
 
 ### Matching
 
-- **The query.** Trimmed and lowercased. For the French side, a leading "se " or "s'" (or "s’")
-  is dropped, since pronominal verbs are stored without it; a bare "s'" searches as "s". For the
-  English side, a leading "to " is dropped. Extra letters (haïr's "France", sortir's "exit") are
+- **The query.** Trimmed and lowercased. For the French side, `VerbSearch.frenchQuery` drops what
+  `ConjugationQuery` drops (§ Reverse Lookup), since infinitives are stored without their pronouns:
+  "se souvenir", "s'en aller", "y aller", "me lever", and "ne pas manger" find souvenir, aller,
+  lever, and manger as exact infinitives. Until 2026-11-26 it dropped only "se " and "s'", so the
+  others found nothing and the guess, which already used the fuller rule, offered the infinitive
+  at distance zero. A bare "s'" searches as "s". For the English side, a leading "to " is dropped. Extra letters (haïr's "France", sortir's "exit") are
   not searched.
-- **Folding.** `VerbSearch.fold` lowercases, turns œ into oe and æ into ae, and strips diacritics,
+- **Folding.** `VerbSearchKeys.fold` lowercases, turns œ into oe and æ into ae, and strips diacritics,
   so etre finds être and manoeuvrer finds manœuvrer.
 - **Kinds and tiers.** `MatchKind`, best first: exact infinitive; exact after folding; then one tier
   holding a conjugation (literal or folded), an infinitive prefix, a whole English meaning (one
-  comma-separated sense of the gloss, its parenthetical note dropped, so "can (food)" means "can"),
+  comma-separated sense of the gloss, its parenthetical notes dropped before it is split, so "can
+  (food)" means "can" and "loosen (knot, belt, etc.)" means only "loosen"),
   and a folded prefix; then a whole word of the gloss; then an infinitive substring, literal or
   folded; then a gloss substring. Each verb appears once, with its best kind; on a tie a
   conjugation wins, because its row can name the cells.
@@ -66,14 +71,15 @@ query use it too.
   keyboard down, the picker shows and is disabled, since search ignores it.
 - **No result.** Both tabs play `Sound.randomSadTrombone` once as a search begins to fail
   (`FailedSearchSound`), not again for each letter it goes on failing, not when the sort order
-  changes, and not while the query is only pronouns ("j'", "nous"). A query of only spaces is no
+  changes, and not while the query is still being typed: only pronouns ("j'", "nous"), or a word
+  that ends in a hyphen or in the start of a pronoun after one ("dis-", "dis-m", "lève-to"). A query of only spaces is no
   search in either tab. The Models tab shows
   `ContentUnavailableView.search`. The Verbs tab shows `FailedVerbSearchView`: the
   same view, then a guess, then "If you believe that “…” is a French verb, please email
   vermontcoder@gmail.com", whose address is a `mailto:` link (`URL.mailto`) with the subject and
   body filled in with the query in the learner's language. A device that cannot open the link,
   such as the simulator, copies the address to the clipboard instead and says so for four seconds.
-- **The guess.** `VerbSearch.guess` folds the query as search does (reflexive pronoun dropped,
+- **The guess.** A query still being typed gets none. Otherwise `VerbSearch.guess` folds the query as search does (reflexive pronoun dropped,
   accents and ligatures folded) and measures optimal string alignment distance (Levenshtein plus a
   swap of two adjacent letters) to every folded infinitive and to every folded
   conjugation when the query is one word once its pronouns are dropped. A guess must be within one
@@ -114,8 +120,8 @@ query use it too.
   a recent opens by tap). Return and the arrows act only on the iPad idiom (which a Mac running the
   iPad app also reports), so the iPhone keyboard's Search key keeps its usual behavior.
 - **Cost.** One search over 6,330 verbs takes about 20 ms on the Intel simulator, and about 50 ms
-  with reverse lookup, in a Debug build. `VerbSearch` caches each verb's folded keys after the
-  first search.
+  with reverse lookup, in a Debug build. Each `Verb` carries its `VerbSearchKeys` from the parse,
+  so no search folds an infinitive.
 
 ### Reverse Lookup
 
@@ -124,30 +130,39 @@ A conjugation finds its verb, through the map ([Conjugation Map](#conjugation-ma
 
 - **The query.** `ConjugationQuery` splits elided words (j'ai is j' and ai, with ’ read as ') and
   drops leading words that a sentence puts around a conjugation, while one word remains: subject
-  pronouns, que and qu', ne and n', reflexive pronouns (me, te, se, elided or not, and a second nous
-  or vous), y, and en. After a ne, it drops pas, plus, jamais, rien, point, and guère too. So "je
-  vais", "j'ai", "il y a", "que je sois", "je ne sais pas", and "je me souviens" are vais, ai, a,
-  sois, sais, and souviens. A query of pronouns alone ("j'", "nous") is still being typed, so it
-  plays no trombone when it finds nothing.
+  pronouns (ce, c', ça, ca, and cela among them), que and qu', ne and n', reflexive pronouns (me,
+  te, se, elided or not, and a second nous or vous), y, and en. After a ne, it drops pas, plus,
+  jamais, rien, point, and guère too. So "je vais", "j'ai", "il y a", "que je sois", "je ne sais
+  pas", "je me souviens", "c'est", and "ça va" are vais, ai, a, sois, sais, souviens, est, and va.
+  A query of pronouns alone ("j'", "nous"), or one whose last word ends in a hyphen or in the start
+  of a pronoun after one ("dis-", "dis-m"), is still being typed, so it plays no trombone and gets
+  no guess when it finds nothing.
 - **One word** is looked up as typed and then folded (`ConjugationIndex.spellings`), so etait finds
   était. Each verb's cells (`Verb.conjugations(matching:)`) confirm it and name the row; a map entry
   that is only an infinitive is left to the infinitive search. A hyphenated word is tried whole
-  (arc-boutait), then with the confirming text whole and its verb alone (souviens-toi matches only
-  souvenir's impératif), then as its verb alone (lève-toi, vas-tu, a-t-il).
+  (arc-boutait), then by its verb with its pronouns put back on the verb as the app spells it
+  (souviens-toi matches only souvenir's impératif, and debrouille-toi only débrouiller's), then as
+  its verb alone (lève-toi, vas-tu, a-t-il, est-ce).
 - **More than one word** is a compound: the last word, the participle, is looked up as typed and
   folded, and every spelling of the auxiliary's words is tried against that verb's compound cells,
-  so "ai mangé", "est allée", "avions fini", and "etait allee" work. When the query carried a
+  so "ai mangé", "est allée", "avions fini", and "etait allee" work. An inverted auxiliary is
+  looked up by its verb part, so "as-tu mangé" and "est-il allé" are "as mangé" and "est allé".
+  When the query carried a
   reflexive pronoun, an avoir verb's compound also matches with être, as its pronominal use: "je
   me suis levé" is lever's passé composé, je, though the page shows "j'ai levé". Without one, "est
   levé" is a passive and matches nothing. Every other multi-word query finds only what the
   infinitive and gloss search finds.
 - **The row** adds a French line in red under the gloss: the conjugation as the app spells it, then
-  each tense once with its matching persons, joined by a dot: "suis: Indicatif Présent (je, tu) ·
-  Impératif (tu)" under suivre. Tense names are `Tense.titleCaseName`, French in both languages.
+  each tense once with its matching persons, joined by a dot: "suis : Indicatif Présent (je, tu) ·
+  Impératif (tu)" under suivre. The line is French in both interface languages, so a narrow
+  no-break space (U+202F) comes before its colon. Tense names are `Tense.titleCaseName`, French in both languages.
   The third persons follow the pronoun setting, except that a participle agreed in the feminine
-  names elle or elles ("est allée: Passé Composé (elle)"). An agreed participe passé alone reads
-  "allées: Participe Passé (accordé)". A pronominal compound keeps its reflexive pronoun ("me suis
-  levé"), because the page's cell does not show it.
+  names elle or elles ("est allée : Passé Composé (elle)"). An agreed participe passé alone reads
+  "allées : Participe Passé (accordé)". A pronominal compound keeps its reflexive pronoun ("me suis
+  levé"), because the page's cell does not show it, and with nous or vous keeps the subject too
+  ("nous nous sommes levés"), since one nous would read as the passive the search refuses and a
+  link's `match` would mark nothing. A test reads every sentence row's text back through
+  `MarkedConjugations(text:on:)` and finds the same cells.
 - **Short queries.** Sixteen conjugations have one or two letters: a, ai, as, es, eu, vu, su, lu,
   bu, dû, mû, né, pu, ri, tu, and va. Sharing the prefix tier puts the common verbs' first (a, ai,
   and as find avoir; es être; du, typed without its accent, devoir), and lets a rare verb's fall
@@ -200,7 +215,7 @@ personless card (participe passé, participe présent, radical du futur) sits be
 where the participe passé introduces the compound tenses built from it (Josh, 2026-11-22). The
 order changes the verb page only: Info, the quiz, and the model page keep theirs. Search's row
 lines and its landing follow it, since `Verb.conjugations(matching:)` reads `TenseTable` too
-("fait: Indicatif Présent (il) · Participe Passé").
+("fait : Indicatif Présent (il) · Participe Passé").
 
 ### Headings
 
@@ -382,7 +397,7 @@ so that search can start from a conjugation: vais finds aller, and suis finds ê
 | `Conjuguer/Models/ConjugationMatch.swift` | `Verb.conjugations(matching:)`, app only |
 | `Conjuguer/Models/ConjugationLabels.swift` | The core's display members, which reach `Current.settings` or `L` and so stay out of the tool |
 
-**The tool compiles the app's own conjugation core**: 24 files of `Conjuguer/Models` and
+**The tool compiles the app's own conjugation core**: 25 files of `Conjuguer/Models` and
 `Conjuguer/Utils`, listed in a membership exception on the `Conjuguer` folder in
 `project.pbxproj`. The core takes the pronoun gender explicitly; the app's overloads in
 `ConjugationLabels.swift` default it to the setting. A caller with a verb in hand passes
@@ -676,21 +691,26 @@ Five surfaces reach Conjuguer from outside the app.
 
 | Surface | Files | What it does |
 |---|---|---|
-| Look Up a Verb | `Intents/LookUpVerbIntent.swift`, `Models/VerbLookup.swift` | Asks for a word, answers ("vais: Indicatif Présent (je) of aller"), and opens the verb's page, marked, when one verb answers; otherwise the search |
+| Look Up a Verb | `Intents/LookUpVerbIntent.swift`, `Models/VerbLookup.swift` | Asks for a word, answers ("vais : Indicatif Présent (je) of aller"), and opens the verb's page, marked, when one verb answers; otherwise the search |
 | App Shortcuts | `Intents/ConjuguerShortcuts.swift` | Look Up a Verb, Start Quiz (`OpenQuizIntent`), and Random Verb (`OpenRandomVerbIntent`), with English phrases only |
 | Find a Verb control | `ConjuguerWidget/FindVerbControl.swift`, `Shared/OpenVerbSearchIntent.swift` | Opens the empty, focused search (`search?source=control`) |
 | Quick action | `App/QuickActions.swift` | "Find a Verb" on a long press of the icon: the same search, with `source` `quickAction` |
 | Spotlight | `Intents/VerbEntity.swift`, `Intents/VerbSpotlight.swift` | One entry per verb entry, in the named index `verbs` |
 
 **What Look Up a Verb opens.** `VerbLookup` reads the verb list's own `VerbSearch.matches`, so the
-two cannot disagree. An infinitive (folded or not) and a conjugation both answer, and a folded
-conjugation (etait) answers only when nothing literal does. One answering verb opens its page with
+two cannot disagree. An exact infinitive and a literal conjugation both answer, and a folded
+infinitive (etre) or a folded conjugation (etait) answers only when nothing literal does. So pêcher,
+typed with its accent, opens pêcher's page, and pecher names pêcher and pécher. Until 2026-11-26 a
+folded infinitive counted as literal, so any of the 26 accent pairs in `verbs.xml` (coûter and
+couter, brûler and bruler) opened the search. One answering verb opens its page with
 `match` set to the matched conjugation; two or more (suis: être and suivre), a gloss ("go"), a
 misspelling, or nothing opens the search for the word, where the list shows every match or the
 guess. At most four verbs are named. An infinitive's answer is its citation form, its gloss, and
-its key conjugations with no label ("aller, “go”: va · est allé · ira"); a conjugation's is the
-search row's line and the verb ("vais: Indicatif Présent (je) of aller"; French "…, du verbe
-aller"). The third person follows the pronoun setting, as the row does.
+its key conjugations with no label ("aller, “go”: va · est allé · ira", with a narrow space before
+the colon in French); a conjugation's is the search row's line and the verb ("vais : Indicatif
+Présent (je) of aller"; French "…, du verbe aller"). The third person follows the pronoun setting,
+as the row does. Every answer names a doubled infinitive with its extra letters, so haïssons gives
+one line for "haïr (France)" and one for "haïr (Québec)".
 
 **Why a second intent.** An intent's result can open the app only by naming another intent, so
 Look Up a Verb returns `.result(opensIntent:dialog:)` naming the hidden `OpenLookupResultIntent`,

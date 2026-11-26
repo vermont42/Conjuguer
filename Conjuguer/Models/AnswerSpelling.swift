@@ -8,18 +8,15 @@
 import Foundation
 
 /// How the quiz reads a typed answer before grading it. Search folds far more loosely
-/// (`VerbSearch.fold` reads parle as parlé), which is right for finding a verb and wrong for
+/// (`VerbSearchKeys.fold` reads parle as parlé), which is right for finding a verb and wrong for
 /// grading one.
 enum AnswerSpelling {
   /// Case, runs of whitespace, and the typographic apostrophe that the keyboard types are not
   /// part of an answer: "  J’ai   parlé " is j'ai parlé.
   static func normalized(_ answer: String) -> String {
-    answer
-      .precomposedStringWithCanonicalMapping
-      .replacingOccurrences(of: "’", with: "'")
+    ConjugationMap.key(answer.replacingOccurrences(of: "’", with: "'"))
       .split(whereSeparator: \.isWhitespace)
       .joined(separator: " ")
-      .lowercased()
   }
 
   /// The subject pronouns a learner may type before an answer for this person. Every

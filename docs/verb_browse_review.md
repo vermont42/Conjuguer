@@ -190,6 +190,8 @@ and it does not survive a round trip: Look Up a Verb sends the text as the link'
 lever's page opens unmarked. "je me suis levé" works. **Fix:** write the pronoun twice, and test
 that every sentence row's text re-parses to the same cells.
 
+**Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): a pronominal compound with nous or vous writes the pronoun twice ("nous nous sommes levés"), and `testARowsTextReadsBackAsTheSameCells` reads every sentence row's text back through `MarkedConjugations(text:on:)` and finds the same cells. Before the fix it failed for nous and vous.
+
 **B8. A second link to the verb already showing changes the marks and nothing else.** *Traced.*
 Look up "vais", then, with aller's page up, "suis allé". The sheet's item keeps its identity, so
 the page is not presented again: the new cell is marked, but the page does not scroll to it
@@ -250,15 +252,21 @@ at "dis-", "dis-m", and "dis-mo", and shows the empty state with a guess each ti
 `verbPart(ofHyphenated:)` needs every part after the hyphen to be a whole pronoun
 (`ConjugationQuery.swift:83-89`). The code already avoids this for "s'" and for pronouns alone.
 
+**Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `ConjugationQuery.isStillBeingTyped` covers a last word that ends in a hyphen or in the start of a pronoun after one, so "dis-", "dis-m", "dis-mo", and "lève-to" play no trombone and get no guess. Before the fix, typing "dis-moi" a letter at a time sounded the trombone once and started three guesses.
+
 **B14. A pronoun typed alone is offered a guess.** *Traced, and simulated by a reviewer over the
 built map.* "nous" finds nothing, as intended, but `guess` does not ask `isOnlyPronouns`
 (`VerbBrowseView.swift:581`), so the empty state suggests foutre through "fous".
+
+**Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `VerbSearch.guess` returns nothing for a query still being typed, so "nous" gets no guess in the list or in Look Up a Verb, where it had offered foutre.
 
 **B15. `meanings(of:)` splits inside parentheses.** *Traced.* It splits on commas before it strips
 parentheticals (`VerbSearch.swift:283-291`), so remercier's "thank, fire (an employee,
 euphemistically)" yields "fire (an employee" and "euphemistically)". Six glosses are affected
 (chantourner, desserrer, écaler, locher, ratonner, remercier): "fire" no longer ranks remercier
 as a whole meaning, "belt" becomes a meaning of desserrer, and Spotlight gets names like "etc.)".
+
+**Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): parentheticals are dropped before the gloss is split. remercier's meanings are thank and fire, so "fire" finds it as a whole meaning; desserrer's is loosen alone, so "belt" finds it as a word of the gloss.
 
 **B16. The twenty-verb limit on recents is applied before starred verbs are removed.** *Traced.*
 `recent()` takes the twenty newest, and My Verbs then filters out the starred ones
@@ -297,10 +305,14 @@ any open sheet).
 belongs to both entries of haïr, and the answer names neither the extra letters nor the gloss
 (`VerbLookup.swift:53-58`).
 
+**Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): every Look Up answer names a doubled infinitive with its extra letters, so haïssons gives one line for haïr (France) and one for haïr (Québec).
+
 **B22. A hyphenated impératif typed without accents loses its "-toi".** *Traced.*
 "debrouille-toi" lists the présent and subjonctif cells of débrouiller instead of the impératif
 alone, because the confirmation uses the typed word, unfolded
 (`VerbSearch+Conjugations.swift:46`).
+
+**Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): a hyphenated word's pronouns go back onto the verb as the app spells it, so "debrouille-toi" confirms "débrouille-toi" and lists débrouiller's impératif alone.
 
 **B23. A query of spaces hides the collections but lists every model.** *Traced.*
 `showsCollections` tests `searchText.isEmpty` (`ModelBrowseView.swift:98-100`), where the search
@@ -321,6 +333,8 @@ lands. `SearchEngagementTests.theLingerHoldsUntilAWaitingLetterLands` pins the s
 "vais: Indicatif Présent (je)" (`MatchedConjugation.swift:49-51`), which Phase 5 flagged for Josh
 before the rule of 2026-11-23, and the model page's "Parent: " and participe passé label
 (`ModelView.swift:108`, `137`). See the open questions.
+
+**The row's line fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): "vais : Indicatif Présent (je)" in both languages, and so in the Look Up answer. An infinitive's Look Up answer moved its colon into the catalog (`Lookup.keyConjugations`), with U+202F in French. The model page's labels are Phase 10's.
 
 **B26. The keyboard highlight is color only.** *Traced.* Neither the row nor the guess card adds
 the selected trait, so VoiceOver and Full Keyboard Access cannot tell which row Return will open
@@ -364,6 +378,8 @@ among them coûter and couter, brûler and bruler, répartir and repartir, tâch
 and mater, rôder and roder. **Fix:** make the literal tier `[.exactInfinitive, .conjugation]`,
 fall back to the folded kinds, and test one pair.
 
+**Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the literal tier is the exact infinitive and the literal conjugation, and the folded kinds answer only when it is empty. pêcher, pécher, brûler, bruler, coûter, and couter each open their own page; pecher still names pêcher and pécher.
+
 ## Gaps in What Search Understands
 
 The plan records that object pronouns (le, la, lui) and periphrases ("vais manger") are not
@@ -374,9 +390,13 @@ handled. These are different, and each is something a learner would type.
 hyphenated pronouns. The learner sees only "If you believe that “c'est” is a French verb, please
 email".
 
+**Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): ce, c', ça, ca, and cela are subjects, and ce follows a hyphen. "c'est", "ce sont", "ça va", "cela suffit", "est-ce", "qu'est-ce", and "c'était" find être, aller, and suffire.
+
 **G2. An inverted compound finds nothing.** *Traced.* "vas-tu" and "a-t-il" work, but "as-tu
 mangé" and "est-il allé" do not, because the auxiliary is looked up as typed
 (`VerbSearch+Conjugations.swift:113-125`). Looking up its verb part is one line.
+
+**Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): an inverted auxiliary is looked up by its verb part, so "as-tu mangé", "est-il allé", and "a-t-elle fini" find manger, aller, and finir.
 
 **G3. An infinitive with a pronoun finds nothing, and then the guess finds it.** *Traced.*
 `frenchQuery` strips only "se " and "s'" (`VerbSearch.swift:262-269`), while `ConjugationQuery`
@@ -384,7 +404,11 @@ strips subjects, me, te, y, en, que, and ne. So "y aller", "s'en aller", "me lev
 manger" sound the trombone, and the guess, which uses the other stripper, then offers the exact
 infinitive at distance zero. Two strippers have drifted (see S10).
 
+**Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `VerbSearch.frenchQuery` drops what `ConjugationQuery` drops, so "y aller", "s'en aller", "me lever", and "ne pas manger" find their infinitives as exact matches.
+
 **G4. Typing toward a hyphenated form** is B13.
+
+**Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): see B13.
 
 ## Structure and Smells
 
@@ -542,10 +566,14 @@ itself, "haïr France", where every other screen shows "haïr (France)" (older).
 - `BrowseSearch`'s header calls itself "the one piece the Verb and Model browse screens genuinely
   share", which five shared types now contradict.
 
+**Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `MatchKind` lost its `Comparable`, and its comment says that `tier` decides rank. Each `Verb` carries `VerbSearchKeys` (the folded infinitive and the gloss's meanings) from the moment it is made, so `keysCache` and its check against a test's verb are gone. `ModelSearch.seenVerbs` is `modelsFoundByAVerb`. The rest of S9 belongs to other phases.
+
 **S10. One rule, several copies.** Lowercase-and-NFC normalization is written in
 `ConjugationMap.key`, `Verb.normalizedConjugation`, `AnswerSpelling.normalized`, and
 `FormsJSON.normalize`. The subject pronouns are listed in `ConjugationQuery` and `AnswerSpelling`.
 The pronoun stripping of G3 is the case where two copies have already drifted.
+
+**Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the infinitive side and the conjugation side share `ConjugationQuery`'s stripper (G3). `AnswerSpelling.normalized`, `ConjugationMatch`'s normalization, and `FormsJSON` now call `ConjugationMap.key`, the one lowercase-and-NFC rule, which the tool compiles. The subject pronouns are still listed in both `ConjugationQuery` and `AnswerSpelling`, because they answer different questions: grading accepts a person's own pronouns, and search drops ce and ça, which grading must not accept.
 
 **S11. Four intents with one body, and links typed by hand.** `OpenVerbSearchIntent`, both Random
 Verb intents, and `OpenQuizIntent` differ only in the string they stash. Those strings and
@@ -653,6 +681,8 @@ a page open. `aDayGivesTheSameVerbEveryTime` and `aDefectiveVerbIsAskedOnlyTheCe
 
 **T4. Nothing tests that a search row's text re-parses to the same cells** (B7), or that related
 verbs agree across the two languages (S5).
+
+**The row half fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): see B7. The related verbs half is Phase 9's.
 
 **T5. Doc claims that are false today,** all in `docs/feature_architecture.md`: Return and the
 arrows act "only while the field holds a query" (§ Search; § The Learner's Verbs says otherwise);

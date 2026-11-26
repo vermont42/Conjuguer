@@ -19,7 +19,7 @@ struct BrowseRow: View {
   var subtitleIsFrench = false
 
   /// A French line below the subtitle, in the accent color: what a search matched, as in
-  /// "vais: Indicatif Présent (je)".
+  /// "vais : Indicatif Présent (je)".
   var detail: String?
 
   /// A check for a verb already looked up, as a collection's page marks its verbs.

@@ -29,7 +29,8 @@ struct VerbLookup {
   /// At most this many verbs are named, so that a spoken answer stays short.
   static let maxNamedVerbs = 4
 
-  private static let literalAnswerKinds: Set<VerbSearch.MatchKind> = [.exactInfinitive, .exactFoldedInfinitive, .conjugation]
+  private static let literalAnswerKinds: Set<VerbSearch.MatchKind> = [.exactInfinitive, .conjugation]
+  private static let foldedAnswerKinds: Set<VerbSearch.MatchKind> = [.exactFoldedInfinitive, .foldedConjugation]
 
   let word: String
   let findings: [Finding]
@@ -45,10 +46,10 @@ struct VerbLookup {
     let matches = VerbSearch.matches(for: trimmed, in: verbs, includeGlosses: true, conjugations: index)
 
     // An infinitive and a conjugation answer the question equally, so a word that is both names
-    // both verbs. A folded spelling answers only when nothing literal does, as it ranks in the
-    // list.
+    // both verbs. A folded spelling answers only when nothing literal does, so pêcher, typed with
+    // its accent, opens pêcher's page, and pecher names pêcher and pécher.
     let literalAnswers = matches.filter { Self.literalAnswerKinds.contains($0.kind) }
-    let answers = literalAnswers.isEmpty ? matches.filter { $0.kind == .foldedConjugation } : literalAnswers
+    let answers = literalAnswers.isEmpty ? matches.filter { Self.foldedAnswerKinds.contains($0.kind) } : literalAnswers
 
     var findings: [Finding] = answers.prefix(Self.maxNamedVerbs).map { match in
       if let conjugation = match.conjugation, match.kind.isConjugation {
@@ -80,9 +81,9 @@ struct VerbLookup {
       case .infinitive(let verb):
         let heading = Self.verbWithGloss(verb)
         let conjugations = verb.keyConjugations().map { $0.lowercased() }
-        return conjugations.isEmpty ? heading : "\(heading): \(conjugations.joined(separator: " · "))"
+        return conjugations.isEmpty ? heading : L.Lookup.keyConjugations(heading, conjugations: conjugations.joined(separator: " · "))
       case .conjugation(let conjugation, let verb):
-        return L.Lookup.conjugation(conjugation.line(pronounGender: verb.pronounGender(for: pronounGender)), infinitif: verb.citationInfinitif)
+        return L.Lookup.conjugation(conjugation.line(pronounGender: verb.pronounGender(for: pronounGender)), infinitif: Self.name(of: verb))
       case .otherMatches(let first, let count):
         let firstVerb = Self.verbWithGloss(first)
         return count == 1
@@ -90,9 +91,9 @@ struct VerbLookup {
           : L.Lookup.otherMatchesMany(word, count: count, verb: firstVerb)
       case .guess(let verb, let conjugation):
         if let conjugation {
-          return L.Lookup.guessConjugation(word, conjugation: conjugation.text, infinitif: verb.citationInfinitif)
+          return L.Lookup.guessConjugation(word, conjugation: conjugation.text, infinitif: Self.name(of: verb))
         }
-        return L.Lookup.guessVerb(word, infinitif: verb.citationInfinitif)
+        return L.Lookup.guessVerb(word, infinitif: Self.name(of: verb))
       case .nothing:
         return L.Lookup.nothing(word)
       }
@@ -101,6 +102,12 @@ struct VerbLookup {
   }
 
   private static func verbWithGloss(_ verb: Verb) -> String {
-    L.Lookup.verbWithGloss(infinitif: verb.citationInfinitif, gloss: verb.translation)
+    L.Lookup.verbWithGloss(infinitif: name(of: verb), gloss: verb.translation)
+  }
+
+  /// The infinitive as cited, with a doubled infinitive's extra letters, so that the two haïr
+  /// entries that share haïssons are told apart: "haïr (France)" and "haïr (Québec)".
+  private static func name(of verb: Verb) -> String {
+    verb.extraLetters.map { "\(verb.citationInfinitif) (\($0))" } ?? verb.citationInfinitif
   }
 }

@@ -51,7 +51,7 @@ struct VerbLookupTests {
   }
 
   @Test func testTheAnswerNamesTheCellsAndTheVerb() {
-    #expect(lookup("vais").answer(pronounGender: .masculine) == "vais: Indicatif Présent (je) of aller")
+    #expect(lookup("vais").answer(pronounGender: .masculine) == "vais\u{202F}: Indicatif Présent (je) of aller")
   }
 
   @Test func testAConjugationOfTwoVerbsNamesBothAndOpensTheSearch() {
@@ -92,6 +92,33 @@ struct VerbLookupTests {
   @Test func testAMisspellingOffersTheGuess() throws {
     #expect(lookup("venier").findings == [.guess(try verb("venir"), conjugation: nil)])
     #expect(lookup("venier").answer(pronounGender: .masculine).hasSuffix("Perhaps you meant venir."))
+  }
+
+  @Test(arguments: ["pêcher", "pécher", "brûler", "bruler", "coûter", "couter"])
+  func testAnInfinitiveWithAnAccentTwinOpensItsOwnPage(infinitif: String) throws {
+    let found = lookup(infinitif)
+    #expect(found.findings == [.infinitive(try verb(infinitif))])
+    #expect(found.destination == .verb(.key(infinitif), source: .lookup))
+  }
+
+  @Test func testAnUnaccentedSpellingOfTwoVerbsNamesBoth() throws {
+    let found = lookup("pecher")
+    #expect(found.findings.count == 2)
+    #expect(found.findings.contains(.infinitive(try verb("pêcher"))))
+    #expect(found.findings.contains(.infinitive(try verb("pécher"))))
+    #expect(found.destination == .search(text: "pecher", source: .lookup))
+  }
+
+  @Test func testAConjugationOfBothEntriesOfADoubledInfinitiveTellsThemApart() {
+    let lines = lookup("haïssons").answer(pronounGender: .masculine).components(separatedBy: "\n")
+    #expect(lines.count == 2)
+    #expect(Set(lines).count == 2)
+    #expect(lines.contains { $0.hasSuffix("of haïr (France)") })
+    #expect(lines.contains { $0.hasSuffix("of haïr (Québec)") })
+  }
+
+  @Test func testAPronounAloneGetsNoGuess() {
+    #expect(lookup("nous").findings == [.nothing])
   }
 
   @Test func testNonsenseFindsNothingAndOpensTheTrimmedSearch() {

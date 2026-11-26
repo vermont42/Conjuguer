@@ -10,13 +10,14 @@ import Foundation
 /// The one matching and ranking rule for verb search, shared by the verb list, the model list,
 /// Spotlight, and the Look Up intent so that no two of them can drift.
 enum VerbSearch {
-  // Cases run best first, and `matches` tries them in this order. Cases that share a tier rank
-  // together by frequency: a prefix, a folded prefix, a whole English meaning, and a whole
+  // Cases run best first, and `matches` tries them in this order, but `tier` alone decides
+  // rank, so the kinds are not ordered among themselves. Cases that share a tier rank together
+  // by frequency: a prefix, a folded prefix, a whole English meaning, and a whole
   // conjugation are about equally strong evidence, so "go" finds aller (whose meaning it is)
   // ahead of gonfler (which it begins), "ai" finds avoir ahead of aimer, and "réa" finds
   // réaliser ahead of réer, of which it is a passé simple. The two exact cases keep separate
   // tiers so that mater, typed, leads mâter.
-  enum MatchKind: Int, CaseIterable, Comparable {
+  enum MatchKind: CaseIterable {
     case exactInfinitive
     case exactFoldedInfinitive
     case conjugation
@@ -58,10 +59,6 @@ enum VerbSearch {
     var isConjugation: Bool {
       self == .conjugation || self == .foldedConjugation
     }
-
-    static func < (lhs: MatchKind, rhs: MatchKind) -> Bool {
-      lhs.rawValue < rhs.rawValue
-    }
   }
 
   struct Match: Equatable {
@@ -96,7 +93,7 @@ enum VerbSearch {
       return []
     }
     let frenchQuery = frenchQuery(from: trimmed)
-    let foldedQuery = fold(frenchQuery)
+    let foldedQuery = VerbSearchKeys.fold(frenchQuery)
     let queryIsMarked = foldedQuery != frenchQuery
     let englishQuery = includeGlosses ? glossQuery(from: trimmed) : nil
 
@@ -104,7 +101,7 @@ enum VerbSearch {
     var verbsByKey: [String: Verb] = [:]
     for verb in verbs {
       verbsByKey[verb.dictionaryKey] = verb
-      if let kind = kind(of: keys(for: verb), frenchQuery: frenchQuery, foldedQuery: foldedQuery, englishQuery: englishQuery) {
+      if let kind = kind(of: verb.searchKeys, frenchQuery: frenchQuery, foldedQuery: foldedQuery, englishQuery: englishQuery) {
         best[verb.id] = Match(verb: verb, kind: kind)
       }
     }
@@ -171,7 +168,7 @@ enum VerbSearch {
         id: verb.id,
         dictionaryKey: verb.dictionaryKey,
         frequency: verb.frequency,
-        foldedInfinitifBytes: keys(for: verb).foldedInfinitifBytes,
+        foldedInfinitifBytes: verb.searchKeys.foldedInfinitifBytes,
         infinitiveKey: ConjugationMap.key(verb.infinitif)
       )
     }
@@ -201,15 +198,16 @@ enum VerbSearch {
   /// wins. Nil when no verb is near enough to be a plausible misspelling, and when the task
   /// running it is cancelled, since a guess for text since edited is not wanted. Conjugations
   /// are considered only for a query that is one word once its pronouns are dropped, and only
-  /// with an index.
+  /// with an index. A query still being typed ("nous", "dis-m") gets none.
   nonisolated static func guess(
     for query: String,
     among candidates: [GuessCandidate],
     conjugations index: ConjugationIndex? = ConjugationIndex.bundled
   ) -> GuessFinding? {
     let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
-    let foldedQuery = Array(fold(frenchQuery(from: trimmed)))
-    guard !trimmed.isEmpty, !foldedQuery.isEmpty else {
+    let parsed = ConjugationQuery(trimmed)
+    let foldedQuery = Array(VerbSearchKeys.fold(frenchQuery(from: trimmed)))
+    guard !trimmed.isEmpty, !foldedQuery.isEmpty, !parsed.isStillBeingTyped else {
       return nil
     }
     // The conjugation's spelling breaks the last tie, so that a guess never depends on the
@@ -237,9 +235,9 @@ enum VerbSearch {
       }
     }
 
-    let words = ConjugationQuery(trimmed).words
+    let words = parsed.words
     if let index, words.count == 1, let word = words.first, !Task.isCancelled {
-      let foldedWord = fold(word)
+      let foldedWord = VerbSearchKeys.fold(word)
       let wordMaxDistance = min(maxGuessDistance(forQueryLength: foldedWord.count), best?.rank.distance ?? .max)
       if let nearest = index.nearestFolds(to: foldedWord, within: wordMaxDistance) {
         for conjugation in nearest.folds.flatMap(index.conjugations(folding:)) {
@@ -290,25 +288,13 @@ enum VerbSearch {
     return previousRow[rhs.count]
   }
 
-  /// Collapses what a learner without a French keyboard types: accents, the cedilla, and the
-  /// ligatures, so that etre finds être and manoeuvrer finds manœuvrer. For matching only.
-  nonisolated static func fold(_ text: String) -> String {
-    text.lowercased()
-      .replacingOccurrences(of: "œ", with: "oe")
-      .replacingOccurrences(of: "æ", with: "ae")
-      .folding(options: .diacriticInsensitive, locale: nil)
-  }
-
-  /// Infinitives are stored without their reflexive pronoun, so "se souvenir" and "s'asseoir"
-  /// mean souvenir and asseoir. A bare s' is a pronoun still being typed, so it searches as s
-  /// rather than finding nothing and sounding the trombone mid-word.
+  /// The query as an infinitive, without what `ConjugationQuery` drops: infinitives are stored
+  /// without their pronouns, so "se souvenir", "s'en aller", "y aller", and "ne pas manger" mean
+  /// souvenir, aller, and manger. A bare s' is a pronoun still being typed, so it searches as s,
+  /// toward the verbs that begin with it.
   nonisolated static func frenchQuery(from query: String) -> String {
-    let lowered = query.lowercased().replacingOccurrences(of: "’", with: "'")
-    for pronoun in ["se ", "s'"] where lowered.hasPrefix(pronoun) {
-      let stripped = lowered.dropFirst(pronoun.count).trimmingCharacters(in: .whitespaces)
-      return stripped.isEmpty ? "s" : stripped
-    }
-    return lowered
+    let words = ConjugationQuery(query).words
+    return words == ["s'"] ? "s" : words.joined(separator: " ")
   }
 
   /// Glosses are stored without a leading "to", so a learner who types "to go" means "go".
@@ -319,18 +305,6 @@ enum VerbSearch {
     }
     let stripped = lowered.dropFirst(3).trimmingCharacters(in: .whitespaces)
     return stripped.isEmpty ? lowered : stripped
-  }
-
-  /// The meanings a gloss lists, each without its parenthetical note: "can (food)" is a meaning
-  /// "can", and "hand over, pay, turn up (slang)" holds three.
-  nonisolated static func meanings(of gloss: String) -> [String] {
-    gloss.lowercased()
-      .split(whereSeparator: { $0 == "," || $0 == ";" })
-      .map { meaning in
-        meaning.replacingOccurrences(of: #"\([^)]*\)"#, with: "", options: .regularExpression)
-          .trimmingCharacters(in: .whitespaces)
-      }
-      .filter { !$0.isEmpty }
   }
 
   nonisolated static func containsWholeWord(_ word: String, in text: String) -> Bool {
@@ -346,36 +320,7 @@ enum VerbSearch {
     return false
   }
 
-  private struct Keys {
-    let infinitif: String
-    let foldedInfinitif: String
-    let foldedInfinitifBytes: [UInt8]
-    let gloss: String
-    let meanings: [String]
-  }
-
-  private static var keysCache: [String: (source: (String, String), keys: Keys)] = [:]
-
-  // Keyed by id but checked against the verb's text, so that a test's made-up verb never reads
-  // the keys of a real verb that shares its id.
-  private static func keys(for verb: Verb) -> Keys {
-    let source = (verb.infinitif, verb.translation)
-    if let cached = keysCache[verb.id], cached.source == source {
-      return cached.keys
-    }
-    let infinitif = verb.infinitif.lowercased()
-    let keys = Keys(
-      infinitif: infinitif,
-      foldedInfinitif: fold(infinitif),
-      foldedInfinitifBytes: Array(fold(infinitif).utf8),
-      gloss: verb.translation.lowercased(),
-      meanings: meanings(of: verb.translation)
-    )
-    keysCache[verb.id] = (source, keys)
-    return keys
-  }
-
-  private static func kind(of keys: Keys, frenchQuery: String, foldedQuery: String, englishQuery: String?) -> MatchKind? {
+  private static func kind(of keys: VerbSearchKeys, frenchQuery: String, foldedQuery: String, englishQuery: String?) -> MatchKind? {
     if keys.infinitif == frenchQuery {
       return .exactInfinitive
     }

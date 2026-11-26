@@ -26,17 +26,17 @@ struct VerbSearchConjugationTests {
   }
 
   @Test(arguments: [
-    ("vais", "aller", "vais: Indicatif Présent (je)"),
-    ("fait", "faire", "fait: Indicatif Présent (il) · Participe Passé"),
-    ("ai", "avoir", "ai: Indicatif Présent (je)"),
-    ("j'ai", "avoir", "ai: Indicatif Présent (je)"),
-    ("j’ai", "avoir", "ai: Indicatif Présent (je)"),
-    ("ai mangé", "manger", "ai mangé: Passé Composé (je)"),
-    ("est allée", "aller", "est allée: Passé Composé (elle)"),
-    ("me lève", "lever", "lève: Indicatif Présent (je, il) · Subjonctif Présent (je, il) · Impératif (tu)"),
-    ("etait", "être", "était: Imparfait (il)"),
-    ("vins", "venir", "vins: Passé Simple (je, tu)"),
-    ("avions fini", "finir", "avions fini: Plus-que-parfait (nous)")
+    ("vais", "aller", "vais\u{202F}: Indicatif Présent (je)"),
+    ("fait", "faire", "fait\u{202F}: Indicatif Présent (il) · Participe Passé"),
+    ("ai", "avoir", "ai\u{202F}: Indicatif Présent (je)"),
+    ("j'ai", "avoir", "ai\u{202F}: Indicatif Présent (je)"),
+    ("j’ai", "avoir", "ai\u{202F}: Indicatif Présent (je)"),
+    ("ai mangé", "manger", "ai mangé\u{202F}: Passé Composé (je)"),
+    ("est allée", "aller", "est allée\u{202F}: Passé Composé (elle)"),
+    ("me lève", "lever", "lève\u{202F}: Indicatif Présent (je, il) · Subjonctif Présent (je, il) · Impératif (tu)"),
+    ("etait", "être", "était\u{202F}: Imparfait (il)"),
+    ("vins", "venir", "vins\u{202F}: Passé Simple (je, tu)"),
+    ("avions fini", "finir", "avions fini\u{202F}: Plus-que-parfait (nous)")
   ])
   func testConjugationFindsItsVerbFirst(query: String, verb: String, line: String) {
     #expect(infinitives(query).first == verb)
@@ -47,8 +47,8 @@ struct VerbSearchConjugationTests {
     let results = matches("suis")
     #expect(results.map(\.verb.infinitif) == ["être", "suivre"])
     #expect(results.map { $0.conjugation?.line(pronounGender: .masculine) } == [
-      "suis: Indicatif Présent (je)",
-      "suis: Indicatif Présent (je, tu) · Impératif (tu)"
+      "suis\u{202F}: Indicatif Présent (je)",
+      "suis\u{202F}: Indicatif Présent (je, tu) · Impératif (tu)"
     ])
     #expect(results.allSatisfy { $0.kind == .conjugation })
   }
@@ -108,27 +108,50 @@ struct VerbSearchConjugationTests {
     #expect(Array(infinitives("crois").prefix(3)) == ["croire", "croiser", "croître"])
   }
 
-  @Test(arguments: [
-    ("je me suis levé", "lever", "me suis levé: Passé Composé (je)"),
-    ("elles se sont levées", "lever", "se sont levées: Passé Composé (elles)"),
-    ("nous nous sommes levés", "lever", "nous sommes levés: Passé Composé (nous)"),
-    ("s'est assis", "asseoir", "s'est assis: Passé Composé (il)"),
-    ("elle s'est souvenue", "souvenir", "est souvenue: Passé Composé (elle)"),
-    ("je me souviens", "souvenir", "souviens: Indicatif Présent (je, tu) · Impératif (tu)"),
-    ("je ne sais pas", "savoir", "sais: Indicatif Présent (je, tu)"),
-    ("je n'ai pas mangé", "manger", "ai mangé: Passé Composé (je)"),
-    ("il y a", "avoir", "a: Indicatif Présent (il)"),
-    ("que je sois", "être", "sois: Subjonctif Présent (je, tu) · Impératif (tu)"),
-    ("lève-toi", "lever", "lève: Indicatif Présent (je, il) · Subjonctif Présent (je, il) · Impératif (tu)"),
-    ("souviens-toi", "souvenir", "souviens-toi: Impératif (tu)"),
-    ("a-t-il", "avoir", "a: Indicatif Présent (il)"),
-    ("vas-tu", "aller", "vas: Indicatif Présent (tu)"),
-    ("etait allee", "aller", "était allée: Plus-que-parfait (elle)"),
-    ("allées", "aller", "allées: Participe Passé (accordé)")
-  ])
+  nonisolated private static let sentences: [(String, String, String)] = [
+    ("je me suis levé", "lever", "me suis levé\u{202F}: Passé Composé (je)"),
+    ("elles se sont levées", "lever", "se sont levées\u{202F}: Passé Composé (elles)"),
+    ("nous nous sommes levés", "lever", "nous nous sommes levés\u{202F}: Passé Composé (nous)"),
+    ("vous vous êtes levés", "lever", "vous vous êtes levés\u{202F}: Passé Composé (vous)"),
+    ("s'est assis", "asseoir", "s'est assis\u{202F}: Passé Composé (il)"),
+    ("elle s'est souvenue", "souvenir", "est souvenue\u{202F}: Passé Composé (elle)"),
+    ("je me souviens", "souvenir", "souviens\u{202F}: Indicatif Présent (je, tu) · Impératif (tu)"),
+    ("je ne sais pas", "savoir", "sais\u{202F}: Indicatif Présent (je, tu)"),
+    ("je n'ai pas mangé", "manger", "ai mangé\u{202F}: Passé Composé (je)"),
+    ("il y a", "avoir", "a\u{202F}: Indicatif Présent (il)"),
+    ("que je sois", "être", "sois\u{202F}: Subjonctif Présent (je, tu) · Impératif (tu)"),
+    ("lève-toi", "lever", "lève\u{202F}: Indicatif Présent (je, il) · Subjonctif Présent (je, il) · Impératif (tu)"),
+    ("souviens-toi", "souvenir", "souviens-toi\u{202F}: Impératif (tu)"),
+    ("debrouille-toi", "débrouiller", "débrouille-toi\u{202F}: Impératif (tu)"),
+    ("a-t-il", "avoir", "a\u{202F}: Indicatif Présent (il)"),
+    ("vas-tu", "aller", "vas\u{202F}: Indicatif Présent (tu)"),
+    ("as-tu mangé", "manger", "as mangé\u{202F}: Passé Composé (tu)"),
+    ("est-il allé", "aller", "est allé\u{202F}: Passé Composé (il)"),
+    ("a-t-elle fini", "finir", "a fini\u{202F}: Passé Composé (il)"),
+    ("c'est", "être", "est\u{202F}: Indicatif Présent (il)"),
+    ("ce sont", "être", "sont\u{202F}: Indicatif Présent (ils)"),
+    ("ça va", "aller", "va\u{202F}: Indicatif Présent (il) · Impératif (tu)"),
+    ("cela suffit", "suffire", "suffit\u{202F}: Indicatif Présent (il) · Passé Simple (il)"),
+    ("est-ce", "être", "est\u{202F}: Indicatif Présent (il)"),
+    ("qu'est-ce", "être", "est\u{202F}: Indicatif Présent (il)"),
+    ("c'était", "être", "était\u{202F}: Imparfait (il)"),
+    ("etait allee", "aller", "était allée\u{202F}: Plus-que-parfait (elle)"),
+    ("allées", "aller", "allées\u{202F}: Participe Passé (accordé)")
+  ]
+
+  @Test(arguments: sentences)
   func testSentenceFindsItsVerb(query: String, verb: String, line: String) {
     #expect(infinitives(query).first == verb)
     #expect(firstLine(query) == line)
+  }
+
+  // A link's match carries a row's text, and the verb page reads it back as search does, so
+  // the text must name the cells it was shown with.
+  @Test(arguments: sentences.map(\.0))
+  func testARowsTextReadsBackAsTheSameCells(query: String) throws {
+    let match = try #require(matches(query).first)
+    let conjugation = try #require(match.conjugation)
+    #expect(MarkedConjugations(text: conjugation.text, on: match.verb) == conjugation.marks)
   }
 
   @Test func testPassiveIsNoCompoundTense() {
@@ -137,7 +160,7 @@ struct VerbSearchConjugationTests {
 
   @Test func testNamesTheThirdPersonAsTheSettingDoes() {
     let line = matches("va").first?.conjugation?.line(pronounGender: .feminine)
-    #expect(line == "va: Indicatif Présent (elle) · Impératif (tu)")
+    #expect(line == "va\u{202F}: Indicatif Présent (elle) · Impératif (tu)")
   }
 
   @Test func testModelSearchIgnoresConjugations() {
@@ -182,11 +205,29 @@ struct VerbSearchConjugationTests {
     ("nous", true),
     ("je me", true),
     ("qu'", true),
+    ("c'", true),
+    ("ça", true),
+    ("dis-", true),
+    ("dis-m", true),
+    ("dis-mo", true),
+    ("lève-to", true),
+    ("a-t-", true),
+    ("a-t-i", true),
+    ("tu dis-m", true),
     ("je vais", false),
-    ("venir", false)
+    ("venir", false),
+    ("dis-moi", false),
+    ("arc-b", false),
+    ("xq-moi", false)
   ])
-  func testPronounsAloneAreStillBeingTyped(query: String, expected: Bool) {
-    #expect(ConjugationQuery(query).isOnlyPronouns == expected)
+  func testPronounsAndAnUnfinishedHyphenAreStillBeingTyped(query: String, expected: Bool) {
+    #expect(ConjugationQuery(query).isStillBeingTyped == expected)
+  }
+
+  @Test(arguments: ["nous", "j'", "dis-", "dis-m", "dis-mo", "lève-to"])
+  func testWhatIsStillBeingTypedGetsNoGuess(query: String) {
+    #expect(matches(query).isEmpty)
+    #expect(VerbSearch.guess(for: query, in: Self.verbs) == nil)
   }
 
   @Test(arguments: [
@@ -196,6 +237,11 @@ struct VerbSearchConjugationTests {
     ("nous nous sommes levés", ["sommes", "levés"], "nous"),
     ("nous allons", ["allons"], nil),
     ("je ne mange plus", ["mange"], nil),
+    ("c'est", ["est"], nil),
+    ("ça va", ["va"], nil),
+    ("y aller", ["aller"], nil),
+    ("s'en aller", ["aller"], "s'"),
+    ("ne pas manger", ["manger"], nil),
     ("tu", ["tu"], nil)
   ] as [(String, [String], String?)])
   func testQueryDropsWhatSurroundsAConjugation(query: String, words: [String], reflexive: String?) {
@@ -204,7 +250,7 @@ struct VerbSearchConjugationTests {
     #expect(parsed.reflexivePronoun == reflexive)
   }
 
-  @Test(arguments: [("lève-toi", "lève"), ("a-t-il", "a"), ("arc-boutait", nil), ("vas", nil)] as [(String, String?)])
+  @Test(arguments: [("lève-toi", "lève"), ("a-t-il", "a"), ("est-ce", "est"), ("arc-boutait", nil), ("vas", nil)] as [(String, String?)])
   func testHyphenatedPronounsLeaveTheVerb(word: String, expected: String?) {
     #expect(ConjugationQuery.verbPart(ofHyphenated: word) == expected)
   }
@@ -219,9 +265,9 @@ struct VerbSearchConjugationTests {
   }
 
   @Test(arguments: [
-    ("finnissons", "finir", "finissons: Indicatif Présent (nous) · Impératif (nous)"),
-    ("sommmes", "être", "sommes: Indicatif Présent (nous)"),
-    ("je finnissons", "finir", "finissons: Indicatif Présent (nous) · Impératif (nous)")
+    ("finnissons", "finir", "finissons\u{202F}: Indicatif Présent (nous) · Impératif (nous)"),
+    ("sommmes", "être", "sommes\u{202F}: Indicatif Présent (nous)"),
+    ("je finnissons", "finir", "finissons\u{202F}: Indicatif Présent (nous) · Impératif (nous)")
   ])
   func testMisspelledConjugationGuessesItsVerb(query: String, verb: String, line: String) {
     #expect(matches(query).isEmpty)

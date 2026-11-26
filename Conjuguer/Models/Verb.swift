@@ -30,6 +30,7 @@ struct Verb: Identifiable, Hashable {
   let hitsAreProvisional: Bool
   let extraLetters: String?
   let defectGroupId: String?
+  let searchKeys: VerbSearchKeys
 
   nonisolated init(
     infinitif: String,
@@ -61,6 +62,7 @@ struct Verb: Identifiable, Hashable {
     self.hitsAreProvisional = hitsAreProvisional
     self.extraLetters = extraLetters
     self.defectGroupId = defectGroupId
+    searchKeys = VerbSearchKeys(infinitif: infinitif, translation: translation)
   }
 
   nonisolated func withFrequency(_ frequency: Int) -> Verb {

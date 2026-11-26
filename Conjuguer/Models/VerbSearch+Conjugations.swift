@@ -32,18 +32,19 @@ extension VerbSearch {
 
   /// A hyphenated word is looked up whole first, since arc-boutait is one conjugation, and then
   /// by its verb alone: lève-toi is lève, and vas-tu is vas. Whole, souviens-toi matches only
-  /// souvenir's impératif, as the page shows it.
+  /// souvenir's impératif, as the page shows it. The pronouns go back onto the verb as the app
+  /// spells it, so debrouille-toi is débrouille-toi, débrouiller's impératif, too.
   private static func simpleMatches(for word: String, index: ConjugationIndex, verbNamed: (String) -> Verb?) -> [Match] {
-    var lookups = [(key: word, confirmation: word)]
+    var lookups = [(key: word, pronouns: "")]
     if let verbPart = ConjugationQuery.verbPart(ofHyphenated: word) {
-      lookups.append((verbPart, word))
-      lookups.append((verbPart, verbPart))
+      lookups.append((verbPart, String(word.dropFirst(verbPart.count))))
+      lookups.append((verbPart, ""))
     }
     var found: [Match] = []
     var foundVerbs: Set<String> = []
     for lookup in lookups {
       for spelling in index.spellings(of: lookup.key) {
-        let confirmation = lookup.key == lookup.confirmation ? spelling.conjugation : ConjugationMap.key(lookup.confirmation)
+        let confirmation = spelling.conjugation + ConjugationMap.key(lookup.pronouns)
         for verbKey in index.map.verbs(for: spelling.conjugation) {
           guard let verb = verbNamed(verbKey), !foundVerbs.contains(verb.id) else {
             continue
@@ -85,7 +86,7 @@ extension VerbSearch {
           var cells = verb.conjugations(matching: text).filter(\.tense.isCompound)
           if cells.isEmpty, let reflexivePronoun {
             cells = pronominalCells(of: verb, auxiliary: auxiliary.text, participle: participleSpelling.conjugation)
-            text = reflexivePronoun.hasSuffix("'") ? reflexivePronoun + text : "\(reflexivePronoun) \(text)"
+            text = Self.pronominalText(text, reflexivePronoun: reflexivePronoun)
           }
           guard !cells.isEmpty else {
             continue
@@ -108,11 +109,25 @@ extension VerbSearch {
     return found
   }
 
+  /// The text of a pronominal compound, with its reflexive pronoun, so that the verb page reads
+  /// it back as search did: "me suis levé", "s'est assis", and "nous nous sommes levés", whose
+  /// first nous is the subject that `ConjugationQuery` dropped. One nous would read as a passive.
+  private static func pronominalText(_ text: String, reflexivePronoun: String) -> String {
+    if reflexivePronoun.hasSuffix("'") {
+      return reflexivePronoun + text
+    }
+    if reflexivePronoun == "nous" || reflexivePronoun == "vous" {
+      return "\(reflexivePronoun) \(reflexivePronoun) \(text)"
+    }
+    return "\(reflexivePronoun) \(text)"
+  }
+
   /// Every spelling of the auxiliary's words, as typed and folded, so that "etait allee" finds
-  /// "était allée". A word the map lacks stays as typed, and the verb's cells reject it.
-  private static func auxiliarySpellings(of words: [String], index: ConjugationIndex) -> [(text: String, isFolded: Bool)] {
+  /// "était allée". An inverted auxiliary is looked up by its verb part, so that "as-tu mangé" is
+  /// "as mangé". A word the map lacks stays as typed, and the verb's cells reject it.
+  private static func auxiliarySpellings(of hyphenatedWords: [String], index: ConjugationIndex) -> [(text: String, isFolded: Bool)] {
     var spellings: [(text: String, isFolded: Bool)] = [("", false)]
-    for word in words {
+    for word in hyphenatedWords.map({ ConjugationQuery.verbPart(ofHyphenated: $0) ?? $0 }) {
       let wordSpellings = index.spellings(of: word)
       let options = wordSpellings.isEmpty ? [ConjugationIndex.Spelling(conjugation: ConjugationMap.key(word), isFolded: false)] : wordSpellings
       spellings = spellings.flatMap { prefix in

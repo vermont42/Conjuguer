@@ -58,7 +58,9 @@ enum FormsJSON {
           // a form of avoir or être, and mapping it to every verb would make every "j'ai …" a
           // false hit.
           for alternate in conjugation.split(separator: "/") {
-            let words = alternate.split(separator: " ").map { normalize(String($0)) }
+            // Lowercase and NFC, so that forms compare equal to NFC-normalized corpus tokens however
+            // their accents were encoded upstream.
+            let words = alternate.split(separator: " ").map { ConjugationMap.key($0) }
             let forms = tense.isCompound ? Array(words.suffix(1)) : words
             for token in forms where token.count >= minFormLength {
               index[token, default: []].insert(id)
@@ -147,11 +149,5 @@ enum FormsJSON {
     case .thirdPlural:
       return "thirdPlural"
     }
-  }
-
-  // Lowercase and NFC, so that forms compare equal to NFC-normalized corpus tokens however
-  // their accents were encoded upstream.
-  private static func normalize(_ string: String) -> String {
-    string.lowercased().precomposedStringWithCanonicalMapping
   }
 }

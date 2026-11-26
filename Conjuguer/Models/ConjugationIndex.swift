@@ -31,7 +31,7 @@ nonisolated struct ConjugationIndex: Sendable {
         foldBytesByLength[key.utf8.count, default: []].append(contentsOf: key.utf8)
         continue
       }
-      let fold = VerbSearch.fold(key)
+      let fold = VerbSearchKeys.fold(key)
       let isNewFold = accentedKeysByFold[fold] == nil && map.verbsByConjugation[fold] == nil
       accentedKeysByFold[fold, default: []].append(key)
       if isNewFold {
@@ -57,7 +57,7 @@ nonisolated struct ConjugationIndex: Sendable {
   func spellings(of word: String) -> [Spelling] {
     let key = ConjugationMap.key(word)
     let literal = map.verbsByConjugation[key] == nil ? [] : [Spelling(conjugation: key, isFolded: false)]
-    return literal + conjugations(folding: VerbSearch.fold(key))
+    return literal + conjugations(folding: VerbSearchKeys.fold(key))
       .filter { $0 != key }
       .map { Spelling(conjugation: $0, isFolded: true) }
   }

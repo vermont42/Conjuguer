@@ -7026,3 +7026,49 @@ Ten tests pin the card's rules: chosen once per opening, a dismissal before the 
 verb and one after does nothing, a reveal counts once, a signal goes once per offer, and a stale
 offer disappears. With the stale check removed, the tests that cover it failed, which is the
 proof that they test something. 1,010 tests now.
+
+## Teaching Search the Sentences Learners Type (2026-11-26)
+
+Phase 7 of the [browse fixes plan](../plans/verb_browse_fixes.md) was about what the verb search
+understands. The review had listed a dozen small failures, and most came down to one thing: search
+had two pronoun strippers, and they had drifted. The conjugation side knew that "je ne sais pas"
+means sais and "je me suis levé" means "suis levé". The infinitive side knew only "se " and "s'".
+So "y aller", "s'en aller", "me lever", and "ne pas manger" sounded the sad trombone, and then the
+guess, which used the other stripper, offered the exact infinitive at distance zero, as if the
+learner had misspelled it. Now the infinitive side reads the same `ConjugationQuery` the
+conjugation side does, and those four find their verbs as exact matches.
+
+The rest was teaching that one stripper more French. "c'est", "ce sont", "ça va", and "cela
+suffit" found nothing, because ce and ça were not subjects. "est-ce" found nothing, because ce
+could not follow a hyphen. "vas-tu" worked but "as-tu mangé" did not, because the auxiliary of a
+compound was looked up as typed. Each was a line or two. I added "ca" for ça without its cedilla,
+since a learner on an English keyboard types it.
+
+Two fixes were about the text a row shows, and they had the same cause: a row's text is not only
+something to read. Look Up a Verb sends it as a link's `match`, and the verb page parses it again
+to know which cells to mark. "nous nous sommes levés" lost its first nous on the way to the row,
+and "nous sommes levés" reads as a passive, which the search deliberately refuses, so the page
+opened unmarked. The new test runs every sentence the suite knows back through that parser and
+expects the same cells it was shown with. It failed for nous and vous before the fix.
+
+Typing hyphenated forms sounded the trombone at the hyphen: "dis-" and "dis-m" found nothing on
+the way to "dis-moi". A query is now "still being typed" when its last word ends in a hyphen or in
+the start of a pronoun after one, and such a query gets neither the trombone nor a guess. I tried
+letting "dis-" search as dis, which would show dire while the learner types. I dropped it once I
+saw that "entre-t", on its way to entre-tuer, would then rank entrer first.
+
+Look Up a Verb had a quieter bug. It counted an infinitive found after folding away accents as a
+literal answer, so "pêcher", typed with its accent, answered with both pêcher and pécher and opened
+the search instead of the page. That happened for all 26 pairs in the data that differ only by an
+accent, among them coûter and couter, the 1990 spelling. And "haïssons" gave two identical lines,
+one for each entry of haïr. They now name their extra letters, as the rest of the app does.
+
+Two pieces of housekeeping went with it. The search line now reads "vais : Indicatif Présent
+(je)", with a narrow no-break space before the colon, because the line is French in either
+interface language. And each verb's folded keys are now computed when the verb is made, which
+removed a cache that checked every entry against the verb's text on every keystroke so that a
+test's invented verb could not read a real one's keys. That moved the fold into the conjugation
+core, which the build-time tool compiles too. So the phase ended by running the tool from the old
+code and from the new and checking that its three dumps came out byte-identical. They did.
+
+The tests came first and ran against the old code, recording 114 issues. 1,019 tests now.

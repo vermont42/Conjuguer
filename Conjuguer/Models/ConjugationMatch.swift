@@ -62,9 +62,7 @@ extension Verb {
   }
 
   private static func normalizedConjugation(_ text: String) -> String {
-    text
-      .lowercased()
-      .precomposedStringWithCanonicalMapping
+    ConjugationMap.key(text)
       .split(whereSeparator: \.isWhitespace)
       .joined(separator: " ")
   }

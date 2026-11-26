@@ -224,11 +224,13 @@ final class VerbSearchModel {
     let matches = isSearching ? VerbSearch.matches(for: query, in: verbs, includeGlosses: true) : []
     results = matches.enumerated().map { Result(match: $1, position: $0) }
     verbCount = Set(matches.map(\.verb.infinitif)).count
-    // "j'" and "nous" are a conjugation still being typed, and the trombone would sound mid-word.
-    if failedSearchSound.searchChanged(hasFailed: hasFailed, isStillTyping: ConjugationQuery(query).isOnlyPronouns) {
+    // "j'", "nous", and "dis-m" are a conjugation still being typed, and neither the trombone
+    // nor a guess is wanted mid-word.
+    let isStillTyping = ConjugationQuery(query).isStillBeingTyped
+    if failedSearchSound.searchChanged(hasFailed: hasFailed, isStillTyping: isStillTyping) {
       soundPlayer.play(.randomSadTrombone)
     }
-    if hasFailed {
+    if hasFailed && !isStillTyping {
       startGuess()
     }
   }

@@ -176,6 +176,16 @@ struct VerbSearchModelTests {
     #expect(soundPlayer.playCount == 1)
   }
 
+  @Test func typingTowardAHyphenatedFormSoundsNothingAndGuessesNothing() {
+    let search = model()
+    for text in ["d", "di", "dis", "dis-", "dis-m", "dis-mo", "dis-moi"] {
+      search.text = text
+      #expect(search.guessTask == nil, "\(text)")
+    }
+    #expect(soundPlayer.playCount == 0)
+    #expect(search.results.first?.match.verb.infinitif == "dire")
+  }
+
   @Test func openingAResultReportsWhichAndWhere() throws {
     let search = model()
     search.text = "vais"

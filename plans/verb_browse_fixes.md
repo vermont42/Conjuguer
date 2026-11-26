@@ -34,7 +34,7 @@ empty until it is committed.
 | 4 | Done | 2026-11-25 | `8f31dfe` | S2 | No |
 | 5 | Done | 2026-11-26 | `da22b7e` | B3, B6, B18, B23, B24, B26, S3 (the search model), D5, T1 (the search), K-F1, K-S8 | Yes |
 | 6 | Done | 2026-11-26 | `cbb5b60` | B9, S3 (the rest), D4, D7, T1 (the card), the stale review card | Yes |
-| 7 | Not started | | | B7, B13, B14, B15, B21, B22, B25 (the row), B30, G1, G2, G3, S10 | Yes |
+| 7 | Awaiting Josh | 2026-11-26 | | B7, B13, B14, B15, B21, B22, B25 (the row), B30, G1, G2, G3, S10 | Yes |
 | 8 | Not started | | | B16, B19, S12, the progress decision, the migration, T2 | Yes |
 | 9 | Not started | | | B12, B27, B29, S4, S4a, S5, S6, D8, D9, T1 (the visit), K-G6 | Yes |
 | 10 | Not started | | | B17, B25 (the labels), S8, S13, S14, D1, D2, D3, D6, T6 | Yes |
@@ -696,6 +696,68 @@ slowly with the sound on, nous alone, "nous nous sommes levés" opened onto leve
 belt, and Look Up a Verb for pêcher and for haïssons.
 
 **How it differed:**
+
+- **Tests first.** The new and changed tests ran against the old code before any fix and recorded
+  114 issues across `VerbSearchConjugationTests`, `VerbSearchTests`, `VerbLookupTests`, and
+  `VerbSearchModelTests`; every finding of the phase had at least one. To compile them, the old
+  `ConjugationQuery` briefly carried an `isStillBeingTyped` that only restated `isOnlyPronouns`.
+- **One stripper (G3, S10).** `VerbSearch.frenchQuery` is now `ConjugationQuery`'s words joined,
+  with the bare "s'" still searching as s. So the infinitive side drops subjects, que, y, en,
+  reflexives, and negation too. A side effect worth knowing: "je me" searches as "me" and lists
+  mener and mettre, and "il y a" lists the a- verbs under avoir, exactly as "me" and "a" typed
+  alone do. Before, both found nothing on the infinitive side.
+- **G1.** ce, c', ça, cela, and also **ca** (ça without its cedilla, which a learner without a
+  French keyboard types) are subjects, and ce follows a hyphen. "cela suffit", "qu'est-ce", and
+  "c'était" are pinned beside the plan's four.
+- **G2** reads an auxiliary through `ConjugationQuery.verbPart(ofHyphenated:)`, so "a-t-elle fini"
+  works as well as "as-tu mangé" and "est-il allé". The row names the auxiliary without its
+  pronoun ("as mangé : Passé Composé (tu)"), which `MarkedConjugations` reads back.
+- **B13 and B14** are one property, `ConjugationQuery.isStillBeingTyped`, which replaced
+  `isOnlyPronouns`: only pronouns, or a last word that ends in a hyphen or in the start of a
+  pronoun after one. `VerbSearch.guess` returns nil for it (so Look Up a Verb gives "nous" no
+  guess either), and `VerbSearchModel` neither sounds the trombone nor starts a guess task. I
+  considered searching "dis-" as dis, so that dire would show while the learner types. I left it
+  out, because "entre-t" would then rank entrer ahead of entre-tuer. The empty state still shows
+  for "dis-m", without a guess.
+- **B22.** A hyphenated word's pronouns go back onto the verb's own spelling, so the confirmation
+  is "débrouille-toi" rather than the typed "debrouille-toi". The whole-word lookup had failed
+  because the folded spelling never reached the confirmation.
+- **B7 and T4.** A pronominal compound with nous or vous writes the pronoun twice.
+  `testARowsTextReadsBackAsTheSameCells` runs every sentence row (28 of them) back through
+  `MarkedConjugations(text:on:)`. On the old code it failed for nous and vous, and for every query
+  the old code could not find.
+- **B30.** Literal answers are `[.exactInfinitive, .conjugation]` and the folded ones
+  `[.exactFoldedInfinitive, .foldedConjugation]`. Pinned with pêcher, pécher, and two 1990 pairs,
+  brûler/bruler and coûter/couter, and pecher still names both.
+- **B21: told apart, not merged.** Every Look Up answer names a doubled infinitive with its extra
+  letters ("haïr (France)", "haïr (Québec)"), the way the rest of the app names them.
+- **B25.** `MatchedConjugation.line` puts U+202F before its colon. An infinitive's Look Up answer
+  ("aller, “go”: va · est allé · ira") also typeset its colon in Swift, and its French heading uses
+  guillemets, so the colon moved into the catalog as `Lookup.keyConjugations`, with U+202F in
+  French. That is the one new string.
+- **`VerbSearchKeys`** (`Conjuguer/Models/VerbSearchKeys.swift`) holds the lowercased and folded
+  infinitive, its bytes for the guess, the lowercased gloss, and its meanings. `Verb.init` builds it,
+  so a test's made-up verb carries its own keys and `keysCache` went. `fold` and `meanings(of:)`
+  moved there from `VerbSearch`, because `Verb.swift` compiles into `ConjugationMapTool`. The
+  tool's membership list grew to 25 files, and `CLAUDE.md` and `docs/feature_architecture.md` say
+  so.
+- **Normalization (S10).** `AnswerSpelling.normalized`, `ConjugationMatch`'s normalization, and
+  `FormsJSON` call `ConjugationMap.key`. The subject pronouns stay listed in both
+  `ConjugationQuery` and `AnswerSpelling`: grading accepts a person's own pronouns, and search
+  drops ce and ça, which grading must not accept.
+- **S9's search items.** `MatchKind` lost `Comparable` and its raw values, and its comment says
+  `tier` alone ranks. `ModelSearch.seenVerbs` is `modelsFoundByAVerb`.
+- **The tool's output.** `scripts/write_forms_json.sh` was run from a worktree at `HEAD` and from
+  the working tree, each into the scratchpad. All three dumps came out byte-identical. The dumps
+  in `corpus/working` are gitignored and dated 2026-11-22, and they already differed from `HEAD`'s
+  output, so they were left alone rather than compared.
+- **Checks.** 1,019 tests in 96 suites (1,010 plus 9), `ConjugationMapTests`' comparison with a
+  fresh build included. SwiftLint is clean on the changed files, and `check_docs.py` passes. No
+  signal or parameter changed. On the iPhone simulator, search links for c'est, "as-tu mangé",
+  "nous nous sommes levés", "y aller", and dis-m showed être, manger, lever, aller, and the empty
+  state without a guess. `verb/lever?match=nous nous sommes levés` opened lever with "avons levé"
+  marked. On the iPad, "as-tu mangé" showed manger's card with the narrow space. The links recorded
+  opens of lever on the iPhone simulator.
 
 ## Phase 8: The Learner's Record and the Widget's Draw
 

@@ -45,6 +45,20 @@ struct VerbSearchTests {
     #expect(infinitives(query).first == expected)
   }
 
+  @Test(arguments: [
+    ("y aller", "aller"),
+    ("s'en aller", "aller"),
+    ("me lever", "lever"),
+    ("ne pas manger", "manger"),
+    ("se souvenir", "souvenir"),
+    ("s’asseoir", "asseoir")
+  ])
+  func testAnInfinitiveWithItsPronounsFindsItExactly(query: String, expected: String) throws {
+    let first = try #require(VerbSearch.matches(for: query, in: frequencyVerbs, includeGlosses: true).first)
+    #expect(first.verb.infinitif == expected)
+    #expect(first.kind == .exactInfinitive)
+  }
+
   @Test(arguments: ["etre", "venir", "go", "eat", "pecher"])
   func testRankingIgnoresTheListOrder(query: String) {
     #expect(infinitives(query, in: alphabeticVerbs) == infinitives(query))
@@ -147,7 +161,7 @@ struct VerbSearchTests {
     ("ôter", "oter")
   ])
   func testFold(text: String, expected: String) {
-    #expect(VerbSearch.fold(text) == expected)
+    #expect(VerbSearchKeys.fold(text) == expected)
   }
 
   @Test(arguments: [
@@ -156,7 +170,13 @@ struct VerbSearchTests {
     ("S’Asseoir", "asseoir"),
     ("s'", "s"),
     ("se", "se"),
-    ("sentir", "sentir")
+    ("sentir", "sentir"),
+    ("y aller", "aller"),
+    ("s'en aller", "aller"),
+    ("me lever", "lever"),
+    ("ne pas manger", "manger"),
+    ("nous", "nous"),
+    ("arc-bouter", "arc-bouter")
   ])
   func testFrenchQuery(query: String, expected: String) {
     #expect(VerbSearch.frenchQuery(from: query) == expected)
@@ -173,8 +193,19 @@ struct VerbSearchTests {
   }
 
   @Test func testMeaningsDropParentheticalNotes() {
-    #expect(VerbSearch.meanings(of: "hand over, pay, turn up (slang)") == ["hand over", "pay", "turn up"])
-    #expect(VerbSearch.meanings(of: "can (food)") == ["can"])
+    #expect(VerbSearchKeys.meanings(of: "hand over, pay, turn up (slang)") == ["hand over", "pay", "turn up"])
+    #expect(VerbSearchKeys.meanings(of: "can (food)") == ["can"])
+  }
+
+  @Test func testAParentheticalIsDroppedBeforeTheGlossIsSplit() throws {
+    let remercier = try #require(Verb.verbs["remercier"])
+    let desserrer = try #require(Verb.verbs["desserrer"])
+    #expect(VerbSearchKeys.meanings(of: remercier.translation) == ["thank", "fire"])
+    #expect(VerbSearchKeys.meanings(of: desserrer.translation) == ["loosen"])
+    let fire = VerbSearch.matches(for: "fire", in: frequencyVerbs, includeGlosses: true)
+    #expect(fire.first { $0.verb == remercier }?.kind == .glossMeaning)
+    let belt = VerbSearch.matches(for: "belt", in: frequencyVerbs, includeGlosses: true)
+    #expect(belt.first { $0.verb == desserrer }?.kind == .wholeWordGloss)
   }
 
   @Test func testWholeWord() {

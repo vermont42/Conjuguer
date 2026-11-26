@@ -25,7 +25,7 @@ enum ModelSearch {
     var exemplarMatches: [Match] = []
     var verbMatches: [Match] = []
     var seenExemplars: Set<String> = []
-    var seenVerbs: Set<String> = []
+    var modelsFoundByAVerb: Set<String> = []
 
     for match in VerbSearch.matches(for: query, in: verbs, includeGlosses: false, conjugations: nil) {
       guard let model = modelsById[match.verb.model] else {
@@ -35,7 +35,7 @@ enum ModelSearch {
         if seenExemplars.insert(model.id).inserted {
           exemplarMatches.append(Match(model: model, verb: nil))
         }
-      } else if seenVerbs.insert(model.id).inserted {
+      } else if modelsFoundByAVerb.insert(model.id).inserted {
         verbMatches.append(Match(model: model, verb: match.verb))
       }
     }

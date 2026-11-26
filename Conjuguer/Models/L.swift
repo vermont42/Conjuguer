@@ -2425,7 +2425,12 @@ enum L {
       String(localized: "Lookup.verbWithGloss", defaultValue: "\(infinitif), “\(gloss)”")
     }
 
-    /// `line` is a search row's: "vais: Indicatif Présent (je)".
+    /// "aller, “go”: va · est allé · ira", an infinitive's answer.
+    static func keyConjugations(_ heading: String, conjugations: String) -> String {
+      String(localized: "Lookup.keyConjugations", defaultValue: "\(heading): \(conjugations)")
+    }
+
+    /// `line` is a search row's: "vais : Indicatif Présent (je)".
     static func conjugation(_ line: String, infinitif: String) -> String {
       String(localized: "Lookup.conjugation", defaultValue: "\(line) of \(infinitif)")
     }

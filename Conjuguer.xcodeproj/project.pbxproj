@@ -89,6 +89,7 @@
 				Models/VerbModel.swift,
 				Models/VerbModelParser.swift,
 				Models/VerbParser.swift,
+				Models/VerbSearchKeys.swift,
 				Models/XMLDataParser.swift,
 				Utils/Log.swift,
 				Utils/Util.swift,

@@ -7,7 +7,7 @@
 
 import AppIntents
 
-/// Says which verb a word belongs to ("vais: Indicatif Présent (je) of aller"), then opens the
+/// Says which verb a word belongs to ("vais : Indicatif Présent (je) of aller"), then opens the
 /// app: on that verb's page when the word settles one verb, and otherwise on the verb list
 /// searched for the word. Answering before opening means the answer arrives even when the
 /// learner only wanted to hear it.

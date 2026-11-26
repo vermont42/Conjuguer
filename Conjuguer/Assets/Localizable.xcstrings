@@ -3752,6 +3752,23 @@
         }
       }
     },
+    "Lookup.keyConjugations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@: %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ : %2$@"
+          }
+        }
+      }
+    },
     "Lookup.nothing" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -266,7 +266,7 @@ type. Practical consequences:
   should *not* ship — they'd be picked up automatically; exclude them with a membership
   exception or keep them outside the folder.
 - **One target borrows app files: `ConjugationMapTool`**, a macOS command-line tool whose own
-  folder is synced, compiles the conjugation core (24 files of `Conjuguer/Models` and
+  folder is synced, compiles the conjugation core (25 files of `Conjuguer/Models` and
   `Conjuguer/Utils`) through a membership exception on the `Conjuguer` folder. A file the core
   newly needs must be added to that list in `project.pbxproj`, and a core file must not reach
   `Current`, `L`, or SwiftUI: such members go in `Conjuguer/Models/ConjugationLabels.swift`. The

@@ -103,7 +103,7 @@ from `conjugationParts`). The lowercasing matters: the display marks irregular l
 personless card (participes and radical du futur) gives each cell its own row and element, so
 VoiceOver reads allé, allant, and ir one at a time, each lowercased the same way. Any new place
 that shows a conjugation should give VoiceOver the lowercased spoken form, as the review card's key
-conjugations do. A search result's match line ("vais: Indicatif Présent (je)") needs nothing
+conjugations do. A search result's match line ("vais : Indicatif Présent (je)") needs nothing
 extra: it is built from the map's lowercase keys and marked French.
 
 A cell that a search matched carries the accessibility value "Matches your search" ("Correspond à

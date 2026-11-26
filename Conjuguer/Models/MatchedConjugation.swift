@@ -45,9 +45,11 @@ struct MatchedConjugation: Hashable {
       .joined(separator: " · ")
   }
 
-  /// "vais: Indicatif Présent (je)", the line a search result shows under its verb.
+  /// "vais : Indicatif Présent (je)", the line a search result shows under its verb. The line is
+  /// French in either interface language, so it takes French punctuation: a narrow no-break
+  /// space before the colon.
   func line(pronounGender: PronounGender) -> String {
-    "\(text): \(cellNames(pronounGender: pronounGender))"
+    "\(text)\u{202F}: \(cellNames(pronounGender: pronounGender))"
   }
 
   var marks: MarkedConjugations {
