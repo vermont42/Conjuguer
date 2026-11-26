@@ -6958,3 +6958,40 @@ over the bottom of the list, and a tap meant for the row beneath it chose Alphab
 And parler's model page, which lists 4,859 verbs as links, takes several seconds to appear, long
 enough that a screenshot two seconds after the tap shows the page you started from. That slowness
 is Phase 10's S13. It is not a dropped push.
+
+## Browse Fixes, Phase 5: A Search Model the Two Tabs Share (2026-11-26)
+
+Phase 5 of [`plans/verb_browse_fixes.md`](../plans/verb_browse_fixes.md) pulled the verb list's
+search out of a 718-line view into `VerbSearchModel`, an observable type a test can drive, and put
+the iPad's timed workarounds into one piece, `SearchEngagement`, that the Verbs and Models tabs
+both use. Konjugieren had done the same extraction a day earlier, and its model was the template:
+the text with a `didSet`, the tracker inside, an open that returns where to go and leaves the
+pushing to the view.
+
+The guess moved off the main thread the way Konjugieren's did. The project's approachable
+concurrency runs a plain `nonisolated async` function on its caller's actor, so the work runs in a
+`@concurrent` function, over plain `Sendable` values describing each verb, and the model looks the
+verb up again on the main actor once an answer arrives. A failed search now shows its empty state
+at once. On the Intel simulator, finnissons used to hold the main thread for a quarter of a
+second; now it holds it for the ordinary search, under a tenth, and the guess turns up about when
+the old empty state would have.
+
+The bug that defined the phase was the Models tab's accent row. On an iPad, a tap outside an empty
+search field ends the search at the touch, so a row of accent keys that follows the focus vanishes
+under the finger. The Verbs tab had a cure, a focus that lingers 0.7 seconds and a letter that
+waits for the dismissal before it goes in, and the Models tab had never been given it. I ran the
+old build first to watch ê disappear, then the new one to watch it land. Gathering the cure into
+one type made its flaws visible too: the linger was never cancelled, so focus lost twice in quick
+succession let go early; two search requests could focus the field mid-pop; and a letter that took
+longer than the linger began the tab's search instead of the control's. Each became a task that
+the next one cancels, with a test.
+
+Two smaller decisions. The keyboard highlight is now a verb rather than a row number, so when
+opening a recent verb moves it to the top, the highlight goes with it. And a search the learner
+clears by backspacing now reports the query they had typed rather than its last letter, which the
+browse plan had recorded as a quirk. That needed the model to keep the longer query's results
+aside while the deletions go on.
+
+One thing the review expected did not hold: Return in an empty field never reaches the app on the
+iPad, so the recents can be reached by the arrow keys but opened only by a tap. That was true of
+the old code too. 998 tests now, from 961.

@@ -14,9 +14,12 @@ query use it too.
 | File | Purpose |
 |------|---------|
 | `VerbBrowseView.swift` | The Verbs tab: the list (a `List` on iPhone, a `LazyVGrid` of cards on iPad), the sort picker, the search field, and the verb count. `VerbBrowse.makeStore` builds the store |
+| `VerbSearchModel.swift` | The Verbs tab's search: the text, its results and their count of infinitives, the guess, the keyboard selection, what Return opens, and the `finishSearch` reports. The view keeps the focus and the navigation |
 | `ModelBrowseView.swift` | The Models tab, built the same way. `ModelBrowse.makeStore` builds the store |
 | `BrowseStore.swift` | A generic `@Observable` store that holds a list presorted for each sort order and persists the chosen order through a closure |
-| `BrowseSearch.swift` | `BrowseSearch.results(in:query:playSoundIfEmpty:search:)`: every item for a blank query, otherwise what the tab's search closure returns, with a sad trombone when that is nothing |
+| `BrowseSearchField.swift` | `browseSearchable`, the field both tabs show, and `SortPickerOrKeyRow` |
+| `SearchEngagement.swift` | The iPad field's timed workarounds, which both tabs share (§ Recents) |
+| `FailedSearchSound.swift` | When the sad trombone sounds |
 | `VerbSearch.swift` | The matching and ranking rule. `MatchKind` names each kind of match, for the `matchKind` signal parameter. Also the guess |
 | `VerbSearch+Conjugations.swift` | Reverse lookup: a conjugation, simple or compound, finds its verbs |
 | `ConjugationQuery.swift` | A query as a conjugation's words: subject and reflexive pronouns, elision, que, y, en, and negation dropped |
@@ -58,9 +61,13 @@ query use it too.
   English meaning" and "Model or verb". While a field is focused, `FrenchLetterKeyRow` replaces the
   sort picker (on iPhone it then sits just above the keyboard), because a
   `ToolbarItemGroup(placement: .keyboard)` never appears for the navigation bar's search field on
-  iOS 26.3, as Konjugieren found too. A key appends its letter.
-- **No result.** `BrowseSearch` plays `Sound.randomSadTrombone` when the text changes, not when
-  the sort order changes, and not for a query of only spaces. The Models tab shows
+  iOS 26.3, as Konjugieren found too. A key appends its letter. The row follows
+  `SearchEngagement.isEngaged` in both tabs (§ Recents). While the field holds text with the
+  keyboard down, the picker shows and is disabled, since search ignores it.
+- **No result.** Both tabs play `Sound.randomSadTrombone` once as a search begins to fail
+  (`FailedSearchSound`), not again for each letter it goes on failing, not when the sort order
+  changes, and not while the query is only pronouns ("j'", "nous"). A query of only spaces is no
+  search in either tab. The Models tab shows
   `ContentUnavailableView.search`. The Verbs tab shows `FailedVerbSearchView`: the
   same view, then a guess, then "If you believe that “…” is a French verb, please email
   vermontcoder@gmail.com", whose address is a `mailto:` link (`URL.mailto`) with the subject and
@@ -74,8 +81,11 @@ query use it too.
   then the more frequent verb wins, then the earlier spelling. So venier finds venir, assoir
   asseoir, manjer manger (ahead of manier, also one edit away), finnissons finir through finissons
   (whose cells the guess's card names and its page marks), and xyzzyq nothing, in which case only
-  the mail line shows. Glosses are not considered. A Debug build measures 230,000 folds between
-  keystrokes because `BoundedEditDistance` discards most by their letter counts, abandons a
+  the mail line shows. Glosses are not considered. The Verbs tab shows its empty state at once and
+  finds the guess off the main actor (`VerbSearchModel` calls the `@concurrent`
+  `guess(for:among:)`, over `Sendable` `GuessCandidate`s), and the next change to the text cancels
+  a guess still in flight; Look Up a Verb still guesses in line. A Debug build measures 230,000
+  folds because `BoundedEditDistance` discards most by their letter counts, abandons a
   comparison once it must exceed the limit, and `ConjugationIndex.nearestFolds` measures lengths
   nearest the query's first and tightens the limit with each find: at most about 0.3 s, against 9 s
   without them.
@@ -94,9 +104,15 @@ query use it too.
   `VerbSearchArrowKeys`, a `UIKeyCommand` on the window's root view controller installed only while
   the verb field is focused, because a focused text field consumes them ahead of every SwiftUI
   mechanism. Each window keeps its own installation and its own closure, and a key moves the
-  highlight of the window whose responder chain it arrived through. **Return** opens the highlighted result, else the first, else the guess. Return and the
-  arrows act only on the iPad idiom (which a Mac running the iPad app also reports) and only while
-  the field holds a query, so the iPhone keyboard's Search key keeps its usual behavior.
+  highlight of the window whose responder chain it arrived through. The highlight is the selected
+  verb, not a row, so it stays with its verb when the rows change (an open moves a recent verb to
+  the top), and it is drawn only while that verb is among the rows the keys reach. The
+  highlighted row and the guess card carry the selected trait for VoiceOver and Full Keyboard
+  Access. **Return** opens the highlighted row, else the first result, else the guess
+  (`VerbSearchModel.openForReturn`, which would open a recent verb too, but an empty field sends
+  no submit: on the iPad simulator on 2026-11-26, Return over a highlighted recent did nothing, so
+  a recent opens by tap). Return and the arrows act only on the iPad idiom (which a Mac running the
+  iPad app also reports), so the iPhone keyboard's Search key keeps its usual behavior.
 - **Cost.** One search over 6,330 verbs takes about 20 ms on the Intel simulator, and about 50 ms
   with reverse lookup, in a Debug build. `VerbSearch` caches each verb's folded keys after the
   first search.
@@ -472,8 +488,10 @@ does not name the verb.
 **A search** (`SearchTracker`, `SearchReport`) begins with the first non-blank letter and ends
 once. Returning to the results and opening another verb without editing the text sends no second
 `finishSearch`, though the page still reports `search`. Editing the text after an open begins a new
-search, so deleting the query letter by letter reports an abandoned search of its last letters. An
-abandoned search's `matchKind` is that of the top result it passed over. Opening the guess reports
+search. A search cleared by deleting it letter by letter reports the query from before the
+deletions began, with that query's results, since that is what the learner passed over; typing
+forward again forgets it. An ended search is reported from the results the model holds, not
+searched again. An abandoned search's `matchKind` is that of the top result it passed over. Opening the guess reports
 `opened`, `resultCount` `0`, `matchKind` `guess`, and position `1`. `resultCount` counts rows, so a
 doubled infinitive (haïr) counts twice. The Models tab's search sends nothing.
 
@@ -482,7 +500,9 @@ Command-F included, or the surface whose search link opened the field (`control`
 `lookup`, or `deeplink` for a link without a `source`). Without it, a page reached through the
 control's search would report only `search`. `SearchTracker.fieldOpened(from:)` holds the surface
 for the next search, `fieldClosed()` forgets it if nothing was typed, and a search that the opening
-interrupts ends there.
+interrupts ends there. The field counts as closed when `SearchEngagement` lets go, not at the loss
+of focus, so that on iPad a first accent key, whose touch takes the focus, still begins the
+surface's search.
 
 **`matchKind`** is `VerbSearch.MatchKind`'s case by name, through an exhaustive switch
 (`analyticsValue` in `SearchReport.swift`), so a new kind cannot go unnamed: `exactInfinitive`,
@@ -719,12 +739,16 @@ Verbs" or "Remove from My Verbs" and gives a selection haptic.
 
 **Recents.** While the search field is focused and empty, and anything has been opened, the list
 shows the last twenty verbs opened under "Recent" instead of every verb, with the source `recent`.
-The arrow keys and Return reach them on iPad and Mac. They, and the accent key row, follow
-`searchIsEngaged`, which lets go of the focus 0.7 seconds after the field does: on iPad a tap
-outside an empty field ends its focus at touch-down, so views that followed the focus vanished
-under the finger (Konjugieren). The push from such a tap waits for the search's dismissal to end
-(`ViewControllerTransitions.waitUntilIdle()`), since UIKit drops a push made during it, and an
-accent key tapped then waits likewise, sets the letter, and refocuses the field.
+The arrow keys and Return reach them on iPad and Mac. They, and the accent key row in both tabs,
+follow `SearchEngagement.isEngaged`, which lets go of the focus 0.7 seconds after the field's last
+loss of it: on iPad a tap outside an empty field ends its focus at touch-down, so views that
+followed the focus vanished under the finger (Konjugieren). The push from such a tap, in either
+tab, waits for the search's dismissal to end (`ViewControllerTransitions.waitUntilIdle()`), since
+UIKit drops a push made during it, and a later push replaces one still waiting. An accent key
+tapped then waits likewise, with any tapped after it; the letters go in together, the field is
+refocused, and the linger holds until they land. A search request that pops a page waits 500 ms
+for the pop before focusing the field, and a second request during that wait waits for the same
+end. Each of these is a task that the next one cancels.
 
 **My Verbs** is the third segment of the verb list's picker, with the starred verbs (newest star
 first) under "Starred" and the recent verbs not starred under "Recent", whose Clear button forgets

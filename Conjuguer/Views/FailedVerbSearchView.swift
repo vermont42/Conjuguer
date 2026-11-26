@@ -38,6 +38,7 @@ struct FailedVerbSearchView: View {
           }
           .buttonStyle(.plain)
           .accessibilityIdentifier("search_guess_row")
+          .accessibilityAddTraits(guessIsSelected ? .isSelected : [])
         }
 
         Text(verbRequestText)

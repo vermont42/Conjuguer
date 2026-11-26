@@ -122,7 +122,7 @@ VoiceOver running.
 
 | Screen | Approach |
 |---|---|
-| `VerbBrowseView`, `ModelBrowseView` | `BrowseRow` in a `Button`: title French, subtitle English, or French when it names the verb that found a model (see above); a search's match line French |
+| `VerbBrowseView`, `ModelBrowseView` | `BrowseRow` in a `Button`: title French, subtitle English, or French when it names the verb that found a model (see above); a search's match line French. The row the hardware keyboard's arrows highlight, and the failed search's guess card while highlighted, carry the selected trait, so Return's target is not told by color alone. Not tried with VoiceOver |
 | `FrenchLetterKeyRow` | Each key a `Button` whose letter is marked French |
 | `VerbView` (infinitive, headings, cells) | `.frenchPronunciation()` on each; the infinitive and each cell a Copy action |
 | `VerbView` (share button) | A toolbar `Button` whose `Label` reads "Share" ("Partager") |

@@ -71,13 +71,16 @@ nonisolated struct ConjugationIndex: Sendable {
   /// The folds fewest edits from `fold`, none more than `limit`, with that distance. Lengths
   /// nearest the query's are measured first, and each find tightens the limit, so that a word
   /// one edit from a conjugation is never compared at length with every conjugation three edits
-  /// away.
+  /// away. Nil, too, once the task running it is cancelled.
   func nearestFolds(to fold: String, within limit: Int) -> (folds: [String], distance: Int)? {
     var distance = BoundedEditDistance(query: Array(fold.utf8))
     let queryLength = distance.queryLength
     var best: (folds: [String], distance: Int)?
     let lengths = (0...limit).flatMap { offset in offset == 0 ? [queryLength] : [queryLength - offset, queryLength + offset] }
     for length in lengths where length > 0 {
+      if Task.isCancelled {
+        return nil
+      }
       let currentLimit = best?.distance ?? limit
       guard abs(length - queryLength) <= currentLimit, let bytes = foldBytesByLength[length] else {
         continue

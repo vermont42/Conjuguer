@@ -32,7 +32,7 @@ empty until it is committed.
 | 2 | Done | 2026-11-25 | `d36f6d5` | B1, B2, B8, B28, S1 (the sheets) | Yes |
 | 3 | Done | 2026-11-25 | `f2e962e` | Multiple windows | Yes |
 | 4 | Done | 2026-11-25 | `8f31dfe` | S2 | No |
-| 5 | Not started | | | B3, B6, B18, B23, B24, B26, S3 (the search model), D5, T1 (the search), K-F1, K-S8 | Yes |
+| 5 | Done | 2026-11-26 | | B3, B6, B18, B23, B24, B26, S3 (the search model), D5, T1 (the search), K-F1, K-S8 | Yes |
 | 6 | Not started | | | B9, S3 (the rest), D4, D7, T1 (the card), the stale review card | Yes |
 | 7 | Not started | | | B7, B13, B14, B15, B21, B22, B25 (the row), B30, G1, G2, G3, S10 | Yes |
 | 8 | Not started | | | B16, B19, S12, the progress decision, the migration, T2 | Yes |
@@ -510,6 +510,76 @@ on the iPad with a hardware keyboard, Command-F, the arrow keys through results 
 recents, Return on a result and on the guess, and an accent key first in each tab's empty field.
 
 **How it differed:**
+
+- **Measured,** three runs each in a Debug build on the Conjuguer iPhone 17 simulator (Intel Mac),
+  with the index and the verbs' keys warm. "Before" times the old path, the search and then the
+  guess in line; "after" times `text`'s change returning, and then the guess arriving:
+
+  | Query | Before, main thread | After, main thread | After, guess ready |
+  |---|---:|---:|---:|
+  | finnissons | 0.25–0.27 s | 0.08–0.09 s | 0.27–0.29 s |
+  | xyzzyq | 0.17–0.19 s | 0.09–0.10 s | 0.16–0.19 s |
+
+  What stays on the main thread is the ordinary search with reverse lookup, which the old path
+  paid too. The temporary test was deleted.
+- **`VerbSearchModel`** (`Conjuguer/Models/VerbSearchModel.swift`) owns the text, one list of
+  `Result`s (a match and its position), `verbCount` (distinct infinitives, computed once per
+  change; the whole list's heading reads `Verb.rankCount`), the guess and its task, the selected
+  verb's id, and the `SearchTracker`. Opening a result, the guess, or what Return opens returns a
+  `VerbDestination`; the view pushes it. The view creates it as `@State` with `Current`'s
+  analytics and sound player, as Konjugieren's does.
+- **The guess off the main actor** follows Konjugieren: a `@concurrent` function over `Sendable`
+  `VerbSearch.GuessCandidate`s returns a `GuessFinding` (a verb id and a conjugation), and the
+  model looks the verb and its cells up on the main actor. `ConjugationIndex.nearestFolds` stops
+  when its task is cancelled. Look Up a Verb still guesses in line through the old signature.
+  Conjuguer's edit distance was already bounded, so that half of Konjugieren's change had nothing
+  to do here.
+- **The trombone** (`FailedSearchSound`, shared with the Models tab) plays once as a search begins
+  to fail. Before, it played on each failing keystroke, softened only by the player's debounce.
+  It still waits out a query of only pronouns, and a pronoun followed by a failing word ("j'xq")
+  now sounds, where a rule of "had it already failed" would have stayed silent.
+- **The query passed over: decided yes.** A search cleared by deleting letter by letter reports the
+  query from before the deletions began, with that query's results, which the model keeps aside
+  while the learner deletes. Typing forward, or an open, forgets it. Only a clear uses it: leaving
+  the foreground mid-deletion reports what is in the field. No value of `finishSearch` changed, so
+  nothing was staged for the privacy policy; `docs/feature_architecture.md` § Search says what a
+  cleared search's `queryLength` now measures.
+- **`SearchEngagement`** (`Conjuguer/Utils/SearchEngagement.swift`) is the shared piece: `isEngaged`
+  (the linger restarts at each loss of focus), `isLingering` (in place of `searchFocusLostAt`),
+  `push(fieldIsEmpty:)` (a later push replaces one waiting), `insert` (letters tapped while the
+  search is dismissed wait together, then go in and refocus the field), and
+  `focus(afterPopping:)`, the 500 ms pop wait, where a second request waits for the same end. Its
+  wait for the dismissal is injected, so a test can make it slow. The Models tab's rows and
+  collections now push through it too, which they did not before.
+- **B24** is fixed by closing the tracker's field when the engagement lets go rather than at the
+  loss of focus, and by holding the linger until a waiting letter lands.
+- **D5.** `browseSearchable` and `SortPickerOrKeyRow` are in `Conjuguer/Views/BrowseSearchField.swift`.
+  `BrowseSearch.swift` is deleted. The Verbs tab's grid and list now share one `verbRows` builder,
+  a start on D4, which Phase 6 finishes for the rest.
+- **Return in an empty field does nothing on the iPad.** The field sends no submit while empty, so
+  `openForReturn`'s branch for the recents is unreachable there, as the old code's was. The review's
+  second B6 scenario (Return on a recent) could not be tried; I kept the branch, since a Mac may
+  differ, and the doc says so.
+- **B3 reproduced first** on the old build (stashed), on the iPad simulator: ê in the empty Models
+  field left it empty and the row gone. After the fix it gave "ê", être first, and typing went on.
+- **Checked on the iPad simulator:** ↓↓ through the recents highlighted boire; a tap opened it;
+  Back and Command-F showed boire first, still highlighted (B6); Escape showed the whole list,
+  "6,326 verbs", nothing highlighted; é first in the empty Verbs field, then "crire", ↓↓, and
+  Return opened décrire; finnissons and Return opened the guess, finir; back from it, the picker
+  showed disabled with "finnissons" in the field (K-S8); a query of two spaces in Models kept the
+  collections (B23); a model row tapped from the focused blank field pushed. **On the iPhone:** a
+  cold `search?q=finnissons` link showed the empty state with finir's guess and a greyed picker;
+  the clear button showed the recents; xyzzyq typed fast showed the empty state and the mail line.
+  The trombone could not be heard; `theTromboneSoundsOncePerFailedSearch` pins it.
+- **Tests.** `VerbSearchModelTests` (28) and `SearchEngagementTests` (9). Both test types are
+  new, so there was no old code to run them against. `aSecondLossOfFocusLingersAFullMoment` and
+  `aSecondRequestDuringAPopWaitsForTheSameEnd` each pin a cancellation the old view lacked, and
+  `theSelectionFollowsItsVerbWhenTheRowsMove` pins what a row index got wrong. 998 tests
+  in 94 suites (961 plus 37). SwiftLint is clean on the changed files, and `check_docs.py` passes.
+  No string changed.
+- **Docs.** `docs/feature_architecture.md` § Search (the file table, the key row, no result, the
+  guess, the keyboard, a search's report, where a search began, recents), `docs/voiceover.md`'s
+  browse row, and `docs/project_structure.md`.
 
 ## Phase 6: Split the Verb List's View
 

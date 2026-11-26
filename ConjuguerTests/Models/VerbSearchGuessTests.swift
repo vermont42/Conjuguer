@@ -81,7 +81,7 @@ struct VerbSearchGuessTests {
     (3, 1, 1, 0)
   ] as [(Int?, Int, Int, Int?)])
   func testKeyboardSelection(current: Int?, offset: Int, count: Int, expected: Int?) {
-    #expect(VerbBrowseView.keyboardSelection(after: current, moving: offset, count: count) == expected)
+    #expect(VerbSearchModel.keyboardSelection(after: current, moving: offset, count: count) == expected)
   }
 
   @Test func testMailtoEncodesEverythingOutsideTheUnreservedSet() {

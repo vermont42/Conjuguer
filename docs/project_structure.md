@@ -83,6 +83,7 @@ Conjuguer/
 │   ├── Etymology.swift         # Lazy-loading etymology lookup by infinitif
 │   ├── Example.swift           # Codable model for a literature example sentence; its Gutenberg _underscore_ italics as styled or plain text
 │   ├── ExampleSource.swift     # Provenance enum for example sentences (Proust/Zola/Flaubert/La Fontaine/Molière/gov/Wikipedia/Wiktionary/Claude) with per-source attribution
+│   ├── FailedSearchSound.swift # The sad trombone's rule for both browse tabs: once as a search begins to fail, and not while only pronouns are typed
 │   ├── FrequencyBand.swift     # The top 100, 300, and 1,000 verbs by rank (Verb.isIn, Verb.verbs(in:)); the verb of the day draws from the top 1,000, and the pedagogy levels will read all three
 │   ├── FuturSimple.swift       # Futur simple endings
 │   ├── GapSentence.swift       # Phrases à trous: a sentence with its conjugation in braces, its cell and fixed gender, its frame, which levels ask it, the draw of a round, and the scope
@@ -145,7 +146,8 @@ Conjuguer/
 │   ├── verbs.xml               # 6,330 entries / 6,326 distinct infinitives, with inline corpus hit counts (hi/hn/hl/hs/hp); VerbParser derives the ranks
 │   ├── VerbLookup.swift        # What Look Up a Verb says about a word and where it opens the app, read from the verb list's search
 │   ├── VerbSearch+Conjugations.swift # Reverse lookup: a conjugation, one word or compound ("ai mangé", "me suis levé"), finds its verbs
-│   ├── VerbSearch.swift        # The one matching and ranking rule for verb search: accent and ligature folding, "se" and "to" stripped, exact then prefix or English meaning then the rest, each by frequency; the guess, over infinitives and conjugations, when nothing matches
+│   ├── VerbSearch.swift        # The one matching and ranking rule for verb search: accent and ligature folding, "se" and "to" stripped, exact then prefix or English meaning then the rest, each by frequency; the guess, over infinitives and conjugations, when nothing matches, in a form that runs off the main actor
+│   ├── VerbSearchModel.swift   # The verb list's search: the text, its results and count, the guess found off the main actor, the keyboard selection by verb, what Return opens, and the finishSearch reports
 │   ├── VerbVisit.swift         # VerbDestination (a verb page to push, with its source) and VerbVisit (one stretch of a verb page on screen, for viewAppeared and leaveVerbView)
 │   ├── XMLDataParser.swift     # Shared XMLParser delegate base for the three parsers
 │   └── Game/
@@ -193,6 +195,7 @@ Conjuguer/
 │   ├── ReminderScheduler.swift # Protocol for the daily reminder's notifications (Current.reminderScheduler)
 │   ├── ReminderSchedulerReal.swift  # UNUserNotificationCenter implementation: permission, and the reminders replaced as a set, each carrying its link
 │   ├── ReminderSchedulerSpy.swift   # Test spy under unit tests: records each schedule and permission request
+│   ├── SearchEngagement.swift  # Hack: the iPad search field's timed workarounds both browse tabs share: the focus that lingers, the push and the letter that wait for the search's dismissal, and the focus that waits for a pop
 │   ├── Settings.swift          # @Observable user preferences persisted through GetterSetter
 │   ├── SeededRandomNumberGenerator.swift  # SplitMix64, so tests can check random draws with a fixed seed
 │   ├── QRCode.swift            # QR codes made on the device with Core Image, black on white, medium error correction
@@ -219,7 +222,7 @@ Conjuguer/
     ├── ArticleSheet.swift      # An Info article in a sheet with its own stack, whose article and verb links push inside it, as do a verb page's tense articles there
     ├── BrowseLayout.swift      # Shared adaptive grid columns and search-field placement (a fixed bar on iPad and Mac) for the browse views
     ├── BrowseRow.swift         # Shared row/cell used by both browse views, with optional badge, a looked-up check, and a French or English subtitle
-    ├── BrowseSearch.swift      # Shared search plumbing for the browse views: all items for a blank query, the trombone for none
+    ├── BrowseSearchField.swift # The browse tabs' search field (browseSearchable) and SortPickerOrKeyRow, the sort picker or, while the field is engaged, the accent keys
     ├── ChoiceQuestionView.swift # A choice question's two sentences, each with its conjugation in bold and its tense, and once one is chosen, the marks, the reason, and Continue
     ├── CustomQuizView.swift    # The custom quiz's editor (tenses and a verb set, each tap kept at once), its list of models, pushed onto the Quiz tab, and the summary card the tab and a practice set share
     ├── FailedVerbSearchView.swift # The verb list's empty state: no results, a guess at the verb meant, and the email-us line
@@ -358,6 +361,7 @@ ConjuguerTests/
     ├── RichTextTests.swift             # Rich-text markup parsing into blocks and segments
     ├── RoutedSheetTests.swift          # The routed sheet: a fresh identity per link, every page in the one sheet, and MainTabView hosted in a window, where a linked verb begins one visit and records one open after the Info tab has loaded (B1); test accessors for the sheet's page
     ├── SceneRouterTests.swift          # Each window's own router: two routers kept apart, a cold launch's link replayed in its own window, a link waiting for its scene's router or for an active window, and the arrow keys kept per window
+    ├── SearchEngagementTests.swift     # The iPad search workarounds: the linger and its restart, a push that waits and one replaced, letters that wait and go in together, the linger held for a letter, and focus after a pop
     ├── SearchReportTests.swift         # The search tracker's lifecycle, each finishSearch report, and that no parameter can echo the query
     ├── SettingsTests.swift             # Settings defaults (Suppress Review Card off), persistence, the quiz difficulty's migration to a level, and malformed-value handling (serialized)
     ├── SpeedRoundTests.swift           # The Speed Round: mastered items, the draw in turn and never twice running, a pattern's verbs, a key conjugation's cells by level, the scope, the best across a launch and a reset, a miss written out; nested in QuizTests, a round that records nothing, moves on at a miss, ends at sixty ticks, and sends no counts
@@ -371,6 +375,7 @@ ConjuguerTests/
     ├── VerbModelTests.swift            # GENERATED by T.generateVerbModelTests() — one @Test per verb model, ~5,500 lines. Regenerate rather than hand-edit
     ├── VerbSearchConjugationTests.swift # Reverse lookup: the plan's queries, short-query ranking, sentences, row lines, landing marks, the conjugation guess, bounded distance
     ├── VerbSearchGuessTests.swift      # The guess at the verb meant, edit distance, arrow-key selection, and the mailto: link
+    ├── VerbSearchModelTests.swift      # The verb list's search model: typing, clearing, the query passed over, the guess arriving and cancelled, the trombone, opening a result or the guess, Return, the selection following its verb, requests, and each report
     ├── VerbSearchTests.swift           # Verb search: folding, reflexive and "to" stripping, tier ranking, literal-before-folded, order independence
     ├── VerbSpotlightTests.swift        # The Spotlight entries' description, alternate names, keywords, and identifiers
     ├── VerbVisitTests.swift            # A verb visit's deepest section, resume, and banded dwell

@@ -15,6 +15,8 @@ struct ModelBrowseView: View {
   @State private var store: BrowseStore<ModelAndDecorator, ModelSort>?
   @State private var searchText = ""
   @State private var searchResults: [ModelAndDecorator] = []
+  @State private var failedSearchSound = FailedSearchSound()
+  @State private var engagement = SearchEngagement()
   @State private var path = NavigationPath()
   @FocusState private var searchIsFocused: Bool
   private let exploreModelsTip = ExploreModelsTip()
@@ -39,7 +41,16 @@ struct ModelBrowseView: View {
   private func content(store: BrowseStore<ModelAndDecorator, ModelSort>) -> some View {
     @Bindable var store = store
 
-    let sortPicker = Picker("", selection: $store.sort) {
+    let sortBinding = Binding<ModelSort>(
+      get: { store.sort },
+      set: { sort in
+        withAnimation(.snappy) {
+          store.sort = sort
+        }
+      }
+    )
+
+    let sortPicker = Picker("", selection: sortBinding) {
       ForEach(ModelSort.allCases, id: \.self) { type in
         Text(type.displayName).tag(type)
       }
@@ -58,7 +69,7 @@ struct ModelBrowseView: View {
 
           TipView(exploreModelsTip)
 
-          modelCollection
+          modelCollection(store: store)
 
           if horizontalSizeClass != .regular {
             sortPickerOrKeyRow(sortPicker)
@@ -68,30 +79,36 @@ struct ModelBrowseView: View {
       }
       .navigationTitle(L.Navigation.models)
       .verbPageNavigation(path: $path)
-      .searchable(text: $searchText, placement: BrowseLayout.searchPlacement, prompt: L.ModelBrowseView.searchPrompt)
-      .searchFocused($searchIsFocused)
-      .textInputAutocapitalization(.never)
-      .autocorrectionDisabled()
+      .browseSearchable(text: $searchText, prompt: L.ModelBrowseView.searchPrompt, isFocused: $searchIsFocused, engagement: engagement)
     }
     .screenBackground()
-    .onChange(of: searchText, initial: true) { _, _ in
-      updateSearchResults(playSoundIfEmpty: true)
-    }
-    .onChange(of: store.sort) { _, _ in
-      withAnimation(.snappy) {
-        updateSearchResults(playSoundIfEmpty: false)
+    .onChange(of: trimmedSearchText) {
+      updateSearchResults(store: store)
+      if failedSearchSound.searchChanged(hasFailed: isSearching && searchResults.isEmpty, isStillTyping: false) {
+        world.soundPlayer.play(.randomSadTrombone)
       }
+    }
+    // A model's row carries its decorator, " (1-9)" under Identifier, so the results are the
+    // sort's own items.
+    .onChange(of: store.sort) {
+      updateSearchResults(store: store)
     }
     .sensoryFeedback(.selection, trigger: store.sort)
     .recordsAppearance(as: "\(ModelBrowseView.self)")
   }
 
-  private var showsCollections: Bool {
-    searchText.isEmpty
+  private var trimmedSearchText: String {
+    searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+  }
+
+  private var isSearching: Bool {
+    !trimmedSearchText.isEmpty
   }
 
   @ViewBuilder
-  private var modelCollection: some View {
+  private func modelCollection(store: BrowseStore<ModelAndDecorator, ModelSort>) -> some View {
+    let showsCollections = !isSearching
+    let models = isSearching ? searchResults : store.items
     if horizontalSizeClass == .regular {
       ScrollView {
         VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
@@ -114,9 +131,9 @@ struct ModelBrowseView: View {
           }
 
           LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
-            ForEach(searchResults) { modelAndDecorator in
+            ForEach(models) { modelAndDecorator in
               Button {
-                path.append(VerbPageRoute.model(modelAndDecorator.model))
+                push(.model(modelAndDecorator.model))
               } label: {
                 modelRow(modelAndDecorator)
                   .card()
@@ -130,8 +147,8 @@ struct ModelBrowseView: View {
       }
       .scrollContentBackground(.hidden)
       .overlay {
-        if searchResults.isEmpty && !searchText.isEmpty {
-          ContentUnavailableView.search(text: searchText)
+        if isSearching && searchResults.isEmpty {
+          ContentUnavailableView.search(text: trimmedSearchText)
         }
       }
     } else {
@@ -148,9 +165,9 @@ struct ModelBrowseView: View {
         }
 
         Section {
-          ForEach(searchResults) { modelAndDecorator in
+          ForEach(models) { modelAndDecorator in
             Button {
-              path.append(VerbPageRoute.model(modelAndDecorator.model))
+              push(.model(modelAndDecorator.model))
             } label: {
               modelRow(modelAndDecorator)
             }
@@ -167,8 +184,8 @@ struct ModelBrowseView: View {
       .listStyle(.plain)
       .scrollContentBackground(.hidden)
       .overlay {
-        if searchResults.isEmpty && !searchText.isEmpty {
-          ContentUnavailableView.search(text: searchText)
+        if isSearching && searchResults.isEmpty {
+          ContentUnavailableView.search(text: trimmedSearchText)
         }
       }
     }
@@ -181,7 +198,7 @@ struct ModelBrowseView: View {
   @ViewBuilder
   private func collectionButton(_ collection: VerbCollection, isCard: Bool) -> some View {
     Button {
-      path.append(VerbPageRoute.collection(VerbCollectionDestination(collection: collection, source: .tab)))
+      push(.collection(VerbCollectionDestination(collection: collection, source: .tab)))
     } label: {
       if isCard {
         VerbCollectionRow(collection: collection)
@@ -222,31 +239,34 @@ struct ModelBrowseView: View {
     )
   }
 
-  // A keyboard toolbar never appears for the navigation bar's search field (iOS 26.3), so the
-  // accent row takes the sort picker's place while the field is focused. Search ranks its
-  // results whatever the sort order, so the picker has nothing to do then.
-  @ViewBuilder
+  private func push(_ route: VerbPageRoute) {
+    engagement.push(fieldIsEmpty: !isSearching) {
+      path.append(route)
+    }
+  }
+
   private func sortPickerOrKeyRow(_ sortPicker: some View) -> some View {
-    if searchIsFocused {
-      FrenchLetterKeyRow { letter in
-        searchText.append(letter)
+    SortPickerOrKeyRow(engagement: engagement, isSearching: isSearching) { letter in
+      engagement.insert(letter) { letters in
+        searchText.append(letters)
+      } focus: {
+        searchIsFocused = true
       }
-    } else {
+    } sortPicker: {
       sortPicker
     }
   }
 
-  private func updateSearchResults(playSoundIfEmpty: Bool) {
-    guard let store else {
+  private func updateSearchResults(store: BrowseStore<ModelAndDecorator, ModelSort>) {
+    guard isSearching else {
+      searchResults = []
       return
     }
     let itemsById = Dictionary(store.items.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
-    searchResults = BrowseSearch.results(in: store.items, query: searchText, playSoundIfEmpty: playSoundIfEmpty) { query in
-      ModelSearch.matches(for: query, in: store.items.map(\.model), verbs: Array(Verb.verbs.values)).compactMap { match in
-        var item = itemsById[match.model.id]
-        item?.matchedVerb = match.verb?.infinitifWithPossibleExtraLetters
-        return item
-      }
+    searchResults = ModelSearch.matches(for: trimmedSearchText, in: store.items.map(\.model), verbs: Array(Verb.verbs.values)).compactMap { match in
+      var item = itemsById[match.model.id]
+      item?.matchedVerb = match.verb?.infinitifWithPossibleExtraLetters
+      return item
     }
   }
 }

@@ -150,13 +150,63 @@ enum VerbSearch {
     let conjugation: MatchedConjugation?
   }
 
+  /// What the guess needs of a verb, as values that can leave the main actor.
+  nonisolated struct GuessCandidate: Sendable {
+    let id: String
+    let dictionaryKey: String
+    let frequency: Int
+    let foldedInfinitifBytes: [UInt8]
+    let infinitiveKey: String
+  }
+
+  /// A guess by verb id, before its verb and cells are looked up on the main actor.
+  nonisolated struct GuessFinding: Equatable, Sendable {
+    let verbID: String
+    let conjugation: String?
+  }
+
+  static func guessCandidates(of verbs: [Verb]) -> [GuessCandidate] {
+    verbs.map { verb in
+      GuessCandidate(
+        id: verb.id,
+        dictionaryKey: verb.dictionaryKey,
+        frequency: verb.frequency,
+        foldedInfinitifBytes: keys(for: verb).foldedInfinitifBytes,
+        infinitiveKey: ConjugationMap.key(verb.infinitif)
+      )
+    }
+  }
+
+  static func guess(for query: String, in verbs: [Verb], conjugations index: ConjugationIndex? = ConjugationIndex.bundled) -> Guess? {
+    guess(for: query, among: guessCandidates(of: verbs), conjugations: index).flatMap { finding in
+      guess(from: finding, verbNamed: { id in verbs.first { $0.id == id } })
+    }
+  }
+
+  /// The finding's verb, and the cells of its conjugation, which only the main actor can read.
+  static func guess(from finding: GuessFinding, verbNamed: (String) -> Verb?) -> Guess? {
+    guard let verb = verbNamed(finding.verbID) else {
+      return nil
+    }
+    let cells = finding.conjugation.map { verb.conjugations(matching: $0) } ?? []
+    let conjugation = finding.conjugation.flatMap { text in
+      cells.isEmpty ? nil : MatchedConjugation(text: text, cells: cells)
+    }
+    return Guess(verb: verb, conjugation: conjugation)
+  }
+
   /// The verb whose folded infinitive, or one of whose folded conjugations, is fewest edits from
   /// the folded query, offered when a search found nothing: finnissons guesses finir through
   /// finissons. On a tie, an infinitive beats a conjugation, and then the more frequent verb
-  /// wins. Nil when no verb is near enough to be a plausible misspelling. Conjugations are
-  /// considered only for a query that is one word once its pronouns are dropped, and only with
-  /// an index.
-  static func guess(for query: String, in verbs: [Verb], conjugations index: ConjugationIndex? = ConjugationIndex.bundled) -> Guess? {
+  /// wins. Nil when no verb is near enough to be a plausible misspelling, and when the task
+  /// running it is cancelled, since a guess for text since edited is not wanted. Conjugations
+  /// are considered only for a query that is one word once its pronouns are dropped, and only
+  /// with an index.
+  nonisolated static func guess(
+    for query: String,
+    among candidates: [GuessCandidate],
+    conjugations index: ConjugationIndex? = ConjugationIndex.bundled
+  ) -> GuessFinding? {
     let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
     let foldedQuery = Array(fold(frenchQuery(from: trimmed)))
     guard !trimmed.isEmpty, !foldedQuery.isEmpty else {
@@ -164,54 +214,47 @@ enum VerbSearch {
     }
     // The conjugation's spelling breaks the last tie, so that a guess never depends on the
     // order in which the index happens to hold its folds.
-    var best: (verb: Verb, conjugation: String?, rank: (distance: Int, isConjugation: Int, frequency: Int, id: String, spelling: String))?
+    var best: (finding: GuessFinding, rank: (distance: Int, isConjugation: Int, frequency: Int, id: String, spelling: String))?
 
-    func consider(_ verb: Verb, conjugation: String?, distance: Int) {
-      let rank = (distance: distance, isConjugation: conjugation == nil ? 0 : 1, frequency: verb.frequency, id: verb.id, spelling: conjugation ?? "")
+    func consider(_ candidate: GuessCandidate, conjugation: String?, distance: Int) {
+      let rank = (distance: distance, isConjugation: conjugation == nil ? 0 : 1, frequency: candidate.frequency, id: candidate.id, spelling: conjugation ?? "")
       if let current = best, current.rank <= rank {
         return
       }
-      best = (verb, conjugation, rank)
+      best = (GuessFinding(verbID: candidate.id, conjugation: conjugation), rank)
     }
 
     let maxDistance = maxGuessDistance(forQueryLength: foldedQuery.count)
     var infinitiveDistance = BoundedEditDistance(query: Array(String(foldedQuery).utf8))
-    var verbsByKey: [String: Verb] = [:]
-    for verb in verbs {
-      verbsByKey[verb.dictionaryKey] = verb
-      let distance = keys(for: verb).foldedInfinitifBytes.withUnsafeBufferPointer { candidate in
-        infinitiveDistance.measure(candidate, atMost: maxDistance)
+    var candidatesByKey: [String: GuessCandidate] = [:]
+    for candidate in candidates {
+      candidatesByKey[candidate.dictionaryKey] = candidate
+      let distance = candidate.foldedInfinitifBytes.withUnsafeBufferPointer { bytes in
+        infinitiveDistance.measure(bytes, atMost: maxDistance)
       }
       if let distance {
-        consider(verb, conjugation: nil, distance: distance)
+        consider(candidate, conjugation: nil, distance: distance)
       }
     }
 
     let words = ConjugationQuery(trimmed).words
-    if let index, words.count == 1, let word = words.first {
+    if let index, words.count == 1, let word = words.first, !Task.isCancelled {
       let foldedWord = fold(word)
       let wordMaxDistance = min(maxGuessDistance(forQueryLength: foldedWord.count), best?.rank.distance ?? .max)
       if let nearest = index.nearestFolds(to: foldedWord, within: wordMaxDistance) {
         for conjugation in nearest.folds.flatMap(index.conjugations(folding:)) {
           for verbKey in index.map.verbs(for: conjugation) {
-            guard let verb = verbsByKey[verbKey] else {
+            guard let candidate = candidatesByKey[verbKey] else {
               continue
             }
-            let isInfinitive = conjugation == ConjugationMap.key(verb.infinitif)
-            consider(verb, conjugation: isInfinitive ? nil : conjugation, distance: nearest.distance)
+            let isInfinitive = conjugation == candidate.infinitiveKey
+            consider(candidate, conjugation: isInfinitive ? nil : conjugation, distance: nearest.distance)
           }
         }
       }
     }
 
-    guard let best else {
-      return nil
-    }
-    let cells = best.conjugation.map { best.verb.conjugations(matching: $0) } ?? []
-    let conjugation = best.conjugation.flatMap { text in
-      cells.isEmpty ? nil : MatchedConjugation(text: text, cells: cells)
-    }
-    return Guess(verb: best.verb, conjugation: conjugation)
+    return Task.isCancelled ? nil : best?.finding
   }
 
   // One edit in three letters, and never more than three, keeps a guess recognizable: venier

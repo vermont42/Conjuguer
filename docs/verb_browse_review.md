@@ -127,6 +127,11 @@ functions carry the same comment word for word. Phase 10's note says the Verbs r
 the Models row was not moved over. être, écrire, and étudier all begin with an accent. **Fix:**
 one shared piece for both tabs (see D5).
 
+**Fixed on `main` 2026-11-26**, by Phase 5 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): both tabs' key rows follow
+`SearchEngagement.isEngaged` and insert through `SearchEngagement.insert`. Reproduced first on the
+old build on the iPad simulator; after the fix, ê tapped in the empty Models field gave "ê" with
+être first, and typing went on in the field.
+
 **B4. A link that resolves to nothing still closes the open sheet.** *Reproduced.* With lire's
 page up, `conjuguer://list/nonsense` closed it. `World.handleURL` calls `clearDeeplinkTargets()`
 before it knows whether the link resolves (`World.swift:204`), so an unknown `list/`, `info/`, or
@@ -168,6 +173,13 @@ iPad: arrow down three times through the recents, then end the search, and the t
 whole list is drawn highlighted. Or open the second recent with Return, come back, and the
 highlight sits on a different verb, because the open moved that verb to the top; Return now opens
 the other one. **Fix:** store the selected verb's id and derive the index.
+
+**Fixed on `main` 2026-11-26**, by Phase 5 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `VerbSearchModel` keeps the
+selected verb's id, and a row is drawn highlighted only while its verb is among the rows the keys
+reach. On the iPad simulator, ↓↓ to boire among the recents, a tap on boire, Back, and Command-F
+showed boire first and still highlighted. The second scenario's Return could not be tried: an
+empty search field sends no submit, so Return over a recent does nothing (it did nothing before,
+too).
 
 **B7. A pronominal compound with nous or vous loses a pronoun.** *Traced.* For "nous nous sommes
 levés", `ConjugationQuery` drops the first nous as subject and keeps the second as the reflexive
@@ -259,6 +271,11 @@ search requests half a second apart can focus the field mid-pop (`687-695`). The
 note can vanish a second after a second tap (`FailedVerbSearchView.swift:86-98`). `.task(id:)`
 cancels for free.
 
+**Fixed on `main` 2026-11-26** for the linger and the two requests, by Phase 5 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md):
+`SearchEngagement` cancels the linger at each change of focus, a waiting push when another comes,
+and a waiting focus when another request comes, which waits for the same pop to end. Tests pin
+each. The "address copied" note is left for a later phase.
+
 **B19. The widget's My Verbs days do not take verbs in turn.** *Traced.* `verbOfTheDay` indexes
 `myVerbs[turn % count]` (`VerbDraw.swift:40-45`), and the recents in that list are newest first, so
 opening the widget's verb moves it to the front and the next My Verbs day can show it again while
@@ -282,9 +299,16 @@ alone, because the confirmation uses the typed word, unfolded
 `showsCollections` tests `searchText.isEmpty` (`ModelBrowseView.swift:98-100`), where the search
 itself trims.
 
+**Fixed on `main` 2026-11-26**, by Phase 5 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the Models tab searches its
+trimmed text, so a query of spaces is no search, and the collections stay.
+
 **B24. On iPad, a first accent key in a field the control opened is reported as `tab`.**
 *Traced.* The key's touch ends the focus, `fieldClosed()` clears the pending source
 (`VerbBrowseView.swift:157-161`), and the search that begins is the tab's.
+
+**Fixed on `main` 2026-11-26**, by Phase 5 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the field counts as closed when
+`SearchEngagement` lets go, not at the loss of focus, and the linger holds until a waiting letter
+lands. `SearchEngagementTests.theLingerHoldsUntilAWaitingLetterLands` pins the second half.
 
 **B25. French text typeset in Swift with an English colon.** *Traced.* The search row's line,
 "vais: Indicatif Présent (je)" (`MatchedConjugation.swift:49-51`), which Phase 5 flagged for Josh
@@ -294,6 +318,9 @@ before the rule of 2026-11-23, and the model page's "Parent: " and participe pas
 **B26. The keyboard highlight is color only.** *Traced.* Neither the row nor the guess card adds
 the selected trait, so VoiceOver and Full Keyboard Access cannot tell which row Return will open
 (`VerbBrowseView.swift:228`, `256`).
+
+**Fixed on `main` 2026-11-26**, by Phase 5 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the highlighted row and the guess
+card add `.isSelected`. AXe does not report traits, so this was checked in the code only.
 
 **B27. A search that lands below a block's first card reports the visit as `header`.** *Traced.*
 Only the first card of each block reports reaching it (`VerbView.swift:89`, `582`). "sois" lands
@@ -427,6 +454,12 @@ switches on, and four seams: an `@Observable` search model (text, matches, guess
 tracker), a review-card model, a `MyVerbsList` view, and the iPad engagement workaround shared
 with the Models tab.
 
+**The search model fixed on `main` 2026-11-26**, by Phase 5 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `VerbSearchModel`
+holds the text, one list of results (each a match with its position), their count of infinitives,
+the guess, the selection, and the tracker, and reports an ended search from its results.
+`BrowseSearch` is gone. `searchFocusLostAt` became `SearchEngagement.isLingering`. The rest
+(`ListContent`, the review card, My Verbs) is Phase 6's.
+
 **S4. The verb page is rebuilt about six times per open, and the compound cards are recomputed
 each time.** *Measured.* One open built the page's headings six times in the first seconds, with
 no interaction. `VerbConjugations.memoized` caches the simple cards, but `CompoundTensesView`
@@ -545,6 +578,10 @@ split.
 modifiers (placement, capitalization, autocorrection), the store bootstrap, and
 `updateSearchResults` exist in both tabs, and B3 is what the drift cost.
 
+**Fixed on `main` 2026-11-26**, by Phase 5 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `browseSearchable` and
+`SortPickerOrKeyRow` (`BrowseSearchField.swift`) are written once, and `SearchEngagement` serves
+both tabs.
+
 **D6. Share-button anchoring** (`@State` frame, `onGeometryChange`, the zero check) is written at
 four sites, one of them browse's (`VerbCollectionView.swift:134`, `165-170`, `193`).
 
@@ -569,6 +606,10 @@ record are tested as types, and the wiring is not. S3's seams are what would mak
 The verb page's visit rules are the same case: that every `viewAppeared` pairs with one
 `leaveVerbView`, and that a resume records no open, holds in the code as traced, and lives in
 `onAppear`, `onDisappear`, and two `onChange`s that no test runs.
+
+**The search's part fixed on `main` 2026-11-26**, by Phase 5 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md):
+`VerbSearchModelTests` pins which events finish a search and what each reports, and what Return
+opens. The review card and the visit are Phases 6 and 9.
 
 **T2. "A relaunch keeps today's verb" is untested through the disk.** `writeSnapshots(now:)`
 reads `WidgetConstants.snapshotsURL` and `Current` directly, so no test can point it at a file.
@@ -674,7 +715,7 @@ there; **does not apply** means French or Conjuguer's design has no such thing.
 | **C7** Two entry points bypass the route | Did not | No Open Verb intent or Handoff; Spotlight goes through `URL.verbDeeplink` and `handleURL`. |
 | **C7** Spotlight's migration flag; entries never removed; rebuilt at every launch | Part | No migration here, and indexing is gated on the version. Never removing an entry carried over (B20). |
 | **C7** A collection key stored as the link spelled it | Does not apply | A featured key resolves to the collection itself, a model's id is ASCII, and analytics sends `model`. |
-| **F1** A failed search computes its guess on the main thread | **Carried over, mitigated** | Not listed above. Phase 5 bounded the distance and measured at most 0.3 s per keystroke in a Debug build, against Konjugieren's 0.8 s; it is still synchronous in `updateSearchResults`. Its fix (compute off the main actor, cancel when the text changes) applies. |
+| **F1** A failed search computes its guess on the main thread | **Carried over, mitigated** | Not listed above. Phase 5 bounded the distance and measured at most 0.3 s per keystroke in a Debug build, against Konjugieren's 0.8 s; it is still synchronous in `updateSearchResults`. Its fix (compute off the main actor, cancel when the text changes) applies. **Fixed on `main` 2026-11-26** by Phase 5 of the fixes plan: finnissons fell from 0.25–0.27 s on the main thread to 0.08–0.09 s, the search alone. |
 | **F2** Related verbs rebuilt in `body` | Did not | `Verb.related` is cached per verb. |
 | **F2** Look Up a Verb may build the index on the main actor | **Carried over** | B11. |
 | **F2** An ended search is computed again | **Carried over** | S3. |
@@ -703,7 +744,7 @@ there; **does not apply** means French or Conjuguer's design has no such thing.
 | **S5** App-wide statics with multiple scenes | **Carried over** | Seen Outside the Scope, and open question 3. |
 | **S6** An analytics value decides the interface; `isRanked` | **Carried over** | S7. |
 | **S7** Timed workarounds, none cancelled | **Carried over** | B18. |
-| **S8** The sort picker returns during a search and does nothing | **Carried over** | Not listed above. With text in the field and the keyboard down, the picker shows, and choosing My Verbs changes nothing (`showsMyVerbs` needs an empty field). |
+| **S8** The sort picker returns during a search and does nothing | **Carried over** | Not listed above. With text in the field and the keyboard down, the picker shows, and choosing My Verbs changes nothing (`showsMyVerbs` needs an empty field). **Fixed on `main` 2026-11-26** by Phase 5 of the fixes plan: the picker is disabled while the field has text, in both tabs. |
 | **S9** Unused or unguarded | Part | Carried over: `recent(limit:)`'s unused parameter; the tool accepts any `--flag`, so a mistyped output name is skipped silently (`main.swift:38-46`); `ConjugationMap(compressed:)` turns invalid UTF-8 into an empty map. Did not: the unused URL prefix, which Phase 9 removed. |
 | **S10** Both apps build the tool into one directory | **Carried over** | `scripts/write_forms_json.sh:31` uses `$TMPDIR/ConjugationMapTool-build`, the same path as Konjugieren's. A prefix on either side fixes both. |
 | **E1** `Row` and `Entry` are one shape twice | Does not apply | No separable rows. |
