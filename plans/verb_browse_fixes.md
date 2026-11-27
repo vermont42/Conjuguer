@@ -37,7 +37,7 @@ empty until it is committed.
 | 7 | Done | 2026-11-26 | `4ca2f5f` | B7, B13, B14, B15, B21, B22, B25 (the row), B30, G1, G2, G3, S10 | Yes |
 | 8 | Done | 2026-11-26 | `f866c2a` | B16, B19, S12, the progress decision, the migration, T2 | Yes |
 | 9 | Done | 2026-11-26 | `d5ae545` | B12, B27, B29, S4, S4a, S5, S6, D8, D9, T1 (the visit), K-G6 | Yes |
-| 10 | Done | 2026-11-27 | | B17, B25 (the labels), S8, S13, S14, D1, D2, D3, D6, T6 | Yes |
+| 10 | Done | 2026-11-27 | `6d94bd6` | B17, B25 (the labels), S8, S13, S14, D1, D2, D3, D6, T6 | Yes |
 | 11 | Not started | | | B5, S7, the rare-verb draw | Yes |
 | 12 | Not started | | | B10, B11, B20, S11, K-S9, K-S10 | No |
 | 13 | Not started | | | S9, T3, T4, T5, what the others left | No |
