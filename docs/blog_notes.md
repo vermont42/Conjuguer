@@ -7419,3 +7419,58 @@ to the routed sheet. The duplicate page appeared in the same 100 ms poll as the 
 now waits 300 ms, and the mutated app still failed three expectations under it. The test went from
 8.1 s to 5.5 s. The rest is the simulator presenting the two pages, which takes 3.6 s. The suite now
 runs in 64 s.
+
+## Reviewing the Pedagogy Port, and Planning Its Fixes (2026-11-27)
+
+Josh asked for a review of everything the pedagogy plan built, written as a plan of fixes with
+the findings inside it, since there would be no separate review document. The result is
+`plans/pedagogy_fixes.md`: 81 findings, his 23 decisions, and seventeen phases and a closing.
+Nothing in the app changed.
+
+The method was the browse review's, scaled up. I read the session class, the grader, the practice
+record, the draw, and the daily challenge myself, and eight Opus reviewers each read one slice
+with no view of my notes: grading, the quiz's core, shared sets and the hub, the record and
+mastery, the new kinds of question, the daily features, privacy and localization, and the tests.
+A shared brief told them to read each phase's "How it differed" note before calling anything a
+gap, to give a concrete input that goes wrong, and not to build, since eight builds in one
+directory would have collided. Findings that needed a run came back marked Suspected with the
+test that would settle them, and I ran those in a temporary probe suite of twenty tests, since
+deleted. Nineteen held.
+
+The findings fall into two kinds. Some came over from Konjugieren with the design: a right
+re-ask three questions after the correction empties My Mistakes, a diagnosed error that the
+learner repairs counts as known, two taps on the review card master a verb never typed, and
+opening a verb's page from the correction's own link erases its mastery. The others are French.
+The default quiz never asks the subjonctif of faire, pouvoir, savoir, vouloir, devoir, venir, or
+prendre, because that tense's pools are regular verbs and the big three, a structure the old
+curated quiz had and nobody revisited. "Que je parle" is graded wrong. "Vous êtes allée", said
+to one person, is graded wrong. "J'absout" is graded right. The quiz asks "il a sis". And the
+key conjugations, which in German really are a strong verb's principal parts, are in French the
+il forms, which do not give boivent or faites: after a miss on "vous faites", My Mistakes asks
+"il fait".
+
+I found the subjonctif gap myself and no reviewer did, which is a caution about slicing. Each
+reviewer checked that the draw honored its pools, and none asked whether the pools were the
+right ones, because that question sits between the draw's slice and the pedagogy's.
+
+Konjugieren's own review existed, and the prompt said not to read it until mine was done. That
+order mattered both ways. Reading it afterward added ten findings I had missed, the largest
+being that "a prit" for "a pris" and "j'ai finit" are treated as typing slips. And mine had
+things theirs could not have: everything French, and also a hub that does not notice midnight,
+links that close a sheet's quiz in silence, and a test that leaves overdue items in a shared
+record for the strongest seeded suites to read. Of Konjugieren's 62 findings, 30 carried over,
+19 in part, and 13 not at all.
+
+One thing I had wrong along the way. The pedagogy plan's Closing warned that the suite must run
+with the simulator in English, and I confirmed the simulator's language before trusting the
+baseline. The third comparison reviewer then noticed that the scheme's test action already sets
+the language to English, so the warning may be moot. The plan asks a session to try it and
+record what it finds.
+
+Josh answered the 23 decisions in six batches. Where he had ruled on the same question for
+Konjugieren earlier the same day he ruled the same way here, and on the French questions he
+took the recommendation each time: the record remembers the cell last missed, Verb Essentials
+gains a fourth blank for a verb with a second présent stem, the subjonctif's frame shows que,
+and the four kinds of correct French the quiz rejected are accepted. The plan and this entry
+are uncommitted, at his request, until he has read the plan.
+

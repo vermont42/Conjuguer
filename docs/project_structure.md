@@ -489,6 +489,7 @@ plans/                              # What Claude wrote to get another session (
 ├── location_cleanup.md             # This sorting into prompts/plans/docs and the snake_case rename (2026-11-16)
 ├── location_cleanup_moves [.json]  # Its map of every old path to its new one
 ├── mine_classical_tier.md          # Mine La Fontaine and Molière for the 144 Chanson-only verbs
+├── pedagogy_fixes.md               # The review of the pedagogy port's code and the plan to fix it: 81 findings, Konjugieren's 62 checked here, Josh's 23 decisions of 2026-11-27, seventeen phases and a closing
 ├── pedagogy_implementation.md      # Port Konjugieren's quiz pedagogy (levels, corrections, practice record, modes), in phases; runs after the browse plan
 ├── pedagogy_phase1_variant_audit.md  # The optional standard conjugations (1990 rectifications, doublets) the quiz might accept, with sources and Josh's rulings
 ├── quiz_best_score_followup.md     # Best score on the quiz briefing screen; resolved by a different route
@@ -516,7 +517,7 @@ prompts/                            # What Josh wrote to get Claude to do someth
 ├── landscape.md                    # Make the minigame work in landscape
 ├── model_eval.md                   # The Fable vs. Opus code-review eval, and the ask for its analysis
 ├── onboarding.md                   # Adapt Konjugieren's first-launch onboarding
-├── pedagogy_review.md              # Review the code the pedagogy port built, as a plan of fixes (plans/pedagogy_fixes.md)
+├── pedagogy_review.md              # Review the code the pedagogy port built, as a plan of fixes (done 2026-11-27: plans/pedagogy_fixes.md)
 ├── post.md                         # Turn the model eval into a blog post
 ├── rename_objects.md               # Rename the behavior protocols' conformers to Fowler's test-double names
 ├── tutor.md                        # The conjugation tutor
