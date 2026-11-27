@@ -39,7 +39,7 @@ empty until it is committed.
 | 9 | Done | 2026-11-26 | `d5ae545` | B12, B27, B29, S4, S4a, S5, S6, D8, D9, T1 (the visit), K-G6 | Yes |
 | 10 | Done | 2026-11-27 | `6d94bd6` | B17, B25 (the labels), S8, S13, S14, D1, D2, D3, D6, T6 | Yes |
 | 11 | Done | 2026-11-27 | `4d535b0` | B5, S7, the rare-verb draw | Yes |
-| 12 | Done | 2026-11-27 | | B10 (to a device), B11, B20, S11, K-S9, K-S10 | No |
+| 12 | Done | 2026-11-27 | `5265454` | B10 (to a device), B11, B20, S11, K-S9, K-S10 | No |
 | 13 | Not started | | | S9, T3, T4, T5, what the others left | No |
 | Closing | Not started | | | The audit, the workarounds list, the note for the other apps | No |
 
