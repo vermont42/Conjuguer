@@ -23,6 +23,9 @@ final class PracticeStore {
   /// forgetting one would let its challenge be taken again.
   private(set) var challengeResults: [DailyChallengeResult] = []
   private let getterSetter: GetterSetter
+  // Autoupdating by default: a stored `Calendar.current` keeps the time zone of the moment it was
+  // read, so a learner who flies across zones would see items fall due at the old midnight until
+  // the app relaunched.
   private let calendar: Calendar
 
   struct CardOffer: Equatable {
@@ -35,7 +38,7 @@ final class PracticeStore {
     let wasLookedUp: Bool
   }
 
-  init(getterSetter: GetterSetter, calendar: Calendar = .current) {
+  init(getterSetter: GetterSetter, calendar: Calendar = .autoupdatingCurrent) {
     self.getterSetter = getterSetter
     self.calendar = calendar
     record = getterSetter.get(key: PracticeRecord.storageKey).flatMap(PracticeRecord.init(json:)) ?? PracticeRecord()

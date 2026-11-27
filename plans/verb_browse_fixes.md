@@ -40,7 +40,7 @@ empty until it is committed.
 | 10 | Done | 2026-11-27 | `6d94bd6` | B17, B25 (the labels), S8, S13, S14, D1, D2, D3, D6, T6 | Yes |
 | 11 | Done | 2026-11-27 | `4d535b0` | B5, S7, the rare-verb draw | Yes |
 | 12 | Done | 2026-11-27 | `5265454` | B10 (to a device), B11, B20, S11, K-S9, K-S10 | No |
-| 13 | Not started | | | S9, T3, T4, T5, what the others left | No |
+| 13 | Done | 2026-11-27 | | S9, T3, T4, T5, what the others left | No |
 | Closing | Not started | | | The audit, the workarounds list, the note for the other apps | No |
 
 ## How to Work This Plan
@@ -1193,6 +1193,42 @@ nothing, though it is shortest when taken last.
   the file survived Phase 5.
 
 **How it differed:**
+
+- **`aDayGivesTheSameVerbEveryTime` was replaced,** not deleted, by
+  `everyMomentOfADayDrawsTheDaysVerb`: five moments of 15 June 2025, from its first second to its
+  last, draw one verb, and a week draws more than one. That is what "the same verb for the same
+  day" claims, and the draw's seed is where it could break.
+- **`testNoParameterValueEchoesTheQuery` was half evidence, as Konjugieren found.** The echo holds
+  by the types; the bands do not, since the parameters are strings. It stays, renamed
+  `testEveryParameterValueIsAWordOfTheVocabularyOrABand`, with its comment saying why, and
+  `testAReportKeepsNoText` pins the types through a `Mirror`: it fails if a stored property of a
+  report is text. No tripwire comment was needed, since neither test is one.
+- **T4.** None of the exact assertions in the search and lookup suites was meant as a tripwire, so
+  none got a comment. pécher and pêcher stay exact (only a new accented pecher could join them), as
+  do vins finding only venir and the lookup's single verbs, whose "only" is the point. Three now
+  assert what they test: crois ranks croiser above croître, mate's folded spellings include maté,
+  mâte, and mâté and not mate, and suis's first two results are être and suivre.
+- **The schedule on a daylight-saving day.** `dueDatesFallAtMidnightAcrossAChangeOfTheClocks`
+  takes Paris's two changes of 2026, 29 March (23 hours) and 25 October (25), and pins a start, a
+  snooze, and a review across each to midnight.
+- **`Calendar.autoupdatingCurrent`, adopted** as `PracticeStore`'s default, with a comment, since a
+  stored `.current` keeps the time zone it was read in: a learner who flew east would see items
+  fall due at the old zone's midnight until a relaunch. No test pins it, because one would have to
+  change the process's time zone under suites running in parallel. Seen and left:
+  `WidgetDateHelper.calendar` is a fixed Gregorian calendar made once, so it too keeps the launch's
+  time zone for the widget's day numbers. That is outside this plan's findings.
+- **Mutations.** Each new or repaired test was run against a temporary break of the code it pins:
+  due dates counted in seconds, a stored text field in `SearchReport`, an unbanded length, and the
+  day's seed taken from the moment. Each failed, and the three files were then restored from
+  copies.
+- **T5.** Of T5's list, only the guess's limit was still false; the doc now says one edit per three
+  whole letters, at least one and at most three. Reading the doc against each phase's notes found
+  four more stale claims, corrected: a visit's page "presented as a sheet" from an Info link or a
+  model page, `modelPage` "in a sheet over a verb page", `World` storing a link's `source`, and
+  `World.collection`. § Finding a Base now names the test that pins the two languages' agreement.
+- **S9.** `BrowseSearch.swift` was deleted in Phase 5, header and all. I read the comments in the
+  browse and verb-page files for any that restate a callee and found none; each states a reason.
+- The suite went from 1,074 to 1,076 tests, in 100 suites, all passing.
 
 ## Closing
 

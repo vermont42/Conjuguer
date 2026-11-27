@@ -608,6 +608,8 @@ itself, "haïr France", where every other screen shows "haïr (France)" (older).
 
 **Found already gone, 2026-11-27**, by Phase 12 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `URL.modelDeeplink(_: VerbModel)` was deleted with the rest of the URL builders when `Deeplink` arrived in Phase 1 (`5543a98`). Phases 8 and 10 listed it as remaining from the review's text, not the code. `BrowseSearch`'s header remains for Phase 13.
 
+**Found already gone, 2026-11-27**, by Phase 13 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `BrowseSearch.swift`, header and all, was deleted in Phase 5 (`da22b7e`); the one survivor of the name is `BrowseSearchField.swift`, whose header claims nothing. Every item of S9 is now fixed or gone.
+
 **S10. One rule, several copies.** Lowercase-and-NFC normalization is written in
 `ConjugationMap.key`, `Verb.normalizedConjugation`, `AnswerSpelling.normalized`, and
 `FormsJSON.normalize`. The subject pronouns are listed in `ConjugationQuery` and `AnswerSpelling`.
@@ -745,6 +747,8 @@ a page open. `aDayGivesTheSameVerbEveryTime` and `aDefectiveVerbIsAskedOnlyTheCe
 
 **`aDefectiveVerbIsAskedOnlyTheCellsItHas` corrected on `main` 2026-11-27**, by Phase 11 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): it asserts that falloir alone is asked each of its cells once, fewer than ten. `aDayGivesTheSameVerbEveryTime` remains.
 
+**`aDayGivesTheSameVerbEveryTime` replaced on `main` 2026-11-27**, by Phase 13 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `everyMomentOfADayDrawsTheDaysVerb` draws at five moments of one day, from its first second to its last, and expects one verb, and over a week expects more than one. Seeding by the moment instead of the day fails it. Every test T3 names is now repaired.
+
 **T4. Nothing tests that a search row's text re-parses to the same cells** (B7), or that related
 verbs agree across the two languages (S5).
 
@@ -764,6 +768,8 @@ key and the tip "both obey `TipDisplay.tipsEnabled`" (`shouldShowColorKey` does 
 **férir's 2-4 corrected on `main` 2026-11-27**, by Phase 11 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): it now shows no Quiz button from Elementary up, as the doc says, and the doc names the three-cell floor.
 
 **The verb page's three corrected on `main` 2026-11-26**, by Phase 9 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the sheets that end a visit are the article and Test Me; six tenses have no French second name, named; and the color key now obeys `TipDisplay.tipsEnabled`, as the doc said, since it is a hint that goes once dismissed.
+
+**The rest corrected on `main` 2026-11-27**, by Phase 13 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the guess's limit says one edit per three whole letters, at least one, as `maxGuessDistance` computes. The other claims were already true: § Search no longer says Return and the arrows need a query, an unknown key does nothing since B4's fix made that so, `DeeplinkTests` pins all six links since Phase 12, and the widget takes My Verbs in turn since Phase 8. Reading the doc against each phase's notes found four more, now corrected: a visit's page "presented as a sheet" from an Info link or a model page (both push since Phase 4), `modelPage`'s source "in a sheet over a verb page", `World` storing a link's `source` (the scene's router does, since Phase 3), and `World.collection` (now `RoutedSheet.Page.collection`).
 
 **T6. `docs/voiceover.md` has no row for the collection views,** and the verb row's two languages
 inside a `Button`, which the plan left untested in Phase 0, 1, 2, and 5, are still untested.
@@ -887,10 +893,10 @@ there; **does not apply** means French or Conjuguer's design has no such thing.
 | **E1** `Row` and `Entry` are one shape twice | Does not apply | No separable rows. |
 | **E2** A redundant case in the cell rows | **Carried over** | `conjugationParts` names the three personless tenses in a case whose result the default's `guard` already gives (`VerbConjugations.swift:112-121`). **Fixed on `main` 2026-11-26** by Phase 9: the case names only the impératif passé, which has a person and no pronoun. |
 | **E3** Static tables pick the tracked sections | Did not | Conjuguer compares with the block's first section, which has its own cost (B27). |
-| **T1** Tests that cannot fail | Part | `testNoParameterValueEchoesTheQuery` is here and holds by the types. The other two are Konjugieren's. Conjuguer's own are T3. |
+| **T1** Tests that cannot fail | Part | `testNoParameterValueEchoesTheQuery` is here and holds by the types. The other two are Konjugieren's. Conjuguer's own are T3. **Fixed on `main` 2026-11-27** by Phase 13 of the fixes plan, as Konjugieren found: the echo holds by the types, but the bands do not, since the parameters are strings, and an unbanded length fails the test. It stays, as `testEveryParameterValueIsAWordOfTheVocabularyOrABand`, and `testAReportKeepsNoText` pins the types: it fails if a stored property of a report is text. |
 | **T2** Tests that check a copy | Part | The retyped widget links (S11). |
-| **T3** Branches with no test | **Carried over** | Twins (B30), the rotation with a changing list (B19), the writer's disk path (T2), the visit pairing (T1), and the schedule across a daylight-saving day. |
-| **T4** Exact assertions against a growing corpus | **Carried over, mildly** | `Set(results) == ["pécher", "pêcher"]` (`VerbSearchTests.swift:61`). |
+| **T3** Branches with no test | **Carried over** | Twins (B30), the rotation with a changing list (B19), the writer's disk path (T2), the visit pairing (T1), and the schedule across a daylight-saving day. **Fixed on `main`**: the first four by Phases 7, 8, 8, and 9; the schedule on 2026-11-27 by Phase 13, which pins a start, a snooze, and a review across both of Paris's 2026 changes. Counted in seconds, the due dates miss midnight by an hour. The practice store's calendar also became `Calendar.autoupdatingCurrent`, since a stored `.current` keeps the zone it was read in. |
+| **T4** Exact assertions against a growing corpus | **Carried over, mildly** | `Set(results) == ["pécher", "pêcher"]` (`VerbSearchTests.swift:61`). **Fixed on `main` 2026-11-27** by Phase 13 of the fixes plan. None was meant as a tripwire. pécher and pêcher stay exact, since only a new accented spelling of pecher could join them, and so do vins and the lookup's single verbs, whose "only" is what they test. Three now assert what they are about: crois ranks croiser above croître rather than naming the first three, mate's folded spellings include maté, mâte, and mâté rather than being only those, and suis's first two results are être and suivre. |
 
 ### Costs of Settled Decisions
 

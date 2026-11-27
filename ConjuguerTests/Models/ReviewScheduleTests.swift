@@ -76,6 +76,35 @@ struct ReviewScheduleTests {
     #expect(schedule.answered(correctly: true, at: date(10), calendar: calendar) == ReviewSchedule(box: 3, due: startOf(24)))
   }
 
+  private static let paris: Calendar = {
+    var calendar = Calendar(identifier: .gregorian)
+    calendar.timeZone = TimeZone(identifier: "Europe/Paris") ?? .gmt
+    return calendar
+  }()
+
+  private func paris(_ month: Int, _ day: Int, hour: Int = 0) -> Date {
+    Self.paris.date(from: DateComponents(year: 2026, month: month, day: day, hour: hour)) ?? .distantPast
+  }
+
+  // Paris puts its clocks forward on 29 March 2026, a day of 23 hours, and back on 25 October,
+  // one of 25. A due date counted in seconds from midnight would land at 01:00 after the first
+  // and at 23:00 the evening before after the second.
+  @Test(arguments: [(3, 29), (10, 25)])
+  func dueDatesFallAtMidnightAcrossAChangeOfTheClocks(month: Int, day: Int) {
+    let calendar = Self.paris
+
+    let started = ReviewSchedule.start(at: paris(month, day, hour: 12), calendar: calendar)
+    #expect(started.due == paris(month, day + 1))
+
+    let snoozed = started.snoozed(at: paris(month, day, hour: 20), calendar: calendar)
+    #expect(snoozed.due == paris(month, day + 1))
+
+    let reviewed = ReviewSchedule.start(at: paris(month, day - 2, hour: 12), calendar: calendar)
+      .reviewed(at: paris(month, day - 1, hour: 12), calendar: calendar)
+    #expect(reviewed.box == 1)
+    #expect(reviewed.due == paris(month, day + 2))
+  }
+
   @Test func aWrongAnswerStartsOverWhetherDueOrNot() {
     let schedule = ReviewSchedule(box: 3, due: startOf(20))
 

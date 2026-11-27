@@ -83,7 +83,8 @@ query use it too.
   accents and ligatures folded) and measures optimal string alignment distance (Levenshtein plus a
   swap of two adjacent letters) to every folded infinitive and to every folded
   conjugation when the query is one word once its pronouns are dropped. A guess must be within one
-  edit per three letters, and never more than three; on a tie an infinitive beats a conjugation,
+  edit per three whole letters, at least one and never more than three, so a query of one or two
+  letters may be one edit away (`VerbSearch.maxGuessDistance`); on a tie an infinitive beats a conjugation,
   then the more frequent verb wins, then the earlier spelling. So venier finds venir, assoir
   asseoir, manjer manger (ahead of manier, also one edit away), finnissons finir through finissons
   (whose cells the guess's card names and its page marks), and xyzzyq nothing, in which case only
@@ -299,7 +300,9 @@ mettre 16). Of the 300 most frequent verbs, the 65 with a base are all right. Th
 formed in Latin whose meaning has drifted (attendre on tendre, demander on mander, rester on the
 archaic ester), and Josh kept them (2026-11-22). allier is built on lier by the same reasoning
 (Latin alligare, ad + ligare). The rule reads the etymology in the app's language. Every pair
-appears in both languages today, so the families are the same in French and English.
+appears in both languages today, so the families are the same in French and English, and
+`RelatedVerbsTests.testTheBaseRuleGivesTheSameAnswerInEnglishAndFrench` fails if a rewritten
+etymology changes that.
 
 ### The Card
 
@@ -508,8 +511,8 @@ one series.
 | `finishSearch` | `source` (where the search began: `tab`, `control`, `quickAction`, `lookup`, or `deeplink`), `outcome` (`opened`, `abandoned`, `noResult`), `queryLength` (`1-2`, `3-5`, `6-9`, `10+`), `resultCount` (`0`, `1`, `2-10`, `11+`), `matchKind` (below), `resultPosition` (`1`, `2-5`, `6+`, `none`) | Once per verb search: when a result or the guess is opened (by tap, Return, or the arrow keys), the field is cleared, or the app goes to the background with text in the field |
 
 **A visit** (`VerbVisit`) is one stretch of a verb page on screen, uncovered by a sheet of its own
-(a tense's article or Test Me), with the app out of the background. It is the same whether the page was pushed (Verbs tab) or presented
-as a sheet (a deeplink, an Info link, a model page). A page that returns starts a new visit whose
+(a tense's article or Test Me), with the app out of the background. It is the same whether the page was pushed (from a tab, an
+article, a model page, or another verb page) or presented as a link's routed sheet. A page that returns starts a new visit whose
 `source` is `resume`, so every verb page's `viewAppeared` pairs with one `leaveVerbView`, background
 time never counts as reading, and arrivals are the visits whose source is not `resume`. A resumed
 visit starts from the deepest section already on screen. The App Store version sent
@@ -579,7 +582,7 @@ same.
 | `browse` | Yes | A row of the verb list with the search field blank |
 | `search` | Yes | A search result, opened by tap, Return, or the arrow keys |
 | `searchGuess` | Yes | The guess at the verb meant, shown when a search finds nothing |
-| `modelPage` | Yes | A verb in a model page's list, in the Models tab or in a sheet over a verb page |
+| `modelPage` | Yes | A verb in a model page's list, in whichever stack pushed the model page |
 | `infoLink` | Yes | A verb linked from an Info article (`?source=infoLink`) |
 | `widget` | Yes | Any home-screen, lock-screen, or quiz widget (`WidgetDeeplink`, `?source=widget`) |
 | `control` | Yes | The Random Verb control in Control Center (`OpenRandomVerbControlIntent`); for `finishSearch`, the Find a Verb control |
@@ -616,8 +619,8 @@ same.
 **How the source travels.** The verb list pushes a `VerbDestination` (verb and source) rather than
 a bare `Verb`, and the cells a search matched (`marks`). A link carries `source` as a query item
 (`conjuguer://verb/aller?source=widget`), because a widget or an intent can hand the app only a
-URL. `Deeplink(url:)` reads it, falling back to `deeplink`, and `World` stores it in the
-`VerbDestination` of the routed sheet, which passes it to `VerbView`. A model
+URL. `Deeplink(url:)` reads it, falling back to `deeplink`, and `SceneRouter.handle(_:)` stores
+it in the `VerbDestination` of the routed sheet, which passes it to `VerbView`. A model
 page passes `modelPage` itself. The link grammar (§ Deeplinks) keeps the item on every route.
 
 **The convention for new surfaces.** A change that adds a way to reach a verb page passes its
@@ -899,7 +902,7 @@ as a link.
 | Piece | File | Role |
 |---|---|---|
 | `VerbCollection` | `Models/VerbCollection.swift` | The cases, keys, membership (`contains`, `verbs`, cached, most frequent first; a model's from `VerbModel.entriesByFrequency`), titles, descriptions, links, share text, `analyticsValue`, `viewParameters(source:)`, and `QuizScope.collection(_:)` |
-| `VerbCollectionDestination` | `Models/VerbCollection.swift` | A featured collection and how it was reached, pushed through `verbPageNavigation` or presented from a link (`World.collection`) |
+| `VerbCollectionDestination` | `Models/VerbCollection.swift` | A featured collection and how it was reached, pushed through `verbPageNavigation` or presented from a link (`RoutedSheet.Page.collection`) |
 | `VerbCollectionView` | `Views/VerbCollectionView.swift` | A featured collection's page: a `VerbListPage` with the title, description, and bar above its Frequency/Alphabetical picker (not stored), and its verbs as rows with a check on each looked up. It sends `viewCollection` with what `VerbCollection.viewParameters(source:)` gives |
 | `VerbCollectionBar` | `Views/VerbCollectionView.swift` | "3 of 100 looked up", Quiz, Share, and a progress bar. The collection page has it, and so does every model page, in its verbs card |
 | `VerbCollectionRow` | `Views/VerbCollectionView.swift` | A featured collection in the Models tab: a row on iPhone, a card in a grid on iPad, with its count and a progress bar |

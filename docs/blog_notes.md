@@ -7286,3 +7286,38 @@ nothing. The map refuses bytes that are not UTF-8 instead of reading them as an 
 Conjugar's prefixes, so the three apps no longer share a build directory. The one cleanup the plan
 listed, a test-only `URL.modelDeeplink` overload, turned out to have gone in Phase 1. Two later
 phases had copied "remains" from the review's prose, not from the code.
+
+## Tests That Could Not Fail, and Midnight in Paris (2026-11-27)
+
+Phase 13 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md) took what the other twelve
+phases left: two tests the review said could not fail, assertions that a growing verb list could
+break, a schedule never tried on a short day, and prose that had drifted.
+
+`aDayGivesTheSameVerbEveryTime` called a pure function twice and compared the answers, which
+proves nothing. The claim behind it is real, though: the widget's verb belongs to the day, not to
+the moment. So the new test draws at the day's first second, its last, and three moments between,
+and expects one verb, then expects a week to give more than one. Seeding the draw by the moment
+instead of the day fails it, which the old test would not have noticed.
+
+The privacy test was the opposite case. The review said it held by its types, and Konjugieren had
+already found that only half true: a report stores only enums and counts, so it cannot echo a
+query, but its parameters are strings, and an unbanded length would send "14" for Constantinople.
+The test caught that, so it stayed under a name saying what it checks, and a second test now pins
+the types themselves by reflecting over the report and failing on any stored text.
+
+The review schedule is counted in calendar days, which a test in UTC never questions. Paris
+changes its clocks on 29 March and 25 October, so a start, a snooze, and a review across each must
+land at midnight. Counted in seconds, they land at 01:00 and 23:00. While there, the practice
+store's calendar became `Calendar.autoupdatingCurrent`. A stored `Calendar.current` keeps the time
+zone of the moment it was read, so a learner who flew from Paris to Montréal would have had cards
+fall due at Paris's midnight until the app relaunched.
+
+Every new test was run once against a deliberate break of the code it guards, and each failed.
+That habit came from Konjugieren's version of this phase, and it is the only way to know that a
+test is not the kind this phase existed to remove.
+
+The doc pass was smaller than the review's list suggested, since most of T5's claims had been made
+true by the phases that touched them. The guess's limit was still misdescribed. A slower read
+against each phase's notes found four sentences that still had verb pages presented as sheets from
+places that have pushed since Phase 4, and `World` doing what each window's router has done since
+Phase 3. Those are the sentences a future session would have believed.

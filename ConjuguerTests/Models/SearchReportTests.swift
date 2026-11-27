@@ -158,11 +158,11 @@ struct SearchReportTests {
     ])
   }
 
-  // The privacy policy promises that nothing typed is sent. Every value must come from a fixed
-  // vocabulary or a band, so none can echo the query, even a query that is itself a band or a
-  // vocabulary word.
+  // The privacy policy promises that nothing typed is sent. A report keeps no text, which
+  // `testAReportKeepsNoText` pins, but its parameters are strings, so this checks that each is a
+  // word of the vocabulary or a band: an unbanded length would send "14" for Constantinople.
   @Test(arguments: ["venir", "a", "1", "10+", "opened", "none", "se souvenir", "Constantinople"])
-  func testNoParameterValueEchoesTheQuery(query: String) {
+  func testEveryParameterValueIsAWordOfTheVocabularyOrABand(query: String) {
     let vocabulary = Set(
       SearchOutcome.allCases.map(\.rawValue)
         + SearchMatchKind.allCases.map(\.rawValue)
@@ -178,6 +178,19 @@ struct SearchReportTests {
     for report in reports {
       #expect(Set(report.parameters.keys) == ["source", "outcome", "queryLength", "resultCount", "matchKind", "resultPosition"])
       #expect(Set(report.parameters.values).isSubset(of: vocabulary))
+    }
+  }
+
+  @Test func testAReportKeepsNoText() {
+    let reports = [
+      SearchReport.ended(query: "venir", matches: matches("venir")),
+      SearchReport.opened(query: "venir", resultCount: 3, kind: .exactInfinitive, position: 0),
+      SearchReport.openedGuess(query: "venier")
+    ]
+    for report in reports {
+      let stored = Mirror(reflecting: report).children
+      #expect(!stored.isEmpty)
+      #expect(stored.allSatisfy { !($0.value is any StringProtocol) && !($0.value is Character) })
     }
   }
 }

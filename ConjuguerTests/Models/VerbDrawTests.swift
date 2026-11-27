@@ -144,12 +144,16 @@ struct VerbDrawTests {
     #expect(longestGap == 2)
   }
 
-  @Test func aDayGivesTheSameVerbEveryTime() {
-    let date = day("2025-06-15")
-    let first = VerbDraw.verbOfTheDay(on: date, myVerbs: [], frequentVerbs: VerbDraw.frequentVerbs)
-    let second = VerbDraw.verbOfTheDay(on: date, myVerbs: [], frequentVerbs: VerbDraw.frequentVerbs)
-    #expect(first != nil)
-    #expect(first == second)
+  @Test func everyMomentOfADayDrawsTheDaysVerb() {
+    let start = day("2025-06-15")
+    let moments = [0, 1, 3_600, 43_200, 86_399].map { start.addingTimeInterval(Double($0)) }
+    let keys = moments.compactMap { VerbDraw.verbOfTheDay(on: $0, myVerbs: [], frequentVerbs: VerbDraw.frequentVerbs)?.dictionaryKey }
+    #expect(keys.count == moments.count)
+    #expect(Set(keys).count == 1)
+    let week = days(from: "2025-06-15", count: 7).compactMap {
+      VerbDraw.verbOfTheDay(on: $0, myVerbs: [], frequentVerbs: VerbDraw.frequentVerbs)?.dictionaryKey
+    }
+    #expect(Set(week).count > 1)
   }
 
   /// Each draw weighs every verb it is offered, and a verb's weight reads its etymology, so these
