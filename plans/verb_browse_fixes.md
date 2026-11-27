@@ -1214,9 +1214,18 @@ nothing, though it is shortest when taken last.
 - **`Calendar.autoupdatingCurrent`, adopted** as `PracticeStore`'s default, with a comment, since a
   stored `.current` keeps the time zone it was read in: a learner who flew east would see items
   fall due at the old zone's midnight until a relaunch. No test pins it, because one would have to
-  change the process's time zone under suites running in parallel. Seen and left:
-  `WidgetDateHelper.calendar` is a fixed Gregorian calendar made once, so it too keeps the launch's
-  time zone for the widget's day numbers. That is outside this plan's findings.
+  change the process's time zone under suites running in parallel.
+- **`WidgetDateHelper.calendar`, fixed at Josh's request (2026-11-27).** It was a Gregorian
+  calendar made once, so it kept the launch's time zone for the widget's dates and day numbers. A
+  script measured the ways out: a Gregorian calendar given `TimeZone.autoupdatingCurrent` kept the
+  zone it was given, and `TimeZone.current` stayed put too, while `Calendar.autoupdatingCurrent`
+  followed a change of the default zone. So the helper's calendar is made on each access with
+  `Calendar.autoupdatingCurrent`'s zone, at about 0.6 µs a call. `VerbDraw.dayNumber` held a
+  second copy of the launch's zone in a stored 2025-01-01 instant, which east of that zone gave
+  the day before's number; it now counts between dates and takes a calendar, and
+  `aDayHasOneNumberInEveryTimeZone` pins 10 March 2026 as day 433 at three hours in four zones,
+  from Kiritimati to Pago Pago. With the stored instant put back, every zone east of this Mac's
+  failed with 432.
 - **Mutations.** Each new or repaired test was run against a temporary break of the code it pins:
   due dates counted in seconds, a stored text field in `SearchReport`, an unbanded length, and the
   day's seed taken from the moment. Each failed, and the three files were then restored from
@@ -1228,7 +1237,7 @@ nothing, though it is shortest when taken last.
   `World.collection`. § Finding a Base now names the test that pins the two languages' agreement.
 - **S9.** `BrowseSearch.swift` was deleted in Phase 5, header and all. I read the comments in the
   browse and verb-page files for any that restate a callee and found none; each states a reason.
-- The suite went from 1,074 to 1,076 tests, in 100 suites, all passing.
+- The suite went from 1,074 to 1,077 tests, in 100 suites, all passing.
 
 ## Closing
 

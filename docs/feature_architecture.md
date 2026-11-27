@@ -2181,7 +2181,10 @@ does not depend on the language.
 
 Once My Verbs has entries (starred verbs, then the last 20 opened), it supplies one draw in three.
 For the widget, that is every day whose number since 2025-01-01 is a multiple of three
-(`VerbDraw.isMyVerbsDay`), taking My Verbs in turn: the verb whose last My Verbs day is longest
+(`VerbDraw.isMyVerbsDay`). The number counts dates, not instants, in `WidgetDateHelper.calendar`,
+a Gregorian calendar made on each access with the time zone of `Calendar.autoupdatingCurrent`, so
+a learner who changes zones gets the new zone's day without a relaunch. My Verbs days take
+My Verbs in turn: the verb whose last My Verbs day is longest
 ago, a verb never given one first, the key breaking a tie. An index into the list by turn cannot
 serve, since opening the widget's verb moves it to the front of Recent and a verb opened between
 turns changes the list's length, so the index lands anywhere, often on the verb just shown (B19 of

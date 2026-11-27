@@ -7,12 +7,19 @@
 
 import Foundation
 
-// Date helpers shared by the app and the widget extension. A fixed Gregorian calendar
-// keeps day indices and date strings stable regardless of the user's calendar/locale
-// (a Buddhist/Japanese calendar would otherwise leak era years into the questionID),
-// and the midnight math stays DST-correct.
+// Date helpers shared by the app and the widget extension. A Gregorian calendar keeps day
+// indices and date strings stable regardless of the user's calendar/locale (a Buddhist/Japanese
+// calendar would otherwise leak era years into the questionID), and the midnight math stays
+// DST-correct. It is made on each access, with `Calendar.autoupdatingCurrent`'s time zone,
+// because a stored calendar keeps the zone of its launch, and so does one given
+// `TimeZone.autoupdatingCurrent` (measured 2026-11-27): a learner who crossed zones would see
+// the old zone's day until a relaunch. Making one costs under a microsecond.
 enum WidgetDateHelper {
-  static let calendar = Calendar(identifier: .gregorian)
+  static var calendar: Calendar {
+    var calendar = Calendar(identifier: .gregorian)
+    calendar.timeZone = Calendar.autoupdatingCurrent.timeZone
+    return calendar
+  }
 
   // Locale-/calendar-independent yyyy-MM-dd. Used in quiz questionIDs and to match a
   // multi-day snapshot to the day it should display. `String(format:)` with `%d` is

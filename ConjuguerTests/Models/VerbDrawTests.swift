@@ -144,6 +144,16 @@ struct VerbDrawTests {
     #expect(longestGap == 2)
   }
 
+  @Test(arguments: ["Pacific/Kiritimati", "Europe/Paris", "America/Toronto", "Pacific/Pago_Pago"])
+  func aDayHasOneNumberInEveryTimeZone(identifier: String) throws {
+    var calendar = Calendar(identifier: .gregorian)
+    calendar.timeZone = try #require(TimeZone(identifier: identifier))
+    for hour in [0, 12, 23] {
+      let date = try #require(calendar.date(from: DateComponents(year: 2026, month: 3, day: 10, hour: hour)))
+      #expect(VerbDraw.dayNumber(of: date, calendar: calendar) == 433)
+    }
+  }
+
   @Test func everyMomentOfADayDrawsTheDaysVerb() {
     let start = day("2025-06-15")
     let moments = [0, 1, 3_600, 43_200, 86_399].map { start.addingTimeInterval(Double($0)) }

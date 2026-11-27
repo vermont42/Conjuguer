@@ -7321,3 +7321,24 @@ true by the phases that touched them. The guess's limit was still misdescribed. 
 against each phase's notes found four sentences that still had verb pages presented as sheets from
 places that have pushed since Phase 4, and `World` doing what each window's router has done since
 Phase 3. Those are the sentences a future session would have believed.
+
+## The Widget's Calendar Follows the Learner (2026-11-27)
+
+Phase 13 had noticed that the widget's calendar was made once and kept the time zone of the
+app's launch, and left it as out of scope. Josh asked for the fix.
+
+The obvious repair failed. A Gregorian calendar whose time zone is set to
+`TimeZone.autoupdatingCurrent` sounds as if it should follow the zone, but a small script showed
+otherwise: the calendar fixes the zone when it is assigned. `TimeZone.current` also stayed put
+when the default zone changed. Only `Calendar.autoupdatingCurrent` followed. So
+`WidgetDateHelper.calendar` became a computed property that builds a Gregorian calendar with that
+calendar's zone each time it is read. The same script timed it at 0.6 µs, which is nothing beside
+what the callers do with it.
+
+A second copy of the launch's zone was hiding in `VerbDraw`. The day number counted from a stored
+instant, midnight of 1 January 2025 in whatever zone the app launched in. East of that zone, the
+day's midnight falls less than a whole day after the reference, so the count came out one short,
+and a Paris learner whose app had launched in Montréal would get yesterday's verb of the day. The
+number now counts between dates rather than instants. The new test asks for 10 March 2026 as day
+433 at three hours of the day in four zones, from Kiritimati to Pago Pago. Put the stored instant
+back and every zone east of this Mac fails with 432.

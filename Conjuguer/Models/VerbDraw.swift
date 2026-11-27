@@ -18,7 +18,6 @@ enum VerbDraw {
   static let alleModelID = "1-9"
 
   private static let firstIrregularGroup = 3
-  private static let referenceDate = WidgetDateHelper.calendar.date(from: DateComponents(year: 2025, month: 1, day: 1)) ?? .distantPast
 
   @MainActor static var frequentVerbs: [Verb] {
     Verb.verbs(in: frequentBand)
@@ -79,9 +78,11 @@ enum VerbDraw {
     VerbBase.base(of: verb.infinitif) == nil
   }
 
-  static func dayNumber(of date: Date) -> Int {
-    let calendar = WidgetDateHelper.calendar
-    return calendar.dateComponents([.day], from: referenceDate, to: calendar.startOfDay(for: date)).day ?? 0
+  /// Days from 1 January 2025 to the date's day, counted between dates rather than instants, so
+  /// that a learner who has changed time zones still gets one number per day of their calendar.
+  static func dayNumber(of date: Date, calendar: Calendar = WidgetDateHelper.calendar) -> Int {
+    let day = calendar.dateComponents([.year, .month, .day], from: date)
+    return calendar.dateComponents([.day], from: DateComponents(year: 2025, month: 1, day: 1), to: day).day ?? 0
   }
 
   // `Int.random(in:using:)` would serve, but its use of the generator is not documented, so a
