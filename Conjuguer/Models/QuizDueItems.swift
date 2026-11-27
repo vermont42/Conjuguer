@@ -24,8 +24,10 @@ extension QuizDraw {
     limit: Int = dueItemLimit, // swiftlint:disable:this function_default_parameter_at_end
     using generator: inout some RandomNumberGenerator
   ) -> [QuizQuestion] {
-    let bandVerbs = verbs(in: band).filter { !excludedEntries.contains($0.dictionaryKey) }
-    let bandKeys = Set(bandVerbs.map(\.dictionaryKey))
+    guard !items.isEmpty else {
+      return []
+    }
+    let (bandVerbs, bandKeys) = dueCandidates(in: band)
     let askedSlots = Set(slots)
     var questions: [QuizQuestion] = []
 
@@ -47,6 +49,20 @@ extension QuizDraw {
       }
     }
     return questions
+  }
+
+  @MainActor private static var dueCandidatesByBand: [FrequencyBand?: (verbs: [Verb], keys: Set<String>)] = [:]
+
+  /// The band's askable verbs and their keys, kept, since filtering and hashing every verb cost
+  /// most of an Advanced quiz's start.
+  @MainActor private static func dueCandidates(in band: FrequencyBand?) -> (verbs: [Verb], keys: Set<String>) {
+    if let cached = dueCandidatesByBand[band] {
+      return cached
+    }
+    let verbs = verbs(in: band).filter { !excludedEntries.contains($0.dictionaryKey) }
+    let candidates = (verbs: verbs, keys: Set(verbs.map(\.dictionaryKey)))
+    dueCandidatesByBand[band] = candidates
+    return candidates
   }
 
   /// A verb of `verbs` whose `tense` exercises the pattern `item`, drawn at random.

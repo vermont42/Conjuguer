@@ -77,16 +77,19 @@ struct RoutedSheetTests {
 
   /// Lets the window run until `condition` holds or `seconds` pass. A sheet that replaces another
   /// takes about two seconds on the simulator, its dismissal and then its presentation.
-  private static func waitUntil(seconds: Double = 6, _ condition: () -> Bool) async throws {
+  @discardableResult
+  private static func waitUntil(seconds: Double = 6, _ condition: () -> Bool) async throws -> Bool {
     let deadline = Date.now.addingTimeInterval(seconds)
     while !condition(), Date.now < deadline {
       try await Task.sleep(for: .milliseconds(100))
     }
+    return condition()
   }
 
-  /// Long enough for a tab to load or for a stray second presentation to show itself.
+  /// Long enough for a stray second presentation to show itself. With B1 restored, the second
+  /// page appeared in the same 100 ms poll as the first, so this leaves room for a slower one.
   private static func settle() async throws {
-    try await Task.sleep(for: .milliseconds(1_000))
+    try await Task.sleep(for: .milliseconds(300))
   }
 
   /// B8 of docs/verb_browse_review.md: a second link to the verb already showing is a new sheet,
@@ -136,9 +139,10 @@ struct RoutedSheetTests {
     }
 
     router.selectedTab = .info
-    try await Self.settle()
+    #expect(try await Self.waitUntil { appearances(of: "\(InfoBrowseView.self)", analytics) > 0 }, "The Info tab must load, since B1 needs its view.")
+    let verbBrowseAppearances = appearances(of: "\(VerbBrowseView.self)", analytics)
     router.selectedTab = .verbs
-    try await Self.settle()
+    #expect(try await Self.waitUntil { appearances(of: "\(VerbBrowseView.self)", analytics) > verbBrowseAppearances })
 
     router.handleURL(try Self.url("conjuguer://verb/boire?source=widget"))
     try await Self.waitUntil { !verbPageAppearances(analytics).isEmpty }
@@ -151,6 +155,12 @@ struct RoutedSheetTests {
     try await Self.settle()
     #expect(verbPageAppearances(analytics) == ["widget", "lookup"])
     #expect(world.learnerVerbs.record.entries["boire"]?.openCount == 2)
+  }
+
+  private func appearances(of viewName: String, _ analytics: AnalyticsSpy) -> Int {
+    zip(analytics.signalNames, analytics.signalParameters).filter { name, parameters in
+      name == .viewAppeared && parameters[ParameterKey.viewName.rawValue] == viewName
+    }.count
   }
 
   private func verbPageAppearances(_ analytics: AnalyticsSpy) -> [String] {

@@ -191,7 +191,7 @@ enum QuizDraw {
     return slots.compactMap { slot in
       let pools = slot.tense.verbPools
       let fitting = pools.filter { !candidates(slot.tense, $0).verbs(role: slot.role, isIrregular: slot.isIrregular).isEmpty }
-      let verbs: [Verb]
+      let verbs: CandidateVerbs
       if let pool = fitting.randomElement(using: &generator) {
         verbs = candidates(slot.tense, pool).verbs(role: slot.role, isIrregular: slot.isIrregular)
       } else if let pool = pools.randomElement(using: &generator) {
@@ -211,7 +211,7 @@ enum QuizDraw {
     band.map(Verb.verbs(in:)) ?? Verb.verbsByFrequency
   }
 
-  private static func freshVerb(from verbs: [Verb], asked: Set<String>, using generator: inout some RandomNumberGenerator) -> Verb? {
+  private static func freshVerb(from verbs: CandidateVerbs, asked: Set<String>, using generator: inout some RandomNumberGenerator) -> Verb? {
     var verb = verbs.randomElement(using: &generator)
     for _ in 0 ..< freshVerbTries {
       guard let drawn = verb, asked.contains(drawn.id) else {
@@ -286,7 +286,7 @@ enum QuizDraw {
       return candidates
     }
 
-    func verbs(role: Role, isIrregular: Bool?) -> [Verb] {
+    func verbs(role: Role, isIrregular: Bool?) -> CandidateVerbs {
       let kinds: [Kind]
       switch role {
       case .core:
@@ -299,9 +299,40 @@ enum QuizDraw {
         kinds = [.core, .frequentDerivative, .other]
       }
       let irregularities = isIrregular.map { [$0] } ?? [true, false]
-      return kinds.flatMap { kind in
-        irregularities.flatMap { buckets[Bucket(kind: kind, isIrregular: $0)] ?? [] }
+      return CandidateVerbs(parts: kinds.flatMap { kind in
+        irregularities.compactMap { buckets[Bucket(kind: kind, isIrregular: $0)] }
+      })
+    }
+  }
+
+  /// The buckets a role and an irregularity draw from, read in place. Joining them into one array
+  /// copied thousands of verbs at Advanced for each of the hundred-odd reads a quiz makes. A draw
+  /// consumes the generator as `Array.randomElement(using:)` does, so a seed draws the same quiz.
+  fileprivate struct CandidateVerbs {
+    private let parts: [[Verb]]
+    let count: Int
+
+    init(parts: [[Verb]]) {
+      self.parts = parts
+      count = parts.reduce(0) { $0 + $1.count }
+    }
+
+    var isEmpty: Bool {
+      parts.allSatisfy(\.isEmpty)
+    }
+
+    func randomElement(using generator: inout some RandomNumberGenerator) -> Verb? {
+      guard !isEmpty else {
+        return nil
       }
+      var index = Int.random(in: 0 ..< count, using: &generator)
+      for part in parts {
+        if index < part.count {
+          return part[index]
+        }
+        index -= part.count
+      }
+      return nil
     }
   }
 }

@@ -21,10 +21,6 @@ struct VerbSearchConjugationTests {
     matches(query).map(\.verb.infinitif)
   }
 
-  private func firstLine(_ query: String) -> String? {
-    matches(query).first?.conjugation?.line(pronounGender: .masculine)
-  }
-
   @Test(arguments: [
     ("vais", "aller", "vais\u{202F}: Indicatif Présent (je)"),
     ("fait", "faire", "fait\u{202F}: Indicatif Présent (il) · Participe Passé"),
@@ -39,8 +35,9 @@ struct VerbSearchConjugationTests {
     ("avions fini", "finir", "avions fini\u{202F}: Plus-que-parfait (nous)")
   ])
   func testConjugationFindsItsVerbFirst(query: String, verb: String, line: String) {
-    #expect(infinitives(query).first == verb)
-    #expect(firstLine(query) == line)
+    let first = matches(query).first
+    #expect(first?.verb.infinitif == verb)
+    #expect(first?.conjugation?.line(pronounGender: .masculine) == line)
   }
 
   @Test func testHomographFindsBothVerbs() {
@@ -143,8 +140,9 @@ struct VerbSearchConjugationTests {
 
   @Test(arguments: sentences)
   func testSentenceFindsItsVerb(query: String, verb: String, line: String) {
-    #expect(infinitives(query).first == verb)
-    #expect(firstLine(query) == line)
+    let first = matches(query).first
+    #expect(first?.verb.infinitif == verb)
+    #expect(first?.conjugation?.line(pronounGender: .masculine) == line)
   }
 
   // A link's match carries a row's text, and the verb page reads it back as search does, so

@@ -282,8 +282,27 @@ enum ChoiceQuestions {
 
   /// The items a level asks. A debug build asks drafts too, as Phrases à trous does.
   @MainActor static func askable(at level: QuizLevel, from items: [ChoiceQuestion]? = nil, includesDrafts: Bool = GapSentences.includesDrafts) -> [ChoiceQuestion] {
-    (items ?? all).filter { ($0.reviewed || includesDrafts) && $0.isAskable(at: level) }
+    func filtered(_ items: [ChoiceQuestion]) -> [ChoiceQuestion] {
+      items.filter { ($0.reviewed || includesDrafts) && $0.isAskable(at: level) }
+    }
+    if let items {
+      return filtered(items)
+    }
+    let key = AskableKey(level: level, includesDrafts: includesDrafts)
+    if let cached = askableByKey[key] {
+      return cached
+    }
+    let askable = filtered(all)
+    askableByKey[key] = askable
+    return askable
   }
+
+  private struct AskableKey: Hashable {
+    let level: QuizLevel
+    let includesDrafts: Bool
+  }
+
+  @MainActor private static var askableByKey: [AskableKey: [ChoiceQuestion]] = [:]
 }
 
 extension QuizDraw {

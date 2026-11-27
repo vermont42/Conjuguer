@@ -7377,3 +7377,45 @@ finished their own fixes plans the same week, so the list names only what their 
 missed. The most useful item is the time-zone bug that Phase 13 found late. Both siblings' practice
 stores keep the calendar they launched with, and Konjugieren's widget has the same stored
 reference instant that gave a learner here yesterday's verb.
+
+## Why the suite took two minutes (2026-11-27)
+
+Josh asked which unit tests were slowest. The full run took 134 s, and one test took 44 s of
+that by itself: `theDefaultQuizDrawsEachTenseAtItsWeight`, which starts 600 seeded Advanced
+quizzes to check the tense weights statistically. Every other quiz test that loops over seeds
+was slow in proportion, and always at Advanced. A Beginner quiz started in about 1 ms, and an
+Advanced one took about 40 ms.
+
+Timing each phase of a quiz settled where the cost was. `Quiz.init`, `quit()`, and the practice
+record cost nothing. `QuizDraw.questions` cost 20 to 40 ms at Advanced. Its `Candidates` cache was
+doing its job, but `verbs(role:isIrregular:)` joined the cached buckets into a fresh array on
+every call, and `admits` called it only to ask `isEmpty`. At Advanced the buckets hold thousands
+of verbs, and `Verb` is a large struct with a dozen reference-counted fields, so each of a quiz's
+hundred-odd reads copied thousands of them. The prototype returns a view over the buckets that
+draws with the same single `Int.random(in: 0 ..< count)` that `Array.randomElement(using:)`
+makes, so a seed still draws the same quiz.
+
+That made the draw 23 times faster, but `start()` at Advanced still took 20 ms. A `sample` of
+the test host found the rest. Eighty percent of it was `QuizDraw.dueQuestions`, which filtered
+all 6,326 verbs and hashed their dictionary keys into a set before looking at whether anything
+was due. In the tests nothing ever is. The prototype returns early when no item is due and keeps
+the filtered verbs and keys per band, since a real learner usually has due items. Re-filtering
+the 66 choice questions on every quiz was most of what remained, and those are now kept per level.
+
+With the three changes the suite took 71 s, all 1,077 tests green, and the 44 s test took under
+a second. The changes are uncommitted for Josh's review. Two smaller leads were left as
+proposals: `aLinkedVerbIsPresentedOnce` spends four fixed seconds in `settle()`, and the search
+suites cost about 57 ms a query. The sample hinted at a cause of that last one. The strings
+`XMLParser` hands `VerbParser` are bridged `NSString`s, so hashing a dictionary key went through
+Swift's slow foreign-string path, and search may be paying the same price.
+
+Josh then asked for the sheet test and the two search tests. The search tests searched twice per
+case, once for the verb and once for the line, and now search once, which halves them. The sheet
+test spent four fixed seconds in `settle()`. The two after its tab switches now wait for the tab's
+own `viewAppeared` signal, and they fail the test if it never comes, since the test pins B1 only
+when the Info tab has loaded. The other two settles check that no second page appears. Timing them
+needed a broken app, so I put B1 back for one run by giving `InfoBrowseView` a second sheet bound
+to the routed sheet. The duplicate page appeared in the same 100 ms poll as the first, so `settle()`
+now waits 300 ms, and the mutated app still failed three expectations under it. The test went from
+8.1 s to 5.5 s. The rest is the simulator presenting the two pages, which takes 3.6 s. The suite now
+runs in 64 s.
