@@ -20,6 +20,7 @@ struct AnswerFrameTests {
   @Test(arguments: [
     ("parler", Tense.indicatifPrésent(.firstSingular), PronounGender.feminine, [AnswerFrame.Segment.pronoun("je"), .blank]),
     ("aimer", .indicatifPrésent(.firstSingular), .feminine, [.pronoun("j'"), .blank]),
+    ("œuvrer", .indicatifPrésent(.firstSingular), .feminine, [.pronoun("j'"), .blank]),
     ("haïr France", .indicatifPrésent(.firstSingular), .feminine, [.pronoun("je"), .blank]),
     ("parler", .indicatifPrésent(.thirdSingular), .feminine, [.pronoun("elle"), .blank]),
     ("parler", .indicatifPrésent(.thirdSingular), .masculine, [.pronoun("il"), .blank]),

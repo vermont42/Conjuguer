@@ -49,6 +49,22 @@ struct RelatedVerbsTests {
     #expect(VerbBase.base(of: verb) == nil)
   }
 
+  /// The base rule reads the etymology in the interface's language, so a reworded etymology in one
+  /// language could change a verb's relatives, and the widget's draw, on that language's devices.
+  @Test func testTheBaseRuleGivesTheSameAnswerInEnglishAndFrench() throws {
+    let english = try #require(Etymology.texts(in: "en"))
+    let french = try #require(Etymology.texts(in: "fr"))
+    var differences: [String] = []
+    for infinitif in Set(Verb.verbs.values.map(\.infinitif)) {
+      let englishBase = VerbBase.base(of: infinitif) { english[$0] }
+      let frenchBase = VerbBase.base(of: infinitif) { french[$0] }
+      if englishBase != frenchBase {
+        differences.append("\(infinitif): \(englishBase ?? "none") in English, \(frenchBase ?? "none") in French")
+      }
+    }
+    #expect(differences.isEmpty, "\(differences.sorted().joined(separator: "; "))")
+  }
+
   @Test func testEveryFalsePairWouldOtherwisePass() {
     for pair in VerbBase.falsePairs {
       #expect(Etymology.text(for: pair.verb)?.contains("~\(pair.base)~") == true, "\(pair.verb) no longer names \(pair.base); drop the pair")

@@ -21,7 +21,7 @@ struct RelatedVerbsView: View {
         .accessibilityIdentifier("verb_related")
 
       if !related.builtOnRoot.isEmpty {
-        relation(title: L.VerbView.builtOn(related.root)) {
+        relation(label: L.VerbView.builtOnLabel, value: related.root) {
           ForEach(related.builtOnRoot.prefix(RelatedVerbs.shortListLength)) { verb in
             verbChip(verb)
           }
@@ -35,7 +35,7 @@ struct RelatedVerbsView: View {
       }
 
       if let model = related.model, !related.modelRelatives.isEmpty {
-        relation(title: L.VerbView.sameModel(model.exemplar, model.id)) {
+        relation(label: L.VerbView.sameModelLabel, value: "\(model.exemplar) (\(model.id))") {
           ForEach(related.modelRelatives) { verb in
             verbChip(verb)
           }
@@ -50,10 +50,17 @@ struct RelatedVerbsView: View {
     .card()
   }
 
-  private func relation(title: String, @ViewBuilder chips: () -> some View) -> some View {
+  /// A row's title is an interface label beside a French value, each read in its own voice, as
+  /// docs/voiceover.md asks.
+  private func relation(label: String, value: String, @ViewBuilder chips: () -> some View) -> some View {
     VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
-      Text(title)
-        .smallLabel()
+      HStack(alignment: .firstTextBaseline, spacing: 0) {
+        Text(label + " ")
+          .fixedSize(horizontal: true, vertical: false)
+        Text(verbatim: value)
+          .frenchPronunciation()
+      }
+      .smallLabel()
       FlowLayout(spacing: Layout.defaultSpacing) {
         chips()
       }

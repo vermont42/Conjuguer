@@ -235,8 +235,12 @@ enum L {
       String(localized: "VerbView.builtOn", defaultValue: "Built on \(root)")
     }
 
-    static func sameModel(_ exemplar: String, _ id: String) -> String {
-      String(localized: "VerbView.sameModel", defaultValue: "Same model: \(exemplar) (\(id))")
+    static var builtOnLabel: String {
+      String(localized: "VerbView.builtOnLabel")
+    }
+
+    static var sameModelLabel: String {
+      String(localized: "VerbView.sameModelLabel")
     }
 
     static func allRelated(_ count: Int) -> String {

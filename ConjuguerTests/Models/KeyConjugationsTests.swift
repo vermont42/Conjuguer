@@ -86,10 +86,10 @@ struct KeyConjugationsTests {
 
   @Test func testCopyTextIsTheFormInLowercase() throws {
     let aller = try verb("aller")
-    let cell = VerbConjugations.cell(verb: aller, tense: .indicatifPrésent(.firstSingular), id: 0)
+    let cell = VerbConjugations.cell(verb: aller, tense: .indicatifPrésent(.firstSingular), id: 0, pronounGender: .feminine)
 
     #expect(cell.copyText == "vais")
-    #expect(VerbConjugations.cell(verb: aller, tense: .passéComposé(.firstSingular), id: 0).copyText?.hasPrefix("suis all") == true)
+    #expect(VerbConjugations.cell(verb: aller, tense: .passéComposé(.firstSingular), id: 0, pronounGender: .feminine).copyText?.hasPrefix("suis all") == true)
   }
 
   @Test func testAppStoreURLHasNoStorefront() {

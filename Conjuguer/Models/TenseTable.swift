@@ -80,16 +80,7 @@ enum TenseTable: CaseIterable {
   }
 
   var isCompound: Bool {
-    switch self {
-    case .indicatifPrésent, .imparfait, .passéSimple, .futurSimple, .conditionnelPrésent, .subjonctifPrésent, .impératif, .subjonctifImparfait, .personless:
-      return false
-    case .passéComposé, .plusQueParfait, .conditionnelPassé, .subjonctifPlusQueParfait, .subjonctifPassé, .passéAntérieur, .futurAntérieur, .passéSurcomposé, .impératifPassé:
-      return true
-    }
-  }
-
-  var scrollID: String {
-    "\(self)"
+    representative.isCompound
   }
 
   /// The tense whose name heads the card. The personless card's rows carry their own names.
@@ -188,7 +179,7 @@ extension Tense {
   }
 
   var article: Info? {
-    Info.infos.first { $0.stableKey == articleKey }
+    Info.withStableKey[articleKey]
   }
 
   /// The name a textbook also uses, shown under the heading as "also simple past" in English and

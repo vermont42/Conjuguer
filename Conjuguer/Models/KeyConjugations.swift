@@ -18,17 +18,26 @@ extension Verb {
   /// letters. A form the verb's defect group marks unused, or the Conjugator cannot produce, is
   /// left out, so gésir gives only gît and accroire gives nothing.
   func keyConjugations() -> [String] {
-    Self.keyTenses.compactMap { tense in
-      guard
-        !VerbConjugations.isDefective(verb: self, tense: tense),
-        let conjugation = Conjugator.conjugatedString(infinitif: infinitif, tense: tense, extraLetters: extraLetters, pronounGender: .masculine)
-      else {
-        return nil
-      }
+    keyConjugationsByStem().map { _, conjugation in
       guard isReflexive else {
         return conjugation
       }
       return PersonNumber.thirdPersonReflexivePronoun(before: conjugation, hasAspiratedH: hasAspiratedH) + conjugation
+    }
+  }
+
+  /// Which key conjugations the verb has, and each one's bare form. The page's forms and the
+  /// practice schedule's items both come from here, so the review card never shows a form the
+  /// schedule does not hold.
+  func keyConjugationsByStem() -> [(stem: PracticeItem.Stem, conjugation: String)] {
+    PracticeItem.Stem.shown.compactMap { stem in
+      guard
+        !VerbConjugations.isDefective(verb: self, tense: stem.keyTense),
+        let conjugation = Conjugator.conjugatedString(infinitif: infinitif, tense: stem.keyTense, extraLetters: extraLetters, pronounGender: .masculine)
+      else {
+        return nil
+      }
+      return (stem, conjugation)
     }
   }
 
@@ -52,6 +61,5 @@ extension Verb {
     return lines.joined(separator: "\n") + "\n\n" + L.VerbView.shareInvitation(infinitif: citationInfinitif, link: URL.appStore.absoluteString)
   }
 
-  /// The practice record schedules an irregular verb's key conjugations, so the two lists are one.
   static let keyTenses = PracticeItem.Stem.shown.map(\.keyTense)
 }

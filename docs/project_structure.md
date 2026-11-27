@@ -152,6 +152,7 @@ Conjuguer/
 │   ├── VerbSearchKeys.swift    # A verb's infinitive and gloss as search compares them (lowercased, folded, the gloss's meanings), stored on Verb when it is made; the accent fold; compiled by the app and ConjugationMapTool
 │   ├── VerbSearchModel.swift   # The verb list's search: the text, its results and count, the guess found off the main actor, the keyboard selection by verb, what Return opens, and the finishSearch reports
 │   ├── VerbVisit.swift         # VerbDestination (a verb page to push, with its source) and VerbVisit (one stretch of a verb page on screen, for viewAppeared and leaveVerbView)
+│   ├── VerbVisitTracker.swift  # When a verb page's visits begin and end: each event (appear, disappear, scene phase, the page's own sheet) returns what to signal and whether to record an open
 │   ├── XMLDataParser.swift     # Shared XMLParser delegate base for the three parsers
 │   └── Game/
 │       ├── GameModels.swift            # Entity structs/enums (Bullet, Target, EnemyBullet, DropKind, …)
@@ -223,12 +224,14 @@ Conjuguer/
 │   └── World.swift             # @Observable DI container (Current): the services, settings, and stores every window shares; device/simulator/unitTest configurations
 └── Views/
     ├── AnswerFrameView.swift   # Draws an AnswerFrame around the answer field, on one line or as a sentence wrapped word by word, keeping the field's identity, and the keyboard's focus, from one question to the next
+    ├── ArticleButton.swift     # The red question-mark diamond that opens an Info article, on a tense's heading and on the model page
     ├── ArticleSheet.swift      # An Info article in a sheet with its own stack, whose article and verb links push inside it, as do a verb page's tense articles there
     ├── BrowseLayout.swift      # Shared adaptive grid columns and search-field placement (a fixed bar on iPad and Mac) for the browse views
     ├── BrowseRow.swift         # Shared row/cell used by both browse views, with optional badge, a looked-up check, and a French or English subtitle; init(verb:) is a ranked verb's row
     ├── BrowseSearchField.swift # The browse tabs' search field (browseSearchable) and SortPickerOrKeyRow, the sort picker or, while the field is engaged, the accent keys
     ├── ChoiceQuestionView.swift # A choice question's two sentences, each with its conjugation in bold and its tense, and once one is chosen, the marks, the reason, and Continue
     ├── CustomQuizView.swift    # The custom quiz's editor (tenses and a verb set, each tap kept at once), its list of models, pushed onto the Quiz tab, and the summary card the tab and a practice set share
+    ├── ExampleCard.swift       # The verb page's example sentence and Chanson de Roland line, which owns its place in the chanson's lines
     ├── FailedVerbSearchView.swift # The verb list's empty state: no results, a guess at the verb meant, and the email-us line
     ├── FrenchLetterKeyRow.swift   # é è ê â î ô û ç keys that replace the sort picker while a search field is focused, and sit above the keyboard for the quiz's answer field
     ├── GameCenterAuthView.swift   # UIViewController shim + coordinator for presenting Game Center auth
@@ -256,13 +259,14 @@ Conjuguer/
     ├── ReviewCardView.swift    # The review card above the verb list: an irregular verb looked up or practiced days ago, its key conjugations hidden until a tap, a second tap opening its page
     ├── RichTextView.swift      # Renders [RichTextBlock] with subheadings, emphasis, color-coding, links
     ├── SettingsView.swift      # Settings UI: pickers, app icon, ratings, onboarding re-show, Reset Practice
+    ├── TenseCards.swift        # The verb page's tense cards: TenseSectionView, PersonlessCard, TenseHeading (name, second name, article button), and MarkableConjugation
     ├── TutorTestView.swift     # DEBUG-only batch harness for tutor queries
     ├── TutorView.swift         # Chat interface for the on-device tutor
     ├── VerbBrowseView.swift    # The Verbs tab: the navigation stack, the list or grid by VerbListContent, the picker or key row, and search requests (hosts the verb_browse_sort launch anchor)
     ├── VerbCollectionView.swift # A featured collection's page, VerbCollectionBar (looked-up count, Quiz, Share) for it and every model page, and the Models tab's VerbCollectionRow
     ├── VerbEssentialsRowView.swift # A Verb Essentials row other than the answer field's: answered with its mark, given in a re-ask, or still to come; and the tense label above each row
     ├── VerbPageNavigation.swift # VerbPageRoute, VerbPagePush, and verbPageNavigation(path:pushesTenseArticles:done:): the pages a verb, model, collection page, or article pushes, in every tab's stack and every sheet, and whether a verb page there pushes its tense articles
-    └── VerbView.swift          # Verb detail: conjugation cards with second names and article buttons, the article sheet, the color key and scroll tip, etymology, example sentence, related verbs
+    └── VerbView.swift          # Verb detail: the overview, the color key and scroll tip, the tense cards read from the cache in body, etymology, the example card, related verbs, Test Me, the star (a view of its own), and share
 
 ConjugationMapTool/                 # macOS command-line target; compiles the conjugation core from Conjuguer/ (membership exceptions in project.pbxproj)
 ├── FormsJSON.swift             # The corpus pipelines' three dumps (forms [.json], forms_all [.json], conjugations [.json]), ported byte-for-byte from the retired CorpusFormsDumpTests
@@ -357,7 +361,7 @@ ConjuguerTests/
     ├── QuizTests.swift                 # Quiz question generation, scoring, and lifecycle; seeded quizzes that never ask a defective cell; the recorded spelling of a variant; the held correction, its stopped clock, and Continue; a slip's one more try, its half points, and its running clock (serialized — mutates Current)
     ├── RecognitionTests.swift          # Name the Conjugation: the cells of fûmes, suis, vis, parle, fait, me souviens, souviens-toi, finissons, avions pris; the level's tenses; pronominal prompts; the infinitive's spellings; each part's grade and line; the correction's lines; the scope; nested in QuizTests, sessions (the draw at each level, nothing recorded, one more try, the held correction and re-ask)
     ├── ReviewCardModelTests.swift      # The review card: chosen once per opening, a dismissal before and after the reveal, one reveal, one signal per offer, a stale offer dropped, its own open and reveal kept, and suppression
-    ├── RelatedVerbsTests.swift         # Base-finding on known and false pairs, nested roots, the card's two relations, doubled roots, and the model page's two orders
+    ├── RelatedVerbsTests.swift         # Base-finding on known and false pairs, the rule giving one answer from the English and the French etymologies for every verb, nested roots, the card's two relations, doubled roots, and the model page's two orders
     ├── ReviewScheduleTests.swift       # The review ladder: starts, reviews, snoozes, a new item's first answer, a right answer climbing only when due, a wrong one starting over
     ├── PracticeItemTests.swift         # The practice items: pinned and unreadable keys, which verbs are patterns, spelling-change cells, compound tenses with être, every tense's stem, doubled entries, lookups, the shown stems, items asking their own cell back
     ├── PracticeRecordTests.swift       # The practice record: the ladder through answers, due order, lookups, the card's review, snooze, choice, and caption, patterns and passé simple never on the card, a relaunch, a reset that stays
@@ -386,7 +390,9 @@ ConjuguerTests/
     ├── VerbSearchModelTests.swift      # The verb list's search model: typing, clearing, the query passed over, the guess arriving and cancelled, the trombone, opening a result or the guess, Return, the selection following its verb, requests, and each report
     ├── VerbSearchTests.swift           # Verb search: folding, reflexive and "to" stripping, tier ranking, literal-before-folded, order independence
     ├── VerbSpotlightTests.swift        # The Spotlight entries' description, alternate names, keywords, and identifiers
+    ├── VerbPageTests.swift             # The verb page's cells: œ and æ elide (j'œuvre), the cache's two blocks in the gender asked, no pronoun on a subjectless cell, the schedule holding the page's key conjugations, compound tables
     ├── VerbVisitTests.swift            # A verb visit's deepest section, resume, and banded dwell
+    ├── VerbVisitTrackerTests.swift     # The visit's rules: the first visit's source and open, resumes after a page, the background, and the page's sheet, and every order of five events pairing each view with one leave
     └── WidgetSnapshotWriterTests.swift # Snapshot-bundle generation from the band, writes through a file (missing, corrupt, another day's, a bare list, an identical rewrite skipped, today's verb kept, My Verbs' turns carried), doubled entries, the quiz question, and truncation
 
 docs/                               # Claude's output that informs: research, reports, playbooks, manifests, App Store copy

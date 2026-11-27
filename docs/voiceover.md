@@ -91,7 +91,9 @@ HStack(alignment: .top, spacing: 0) {
 ```
 
 `VerbView.metaRow` today marks the whole row French, label included, which reads an English label
-with a French voice in the English interface.
+with a French voice in the English interface. The Related Verbs card's row titles follow the pattern since
+2026-11-26: "Built on" beside "prendre", and "Same model:" beside "venir (6-7)", each value marked
+French (`RelatedVerbsView.relation(label:value:chips:)`).
 
 ## Conjugations
 

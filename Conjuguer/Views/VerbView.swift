@@ -17,35 +17,24 @@ struct VerbView: View {
   @AppStorage("hasSeenConjugationColorKey") private var hasSeenColorKey = false
   @AppStorage("showsCompoundTenses") private var showsCompoundTenses = true
   let verb: Verb
-  let source: AnalyticsSource
   let marks: MarkedConjugations?
-  private let conjugations: VerbConjugations
   /// A search that matched a compound tense shows the compound block on this page even when the
   /// learner has hidden it, without changing the stored choice.
   @State private var compoundTensesAreForcedOn: Bool
   @State private var detailSheet: DetailSheet?
-  @State private var chansonExamples: [ChansonExample]
-  @State private var chansonIndex: Int
-  @State private var visit: VerbVisit?
-  @State private var visibleSections: Set<VerbPageSection> = []
-  @State private var isOnScreen = false
+  @State private var visits: VerbVisitTracker
   @State private var hasAppeared = false
   private let scrollToBottomTip = ScrollToBottomTip()
 
   init(verb: Verb, source: AnalyticsSource, marks: MarkedConjugations? = nil) {
     self.verb = verb
-    self.source = source
     self.marks = marks
-    conjugations = VerbConjugations.memoized(for: verb)
     _compoundTensesAreForcedOn = State(initialValue: marks?.includesCompoundTense ?? false)
-    let examples = ChansonData.examples(for: verb)
-    _chansonExamples = State(initialValue: examples)
-    // Start on a random occurrence so each launch still varies; the sword button cycles from here.
-    _chansonIndex = State(initialValue: examples.indices.randomElement() ?? 0)
+    _visits = State(initialValue: VerbVisitTracker(source: source))
   }
 
-  private var chansonExample: ChansonExample? {
-    chansonExamples.indices.contains(chansonIndex) ? chansonExamples[chansonIndex] : nil
+  private var conjugations: VerbConjugations {
+    VerbConjugations.memoized(for: verb, pronounGender: world.settings.pronounGender)
   }
 
   var body: some View {
@@ -53,16 +42,16 @@ struct VerbView: View {
       page
         .onAppear {
           scrollToFirstMark(proxy)
-          isOnScreen = true
-          beginVisit(source: hasAppeared ? .resume : source)
           hasAppeared = true
+          perform(visits.pageAppeared())
           unlockScrollTipIfDue()
         }
     }
   }
 
   private var page: some View {
-    ScrollView {
+    let conjugations = conjugations
+    return ScrollView {
       VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
         Text(verb.infinitifWithPossibleExtraLetters)
           .headingLabel()
@@ -73,7 +62,7 @@ struct VerbView: View {
         overviewCard
           .scrollFade()
 
-        if shouldShowColorKey {
+        if shouldShowColorKey(conjugations) {
           colorKey
             .scrollFade()
         } else {
@@ -81,17 +70,13 @@ struct VerbView: View {
             .tipBackground(Color.customBackground)
         }
 
-        ForEach(conjugations.simpleSections) { section in
-          TenseSectionView(section: section, marks: marks, openArticle: articleOpener(for:))
-            .card()
-            .scrollFade()
-            .id(section.scrollID)
-            .reportsReaching(section.id == conjugations.simpleSections.first?.id ? .simple : nil, to: sectionVisibilityChanged)
-        }
+        tenseCards(conjugations.simpleSections, reaching: .simple)
 
-        personlessCard
+        PersonlessCard(cells: conjugations.personlessCells, marks: marks, openArticle: articleOpener(for:))
+          .card()
           .scrollFade()
-          .id(TenseTable.personless.scrollID)
+          .id(TenseTable.personless)
+          .reportsReaching(.simple, to: sectionVisibilityChanged)
 
         Toggle(isOn: compoundTensesAreShown) {
           Text(L.VerbView.showCompoundTenses)
@@ -102,7 +87,7 @@ struct VerbView: View {
         .scrollFade()
 
         if compoundTensesAreShown.wrappedValue {
-          CompoundTensesView(verb: verb, marks: marks, openArticle: articleOpener(for:), sectionVisibilityChanged: sectionVisibilityChanged)
+          tenseCards(conjugations.compoundSections, reaching: .compound)
         }
 
         if let etymologyText = Etymology.text(for: verb.infinitif) {
@@ -111,15 +96,14 @@ struct VerbView: View {
             .reportsReaching(.etymology, to: sectionVisibilityChanged)
         }
 
-        if ExampleData.example(for: verb) != nil || chansonExample != nil {
-          exampleCard(ExampleData.example(for: verb))
-            .scrollFade()
-            .reportsReaching(.example, to: sectionVisibilityChanged)
-        }
+        ExampleCard(verb: verb)
+          .scrollFade()
+          .reportsReaching(.example, to: sectionVisibilityChanged)
 
         if !verb.related.isEmpty {
           RelatedVerbsView(related: verb.related)
             .scrollFade()
+            .reportsReaching(.related, to: sectionVisibilityChanged)
         }
       }
       .padding(.horizontal, Layout.doubleDefaultSpacing)
@@ -138,7 +122,7 @@ struct VerbView: View {
       }
 
       ToolbarItem(placement: .topBarTrailing) {
-        starButton
+        VerbStarButton(verb: verb)
       }
 
       ToolbarItem(placement: .topBarTrailing) {
@@ -157,25 +141,13 @@ struct VerbView: View {
       }
     }
     .onDisappear {
-      isOnScreen = false
-      endVisit()
+      perform(visits.pageDisappeared())
     }
     .onChange(of: scenePhase) {
-      switch scenePhase {
-      case .background:
-        endVisit()
-      case .active:
-        resumeVisitIfUncovered()
-      default:
-        break
-      }
+      perform(visits.scenePhaseChanged(to: scenePhase))
     }
     .onChange(of: detailSheet) {
-      if detailSheet == nil {
-        resumeVisitIfUncovered()
-      } else {
-        endVisit()
-      }
+      perform(visits.coverChanged(isCovered: detailSheet != nil))
     }
     .sheet(item: $detailSheet) { sheet in
       switch sheet {
@@ -187,24 +159,11 @@ struct VerbView: View {
     }
   }
 
-  private var starButton: some View {
-    let isStarred = world.learnerVerbs.isStarred(verb)
-    return Button {
-      let isNowStarred = world.learnerVerbs.toggleStar(verb)
-      world.analytics.signal(name: .tapStarVerb, parameters: [
-        ParameterKey.starred.rawValue: "\(isNowStarred)"
-      ])
-    } label: {
-      Label(isStarred ? L.VerbView.unstar : L.VerbView.star, systemImage: isStarred ? "star.fill" : "star")
-    }
-    .sensoryFeedback(.selection, trigger: isStarred)
-    .accessibilityIdentifier("verb_star_button")
-  }
-
   private var overviewCard: some View {
     VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
       Text(L.VerbView.overview)
         .subheadingLabel()
+        .accessibilityAddTraits(.isHeader)
 
       Text(verb.translation)
         .bodyLabel()
@@ -282,71 +241,6 @@ struct VerbView: View {
     return Text(label + valuePart)
   }
 
-  private func exampleCard(_ example: Example?) -> some View {
-    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
-      Text(example != nil && chansonExample != nil ? L.VerbView.exampleUses : L.VerbView.exampleUse)
-        .subheadingLabel()
-        .accessibilityAddTraits(.isHeader)
-
-      if let example {
-        Text(example.styledFrench)
-          .bodyLabel()
-          .frenchPronunciation()
-
-        Text(example.en)
-          .translationLabel()
-          .englishPronunciation()
-
-        Text(example.provenance.attribution)
-          .smallLabel()
-          .rightAligned()
-      }
-
-      if let chanson = chansonExample {
-        chansonSection(chanson, showDivider: example != nil)
-      }
-    }
-    .card()
-    .accessibilityIdentifier("verb_example")
-  }
-
-  private func chansonSection(_ chanson: ChansonExample, showDivider: Bool) -> some View {
-    VStack(alignment: .leading, spacing: 6) {
-      if showDivider {
-        Divider()
-          .padding(.vertical, 4)
-      }
-
-      Text(L.VerbView.chansonHeading)
-        .smallLabel()
-        .accessibilityAddTraits(.isHeader)
-
-      Text(L.VerbView.chansonReference(laisse: chanson.laisse, line: chanson.line))
-        .smallLabel()
-
-      Text(chanson.of)
-        .bodyLabel()
-        .frenchPronunciation()
-
-      Text(chanson.tr)
-        .translationLabel()
-        .englishPronunciation()
-
-      if chansonExamples.count > 1 {
-        Button {
-          withAnimation {
-            chansonIndex = (chansonIndex + 1) % chansonExamples.count
-          }
-        } label: {
-          Image(systemName: "flag.2.crossed")
-            .foregroundStyle(Color.customRed)
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(Text(L.VerbView.chansonNextExample))
-      }
-    }
-  }
-
   private func etymologyCard(_ text: String) -> some View {
     VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
       Text(L.VerbView.etymologyHeading)
@@ -360,18 +254,14 @@ struct VerbView: View {
     .card()
   }
 
-  private var personlessCard: some View {
-    VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
-      ForEach(conjugations.personlessCells) { cell in
-        VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
-          TenseHeading(tense: cell.tense, openArticle: articleOpener(for: cell.tense))
-
-          MarkableConjugation(cell: cell, isMarked: marks?.contains(cell.tense) == true)
-            .leftAligned()
-        }
-      }
+  private func tenseCards(_ sections: [VerbConjugations.Section], reaching block: VerbPageSection) -> some View {
+    ForEach(sections) { section in
+      TenseSectionView(section: section, marks: marks, openArticle: articleOpener(for:))
+        .card()
+        .scrollFade()
+        .id(section.table)
+        .reportsReaching(block, to: sectionVisibilityChanged)
     }
-    .card()
   }
 
   private var compoundTensesAreShown: Binding<Bool> {
@@ -383,8 +273,8 @@ struct VerbView: View {
     }
   }
 
-  private var shouldShowColorKey: Bool {
-    !hasSeenColorKey && conjugations.hasIrregularLetters
+  private func shouldShowColorKey(_ conjugations: VerbConjugations) -> Bool {
+    TipDisplay.tipsEnabled && !hasSeenColorKey && conjugations.hasIrregularLetters
   }
 
   private func articleOpener(for tense: Tense) -> (() -> Void)? {
@@ -418,7 +308,7 @@ struct VerbView: View {
       return
     }
     Task {
-      proxy.scrollTo(VerbConjugations.scrollID(for: firstTense), anchor: .top)
+      proxy.scrollTo(firstTense.table, anchor: .top)
     }
   }
 
@@ -427,6 +317,7 @@ struct VerbView: View {
       HStack {
         Text(L.VerbView.colorKeyTitle)
           .subheadingLabel()
+          .accessibilityAddTraits(.isHeader)
         Spacer()
         Button {
           withAnimation { hasSeenColorKey = true }
@@ -462,47 +353,23 @@ struct VerbView: View {
     .accessibilityElement(children: .combine)
   }
 
-  private func beginVisit(source: AnalyticsSource) {
-    guard visit == nil else {
-      return
+  private func perform(_ effects: [VerbVisitTracker.Effect]) {
+    for effect in effects {
+      switch effect {
+      case let .signal(name, parameters):
+        world.analytics.signal(name: name, parameters: parameters)
+      case let .recordOpen(source):
+        world.learnerVerbs.recordOpen(verb)
+        world.practice.recordLookup(verb, source: source)
+      }
     }
-    let newVisit = VerbVisit(source: source, start: .now, visibleSections: visibleSections)
-    visit = newVisit
-    world.analytics.signal(name: .viewAppeared, parameters: newVisit.viewParameters)
-    // A page that returns after a tab switch, the background, or its own sheet is not a new open.
-    if source != .resume {
-      world.learnerVerbs.recordOpen(verb)
-      world.practice.recordLookup(verb, source: source)
-    }
-  }
-
-  private func endVisit() {
-    guard let visit else {
-      return
-    }
-    world.analytics.signal(name: .leaveVerbView, parameters: visit.leaveParameters(end: .now))
-    self.visit = nil
-  }
-
-  // A sheet of the page's own, Test Me or a tense's article, ends the visit, and closing it
-  // resumes the visit.
-  private func resumeVisitIfUncovered() {
-    guard isOnScreen, detailSheet == nil else {
-      return
-    }
-    beginVisit(source: .resume)
   }
 
   private func sectionVisibilityChanged(_ section: VerbPageSection, isVisible: Bool) {
-    if isVisible {
-      visibleSections.insert(section)
-      visit?.reach(section)
-      // A learner who already scrolls to the bottom does not need the advice.
-      if section >= .etymology, TipDisplay.tipsEnabled {
-        scrollToBottomTip.invalidate(reason: .actionPerformed)
-      }
-    } else {
-      visibleSections.remove(section)
+    visits.sectionVisibilityChanged(section, isVisible: isVisible)
+    // A learner who already scrolls to the bottom does not need the advice.
+    if isVisible, section >= .etymology, TipDisplay.tipsEnabled {
+      scrollToBottomTip.invalidate(reason: .actionPerformed)
     }
   }
 
@@ -521,134 +388,33 @@ struct VerbView: View {
   }
 }
 
-private struct CompoundTensesView: View {
-  let sections: [VerbConjugations.Section]
-  let marks: MarkedConjugations?
-  let openArticle: (Tense) -> (() -> Void)?
-  let sectionVisibilityChanged: (VerbPageSection, Bool) -> Void
-
-  init(
-    verb: Verb,
-    marks: MarkedConjugations?,
-    openArticle: @escaping (Tense) -> (() -> Void)?,
-    sectionVisibilityChanged: @escaping (VerbPageSection, Bool) -> Void
-  ) {
-    sections = VerbConjugations.sections(verb: verb, tables: TenseTable.compound)
-    self.marks = marks
-    self.openArticle = openArticle
-    self.sectionVisibilityChanged = sectionVisibilityChanged
-  }
+private struct VerbStarButton: View {
+  @Environment(World.self) private var world
+  let verb: Verb
 
   var body: some View {
-    ForEach(sections) { section in
-      TenseSectionView(section: section, marks: marks, openArticle: openArticle)
-        .card()
-        .scrollFade()
-        .id(section.scrollID)
-        .reportsReaching(section.id == sections.first?.id ? .compound : nil, to: sectionVisibilityChanged)
+    let isStarred = world.learnerVerbs.isStarred(verb)
+    Button {
+      let isNowStarred = world.learnerVerbs.toggleStar(verb)
+      world.analytics.signal(name: .tapStarVerb, parameters: [
+        ParameterKey.starred.rawValue: "\(isNowStarred)"
+      ])
+    } label: {
+      Label(isStarred ? L.VerbView.unstar : L.VerbView.star, systemImage: isStarred ? "star.fill" : "star")
     }
+    .sensoryFeedback(.selection, trigger: isStarred)
+    .accessibilityIdentifier("verb_star_button")
   }
 }
 
 private extension View {
   /// Reports when a third of this card comes on screen or leaves it, which counts as reaching
   /// `section`: a higher threshold could never be met by an etymology card taller than the
-  /// screen. A nil section reports nothing, so that only the first card of a block counts.
-  @ViewBuilder
-  func reportsReaching(_ section: VerbPageSection?, to report: @escaping (VerbPageSection, Bool) -> Void) -> some View {
-    if let section {
-      onScrollVisibilityChange(threshold: 0.3) { isVisible in
-        report(section, isVisible)
-      }
-    } else {
-      self
+  /// screen.
+  func reportsReaching(_ section: VerbPageSection, to report: @escaping (VerbPageSection, Bool) -> Void) -> some View {
+    onScrollVisibilityChange(threshold: 0.3) { isVisible in
+      report(section, isVisible)
     }
-  }
-}
-
-private struct TenseSectionView: View {
-  let section: VerbConjugations.Section
-  let marks: MarkedConjugations?
-  let openArticle: (Tense) -> (() -> Void)?
-
-  var body: some View {
-    VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
-      TenseHeading(tense: section.table.representative, openArticle: openArticle(section.table.representative))
-
-      Grid(alignment: .leading, horizontalSpacing: Layout.doubleDefaultSpacing, verticalSpacing: 8) {
-        ForEach(section.cells) { cell in
-          GridRow(alignment: .firstTextBaseline) {
-            Text(cell.pronoun)
-              .smallLabel()
-              .frenchPronunciation()
-              .gridColumnAlignment(.leading)
-              .accessibilityHidden(true)
-
-            MarkableConjugation(cell: cell, isMarked: isMarked(cell))
-              .gridColumnAlignment(.leading)
-          }
-        }
-      }
-    }
-  }
-
-  private func isMarked(_ cell: VerbConjugations.Cell) -> Bool {
-    marks?.contains(cell.tense) == true
-  }
-}
-
-/// A tense's name, the name a textbook also uses, and a button that opens the tense's article.
-private struct TenseHeading: View {
-  let tense: Tense
-  let openArticle: (() -> Void)?
-
-  var body: some View {
-    VStack(alignment: .leading, spacing: 2) {
-      HStack(alignment: .firstTextBaseline, spacing: 6) {
-        Text(tense.titleCaseName)
-          .subheadingLabel()
-          .frenchPronunciation()
-          .accessibilityAddTraits(.isHeader)
-
-        if let openArticle {
-          Button(action: openArticle) {
-            Image(systemName: "questionmark.diamond.fill")
-          }
-          .buttonStyle(.borderless)
-          .tint(.customRed)
-          .accessibilityLabel(Text(L.Navigation.info))
-          .accessibilityHint(Text(L.VerbView.articleButtonHint))
-        }
-
-        Spacer(minLength: 0)
-      }
-
-      if let secondName = tense.secondName {
-        Text(L.VerbView.secondName(secondName))
-          .smallLabel()
-      }
-    }
-  }
-}
-
-private struct MarkableConjugation: View {
-  let cell: VerbConjugations.Cell
-  let isMarked: Bool
-
-  var body: some View {
-    Text(cell.display)
-      .font(bodyFont)
-      .frenchPronunciation()
-      .accessibilityLabel(cell.accessibility)
-      .accessibilityValue(Text(isMarked ? L.VerbView.matchesSearch : ""))
-      .background {
-        if isMarked {
-          RoundedRectangle(cornerRadius: 6)
-            .fill(Color.markedConjugation)
-            .padding(-4)
-        }
-      }
-      .copyOnLongPress(cell.copyText)
   }
 }
 

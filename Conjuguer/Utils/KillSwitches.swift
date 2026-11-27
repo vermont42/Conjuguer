@@ -13,8 +13,9 @@ enum OnboardingDisplay {
 }
 
 enum TipDisplay {
-  /// Master switch for all TipKit tips. Ordinarily `true`. Set to `false` before
-  /// generating screenshots (then restore to `true`) so no tip ever appears.
+  /// Master switch for all TipKit tips, and for the verb page's color key, a hint that goes once
+  /// dismissed as a tip does. Ordinarily `true`. Set to `false` before generating screenshots
+  /// (then restore to `true`) so no tip ever appears.
   ///
   /// When `false`, `ConjuguerApp` skips `Tips.configure()`. TipKit displays nothing
   /// until it is configured, so every `TipView` and `.popoverTip(_:)` in the app stays

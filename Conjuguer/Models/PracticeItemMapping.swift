@@ -61,18 +61,12 @@ extension PracticeItem {
   }
 
   /// The items a lookup of the verb schedules: the key conjugations the review card shows. A
-  /// regular verb has none, since its conjugations are patterns, and a form the verb lacks is
-  /// left out, as `Verb.keyConjugations()` leaves it out.
+  /// regular verb has none, since its conjugations are patterns.
   static func keyConjugations(of verb: Verb) -> [PracticeItem] {
     guard !isLearnedByPattern(verb) else {
       return []
     }
-    return Stem.shown
-      .filter { stem in
-        !VerbConjugations.isDefective(verb: verb, tense: stem.keyTense)
-          && Conjugator.conjugatedString(infinitif: verb.infinitif, tense: stem.keyTense, extraLetters: verb.extraLetters, pronounGender: .masculine) != nil
-      }
-      .map { .keyConjugation(verb: verb.dictionaryKey, stem: $0) }
+    return verb.keyConjugationsByStem().map { .keyConjugation(verb: verb.dictionaryKey, stem: $0.stem) }
   }
 
   /// The cell a review of the item asks: a key conjugation's own cell, or the pattern's. Nil for a

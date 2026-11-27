@@ -178,7 +178,7 @@ struct VerbSearchConjugationTests {
   func testLandingScrollsToTheFirstMatchedCard(query: String, table: TenseTable) throws {
     let marks = try #require(matches(query).first?.conjugation?.marks)
     let firstTense = try #require(marks.tenses.first)
-    #expect(VerbConjugations.scrollID(for: firstTense) == table.scrollID)
+    #expect(firstTense.table == table)
   }
 
   @Test func testCompoundMatchShowsTheCompoundTenses() throws {
@@ -189,15 +189,14 @@ struct VerbSearchConjugationTests {
     #expect(!simple.includesCompoundTense)
   }
 
-  @Test func testEverySectionHasTheScrollIDThatTheLandingComputes() throws {
+  @Test func testEverySectionIsTheScrollTargetThatTheLandingComputes() throws {
     let verb = try #require(Verb.verbs["aller"])
-    let sections = VerbConjugations.sections(verb: verb, tables: TenseTable.allCases)
+    let sections = VerbConjugations.sections(verb: verb, tables: TenseTable.allCases, pronounGender: .feminine)
     for section in sections {
       for cell in section.cells {
-        #expect(VerbConjugations.scrollID(for: cell.tense) == section.scrollID)
+        #expect(cell.tense.table == section.id)
       }
     }
-    #expect(Set(sections.map(\.scrollID)).count == sections.count)
   }
 
   @Test(arguments: [

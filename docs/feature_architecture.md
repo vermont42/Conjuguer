@@ -172,8 +172,8 @@ A conjugation finds its verb, through the map ([Conjugation Map](#conjugation-ma
 - **Landing.** Opening a result pushes a `VerbDestination` with `MarkedConjugations`, the matched
   tenses in page order. `VerbView` shows the compound block when any is compound, even if the
   learner has hidden it, without changing the stored choice ([Verb Page](#verb-page)). It scrolls
-  to the first marked card (`VerbConjugations.scrollID(for:)`, read from the same `TenseTable` that
-  builds the cards) after its first appearance, tints each marked cell with
+  to the first marked card (its `TenseTable`, the id each card carries, read from the same table
+  that builds the cards) after its first appearance, tints each marked cell with
   `Color.markedConjugation`, and gives it the accessibility value "Matches your search". A marked
   participle is tinted in its row of the personless card. The guess, when guessed from a
   conjugation, marks its page the same way.
@@ -198,8 +198,12 @@ The page orders its cards by frequency, names each tense twice, and gives each t
 | File | Purpose |
 |------|---------|
 | `Models/TenseTable.swift` | `TenseTable`, the page's cards in order, and on `Tense` the card that shows it (`table`), its article (`articleKey`, `article`), and its second name |
-| `Utils/VerbConjugations.swift` | Builds each card's cells from `TenseTable` and notes whether the verb's own cells have red letters (`hasIrregularLetters`) |
-| `Views/VerbView.swift` | The page; `TenseHeading` (name, second name, article button) and `MarkableConjugation` |
+| `Utils/VerbConjugations.swift` | Builds every card's cells from `TenseTable`, simple and compound, and notes whether the verb's own cells have red letters (`hasIrregularLetters`). `memoized(for:pronounGender:)` caches them by verb and pronoun gender; the page reads it from `body`, so a change of the setting reaches both blocks of an open page |
+| `Views/VerbView.swift` | The page, and its star in a view of its own, so that recording an open does not rebuild every page in the stack |
+| `Views/TenseCards.swift` | `TenseSectionView` (a tense's card), `PersonlessCard`, `TenseHeading` (name, second name, article button), and `MarkableConjugation` |
+| `Views/ExampleCard.swift` | The example sentence and the *Chanson de Roland* line, whose place in the chanson's lines is the card's own state |
+| `Views/ArticleButton.swift` | The red question-mark diamond, on a tense's heading and on the model page |
+| `Models/VerbVisitTracker.swift` | When a visit begins and ends ([Analytics](#analytics)) |
 | `Views/ArticleSheet.swift` | An article in a sheet with a stack of its own, for a tense's heading, a model page's irregularities, and an `info/` link |
 | `Models/ConjuguerTips.swift` | `ScrollToBottomTip` |
 | `scripts/count_tenses.py` | The corpus count behind the order ([`tense_frequency.md`](tense_frequency.md)) |
@@ -222,8 +226,9 @@ lines and its landing follow it, since `Verb.conjugations(matching:)` reads `Ten
 Each card's heading is the tense's French name, then a red question-mark diamond, the model page's
 button for the irregularities article, which opens the tense's Info article. Under the name is a
 second name in the app's language: "also simple past" in English, "aussi passé défini" in French,
-each the name its learners' textbooks use (Josh, 2026-11-22). Nine French tenses have no French
-alternate, and their catalog value is empty, so no line shows. The personless card gives each of its
+each the name its learners' textbooks use (Josh, 2026-11-22). Six French tenses have no French
+alternate (the participes, the radical du futur, the passé antérieur, the futur antérieur, and the
+passé surcomposé), and their catalog value is empty, so no line shows. The personless card gives each of its
 three cells such a heading.
 
 **The article** opens in an `ArticleSheet`, so closing it returns to the same verb. A link
@@ -248,8 +253,11 @@ verb has red letters of its own, in its simple tenses or personless cells (Josh,
 compound tense has red letters in avoir's or être's forms, so this test leaves them out: parler's
 page shows no key. In the key's place, `ScrollToBottomTip` points to the etymology and examples. A
 page that appears after the key was dismissed unlocks it (a persisted TipKit parameter), so the two
-never appear one straight after the other, and reaching the etymology or the examples retires it.
-Both obey `TipDisplay.tipsEnabled`.
+never appear one straight after the other, and reaching the etymology, the examples, or the related
+verbs retires it. Both obey `TipDisplay.tipsEnabled`, so a run for screenshots shows neither. The
+key obeys it since Phase 9 of the browse fixes plan (2026-11-26): it is a hint that goes once
+dismissed, like the tip, and a screenshot of a verb page should show the page a returning learner
+sees.
 
 ## Related Verbs
 
@@ -469,26 +477,34 @@ one series.
 
 | Signal | Parameters | Sent |
 |---|---|---|
-| `viewAppeared` with `viewName` `VerbView` | `source` (below) | When a verb visit begins: the page arrives, or returns with `source` `resume` after another tab, its own model sheet, or the background |
-| `leaveVerbView` | `deepestSection` (`header`, `simple`, `compound`, `etymology`, `example`), `dwell` (`0-5s`, `5-15s`, `15-60s`, `60s+`) | Exactly once for each verb page's `viewAppeared`: when the page leaves the screen, its model sheet opens, or the app goes to the background |
+| `viewAppeared` with `viewName` `VerbView` | `source` (below) | When a verb visit begins: the page arrives, or returns with `source` `resume` after another tab, a pushed page, its own sheet (a tense's article or Test Me), or the background |
+| `leaveVerbView` | `deepestSection` (`header`, `simple`, `compound`, `etymology`, `example`, `related`), `dwell` (`0-5s`, `5-15s`, `15-60s`, `60s+`) | Exactly once for each verb page's `viewAppeared`: when the page leaves the screen, its own sheet opens, or the app goes to the background |
 | `finishSearch` | `source` (where the search began: `tab`, `control`, `quickAction`, `lookup`, or `deeplink`), `outcome` (`opened`, `abandoned`, `noResult`), `queryLength` (`1-2`, `3-5`, `6-9`, `10+`), `resultCount` (`0`, `1`, `2-10`, `11+`), `matchKind` (below), `resultPosition` (`1`, `2-5`, `6+`, `none`) | Once per verb search: when a result or the guess is opened (by tap, Return, or the arrow keys), the field is cleared, or the app goes to the background with text in the field |
 
-**A visit** (`VerbVisit`) is one stretch of a verb page on screen, uncovered by its own model sheet,
-with the app in the foreground. It is the same whether the page was pushed (Verbs tab) or presented
+**A visit** (`VerbVisit`) is one stretch of a verb page on screen, uncovered by a sheet of its own
+(a tense's article or Test Me), with the app out of the background. It is the same whether the page was pushed (Verbs tab) or presented
 as a sheet (a deeplink, an Info link, a model page). A page that returns starts a new visit whose
 `source` is `resume`, so every verb page's `viewAppeared` pairs with one `leaveVerbView`, background
 time never counts as reading, and arrivals are the visits whose source is not `resume`. A resumed
 visit starts from the deepest section already on screen. The App Store version sent
 `viewAppeared` for `VerbView` on each `onAppear` and never on a return from the background; the
 current code also sends it on that return, as `resume`. A sheet that something else presents over a
-page (a deeplink's verb over a pushed page, say) does not end the page's visit.
+page (a deeplink's verb over a pushed page, say) does not end the page's visit. An inactive scene,
+under Control Center or the app switcher, ends nothing.
 
-**Reaching a section** means a third of its first card on screen (`onScrollVisibilityChange`,
-threshold 0.3): the présent card for `simple`, the passé composé card for `compound`, then the
-etymology and example cards. The compound block shows only when its toggle is on, which is on by
+`VerbVisitTracker` (`Models/VerbVisitTracker.swift`) holds these rules. The page tells it each event
+(appearing, disappearing, a scene phase, its sheet opening or closing, a section coming into view),
+and each event returns what to signal and whether to record an open, which the page then does. Each
+event sets one condition and reconciles, so no order of events can send a `leaveVerbView` without a
+`viewAppeared` before it. `VerbVisitTrackerTests` drives every order of five events.
+
+**Reaching a section** means a third of one of its cards on screen (`onScrollVisibilityChange`,
+threshold 0.3). Every tense card of a block reports its block, so a search that lands on the
+subjonctif présent counts as reaching `simple` though the présent never came on screen. The
+personless card reports `simple` too, since it closes that block. Then come the etymology, example,
+and Related Verbs cards. The compound block shows only when its toggle is on, which is on by
 default and remembered, so a learner who never hides the block reaches it on the way to the
-etymology. A tense article's sheet ends the visit as the model sheet does, and closing it resumes
-the visit.
+etymology.
 
 **`tapTenseArticle`**, with no parameters, counts taps on a tense heading's article button.
 Konjugieren's counterpart is `tapConjugationgroupArticle`.
@@ -760,8 +776,8 @@ Starred nor Recent. An entry with `lastOpened` and no `firstOpened`, which Reset
 for a recent verb, is recent but not opened; no earlier build wrote that shape, since every open
 has set both dates from the start.
 
-**An open** is a verb page's arrival by any route: `VerbView.beginVisit` records one whenever it
-sends `viewAppeared` with a source other than `resume`. A page that returns after a tab switch,
+**An open** is a verb page's arrival by any route: the page records one whenever its
+`VerbVisitTracker` begins a visit with a source other than `resume`. A page that returns after a tab switch,
 the background, or its own sheet is not a new open.
 
 **The star** is a button in the verb page's navigation bar, before Share. It reads "Add to My

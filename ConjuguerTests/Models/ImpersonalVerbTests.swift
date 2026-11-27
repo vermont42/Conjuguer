@@ -76,8 +76,8 @@ extension QuizTests {
         let falloir = try #require(Verb.verbs["falloir"])
         let parler = try #require(Verb.verbs["parler"])
 
-        #expect(VerbConjugations.conjugationParts(verb: falloir, tense: .indicatifPrésent(.thirdSingular)).spoken == "il faut")
-        #expect(VerbConjugations.conjugationParts(verb: parler, tense: .indicatifPrésent(.thirdSingular)).spoken == "elle parle")
+        #expect(VerbConjugations.conjugationParts(verb: falloir, tense: .indicatifPrésent(.thirdSingular), pronounGender: .feminine).spoken == "il faut")
+        #expect(VerbConjugations.conjugationParts(verb: parler, tense: .indicatifPrésent(.thirdSingular), pronounGender: .feminine).spoken == "elle parle")
       }
     }
 

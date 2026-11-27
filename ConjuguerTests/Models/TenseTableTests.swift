@@ -47,11 +47,6 @@ struct TenseTableTests {
     }
   }
 
-  @Test func testScrollIDsAreDistinct() {
-    let ids = TenseTable.allCases.map(\.scrollID)
-    #expect(Set(ids).count == ids.count)
-  }
-
   @Test func testSecondNamesInEnglish() {
     #expect(Tense.passéSimple(.firstSingular).secondName == "simple past")
     #expect(Tense.passéComposé(.firstSingular).secondName == "compound past")
@@ -65,6 +60,6 @@ struct TenseTableTests {
   ])
   func testColorKeyNeedsTheVerbsOwnRedLetters(infinitif: String, hasRedLetters: Bool) throws {
     let verb = try #require(Verb.verbs[infinitif])
-    #expect(VerbConjugations(verb: verb).hasIrregularLetters == hasRedLetters)
+    #expect(VerbConjugations(verb: verb, pronounGender: .feminine).hasIrregularLetters == hasRedLetters)
   }
 }

@@ -7113,3 +7113,46 @@ Verbs shows twenty unstarred recents rather than twenty recents minus the starre
 comments that said the widget reads a record now say it does not. Thirteen of the new tests failed
 against the old logic. 1,035 tests now.
 
+
+## The Verb Page Stops Rebuilding Itself, and j'œuvre (2026-11-26)
+
+Phase 9 of [`plans/verb_browse_fixes.md`](../plans/verb_browse_fixes.md) took the verb page's
+findings from the browse review, and the most interesting result was a suspicion that turned out
+false.
+
+The review had suspected that a verb page left open across a change of the pronoun-gender setting
+could show "il" in its simple tenses and "elle est allée" in its compound ones. The simple cards
+were computed once, when the page was made, and the compound cards on every pass, so the two blocks
+aged differently. I tried it before touching the code: faire's page in the Verbs tab, then
+avoir's in the Models tab, a change of the setting, a return, a tap on the star. Both blocks
+followed the setting every time, because SwiftUI built each tab's pages afresh. The cost behind
+the suspicion was real, though. A temporary log line in the page's `body` counted three passes for
+a push from the list and five for a page in a link's sheet, with fifty-odd compound cells
+conjugated on each, and the act of recording an open rebuilt every verb page still alive
+beneath. Now both blocks come from one cache keyed by verb and gender, read in `body`, and the star,
+which reads the record, is a small view of its own. The counts fell to two and four, the compound
+cells are conjugated once per page, and the pages beneath stay put.
+
+The visit, which decides when `viewAppeared` and `leaveVerbView` are sent, moved out of four
+`@State` flags and five callbacks into `VerbVisitTracker`, whose event methods return what to
+signal and whether to record an open. That made it testable. One test sends every order of five
+of seven events, 16,807 of them, and checks that a view always comes before its leave and that
+only the first view records an open. Konjugieren's tracker, which I read first, performs its
+effects; this one returns them, as the plan asked, so a test needs no spy.
+
+The visit also stopped reporting bounces that were not. Only the first card of each block said
+"the learner reached here", so searching "sois", which lands on the subjonctif présent card below
+the présent, and leaving at once read as a visit that never got past the header. Every card
+reports its block now, the participles' card included, and the Related Verbs card has a section
+of its own, which waits in the privacy file for release.
+
+The smallest fix was the oldest bug. The elision test stripped accents and asked whether the first
+letter was a, e, i, o, or u. œ is a ligature with no accent to strip, so œuvrer's page read
+"je œuvre". It reads "j'œuvre" now.
+
+The rest was tidying the review asked for. The tense cards and the example card have files of
+their own, a card's scroll target is its `TenseTable` rather than one of three spellings of a
+string, the page and the practice schedule ask one function which key conjugations a verb has,
+and both article buttons are one view. A new test runs the related-verbs base rule over the
+English and the French etymologies for every verb, since the rule reads prose that a pipeline
+rewrites in bulk. They agree today. 1,049 tests now.

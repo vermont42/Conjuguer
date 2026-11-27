@@ -36,7 +36,7 @@ empty until it is committed.
 | 6 | Done | 2026-11-26 | `cbb5b60` | B9, S3 (the rest), D4, D7, T1 (the card), the stale review card | Yes |
 | 7 | Done | 2026-11-26 | `4ca2f5f` | B7, B13, B14, B15, B21, B22, B25 (the row), B30, G1, G2, G3, S10 | Yes |
 | 8 | Done | 2026-11-26 | `f866c2a` | B16, B19, S12, the progress decision, the migration, T2 | Yes |
-| 9 | Not started | | | B12, B27, B29, S4, S4a, S5, S6, D8, D9, T1 (the visit), K-G6 | Yes |
+| 9 | Awaiting Josh | 2026-11-26 | | B12, B27, B29, S4, S4a, S5, S6, D8, D9, T1 (the visit), K-G6 | Yes |
 | 10 | Not started | | | B17, B25 (the labels), S8, S13, S14, D1, D2, D3, D6, T6 | Yes |
 | 11 | Not started | | | B5, S7, the rare-verb draw | Yes |
 | 12 | Not started | | | B10, B11, B20, S11, K-S9, K-S10 | No |
@@ -881,7 +881,61 @@ read as a bounce, which only the log shows); a verb page open across a change of
 the star on a page three deep in a related-verbs chain; Test Me and an article from a page, and
 the page still there after each.
 
-**How it differed:**
+**How it differed:** In S4's suspicion, which did not reproduce, and in a few choices the phase left
+open. No question for Josh came up. 1,049 tests in 98 suites (1,035 plus 14).
+
+- **S4's suspicion is not real.** On the iPhone simulator, faire's page pushed in the Verbs tab and
+  avoir's pushed from the top 100 in the Models tab each followed a change of pronoun gender in both
+  blocks, on the return and after a tap on the star: each tab's stack built its pages afresh, so
+  the simple block's stored cells were replaced too. The cost was real, and the fix went in as
+  planned. `VerbConjugations` holds the compound cards beside the simple ones, cached by verb and
+  gender, so `Settings` no longer clears the cache, and the page reads it from `body`. The star is
+  `VerbStarButton`, a view of its own.
+- **Measured** with a temporary log line in `body` and one where the cards are conjugated. A push
+  of faire from the Verbs tab built the page 3 times before and 2 after. prendre's page in a link's
+  sheet over it, 5 and 4, and faire's page beneath was rebuilt once before and not after. apprendre
+  pushed from prendre's related chips, 2 and 1, with each page beneath rebuilt once before, and
+  after only prendre's. The compound cards were conjugated on every pass before and once per page
+  after. Recorded under S4 in the review.
+- **S4a's tracker returns its effects**, as the plan asked, where Konjugieren's performs them:
+  `VerbVisitTracker`'s events return `.signal(name, parameters:)` and `.recordOpen(source:)`, and
+  `VerbView.perform` sends and records them. It is a class held in `@State`, since the page draws
+  nothing from it, and it reconciles three conditions on each event, as Konjugieren's does. The
+  pairing test sends every order of five of seven events (16,807 orders). With the sheet ignored,
+  three of its tests failed. The pairing test still passed then, since ignoring an event breaks no
+  pairing. With the old elision rule put back, the three B12 tests failed.
+- **The personless card reports `simple`.** "Every card of a block" left it out, since it belongs
+  to neither block, but a search for "allé" lands on it, and it was B27's bounce in another place.
+  It closes the simple block, so it reports that.
+- **`related` retires the scroll tip**, as the etymology and the examples do, since it lies below
+  them. Staged in a new dated section of `docs/privacy_policy_pending.md`, which replaces the
+  lookup signals' second bullet in both languages.
+- **The color key now obeys `TipDisplay.tipsEnabled`.** The doc already said it did. It is a hint
+  that goes once dismissed, like the tip, and a run for screenshots should show the page a
+  returning learner sees. `KillSwitches.swift` says so.
+- **B12.** Name the Conjugation calls `elides` only for a pronominal verb's reflexive pronoun, and
+  no pronominal verb starts with a ligature, so nothing there changes. The quiz's frame gives
+  "j'" (a new row in `AnswerFrameTests`). œuvrer's key conjugations carry no pronoun, so the test
+  pins them as they are: œuvre, A œuvré (avoir's red letter), œuvrera.
+- **S5.** `Etymology.texts(in:)` reads one language afresh and keeps nothing, and
+  `VerbBase.base(of:etymology:)` is the rule without its cache. The test passes today.
+- **S6** went no further than the plan: `Tense.table` and `TenseTable.tenses` stay as two
+  exhaustive switches, which `testEveryCellBelongsToTheTableThatListsIt` checks against each other.
+  `Tense.article` reads `Info.withStableKey`, which `Info.info(deeplinkTarget:)` now uses too.
+- **The cells take the gender as a parameter.** `conjugationParts`, `cell`, and `sections` take the
+  learner's setting, which an impersonal verb overrides inside, rather than reading `Current`.
+- **D8** is `Verb.keyConjugationsByStem()`, which gives each stem with its bare form.
+- **B29's titles** needed two catalog keys, `VerbView.builtOnLabel` and `VerbView.sameModelLabel`,
+  which replaces `VerbView.sameModel`. `builtOn(_:)` stays as the related list's title. Not heard
+  with VoiceOver; the tree shows "Built on " and "prendre" as two elements.
+- **D9 fixed a typo on the way.** The model page's hint read "infomation" in English.
+- **Seen in the simulator, iPhone:** œuvrer's cells read j'œuvre, j'œuvrais, j'œuvrai; "sois" from
+  a search link, then Back at once, sent `leaveVerbView` with `simple`; Test Me from apprendre's
+  sheet ended the visit (deepest `related`) and Quit resumed it; an article's diamond on aller's
+  page ended the visit and Done resumed it, the page still there; the star filled on apprendre,
+  three deep from prendre through comprendre. **iPad:** apprendre's Related Verbs card and
+  œuvrer's cells. Both records were restored afterward, and a relaunch left the iPhone's byte for
+  byte.
 
 ## Phase 10: Lists, Model Pages, and Collections
 

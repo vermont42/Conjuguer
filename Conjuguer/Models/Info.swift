@@ -62,6 +62,8 @@ struct Info: Identifiable, Hashable {
     Info(stableKey: "credits", heading: L.Info.creditsHeading, text: L.Info.creditsText, category: .about, imageInfo: ImageInfo(filename: "Adams", accessibilityLabel: L.ImageInfo.joshAdams))
   ]
 
+  static let withStableKey = Dictionary(uniqueKeysWithValues: infos.map { ($0.stableKey, $0) })
+
   static var sections: [(category: InfoCategory, infos: [Info])] {
     InfoCategory.allCases.compactMap { category in
       let matching = infos.filter { $0.category == category }
@@ -76,7 +78,7 @@ struct Info: Identifiable, Hashable {
   /// The article an `info/` link names: by its stable key, or by its position, as links from
   /// earlier versions did and as a widget or shortcut made then may still.
   static func info(deeplinkTarget target: String) -> Info? {
-    if let info = infos.first(where: { $0.stableKey == target }) {
+    if let info = withStableKey[target] {
       return info
     }
     guard let index = Int(target), infos.indices.contains(index) else {

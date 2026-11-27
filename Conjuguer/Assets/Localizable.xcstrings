@@ -4789,6 +4789,23 @@
         }
       }
     },
+    "VerbView.builtOnLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Built on"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formés sur"
+          }
+        }
+      }
+    },
     "VerbView.matchesSearch" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4823,19 +4840,19 @@
         }
       }
     },
-    "VerbView.sameModel" : {
+    "VerbView.sameModelLabel" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Same model: %1$@ (%2$@)"
+            "value" : "Same model:"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Même modèle : %1$@ (%2$@)"
+            "value" : "Même modèle :"
           }
         }
       }
@@ -6435,7 +6452,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "shows infomation about how verb conjugation irregularities are represented"
+            "value" : "shows information about how verb conjugation irregularities are represented"
           }
         },
         "fr" : {

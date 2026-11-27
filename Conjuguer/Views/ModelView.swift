@@ -183,15 +183,9 @@ struct ModelView: View {
         Text(L.ModelView.stemAlterations)
           .subheadingLabel()
 
-        Button {
+        ArticleButton(hint: L.ModelView.infoButtonHint) {
           isShowingIrregularitiesArticle = true
-        } label: {
-          Image(systemName: "questionmark.diamond.fill")
         }
-        .buttonStyle(.borderless)
-        .tint(.customRed)
-        .accessibilityLabel(Text(L.Navigation.info))
-        .accessibilityHint(Text(L.ModelView.infoButtonHint))
 
         Spacer()
       }

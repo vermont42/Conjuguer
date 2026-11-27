@@ -31,66 +31,54 @@ struct VerbConjugations {
     var id: TenseTable {
       table
     }
-
-    var scrollID: String {
-      table.scrollID
-    }
   }
 
   let personlessCells: [Cell]
   let simpleSections: [Section]
+  let compoundSections: [Section]
 
   /// Whether the verb's own conjugations, not only its auxiliary's, have red letters.
   let hasIrregularLetters: Bool
 
-  init(verb: Verb) {
-    personlessCells = Self.personlessCells(verb: verb)
-    simpleSections = Self.sections(verb: verb, tables: TenseTable.simple)
+  /// The cells bake in the pronouns of `pronounGender`, the learner's setting: il or elle, ils or
+  /// elles, and the agreement of an être participle.
+  init(verb: Verb, pronounGender: PronounGender) {
+    personlessCells = Self.sections(verb: verb, tables: [.personless], pronounGender: pronounGender)[0].cells
+    simpleSections = Self.sections(verb: verb, tables: TenseTable.simple, pronounGender: pronounGender)
+    compoundSections = Self.sections(verb: verb, tables: TenseTable.compound, pronounGender: pronounGender)
     hasIrregularLetters = (personlessCells + simpleSections.flatMap(\.cells)).contains(where: \.hasRedLetters)
   }
 
-  @MainActor private static var cache: [String: VerbConjugations] = [:]
+  private struct CacheKey: Hashable {
+    let verb: String
+    let pronounGender: PronounGender
+  }
 
-  @MainActor static func memoized(for verb: Verb) -> VerbConjugations {
-    let key = verb.infinitifWithPossibleExtraLetters
+  @MainActor private static var cache: [CacheKey: VerbConjugations] = [:]
+
+  /// A page reads this from `body`, so a change of the pronoun-gender setting reaches every
+  /// open page whole. The key holds the gender, so nothing needs clearing when it changes.
+  @MainActor static func memoized(for verb: Verb, pronounGender: PronounGender) -> VerbConjugations {
+    let key = CacheKey(verb: verb.id, pronounGender: pronounGender)
     if let cached = cache[key] {
       return cached
     }
-    let conjugations = VerbConjugations(verb: verb)
+    let conjugations = VerbConjugations(verb: verb, pronounGender: pronounGender)
     cache[key] = conjugations
     return conjugations
   }
 
-  // The cached simple-tense cells bake in the pronoun (il/elle, ils/elles), which
-  // depends on Current.settings.pronounGender at build time. Clear the cache when
-  // that setting changes so already-viewed verbs re-render with the new pronouns.
-  @MainActor static func clearCache() {
-    cache.removeAll()
-  }
-
-  /// The card that shows `tense`, for a search's landing. The page and `sections` read the same
-  /// `TenseTable`, so the two cannot disagree.
-  static func scrollID(for tense: Tense) -> String {
-    tense.table.scrollID
-  }
-
-  static func sections(verb: Verb, tables: [TenseTable]) -> [Section] {
+  static func sections(verb: Verb, tables: [TenseTable], pronounGender: PronounGender) -> [Section] {
     tables.map { table in
       let cells = table.tenses.enumerated().map { cellIndex, tense in
-        cell(verb: verb, tense: tense, id: cellIndex)
+        cell(verb: verb, tense: tense, id: cellIndex, pronounGender: pronounGender)
       }
       return Section(table: table, cells: cells)
     }
   }
 
-  static func personlessCells(verb: Verb) -> [Cell] {
-    TenseTable.personless.tenses.enumerated().map { index, tense in
-      cell(verb: verb, tense: tense, id: index)
-    }
-  }
-
-  static func cell(verb: Verb, tense: Tense, id: Int) -> Cell {
-    let parts = conjugationParts(verb: verb, tense: tense)
+  static func cell(verb: Verb, tense: Tense, id: Int, pronounGender: PronounGender) -> Cell {
+    let parts = conjugationParts(verb: verb, tense: tense, pronounGender: pronounGender)
     var display = AttributedString(mixedCaseString: parts.form)
     if isDefective(verb: verb, tense: tense) {
       display.strikethroughStyle = Text.LineStyle.single
@@ -105,28 +93,29 @@ struct VerbConjugations {
     )
   }
 
-  static func conjugationParts(verb: Verb, tense: Tense) -> (pronoun: String, form: String, spoken: String) {
-    let conjugation = rawConjugation(verb: verb, tense: tense)
+  /// `pronounGender` is the learner's setting, which an impersonal verb overrides.
+  static func conjugationParts(verb: Verb, tense: Tense, pronounGender setting: PronounGender) -> (pronoun: String, form: String, spoken: String) {
+    let pronounGender = verb.pronounGender(for: setting)
+    let conjugation = rawConjugation(verb: verb, tense: tense, pronounGender: pronounGender)
 
     switch tense {
-    case .participePassé, .participePrésent, .radicalFutur, .impératifPassé:
+    case .impératifPassé:
       return ("", conjugation, conjugation.lowercased())
     case .impératif(let personNumber):
       let form = personNumber.impératifAndPossibleReflexivePronoun(conjugation, isReflexive: verb.isReflexive)
       return ("", form, form.lowercased())
     default:
-      // Every remaining case is a person-bearing simple/compound tense, so personNumber is non-nil.
       guard let personNumber = tense.personNumber else {
         return ("", conjugation, conjugation.lowercased())
       }
-      let preamble = personNumber.preamble(forConjugation: conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH, pronounGender: verb.pronounGender)
+      let preamble = personNumber.preamble(forConjugation: conjugation, isReflexive: verb.isReflexive, hasAspiratedH: verb.hasAspiratedH, pronounGender: pronounGender)
       let pronoun = preamble.trimmingCharacters(in: .whitespaces)
       return (pronoun, conjugation, (preamble + conjugation).lowercased())
     }
   }
 
-  static func rawConjugation(verb: Verb, tense: Tense) -> String {
-    guard let conjugation = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters, pronounGender: verb.pronounGender) else {
+  private static func rawConjugation(verb: Verb, tense: Tense, pronounGender: PronounGender) -> String {
+    guard let conjugation = Conjugator.conjugatedString(infinitif: verb.infinitif, tense: tense, extraLetters: verb.extraLetters, pronounGender: pronounGender) else {
       // Unreachable with today's data; a future data typo degrades to an empty cell
       // rather than crashing the user mid-browse.
       assertionFailure("Could not conjugate \(verb.infinitif) for \(tense.titleCaseName).")

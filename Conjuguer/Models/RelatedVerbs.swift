@@ -90,14 +90,19 @@ enum VerbBase {
     if let cached = baseCache[infinitif] {
       return cached.base
     }
-    let candidates = prefixes
-      .filter { infinitif.hasPrefix($0) }
-      .map { String(infinitif.dropFirst($0.count)) }
-    let base = candidates
-      .filter { isBase($0, of: infinitif) }
-      .max { $0.count < $1.count }
+    let base = base(of: infinitif, etymology: Etymology.text(for:))
     baseCache[infinitif] = CachedBase(base: base)
     return base
+  }
+
+  /// The rule itself, uncached, reading each verb's etymology from `etymology`, so that a test can
+  /// run it over both languages' etymologies.
+  @MainActor static func base(of infinitif: String, etymology: (String) -> String?) -> String? {
+    prefixes
+      .filter { infinitif.hasPrefix($0) }
+      .map { String(infinitif.dropFirst($0.count)) }
+      .filter { isBase($0, of: infinitif, etymology: etymology) }
+      .max { $0.count < $1.count }
   }
 
   /// The innermost base, following bases that are themselves built on another: redécouvrir,
@@ -114,7 +119,7 @@ enum VerbBase {
     return root
   }
 
-  @MainActor private static func isBase(_ candidate: String, of infinitif: String) -> Bool {
+  @MainActor private static func isBase(_ candidate: String, of infinitif: String, etymology: (String) -> String?) -> Bool {
     guard candidate.count >= minimumBaseLength, Verb.entriesByInfinitif[candidate] != nil else {
       return false
     }
@@ -125,11 +130,7 @@ enum VerbBase {
     guard !falsePairs.contains(pair) else {
       return false
     }
-    return etymology(of: infinitif, names: candidate)
-  }
-
-  @MainActor private static func etymology(of infinitif: String, names base: String) -> Bool {
-    Etymology.text(for: infinitif)?.contains("~\(base)~") == true
+    return etymology(infinitif)?.contains("~\(candidate)~") == true
   }
 
   private struct CachedBase {

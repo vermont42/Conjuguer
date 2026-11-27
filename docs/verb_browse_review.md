@@ -245,6 +245,8 @@ Name the Conjugation call the same function (`AnswerFrame.swift:72`, `Recognitio
 The rule predates the plan; Phase 4 moved it into this file and Phase 8 made the key conjugations
 share it. **Fix:** count œ and æ as vowels, and pin œuvrer's je cell.
 
+**Fixed on `main` 2026-11-26**, by Phase 9 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `elides` lists œ and æ as vowels. œuvrer's je cells read j'œuvre, j'œuvrais, and j'ai œuvré, and the quiz's frame gives "j'". Name the Conjugation calls the rule only for a pronominal verb's reflexive pronoun, and no pronominal verb begins with a ligature.
+
 ### Low
 
 **B13. Typing a hyphenated form sounds the trombone at the hyphen.** *Traced.* "dis-moi" plays it
@@ -354,6 +356,8 @@ reads the marked cell and leaves sends `leaveVerbView` with `deepestSection` `he
 as a bounce. Every compound landing but the passé composé does the same. **Fix:** let every card of
 a block report its block; `VerbVisit.reach` already keeps the deepest.
 
+**Fixed on `main` 2026-11-26**, by Phase 9 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): every tense card reports its block, and the personless card reports `simple`. The wiring is in the view, so no unit test fails without it; `VerbVisitTrackerTests` pins that a section reached mid-visit counts.
+
 **B28. The article opener leaks into sheets presented from inside an article sheet.** *Traced.*
 `tenseArticleOpener` is an environment value set on the article sheet's whole stack
 (`VerbView.swift:708-710`), and sheets inherit the environment. A verb page inside an article
@@ -372,6 +376,8 @@ headings lack the header trait. *Traced in code; not heard.* "Built on prendre" 
 venir (6-7)" are each one `Text` with no locale (`RelatedVerbsView.swift:24`, `38`), where
 `docs/voiceover.md` asks for a label and a French-marked value. Overview and the color key's title
 skip `.isHeader` (`VerbView.swift:215`, `454`), so the heading rotor misses the page's first card.
+
+**Fixed on `main` 2026-11-26**, by Phase 9 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): each relation's title is a label ("Built on", "Same model:") beside a French-marked value, as `docs/voiceover.md` asks, and Overview and the color key's title carry the header trait. Not heard with VoiceOver.
 
 **B30. Look Up a Verb cannot open the page of an infinitive that has a twin.** *Traced. Found
 through Konjugieren's review, not by mine.* `literalAnswerKinds` includes `.exactFoldedInfinitive`
@@ -513,6 +519,8 @@ open across a change of the pronoun-gender setting may show "il" above and "elle
 (suspected, not run). **Fix:** cache the compound sections beside the simple ones, look the cache
 up from `body` rather than storing its answer, and give the star its own small view.
 
+**Fixed on `main` 2026-11-26**, by Phase 9 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md). The suspicion did not reproduce: on the iPhone simulator, a page pushed in the Verbs tab and one pushed in the Models tab both followed a change of pronoun gender in both blocks, before and after a tap on the star, since each tab's stack built its pages afresh. The cost was real. `VerbConjugations` now holds the compound cards beside the simple ones, cached by verb and gender, and the page reads the cache from `body`. The star is a view of its own. Counted by a log line in `body` and one where the cards are conjugated, on the iPhone simulator: a push of faire from the Verbs tab built the page 3 times before and 2 after; prendre's page in a link's sheet over it, 5 times before and 4 after, and faire's page beneath was rebuilt once before and not after; apprendre pushed from prendre's related chips, 2 times before and 1 after, with each page beneath rebuilt once before, and after only prendre's. The compound cards were conjugated on every pass before and once per page after.
+
 **S4a. `VerbView` is 756 lines with seams of its own.** The visit tracker is four `@State` flags
 and five callbacks (see T1); the example card owns chanson state that `init` recomputes on every
 parent pass and then discards; `TenseArticleSheet` repeats `SheetDismissable` nearly line for line
@@ -525,6 +533,8 @@ is already `Hashable` and could be the id itself.
 `ArticleSheet` is `InfoView` in a `.sheetDismissable(pushesTenseArticles: true)`. The rest is
 Phase 9's.
 
+**The rest fixed on `main` 2026-11-26**, by Phase 9 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `VerbVisitTracker` holds the visit's rules, each event returning what to signal and whether to record an open; `ExampleCard` owns its chanson state; the tense cards are in `TenseCards.swift` and the example card in `ExampleCard.swift`; a card's scroll target is its `TenseTable`, and the three `scrollID`s are gone.
+
 **S5. Related verbs are derived at run time from etymology prose in the interface's language.**
 `VerbBase.base(of:)` accepts a base when the verb's etymology contains `~base~`
 (`RelatedVerbs.swift:117-133`). That one test feeds the Related Verbs card, the widget draw's
@@ -536,10 +546,14 @@ exception lists (`falsePairs`, `knownPairs`, sixty-odd prefixes) are data living
 **Shape:** compute the base table once at build time, beside the conjugation map, from one
 language, and test it; or at least pin that both languages agree for every verb.
 
+**Fixed on `main` 2026-11-26**, by Phase 9 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md), the second way (Josh, 2026-11-25): `RelatedVerbsTests.testTheBaseRuleGivesTheSameAnswerInEnglishAndFrench` runs the rule over both languages' etymologies, read through `Etymology.texts(in:)`, and passes today.
+
 **S6. `TenseTable` states the same mapping several ways.** `tenses` (table to cells) and
 `Tense.table` (cell to table) are inverse switches kept by hand, `TenseTable.isCompound` restates
 `Tense.isCompound` (it could be `representative.isCompound`), and `articleKey` and `secondName` are
 twenty-case switches. `Tense.article` scans `Info.infos` for every heading on every body pass.
+
+**Fixed on `main` 2026-11-26**, by Phase 9 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `TenseTable.isCompound` is `representative.isCompound`, and `Tense.article` reads `Info.withStableKey`, a dictionary built once. The inverse switches stay: each is exhaustive, which the compiler checks, and `testEveryCellBelongsToTheTableThatListsIt` checks that they agree.
 
 **S7. `QuizScope` is a bag of flags.** *Mostly the pedagogy plan's, noted because collections
 depend on it.* `isRanked` is a ten-term conjunction that every new kind must extend, and a model's
@@ -649,8 +663,12 @@ four sites, one of them browse's (`VerbCollectionView.swift:134`, `165-170`, `19
 whose comment admits the coupling. If one changes, the review card shows forms the schedule does
 not hold.
 
+**Fixed on `main` 2026-11-26**, by Phase 9 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `Verb.keyConjugationsByStem()` decides, and both read it.
+
 **D9. The red question-mark article button** is written in `VerbView.swift:647-655` and
 `ModelView.swift:199-207`, differing in hint and action.
+
+**Fixed on `main` 2026-11-26**, by Phase 9 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `ArticleButton(hint:action:)`. Its model-page hint's "infomation" was corrected on the way.
 
 ## Tests and Docs
 
@@ -670,6 +688,8 @@ opens. The review card and the visit are Phases 6 and 9.
 **The review card's part fixed on `main` 2026-11-26**, by Phase 6 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md):
 `ReviewCardModelTests` pins the choice once per opening, a dismissal before and after the reveal,
 one reveal, one signal per offer, and a stale offer dropped. The visit is Phase 9's.
+
+**The visit's part fixed on `main` 2026-11-26**, by Phase 9 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `VerbVisitTrackerTests` pins the first visit's open, a resume after a page, the background, and the page's own sheet, no open on a resume, and the pairing over every order of five events.
 
 **T2. "A relaunch keeps today's verb" is untested through the disk.** `writeSnapshots(now:)`
 reads `WidgetConstants.snapshotsURL` and `Current` directly, so no test can point it at a file.
@@ -694,6 +714,8 @@ verbs agree across the two languages (S5).
 
 **The row half fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): see B7. The related verbs half is Phase 9's.
 
+**The related verbs half fixed on `main` 2026-11-26**, by Phase 9 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): see S5.
+
 **T5. Doc claims that are false today,** all in `docs/feature_architecture.md`: Return and the
 arrows act "only while the field holds a query" (§ Search; § The Learner's Verbs says otherwise);
 an unknown key "does nothing" (B4); férir's 2-4 shows no Quiz button (B5); the guess allows "one
@@ -702,6 +724,8 @@ link (S11); the widget takes My Verbs "in turn" (B19); the page's own model shee
 (the model page has been pushed since Phase 7, and the sheets that end a visit are the article and
 Test Me); "nine French tenses have no French alternate" (six catalog values are empty); the color
 key and the tip "both obey `TipDisplay.tipsEnabled`" (`shouldShowColorKey` does not read it).
+
+**The verb page's three corrected on `main` 2026-11-26**, by Phase 9 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the sheets that end a visit are the article and Test Me; six tenses have no French second name, named; and the color key now obeys `TipDisplay.tipsEnabled`, as the doc said, since it is a hint that goes once dismissed.
 
 **T6. `docs/voiceover.md` has no row for the collection views,** and the verb row's two languages
 inside a `Button`, which the plan left untested in Phase 0, 1, 2, and 5, are still untested.
@@ -801,7 +825,7 @@ there; **does not apply** means French or Conjuguer's design has no such thing.
 | **G3** `DeeplinkTests` pins copies of the widget's links | **Carried over** | S11. |
 | **G4** A migration for data no shipped build wrote | **Carried over** | Seen Outside the Scope. **Fixed on `main` 2026-11-26** by Phase 8: deleted. |
 | **G5** Dwell time includes time under a sheet | Did not | The page's own sheets end the visit (`VerbView.swift:173-179`). |
-| **G6** The Related Verbs card has no `VerbPageSection` | **Carried over** | Not listed above. The sections are header, simple, compound, etymology, and example. |
+| **G6** The Related Verbs card has no `VerbPageSection` | **Carried over** | Not listed above. The sections are header, simple, compound, etymology, and example. **Fixed on `main` 2026-11-26** by Phase 9: `related`, staged in the privacy file. |
 | **G7** Stale prose | Does not apply | Its five are Konjugieren's. The tool's note about a non-atomic write still holds here, since the script sandbox is on. Conjuguer's own stale prose is T5. |
 | **D1** "The cells this text fills" written three times | Did not | `MarkedConjugations(text:on:)` calls the one search function. |
 | **D2**, **D3**, **D7** The zu-infinitive, finite parts, the main-clause split | Does not apply | German. |
@@ -819,7 +843,7 @@ there; **does not apply** means French or Conjuguer's design has no such thing.
 | **S9** Unused or unguarded | Part | Carried over: `recent(limit:)`'s unused parameter; the tool accepts any `--flag`, so a mistyped output name is skipped silently (`main.swift:38-46`); `ConjugationMap(compressed:)` turns invalid UTF-8 into an empty map. Did not: the unused URL prefix, which Phase 9 removed. |
 | **S10** Both apps build the tool into one directory | **Carried over** | `scripts/write_forms_json.sh:31` uses `$TMPDIR/ConjugationMapTool-build`, the same path as Konjugieren's. A prefix on either side fixes both. |
 | **E1** `Row` and `Entry` are one shape twice | Does not apply | No separable rows. |
-| **E2** A redundant case in the cell rows | **Carried over** | `conjugationParts` names the three personless tenses in a case whose result the default's `guard` already gives (`VerbConjugations.swift:112-121`). |
+| **E2** A redundant case in the cell rows | **Carried over** | `conjugationParts` names the three personless tenses in a case whose result the default's `guard` already gives (`VerbConjugations.swift:112-121`). **Fixed on `main` 2026-11-26** by Phase 9: the case names only the impératif passé, which has a person and no pronoun. |
 | **E3** Static tables pick the tracked sections | Did not | Conjuguer compares with the block's first section, which has its own cost (B27). |
 | **T1** Tests that cannot fail | Part | `testNoParameterValueEchoesTheQuery` is here and holds by the types. The other two are Konjugieren's. Conjuguer's own are T3. |
 | **T2** Tests that check a copy | Part | The retyped widget links (S11). |

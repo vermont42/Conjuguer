@@ -18,20 +18,29 @@ enum Etymology {
     guard etymologies == nil else {
       return
     }
-    guard
-      let url = Bundle.main.url(forResource: "Etymologies", withExtension: "json"),
-      let data = try? Data(contentsOf: url),
-      let file = try? JSONDecoder().decode([String: [String: String]].self, from: data)
-    else {
-      etymologies = [:]
-      return
-    }
+    let file = decodedFile()
     let language = Locale.current.language.languageCode?.identifier ?? "en"
-    etymologies = file[language] ?? file["en"] ?? [:]
+    etymologies = file?[language] ?? file?["en"] ?? [:]
   }
 
   @MainActor static func text(for infinitif: String) -> String? {
     loadIfNeeded()
     return etymologies?[infinitif]
+  }
+
+  /// Every etymology in one language, read afresh from the bundle and not kept, so that a test can
+  /// compare the two languages. Nil for a language the file lacks.
+  static func texts(in language: String) -> [String: String]? {
+    decodedFile()?[language]
+  }
+
+  private static func decodedFile() -> [String: [String: String]]? {
+    guard
+      let url = Bundle.main.url(forResource: "Etymologies", withExtension: "json"),
+      let data = try? Data(contentsOf: url)
+    else {
+      return nil
+    }
+    return try? JSONDecoder().decode([String: [String: String]].self, from: data)
   }
 }

@@ -135,11 +135,13 @@ extension PersonNumber {
   }
 
   /// Whether a pronoun before `word` loses its vowel (j', m', t', s'): before a vowel or a mute h.
+  /// œ and æ are ligatures with no accent to fold away, so they are listed as vowels of their own
+  /// (j'œuvre).
   nonisolated static func elides(before word: String, hasAspiratedH: Bool) -> Bool {
     let normalizedFirstLetter = String(word.first ?? Character(" "))
       .folding(options: .diacriticInsensitive, locale: Util.french)
       .lowercased(with: Util.french)
-    let firstLetterIsVowel = ["a", "e", "i", "o", "u"].contains(normalizedFirstLetter)
+    let firstLetterIsVowel = ["a", "e", "i", "o", "u", "œ", "æ"].contains(normalizedFirstLetter)
     let firstLetterIsUnaspiratedH = normalizedFirstLetter == "h" && !hasAspiratedH
     return firstLetterIsVowel || firstLetterIsUnaspiratedH
   }

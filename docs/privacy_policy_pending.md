@@ -1182,3 +1182,27 @@ Le paragraphe sur la liste conservée sur l'appareil devient :
 L'application conserve une liste des verbes que vous avez ouverts et des verbes que vous avez marqués d'une étoile, afin d'afficher vos verbes récents, « Mes verbes » et le nombre de verbes de chaque collection que vous avez consultés. Cette liste reste sur votre appareil et n'est jamais envoyée. Un verbe supprimé de « Mes verbes », ou effacé de vos verbes récents, reste compté comme consulté ; « Réinitialiser le suivi », dans les Paramètres, oublie les verbes que vous avez consultés.
 ```
 
+## The Related Verbs card as a depth (browse fixes plan, Phase 9, 2026-11-26)
+
+`leaveVerbView`'s `deepestSection` gains a sixth value, `related`: the Related Verbs card at the
+foot of a verb's page was reached. Phase 9 of [`plans/verb_browse_fixes.md`](../plans/verb_browse_fixes.md)
+added it, a finding Konjugieren's review made for its own page. It names no verb. It changes the
+second bullet of the lookup signals' section above, so apply this section in place of that bullet.
+Phase 9 also counts a section as reached when any of its tense cards comes into view, not only its
+first, which the bullet's words already cover.
+
+### English
+
+The second bullet of the lookup signals' section now reads:
+
+```
+- How far down a verb's page you scrolled (its top, the simple tenses, the compound tenses, the etymology, the example sentences, or the related verbs), and roughly how long the page was open (under 5 seconds, 5 to 15 seconds, 15 to 60 seconds, or longer)
+```
+
+### French
+
+Le deuxième point de la section sur les signaux de consultation devient :
+
+```
+- Jusqu'où vous avez fait défiler la page d'un verbe (son début, les temps simples, les temps composés, l'étymologie, les exemples ou les verbes apparentés) et, approximativement, combien de temps la page est restée ouverte (moins de 5 secondes, de 5 à 15 secondes, de 15 à 60 secondes, ou davantage)
+```
