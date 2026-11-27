@@ -54,3 +54,45 @@ struct VerbSpotlightTests {
     #expect(exit.title == "sortir")
   }
 }
+
+@MainActor
+@Suite(.serialized)
+struct VerbSpotlightIndexingTests {
+  private let map = ConjugationMap(verbsByConjugation: ["vais": ["aller"]])
+
+  private func verbs(_ keys: [String]) throws -> [Verb] {
+    try keys.map { try #require(Verb.verbs[$0]) }
+  }
+
+  @Test func aReindexDeletesTheEntriesBeforeWritingThem() async throws {
+    let index = SpotlightIndexSpy()
+    let store = GetterSetterFake()
+    await VerbSpotlight.indexVerbsIfNeeded(index: index, store: store, verbs: try verbs(["aller", "parler"]), map: map)
+    #expect(index.calls == [.deleteAll, .index(["aller", "parler"])])
+    #expect(store.get(key: VerbSpotlight.indexedVersionKey) == VerbSpotlight.version)
+  }
+
+  @Test func anIndexOfThisVersionIsNotRepeated() async throws {
+    let index = SpotlightIndexSpy()
+    let store = GetterSetterFake(dictionary: [VerbSpotlight.indexedVersionKey: VerbSpotlight.version])
+    await VerbSpotlight.indexVerbsIfNeeded(index: index, store: store, verbs: try verbs(["aller"]), map: map)
+    #expect(index.calls.isEmpty)
+  }
+
+  @Test func aFailedDeleteStillIndexesAndTriesAgainNextLaunch() async throws {
+    let index = SpotlightIndexSpy()
+    index.deleteFails = true
+    let store = GetterSetterFake()
+    await VerbSpotlight.indexVerbsIfNeeded(index: index, store: store, verbs: try verbs(["aller"]), map: map)
+    #expect(index.calls == [.deleteAll, .index(["aller"])])
+    #expect(store.get(key: VerbSpotlight.indexedVersionKey) == nil)
+  }
+
+  @Test func aFailedIndexIsNotRecorded() async throws {
+    let index = SpotlightIndexSpy()
+    index.indexFails = true
+    let store = GetterSetterFake()
+    await VerbSpotlight.indexVerbsIfNeeded(index: index, store: store, verbs: try verbs(["aller"]), map: map)
+    #expect(store.get(key: VerbSpotlight.indexedVersionKey) == nil)
+  }
+}

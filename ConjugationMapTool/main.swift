@@ -35,12 +35,22 @@
 
 import Foundation
 
+private let knownFlags: Set = ["--verbs", "--verb-models", "--defect-groups", "--map", "--forms-json", "--forms-all-json", "--conjugations-json"]
+
+// A mistyped output flag (--form-json) would otherwise be read and ignored, and the run would
+// succeed without writing the file asked for.
 private func parseArguments() -> [String: String] {
   var values: [String: String] = [:]
   var remaining = CommandLine.arguments.dropFirst()
   while let flag = remaining.popFirst() {
     guard flag.hasPrefix("--"), let value = remaining.popFirst() else {
       fail("Expected --flag value pairs, got \(flag).")
+    }
+    guard knownFlags.contains(flag) else {
+      fail("Unknown flag \(flag). Known flags: \(knownFlags.sorted().joined(separator: ", ")).")
+    }
+    guard values[flag] == nil else {
+      fail("\(flag) was given twice.")
     }
     values[flag] = value
   }

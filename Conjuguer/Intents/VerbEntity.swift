@@ -60,6 +60,7 @@ struct VerbEntityQuery: EntityStringQuery {
   // cut off behind its prefixed relatives.
   func entities(matching string: String) async -> [VerbEntity] {
     await VerbData.ensureLoaded()
+    await ConjugationIndex.warmBundled()
     return await MainActor.run {
       VerbSearch.matches(for: string, in: Array(Verb.verbs.values), includeGlosses: true)
         .prefix(Self.matchLimit)

@@ -59,6 +59,26 @@ material for the release notes.
    window in front; and ↑ and ↓ move the highlight only in the window whose field is focused. On
    the Mac, check also that a link does not open a new window, which SwiftUI's `WindowGroup` may do
    there for an external event.
+10. **Check that the control's and the shortcuts' links open at once, warm and cold** (finding B10
+    of [`verb_browse_review.md`](verb_browse_review.md), Phase 12 of the browse fixes). The Find a
+    Verb, Random Verb, and Quick Quiz controls and the Random Verb shortcut each leave a link in
+    the App Group's defaults (`PendingDeeplinkIntent`), and a window takes it only when it becomes
+    active (`SceneRoot.drainPendingWidgetDeeplink`). If the intent's `perform()` runs after that
+    moment, the link waits for the next activation, which may be days later. Try each of the four
+    twice: once with the app killed, and once with it in the background on another tab. Each
+    should open its page or tab on that tap. Then put the app in the background and bring it
+    back, and kill it and launch it from its icon: no page should open by itself. If one does, or
+    a tap opens nothing until the next activation, fix it by one of two ways and record which in
+    `docs/feature_architecture.md` § Deeplinks:
+    - **`OpenURLIntent`.** Have each intent return `.result(opensIntent: OpenURLIntent(url))`, so
+      the system opens the link itself and the mailbox goes. This is the better fix if the control
+      accepts it; Konjugieren's `docs/control_center_controls.md` records that a control's intent
+      could not open a URL itself, so try the control first.
+    - **A timestamp on the stashed link.** Store the time beside the link, have
+      `drainPendingWidgetDeeplink` drop a link older than a minute, and have the app also drain
+      when the shared defaults change while it is active (a Darwin notification that the intent
+      posts, since `UserDefaults` does not notify across processes). The first stops a stale link
+      from firing days later; the second opens a link that arrives after activation.
 
 ## On Release Day
 

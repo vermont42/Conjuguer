@@ -39,7 +39,10 @@ Conjuguer/
 │   ├── ConjuguerShortcuts.swift # AppShortcutsProvider: Look Up a Verb, Start Quiz, Random Verb, with English phrases
 │   ├── LookUpVerbIntent.swift  # Look Up a Verb (asks for a word, answers, opens the page or search) and the hidden OpenLookupResultIntent it opens with
 │   ├── VerbEntity.swift        # AppEntity and IndexedEntity for a verb entry, with its query
-│   └── VerbSpotlight.swift     # The Spotlight entries (gloss, key conjugations, every conjugation) in the named index, indexed when the app's version changes
+│   ├── SpotlightIndex.swift    # Protocol for the named Spotlight index: delete every entry, index the verbs
+│   ├── SpotlightIndexReal.swift # CSSearchableIndex behind SpotlightIndex
+│   ├── SpotlightIndexSpy.swift # Test double recording the deletes and indexes, for VerbSpotlightIndexingTests
+│   └── VerbSpotlight.swift     # The Spotlight entries (gloss, key conjugations, every conjugation) in the named index, deleted and indexed again when the app's version changes
 ├── Assets/
 │   ├── Assets.xcassets/        # Colors (customBlue, customRed, …), app icons + their preview images, Adams/Compton/Splash images
 │   ├── LaunchScreen.storyboard # Launch screen
@@ -291,7 +294,6 @@ ConjuguerWidget/
 ├── RandomVerbControl.swift     # Control Center button that opens a random verb (runs OpenRandomVerbControlIntent)
 ├── SnapshotReader.swift        # Reads the snapshot bundle from the shared container into timeline entries
 ├── VerbDuJourWidget.swift      # Timeline widget for the verb of the day
-├── WidgetDeeplink.swift        # Builds conjuguer:// URLs for widget taps: the verb's page (source=widget) and the quiz widget's daily challenge (source=challengeWidget)
 └── Views/
     ├── AccessoryWidgetView.swift   # Lock Screen accessory families
     ├── LargeWidgetView.swift       # Large family: verb plus full présent paradigm
@@ -303,15 +305,17 @@ ConjuguerWidget/
 
 Shared/                         # Compiles into BOTH the app and widget targets
 ├── LearnerVerbs.swift          # The learner's verb record, keyed by Verb.dictionaryKey: opens (first, last, count) and stars, as JSON in the App Group's defaults; the first open is collection progress and only Reset Practice forgets it, the last puts a verb in Recent; every later field must be optional
-├── OpenQuizIntent.swift        # AppIntent opening the quiz (title written inline — appintentsmetadataprocessor can't read WidgetL accessors)
+├── OpenQuizIntent.swift        # The Quick Quiz control's action, a PendingDeeplinkIntent (title written inline, since appintentsmetadataprocessor can't read WidgetL accessors)
 ├── OpenRandomVerbControlIntent.swift  # The Random Verb control's action: OpenRandomVerbIntent with source=control, hidden from Shortcuts
 ├── OpenRandomVerbIntent.swift  # AppIntent opening a random verb from Shortcuts, with source=shortcut (same inline-title constraint)
 ├── OpenVerbSearchIntent.swift  # The Find a Verb control's action: conjuguer://search?source=control, hidden from Shortcuts
+├── PendingDeeplinkIntent.swift  # The nonisolated protocol whose one perform() leaves an intent's WidgetDeeplink in the shared defaults for the app to follow
 ├── QuizActivityAttributes.swift  # ActivityKit model for the quiz Live Activity
 ├── PracticeRecord.swift        # The practice record: PracticeItem (a pattern or a key conjugation, with permanent string keys) and a box, a due date, and the last answer per item, as JSON in the App Group's defaults; every later field must be optional
 ├── ReviewSchedule.swift        # The practice record's Leitner ladder (1, 3, 7, 14, 30 days): a box and a due date at the start of a day; a right answer climbs only when due, a wrong one starts over
 ├── WidgetConstants.swift       # App-group ID, snapshot filename, storage keys
 ├── WidgetDateHelper.swift      # Pinned Gregorian calendar and day-key formatting shared by writer and reader
+├── WidgetDeeplink.swift        # Every conjuguer:// link the widget extension and Shared/'s intents spell (verb widgets, the quiz widget's challenge, the controls, the shortcut); DeeplinkTests pins each to Deeplink's
 ├── WidgetL.swift               # LocalizedStringResource accessors for widget strings (the widget's analogue to L)
 └── WidgetSnapshot.swift        # WidgetSnapshotBundle, the snapshot file (each day's snapshot and the last day each My Verbs verb was given, read also from the older bare list); the Codable model for one day of serialized widget state; WidgetQuizQuestion.stableSeed, the FNV-1a seed the widget's answer order and the daily challenge share
 

@@ -7245,3 +7245,44 @@ One question went to Josh rather than into code: whether a custom quiz over a li
 three cells too, since falloir's model with only the présent chosen asked a round of one. He said
 yes, so the custom quiz and a shared practice set follow the same floor, with a line under Start
 that tells "too few" from "none".
+
+## Six Links in One Place, and an Index Off the Main Thread (2026-11-27)
+
+Phase 12 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md) gathered the review's findings
+about the app's edges: the intents, Spotlight, and the build-time tool.
+
+The intents in `Shared/` had a duplication with a twist. Four of them had the same `perform()`,
+differing only in the string they left in the App Group, and those strings, with the widget's two
+links, were the link grammar written out a second time where the app's `Deeplink` builder could
+not reach. The doc claimed `DeeplinkTests` pinned each literal; it pinned three of six.
+Konjugieren had fixed the same thing the day before, so its shape came over: a
+`PendingDeeplinkIntent` protocol with one `perform()`, and a `WidgetDeeplink` enum, now in
+`Shared/`, that spells all six links. The test now compares each to the URL `Deeplink` builds for
+the same place, and the verb link for all 6,330 keys, which a literal could never have covered.
+Konjugieren's notes saved a round trip: the protocol has to be `nonisolated`, or the app's default
+main-actor isolation leaks into every intent that adopts it and breaks `AppIntent`'s `title`.
+
+B11 said to measure before fixing, so I put timing into a Release build and launched it cold in
+the simulator. A cold `conjuguer://search?q=vais` held the main thread for 0.85 s while the
+conjugation index folded its 243,000 spellings; a cold Look Up a Verb, with nothing warming the
+index first, took 0.8 to 1.8 s. Far more than a frame. Now every path that can arrive first awaits
+a `@concurrent` warm-up before touching the index. One path is still synchronous: a
+`verb/…?match=` link from outside, resolved in `SceneRouter.handle`, would build the index on the
+main thread on a cold launch. Look Up's own such link comes after its intent has warmed it, so
+the case left is a hand-typed link, and I left it.
+
+Spotlight (B20) had never deleted anything, so a verb that left `verbs.xml` would leave a result
+that opened nothing. Each reindex now clears the named index first. The index went behind a small
+protocol so a spy could pin the order, and a failed delete still indexes but is not recorded as
+done, so the next launch retries.
+
+B10, whether the controls' links wait a whole activation when `perform()` runs late, stays a
+device question. Both fixes (`OpenURLIntent`, or a timestamp and a Darwin notification) went into
+`docs/release.md` beside a warm-and-cold check. Neither could be shown to work in the simulator.
+
+The tool now refuses a flag it does not know, so `--form-json` fails loudly instead of writing
+nothing. The map refuses bytes that are not UTF-8 instead of reading them as an empty map. And
+`write_forms_json.sh` builds into `ConjuguerConjugationMapTool-build`, matching Konjugieren's and
+Conjugar's prefixes, so the three apps no longer share a build directory. The one cleanup the plan
+listed, a test-only `URL.modelDeeplink` overload, turned out to have gone in Phase 1. Two later
+phases had copied "remains" from the review's prose, not from the code.

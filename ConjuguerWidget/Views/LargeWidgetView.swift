@@ -74,7 +74,7 @@ struct LargeWidgetView: View {
 
       Spacer(minLength: 0)
     }
-    .widgetURL(WidgetDeeplink.verb(snapshot))
+    .widgetURL(snapshot.deeplink.url)
   }
 
   private func conjugationCell(_ conjugation: WidgetConjugation) -> some View {

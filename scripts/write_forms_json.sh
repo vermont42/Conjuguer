@@ -28,8 +28,9 @@ models="$repo/Conjuguer/Models"
 
 # A bare `xcodebuild -target` build writes ./build into the repository unless SYMROOT and
 # OBJROOT point elsewhere. A scratch directory under TMPDIR keeps the tree clean, and reusing it
-# across runs keeps rebuilds incremental.
-build_root="${TMPDIR:-/tmp}/ConjugationMapTool-build"
+# across runs keeps rebuilds incremental. Its name says Conjuguer because Konjugieren's tool has
+# the same name, and two apps building into one directory would overwrite each other's products.
+build_root="${TMPDIR:-/tmp}/ConjuguerConjugationMapTool-build"
 
 xcodebuild -project "$repo/Conjuguer.xcodeproj" -target ConjugationMapTool -configuration Release \
   SYMROOT="$build_root/Products" OBJROOT="$build_root/Intermediates" -quiet build

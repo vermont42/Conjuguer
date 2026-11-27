@@ -90,9 +90,16 @@ nonisolated extension ConjugationMap {
     try (Data(text.utf8) as NSData).compressed(using: .lzfse) as Data
   }
 
+  enum ReadError: Error, Equatable {
+    case notUTF8
+  }
+
   init(compressed data: Data) throws {
     let decompressed = try (data as NSData).decompressed(using: .lzfse) as Data
-    self.init(text: String(bytes: decompressed, encoding: .utf8) ?? "")
+    guard let text = String(bytes: decompressed, encoding: .utf8) else {
+      throw ReadError.notUTF8
+    }
+    self.init(text: text)
   }
 
   static func agreedForms(ofParticiple participle: String) -> [String] {

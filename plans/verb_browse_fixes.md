@@ -39,7 +39,7 @@ empty until it is committed.
 | 9 | Done | 2026-11-26 | `d5ae545` | B12, B27, B29, S4, S4a, S5, S6, D8, D9, T1 (the visit), K-G6 | Yes |
 | 10 | Done | 2026-11-27 | `6d94bd6` | B17, B25 (the labels), S8, S13, S14, D1, D2, D3, D6, T6 | Yes |
 | 11 | Done | 2026-11-27 | `4d535b0` | B5, S7, the rare-verb draw | Yes |
-| 12 | Not started | | | B10, B11, B20, S11, K-S9, K-S10 | No |
+| 12 | Done | 2026-11-27 | | B10 (to a device), B11, B20, S11, K-S9, K-S10 | No |
 | 13 | Not started | | | S9, T3, T4, T5, what the others left | No |
 | Closing | Not started | | | The audit, the workarounds list, the note for the other apps | No |
 
@@ -1129,6 +1129,51 @@ timestamp, as `docs/feature_architecture.md` § Conjugation Map describes), and
 Look Up a Verb, and a verb found in Spotlight.
 
 **How it differed:**
+
+- **S11 followed Konjugieren's Phase 9.** `PendingDeeplinkIntent` is a `nonisolated` protocol whose
+  extension gives the four intents one `perform()`, for the reason Konjugieren recorded: declared
+  plainly, it takes the app's main-actor default and its adopters' `title` no longer satisfies
+  `AppIntent`. Each intent names a `WidgetDeeplink` case. `WidgetDeeplink` moved from
+  `ConjuguerWidget/` to `Shared/`, where tests can see it, became an enum of all six links built
+  with `URLComponents`, and gave `WidgetSnapshot` a `deeplink`. `DeeplinkTests` pins each of the
+  six to `Deeplink`'s URL for the same place and checks that it parses back, pins the verb link
+  for every key in `Verb.verbs`, and calls `OpenRandomVerbControlIntent().perform()` to read what
+  it left in the App Group. `OpenQuizIntent`'s link keeps no `source`, as before.
+- **B11, measured.** A temporary build with timing, Release configuration, on "Conjuguer iPhone 17"
+  (Intel Mac), launched cold three times each: `conjuguer://search?q=vais` blocked the main actor
+  0.82 to 0.88 s, nearly all the fold (0.78 to 0.84 s), with the verb list's own warm-up running
+  beside it; the Look Up path (`VerbData.ensureLoaded()`, then `VerbLookup` for vais), with that
+  warm-up switched off, 0.79 to 1.83 s. In every run the map itself was already loaded by the time
+  the index was built, so these times are the fold alone. The fix: `ConjugationIndex.warmBundled()`,
+  `@concurrent`, awaited by the verb list's `.task` (which loses its detached `.utility` task), by
+  `LookUpVerbIntent` and `VerbEntityQuery.entities(matching:)` before their `MainActor.run`, and by
+  `openRequestedSearch`, which now applies a search link's text from a task once the index is
+  warm. Seen in the simulator: a cold `search?q=vais` shows aller with its vais line. Not fixed: a
+  `verb/…?match=` link resolved cold in the synchronous `SceneRouter.handle(_:)` still builds the
+  index on the main actor; Look Up's own such link arrives after its intent warmed it. No test
+  fails without this fix, since the index is built once per process.
+- **B10 was not built.** Both fixes are sketched in `docs/release.md`, item 10, with the check.
+  A timestamp could be unit-tested, but not shown to fix what the finding is about, which is when
+  `perform()` runs on a device.
+- **B20.** A `SpotlightIndex` protocol with `SpotlightIndexReal` (which makes a `CSSearchableIndex`
+  per call, since holding one and sending it to the index's executor failed the build as a data
+  race) and `SpotlightIndexSpy`. It is a parameter of `indexVerbsIfNeeded`, with the store, verbs,
+  and map, defaulting to the real ones, rather than a `World` service: only this function uses it,
+  and the test host never indexes. Each index deletes all of the named index's entries, then
+  writes them. A failed delete still indexes but leaves the version unrecorded.
+- **K-S9.** The tool also refuses a flag given twice. Tried by hand: `--form-json` and a doubled
+  `--verbs` each exit 1 with a message. `ConjugationMap(compressed:)` throws `ReadError.notUTF8`.
+- **K-S10.** The directory is `ConjuguerConjugationMapTool-build`, without a hyphen, to match the
+  siblings' `KonjugierenConjugationMapTool-build` and `ConjugarConjugationMapTool-build`, found in
+  `$TMPDIR`. The old shared `ConjugationMapTool-build` is still there, untouched, since another
+  app may have used it last. The script ran twice from the new directory with byte-identical
+  output. That output differs from `corpus/working`'s dumps of 2026-11-22 in 48 conjugations
+  (écoconcevoir's futur stem) and some forms (s'abstenir's), changes to the data since then, not
+  this phase's. `corpus/working` was left as it was.
+- **The model-deeplink overload was already gone,** deleted with the URL builders in Phase 1
+  (`5543a98`). The review now says so under S9.
+- **Done when.** An unchanged rebuild ran no "Generate Conjugation Map" phase. The suite: 1,074
+  tests in 100 suites, all passing.
 
 ## Phase 13: Tests and Prose That Remain
 

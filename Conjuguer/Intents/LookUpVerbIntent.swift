@@ -27,6 +27,7 @@ struct LookUpVerbIntent: AppIntent {
   func perform() async throws -> some IntentResult & OpensIntent & ProvidesDialog {
     let word = word
     await VerbData.ensureLoaded()
+    await ConjugationIndex.warmBundled()
     let (answer, destination) = await MainActor.run {
       let lookup = VerbLookup(word: word, verbs: Array(Verb.verbs.values))
       return (lookup.answer(pronounGender: Current.settings.pronounGender), lookup.destination.url)

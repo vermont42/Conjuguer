@@ -178,8 +178,14 @@ A conjugation finds its verb, through the map ([Conjugation Map](#conjugation-ma
   participle is tinted in its row of the personless card. The guess, when guessed from a
   conjugation, marks its page the same way.
 - **Cost.** `ConjugationIndex.bundled` loads the map (1.2 s in a Debug build) and folds the 107,000
-  keys that have accents (1.0 s), so `VerbBrowseView` builds it from a detached task when the tab
-  first appears. A lookup costs a few `conjugations(matching:)` calls, about 10 ms each.
+  keys that have accents (1.0 s); in a Release build on the simulator the fold alone took 0.75 to
+  1.7 s (2026-11-27). So every caller that can arrive first awaits `ConjugationIndex.warmBundled()`,
+  a `@concurrent` function, before using it: the verb list's `.task`, a requested search with text
+  (`VerbBrowseView.openRequestedSearch`, whose results then follow by that wait on a cold launch),
+  Look Up a Verb, and `VerbEntityQuery.entities(matching:)`. A `verb/…?match=` link resolved on a
+  cold launch still builds it on the main actor, since `SceneRouter.handle(_:)` is synchronous;
+  Look Up's own such link arrives after its intent has warmed it. A lookup costs a few
+  `conjugations(matching:)` calls, about 10 ms each.
 
 ### Opening a Verb
 
@@ -462,8 +468,8 @@ leaves the map alone, rightly, since a new signature cannot change the map.
   were corrected.) `sorted()` is not used, because it left 155 keys out of order, and two builds of
   the same data wrote different bytes.
 - **Loading** `ConjugationMap.bundled` takes 1.2 seconds in a Debug build on this Intel Mac's
-  simulator, so the verb list builds `ConjugationIndex.bundled`, which loads it, from a background
-  task before the first search. It is a `nonisolated static let`.
+  simulator, so it is loaded through `ConjugationIndex.warmBundled()`, off the main actor, before
+  the first search (§ Reverse Lookup, Cost). It is a `nonisolated static let`.
 
 ### Matching cells
 
@@ -655,9 +661,13 @@ conjuguer://<route>[/<target>][?<item>=<value>&…]
   out a `source` of `deeplink`, so every route round-trips (`DeeplinkTests.testEveryRouteRoundTrips`).
   App code builds a value (`.verb(.key("aller"), source: .lookup, match: "vais")`) and hands it to
   a window's `SceneRouter.handle(_:)`, or its `url` to whatever needs a URL. Only the widget extension and
-  `Shared/`, which cannot see `AnalyticsSource`, write literals (`WidgetDeeplink.verb(_:)`, `WidgetDeeplink.challenge`, the
-  pending links of `OpenQuizIntent`, `OpenRandomVerbIntent`, `OpenRandomVerbControlIntent`, and
-  `OpenVerbSearchIntent`), and `DeeplinkTests` pins each literal's source to the vocabulary.
+  `Shared/`, which cannot see `AnalyticsSource` or `Deeplink`, spell links themselves, all in
+  `Shared/WidgetDeeplink.swift`: the verb widgets' link, the quiz widget's challenge, and the
+  links that `OpenQuizIntent`, `OpenRandomVerbIntent`, `OpenRandomVerbControlIntent`, and
+  `OpenVerbSearchIntent` leave through `PendingDeeplinkIntent`'s one `perform()`.
+  `DeeplinkTests.testAWidgetLinkIsTheBuildersLink` pins each of the six to the URL `Deeplink`
+  builds for the same place, and `testEveryVerbsWidgetLinkIsTheBuildersLink` the verb link for
+  every key.
 
 | Route | Target | Query items | Opens | Shipped |
 |---|---|---|---|---|
@@ -761,7 +771,10 @@ conjugation map plus the meanings with and without "to" as keywords. Indexing ta
 of the main actor, since the key conjugations need the Conjugator, so
 `VerbSpotlight.indexVerbsIfNeeded()` indexes only when the app's version and build, or the entries'
 `format` constant, differ from the last index that succeeded, and never while an index is already
-under way, since each window's launch asks for one. **Raise `format` when the entries
+under way, since each window's launch asks for one. Each index deletes the named index's entries
+first (`SpotlightIndex.deleteAllEntries`), so a verb that left `verbs.xml`, or a key that changed
+when an infinitive gained a second entry, leaves Spotlight too; a failed delete still indexes but is
+not recorded, so the next launch tries again (`VerbSpotlightIndexingTests`). **Raise `format` when the entries
 change**, or a development build with unchanged version numbers keeps the old entries. A tapped
 result arrives as a `CSSearchableItemActionType` activity whose identifier is "VerbEntity/<key>".
 
@@ -2147,9 +2160,9 @@ conjugator and no verb data, so it shows what the app last wrote.
 | `SnapshotReader.swift` | Reads the bundle's snapshots in the widget |
 | `VerbDuJourWidget.swift` | The verb of the day: small, medium, large, and the rectangular and inline accessory families. One timeline entry per cached day |
 | `QuizWidget.swift`, `AnswerQuizIntent.swift` | The daily quiz question, small and medium, with buttons that grade the tapped answer in place |
-| `QuickQuizControl.swift`, `RandomVerbControl.swift`, `FindVerbControl.swift` | Control Center controls. Their intents (`OpenQuizIntent`, `OpenRandomVerbControlIntent`, `OpenVerbSearchIntent` in `Shared/`) store `conjuguer://quiz/start`, `conjuguer://verb/random?source=control`, or `conjuguer://search?source=control` in the shared defaults and open the app, which drains it on activation |
+| `QuickQuizControl.swift`, `RandomVerbControl.swift`, `FindVerbControl.swift` | Control Center controls. Their intents (`OpenQuizIntent`, `OpenRandomVerbControlIntent`, `OpenVerbSearchIntent` in `Shared/`, each a `PendingDeeplinkIntent`) store `conjuguer://quiz/start`, `conjuguer://verb/random?source=control`, or `conjuguer://search?source=control` in the shared defaults and open the app, which drains it on activation. Whether a link that arrives after activation waits for the next one is a device question (`docs/release.md`, B10) |
 | `QuizLiveActivity.swift` | The quiz's Lock Screen and Dynamic Island presentation |
-| `WidgetDeeplink.swift` | The verb widget's link to the verb's page, and the quiz widget's to the daily challenge |
+| `WidgetDeeplink.swift` (`Shared/`) | Every link the widget extension and the `Shared/` intents spell: the verb widget's link to the verb's page, the quiz widget's to the daily challenge, and the four controls' and shortcut's |
 
 ### Choosing the Verb
 

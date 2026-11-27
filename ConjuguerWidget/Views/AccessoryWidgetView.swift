@@ -24,7 +24,7 @@ struct AccessoryRectangularView: View {
           .font(.caption2)
       }
     }
-    .widgetURL(WidgetDeeplink.verb(snapshot))
+    .widgetURL(snapshot.deeplink.url)
   }
 }
 
@@ -33,6 +33,6 @@ struct AccessoryInlineView: View {
 
   var body: some View {
     Text(verbatim: "\(snapshot.infinitif) — \(snapshot.translation)")
-      .widgetURL(WidgetDeeplink.verb(snapshot))
+      .widgetURL(snapshot.deeplink.url)
   }
 }

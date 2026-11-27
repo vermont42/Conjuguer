@@ -6,7 +6,6 @@
 //
 
 import AppIntents
-import CoreSpotlight
 import os
 
 /// Conjuguer's Spotlight entries, one per verb entry, in a named index. Each can be found by its
@@ -28,7 +27,7 @@ enum VerbSpotlight {
 
   /// Raise this when the entries' contents change, so that every install indexes again.
   private static let format = 1
-  private static let indexedVersionKey = "spotlightIndexedVersion"
+  static let indexedVersionKey = "spotlightIndexedVersion"
 
   /// Indexing takes several seconds of the main actor, which the Conjugator needs for the key
   /// conjugations, so it runs only when the app's version or the entries' format has changed
@@ -44,9 +43,18 @@ enum VerbSpotlight {
   // otherwise both spend those seconds.
   private(set) static var isIndexing = false
 
-  static func indexVerbsIfNeeded() async {
+  /// Deletes the index's entries before writing them again, so that a verb that left
+  /// `verbs.xml`, or an entry whose key changed when its infinitive gained a second entry, leaves
+  /// Spotlight too. A failed delete still indexes, which keeps the entries current, but is not
+  /// recorded as done, so the next launch tries again.
+  static func indexVerbsIfNeeded(
+    index: SpotlightIndex = SpotlightIndexReal(name: indexName),
+    store: GetterSetter = Current.getterSetter,
+    verbs: [Verb] = Array(Verb.verbs.values),
+    map: ConjugationMap = .bundled
+  ) async {
     let version = version
-    guard !isIndexing, Current.getterSetter.get(key: indexedVersionKey) != version else {
+    guard !isIndexing, store.get(key: indexedVersionKey) != version else {
       return
     }
     isIndexing = true
@@ -54,18 +62,27 @@ enum VerbSpotlight {
       isIndexing = false
     }
     let conjugations = await Task.detached(priority: .utility) {
-      conjugationsByVerb(in: .bundled)
+      conjugationsByVerb(in: map)
     }.value
     var entities: [VerbEntity] = []
-    for (offset, verb) in Verb.verbs.values.enumerated() {
+    for (offset, verb) in verbs.enumerated() {
       entities.append(VerbEntity(verb: verb, spotlight: text(for: verb, conjugations: conjugations[verb.dictionaryKey] ?? [])))
       if offset.isMultiple(of: 100) {
         await Task.yield()
       }
     }
+    var deleted = true
     do {
-      try await CSSearchableIndex(name: indexName).indexAppEntities(entities)
-      Current.getterSetter.set(key: indexedVersionKey, value: version)
+      try await index.deleteAllEntries()
+    } catch {
+      deleted = false
+      Log.spotlight.error("Could not delete the verbs' Spotlight entries: \(error.localizedDescription, privacy: .public)")
+    }
+    do {
+      try await index.index(entities)
+      if deleted {
+        store.set(key: indexedVersionKey, value: version)
+      }
     } catch {
       Log.spotlight.error("Could not index the verbs for Spotlight: \(error.localizedDescription, privacy: .public)")
     }

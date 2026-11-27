@@ -44,7 +44,7 @@ struct MediumWidgetView: View {
       .lineLimit(1)
       .minimumScaleFactor(0.7)
     }
-    .widgetURL(WidgetDeeplink.verb(snapshot))
+    .widgetURL(snapshot.deeplink.url)
   }
 
   private func conjugationColumn(_ conjugations: [WidgetConjugation]) -> some View {

@@ -231,12 +231,16 @@ the next activation, perhaps days later. `docs/release.md` already asks for a de
 control, which would settle it if it also covers a warm launch. `OpenURLIntent` would remove the
 mailbox.
 
+**Left for a device, 2026-11-27**, by Phase 12 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): still Suspected, since only a device can say when `perform()` runs against the scene's activation. `docs/release.md` § Before Submitting, item 10, holds the warm-and-cold check and sketches both fixes (`OpenURLIntent`, or a timestamp on the stashed link and a Darwin notification). Neither was built, because neither could be shown to work without a device.
+
 **B11. A cold Look Up a Verb, or a cold `search` link, loads the conjugation index on the main
 actor.** *Suspected.* The verb list warms `ConjugationIndex.bundled` from a detached task, but
 `LookUpVerbIntent`, `VerbEntityQuery`, and `openRequestedSearch` can each touch it first, inside
 `MainActor.run` or a view callback (`LookUpVerbIntent.swift:30-33`, `VerbEntity.swift:61-67`,
 `VerbBrowseView.swift:672-685`). The plan measured the load and fold at about 2.2 seconds in a
 Debug build. A Release timing of a cold `conjuguer://search?q=vais` would say whether it matters.
+
+**Fixed on `main` 2026-11-27**, by Phase 12 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md), after measuring: in a Release build on the simulator, cold, a `search?q=vais` link held the main actor 0.82 to 0.88 s and the Look Up path 0.79 to 1.83 s, nearly all of it the fold. `ConjugationIndex.warmBundled()`, `@concurrent`, is awaited by Look Up, the entity query, the requested search, and the verb list. A `verb/…?match=` link resolved cold in the synchronous `SceneRouter.handle(_:)` still builds the index on the main actor.
 
 **B12. œuvrer's page reads "je œuvre".** *Traced, and the fold checked in Swift. Older.*
 `PersonNumber.elides(before:hasAspiratedH:)` strips the first letter's accent and tests it against
@@ -310,6 +314,8 @@ another waits. The rotation is fair only over the starred verbs.
 (`VerbSpotlight.swift:43-64`). A verb removed from `verbs.xml`, or one whose key changes when it
 gains a second entry, leaves a result that opens the Verbs tab with nothing (and, by B4, closes
 any open sheet).
+
+**Fixed on `main` 2026-11-27**, by Phase 12 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): each index deletes the named index's entries before writing them (`SpotlightIndex.deleteAllEntries`), and a failed delete still indexes but leaves the version unrecorded, so the next launch tries again. The index sits behind a `SpotlightIndex` protocol so that `VerbSpotlightIndexingTests` pins the order.
 
 **B21. Look Up a Verb says the same line twice for a doubled infinitive.** *Traced.* "haïssons"
 belongs to both entries of haïr, and the answer names neither the extra letters nor the gloss
@@ -600,6 +606,8 @@ itself, "haïr France", where every other screen shows "haïr (France)" (older).
 
 **Fixed on `main` 2026-11-27**, by Phase 10 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md), in part: `FlowLayout` has its own file and proposes the row's width to each child, `isFeatured` and `ModelView`'s `world` are gone, and `VerbDestination` moved to a file named for it (Konjugieren's S3). `URL.modelDeeplink(_: VerbModel)` and `BrowseSearch`'s header remain for Phase 13.
 
+**Found already gone, 2026-11-27**, by Phase 12 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `URL.modelDeeplink(_: VerbModel)` was deleted with the rest of the URL builders when `Deeplink` arrived in Phase 1 (`5543a98`). Phases 8 and 10 listed it as remaining from the review's text, not the code. `BrowseSearch`'s header remains for Phase 13.
+
 **S10. One rule, several copies.** Lowercase-and-NFC normalization is written in
 `ConjugationMap.key`, `Verb.normalizedConjugation`, `AnswerSpelling.normalized`, and
 `FormsJSON.normalize`. The subject pronouns are listed in `ConjugationQuery` and `AnswerSpelling`.
@@ -611,6 +619,8 @@ The pronoun stripping of G3 is the case where two copies have already drifted.
 Verb intents, and `OpenQuizIntent` differ only in the string they stash. Those strings and
 `WidgetDeeplink`'s two are the grammar written out a second time, outside the builders. The doc
 says `DeeplinkTests` pins each literal, and it pins three of six.
+
+**Fixed on `main` 2026-11-27**, by Phase 12 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the four intents adopt `PendingDeeplinkIntent`, a nonisolated protocol with one `perform()`, and each names a `WidgetDeeplink` case, `OpenQuizIntent` included. `WidgetDeeplink` moved to `Shared/` and spells all six links, the widget's two among them. `DeeplinkTests` pins each to the URL `Deeplink` builds for the same place, and the verb link for every key, so `docs/feature_architecture.md`'s sentence about it is now true.
 
 **S12. `LearnerVerbStore` sorts the whole record on every read.** `recentVerbs` sorts every entry
 ever opened and is read about six times per body pass through `showsRecents`
@@ -872,8 +882,8 @@ there; **does not apply** means French or Conjuguer's design has no such thing.
 | **S6** An analytics value decides the interface; `isRanked` | **Carried over** | S7. |
 | **S7** Timed workarounds, none cancelled | **Carried over** | B18. |
 | **S8** The sort picker returns during a search and does nothing | **Carried over** | Not listed above. With text in the field and the keyboard down, the picker shows, and choosing My Verbs changes nothing (`showsMyVerbs` needs an empty field). **Fixed on `main` 2026-11-26** by Phase 5 of the fixes plan: the picker is disabled while the field has text, in both tabs. |
-| **S9** Unused or unguarded | Part | Carried over: `recent(limit:)`'s unused parameter; the tool accepts any `--flag`, so a mistyped output name is skipped silently (`main.swift:38-46`); `ConjugationMap(compressed:)` turns invalid UTF-8 into an empty map. Did not: the unused URL prefix, which Phase 9 removed. |
-| **S10** Both apps build the tool into one directory | **Carried over** | `scripts/write_forms_json.sh:31` uses `$TMPDIR/ConjugationMapTool-build`, the same path as Konjugieren's. A prefix on either side fixes both. |
+| **S9** Unused or unguarded | Part | Carried over: `recent(limit:)`'s unused parameter; the tool accepts any `--flag`, so a mistyped output name is skipped silently (`main.swift:38-46`); `ConjugationMap(compressed:)` turns invalid UTF-8 into an empty map. Did not: the unused URL prefix, which Phase 9 removed. **Fixed on `main` 2026-11-27** (the tool and the map), by Phase 12 of the fixes plan: the tool refuses an unknown or repeated flag, and `ConjugationMap(compressed:)` throws `ReadError.notUTF8`. |
+| **S10** Both apps build the tool into one directory | **Carried over** | `scripts/write_forms_json.sh:31` uses `$TMPDIR/ConjugationMapTool-build`, the same path as Konjugieren's. A prefix on either side fixes both. **Fixed on `main` 2026-11-27**, by Phase 12 of the fixes plan: the directory is `$TMPDIR/ConjuguerConjugationMapTool-build`. |
 | **E1** `Row` and `Entry` are one shape twice | Does not apply | No separable rows. |
 | **E2** A redundant case in the cell rows | **Carried over** | `conjugationParts` names the three personless tenses in a case whose result the default's `guard` already gives (`VerbConjugations.swift:112-121`). **Fixed on `main` 2026-11-26** by Phase 9: the case names only the impératif passé, which has a person and no pronoun. |
 | **E3** Static tables pick the tracked sections | Did not | Conjuguer compares with the block's first section, which has its own cost (B27). |

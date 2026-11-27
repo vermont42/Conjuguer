@@ -318,11 +318,53 @@ struct DeeplinkTests {
     (OpenRandomVerbIntent.pendingDeeplink, AnalyticsSource.shortcut),
     (OpenRandomVerbControlIntent.pendingDeeplink, .control)
   ])
-  func testRandomVerbIntentsNameThemselves(link: String, source: AnalyticsSource) {
+  func testRandomVerbIntentsNameThemselves(link: WidgetDeeplink, source: AnalyticsSource) throws {
     let router = SceneRouter()
-    router.handleURL(url(link))
+    router.handleURL(try #require(link.url))
     #expect(router.routedVerb != nil)
     #expect(router.routedVerb?.source == source)
+  }
+
+  // The widget extension and Shared/ cannot reach Deeplink, so they spell their links
+  // themselves. Each must be the link Deeplink builds for the same place.
+  @Test(arguments: [
+    (WidgetDeeplink.challenge, Deeplink.challenge(day: nil, level: nil, source: .challengeWidget)),
+    (.findVerb, .search(text: nil, source: .control)),
+    (.quiz, .startQuiz()),
+    (.randomVerbFromControl, .verb(.random, source: .control)),
+    (.randomVerbFromShortcut, .verb(.random, source: .shortcut)),
+    (.verb("aller"), .verb(.key("aller"), source: .widget))
+  ])
+  func testAWidgetLinkIsTheBuildersLink(widgetLink: WidgetDeeplink, link: Deeplink) throws {
+    let url = try #require(widgetLink.url)
+    #expect(url == link.url)
+    #expect(Deeplink(url: url) == link)
+  }
+
+  @Test func testTheIntentsLeaveTheirOwnLinks() {
+    let intents: [any PendingDeeplinkIntent.Type] = [
+      OpenQuizIntent.self, OpenRandomVerbIntent.self, OpenRandomVerbControlIntent.self, OpenVerbSearchIntent.self
+    ]
+    #expect(Set(intents.map { $0.pendingDeeplink }) == [.quiz, .randomVerbFromShortcut, .randomVerbFromControl, .findVerb])
+  }
+
+  @Test func testAnIntentLeavesItsLinkForTheApp() async throws {
+    let defaults = try #require(WidgetConstants.sharedDefaults)
+    let earlier = defaults.string(forKey: WidgetConstants.pendingDeeplinkKey)
+    defer {
+      defaults.set(earlier, forKey: WidgetConstants.pendingDeeplinkKey)
+    }
+    _ = try await OpenRandomVerbControlIntent().perform()
+    #expect(defaults.string(forKey: WidgetConstants.pendingDeeplinkKey) == WidgetDeeplink.randomVerbFromControl.url?.absoluteString)
+  }
+
+  @Test func testEveryVerbsWidgetLinkIsTheBuildersLink() {
+    for key in Verb.verbs.keys {
+      let widgetURL = WidgetDeeplink.verb(key).url
+      if widgetURL != Deeplink.verb(.key(key), source: .widget).url {
+        Issue.record("\(key): the widget builds \(widgetURL?.absoluteString ?? "nothing")")
+      }
+    }
   }
 
   @Test func testASearchLinkRequestsItsTextFromItsSource() {
@@ -428,10 +470,9 @@ struct DeeplinkTests {
     #expect(router.routedModel == model)
   }
 
-  // The control's link is a literal, which Shared/ writes because it cannot reach the builders.
   @Test func testFindAVerbOpensAnEmptySearch() throws {
     let links = [
-      (url(OpenVerbSearchIntent.pendingDeeplink), AnalyticsSource.control),
+      (try #require(OpenVerbSearchIntent.pendingDeeplink.url), AnalyticsSource.control),
       (QuickAction.findVerb.deeplink.url, .quickAction)
     ]
     for (link, source) in links {

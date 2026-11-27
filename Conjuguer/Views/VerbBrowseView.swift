@@ -133,11 +133,7 @@ struct VerbBrowseView: View {
       openRequestedSearch()
     }
     .task {
-      // Loading the map and folding its 243,000 conjugations takes over a second in a Debug
-      // build, which the first keystroke should not wait for.
-      await Task.detached(priority: .utility) {
-        _ = ConjugationIndex.bundled
-      }.value
+      await ConjugationIndex.warmBundled()
     }
   }
 
@@ -327,7 +323,11 @@ struct VerbBrowseView: View {
     }
     router.searchRequest = nil
     if let text = request.text {
-      search.request(text: text, source: request.source)
+      // A cold search link would otherwise build the conjugation index on the main actor.
+      Task {
+        await ConjugationIndex.warmBundled()
+        search.request(text: text, source: request.source)
+      }
     }
     let wantsKeyboard = request.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
     let didPop = !path.isEmpty
