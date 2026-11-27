@@ -41,7 +41,7 @@ empty until it is committed.
 | 11 | Done | 2026-11-27 | `4d535b0` | B5, S7, the rare-verb draw | Yes |
 | 12 | Done | 2026-11-27 | `5265454` | B10 (to a device), B11, B20, S11, K-S9, K-S10 | No |
 | 13 | Done | 2026-11-27 | `bf939dc` | S9, T3, T4, T5, what the others left | No |
-| Closing | Done | 2026-11-27 | | The audit, the workarounds list, the note for the other apps | No |
+| Closing | Done | 2026-11-27 | `70c1ab1` | The audit, the workarounds list, the note for the other apps | No |
 
 **This plan is finished (2026-11-27).** Every finding in the review carries a line: fixed, found
 not to be real, or left with its reason.
