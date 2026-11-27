@@ -999,6 +999,8 @@ not by reading it. Nothing there was changed.
 - **A stale comment in Konjugieren.** `scripts/write_forms_json.sh` says Conjuguer builds the map
   tool into the plain `ConjugationMapTool-build`. Since Phase 12 it is
   `ConjuguerConjugationMapTool-build`.
+  **Fixed in Konjugieren 2026-11-27** (`1b577ae`), at Josh's request: the comment gives each
+  app's directory and the dates the two moved off the shared one.
 
 **Does not apply there:**
 
