@@ -138,4 +138,18 @@ struct RelatedVerbsTests {
     #expect(écouter.lowerBound < zozoter.lowerBound)
     #expect(frequency.hasPrefix("donner, trouver, passer"))
   }
+
+  // The links named each verb by its dictionary key, "haïr France", where every other screen
+  // says "haïr (France)".
+  @Test func aModelsVerbLinksNameADoubledInfinitiveAsTheAppDoes() throws {
+    let model = try #require(VerbModel.models["2-3A"])
+    let links = model.verbsWithDeepLinks()
+    #expect(String(links.characters) == "haïr (France)")
+    let link = try #require(links.runs.compactMap(\.link).first)
+    guard case .verb(.key(let key), _, _) = Deeplink(url: link) else {
+      Issue.record("Not a verb link: \(link)")
+      return
+    }
+    #expect(key == "haïr France")
+  }
 }

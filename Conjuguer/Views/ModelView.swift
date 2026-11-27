@@ -9,7 +9,6 @@ import SwiftUI
 import TipKit
 
 struct ModelView: View {
-  @Environment(World.self) private var world
   @Environment(\.verbPagePush) private var verbPagePush
   @State private var isShowingIrregularitiesArticle = false
   @State private var verbOrder: VerbSort
@@ -92,7 +91,7 @@ struct ModelView: View {
         let parentId = model.parentId,
         let parent = VerbModel.models[parentId] {
         HStack(spacing: 0) {
-          Text("\(L.ModelView.parent): ")
+          Text(L.ModelView.parentLabel + " ")
             .smallLabel()
           Text(parent.exemplarWithPossibleExtraLetters)
             .smallLabel()
@@ -121,7 +120,7 @@ struct ModelView: View {
       Text(L.ModelView.endings)
         .subheadingLabel()
 
-      endingRow("\(Tense.participePassé.shortTitleCaseName): ", model.participeEndingRecursive)
+      endingRow(L.ModelView.participleLabel + " ", model.participeEndingRecursive)
 
       ScrollView(.horizontal, showsIndicators: false) {
         Grid(alignment: .leading, horizontalSpacing: 8, verticalSpacing: 6) {

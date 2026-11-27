@@ -6480,19 +6480,36 @@
         }
       }
     },
-    "ModelView.parent" : {
+    "ModelView.parentLabel" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parent"
+            "value" : "Parent:"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parent"
+            "value" : "Parent :"
+          }
+        }
+      }
+    },
+    "ModelView.participleLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Participe Passé:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Participe Passé :"
           }
         }
       }

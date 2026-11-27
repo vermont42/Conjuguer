@@ -735,12 +735,12 @@ nav_model_browse() {
   tap_tab models
   # Irregularity sort is the default (Settings.modelSortDefault = .irregularity),
   # which puts the most irregular model (être) at/near the top per the spec.
-  verify_screen_loaded model_row_être
+  verify_screen_loaded model_row_5-26
 }
 
 nav_model_view() {
   tap_tab models
-  tap_id_first model_row_être
+  tap_id_first model_row_5-26
 }
 
 nav_quiz_mid() {

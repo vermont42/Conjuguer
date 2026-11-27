@@ -283,6 +283,8 @@ seed (`VerbBrowseView.swift:712-714`), so haïr (France) and haïr (Québec) can
 frequency order breaks the tie by id. The Models tab's alphabetical order has the same gap for
 haïr's two models (`ModelBrowseView.swift:281-283`).
 
+**Fixed on `main` 2026-11-27**, by Phase 10 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `Verb.byFrequency` and `Verb.alphabetically` break a tie by id, and `VerbModel.alphabetically` and `byIrregularity` by the model's id, so haïr (France) comes before haïr (Québec), and 2-3A before 2-3B, whatever order the dictionary gives. `VerbOrderTests` sorts both entries and both models in each input order; with the old comparison the reversed input stayed reversed.
+
 **B18. Tasks that are never cancelled race each other.** *Traced.* The 0.7-second linger starts a
 new task at each loss of focus (`VerbBrowseView.swift:396-401`), so focus lost, regained, and lost
 again within 0.7 seconds disengages early, which reopens the window the workaround closes. Two
@@ -341,6 +343,8 @@ before the rule of 2026-11-23, and the model page's "Parent: " and participe pas
 (`ModelView.swift:108`, `137`). See the open questions.
 
 **The row's line fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): "vais : Indicatif Présent (je)" in both languages, and so in the Look Up answer. An infinitive's Look Up answer moved its colon into the catalog (`Lookup.keyConjugations`), with U+202F in French. The model page's labels are Phase 10's.
+
+**The model page's labels fixed on `main` 2026-11-27**, by Phase 10 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): "Parent:" and "Participe Passé:" carry their colons in the catalog (`ModelView.parentLabel`, `ModelView.participleLabel`), with U+202F in French. The stem alterations' rows keep their English colon, since they are the irregularity notation that `.claude/rules/localization_catalog.md` leaves alone.
 
 **B26. The keyboard highlight is color only.** *Traced.* Neither the row nor the guess card adds
 the selected trait, so VoiceOver and Full Keyboard Access cannot tell which row Return will open
@@ -566,6 +570,8 @@ obtain". Search keys its matches by one and its lookup table by the other within
 share (`verb_row_haïr` twice, and `model_row_haïr` twice), and the model page shows the key
 itself, "haïr France", where every other screen shows "haïr (France)" (older).
 
+**Fixed on `main` 2026-11-27**, by Phase 10 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the identifiers that name a verb use its dictionary key (`verb_row_haïr France`, `related_haïr France`, `collection_verb_…`, `related_list_verb_…`) and a model's row its id (`model_row_2-3A`), and the model page names its verbs "haïr (France)". Search keys its matches by dictionary key too, as its lookup table does. `Verb.id` remains, as `Identifiable` asks, and as the tie-break of the sort comparators.
+
 **S9. Small dead or misleading things.**
 
 - `VerbSearch.MatchKind` is `Comparable` by case order, but ranking uses `tier`, and nothing
@@ -587,6 +593,8 @@ itself, "haïr France", where every other screen shows "haïr (France)" (older).
 **Fixed on `main` 2026-11-26**, by Phase 7 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `MatchKind` lost its `Comparable`, and its comment says that `tier` decides rank. Each `Verb` carries `VerbSearchKeys` (the folded infinitive and the gloss's meanings) from the moment it is made, so `keysCache` and its check against a test's verb are gone. `ModelSearch.seenVerbs` is `modelsFoundByAVerb`. The rest of S9 belongs to other phases.
 
 **Fixed on `main` 2026-11-26**, in part, by Phase 8 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `Shared/LearnerVerbs.swift` (and `PracticeRecord.swift`, and `World`'s comment on the shared defaults) now say the widget reads neither record; `SeededRandomNumberGenerator`'s header says it draws every learner's verb of the day; and the test-only `generateSnapshot(date:myVerbs:)` is gone. `isFeatured`, `ModelView`'s `world`, `URL.modelDeeplink(_: VerbModel)`, `FlowLayout`'s home, and `BrowseSearch`'s header remain.
+
+**Fixed on `main` 2026-11-27**, by Phase 10 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md), in part: `FlowLayout` has its own file and proposes the row's width to each child, `isFeatured` and `ModelView`'s `world` are gone, and `VerbDestination` moved to a file named for it (Konjugieren's S3). `URL.modelDeeplink(_: VerbModel)` and `BrowseSearch`'s header remain for Phase 13.
 
 **S10. One rule, several copies.** Lowercase-and-NFC normalization is written in
 `ConjugationMap.key`, `Verb.normalizedConjugation`, `AnswerSpelling.normalized`, and
@@ -612,9 +620,13 @@ with French collation and parses Markdown for up to 4,859 links (parler's model)
 (`ModelView.swift:240`). The run of links is Josh's decision; caching it per model and order is
 free. A model's collection also filters all 6,330 verbs for what `model.verbs` already lists.
 
+**Fixed on `main` 2026-11-27**, by Phase 10 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `VerbModel.verbsWithDeepLinks(order:)` (in `VerbModel+Verbs.swift`) is built once per model and order and kept, and names a doubled entry "haïr (France)". A model's collection, its practice, and the Related Verbs card read `VerbModel.entriesByFrequency`, the model's own list of keys sorted once.
+
 **S14. A model type sends analytics.** `VerbCollection.signalView` reaches `Current`
 (`VerbCollection.swift:209-214`) while the views beside it use the environment's `world`, as
 `BrowseSearch` reaches `Current.soundPlayer`.
+
+**Fixed on `main` 2026-11-27**, by Phase 10 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `VerbCollection.viewParameters(source:)` says what to send, and `VerbCollectionView` sends `viewCollection` through the environment's `world`.
 
 ## Duplication
 
@@ -622,14 +634,20 @@ free. A model's collection also filters all 6,330 verbs for what `model.verbs` a
 `VerbCollectionView.swift:106`, `RelatedVerbsView.swift:132`. A `BrowseRow(verb:detail:isChecked:)`
 initializer would hold the badge's format once.
 
+**Fixed on `main` 2026-11-27**, by Phase 10 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `BrowseRow(verb:detail:isChecked:)` builds every verb row, the collection's and the related list's included.
+
 **D2. `VerbCollectionView` and `RelatedVerbListView` are one page written twice,** and have
 drifted: only the collection page has the iPad grid, and the two sort alphabetically by different
 keys.
+
+**Fixed on `main` 2026-11-27**, by Phase 10 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `VerbListPage` serves both, with the iPad grid, the picker, and one alphabetical rule (`Verb.alphabetically`). The related list gains the grid in a regular-width stack. `RelatedVerbListView` stays as a type, since its name is the `viewName` its `viewAppeared` sends.
 
 **D3. Sort comparators.** "By frequency" is written six times with two different tie-breakers
 (`dictionaryKey` in `FrequencyBand` and `VerbCollection`, `id` in `RelatedVerbs` and
 `VerbBrowseView`), and the French alphabetical compare three times. "A model's verbs by frequency"
 is built four ways.
+
+**Fixed on `main` 2026-11-27**, by Phase 10 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `Verb.byFrequency` and `Verb.alphabetically`, and `VerbModel.alphabetically` and `byIrregularity`, each with a tie-break, sort every list; `VerbSort.areInIncreasingOrder` picks one for a sort. A model's verbs by frequency are `VerbModel.entriesByFrequency`, used by all four places that built them.
 
 **D4. The grid and list branches** of `VerbBrowseView.verbCollection` repeat the row, the
 identifier, and the scroll handler, and `ModelBrowseView` repeats the model button and the
@@ -651,6 +669,8 @@ both tabs.
 
 **D6. Share-button anchoring** (`@State` frame, `onGeometryChange`, the zero check) is written at
 four sites, one of them browse's (`VerbCollectionView.swift:134`, `165-170`, `193`).
+
+**Fixed on `main` 2026-11-27**, by Phase 10 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `ShareButton` hands its frame to its action, and `ShareSheet.present` treats a zero rect as none, so no call site checks. The collection's bar and the challenge's Share Result use it. The custom quiz's share is a `Menu`, and the hub's challenge row a `QuizHubRow`, so neither is a button to wrap; each keeps its own `onGeometryChange` and lost only its zero check.
 
 **D7. `VerbListMode` restates `VerbSort`'s cases** with a conversion each way (`VerbSort.swift`).
 `case sorted(VerbSort), myVerbs` would not.
@@ -729,6 +749,8 @@ key and the tip "both obey `TipDisplay.tipsEnabled`" (`shouldShowColorKey` does 
 
 **T6. `docs/voiceover.md` has no row for the collection views,** and the verb row's two languages
 inside a `Button`, which the plan left untested in Phase 0, 1, 2, and 5, are still untested.
+
+**Fixed on `main` 2026-11-27**, by Phase 10 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `docs/voiceover.md` has rows for the collection page and the related list (`VerbListPage`), the bar, and the Models tab's row. The page and the bar are read from the accessibility tree, not heard; the row is untested; and the verb row's two languages inside a `Button` remain untested.
 
 ## Seen Outside the Scope
 
@@ -834,7 +856,7 @@ there; **does not apply** means French or Conjuguer's design has no such thing.
 | **D6** Widget and intent links | **Carried over** | S11. |
 | **S1** `VerbBrowseView` does too much | **Carried over** | S3. |
 | **S2** `searchFocusLostAt` is a `Date` used as a `Bool` | **Carried over** | S3. |
-| **S3** Declarations in files named for something else | **Carried over** | `FlowLayout` in `RelatedVerbsView.swift`, `VerbDestination` in `VerbVisit.swift`, `VerbListMode` in `VerbSort.swift`. |
+| **S3** Declarations in files named for something else | **Carried over** | `FlowLayout` in `RelatedVerbsView.swift`, `VerbDestination` in `VerbVisit.swift`, `VerbListMode` in `VerbSort.swift`. **Fixed on `main` 2026-11-27** by Phases 6 and 10: each has a file named for it, as does `RelatedVerbListView`. |
 | **S4** `keysCache` is a global memo | **Carried over, changed** | The port re-checks each entry against the verb's text to protect tests (S9). Its fix, storing the folded infinitive on `Verb` at parse time, removes the cache. |
 | **S5** App-wide statics with multiple scenes | **Carried over** | Seen Outside the Scope, and open question 3. |
 | **S6** An analytics value decides the interface; `isRanked` | **Carried over** | S7. |

@@ -36,7 +36,7 @@ extension Verb {
     }
     let verbs = Verb.verbs.values
       .filter { $0.isIn(band) }
-      .sorted { ($0.frequency, $0.dictionaryKey) < ($1.frequency, $1.dictionaryKey) }
+      .sorted(by: Verb.byFrequency)
     bandCache[band] = verbs
     return verbs
   }
@@ -45,7 +45,7 @@ extension Verb {
     if !cachedVerbsByFrequency.isEmpty {
       return cachedVerbsByFrequency
     }
-    cachedVerbsByFrequency = Verb.verbs.values.sorted { ($0.frequency, $0.dictionaryKey) < ($1.frequency, $1.dictionaryKey) }
+    cachedVerbsByFrequency = Verb.verbs.values.sorted(by: Verb.byFrequency)
     return cachedVerbsByFrequency
   }
 }

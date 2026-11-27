@@ -6,12 +6,11 @@
 //
 
 import Foundation
-import os
 
-// The conjugation core's display members: pronouns, localized names, and the model page's
-// verb links. They read `Current.settings` or `L`, which ConjugationMapTool, a macOS tool
-// that compiles the core, does not have, so they live in this app-only file rather than
-// beside the types they extend. See ConjugationMapTool/main.swift.
+// The conjugation core's display members: pronouns and localized names. They read
+// `Current.settings` or `L`, which ConjugationMapTool, a macOS tool that compiles the core, does
+// not have, so they live in this app-only file rather than beside the types they extend. See
+// ConjugationMapTool/main.swift.
 
 extension PersonNumber {
   func pronoun(pronounGender: PronounGender) -> String {
@@ -245,30 +244,6 @@ extension VerbModel {
       return "\(L.ModelView.regular) -re"
     default:
       return "\(irregularity)% \(L.ModelView.irregular)"
-    }
-  }
-
-  /// The model's verbs as a run of `conjuguer://verb/` links, alphabetically in French order
-  /// (écouter among the e's, where a plain sort would put it after the z's) or most frequent first.
-  func verbsWithDeepLinks(order: VerbSort = .alphabetical) -> AttributedString {
-    let orderedVerbs: [String]
-    switch order {
-    case .alphabetical:
-      orderedVerbs = verbs.sorted { $0.compare($1, locale: Util.french) == .orderedAscending }
-    case .frequency:
-      orderedVerbs = verbs.sorted { lhs, rhs in
-        (Verb.verbs[lhs]?.frequency ?? Int.max, lhs) < (Verb.verbs[rhs]?.frequency ?? Int.max, rhs)
-      }
-    }
-    do {
-      return try AttributedString(markdown: orderedVerbs.map { key in
-        "[\(key)](\(Deeplink.verb(.key(key)).url.absoluteString))"
-      }
-        .joined(separator: ", ")
-      )
-    } catch {
-      Log.verbModel.error("Could not build deep-linked verb list for model \(id, privacy: .public): \(error.localizedDescription, privacy: .public)")
-      return AttributedString("")
     }
   }
 }

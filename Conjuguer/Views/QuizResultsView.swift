@@ -10,7 +10,6 @@ import SwiftUI
 struct QuizResultsView: View {
   @Environment(World.self) private var world
   @Environment(Quiz.self) var quiz
-  @State private var shareButtonFrame = CGRect.zero
 
   // As wide as an iPhone's, and no wider on an iPad.
   private static let tenMoreMaxWidth: CGFloat = 400
@@ -109,8 +108,8 @@ struct QuizResultsView: View {
           .accessibilityHint(L.DailySession.anotherHint)
           .accessibilityIdentifier("results_daily_another")
         } else if let result = quiz.challengeResult {
-          Button {
-            result.share(anchorRect: shareButtonFrame)
+          ShareButton { frame in
+            result.share(anchorRect: frame)
           } label: {
             Label(L.DailyChallenge.share, systemImage: "square.and.arrow.up")
               .buttonLabel()
@@ -118,11 +117,6 @@ struct QuizResultsView: View {
           }
           .funButton()
           .controlSize(.large)
-          .onGeometryChange(for: CGRect.self) { proxy in
-            proxy.frame(in: .global)
-          } action: { frame in
-            shareButtonFrame = frame
-          }
           .frame(maxWidth: .infinity)
           .padding(.top, Layout.defaultSpacing)
           .accessibilityHint(L.DailyChallenge.shareHint)

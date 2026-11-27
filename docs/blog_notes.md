@@ -7156,3 +7156,51 @@ string, the page and the practice schedule ask one function which key conjugatio
 and both article buttons are one view. A new test runs the related-verbs base rule over the
 English and the French etymologies for every verb, since the rule reads prose that a pipeline
 rewrites in bulk. They agree today. 1,049 tests now.
+
+## Two haïrs, One Sort, and a Page Written Once (2026-11-27)
+
+Phase 10 of [`plans/verb_browse_fixes.md`](../plans/verb_browse_fixes.md) took the review's
+findings about lists: how they sort, how their rows are named, and two pages that were one page
+written twice.
+
+The bug at the center was small and a little sly. Four French infinitives have two entries in the
+data, haïr among them: haïr (France), which drops the tréma in the singular present (je hais),
+and haïr (Québec), which keeps it (je haïs). The alphabetical verb list compared infinitives alone,
+and `Verb.verbs.values`, the dictionary it sorted, comes out in an order that changes with every
+launch's hash seed. Swift's sort keeps equal elements in the order it receives them, so the two
+haïrs kept whatever order the hash gave, and swapped between launches. The Models tab had the same
+gap for haïr's two models. The frequency order already broke its tie, by id in two places and by
+dictionary key in two others, which happens to order these four pairs the same way.
+
+The fix is one frequency comparator and one French alphabetical comparator on `Verb`, and two on
+`VerbModel`, each breaking a tie by id, used by every list. The test that proves it is plain: sort
+the two entries in each input order and expect one answer. With the old comparison, the reversed
+input stayed reversed.
+
+The same pair exposed a naming problem. The model page listed its verbs by dictionary key, "haïr
+France", where every other screen says "haïr (France)". The verb list's rows and the Models tab's
+rows used the infinitive and the exemplar as accessibility identifiers, so the two haïr rows had
+one identifier and a script could reach only the first. Identifiers now use the dictionary key and
+the model's id. That moved the screenshot script's anchor from `model_row_être` to
+`model_row_5-26`, which is less pretty and finally unambiguous.
+
+The model page's run of links, which Josh chose to keep as one `Text` of links because parler's
+model has 4,859 of them, was rebuilt on every pass of `body`: a French-collated sort and a
+Markdown parse of every link. It is now built once per model and order and kept. Four places
+built "a model's verbs by frequency" four ways, one of them by filtering all 6,330 entries for a
+list the model already holds; they share one cached list now.
+
+A featured collection's page and the related-verbs list had drifted apart in the way duplicated
+code does: only the collection had the iPad grid, and the two sorted alphabetically by different
+keys. They are one `VerbListPage` now, generic over a header, with the collection's title and bar
+as its header. The related list keeps its own small type only because its name is the
+`viewName` its analytics signal sends.
+
+Smaller things rode along. The model page's "Parent:" label and its participe passé label moved
+into the string catalog, so French gets its narrow space before the colon. I followed the plan's
+"Parent:" in English for both labels, though the participe passé label is French in both
+interfaces, which by the search row's logic would take the narrow space in English too; that is
+noted for Josh. A share button now hands its own frame to its action, so the iPad's popover points
+at it without each call site keeping a frame and checking it for zero. `FlowLayout` got its own
+file and now offers each child the row's width, so a chip wider than a row wraps rather than
+overflowing. 1,057 tests.

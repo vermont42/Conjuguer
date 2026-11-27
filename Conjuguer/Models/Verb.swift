@@ -118,6 +118,26 @@ struct Verb: Identifiable, Hashable {
     }
   }
 
+  /// The most frequent first. The two entries of a doubled infinitive share a rank, so the id
+  /// breaks the tie, and a list keeps one order whatever order the dictionary gives its values,
+  /// which changes with each launch's hash seed.
+  static func byFrequency(_ lhs: Verb, _ rhs: Verb) -> Bool {
+    (lhs.frequency, lhs.id) < (rhs.frequency, rhs.id)
+  }
+
+  /// In French alphabetical order (écouter among the e's, where a plain comparison puts it after
+  /// the z's), the id breaking the tie between the two entries of a doubled infinitive.
+  static func alphabetically(_ lhs: Verb, _ rhs: Verb) -> Bool {
+    switch lhs.infinitif.compare(rhs.infinitif, locale: Util.french) {
+    case .orderedAscending:
+      return true
+    case .orderedDescending:
+      return false
+    case .orderedSame:
+      return lhs.id < rhs.id
+    }
+  }
+
   static func endingIsValid(infinitif: String) -> Bool {
     let frenchVerbEndingLength = 2
     let validFrenchVerbEndings = ["er", "ir", "re", "ïr"]

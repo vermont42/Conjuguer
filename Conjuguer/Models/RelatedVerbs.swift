@@ -197,8 +197,7 @@ extension Verb {
   @MainActor private func modelRelatives(in model: VerbModel, excludingRoot root: String) -> [Verb] {
     var seenRoots: Set<String> = [root]
     var relatives: [Verb] = []
-    let members = model.verbs.compactMap { Verb.verbs[$0] }.sorted(by: Verb.byFrequency)
-    for member in members where member.infinitif != infinitif {
+    for member in model.entriesByFrequency where member.infinitif != infinitif {
       let memberRoot = member.root
       guard !seenRoots.contains(memberRoot) else {
         continue
@@ -210,10 +209,6 @@ extension Verb {
       }
     }
     return relatives
-  }
-
-  static func byFrequency(_ lhs: Verb, _ rhs: Verb) -> Bool {
-    (lhs.frequency, lhs.id) < (rhs.frequency, rhs.id)
   }
 }
 

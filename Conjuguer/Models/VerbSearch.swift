@@ -102,7 +102,7 @@ enum VerbSearch {
     for verb in verbs {
       verbsByKey[verb.dictionaryKey] = verb
       if let kind = kind(of: verb.searchKeys, frenchQuery: frenchQuery, foldedQuery: foldedQuery, englishQuery: englishQuery) {
-        best[verb.id] = Match(verb: verb, kind: kind)
+        best[verb.dictionaryKey] = Match(verb: verb, kind: kind)
       }
     }
 
@@ -119,13 +119,13 @@ enum VerbSearch {
 
     // On a tie, the conjugation wins, because its row can say which cells the query fills.
     for match in conjugationResults {
-      if let current = best[match.verb.id], rank(current) < rank(match) {
+      if let current = best[match.verb.dictionaryKey], rank(current) < rank(match) {
         continue
       }
-      if let current = best[match.verb.id], current.kind.isConjugation, rank(current) <= rank(match) {
+      if let current = best[match.verb.dictionaryKey], current.kind.isConjugation, rank(current) <= rank(match) {
         continue
       }
-      best[match.verb.id] = match
+      best[match.verb.dictionaryKey] = match
     }
 
     func sortKey(_ match: Match) -> (Int, Int, Int) {

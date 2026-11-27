@@ -78,10 +78,6 @@ enum VerbCollection: Hashable, Identifiable {
     }
   }
 
-  var isFeatured: Bool {
-    Self.featured.contains(self)
-  }
-
   /// The collection's entries, the most frequent first. Each entry of a doubled infinitive
   /// counts, as in the verb list, except in the top 100.
   @MainActor var verbs: [Verb] {
@@ -89,15 +85,16 @@ enum VerbCollection: Hashable, Identifiable {
       return cached
     }
     let verbs: [Verb]
-    if self == .top100 {
+    switch self {
+    case .top100:
       // sortir's two entries share a rank. The list keeps the first, sortir "exit", so that the
       // hundred are a hundred.
       var seen: Set<String> = []
       verbs = Verb.verbs(in: .top100).filter { seen.insert($0.infinitif).inserted }
-    } else {
-      verbs = Verb.verbs.values
-        .filter(contains)
-        .sorted { ($0.frequency, $0.dictionaryKey) < ($1.frequency, $1.dictionaryKey) }
+    case .model(let id):
+      verbs = VerbModel.models[id]?.entriesByFrequency ?? []
+    case .être, .irregularFutur, .pronominal:
+      verbs = Verb.verbsByFrequency.filter(contains)
     }
     Self.verbsCache[self] = verbs
     return verbs
@@ -204,13 +201,13 @@ enum VerbCollection: Hashable, Identifiable {
     )
   }
 
-  /// `viewCollection`, for a featured collection's page. A model's page reports itself through
-  /// `viewAppeared` instead.
-  @MainActor func signalView(source: AnalyticsSource) {
-    Current.analytics.signal(name: .viewCollection, parameters: [
+  /// What a featured collection's page sends with `viewCollection`. A model's page reports itself
+  /// through `viewAppeared` instead.
+  func viewParameters(source: AnalyticsSource) -> [String: String] {
+    [
       ParameterKey.collection.rawValue: analyticsValue,
       ParameterKey.source.rawValue: source.rawValue
-    ])
+    ]
   }
 }
 

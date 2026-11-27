@@ -15,7 +15,8 @@ import UIKit
 enum ShareSheet {
   /// Presents the system share sheet over whatever is on screen. On iPad the sheet is a popover,
   /// anchored to `anchorRect`, in window coordinates, for a button in the page, or else to the
-  /// bar button whose accessibility label is `anchorLabel` when one is found.
+  /// bar button whose accessibility label is `anchorLabel` when one is found. A zero rect, a
+  /// button's frame before its first layout, counts as none.
   static func present(text: String, title: String, icon: UIImage?, anchorLabel: String, anchorRect: CGRect? = nil) {
     guard
       let window = UIApplication.shared.connectedScenes
@@ -33,7 +34,7 @@ enum ShareSheet {
     let source = ShareTextSource(text: text, title: title, icon: icon)
     let controller = UIActivityViewController(activityItems: [source], applicationActivities: nil)
     if let popover = controller.popoverPresentationController {
-      if let anchorRect {
+      if let anchorRect, anchorRect != .zero {
         popover.sourceView = window
         popover.sourceRect = anchorRect
       } else if let item = barButtonItem(labeled: anchorLabel, in: presenter) {

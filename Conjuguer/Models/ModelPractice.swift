@@ -98,11 +98,10 @@ struct ModelPractice: Identifiable {
     if let cachedAll {
       return cachedAll
     }
-    let byModel = Dictionary(grouping: Verb.verbsByFrequency, by: \.model)
     let practices = VerbModel.models.values
       .sorted { $0.position < $1.position }
       .compactMap { model in
-        practice(modelID: model.id, verbs: byModel[model.id] ?? [])
+        practice(modelID: model.id, verbs: model.entriesByFrequency)
       }
     cachedAll = practices
     return practices
@@ -137,8 +136,7 @@ struct ModelPractice: Identifiable {
     if PracticeItem.patternBases.contains(modelID) {
       return .base
     }
-    let verbs = Verb.verbsByFrequency.filter { $0.model == modelID }
-    guard let verb = verbs.first, PracticeItem.isLearnedByPattern(verb) else {
+    guard let verb = VerbModel.models[modelID]?.entriesByFrequency.first, PracticeItem.isLearnedByPattern(verb) else {
       return nil
     }
     return .fewMarkedCells
@@ -148,7 +146,7 @@ struct ModelPractice: Identifiable {
   /// Nil for a model learned verb by verb.
   @MainActor static func baseExemplar(of modelID: String) -> String? {
     guard
-      let verb = Verb.verbsByFrequency.first(where: { $0.model == modelID }),
+      let verb = VerbModel.models[modelID]?.entriesByFrequency.first,
       let base = PracticeItem.patternBase(of: verb)
     else {
       return nil

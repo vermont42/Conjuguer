@@ -219,7 +219,7 @@ struct DailyChallengeResult: Codable, Equatable {
       title: L.DailyChallenge.title,
       icon: UIImage(named: Current.settings.appIcon.previewAssetName),
       anchorLabel: L.DailyChallenge.share,
-      anchorRect: anchorRect == .zero ? nil : anchorRect
+      anchorRect: anchorRect
     )
   }
 }

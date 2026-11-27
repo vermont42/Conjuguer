@@ -87,6 +87,17 @@ struct VerbCollectionTests {
     #expect(VerbCollection.être.analyticsValue == "etre")
   }
 
+  @Test func aCollectionsPageSaysWhatToSend() {
+    #expect(VerbCollection.être.viewParameters(source: .sharedLink) == ["collection": "etre", "source": "sharedLink"])
+    #expect(VerbCollection.model("1-9").viewParameters(source: .list) == ["collection": "model", "source": "list"])
+  }
+
+  @Test func aModelsCollectionIsTheModelsOwnList() throws {
+    let model = try #require(VerbModel.models["1-1"])
+    #expect(VerbCollection.model("1-1").verbs == model.entriesByFrequency)
+    #expect(model.entriesByFrequency.map(\.dictionaryKey).sorted() == model.verbs.sorted())
+  }
+
   @Test func aListLinkOpensItsCollection() throws {
     for collection in VerbCollection.featured {
       let router = SceneRouter()

@@ -1080,7 +1080,7 @@ struct QuizView: View {
           title: L.PracticeSet.title,
           icon: UIImage(named: world.settings.appIcon.previewAssetName),
           anchorLabel: L.VerbView.share,
-          anchorRect: shareButtonFrame == .zero ? nil : shareButtonFrame
+          anchorRect: shareButtonFrame
         )
       } label: {
         Label(L.PracticeSet.shareLink, systemImage: "link")

@@ -89,12 +89,13 @@ struct BrowseRow: View {
 }
 
 extension BrowseRow {
-  /// A verb's row in the lists that rank verbs: its infinitive, its gloss, and its rank.
-  init(verb: Verb, detail: String? = nil) {
+  /// A verb's row in every list of verbs: its infinitive, its gloss, and its rank.
+  init(verb: Verb, detail: String? = nil, isChecked: Bool = false) {
     self.init(
       title: verb.infinitifWithPossibleExtraLetters,
       subtitle: verb.translation,
       detail: detail,
+      isChecked: isChecked,
       badge: Badge(text: "#\(verb.frequency)", tint: .customBlue)
     )
   }

@@ -208,7 +208,7 @@ struct ModelBrowseView: View {
       }
     }
     .buttonStyle(.plain)
-    .accessibilityIdentifier(Self.rowIdentifier(modelAndDecorator))
+    .accessibilityIdentifier(Self.rowIdentifier(modelAndDecorator.model))
     .listRowBackground(Color.customBackground)
   }
 
@@ -227,8 +227,8 @@ struct ModelBrowseView: View {
     )
   }
 
-  private static func rowIdentifier(_ modelAndDecorator: ModelAndDecorator) -> String {
-    "model_row_\(modelAndDecorator.model.exemplar)"
+  static func rowIdentifier(_ model: VerbModel) -> String {
+    "model_row_\(model.id)"
   }
 
   private func irregularityBadge(percent: Int) -> BrowseRow.Badge {
@@ -281,18 +281,11 @@ struct ModelAndDecorator: Identifiable, Hashable {
 
 enum ModelBrowse {
   static func makeStore(world: World) -> BrowseStore<ModelAndDecorator, ModelSort> {
-    let irregularityModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
-      if lhs.irregularity != rhs.irregularity {
-        return lhs.irregularity > rhs.irregularity
-      }
-      return lhs.exemplar.compare(rhs.exemplar, locale: Util.french) == .orderedAscending
-    }
-    .map { ModelAndDecorator(model: $0, decorator: "", irregularityBadge: $0.irregularity) }
+    let irregularityModelsAndDecorators = VerbModel.models.values.sorted(by: VerbModel.byIrregularity)
+      .map { ModelAndDecorator(model: $0, decorator: "", irregularityBadge: $0.irregularity) }
 
-    let alphabeticModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
-      lhs.exemplar.compare(rhs.exemplar, locale: Util.french) == .orderedAscending
-    }
-    .map { ModelAndDecorator(model: $0, decorator: "") }
+    let alphabeticModelsAndDecorators = VerbModel.models.values.sorted(by: VerbModel.alphabetically)
+      .map { ModelAndDecorator(model: $0, decorator: "") }
 
     let identifierModelsAndDecorators = VerbModel.models.values.sorted { lhs, rhs in
       lhs.position < rhs.position

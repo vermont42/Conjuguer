@@ -13,102 +13,39 @@ import SwiftUI
 struct VerbCollectionView: View {
   let destination: VerbCollectionDestination
   @Environment(World.self) private var world
-  @Environment(\.verbPagePush) private var push
-  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-  @State private var order = VerbSort.frequency
   @State private var hasSignaledView = false
 
   private var collection: VerbCollection {
     destination.collection
   }
 
-  private var orderedVerbs: [Verb] {
-    switch order {
-    case .frequency:
-      return collection.verbs
-    case .alphabetical:
-      return collection.verbs.sorted { lhs, rhs in
-        lhs.infinitifWithPossibleExtraLetters.compare(rhs.infinitifWithPossibleExtraLetters, locale: Util.french) == .orderedAscending
-      }
-    }
-  }
-
   var body: some View {
-    ScrollView {
-      VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
-        HStack(alignment: .firstTextBaseline) {
-          Image(systemName: collection.systemImageName)
-            .foregroundStyle(Color.customRed)
-          Text(collection.title)
-        }
-        .headingLabel()
-        .accessibilityElement(children: .combine)
-        .accessibilityAddTraits(.isHeader)
-
-        Text(collection.shortDescription)
-          .bodyLabel()
-          .card()
-
-        VerbCollectionBar(collection: collection)
-          .card()
-
-        Picker(L.BrowseView.sortOrder, selection: $order) {
-          ForEach(VerbSort.allCases, id: \.self) { order in
-            Text(order.displayName)
-              .tag(order)
-          }
-        }
-        .pickerStyle(.segmented)
-        .sensoryFeedback(.selection, trigger: order)
-        .accessibilityIdentifier("collection_sort_order")
-
-        verbList
+    VerbListPage(verbs: collection.verbs, source: .list, identifierPrefix: "collection", checksOpenedVerbs: true) {
+      HStack(alignment: .firstTextBaseline) {
+        Image(systemName: collection.systemImageName)
+          .foregroundStyle(Color.customRed)
+        Text(collection.title)
       }
-      .padding(.horizontal, Layout.doubleDefaultSpacing)
-      .padding(.bottom, Layout.doubleDefaultSpacing)
+      .headingLabel()
+      .accessibilityElement(children: .combine)
+      .accessibilityAddTraits(.isHeader)
+
+      Text(collection.shortDescription)
+        .bodyLabel()
+        .card()
+
+      VerbCollectionBar(collection: collection)
+        .card()
     }
-    .screenBackground()
-    .navigationBarTitleDisplayMode(.inline)
     .onAppear {
       // A return from one of the list's verb pages is not another opening of the list.
       guard !hasSignaledView else {
         return
       }
       hasSignaledView = true
-      collection.signalView(source: destination.source)
+      world.analytics.signal(name: .viewCollection, parameters: collection.viewParameters(source: destination.source))
     }
     .recordsAppearance(as: "\(VerbCollectionView.self)")
-  }
-
-  @ViewBuilder
-  private var verbList: some View {
-    if horizontalSizeClass == .regular {
-      LazyVGrid(columns: BrowseLayout.columns, spacing: Layout.doubleDefaultSpacing) {
-        verbRows
-      }
-    } else {
-      LazyVStack(alignment: .leading, spacing: Layout.defaultSpacing) {
-        verbRows
-      }
-    }
-  }
-
-  private var verbRows: some View {
-    ForEach(orderedVerbs) { verb in
-      Button {
-        push(.verb(VerbDestination(verb: verb, source: .list)))
-      } label: {
-        BrowseRow(
-          title: verb.infinitifWithPossibleExtraLetters,
-          subtitle: verb.translation,
-          isChecked: world.learnerVerbs.hasOpened(verb),
-          badge: BrowseRow.Badge(text: "#\(verb.frequency)", tint: .customBlue)
-        )
-        .card()
-      }
-      .buttonStyle(.plain)
-      .accessibilityIdentifier("collection_verb_\(verb.dictionaryKey)")
-    }
   }
 }
 
@@ -118,7 +55,6 @@ struct VerbCollectionBar: View {
   @Environment(World.self) private var world
   @Environment(\.isBeneathQuiz) private var isBeneathQuiz
   @State private var isQuizzing = false
-  @State private var shareButtonFrame = CGRect.zero
 
   var body: some View {
     let verbs = collection.verbs
@@ -143,16 +79,9 @@ struct VerbCollectionBar: View {
           .accessibilityIdentifier("collection_quiz_button")
         }
 
-        Button {
-          share()
-        } label: {
+        ShareButton(action: share) {
           Label(L.VerbView.share, systemImage: "square.and.arrow.up")
             .labelStyle(.iconOnly)
-        }
-        .onGeometryChange(for: CGRect.self) { proxy in
-          proxy.frame(in: .global)
-        } action: { frame in
-          shareButtonFrame = frame
         }
         .accessibilityIdentifier("collection_share_button")
       }
@@ -168,7 +97,7 @@ struct VerbCollectionBar: View {
     }
   }
 
-  private func share() {
+  private func share(from frame: CGRect?) {
     world.analytics.signal(name: .tapShareCollection, parameters: [
       ParameterKey.collection.rawValue: collection.analyticsValue
     ])
@@ -177,7 +106,7 @@ struct VerbCollectionBar: View {
       title: collection.title,
       icon: UIImage(named: world.settings.appIcon.previewAssetName),
       anchorLabel: L.VerbView.share,
-      anchorRect: shareButtonFrame == .zero ? nil : shareButtonFrame
+      anchorRect: frame
     )
   }
 }

@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct VerbDestination: Hashable {
-  let verb: Verb
-  let source: AnalyticsSource
-  var marks: MarkedConjugations?
-}
-
 /// One stretch of time during which a verb page is on screen, uncovered by a sheet of its own,
 /// with the app in the foreground. It begins with `viewAppeared` and ends with exactly one
 /// `leaveVerbView`, whether the page was pushed or presented as a sheet. A page that leaves the

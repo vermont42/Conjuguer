@@ -71,7 +71,7 @@ struct RelatedVerbsView: View {
     RelatedChip(text: verb.infinitifWithPossibleExtraLetters, isFrench: true) {
       push(.verb(VerbDestination(verb: verb, source: .related)))
     }
-    .accessibilityIdentifier("related_\(verb.infinitif)")
+    .accessibilityIdentifier("related_\(verb.dictionaryKey)")
   }
 }
 
@@ -98,112 +98,5 @@ private struct RelatedChip: View {
       .accessibilityAddTraits(.isButton)
       .accessibilityAction { action() }
       .onTapGesture(perform: action)
-  }
-}
-
-struct RelatedVerbListView: View {
-  let root: String
-  let verbs: [Verb]
-  @Environment(\.verbPagePush) private var push
-  @State private var order = VerbSort.frequency
-
-  private var orderedVerbs: [Verb] {
-    switch order {
-    case .frequency:
-      return verbs.sorted(by: Verb.byFrequency)
-    case .alphabetical:
-      return verbs.sorted { lhs, rhs in
-        lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
-      }
-    }
-  }
-
-  var body: some View {
-    ScrollView {
-      VStack(alignment: .leading, spacing: Layout.doubleDefaultSpacing) {
-        Picker(L.BrowseView.sortOrder, selection: $order) {
-          ForEach(VerbSort.allCases, id: \.self) { order in
-            Text(order.displayName)
-              .tag(order)
-          }
-        }
-        .pickerStyle(.segmented)
-        .sensoryFeedback(.selection, trigger: order)
-        .accessibilityIdentifier("related_list_sort")
-
-        VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
-          ForEach(orderedVerbs) { verb in
-            Button {
-              push(.verb(VerbDestination(verb: verb, source: .related)))
-            } label: {
-              BrowseRow(
-                title: verb.infinitifWithPossibleExtraLetters,
-                subtitle: verb.translation,
-                badge: BrowseRow.Badge(text: "#\(verb.frequency)", tint: .customBlue)
-              )
-              .card()
-            }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("related_list_\(verb.infinitif)")
-          }
-        }
-      }
-      .padding(.horizontal, Layout.doubleDefaultSpacing)
-    }
-    .screenBackground()
-    .navigationTitle(L.VerbView.builtOn(root))
-    .navigationBarTitleDisplayMode(.inline)
-    .recordsAppearance(as: "\(RelatedVerbListView.self)")
-  }
-}
-
-struct FlowLayout: SwiftUI.Layout {
-  var spacing: CGFloat = 8
-
-  func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-    let rows = rows(for: subviews, width: proposal.width ?? .infinity)
-    let height = rows.map(\.height).reduce(0, +) + spacing * CGFloat(max(rows.count - 1, 0))
-    let width = rows.map(\.width).max() ?? 0
-    return CGSize(width: proposal.width ?? width, height: height)
-  }
-
-  func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
-    var y = bounds.minY
-    for row in rows(for: subviews, width: bounds.width) {
-      var x = bounds.minX
-      for index in row.indices {
-        let size = subviews[index].sizeThatFits(.unspecified)
-        // Centered in its row, so that a sentence's words line up with the field between them.
-        subviews[index].place(at: CGPoint(x: x, y: y + (row.height - size.height) / 2), proposal: ProposedViewSize(size))
-        x += size.width + spacing
-      }
-      y += row.height + spacing
-    }
-  }
-
-  private struct Row {
-    var indices: [Int] = []
-    var width: CGFloat = 0
-    var height: CGFloat = 0
-  }
-
-  private func rows(for subviews: Subviews, width: CGFloat) -> [Row] {
-    var rows: [Row] = []
-    var current = Row()
-    for index in subviews.indices {
-      let size = subviews[index].sizeThatFits(.unspecified)
-      let widthWithChild = current.indices.isEmpty ? size.width : current.width + spacing + size.width
-      if widthWithChild > width, !current.indices.isEmpty {
-        rows.append(current)
-        current = Row()
-      }
-      current.width = current.indices.isEmpty ? size.width : current.width + spacing + size.width
-      current.height = max(current.height, size.height)
-      current.indices.append(index)
-    }
-    if !current.indices.isEmpty {
-      rows.append(current)
-    }
-    return rows
   }
 }

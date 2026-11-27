@@ -379,8 +379,12 @@ enum L {
   }
 
   enum ModelView {
-    static var parent: String {
-      String(localized: "ModelView.parent")
+    static var parentLabel: String {
+      String(localized: "ModelView.parentLabel")
+    }
+
+    static var participleLabel: String {
+      String(localized: "ModelView.participleLabel")
     }
 
     static var defective: String {

@@ -171,9 +171,7 @@ struct InputView: View {
     """
     output += "\n"
 
-    let verbArray = Verb.verbs.values.sorted { lhs, rhs in
-      lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
-    }
+    let verbArray = Verb.verbs.values.sorted(by: Verb.alphabetically)
 
     for verb in verbArray {
       output += "  <verb in=\"" + verb.infinitif + "\" tn=\"" + verb.translation + "\" "

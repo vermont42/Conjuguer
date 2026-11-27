@@ -58,19 +58,19 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `picker_settings_pronounGender` | Pronoun-gender segmented `Picker` in `SettingsView` | 3 segments (Feminine, Masculine, Both). |
 | `verb_example` | Example card in `VerbView` (below etymology) | Wraps the FR sentence, EN translation, source attribution, and nested *Chanson de Roland* example. |
 | `verb_browse_count` | "N VERBS" header above the verb collection | Hidden when the search yields nothing. |
-| `verb_row_<infinitif>` | Row `Button` in `VerbBrowseView` (list and grid) | e.g. `verb_row_avoir`. |
-| `model_row_<exemplar>` | Row `Button` in `ModelBrowseView` (list and grid) | e.g. `model_row_avoir`. |
+| `verb_row_<dictionaryKey>` | Row `Button` in `VerbBrowseView` (list and grid) | e.g. `verb_row_avoir`; a doubled infinitive's rows are `verb_row_haïr France` and `verb_row_haïr Québec`. |
+| `model_row_<model id>` | Row `Button` in `ModelBrowseView` (list and grid) | e.g. `model_row_5-26` (être), `model_row_2-3A` and `model_row_2-3B` (haïr's two). |
 | `french_letter_key_<letter>` | Accent key in `FrenchLetterKeyRow` (é è ê â î ô û ç) | Shown in place of the sort picker only while a search field is focused, e.g. `french_letter_key_ê`. `tap_id.sh` taps it and the field keeps focus. Over the quiz's answer field the row is a keyboard toolbar that AXe cannot see: tap a key by coordinate (with a hardware keyboard on the iPhone 17, y ≈ 816 and x ≈ 41, 86, 132, 178, 223, 269, 315, 361 for é to ç; on the iPad Pro 11, y ≈ 1167, é at x ≈ 70). Arrow keys (`axe key 80`, left) move the cursor if sent a few tenths of a second apart; faster presses are dropped. |
 | `search_guess_intro` | "A guess at the verb you meant:" in `FailedVerbSearchView` | Present only when a failed verb search has a guess. |
 | `search_guess_row` | The guess's row `Button` in `FailedVerbSearchView` | `tap_id.sh search_guess_row` opens the guessed verb. |
 | `verb_request_link` | The "please email" line in `FailedVerbSearchView` | Its address is a `mailto:` link; tap the address by frame. The simulator has no Mail, so the tap copies the address and shows `address_copied_note`. |
 | `address_copied_note` | The note under `verb_request_link` | Shows for four seconds after the address is copied. |
 | `verb_related` | "Related Verbs" heading of the card at the bottom of `VerbView` | Scroll to the page's bottom first. |
-| `related_<infinitif>` | A verb chip on the Related Verbs card | e.g. `related_tenir`. `tap_id.sh` taps it; the verb pushes onto the current stack. |
+| `related_<dictionaryKey>` | A verb chip on the Related Verbs card | e.g. `related_tenir`. `tap_id.sh` taps it; the verb pushes onto the current stack. |
 | `related_all_built_on` | The "All N" chip of the card's "Built on …" row | Pushes `RelatedVerbListView`. |
 | `related_all_model` | The "All N" chip of the card's "Same model" row | Pushes the model page in frequency order. |
-| `related_list_sort` | Frequency/Alphabetical `Picker` in `RelatedVerbListView` | 2 segments. |
-| `related_list_<infinitif>` | Row `Button` in `RelatedVerbListView` | e.g. `related_list_remettre`. |
+| `related_list_sort` | Frequency/Alphabetical `Picker` in `RelatedVerbListView` | 2 segments. The page is `VerbListPage`, as a collection's is: a grid in a tab on the iPad, a list in a sheet. |
+| `related_list_verb_<dictionaryKey>` | Row `Button` in `RelatedVerbListView` | e.g. `related_list_verb_remettre`. |
 | `verb_share_button` | Share button in `VerbView`'s navigation bar | Opens the share sheet. Tap the sheet's Copy and read the text with `xcrun simctl pbpaste <udid>`. On the iPad it is a popover over the button. |
 | `verb_star_button` | Star button in `VerbView`'s navigation bar | AXe cannot see navigation-bar buttons on iOS 26; tap it by position, between Done (in a sheet) and Share, and confirm by screenshot (a filled star). |
 | `verb_test_button` | Test Me (clipboard) button in `VerbView`'s navigation bar | First in the bar, before the star; absent on the six verbs with only an infinitif. Invisible to AXe like the star: tap by position (≈ `250,100` in a sheet on the iPhone 17, ≈ `691,54` pushed on the iPad Pro 11) and confirm by the sheet's "1 / 3". The sheet's Quit is found by `tap_label.sh Quit`; its results' Done at ≈ `352,110` on the iPhone. |
@@ -108,7 +108,7 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `quiz_best_score`, `quiz_leaderboard_button`, `quiz_achievements_button` | The best score, View Leaderboard, and View Achievements at the foot of the Quiz tab | Scroll down. The buttons show only while signed in to Game Center; the simulator's `GameCenterSpy` signs in when the tab appears, so they show there, and tapping one shows nothing. On the iPad, swipe in points (834 × 1194), not screenshot pixels: a swipe from y ≈ 1800 grabbed the home indicator on 2026-11-24 and shrank the app into a window, which the window's green button restored. |
 | `quiz_my_verbs_note` | The line under `quiz_scope_picker` with My Verbs chosen | "Questions about N verbs in My Verbs", or how to add some; `quiz_start_button` is then disabled (`enabled: false` in `describe_ui`). |
 | `recent_verbs_heading` | "Recent" heading over the recents in the empty focused search field | Present only when something has been opened. |
-| `my_verbs_list` | The My Verbs `List` (third segment of `verb_browse_sort`) | Tap the picker's third segment by frame (`x + width*5/6`). Rows keep `verb_row_<infinitif>`. Swipe a row left with `axe swipe --duration 0.4` at its `describe_ui` frame to show Delete. |
+| `my_verbs_list` | The My Verbs `List` (third segment of `verb_browse_sort`) | Tap the picker's third segment by frame (`x + width*5/6`). Rows keep `verb_row_<dictionaryKey>`. Swipe a row left with `axe swipe --duration 0.4` at its `describe_ui` frame to show Delete. |
 | `my_verbs_starred_heading`, `my_verbs_recent_heading` | Section headings in My Verbs | |
 | `my_verbs_clear_recent` | Clear button in My Verbs' Recent heading | Empties Recent; keeps the stars and every collection's progress. |
 | `my_verbs_empty` | My Verbs' empty state | |
@@ -123,7 +123,7 @@ surface (named-intent ops, annotation checks, iOS 26 control caveats).
 | `collection_progress` | "3 of 100 looked up" in a `VerbCollectionBar`, on a collection's page or a model's verbs card | Read it before and after opening a verb to see the count rise. Clear and a swipe in My Verbs leave it; only Reset Practice lowers it. |
 | `collection_quiz_button` | The bar's Quiz button | Opens a ten-question `QuizSheet` titled with the collection. Absent when no verb can be quizzed (1-10, 2-4). |
 | `collection_share_button` | The bar's Share button | The popover anchors to it on iPad. |
-| `collection_sort_order` | Frequency/Alphabetical `Picker` on a collection's page | 2 segments, Frequency first. |
+| `collection_sort` | Frequency/Alphabetical `Picker` on a collection's page | 2 segments, Frequency first. |
 | `collection_verb_<dictionaryKey>` | A verb row on a collection's page | e.g. `collection_verb_aller`; a green check marks a verb looked up. |
 | `custom_quiz_share_button` | Share, beside Change on the Custom segment | Present only while Start is enabled. A menu: `tap_label.sh "Share Link"` opens the share sheet (Copy at ≈ `68,531` on the iPhone 17, then `simctl pbpaste`), `tap_label.sh "Show QR Code"` the QR view. On the iPad `tap_id.sh` fails; tap by its `describe_ui` frame, and the menu's rows by theirs. The menu items carry `practice_set_share_link` and `practice_set_show_qr_code`, which AXe does not report. |
 | `practice_set_summary`, `practice_set_verbs` | A practice set's summary card and its list's verb chips | Open a set with `xcrun simctl openurl <udid> "conjuguer://quiz/set?tenses=imparfait&verbs=etre"`; it shows over any tab, and works from a cold launch. |

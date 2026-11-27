@@ -19,4 +19,13 @@ enum VerbSort: String, CaseIterable {
       return L.VerbSort.alphabetical
     }
   }
+
+  func areInIncreasingOrder(_ lhs: Verb, _ rhs: Verb) -> Bool {
+    switch self {
+    case .frequency:
+      return Verb.byFrequency(lhs, rhs)
+    case .alphabetical:
+      return Verb.alphabetically(lhs, rhs)
+    }
+  }
 }

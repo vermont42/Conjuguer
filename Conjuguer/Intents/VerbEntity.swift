@@ -70,8 +70,7 @@ struct VerbEntityQuery: EntityStringQuery {
   func suggestedEntities() async -> [VerbEntity] {
     await VerbData.ensureLoaded()
     return await MainActor.run {
-      Verb.verbs.values
-        .sorted { ($0.frequency, $0.id) < ($1.frequency, $1.id) }
+      Verb.verbsByFrequency
         .prefix(10)
         .map { VerbEntity(verb: $0) }
     }

@@ -287,7 +287,7 @@ struct VerbBrowseView: View {
   }
 
   static func rowIdentifier(_ verb: Verb) -> String {
-    "verb_row_\(verb.infinitif)"
+    "verb_row_\(verb.dictionaryKey)"
   }
 
   private func sortPickerOrKeyRow(_ sortPicker: some View) -> some View {
@@ -342,17 +342,8 @@ struct VerbBrowseView: View {
 
 enum VerbBrowse {
   static func makeStore(world: World) -> BrowseStore<Verb, VerbSort> {
-    let frequencyVerbs = Verb.verbs.values
-      .sorted { lhs, rhs in
-        (lhs.frequency, lhs.id) < (rhs.frequency, rhs.id)
-      }
-
-    let alphabeticVerbs = Verb.verbs.values.sorted { lhs, rhs in
-      lhs.infinitif.compare(rhs.infinitif, locale: Util.french) == .orderedAscending
-    }
-
-    return BrowseStore(
-      itemsBySort: [.frequency: frequencyVerbs, .alphabetical: alphabeticVerbs],
+    BrowseStore(
+      itemsBySort: [.frequency: Verb.verbsByFrequency, .alphabetical: Verb.verbs.values.sorted(by: Verb.alphabetically)],
       initialSort: world.settings.verbSort,
       persistSort: { world.settings.verbSort = $0 }
     )

@@ -642,8 +642,8 @@ Compact reference. The driver's inline comments hold the full WHY for each — c
 |---|---|---|---|---|
 | 1 | VerbBrowseView | dark | `nav_verb_browse` | Default landing; `wait_for_render verb_browse_sort`. Frequency sort is the default → être on top. |
 | 2 | VerbView | light | `nav_verb_view` | `tap_id_first verb_row_avoir`. |
-| 3 | ModelBrowseView | dark | `nav_model_browse` | `tap_tab models` → settle on `model_row_être`. Irregularity sort is the default → être model at/near top. |
-| 4 | ModelView | light | `nav_model_view` | `tap_tab models` → `tap_id_first model_row_être`. |
+| 3 | ModelBrowseView | dark | `nav_model_browse` | `tap_tab models` → settle on `model_row_5-26`. Irregularity sort is the default → être model at/near top. |
+| 4 | ModelView | light | `nav_model_view` | `tap_tab models` → `tap_id_first model_row_5-26`. |
 | 5 | QuizView (mid) | dark | `nav_quiz_mid` | `tap_tab quiz` → `quiz_start_button` → `set_keyboard_state hidden` → paste fixture answer 0 → `set_keyboard_state visible`. Captured before submit (keyboard visible per spec). The field is not tapped — it is already focused, and tapping it raises an edit callout (workaround #20). |
 | 6 | InfoBrowseView | light | `nav_info_browse` | `tap_tab info` → settle on `info_row_dedication` → `scroll_until_top info_row_participe_passe` (Tenses header to top). |
 | 7 | InfoView | dark | `nav_info_view` | `tap_tab info` → `scroll_until_top info_row_indicatif_present` → tap it. |
@@ -667,8 +667,8 @@ The driver depends on these app-side touchpoints. Renaming any one silently brea
 | Touchpoint | Driver depends on | Source file |
 |---|---|---|
 | `verb_browse_sort` identifier | `wait_for_render` polls for it after every launch (render anchor) | `Conjuguer/Views/VerbBrowseView.swift` |
-| `verb_row_<infinitif>` identifiers | `tap_id_first verb_row_avoir` for screen 2 | same file |
-| `model_row_<exemplar>` identifiers | `model_row_être` settle (screen 3) + `tap_id_first model_row_être` (screen 4) | `Conjuguer/Views/ModelBrowseView.swift` |
+| `verb_row_<dictionaryKey>` identifiers | `tap_id_first verb_row_avoir` for screen 2 | same file |
+| `model_row_<model id>` identifiers | `model_row_5-26` settle (screen 3) + `tap_id_first model_row_5-26` (screen 4) | `Conjuguer/Views/ModelBrowseView.swift` |
 | `info_row_<stableKey>` identifiers | `verify_screen_loaded info_row_dedication` (screens 6 & 7 settle); `info_row_participe_passe` (screen 6 scroll target); `info_row_indicatif_present` (screen 7) | `Conjuguer/Views/InfoBrowseView.swift` + `Info.stableKey` in `Conjuguer/Models/Info.swift` |
 | `Info.stableKey` field | source of every `info_row_<stableKey>` (locale-independent; `heading` is localized) | `Conjuguer/Models/Info.swift` |
 | `OnboardingDisplay.onboardingEnabled` / `TipDisplay.tipsEnabled` / `TutorDisplay.tutorUnavailableRowEnabled` | operator flips all three to `false` pre-sweep; renaming any of them silently breaks the documented `sed` commands, which fail *quietly* (`sed` reports no error when a pattern matches nothing) | `Conjuguer/Utils/KillSwitches.swift` |
@@ -677,7 +677,7 @@ The driver depends on these app-side touchpoints. Renaming any one silently brea
 | `Quiz.generateScreenshotFixture()` + `exportFixtureAnswers()` | DEBUG-gated ten-pair fixture; JSON written to `Documents/screenshot_fixture_answers.json` when launched with `-CONJUGUER_QUIZ_FIXTURE screenshot` | `Conjuguer/Models/Quiz.swift` |
 | `results_score` identifier | `verify_screen_loaded results_score` after the answer loop | `Conjuguer/Views/QuizResultsView.swift` |
 
-The `info_row_<stableKey>` keys are locale-independent ASCII (e.g. `indicatif_present`, `participe_passe`, `dedication`); `verb_row_<infinitif>` and `model_row_<exemplar>` carry French text (e.g. `verb_row_avoir`, `model_row_être`) — the driver passes them as UTF-8 and matches via `describe-ui` + `jq`, which handles non-ASCII fine.
+The `info_row_<stableKey>` keys are locale-independent ASCII (e.g. `indicatif_present`, `participe_passe`, `dedication`); `verb_row_<dictionaryKey>` carries French text (e.g. `verb_row_avoir`), and `model_row_<model id>` is ASCII (`model_row_5-26`, être's) — the driver passes them as UTF-8 and matches via `describe-ui` + `jq`, which handles non-ASCII fine.
 
 ### Sim Runtime Drift
 

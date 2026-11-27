@@ -55,9 +55,7 @@ final class VerbSearchModel {
   @ObservationIgnored private let analytics: Analytics
   @ObservationIgnored private let soundPlayer: SoundPlayer
   @ObservationIgnored private let suppliedVerbs: [Verb]?
-  @ObservationIgnored private lazy var verbs = suppliedVerbs ?? Verb.verbs.values.sorted { lhs, rhs in
-    (lhs.frequency, lhs.id) < (rhs.frequency, rhs.id)
-  }
+  @ObservationIgnored private lazy var verbs = suppliedVerbs ?? Verb.verbsByFrequency
   @ObservationIgnored private lazy var verbsByID = Dictionary(verbs.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
   @ObservationIgnored private lazy var guessCandidates = VerbSearch.guessCandidates(of: verbs)
 

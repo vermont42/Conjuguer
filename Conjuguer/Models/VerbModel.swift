@@ -146,6 +146,27 @@ struct VerbModel: Identifiable, Hashable {
     inheritedGroup(\.subjonctifPrésentGroup, name: "subjonctifPrésentGroup")
   }
 
+  /// In French alphabetical order of the exemplar, the id breaking the tie between haïr's two
+  /// models, so that their order does not change between launches.
+  static func alphabetically(_ lhs: VerbModel, _ rhs: VerbModel) -> Bool {
+    switch lhs.exemplar.compare(rhs.exemplar, locale: Util.french) {
+    case .orderedAscending:
+      return true
+    case .orderedDescending:
+      return false
+    case .orderedSame:
+      return lhs.id < rhs.id
+    }
+  }
+
+  /// The most irregular first, and alphabetically among models equally irregular.
+  static func byIrregularity(_ lhs: VerbModel, _ rhs: VerbModel) -> Bool {
+    if lhs.irregularity != rhs.irregularity {
+      return lhs.irregularity > rhs.irregularity
+    }
+    return alphabetically(lhs, rhs)
+  }
+
   var exemplarWithPossibleExtraLetters: String {
     if let extraLetters = extraLetters {
       return exemplar + " (" + extraLetters + ")"

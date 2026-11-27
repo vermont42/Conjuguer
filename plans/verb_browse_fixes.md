@@ -37,7 +37,7 @@ empty until it is committed.
 | 7 | Done | 2026-11-26 | `4ca2f5f` | B7, B13, B14, B15, B21, B22, B25 (the row), B30, G1, G2, G3, S10 | Yes |
 | 8 | Done | 2026-11-26 | `f866c2a` | B16, B19, S12, the progress decision, the migration, T2 | Yes |
 | 9 | Done | 2026-11-26 | `d5ae545` | B12, B27, B29, S4, S4a, S5, S6, D8, D9, T1 (the visit), K-G6 | Yes |
-| 10 | Not started | | | B17, B25 (the labels), S8, S13, S14, D1, D2, D3, D6, T6 | Yes |
+| 10 | Done | 2026-11-27 | | B17, B25 (the labels), S8, S13, S14, D1, D2, D3, D6, T6 | Yes |
 | 11 | Not started | | | B5, S7, the rare-verb draw | Yes |
 | 12 | Not started | | | B10, B11, B20, S11, K-S9, K-S10 | No |
 | 13 | Not started | | | S9, T3, T4, T5, what the others left | No |
@@ -969,6 +969,52 @@ page and "All N" from a Related Verbs card in both orders, on the iPad too; parl
 French for "Parent :"; the chips on the Quiz tab, which share `FlowLayout`.
 
 **How it differed:**
+No question for Josh came up. 1,057 tests in 99 suites (1,049 plus 8).
+
+- **The comparators live on the types.** `Verb.byFrequency` and `Verb.alphabetically` are in
+  `Verb.swift`, and `VerbModel.alphabetically` and `byIrregularity` in `VerbModel.swift`, so the
+  tool could use them; `VerbSort.areInIncreasingOrder` picks the verb comparator for a sort. The
+  frequency tie-break is the id everywhere. `FrequencyBand` and `VerbCollection` used the
+  dictionary key, which orders the four doubled infinitives the same way, so no list moved. The
+  verb list's store, the search model's default, and Spotlight's suggestions read
+  `Verb.verbsByFrequency` rather than sorting again.
+- **"A model's verbs by frequency" is `VerbModel.entriesByFrequency`**, cached per model, in a new
+  `VerbModel+Verbs.swift` beside the model page's links, which moved there from
+  `ConjugationLabels.swift` (they reach neither `Current` nor `L`, the reason that file exists).
+  The model's collection, the Related Verbs card's model row, and `ModelPractice` all read it.
+- **The links' cache** holds one `AttributedString` per model and order. Not measured: the review's
+  cost was traced, and a cached value cannot cost more than the sort and parse it replaces.
+- **D2's page is `VerbListPage`**, generic over a header. `RelatedVerbListView` stays as a thin type
+  in its own file, since its name is the `viewName` its `viewAppeared` sends, which the pending
+  privacy text names. The page sorts its verbs by the picker's order on each pass, so it needs no
+  input order. The related list gains the iPad grid; in a sheet the width is compact, so both pages
+  show a list there, as the collection's did.
+- **S8's identifiers**: `verb_row_`, `related_`, `collection_verb_`, and `related_list_verb_` take
+  the dictionary key, and `model_row_` the model's id. The two sort pickers are
+  `collection_sort` and `related_list_sort`, one rule from the page's prefix, so
+  `collection_sort_order` became `collection_sort`. `model_row_être` became `model_row_5-26` in
+  `scripts/take_screenshots.sh` and the screenshot playbook. Search's `best` is keyed by
+  dictionary key too, the other half of S8.
+- **B25's participe passé label** is "Participe Passé:" in English and "Participe Passé :" in
+  French, following the decision's "Parent:"/"Parent :" for both labels, though the label's text is
+  French in both languages, as the search row's line is. Josh may prefer the narrow space in both.
+  The stem alterations' "r1p:" rows are the irregularity notation and keep their colon.
+- **D6.** `ShareButton` serves the collection's bar and the challenge's Share Result. The custom
+  quiz's Share is a `Menu` and the hub's challenge row a `QuizHubRow`, so they keep their own
+  `onGeometryChange`; the zero check moved into `ShareSheet.present`, so none of the four checks.
+- **`FlowLayout`** took Konjugieren's version, which proposes the row's width to each child, and
+  kept Conjuguer's vertical centering, which the quiz's sentences need. No unit test: a `Layout`'s
+  subviews cannot be built in a test. Name the Conjugation's chips looked as before.
+- **Fails without the fix**: with the tie-break removed, the alphabetical case of the doubled-entry
+  test and the shuffled-list test failed; with the links naming the key, the haïr link test failed;
+  with `verb_row_` naming the infinitive, the identifier test failed.
+- **Seen in the simulator, iPhone:** the top 100's page in both orders, its rows
+  `collection_verb_<key>`; haïr's 2-3A page listing "haïr (France)", whose link pushed haïr's page;
+  the "All" chip of mettre's built-on row in both orders; 2-3B's page in French reading
+  "Parent : finir (2-1)" and "Participe Passé : ï"; search "hair" giving `verb_row_haïr France` and
+  `verb_row_haïr Québec`;
+  the Models tab's `model_row_<id>`; Name the Conjugation's chips. **iPad:** Verbs Taking Être pushed
+  in the Models tab, three columns, and the share popover pointing at the bar's button.
 
 ## Phase 11: A Quiz over Chosen Verbs
 

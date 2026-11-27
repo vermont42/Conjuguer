@@ -29,7 +29,7 @@ struct FailedVerbSearchView: View {
             openGuess(guess)
           } label: {
             BrowseRow(verb: guess.verb, detail: guess.conjugation?.line(pronounGender: guess.verb.pronounGender(for: pronounGender)))
-            .card(accent: guessIsSelected ? .customRed : nil)
+              .card(accent: guessIsSelected ? .customRed : nil)
           }
           .buttonStyle(.plain)
           .accessibilityIdentifier("search_guess_row")

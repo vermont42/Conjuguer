@@ -268,7 +268,11 @@ The verb page leads to related verbs, and the model page can list its verbs by f
 | File | Purpose |
 |------|---------|
 | `Models/RelatedVerbs.swift` | `VerbBase` (a verb's base and root), `RelatedVerbs`, and `Verb.related`, cached per entry |
-| `Views/RelatedVerbsView.swift` | The card at the bottom of the verb page, `RelatedVerbListView` (every verb built on a root), and `FlowLayout` |
+| `Views/RelatedVerbsView.swift` | The card at the bottom of the verb page |
+| `Views/RelatedVerbListView.swift` | Every verb built on a root, a `VerbListPage` titled "Built on mettre" |
+| `Views/VerbListPage.swift` | The sortable page of verb rows that the related list and a featured collection's page share, a grid in a regular-width stack |
+| `Views/FlowLayout.swift` | The chips' wrapping layout, which the quiz's sentences and chips and the mastery page use too |
+| `Models/VerbModel+Verbs.swift` | A model's entries by frequency and the model page's run of links, each built once per model (and order) |
 | `Views/VerbPageNavigation.swift` | `VerbPageRoute`, `VerbPagePush`, and `verbPageNavigation(path:pushesTenseArticles:done:)` |
 
 ### Finding a Base
@@ -299,7 +303,8 @@ each of up to six chips:
 - **Built on prendre**: the root verb first (for a doubled root, the entry that shares this verb's
   model, so ressortir leads to sortir "exit" and assortir to sortir "obtain"), then the family by
   frequency. More than six adds "All 11", which pushes `RelatedVerbListView`, Frequency first, with
-  an Alphabetical control. The choice is not stored.
+  an Alphabetical control. The choice is not stored. The list is the page a featured collection
+  uses (`VerbListPage`), so it sorts by the same rules and has the same grid on the iPad.
 - **Same model: venir (6-7)**: the most frequent verb of each other root in the model, by frequency
   (tenir, appartenir on venir's page; donner, trouver, passer on parler's). The most frequent verb
   wins over the root verb, so demander rather than mander speaks for its root. "All 29" pushes the
@@ -330,7 +335,21 @@ A segmented control above "Verbs Using This Model" chooses Alphabetical (the def
 The choice is not stored. The list stays a run of `conjuguer://verb/` links in one `Text` (Josh,
 2026-11-22), since model 1-1 has 4,859 verbs and Konjugieren saw about 1,000 rows in a non-lazy
 stack peg the CPU. Alphabetical uses French collation (`Util.french`), since a plain sort puts
-écouter after the z's.
+écouter after the z's. Each link names its verb as every other screen does, "haïr (France)", and
+carries the dictionary key ("haïr France") in its URL. The run is built once per model and order
+and kept, since parler's model took a French sort and a Markdown parse of 4,859 links on every pass
+of `body` before Phase 10 of `plans/verb_browse_fixes.md`.
+
+### Sort Orders
+
+Every list of verbs sorts through `Verb.byFrequency` or `Verb.alphabetically`, and every list of
+models through `VerbModel.alphabetically` or `VerbModel.byIrregularity` (`VerbSort.areInIncreasingOrder`
+picks the verb comparator for a sort). Each breaks a tie by id: the two entries of a doubled
+infinitive share a rank and an infinitive, and haïr's two models share an exemplar, and
+`Verb.verbs.values` comes in an order that changes with each launch's hash seed, so a sort without
+the tie-break let haïr (France) and haïr (Québec) change places between launches. A model's
+entries by frequency are `VerbModel.entriesByFrequency`, read from the model's own list of keys,
+which its collection, its practice, and the Related Verbs card share.
 
 ## Copy and Share
 
@@ -341,7 +360,8 @@ A learner can copy a conjugation and share a verb.
 | File | Purpose |
 |------|---------|
 | `Models/KeyConjugations.swift` | `Verb.keyConjugations()`, `Verb.keyTenses`, `Verb.citationInfinitif`, and `Verb.shareText()` |
-| `Utils/ShareSheet.swift` | Presents `UIActivityViewController` with an `LPLinkMetadata` header, and on iPad anchors its popover to the share button |
+| `Utils/ShareSheet.swift` | Presents `UIActivityViewController` with an `LPLinkMetadata` header, and on iPad anchors its popover to the share button. A zero rect, a frame not yet laid out, counts as none |
+| `Views/ShareButton.swift` | A button that hands its own frame to its action, so the popover can point at it: a collection's bar and the challenge's Share Result. The custom quiz's share is a `Menu` and the hub's challenge row a `QuizHubRow`, so each keeps its own frame |
 | `Utils/Modifiers.swift` | `copyOnLongPress(_:)`: a context menu with Copy, and a VoiceOver action of the same name |
 | `Utils/URLExtensions.swift` | `URL.appStore`, the App Store page with no storefront, so the App Store opens the reader's own |
 
@@ -865,9 +885,9 @@ as a link.
 
 | Piece | File | Role |
 |---|---|---|
-| `VerbCollection` | `Models/VerbCollection.swift` | The cases, keys, membership (`contains`, `verbs`, cached, most frequent first), titles, descriptions, links, share text, `analyticsValue`, and `QuizScope.collection(_:)` |
+| `VerbCollection` | `Models/VerbCollection.swift` | The cases, keys, membership (`contains`, `verbs`, cached, most frequent first; a model's from `VerbModel.entriesByFrequency`), titles, descriptions, links, share text, `analyticsValue`, `viewParameters(source:)`, and `QuizScope.collection(_:)` |
 | `VerbCollectionDestination` | `Models/VerbCollection.swift` | A featured collection and how it was reached, pushed through `verbPageNavigation` or presented from a link (`World.collection`) |
-| `VerbCollectionView` | `Views/VerbCollectionView.swift` | A featured collection's page: title, description, the bar, a Frequency/Alphabetical picker (not stored), and its verbs as rows with a check on each looked up |
+| `VerbCollectionView` | `Views/VerbCollectionView.swift` | A featured collection's page: a `VerbListPage` with the title, description, and bar above its Frequency/Alphabetical picker (not stored), and its verbs as rows with a check on each looked up. It sends `viewCollection` with what `VerbCollection.viewParameters(source:)` gives |
 | `VerbCollectionBar` | `Views/VerbCollectionView.swift` | "3 of 100 looked up", Quiz, Share, and a progress bar. The collection page has it, and so does every model page, in its verbs card |
 | `VerbCollectionRow` | `Views/VerbCollectionView.swift` | A featured collection in the Models tab: a row on iPhone, a card in a grid on iPad, with its count and a progress bar |
 
@@ -889,7 +909,8 @@ none of whose verbs can be quizzed (ester's 1-10, férir's 2-4) shows no Quiz bu
 souvenir"), the link, and the App Store link. A featured collection's link is
 `conjuguer://list/<key>?source=sharedLink`; a model's is its existing
 `conjuguer://model/<id>?source=sharedLink`, so each model has one link. The share sheet anchors
-to the bar's button on iPad (`ShareSheet.present(anchorRect:)`).
+to the bar's button on iPad: the button is a `ShareButton`, which hands its frame to its action
+for `ShareSheet.present(anchorRect:)`. The Daily Challenge's Share Result uses it too.
 
 **Signals.** `viewCollection` (`collection`, `source`), once per featured page, its return from a
 verb page not counted. `source` is `tab` (the Models tab), `sharedLink`, or `deeplink`.
