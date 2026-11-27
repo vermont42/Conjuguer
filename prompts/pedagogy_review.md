@@ -1,0 +1,20 @@
+Claude ported Konjugieren's pedagogy work to Conjuguer using plans/pedagogy_implementation.md . That plan builds the suggestions I accepted in ../Konjugieren/docs/pedagogy_research.md , and its "Decisions Already Made" records what I decided for Conjuguer and what carried over from Konjugieren. The port ran in 24 phases and a Closing, from 5bd3650 (the commit before Phase 1) through bd06478 (the Closing). A lot of code got added: about 34,300 lines across some 172 files, covering grading, the 1990 spellings, levels, a practice record, Review and My Mistakes, the practice hub, naming the error, recognition, sentences with a blank, mastery, the speed round, the daily session and streak, achievements, and the daily challenge. Please review that code for correctness, smells, gaps, duplication, and elegance. Output your findings to plans/pedagogy_fixes.md . That file should act as a plan to fix the findings, in proposed phases. Implementing sessions will mark each phase as done and note how their implementations differed from the plan.
+
+Because there is no separate review document, the plan must hold the findings themselves. Give each finding a label (C1, P1, and so on), its file and line, its evidence, how it was verified, and a suggested fix, and have the phases cite findings by label. Line numbers will drift as phases land, so tell implementing sessions to find code by name.
+
+Where a finding needs a decision from me, list it under "Decisions for Josh", and mark the phases that depend on it as waiting for my answer. Implementing sessions should ask me rather than guess, and record my answer and its date in the phase's note.
+
+Every phase waits for me before git. An implementing session finishes its work, runs the build and tests, marks the phase "Awaiting Josh", and does not run git add, git commit, or git push until I have tried the change and said to commit. Give the plan's Status table a Commit column that stays empty until then, as plans/verb_browse_fixes.md does.
+
+Some guidance:
+
+- Review the code as it stands on main, not as each phase left it. Later work changed some of it.
+- docs/verb_browse_review.md already reviewed the Verbs, Models, and verb code, and plans/verb_browse_fixes.md fixed what it found, after the pedagogy Closing. Some of that touched pedagogy code. Don't re-report those findings, but do say if a fix there is incomplete or broke something here.
+- Each phase's "How it differed" note records what departed from the plan and why. Read the notes before calling something a gap, and check whether the code matches what the notes claim.
+- Besides code quality, note any place where the built feature undercuts the pedagogical aim its suggestion in ../Konjugieren/docs/pedagogy_research.md stated, such as a retry that leaks the answer or a schedule that never resurfaces an item. Also note where a German design was ported that does not fit French, such as a question that asks for a form French lacks, or a check that misjudges elision, agreement with être, or a reformed spelling.
+- Decision 5 says no analytics signal may carry an answer, a score, a count of right or wrong answers, or a verb. Check that it still holds, and that docs/privacy_policy_pending.md covers every signal in English and French.
+- Quiz generation is random. Judge whether the tests that use SeededRNG prove what they claim.
+- The Closing ran the suite on the iPhone simulator with its language in English. Confirm the simulator's language before trusting a run, and pass -testLanguage en on a raw xcodebuild if it has changed. Read the test count, not just the exit status.
+- Konjugieren's code got the same review, in ../Konjugieren/plans/pedagogy_fixes.md . Do your own review first, so that it is not anchored on that one. Then check each of its findings against Conjuguer's code, and say which carried over in the port, which did not, and which do not apply here. Do not review or change Konjugieren as part of this task.
+
+If running the app to try the new functionality is helpful, please do so using ios-build-verify . If you choose to launch subagents, please use Opus subagents.

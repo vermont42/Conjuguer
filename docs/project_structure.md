@@ -516,6 +516,7 @@ prompts/                            # What Josh wrote to get Claude to do someth
 ├── landscape.md                    # Make the minigame work in landscape
 ├── model_eval.md                   # The Fable vs. Opus code-review eval, and the ask for its analysis
 ├── onboarding.md                   # Adapt Konjugieren's first-launch onboarding
+├── pedagogy_review.md              # Review the code the pedagogy port built, as a plan of fixes (plans/pedagogy_fixes.md)
 ├── post.md                         # Turn the model eval into a blog post
 ├── rename_objects.md               # Rename the behavior protocols' conformers to Fowler's test-double names
 ├── tutor.md                        # The conjugation tutor
