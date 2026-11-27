@@ -12,7 +12,7 @@ import Foundation
 /// `gap_sentences.json`. Claude drafts them, `GapSentenceTests` confirms every blank against the
 /// Conjugator, and each is reread before it ships, which `reviewed` records.
 extension QuizScope {
-  static let sentences = QuizScope(verbs: nil, questionCount: Quiz.questionCount, source: .sentences, isSentences: true)
+  static let sentences = QuizScope(verbs: nil, questionCount: Quiz.questionCount, source: .sentences, kind: .sentences)
 }
 
 struct GapSentence: Decodable, Identifiable, Hashable {

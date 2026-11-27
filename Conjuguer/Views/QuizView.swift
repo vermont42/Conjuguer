@@ -319,7 +319,7 @@ struct QuizView: View {
       QuizCorrectionView(
         question: quiz.questions[quiz.currentQuestionIndex],
         correction: correction,
-        showsVerbLink: !quiz.scope.isVerbPage,
+        showsVerbLink: quiz.scope.showsVerbLink,
         accessibilityIsFocused: $correctionHasAccessibilityFocus,
         onOpen: { navigationPath.append($0) },
         onContinue: continueAfterCorrection
@@ -998,7 +998,13 @@ struct QuizView: View {
   }
 
   private var myVerbsNote: String {
-    myVerbs.isEmpty ? L.QuizView.myVerbsEmpty : L.QuizView.myVerbsCount(myVerbs.count)
+    if myVerbs.isEmpty {
+      return L.QuizView.myVerbsEmpty
+    }
+    if !QuizScope.myVerbs(myVerbs).hasEnoughCells(at: level) {
+      return L.QuizView.myVerbsTooFewCells
+    }
+    return L.QuizView.myVerbsCount(myVerbs.count)
   }
 
   private var customQuiz: CustomQuiz {
@@ -1014,7 +1020,7 @@ struct QuizView: View {
     case .allVerbs:
       return true
     case .myVerbs:
-      return !myVerbs.isEmpty
+      return QuizScope.myVerbs(myVerbs).hasEnoughCells(at: level)
     case .custom:
       return customQuiz.canBeAsked(at: level, myVerbs: myVerbs)
     }
@@ -1027,7 +1033,10 @@ struct QuizView: View {
     if customQuiz.canBeAsked(at: level, myVerbs: myVerbs) {
       return L.CustomQuiz.description
     }
-    return customQuiz.verbSet == .myVerbs && myVerbs.isEmpty ? L.QuizView.myVerbsEmpty : L.CustomQuiz.nothingToAsk
+    if customQuiz.verbSet == .myVerbs, myVerbs.isEmpty {
+      return L.QuizView.myVerbsEmpty
+    }
+    return customQuiz.hasTooFewCells(at: level, myVerbs: myVerbs) ? L.CustomQuiz.tooFewCells : L.CustomQuiz.nothingToAsk
   }
 
   private var customQuizSummary: some View {

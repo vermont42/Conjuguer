@@ -899,11 +899,17 @@ collection's page in the tab's stack.
 entries rather than infinitives, so it matches the rows. A star alone does not count. Clear and the
 swipe in My Verbs leave it, and only Reset Practice returns it to nothing (§ The Learner's Verbs).
 
-**The quiz** is `QuizScope.collection(_:)`: ten unranked questions, with Ten More, at the learner's level over
+**The quiz** is `QuizScope.collection(_:)`: up to ten unranked questions, with Ten More, at the learner's level over
 the collection's verbs, in a `QuizSheet` over the page, the same sheet Test Me uses, whose title it
 replaces with the collection's (`QuizScope.title`). Unlike a My Verbs quiz it starts no Live
-Activity, since a tap on the activity would open the Quiz tab rather than the sheet. A collection
-none of whose verbs can be quizzed (ester's 1-10, férir's 2-4) shows no Quiz button.
+Activity, since a tap on the activity would open the Quiz tab rather than the sheet. It asks the
+collection's verbs inside the level's band first, and the rest only once those are asked
+(`QuizScope.prefersBandVerbs`), since most of a large model's verbs are rare: without that, a quiz
+from parler's model page asked about 87% verbs outside the 1,000 most frequent. A collection with
+fewer than three cells at the learner's level (`QuizScope.hasEnoughCells(at:)`, Test Me's length)
+shows no Quiz button: ester's 1-10 at every level, apparoir's 4-1D at every level, férir's 2-4 from
+Elementary up, and falloir's 4-5C at Beginner, where "il faut" is its one cell. The button's hint
+names the round's length, ten or fewer.
 
 **Sharing** sends the title, the count, the six most frequent verbs in citation form ("se
 souvenir"), the link, and the App Store link. A featured collection's link is
@@ -941,7 +947,7 @@ sentences a speaker would use (§ Choice Questions).
 | `CustomQuiz.swift`, `CustomQuizView.swift` | The custom quiz: `CustomQuiz` (chosen tenses and a `QuizVerbSet`), its stored form, `QuizScope.custom(_:myVerbs:)`, and the editor and model list the Quiz tab pushes (§ The Custom Quiz) |
 | `QuizDraw.swift` | The verbs of a quiz whose verbs were not listed (the default quiz, or a custom quiz over a band): `QuizDraw`, which draws them from a band with a fixed share of irregular, core, and prefixed verbs; `QuizVerbPool`, a kind of verb a tense is asked of, read from the data; and `QuizVerbTraits`, where a model is irregular |
 | `QuizLevel.swift` | The four levels, chosen in Settings, and the tenses each asks; `QuizTenseSlot`, a tense as the quiz asks it, with its cells, its weight, and its pools |
-| `QuizScope.swift` | What a quiz asks about, its question count, and its analytics source; the questions of a quiz over chosen verbs; `Verb.hasCell(_:)` and `canBeQuizzed(at:)` |
+| `QuizScope.swift` | What a quiz asks about, its question count, its analytics source, and its `Kind`, over which ranking, Ten More, the Live Activity, and the draw switch; the questions of a quiz over chosen verbs, no cell twice in a session and a collection's band first; the three-cell floor; `Verb.hasCell(_:)` and `canBeQuizzed(at:)` |
 | `QuizQuestion.swift`, `QuizResult.swift`, `QuizState.swift` | A question (verb, tense, and the step it shares with others on one screen), an answered question, and the quiz's lifecycle |
 | `VerbEssentials.swift`, `VerbEssentialsRowView.swift` | Verb Essentials: its scope, its draw, the rows of a step, and where a missed blank returns (§ Verb Essentials) |
 | `ModelPractice.swift`, `ModelPracticeCard.swift`, `ModelPracticeListView.swift` | A model's practice: what it asks, when a model is known, the draws alone and mixed, the card on a model's page, and the hub's list of models (§ Model Practice) |
@@ -1144,8 +1150,8 @@ learner's answer and underlined in green in the right one.
 `source` `quizCorrection`), and its model's page. `QuizView` holds its own `NavigationStack`, with
 `verbPageNavigation`, whose root hides the navigation bar, so the pages push over the held
 question and Back returns to it. In a sheet the pushed pages have no Done, which would close the
-sheet without Quit. A quiz begun from the verb's page (`QuizScope.isVerbPage`) leaves out the verb
-link. While a quiz is in progress the `isBeneathQuiz` environment value hides Test Me on a pushed
+sheet without Quit. A quiz begun from the verb's page (`QuizScope.showsVerbLink`, false for `Kind.verbPage`) leaves out
+the verb link. While a quiz is in progress the `isBeneathQuiz` environment value hides Test Me on a pushed
 verb page and the Quiz button of a model's collection bar, so that no quiz starts inside a quiz.
 After Continue the next question's feedback slot is empty, since the correction has been read.
 
@@ -1221,14 +1227,16 @@ diagnosis is sent.
 
 ### Rounds, Re-asks, and the Clock
 
-**A round is ten questions** (`Quiz.questionCount`), and the results offer **Ten More**
+**A round is ten questions** (`Quiz.questionCount`), or fewer for a quiz over chosen verbs that
+has fewer cells left (§ Quiz Scopes), and the results offer **Ten More**
 (`Quiz.continueSession()`, "Encore dix"), which appends a fresh draw of ten, so that every round
 has the default quiz's mix of irregular, core, and prefixed verbs. A fresh draw passes over verbs
 asked earlier in the session while another fits (`QuizDraw.questions(level:count:asked:using:)`).
 The score, the clock, and the results list carry on, the progress reads 11 / 20, and the first
 question of the new round has an empty feedback slot (`Quiz.lastRoundResult`). Ten More has no
-limit. Test Me's three questions offer none (`QuizScope.continues`). In DEBUG, a fixture is asked
-again by Ten More.
+limit, except over chosen verbs, where it is offered only while a cell remains unasked
+(`QuizScope.hasUnaskedCell(at:asked:)`). Test Me's three questions offer none
+(`QuizScope.continues`). In DEBUG, a fixture is asked again by Ten More.
 
 **A missed question is asked once more** (`QuizQuestion.isReask`), `Quiz.reaskGap` (3) questions
 later, or at the round's end, before the results, when fewer remain (`Quiz.reaskPosition`). A
@@ -1312,9 +1320,14 @@ partir-like (il sort).
 ### Quiz Scopes
 
 A `QuizScope` says which verbs a quiz asks about (nil for the default quiz), how many questions it
-asks, and its `source`. `Quiz.start(scope:)` defaults to `.allVerbs`, whose `source` is `tab`, which the Start
-button uses; the `quiz/` link uses `.allVerbs(source:)` with the link's `source`, or `deeplink`. A new kind of quiz adds a constructor, as collections added `.collection(_:)` (§
-Collections).
+asks, its `source`, and its `kind` (`QuizScope.Kind`), one case for each place a quiz starts. What is
+ranked (`isRanked`), what continues (`continues`), what starts a Live Activity
+(`startsLiveActivity`), whether a correction links to the verb's page (`showsVerbLink`), and which
+draw `Quiz` runs are exhaustive switches over the kind, so a new kind must answer each. The
+analytics `source` decides nothing. `Quiz.start(scope:)` defaults to `.allVerbs`, whose `source` is `tab`, which the Start
+button uses; the `quiz/` link uses `.allVerbs(source:)` with the link's `source`, or `deeplink`. A new kind of quiz adds a case and a constructor, as collections added `.collection(_:)` (§
+Collections). `QuizScopeTests` builds every scope the app can start and pins which is ranked, which
+starts a Live Activity, which prefers its band, and which hides the verb link.
 
 | Scope | Questions | Where |
 |---|---|---|
@@ -1329,10 +1342,19 @@ Collections).
 | `.challenge(_:source:)` | 5, the same on every device for a day and a level, with no re-ask and no Ten More | The hub's Daily Challenge row, a shared result's link, and the quiz widget (§ Daily Challenge) |
 
 **A scoped quiz uses the learner's level.** Each question draws a tense by its weight from the
-level's tenses that some verb of the scope has, so a tense no verb has is never drawn and a My
-Verbs quiz of only falloir still asks ten. It then takes the next verb from a shuffled deck of
-the scope's verbs, and a cell of the tense that the verb's defect group has (`Verb.hasCell`),
-preferring a cell not yet asked of that verb. A verb without the tense passes it to the next verb.
+level's tenses that some verb of the scope has unasked. It then takes the next verb from a deck of
+the scope's verbs, and a cell of the tense that the verb's defect group has (`Verb.hasCell`) and
+that the session has not asked. A verb without such a cell passes the tense to the next verb, and
+a tense with none left is drawn no more. **No cell is asked twice in a session**, Ten More's rounds
+included, so a round is as long as the unasked cells allow, up to ten: a My Verbs quiz of three
+verbs at Beginner, which have 27 cells, asks 10, 10, and 7, and then offers no Ten More. The deck
+puts verbs the session has not asked before those it has, each group shuffled, and for a
+collection the verbs of the level's band before the rest. My Verbs and a shared list are the
+learner's or a teacher's choice, so they are asked without regard to the band. A collection's
+Quiz button and Start for My Verbs need three cells at the learner's level
+(`QuizScope.hasEnoughCells(at:)`); below that, My Verbs' note says the verbs have too few
+conjugations at the level (`quiz_my_verbs_note`). A custom quiz or a practice set over a list
+needs three cells of its chosen tenses (§ The Custom Quiz).
 
 **Test Me's three questions** ask three different tenses of the level, drawn by weight without
 replacement and without participles, since any passé composé already tests the participe passé.
@@ -1381,9 +1403,12 @@ order. Each tap is kept at once in `Settings.customQuiz`, which Settings does no
 - **The top-100 collection is offered only as the band**, which holds the same verbs under the same
   key, `top100`.
 - **Start is disabled** while nothing is chosen, while a kept choice of My Verbs meets an empty
-  list, and while no verb of a list has any chosen tense (falloir's model and the impératif):
-  `CustomQuiz.canBeAsked(at:myVerbs:)`. The line under the summary says which.
-- **Never ranked.** `QuizScope.isRanked` requires `custom == nil`, so a custom quiz posts to no
+  list, and while a list has fewer than three cells of the chosen tenses, the floor a collection's
+  quiz and My Verbs share (§ Quiz Scopes): `CustomQuiz.canBeAsked(at:myVerbs:)`. The line under the
+  summary says which, telling none (falloir's model and the impératif, `CustomQuiz.nothingToAsk`)
+  from too few (falloir's model and the présent, "il faut" alone, `CustomQuiz.tooFewCells`,
+  `CustomQuiz.hasTooFewCells(at:myVerbs:)`). A practice set's sheet does the same above its Start.
+- **Never ranked.** `QuizScope.isRanked` holds only for `Kind.allVerbs`, so a custom quiz posts to no
   leaderboard, sets no best score, and donates nothing to `ChangeLevelTip`. It has Ten More and a
   Live Activity like any ten-question quiz in the tab. The DEBUG quiz fixtures apply only to the
   default quiz.
@@ -1428,7 +1453,7 @@ scanning beneath it; the screen stays awake while it shows.
   tenses, verb sets, verbs, a model that names nothing, and an unknown level are dropped and the
   rest kept. A link naming `verbs=myVerbs` drops that part, since it would ask the opener's own.
 - **Unranked, in a sheet.** A set's quiz has `custom`, so it posts nothing and sets no best score,
-  and like a collection's quiz it starts no Live Activity (`QuizScope.isPracticeSet`), since a tap
+  and like a collection's quiz it starts no Live Activity (`QuizScope.Kind.practiceSet`), since a tap
   on the activity would open the Quiz tab instead.
 - **Signals.** `tapSharePracticeSet` (`method` `link` or `qrCode`, and `customChoice`),
   `viewPracticeSet` (`source`, and `outcome` `opened` or `invalid`), and `tapKeepPracticeSet`. The

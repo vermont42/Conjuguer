@@ -228,8 +228,7 @@ extension QuizScope {
       verbs: collection.verbs,
       questionCount: Quiz.questionCount,
       source: .list,
-      title: collection.title,
-      collection: collection
+      kind: .collection(collection)
     )
   }
 }

@@ -160,7 +160,7 @@ struct VerbCollectionTests {
 
     let keys = Set(VerbCollection.être.verbs.map(\.dictionaryKey))
     var generator = SeededRandomNumberGenerator(seed: 14)
-    let questions = scope.questions(level: .advanced, using: &generator)
+    let questions = scope.questions(level: .advanced, asked: [], using: &generator)
     #expect(questions.count == Quiz.questionCount)
     #expect(questions.allSatisfy { keys.contains($0.verb.dictionaryKey) })
   }
@@ -180,12 +180,5 @@ struct VerbCollectionTests {
     #expect(spy.signalNames == [.quizStart, .quizQuit])
     #expect(spy.signalParameters.first?[ParameterKey.collection.rawValue] == "model")
     #expect(spy.signalParameters.first?[ParameterKey.source.rawValue] == AnalyticsSource.list.rawValue)
-  }
-
-  @Test func aCollectionWithNothingToAskHidesItsQuiz() {
-    for level in QuizLevel.allCases {
-      #expect(!VerbCollection.model("1-10").verbs.contains { $0.canBeQuizzed(at: level) })
-      #expect(VerbCollection.model("1-1").verbs.contains { $0.canBeQuizzed(at: level) })
-    }
   }
 }

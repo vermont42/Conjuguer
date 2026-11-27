@@ -113,7 +113,7 @@ extension AnswerFrame {
 
 extension QuizScope {
   /// From the hub's Exercises. Never ranked, never continued, and mixing in nothing.
-  static let speedRound = QuizScope(verbs: nil, questionCount: SpeedRound.batchSize, source: .speedRound, isSpeedRound: true)
+  static let speedRound = QuizScope(verbs: nil, questionCount: SpeedRound.batchSize, source: .speedRound, kind: .speedRound)
 }
 
 extension QuizDraw {

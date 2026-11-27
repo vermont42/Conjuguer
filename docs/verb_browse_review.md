@@ -167,6 +167,8 @@ keeps its identity.)
 **Fix:** cap a round at the distinct cells available, carry `asked` across rounds, and decide what
 a collection with fewer than, say, three cells shows (see the open questions).
 
+**Fixed on `main` 2026-11-27**, by Phase 11 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): a round over chosen verbs asks no cell the session has asked, so it is as long as the unasked cells allow, up to ten, and Ten More passes the session's questions and is offered only while an unasked cell remains (`QuizScope.hasUnaskedCell(at:asked:)`). A collection's Quiz button and Start for My Verbs need three cells at the learner's level (`QuizScope.hasEnoughCells(at:)`), so falloir's 4-5C at Beginner, apparoir's 4-1D, and férir's 2-4 from Elementary show no Quiz button. A My Verbs quiz of three verbs at Beginner now asks 10, 10, and 7. `aDefectiveVerbIsAskedOnlyTheCellsItHas` asserts falloir's own count of cells.
+
 **B6. The keyboard highlight is a row index, so it goes stale when the rows change.** *Traced.*
 `keyboardSelection` is cleared only when the text changes (`VerbBrowseView.swift:131-133`). On
 iPad: arrow down three times through the recents, then end the search, and the third verb of the
@@ -564,6 +566,8 @@ depend on it.* `isRanked` is a ten-term conjunction that every new kind must ext
 practice starts no Live Activity only because it happens to set `collection` for analytics
 (`QuizScope.swift:129-131`). One `Kind` enum would make these exhaustive switches.
 
+**Fixed on `main` 2026-11-27**, by Phase 11 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `QuizScope.Kind` has a case for each place a quiz starts, and ranking, Ten More, the Live Activity, the verb link, and `Quiz`'s draw are exhaustive switches over it. The boolean flags and optional fields are gone from the stored properties; those still read are computed from the kind. `QuizScopeTests` builds every scope and pins which is ranked, which starts a Live Activity, which prefers its band, and which hides the verb link.
+
 **S8. Two identities for a verb.** `Verb.id` is "sortir (obtain)" and `dictionaryKey` is "sortir
 obtain". Search keys its matches by one and its lookup table by the other within one function
 (`VerbSearch.swift:103-110`), accessibility identifiers use `infinitif`, which the two entries
@@ -729,6 +733,8 @@ nothing open (B4), and `aDefectiveVerbIsAskedOnlyTheCellsItHas` pins B5.
 pronominal row, and checks the one cell each row's `match` marks; the unknown-link test starts with
 a page open. `aDayGivesTheSameVerbEveryTime` and `aDefectiveVerbIsAskedOnlyTheCellsItHas` remain.
 
+**`aDefectiveVerbIsAskedOnlyTheCellsItHas` corrected on `main` 2026-11-27**, by Phase 11 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): it asserts that falloir alone is asked each of its cells once, fewer than ten. `aDayGivesTheSameVerbEveryTime` remains.
+
 **T4. Nothing tests that a search row's text re-parses to the same cells** (B7), or that related
 verbs agree across the two languages (S5).
 
@@ -744,6 +750,8 @@ link (S11); the widget takes My Verbs "in turn" (B19); the page's own model shee
 (the model page has been pushed since Phase 7, and the sheets that end a visit are the article and
 Test Me); "nine French tenses have no French alternate" (six catalog values are empty); the color
 key and the tip "both obey `TipDisplay.tipsEnabled`" (`shouldShowColorKey` does not read it).
+
+**férir's 2-4 corrected on `main` 2026-11-27**, by Phase 11 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): it now shows no Quiz button from Elementary up, as the doc says, and the doc names the three-cell floor.
 
 **The verb page's three corrected on `main` 2026-11-26**, by Phase 9 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the sheets that end a visit are the article and Test Me; six tenses have no French second name, named; and the color key now obeys `TipDisplay.tipsEnabled`, as the doc said, since it is a hint that goes once dismissed.
 
@@ -780,6 +788,8 @@ Not browse code, and noted in passing:
 - **A collection's quiz draws uniformly over its entries,** so a quiz from parler's model page
   asks about 87% verbs from outside the 1,000 most frequent, and the pronominal collection about
   94% (a reviewer's Python estimate). See the open questions.
+
+  **Fixed on `main` 2026-11-27**, by Phase 11 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): a collection's quiz, and a custom quiz or practice set over a collection, takes the collection's verbs inside the level's band first, and the rest once those are asked (`QuizScope.prefersBandVerbs`). A My Verbs quiz and a shared list do not, since the learner or a teacher chose those verbs. At Advanced the band is every verb, so nothing changes there.
 
 ## Checked and Found Sound
 

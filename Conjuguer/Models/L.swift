@@ -543,6 +543,10 @@ enum L {
       String(localized: "QuizView.myVerbsEmpty")
     }
 
+    static var myVerbsTooFewCells: String {
+      String(localized: "QuizView.myVerbsTooFewCells")
+    }
+
     // Separate singular and plural keys, as `VerbBrowseView.verbCount(count:)` explains.
     static func myVerbsCount(_ count: Int) -> String {
       let formattedCount = count.formatted()
@@ -2129,6 +2133,10 @@ enum L {
 
     static var nothingToAsk: String {
       String(localized: "CustomQuiz.nothingToAsk")
+    }
+
+    static var tooFewCells: String {
+      String(localized: "CustomQuiz.tooFewCells")
     }
 
     static func verbList(count: Int) -> String {

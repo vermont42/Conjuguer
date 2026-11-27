@@ -7204,3 +7204,44 @@ noted for Josh. A share button now hands its own frame to its action, so the iPa
 at it without each call site keeping a frame and checking it for zero. `FlowLayout` got its own
 file and now offers each child the row's width, so a chip wider than a row wraps rather than
 overflowing. 1,057 tests.
+
+## A Quiz That Knows When It Has Run Out (2026-11-27)
+
+Phase 11 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md) fixed the quiz over chosen
+verbs: My Verbs, a collection's page, a model's page, and a custom list. The review had found
+that falloir's model page, at Beginner, the default level, asked "il faut" ten times in a row,
+and that Ten More asked it ten more. The cause was two lines of intent that each looked
+reasonable. The Quiz button asked only whether some cell existed. The draw, when it found no
+fresh cell, fell back to a repeated one with no limit. A model with one verb and one cell met
+both.
+
+The fix makes a cell something a session asks once. A round is as long as the unasked cells
+allow, up to ten, and Ten More passes the session's questions so far, so it never repeats one and
+is offered only while a cell remains. Three verbs at Beginner have 27 cells, and the quiz now asks
+10, 10, and 7 and stops. Before, the second round repeated about four of the first round's ten.
+Below three cells, Test Me's length, the collection hides its Quiz button and My Verbs disables
+Start, with a line saying why. Test Me keeps its own rule, since three questions on one verb are
+a check, not a session.
+
+The same draw had a quieter problem. A collection's quiz shuffled all its verbs, so a quiz from
+parler's model page, which holds most of French's verbs, asked mostly verbs a learner will never
+meet: about 87% from outside the thousand most frequent. Now the deck puts the collection's verbs
+inside the learner's band first, and the rare ones only after those have been asked. My Verbs
+does not do this, because the learner chose those verbs, and a rare one there is rare on
+purpose. "After the band runs out" could mean after every band verb has been asked once, or
+after every cell of every band verb has. The first won. The second would ask aimer's seventh
+présent before a single rare verb.
+
+The structural half was S7. `QuizScope` had grown a flag for each kind of quiz, and `isRanked`
+was a ten-term conjunction that each new kind had to remember to extend. A model's practice
+started no Live Activity only because it set `collection` for analytics. Now there is one `Kind`
+enum, and ranking, Ten More, the Live Activity, the verb link, and the draw are exhaustive
+switches over it, so the compiler asks the next kind to answer each. A test builds every scope
+the app can start and pins the answers. The refactor surfaced one test that had built a scope the
+types now forbid, the ranked default quiz pinned to a practice set's level, and it became a real
+practice set.
+
+One question went to Josh rather than into code: whether a custom quiz over a list should need
+three cells too, since falloir's model with only the présent chosen asked a round of one. He said
+yes, so the custom quiz and a shared practice set follow the same floor, with a line under Start
+that tells "too few" from "none".

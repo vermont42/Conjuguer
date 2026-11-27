@@ -2262,6 +2262,23 @@
         }
       }
     },
+    "CustomQuiz.tooFewCells" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These verbs have fewer than three conjugations in the tenses chosen."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ces verbes ont moins de trois conjugaisons dans les temps choisis."
+          }
+        }
+      }
+    },
     "CustomQuiz.segment" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3465,6 +3482,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajoutez un verbe à Mes verbes depuis sa page, ou ouvrez quelques verbes, et le quiz portera sur eux."
+          }
+        }
+      }
+    },
+    "QuizView.myVerbsTooFewCells" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "At this level, these verbs have fewer than three conjugations to ask. Add a verb, or choose another level."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À ce niveau, ces verbes ont moins de trois conjugaisons à proposer. Ajoutez un verbe ou choisissez un autre niveau."
           }
         }
       }

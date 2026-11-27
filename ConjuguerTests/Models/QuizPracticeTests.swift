@@ -163,8 +163,7 @@ extension QuizTests {
       }
       #expect(!QuizScope.myVerbs([parler]).mixesDueItems)
       #expect(QuizScope.allVerbs.mixesDueItems)
-      var practiceSetScope = QuizScope.allVerbs
-      practiceSetScope.level = .beginner
+      let practiceSetScope = PracticeSet(custom: CustomQuiz(verbSet: .band(.top100)), level: .beginner).scope(source: .sharedLink)
       #expect(!practiceSetScope.mixesDueItems)
     }
   }

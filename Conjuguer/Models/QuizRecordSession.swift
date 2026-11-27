@@ -133,6 +133,6 @@ extension QuizScope {
   /// Review or My Mistakes, from the Quiz tab: up to ten items, then Ten More while any remain,
   /// never ranked, and mixing in nothing.
   static func recordSession(_ session: QuizRecordSession) -> QuizScope {
-    QuizScope(verbs: nil, questionCount: Quiz.questionCount, source: session.source, recordSession: session)
+    QuizScope(verbs: nil, questionCount: Quiz.questionCount, source: session.source, kind: .recordSession(session))
   }
 }

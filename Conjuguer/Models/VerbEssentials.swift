@@ -22,7 +22,7 @@ extension QuizScope {
       verbs: verbs,
       questionCount: verbEssentialsVerbCount * PracticeItem.Stem.shown.count,
       source: .verbEssentials,
-      isVerbEssentials: true
+      kind: .verbEssentials
     )
   }
 

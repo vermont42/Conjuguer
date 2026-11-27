@@ -59,6 +59,7 @@ struct VerbCollectionBar: View {
   var body: some View {
     let verbs = collection.verbs
     let openedCount = world.learnerVerbs.openedCount(of: verbs)
+    let quizLength = QuizScope.collection(collection).askableCellCount(at: world.settings.quizLevel, limit: Quiz.questionCount)
 
     VStack(alignment: .leading, spacing: Layout.defaultSpacing) {
       HStack(spacing: Layout.defaultSpacing) {
@@ -69,13 +70,13 @@ struct VerbCollectionBar: View {
 
         Spacer()
 
-        if !isBeneathQuiz, verbs.contains(where: { $0.canBeQuizzed(at: world.settings.quizLevel) }) {
+        if !isBeneathQuiz, quizLength >= QuizScope.minimumCellCount {
           Button {
             isQuizzing = true
           } label: {
             Label(L.Navigation.quiz, systemImage: "pencil.and.list.clipboard")
           }
-          .accessibilityHint(L.VerbCollection.quizHint(questionCount: Quiz.questionCount))
+          .accessibilityHint(L.VerbCollection.quizHint(questionCount: quizLength))
           .accessibilityIdentifier("collection_quiz_button")
         }
 

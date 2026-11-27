@@ -139,17 +139,34 @@ class Quiz {
     quizResults.filter { !$0.isReask }.prefix(scope.questionCount).reduce(0) { $0 + $1.points }
   }
 
-  /// Whether the results offer Ten More. Test Me's three questions do not continue, and Review or
-  /// My Mistakes continues only while the record has an item the session has not asked.
+  /// Whether the results offer Ten More. Test Me's three questions do not continue, Review or My
+  /// Mistakes continues only while the record has an item the session has not asked, and a quiz
+  /// over chosen verbs only while they have a cell the session has not asked.
   var canContinue: Bool {
     guard shouldShowResults, quizState == .notStarted, scope.continues, !questions.isEmpty else {
       return false
     }
-    guard let session = scope.recordSession else {
-      return true
+    if let session = scope.recordSession {
+      let asked = askedItemKeys
+      return session.items(from: Current.practice, at: now()).contains { $0.isAskable && !asked.contains($0.key) }
     }
-    let asked = askedItemKeys
-    return session.items(from: Current.practice, at: now()).contains { $0.isAskable && !asked.contains($0.key) }
+    if asksListedVerbs {
+      return scope.hasUnaskedCell(at: level, asked: questions)
+    }
+    return true
+  }
+
+  /// Whether the scope's verbs are a list, asked cell by cell, rather than a draw that reads the
+  /// verbs itself.
+  private var asksListedVerbs: Bool {
+    switch scope.kind {
+    case .myVerbs, .verbPage, .collection:
+      return true
+    case .custom, .practiceSet:
+      return scope.verbs != nil
+    case .allVerbs, .recordSession, .verbEssentials, .modelPractice, .recognition, .sentences, .speedRound, .daily, .challenge:
+      return false
+    }
   }
 
   /// The record's items this session has asked, which a Review or My Mistakes round skips.
@@ -393,11 +410,10 @@ class Quiz {
 
   /// A round's questions, a fixture's in DEBUG, which Ten More repeats.
   private func drawQuestions() -> [QuizQuestion] {
-    if let challenge = scope.challenge {
-      return DailyChallenge.questions(for: challenge)
-    }
-
-    if scope.isSpeedRound {
+    switch scope.kind {
+    case .challenge(let key):
+      return DailyChallenge.questions(for: key)
+    case .speedRound:
       return QuizDraw.speedRoundQuestions(
         for: SpeedRound.items(from: Current.practice),
         slots: level.slots,
@@ -406,13 +422,9 @@ class Quiz {
         after: questions.last.map { PracticeItem.exercised(by: $0.tense, of: $0.verb) },
         using: &generator
       )
-    }
-
-    if let session = scope.modelPractice {
+    case .modelPractice(let session, _):
       return QuizDraw.modelPracticeQuestions(for: session, record: Current.practice.record, asked: questions, using: &generator)
-    }
-
-    if scope.isVerbEssentials {
+    case .verbEssentials:
       #if DEBUG
       if UserDefaults.standard.string(forKey: "CONJUGUER_QUIZ_FIXTURE") == "essentials" {
         return generateVerbEssentialsFixture()
@@ -425,21 +437,11 @@ class Quiz {
         using: &generator
       )
       .flatMap { $0 }
-    }
-
-    if scope.isRecognition {
+    case .recognition:
       return recognitionQuestions()
-    }
-
-    if scope.isSentences {
+    case .sentences:
       return sentenceQuestions()
-    }
-
-    if scope.verbs != nil {
-      return scope.questions(level: level, using: &generator)
-    }
-
-    if let session = scope.recordSession {
+    case .recordSession(let session):
       return QuizDraw.sessionQuestions(
         for: session.items(from: Current.practice, at: now()),
         band: scope.band(at: level),
@@ -447,14 +449,28 @@ class Quiz {
         limit: scope.questionCount,
         using: &generator
       )
+    case .allVerbs, .daily:
+      #if DEBUG
+      if let fixture = fixtureQuestions() {
+        return fixture
+      }
+      #endif
+      return mixedQuestions()
+    case .myVerbs, .verbPage, .collection:
+      return listedQuestions()
+    case .custom, .practiceSet:
+      return asksListedVerbs ? listedQuestions() : mixedQuestions()
     }
+  }
 
-    #if DEBUG
-    if scope.custom == nil, let fixture = fixtureQuestions() {
-      return fixture
-    }
-    #endif
+  /// A list's questions, none a cell the session has asked.
+  private func listedQuestions() -> [QuizQuestion] {
+    scope.questions(level: level, asked: questions, using: &generator)
+  }
 
+  /// The default quiz's draw: due items where the scope mixes them in, the level's or the chosen
+  /// tenses over a band, and a choice question where the scope asks one.
+  private func mixedQuestions() -> [QuizQuestion] {
     let slots = scope.slots(at: level)
     let band = scope.band(at: level)
     let due = scope.mixesDueItems

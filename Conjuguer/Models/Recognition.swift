@@ -12,7 +12,7 @@ import Foundation
 /// develops in the direction practiced. Recognizing fûmes is not evidence of producing it, so an
 /// answer moves nothing in the practice record (Josh, 2026-11-23).
 extension QuizScope {
-  static let recognition = QuizScope(verbs: nil, questionCount: Quiz.questionCount, source: .recognition, isRecognition: true)
+  static let recognition = QuizScope(verbs: nil, questionCount: Quiz.questionCount, source: .recognition, kind: .recognition)
 }
 
 /// One cell of one verb whose conjugation is a recognition question's prompt.

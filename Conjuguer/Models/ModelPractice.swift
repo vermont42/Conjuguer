@@ -247,10 +247,7 @@ extension QuizScope {
       verbs: practice?.verbs ?? [],
       questionCount: isVerbEssentials ? verbEssentialsVerbCount * PracticeItem.Stem.shown.count : Quiz.questionCount,
       source: session.source,
-      title: session.title,
-      collection: session.collection,
-      isVerbEssentials: isVerbEssentials,
-      modelPractice: session
+      kind: .modelPractice(session, isVerbEssentials: isVerbEssentials)
     )
   }
 }

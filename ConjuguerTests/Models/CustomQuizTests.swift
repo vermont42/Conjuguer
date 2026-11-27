@@ -127,9 +127,25 @@ struct CustomQuizTests {
     #expect(!CustomQuiz(verbSet: .myVerbs).canBeAsked(at: .advanced, myVerbs: []))
     #expect(CustomQuiz(verbSet: .myVerbs).canBeAsked(at: .advanced, myVerbs: [try verb("parler")]))
     let falloirModel = try verb("falloir").model
-    #expect(!CustomQuiz(tenses: [.impératif], verbSet: .model(falloirModel)).canBeAsked(at: .beginner, myVerbs: []))
-    #expect(CustomQuiz(tenses: [.indicatifPrésent], verbSet: .model(falloirModel)).canBeAsked(at: .beginner, myVerbs: []))
+    let noImpératif = CustomQuiz(tenses: [.impératif], verbSet: .model(falloirModel))
+    #expect(!noImpératif.canBeAsked(at: .beginner, myVerbs: []))
+    #expect(!noImpératif.hasTooFewCells(at: .beginner, myVerbs: []))
     #expect(CustomQuiz(tenses: [.passéSimple]).canBeAsked(at: .beginner, myVerbs: []))
+    #expect(!CustomQuiz(tenses: [.passéSimple]).hasTooFewCells(at: .beginner, myVerbs: []))
+  }
+
+  // falloir has one cell a tense, "il faut", "il fallait", "il faudra": a list needs three, as a
+  // collection's quiz does, and the line under Start says it has too few rather than none.
+  @Test func aListNeedsThreeCells() throws {
+    let falloirModel = try verb("falloir").model
+    let présent = CustomQuiz(tenses: [.indicatifPrésent], verbSet: .model(falloirModel))
+    #expect(!présent.canBeAsked(at: .beginner, myVerbs: []))
+    #expect(présent.hasTooFewCells(at: .beginner, myVerbs: []))
+    let three = CustomQuiz(tenses: [.indicatifPrésent, .imparfait, .futurSimple], verbSet: .model(falloirModel))
+    #expect(three.canBeAsked(at: .beginner, myVerbs: []))
+    #expect(!three.hasTooFewCells(at: .beginner, myVerbs: []))
+    let set = PracticeSet(custom: présent, level: nil)
+    #expect(!set.canBeAsked(levelFallback: .advanced))
   }
 
   // Any tense may be chosen, above the learner's level or not.

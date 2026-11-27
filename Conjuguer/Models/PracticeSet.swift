@@ -71,10 +71,7 @@ struct PracticeSet: Equatable {
       verbs: custom.verbSet?.listedVerbs(myVerbs: []),
       questionCount: Quiz.questionCount,
       source: source,
-      title: L.PracticeSet.title,
-      custom: custom,
-      level: level,
-      isPracticeSet: true
+      kind: .practiceSet(custom, level: level)
     )
   }
 

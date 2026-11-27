@@ -81,7 +81,7 @@ struct PracticeSetView: View {
           }
 
           if !canStart {
-            Text(L.CustomQuiz.nothingToAsk)
+            Text(practiceSet.custom.hasTooFewCells(at: level, myVerbs: []) ? L.CustomQuiz.tooFewCells : L.CustomQuiz.nothingToAsk)
               .smallLabel()
               .multilineTextAlignment(.center)
               .fixedSize(horizontal: false, vertical: true)

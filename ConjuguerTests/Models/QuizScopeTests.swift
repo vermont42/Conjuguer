@@ -20,7 +20,7 @@ struct QuizScopeTests {
 
   private func questions(_ scope: QuizScope, seed: UInt64, level: QuizLevel = .elementary) -> [QuizQuestion] {
     var generator = SeededRandomNumberGenerator(seed: seed)
-    return scope.questions(level: level, using: &generator)
+    return scope.questions(level: level, asked: [], using: &generator)
   }
 
   private func slots(_ questions: [QuizQuestion]) -> Set<QuizTenseSlot> {
@@ -88,13 +88,17 @@ struct QuizScopeTests {
   }
 
   // falloir has only the third-person singular, so it has no impératif: those questions fall to
-  // parler, or are never drawn when falloir is the only verb.
+  // parler, or are never drawn when falloir is the only verb, whose round is as long as its few
+  // cells.
   @Test func aDefectiveVerbIsAskedOnlyTheCellsItHas() throws {
     let falloir = try verb("falloir")
     let parler = try verb("parler")
+    let falloirCellCount = QuizScope.myVerbs([falloir]).askableCellCount(at: .elementary, limit: .max)
+    #expect(falloirCellCount < Quiz.questionCount)
     for seed in seeds {
       let alone = questions(.myVerbs([falloir]), seed: seed)
-      #expect(alone.count == Quiz.questionCount)
+      #expect(alone.count == falloirCellCount)
+      #expect(Set(alone.map(\.tense)).count == alone.count)
       #expect(alone.allSatisfy { falloir.hasCell($0.tense) })
 
       let mixed = questions(.myVerbs([falloir, parler]), seed: seed)
@@ -102,6 +106,141 @@ struct QuizScopeTests {
       #expect(mixed.allSatisfy { $0.verb.hasCell($0.tense) })
       #expect(mixed.filter { QuizTenseSlot(tense: $0.tense) == .impératif }.allSatisfy { $0.verb.id == parler.id })
     }
+  }
+
+  private func cell(_ question: QuizQuestion) -> String {
+    "\(question.verb.id) \(question.tense)"
+  }
+
+  /// Every round of `scope` at `level`, each answered rightly, through Ten More until the results
+  /// offer it no longer.
+  private func rounds(of scope: QuizScope, level: QuizLevel, seed: UInt64) -> [[QuizQuestion]] {
+    Current.settings.quizLevel = level
+    defer {
+      Current.settings.quizLevel = .elementary
+    }
+    let quiz = Quiz(gameCenter: GameCenterSpy(), seed: seed)
+    quiz.start(scope: scope)
+    var rounds: [[QuizQuestion]] = []
+    var roundStart = 0
+    while quiz.quizState == .inProgress, rounds.count < 100 {
+      while quiz.quizState == .inProgress, let question = quiz.currentQuestion {
+        quiz.process(proposedAnswer: correctAnswer(for: question))
+      }
+      rounds.append(Array(quiz.questions[roundStart...]))
+      roundStart = quiz.questions.count
+      guard quiz.canContinue else {
+        break
+      }
+      quiz.continueSession()
+    }
+    return rounds
+  }
+
+  // Three verbs at Beginner have 27 cells: six présents and three impératifs each.
+  @Test func tenMoreAsksNoCellTwiceUntilTheCellsRunOut() throws {
+    let verbs = try [verb("être"), verb("parler"), verb("finir")]
+    for seed in UInt64(1) ... 20 {
+      let rounds = rounds(of: .myVerbs(verbs), level: .beginner, seed: seed)
+      #expect(rounds.map(\.count) == [10, 10, 7])
+      let cells = rounds.flatMap { $0 }.map(cell)
+      #expect(Set(cells).count == cells.count)
+    }
+  }
+
+  @Test(arguments: [QuizLevel.beginner, .elementary])
+  func aModelsQuizAsksEachCellOnceAcrossTenMore(level: QuizLevel) throws {
+    let scope = QuizScope.collection(.model(try verb("aller").model))
+    let cellCount = scope.askableCellCount(at: level, limit: .max)
+    for seed in UInt64(1) ... 10 {
+      let rounds = rounds(of: scope, level: level, seed: seed)
+      #expect(rounds.dropLast().allSatisfy { $0.count == Quiz.questionCount })
+      let cells = rounds.flatMap { $0 }.map(cell)
+      #expect(Set(cells).count == cells.count)
+      #expect(cells.count == cellCount)
+    }
+  }
+
+  @Test func aQuizOverChosenVerbsNeedsThreeCells() throws {
+    let falloir = try verb("falloir")
+    let parler = try verb("parler")
+    #expect(!QuizScope.collection(.model(falloir.model)).hasEnoughCells(at: .beginner))
+    #expect(!QuizScope.myVerbs([falloir]).hasEnoughCells(at: .beginner))
+    #expect(QuizScope.myVerbs([falloir, parler]).hasEnoughCells(at: .beginner))
+    #expect(!QuizScope.myVerbs([]).hasEnoughCells(at: .beginner))
+    for level in QuizLevel.allCases {
+      #expect(!QuizScope.collection(.model(try verb("apparoir").model)).hasEnoughCells(at: level))
+      #expect(!QuizScope.collection(.model("1-10")).hasEnoughCells(at: level))
+      #expect(QuizScope.collection(.model("1-1")).hasEnoughCells(at: level))
+    }
+    for level in QuizLevel.allCases where level != .beginner {
+      #expect(!QuizScope.collection(.model(try verb("férir").model)).hasEnoughCells(at: level))
+    }
+  }
+
+  @Test(arguments: [QuizLevel.beginner, .elementary, .intermediate])
+  func aModelsQuizAsksTheLevelsBandFirst(level: QuizLevel) throws {
+    let band = try #require(level.band)
+    for modelID in [try verb("parler").model, try verb("venir").model] {
+      let scope = QuizScope.collection(.model(modelID))
+      let bandCount = VerbCollection.model(modelID).verbs.filter { $0.isIn(band) }.count
+      for seed in UInt64(1) ... 40 {
+        let asked = questions(scope, seed: seed, level: level)
+        let inBand = asked.map { $0.verb.isIn(band) }
+        #expect(inBand.prefix(min(bandCount, asked.count)).allSatisfy { $0 }, "\(modelID)")
+        #expect(!inBand.drop(while: { $0 }).contains(true), "\(modelID)")
+      }
+    }
+  }
+
+  /// Every scope the app can start, named for the failure message.
+  private func everyScope() throws -> [(String, QuizScope)] {
+    let parler = try verb("parler")
+    let practiceSet = PracticeSet(custom: CustomQuiz(verbSet: .collection(.être)), level: nil)
+    let today = DailyChallenge.Key(date: Date(timeIntervalSince1970: 1_800_000_000), level: .elementary)
+    return [
+      ("allVerbs", .allVerbs),
+      ("allVerbsFromALink", .allVerbs(source: .deeplink)),
+      ("myVerbs", .myVerbs([parler])),
+      ("verbPage", .verbPage(parler)),
+      ("collection", .collection(.être)),
+      ("model", .collection(.model(parler.model))),
+      ("customMixed", .custom(CustomQuiz(verbSet: .band(.top300)), myVerbs: [])),
+      ("customList", .custom(CustomQuiz(verbSet: .myVerbs), myVerbs: [parler])),
+      ("practiceSet", practiceSet.scope(source: .sharedLink)),
+      ("review", .recordSession(.review)),
+      ("mistakes", .recordSession(.mistakes)),
+      ("verbEssentials", .verbEssentials()),
+      ("modelAlone", .modelPractice(ModelPracticeSession(modelID: "6-7", mode: .alone))),
+      ("modelMixed", .modelPractice(ModelPracticeSession(modelID: "5-2", mode: .mixed))),
+      ("recognition", .recognition),
+      ("sentences", .sentences),
+      ("speedRound", .speedRound),
+      ("daily", .daily()),
+      ("challenge", .challenge(today))
+    ]
+  }
+
+  @Test func onlyTheDefaultQuizIsRanked() throws {
+    let ranked = try everyScope().filter { $0.1.isRanked }.map(\.0)
+    #expect(ranked == ["allVerbs", "allVerbsFromALink"])
+  }
+
+  // A sheet's quiz starts none, since a tap on the activity would open the Quiz tab, and neither
+  // does a Speed Round or a challenge.
+  @Test func theQuizTabsSessionsStartALiveActivity() throws {
+    let starting = try everyScope().filter { $0.1.startsLiveActivity }.map(\.0)
+    #expect(starting == ["allVerbs", "allVerbsFromALink", "myVerbs", "customMixed", "customList", "review", "mistakes", "verbEssentials", "recognition", "sentences", "daily"])
+  }
+
+  @Test func onlyACollectionPrefersItsBand() throws {
+    let preferring = try everyScope().filter { $0.1.prefersBandVerbs }.map(\.0)
+    #expect(preferring == ["collection", "model", "practiceSet"])
+  }
+
+  @Test func onlyTestMeHidesTheVerbLink() throws {
+    let hiding = try everyScope().filter { !$0.1.showsVerbLink }.map(\.0)
+    #expect(hiding == ["verbPage"])
   }
 
   @Test func testMeAsksThreeDifferentTensesOfTheVerbWithoutParticiples() throws {

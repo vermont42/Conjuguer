@@ -38,7 +38,7 @@ empty until it is committed.
 | 8 | Done | 2026-11-26 | `f866c2a` | B16, B19, S12, the progress decision, the migration, T2 | Yes |
 | 9 | Done | 2026-11-26 | `d5ae545` | B12, B27, B29, S4, S4a, S5, S6, D8, D9, T1 (the visit), K-G6 | Yes |
 | 10 | Done | 2026-11-27 | `6d94bd6` | B17, B25 (the labels), S8, S13, S14, D1, D2, D3, D6, T6 | Yes |
-| 11 | Not started | | | B5, S7, the rare-verb draw | Yes |
+| 11 | Awaiting Josh | 2026-11-27 | | B5, S7, the rare-verb draw | Yes |
 | 12 | Not started | | | B10, B11, B20, S11, K-S9, K-S10 | No |
 | 13 | Not started | | | S9, T3, T4, T5, what the others left | No |
 | Closing | Not started | | | The audit, the workarounds list, the note for the other apps | No |
@@ -1048,6 +1048,54 @@ list of only falloir; and the default quiz, a collection quiz, Test Me, and a da
 started once each, to see that nothing else moved.
 
 **How it differed:**
+
+- **The draw, decided.** A My Verbs quiz does not prefer the band: the learner chose those verbs,
+  and so does a shared list a practice set carries. A custom quiz or a practice set over a
+  collection does, since it asks the same verbs as the collection's own quiz
+  (`QuizScope.prefersBandVerbs`). "The band runs out" is read by verb, not by cell: the deck puts
+  the collection's band verbs first, so a round takes each once before any rare verb, and Ten
+  More reaches the rare verbs once the band's verbs have all been asked. Reading it by cell would
+  ask a band verb its seventh présent before any rare verb was asked.
+- **The deck also puts verbs the session has not asked before those it has,** for every list,
+  My Verbs included, so that Ten More moves on to new verbs, not only new cells. The plan did not
+  ask for it. It follows from carrying `asked`, and it is what B5's "Ten More forgets the first
+  ten" was about.
+- **The three-cell floor applies to lists in a custom quiz and a practice set too.** The plan named
+  only the collection bar's Quiz button and Start for My Verbs. Josh, asked on 2026-11-27 whether
+  a custom quiz or practice set over a list should need three cells (falloir's model with the
+  présent chosen asked a round of one), answered yes. `CustomQuiz.canBeAsked(at:myVerbs:)` counts
+  cells of the chosen tenses, and a new line, `CustomQuiz.tooFewCells` ("These verbs have fewer
+  than three conjugations in the tenses chosen."), tells too few from none under the custom quiz's
+  summary and on a practice set's sheet.
+- **A new string,** `QuizView.myVerbsTooFewCells`, under the picker when My Verbs has fewer than
+  three cells at the level ("At this level, these verbs have fewer than three conjugations to ask.
+  Add a verb, or choose another level."). Before, Start was enabled and the quiz asked "il faut"
+  ten times. The Quiz button's hint names the round's length, ten or fewer.
+- **S7's shape.** The stored flags and optional fields (`title`, `collection`, `custom`, `level`,
+  `isPracticeSet`, `recordSession`, `isVerbEssentials`, `modelPractice`, `isRecognition`,
+  `isSentences`, `isSpeedRound`, `isDaily`, `challenge`) became one `kind`. Those still read are
+  computed from it, so most callers did not change. `title` and `level` come from the kind: a
+  practice set carries its level and a challenge its key. A model's practice carries whether it
+  is asked as Verb Essentials. `collection` now means only a collection's own quiz; the model a
+  practice names for analytics is `namedCollection`, which `quizStart` already read.
+  `LastQuizResult.Kind(scope:)` and `Quiz`'s draw are switches. `showsVerbLink` is new and
+  `QuizView` reads it.
+- **A test built a scope that can no longer exist,** the default quiz with a practice set's level
+  (`QuizPracticeTests`), to show that such a scope mixes in no due items. It now builds a real
+  practice set over the top 100.
+- **Tests.** Eight new test functions in `QuizScopeTests`: Ten More through 10, 10, and 7 with no
+  repeated cell; aller's model through every cell at Beginner and Elementary; the three-cell
+  floor (falloir's 4-5C at Beginner, apparoir's 4-1D, férir's 2-4 from Elementary, ester's 1-10, a
+  My Verbs of falloir alone); a model's quiz takes its band first (parler's and venir's at three
+  levels); and four over every scope the app can start, which pin which is ranked, which starts a
+  Live Activity, which prefers its band, and which hides the verb link. `CustomQuizTests` gained
+  `aListNeedsThreeCells`. `aCollectionWithNothingToAskHidesItsQuiz` was folded into the floor's
+  test. The suite: 1,065 tests in 99 suites, all passing.
+- **Seen in the simulator** at Beginner, on the iPhone and the iPad: falloir's model page has no
+  Quiz button, and aller's has one whose quiz reads "1 / 9". The levels were put back to
+  Intermediate. On the iPhone, a practice set of falloir's model with the présent shows the
+  too-few line, and with the impératif the none line. Not seen there: the My Verbs note, Ten
+  More's sweep, and the band draw, which the tests cover.
 
 ## Phase 12: Intents, Spotlight, and the Tool
 

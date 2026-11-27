@@ -146,38 +146,36 @@ extension LastQuizResult.Kind {
   /// A practice set is a custom quiz opened from a link or a code, and a custom quiz over a
   /// collection counts as custom, since the learner chose it in the editor.
   init(scope: QuizScope) {
-    if let session = scope.modelPractice {
+    switch scope.kind {
+    case .modelPractice(let session, _):
       self = session.mode == .alone ? .modelAlone : .modelMixed
-    } else if let session = scope.recordSession {
-      switch session {
-      case .review:
-        self = .review
-      case .mistakes:
-        self = .mistakes
-      }
-    } else if scope.isVerbEssentials {
+    case .recordSession(.review):
+      self = .review
+    case .recordSession(.mistakes):
+      self = .mistakes
+    case .verbEssentials:
       self = .verbEssentials
-    } else if scope.isRecognition {
+    case .recognition:
       self = .recognition
-    } else if scope.isSentences {
+    case .sentences:
       self = .sentences
-    } else if scope.isSpeedRound {
+    case .speedRound:
       self = .speedRound
-    } else if scope.isDaily {
+    case .daily:
       self = .daily
-    } else if scope.isChallenge {
+    case .challenge:
       self = .challenge
-    } else if scope.isPracticeSet {
+    case .practiceSet:
       self = .practiceSet
-    } else if scope.custom != nil {
+    case .custom:
       self = .custom
-    } else if scope.isVerbPage {
+    case .verbPage:
       self = .verbPage
-    } else if scope.collection != nil {
+    case .collection:
       self = .collection
-    } else if scope.verbs != nil {
+    case .myVerbs:
       self = .myVerbs
-    } else {
+    case .allVerbs:
       self = .allVerbs
     }
   }

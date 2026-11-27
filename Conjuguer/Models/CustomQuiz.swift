@@ -42,15 +42,29 @@ struct CustomQuiz: Equatable {
     }
   }
 
-  /// Whether some verb of the choice has some cell of the chosen tenses. A list can lack them all:
-  /// falloir's model has no impératif, and My Verbs can empty after the choice was kept.
+  /// Whether the choice has enough to ask: for a list, three cells of the chosen tenses, as a
+  /// collection's quiz and My Verbs need. A list can lack them: falloir's model has no impératif
+  /// and one présent, and My Verbs can empty after the choice was kept.
   @MainActor func canBeAsked(at level: QuizLevel, myVerbs: [Verb]) -> Bool {
-    guard let verbs = verbSet?.listedVerbs(myVerbs: myVerbs) else {
+    guard let count = listedCellCount(at: level, myVerbs: myVerbs) else {
       return !isEmpty
     }
-    let cells = slots(at: level).flatMap(\.cells)
-    return verbs.contains { verb in
-      cells.contains(where: verb.hasCell)
+    return count >= QuizScope.minimumCellCount
+  }
+
+  /// Whether a list that cannot be asked has some cell of the chosen tenses, only too few, which
+  /// the line under a disabled Start tells apart from none.
+  @MainActor func hasTooFewCells(at level: QuizLevel, myVerbs: [Verb]) -> Bool {
+    guard let count = listedCellCount(at: level, myVerbs: myVerbs) else {
+      return false
+    }
+    return count > 0 && count < QuizScope.minimumCellCount
+  }
+
+  /// The cells of the chosen tenses that a list has, counted up to three. Nil for a mixed set.
+  @MainActor private func listedCellCount(at level: QuizLevel, myVerbs: [Verb]) -> Int? {
+    verbSet?.listedVerbs(myVerbs: myVerbs).map {
+      QuizScope.cellCount(of: $0, slots: slots(at: level), limit: QuizScope.minimumCellCount)
     }
   }
 
@@ -271,7 +285,7 @@ extension QuizScope {
       verbs: custom.verbSet?.listedVerbs(myVerbs: myVerbs),
       questionCount: Quiz.questionCount,
       source: .custom,
-      custom: custom
+      kind: .custom(custom)
     )
   }
 }
