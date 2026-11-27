@@ -39,7 +39,8 @@ material for the release notes.
 6. **Try the lookups from outside the app on a device**, which were tried only in the
    simulator. Look Up a Verb from Siri and from the Shortcuts app: in the simulator the app
    opened on the right page but its spoken or shown answer never appeared, so check that Siri says
-   "vais: Indicatif Présent (je) of aller" before opening the page. Spotlight: in the simulator only
+   "vais : Indicatif Présent (je) of aller" before opening the page (a narrow no-break space
+   before the colon since the browse fixes' Phase 7). Spotlight: in the simulator only
    titles matched (aller found its entry; vais, "to go", and souviens found nothing), so check
    whether a device matches the keywords and alternate names. Add the Find a Verb control to
    Control Center and tap it. Long-press the icon for the Find a Verb quick action. Record what
@@ -79,6 +80,17 @@ material for the release notes.
       when the shared defaults change while it is active (a Darwin notification that the intent
       posts, since `UserDefaults` does not notify across processes). The first stops a stale link
       from firing days later; the second opens a link that arrives after activation.
+11. **Listen to the browse screens with VoiceOver on a device**, which were read only from the
+    accessibility tree in the simulator (finding T6 of [`verb_browse_review.md`](verb_browse_review.md)).
+    In the Verbs tab, a model page, a collection's page, and the related list, check that a verb
+    row, a `BrowseRow` inside a `Button`, reads its French infinitive in a French voice and its
+    English gloss in an English one, under both interface languages. If the button reads both in
+    one voice, apply the pattern in [`voiceover.md`](voiceover.md) § Pattern: Tappable Text in Two
+    Languages. Then hear the collection bar ("12 of 100 looked up", Quiz, Share), a collection
+    row in the Models tab, and the review card, and record in `voiceover.md` § Pronunciation by
+    Screen which rows were heard. While VoiceOver is on, take a quiz and check that each question's
+    spoken prompt is heard whole: [`timed_workarounds.md`](timed_workarounds.md) § The Quiz's
+    Spoken Announcements says how to tell whether its one-second wait is still needed.
 
 ## On Release Day
 

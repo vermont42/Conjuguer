@@ -41,7 +41,10 @@ empty until it is committed.
 | 11 | Done | 2026-11-27 | `4d535b0` | B5, S7, the rare-verb draw | Yes |
 | 12 | Done | 2026-11-27 | `5265454` | B10 (to a device), B11, B20, S11, K-S9, K-S10 | No |
 | 13 | Done | 2026-11-27 | `bf939dc` | S9, T3, T4, T5, what the others left | No |
-| Closing | Not started | | | The audit, the workarounds list, the note for the other apps | No |
+| Closing | Done | 2026-11-27 | | The audit, the workarounds list, the note for the other apps | No |
+
+**This plan is finished (2026-11-27).** Every finding in the review carries a line: fixed, found
+not to be real, or left with its reason.
 
 ## How to Work This Plan
 
@@ -1258,3 +1261,33 @@ nothing, though it is shortest when taken last.
 - Mark this plan finished in its Status section.
 
 **How it differed:**
+
+- **The run.** 1,077 tests in 100 suites, all passing, as Phase 13 left them; `swiftlint lint
+  --strict` found no violation in 345 files; `check_docs.py` found no problem.
+- **The audit.** Every finding in the review carried a line but four, which now have one. The
+  "Address copied" note of B18, which Phase 5 left "for a later phase" and no phase took, is
+  **left**: a second tap within four seconds clears the note early, it shows only on a device
+  with no email app, and a test would need its timer out of a private view method. The fix, if
+  wanted, is sketched under B18. The verb row's two languages under VoiceOver (T6) are left for
+  release day. The widget's lookup resetting a schedule is left as the settled decision it is.
+  `recent(limit:)`'s unused parameter, in the table of Konjugieren's S9, was found gone since
+  Phase 8. The table's other "carried over" rows each pointed at a label of this review without
+  saying so was fixed, so each now names the label and the phase. The review's opening, which
+  still said "Nothing here has been fixed", now says what was left.
+- **The timed workarounds** are [`docs/timed_workarounds.md`](../docs/timed_workarounds.md),
+  a doc of their own rather than a section of `feature_architecture.md`, since two of them are in
+  the quiz and the tutor and not the browse code. A search of `Task.sleep` found nine waits that
+  work around something. Three are the iPad search field's. One is the tutor's push from onboarding, 500 ms, whose
+  reason the code does not record. Four are the quiz's keyboard refocus, 50 to 450 ms. One is
+  the quiz's VoiceOver announcement, a second, dating from 2022. Each entry says how to tell
+  whether a new iOS has made it unnecessary. The doc says which waits are deliberate and not
+  workarounds.
+- **For release day.** Item 9 of `docs/release.md` already held two windows, and item 10 B10's
+  check. VoiceOver on the verb row and the collection views was missing, and is item 11, with the
+  quiz's announcement wait beside it. Item 6 still quoted Siri's answer with the English colon
+  that Phase 7 replaced, and now quotes it with U+202F.
+- **For the other apps.** Both siblings had already finished their own fixes plans, so the list,
+  the review's last section, names only what their reviews may not cover: the time-zone
+  calendars (both), the thin quiz (both, unchecked), the workarounds list, and a stale comment in
+  Konjugieren's `write_forms_json.sh`. It also says which fixes do not apply and why. The
+  siblings' code was searched, not read.

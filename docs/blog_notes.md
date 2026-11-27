@@ -7342,3 +7342,38 @@ and a Paris learner whose app had launched in Montréal would get yesterday's ve
 number now counts between dates rather than instants. The new test asks for 10 March 2026 as day
 433 at three hours of the day in four zones, from Kiritimati to Pago Pago. Put the stored instant
 back and every zone east of this Mac fails with 432.
+
+## Closing the Browse Fixes (2026-11-27)
+
+The last session of the browse fixes plan wrote no code. It ran the suite (1,077 tests in 100
+suites, all green), linted all 345 Swift files, and then read the review finding by finding to
+check that each had a line saying what happened to it.
+
+Almost every finding did. The gaps were the kind a long plan leaves. Phase 5 fixed two of B18's
+three uncancelled tasks and wrote that the third, the "Address copied" note's timer, was "left for
+a later phase". No later phase ever named it, so it fell through. It is now left on purpose: the
+note shows only on a device with no email app, and a second tap within four seconds clears it a
+little early. The table of Konjugieren's findings had a subtler gap. Its "carried over" rows each
+pointed at one of this review's labels, and those labels had been marked fixed, but a reader of
+the table could not tell. Each row now says which label and which phase. One row named
+`recent(limit:)`'s unused parameter, which turned out to have disappeared in Phase 8 when the
+recents became a property. The review's own opening still said "Nothing here has been fixed".
+
+The plan asked for one list of the app's timed workarounds, and a search for `Task.sleep` found
+more than the browse code. Three waits belong to the iPad search field and came from Konjugieren.
+A fourth pushes the tutor half a second after onboarding closes, with no recorded reason. Four
+more refocus the quiz's answer field. The last delays VoiceOver's announcements by a second and
+dates from 2022. `docs/timed_workarounds.md` gives each one a test: set the wait to zero, try the
+named steps, and see whether the old failure returns. A wait whose reason was never written down
+gets a likely reason, labeled as a guess.
+
+The release checklist had a stale quotation. It still asked a tester to hear Siri say "vais:
+Indicatif Présent (je)" with an English colon, which Phase 7 had replaced. It also lacked the
+VoiceOver pass that the browse screens have been waiting for since the browse plan began. Both
+are now in `docs/release.md`.
+
+The note for the other apps came out shorter than planned. Konjugieren and Conjugar had both
+finished their own fixes plans the same week, so the list names only what their reviews may have
+missed. The most useful item is the time-zone bug that Phase 13 found late. Both siblings' practice
+stores keep the calendar they launched with, and Konjugieren's widget has the same stored
+reference instant that gave a learner here yesterday's verb.

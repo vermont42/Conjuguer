@@ -830,7 +830,8 @@ UIKit drops a push made during it, and a later push replaces one still waiting. 
 tapped then waits likewise, with any tapped after it; the letters go in together, the field is
 refocused, and the linger holds until they land. A search request that pops a page waits 500 ms
 for the pop before focusing the field, and a second request during that wait waits for the same
-end. Each of these is a task that the next one cancels.
+end. Each of these is a task that the next one cancels. [`timed_workarounds.md`](timed_workarounds.md)
+lists every such wait in the app, with how to tell whether a new iOS still needs it.
 
 **My Verbs** is the third segment of the verb list's picker, with the starred verbs (newest star
 first) under "Starred" and the twenty most recent verbs not starred under "Recent" (the starred

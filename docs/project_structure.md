@@ -447,6 +447,7 @@ docs/                               # Claude's output that informs: research, re
 ├── screenshot_playbook.md          # Screenshot workflow: prerequisites, kill switches, driver flags, workarounds, recovery
 ├── screenshots/                    # Captured screenshots produced by the driver (gitignored)
 ├── technology_corpus_sources.md    # Provenance manifest for the technology corpus tier
+├── timed_workarounds.md            # Every timed wait the app still makes (iPad search, tutor push, quiz keyboard, VoiceOver): what it waits for, how long, how to tell if iOS fixed it
 ├── tense_frequency.md              # How often each tense occurs in corpus/originals, by folder: the method and counts behind the verb page's order
 ├── verb_browse_review.md           # Review of the browse plan's code (2026-11-25): bugs, smells, duplication, tests, Konjugieren's findings checked here; plans/verb_browse_fixes.md fixes it
 ├── verb_frequency_sources.md       # Research: frequency-of-use sources for all verbs (Sketch Engine prices/caps, GLÀFF, Lexique 4 coverage)

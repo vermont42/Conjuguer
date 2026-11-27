@@ -6,8 +6,10 @@ built for the Verbs and Models tabs, asked for in
 `88dbb96`. It reviews the code as it stands, so where the pedagogy plan has since edited a browse
 file, the review reads the edited file.
 
-**Nothing here has been fixed.** [`plans/verb_browse_fixes.md`](../plans/verb_browse_fixes.md)
-is the plan for fixing it, and each finding will gain a line here when its phase lands.
+**Every finding here now carries a line (2026-11-27):** fixed on `main`, found not to be real, or
+left, with the reason. [`plans/verb_browse_fixes.md`](../plans/verb_browse_fixes.md) fixed them
+in thirteen phases and a closing. Two were left: B10, which needs a device, and the race in B18's
+"Address copied" note. The verb row's two languages under VoiceOver (T6) wait for release day.
 
 ## Summary
 
@@ -302,6 +304,8 @@ cancels for free.
 `SearchEngagement` cancels the linger at each change of focus, a waiting push when another comes,
 and a waiting focus when another request comes, which waits for the same pop to end. Tests pin
 each. The "address copied" note is left for a later phase.
+
+**The "address copied" note left, 2026-11-27**, by the Closing of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): no phase took it. A second tap on the address within four seconds clears the note a second or more early. The note shows only on a device with no email app, nothing is lost but its time on screen, and a test would need the timer moved out of `FailedVerbSearchView`'s private method. If it is wanted: a count that each tap raises, with the note cleared only by the latest tap's task.
 
 **B19. The widget's My Verbs days do not take verbs in turn.** *Traced.* `verbOfTheDay` indexes
 `myVerbs[turn % count]` (`VerbDraw.swift:40-45`), and the recents in that list are newest first, so
@@ -776,6 +780,8 @@ inside a `Button`, which the plan left untested in Phase 0, 1, 2, and 5, are sti
 
 **Fixed on `main` 2026-11-27**, by Phase 10 of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): `docs/voiceover.md` has rows for the collection page and the related list (`VerbListPage`), the bar, and the Models tab's row. The page and the bar are read from the accessibility tree, not heard; the row is untested; and the verb row's two languages inside a `Button` remain untested.
 
+**The verb row and the collection views left for release day, 2026-11-27**, by the Closing of [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): only VoiceOver on a device can say which voice reads each part of a row, so `docs/release.md` § Before Submitting, item 11, asks for it, with the collection page, the bar, and the Models tab's row.
+
 ## Seen Outside the Scope
 
 Not browse code, and noted in passing:
@@ -846,55 +852,55 @@ there; **does not apply** means French or Conjuguer's design has no such thing.
 |---|---|---|
 | **C1** A folded infinitive counts as literal: the ranking | Does not apply | `exactFoldedInfinitive` still outranks `conjugation`, but I checked the built map and no unaccented French conjugation folds to another verb's accented infinitive, so nothing misranks. |
 | **C1** …: the stranded separable verbs | Does not apply | French has no separable rows. |
-| **C1** …: Look Up a Verb and twin infinitives | **Carried over** | B30, with 26 pairs here against its 18. I had missed it. |
-| **C2** The widget's My Verbs rotation repeats a verb | **Carried over** | B19. |
+| **C1** …: Look Up a Verb and twin infinitives | **Carried over** | B30, with 26 pairs here against its 18. I had missed it. **Fixed on `main`** with B30, by Phase 7. |
+| **C2** The widget's My Verbs rotation repeats a verb | **Carried over** | B19. **Fixed on `main`** with B19, by Phase 8. |
 | **C3** The red-letter guard is true for every verb | Did not | Conjuguer's key reads only the simple and personless cells, has no capital "Sie", and Phase 6 saw parler's page without it. |
 | **C4** Tidying My Verbs erases collection progress | **Carried over** | Open question 5. Its two additions hold here too: the swipe erases as Clear does, and `firstOpened` and `openCount` are written on every open and read nowhere, so progress could count `firstOpened`. **Fixed on `main` 2026-11-26** by Phase 8: progress counts `firstOpened`, and Reset Practice forgets it. |
 | **C5** "Alphabetical" is code-point order | Did not | Phase 7 gave the model page French collation, and the newer lists use it. `VerbModel.sortVerbs()` still sorts by code point, but every reader re-sorts. The copied comparators are D3. |
 | **C6** Swiss spelling missing from captions | Does not apply | No regional spelling. |
 | **C7** A strong second reading drops out | Does not apply | No readings. |
-| **C7** Recent can show fewer than 20 | **Carried over** | B16. |
-| **C7** A bad link cancels a good pending one | **Carried over** | B4, reproduced, and worse here: it also closes the sheet on screen. |
+| **C7** Recent can show fewer than 20 | **Carried over** | B16. **Fixed on `main`** with B16, by Phase 8. |
+| **C7** A bad link cancels a good pending one | **Carried over** | B4, reproduced, and worse here: it also closes the sheet on screen. **Fixed on `main`** with B4, by Phase 1. |
 | **C7** Two entry points bypass the route | Did not | No Open Verb intent or Handoff; Spotlight goes through `URL.verbDeeplink` and `handleURL`. |
-| **C7** Spotlight's migration flag; entries never removed; rebuilt at every launch | Part | No migration here, and indexing is gated on the version. Never removing an entry carried over (B20). |
+| **C7** Spotlight's migration flag; entries never removed; rebuilt at every launch | Part | No migration here, and indexing is gated on the version. Never removing an entry carried over (B20). **Fixed on `main`** with B20, by Phase 12. |
 | **C7** A collection key stored as the link spelled it | Does not apply | A featured key resolves to the collection itself, a model's id is ASCII, and analytics sends `model`. |
 | **F1** A failed search computes its guess on the main thread | **Carried over, mitigated** | Not listed above. Phase 5 bounded the distance and measured at most 0.3 s per keystroke in a Debug build, against Konjugieren's 0.8 s; it is still synchronous in `updateSearchResults`. Its fix (compute off the main actor, cancel when the text changes) applies. **Fixed on `main` 2026-11-26** by Phase 5 of the fixes plan: finnissons fell from 0.25–0.27 s on the main thread to 0.08–0.09 s, the search alone. |
 | **F2** Related verbs rebuilt in `body` | Did not | `Verb.related` is cached per verb. |
-| **F2** Look Up a Verb may build the index on the main actor | **Carried over** | B11. |
-| **F2** An ended search is computed again | **Carried over** | S3. |
+| **F2** Look Up a Verb may build the index on the main actor | **Carried over** | B11. **Fixed on `main`** with B11, by Phase 12, but for a `verb/…?match=` link resolved cold, as B11 says. |
+| **F2** An ended search is computed again | **Carried over** | S3. **Fixed on `main`** with S3, by Phase 5. |
 | **P1** A correction's group link says which verb was missed | Did not | The correction's model link pushes `ModelDestination`, and a model's page sends `viewAppeared` only. No signal pairs `quizCorrection` with a collection, and a model's collection value is `model`. |
 
 ### Docs, Duplication, Smells, Elegance, and Tests
 
 | Its finding | Here | Notes |
 |---|---|---|
-| **G1** The widget does not read the learner's record | **Carried over** | S9. |
+| **G1** The widget does not read the learner's record | **Carried over** | S9. **Fixed on `main`** with S9, by Phase 8: the comments now say the widget reads neither record. |
 | **G2** The frequency doc overstates two Konjunktiv counts | Does not apply | A rule of the German counting script. `scripts/count_tenses.py` is Conjuguer's own, and this review did not read it. |
-| **G3** `DeeplinkTests` pins copies of the widget's links | **Carried over** | S11. |
+| **G3** `DeeplinkTests` pins copies of the widget's links | **Carried over** | S11. **Fixed on `main`** with S11, by Phase 12. |
 | **G4** A migration for data no shipped build wrote | **Carried over** | Seen Outside the Scope. **Fixed on `main` 2026-11-26** by Phase 8: deleted. |
 | **G5** Dwell time includes time under a sheet | Did not | The page's own sheets end the visit (`VerbView.swift:173-179`). |
 | **G6** The Related Verbs card has no `VerbPageSection` | **Carried over** | Not listed above. The sections are header, simple, compound, etymology, and example. **Fixed on `main` 2026-11-26** by Phase 9: `related`, staged in the privacy file. |
 | **G7** Stale prose | Does not apply | Its five are Konjugieren's. The tool's note about a non-atomic write still holds here, since the script sandbox is on. Conjuguer's own stale prose is T5. |
 | **D1** "The cells this text fills" written three times | Did not | `MarkedConjugations(text:on:)` calls the one search function. |
 | **D2**, **D3**, **D7** The zu-infinitive, finite parts, the main-clause split | Does not apply | German. |
-| **D4** A stem's key conjugation computed twice | **Carried over** | D8, between the page and the practice schedule. |
-| **D5** The collection and family views repeat themselves | **Carried over** | D2 and D4. Its bar-and-quiz mismatch did not: the bar and its quiz read one list. |
-| **D6** Widget and intent links | **Carried over** | S11. |
-| **S1** `VerbBrowseView` does too much | **Carried over** | S3. |
-| **S2** `searchFocusLostAt` is a `Date` used as a `Bool` | **Carried over** | S3. |
+| **D4** A stem's key conjugation computed twice | **Carried over** | D8, between the page and the practice schedule. **Fixed on `main`** with D8, by Phase 9. |
+| **D5** The collection and family views repeat themselves | **Carried over** | D2 and D4. Its bar-and-quiz mismatch did not: the bar and its quiz read one list. **Fixed on `main`** with D4 and D2, by Phases 6 and 10. |
+| **D6** Widget and intent links | **Carried over** | S11. **Fixed on `main`** with S11, by Phase 12. |
+| **S1** `VerbBrowseView` does too much | **Carried over** | S3. **Fixed on `main`** with S3, by Phases 5 and 6. |
+| **S2** `searchFocusLostAt` is a `Date` used as a `Bool` | **Carried over** | S3. **Fixed on `main`** with S3, by Phase 5. |
 | **S3** Declarations in files named for something else | **Carried over** | `FlowLayout` in `RelatedVerbsView.swift`, `VerbDestination` in `VerbVisit.swift`, `VerbListMode` in `VerbSort.swift`. **Fixed on `main` 2026-11-27** by Phases 6 and 10: each has a file named for it, as does `RelatedVerbListView`. |
-| **S4** `keysCache` is a global memo | **Carried over, changed** | The port re-checks each entry against the verb's text to protect tests (S9). Its fix, storing the folded infinitive on `Verb` at parse time, removes the cache. |
-| **S5** App-wide statics with multiple scenes | **Carried over** | Seen Outside the Scope, and open question 3. |
-| **S6** An analytics value decides the interface; `isRanked` | **Carried over** | S7. |
-| **S7** Timed workarounds, none cancelled | **Carried over** | B18. |
+| **S4** `keysCache` is a global memo | **Carried over, changed** | The port re-checks each entry against the verb's text to protect tests (S9). Its fix, storing the folded infinitive on `Verb` at parse time, removes the cache. **Fixed on `main`** with S9, by Phase 7: each `Verb` carries its search keys, and the cache is gone. |
+| **S5** App-wide statics with multiple scenes | **Carried over** | Seen Outside the Scope, and open question 3. **Fixed on `main`** by Phase 3: each window owns a `SceneRouter`. |
+| **S6** An analytics value decides the interface; `isRanked` | **Carried over** | S7. **Fixed on `main`** with S7, by Phase 11. |
+| **S7** Timed workarounds, none cancelled | **Carried over** | B18. **Fixed on `main`** with B18, by Phase 5, but for the "Address copied" note, which B18 says was left. The waits that remain are listed in [`timed_workarounds.md`](timed_workarounds.md). |
 | **S8** The sort picker returns during a search and does nothing | **Carried over** | Not listed above. With text in the field and the keyboard down, the picker shows, and choosing My Verbs changes nothing (`showsMyVerbs` needs an empty field). **Fixed on `main` 2026-11-26** by Phase 5 of the fixes plan: the picker is disabled while the field has text, in both tabs. |
-| **S9** Unused or unguarded | Part | Carried over: `recent(limit:)`'s unused parameter; the tool accepts any `--flag`, so a mistyped output name is skipped silently (`main.swift:38-46`); `ConjugationMap(compressed:)` turns invalid UTF-8 into an empty map. Did not: the unused URL prefix, which Phase 9 removed. **Fixed on `main` 2026-11-27** (the tool and the map), by Phase 12 of the fixes plan: the tool refuses an unknown or repeated flag, and `ConjugationMap(compressed:)` throws `ReadError.notUTF8`. |
+| **S9** Unused or unguarded | Part | Carried over: `recent(limit:)`'s unused parameter; the tool accepts any `--flag`, so a mistyped output name is skipped silently (`main.swift:38-46`); `ConjugationMap(compressed:)` turns invalid UTF-8 into an empty map. Did not: the unused URL prefix, which Phase 9 removed. **Fixed on `main` 2026-11-27** (the tool and the map), by Phase 12 of the fixes plan: the tool refuses an unknown or repeated flag, and `ConjugationMap(compressed:)` throws `ReadError.notUTF8`. `recent(limit:)`'s unused parameter was **found already gone**: Phase 8 (`f866c2a`) made the recents the property `recent`, capped at `LearnerVerbs.recentLimit`. |
 | **S10** Both apps build the tool into one directory | **Carried over** | `scripts/write_forms_json.sh:31` uses `$TMPDIR/ConjugationMapTool-build`, the same path as Konjugieren's. A prefix on either side fixes both. **Fixed on `main` 2026-11-27**, by Phase 12 of the fixes plan: the directory is `$TMPDIR/ConjuguerConjugationMapTool-build`. |
 | **E1** `Row` and `Entry` are one shape twice | Does not apply | No separable rows. |
 | **E2** A redundant case in the cell rows | **Carried over** | `conjugationParts` names the three personless tenses in a case whose result the default's `guard` already gives (`VerbConjugations.swift:112-121`). **Fixed on `main` 2026-11-26** by Phase 9: the case names only the impératif passé, which has a person and no pronoun. |
 | **E3** Static tables pick the tracked sections | Did not | Conjuguer compares with the block's first section, which has its own cost (B27). |
 | **T1** Tests that cannot fail | Part | `testNoParameterValueEchoesTheQuery` is here and holds by the types. The other two are Konjugieren's. Conjuguer's own are T3. **Fixed on `main` 2026-11-27** by Phase 13 of the fixes plan, as Konjugieren found: the echo holds by the types, but the bands do not, since the parameters are strings, and an unbanded length fails the test. It stays, as `testEveryParameterValueIsAWordOfTheVocabularyOrABand`, and `testAReportKeepsNoText` pins the types: it fails if a stored property of a report is text. |
-| **T2** Tests that check a copy | Part | The retyped widget links (S11). |
+| **T2** Tests that check a copy | Part | The retyped widget links (S11). **Fixed on `main`** with S11, by Phase 12. |
 | **T3** Branches with no test | **Carried over** | Twins (B30), the rotation with a changing list (B19), the writer's disk path (T2), the visit pairing (T1), and the schedule across a daylight-saving day. **Fixed on `main`**: the first four by Phases 7, 8, 8, and 9; the schedule on 2026-11-27 by Phase 13, which pins a start, a snooze, and a review across both of Paris's 2026 changes. Counted in seconds, the due dates miss midnight by an hour. The practice store's calendar also became `Calendar.autoupdatingCurrent`, since a stored `.current` keeps the zone it was read in, and `WidgetDateHelper.calendar` takes that calendar's zone on each access, so the widget's day follows the learner's zone too. |
 | **T4** Exact assertions against a growing corpus | **Carried over, mildly** | `Set(results) == ["pécher", "pêcher"]` (`VerbSearchTests.swift:61`). **Fixed on `main` 2026-11-27** by Phase 13 of the fixes plan. None was meant as a tripwire. pécher and pêcher stay exact, since only a new accented spelling of pecher could join them, and so do vins and the lookup's single verbs, whose "only" is what they test. Three now assert what they are about: crois ranks croiser above croître rather than naming the first three, mate's folded spellings include maté, mâte, and mâté rather than being only those, and suis's first two results are être and suivre. |
 
@@ -902,7 +908,10 @@ there; **does not apply** means French or Conjuguer's design has no such thing.
 
 - **Opening a verb from the widget counts as forgetting it:** carried over.
   `PracticeStore.recordLookup` reschedules for every source but the review card
-  (`PracticeStore.swift:100-108`).
+  (`PracticeStore.swift:100-108`). **Left, 2026-11-27**, by the Closing of
+  [`verb_browse_fixes.md`](../plans/verb_browse_fixes.md): the rule is the pedagogy plan's, a
+  lookup from anywhere outside the card sends a verb back to the first box, and the fixes plan's
+  § Decisions Already Made keeps it as it is.
 - **The search-scope flip:** does not apply; Conjuguer has no setting.
 - **The sein collection may ask a haben reading:** does not apply; a French verb has one
   auxiliary in the data.
@@ -961,3 +970,49 @@ confirmed before they are fixed. The questions stay below as they were asked.
 9. **Collection quizzes and rare verbs.** Draw uniformly as now, or favor the learner's band.
 10. **The suspected ones (B9, B10, B11).** Confirm on a simulator or device before planning, or
     fix on the strength of the trace.
+
+## What Would Carry Over to Konjugieren and Conjugar
+
+Written 2026-11-27 by the Closing of [`plans/verb_browse_fixes.md`](../plans/verb_browse_fixes.md).
+Each sibling has reviewed its own browse code and finished its own fixes plan (Konjugieren's
+Closing is `41e4069`, Conjugar's `86ec887`), so this names only Conjuguer's fixes that their
+reviews may not have covered. Whether each applies was settled by searching the siblings' code,
+not by reading it. Nothing there was changed.
+
+**Worth doing there:**
+
+- **A calendar that keeps the launch's time zone** (Phase 13). Both siblings' `PracticeStore`
+  stores `calendar: Calendar = .current` (Konjugieren's `PracticeStore.swift:37`, Conjugar's
+  `:51`), so a learner who flies east sees items fall due at the old zone's midnight until a
+  relaunch. `Calendar.autoupdatingCurrent` as the default is the fix here. Konjugieren also has
+  both of the widget's shapes that Phase 13 fixed: `WidgetConstants.gregorianCalendar` is a
+  `static let` calendar holding the zone of its first use, and `VerbDraw.referenceDate` is an
+  instant stored from it, which here gave a learner east of that zone the day before's number.
+  Conjugar's `CalendarDay.calendar` sets `TimeZone.current` on each access. In Phase 13's script,
+  `TimeZone.current` did not follow a change of the default zone, so it is worth a check there.
+- **A quiz with few cells to ask** (B5, Phase 11). Neither sibling's review names it. A model or
+  collection whose verbs have fewer than ten distinct cells at the learner's level would repeat
+  questions. Try a defective verb's model in each.
+- **A list of the timed waits** ([`timed_workarounds.md`](timed_workarounds.md)). The waits came
+  from Konjugieren, and Conjugar's browse view has the same engagement linger, so the same list,
+  with each wait's test, would serve both.
+- **A stale comment in Konjugieren.** `scripts/write_forms_json.sh` says Conjuguer builds the map
+  tool into the plain `ConjugationMapTool-build`. Since Phase 12 it is
+  `ConjuguerConjugationMapTool-build`.
+
+**Does not apply there:**
+
+- **The duplicate verb sheet (B1)**. No view in either sibling presents a verb page from
+  `.sheet(item:)` outside its own stack. The article's dead-end link (B2) depends on the same
+  shape here. Konjugieren's Info tab does present `world.info` as a sheet, so a verb link inside
+  a linked article is the one case there worth a tap.
+- **The Models tab's accent row (B3).** Konjugieren has one search field, and Conjugar's Models
+  tab has no letter row.
+- **The shared build directory (K-S10).** Both siblings already build into directories named for
+  themselves.
+- **Multiple windows (Phase 3).** Conjugar has multiple scenes off. Konjugieren's
+  `docs/feature_architecture.md` § Multiple Windows names Phase 3's router as one way out and
+  leaves the choice to Josh.
+- **The French findings:** the hyphen's trombone (B13), the colon (B25), the nous/vous
+  pronominal text (B7), G1 to G3, and related verbs read from etymology prose (S5), which is
+  Conjuguer's own way of finding a base.
