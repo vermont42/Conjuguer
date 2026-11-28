@@ -9,20 +9,40 @@ import SwiftUI
 
 extension View {
   /// The search field both browse tabs show, which tells `engagement` when it gains and loses
-  /// the focus.
+  /// the focus. Its prompt is the longest of `prompts` that fits the field.
   func browseSearchable(
     text: Binding<String>,
-    prompt: String,
+    prompts: [String],
     isFocused: FocusState<Bool>.Binding,
     engagement: SearchEngagement
   ) -> some View {
-    searchable(text: text, placement: BrowseLayout.searchPlacement, prompt: prompt)
+    modifier(BrowseSearchable(text: text, prompts: prompts, isFocused: isFocused, engagement: engagement))
+  }
+}
+
+private struct BrowseSearchable: ViewModifier {
+  let text: Binding<String>
+  let prompts: [String]
+  let isFocused: FocusState<Bool>.Binding
+  let engagement: SearchEngagement
+  @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+  @State private var width: CGFloat = 0
+
+  func body(content: Content) -> some View {
+    content
+      .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { width = $0 }
+      .searchable(text: text, placement: BrowseLayout.searchPlacement, prompt: prompt)
       .searchFocused(isFocused)
       .textInputAutocapitalization(.never)
       .autocorrectionDisabled()
       .onChange(of: isFocused.wrappedValue) { _, isFocused in
         engagement.focusChanged(to: isFocused)
       }
+  }
+
+  private var prompt: String {
+    SearchPrompt.longestFitting(prompts, containerWidth: width, dynamicTypeSize: dynamicTypeSize, sizeClass: horizontalSizeClass)
   }
 }
 

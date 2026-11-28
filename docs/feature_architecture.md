@@ -207,7 +207,7 @@ The page orders its cards by frequency, names each tense twice, and gives each t
 | `Models/TenseTable.swift` | `TenseTable`, the page's cards in order, and on `Tense` the card that shows it (`table`), its article (`articleKey`, `article`), and its second name |
 | `Utils/VerbConjugations.swift` | Builds every card's cells from `TenseTable`, simple and compound, and notes whether the verb's own cells have red letters (`hasIrregularLetters`). `memoized(for:pronounGender:)` caches them by verb and pronoun gender; the page reads it from `body`, so a change of the setting reaches both blocks of an open page |
 | `Views/VerbView.swift` | The page, and its star in a view of its own, so that recording an open does not rebuild every page in the stack |
-| `Views/TenseCards.swift` | `TenseSectionView` (a tense's card), `PersonlessCard`, `TenseHeading` (name, second name, article button), and `MarkableConjugation` |
+| `Views/TenseCards.swift` | `TenseSectionView` (a tense's card), `PersonlessCard`, `TenseHeading` (name and article button), and `MarkableConjugation` |
 | `Views/ExampleCard.swift` | The example sentence and the *Chanson de Roland* line, whose place in the chanson's lines is the card's own state |
 | `Views/ArticleButton.swift` | The red question-mark diamond, on a tense's heading and on the model page |
 | `Models/VerbVisitTracker.swift` | When a visit begins and ends ([Analytics](#analytics)) |
@@ -231,12 +231,10 @@ lines and its landing follow it, since `Verb.conjugations(matching:)` reads `Ten
 ### Headings
 
 Each card's heading is the tense's French name, then a red question-mark diamond, the model page's
-button for the irregularities article, which opens the tense's Info article. Under the name is a
-second name in the app's language: "also simple past" in English, "aussi passé défini" in French,
-each the name its learners' textbooks use (Josh, 2026-11-22). Six French tenses have no French
-alternate (the participes, the radical du futur, the passé antérieur, the futur antérieur, and the
-passé surcomposé), and their catalog value is empty, so no line shows. The personless card gives each of its
-three cells such a heading.
+button for the irregularities article, which opens the tense's Info article. The personless card
+gives each of its three cells such a heading. Until 2026-11-28 a second name in the app's language
+("also simple past", "aussi passé défini") sat under the French one. Josh removed it from the verb
+page. `Tense.secondName` survives because the custom quiz's tense picker still shows it.
 
 **The article** opens in an `ArticleSheet`, so closing it returns to the same verb. A link
 inside to another article or to a verb pushes it inside the sheet, and a verb page there pushes

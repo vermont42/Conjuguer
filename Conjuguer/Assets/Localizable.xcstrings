@@ -4891,23 +4891,6 @@
         }
       }
     },
-    "VerbView.secondName" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "also %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "aussi %@"
-          }
-        }
-      }
-    },
     "VerbView.star" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -8978,6 +8961,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verbe, conjugaison ou sens anglais"
+          }
+        }
+      }
+    },
+    "VerbBrowseView.searchPromptShort" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verb, conjugation, or meaning"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbe, conjugaison ou sens"
+          }
+        }
+      }
+    },
+    "VerbBrowseView.searchPromptShortest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verb or meaning"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbe ou sens"
           }
         }
       }

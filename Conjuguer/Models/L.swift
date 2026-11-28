@@ -53,6 +53,14 @@ enum L {
       String(localized: "VerbBrowseView.searchPrompt")
     }
 
+    static var searchPromptShort: String {
+      String(localized: "VerbBrowseView.searchPromptShort")
+    }
+
+    static var searchPromptShortest: String {
+      String(localized: "VerbBrowseView.searchPromptShortest")
+    }
+
     static var findVerb: String {
       String(localized: "VerbBrowseView.findVerb")
     }
@@ -193,10 +201,6 @@ enum L {
 
     static var exampleUses: String {
       String(localized: "VerbView.exampleUses")
-    }
-
-    static func secondName(_ name: String) -> String {
-      String(localized: "VerbView.secondName", defaultValue: "also \(name)")
     }
 
     static var relatedHeading: String {

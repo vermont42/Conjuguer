@@ -205,6 +205,7 @@ Conjuguer/
 │   ├── ReminderSchedulerReal.swift  # UNUserNotificationCenter implementation: permission, and the reminders replaced as a set, each carrying its link
 │   ├── ReminderSchedulerSpy.swift   # Test spy under unit tests: records each schedule and permission request
 │   ├── SearchEngagement.swift  # Hack: the iPad search field's timed workarounds both browse tabs share: the focus that lingers, the push and the letter that wait for the search's dismissal, and the focus that waits for a pop
+│   ├── SearchPrompt.swift      # The longest of a ladder of search prompts that fits the browse field, from measured UIKit insets (iOS 26.3)
 │   ├── Settings.swift          # @Observable user preferences persisted through GetterSetter
 │   ├── SeededRandomNumberGenerator.swift  # SplitMix64: draws every learner's verb of the day, the day's challenge, and the widget's quiz options, and lets tests check random draws with a fixed seed
 │   ├── QRCode.swift            # QR codes made on the device with Core Image, black on white, medium error correction
@@ -233,7 +234,7 @@ Conjuguer/
     ├── ArticleSheet.swift      # An Info article in a sheet with its own stack, whose article and verb links push inside it, as do a verb page's tense articles there
     ├── BrowseLayout.swift      # Shared adaptive grid columns and search-field placement (a fixed bar on iPad and Mac) for the browse views
     ├── BrowseRow.swift         # Shared row/cell used by both browse views, with optional badge, a looked-up check, and a French or English subtitle; init(verb:detail:isChecked:) is every verb's row
-    ├── BrowseSearchField.swift # The browse tabs' search field (browseSearchable) and SortPickerOrKeyRow, the sort picker or, while the field is engaged, the accent keys
+    ├── BrowseSearchField.swift # The browse tabs' search field (browseSearchable, whose prompt is the longest that fits) and SortPickerOrKeyRow, the sort picker or, while the field is engaged, the accent keys
     ├── ChoiceQuestionView.swift # A choice question's two sentences, each with its conjugation in bold and its tense, and once one is chosen, the marks, the reason, and Continue
     ├── CustomQuizView.swift    # The custom quiz's editor (tenses and a verb set, each tap kept at once), its list of models, pushed onto the Quiz tab, and the summary card the tab and a practice set share
     ├── ExampleCard.swift       # The verb page's example sentence and Chanson de Roland line, which owns its place in the chanson's lines
@@ -267,7 +268,7 @@ Conjuguer/
     ├── RichTextView.swift      # Renders [RichTextBlock] with subheadings, emphasis, color-coding, links
     ├── ShareButton.swift       # A button that hands its frame to its action, so a share popover points at it on iPad
     ├── SettingsView.swift      # Settings UI: pickers, app icon, ratings, onboarding re-show, Reset Practice
-    ├── TenseCards.swift        # The verb page's tense cards: TenseSectionView, PersonlessCard, TenseHeading (name, second name, article button), and MarkableConjugation
+    ├── TenseCards.swift        # The verb page's tense cards: TenseSectionView, PersonlessCard, TenseHeading (name and article button), and MarkableConjugation
     ├── TutorTestView.swift     # DEBUG-only batch harness for tutor queries
     ├── TutorView.swift         # Chat interface for the on-device tutor
     ├── VerbBrowseView.swift    # The Verbs tab: the navigation stack, the list or grid by VerbListContent, the picker or key row, and search requests (hosts the verb_browse_sort launch anchor)
@@ -322,6 +323,7 @@ Shared/                         # Compiles into BOTH the app and widget targets
 ConjuguerTests/
 ├── Info.plist                  # Test-bundle configuration (excluded from the target via membershipExceptions)
 ├── LocalizationTests.swift     # Asserts format-style strings substitute their runtime values
+├── SearchPromptTests.swift     # Which rung of the Verbs prompt ladder fits each width and text size, English and French
 ├── TestUtils.swift             # T.testConjugation shared assertion (threads #_sourceLocation) and T.generateVerbModelTests
 └── Models/
     ├── AchievementTests.swift          # The achievements: each permanent ID, the points, the 50 irregular verbs and the pillars, the maison d'être's twenty items, an empty record, each level's patterns earning its own and the lower levels', one short, learning counting for nothing, all three key conjugations needed and the passé simple not, each step, nothing measured while signed out
@@ -497,6 +499,7 @@ plans/                              # What Claude wrote to get another session (
 ├── run_etymology_select_verbs.md   # One-shot run of that pipeline for the four select verbs
 ├── screenshot.md                   # Screenshot capture spec: Josh's nine views, devices, languages, App Store slots, alpha channels
 ├── screenshot_driver_fixes.md      # Port six screenshot-driver fixes from Konjugieren, fix a seventh
+├── search_prompt_truncation.md     # Shorten the Verbs tab's search prompt only where it would truncate (375-point iPhone at XXXL), ported from Konjugieren's fix, plus the quiz's Level tile and the tense headings' second names. Done 2026-11-28
 ├── sweep_comments.md               # Sweep low-value comments down to CLAUDE.md's comment policy
 ├── tutor_row_killswitch.md         # The tutor-row kill switch for screenshots; implemented, kept as rationale
 ├── verb_browse_fixes.md            # Fix what docs/verb_browse_review.md found, in thirteen phases and a closing, with Josh's decisions of 2026-11-25

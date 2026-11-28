@@ -79,7 +79,7 @@ struct ModelBrowseView: View {
       }
       .navigationTitle(L.Navigation.models)
       .verbPageNavigation(path: $path)
-      .browseSearchable(text: $searchText, prompt: L.ModelBrowseView.searchPrompt, isFocused: $searchIsFocused, engagement: engagement)
+      .browseSearchable(text: $searchText, prompts: [L.ModelBrowseView.searchPrompt], isFocused: $searchIsFocused, engagement: engagement)
     }
     .screenBackground()
     .onChange(of: trimmedSearchText) {

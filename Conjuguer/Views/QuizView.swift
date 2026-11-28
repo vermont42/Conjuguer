@@ -717,13 +717,12 @@ struct QuizView: View {
   }
 
   private var sessionFacts: some View {
-    HStack(alignment: .top, spacing: Layout.defaultSpacing) {
+    QuizFactRow(levelNames: QuizLevel.allCases.map(\.localizedName)) {
       QuizFactTile(systemImage: "list.number", value: "\(Quiz.questionCount)", label: L.QuizView.questionsLabel)
       QuizFactTile(systemImage: "timer", value: L.QuizView.sessionMinutes, label: L.QuizView.minutesLabel, accessibilityLabel: L.QuizView.sessionLength)
+    } level: {
       levelMenu
     }
-    // Equal heights when one label wraps to two lines.
-    .fixedSize(horizontal: false, vertical: true)
     .transition(.opacity)
   }
 
@@ -1337,7 +1336,81 @@ private extension QuizRecordSession {
   }
 }
 
+/// The quiz's three fact tiles side by side, unless the longest level name would truncate in a
+/// third of the row even at its smallest scale, as "Elementary" does at XXXL on a 375-point
+/// iPhone. Then the level's tile takes a row of its own.
+private struct QuizFactRow<Facts: View, Level: View>: View {
+  let levelNames: [String]
+  @ViewBuilder let facts: Facts
+  @ViewBuilder let level: Level
+  @State private var rowWidth: CGFloat = 0
+  @State private var levelNameWidth: CGFloat = 0
+  @State private var menuIndicatorWidth: CGFloat = 0
+
+  var body: some View {
+    Group {
+      if levelFitsInRow {
+        HStack(alignment: .top, spacing: Layout.defaultSpacing) {
+          facts
+          level
+        }
+        // Tiles of equal height.
+        .fixedSize(horizontal: false, vertical: true)
+      } else {
+        VStack(spacing: Layout.defaultSpacing) {
+          HStack(alignment: .top, spacing: Layout.defaultSpacing) {
+            facts
+          }
+          .fixedSize(horizontal: false, vertical: true)
+          level
+        }
+      }
+    }
+    .frame(maxWidth: .infinity)
+    .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { rowWidth = $0 }
+    .background {
+      VStack {
+        ZStack {
+          ForEach(levelNames, id: \.self) { name in
+            Text(verbatim: name)
+          }
+        }
+        .fixedSize()
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { levelNameWidth = $0 }
+
+        QuizFactTile.menuIndicator
+          .fixedSize()
+          .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { menuIndicatorWidth = $0 }
+      }
+      .font(QuizFactTile.valueFont)
+      .hidden()
+    }
+  }
+
+  // The row's width is the same in both layouts, so the choice cannot oscillate.
+  private var levelFitsInRow: Bool {
+    guard rowWidth > 0 else {
+      return true
+    }
+    let tileWidth = (rowWidth - 2 * Layout.defaultSpacing) / 3 - 2 * QuizFactTile.horizontalPadding
+    let smallestLevelValue = levelNameWidth * QuizFactTile.minimumTextScale + QuizFactTile.menuIndicatorSpacing + menuIndicatorWidth
+    return smallestLevelValue <= tileWidth
+  }
+}
+
 private struct QuizFactTile: View {
+  static let valueFont = bodyEmphasisFont
+  static let minimumTextScale: CGFloat = 0.6
+  static let menuIndicatorSpacing: CGFloat = 3
+  static let horizontalPadding = Layout.defaultSpacing / 2
+
+  static var menuIndicator: some View {
+    Image(systemName: "chevron.up.chevron.down")
+      .font(.caption2.bold())
+      .foregroundStyle(Color.customBlue)
+      .accessibilityHidden(true)
+  }
+
   let systemImage: String
   let value: String
   let label: String
@@ -1353,33 +1426,28 @@ private struct QuizFactTile: View {
         .frame(height: 30)
         .accessibilityHidden(true)
 
-      HStack(spacing: 3) {
+      HStack(spacing: Self.menuIndicatorSpacing) {
         Text(verbatim: value)
           .lineLimit(1)
-          .minimumScaleFactor(0.6)
+          .minimumScaleFactor(Self.minimumTextScale)
         if showsMenuIndicator {
-          Image(systemName: "chevron.up.chevron.down")
-            .font(.caption2.bold())
-            .foregroundStyle(Color.customBlue)
-            .accessibilityHidden(true)
+          Self.menuIndicator
         }
       }
-      .font(bodyEmphasisFont)
+      .font(Self.valueFont)
       .foregroundStyle(Color.customForeground)
 
       Text(label)
         .font(captionFont)
         .foregroundStyle(Color.customGray)
-        .multilineTextAlignment(.center)
-        .lineLimit(2)
-        .minimumScaleFactor(0.8)
-        .fixedSize(horizontal: false, vertical: true)
+        .lineLimit(1)
+        .minimumScaleFactor(Self.minimumTextScale)
 
       Spacer(minLength: 0)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(.vertical, Layout.defaultSpacing * 1.5)
-    .padding(.horizontal, Layout.defaultSpacing / 2)
+    .padding(.horizontal, Self.horizontalPadding)
     .background(Color.customBlue.opacity(0.08), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     .overlay {
       RoundedRectangle(cornerRadius: 14, style: .continuous)

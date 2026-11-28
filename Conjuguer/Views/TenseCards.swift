@@ -55,30 +55,23 @@ struct PersonlessCard: View {
   }
 }
 
-/// A tense's name, the name a textbook also uses, and a button that opens the tense's article.
+/// A tense's name and a button that opens the tense's article.
 struct TenseHeading: View {
   let tense: Tense
   let openArticle: (() -> Void)?
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 2) {
-      HStack(alignment: .firstTextBaseline, spacing: 6) {
-        Text(tense.titleCaseName)
-          .subheadingLabel()
-          .frenchPronunciation()
-          .accessibilityAddTraits(.isHeader)
+    HStack(alignment: .firstTextBaseline, spacing: 6) {
+      Text(tense.titleCaseName)
+        .subheadingLabel()
+        .frenchPronunciation()
+        .accessibilityAddTraits(.isHeader)
 
-        if let openArticle {
-          ArticleButton(hint: L.VerbView.articleButtonHint, action: openArticle)
-        }
-
-        Spacer(minLength: 0)
+      if let openArticle {
+        ArticleButton(hint: L.VerbView.articleButtonHint, action: openArticle)
       }
 
-      if let secondName = tense.secondName {
-        Text(L.VerbView.secondName(secondName))
-          .smallLabel()
-      }
+      Spacer(minLength: 0)
     }
   }
 }

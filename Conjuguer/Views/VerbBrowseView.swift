@@ -90,7 +90,7 @@ struct VerbBrowseView: View {
       }
       .navigationTitle(L.Navigation.verbs)
       .verbPageNavigation(path: $path)
-      .browseSearchable(text: $search.text, prompt: L.VerbBrowseView.searchPrompt, isFocused: $searchIsFocused, engagement: engagement)
+      .browseSearchable(text: $search.text, prompts: [L.VerbBrowseView.searchPrompt, L.VerbBrowseView.searchPromptShort, L.VerbBrowseView.searchPromptShortest], isFocused: $searchIsFocused, engagement: engagement)
       .onSubmit(of: .search) {
         // On iPhone, the keyboard's Search key keeps its usual meaning: it only hides the keyboard.
         if BrowseLayout.isPadOrMac, let destination = search.openForReturn(recents: shownRecents) {

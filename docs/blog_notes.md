@@ -7474,3 +7474,48 @@ gains a fourth blank for a verb with a second présent stem, the subjonctif's fr
 and the four kinds of correct French the quiz rejected are accepted. The plan and this entry
 are uncommitted, at his request, until he has read the plan.
 
+
+## Three Screenshots From a Small Phone (2026-11-28)
+
+Josh sent three screenshots from his 375-point iPhone with the text at XXXL, the largest size
+below the accessibility sizes. The Konjugieren session that had fixed the same search bug there
+wrote `plans/search_prompt_truncation.md` to port the fix, and Josh added two of the screenshots
+to it.
+
+The first was the Verbs tab's search prompt, "Verb, conjugation, or Engli…". Konjugieren's
+journal entry, "The Search Prompt That Lost Three Points", holds the measurements and the dead
+ends (the prompt is a UIKit placeholder, and UIKit shrinks it only at the accessibility sizes),
+so they are not repeated here. Conjuguer took its `SearchPrompt.longestFitting` with two
+differences. Its prompt is longer: "Verb, conjugation, or English meaning" is 287 points at the
+default size against Konjugieren's 228, so it truncates from XL on Josh's phone and from XXL on
+the 402-point simulator. The ladder runs "Verb, conjugation, or meaning", then "Verb or
+meaning", and needs no "Search" rung, since the last rung fits any width an iPhone has. The
+other difference is a rule the three apps should share. Konjugieren returns its full prompt at
+every accessibility size because UIKit shrinks it there, but UIKit shrinks it no further than
+14 points, and Conjugar's Spanish prompt does not fit even then. So at an accessibility size
+each rung is measured in a 14-point font, and that needed the accessibility rows of the inset
+table that Konjugieren had folded into a default. The fix lives in `browseSearchable`, now a
+`ViewModifier` because it holds the measured width, so the Models tab has it too, though its
+prompt never truncates. On the simulator both languages read as the plan predicted at all six
+sizes tried, and French at XXL took the shorter rung, which the plan had said was within the
+measurement's error.
+
+The second screenshot showed the Quiz tab's Level tile reading "Eleme…". The tile's value
+already shrinks to 60 percent, and even that does not fit a third of the row at XXXL on 375
+points. `ViewThatFits` could not decide when to change the layout, because it judges by
+unscaled widths and would have changed the default size too. So `QuizFactRow` measures the
+longest level name in a hidden copy and compares 60 percent of it, plus the chevron, against a
+third of its own width. When the name would not fit, the Level tile drops to a full-width row
+under the other two. The row's width is the same in either layout, so the choice cannot
+oscillate. It measures the longest of the four names rather than the one chosen, so changing
+the level never rearranges the card. On the simulator the row holds three tiles at L and
+moves Level down from XL. At AX5 a check of the new layout turned up something nobody had
+asked about: "Questions" broke mid-word over two lines, since its label allowed two lines and
+shrank only to 80 percent. Every label is one word in both languages, so the labels now keep
+one line and shrink like the values.
+
+The third screenshot circled "also present" under Indicatif Présent, and Josh asked for that
+line to go from every tense. The second names had been added on 2026-11-22 so that a learner
+could match the French names to a textbook's. They are gone from the verb page's headings, and
+the `VerbView.secondName` string with them. `Tense.secondName` stays, because the custom quiz's
+tense picker still shows it beside each French name.

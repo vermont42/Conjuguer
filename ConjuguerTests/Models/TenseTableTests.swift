@@ -51,7 +51,6 @@ struct TenseTableTests {
     #expect(Tense.passéSimple(.firstSingular).secondName == "simple past")
     #expect(Tense.passéComposé(.firstSingular).secondName == "compound past")
     #expect(Tense.participePassé.secondName == "past participle")
-    #expect(L.VerbView.secondName("pluperfect") == "also pluperfect")
   }
 
   @Test(arguments: [
